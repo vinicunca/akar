@@ -1,0 +1,51 @@
+{
+  "name": "@vinicunca/akar",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@9.5.0",
+  "license": "MIT",
+  "homepage": "https://github.com/vinicunca/akar#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinicunca/akar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vinicunca/akar/issues"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "prepare": "pnpm simple-git-hooks"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@vinicunca/eslint-config": "^2.7.0",
+    "bumpp": "^9.4.1",
+    "eslint": "^9.7.0",
+    "lint-staged": "^15.2.7",
+    "rimraf": "^6.0.1",
+    "simple-git-hooks": "^2.11.1",
+    "typescript": "5.5.3"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "commit-msg": "pnpm commitlint --edit ${1}"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
