@@ -28,7 +28,12 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "prepare": "pnpm simple-git-hooks"
+    "prepare": "pnpm simple-git-hooks",
+    "bumpp": "bumpp package.json packages/*/package.json docs/package.json",
+    "pub:release": "cd packages/akar && pnpm pub:release",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --cache --fix",
+    "test": "pnpm --filter @vinicunca/akar test"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
