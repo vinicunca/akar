@@ -1,17 +1,18 @@
-import { HstVue } from '@histoire/plugin-vue';
-import alias from '@rollup/plugin-alias';
-import vue from '@vitejs/plugin-vue';
-import { resolve } from 'node:path';
-import { defineConfig } from 'vite';
+import { HstVue } from '@histoire/plugin-vue'
+import alias from '@rollup/plugin-alias'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'node:path'
+import { defineConfig } from 'vite'
 
-const projectRootDir = resolve(__dirname);
+const projectRootDir = resolve(__dirname)
+console.log({ projectRootDir })
 
 export default defineConfig({
   histoire: {
     outDir: './dist',
     plugins: [{ name: 'builtin:tailwind-tokens' }, HstVue()],
     setupFile: './setup.ts',
-    storyMatch: [resolve(projectRootDir, '../packages/radix-vue/src/**/*.story.vue')],
+    storyMatch: [resolve(projectRootDir, '../packages/akar/src/**/*.story.vue')],
     theme: {
       logo: {
         light: '../docs/content/public/logo.svg',
@@ -21,7 +22,7 @@ export default defineConfig({
     },
     tree: {
       groups: [
-        { include: (_file) => true, title: 'Components' },
+        { include: _file => true, title: 'Components' },
         { id: 'utilities', title: 'Utilities' },
       ],
     },
@@ -33,7 +34,7 @@ export default defineConfig({
       entries: [
         {
           find: '@',
-          replacement: resolve(projectRootDir, '../packages/radix-vue/src'),
+          replacement: resolve(projectRootDir, '../packages/akar/src'),
         },
       ],
     }),
@@ -49,4 +50,4 @@ export default defineConfig({
     },
     host: true,
   },
-});
+})

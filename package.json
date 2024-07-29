@@ -30,6 +30,7 @@
     "story:preview": "histoire preview"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.24.0",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@histoire/plugin-vue": "^0.17.17",

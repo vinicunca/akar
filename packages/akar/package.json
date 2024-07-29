@@ -91,8 +91,19 @@
   "peerDependencies": {
     "vue": ">= 3.2.0"
   },
+  "dependencies": {
+    "@tanstack/vue-virtual": "^3.8.3",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@vueuse/core": "^10.11.0"
+  },
   "devDependencies": {
+    "@iconify/vue": "^4.1.2",
+    "@types/node": "^20.14.9",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vue/tsconfig": "^0.5.1",
+    "jsdom": "^24.1.1",
+    "vite-plugin-dts": "4.0.0-beta.1",
     "vitest": "^2.0.2"
+
   }
 }
