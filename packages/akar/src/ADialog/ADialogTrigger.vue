@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<ADialogTriggerProps>(), {
 const rootContext = injectADialogRootContext()
 const { forwardRef, currentElement } = useForwardExpose()
 
-rootContext.contentId ||= useId(undefined, 'radix-vue-dialog-content')
+rootContext.contentId ||= useId(undefined, 'akar-dialog-content')
 onMounted(() => {
   rootContext.triggerElement.value = currentElement.value
 })
