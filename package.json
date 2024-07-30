@@ -25,9 +25,7 @@
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --cache --fix",
     "test": "pnpm --filter @vinicunca/akar test",
-    "story:dev": "histoire dev",
-    "story:build": "histoire build",
-    "story:preview": "histoire preview"
+    "story:dev": "pnpm --filter histoire story:dev --open"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.24.0",

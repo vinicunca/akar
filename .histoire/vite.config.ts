@@ -5,8 +5,6 @@ import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 const projectRootDir = resolve(__dirname)
-console.log({ projectRootDir })
-
 export default defineConfig({
   histoire: {
     outDir: './dist',
@@ -14,10 +12,6 @@ export default defineConfig({
     setupFile: './setup.ts',
     storyMatch: [resolve(projectRootDir, '../packages/akar/src/**/*.story.vue')],
     theme: {
-      logo: {
-        light: '../docs/content/public/logo.svg',
-        square: '../docs/content/public/logo.svg',
-      },
       title: 'Akar',
     },
     tree: {

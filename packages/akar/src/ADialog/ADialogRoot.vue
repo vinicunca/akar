@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue'
-import { createContext } from '../shared/createContext'
+import { createContext } from '@/shared'
 
 export interface ADialogRootProps {
   /** The controlled open state of the dialog. Can be binded as `v-model:open`. */
