@@ -3,6 +3,7 @@ import alias from '@rollup/plugin-alias'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
+import UnoCSS from 'unocss/vite'
 
 const projectRootDir = resolve(__dirname)
 export default defineConfig({
@@ -23,6 +24,7 @@ export default defineConfig({
     viteNodeInlineDeps: [/@tanstack/],
   },
   plugins: [
+    UnoCSS(),
     vue(),
     alias({
       entries: [

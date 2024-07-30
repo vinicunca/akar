@@ -2,14 +2,20 @@
 import { ref } from 'vue'
 import {
   ADialogRoot,
+  ADialogTrigger,
 } from '../'
 
 const dialogOpen = ref(false)
 </script>
 
 <template>
+  <h1>Akar Dialog </h1>
   <ADialogRoot v-model:open="dialogOpen">
-    <p>A</p>
+    <ADialogTrigger
+      class="color-white hover:bg-mauve3 inline-flex h-[35px] items-center justify-center rounded-[4px] bg-blue px-[15px] font-medium leading-none shadow-[0_2px_10px]  focus:outline-none"
+    >
+      Edit profile
+    </ADialogTrigger>
   </ADialogRoot>
 </template>
 

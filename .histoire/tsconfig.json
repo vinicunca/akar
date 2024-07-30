@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@iconify/vue": ["node_modules/@iconify/vue/dist/iconify.mjs"]
-    }
+    },
+    "types": ["unocss/vite"]
   },
   "includes": ["../packages/akar/src/**/*.vue", "../packages/akar/src/**/*.ts"]
 }
