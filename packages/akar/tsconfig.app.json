@@ -1,6 +1,5 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-
   "compilerOptions": {
     "target": "ESNext",
     "jsx": "preserve",
@@ -12,13 +11,12 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "paths": {
-      "~~/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@iconify/vue": ["../../.histoire/node_modules/@iconify/vue"],
+      "@vue/shared": ["node_modules/@vue/shared"]
     },
     "resolveJsonModule": true,
-    "types": [
-      "node",
-      "jsdom"
-    ],
+    "types": ["node", "jsdom", "@testing-library/jest-dom"],
     "strict": true,
     "declaration": false,
     "outDir": "dist",
@@ -26,11 +24,10 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-
   "include": [
     "env.d.ts",
+    "src/**/*",
     "src/**/*.ts",
-    "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
   ]
