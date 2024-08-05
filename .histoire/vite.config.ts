@@ -38,15 +38,6 @@ export default defineConfig({
       ],
     }),
   ],
-  resolve: {
-    alias: {
-      '@iconify/vue': './node_modules/@iconify/vue/dist/iconify.mjs',
-    },
-  },
-  server: {
-    fs: {
-      allow: ['..'],
-    },
-    host: true,
-  },
 });
+
+// animation, server fs, radix-ui/colors/, @iconify/vue, vitest,

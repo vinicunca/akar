@@ -12,9 +12,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
-      "@/*": ["src/*"],
-      "@iconify/vue": ["../../.histoire/node_modules/@iconify/vue"],
-      "@vue/shared": ["node_modules/@vue/shared"]
+      "~~/*": ["src/*"]
     },
     "resolveJsonModule": true,
     "strict": true,
