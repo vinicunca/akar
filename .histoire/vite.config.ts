@@ -39,5 +39,3 @@ export default defineConfig({
     }),
   ],
 });
-
-// animation, server fs, radix-ui/colors/, @iconify/vue, vitest, axe,
