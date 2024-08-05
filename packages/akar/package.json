@@ -92,6 +92,7 @@
     "vue": ">= 3.2.0"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
     "@vue/tsconfig": "^0.5.1",
     "vitest": "^2.0.2"
   }

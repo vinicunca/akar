@@ -9,6 +9,7 @@
     "story:preview": "histoire preview"
   },
   "devDependencies": {
+    "@histoire/plugin-vue": "^0.17.17",
     "histoire": "^0.17.17"
   }
 }
