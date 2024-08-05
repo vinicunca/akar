@@ -24,7 +24,8 @@
     "pub:release": "cd packages/akar && pnpm pub:release",
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --cache --fix",
-    "test": "pnpm --filter @vinicunca/akar test"
+    "test": "pnpm --filter @vinicunca/akar test",
+    "story:dev": "pnpm --filter histoire story:dev --open"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
