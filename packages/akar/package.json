@@ -93,7 +93,6 @@
   },
   "dependencies": {
     "@tanstack/vue-virtual": "^3.8.3",
-    "@vueuse/core": "^10.11.0",
     "aria-hidden": "^1.2.4"
   },
   "devDependencies": {

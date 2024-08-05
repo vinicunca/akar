@@ -62,9 +62,6 @@ importers:
       '@vueuse/components':
         specifier: ^10.11.0
         version: 10.11.0(vue@3.4.31(typescript@5.5.3))
-      '@vueuse/core':
-        specifier: ^10.11.0
-        version: 10.11.0(vue@3.4.31(typescript@5.5.3))
       '@vueuse/shared':
         specifier: ^10.11.0
         version: 10.11.0(vue@3.4.31(typescript@5.5.3))
@@ -105,9 +102,6 @@ importers:
       '@tanstack/vue-virtual':
         specifier: ^3.8.3
         version: 3.8.4(vue@3.4.31(typescript@5.5.3))
-      '@vueuse/core':
-        specifier: ^10.11.0
-        version: 10.11.0(vue@3.4.31(typescript@5.5.3))
       aria-hidden:
         specifier: ^1.2.4
         version: 1.2.4
