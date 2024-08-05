@@ -1,4 +1,3 @@
-import { blackA, grass, green, indigo, mauve, purple, red, slate, teal, violet } from '@radix-ui/colors';
 import presetUno from '@unocss/preset-uno';
 import { defineConfig } from 'unocss';
 
@@ -69,18 +68,6 @@ export default defineConfig({
         'bezier-1': 'cubic-bezier(0.16, 1, 0.3, 1)',
         'bezier-2': 'cubic-bezier(0.87, 0, 0.13, 1)',
       },
-    },
-    colors: {
-      ...blackA,
-      ...mauve,
-      ...violet,
-      ...green,
-      ...grass,
-      ...red,
-      ...indigo,
-      ...purple,
-      ...teal,
-      ...slate,
     },
   },
 });
