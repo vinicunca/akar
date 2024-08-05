@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "includes": [
+    "../packages/akar/src/**/*.vue",
+    "../packages/akar/src/**/*.ts"
+  ]
+}
