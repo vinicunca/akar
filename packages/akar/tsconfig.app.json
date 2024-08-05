@@ -15,7 +15,7 @@
       "@vue/shared": ["node_modules/@vue/shared"]
     },
     "resolveJsonModule": true,
-    "types": ["node", "jsdom", "@testing-library/jest-dom"],
+    "types": ["node", "jsdom"],
     "strict": true,
     "declaration": false,
     "outDir": "dist",
