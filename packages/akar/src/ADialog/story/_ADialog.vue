@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="color-black">
     Testing Adialog
   </div>
 </template>

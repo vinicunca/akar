@@ -4,7 +4,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "jsx": "preserve",
-    "module": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "baseUrl": ".",
     "moduleResolution": "node",
     "paths": {
       "~~/*": ["src/*"]
