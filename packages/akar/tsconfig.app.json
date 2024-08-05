@@ -9,6 +9,7 @@
       "DOM"
     ],
     "baseUrl": ".",
+    "module": "ESNext",
     "moduleResolution": "node",
     "paths": {
       "~~/*": ["src/*"]
