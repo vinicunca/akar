@@ -19,9 +19,7 @@ export default defineConfig({
       name: 'akar',
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library (Vue)
-      external: ['vue', '@floating-ui/vue', '@internationalized/date', '@internationalized/number'],
+      external: ['vue'],
       output: {
         // Provide global variables to use in the UMD build
         assetFileNames: (chunkInfo) => {
@@ -30,11 +28,8 @@ export default defineConfig({
           }
           return chunkInfo.name as string;
         },
-        // for externalized deps
         globals: {
-          '@internationalized/date': '@internationalized/date',
-          '@internationalized/number': '@internationalized/number',
-          'vue': 'Vue',
+          vue: 'Vue',
         },
       },
     },
@@ -42,7 +37,7 @@ export default defineConfig({
   plugins: [
     vueJsx(),
     dts({
-      exclude: ['src/test/**', 'src/**/story/**', 'src/**/*.story.vue'],
+      exclude: ['src/**/story/**', 'src/**/*.story.vue'],
       tsconfigPath: 'tsconfig.build.json',
     }),
   ],
@@ -50,9 +45,5 @@ export default defineConfig({
     alias: {
       '@': resolve(projectRootDir, 'src'),
     },
-    dedupe: [
-      'vue',
-      '@vue/runtime-core',
-    ],
   },
 });
