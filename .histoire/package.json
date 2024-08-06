@@ -1,0 +1,15 @@
+{
+  "name": "histoire",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "story:dev": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview"
+  },
+  "devDependencies": {
+    "@histoire/plugin-vue": "^0.17.17",
+    "histoire": "^0.17.17"
+  }
+}
