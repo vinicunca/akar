@@ -38,4 +38,10 @@ export default defineConfig({
       ],
     }),
   ],
+  server: {
+    fs: {
+      allow: ['..'],
+    },
+    host: true,
+  },
 });
