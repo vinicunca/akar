@@ -1,4 +1,3 @@
-import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
@@ -20,8 +19,6 @@ export default defineConfig({
       name: 'akar',
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library (Vue)
       external: ['vue'],
       output: {
         // Provide global variables to use in the UMD build
@@ -31,7 +28,6 @@ export default defineConfig({
           }
           return chunkInfo.name as string;
         },
-        // for externalized deps
         globals: {
           vue: 'Vue',
         },
@@ -39,10 +35,8 @@ export default defineConfig({
     },
   },
   plugins: [
-    vue(),
     vueJsx(),
     dts({
-      cleanVueFileName: true,
       exclude: ['src/**/story/**', 'src/**/*.story.vue'],
       tsconfigPath: 'tsconfig.build.json',
     }),
