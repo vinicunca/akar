@@ -5,9 +5,9 @@
 <template>
   <Story>
     <Variant title="Setup histoire">
-      <div>
+      <h1 class="color-blue">
         Testing APrimitive
-      </div>
+      </h1>
     </Variant>
   </Story>
 </template>

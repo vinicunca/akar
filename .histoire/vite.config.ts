@@ -11,6 +11,7 @@ export default defineConfig({
     plugins: [
       HstVue(),
     ],
+    setupFile: './setup.ts',
     storyMatch: [
       resolve(
         projectRootDir,
@@ -36,7 +37,7 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@',
+        find: '~~',
         replacement: resolve(projectRootDir, '../packages/akar/src'),
       },
     ],

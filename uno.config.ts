@@ -1,13 +1,6 @@
-import presetUno from '@unocss/preset-uno';
-import { defineConfig } from 'unocss';
+/**
+ * This file is only to satisfy the @unocss/eslint-plugin
+ */
+import defaultUno from './.histoire/uno.config';
 
-export default defineConfig({
-  content: {
-    filesystem: [
-      'packages/akar/src/**/*.vue',
-    ],
-  },
-  presets: [
-    presetUno(),
-  ],
-});
+export default defaultUno;

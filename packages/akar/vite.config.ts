@@ -43,7 +43,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': resolve(projectRootDir, 'src'),
+      '~~': resolve(projectRootDir, 'src'),
     },
   },
 });

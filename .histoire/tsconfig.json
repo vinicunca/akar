@@ -3,5 +3,8 @@
     "baseUrl": ".",
     "types": ["unocss/vite"]
   },
-  "includes": ["../packages/akar/src/**/*.vue", "../packages/akar/src/**/*.ts"]
+  "includes": [
+    "../packages/akar/src/**/*.vue",
+    "../packages/akar/src/**/*.ts"
+  ]
 }
