@@ -5,8 +5,7 @@
     "target": "ESNext",
     "jsx": "preserve",
     "lib": [
-      "ESNext",
-      "DOM"
+      "ESNext"
     ],
     "baseUrl": ".",
     "module": "ESNext",
@@ -16,8 +15,7 @@
     },
     "resolveJsonModule": true,
     "types": [
-      "node",
-      "jsdom"
+      "node"
     ],
     "strict": true,
     "declaration": false,

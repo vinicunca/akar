@@ -10,6 +10,8 @@
   },
   "devDependencies": {
     "@histoire/plugin-vue": "^0.17.17",
-    "histoire": "^0.17.17"
+    "@unocss/vite": "^0.61.7",
+    "histoire": "^0.17.17",
+    "unocss": "^0.61.7"
   }
 }
