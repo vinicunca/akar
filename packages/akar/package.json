@@ -91,13 +91,8 @@
   "peerDependencies": {
     "vue": ">= 3.2.0"
   },
-  "dependencies": {
-    "@tanstack/vue-virtual": "^3.8.3",
-    "aria-hidden": "^1.2.4"
-  },
   "devDependencies": {
     "@types/node": "^20.14.9",
-    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",
     "jsdom": "^24.1.1",

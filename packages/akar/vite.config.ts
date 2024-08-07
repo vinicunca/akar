@@ -1,4 +1,3 @@
-import vueJsx from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
@@ -35,7 +34,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    vueJsx(),
     dts({
       exclude: ['src/**/story/**', 'src/**/*.story.vue'],
       tsconfigPath: 'tsconfig.build.json',

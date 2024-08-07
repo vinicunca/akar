@@ -21,12 +21,6 @@ export default defineConfig({
     theme: {
       title: 'Akar',
     },
-    tree: {
-      groups: [
-        { include: (_file) => true, title: 'Components' },
-        { id: 'utilities', title: 'Utilities' },
-      ],
-    },
   },
 
   plugins: [
