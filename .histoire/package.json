@@ -11,10 +11,8 @@
   "devDependencies": {
     "@histoire/plugin-vue": "^0.17.17",
     "@unocss/vite": "^0.61.7",
-    "autoprefixer": "^10.4.19",
     "eslint": "^9.7.0",
     "histoire": "^0.17.17",
-    "postcss": "^8.4.39",
     "unocss": "^0.61.7"
   }
 }

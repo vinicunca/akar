@@ -9,10 +9,4 @@ export default vinicuncaESLint(
     unocss: true,
     vue: true,
   },
-  {
-    files: ['**/*.ts'],
-    rules: {
-      'sonar/no-duplicate-string': 'off',
-    },
-  },
 );
