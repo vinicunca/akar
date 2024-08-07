@@ -9,4 +9,15 @@ export default vinicuncaESLint(
     unocss: true,
     vue: true,
   },
+  {
+    files: ['**/*.vue'],
+    rules: {
+      'import/first': 'off',
+      'ts/consistent-type-definitions': 'off',
+      'vue/max-attributes-per-line': ['error', {
+        multiline: 1,
+        singleline: 1,
+      }],
+    },
+  },
 );

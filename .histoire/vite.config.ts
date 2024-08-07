@@ -7,6 +7,7 @@ import { defineConfig } from 'vite';
 const projectRootDir = resolve(__dirname);
 
 export default defineConfig({
+
   histoire: {
     plugins: [
       HstVue(),
@@ -21,8 +22,13 @@ export default defineConfig({
     theme: {
       title: 'Akar',
     },
+    tree: {
+      groups: [
+        { include: (_file) => true, title: 'Components' },
+        { id: 'utilities', title: 'Utilities' },
+      ],
+    },
   },
-
   plugins: [
     UnoCSS(),
     vue(),
