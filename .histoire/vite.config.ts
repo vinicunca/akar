@@ -1,6 +1,7 @@
 import { HstVue } from '@histoire/plugin-vue';
-import Vue from '@vitejs/plugin-vue';
+import vue from '@vitejs/plugin-vue';
 import { resolve } from 'node:path';
+import UnoCSS from 'unocss/vite';
 import { defineConfig } from 'vite';
 
 const projectRootDir = resolve(__dirname);
@@ -16,11 +17,30 @@ export default defineConfig({
         '../packages/akar/src/**/*.story.vue',
       ),
     ],
+    theme: {
+      title: 'Akar',
+    },
+    tree: {
+      groups: [
+        { include: (_file) => true, title: 'Components' },
+        { id: 'utilities', title: 'Utilities' },
+      ],
+    },
   },
 
   plugins: [
-    Vue(),
+    UnoCSS(),
+    vue(),
   ],
+
+  resolve: {
+    alias: [
+      {
+        find: '@',
+        replacement: resolve(projectRootDir, '../packages/akar/src'),
+      },
+    ],
+  },
 
   /**
    * We need to allow serving files from the `akar` package,
