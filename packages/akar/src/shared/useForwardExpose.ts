@@ -13,7 +13,6 @@ export function useForwardExpose() {
     return ['#comment', '#text'].includes(currentRef.value?.$el.nodeName) ? currentRef.value?.$el.nextElementSibling : unrefElement(currentRef);
   });
 
-  // Do give us credit if you reference our code :D
   // localExpose should only be assigned once else will create infinite loop
   const localExpose: null | Record<string, any> = Object.assign({}, instance.exposed);
   const ret: Record<string, any> = {};

@@ -1,4 +1,9 @@
 export {
+  type ADialogPortalProps,
+  default as ADialogPortal,
+} from './ADialogPortal.vue';
+
+export {
   type ADialogRootEmits,
   type ADialogRootProps,
   default as ADialogRoot,
