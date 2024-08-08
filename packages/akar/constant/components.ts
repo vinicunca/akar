@@ -2,6 +2,7 @@ export const components = {
 
   dialog: [
     'ADialogRoot',
+    'ADialogTrigger',
   ],
 
 };
