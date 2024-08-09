@@ -21,13 +21,26 @@ export default defineConfig({
     theme: {
       title: 'Akar',
     },
+    tree: {
+      groups: [
+        {
+          id: 'utilities',
+          include: (file) => file.title.toLowerCase().includes('utilities'),
+          title: 'Utilities',
+        },
+        {
+          id: 'components',
+          include: (file) => !file.title.toLowerCase().includes('utilities'),
+          title: 'Components',
+        },
+      ],
+    },
   },
 
   plugins: [
     UnoCSS(),
     vue(),
   ],
-
   resolve: {
     alias: [
       {
@@ -50,4 +63,5 @@ export default defineConfig({
     },
     host: true,
   },
+
 });
