@@ -1,4 +1,9 @@
 export {
+  type ADialogOverlayProps,
+  default as ADialogOverlay,
+} from './ADialogOverlay.vue';
+
+export {
   type ADialogPortalProps,
   default as ADialogPortal,
 } from './ADialogPortal.vue';

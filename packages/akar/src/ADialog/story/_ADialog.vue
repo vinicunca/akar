@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { ADialogRoot, ADialogTrigger } from '../';
+import { ADialogOverlay, ADialogPortal, ADialogRoot, ADialogTrigger } from '../';
 
 const dialogOpen = ref(false);
 </script>
@@ -16,6 +16,13 @@ const dialogOpen = ref(false);
     >
       Edit profile
     </ADialogTrigger>
+    <ADialogPortal>
+      <Transition name="fade">
+        <ADialogOverlay
+          class="bg-blackA9 fixed inset-0"
+        />
+      </Transition>
+    </ADialogPortal>
   </ADialogRoot>
 </template>
 
