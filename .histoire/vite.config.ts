@@ -27,7 +27,6 @@ export default defineConfig({
     UnoCSS(),
     vue(),
   ],
-
   resolve: {
     alias: [
       {
@@ -49,5 +48,12 @@ export default defineConfig({
       allow: ['..'],
     },
     host: true,
+  },
+
+  tree: {
+    groups: [
+      { include: (_file) => true, title: 'Components' },
+      { id: 'utilities', title: 'Utilities' },
+    ],
   },
 });
