@@ -5,6 +5,7 @@ export { useBodyScrollLock } from './useBodyScrollLock';
 export { useEmitAsProps } from './useEmitAsProps';
 export { useFocusGuards } from './useFocusGuards';
 export { useForwardExpose } from './useForwardExpose';
+export { useHideOthers } from './useHideOthers';
 export { useId } from './useId';
 export { useSize } from './useSize';
 export { useStateMachine } from './useStateMachine';

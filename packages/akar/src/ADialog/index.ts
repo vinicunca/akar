@@ -1,4 +1,10 @@
 export {
+  type ADialogContentEmits,
+  type ADialogContentProps,
+  default as ADialogContent,
+} from './ADialogContent.vue';
+
+export {
   type ADialogOverlayProps,
   default as ADialogOverlay,
 } from './ADialogOverlay.vue';

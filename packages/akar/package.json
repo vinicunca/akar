@@ -92,7 +92,8 @@
     "vue": ">= 3.2.0"
   },
   "dependencies": {
-    "@vueuse/core": "^10.11.0"
+    "@vueuse/core": "^10.11.0",
+    "aria-hidden": "^1.2.4"
   },
   "devDependencies": {
     "@types/jsdom": "^21.1.7",
