@@ -21,6 +21,20 @@ export default defineConfig({
     theme: {
       title: 'Akar',
     },
+    tree: {
+      groups: [
+        {
+          id: 'utilities',
+          include: (file) => file.title.toLowerCase().includes('utilities'),
+          title: 'Utilities',
+        },
+        {
+          id: 'components',
+          include: (file) => !file.title.toLowerCase().includes('utilities'),
+          title: 'Components',
+        },
+      ],
+    },
   },
 
   plugins: [
@@ -50,10 +64,4 @@ export default defineConfig({
     host: true,
   },
 
-  tree: {
-    groups: [
-      { include: (_file) => true, title: 'Components' },
-      { id: 'utilities', title: 'Utilities' },
-    ],
-  },
 });
