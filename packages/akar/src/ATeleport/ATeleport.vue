@@ -31,11 +31,11 @@ const isMounted = useMounted();
 </script>
 
 <template>
-  <ATeleport
+  <Teleport
     v-if="isMounted || forceMount"
     :to="to"
     :disabled="disabled"
   >
     <slot />
-  </ATeleport>
+  </Teleport>
 </template>
