@@ -30,7 +30,11 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@floating-ui/dom": "^1.6.7",
+    "@floating-ui/vue": "^1.1.0",
     "@histoire/plugin-vue": "^0.17.17",
+    "@testing-library/user-event": "^14.5.2",
+    "@testing-library/vue": "^8.1.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.1.0",
     "@vinicunca/eslint-config": "^2.7.4",

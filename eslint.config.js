@@ -20,4 +20,10 @@ export default vinicuncaESLint(
       }],
     },
   },
+  {
+    files: ['**/*.ts'],
+    rules: {
+      'sonar/no-duplicate-string': 'off',
+    },
+  },
 );
