@@ -26,6 +26,9 @@ importers:
       '@vinicunca/eslint-config':
         specifier: ^2.7.4
         version: 2.7.4(@vue/compiler-sfc@3.4.31)(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.2(@types/node@22.1.0))
+      '@vinicunca/perkakas':
+        specifier: ^1.0.4
+        version: 1.0.4
       '@vitejs/plugin-vue':
         specifier: ^5.1.1
         version: 5.1.1(vite@5.3.5(@types/node@22.1.0))(vue@3.4.31(typescript@5.5.4))
@@ -69,9 +72,6 @@ importers:
   packages/akar:
     dependencies:
       '@vueuse/core':
-        specifier: ^10.11.1
-        version: 10.11.1(vue@3.4.31(typescript@5.5.4))
-      '@vueuse/shared':
         specifier: ^10.11.1
         version: 10.11.1(vue@3.4.31(typescript@5.5.4))
       vue:
@@ -1110,6 +1110,10 @@ packages:
     engines: {node: '>=20.0.0'}
     peerDependencies:
       eslint: '>=8.57.0'
+
+  '@vinicunca/perkakas@1.0.4':
+    resolution: {integrity: sha512-fhW2uf/ITrJazBsd8UDCh+ZS7DH6MOie35TPTPSU85FCbQUj5Y5EUkfGCnjWdaF7Y0r2MljeIiCebKqKgDfuQA==}
+    engines: {node: '>=20.0.0'}
 
   '@vitejs/plugin-vue@5.1.1':
     resolution: {integrity: sha512-sDckXxlHpMsjRQbAH9WanangrfrblsOd3pNifePs+FOHjJg1jfWq5L/P0PsBRndEt3nmdUnmvieP8ULDeX5AvA==}
@@ -5185,6 +5189,10 @@ snapshots:
       - svelte-eslint-parser
       - typescript
       - vitest
+
+  '@vinicunca/perkakas@1.0.4':
+    dependencies:
+      type-fest: 4.23.0
 
   '@vitejs/plugin-vue@5.1.1(vite@5.3.5(@types/node@22.1.0))(vue@3.4.31(typescript@5.5.4))':
     dependencies:

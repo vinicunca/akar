@@ -34,6 +34,7 @@
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.1.0",
     "@vinicunca/eslint-config": "^2.7.4",
+    "@vinicunca/perkakas": "^1.0.4",
     "@vitejs/plugin-vue": "^5.1.1",
     "bumpp": "^9.4.2",
     "eslint": "^9.8.0",
