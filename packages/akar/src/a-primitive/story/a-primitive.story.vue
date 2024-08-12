@@ -21,4 +21,3 @@ export interface ADialogCloseProps extends APrimitiveProps {}
     </Variant>
   </Story>
 </template>
-..~~/a-primitive

@@ -22,5 +22,3 @@ const props = withDefaults(defineProps<ADialogCloseProps>(), {
     </Variant>
   </Story>
 </template>
-../a-primitive
-~~/a-primitive

@@ -20,4 +20,3 @@ function handleClick() {
     <slot />
   </APrimitive>
 </template>
-./a-primitive
