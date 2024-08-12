@@ -1,1 +1,1 @@
-export { renderSlotFragments } from './renderSlotFragments';
+export { renderSlotFragments } from './render-slot-fragments';

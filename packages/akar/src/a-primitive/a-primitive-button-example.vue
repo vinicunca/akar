@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { APrimitive, type APrimitiveProps } from './APrimitive';
+import { APrimitive, type APrimitiveProps } from './a-primitive';
 
 const props = withDefaults(defineProps<APrimitiveProps>(), {
   as: 'button',
@@ -20,3 +20,4 @@ function handleClick() {
     <slot />
   </APrimitive>
 </template>
+./a-primitive

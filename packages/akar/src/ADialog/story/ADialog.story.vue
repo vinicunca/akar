@@ -7,10 +7,7 @@ import Dialog from './_ADialog.vue';
     title="ADialog"
     :layout="{ type: 'single', iframe: false }"
   >
-    <Variant
-      group="utilities"
-      title="Akar Dialog"
-    >
+    <Variant title="default">
       <Dialog />
     </Variant>
   </Story>
