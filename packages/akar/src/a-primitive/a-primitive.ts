@@ -1,6 +1,6 @@
 import { type Component, defineComponent, h, type PropType } from 'vue';
 
-import { Slot } from './ASlot';
+import { Slot } from './a-slot';
 
 export type AsTag =
   | 'a'

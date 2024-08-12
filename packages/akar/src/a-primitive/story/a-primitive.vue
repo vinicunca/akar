@@ -1,9 +1,7 @@
-<script lang="ts">
-import type { APrimitiveProps } from '~~/APrimitive';
-</script>
-
 <script lang="ts" setup>
-import { APrimitive } from '../APrimitive';
+import type { APrimitiveProps } from '~~/a-primitive';
+
+import { APrimitive } from '~~/a-primitive';
 
 export interface ADialogCloseProps extends APrimitiveProps {}
 
