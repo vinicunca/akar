@@ -13,7 +13,6 @@ export default vinicuncaESLint(
     files: ['**/*.vue'],
     rules: {
       'import/first': 'off',
-      'ts/consistent-type-definitions': 'off',
     },
   },
 );

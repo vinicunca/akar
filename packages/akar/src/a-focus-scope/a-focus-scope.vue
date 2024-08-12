@@ -3,6 +3,7 @@ import type { APrimitiveProps } from '~~/a-primitive';
 
 import { useForwardExpose } from '~~/shared';
 
+// eslint-disable-next-line ts/consistent-type-definitions
 export type AFocusScopeEmits = {
   /**
    * Event handler called when auto-focusing on mount.
@@ -98,33 +99,38 @@ watchEffect((cleanupFn) => {
     }
     const relatedTarget = event.relatedTarget as HTMLElement | null;
 
-    // A `focusout` event with a `null` `relatedTarget` will happen in at least two cases:
-    //
-    // 1. When the user switches app/tabs/windows/the browser itself loses focus.
-    // 2. In Google Chrome, when the focused element is removed from the DOM.
-    //
-    // We let the browser do its thing here because:
-    //
-    // 1. The browser already keeps a memory of what's focused for when the page gets refocused.
-    // 2. In Google Chrome, if we try to focus the deleted focused element (as per below), it
-    //    throws the CPU to 100%, so we avoid doing anything for this reason here too.
+    /**
+     * A `focusout` event with a `null` `relatedTarget` will happen in at least two cases:
+     * 1. When the user switches app/tabs/windows/the browser itself loses focus.
+     * 2. In Google Chrome, when the focused element is removed from the DOM.
+     * We let the browser do its thing here because:
+     * 1. The browser already keeps a memory of what's focused for when the page gets refocused.
+     * 2. In Google Chrome, if we try to focus the deleted focused element (as per below), it
+     * throws the CPU to 100%, so we avoid doing anything for this reason here too.
+     */
+
     if (relatedTarget === null) {
       return;
     }
 
-    // If the focus has moved to an actual legitimate element (`relatedTarget !== null`)
-    // that is outside the container, we move focus to the last valid focused element inside.
+    /**
+     *  If the focus has moved to an actual legitimate element (`relatedTarget !== null`)
+     *  that is outside the container, we move focus to the last valid focused element inside.    *
+     */
     if (!container.contains(relatedTarget)) {
       focus(lastFocusedElementRef.value, { select: true });
     }
   }
 
-  // When the focused element gets removed from the DOM, browsers move focus
-  // back to the document.body. In this case, we move focus to the container
-  // to keep focus trapped correctly.
-  // instead of leaning on document.activeElement, we use lastFocusedElementRef.value to check
-  // if the element still exist inside the container,
-  // if not then we focus to the container
+  /**
+   * When the focused element gets removed from the DOM, browsers move focus
+   * back to the document.body. In this case, we move focus to the container
+   * to keep focus trapped correctly.
+   * instead of leaning on document.activeElement, we use lastFocusedElementRef.value to check
+   * if the element still exist inside the container,
+   * if not then we focus to the container
+   */
+
   function handleMutations(mutations: Array<MutationRecord>) {
     const isLastFocusedElementExist = container.contains(lastFocusedElementRef.value);
     if (!isLastFocusedElementExist) {
