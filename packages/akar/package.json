@@ -91,6 +91,10 @@
   "peerDependencies": {
     "vue": ">= 3.2.0"
   },
+  "dependencies": {
+    "@vueuse/core": "^10.11.1",
+    "@vueuse/shared": "^10.11.1"
+  },
   "devDependencies": {
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.1.0",
