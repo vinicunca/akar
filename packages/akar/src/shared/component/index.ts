@@ -1,1 +1,1 @@
-export { default as AArrow } from './Arrow.vue';
+export { default as AArrow } from './a-arrow.vue';
