@@ -36,7 +36,7 @@ export interface AFocusScopeProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { isClient } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
 import { nextTick, reactive, ref, watchEffect } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
@@ -73,7 +73,7 @@ const focusScope = reactive({
 });
 
 watchEffect((cleanupFn) => {
-  if (!isClient) {
+  if (!isBrowser) {
     return;
   }
   const container = currentElement.value;
