@@ -30,12 +30,11 @@ export const Slot = defineComponent({
         delete firstNonCommentChildren.props.class;
       }
       const cloned = cloneVNode(firstNonCommentChildren, mergedProps);
-
-      // Explicitly override props starting with `on`.
-      // It seems cloneVNode from Vue doesn't like overriding `onXXX` props.
-      // So we have to do it manually.
-
-      // Dhia's note to discuss with Mas Prabu: I don't understand why ESLint not allowing for in statements. A quick google searcj says, it's bad because it will loop over all properties including those from Object prototype. But not sure how it's possible, especially in this context since they check if it's start with 'on'. So for now, I am disabling the rule for the next line
+      /**
+       * Explicitly override props starting with `on`.
+       *  It seems cloneVNode from Vue doesn't like overriding `onXXX` props.
+       * So we have to do it manually.
+       */
 
       // eslint-disable-next-line no-restricted-syntax
       for (const prop in mergedProps) {
