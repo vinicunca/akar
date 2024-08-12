@@ -1,4 +1,4 @@
-import { isClient } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
 import { watchEffect } from 'vue';
 
 /** Number of components which have requested interest to have focus guards */
@@ -10,7 +10,7 @@ let count = 0;
  */
 export function useFocusGuards() {
   watchEffect((cleanupFn) => {
-    if (!isClient) {
+    if (!isBrowser) {
       return;
     }
     const edgeGuards = document.querySelectorAll('[data-akar-focus-guard]');
