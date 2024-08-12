@@ -1,2 +1,2 @@
 export { renderSlotFragments } from './render-slot-fragments';
-export { useForwardExpose } from './useForwardExpose';
+export { useForwardExpose } from './use-forward-expose';

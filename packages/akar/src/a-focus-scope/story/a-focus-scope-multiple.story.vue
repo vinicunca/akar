@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { AFocusScope } from '../';
+import { AFocusScope } from '~~/a-focus-scope';
 
 const trapped1 = ref(false);
 const trapped2 = ref(false);
