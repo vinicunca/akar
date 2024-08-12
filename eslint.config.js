@@ -9,4 +9,10 @@ export default vinicuncaESLint(
     unocss: true,
     vue: true,
   },
+  {
+    files: ['**/*.vue'],
+    rules: {
+      'import/first': 'off',
+    },
+  },
 );
