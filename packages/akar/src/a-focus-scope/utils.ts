@@ -46,9 +46,11 @@ export function getTabbableCandidates(container: HTMLElement) {
       if (node.disabled || node.hidden || isHiddenInput) {
         return NodeFilter.FILTER_SKIP;
       }
-      // `.tabIndex` is not the same as the `tabindex` attribute. It works on the
-      // runtime's understanding of tabbability, so this automatically accounts
-      // for any kind of element that could be tabbed to.
+      /**
+       *  `.tabIndex` is not the same as the `tabindex` attribute. It works on the
+       * runtime's understanding of tabbability, so this automatically accounts
+       * for any kind of element that could be tabbed to.
+       */
       return node.tabIndex >= 0
         ? NodeFilter.FILTER_ACCEPT
         : NodeFilter.FILTER_SKIP;
@@ -57,8 +59,10 @@ export function getTabbableCandidates(container: HTMLElement) {
   while (walker.nextNode()) {
     nodes.push(walker.currentNode as HTMLElement);
   }
-  // we do not take into account the order of nodes with positive `tabIndex` as it
-  // hinders accessibility to have tab order different from visual order.
+  /**
+   * we do not take into account the order of nodes with positive `tabIndex` as it
+   * hinders accessibility to have tab order different from visual order.
+   */
   return nodes;
 }
 
