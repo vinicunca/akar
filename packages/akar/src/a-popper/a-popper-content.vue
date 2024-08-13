@@ -322,32 +322,49 @@ providePopperContentContext({
   placedSide,
   shouldHideArrow: cannotCenterArrow,
 });
+
+const contentStyle = computed(() => {
+  const baseStyle = {
+    ...floatingStyles.value,
+    ['--akar-popper-transform-origin' as any]: [
+      middlewareData.value.transformOrigin?.x,
+      middlewareData.value.transformOrigin?.y,
+    ].join(' '),
+    minWidth: 'max-content',
+    transform: isPositioned.value ? floatingStyles.value.transform : 'translate(0, -200%)', // keep off the page when measuring
+    zIndex: contentZIndex.value,
+  };
+
+  /**
+   * hide the content if using the hide middleware and should be hidden
+   * set visibility to hidden and disable pointer events so the UI behaves
+   * as if the PopperContent isn't there at all
+   */
+  if (middlewareData.value.hide?.referenceHidden) {
+    return {
+      ...baseStyle,
+      pointerEvents: 'none',
+      visibility: 'hidden',
+    };
+  }
+
+  return baseStyle;
+});
+
+const innerContentStyle = computed(() => ({
+  /**
+   * if the PopperContent hasn't been placed yet (not all measurements done)
+   * we prevent animations so that users's animation don't kick in too early referring wrong sides
+   */
+  animation: !isPositioned.value ? 'none' : undefined,
+}));
 </script>
 
 <template>
   <div
     ref="floatingRef"
     data-akar-popper-content-wrapper=""
-    :style="{
-      ...floatingStyles,
-      transform: isPositioned ? floatingStyles.transform : 'translate(0, -200%)', // keep off the page when measuring
-      minWidth: 'max-content',
-      zIndex: contentZIndex,
-      ['--akar-popper-transform-origin' as any]: [
-        middlewareData.transformOrigin?.x,
-        middlewareData.transformOrigin?.y,
-      ].join(' '),
-
-      /**hide the content if using the hide middleware and should be hidden
-      * set visibility to hidden and disable pointer events so the UI behaves
-      * as if the PopperContent isn't there at all
-      */
-
-      ...(middlewareData.hide?.referenceHidden && {
-        visibility: 'hidden',
-        pointerEvents: 'none',
-      }),
-    }"
+    :style="contentStyle"
   >
     <APrimitive
       :ref="forwardRef"
@@ -356,13 +373,7 @@ providePopperContentContext({
       :as="as"
       :data-side="placedSide"
       :data-align="placedAlign"
-      :style="{
-        /**
-        * if the PopperContent hasn't been placed yet (not all measurements done)
-        * we prevent animations so that users's animation don't kick in too early referring wrong sides
-        */
-        animation: !isPositioned ? 'none' : undefined,
-      }"
+      :style="innerContentStyle"
     >
       <slot />
     </APrimitive>
