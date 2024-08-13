@@ -63,11 +63,11 @@ export interface APopperContentProps extends APrimitiveProps {
   avoidCollisions?: boolean;
 
   /**
-   * The element used as the collision boundary. By default
-   * this is the viewport, though you can provide additional
+   * The element(s) used as the collision boundary.
+   * By default, this is the viewport, but you can provide additional
    * element(s) to be included in this check.
    *
-   * @defaultValue []
+   * @default [] - An empty array, which means only the viewport is used
    */
   collisionBoundary?: Array<Element | null> | Element | null;
 
