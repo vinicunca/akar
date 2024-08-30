@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📚 Documentation
+    url: https://vinicunca.dev/
+    about: Check the documentation for usage of Akar.
+  - name: 🗨️ Discord
+    url: https://chat.vinicunca.dev/
+    about: Join the Vinicunca Discord server.
