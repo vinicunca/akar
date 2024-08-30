@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "types": ["unocss/vite"]
+    "baseUrl": "."
   },
   "includes": [
-    "../packages/akar/src/**/*.vue",
-    "../packages/akar/src/**/*.ts"
+    "../packages/core/src/**/*.vue",
+    "../packages/core/src/**/*.ts"
   ]
 }

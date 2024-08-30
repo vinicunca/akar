@@ -1,4 +1,6 @@
 {
+  // tsconfig for type-check only
+
   "extends": "@vue/tsconfig/tsconfig.dom.json",
 
   "compilerOptions": {

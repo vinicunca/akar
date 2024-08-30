@@ -5,10 +5,15 @@ export default vinicuncaESLint(
     formatters: {
       css: true,
     },
-    typescript: true,
+    typescript: {
+      overrides: {
+        'perfectionist/sort-objects': 'off',
+      },
+    },
     unocss: true,
     vue: true,
   },
+
   {
     files: ['**/*.vue'],
     rules: {

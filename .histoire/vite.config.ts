@@ -7,6 +7,20 @@ import { defineConfig } from 'vite';
 const projectRootDir = resolve(__dirname);
 
 export default defineConfig({
+  plugins: [
+    UnoCSS(),
+    vue(),
+  ],
+
+  resolve: {
+    alias: [
+      {
+        find: '~~',
+        replacement: resolve(projectRootDir, '../packages/core/src'),
+      },
+    ],
+  },
+
   histoire: {
     plugins: [
       HstVue(),
@@ -15,7 +29,7 @@ export default defineConfig({
     storyMatch: [
       resolve(
         projectRootDir,
-        '../packages/akar/src/**/*.story.vue',
+        '../packages/core/src/**/*.story.vue',
       ),
     ],
     theme: {
@@ -24,34 +38,21 @@ export default defineConfig({
     tree: {
       groups: [
         {
-          id: 'utilities',
-          include: (file) => file.title.toLowerCase().includes('utilities'),
-          title: 'Utilities',
-        },
-        {
           id: 'components',
           include: (file) => !file.title.toLowerCase().includes('utilities'),
           title: 'Components',
+        },
+        {
+          id: 'utilities',
+          include: (file) => file.title.toLowerCase().includes('utilities'),
+          title: 'Utilities',
         },
       ],
     },
   },
 
-  plugins: [
-    UnoCSS(),
-    vue(),
-  ],
-  resolve: {
-    alias: [
-      {
-        find: '~~',
-        replacement: resolve(projectRootDir, '../packages/akar/src'),
-      },
-    ],
-  },
-
   /**
-   * We need to allow serving files from the `akar` package,
+   * We need to allow serving files from the `core` package,
    * if not vite will throw an error saying that the file doesn't exist.
    *
    * @see https://vitejs.dev/config/server-options#server-fs-allow
