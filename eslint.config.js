@@ -15,6 +15,13 @@ export default vinicuncaESLint(
   },
 
   {
+    files: ['**/*.spec.ts'],
+    rules: {
+      'sonar/no-duplicate-string': 'off',
+    },
+  },
+
+  {
     files: ['**/*.vue'],
     rules: {
       'import/first': 'off',
