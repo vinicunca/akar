@@ -28,7 +28,7 @@ export default defineConfig({
     },
     rollupOptions: {
       /**
-       * We need to make sure not to include external deps that won't be bundeled in the final build
+       * We need to make sure not to include external deps that won't be bundled in the final build
        */
       external: [
         'vue',
