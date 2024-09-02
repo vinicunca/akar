@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [Vue()],
   resolve: {
     alias: {
-      '@': pathResolver('./src'),
+      '~~': pathResolver('./src'),
     },
     dedupe: [
       'vue',
@@ -20,9 +20,6 @@ export default defineConfig({
     globals: true,
     exclude: ['**/node_modules/**'],
     include: ['./**/*.spec.ts'],
-    coverage: {
-      provider: 'istanbul',
-    },
     setupFiles: './vitest.setup.ts',
     server: {
       deps: {
