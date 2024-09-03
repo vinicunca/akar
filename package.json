@@ -17,6 +17,7 @@
   },
   "scripts": {
     "prepare": "pnpm simple-git-hooks",
+    "build": "rimraf packages/core/dist && pnpm run --filter @vinicunca/akar build && pnpm run --filter plugins build",
     "bumpp": "bumpp package.json packages/*/package.json docs/package.json",
     "pub:release": "cd packages/akar && pnpm pub:release",
     "lint": "eslint . --cache",
@@ -32,6 +33,7 @@
     "@types/node": "^22.5.1",
     "@vinicunca/eslint-config": "^2.10.1",
     "@vinicunca/perkakas": "^1.0.5",
+    "@vinicunca/unocss-preset-vinicunca": "^0.2.2",
     "bumpp": "^9.5.2",
     "eslint": "^9.9.1",
     "histoire": "^0.17.17",
