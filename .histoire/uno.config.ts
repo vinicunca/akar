@@ -1,4 +1,5 @@
 import presetUno from '@unocss/preset-uno';
+import { presetVinicunca } from '@vinicunca/unocss-preset-vinicunca';
 import { defineConfig } from 'unocss';
 
 export default defineConfig({
@@ -9,5 +10,6 @@ export default defineConfig({
   },
   presets: [
     presetUno(),
+    presetVinicunca(),
   ],
 });
