@@ -86,6 +86,7 @@
     "type-check": "vue-tsc -p tsconfig.check.json --noEmit",
     "type-gen": "vue-tsc --declaration --emitDeclarationOnly",
     "test": "vitest",
+    "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui",
     "pub:release": "pnpm publish --access public"
   },
