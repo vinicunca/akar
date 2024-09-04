@@ -69,7 +69,7 @@ export default defineComponent({
           'You can apply a few solutions:',
           [
             'Provide a single child element so that `presence` directive attach correctly.',
-            'Ensure the first child is an actual element instead of a raw text node or commnet node.',
+            'Ensure the first child is an actual element instead of a raw text node or comment node.',
           ]
             .map((line) => `  - ${line}`)
             .join('\n'),

@@ -69,7 +69,7 @@ export function usePresence(
         } else {
           /**
            * When `present` changes to `false`, we check changes to animation-name to
-           * determine wether an animation has started.
+           * determine whether an animation has started.
            * We chose this approach (reading computed styles) because
            * there is no `animationrun` event and `animationstart` fires after
            * `animation-delay` has expired which would be too late.
