@@ -2,22 +2,28 @@ import { cloneVNode, Comment, defineComponent, mergeProps } from 'vue';
 
 import { renderSlotFragments } from '~~/shared';
 
-export const Slot = defineComponent({
+export const APrimitiveSlot = defineComponent({
+  name: 'APrimitiveSlot',
+
   inheritAttrs: false,
-  name: 'PrimitiveSlot',
+
   setup(_, { attrs, slots }) {
     return () => {
       if (!slots.default) {
         return null;
       }
 
-      const childrens = renderSlotFragments(slots.default());
-      const firstNonCommentChildrenIndex = childrens.findIndex((child) => child.type !== Comment);
+      const children = renderSlotFragments(slots.default());
+
+      const firstNonCommentChildrenIndex = children.findIndex(
+        (child) => child.type !== Comment,
+      );
+
       if (firstNonCommentChildrenIndex === -1) {
-        return childrens;
+        return children;
       }
 
-      const firstNonCommentChildren = childrens[firstNonCommentChildrenIndex];
+      const firstNonCommentChildren = children[firstNonCommentChildrenIndex];
 
       // remove props ref from being inferred
       delete firstNonCommentChildren.props?.ref;
@@ -25,17 +31,19 @@ export const Slot = defineComponent({
       const mergedProps = firstNonCommentChildren.props
         ? mergeProps(attrs, firstNonCommentChildren.props)
         : attrs;
+
       // remove class to prevent duplicated
       if (attrs.class && firstNonCommentChildren.props?.class) {
         delete firstNonCommentChildren.props.class;
       }
+
       const cloned = cloneVNode(firstNonCommentChildren, mergedProps);
+
       /**
        * Explicitly override props starting with `on`.
        *  It seems cloneVNode from Vue doesn't like overriding `onXXX` props.
        * So we have to do it manually.
        */
-
       // eslint-disable-next-line no-restricted-syntax
       for (const prop in mergedProps) {
         if (prop.startsWith('on')) {
@@ -44,12 +52,13 @@ export const Slot = defineComponent({
         }
       }
 
-      if (childrens.length === 1) {
+      if (children.length === 1) {
         return cloned;
       }
 
-      childrens[firstNonCommentChildrenIndex] = cloned;
-      return childrens;
+      children[firstNonCommentChildrenIndex] = cloned;
+
+      return children;
     };
   },
 });

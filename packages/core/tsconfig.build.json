@@ -12,7 +12,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
-      "~~/*": ["src/*"]
+      "~~/*": ["src/*"],
+      "@vue/shared": ["node_modules/@vue/shared"]
     },
     "resolveJsonModule": true,
     "strict": true,

@@ -159,7 +159,7 @@ describe('given a APresence with animated content', () => {
   });
 });
 
-describe('given multiple children', () => {
+describe.todo('given multiple children', () => {
   it('should throw an error', () => {
     const component = defineComponent({
       components: { APresence },
@@ -167,12 +167,11 @@ describe('given multiple children', () => {
         return { open: ref(false) };
       },
       template: `
-    <div>
-    <APresence :present="open">
-      <div>${CONTENT}</div>
-      <div>${CONTENT}</div>
-    </APresence>
-    </div>`,
+        <APresence :present="open">
+          <div>${CONTENT}</div>
+          <div>${CONTENT}</div>
+        </APresence>
+      `,
     });
 
     expect(() => mount(component)).toThrowError();

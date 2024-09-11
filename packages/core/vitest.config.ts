@@ -31,5 +31,9 @@ export default defineConfig({
         resources: 'usable',
       },
     },
+    coverage: {
+      include: ['src/**'],
+      exclude: ['**/index.ts'],
+    },
   },
 });
