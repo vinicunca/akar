@@ -1,10 +1,22 @@
+import Vue from '@vitejs/plugin-vue';
+import VueJsx from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
+import Dts from 'vite-plugin-dts';
 
 const projectRootDir = resolve(__dirname);
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [
+    Vue(),
+    VueJsx(),
+    Dts({
+      tsconfigPath: 'tsconfig.build.json',
+      cleanVueFileName: true,
+      exclude: ['src/spec/**', 'src/**/story/**', 'src/**/*.story.vue'],
+    }),
+  ],
   resolve: {
     alias: {
       '~~': resolve(projectRootDir, 'src'),
