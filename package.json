@@ -26,21 +26,21 @@
     "story:dev": "pnpm --filter histoire story:dev --open"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.4.1",
-    "@commitlint/config-conventional": "^19.4.1",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@floating-ui/vue": "^1.1.4",
     "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^22.5.1",
-    "@vinicunca/eslint-config": "^2.10.1",
+    "@types/node": "^22.5.4",
+    "@vinicunca/eslint-config": "^2.11.2",
     "@vinicunca/perkakas": "^1.0.5",
     "@vinicunca/unocss-preset-vinicunca": "^0.2.2",
     "bumpp": "^9.5.2",
-    "eslint": "^9.9.1",
+    "eslint": "^9.10.0",
     "histoire": "^0.17.17",
-    "lint-staged": "^15.2.9",
+    "lint-staged": "^15.2.10",
     "rimraf": "^6.0.1",
     "simple-git-hooks": "^2.11.1",
-    "typescript": "5.5.4"
+    "typescript": "5.6.2"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
