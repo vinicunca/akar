@@ -7,7 +7,6 @@ const props = withDefaults(
     scrollBody: undefined,
   },
 );
-console.log('🚀 ~ scrollBody:', props);
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-import { mount, shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { defineComponent, onMounted, ref } from 'vue';
 
