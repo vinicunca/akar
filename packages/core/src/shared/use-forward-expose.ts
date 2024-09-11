@@ -3,14 +3,18 @@
 import { unrefElement } from '@vueuse/core';
 import { type ComponentPublicInstance, computed, getCurrentInstance, ref } from 'vue';
 
-export function useForwardExpose() {
+export function useForwardExpose<T extends ComponentPublicInstance>() {
   const instance = getCurrentInstance()!;
 
-  const currentRef = ref<ComponentPublicInstance | Element | null>();
+  const currentRef = ref<Element | null | T>();
   const currentElement = computed<HTMLElement>(() => {
     // $el could be text/comment for non-single root normal or text root, thus we retrieve the nextElementSibling
     // @ts-expect-error ignore ts error
-    return ['#comment', '#text'].includes(currentRef.value?.$el.nodeName) ? currentRef.value?.$el.nextElementSibling : unrefElement(currentRef);
+    return ['#comment', '#text'].includes(currentRef.value?.$el.nodeName)
+      // @ts-expect-error ignore ts error
+      ? currentRef.value?.$el.nextElementSibling
+      // @ts-expect-error ignore ts error
+      : unrefElement(currentRef);
   });
 
   // localExpose should only be assigned once else will create infinite loop
@@ -45,7 +49,7 @@ export function useForwardExpose() {
   });
   instance.exposed = ret;
 
-  function forwardRef(ref: ComponentPublicInstance | Element | null) {
+  function forwardRef(ref: Element | null | T) {
     currentRef.value = ref;
 
     if (ref instanceof Element || !ref) {
