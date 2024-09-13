@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<Props>(), {
       <AScrollAreaThumb
         :class="
           animated
-            && 'data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut'
+            && 'data-[state=visible]:fade-in-100 data-[state=visible]:animate-in data-[state=hidden]:fade-out data-[state=hidden]:animate-out'
         "
         class="relative flex-1 rounded-[var(--scrollbar-size)] bg-gray-400"
       />
@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<Props>(), {
       <AScrollAreaThumb
         :class="
           animated
-            && 'data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut'
+            && 'data-[state=visible]:fade-in data-[state=visible]:animate-in data-[state=hidden]:fade-out data-[state=hidden]:animate-out'
         "
         class="relative flex-1 rounded-[var(--scrollbar-size)] bg-gray-400"
       />

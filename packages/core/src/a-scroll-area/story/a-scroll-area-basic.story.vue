@@ -44,7 +44,7 @@ const contentChangeState = reactive({
     >
       <div class="h-[400px] w-[400px] resize overflow-hidden">
         <AScrollAreaStory class="h-full w-full">
-          <ScrollAreaCopy
+          <AScrollAreaCopy
             v-for="i in 30"
             :key="i"
           />
