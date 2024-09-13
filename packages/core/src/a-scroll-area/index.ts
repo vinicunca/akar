@@ -4,6 +4,7 @@ export {
 } from './a-scroll-area-corner.vue';
 
 export {
+  type AScrollAreaRootProps,
   default as AScrollAreaRoot,
   injectAScrollAreaRootContext,
 } from './a-scroll-area-root.vue';
