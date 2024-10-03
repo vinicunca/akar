@@ -12,8 +12,8 @@ interface AConfigProviderContextValue {
 }
 
 export const [
-  injectConfigProviderContext,
-  provideConfigProviderContext,
+  injectAConfigProviderContext,
+  provideAConfigProviderContext,
 ] = createContext<AConfigProviderContextValue>('AConfigProvider');
 
 export interface AConfigProviderProps {
@@ -53,7 +53,7 @@ const props = withDefaults(
 
 const { dir, locale, scrollBody, nonce } = toRefs(props);
 
-provideConfigProviderContext({
+provideAConfigProviderContext({
   dir,
   locale,
   scrollBody,
