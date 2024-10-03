@@ -10,8 +10,9 @@
   },
   "devDependencies": {
     "@histoire/plugin-vue": "^0.17.17",
-    "@unocss/vite": "^0.62.3",
+    "@radix-ui/colors": "^3.0.0",
+    "@unocss/vite": "^0.63.2",
     "histoire": "^0.17.17",
-    "unocss": "^0.62.3"
+    "unocss": "^0.63.2"
   }
 }

@@ -65,15 +65,15 @@ export function useCollection<ItemData = {}>(
 
       watch(currentElement, () => {
         context.collectionRef.value = currentElement.value;
-
-        return () => h(
-          APrimitiveSlot,
-          {
-            ref: primitiveElement,
-          },
-          slots,
-        );
       });
+
+      return () => h(
+        APrimitiveSlot,
+        {
+          ref: primitiveElement,
+        },
+        slots,
+      );
     },
   });
 
