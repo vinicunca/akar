@@ -8,8 +8,9 @@ export {
 } from './a-popper-arrow.vue';
 export {
   type APopperContentProps,
+  APopperContentPropsDefaultValue,
   default as APopperContent,
-  PopperContentPropsDefaultValue,
 } from './a-popper-content.vue';
-export { default as APopperRoot } from './a-popper-root.vue';
+export { default as APopperRoot, injectAPopperRootContext } from './a-popper-root.vue';
+
 export * from './utils';

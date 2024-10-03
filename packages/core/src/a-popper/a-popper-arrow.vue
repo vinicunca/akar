@@ -20,7 +20,7 @@ import { computed } from 'vue';
 import { useForwardExpose } from '~~/shared';
 import AArrow from '~~/shared/component/a-arrow.vue';
 
-import { injectPopperContentContext } from './a-popper-content.vue';
+import { injectAPopperContentContext } from './a-popper-content.vue';
 
 defineOptions({
   inheritAttrs: false,
@@ -32,41 +32,9 @@ withDefaults(
 );
 
 const { forwardRef } = useForwardExpose();
-const contentContext = injectPopperContentContext();
+const contentContext = injectAPopperContentContext();
 
 const baseSide = computed(() => OPPOSITE_SIDE[contentContext.placedSide.value]);
-
-const arrowWrapperStyle = computed(() => {
-  const style: Record<string, any> = {
-    [baseSide.value]: 0,
-    left: contentContext.arrowX?.value ? `${contentContext.arrowX.value}px` : undefined,
-    position: 'absolute',
-    top: contentContext.arrowY?.value ? `${contentContext.arrowY.value}px` : undefined,
-    visibility: contentContext.shouldHideArrow.value ? 'hidden' : undefined,
-  };
-
-  const transformOrigins = {
-    bottom: 'center 0',
-    left: '100% 0',
-    right: '0 0',
-    top: '',
-  };
-  style.transformOrigin = transformOrigins[contentContext.placedSide.value];
-
-  const transforms = {
-    bottom: 'rotate(180deg)',
-    left: 'translateY(50%) rotate(-90deg) translateX(50%)',
-    right: 'translateY(50%) rotate(90deg) translateX(-50%)',
-    top: 'translateY(100%)',
-  };
-  style.transform = transforms[contentContext.placedSide.value];
-
-  return style;
-});
-
-const arrowStyle = computed(() => ({
-  display: 'block',
-}));
 
 function setArrowRef(el: HTMLElement) {
   contentContext.onArrowChange(el);
@@ -77,12 +45,32 @@ function setArrowRef(el: HTMLElement) {
 <template>
   <span
     :ref="setArrowRef"
-    :style="arrowWrapperStyle"
+    :style="{
+      position: 'absolute',
+      left: contentContext.arrowX?.value ? `${contentContext.arrowX?.value}px` : undefined,
+      top: contentContext.arrowY?.value ? `${contentContext.arrowY?.value}px` : undefined,
+      [baseSide]: 0,
+      transformOrigin: {
+        top: '',
+        right: '0 0',
+        bottom: 'center 0',
+        left: '100% 0',
+      }[contentContext.placedSide.value],
+      transform: {
+        top: 'translateY(100%)',
+        right: 'translateY(50%) rotate(90deg) translateX(-50%)',
+        bottom: `rotate(180deg)`,
+        left: 'translateY(50%) rotate(-90deg) translateX(50%)',
+      }[contentContext.placedSide.value],
+      visibility: contentContext.shouldHideArrow.value ? 'hidden' : undefined,
+    }"
   >
     <AArrow
       v-bind="$attrs"
       :ref="forwardRef"
-      :style="arrowStyle"
+      :style="{
+        display: 'block',
+      }"
       :as="as"
       :as-child="asChild"
       :width="width"

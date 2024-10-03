@@ -2,8 +2,11 @@
 import type {
   Middleware,
   Placement,
+  ReferenceElement,
 } from '@floating-ui/vue';
 import type { Ref } from 'vue';
+
+import { isNumber } from '@vinicunca/perkakas';
 
 import type { APrimitiveProps } from '~~/a-primitive';
 
@@ -14,7 +17,7 @@ import type {
   Side,
 } from './utils';
 
-export const PopperContentPropsDefaultValue = {
+export const APopperContentPropsDefaultValue = {
   align: 'center' as Align,
   alignOffset: 0,
   arrowPadding: 0,
@@ -55,7 +58,7 @@ export interface APopperContentProps extends APrimitiveProps {
   arrowPadding?: number;
 
   /**
-   * When `true`, overrides the side andalign preferences
+   * When `true`, overrides the side and align preferences
    * to prevent collisions with boundary edges.
    *
    * @defaultValue true
@@ -63,11 +66,11 @@ export interface APopperContentProps extends APrimitiveProps {
   avoidCollisions?: boolean;
 
   /**
-   * The element(s) used as the collision boundary.
-   * By default, this is the viewport, but you can provide additional
+   * The element used as the collision boundary. By default
+   * this is the viewport, though you can provide additional
    * element(s) to be included in this check.
    *
-   * @default [] - An empty array, which means only the viewport is used
+   * @defaultValue []
    */
   collisionBoundary?: Array<Element | null> | Element | null;
 
@@ -81,11 +84,23 @@ export interface APopperContentProps extends APrimitiveProps {
   collisionPadding?: number | Partial<Record<Side, number>>;
 
   /**
+   * Whether to disable the update position for the content when the layout shifted.
+   *
+   * @defaultValue false
+   */
+  disableUpdateOnLayoutShift?: boolean;
+
+  /**
    * Whether to hide the content when the trigger becomes fully occluded.
    *
    * @defaultValue false
    */
   hideWhenDetached?: boolean;
+
+  /**
+   *  The type of CSS position property to use.
+   */
+  positionStrategy?: 'absolute' | 'fixed';
 
   /**
    * Force content to be position within the viewport.
@@ -95,6 +110,14 @@ export interface APopperContentProps extends APrimitiveProps {
    * @defaultValue false
    */
   prioritizePosition?: boolean;
+
+  /**
+   *  The custom element or virtual element that will be set as the reference
+   *  to position the floating element.
+   *
+   *  If provided, it will replace the default anchor element.
+   */
+  reference?: ReferenceElement;
 
   /**
    * The preferred side of the trigger to render against when open.
@@ -130,7 +153,7 @@ export interface APopperContentProps extends APrimitiveProps {
   updatePositionStrategy?: 'always' | 'optimized';
 }
 
-export interface PopperContentContext {
+export interface APopperContentContext {
   arrowX?: Ref<number>;
   arrowY?: Ref<number>;
   onArrowChange: (arrow: HTMLElement | undefined) => void;
@@ -138,8 +161,8 @@ export interface PopperContentContext {
   shouldHideArrow: Ref<boolean>;
 }
 
-export const [injectPopperContentContext, providePopperContentContext]
-  = createContext<PopperContentContext>('PopperContent');
+export const [injectAPopperContentContext, provideAPopperContentContext]
+  = createContext<APopperContentContext>('PopperContent');
 </script>
 
 <script setup lang="ts">
@@ -154,14 +177,14 @@ import {
   size,
   useFloating,
 } from '@floating-ui/vue';
-import { computedEager } from '@vueuse/core';
-import { computed, ref, watchEffect } from 'vue';
+import { useThrottleFn } from '@vueuse/core';
+import { computed, ref, watchEffect, watchPostEffect } from 'vue';
 
 import {
   APrimitive,
 } from '~~/a-primitive';
 
-import { injectPopperRootContext } from './a-popper-root.vue';
+import { injectAPopperRootContext } from './a-popper-root.vue';
 import {
   getSideAndAlignFromPlacement,
   isNotNull,
@@ -173,13 +196,14 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<APopperContentProps>(), {
-  ...PopperContentPropsDefaultValue,
+  ...APopperContentPropsDefaultValue,
 });
+
 const emits = defineEmits<{
   placed: [void];
 }>();
-const rootContext = injectPopperRootContext();
 
+const rootContext = injectAPopperRootContext();
 const { currentElement: contentElement, forwardRef } = useForwardExpose();
 
 const floatingRef = ref<HTMLElement>();
@@ -190,11 +214,11 @@ const { height: arrowHeight, width: arrowWidth } = useSize(arrow);
 const desiredPlacement = computed(
   () =>
     (props.side
-    + (props.align !== 'center' ? `-${props.align}` : '')) as Placement,
+      + (props.align !== 'center' ? `-${props.align}` : '')) as Placement,
 );
 
 const collisionPadding = computed(() => {
-  return typeof props.collisionPadding === 'number'
+  return isNumber(props.collisionPadding)
     ? props.collisionPadding
     : { bottom: 0, left: 0, right: 0, top: 0, ...props.collisionPadding };
 });
@@ -214,17 +238,19 @@ const detectOverflowOptions = computed(() => {
   };
 });
 
-const computedMiddleware = computedEager(() => {
+const computedMiddleware = computed(() => {
   return [
     offset({
       alignmentAxis: props.alignOffset,
       mainAxis: props.sideOffset + arrowHeight.value,
     }),
+
     props.prioritizePosition
     && props.avoidCollisions
     && flip({
       ...detectOverflowOptions.value,
     }),
+
     props.avoidCollisions
     && shift({
       crossAxis: !!props.prioritizePosition,
@@ -232,54 +258,66 @@ const computedMiddleware = computedEager(() => {
       mainAxis: true,
       ...detectOverflowOptions.value,
     }),
+
     !props.prioritizePosition
     && props.avoidCollisions
     && flip({
       ...detectOverflowOptions.value,
     }),
+
     size({
       ...detectOverflowOptions.value,
       apply: ({ availableHeight, availableWidth, elements, rects }) => {
         const { height: anchorHeight, width: anchorWidth } = rects.reference;
         const contentStyle = elements.floating.style;
+
         contentStyle.setProperty(
           '--akar-popper-available-width',
           `${availableWidth}px`,
         );
+
         contentStyle.setProperty(
           '--akar-popper-available-height',
           `${availableHeight}px`,
         );
+
         contentStyle.setProperty(
           '--akar-popper-anchor-width',
           `${anchorWidth}px`,
         );
+
         contentStyle.setProperty(
           '--akar-popper-anchor-height',
           `${anchorHeight}px`,
         );
       },
     }),
+
     arrow.value
     && floatingUIarrow({ element: arrow.value, padding: props.arrowPadding }),
     transformOrigin({
       arrowHeight: arrowHeight.value,
       arrowWidth: arrowWidth.value,
     }),
+
     props.hideWhenDetached
     && hide({ strategy: 'referenceHidden', ...detectOverflowOptions.value }),
   ] as Array<Middleware>;
 });
 
-const { floatingStyles, isPositioned, middlewareData, placement } = useFloating(
-  rootContext.anchor,
+// If provided custom reference, it will overwrite the default anchor element
+const reference = computed(() => props.reference ?? rootContext.anchor.value);
+
+const { floatingStyles, isPositioned, middlewareData, placement, update } = useFloating(
+  reference,
   floatingRef,
   {
     middleware: computedMiddleware,
     placement: desiredPlacement,
-    strategy: 'fixed',
+    strategy: props.positionStrategy,
     whileElementsMounted: (...args) => {
       return autoUpdate(...args, {
+        layoutShift: !props.disableUpdateOnLayoutShift,
         animationFrame: props.updatePositionStrategy === 'always',
       });
     },
@@ -289,13 +327,22 @@ const { floatingStyles, isPositioned, middlewareData, placement } = useFloating(
 const placedSide = computed(
   () => getSideAndAlignFromPlacement(placement.value)[0],
 );
+
 const placedAlign = computed(
   () => getSideAndAlignFromPlacement(placement.value)[1],
 );
 
-watchEffect(() => {
+watchPostEffect(() => {
   if (isPositioned.value) {
     emits('placed');
+  }
+});
+
+// update position automatically when `boundingClientRect` changes
+const throttleUpdate = useThrottleFn(update, 10, true, true);
+watchEffect(() => {
+  if (reference.value?.getBoundingClientRect()) {
+    throttleUpdate();
   }
 });
 
@@ -313,7 +360,7 @@ watchEffect(() => {
 const arrowX = computed(() => middlewareData.value.arrow?.x ?? 0);
 const arrowY = computed(() => middlewareData.value.arrow?.y ?? 0);
 
-providePopperContentContext({
+provideAPopperContentContext({
   arrowX,
   arrowY,
   onArrowChange: (element) => {

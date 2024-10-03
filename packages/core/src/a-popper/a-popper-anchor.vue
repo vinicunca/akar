@@ -1,32 +1,37 @@
 <script lang="ts">
+import type { ReferenceElement } from '@floating-ui/vue';
+
 import type { APrimitiveProps } from '~~/a-primitive';
 
 import { useForwardExpose } from '~~/shared';
 
-import type { Measurable } from './a-popper-root.vue';
-
 export interface APopperAnchorProps extends APrimitiveProps {
-  element?: Measurable;
+  /**
+   *  The reference (or anchor) element that is being referred to for positioning.
+   *
+   *  If not provided will use the current component as anchor.
+   */
+  reference?: ReferenceElement;
 }
 </script>
 
 <script setup lang="ts">
-import { watch } from 'vue';
+import { watchPostEffect } from 'vue';
 
 import {
   APrimitive,
 } from '~~/a-primitive';
 
-import { injectPopperRootContext } from './a-popper-root.vue';
+import { injectAPopperRootContext } from './a-popper-root.vue';
 
 const props = defineProps<APopperAnchorProps>();
 
 const { currentElement, forwardRef } = useForwardExpose();
 
-const rootContext = injectPopperRootContext();
+const rootContext = injectAPopperRootContext();
 
-watch(currentElement, () => {
-  rootContext.onAnchorChange(props.element ?? currentElement.value);
+watchPostEffect(() => {
+  rootContext.onAnchorChange(props.reference ?? currentElement.value);
 });
 </script>
 

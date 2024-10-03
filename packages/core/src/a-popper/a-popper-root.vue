@@ -1,27 +1,24 @@
 <script lang="ts">
+import type { ReferenceElement } from '@floating-ui/vue';
 import type { Ref } from 'vue';
 
 import { createContext } from '~~/shared';
 
-export interface Measurable {
-  getBoundingClientRect: () => DOMRect;
+interface APopperRootContext {
+  anchor: Ref<ReferenceElement | undefined >;
+  onAnchorChange: (element: ReferenceElement | undefined) => void;
 }
 
-interface PopperRootContext {
-  anchor: Ref<HTMLElement | Measurable | undefined>;
-  onAnchorChange: (element: HTMLElement | Measurable | undefined) => void;
-}
-
-export const [injectPopperRootContext, providePopperRootContext]
-  = createContext<PopperRootContext>('PopperRoot');
+export const [injectAPopperRootContext, provideAPopperRootContext]
+  = createContext<APopperRootContext>('APopperRoot');
 </script>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const anchor = ref<HTMLElement | Measurable>();
+const anchor = ref<ReferenceElement>();
 
-providePopperRootContext({
+provideAPopperRootContext({
   anchor,
   onAnchorChange: (element) => {
     anchor.value = element;

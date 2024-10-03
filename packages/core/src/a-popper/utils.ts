@@ -47,9 +47,12 @@ export function transformOrigin(options: {
         x = `${rects.floating.width + arrowHeight}px`;
         y = isArrowHidden ? noArrowAlign : `${arrowYCenter}px`;
       }
+
       return { data: { x, y } };
     },
+
     name: 'transformOrigin',
+
     options,
   };
 }
