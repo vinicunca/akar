@@ -44,9 +44,9 @@ export {
   default as AMenuSeparator,
 } from './a-menu-separator.vue';
 export {
+  type AMenuSubEmits,
+  type AMenuSubProps,
   default as AMenuSub,
-  type MenuSubEmits,
-  type MenuSubProps,
 } from './a-menu-sub.vue';
 export {
   type AMenuSubContentEmits,

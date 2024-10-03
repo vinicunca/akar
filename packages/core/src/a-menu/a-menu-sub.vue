@@ -18,12 +18,12 @@ export const [
   provideAMenuSubContext,
 ] = createContext<AMenuSubContext>('MenuSub');
 
-export interface MenuSubProps {
+export interface AMenuSubProps {
   /** The controlled open state of the menu. Can be used as `v-model:open`. */
   open?: boolean;
 }
 
-export type MenuSubEmits = {
+export type AMenuSubEmits = {
   /** Event handler called when the open state of the submenu changes. */
   'update:open': [payload: boolean];
 };
@@ -40,11 +40,11 @@ import { APopperRoot } from '~~/a-popper';
 
 import { injectAMenuContext, provideAMenuContext } from './a-menu-root.vue';
 
-const props = withDefaults(defineProps<MenuSubProps>(), {
+const props = withDefaults(defineProps<AMenuSubProps>(), {
   open: undefined,
 });
 
-const emits = defineEmits<MenuSubEmits>();
+const emits = defineEmits<AMenuSubEmits>();
 
 const open = useVModel(
   props,
