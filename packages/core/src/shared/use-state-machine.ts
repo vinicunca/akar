@@ -1,4 +1,4 @@
-import { ref, type Ref, type UnwrapRef } from 'vue';
+import { ref, type Ref } from 'vue';
 
 interface Machine<S> {
   [key: string]: { [key: string]: S };
@@ -12,11 +12,6 @@ type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (
 ) => any
   ? R
   : never;
-
-interface UseStateMachineReturn<M> {
-  dispatch: (event: MachineEvent<M>) => void;
-  state: Ref<UnwrapRef<keyof M>>;
-}
 
 /**
  * The `useStateMachine` function is a TypeScript function that creates a state machine and returns the
@@ -34,8 +29,8 @@ interface UseStateMachineReturn<M> {
 export function useStateMachine<M>(
   initialState: MachineState<M>,
   machine: M & Machine<MachineState<M>>,
-): UseStateMachineReturn<M> {
-  const state = ref(initialState);
+) {
+  const state = ref(initialState) as Ref<MachineState<M>>;
 
   function dispatch(event: MachineEvent<M>) {
     state.value = reducer(event);
@@ -49,7 +44,6 @@ export function useStateMachine<M>(
   }
 
   return {
-    // @ts-expect-error  state.value is keyof M
     state,
     dispatch,
   };

@@ -55,8 +55,8 @@ describe('createContext', () => {
 
     it('with multiple providers', () => {
       const [injectContextMulti] = createContext<string>(
-        ['MenuCheckboxItem', 'MenuRadioItem'],
-        'MenuItemIndicatorContext',
+        ['AMenuCheckboxItem', 'AMenuRadioItem'],
+        'AMenuItemIndicatorContext',
       );
 
       const ChildComponent = defineComponent({
@@ -68,7 +68,7 @@ describe('createContext', () => {
       });
 
       expect(() => mount(ChildComponent))
-        .toThrowError('Component must be used within one of the following components: MenuCheckboxItem, MenuRadioItem');
+        .toThrowError('Component must be used within one of the following components: AMenuCheckboxItem, AMenuRadioItem');
     });
   });
 });
