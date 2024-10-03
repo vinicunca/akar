@@ -44,13 +44,16 @@ export default defineConfig({
        */
       external: [
         'vue',
+        '@floating-ui/vue',
+        '@vinicunca/perkakas',
       ],
       output: {
         /**
          * Provide global variables to use in the UMD build
          */
         globals: {
-          vue: 'Vue',
+          'vue': 'Vue',
+          '@floating-ui/vue': '@floating-ui/vue',
         },
       },
     },
