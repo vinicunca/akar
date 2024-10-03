@@ -12,6 +12,12 @@ export * from './a-scroll-area';
 export * from './collection';
 
 export {
+  createContext,
+  useBodyScrollLock,
+  useEmitAsProps,
+  useForwardExpose,
+  useForwardProps,
+  useForwardPropsEmits,
   useStateMachine,
 } from './shared';
 
