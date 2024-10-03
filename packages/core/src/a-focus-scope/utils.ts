@@ -8,10 +8,18 @@ type FocusableTarget = { focus: () => void } | HTMLElement;
  * Attempts focusing the first element in a list of candidates.
  * Stops when focus has actually moved.
  */
-export function focusFirst(candidates: Array<HTMLElement>, { select = false } = {}) {
+export function focusFirst(
+  { candidates = [], select = false }:
+  {
+    candidates?: Array<HTMLElement>;
+    select?: boolean;
+  } = {},
+) {
   const previouslyFocusedElement = document.activeElement;
+
   for (const candidate of candidates) {
-    focus(candidate, { select });
+    focus({ element: candidate, select });
+
     if (document.activeElement !== previouslyFocusedElement) {
       return true;
     }
@@ -73,26 +81,36 @@ export function getTabbableCandidates(container: HTMLElement) {
 export function findVisible(elements: Array<HTMLElement>, container: HTMLElement) {
   for (const element of elements) {
     // we stop checking if it's hidden at the `container` level (excluding)
-    if (!isHidden(element, { upTo: container })) {
+    if (!isHidden({
+      node: element,
+      upTo: container,
+    })) {
       return element;
     }
   }
 }
 
-export function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
+export function isHidden({ node, upTo }: {
+  node: HTMLElement;
+  upTo?: HTMLElement;
+
+}) {
   if (getComputedStyle(node).visibility === 'hidden') {
     return true;
   }
+
   while (node) {
     // we stop at `upTo` (excluding it)
     if (upTo !== undefined && node === upTo) {
       return false;
     }
+
     if (getComputedStyle(node).display === 'none') {
       return true;
     }
     node = node.parentElement as HTMLElement;
   }
+
   return false;
 }
 
@@ -103,8 +121,11 @@ export function isSelectableInput(
 }
 
 export function focus(
-  element?: FocusableTarget | null,
-  { select = false } = {},
+  { element, select = false }:
+  {
+    element?: FocusableTarget | null;
+    select?: boolean;
+  } = {},
 ) {
   // only focus if that element is focusable
   if (element && element.focus) {

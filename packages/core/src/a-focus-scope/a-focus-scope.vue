@@ -3,7 +3,6 @@ import type { APrimitiveProps } from '~~/a-primitive';
 
 import { useForwardExpose } from '~~/shared';
 
-// eslint-disable-next-line ts/consistent-type-definitions
 export type AFocusScopeEmits = {
   /**
    * Event handler called when auto-focusing on mount.
@@ -89,7 +88,10 @@ watchEffect((cleanupFn) => {
     if (container.contains(target)) {
       lastFocusedElementRef.value = target;
     } else {
-      focus(lastFocusedElementRef.value, { select: true });
+      focus({
+        element: lastFocusedElementRef.value,
+        select: true,
+      });
     }
   }
 
@@ -118,7 +120,10 @@ watchEffect((cleanupFn) => {
      *  that is outside the container, we move focus to the last valid focused element inside.    *
      */
     if (!container.contains(relatedTarget)) {
-      focus(lastFocusedElementRef.value, { select: true });
+      focus({
+        element: lastFocusedElementRef.value,
+        select: true,
+      });
     }
   }
 
@@ -134,7 +139,7 @@ watchEffect((cleanupFn) => {
   function handleMutations(mutations: Array<MutationRecord>) {
     const isLastFocusedElementExist = container.contains(lastFocusedElementRef.value);
     if (!isLastFocusedElementExist) {
-      focus(container);
+      focus({ element: container });
     }
   }
 
@@ -170,11 +175,13 @@ watchEffect(async (cleanupFn) => {
     container.dispatchEvent(mountEvent);
 
     if (!mountEvent.defaultPrevented) {
-      focusFirst(removeLinks(getTabbableCandidates(container)), {
+      focusFirst({
+        candidates: removeLinks(getTabbableCandidates(container)),
         select: true,
       });
+
       if (document.activeElement === previouslyFocusedElement) {
-        focus(container);
+        focus({ element: container });
       }
     }
   }
@@ -192,7 +199,10 @@ watchEffect(async (cleanupFn) => {
 
     setTimeout(() => {
       if (!unmountEvent.defaultPrevented) {
-        focus(previouslyFocusedElement ?? document.body, { select: true });
+        focus({
+          element: previouslyFocusedElement ?? document.body,
+          select: true,
+        });
       }
 
       // we need to remove the listener after we `dispatchEvent`
@@ -229,12 +239,18 @@ function handleKeyDown(event: KeyboardEvent) {
       if (!event.shiftKey && focusedElement === last) {
         event.preventDefault();
         if (props.loop) {
-          focus(first, { select: true });
+          focus({
+            element: first,
+            select: true,
+          });
         }
       } else if (event.shiftKey && focusedElement === first) {
         event.preventDefault();
         if (props.loop) {
-          focus(last, { select: true });
+          focus({
+            element: last,
+            select: true,
+          });
         }
       }
     }

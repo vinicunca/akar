@@ -1,14 +1,14 @@
 import { createGlobalState } from '@vueuse/core';
 import { ref } from 'vue';
 
-interface FocusScopeAPI {
+interface AFocusScopeAPI {
   pause: () => void;
   paused: boolean;
   resume: () => void;
 }
 
 const useFocusStackState = createGlobalState(() => {
-  return ref<Array<FocusScopeAPI>>([]);
+  return ref<Array<AFocusScopeAPI>>([]);
 });
 
 export function createFocusScopesStack() {
@@ -16,7 +16,7 @@ export function createFocusScopesStack() {
   const stack = useFocusStackState();
 
   return {
-    add(focusScope: FocusScopeAPI) {
+    add(focusScope: AFocusScopeAPI) {
       // pause the currently active focus scope (at the top of the stack)
       const activeFocusScope = stack.value[0];
       if (focusScope !== activeFocusScope) {
@@ -24,20 +24,24 @@ export function createFocusScopesStack() {
       }
 
       // remove in case it already exists (because we'll re-add it at the top of the stack)
-      stack.value = arrayRemove(stack.value, focusScope);
+      stack.value = arrayRemove({ array: stack.value, item: focusScope });
       stack.value.unshift(focusScope);
     },
 
-    remove(focusScope: FocusScopeAPI) {
-      stack.value = arrayRemove(stack.value, focusScope);
+    remove(focusScope: AFocusScopeAPI) {
+      stack.value = arrayRemove({ array: stack.value, item: focusScope });
       stack.value[0]?.resume();
     },
   };
 }
 
-export function arrayRemove<T>(array: Array<T>, item: T) {
+export function arrayRemove<T>(
+  { array, item }:
+  { array: Array<T>; item: T },
+) {
   const updatedArray = [...array];
   const index = updatedArray.indexOf(item);
+
   if (index !== -1) {
     updatedArray.splice(index, 1);
   }
