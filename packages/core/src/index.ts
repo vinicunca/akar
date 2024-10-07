@@ -7,8 +7,11 @@ export {
   APrimitiveSlot,
   type AsTag,
 } from './a-primitive';
+// export * from './a-progress-circular';
 export * from './a-roving-focus';
 export * from './a-scroll-area';
+export * from './a-slider';
+export * from './a-visually-hidden';
 export * from './collection';
 
 export {

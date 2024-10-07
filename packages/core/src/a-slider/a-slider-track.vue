@@ -1,0 +1,32 @@
+<script lang="ts">
+import type { APrimitiveProps } from '~~/a-primitive';
+
+export interface ASliderTrackProps extends APrimitiveProps {}
+</script>
+
+<script lang="ts" setup>
+import { APrimitive } from '~~/a-primitive';
+import { useForwardExpose } from '~~/shared';
+
+import { injectASliderRootContext } from './a-slider-root.vue';
+
+withDefaults(
+  defineProps<ASliderTrackProps>(),
+  { as: 'span' },
+);
+
+const rootContext = injectASliderRootContext();
+
+useForwardExpose();
+</script>
+
+<template>
+  <APrimitive
+    :as-child="asChild"
+    :as="as"
+    :data-disabled="rootContext.disabled.value ? '' : undefined"
+    :data-orientation="rootContext.orientation.value"
+  >
+    <slot />
+  </APrimitive>
+</template>
