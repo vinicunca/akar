@@ -31,6 +31,10 @@ export default defineConfig({
         projectRootDir,
         '../packages/core/src/**/*.story.vue',
       ),
+      resolve(
+        projectRootDir,
+        '../packages/mandor/**/*.story.vue',
+      ),
     ],
     theme: {
       title: 'Akar',
@@ -46,6 +50,11 @@ export default defineConfig({
           id: 'utilities',
           include: (file) => file.title.toLowerCase().includes('utilities'),
           title: 'Utilities',
+        },
+        {
+          id: 'mandor',
+          include: (file) => file.title.toLowerCase().includes('mandor'),
+          title: 'Mandor',
         },
       ],
     },

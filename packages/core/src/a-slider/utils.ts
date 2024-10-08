@@ -113,7 +113,7 @@ export function linearScale(
  *
  * @example
  * // returns 1
- * getClosestValueIndex([10, 30], 25);
+ * getClosestValueIndex({ nextValue: 25, values: [10, 30] });
  */
 export function getClosestValueIndex(
   { nextValue, values }:
@@ -162,11 +162,11 @@ export function getStepsBetweenValues(values: Array<number>) {
  *
  * @example
  * // returns false
- * hasMinStepsBetweenValues([1,2,3], 2);
+ * hasMinStepsBetweenValues({ minStepsBetweenValues: 2, values: [1,2,3] });
  *
  * @example
  * // returns true
- * hasMinStepsBetweenValues([1,2,3], 1);
+ * hasMinStepsBetweenValues({ minStepsBetweenValues: 1, values: [1,2,3] });
  */
 export function hasMinStepsBetweenValues(
   { minStepsBetweenValues, values }:
