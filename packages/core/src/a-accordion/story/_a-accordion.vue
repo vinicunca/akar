@@ -1,22 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
+
+import { useEmitAsProps } from '~~/shared';
+
 import type {
   AAccordionRootEmits,
   AAccordionRootProps,
-} from '..'
+} from '..';
+
 import {
   AAccordionContent,
   AAccordionHeader,
   AAccordionItem,
   AAccordionRoot,
   AAccordionTrigger,
-} from '..'
-import { useEmitAsProps } from '@/shared'
+} from '..';
 
-withDefaults(defineProps<{ type?: AAccordionRootProps['type'] }>(), { type: 'single' })
-const emits = defineEmits<AAccordionRootEmits>()
-const values = ['One', 'Two', 'Three', 'Four']
-const count = ref(1)
+withDefaults(defineProps<{ type?: AAccordionRootProps['type'] }>(), { type: 'single' });
+const emits = defineEmits<AAccordionRootEmits>();
+const values = ['One', 'Two', 'Three', 'Four'];
+const count = ref(1);
 </script>
 
 <template>

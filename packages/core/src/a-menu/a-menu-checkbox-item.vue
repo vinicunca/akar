@@ -5,12 +5,12 @@ import type {
 } from './a-menu-item.vue';
 import type { CheckedState } from './utils';
 
-export type AMenuCheckboxItemEmits = {
+export type AMenuACheckboxItemEmits = {
   /** Event handler called when the checked state changes. */
   'update:modelValue': [payload: boolean];
 } & AMenuItemEmits;
 
-export interface AMenuCheckboxItemProps extends AMenuItemProps {
+export interface AMenuACheckboxItemProps extends AMenuItemProps {
   /** The controlled checked state of the item. Can be used as `v-model`. */
   modelValue?: CheckedState;
 }
@@ -24,13 +24,13 @@ import { provideAMenuItemIndicatorContext } from './a-menu-item-indicator.vue';
 import { getCheckedState, isIndeterminate } from './utils';
 
 const props = withDefaults(
-  defineProps<AMenuCheckboxItemProps>(),
+  defineProps<AMenuACheckboxItemProps>(),
   {
     modelValue: false,
   },
 );
 
-const emits = defineEmits<AMenuCheckboxItemEmits>();
+const emits = defineEmits<AMenuACheckboxItemEmits>();
 
 defineSlots<{
   default: (props: {

@@ -1,33 +1,34 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch } from 'vue';
+
 import {
   AAccordionContent,
   AAccordionHeader,
   AAccordionItem,
   AAccordionRoot,
   AAccordionTrigger,
-} from '..'
+} from '..';
 
-const values = ['One', 'Two', 'Three', 'Four']
-const count = ref(1)
-const hasDynamicContent = ref(false)
-const timer = ref(0)
+const values = ['One', 'Two', 'Three', 'Four'];
+const count = ref(1);
+const hasDynamicContent = ref(false);
+const timer = ref(0);
 
 watch(hasDynamicContent, () => {
   if (hasDynamicContent.value) {
     timer.value = window.setInterval(() => {
-      const nextCount = count.value < 5 ? count.value + 1 : count.value
-      if (nextCount === 5)
-        hasDynamicContent.value = false
-      count.value = nextCount
-    }, 3000)
+      const nextCount = count.value < 5 ? count.value + 1 : count.value;
+      if (nextCount === 5) {
+        hasDynamicContent.value = false;
+      }
+      count.value = nextCount;
+    }, 3000);
+  } else {
+    clearInterval(timer.value);
   }
-  else {
-    clearInterval(timer.value)
-  }
-})
+});
 
-const selectedValue = ref(['One', 'Two', 'Three', 'Four'])
+const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
 </script>
 
 <template>
@@ -130,9 +131,9 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four'])
             </AAccordionTrigger>
           </AAccordionHeader>
           <AAccordionContent
-            class="accordion-animated-content overflow-hidden data-[state=open]:animate-open2D data-[state=closed]:animate-close2D"
+            class="accordion-animated-content data-[state=open]:animate-open2D data-[state=closed]:animate-close2D overflow-hidden"
           >
-            <div class="px-5 py-4 overflow-hidden">
+            <div class="overflow-hidden px-5 py-4">
               <div :style="{ width: 'calc(20em - 20px)', height: 100 }">
                 Per erat orci nostra luctus sociosqu mus risus penatibus, duis
                 elit vulputate viverra integer ullamcorper congue curabitur

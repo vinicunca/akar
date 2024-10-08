@@ -1,20 +1,20 @@
 <script lang="ts">
 import type {
-  AMenuCheckboxItemEmits,
-  AMenuCheckboxItemProps,
+  AMenuACheckboxItemEmits,
+  AMenuACheckboxItemProps,
 } from '~~/a-menu';
 
-export type ADropdownMenuCheckboxItemEmits = AMenuCheckboxItemEmits;
+export type ADropdownMenuACheckboxItemEmits = AMenuACheckboxItemEmits;
 
-export interface ADropdownMenuCheckboxItemProps extends AMenuCheckboxItemProps {}
+export interface ADropdownMenuACheckboxItemProps extends AMenuACheckboxItemProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuCheckboxItem } from '~~/a-menu';
+import { AMenuACheckboxItem } from '~~/a-menu';
 import { useEmitAsProps, useForwardExpose } from '~~/shared';
 
-const props = defineProps<ADropdownMenuCheckboxItemProps>();
-const emits = defineEmits<ADropdownMenuCheckboxItemEmits>();
+const props = defineProps<ADropdownMenuACheckboxItemProps>();
+const emits = defineEmits<ADropdownMenuACheckboxItemEmits>();
 
 const emitsAsProps = useEmitAsProps(emits);
 
@@ -22,7 +22,7 @@ useForwardExpose();
 </script>
 
 <template>
-  <AMenuCheckboxItem v-bind="{ ...props, ...emitsAsProps }">
+  <AMenuACheckboxItem v-bind="{ ...props, ...emitsAsProps }">
     <slot />
-  </AMenuCheckboxItem>
+  </AMenuACheckboxItem>
 </template>

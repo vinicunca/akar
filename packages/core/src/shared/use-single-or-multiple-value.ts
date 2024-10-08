@@ -1,8 +1,7 @@
-import { isDefined } from '@vinicunca/perkakas';
+import { isDeepEqual, isDefined } from '@vinicunca/perkakas';
 
 /* eslint-disable no-nested-ternary */
 import { useVModel } from '@vueuse/core';
-import isEqual from 'fast-deep-equal';
 import { computed, type Ref, ref, watch } from 'vue';
 
 import type { AcceptableValue, SingleOrMultipleProps } from './types';
@@ -103,11 +102,12 @@ export function useSingleOrMultipleValue<P extends SingleOrMultipleProps, Name e
 
   function changeModelValue(value: AcceptableValue) {
     if (type.value === 'single') {
-      modelValue.value = isEqual(value, modelValue.value) ? undefined : value;
+      // @ts-expect-error Typed array is not supported yet
+      modelValue.value = isDeepEqual(value, modelValue.value) ? undefined : value;
     } else {
       const modelValueArray = [...(modelValue.value as Array<AcceptableValue> || [])];
-      if (isValueEqualOrExist({ base: modelValueArray, current: value })) {
-        const index = modelValueArray.findIndex((i) => isEqual(i, value));
+      if (isValueEqualOrExist(modelValueArray, value)) {
+        const index = modelValueArray.findIndex((i) => isDeepEqual(i, value));
         modelValueArray.splice(index, 1);
       } else {
         modelValueArray.push(value);

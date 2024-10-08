@@ -5,9 +5,9 @@ import {
   AAccordionItem,
   AAccordionRoot,
   AAccordionTrigger,
-} from '..'
+} from '..';
 
-const items = ['One', 'Two', 'Three', 'Four']
+const items = ['One', 'Two', 'Three', 'Four'];
 </script>
 
 <template>
@@ -288,7 +288,7 @@ const items = ['One', 'Two', 'Three', 'Four']
 
     <Variant title="State attributes (AAccordion disabled)">
       <AAccordionRoot
-        class="w-[300px] root-attr"
+        class="root-attr w-[300px]"
         type="single"
         disabled
         default-value="Two"
@@ -316,7 +316,7 @@ const items = ['One', 'Two', 'Three', 'Four']
 
     <Variant title="State attributes (AAccordion enabled with item override)">
       <AAccordionRoot
-        class="w-[300px] root-attr"
+        class="root-attr w-[300px]"
         type="single"
         :disabled="false"
         default-value="Two"
@@ -345,7 +345,7 @@ const items = ['One', 'Two', 'Three', 'Four']
 
     <Variant title="State attributes (AAccordion disabled with item override)">
       <AAccordionRoot
-        class="w-[300px] root-attr"
+        class="root-attr w-[300px]"
         type="single"
         disabled
         default-value="Two"
@@ -384,10 +384,10 @@ const items = ['One', 'Two', 'Three', 'Four']
   border: 2px solid blue;
   padding: 10px;
 
-  &[data-state="closed"] {
+  &[data-state='closed'] {
     border-color: red;
   }
-  &[data-state="open"] {
+  &[data-state='open'] {
     border-color: green;
   }
   &[data-disabled] {

@@ -5,7 +5,7 @@ import {
   AAccordionItem,
   AAccordionRoot,
   AAccordionTrigger,
-} from '..'
+} from '..';
 </script>
 
 <template>

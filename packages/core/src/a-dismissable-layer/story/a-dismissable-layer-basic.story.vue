@@ -31,15 +31,15 @@ const openButtonRef = ref<HTMLElement>();
   >
     <Variant title="default">
       <template #controls>
-        <HstCheckbox
+        <HstACheckbox
           v-model="state.isEscapeKeyDownPrevented"
           title="Dismiss on escape?"
         />
-        <HstCheckbox
+        <HstACheckbox
           v-model="state.isPointerDownOutsidePrevented"
           title="Dismiss on pointer down outside?"
         />
-        <HstCheckbox
+        <HstACheckbox
           v-model="state.isFocusOutsidePrevented"
           title="Dismiss on focus outside?"
         />

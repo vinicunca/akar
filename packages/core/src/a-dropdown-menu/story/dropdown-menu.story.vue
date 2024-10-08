@@ -3,7 +3,7 @@ import { ref } from 'vue';
 
 import {
   ADropdownMenuArrow,
-  ADropdownMenuCheckboxItem,
+  ADropdownMenuACheckboxItem,
   ADropdownMenuContent,
   ADropdownMenuItem,
   ADropdownMenuItemIndicator,
@@ -248,7 +248,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               </ADropdownMenuPortal>
             </ADropdownMenuSub>
             <ADropdownMenuSeparator :class="separator" />
-            <ADropdownMenuCheckboxItem
+            <ADropdownMenuACheckboxItem
               v-model="checkboxOne"
               :class="checkboxItem"
               @select.prevent
@@ -260,8 +260,8 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               <div :class="shortcut">
                 ⌘+B
               </div>
-            </ADropdownMenuCheckboxItem>
-            <ADropdownMenuCheckboxItem
+            </ADropdownMenuACheckboxItem>
+            <ADropdownMenuACheckboxItem
               v-model="checkboxTwo"
               :class="checkboxItem"
               @select.prevent
@@ -270,7 +270,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
                 <i class="i-tabler:check" />
               </ADropdownMenuItemIndicator>
               Show Full URLs
-            </ADropdownMenuCheckboxItem>
+            </ADropdownMenuACheckboxItem>
             <ADropdownMenuSeparator :class="separator" />
 
             <ADropdownMenuLabel class="text-mauve11 pl-6 text-xs leading-6">

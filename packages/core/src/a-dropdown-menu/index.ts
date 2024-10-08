@@ -3,9 +3,9 @@ export {
   default as ADropdownMenuArrow,
 } from './a-dropdown-menu-arrow.vue';
 export {
-  type ADropdownMenuCheckboxItemEmits,
-  type ADropdownMenuCheckboxItemProps,
-  default as ADropdownMenuCheckboxItem,
+  type ADropdownMenuACheckboxItemEmits,
+  type ADropdownMenuACheckboxItemProps,
+  default as ADropdownMenuACheckboxItem,
 } from './a-dropdown-menu-checkbox-item.vue';
 export {
   type ADropdownMenuContentEmits,

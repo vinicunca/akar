@@ -9,7 +9,7 @@ import type {
 
 import {
   ADropdownMenuArrow,
-  ADropdownMenuCheckboxItem,
+  ADropdownMenuACheckboxItem,
   ADropdownMenuContent,
   ADropdownMenuItem,
   ADropdownMenuItemIndicator,
@@ -289,7 +289,7 @@ function handleCheck(ev: any) {
             </ADropdownMenuPortal>
           </ADropdownMenuSub> -->
           <ADropdownMenuSeparator class="m-[5px] h-[1px] bg-violet6" />
-          <ADropdownMenuCheckboxItem
+          <ADropdownMenuACheckboxItem
             v-model="checkboxOne"
             class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
             @select="handleCheck"
@@ -305,8 +305,8 @@ function handleCheck(ev: any) {
             >
               ⌘+B
             </div>
-          </ADropdownMenuCheckboxItem>
-          <ADropdownMenuCheckboxItem
+          </ADropdownMenuACheckboxItem>
+          <ADropdownMenuACheckboxItem
             v-model="checkboxTwo"
             class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
           >
@@ -316,7 +316,7 @@ function handleCheck(ev: any) {
               <i class="i-radix-icons:check" />
             </ADropdownMenuItemIndicator>
             Show Full URLs
-          </ADropdownMenuCheckboxItem>
+          </ADropdownMenuACheckboxItem>
           <ADropdownMenuSeparator class="m-[5px] h-[1px] bg-violet6" />
 
           <ADropdownMenuLabel

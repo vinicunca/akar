@@ -5,15 +5,15 @@ import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import Collapsible from './story/_Collapsible.vue';
+import ACollapsible from './story/_a-collapsible.vue';
 
 const CONTENT_TEXT = 'Content';
 
-describe('given a default Collapsible', async () => {
-  let wrapper: VueWrapper<InstanceType<typeof Collapsible>>;
+describe('given a default ACollapsible', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof ACollapsible>>;
   let trigger: DOMWrapper<HTMLButtonElement>;
   beforeEach(() => {
-    wrapper = mount(Collapsible);
+    wrapper = mount(ACollapsible);
     trigger = wrapper.find('button');
   });
   it('should pass axe accessibility tests', async () => {
@@ -43,11 +43,11 @@ describe('given a default Collapsible', async () => {
   });
 });
 
-describe('given a Collapsible with `unmountOnHide`', async () => {
-  let wrapper: VueWrapper<InstanceType<typeof Collapsible>>;
+describe('given a ACollapsible with `unmountOnHide`', async () => {
+  let wrapper: VueWrapper<InstanceType<typeof ACollapsible>>;
   let trigger: DOMWrapper<HTMLButtonElement>;
   beforeEach(() => {
-    wrapper = mount(Collapsible, { props: { unmountOnHide: false } });
+    wrapper = mount(ACollapsible, { props: { unmountOnHide: false } });
     trigger = wrapper.find('button');
   });
   it('should pass axe accessibility tests', async () => {
@@ -79,12 +79,12 @@ describe('given a Collapsible with `unmountOnHide`', async () => {
   });
 });
 
-describe('given an open uncontrolled Collapsible', () => {
+describe('given an open uncontrolled ACollapsible', () => {
   let content: HTMLElement;
   describe('when clicking the trigger', async () => {
-    let wrapper: VueWrapper<InstanceType<typeof Collapsible>>;
+    let wrapper: VueWrapper<InstanceType<typeof ACollapsible>>;
     beforeEach(async () => {
-      wrapper = mount(Collapsible, {
+      wrapper = mount(ACollapsible, {
         props: {
           defaultOpen: true,
         },
