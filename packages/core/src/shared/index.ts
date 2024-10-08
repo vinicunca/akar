@@ -1,5 +1,6 @@
 export { createContext } from './create-context';
 export { handleAndDispatchCustomEvent } from './handle-and-dispatch-custom-event';
+export { isValueEqualOrExist } from './is-value-equal-or-exist';
 export { renderSlotFragments } from './render-slot-fragments';
 export * from './types';
 export { useArrowNavigation } from './use-arrow-navigation';
@@ -12,6 +13,7 @@ export { useForwardExpose } from './use-forward-expose';
 export { useForwardProps } from './use-forward-props';
 export { useForwardPropsEmits } from './use-forward-props-emits';
 export { useHideOthers } from './use-hide-others';
+export { useSingleOrMultipleValue } from './use-single-or-multiple-value';
 export { useSize } from './use-size';
 export { useStateMachine } from './use-state-machine';
 export { useTypeahead } from './use-typeahead';

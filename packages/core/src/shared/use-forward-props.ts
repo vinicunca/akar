@@ -1,3 +1,4 @@
+import { isDefined } from '@vinicunca/perkakas';
 import { camelize, computed, getCurrentInstance, type MaybeRefOrGetter, toRef } from 'vue';
 
 interface PropOptions {
@@ -19,7 +20,7 @@ export function useForwardProps<T extends Record<string, any>>(props: MaybeRefOr
   // Default value for declared props
   const defaultProps = Object.keys(vm?.type.props ?? {}).reduce((prev, curr) => {
     const defaultValue = (vm?.type.props[curr] as PropOptions).default;
-    if (defaultValue !== undefined) {
+    if (isDefined(defaultValue)) {
       prev[curr as keyof T] = defaultValue;
     }
     return prev;
@@ -37,7 +38,7 @@ export function useForwardProps<T extends Record<string, any>>(props: MaybeRefOr
 
     // Only return value from the props parameter
     return Object.keys({ ...defaultProps, ...preservedProps }).reduce((prev, curr) => {
-      if (refProps.value[curr] !== undefined) {
+      if (isDefined(refProps.value[curr])) {
         prev[curr as keyof T] = refProps.value[curr];
       }
 

@@ -1,3 +1,5 @@
+export * from './a-accordion';
+export * from './a-collapsible';
 export * from './a-dialog';
 export * from './a-dropdown-menu';
 export * from './a-menu';

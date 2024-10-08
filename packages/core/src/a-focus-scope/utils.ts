@@ -1,3 +1,5 @@
+import { isDefined } from '@vinicunca/perkakas';
+
 export const AUTOFOCUS_ON_MOUNT = 'focusScope.autoFocusOnMount';
 export const AUTOFOCUS_ON_UNMOUNT = 'focusScope.autoFocusOnUnmount';
 export const EVENT_OPTIONS = { bubbles: false, cancelable: true };
@@ -101,7 +103,7 @@ export function isHidden({ node, upTo }: {
 
   while (node) {
     // we stop at `upTo` (excluding it)
-    if (upTo !== undefined && node === upTo) {
+    if (isDefined(upTo) && node === upTo) {
       return false;
     }
 
