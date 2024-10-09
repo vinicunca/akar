@@ -6,8 +6,8 @@ import { axe } from 'vitest-axe';
 
 import { handleSubmit } from '~~/test';
 
-import ACheckbox from './story/_ACheckbox.vue';
-import ACheckboxGroup from './story/_ACheckboxGroup.vue';
+import ACheckbox from './story/_a-checkbox.vue';
+import ACheckboxGroup from './story/_a-checkbox-group.vue';
 
 globalThis.ResizeObserver = class ResizeObserver {
   cb: any;
@@ -241,7 +241,7 @@ describe('given checkboxGroup in a form', async () => {
     expect(wrapper.find('input[hidden]').exists()).toBe(true);
   });
 
-  describe('after clicking submit button', () => {
+  describe.only('after clicking submit button', () => {
     it('should trigger submit once', async () => {
       await form.trigger('submit');
 
@@ -249,6 +249,7 @@ describe('given checkboxGroup in a form', async () => {
       const event = handleSubmit.mock.calls[0][0];
       const formData = new FormData(event.target);
       const submittedData = Object.fromEntries(formData as any);
+      console.log('🚀 ~ it ~ submittedData:', submittedData);
 
       expect(handleSubmit).toHaveBeenCalledTimes(1);
       expect(submittedData).toStrictEqual({ '[test][0][name]': 'jack' });

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 
 import { ACheckboxIndicator, ACheckboxRoot } from '..';
@@ -25,15 +24,13 @@ const checkboxThree = ref(false);
             <ACheckboxIndicator
               class="h-full w-full flex items-center justify-center rounded bg-white"
             >
-              <Icon
+              <i
                 v-if="checkboxOne === 'indeterminate'"
-                icon="radix-icons:divider-horizontal"
-                class="h-4 w-4 text-black"
+                class="i-radix-icons:divider-horizontal h-4 w-4 text-black"
               />
-              <Icon
+              <i
                 v-else-if="checkboxOne"
-                icon="radix-icons:check"
-                class="h-4 w-4 text-black"
+                class="i-radix-icons:check h-4 w-4 text-black"
               />
             </ACheckboxIndicator>
           </ACheckboxRoot>
@@ -49,10 +46,7 @@ const checkboxThree = ref(false);
             <ACheckboxIndicator
               class="h-full w-full flex items-center justify-center rounded bg-white"
             >
-              <Icon
-                icon="radix-icons:check"
-                class="h-3 w-3 text-black"
-              />
+              <i class="i-radix-icons:check h-3 w-3 text-black" />
             </ACheckboxIndicator>
           </ACheckboxRoot>
           <span class="select-none">Disabled ACheckbox</span>
@@ -68,10 +62,7 @@ const checkboxThree = ref(false);
             <ACheckboxIndicator
               class="h-full w-full flex items-center justify-center rounded bg-white"
             >
-              <Icon
-                icon="radix-icons:check"
-                class="h-3 w-3 text-black"
-              />
+              <i class="i-radix-icons:check h-3 w-3 text-black" />
             </ACheckboxIndicator>
           </ACheckboxRoot>
           <span class="select-none">Required ACheckbox</span>

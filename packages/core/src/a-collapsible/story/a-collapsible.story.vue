@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 
 import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from '..';
@@ -32,15 +31,13 @@ const rootDisabled = ref(false);
           <ACollapsibleTrigger
             class="h-[25px] w-[25px] inline-flex cursor-default items-center justify-center rounded-full text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none data-[state=closed]:bg-white data-[state=open]:bg-violet3 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
           >
-            <Icon
+            <i
               v-if="rootOpen"
-              icon="radix-icons:cross-2"
-              class="h-3.5 w-3.5"
+              class="i-radix-icons:cross-2 h-3.5 w-3.5"
             />
-            <Icon
+            <i
               v-else
-              icon="radix-icons:row-spacing"
-              class="h-3.5 w-3.5"
+              class="i-radix-icons:row-spacing h-3.5 w-3.5"
             />
           </ACollapsibleTrigger>
         </div>

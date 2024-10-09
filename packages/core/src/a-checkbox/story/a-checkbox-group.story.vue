@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 
 import { ACheckboxGroupRoot, ACheckboxIndicator, ACheckboxRoot } from '..';
@@ -32,10 +31,7 @@ const checkboxes = ref([items[1]]);
             <ACheckboxIndicator
               class="h-full w-full flex items-center justify-center rounded bg-white"
             >
-              <Icon
-                icon="radix-icons:check"
-                class="h-4 w-4 text-black"
-              />
+              <i class="i-radix-icons:check h-4 w-4 text-black" />
             </ACheckboxIndicator>
           </ACheckboxRoot>
           <label

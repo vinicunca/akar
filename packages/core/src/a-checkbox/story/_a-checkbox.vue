@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 
 import type { ACheckboxRootProps } from '..';
@@ -28,10 +27,7 @@ const modelValue = ref(props.modelValue);
       data-testid="test-indicator"
       class="h-full w-full flex items-center justify-center rounded bg-white"
     >
-      <Icon
-        icon="radix-icons:check"
-        class="h-3 w-3 text-black"
-      />
+      <i class="i-radix-icons:check h-3 w-3 text-black" />
     </ACheckboxIndicator>
   </ACheckboxRoot>
 </template>
