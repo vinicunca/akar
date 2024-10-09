@@ -51,10 +51,13 @@ import {
   getTabbableEdges,
 } from './utils';
 
-const props = withDefaults(defineProps<AFocusScopeProps>(), {
-  loop: false,
-  trapped: false,
-});
+const props = withDefaults(
+  defineProps<AFocusScopeProps>(),
+  {
+    loop: false,
+    trapped: false,
+  },
+);
 const emits = defineEmits<AFocusScopeEmits>();
 
 const { currentElement, currentRef } = useForwardExpose();

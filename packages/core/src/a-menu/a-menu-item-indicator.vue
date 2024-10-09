@@ -36,9 +36,12 @@ import { APrimitive } from '~~/a-primitive';
 
 import { getCheckedState, isIndeterminate } from './utils';
 
-withDefaults(defineProps<AMenuItemIndicatorProps>(), {
-  as: 'span',
-});
+withDefaults(
+  defineProps<AMenuItemIndicatorProps>(),
+  {
+    as: 'span',
+  },
+);
 
 const indicatorContext = injectAMenuItemIndicatorContext({
   modelValue: ref(false),

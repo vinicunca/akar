@@ -11,9 +11,12 @@ import { useForwardExpose } from '~~/shared';
 import { injectAAccordionItemContext } from './a-accordion-item.vue';
 import { injectAAccordionRootContext } from './a-accordion-root.vue';
 
-const props = withDefaults(defineProps<AAccordionHeaderProps>(), {
-  as: 'h3',
-});
+const props = withDefaults(
+  defineProps<AAccordionHeaderProps>(),
+  {
+    as: 'h3',
+  },
+);
 
 const rootContext = injectAAccordionRootContext();
 const itemContext = injectAAccordionItemContext();

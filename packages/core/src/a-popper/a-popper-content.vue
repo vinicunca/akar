@@ -195,9 +195,12 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<APopperContentProps>(), {
-  ...APopperContentPropsDefaultValue,
-});
+const props = withDefaults(
+  defineProps<APopperContentProps>(),
+  {
+    ...APopperContentPropsDefaultValue,
+  },
+);
 
 const emits = defineEmits<{
   placed: [void];

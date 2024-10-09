@@ -40,9 +40,12 @@ import { APopperRoot } from '~~/a-popper';
 
 import { injectAMenuContext, provideAMenuContext } from './a-menu-root.vue';
 
-const props = withDefaults(defineProps<AMenuSubProps>(), {
-  open: undefined,
-});
+const props = withDefaults(
+  defineProps<AMenuSubProps>(),
+  {
+    open: undefined,
+  },
+);
 
 const emits = defineEmits<AMenuSubEmits>();
 

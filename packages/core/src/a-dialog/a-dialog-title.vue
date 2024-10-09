@@ -11,7 +11,10 @@ import { APrimitive } from '~~/a-primitive';
 
 import { injectADialogRootContext } from './a-dialog-root.vue';
 
-const props = withDefaults(defineProps<ADialogTitleProps>(), { as: 'h2' });
+const props = withDefaults(
+  defineProps<ADialogTitleProps>(),
+  { as: 'h2' },
+);
 const rootContext = injectADialogRootContext();
 
 useForwardExpose();

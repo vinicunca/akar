@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 
-import { isIncludedIn } from '@vinicunca/perkakas';
+import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 
 import type {
   ADismissableLayerEmits,
@@ -213,7 +213,7 @@ function handleKeyDown(event: KeyboardEvent) {
 
   if (isKeyDownInside) {
     // menus should not be navigated using tab key so we prevent it
-    if (event.key === 'Tab') {
+    if (event.key === KEY_CODES.TAB) {
       event.preventDefault();
     }
 

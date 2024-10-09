@@ -22,11 +22,14 @@ export interface ArrowProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APrimitive } from '~~/a-primitive';
 
-const props = withDefaults(defineProps<ArrowProps>(), {
-  as: 'svg',
-  height: 5,
-  width: 10,
-});
+const props = withDefaults(
+  defineProps<ArrowProps>(),
+  {
+    as: 'svg',
+    height: 5,
+    width: 10,
+  },
+);
 
 useForwardExpose();
 </script>

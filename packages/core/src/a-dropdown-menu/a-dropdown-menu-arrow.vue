@@ -9,11 +9,14 @@ export interface ADropdownMenuArrowProps extends AMenuArrowProps {}
 <script setup lang="ts">
 import { AMenuArrow } from '~~/a-menu';
 
-const props = withDefaults(defineProps<ADropdownMenuArrowProps>(), {
-  width: 10,
-  height: 5,
-  as: 'svg',
-});
+const props = withDefaults(
+  defineProps<ADropdownMenuArrowProps>(),
+  {
+    width: 10,
+    height: 5,
+    as: 'svg',
+  },
+);
 
 useForwardExpose();
 </script>

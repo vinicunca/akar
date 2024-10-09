@@ -21,11 +21,14 @@ import { useCollection } from '~~/collection';
 import { injectARovingFocusGroupContext } from './a-roving-focus-group.vue';
 import { focusFirst, getFocusIntent } from './utils';
 
-const props = withDefaults(defineProps<ARovingFocusItemProps>(), {
-  focusable: true,
-  active: true,
-  as: 'span',
-});
+const props = withDefaults(
+  defineProps<ARovingFocusItemProps>(),
+  {
+    focusable: true,
+    active: true,
+    as: 'span',
+  },
+);
 
 const context = injectARovingFocusGroupContext();
 const id = computed(() => props.tabStopId || useId()!);

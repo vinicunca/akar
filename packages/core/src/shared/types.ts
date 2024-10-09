@@ -1,3 +1,6 @@
+// Temporary solution for InstanceType complains about generic components. Reference: https://github.com/vuejs/language-tools/issues/3206#issuecomment-2188687250
+import type { DefineComponent } from 'vue';
+
 export type Direction = 'ltr' | 'rtl';
 export type DataOrientation = 'horizontal' | 'vertical';
 
@@ -48,3 +51,13 @@ export interface SingleOrMultipleProps<ValidValue = AcceptableValue | Array<Acce
           ? 'multiple'
           : never;
 }
+
+export type GenericComponentInstance<T> = T extends new (...args: Array<any>) => infer R
+  ? R
+  : T extends (...args: Array<any>) => infer R
+    ? R extends { __ctx?: infer K }
+      ? Exclude<K, void> extends { expose: (...args: infer Y) => void }
+        ? InstanceType<DefineComponent> & Y[0]
+        : any
+      : any
+    : any;

@@ -18,9 +18,12 @@ import { useForwardExpose } from '~~/shared';
 import { injectACheckboxRootContext } from './a-checkbox-root.vue';
 import { getState, isIndeterminate } from './utils';
 
-withDefaults(defineProps<ACheckboxIndicatorProps>(), {
-  as: 'span',
-});
+withDefaults(
+  defineProps<ACheckboxIndicatorProps>(),
+  {
+    as: 'span',
+  },
+);
 const { forwardRef } = useForwardExpose();
 
 const rootContext = injectACheckboxRootContext();

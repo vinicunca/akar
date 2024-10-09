@@ -15,11 +15,14 @@ interface Props extends AScrollAreaRootProps {
   vertical?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  animated: false,
-  vertical: true,
-  horizontal: true,
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    animated: false,
+    vertical: true,
+    horizontal: true,
+  },
+);
 </script>
 
 <template>

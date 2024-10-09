@@ -27,9 +27,12 @@ import { injectAMenuContext, injectAMenuRootContext } from './a-menu-root.vue';
 import { injectAMenuSubContext } from './a-menu-sub.vue';
 import { SUB_CLOSE_KEYS } from './utils';
 
-const props = withDefaults(defineProps<AMenuSubContentProps>(), {
-  prioritizePosition: true,
-});
+const props = withDefaults(
+  defineProps<AMenuSubContentProps>(),
+  {
+    prioritizePosition: true,
+  },
+);
 const emits = defineEmits<AMenuSubContentEmits>();
 
 const forwarded = useForwardPropsEmits(props, emits);

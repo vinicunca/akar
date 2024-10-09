@@ -1,0 +1,110 @@
+<script lang="ts">
+import type { Ref } from 'vue';
+
+import type { AListboxItemEmits, AListboxItemProps } from '~~/a-listbox';
+import type { SelectEvent } from '~~/a-listbox/a-listbox-item.vue';
+import type { AcceptableValue } from '~~/shared/types';
+
+import { usePrimitiveElement } from '~~/a-primitive';
+import { createContext } from '~~/shared';
+
+interface AComboboxItemContext {
+  isSelected: Ref<boolean>;
+}
+
+export const [injectAComboboxItemContext, provideAComboboxItemContext]
+  = createContext<AComboboxItemContext>('AComboboxItem');
+
+export type AComboboxItemEmits<T = AcceptableValue> = AListboxItemEmits<T>;
+export interface AComboboxItemProps<T = AcceptableValue> extends AListboxItemProps<T> {
+  /**
+   * A string representation of the item contents.
+   *
+   * If the children are not plain text, then the `textValue` prop must also be set to a plain text representation, which will be used for autocomplete in the ComboBox.
+   */
+  textValue?: string;
+}
+</script>
+
+<script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
+import { computed, onMounted, onUnmounted, useId } from 'vue';
+
+import { AListboxItem } from '~~/a-listbox';
+
+import { injectAComboboxGroupContext } from './a-combobox-group.vue';
+import { injectAComboboxRootContext } from './a-combobox-root.vue';
+
+const props = defineProps<AComboboxItemProps<T>>();
+const emits = defineEmits<AComboboxItemEmits<T>>();
+
+const id = useId();
+const rootContext = injectAComboboxRootContext();
+const groupContext = injectAComboboxGroupContext(null);
+
+const { primitiveElement, currentElement } = usePrimitiveElement();
+
+if (!props.value) {
+  throw new Error(
+    'A <AComboboxItem /> must have a value prop that is not an empty string. This is because the ACombobox value can be set to an empty string to clear the selection and show the placeholder.',
+  );
+}
+
+const isRender = computed(() => {
+  if (
+    rootContext.isVirtual.value
+    || rootContext.ignoreFilter.value
+    || !rootContext.filterState.search
+  ) {
+    return true;
+  } else {
+    return rootContext.filterState.filtered.items.get(id)! > 0;
+  }
+});
+
+onMounted(() => {
+  // textValue to perform filter
+  rootContext.allItems.value.set(
+    id,
+    // eslint-disable-next-line unicorn/prefer-dom-node-text-content
+    props.textValue || currentElement.value.textContent || currentElement.value.innerText,
+  );
+
+  const groupId = groupContext?.id;
+  if (groupId) {
+    if (!rootContext.allGroups.value.has(groupId)) {
+      rootContext.allGroups.value.set(groupId, new Set([id]));
+    } else {
+      rootContext.allGroups.value.get(groupId)?.add(id);
+    }
+  }
+});
+
+onUnmounted(() => {
+  rootContext.allItems.value.delete(id);
+});
+
+function handleSelect(event: SelectEvent<any>) {
+  emits('select', event);
+  if (event.defaultPrevented) {
+    return;
+  }
+
+  if (!rootContext.multiple.value) {
+    event.preventDefault();
+    rootContext.onOpenChange(false);
+    rootContext.modelValue.value = props.value;
+  }
+}
+</script>
+
+<template>
+  <AListboxItem
+    v-if="isRender"
+    v-bind="props"
+    :id="id"
+    ref="primitiveElement"
+    @select="handleSelect"
+  >
+    <slot>{{ value }}</slot>
+  </AListboxItem>
+</template>

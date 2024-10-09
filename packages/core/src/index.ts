@@ -1,6 +1,7 @@
 export * from './a-accordion';
 export * from './a-checkbox';
 export * from './a-collapsible';
+export * from './a-combobox';
 export * from './a-dialog';
 export * from './a-dropdown-menu';
 export * from './a-menu';

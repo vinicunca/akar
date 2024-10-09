@@ -16,9 +16,12 @@ import { useVModel } from '@vueuse/core';
 import { AMenuSub } from '~~/a-menu';
 import { useForwardExpose } from '~~/shared';
 
-const props = withDefaults(defineProps<ADropdownMenuSubProps>(), {
-  open: undefined,
-});
+const props = withDefaults(
+  defineProps<ADropdownMenuSubProps>(),
+  {
+    open: undefined,
+  },
+);
 const emit = defineEmits<ADropdownMenuSubEmits>();
 
 defineSlots<{

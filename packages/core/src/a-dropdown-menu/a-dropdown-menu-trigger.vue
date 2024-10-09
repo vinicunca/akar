@@ -21,9 +21,12 @@ import {
 
 import { injectADropdownMenuRootContext } from './a-dropdown-menu-root.vue';
 
-const props = withDefaults(defineProps<ADropdownMenuTriggerProps>(), {
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<ADropdownMenuTriggerProps>(),
+  {
+    as: 'button',
+  },
+);
 
 const rootContext = injectADropdownMenuRootContext();
 

@@ -10,9 +10,12 @@ import { useForwardExpose } from '~~/shared';
 
 import { injectADialogRootContext } from './a-dialog-root.vue';
 
-const props = withDefaults(defineProps<ADialogCloseProps>(), {
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<ADialogCloseProps>(),
+  {
+    as: 'button',
+  },
+);
 
 useForwardExpose();
 const rootContext = injectADialogRootContext();

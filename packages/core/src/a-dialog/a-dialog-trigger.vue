@@ -12,9 +12,12 @@ import { useForwardExpose } from '~~/shared';
 
 import { injectADialogRootContext } from './a-dialog-root.vue';
 
-const props = withDefaults(defineProps<ADialogTriggerProps>(), {
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<ADialogTriggerProps>(),
+  {
+    as: 'button',
+  },
+);
 const rootContext = injectADialogRootContext();
 const { forwardRef, currentElement } = useForwardExpose();
 

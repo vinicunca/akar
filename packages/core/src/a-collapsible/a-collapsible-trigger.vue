@@ -10,9 +10,12 @@ import { useForwardExpose } from '~~/shared';
 
 import { injectACollapsibleRootContext } from './a-collapsible-root.vue';
 
-const props = withDefaults(defineProps<ACollapsibleTriggerProps>(), {
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<ACollapsibleTriggerProps>(),
+  {
+    as: 'button',
+  },
+);
 
 useForwardExpose();
 const rootContext = injectACollapsibleRootContext();

@@ -16,7 +16,10 @@ import {
   AAccordionTrigger,
 } from '..';
 
-withDefaults(defineProps<{ type?: AAccordionRootProps['type'] }>(), { type: 'single' });
+withDefaults(
+  defineProps<{ type?: AAccordionRootProps['type'] }>(),
+  { type: 'single' },
+);
 const emits = defineEmits<AAccordionRootEmits>();
 const values = ['One', 'Two', 'Three', 'Four'];
 const count = ref(1);

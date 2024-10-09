@@ -10,9 +10,12 @@ import {
 } from '..';
 
 interface Props extends AMenuProps {}
-const props = withDefaults(defineProps<Props>(), {
-  open: true,
-});
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    open: true,
+  },
+);
 
 const open = useVModel(props, 'open');
 </script>
