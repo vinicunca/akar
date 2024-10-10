@@ -1,0 +1,54 @@
+<script lang="ts">
+import type { APrimitiveProps } from '~~/a-primitive';
+
+export interface APopoverTriggerProps extends APrimitiveProps {}
+</script>
+
+<script setup lang="ts">
+import { onMounted, useId } from 'vue';
+
+import { APopperAnchor } from '~~/a-popper';
+import { APrimitive } from '~~/a-primitive';
+import { useForwardExpose } from '~~/shared';
+
+import { injectAPopoverRootContext } from './a-popover-root.vue';
+
+const props = withDefaults(
+  defineProps<APopoverTriggerProps>(),
+  {
+    as: 'button',
+  },
+);
+
+const rootContext = injectAPopoverRootContext();
+
+const { forwardRef, currentElement: triggerElement } = useForwardExpose();
+
+rootContext.triggerId ||= useId();
+
+onMounted(() => {
+  rootContext.triggerElement.value = triggerElement.value;
+});
+</script>
+
+<template>
+  <component
+    :is="rootContext.hasCustomAnchor.value ? APrimitive : APopperAnchor"
+    as-child
+  >
+    <APrimitive
+      :id="rootContext.triggerId"
+      :ref="forwardRef"
+      :type="as === 'button' ? 'button' : undefined"
+      aria-haspopup="dialog"
+      :aria-expanded="rootContext.open.value"
+      :aria-controls="rootContext.contentId"
+      :data-state="rootContext.open.value ? 'open' : 'closed'"
+      :as="as"
+      :as-child="props.asChild"
+      @click="rootContext.onOpenToggle"
+    >
+      <slot />
+    </APrimitive>
+  </component>
+</template>
