@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { AListboxContent, AListboxFilter, AListboxItem, AListboxRoot } from '..'
-import { countryList } from '@/shared/constant'
+import { computed, ref } from 'vue';
 
-const searchTerm = ref('')
-const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20).filter(i => i.toLowerCase().includes(searchTerm.value.toLowerCase().trim())) : countryList.slice(0, 20))
+import { countryList } from '~~/test';
+
+import { AListboxContent, AListboxFilter, AListboxItem, AListboxRoot } from '..';
+
+const searchTerm = ref('');
+const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20).filter((i) => i.toLowerCase().includes(searchTerm.value.toLowerCase().trim())) : countryList.slice(0, 20));
 </script>
 
 <template>
@@ -13,7 +15,7 @@ const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20
     :layout="{ type: 'grid', iframe: false, width: '50%' }"
   >
     <Variant title="Filter (Single)">
-      <AListboxRoot class="w-48  flex flex-col p-1 rounded-lg border bg-white text-green9 mx-auto ">
+      <AListboxRoot class="mx-auto w-48 flex flex-col border rounded-lg bg-white p-1 text-green9">
         <AListboxFilter
           v-model="searchTerm"
           class="border rounded"
@@ -23,7 +25,7 @@ const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full py-1 px-2 text-green9 select-none text-sm focus:ring-0 data-[highlighted]:outline-green9 data-[highlighted]:outline-1 data-[highlighted]:outline focus:outline-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 rounded"
+            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -34,7 +36,7 @@ const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20
     <Variant title="Filter (Multiple)">
       <AListboxRoot
         :multiple="true"
-        class="w-48  flex flex-col p-1 rounded-lg border bg-white text-green9 mx-auto "
+        class="mx-auto w-48 flex flex-col border rounded-lg bg-white p-1 text-green9"
       >
         <AListboxFilter
           v-model="searchTerm"
@@ -45,7 +47,7 @@ const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full py-1 px-2 text-green9 select-none text-sm focus:ring-0 data-[highlighted]:outline-green9 data-[highlighted]:outline-1 data-[highlighted]:outline focus:outline-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 rounded"
+            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
