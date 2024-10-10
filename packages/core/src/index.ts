@@ -5,6 +5,7 @@ export * from './a-combobox';
 export * from './a-date-field';
 export * from './a-dialog';
 export * from './a-dropdown-menu';
+export * from './a-label';
 export * from './a-menu';
 export * from './a-popper';
 export {
