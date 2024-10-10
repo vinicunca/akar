@@ -15,6 +15,7 @@ export { useForwardExpose } from './use-forward-expose';
 export { useForwardProps } from './use-forward-props';
 export { useForwardPropsEmits } from './use-forward-props-emits';
 export { useHideOthers } from './use-hide-others';
+export { useLocale } from './use-locale';
 export { useSingleOrMultipleValue } from './use-single-or-multiple-value';
 export { useSize } from './use-size';
 export { useStateMachine } from './use-state-machine';
