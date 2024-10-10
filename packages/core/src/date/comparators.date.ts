@@ -37,8 +37,8 @@ export function isZonedDateTime(dateValue: DateValue): dateValue is ZonedDateTim
  * If no timezone is provided, the date will be converted to the local timezone.
  */
 export function toDate(
-  { dateValue, tz = getLocalTimeZone() }:
-  { dateValue: DateValue; tz?: string },
+  dateValue: DateValue,
+  tz: string = getLocalTimeZone(),
 ) {
   if (isZonedDateTime(dateValue)) {
     return dateValue.toDate();
@@ -53,6 +53,24 @@ export function hasTime(dateValue: DateValue) {
 
 export function isCalendarDateTime(dateValue: DateValue): dateValue is CalendarDateTime {
   return dateValue instanceof CalendarDateTime;
+}
+
+/**
+ * Given a date, return the number of days in the month.
+ */
+export function getDaysInMonth(date: Date | DateValue) {
+  if (date instanceof Date) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    /**
+     * By using zero as the day, we get the
+     * last day of the previous month, which
+     * is the month we originally passed in.
+     */
+    return new Date(year, month, 0).getDate();
+  } else {
+    return date.set({ day: 100 }).day;
+  }
 }
 
 interface GetDefaultDateProps {

@@ -54,7 +54,7 @@ export function useDateFormatter(initialLocale: string): UseDateFormatter {
   function selectedDate({ date, includeTime = true }: { date: DateValue; includeTime?: boolean }) {
     if (hasTime(date) && includeTime) {
       return custom({
-        date: toDate({ dateValue: date }),
+        date: toDate(date),
         options: {
           dateStyle: 'long',
           timeStyle: 'long',
@@ -62,7 +62,7 @@ export function useDateFormatter(initialLocale: string): UseDateFormatter {
       });
     } else {
       return custom({
-        date: toDate({ dateValue: date }),
+        date: toDate(date),
         options: {
           dateStyle: 'long',
         },
@@ -89,9 +89,7 @@ export function useDateFormatter(initialLocale: string): UseDateFormatter {
     const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     return months.map((item) => ({
       label: fullMonth({
-        date: toDate({
-          dateValue: defaultDate.set({ month: item }),
-        }),
+        date: toDate(defaultDate.set({ month: item })),
       }),
       value: item,
     }));
@@ -109,13 +107,10 @@ export function useDateFormatter(initialLocale: string): UseDateFormatter {
       return new DateFormatter(locale.value, {
         ...options,
         timeZone: (date as ZonedDateTime).timeZone,
-      }).formatToParts(toDate({
-        dateValue: date,
-      }));
+      }).formatToParts(toDate(date));
     } else {
-      return new DateFormatter(locale.value, options).formatToParts(toDate({
-        dateValue: date,
-      }));
+      return new DateFormatter(locale.value, options)
+        .formatToParts(toDate(date));
     }
   }
 

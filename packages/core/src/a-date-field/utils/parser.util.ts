@@ -220,7 +220,7 @@ export function syncSegmentValues(props: SyncSegmentValuesProps) {
   if ('hour' in props.value) {
     const timeValues = TIME_SEGMENT_PARTS.map((part) => {
       if (part === 'dayPeriod') {
-        return [part, formatter.dayPeriod(toDate({ dateValue: props.value }))];
+        return [part, formatter.dayPeriod(toDate(props.value))];
       }
 
       return [part, props.value[part as keyof DateValue]];
