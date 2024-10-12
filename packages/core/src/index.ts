@@ -1,4 +1,5 @@
 export * from './a-accordion';
+export * from './a-calendar';
 export * from './a-checkbox';
 export * from './a-collapsible';
 export * from './a-combobox';

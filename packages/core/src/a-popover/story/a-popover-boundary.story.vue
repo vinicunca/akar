@@ -39,8 +39,8 @@ const boundary = ref<HTMLElement>();
                 padding: '8px',
                 color: 'white',
                 backgroundColor: 'black',
-                width: 'var(--reka-popper-available-width)',
-                height: 'var(--reka-popper-available-height)',
+                width: 'var(--akar-popper-available-width)',
+                height: 'var(--akar-popper-available-height)',
               }"
             >
               out of bound out of bound out of bound out of bound out of bound

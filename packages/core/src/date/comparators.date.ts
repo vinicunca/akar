@@ -6,6 +6,7 @@ import {
   CalendarDate,
   CalendarDateTime,
   type DateValue,
+  getDayOfWeek,
   getLocalTimeZone,
   ZonedDateTime,
 } from '@internationalized/date';
@@ -114,4 +115,60 @@ export function getDefaultDate(props: GetDefaultDateProps): DateValue {
   }
 
   return new CalendarDate(year, month, day);
+}
+
+interface DayOfWeekParams<T> {
+  date: T;
+  firstDayOfWeek: number;
+  locale: string;
+};
+
+export function getLastFirstDayOfWeek<T extends DateValue = DateValue>(
+  { date, firstDayOfWeek, locale }:
+  DayOfWeekParams<T>,
+) {
+  const day = getDayOfWeek(date, locale);
+
+  if (firstDayOfWeek > day) {
+    return date.subtract({ days: day + 7 - firstDayOfWeek }) as T;
+  }
+
+  if (firstDayOfWeek === day) {
+    return date as T;
+  }
+
+  return date.subtract({ days: day - firstDayOfWeek }) as T;
+}
+
+export function getNextLastDayOfWeek<T extends DateValue = DateValue>(
+  { date, firstDayOfWeek, locale }:
+  DayOfWeekParams<T>,
+): T {
+  const day = getDayOfWeek(date, locale);
+  const lastDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
+
+  if (day === lastDayOfWeek) {
+    return date as T;
+  }
+
+  if (day > lastDayOfWeek) {
+    return date.add({ days: 7 - day + lastDayOfWeek }) as T;
+  }
+
+  return date.add({ days: lastDayOfWeek - day }) as T;
+}
+
+/**
+ * Determine if a date is after the reference date.
+ * @param params
+ * @param params.dateToCompare - is this date after the `referenceDate`
+ * @param params.referenceDate - is the `dateToCompare` after this date
+ *
+ * @see {@link isDateAfterOrSame} for inclusive
+ */
+export function isDateAfter(
+  { dateToCompare, referenceDate }:
+  { dateToCompare: DateValue; referenceDate: DateValue },
+) {
+  return dateToCompare.compare(referenceDate) > 0;
 }

@@ -1,3 +1,4 @@
+export * from './calendar.date';
 export * from './comparators.date';
 export * from './placeholders.date';
 export * from './types.date';
