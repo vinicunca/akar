@@ -8,24 +8,115 @@ import {
   type DateValue,
   getDayOfWeek,
   getLocalTimeZone,
+  parseDate,
+  parseDateTime,
+  parseZonedDateTime,
+  toCalendar,
   ZonedDateTime,
 } from '@internationalized/date';
+
+import type { DateMatcher } from '~~/date/types.date';
 
 export type DateTimeGranularity = 'day' | 'hour' | 'minute' | 'second';
 
 /**
  * Determine if a date is before the reference date.
- * @param params
- * @param params.dateToCompare - is this date before the `referenceDate`
- * @param params.referenceDate - is the `dateToCompare` before this date
+ * @param dateToCompare - is this date before the `referenceDate`
+ * @param referenceDate - is the `dateToCompare` before this date
  *
  * @see {@link isDateBeforeOrSame} for inclusive
  */
 export function isDateBefore(
-  { dateToCompare, referenceDate }:
-  { dateToCompare: DateValue; referenceDate: DateValue },
+  dateToCompare: DateValue,
+  referenceDate: DateValue,
 ) {
   return dateToCompare.compare(referenceDate) < 0;
+}
+
+/**
+ * Determine if a date is before or the same as the reference date.
+ *
+ * @param dateToCompare - the date to compare
+ * @param referenceDate - the reference date to make the comparison against
+ *
+ * @see {@link isDateBefore} for non-inclusive
+ */
+export function isDateBeforeOrSame(
+  dateToCompare: DateValue,
+  referenceDate: DateValue,
+) {
+  return dateToCompare.compare(referenceDate) <= 0;
+}
+
+/**
+ * Determine if a date is after the reference date.
+ * @param dateToCompare - is this date after the `referenceDate`
+ * @param referenceDate - is the `dateToCompare` after this date
+ *
+ * @see {@link isDateAfterOrSame} for inclusive
+ */
+export function isDateAfter(
+  dateToCompare: DateValue,
+  referenceDate: DateValue,
+) {
+  return dateToCompare.compare(referenceDate) > 0;
+}
+
+/**
+ * Determine if a date is after or the same as the reference date.
+ *
+ * @param dateToCompare - is this date after or the same as the `referenceDate`
+ * @param referenceDate - is the `dateToCompare` after or the same as this date
+ *
+ * @see {@link isDateAfter} for non-inclusive
+ */
+export function isDateAfterOrSame(
+  dateToCompare: DateValue,
+  referenceDate: DateValue,
+) {
+  return dateToCompare.compare(referenceDate) >= 0;
+}
+
+/**
+ * Determine if a date is between a start and end reference date.
+ *
+ * @param params
+ * @param params.date - is this date between the `start` and `end` dates
+ * @param params.start - the start reference date to make the comparison against
+ * @param params.end - the end reference date to make the comparison against
+ *
+ * @see {@link isDateBetweenInclusive} for inclusive
+ */
+export function isDateBetween(
+  { date, start, end }:
+  {
+    date: DateValue;
+    end: DateValue;
+    start: DateValue;
+  },
+) {
+  return isDateAfter(date, start) && isDateBefore(date, end);
+}
+
+/**
+ * Determine if a date is inclusively between a start and end reference date.
+ *
+ * @param params
+ * @param params.date - is this date inclusively between the `start` and `end` dates
+ * @param params.start - the start reference date to make the comparison against
+ * @param params.end - the end reference date to make the comparison against
+ *
+ * @see {@link isDateBetween} for non-inclusive
+ */
+export function isDateBetweenInclusive(
+  { date, start, end }:
+  {
+    date: DateValue;
+    end: DateValue;
+    start: DateValue;
+  },
+) {
+  return isDateAfterOrSame(date, start) && isDateBeforeOrSame(date, end);
 }
 
 export function isZonedDateTime(dateValue: DateValue): dateValue is ZonedDateTime {
@@ -158,17 +249,52 @@ export function getNextLastDayOfWeek<T extends DateValue = DateValue>(
   return date.add({ days: lastDayOfWeek - day }) as T;
 }
 
-/**
- * Determine if a date is after the reference date.
- * @param params
- * @param params.dateToCompare - is this date after the `referenceDate`
- * @param params.referenceDate - is the `dateToCompare` after this date
- *
- * @see {@link isDateAfterOrSame} for inclusive
- */
-export function isDateAfter(
-  { dateToCompare, referenceDate }:
-  { dateToCompare: DateValue; referenceDate: DateValue },
+export function areAllDaysBetweenValid(
+  { start, end, isUnavailable, isDisabled }:
+  {
+    end: DateValue;
+    isDisabled?: DateMatcher;
+    isUnavailable?: DateMatcher;
+    start: DateValue;
+  },
 ) {
-  return dateToCompare.compare(referenceDate) > 0;
+  if (isUnavailable === undefined && isDisabled === undefined) {
+    return true;
+  }
+
+  let dCurrent = start.add({ days: 1 });
+  if (isDisabled?.(dCurrent) || isUnavailable?.(dCurrent)) {
+    return false;
+  }
+
+  const dEnd = end;
+  while (dCurrent.compare(dEnd) < 0) {
+    dCurrent = dCurrent.add({ days: 1 });
+    if (isDisabled?.(dCurrent) || isUnavailable?.(dCurrent)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Given a date string and a reference `DateValue` object, parse the
+ * string to the same type as the reference object.
+ *
+ * Useful for parsing strings from data attributes, which are always
+ * strings, to the same type being used by the date component.
+ */
+export function parseStringToDateValue(dateStr: string, referenceVal: DateValue): DateValue {
+  let dateValue: DateValue;
+  if (isZonedDateTime(referenceVal)) {
+    dateValue = parseZonedDateTime(dateStr);
+  } else if (isCalendarDateTime(referenceVal)) {
+    dateValue = parseDateTime(dateStr);
+  } else {
+    dateValue = parseDate(dateStr);
+  }
+
+  return dateValue.calendar !== referenceVal.calendar
+    ? toCalendar(dateValue, referenceVal.calendar)
+    : dateValue;
 }

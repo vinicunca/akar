@@ -4,7 +4,13 @@ import { computed, ref } from 'vue';
 import { type Direction, useForwardExpose } from '~~/shared';
 
 import ASliderImpl from './a-slider-impl.vue';
-import { type ASliderOrientationPrivateEmits, type ASliderOrientationPrivateProps, BACK_KEYS, linearScale, provideASliderOrientationContext } from './utils';
+import {
+  type ASliderOrientationPrivateEmits,
+  type ASliderOrientationPrivateProps,
+  BACK_KEYS,
+  linearScale,
+  provideASliderOrientationContext,
+} from './utils';
 
 interface ASliderHorizontalProps extends ASliderOrientationPrivateProps {
   dir?: Direction;
@@ -32,11 +38,11 @@ function getValueFromPointer(pointerPosition: number) {
     ? [props.min, props.max]
     : [props.max, props.min];
 
-  const getValue = linearScale({ input, output });
+  const getLinearValue = linearScale({ input, output });
 
   rectRef.value = rect;
 
-  return getValue(pointerPosition - rect.left);
+  return getLinearValue(pointerPosition - rect.left);
 }
 
 function handleSlideStart(event: PointerEvent) {
