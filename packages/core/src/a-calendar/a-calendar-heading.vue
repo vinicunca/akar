@@ -9,7 +9,10 @@ import { APrimitive } from '~~/a-primitive';
 
 import { injectACalendarRootContext } from './a-calendar-root.vue';
 
-const props = withDefaults(defineProps<ACalendarHeadingProps>(), { as: 'div' });
+const props = withDefaults(
+  defineProps<ACalendarHeadingProps>(),
+  { as: 'div' },
+);
 
 defineSlots<{
   default: (props: {

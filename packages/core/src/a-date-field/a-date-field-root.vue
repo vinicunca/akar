@@ -164,26 +164,15 @@ const isInvalid = computed(() => {
 
   if (
     props.minValue
-    && isDateBefore({
-      dateToCompare: modelValue.value,
-      referenceDate: props.minValue,
-    })
+    && isDateBefore(modelValue.value, props.minValue)
   ) {
     return true;
   }
 
-  // eslint-disable-next-line sonar/prefer-single-boolean-return
-  if (
+  return Boolean(
     props.maxValue
-    && isDateBefore({
-      dateToCompare: props.maxValue,
-      referenceDate: modelValue.value,
-    })
-  ) {
-    return true;
-  }
-
-  return false;
+    && isDateBefore(props.maxValue, modelValue.value),
+  );
 });
 
 const inferredGranularity = computed(() => {

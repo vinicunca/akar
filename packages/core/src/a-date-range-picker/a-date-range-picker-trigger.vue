@@ -1,16 +1,14 @@
 <script lang="ts">
-import type { APopoverTriggerProps } from '~~/a-popover';
+import { APopoverTrigger, type APopoverTriggerProps } from '~~/a-popover';
 
-export interface ADatePickerTriggerProps extends APopoverTriggerProps {}
+import { injectADateRangePickerRootContext } from './a-date-range-picker-root.vue';
+
+export interface ADateRangePickerTriggerProps extends APopoverTriggerProps {}
 </script>
 
 <script setup lang="ts">
-import { APopoverTrigger } from '~~/a-popover';
-
-import { injectADatePickerRootContext } from './a-date-picker-root.vue';
-
-const props = defineProps<ADatePickerTriggerProps>();
-const rootContext = injectADatePickerRootContext();
+const props = defineProps<ADateRangePickerTriggerProps>();
+const rootContext = injectADateRangePickerRootContext();
 
 function handleFocusin(event: FocusEvent) {
   rootContext.dateFieldRef.value?.setFocusedElement(event.target as HTMLElement);

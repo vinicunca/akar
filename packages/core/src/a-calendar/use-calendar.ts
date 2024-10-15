@@ -144,10 +144,7 @@ export function useCalendar(props: UseCalendarProps) {
     if (!nextPageFunc && !props.nextPage.value) {
       const firstPeriodOfNextPage = lastPeriodInView.add({ months: 1 }).set({ day: 1 });
 
-      return isDateAfter({
-        dateToCompare: firstPeriodOfNextPage,
-        referenceDate: props.maxValue.value,
-      });
+      return isDateAfter(firstPeriodOfNextPage, props.maxValue.value);
     }
 
     const firstPeriodOfNextPage = handleNextDisabled({
@@ -155,10 +152,7 @@ export function useCalendar(props: UseCalendarProps) {
       nextPageFunc: nextPageFunc || props.nextPage.value!,
     });
 
-    return isDateAfter({
-      dateToCompare: firstPeriodOfNextPage,
-      referenceDate: props.maxValue.value,
-    });
+    return isDateAfter(firstPeriodOfNextPage, props.maxValue.value);
   };
 
   function isPrevButtonDisabled(
@@ -176,10 +170,7 @@ export function useCalendar(props: UseCalendarProps) {
 
     if (!prevPageFunc && !props.prevPage.value) {
       const lastPeriodOfPrevPage = firstPeriodInView.subtract({ months: 1 }).set({ day: 35 });
-      return isDateBefore({
-        dateToCompare: lastPeriodOfPrevPage,
-        referenceDate: props.minValue.value,
-      });
+      return isDateBefore(lastPeriodOfPrevPage, props.minValue.value);
     }
 
     const lastPeriodOfPrevPage = handlePrevDisabled({
@@ -187,10 +178,7 @@ export function useCalendar(props: UseCalendarProps) {
       prevPageFunc: prevPageFunc || props.prevPage.value!,
     });
 
-    return isDateBefore({
-      dateToCompare: lastPeriodOfPrevPage,
-      referenceDate: props.minValue.value,
-    });
+    return isDateBefore(lastPeriodOfPrevPage, props.minValue.value);
   };
 
   function isDateDisabled(dateObj: DateValue) {
@@ -198,33 +186,19 @@ export function useCalendar(props: UseCalendarProps) {
       return true;
     }
 
-    if (props.maxValue.value && isDateAfter({
-      dateToCompare: dateObj,
-      referenceDate: props.maxValue.value,
-    })) {
+    if (props.maxValue.value
+      && isDateAfter(dateObj, props.maxValue.value)) {
       return true;
     }
 
-    // eslint-disable-next-line sonar/prefer-single-boolean-return
-    if (
-      props.minValue.value && isDateBefore({
-        dateToCompare: dateObj,
-        referenceDate: props.minValue.value,
-      })
-    ) {
-      return true;
-    }
-
-    return false;
+    return Boolean(
+      props.minValue.value
+      && isDateBefore(dateObj, props.minValue.value),
+    );
   }
 
   function isDateUnavailable(date: DateValue) {
-    // eslint-disable-next-line sonar/prefer-single-boolean-return
-    if (props.isDateUnavailable?.(date)) {
-      return true;
-    }
-
-    return false;
+    return Boolean(props.isDateUnavailable?.(date));
   }
 
   const weekdays = computed(() => {
