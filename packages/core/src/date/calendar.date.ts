@@ -1,7 +1,7 @@
-import { type DateValue, endOfMonth, startOfMonth } from '@internationalized/date';
+import { type DateValue, endOfMonth, endOfYear, startOfMonth, startOfYear } from '@internationalized/date';
 import { chunk } from '@vinicunca/perkakas';
 
-import type { DateGrid } from './types.date';
+import type { DateGrid, DateRange } from './types.date';
 
 import { getDaysInMonth, getLastFirstDayOfWeek, getNextLastDayOfWeek } from './comparators.date';
 
@@ -158,4 +158,102 @@ export function createMonths(props: SetMonthProps) {
   }
 
   return months;
+}
+
+export interface CreateSelectProps {
+  /**
+   * The date object representing the date (usually the first day of the month/year).
+   */
+  dateObj: DateValue;
+};
+
+type SetYearProps = {
+  numberOfMonths?: number;
+  pagedNavigation?: boolean;
+} & CreateSelectProps;
+
+type SetDecadeProps = {
+  endIndex: number;
+  startIndex?: number;
+} & CreateSelectProps;
+
+export function startOfDecade(dateObj: DateValue) {
+  // round to the lowest nearest 10 when building the decade
+  return startOfYear(dateObj.subtract({
+    years: dateObj.year - Math.floor(dateObj.year / 10) * 10,
+  }).set({ day: 1, month: 1 }));
+}
+
+export function endOfDecade(dateObj: DateValue) {
+  // round to the lowest nearest 10 when building the decade
+  return endOfYear(dateObj.add({
+    years: Math.ceil((dateObj.year + 1) / 10) * 10 - dateObj.year - 1,
+  }).set({ day: 35, month: 12 }));
+}
+
+export function createDecade(props: SetDecadeProps): Array<DateValue> {
+  const { dateObj, startIndex, endIndex } = props;
+
+  const decadeArray = Array.from(
+    { length: Math.abs(startIndex ?? 0) + endIndex },
+    (_, i) =>
+      i <= Math.abs((startIndex ?? 0))
+        ? dateObj.subtract({ years: i }).set({ day: 1, month: 1 })
+        : dateObj.add({ years: i - endIndex }).set({ day: 1, month: 1 }),
+  );
+
+  decadeArray.sort((a: DateValue, b: DateValue) => a.year - b.year);
+
+  return decadeArray;
+}
+
+export function createYear(props: SetYearProps): Array<DateValue> {
+  const { dateObj, numberOfMonths = 1, pagedNavigation = false } = props;
+
+  if (numberOfMonths && pagedNavigation) {
+    return Array.from(
+      { length: Math.floor(12 / numberOfMonths) },
+      (_, i) => startOfMonth(dateObj.set({ month: i * numberOfMonths + 1 })),
+    );
+  }
+
+  return Array.from(
+    { length: 12 },
+    (_, i) => startOfMonth(dateObj.set({ month: i + 1 })),
+  );
+}
+
+export function createYearRange({ start, end }: DateRange): Array<DateValue> {
+  const years: Array<DateValue> = [];
+
+  if (!start || !end) {
+    return years;
+  }
+
+  let current = startOfYear(start);
+
+  while (current.compare(end) <= 0) {
+    years.push(current);
+    // Move to the first day of the next year
+    current = startOfYear(current.add({ years: 1 }));
+  }
+
+  return years;
+}
+
+export function createDateRange({ start, end }: DateRange): Array<DateValue> {
+  const dates: Array<DateValue> = [];
+
+  if (!start || !end) {
+    return dates;
+  }
+
+  let current = start;
+
+  while (current.compare(end) <= 0) {
+    dates.push(current);
+    current = current.add({ days: 1 });
+  }
+
+  return dates;
 }

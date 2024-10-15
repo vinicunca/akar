@@ -1,4 +1,6 @@
 <script lang="ts">
+import { isObjectType } from '@vinicunca/perkakas';
+
 import type { AListboxFilterEmits, AListboxFilterProps } from '~~/a-listbox';
 
 export type AComboboxInputEmits = AListboxFilterEmits;
@@ -74,7 +76,7 @@ function resetSearchTerm() {
   if (props.displayValue) {
     modelValue.value = props.displayValue(rootModelValue);
   } else if (!rootContext.multiple.value && rootModelValue && !Array.isArray(rootModelValue)) {
-    if (typeof rootModelValue !== 'object') {
+    if (!isObjectType(rootModelValue)) {
       modelValue.value = rootModelValue.toString();
     } else {
       modelValue.value = '';

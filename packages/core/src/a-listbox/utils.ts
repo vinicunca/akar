@@ -1,4 +1,4 @@
-import { isDeepEqual } from '@vinicunca/perkakas';
+import { isDeepEqual, isFunction, isString } from '@vinicunca/perkakas';
 
 export function queryCheckedElement(parentEl: HTMLElement | null) {
   return parentEl?.querySelector('[data-state=checked]') as HTMLElement | null;
@@ -33,15 +33,15 @@ export function compare<T>(
     return false;
   }
 
-  if (typeof value === 'string') {
+  if (isString(value)) {
     return value === currentValue;
   }
 
-  if (typeof comparator === 'function') {
+  if (isFunction(comparator)) {
     return comparator(value, currentValue);
   }
 
-  if (typeof comparator === 'string') {
+  if (isString(comparator)) {
     return value?.[comparator as keyof T] === currentValue?.[comparator as keyof T];
   }
 
