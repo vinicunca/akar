@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event'
 import { CalendarDate, CalendarDateTime, type DateValue, toZoned } from '@internationalized/date'
 import type { DateRangePickerRootProps } from './a-date-range-picker-root.vue'
 import { render } from '@testing-library/vue'
-import { useTestKbd } from '@/shared'
+import { useTestKbd } from '~~/shared'
 
 const calendarDate = {
   start: new CalendarDate(2022, 1, 1),

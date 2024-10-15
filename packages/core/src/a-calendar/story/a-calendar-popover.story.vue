@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { createDecade, createYear, toDate } from '@/date';
-import { useDateFormatter } from '@/shared';
+import { useDateFormatter } from '~~/shared';
 import { Icon } from '@iconify/vue';
 import { CalendarDate, type DateValue, getLocalTimeZone, today } from '@internationalized/date';
 import { type Ref, ref } from 'vue';

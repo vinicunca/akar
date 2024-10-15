@@ -1,4 +1,4 @@
-import { useKbd } from '@/shared';
+import { useKbd } from '~~/shared';
 import { handleSubmit } from '@/test';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render } from '@testing-library/vue';

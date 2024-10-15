@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot, type CalendarRootEmits, type CalendarRootProps } from '..'
-import { useForwardPropsEmits } from '@/shared'
+import { useForwardPropsEmits } from '~~/shared'
 
 const props = defineProps<CalendarRootProps>()
 const emits = defineEmits<CalendarRootEmits>()

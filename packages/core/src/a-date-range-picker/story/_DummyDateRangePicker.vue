@@ -22,7 +22,7 @@ import {
   type DateRangePickerRootProps,
   DateRangePickerTrigger,
 } from '..'
-import { useForwardPropsEmits } from '@/shared'
+import { useForwardPropsEmits } from '~~/shared'
 
 const props = defineProps<DateRangePickerRootProps>()
 const emits = defineEmits<DateRangePickerRootEmits>()

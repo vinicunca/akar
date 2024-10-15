@@ -10,7 +10,7 @@ import {
   type EditableRootProps,
   EditableSubmitTrigger,
 } from '@/Editable'
-import { useForwardPropsEmits } from '@/shared'
+import { useForwardPropsEmits } from '~~/shared'
 
 const props = defineProps<EditableRootProps>()
 const emits = defineEmits<EditableRootEmits>()

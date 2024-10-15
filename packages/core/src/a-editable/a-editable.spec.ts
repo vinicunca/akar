@@ -1,4 +1,4 @@
-import { useTestKbd } from '@/shared';
+import { useTestKbd } from '~~/shared';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';

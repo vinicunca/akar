@@ -6,7 +6,7 @@ import { type DateValue, getLocalTimeZone, today } from '@internationalized/date
 
 import CalendarPopover from '@/Calendar/story/_CalendarPopover.vue'
 import { createDecade, createYear, toDate } from '@/date'
-import { useDateFormatter } from '@/shared'
+import { useDateFormatter } from '~~/shared'
 
 const placeholder = ref(today(getLocalTimeZone())) as Ref<DateValue>
 const formatter = useDateFormatter('en')
