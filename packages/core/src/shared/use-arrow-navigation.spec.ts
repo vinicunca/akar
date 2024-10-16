@@ -1,3 +1,4 @@
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { useArrowNavigation } from './use-arrow-navigation';
@@ -24,7 +25,7 @@ describe('useArrowNavigation', () => {
   });
 
   it('should navigate horizontally', () => {
-    const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+    const event = new KeyboardEvent('keydown', { key: KEY_CODES.ARROW_RIGHT });
     const nextElement = useArrowNavigation({
       event,
       currentElement: child1,
@@ -37,7 +38,7 @@ describe('useArrowNavigation', () => {
   });
 
   it('should navigate vertically', () => {
-    const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+    const event = new KeyboardEvent('keydown', { key: KEY_CODES.ARROW_DOWN });
     const nextElement = useArrowNavigation({
       event,
       currentElement: child1,
@@ -51,7 +52,7 @@ describe('useArrowNavigation', () => {
 
   it('should not navigate with arrow keys when arrowKeyOptions is not set to both', () => {
     const nextElementHorizontal = useArrowNavigation({
-      event: new KeyboardEvent('keydown', { key: 'ArrowDown' }),
+      event: new KeyboardEvent('keydown', { key: KEY_CODES.ARROW_DOWN }),
       currentElement: child1,
       parentElement,
       options: {
@@ -60,7 +61,7 @@ describe('useArrowNavigation', () => {
     });
     expect(nextElementHorizontal).toBeNull();
     const nextElementVertical = useArrowNavigation({
-      event: new KeyboardEvent('keydown', { key: 'ArrowLeft' }),
+      event: new KeyboardEvent('keydown', { key: KEY_CODES.ARROW_LEFT }),
       currentElement: child1,
       parentElement,
       options: {
@@ -72,7 +73,7 @@ describe('useArrowNavigation', () => {
   });
 
   it('should return null if there are no items in the collection', () => {
-    const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+    const event = new KeyboardEvent('keydown', { key: KEY_CODES.ARROW_RIGHT });
     const nextElement = useArrowNavigation({
       event,
       currentElement: child1,
@@ -82,7 +83,7 @@ describe('useArrowNavigation', () => {
   });
 
   it('should loop through items if loop is set to true', () => {
-    const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+    const event = new KeyboardEvent('keydown', { key: KEY_CODES.ARROW_LEFT });
     const nextElement = useArrowNavigation({
       event,
       currentElement: child3,
@@ -95,7 +96,7 @@ describe('useArrowNavigation', () => {
   });
 
   it('should not loop through items if loop is set to false', () => {
-    const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+    const event = new KeyboardEvent('keydown', { key: KEY_CODES.ARROW_LEFT });
     const nextElement = useArrowNavigation({
       event,
       currentElement: child1,
@@ -110,13 +111,13 @@ describe('useArrowNavigation', () => {
   it('should skip disabled items', () => {
     child2.setAttribute('disabled', 'true');
     child3.setAttribute('disabled', 'true');
-    const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+    const event = new KeyboardEvent('keydown', { key: KEY_CODES.ARROW_RIGHT });
     const nextElement = useArrowNavigation({ event, currentElement: child1, parentElement });
     expect(nextElement).toBeNull();
   });
 
   it('should navigate correctly in rtl', () => {
-    const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+    const event = new KeyboardEvent('keydown', { key: KEY_CODES.ARROW_RIGHT });
     const nextElement = useArrowNavigation({
       event,
       currentElement: child1,
@@ -129,13 +130,13 @@ describe('useArrowNavigation', () => {
   });
 
   it('should navigate to the first item', () => {
-    const event = new KeyboardEvent('keydown', { key: 'Home' });
+    const event = new KeyboardEvent('keydown', { key: KEY_CODES.HOME });
     const nextElement = useArrowNavigation({ event, currentElement: child1, parentElement });
     expect(nextElement).toStrictEqual(child3);
   });
 
   it('should navigate to the last item', () => {
-    const event = new KeyboardEvent('keydown', { key: 'End' });
+    const event = new KeyboardEvent('keydown', { key: KEY_CODES.END });
     const nextElement = useArrowNavigation({ event, currentElement: child2, parentElement });
     expect(nextElement).toStrictEqual(child1);
   });

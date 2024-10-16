@@ -2,6 +2,7 @@ export * from './arrays';
 export { createContext } from './create-context';
 export { handleAndDispatchCustomEvent } from './handle-and-dispatch-custom-event';
 export { isValueEqualOrExist } from './is-value-equal-or-exist';
+export * from './numbers';
 export { renderSlotFragments } from './render-slot-fragments';
 export * from './types';
 export { useArrowNavigation } from './use-arrow-navigation';

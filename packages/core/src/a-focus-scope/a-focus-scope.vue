@@ -225,7 +225,7 @@ function handleKeyDown(event: KeyboardEvent) {
   }
 
   const isTabKey
-    = event.key === 'Tab' && !event.altKey && !event.ctrlKey && !event.metaKey;
+    = event.key === KEY_CODES.TAB && !event.altKey && !event.ctrlKey && !event.metaKey;
   const focusedElement = document.activeElement as HTMLElement | null;
 
   if (isTabKey && focusedElement) {

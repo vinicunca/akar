@@ -26,7 +26,7 @@ describe('given a single AAccordion', () => {
 
     describe('on `ArrowDown`', () => {
       it('should move focus to the next trigger', () => {
-        fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_DOWN });
         const trigger = wrapper.findAll('button')[1].element;
         expect(trigger).toBe(document.activeElement);
       });
@@ -34,7 +34,7 @@ describe('given a single AAccordion', () => {
       it('should move focus to the first item if at the end', () => {
         const triggers = wrapper.findAll('button').map((i) => i.element);
         triggers[3].focus();
-        fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_DOWN });
         expect(triggers[0]).toBe(document.activeElement);
       });
     });
@@ -43,28 +43,28 @@ describe('given a single AAccordion', () => {
       it('should move focus to the previous trigger', () => {
         const triggers = wrapper.findAll('button').map((i) => i.element);
         triggers[2].focus();
-        fireEvent.keyDown(document.activeElement!, { key: 'ArrowUp' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_UP });
         expect(triggers[1]).toBe(document.activeElement);
       });
 
       it('should move focus to the last item if at the beginning', () => {
         const triggers = wrapper.findAll('button').map((i) => i.element);
         triggers[0].focus();
-        fireEvent.keyDown(document.activeElement!, { key: 'ArrowUp' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_UP });
         expect(triggers[3]).toBe(document.activeElement);
       });
     });
 
     describe('on `Home`', () => {
       it('should move focus to the first trigger', () => {
-        fireEvent.keyDown(document.activeElement!, { key: 'Home' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.HOME });
         expect(wrapper.findAll('button')[0].element).toBe(document.activeElement);
       });
     });
 
     describe('on `End`', () => {
       it('should move focus to the last trigger', () => {
-        fireEvent.keyDown(document.activeElement!, { key: 'End' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.END });
         expect(wrapper.findAll('button')[3].element).toBe(document.activeElement);
       });
     });
@@ -140,28 +140,28 @@ describe('given a multiple AAccordion', () => {
 
     describe('on `ArrowDown`', () => {
       it('should move focus to the next trigger', () => {
-        fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_DOWN });
         expect(wrapper.findAll('button')[1].element).toBe(document.activeElement);
       });
     });
 
     describe('on `ArrowUp`', () => {
       it('should move focus to the previous trigger', () => {
-        fireEvent.keyDown(document.activeElement!, { key: 'ArrowUp' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_UP });
         expect(wrapper.findAll('button')[3].element).toBe(document.activeElement);
       });
     });
 
     describe('on `Home`', () => {
       it('should move focus to the first trigger', () => {
-        fireEvent.keyDown(document.activeElement!, { key: 'Home' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.HOME });
         expect(wrapper.findAll('button')[0].element).toBe(document.activeElement);
       });
     });
 
     describe('on `End`', () => {
       it('should move focus to the last trigger', () => {
-        fireEvent.keyDown(document.activeElement!, { key: 'End' });
+        fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.END });
         expect(wrapper.findAll('button')[3].element).toBe(document.activeElement);
       });
     });

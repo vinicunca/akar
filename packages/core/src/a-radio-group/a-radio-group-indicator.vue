@@ -17,9 +17,12 @@ import { useForwardExpose } from '~~/shared';
 
 import { injectARadioGroupItemContext } from './a-radio-group-item.vue';
 
-withDefaults(defineProps<ARadioGroupIndicatorProps>(), {
-  as: 'span',
-});
+withDefaults(
+  defineProps<ARadioGroupIndicatorProps>(),
+  {
+    as: 'span',
+  },
+);
 
 const { forwardRef } = useForwardExpose();
 const itemContext = injectARadioGroupItemContext();

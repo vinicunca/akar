@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList, APaginationListItem, APaginationNext, APaginationPrev, APaginationRoot, type APaginationRootProps } from '..'
+import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList, APaginationListItem, APaginationNext, APaginationPrev, APaginationRoot, type APaginationRootProps } from '..';
 
-const props = withDefaults(defineProps<{
-  total?: APaginationRootProps['total']
-  showEdges?: APaginationRootProps['showEdges']
-}>(), {
-  total: 100,
-})
+const props = withDefaults(
+  defineProps<{
+    showEdges?: APaginationRootProps['showEdges'];
+    total?: APaginationRootProps['total'];
+  }>(),
+  {
+    total: 100,
+  },
+);
 </script>
 
 <template>
@@ -16,7 +19,7 @@ const props = withDefaults(defineProps<{
   >
     <APaginationList
       v-slot="{ items }"
-      class="flex items-center gap-2 "
+      class="flex items-center gap-2"
     >
       <APaginationFirst />
       <APaginationPrev />
@@ -33,7 +36,7 @@ const props = withDefaults(defineProps<{
           v-else
           :key="page.type"
           :index="index"
-          class="border rounded px-4 py-2 "
+          class="border rounded px-4 py-2"
         >
           &#8230;
         </APaginationEllipsis>

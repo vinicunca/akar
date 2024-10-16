@@ -69,7 +69,7 @@ describe('given default APinInput', () => {
 
   describe('after pressing ArrowRight key', () => {
     beforeEach(async () => {
-      await inputs[0].trigger('keydown', { key: 'ArrowRight' });
+      await inputs[0].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
     });
 
     it('should navigate to 2nd box', () => {
@@ -78,7 +78,7 @@ describe('given default APinInput', () => {
 
     describe('after pressing ArrowRight key', () => {
       beforeEach(async () => {
-        await inputs[1].trigger('keydown', { key: 'ArrowRight' });
+        await inputs[1].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
       });
 
       it('should navigate to 3rd box', () => {
@@ -87,8 +87,8 @@ describe('given default APinInput', () => {
 
       describe('after pressing ArrowLeft key twice', () => {
         beforeEach(async () => {
-          await inputs[2].trigger('keydown', { key: 'ArrowLeft' });
-          await inputs[1].trigger('keydown', { key: 'ArrowLeft' });
+          await inputs[2].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
+          await inputs[1].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
         });
 
         it('should navigate back to 1st box', () => {

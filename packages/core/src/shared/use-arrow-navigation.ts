@@ -82,7 +82,7 @@ export function useArrowNavigation(
     currentElement: HTMLElement;
     event: KeyboardEvent;
     options?: ArrowNavigationOptions;
-    parentElement: HTMLElement | undefined;
+    parentElement?: HTMLElement | undefined;
   },
 ): HTMLElement | null {
   if (

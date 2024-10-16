@@ -49,7 +49,7 @@ interface ARovingContext {
 export const [
   injectARovingFocusGroupContext,
   provideARovingFocusGroupContext,
-] = createContext<ARovingContext>('RovingFocusGroup');
+] = createContext<ARovingContext>('ARovingFocusGroup');
 </script>
 
 <script setup lang="ts">

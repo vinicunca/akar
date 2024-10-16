@@ -87,7 +87,7 @@ describe('test RovingFocus with Arrow Navigation', () => {
       attachTo: document.body,
     })
     const buttons = wrapper.findAll('button')
-    // make focus to the RovingFocusGroup
+    // make focus to the ARovingFocusGroup
     await userEvent.tab()
     expect(buttons[1].attributes('data-active')).toBe('true')
     expect(buttons[1].element).toBe(document.activeElement)
@@ -118,7 +118,7 @@ describe('test RovingFocus with Arrow Navigation', () => {
     })
     const buttons = wrapper.findAll('button')
 
-    // make focus to the RovingFocusGroup
+    // make focus to the ARovingFocusGroup
     await userEvent.tab()
     expect(buttons[1].attributes('data-active')).toBe('true')
     expect(buttons[1].element).toBe(document.activeElement)
