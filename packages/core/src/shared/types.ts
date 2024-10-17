@@ -4,6 +4,8 @@ import type { DefineComponent } from 'vue';
 export type Direction = 'ltr' | 'rtl';
 export type DataOrientation = 'horizontal' | 'vertical';
 
+export type StringOrNumber = number | string;
+
 export interface ScrollBodyOption {
   margin?: boolean | number;
   padding?: boolean | number;

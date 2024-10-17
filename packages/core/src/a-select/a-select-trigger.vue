@@ -16,9 +16,13 @@ import { useForwardExpose, useTypeahead } from '~~/shared';
 import { injectASelectRootContext } from './a-select-root.vue';
 import { OPEN_KEYS } from './utils';
 
-const props = withDefaults(defineProps<ASelectTriggerProps>(), {
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<ASelectTriggerProps>(),
+  {
+    as: 'button',
+  },
+);
+
 const rootContext = injectASelectRootContext();
 const { forwardRef, currentElement: triggerElement } = useForwardExpose();
 
