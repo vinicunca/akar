@@ -20,10 +20,13 @@ import { useForwardExpose } from '~~/shared';
 import { injectATabsRootContext } from './a-tabs-root.vue';
 import { makeContentId, makeTriggerId } from './utils';
 
-const props = withDefaults(defineProps<ATabsTriggerProps>(), {
-  disabled: false,
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<ATabsTriggerProps>(),
+  {
+    disabled: false,
+    as: 'button',
+  },
+);
 
 const { forwardRef } = useForwardExpose();
 const rootContext = injectATabsRootContext();
