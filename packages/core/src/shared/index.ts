@@ -18,6 +18,7 @@ export { useForwardPropsEmits } from './use-forward-props-emits';
 export { useGraceArea } from './use-grace-area';
 export { useHideOthers } from './use-hide-others';
 export { useLocale } from './use-locale';
+export { useSelectionBehavior } from './use-selection-behavior';
 export { useSingleOrMultipleValue } from './use-single-or-multiple-value';
 export { useSize } from './use-size';
 export { useStateMachine } from './use-state-machine';
