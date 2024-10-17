@@ -12,9 +12,12 @@ import { useForwardExpose } from '~~/shared';
 
 import { injectATagsInputItemContext } from './a-tags-input-item.vue';
 
-const props = withDefaults(defineProps<ATagsInputItemTextProps>(), {
-  as: 'span',
-});
+const props = withDefaults(
+  defineProps<ATagsInputItemTextProps>(),
+  {
+    as: 'span',
+  },
+);
 
 const itemContext = injectATagsInputItemContext();
 useForwardExpose();

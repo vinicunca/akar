@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot } from '..'
-import { Icon } from '@iconify/vue'
+import { Icon } from '@iconify/vue';
+import { ref } from 'vue';
+
+import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot } from '..';
 
 export interface TestProps {
-  addOnTab?: boolean
-  addOnBlur?: boolean
+  addOnBlur?: boolean;
+  addOnTab?: boolean;
 }
 
-withDefaults(defineProps<TestProps>(), {
-  addOnBlur: false,
-  addOnTab: false,
-})
+withDefaults(
+  defineProps<TestProps>(),
+  {
+    addOnBlur: false,
+    addOnTab: false,
+  },
+);
 
-const modelValue = ref(['Test'])
+const modelValue = ref(['Test']);
 </script>
 
 <template>
@@ -21,13 +25,13 @@ const modelValue = ref(['Test'])
     v-model="modelValue"
     :add-on-blur="addOnBlur"
     :add-on-tab="addOnTab"
-    class="flex gap-2 items-center border p-2 rounded-lg bg-blackA7 w-[300px] flex-wrap border-blackA7"
+    class="w-[300px] flex flex-wrap items-center gap-2 border border-blackA7 rounded-lg bg-blackA7 p-2"
   >
     <ATagsInputItem
       v-for="item in modelValue"
       :key="item"
       :value="item"
-      class="flex items-center justify-center gap-2 bg-green8 aria-[selected=true]:bg-green9 rounded px-2 py-1"
+      class="flex items-center justify-center gap-2 rounded bg-green8 px-2 py-1 aria-[selected=true]:bg-green9"
     >
       <ATagsInputItemText class="text-sm">
         {{ item }}
@@ -39,7 +43,7 @@ const modelValue = ref(['Test'])
 
     <ATagsInputInput
       placeholder="Anything..."
-      class="focus:outline-none flex-1 rounded bg-transparent text-white placeholder:text-mauve10 px-1"
+      class="flex-1 rounded bg-transparent px-1 text-white placeholder:text-mauve10 focus:outline-none"
     />
   </ATagsInputRoot>
 </template>

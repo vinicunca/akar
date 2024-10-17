@@ -29,12 +29,15 @@ import { APresence } from '~~/a-presence';
 
 import AToastRootImpl from './a-toast-root-impl.vue';
 
-const props = withDefaults(defineProps<AToastRootProps>(), {
-  type: 'foreground',
-  open: undefined,
-  defaultOpen: true,
-  as: 'li',
-});
+const props = withDefaults(
+  defineProps<AToastRootProps>(),
+  {
+    type: 'foreground',
+    open: undefined,
+    defaultOpen: true,
+    as: 'li',
+  },
+);
 
 const emits = defineEmits<AToastRootEmits>();
 

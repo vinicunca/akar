@@ -20,9 +20,12 @@ import { isValueEqualOrExist, useForwardExpose } from '~~/shared';
 
 import { injectAToggleGroupRootContext } from './a-toggle-group-root.vue';
 
-const props = withDefaults(defineProps<AToggleGroupItemProps>(), {
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<AToggleGroupItemProps>(),
+  {
+    as: 'button',
+  },
+);
 
 const rootContext = injectAToggleGroupRootContext();
 const disabled = computed(() => rootContext.disabled?.value || props.disabled);
