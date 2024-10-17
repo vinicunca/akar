@@ -45,3 +45,26 @@ export function findValuesBetween<T>(
 
   return array.slice(minIndex, maxIndex + 1);
 }
+
+/**
+ * The function `areEqual` compares two arrays and returns true if they are equal in length and have
+ * the same elements at corresponding indexes.
+ * @param arrayA - An array of any type of elements.
+ * @param arrayB - It looks like you haven't provided the value for `arrayB`. Could you please
+ * provide the arrayB value so that I can assist you further?
+ * @returns The function `areEqual` is returning a boolean value, either `true` if the two input arrays
+ * `arrayA` and `arrayB` are equal, or `false` if they are not equal.
+ */
+export function areArrayEqual(arrayA: Array<any>, arrayB: Array<any>): boolean {
+  if (arrayA.length !== arrayB.length) {
+    return false;
+  }
+
+  for (let index = 0; index < arrayA.length; index++) {
+    if (arrayA[index] !== arrayB[index]) {
+      return false;
+    }
+  }
+
+  return true;
+}
