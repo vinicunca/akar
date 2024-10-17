@@ -66,6 +66,7 @@ export function getTabbableCandidates(container: HTMLElement) {
         : NodeFilter.FILTER_SKIP;
     },
   });
+
   while (walker.nextNode()) {
     nodes.push(walker.currentNode as HTMLElement);
   }

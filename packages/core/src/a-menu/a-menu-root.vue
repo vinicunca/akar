@@ -73,7 +73,11 @@ const emits = defineEmits<AMenuEmits>();
 const { modal, dir: propDir } = toRefs(props);
 const dir = useDirection(propDir);
 
-const open = useVModel(props, 'open', emits);
+const open = useVModel(
+  props,
+  'open',
+  emits,
+);
 
 const content = ref<HTMLElement>();
 const isUsingKeyboardRef = useIsUsingKeyboard();

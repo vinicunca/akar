@@ -47,7 +47,11 @@ defineSlots<{
   }) => any;
 }>();
 
-const modelValue = useVModel(props, 'modelValue', emits);
+const modelValue = useVModel(
+  props,
+  'modelValue',
+  emits,
+);
 
 provideAMenuRadioGroupContext({
   modelValue,

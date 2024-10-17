@@ -17,7 +17,10 @@ const props = withDefaults(
   },
 );
 
-const open = useVModel(props, 'open');
+const open = useVModel(
+  props,
+  'open',
+);
 </script>
 
 <template>

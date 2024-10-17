@@ -1,5 +1,7 @@
 import type { Ref } from 'vue';
 
+import { isFunction } from '@vinicunca/perkakas';
+
 import type { Direction, ResizeEvent } from './types';
 
 import { getResizeEventCoordinates } from './events';
@@ -32,7 +34,7 @@ export const EXCEEDED_VERTICAL_MIN = 0b0100;
 export const EXCEEDED_VERTICAL_MAX = 0b1000;
 
 function getInputType(): 'coarse' | 'fine' | undefined {
-  if (typeof matchMedia === 'function') {
+  if (isFunction(matchMedia)) {
     return matchMedia('(pointer:coarse)').matches ? 'coarse' : 'fine';
   }
 }
@@ -264,11 +266,11 @@ function updateCursor() {
   });
 
   if (intersectsHorizontal && intersectsVertical) {
-    setGlobalCursorStyle('intersection', constraintFlags);
+    setGlobalCursorStyle({ state: 'intersection', constraintFlags });
   } else if (intersectsHorizontal) {
-    setGlobalCursorStyle('horizontal', constraintFlags);
+    setGlobalCursorStyle({ state: 'horizontal', constraintFlags });
   } else if (intersectsVertical) {
-    setGlobalCursorStyle('vertical', constraintFlags);
+    setGlobalCursorStyle({ state: 'vertical', constraintFlags });
   } else {
     resetGlobalCursorStyle();
   }

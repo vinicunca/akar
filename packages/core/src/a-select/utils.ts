@@ -1,4 +1,4 @@
-import { isDeepEqual, isString, KEY_CODES } from '@vinicunca/perkakas';
+import { isDeepEqual, isFunction, isString, KEY_CODES } from '@vinicunca/perkakas';
 
 export const OPEN_KEYS = [' ', KEY_CODES.ENTER, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN];
 export const SELECTION_KEYS = [' ', KEY_CODES.ENTER];
@@ -37,11 +37,11 @@ export function compare<T>(
     return value === currentValue;
   }
 
-  if (typeof comparator === 'function') {
+  if (isFunction(comparator)) {
     return comparator(value, currentValue);
   }
 
-  if (typeof comparator === 'string') {
+  if (isString(comparator)) {
     return value?.[comparator as keyof T] === currentValue?.[comparator as keyof T];
   }
 

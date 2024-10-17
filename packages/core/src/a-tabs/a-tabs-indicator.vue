@@ -1,4 +1,6 @@
 <script lang="ts">
+import { isNumber } from '@vinicunca/perkakas';
+
 import type { APrimitiveProps } from '~~/a-primitive';
 
 export interface ATabsIndicatorProps extends APrimitiveProps {}
@@ -62,7 +64,7 @@ function updateIndicatorStyle() {
 
 <template>
   <APrimitive
-    v-if="typeof indicatorStyle.size === 'number'"
+    v-if="isNumber(indicatorStyle.size)"
     v-bind="props"
     :style="{
       '--akar-tabs-indicator-size': `${indicatorStyle.size}px`,

@@ -9,7 +9,10 @@ const props = defineProps<{
   open: boolean;
 }>();
 
-const open = useVModel(props, 'open');
+const open = useVModel(
+  props,
+  'open',
+);
 </script>
 
 <template>
