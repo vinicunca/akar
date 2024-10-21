@@ -205,7 +205,7 @@ function handleKeyDown(event: KeyboardEvent) {
   }
 
   // prevent "Space" taken account into handleTypeahead
-  if (event.code === 'Space') {
+  if (event.key === KEY_CODES.SPACE) {
     return;
   }
 

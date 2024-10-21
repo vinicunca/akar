@@ -20,6 +20,11 @@ export default defineConfig({
     globals: true,
     exclude: ['**/node_modules/**'],
     include: ['./**/*.spec.ts'],
+    coverage: {
+      include: ['src/**'],
+      exclude: ['**/index.ts'],
+    },
+    globalSetup: './vitest.global.ts',
     setupFiles: './vitest.setup.ts',
     server: {
       deps: {
@@ -30,10 +35,6 @@ export default defineConfig({
       jsdom: {
         resources: 'usable',
       },
-    },
-    coverage: {
-      include: ['src/**'],
-      exclude: ['**/index.ts'],
     },
   },
 });

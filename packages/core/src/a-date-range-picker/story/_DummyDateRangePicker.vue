@@ -100,7 +100,7 @@ const forwarded = useForwardPropsEmits(props, emits)
             class="inline-flex items-center cursor-pointer text-black justify-center rounded-md bg-transparent w-8 h-8 hover:bg-green10 hover:text-white active:scale-98 active:transition-all focus:shadow-[0_0_0_2px] focus:shadow-black"
           >
             <Icon
-              icon="radix-icons:chevron-left"
+              icon="i-radix-icons:chevron-left"
               class="w-5 h-5"
             />
           </DateRangePickerPrev>
@@ -110,7 +110,7 @@ const forwarded = useForwardPropsEmits(props, emits)
             class="inline-flex items-center cursor-pointer text-black justify-center rounded-md bg-transparent w-8 h-8 hover:bg-green10 hover:text-white active:scale-98 active:transition-all focus:shadow-[0_0_0_2px] focus:shadow-black"
           >
             <Icon
-              icon="radix-icons:chevron-right"
+              icon="i-radix-icons:chevron-right"
               class="w-5 h-5"
             />
           </DateRangePickerNext>

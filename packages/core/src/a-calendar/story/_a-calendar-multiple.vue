@@ -1,64 +1,68 @@
 <script lang="ts" setup>
-import type { DateValue } from '@internationalized/date'
-import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot, type CalendarRootProps } from '..'
+import type { DateValue } from '@internationalized/date';
 
-const props = defineProps<{ calendarProps?: CalendarRootProps, emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>()
+import { ACalendarCell, ACalendarCellTrigger, ACalendarGrid, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot, type ACalendarRootProps } from '..';
+
+const props = defineProps<{
+  calendarProps?: ACalendarRootProps;
+  emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void };
+}>();
 </script>
 
 <template>
-  <CalendarRoot
+  <ACalendarRoot
     v-slot="{ weekDays, grid }"
     v-bind="props.calendarProps"
     data-testid="calendar"
     v-on="{ 'update:modelValue': props.emits?.['onUpdate:modelValue'] }"
   >
-    <CalendarHeader data-testid="header">
-      <CalendarPrev
+    <ACalendarHeader data-testid="header">
+      <ACalendarPrev
         data-testid="prev-button"
       />
-      <CalendarHeading data-testid="heading" />
-      <CalendarNext
+      <ACalendarHeading data-testid="heading" />
+      <ACalendarNext
         data-testid="next-button"
       />
-    </CalendarHeader>
+    </ACalendarHeader>
 
-    <CalendarGrid
+    <ACalendarGrid
       v-for="month in grid"
       :key="month.value.toString()"
       :data-testid="`grid-${month.value.month}`"
     >
-      <CalendarGridHead :data-testid="`grid-head-${month.value.month}`">
-        <CalendarGridRow>
-          <CalendarHeadCell
+      <ACalendarGridHead :data-testid="`grid-head-${month.value.month}`">
+        <ACalendarGridRow>
+          <ACalendarHeadCell
             v-for="(day, i) in weekDays"
             :key="day"
             :data-testid="`weekday-${month.value.month}-${i}`"
           >
             {{ day }}
-          </CalendarHeadCell>
-        </CalendarGridRow>
-      </CalendarGridHead>
-      <CalendarGridBody :data-testid="`grid-body-${month.value.month}`">
-        <CalendarGridRow
+          </ACalendarHeadCell>
+        </ACalendarGridRow>
+      </ACalendarGridHead>
+      <ACalendarGridBody :data-testid="`grid-body-${month.value.month}`">
+        <ACalendarGridRow
           v-for="(weekDates, index) in month.rows"
           :key="`weekDate-${index}`"
           data-week
           :data-testid="`grid-row-${month.value.month}-${index}`"
         >
-          <CalendarCell
+          <ACalendarCell
             v-for="(weekDate, d) in weekDates"
             :key="weekDate.toString()"
             :data-testid="`cell-${weekDate.month}-${d}`"
             :date="weekDate"
           >
-            <CalendarCellTrigger
+            <ACalendarCellTrigger
               :day="weekDate"
               :month="month.value"
               :data-testid="`date-${weekDate.month}-${weekDate.day}`"
             />
-          </CalendarCell>
-        </CalendarGridRow>
-      </CalendarGridBody>
-    </CalendarGrid>
-  </CalendarRoot>
+          </ACalendarCell>
+        </ACalendarGridRow>
+      </ACalendarGridBody>
+    </ACalendarGrid>
+  </ACalendarRoot>
 </template>

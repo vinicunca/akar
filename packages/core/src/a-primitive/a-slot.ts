@@ -41,7 +41,7 @@ export const APrimitiveSlot = defineComponent({
 
       /**
        * Explicitly override props starting with `on`.
-       *  It seems cloneVNode from Vue doesn't like overriding `onXXX` props.
+       * It seems cloneVNode from Vue doesn't like overriding `onXXX` props.
        * So we have to do it manually.
        */
       // eslint-disable-next-line no-restricted-syntax

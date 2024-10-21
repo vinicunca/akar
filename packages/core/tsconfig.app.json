@@ -17,7 +17,8 @@
     "resolveJsonModule": true,
     "types": [
       "node",
-      "jsdom"
+      "jsdom",
+      "@testing-library/jest-dom"
     ],
     "strict": true,
     "declaration": false,

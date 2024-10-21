@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import Calendar from './_dummy-calendar.vue'
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate } from '@internationalized/date';
 
-const defaultValue = new CalendarDate(2024, 2, 20)
+import ACalendar from './_dummy-calendar.vue';
+
+const defaultValue = new CalendarDate(2024, 2, 20);
 </script>
 
 <template>
@@ -11,14 +12,14 @@ const defaultValue = new CalendarDate(2024, 2, 20)
     :layout="{ type: 'grid', width: '100%', iframe: false }"
   >
     <Variant title="2 months">
-      <Calendar
+      <ACalendar
         :default-value="defaultValue"
         :number-of-months="2"
       />
     </Variant>
 
     <Variant title="2 months (Paged navigation)">
-      <Calendar
+      <ACalendar
         :default-value="defaultValue"
         :number-of-months="2"
         paged-navigation
@@ -26,14 +27,14 @@ const defaultValue = new CalendarDate(2024, 2, 20)
     </Variant>
 
     <Variant title="3 months">
-      <Calendar
+      <ACalendar
         :default-value="defaultValue"
         :number-of-months="3"
       />
     </Variant>
 
     <Variant title="3 months (Paged navigation)">
-      <Calendar
+      <ACalendar
         :default-value="defaultValue"
         :number-of-months="3"
         paged-navigation
@@ -41,7 +42,7 @@ const defaultValue = new CalendarDate(2024, 2, 20)
     </Variant>
 
     <Variant title="3 months (Fixed week)">
-      <Calendar
+      <ACalendar
         :default-value="defaultValue"
         :number-of-months="3"
         fixed-weeks

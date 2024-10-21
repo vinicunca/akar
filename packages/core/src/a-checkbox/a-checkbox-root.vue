@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 
-import { isDeepEqual } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 
 import type { APrimitiveProps } from '~~/a-primitive';
@@ -44,6 +43,8 @@ export const [
 </script>
 
 <script setup lang="ts">
+// import { isDeepEqual } from '@vinicunca/perkakas';
+import isEqual from 'fast-deep-equal';
 import { computed } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
@@ -107,7 +108,7 @@ function handleClick() {
     const modelValueArray = [...(checkboxGroupContext.modelValue.value || [])];
 
     if (isValueEqualOrExist(modelValueArray, props.value)) {
-      const index = modelValueArray.findIndex((i) => isDeepEqual(i, props.value));
+      const index = modelValueArray.findIndex((i) => isEqual(i, props.value));
       modelValueArray.splice(index, 1);
     } else {
       modelValueArray.push(props.value);

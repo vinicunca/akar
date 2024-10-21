@@ -117,7 +117,7 @@ function handleArrowKey(event: KeyboardEvent) {
   const indexIncrementation = 7;
   const sign = rootContext.dir.value === 'rtl' ? -1 : 1;
 
-  switch (event.code) {
+  switch (event.key) {
     case KEY_CODES.ARROW_RIGHT:
       newIndex += sign;
       break;

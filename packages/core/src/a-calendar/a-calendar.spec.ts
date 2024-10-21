@@ -1,8 +1,11 @@
+/* eslint-disable no-await-in-loop */
 import { CalendarDate, CalendarDateTime, type DateValue, toZoned } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+
+import { useTestKeyboard } from '~~/test/use-test-keyboard';
 
 import type { ACalendarRootProps } from './a-calendar-root.vue';
 
@@ -19,7 +22,12 @@ const longWeekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'F
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-function setup(props: { calendarProps?: ACalendarRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } } = {}) {
+const kbd = useTestKeyboard();
+
+function setup(props: {
+  calendarProps?: ACalendarRootProps;
+  emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void };
+} = {}) {
   const user = userEvent.setup();
   const returned = render(ACalendar, { props });
   const calendar = returned.getByTestId('calendar');
@@ -28,9 +36,18 @@ function setup(props: { calendarProps?: ACalendarRootProps; emits?: { 'onUpdate:
   return { ...returned, user, calendar };
 }
 
-function setupMulti(props: { calendarProps?: ACalendarRootProps; emits?: { 'onUpdate:modelValue'?: (data: Array<DateValue>) => void } } = { }) {
+function setupMulti(props: {
+  calendarProps?: ACalendarRootProps;
+  emits?: { 'onUpdate:modelValue'?: (data: Array<DateValue>) => void };
+} = { }) {
   const user = userEvent.setup();
-  const returned = render(ACalendarMultiple, { props: { ...props, multiple: true } });
+  const returned = render(ACalendarMultiple, {
+    props: {
+      ...props,
+      // @ts-expect-error not sure why
+      multiple: true,
+    },
+  });
   const calendar = returned.getByTestId('calendar');
   expect(calendar).toBeVisible();
   return { ...returned, user, calendar };
@@ -146,7 +163,10 @@ describe('calendar', async () => {
   });
 
   it('allows dates to be deselected by clicking the selected date', async () => {
-    const { user, calendar, rerender } = setup({ calendarProps: { modelValue: calendarDate }, emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ modelValue: data }) } });
+    const { user, calendar, rerender } = setup({
+      calendarProps: { modelValue: calendarDate },
+      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ modelValue: data }) },
+    });
 
     const selectedDay = getSelectedDay(calendar);
 

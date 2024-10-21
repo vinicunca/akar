@@ -1,5 +1,5 @@
 <script lang="ts" setup generic="T">
-import { isBoolean, isNumber, isPlainObject, isString } from '@vinicunca/perkakas';
+import { isBoolean, isNumber, isObjectType, isPlainObject, isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 
 import type { AVisuallyHiddenInputBubbleProps } from './a-visually-hidden-input-bubble.vue';
@@ -19,28 +19,27 @@ const props = withDefaults(
 );
 
 const parsedValue = computed(() => {
-  // primitive value
+  // if primitive value
   if (
     isString(props.value)
     || isNumber(props.value)
     || isBoolean(props.value)
   ) {
-    return [{
-      name: props.name,
-      value: props.value,
-    }];
-  } else if (Array.isArray(props.value)) {
+    return [{ name: props.name, value: props.value }];
+  } else if (isObjectType(props.value) && Array.isArray(props.value)) {
     return props.value.flatMap((obj, index) => {
+      // if item in array is object
       if (isPlainObject(obj)) {
         return Object.entries(obj).map(([key, value]) => ({
-          name: `${props.name}[${index}][${key}]`,
+          name: `[${props.name}][${index}][${key}]`,
           value,
         }));
       } else {
-        return {
-          name: `${props.name}[${index}]`,
+        // if item in array is not object, may be primitive
+        return ({
+          name: `[${props.name}][${index}]`,
           value: obj,
-        };
+        });
       }
     });
   } else if (
@@ -48,8 +47,9 @@ const parsedValue = computed(() => {
     && isPlainObject(props.value)
     && !Array.isArray(props.value)
   ) {
-    return Object.entries(props.value).map(([key, value]) => ({
-      name: `${props.name}[${key}]`,
+    // if object value
+    return Object.entries(props.value as object).map(([key, value]) => ({
+      name: `[${props.name}][${key}]`,
       value,
     }));
   }
@@ -62,7 +62,7 @@ const parsedValue = computed(() => {
   <AVisuallyHiddenInputBubble
     v-for="parsed in parsedValue"
     :key="parsed.name"
-    v-bind="{ ...$props, ...$attrs }"
+    v-bind="{ ...props, ...$attrs }"
     :name="parsed.name"
     :value="parsed.value"
   />

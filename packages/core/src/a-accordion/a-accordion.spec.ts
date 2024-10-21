@@ -1,11 +1,12 @@
 import type { VueWrapper } from '@vue/test-utils';
 
 import { findByText, fireEvent } from '@testing-library/vue';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import AAccordion from './story/_AAccordion.vue';
+import AAccordion from './story/_a-accordion.vue';
 
 describe('given a single AAccordion', () => {
   let wrapper: VueWrapper<InstanceType<typeof AAccordion>>;

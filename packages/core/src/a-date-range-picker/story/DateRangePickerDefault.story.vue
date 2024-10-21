@@ -104,7 +104,7 @@ import { Label } from '@/Label'
                   class="inline-flex items-center cursor-pointer text-black justify-center rounded-[9px] bg-transparent w-10 h-10 hover:bg-black hover:text-white active:scale-98 active:transition-all focus:shadow-[0_0_0_2px] focus:shadow-black"
                 >
                   <Icon
-                    icon="radix-icons:chevron-left"
+                    icon="i-radix-icons:chevron-left"
                     class="w-6 h-6"
                   />
                 </DateRangePickerPrev>
@@ -114,7 +114,7 @@ import { Label } from '@/Label'
                   class="inline-flex items-center cursor-pointer text-black justify-center rounded-[9px] bg-transparent w-10 h-10 hover:bg-black hover:text-white active:scale-98 active:transition-all focus:shadow-[0_0_0_2px] focus:shadow-black"
                 >
                   <Icon
-                    icon="radix-icons:chevron-right"
+                    icon="i-radix-icons:chevron-right"
                     class="w-6 h-6"
                   />
                 </DateRangePickerNext>
