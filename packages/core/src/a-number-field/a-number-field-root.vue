@@ -108,12 +108,15 @@ const isDecreaseDisabled = computed(() => {
   return clampInputValue(modelValue.value) === min.value
     || (
       min.value
-      && !Number.isNaN(modelValue.value)
-        ? (handleDecimalOperation({
-            operator: '-',
-            value1: modelValue.value,
-            value2: step.value,
-          }) < min.value)
+      && !Number.isNaN(modelValue.value ?? Number.NaN)
+        ? (
+            handleDecimalOperation({
+              operator: '-',
+              value1: modelValue.value,
+              value2: step.value,
+            })
+            < min.value
+          )
         : false
     );
 });
@@ -122,12 +125,15 @@ const isIncreaseDisabled = computed(() => {
   return clampInputValue(modelValue.value) === max.value
     || (
       max.value
-      && !Number.isNaN(modelValue.value)
-        ? (handleDecimalOperation({
-            operator: '+',
-            value1: modelValue.value,
-            value2: step.value,
-          }) > max.value)
+      && !Number.isNaN(modelValue.value ?? Number.NaN)
+        ? (
+            handleDecimalOperation({
+              operator: '+',
+              value1: modelValue.value,
+              value2: step.value,
+            })
+            > max.value
+          )
         : false
     );
 },
@@ -190,7 +196,7 @@ const inputMode = computed<HTMLAttributes['inputmode']>(() => {
  */
 const textValueFormatter = useNumberFormatter({ locale, options: formatOptions });
 const textValue = computed(() =>
-  Number.isNaN(modelValue.value)
+  Number.isNaN(modelValue.value ?? Number.NaN)
     ? ''
     : textValueFormatter.format(modelValue.value),
 );

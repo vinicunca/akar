@@ -1,14 +1,15 @@
-import { useKbd } from '~~/shared';
-import { handleSubmit } from '@/test';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render } from '@testing-library/vue';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
+import { handleSubmit } from '~~/test';
+
 import type { ANumberFieldRootProps } from './a-number-field-root.vue';
 
-import ANumberField from './story/_ANumberField.vue';
+import ANumberField from './story/_a-number-field.vue';
 
 function setup(props?: ANumberFieldRootProps) {
   const user = userEvent.setup();
@@ -22,7 +23,6 @@ function setup(props?: ANumberFieldRootProps) {
   return { ...returned, user, root, input, label, increment, decrement };
 }
 
-const kbd = useKbd();
 describe('numberField', () => {
   it('should pass axe accessibility tests', async () => {
     const { root } = setup();
@@ -88,13 +88,13 @@ describe('numberField', () => {
   it('should increase and decrease based on keyboard navigation on input', async () => {
     const { input } = setup({ defaultValue: 0, min: 0, max: 10 });
 
-    await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
     expect(input.value).toBe('1');
-    await fireEvent.keyDown(input, { key: kbd.ARROW_DOWN });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_DOWN });
     expect(input.value).toBe('0');
-    await fireEvent.keyDown(input, { key: kbd.END });
+    await fireEvent.keyDown(input, { key: KEY_CODES.END });
     expect(input.value).toBe('10');
-    await fireEvent.keyDown(input, { key: kbd.HOME });
+    await fireEvent.keyDown(input, { key: KEY_CODES.HOME });
     expect(input.value).toBe('0');
   });
 
@@ -103,9 +103,9 @@ describe('numberField', () => {
 
     expect(root.getAttribute('data-disabled')).toBe('');
     expect(input.getAttribute('data-disabled')).toBe('');
-    await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
     expect(input.value).toBe('0');
-    await fireEvent.keyDown(input, { key: kbd.ARROW_DOWN });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_DOWN });
     expect(input.value).toBe('0');
     await userEvent.click(increment);
     expect(input.value).toBe('0');
@@ -190,11 +190,11 @@ describe('numberField', () => {
       const { input } = setup({ min: 2, step: 3 });
 
       expect(input.value).toBe('');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
       expect(input.value).toBe('2');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
       expect(input.value).toBe('5');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
       expect(input.value).toBe('8');
     });
 
@@ -202,15 +202,15 @@ describe('numberField', () => {
       const { input } = setup({ min: 2, max: 21, step: 3 });
 
       expect(input.value).toBe('');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 2
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 5
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 8
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 11
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 14
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 17
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 20
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 2
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 5
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 8
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 11
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 14
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 17
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 20
       expect(input.value).toBe('20');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 20 (max)
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 20 (max)
       expect(input.value).toBe('20');
     });
   });

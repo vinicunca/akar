@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { ANumberFieldRootProps } from '..'
-import { ANumberFieldDecrement, ANumberFieldIncrement, ANumberFieldInput, ANumberFieldRoot } from '..'
-import { Icon } from '@iconify/vue'
+import type { ANumberFieldRootProps } from '..';
 
-const props = defineProps<ANumberFieldRootProps>()
+import { ANumberFieldDecrement, ANumberFieldIncrement, ANumberFieldInput, ANumberFieldRoot } from '..';
+
+const props = defineProps<ANumberFieldRootProps>();
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const props = defineProps<ANumberFieldRootProps>()
     v-bind="props"
     id="number-field"
     data-testid="root"
-    class="text-sm flex items-center border bg-blackA7 border-blackA9 rounded-md text-white"
+    class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
   >
     <label
       for="number-field"
@@ -21,17 +21,19 @@ const props = defineProps<ANumberFieldRootProps>()
       class="p-2"
       data-testid="decrement"
     >
-      <Icon icon="radix-icons:minus" />
+      <i class="i-radix-icons:minus" />
     </ANumberFieldDecrement>
+
     <ANumberFieldInput
       data-testid="input"
-      class="bg-transparent w-32 tabular-nums focus:outline-0 p-1"
+      class="w-32 bg-transparent p-1 tabular-nums focus:outline-0"
     />
+
     <ANumberFieldIncrement
       class="p-2"
       data-testid="increment"
     >
-      <Icon icon="radix-icons:plus" />
+      <i class="i-radix-icons:plus" />
     </ANumberFieldIncrement>
   </ANumberFieldRoot>
 </template>

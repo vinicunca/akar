@@ -406,6 +406,13 @@ watch(
   { immediate: true, deep: true },
 );
 
+function handleFocusOut(event: FocusEvent) {
+  const target = (event.relatedTarget || event.target) as HTMLElement | null;
+  if (highlightedElement.value && !currentElement.value.contains(target)) {
+    onLeave(event);
+  }
+}
+
 defineExpose({
   highlightedElement,
   highlightItem,
@@ -451,12 +458,7 @@ provideAListboxRootContext({
     :dir="dir"
     :data-disabled="disabled ? '' : undefined"
     @pointerleave="onLeave"
-    @focusout="(event: FocusEvent) => {
-      const target = (event.relatedTarget || event.target) as HTMLElement | null
-      if (highlightedElement && !currentElement.contains(target)) {
-        onLeave(event)
-      }
-    }"
+    @focusout="handleFocusOut"
   >
     <slot :model-value="modelValue" />
 
