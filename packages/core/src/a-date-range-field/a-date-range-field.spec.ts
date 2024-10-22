@@ -4,9 +4,13 @@ import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
+import { useTestKeyboard } from '~~/test/use-test-keyboard';
+
 import type { ADateRangeFieldRootProps } from './a-date-range-field-root.vue';
 
-import DateRangeField from './story/_DateRangeField.vue';
+import ADateRangeField from './story/_a-date-range-field.vue';
+
+const kbd = useTestKeyboard();
 
 const calendarDate = {
   start: new CalendarDate(2022, 1, 1),
@@ -24,7 +28,7 @@ const zonedDateTime = {
 
 function setup(props: { dateFieldProps?: ADateRangeFieldRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } } = {}) {
   const user = userEvent.setup();
-  const returned = render(DateRangeField, { props });
+  const returned = render(ADateRangeField, { props });
 
   const start = {
     month: returned.getByTestId('start-month'),

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { CalendarDateTime, type DateValue } from '@internationalized/date'
-import DateRangePicker from './_DummyDateRangePicker.vue'
-import { type Ref, ref } from 'vue'
+import { CalendarDateTime, type DateValue } from '@internationalized/date';
+import { type Ref, ref } from 'vue';
 
-const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new CalendarDateTime(2024, 2, 27) }
-const modelValue = ref(defaultValue) as Ref<{ start: DateValue, end: DateValue }>
+import ADateRangePicker from './_dummy-a-date-range-picker.vue';
+
+const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new CalendarDateTime(2024, 2, 27) };
+const modelValue = ref(defaultValue) as Ref<{ end: DateValue; start: DateValue }>;
 </script>
 
 <template>
@@ -13,58 +14,58 @@ const modelValue = ref(defaultValue) as Ref<{ start: DateValue, end: DateValue }
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Empty default">
-      <DateRangePicker />
+      <ADateRangePicker />
     </Variant>
 
     <Variant title="With default">
-      <DateRangePicker :default-value="defaultValue" />
+      <ADateRangePicker :default-value="defaultValue" />
     </Variant>
 
     <Variant title="Uncontrolled">
-      <DateRangePicker :default-value="defaultValue" />
+      <ADateRangePicker :default-value="defaultValue" />
     </Variant>
 
     <Variant title="Controlled">
-      <DateRangePicker v-model="modelValue" />
+      <ADateRangePicker v-model="modelValue" />
     </Variant>
 
     <Variant title="Disabled">
-      <DateRangePicker
+      <ADateRangePicker
         :default-value="defaultValue"
         disabled
       />
     </Variant>
 
     <Variant title="Prevent deselect">
-      <DateRangePicker
+      <ADateRangePicker
         :default-value="defaultValue"
         prevent-deselect
       />
     </Variant>
 
     <Variant title="Locale awareness">
-      <DateRangePicker
+      <ADateRangePicker
         :default-value="defaultValue"
         locale="de"
       />
     </Variant>
 
     <Variant title="Fixed weeks">
-      <DateRangePicker
+      <ADateRangePicker
         :default-value="defaultValue"
         fixed-weeks
       />
     </Variant>
 
     <Variant title="Multiple months">
-      <DateRangePicker
+      <ADateRangePicker
         :default-value="defaultValue"
         :number-of-months="2"
       />
     </Variant>
 
     <Variant title="Multiple months (Paged navigation)">
-      <DateRangePicker
+      <ADateRangePicker
         :default-value="defaultValue"
         :number-of-months="2"
         paged-navigation

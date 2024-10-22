@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import DatePicker from './_DummyDatePicker.vue'
+import ADateRangePicker from './_dummy-a-date-range-picker.vue';
 </script>
 
 <template>
   <Story
-    title="Date Picker/Granular"
+    title="Date Range Picker/Granular"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Granular (second)">
-      <DatePicker granularity="second" />
+      <ADateRangePicker granularity="second" />
     </Variant>
 
     <Variant title="Granular (minute)">
-      <DatePicker granularity="minute" />
+      <ADateRangePicker granularity="minute" />
     </Variant>
 
     <Variant title="Granular (hour)">
-      <DatePicker granularity="hour" />
+      <ADateRangePicker granularity="hour" />
     </Variant>
 
     <Variant title="Granular (day)">
-      <DatePicker granularity="day" />
+      <ADateRangePicker granularity="day" />
     </Variant>
   </Story>
 </template>

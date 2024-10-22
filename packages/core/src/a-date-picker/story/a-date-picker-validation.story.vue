@@ -1,50 +1,50 @@
 <script setup lang="ts">
-import DateRangePicker from './_DummyDateRangePicker.vue'
+import { CalendarDate, type DateValue, isWeekend } from '@internationalized/date';
 
-import { CalendarDateTime, type DateValue, isWeekend } from '@internationalized/date'
+import DatePicker from './_dummy-a-date-picker.vue';
 
-const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new CalendarDateTime(2024, 2, 27) }
+const defaultValue = new CalendarDate(2024, 2, 20);
 
-const minValue = new CalendarDateTime(2024, 2, 14)
-const maxValue = new CalendarDateTime(2024, 2, 28)
+const minValue = new CalendarDate(2024, 2, 14);
+const maxValue = new CalendarDate(2024, 2, 28);
 
 function isDateUnavailable(date: DateValue) {
-  return isWeekend(date, 'en')
+  return isWeekend(date, 'en');
 }
 
 function isDateDisabled(date: DateValue) {
-  return date.day <= 12
+  return date.day <= 12;
 }
 </script>
 
 <template>
   <Story
-    title="Date Range Picker/Validation"
+    title="Date Picker/Validation"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Min date">
-      <DateRangePicker
+      <DatePicker
         :default-value="defaultValue"
         :min-value="minValue"
       />
     </Variant>
 
     <Variant title="Max date">
-      <DateRangePicker
+      <DatePicker
         :default-value="defaultValue"
         :max-value="maxValue"
       />
     </Variant>
 
     <Variant title="Unavailable">
-      <DateRangePicker
+      <DatePicker
         :default-value="defaultValue"
         :is-date-unavailable="isDateUnavailable"
       />
     </Variant>
 
     <Variant title="Disabled">
-      <DateRangePicker
+      <DatePicker
         :default-value="defaultValue"
         :is-date-disabled="isDateDisabled"
       />

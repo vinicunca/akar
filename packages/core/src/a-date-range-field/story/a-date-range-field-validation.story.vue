@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import type { Matcher } from '~~/shared/date'
-import DateRangeField from './_DummyDateRangeField.vue'
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate } from '@internationalized/date';
 
-const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDate(2024, 2, 27) }
-const minValue = new CalendarDate(2024, 2, 15)
-const maxValue = new CalendarDate(2024, 2, 28)
+import type { DateMatcher } from '~~/date';
 
-const isFirstOrFifteenth: Matcher = (date) => {
-  return date.day === 1 || date.day === 15
-}
+import AADateRangeField from './_dummy-a-date-range-field.vue.vue';
+
+const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDate(2024, 2, 27) };
+const minValue = new CalendarDate(2024, 2, 15);
+const maxValue = new CalendarDate(2024, 2, 28);
+
+const isFirstOrFifteenth: DateMatcher = (date) => {
+  return date.day === 1 || date.day === 15;
+};
 </script>
 
 <template>
@@ -18,28 +20,28 @@ const isFirstOrFifteenth: Matcher = (date) => {
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Unavailable">
-      <DateRangeField
+      <AADateRangeField
         :default-value="defaultValue"
         :is-date-unavailable="isFirstOrFifteenth"
       />
     </Variant>
 
     <Variant title="Disabled">
-      <DateRangeField
+      <AADateRangeField
         :default-value="defaultValue"
         :is-date-disabled="isFirstOrFifteenth"
       />
     </Variant>
 
     <Variant title="Min">
-      <DateRangeField
+      <AADateRangeField
         :default-value="defaultValue"
         :min-value="minValue"
       />
     </Variant>
 
     <Variant title="Max">
-      <DateRangeField
+      <AADateRangeField
         :default-value="defaultValue"
         :max-value="maxValue"
       />

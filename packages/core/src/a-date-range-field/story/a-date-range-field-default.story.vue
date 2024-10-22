@@ -1,57 +1,57 @@
 <script setup lang="ts">
-import { DateRangeFieldInput, DateRangeFieldRoot } from '..'
+import { ADateRangeFieldInput, ADateRangeFieldRoot } from '..';
 </script>
 
 <template>
   <Story title="Date Range Field/Default">
     <Variant title="default">
-      <DateRangeFieldRoot
+      <ADateRangeFieldRoot
         id="date-field"
         v-slot="{ segments }"
-        class="flex select-none bg-white items-center rounded-lg text-center text-green10 placeholder:text-mauve5 border border-gray9 p-1 data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded-lg bg-white p-1 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments.start"
           :key="item.part"
         >
-          <DateRangeFieldInput
+          <ADateRangeFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
             type="start"
           >
             {{ item.value }}
-          </DateRangeFieldInput>
-          <DateRangeFieldInput
+          </ADateRangeFieldInput>
+          <ADateRangeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 py-1 hover:bg-grass4 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 py-1 hover:bg-grass4 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
             type="start"
           >
             {{ item.value }}
-          </DateRangeFieldInput>
+          </ADateRangeFieldInput>
         </template>
         -
         <template
           v-for="item in segments.end"
           :key="item.part"
         >
-          <DateRangeFieldInput
+          <ADateRangeFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
             type="end"
           >
             {{ item.value }}
-          </DateRangeFieldInput>
-          <DateRangeFieldInput
+          </ADateRangeFieldInput>
+          <ADateRangeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 py-1 hover:bg-grass4 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 py-1 hover:bg-grass4 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
             type="end"
           >
             {{ item.value }}
-          </DateRangeFieldInput>
+          </ADateRangeFieldInput>
         </template>
-      </DateRangeFieldRoot>
+      </ADateRangeFieldRoot>
     </Variant>
   </Story>
 </template>

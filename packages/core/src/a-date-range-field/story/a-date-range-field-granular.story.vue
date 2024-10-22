@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import DateRangeField from './_DummyDateRangeField.vue'
-import { CalendarDateTime } from '@internationalized/date'
+import { CalendarDateTime } from '@internationalized/date';
 
-const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new CalendarDateTime(2024, 2, 27) }
+import AADateRangeField from './_dummy-a-date-range-field.vue.vue';
+
+const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new CalendarDateTime(2024, 2, 27) };
 </script>
 
 <template>
@@ -11,28 +12,28 @@ const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new Calend
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Granular (second)">
-      <DateRangeField
+      <AADateRangeField
         :default-value="defaultValue"
         granularity="second"
       />
     </Variant>
 
     <Variant title="Granular (minute)">
-      <DateRangeField
+      <AADateRangeField
         :default-value="defaultValue"
         granularity="minute"
       />
     </Variant>
 
     <Variant title="Granular (hour)">
-      <DateRangeField
+      <AADateRangeField
         :default-value="defaultValue"
         granularity="hour"
       />
     </Variant>
 
     <Variant title="Granular (day)">
-      <DateRangeField
+      <AADateRangeField
         :default-value="defaultValue"
         granularity="day"
       />

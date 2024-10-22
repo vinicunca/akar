@@ -35,7 +35,7 @@ export interface AFocusScopeProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { isBrowser } from '@vinicunca/perkakas';
+import { isBrowser, KEY_CODES } from '@vinicunca/perkakas';
 import { nextTick, reactive, ref, watchEffect } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
