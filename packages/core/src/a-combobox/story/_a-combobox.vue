@@ -19,7 +19,7 @@ const open = ref(props.open);
 const query = ref('');
 const { contains } = useFilter({ sensitivity: 'base' });
 const filteredOptions = computed(() => options.filter((p) => contains({ string: p, substring: query.value })));
-const filteredVege = computed(() => vegetables.filter((p) => contains({ string: p, substring: query.value })));
+const filteredVeg = computed(() => vegetables.filter((p) => contains({ string: p, substring: query.value })));
 </script>
 
 <template>
@@ -72,7 +72,7 @@ const filteredVege = computed(() => vegetables.filter((p) => contains({ string: 
             Vegetables
           </AComboboxLabel>
           <AComboboxItem
-            v-for="(option, index) in filteredVege"
+            v-for="(option, index) in filteredVeg"
             :key="index"
             class="relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] text-grass11 leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-grass9 data-[disabled]:text-mauve8 data-[highlighted]:text-grass1 data-[highlighted]:outline-none"
             :value="option"

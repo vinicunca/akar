@@ -33,7 +33,7 @@ describe('given default DropdownMenu', () => {
       await wrapper.find('button').trigger('click');
     });
 
-    it.only('should pass axe accessibility tests', async () => {
+    it('should pass axe accessibility tests', async () => {
       expect(await axe(wrapper.element)).toHaveNoViolations();
     });
 

@@ -1,6 +1,6 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 
-import { sleep } from '@vinicunca/perkakas';
+import { KEY_CODES, sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -110,7 +110,10 @@ describe('given default Combobox', () => {
 
         it('should render the icon', () => {
           const selection = items[1];
-          expect(selection.html()).toContain('svg');
+          const iconElement = selection.find('i');
+
+          expect(iconElement.exists()).toBe(true);
+          expect(iconElement.classes()).toContain('i-radix-icons:check');
         });
       });
     });

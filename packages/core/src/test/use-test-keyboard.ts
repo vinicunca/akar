@@ -9,7 +9,6 @@ export function useTestKeyboard() {
       return acc;
     }, {} as Record<KbdKeys, string>);
 
-  // console.log('🚀 ~ useTestKeyboard ~ initTestKbd:', initTestKbd);
   return {
     ...initTestKbd,
     SHIFT_TAB: `{Shift>}{${KEY_CODES.TAB}}`,
