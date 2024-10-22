@@ -14,6 +14,13 @@ export function transform(items: Array<number | string>): Pages {
   });
 }
 
+function range_(start: number, end: number): Array<number> {
+  /**
+   * Perkakas's range is inclusive, so we need to add 1 to the end
+   */
+  return range(start, end + 1);
+}
+
 const ELLIPSIS = 'ellipsis';
 
 export function getRange(
@@ -62,35 +69,35 @@ export function getRange(
       && Math.abs(lastPageIndex - rightSiblingIndex) > 2;
 
     if (!showLeftEllipsis && showRightEllipsis) {
-      const leftRange = range(1, itemCount);
+      const leftRange = range_(1, itemCount);
 
       return [...leftRange, ELLIPSIS, lastPageIndex];
     }
 
     if (showLeftEllipsis && !showRightEllipsis) {
-      const rightRange = range(lastPageIndex - itemCount + 1, lastPageIndex);
+      const rightRange = range_(lastPageIndex - itemCount + 1, lastPageIndex);
 
       return [firstPageIndex, ELLIPSIS, ...rightRange];
     }
 
     if (showLeftEllipsis && showRightEllipsis) {
-      const middleRange = range(leftSiblingIndex, rightSiblingIndex);
+      const middleRange = range_(leftSiblingIndex, rightSiblingIndex);
 
       return [firstPageIndex, ELLIPSIS, ...middleRange, ELLIPSIS, lastPageIndex];
     }
 
-    return range(firstPageIndex, lastPageIndex);
+    return range_(firstPageIndex, lastPageIndex);
   } else {
     const itemCount = siblingCount * 2 + 1;
 
     if (pageCount < itemCount) {
-      return range(1, lastPageIndex);
+      return range_(1, lastPageIndex);
     } else if (currentPage <= (siblingCount + 1)) {
-      return range(firstPageIndex, itemCount);
+      return range_(firstPageIndex, itemCount);
     } else if ((pageCount - currentPage) <= siblingCount) {
-      return range(pageCount - itemCount + 1, lastPageIndex);
+      return range_(pageCount - itemCount + 1, lastPageIndex);
     } else {
-      return range(leftSiblingIndex, rightSiblingIndex);
+      return range_(leftSiblingIndex, rightSiblingIndex);
     }
   }
 }

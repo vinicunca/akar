@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList, APaginationListItem, APaginationNext, APaginationPrev, APaginationRoot } from '..'
+import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList, APaginationListItem, APaginationNext, APaginationPrev, APaginationRoot } from '..';
 </script>
 
 <template>
@@ -15,7 +15,7 @@ import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList
       >
         <APaginationList
           v-slot="{ items }"
-          class="flex items-center gap-2 "
+          class="flex items-center gap-2"
         >
           <APaginationFirst />
           <APaginationPrev />
@@ -32,7 +32,7 @@ import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList
               v-else
               :key="page.type"
               :index="index"
-              class="border rounded px-4 py-2 "
+              class="border rounded px-4 py-2"
             >
               &#8230;
             </APaginationEllipsis>
