@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import RangeCalendar from './_DummyRangeCalendar.vue'
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate } from '@internationalized/date';
 
-const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDate(2024, 2, 27) }
+import ARangeCalendar from './_dummy-a-range-calendar.vue';
+
+const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDate(2024, 2, 27) };
 </script>
 
 <template>
@@ -11,14 +12,14 @@ const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDa
     :layout="{ type: 'grid', width: '100%', iframe: false }"
   >
     <Variant title="2 months">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         :number-of-months="2"
       />
     </Variant>
 
     <Variant title="2 months (Paged navigation)">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         :number-of-months="2"
         paged-navigation
@@ -26,14 +27,14 @@ const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDa
     </Variant>
 
     <Variant title="3 months">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         :number-of-months="3"
       />
     </Variant>
 
     <Variant title="3 months (Paged navigation)">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         :number-of-months="3"
         paged-navigation
@@ -41,7 +42,7 @@ const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDa
     </Variant>
 
     <Variant title="3 months (Fixed week)">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         :number-of-months="3"
         fixed-weeks

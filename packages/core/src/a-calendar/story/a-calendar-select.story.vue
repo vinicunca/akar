@@ -87,7 +87,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
               <ASelectScrollUpButton
                 class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
               >
-                <Icon icon="radix-icons:chevron-up" />
+                <i class="i-radix-icons:chevron-up" />
               </ASelectScrollUpButton>
 
               <ASelectViewport class="p-[5px]">
@@ -100,7 +100,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
                   <ASelectItemIndicator
                     class="absolute left-0 w-[25px] inline-flex items-center justify-center"
                   >
-                    <Icon icon="radix-icons:check" />
+                    <i class="i-radix-icons:check" />
                   </ASelectItemIndicator>
                   <ASelectItemText>
                     {{ option.label }}
@@ -111,7 +111,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
               <ASelectScrollDownButton
                 class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
               >
-                <Icon icon="radix-icons:chevron-down" />
+                <i class="i-radix-icons:chevron-down" />
               </ASelectScrollDownButton>
             </ASelectContent>
           </ASelectPortal>
@@ -142,7 +142,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
               <ASelectScrollUpButton
                 class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
               >
-                <Icon icon="radix-icons:chevron-up" />
+                <i class="i-radix-icons:chevron-up" />
               </ASelectScrollUpButton>
 
               <ASelectViewport class="p-[5px]">
@@ -161,7 +161,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
                     <ASelectItemIndicator
                       class="absolute left-0 w-[25px] inline-flex items-center justify-center"
                     >
-                      <Icon icon="radix-icons:check" />
+                      <i class="i-radix-icons:check" />
                     </ASelectItemIndicator>
                     <ASelectItemText>
                       {{ option!.name }}
@@ -184,7 +184,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
                     <ASelectItemIndicator
                       class="absolute left-0 w-[25px] inline-flex items-center justify-center"
                     >
-                      <Icon icon="radix-icons:check" />
+                      <i class="i-radix-icons:check" />
                     </ASelectItemIndicator>
                     <ASelectItemText>
                       {{ option.name }}
@@ -196,7 +196,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
               <ASelectScrollDownButton
                 class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
               >
-                <Icon icon="radix-icons:chevron-down" />
+                <i class="i-radix-icons:chevron-down" />
               </ASelectScrollDownButton>
             </ASelectContent>
           </ASelectPortal>

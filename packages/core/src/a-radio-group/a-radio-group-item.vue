@@ -24,14 +24,14 @@ export const [
 </script>
 
 <script setup lang="ts">
-import { isDeepEqual } from '@vinicunca/perkakas';
+import { isDeepEqual, isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { useEventListener } from '@vueuse/core';
 import { computed, ref } from 'vue';
 
 import { ARovingFocusItem } from '~~/a-roving-focus';
 import { useForwardExpose } from '~~/shared';
 
-import Radio from './a-radio.vue';
+import ARadio from './a-radio.vue';
 import { injectARadioGroupRootContext } from './a-radio-group-root.vue';
 
 defineOptions({
@@ -64,7 +64,7 @@ const ARROW_KEYS = [KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_LE
 useEventListener(
   'keydown',
   (event) => {
-    if (ARROW_KEYS.includes(event.key)) {
+    if (isIncludedIn(event.key, ARROW_KEYS)) {
       isArrowKeyPressed.value = true;
     }
   },
@@ -99,7 +99,7 @@ function handleFocus() {
     :focusable="!disabled"
     :active="checked"
   >
-    <Radio
+    <ARadio
       v-bind="{ ...$attrs, ...props }"
       :ref="forwardRef"
       :checked="checked"
@@ -111,6 +111,6 @@ function handleFocus() {
       @focus="handleFocus"
     >
       <slot />
-    </Radio>
+    </ARadio>
   </ARovingFocusItem>
 </template>

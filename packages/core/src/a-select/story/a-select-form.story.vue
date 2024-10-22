@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { ref } from 'vue'
+import { ref } from 'vue';
+
 import {
   ASelectContent,
   ASelectGroup,
@@ -16,16 +16,16 @@ import {
   ASelectTrigger,
   ASelectValue,
   ASelectViewport,
-} from '..'
+} from '..';
 
-const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
-const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
+const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'];
 
-const data = ref({})
+const data = ref({});
 
 function handleChange(event: any) {
-  const formData = new FormData(event.target)
-  data.value = Object.fromEntries((formData as any).entries())
+  const formData = new FormData(event.target);
+  data.value = Object.fromEntries((formData as any).entries());
 }
 </script>
 
@@ -37,7 +37,7 @@ function handleChange(event: any) {
     <Variant title="default">
       <div class="flex flex-col items-center">
         <form
-          class="p-12 flex flex-col items-center"
+          class="flex flex-col items-center p-12"
           @submit.prevent="handleChange"
         >
           <label for="fruit">Fruit</label>
@@ -46,31 +46,30 @@ function handleChange(event: any) {
             default-value="Apple"
           >
             <ASelectTrigger
-              class="min-w-[160px] inline-flex items-center justify-between rounded px-[15px] text-[13px] leading-none h-[35px] gap-[5px] bg-white text-violet11 shadow-[0_2px_10px] shadow-black/10 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-violet9 outline-none"
+              class="h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] text-violet11 leading-none shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-mauve3 data-[placeholder]:text-violet9 focus:shadow-[0_0_0_2px] focus:shadow-black"
               aria-label="Customise options"
             >
               <ASelectValue placeholder="Please select a fruit" />
-              <Icon
-                icon="radix-icons:chevron-down"
-                class="h-4 w-4"
+              <i
+                class="i-radix-icons:chevron-down h-4 w-4"
               />
             </ASelectTrigger>
 
             <ASelectPortal>
               <ASelectContent
-                class="min-w-[160px] bg-white overflow-hidden rounded shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+                class="will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade min-w-[160px] overflow-hidden rounded bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]"
                 :side-offset="5"
                 position="popper"
               >
                 <ASelectScrollUpButton
-                  class="flex items-center justify-center h-[25px] bg-white text-violet11 cursor-default"
+                  class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
                 >
-                  <Icon icon="radix-icons:chevron-up" />
+                  <i class="i-radix-icons:chevron-up" />
                 </ASelectScrollUpButton>
 
                 <ASelectViewport class="p-[5px]">
                   <ASelectLabel
-                    class="px-[25px] text-xs leading-[25px] text-mauve11"
+                    class="px-[25px] text-xs text-mauve11 leading-[25px]"
                   >
                     Fruits
                   </ASelectLabel>
@@ -78,22 +77,22 @@ function handleChange(event: any) {
                     <ASelectItem
                       v-for="(option, index) in options"
                       :key="index"
-                      class="text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] pr-[35px] pl-[25px] relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                      class="relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] text-violet11 leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 data-[highlighted]:outline-none"
                       :value="option"
                     >
                       <ASelectItemIndicator
                         class="absolute left-0 w-[25px] inline-flex items-center justify-center"
                       >
-                        <Icon icon="radix-icons:check" />
+                        <i class="i-radix-icons:check" />
                       </ASelectItemIndicator>
                       <ASelectItemText>
                         {{ option }}
                       </ASelectItemText>
                     </ASelectItem>
                   </ASelectGroup>
-                  <ASelectSeparator class="h-[1px] bg-violet6 m-[5px]" />
+                  <ASelectSeparator class="m-[5px] h-[1px] bg-violet6" />
                   <ASelectLabel
-                    class="px-[25px] text-xs leading-[25px] text-mauve11"
+                    class="px-[25px] text-xs text-mauve11 leading-[25px]"
                   >
                     Vegetables
                   </ASelectLabel>
@@ -101,14 +100,14 @@ function handleChange(event: any) {
                     <ASelectItem
                       v-for="(option, index) in vegetables"
                       :key="index"
-                      class="text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] pr-[35px] pl-[25px] relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                      class="relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] text-violet11 leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 data-[highlighted]:outline-none"
                       :value="option"
                       :disabled="option === 'Courgette'"
                     >
                       <ASelectItemIndicator
                         class="absolute left-0 w-[25px] inline-flex items-center justify-center"
                       >
-                        <Icon icon="radix-icons:check" />
+                        <i class="i-radix-icons:check" />
                       </ASelectItemIndicator>
                       <ASelectItemText>
                         {{ option }}
@@ -118,9 +117,9 @@ function handleChange(event: any) {
                 </ASelectViewport>
 
                 <ASelectScrollDownButton
-                  class="flex items-center justify-center h-[25px] bg-white text-violet11 cursor-default"
+                  class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
                 >
-                  <Icon icon="radix-icons:chevron-down" />
+                  <i class="i-radix-icons:chevron-down" />
                 </ASelectScrollDownButton>
               </ASelectContent>
             </ASelectPortal>
@@ -131,7 +130,7 @@ function handleChange(event: any) {
           </button>
         </form>
 
-        <pre class="text-left whitespace-nowrap">{{ data }}</pre>
+        <pre class="whitespace-nowrap text-left">{{ data }}</pre>
       </div>
     </Variant>
   </Story>

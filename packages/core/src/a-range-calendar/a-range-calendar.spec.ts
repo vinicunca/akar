@@ -5,18 +5,18 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import { useTestKbd } from '~~/shared';
+import { useTestKeyboard } from '~~/test/use-test-keyboard';
 
 import type { ARangeCalendarRootProps } from './a-range-calendar-root.vue';
 
-import RangeCalendar from './story/_RangeCalendar.vue';
+import RangeCalendar from './story/_a-range-calendar.vue';
 
 it('should pass axe accessibility tests', async () => {
   const wrapper = mount(RangeCalendar);
   expect(await axe(wrapper.element)).toHaveNoViolations();
 });
 
-const kbd = useTestKbd();
+const kbd = useTestKeyboard();
 
 const calendarDateRange = {
   start: new CalendarDate(1980, 1, 20),

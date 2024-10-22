@@ -78,7 +78,7 @@ watch(values, () => {
                 <ComboboxItemIndicator
                   class="absolute left-0 w-[25px] inline-flex items-center justify-center"
                 >
-                  <Icon icon="radix-icons:check" />
+                  <i class="i-radix-icons:check" />
                 </ComboboxItemIndicator>
                 <span>
                   {{ option }}

@@ -1,11 +1,12 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 
 import userEvent from '@testing-library/user-event';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import APinInput from './story/_APinInput.vue';
+import APinInput from './story/_a-pin-input.vue';
 
 describe('given default APinInput', () => {
   // @ts-expect-error aXe throwing error complaining getComputedStyle

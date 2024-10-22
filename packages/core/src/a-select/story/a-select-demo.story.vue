@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { ref } from 'vue'
 import {
   ASelectContent,
@@ -17,7 +16,7 @@ import {
   ASelectValue,
   ASelectViewport,
 } from '..'
-import ASelectItemWrapper from './_ASelectItem.vue'
+import ASelectItemWrapper from './_a-select-item.vue'
 
 const fruit = ref(['Apple'])
 
@@ -45,9 +44,8 @@ const POSITION = ['item-aligned', 'popper'] as const
             aria-label="Customise options"
           >
             <ASelectValue placeholder="Please select a fruit" />
-            <Icon
-              icon="radix-icons:chevron-down"
-              class="h-4 w-4"
+            <i
+              class="i-radix-icons:chevron-down h-4 w-4"
             />
           </ASelectTrigger>
 
@@ -61,7 +59,7 @@ const POSITION = ['item-aligned', 'popper'] as const
                 <ASelectScrollUpButton
                   class="flex items-center justify-center h-[25px] bg-white text-violet11 cursor-default"
                 >
-                  <Icon icon="radix-icons:chevron-up" />
+                  <i class="i-radix-icons:chevron-up" />
                 </ASelectScrollUpButton>
 
                 <ASelectViewport class="p-[5px]">
@@ -90,7 +88,7 @@ const POSITION = ['item-aligned', 'popper'] as const
                       <ASelectItemIndicator
                         class="absolute left-0 w-[25px] inline-flex items-center justify-center"
                       >
-                        <Icon icon="radix-icons:check" />
+                        <i class="i-radix-icons:check" />
                       </ASelectItemIndicator>
                       <ASelectItemText>
                         {{ option }}
@@ -102,7 +100,7 @@ const POSITION = ['item-aligned', 'popper'] as const
                 <ASelectScrollDownButton
                   class="flex items-center justify-center h-[25px] bg-white text-violet11 cursor-default"
                 >
-                  <Icon icon="radix-icons:chevron-down" />
+                  <i class="i-radix-icons:chevron-down" />
                 </ASelectScrollDownButton>
               </ASelectContent>
             </Transition>

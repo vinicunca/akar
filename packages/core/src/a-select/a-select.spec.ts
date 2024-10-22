@@ -1,13 +1,14 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 
-import { handleSubmit } from '@/test';
 import { fireEvent } from '@testing-library/vue';
 import { mount } from '@vue/test-utils';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
 
-import ASelect from './story/_ASelectTest.vue';
+import { handleSubmit } from '~~/test';
+
+import ASelect from './story/_a-select-test.vue';
 
 beforeAll(() => {
   window.HTMLElement.prototype.releasePointerCapture = vi.fn();
@@ -93,7 +94,10 @@ describe('given default ASelect', () => {
 
         it('should render the icon', () => {
           const selection = wrapper.findAll('[role=option]')[1];
-          expect(selection.html()).toContain('svg');
+          const iconElement = selection.find('i');
+
+          expect(iconElement.exists()).toBe(true);
+          expect(iconElement.classes()).toContain('i-radix-icons:check');
         });
       });
     });
@@ -170,7 +174,10 @@ describe('given ASelect with multiple props', async () => {
 
         it('should render the icon', () => {
           const selection = wrapper.findAll('[role=option]')[1];
-          expect(selection.html()).toContain('svg');
+          const iconElement = selection.find('i');
+
+          expect(iconElement.exists()).toBe(true);
+          expect(iconElement.classes()).toContain('i-radix-icons:check');
         });
 
         describe('after selecting another value', () => {

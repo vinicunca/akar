@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-
 import { useForwardPropsEmits } from '~~/shared';
 
 import {
@@ -42,9 +40,8 @@ const forwarded = useForwardPropsEmits(props, emits);
         aria-label="Customise options"
       >
         <ASelectValue placeholder="Please select a fruit" />
-        <Icon
-          icon="radix-icons:chevron-down"
-          class="h-4 w-4"
+        <i
+          class="i-radix-icons:chevron-down h-4 w-4"
         />
       </ASelectTrigger>
 
@@ -70,7 +67,7 @@ const forwarded = useForwardPropsEmits(props, emits);
                 <ASelectItemIndicator
                   class="absolute left-0 w-[25px] inline-flex items-center justify-center"
                 >
-                  <Icon icon="radix-icons:check" />
+                  <i class="i-radix-icons:check" />
                 </ASelectItemIndicator>
                 <ASelectItemText>
                   {{ option }}

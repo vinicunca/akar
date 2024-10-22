@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import RangeCalendar from './_DummyRangeCalendar.vue'
-import { CalendarDate, type DateValue, PersianCalendar, toCalendar } from '@internationalized/date'
-import { type Ref, ref } from 'vue'
+import { CalendarDate, type DateValue, PersianCalendar, toCalendar } from '@internationalized/date';
+import { type Ref, ref } from 'vue';
 
-const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDate(2024, 2, 27) }
-const persianCalendar = ref({ start: toCalendar(defaultValue.start, new PersianCalendar()), end: toCalendar(defaultValue.end, new PersianCalendar()) }) as Ref<{ start: DateValue, end: DateValue }>
-const modelValue = ref(defaultValue) as Ref<{ start: DateValue, end: DateValue }>
+import ARangeCalendar from './_dummy-a-range-calendar.vue';
 
-const placeholder = ref(new CalendarDate(2024, 4, 1)) as Ref<CalendarDate>
+const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDate(2024, 2, 27) };
+const persianCalendar = ref({ start: toCalendar(defaultValue.start, new PersianCalendar()), end: toCalendar(defaultValue.end, new PersianCalendar()) }) as Ref<{ end: DateValue; start: DateValue }>;
+const modelValue = ref(defaultValue) as Ref<{ end: DateValue; start: DateValue }>;
+
+const placeholder = ref(new CalendarDate(2024, 4, 1)) as Ref<CalendarDate>;
 
 function paging(date: DateValue, sign: -1 | 1) {
-  if (sign === -1)
-    return date.subtract({ years: 1 })
-  return date.add({ years: 1 })
+  if (sign === -1) {
+    return date.subtract({ years: 1 });
+  }
+  return date.add({ years: 1 });
 }
 </script>
 
@@ -22,70 +24,70 @@ function paging(date: DateValue, sign: -1 | 1) {
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Uncontrolled (modelValue)">
-      <RangeCalendar :default-value="defaultValue" />
+      <ARangeCalendar :default-value="defaultValue" />
     </Variant>
 
     <Variant title="Controlled (modelValue)">
-      <RangeCalendar v-model="modelValue" />
+      <ARangeCalendar v-model="modelValue" />
     </Variant>
 
     <Variant title="Uncontrolled (placeholder)">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         :default-placeholder="placeholder"
       />
     </Variant>
 
     <Variant title="Controlled (placeholder)">
-      <RangeCalendar v-model:placeholder="placeholder" />
+      <ARangeCalendar v-model:placeholder="placeholder" />
     </Variant>
 
     <Variant title="Empty default">
-      <RangeCalendar />
+      <ARangeCalendar />
     </Variant>
 
     <Variant title="Default value">
-      <RangeCalendar :default-value="defaultValue" />
+      <ARangeCalendar :default-value="defaultValue" />
     </Variant>
 
     <Variant title="Disabled">
-      <RangeCalendar :disabled="true" />
+      <ARangeCalendar :disabled="true" />
     </Variant>
 
     <Variant title="Fixed weeks">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         fixed-weeks
       />
     </Variant>
 
     <Variant title="Localization">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         locale="de"
       />
     </Variant>
 
     <Variant title="Prevent deselection">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         prevent-deselect
       />
     </Variant>
 
     <Variant title="Multiple selection">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         multiple
       />
     </Variant>
 
     <Variant title="Different calendar">
-      <RangeCalendar :default-value="persianCalendar" />
+      <ARangeCalendar :default-value="persianCalendar" />
     </Variant>
 
     <Variant title="Pagination functions">
-      <RangeCalendar
+      <ARangeCalendar
         :default-value="defaultValue"
         :prev-page="(date: DateValue) => paging(date, -1)"
         :next-page="(date:DateValue) => paging(date, 1)"

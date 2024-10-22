@@ -1,13 +1,15 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 
-import { handleSubmit, sleep } from '@/test';
 import { fireEvent } from '@testing-library/vue';
+import { KEY_CODES, sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import ARadioGroup from './story/_ARadioGroup.vue';
-import Radio from './story/_Radio.vue';
+import { handleSubmit } from '~~/test';
+
+import ARadio from './story/_a-radio.vue';
+import ARadioGroup from './story/_a-radio-group.vue';
 
 describe('given a default ARadioGroup', () => {
   let wrapper: VueWrapper<InstanceType<typeof ARadioGroup>>;
@@ -97,14 +99,14 @@ describe('given disabled ARadioGroup', () => {
 describe('given radio in a form', async () => {
   const wrapper = mount({
     props: ['handleSubmit'],
-    components: { Radio },
-    template: '<form @submit="handleSubmit"><Radio  /></form>',
+    components: { ARadio },
+    template: '<form @submit="handleSubmit"><ARadio /></form>',
   }, {
     props: { handleSubmit },
   });
 
   it('should have hidden input field', async () => {
-    expect(wrapper.find('[type="Radio"]').exists()).toBe(true);
+    expect(wrapper.find('[type="radio"]').exists()).toBe(true);
   });
 
   describe('after clicking submit button', () => {
