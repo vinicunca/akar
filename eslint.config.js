@@ -17,6 +17,7 @@ export default vinicuncaESLint(
   {
     files: ['**/*.spec.ts'],
     rules: {
+      'no-await-in-loop': 'off',
       'sonar/no-duplicate-string': 'off',
     },
   },

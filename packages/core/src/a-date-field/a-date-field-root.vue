@@ -118,10 +118,12 @@ const {
   readonly,
 } = toRefs(props);
 
-const dir = useDirection(propDir);
 const locale = useLocale(propLocale);
+const dir = useDirection(propDir);
 
 const formatter = useDateFormatter(locale.value);
+const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
+const segmentElements = ref<Set<HTMLElement>>(new Set());
 
 const modelValue = useVModel(
   props,
@@ -149,9 +151,17 @@ const placeholder = useVModel(
   },
 ) as Ref<DateValue>;
 
-const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
+const inferredGranularity = computed(() => {
+  if (props.granularity) {
+    return !hasTime(placeholder.value)
+      ? 'day'
+      : props.granularity;
+  }
 
-const segmentElements = ref<Set<HTMLElement>>(new Set());
+  return hasTime(placeholder.value)
+    ? 'minute'
+    : 'day';
+});
 
 const isInvalid = computed(() => {
   if (!modelValue.value) {
@@ -175,18 +185,6 @@ const isInvalid = computed(() => {
   );
 });
 
-const inferredGranularity = computed(() => {
-  if (props.granularity) {
-    return !hasTime(placeholder.value)
-      ? 'day'
-      : props.granularity;
-  }
-
-  return hasTime(placeholder.value)
-    ? 'minute'
-    : 'day';
-});
-
 const initialSegments = initializeSegmentValues(inferredGranularity.value);
 
 const segmentValues = ref<DateTimeSegmentValueObj>(modelValue.value
@@ -205,6 +203,10 @@ const allSegmentContent = computed(() => createDateContent({
 
 const segmentContents = computed(() => allSegmentContent.value.arr);
 
+const editableSegmentContents = computed(() =>
+  segmentContents.value.filter(({ part }) => part !== 'literal'),
+);
+
 const currentFocusedElement = ref<HTMLElement | null>(null);
 
 const currentSegmentIndex = computed(() => {
@@ -217,7 +219,7 @@ const currentSegmentIndex = computed(() => {
 });
 
 const prevFocusableSegment = computed(() => {
-  const sign = dir.value === 'rtl' ? 1 : -1;
+  const sign = dir.value === 'rtl' ? -1 : 1;
   const prevCondition = sign > 0
     ? currentSegmentIndex.value < 0
     : currentSegmentIndex.value > segmentElements.value.size - 1;
@@ -260,28 +262,11 @@ function setFocusedElement(el: HTMLElement) {
   currentFocusedElement.value = el;
 }
 
-const editableSegmentContents = computed(() =>
-  segmentContents.value.filter(({ part }) => part !== 'literal'),
-);
-
-function addSegmentElements() {
-  getDateSegmentElements(parentElement.value).forEach(
-    (item) => {
-      segmentElements.value.add(item as HTMLElement);
-    },
-  );
-}
-
-onMounted(() => {
-  addSegmentElements();
-});
-
 watch(
   locale,
   (value) => {
     if (formatter.getLocale() !== value) {
       formatter.setLocale(value);
-
       /**
        * Locale changed, so we need to clear the segment elements and
        * re-get them in a different order.
@@ -320,6 +305,16 @@ watch(
     }
   },
 );
+
+function addSegmentElements() {
+  getDateSegmentElements(parentElement.value).forEach((item) => {
+    segmentElements.value.add(item as HTMLElement);
+  });
+}
+
+onMounted(() => {
+  addSegmentElements();
+});
 
 provideADateFieldRootContext({
   isDateUnavailable: propsIsDateUnavailable.value,

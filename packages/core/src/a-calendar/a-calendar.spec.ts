@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 import { CalendarDate, CalendarDateTime, type DateValue, toZoned } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';

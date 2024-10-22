@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { APinInputInput, APinInputRoot } from '..'
-import { Label } from '@/Label'
+import { ALabel } from '~~/a-label'
 
 const value = ref<string[]>([])
 </script>
@@ -13,7 +13,7 @@ const value = ref<string[]>([])
   >
     <Variant title="default">
       <div>
-        <Label for="otp">Input label</Label>
+        <ALabel for="otp">Input label</ALabel>
 
         <APinInputRoot
           id="otp"

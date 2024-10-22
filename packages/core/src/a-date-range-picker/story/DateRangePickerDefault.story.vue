@@ -20,17 +20,17 @@ import {
   DateRangePickerRoot,
   DateRangePickerTrigger,
 } from '..'
-import { Label } from '@/Label'
+import { ALabel } from '~~/a-label'
 </script>
 
 <template>
   <Story title="Date Range Picker/Default">
     <Variant title="default">
       <div class="flex flex-col gap-2">
-        <Label
+        <ALabel
           class="text-sm text-gray9"
           for="date-field"
-        >Hotel Booking Dates</Label>
+        >Hotel Booking Dates</ALabel>
         <DateRangePickerRoot
           id="date-field"
           :is-date-unavailable="date => date.day === 19"

@@ -104,6 +104,12 @@ function createContentObj(props: CreateDateContentObjProps) {
             }),
             type: part,
           });
+        } else {
+          return getDatePlaceholder({
+            field: part,
+            value: '',
+            locale: locale.value,
+          });
         }
       }
 

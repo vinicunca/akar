@@ -7,7 +7,10 @@ import type { ADateFieldRootProps } from '..';
 
 import { ADateFieldInput, ADateFieldRoot } from '..';
 
-const props = defineProps<{ dateFieldProps?: ADateFieldRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>();
+const props = defineProps<{
+  dateFieldProps?: ADateFieldRootProps;
+  emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void };
+}>();
 </script>
 
 <template>
@@ -37,6 +40,8 @@ const props = defineProps<{ dateFieldProps?: ADateFieldRootProps; emits?: { 'onU
       data-testid="value"
       tabindex="-1"
       disabled
-    >{{ modelValue }}</span>
+    >
+      {{ modelValue }}
+    </span>
   </ADateFieldRoot>
 </template>

@@ -11,7 +11,7 @@ const lastEvent = ref('')
     title="ATooltip/Content"
     :layout="{ type: 'grid', width: '300px' }"
   >
-    <Variant title="Aria Label">
+    <Variant title="Aria ALabel">
       <div class="grid w-full h-28 place-content-center">
         <ATooltipProvider :disable-closing-trigger="true">
           <ATooltipRoot

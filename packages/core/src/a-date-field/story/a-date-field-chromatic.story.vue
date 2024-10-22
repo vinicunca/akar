@@ -1,234 +1,235 @@
 <script setup lang="ts">
-import { CalendarDate, type DateValue } from '@internationalized/date'
-import { DateFieldInput, DateFieldRoot } from '..'
-import { ref } from 'vue'
+import { CalendarDate, type DateValue } from '@internationalized/date';
+import { ref } from 'vue';
 
-const modelValue = ref<DateValue>()
-const defaultValue = new CalendarDate(2024, 2, 28)
-const minValue = new CalendarDate(2024, 2, 24)
-const maxValue = new CalendarDate(2024, 2, 29)
+import { ADateFieldInput, ADateFieldRoot } from '..';
+
+const modelValue = ref<DateValue>();
+const defaultValue = new CalendarDate(2024, 2, 28);
+const minValue = new CalendarDate(2024, 2, 24);
+const maxValue = new CalendarDate(2024, 2, 29);
 </script>
 
 <template>
   <Story
-    title="Date Field/Chromatic"
+    title="ADateField/Chromatic"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Empty default">
-      <DateFieldRoot
+      <ADateFieldRoot
         v-slot="{ segments }"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
           :key="item.part"
         >
-          <DateFieldInput
+          <ADateFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
           >
             {{ item.value }}
-          </DateFieldInput>
-          <DateFieldInput
+          </ADateFieldInput>
+          <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
-          </DateFieldInput>
+          </ADateFieldInput>
         </template>
-      </DateFieldRoot>
+      </ADateFieldRoot>
     </Variant>
 
     <Variant title="With default">
-      <DateFieldRoot
+      <ADateFieldRoot
         v-slot="{ segments }"
         :default-value="defaultValue"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
           :key="item.part"
         >
-          <DateFieldInput
+          <ADateFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
           >
             {{ item.value }}
-          </DateFieldInput>
-          <DateFieldInput
+          </ADateFieldInput>
+          <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
-          </DateFieldInput>
+          </ADateFieldInput>
         </template>
-      </DateFieldRoot>
+      </ADateFieldRoot>
     </Variant>
 
     <Variant title="Uncontrolled">
-      <DateFieldRoot
+      <ADateFieldRoot
         v-slot="{ segments }"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
           :key="item.part"
         >
-          <DateFieldInput
+          <ADateFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
           >
             {{ item.value }}
-          </DateFieldInput>
-          <DateFieldInput
+          </ADateFieldInput>
+          <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
-          </DateFieldInput>
+          </ADateFieldInput>
         </template>
-      </DateFieldRoot>
+      </ADateFieldRoot>
     </Variant>
 
     <Variant title="Controlled">
-      <DateFieldRoot
+      <ADateFieldRoot
         v-slot="{ segments }"
         v-model="modelValue"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
           :key="item.part"
         >
-          <DateFieldInput
+          <ADateFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
           >
             {{ item.value }}
-          </DateFieldInput>
-          <DateFieldInput
+          </ADateFieldInput>
+          <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
-          </DateFieldInput>
+          </ADateFieldInput>
         </template>
-      </DateFieldRoot>
+      </ADateFieldRoot>
     </Variant>
 
     <Variant title="Min date">
-      <DateFieldRoot
+      <ADateFieldRoot
         v-slot="{ segments }"
         :default-value="defaultValue"
         :min-value="minValue"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
           :key="item.part"
         >
-          <DateFieldInput
+          <ADateFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
           >
             {{ item.value }}
-          </DateFieldInput>
-          <DateFieldInput
+          </ADateFieldInput>
+          <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
-          </DateFieldInput>
+          </ADateFieldInput>
         </template>
-      </DateFieldRoot>
+      </ADateFieldRoot>
     </Variant>
 
     <Variant title="Max date">
-      <DateFieldRoot
+      <ADateFieldRoot
         v-slot="{ segments }"
         :default-value="defaultValue"
         :max-value="maxValue"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
           :key="item.part"
         >
-          <DateFieldInput
+          <ADateFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
           >
             {{ item.value }}
-          </DateFieldInput>
-          <DateFieldInput
+          </ADateFieldInput>
+          <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
-          </DateFieldInput>
+          </ADateFieldInput>
         </template>
-      </DateFieldRoot>
+      </ADateFieldRoot>
     </Variant>
 
     <Variant title="Disabled">
-      <DateFieldRoot
+      <ADateFieldRoot
         v-slot="{ segments }"
         :default-value="defaultValue"
         :disabled="true"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
           :key="item.part"
         >
-          <DateFieldInput
+          <ADateFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
           >
             {{ item.value }}
-          </DateFieldInput>
-          <DateFieldInput
+          </ADateFieldInput>
+          <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
-          </DateFieldInput>
+          </ADateFieldInput>
         </template>
-      </DateFieldRoot>
+      </ADateFieldRoot>
     </Variant>
 
     <Variant title="Locale awareness">
-      <DateFieldRoot
+      <ADateFieldRoot
         v-slot="{ segments }"
         locale="de"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
           :key="item.part"
         >
-          <DateFieldInput
+          <ADateFieldInput
             v-if="item.part === 'literal'"
             :part="item.part"
           >
             {{ item.value }}
-          </DateFieldInput>
-          <DateFieldInput
+          </ADateFieldInput>
+          <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
-          </DateFieldInput>
+          </ADateFieldInput>
         </template>
-      </DateFieldRoot>
+      </ADateFieldRoot>
     </Variant>
   </Story>
 </template>

@@ -20,16 +20,16 @@ import {
   DatePickerRoot,
   DatePickerTrigger,
 } from '..'
-import { Label } from '@/Label'
+import { ALabel } from '~~/a-label'
 
 const props = defineProps<{ datePickerProps?: DatePickerRootProps, emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>()
 </script>
 
 <template>
-  <Label
+  <ALabel
     data-testid="label"
     for="date-picker-field"
-  >Input label</Label>
+  >Input label</ALabel>
   <DatePickerRoot
     id="date-picker-field"
     :is-date-unavailable="(date:DateValue) => date.day === 19"

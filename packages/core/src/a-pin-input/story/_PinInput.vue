@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { APinInputInput, APinInputRoot, type APinInputRootEmits, type APinInputRootProps } from '..'
-import { Label } from '@/Label'
+import { ALabel } from '~~/a-label'
 import { useEmitAsProps } from '~~/shared'
 
 const props = defineProps<APinInputRootProps>()
@@ -11,7 +11,7 @@ const value = ref<string[]>([])
 </script>
 
 <template>
-  <Label for="otp">Test label</Label>
+  <ALabel for="otp">Test label</ALabel>
   <APinInputRoot
     v-bind="{ ...props, ...useEmitAsProps(emits) }"
     v-model="value"

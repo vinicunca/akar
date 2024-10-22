@@ -17,7 +17,7 @@ vi.mock('@vueuse/core', async (importOriginal) => {
   };
 });
 
-describe.todo('given a default ConfigProvider', async () => {
+describe('given a default ConfigProvider', async () => {
   globalThis.ResizeObserver = class ResizeObserver {
     disconnect() {}
     observe() {}
@@ -50,7 +50,7 @@ describe.todo('given a default ConfigProvider', async () => {
   });
 });
 
-describe.todo('given a dir="rtl" ConfigProvider', async () => {
+describe('given a dir="rtl" ConfigProvider', async () => {
   beforeEach(() => {
     document.body.innerHTML = '';
     mount(AConfigProviderTest, { props: { dir: 'rtl' }, attachTo: document.body });
@@ -61,7 +61,7 @@ describe.todo('given a dir="rtl" ConfigProvider', async () => {
   });
 });
 
-describe.todo('given a scrollBody ConfigProvider', async () => {
+describe('given a scrollBody ConfigProvider', async () => {
   beforeEach(() => {
     document.body.innerHTML = '';
   });

@@ -20,17 +20,17 @@ import {
   DatePickerRoot,
   DatePickerTrigger,
 } from '..'
-import { Label } from '@/Label'
+import { ALabel } from '~~/a-label'
 </script>
 
 <template>
   <Story title="Date Picker/Default">
     <Variant title="default">
       <div class="flex flex-col gap-2">
-        <Label
+        <ALabel
           class="text-sm text-gray9"
           for="date-field"
-        >Birthday</Label>
+        >Birthday</ALabel>
         <DatePickerRoot
           id="date-field"
           :is-date-unavailable="date => date.day === 19"
