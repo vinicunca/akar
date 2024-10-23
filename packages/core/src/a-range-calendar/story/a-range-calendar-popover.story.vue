@@ -40,9 +40,8 @@ const formatter = useDateFormatter('en');
           <ARangeCalendarPrev
             class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
           >
-            <Icon
-              icon="i-radix-icons:chevron-left"
-              class="h-6 w-6"
+            <i
+              class="i-radix-icons:chevron-left h-6 w-6"
             />
           </ARangeCalendarPrev>
           <ARangeCalendarHeading class="flex justify-center gap-2 text-[15px] text-black font-medium">
@@ -85,9 +84,8 @@ const formatter = useDateFormatter('en');
           <ARangeCalendarNext
             class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
           >
-            <Icon
-              icon="i-radix-icons:chevron-right"
-              class="h-6 w-6"
+            <i
+              class="i-radix-icons:chevron-right h-6 w-6"
             />
           </ARangeCalendarNext>
         </ARangeCalendarHeader>

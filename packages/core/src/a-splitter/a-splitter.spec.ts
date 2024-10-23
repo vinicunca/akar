@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
 
-import ASplitter from './story/_ASplitter.vue';
+import ASplitter from './story/_a-splitter.vue';
 
 // Simple a11y test for now
 describe('test splitter functionalities', () => {

@@ -73,9 +73,8 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
             <ASelectValue placeholder="Please select a locale">
               {{ pref!.label }}
             </ASelectValue>
-            <Icon
-              icon="radix-icons:chevron-down"
-              class="h-4 w-4"
+            <i
+              class="i-radix-icons:chevron-down h-4 w-4"
             />
           </ASelectTrigger>
 
@@ -111,7 +110,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
               <ASelectScrollDownButton
                 class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
               >
-                <i class="i-radix-icons:chevron-down" />
+                <i class="i-i-radix-icons:chevron-down" />
               </ASelectScrollDownButton>
             </ASelectContent>
           </ASelectPortal>
@@ -128,9 +127,8 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
             <ASelectValue placeholder="Please select a calendar">
               {{ calendars.find(c => c.key === calendar)?.name }}
             </ASelectValue>
-            <Icon
-              icon="radix-icons:chevron-down"
-              class="h-4 w-4"
+            <i
+              class="i-radix-icons:chevron-down h-4 w-4"
             />
           </ASelectTrigger>
 
@@ -196,7 +194,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
               <ASelectScrollDownButton
                 class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
               >
-                <i class="i-radix-icons:chevron-down" />
+                <i class="i-i-radix-icons:chevron-down" />
               </ASelectScrollDownButton>
             </ASelectContent>
           </ASelectPortal>
@@ -212,9 +210,8 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
             <ACalendarPrev
               class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
             >
-              <Icon
-                icon="i-radix-icons:chevron-left"
-                class="h-6 w-6"
+              <i
+                class="i-radix-icons:chevron-left h-6 w-6"
               />
             </ACalendarPrev>
 
@@ -223,9 +220,8 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
             <ACalendarNext
               class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
             >
-              <Icon
-                icon="i-radix-icons:chevron-right"
-                class="h-6 w-6"
+              <i
+                class="i-radix-icons:chevron-right h-6 w-6"
               />
             </ACalendarNext>
           </ACalendarHeader>

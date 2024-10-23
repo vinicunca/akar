@@ -6,7 +6,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
 
-import AToast from './story/_AToast.vue';
+import AToast from './story/_a-toast.vue';
 
 const CLOSE_TEXT = 'Close';
 

@@ -3,11 +3,11 @@ import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import { useTestKbd } from '~~/shared';
+import { useTestKeyboard } from '~~/test/use-test-keyboard';
 
-import type { AStepperRootProps } from './AStepperRoot.vue';
+import type { AStepperRootProps } from './a-stepper-root.vue';
 
-import AStepper from './story/_AStepper.vue';
+import AStepper from './story/_a-stepper.vue';
 
 const steps = [{
   step: 1,
@@ -36,7 +36,7 @@ const steps = [{
   icon: 'radix-icons:check',
 }];
 
-const kbd = useTestKbd();
+const kbd = useTestKeyboard();
 
 function setup(props: { emits?: { 'onUpdate:modelValue'?: (data: number) => void }; stepperProps?: { steps: Array<{ description: string; icon: string; isCompleted?: boolean; step: number; title: string }> } & AStepperRootProps } = {}) {
   const user = userEvent.setup();

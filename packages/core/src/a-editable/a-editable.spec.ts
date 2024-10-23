@@ -1,16 +1,17 @@
-import { useTestKbd } from '~~/shared';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import type { EditableRootProps } from './a-editable-root.vue';
+import { useTestKeyboard } from '~~/test/use-test-keyboard';
 
-import Editable from './story/_Editable.vue';
+import type { AEditableRootProps } from './a-editable-root.vue';
 
-const kbd = useTestKbd();
+import Editable from './story/_a-editable.vue';
 
-function setup(props: { editableProps?: EditableRootProps; emits?: { 'onUpdate:modelValue'?: (data: string) => void } } = {}) {
+const kbd = useTestKeyboard();
+
+function setup(props: { editableProps?: AEditableRootProps; emits?: { 'onUpdate:modelValue'?: (data: string) => void } } = {}) {
   const user = userEvent.setup();
   const returned = render(Editable, { props });
   const editable = returned.getByTestId('root');

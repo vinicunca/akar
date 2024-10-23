@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import ASeparator from './ASeparator.vue';
+import ASeparator from './a-separator.vue';
 
 it('should pass axe accessibility tests', async () => {
   const wrapper = mount(ASeparator);

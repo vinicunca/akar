@@ -41,7 +41,7 @@ const forwarded = useForwardPropsEmits(props, emits);
       >
         <ASelectValue placeholder="Please select a fruit" />
         <i
-          class="i-radix-icons:chevron-down h-4 w-4"
+          class="i-i-radix-icons:chevron-down h-4 w-4"
         />
       </ASelectTrigger>
 

@@ -24,7 +24,7 @@ import { computed } from 'vue';
 import { APrimitive } from '~~/a-primitive';
 
 const props = withDefaults(
-  defineProps<BaseSeparatorProps>(),
+  defineProps<ABaseSeparatorProps>(),
   {
     orientation: 'horizontal',
   },

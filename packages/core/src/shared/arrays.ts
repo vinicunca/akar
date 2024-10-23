@@ -1,4 +1,4 @@
-import { isStrictEqual } from '@vinicunca/perkakas';
+import { isDeepEqual } from '@vinicunca/perkakas';
 
 /**
  * Wraps an array around itself at a given start index
@@ -34,8 +34,8 @@ export function findValuesBetween<T>(
     start: T;
   },
 ) {
-  const startIndex = array.findIndex((i) => isStrictEqual(i, start));
-  const endIndex = array.findIndex((i) => isStrictEqual(i, end));
+  const startIndex = array.findIndex((i) => isDeepEqual(i, start));
+  const endIndex = array.findIndex((i) => isDeepEqual(i, end));
 
   if (startIndex === -1 || endIndex === -1) {
     return [];

@@ -1,10 +1,11 @@
 import type { VueWrapper } from '@vue/test-utils';
 
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import ATabs from './story/_ATabs.vue';
+import ATabs from './story/_a-tabs.vue';
 
 describe('given default ATabs', () => {
   let wrapper: VueWrapper<InstanceType<typeof ATabs>>;

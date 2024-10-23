@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 
-import ATooltip from './stories/_ATooltip.vue';
+import ATooltip from './stories/_a-tooltip.vue';
 
 describe('given default ATooltip', () => {
   let wrapper: VueWrapper<InstanceType<typeof ATooltip>>;

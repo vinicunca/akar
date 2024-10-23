@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 
 import { AToggle } from '.';
@@ -31,9 +30,8 @@ function onChange() {
           aria-label="AToggle bold"
           class="h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base color-mauve11 leading-4 shadow-[0_2px_10px] shadow-blackA7 data-[state=on]:bg-violet6 hover:bg-violet3 data-[state=on]:text-violet12 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
         >
-          <Icon
-            icon="radix-icons:font-bold"
-            class="text-black"
+          <i
+            class="i-radix-icons:font-bold text-black"
           />
         </AToggle>
         <span class="">default on</span>
@@ -43,9 +41,8 @@ function onChange() {
           aria-label="AToggle bold"
           class="h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base color-mauve11 leading-4 shadow-[0_2px_10px] shadow-blackA7 data-[state=on]:bg-violet6 hover:bg-violet3 data-[state=on]:text-violet12 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
         >
-          <Icon
-            icon="radix-icons:font-bold"
-            class="text-black"
+          <i
+            class="i-radix-icons:font-bold text-black"
           />
         </AToggle>
 
@@ -59,9 +56,8 @@ function onChange() {
           :default-value="false"
           class="h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base color-mauve11 leading-4 shadow-[0_2px_10px] shadow-blackA7 data-[state=on]:bg-violet6 hover:bg-violet3 data-[state=on]:text-violet12 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
         >
-          <Icon
-            icon="radix-icons:font-bold"
-            class="text-black"
+          <i
+            class="i-radix-icons:font-bold text-black"
           />
         </AToggle>
 
@@ -72,9 +68,8 @@ function onChange() {
           :default-value="true"
           class="h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base color-mauve11 leading-4 shadow-[0_2px_10px] shadow-blackA7 data-[state=on]:bg-violet6 hover:bg-violet3 data-[state=on]:text-violet12 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
         >
-          <Icon
-            icon="radix-icons:font-bold"
-            class="text-black"
+          <i
+            class="i-radix-icons:font-bold text-black"
           />
         </AToggle>
 
@@ -88,9 +83,8 @@ function onChange() {
           class="h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base color-mauve11 leading-4 shadow-[0_2px_10px] shadow-blackA7 data-[state=on]:bg-violet6 hover:bg-violet3 data-[state=on]:text-violet12 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
           @update:model-value="onChange"
         >
-          <Icon
-            icon="radix-icons:font-bold"
-            class="text-black"
+          <i
+            class="i-radix-icons:font-bold text-black"
           />
         </AToggle>
       </div>
@@ -101,9 +95,8 @@ function onChange() {
         aria-label="AToggle bold"
         class="h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base color-mauve11 leading-4 shadow-[0_2px_10px] shadow-blackA7 data-[state=on]:bg-violet6 hover:bg-violet3 data-[state=on]:text-violet12 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
       >
-        <Icon
-          icon="radix-icons:font-bold"
-          class="text-black"
+        <i
+          class="i-radix-icons:font-bold text-black"
         />
       </AToggle>
     </Variant>
@@ -114,9 +107,8 @@ function onChange() {
         :default-value="true"
         class="h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base color-mauve11 leading-4 shadow-[0_2px_10px] shadow-blackA7 data-[state=on]:bg-violet6 hover:bg-violet3 data-[state=on]:text-violet12 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
       >
-        <Icon
-          icon="radix-icons:font-bold"
-          class="text-black"
+        <i
+          class="i-radix-icons:font-bold text-black"
         />
       </AToggle>
     </Variant>
@@ -127,9 +119,8 @@ function onChange() {
         class="h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base color-mauve11 leading-4 shadow-[0_2px_10px] shadow-blackA7 data-[state=on]:bg-violet6 hover:bg-violet3 data-[state=on]:text-violet12 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
         @update:model-value="onChange"
       >
-        <Icon
-          icon="radix-icons:font-bold"
-          class="text-black"
+        <i
+          class="i-radix-icons:font-bold text-black"
         />
       </AToggle>
     </Variant>

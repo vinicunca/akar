@@ -1,12 +1,13 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
 
-import ATagsInput from './story/_ATagsInput.vue';
-import ATagsInputObject from './story/_ATagsInputObject.vue';
+import ATagsInput from './story/_a-tags-input.vue';
+import ATagsInputObject from './story/_a-tags-input-object.vue';
 
 describe('given default ATagsInput', () => {
   // @ts-expect-error we return empty object

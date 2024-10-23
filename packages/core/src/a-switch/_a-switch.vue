@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import ASwitchRoot from './ASwitchRoot.vue'
-import ASwitchThumb from './ASwitchThumb.vue'
+import { ref } from 'vue';
 
-const checked = ref(false)
+import ASwitchRoot from './a-switch-root.vue';
+import ASwitchThumb from './a-switch-thumb.vue';
+
+const checked = ref(false);
 </script>
 
 <template>

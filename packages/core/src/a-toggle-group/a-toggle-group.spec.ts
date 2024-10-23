@@ -1,13 +1,16 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-import AToggleGroup from './story/_AToggleGroup.vue'
-import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
-import { mount } from '@vue/test-utils'
-import { axe } from 'vitest-axe'
-import { nextTick } from 'vue'
+import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
+
+import { KEY_CODES } from '@vinicunca/perkakas';
+import { mount } from '@vue/test-utils';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { axe } from 'vitest-axe';
+import { nextTick } from 'vue';
+
+import AToggleGroup from './story/_a-toggle-group.vue';
 
 describe('given default Toggle Group', () => {
-  let wrapper: VueWrapper<InstanceType<typeof AToggleGroup>>
-  let triggers: DOMWrapper<HTMLButtonElement>[]
+  let wrapper: VueWrapper<InstanceType<typeof AToggleGroup>>;
+  let triggers: Array<DOMWrapper<HTMLButtonElement>>;
 
   beforeEach(() => {
     wrapper = mount(AToggleGroup, {
@@ -15,94 +18,94 @@ describe('given default Toggle Group', () => {
       props: {
         defaultValue: 'center',
       },
-    })
-    triggers = wrapper.findAll('button')
-  })
+    });
+    triggers = wrapper.findAll('button');
+  });
 
   it('should pass axe accessibility tests', async () => {
-    expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
+    expect(await axe(wrapper.element)).toHaveNoViolations();
+  });
 
   it('should have active toggle=center', () => {
-    expect(triggers[0].attributes('data-state')).toBe('off')
-    expect(triggers[1].attributes('data-state')).toBe('on')
-    expect(triggers[2].attributes('data-state')).toBe('off')
-  })
+    expect(triggers[0].attributes('data-state')).toBe('off');
+    expect(triggers[1].attributes('data-state')).toBe('on');
+    expect(triggers[2].attributes('data-state')).toBe('off');
+  });
 
   describe('after toggling current active', () => {
     beforeEach(async () => {
-      triggers[1].element.focus()
-      triggers[1].element.click()
-      await nextTick()
-    })
+      triggers[1].element.focus();
+      triggers[1].element.click();
+      await nextTick();
+    });
 
     it('should deselect pre-existing value', () => {
-      expect(triggers[0].attributes('data-state')).toBe('off')
-      expect(triggers[1].attributes('data-state')).toBe('off')
-      expect(triggers[2].attributes('data-state')).toBe('off')
-    })
-  })
+      expect(triggers[0].attributes('data-state')).toBe('off');
+      expect(triggers[1].attributes('data-state')).toBe('off');
+      expect(triggers[2].attributes('data-state')).toBe('off');
+    });
+  });
 
   describe('after triggering ArrowRight', () => {
     beforeEach(async () => {
-      triggers[1].element.focus()
-      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT })
-    })
+      triggers[1].element.focus();
+      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
+    });
 
     it('should received focus for the next toggle', () => {
-      expect(triggers[2].element).toBe(document.activeElement)
-    })
+      expect(triggers[2].element).toBe(document.activeElement);
+    });
 
     describe('after toggling', () => {
       beforeEach(() => {
-        triggers[2].element.click()
-      })
+        triggers[2].element.click();
+      });
 
       it('should have next active value', () => {
-        expect(triggers[0].attributes('data-state')).toBe('off')
-        expect(triggers[1].attributes('data-state')).toBe('off')
-        expect(triggers[2].attributes('data-state')).toBe('on')
-      })
+        expect(triggers[0].attributes('data-state')).toBe('off');
+        expect(triggers[1].attributes('data-state')).toBe('off');
+        expect(triggers[2].attributes('data-state')).toBe('on');
+      });
 
       describe('after triggering ArrowRight again', () => {
         beforeEach(async () => {
-          await triggers[2].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT })
-        })
+          await triggers[2].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
+        });
 
         it('should received focus for the first toggle', () => {
-          expect(triggers[0].element).toBe(document.activeElement)
-        })
-      })
-    })
-  })
+          expect(triggers[0].element).toBe(document.activeElement);
+        });
+      });
+    });
+  });
 
   describe('after triggering ArrowLeft', () => {
     beforeEach(async () => {
-      triggers[1].element.focus()
-      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_LEFT })
-    })
+      triggers[1].element.focus();
+      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
+    });
 
     it('should received focus for the next toggle', () => {
-      expect(triggers[0].element).toBe(document.activeElement)
-    })
+      expect(triggers[0].element).toBe(document.activeElement);
+    });
 
     describe('after toggling', () => {
       beforeEach(() => {
-        triggers[0].element.click()
-      })
+        triggers[0].element.click();
+      });
 
       it('should have next active value', () => {
-        expect(triggers[0].attributes('data-state')).toBe('on')
-        expect(triggers[1].attributes('data-state')).toBe('off')
-        expect(triggers[2].attributes('data-state')).toBe('off')
-      })
-    })
-  })
-})
+        expect(triggers[0].attributes('data-state')).toBe('on');
+        expect(triggers[1].attributes('data-state')).toBe('off');
+        expect(triggers[2].attributes('data-state')).toBe('off');
+      });
+    });
+  });
+});
 
 describe('given multiple value Toggle Group', () => {
-  let wrapper: VueWrapper<InstanceType<typeof AToggleGroup>>
-  let triggers: DOMWrapper<HTMLButtonElement>[]
+  let wrapper: VueWrapper<InstanceType<typeof AToggleGroup>>;
+  let triggers: Array<DOMWrapper<HTMLButtonElement>>;
 
   beforeEach(() => {
     wrapper = mount(AToggleGroup, {
@@ -110,77 +113,77 @@ describe('given multiple value Toggle Group', () => {
       props: {
         'modelValue': ['center', 'right'],
         'onUpdate:modelValue': (ev) => {
-          wrapper.setProps({ modelValue: ev })
+          wrapper.setProps({ modelValue: ev });
         },
         'type': 'multiple',
       },
-    })
-    triggers = wrapper.findAll('button')
-  })
+    });
+    triggers = wrapper.findAll('button');
+  });
 
   it('should pass axe accessibility tests', async () => {
-    expect(await axe(wrapper.element)).toHaveNoViolations()
-  })
+    expect(await axe(wrapper.element)).toHaveNoViolations();
+  });
 
   it('should have active toggle=center', () => {
-    expect(triggers[0].attributes('data-state')).toBe('off')
-    expect(triggers[1].attributes('data-state')).toBe('on')
-    expect(triggers[2].attributes('data-state')).toBe('on')
-  })
+    expect(triggers[0].attributes('data-state')).toBe('off');
+    expect(triggers[1].attributes('data-state')).toBe('on');
+    expect(triggers[2].attributes('data-state')).toBe('on');
+  });
 
   describe('after triggering ArrowRight', () => {
     beforeEach(async () => {
-      triggers[1].element.focus()
-      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT })
-    })
+      triggers[1].element.focus();
+      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
+    });
 
     it('should received focus for the next toggle', () => {
-      expect(triggers[2].element).toBe(document.activeElement)
-    })
+      expect(triggers[2].element).toBe(document.activeElement);
+    });
 
     describe('after toggling', () => {
       beforeEach(() => {
-        triggers[2].element.click()
-      })
+        triggers[2].element.click();
+      });
 
       it('should have next active value', () => {
-        expect(triggers[0].attributes('data-state')).toBe('off')
-        expect(triggers[1].attributes('data-state')).toBe('on')
-        expect(triggers[2].attributes('data-state')).toBe('off')
-      })
+        expect(triggers[0].attributes('data-state')).toBe('off');
+        expect(triggers[1].attributes('data-state')).toBe('on');
+        expect(triggers[2].attributes('data-state')).toBe('off');
+      });
 
       describe('after triggering ArrowRight again', () => {
         beforeEach(async () => {
-          await triggers[2].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT })
-        })
+          await triggers[2].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
+        });
 
         it('should received focus for the first toggle', () => {
-          expect(triggers[0].element).toBe(document.activeElement)
-        })
-      })
-    })
-  })
+          expect(triggers[0].element).toBe(document.activeElement);
+        });
+      });
+    });
+  });
 
   describe('after triggering ArrowLeft', () => {
     beforeEach(async () => {
-      triggers[1].element.focus()
-      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_LEFT })
-    })
+      triggers[1].element.focus();
+      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
+    });
 
     it('should received focus for the next toggle', () => {
-      expect(triggers[0].element).toBe(document.activeElement)
-    })
+      expect(triggers[0].element).toBe(document.activeElement);
+    });
 
     describe('after toggling', () => {
       beforeEach(() => {
-        triggers[0].element.click()
-      })
+        triggers[0].element.click();
+      });
 
       it('should have next active value', () => {
-        expect(triggers[0].attributes('data-state')).toBe('on')
-        expect(triggers[1].attributes('data-state')).toBe('on')
-        expect(triggers[2].attributes('data-state')).toBe('on')
-      })
-    })
-  })
-})
+        expect(triggers[0].attributes('data-state')).toBe('on');
+        expect(triggers[1].attributes('data-state')).toBe('on');
+        expect(triggers[2].attributes('data-state')).toBe('on');
+      });
+    });
+  });
+});
