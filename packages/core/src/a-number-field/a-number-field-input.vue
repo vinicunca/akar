@@ -91,6 +91,7 @@ onMounted(() => {
     @keydown.end.prevent="rootContext.handleMinMaxValue('max')"
     @wheel="handleWheelEvent"
     @beforeinput="handleBeforeInput"
+    @keydown.enter="rootContext.applyInputValue($event.target?.value)"
     @blur="rootContext.applyInputValue($event.target?.value)"
   >
     <slot />

@@ -11,8 +11,9 @@ export interface APinInputInputProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted } from 'vue';
 
+import { usePrimitiveElement } from '~~/a-primitive';
 import { useArrowNavigation } from '~~/shared';
 
 import { injectAPinInputRootContext } from './a-pin-input-root.vue';
@@ -32,7 +33,7 @@ const isOtpMode = computed(() => context.otp.value);
 const isNumericMode = computed(() => context.type.value === 'number');
 const isPasswordMode = computed(() => context.mask.value);
 
-const inputRef = ref();
+const { primitiveElement, currentElement } = usePrimitiveElement();
 
 function handleInput(event: InputEvent) {
   const target = event.target as HTMLInputElement;
@@ -170,18 +171,20 @@ function updateModelValueAt(
 }
 
 onMounted(() => {
-  context.onInputElementChange(inputRef.value);
+  context.onInputElementChange(currentElement.value as HTMLInputElement);
 });
 
 onUnmounted(() => {
-  context.inputElements?.value.delete(inputRef.value);
+  context.inputElements?.value.delete(currentElement.value as HTMLInputElement);
 });
 </script>
 
 <template>
-  <input
-    ref="inputRef"
+  <APrimitive
+    ref="primitiveElement"
     autocapitalize="none"
+    :as="as"
+    :as-child="asChild"
     :autocomplete="isOtpMode ? 'one-time-code' : 'false'"
     :type="isPasswordMode ? 'password' : 'text'"
     :inputmode="isNumericMode ? 'numeric' : 'text'"
@@ -200,4 +203,6 @@ onUnmounted(() => {
     @blur="handleBlur"
     @paste="handlePaste"
   >
+    <slot />
+  </APrimitive>
 </template>

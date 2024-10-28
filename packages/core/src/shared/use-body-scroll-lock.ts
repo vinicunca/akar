@@ -1,4 +1,4 @@
-import { isPlainObject } from '@vinicunca/perkakas';
+import { isNumber, isPlainObject } from '@vinicunca/perkakas';
 import {
   createSharedComposable,
   useEventListener,
@@ -88,8 +88,12 @@ const useBodyLockStackCount = createSharedComposable(() => {
       }
 
       if (verticalScrollbarWidth > 0) {
-        document.body.style.paddingRight = `${config.padding}px`;
-        document.body.style.marginRight = `${config.margin}px`;
+        document.body.style.paddingRight = isNumber(config.padding)
+          ? `${config.padding}px`
+          : String(config.padding);
+        document.body.style.marginRight = isNumber(config.margin)
+          ? `${config.margin}px`
+          : String(config.margin);
         document.body.style.setProperty('--scrollbar-width', `${verticalScrollbarWidth}px`);
         document.body.style.overflow = 'hidden';
       }

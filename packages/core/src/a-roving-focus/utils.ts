@@ -70,10 +70,10 @@ export function getFocusIntent(
 }
 
 export function focusFirst(
-  { candidates, preventScroll = false }:
-  { candidates: Array<HTMLElement>; preventScroll?: boolean },
+  { candidates, preventScroll = false, rootNode }:
+  { candidates: Array<HTMLElement>; preventScroll?: boolean; rootNode?: Document | ShadowRoot },
 ) {
-  const PREVIOUSLY_FOCUSED_ELEMENT = document.activeElement;
+  const PREVIOUSLY_FOCUSED_ELEMENT = rootNode?.activeElement ?? document.activeElement;
 
   for (const candidate of candidates) {
     // if focus is already where we want to go, we don't want to keep going through the candidates

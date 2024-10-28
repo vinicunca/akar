@@ -6,10 +6,15 @@ export type DataOrientation = 'horizontal' | 'vertical';
 
 export type StringOrNumber = number | string;
 
+/**
+ * if padding or margin is number, it will be in px
+ * if padding or margin is true, it will be var(--scrollbar-width)
+ * otherwise, it will be passed string
+ */
 export interface ScrollBodyOption {
-  margin?: boolean | number;
-  padding?: boolean | number;
-}
+  margin?: boolean | number | string;
+  padding?: boolean | number | string;
+};
 
 export interface FormFieldProps {
   /** The name of the field. Submitted with its owning form as part of a name/value pair. */

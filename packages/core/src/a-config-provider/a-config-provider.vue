@@ -41,6 +41,10 @@ export interface AConfigProviderProps {
 <script lang="ts" setup>
 import { type Ref, toRefs, useId } from 'vue';
 
+defineOptions({
+  inheritAttrs: false,
+});
+
 const props = withDefaults(
   defineProps<AConfigProviderProps>(),
   {

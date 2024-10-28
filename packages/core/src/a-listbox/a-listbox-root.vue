@@ -272,7 +272,12 @@ function highlightFirstItem() {
 }
 
 function onLeave(event: Event) {
-  previousElement.value = highlightedElement.value;
+  const el = highlightedElement.value;
+
+  if ((el as Node)?.isConnected) {
+    previousElement.value = el;
+  }
+
   highlightedElement.value = null;
   emits('leave', event);
 }
@@ -406,8 +411,11 @@ watch(
   { immediate: true, deep: true },
 );
 
-function handleFocusOut(event: FocusEvent) {
+async function handleFocusOut(event: FocusEvent) {
   const target = (event.relatedTarget || event.target) as HTMLElement | null;
+
+  await nextTick();
+
   if (highlightedElement.value && !currentElement.value.contains(target)) {
     onLeave(event);
   }

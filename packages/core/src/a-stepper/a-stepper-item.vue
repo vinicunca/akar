@@ -27,7 +27,7 @@ export interface AStepperItemContext {
 export interface AStepperItemProps extends APrimitiveProps {
   /** Shows whether the step is completed. */
   completed?: boolean;
-  /** When `true`, prevents the user from interacting with the tab. */
+  /** When `true`, prevents the user from interacting with the step. */
   disabled?: boolean;
   /** A unique value that associates the stepper item with an index */
   step: number;

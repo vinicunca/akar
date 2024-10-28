@@ -56,6 +56,10 @@ import { ref, toRefs } from 'vue';
 
 import { useCollection } from '~~/collection';
 
+defineOptions({
+  inheritAttrs: false,
+});
+
 const props = withDefaults(
   defineProps<AToastProviderProps>(),
   {

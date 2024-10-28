@@ -17,7 +17,7 @@ export interface AStepperRootContext {
 
 export interface AStepperRootProps extends APrimitiveProps {
   /**
-   * The value of the tab that should be active when initially rendered. Use when you do not need to control the state of the tabs
+   * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps
    */
   defaultValue?: number;
   /**
@@ -26,10 +26,10 @@ export interface AStepperRootProps extends APrimitiveProps {
   dir?: Direction;
   /** Whether or not the steps must be completed in order */
   linear?: boolean;
-  /** The controlled value of the tab to activate. Can be bound as `v-model`. */
+  /** The controlled value of the step to activate. Can be bound as `v-model`. */
   modelValue?: number;
   /**
-   * The orientation the tabs are laid out.
+   * The orientation the steps are laid out.
    * Mainly so arrow navigation is done accordingly (left & right vs. up & down)
    * @defaultValue horizontal
    */

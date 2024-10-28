@@ -43,6 +43,10 @@ export const [
 import { useVModel } from '@vueuse/core';
 import { ref, toRefs } from 'vue';
 
+defineOptions({
+  inheritAttrs: false,
+});
+
 const props = withDefaults(
   defineProps<ADialogRootProps>(),
   {
@@ -51,7 +55,6 @@ const props = withDefaults(
     modal: true,
   },
 );
-
 const emit = defineEmits<ADialogRootEmits>();
 
 defineSlots<{

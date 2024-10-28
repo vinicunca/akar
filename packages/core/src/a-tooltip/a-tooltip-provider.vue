@@ -63,6 +63,10 @@ import { ref, toRefs } from 'vue';
 
 import { useForwardExpose } from '~~/shared';
 
+defineOptions({
+  inheritAttrs: false,
+});
+
 const props = withDefaults(defineProps<ATooltipProviderProps>(), {
   delayDuration: 700,
   skipDelayDuration: 300,

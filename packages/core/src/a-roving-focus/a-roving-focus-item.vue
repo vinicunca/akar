@@ -15,7 +15,7 @@ export interface ARovingFocusItemProps extends APrimitiveProps {
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick, onMounted, onUnmounted, useId } from 'vue';
 
-import { APrimitive } from '~~/a-primitive';
+import { APrimitive, usePrimitiveElement } from '~~/a-primitive';
 import { useCollection } from '~~/collection';
 
 import { injectARovingFocusGroupContext } from './a-roving-focus-group.vue';
@@ -37,6 +37,9 @@ const isCurrentTabStop = computed(
 );
 
 const { getItems, ACollectionItem } = useCollection();
+
+const { primitiveElement, currentElement } = usePrimitiveElement();
+const rootNode = computed(() => currentElement.value?.getRootNode() as Document | ShadowRoot);
 
 onMounted(() => {
   if (props.focusable) {
@@ -102,7 +105,24 @@ function handleKeydown(event: KeyboardEvent) {
         : candidateNodes.slice(currentIndex + 1);
     }
 
-    nextTick(() => focusFirst({ candidates: candidateNodes }));
+    nextTick(() => focusFirst({
+      candidates: candidateNodes,
+      preventScroll: false,
+      rootNode: rootNode.value,
+    }));
+  }
+}
+
+function handleMouseDown(event: MouseEvent) {
+  /**
+   * We prevent focusing non-focusable items on `mousedown`.
+   * Even though the item has tabIndex={-1}, that only means take it out of the tab order.
+   */
+  if (!props.focusable) {
+    event.preventDefault();
+  } else {
+    // Safari doesn't focus a button when clicked so we run our logic on mousedown also
+    context.onItemFocus(id.value);
   }
 }
 </script>
@@ -110,21 +130,14 @@ function handleKeydown(event: KeyboardEvent) {
 <template>
   <ACollectionItem>
     <APrimitive
+      ref="primitiveElement"
       :tabindex="isCurrentTabStop ? 0 : -1"
       :data-orientation="context.orientation.value"
       :data-active="active"
       :data-disabled="!focusable ? '' : undefined"
       :as="as"
       :as-child="asChild"
-      @mousedown="
-        (event) => {
-          // We prevent focusing non-focusable items on `mousedown`.
-          // Even though the item has tabIndex={-1}, that only means take it out of the tab order.
-          if (!focusable) event.preventDefault();
-          // Safari doesn't focus a button when clicked so we run our logic on mousedown also
-          else context.onItemFocus(id);
-        }
-      "
+      @mousedown="handleMouseDown"
       @focus="context.onItemFocus(id)"
       @keydown="handleKeydown"
     >

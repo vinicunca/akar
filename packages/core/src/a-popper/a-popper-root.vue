@@ -9,12 +9,18 @@ interface APopperRootContext {
   onAnchorChange: (element: ReferenceElement | undefined) => void;
 }
 
-export const [injectAPopperRootContext, provideAPopperRootContext]
-  = createContext<APopperRootContext>('APopperRoot');
+export const [
+  injectAPopperRootContext,
+  provideAPopperRootContext,
+] = createContext<APopperRootContext>('APopperRoot');
 </script>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const anchor = ref<ReferenceElement>();
 

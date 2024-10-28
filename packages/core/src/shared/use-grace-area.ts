@@ -75,9 +75,11 @@ export function useGraceArea(
           pointerExit.trigger();
         }
       };
-      document.addEventListener('pointermove', handleTrackPointerGrace);
+      triggerElement.value?.ownerDocument.addEventListener('pointermove', handleTrackPointerGrace);
 
-      cleanupFn(() => document.removeEventListener('pointermove', handleTrackPointerGrace));
+      cleanupFn(() =>
+        triggerElement.value?.ownerDocument.removeEventListener('pointermove', handleTrackPointerGrace),
+      );
     }
   });
 
@@ -104,14 +106,14 @@ function getExitSideFromRect(
   const left = Math.abs(rect.left - point.x);
 
   switch (Math.min(top, bottom, right, left)) {
+    case bottom:
+      return 'bottom';
     case left:
       return 'left';
     case right:
       return 'right';
     case top:
       return 'top';
-    case bottom:
-      return 'bottom';
     default:
       throw new Error('unreachable');
   }
