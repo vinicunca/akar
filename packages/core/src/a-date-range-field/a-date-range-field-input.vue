@@ -4,8 +4,6 @@ import { computed, ref } from 'vue';
 import type { APrimitiveProps } from '~~/a-primitive';
 import type { DateTimeSegmentPart } from '~~/date';
 
-import { useDateField } from '~~/a-date-field/use-date-field';
-
 import type { ADateRangeType } from './a-date-range-field-root.vue';
 
 export interface ADateRangeFieldInputProps extends APrimitiveProps {
@@ -18,6 +16,7 @@ export interface ADateRangeFieldInputProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { APrimitive } from '~~/a-primitive';
+import { useDateField } from '~~/date';
 
 import { injectADateRangeFieldRootContext } from './a-date-range-field-root.vue';
 

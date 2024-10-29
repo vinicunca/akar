@@ -2,23 +2,23 @@
 import type { APrimitiveProps } from '~~/a-primitive';
 import type { DateTimeSegmentPart } from '~~/date';
 
-export interface ADateFieldInputProps extends APrimitiveProps {
+export interface TimeFieldInputProps extends APrimitiveProps {
   /** The part of the date to render */
   part: DateTimeSegmentPart;
 }
 </script>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, ref } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
 import { useDateField } from '~~/date';
 
-import { injectADateFieldRootContext } from './a-date-field-root.vue';
+import { injectATimeFieldRootContext } from './a-time-field-root.vue';
 
-const props = defineProps<ADateFieldInputProps>();
+const props = defineProps<TimeFieldInputProps>();
 
-const rootContext = injectADateFieldRootContext();
+const rootContext = injectATimeFieldRootContext();
 
 const hasLeftFocus = ref(true);
 const lastKeyZero = ref(false);
@@ -52,7 +52,7 @@ const isInvalid = computed(() => rootContext.isInvalid.value);
     :as-child="asChild"
     v-bind="attributes"
     :contenteditable="disabled || readonly ? false : part !== 'literal'"
-    :data-akar-date-field-segment="part"
+    :data-akar-time-field-segment="part"
     :aria-disabled="disabled ? true : undefined"
     :aria-readonly="readonly ? true : undefined"
     :data-disabled="disabled ? '' : undefined"
@@ -62,8 +62,8 @@ const isInvalid = computed(() => rootContext.isInvalid.value);
       mousedown: handleSegmentClick,
       keydown: handleSegmentKeydown,
       focusout: () => { hasLeftFocus = true },
-      focusin: (event: FocusEvent) => {
-        rootContext.setFocusedElement(event.target as HTMLElement)
+      focusin: (e: FocusEvent) => {
+        rootContext.setFocusedElement(e.target as HTMLElement)
       },
     } : {}"
   >

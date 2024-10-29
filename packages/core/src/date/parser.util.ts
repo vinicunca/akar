@@ -15,7 +15,93 @@ import {
   toDate,
   type UseDateFormatter,
 } from '~~/date';
-import { DATE_SEGMENT_PARTS, DATE_TIME_EDITABLE_SEGMENT_PARTS, isDateSegmentPart, isEditableSegmentPart, TIME_SEGMENT_PARTS } from '~~/date/parts.date';
+import {
+  DATE_SEGMENT_PARTS,
+  EDITABLE_DATE_TIME_SEGMENT_PARTS,
+  isDateSegmentPart,
+  isEditableSegmentPart,
+  TIME_SEGMENT_PARTS,
+} from '~~/date/parts.date';
+
+/* ----- Segment Values ----- */
+
+const calendarDateTimeGranularities = ['hour', 'minute', 'second'];
+
+interface SyncDateSegmentValuesProps {
+  formatter: UseDateFormatter;
+  value: DateValue;
+};
+
+interface SyncTimeSegmentValuesProps {
+  formatter: UseDateFormatter;
+  value: DateValue;
+};
+
+export function syncTimeSegmentValues(props: SyncTimeSegmentValuesProps) {
+  return Object.fromEntries(TIME_SEGMENT_PARTS.map((part) => {
+    if (part === 'dayPeriod') {
+      return [part, props.formatter.dayPeriod(toDate(props.value))];
+    }
+
+    return [part, props.value[part as keyof DateValue]];
+  })) as DateTimeSegmentValueObj;
+}
+
+export function syncSegmentValues(props: SyncDateSegmentValuesProps) {
+  const { formatter } = props;
+
+  const dateValues = DATE_SEGMENT_PARTS.map((part) => {
+    return [part, props.value[part]];
+  });
+
+  if ('hour' in props.value) {
+    const timeValues = syncTimeSegmentValues({ value: props.value, formatter });
+
+    return { ...Object.fromEntries(dateValues), ...timeValues } as DateTimeSegmentValueObj;
+  }
+
+  return Object.fromEntries(dateValues) as DateTimeSegmentValueObj;
+}
+
+export function initializeTimeSegmentValues(): DateTimeSegmentValueObj {
+  return Object.fromEntries(
+    TIME_SEGMENT_PARTS.map((part) => {
+      if (part === 'dayPeriod') {
+        return [part, 'AM'];
+      }
+
+      return [part, null];
+    }).filter(([key]) => {
+      // eslint-disable-next-line sonar/prefer-single-boolean-return
+      if (key === 'literal' || key === null) {
+        return false;
+      } else {
+        return true;
+      }
+    }),
+  );
+}
+
+export function initializeSegmentValues(granularity: DateTimeGranularity): DateTimeSegmentValueObj {
+  const initialParts = EDITABLE_DATE_TIME_SEGMENT_PARTS.map((part) => {
+    if (part === 'dayPeriod') {
+      return [part, 'AM'];
+    }
+
+    return [part, null];
+  }).filter(([key]) => {
+    if (key === 'literal' || key === null) {
+      return false;
+    }
+    if (granularity === 'day') {
+      return !calendarDateTimeGranularities.includes(key) && key !== 'dayPeriod';
+    } else {
+      return true;
+    }
+  });
+
+  return Object.fromEntries(initialParts);
+}
 
 interface SharedContentProps {
   dateRef: DateValue;
@@ -23,6 +109,7 @@ interface SharedContentProps {
   granularity: DateTimeGranularity;
   hideTimeZone: boolean;
   hourCycle: HourCycle;
+  isTimeValue?: boolean;
 };
 
 type CreateDateContentObjProps = {
@@ -63,7 +150,7 @@ function createContentObj(props: CreateDateContentObjProps) {
             }),
             type: part,
             options: {
-              hourCycle: props.hourCycle === 24 ? 'h24' : undefined,
+              hourCycle: props.hourCycle === 24 ? 'h23' : undefined,
             },
           });
         }
@@ -74,7 +161,7 @@ function createContentObj(props: CreateDateContentObjProps) {
           }),
           type: part,
           options: {
-            hourCycle: props.hourCycle === 24 ? 'h24' : undefined,
+            hourCycle: props.hourCycle === 24 ? 'h23' : undefined,
           },
         });
       } else {
@@ -147,10 +234,10 @@ type CreateContentArrProps = {
 } & SharedContentProps;
 
 function createContentArr(props: CreateContentArrProps) {
-  const { granularity, formatter, contentObj, hideTimeZone, hourCycle } = props;
+  const { granularity, formatter, contentObj, hideTimeZone, hourCycle, isTimeValue } = props;
   const parts = formatter.toParts({
     date: props.dateRef,
-    options: getOptsByGranularity({ granularity, hourCycle }),
+    options: getOptsByGranularity({ granularity, hourCycle, isTimeValue }),
   });
 
   return parts
@@ -184,58 +271,4 @@ function createContentArr(props: CreateContentArrProps) {
 
       return true;
     });
-}
-
-/* ----- Segment Values ----- */
-
-const calendarDateTimeGranularities = ['hour', 'minute', 'second'];
-
-export function initializeSegmentValues(granularity: DateTimeGranularity): DateTimeSegmentValueObj {
-  const initialParts = DATE_TIME_EDITABLE_SEGMENT_PARTS.map((part) => {
-    if (part === 'dayPeriod') {
-      return [part, 'AM'];
-    }
-
-    return [part, null];
-  }).filter(([key]) => {
-    if (key === 'literal' || key === null) {
-      return false;
-    }
-    if (granularity === 'day') {
-      return !calendarDateTimeGranularities.includes(key) && key !== 'dayPeriod';
-    } else {
-      return true;
-    }
-  });
-
-  return Object.fromEntries(initialParts);
-}
-
-interface SyncSegmentValuesProps {
-  formatter: UseDateFormatter;
-  value: DateValue;
-};
-
-export function syncSegmentValues(props: SyncSegmentValuesProps) {
-  const { formatter } = props;
-
-  const dateValues = DATE_SEGMENT_PARTS.map((part) => {
-    return [part, props.value[part]];
-  });
-
-  if ('hour' in props.value) {
-    const timeValues = TIME_SEGMENT_PARTS.map((part) => {
-      if (part === 'dayPeriod') {
-        return [part, formatter.dayPeriod(toDate(props.value))];
-      }
-
-      return [part, props.value[part as keyof DateValue]];
-    });
-
-    const mergedSegmentValues = [...dateValues, ...timeValues];
-
-    return Object.fromEntries(mergedSegmentValues) as DateTimeSegmentValueObj;
-  }
-
-  return Object.fromEntries(dateValues) as DateTimeSegmentValueObj;
 }

@@ -37,6 +37,7 @@ export * from './a-stepper';
 export * from './a-switch';
 export * from './a-tabs';
 export * from './a-tags-input';
+export * from './a-time-field';
 export * from './a-toast';
 export * from './a-toggle';
 export * from './a-toggle-group';

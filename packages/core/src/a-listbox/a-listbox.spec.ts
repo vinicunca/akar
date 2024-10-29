@@ -341,7 +341,7 @@ describe('given AListbox in a form', async () => {
   });
 
   it('should have hidden input field', async () => {
-    expect(wrapper.find('input[hidden]').exists()).toBe(true);
+    expect(wrapper.find('input[data-hidden]').exists()).toBe(true);
   });
 
   describe('after selecting option and clicking submit button', () => {

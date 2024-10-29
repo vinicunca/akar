@@ -10,7 +10,7 @@ import { ASeparator } from '.';
     <Variant title="default">
       <div class="mx-[15px] max-w-[300px] w-full">
         <div class="text-[15px] text-white font-medium leading-5">
-          Reka UI
+          Akar
         </div>
         <div class="text-[15px] text-white leading-5">
           An open-source UI component library.

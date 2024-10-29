@@ -92,21 +92,19 @@ import { isEqualDay } from '@internationalized/date';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
 
-import {
-  createDateContent,
-  getDateSegmentElements,
-  initializeSegmentValues,
-  isSegmentNavigationKey,
-  syncSegmentValues,
-} from '~~/a-date-field/utils';
 import { APrimitive, usePrimitiveElement } from '~~/a-primitive';
 import { AVisuallyHidden } from '~~/a-visually-hidden';
 import {
   areAllDaysBetweenValid,
+  createDateContent,
+  getDateSegmentElements,
   getDefaultDate,
   hasTime,
+  initializeSegmentValues,
   isDateBefore,
   isDateBeforeOrSame,
+  isSegmentNavigationKey,
+  syncSegmentValues,
   useDateFormatter,
 } from '~~/date';
 import { useDirection, useLocale } from '~~/shared';

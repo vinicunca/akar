@@ -2,8 +2,8 @@ import type { DateTimeGranularity } from '~~/date/comparators.date';
 import type { HourCycle } from '~~/date/types.date';
 
 export function getOptsByGranularity(
-  { granularity, hourCycle }:
-  { granularity: DateTimeGranularity; hourCycle: HourCycle },
+  { granularity, hourCycle, isTimeValue = false }:
+  { granularity: DateTimeGranularity; hourCycle: HourCycle; isTimeValue?: boolean },
 ) {
   const opts: Intl.DateTimeFormatOptions = {
     year: 'numeric',
@@ -13,9 +13,15 @@ export function getOptsByGranularity(
     minute: '2-digit',
     second: '2-digit',
     timeZoneName: 'short',
-    hourCycle: hourCycle === 24 ? 'h24' : undefined,
+    hourCycle: hourCycle === 24 ? 'h23' : undefined,
     hour12: hourCycle === 24 ? false : undefined,
   };
+
+  if (isTimeValue) {
+    delete opts.year;
+    delete opts.month;
+    delete opts.day;
+  }
 
   if (granularity === 'day') {
     delete opts.second;

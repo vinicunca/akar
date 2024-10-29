@@ -13,7 +13,7 @@ import {
   type UseDateFormatter,
 } from '~~/date';
 
-import { isAcceptableSegmentKey, isNumberString, isSegmentNavigationKey } from './utils';
+import { isAcceptableSegmentKey, isNumberString, isSegmentNavigationKey } from './segment.util';
 
 export interface UseDateFieldProps {
   disabled: Ref<boolean>;

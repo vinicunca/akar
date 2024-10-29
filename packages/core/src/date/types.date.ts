@@ -6,7 +6,7 @@ import type { DateValue } from '@internationalized/date';
 
 import type {
   DATE_SEGMENT_PARTS,
-  DATE_TIME_EDITABLE_SEGMENT_PARTS,
+  EDITABLE_DATE_TIME_SEGMENT_PARTS,
   NON_EDITABLE_DATE_TIME_SEGMENT_PARTS,
   TIME_SEGMENT_PARTS,
 } from './parts.date';
@@ -15,7 +15,7 @@ export type DateMatcher = (date: DateValue) => boolean;
 
 export type DateSegmentPart = (typeof DATE_SEGMENT_PARTS)[number];
 export type TimeSegmentPart = (typeof TIME_SEGMENT_PARTS)[number];
-export type EditableDateTimeSegmentPart = (typeof DATE_TIME_EDITABLE_SEGMENT_PARTS)[number];
+export type EditableDateTimeSegmentPart = (typeof EDITABLE_DATE_TIME_SEGMENT_PARTS)[number];
 export type NonEditableDateTimeSegmentPart = (typeof NON_EDITABLE_DATE_TIME_SEGMENT_PARTS)[number];
 export type DateTimeSegmentPart = EditableDateTimeSegmentPart | NonEditableDateTimeSegmentPart;
 

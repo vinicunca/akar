@@ -77,11 +77,21 @@ export const [
 import { isEqualDay } from '@internationalized/date';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
 
+import type { DateTimeSegmentPart } from '~~/date';
+
 import { APrimitive, usePrimitiveElement } from '~~/a-primitive';
 import { AVisuallyHidden } from '~~/a-visually-hidden';
-import { type DateTimeSegmentPart, getDefaultDate, hasTime, isDateBefore, useDateFormatter } from '~~/date';
-
-import { createDateContent, getDateSegmentElements, initializeSegmentValues, isSegmentNavigationKey, syncSegmentValues } from './utils';
+import {
+  createDateContent,
+  getDateSegmentElements,
+  getDefaultDate,
+  hasTime,
+  initializeSegmentValues,
+  isDateBefore,
+  isSegmentNavigationKey,
+  syncSegmentValues,
+  useDateFormatter,
+} from '~~/date';
 
 defineOptions({
   inheritAttrs: false,

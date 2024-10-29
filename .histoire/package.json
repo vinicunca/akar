@@ -12,7 +12,9 @@
     "@histoire/plugin-vue": "^0.17.17",
     "@radix-ui/colors": "^3.0.0",
     "@unocss/vite": "^0.63.2",
+    "@vitejs/plugin-vue": "^5.1.4",
     "histoire": "^0.17.17",
-    "unocss": "^0.63.2"
+    "unocss": "^0.63.2",
+    "vite": "^5.4.9"
   }
 }

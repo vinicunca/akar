@@ -11,13 +11,16 @@ import {
   parseDate,
   parseDateTime,
   parseZonedDateTime,
+  Time,
   toCalendar,
   ZonedDateTime,
 } from '@internationalized/date';
 
 import type { DateMatcher } from '~~/date/types.date';
 
+export type TimeValue = CalendarDateTime | Time | ZonedDateTime;
 export type DateTimeGranularity = 'day' | 'hour' | 'minute' | 'second';
+export type TimeGranularity = 'hour' | 'minute' | 'second';
 
 /**
  * Determine if a date is before the reference date.
@@ -206,6 +209,25 @@ export function getDefaultDate(props: GetDefaultDateProps): DateValue {
   }
 
   return new CalendarDate(year, month, day);
+}
+
+interface GetDefaultTimeProps {
+  defaultPlaceholder?: TimeValue | undefined;
+  defaultValue?: TimeValue | undefined;
+};
+
+export function getDefaultTime(props: GetDefaultTimeProps): TimeValue {
+  const { defaultValue, defaultPlaceholder } = props;
+
+  if (defaultValue) {
+    return defaultValue.copy();
+  }
+
+  if (defaultPlaceholder) {
+    return defaultPlaceholder.copy();
+  }
+
+  return new Time(0, 0, 0);
 }
 
 interface DayOfWeekParams<T> {
