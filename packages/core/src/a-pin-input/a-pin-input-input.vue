@@ -13,7 +13,7 @@ export interface APinInputInputProps extends APrimitiveProps {
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick, onMounted, onUnmounted } from 'vue';
 
-import { usePrimitiveElement } from '~~/a-primitive';
+import { APrimitive, usePrimitiveElement } from '~~/a-primitive';
 import { useArrowNavigation } from '~~/shared';
 
 import { injectAPinInputRootContext } from './a-pin-input-root.vue';
