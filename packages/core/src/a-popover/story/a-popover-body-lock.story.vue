@@ -29,7 +29,7 @@ const toggleState = ref(false);
             aria-label="Update dimensions"
           >
             <button>
-              <i class="i-radix-icons:mixer-horizonal" />
+              <i class="i-radix-icons:mixer-horizontal" />
             </button>
           </APopoverTrigger>
           <APopoverPortal>

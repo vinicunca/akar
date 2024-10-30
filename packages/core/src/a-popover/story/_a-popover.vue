@@ -22,7 +22,7 @@ const toggleState = ref(false);
       class="h-[35px] w-[35px] inline-flex cursor-default items-center justify-center rounded-full bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
       aria-label="Update dimensions"
     >
-      <i class="i-radix-icons:mixer-horizonal" />
+      <i class="i-radix-icons:mixer-horizontal" />
       Open
     </APopoverTrigger>
     <APopoverPortal>
