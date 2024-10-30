@@ -18,7 +18,7 @@ const contentChangeState = reactive({
 
 <template>
   <Story
-    title="Scroll Area/Basic"
+    title="AScrollArea/Basic"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Basic">

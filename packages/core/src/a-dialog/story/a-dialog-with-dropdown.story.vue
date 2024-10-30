@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-
 import {
   ADialogClose,
   ADialogContent,
@@ -9,7 +7,7 @@ import {
   ADialogRoot,
   ADialogTrigger,
 } from '..';
-import DropdownMenu from '../../DropdownMenu/story/_DropdownMenu.vue';
+import ADropdownMenu from '../../a-dropdown-menu/story/_a-dropdown-menu.vue';
 </script>
 
 <template>
@@ -34,12 +32,12 @@ import DropdownMenu from '../../DropdownMenu/story/_DropdownMenu.vue';
             <ADialogContent
               class="fixed left-[50%] top-[50%] max-h-[85vh] max-w-[450px] w-[90vw] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none"
             >
-              <DropdownMenu />
+              <ADropdownMenu />
               <ADialogClose
                 class="absolute right-[10px] top-[10px] h-[25px] w-[25px] inline-flex appearance-none items-center justify-center rounded-full text-violet11 hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 focus:outline-none"
                 aria-label="Close"
               >
-                <i class="i-i-lucide:x" />
+                <i class="i-lucide:x" />
               </ADialogClose>
             </ADialogContent>
           </Transition>

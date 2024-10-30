@@ -16,7 +16,7 @@ const isFirstOrFifteenth: DateMatcher = (date) => {
 
 <template>
   <Story
-    title="Date Range Field/Validation"
+    title="ADateRangeField/Validation"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Unavailable">

@@ -77,7 +77,7 @@ function handleCheck(ev: any) {
               <div
                 class="ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8"
               >
-                <i class="i-i-radix-icons:chevron-right" />
+                <i class="i-radix-icons:chevron-right" />
               </div>
             </ADropdownMenuSubTrigger>
             <ADropdownMenuPortal>
@@ -147,7 +147,7 @@ function handleCheck(ev: any) {
               <div
                 class="ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8"
               >
-                <i class="i-i-radix-icons:chevron-right" />
+                <i class="i-radix-icons:chevron-right" />
               </div>
             </ADropdownMenuSubTrigger>
             <ADropdownMenuPortal>
@@ -191,7 +191,7 @@ function handleCheck(ev: any) {
                     <div
                       class="ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8"
                     >
-                      <i class="i-i-radix-icons:chevron-right" />
+                      <i class="i-radix-icons:chevron-right" />
                     </div>
                   </ADropdownMenuSubTrigger>
                   <ADropdownMenuPortal>
@@ -237,7 +237,7 @@ function handleCheck(ev: any) {
                           <div
                             class="ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8"
                           >
-                            <i class="i-i-radix-icons:chevron-right" />
+                            <i class="i-radix-icons:chevron-right" />
                           </div>
                         </ADropdownMenuSubTrigger>
                         <ADropdownMenuPortal>

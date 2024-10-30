@@ -5,7 +5,7 @@ import { items } from './constants';
 
 <template>
   <Story
-    title="AATree/Basic"
+    title="ATree/Basic"
     :layout="{ type: 'single', iframe: false }"
   >
     <Variant title="default">

@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 
 import { useForwardPropsEmits } from '~~/shared';
-import { countryList } from '~~/test';
+import { countryList } from '~~/shared';
 
 import type { AListboxRootEmits, AListboxRootProps } from '..';
 

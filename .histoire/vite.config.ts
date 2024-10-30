@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [
     UnoCSS(),
     vue(),
+
   ],
 
   resolve: {
@@ -22,6 +23,7 @@ export default defineConfig({
   },
 
   histoire: {
+    viteNodeInlineDeps: [/@tanstack/],
     plugins: [
       HstVue(),
     ],

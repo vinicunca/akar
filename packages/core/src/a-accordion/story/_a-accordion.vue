@@ -45,7 +45,7 @@ const count = ref(1);
       <AAccordionContent
         v-for="i in count"
         :key="i"
-        class="accordion-animated-content data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp"
+        class="accordion-animated-content data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up"
       >
         <div class="px-5 py-4">
           Content {{ value }}

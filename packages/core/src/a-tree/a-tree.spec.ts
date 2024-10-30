@@ -6,10 +6,10 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
 
-import AATree from './story/_a-tree.vue';
+import ATree from './story/_a-tree.vue';
 
-describe('given default AATree', () => {
-  let wrapper: VueWrapper<InstanceType<typeof AATree>>;
+describe('given default ATree', () => {
+  let wrapper: VueWrapper<InstanceType<typeof ATree>>;
   let content: DOMWrapper<Element>;
   let items: Array<DOMWrapper<Element>>;
 
@@ -19,7 +19,7 @@ describe('given default AATree', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(AATree, { attachTo: document.body, props: { selectionBehavior: 'toggle' } });
+    wrapper = mount(ATree, { attachTo: document.body, props: { selectionBehavior: 'toggle' } });
     content = wrapper.find('[role=tree]');
     updateItems();
   });
@@ -84,7 +84,7 @@ describe('given default AATree', () => {
       });
 
       it('should expand the nested item, revealing it\'s item ', () => {
-        expect(items[3].text()).toBe('AATree.vue');
+        expect(items[3].text()).toBe('ATree.vue');
       });
     });
   });
@@ -123,14 +123,14 @@ describe('given default AATree', () => {
   });
 });
 
-describe('given multiple `true` AATree', () => {
-  let wrapper: VueWrapper<InstanceType<typeof AATree>>;
+describe('given multiple `true` ATree', () => {
+  let wrapper: VueWrapper<InstanceType<typeof ATree>>;
   // let content: DOMWrapper<Element>
   let items: Array<DOMWrapper<Element>>;
 
   beforeEach(async () => {
     document.body.innerHTML = '';
-    wrapper = mount(AATree, { props: { multiple: true, selectionBehavior: 'toggle' }, attachTo: document.body });
+    wrapper = mount(ATree, { props: { multiple: true, selectionBehavior: 'toggle' }, attachTo: document.body });
     await nextTick();
     // content = wrapper.find('[role=tree]')
     items = wrapper.findAll('[role=treeitem]');
@@ -187,7 +187,7 @@ describe('given multiple `true` AATree', () => {
   });
 });
 
-describe('given a AATree with a custom children structure', () => {
+describe('given a ATree with a custom children structure', () => {
   const customItems = [
     { title: 'index.vue', icon: 'vue' },
     {
@@ -199,7 +199,7 @@ describe('given a AATree with a custom children structure', () => {
           icon: 'folder',
           files: [
             {
-              title: 'AATree.vue',
+              title: 'ATree.vue',
               icon: 'vue',
             },
             {
@@ -246,20 +246,28 @@ describe('given a AATree with a custom children structure', () => {
     },
   ];
 
-  let wrapper: VueWrapper<InstanceType<typeof AATree>>;
+  let wrapper: VueWrapper<InstanceType<typeof ATree>>;
   // let content: DOMWrapper<Element>
   let items: Array<DOMWrapper<Element>>;
 
   beforeEach(async () => {
     document.body.innerHTML = '';
-    wrapper = mount(AATree, {
+    wrapper = mount(ATree, {
       props: {
         items: customItems,
         multiple: true,
         selectionBehavior: 'toggle',
-        getChildren: (val) => (!val.files)
-          ? val.directories
-          : (!val.directories) ? val.files : [...val.directories, ...val.files],
+        getChildren: (val) => {
+          if (!val.files) {
+            return val.directories;
+          }
+
+          if (!val.directories) {
+            return val.files;
+          }
+
+          return [...val.directories, ...val.files]; ;
+        },
       },
       attachTo: document.body,
     });
@@ -290,7 +298,7 @@ describe('given a AATree with a custom children structure', () => {
       });
 
       it('should expand the nested item, revealing it\'s item ', () => {
-        expect(items[3].text()).toBe('AATree.vue');
+        expect(items[3].text()).toBe('ATree.vue');
       });
     });
   });

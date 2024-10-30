@@ -10,7 +10,7 @@ const modelValue = ref(defaultValue) as Ref<DateValue>;
 
 <template>
   <Story
-    title="Date Picker/Chromatic"
+    title="ADatePicker/Chromatic"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Empty default">

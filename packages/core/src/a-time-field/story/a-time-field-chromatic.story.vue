@@ -12,7 +12,7 @@ const maxValue = new Time(18);
 
 <template>
   <Story
-    title="Time Field/Chromatic"
+    title="ATimeField/Chromatic"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Empty default">

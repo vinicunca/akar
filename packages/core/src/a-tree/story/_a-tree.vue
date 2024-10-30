@@ -19,7 +19,7 @@ const items = [
         icon: 'folder',
         children: [
           {
-            title: 'AATree.vue',
+            title: 'ATree.vue',
             icon: 'vue',
           },
           {

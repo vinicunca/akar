@@ -36,7 +36,7 @@ const filteredVeg = computed(() => vegetables.filter((p) => contains({ string: p
       />
       <AComboboxTrigger>
         <i
-          class="i-i-radix-icons:chevron-down h-4 w-4 text-grass11"
+          class="i-radix-icons:chevron-down h-4 w-4 text-grass11"
         />
       </AComboboxTrigger>
     </AComboboxAnchor>

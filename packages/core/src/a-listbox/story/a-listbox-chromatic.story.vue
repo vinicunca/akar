@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 
 import type { GenericComponentInstance } from '~~/shared/types';
 
-import { countryList } from '~~/test';
+import { countryList } from '~~/shared';
 
 import { AListboxContent, AListboxItem, AListboxRoot } from '..';
 

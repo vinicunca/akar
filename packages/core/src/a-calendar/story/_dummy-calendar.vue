@@ -20,7 +20,7 @@ const forwarded = useForwardPropsEmits(props, emits);
         class="h-8 w-8 inline-flex cursor-pointer items-center justify-center rounded-lg bg-transparent text-black data-[disabled]:pointer-events-none active:scale-98 hover:bg-black data-[disabled]:text-black/40 hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
       >
         <i
-          class="i-i-radix-icons:chevron-left h-6 w-6"
+          class="i-radix-icons:chevron-left h-6 w-6"
         />
       </ACalendarPrev>
       <ACalendarHeading class="text-[15px] text-black font-medium" />
@@ -28,7 +28,7 @@ const forwarded = useForwardPropsEmits(props, emits);
         class="h-8 w-8 inline-flex cursor-pointer items-center justify-center rounded-lg bg-transparent text-black data-[disabled]:pointer-events-none active:scale-98 hover:bg-black data-[disabled]:text-black/40 hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
       >
         <i
-          class="i-i-radix-icons:chevron-right h-6 w-6"
+          class="i-radix-icons:chevron-right h-6 w-6"
         />
       </ACalendarNext>
     </ACalendarHeader>

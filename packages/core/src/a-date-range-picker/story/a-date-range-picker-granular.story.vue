@@ -4,7 +4,7 @@ import ADateRangePicker from './_dummy-a-date-range-picker.vue';
 
 <template>
   <Story
-    title="Date Range Picker/Granular"
+    title="ADateRangePicker/Granular"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Granular (second)">

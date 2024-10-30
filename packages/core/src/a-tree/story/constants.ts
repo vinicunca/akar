@@ -1,3 +1,5 @@
+import { KEY_CODES } from '@vinicunca/perkakas';
+
 export const items = [
   {
     title: 'composables',

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
-import { countryList } from '~~/test';
+import { countryList } from '~~/shared';
 
 import { AListboxContent, AListboxFilter, AListboxItem, AListboxRoot } from '..';
 

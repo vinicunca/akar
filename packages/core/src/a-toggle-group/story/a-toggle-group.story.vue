@@ -11,7 +11,7 @@ const toggleGroupItemClasses
 
 <template>
   <Story
-    title="Toggle Group/Demo"
+    title="AToggleGroup/Demo"
     :layout="{ type: 'single', iframe: false }"
   >
     <Variant title="default">

@@ -45,7 +45,7 @@ const POSITION = ['item-aligned', 'popper'] as const
           >
             <ASelectValue placeholder="Please select a fruit" />
             <i
-              class="i-i-radix-icons:chevron-down h-4 w-4"
+              class="i-radix-icons:chevron-down h-4 w-4"
             />
           </ASelectTrigger>
 
@@ -100,7 +100,7 @@ const POSITION = ['item-aligned', 'popper'] as const
                 <ASelectScrollDownButton
                   class="flex items-center justify-center h-[25px] bg-white text-violet11 cursor-default"
                 >
-                  <i class="i-i-radix-icons:chevron-down" />
+                  <i class="i-radix-icons:chevron-down" />
                 </ASelectScrollDownButton>
               </ASelectContent>
             </Transition>

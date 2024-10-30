@@ -2,7 +2,7 @@
 import { ATreeItem } from '..';
 
 // eslint-disable-next-line import/no-self-import
-import AATree from './_a-tree-nested.vue';
+import ATree from './_a-tree-nested.vue';
 
 interface ATreeNode {
   children?: Array<ATreeNode>;
@@ -43,7 +43,7 @@ withDefaults(defineProps<{
 
       <ul v-if="isExpanded">
         <template v-if="tree.children">
-          <AATree
+          <ATree
             :tree-items="tree.children"
             :level="level + 1"
           />

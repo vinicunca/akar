@@ -32,7 +32,7 @@ function handleClick() {
     title="AToast/Demo"
     :layout="{ type: 'single', iframe: false }"
   >
-    <AToastProvider swipe-direction="left">
+    <AToastProvider swipe-direction="right">
       <button
         class="h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] text-violet11 font-medium leading-[35px] shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black"
         @click="handleClick"

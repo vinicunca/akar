@@ -6,7 +6,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
 
 <template>
   <Story
-    title="Time Field/Granular"
+    title="ATimeField/Granular"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Granular (second)">

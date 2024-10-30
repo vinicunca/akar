@@ -48,7 +48,7 @@ const rootDisabled = ref(false);
           <span class="text-[15px] text-violet11 leading-[25px]">radix-vue/radix-vue</span>
         </div>
 
-        <ACollapsibleContent class="data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
+        <ACollapsibleContent class="data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
           <div
             class="my-[10px] rounded bg-white p-[10px] shadow-[0_2px_10px] shadow-blackA7"
           >

@@ -6,7 +6,7 @@ import AScrollAreaStory from './_a-scroll-area-story.vue';
 
 <template>
   <Story
-    title="Scroll Area/Chromatic"
+    title="AScrollArea/Chromatic"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant

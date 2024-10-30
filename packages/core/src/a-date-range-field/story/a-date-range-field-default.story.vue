@@ -3,7 +3,7 @@ import { ADateRangeFieldInput, ADateRangeFieldRoot } from '..';
 </script>
 
 <template>
-  <Story title="Date Range Field/Default">
+  <Story title="ADateRangeField/Default">
     <Variant title="default">
       <ADateRangeFieldRoot
         id="date-field"

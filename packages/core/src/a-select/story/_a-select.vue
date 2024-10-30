@@ -41,7 +41,7 @@ const POSITION = ['item-aligned', 'popper'] as const;
         {{ fruit }}
       </ASelectValue>
       <i
-        class="i-i-radix-icons:chevron-down h-4 w-4"
+        class="i-radix-icons:chevron-down h-4 w-4"
       />
     </ASelectTrigger>
 
@@ -109,7 +109,7 @@ const POSITION = ['item-aligned', 'popper'] as const;
         <ASelectScrollDownButton
           class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
         >
-          <i class="i-i-radix-icons:chevron-down" />
+          <i class="i-radix-icons:chevron-down" />
         </ASelectScrollDownButton>
       </ASelectContent>
     </ASelectPortal>

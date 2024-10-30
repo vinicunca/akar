@@ -13,7 +13,7 @@ const localTimezonePlaceholder = now(getLocalTimeZone());
 
 <template>
   <Story
-    title="Date Range Field/Chromatic"
+    title="ADateRangeField/Chromatic"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Empty default">

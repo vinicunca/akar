@@ -19,7 +19,7 @@ function isDateDisabled(date: DateValue) {
 
 <template>
   <Story
-    title="Date Range Picker/Validation"
+    title="ADateRangePicker/Validation"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Min date">

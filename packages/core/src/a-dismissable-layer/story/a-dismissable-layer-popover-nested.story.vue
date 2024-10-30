@@ -10,7 +10,7 @@ function handleAlert() {
 <template>
   <Story
     group="utilities"
-    title="DismissableLayer/PopoverNested"
+    title="ADismissableLayer/PopoverNested"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Dialog (fully modal example)">

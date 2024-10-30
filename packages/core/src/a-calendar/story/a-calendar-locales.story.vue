@@ -42,7 +42,7 @@ const hebrew = new CalendarDate(
 
 <template>
   <Story
-    title="Calendar/Locales"
+    title="ACalendar/Locales"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Gregorian">

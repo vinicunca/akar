@@ -58,7 +58,7 @@ const forwarded = useForwardPropsEmits(props, emits);
 
       <ADatePickerTrigger class="ml-4 mr-1 focus:shadow-[0_0_0_2px] focus:shadow-black">
         <i
-          class="i-i-radix-icons:calendar h-6 w-6"
+          class="i-radix-icons:calendar h-6 w-6"
         />
       </ADatePickerTrigger>
     </ADatePickerField>

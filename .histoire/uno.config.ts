@@ -45,5 +45,20 @@ export default defineConfig({
       ...teal,
       ...slate,
     },
+
+    animation: {
+      keyframes: {
+        'accordion-down': '{from{height:0}to{height:var(--akar-accordion-content-height)}}',
+        'accordion-up': '{from{height:var(--akar-accordion-content-height)}to{height:0}}',
+      },
+      durations: {
+        'accordion-down': '0.3s',
+        'accordion-up': '0.3s',
+      },
+      timingFns: {
+        'accordion-down': 'cubic-bezier(0.87, 0, 0.13, 1)',
+        'accordion-up': 'cubic-bezier(0.87, 0, 0.13, 1)',
+      },
+    },
   },
 });

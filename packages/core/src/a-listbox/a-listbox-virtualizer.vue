@@ -203,15 +203,6 @@ function handleMultipleReplace(event: Event, intent: 'first' | 'last' | 'next' |
 
   let value: Array<T> | null = null;
   switch (intent) {
-    case 'prev':
-    case 'next': {
-      value = findValuesBetween({
-        array: props.options,
-        start: rootContext.firstValue.value as T,
-        end: lastValue,
-      });
-      break;
-    }
     case 'first': {
       value = findValuesBetween({
         array: props.options,
@@ -225,6 +216,15 @@ function handleMultipleReplace(event: Event, intent: 'first' | 'last' | 'next' |
         array: props.options,
         start: rootContext.firstValue.value as T,
         end: props.options?.[props.options.length - 1],
+      });
+      break;
+    }
+    case 'next':
+    case 'prev': {
+      value = findValuesBetween({
+        array: props.options,
+        start: rootContext.firstValue.value as T,
+        end: lastValue,
       });
       break;
     }

@@ -2,7 +2,7 @@
 import type { APrimitiveProps } from '~~/a-primitive';
 import type { DateTimeSegmentPart } from '~~/date';
 
-export interface TimeFieldInputProps extends APrimitiveProps {
+export interface ATimeFieldInputProps extends APrimitiveProps {
   /** The part of the date to render */
   part: DateTimeSegmentPart;
 }
@@ -16,7 +16,7 @@ import { useDateField } from '~~/date';
 
 import { injectATimeFieldRootContext } from './a-time-field-root.vue';
 
-const props = defineProps<TimeFieldInputProps>();
+const props = defineProps<ATimeFieldInputProps>();
 
 const rootContext = injectATimeFieldRootContext();
 

@@ -4,7 +4,7 @@ import DatePicker from './_dummy-a-date-picker.vue';
 
 <template>
   <Story
-    title="Date Picker/Granular"
+    title="ADatePicker/Granular"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Granular (second)">

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ATreeRoot } from '..';
-import AATree from './_a-tree-nested.vue';
+import ATree from './_a-tree-nested.vue';
 import { items } from './constants';
 </script>
 
 <template>
   <Story
-    title="AATree/Nested"
+    title="ATree/Nested"
     :layout="{ type: 'single', iframe: false }"
   >
     <Variant title="default">
@@ -15,7 +15,7 @@ import { items } from './constants';
         :items="items"
         :get-key="(item) => item.title"
       >
-        <AATree :tree-items="items" />
+        <ATree :tree-items="items" />
       </ATreeRoot>
     </Variant>
   </Story>

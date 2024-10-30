@@ -8,7 +8,7 @@ const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new Calend
 
 <template>
   <Story
-    title="Date Range Field/Granular"
+    title="ADateRangeField/Granular"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Granular (second)">

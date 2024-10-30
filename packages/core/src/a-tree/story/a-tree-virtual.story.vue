@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { countryList } from '~~/test';
+import { countryList } from '~~/shared';
 
 import { ATreeItem, ATreeRoot, ATreeVirtualizer } from '..';
 
@@ -22,7 +22,7 @@ const items = groupCountriesByFirstLetter(countryList);
 
 <template>
   <Story
-    title="AATree/Virtual"
+    title="ATree/Virtual"
     :layout="{ type: 'single', iframe: false }"
   >
     <Variant title="default">

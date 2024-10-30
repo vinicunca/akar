@@ -10,7 +10,7 @@ const dir = ref<'ltr' | 'rtl'>('ltr');
 <template>
   <Story
     group="utilities"
-    title="Roving Focus/Basic"
+    title="ARovingFocus/Basic"
     :layout="{ type: 'grid', width: '50%' }"
     auto-props-disabled
   >

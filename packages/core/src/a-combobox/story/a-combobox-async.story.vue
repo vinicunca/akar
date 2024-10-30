@@ -37,7 +37,7 @@ async function handleOpen(val: boolean) {
             placeholder="Test"
           />
           <AComboboxTrigger>
-            <i class="i-i-radix-icons:chevron-down h-4 w-4 text-grass11" />
+            <i class="i-radix-icons:chevron-down h-4 w-4 text-grass11" />
           </AComboboxTrigger>
         </AComboboxAnchor>
 

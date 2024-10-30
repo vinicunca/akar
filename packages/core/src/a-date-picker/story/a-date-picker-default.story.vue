@@ -24,7 +24,7 @@ import {
 </script>
 
 <template>
-  <Story title="Date Picker/Default">
+  <Story title="ADatePicker/Default">
     <Variant title="default">
       <div class="flex flex-col gap-2">
         <ALabel

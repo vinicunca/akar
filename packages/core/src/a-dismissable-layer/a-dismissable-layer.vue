@@ -18,8 +18,8 @@ import type {
 export interface ADismissableLayerProps extends APrimitiveProps {
   /**
    * When `true`, hover/focus/click interactions will be disabled on elements outside
-   * the `DismissableLayer`. Users will need to click twice on outside elements to
-   * interact with them: once to close the `DismissableLayer`, and again to trigger the element.
+   * the `ADismissableLayer`. Users will need to click twice on outside elements to
+   * interact with them: once to close the `ADismissableLayer`, and again to trigger the element.
    */
   disableOutsidePointerEvents?: boolean;
 }
@@ -31,18 +31,18 @@ export type ADismissableLayerEmits = {
    */
   escapeKeyDown: [event: KeyboardEvent];
   /**
-   * Event handler called when the focus moves outside of the `DismissableLayer`.
+   * Event handler called when the focus moves outside of the `ADismissableLayer`.
    * Can be prevented.
    */
   focusOutside: [ event: FocusOutsideEvent];
   /**
-   * Event handler called when an interaction happens outside the `DismissableLayer`.
+   * Event handler called when an interaction happens outside the `ADismissableLayer`.
    * Specifically, when a `pointerdown` event happens outside or focus moves outside of it.
    * Can be prevented.
    */
   interactOutside: [ event: FocusOutsideEvent | PointerDownOutsideEvent];
   /**
-   * Event handler called when the a `pointerdown` event happens outside of the `DismissableLayer`.
+   * Event handler called when the a `pointerdown` event happens outside of the `ADismissableLayer`.
    * Can be prevented.
    */
   pointerDownOutside: [event: PointerDownOutsideEvent];
@@ -50,7 +50,7 @@ export type ADismissableLayerEmits = {
 
 export type ADismissableLayerPrivateEmits = {
   /**
-   * Handler called when the `DismissableLayer` should be dismissed
+   * Handler called when the `ADismissableLayer` should be dismissed
    */
   dismiss: [];
 } & ADismissableLayerEmits;

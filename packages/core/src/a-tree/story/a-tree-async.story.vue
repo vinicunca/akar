@@ -73,7 +73,7 @@ async function fetchChildren(ev: ATreeItemToggleEvent<ATreeNode>) {
 
 <template>
   <Story
-    title="AATree/Async"
+    title="ATree/Async"
     :layout="{ type: 'single', iframe: false }"
   >
     <Variant title="default">

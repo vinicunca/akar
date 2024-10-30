@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 
 import {
@@ -54,7 +53,7 @@ const open = ref(false);
                   class="absolute right-[10px] top-[10px] h-[25px] w-[25px] inline-flex appearance-none items-center justify-center rounded-full text-violet11 hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 focus:outline-none"
                   aria-label="Close"
                 >
-                  <i class="i-i-lucide:x" />
+                  <i class="i-lucide:x" />
                 </ADialogClose>
               </ADialogContent>
             </Transition>

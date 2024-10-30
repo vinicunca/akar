@@ -110,7 +110,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
               <ASelectScrollDownButton
                 class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
               >
-                <i class="i-i-radix-icons:chevron-down" />
+                <i class="i-radix-icons:chevron-down" />
               </ASelectScrollDownButton>
             </ASelectContent>
           </ASelectPortal>
@@ -194,7 +194,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
               <ASelectScrollDownButton
                 class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
               >
-                <i class="i-i-radix-icons:chevron-down" />
+                <i class="i-radix-icons:chevron-down" />
               </ASelectScrollDownButton>
             </ASelectContent>
           </ASelectPortal>

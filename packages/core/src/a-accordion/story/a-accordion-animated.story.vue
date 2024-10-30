@@ -46,7 +46,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
       </template>
 
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="w-[300px] rounded-md shadow-lg"
         type="single"
       >
         <AAccordionItem
@@ -63,7 +63,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
           <AAccordionContent
             v-for="i in count"
             :key="i"
-            class="accordion-animated-content data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp"
+            class="accordion-animated-content data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
           >
             <div class="px-5 py-4">
               Per erat orci nostra luctus sociosqu mus risus penatibus, duis
@@ -102,7 +102,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
           <AAccordionContent
             v-for="i in count"
             :key="i"
-            class="accordion-animated-content data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp"
+            class="accordion-animated-content data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
           >
             <div class="px-5 py-4">
               Per erat orci nostra luctus sociosqu mus risus penatibus, duis
@@ -161,7 +161,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
             </AAccordionTrigger>
           </AAccordionHeader>
           <AAccordionContent
-            class="accordion-animated-content data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp"
+            class="accordion-animated-content data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
           >
             <div class="px-5 py-4">
               Yes. It adheres to the WAI-ARIA design pattern.
@@ -179,7 +179,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
             </AAccordionTrigger>
           </AAccordionHeader>
           <AAccordionContent
-            class="accordion-animated-content data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp"
+            class="accordion-animated-content data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
           >
             <div class="px-5 py-4">
               Yes. It's unstyled by default, giving you freedom over the look
@@ -198,7 +198,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
             </AAccordionTrigger>
           </AAccordionHeader>
           <AAccordionContent
-            class="accordion-animated-content data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp"
+            class="accordion-animated-content data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
           >
             <div class="px-5 py-4">
               Yes! You can use the transition prop to configure the animation.
@@ -216,7 +216,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
             </AAccordionTrigger>
           </AAccordionHeader>
           <AAccordionContent
-            class="accordion-animated-content data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp"
+            class="accordion-animated-content data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
           >
             <div class="px-5 py-4">
               Yes! You can use the transition prop to configure the animation.

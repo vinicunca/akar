@@ -17,7 +17,7 @@ const maxValue = new CalendarDate(2024, 2, 20);
 
 <template>
   <Story
-    title="Range Calendar/Validation"
+    title="ARangeCalendar/Validation"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Unavailable">

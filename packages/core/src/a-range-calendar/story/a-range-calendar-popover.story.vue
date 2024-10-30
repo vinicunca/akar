@@ -26,7 +26,7 @@ const formatter = useDateFormatter('en');
 
 <template>
   <Story
-    title="Range Calendar/Popover"
+    title="ARangeCalendar/Popover"
     :layout="{ type: 'single' }"
   >
     <Variant title="default">

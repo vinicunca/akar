@@ -4,7 +4,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
 
 <template>
   <Story
-    title="Time Field/Locales"
+    title="ATimeField/Locales"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Gregorian">

@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue';
 
 import { useFilter } from '~~/shared';
-import { countryList } from '~~/test';
+import { countryList } from '~~/shared';
 
 import { AComboboxAnchor, AComboboxContent, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxRoot, AComboboxTrigger, AComboboxViewport, AComboboxVirtualizer } from '..';
 
@@ -39,7 +39,7 @@ const filteredOptions = computed(() => {
             />
             <AComboboxTrigger>
               <i
-                class="i-i-radix-icons:chevron-down h-4 w-4 text-grass11"
+                class="i-radix-icons:chevron-down h-4 w-4 text-grass11"
               />
             </AComboboxTrigger>
           </AComboboxAnchor>

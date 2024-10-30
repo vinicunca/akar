@@ -5,7 +5,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
 </script>
 
 <template>
-  <Story title="Time Field/Default">
+  <Story title="ATimeField/Default">
     <Variant title="default">
       <div class="flex flex-col gap-2 text-black">
         <ALabel

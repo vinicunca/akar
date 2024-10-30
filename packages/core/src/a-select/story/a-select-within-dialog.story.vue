@@ -42,7 +42,7 @@ const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
               >
                 <ASelectValue placeholder="Please select a fruit" />
                 <i
-                  class="i-i-radix-icons:chevron-down h-4 w-4"
+                  class="i-radix-icons:chevron-down h-4 w-4"
                 />
               </ASelectTrigger>
 
@@ -86,7 +86,7 @@ const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
                   <ASelectScrollDownButton
                     class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
                   >
-                    <i class="i-i-radix-icons:chevron-down" />
+                    <i class="i-radix-icons:chevron-down" />
                   </ASelectScrollDownButton>
                 </ASelectContent>
               </ASelectPortal>

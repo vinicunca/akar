@@ -17,7 +17,7 @@ import {
 
 <template>
   <Story
-    title="Range Calendar/Default"
+    title="ARangeCalendar/Default"
     :layout="{ type: 'single', iframe: false }"
   >
     <Variant title="default">

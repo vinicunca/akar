@@ -20,7 +20,7 @@ function paging(date: DateValue, sign: -1 | 1) {
 
 <template>
   <Story
-    title="Range Calendar/Chromatic"
+    title="ARangeCalendar/Chromatic"
     :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Uncontrolled (modelValue)">
