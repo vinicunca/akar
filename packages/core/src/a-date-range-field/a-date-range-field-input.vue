@@ -16,7 +16,7 @@ export interface ADateRangeFieldInputProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { APrimitive } from '~~/a-primitive';
-import { useDateField } from '~~/date';
+import { useDateField } from '~~/date/use-date-field';
 
 import { injectADateRangeFieldRootContext } from './a-date-range-field-root.vue';
 

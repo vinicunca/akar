@@ -146,20 +146,23 @@ if (props.type && !['background', 'foreground'].includes(props.type)) {
 watchEffect(() => {
   const viewport = providerContext.viewport.value;
   if (viewport) {
-    const handleResume = () => {
+    function handleResume() {
       startTimer(closeTimerRemainingTimeRef.value);
       remainingRaf.resume();
       emits('resume');
     };
-    const handlePause = () => {
+
+    function handlePause() {
       const elapsedTime = new Date().getTime() - closeTimerStartTimeRef.value;
       closeTimerRemainingTimeRef.value = closeTimerRemainingTimeRef.value - elapsedTime;
       window.clearTimeout(closeTimerRef.value);
       remainingRaf.pause();
       emits('pause');
     };
+
     viewport.addEventListener(VIEWPORT_PAUSE, handlePause);
     viewport.addEventListener(VIEWPORT_RESUME, handleResume);
+
     return () => {
       viewport.removeEventListener(VIEWPORT_PAUSE, handlePause);
       viewport.removeEventListener(VIEWPORT_RESUME, handleResume);

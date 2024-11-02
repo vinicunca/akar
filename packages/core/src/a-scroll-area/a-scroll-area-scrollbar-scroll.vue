@@ -64,6 +64,7 @@ watchEffect((onCleanup) => {
 
   if (viewport) {
     let prevScrollPos = viewport[scrollDirection];
+
     const handleScroll = () => {
       const scrollPos = viewport[scrollDirection];
       const hasScrollInDirectionChanged = prevScrollPos !== scrollPos;
@@ -73,6 +74,7 @@ watchEffect((onCleanup) => {
       }
       prevScrollPos = scrollPos;
     };
+
     viewport.addEventListener('scroll', handleScroll);
 
     onCleanup(() => {

@@ -15,6 +15,7 @@ export default defineConfig({
       tsconfigPath: 'tsconfig.build.json',
       cleanVueFileName: true,
       exclude: ['src/spec/**', 'src/**/story/**', 'src/**/*.story.vue'],
+      rollupTypes: true,
     }),
   ],
   resolve: {
@@ -29,10 +30,12 @@ export default defineConfig({
   },
 
   build: {
+    minify: true,
+    target: 'esnext',
     lib: {
       name: 'akar',
       fileName: (format, name) => {
-        return `${name}.${format === 'es' ? 'js' : 'umd.cjs'}`;
+        return `${name}.${format === 'es' ? 'js' : 'cjs'}`;
       },
       entry: {
         index: resolve(__dirname, 'src/index.ts'),
@@ -48,13 +51,8 @@ export default defineConfig({
         '@vinicunca/perkakas',
       ],
       output: {
-        /**
-         * Provide global variables to use in the UMD build
-         */
-        globals: {
-          'vue': 'Vue',
-          '@floating-ui/vue': '@floating-ui/vue',
-        },
+        preserveModules: true,
+        exports: 'named',
       },
     },
   },

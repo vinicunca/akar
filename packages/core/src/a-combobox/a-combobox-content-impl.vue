@@ -40,11 +40,11 @@ import { AListboxContent } from '~~/a-listbox';
 import { APopperContent } from '~~/a-popper';
 import { APrimitive } from '~~/a-primitive';
 import {
-  useBodyScrollLock,
   useForwardExpose,
   useForwardProps,
   useHideOthers,
 } from '~~/shared';
+import { useBodyScrollLock } from '~~/shared/use-body-scroll-lock';
 
 import { injectAComboboxRootContext } from './a-combobox-root.vue';
 

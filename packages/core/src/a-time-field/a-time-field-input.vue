@@ -12,7 +12,7 @@ export interface ATimeFieldInputProps extends APrimitiveProps {
 import { computed, ref } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
-import { useDateField } from '~~/date';
+import { useDateField } from '~~/date/use-date-field';
 
 import { injectATimeFieldRootContext } from './a-time-field-root.vue';
 

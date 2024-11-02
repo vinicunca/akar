@@ -6,7 +6,8 @@ export interface ADialogOverlayImplProps extends APrimitiveProps {}
 
 <script setup lang="ts">
 import { APrimitive } from '~~/a-primitive';
-import { useBodyScrollLock, useForwardExpose } from '~~/shared';
+import { useForwardExpose } from '~~/shared';
+import { useBodyScrollLock } from '~~/shared/use-body-scroll-lock';
 
 import { injectADialogRootContext } from './a-dialog-root.vue';
 

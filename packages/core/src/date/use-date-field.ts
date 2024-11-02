@@ -3,15 +3,16 @@ import type { CalendarDateTime, CycleTimeOptions, DateFields, DateValue, TimeFie
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { computed, type Ref } from 'vue';
 
-import {
-  type DateSegmentExceptLiteral,
-  type DateTimeSegmentPart,
-  type DateTimeSegmentValueObj,
-  getDaysInMonth,
-  type HourCycle,
-  toDate,
-  type UseDateFormatter,
-} from '~~/date';
+import type { UseDateFormatter } from '~~/date/use-date-formatter';
+
+import { getDaysInMonth, toDate } from '~~/date/comparators.date';
+
+import type {
+  DateSegmentExceptLiteral,
+  DateTimeSegmentPart,
+  DateTimeSegmentValueObj,
+  HourCycle,
+} from './types.date';
 
 import { isAcceptableSegmentKey, isNumberString, isSegmentNavigationKey } from './segment.util';
 

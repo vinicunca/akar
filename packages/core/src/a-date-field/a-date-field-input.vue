@@ -12,7 +12,7 @@ export interface ADateFieldInputProps extends APrimitiveProps {
 import { computed, ref } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
-import { useDateField } from '~~/date';
+import { useDateField } from '~~/date/use-date-field';
 
 import { injectADateFieldRootContext } from './a-date-field-root.vue';
 

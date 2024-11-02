@@ -28,7 +28,7 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs"
+      "require": "./dist/index.cjs"
     },
     "./date": {
       "import": {
@@ -37,7 +37,7 @@
       },
       "require": {
         "types": "./dist/date/index.d.ts",
-        "default": "./dist/date.umd.cjs"
+        "default": "./dist/date.cjs"
       }
     },
     "./namespaced": {
@@ -69,9 +69,17 @@
         "types": "./dist/resolver/index.d.cts",
         "default": "./dist/resolver/index.cjs"
       }
+    },
+    "./constant": {
+      "import": {
+        "default": "./dist/constant.js"
+      },
+      "require": {
+        "default": "./dist/constant.cjs"
+      }
     }
   },
-  "main": "./dist/index.umd.cjs",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typings": "./dist/index.d.ts",

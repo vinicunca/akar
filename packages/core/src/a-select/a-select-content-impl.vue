@@ -90,12 +90,12 @@ import { AFocusScope } from '~~/a-focus-scope';
 import { focusFirst } from '~~/a-menu/utils';
 import { useCollection } from '~~/collection';
 import {
-  useBodyScrollLock,
   useFocusGuards,
   useForwardProps,
   useHideOthers,
   useTypeahead,
 } from '~~/shared';
+import { useBodyScrollLock } from '~~/shared/use-body-scroll-lock';
 
 import ASelectItemAlignedPosition from './a-select-item-aligned-position.vue';
 import ASelectPopperPosition from './a-select-popper-position.vue';

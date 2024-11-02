@@ -11,14 +11,7 @@ import type { AFocusScopeProps } from '~~/a-focus-scope';
 import type { APopperContentProps } from '~~/a-popper';
 import type { ARovingFocusGroupEmits } from '~~/a-roving-focus';
 
-import {
-  createContext,
-  useArrowNavigation,
-  useBodyScrollLock,
-  useFocusGuards,
-  useForwardExpose,
-  useTypeahead,
-} from '~~/shared';
+import { createContext } from '~~/shared';
 
 import type {
   GraceIntent,
@@ -104,6 +97,13 @@ import {
   APopperContentPropsDefaultValue,
 } from '~~/a-popper';
 import { ARovingFocusGroup } from '~~/a-roving-focus';
+import {
+  useArrowNavigation,
+  useFocusGuards,
+  useForwardExpose,
+  useTypeahead,
+} from '~~/shared';
+import { useBodyScrollLock } from '~~/shared/use-body-scroll-lock';
 
 import { injectAMenuContext, injectAMenuRootContext } from './a-menu-root.vue';
 import {

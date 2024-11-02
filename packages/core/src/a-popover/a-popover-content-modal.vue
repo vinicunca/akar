@@ -3,7 +3,8 @@ import { ref } from 'vue';
 
 import type { PointerDownOutsideEvent } from '~~/a-dismissable-layer';
 
-import { useBodyScrollLock, useForwardExpose, useForwardPropsEmits, useHideOthers } from '~~/shared';
+import { useForwardExpose, useForwardPropsEmits, useHideOthers } from '~~/shared';
+import { useBodyScrollLock } from '~~/shared/use-body-scroll-lock';
 
 import APopoverContentImpl, {
   type APopoverContentImplEmits,
