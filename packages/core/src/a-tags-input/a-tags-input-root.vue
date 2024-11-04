@@ -21,8 +21,8 @@ export interface ATagsInputRootProps<T = AcceptableInputValue> extends APrimitiv
   convertValue?: (value: string) => T;
   /** The value of the tags that should be added. Use when you do not need to control the state of the tags input */
   defaultValue?: Array<T>;
-  /** The character to trigger the addition of a new tag. Also used to split tags for `@paste` event */
-  delimiter?: string;
+  /** The character or regular expression to trigger the addition of a new tag. Also used to split tags for `@paste` event */
+  delimiter?: RegExp | string;
   /** The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode. */
   dir?: Direction;
   /** When `true`, prevents the user from interacting with the tags input. */
@@ -49,7 +49,7 @@ export interface ATagsInputRootContext<T = AcceptableInputValue> {
   addOnBlur: Ref<boolean>;
   addOnPaste: Ref<boolean>;
   addOnTab: Ref<boolean>;
-  delimiter: Ref<string>;
+  delimiter: Ref<RegExp | string>;
   dir: Ref<Direction>;
   disabled: Ref<boolean>;
   displayValue: (value: T) => string;
@@ -175,8 +175,8 @@ provideATagsInputRootContext({
     }
     const lastTag = collection.at(-1);
     switch (event.key) {
-      case 'Delete':
-      case 'Backspace': {
+      case 'Backspace':
+      case 'Delete': {
         if (target.selectionStart !== 0 || target.selectionEnd !== 0) {
           break;
         }
@@ -192,10 +192,17 @@ provideATagsInputRootContext({
         }
         break;
       }
-      case KEY_CODES.HOME:
-      case KEY_CODES.END:
+      case KEY_CODES.ARROW_DOWN:
+      case KEY_CODES.ARROW_UP: {
+        if (selectedElement.value) {
+          event.preventDefault();
+        }
+        break;
+      }
+      case KEY_CODES.ARROW_LEFT:
       case KEY_CODES.ARROW_RIGHT:
-      case KEY_CODES.ARROW_LEFT: {
+      case KEY_CODES.END:
+      case KEY_CODES.HOME: {
         const isArrowRight = (event.key === KEY_CODES.ARROW_RIGHT && dir.value === 'ltr')
           || (event.key === KEY_CODES.ARROW_LEFT && dir.value === 'rtl');
         const isArrowLeft = !isArrowRight;
@@ -227,13 +234,6 @@ provideATagsInputRootContext({
             selectedElement.value = el;
           }
 
-          event.preventDefault();
-        }
-        break;
-      }
-      case KEY_CODES.ARROW_UP:
-      case KEY_CODES.ARROW_DOWN: {
-        if (selectedElement.value) {
           event.preventDefault();
         }
         break;

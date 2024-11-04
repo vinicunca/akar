@@ -8,6 +8,7 @@ import { computed, type Ref } from 'vue';
 import { areAllDaysBetweenValid, type DateMatcher, isDateBefore, isDateBetween } from '~~/date';
 
 export interface UseRangeCalendarProps {
+  allowNonContiguousRanges: Ref<boolean>;
   end: Ref<DateValue | undefined>;
   focusedValue: Ref<DateValue | undefined>;
   isDateDisabled: DateMatcher;
@@ -100,7 +101,7 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
       };
     }
 
-    const isValid = areAllDaysBetweenValid({
+    const isValid = props.allowNonContiguousRanges.value || areAllDaysBetweenValid({
       start,
       end,
       isDisabled: props.isDateDisabled,

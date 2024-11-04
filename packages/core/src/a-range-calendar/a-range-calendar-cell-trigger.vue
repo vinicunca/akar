@@ -168,17 +168,17 @@ function handleArrowKey(event: KeyboardEvent) {
   const indexIncrementation = 7;
   const sign = rootContext.dir.value === 'rtl' ? -1 : 1;
   switch (event.key) {
-    case KEY_CODES.ARROW_RIGHT:
-      newIndex += sign;
+    case KEY_CODES.ARROW_DOWN:
+      newIndex += indexIncrementation;
       break;
     case KEY_CODES.ARROW_LEFT:
       newIndex -= sign;
       break;
+    case KEY_CODES.ARROW_RIGHT:
+      newIndex += sign;
+      break;
     case KEY_CODES.ARROW_UP:
       newIndex -= indexIncrementation;
-      break;
-    case KEY_CODES.ARROW_DOWN:
-      newIndex += indexIncrementation;
       break;
     case KEY_CODES.ENTER:
     case KEY_CODES.SPACE:
@@ -229,14 +229,14 @@ function handleArrowKey(event: KeyboardEvent) {
     role="button"
     :aria-label="labelText"
     data-akar-calendar-cell-trigger
-    :aria-selected="isSelectedDate ? true : undefined"
+    :aria-selected="isSelectedDate && !isUnavailable ? true : undefined"
     :aria-disabled="isOutsideView || isDisabled || isUnavailable ? true : undefined"
-    :data-highlighted="isHighlighted ? '' : undefined"
+    :data-highlighted="isHighlighted && !isUnavailable ? '' : undefined"
     :data-selection-start="isSelectionStart ? true : undefined"
     :data-selection-end="isSelectionEnd ? true : undefined"
     :data-highlighted-start="isHighlightStart ? true : undefined"
     :data-highlighted-end="isHighlightEnd ? true : undefined"
-    :data-selected="isSelectedDate ? true : undefined"
+    :data-selected="isSelectedDate && !isUnavailable ? true : undefined"
     :data-outside-visible-view="isOutsideVisibleView ? '' : undefined"
     :data-value="day.toString()"
     :data-disabled="isDisabled || isOutsideView ? '' : undefined"

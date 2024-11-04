@@ -1,5 +1,6 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 
+import userEvent from '@testing-library/user-event';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -234,5 +235,75 @@ describe('given a ATagsInput with objects', async () => {
 
     expect(consoleWarnMockFunction).toHaveBeenCalledOnce();
     expect(consoleWarnMockFunction).toHaveBeenLastCalledWith('You must provide a `convertValue` function when using objects as values.');
+  });
+
+  describe('given a TagsInput with delimiter', async () => {
+    const setupDelimiter = (delimiter: RegExp | string) => {
+      const wrapper = mount(ATagsInput, {
+        props: {
+          delimiter,
+          addOnPaste: true,
+        },
+        attachTo: document.body,
+      });
+
+      const input = wrapper.find('input');
+
+      return {
+        wrapper,
+        input,
+      };
+    };
+
+    it('should add tag on typing single delimiter character', async () => {
+      const { wrapper, input } = setupDelimiter(',');
+      const user = userEvent.setup();
+
+      await user.type(input.element, 'tag1,');
+
+      const tags = wrapper.findAll('[data-reka-collection-item]');
+      expect(tags[1].text()).toBe('tag1');
+    });
+
+    it('should add tag on typing multiple delimiter characters', async () => {
+      const { wrapper, input } = setupDelimiter(/[ ,;]+/);
+      const user = userEvent.setup();
+
+      await user.type(input.element, 'tag1,');
+      await user.type(input.element, 'tag2 ');
+      await user.type(input.element, 'tag3;');
+
+      const tags = wrapper.findAll('[data-reka-collection-item]');
+      expect(tags[1].text()).toBe('tag1');
+      expect(tags[2].text()).toBe('tag2');
+      expect(tags[3].text()).toBe('tag3');
+    });
+
+    it('should add multiple tags on pasting text with single delimiter character', async () => {
+      const { wrapper, input } = setupDelimiter(',');
+      const user = userEvent.setup();
+
+      await user.click(input.element);
+      await user.paste('tag1,tag2,tag3');
+
+      const tags = wrapper.findAll('[data-reka-collection-item]');
+      expect(tags[1].text()).toBe('tag1');
+      expect(tags[2].text()).toBe('tag2');
+      expect(tags[3].text()).toBe('tag3');
+    });
+
+    it('should add multiple tags on pasting text with multiple delimiter characters', async () => {
+      const { wrapper, input } = setupDelimiter(/[ ,;]+/);
+      const user = userEvent.setup();
+
+      await user.click(input.element);
+      await user.paste('tag1, tag2;tag3 tag4');
+
+      const tags = wrapper.findAll('[data-reka-collection-item]');
+      expect(tags[1].text()).toBe('tag1');
+      expect(tags[2].text()).toBe('tag2');
+      expect(tags[3].text()).toBe('tag3');
+      expect(tags[4].text()).toBe('tag4');
+    });
   });
 });

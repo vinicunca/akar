@@ -10,6 +10,7 @@ import type { DateMatcher, DateRange, DateTimeGranularity, HourCycle, WeekDayFor
 import { createContext, type Direction } from '~~/shared';
 
 type ADateRangePickerRootContext = {
+  allowNonContiguousRanges: Ref<boolean>;
   dateFieldRef: Ref<InstanceType<typeof ADateRangeFieldRoot> | undefined>;
   defaultOpen: Ref<boolean>;
   dir: Ref<Direction>;
@@ -43,7 +44,7 @@ type ADateRangePickerRootContext = {
 
 export type ADateRangePickerRootProps = ADateRangeFieldRootProps
   & APopoverRootProps
-  & Pick<ARangeCalendarRootProps, 'fixedWeeks' | 'isDateDisabled' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn'>;
+  & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn'>;
 
 export type ADateRangePickerRootEmits = {
   /** Event handler called whenever the model value changes */
@@ -92,6 +93,7 @@ const props = withDefaults(
     locale: 'en',
     isDateDisabled: undefined,
     isDateUnavailable: undefined,
+    allowNonContiguousRanges: false,
   },
 );
 
@@ -120,6 +122,7 @@ const {
   hideTimeZone,
   hourCycle,
   dir: propsDir,
+  allowNonContiguousRanges,
 } = toRefs(props);
 
 const dir = useDirection(propsDir);
@@ -163,6 +166,7 @@ const open = useVModel(
 const dateFieldRef = ref<InstanceType<typeof ADateRangeFieldRoot> | undefined>();
 
 provideADateRangePickerRootContext({
+  allowNonContiguousRanges,
   isDateUnavailable: propsIsDateUnavailable.value,
   isDateDisabled: propsIsDateDisabled.value,
   locale,

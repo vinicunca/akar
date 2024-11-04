@@ -53,6 +53,8 @@ type ARangeCalendarRootContext = {
 };
 
 export interface ARangeCalendarRootProps extends APrimitiveProps {
+  /** When combined with `isDateUnavailable`, determines whether non-contiguous ranges, i.e. ranges containing unavailable dates, may be selected. */
+  allowNonContiguousRanges?: boolean;
   /** The accessible label for the calendar */
   calendarLabel?: string;
   /** The default placeholder date */
@@ -149,6 +151,7 @@ const props = withDefaults(
     placeholder: undefined,
     isDateDisabled: undefined,
     isDateUnavailable: undefined,
+    allowNonContiguousRanges: false,
   },
 );
 const emits = defineEmits<ARangeCalendarRootEmits>();
@@ -189,6 +192,7 @@ const {
   locale: propLocale,
   nextPage: propsNextPage,
   prevPage: propsPrevPage,
+  allowNonContiguousRanges,
 } = toRefs(props);
 
 const { primitiveElement, currentElement: parentElement }
@@ -276,6 +280,7 @@ const {
   isDateDisabled,
   isDateUnavailable,
   focusedValue,
+  allowNonContiguousRanges,
 });
 
 watch(
