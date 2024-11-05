@@ -145,7 +145,7 @@ export function useWindowSplitterPanelGroupBehavior({
 
               if (size != null && collapsible) {
                 const nextLayout = adjustLayoutByDelta({
-                  delta: fuzzyNumbersEqual(size, collapsedSize)
+                  delta: fuzzyNumbersEqual({ actual: size, expected: collapsedSize })
                     ? minSize - collapsedSize
                     : collapsedSize - size,
                   layout: layout.value,

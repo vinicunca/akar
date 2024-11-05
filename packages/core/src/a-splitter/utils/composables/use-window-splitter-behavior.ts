@@ -40,17 +40,6 @@ export function useWindowSplitterResizeHandlerBehavior({
       }
 
       switch (event.key) {
-        case KEY_CODES.ARROW_DOWN:
-        case KEY_CODES.ARROW_LEFT:
-        case KEY_CODES.ARROW_RIGHT:
-        case KEY_CODES.ARROW_UP:
-        case KEY_CODES.END:
-        case KEY_CODES.HOME: {
-          event.preventDefault();
-
-          resizeHandler.value?.(event);
-          break;
-        }
         case 'F6': {
           event.preventDefault();
 
@@ -89,6 +78,17 @@ export function useWindowSplitterResizeHandlerBehavior({
           const nextHandle = handles[nextIndex] as HTMLElement;
           nextHandle.focus();
 
+          break;
+        }
+        case KEY_CODES.ARROW_DOWN:
+        case KEY_CODES.ARROW_LEFT:
+        case KEY_CODES.ARROW_RIGHT:
+        case KEY_CODES.ARROW_UP:
+        case KEY_CODES.END:
+        case KEY_CODES.HOME: {
+          event.preventDefault();
+
+          resizeHandler.value?.(event);
           break;
         }
       }

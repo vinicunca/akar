@@ -39,6 +39,7 @@ export default defineConfig({
       },
       entry: {
         index: resolve(__dirname, 'src/index.ts'),
+        date: resolve(__dirname, 'src/date/index.ts'),
       },
     },
     rollupOptions: {
@@ -49,6 +50,8 @@ export default defineConfig({
         'vue',
         '@floating-ui/vue',
         '@vinicunca/perkakas',
+        '@internationalized/date',
+        '@internationalized/number',
       ],
       output: {
         preserveModules: true,

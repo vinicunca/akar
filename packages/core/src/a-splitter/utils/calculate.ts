@@ -30,7 +30,7 @@ export function calculateDragOffsetPercentage(
 
   const { initialCursorPosition } = initialDragState;
 
-  const cursorPosition = getResizeEventCursorPosition(direction, event);
+  const cursorPosition = getResizeEventCursorPosition({ direction, event });
 
   const groupElement = getPanelGroupElement({
     id: groupId,
