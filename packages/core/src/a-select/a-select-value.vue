@@ -10,6 +10,8 @@ export interface ASelectValueProps extends APrimitiveProps {
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
 
+import type { AcceptableValue } from '~~/shared/types';
+
 import { APrimitive } from '~~/a-primitive';
 import { useForwardExpose } from '~~/shared';
 
@@ -31,12 +33,22 @@ onMounted(() => {
   rootContext.valueElement = currentElement;
 });
 
-const slotText = computed(() => {
+const selectedLabel = computed(() => {
+  let list: Array<string> = [];
+  const options = Array.from(rootContext.optionsSet.value);
+  const getOption = (value?: AcceptableValue) => options.find((option) => option.value === value);
+
   if (Array.isArray(rootContext.modelValue.value)) {
-    return rootContext.modelValue.value.length === 0 ? props.placeholder : rootContext.modelValue.value.join(', ');
+    list = rootContext.modelValue.value.map((value) => getOption(value)?.textContent ?? '');
   } else {
-    return rootContext.modelValue.value || props.placeholder;
+    list = [getOption(rootContext.modelValue.value)?.textContent ?? ''];
   }
+
+  return list.filter(Boolean);
+});
+
+const slotText = computed(() => {
+  return selectedLabel.value.length ? selectedLabel.value.join(', ') : props.placeholder;
 });
 </script>
 
@@ -46,7 +58,10 @@ const slotText = computed(() => {
     :as="as"
     :as-child="asChild"
     :style="{ pointerEvents: 'none' }"
+    :data-placeholder="selectedLabel.length ? undefined : props.placeholder"
   >
-    <slot>{{ slotText }}</slot>
+    <slot :selected-label="selectedLabel">
+      {{ slotText }}
+    </slot>
   </APrimitive>
 </template>

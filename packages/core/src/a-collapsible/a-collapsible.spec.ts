@@ -12,12 +12,21 @@ const CONTENT_TEXT = 'Content';
 describe('given a default ACollapsible', async () => {
   let wrapper: VueWrapper<InstanceType<typeof ACollapsible>>;
   let trigger: DOMWrapper<HTMLButtonElement>;
+  let content: DOMWrapper<HTMLDivElement>;
+
   beforeEach(() => {
     wrapper = mount(ACollapsible);
     trigger = wrapper.find('button');
+    content = wrapper.find('[hidden]');
   });
+
   it('should pass axe accessibility tests', async () => {
     expect(await axe(wrapper.element)).toHaveNoViolations();
+  });
+
+  it('should have hidden content', async () => {
+    expect(content.element).not.toBeNull();
+    expect(content.element).toHaveTextContent('');
   });
 
   describe('when clicking the trigger', async () => {
@@ -43,15 +52,26 @@ describe('given a default ACollapsible', async () => {
   });
 });
 
-describe('given a ACollapsible with `unmountOnHide`', async () => {
+describe('given a ACollapsible with `unmountOnHide:false`', async () => {
   let wrapper: VueWrapper<InstanceType<typeof ACollapsible>>;
   let trigger: DOMWrapper<HTMLButtonElement>;
+  let content: DOMWrapper<HTMLDivElement>;
+
   beforeEach(() => {
     wrapper = mount(ACollapsible, { props: { unmountOnHide: false } });
     trigger = wrapper.find('button');
+    content = wrapper.find('[hidden]');
   });
+
   it('should pass axe accessibility tests', async () => {
     expect(await axe(wrapper.element)).toHaveNoViolations();
+  });
+
+  it('should have hidden attribute', async () => {
+    // `jsdom` doesn't render hidden attribute correctly
+    expect(content.element.getAttribute('hidden')).toBe('');
+    // it should be
+    // expect(content.element.getAttribute('hidden')).toBe('until-found')
   });
 
   describe('when clicking the trigger', async () => {

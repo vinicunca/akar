@@ -32,6 +32,7 @@ useForwardExpose();
       --akar-accordion-content-width: var(--akar-collapsible-content-width);
       --akar-accordion-content-height: var(--akar-collapsible-content-height);
     "
+    @content-found="rootContext.changeModelValue(itemContext.value.value)"
   >
     <slot />
   </ACollapsibleContent>

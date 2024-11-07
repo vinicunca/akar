@@ -1,8 +1,6 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/a-primitive';
 
-import { useForwardExpose } from '~~/shared';
-
 export interface ACollapsibleContentProps extends APrimitiveProps {
   /**
    * Used to force mounting when more control is needed. Useful when
@@ -10,15 +8,21 @@ export interface ACollapsibleContentProps extends APrimitiveProps {
    */
   forceMount?: boolean;
 }
+
+export type ACollapsibleContentEmits = {
+  contentFound: [void];
+};
 </script>
 
 <script setup lang="ts">
+import { useEventListener } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, useId, watch } from 'vue';
 
 import { APresence } from '~~/a-presence';
 import {
   APrimitive,
 } from '~~/a-primitive';
+import { useForwardExpose } from '~~/shared';
 
 import { injectACollapsibleRootContext } from './a-collapsible-root.vue';
 
@@ -27,6 +31,7 @@ defineOptions({
 });
 
 const props = defineProps<ACollapsibleContentProps>();
+const emits = defineEmits<ACollapsibleContentEmits>();
 
 const rootContext = injectACollapsibleRootContext();
 rootContext.contentId ||= useId();
@@ -85,6 +90,17 @@ onMounted(() => {
     isMountAnimationPrevented.value = false;
   });
 });
+
+useEventListener(
+  currentElement,
+  'beforematch',
+  () => {
+    requestAnimationFrame(() => {
+      rootContext.onOpenToggle();
+      emits('contentFound');
+    });
+  },
+);
 </script>
 
 <template>
@@ -100,7 +116,7 @@ onMounted(() => {
       :ref="forwardRef"
       :as-child="props.asChild"
       :as="as"
-      :hidden="!present"
+      :hidden="!present ? rootContext.unmountOnHide.value ? '' : 'until-found' : undefined"
       :data-state="skipAnimation ? undefined : rootContext.open.value ? 'open' : 'closed'"
       :data-disabled="rootContext.disabled?.value ? '' : undefined"
       :style="{

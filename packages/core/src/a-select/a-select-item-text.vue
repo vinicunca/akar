@@ -5,14 +5,14 @@ export interface ASelectItemTextProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { computed, h, onBeforeUnmount, onMounted } from 'vue';
+import { computed, onBeforeUnmount, onMounted } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
 import { useForwardExpose } from '~~/shared';
 
 import { injectASelectContentContext } from './a-select-content-impl.vue';
 import { injectASelectItemContext } from './a-select-item.vue';
-import { injectASelectNativeOptionsContext } from './a-select-root.vue';
+import { injectASelectRootContext } from './a-select-root.vue';
 
 defineOptions({
   inheritAttrs: false,
@@ -25,19 +25,18 @@ const props = withDefaults(
   },
 );
 
+const rootContext = injectASelectRootContext();
 const contentContext = injectASelectContentContext();
-const nativeOptionContext = injectASelectNativeOptionsContext();
 const itemContext = injectASelectItemContext();
 
 const { forwardRef, currentElement: itemTextElement } = useForwardExpose();
 
-const nativeOption = computed(() => {
-  return h('option', {
-    key: itemContext.value.toString(),
+const optionProps = computed(() => {
+  return {
     value: itemContext.value,
     disabled: itemContext.disabled.value,
-    textContent: itemTextElement.value?.textContent,
-  });
+    textContent: itemTextElement.value?.textContent ?? itemContext.value.toString(),
+  };
 });
 
 onMounted(() => {
@@ -52,11 +51,11 @@ onMounted(() => {
     disabled: itemContext.disabled.value,
   });
 
-  nativeOptionContext.onNativeOptionAdd(nativeOption.value);
+  rootContext.onOptionAdd(optionProps.value);
 });
 
 onBeforeUnmount(() => {
-  nativeOptionContext.onNativeOptionRemove(nativeOption.value);
+  rootContext.onOptionRemove(optionProps.value);
 });
 </script>
 

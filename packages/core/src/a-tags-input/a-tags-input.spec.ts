@@ -261,7 +261,7 @@ describe('given a ATagsInput with objects', async () => {
 
       await user.type(input.element, 'tag1,');
 
-      const tags = wrapper.findAll('[data-reka-collection-item]');
+      const tags = wrapper.findAll('[data-akar-collection-item]');
       expect(tags[1].text()).toBe('tag1');
     });
 
@@ -273,7 +273,7 @@ describe('given a ATagsInput with objects', async () => {
       await user.type(input.element, 'tag2 ');
       await user.type(input.element, 'tag3;');
 
-      const tags = wrapper.findAll('[data-reka-collection-item]');
+      const tags = wrapper.findAll('[data-akar-collection-item]');
       expect(tags[1].text()).toBe('tag1');
       expect(tags[2].text()).toBe('tag2');
       expect(tags[3].text()).toBe('tag3');
@@ -286,7 +286,7 @@ describe('given a ATagsInput with objects', async () => {
       await user.click(input.element);
       await user.paste('tag1,tag2,tag3');
 
-      const tags = wrapper.findAll('[data-reka-collection-item]');
+      const tags = wrapper.findAll('[data-akar-collection-item]');
       expect(tags[1].text()).toBe('tag1');
       expect(tags[2].text()).toBe('tag2');
       expect(tags[3].text()).toBe('tag3');
@@ -299,7 +299,7 @@ describe('given a ATagsInput with objects', async () => {
       await user.click(input.element);
       await user.paste('tag1, tag2;tag3 tag4');
 
-      const tags = wrapper.findAll('[data-reka-collection-item]');
+      const tags = wrapper.findAll('[data-akar-collection-item]');
       expect(tags[1].text()).toBe('tag1');
       expect(tags[2].text()).toBe('tag2');
       expect(tags[3].text()).toBe('tag3');
