@@ -2,7 +2,7 @@ import type { Ref } from 'vue';
 
 import { refAutoReset } from '@vueuse/shared';
 
-import { wrapArray } from '~~/shared';
+import { wrapArray } from '~~/shared/arrays';
 
 export function useTypeahead(collections?: Ref<Array<HTMLElement>>) {
   // Reset `search` 1 second after it was last updated
