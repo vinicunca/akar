@@ -416,7 +416,7 @@ async function handleFocusOut(event: FocusEvent) {
 
   await nextTick();
 
-  if (highlightedElement.value && !currentElement.value.contains(target)) {
+  if (highlightedElement.value && currentElement && !currentElement.value.contains(target)) {
     onLeave(event);
   }
 }

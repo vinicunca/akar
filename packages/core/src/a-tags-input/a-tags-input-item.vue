@@ -56,7 +56,7 @@ const itemContext = provideATagsInputItemContext({
 </script>
 
 <template>
-  <ACollectionItem>
+  <ACollectionItem :value="value">
     <APrimitive
       :ref="forwardRef"
       :as="as"

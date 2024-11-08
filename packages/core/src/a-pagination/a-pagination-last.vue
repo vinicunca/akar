@@ -5,6 +5,8 @@ export interface APaginationLastProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import { APrimitive } from '~~/a-primitive';
 import { useForwardExpose } from '~~/shared';
 
@@ -16,7 +18,13 @@ const props = withDefaults(
 );
 
 const rootContext = injectAPaginationRootContext();
+
 useForwardExpose();
+
+const disabled = computed(() =>
+  rootContext.page.value === rootContext.pageCount.value
+  || rootContext.disabled.value,
+);
 </script>
 
 <template>
@@ -24,8 +32,8 @@ useForwardExpose();
     v-bind="props"
     aria-label="Last Page"
     :type="as === 'button' ? 'button' : undefined"
-    :disabled="rootContext.page.value === rootContext.pageCount.value || rootContext.disabled.value"
-    @click="rootContext.onPageChange(rootContext.pageCount.value)"
+    :disabled
+    @click="!disabled && rootContext.onPageChange(rootContext.pageCount.value)"
   >
     <slot>Last page</slot>
   </APrimitive>

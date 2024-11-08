@@ -39,8 +39,12 @@ export interface ATagsInputRootProps<T = AcceptableInputValue> extends APrimitiv
 }
 
 export type ATagsInputRootEmits<T = AcceptableInputValue> = {
+  /** Event handler called when tag is added */
+  'addTag': [payload: T];
   /** Event handler called when the value is invalid */
   'invalid': [payload: T];
+  /** Event handler called when tag is removed */
+  'removeTag': [payload: T];
   /** Event handler called when the value changes */
   'update:modelValue': [payload: Array<T>];
 };
@@ -129,6 +133,15 @@ const { getItems, ACollectionSlot } = useCollection({ isProvider: true });
 const selectedElement = ref<HTMLElement>();
 const isInvalidInput = ref(false);
 
+function handleRemoveTag(index: number) {
+  if (index !== -1) {
+    const collection = getItems().filter((i) => i.ref.dataset.disabled !== '');
+    modelValue.value.splice(index, 1);
+
+    emits('removeTag', collection[index].value);
+  }
+}
+
 provideATagsInputRootContext({
   modelValue,
   onAddValue: (_payload) => {
@@ -149,11 +162,15 @@ provideATagsInputRootContext({
 
     if (props.duplicate) {
       modelValue.value.push(payload);
+      emits('addTag', payload);
+
       return true;
     } else {
       const exist = modelValue.value.includes(payload);
       if (!exist) {
         modelValue.value.push(payload);
+        emits('addTag', payload);
+
         return true;
       } else {
         isInvalidInput.value = true;
@@ -162,11 +179,7 @@ provideATagsInputRootContext({
     emits('invalid', payload);
     return false;
   },
-  onRemoveValue: (index) => {
-    if (index !== -1) {
-      modelValue.value.splice(index, 1);
-    }
-  },
+  onRemoveValue: handleRemoveTag,
   onInputKeydown: (event) => {
     const target = event.target as HTMLInputElement;
     const collection = getItems().map((i) => i.ref).filter((i) => i.dataset.disabled !== '');
@@ -183,6 +196,7 @@ provideATagsInputRootContext({
 
         if (selectedElement.value) {
           const index = collection.findIndex((i) => i === selectedElement.value);
+          handleRemoveTag(index);
           modelValue.value.splice(index, 1);
           selectedElement.value = selectedElement.value === lastTag ? collection.at(index - 1) : collection.at(index + 1);
           event.preventDefault();

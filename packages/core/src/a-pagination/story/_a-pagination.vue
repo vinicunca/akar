@@ -1,34 +1,61 @@
 <script setup lang="ts">
-import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList, APaginationListItem, APaginationNext, APaginationPrev, APaginationRoot, type APaginationRootProps } from '..';
+import { computed } from 'vue';
 
-const props = withDefaults(
-  defineProps<{
-    showEdges?: APaginationRootProps['showEdges'];
-    total?: APaginationRootProps['total'];
-  }>(),
-  {
-    total: 100,
-  },
-);
+import {
+  APaginationEllipsis,
+  type APaginationEllipsisProps,
+  APaginationFirst,
+  type APaginationFirstProps,
+  APaginationLast,
+  type APaginationLastProps,
+  APaginationList,
+  APaginationListItem,
+  type APaginationListItemProps,
+  type APaginationListProps,
+  APaginationNext,
+  type APaginationNextProps,
+  APaginationPrev,
+  type APaginationPrevProps,
+  APaginationRoot,
+  type APaginationRootProps,
+} from '..';
+
+const props = defineProps<{
+  ellipsis?: APaginationEllipsisProps;
+  first?: APaginationFirstProps;
+
+  last?: APaginationLastProps;
+  list?: APaginationListProps;
+
+  listItem?: Partial<APaginationListItemProps>;
+  next?: APaginationNextProps;
+
+  prev?: APaginationPrevProps;
+  root?: APaginationRootProps;
+}>();
+
+const rootProps = computed(() => ({ total: 100, ...props.root }));
 </script>
 
 <template>
   <APaginationRoot
-    v-bind="props"
+    v-bind="rootProps"
     :items-per-page="10"
   >
     <APaginationList
       v-slot="{ items }"
+      v-bind="props.list"
       class="flex items-center gap-2"
     >
-      <APaginationFirst />
-      <APaginationPrev />
+      <APaginationFirst v-bind="props.first" />
+      <APaginationPrev v-bind="props.prev" />
       <template v-for="(page, index) in items">
         <APaginationListItem
           v-if="page.type === 'page'"
           :key="index"
           class="border rounded px-4 py-2 data-[selected]:bg-grass8"
           :value="page.value"
+          v-bind="props.listItem"
         >
           {{ page.value }}
         </APaginationListItem>
@@ -37,12 +64,13 @@ const props = withDefaults(
           :key="page.type"
           :index="index"
           class="border rounded px-4 py-2"
+          v-bind="props.ellipsis"
         >
           &#8230;
         </APaginationEllipsis>
       </template>
-      <APaginationNext />
-      <APaginationLast />
+      <APaginationNext v-bind="props.next" />
+      <APaginationLast v-bind="props.last" />
     </APaginationList>
   </APaginationRoot>
 </template>

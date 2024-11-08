@@ -7,7 +7,7 @@ export interface ASelectArrowProps extends APopperArrowProps {}
 <script setup lang="ts">
 import { APopperArrow } from '~~/a-popper';
 
-import { injectASelectContentContext } from './a-select-content-impl.vue';
+import { ASelectContentDefaultContextValue, injectASelectContentContext } from './a-select-content-impl.vue';
 import { injectASelectRootContext } from './a-select-root.vue';
 
 const props = withDefaults(
@@ -20,7 +20,7 @@ const props = withDefaults(
 );
 
 const rootContext = injectASelectRootContext();
-const contentContext = injectASelectContentContext();
+const contentContext = injectASelectContentContext(ASelectContentDefaultContextValue);
 </script>
 
 <template>

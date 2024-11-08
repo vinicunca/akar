@@ -5,6 +5,8 @@ export interface APaginationPrevProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import { APrimitive } from '~~/a-primitive';
 import { useForwardExpose } from '~~/shared';
 
@@ -16,7 +18,10 @@ const props = withDefaults(
 );
 
 useForwardExpose();
+
 const rootContext = injectAPaginationRootContext();
+
+const disabled = computed(() => rootContext.page.value === 1 || rootContext.disabled.value);
 </script>
 
 <template>
@@ -24,8 +29,8 @@ const rootContext = injectAPaginationRootContext();
     v-bind="props"
     aria-label="Previous Page"
     :type="as === 'button' ? 'button' : undefined"
-    :disabled="rootContext.page.value === 1 || rootContext.disabled?.value"
-    @click="rootContext.onPageChange(rootContext.page.value - 1)"
+    :disabled
+    @click="!disabled && rootContext.onPageChange(rootContext.page.value - 1)"
   >
     <slot>Prev page</slot>
   </APrimitive>

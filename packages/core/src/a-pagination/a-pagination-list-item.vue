@@ -23,6 +23,7 @@ useForwardExpose();
 
 const rootContext = injectAPaginationRootContext();
 const isSelected = computed(() => rootContext.page.value === props.value);
+const disabled = computed(() => rootContext.disabled.value);
 </script>
 
 <template>
@@ -32,9 +33,9 @@ const isSelected = computed(() => rootContext.page.value === props.value);
     :aria-label="`Page ${value}`"
     :aria-current="isSelected ? 'page' : undefined"
     :data-selected="isSelected ? 'true' : undefined"
-    :disabled="rootContext.disabled.value"
+    :disabled
     :type="as === 'button' ? 'button' : undefined"
-    @click="rootContext.onPageChange(value)"
+    @click="!disabled && rootContext.onPageChange(value)"
   >
     <slot>{{ value }}</slot>
   </APrimitive>

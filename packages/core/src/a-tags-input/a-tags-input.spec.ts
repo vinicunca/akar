@@ -16,10 +16,12 @@ describe('given default ATagsInput', () => {
   let wrapper: VueWrapper<InstanceType<typeof ATagsInput>>;
   let input: DOMWrapper<HTMLInputElement>;
   let tags: Array<DOMWrapper<HTMLElement>>;
+  let rootComponent: Omit< VueWrapper, 'exists'>;
 
   beforeEach(() => {
     wrapper = mount(ATagsInput, { attachTo: document.body });
     tags = wrapper.findAll('[data-akar-collection-item]');
+    rootComponent = wrapper.getComponent({ name: 'ATagsInputRoot' });
   });
 
   it('should pass axe accessibility tests', async () => {
@@ -42,6 +44,10 @@ describe('given default ATagsInput', () => {
       input.element.focus();
       await addTag('123');
       await addTag('Asd');
+    });
+
+    it('should emit `addTag` event', () => {
+      expect(rootComponent.emitted('addTag')?.flat()).toEqual(['123', 'Asd']);
     });
 
     it('should add a new tag', () => {
@@ -110,6 +116,10 @@ describe('given default ATagsInput', () => {
             key: 'Backspace',
           });
           tags = wrapper.findAll('[data-akar-collection-item]');
+        });
+
+        it('should trigger `removeTag` event', () => {
+          expect(rootComponent.emitted('removeTag')?.[0]?.[0]).toEqual('Asd');
         });
 
         it('should remove the active tag', () => {
