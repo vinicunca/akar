@@ -3,7 +3,7 @@ import { ref } from 'vue';
 
 import {
   ADropdownMenuArrow,
-  ADropdownMenuACheckboxItem,
+  ADropdownMenuCheckboxItem,
   ADropdownMenuContent,
   ADropdownMenuItem,
   ADropdownMenuItemIndicator,
@@ -47,7 +47,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
     <Variant title="default">
       <ADropdownMenuRoot v-model:open="toggleState">
         <ADropdownMenuTrigger
-          class="text-violet11 shadow-blackA7 size-10 inline-flex items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+          class="size-10 inline-flex items-center justify-center rounded-full bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
           aria-label="Customise options"
         >
           <i
@@ -76,7 +76,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               >
                 More Tools
                 <div
-                  class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
+                  class="ml-auto pl-5 text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                 >
                   <i
                     class="i-tabler:chevron-right size-3.5"
@@ -134,7 +134,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               >
                 More Tools
                 <div
-                  class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
+                  class="ml-auto pl-5 text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                 >
                   <i
                     class="i-tabler:chevron-right size-3.5"
@@ -170,7 +170,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
                     >
                       More Tools
                       <div
-                        class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
+                        class="ml-auto pl-5 text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                       >
                         <i
                           class="i-tabler:chevron-right size-3.5"
@@ -206,7 +206,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
                           >
                             More Tools
                             <div
-                              class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
+                              class="ml-auto pl-5 text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                             >
                               <i
                                 class="i-tabler:chevron-right size-3.5"
@@ -248,7 +248,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               </ADropdownMenuPortal>
             </ADropdownMenuSub>
             <ADropdownMenuSeparator :class="separator" />
-            <ADropdownMenuACheckboxItem
+            <ADropdownMenuCheckboxItem
               v-model="checkboxOne"
               :class="checkboxItem"
               @select.prevent
@@ -260,8 +260,8 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               <div :class="shortcut">
                 ⌘+B
               </div>
-            </ADropdownMenuACheckboxItem>
-            <ADropdownMenuACheckboxItem
+            </ADropdownMenuCheckboxItem>
+            <ADropdownMenuCheckboxItem
               v-model="checkboxTwo"
               :class="checkboxItem"
               @select.prevent
@@ -270,10 +270,10 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
                 <i class="i-tabler:check" />
               </ADropdownMenuItemIndicator>
               Show Full URLs
-            </ADropdownMenuACheckboxItem>
+            </ADropdownMenuCheckboxItem>
             <ADropdownMenuSeparator :class="separator" />
 
-            <ADropdownMenuLabel class="text-mauve11 pl-6 text-xs leading-6">
+            <ADropdownMenuLabel class="pl-6 text-xs text-mauve11 leading-6">
               People
             </ADropdownMenuLabel>
             <ADropdownMenuRadioGroup v-model="person">

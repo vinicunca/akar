@@ -23,7 +23,7 @@ export const [
   injectAMenuItemIndicatorContext,
   provideAMenuItemIndicatorContext,
 ] = createContext<AMenuItemIndicatorContext>(
-  ['AMenuACheckboxItem', 'AMenuRadioItem'],
+  ['AMenuCheckboxItem', 'AMenuRadioItem'],
   'AMenuItemIndicatorContext',
 );
 </script>

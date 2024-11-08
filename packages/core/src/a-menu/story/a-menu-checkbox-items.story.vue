@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import { AMenuACheckboxItem, AMenuItemIndicator, AMenuSeparator } from '..';
+import { AMenuCheckboxItem, AMenuItemIndicator, AMenuSeparator } from '..';
 import AMenuWithAnchor from './_a-menu-with-anchor.vue';
 import TickIcon from './_a-tick-icon.vue';
 
@@ -21,12 +21,12 @@ function handleSelectAll() {
 <template>
   <Story
     group="utilities"
-    title="AMenu/ACheckboxItems"
+    title="AMenuCheckboxItems"
     :layout="{ type: 'single', iframe: true }"
   >
     <Variant title="default">
       <AMenuWithAnchor>
-        <AMenuACheckboxItem
+        <AMenuCheckboxItem
           class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           :model-value="
             selection.length === options.length
@@ -41,11 +41,11 @@ function handleSelectAll() {
           <AMenuItemIndicator>
             <TickIcon v-if="selection.length === options.length" />
           </AMenuItemIndicator>
-        </AMenuACheckboxItem>
+        </AMenuCheckboxItem>
 
         <AMenuSeparator class="mx-[10px] my-[5px] h-[1px] bg-gray-200" />
 
-        <AMenuACheckboxItem
+        <AMenuCheckboxItem
           v-for="(option, index) in options"
           :key="index"
           class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
@@ -66,7 +66,7 @@ function handleSelectAll() {
           <AMenuItemIndicator>
             <TickIcon />
           </AMenuItemIndicator>
-        </AMenuACheckboxItem>
+        </AMenuCheckboxItem>
       </AMenuWithAnchor>
     </Variant>
   </Story>

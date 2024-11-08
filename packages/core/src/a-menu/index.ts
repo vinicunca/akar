@@ -1,9 +1,9 @@
 export { default as AMenuAnchor } from './a-menu-anchor.vue';
 export { type AMenuArrowProps, default as AMenuArrow } from './a-menu-arrow.vue';
 export {
-  type AMenuACheckboxItemEmits,
-  type AMenuACheckboxItemProps,
-  default as AMenuACheckboxItem,
+  type AMenuCheckboxItemEmits,
+  type AMenuCheckboxItemProps,
+  default as AMenuCheckboxItem,
 } from './a-menu-checkbox-item.vue';
 export {
   type AMenuContentEmits,
