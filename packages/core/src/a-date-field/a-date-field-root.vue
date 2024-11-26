@@ -310,7 +310,10 @@ watch(
   ([modelValue_]) => {
     if (modelValue_ !== undefined) {
       segmentValues.value = { ...syncSegmentValues({ value: modelValue_, formatter }) };
-    } else if (Object.values(segmentValues.value).every((value) => value === null)) {
+    } else if (
+      Object.values(segmentValues.value).every((value) => value === null)
+      || modelValue === undefined
+    ) {
       segmentValues.value = { ...initialSegments };
     }
   },

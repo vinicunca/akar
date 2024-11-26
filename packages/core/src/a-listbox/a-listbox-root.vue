@@ -19,12 +19,12 @@ type AListboxRootContext<T> = {
   isVirtual: Ref<boolean>;
   modelValue: Ref<Array<T> | T | undefined>;
   multiple: Ref<boolean>;
+  onCompositionEnd: () => void;
+  onCompositionStart: () => void;
   onEnter: (event: Event) => void;
   onKeydownEnter: (event: KeyboardEvent) => void;
   onKeydownNavigation: (event: KeyboardEvent) => void;
-
   onKeydownTypeAhead: (event: KeyboardEvent) => void;
-
   onLeave: (event: Event) => void;
   onValueChange: (val: T) => void;
   orientation: Ref<DataOrientation>;
@@ -179,6 +179,7 @@ function onValueChange(val: T) {
 const highlightedElement = ref<HTMLElement | null>(null);
 const previousElement = ref<HTMLElement | null>(null);
 const isVirtual = ref(false);
+const isComposing = ref(false);
 const virtualFocusHook = createEventHook<Event | null | undefined>();
 const virtualKeydownHook = createEventHook<KeyboardEvent>();
 const virtualHighlightHook = createEventHook<T>();
@@ -233,7 +234,9 @@ function onKeydownEnter(event: KeyboardEvent) {
     event.preventDefault();
     event.stopPropagation();
 
-    highlightedElement.value.click();
+    if (!isComposing.value) {
+      highlightedElement.value.click();
+    }
   }
 }
 
@@ -262,6 +265,16 @@ function onKeydownTypeAhead(event: KeyboardEvent) {
   setTimeout(() => {
     isUserAction.value = false;
   }, 1);
+}
+
+function onCompositionStart() {
+  isComposing.value = true;
+}
+
+function onCompositionEnd() {
+  requestAnimationFrame(() => {
+    isComposing.value = false;
+  });
 }
 
 function highlightFirstItem() {
@@ -455,6 +468,9 @@ provideAListboxRootContext({
   onKeydownNavigation,
   onKeydownTypeAhead,
   highlightFirstItem,
+
+  onCompositionStart,
+  onCompositionEnd,
 });
 </script>
 

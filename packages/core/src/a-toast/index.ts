@@ -14,6 +14,11 @@ export {
 } from './a-toast-description.vue';
 
 export {
+  type AToastPortalProps,
+  default as ToastPortal,
+} from './a-toast-portal.vue';
+
+export {
   type AToastProviderProps,
   default as AToastProvider,
   injectAToastProviderContext,

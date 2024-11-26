@@ -4,7 +4,12 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import Dts from 'vite-plugin-dts';
 
+import pkg from './package.json';
+
 const projectRootDir = resolve(__dirname);
+
+// A bit of a hack, but lets us use the proper extension in chunk filenames
+let currentFormat = '';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -35,6 +40,7 @@ export default defineConfig({
     lib: {
       name: 'akar',
       fileName: (format, name) => {
+        currentFormat = format;
         return `${name}.${format === 'es' ? 'js' : 'cjs'}`;
       },
       entry: {
@@ -43,19 +49,30 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      /**
-       * We need to make sure not to include external deps that won't be bundled in the final build
-       */
       external: [
-        'vue',
-        '@floating-ui/vue',
-        '@vinicunca/perkakas',
-        '@internationalized/date',
-        '@internationalized/number',
+        'nanoid/non-secure',
+        ...Object.keys(pkg.dependencies ?? {}),
+        ...Object.keys(pkg.peerDependencies ?? {}),
       ],
       output: {
-        preserveModules: true,
+        // Don't rely on preserveModules
+        // It creates a lot of unwanted files because of the multiple sections of SFC files
+        manualChunks: (moduleId, meta) => {
+          const info = meta.getModuleInfo(moduleId);
+          if (!info?.isIncluded) {
+            // Don't create empty chunks
+            return null;
+          }
+
+          const [namespace, file] = moduleId.split('?')[0].split('/').slice(-2);
+          return `${namespace}/${file.slice(0, file.lastIndexOf('.'))}`;
+        },
+
         exports: 'named',
+        chunkFileNames: (chunk) => `${chunk.name}.${currentFormat === 'es' ? 'js' : 'cjs'}`,
+        assetFileNames: (chunkInfo) => {
+          return chunkInfo.name as string;
+        },
       },
     },
   },
