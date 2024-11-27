@@ -51,9 +51,11 @@ export {
   createContext,
   useBodyScrollLock,
   useEmitAsProps,
+  useFilter,
   useForwardExpose,
   useForwardProps,
   useForwardPropsEmits,
+  useId,
   useStateMachine,
 } from './shared';
 
