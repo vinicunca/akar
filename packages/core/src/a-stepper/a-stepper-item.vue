@@ -13,8 +13,6 @@ export const [
   provideAStepperItemContext,
 ] = createContext<AStepperItemContext>('AStepperItem');
 
-export type AStepperState = 'active' | 'completed' | 'inactive';
-
 export interface AStepperItemContext {
   descriptionId: string;
   disabled: Ref<boolean>;
@@ -32,12 +30,14 @@ export interface AStepperItemProps extends APrimitiveProps {
   /** A unique value that associates the stepper item with an index */
   step: number;
 }
+
+export type AStepperState = 'active' | 'completed' | 'inactive';
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs, useId } from 'vue';
+import { computed, toRefs } from 'vue';
 
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose, useId } from '~~/shared';
 
 const props = withDefaults(
   defineProps<AStepperItemProps>(),
@@ -60,8 +60,8 @@ const { forwardRef } = useForwardExpose();
 
 const rootContext = injectAStepperRootContext();
 
-const titleId = useId();
-const descriptionId = useId();
+const titleId = useId(undefined, 'akar-stepper-item-title');
+const descriptionId = useId(undefined, 'akar-stepper-item-description');
 
 const itemState = computed(() => {
   if (completed.value) {

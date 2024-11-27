@@ -1,10 +1,13 @@
 <script lang="ts">
-import { isBrowser } from '@vinicunca/perkakas';
-import { ref, toRefs, useId, watch, watchEffect } from 'vue';
-
 import type { APrimitiveProps } from '~~/a-primitive';
+import { isBrowser } from '@vinicunca/perkakas';
 
 import { useWindowSplitterResizeHandlerBehavior } from './utils/composables/use-window-splitter-behavior';
+
+export type ASplitterResizeHandleEmits = {
+  /** Event handler called when dragging the handler. */
+  dragging: [isDragging: boolean];
+};
 
 export interface ASplitterResizeHandleProps extends APrimitiveProps {
   /** Disable drag handle */
@@ -16,22 +19,18 @@ export interface ASplitterResizeHandleProps extends APrimitiveProps {
   /** Tabindex for the handle */
   tabindex?: number;
 }
-
 export type PanelResizeHandleOnDragging = (isDragging: boolean) => void;
-export type ResizeHandlerState = 'drag' | 'hover' | 'inactive';
 
-export type ASplitterResizeHandleEmits = {
-  /** Event handler called when dragging the handler. */
-  dragging: [isDragging: boolean];
-};
+export type ResizeHandlerState = 'drag' | 'hover' | 'inactive';
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/a-primitive';
-import { useForwardExpose } from '~~/shared';
-
 import type { PointerHitAreaMargins, ResizeHandlerAction } from './utils/registry';
 import type { ResizeEvent, ResizeHandler } from './utils/types';
+import { ref, toRefs, watch, watchEffect } from 'vue';
+
+import { APrimitive } from '~~/a-primitive';
+import { useForwardExpose, useId } from '~~/shared';
 
 import { injectPanelGroupContext } from './a-splitter-group.vue';
 import { assert } from './utils/assert';
@@ -65,7 +64,7 @@ const {
   panelGroupElement,
 } = panelGroupContext;
 
-const resizeHandleId = useId();
+const resizeHandleId = useId(props.id, 'akar-splitter-resize-handle');
 const state = ref<ResizeHandlerState>('inactive');
 const isFocused = ref(false);
 const resizeHandler = ref<null | ResizeHandler>(null);

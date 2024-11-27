@@ -1,9 +1,7 @@
 <script lang="ts">
-import { KEY_CODES } from '@vinicunca/perkakas';
-
 import type { APrimitiveProps } from '~~/a-primitive';
 
-import { useForwardExpose } from '~~/shared';
+import { KEY_CODES } from '@vinicunca/perkakas';
 
 export interface ADropdownMenuTriggerProps extends APrimitiveProps {
   /** When `true`, prevents the user from interacting with item */
@@ -12,12 +10,13 @@ export interface ADropdownMenuTriggerProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { nextTick, onMounted, useId } from 'vue';
-
+import { nextTick, onMounted } from 'vue';
 import { AMenuAnchor } from '~~/a-menu';
+
 import {
   APrimitive,
 } from '~~/a-primitive';
+import { useForwardExpose, useId } from '~~/shared';
 
 import { injectADropdownMenuRootContext } from './a-dropdown-menu-root.vue';
 
@@ -36,7 +35,7 @@ onMounted(() => {
   rootContext.triggerElement = triggerElement;
 });
 
-rootContext.triggerId ||= useId();
+rootContext.triggerId ||= useId(undefined, 'akar-dropdown-menu-trigger');
 
 async function handleClick(event: MouseEvent) {
   // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)

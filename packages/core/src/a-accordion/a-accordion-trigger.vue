@@ -1,7 +1,6 @@
 <script lang="ts">
-import { useId } from 'vue';
-
 import type { APrimitiveProps } from '~~/a-primitive';
+import { useId } from '~~/shared';
 
 export interface AAccordionTriggerProps extends APrimitiveProps {}
 </script>
@@ -17,7 +16,8 @@ const props = defineProps<AAccordionTriggerProps>();
 const rootContext = injectAAccordionRootContext();
 const itemContext = injectAAccordionItemContext();
 
-itemContext.triggerId ||= useId();
+itemContext.triggerId ||= useId(undefined, 'akar-accordion-trigger');
+
 function changeItem() {
   if (itemContext.disabled.value) {
     return;

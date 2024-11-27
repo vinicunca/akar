@@ -1,6 +1,15 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/a-primitive';
 
+export type ASplitterPanelEmits = {
+  /** Event handler called when panel is collapsed. */
+  collapse: [];
+  /** Event handler called when panel is expanded. */
+  expand: [];
+  /** Event handler called when panel is resized; size parameter is a numeric value between 1-100.  */
+  resize: [size: number, prevSize: number | undefined];
+};
+
 export interface ASplitterPanelProps extends APrimitiveProps {
   /** The size of panel when it is collapsed. */
   collapsedSize?: number;
@@ -17,22 +26,6 @@ export interface ASplitterPanelProps extends APrimitiveProps {
   /** The order of panel within group; required for groups with conditionally rendered panels */
   order?: number;
 }
-
-export type ASplitterPanelEmits = {
-  /** Event handler called when panel is collapsed. */
-  collapse: [];
-  /** Event handler called when panel is expanded. */
-  expand: [];
-  /** Event handler called when panel is resized; size parameter is a numeric value between 1-100.  */
-  resize: [size: number, prevSize: number | undefined];
-};
-
-export type PanelOnCollapse = () => void;
-export type PanelOnExpand = () => void;
-export type PanelOnResize = (
-  size: number,
-  prevSize: number | undefined
-) => void;
 
 export type PanelCallbacks = {
   onCollapse?: PanelOnCollapse;
@@ -56,13 +49,21 @@ export type PanelData = {
   idIsFromProps: boolean;
   order: number | undefined;
 };
+
+export type PanelOnCollapse = () => void;
+
+export type PanelOnExpand = () => void;
+
+export type PanelOnResize = (
+  size: number,
+  prevSize: number | undefined
+) => void;
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, useId, watch } from 'vue';
-
+import { computed, onMounted, onUnmounted, watch } from 'vue';
 import { APrimitive } from '~~/a-primitive';
-
+import { useId } from '~~/shared';
 import { injectPanelGroupContext } from './a-splitter-group.vue';
 import { PRECISION } from './utils/constants';
 
@@ -100,7 +101,7 @@ const {
   unregisterPanel,
 } = panelGroupContext;
 
-const panelId = useId();
+const panelId = useId(props.id, 'akar-splitter-panel');
 
 const panelDataRef = computed(() => ({
   callbacks: {

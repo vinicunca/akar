@@ -6,7 +6,7 @@ import type { SelectEvent } from '~~/a-listbox/a-listbox-item.vue';
 import type { AcceptableValue } from '~~/shared/types';
 
 import { usePrimitiveElement } from '~~/a-primitive';
-import { createContext } from '~~/shared';
+import { createContext, useId } from '~~/shared';
 
 interface AComboboxItemContext {
   isSelected: Ref<boolean>;
@@ -27,7 +27,7 @@ export interface AComboboxItemProps<T = AcceptableValue> extends AListboxItemPro
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
-import { computed, onMounted, onUnmounted, useId } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 
 import { AListboxItem } from '~~/a-listbox';
 
@@ -37,7 +37,7 @@ import { injectAComboboxRootContext } from './a-combobox-root.vue';
 const props = defineProps<AComboboxItemProps<T>>();
 const emits = defineEmits<AComboboxItemEmits<T>>();
 
-const id = useId();
+const id = useId(undefined, 'akar-combobox-item');
 const rootContext = injectAComboboxRootContext();
 const groupContext = injectAComboboxGroupContext(null);
 

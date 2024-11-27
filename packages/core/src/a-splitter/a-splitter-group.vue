@@ -1,15 +1,20 @@
 <script lang="ts">
 import type { CSSProperties, Ref } from 'vue';
 
-import { debounce } from '@vinicunca/perkakas';
-
 import type { APrimitiveProps } from '~~/a-primitive';
-
-import { createContext } from '~~/shared';
 
 import type { PanelConstraints, PanelData } from './a-splitter-panel.vue';
 
+import { debounce } from '@vinicunca/perkakas';
+
+import { createContext } from '~~/shared';
+
 import { initializeDefaultStorage } from './utils/storage';
+
+export type ASplitterGroupEmits = {
+  /** Event handler called when group layout changes */
+  layout: [val: Array<number>];
+};
 
 export interface ASplitterGroupProps extends APrimitiveProps {
   /** Unique id used to auto-save group arrangement via `localStorage`. */
@@ -23,11 +28,6 @@ export interface ASplitterGroupProps extends APrimitiveProps {
   /** Custom storage API; defaults to localStorage */
   storage?: PanelGroupStorage;
 }
-
-export type ASplitterGroupEmits = {
-  /** Event handler called when group layout changes */
-  layout: [val: Array<number>];
-};
 
 const LOCAL_STORAGE_DEBOUNCE_INTERVAL = 100;
 
@@ -75,12 +75,12 @@ export const [
 </script>
 
 <script setup lang="ts">
-import { computed, ref, toRefs, useId, watch, watchEffect } from 'vue';
-
-import { APrimitive } from '~~/a-primitive';
-import { areArrayEqual, useDirection, useForwardExpose } from '~~/shared';
-
 import type { Direction, DragState, ResizeEvent, ResizeHandler } from './utils/types';
+
+import { computed, ref, toRefs, watch, watchEffect } from 'vue';
+import { APrimitive } from '~~/a-primitive';
+
+import { areArrayEqual, useDirection, useForwardExpose, useId } from '~~/shared';
 
 import { assert } from './utils/assert';
 import { calculateDeltaPercentage, calculateUnsafeDefaultLayout } from './utils/calculate';
@@ -129,7 +129,7 @@ const debounceMap: {
 } = {};
 
 const { direction } = toRefs(props);
-const groupId = useId();
+const groupId = useId(props.id, 'akar-splitter-group');
 const dir = useDirection();
 
 const { forwardRef, currentElement: panelGroupElementRef } = useForwardExpose();
@@ -314,6 +314,206 @@ watch(
   },
 );
 
+function collapsePanel(panelData: PanelData) {
+  const { layout: prevLayout, panelDataArray } = eagerValuesRef.value;
+
+  if (panelData.constraints.collapsible) {
+    const panelConstraintsArray = panelDataArray.map(
+      (panelData) => panelData.constraints,
+    );
+
+    const {
+      collapsedSize = 0,
+      panelSize,
+      pivotIndices,
+    } = panelDataHelper({ panelDataArray, panelData, layout: prevLayout });
+
+    assert(
+      panelSize != null,
+      `Panel size not found for panel "${panelData.id}"`,
+    );
+
+    if (panelSize !== collapsedSize) {
+      // Store size before collapse;
+      // This is the size that gets restored if the expand() API is used.
+      panelSizeBeforeCollapseRef.value.set(panelData.id, panelSize);
+
+      const isLastPanel = findPanelDataIndex({ panelDataArray, panelData })
+        === panelDataArray.length - 1;
+      const delta = isLastPanel
+        ? panelSize - collapsedSize
+        : collapsedSize - panelSize;
+
+      const nextLayout = adjustLayoutByDelta({
+        delta,
+        layout: prevLayout,
+        panelConstraints: panelConstraintsArray,
+        pivotIndices,
+        trigger: TRIGGER_IMPERATIVE_API,
+      });
+
+      if (!compareLayouts(prevLayout, nextLayout)) {
+        setLayout(nextLayout);
+
+        eagerValuesRef.value.layout = nextLayout;
+
+        emits('layout', nextLayout);
+
+        callPanelCallbacks({
+          panelsArray: panelDataArray,
+          layout: nextLayout,
+          panelIdToLastNotifiedSizeMap: panelIdToLastNotifiedSizeMapRef.value,
+        });
+      }
+    }
+  }
+}
+
+function expandPanel(panelData: PanelData) {
+  const { layout: prevLayout, panelDataArray } = eagerValuesRef.value;
+
+  if (panelData.constraints.collapsible) {
+    const panelConstraintsArray = panelDataArray.map(
+      (panelData) => panelData.constraints,
+    );
+
+    const {
+      collapsedSize = 0,
+      panelSize,
+      minSize = 0,
+      pivotIndices,
+    } = panelDataHelper({ panelDataArray, panelData, layout: prevLayout });
+
+    if (panelSize === collapsedSize) {
+      // Restore this panel to the size it was before it was collapsed, if possible.
+      const prevPanelSize = panelSizeBeforeCollapseRef.value.get(
+        panelData.id,
+      );
+
+      const baseSize
+          = prevPanelSize != null && prevPanelSize >= minSize
+            ? prevPanelSize
+            : minSize;
+
+      const isLastPanel
+          = findPanelDataIndex({ panelDataArray, panelData })
+          === panelDataArray.length - 1;
+      const delta = isLastPanel ? panelSize - baseSize : baseSize - panelSize;
+
+      const nextLayout = adjustLayoutByDelta({
+        delta,
+        layout: prevLayout,
+        panelConstraints: panelConstraintsArray,
+        pivotIndices,
+        trigger: TRIGGER_IMPERATIVE_API,
+      });
+
+      if (!compareLayouts(prevLayout, nextLayout)) {
+        setLayout(nextLayout);
+
+        eagerValuesRef.value.layout = nextLayout;
+
+        emits('layout', nextLayout);
+
+        callPanelCallbacks({
+          panelsArray: panelDataArray,
+          layout: nextLayout,
+          panelIdToLastNotifiedSizeMap: panelIdToLastNotifiedSizeMapRef.value,
+        });
+      }
+    }
+  }
+}
+
+function getPanelSize(panelData: PanelData) {
+  const { layout, panelDataArray } = eagerValuesRef.value;
+
+  const { panelSize } = panelDataHelper({ panelDataArray, panelData, layout });
+
+  assert(
+    panelSize != null,
+    `Panel size not found for panel "${panelData.id}"`,
+  );
+
+  return panelSize;
+}
+
+function isPanelCollapsed(panelData: PanelData) {
+  const { layout, panelDataArray } = eagerValuesRef.value;
+
+  const {
+    collapsedSize = 0,
+    collapsible,
+    panelSize,
+  } = panelDataHelper({ panelDataArray, panelData, layout });
+
+  return collapsible === true && panelSize === collapsedSize;
+}
+function isPanelExpanded(panelData: PanelData) {
+  const { layout, panelDataArray } = eagerValuesRef.value;
+
+  const {
+    collapsedSize = 0,
+    collapsible,
+    panelSize,
+  } = panelDataHelper({ panelDataArray, panelData, layout });
+
+  assert(
+    panelSize != null,
+    `Panel size not found for panel "${panelData.id}"`,
+  );
+
+  return !collapsible || panelSize > collapsedSize;
+}
+
+function reevaluatePanelConstraints(
+  { panelData, prevConstraints }:
+  { panelData: PanelData; prevConstraints: PanelConstraints },
+) {
+  const { layout, panelDataArray } = eagerValuesRef.value;
+  const index = findPanelDataIndex({ panelDataArray, panelData });
+  panelDataArray[index] = panelData;
+  eagerValuesRef.value.panelDataArrayChanged = true;
+  const {
+    collapsedSize: prevCollapsedSize = 0,
+    collapsible: prevCollapsible,
+  } = prevConstraints;
+
+  const {
+    collapsedSize: nextCollapsedSize = 0,
+    collapsible: nextCollapsible,
+    maxSize: nextMaxSize = 100,
+    minSize: nextMinSize = 0,
+  } = panelData.constraints;
+
+  const { panelSize: prevPanelSize } = panelDataHelper({
+    panelDataArray,
+    panelData,
+    layout,
+  });
+
+  if (prevPanelSize === null) {
+    // It's possible that the panels in this group have changed since the last render
+    return;
+  }
+
+  if (
+    prevCollapsible
+    && nextCollapsible
+    && prevPanelSize === prevCollapsedSize
+  ) {
+    if (prevCollapsedSize !== nextCollapsedSize) {
+      resizePanel({ panelData, unsafePanelSize: nextCollapsedSize });
+    } else {
+      // Stay collapsed
+    }
+  } else if (prevPanelSize < nextMinSize) {
+    resizePanel({ panelData, unsafePanelSize: nextMinSize });
+  } else if (prevPanelSize > nextMaxSize) {
+    resizePanel({ panelData, unsafePanelSize: nextMaxSize });
+  }
+}
+
 function registerResizeHandle(dragHandleId: string) {
   return function resizeHandler(event: ResizeEvent) {
     event.preventDefault();
@@ -466,54 +666,6 @@ function resizePanel(
   }
 }
 
-function reevaluatePanelConstraints(
-  { panelData, prevConstraints }:
-  { panelData: PanelData; prevConstraints: PanelConstraints },
-) {
-  const { layout, panelDataArray } = eagerValuesRef.value;
-  const index = findPanelDataIndex({ panelDataArray, panelData });
-  panelDataArray[index] = panelData;
-  eagerValuesRef.value.panelDataArrayChanged = true;
-  const {
-    collapsedSize: prevCollapsedSize = 0,
-    collapsible: prevCollapsible,
-  } = prevConstraints;
-
-  const {
-    collapsedSize: nextCollapsedSize = 0,
-    collapsible: nextCollapsible,
-    maxSize: nextMaxSize = 100,
-    minSize: nextMinSize = 0,
-  } = panelData.constraints;
-
-  const { panelSize: prevPanelSize } = panelDataHelper({
-    panelDataArray,
-    panelData,
-    layout,
-  });
-
-  if (prevPanelSize === null) {
-    // It's possible that the panels in this group have changed since the last render
-    return;
-  }
-
-  if (
-    prevCollapsible
-    && nextCollapsible
-    && prevPanelSize === prevCollapsedSize
-  ) {
-    if (prevCollapsedSize !== nextCollapsedSize) {
-      resizePanel({ panelData, unsafePanelSize: nextCollapsedSize });
-    } else {
-      // Stay collapsed
-    }
-  } else if (prevPanelSize < nextMinSize) {
-    resizePanel({ panelData, unsafePanelSize: nextMinSize });
-  } else if (prevPanelSize > nextMaxSize) {
-    resizePanel({ panelData, unsafePanelSize: nextMaxSize });
-  }
-}
-
 function startDragging(dragHandleId: string, event: ResizeEvent) {
   const { direction } = committedValuesRef.value;
   const { layout } = eagerValuesRef.value;
@@ -539,6 +691,7 @@ function startDragging(dragHandleId: string, event: ResizeEvent) {
     initialLayout: layout,
   };
 }
+
 function stopDragging() {
   dragState.value = null;
 }
@@ -559,159 +712,6 @@ function unregisterPanel(panelData: PanelData) {
 
     eagerValuesRef.value.panelDataArrayChanged = true;
   }
-}
-
-function collapsePanel(panelData: PanelData) {
-  const { layout: prevLayout, panelDataArray } = eagerValuesRef.value;
-
-  if (panelData.constraints.collapsible) {
-    const panelConstraintsArray = panelDataArray.map(
-      (panelData) => panelData.constraints,
-    );
-
-    const {
-      collapsedSize = 0,
-      panelSize,
-      pivotIndices,
-    } = panelDataHelper({ panelDataArray, panelData, layout: prevLayout });
-
-    assert(
-      panelSize != null,
-      `Panel size not found for panel "${panelData.id}"`,
-    );
-
-    if (panelSize !== collapsedSize) {
-      // Store size before collapse;
-      // This is the size that gets restored if the expand() API is used.
-      panelSizeBeforeCollapseRef.value.set(panelData.id, panelSize);
-
-      const isLastPanel = findPanelDataIndex({ panelDataArray, panelData })
-        === panelDataArray.length - 1;
-      const delta = isLastPanel
-        ? panelSize - collapsedSize
-        : collapsedSize - panelSize;
-
-      const nextLayout = adjustLayoutByDelta({
-        delta,
-        layout: prevLayout,
-        panelConstraints: panelConstraintsArray,
-        pivotIndices,
-        trigger: TRIGGER_IMPERATIVE_API,
-      });
-
-      if (!compareLayouts(prevLayout, nextLayout)) {
-        setLayout(nextLayout);
-
-        eagerValuesRef.value.layout = nextLayout;
-
-        emits('layout', nextLayout);
-
-        callPanelCallbacks({
-          panelsArray: panelDataArray,
-          layout: nextLayout,
-          panelIdToLastNotifiedSizeMap: panelIdToLastNotifiedSizeMapRef.value,
-        });
-      }
-    }
-  }
-}
-
-function expandPanel(panelData: PanelData) {
-  const { layout: prevLayout, panelDataArray } = eagerValuesRef.value;
-
-  if (panelData.constraints.collapsible) {
-    const panelConstraintsArray = panelDataArray.map(
-      (panelData) => panelData.constraints,
-    );
-
-    const {
-      collapsedSize = 0,
-      panelSize,
-      minSize = 0,
-      pivotIndices,
-    } = panelDataHelper({ panelDataArray, panelData, layout: prevLayout });
-
-    if (panelSize === collapsedSize) {
-      // Restore this panel to the size it was before it was collapsed, if possible.
-      const prevPanelSize = panelSizeBeforeCollapseRef.value.get(
-        panelData.id,
-      );
-
-      const baseSize
-          = prevPanelSize != null && prevPanelSize >= minSize
-            ? prevPanelSize
-            : minSize;
-
-      const isLastPanel
-          = findPanelDataIndex({ panelDataArray, panelData })
-          === panelDataArray.length - 1;
-      const delta = isLastPanel ? panelSize - baseSize : baseSize - panelSize;
-
-      const nextLayout = adjustLayoutByDelta({
-        delta,
-        layout: prevLayout,
-        panelConstraints: panelConstraintsArray,
-        pivotIndices,
-        trigger: TRIGGER_IMPERATIVE_API,
-      });
-
-      if (!compareLayouts(prevLayout, nextLayout)) {
-        setLayout(nextLayout);
-
-        eagerValuesRef.value.layout = nextLayout;
-
-        emits('layout', nextLayout);
-
-        callPanelCallbacks({
-          panelsArray: panelDataArray,
-          layout: nextLayout,
-          panelIdToLastNotifiedSizeMap: panelIdToLastNotifiedSizeMapRef.value,
-        });
-      }
-    }
-  }
-}
-
-function getPanelSize(panelData: PanelData) {
-  const { layout, panelDataArray } = eagerValuesRef.value;
-
-  const { panelSize } = panelDataHelper({ panelDataArray, panelData, layout });
-
-  assert(
-    panelSize != null,
-    `Panel size not found for panel "${panelData.id}"`,
-  );
-
-  return panelSize;
-}
-
-function isPanelCollapsed(panelData: PanelData) {
-  const { layout, panelDataArray } = eagerValuesRef.value;
-
-  const {
-    collapsedSize = 0,
-    collapsible,
-    panelSize,
-  } = panelDataHelper({ panelDataArray, panelData, layout });
-
-  return collapsible === true && panelSize === collapsedSize;
-}
-
-function isPanelExpanded(panelData: PanelData) {
-  const { layout, panelDataArray } = eagerValuesRef.value;
-
-  const {
-    collapsedSize = 0,
-    collapsible,
-    panelSize,
-  } = panelDataHelper({ panelDataArray, panelData, layout });
-
-  assert(
-    panelSize != null,
-    `Panel size not found for panel "${panelData.id}"`,
-  );
-
-  return !collapsible || panelSize > collapsedSize;
 }
 
 providePanelGroupContext({

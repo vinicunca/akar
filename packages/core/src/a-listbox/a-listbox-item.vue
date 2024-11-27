@@ -6,18 +6,18 @@ import {
   createContext,
 } from '~~/shared';
 
+export type AListboxItemEmits<T = AcceptableValue> = {
+  /** Event handler called when the selecting item. <br> It can be prevented by calling `event.preventDefault`. */
+  select: [event: SelectEvent<T>];
+};
 export interface AListboxItemProps<T = AcceptableValue> extends APrimitiveProps {
   /** When `true`, prevents the user from interacting with the item. */
   disabled?: boolean;
   /** The value given as data when submitted with a `name`. */
   value: T;
 }
-export type SelectEvent<T> = CustomEvent<{ originalEvent: PointerEvent; value?: T }>;
 
-export type AListboxItemEmits<T = AcceptableValue> = {
-  /** Event handler called when the selecting item. <br> It can be prevented by calling `event.preventDefault`. */
-  select: [event: SelectEvent<T>];
-};
+export type SelectEvent<T> = CustomEvent<{ originalEvent: PointerEvent; value?: T }>;
 
 const LISTBOX_SELECT = 'listbox.select';
 
@@ -32,13 +32,14 @@ export const [
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
-import { computed, type Ref, useId } from 'vue';
+import { computed, type Ref } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
 import { useCollection } from '~~/collection';
 import {
   handleAndDispatchCustomEvent,
   useForwardExpose,
+  useId,
 } from '~~/shared';
 
 import { injectAListboxRootContext } from './a-listbox-root.vue';
@@ -52,7 +53,7 @@ const props = withDefaults(
 );
 const emits = defineEmits<AListboxItemEmits<T>>();
 
-const id = useId();
+const id = useId(undefined, 'akar-listbox-item');
 const { ACollectionItem } = useCollection();
 const { forwardRef, currentElement } = useForwardExpose();
 const rootContext = injectAListboxRootContext();
@@ -65,6 +66,20 @@ const isSelected = computed(() => valueComparator({
 }));
 
 const disabled = computed(() => rootContext.disabled.value || props.disabled);
+
+function handlePointerMove() {
+  if (rootContext.highlightedElement.value === currentElement.value) {
+    return;
+  }
+
+  if (rootContext.highlightOnHover.value) {
+    rootContext.changeHighlight({ el: currentElement.value, scrollIntoView: false });
+  } else {
+    if (!rootContext.focusable.value) {
+      rootContext.changeHighlight({ el: currentElement.value, scrollIntoView: false });
+    }
+  }
+}
 
 async function handleSelect(event: SelectEvent<T>) {
   emits('select', event);
@@ -82,20 +97,6 @@ async function handleSelect(event: SelectEvent<T>) {
 function handleSelectCustomEvent(ev: PointerEvent) {
   const eventDetail = { originalEvent: ev, value: props.value as T };
   handleAndDispatchCustomEvent({ name: LISTBOX_SELECT, handler: handleSelect, detail: eventDetail });
-}
-
-function handlePointerMove() {
-  if (rootContext.highlightedElement.value === currentElement.value) {
-    return;
-  }
-
-  if (rootContext.highlightOnHover.value) {
-    rootContext.changeHighlight({ el: currentElement.value, scrollIntoView: false });
-  } else {
-    if (!rootContext.focusable.value) {
-      rootContext.changeHighlight({ el: currentElement.value, scrollIntoView: false });
-    }
-  }
 }
 
 provideAListboxItemContext({

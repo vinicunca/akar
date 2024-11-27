@@ -16,13 +16,12 @@ export const [
 </script>
 
 <script setup lang="ts">
-import { useId } from 'vue';
-
 import { APrimitive } from '~~/a-primitive';
+import { useId } from '~~/shared';
 
 const props = defineProps<ASelectGroupProps>();
 
-const id = useId();
+const id = useId(undefined, 'akar-select-group');
 
 provideASelectGroupContext({ id });
 </script>

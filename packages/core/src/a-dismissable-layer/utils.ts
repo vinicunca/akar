@@ -1,4 +1,4 @@
-import { isClient } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
 import { nextTick, type Ref, ref, watchEffect } from 'vue';
 
 import { handleAndDispatchCustomEvent } from '~~/shared';
@@ -62,7 +62,7 @@ export function usePointerDownOutside(
   const handleClickRef = ref(() => {});
 
   watchEffect((cleanupFn) => {
-    if (!isClient) {
+    if (!isBrowser) {
       return;
     }
 
@@ -166,7 +166,7 @@ export function useFocusOutside(
 
   const isFocusInsideDOMTree = ref(false);
   watchEffect((cleanupFn) => {
-    if (!isClient) {
+    if (!isBrowser) {
       return;
     }
     const handleFocus = async (event: FocusEvent) => {

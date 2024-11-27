@@ -17,10 +17,8 @@ export interface AMenuSubContentProps extends Omit<AMenuContentImplProps, 'align
 </script>
 
 <script setup lang="ts">
-import { useId } from 'vue';
-
 import { APresence } from '~~/a-presence';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { useForwardExpose, useForwardPropsEmits, useId } from '~~/shared';
 
 import AMenuContentImpl from './a-menu-content-impl.vue';
 import { injectAMenuContext, injectAMenuRootContext } from './a-menu-root.vue';
@@ -43,13 +41,12 @@ const menuSubContext = injectAMenuSubContext();
 
 const { forwardRef, currentElement: subContentElement } = useForwardExpose();
 
-menuSubContext.contentId ||= useId();
+menuSubContext.contentId ||= useId(undefined, 'akar-menu-sub-content');
 
-function handleOpenAutoFocus() {
-  // when opening a submenu, focus content for keyboard users only
-  if (rootContext.isUsingKeyboardRef.value) {
-    subContentElement.value?.focus();
-  }
+function handleEscapeKeyDown(event: Event) {
+  rootContext.onClose();
+  // ensure pressing escape in submenu doesn't escape full screen mode
+  event.preventDefault();
 }
 
 function handleFocusOutside(event: Event) {
@@ -63,12 +60,6 @@ function handleFocusOutside(event: Event) {
   }
 }
 
-function handleEscapeKeyDown(event: Event) {
-  rootContext.onClose();
-  // ensure pressing escape in submenu doesn't escape full screen mode
-  event.preventDefault();
-}
-
 function handleKeydown(event: KeyboardEvent) {
 // Submenu key events bubble through portals. We only care about keys in this menu.
   const isKeyDownInside = (event.currentTarget as HTMLElement)?.contains(event.target as HTMLElement);
@@ -80,6 +71,13 @@ function handleKeydown(event: KeyboardEvent) {
     menuSubContext.trigger.value?.focus();
     // prevent window from scrolling
     event.preventDefault();
+  }
+}
+
+function handleOpenAutoFocus() {
+  // when opening a submenu, focus content for keyboard users only
+  if (rootContext.isUsingKeyboardRef.value) {
+    subContentElement.value?.focus();
   }
 }
 </script>

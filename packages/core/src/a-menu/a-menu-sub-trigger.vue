@@ -6,8 +6,8 @@ export interface AMenuSubTriggerProps extends AMenuItemImplProps {}
 </script>
 
 <script setup lang="ts">
-import { type ComponentPublicInstance, nextTick, onUnmounted, ref, useId } from 'vue';
-
+import { type ComponentPublicInstance, nextTick, onUnmounted, ref } from 'vue';
+import { useId } from '~~/shared';
 import AMenuAnchor from './a-menu-anchor.vue';
 import { injectAMenuContentContext } from './a-menu-content-impl.vue';
 import MenuItemImpl from './a-menu-item-impl.vue';
@@ -24,7 +24,7 @@ const contentContext = injectAMenuContentContext();
 
 const openTimerRef = ref<null | number>(null);
 
-subContext.triggerId ||= useId();
+subContext.triggerId ||= useId(undefined, 'akar-menu-sub-trigger');
 
 function clearOpenTimer() {
   if (openTimerRef.value) {
@@ -38,22 +38,36 @@ onUnmounted(() => {
   clearOpenTimer();
 });
 
-function handlePointerMove(event: PointerEvent) {
-  if (!isMouseEvent(event)) {
+function handleClick(event: Event) {
+  if (props.disabled || event.defaultPrevented) {
     return;
   }
+  /**
+   * We manually focus because iOS Safari doesn't always focus on click (e.g. buttons)
+   * and we rely heavily on `onFocusOutside` for submenus to close when switching
+   * between separate submenus.
+   */
+  (event.currentTarget as HTMLButtonElement)?.focus();
 
-  const defaultPrevented = contentContext.onItemEnter(event);
-  if (defaultPrevented) {
+  if (!menuContext.open.value) {
+    menuContext.onOpenChange(true);
+  }
+}
+
+async function handleKeyDown(event: KeyboardEvent) {
+  const isTypingAhead = contentContext.searchRef.value !== '';
+  if (props.disabled || (isTypingAhead && event.key === ' ')) {
     return;
   }
+  if (SUB_OPEN_KEYS[rootContext.dir.value].includes(event.key)) {
+    menuContext.onOpenChange(true);
 
-  if (!props.disabled && !menuContext.open.value && !openTimerRef.value) {
-    contentContext.onPointerGraceIntentChange(null);
-    openTimerRef.value = window.setTimeout(() => {
-      menuContext.onOpenChange(true);
-      clearOpenTimer();
-    }, 100);
+    await nextTick();
+    // The trigger may hold focus if opened via pointer interaction
+    // so we ensure content is given focus again when switching to keyboard.
+    menuContext.content.value?.focus();
+    // prevent window from scrolling
+    event.preventDefault();
   }
 }
 
@@ -104,20 +118,22 @@ async function handlePointerLeave(event: PointerEvent) {
   }
 }
 
-async function handleKeyDown(event: KeyboardEvent) {
-  const isTypingAhead = contentContext.searchRef.value !== '';
-  if (props.disabled || (isTypingAhead && event.key === ' ')) {
+function handlePointerMove(event: PointerEvent) {
+  if (!isMouseEvent(event)) {
     return;
   }
-  if (SUB_OPEN_KEYS[rootContext.dir.value].includes(event.key)) {
-    menuContext.onOpenChange(true);
 
-    await nextTick();
-    // The trigger may hold focus if opened via pointer interaction
-    // so we ensure content is given focus again when switching to keyboard.
-    menuContext.content.value?.focus();
-    // prevent window from scrolling
-    event.preventDefault();
+  const defaultPrevented = contentContext.onItemEnter(event);
+  if (defaultPrevented) {
+    return;
+  }
+
+  if (!props.disabled && !menuContext.open.value && !openTimerRef.value) {
+    contentContext.onPointerGraceIntentChange(null);
+    openTimerRef.value = window.setTimeout(() => {
+      menuContext.onOpenChange(true);
+      clearOpenTimer();
+    }, 100);
   }
 }
 
@@ -125,22 +141,6 @@ function refMenuItem(vnode: ComponentPublicInstance) {
   subContext?.onTriggerChange(vnode?.$el);
 
   return undefined;
-}
-
-function handleClick(event: Event) {
-  if (props.disabled || event.defaultPrevented) {
-    return;
-  }
-  /**
-   * We manually focus because iOS Safari doesn't always focus on click (e.g. buttons)
-   * and we rely heavily on `onFocusOutside` for submenus to close when switching
-   * between separate submenus.
-   */
-  (event.currentTarget as HTMLButtonElement)?.focus();
-
-  if (!menuContext.open.value) {
-    menuContext.onOpenChange(true);
-  }
 }
 </script>
 

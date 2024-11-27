@@ -14,13 +14,12 @@ export const [injectAListboxGroupContext, provideAListboxGroupContext]
 </script>
 
 <script setup lang="ts">
-import { useId } from 'vue';
-
 import { APrimitive } from '~~/a-primitive';
+import { useId } from '~~/shared';
 
 const props = defineProps<AListboxGroupProps>();
 
-const id = useId();
+const id = useId(undefined, 'akar-listbox-group');
 
 provideAListboxGroupContext({ id });
 </script>

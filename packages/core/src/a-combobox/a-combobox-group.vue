@@ -1,9 +1,9 @@
 <script lang="ts">
-import { computed, onMounted, onUnmounted, useId } from 'vue';
-
 import type { AListboxGroupProps } from '~~/a-listbox';
 
-import { createContext } from '~~/shared';
+import { computed, onMounted, onUnmounted } from 'vue';
+
+import { createContext, useId } from '~~/shared';
 
 import { injectAComboboxRootContext } from './a-combobox-root.vue';
 
@@ -25,7 +25,7 @@ export const
 import { AListboxGroup } from '~~/a-listbox';
 
 const props = defineProps<AComboboxGroupProps>();
-const id = useId();
+const id = useId(undefined, 'akar-combobox-group');
 const rootContext = injectAComboboxRootContext();
 
 const isRender = computed(() => {

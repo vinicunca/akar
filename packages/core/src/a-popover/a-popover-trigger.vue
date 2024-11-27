@@ -5,11 +5,11 @@ export interface APopoverTriggerProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { onMounted, useId } from 'vue';
+import { onMounted } from 'vue';
 
 import { APopperAnchor } from '~~/a-popper';
 import { APrimitive } from '~~/a-primitive';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose, useId } from '~~/shared';
 
 import { injectAPopoverRootContext } from './a-popover-root.vue';
 
@@ -24,7 +24,7 @@ const rootContext = injectAPopoverRootContext();
 
 const { forwardRef, currentElement: triggerElement } = useForwardExpose();
 
-rootContext.triggerId ||= useId();
+rootContext.triggerId ||= useId(undefined, 'akar-popover-trigger');
 
 onMounted(() => {
   rootContext.triggerElement.value = triggerElement.value;

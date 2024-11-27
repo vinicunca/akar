@@ -1,6 +1,4 @@
 <script lang="ts">
-import { useId } from 'vue';
-
 import type { AComboboxContentImplEmits, AComboboxContentImplProps } from './a-combobox-content-impl.vue';
 
 export type AComboboxContentEmits = AComboboxContentImplEmits;
@@ -15,7 +13,7 @@ export interface AComboboxContentProps extends AComboboxContentImplProps {
 
 <script setup lang="ts">
 import { APresence } from '~~/a-presence';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { useForwardExpose, useForwardPropsEmits, useId } from '~~/shared';
 
 import AComboboxContentImpl from './a-combobox-content-impl.vue';
 import { injectAComboboxRootContext } from './a-combobox-root.vue';
@@ -27,7 +25,7 @@ const { forwardRef } = useForwardExpose();
 
 const rootContext = injectAComboboxRootContext();
 
-rootContext.contentId ||= useId();
+rootContext.contentId ||= useId(undefined, 'akar-combobox-content');
 </script>
 
 <template>

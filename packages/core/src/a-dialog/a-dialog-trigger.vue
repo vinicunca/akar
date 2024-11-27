@@ -5,10 +5,10 @@ export interface ADialogTriggerProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { onMounted, useId } from 'vue';
+import { onMounted } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose, useId } from '~~/shared';
 
 import { injectADialogRootContext } from './a-dialog-root.vue';
 
@@ -21,7 +21,7 @@ const props = withDefaults(
 const rootContext = injectADialogRootContext();
 const { forwardRef, currentElement } = useForwardExpose();
 
-rootContext.contentId ||= useId();
+rootContext.contentId ||= useId(undefined, 'akar-dialog-content');
 
 onMounted(() => {
   rootContext.triggerElement.value = currentElement.value;

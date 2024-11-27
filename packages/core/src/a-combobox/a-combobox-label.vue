@@ -1,6 +1,4 @@
 <script lang="ts">
-import { useId } from 'vue';
-
 import type { APrimitiveProps } from '~~/a-primitive';
 
 export interface AComboboxLabelProps extends APrimitiveProps {
@@ -10,7 +8,7 @@ export interface AComboboxLabelProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { APrimitive } from '~~/a-primitive';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose, useId } from '~~/shared';
 
 import { injectAComboboxGroupContext } from './a-combobox-group.vue';
 
@@ -22,9 +20,10 @@ const props = withDefaults(
 );
 
 useForwardExpose();
+
 const groupContext = injectAComboboxGroupContext({ id: '', labelId: '' });
 
-groupContext.labelId ||= useId();
+groupContext.labelId ||= useId(undefined, 'akar-combobox-group-label');
 </script>
 
 <template>

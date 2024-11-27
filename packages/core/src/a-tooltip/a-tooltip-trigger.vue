@@ -10,13 +10,13 @@ export interface ATooltipTriggerProps extends APopperAnchorProps {}
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, useId } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { APopperAnchor } from '~~/a-popper';
 import {
   APrimitive,
 } from '~~/a-primitive';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose, useId } from '~~/shared';
 
 import { injectATooltipProviderContext } from './a-tooltip-provider.vue';
 import { injectATooltipRootContext } from './a-tooltip-root.vue';
@@ -30,7 +30,7 @@ const props = withDefaults(
 const rootContext = injectATooltipRootContext();
 const providerContext = injectATooltipProviderContext();
 
-rootContext.contentId ||= useId();
+rootContext.contentId ||= useId(undefined, 'akar-tooltip-content');
 
 const { forwardRef, currentElement: triggerElement } = useForwardExpose();
 
@@ -56,15 +56,36 @@ onMounted(() => {
   rootContext.onTriggerChange(triggerElement.value);
 });
 
-function handlePointerUp() {
-  setTimeout(() => {
-    isPointerDown.value = false;
-  }, 1);
+function handleBlur() {
+  rootContext.onClose();
+}
+
+function handleClick() {
+  if (!rootContext.disableClosingTrigger.value) {
+    rootContext.onClose();
+  }
+}
+
+function handleFocus(event: FocusEvent) {
+  if (isPointerDown.value) {
+    return;
+  }
+
+  if (rootContext.ignoreNonKeyboardFocus.value && !(event.target as HTMLElement).matches?.(':focus-visible')) {
+    return;
+  }
+
+  rootContext.onOpen();
 }
 
 function handlePointerDown() {
   isPointerDown.value = true;
   document.addEventListener('pointerup', handlePointerUp, { once: true });
+}
+
+function handlePointerLeave() {
+  rootContext.onTriggerLeave();
+  hasPointerMoveOpened.value = false;
 }
 
 function handlePointerMove(event: PointerEvent) {
@@ -80,31 +101,10 @@ function handlePointerMove(event: PointerEvent) {
   }
 }
 
-function handlePointerLeave() {
-  rootContext.onTriggerLeave();
-  hasPointerMoveOpened.value = false;
-}
-
-function handleFocus(event: FocusEvent) {
-  if (isPointerDown.value) {
-    return;
-  }
-
-  if (rootContext.ignoreNonKeyboardFocus.value && !(event.target as HTMLElement).matches?.(':focus-visible')) {
-    return;
-  }
-
-  rootContext.onOpen();
-}
-
-function handleBlur() {
-  rootContext.onClose();
-}
-
-function handleClick() {
-  if (!rootContext.disableClosingTrigger.value) {
-    rootContext.onClose();
-  }
+function handlePointerUp() {
+  setTimeout(() => {
+    isPointerDown.value = false;
+  }, 1);
 }
 </script>
 

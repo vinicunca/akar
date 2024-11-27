@@ -1,6 +1,10 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/a-primitive';
 
+export type ACollapsibleContentEmits = {
+  contentFound: [void];
+};
+
 export interface ACollapsibleContentProps extends APrimitiveProps {
   /**
    * Used to force mounting when more control is needed. Useful when
@@ -8,21 +12,17 @@ export interface ACollapsibleContentProps extends APrimitiveProps {
    */
   forceMount?: boolean;
 }
-
-export type ACollapsibleContentEmits = {
-  contentFound: [void];
-};
 </script>
 
 <script setup lang="ts">
 import { useEventListener } from '@vueuse/core';
-import { computed, nextTick, onMounted, ref, useId, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 import { APresence } from '~~/a-presence';
 import {
   APrimitive,
 } from '~~/a-primitive';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose, useId } from '~~/shared';
 
 import { injectACollapsibleRootContext } from './a-collapsible-root.vue';
 
@@ -34,7 +34,7 @@ const props = defineProps<ACollapsibleContentProps>();
 const emits = defineEmits<ACollapsibleContentEmits>();
 
 const rootContext = injectACollapsibleRootContext();
-rootContext.contentId ||= useId();
+rootContext.contentId ||= useId(undefined, 'akar-collapsible-content');
 
 const presentRef = ref<InstanceType<typeof APresence>>();
 const { forwardRef, currentElement } = useForwardExpose();

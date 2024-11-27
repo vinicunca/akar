@@ -1,7 +1,8 @@
 import { NumberFormatter, NumberParser } from '@internationalized/number';
 import { type MaybeComputedElementRef, unrefElement, useEventListener } from '@vueuse/core';
-import { createEventHook, isClient, reactiveComputed } from '@vueuse/shared';
+import { createEventHook, reactiveComputed } from '@vueuse/shared';
 import { computed, type Ref, ref } from 'vue';
+import { isBrowser } from '@vinicunca/perkakas';
 
 export function usePressedHold(options: {
   disabled: Ref<boolean>;
@@ -53,7 +54,7 @@ export function usePressedHold(options: {
     handlePressEnd();
   };
 
-  if (isClient) {
+  if (isBrowser) {
     useEventListener(target || window, 'pointerdown', onPressStart);
     useEventListener(window, 'pointerup', onPressRelease);
     useEventListener(window, 'pointercancel', onPressRelease);

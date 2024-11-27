@@ -35,8 +35,9 @@ export default defineConfig({
   },
 
   build: {
-    minify: true,
+    minify: false,
     target: 'esnext',
+    sourcemap: true,
     lib: {
       name: 'akar',
       fileName: (format, name) => {
@@ -46,6 +47,7 @@ export default defineConfig({
       entry: {
         index: resolve(__dirname, 'src/index.ts'),
         date: resolve(__dirname, 'src/date/index.ts'),
+        constant: resolve(__dirname, 'constant/index.ts'),
       },
     },
     rollupOptions: {

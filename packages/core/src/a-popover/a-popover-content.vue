@@ -1,6 +1,4 @@
 <script lang="ts">
-import { useId } from 'vue';
-
 import type {
   APopoverContentImplEmits,
   APopoverContentImplProps,
@@ -19,7 +17,7 @@ export interface APopoverContentProps extends APopoverContentImplProps {
 
 <script setup lang="ts">
 import { APresence } from '~~/a-presence';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { useForwardExpose, useForwardPropsEmits, useId } from '~~/shared';
 
 import APopoverContentModal from './a-popover-content-modal.vue';
 import APopoverContentNonModal from './a-popover-content-non-modal.vue';
@@ -33,7 +31,7 @@ const rootContext = injectAPopoverRootContext();
 const forwarded = useForwardPropsEmits(props, emits);
 const { forwardRef } = useForwardExpose();
 
-rootContext.contentId ||= useId();
+rootContext.contentId ||= useId(undefined, 'akar-popover-content');
 </script>
 
 <template>

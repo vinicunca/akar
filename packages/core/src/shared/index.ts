@@ -18,6 +18,7 @@ export { useForwardProps } from './use-forward-props';
 export { useForwardPropsEmits } from './use-forward-props-emits';
 export { useGraceArea } from './use-grace-area';
 export { useHideOthers } from './use-hide-others';
+export { useId } from './use-id';
 export { useLocale } from './use-locale';
 export { useSelectionBehavior } from './use-selection-behavior';
 export { useSingleOrMultipleValue } from './use-single-or-multiple-value';

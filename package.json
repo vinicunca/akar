@@ -3,7 +3,8 @@
   "type": "module",
   "version": "0.0.16",
   "private": true,
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@9.14.2",
+  "license": "MIT",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -16,14 +17,21 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "prepare": "pnpm simple-git-hooks",
+    "story:dev": "pnpm --filter histoire story:dev --open",
     "build": "rimraf packages/core/dist && pnpm run --filter @vinicunca/akar build && pnpm run --filter plugins build",
-    "bumpp": "bumpp package.json packages/*/package.json docs/package.json",
-    "pub:release": "cd packages/core && pnpm pub:release",
-    "lint": "eslint . --cache",
-    "lint:fix": "eslint . --cache --fix",
+    "build-only": "rimraf packages/core/dist  && pnpm run -r build-only",
+    "docs:install": "pnpm --filter docs install",
+    "docs:dev": "pnpm --filter docs docs:dev",
+    "docs:build": "pnpm --filter docs docs:build",
+    "docs:gen": "pnpm --filter docs docs:gen",
+    "docs:contributors": "pnpm --filter docs docs:contributors",
     "test": "pnpm --filter @vinicunca/akar test",
-    "story:dev": "pnpm --filter histoire story:dev --open"
+    "test-update": "pnpm --filter @vinicunca/akar test-update",
+    "prepare": "pnpm simple-git-hooks",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "bumpp": "bumpp package.json packages/*/package.json docs/package.json",
+    "pub:release": "cd packages/core && pnpm pub:release"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
@@ -31,7 +39,7 @@
     "@iconify/json": "^2.2.276",
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^22.9.4",
-    "@vinicunca/eslint-config": "^2.12.2",
+    "@vinicunca/eslint-config": "^2.13.0",
     "@vinicunca/perkakas": "^1.0.6",
     "@vinicunca/unocss-preset-vinicunca": "^0.2.9",
     "bumpp": "^9.8.1",
@@ -40,7 +48,7 @@
     "lint-staged": "^15.2.10",
     "rimraf": "^6.0.1",
     "simple-git-hooks": "^2.11.1",
-    "typescript": "5.6.3"
+    "typescript": "5.3.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",

@@ -7,11 +7,11 @@ export interface ASelectTriggerProps extends APopperAnchorProps {
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted, useId } from 'vue';
+import { computed, onMounted } from 'vue';
 
 import { APopperAnchor, type APopperAnchorProps } from '~~/a-popper';
 import { APrimitive } from '~~/a-primitive';
-import { useForwardExpose, useTypeahead } from '~~/shared';
+import { useForwardExpose, useId, useTypeahead } from '~~/shared';
 
 import { injectASelectRootContext } from './a-select-root.vue';
 import { OPEN_KEYS } from './utils';
@@ -28,7 +28,7 @@ const { forwardRef, currentElement: triggerElement } = useForwardExpose();
 
 const isDisabled = computed(() => rootContext.disabled?.value || props.disabled);
 
-rootContext.contentId ||= useId();
+rootContext.contentId ||= useId(undefined, 'akar-select-content');
 
 onMounted(() => {
   rootContext.onTriggerChange(triggerElement.value);
@@ -36,22 +36,6 @@ onMounted(() => {
 
 const { getItems } = useCollection();
 const { search, handleTypeaheadSearch, resetTypeahead } = useTypeahead();
-
-function handleOpen() {
-  if (!isDisabled.value) {
-    rootContext.onOpenChange(true);
-    // reset typeahead when we open
-    resetTypeahead();
-  }
-}
-
-function handlePointerOpen(event: PointerEvent) {
-  handleOpen();
-  rootContext.triggerPointerDownPosRef.value = {
-    x: Math.round(event.pageX),
-    y: Math.round(event.pageY),
-  };
-}
 
 function handleClick(event: MouseEvent) {
   /**
@@ -62,6 +46,36 @@ function handleClick(event: MouseEvent) {
    * this only runs for a label 'click'
    */
   (event?.currentTarget as HTMLElement)?.focus();
+}
+
+function handleKeyDown(event: KeyboardEvent) {
+  const isTypingAhead = search.value !== '';
+
+  const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
+
+  if (
+    (!isModifierKey && event.key.length === 1)
+    && (isTypingAhead && event.key === ' ')
+  ) {
+    return;
+  }
+
+  const collectionItems = getItems().map((i) => i.ref);
+
+  handleTypeaheadSearch({ key: event.key, fallback: collectionItems });
+
+  if (OPEN_KEYS.includes(event.key)) {
+    handleOpen();
+    event.preventDefault();
+  }
+}
+
+function handleOpen() {
+  if (!isDisabled.value) {
+    rootContext.onOpenChange(true);
+    // reset typeahead when we open
+    resetTypeahead();
+  }
 }
 
 function handlePointerDown(event: PointerEvent) {
@@ -87,33 +101,19 @@ function handlePointerDown(event: PointerEvent) {
   }
 }
 
+function handlePointerOpen(event: PointerEvent) {
+  handleOpen();
+  rootContext.triggerPointerDownPosRef.value = {
+    x: Math.round(event.pageX),
+    y: Math.round(event.pageY),
+  };
+}
+
 function handlePointerUp(event: PointerEvent) {
   // Only open on pointer up when using touch devices
   // https://github.com/unovue/akar-ui/issues/804
   if (event.pointerType === 'touch') {
     handlePointerOpen(event);
-  }
-}
-
-function handleKeyDown(event: KeyboardEvent) {
-  const isTypingAhead = search.value !== '';
-
-  const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
-
-  if (
-    (!isModifierKey && event.key.length === 1)
-    && (isTypingAhead && event.key === ' ')
-  ) {
-    return;
-  }
-
-  const collectionItems = getItems().map((i) => i.ref);
-
-  handleTypeaheadSearch({ key: event.key, fallback: collectionItems });
-
-  if (OPEN_KEYS.includes(event.key)) {
-    handleOpen();
-    event.preventDefault();
   }
 }
 </script>

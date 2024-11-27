@@ -43,11 +43,10 @@ import {
   onMounted,
   ref,
   toRefs,
-  useId,
 } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose, useId } from '~~/shared';
 
 import { injectASelectContentContext } from './a-select-content-impl.vue';
 import { injectASelectRootContext } from './a-select-root.vue';
@@ -71,7 +70,7 @@ const isSelected = computed(() =>
 
 const isFocused = ref(false);
 const textValue = ref(props.textValue ?? '');
-const textId = useId();
+const textId = useId(undefined, 'akar-select-item-text');
 
 async function handleASelect(event?: PointerEvent) {
   await nextTick();
@@ -86,33 +85,6 @@ async function handleASelect(event?: PointerEvent) {
     if (!rootContext.multiple.value) {
       rootContext.onOpenChange(false);
     }
-  }
-}
-
-async function handlePointerMove(event: PointerEvent) {
-  await nextTick();
-
-  if (event.defaultPrevented) {
-    return;
-  }
-  if (disabled.value) {
-    contentContext.onItemLeave?.();
-  } else {
-    // even though safari doesn't support this option, it's acceptable
-    // as it only means it might scroll a few pixels when using the pointer.
-    (event.currentTarget as HTMLElement).focus({ preventScroll: true });
-  }
-}
-
-async function handlePointerLeave(event: PointerEvent) {
-  await nextTick();
-
-  if (event.defaultPrevented) {
-    return;
-  }
-
-  if (event.currentTarget === document.activeElement) {
-    contentContext.onItemLeave?.();
   }
 }
 
@@ -136,6 +108,33 @@ async function handleKeyDown(event: KeyboardEvent) {
   // prevent page scroll if using the space key to select an item
   if (event.key === ' ') {
     event.preventDefault();
+  }
+}
+
+async function handlePointerLeave(event: PointerEvent) {
+  await nextTick();
+
+  if (event.defaultPrevented) {
+    return;
+  }
+
+  if (event.currentTarget === document.activeElement) {
+    contentContext.onItemLeave?.();
+  }
+}
+
+async function handlePointerMove(event: PointerEvent) {
+  await nextTick();
+
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (disabled.value) {
+    contentContext.onItemLeave?.();
+  } else {
+    // even though safari doesn't support this option, it's acceptable
+    // as it only means it might scroll a few pixels when using the pointer.
+    (event.currentTarget as HTMLElement).focus({ preventScroll: true });
   }
 }
 

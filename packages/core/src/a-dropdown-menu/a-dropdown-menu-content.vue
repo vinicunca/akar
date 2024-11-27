@@ -11,10 +11,10 @@ export interface ADropdownMenuContentProps extends AMenuContentProps {}
 </script>
 
 <script setup lang="ts">
-import { ref, useId } from 'vue';
+import { ref } from 'vue';
 
 import { AMenuContent } from '~~/a-menu';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { useForwardExpose, useForwardPropsEmits, useId } from '~~/shared';
 
 import { injectADropdownMenuRootContext } from './a-dropdown-menu-root.vue';
 
@@ -44,7 +44,7 @@ function handleCloseAutoFocus(event: Event) {
   event.preventDefault();
 }
 
-rootContext.contentId ||= useId();
+rootContext.contentId ||= useId(undefined, 'akar-dropdown-menu-content');
 
 function handleInteractOutside(event: FocusOutsideEvent | PointerDownOutsideEvent) {
   if (event.defaultPrevented) {

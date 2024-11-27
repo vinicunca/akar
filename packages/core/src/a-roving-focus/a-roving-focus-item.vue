@@ -1,8 +1,6 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/a-primitive';
 
-import { wrapArray } from '~~/shared';
-
 export interface ARovingFocusItemProps extends APrimitiveProps {
   active?: boolean;
   allowShiftKey?: boolean;
@@ -13,10 +11,11 @@ export interface ARovingFocusItemProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { computed, nextTick, onMounted, onUnmounted, useId } from 'vue';
-
+import { computed, nextTick, onMounted, onUnmounted } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/a-primitive';
 import { useCollection } from '~~/collection';
+import { useId } from '~~/shared';
+import { wrapArray } from '~~/shared';
 
 import { injectARovingFocusGroupContext } from './a-roving-focus-group.vue';
 import { focusFirst, getFocusIntent } from './utils';
@@ -31,7 +30,7 @@ const props = withDefaults(
 );
 
 const context = injectARovingFocusGroupContext();
-const id = computed(() => props.tabStopId || useId()!);
+const id = computed(() => props.tabStopId || useId());
 const isCurrentTabStop = computed(
   () => context.currentTabStopId.value === id.value,
 );

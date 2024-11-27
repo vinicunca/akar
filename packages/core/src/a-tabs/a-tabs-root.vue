@@ -17,6 +17,11 @@ export interface ATabsRootContext {
   unmountOnHide: Ref<boolean>;
 }
 
+export type ATabsRootEmits<T extends StringOrNumber = StringOrNumber> = {
+  /** Event handler called when the value changes */
+  'update:modelValue': [payload: T];
+};
+
 export interface ATabsRootProps<T extends StringOrNumber = StringOrNumber> extends APrimitiveProps {
   /**
    * Whether a tab is activated automatically (on focus) or manually (on click).
@@ -47,11 +52,6 @@ export interface ATabsRootProps<T extends StringOrNumber = StringOrNumber> exten
   unmountOnHide?: boolean;
 }
 
-export type ATabsRootEmits<T extends StringOrNumber = StringOrNumber> = {
-  /** Event handler called when the value changes */
-  'update:modelValue': [payload: T];
-};
-
 export const [
   injectATabsRootContext,
   provideATabsRootContext,
@@ -60,10 +60,10 @@ export const [
 
 <script setup lang="ts" generic="T extends StringOrNumber = StringOrNumber">
 import { useVModel } from '@vueuse/core';
-import { ref, toRefs, useId } from 'vue';
+import { ref, toRefs } from 'vue';
 
 import { APrimitive } from '~~/a-primitive';
-import { useDirection, useForwardExpose } from '~~/shared';
+import { useDirection, useForwardExpose, useId } from '~~/shared';
 
 const props = withDefaults(
   defineProps<ATabsRootProps<T>>(),
@@ -109,7 +109,7 @@ provideATabsRootContext({
   dir,
   unmountOnHide,
   activationMode: props.activationMode,
-  baseId: useId(),
+  baseId: useId(undefined, 'akar-tabs'),
   tabsList,
 });
 </script>

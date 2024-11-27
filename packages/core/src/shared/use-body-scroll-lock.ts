@@ -3,7 +3,8 @@ import {
   createSharedComposable,
   useEventListener,
 } from '@vueuse/core';
-import { type Fn, isClient, isIOS, tryOnBeforeUnmount } from '@vueuse/shared';
+import { type Fn, isIOS, tryOnBeforeUnmount } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
 import { defu } from 'defu';
 import { nanoid } from 'nanoid/non-secure';
 import { computed, nextTick, ref, watch } from 'vue';
@@ -46,7 +47,7 @@ const useBodyLockStackCount = createSharedComposable(() => {
   watch(
     locked,
     (val, oldVal) => {
-      if (!isClient) {
+      if (!isBrowser) {
         return;
       }
 

@@ -4,7 +4,7 @@ import type {
   ADismissableLayerProps,
 } from '~~/a-dismissable-layer';
 
-export type ADialogContentImplEmits = {
+export type ADialogContentImplEmits = ADismissableLayerEmits & {
   /**
    * Event handler called when auto-focusing on close.
    * Can be prevented.
@@ -15,7 +15,7 @@ export type ADialogContentImplEmits = {
    * Can be prevented.
    */
   openAutoFocus: [event: Event];
-} & ADismissableLayerEmits;
+};
 
 export interface ADialogContentImplProps extends ADismissableLayerProps {
   /**
@@ -33,12 +33,12 @@ export interface ADialogContentImplProps extends ADismissableLayerProps {
 </script>
 
 <script setup lang="ts">
-import { onMounted, useId } from 'vue';
+import { onMounted } from 'vue';
 
 import { ADismissableLayer } from '~~/a-dismissable-layer';
 import { AFocusScope } from '~~/a-focus-scope';
 import { getOpenState } from '~~/a-menu/utils';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose, useId } from '~~/shared';
 
 import { injectADialogRootContext } from './a-dialog-root.vue';
 import { useWarning } from './utils';
@@ -49,8 +49,8 @@ const emits = defineEmits<ADialogContentImplEmits>();
 const rootContext = injectADialogRootContext();
 const { forwardRef, currentElement: contentElement } = useForwardExpose();
 
-rootContext.titleId ||= useId();
-rootContext.descriptionId ||= useId();
+rootContext.titleId ||= useId(undefined, 'akar-dialog-title');
+rootContext.descriptionId ||= useId(undefined, 'akar-dialog-description');
 
 onMounted(() => {
   rootContext.contentElement = contentElement;
