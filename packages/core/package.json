@@ -28,7 +28,7 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs"
+      "require": "./dist/index.cjs"
     },
     "./date": {
       "import": {
@@ -37,7 +37,7 @@
       },
       "require": {
         "types": "./dist/date/index.d.ts",
-        "default": "./dist/date.umd.cjs"
+        "default": "./dist/date.cjs"
       }
     },
     "./namespaced": {
@@ -69,9 +69,17 @@
         "types": "./dist/resolver/index.d.cts",
         "default": "./dist/resolver/index.cjs"
       }
+    },
+    "./constant": {
+      "import": {
+        "default": "./dist/constant.js"
+      },
+      "require": {
+        "default": "./dist/constant.cjs"
+      }
     }
   },
-  "main": "./dist/index.umd.cjs",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typings": "./dist/index.d.ts",
@@ -84,23 +92,49 @@
     "build-only": "vite build",
     "watch": "vite build --watch",
     "type-check": "vue-tsc -p tsconfig.check.json --noEmit",
-    "type-gen": "vue-tsc --declaration --emitDeclarationOnly",
+    "type-gen": "vue-tsc --declaration  --emitDeclarationOnly",
     "test": "vitest",
+    "test-update": "vitest -u",
     "pub:release": "pnpm publish --access public"
   },
   "peerDependencies": {
-    "vue": "3.4.38"
+    "vue": ">= 3.2.0"
   },
   "dependencies": {
-    "@vueuse/core": "^11.0.3"
+    "@floating-ui/dom": "catalog:",
+    "@floating-ui/vue": "catalog:",
+    "@internationalized/date": "catalog:",
+    "@internationalized/number": "catalog:",
+    "@tanstack/vue-virtual": "catalog:",
+    "@vinicunca/perkakas": "^1.0.6",
+    "@vueuse/core": "catalog:",
+    "@vueuse/shared": "catalog:",
+    "aria-hidden": "catalog:",
+    "defu": "catalog:",
+    "ohash": "catalog:",
+    "uncrypto": "catalog:"
   },
   "devDependencies": {
-    "@types/jsdom": "^21.1.7",
-    "@vue/test-utils": "^2.4.6",
-    "@vue/tsconfig": "^0.5.1",
-    "jsdom": "^25.0.0",
-    "vite": "^5.4.2",
-    "vite-plugin-dts": "4.0.3",
-    "vitest": "^2.0.5"
+    "@iconify/vue": "catalog:",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/jest-dom": "catalog:",
+    "@testing-library/user-event": "catalog:",
+    "@testing-library/vue": "catalog:",
+    "@tsconfig/node18": "catalog:",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vitejs/plugin-vue-jsx": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "@vue/test-utils": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "jsdom": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-dts": "catalog:",
+    "vitest": "catalog:",
+    "vitest-axe": "catalog:",
+    "vitest-canvas-mock": "catalog:",
+    "vue": "catalog:",
+    "vue-component-type-helpers": "catalog:",
+    "vue-tsc": "catalog:"
   }
 }

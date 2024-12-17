@@ -1,3 +1,4 @@
+import { isString } from '@vinicunca/perkakas';
 import { inject, type InjectionKey, provide } from 'vue';
 
 /**
@@ -12,7 +13,7 @@ export function createContext<ContextValue>(
   contextName?: string,
 ) {
   const symbolDescription
-    = typeof providerComponentName === 'string' && !contextName
+    = isString(providerComponentName) && !contextName
       ? `${providerComponentName}Context`
       : contextName;
 
@@ -42,15 +43,16 @@ export function createContext<ContextValue>(
       `Injection \`${injectionKey.toString()}\` not found. Component must be used within ${
         Array.isArray(providerComponentName)
           ? `one of the following components: ${providerComponentName.join(
-              ', ',
-            )}`
+            ', ',
+          )}`
           : `\`${providerComponentName}\``
       }`,
     );
   };
 
-  const provideContext = (contextValue: ContextValue) => {
+  function provideContext(contextValue: ContextValue) {
     provide(injectionKey, contextValue);
+
     return contextValue;
   };
 

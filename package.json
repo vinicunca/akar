@@ -1,46 +1,54 @@
 {
-  "name": "@vinicunca/akar",
+  "name": "akar-ui-monorepo",
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@9.5.0",
+  "license": "MIT",
+  "repository": "vinicunca/akar",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "story:dev": "pnpm --filter histoire story:dev --open",
+    "build": "rimraf packages/core/dist  && pnpm run --filter @vinicunca/akar build && pnpm run --filter plugins build",
+    "build-only": "rimraf packages/core/dist  && pnpm run -r build-only",
+    "docs:install": "pnpm --filter docs install",
+    "docs:dev": "pnpm --filter docs docs:dev",
+    "docs:build": "pnpm --filter docs docs:build",
+    "docs:gen": "pnpm --filter docs docs:gen",
+    "docs:contributors": "pnpm --filter docs docs:contributors",
+    "prepare": "pnpm simple-git-hooks",
+    "taze": "taze major -wIr",
+    "test": "pnpm --filter @vinicunca/akar test",
+    "test-update": "pnpm --filter @vinicunca/akar test-update",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "bumpp": "bumpp package.json packages/*/package.json docs/package.json",
+    "pub:release": "cd packages/core && pnpm pub:release"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
+    "@iconify/json": "catalog:",
+    "@types/node": "catalog:",
+    "@vinicunca/eslint-config": "catalog:",
+    "@vinicunca/perkakas": "^1.1.0",
+    "@vinicunca/unocss-preset": "catalog:",
+    "bumpp": "catalog:",
+    "eslint": "catalog:",
+    "lint-staged": "catalog:",
+    "pnpm": "catalog:",
+    "rimraf": "catalog:",
+    "simple-git-hooks": "catalog:",
+    "taze": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
-  "engines": {
-    "node": ">=20.0.0"
-  },
-  "scripts": {
-    "prepare": "pnpm simple-git-hooks",
-    "bumpp": "bumpp package.json packages/*/package.json docs/package.json",
-    "pub:release": "cd packages/akar && pnpm pub:release",
-    "lint": "eslint . --cache",
-    "lint:fix": "eslint . --cache --fix",
-    "test": "pnpm --filter @vinicunca/akar test",
-    "story:dev": "pnpm --filter histoire story:dev --open"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^19.4.1",
-    "@commitlint/config-conventional": "^19.4.1",
-    "@floating-ui/vue": "^1.1.4",
-    "@histoire/plugin-vue": "^0.17.17",
-    "@tsconfig/node20": "^20.1.4",
-    "@types/node": "^22.5.1",
-    "@vinicunca/eslint-config": "^2.10.1",
-    "@vinicunca/perkakas": "^1.0.5",
-    "@vitejs/plugin-vue": "^5.1.3",
-    "bumpp": "^9.5.2",
-    "eslint": "^9.9.1",
-    "histoire": "^0.17.17",
-    "lint-staged": "^15.2.9",
-    "rimraf": "^6.0.1",
-    "simple-git-hooks": "^2.11.1",
-    "typescript": "5.5.4"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",

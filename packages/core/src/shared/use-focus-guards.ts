@@ -1,6 +1,8 @@
 import { isBrowser } from '@vinicunca/perkakas';
 import { watchEffect } from 'vue';
 
+const DATA_AKAR_FOCUS_GUARD = 'data-akar-focus-guard';
+
 /** Number of components which have requested interest to have focus guards */
 let count = 0;
 
@@ -13,7 +15,9 @@ export function useFocusGuards() {
     if (!isBrowser) {
       return;
     }
-    const edgeGuards = document.querySelectorAll('[data-akar-focus-guard]');
+
+    const edgeGuards = document.querySelectorAll(`[${DATA_AKAR_FOCUS_GUARD}]`);
+
     document.body.insertAdjacentElement(
       'afterbegin',
       edgeGuards[0] ?? createFocusGuard(),
@@ -27,11 +31,12 @@ export function useFocusGuards() {
     cleanupFn(() => {
       if (count === 1) {
         document
-          .querySelectorAll('[data-akar-focus-guard]')
+          .querySelectorAll(`[${DATA_AKAR_FOCUS_GUARD}]`)
           .forEach((node) => {
             node.remove();
           });
       }
+
       count--;
     });
   });
@@ -39,9 +44,12 @@ export function useFocusGuards() {
 
 function createFocusGuard() {
   const element = document.createElement('span');
-  element.setAttribute('data-akar-focus-guard', '');
+  element.setAttribute(DATA_AKAR_FOCUS_GUARD, '');
   element.tabIndex = 0;
-  element.style.cssText
-    = 'outline: none; opacity: 0; position: fixed; pointer-events: none';
+  element.style.outline = 'none';
+  element.style.opacity = '0';
+  element.style.position = 'fixed';
+  element.style.pointerEvents = 'none';
+
   return element;
 }
