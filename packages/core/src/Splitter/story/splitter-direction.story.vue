@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '../'
-import type { DataOrientation } from '~~/shared/types'
+import type { DataOrientation } from '~~/shared/types';
+import { ref } from 'vue';
+import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
 
-const direction = ref<DataOrientation>('horizontal')
+const direction = ref<DataOrientation>('horizontal');
 </script>
 
 <template>
@@ -15,22 +15,22 @@ const direction = ref<DataOrientation>('horizontal')
       <div class="w-full">
         <div>
           <button
-            class="px-3 py-1.5 text-sm rounded bg-white hover:bg-slate-100 text-slate-800 capitalize"
+            class="rounded bg-white px-3 py-1.5 text-sm text-slate-800 capitalize hover:bg-slate-100"
             @click="direction = direction === 'horizontal' ? 'vertical' : 'horizontal'"
           >
             {{ direction }}
           </button>
         </div>
-        <div class="w-full mt-4 h-48">
+        <div class="mt-4 h-48 w-full">
           <ASplitterGroup :direction="direction">
-            <ASplitterPanel class="flex items-center justify-center bg-blackA8 rounded-lg">
+            <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
               Panel A
             </ASplitterPanel>
             <ASplitterResizeHandle
-              class="data-[state=active]:bg-white transition"
+              class="transition data-[state=active]:bg-white"
               :class="direction === 'horizontal' ? 'w-2' : 'h-2'"
             />
-            <ASplitterPanel class="flex items-center justify-center bg-blackA8 rounded-lg">
+            <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
               Panel B
             </ASplitterPanel>
           </ASplitterGroup>

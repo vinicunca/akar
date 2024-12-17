@@ -1,9 +1,9 @@
 {
   "name": "akar-ui-monorepo",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.1",
   "private": true,
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.15.0",
   "license": "MIT",
   "repository": "vinicunca/akar",
   "workspaces": [
@@ -33,7 +33,7 @@
     "@iconify/json": "catalog:",
     "@types/node": "catalog:",
     "@vinicunca/eslint-config": "catalog:",
-    "@vinicunca/perkakas": "^1.1.0",
+    "@vinicunca/perkakas": "catalog:",
     "@vinicunca/unocss-preset": "catalog:",
     "bumpp": "catalog:",
     "eslint": "catalog:",

@@ -20,7 +20,7 @@ import {
   ADialogContent,
   ADialogRoot,
   ADialogTrigger,
-} from '~~/Dialog'
+} from '~~/dialog'
 
 const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 </script>

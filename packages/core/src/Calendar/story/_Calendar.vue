@@ -1,14 +1,15 @@
 <script lang="ts" setup>
-import type { DateValue } from '@internationalized/date'
-import type { ACalendarRootProps } from '..'
-import { ACalendarCell, ACalendarCellTrigger, ACalendarGrid, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot } from '..'
+import type { DateValue } from '@internationalized/date';
+import type { ACalendarRootProps } from '..';
+import { ACalendarCell, ACalendarCellTrigger, ACalendarGrid, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot } from '..';
 
-const props = defineProps<{ calendarProps?: ACalendarRootProps, emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>()
+const props = defineProps<{ calendarProps?: ACalendarRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>();
 
 function pagingFunc(date: DateValue, sign: -1 | 1) {
-  if (sign === -1)
-    return date.subtract({ years: 1 })
-  return date.add({ years: 1 })
+  if (sign === -1) {
+    return date.subtract({ years: 1 });
+  }
+  return date.add({ years: 1 });
 }
 </script>
 

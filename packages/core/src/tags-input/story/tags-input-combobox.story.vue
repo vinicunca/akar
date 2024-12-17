@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, AComboboxTrigger, AComboboxViewport } from '~~/Combobox'
-import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot } from '..'
-import { Icon } from '@iconify/vue'
+import { Icon } from '@iconify/vue';
+import { ref, watch } from 'vue';
+import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, AComboboxTrigger, AComboboxViewport } from '~~/combobox';
+import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot } from '..';
 
-const searchTerm = ref('')
-const values = ref(['Apple'])
-const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
+const searchTerm = ref('');
+const values = ref(['Apple']);
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
 
 watch(values, () => {
-  searchTerm.value = ''
-}, { deep: true })
+  searchTerm.value = '';
+}, { deep: true });
 </script>
 
 <template>
@@ -24,18 +24,18 @@ watch(values, () => {
         multiple
         class="my-4"
       >
-        <AComboboxAnchor class="w-[400px] inline-flex items-center justify-between rounded-lg p-2 text-[13px] leading-none  gap-[5px] bg-white text-grass11 shadow-[0_2px_10px] shadow-black/10 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-grass9 outline-none">
+        <AComboboxAnchor class="text-grass11 hover:bg-mauve3 data-[placeholder]:text-grass9 w-[400px] inline-flex items-center justify-between gap-[5px] rounded-lg bg-white p-2 text-[13px] leading-none shadow-[0_2px_10px] shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
           <ATagsInputRoot
             v-slot="{ modelValue: tags }"
             :model-value="values"
             delimiter=""
-            class="flex gap-2 items-center rounded-lg flex-wrap"
+            class="flex flex-wrap items-center gap-2 rounded-lg"
           >
             <ATagsInputItem
               v-for="item in tags"
               :key="item"
               :value="item"
-              class="flex items-center justify-center gap-2 text-white bg-grass10 aria-[current=true]:bg-grass11 rounded px-2 py-1"
+              class="bg-grass10 aria-[current=true]:bg-grass11 flex items-center justify-center gap-2 rounded px-2 py-1 text-white"
             >
               <ATagsInputItemText class="text-sm" />
               <ATagsInputItemDelete>
@@ -49,7 +49,7 @@ watch(values, () => {
             >
               <ATagsInputInput
                 placeholder="Fruits..."
-                class="focus:outline-none flex-1 rounded bg-transparent  placeholder:text-mauve10 px-1  "
+                class="placeholder:text-mauve10 flex-1 rounded bg-transparent px-1 focus:outline-none"
                 @keydown.enter.prevent
               />
             </AComboboxInput>
@@ -58,21 +58,21 @@ watch(values, () => {
           <AComboboxTrigger>
             <Icon
               icon="radix-icons:chevron-down"
-              class="h-4 w-4 text-grass11"
+              class="text-grass11 h-4 w-4"
             />
           </AComboboxTrigger>
         </AComboboxAnchor>
-        <AComboboxContent class="mt-2 min-w-[160px] bg-white overflow-hidden rounded shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade">
+        <AComboboxContent class="will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade mt-2 min-w-[160px] overflow-hidden rounded bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
           <AComboboxViewport class="p-[5px]">
             <AComboboxGroup>
-              <AComboboxLabel class="px-[25px] text-xs leading-[25px] text-mauve11">
+              <AComboboxLabel class="text-mauve11 px-[25px] text-xs leading-[25px]">
                 Fruits
               </AComboboxLabel>
 
               <AComboboxItem
                 v-for="(option, index) in options"
                 :key="index"
-                class="text-[13px] leading-none text-grass11 rounded-[3px] flex items-center h-[25px] pr-[35px] pl-[25px] relative select-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:outline-none data-[highlighted]:bg-grass9 data-[highlighted]:text-grass1"
+                class="text-grass11 data-[disabled]:text-mauve8 data-[highlighted]:bg-grass9 data-[highlighted]:text-grass1 relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none"
                 :value="option"
               >
                 <AComboboxItemIndicator

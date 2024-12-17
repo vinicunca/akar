@@ -10,15 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@internationalized/date": "^3.5.6",
-    "@internationalized/number": "^3.5.3",
-    "@nuxt/ui": "3.0.0-alpha.10"
+    "@internationalized/date": "catalog:",
+    "@internationalized/number": "catalog:",
+    "@nuxt/ui": "catalog:"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.276",
-    "@unocss/nuxt": "^0.65.1",
-    "@vinicunca/unocss-preset": "^1.0.0",
-    "nuxt": "^3.14.1592",
+    "@iconify/json": "catalog:",
+    "@unocss/nuxt": "catalog:",
+    "@vinicunca/unocss-preset": "catalog:",
+    "nuxt": "catalog:",
     "vue": "latest",
     "vue-router": "latest"
   }

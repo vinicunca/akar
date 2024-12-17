@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import type { ACheckboxRootProps } from '..'
-import { ACheckboxIndicator, ACheckboxRoot } from '..'
-import { ref } from 'vue'
+import type { ACheckboxRootProps } from '..';
+import { Icon } from '@iconify/vue';
+import { ref } from 'vue';
+import { ACheckboxIndicator, ACheckboxRoot } from '..';
 
-const props = defineProps<ACheckboxRootProps>()
-const modelValue = ref(props.modelValue)
+const props = defineProps<ACheckboxRootProps>();
+const modelValue = ref(props.modelValue);
 </script>
 
 <template>
   <label
-    class="flex flex-row gap-4 items-center [&>.checkbox]:hover:bg-neutral-100"
+    class="flex flex-row items-center gap-4 [&>.checkbox]:hover:bg-neutral-100"
     for="test"
   >
     Test
@@ -19,12 +19,12 @@ const modelValue = ref(props.modelValue)
     v-bind="props"
     v-model="modelValue"
     name="test"
-    class="shadow-blackA7 hover:bg-violet3 flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] outline-none focus-within:shadow-[0_0_0_2px_black]"
+    class="shadow-blackA7 h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
     aria-label="Test"
   >
     <ACheckboxIndicator
       data-testid="test-indicator"
-      class="bg-white h-full w-full rounded flex items-center justify-center"
+      class="h-full w-full flex items-center justify-center rounded bg-white"
     >
       <Icon
         icon="radix-icons:check"

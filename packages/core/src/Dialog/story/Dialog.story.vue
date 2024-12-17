@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Dialog from './_Dialog.vue'
+import Dialog from './_dialog.vue';
 </script>
 
 <template>
