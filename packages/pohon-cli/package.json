@@ -1,5 +1,6 @@
 {
   "name": "@vinicunca/pohon-cli",
+  "type": "module",
   "version": "1.0.0-alpha.1",
   "description": "Generator for Akar UI components",
   "author": "Vinicunca Contributors (https://github.com/vinicunca)",
@@ -47,5 +48,13 @@
   "peerDependencies": {
     "@vitest/ui": "*",
     "vitest": "*"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "consola": "^3.2.3"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

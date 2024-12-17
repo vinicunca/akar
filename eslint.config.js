@@ -56,4 +56,11 @@ export default vinicuncaESLint(
       'ts/consistent-type-definitions': 'off',
     },
   },
+
+  {
+    files: ['packages/pohon-cli/**/*.ts'],
+    rules: {
+      'node/prefer-global/process': 'off',
+    },
+  },
 );
