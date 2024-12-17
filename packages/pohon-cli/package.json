@@ -1,7 +1,7 @@
 {
   "name": "@vinicunca/pohon-cli",
   "type": "module",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Generator for Akar UI components",
   "author": "Vinicunca Contributors (https://github.com/vinicunca)",
   "license": "MIT",
