@@ -1,1 +1,1 @@
-export { default as ALabel, type LabelProps } from './label.vue';
+export { default as ALabel, type ALabelProps } from './label.vue';

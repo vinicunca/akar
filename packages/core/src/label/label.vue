@@ -2,7 +2,7 @@
 import type { APrimitiveProps } from '~~/primitive';
 import { useForwardExpose } from '~~/shared';
 
-export interface LabelProps extends APrimitiveProps {
+export interface ALabelProps extends APrimitiveProps {
   /** The id of the element the label is associated with. */
   for?: string;
 }
@@ -11,7 +11,7 @@ export interface LabelProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APrimitive } from '~~/primitive';
 
-const props = withDefaults(defineProps<LabelProps>(), {
+const props = withDefaults(defineProps<ALabelProps>(), {
   as: 'label',
 });
 
