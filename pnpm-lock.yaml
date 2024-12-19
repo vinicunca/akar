@@ -7,7 +7,7 @@ settings:
 catalogs:
   default:
     '@commitlint/cli':
-      specifier: ^19.6.0
+      specifier: ^19.6.1
       version: 19.6.1
     '@commitlint/config-conventional':
       specifier: ^19.6.0
@@ -73,8 +73,8 @@ catalogs:
       specifier: ^0.65.1
       version: 0.65.1
     '@vinicunca/eslint-config':
-      specifier: ^2.15.1
-      version: 2.15.2
+      specifier: ^2.15.3
+      version: 2.15.3
     '@vinicunca/perkakas':
       specifier: ^1.2.0
       version: 1.2.0
@@ -106,13 +106,13 @@ catalogs:
       specifier: ^1.2.4
       version: 1.2.4
     bumpp:
-      specifier: ^9.4.1
+      specifier: ^9.9.1
       version: 9.9.1
     defu:
       specifier: ^6.1.4
       version: 6.1.4
     eslint:
-      specifier: ^9.16.0
+      specifier: ^9.17.0
       version: 9.17.0
     histoire:
       specifier: ^0.17.17
@@ -121,7 +121,7 @@ catalogs:
       specifier: ^25.0.1
       version: 25.0.1
     lint-staged:
-      specifier: ^15.2.10
+      specifier: ^15.2.11
       version: 15.2.11
     nuxt:
       specifier: ^3.14.1592
@@ -150,9 +150,6 @@ catalogs:
     unbuild:
       specifier: ^3.0.1
       version: 3.0.1
-    uncrypto:
-      specifier: ^0.1.3
-      version: 0.1.3
     unocss:
       specifier: ^0.65.1
       version: 0.65.1
@@ -202,7 +199,7 @@ importers:
         version: 20.17.10
       '@vinicunca/eslint-config':
         specifier: 'catalog:'
-        version: 2.15.2(@typescript-eslint/utils@8.18.1(eslint@9.17.0(jiti@2.4.1))(typescript@5.7.2))(@vue/compiler-sfc@3.5.13)(eslint@9.17.0(jiti@2.4.1))(typescript@5.7.2)(vitest@2.1.8)
+        version: 2.15.3(@typescript-eslint/utils@8.18.1(eslint@9.17.0(jiti@2.4.1))(typescript@5.7.2))(@vue/compiler-sfc@3.5.13)(eslint@9.17.0(jiti@2.4.1))(typescript@5.7.2)(vitest@2.1.8)
       '@vinicunca/perkakas':
         specifier: 'catalog:'
         version: 1.2.0
@@ -309,9 +306,6 @@ importers:
       ohash:
         specifier: 'catalog:'
         version: 1.1.4
-      uncrypto:
-        specifier: 'catalog:'
-        version: 0.1.3
     devDependencies:
       '@iconify/vue':
         specifier: 'catalog:'
@@ -2602,8 +2596,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  '@vinicunca/eslint-config@2.15.2':
-    resolution: {integrity: sha512-FMbBmDrPDX9Ujo2J6EG9GZ46iPEi7JsZ7cVyzO8+T8SKASM6eqv0lqCzIaek+7qVjuONLDdMuhtz4sCWmppGKw==}
+  '@vinicunca/eslint-config@2.15.3':
+    resolution: {integrity: sha512-mXY/7pSUvf368qYpDQcLgXfpFl03euPuZ5FTzHUfNEEU4Y2PffMmwmBLsJQAH9cK3pn6FO2opMtIl9v933AHJQ==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       '@eslint-react/eslint-plugin': ^1.17.3
@@ -10322,7 +10316,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@vinicunca/eslint-config@2.15.2(@typescript-eslint/utils@8.18.1(eslint@9.17.0(jiti@2.4.1))(typescript@5.7.2))(@vue/compiler-sfc@3.5.13)(eslint@9.17.0(jiti@2.4.1))(typescript@5.7.2)(vitest@2.1.8)':
+  '@vinicunca/eslint-config@2.15.3(@typescript-eslint/utils@8.18.1(eslint@9.17.0(jiti@2.4.1))(typescript@5.7.2))(@vue/compiler-sfc@3.5.13)(eslint@9.17.0(jiti@2.4.1))(typescript@5.7.2)(vitest@2.1.8)':
     dependencies:
       '@antfu/install-pkg': 0.5.0
       '@clack/prompts': 0.8.2
