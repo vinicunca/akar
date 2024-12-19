@@ -111,8 +111,7 @@
     "@vueuse/shared": "catalog:",
     "aria-hidden": "catalog:",
     "defu": "catalog:",
-    "ohash": "catalog:",
-    "uncrypto": "catalog:"
+    "ohash": "catalog:"
   },
   "devDependencies": {
     "@iconify/vue": "catalog:",

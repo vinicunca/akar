@@ -5,9 +5,9 @@ import {
 } from '@vueuse/core';
 import { type Fn, isIOS, tryOnBeforeUnmount } from '@vueuse/shared';
 import { defu } from 'defu';
-import { randomUUID } from 'uncrypto';
 import { computed, nextTick, ref, watch } from 'vue';
 import { injectAConfigProviderContext } from '~~/config-provider/config-provider.vue';
+import { useId } from './use-id';
 
 const useBodyLockStackCount = createSharedComposable(() => {
   const map = ref<Map<string, boolean>>(new Map());
@@ -113,7 +113,7 @@ const useBodyLockStackCount = createSharedComposable(() => {
 });
 
 export function useBodyScrollLock(initialState?: boolean | undefined) {
-  const id = randomUUID();
+  const id = useId();
   const map = useBodyLockStackCount();
 
   map.value.set(id, initialState ?? false);
