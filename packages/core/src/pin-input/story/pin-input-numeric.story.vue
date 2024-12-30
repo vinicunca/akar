@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { APinInputInput, APinInputRoot } from '..'
+import { ref } from 'vue';
+import { APinInputInput, APinInputRoot } from '..';
 
-const value = ref<string[]>([])
+const value = ref<Array<string>>([]);
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const value = ref<string[]>([])
     <Variant title="default">
       <APinInputRoot
         v-model="value"
-        class="flex gap-2 items-center"
+        class="flex items-center gap-2"
         type="number"
         :otp="true"
         @complete="e => console.log(e.join(''))"
@@ -21,7 +21,7 @@ const value = ref<string[]>([])
         <APinInputInput
           v-for="(id, index) in 5"
           :key="id"
-          class="w-10 h-10 rounded text-center text-green10 placeholder:text-mauve5"
+          class="text-green10 placeholder:text-mauve5 h-10 w-10 rounded text-center"
           :index="index"
         />
       </APinInputRoot>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { ref } from 'vue'
+import { Icon } from '@iconify/vue';
+import { ref } from 'vue';
 import {
   ADropdownMenuArrow,
   ADropdownMenuCheckboxItem,
@@ -17,26 +17,26 @@ import {
   ADropdownMenuSubContent,
   ADropdownMenuSubTrigger,
   ADropdownMenuTrigger,
-} from '..'
+} from '..';
 
-const toggleState = ref(false)
-const checkboxOne = ref(false)
-const checkboxTwo = ref(false)
-const person = ref('pedro')
+const toggleState = ref(false);
+const checkboxOne = ref(false);
+const checkboxTwo = ref(false);
+const person = ref('pedro');
 
-const content = 'relative min-w-32 bg-white will-change-[opacity,transform] z-50 rounded-md border p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2'
+const content = 'relative min-w-32 bg-white will-change-[opacity,transform] z-50 rounded-md border p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2';
 
-const item = 'group w-full text-sm leading-none text-violet11 flex items-center h-7 relative pl-7 pr-2 select-none outline-none data-[state=open]:bg-violet4 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 cursor-default rounded'
+const item = 'group w-full text-sm leading-none text-violet11 flex items-center h-7 relative pl-7 pr-2 select-none outline-none data-[state=open]:bg-violet4 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 cursor-default rounded';
 
-const subContent = 'bg-white rounded-md shadow-md will-change-[opacity,transform] min-w-32 z-50 overflow-hidden p-1 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-left-right-1 data-[side=right]:slide-in-from-right-1 data-[side=top]:slide-in-from-bottom-2'
+const subContent = 'bg-white rounded-md shadow-md will-change-[opacity,transform] min-w-32 z-50 overflow-hidden p-1 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-left-right-1 data-[side=right]:slide-in-from-right-1 data-[side=top]:slide-in-from-bottom-2';
 
-const separator = '-mx-1 my-1 h-px bg-mauve5'
+const separator = '-mx-1 my-1 h-px bg-mauve5';
 
-const shortcut = 'ml-auto pl-5 text-[13px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8'
+const shortcut = 'ml-auto pl-5 text-[13px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8';
 
-const checkboxItem = 'group w-full text-sm leading-none text-violet11 flex items-center h-7 relative pl-7 pr-2 select-none outline-none data-[state=open]:bg-violet4 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 cursor-default rounded'
+const checkboxItem = 'group w-full text-sm leading-none text-violet11 flex items-center h-7 relative pl-7 pr-2 select-none outline-none data-[state=open]:bg-violet4 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 cursor-default rounded';
 
-const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-center h-7 relative pl-7 pr-2 select-none outline-none data-[state=open]:bg-violet4 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 cursor-default rounded'
+const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-center h-7 relative pl-7 pr-2 select-none outline-none data-[state=open]:bg-violet4 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 cursor-default rounded';
 </script>
 
 <template>
@@ -47,7 +47,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
     <Variant title="default">
       <ADropdownMenuRoot v-model:open="toggleState">
         <ADropdownMenuTrigger
-          class="rounded-full size-10 inline-flex items-center justify-center text-violet11 bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+          class="text-violet11 shadow-blackA7 size-10 inline-flex items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
           aria-label="Customise options"
         >
           <Icon
@@ -77,7 +77,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               >
                 More Tools
                 <div
-                  class="ml-auto pl-5 text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8"
+                  class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
                 >
                   <Icon
                     icon="tabler:chevron-right"
@@ -136,7 +136,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               >
                 More Tools
                 <div
-                  class="ml-auto pl-5 text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8"
+                  class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
                 >
                   <Icon
                     icon="tabler:chevron-right"
@@ -173,7 +173,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
                     >
                       More Tools
                       <div
-                        class="ml-auto pl-5 text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8"
+                        class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
                       >
                         <Icon
                           icon="tabler:chevron-right"
@@ -210,7 +210,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
                           >
                             More Tools
                             <div
-                              class="ml-auto pl-5 text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8"
+                              class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
                             >
                               <Icon
                                 icon="tabler:chevron-right"
@@ -278,7 +278,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
             </ADropdownMenuCheckboxItem>
             <ADropdownMenuSeparator :class="separator" />
 
-            <ADropdownMenuLabel class="pl-6 text-xs leading-6 text-mauve11">
+            <ADropdownMenuLabel class="text-mauve11 pl-6 text-xs leading-6">
               People
             </ADropdownMenuLabel>
             <ADropdownMenuRadioGroup v-model="person">

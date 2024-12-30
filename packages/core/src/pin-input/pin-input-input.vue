@@ -1,4 +1,5 @@
 <script lang="ts">
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { APrimitive, type APrimitiveProps, usePrimitiveElement } from '~~/primitive';
 import { useArrowNavigation } from '~~/shared';
 import { injectAPinInputRootContext } from './pin-input-root.vue';
@@ -12,7 +13,7 @@ export interface APinInputInputProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, watch } from 'vue';
 
 const props = withDefaults(defineProps<APinInputInputProps>(), {
   as: 'input',
@@ -20,6 +21,7 @@ const props = withDefaults(defineProps<APinInputInputProps>(), {
 
 const context = injectAPinInputRootContext();
 const inputElements = computed(() => Array.from(context.inputElements!.value));
+const currentValue = computed(() => context.modelValue.value[props.index]);
 
 const disabled = computed(() => props.disabled || context.disabled.value);
 const isOtpMode = computed(() => context.otp.value);
@@ -27,6 +29,7 @@ const isNumericMode = computed(() => context.type.value === 'number');
 const isPasswordMode = computed(() => context.mask.value);
 
 const { primitiveElement, currentElement } = usePrimitiveElement();
+
 function handleInput(event: InputEvent) {
   const target = event.target as HTMLInputElement;
 
@@ -41,12 +44,25 @@ function handleInput(event: InputEvent) {
   }
 
   target.value = target.value.slice(-1);
-  updateModelValueAt(props.index, target.value);
+  updateModelValueAt({
+    index: props.index,
+    value: target.value,
+  });
 
   const nextEl = inputElements.value[props.index + 1];
+
   if (nextEl) {
     nextEl.focus();
   }
+}
+
+function resetPlaceholder() {
+  const target = currentElement.value as HTMLInputElement;
+  nextTick(() => {
+    if (!target.value) {
+      target.placeholder = context.placeholder.value;
+    }
+  });
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -69,20 +85,29 @@ function handleBackspace(event: KeyboardEvent) {
   const value = target.value;
 
   if (value) {
-    updateModelValueAt(props.index, '');
+    updateModelValueAt({
+      index: props.index,
+      value: '',
+    });
   } else {
     const prevEl = inputElements.value[props.index - 1];
     if (prevEl) {
       prevEl.focus();
-      updateModelValueAt(props.index - 1, '');
+      updateModelValueAt({
+        index: props.index - 1,
+        value: '',
+      });
     }
   }
 }
 
 function handleDelete(event: KeyboardEvent) {
-  if (event.key === 'Delete') {
+  if (event.key === KEY_CODES.DELETE) {
     event.preventDefault();
-    updateModelValueAt(props.index, '');
+    updateModelValueAt({
+      index: props.index,
+      value: '',
+    });
   }
 }
 
@@ -95,18 +120,14 @@ function handleFocus(event: FocusEvent) {
   }
 }
 
-function handleBlur(event: FocusEvent) {
-  const target = event.target as HTMLInputElement;
-  nextTick(() => {
-    if (!target.value) {
-      target.placeholder = context.placeholder.value;
-    }
-  });
+function handleBlur() {
+  resetPlaceholder();
 }
 
 function handlePaste(event: ClipboardEvent) {
   event.preventDefault();
   const clipboardData = event.clipboardData;
+
   if (!clipboardData) {
     return;
   }
@@ -119,6 +140,7 @@ function handleMultipleCharacter(values: string) {
   const tempModelValue = [...context.modelValue.value];
   const initialIndex = values.length >= inputElements.value.length ? 0 : props.index;
   const lastIndex = Math.min(initialIndex + values.length, inputElements.value.length);
+
   for (let i = initialIndex; i < lastIndex; i++) {
     const input = inputElements.value[i];
     const value = values[i - initialIndex];
@@ -129,6 +151,7 @@ function handleMultipleCharacter(values: string) {
     tempModelValue[i] = value;
     input.focus();
   }
+
   context.modelValue.value = tempModelValue;
   inputElements.value[lastIndex]?.focus();
 }
@@ -144,15 +167,28 @@ function removeTrailingEmptyStrings(input: Array<string>) {
   return input;
 }
 
-function updateModelValueAt(index: number, value: string) {
+function updateModelValueAt(
+  { index, value }:
+  { index: number; value: string },
+) {
   const tempModelValue = [...context.modelValue.value];
   tempModelValue[index] = value;
   context.modelValue.value = removeTrailingEmptyStrings(tempModelValue);
 }
 
+watch(
+  currentValue,
+  () => {
+    if (!currentValue.value) {
+      resetPlaceholder();
+    }
+  },
+);
+
 onMounted(() => {
   context.onInputElementChange(currentElement.value as HTMLInputElement);
 });
+
 onUnmounted(() => {
   context.inputElements?.value.delete(currentElement.value as HTMLInputElement);
 });
