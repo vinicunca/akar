@@ -166,6 +166,7 @@ function handleKeyDown(event: KeyboardEvent) {
   if (event.defaultPrevented) {
     return;
   }
+
   // submenu key events bubble through portals. We only care about keys in this menu.
   const target = event.target as HTMLElement;
   const isKeyDownInside
@@ -195,7 +196,7 @@ function handleKeyDown(event: KeyboardEvent) {
     return;
   }
 
-  const collectionItems = rovingFocusGroupRef.value?.getItems().map((i) => i.ref) ?? [];
+  const collectionItems = rovingFocusGroupRef.value?.getItems() ?? [];
 
   if (isKeyDownInside) {
     // menus should not be navigated using tab key so we prevent it
@@ -203,7 +204,7 @@ function handleKeyDown(event: KeyboardEvent) {
       event.preventDefault();
     }
     if (!isModifierKey && isCharacterKey) {
-      handleTypeaheadSearch({ key: event.key, fallback: collectionItems });
+      handleTypeaheadSearch({ key: event.key, items: collectionItems });
     }
   }
 
@@ -215,10 +216,13 @@ function handleKeyDown(event: KeyboardEvent) {
     return;
   }
   event.preventDefault();
-  const candidateNodes = [...collectionItems];
+
+  const candidateNodes = [...collectionItems.map((item) => item.ref)];
+
   if (LAST_KEYS.includes(event.key)) {
     candidateNodes.reverse();
   }
+
   focusFirst(candidateNodes);
 }
 

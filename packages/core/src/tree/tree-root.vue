@@ -169,8 +169,8 @@ function handleKeydown(event: KeyboardEvent) {
   if (isVirtual.value) {
     virtualKeydownHook.trigger(event);
   } else {
-    const collections = rovingFocusGroupRef.value?.getItems().map((i) => i.ref);
-    handleTypeaheadSearch({ key: event.key, fallback: collections });
+    const collections = rovingFocusGroupRef.value?.getItems() ?? [];
+    handleTypeaheadSearch({ key: event.key, items: collections });
   }
 }
 

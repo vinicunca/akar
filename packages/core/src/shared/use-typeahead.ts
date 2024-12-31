@@ -1,42 +1,41 @@
-import type { Ref } from 'vue';
 import { refAutoReset } from '@vueuse/shared';
 import { wrapArray } from './arrays';
 
-export function useTypeahead(collections?: Ref<Array<HTMLElement>>) {
+export function useTypeahead(callback?: (search: string) => void) {
   // Reset `search` 1 second after it was last updated
   const search = refAutoReset('', 1000);
 
   function handleTypeaheadSearch(
-    { key, fallback }: { fallback?: Array<HTMLElement>; key: string },
+    { key, items }: { key: string; items: Array<{ ref: HTMLElement; value?: any }> },
   ) {
-    if (!collections?.value && !fallback) {
-      return;
-    }
-
     search.value = search.value + key;
-    const items = collections?.value ?? fallback!;
-    const currentItem = document.activeElement;
-    const currentMatch = items.find(
-      (item) => item === currentItem,
-    )?.textContent?.trim() ?? '';
-    const values = items.map((item) =>
-      item.textContent?.trim() ?? '',
-    );
-    const nextMatch = getNextMatch({
-      values,
-      search: search.value,
-      currentMatch,
-    });
 
-    const newItem = items.find(
-      (item) => item.textContent?.trim() === nextMatch,
-    );
+    if (callback) {
+      callback(key);
+    } else {
+      const currentItem = document.activeElement;
+      const itemsWithTextValue = items.map((item) => ({
+        ...item,
+        textValue: item.value?.textValue ?? item.ref.textContent?.trim() ?? '',
+      }));
 
-    if (newItem) {
-      (newItem as HTMLElement).focus();
+      const currentMatch = itemsWithTextValue.find((item) => item.ref === currentItem);
+      const values = itemsWithTextValue.map((item) => item.textValue);
+
+      const nextMatch = getNextMatch({
+        values,
+        search: search.value,
+        currentMatch: currentMatch?.textValue,
+      });
+
+      const newItem = itemsWithTextValue.find((item) => item.textValue === nextMatch);
+
+      if (newItem) {
+        (newItem.ref as HTMLElement).focus();
+      }
+
+      return newItem?.ref;
     }
-
-    return newItem;
   };
 
   function resetTypeahead() {
@@ -70,9 +69,9 @@ export function useTypeahead(collections?: Ref<Array<HTMLElement>>) {
 export function getNextMatch(
   { values, search, currentMatch }:
   {
-    currentMatch?: string;
-    search: string;
     values: Array<string>;
+    search: string;
+    currentMatch?: string;
   },
 ) {
   const isRepeated = search.length > 1

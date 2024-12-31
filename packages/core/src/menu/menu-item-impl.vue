@@ -67,7 +67,7 @@ async function handlePointerLeave(event: PointerEvent) {
 </script>
 
 <template>
-  <ACollectionItem>
+  <ACollectionItem :value="{ textValue }">
     <APrimitive
       :ref="forwardRef"
       role="menuitem"

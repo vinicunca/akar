@@ -143,7 +143,7 @@ provideSelectItemContext({
 </script>
 
 <template>
-  <ACollectionItem>
+  <ACollectionItem :value="{ textValue }">
     <APrimitive
       :ref="forwardRef"
       role="option"

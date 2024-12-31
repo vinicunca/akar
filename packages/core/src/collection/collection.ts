@@ -1,5 +1,16 @@
 /* eslint-disable ts/no-empty-object-type */
-import { computed, defineComponent, h, inject, markRaw, provide, type Ref, ref, watch, watchEffect } from 'vue';
+import {
+  computed,
+  defineComponent,
+  h,
+  inject,
+  markRaw,
+  provide,
+  type Ref,
+  ref,
+  watch,
+  watchEffect,
+} from 'vue';
 import { APrimitiveSlot, usePrimitiveElement } from '~~/primitive';
 
 interface CollectionContext<ItemData = {}> {

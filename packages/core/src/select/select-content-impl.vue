@@ -191,12 +191,12 @@ function handleKeyDown(event: KeyboardEvent) {
     event.preventDefault();
   }
 
-  const collectionItems = getItems().map((i) => i.ref);
   if (!isModifierKey && event.key.length === 1) {
-    handleTypeaheadSearch({ key: event.key, fallback: collectionItems });
+    handleTypeaheadSearch({ key: event.key, items: getItems() });
   }
 
   if (['ArrowDown', 'ArrowUp', 'End', 'Home'].includes(event.key)) {
+    const collectionItems = getItems().map((i) => i.ref);
     let candidateNodes = [...collectionItems];
 
     if (['ArrowUp', 'End'].includes(event.key)) {

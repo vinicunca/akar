@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
-import { onMounted } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { injectANumberFieldRootContext } from './number-field-root.vue';
 
 export interface ANumberFieldInputProps extends APrimitiveProps {
@@ -43,6 +43,22 @@ function handleWheelEvent(event: WheelEvent) {
 onMounted(() => {
   rootContext.onInputElement(currentElement.value as HTMLInputElement);
 });
+
+const inputValue = ref(rootContext.textValue.value);
+
+watch(
+  () => rootContext.textValue.value,
+  () => {
+    inputValue.value = rootContext.textValue.value;
+  },
+  { immediate: true, deep: true },
+);
+
+function handleChange() {
+  requestAnimationFrame(() => {
+    inputValue.value = rootContext.textValue.value;
+  });
+}
 </script>
 
 <template>
@@ -53,7 +69,7 @@ onMounted(() => {
     role="spinbutton"
     type="text"
     tabindex="0"
-    :value="rootContext.textValue.value"
+    :value="inputValue"
     :inputmode="rootContext.inputMode.value"
     :disabled="rootContext.disabled.value ? '' : undefined"
     :data-disabled="rootContext.disabled.value ? '' : undefined"
@@ -82,6 +98,11 @@ onMounted(() => {
       if (!rootContext.validate(nextValue))
         event.preventDefault()
     }"
+    @input="(event: InputEvent) => {
+      const target = event.target as HTMLInputElement
+      inputValue = target.value
+    }"
+    @change="handleChange"
     @keydown.enter="rootContext.applyInputValue($event.target?.value)"
     @blur="rootContext.applyInputValue($event.target?.value)"
   >

@@ -64,11 +64,7 @@ const open = computed(() =>
 );
 
 const disabled = computed(() => {
-  return (
-    rootContext.disabled.value
-    || props.disabled
-    || (rootContext.isSingle.value && open.value && !rootContext.collapsible)
-  );
+  return (rootContext.disabled.value || props.disabled);
 });
 
 const dataDisabled = computed(() => (disabled.value ? '' : undefined));
@@ -92,6 +88,15 @@ provideAccordionItemContext({
 });
 
 function handleArrowKey(event: KeyboardEvent) {
+  const target = event.target as HTMLElement;
+  const allCollectionItems: Array<HTMLElement> = Array.from(rootContext.parentElement.value?.querySelectorAll('[data-akar-collection-item]') ?? []);
+
+  const collectionItemIndex = allCollectionItems.findIndex((item) => item === target);
+
+  if (collectionItemIndex === -1) {
+    return null;
+  }
+
   useArrowNavigation({
     event,
     currentElement: currentElement.value,

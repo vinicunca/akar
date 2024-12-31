@@ -219,7 +219,9 @@ function onKeydownTypeAhead(event: KeyboardEvent) {
   if (!focusable.value) {
     return;
   }
+
   isUserAction.value = true;
+
   if (isVirtual.value) {
     virtualKeydownHook.trigger(event);
   } else {
@@ -234,7 +236,7 @@ function onKeydownTypeAhead(event: KeyboardEvent) {
     } else if (!isMetaKey) {
       const el = handleTypeaheadSearch({
         key: event.key,
-        fallback: getCollectionItem(),
+        items: getItems(),
       });
 
       if (el) {
