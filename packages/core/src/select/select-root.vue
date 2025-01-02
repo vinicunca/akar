@@ -114,7 +114,7 @@ const triggerPointerDownPosRef = ref({
 
 const isEmptyModelValue = computed(() => {
   if (multiple.value && Array.isArray(modelValue.value)) {
-    return modelValue.value.length === 0;
+    return modelValue.value?.length === 0;
   } else {
     return isNullish(modelValue.value);
   }

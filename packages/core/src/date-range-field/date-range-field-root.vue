@@ -55,7 +55,7 @@ export interface ADateRangeFieldRootProps extends APrimitiveProps, FormFieldProp
   /** The placeholder date, which is used to determine what month to display when no date is selected. This updates as the user navigates the calendar and can be used to programmatically control the calendar view */
   placeholder?: DateValue;
   /** The controlled checked state of the calendar. Can be bound as `v-model`. */
-  modelValue?: DateRange;
+  modelValue?: DateRange | null;
   /** The hour cycle used for formatting times. Defaults to the local preference */
   hourCycle?: HourCycle;
   /** The granularity to use for formatting times. Defaults to day if a CalendarDate is provided, otherwise defaults to minute. The field will render segments for each part of the date up to and including the specified granularity */
@@ -87,8 +87,10 @@ export type ADateRangeFieldRootEmits = {
   'update:placeholder': [date: DateValue];
 };
 
-export const [injectADateRangeFieldRootContext, provideDateRangeFieldRootContext]
-  = createContext<DateRangeFieldRootContext>('ADateRangeFieldRoot');
+export const [
+  injectADateRangeFieldRootContext,
+  provideDateRangeFieldRootContext,
+] = createContext<DateRangeFieldRootContext>('ADateRangeFieldRoot');
 </script>
 
 <script setup lang="ts">
@@ -127,12 +129,12 @@ onMounted(() => {
 const modelValue = useVModel(props, 'modelValue', emits, {
   defaultValue: props.defaultValue ?? { start: undefined, end: undefined },
   passive: (props.modelValue === undefined) as false,
-}) as Ref<DateRange>;
+}) as Ref<DateRange | null>;
 
 const defaultDate = getDefaultDate({
   defaultPlaceholder: props.placeholder,
   granularity: props.granularity,
-  defaultValue: modelValue.value.start,
+  defaultValue: modelValue.value?.start,
   locale: props.locale,
 });
 
@@ -150,7 +152,7 @@ const inferredGranularity = computed(() => {
 });
 
 const isStartInvalid = computed(() => {
-  if (!modelValue.value.start) {
+  if (!modelValue.value?.start) {
     return false;
   }
 
@@ -169,7 +171,7 @@ const isStartInvalid = computed(() => {
 });
 
 const isEndInvalid = computed(() => {
-  if (!modelValue.value.end) {
+  if (!modelValue.value?.end) {
     return false;
   }
 
@@ -192,7 +194,7 @@ const isInvalid = computed(() => {
     return true;
   }
 
-  if (!modelValue.value.start || !modelValue.value.end) {
+  if (!modelValue.value?.start || !modelValue.value?.end) {
     return false;
   }
 
@@ -216,8 +218,16 @@ const isInvalid = computed(() => {
 
 const initialSegments = initializeSegmentValues(inferredGranularity.value);
 
-const startSegmentValues = ref<SegmentValueObj>(modelValue.value.start ? { ...syncSegmentValues({ value: modelValue.value.start, formatter }) } : { ...initialSegments });
-const endSegmentValues = ref<SegmentValueObj>(modelValue.value.end ? { ...syncSegmentValues({ value: modelValue.value.end, formatter }) } : { ...initialSegments });
+const startSegmentValues = ref<SegmentValueObj>(
+  modelValue.value?.start
+    ? { ...syncSegmentValues({ value: modelValue.value.start, formatter }) }
+    : { ...initialSegments },
+);
+const endSegmentValues = ref<SegmentValueObj>(
+  modelValue.value?.end
+    ? { ...syncSegmentValues({ value: modelValue.value.end, formatter }) }
+    : { ...initialSegments },
+);
 
 const startSegmentContent = computed(() => createContent({
   granularity: inferredGranularity.value,
@@ -246,15 +256,15 @@ const segmentContents = computed(() => ({
 
 const editableSegmentContents = computed(() => ({ start: segmentContents.value.start.filter(({ part }) => part !== 'literal'), end: segmentContents.value.end.filter(({ part }) => part !== 'literal') }));
 
-const startValue = ref(modelValue.value.start?.copy()) as Ref<DateValue | undefined>;
-const endValue = ref(modelValue.value.end?.copy()) as Ref<DateValue | undefined>;
+const startValue = ref(modelValue.value?.start?.copy()) as Ref<DateValue | undefined>;
+const endValue = ref(modelValue.value?.end?.copy()) as Ref<DateValue | undefined>;
 
 watch([startValue, endValue], ([_startValue, _endValue]) => {
   modelValue.value = { start: _startValue?.copy(), end: _endValue?.copy() };
 });
 
 watch(modelValue, (_modelValue) => {
-  if (_modelValue.start && _modelValue.end) {
+  if (_modelValue && _modelValue.start && _modelValue.end) {
     if (!startValue.value || _modelValue.start.compare(startValue.value) !== 0) {
       startValue.value = _modelValue.start.copy();
     }
@@ -287,7 +297,14 @@ watch(locale, (value) => {
 });
 
 watch(modelValue, (_modelValue) => {
-  if (_modelValue.start !== undefined && (!isEqualDay(placeholder.value, _modelValue.start) || placeholder.value.compare(_modelValue.start) !== 0)) {
+  if (
+    _modelValue
+    && _modelValue.start !== undefined
+    && (
+      !isEqualDay(placeholder.value, _modelValue.start)
+      || placeholder.value.compare(_modelValue.start) !== 0
+    )
+  ) {
     placeholder.value = _modelValue.start.copy();
   }
 });
@@ -390,7 +407,7 @@ defineExpose({
       as="input"
       feature="focusable"
       tabindex="-1"
-      :value="`${modelValue.start?.toString()} - ${modelValue.end?.toString()}`"
+      :value="`${modelValue?.start?.toString()} - ${modelValue?.end?.toString()}`"
       :name="name"
       :disabled="disabled"
       :required="required"

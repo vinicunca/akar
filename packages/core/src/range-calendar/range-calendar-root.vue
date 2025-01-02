@@ -5,6 +5,7 @@ import type { APrimitiveProps } from '~~/primitive';
 import type { DateRange } from '~~/shared/date';
 import type { Direction } from '~~/shared/types';
 import { type DateValue, isEqualDay } from '@internationalized/date';
+import { isNullish } from '@vinicunca/perkakas';
 import { useCalendar } from '~~/calendar/use-calendar';
 import { type DateGrid, type DateMatcher, isDateBefore, type WeekDayFormat } from '~~/date';
 import { createContext, type UseDateFormatter, useDirection, useLocale } from '~~/shared';
@@ -56,7 +57,7 @@ export interface ARangeCalendarRootProps extends APrimitiveProps {
   /** The default value for the calendar */
   defaultValue?: DateRange;
   /** The controlled checked state of the calendar. Can be bound as `v-model`. */
-  modelValue?: DateRange;
+  modelValue?: DateRange | null;
   /** The placeholder date, which is used to determine what month to display when no date is selected. This updates as the user navigates the calendar and can be used to programmatically control the calendar view */
   placeholder?: DateValue;
   /** When combined with `isDateUnavailable`, determines whether non-contiguous ranges, i.e. ranges containing unavailable dates, may be selected. */
@@ -114,7 +115,7 @@ export const [injectARangeCalendarRootContext, provideRangeCalendarRootContext]
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { onMounted, ref, toRefs, watch } from 'vue';
+import { computed, onMounted, ref, toRefs, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 
 const props = withDefaults(defineProps<ARangeCalendarRootProps>(), {
@@ -150,6 +151,8 @@ defineSlots<{
     locale: string;
     /** Whether or not to always display 6 weeks in the calendar */
     fixedWeeks: boolean;
+    /** The current date range */
+    modelValue: DateRange;
   }) => any;
 }>();
 
@@ -188,14 +191,20 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   passive: (props.modelValue === undefined) as false,
 }) as Ref<DateRange>;
 
+const currentModelValue = computed(() =>
+  isNullish(modelValue.value)
+    ? { start: undefined, end: undefined }
+    : modelValue.value,
+);
+
 const defaultDate = getDefaultDate({
   defaultPlaceholder: props.placeholder,
   defaultValue: modelValue.value.start,
   locale: props.locale,
 });
 
-const startValue = ref(modelValue.value.start) as Ref<DateValue | undefined>;
-const endValue = ref(modelValue.value.end) as Ref<DateValue | undefined>;
+const startValue = ref(currentModelValue.value.start) as Ref<DateValue | undefined>;
+const endValue = ref(currentModelValue.value.end) as Ref<DateValue | undefined>;
 
 const placeholder = useVModel(props, 'placeholder', emits, {
   defaultValue: props.defaultPlaceholder ?? defaultDate.copy(),
@@ -255,12 +264,13 @@ const {
 });
 
 watch(modelValue, (_modelValue) => {
-  if (_modelValue.start) {
+  if (_modelValue && _modelValue.start) {
     if (!startValue.value || !isEqualDay(startValue.value, _modelValue.start)) {
       startValue.value = _modelValue.start.copy();
     }
   }
-  if (_modelValue.end) {
+
+  if (_modelValue && _modelValue.end) {
     if (!endValue.value || !isEqualDay(endValue.value, _modelValue.end)) {
       endValue.value = _modelValue.end.copy();
     }
@@ -276,7 +286,7 @@ watch(startValue, (_startValue) => {
 });
 
 watch([startValue, endValue], ([_startValue, _endValue]) => {
-  const value = modelValue.value;
+  const value = currentModelValue.value;
 
   if (value && value.start && value.end && _startValue && _endValue && isEqualDay(value.start, _startValue) && isEqualDay(value.end, _endValue)) {
     return;

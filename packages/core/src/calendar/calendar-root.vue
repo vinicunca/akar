@@ -119,24 +119,29 @@ import { useVModel } from '@vueuse/core';
 import { onMounted, toRefs, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 
-const props = withDefaults(defineProps<ACalendarRootProps>(), {
-  defaultValue: undefined,
-  as: 'div',
-  pagedNavigation: false,
-  preventDeselect: false,
-  weekStartsOn: 0,
-  weekdayFormat: 'narrow',
-  fixedWeeks: false,
-  multiple: false,
-  numberOfMonths: 1,
-  disabled: false,
-  readonly: false,
-  initialFocus: false,
-  placeholder: undefined,
-  isDateDisabled: undefined,
-  isDateUnavailable: undefined,
-});
+const props = withDefaults(
+  defineProps<ACalendarRootProps>(),
+  {
+    defaultValue: undefined,
+    as: 'div',
+    pagedNavigation: false,
+    preventDeselect: false,
+    weekStartsOn: 0,
+    weekdayFormat: 'narrow',
+    fixedWeeks: false,
+    multiple: false,
+    numberOfMonths: 1,
+    disabled: false,
+    readonly: false,
+    initialFocus: false,
+    placeholder: undefined,
+    isDateDisabled: undefined,
+    isDateUnavailable: undefined,
+  },
+);
+
 const emits = defineEmits<ACalendarRootEmits>();
+
 defineSlots<{
   default: (props: {
     /** The current date of the placeholder */
@@ -151,6 +156,8 @@ defineSlots<{
     locale: string;
     /** Whether or not to always display 6 weeks in the calendar */
     fixedWeeks: boolean;
+    /** The current date of the calendar */
+    modelValue: DateValue | undefined;
   }) => any;
 }>();
 

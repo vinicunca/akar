@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { DataOrientation, Direction, FormFieldProps } from '../shared/types';
 import { clamp, isIncludedIn } from '@vinicunca/perkakas';
@@ -10,7 +10,7 @@ export interface ASliderRootProps extends APrimitiveProps, FormFieldProps {
   /** The value of the slider when initially rendered. Use when you do not need to control the state of the slider. */
   defaultValue?: Array<number>;
   /** The controlled value of the slider. Can be bind as `v-model`. */
-  modelValue?: Array<number>;
+  modelValue?: Array<number> | null;
   /** When `true`, prevents the user from interacting with the slider. */
   disabled?: boolean;
   /** The orientation of the slider. */
@@ -47,7 +47,8 @@ export interface SliderRootContext {
   disabled: Ref<boolean>;
   min: Ref<number>;
   max: Ref<number>;
-  modelValue?: Readonly<Ref<Array<number> | undefined>>;
+  modelValue?: Readonly<Ref<Array<number> | null | undefined>>;
+  currentModelValue: ComputedRef<Array<number>>;
   valueIndexToChangeRef: Ref<number>;
   thumbElements: Ref<Array<HTMLElement>>;
 }
@@ -58,7 +59,7 @@ export const [injectASliderRootContext, provideSliderRootContext]
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { ref, toRaw, toRefs } from 'vue';
+import { computed, ref, toRaw, toRefs } from 'vue';
 import { AVisuallyHiddenInput } from '~~/visually-hidden';
 import SliderHorizontal from './slider-horizontal.vue';
 import SliderVertical from './slider-vertical.vue';
@@ -97,13 +98,15 @@ const { ACollectionSlot } = useCollection({ isProvider: true });
 const modelValue = useVModel(props, 'modelValue', emits, {
   defaultValue: props.defaultValue,
   passive: (props.modelValue === undefined) as false,
-}) as Ref<Array<number>>;
+}) as Ref<Array<number> | null>;
+
+const currentModelValue = computed(() => Array.isArray(modelValue.value) ? [...modelValue.value] : []);
 
 const valueIndexToChangeRef = ref(0);
-const valuesBeforeSlideStartRef = ref(modelValue.value);
+const valuesBeforeSlideStartRef = ref(currentModelValue.value);
 
 function handleSlideStart(value: number) {
-  const closestIndex = getClosestValueIndex(modelValue.value, value);
+  const closestIndex = getClosestValueIndex(currentModelValue.value, value);
   updateValues(value, closestIndex);
 }
 
@@ -113,10 +116,10 @@ function handleSlideMove(value: number) {
 
 function handleSlideEnd() {
   const prevValue = valuesBeforeSlideStartRef.value[valueIndexToChangeRef.value];
-  const nextValue = modelValue.value[valueIndexToChangeRef.value];
+  const nextValue = currentModelValue.value[valueIndexToChangeRef.value];
   const hasChanged = nextValue !== prevValue;
   if (hasChanged) {
-    emits('valueCommit', toRaw(modelValue.value));
+    emits('valueCommit', toRaw(currentModelValue.value));
   }
 }
 
@@ -125,7 +128,7 @@ function updateValues(value: number, atIndex: number, { commit } = { commit: fal
   const snapToStep = roundValue(Math.round((value - min.value) / step.value) * step.value + min.value, decimalCount);
   const nextValue = clamp(snapToStep, { min: min.value, max: max.value });
 
-  const nextValues = getNextSortedValues(modelValue.value, nextValue, atIndex);
+  const nextValues = getNextSortedValues(currentModelValue.value, nextValue, atIndex);
 
   if (hasMinStepsBetweenValues(nextValues, minStepsBetweenThumbs.value * step.value)) {
     valueIndexToChangeRef.value = nextValues.indexOf(nextValue);
@@ -144,6 +147,7 @@ function updateValues(value: number, atIndex: number, { commit } = { commit: fal
 const thumbElements = ref<Array<HTMLElement>>([]);
 provideSliderRootContext({
   modelValue,
+  currentModelValue,
   valueIndexToChangeRef,
   thumbElements,
   orientation,
@@ -168,20 +172,22 @@ provideSliderRootContext({
       :aria-disabled="disabled"
       :data-disabled="disabled ? '' : undefined"
       @pointerdown="() => {
-        if (!disabled) valuesBeforeSlideStartRef = modelValue
+        if (!disabled) {
+          valuesBeforeSlideStartRef = currentModelValue;
+        }
       }"
       @slide-start="!disabled && handleSlideStart($event)"
       @slide-move="!disabled && handleSlideMove($event)"
       @slide-end="!disabled && handleSlideEnd()"
       @home-key-down="!disabled && updateValues(min, 0, { commit: true })"
-      @end-key-down="!disabled && updateValues(max, modelValue.length - 1, { commit: true })"
+      @end-key-down="!disabled && updateValues(max, currentModelValue.length - 1, { commit: true })"
       @step-key-down="(event, direction) => {
         if (!disabled) {
           const isPageKey = isIncludedIn(event.key, PAGE_KEYS);
           const isSkipKey = isPageKey || (event.shiftKey && isIncludedIn(event.key, ARROW_KEYS));
           const multiplier = isSkipKey ? 10 : 1;
           const atIndex = valueIndexToChangeRef;
-          const value = modelValue[atIndex];
+          const value = currentModelValue[atIndex];
           const stepInDirection = step * multiplier * direction;
           updateValues(value + stepInDirection, atIndex, { commit: true });
         }

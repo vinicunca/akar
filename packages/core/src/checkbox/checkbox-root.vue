@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { AcceptableValue, FormFieldProps } from '~~/shared/types';
 import type { CheckboxCheckedState } from './utils';
-import { isDeepEqual } from '@vinicunca/perkakas';
+import { isDeepEqual, isNullish } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { createContext, isValueEqualOrExist, useFormControl, useForwardExpose } from '~~/shared';
 import { injectACheckboxGroupRootContext } from './checkbox-group-root.vue';
@@ -12,7 +12,7 @@ export interface ACheckboxRootProps extends APrimitiveProps, FormFieldProps {
   /** The value of the checkbox when it is initially rendered. Use when you do not need to control its value. */
   defaultValue?: 'indeterminate' | boolean;
   /** The controlled value of the checkbox. Can be binded with v-model. */
-  modelValue?: 'indeterminate' | boolean;
+  modelValue?: boolean | 'indeterminate' | null;
   /** When `true`, prevents the user from interacting with the checkbox */
   disabled?: boolean;
   /**
@@ -34,8 +34,10 @@ interface CheckboxRootContext {
   state: Ref<CheckboxCheckedState>;
 }
 
-export const [injectACheckboxRootContext, provideCheckboxRootContext]
-  = createContext<CheckboxRootContext>('ACheckboxRoot');
+export const [
+  injectACheckboxRootContext,
+  provideCheckboxRootContext,
+] = createContext<CheckboxRootContext>('ACheckboxRoot');
 </script>
 
 <script setup lang="ts">
@@ -49,11 +51,15 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<ACheckboxRootProps>(), {
-  modelValue: undefined,
-  value: 'on',
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<ACheckboxRootProps>(),
+  {
+    modelValue: undefined,
+    value: 'on',
+    as: 'button',
+  },
+);
+
 const emits = defineEmits<ACheckboxRootEmits>();
 
 defineSlots<{
@@ -69,15 +75,20 @@ const { forwardRef, currentElement } = useForwardExpose();
 
 const checkboxGroupContext = injectACheckboxGroupRootContext(null);
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue,
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<CheckboxCheckedState>;
+const modelValue = useVModel(
+  props,
+  'modelValue',
+  emits,
+  {
+    defaultValue: props.defaultValue,
+    passive: (props.modelValue === undefined) as false,
+  },
+) as Ref<CheckboxCheckedState>;
 
 const disabled = computed(() => checkboxGroupContext?.disabled.value || props.disabled);
 
 const checkboxState = computed<CheckboxCheckedState>(() => {
-  if (checkboxGroupContext?.modelValue.value !== undefined) {
+  if (!isNullish(checkboxGroupContext?.modelValue.value)) {
     return isValueEqualOrExist(checkboxGroupContext.modelValue.value, props.value);
   } else {
     return modelValue.value === 'indeterminate' ? 'indeterminate' : modelValue.value;
@@ -85,7 +96,7 @@ const checkboxState = computed<CheckboxCheckedState>(() => {
 });
 
 function handleClick() {
-  if (checkboxGroupContext?.modelValue.value !== undefined) {
+  if (!isNullish(checkboxGroupContext?.modelValue.value)) {
     const modelValueArray = [...(checkboxGroupContext.modelValue.value || [])];
     if (isValueEqualOrExist(modelValueArray, props.value)) {
       const index = modelValueArray.findIndex((i) => isDeepEqual(i, props.value));

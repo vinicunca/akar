@@ -7,7 +7,7 @@ import { createContext, snapValueToStep, useFormControl, useLocale } from '~~/sh
 
 export interface ANumberFieldRootProps extends APrimitiveProps, FormFieldProps {
   defaultValue?: number;
-  modelValue?: number;
+  modelValue?: number | null;
   /** The smallest value allowed for the input. */
   min?: number;
   /** The largest value allowed for the input. */

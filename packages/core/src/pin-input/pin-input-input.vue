@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<APinInputInputProps>(), {
 
 const context = injectAPinInputRootContext();
 const inputElements = computed(() => Array.from(context.inputElements!.value));
-const currentValue = computed(() => context.modelValue.value[props.index]);
+const currentValue = computed(() => context.currentModelValue.value[props.index]);
 
 const disabled = computed(() => props.disabled || context.disabled.value);
 const isOtpMode = computed(() => context.otp.value);
@@ -137,7 +137,7 @@ function handlePaste(event: ClipboardEvent) {
 }
 
 function handleMultipleCharacter(values: string) {
-  const tempModelValue = [...context.modelValue.value];
+  const tempModelValue = [...context.currentModelValue.value];
   const initialIndex = values.length >= inputElements.value.length ? 0 : props.index;
   const lastIndex = Math.min(initialIndex + values.length, inputElements.value.length);
 
@@ -171,7 +171,7 @@ function updateModelValueAt(
   { index, value }:
   { index: number; value: string },
 ) {
-  const tempModelValue = [...context.modelValue.value];
+  const tempModelValue = [...context.currentModelValue.value];
   tempModelValue[index] = value;
   context.modelValue.value = removeTrailingEmptyStrings(tempModelValue);
 }

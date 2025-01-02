@@ -13,7 +13,7 @@ const props = defineProps<AComboboxVirtualizerProps<T>>();
 defineSlots<{
   default: (props: {
     option: T;
-    virtualizer: Virtualizer<Element | Window, Element>;
+    virtualizer: Virtualizer<HTMLElement, Element>;
     virtualItem: VirtualItem;
   }) => any;
 }>();

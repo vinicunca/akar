@@ -12,7 +12,7 @@ type EditableRootContext = {
   name: Ref<string | undefined>;
   maxLength: Ref<number | undefined>;
   disabled: Ref<boolean>;
-  modelValue: Ref<string | undefined>;
+  modelValue: Ref<string | null | undefined>;
   placeholder: Ref<{ edit: string; preview: string }>;
   isEditing: Ref<boolean>;
   submitMode: Ref<SubmitMode>;
@@ -32,7 +32,7 @@ export interface AEditableRootProps extends APrimitiveProps, FormFieldProps {
   /** The default value of the editable field */
   defaultValue?: string;
   /** The value of the editable field */
-  modelValue?: string;
+  modelValue?: string | null;
   /** The placeholder for the editable field */
   placeholder?: string | { edit: string; preview: string };
   /** The reading direction of the calendar when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode. */
@@ -61,7 +61,7 @@ export type AEditableRootEmits = {
   /** Event handler called whenever the model value changes */
   'update:modelValue': [value: string];
   /** Event handler called when a value is submitted */
-  'submit': [value: string | undefined];
+  'submit': [value: string | undefined | null];
   /** Event handler called when the editable field changes state */
   'update:state': [state: 'cancel' | 'edit' | 'submit'];
 };

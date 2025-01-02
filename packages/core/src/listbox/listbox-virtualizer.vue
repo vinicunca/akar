@@ -29,7 +29,7 @@ const props = defineProps<AListboxVirtualizerProps<T>>();
 defineSlots<{
   default: (props: {
     option: T;
-    virtualizer: Virtualizer<Element | Window, Element>;
+    virtualizer: Virtualizer<HTMLElement, Element>;
     virtualItem: VirtualItem;
   }) => any;
 }>();
@@ -167,7 +167,7 @@ const optionsWithMetadata = computed(() => {
     if (props.textContent) {
       return props.textContent(option);
     } else {
-      return option.toString().toLowerCase();
+      return option?.toString().toLowerCase();
     }
   };
 
@@ -254,7 +254,7 @@ rootContext.virtualKeydownHook.on((event) => {
     search.value += event.key;
     const currentIndex = Number(document.activeElement?.getAttribute('data-index'));
     const currentMatch = optionsWithMetadata.value[currentIndex].textContent;
-    const filteredOptions = optionsWithMetadata.value.map((i) => i.textContent);
+    const filteredOptions = optionsWithMetadata.value.map((i) => i.textContent ?? '');
     const next = getNextMatch({
       values: filteredOptions,
       search: search.value,

@@ -116,16 +116,18 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 
 function onValueChange(val: T) {
   isUserAction.value = true;
-  if (Array.isArray(modelValue.value)) {
-    const index = modelValue.value.findIndex((idx) => compare({
+
+  if (props.multiple) {
+    const modelArray = Array.isArray(modelValue.value)
+      ? [...modelValue.value]
+      : [];
+    const index = modelArray.findIndex((idx) => compare({
       value: idx,
       currentValue: val,
       comparator: props.by,
     }));
 
     if (props.selectionBehavior === 'toggle') {
-      const modelArray = [...modelValue.value];
-
       if (index === -1) {
         modelArray.push(val);
       } else {

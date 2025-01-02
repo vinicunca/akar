@@ -4,8 +4,8 @@ import type { APrimitiveProps } from '~~/primitive';
 import type { AcceptableValue, DataOrientation, Direction, SingleOrMultipleProps, SingleOrMultipleType } from '~~/shared/types';
 import { createContext, useDirection, useForwardExpose } from '~~/shared';
 
-export interface AAccordionRootProps<ValidValue = Array<string> | string, ExplicitType = SingleOrMultipleType>
-  extends APrimitiveProps, SingleOrMultipleProps<ValidValue, ExplicitType> {
+export interface AAccordionRootProps<T = string | Array<string>>
+  extends APrimitiveProps, SingleOrMultipleProps<T> {
   /**
    * When type is "single", allows closing content when clicking trigger for an open item.
    * When type is "multiple", this prop has no effect.
@@ -68,17 +68,20 @@ export const [
 ] = createContext<AccordionRootContext<AAccordionRootProps>>('AAccordionRoot');
 </script>
 
-<script setup lang="ts" generic="ValidValue extends (AcceptableValue | AcceptableValue[]), ExplicitType extends SingleOrMultipleType">
+<script setup lang="ts" generic="T extends (string | string[]), ExplicitType extends SingleOrMultipleType">
 import { toRefs } from 'vue';
 import { APrimitive } from '~~/primitive';
 import { useSingleOrMultipleValue } from '~~/shared/use-single-or-multiple-value';
 
-const props = withDefaults(defineProps<AAccordionRootProps<ValidValue, ExplicitType>>(), {
-  disabled: false,
-  orientation: 'vertical',
-  collapsible: false,
-  unmountOnHide: true,
-});
+const props = withDefaults(
+  defineProps<AAccordionRootProps<T>>(),
+  {
+    disabled: false,
+    orientation: 'vertical',
+    collapsible: false,
+    unmountOnHide: true,
+  },
+);
 
 const emits = defineEmits<AccordionRootEmits<ExplicitType>>();
 
