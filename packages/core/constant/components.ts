@@ -7,6 +7,12 @@ export const components = {
     'AAccordionTrigger',
   ],
 
+  avatar: [
+    'AAvatarFallback',
+    'AAvatarImage',
+    'AAvatarRoot',
+  ],
+
   calendar: [
     'ACalendarCellTrigger',
     'ACalendarCell',

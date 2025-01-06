@@ -1,5 +1,6 @@
 /* eslint-disable perfectionist/sort-exports */
 export * from './accordion';
+export * from './avatar';
 export * from './calendar';
 export * from './checkbox';
 export * from './collapsible';
