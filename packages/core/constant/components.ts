@@ -153,6 +153,14 @@ export const components = {
     'AEditableSubmitTrigger',
   ],
 
+  hoverCard: [
+    'AHoverCardArrow',
+    'AHoverCardContent',
+    'AHoverCardPortal',
+    'AHoverCardRoot',
+    'AHoverCardTrigger',
+  ],
+
   label: [
     'ALabel',
   ],

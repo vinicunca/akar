@@ -12,6 +12,7 @@ export * from './date-range-picker';
 export * from './dialog';
 export * from './dropdown-menu';
 export * from './editable';
+export * from './hover-card';
 export * from './label';
 export * from './listbox';
 export * from './number-field';

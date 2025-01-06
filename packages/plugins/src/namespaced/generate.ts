@@ -6,10 +6,18 @@ const filteredComponent = Object.keys(components).filter(
   (i) => !excludedComponent.includes(i),
 );
 
-const flattenComponents = Object.values(components).flat();
+const flattenComponents = [];
+
+filteredComponent.forEach((curr) => {
+  const values = components[curr];
+
+  values.forEach((val) => {
+    flattenComponents.push(val);
+  });
+});
 
 const namespaced = filteredComponent.map((curr) => {
-  const key = curr.charAt(0).toUpperCase() + curr.slice(1);
+  const key = `A${curr.charAt(0).toUpperCase()}${curr.slice(1)}`;
   const tmp: Record<string, string> = {};
 
   const values = components[curr];
@@ -22,20 +30,19 @@ const namespaced = filteredComponent.map((curr) => {
   });
 
   if (Object.keys(tmp).length === 0) {
-    return `export { ${key} }`;
+    return `export { ${key} };`;
   } else {
     return `export const ${key} = {\n${
       Object.keys(tmp).map((k) => {
         return `  ${k}: ${tmp[k]},\n`;
       }).join('')
-    }}  as {\n${Object.keys(tmp).map((k) => {
-      return `  ${k}: typeof ${tmp[k]}\n`;
-    }).join('')}}`;
+    }} as {\n${Object.keys(tmp).map((k) => {
+      return `  ${k}: typeof ${tmp[k]};\n`;
+    }).join('')}};`;
   }
 });
 
-const template = `
-import { ${flattenComponents.join(', ')} } from '@vinicunca/akar';
+const template = `import { ${flattenComponents.join(', ')} } from '@vinicunca/akar';
 
 ${namespaced.map((component) => component).join('\n\n')}
 `;
