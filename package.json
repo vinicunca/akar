@@ -1,7 +1,7 @@
 {
   "name": "akar-ui-monorepo",
   "type": "module",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "private": true,
   "packageManager": "pnpm@9.15.0",
   "license": "MIT",
