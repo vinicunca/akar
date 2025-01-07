@@ -1,6 +1,7 @@
-import { getProjectInfo } from '@/src/utils/get-project-info';
 import { Command } from 'commander';
 import consola from 'consola';
+import { getProjectInfo } from '~~/src/utils/get-project-info.util';
+
 import { logger } from '~~/src/utils/logger.util';
 
 export const infoCommand = new Command()
