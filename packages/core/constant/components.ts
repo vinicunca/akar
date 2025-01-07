@@ -59,6 +59,25 @@ export const components = {
     'AComboboxVirtualizer',
   ],
 
+  contextMenu: [
+    'AContextMenuArrow',
+    'AContextMenuCheckboxItem',
+    'AContextMenuContent',
+    'AContextMenuGroup',
+    'AContextMenuItemIndicator',
+    'AContextMenuItem',
+    'AContextMenuLabel',
+    'AContextMenuPortal',
+    'AContextMenuRadioGroup',
+    'AContextMenuRadioItem',
+    'AContextMenuRoot',
+    'AContextMenuSeparator',
+    'AContextMenuSubContent',
+    'AContextMenuSubTrigger',
+    'AContextMenuSub',
+    'AContextMenuTrigger',
+  ],
+
   configProvider: [
     'AConfigProvider',
   ],

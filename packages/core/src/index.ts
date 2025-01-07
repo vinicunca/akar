@@ -5,6 +5,7 @@ export * from './calendar';
 export * from './checkbox';
 export * from './collapsible';
 export * from './combobox';
+export * from './context-menu';
 export * from './config-provider';
 export * from './date-field';
 export * from './date-picker';
