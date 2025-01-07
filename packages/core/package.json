@@ -1,7 +1,7 @@
 {
   "name": "@vinicunca/akar",
   "type": "module",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "description": "Vue UI components",
   "author": "Vinicunca Contributors (https://github.com/vinicunca)",
   "license": "MIT",
