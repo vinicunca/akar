@@ -10,6 +10,14 @@ import { APrimitive } from '~~/primitive';
 export interface AStepperIndicatorProps extends APrimitiveProps { }
 
 const props = defineProps<AStepperIndicatorProps>();
+
+defineSlots<{
+  default: (props: {
+    /** Current step */
+    step: number;
+  }) => any;
+}>();
+
 const itemContext = injectAStepperItemContext();
 useForwardExpose();
 </script>
@@ -18,7 +26,7 @@ useForwardExpose();
   <APrimitive
     v-bind="props"
   >
-    <slot>
+    <slot :step="itemContext.step.value">
       Step {{ itemContext.step.value }}
     </slot>
   </APrimitive>

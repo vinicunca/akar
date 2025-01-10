@@ -5,7 +5,7 @@ import type { APrimitiveProps } from '~~/primitive';
 import type { DateRange } from '~~/shared/date';
 import type { Direction } from '~~/shared/types';
 import { type DateValue, isEqualDay } from '@internationalized/date';
-import { isNullish } from '@vinicunca/perkakas';
+import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { useCalendar } from '~~/calendar/use-calendar';
 import { type DateGrid, type DateMatcher, isDateBefore, type WeekDayFormat } from '~~/date';
 import { createContext, type UseDateFormatter, useDirection, useLocale } from '~~/shared';
@@ -114,7 +114,7 @@ export const [injectARangeCalendarRootContext, provideRangeCalendarRootContext]
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
+import { useEventListener, useVModel } from '@vueuse/core';
 import { computed, onMounted, ref, toRefs, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 
@@ -307,13 +307,19 @@ watch([startValue, endValue], ([_startValue, _endValue]) => {
         end: _endValue.copy(),
       };
     }
-  } else if (value.start && value.end) {
-    modelValue.value = {
-      start: undefined,
-      end: undefined,
-    };
   }
 });
+
+useEventListener(
+  'keydown',
+  (ev) => {
+    if (ev.key === KEY_CODES.ESC) {
+      // Abort start and end selection
+      startValue.value = modelValue.value.start;
+      endValue.value = modelValue.value.end;
+    }
+  },
+);
 
 provideRangeCalendarRootContext({
   isDateUnavailable,
