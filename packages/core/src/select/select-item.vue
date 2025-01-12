@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { AcceptableValue } from '~~/shared/types';
 import { useCollection } from '~~/collection';
-import { createContext, useForwardExpose, useId } from '~~/shared';
+import { createContext, handleAndDispatchCustomEvent, useForwardExpose, useId } from '~~/shared';
 
 interface SelectItemContext<T = AcceptableValue> {
   value: T;
@@ -13,8 +13,17 @@ interface SelectItemContext<T = AcceptableValue> {
   onItemTextChange: (node: HTMLElement | undefined) => void;
 }
 
-export const [injectASelectItemContext, provideSelectItemContext]
-    = createContext<SelectItemContext>('ASelectItem');
+export const [
+  injectASelectItemContext,
+  provideSelectItemContext,
+] = createContext<SelectItemContext>('ASelectItem');
+
+export type SelectEvent<T> = CustomEvent<{ originalEvent: PointerEvent | KeyboardEvent; value?: T }>;
+
+export type ASelectItemEmits<T = AcceptableValue> = {
+  /** Event handler called when the selecting item. <br> It can be prevented by calling `event.preventDefault`. */
+  select: [event: SelectEvent<T>];
+};
 
 export interface ASelectItemProps<T = AcceptableValue> extends APrimitiveProps {
   /** The value given as data when submitted with a `name`. */
@@ -32,7 +41,7 @@ export interface ASelectItemProps<T = AcceptableValue> extends APrimitiveProps {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import {
   computed,
   nextTick,
@@ -46,6 +55,8 @@ import { injectASelectRootContext } from './select-root.vue';
 import { SELECTION_KEYS, valueComparator } from './utils';
 
 const props = defineProps<ASelectItemProps>();
+const emits = defineEmits<ASelectItemEmits<T>>();
+
 const { disabled } = toRefs(props);
 
 const rootContext = injectASelectRootContext();
@@ -58,9 +69,26 @@ const isFocused = ref(false);
 const textValue = ref(props.textValue ?? '');
 const textId = useId(undefined, 'akar-select-item-text');
 
-async function handleSelect(ev?: PointerEvent) {
+const SELECT_SELECT = 'select.select';
+
+async function handleSelectCustomEvent(event: PointerEvent | KeyboardEvent) {
+  if (event.defaultPrevented) {
+    return;
+  }
+
+  const eventDetail = { originalEvent: event, value: props.value as T };
+  handleAndDispatchCustomEvent({
+    name: SELECT_SELECT,
+    handler: handleSelect,
+    detail: eventDetail,
+  });
+}
+
+async function handleSelect(event: SelectEvent<T>) {
   await nextTick();
-  if (ev?.defaultPrevented) {
+  emits('select', event);
+
+  if (event?.defaultPrevented) {
     return;
   }
 
@@ -106,7 +134,7 @@ async function handleKeyDown(event: KeyboardEvent) {
     return;
   }
   if (SELECTION_KEYS.includes(event.key)) {
-    handleSelect();
+    handleSelectCustomEvent(event);
   }
   // prevent page scroll if using the space key to select an item
   if (event.key === ' ') {
@@ -158,7 +186,7 @@ provideSelectItemContext({
       :as-child="asChild"
       @focus="isFocused = true"
       @blur="isFocused = false"
-      @pointerup="handleSelect"
+      @pointerup="handleSelectCustomEvent"
       @pointerdown="(event) => {
         (event.currentTarget as HTMLElement).focus({ preventScroll: true })
       }"

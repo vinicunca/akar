@@ -173,7 +173,7 @@ import {
   size,
   useFloating,
 } from '@floating-ui/vue';
-import { computedEager, useThrottleFn } from '@vueuse/core';
+import { computedEager } from '@vueuse/core';
 import { computed, ref, watchEffect, watchPostEffect } from 'vue';
 import {
   APrimitive,
@@ -291,7 +291,7 @@ const computedMiddleware = computedEager(() => {
 // If provided custom reference, it will overwrite the default anchor element
 const reference = computed(() => props.reference ?? rootContext.anchor.value);
 
-const { floatingStyles, placement, isPositioned, middlewareData, update } = useFloating(
+const { floatingStyles, placement, isPositioned, middlewareData } = useFloating(
   reference,
   floatingRef,
   {
@@ -318,14 +318,6 @@ const placedAlign = computed(
 watchPostEffect(() => {
   if (isPositioned.value) {
     emits('placed');
-  }
-});
-
-// update position automatically when `boundingClientRect` changes
-const throttleUpdate = useThrottleFn(update, 10, true, true);
-watchEffect(() => {
-  if (reference.value?.getBoundingClientRect()) {
-    throttleUpdate();
   }
 });
 
