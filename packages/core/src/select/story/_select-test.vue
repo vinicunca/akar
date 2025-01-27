@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ASelectRootEmits, ASelectRootProps } from '..';
 import { Icon } from '@iconify/vue';
 import { useForwardPropsEmits } from '~~/shared';
 import {
@@ -10,8 +11,7 @@ import {
   ASelectLabel,
   ASelectPortal,
   ASelectRoot,
-  type ASelectRootEmits,
-  type ASelectRootProps,
+
   ASelectSeparator,
   ASelectTrigger,
   ASelectValue,

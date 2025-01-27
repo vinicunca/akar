@@ -1,6 +1,7 @@
 <script lang="ts">
+import type { DialogOverlayImplProps } from './dialog-overlay-impl.vue';
 import { useForwardExpose } from '~~/shared';
-import DialogOverlayImpl, { type DialogOverlayImplProps } from './dialog-overlay-impl.vue';
+import DialogOverlayImpl from './dialog-overlay-impl.vue';
 
 export interface ADialogOverlayProps extends DialogOverlayImplProps {
   /**

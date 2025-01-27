@@ -1,6 +1,7 @@
-import type { ADateRangeFieldRootProps } from './date-range-field-root.vue';
+import type { DateValue } from '@internationalized/date';
 
-import { CalendarDate, CalendarDateTime, type DateValue, toZoned } from '@internationalized/date';
+import type { ADateRangeFieldRootProps } from './date-range-field-root.vue';
+import { CalendarDate, CalendarDateTime, toZoned } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';

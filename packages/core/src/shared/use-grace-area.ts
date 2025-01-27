@@ -1,6 +1,7 @@
+import type { Ref } from 'vue';
 import type { Side } from '~~/popper/utils';
 import { createEventHook, refAutoReset } from '@vueuse/shared';
-import { type Ref, ref, watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 export function useGraceArea(
   { triggerElement, containerElement }:

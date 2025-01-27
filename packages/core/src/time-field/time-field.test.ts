@@ -1,7 +1,8 @@
-import type { TimeValue } from '~~/shared/date';
+import type { DateFields, TimeFields } from '@internationalized/date';
 
+import type { TimeValue } from '~~/shared/date';
 import type { ATimeFieldRootProps } from './time-field-root.vue';
-import { CalendarDateTime, type DateFields, now, parseAbsoluteToLocal, Time, type TimeFields, toZoned } from '@internationalized/date';
+import { CalendarDateTime, now, parseAbsoluteToLocal, Time, toZoned } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';

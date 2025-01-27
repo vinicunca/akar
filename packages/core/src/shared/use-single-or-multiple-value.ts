@@ -1,7 +1,8 @@
+import type { Ref } from 'vue';
 import type { AcceptableValue, SingleOrMultipleProps } from './types';
 import { isDeepEqual, isDefined } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
-import { computed, type Ref } from 'vue';
+import { computed } from 'vue';
 import { isValueEqualOrExist } from './is-value-equal-or-exist';
 
 /**

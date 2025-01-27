@@ -1,8 +1,10 @@
 <script lang="ts">
+import type { ComputedRef, Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
-import { computed, type ComputedRef, type Ref, toRefs } from 'vue';
+import type { AcceptableInputValue } from './tags-input-root.vue';
+import { computed, toRefs } from 'vue';
 import { createContext, useForwardExpose } from '~~/shared';
-import { type AcceptableInputValue, injectATagsInputRootContext } from './tags-input-root.vue';
+import { injectATagsInputRootContext } from './tags-input-root.vue';
 
 export interface ATagsInputItemProps extends APrimitiveProps {
   /** Value associated with the tags */

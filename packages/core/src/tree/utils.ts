@@ -1,4 +1,4 @@
-export function flatten<U, T extends { children: Array<any> } >(items: Array<T>): Array<U> {
+export function flatten<U, T extends { children: Array<any> }>(items: Array<T>): Array<U> {
   return items.reduce((acc: Array<any>, item: T) => {
     acc.push(item);
 

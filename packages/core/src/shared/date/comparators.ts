@@ -2,15 +2,16 @@
   * Implementation ported from https://github.com/melt-ui/melt-ui/blob/develop/src/lib/internal/helpers/date/utils.ts
 */
 
+import type { DateValue, ZonedDateTime } from '@internationalized/date';
 import {
   CalendarDate,
   CalendarDateTime,
   createCalendar,
   DateFormatter,
-  type DateValue,
+
   Time,
   toCalendar,
-  type ZonedDateTime,
+
 } from '@internationalized/date';
 
 export type TimeValue = CalendarDateTime | Time | ZonedDateTime;

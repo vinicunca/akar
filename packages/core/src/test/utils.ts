@@ -5,5 +5,3 @@ export const handleSubmit = vi.fn((e) => {
   const formData = new FormData(e.target);
   return Object.fromEntries(formData as any);
 });
-
-export const sleep = (duration: number) => new Promise((resolve) => setTimeout(resolve, duration));

@@ -29,8 +29,9 @@ export interface AToggleProps extends APrimitiveProps, FormFieldProps {
 </script>
 
 <script setup lang="ts">
+import type { Ref } from 'vue';
 import { useVModel } from '@vueuse/core';
-import { computed, type Ref } from 'vue';
+import { computed } from 'vue';
 import { APrimitive } from '~~/primitive';
 
 const props = withDefaults(defineProps<AToggleProps>(), {

@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { DismissableLayerEmits } from '..'
-import { DismissableLayer } from '..'
-import { useEmitAsProps } from '~~/shared'
+import type { DismissableLayerEmits } from '..';
+import { ref } from 'vue';
+import { useEmitAsProps } from '~~/shared';
+import { DismissableLayer } from '..';
 
 defineProps<{
-  openLabel?: string
-  closeLabel?: string
-  outsideLabel?: string
+  openLabel?: string;
+  closeLabel?: string;
+  outsideLabel?: string;
 
-  preventEscapeKeyDownEvent?: boolean
-  preventPointerDownOutsideEvent?: boolean
-  preventFocusOutsideEvent?: boolean
-}>()
+  preventEscapeKeyDownEvent?: boolean;
+  preventPointerDownOutsideEvent?: boolean;
+  preventFocusOutsideEvent?: boolean;
+}>();
 
-const emits = defineEmits<DismissableLayerEmits>()
+const emits = defineEmits<DismissableLayerEmits>();
 
-const open = ref(false)
+const open = ref(false);
 
 function handleDismiss() {
-  open.value = false
+  open.value = false;
 }
 </script>
 

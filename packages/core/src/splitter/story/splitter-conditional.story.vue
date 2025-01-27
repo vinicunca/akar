@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..'
+import { ref } from 'vue';
+import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
 
-const isShowingA = ref(false)
-const isShowingB = ref(false)
+const isShowingA = ref(false);
+const isShowingB = ref(false);
 </script>
 
 <template>
@@ -15,46 +15,46 @@ const isShowingB = ref(false)
       <div class="w-full">
         <div>
           <button
-            class="px-3 py-1.5 text-sm rounded bg-white hover:bg-slate-100 text-slate-800"
+            class="rounded bg-white px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-100"
             @click="isShowingA = !isShowingA"
           >
             {{ isShowingA ? 'Hide' : 'Show' }} A
           </button>
           <button
-            class="ml-2 px-3 py-1.5 text-sm rounded bg-white hover:bg-slate-100 text-slate-800"
+            class="ml-2 rounded bg-white px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-100"
             @click="isShowingB = !isShowingB"
           >
             {{ isShowingB ? 'Hide' : 'Show' }} B
           </button>
         </div>
 
-        <div class="w-full mt-4 h-48">
+        <div class="mt-4 h-48 w-full">
           <ASplitterGroup direction="horizontal">
             <template v-if="isShowingA">
               <ASplitterPanel
                 :min-size="20"
-                class="flex items-center justify-center bg-blackA8 rounded-lg"
+                class="bg-blackA8 flex items-center justify-center rounded-lg"
                 :order="1"
               >
                 Panel A
               </ASplitterPanel>
-              <ASplitterResizeHandle class="w-2 data-[state=active]:bg-white transition" />
+              <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
             </template>
 
             <template v-if="isShowingB">
               <ASplitterPanel
                 :min-size="20"
-                class="flex items-center justify-center bg-blackA8 rounded-lg"
+                class="bg-blackA8 flex items-center justify-center rounded-lg"
                 :order="2"
               >
                 Panel B
               </ASplitterPanel>
-              <ASplitterResizeHandle class="w-2 data-[state=active]:bg-white transition" />
+              <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
             </template>
 
             <ASplitterPanel
               :min-size="20"
-              class="flex items-center justify-center bg-blackA8 rounded-lg"
+              class="bg-blackA8 flex items-center justify-center rounded-lg"
               :order="3"
             >
               Panel C

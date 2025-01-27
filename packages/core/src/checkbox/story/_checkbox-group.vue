@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import type { ACheckboxGroupRootProps } from '..'
-import { ACheckboxGroupRoot, ACheckboxIndicator, ACheckboxRoot } from '..'
-import { ref } from 'vue'
+import type { ACheckboxGroupRootProps } from '..';
+import { Icon } from '@iconify/vue';
+import { ref } from 'vue';
+import { ACheckboxGroupRoot, ACheckboxIndicator, ACheckboxRoot } from '..';
 
-const props = defineProps<ACheckboxGroupRootProps<any>>()
-const modelValue = ref([])
+const props = defineProps<ACheckboxGroupRootProps<any>>();
+const modelValue = ref([]);
 
-const items = [{ name: 'jack' }, { name: 'john' }, { name: 'mike' }]
+const items = [{ name: 'jack' }, { name: 'john' }, { name: 'mike' }];
 </script>
 
 <template>
@@ -19,16 +19,16 @@ const items = [{ name: 'jack' }, { name: 'john' }, { name: 'mike' }]
     <div
       v-for="item in items"
       :key="item.name"
-      class="flex flex-row gap-4 items-center [&>.checkbox]:hover:bg-neutral-100"
+      class="flex flex-row items-center gap-4 [&>.checkbox]:hover:bg-neutral-100"
     >
       <ACheckboxRoot
         :id="item.name"
         :value="item"
         :aria-label="item.name"
-        class="shadow-blackA7 hover:bg-violet3 flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] outline-none focus-within:shadow-[0_0_0_2px_black]"
+        class="shadow-blackA7 h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
       >
         <ACheckboxIndicator
-          class="bg-white h-full w-full rounded flex items-center justify-center"
+          class="h-full w-full flex items-center justify-center rounded bg-white"
         >
           <Icon
             icon="radix-icons:check"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { APopperAnchor, type APopperAnchorProps } from '~~/popper';
+import type { APopperAnchorProps } from '~~/popper';
+import { APopperAnchor } from '~~/popper';
 
 interface MenuAnchorProps extends APopperAnchorProps {}
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ScrollAreaStory from './_ScrollAreaStory.vue'
-import ScrollAreaCopy from './_ScrollAreaCopy.vue'
+import ScrollAreaCopy from './_ScrollAreaCopy.vue';
+import ScrollAreaStory from './_ScrollAreaStory.vue';
 </script>
 
 <template>
@@ -33,7 +33,7 @@ import ScrollAreaCopy from './_ScrollAreaCopy.vue'
         vertical
         :horizontal="false"
       >
-        <ScrollAreaCopy class="overflow-hidden h-[50px]" />
+        <ScrollAreaCopy class="h-[50px] overflow-hidden" />
       </ScrollAreaStory>
     </Variant>
 
@@ -80,7 +80,7 @@ import ScrollAreaCopy from './_ScrollAreaCopy.vue'
         vertical
         :horizontal="false"
       >
-        <ScrollAreaCopy class="overflow-hidden h-[50px]" />
+        <ScrollAreaCopy class="h-[50px] overflow-hidden" />
       </ScrollAreaStory>
     </Variant>
 
@@ -109,7 +109,7 @@ import ScrollAreaCopy from './_ScrollAreaCopy.vue'
         vertical
         :horizontal="false"
       >
-        <ScrollAreaCopy class="overflow-hidden h-[50px]" />
+        <ScrollAreaCopy class="h-[50px] overflow-hidden" />
       </ScrollAreaStory>
     </Variant>
   </Story>

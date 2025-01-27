@@ -1,5 +1,6 @@
 <script lang="ts">
-import { APopoverClose, type APopoverCloseProps } from '..';
+import type { APopoverCloseProps } from '..';
+import { APopoverClose } from '..';
 
 export interface DateRangePickerCloseProps extends APopoverCloseProps {}
 </script>

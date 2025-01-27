@@ -1,25 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ADialogContent, ADialogOverlay, ADialogRoot } from '..'
+import { ref } from 'vue';
+import { ADialogContent, ADialogOverlay, ADialogRoot } from '..';
 
-const dialogAOpen = ref(false)
-const dialogBOpen = ref(false)
+const dialogAOpen = ref(false);
+const dialogBOpen = ref(false);
 
 function openA() {
-  dialogBOpen.value = false
-  dialogAOpen.value = true
+  dialogBOpen.value = false;
+  dialogAOpen.value = true;
 }
 function openB() {
-  dialogAOpen.value = false
-  dialogBOpen.value = true
+  dialogAOpen.value = false;
+  dialogBOpen.value = true;
 }
 function closeA(opened: boolean) {
-  if (opened)
-    dialogAOpen.value = false
+  if (opened) {
+    dialogAOpen.value = false;
+  }
 }
 function closeB(opened: boolean) {
-  if (opened)
-    dialogBOpen.value = false
+  if (opened) {
+    dialogBOpen.value = false;
+  }
 }
 </script>
 
@@ -31,7 +33,7 @@ function closeB(opened: boolean) {
     <Variant title="default">
       <div class="h-[300vh]">
         <button
-          class="text-black9 bg-blackA9 hover:bg-blackA10 rounded-[4px] text-white p-2"
+          class="bg-blackA9 text-black9 hover:bg-blackA10 rounded-[4px] p-2 text-white"
           @click="openA"
         >
           Open A
@@ -43,11 +45,11 @@ function closeB(opened: boolean) {
           >
             <ADialogOverlay class="bg-blackA9 fixed inset-0" />
             <ADialogContent
-              class="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px]"
+              class="fixed left-[50%] top-[50%] max-h-[85vh] max-w-[450px] w-[90vw] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px]"
             >
               <h1>Dialog A</h1>
               <button
-                class="text-black9 bg-blackA9 hover:bg-blackA10 rounded-[4px] text-white p-2"
+                class="text-black9 bg-blackA9 hover:bg-blackA10 rounded-[4px] p-2 text-white"
                 @click="openB"
               >
                 Open B
@@ -62,11 +64,11 @@ function closeB(opened: boolean) {
           >
             <ADialogOverlay class="bg-blackA9 fixed inset-0" />
             <ADialogContent
-              class="fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px]"
+              class="fixed left-[50%] top-[50%] max-h-[85vh] max-w-[450px] w-[90vw] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px]"
             >
               <h1>Dialog B</h1>
               <button
-                class="text-black9 bg-blackA9 hover:bg-blackA10 rounded-[4px] text-white p-2"
+                class="text-black9 bg-blackA9 hover:bg-blackA10 rounded-[4px] p-2 text-white"
                 @click="openA"
               >
                 Open A

@@ -1,6 +1,7 @@
-import type { Direction } from './types';
+import type { Ref } from 'vue';
 
-import { computed, type Ref, ref } from 'vue';
+import type { Direction } from './types';
+import { computed, ref } from 'vue';
 
 import { injectAConfigProviderContext } from '~~/config-provider/config-provider.vue';
 

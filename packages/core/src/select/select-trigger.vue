@@ -7,8 +7,9 @@ export interface ASelectTriggerProps extends APopperAnchorProps {
 </script>
 
 <script setup lang="ts">
+import type { APopperAnchorProps } from '~~/popper';
 import { computed, onMounted } from 'vue';
-import { APopperAnchor, type APopperAnchorProps } from '~~/popper';
+import { APopperAnchor } from '~~/popper';
 import { APrimitive } from '~~/primitive';
 import { useForwardExpose, useId, useTypeahead } from '~~/shared';
 import {

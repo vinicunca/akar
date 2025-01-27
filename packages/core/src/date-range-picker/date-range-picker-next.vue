@@ -1,5 +1,6 @@
 <script lang="ts">
-import { ARangeCalendarNext, type ARangeCalendarNextProps } from '..';
+import type { ARangeCalendarNextProps } from '..';
+import { ARangeCalendarNext } from '..';
 
 export interface ADateRangePickerNextProps extends ARangeCalendarNextProps {}
 </script>

@@ -151,8 +151,8 @@ function position() {
       contentWrapperElement.value.style.bottom = `${0}px`;
       const viewportOffsetBottom
         = contentElement.value.clientHeight
-        - viewport.value.offsetTop
-        - viewport.value.offsetHeight;
+          - viewport.value.offsetTop
+          - viewport.value.offsetHeight;
       const clampedTriggerMiddleToBottomEdge = Math.max(
         triggerMiddleToBottomEdge,
         selectedItemHalfHeight
@@ -178,8 +178,8 @@ function position() {
       contentWrapperElement.value.style.height = `${height}px`;
       viewport.value.scrollTop
         = contentTopToItemMiddle
-        - topEdgeToTriggerMiddle
-        + viewport.value.offsetTop;
+          - topEdgeToTriggerMiddle
+          + viewport.value.offsetTop;
     }
 
     contentWrapperElement.value.style.margin = `${CONTENT_MARGIN}px 0`;

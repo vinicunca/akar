@@ -1,7 +1,8 @@
 <script lang="ts">
+import type { ComputedRef, Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { Direction, FormFieldProps } from '~~/shared/types';
-import { computed, type ComputedRef, type Ref, ref, toRefs, watch } from 'vue';
+import { computed, ref, toRefs, watch } from 'vue';
 import { createContext, useDirection, useForwardExpose } from '~~/shared';
 import AVisuallyHiddenInput from '~~/visually-hidden/visually-hidden-input.vue';
 

@@ -40,7 +40,7 @@ export type ProgressState = 'complete' | 'indeterminate' | 'loading';
 function validateValue(value: unknown, max: number): null | number {
   const isValidValueError
     = isNullish(value)
-    || (isNumber(value) && !Number.isNaN(value) && value <= max && value >= 0);
+      || (isNumber(value) && !Number.isNaN(value) && value <= max && value >= 0);
 
   if (isValidValueError) {
     return value as null;

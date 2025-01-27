@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { provide, ref } from 'vue'
-import { ARovingFocusGroup, type ARovingFocusGroupProps } from '..'
+import type { ARovingFocusGroupProps } from '..';
+import { provide, ref } from 'vue';
+import { ARovingFocusGroup } from '..';
 
 interface Props extends ARovingFocusGroupProps {
-  defaultValue?: string
+  defaultValue?: string;
 }
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
-const value = ref(props.defaultValue ?? '')
+const value = ref(props.defaultValue ?? '');
 
 provide('rovingFocusDemo', {
   value,
-})
+});
 </script>
 
 <template>

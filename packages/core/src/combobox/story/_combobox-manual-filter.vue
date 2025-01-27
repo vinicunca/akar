@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { AComboboxInputProps, AComboboxRootProps } from '..';
 import { Icon } from '@iconify/vue';
 import { computed, ref } from 'vue';
 import { useFilter } from '~~/shared';
-import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, type AComboboxInputProps, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, type AComboboxRootProps, AComboboxTrigger, AComboboxViewport } from '..';
+import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, AComboboxTrigger, AComboboxViewport } from '..';
 
 const props = defineProps<AComboboxRootProps & { input?: AComboboxInputProps }>();
 const people = [
@@ -30,7 +31,7 @@ const filteredPeople = computed(() => people.filter((p) => startsWith({
     v-model:open="open"
     name="test"
   >
-    <AComboboxAnchor class="text-grass11 hover:bg-mauve3 data-[placeholder]:text-grass9 h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none shadow-[0_2px_10px] shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
+    <AComboboxAnchor class="hover:bg-mauve3 text-grass11 data-[placeholder]:text-grass9 h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none shadow-[0_2px_10px] shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
       <AComboboxInput
         v-bind="props.input"
         class="text-grass11 bg-transparent outline-none placeholder-gray-400"

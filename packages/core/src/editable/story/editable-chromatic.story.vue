@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Editable from './_DummyEditable.vue'
-import { ref } from 'vue'
+import { ref } from 'vue';
+import Editable from './_DummyEditable.vue';
 
-const defaultValue = 'Default value'
-const modelValue = ref(defaultValue)
+const defaultValue = 'Default value';
+const modelValue = ref(defaultValue);
 </script>
 
 <template>

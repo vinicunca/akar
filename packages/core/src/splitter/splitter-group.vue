@@ -1,6 +1,7 @@
 <script lang="ts">
+import type { CSSProperties, Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
-import { computed, type CSSProperties, type Ref, ref, toRefs, watch, watchEffect } from 'vue';
+import { computed, ref, toRefs, watch, watchEffect } from 'vue';
 import { areArrayEqual, createContext, useDirection, useForwardExpose, useId } from '~~/shared';
 import { useWindowSplitterPanelGroupBehavior } from './utils/composables/use-window-splitter-panel-group-behavior';
 import {
@@ -536,7 +537,7 @@ function collapsePanel(panelData: PanelData) {
 
       const isLastPanel
           = findPanelDataIndex(panelDataArray, panelData)
-          === panelDataArray.length - 1;
+            === panelDataArray.length - 1;
       const delta = isLastPanel
         ? panelSize - collapsedSize
         : collapsedSize - panelSize;
@@ -594,7 +595,7 @@ function expandPanel(panelData: PanelData) {
 
       const isLastPanel
           = findPanelDataIndex(panelDataArray, panelData)
-          === panelDataArray.length - 1;
+            === panelDataArray.length - 1;
       const delta = isLastPanel ? panelSize - baseSize : baseSize - panelSize;
 
       const nextLayout = adjustLayoutByDelta({

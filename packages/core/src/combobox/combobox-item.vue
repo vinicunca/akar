@@ -1,7 +1,8 @@
 <script lang="ts">
+import type { Ref } from 'vue';
 import type { AListboxItemEmits, AListboxItemProps } from '~~/listbox';
 import type { AcceptableValue } from '~~/shared/types';
-import { computed, onMounted, onUnmounted, type Ref } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import { usePrimitiveElement } from '~~/primitive';
 import { createContext, useId } from '~~/shared';
 import { injectAComboboxGroupContext } from './combobox-group.vue';

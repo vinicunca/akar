@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import DummyPopover from './_DummyPopover.vue'
+import DummyPopover from './_DummyPopover.vue';
 
 function handleAlert() {
   // eslint-disable-next-line no-alert
-  alert('Alert')
+  alert('Alert');
 }
 </script>
 
@@ -15,7 +15,7 @@ function handleAlert() {
   >
     <Variant title="Dialog (fully modal example)">
       <div class="h-[300vh]">
-        <ul class="list-disc ml-4">
+        <ul class="ml-4 list-disc">
           <li>
             ✅ dismissing a `Popover` by pressing escape should only dismiss
             that given `Popover`, not its parents
@@ -40,7 +40,7 @@ function handleAlert() {
           </li>
         </ul>
 
-        <div class="flex flex-col gap-4 mt-12">
+        <div class="mt-12 flex flex-col gap-4">
           <DummyPopover disable-outside-pointer-events>
             <DummyPopover
               color="tomato"

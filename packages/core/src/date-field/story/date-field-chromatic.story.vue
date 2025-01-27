@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { CalendarDate, type DateValue } from '@internationalized/date';
+import type { DateValue } from '@internationalized/date';
+import { CalendarDate } from '@internationalized/date';
 import { ref } from 'vue';
 import { ADateFieldInput, ADateFieldRoot } from '..';
 

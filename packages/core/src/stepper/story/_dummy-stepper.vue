@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { AStepperDescription, AStepperIndicator, AStepperItem, AStepperRoot, type AStepperRootEmits, type AStepperRootProps, AStepperSeparator, AStepperTitle, AStepperTrigger } from '..'
-import { useForwardPropsEmits } from '~~/shared'
+import type { AStepperRootEmits, AStepperRootProps } from '..';
+import { Icon } from '@iconify/vue';
+import { useForwardPropsEmits } from '~~/shared';
+import { AStepperDescription, AStepperIndicator, AStepperItem, AStepperRoot, AStepperSeparator, AStepperTitle, AStepperTrigger } from '..';
 
-const props = defineProps<AStepperRootProps>()
-const emits = defineEmits<AStepperRootEmits>()
+const props = defineProps<AStepperRootProps>();
+const emits = defineEmits<AStepperRootEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(props, emits);
 
 const steps = [{
   step: 1,
@@ -33,7 +34,7 @@ const steps = [{
   title: 'Checkout',
   description: 'Confirm your order',
   icon: 'radix-icons:check',
-}]
+}];
 </script>
 
 <template>
@@ -44,16 +45,16 @@ const steps = [{
     <AStepperItem
       v-for="item in steps"
       :key="item.step"
-      class="flex items-center p-1 gap-2 basis-1/5 cursor-pointer group data-[disabled]:pointer-events-none data-[orientation=vertical]:flex-col"
+      class="group flex basis-1/5 cursor-pointer items-center gap-2 p-1 data-[disabled]:pointer-events-none data-[orientation=vertical]:flex-col"
       :step="item.step"
     >
-      <AStepperTrigger class="p-1 flex flex-col items-center text-center gap-2 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none rounded-md">
+      <AStepperTrigger class="flex flex-col items-center gap-2 rounded-md p-1 text-center focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
         <AStepperIndicator
-          class="inline-flex items-center group-data-[disabled]:text-gray-400 group-data-[state=active]:bg-mauve12 group-data-[state=active]:text-white justify-center rounded-full text-grass11 w-10 h-10 shrink-0 bg-white group-data-[state=active]:shadow-mauve12 group-data-[state=completed]:bg-green9 group-data-[state=completed]:text-white group-data-[state=completed]:shadow-green9 shadow-[0_0_0_2px] "
+          class="text-grass11 group-data-[state=active]:shadow-mauve12 group-data-[state=active]:bg-mauve12 h-10 w-10 inline-flex shrink-0 items-center justify-center rounded-full bg-white shadow-[0_0_0_2px] group-data-[state=completed]:bg-green9 group-data-[disabled]:text-gray-400 group-data-[state=active]:text-white group-data-[state=completed]:text-white group-data-[state=completed]:shadow-green9"
         >
           <Icon
             :icon="item.icon"
-            class="w-6 h-6"
+            class="h-6 w-6"
           />
         </AStepperIndicator>
         <div class="flex flex-col">
@@ -67,7 +68,7 @@ const steps = [{
       </AStepperTrigger>
       <AStepperSeparator
         v-if="item.step !== steps[steps.length - 1].step"
-        class="w-full h-px group-data-[orientation=vertical]:w-px group-data-[orientation=vertical]:h-[100px] group-data-[disabled]:bg-gray-300 group-data-[state=completed]:bg-green9 bg-green5"
+        class="h-px w-full bg-green5 group-data-[orientation=vertical]:h-[100px] group-data-[orientation=vertical]:w-px group-data-[disabled]:bg-gray-300 group-data-[state=completed]:bg-green9"
       />
     </AStepperItem>
   </AStepperRoot>

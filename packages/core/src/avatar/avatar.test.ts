@@ -1,3 +1,5 @@
+/* eslint-disable sonar/no-identical-functions */
+/* eslint-disable no-constructor-return */
 import type { VueWrapper } from '@vue/test-utils';
 import { findByAltText, findByText, queryByText, waitForElementToBeRemoved } from '@testing-library/vue';
 import { mount } from '@vue/test-utils';

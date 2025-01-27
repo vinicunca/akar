@@ -1,5 +1,6 @@
 <script lang="ts">
-import { APopoverTrigger, type APopoverTriggerProps } from '..';
+import type { APopoverTriggerProps } from '..';
+import { APopoverTrigger } from '..';
 import { injectADateRangePickerRootContext } from './date-range-picker-root.vue';
 
 export interface ADateRangePickerTriggerProps extends APopoverTriggerProps {}

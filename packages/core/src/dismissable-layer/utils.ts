@@ -1,5 +1,6 @@
+import type { Ref } from 'vue';
 import { isBrowser } from '@vinicunca/perkakas';
-import { nextTick, type Ref, ref, watchEffect } from 'vue';
+import { nextTick, ref, watchEffect } from 'vue';
 import { handleAndDispatchCustomEvent } from '~~/shared';
 
 export type PointerDownOutsideEvent = CustomEvent<{

@@ -1,6 +1,7 @@
-import type { ADatePickerRootProps } from './date-picker-root.vue';
+import type { DateFields, DateValue, TimeFields } from '@internationalized/date';
 
-import { CalendarDate, CalendarDateTime, type DateFields, type DateValue, type TimeFields, toZoned } from '@internationalized/date';
+import type { ADatePickerRootProps } from './date-picker-root.vue';
+import { CalendarDate, CalendarDateTime, toZoned } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';

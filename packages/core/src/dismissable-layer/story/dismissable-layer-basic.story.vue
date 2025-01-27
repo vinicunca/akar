@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { DismissableLayer } from '..'
-import DismissableBox from './_DismissableBox.vue'
-import { FocusScope } from '~~/focus-scope'
+import { reactive, ref } from 'vue';
+import { FocusScope } from '~~/focus-scope';
+import { DismissableLayer } from '..';
+import DismissableBox from './_DismissableBox.vue';
 
-const open = ref(false)
+const open = ref(false);
 
 function handleClick() {
   // eslint-disable-next-line no-console
-  console.log('click')
+  console.log('click');
 }
 
 const state = reactive({
   isEscapeKeyDownPrevented: false,
   isPointerDownOutsidePrevented: false,
   isFocusOutsidePrevented: false,
-})
+});
 
-const openWithFocusScope = ref(false)
-const openButtonRef = ref<HTMLElement>()
+const openWithFocusScope = ref(false);
+const openButtonRef = ref<HTMLElement>();
 </script>
 
 <template>
@@ -78,7 +78,7 @@ const openButtonRef = ref<HTMLElement>()
             }
           "
         >
-          <div class="p-4 bg-gray-400">
+          <div class="bg-gray-400 p-4">
             <input type="text">
           </div>
         </DismissableLayer>
@@ -116,7 +116,7 @@ const openButtonRef = ref<HTMLElement>()
           <FocusScope
             trapped
             loop
-            class="w-[400px] h-[300px] bg-black rounded flex flex-col items-center justify-center"
+            class="h-[300px] w-[400px] flex flex-col items-center justify-center rounded bg-black"
           >
             <input type="text">
             <input type="text">

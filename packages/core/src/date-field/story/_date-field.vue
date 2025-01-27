@@ -11,7 +11,9 @@ const props = defineProps<{ dateFieldProps?: ADateFieldRootProps; emits?: { 'onU
   <ALabel
     for="date-field"
     data-testid="label"
-  >ALabel</ALabel>
+  >
+    ALabel
+  </ALabel>
   <ADateFieldRoot
     v-bind="props.dateFieldProps"
     id="date-field"

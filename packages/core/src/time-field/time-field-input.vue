@@ -1,7 +1,8 @@
 <script lang="ts">
+import type { APrimitiveProps } from '~~/primitive';
 import type { SegmentPart } from '~~/shared/date';
 import { computed, ref } from 'vue';
-import { APrimitive, type APrimitiveProps } from '~~/primitive';
+import { APrimitive } from '~~/primitive';
 import { useDateField } from '~~/shared/date/use-date-field';
 import { injectATimeFieldRootContext } from './time-field-root.vue';
 

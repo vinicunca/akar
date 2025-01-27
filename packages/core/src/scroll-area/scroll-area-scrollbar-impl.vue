@@ -80,7 +80,7 @@ function handleWheel(event: WheelEvent) {
   const isScrollbarWheel = scrollbar.value?.contains(element);
   const maxScrollPos
     = scrollbarVisibleContext.sizes.value.content
-    - scrollbarVisibleContext.sizes.value.viewport;
+      - scrollbarVisibleContext.sizes.value.viewport;
   if (isScrollbarWheel) {
     scrollbarVisibleContext.handleWheelScroll(event, maxScrollPos);
   }

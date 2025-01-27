@@ -1,9 +1,10 @@
+import type { Fn } from '@vueuse/shared';
 import { isBrowser, isPlainObject } from '@vinicunca/perkakas';
 import {
   createSharedComposable,
   useEventListener,
 } from '@vueuse/core';
-import { type Fn, isIOS, tryOnBeforeUnmount } from '@vueuse/shared';
+import { isIOS, tryOnBeforeUnmount } from '@vueuse/shared';
 import { defu } from 'defu';
 import { computed, nextTick, ref, watch } from 'vue';
 import { injectAConfigProviderContext } from '~~/config-provider/config-provider.vue';

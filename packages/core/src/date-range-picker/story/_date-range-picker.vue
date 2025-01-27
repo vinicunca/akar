@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import type { DateValue } from '@internationalized/date'
-import type { ADateRangePickerRootProps } from '..'
+import type { DateValue } from '@internationalized/date';
+import type { ADateRangePickerRootProps } from '..';
+import { ALabel } from '~~/label';
 import {
   ADateRangePickerCalendar,
   ADateRangePickerCell,
@@ -19,17 +20,18 @@ import {
   ADateRangePickerPrev,
   ADateRangePickerRoot,
   ADateRangePickerTrigger,
-} from '..'
-import { ALabel } from '~~/label'
+} from '..';
 
-const props = defineProps<{ dateFieldProps?: ADateRangePickerRootProps, emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>()
+const props = defineProps<{ dateFieldProps?: ADateRangePickerRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>();
 </script>
 
 <template>
   <ALabel
     data-testid="label"
     for="date-picker-field"
-  >Input label</ALabel>
+  >
+    Input label
+  </ALabel>
   <ADateRangePickerRoot
     id="date-picker-field"
     :is-date-unavailable="(date:DateValue) => date.day === 19"

@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { ACalendarCell, ACalendarCellTrigger, ACalendarGrid, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot } from '..'
-import { type Ref, ref } from 'vue'
-import { CalendarDate, type DateValue, getLocalTimeZone, today } from '@internationalized/date'
+import type { DateValue } from '@internationalized/date';
+import type { Ref } from 'vue';
+import { Icon } from '@iconify/vue';
+import { CalendarDate, getLocalTimeZone, today } from '@internationalized/date';
+import { ref } from 'vue';
+import { createDecade, createYear, toDate } from '~~/date';
 
-import { createDecade, createYear, toDate } from '~~/date'
+import { useDateFormatter } from '~~/shared';
 
-import CalendarPopover from './_CalendarPopover.vue'
-import { useDateFormatter } from '~~/shared'
+import { ACalendarCell, ACalendarCellTrigger, ACalendarGrid, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot } from '..';
+import CalendarPopover from './_CalendarPopover.vue';
 
-const value = ref(new CalendarDate(2024, 3, 20)) as Ref<DateValue>
+const value = ref(new CalendarDate(2024, 3, 20)) as Ref<DateValue>;
 
-const placeholder = ref(today(getLocalTimeZone())) as Ref<DateValue>
-const formatter = useDateFormatter('en')
+const placeholder = ref(today(getLocalTimeZone())) as Ref<DateValue>;
+const formatter = useDateFormatter('en');
 </script>
 
 <template>
@@ -25,28 +27,28 @@ const formatter = useDateFormatter('en')
         v-slot="{ weekDays, grid, date }"
         v-model="value"
         v-model:placeholder="placeholder"
-        class="mt-6 rounded-[15px] border border-black bg-white p-[22px] shadow-md"
+        class="mt-6 border border-black rounded-[15px] bg-white p-[22px] shadow-md"
         fixed-weeks
       >
         <ACalendarHeader class="flex items-center justify-between">
           <ACalendarPrev
-            class="inline-flex items-center cursor-pointer text-black justify-center rounded-[9px] bg-transparent w-10 h-10 hover:bg-black hover:text-white active:scale-98 active:transition-all focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
           >
             <Icon
               icon="radix-icons:chevron-left"
-              class="w-6 h-6"
+              class="h-6 w-6"
             />
           </ACalendarPrev>
-          <ACalendarHeading class="text-[15px] text-black font-medium flex justify-center gap-2">
+          <ACalendarHeading class="flex justify-center gap-2 text-[15px] text-black font-medium">
             <CalendarPopover>
               <template #trigger>
                 <span class="cursor-pointer">{{ formatter.fullMonth(toDate(date)) }}</span>
               </template>
-              <div class="grid grid-cols-4 bg-white rounded-[9px]">
+              <div class="grid grid-cols-4 rounded-[9px] bg-white">
                 <div
                   v-for="month in createYear({ dateObj: date })"
                   :key="month.toString()"
-                  class="relative cursor-pointer flex items-center justify-center whitespace-nowrap rounded-[9px] border border-transparent bg-transparent text-sm font-normal text-black p-2 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black hover:border-black"
+                  class="relative flex cursor-pointer items-center justify-center whitespace-nowrap border border-transparent rounded-[9px] bg-transparent p-2 text-sm text-black font-normal outline-none hover:border-black focus:shadow-[0_0_0_2px] focus:shadow-black"
                   :class="{ 'before:absolute before:top-[5px] before:rounded-full before:w-1 before:h-1 before:block before:bg-grass9': placeholder.month === month.month }"
                   @click="placeholder = month.copy()"
                 >
@@ -58,11 +60,11 @@ const formatter = useDateFormatter('en')
               <template #trigger>
                 <span class="cursor-pointer">{{ formatter.fullYear(toDate(date)) }}</span>
               </template>
-              <div class="grid grid-cols-4 bg-white rounded-[9px] gap-4">
+              <div class="grid grid-cols-4 gap-4 rounded-[9px] bg-white">
                 <div
                   v-for="yearValue in createDecade({ dateObj: date, startIndex: -10, endIndex: 10 })"
                   :key="yearValue.toString()"
-                  class="relative cursor-pointer flex items-center justify-center whitespace-nowrap rounded-[9px] border border-transparent bg-transparent text-sm font-normal text-black p-2 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black hover:border-black"
+                  class="relative flex cursor-pointer items-center justify-center whitespace-nowrap border border-transparent rounded-[9px] bg-transparent p-2 text-sm text-black font-normal outline-none hover:border-black focus:shadow-[0_0_0_2px] focus:shadow-black"
                   :class="{ 'before:absolute before:top-[5px] before:rounded-full before:w-1 before:h-1 before:block before:bg-grass9': placeholder.year === yearValue.year }"
                   @click="placeholder = yearValue.copy()"
                 >
@@ -73,16 +75,16 @@ const formatter = useDateFormatter('en')
           </ACalendarHeading>
 
           <ACalendarNext
-            class="inline-flex items-center cursor-pointer text-black justify-center rounded-[9px] bg-transparent w-10 h-10 hover:bg-black hover:text-white active:scale-98 active:transition-all focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
           >
             <Icon
               icon="radix-icons:chevron-right"
-              class="w-6 h-6"
+              class="h-6 w-6"
             />
           </ACalendarNext>
         </ACalendarHeader>
         <div
-          class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0"
+          class="flex flex-col pt-4 sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0"
         >
           <ACalendarGrid
             v-for="month in grid"
@@ -90,11 +92,11 @@ const formatter = useDateFormatter('en')
             class="w-full border-collapse select-none space-y-1"
           >
             <ACalendarGridHead>
-              <ACalendarGridRow class="mb-1 grid w-full grid-cols-7">
+              <ACalendarGridRow class="grid grid-cols-7 mb-1 w-full">
                 <ACalendarHeadCell
                   v-for="day in weekDays"
                   :key="day"
-                  class="rounded-md text-xs !font-normal text-black"
+                  class="rounded-md text-xs text-black !font-normal"
                 >
                   {{ day }}
                 </ACalendarHeadCell>
@@ -115,7 +117,7 @@ const formatter = useDateFormatter('en')
                   <ACalendarCellTrigger
                     :day="weekDate"
                     :month="month.value"
-                    class="relative flex items-center justify-center whitespace-nowrap rounded-[9px] border border-transparent bg-transparent text-sm font-normal text-black p-2 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black hover:border-black data-[selected]:bg-black data-[selected]:font-medium data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-grass9 data-[selected]:before:bg-white"
+                    class="data-[today]:before:bg-grass9 relative flex items-center justify-center whitespace-nowrap border border-transparent rounded-[9px] bg-transparent p-2 text-sm text-black font-normal outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 hover:border-black before:rounded-full before:bg-white data-[selected]:bg-black data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:shadow-[0_0_0_2px] focus:shadow-black data-[today]:before:block data-[selected]:before:bg-white"
                   />
                 </ACalendarCell>
               </ACalendarGridRow>

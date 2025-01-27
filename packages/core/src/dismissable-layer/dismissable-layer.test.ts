@@ -1,7 +1,8 @@
+import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { fireEvent } from '@testing-library/vue';
-import { type DOMWrapper, mount, type VueWrapper } from '@vue/test-utils';
+import { sleep } from '@vinicunca/perkakas';
+import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { sleep } from '~~/test';
 import DismissableLayer from './story/_dismissable-layer.vue';
 
 const OPEN_LABEL = 'Open';

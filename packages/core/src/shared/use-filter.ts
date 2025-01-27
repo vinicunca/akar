@@ -1,4 +1,5 @@
-import { computed, type MaybeRef, unref } from 'vue';
+import type { MaybeRef } from 'vue';
+import { computed, unref } from 'vue';
 
 export function useFilter(options?: MaybeRef<Intl.CollatorOptions>) {
   const computedOptions = computed(() => unref(options));

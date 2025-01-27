@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type { AMenuPortalProps } from '~~/menu';
 import {
   AMenuPortal,
-  type AMenuPortalProps,
+
 } from '~~/menu';
 
 export interface AContextMenuPortalProps extends AMenuPortalProps {}

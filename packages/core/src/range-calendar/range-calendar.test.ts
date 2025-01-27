@@ -1,5 +1,6 @@
+import type { DateValue } from '@internationalized/date';
 import type { ARangeCalendarRootProps } from './range-calendar-root.vue';
-import { CalendarDate, CalendarDateTime, type DateValue, toZoned } from '@internationalized/date';
+import { CalendarDate, CalendarDateTime, toZoned } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { mount } from '@vue/test-utils';

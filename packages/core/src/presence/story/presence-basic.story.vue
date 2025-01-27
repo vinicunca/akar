@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { APresence } from '..'
+import { ref } from 'vue';
+import { APresence } from '..';
 
-const open = ref(false)
+const open = ref(false);
 </script>
 
 <template>

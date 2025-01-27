@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { AEditableRootProps } from '..'
-import { AEditableArea, AEditableCancelTrigger, AEditableEditTrigger, AEditableInput, AEditablePreview, AEditableRoot, AEditableSubmitTrigger } from '..'
+import type { AEditableRootProps } from '..';
+import { AEditableArea, AEditableCancelTrigger, AEditableEditTrigger, AEditableInput, AEditablePreview, AEditableRoot, AEditableSubmitTrigger } from '..';
 
-const props = defineProps<{ editableProps?: AEditableRootProps, emits?: { 'onUpdate:modelValue'?: (data: string) => void } }>()
+const props = defineProps<{ editableProps?: AEditableRootProps; emits?: { 'onUpdate:modelValue'?: (data: string) => void } }>();
 </script>
 
 <template>

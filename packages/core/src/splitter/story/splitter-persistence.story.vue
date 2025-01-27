@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..'
+import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
 </script>
 
 <template>
@@ -8,20 +8,20 @@ import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..'
     :layout="{ type: 'single', width: '100%', iframe: false }"
   >
     <Variant title="default">
-      <div class="w-full h-48">
+      <div class="h-48 w-full">
         <ASplitterGroup
           auto-save-id="persistence"
           direction="horizontal"
         >
-          <ASplitterPanel class="flex items-center justify-center bg-blackA8 rounded-lg">
+          <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
             Panel A
           </ASplitterPanel>
-          <ASplitterResizeHandle class="w-2 data-[state=active]:bg-white transition" />
-          <ASplitterPanel class="flex items-center justify-center bg-blackA8 rounded-lg">
+          <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
+          <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
             Panel B
           </ASplitterPanel>
-          <ASplitterResizeHandle class="w-2 data-[state=active]:bg-white transition" />
-          <ASplitterPanel class="flex items-center justify-center bg-blackA8 rounded-lg">
+          <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
+          <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
             Panel C
           </ASplitterPanel>
         </ASplitterGroup>

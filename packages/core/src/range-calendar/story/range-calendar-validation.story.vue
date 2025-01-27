@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import RangeCalendar from './_DummyRangeCalendar.vue'
-import { CalendarDate, type DateValue, isWeekend } from '@internationalized/date'
+import type { DateValue } from '@internationalized/date';
+import { CalendarDate, isWeekend } from '@internationalized/date';
+import RangeCalendar from './_DummyRangeCalendar.vue';
 
 function isDateUnavailable(date: DateValue) {
-  return isWeekend(date, 'en')
+  return isWeekend(date, 'en');
 }
 function isDateDisabled(date: DateValue) {
-  return date.day > 20
+  return date.day > 20;
 }
 
-const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDate(2024, 2, 24) }
-const minValue = new CalendarDate(2024, 2, 12)
-const maxValue = new CalendarDate(2024, 2, 20)
+const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDate(2024, 2, 24) };
+const minValue = new CalendarDate(2024, 2, 12);
+const maxValue = new CalendarDate(2024, 2, 20);
 </script>
 
 <template>

@@ -28,13 +28,12 @@ export function validatePanelGroupLayout({
     // This is not ideal so we should warn about it, but it may be recoverable in some cases
     // (especially if the amount is small)
 
-    if (true) {
-      console.warn(
-        `WARNING: Invalid layout total size: ${nextLayout
-          .map((size) => `${size}%`)
-          .join(', ')}. Layout normalization will be applied.`,
-      );
-    }
+    console.warn(
+      `WARNING: Invalid layout total size: ${nextLayout
+        .map((size) => `${size}%`)
+        .join(', ')}. Layout normalization will be applied.`,
+    );
+
     for (let index = 0; index < panelConstraints.length; index++) {
       const unsafeSize = nextLayout[index];
       assert(unsafeSize != null);

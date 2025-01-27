@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { AToastAction, AToastDescription, AToastProvider, AToastRoot, AToastViewport } from '..'
-import { ADialogClose, ADialogContent, ADialogDescription, ADialogOverlay, ADialogRoot, ADialogTitle, ADialogTrigger } from '~~/dialog'
+import { ref } from 'vue';
+import { ADialogClose, ADialogContent, ADialogDescription, ADialogOverlay, ADialogRoot, ADialogTitle, ADialogTrigger } from '~~/dialog';
+import { AToastAction, AToastDescription, AToastProvider, AToastRoot, AToastViewport } from '..';
 
-const open = ref(false)
+const open = ref(false);
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const open = ref(false)
   >
     <AToastProvider>
       <ADialogRoot>
-        <ADialogTrigger class="inline-flex items-center justify-center rounded font-medium text-[15px] px-[15px] leading-[35px] h-[35px] bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black">
+        <ADialogTrigger class="text-violet11 shadow-blackA7 hover:bg-mauve3 h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] font-medium leading-[35px] shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
           Open
         </ADialogTrigger>
         <ADialogOverlay />
@@ -23,7 +23,7 @@ const open = ref(false)
           </ADialogTitle>
           <ADialogDescription>Description</ADialogDescription>
           <button
-            class="inline-flex items-center justify-center rounded font-medium text-[15px] px-[15px] leading-[35px] h-[35px] bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="text-violet11 shadow-blackA7 hover:bg-mauve3 h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] font-medium leading-[35px] shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
             @click="open = true"
           >
             Open toast
@@ -34,11 +34,11 @@ const open = ref(false)
 
       <AToastRoot
         v-model:open="open"
-        class="flex items-center space-between pointer-events-auto"
+        class="space-between pointer-events-auto flex items-center"
       >
         <AToastDescription>There was an error</AToastDescription>
         <AToastAction
-          class="inline-flex items-center justify-center rounded font-medium text-[15px] px-[15px] leading-[35px] h-[35px] bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+          class="text-violet11 shadow-blackA7 hover:bg-mauve3 h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] font-medium leading-[35px] shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
           alt-text="Resubmit the form to try again."
           @click="() => {
             console.log('try again')
@@ -48,7 +48,7 @@ const open = ref(false)
         </AToastAction>
       </AToastRoot>
 
-      <AToastViewport class="fixed top-1/2 right-1/2 border flex flex-col overflow-hidden" />
+      <AToastViewport class="fixed right-1/2 top-1/2 flex flex-col overflow-hidden border" />
     </AToastProvider>
   </Story>
 </template>

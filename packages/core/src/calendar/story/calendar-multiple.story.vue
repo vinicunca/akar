@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Calendar from './_DummyCalendar.vue'
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate } from '@internationalized/date';
+import Calendar from './_DummyCalendar.vue';
 
-const defaultValue = new CalendarDate(2024, 2, 20)
+const defaultValue = new CalendarDate(2024, 2, 20);
 </script>
 
 <template>

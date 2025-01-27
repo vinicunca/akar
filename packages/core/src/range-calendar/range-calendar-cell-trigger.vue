@@ -1,7 +1,8 @@
 <script lang="ts">
+import type { DateValue } from '@internationalized/date';
 import type { APrimitiveProps } from '~~/primitive';
 import {
-  type DateValue,
+
   getLocalTimeZone,
   isSameDay,
   isSameMonth,
@@ -52,10 +53,10 @@ const isHighlightStart = computed(() => rootContext.isHighlightedStart(props.day
 const isHighlightEnd = computed(() => rootContext.isHighlightedEnd(props.day));
 const isHighlighted = computed(() => rootContext.highlightedRange.value
   ? isDateBetweenInclusive({
-    date: props.day,
-    start: rootContext.highlightedRange.value.start,
-    end: rootContext.highlightedRange.value.end,
-  })
+      date: props.day,
+      start: rootContext.highlightedRange.value.start,
+      end: rootContext.highlightedRange.value.end,
+    })
   : false);
 
 const SELECTOR

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { TimeValue } from '~~/shared/date'
-import type { ATimeFieldRootProps } from '..'
-import { ATimeFieldInput, ATimeFieldRoot } from '..'
-import { ALabel } from '~~/label'
+import type { TimeValue } from '~~/shared/date';
+import type { ATimeFieldRootProps } from '..';
+import { ALabel } from '~~/label';
+import { ATimeFieldInput, ATimeFieldRoot } from '..';
 
-const props = defineProps<{ timeFieldProps?: ATimeFieldRootProps, emits?: { 'onUpdate:modelValue'?: (data: TimeValue) => void } }>()
+const props = defineProps<{ timeFieldProps?: ATimeFieldRootProps; emits?: { 'onUpdate:modelValue'?: (data: TimeValue) => void } }>();
 </script>
 
 <template>
@@ -12,7 +12,8 @@ const props = defineProps<{ timeFieldProps?: ATimeFieldRootProps, emits?: { 'onU
     for="time-field"
     data-testid="label"
   >
-    ALabel</ALabel>
+    ALabel
+  </ALabel>
   <ATimeFieldRoot
     v-bind="props.timeFieldProps"
     id="time-field"

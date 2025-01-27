@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { AStepperDescription, AStepperIndicator, AStepperItem, AStepperRoot, type AStepperRootProps, AStepperSeparator, AStepperTitle, AStepperTrigger } from '..'
+import type { AStepperRootProps } from '..';
+import { AStepperDescription, AStepperIndicator, AStepperItem, AStepperRoot, AStepperSeparator, AStepperTitle, AStepperTrigger } from '..';
 
-const props = defineProps<{ stepperProps?: AStepperRootProps & { steps: { step: number, title: string, description: string, icon: string, isCompleted?: boolean }[] }, emits?: { 'onUpdate:modelValue'?: (data: number) => void } }>()
+const props = defineProps<{ stepperProps?: AStepperRootProps & { steps: Array<{ step: number; title: string; description: string; icon: string; isCompleted?: boolean }> }; emits?: { 'onUpdate:modelValue'?: (data: number) => void } }>();
 const steps = [{
   step: 1,
   title: 'Address',
@@ -27,7 +28,7 @@ const steps = [{
   title: 'Checkout',
   description: 'Confirm your order',
   icon: 'radix-icons:check',
-}]
+}];
 </script>
 
 <template>

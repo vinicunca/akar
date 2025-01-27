@@ -21,9 +21,10 @@ const TREE_TOGGLE = 'tree.toggle';
 </script>
 
 <script setup lang="ts" generic="T extends Record<string, any>">
+import type { APrimitiveProps } from '~~/primitive';
 import { computed } from 'vue';
 import { useCollection } from '~~/collection';
-import { APrimitive, type APrimitiveProps } from '~~/primitive';
+import { APrimitive } from '~~/primitive';
 import { ARovingFocusItem } from '~~/roving-focus';
 import { handleAndDispatchCustomEvent } from '~~/shared';
 import { injectATreeRootContext } from './tree-root.vue';

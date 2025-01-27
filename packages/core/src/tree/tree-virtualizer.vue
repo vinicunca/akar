@@ -10,13 +10,16 @@ export interface ATreeVirtualizerProps {
 </script>
 
 <script setup lang="ts">
-import { useVirtualizer, type VirtualItem, type Virtualizer } from '@tanstack/vue-virtual';
+import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual';
+import type { Ref } from 'vue';
+import type { FlattenedItem } from './tree-root.vue';
+import { useVirtualizer } from '@tanstack/vue-virtual';
 import { refAutoReset, useParentElement } from '@vueuse/core';
-import { cloneVNode, computed, nextTick, type Ref, useSlots } from 'vue';
+import { cloneVNode, computed, nextTick, useSlots } from 'vue';
 import { useCollection } from '~~/collection';
 import { MAP_KEY_TO_FOCUS_INTENT } from '~~/roving-focus/utils';
 import { getNextMatch } from '~~/shared/use-typeahead';
-import { type FlattenedItem, injectATreeRootContext } from './tree-root.vue';
+import { injectATreeRootContext } from './tree-root.vue';
 
 const props = defineProps<ATreeVirtualizerProps>();
 

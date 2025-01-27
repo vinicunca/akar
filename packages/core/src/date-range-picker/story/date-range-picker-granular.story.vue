@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DateRangePicker from './_DummyDateRangePicker.vue'
+import DateRangePicker from './_DummyDateRangePicker.vue';
 </script>
 
 <template>

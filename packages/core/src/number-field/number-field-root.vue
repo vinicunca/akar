@@ -1,8 +1,9 @@
 <script lang="ts">
+import type { HTMLAttributes, Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { FormFieldProps } from '~~/shared/types';
 import { useVModel } from '@vueuse/core';
-import { computed, type HTMLAttributes, type Ref, ref, toRefs } from 'vue';
+import { computed, ref, toRefs } from 'vue';
 import { createContext, snapValueToStep, useFormControl, useLocale } from '~~/shared';
 
 export interface ANumberFieldRootProps extends APrimitiveProps, FormFieldProps {

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { AMenuItem, AMenuSeparator } from '..'
-import MenuWithAnchor from './_MenuWithAnchor.vue'
-import Submenu from './_Submenu.vue'
+import { ref } from 'vue';
+import { AMenuItem, AMenuSeparator } from '..';
+import MenuWithAnchor from './_MenuWithAnchor.vue';
+import Submenu from './_Submenu.vue';
 
 function handleSelect(text: string) {
   // eslint-disable-next-line no-console
-  console.log({ text })
+  console.log({ text });
 }
 
-const open1 = ref(false)
-const open2 = ref(false)
+const open1 = ref(false);
+const open2 = ref(false);
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const open2 = ref(false)
       </div>
       <MenuWithAnchor>
         <AMenuItem
-          class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           @select="handleSelect('undo')"
         >
           Undo
@@ -37,19 +37,19 @@ const open2 = ref(false)
           :disabled="true"
         >
           <AMenuItem
-            class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+            class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
             disabled
           >
             Disabled
           </AMenuItem>
           <AMenuItem
-            class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+            class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
             @select="handleSelect('one')"
           >
             One
           </AMenuItem>
           <AMenuItem
-            class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+            class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
             @select="handleSelect('Two')"
           >
             Two
@@ -57,25 +57,25 @@ const open2 = ref(false)
 
           <Submenu v-model:open="open2">
             <AMenuItem
-              class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+              class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
               @select="handleSelect('one')"
             >
               One
             </AMenuItem>
             <AMenuItem
-              class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+              class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
               @select="handleSelect('Two')"
             >
               Two
             </AMenuItem>
             <AMenuItem
-              class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+              class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
               @select="handleSelect('Three')"
             >
               Three
             </AMenuItem>
             <AMenuItem
-              class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+              class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
               @select="handleSelect('Four')"
             >
               Four
@@ -84,23 +84,23 @@ const open2 = ref(false)
         </Submenu>
 
         <AMenuItem
-          class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:text-white data-[highlighted]:bg-black data-[disabled]:text-gray-100"
+          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           @select="handleSelect('cut')"
         >
           Cut
         </AMenuItem>
 
-        <AMenuSeparator class="h-[1px] my-[5px] mx-[10px] bg-gray-200" />
+        <AMenuSeparator class="mx-[10px] my-[5px] h-[1px] bg-gray-200" />
 
         <AMenuItem
-          class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:text-white data-[highlighted]:bg-black data-[disabled]:text-gray-100"
+          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           :disabled="true"
           @select="handleSelect('copy')"
         >
           Copy
         </AMenuItem>
         <AMenuItem
-          class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:text-white data-[highlighted]:bg-black data-[disabled]:text-gray-100"
+          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           @select="handleSelect('paste')"
         >
           Paste

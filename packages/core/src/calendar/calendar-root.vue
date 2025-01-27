@@ -1,12 +1,14 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { DateValue } from '@internationalized/date';
 
+import type { Ref } from 'vue';
 import type { DateGrid, DateMatcher, WeekDayFormat } from '~~/date';
 import type { APrimitiveProps } from '~~/primitive';
-import type { Direction } from '~~/shared/types';
 
-import { type DateValue, isEqualDay, isSameDay } from '@internationalized/date';
-import { createContext, type UseDateFormatter, useDirection, useLocale } from '~~/shared';
+import type { UseDateFormatter } from '~~/shared';
+import type { Direction } from '~~/shared/types';
+import { isEqualDay, isSameDay } from '@internationalized/date';
+import { createContext, useDirection, useLocale } from '~~/shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '~~/shared/date';
 import { useCalendar, useCalendarState } from './use-calendar';
 

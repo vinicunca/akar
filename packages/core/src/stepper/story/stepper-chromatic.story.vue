@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Stepper from './_DummyStepper.vue'
-import { ref } from 'vue'
+import { ref } from 'vue';
+import Stepper from './_DummyStepper.vue';
 
-const defaultValue = ref(2)
-const modelValue = ref(defaultValue)
+const defaultValue = ref(2);
+const modelValue = ref(defaultValue);
 </script>
 
 <template>

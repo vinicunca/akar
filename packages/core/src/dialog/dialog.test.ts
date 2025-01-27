@@ -1,7 +1,8 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
+import type { Mock, MockInstance } from 'vitest';
 import { findByText, fireEvent, render } from '@testing-library/vue';
 import { mount } from '@vue/test-utils';
-import { afterEach, beforeEach, describe, expect, it, type Mock, type SpyInstance, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent, nextTick } from 'vue';
 import { ADialogClose, ADialogContent, ADialogOverlay, ADialogRoot, ADialogTitle, ADialogTrigger } from '.';
@@ -53,7 +54,7 @@ describe('given a default Dialog', () => {
   let wrapper: VueWrapper<InstanceType<typeof DialogTest>>;
   let trigger: DOMWrapper<HTMLElement>;
   let closeButton: HTMLElement;
-  let consoleWarnMock: SpyInstance;
+  let consoleWarnMock: MockInstance;
   let consoleWarnMockFunction: Mock;
 
   beforeEach(() => {
@@ -66,7 +67,7 @@ describe('given a default Dialog', () => {
 
   afterEach(() => {
     consoleWarnMock.mockRestore();
-    consoleWarnMockFunction.mockClear;
+    consoleWarnMockFunction.mockClear();
   });
 
   it('should pass axe accessibility tests', async () => {

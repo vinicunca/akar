@@ -3,7 +3,8 @@ export interface AComboboxAnchorProps extends APopperAnchorProps {}
 </script>
 
 <script setup lang="ts">
-import { APopperAnchor, type APopperAnchorProps } from '~~/popper';
+import type { APopperAnchorProps } from '~~/popper';
+import { APopperAnchor } from '~~/popper';
 import { APrimitive } from '~~/primitive';
 import { useForwardExpose } from '~~/shared';
 

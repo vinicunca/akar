@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import type { MenuContentImplEmits, MenuRootContentTypeProps } from './menu-content-impl.vue';
 import { useForwardPropsEmits } from '~~/shared';
-import MenuContentImpl, { type MenuContentImplEmits, type MenuRootContentTypeProps } from './menu-content-impl.vue';
+import MenuContentImpl from './menu-content-impl.vue';
 import { injectAMenuContext } from './menu-root.vue';
 
 const props = defineProps<MenuRootContentNonModalProps>();

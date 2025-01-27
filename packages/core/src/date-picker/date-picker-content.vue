@@ -1,5 +1,6 @@
 <script lang="ts">
-import { APopoverContent, type APopoverContentEmits, type APopoverContentProps, APopoverPortal, useForwardPropsEmits } from '..';
+import type { APopoverContentEmits, APopoverContentProps } from '..';
+import { APopoverContent, APopoverPortal, useForwardPropsEmits } from '..';
 
 export interface ADatePickerContentProps extends APopoverContentProps {}
 export interface DatePickerContentEmits extends APopoverContentEmits {}

@@ -49,7 +49,7 @@ function handleClick() {
           >
             <AContextMenuItem
               value="New Tab"
-              class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+              class="text-violet11 data-[disabled]:text-mauve8 group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
               @click="handleClick"
             >
               New Tab
@@ -62,7 +62,7 @@ function handleClick() {
             <AContextMenuSub>
               <AContextMenuSubTrigger
                 value="more toolsz"
-                class="group text-violet11 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[highlighted]:text-violet1"
+                class="group text-violet11 data-[disabled]:text-mauve8 data-[state=open]:text-violet11 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[highlighted]:text-violet1"
               >
                 More Tools
                 <div

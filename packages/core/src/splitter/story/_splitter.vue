@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..'
+import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
 </script>
 
 <template>
-  <div class="w-full h-48">
+  <div class="h-48 w-full">
     <ASplitterGroup direction="horizontal">
       <ASplitterPanel>
         Panel A

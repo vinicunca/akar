@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { AMenuCheckboxItem, AMenuItemIndicator, AMenuSeparator } from '..'
-import MenuWithAnchor from './_MenuWithAnchor.vue'
-import TickIcon from './_TickIcon.vue'
+import { ref } from 'vue';
+import { AMenuCheckboxItem, AMenuItemIndicator, AMenuSeparator } from '..';
+import MenuWithAnchor from './_MenuWithAnchor.vue';
+import TickIcon from './_TickIcon.vue';
 
-const options = ['Crows', 'Ravens', 'Magpies', 'Jackdaws']
+const options = ['Crows', 'Ravens', 'Magpies', 'Jackdaws'];
 
-const selection = ref<string[]>([])
+const selection = ref<Array<string>>([]);
 
 function handleSelectAll() {
-  if (selection.value.length === options.length)
-    selection.value = []
-  else selection.value = options
+  if (selection.value.length === options.length) {
+    selection.value = [];
+  } else {
+    selection.value = options;
+  }
 }
 </script>
 
@@ -24,7 +26,7 @@ function handleSelectAll() {
     <Variant title="default">
       <MenuWithAnchor>
         <AMenuCheckboxItem
-          class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           :model-value="
             selection.length === options.length
               ? true
@@ -40,12 +42,12 @@ function handleSelectAll() {
           </AMenuItemIndicator>
         </AMenuCheckboxItem>
 
-        <AMenuSeparator class="h-[1px] my-[5px] mx-[10px] bg-gray-200" />
+        <AMenuSeparator class="mx-[10px] my-[5px] h-[1px] bg-gray-200" />
 
         <AMenuCheckboxItem
           v-for="(option, index) in options"
           :key="index"
-          class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           :model-value="selection.includes(option)"
           @update:model-value="
             () => {

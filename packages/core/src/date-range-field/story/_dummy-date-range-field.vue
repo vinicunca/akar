@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { useForwardPropsEmits } from '~~/shared'
-import { ADateRangeFieldInput, ADateRangeFieldRoot, type ADateRangeFieldRootEmits, type ADateRangeFieldRootProps } from '..'
+import type { ADateRangeFieldRootEmits, ADateRangeFieldRootProps } from '..';
+import { useForwardPropsEmits } from '~~/shared';
+import { ADateRangeFieldInput, ADateRangeFieldRoot } from '..';
 
-const props = defineProps<ADateRangeFieldRootProps>()
-const emits = defineEmits<ADateRangeFieldRootEmits>()
-const forwarded = useForwardPropsEmits(props, emits)
+const props = defineProps<ADateRangeFieldRootProps>();
+const emits = defineEmits<ADateRangeFieldRootEmits>();
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
   <ADateRangeFieldRoot
     v-slot="{ segments }"
     v-bind="forwarded"
-    class="flex select-none bg-white items-center rounded-lg text-center text-green10 placeholder:text-mauve5 border border-gray9 p-1 data-[invalid]:border-red-500"
+    class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded-lg bg-white p-1 text-center data-[invalid]:border-red-500"
   >
     <template
       v-for="item in segments.start"
@@ -27,7 +28,7 @@ const forwarded = useForwardPropsEmits(props, emits)
       <ADateRangeFieldInput
         v-else
         :part="item.part"
-        class="rounded-5px p-1 hover:bg-grass4 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+        class="hover:bg-grass4 rounded-5px p-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
         type="start"
       >
         {{ item.value }}
@@ -48,7 +49,7 @@ const forwarded = useForwardPropsEmits(props, emits)
       <ADateRangeFieldInput
         v-else
         :part="item.part"
-        class="rounded-5px p-1 hover:bg-grass4 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+        class="hover:bg-grass4 rounded-5px p-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
         type="end"
       >
         {{ item.value }}

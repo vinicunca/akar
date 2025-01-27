@@ -1,6 +1,7 @@
 <script lang="ts">
+import type { APrimitiveProps } from '~~/primitive';
 import { refAutoReset } from '@vueuse/shared';
-import { APrimitive, type APrimitiveProps } from '~~/primitive';
+import { APrimitive } from '~~/primitive';
 import { injectAListboxRootContext } from './listbox-root.vue';
 
 export interface AListboxContentProps extends APrimitiveProps { }

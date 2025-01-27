@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { ref } from 'vue'
-import { ATooltipArrow, ATooltipContent, ATooltipPortal, ATooltipProvider, ATooltipRoot, ATooltipTrigger } from '..'
+import { Icon } from '@iconify/vue';
+import { ref } from 'vue';
+import { ATooltipArrow, ATooltipContent, ATooltipPortal, ATooltipProvider, ATooltipRoot, ATooltipTrigger } from '..';
 
-const lastEvent = ref('')
+const lastEvent = ref('');
 </script>
 
 <template>
@@ -12,14 +12,14 @@ const lastEvent = ref('')
     :layout="{ type: 'grid', width: '300px' }"
   >
     <Variant title="Aria ALabel">
-      <div class="grid w-full h-28 place-content-center">
+      <div class="grid h-28 w-full place-content-center">
         <ATooltipProvider :disable-closing-trigger="true">
           <ATooltipRoot
             :delay-duration="1000"
             :default-open="true"
           >
             <ATooltipTrigger
-              class="text-violet11 shadow-blackA7 hover:bg-violet3 inline-flex h-[35px] w-[35px] items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+              class="text-violet11 shadow-blackA7 h-[35px] w-[35px] inline-flex items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
             >
               <Icon icon="radix-icons:plus" />
             </ATooltipTrigger>
@@ -31,7 +31,7 @@ const lastEvent = ref('')
                 :align-offset="20"
                 aria-label="label tooltip content"
                 :side-offset="5"
-                class="data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] bg-white px-[15px] py-[10px] text-[15px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity]"
+                class="text-violet11 will-change-[transform,opacity] data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade select-none rounded-[4px] bg-white px-[15px] py-[10px] text-[15px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px]"
               >
                 <ul>
                   <h4>Add to library</h4>
@@ -48,7 +48,7 @@ const lastEvent = ref('')
     </Variant>
 
     <Variant title="Events">
-      <div class="grid w-full h-28 place-content-center">
+      <div class="grid h-28 w-full place-content-center">
         <p class="mb-4">
           <template v-if="lastEvent">
             The event <code>{{ lastEvent }}</code> has been triggered
@@ -61,7 +61,7 @@ const lastEvent = ref('')
         <ATooltipProvider>
           <ATooltipRoot>
             <ATooltipTrigger
-              class="text-violet11 shadow-blackA7 hover:bg-violet3 inline-flex h-[35px] w-[35px] items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+              class="text-violet11 shadow-blackA7 h-[35px] w-[35px] inline-flex items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
               @click.prevent
             >
               <Icon icon="radix-icons:plus" />
@@ -69,7 +69,7 @@ const lastEvent = ref('')
             <Teleport to="body">
               <ATooltipContent
                 :side-offset="5"
-                class="data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] bg-white px-[15px] py-[10px] text-[15px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity]"
+                class="data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 will-change-[transform,opacity] select-none rounded-[4px] bg-white px-[15px] py-[10px] text-[15px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px]"
                 @escape-key-down="lastEvent = '@on-escape-key-down'"
                 @pointer-down-outside="lastEvent = '@pointer-down-outside'"
               >

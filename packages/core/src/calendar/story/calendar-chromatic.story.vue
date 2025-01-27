@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import Calendar from './_DummyCalendar.vue'
-import { CalendarDate, type DateValue } from '@internationalized/date'
-import { type Ref, ref } from 'vue'
+import type { DateValue } from '@internationalized/date';
+import type { Ref } from 'vue';
+import { CalendarDate } from '@internationalized/date';
+import { ref } from 'vue';
+import Calendar from './_DummyCalendar.vue';
 
-const defaultValue = new CalendarDate(2024, 2, 20)
-const modelValue = ref(defaultValue) as Ref<DateValue>
+const defaultValue = new CalendarDate(2024, 2, 20);
+const modelValue = ref(defaultValue) as Ref<DateValue>;
 
-const placeholder = ref(new CalendarDate(2024, 4, 1)) as Ref<CalendarDate>
+const placeholder = ref(new CalendarDate(2024, 4, 1)) as Ref<CalendarDate>;
 
 function paging(date: DateValue, sign: -1 | 1) {
-  if (sign === -1)
-    return date.subtract({ years: 1 })
-  return date.add({ years: 1 })
+  if (sign === -1) {
+    return date.subtract({ years: 1 });
+  }
+  return date.add({ years: 1 });
 }
 </script>
 

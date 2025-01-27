@@ -1,6 +1,7 @@
 <script lang="ts">
+import type { Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
-import { type Ref, toRefs } from 'vue';
+import { toRefs } from 'vue';
 import { createContext, useForwardExpose } from '~~/shared';
 
 export interface ACollapsibleRootProps extends APrimitiveProps {

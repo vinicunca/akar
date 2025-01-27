@@ -1,5 +1,6 @@
 <script lang="ts">
-import { ACalendarHeading, type ACalendarHeadingProps } from '..';
+import type { ACalendarHeadingProps } from '..';
+import { ACalendarHeading } from '..';
 
 export interface ADatePickerHeadingProps extends ACalendarHeadingProps {}
 </script>

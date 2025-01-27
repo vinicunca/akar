@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
+import { Icon } from '@iconify/vue';
+import { ALabel } from '~~/label';
 import {
   ADateRangePickerArrow,
   ADateRangePickerCalendar,
@@ -19,8 +20,7 @@ import {
   ADateRangePickerPrev,
   ADateRangePickerRoot,
   ADateRangePickerTrigger,
-} from '..'
-import { ALabel } from '~~/label'
+} from '..';
 </script>
 
 <template>
@@ -30,14 +30,16 @@ import { ALabel } from '~~/label'
         <ALabel
           class="text-sm text-gray9"
           for="date-field"
-        >Hotel Booking Dates</ALabel>
+        >
+          Hotel Booking Dates
+        </ALabel>
         <ADateRangePickerRoot
           id="date-field"
           :is-date-unavailable="date => date.day === 19"
         >
           <ADateRangePickerField
             v-slot="{ segments }"
-            class="flex select-none items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+            class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded p-2 text-center data-[invalid]:border-red-500"
           >
             <template
               v-for="item in segments.start"
@@ -54,7 +56,7 @@ import { ALabel } from '~~/label'
                 v-else
                 type="start"
                 :part="item.part"
-                class="rounded-5px px-1 py-1 hover:bg-grass4 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black ]:text-grass6"
+                class="hover:bg-grass4 ]:text-grass6 rounded-5px px-1 py-1 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
               >
                 {{ item.value }}
               </ADateRangePickerInput>
@@ -76,7 +78,7 @@ import { ALabel } from '~~/label'
                 v-else
                 type="end"
                 :part="item.part"
-                class="rounded-5px px-1 py-1 hover:bg-grass4 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black ]:text-grass6"
+                class="hover:bg-grass4 ]:text-grass6 rounded-5px px-1 py-1 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
               >
                 {{ item.value }}
               </ADateRangePickerInput>
@@ -84,7 +86,7 @@ import { ALabel } from '~~/label'
             <ADateRangePickerTrigger class="focus:shadow-[0_0_0_2px] focus:shadow-black">
               <Icon
                 icon="radix-icons:calendar"
-                class="w-6 h-6"
+                class="h-6 w-6"
               />
             </ADateRangePickerTrigger>
           </ADateRangePickerField>
@@ -92,7 +94,7 @@ import { ALabel } from '~~/label'
           <ADateRangePickerContent
             align="end"
             :side-offset="16"
-            class="rounded-lg bg-white shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.green7)] will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade"
+            class="will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade rounded-lg bg-white shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)]"
           >
             <ADateRangePickerArrow class="fill-white" />
             <ADateRangePickerCalendar
@@ -101,26 +103,26 @@ import { ALabel } from '~~/label'
             >
               <ADateRangePickerHeader class="flex items-center justify-between">
                 <ADateRangePickerPrev
-                  class="inline-flex items-center cursor-pointer text-black justify-center rounded-[9px] bg-transparent w-10 h-10 hover:bg-black hover:text-white active:scale-98 active:transition-all focus:shadow-[0_0_0_2px] focus:shadow-black"
+                  class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
                 >
                   <Icon
                     icon="radix-icons:chevron-left"
-                    class="w-6 h-6"
+                    class="h-6 w-6"
                   />
                 </ADateRangePickerPrev>
 
                 <ADateRangePickerHeading class="text-[15px] text-black font-medium" />
                 <ADateRangePickerNext
-                  class="inline-flex items-center cursor-pointer text-black justify-center rounded-[9px] bg-transparent w-10 h-10 hover:bg-black hover:text-white active:scale-98 active:transition-all focus:shadow-[0_0_0_2px] focus:shadow-black"
+                  class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
                 >
                   <Icon
                     icon="radix-icons:chevron-right"
-                    class="w-6 h-6"
+                    class="h-6 w-6"
                   />
                 </ADateRangePickerNext>
               </ADateRangePickerHeader>
               <div
-                class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0"
+                class="flex flex-col pt-4 sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0"
               >
                 <ADateRangePickerGrid
                   v-for="month in grid"
@@ -128,11 +130,11 @@ import { ALabel } from '~~/label'
                   class="w-full border-collapse select-none space-y-1"
                 >
                   <ADateRangePickerGridHead>
-                    <ADateRangePickerGridRow class="mb-1 flex w-full justify-between">
+                    <ADateRangePickerGridRow class="mb-1 w-full flex justify-between">
                       <ADateRangePickerHeadCell
                         v-for="day in weekDays"
                         :key="day"
-                        class="w-10 rounded-md text-xs !font-normal text-black"
+                        class="w-10 rounded-md text-xs text-black !font-normal"
                       >
                         {{ day }}
                       </ADateRangePickerHeadCell>
@@ -142,18 +144,18 @@ import { ALabel } from '~~/label'
                     <ADateRangePickerGridRow
                       v-for="(weekDates, index) in month.rows"
                       :key="`weekDate-${index}`"
-                      class="flex w-full"
+                      class="w-full flex"
                     >
                       <ADateRangePickerCell
                         v-for="weekDate in weekDates"
                         :key="weekDate.toString()"
                         :date="weekDate"
-                        class="relative !p-0 text-center text-sm w-10 h-10"
+                        class="relative h-10 w-10 text-center text-sm !p-0"
                       >
                         <ADateRangePickerCellTrigger
                           :day="weekDate"
                           :month="month.value"
-                          class="relative flex items-center justify-center whitespace-nowrap rounded-[9px] border border-transparent bg-transparent text-sm font-normal text-black p-2 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black hover:border-black data-[selected]:bg-black data-[selected]:font-medium data-[disabled]:text-black/30 data-[selected]:text-white data-[highlighted]:bg-grass9/30 data-[highlighted]:rounded-none data-[selection-start]:bg-black data-[selection-start]:rounded-none data-[selection-start]:rounded-l-[9px] data-[selection-end]:rounded-none data-[selection-end]:bg-black data-[selection-end]:rounded-r-[9px] data-[selected]:[&:not([data-selection-start])]:[&:not([data-selection-end])]:rounded-none data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-grass9 data-[selected]:before:bg-white"
+                          class="data-[highlighted]:bg-grass9/30 data-[today]:before:bg-grass9 relative flex items-center justify-center whitespace-nowrap border border-transparent rounded-[9px] bg-transparent p-2 text-sm text-black font-normal outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 hover:border-black before:rounded-full data-[highlighted]:rounded-none data-[selection-end]:rounded-none data-[selection-start]:rounded-none data-[selection-end]:rounded-r-[9px] data-[selection-start]:rounded-l-[9px] before:bg-white data-[selected]:bg-black data-[selection-end]:bg-black data-[selection-start]:bg-black data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:shadow-[0_0_0_2px] focus:shadow-black data-[today]:before:block data-[selected]:before:bg-white data-[selected]:[&:not([data-selection-start])]:[&:not([data-selection-end])]:rounded-none"
                         />
                       </ADateRangePickerCell>
                     </ADateRangePickerGridRow>

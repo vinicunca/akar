@@ -1,5 +1,6 @@
+import type { DateFields, DateValue, TimeFields } from '@internationalized/date';
 import type { ADateFieldRootProps } from './date-field-root.vue';
-import { CalendarDate, CalendarDateTime, type DateFields, type DateValue, now, parseAbsoluteToLocal, type TimeFields, toZoned } from '@internationalized/date';
+import { CalendarDate, CalendarDateTime, now, parseAbsoluteToLocal, toZoned } from '@internationalized/date';
 
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';

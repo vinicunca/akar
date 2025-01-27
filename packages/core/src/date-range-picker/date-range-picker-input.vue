@@ -1,5 +1,6 @@
 <script lang="ts">
-import { ADateRangeFieldInput, type ADateRangeFieldInputProps } from '..';
+import type { ADateRangeFieldInputProps } from '..';
+import { ADateRangeFieldInput } from '..';
 
 export interface ADateRangePickerInputProps extends ADateRangeFieldInputProps {}
 </script>

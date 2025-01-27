@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..'
+import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..'
     :layout="{ type: 'single', width: '100%', iframe: false }"
   >
     <Variant title="default">
-      <div class="w-full h-48">
+      <div class="h-48 w-full">
         <ASplitterGroup direction="horizontal">
           <ASplitterPanel
             collapsible
@@ -22,8 +22,8 @@ import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..'
               Panel A
             </div>
           </ASplitterPanel>
-          <ASplitterResizeHandle class="w-2 data-[state=active]:bg-white transition" />
-          <ASplitterPanel class="bg-blackA8 rounded-lg ">
+          <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
+          <ASplitterPanel class="bg-blackA8 rounded-lg">
             <div class="h-full overflow-auto">
               <div class="h-96 w-[30vw] p-4">
                 Panel B

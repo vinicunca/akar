@@ -1,5 +1,6 @@
+import type { VueWrapper } from '@vue/test-utils';
 import { findByRole } from '@testing-library/vue';
-import { mount, type VueWrapper } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import ContextMenu from './story/_context-menu.vue';

@@ -1,8 +1,9 @@
+import type { ImgHTMLAttributes, Ref } from 'vue';
 import {
-  type ImgHTMLAttributes,
+
   onMounted,
   onUnmounted,
-  type Ref,
+
   ref,
   watch,
 } from 'vue';

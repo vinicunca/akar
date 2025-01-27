@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 import {
   APopoverContent,
   APopoverPortal,
   APopoverRoot,
   APopoverTrigger,
-} from '..'
+} from '..';
 
-const boundary = ref<HTMLElement>()
+const boundary = ref<HTMLElement>();
 </script>
 
 <template>
@@ -18,11 +18,11 @@ const boundary = ref<HTMLElement>()
     <Variant title="default">
       <div
         ref="boundary"
-        class="border border-3 border-dashed border-red-600 w-[200px] h-[200px]"
+        class="h-[200px] w-[200px] border border-3 border-red-600 border-dashed"
       >
         <APopoverRoot>
           <APopoverTrigger
-            class="rounded-full w-[35px] h-[35px] inline-flex items-center justify-center text-violet11 bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black cursor-default outline-none"
+            class="text-violet11 shadow-blackA7 h-[35px] w-[35px] inline-flex cursor-default items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
             aria-label="Update dimensions"
             as-child
           >

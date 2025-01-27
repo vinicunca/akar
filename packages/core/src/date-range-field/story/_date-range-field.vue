@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import type { DateValue } from '@internationalized/date'
-import type { ADateRangeFieldRootProps } from '..'
-import { ADateRangeFieldInput, ADateRangeFieldRoot } from '..'
-import { ALabel } from '~~/label'
+import type { DateValue } from '@internationalized/date';
+import type { ADateRangeFieldRootProps } from '..';
+import { ALabel } from '~~/label';
+import { ADateRangeFieldInput, ADateRangeFieldRoot } from '..';
 
-const props = defineProps<{ dateFieldProps?: ADateRangeFieldRootProps, emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>()
+const props = defineProps<{ dateFieldProps?: ADateRangeFieldRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>();
 </script>
 
 <template>
   <ALabel
     for="date-field"
     data-testid="label"
-  >ALabel</ALabel>
+  >
+    ALabel
+  </ALabel>
   <ADateRangeFieldRoot
     v-bind="props.dateFieldProps"
     id="date-field"

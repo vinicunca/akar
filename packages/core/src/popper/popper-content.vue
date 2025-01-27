@@ -73,7 +73,7 @@ export interface APopperContentProps extends APrimitiveProps {
    * this is the viewport, though you can provide additional
    * element(s) to be included in this check.
    *
-   * @defaultValue []
+   * @defaultValue Array
    */
   collisionBoundary?: Array<Element | null> | Element | null;
 

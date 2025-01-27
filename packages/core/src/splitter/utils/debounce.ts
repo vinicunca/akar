@@ -1,3 +1,4 @@
+// eslint-disable-next-line ts/no-unsafe-function-type
 export default function debounce<T extends Function>(
   callback: T,
   durationMs = 10,

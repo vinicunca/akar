@@ -42,7 +42,7 @@ watchEffect(() => {
 
     <Variant title="With Open & Close Animation">
       <Animation
-        class="data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut"
+        class="data-[state=closed]:animate-fadeOut data-[state=open]:animate-fadeIn"
       />
     </Variant>
 

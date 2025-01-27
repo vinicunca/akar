@@ -1,6 +1,7 @@
 <script lang="ts">
+import type { APrimitiveProps } from '~~/primitive';
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { APrimitive, type APrimitiveProps, usePrimitiveElement } from '~~/primitive';
+import { APrimitive, usePrimitiveElement } from '~~/primitive';
 import { useArrowNavigation } from '~~/shared';
 import { injectAPinInputRootContext } from './pin-input-root.vue';
 

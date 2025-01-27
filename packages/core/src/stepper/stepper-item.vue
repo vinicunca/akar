@@ -1,7 +1,8 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { Ref } from 'vue';
 
-import { computed, type Ref, toRefs } from 'vue';
+import type { APrimitiveProps } from '~~/primitive';
+import { computed, toRefs } from 'vue';
 import { APrimitive } from '~~/primitive';
 import { createContext, useForwardExpose, useId } from '~~/shared';
 import { injectAStepperRootContext } from './stepper-root.vue';

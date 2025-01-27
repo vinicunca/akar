@@ -6,7 +6,7 @@ import { AComboboxAnchor, AComboboxContent, AComboboxInput, AComboboxItem, AComb
 
 const v = ref<Array<{ id: number }>>([]);
 
-const { data, execute, isFinished } = useFetch('https://jsonplaceholder.typicode.com/comments', {
+const { data, execute } = useFetch('https://jsonplaceholder.typicode.com/comments', {
   immediate: false,
   initialData: [],
 }).get().json<Array<{ id: number }>>();

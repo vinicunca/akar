@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import type { APaginationEllipsisProps, APaginationFirstProps, APaginationLastProps, APaginationListItemProps, APaginationListProps, APaginationNextProps, APaginationPrevProps, APaginationRootProps } from '..';
 import { computed } from 'vue';
-import { APaginationEllipsis, type APaginationEllipsisProps, APaginationFirst, type APaginationFirstProps, APaginationLast, type APaginationLastProps, APaginationList, APaginationListItem, type APaginationListItemProps, type APaginationListProps, APaginationNext, type APaginationNextProps, APaginationPrev, type APaginationPrevProps, APaginationRoot, type APaginationRootProps } from '..';
+import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList, APaginationListItem, APaginationNext, APaginationPrev, APaginationRoot } from '..';
 
 const props = defineProps<{
   root?: APaginationRootProps;

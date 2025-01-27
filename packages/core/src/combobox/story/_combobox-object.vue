@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type { AComboboxInputProps, AComboboxRootProps } from '..';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
-import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, type AComboboxInputProps, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, type AComboboxRootProps, AComboboxTrigger, AComboboxViewport } from '..';
+import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, AComboboxTrigger, AComboboxViewport } from '..';
 
 const props = defineProps<AComboboxRootProps & { input?: AComboboxInputProps }>();
 const people = [

@@ -2,12 +2,13 @@
   * Implementation ported from https://github.com/melt-ui/melt-ui/blob/develop/src/lib/internal/helpers/date/formatter.ts
 */
 
+import type { DateValue, ZonedDateTime } from '@internationalized/date';
 import {
   DateFormatter,
-  type DateValue,
+
   getLocalTimeZone,
   today,
-  type ZonedDateTime,
+
 } from '@internationalized/date';
 import { ref } from 'vue';
 

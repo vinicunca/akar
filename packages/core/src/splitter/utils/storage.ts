@@ -74,7 +74,7 @@ function loadSerializedPanelGroupState(
         return parsed as SerializedPanelGroupState;
       }
     }
-  } catch (error) {}
+  } catch {}
 
   return null;
 }

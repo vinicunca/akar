@@ -28,7 +28,7 @@ function onChange() {
         <AToggle
           v-model="toggleState"
           aria-label="AToggle bold"
-          class="color-mauve11 data-[state=on]:text-violet12 shadow-blackA7 h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base leading-4 shadow-[0_2px_10px] data-[state=on]:bg-violet6 hover:bg-violet3 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
+          class="shadow-blackA7 color-mauve11 data-[state=on]:text-violet12 h-[35px] w-[35px] flex items-center justify-center rounded bg-white text-base leading-4 shadow-[0_2px_10px] data-[state=on]:bg-violet6 hover:bg-violet3 focus-within:shadow-[0_0_0_2px] focus-within:shadow-black"
         >
           <Icon
             icon="radix-icons:font-bold"

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { AToastDescription, AToastProvider, AToastRoot, AToastViewport } from '..'
+import { ref } from 'vue';
+import { AToastDescription, AToastProvider, AToastRoot, AToastViewport } from '..';
 
-const one = ref(0)
-const two = ref(0)
+const one = ref(0);
+const two = ref(0);
 </script>
 
 <template>
@@ -22,7 +22,7 @@ const two = ref(0)
       <AToastRoot
         v-if="one > 0"
         :key="`one-${String(one)}`"
-        class="flex items-center space-between pointer-events-auto"
+        class="space-between pointer-events-auto flex items-center"
       >
         <AToastDescription>Toast one</AToastDescription>
       </AToastRoot>
@@ -30,12 +30,12 @@ const two = ref(0)
       <AToastRoot
         v-if="two > 0"
         :key="`two-${String(two)}`"
-        class="flex items-center space-between pointer-events-auto"
+        class="space-between pointer-events-auto flex items-center"
       >
         <AToastDescription>Toast two</AToastDescription>
       </AToastRoot>
 
-      <AToastViewport class="fixed top-1/2 right-1/2 border flex flex-col overflow-hidden" />
+      <AToastViewport class="fixed right-1/2 top-1/2 flex flex-col overflow-hidden border" />
     </AToastProvider>
   </Story>
 </template>

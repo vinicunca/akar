@@ -1,8 +1,9 @@
 <script lang="ts">
+import type { Ref } from 'vue';
 import type { ARovingFocusGroupProps } from '~~/roving-focus';
 import type { AcceptableValue, FormFieldProps } from '~~/shared/types';
 import { useVModel } from '@vueuse/core';
-import { computed, type Ref, toRefs } from 'vue';
+import { computed, toRefs } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 import { createContext, useDirection, useFormControl } from '~~/shared';
 

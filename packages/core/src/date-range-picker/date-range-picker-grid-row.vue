@@ -1,5 +1,6 @@
 <script lang="ts">
-import { ARangeCalendarGridRow, type ARangeCalendarGridRowProps } from '..';
+import type { ARangeCalendarGridRowProps } from '..';
+import { ARangeCalendarGridRow } from '..';
 
 export interface ADateRangePickerGridRowProps extends ARangeCalendarGridRowProps {}
 </script>

@@ -1,91 +1,91 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive'
-import { useId } from '~~/shared'
-import { PRECISION } from './utils/constants'
+import type { APrimitiveProps } from '~~/primitive';
+import { useId } from '~~/shared';
+import { PRECISION } from './utils/constants';
 
 export interface ASplitterPanelProps extends APrimitiveProps {
   /** The size of panel when it is collapsed. */
-  collapsedSize?: number
+  collapsedSize?: number;
   /** Should panel collapse when resized beyond its `minSize`. When `true`, it will be collapsed to `collapsedSize`. */
-  collapsible?: boolean
+  collapsible?: boolean;
   /** Initial size of panel (numeric value between 1-100) */
-  defaultSize?: number
+  defaultSize?: number;
   /** Panel id (unique within group); falls back to `useId` when not provided */
-  id?: string
+  id?: string;
   /** The maximum allowable size of panel (numeric value between 1-100); defaults to `100` */
-  maxSize?: number
+  maxSize?: number;
   /** The minimum allowable size of panel (numeric value between 1-100); defaults to `10` */
-  minSize?: number
+  minSize?: number;
   /** The order of panel within group; required for groups with conditionally rendered panels */
-  order?: number
+  order?: number;
 }
 
 export type ASplitterPanelEmits = {
   /** Event handler called when panel is collapsed. */
-  collapse: []
+  collapse: [];
   /** Event handler called when panel is expanded. */
-  expand: []
+  expand: [];
   /** Event handler called when panel is resized; size parameter is a numeric value between 1-100.  */
-  resize: [size: number, prevSize: number | undefined]
-}
+  resize: [size: number, prevSize: number | undefined];
+};
 
-export type PanelOnCollapse = () => void
-export type PanelOnExpand = () => void
+export type PanelOnCollapse = () => void;
+export type PanelOnExpand = () => void;
 export type PanelOnResize = (
   size: number,
   prevSize: number | undefined
-) => void
+) => void;
 
 export type PanelCallbacks = {
-  onCollapse?: PanelOnCollapse
-  onExpand?: PanelOnExpand
-  onResize?: PanelOnResize
-}
+  onCollapse?: PanelOnCollapse;
+  onExpand?: PanelOnExpand;
+  onResize?: PanelOnResize;
+};
 
 export type PanelConstraints = {
-  collapsedSize?: number | undefined
-  collapsible?: boolean | undefined
-  defaultSize?: number | undefined
+  collapsedSize?: number | undefined;
+  collapsible?: boolean | undefined;
+  defaultSize?: number | undefined;
   /** Panel id (unique within group); falls back to useId when not provided */
-  maxSize?: number | undefined
-  minSize?: number | undefined
-}
+  maxSize?: number | undefined;
+  minSize?: number | undefined;
+};
 
 export type PanelData = {
-  callbacks: PanelCallbacks
-  constraints: PanelConstraints
-  id: string
-  idIsFromProps: boolean
-  order: number | undefined
-}
+  callbacks: PanelCallbacks;
+  constraints: PanelConstraints;
+  id: string;
+  idIsFromProps: boolean;
+  order: number | undefined;
+};
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive'
-import { injectPanelGroupContext } from './splitter-group.vue'
-import { computed, onMounted, onUnmounted, watch } from 'vue'
+import { computed, onMounted, onUnmounted, watch } from 'vue';
+import { APrimitive } from '~~/primitive';
+import { injectPanelGroupContext } from './splitter-group.vue';
 
-const props = defineProps<ASplitterPanelProps>()
-const emits = defineEmits<ASplitterPanelEmits>()
+const props = defineProps<ASplitterPanelProps>();
+const emits = defineEmits<ASplitterPanelEmits>();
 
 defineSlots<{
   default: (props: {
     /** Is the panel collapsed */
-    isCollapsed: typeof isCollapsed.value
+    isCollapsed: typeof isCollapsed.value;
     /** Is the panel expanded */
-    isExpanded: typeof isExpanded.value
-  }) => any
-}>()
+    isExpanded: typeof isExpanded.value;
+  }) => any;
+}>();
 
-const panelGroupContext = injectPanelGroupContext()
+const panelGroupContext = injectPanelGroupContext();
 if (panelGroupContext === null) {
   throw new Error(
     'ASplitterPanel components must be rendered within a ASplitterGroup container',
-  )
+  );
 }
 
-const { collapsePanel, expandPanel, getPanelSize, getPanelStyle, isPanelCollapsed, resizePanel, groupId, reevaluatePanelConstraints, registerPanel, unregisterPanel } = panelGroupContext
-const panelId = useId(props.id, 'akar-splitter-panel')
+const { collapsePanel, expandPanel, getPanelSize, getPanelStyle, isPanelCollapsed, resizePanel, groupId, reevaluatePanelConstraints, registerPanel, unregisterPanel } = panelGroupContext;
+const panelId = useId(props.id, 'akar-splitter-panel');
 
 const panelDataRef = computed(() => ({
   callbacks: {
@@ -105,7 +105,7 @@ const panelDataRef = computed(() => ({
   id: panelId,
   idIsFromProps: props.id !== undefined,
   order: props.order,
-}) satisfies PanelData)
+}) satisfies PanelData);
 
 watch(() => panelDataRef.value.constraints, (constraints, prevConstraints) => {
   // If constraints have changed, we should revisit panel sizes.
@@ -116,46 +116,46 @@ watch(() => panelDataRef.value.constraints, (constraints, prevConstraints) => {
     || prevConstraints.maxSize !== constraints.maxSize
     || prevConstraints.minSize !== constraints.minSize
   ) {
-    reevaluatePanelConstraints(panelDataRef.value, prevConstraints)
+    reevaluatePanelConstraints(panelDataRef.value, prevConstraints);
   }
-}, { deep: true })
+}, { deep: true });
 
 onMounted(() => {
-  const panelData = panelDataRef.value
-  registerPanel(panelData)
+  const panelData = panelDataRef.value;
+  registerPanel(panelData);
   onUnmounted(() => {
-    unregisterPanel(panelData)
-  })
-})
+    unregisterPanel(panelData);
+  });
+});
 
-const style = computed(() => getPanelStyle(panelDataRef.value, props.defaultSize))
+const style = computed(() => getPanelStyle(panelDataRef.value, props.defaultSize));
 /** Panel id (unique within group); falls back to useId when not provided */
 
-const isCollapsed = computed(() => isPanelCollapsed(panelDataRef.value))
-const isExpanded = computed(() => !isCollapsed.value)
+const isCollapsed = computed(() => isPanelCollapsed(panelDataRef.value));
+const isExpanded = computed(() => !isCollapsed.value);
 
 defineExpose({
   /** If panel is `collapsible`, collapse it fully. */
   collapse: () => {
-    collapsePanel(panelDataRef.value)
+    collapsePanel(panelDataRef.value);
   },
   /** If panel is currently collapsed, expand it to its most recent size. */
   expand: () => {
-    expandPanel(panelDataRef.value)
+    expandPanel(panelDataRef.value);
   },
   /** Gets the current size of the panel as a percentage (1 - 100). */
   getSize() {
-    return getPanelSize(panelDataRef.value)
+    return getPanelSize(panelDataRef.value);
   },
   /** Resize panel to the specified percentage (1 - 100). */
   resize: (size: number) => {
-    resizePanel(panelDataRef.value, size)
+    resizePanel(panelDataRef.value, size);
   },
   /** Returns `true` if the panel is currently collapsed */
   isCollapsed,
   /** Returns `true` if the panel is currently not collapsed */
   isExpanded,
-})
+});
 </script>
 
 <template>

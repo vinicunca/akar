@@ -26,10 +26,10 @@ const handleResize = useDebounceFn(() => {
   if (rootContext.viewport.value) {
     const isOverflowX
       = rootContext.viewport.value.offsetWidth
-      < rootContext.viewport.value.scrollWidth;
+        < rootContext.viewport.value.scrollWidth;
     const isOverflowY
       = rootContext.viewport.value.offsetHeight
-      < rootContext.viewport.value.scrollHeight;
+        < rootContext.viewport.value.scrollHeight;
 
     visible.value = scrollbarContext.isHorizontal.value
       ? isOverflowX

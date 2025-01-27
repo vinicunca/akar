@@ -167,9 +167,9 @@ function recalculateIntersectingHandles({
 
     const eventIntersects
       = x >= left - margin
-      && x <= right + margin
-      && y >= top - margin
-      && y <= bottom + margin;
+        && x <= right + margin
+        && y >= top - margin
+        && y <= bottom + margin;
 
     if (eventIntersects) {
       // TRICKY

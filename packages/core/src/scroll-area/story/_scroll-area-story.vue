@@ -2,10 +2,10 @@
 import type { AScrollAreaRootProps } from '../scroll-area-root.vue';
 import {
   AScrollAreaCorner,
+  AScrollAreaRoot,
   AScrollAreaScrollbar,
   AScrollAreaThumb,
   AScrollAreaViewport,
-  AScrollAreaRoot,
 } from '..';
 
 interface Props extends AScrollAreaRootProps {

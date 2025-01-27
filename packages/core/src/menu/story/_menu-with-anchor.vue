@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { AMenuProps } from '..';
 import { useVModel } from '@vueuse/core';
 import {
   AMenuAnchor,
   AMenuContent,
   AMenuPortal,
-  type AMenuProps,
+
   AMenuRoot,
 } from '..';
 

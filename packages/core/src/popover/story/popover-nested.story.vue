@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 import {
   APopoverArrow,
   APopoverClose,
@@ -7,9 +7,9 @@ import {
   APopoverPortal,
   APopoverRoot,
   APopoverTrigger,
-} from '..'
+} from '..';
 
-const buttonRef = ref()
+const buttonRef = ref();
 </script>
 
 <template>
@@ -18,10 +18,10 @@ const buttonRef = ref()
     :layout="{ type: 'single', iframe: true }"
   >
     <Variant title="default">
-      <div class="relative flex items-center justify-center flex-col h-[300vh]">
+      <div class="relative h-[300vh] flex flex-col items-center justify-center">
         <button
           type="button"
-          class="border fixed top-6 left-6 text-white"
+          class="fixed left-6 top-6 border text-white"
           @click="buttonRef.$el.focus()"
         >
           Focus popover button
@@ -30,7 +30,7 @@ const buttonRef = ref()
         <APopoverRoot>
           <APopoverTrigger
             ref="buttonRef"
-            class="inline-flex items-center justify-center text-violet11 bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black cursor-default outline-none"
+            class="text-violet11 shadow-blackA7 inline-flex cursor-default items-center justify-center bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
           >
             Open popover
           </APopoverTrigger>
@@ -38,7 +38,7 @@ const buttonRef = ref()
             <APopoverContent
               side="bottom"
               :side-offset="5"
-              class="rounded p-5 w-[260px] shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.violet7)] will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade"
+              class="will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade w-[260px] rounded p-5 shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)]"
               style="background-color: crimson"
             >
               <APopoverRoot>
@@ -64,7 +64,7 @@ const buttonRef = ref()
               </APopoverRoot>
 
               <APopoverClose
-                class="h-[25px] w-[25px] inline-flex items-center justify-center text-violet11 hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 outline-none cursor-default"
+                class="text-violet11 h-[25px] w-[25px] inline-flex cursor-default items-center justify-center outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
                 aria-label="Close"
               >
                 Close

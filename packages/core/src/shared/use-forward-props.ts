@@ -1,5 +1,6 @@
+import type { MaybeRefOrGetter } from 'vue';
 import { isDefined } from '@vinicunca/perkakas';
-import { camelize, computed, getCurrentInstance, type MaybeRefOrGetter, toRef } from 'vue';
+import { camelize, computed, getCurrentInstance, toRef } from 'vue';
 
 interface PropOptions {
   type?: any;

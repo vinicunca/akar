@@ -1,5 +1,6 @@
 <script lang="ts">
-import { type DateValue, isEqualDay } from '@internationalized/date';
+import type { DateValue } from '@internationalized/date';
+import { isEqualDay } from '@internationalized/date';
 import { ACalendarRoot } from '~~/calendar';
 import { injectADatePickerRootContext } from './date-picker-root.vue';
 </script>

@@ -1,5 +1,6 @@
+import type { InjectionKey } from 'vue';
 import { isString } from '@vinicunca/perkakas';
-import { inject, type InjectionKey, provide } from 'vue';
+import { inject, provide } from 'vue';
 
 /**
  * @param providerComponentName - The name(s) of the component(s) providing the context.

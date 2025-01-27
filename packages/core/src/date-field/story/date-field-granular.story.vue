@@ -13,7 +13,9 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         <ALabel
           class="text-sm text-gray9"
           for="date-field"
-        >Birthday</ALabel>
+        >
+          Birthday
+        </ALabel>
         <ADateFieldRoot
           id="date-field"
           v-slot="{ segments }"
@@ -48,7 +50,9 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         <ALabel
           class="text-sm text-gray9"
           for="date-field"
-        >Birthday</ALabel>
+        >
+          Birthday
+        </ALabel>
         <ADateFieldRoot
           id="date-field"
           v-slot="{ segments }"
@@ -83,7 +87,9 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         <ALabel
           class="text-sm text-gray9"
           for="date-field"
-        >Birthday</ALabel>
+        >
+          Birthday
+        </ALabel>
         <ADateFieldRoot
           id="date-field"
           v-slot="{ segments }"
@@ -118,7 +124,9 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         <ALabel
           class="text-sm text-gray9"
           for="date-field"
-        >Birthday</ALabel>
+        >
+          Birthday
+        </ALabel>
         <ADateFieldRoot
           id="date-field"
           v-slot="{ segments }"

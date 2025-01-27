@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/vue';
 import { ATreeItem } from '..';
 
+// eslint-disable-next-line import/no-self-import
 import Tree from './_tree-nested.vue';
 
 interface TreeNode {
@@ -30,7 +31,7 @@ withDefaults(defineProps<{
       :value="tree"
       :style="{ 'margin-left': `${level}rem` }"
     >
-      <button class="focus:ring-grass9 data-[selected]:bg-grass4 my-0.5 w-max flex items-center rounded px-2 py-1 outline-none focus:ring-2">
+      <button class="data-[selected]:bg-grass4 focus:ring-grass9 my-0.5 w-max flex items-center rounded px-2 py-1 outline-none focus:ring-2">
         <Icon
           v-if="tree.children"
           icon="radix-icons:chevron-down"

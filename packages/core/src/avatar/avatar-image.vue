@@ -17,7 +17,8 @@ export interface AAvatarImageProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { type ImgHTMLAttributes, toRefs, watch } from 'vue';
+import type { ImgHTMLAttributes } from 'vue';
+import { toRefs, watch } from 'vue';
 import { APrimitive } from '~~/primitive';
 import { injectAAvatarRootContext } from './avatar-root.vue';
 import { useImageLoadingStatus } from './utils';

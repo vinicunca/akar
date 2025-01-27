@@ -13,7 +13,9 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         <ALabel
           class="text-sm text-gray9"
           for="date-field"
-        >Appointment (unavailable on 19th)</ALabel>
+        >
+          Appointment (unavailable on 19th)
+        </ALabel>
         <ADateFieldRoot
           id="date-field"
           v-slot="{ segments, isInvalid }"

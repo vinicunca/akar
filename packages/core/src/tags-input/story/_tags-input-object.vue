@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type { ATagsInputRootProps } from '..';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
-import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot, type ATagsInputRootProps } from '..';
+import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot } from '..';
 
 const props = defineProps<ATagsInputRootProps>();
 const people = ref([

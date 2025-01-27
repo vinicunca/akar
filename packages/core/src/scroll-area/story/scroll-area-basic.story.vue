@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
-import ScrollAreaStory from './_ScrollAreaStory.vue'
-import ScrollAreaCopy from './_ScrollAreaCopy.vue'
+import { reactive } from 'vue';
+import ScrollAreaCopy from './_ScrollAreaCopy.vue';
+import ScrollAreaStory from './_ScrollAreaStory.vue';
 
-type Type = 'auto' | 'always' | 'scroll' | 'hover'
+type Type = 'auto' | 'always' | 'scroll' | 'hover';
 
 const state = reactive({
   type: 'hover' as Type,
-})
+});
 
 const contentChangeState = reactive({
   verticalCount: 1,
   horizontalCount: 1,
-})
+});
 </script>
 
 <template>
@@ -41,8 +41,8 @@ const contentChangeState = reactive({
       auto-props-disabled
       title="Resizable"
     >
-      <div class="w-[400px] h-[400px] resize overflow-hidden">
-        <ScrollAreaStory class="w-full h-full">
+      <div class="h-[400px] w-[400px] resize overflow-hidden">
+        <ScrollAreaStory class="h-full w-full">
           <ScrollAreaCopy
             v-for="i in 30"
             :key="i"
@@ -55,10 +55,10 @@ const contentChangeState = reactive({
       auto-props-disabled
       title="Content Change"
     >
-      <div class="w-[400px] h-[400px]">
+      <div class="h-[400px] w-[400px]">
         <ScrollAreaStory
           type="always"
-          class="w-full h-full"
+          class="h-full w-full"
         >
           <ScrollAreaCopy
             v-for="i in contentChangeState.verticalCount"

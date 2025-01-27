@@ -1,8 +1,10 @@
+import type { MaybeComputedElementRef } from '@vueuse/core';
+import type { Ref } from 'vue';
 import { NumberFormatter, NumberParser } from '@internationalized/number';
 import { isBrowser } from '@vinicunca/perkakas';
-import { type MaybeComputedElementRef, unrefElement, useEventListener } from '@vueuse/core';
+import { unrefElement, useEventListener } from '@vueuse/core';
 import { createEventHook, reactiveComputed } from '@vueuse/shared';
-import { computed, type Ref, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 export function usePressedHold(options: {
   target?: MaybeComputedElementRef;

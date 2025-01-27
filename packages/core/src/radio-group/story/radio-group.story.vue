@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ARadioGroupIndicator, ARadioGroupItem, ARadioGroupRoot } from '..'
+import { ref } from 'vue';
+import { ARadioGroupIndicator, ARadioGroupItem, ARadioGroupRoot } from '..';
 
-const radioStateSingle = ref('compact')
+const radioStateSingle = ref('compact');
 </script>
 
 <template>
@@ -20,15 +20,15 @@ const radioStateSingle = ref('compact')
         <div class="flex items-center">
           <ARadioGroupItem
             id="r1"
-            class="bg-white w-[25px] h-[25px] rounded-full shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black outline-none cursor-default data-[disabled]:bg-red-500"
+            class="shadow-blackA7 h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] outline-none data-[disabled]:bg-red-500 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
             value="default"
           >
             <ARadioGroupIndicator
-              class="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[11px] after:h-[11px] after:rounded-[50%] after:bg-violet11"
+              class="after:bg-violet11 relative h-full w-full flex items-center justify-center after:block after:h-[11px] after:w-[11px] after:rounded-[50%] after:content-['']"
             />
           </ARadioGroupItem>
           <label
-            class="text-white text-[15px] leading-none pl-[15px]"
+            class="pl-[15px] text-[15px] text-white leading-none"
             for="r1"
           >
             Default
@@ -37,15 +37,15 @@ const radioStateSingle = ref('compact')
         <div class="flex items-center">
           <ARadioGroupItem
             id="r2"
-            class="bg-white w-[25px] h-[25px] rounded-full shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black outline-none cursor-default data-[disabled]:bg-red-500"
+            class="shadow-blackA7 h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] outline-none data-[disabled]:bg-red-500 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
             value="comfortable"
           >
             <ARadioGroupIndicator
-              class="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[11px] after:h-[11px] after:rounded-[50%] after:bg-violet11"
+              class="after:bg-violet11 relative h-full w-full flex items-center justify-center after:block after:h-[11px] after:w-[11px] after:rounded-[50%] after:content-['']"
             />
           </ARadioGroupItem>
           <label
-            class="text-white text-[15px] leading-none pl-[15px]"
+            class="pl-[15px] text-[15px] text-white leading-none"
             for="r2"
           >
             Comfortable
@@ -55,17 +55,17 @@ const radioStateSingle = ref('compact')
           <ARadioGroupItem
             id="r3"
             as-child
-            class="bg-white w-[25px] h-[25px] rounded-full shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black outline-none cursor-default"
+            class="shadow-blackA7 h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
             value="compact"
           >
             <button>
               <ARadioGroupIndicator
-                class="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-[11px] after:h-[11px] after:rounded-[50%] after:bg-violet11"
+                class="after:bg-violet11 relative h-full w-full flex items-center justify-center after:block after:h-[11px] after:w-[11px] after:rounded-[50%] after:content-['']"
               />
             </button>
           </ARadioGroupItem>
           <label
-            class="text-white text-[15px] leading-none pl-[15px]"
+            class="pl-[15px] text-[15px] text-white leading-none"
             for="r3"
           >
             Compact

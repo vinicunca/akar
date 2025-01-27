@@ -1,5 +1,6 @@
 <script lang="ts">
-import { ACalendarGridBody, type ACalendarGridBodyProps } from '..';
+import type { ACalendarGridBodyProps } from '..';
+import { ACalendarGridBody } from '..';
 
 export interface ADatePickerGridBodyProps extends ACalendarGridBodyProps {}
 </script>

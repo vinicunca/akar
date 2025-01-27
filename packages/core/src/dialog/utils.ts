@@ -1,15 +1,16 @@
-import { type Ref, onMounted } from 'vue'
+import type { Ref } from 'vue';
+import { onMounted } from 'vue';
 
-const DEFAULT_TITLE_NAME = 'ADialogTitle'
-const DEFAULT_CONTENT_NAME = 'ADialogContent'
+const DEFAULT_TITLE_NAME = 'ADialogTitle';
+const DEFAULT_CONTENT_NAME = 'ADialogContent';
 
-export type WarningProps = {
-  titleName?: string
-  contentName?: string
-  componentLink?: string
-  titleId: string
-  descriptionId: string
-  contentElement: Ref<HTMLElement | undefined>
+export interface WarningProps {
+  titleName?: string;
+  contentName?: string;
+  componentLink?: string;
+  titleId: string;
+  descriptionId: string;
+  contentElement: Ref<HTMLElement | undefined>;
 }
 
 export function useWarning({
@@ -24,21 +25,23 @@ export function useWarning({
 
 If you want to hide the \`${titleName}\`, you can wrap it with our AVisuallyHidden component.
 
-For more information, see https://www.akar.com/components/${componentLink}`
+For more information, see https://www.akar.com/components/${componentLink}`;
 
-  const DESCRIPTION_MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby="undefined"\` for ${contentName}.`
+  const DESCRIPTION_MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby="undefined"\` for ${contentName}.`;
 
   onMounted(() => {
-    const hasTitle = document.getElementById(titleId)
-    if (!hasTitle)
-      console.warn(TITLE_MESSAGE)
+    const hasTitle = document.getElementById(titleId);
+    if (!hasTitle) {
+      console.warn(TITLE_MESSAGE);
+    }
 
-    const describedById = contentElement.value?.getAttribute('aria-describedby')
+    const describedById = contentElement.value?.getAttribute('aria-describedby');
     // if we have an id and the user hasn't set aria-describedby="undefined"
     if (descriptionId && describedById) {
-      const hasDescription = document.getElementById(descriptionId)
-      if (!hasDescription)
-        console.warn(DESCRIPTION_MESSAGE)
+      const hasDescription = document.getElementById(descriptionId);
+      if (!hasDescription) {
+        console.warn(DESCRIPTION_MESSAGE);
+      }
     }
-  })
+  });
 }

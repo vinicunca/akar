@@ -60,7 +60,8 @@ export interface AComboboxRootProps<T = AcceptableValue> extends Omit<AListboxRo
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
-import { createEventHook, type EventHookOn, useVModel } from '@vueuse/core';
+import type { EventHookOn } from '@vueuse/core';
+import { createEventHook, useVModel } from '@vueuse/core';
 import { computed, nextTick, reactive, ref, toRefs, watch } from 'vue';
 import { AListboxRoot } from '~~/listbox';
 import { APopperRoot } from '~~/popper';

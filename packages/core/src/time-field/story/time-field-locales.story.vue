@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ATimeFieldInput, ATimeFieldRoot } from '..'
+import { ATimeFieldInput, ATimeFieldRoot } from '..';
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
       <ATimeFieldRoot
         v-slot="{ segments }"
         granularity="second"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
       >
         <template
           v-for="item in segments"
@@ -26,7 +26,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
           <ATimeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholderdata-[placeholder]:text-green9"
+            class="data-[placeholderdata-[placeholder]:text-green9 rounded-5px px-1 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ATimeFieldInput>
@@ -39,7 +39,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
         v-slot="{ segments }"
         granularity="second"
         locale="ja"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
       >
         <template
           v-for="item in segments"
@@ -54,7 +54,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
           <ATimeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ATimeFieldInput>
@@ -67,7 +67,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
         v-slot="{ segments }"
         granularity="second"
         locale="fa-IR"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
       >
         <template
           v-for="item in segments"
@@ -82,7 +82,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
           <ATimeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ATimeFieldInput>
@@ -95,7 +95,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
         v-slot="{ segments }"
         granularity="second"
         locale="zh-TW"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
       >
         <template
           v-for="item in segments"
@@ -110,7 +110,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
           <ATimeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ATimeFieldInput>
@@ -123,7 +123,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
         v-slot="{ segments }"
         granularity="second"
         locale="he"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
       >
         <template
           v-for="item in segments"
@@ -138,7 +138,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
           <ATimeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ATimeFieldInput>
@@ -151,7 +151,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
         v-slot="{ segments }"
         granularity="second"
         locale="th"
-        class="flex select-none bg-white items-center rounded text-center text-green10 placeholder:text-mauve5 border border-gray9 p-2 data-[invalid]:border-red-500"
+        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
       >
         <template
           v-for="item in segments"
@@ -166,7 +166,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..'
           <ATimeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-green9"
+            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ATimeFieldInput>

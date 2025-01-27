@@ -1,5 +1,6 @@
 <script lang="ts">
-import { ACalendarPrev, type ACalendarPrevProps } from '..';
+import type { ACalendarPrevProps } from '..';
+import { ACalendarPrev } from '..';
 
 export interface ADatePickerPrevProps extends ACalendarPrevProps {}
 </script>

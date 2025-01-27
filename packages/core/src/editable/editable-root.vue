@@ -71,8 +71,9 @@ export const [injectAEditableRootContext, provideEditableRootContext]
 </script>
 
 <script setup lang="ts">
+import type { Ref } from 'vue';
 import { useVModel } from '@vueuse/core';
-import { computed, type Ref, ref, toRefs } from 'vue';
+import { computed, ref, toRefs } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 import { AVisuallyHiddenInput } from '~~/visually-hidden';
 

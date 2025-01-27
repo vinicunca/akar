@@ -1,5 +1,6 @@
+import type { RenderResult } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-import { render, type RenderResult, waitFor } from '@testing-library/vue';
+import { render, waitFor } from '@testing-library/vue';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { defineComponent } from 'vue';
 import { FocusScope } from '.';

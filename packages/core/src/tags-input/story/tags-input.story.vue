@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot } from '..'
-import { Icon } from '@iconify/vue'
+import { Icon } from '@iconify/vue';
+import { ref } from 'vue';
+import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot } from '..';
 
-const modelValue = ref(['Test'])
+const modelValue = ref(['Test']);
 </script>
 
 <template>
@@ -14,13 +14,13 @@ const modelValue = ref(['Test'])
     <Variant title="default">
       <ATagsInputRoot
         v-model="modelValue"
-        class="flex gap-2 items-center border p-2 rounded-lg bg-blackA7 w-[300px] flex-wrap border-blackA7"
+        class="bg-blackA7 border-blackA7 w-[300px] flex flex-wrap items-center gap-2 border rounded-lg p-2"
       >
         <ATagsInputItem
           v-for="item in modelValue"
           :key="item"
           :value="item"
-          class=" data-[disabled]:opacity-50 flex items-center justify-center gap-2 bg-green8 aria-[current=true]:bg-green9 rounded px-2 py-1"
+          class="flex items-center justify-center gap-2 rounded bg-green8 px-2 py-1 aria-[current=true]:bg-green9 data-[disabled]:opacity-50"
         >
           <ATagsInputItemText class="text-sm" />
           <ATagsInputItemDelete>
@@ -30,7 +30,7 @@ const modelValue = ref(['Test'])
 
         <ATagsInputInput
           placeholder="Anything..."
-          class="focus:outline-none flex-1 rounded bg-transparent text-white placeholder:text-mauve10 px-1"
+          class="placeholder:text-mauve10 flex-1 rounded bg-transparent px-1 text-white focus:outline-none"
         />
       </ATagsInputRoot>
     </Variant>

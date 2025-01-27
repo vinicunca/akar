@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import Button from './_Button.vue'
-import ButtonGroup from './_ButtonGroup.vue'
+import { ref } from 'vue';
+import Button from './_Button.vue';
+import ButtonGroup from './_ButtonGroup.vue';
 
-const dir = ref<'ltr' | 'rtl'>('ltr')
+const dir = ref<'ltr' | 'rtl'>('ltr');
 </script>
 
 <template>

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import Calendar from './_DummyCalendar.vue'
-import { BuddhistCalendar, CalendarDate, HebrewCalendar, JapaneseCalendar, PersianCalendar, TaiwanCalendar } from '@internationalized/date'
+import { BuddhistCalendar, CalendarDate, HebrewCalendar, JapaneseCalendar, PersianCalendar, TaiwanCalendar } from '@internationalized/date';
+import Calendar from './_DummyCalendar.vue';
 
-const gregorian = new CalendarDate(2024, 2, 20)
+const gregorian = new CalendarDate(2024, 2, 20);
 
 const persian = new CalendarDate(
   new PersianCalendar(),
   1403,
   12,
   1,
-)
+);
 const japanese = new CalendarDate(
   new JapaneseCalendar(),
   'heisei',
@@ -17,26 +17,26 @@ const japanese = new CalendarDate(
   4,
   30,
 
-)
+);
 const buddhist = new CalendarDate(
   new BuddhistCalendar(),
   2563,
   4,
   30,
-)
+);
 const taiwan = new CalendarDate(
   new TaiwanCalendar(),
   109,
   4,
   30,
-)
+);
 
 const hebrew = new CalendarDate(
   new HebrewCalendar(),
   5781,
   5,
   1,
-)
+);
 </script>
 
 <template>

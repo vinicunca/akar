@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { AMenuGroup, AMenuItem, AMenuLabel, AMenuSeparator } from '..'
-import MenuWithAnchor from './_MenuWithAnchor.vue'
+import { AMenuGroup, AMenuItem, AMenuLabel, AMenuSeparator } from '..';
+import MenuWithAnchor from './_MenuWithAnchor.vue';
 
 function handleSelect(text: string) {
   // eslint-disable-next-line no-console
-  console.log({ text })
+  console.log({ text });
 }
 
 const foodGroups: Array<{
-  label?: string
-  foods: Array<{ value: string, label: string, disabled?: boolean }>
+  label?: string;
+  foods: Array<{ value: string; label: string; disabled?: boolean }>;
 }> = [
   {
     label: 'Fruits',
@@ -47,7 +47,7 @@ const foodGroups: Array<{
       { value: 'chocolates', label: 'Chocolates' },
     ],
   },
-]
+];
 </script>
 
 <template>
@@ -64,14 +64,14 @@ const foodGroups: Array<{
         >
           <AMenuLabel
             v-if="foodGroup.label"
-            class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] rounded-[3] text-gray-400 my-2"
+            class="my-2 h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3] px-[10px] text-gray-400 leading-[1]"
           >
             {{ foodGroup.label }}
           </AMenuLabel>
           <AMenuItem
             v-for="(food, foodIndex) in foodGroup.foods"
             :key="foodIndex"
-            class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+            class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
             @select="handleSelect(food.value)"
           >
             {{ food.label }}

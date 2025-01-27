@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ScrollAreaStory from './_ScrollAreaStory.vue'
-import ScrollAreaCopy from './_ScrollAreaCopy.vue'
-import { AConfigProvider } from '../../AConfigProvider'
+import { AConfigProvider } from '../../AConfigProvider';
+import ScrollAreaCopy from './_ScrollAreaCopy.vue';
+import ScrollAreaStory from './_ScrollAreaStory.vue';
 </script>
 
 <template>
@@ -84,7 +84,7 @@ import { AConfigProvider } from '../../AConfigProvider'
         <ScrollAreaCopy
           v-for="i in 10"
           :key="i"
-          class="!w-[125px] truncate"
+          class="truncate !w-[125px]"
         />
       </ScrollAreaStory>
     </Variant>

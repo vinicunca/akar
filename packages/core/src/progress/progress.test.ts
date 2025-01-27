@@ -1,8 +1,8 @@
 import type { VueWrapper } from '@vue/test-utils';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { sleep } from '~~/test';
 import Progress from './story/_progress.vue';
 
 describe('given a default Progress', () => {

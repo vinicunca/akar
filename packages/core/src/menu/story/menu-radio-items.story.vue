@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 import {
   AMenuItem,
   AMenuItemIndicator,
   AMenuRadioGroup,
   AMenuRadioItem,
   AMenuSeparator,
-} from '..'
-import MenuWithAnchor from './_MenuWithAnchor.vue'
-import TickIcon from './_TickIcon.vue'
+} from '..';
+import MenuWithAnchor from './_MenuWithAnchor.vue';
+import TickIcon from './_TickIcon.vue';
 
-const files = ['README.md', 'index.js', 'page.css']
+const files = ['README.md', 'index.js', 'page.css'];
 
-const selectedFiles = ref(files[1])
+const selectedFiles = ref(files[1]);
 
 function handleSelect(text: string) {
   // eslint-disable-next-line no-console
-  console.log({ text })
+  console.log({ text });
 }
 </script>
 
@@ -29,32 +29,32 @@ function handleSelect(text: string) {
     <Variant title="default">
       <MenuWithAnchor>
         <AMenuItem
-          class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           @select="handleSelect('minize')"
         >
           Minimize window
         </AMenuItem>
         <AMenuItem
-          class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           @select="handleSelect('zoom')"
         >
           Zoom
         </AMenuItem>
         <AMenuItem
-          class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           @select="handleSelect('Smaller')"
         >
           Smaller
         </AMenuItem>
 
-        <AMenuSeparator class="h-[1px] my-[5px] mx-[10px] bg-gray-200" />
+        <AMenuSeparator class="mx-[10px] my-[5px] h-[1px] bg-gray-200" />
 
         <AMenuRadioGroup v-model="selectedFiles">
           <AMenuRadioItem
             v-for="(file, index) in files"
             :key="index"
             :value="file"
-            class="flex items-center justify-between leading-[1] cursor-default select-none whitespace-nowrap h-[25px] px-[10px] text-black rounded-[3px] outline-none data-[highlighted]:bg-black data-[highlighted]:text-white data-[disabled]:text-gray-100"
+            class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
           >
             {{ file }}
             <AMenuItemIndicator>

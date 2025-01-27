@@ -1,7 +1,8 @@
 <script lang="ts">
+import type { Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { Direction, FormFieldProps } from '~~/shared/types';
-import { computed, type Ref, ref, toRefs } from 'vue';
+import { computed, ref, toRefs } from 'vue';
 import { createContext, useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '~~/shared';
 
 export type AcceptableInputValue = Record<string, any> | string;

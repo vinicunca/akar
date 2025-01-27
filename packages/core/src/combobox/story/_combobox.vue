@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { AComboboxRootEmits, AComboboxRootProps } from '..';
 import { Icon } from '@iconify/vue';
 import { computed, ref } from 'vue';
 import { useFilter, useForwardPropsEmits } from '~~/shared';
-import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, type AComboboxRootEmits, type AComboboxRootProps, AComboboxSeparator, AComboboxTrigger, AComboboxViewport } from '..';
+import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, AComboboxSeparator, AComboboxTrigger, AComboboxViewport } from '..';
 
 const props = defineProps<AComboboxRootProps>();
 const emits = defineEmits<AComboboxRootEmits>();

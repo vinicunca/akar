@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ATabsContent, ATabsIndicator, ATabsList, ATabsRoot, ATabsTrigger } from '..'
+import { ATabsContent, ATabsIndicator, ATabsList, ATabsRoot, ATabsTrigger } from '..';
 </script>
 
 <template>
@@ -9,117 +9,117 @@ import { ATabsContent, ATabsIndicator, ATabsList, ATabsRoot, ATabsTrigger } from
   >
     <Variant title="default">
       <ATabsRoot
-        class="flex flex-col w-[300px] shadow-[0_2px_10px] shadow-blackA4"
+        class="shadow-blackA4 w-[300px] flex flex-col shadow-[0_2px_10px]"
         default-value="tab1"
       >
         <ATabsList
-          class="shrink-0 flex border-b border-mauve6 relative"
+          class="border-mauve6 relative flex shrink-0 border-b"
           aria-label="Manage your account"
         >
-          <ATabsIndicator class="absolute bg-violet11 left-0 h-[2px] bottom-0 w-[--akar-tabs-indicator-size] translate-x-[--akar-tabs-indicator-position] rounded-full  transition-[width,transform] duration-300" />
+          <ATabsIndicator class="bg-violet11 absolute bottom-0 left-0 h-[2px] w-[--akar-tabs-indicator-size] translate-x-[--akar-tabs-indicator-position] rounded-full transition-[width,transform] duration-300" />
           <ATabsTrigger
-            class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-mauve11 select-none rounded-tl-md   hover:text-violet11 focus-visible:shadow-[0_0_0_2px] data-[state=active]:text-violet11 outline-none cursor-default"
+            class="text-mauve11 hover:text-violet11 data-[state=active]:text-violet11 h-[45px] flex flex-1 cursor-default select-none items-center justify-center rounded-tl-md bg-white px-5 text-[15px] leading-none outline-none focus-visible:shadow-[0_0_0_2px]"
             value="tab1"
           >
             Account
           </ATabsTrigger>
           <ATabsTrigger
-            class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-mauve11 select-none rounded-tr-md hover:text-violet11 focus-visible:shadow-[0_0_0_2px] data-[state=active]:text-violet11 outline-none cursor-default"
+            class="text-mauve11 hover:text-violet11 data-[state=active]:text-violet11 h-[45px] flex flex-1 cursor-default select-none items-center justify-center rounded-tr-md bg-white px-5 text-[15px] leading-none outline-none focus-visible:shadow-[0_0_0_2px]"
             value="tab2"
           >
             Password
           </ATabsTrigger>
         </ATabsList>
         <ATabsContent
-          class="grow p-5 bg-white rounded-b-md outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+          class="grow rounded-b-md bg-white p-5 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
           value="tab1"
         >
-          <p class="mb-5 text-mauve11 text-[15px] leading-normal">
+          <p class="text-mauve11 mb-5 text-[15px] leading-normal">
             Make changes to your account here. Click save when you're done.
           </p>
           <fieldset class="mb-[15px] w-full flex flex-col justify-start">
             <label
-              class="text-[13px] leading-none mb-2.5 text-violet12 block"
+              class="text-violet12 mb-2.5 block text-[13px] leading-none"
               for="name"
             >
               Name
             </label>
             <input
               id="name"
-              class="grow shrink-0 rounded px-2.5 text-[15px] leading-none text-violet11 shadow-[0_0_0_1px] shadow-violet7 h-[35px] focus:shadow-[0_0_0_2px] focus:shadow-violet8 outline-none"
+              class="text-violet11 h-[35px] shrink-0 grow rounded px-2.5 text-[15px] leading-none shadow-[0_0_0_1px] shadow-violet7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet8"
               value="Pedro Duarte"
             >
           </fieldset>
           <fieldset class="mb-[15px] w-full flex flex-col justify-start">
             <label
-              class="text-[13px] leading-none mb-2.5 text-violet12 block"
+              class="text-violet12 mb-2.5 block text-[13px] leading-none"
               for="username"
             >
               Username
             </label>
             <input
               id="username"
-              class="grow shrink-0 rounded px-2.5 text-[15px] leading-none text-violet11 shadow-[0_0_0_1px] shadow-violet7 h-[35px] focus:shadow-[0_0_0_2px] focus:shadow-violet8 outline-none"
+              class="text-violet11 h-[35px] shrink-0 grow rounded px-2.5 text-[15px] leading-none shadow-[0_0_0_1px] shadow-violet7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet8"
               value="@peduarte"
             >
           </fieldset>
-          <div class="flex justify-end mt-5">
+          <div class="mt-5 flex justify-end">
             <button
-              class="inline-flex items-center justify-center rounded px-[15px] text-[15px] leading-none font-medium h-[35px] bg-green4 text-green11 hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7 outline-none cursor-default"
+              class="text-green11 h-[35px] inline-flex cursor-default items-center justify-center rounded bg-green4 px-[15px] text-[15px] font-medium leading-none outline-none hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7"
             >
               Save changes
             </button>
           </div>
         </ATabsContent>
         <ATabsContent
-          class="grow p-5 bg-white rounded-b-md outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+          class="grow rounded-b-md bg-white p-5 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
           value="tab2"
         >
-          <p class="mb-5 text-mauve11 text-[15px] leading-normal">
+          <p class="text-mauve11 mb-5 text-[15px] leading-normal">
             Change your password here. After saving, you'll be logged out.
           </p>
           <fieldset class="mb-[15px] w-full flex flex-col justify-start">
             <label
-              class="text-[13px] leading-none mb-2.5 text-violet12 block"
+              class="text-violet12 mb-2.5 block text-[13px] leading-none"
               for="currentPassword"
             >
               Current password
             </label>
             <input
               id="currentPassword"
-              class="grow shrink-0 rounded px-2.5 text-[15px] leading-none text-violet11 shadow-[0_0_0_1px] shadow-violet7 h-[35px] focus:shadow-[0_0_0_2px] focus:shadow-violet8 outline-none"
+              class="text-violet11 h-[35px] shrink-0 grow rounded px-2.5 text-[15px] leading-none shadow-[0_0_0_1px] shadow-violet7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet8"
               type="password"
             >
           </fieldset>
           <fieldset class="mb-[15px] w-full flex flex-col justify-start">
             <label
-              class="text-[13px] leading-none mb-2.5 text-violet12 block"
+              class="text-violet12 mb-2.5 block text-[13px] leading-none"
               for="newPassword"
             >
               New password
             </label>
             <input
               id="newPassword"
-              class="grow shrink-0 rounded px-2.5 text-[15px] leading-none text-violet11 shadow-[0_0_0_1px] shadow-violet7 h-[35px] focus:shadow-[0_0_0_2px] focus:shadow-violet8 outline-none"
+              class="text-violet11 h-[35px] shrink-0 grow rounded px-2.5 text-[15px] leading-none shadow-[0_0_0_1px] shadow-violet7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet8"
               type="password"
             >
           </fieldset>
           <fieldset class="mb-[15px] w-full flex flex-col justify-start">
             <label
-              class="text-[13px] leading-none mb-2.5 text-violet12 block"
+              class="text-violet12 mb-2.5 block text-[13px] leading-none"
               for="confirmPassword"
             >
               Confirm password
             </label>
             <input
               id="confirmPassword"
-              class="grow shrink-0 rounded px-2.5 text-[15px] leading-none text-violet11 shadow-[0_0_0_1px] shadow-violet7 h-[35px] focus:shadow-[0_0_0_2px] focus:shadow-violet8 outline-none"
+              class="text-violet11 h-[35px] shrink-0 grow rounded px-2.5 text-[15px] leading-none shadow-[0_0_0_1px] shadow-violet7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet8"
               type="password"
             >
           </fieldset>
-          <div class="flex justify-end mt-5">
+          <div class="mt-5 flex justify-end">
             <button
-              class="inline-flex items-center justify-center rounded px-[15px] text-[15px] leading-none font-medium h-[35px] bg-green4 text-green11 hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7 outline-none cursor-default"
+              class="text-green11 h-[35px] inline-flex cursor-default items-center justify-center rounded bg-green4 px-[15px] text-[15px] font-medium leading-none outline-none hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7"
             >
               Change password
             </button>

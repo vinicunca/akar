@@ -1,4 +1,5 @@
-import { type Component, defineComponent, h, type PropType } from 'vue';
+import type { Component, PropType } from 'vue';
+import { defineComponent, h } from 'vue';
 import { APrimitiveSlot } from './slot-primitive';
 
 export type APrimitiveAsTag =
