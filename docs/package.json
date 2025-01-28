@@ -1,0 +1,27 @@
+{
+  "name": "docs-akar",
+  "type": "module",
+  "version": "1.0.0-alpha.12",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "contributors": "tsx scripts/update-contributors.ts",
+    "gen": "tsx scripts/autogen.ts"
+  },
+  "dependencies": {
+    "@vinicunca/akar": "link:../packages/core",
+    "@vueuse/core": "^12.5.0"
+  },
+  "devDependencies": {
+    "@iconify/json": "catalog:",
+    "@radix-ui/colors": "catalog:",
+    "@vinicunca/unocss-preset": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "mark.js": "catalog:",
+    "minisearch": "catalog:",
+    "postcss-preset-env": "catalog:",
+    "unocss": "catalog:",
+    "vitepress": "catalog:"
+  }
+}
