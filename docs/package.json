@@ -1,7 +1,7 @@
 {
   "name": "docs-akar",
   "type": "module",
-  "version": "1.0.0-alpha.12",
+  "version": "1.0.0-alpha.13",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
