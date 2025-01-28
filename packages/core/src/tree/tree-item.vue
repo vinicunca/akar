@@ -26,7 +26,7 @@ import { computed } from 'vue';
 import { useCollection } from '~~/collection';
 import { APrimitive } from '~~/primitive';
 import { ARovingFocusItem } from '~~/roving-focus';
-import { handleAndDispatchCustomEvent } from '~~/shared';
+import { getActiveElement, handleAndDispatchCustomEvent } from '~~/shared';
 import { injectATreeRootContext } from './tree-root.vue';
 import { flatten } from './utils';
 
@@ -34,9 +34,12 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<ATreeItemProps<T>>(), {
-  as: 'li',
-});
+const props = withDefaults(
+  defineProps<ATreeItemProps<T>>(),
+  {
+    as: 'li',
+  },
+);
 
 const emits = defineEmits<ATreeItemEmits<T>>();
 
@@ -82,7 +85,7 @@ function handleKeydownRight(ev: KeyboardEvent) {
   if (isExpanded.value) {
     // go to first child
     const collection = getItems().map((i) => i.ref);
-    const currentElement = document.activeElement as HTMLElement;
+    const currentElement = getActiveElement() as HTMLElement;
     const currentIndex = collection.indexOf(currentElement);
     const list = [...collection].slice(currentIndex);
     const nextElement = list.find((el) => Number(el.getAttribute('data-indent')) === (props.level + 1));
@@ -103,7 +106,7 @@ function handleKeydownLeft(ev: KeyboardEvent) {
   } else {
     // go back to parent
     const collection = getItems().map((i) => i.ref);
-    const currentElement = document.activeElement as HTMLElement;
+    const currentElement = getActiveElement() as HTMLElement;
     const currentIndex = collection.indexOf(currentElement);
     const list = [...collection].slice(0, currentIndex).reverse();
     const parentElement = list.find((el) => Number(el.getAttribute('data-indent')) === (props.level - 1));

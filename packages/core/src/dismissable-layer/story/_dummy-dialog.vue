@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { FocusScope } from '~~/focus-scope';
+import { AFocusScope } from '~~/focus-scope';
 import { FocusGuards } from '~~/FocusGuards';
 import { DismissableLayer } from '..';
 
@@ -35,7 +35,7 @@ const open = ref(false);
           as-child
           @dismiss="open = false"
         >
-          <FocusScope
+          <AFocusScope
             trapped
             class="min-height-[200px] fixed left-1/2 top-1/2 min-w-[300px] flex items-start gap-4 rounded-lg bg-white bg-white p-8 shadow-xl -translate-x-1/2 -translate-y-1/2"
           >
@@ -50,7 +50,7 @@ const open = ref(false);
               type="text"
               value="Hello world"
             >
-          </FocusScope>
+          </AFocusScope>
         </DismissableLayer>
       </Teleport>
     </FocusGuards>

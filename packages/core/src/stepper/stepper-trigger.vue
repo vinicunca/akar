@@ -1,21 +1,24 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
-import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
-import { computed, onMounted, onUnmounted } from 'vue';
-import { useArrowNavigation, useForwardExpose } from '~~/shared';
 
 export interface AStepperTriggerProps extends APrimitiveProps {
 }
 </script>
 
 <script setup lang="ts">
+import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
+import { computed, onMounted, onUnmounted } from 'vue';
 import { APrimitive } from '~~/primitive';
+import { getActiveElement, useArrowNavigation, useForwardExpose } from '~~/shared';
 import { injectAStepperItemContext } from './stepper-item.vue';
 import { injectAStepperRootContext } from './stepper-root.vue';
 
-withDefaults(defineProps<AStepperTriggerProps>(), {
-  as: 'button',
-});
+withDefaults(
+  defineProps<AStepperTriggerProps>(),
+  {
+    as: 'button',
+  },
+);
 
 const rootContext = injectAStepperRootContext();
 const itemContext = injectAStepperItemContext();
@@ -60,7 +63,7 @@ function handleKeyDown(event: KeyboardEvent) {
   ) {
     useArrowNavigation({
       event,
-      currentElement: document.activeElement as HTMLElement,
+      currentElement: getActiveElement() as HTMLElement,
       options: {
         itemsArray: stepperItems.value,
         focus: true,

@@ -20,6 +20,7 @@ type ComboboxRootContext<T> = {
   onTriggerElementChange: (el: HTMLElement) => void;
   highlightedElement: Ref<HTMLElement | undefined>;
   parentElement: Ref<HTMLElement | undefined>;
+  resetSearchTermOnSelect: Ref<boolean>;
   onResetSearchTerm: EventHookOn;
   allItems: Ref<Map<string, string>>;
   allGroups: Ref<Map<string, Set<string>>>;
@@ -53,6 +54,11 @@ export interface AComboboxRootProps<T = AcceptableValue> extends Omit<AListboxRo
    */
   resetSearchTermOnBlur?: boolean;
   /**
+   * Whether to reset the searchTerm when the Combobox value is selected
+   * @defaultValue `true`
+   */
+  resetSearchTermOnSelect?: boolean;
+  /**
    * When `true`, disable the default filters
    */
   ignoreFilter?: boolean;
@@ -66,10 +72,14 @@ import { computed, nextTick, reactive, ref, toRefs, watch } from 'vue';
 import { AListboxRoot } from '~~/listbox';
 import { APopperRoot } from '~~/popper';
 
-const props = withDefaults(defineProps<AComboboxRootProps<T>>(), {
-  open: undefined,
-  resetSearchTermOnBlur: true,
-});
+const props = withDefaults(
+  defineProps<AComboboxRootProps<T>>(),
+  {
+    open: undefined,
+    resetSearchTermOnBlur: true,
+    resetSearchTermOnSelect: true,
+  },
+);
 const emits = defineEmits<AComboboxRootEmits<T>>();
 
 defineSlots<{
@@ -81,8 +91,17 @@ defineSlots<{
   }) => any;
 }>();
 
-const { primitiveElement, currentElement: parentElement } = usePrimitiveElement<GenericComponentInstance<typeof AListboxRoot>>();
-const { multiple, disabled, ignoreFilter, dir: propDir } = toRefs(props);
+const {
+  primitiveElement,
+  currentElement: parentElement,
+} = usePrimitiveElement<GenericComponentInstance<typeof AListboxRoot>>();
+const {
+  multiple,
+  disabled,
+  ignoreFilter,
+  resetSearchTermOnSelect,
+  dir: propDir,
+} = toRefs(props);
 
 const dir = useDirection(propDir);
 
@@ -225,6 +244,7 @@ provideComboboxRootContext({
     triggerElement.value = val;
   },
   parentElement,
+  resetSearchTermOnSelect,
   onResetSearchTerm: resetSearchTerm.on,
   allItems,
   allGroups,

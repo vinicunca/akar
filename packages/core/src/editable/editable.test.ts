@@ -83,7 +83,7 @@ describe('editable', () => {
   });
 
   it('submits the value when pressing enter', async () => {
-    const { input, preview, rerender } = setup({ editableProps: { modelValue: '' }, emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data }) } });
+    const { input, preview, rerender } = setup({ editableProps: { modelValue: '', submitMode: 'enter' }, emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data }) } });
 
     await userEvent.type(input, 'New Value');
     await userEvent.keyboard(kbd.ENTER);
@@ -94,8 +94,10 @@ describe('editable', () => {
   it('submits the value on blur', async () => {
     const { input, preview, rerender } = setup({ editableProps: { modelValue: '', submitMode: 'blur' }, emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data, submitMode: 'blur' }) } });
 
+    await userEvent.dblClick(preview);
     await userEvent.type(input, 'New Value');
-    await userEvent.tab();
+    await userEvent.click(document.children[0]);
+
     expect(preview).toBeVisible();
     expect(preview).toHaveTextContent('New Value');
   });
@@ -105,6 +107,7 @@ describe('editable', () => {
 
     await userEvent.type(input, 'New Value');
     await userEvent.keyboard(kbd.ENTER);
+
     expect(preview).toBeVisible();
     expect(preview).toHaveTextContent('New Value');
   });
@@ -113,7 +116,10 @@ describe('editable', () => {
     const { input, preview, rerender } = setup({ editableProps: { modelValue: '', submitMode: 'both' }, emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data, submitMode: 'blur' }) } });
 
     await userEvent.type(input, 'New Value');
-    await userEvent.tab();
+    await userEvent.dblClick(preview);
+    await userEvent.type(input, 'New Value');
+    await userEvent.click(document.children[0]);
+
     expect(preview).toBeVisible();
     expect(preview).toHaveTextContent('New Value');
   });

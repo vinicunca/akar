@@ -2,7 +2,7 @@
 import type { ComputedRef, Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { AcceptableValue, DataOrientation, Direction, SingleOrMultipleProps, SingleOrMultipleType } from '~~/shared/types';
-import { createContext, useDirection, useForwardExpose } from '~~/shared';
+import { createContext } from '~~/shared';
 
 export interface AAccordionRootProps<T = string | Array<string>>
   extends APrimitiveProps, SingleOrMultipleProps<T> {
@@ -71,6 +71,7 @@ export const [
 <script setup lang="ts" generic="T extends (string | string[]), ExplicitType extends SingleOrMultipleType">
 import { toRefs } from 'vue';
 import { APrimitive } from '~~/primitive';
+import { useDirection, useForwardExpose } from '~~/shared';
 import { useSingleOrMultipleValue } from '~~/shared/use-single-or-multiple-value';
 
 const props = withDefaults(

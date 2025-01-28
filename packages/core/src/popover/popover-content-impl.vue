@@ -33,7 +33,7 @@ export interface PopoverContentImplProps
 
 <script setup lang="ts">
 import { DismissableLayer } from '~~/dismissable-layer';
-import { FocusScope } from '~~/focus-scope';
+import { AFocusScope } from '~~/focus-scope';
 import { APopperContent } from '~~/popper';
 import { useFocusGuards, useForwardExpose, useForwardProps } from '~~/shared';
 import { injectAPopoverRootContext } from './popover-root.vue';
@@ -49,7 +49,7 @@ useFocusGuards();
 </script>
 
 <template>
-  <FocusScope
+  <AFocusScope
     as-child
     loop
     :trapped="trapFocus"
@@ -86,5 +86,5 @@ useFocusGuards();
         <slot />
       </APopperContent>
     </DismissableLayer>
-  </FocusScope>
+  </AFocusScope>
 </template>

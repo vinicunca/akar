@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { ComponentPublicInstance } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
-import { useCollection } from '~~/collection';
 
 export interface AToastViewportProps extends APrimitiveProps {
   /**
@@ -20,12 +19,14 @@ export interface AToastViewportProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { onKeyStroke, unrefElement } from '@vueuse/core';
 import { computed, onMounted, ref, toRefs, watchEffect } from 'vue';
+import { useCollection } from '~~/collection';
 import { DismissableLayerBranch } from '~~/dismissable-layer';
 import { focusFirst, getTabbableCandidates } from '~~/focus-scope/utils';
 import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { getActiveElement, useForwardExpose } from '~~/shared';
 import FocusProxy from './focus-proxy.vue';
 import { injectAToastProviderContext } from './toast-provider.vue';
 import { VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';
@@ -61,45 +62,45 @@ onMounted(() => {
 watchEffect((cleanupFn) => {
   const viewport = currentElement.value;
   if (hasToasts.value && viewport) {
-    const handlePause = () => {
+    function handlePause() {
       if (!providerContext.isClosePausedRef.value) {
         const pauseEvent = new CustomEvent(VIEWPORT_PAUSE);
         viewport.dispatchEvent(pauseEvent);
         providerContext.isClosePausedRef.value = true;
       }
-    };
+    }
 
-    const handleResume = () => {
+    function handleResume() {
       if (providerContext.isClosePausedRef.value) {
         const resumeEvent = new CustomEvent(VIEWPORT_RESUME);
         viewport.dispatchEvent(resumeEvent);
         providerContext.isClosePausedRef.value = false;
       }
-    };
+    }
 
-    const handleFocusOutResume = (event: FocusEvent) => {
+    function handleFocusOutResume(event: FocusEvent) {
       const isFocusMovingOutside = !viewport.contains(event.relatedTarget as HTMLElement);
       if (isFocusMovingOutside) {
         handleResume();
       }
-    };
+    }
 
-    const handlePointerLeaveResume = () => {
-      const isFocusInside = viewport.contains(document.activeElement);
+    function handlePointerLeaveResume() {
+      const isFocusInside = viewport.contains(getActiveElement());
       if (!isFocusInside) {
         handleResume();
       }
-    };
+    }
 
     // We programmatically manage tabbing as we are unable to influence
     // the source order with portals, this allows us to reverse the
     // tab order so that it runs from most recent toast to least
-    const handleKeyDown = (event: KeyboardEvent) => {
+    function handleKeyDown(event: KeyboardEvent) {
       const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
-      const isTabKey = event.key === 'Tab' && !isMetaKey;
+      const isTabKey = event.key === KEY_CODES.TAB && !isMetaKey;
 
       if (isTabKey) {
-        const focusedElement = document.activeElement;
+        const focusedElement = getActiveElement();
         const isTabbingBackwards = event.shiftKey;
         const targetIsViewport = event.target === viewport;
 
@@ -126,7 +127,7 @@ watchEffect((cleanupFn) => {
           }
         }
       }
-    };
+    }
 
     viewport.addEventListener('focusin', handlePause);
     viewport.addEventListener('focusout', handleFocusOutResume);

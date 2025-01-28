@@ -1,9 +1,7 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
 import type { SwipeEvent } from './utils';
-import { isClient } from '@vueuse/shared';
-import { useCollection } from '~~/collection';
-import { createContext, useForwardExpose } from '~~/shared';
+import { createContext } from '~~/shared';
 
 export type ToastRootImplEmits = {
   close: [];
@@ -40,14 +38,19 @@ export interface ToastRootImplProps extends APrimitiveProps {
   duration?: number;
 }
 
-export const [injectToastRootContext, provideToastRootContext]
-  = createContext<{ onClose: () => void }>('AToastRoot');
+export const [
+  injectToastRootContext,
+  provideToastRootContext,
+] = createContext<{ onClose: () => void }>('AToastRoot');
 </script>
 
 <script setup lang="ts">
 import { onKeyStroke, useRafFn } from '@vueuse/core';
+import { isClient } from '@vueuse/shared';
 import { computed, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
+import { useCollection } from '~~/collection';
 import { APrimitive } from '~~/primitive';
+import { getActiveElement, useForwardExpose } from '~~/shared';
 import ToastAnnounce from './toast-announce.vue';
 import { injectAToastProviderContext } from './toast-provider.vue';
 import { getAnnounceTextContent, handleAndDispatchCustomEvent, isDeltaInDirection, TOAST_SWIPE_CANCEL, TOAST_SWIPE_END, TOAST_SWIPE_MOVE, TOAST_SWIPE_START, VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';
@@ -103,7 +106,7 @@ function startTimer(duration: number) {
 function handleClose() {
   // focus viewport if focus is within toast to read the remaining toast
   // count to SR users and ensure focus isn't lost
-  const isFocusInToast = currentElement.value?.contains(document.activeElement);
+  const isFocusInToast = currentElement.value?.contains(getActiveElement());
   if (isFocusInToast) {
     providerContext.viewport.value?.focus();
   }
@@ -177,9 +180,9 @@ provideToastRootContext({ onClose: handleClose });
 <template>
   <ToastAnnounce
     v-if="announceTextContent"
-    role="status"
+    role="alert"
     :aria-live="type === 'foreground' ? 'assertive' : 'polite'"
-    aria-atomic
+    aria-atomic="true"
   >
     {{ announceTextContent }}
   </ToastAnnounce>
@@ -191,9 +194,9 @@ provideToastRootContext({ onClose: handleClose });
     <ACollectionItem>
       <APrimitive
         :ref="forwardRef"
-        role="status"
+        role="alert"
         aria-live="off"
-        aria-atomic
+        aria-atomic="true"
         tabindex="0"
         v-bind="$attrs"
         :as="as"

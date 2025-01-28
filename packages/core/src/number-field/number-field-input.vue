@@ -1,14 +1,15 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
-import { onMounted, ref, watch } from 'vue';
-import { injectANumberFieldRootContext } from './number-field-root.vue';
 
 export interface ANumberFieldInputProps extends APrimitiveProps {
 }
 </script>
 
 <script setup lang="ts">
+import { onMounted, ref, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { getActiveElement } from '~~/shared';
+import { injectANumberFieldRootContext } from './number-field-root.vue';
 
 const props = withDefaults(defineProps<ANumberFieldInputProps>(), {
   as: 'input',
@@ -19,7 +20,7 @@ const rootContext = injectANumberFieldRootContext();
 
 function handleWheelEvent(event: WheelEvent) {
   // only handle when in focus
-  if (event.target !== document.activeElement) {
+  if (event.target !== getActiveElement()) {
     return;
   }
 

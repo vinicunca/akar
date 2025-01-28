@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { FocusScope } from '..';
+import { AFocusScope } from '..';
 
 const trapped1 = ref(false);
 const trapped2 = ref(false);
@@ -21,7 +21,7 @@ const trapped2 = ref(false);
           Trap 1
         </button>
 
-        <FocusScope
+        <AFocusScope
           v-if="trapped1"
           as-child
           :loop="trapped1"
@@ -57,7 +57,7 @@ const trapped2 = ref(false);
               Close
             </button>
           </form>
-        </FocusScope>
+        </AFocusScope>
       </div>
       <div>
         <button
@@ -67,7 +67,7 @@ const trapped2 = ref(false);
           Trap 2
         </button>
 
-        <FocusScope
+        <AFocusScope
           v-if="trapped2"
           as-child
           :loop="trapped2"
@@ -103,7 +103,7 @@ const trapped2 = ref(false);
               Close
             </button>
           </form>
-        </FocusScope>
+        </AFocusScope>
       </div>
     </div>
   </Story>

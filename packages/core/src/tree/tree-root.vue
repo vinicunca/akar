@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { Direction } from '~~/shared/types';
-import { createContext, useDirection, useSelectionBehavior, useTypeahead } from '~~/shared';
-import { flatten } from './utils';
+import { createContext, getActiveElement, useDirection, useSelectionBehavior, useTypeahead } from '~~/shared';
 
 export interface ATreeRootProps<T = Record<string, any>, U extends Record<string, any> = Record<string, any>> extends APrimitiveProps {
   /** The controlled value of the tree. Can be binded with with `v-model`. */
@@ -69,7 +68,10 @@ export type FlattenedItem<T> = {
   };
 };
 
-export const [injectATreeRootContext, provideTreeRootContext] = createContext<TreeRootContext<any>>('ATreeRoot');
+export const [
+  injectATreeRootContext,
+  provideTreeRootContext,
+] = createContext<TreeRootContext<any>>('ATreeRoot');
 </script>
 
 <script setup lang="ts" generic="T extends Record<string, any>, U extends Record<string, any>">
@@ -81,12 +83,16 @@ import { computed, nextTick, ref, toRefs } from 'vue';
 import { APrimitive } from '~~/primitive';
 import { ARovingFocusGroup } from '~~/roving-focus';
 import { MAP_KEY_TO_FOCUS_INTENT } from '~~/roving-focus/utils';
+import { flatten } from './utils';
 
-const props = withDefaults(defineProps<ATreeRootProps<T, U>>(), {
-  as: 'ul',
-  selectionBehavior: 'toggle',
-  getChildren: (val: T) => val.children,
-});
+const props = withDefaults(
+  defineProps<ATreeRootProps<T, U>>(),
+  {
+    as: 'ul',
+    selectionBehavior: 'toggle',
+    getChildren: (val: T) => val.children,
+  },
+);
 const emits = defineEmits<ATreeRootEmits<U>>();
 
 defineSlots<{
@@ -186,7 +192,7 @@ function handleKeydownNavigation(event: KeyboardEvent) {
   nextTick(() => {
     handleMultipleReplace({
       intent,
-      currentElement: document.activeElement,
+      currentElement: getActiveElement(),
       getItems: rovingFocusGroupRef.value!.getItems,
       options: expandedItems.value.map((i) => i.value),
     });

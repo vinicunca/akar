@@ -2,8 +2,7 @@
 import type { Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { AcceptableValue } from '~~/shared/types';
-import { useCollection } from '~~/collection';
-import { createContext, handleAndDispatchCustomEvent, useForwardExpose, useId } from '~~/shared';
+import { createContext } from '~~/shared';
 
 interface SelectItemContext<T = AcceptableValue> {
   value: T;
@@ -49,7 +48,9 @@ import {
   ref,
   toRefs,
 } from 'vue';
+import { useCollection } from '~~/collection';
 import { APrimitive } from '~~/primitive';
+import { getActiveElement, handleAndDispatchCustomEvent, useForwardExpose, useId } from '~~/shared';
 import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectASelectRootContext } from './select-root.vue';
 import { SELECTION_KEYS, valueComparator } from './utils';
@@ -119,7 +120,8 @@ async function handlePointerLeave(event: PointerEvent) {
   if (event.defaultPrevented) {
     return;
   }
-  if (event.currentTarget === document.activeElement) {
+
+  if (event.currentTarget === getActiveElement()) {
     contentContext.onItemLeave?.();
   }
 }

@@ -14,10 +14,12 @@ import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual';
 import type { Ref } from 'vue';
 import type { FlattenedItem } from './tree-root.vue';
 import { useVirtualizer } from '@tanstack/vue-virtual';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { refAutoReset, useParentElement } from '@vueuse/core';
 import { cloneVNode, computed, nextTick, useSlots } from 'vue';
 import { useCollection } from '~~/collection';
 import { MAP_KEY_TO_FOCUS_INTENT } from '~~/roving-focus/utils';
+import { getActiveElement } from '~~/shared';
 import { getNextMatch } from '~~/shared/use-typeahead';
 import { injectATreeRootContext } from './tree-root.vue';
 
@@ -128,7 +130,7 @@ function scrollToIndexAndFocus(index: number) {
 
 rootContext.virtualKeydownHook.on((event) => {
   const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
-  const isTabKey = event.key === 'Tab' && !isMetaKey;
+  const isTabKey = event.key === KEY_CODES.TAB && !isMetaKey;
   if (isTabKey) {
     return;
   }
@@ -146,7 +148,7 @@ rootContext.virtualKeydownHook.on((event) => {
       item.ref.focus();
     });
   } else if (intent === 'prev' && event.key !== 'ArrowUp') {
-    const currentElement = document.activeElement as HTMLElement;
+    const currentElement = getActiveElement() as HTMLElement;
     const currentIndex = Number(currentElement.getAttribute('data-index'));
     const currentLevel = Number(currentElement.getAttribute('data-indent'));
     const list = rootContext.expandedItems.value.slice(0, currentIndex).map((item, index) => ({ ...item, index })).reverse();
@@ -157,7 +159,7 @@ rootContext.virtualKeydownHook.on((event) => {
     }
   } else if (!intent && !isMetaKey) {
     search.value += event.key;
-    const currentIndex = Number(document.activeElement?.getAttribute('data-index'));
+    const currentIndex = Number(getActiveElement()?.getAttribute('data-index'));
     const currentMatch = optionsWithMetadata.value[currentIndex].textContent;
     const filteredOptions = optionsWithMetadata.value.map((i) => i.textContent);
     const next = getNextMatch({
@@ -176,7 +178,7 @@ rootContext.virtualKeydownHook.on((event) => {
     if (event.shiftKey && intent) {
       rootContext.handleMultipleReplace({
         intent,
-        currentElement: document.activeElement,
+        currentElement: getActiveElement(),
         getItems,
         options: rootContext.expandedItems.value.map((i) => i.value),
       });

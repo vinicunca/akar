@@ -13,6 +13,7 @@ type EditableRootContext = {
   maxLength: Ref<number | undefined>;
   disabled: Ref<boolean>;
   modelValue: Ref<string | null | undefined>;
+  inputValue: Ref<string | null | undefined>;
   placeholder: Ref<{ edit: string; preview: string }>;
   isEditing: Ref<boolean>;
   submitMode: Ref<SubmitMode>;
@@ -73,7 +74,7 @@ export const [injectAEditableRootContext, provideEditableRootContext]
 <script setup lang="ts">
 import type { Ref } from 'vue';
 import { useVModel } from '@vueuse/core';
-import { computed, ref, toRefs } from 'vue';
+import { computed, ref, toRefs, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 import { AVisuallyHiddenInput } from '~~/visually-hidden';
 
@@ -144,21 +145,31 @@ const placeholder = computed(() => {
   return typeof propPlaceholder.value === 'string' ? { edit: propPlaceholder.value, preview: propPlaceholder.value } : propPlaceholder.value;
 });
 
-const previousValue = ref(modelValue.value);
+const inputValue = ref(modelValue.value);
+
+watch(
+  () => modelValue.value,
+  () => {
+    inputValue.value = modelValue.value;
+  },
+  { immediate: true, deep: true },
+);
 
 function cancel() {
-  modelValue.value = previousValue.value;
   isEditing.value = false;
+
   emits('update:state', 'cancel');
 }
 
 function edit() {
   isEditing.value = true;
+  inputValue.value = modelValue.value;
+
   emits('update:state', 'edit');
 }
 
 function submit() {
-  previousValue.value = modelValue.value;
+  modelValue.value = inputValue.value;
   isEditing.value = false;
 
   emits('update:state', 'submit');
@@ -201,6 +212,7 @@ provideEditableRootContext({
   isEditing,
   maxLength,
   modelValue,
+  inputValue,
   placeholder,
   edit,
   cancel,

@@ -12,8 +12,10 @@ import type {
   Side,
 } from './utils';
 
+import { KEY_CODES } from '@vinicunca/perkakas';
 import {
   createContext,
+  getActiveElement,
   useArrowNavigation,
   useFocusGuards,
   useForwardExpose,
@@ -91,7 +93,7 @@ import {
   watch,
 } from 'vue';
 import { DismissableLayer } from '~~/dismissable-layer';
-import { FocusScope } from '~~/focus-scope';
+import { AFocusScope } from '~~/focus-scope';
 import {
   APopperContent,
   APopperContentPropsDefaultValue,
@@ -176,7 +178,7 @@ function handleKeyDown(event: KeyboardEvent) {
 
   const el = useArrowNavigation({
     event,
-    currentElement: document.activeElement as HTMLElement,
+    currentElement: getActiveElement() as HTMLElement,
     parentElement: contentElement.value,
     options: {
       loop: loop.value,
@@ -200,7 +202,7 @@ function handleKeyDown(event: KeyboardEvent) {
 
   if (isKeyDownInside) {
     // menus should not be navigated using tab key so we prevent it
-    if (event.key === 'Tab') {
+    if (event.key === KEY_CODES.TAB) {
       event.preventDefault();
     }
     if (!isModifierKey && isCharacterKey) {
@@ -279,7 +281,7 @@ provideMenuContentContext({
 </script>
 
 <template>
-  <FocusScope
+  <AFocusScope
     as-child
     :trapped="trapFocus"
     @mount-auto-focus="handleMountAutoFocus"
@@ -337,5 +339,5 @@ provideMenuContentContext({
         </APopperContent>
       </ARovingFocusGroup>
     </DismissableLayer>
-  </FocusScope>
+  </AFocusScope>
 </template>

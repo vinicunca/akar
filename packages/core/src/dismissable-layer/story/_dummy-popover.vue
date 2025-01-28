@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { FocusScope } from '~~/focus-scope';
+import { AFocusScope } from '~~/focus-scope';
 import { APopperAnchor, APopperArrow, APopperContent, APopperRoot } from '~~/popper';
 import { DismissableLayer } from '..';
 
@@ -47,7 +47,7 @@ const openButtonRef = ref();
         :disable-outside-pointer-events="disableOutsidePointerEvents"
         @dismiss="open = false"
       >
-        <FocusScope
+        <AFocusScope
           as-child
           :trapped="trapped"
         >
@@ -77,7 +77,7 @@ const openButtonRef = ref();
               }"
             />
           </APopperContent>
-        </FocusScope>
+        </AFocusScope>
       </DismissableLayer>
     </Teleport>
   </APopperRoot>

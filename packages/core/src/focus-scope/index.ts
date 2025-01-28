@@ -1,5 +1,5 @@
 export {
-  default as FocusScope,
-  type FocusScopeEmits,
-  type FocusScopeProps,
+  default as AFocusScope,
+  type AFocusScopeEmits as FocusScopeEmits,
+  type AFocusScopeProps as FocusScopeProps,
 } from './focus-scope.vue';

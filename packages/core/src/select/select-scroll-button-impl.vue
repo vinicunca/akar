@@ -2,6 +2,7 @@
 import { onBeforeUnmount, ref, watchEffect } from 'vue';
 import { useCollection } from '~~/collection';
 import { APrimitive } from '~~/primitive';
+import { getActiveElement } from '~~/shared';
 import { injectSelectContentContext } from './select-content-impl.vue';
 
 export type SelectScrollButtonImplEmits = {
@@ -23,7 +24,7 @@ function clearAutoScrollTimer() {
 
 watchEffect(() => {
   const activeItem = getItems().map((i) => i.ref).find(
-    (item) => item === document.activeElement,
+    (item) => item === getActiveElement(),
   );
   activeItem?.scrollIntoView({ block: 'nearest' });
 });

@@ -18,7 +18,8 @@ import { isValueEqualOrExist } from './is-value-equal-or-exist';
 function validateProps({ type, defaultValue, modelValue }: SingleOrMultipleProps) {
   const value = modelValue || defaultValue;
 
-  const canTypeBeInferred = isDefined(modelValue) || isDefined(defaultValue);
+  // const canTypeBeInferred = isDefined(modelValue) || isDefined(defaultValue);
+  const canTypeBeInferred = modelValue !== undefined || defaultValue !== undefined;
 
   if (canTypeBeInferred) {
     return Array.isArray(value) ? 'multiple' : 'single';
@@ -37,7 +38,8 @@ function getDefaultType({ type, defaultValue, modelValue }: SingleOrMultipleProp
 }
 
 function getDefaultValue({ type, defaultValue }: SingleOrMultipleProps) {
-  if (isDefined(defaultValue)) {
+  // if (isDefined(defaultValue)) {
+  if (defaultValue !== undefined) {
     return defaultValue;
   }
 

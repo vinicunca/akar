@@ -1,5 +1,6 @@
 import { refAutoReset } from '@vueuse/shared';
 import { wrapArray } from './arrays';
+import { getActiveElement } from './get-active-element';
 
 export function useTypeahead(callback?: (search: string) => void) {
   // Reset `search` 1 second after it was last updated
@@ -13,7 +14,7 @@ export function useTypeahead(callback?: (search: string) => void) {
     if (callback) {
       callback(key);
     } else {
-      const currentItem = document.activeElement;
+      const currentItem = getActiveElement();
       const itemsWithTextValue = items.map((item) => ({
         ...item,
         textValue: item.value?.textValue ?? item.ref.textContent?.trim() ?? '',

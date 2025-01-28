@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
+import { KEY_CODES } from '@vinicunca/perkakas';
 
 export interface ARovingFocusItemProps extends APrimitiveProps {
   tabStopId?: string;
@@ -12,7 +13,7 @@ export interface ARovingFocusItemProps extends APrimitiveProps {
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted } from 'vue';
 import { useCollection } from '~~/collection';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { APrimitive } from '~~/primitive';
 import { useId } from '~~/shared';
 import { injectRovingFocusGroupContext } from './roving-focus-group.vue';
 import { focusFirst, getFocusIntent, wrapArray } from './utils';
@@ -31,9 +32,6 @@ const isCurrentTabStop = computed(
 
 const { getItems, ACollectionItem } = useCollection();
 
-const { primitiveElement, currentElement } = usePrimitiveElement();
-const rootNode = computed(() => currentElement.value?.getRootNode() as Document | ShadowRoot);
-
 onMounted(() => {
   if (props.focusable) {
     context.onFocusableItemAdd();
@@ -46,7 +44,7 @@ onUnmounted(() => {
 });
 
 function handleKeydown(event: KeyboardEvent) {
-  if (event.key === 'Tab' && event.shiftKey) {
+  if (event.key === KEY_CODES.TAB && event.shiftKey) {
     context.onItemShiftTab();
     return;
   }
@@ -83,7 +81,7 @@ function handleKeydown(event: KeyboardEvent) {
         : candidateNodes.slice(currentIndex + 1);
     }
 
-    nextTick(() => focusFirst(candidateNodes, false, rootNode.value));
+    nextTick(() => focusFirst(candidateNodes));
   }
 }
 </script>
@@ -91,7 +89,6 @@ function handleKeydown(event: KeyboardEvent) {
 <template>
   <ACollectionItem>
     <APrimitive
-      ref="primitiveElement"
       :tabindex="isCurrentTabStop ? 0 : -1"
       :data-orientation="context.orientation.value"
       :data-active="active"

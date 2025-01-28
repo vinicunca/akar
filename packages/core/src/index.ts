@@ -14,6 +14,7 @@ export * from './date-range-picker';
 export * from './dialog';
 export * from './dropdown-menu';
 export * from './editable';
+export * from './focus-scope';
 export * from './hover-card';
 export * from './label';
 export * from './listbox';

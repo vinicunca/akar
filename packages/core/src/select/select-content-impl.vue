@@ -6,6 +6,7 @@ import type {
 import type { PointerDownOutsideEvent } from '~~/dismissable-layer';
 import type { APopperContentProps } from '~~/popper';
 import type { AcceptableValue } from '~~/shared/types';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { useCollection } from '~~/collection';
 import {
   createContext,
@@ -89,7 +90,7 @@ import {
   watchEffect,
 } from 'vue';
 import { DismissableLayer } from '~~/dismissable-layer';
-import { FocusScope } from '~~/focus-scope';
+import { AFocusScope } from '~~/focus-scope';
 import { focusFirst } from '~~/menu/utils';
 import SelectItemAlignedPosition from './select-item-aligned-position.vue';
 import SelectPopperPosition from './select-popper-position.vue';
@@ -187,7 +188,7 @@ function handleKeyDown(event: KeyboardEvent) {
   const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
 
   // select should not be navigated using tab key so we prevent it
-  if (event.key === 'Tab') {
+  if (event.key === KEY_CODES.TAB) {
     event.preventDefault();
   }
 
@@ -263,7 +264,7 @@ provideSelectContentContext({
 
 <template>
   <ACollectionSlot>
-    <FocusScope
+    <AFocusScope
       as-child
       @mount-auto-focus.prevent
       @unmount-auto-focus="
@@ -314,6 +315,6 @@ provideSelectContentContext({
           <slot />
         </component>
       </DismissableLayer>
-    </FocusScope>
+    </AFocusScope>
   </ACollectionSlot>
 </template>

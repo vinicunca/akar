@@ -178,6 +178,10 @@ export const components = {
     'AEditableSubmitTrigger',
   ],
 
+  focusScope: [
+    'AFocusScope',
+  ],
+
   hoverCard: [
     'AHoverCardArrow',
     'AHoverCardContent',

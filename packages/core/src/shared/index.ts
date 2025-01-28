@@ -1,10 +1,12 @@
 export * from './arrays';
 export { createContext } from './create-context';
 export { type DateRange } from './date';
+export { getActiveElement } from './get-active-element';
 export { handleAndDispatchCustomEvent } from './handle-and-dispatch-custom-event';
 export { isValueEqualOrExist } from './is-value-equal-or-exist';
 export * from './numbers';
 export { renderSlotFragments } from './render-slot-fragments';
+export { trapFocus } from './trap-focus';
 export { useArrowNavigation } from './use-arrow-navigation';
 export { useBodyScrollLock } from './use-body-scroll-lock';
 export { type UseDateFormatter, useDateFormatter } from './use-date-formatter';

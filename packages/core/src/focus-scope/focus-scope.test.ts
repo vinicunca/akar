@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { render, waitFor } from '@testing-library/vue';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { defineComponent } from 'vue';
-import { FocusScope } from '.';
+import { AFocusScope } from '.';
 
 const INNER_NAME_INPUT_LABEL = 'Name';
 const INNER_EMAIL_INPUT_LABEL = 'Email';
@@ -30,7 +30,7 @@ describe('focusScope', () => {
 
     beforeEach(() => {
       rendered = render(defineComponent({
-        components: { TestField, FocusScope },
+        components: { TestField, FocusScope: AFocusScope },
         template: `<div>
         <FocusScope asChild loop trapped>
           <form>
@@ -74,7 +74,7 @@ describe('focusScope', () => {
 
     beforeEach(() => {
       rendered = render(defineComponent({
-        components: { TestField, FocusScope },
+        components: { TestField, FocusScope: AFocusScope },
         template: `   <div>
         <FocusScope asChild loop trapped>
           <form>
@@ -110,7 +110,7 @@ describe('focusScope', () => {
     let tabbableFirst: HTMLInputElement;
     beforeEach(() => {
       rendered = render(defineComponent({
-        components: { TestField, FocusScope },
+        components: { TestField, FocusScope: AFocusScope },
         props: { handleLastFocusableElementBlur },
         template: `<div>
         <FocusScope asChild loop trapped>

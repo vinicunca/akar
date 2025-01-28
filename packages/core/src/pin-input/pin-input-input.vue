@@ -1,9 +1,5 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
-import { useArrowNavigation } from '~~/shared';
-import { injectAPinInputRootContext } from './pin-input-root.vue';
 
 export interface APinInputInputProps extends APrimitiveProps {
   /** Position of the value this input binds to. */
@@ -14,11 +10,18 @@ export interface APinInputInputProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick, onMounted, onUnmounted, watch } from 'vue';
+import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { getActiveElement, useArrowNavigation } from '~~/shared';
+import { injectAPinInputRootContext } from './pin-input-root.vue';
 
-const props = withDefaults(defineProps<APinInputInputProps>(), {
-  as: 'input',
-});
+const props = withDefaults(
+  defineProps<APinInputInputProps>(),
+  {
+    as: 'input',
+  },
+);
 
 const context = injectAPinInputRootContext();
 const inputElements = computed(() => Array.from(context.inputElements!.value));
@@ -69,7 +72,7 @@ function resetPlaceholder() {
 function handleKeydown(event: KeyboardEvent) {
   useArrowNavigation({
     event,
-    currentElement: document.activeElement as HTMLElement,
+    currentElement: getActiveElement() as HTMLElement,
     options: {
       itemsArray: inputElements.value,
       focus: true,

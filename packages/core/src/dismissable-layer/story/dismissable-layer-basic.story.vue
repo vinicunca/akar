@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { FocusScope } from '~~/focus-scope';
+import { AFocusScope } from '~~/focus-scope';
 import { DismissableLayer } from '..';
 import DismissableBox from './_DismissableBox.vue';
 
@@ -113,7 +113,7 @@ const openButtonRef = ref<HTMLElement>();
             }
           "
         >
-          <FocusScope
+          <AFocusScope
             trapped
             loop
             class="h-[300px] w-[400px] flex flex-col items-center justify-center rounded bg-black"
@@ -121,7 +121,7 @@ const openButtonRef = ref<HTMLElement>();
             <input type="text">
             <input type="text">
             <input type="text">
-          </FocusScope>
+          </AFocusScope>
         </DismissableLayer>
       </div>
     </Variant>

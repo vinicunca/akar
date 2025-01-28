@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { KEY_CODES } from '@vinicunca/perkakas';
 
-export type FocusScopeEmits = {
+export type AFocusScopeEmits = {
   /**
    * Event handler called when auto-focusing on mount.
    * Can be prevented.
@@ -16,7 +16,7 @@ export type FocusScopeEmits = {
   unmountAutoFocus: [event: Event];
 };
 
-export interface FocusScopeProps extends APrimitiveProps {
+export interface AFocusScopeProps extends APrimitiveProps {
   /**
    * When `true`, tabbing from last item will focus first tabbable
    * and shift+tab from first item will focus last tababble.
@@ -37,6 +37,7 @@ export interface FocusScopeProps extends APrimitiveProps {
 import { isClient } from '@vueuse/shared';
 import { nextTick, reactive, ref, watchEffect } from 'vue';
 import { APrimitive } from '~~/primitive';
+import { getActiveElement, useForwardExpose } from '~~/shared';
 import { createFocusScopesStack, removeLinks } from './stack';
 import {
   AUTOFOCUS_ON_MOUNT,
@@ -48,11 +49,11 @@ import {
   getTabbableEdges,
 } from './utils';
 
-const props = withDefaults(defineProps<FocusScopeProps>(), {
+const props = withDefaults(defineProps<AFocusScopeProps>(), {
   loop: false,
   trapped: false,
 });
-const emits = defineEmits<FocusScopeEmits>();
+const emits = defineEmits<AFocusScopeEmits>();
 
 const { currentRef, currentElement } = useForwardExpose();
 const lastFocusedElementRef = ref<HTMLElement | null>(null);
@@ -151,7 +152,7 @@ watchEffect(async (cleanupFn) => {
     return;
   }
   focusScopesStack.add(focusScope);
-  const previouslyFocusedElement = document.activeElement as HTMLElement | null;
+  const previouslyFocusedElement = getActiveElement() as HTMLElement | null;
   const hasFocusedCandidate = container.contains(previouslyFocusedElement);
 
   if (!hasFocusedCandidate) {
@@ -164,7 +165,7 @@ watchEffect(async (cleanupFn) => {
       focusFirst(removeLinks(getTabbableCandidates(container)), {
         select: true,
       });
-      if (document.activeElement === previouslyFocusedElement) {
+      if (getActiveElement() === previouslyFocusedElement) {
         focus(container);
       }
     }
@@ -203,8 +204,8 @@ function handleKeyDown(event: KeyboardEvent) {
   }
 
   const isTabKey
-    = event.key === 'Tab' && !event.altKey && !event.ctrlKey && !event.metaKey;
-  const focusedElement = document.activeElement as HTMLElement | null;
+    = event.key === KEY_CODES.TAB && !event.altKey && !event.ctrlKey && !event.metaKey;
+  const focusedElement = getActiveElement() as HTMLElement | null;
 
   if (isTabKey && focusedElement) {
     const container = event.currentTarget as HTMLElement;

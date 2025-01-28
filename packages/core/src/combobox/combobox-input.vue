@@ -83,7 +83,10 @@ rootContext.onResetSearchTerm(() => {
 });
 
 watch(rootContext.modelValue, async () => {
-  if (!rootContext.isUserInputted.value) {
+  if (
+    !rootContext.isUserInputted.value
+    && rootContext.resetSearchTermOnSelect.value
+  ) {
     resetSearchTerm();
   }
 }, { immediate: true, deep: true });

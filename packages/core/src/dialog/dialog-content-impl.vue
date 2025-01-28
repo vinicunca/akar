@@ -3,7 +3,6 @@ import type {
   DismissableLayerEmits,
   DismissableLayerProps,
 } from '~~/dismissable-layer';
-import { useForwardExpose, useId } from '~~/shared';
 
 export type DialogContentImplEmits = DismissableLayerEmits & {
   /**
@@ -36,8 +35,9 @@ export interface DialogContentImplProps extends DismissableLayerProps {
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { DismissableLayer } from '~~/dismissable-layer';
-import { FocusScope } from '~~/focus-scope';
+import { AFocusScope } from '~~/focus-scope';
 import { getOpenState } from '~~/menu/utils';
+import { getActiveElement, useForwardExpose, useId } from '~~/shared';
 import { injectDialogRootContext } from './dialog-root.vue';
 import { useWarning } from './utils';
 
@@ -54,8 +54,8 @@ onMounted(() => {
   rootContext.contentElement = contentElement;
 
   // Preserve the `ADialogTrigger` element in case it was triggered programmatically
-  if (document.activeElement !== document.body) {
-    rootContext.triggerElement.value = document.activeElement as HTMLElement;
+  if (getActiveElement() !== document.body) {
+    rootContext.triggerElement.value = getActiveElement() as HTMLElement;
   }
 });
 
@@ -72,7 +72,7 @@ if (process.env.NODE_ENV !== 'production') {
 </script>
 
 <template>
-  <FocusScope
+  <AFocusScope
     as-child
     loop
     :trapped="props.trapFocus"
@@ -98,5 +98,5 @@ if (process.env.NODE_ENV !== 'production') {
     >
       <slot />
     </DismissableLayer>
-  </FocusScope>
+  </AFocusScope>
 </template>

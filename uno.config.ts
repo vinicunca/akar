@@ -1,3 +1,3 @@
-import { defineVinicuncaConfig } from '@vinicunca/unocss-preset';
+import unoConfig from './docs/uno.config';
 
-export default defineVinicuncaConfig({});
+export default unoConfig;

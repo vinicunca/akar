@@ -50,11 +50,11 @@
     "vitest": "*"
   },
   "dependencies": {
-    "commander": "^13.1.0",
-    "consola": "^3.4.0"
+    "commander": "catalog:",
+    "consola": "catalog:"
   },
   "devDependencies": {
-    "tsup": "^8.3.6",
-    "vite-tsconfig-paths": "^5.1.4"
+    "tsup": "catalog:",
+    "vite-tsconfig-paths": "catalog:"
   }
 }
