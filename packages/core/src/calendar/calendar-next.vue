@@ -6,6 +6,13 @@ export interface ACalendarNextProps extends APrimitiveProps {
   /** The function to be used for the next page. Overwrites the `nextPage` function set on the `ACalendarRoot`. */
   nextPage?: (placeholder: DateValue) => DateValue;
 }
+
+export interface CalendarNextSlot {
+  default: (props: {
+    /** Current disable state */
+    disabled: boolean;
+  }) => any;
+}
 </script>
 
 <script setup lang="ts">
@@ -14,6 +21,9 @@ import { APrimitive } from '~~/primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
 const props = withDefaults(defineProps<ACalendarNextProps>(), { as: 'button', step: 'month' });
+
+defineSlots<CalendarNextSlot>();
+
 const disabled = computed(() =>
   rootContext.disabled.value || rootContext.isNextButtonDisabled(props.nextPage),
 );
@@ -32,6 +42,8 @@ const rootContext = injectACalendarRootContext();
     :disabled="disabled"
     @click="rootContext.nextPage(props.nextPage)"
   >
-    <slot>Next page</slot>
+    <slot :disabled>
+      Next page
+    </slot>
   </APrimitive>
 </template>

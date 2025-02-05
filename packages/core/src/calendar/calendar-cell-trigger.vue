@@ -18,6 +18,15 @@ export interface ACalendarCellTriggerProps extends APrimitiveProps {
   /** The month in which the cell is rendered */
   month: DateValue;
 }
+
+export interface CalendarCellTriggerSlot {
+  default: (props: {
+    /** Current day */
+    dayValue: string;
+    /** Current disable state */
+    disabled: boolean;
+  }) => any;
+}
 </script>
 
 <script setup lang="ts">
@@ -28,12 +37,7 @@ const props = withDefaults(defineProps<ACalendarCellTriggerProps>(), {
   as: 'div',
 });
 
-defineSlots<{
-  default: (props: {
-    /** Current day */
-    dayValue: string;
-  }) => any;
-}>();
+defineSlots<CalendarCellTriggerSlot>();
 
 const rootContext = injectACalendarRootContext();
 
@@ -180,7 +184,10 @@ function handleArrowKey(event: KeyboardEvent) {
     @keydown.up.down.left.right.space.enter="handleArrowKey"
     @keydown.enter.prevent
   >
-    <slot :day-value="dayValue">
+    <slot
+      :day-value="dayValue"
+      :disabled="isDisabled"
+    >
       {{ dayValue }}
     </slot>
   </APrimitive>
