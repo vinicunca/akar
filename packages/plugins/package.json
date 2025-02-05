@@ -1,7 +1,7 @@
 {
   "name": "plugins",
   "type": "module",
-  "version": "1.0.0-alpha.13",
+  "version": "1.0.0-alpha.14",
   "description": "Plugins for akar",
   "license": "MIT",
   "keywords": [
