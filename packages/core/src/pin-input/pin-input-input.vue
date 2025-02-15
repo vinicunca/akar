@@ -63,7 +63,7 @@ function handleInput(event: InputEvent) {
 function resetPlaceholder() {
   const target = currentElement.value as HTMLInputElement;
   nextTick(() => {
-    if (!target.value) {
+    if (target && !target.value) {
       target.placeholder = context.placeholder.value;
     }
   });

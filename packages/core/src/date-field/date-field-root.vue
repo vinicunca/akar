@@ -7,7 +7,6 @@ import type { APrimitiveProps } from '~~/primitive';
 import type { UseDateFormatter } from '~~/shared';
 import type { Granularity, HourCycle, SegmentPart, SegmentValueObj } from '~~/shared/date';
 import type { Direction, FormFieldProps } from '~~/shared/types';
-import { isEqualDay } from '@internationalized/date';
 import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { hasTime, isDateBefore } from '~~/date';
 import { createContext, useDateFormatter, useDirection, useLocale } from '~~/shared';
@@ -114,8 +113,7 @@ const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
 
 const formatter = useDateFormatter(locale.value);
-const { primitiveElement, currentElement: parentElement }
-  = usePrimitiveElement();
+const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
 const segmentElements = ref<Set<HTMLElement>>(new Set());
 
 onMounted(() => {
@@ -201,7 +199,10 @@ watch(locale, (value) => {
 });
 
 watch(modelValue, (_modelValue) => {
-  if (!isNullish(_modelValue) && (!isEqualDay(placeholder.value, _modelValue) || placeholder.value.compare(_modelValue) !== 0)) {
+  if (
+    !isNullish(_modelValue)
+    || placeholder.value.compare(_modelValue) !== 0
+  ) {
     placeholder.value = _modelValue.copy();
   }
 });

@@ -76,8 +76,7 @@ const isFocusedDate = computed(() => {
 });
 const isSelectedDate = computed(() => rootContext.isDateSelected(props.day));
 
-const SELECTOR
-  = '[data-akar-calendar-cell-trigger]:not([data-disabled]):not([data-outside-month]):not([data-outside-visible-months])';
+const SELECTOR = '[data-akar-calendar-cell-trigger]:not([data-disabled]):not([data-outside-view]):not([data-outside-visible-view])';
 
 function changeDate(date: DateValue) {
   if (rootContext.readonly.value) {
@@ -170,10 +169,10 @@ function handleArrowKey(event: KeyboardEvent) {
     role="button"
     :aria-label="labelText"
     data-akar-calendar-cell-trigger
-    :aria-disabled="isOutsideView || isDisabled || isUnavailable ? true : undefined"
+    :aria-disabled="isDisabled || isUnavailable ? true : undefined"
     :data-selected="isSelectedDate ? true : undefined"
     :data-value="day.toString()"
-    :data-disabled="isDisabled || isOutsideView ? '' : undefined"
+    :data-disabled="isDisabled ? '' : undefined"
     :data-unavailable="isUnavailable ? '' : undefined"
     :data-today="isDateToday ? '' : undefined"
     :data-outside-view="isOutsideView ? '' : undefined"

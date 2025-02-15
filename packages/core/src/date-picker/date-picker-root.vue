@@ -6,10 +6,7 @@ import type { DateMatcher, WeekDayFormat } from '~~/date';
 import type { Granularity, HourCycle } from '~~/shared/date';
 import type { Direction } from '~~/shared/types';
 import type { ACalendarRootProps, ADateFieldRoot, ADateFieldRootProps, APopoverRootEmits, APopoverRootProps } from '..';
-import { isEqualDay, isSameDay } from '@internationalized/date';
 import { createContext, useDirection } from '~~/shared';
-import { getDefaultDate } from '~~/shared/date';
-import { APopoverRoot } from '..';
 
 type DatePickerRootContext = {
   id: Ref<string | undefined>;
@@ -51,37 +48,48 @@ export type ADatePickerRootEmits = {
   'update:placeholder': [date: DateValue];
 };
 
-export const [injectADatePickerRootContext, provideDatePickerRootContext]
-  = createContext<DatePickerRootContext>('ADatePickerRoot');
+export const [
+  injectADatePickerRootContext,
+  provideDatePickerRootContext,
+] = createContext<DatePickerRootContext>('ADatePickerRoot');
 </script>
 
 <script setup lang="ts">
+import { isEqualDay, isSameDay } from '@internationalized/date';
 import { useVModel } from '@vueuse/core';
-import { computed, ref, toRefs } from 'vue';
+import { computed, ref, toRefs, watch } from 'vue';
+import { getDefaultDate } from '~~/shared/date';
+import { APopoverRoot } from '..';
 
 defineOptions({
   inheritAttrs: false,
 });
-const props = withDefaults(defineProps<ADatePickerRootProps>(), {
-  defaultValue: undefined,
-  defaultOpen: false,
-  open: undefined,
-  modal: false,
-  pagedNavigation: false,
-  preventDeselect: false,
-  weekStartsOn: 0,
-  weekdayFormat: 'narrow',
-  fixedWeeks: false,
-  numberOfMonths: 1,
-  disabled: false,
-  readonly: false,
-  initialFocus: false,
-  placeholder: undefined,
-  locale: 'en',
-  isDateDisabled: undefined,
-  isDateUnavailable: undefined,
-});
+
+const props = withDefaults(
+  defineProps<ADatePickerRootProps>(),
+  {
+    defaultValue: undefined,
+    defaultOpen: false,
+    open: undefined,
+    modal: false,
+    pagedNavigation: false,
+    preventDeselect: false,
+    weekStartsOn: 0,
+    weekdayFormat: 'narrow',
+    fixedWeeks: false,
+    numberOfMonths: 1,
+    disabled: false,
+    readonly: false,
+    initialFocus: false,
+    placeholder: undefined,
+    locale: 'en',
+    isDateDisabled: undefined,
+    isDateUnavailable: undefined,
+  },
+);
+
 const emits = defineEmits<ADatePickerRootEmits & APopoverRootEmits>();
+
 const {
   locale,
   disabled,
@@ -133,6 +141,15 @@ const open = useVModel(props, 'open', emits, {
 }) as Ref<boolean>;
 
 const dateFieldRef = ref<InstanceType<typeof ADateFieldRoot> | undefined>();
+
+watch(
+  modelValue,
+  (value) => {
+    if (value && value.compare(placeholder.value) !== 0) {
+      placeholder.value = value.copy();
+    }
+  },
+);
 
 provideDatePickerRootContext({
   isDateUnavailable: propsIsDateUnavailable.value,

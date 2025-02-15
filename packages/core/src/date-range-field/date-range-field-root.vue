@@ -7,11 +7,9 @@ import type { APrimitiveProps } from '~~/primitive';
 import type { UseDateFormatter } from '~~/shared';
 import type { DateRange, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '~~/shared/date';
 import type { Direction, FormFieldProps } from '~~/shared/types';
-import { isEqualDay } from '@internationalized/date';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import {
   areAllDaysBetweenValid,
-
   hasTime,
   isDateBefore,
   isDateBeforeOrSame,
@@ -105,21 +103,31 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<ADateRangeFieldRootProps>(), {
-  defaultValue: undefined,
-  disabled: false,
-  readonly: false,
-  placeholder: undefined,
-  isDateUnavailable: undefined,
-});
+const props = withDefaults(
+  defineProps<ADateRangeFieldRootProps>(),
+  {
+    defaultValue: undefined,
+    disabled: false,
+    readonly: false,
+    placeholder: undefined,
+    isDateUnavailable: undefined,
+  },
+);
+
 const emits = defineEmits<ADateRangeFieldRootEmits>();
-const { disabled, readonly, isDateUnavailable: propsIsDateUnavailable, dir: propDir, locale: propLocale } = toRefs(props);
+
+const {
+  disabled,
+  readonly,
+  isDateUnavailable: propsIsDateUnavailable,
+  dir: propDir,
+  locale: propLocale,
+} = toRefs(props);
 const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
 
 const formatter = useDateFormatter(locale.value);
-const { primitiveElement, currentElement: parentElement }
-  = usePrimitiveElement();
+const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
 const segmentElements = ref<Set<HTMLElement>>(new Set());
 
 onMounted(() => {
@@ -128,10 +136,15 @@ onMounted(() => {
   });
 });
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? { start: undefined, end: undefined },
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<DateRange | null>;
+const modelValue = useVModel(
+  props,
+  'modelValue',
+  emits,
+  {
+    defaultValue: props.defaultValue ?? { start: undefined, end: undefined },
+    passive: (props.modelValue === undefined) as false,
+  },
+) as Ref<DateRange | null>;
 
 const defaultDate = getDefaultDate({
   defaultPlaceholder: props.placeholder,
@@ -140,10 +153,15 @@ const defaultDate = getDefaultDate({
   locale: props.locale,
 });
 
-const placeholder = useVModel(props, 'placeholder', emits, {
-  defaultValue: props.defaultPlaceholder ?? defaultDate.copy(),
-  passive: (props.placeholder === undefined) as false,
-}) as Ref<DateValue>;
+const placeholder = useVModel(
+  props,
+  'placeholder',
+  emits,
+  {
+    defaultValue: props.defaultPlaceholder ?? defaultDate.copy(),
+    passive: (props.placeholder === undefined) as false,
+  },
+) as Ref<DateValue>;
 
 const inferredGranularity = computed(() => {
   if (props.granularity) {
@@ -298,18 +316,18 @@ watch(locale, (value) => {
   }
 });
 
-watch(modelValue, (_modelValue) => {
-  if (
-    _modelValue
-    && _modelValue.start !== undefined
-    && (
-      !isEqualDay(placeholder.value, _modelValue.start)
-      || placeholder.value.compare(_modelValue.start) !== 0
-    )
-  ) {
-    placeholder.value = _modelValue.start.copy();
-  }
-});
+watch(
+  modelValue,
+  (_modelValue) => {
+    if (
+      _modelValue
+      && _modelValue.start !== undefined
+      && placeholder.value.compare(_modelValue.start) !== 0
+    ) {
+      placeholder.value = _modelValue.start.copy();
+    }
+  },
+);
 
 watch([endValue, locale], ([_endValue]) => {
   if (_endValue !== undefined) {

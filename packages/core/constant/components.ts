@@ -205,6 +205,18 @@ export const components = {
     'AListboxVirtualizer',
   ],
 
+  navigationMenu: [
+    'ANavigationMenuContent',
+    'ANavigationMenuIndicator',
+    'ANavigationMenuItem',
+    'ANavigationMenuLink',
+    'ANavigationMenuList',
+    'ANavigationMenuRoot',
+    'ANavigationMenuSub',
+    'ANavigationMenuTrigger',
+    'ANavigationMenuViewport',
+  ],
+
   numberField: [
     'ANumberFieldDecrement',
     'ANumberFieldIncrement',

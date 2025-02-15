@@ -1,12 +1,29 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { DateValue } from '@internationalized/date';
-import { isEqualDay } from '@internationalized/date';
 import { ADateFieldRoot } from '..';
 import { injectADatePickerRootContext } from './date-picker-root.vue';
-</script>
 
-<script setup lang="ts">
 const rootContext = injectADatePickerRootContext();
+
+function handleUpdateModelValue(date: DateValue | undefined) {
+  if (
+    date
+    && rootContext.modelValue.value
+    && date.compare(rootContext.modelValue.value) === 0
+  ) {
+    return;
+  }
+
+  rootContext.onDateChange(date);
+}
+
+function handleUpdatePlaceholder(date: DateValue) {
+  if (date.compare(rootContext.placeholder.value) === 0) {
+    return;
+  }
+
+  rootContext.onPlaceholderChange(date);
+}
 </script>
 
 <template>
@@ -30,14 +47,8 @@ const rootContext = injectADatePickerRootContext();
       required: rootContext.required.value,
       dir: rootContext.dir.value,
     }"
-    @update:model-value="(date: DateValue | undefined) => {
-      if (date && rootContext.modelValue.value && isEqualDay(rootContext.modelValue.value, date) && date.compare(rootContext.modelValue.value) === 0) return
-      rootContext.onDateChange(date)
-    }"
-    @update:placeholder="(date: DateValue) => {
-      if (isEqualDay(rootContext.placeholder.value, date) && date.compare(rootContext.placeholder.value) === 0) return
-      rootContext.onPlaceholderChange(date)
-    }"
+    @update:model-value="handleUpdateModelValue"
+    @update:placeholder="handleUpdatePlaceholder"
   >
     <slot
       :segments="segments"

@@ -50,6 +50,7 @@ const hasInteractedOutside = ref(false);
     side="right"
     :side-offset="2"
     align="start"
+    update-position-strategy="always"
     :style="{
       '--akar-context-menu-content-transform-origin':
         'var(--akar-popper-transform-origin)',

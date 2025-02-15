@@ -61,7 +61,7 @@ export const [injectADateRangePickerRootContext, provideDateRangePickerRootConte
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { ref, toRefs } from 'vue';
+import { ref, toRefs, watch } from 'vue';
 
 defineOptions({
   inheritAttrs: false,
@@ -138,6 +138,15 @@ const open = useVModel(props, 'open', emits, {
 }) as Ref<boolean>;
 
 const dateFieldRef = ref<InstanceType<typeof ADateRangeFieldRoot> | undefined>();
+
+watch(
+  modelValue,
+  (value) => {
+    if (value.start && value.start.compare(placeholder.value) !== 0) {
+      placeholder.value = value.start.copy();
+    }
+  },
+);
 
 provideDateRangePickerRootContext({
   allowNonContiguousRanges,

@@ -64,8 +64,7 @@ const isHighlighted = computed(() => rootContext.highlightedRange.value
     })
   : false);
 
-const SELECTOR
-  = '[data-akar-calendar-cell-trigger]:not([data-disabled]):not([data-outside-month]):not([data-outside-visible-months])';
+const SELECTOR = '[data-akar-calendar-cell-trigger]:not([data-disabled]):not([data-outside-view]):not([data-outside-visible-view])';
 
 const isDateToday = computed(() => {
   return isToday(props.day, getLocalTimeZone());
@@ -210,7 +209,7 @@ function handleArrowKey(event: KeyboardEvent) {
     :aria-label="labelText"
     data-akar-calendar-cell-trigger
     :aria-selected="isSelectedDate && !isUnavailable ? true : undefined"
-    :aria-disabled="isOutsideView || isDisabled || isUnavailable ? true : undefined"
+    :aria-disabled="isDisabled || isUnavailable ? true : undefined"
     :data-highlighted="isHighlighted && !isUnavailable ? '' : undefined"
     :data-selection-start="isSelectionStart ? true : undefined"
     :data-selection-end="isSelectionEnd ? true : undefined"
@@ -219,10 +218,10 @@ function handleArrowKey(event: KeyboardEvent) {
     :data-selected="isSelectedDate && !isUnavailable ? true : undefined"
     :data-outside-visible-view="isOutsideVisibleView ? '' : undefined"
     :data-value="day.toString()"
-    :data-disabled="isDisabled || isOutsideView ? '' : undefined"
+    :data-disabled="isDisabled ? '' : undefined"
     :data-unavailable="isUnavailable ? '' : undefined"
     :data-today="isDateToday ? '' : undefined"
-    :data-outside-month="isOutsideView ? '' : undefined"
+    :data-outside-view="isOutsideView ? '' : undefined"
     :data-focused="isFocusedDate ? '' : undefined"
     :tabindex="isFocusedDate ? 0 : isOutsideView || isDisabled ? undefined : -1"
     @click="handleClick"

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@vinicunca/akar": "link:../packages/core",
-    "@vueuse/core": "^12.5.0"
+    "@vueuse/core": "catalog:"
   },
   "devDependencies": {
     "@iconify/json": "catalog:",
