@@ -201,7 +201,7 @@ watch(locale, (value) => {
 watch(modelValue, (_modelValue) => {
   if (
     !isNullish(_modelValue)
-    || placeholder.value.compare(_modelValue) !== 0
+    && placeholder.value.compare(_modelValue) !== 0
   ) {
     placeholder.value = _modelValue.copy();
   }

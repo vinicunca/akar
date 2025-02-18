@@ -25,6 +25,16 @@ export interface CalendarCellTriggerSlot {
     dayValue: string;
     /** Current disable state */
     disabled: boolean;
+    /** Current selected state */
+    selected: boolean;
+    /** Current today state */
+    today: boolean;
+    /** Current outside view state */
+    outsideView: boolean;
+    /** Current outside visible view state */
+    outsideVisibleView: boolean;
+    /** Current unavailable state */
+    unavailable: boolean;
   }) => any;
 }
 </script>
@@ -59,7 +69,7 @@ const labelText = computed(() => {
 
 const isDisabled = computed(() => rootContext.isDateDisabled(props.day));
 const isUnavailable = computed(() =>
-  rootContext.isDateUnavailable?.(props.day),
+  rootContext.isDateUnavailable?.(props.day) ?? false,
 );
 const isDateToday = computed(() => {
   return isToday(props.day, getLocalTimeZone());
@@ -186,6 +196,11 @@ function handleArrowKey(event: KeyboardEvent) {
     <slot
       :day-value="dayValue"
       :disabled="isDisabled"
+      :today="isDateToday"
+      :selected="isSelectedDate"
+      :outside-view="isOutsideView"
+      :outside-visible-view="isOutsideVisibleView"
+      :unavailable="isUnavailable"
     >
       {{ dayValue }}
     </slot>

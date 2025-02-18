@@ -23,6 +23,26 @@ export interface RangeCalendarCellTriggerSlot {
     dayValue: string;
     /** Current disable state */
     disabled: boolean;
+    /** Current selected state */
+    selected: boolean;
+    /** Current today state */
+    today: boolean;
+    /** Current outside view state */
+    outsideView: boolean;
+    /** Current outside visible view state */
+    outsideVisibleView: boolean;
+    /** Current unavailable state */
+    unavailable: boolean;
+    /** Current highlighted state */
+    highlighted: boolean;
+    /** Current highlighted start state */
+    highlightedStart: boolean;
+    /** Current highlighted end state */
+    highlightedEnd: boolean;
+    /** Current selection start state */
+    selectionStart: boolean;
+    /** Current selection end state */
+    selectionEnd: boolean;
   }) => any;
 }
 </script>
@@ -50,7 +70,7 @@ const labelText = computed(() => rootContext.formatter.custom({
 }));
 
 const isDisabled = computed(() => rootContext.isDateDisabled(props.day));
-const isUnavailable = computed(() => rootContext.isDateUnavailable?.(props.day));
+const isUnavailable = computed(() => rootContext.isDateUnavailable?.(props.day) ?? false);
 const isSelectedDate = computed(() => rootContext.isSelected(props.day));
 const isSelectionStart = computed(() => rootContext.isSelectionStart(props.day));
 const isSelectionEnd = computed(() => rootContext.isSelectionEnd(props.day));
@@ -232,6 +252,16 @@ function handleArrowKey(event: KeyboardEvent) {
     <slot
       :day-value="dayValue"
       :disabled="isDisabled"
+      :today="isDateToday"
+      :selected="isSelectedDate"
+      :outside-view="isOutsideView"
+      :outside-visible-view="isOutsideVisibleView"
+      :unavailable="isUnavailable"
+      :highlighted="isHighlighted && !isUnavailable"
+      :highlighted-start="isHighlightStart"
+      :highlighted-end="isHighlightEnd"
+      :selection-start="isSelectionStart"
+      :selection-end="isSelectionEnd"
     >
       {{ dayValue }}
     </slot>
