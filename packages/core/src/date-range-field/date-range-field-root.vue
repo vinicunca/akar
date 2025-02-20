@@ -17,13 +17,10 @@ import {
 import { createContext, useDateFormatter, useDirection, useLocale } from '~~/shared';
 import {
   createContent,
-
   getDefaultDate,
   getSegmentElements,
-
   initializeSegmentValues,
   isSegmentNavigationKey,
-
   syncSegmentValues,
 } from '~~/shared/date';
 
@@ -279,42 +276,58 @@ const editableSegmentContents = computed(() => ({ start: segmentContents.value.s
 const startValue = ref(modelValue.value?.start?.copy()) as Ref<DateValue | undefined>;
 const endValue = ref(modelValue.value?.end?.copy()) as Ref<DateValue | undefined>;
 
-watch([startValue, endValue], ([_startValue, _endValue]) => {
-  modelValue.value = { start: _startValue?.copy(), end: _endValue?.copy() };
-});
+watch(
+  [startValue, endValue],
+  ([_startValue, _endValue]) => {
+    modelValue.value = { start: _startValue?.copy(), end: _endValue?.copy() };
+  },
+);
 
-watch(modelValue, (_modelValue) => {
-  if (_modelValue && _modelValue.start && _modelValue.end) {
-    if (!startValue.value || _modelValue.start.compare(startValue.value) !== 0) {
-      startValue.value = _modelValue.start.copy();
+watch(
+  modelValue,
+  (_modelValue) => {
+    if (_modelValue && _modelValue.start && _modelValue.end) {
+      if (!startValue.value || _modelValue.start.compare(startValue.value) !== 0) {
+        startValue.value = _modelValue.start.copy();
+      }
+      if (!endValue.value || _modelValue.end.compare(endValue.value) !== 0) {
+        endValue.value = _modelValue.end.copy();
+      }
     }
-    if (!endValue.value || _modelValue.end.compare(endValue.value) !== 0) {
-      endValue.value = _modelValue.end.copy();
+  },
+);
+
+watch(
+  [startValue, locale],
+  ([_startValue]) => {
+    if (_startValue !== undefined) {
+      startSegmentValues.value = { ...syncSegmentValues({ value: _startValue, formatter }) };
+    } else if (
+      // If segment has null value, means that user modified it, thus do not reset the segmentValues
+      Object.values(startSegmentValues.value).every((value) => value !== null)
+      && _startValue === undefined
+    ) {
+      startSegmentValues.value = { ...initialSegments };
     }
-  }
-});
+  },
+);
 
-watch([startValue, locale], ([_startValue]) => {
-  if (_startValue !== undefined) {
-    startSegmentValues.value = { ...syncSegmentValues({ value: _startValue, formatter }) };
-  } else if (Object.values(startSegmentValues.value).every((value) => value === null) || _startValue === undefined) {
-    startSegmentValues.value = { ...initialSegments };
-  }
-});
-
-watch(locale, (value) => {
-  if (formatter.getLocale() !== value) {
-    formatter.setLocale(value);
-    // Locale changed, so we need to clear the segment elements and re-get them (different order)
-    // Get the focusable elements again on the next tick
-    nextTick(() => {
-      segmentElements.value.clear();
-      getSegmentElements(parentElement.value).forEach((item) => {
-        segmentElements.value.add(item as HTMLElement);
+watch(
+  locale,
+  (value) => {
+    if (formatter.getLocale() !== value) {
+      formatter.setLocale(value);
+      // Locale changed, so we need to clear the segment elements and re-get them (different order)
+      // Get the focusable elements again on the next tick
+      nextTick(() => {
+        segmentElements.value.clear();
+        getSegmentElements(parentElement.value).forEach((item) => {
+          segmentElements.value.add(item as HTMLElement);
+        });
       });
-    });
-  }
-});
+    }
+  },
+);
 
 watch(
   modelValue,

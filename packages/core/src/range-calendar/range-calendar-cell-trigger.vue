@@ -10,7 +10,6 @@ import {
 } from '@internationalized/date';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
-import { isDateBetweenInclusive, toDate } from '~~/date';
 
 export interface ARangeCalendarCellTriggerProps extends APrimitiveProps {
   day: DateValue;
@@ -48,10 +47,14 @@ export interface RangeCalendarCellTriggerSlot {
 </script>
 
 <script setup lang="ts">
+import { getDaysInMonth, isDateBetweenInclusive, toDate } from '~~/date';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
-const props = withDefaults(defineProps<ARangeCalendarCellTriggerProps>(), { as: 'div' });
+const props = withDefaults(
+  defineProps<ARangeCalendarCellTriggerProps>(),
+  { as: 'div' },
+);
 
 defineSlots<RangeCalendarCellTriggerSlot>();
 
@@ -196,12 +199,27 @@ function handleArrowKey(event: KeyboardEvent) {
     if (rootContext.isPrevButtonDisabled()) {
       return;
     }
+
     rootContext.prevPage();
+
     nextTick(() => {
       const newCollectionItems: Array<HTMLElement> = parentElement
         ? Array.from(parentElement.querySelectorAll(SELECTOR))
         : [];
-      newCollectionItems[newCollectionItems.length - Math.abs(newIndex)].focus();
+
+      if (!rootContext.pagedNavigation.value) {
+        // Placeholder is set to first month of the new page
+        const numberOfDays = getDaysInMonth(rootContext.placeholder.value);
+        newCollectionItems[
+          numberOfDays - Math.abs(newIndex)
+        ].focus();
+
+        return;
+      }
+
+      newCollectionItems[
+        newCollectionItems.length - Math.abs(newIndex)
+      ].focus();
     });
     return;
   }
@@ -215,6 +233,15 @@ function handleArrowKey(event: KeyboardEvent) {
       const newCollectionItems: Array<HTMLElement> = parentElement
         ? Array.from(parentElement.querySelectorAll(SELECTOR))
         : [];
+
+      if (!rootContext.pagedNavigation.value) {
+        // Placeholder is set to first month of the new page
+        const numberOfDays = getDaysInMonth(rootContext.placeholder.value.add({ months: rootContext.numberOfMonths.value - 1 }));
+        newCollectionItems[newCollectionItems.length - numberOfDays + newIndex - allCollectionItems.length].focus();
+
+        return;
+      }
+
       newCollectionItems[newIndex - allCollectionItems.length].focus();
     });
   }

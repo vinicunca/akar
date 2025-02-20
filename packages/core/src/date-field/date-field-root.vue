@@ -198,25 +198,32 @@ watch(locale, (value) => {
   }
 });
 
-watch(modelValue, (_modelValue) => {
-  if (
-    !isNullish(_modelValue)
-    && placeholder.value.compare(_modelValue) !== 0
-  ) {
-    placeholder.value = _modelValue.copy();
-  }
-});
+watch(
+  modelValue,
+  (_modelValue) => {
+    if (
+      !isNullish(_modelValue)
+      && placeholder.value.compare(_modelValue) !== 0
+    ) {
+      placeholder.value = _modelValue.copy();
+    }
+  },
+);
 
-watch([modelValue, locale], ([_modelValue]) => {
-  if (!isNullish(_modelValue)) {
-    segmentValues.value = { ...syncSegmentValues({ value: _modelValue, formatter }) };
-  } else if (
-    Object.values(segmentValues.value).every((value) => value === null)
-    || isNullish(_modelValue)
-  ) {
-    segmentValues.value = { ...initialSegments };
-  }
-});
+watch(
+  [modelValue, locale],
+  ([_modelValue]) => {
+    if (!isNullish(_modelValue)) {
+      segmentValues.value = { ...syncSegmentValues({ value: _modelValue, formatter }) };
+    } else if (
+      // If segment has null value, means that user modified it, there fore do not reset the segmentValues
+      Object.values(segmentValues.value).every((value) => value !== null)
+      && isNullish(_modelValue)
+    ) {
+      segmentValues.value = { ...initialSegments };
+    }
+  },
+);
 
 const currentFocusedElement = ref<HTMLElement | null>(null);
 

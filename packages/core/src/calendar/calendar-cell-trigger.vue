@@ -10,7 +10,7 @@ import {
 } from '@internationalized/date';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
-import { toDate } from '~~/date';
+import { getDaysInMonth, toDate } from '~~/date';
 
 export interface ACalendarCellTriggerProps extends APrimitiveProps {
   /** The date value provided to the cell trigger */
@@ -145,15 +145,28 @@ function handleArrowKey(event: KeyboardEvent) {
     if (rootContext.isPrevButtonDisabled()) {
       return;
     }
+
     rootContext.prevPage();
+
     nextTick(() => {
       const newCollectionItems: Array<HTMLElement> = parentElement
         ? Array.from(parentElement.querySelectorAll(SELECTOR))
         : [];
+
+      if (!rootContext.pagedNavigation.value) {
+        // Placeholder is set to first month of the new page
+        const numberOfDays = getDaysInMonth(rootContext.placeholder.value);
+        newCollectionItems[
+          numberOfDays - Math.abs(newIndex)
+        ].focus();
+        return;
+      }
+
       newCollectionItems[
         newCollectionItems.length - Math.abs(newIndex)
       ].focus();
     });
+
     return;
   }
 
@@ -161,11 +174,21 @@ function handleArrowKey(event: KeyboardEvent) {
     if (rootContext.isNextButtonDisabled()) {
       return;
     }
+
     rootContext.nextPage();
+
     nextTick(() => {
       const newCollectionItems: Array<HTMLElement> = parentElement
         ? Array.from(parentElement.querySelectorAll(SELECTOR))
         : [];
+
+      if (!rootContext.pagedNavigation.value) {
+        // Placeholder is set to first month of the new page
+        const numberOfDays = getDaysInMonth(rootContext.placeholder.value.add({ months: rootContext.numberOfMonths.value - 1 }));
+        newCollectionItems[newCollectionItems.length - numberOfDays + newIndex - allCollectionItems.length].focus();
+        return;
+      }
+
       newCollectionItems[newIndex - allCollectionItems.length].focus();
     });
   }
