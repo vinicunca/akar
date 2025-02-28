@@ -20,8 +20,10 @@ interface ListboxItemContext {
   isSelected: Ref<boolean>;
 }
 
-export const [injectAListboxItemContext, provideListboxItemContext]
-  = createContext<ListboxItemContext>('AListboxItem');
+export const [
+  injectAListboxItemContext,
+  provideListboxItemContext,
+] = createContext<ListboxItemContext>('AListboxItem');
 </script>
 
 <script setup lang="ts"  generic="T extends AcceptableValue = AcceptableValue">

@@ -13,3 +13,6 @@ export {
   type ARadioGroupRootProps,
   injectARadioGroupRootContext,
 } from './radio-group-root.vue';
+export {
+  type SelectEvent as ARadioGroupItemSelectEvent,
+} from './utils';

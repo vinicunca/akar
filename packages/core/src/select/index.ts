@@ -33,6 +33,7 @@ export {
 export {
   default as ASelectItem,
   type ASelectItemProps,
+  type SelectEvent as ASelectItemSelectEvent,
   injectASelectItemContext,
 } from './select-item.vue';
 

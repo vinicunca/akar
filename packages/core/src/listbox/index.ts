@@ -24,6 +24,7 @@ export {
   default as AListboxItem,
   type AListboxItemEmits,
   type AListboxItemProps,
+  type SelectEvent as AListboxItemSelectEvent,
   injectAListboxItemContext,
 } from './listbox-item.vue';
 export {

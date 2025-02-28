@@ -55,7 +55,7 @@ export const [
 </script>
 
 <script setup lang="ts">
-import { isEqualDay, isSameDay } from '@internationalized/date';
+import { isSameDay } from '@internationalized/date';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs, watch } from 'vue';
 import { getDefaultDate } from '~~/shared/date';
@@ -188,9 +188,7 @@ provideDatePickerRootContext({
     }
   },
   onPlaceholderChange(date: DateValue) {
-    if (!isEqualDay(date, placeholder.value)) {
-      placeholder.value = date.copy();
-    }
+    placeholder.value = date.copy();
   },
 });
 </script>
