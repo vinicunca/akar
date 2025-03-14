@@ -43,7 +43,7 @@ export type AComboboxRootEmits<T = AcceptableValue> = {
   'update:open': [value: boolean];
 };
 
-export interface AComboboxRootProps<T = AcceptableValue> extends Omit<AListboxRootProps<T>, 'orientation' | 'selectionBehavior' > {
+export interface AComboboxRootProps<T = AcceptableValue> extends Omit<AListboxRootProps<T>, 'orientation' | 'selectionBehavior'> {
   /** The controlled open state of the Combobox. Can be binded with with `v-model:open`. */
   open?: boolean;
   /** The open state of the combobox when it is initially rendered. <br> Use when you do not need to control its open state. */
@@ -107,7 +107,7 @@ const dir = useDirection(propDir);
 
 const modelValue = useVModel(props, 'modelValue', emits, {
   // @ts-expect-error ignore the type error here
-  defaultValue: props.defaultValue ?? multiple.value ? [] : undefined,
+  defaultValue: props.defaultValue ?? (multiple.value ? [] : undefined),
   passive: (props.modelValue === undefined) as false,
   deep: true,
 }) as Ref<Array<T> | T>;
