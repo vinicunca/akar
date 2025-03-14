@@ -27,6 +27,8 @@ export interface ASliderRootProps extends APrimitiveProps, FormFieldProps {
   step?: number;
   /** The minimum permitted steps between multiple thumbs. */
   minStepsBetweenThumbs?: number;
+  /** When `true`, slider thumb will not include the inbound pixel offset */
+  disableThumbOffset?: true;
 }
 
 export type ASliderRootEmits = {
@@ -51,6 +53,7 @@ export interface SliderRootContext {
   currentModelValue: ComputedRef<Array<number>>;
   valueIndexToChangeRef: Ref<number>;
   thumbElements: Ref<Array<HTMLElement>>;
+  disableThumbOffset: Ref<boolean>;
 }
 
 export const [injectASliderRootContext, provideSliderRootContext]
@@ -63,7 +66,15 @@ import { computed, ref, toRaw, toRefs } from 'vue';
 import { AVisuallyHiddenInput } from '~~/visually-hidden';
 import SliderHorizontal from './slider-horizontal.vue';
 import SliderVertical from './slider-vertical.vue';
-import { ARROW_KEYS, getClosestValueIndex, getDecimalCount, getNextSortedValues, hasMinStepsBetweenValues, PAGE_KEYS, roundValue } from './utils';
+import {
+  ARROW_KEYS,
+  getClosestValueIndex,
+  getDecimalCount,
+  getNextSortedValues,
+  hasMinStepsBetweenValues,
+  PAGE_KEYS,
+  roundValue,
+} from './utils';
 
 defineOptions({
   inheritAttrs: false,
@@ -88,7 +99,16 @@ defineSlots<{
   }) => any;
 }>();
 
-const { min, max, step, minStepsBetweenThumbs, orientation, disabled, dir: propDir } = toRefs(props);
+const {
+  min,
+  max,
+  step,
+  minStepsBetweenThumbs,
+  orientation,
+  disabled,
+  disableThumbOffset,
+  dir: propDir,
+} = toRefs(props);
 const dir = useDirection(propDir);
 const { forwardRef, currentElement } = useForwardExpose();
 const isFormControl = useFormControl(currentElement);
@@ -154,6 +174,7 @@ provideSliderRootContext({
   min,
   max,
   disabled,
+  disableThumbOffset,
 });
 </script>
 
