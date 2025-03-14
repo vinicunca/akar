@@ -68,7 +68,16 @@ export interface AComboboxRootProps<T = AcceptableValue> extends Omit<AListboxRo
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import type { EventHookOn } from '@vueuse/core';
 import { createEventHook, useVModel } from '@vueuse/core';
-import { computed, nextTick, reactive, ref, toRefs, watch } from 'vue';
+import {
+  computed,
+  getCurrentInstance,
+  nextTick,
+  onMounted,
+  reactive,
+  ref,
+  toRefs,
+  watch,
+} from 'vue';
 import { AListboxRoot } from '~~/listbox';
 import { APopperRoot } from '~~/popper';
 
@@ -216,6 +225,15 @@ watch(
   },
   { flush: 'post' },
 );
+
+const currentInstance = getCurrentInstance();
+onMounted(() => {
+  if (currentInstance?.exposed) {
+    currentInstance.exposed.highlightItem = primitiveElement.value?.highlightItem;
+    currentInstance.exposed.highlightFirstItem = primitiveElement.value?.highlightFirstItem;
+    currentInstance.exposed.highlightSelected = primitiveElement.value?.highlightSelected;
+  }
+});
 
 defineExpose({
   filtered: computed(() => filterState.filtered),
