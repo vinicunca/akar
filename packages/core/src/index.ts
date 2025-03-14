@@ -49,6 +49,7 @@ export { AVisuallyHidden, type AVisuallyHiddenProps } from './visually-hidden';
 export {
   createContext,
   type DateRange,
+  type DateValue,
   useBodyScrollLock,
   type UseDateFormatter,
   useDateFormatter,

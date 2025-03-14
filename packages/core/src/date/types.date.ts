@@ -4,6 +4,8 @@
 
 import type { DateValue } from '@internationalized/date';
 
+export type { DateValue };
+
 export type DateMatcher = (date: DateValue) => boolean;
 
 export interface DateGrid<T> {

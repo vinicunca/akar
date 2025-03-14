@@ -30,6 +30,7 @@ export type {
   DateRange,
   DateSegmentObj,
   DateSegmentPart,
+  DateValue,
   DayOfWeek,
   DayPeriod,
   HourCycle,

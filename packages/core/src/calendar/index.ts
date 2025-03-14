@@ -48,5 +48,7 @@ export {
   default as ACalendarRoot,
   type ACalendarRootEmits,
   type ACalendarRootProps,
+  type AMultipleCalendarRootProps,
+  type ASingleCalendarRootProps,
   injectACalendarRootContext,
 } from './calendar-root.vue';

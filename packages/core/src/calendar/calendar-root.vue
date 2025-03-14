@@ -89,21 +89,21 @@ interface BaseCalendarRootProps extends APrimitiveProps {
   prevPage?: (placeholder: DateValue) => DateValue;
 }
 
-export interface MultipleCalendarRootProps extends BaseCalendarRootProps {
+export interface AMultipleCalendarRootProps extends BaseCalendarRootProps {
   /** The controlled checked state of the calendar. Can be bound as `v-model`. */
   modelValue?: Array<DateValue> | undefined;
   /** Whether or not multiple dates can be selected */
-  multiple: true;
+  multiple?: true;
 }
 
-export interface SingleCalendarRootProps extends BaseCalendarRootProps {
+export interface ASingleCalendarRootProps extends BaseCalendarRootProps {
   /** The controlled checked state of the calendar. Can be bound as `v-model`. */
   modelValue?: DateValue | undefined;
   /** Whether or not multiple dates can be selected */
   multiple?: false;
 }
 
-export type ACalendarRootProps = MultipleCalendarRootProps | SingleCalendarRootProps;
+export type ACalendarRootProps = AMultipleCalendarRootProps | ASingleCalendarRootProps;
 
 export type ACalendarRootEmits = {
   /** Event handler called whenever the model value changes */
@@ -186,8 +186,10 @@ const {
   locale: propLocale,
 } = toRefs(props);
 
-const { primitiveElement, currentElement: parentElement }
-  = usePrimitiveElement();
+const {
+  primitiveElement,
+  currentElement: parentElement,
+} = usePrimitiveElement();
 const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
 
