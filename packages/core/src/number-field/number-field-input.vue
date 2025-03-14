@@ -19,6 +19,10 @@ const { primitiveElement, currentElement } = usePrimitiveElement();
 const rootContext = injectANumberFieldRootContext();
 
 function handleWheelEvent(event: WheelEvent) {
+  if (rootContext.disableWheelChange.value) {
+    return;
+  }
+
   // only handle when in focus
   if (event.target !== getActiveElement()) {
     return;

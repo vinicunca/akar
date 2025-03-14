@@ -23,6 +23,8 @@ export interface ANumberFieldRootProps extends APrimitiveProps, FormFieldProps {
   locale?: string;
   /** When `true`, prevents the user from interacting with the Number Field. */
   disabled?: boolean;
+  /** When `true`, prevents the value from changing on wheel scroll. */
+  disableWheelChange?: boolean;
   /** Id of the element */
   id?: string;
 }
@@ -43,6 +45,7 @@ interface NumberFieldRootContext {
   validate: (val: string) => boolean;
   applyInputValue: (val: string) => void;
   disabled: Ref<boolean>;
+  disableWheelChange: Ref<boolean>;
   max: Ref<number | undefined>;
   min: Ref<number | undefined>;
   isDecreaseDisabled: Ref<boolean>;
@@ -75,6 +78,7 @@ const props = withDefaults(defineProps<ANumberFieldRootProps>(), {
 const emits = defineEmits<ANumberFieldRootEmits>();
 const {
   disabled,
+  disableWheelChange,
   min,
   max,
   step,
@@ -250,6 +254,7 @@ provideNumberFieldRootContext({
   validate,
   applyInputValue,
   disabled,
+  disableWheelChange,
   max,
   min,
   isDecreaseDisabled,

@@ -21,6 +21,14 @@ function setup(props?: ANumberFieldRootProps) {
 }
 
 describe('numberField', () => {
+  beforeEach(() => {
+    // @ts-expect-error axe throwing error complaining getComputedStyle
+    window.getComputedStyle = () => ({
+      display: '',
+    });
+    document.body.innerHTML = '';
+  });
+
   it('should pass axe accessibility tests', async () => {
     const { root } = setup();
     expect(await axe(root)).toHaveNoViolations();
@@ -108,6 +116,33 @@ describe('numberField', () => {
     expect(input.value).toBe('0');
     await userEvent.click(decrement);
     expect(input.value).toBe('0');
+  });
+
+  describe('with disable wheel change option', () => {
+    it('should update value when scroll by default', async () => {
+      const { input } = setup({
+        defaultValue: 10,
+      });
+      input.focus();
+      expect(input.value).toBe('10');
+      await fireEvent.wheel(input, {
+        deltaY: 100, // Positive value for scrolling down
+      });
+      expect(input.value).toBe('11');
+    });
+
+    it('should not update value when `disableWheelChange` is `true`', async () => {
+      const { input } = setup({
+        defaultValue: 10,
+        disableWheelChange: true,
+      });
+      input.focus();
+      expect(input.value).toBe('10');
+      await fireEvent.wheel(input, {
+        deltaY: 100, // Positive value for scrolling down
+      });
+      expect(input.value).toBe('10');
+    });
   });
 
   describe('with different formatOptions', () => {
