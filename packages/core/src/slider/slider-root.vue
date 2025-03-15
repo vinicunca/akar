@@ -6,6 +6,8 @@ import { clamp, isIncludedIn } from '@vinicunca/perkakas';
 import { useCollection } from '~~/collection';
 import { createContext, useDirection, useFormControl, useForwardExpose } from '~~/shared';
 
+type ThumbAlignment = 'contain' | 'overflow';
+
 export interface ASliderRootProps extends APrimitiveProps, FormFieldProps {
   /** The value of the slider when initially rendered. Use when you do not need to control the state of the slider. */
   defaultValue?: Array<number>;
@@ -27,8 +29,13 @@ export interface ASliderRootProps extends APrimitiveProps, FormFieldProps {
   step?: number;
   /** The minimum permitted steps between multiple thumbs. */
   minStepsBetweenThumbs?: number;
-  /** When `true`, slider thumb will not include the inbound pixel offset */
-  disableThumbOffset?: true;
+  /**
+   * The alignment of the slider thumb.
+   * - `contain`: thumbs will be contained within the bounds of the track.
+   * - `overflow`: thumbs will not be bound by the track. No extra offset will be added.
+   * @defaultValue 'contain'
+   */
+  thumbAlignment?: ThumbAlignment;
 }
 
 export type ASliderRootEmits = {
@@ -53,7 +60,7 @@ export interface SliderRootContext {
   currentModelValue: ComputedRef<Array<number>>;
   valueIndexToChangeRef: Ref<number>;
   thumbElements: Ref<Array<HTMLElement>>;
-  disableThumbOffset: Ref<boolean>;
+  thumbAlignment: Ref<ThumbAlignment>;
 }
 
 export const [injectASliderRootContext, provideSliderRootContext]
@@ -89,6 +96,7 @@ const props = withDefaults(defineProps<ASliderRootProps>(), {
   minStepsBetweenThumbs: 0,
   defaultValue: () => [0],
   inverted: false,
+  thumbAlignment: 'contain',
 });
 const emits = defineEmits<ASliderRootEmits>();
 
@@ -106,7 +114,7 @@ const {
   minStepsBetweenThumbs,
   orientation,
   disabled,
-  disableThumbOffset,
+  thumbAlignment,
   dir: propDir,
 } = toRefs(props);
 const dir = useDirection(propDir);
@@ -174,7 +182,7 @@ provideSliderRootContext({
   min,
   max,
   disabled,
-  disableThumbOffset,
+  thumbAlignment,
 });
 </script>
 
