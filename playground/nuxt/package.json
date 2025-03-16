@@ -18,7 +18,7 @@
     "@unocss/nuxt": "catalog:",
     "@vinicunca/unocss-preset": "catalog:",
     "nuxt": "catalog:",
-    "vue": "latest",
-    "vue-router": "latest"
+    "vue": "catalog:",
+    "vue-router": "catalog:"
   }
 }

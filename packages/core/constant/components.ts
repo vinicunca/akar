@@ -149,6 +149,19 @@ export const components = {
     'ADialogTrigger',
   ],
 
+  drawer: [
+    'ADrawerContent',
+    'ADrawerHandle',
+    'ADrawerOverlay',
+    'ADrawerRoot',
+    'ADrawerRootNested',
+    'ADrawerClose',
+    'ADrawerDescription',
+    'ADrawerPortal',
+    'ADrawerTitle',
+    'ADrawerTrigger',
+  ],
+
   dropdownMenu: [
     'ADropdownMenuArrow',
     'ADropdownMenuCheckboxItem',

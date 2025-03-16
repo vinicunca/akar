@@ -12,6 +12,7 @@ export default vinicuncaESLint(
     },
     unocss: true,
     vue: true,
+    pnpm: true,
   },
 
   {
