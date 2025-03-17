@@ -3,7 +3,6 @@ import router from '~~/router';
 import App from './App.vue';
 
 import 'uno.css';
-import './drawer.css';
 
 const app = createApp(App);
 

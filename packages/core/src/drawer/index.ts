@@ -28,3 +28,13 @@ export {
   ADialogTrigger as ADrawerTrigger,
   type ADialogTriggerProps as ADrawerTriggerProps,
 } from '../dialog';
+
+export type {
+  ADrawerRootEmits,
+  ADrawerRootProps,
+} from './drawer.controls';
+
+export type {
+  ADrawerDirection,
+  SnapPoint,
+} from './drawer.types';

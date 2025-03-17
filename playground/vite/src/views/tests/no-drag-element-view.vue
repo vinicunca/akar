@@ -1,40 +1,65 @@
 <script setup lang="ts">
-import { DrawerContent, DrawerOverlay, DrawerPortal, DrawerRoot, DrawerTrigger } from 'akar-vue'
+import {
+  ADrawerContent,
+  ADrawerOverlay,
+  ADrawerPortal,
+  ADrawerRoot,
+  ADrawerTrigger,
+} from '@vinicunca/akar';
 </script>
 
 <template>
   <div
-    class="w-screen h-screen bg-white p-8 flex justify-center items-center"
+    class="h-screen w-screen flex items-center justify-center bg-white p-8"
     data-akar-drawer-wrapper=""
   >
-    <DrawerRoot should-scale-background>
-      <DrawerTrigger
-        class="rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+    <ADrawerRoot should-scale-background>
+      <ADrawerTrigger
+        class="rounded-full bg-white px-4 py-2.5 text-sm text-gray-900 font-semibold shadow-sm ring-1 ring-gray-300 ring-inset hover:bg-gray-50"
       >
-        <button data-testid="trigger" class="text-2xl">
+        <button
+          data-testid="trigger"
+          class="text-2xl"
+        >
           Open Drawer
         </button>
-      </DrawerTrigger>
-      <DrawerPortal>
-        <DrawerOverlay data-testid="overlay" class="fixed bg-black/40 inset-0" />
-        <DrawerContent
+      </ADrawerTrigger>
+      <ADrawerPortal>
+        <ADrawerOverlay
+          data-testid="overlay"
+          class="fixed inset-0 bg-black/40"
+        />
+        <ADrawerContent
           data-testid="content"
-          class="bg-gray-100 flex flex-col rounded-t-[10px] h-full mt-24 max-h-[96%] fixed bottom-0 left-0 right-0"
+          class="fixed bottom-0 left-0 right-0 mt-24 h-full max-h-[96%] flex flex-col rounded-t-[10px] bg-gray-100"
         >
-          <div class="p-4 bg-white rounded-t-[10px] flex-1">
-            <div data-testid="handler" class="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-gray-300 mb-8" />
-            <div class="max-w-md mx-auto" data-akar-no-drag>
-              <h2 id="radix-:R3emdaH1:" class="font-medium mb-4">
+          <div class="flex-1 rounded-t-[10px] bg-white p-4">
+            <div
+              data-testid="handler"
+              class="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-gray-300"
+            />
+            <div
+              class="mx-auto max-w-md"
+              data-akar-no-drag
+            >
+              <h2
+                id="radix-:R3emdaH1:"
+                class="mb-4 font-medium"
+              >
                 The whole content is not draggable
               </h2>
-              <p class="text-gray-600 mb-2">
+              <p class="mb-2 text-gray-600">
                 This component can be used as a Dialog replacement on mobile and tablet devices.
               </p>
-              <p class="text-gray-600 mb-2">
+              <p class="mb-2 text-gray-600">
                 It comes unstyled, has gesture-driven animations, and is made by
-                <a href="https://emilkowal.ski/" class="underline" target="_blank">Emil Kowalski</a>.
+                <a
+                  href="https://emilkowal.ski/"
+                  class="underline"
+                  target="_blank"
+                >Emil Kowalski</a>.
               </p>
-              <p class="text-gray-600 mb-8">
+              <p class="mb-8 text-gray-600">
                 It uses
                 <a
                   href="https://www.radix-ui.com/docs/primitives/components/dialog"
@@ -50,8 +75,8 @@ import { DrawerContent, DrawerOverlay, DrawerPortal, DrawerRoot, DrawerTrigger }
               </p>
             </div>
           </div>
-        </DrawerContent>
-      </DrawerPortal>
-    </DrawerRoot>
+        </ADrawerContent>
+      </ADrawerPortal>
+    </ADrawerRoot>
   </div>
 </template>

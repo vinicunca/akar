@@ -1,48 +1,53 @@
 <script setup lang="ts">
+import type { ADrawerDirection } from '@vinicunca/akar';
 import {
-  DrawerClose,
-  type DrawerDirection,
-  DrawerOverlay,
-  DrawerPortal,
-  DrawerRoot,
-  DrawerTitle,
-  DrawerTrigger,
-} from 'akar-vue'
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-import DrawerContentWrapper from '../../components/DrawerContent.vue'
+  ADrawerOverlay,
+  ADrawerPortal,
+  ADrawerRoot,
+  ADrawerTitle,
+  ADrawerTrigger,
+} from '@vinicunca/akar';
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+import DrawerContentWrapper from '../../components/drawer-content.vue';
 
-const route = useRoute()
-const direction = ref<DrawerDirection>(route.query.direction as DrawerDirection ?? 'bottom')
+const route = useRoute();
+const direction = ref<ADrawerDirection>(route.query.direction as ADrawerDirection ?? 'bottom');
 </script>
 
 <template>
   <div
-    class="w-screen h-screen bg-white p-8 flex justify-center items-center"
+    class="h-screen w-screen flex items-center justify-center bg-white p-8"
     data-akar-drawer-wrapper=""
   >
-    <DrawerRoot :direction="direction">
-      <DrawerTrigger as-child>
-        <button data-testid="trigger" class="text-2xl">
+    <ADrawerRoot :direction="direction">
+      <ADrawerTrigger as-child>
+        <button
+          data-testid="trigger"
+          class="text-2xl"
+        >
           Open Drawer
         </button>
-      </DrawerTrigger>
-      <DrawerPortal>
-        <DrawerOverlay data-testid="overlay" class="fixed inset-0 bg-black/40" />
+      </ADrawerTrigger>
+      <ADrawerPortal>
+        <ADrawerOverlay
+          data-testid="overlay"
+          class="fixed inset-0 bg-black/40"
+        />
         <DrawerContentWrapper
           :direction="direction"
         >
-          <div class="max-w-md mx-auto">
-            <DrawerTitle class="font-medium mb-4">
+          <div class="mx-auto max-w-md">
+            <ADrawerTitle class="mb-4 font-medium">
               Unstyled drawer for Vue.
-            </DrawerTitle>
-            <p class="text-zinc-600 mb-2">
+            </ADrawerTitle>
+            <p class="mb-2 text-zinc-600">
               This component can be used as a replacement for a Dialog on mobile and tablet devices.
             </p>
           </div>
         </DrawerContentWrapper>
-      </DrawerPortal>
-    </DrawerRoot>
+      </ADrawerPortal>
+    </ADrawerRoot>
   </div>
 </template>
 

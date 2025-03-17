@@ -1,43 +1,59 @@
 <script setup lang="ts">
-import { DrawerContent, DrawerOverlay, DrawerPortal, DrawerRoot, DrawerTrigger } from 'akar-vue'
-import { computed, ref } from 'vue'
+import {
+  ADrawerContent,
+  ADrawerOverlay,
+  ADrawerPortal,
+  ADrawerRoot,
+  ADrawerTrigger,
+} from '@vinicunca/akar';
+import { computed, ref } from 'vue';
 
-const snapPoints = ['148px', '355px', 1]
+const snapPoints = ['148px', '355px', 1];
 
-const snap = ref<number | string | null>(snapPoints[0])
+const snap = ref<number | string | null>(snapPoints[0]);
 
-const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as string))
+const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as string));
 
-const open = ref<boolean>(false)
+const open = ref<boolean>(false);
 </script>
 
 <template>
   <div
-    class="w-screen h-screen bg-white p-8 flex justify-center items-center"
+    class="h-screen w-screen flex items-center justify-center bg-white p-8"
     data-akar-drawer-wrapper=""
   >
     <div data-testid="active-snap-index">
       {{ activeSnapPointIndex }}
     </div>
-    <DrawerRoot v-model:open="open" v-model:active-snap-point="snap" :snap-points="snapPoints">
-      <DrawerTrigger as-child>
-        <button data-testid="trigger" class="text-2xl">
+    <ADrawerRoot
+      v-model:open="open"
+      v-model:active-snap-point="snap"
+      :snap-points="snapPoints"
+    >
+      <ADrawerTrigger as-child>
+        <button
+          data-testid="trigger"
+          class="text-2xl"
+        >
           Open Drawer
         </button>
-      </DrawerTrigger>
-      <DrawerPortal>
-        <DrawerOverlay data-testid="overlay" class="fixed inset-0 bg-black/40" />
-        <DrawerContent
+      </ADrawerTrigger>
+      <ADrawerPortal>
+        <ADrawerOverlay
+          data-testid="overlay"
+          class="fixed inset-0 bg-black/40"
+        />
+        <ADrawerContent
           data-testid="content"
-          class="fixed flex flex-col bg-white border border-gray-200 border-b-none rounded-t-[10px] bottom-0 left-0 right-0 h-full max-h-[97%] mx-[-1px]"
+          class="fixed bottom-0 left-0 right-0 mx-[-1px] h-full max-h-[97%] flex flex-col border border-gray-200 rounded-t-[10px] border-b-none bg-white"
         >
           <div
-            class="flex flex-col max-w-md mx-auto w-full p-4 pt-5"
+            class="mx-auto max-w-md w-full flex flex-col p-4 pt-5"
             :class="snap === 1 ? 'overflow-y-auto' : 'overflow-hidden'"
           >
             <div class="flex items-center">
               <svg
-                class="text-yellow-400 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-yellow-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -49,7 +65,7 @@ const open = ref<boolean>(false)
                 />
               </svg>
               <svg
-                class="text-yellow-400 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-yellow-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -61,7 +77,7 @@ const open = ref<boolean>(false)
                 />
               </svg>
               <svg
-                class="text-yellow-400 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-yellow-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -73,7 +89,7 @@ const open = ref<boolean>(false)
                 />
               </svg>
               <svg
-                class="text-yellow-400 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-yellow-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -85,7 +101,7 @@ const open = ref<boolean>(false)
                 />
               </svg>
               <svg
-                class="text-gray-300 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-gray-300"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -97,10 +113,10 @@ const open = ref<boolean>(false)
                 />
               </svg>
             </div>
-            <h1 class="text-2xl mt-2 font-medium">
+            <h1 class="mt-2 text-2xl font-medium">
               The Hidden Details
             </h1>
-            <p class="text-sm mt-1 text-gray-600 mb-6">
+            <p class="mb-6 mt-1 text-sm text-gray-600">
               2 modules, 27 hours of video
             </p>
             <p class="text-gray-600">
@@ -109,7 +125,7 @@ const open = ref<boolean>(false)
               eye, a beautifully designed UI.
             </p>
             <button
-              class="bg-black text-gray-50 mt-8 rounded-md h-[48px] flex-shrink-0 font-medium"
+              class="mt-8 h-[48px] flex-shrink-0 rounded-md bg-black text-gray-50 font-medium"
             >
               Buy for $199
             </button>
@@ -117,7 +133,7 @@ const open = ref<boolean>(false)
               <h2 class="text-xl font-medium">
                 Module 01. The Details
               </h2>
-              <div class="space-y-4 mt-4">
+              <div class="mt-4 space-y-4">
                 <div>
                   <span class="block">Layers of UI</span>
                   <span class="text-gray-600">A basic introduction to Layers of Design.</span>
@@ -139,7 +155,7 @@ const open = ref<boolean>(false)
                   just reading it. Can&rsquo;t wait for more course content!”
                 </blockquote>
                 <figcaption>
-                  <span class="text-sm text-gray-600 mt-2 block">Yvonne Ray, Frontend Developer</span>
+                  <span class="mt-2 block text-sm text-gray-600">Yvonne Ray, Frontend Developer</span>
                 </figcaption>
               </figure>
             </div>
@@ -147,7 +163,7 @@ const open = ref<boolean>(false)
               <h2 class="text-xl font-medium">
                 Module 02. The Process
               </h2>
-              <div class="space-y-4 mt-4">
+              <div class="mt-4 space-y-4">
                 <div>
                   <span class="block">Build</span>
                   <span class="text-gray-600">Create cool components to practice.</span>
@@ -163,9 +179,9 @@ const open = ref<boolean>(false)
               </div>
             </div>
           </div>
-        </DrawerContent>
-      </DrawerPortal>
-    </DrawerRoot>
+        </ADrawerContent>
+      </ADrawerPortal>
+    </ADrawerRoot>
   </div>
 </template>
 

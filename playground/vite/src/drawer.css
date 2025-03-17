@@ -7,31 +7,31 @@
 }
 
 [data-akar-drawer][data-akar-snap-points='false'][data-akar-drawer-direction='bottom'][data-state='open'] {
-  animation-name: slideFromBottom;
+  animation-name: drawer-slide-from-bottom;
 }
 [data-akar-drawer][data-akar-snap-points='false'][data-akar-drawer-direction='bottom'][data-state='closed'] {
-  animation-name: slideToBottom;
+  animation-name: drawer-slide-to-bottom;
 }
 
 [data-akar-drawer][data-akar-snap-points='false'][data-akar-drawer-direction='top'][data-state='open'] {
-  animation-name: slideFromTop;
+  animation-name: drawer-slide-from-top;
 }
 [data-akar-drawer][data-akar-snap-points='false'][data-akar-drawer-direction='top'][data-state='closed'] {
-  animation-name: slideToTop;
+  animation-name: drawer-slide-to-top;
 }
 
 [data-akar-drawer][data-akar-snap-points='false'][data-akar-drawer-direction='left'][data-state='open'] {
-  animation-name: slideFromLeft;
+  animation-name: drawer-slide-from-left;
 }
 [data-akar-drawer][data-akar-snap-points='false'][data-akar-drawer-direction='left'][data-state='closed'] {
-  animation-name: slideToLeft;
+  animation-name: drawer-slide-to-left;
 }
 
 [data-akar-drawer][data-akar-snap-points='false'][data-akar-drawer-direction='right'][data-state='open'] {
-  animation-name: slideFromRight;
+  animation-name: drawer-slide-from-right;
 }
 [data-akar-drawer][data-akar-snap-points='false'][data-akar-drawer-direction='right'][data-state='closed'] {
-  animation-name: slideToRight;
+  animation-name: drawer-slide-to-right;
 }
 
 [data-akar-drawer][data-akar-snap-points='true'][data-akar-drawer-direction='bottom'] {
@@ -71,10 +71,10 @@
   animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
 }
 [data-akar-overlay][data-akar-snap-points='false'][data-state='open'] {
-  animation-name: fadeIn;
+  animation-name: drawer-fade-in;
 }
 [data-akar-overlay][data-state='closed'] {
-  animation-name: fadeOut;
+  animation-name: drawer-fade-out;
 }
 
 [data-akar-animate='false'] {
@@ -180,7 +180,7 @@
   }
 }
 
-@keyframes fadeIn {
+@keyframes drawer-fade-in {
   from {
     opacity: 0;
   }
@@ -189,13 +189,13 @@
   }
 }
 
-@keyframes fadeOut {
+@keyframes drawer-fade-out {
   to {
     opacity: 0;
   }
 }
 
-@keyframes slideFromBottom {
+@keyframes drawer-slide-from-bottom {
   from {
     transform: translate3d(0, var(--initial-transform, 100%), 0);
   }
@@ -204,13 +204,13 @@
   }
 }
 
-@keyframes slideToBottom {
+@keyframes drawer-slide-to-bottom {
   to {
     transform: translate3d(0, var(--initial-transform, 100%), 0);
   }
 }
 
-@keyframes slideFromTop {
+@keyframes drawer-slide-from-top {
   from {
     transform: translate3d(0, calc(var(--initial-transform, 100%) * -1), 0);
   }
@@ -219,13 +219,13 @@
   }
 }
 
-@keyframes slideToTop {
+@keyframes drawer-slide-to-top {
   to {
     transform: translate3d(0, calc(var(--initial-transform, 100%) * -1), 0);
   }
 }
 
-@keyframes slideFromLeft {
+@keyframes drawer-slide-from-left {
   from {
     transform: translate3d(calc(var(--initial-transform, 100%) * -1), 0, 0);
   }
@@ -234,13 +234,13 @@
   }
 }
 
-@keyframes slideToLeft {
+@keyframes drawer-slide-to-left {
   to {
     transform: translate3d(calc(var(--initial-transform, 100%) * -1), 0, 0);
   }
 }
 
-@keyframes slideFromRight {
+@keyframes drawer-slide-from-right {
   from {
     transform: translate3d(var(--initial-transform, 100%), 0, 0);
   }
@@ -249,7 +249,7 @@
   }
 }
 
-@keyframes slideToRight {
+@keyframes drawer-slide-to-right {
   to {
     transform: translate3d(var(--initial-transform, 100%), 0, 0);
   }

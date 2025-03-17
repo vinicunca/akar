@@ -1,44 +1,49 @@
 <script setup lang="ts">
 import {
-  DrawerClose,
-  DrawerContent,
-  DrawerHandle,
-  DrawerOverlay,
-  DrawerPortal,
-  DrawerRoot,
-  DrawerTitle,
-  DrawerTrigger,
-} from 'akar-vue'
+  ADrawerContent,
+  ADrawerHandle,
+  ADrawerOverlay,
+  ADrawerPortal,
+  ADrawerRoot,
+  ADrawerTrigger,
+} from '@vinicunca/akar';
 
-import { computed, ref } from 'vue'
+import { computed, ref } from 'vue';
 
-const snapPoints = ['148px', '355px']
+const snapPoints = ['148px', '355px'];
 
-const snap = ref<number | string | null>(snapPoints[0])
+const snap = ref<number | string | null>(snapPoints[0]);
 
-const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as string))
+const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as string));
 </script>
 
 <template>
-  <div class="w-screen h-screen bg-white p-8 flex justify-center items-center">
+  <div class="h-screen w-screen flex items-center justify-center bg-white p-8">
     <div data-testid="active-snap-index">
       {{ activeSnapPointIndex }}
     </div>
-    <DrawerRoot v-model:active-snap-point="snap" default-open :snap-points="snapPoints">
-      <DrawerTrigger as-child>
+    <ADrawerRoot
+      v-model:active-snap-point="snap"
+      default-open
+      :snap-points="snapPoints"
+    >
+      <ADrawerTrigger as-child>
         <button data-testid="trigger">
           Open Drawer
         </button>
-      </DrawerTrigger>
-      <DrawerOverlay class="fixed inset-0 bg-black/40" />
-      <DrawerPortal>
-        <DrawerContent
+      </ADrawerTrigger>
+      <ADrawerOverlay class="fixed inset-0 bg-black/40" />
+      <ADrawerPortal>
+        <ADrawerContent
           data-testid="content"
-          class="fixed flex flex-col bg-white border border-gray-200 border-b-none rounded-t-[10px] bottom-0 left-0 right-0 h-full max-h-[97%] mx-[-1px]"
+          class="fixed bottom-0 left-0 right-0 mx-[-1px] h-full max-h-[97%] flex flex-col border border-gray-200 rounded-t-[10px] border-b-none bg-white"
         >
-          <DrawerHandle data-testid="handle" class="mb-8 mt-2" />
+          <ADrawerHandle
+            data-testid="handle"
+            class="mb-8 mt-2"
+          />
           <div
-            class="flex flex-col max-w-md mx-auto w-full p-4 pt-5"
+            class="mx-auto max-w-md w-full flex flex-col p-4 pt-5"
             :class=" {
               'overflow-y-auto': snap === 1,
               'overflow-hidden': snap !== 1,
@@ -46,7 +51,7 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
           >
             <div class="flex items-center">
               <svg
-                class="text-yellow-400 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-yellow-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -58,7 +63,7 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
                 />
               </svg>
               <svg
-                class="text-yellow-400 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-yellow-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -70,7 +75,7 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
                 />
               </svg>
               <svg
-                class="text-yellow-400 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-yellow-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -82,7 +87,7 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
                 />
               </svg>
               <svg
-                class="text-yellow-400 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-yellow-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -94,7 +99,7 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
                 />
               </svg>
               <svg
-                class="text-gray-300 h-5 w-5 flex-shrink-0"
+                class="h-5 w-5 flex-shrink-0 text-gray-300"
                 viewBox="0 0 20 20"
                 fill="currentColor"
                 aria-hidden="true"
@@ -106,24 +111,24 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
                 />
               </svg>
             </div>
-            <h1 class="text-2xl mt-2 font-medium">
+            <h1 class="mt-2 text-2xl font-medium">
               The Hidden Details
             </h1>
-            <p class="text-sm mt-1 text-gray-600 mb-6">
+            <p class="mb-6 mt-1 text-sm text-gray-600">
               2 modules, 27 hours of video
             </p>
             <p class="text-gray-600">
               The world of user interface design is an intricate landscape filled with hidden details and nuance. In
               this course, you will learn something cool. To the untrained eye, a beautifully designed UI.
             </p>
-            <button class="bg-black text-gray-50 mt-8 rounded-md h-[48px] flex-shrink-0 font-medium">
+            <button class="mt-8 h-[48px] flex-shrink-0 rounded-md bg-black text-gray-50 font-medium">
               Buy for $199
             </button>
             <div class="mt-12">
               <h2 class="text-xl font-medium">
                 Module 01. The Details
               </h2>
-              <div class="space-y-4 mt-4">
+              <div class="mt-4 space-y-4">
                 <div>
                   <span class="block">Layers of UI</span>
                   <span class="text-gray-600">A basic introduction to Layers of Design.</span>
@@ -145,7 +150,7 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
                   Can't wait for more course content!”
                 </blockquote>
                 <figcaption>
-                  <span class="text-sm text-gray-600 mt-2 block">Yvonne Ray, Frontend Developer</span>
+                  <span class="mt-2 block text-sm text-gray-600">Yvonne Ray, Frontend Developer</span>
                 </figcaption>
               </figure>
             </div>
@@ -153,7 +158,7 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
               <h2 class="text-xl font-medium">
                 Module 02. The Process
               </h2>
-              <div class="space-y-4 mt-4">
+              <div class="mt-4 space-y-4">
                 <div>
                   <span class="block">Build</span>
                   <span class="text-gray-600">Create cool components to practice.</span>
@@ -169,8 +174,8 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
               </div>
             </div>
           </div>
-        </DrawerContent>
-      </DrawerPortal>
-    </DrawerRoot>
+        </ADrawerContent>
+      </ADrawerPortal>
+    </ADrawerRoot>
   </div>
 </template>

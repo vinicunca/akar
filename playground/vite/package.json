@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
+    "test:e2e": "playwright test",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -13,6 +14,7 @@
     "vue": "catalog:"
   },
   "devDependencies": {
+    "@playwright/test": "catalog:",
     "@tsconfig/node18": "catalog:",
     "@vinicunca/unocss-preset": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
