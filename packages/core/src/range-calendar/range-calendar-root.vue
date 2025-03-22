@@ -269,17 +269,17 @@ const {
 
 watch(
   modelValue,
-  (_modelValue) => {
-    if (
-      !_modelValue
+  (_modelValue, _prevValue) => {
+    if ((!_prevValue.start && _modelValue?.start)
+      || !_modelValue
       || !_modelValue.start
       || (startValue.value && !isEqualDay(_modelValue.start, startValue.value))
     ) {
       startValue.value = _modelValue?.start?.copy?.();
     }
 
-    if (
-      !_modelValue
+    if ((!_prevValue.end && _modelValue.end)
+      || !_modelValue
       || !_modelValue.end
       || (endValue.value && !isEqualDay(_modelValue.end, endValue.value))
     ) {

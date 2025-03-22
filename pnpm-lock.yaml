@@ -39,6 +39,9 @@ catalogs:
     '@nuxt/schema':
       specifier: ^3.16.0
       version: 3.16.0
+    '@playwright/test':
+      specifier: ^1.51.0
+      version: 1.51.0
     '@radix-ui/colors':
       specifier: ^3.0.0
       version: 3.0.0
@@ -132,9 +135,6 @@ catalogs:
     nuxt:
       specifier: ^3.16.0
       version: 3.16.0
-    ohash:
-      specifier: ^2.0.11
-      version: 2.0.11
     pnpm:
       specifier: 10.4.0
       version: 10.4.0
@@ -355,9 +355,6 @@ importers:
       defu:
         specifier: 'catalog:'
         version: 6.1.4
-      ohash:
-        specifier: 'catalog:'
-        version: 2.0.11
     devDependencies:
       '@iconify/vue':
         specifier: 'catalog:'
@@ -482,7 +479,7 @@ importers:
         version: 3.5.13(typescript@5.8.2)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.51.0
+        specifier: 'catalog:'
         version: 1.51.0
       '@tsconfig/node18':
         specifier: 'catalog:'

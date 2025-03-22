@@ -1,19 +1,13 @@
 <script lang="ts">
-import type { Ref } from 'vue';
 import type { AListboxItemEmits, AListboxItemProps } from '~~/listbox';
 import type { AcceptableValue } from '~~/shared/types';
 import { computed, onMounted, onUnmounted } from 'vue';
 import { usePrimitiveElement } from '~~/primitive';
-import { createContext, useId } from '~~/shared';
+import { useId } from '~~/shared';
 import { injectAComboboxGroupContext } from './combobox-group.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
-interface ComboboxItemContext {
-  isSelected: Ref<boolean>;
-}
-
-export const [injectComboboxItemContext, provideComboboxItemContext]
-  = createContext<ComboboxItemContext>('AComboboxItem');
+export { injectAListboxItemContext as injectComboboxItemContext } from '~~/listbox';
 
 export type AComboboxItemEmits<T = AcceptableValue> = AListboxItemEmits<T>;
 export interface AComboboxItemProps<T = AcceptableValue> extends AListboxItemProps<T> {

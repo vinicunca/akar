@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import type { ToastRootImplEmits, ToastRootImplProps } from './toast-root-impl.vue';
+import type { SwipeEvent } from './utils';
 import { useForwardExpose } from '~~/shared';
 
 export type AToastRootEmits = Omit<ToastRootImplEmits, 'close'> & {
@@ -45,10 +46,51 @@ defineSlots<{
 }>();
 
 const { forwardRef } = useForwardExpose();
-const open = useVModel(props, 'open', emits, {
-  defaultValue: props.defaultOpen,
-  passive: (props.open === undefined) as false,
-}) as Ref<boolean>;
+const open = useVModel(
+  props,
+  'open',
+  emits,
+  {
+    defaultValue: props.defaultOpen,
+    passive: (props.open === undefined) as false,
+  },
+) as Ref<boolean>;
+
+function handleSwipeStart(event: SwipeEvent) {
+  emits('swipeStart', event);
+  (event.currentTarget as HTMLElement).setAttribute('data-swipe', 'start');
+}
+
+function handleSwipeMove(event: SwipeEvent) {
+  emits('swipeMove', event);
+  const { x, y } = event.detail.delta;
+  const target = event.currentTarget as HTMLElement;
+  target.setAttribute('data-swipe', 'move');
+  target.style.setProperty('--akar-toast-swipe-move-x', `${x}px`);
+  target.style.setProperty('--akar-toast-swipe-move-y', `${y}px`);
+}
+
+function handleSwipeCancel(event: SwipeEvent) {
+  emits('swipeCancel', event);
+  const target = event.currentTarget as HTMLElement;
+  target.setAttribute('data-swipe', 'cancel');
+  target.style.removeProperty('--akar-toast-swipe-move-x');
+  target.style.removeProperty('--akar-toast-swipe-move-y');
+  target.style.removeProperty('--akar-toast-swipe-end-x');
+  target.style.removeProperty('--akar-toast-swipe-end-y');
+}
+
+function handleSwipeEnd(event: SwipeEvent) {
+  emits('swipeEnd', event);
+  const { x, y } = event.detail.delta;
+  const target = event.currentTarget as HTMLElement;
+  target.setAttribute('data-swipe', 'end');
+  target.style.removeProperty('--akar-toast-swipe-move-x');
+  target.style.removeProperty('--akar-toast-swipe-move-y');
+  target.style.setProperty('--akar-toast-swipe-end-x', `${x}px`);
+  target.style.setProperty('--akar-toast-swipe-end-y', `${y}px`);
+  open.value = false;
+}
 </script>
 
 <template>
@@ -66,35 +108,10 @@ const open = useVModel(props, 'open', emits, {
       @pause="emits('pause')"
       @resume="emits('resume')"
       @escape-key-down="emits('escapeKeyDown', $event)"
-      @swipe-start="(event) => {
-        emits('swipeStart', event);
-        (event.currentTarget as HTMLElement).setAttribute('data-swipe', 'start');
-      }"
-      @swipe-move="(event) => {
-        const { x, y } = event.detail.delta;
-        const target = event.currentTarget as HTMLElement
-        target.setAttribute('data-swipe', 'move');
-        target.style.setProperty('--akar-toast-swipe-move-x', `${x}px`);
-        target.style.setProperty('--akar-toast-swipe-move-y', `${y}px`);
-      }"
-      @swipe-cancel="(event) => {
-        const target = event.currentTarget as HTMLElement
-        target.setAttribute('data-swipe', 'cancel');
-        target.style.removeProperty('--akar-toast-swipe-move-x');
-        target.style.removeProperty('--akar-toast-swipe-move-y');
-        target.style.removeProperty('--akar-toast-swipe-end-x');
-        target.style.removeProperty('--akar-toast-swipe-end-y');
-      }"
-      @swipe-end="(event) => {
-        const { x, y } = event.detail.delta;
-        const target = event.currentTarget as HTMLElement
-        target.setAttribute('data-swipe', 'end');
-        target.style.removeProperty('--akar-toast-swipe-move-x');
-        target.style.removeProperty('--akar-toast-swipe-move-y');
-        target.style.setProperty('--akar-toast-swipe-end-x', `${x}px`);
-        target.style.setProperty('--akar-toast-swipe-end-y', `${y}px`);
-        open = false;
-      }"
+      @swipe-start="handleSwipeStart"
+      @swipe-move="handleSwipeMove"
+      @swipe-cancel="handleSwipeCancel"
+      @swipe-end="handleSwipeEnd"
     >
       <slot
         :remaining="remaining"

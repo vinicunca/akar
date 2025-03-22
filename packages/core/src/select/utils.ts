@@ -1,4 +1,4 @@
-import { isEqual } from 'ohash';
+import { isDeepEqual } from '@vinicunca/perkakas';
 
 export const OPEN_KEYS = [' ', 'Enter', 'ArrowUp', 'ArrowDown'];
 export const SELECTION_KEYS = [' ', 'Enter'];
@@ -31,5 +31,5 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
     return value?.[comparator as keyof T] === currentValue?.[comparator as keyof T];
   }
 
-  return isEqual(value, currentValue);
+  return isDeepEqual(value, currentValue);
 }
