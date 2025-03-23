@@ -120,7 +120,7 @@ const currentTrigger = ref('');
                     </ANavigationMenuItem>
 
                     <ANavigationMenuIndicator
-                      class="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut transition-[all,transform_250ms_ease] top-full z-[1] h-[10px] flex items-end justify-center overflow-hidden duration-200 data-[state=hidden]:opacity-0"
+                      class="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut transition-[all,transform_250ms_ease] absolute top-full z-[100] mt-[1px] h-[10px] w-[--akar-navigation-menu-indicator-size] flex translate-x-[--akar-navigation-menu-indicator-position] items-end justify-center overflow-hidden duration-200 data-[state=hidden]:opacity-0"
                     >
                       <div
                         class="relative top-[70%] h-[10px] w-[10px] rotate-[45deg] rounded-tl-[2px] bg-white"
@@ -225,7 +225,7 @@ const currentTrigger = ref('');
                     </ANavigationMenuItem>
 
                     <ANavigationMenuIndicator
-                      class="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut transition-[all,transform_250ms_ease] top-full z-[1] h-[10px] flex items-end justify-center overflow-hidden duration-200 data-[state=hidden]:opacity-0"
+                      class="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut transition-[all,transform_250ms_ease] absolute top-full z-[100] mt-[1px] h-[10px] w-[--akar-navigation-menu-indicator-size] flex translate-x-[--akar-navigation-menu-indicator-position] items-end justify-center overflow-hidden duration-200 data-[state=hidden]:opacity-0"
                     >
                       <div
                         class="relative top-[70%] h-[10px] w-[10px] rotate-[45deg] rounded-tl-[2px] bg-white"
@@ -248,7 +248,7 @@ const currentTrigger = ref('');
             </ANavigationMenuItem>
 
             <ANavigationMenuIndicator
-              class="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut transition-[all,transform_250ms_ease] top-full z-[1] h-[10px] flex items-end justify-center overflow-hidden duration-200 data-[state=hidden]:opacity-0"
+              class="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut transition-[all,transform_250ms_ease] absolute top-full z-[100] mt-[1px] h-[10px] w-[--akar-navigation-menu-indicator-size] flex translate-x-[--akar-navigation-menu-indicator-position] items-end justify-center overflow-hidden duration-200 data-[state=hidden]:opacity-0"
             >
               <div
                 class="relative top-[70%] h-[10px] w-[10px] rotate-[45deg] rounded-tl-[2px] bg-white"

@@ -25,7 +25,7 @@ export interface ANavigationMenuSubProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { APrimitive } from '~~/primitive';
 import { useForwardExpose } from '~~/shared';
 import { injectANavigationMenuContext, provideNavigationMenuContext } from './navigation-menu-root.vue';
@@ -62,14 +62,27 @@ const { forwardRef, currentElement } = useForwardExpose();
 
 const indicatorTrack = ref<HTMLElement>();
 const viewport = ref<HTMLElement>();
+const activeTrigger = ref<HTMLElement>();
 
-const { ACollectionSlot } = useCollection({ key: 'NavigationMenu', isProvider: true });
+const { getItems, ACollectionSlot } = useCollection({ key: 'NavigationMenu', isProvider: true });
+
+watchEffect(() => {
+  if (!modelValue.value) {
+    return;
+  }
+
+  const items = getItems().map((i) => i.ref);
+  activeTrigger.value = items.find((item) =>
+    item.id.includes(modelValue.value),
+  );
+});
 
 provideNavigationMenuContext({
   ...menuContext,
   isRootMenu: false,
   modelValue,
   previousValue,
+  activeTrigger,
   orientation: props.orientation,
   rootNavigationMenu: currentElement,
   indicatorTrack,
