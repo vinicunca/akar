@@ -153,7 +153,7 @@ function handleArrowKey(event: KeyboardEvent) {
         ? Array.from(parentElement.querySelectorAll(SELECTOR))
         : [];
 
-      if (!rootContext.pagedNavigation.value) {
+      if (!rootContext.pagedNavigation.value && rootContext.numberOfMonths.value > 1) {
         // Placeholder is set to first month of the new page
         const numberOfDays = getDaysInMonth(rootContext.placeholder.value);
         newCollectionItems[
@@ -182,10 +182,11 @@ function handleArrowKey(event: KeyboardEvent) {
         ? Array.from(parentElement.querySelectorAll(SELECTOR))
         : [];
 
-      if (!rootContext.pagedNavigation.value) {
+      if (!rootContext.pagedNavigation.value && rootContext.numberOfMonths.value > 1) {
         // Placeholder is set to first month of the new page
-        const numberOfDays = getDaysInMonth(rootContext.placeholder.value.add({ months: rootContext.numberOfMonths.value - 1 }));
-        newCollectionItems[newCollectionItems.length - numberOfDays + newIndex - allCollectionItems.length].focus();
+        const numberOfDays = getDaysInMonth(rootContext.placeholder.value);
+        newCollectionItems[newIndex - allCollectionItems.length + numberOfDays].focus();
+
         return;
       }
 
