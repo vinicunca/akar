@@ -86,7 +86,7 @@ const isFocusedDate = computed(() => {
 });
 const isSelectedDate = computed(() => rootContext.isDateSelected(props.day));
 
-const SELECTOR = '[data-akar-calendar-cell-trigger]:not([data-disabled]):not([data-outside-view]):not([data-outside-visible-view])';
+const SELECTOR = '[data-akar-calendar-cell-trigger]:not([data-outside-view]):not([data-outside-visible-view])';
 
 function changeDate(date: DateValue) {
   if (rootContext.readonly.value) {
@@ -155,9 +155,9 @@ function handleArrowKey(event: KeyboardEvent) {
 
       if (!rootContext.pagedNavigation.value && rootContext.numberOfMonths.value > 1) {
         // Placeholder is set to first month of the new page
-        const numberOfDays = getDaysInMonth(rootContext.placeholder.value.add({
-          months: rootContext.numberOfMonths.value,
-        }));
+        const numberOfDays = getDaysInMonth(
+          rootContext.placeholder.value,
+        );
         newCollectionItems[
           numberOfDays - Math.abs(newIndex)
         ].focus();
@@ -187,7 +187,9 @@ function handleArrowKey(event: KeyboardEvent) {
       if (!rootContext.pagedNavigation.value && rootContext.numberOfMonths.value > 1) {
         // Placeholder is set to first month of the new page
         const numberOfDays = getDaysInMonth(
-          rootContext.placeholder.value.add({ months: rootContext.numberOfMonths.value - 1 }),
+          rootContext.placeholder.value.add({
+            months: rootContext.numberOfMonths.value - 1,
+          }),
         );
         newCollectionItems[newIndex - allCollectionItems.length + (newCollectionItems.length - numberOfDays)].focus();
 

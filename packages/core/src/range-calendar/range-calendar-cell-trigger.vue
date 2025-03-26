@@ -87,7 +87,7 @@ const isHighlighted = computed(() => rootContext.highlightedRange.value
     })
   : false);
 
-const SELECTOR = '[data-akar-calendar-cell-trigger]:not([data-disabled]):not([data-outside-view]):not([data-outside-visible-view])';
+const SELECTOR = '[data-akar-calendar-cell-trigger]:not([data-outside-view]):not([data-outside-visible-view])';
 
 const isDateToday = computed(() => {
   return isToday(props.day, getLocalTimeZone());

@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Controlled', () => {
-  test('should not close when clicked on overlay and only the open prop is passsed', async ({
+  test('should not close when clicked on overlay and only the open prop is passed', async ({
     page,
   }) => {
     await expect(page.getByTestId('content')).not.toBeVisible();

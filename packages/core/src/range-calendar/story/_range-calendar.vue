@@ -42,7 +42,7 @@ function pagingFunc(date: DateValue, sign: -1 | 1) {
     </ARangeCalendarHeader>
 
     <ARangeCalendarGrid
-      v-for="month in grid"
+      v-for="(month, gridIndex) in grid"
       :key="month.value.toString()"
       :data-testid="`grid-${month.value.month}`"
     >
@@ -73,7 +73,7 @@ function pagingFunc(date: DateValue, sign: -1 | 1) {
             <ARangeCalendarCellTrigger
               :day="weekDate"
               :month="month.value"
-              :data-testid="`date-${weekDate.month}-${weekDate.day}`"
+              :data-testid="`date-${props.calendarProps?.numberOfMonths ?? 1 > 1 ? `${gridIndex}-` : ''}${weekDate.month}-${weekDate.day}`"
             />
           </ARangeCalendarCell>
         </ARangeCalendarGridRow>
