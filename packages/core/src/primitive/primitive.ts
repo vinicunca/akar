@@ -36,6 +36,9 @@ export interface APrimitiveProps {
   as?: APrimitiveAsTag | Component;
 }
 
+// For self closing tags, don't provide default slots because of hydration issue
+const SELF_CLOSING_TAGS = ['area', 'img', 'input'];
+
 export const APrimitive = defineComponent({
   name: 'APrimitive',
   inheritAttrs: false,
@@ -52,8 +55,6 @@ export const APrimitive = defineComponent({
   setup(props, { attrs, slots }) {
     const asTag = props.asChild ? 'template' : props.as;
 
-    // For self closing tags, don't provide default slots because of hydration issue
-    const SELF_CLOSING_TAGS = ['area', 'img', 'input'];
     if (typeof asTag === 'string' && SELF_CLOSING_TAGS.includes(asTag)) {
       return () => h(asTag, attrs);
     }

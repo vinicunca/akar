@@ -298,6 +298,11 @@ export const components = {
     'ARangeCalendarRoot',
   ],
 
+  rovingFocus: [
+    'ARovingFocusGroup',
+    'ARovingFocusItem',
+  ],
+
   scrollArea: [
     'AScrollAreaCorner',
     'AScrollAreaRoot',

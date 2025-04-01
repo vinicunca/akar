@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="T">
 import type { VisuallyHiddenInputBubbleProps } from './visually-hidden-input-bubble.vue';
+import { isBoolean, isNumber, isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import VisuallyHiddenInputBubble from './visually-hidden-input-bubble.vue';
 
@@ -7,14 +8,24 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<VisuallyHiddenInputBubbleProps<T>>(), {
-  feature: 'fully-hidden',
-  checked: undefined,
-});
+const props = withDefaults(
+  defineProps<VisuallyHiddenInputBubbleProps<T>>(),
+  {
+    feature: 'fully-hidden',
+    checked: undefined,
+  },
+);
+
+const isFormArrayEmptyAndRequired = computed(() =>
+  typeof props.value === 'object'
+  && Array.isArray(props.value)
+  && props.value.length === 0
+  && props.required,
+);
 
 const parsedValue = computed(() => {
   // if primitive value
-  if (typeof props.value === 'string' || typeof props.value === 'number' || typeof props.value === 'boolean') {
+  if (isString(props.value) || isNumber(props.value) || isBoolean(props.value)) {
     return [{ name: props.name, value: props.value }];
   } else if (typeof props.value === 'object' && Array.isArray(props.value)) { // if array value
     return props.value.flatMap((obj, index) => {
@@ -34,8 +45,18 @@ const parsedValue = computed(() => {
 </script>
 
 <template>
+  <!-- We render single input if it's required -->
+  <VisuallyHiddenInputBubble
+    v-if="isFormArrayEmptyAndRequired"
+    :key="name"
+    v-bind="{ ...props, ...$attrs }"
+    :name="name"
+    :value="value"
+  />
+
   <VisuallyHiddenInputBubble
     v-for="parsed in parsedValue"
+    v-else
     :key="parsed.name"
     v-bind="{ ...props, ...$attrs }"
     :name="parsed.name"

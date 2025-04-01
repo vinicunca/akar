@@ -22,6 +22,7 @@ useForwardExpose();
   <ACollapsibleContent
     role="region"
     :as-child="props.asChild"
+    :as="props.as"
     :force-mount="props.forceMount"
     :aria-labelledby="itemContext.triggerId"
     :data-state="itemContext.dataState.value"

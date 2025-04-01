@@ -29,6 +29,7 @@ export { APrimitive, type APrimitiveAsTag, type APrimitiveProps, APrimitiveSlot 
 export * from './progress';
 export * from './radio-group';
 export * from './range-calendar';
+export * from './roving-focus';
 export * from './scroll-area';
 export * from './select';
 export * from './separator';
