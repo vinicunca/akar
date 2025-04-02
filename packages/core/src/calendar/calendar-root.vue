@@ -18,6 +18,8 @@ type CalendarRootContext = {
   placeholder: Ref<DateValue>;
   pagedNavigation: Ref<boolean>;
   preventDeselect: Ref<boolean>;
+  grid: Ref<Array<DateGrid<DateValue>>>;
+  weekDays: Ref<Array<string>>;
   weekStartsOn: Ref<0 | 1 | 2 | 3 | 4 | 5 | 6>;
   weekdayFormat: Ref<WeekDayFormat>;
   fixedWeeks: Ref<boolean>;
@@ -253,14 +255,14 @@ const {
   isDateUnavailable,
 });
 
-watch(modelValue, (_modelValue) => {
-  if (Array.isArray(_modelValue) && _modelValue.length) {
-    const lastValue = _modelValue[_modelValue.length - 1];
+watch(modelValue, (modelValue_) => {
+  if (Array.isArray(modelValue_) && modelValue_.length) {
+    const lastValue = modelValue_[modelValue_.length - 1];
     if (lastValue && !isEqualDay(placeholder.value, lastValue)) {
       onPlaceholderChange(lastValue);
     }
-  } else if (!Array.isArray(_modelValue) && _modelValue && !isEqualDay(placeholder.value, _modelValue)) {
-    onPlaceholderChange(_modelValue);
+  } else if (!Array.isArray(modelValue_) && modelValue_ && !isEqualDay(placeholder.value, modelValue_)) {
+    onPlaceholderChange(modelValue_);
   }
 });
 
@@ -312,6 +314,8 @@ provideCalendarRootContext({
   disabled,
   initialFocus,
   pagedNavigation,
+  grid,
+  weekDays: weekdays,
   weekStartsOn,
   weekdayFormat,
   fixedWeeks,

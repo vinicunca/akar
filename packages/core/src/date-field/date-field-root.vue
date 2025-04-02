@@ -200,25 +200,25 @@ watch(locale, (value) => {
 
 watch(
   modelValue,
-  (_modelValue) => {
+  (modelValue_) => {
     if (
-      !isNullish(_modelValue)
-      && placeholder.value.compare(_modelValue) !== 0
+      !isNullish(modelValue_)
+      && placeholder.value.compare(modelValue_) !== 0
     ) {
-      placeholder.value = _modelValue.copy();
+      placeholder.value = modelValue_.copy();
     }
   },
 );
 
 watch(
   [modelValue, locale],
-  ([_modelValue]) => {
-    if (!isNullish(_modelValue)) {
-      segmentValues.value = { ...syncSegmentValues({ value: _modelValue, formatter }) };
+  ([modelValue_]) => {
+    if (!isNullish(modelValue_)) {
+      segmentValues.value = { ...syncSegmentValues({ value: modelValue_, formatter }) };
     } else if (
       // If segment has null value, means that user modified it, there fore do not reset the segmentValues
       Object.values(segmentValues.value).every((value) => value !== null)
-      && isNullish(_modelValue)
+      && isNullish(modelValue_)
     ) {
       segmentValues.value = { ...initialSegments };
     }

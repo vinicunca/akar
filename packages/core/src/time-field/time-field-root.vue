@@ -7,11 +7,10 @@ import type { UseDateFormatter } from '~~/shared';
 import type { HourCycle, SegmentPart, SegmentValueObj, TimeValue } from '~~/shared/date';
 import type { Direction, FormFieldProps } from '~~/shared/types';
 import { getLocalTimeZone, isEqualDay, Time, toCalendarDateTime, today } from '@internationalized/date';
-import { KEY_CODES } from '@vinicunca/perkakas';
+import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { isDateBefore } from '~~/date';
 import {
   createContext,
-
   useDateFormatter,
   useDirection,
   useLocale,
@@ -20,12 +19,9 @@ import {
   createContent,
   getDefaultTime,
   getTimeFieldSegmentElements,
-
   initializeTimeSegmentValues,
   isSegmentNavigationKey,
-
   syncTimeSegmentValues,
-
 } from '~~/shared/date';
 
 type TimeFieldRootContext = {
@@ -148,6 +144,10 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 
 const convertedModelValue = computed({
   get() {
+    if (isNullish(modelValue.value)) {
+      return modelValue.value;
+    }
+
     return convertValue(modelValue.value);
   },
   set(newValue) {
@@ -239,16 +239,22 @@ watch(locale, (value) => {
   }
 });
 
-watch(convertedModelValue, (_modelValue) => {
-  if (_modelValue !== undefined && (!isEqualDay(convertedPlaceholder.value, _modelValue) || convertedPlaceholder.value.compare(_modelValue) !== 0)) {
-    placeholder.value = _modelValue.copy();
-  }
-});
+watch(
+  convertedModelValue,
+  (modelValue_) => {
+    if (
+      !isNullish(modelValue_)
+      && (!isEqualDay(convertedPlaceholder.value, modelValue_) || convertedPlaceholder.value.compare(modelValue_) !== 0)
+    ) {
+      placeholder.value = modelValue_.copy();
+    }
+  },
+);
 
-watch([convertedModelValue, locale], ([_modelValue]) => {
-  if (_modelValue !== undefined) {
-    segmentValues.value = { ...syncTimeSegmentValues({ value: _modelValue, formatter }) };
-  } else if (Object.values(segmentValues.value).every((value) => value === null)) {
+watch([convertedModelValue, locale], ([modelValue_]) => {
+  if (!isNullish(modelValue_)) {
+    segmentValues.value = { ...syncTimeSegmentValues({ value: modelValue_, formatter }) };
+  } else if (Object.values(segmentValues.value).every((value) => value === null) || isNullish(modelValue_)) {
     segmentValues.value = { ...initialSegments };
   }
 });
@@ -257,8 +263,9 @@ const currentFocusedElement = ref<HTMLElement | null>(null);
 
 const currentSegmentIndex = computed(() =>
   Array.from(segmentElements.value).findIndex((el) =>
-    el.getAttribute('data-akar-time-field-segment')
-    === currentFocusedElement.value?.getAttribute('data-akar-time-field-segment')));
+    el.getAttribute('data-akar-time-field-segment') === currentFocusedElement.value?.getAttribute('data-akar-time-field-segment'),
+  ),
+);
 
 const nextFocusableSegment = computed(() => {
   const sign = dir.value === 'rtl' ? -1 : 1;

@@ -142,7 +142,7 @@ const dateFieldRef = ref<InstanceType<typeof ADateRangeFieldRoot> | undefined>()
 watch(
   modelValue,
   (value) => {
-    if (value.start && value.start.compare(placeholder.value) !== 0) {
+    if (value && value.start && value.start.compare(placeholder.value) !== 0) {
       placeholder.value = value.start.copy();
     }
   },

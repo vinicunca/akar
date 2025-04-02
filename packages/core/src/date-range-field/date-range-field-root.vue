@@ -285,14 +285,19 @@ watch(
 
 watch(
   modelValue,
-  (_modelValue) => {
-    if (_modelValue && _modelValue.start && _modelValue.end) {
-      if (!startValue.value || _modelValue.start.compare(startValue.value) !== 0) {
-        startValue.value = _modelValue.start.copy();
+  (modelValue_) => {
+    if (modelValue_ && modelValue_.start && modelValue_.end) {
+      if (!startValue.value || modelValue_.start.compare(startValue.value) !== 0) {
+        startValue.value = modelValue_.start.copy();
       }
-      if (!endValue.value || _modelValue.end.compare(endValue.value) !== 0) {
-        endValue.value = _modelValue.end.copy();
+      if (!endValue.value || modelValue_.end.compare(endValue.value) !== 0) {
+        endValue.value = modelValue_.end.copy();
       }
+    }
+
+    if (!modelValue_) {
+      startValue.value = undefined;
+      endValue.value = undefined;
     }
   },
 );
@@ -331,13 +336,13 @@ watch(
 
 watch(
   modelValue,
-  (_modelValue) => {
+  (modelValue_) => {
     if (
-      _modelValue
-      && _modelValue.start !== undefined
-      && placeholder.value.compare(_modelValue.start) !== 0
+      modelValue_
+      && modelValue_.start !== undefined
+      && placeholder.value.compare(modelValue_.start) !== 0
     ) {
-      placeholder.value = _modelValue.start.copy();
+      placeholder.value = modelValue_.start.copy();
     }
   },
 );

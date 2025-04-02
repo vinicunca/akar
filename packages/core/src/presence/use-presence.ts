@@ -61,6 +61,7 @@ export function usePresence(
           }
         } else if (
           currentAnimationName === 'none'
+          || currentAnimationName === 'undefined'
           || stylesRef.value?.display === 'none'
         ) {
           /**
