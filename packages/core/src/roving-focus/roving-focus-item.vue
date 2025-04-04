@@ -20,7 +20,6 @@ import { focusFirst, getFocusIntent, wrapArray } from './utils';
 
 const props = withDefaults(defineProps<ARovingFocusItemProps>(), {
   focusable: true,
-  active: true,
   as: 'span',
 });
 
@@ -92,7 +91,7 @@ function handleKeydown(event: KeyboardEvent) {
     <APrimitive
       :tabindex="isCurrentTabStop ? 0 : -1"
       :data-orientation="context.orientation.value"
-      :data-active="active"
+      :data-active="active ? '' : undefined"
       :data-disabled="!focusable ? '' : undefined"
       :as="as"
       :as-child="asChild"
