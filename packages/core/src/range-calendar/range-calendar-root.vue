@@ -39,6 +39,7 @@ type RangeCalendarRootContext = {
   isInvalid: Ref<boolean>;
   isDateDisabled: DateMatcher;
   isDateUnavailable?: DateMatcher;
+  isDateHighlightable?: DateMatcher;
   isOutsideVisibleView: (date: DateValue) => boolean;
   highlightedRange: Ref<null | { start: DateValue; end: DateValue }>;
   focusedValue: Ref<DateValue | undefined>;
@@ -97,6 +98,8 @@ export interface ARangeCalendarRootProps extends APrimitiveProps {
   isDateDisabled?: DateMatcher;
   /** A function that returns whether or not a date is unavailable */
   isDateUnavailable?: DateMatcher;
+  /** A function that returns whether or not a date is hightable */
+  isDateHighlightable?: DateMatcher;
   /** The reading direction of the calendar when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode. */
   dir?: Direction;
   /** A function that returns the next page of the calendar. It receives the current placeholder as an argument inside the component. */
@@ -114,8 +117,10 @@ export type ARangeCalendarRootEmits = {
   'update:startValue': [date: DateValue | undefined];
 };
 
-export const [injectARangeCalendarRootContext, provideRangeCalendarRootContext]
-  = createContext<RangeCalendarRootContext>('range-calendar-root');
+export const [
+  injectARangeCalendarRootContext,
+  provideRangeCalendarRootContext,
+] = createContext<RangeCalendarRootContext>('range-calendar-root');
 </script>
 
 <script setup lang="ts">
@@ -123,23 +128,27 @@ import { useEventListener, useVModel } from '@vueuse/core';
 import { computed, onMounted, ref, toRefs, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 
-const props = withDefaults(defineProps<ARangeCalendarRootProps>(), {
-  defaultValue: () => ({ start: undefined, end: undefined }),
-  as: 'div',
-  pagedNavigation: false,
-  preventDeselect: false,
-  weekStartsOn: 0,
-  weekdayFormat: 'narrow',
-  fixedWeeks: false,
-  numberOfMonths: 1,
-  disabled: false,
-  readonly: false,
-  initialFocus: false,
-  placeholder: undefined,
-  isDateDisabled: undefined,
-  isDateUnavailable: undefined,
-  allowNonContiguousRanges: false,
-});
+const props = withDefaults(
+  defineProps<ARangeCalendarRootProps>(),
+  {
+    defaultValue: () => ({ start: undefined, end: undefined }),
+    as: 'div',
+    pagedNavigation: false,
+    preventDeselect: false,
+    weekStartsOn: 0,
+    weekdayFormat: 'narrow',
+    fixedWeeks: false,
+    numberOfMonths: 1,
+    disabled: false,
+    readonly: false,
+    initialFocus: false,
+    placeholder: undefined,
+    isDateDisabled: undefined,
+    isDateUnavailable: undefined,
+    isDateHighlightable: undefined,
+    allowNonContiguousRanges: false,
+  },
+);
 const emits = defineEmits<ARangeCalendarRootEmits>();
 
 defineSlots<{
@@ -173,6 +182,7 @@ const {
   preventDeselect,
   isDateUnavailable: propsIsDateUnavailable,
   isDateDisabled: propsIsDateDisabled,
+  isDateHighlightable: propsIsDateHighlightable,
   calendarLabel,
   maxValue,
   minValue,
@@ -255,6 +265,7 @@ const {
 const {
   isInvalid,
   isSelected,
+  isDateHighlightable,
   highlightedRange,
   isSelectionStart,
   isSelectionEnd,
@@ -265,6 +276,7 @@ const {
   end: endValue,
   isDateDisabled,
   isDateUnavailable,
+  isDateHighlightable: propsIsDateHighlightable.value,
   focusedValue,
   allowNonContiguousRanges,
 });
@@ -347,6 +359,7 @@ useEventListener(
 
 provideRangeCalendarRootContext({
   isDateUnavailable,
+  isDateHighlightable,
   startValue,
   endValue,
   formatter,

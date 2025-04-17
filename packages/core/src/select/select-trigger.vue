@@ -15,7 +15,7 @@ import { useForwardExpose, useId, useTypeahead } from '~~/shared';
 import {
   injectASelectRootContext,
 } from './select-root.vue';
-import { OPEN_KEYS } from './utils';
+import { OPEN_KEYS, shouldShowPlaceholder } from './utils';
 
 const props = withDefaults(defineProps<ASelectTriggerProps>(), {
   as: 'button',
@@ -66,9 +66,7 @@ function handlePointerOpen(event: PointerEvent) {
       :dir="rootContext?.dir.value"
       :data-state="rootContext?.open.value ? 'open' : 'closed'"
       :data-disabled="isDisabled ? '' : undefined"
-      :data-placeholder="
-        rootContext.modelValue?.value ? undefined : ''
-      "
+      :data-placeholder="shouldShowPlaceholder(rootContext.modelValue?.value) ? '' : undefined"
       :as-child="asChild"
       :as="as"
       @click="

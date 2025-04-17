@@ -14,6 +14,7 @@ export interface UseRangeCalendarProps {
   end: Ref<DateValue | undefined>;
   isDateDisabled: DateMatcher;
   isDateUnavailable: DateMatcher;
+  isDateHighlightable?: DateMatcher;
   focusedValue: Ref<DateValue | undefined>;
   allowNonContiguousRanges: Ref<boolean>;
 }
@@ -80,6 +81,10 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
     return false;
   };
 
+  function isDateHighlightable(date: DateValue) {
+    return Boolean(props.isDateHighlightable?.(date));
+  }
+
   const highlightedRange = computed(() => {
     if (props.start.value && props.end.value) {
       return null;
@@ -103,7 +108,8 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
       start,
       end,
       isDisabled: props.isDateDisabled,
-      isUnavailable: props.isDateUnavailable,
+      isUnavailable: props.allowNonContiguousRanges.value ? () => false : props.isDateUnavailable,
+      isHighlightable: props.isDateHighlightable,
     });
 
     if (isValid) {
@@ -132,6 +138,7 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
   return {
     isInvalid,
     isSelected,
+    isDateHighlightable,
     highlightedRange,
     isSelectionStart,
     isSelectionEnd,

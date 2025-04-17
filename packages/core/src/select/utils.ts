@@ -1,3 +1,4 @@
+import type { AcceptableValue } from '~~/shared/types';
 import { isDeepEqual } from '@vinicunca/perkakas';
 
 export const OPEN_KEYS = [' ', 'Enter', 'ArrowUp', 'ArrowDown'];
@@ -32,4 +33,11 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
   }
 
   return isDeepEqual(value, currentValue);
+}
+
+export function shouldShowPlaceholder(value?: AcceptableValue | Array<AcceptableValue>): boolean {
+  return value === undefined
+    || value === null
+    || value === ''
+    || (Array.isArray(value) && value.length === 0);
 }

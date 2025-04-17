@@ -4,8 +4,14 @@ import { KEY_CODES } from '@vinicunca/perkakas';
 
 export interface ARovingFocusItemProps extends APrimitiveProps {
   tabStopId?: string;
+  /**
+   * When `false`, item wil be not be focusable.
+   * @defaultValue `true`
+   */
   focusable?: boolean;
+  /** When `true`, item will be initially focused. */
   active?: boolean;
+  /** When `true`, shift + arrow key will allow focusing on next/previous item. */
   allowShiftKey?: boolean;
 }
 </script>

@@ -207,27 +207,38 @@ export function getNextLastDayOfWeek<T extends DateValue = DateValue>(
 }
 
 export function areAllDaysBetweenValid(
-  { start, end, isUnavailable, isDisabled }:
+  { start, end, isUnavailable, isDisabled, isHighlightable }:
   {
     end: DateValue;
     isDisabled?: DateMatcher;
     isUnavailable?: DateMatcher;
     start: DateValue;
+    isHighlightable?: DateMatcher;
   },
 ) {
-  if (isUnavailable === undefined && isDisabled === undefined) {
+  if (
+    isUnavailable === undefined
+    && isDisabled === undefined
+    && isHighlightable === undefined
+  ) {
     return true;
   }
 
   let dCurrent = start.add({ days: 1 });
-  if (isDisabled?.(dCurrent) || isUnavailable?.(dCurrent)) {
+  if (
+    (isDisabled?.(dCurrent) || isUnavailable?.(dCurrent))
+    && !isHighlightable?.(dCurrent)
+  ) {
     return false;
   }
 
   const dEnd = end;
   while (dCurrent.compare(dEnd) < 0) {
     dCurrent = dCurrent.add({ days: 1 });
-    if (isDisabled?.(dCurrent) || isUnavailable?.(dCurrent)) {
+    if (
+      (isDisabled?.(dCurrent) || isUnavailable?.(dCurrent))
+      && !isHighlightable?.(dCurrent)
+    ) {
       return false;
     }
   }

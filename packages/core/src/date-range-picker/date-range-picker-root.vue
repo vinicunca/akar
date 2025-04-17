@@ -34,6 +34,7 @@ type DateRangePickerRootContext = {
   readonly: Ref<boolean>;
   isDateDisabled?: DateMatcher;
   isDateUnavailable?: DateMatcher;
+  isDateHighlightable?: DateMatcher;
   defaultOpen: Ref<boolean>;
   open: Ref<boolean>;
   modal: Ref<boolean>;
@@ -44,7 +45,7 @@ type DateRangePickerRootContext = {
   allowNonContiguousRanges: Ref<boolean>;
 };
 
-export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn'>;
+export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable'>;
 
 export type ADateRangePickerRootEmits = {
   /** Event handler called whenever the model value changes */
@@ -84,6 +85,7 @@ const props = withDefaults(defineProps<ADateRangePickerRootProps>(), {
   locale: 'en',
   isDateDisabled: undefined,
   isDateUnavailable: undefined,
+  isDateHighlightable: undefined,
   allowNonContiguousRanges: false,
 });
 const emits = defineEmits<ADateRangePickerRootEmits & APopoverRootEmits>();
@@ -99,6 +101,7 @@ const {
   preventDeselect,
   isDateDisabled: propsIsDateDisabled,
   isDateUnavailable: propsIsDateUnavailable,
+  isDateHighlightable: propsIsDateHighlightable,
   defaultOpen,
   modal,
   id,
@@ -152,6 +155,7 @@ provideDateRangePickerRootContext({
   allowNonContiguousRanges,
   isDateUnavailable: propsIsDateUnavailable.value,
   isDateDisabled: propsIsDateDisabled.value,
+  isDateHighlightable: propsIsDateHighlightable.value,
   locale,
   disabled,
   pagedNavigation,
