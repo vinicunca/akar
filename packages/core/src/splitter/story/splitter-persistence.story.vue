@@ -13,15 +13,15 @@ import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
           auto-save-id="persistence"
           direction="horizontal"
         >
-          <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
+          <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
             Panel A
           </ASplitterPanel>
           <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
-          <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
+          <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
             Panel B
           </ASplitterPanel>
           <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
-          <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
+          <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
             Panel C
           </ASplitterPanel>
         </ASplitterGroup>

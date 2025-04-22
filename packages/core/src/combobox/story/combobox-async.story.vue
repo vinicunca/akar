@@ -31,15 +31,15 @@ async function handleOpen(val: boolean) {
           console.log(v)
         }"
       >
-        <AComboboxAnchor class="text-grass11 hover:bg-mauve3 data-[placeholder]:text-grass9 h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none shadow-[0_2px_10px] shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
+        <AComboboxAnchor class="h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] text-grass11 leading-none shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-mauve3 data-[placeholder]:text-grass9 focus:shadow-[0_0_0_2px] focus:shadow-black">
           <AComboboxInput
-            class="text-grass11 bg-transparent outline-none placeholder-gray-400"
+            class="bg-transparent text-grass11 outline-none placeholder-gray-400"
             placeholder="Test"
           />
           <AComboboxTrigger>
             <Icon
               icon="radix-icons:chevron-down"
-              class="text-grass11 h-4 w-4"
+              class="h-4 w-4 text-grass11"
             />
           </AComboboxTrigger>
         </AComboboxAnchor>
@@ -56,7 +56,7 @@ async function handleOpen(val: boolean) {
             <AComboboxItem
               v-for="option in data"
               :key="option.id"
-              class="text-grass11 data-[disabled]:text-mauve8 data-[highlighted]:bg-grass9 data-[highlighted]:text-grass1 relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none"
+              class="relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] text-grass11 leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-grass9 data-[disabled]:text-mauve8 data-[highlighted]:text-grass1 data-[highlighted]:outline-none"
               :value="option"
             >
               <AComboboxItemIndicator

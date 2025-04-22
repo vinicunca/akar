@@ -39,7 +39,7 @@ import {
         >
           <ADateRangePickerField
             v-slot="{ segments }"
-            class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded p-2 text-center data-[invalid]:border-red-500"
+            class="flex select-none items-center border border-gray9 rounded p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
           >
             <template
               v-for="item in segments.start"
@@ -56,7 +56,7 @@ import {
                 v-else
                 type="start"
                 :part="item.part"
-                class="hover:bg-grass4 ]:text-grass6 rounded-5px px-1 py-1 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+                class="]:text-grass6 rounded-5px px-1 py-1 hover:bg-grass4 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
               >
                 {{ item.value }}
               </ADateRangePickerInput>
@@ -78,7 +78,7 @@ import {
                 v-else
                 type="end"
                 :part="item.part"
-                class="hover:bg-grass4 ]:text-grass6 rounded-5px px-1 py-1 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+                class="]:text-grass6 rounded-5px px-1 py-1 hover:bg-grass4 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
               >
                 {{ item.value }}
               </ADateRangePickerInput>
@@ -155,7 +155,7 @@ import {
                         <ADateRangePickerCellTrigger
                           :day="weekDate"
                           :month="month.value"
-                          class="data-[highlighted]:bg-grass9/30 data-[today]:before:bg-grass9 relative flex items-center justify-center whitespace-nowrap border border-transparent rounded-[9px] bg-transparent p-2 text-sm text-black font-normal outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 hover:border-black before:rounded-full data-[highlighted]:rounded-none data-[selection-end]:rounded-none data-[selection-start]:rounded-none data-[selection-end]:rounded-r-[9px] data-[selection-start]:rounded-l-[9px] before:bg-white data-[selected]:bg-black data-[selection-end]:bg-black data-[selection-start]:bg-black data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:shadow-[0_0_0_2px] focus:shadow-black data-[today]:before:block data-[selected]:before:bg-white data-[selected]:[&:not([data-selection-start])]:[&:not([data-selection-end])]:rounded-none"
+                          class="relative flex items-center justify-center whitespace-nowrap border border-transparent rounded-[9px] bg-transparent p-2 text-sm text-black font-normal outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 hover:border-black before:rounded-full data-[highlighted]:rounded-none data-[selection-end]:rounded-none data-[selection-start]:rounded-none data-[selection-end]:rounded-r-[9px] data-[selection-start]:rounded-l-[9px] before:bg-white data-[highlighted]:bg-grass9/30 data-[selected]:bg-black data-[selection-end]:bg-black data-[selection-start]:bg-black data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:shadow-[0_0_0_2px] focus:shadow-black data-[today]:before:block data-[selected]:before:bg-white data-[today]:before:bg-grass9 data-[selected]:[&:not([data-selection-start])]:[&:not([data-selection-end])]:rounded-none"
                         />
                       </ADateRangePickerCell>
                     </ADateRangePickerGridRow>

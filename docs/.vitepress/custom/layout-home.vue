@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-
 // import AccordionDemo from '../../components/demo/Accordion/tailwind/index.vue';
 // import CalendarDemo from '../../components/demo/Calendar/tailwind/index.vue';
 // import HoverCardDemo from '../../components/demo/HoverCard/tailwind/index.vue';

@@ -43,7 +43,7 @@ function handleCheck(ev: any) {
   <div>
     <ADropdownMenuRoot v-model:open="toggleState">
       <ADropdownMenuTrigger
-        class="text-violet11 shadow-blackA7 h-[35px] w-[35px] inline-flex items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+        class="h-[35px] w-[35px] inline-flex items-center justify-center rounded-full bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
         aria-label="Customise options"
       >
         <Icon icon="radix-icons:hamburger-menu" />
@@ -55,13 +55,13 @@ function handleCheck(ev: any) {
         >
           <ADropdownMenuItem
             value="New Tab"
-            class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+            class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
             v-bind="useEmitAsProps(emits)"
             @click="handleClick"
           >
             New Tab
             <div
-              class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+              class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
             >
               ⌘+T
             </div>
@@ -115,23 +115,23 @@ function handleCheck(ev: any) {
           </ADropdownMenuSub> -->
           <ADropdownMenuItem
             value="New Window"
-            class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+            class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
           >
             New Window
             <div
-              class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+              class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
             >
               ⌘+N
             </div>
           </ADropdownMenuItem>
           <ADropdownMenuItem
             value="New Private Window"
-            class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+            class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
             disabled
           >
             New Private Window
             <div
-              class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+              class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
             >
               ⇧+⌘+N
             </div>
@@ -289,7 +289,7 @@ function handleCheck(ev: any) {
           <ADropdownMenuSeparator class="m-[5px] h-[1px] bg-violet6" />
           <ADropdownMenuCheckboxItem
             v-model="checkboxOne"
-            class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+            class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
             @select="handleCheck"
           >
             <ADropdownMenuItemIndicator
@@ -299,14 +299,14 @@ function handleCheck(ev: any) {
             </ADropdownMenuItemIndicator>
             Show Bookmarks
             <div
-              class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+              class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
             >
               ⌘+B
             </div>
           </ADropdownMenuCheckboxItem>
           <ADropdownMenuCheckboxItem
             v-model="checkboxTwo"
-            class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+            class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
           >
             <ADropdownMenuItemIndicator
               class="absolute left-0 w-[25px] inline-flex items-center justify-center"
@@ -318,13 +318,13 @@ function handleCheck(ev: any) {
           <ADropdownMenuSeparator class="m-[5px] h-[1px] bg-violet6" />
 
           <ADropdownMenuLabel
-            class="text-mauve11 pl-[25px] text-xs leading-[25px]"
+            class="pl-[25px] text-xs text-mauve11 leading-[25px]"
           >
             People
           </ADropdownMenuLabel>
           <ADropdownMenuRadioGroup v-model="person">
             <ADropdownMenuRadioItem
-              class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+              class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
               value="pedro"
             >
               <ADropdownMenuItemIndicator
@@ -335,7 +335,7 @@ function handleCheck(ev: any) {
               Pedro Duarte
             </ADropdownMenuRadioItem>
             <ADropdownMenuRadioItem
-              class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+              class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
               value="colm"
             >
               <ADropdownMenuItemIndicator

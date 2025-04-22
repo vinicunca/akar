@@ -32,14 +32,14 @@ const items = groupCountriesByFirstLetter(countryList);
         multiple
         selection-behavior="replace"
         propagate-select
-        class="text-blackA11 h-80 w-64 select-none list-none overflow-y-auto rounded-lg bg-white p-2 text-sm font-medium"
+        class="h-80 w-64 select-none list-none overflow-y-auto rounded-lg bg-white p-2 text-sm text-blackA11 font-medium"
       >
         <ATreeVirtualizer
           v-slot="{ item }"
           :text-content="(item) => item.title"
         >
           <ATreeItem
-            class="focus:ring-grass9 data-[selected]:bg-grass4 my-0.5 w-max flex items-center rounded px-2 py-1 outline-none focus:ring-2"
+            class="my-0.5 w-max flex items-center rounded px-2 py-1 outline-none data-[selected]:bg-grass4 focus:ring-2 focus:ring-grass9"
             :style="{ 'margin-left': `${item.level - 1}rem` }"
             v-bind="item.bind"
           >

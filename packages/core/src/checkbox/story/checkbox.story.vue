@@ -19,7 +19,7 @@ const checkboxThree = ref(false);
         >
           <ACheckboxRoot
             v-model="checkboxOne"
-            class="shadow-blackA7 h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
+            class="h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
           >
             <ACheckboxIndicator
               class="h-full w-full flex items-center justify-center rounded bg-white"
@@ -43,7 +43,7 @@ const checkboxThree = ref(false);
         >
           <ACheckboxRoot
             disabled
-            class="data-[disabled]:bg-mauve9 focus-within-within:outline focus-within-within:outline-2 focus-within-within:outline-[#00000066] aspect-square h-6 flex items-center justify-center rounded bg-white shadow"
+            class="focus-within-within:outline focus-within-within:outline-2 focus-within-within:outline-[#00000066] aspect-square h-6 flex items-center justify-center rounded bg-white shadow data-[disabled]:bg-mauve9"
           >
             <ACheckboxIndicator
               class="h-full w-full flex items-center justify-center rounded bg-white"
@@ -62,7 +62,7 @@ const checkboxThree = ref(false);
           <ACheckboxRoot
             v-model="checkboxThree"
             required
-            class="shadow-blackA7 h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
+            class="h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
           >
             <ACheckboxIndicator
               class="h-full w-full flex items-center justify-center rounded bg-white"

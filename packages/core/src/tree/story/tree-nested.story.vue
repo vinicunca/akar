@@ -11,7 +11,7 @@ import { items } from './constants';
   >
     <Variant title="default">
       <ATreeRoot
-        class="text-blackA11 w-64 select-none list-none rounded-lg bg-white p-2 text-sm font-medium"
+        class="w-64 select-none list-none rounded-lg bg-white p-2 text-sm text-blackA11 font-medium"
         :items="items"
         :get-key="(item) => item.title"
       >

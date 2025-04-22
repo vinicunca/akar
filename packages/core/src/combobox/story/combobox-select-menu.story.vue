@@ -62,13 +62,13 @@ const comboboxRef = ref<GenericComponentInstance<typeof AComboboxRoot>>();
       >
         <AComboboxAnchor
           as-child
-          class="text-grass11 hover:bg-mauve3 data-[placeholder]:text-grass9 h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none shadow-[0_2px_10px] shadow-black/10 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+          class="h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] text-grass11 leading-none shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-mauve3 data-[placeholder]:text-grass9 focus:shadow-[0_0_0_2px] focus:shadow-black"
         >
           <AComboboxTrigger tabindex="0">
             <span>{{ modelValue }}</span>
             <Icon
               icon="radix-icons:chevron-down"
-              class="text-grass11 h-4 w-4"
+              class="h-4 w-4 text-grass11"
             />
           </AComboboxTrigger>
         </AComboboxAnchor>
@@ -80,11 +80,11 @@ const comboboxRef = ref<GenericComponentInstance<typeof AComboboxRoot>>();
           >
             <AComboboxViewport class="p-[5px]">
               <AComboboxInput
-                class="text-grass11 bg-transparent outline-none placeholder-gray-400"
+                class="bg-transparent text-grass11 outline-none placeholder-gray-400"
                 placeholder="Test"
               />
 
-              <AComboboxEmpty class="text-mauve8 py-2 text-center text-xs font-medium" />
+              <AComboboxEmpty class="py-2 text-center text-xs text-mauve8 font-medium" />
 
               <template
                 v-for="(group, index) in options"
@@ -93,10 +93,10 @@ const comboboxRef = ref<GenericComponentInstance<typeof AComboboxRoot>>();
                 <AComboboxGroup>
                   <AComboboxSeparator
                     v-if="index !== 0"
-                    class="bg-grass6 m-[5px] h-[1px]"
+                    class="m-[5px] h-[1px] bg-grass6"
                   />
 
-                  <AComboboxLabel class="text-mauve11 px-[25px] text-xs leading-[25px]">
+                  <AComboboxLabel class="px-[25px] text-xs text-mauve11 leading-[25px]">
                     {{ group.name }}
                   </AComboboxLabel>
 
@@ -104,7 +104,7 @@ const comboboxRef = ref<GenericComponentInstance<typeof AComboboxRoot>>();
                     v-for="option in group.children"
                     :key="option.name"
                     :value="option.name"
-                    class="text-grass11 data-[disabled]:text-mauve8 data-[highlighted]:bg-grass9 data-[highlighted]:text-grass1 relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none data-[disabled]:pointer-events-none data-[highlighted]:outline-none"
+                    class="relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] text-grass11 leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-grass9 data-[disabled]:text-mauve8 data-[highlighted]:text-grass1 data-[highlighted]:outline-none"
                   >
                     <AComboboxItemIndicator
                       class="absolute left-0 w-[25px] inline-flex items-center justify-center"

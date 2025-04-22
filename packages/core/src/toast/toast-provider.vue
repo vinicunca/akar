@@ -7,7 +7,7 @@ import { createContext } from '~~/shared';
 type ToastProviderContext = {
   label: Ref<string>;
   duration: Ref<number>;
-  swipeDirection: Ref< SwipeDirection>;
+  swipeDirection: Ref<SwipeDirection>;
   swipeThreshold: Ref<number>;
   toastCount: Ref<number>;
   viewport: Ref<HTMLElement | undefined>;

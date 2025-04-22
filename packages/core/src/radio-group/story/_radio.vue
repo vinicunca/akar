@@ -7,7 +7,7 @@ import Radio from '../radio.vue';
     <Radio
       id="r1"
       aria-label="Default"
-      class="shadow-blackA7 h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] outline-none data-[disabled]:bg-red-500 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+      class="h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none data-[disabled]:bg-red-500 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
       value="true"
       name="test"
     />

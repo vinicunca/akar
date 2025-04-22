@@ -34,7 +34,7 @@ const forwarded = useForwardPropsEmits(props, emits);
   <ADateRangePickerRoot v-bind="forwarded">
     <ADateRangePickerField
       v-slot="{ segments }"
-      class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded-lg bg-white p-1 text-center data-[invalid]:border-red-500"
+      class="flex select-none items-center border border-gray9 rounded-lg bg-white p-1 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
     >
       <template
         v-for="item in segments.start"
@@ -51,7 +51,7 @@ const forwarded = useForwardPropsEmits(props, emits);
           v-else
           type="start"
           :part="item.part"
-          class="hover:bg-grass4 rounded-md p-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+          class="rounded-md p-1 hover:bg-grass4 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
         >
           {{ item.value }}
         </ADateRangePickerInput>
@@ -73,7 +73,7 @@ const forwarded = useForwardPropsEmits(props, emits);
           v-else
           type="end"
           :part="item.part"
-          class="hover:bg-grass4 rounded-md p-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+          class="rounded-md p-1 hover:bg-grass4 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
         >
           {{ item.value }}
         </ADateRangePickerInput>
@@ -97,7 +97,7 @@ const forwarded = useForwardPropsEmits(props, emits);
       >
         <ADateRangePickerHeader class="flex items-center justify-between">
           <ADateRangePickerPrev
-            class="hover:bg-green10 h-8 w-8 inline-flex cursor-pointer items-center justify-center rounded-md bg-transparent text-black active:scale-98 hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+            class="h-8 w-8 inline-flex cursor-pointer items-center justify-center rounded-md bg-transparent text-black active:scale-98 hover:bg-green10 hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
           >
             <Icon
               icon="radix-icons:chevron-left"
@@ -107,7 +107,7 @@ const forwarded = useForwardPropsEmits(props, emits);
 
           <ADateRangePickerHeading class="text-[15px] text-black font-medium" />
           <ADateRangePickerNext
-            class="hover:bg-green10 h-8 w-8 inline-flex cursor-pointer items-center justify-center rounded-md bg-transparent text-black active:scale-98 hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+            class="h-8 w-8 inline-flex cursor-pointer items-center justify-center rounded-md bg-transparent text-black active:scale-98 hover:bg-green10 hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
           >
             <Icon
               icon="radix-icons:chevron-right"
@@ -149,7 +149,7 @@ const forwarded = useForwardPropsEmits(props, emits);
                   <ADateRangePickerCellTrigger
                     :day="weekDate"
                     :month="month.value"
-                    class="data-[today]:before:bg-grass9 data-[highlighted]:bg-grass9/30 data-[selected]:bg-green10 data-[selection-start]:bg-green10 data-[selection-end]:bg-green10 relative h-8 w-8 flex items-center justify-center whitespace-nowrap bg-transparent text-sm text-black font-normal outline-offset-0 outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 data-[selection-end]:rounded-r-lg data-[selection-start]:rounded-l-lg before:bg-white data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:outline-black hover:outline-black data-[today]:before:block data-[selected]:before:bg-white"
+                    class="relative h-8 w-8 flex items-center justify-center whitespace-nowrap bg-transparent text-sm text-black font-normal outline-offset-0 outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 data-[selection-end]:rounded-r-lg data-[selection-start]:rounded-l-lg before:bg-white data-[highlighted]:bg-grass9/30 data-[selected]:bg-green10 data-[selection-end]:bg-green10 data-[selection-start]:bg-green10 data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:outline-black hover:outline-black data-[today]:before:block data-[selected]:before:bg-white data-[today]:before:bg-grass9"
                   />
                 </ADateRangePickerCell>
               </ADateRangePickerGridRow>

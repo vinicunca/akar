@@ -11,7 +11,7 @@ const props = defineProps<ANumberFieldRootProps>();
     v-bind="props"
     id="number-field"
     data-testid="root"
-    class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+    class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
   >
     <label
       for="number-field"

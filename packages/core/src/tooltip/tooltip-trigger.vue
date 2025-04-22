@@ -1,6 +1,4 @@
 <script lang="ts">
-import { useForwardExpose, useId } from '~~/shared';
-
 export type TooltipTriggerDataState =
   | 'closed'
   | 'delayed-open'
@@ -13,15 +11,17 @@ export interface ATooltipTriggerProps extends APopperAnchorProps {}
 import type { APopperAnchorProps } from '~~/popper';
 import { computed, onMounted, ref } from 'vue';
 import { APopperAnchor } from '~~/popper';
-import {
-  APrimitive,
-} from '~~/primitive';
+import { APrimitive } from '~~/primitive';
+import { useForwardExpose, useId } from '~~/shared';
 import { injectATooltipProviderContext } from './tooltip-provider.vue';
 import { injectATooltipRootContext } from './tooltip-root.vue';
 
-const props = withDefaults(defineProps<ATooltipTriggerProps>(), {
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<ATooltipTriggerProps>(),
+  {
+    as: 'button',
+  },
+);
 const rootContext = injectATooltipRootContext();
 const providerContext = injectATooltipProviderContext();
 
@@ -58,6 +58,10 @@ function handlePointerUp() {
 }
 
 function handlePointerDown() {
+  if (rootContext.open) {
+    rootContext.onClose();
+  }
+
   isPointerDown.value = true;
   document.addEventListener('pointerup', handlePointerUp, { once: true });
 }

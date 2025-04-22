@@ -33,7 +33,7 @@ function closeB(opened: boolean) {
     <Variant title="default">
       <div class="h-[300vh]">
         <button
-          class="bg-blackA9 text-black9 hover:bg-blackA10 rounded-[4px] p-2 text-white"
+          class="text-black9 rounded-[4px] bg-blackA9 p-2 text-white hover:bg-blackA10"
           @click="openA"
         >
           Open A
@@ -43,13 +43,13 @@ function closeB(opened: boolean) {
             v-model:open="dialogAOpen"
             @update:open="closeA"
           >
-            <ADialogOverlay class="bg-blackA9 fixed inset-0" />
+            <ADialogOverlay class="fixed inset-0 bg-blackA9" />
             <ADialogContent
               class="fixed left-[50%] top-[50%] max-h-[85vh] max-w-[450px] w-[90vw] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px]"
             >
               <h1>Dialog A</h1>
               <button
-                class="text-black9 bg-blackA9 hover:bg-blackA10 rounded-[4px] p-2 text-white"
+                class="text-black9 rounded-[4px] bg-blackA9 p-2 text-white hover:bg-blackA10"
                 @click="openB"
               >
                 Open B
@@ -62,13 +62,13 @@ function closeB(opened: boolean) {
             v-model:open="dialogBOpen"
             @update:open="closeB"
           >
-            <ADialogOverlay class="bg-blackA9 fixed inset-0" />
+            <ADialogOverlay class="fixed inset-0 bg-blackA9" />
             <ADialogContent
               class="fixed left-[50%] top-[50%] max-h-[85vh] max-w-[450px] w-[90vw] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px]"
             >
               <h1>Dialog B</h1>
               <button
-                class="text-black9 bg-blackA9 hover:bg-blackA10 rounded-[4px] p-2 text-white"
+                class="text-black9 rounded-[4px] bg-blackA9 p-2 text-white hover:bg-blackA10"
                 @click="openA"
               >
                 Open A

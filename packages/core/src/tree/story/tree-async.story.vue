@@ -78,7 +78,7 @@ async function fetchChildren(ev: ATreeItemToggleEvent<TreeNode>) {
     <Variant title="default">
       <ATreeRoot
         v-slot="{ flattenItems }"
-        class="text-blackA11 w-64 select-none list-none rounded-lg bg-white p-2 text-sm font-medium"
+        class="w-64 select-none list-none rounded-lg bg-white p-2 text-sm text-blackA11 font-medium"
         :items="treeData"
         :get-key="(item) => `${item.id}`"
       >
@@ -87,7 +87,7 @@ async function fetchChildren(ev: ATreeItemToggleEvent<TreeNode>) {
           :key="item._id"
           v-slot="{ isExpanded }"
           :style="{ 'margin-left': `${item.level - 1}rem` }"
-          class="focus:ring-grass9 data-[selected]:bg-grass4 my-0.5 w-max flex rotate-0 items-center rounded px-2 py-1 outline-none transition focus:ring-2"
+          class="my-0.5 w-max flex rotate-0 items-center rounded px-2 py-1 outline-none transition data-[selected]:bg-grass4 focus:ring-2 focus:ring-grass9"
           v-bind="item.bind"
           @toggle="fetchChildren"
         >

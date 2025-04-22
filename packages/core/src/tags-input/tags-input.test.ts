@@ -13,7 +13,7 @@ describe('given default TagsInput', () => {
   let wrapper: VueWrapper<InstanceType<typeof TagsInput>>;
   let input: DOMWrapper<HTMLInputElement>;
   let tags: Array<DOMWrapper<HTMLElement>>;
-  let rootComponent: Omit< VueWrapper, 'exists'>;
+  let rootComponent: Omit<VueWrapper, 'exists'>;
 
   beforeEach(() => {
     wrapper = mount(TagsInput, { attachTo: document.body });

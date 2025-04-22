@@ -14,7 +14,7 @@ import { ANumberFieldDecrement, ANumberFieldIncrement, ANumberFieldInput, ANumbe
         :min="0"
         :default-value="18"
       >
-        <div class="bg-blackA7 border-blackA9 mt-1 flex items-center border rounded-md">
+        <div class="mt-1 flex items-center border border-blackA9 rounded-md bg-blackA7">
           <ANumberFieldDecrement class="p-2 disabled:opacity-20">
             <Icon icon="radix-icons:minus" />
           </ANumberFieldDecrement>

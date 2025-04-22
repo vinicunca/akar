@@ -9,14 +9,20 @@ import { APrimitive } from '~~/primitive';
 import { useForwardExpose } from '~~/shared';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
-const props = withDefaults(defineProps<AComboboxCancelProps>(), {
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<AComboboxCancelProps>(),
+  {
+    as: 'button',
+  },
+);
 
 useForwardExpose();
 const rootContext = injectAComboboxRootContext();
 
 function handleClick() {
+  // Reset the search to show all options.
+  rootContext.filterState.search = '';
+
   if (rootContext.inputElement.value) {
     rootContext.inputElement.value.value = '';
     rootContext.inputElement.value.focus();

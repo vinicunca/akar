@@ -18,7 +18,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
     <Variant title="Empty default">
       <ADateFieldRoot
         v-slot="{ segments }"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -45,7 +45,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
       <ADateFieldRoot
         v-slot="{ segments }"
         :default-value="defaultValue"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -71,7 +71,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
     <Variant title="Uncontrolled">
       <ADateFieldRoot
         v-slot="{ segments }"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -98,7 +98,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
       <ADateFieldRoot
         v-slot="{ segments }"
         v-model="modelValue"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -126,7 +126,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
         v-slot="{ segments }"
         :default-value="defaultValue"
         :min-value="minValue"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -154,7 +154,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
         v-slot="{ segments }"
         :default-value="defaultValue"
         :max-value="maxValue"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -182,7 +182,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
         v-slot="{ segments }"
         :default-value="defaultValue"
         :disabled="true"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -209,7 +209,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
       <ADateFieldRoot
         v-slot="{ segments }"
         locale="de"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"

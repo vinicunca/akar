@@ -6,7 +6,7 @@ defineProps<{ delay?: number }>();
 
 <template>
   <AAvatarRoot
-    class="bg-blackA3 h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full align-middle"
+    class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
   >
     <AAvatarImage
       class="h-full w-full rounded-[inherit] object-cover"
@@ -14,7 +14,7 @@ defineProps<{ delay?: number }>();
       alt="Colm Tuite"
     />
     <AAvatarFallback
-      class="text-violet11 h-full w-full flex items-center justify-center bg-white text-[15px] font-medium leading-1"
+      class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
       :delay-ms="delay"
     >
       CT

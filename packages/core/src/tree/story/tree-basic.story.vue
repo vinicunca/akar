@@ -12,7 +12,7 @@ import { items } from './constants';
     <Variant title="default">
       <ATreeRoot
         v-slot="{ flattenItems }"
-        class="text-blackA11 w-64 select-none list-none rounded-lg bg-white p-2 text-sm font-medium"
+        class="w-64 select-none list-none rounded-lg bg-white p-2 text-sm text-blackA11 font-medium"
         :items="items"
         :get-key="(item) => item.title"
       >
@@ -21,7 +21,7 @@ import { items } from './constants';
           :key="item._id"
           v-bind="item.bind"
           :style="{ 'margin-left': `${item.level - 1}rem` }"
-          class="focus:ring-grass9 data-[selected]:bg-grass4 my-0.5 w-max flex items-center rounded px-2 py-1 outline-none focus:ring-2"
+          class="my-0.5 w-max flex items-center rounded px-2 py-1 outline-none data-[selected]:bg-grass4 focus:ring-2 focus:ring-grass9"
         >
           <Icon
             v-if="item.hasChildren"

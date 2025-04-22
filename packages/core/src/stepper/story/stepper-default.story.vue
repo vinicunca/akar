@@ -46,9 +46,9 @@ const steps = [{
           class="group flex basis-1/5 cursor-pointer items-center gap-2 data-[disabled]:pointer-events-none"
           :step="item.step"
         >
-          <AStepperTrigger class="focus:shadow-green11 flex flex-col items-center gap-2 rounded-md p-2 text-center focus:shadow-[0_0_0_2px] focus:outline-none">
+          <AStepperTrigger class="flex flex-col items-center gap-2 rounded-md p-2 text-center focus:shadow-[0_0_0_2px] focus:shadow-green11 focus:outline-none">
             <AStepperIndicator
-              class="group-data-[state=active]:bg-mauve12 text-grass11 group-data-[state=active]:shadow-mauve12 bg-mauve6 h-10 w-10 inline-flex shrink-0 items-center justify-center rounded-full shadow-[0_0_0_2px] group-data-[state=completed]:bg-green9 group-data-[disabled]:text-gray-400 group-data-[state=active]:text-white group-data-[state=completed]:text-white group-data-[state=completed]:shadow-green9"
+              class="h-10 w-10 inline-flex shrink-0 items-center justify-center rounded-full bg-mauve6 text-grass11 shadow-[0_0_0_2px] group-data-[state=active]:bg-mauve12 group-data-[state=completed]:bg-green9 group-data-[disabled]:text-gray-400 group-data-[state=active]:text-white group-data-[state=completed]:text-white group-data-[state=active]:shadow-mauve12 group-data-[state=completed]:shadow-green9"
             >
               <Icon
                 :icon="item.icon"
@@ -59,7 +59,7 @@ const steps = [{
               <AStepperTitle class="text-md whitespace-nowrap font-medium">
                 {{ item.title }}
               </AStepperTitle>
-              <AStepperDescription class="text-mauve8 hidden text-xs">
+              <AStepperDescription class="hidden text-xs text-mauve8">
                 {{ item.description }}
               </AStepperDescription>
             </div>

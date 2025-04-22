@@ -20,11 +20,11 @@ const radioStateSingle = ref('compact');
         <div class="flex items-center">
           <ARadioGroupItem
             id="r1"
-            class="shadow-blackA7 h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] outline-none data-[disabled]:bg-red-500 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none data-[disabled]:bg-red-500 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
             value="default"
           >
             <ARadioGroupIndicator
-              class="after:bg-violet11 relative h-full w-full flex items-center justify-center after:block after:h-[11px] after:w-[11px] after:rounded-[50%] after:content-['']"
+              class="relative h-full w-full flex items-center justify-center after:block after:h-[11px] after:w-[11px] after:rounded-[50%] after:bg-violet11 after:content-['']"
             />
           </ARadioGroupItem>
           <label
@@ -37,11 +37,11 @@ const radioStateSingle = ref('compact');
         <div class="flex items-center">
           <ARadioGroupItem
             id="r2"
-            class="shadow-blackA7 h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] outline-none data-[disabled]:bg-red-500 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none data-[disabled]:bg-red-500 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
             value="comfortable"
           >
             <ARadioGroupIndicator
-              class="after:bg-violet11 relative h-full w-full flex items-center justify-center after:block after:h-[11px] after:w-[11px] after:rounded-[50%] after:content-['']"
+              class="relative h-full w-full flex items-center justify-center after:block after:h-[11px] after:w-[11px] after:rounded-[50%] after:bg-violet11 after:content-['']"
             />
           </ARadioGroupItem>
           <label
@@ -55,12 +55,12 @@ const radioStateSingle = ref('compact');
           <ARadioGroupItem
             id="r3"
             as-child
-            class="shadow-blackA7 h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="h-[25px] w-[25px] cursor-default rounded-full bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
             value="compact"
           >
             <button>
               <ARadioGroupIndicator
-                class="after:bg-violet11 relative h-full w-full flex items-center justify-center after:block after:h-[11px] after:w-[11px] after:rounded-[50%] after:content-['']"
+                class="relative h-full w-full flex items-center justify-center after:block after:h-[11px] after:w-[11px] after:rounded-[50%] after:bg-violet11 after:content-['']"
               />
             </button>
           </ARadioGroupItem>

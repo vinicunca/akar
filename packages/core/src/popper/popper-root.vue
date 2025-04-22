@@ -8,7 +8,7 @@ export interface Measurable {
 }
 
 interface PopperRootContext {
-  anchor: Ref<ReferenceElement | undefined >;
+  anchor: Ref<ReferenceElement | undefined>;
   onAnchorChange: (element: ReferenceElement | undefined) => void;
 }
 

@@ -1,6 +1,6 @@
 import type { Ref } from 'vue';
 import type { AcceptableValue, SingleOrMultipleProps } from './types';
-import { isDeepEqual, isDefined } from '@vinicunca/perkakas';
+import { isDeepEqual } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed } from 'vue';
 import { isValueEqualOrExist } from './is-value-equal-or-exist';
@@ -18,7 +18,6 @@ import { isValueEqualOrExist } from './is-value-equal-or-exist';
 function validateProps({ type, defaultValue, modelValue }: SingleOrMultipleProps) {
   const value = modelValue || defaultValue;
 
-  // const canTypeBeInferred = isDefined(modelValue) || isDefined(defaultValue);
   const canTypeBeInferred = modelValue !== undefined || defaultValue !== undefined;
 
   if (canTypeBeInferred) {
@@ -38,7 +37,6 @@ function getDefaultType({ type, defaultValue, modelValue }: SingleOrMultipleProp
 }
 
 function getDefaultValue({ type, defaultValue }: SingleOrMultipleProps) {
-  // if (isDefined(defaultValue)) {
   if (defaultValue !== undefined) {
     return defaultValue;
   }

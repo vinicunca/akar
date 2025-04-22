@@ -31,7 +31,7 @@ function rotateIndex() {
   <Story title="Avatar/Demo">
     <Variant title="default">
       <AAvatarRoot
-        class="bg-blackA3 h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full align-middle"
+        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
       >
         <AAvatarImage
           class="h-full w-full rounded-[inherit] object-cover"
@@ -39,14 +39,14 @@ function rotateIndex() {
           alt="Colm Tuite"
         />
         <AAvatarFallback
-          class="text-violet11 h-full w-full flex items-center justify-center bg-white text-[15px] font-medium leading-1"
+          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
           :delay-ms="600"
         >
           CT
         </AAvatarFallback>
       </AAvatarRoot>
       <AAvatarRoot
-        class="bg-blackA3 h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full align-middle"
+        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
       >
         <AAvatarImage
           class="h-full w-full rounded-[inherit] object-cover"
@@ -54,13 +54,13 @@ function rotateIndex() {
           alt="Pedro Duarte"
         />
         <AAvatarFallback
-          class="text-violet11 h-full w-full flex items-center justify-center bg-white text-[15px] font-medium leading-1"
+          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
         >
           JD
         </AAvatarFallback>
       </AAvatarRoot>
       <AAvatarRoot
-        class="bg-blackA3 h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full align-middle"
+        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
       >
         <AAvatarImage
           class="h-full w-full rounded-[inherit] object-cover"
@@ -68,22 +68,22 @@ function rotateIndex() {
           alt="Pedro Duarte"
         />
         <AAvatarFallback
-          class="text-violet11 h-full w-full flex items-center justify-center bg-white text-[15px] font-medium leading-1"
+          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
         >
           RD
         </AAvatarFallback>
       </AAvatarRoot>
       <AAvatarRoot
-        class="bg-blackA3 h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full align-middle"
+        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
       >
         <AAvatarFallback
-          class="text-violet11 h-full w-full flex items-center justify-center bg-white text-[15px] font-medium leading-1"
+          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
         >
           PD
         </AAvatarFallback>
       </AAvatarRoot>
       <AAvatarRoot
-        class="bg-blackA3 h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full align-middle"
+        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
         @click.prevent="rotateIndex"
       >
         <AAvatarImage
@@ -92,7 +92,7 @@ function rotateIndex() {
           :alt="profile.alt"
         />
         <AAvatarFallback
-          class="text-violet11 h-full w-full flex items-center justify-center bg-white text-[15px] font-medium leading-1"
+          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
           :delay-ms="600"
         >
           {{ profile.fallback }}

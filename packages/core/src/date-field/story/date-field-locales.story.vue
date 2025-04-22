@@ -11,7 +11,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
       <ADateFieldRoot
         v-slot="{ segments }"
         granularity="second"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -39,7 +39,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="ja"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -67,7 +67,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="fa-IR"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -95,7 +95,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="zh-TW"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -123,7 +123,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="he"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -151,7 +151,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="th"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"

@@ -13,7 +13,7 @@ const value = ref(5);
   >
     <Variant title="Uncontrolled">
       <ANumberFieldRoot
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
         :default-value="5"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
@@ -29,7 +29,7 @@ const value = ref(5);
     <Variant title="Controlled">
       <ANumberFieldRoot
         v-model="value"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
@@ -49,7 +49,7 @@ const value = ref(5);
           minimumFractionDigits: 1,
           maximumFractionDigits: 2,
         }"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
@@ -68,7 +68,7 @@ const value = ref(5);
         :format-options="{
           style: 'percent',
         }"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
@@ -89,7 +89,7 @@ const value = ref(5);
           currencyDisplay: 'code',
           currencySign: 'accounting',
         }"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
@@ -109,7 +109,7 @@ const value = ref(5);
           unit: 'inch',
           unitDisplay: 'long',
         }"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
@@ -125,7 +125,7 @@ const value = ref(5);
       <ANumberFieldRoot
         :default-value="5"
         :min="0"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
@@ -141,7 +141,7 @@ const value = ref(5);
       <ANumberFieldRoot
         :default-value="5"
         :max="20"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
@@ -156,7 +156,7 @@ const value = ref(5);
     <Variant title="Step (3)">
       <ANumberFieldRoot
         :step="3"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
@@ -172,7 +172,7 @@ const value = ref(5);
       <ANumberFieldRoot
         :min="2"
         :step="3"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
@@ -189,7 +189,7 @@ const value = ref(5);
         :min="2"
         :max="21"
         :step="3"
-        class="bg-blackA7 border-blackA9 flex items-center border rounded-md text-sm text-white"
+        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />

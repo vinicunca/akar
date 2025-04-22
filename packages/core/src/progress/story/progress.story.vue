@@ -20,7 +20,7 @@ const errorCaseMax = ref(100);
     <Variant title="Loop">
       <AProgressRoot
         v-model="interactive"
-        class="bg-blackA9 full relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full"
+        class="full relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full bg-blackA9"
       >
         <AProgressIndicator
           class="h-full w-full bg-white transition-transform duration-1000"
@@ -35,7 +35,7 @@ const errorCaseMax = ref(100);
     </Variant>
     <Variant title="Indeterminate">
       <AProgressRoot
-        class="bg-blackA9 full relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full"
+        class="full relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full bg-blackA9"
       >
         <AProgressIndicator class="h-full w-full bg-white/20" />
         <div

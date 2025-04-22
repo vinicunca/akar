@@ -36,7 +36,7 @@ const rootProps = computed(() => ({ total: 100, ...props.root }));
         <APaginationListItem
           v-if="page.type === 'page'"
           :key="index"
-          class="data-[selected]:bg-grass8 border rounded px-4 py-2"
+          class="border rounded px-4 py-2 data-[selected]:bg-grass8"
           :value="page.value"
           v-bind="props.listItem"
         >

@@ -19,11 +19,11 @@ const forwarded = useForwardPropsEmits(props, emits);
     name="slider"
     class="relative h-5 w-[200px] flex touch-none select-none items-center"
   >
-    <ASliderTrack class="bg-blackA10 relative h-[3px] grow rounded-full">
+    <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
       <ASliderRange class="absolute h-full rounded-full bg-white" />
     </ASliderTrack>
     <ASliderThumb
-      class="shadow-blackA7 focus:shadow-blackA8 block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:outline-none"
+      class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
     />
   </ASliderRoot>
 </template>

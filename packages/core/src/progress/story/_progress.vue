@@ -12,7 +12,7 @@ setTimeout(() => {
 <template>
   <AProgressRoot
     v-model="interactive"
-    class="bg-blackA9 full relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full"
+    class="full relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full bg-blackA9"
   >
     <AProgressIndicator
       class="h-full w-full bg-white transition-transform duration-1000"

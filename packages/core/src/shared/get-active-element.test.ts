@@ -35,7 +35,6 @@ describe('getActiveElement', () => {
 
 function createFocusableElement() {
   const button = document.createElement('button');
-  // button.innerText = 'Test Button';
   button.textContent = 'Test Button';
 
   return button;

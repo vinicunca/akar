@@ -19,7 +19,7 @@ const toggleState = ref(false);
     :modal="false"
   >
     <APopoverTrigger
-      class="text-violet11 shadow-blackA7 h-[35px] w-[35px] inline-flex cursor-default items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+      class="h-[35px] w-[35px] inline-flex cursor-default items-center justify-center rounded-full bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
       aria-label="Update dimensions"
     >
       <Icon icon="radix-icons:mixer-horizontal" />
@@ -33,13 +33,13 @@ const toggleState = ref(false);
       >
         <div class="flex flex-col gap-2.5">
           <p
-            class="text-mauve12 mb-2.5 text-[15px] font-medium leading-[19px]"
+            class="mb-2.5 text-[15px] text-mauve12 font-medium leading-[19px]"
           >
             Dimensions
           </p>
         </div>
         <APopoverClose
-          class="text-violet11 absolute right-[5px] top-[5px] h-[25px] w-[25px] inline-flex cursor-default items-center justify-center rounded-full outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
+          class="absolute right-[5px] top-[5px] h-[25px] w-[25px] inline-flex cursor-default items-center justify-center rounded-full text-violet11 outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
           aria-label="Close"
         >
           Close

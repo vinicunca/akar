@@ -17,7 +17,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
           id="time-field"
           v-slot="{ segments, isInvalid }"
           granularity="second"
-          class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500 data-[invalid]:outline-red-500 data-[invalid]:outline"
+          class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5 data-[invalid]:outline-red-500 data-[invalid]:outline"
         >
           <template
             v-for="item in segments"

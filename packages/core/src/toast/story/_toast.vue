@@ -29,7 +29,7 @@ function handleClick() {
 <template>
   <AToastProvider swipe-direction="left">
     <button
-      class="text-violet11 shadow-blackA7 hover:bg-mauve3 h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] font-medium leading-[35px] shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
+      class="h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] text-violet11 font-medium leading-[35px] shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black"
       @click="handleClick"
     >
       Add to calendar
@@ -39,12 +39,12 @@ function handleClick() {
       v-model:open="open"
       class="data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=end]:animate-swipeOut [grid-template-areas:_'title_action'_'description_action'] grid grid-cols-[auto_max-content] items-center gap-x-[15px] rounded-md bg-white p-[15px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--akar-toast-swipe-move-x)]"
     >
-      <AToastTitle class="text-slate12 [grid-area:_title] mb-[5px] text-[15px] font-medium">
+      <AToastTitle class="[grid-area:_title] mb-[5px] text-[15px] text-slate12 font-medium">
         Scheduled: Catch up
       </AToastTitle>
       <AToastDescription as-child>
         <time
-          class="text-slate11 [grid-area:_description] m-0 text-[13px] leading-[1.3]"
+          class="[grid-area:_description] m-0 text-[13px] text-slate11 leading-[1.3]"
           :dateTime="eventDateRef.toISOString()"
         >
           {{ prettyDate(eventDateRef) }}
@@ -55,7 +55,7 @@ function handleClick() {
         as-child
         alt-text="Goto schedule to undo"
       >
-        <button class="text-green11 h-[25px] inline-flex items-center justify-center rounded bg-green2 px-[10px] text-xs font-medium leading-[25px] shadow-[inset_0_0_0_1px] shadow-green7 focus:shadow-[0_0_0_2px] focus:shadow-green8 hover:shadow-[inset_0_0_0_1px] hover:shadow-green8">
+        <button class="h-[25px] inline-flex items-center justify-center rounded bg-green2 px-[10px] text-xs text-green11 font-medium leading-[25px] shadow-[inset_0_0_0_1px] shadow-green7 focus:shadow-[0_0_0_2px] focus:shadow-green8 hover:shadow-[inset_0_0_0_1px] hover:shadow-green8">
           Close
         </button>
       </AToastAction>

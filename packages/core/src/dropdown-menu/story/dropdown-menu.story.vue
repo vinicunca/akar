@@ -47,7 +47,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
     <Variant title="default">
       <ADropdownMenuRoot v-model:open="toggleState">
         <ADropdownMenuTrigger
-          class="text-violet11 shadow-blackA7 size-10 inline-flex items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+          class="size-10 inline-flex items-center justify-center rounded-full bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
           aria-label="Customise options"
         >
           <Icon
@@ -77,7 +77,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               >
                 More Tools
                 <div
-                  class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
+                  class="ml-auto pl-5 text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                 >
                   <Icon
                     icon="tabler:chevron-right"
@@ -136,7 +136,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
               >
                 More Tools
                 <div
-                  class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
+                  class="ml-auto pl-5 text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                 >
                   <Icon
                     icon="tabler:chevron-right"
@@ -173,7 +173,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
                     >
                       More Tools
                       <div
-                        class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
+                        class="ml-auto pl-5 text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                       >
                         <Icon
                           icon="tabler:chevron-right"
@@ -210,7 +210,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
                           >
                             More Tools
                             <div
-                              class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-5 group-data-[highlighted]:text-white"
+                              class="ml-auto pl-5 text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                             >
                               <Icon
                                 icon="tabler:chevron-right"
@@ -278,7 +278,7 @@ const radioItem = 'group w-full text-sm leading-none text-violet11 flex items-ce
             </ADropdownMenuCheckboxItem>
             <ADropdownMenuSeparator :class="separator" />
 
-            <ADropdownMenuLabel class="text-mauve11 pl-6 text-xs leading-6">
+            <ADropdownMenuLabel class="pl-6 text-xs text-mauve11 leading-6">
               People
             </ADropdownMenuLabel>
             <ADropdownMenuRadioGroup v-model="person">

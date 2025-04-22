@@ -58,38 +58,50 @@ const open = useVModel(
 
 function handleSwipeStart(event: SwipeEvent) {
   emits('swipeStart', event);
-  (event.currentTarget as HTMLElement).setAttribute('data-swipe', 'start');
+
+  if (!event.defaultPrevented) {
+    (event.currentTarget as HTMLElement).setAttribute('data-swipe', 'start');
+  }
 }
 
 function handleSwipeMove(event: SwipeEvent) {
   emits('swipeMove', event);
-  const { x, y } = event.detail.delta;
-  const target = event.currentTarget as HTMLElement;
-  target.setAttribute('data-swipe', 'move');
-  target.style.setProperty('--akar-toast-swipe-move-x', `${x}px`);
-  target.style.setProperty('--akar-toast-swipe-move-y', `${y}px`);
+
+  if (!event.defaultPrevented) {
+    const { x, y } = event.detail.delta;
+    const target = event.currentTarget as HTMLElement;
+    target.setAttribute('data-swipe', 'move');
+    target.style.setProperty('--akar-toast-swipe-move-x', `${x}px`);
+    target.style.setProperty('--akar-toast-swipe-move-y', `${y}px`);
+  }
 }
 
 function handleSwipeCancel(event: SwipeEvent) {
   emits('swipeCancel', event);
-  const target = event.currentTarget as HTMLElement;
-  target.setAttribute('data-swipe', 'cancel');
-  target.style.removeProperty('--akar-toast-swipe-move-x');
-  target.style.removeProperty('--akar-toast-swipe-move-y');
-  target.style.removeProperty('--akar-toast-swipe-end-x');
-  target.style.removeProperty('--akar-toast-swipe-end-y');
+
+  if (!event.defaultPrevented) {
+    const target = event.currentTarget as HTMLElement;
+    target.setAttribute('data-swipe', 'cancel');
+    target.style.removeProperty('--akar-toast-swipe-move-x');
+    target.style.removeProperty('--akar-toast-swipe-move-y');
+    target.style.removeProperty('--akar-toast-swipe-end-x');
+    target.style.removeProperty('--akar-toast-swipe-end-y');
+  }
 }
 
 function handleSwipeEnd(event: SwipeEvent) {
   emits('swipeEnd', event);
-  const { x, y } = event.detail.delta;
-  const target = event.currentTarget as HTMLElement;
-  target.setAttribute('data-swipe', 'end');
-  target.style.removeProperty('--akar-toast-swipe-move-x');
-  target.style.removeProperty('--akar-toast-swipe-move-y');
-  target.style.setProperty('--akar-toast-swipe-end-x', `${x}px`);
-  target.style.setProperty('--akar-toast-swipe-end-y', `${y}px`);
-  open.value = false;
+
+  if (!event.defaultPrevented) {
+    const { x, y } = event.detail.delta;
+    const target = event.currentTarget as HTMLElement;
+    target.setAttribute('data-swipe', 'end');
+    target.style.removeProperty('--akar-toast-swipe-move-x');
+    target.style.removeProperty('--akar-toast-swipe-move-y');
+    target.style.setProperty('--akar-toast-swipe-end-x', `${x}px`);
+    target.style.setProperty('--akar-toast-swipe-end-y', `${y}px`);
+    open.value = false;
+  }
 }
 </script>
 

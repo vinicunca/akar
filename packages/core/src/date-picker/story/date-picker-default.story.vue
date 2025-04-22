@@ -40,7 +40,7 @@ import {
         >
           <ADatePickerField
             v-slot="{ segments }"
-            class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded-lg bg-white p-1 text-center data-[invalid]:border-red-500"
+            class="flex select-none items-center border border-gray9 rounded-lg bg-white p-1 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
           >
             <template
               v-for="item in segments"
@@ -131,7 +131,7 @@ import {
                         <ADatePickerCellTrigger
                           :day="weekDate"
                           :month="month.value"
-                          class="data-[today]:before:bg-grass9 relative h-8 w-8 flex items-center justify-center whitespace-nowrap border border-transparent rounded-lg bg-transparent text-sm text-black font-normal outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 hover:border-black before:rounded-full before:bg-white data-[selected]:bg-black data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:shadow-[0_0_0_2px] focus:shadow-black data-[today]:before:block data-[selected]:before:bg-white"
+                          class="relative h-8 w-8 flex items-center justify-center whitespace-nowrap border border-transparent rounded-lg bg-transparent text-sm text-black font-normal outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 hover:border-black before:rounded-full before:bg-white data-[selected]:bg-black data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:shadow-[0_0_0_2px] focus:shadow-black data-[today]:before:block data-[selected]:before:bg-white data-[today]:before:bg-grass9"
                         />
                       </ADatePickerCell>
                     </ADatePickerGridRow>

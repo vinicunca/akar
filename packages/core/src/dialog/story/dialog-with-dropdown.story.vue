@@ -19,14 +19,14 @@ import DropdownMenu from '../../dropdown-menu/story/_DropdownMenu.vue';
     <Variant title="default">
       <ADialogRoot>
         <ADialogTrigger
-          class="text-violet11 shadow-blackA7 hover:bg-mauve3 h-[35px] inline-flex items-center justify-center rounded-[4px] bg-white px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+          class="h-[35px] inline-flex items-center justify-center rounded-[4px] bg-white px-[15px] text-violet11 font-medium leading-none shadow-[0_2px_10px] shadow-blackA7 hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
         >
           Edit profile
         </ADialogTrigger>
         <ADialogPortal>
           <Transition name="fade">
             <ADialogOverlay
-              class="bg-blackA9 fixed inset-0"
+              class="fixed inset-0 bg-blackA9"
             />
           </Transition>
           <Transition name="fade">
@@ -35,7 +35,7 @@ import DropdownMenu from '../../dropdown-menu/story/_DropdownMenu.vue';
             >
               <DropdownMenu />
               <ADialogClose
-                class="text-violet11 absolute right-[10px] top-[10px] h-[25px] w-[25px] inline-flex appearance-none items-center justify-center rounded-full hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 focus:outline-none"
+                class="absolute right-[10px] top-[10px] h-[25px] w-[25px] inline-flex appearance-none items-center justify-center rounded-full text-violet11 hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 focus:outline-none"
                 aria-label="Close"
               >
                 <Icon icon="lucide:x" />

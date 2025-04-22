@@ -45,36 +45,36 @@ const hoverState = ref(false);
               <div class="flex flex-col gap-[15px]">
                 <div>
                   <div
-                    class="text-mauve12 m-0 text-[15px] font-medium leading-[1.5]"
+                    class="m-0 text-[15px] text-mauve12 font-medium leading-[1.5]"
                   >
                     Radix
                   </div>
-                  <div class="text-mauve10 m-0 text-[15px] leading-[1.5]">
+                  <div class="m-0 text-[15px] text-mauve10 leading-[1.5]">
                     @radix_ui
                   </div>
                 </div>
-                <div class="text-mauve12 m-0 text-[15px] leading-[1.5]">
+                <div class="m-0 text-[15px] text-mauve12 leading-[1.5]">
                   Components, icons, colors, and templates for building
                   high-quality, accessible UI. Free and open-source.
                 </div>
                 <div class="flex gap-[15px]">
                   <div class="flex gap-[5px]">
                     <div
-                      class="text-mauve12 m-0 text-[15px] font-medium leading-[1.5]"
+                      class="m-0 text-[15px] text-mauve12 font-medium leading-[1.5]"
                     >
                       0
                     </div>
-                    <div class="text-mauve10 m-0 text-[15px] leading-[1.5]">
+                    <div class="m-0 text-[15px] text-mauve10 leading-[1.5]">
                       Following
                     </div>
                   </div>
                   <div class="flex gap-[5px]">
                     <div
-                      class="text-mauve12 m-0 text-[15px] font-medium leading-[1.5]"
+                      class="m-0 text-[15px] text-mauve12 font-medium leading-[1.5]"
                     >
                       2,900
                     </div>
-                    <div class="text-mauve10 m-0 text-[15px] leading-[1.5]">
+                    <div class="m-0 text-[15px] text-mauve10 leading-[1.5]">
                       Followers
                     </div>
                   </div>

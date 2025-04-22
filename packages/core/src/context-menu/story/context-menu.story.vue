@@ -49,12 +49,12 @@ function handleClick() {
           >
             <AContextMenuItem
               value="New Tab"
-              class="text-violet11 data-[disabled]:text-mauve8 group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+              class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
               @click="handleClick"
             >
               New Tab
               <div
-                class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
               >
                 ⌘+T
               </div>
@@ -62,11 +62,11 @@ function handleClick() {
             <AContextMenuSub>
               <AContextMenuSubTrigger
                 value="more toolsz"
-                class="group text-violet11 data-[disabled]:text-mauve8 data-[state=open]:text-violet11 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[highlighted]:text-violet1"
+                class="group data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 data-[state=open]:text-violet11"
               >
                 More Tools
                 <div
-                  class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                  class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                 >
                   <Icon icon="radix-icons:chevron-right" />
                 </div>
@@ -78,28 +78,28 @@ function handleClick() {
                   :align-offset="-5"
                 >
                   <AContextMenuItem
-                    class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                    class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                   >
                     Save Page As…
                     <div
-                      class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                      class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                     >
                       ⌘+S
                     </div>
                   </AContextMenuItem>
                   <AContextMenuItem
-                    class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                    class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                   >
                     Create Shortcut…
                   </AContextMenuItem>
                   <AContextMenuItem
-                    class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                    class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                   >
                     Name Window…
                   </AContextMenuItem>
                   <AContextMenuSeparator class="m-[5px] h-[1px] bg-violet6" />
                   <AContextMenuItem
-                    class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                    class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                   >
                     Developer Tools
                   </AContextMenuItem>
@@ -110,23 +110,23 @@ function handleClick() {
             </AContextMenuSub>
             <AContextMenuItem
               value="New Window"
-              class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+              class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
             >
               New Window
               <div
-                class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
               >
                 ⌘+N
               </div>
             </AContextMenuItem>
             <AContextMenuItem
               value="New Private Window"
-              class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+              class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
               disabled
             >
               New Private Window
               <div
-                class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
               >
                 ⇧+⌘+N
               </div>
@@ -134,11 +134,11 @@ function handleClick() {
             <AContextMenuSub>
               <AContextMenuSubTrigger
                 value="more tools"
-                class="group text-violet11 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[highlighted]:text-violet1"
+                class="group data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 data-[state=open]:text-violet11"
               >
                 More Tools
                 <div
-                  class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                  class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                 >
                   <Icon icon="radix-icons:chevron-right" />
                 </div>
@@ -150,39 +150,39 @@ function handleClick() {
                   :align-offset="-5"
                 >
                   <AContextMenuItem
-                    class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                    class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                   >
                     Save Page As…
                     <div
-                      class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                      class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                     >
                       ⌘+S
                     </div>
                   </AContextMenuItem>
                   <AContextMenuItem
-                    class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                    class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                   >
                     Create Shortcut…
                   </AContextMenuItem>
                   <AContextMenuItem
-                    class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                    class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                   >
                     Name Window…
                   </AContextMenuItem>
                   <AContextMenuSeparator class="m-[5px] h-[1px] bg-violet6" />
                   <AContextMenuItem
-                    class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                    class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                   >
                     Developer Tools
                   </AContextMenuItem>
                   <AContextMenuSub>
                     <AContextMenuSubTrigger
                       value="more toolsz"
-                      class="group text-violet11 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[highlighted]:text-violet1"
+                      class="group data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 data-[state=open]:text-violet11"
                     >
                       More Tools
                       <div
-                        class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                        class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                       >
                         <Icon icon="radix-icons:chevron-right" />
                       </div>
@@ -194,22 +194,22 @@ function handleClick() {
                         :align-offset="-5"
                       >
                         <AContextMenuItem
-                          class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                          class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                         >
                           Save Page As…
                           <div
-                            class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                            class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                           >
                             ⌘+S
                           </div>
                         </AContextMenuItem>
                         <AContextMenuItem
-                          class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                          class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                         >
                           Create Shortcut…
                         </AContextMenuItem>
                         <AContextMenuItem
-                          class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                          class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                         >
                           Name Window…
                         </AContextMenuItem>
@@ -217,18 +217,18 @@ function handleClick() {
                           class="m-[5px] h-[1px] bg-violet6"
                         />
                         <AContextMenuItem
-                          class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                          class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                         >
                           Developer Tools
                         </AContextMenuItem>
                         <AContextMenuSub>
                           <AContextMenuSubTrigger
                             value="more toolsz"
-                            class="group text-violet11 data-[state=open]:text-violet11 data-[disabled]:text-mauve8 data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[highlighted]:text-violet1"
+                            class="group data-[highlighted]:data-[state=open]:bg-violet9 data-[highlighted]:data-[state=open]:text-violet1 relative h-[25px] w-full flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[state=open]:bg-violet4 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 data-[state=open]:text-violet11"
                           >
                             More Tools
                             <div
-                              class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                              class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                             >
                               <Icon icon="radix-icons:chevron-right" />
                             </div>
@@ -240,22 +240,22 @@ function handleClick() {
                               :align-offset="-5"
                             >
                               <AContextMenuItem
-                                class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                                class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                               >
                                 Save Page As…
                                 <div
-                                  class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                                  class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
                                 >
                                   ⌘+S
                                 </div>
                               </AContextMenuItem>
                               <AContextMenuItem
-                                class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                                class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                               >
                                 Create Shortcut…
                               </AContextMenuItem>
                               <AContextMenuItem
-                                class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                                class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                               >
                                 Name Window…
                               </AContextMenuItem>
@@ -263,7 +263,7 @@ function handleClick() {
                                 class="m-[5px] h-[1px] bg-violet6"
                               />
                               <AContextMenuItem
-                                class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                                class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                               >
                                 Developer Tools
                               </AContextMenuItem>
@@ -274,7 +274,7 @@ function handleClick() {
                     </AContextMenuPortal>
                   </AContextMenuSub>
                   <AContextMenuItem
-                    class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                    class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                   >
                     Developer Tools
                   </AContextMenuItem>
@@ -284,7 +284,7 @@ function handleClick() {
             <AContextMenuSeparator class="m-[5px] h-[1px] bg-violet6" />
             <AContextMenuCheckboxItem
               v-model="checkboxOne"
-              class="group text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+              class="group relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
               @select.prevent
             >
               <AContextMenuItemIndicator
@@ -294,14 +294,14 @@ function handleClick() {
               </AContextMenuItemIndicator>
               Show Bookmarks
               <div
-                class="text-mauve11 group-data-[disabled]:text-mauve8 ml-auto pl-[20px] group-data-[highlighted]:text-white"
+                class="ml-auto pl-[20px] text-mauve11 group-data-[disabled]:text-mauve8 group-data-[highlighted]:text-white"
               >
                 ⌘+B
               </div>
             </AContextMenuCheckboxItem>
             <AContextMenuCheckboxItem
               v-model="checkboxTwo"
-              class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+              class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
               @select.prevent
             >
               <AContextMenuItemIndicator
@@ -314,13 +314,13 @@ function handleClick() {
             <AContextMenuSeparator class="m-[5px] h-[1px] bg-violet6" />
 
             <AContextMenuLabel
-              class="text-mauve11 pl-[25px] text-xs leading-[25px]"
+              class="pl-[25px] text-xs text-mauve11 leading-[25px]"
             >
               People
             </AContextMenuLabel>
             <AContextMenuRadioGroup v-model="person">
               <AContextMenuRadioItem
-                class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                 value="pedro"
               >
                 <AContextMenuItemIndicator
@@ -331,7 +331,7 @@ function handleClick() {
                 Pedro Duarte
               </AContextMenuRadioItem>
               <AContextMenuRadioItem
-                class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+                class="relative h-[25px] flex select-none items-center rounded-[3px] px-[5px] pl-[25px] text-[13px] text-violet11 leading-none outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1"
                 value="colm"
               >
                 <AContextMenuItemIndicator

@@ -31,7 +31,7 @@ withDefaults(defineProps<{
       :value="tree"
       :style="{ 'margin-left': `${level}rem` }"
     >
-      <button class="data-[selected]:bg-grass4 focus:ring-grass9 my-0.5 w-max flex items-center rounded px-2 py-1 outline-none focus:ring-2">
+      <button class="my-0.5 w-max flex items-center rounded px-2 py-1 outline-none data-[selected]:bg-grass4 focus:ring-2 focus:ring-grass9">
         <Icon
           v-if="tree.children"
           icon="radix-icons:chevron-down"

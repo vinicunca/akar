@@ -23,14 +23,14 @@ const direction = ref<DataOrientation>('horizontal');
         </div>
         <div class="mt-4 h-48 w-full">
           <ASplitterGroup :direction="direction">
-            <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
+            <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
               Panel A
             </ASplitterPanel>
             <ASplitterResizeHandle
               class="transition data-[state=active]:bg-white"
               :class="direction === 'horizontal' ? 'w-2' : 'h-2'"
             />
-            <ASplitterPanel class="bg-blackA8 flex items-center justify-center rounded-lg">
+            <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
               Panel B
             </ASplitterPanel>
           </ASplitterGroup>

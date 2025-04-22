@@ -25,7 +25,7 @@ const items = [{ name: 'jack' }, { name: 'john' }, { name: 'mike' }];
         :id="item.name"
         :value="item"
         :aria-label="item.name"
-        class="shadow-blackA7 h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
+        class="h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
       >
         <ACheckboxIndicator
           class="h-full w-full flex items-center justify-center rounded bg-white"

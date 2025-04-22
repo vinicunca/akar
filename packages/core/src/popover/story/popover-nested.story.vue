@@ -30,7 +30,7 @@ const buttonRef = ref();
         <APopoverRoot>
           <APopoverTrigger
             ref="buttonRef"
-            class="text-violet11 shadow-blackA7 inline-flex cursor-default items-center justify-center bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="inline-flex cursor-default items-center justify-center bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
           >
             Open popover
           </APopoverTrigger>
@@ -64,7 +64,7 @@ const buttonRef = ref();
               </APopoverRoot>
 
               <APopoverClose
-                class="text-violet11 h-[25px] w-[25px] inline-flex cursor-default items-center justify-center outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
+                class="h-[25px] w-[25px] inline-flex cursor-default items-center justify-center text-violet11 outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
                 aria-label="Close"
               >
                 Close

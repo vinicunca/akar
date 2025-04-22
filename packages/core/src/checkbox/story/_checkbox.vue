@@ -19,7 +19,7 @@ const modelValue = ref(props.modelValue);
     v-bind="props"
     v-model="modelValue"
     name="test"
-    class="shadow-blackA7 h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
+    class="h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
     aria-label="Test"
   >
     <ACheckboxIndicator

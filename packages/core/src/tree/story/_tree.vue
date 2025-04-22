@@ -70,14 +70,14 @@ const items = [
   <ATreeRoot
     v-slot="{ flattenItems }"
     v-bind="forwarded"
-    class="text-blackA11 w-64 select-none list-none rounded-md bg-white p-2 text-sm font-medium"
+    class="w-64 select-none list-none rounded-md bg-white p-2 text-sm text-blackA11 font-medium"
     :items="items"
     :get-key="(item) => item.title"
   >
     <ATreeItem
       v-for="item in flattenItems"
       :key="item._id"
-      class="focus:ring-grass9 data-[selected]:bg-grass4 my-0.5 w-max flex items-center rounded px-2 py-1 outline-none focus:ring-2"
+      class="my-0.5 w-max flex items-center rounded px-2 py-1 outline-none data-[selected]:bg-grass4 focus:ring-2 focus:ring-grass9"
       :style="{ 'margin-left': `${item.level}rem` }"
       v-bind="item.bind"
     >

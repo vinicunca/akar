@@ -33,7 +33,7 @@ const isShowingB = ref(false);
             <template v-if="isShowingA">
               <ASplitterPanel
                 :min-size="20"
-                class="bg-blackA8 flex items-center justify-center rounded-lg"
+                class="flex items-center justify-center rounded-lg bg-blackA8"
                 :order="1"
               >
                 Panel A
@@ -44,7 +44,7 @@ const isShowingB = ref(false);
             <template v-if="isShowingB">
               <ASplitterPanel
                 :min-size="20"
-                class="bg-blackA8 flex items-center justify-center rounded-lg"
+                class="flex items-center justify-center rounded-lg bg-blackA8"
                 :order="2"
               >
                 Panel B
@@ -54,7 +54,7 @@ const isShowingB = ref(false);
 
             <ASplitterPanel
               :min-size="20"
-              class="bg-blackA8 flex items-center justify-center rounded-lg"
+              class="flex items-center justify-center rounded-lg bg-blackA8"
               :order="3"
             >
               Panel C

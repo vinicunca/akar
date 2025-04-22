@@ -5,7 +5,7 @@ import { KEY_CODES } from '@vinicunca/perkakas';
 export interface ARovingFocusItemProps extends APrimitiveProps {
   tabStopId?: string;
   /**
-   * When `false`, item wil be not be focusable.
+   * When `false`, item will be not be focusable.
    * @defaultValue `true`
    */
   focusable?: boolean;

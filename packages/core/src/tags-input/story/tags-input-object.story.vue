@@ -28,7 +28,7 @@ function convertValue(value: string) {
         v-model="people"
         :convert-value="convertValue"
         :display-value="displayValue"
-        class="bg-blackA7 border-blackA7 mt-6 w-[300px] flex flex-wrap items-center gap-2 border rounded-lg p-2"
+        class="mt-6 w-[300px] flex flex-wrap items-center gap-2 border border-blackA7 rounded-lg bg-blackA7 p-2"
       >
         <ATagsInputItem
           v-for="(item, i) in people"
@@ -44,7 +44,7 @@ function convertValue(value: string) {
 
         <ATagsInputInput
           placeholder="Anything..."
-          class="placeholder:text-mauve10 flex-1 rounded bg-transparent px-1 text-white focus:outline-none"
+          class="flex-1 rounded bg-transparent px-1 text-white placeholder:text-mauve10 focus:outline-none"
         />
       </ATagsInputRoot>
     </Variant>

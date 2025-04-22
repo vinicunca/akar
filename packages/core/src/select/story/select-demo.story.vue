@@ -41,7 +41,7 @@ const POSITION = ['item-aligned', 'popper'] as const;
           multiple
         >
           <ASelectTrigger
-            class="text-violet11 hover:bg-mauve3 h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none shadow-[0_2px_10px] shadow-black/10 outline-none data-[placeholder]:text-violet9 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] text-violet11 leading-none shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-mauve3 data-[placeholder]:text-violet9 focus:shadow-[0_0_0_2px] focus:shadow-black"
             aria-label="Customise options"
           >
             <ASelectValue placeholder="Please select a fruit" />
@@ -59,14 +59,14 @@ const POSITION = ['item-aligned', 'popper'] as const;
                 :position="position"
               >
                 <ASelectScrollUpButton
-                  class="text-violet11 h-[25px] flex cursor-default items-center justify-center bg-white"
+                  class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
                 >
                   <Icon icon="radix-icons:chevron-up" />
                 </ASelectScrollUpButton>
 
                 <ASelectViewport class="p-[5px]">
                   <ASelectLabel
-                    class="text-mauve11 px-[25px] text-xs leading-[25px]"
+                    class="px-[25px] text-xs text-mauve11 leading-[25px]"
                   >
                     Fruits
                   </ASelectLabel>
@@ -75,7 +75,7 @@ const POSITION = ['item-aligned', 'popper'] as const;
                   </ASelectGroup>
                   <ASelectSeparator class="m-[5px] h-[1px] bg-violet6" />
                   <ASelectLabel
-                    class="text-mauve11 px-[25px] text-xs leading-[25px]"
+                    class="px-[25px] text-xs text-mauve11 leading-[25px]"
                   >
                     Vegetables
                   </ASelectLabel>
@@ -83,7 +83,7 @@ const POSITION = ['item-aligned', 'popper'] as const;
                     <ASelectItem
                       v-for="(option, index) in vegetables"
                       :key="index"
-                      class="text-violet11 data-[disabled]:text-mauve8 relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1 data-[highlighted]:outline-none"
+                      class="relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] text-violet11 leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 data-[highlighted]:outline-none"
                       :value="option"
                       :disabled="option === 'Courgette'"
                     >
@@ -100,7 +100,7 @@ const POSITION = ['item-aligned', 'popper'] as const;
                 </ASelectViewport>
 
                 <ASelectScrollDownButton
-                  class="text-violet11 h-[25px] flex cursor-default items-center justify-center bg-white"
+                  class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
                 >
                   <Icon icon="radix-icons:chevron-down" />
                 </ASelectScrollDownButton>

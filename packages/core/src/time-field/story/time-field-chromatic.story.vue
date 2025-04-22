@@ -17,7 +17,7 @@ const maxValue = new Time(18);
     <Variant title="Empty default">
       <ATimeFieldRoot
         v-slot="{ segments }"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -44,7 +44,7 @@ const maxValue = new Time(18);
       <ATimeFieldRoot
         v-slot="{ segments }"
         :default-value="defaultValue"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -70,7 +70,7 @@ const maxValue = new Time(18);
     <Variant title="Uncontrolled">
       <ATimeFieldRoot
         v-slot="{ segments }"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -97,7 +97,7 @@ const maxValue = new Time(18);
       <ATimeFieldRoot
         v-slot="{ segments }"
         v-model="modelValue"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -124,7 +124,7 @@ const maxValue = new Time(18);
       <ATimeFieldRoot
         v-slot="{ segments }"
         :min-value="minValue"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -151,7 +151,7 @@ const maxValue = new Time(18);
       <ATimeFieldRoot
         v-slot="{ segments }"
         :max-value="maxValue"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -178,7 +178,7 @@ const maxValue = new Time(18);
       <ATimeFieldRoot
         v-slot="{ segments }"
         :disabled="true"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -205,7 +205,7 @@ const maxValue = new Time(18);
       <ATimeFieldRoot
         v-slot="{ segments }"
         locale="de"
-        class="text-green10 placeholder:text-mauve5 flex select-none items-center border border-gray9 rounded bg-white p-2 text-center data-[invalid]:border-red-500"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
