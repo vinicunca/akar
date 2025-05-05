@@ -26,9 +26,9 @@ export function useSelectionBehavior<T>(
       } else {
         const index = modelValue.value.findIndex((v) => condition(v));
         if (index !== -1) {
-          modelValue.value.splice(index, 1);
+          modelValue.value = modelValue.value.filter((_, i) => i !== index);
         } else {
-          modelValue.value.push(val);
+          modelValue.value = [...modelValue.value, val];
         }
       }
     } else { // single select

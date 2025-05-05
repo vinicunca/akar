@@ -24,7 +24,7 @@ function isLayerExist(
 ) {
   const targetLayer = targetElement.closest(
     DATA_DISMISSABLE_LAYER,
-  ) as HTMLElement;
+  );
 
   const mainLayer = layerElement.dataset.dismissableLayer === ''
     ? layerElement
@@ -38,8 +38,11 @@ function isLayerExist(
 
   return (
     targetLayer
-    && mainLayer === targetLayer
-  ) || nodeList.indexOf(mainLayer) < nodeList.indexOf(targetLayer);
+    && (
+      mainLayer === targetLayer
+      || nodeList.indexOf(mainLayer) < nodeList.indexOf(targetLayer)
+    )
+  );
 }
 
 /**
@@ -68,9 +71,9 @@ export function usePointerDownOutside(
     }
 
     async function handlePointerDown(event: PointerEvent) {
-      const target = event.target as HTMLElement;
+      const target = event.target as HTMLElement | undefined;
 
-      if (!element?.value) {
+      if (!element?.value || !target) {
         return;
       }
 
@@ -179,10 +182,14 @@ export function useFocusOutside(
       await nextTick();
       await nextTick();
 
+      const target = event.target as HTMLElement | undefined;
+
       if (
-        !element.value || isLayerExist({
+        !element.value
+        || !target
+        || isLayerExist({
           layerElement: element.value,
-          targetElement: event.target as HTMLElement,
+          targetElement: target,
         })
       ) {
         return;

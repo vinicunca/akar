@@ -90,6 +90,15 @@ watch(rootContext.modelValue, async () => {
     resetSearchTerm();
   }
 }, { immediate: true, deep: true });
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (props.modelValue !== undefined) {
+      rootContext.filterState.search = props.modelValue;
+    }
+  },
+);
 </script>
 
 <template>

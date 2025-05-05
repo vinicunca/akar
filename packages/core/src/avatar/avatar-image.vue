@@ -23,7 +23,10 @@ import { APrimitive } from '~~/primitive';
 import { injectAAvatarRootContext } from './avatar-root.vue';
 import { useImageLoadingStatus } from './utils';
 
-const props = withDefaults(defineProps<AAvatarImageProps>(), { as: 'img' });
+const props = withDefaults(
+  defineProps<AAvatarImageProps>(),
+  { as: 'img' },
+);
 const emits = defineEmits<AAvatarImageEmits>();
 
 const { src, referrerPolicy } = toRefs(props);

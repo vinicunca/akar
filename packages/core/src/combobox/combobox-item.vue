@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AListboxItemEmits, AListboxItemProps } from '~~/listbox';
+import type { SelectEvent } from '~~/listbox/listbox-item.vue';
 import type { AcceptableValue } from '~~/shared/types';
 import { computed, onMounted, onUnmounted } from 'vue';
 import { usePrimitiveElement } from '~~/primitive';
@@ -54,6 +55,24 @@ const isRender = computed(() => {
   }
 });
 
+function handleSelect(event: SelectEvent<T>) {
+  emits('select', event);
+
+  if (event.defaultPrevented) {
+    return;
+  }
+
+  if (
+    !rootContext.multiple.value
+    && !props.disabled
+    && !rootContext.disabled.value
+  ) {
+    event.preventDefault();
+    rootContext.onOpenChange(false);
+    rootContext.modelValue.value = props.value;
+  }
+}
+
 onMounted(() => {
   // textValue to perform filter
   rootContext.allItems.value.set(
@@ -71,6 +90,7 @@ onMounted(() => {
     }
   }
 });
+
 onUnmounted(() => {
   rootContext.allItems.value.delete(id);
 });
@@ -82,17 +102,8 @@ onUnmounted(() => {
     v-bind="props"
     :id="id"
     ref="primitiveElement"
-    @select="(event) => {
-      emits('select', event as any)
-      if (event.defaultPrevented)
-        return
-
-      if (!rootContext.multiple.value) {
-        event.preventDefault()
-        rootContext.onOpenChange(false)
-        rootContext.modelValue.value = props.value
-      }
-    }"
+    :disabled="rootContext.disabled.value || disabled"
+    @select="handleSelect"
   >
     <slot>{{ value }}</slot>
   </AListboxItem>
