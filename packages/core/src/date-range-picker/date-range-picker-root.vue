@@ -43,9 +43,10 @@ type DateRangePickerRootContext = {
   onStartValueChange: (date: DateValue | undefined) => void;
   dir: Ref<Direction>;
   allowNonContiguousRanges: Ref<boolean>;
+  fixedDate: Ref<'start' | 'end' | undefined>;
 };
 
-export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable'>;
+export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable' | 'fixedDate'>;
 
 export type ADateRangePickerRootEmits = {
   /** Event handler called whenever the model value changes */
@@ -56,8 +57,10 @@ export type ADateRangePickerRootEmits = {
   'update:startValue': [date: DateValue | undefined];
 };
 
-export const [injectADateRangePickerRootContext, provideDateRangePickerRootContext]
-  = createContext<DateRangePickerRootContext>('ADateRangePickerRoot');
+export const [
+  injectADateRangePickerRootContext,
+  provideDateRangePickerRootContext,
+] = createContext<DateRangePickerRootContext>('ADateRangePickerRoot');
 </script>
 
 <script setup lang="ts">
@@ -67,28 +70,34 @@ import { ref, toRefs, watch } from 'vue';
 defineOptions({
   inheritAttrs: false,
 });
-const props = withDefaults(defineProps<ADateRangePickerRootProps>(), {
-  defaultValue: () => ({ start: undefined, end: undefined }),
-  defaultOpen: false,
-  open: undefined,
-  modal: false,
-  pagedNavigation: false,
-  preventDeselect: false,
-  weekStartsOn: 0,
-  weekdayFormat: 'narrow',
-  fixedWeeks: false,
-  numberOfMonths: 1,
-  disabled: false,
-  readonly: false,
-  initialFocus: false,
-  placeholder: undefined,
-  locale: 'en',
-  isDateDisabled: undefined,
-  isDateUnavailable: undefined,
-  isDateHighlightable: undefined,
-  allowNonContiguousRanges: false,
-});
+
+const props = withDefaults(
+  defineProps<ADateRangePickerRootProps>(),
+  {
+    defaultValue: () => ({ start: undefined, end: undefined }),
+    defaultOpen: false,
+    open: undefined,
+    modal: false,
+    pagedNavigation: false,
+    preventDeselect: false,
+    weekStartsOn: 0,
+    weekdayFormat: 'narrow',
+    fixedWeeks: false,
+    numberOfMonths: 1,
+    disabled: false,
+    readonly: false,
+    initialFocus: false,
+    placeholder: undefined,
+    locale: 'en',
+    isDateDisabled: undefined,
+    isDateUnavailable: undefined,
+    isDateHighlightable: undefined,
+    allowNonContiguousRanges: false,
+  },
+);
+
 const emits = defineEmits<ADateRangePickerRootEmits & APopoverRootEmits>();
+
 const {
   locale,
   disabled,
@@ -114,6 +123,7 @@ const {
   hourCycle,
   dir: propsDir,
   allowNonContiguousRanges,
+  fixedDate,
 } = toRefs(props);
 
 const dir = useDirection(propsDir);
@@ -180,6 +190,7 @@ provideDateRangePickerRootContext({
   hourCycle,
   dateFieldRef,
   dir,
+  fixedDate,
   onStartValueChange(date: DateValue | undefined) {
     emits('update:startValue', date);
   },

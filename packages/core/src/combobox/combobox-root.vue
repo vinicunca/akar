@@ -114,8 +114,7 @@ const {
 
 const dir = useDirection(propDir);
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  // @ts-expect-error ignore the type error here
+const modelValue = useVModel(props as AComboboxRootProps<T>, 'modelValue', emits, {
   defaultValue: props.defaultValue ?? (multiple.value ? [] : undefined),
   passive: (props.modelValue === undefined) as false,
   deep: true,

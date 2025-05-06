@@ -55,6 +55,7 @@ type RangeCalendarRootContext = {
   isPrevButtonDisabled: (prevPageFunc?: (date: DateValue) => DateValue) => boolean;
   formatter: UseDateFormatter;
   dir: Ref<Direction>;
+  fixedDate: Ref<'start' | 'end' | undefined>;
 };
 
 export interface ARangeCalendarRootProps extends APrimitiveProps {
@@ -106,6 +107,8 @@ export interface ARangeCalendarRootProps extends APrimitiveProps {
   nextPage?: (placeholder: DateValue) => DateValue;
   /** A function that returns the previous page of the calendar. It receives the current placeholder as an argument inside the component. */
   prevPage?: (placeholder: DateValue) => DateValue;
+  /** Which part of the range should be fixed */
+  fixedDate?: 'start' | 'end';
 }
 
 export type ARangeCalendarRootEmits = {
@@ -191,10 +194,13 @@ const {
   nextPage: propsNextPage,
   prevPage: propsPrevPage,
   allowNonContiguousRanges,
+  fixedDate,
 } = toRefs(props);
 
-const { primitiveElement, currentElement: parentElement }
-  = usePrimitiveElement();
+const {
+  primitiveElement,
+  currentElement: parentElement,
+} = usePrimitiveElement();
 const dir = useDirection(propDir);
 const locale = useLocale(propLocale);
 
@@ -279,6 +285,7 @@ const {
   isDateHighlightable: propsIsDateHighlightable.value,
   focusedValue,
   allowNonContiguousRanges,
+  fixedDate,
 });
 
 watch(
@@ -397,6 +404,7 @@ provideRangeCalendarRootContext({
   dir,
   isHighlightedStart,
   isHighlightedEnd,
+  fixedDate,
 });
 
 onMounted(() => {
