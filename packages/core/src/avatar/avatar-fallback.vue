@@ -8,7 +8,7 @@ export interface AAvatarFallbackProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { APrimitive } from '~~/primitive';
 import { useForwardExpose } from '~~/shared';
 
@@ -17,7 +17,6 @@ import { injectAAvatarRootContext } from './avatar-root.vue';
 const props = withDefaults(
   defineProps<AAvatarFallbackProps>(),
   {
-    delayMs: 0,
     as: 'span',
   },
 );
@@ -25,26 +24,19 @@ const props = withDefaults(
 const rootContext = injectAAvatarRootContext();
 useForwardExpose();
 
-const canRender = ref(false);
-let timeout: ReturnType<typeof setTimeout> | undefined;
+const canRender = ref(props.delayMs === undefined);
 
-watch(
-  rootContext.imageLoadingStatus,
-  (value) => {
-    if (value === 'loading') {
-      canRender.value = false;
-      if (props.delayMs) {
-        timeout = setTimeout(() => {
-          canRender.value = true;
-          clearTimeout(timeout);
-        }, props.delayMs);
-      } else {
-        canRender.value = true;
-      }
-    }
-  },
-  { immediate: true },
-);
+watchEffect((onCleanup) => {
+  if (props.delayMs) {
+    const timerId = window.setTimeout(() => {
+      canRender.value = true;
+    }, props.delayMs);
+
+    onCleanup(() => {
+      window.clearTimeout(timerId);
+    });
+  }
+});
 </script>
 
 <template>

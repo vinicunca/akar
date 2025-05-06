@@ -13,6 +13,7 @@ export type AAvatarImageEmits = {
 export interface AAvatarImageProps extends APrimitiveProps {
   src: string;
   referrerPolicy?: ImgHTMLAttributes['referrerpolicy'];
+  crossOrigin?: ImgHTMLAttributes['crossorigin'];
 }
 </script>
 
@@ -29,11 +30,13 @@ const props = withDefaults(
 );
 const emits = defineEmits<AAvatarImageEmits>();
 
-const { src, referrerPolicy } = toRefs(props);
+const { src, referrerPolicy, crossOrigin } = toRefs(props);
+
 useForwardExpose();
+
 const rootContext = injectAAvatarRootContext();
 
-const imageLoadingStatus = useImageLoadingStatus({ src, referrerPolicy });
+const imageLoadingStatus = useImageLoadingStatus(src, { referrerPolicy, crossOrigin });
 
 watch(
   imageLoadingStatus,

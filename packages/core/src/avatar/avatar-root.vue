@@ -30,7 +30,7 @@ withDefaults(
 useForwardExpose();
 
 provideAvatarRootContext({
-  imageLoadingStatus: ref<ImageLoadingStatus>('loading'),
+  imageLoadingStatus: ref<ImageLoadingStatus>('idle'),
 });
 </script>
 
