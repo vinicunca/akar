@@ -27,10 +27,10 @@ catalog:
   '@types/node': ^22.13.10
   '@unocss/nuxt': ^66.0.0
   '@unocss/vite': ^66.0.0
-  '@vinicunca/eslint-config': ^3.13.0
+  '@vinicunca/eslint-config': ^3.14.0
   '@vinicunca/perkakas': ^1.5.0
   '@vinicunca/unocss-preset': ^1.14.0
-  '@vitejs/plugin-vue': ^5.2.1
+  '@vitejs/plugin-vue': ^5.2.4
   '@vitejs/plugin-vue-jsx': ^4.1.1
   '@vitest/coverage-istanbul': ^2.1.9
   '@vue/test-utils': ^2.4.6
@@ -57,7 +57,7 @@ catalog:
   unocss: ^66.0.0
   unplugin-vue-components: ^28.4.1
   vite: ^6.2.1
-  vite-plugin-dts: ^4.5.3
+  vite-plugin-dts: ^4.5.4
   vitepress: ^1.6.3
   vitest: ^2.1.9
   vitest-axe: 0.1.0
