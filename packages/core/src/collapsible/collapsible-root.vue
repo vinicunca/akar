@@ -74,6 +74,10 @@ provideACollapsibleRootContext({
   open,
   unmountOnHide,
   onOpenToggle: () => {
+    if (disabled.value) {
+      return;
+    }
+
     open.value = !open.value;
   },
 });
