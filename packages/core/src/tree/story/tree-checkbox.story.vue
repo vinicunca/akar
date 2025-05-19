@@ -17,11 +17,12 @@ import { items } from './constants';
         :get-key="(item) => item.title"
         multiple
         propagate-select
+        bubble-select
       >
         <ATreeItem
           v-for="item in flattenItems"
           :key="item._id"
-          v-slot="{ handleSelect, isSelected }"
+          v-slot="{ handleSelect, isSelected, isIndeterminate }"
           v-bind="item.bind"
           :style="{ 'margin-left': `${item.level - 1}rem` }"
           class="my-0.5 w-max flex items-center rounded px-2 py-1 outline-none data-[selected]:bg-grass4 focus:ring-2 focus:ring-grass9"
@@ -39,6 +40,7 @@ import { items } from './constants';
             :checked="isSelected"
             type="checkbox"
             tabindex="-1"
+            :indeterminate="isIndeterminate"
             @click.stop
             @change="handleSelect"
           >
