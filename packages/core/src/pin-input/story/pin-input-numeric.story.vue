@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { APinInputInput, APinInputRoot } from '..';
 
-const value = ref<Array<string>>([]);
+const value = ref<Array<number>>([]);
 </script>
 
 <template>

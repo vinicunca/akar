@@ -6,16 +6,21 @@ import { computed, ref, toRefs, watch } from 'vue';
 import { createContext, useDirection, useForwardExpose } from '~~/shared';
 import AVisuallyHiddenInput from '~~/visually-hidden/visually-hidden-input.vue';
 
-export type APinInputRootEmits = {
-  'update:modelValue': [value: Array<string>];
-  'complete': [value: Array<string>];
+export type APinInputType = 'text' | 'number';
+
+// Using this type to avoid mixed arrays (string | number)[].
+export type APinInputValue<Type extends APinInputType = 'text'> = Type extends 'number' ? Array<number> : Array<string>;
+
+export type APinInputRootEmits<Type extends APinInputType = 'text'> = {
+  'update:modelValue': [value: APinInputValue<Type>];
+  'complete': [value: APinInputValue<Type>];
 };
 
-export interface APinInputRootProps extends APrimitiveProps, FormFieldProps {
+export interface APinInputRootProps<Type extends APinInputType = 'text'> extends APrimitiveProps, FormFieldProps {
   /** The controlled checked state of the pin input. Can be binded as `v-model`. */
-  modelValue?: Array<string> | null;
+  modelValue?: APinInputValue<Type> | null;
   /** The default value of the pin inputs when it is initially rendered. Use when you do not need to control its checked state. */
-  defaultValue?: Array<string>;
+  defaultValue?: APinInputValue<Type>;
   /** The placeholder character to use for empty pin-inputs. */
   placeholder?: string;
   /** When `true`, pin inputs will be treated as password. */
@@ -23,7 +28,7 @@ export interface APinInputRootProps extends APrimitiveProps, FormFieldProps {
   /** When `true`, mobile devices will autodetect the OTP from messages or clipboard, and enable the autocomplete field. */
   otp?: boolean;
   /** Input type for the inputs. */
-  type?: 'number' | 'text';
+  type?: Type;
   /** The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode. */
   dir?: Direction;
   /** When `true`, prevents the user from interacting with the pin input */
@@ -32,13 +37,13 @@ export interface APinInputRootProps extends APrimitiveProps, FormFieldProps {
   id?: string;
 }
 
-export interface PinInputRootContext {
-  modelValue: Ref<Array<string>>;
-  currentModelValue: ComputedRef<Array<string>>;
+export interface PinInputRootContext<Type extends APinInputType = 'text'> {
+  modelValue: Ref<APinInputValue<Type>>;
+  currentModelValue: ComputedRef<APinInputValue<Type>>;
   mask: Ref<boolean>;
   otp: Ref<boolean>;
   placeholder: Ref<string>;
-  type: Ref<APinInputRootProps['type']>;
+  type: Ref<APinInputType>;
   dir: Ref<Direction>;
   disabled: Ref<boolean>;
   isCompleted: ComputedRef<boolean>;
@@ -46,11 +51,13 @@ export interface PinInputRootContext {
   onInputElementChange: (el: HTMLInputElement) => void;
 }
 
-export const [injectAPinInputRootContext, providePinInputRootContext]
-  = createContext<PinInputRootContext>('APinInputRoot');
+export const [
+  injectAPinInputRootContext,
+  providePinInputRootContext,
+] = createContext<PinInputRootContext<APinInputType>>('APinInputRoot');
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="Type extends APinInputType = 'text'">
 import { useVModel } from '@vueuse/core';
 import { APrimitive } from '~~/primitive';
 
@@ -58,11 +65,14 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<APinInputRootProps>(), {
-  placeholder: '',
-  type: 'text',
-});
-const emits = defineEmits<APinInputRootEmits>();
+const props = withDefaults(
+  defineProps<APinInputRootProps<Type>>(),
+  {
+    placeholder: '',
+    type: 'text' as any,
+  },
+);
+const emits = defineEmits<APinInputRootEmits<Type>>();
 
 defineSlots<{
   default: (props: {
@@ -76,9 +86,9 @@ const { forwardRef } = useForwardExpose();
 const dir = useDirection(propDir);
 
 const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? [],
+  defaultValue: props.defaultValue ?? [] as any,
   passive: (props.modelValue === undefined) as false,
-}) as Ref<Array<string>>;
+}) as Ref<APinInputValue<Type>>;
 
 const currentModelValue = computed(() => Array.isArray(modelValue.value) ? [...modelValue.value] : []);
 
@@ -100,7 +110,7 @@ watch(modelValue, () => {
 
 providePinInputRootContext({
   modelValue,
-  currentModelValue,
+  currentModelValue: currentModelValue as ComputedRef<APinInputValue<Type>>,
   mask,
   otp,
   placeholder,

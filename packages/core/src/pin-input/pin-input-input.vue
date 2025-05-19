@@ -10,6 +10,7 @@ export interface APinInputInputProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import type { APinInputValue } from './pin-input-root.vue';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick, onMounted, onUnmounted, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
@@ -141,7 +142,7 @@ function handlePaste(event: ClipboardEvent) {
 }
 
 function handleMultipleCharacter(values: string) {
-  const tempModelValue = [...context.currentModelValue.value];
+  const tempModelValue = [...context.currentModelValue.value] as APinInputValue<typeof context.type.value>;
   const initialIndex = values.length >= inputElements.value.length ? 0 : props.index;
   const lastIndex = Math.min(initialIndex + values.length, inputElements.value.length);
 
@@ -160,7 +161,7 @@ function handleMultipleCharacter(values: string) {
   inputElements.value[lastIndex]?.focus();
 }
 
-function removeTrailingEmptyStrings(input: Array<string>) {
+function removeTrailingEmptyStrings(input: APinInputValue<typeof context.type.value>) {
   let i = input.length - 1;
 
   while (i >= 0 && input[i] === '') {
@@ -175,8 +176,8 @@ function updateModelValueAt(
   { index, value }:
   { index: number; value: string },
 ) {
-  const tempModelValue = [...context.currentModelValue.value];
-  tempModelValue[index] = value;
+  const tempModelValue = [...context.currentModelValue.value] as APinInputValue<typeof context.type.value>;
+  tempModelValue[index] = isNumericMode.value ? +value : value;
   context.modelValue.value = removeTrailingEmptyStrings(tempModelValue);
 }
 
