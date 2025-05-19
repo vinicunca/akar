@@ -286,18 +286,20 @@ watch(
 watch(
   modelValue,
   (modelValue_) => {
-    if (modelValue_ && modelValue_.start && modelValue_.end) {
-      if (!startValue.value || modelValue_.start.compare(startValue.value) !== 0) {
-        startValue.value = modelValue_.start.copy();
-      }
-      if (!endValue.value || modelValue_.end.compare(endValue.value) !== 0) {
-        endValue.value = modelValue_.end.copy();
-      }
+    const isStartChanged = modelValue_?.start && startValue.value
+      ? modelValue_.start.compare(startValue.value) !== 0
+      : modelValue_?.start !== startValue.value;
+
+    if (isStartChanged) {
+      startValue.value = modelValue_?.start?.copy();
     }
 
-    if (!modelValue_) {
-      startValue.value = undefined;
-      endValue.value = undefined;
+    const isEndChanged = modelValue_?.end && endValue.value
+      ? modelValue_.end.compare(endValue.value) !== 0
+      : modelValue_?.end !== endValue.value;
+
+    if (isEndChanged) {
+      endValue.value = modelValue_?.end?.copy();
     }
   },
 );
