@@ -36,7 +36,7 @@ const thumbInBoundsOffset = computed(() => {
   if (rootContext.thumbAlignment.value === 'overflow' || !orientationSize.value) {
     return 0;
   } else {
-    return getThumbInBoundsOffset(orientationSize.value, percent.value, orientation!.direction);
+    return getThumbInBoundsOffset(orientationSize.value, percent.value, orientation!.direction.value);
   }
 });
 
@@ -69,7 +69,7 @@ onUnmounted(() => {
       :style="{
         transform: 'var(--akar-slider-thumb-transform)',
         position: 'absolute',
-        [orientation!.startEdge]: `calc(${percent}% + ${thumbInBoundsOffset}px)`,
+        [orientation!.startEdge.value]: `calc(${percent}% + ${thumbInBoundsOffset}px)`,
         /**
          * There will be no value on initial render while we work out the index so we hide thumbs
          * without a value, otherwise SSR will render them in the wrong position before they

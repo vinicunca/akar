@@ -18,8 +18,8 @@ const { forwardRef, currentElement: sliderElement } = useForwardExpose();
 const rootContext = injectASliderRootContext();
 
 const offsetPosition = ref<number>();
-const rectRef = ref<ClientRect>();
-const isSlidingFromLeft = computed(() => (dir?.value === 'ltr' && !inverted.value) || (dir?.value !== 'ltr' && inverted.value));
+const rectRef = ref<DOMRect>();
+const isSlidingFromLeft = computed(() => (dir?.value !== 'rtl' && !inverted.value) || (dir?.value !== 'ltr' && inverted.value));
 
 function getValueFromPointerEvent(
   { event, slideStart }:
@@ -75,10 +75,14 @@ function handleStepKeyDown(event: KeyboardEvent) {
   emits('stepKeyDown', event, isBackKey ? -1 : 1);
 }
 
+const startEdge = computed(() => (isSlidingFromLeft.value ? 'left' : 'right'));
+const endEdge = computed(() => (isSlidingFromLeft.value ? 'right' : 'left'));
+const direction = computed(() => (isSlidingFromLeft.value ? 1 : -1));
+
 provideSliderOrientationContext({
-  startEdge: isSlidingFromLeft.value ? 'left' : 'right',
-  endEdge: isSlidingFromLeft.value ? 'right' : 'left',
-  direction: isSlidingFromLeft.value ? 1 : -1,
+  startEdge,
+  endEdge,
+  direction,
   size: 'width',
 });
 </script>

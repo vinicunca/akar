@@ -1,3 +1,4 @@
+import type { ComputedRef } from 'vue';
 import { clamp, KEY_CODES } from '@vinicunca/perkakas';
 import { createContext } from '~~/shared';
 
@@ -144,15 +145,15 @@ export const BACK_KEYS: Record<SlideDirection, Array<string>> = {
   'from-left': [KEY_CODES.HOME, KEY_CODES.PAGE_DOWN, KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_LEFT],
   'from-right': [KEY_CODES.HOME, KEY_CODES.PAGE_DOWN, KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_RIGHT],
   'from-bottom': [KEY_CODES.HOME, KEY_CODES.PAGE_DOWN, KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_LEFT],
-  'from-top': [KEY_CODES.HOME, KEY_CODES.PAGE_DOWN, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_LEFT],
+  'from-top': [KEY_CODES.HOME, KEY_CODES.PAGE_UP, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_LEFT],
 };
 
 type Side = 'bottom' | 'left' | 'right' | 'top';
 interface SliderOrientation {
-  startEdge: Side;
-  endEdge: Side;
+  startEdge: ComputedRef<Side>;
+  endEdge: ComputedRef<Side>;
+  direction: ComputedRef<1 | -1>;
   size: 'height' | 'width';
-  direction: number;
 }
 
 export const [injectSliderOrientationContext, provideSliderOrientationContext]
