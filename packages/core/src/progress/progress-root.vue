@@ -21,7 +21,7 @@ export interface AProgressRootProps extends APrimitiveProps {
    *
    *  If not provided, the value label will be read as the numeric value as a percentage of the max value.
    */
-  getValueLabel?: (value: number, max: number) => string;
+  getValueLabel?: (value: number | null | undefined, max: number) => string | undefined;
 }
 
 const DEFAULT_MAX = 100;
@@ -32,15 +32,21 @@ interface ProgressRootContext {
   progressState: ComputedRef<ProgressState>;
 }
 
-export const [injectAProgressRootContext, provideProgressRootContext]
-  = createContext<ProgressRootContext>('AProgressRoot');
+export const [
+  injectAProgressRootContext,
+  provideProgressRootContext,
+] = createContext<ProgressRootContext>('AProgressRoot');
 
 export type ProgressState = 'complete' | 'indeterminate' | 'loading';
 
 function validateValue(value: unknown, max: number): null | number {
-  const isValidValueError
-    = isNullish(value)
-      || (isNumber(value) && !Number.isNaN(value) && value <= max && value >= 0);
+  const isValidValueError = isNullish(value)
+    || (
+      isNumber(value)
+      && !Number.isNaN(value)
+      && value <= max
+      && value >= 0
+    );
 
   if (isValidValueError) {
     return value as null;
@@ -76,8 +82,8 @@ import { APrimitive } from '~~/primitive';
 
 const props = withDefaults(defineProps<AProgressRootProps>(), {
   max: DEFAULT_MAX,
-  getValueLabel: (value: number, max: number) =>
-    `${Math.round((value / max) * DEFAULT_MAX)}%`,
+  getValueLabel: (value: number | null | undefined, max: number) =>
+    isNumber(value) ? `${Math.round((value / max) * DEFAULT_MAX)}%` : undefined,
 });
 
 const emit = defineEmits<AProgressRootEmits>();
@@ -147,8 +153,8 @@ provideProgressRootContext({
     :aria-valuemax="max"
     :aria-valuemin="0"
     :aria-valuenow="isNumber(modelValue) ? modelValue : undefined"
-    :aria-valuetext="getValueLabel(modelValue!, max)"
-    :aria-label="getValueLabel(modelValue!, max)"
+    :aria-valuetext="getValueLabel(modelValue, max)"
+    :aria-label="getValueLabel(modelValue, max)"
     role="progressbar"
     :data-state="progressState"
     :data-value="modelValue ?? undefined"
