@@ -58,7 +58,7 @@ function handlePointerUp() {
 }
 
 function handlePointerDown() {
-  if (rootContext.open) {
+  if (rootContext.open && !rootContext.disableClosingTrigger.value) {
     rootContext.onClose();
   }
 
