@@ -2,11 +2,11 @@
 import type { Direction } from '~~/shared/types';
 import { createContext, getActiveElement, useDirection, useSelectionBehavior, useTypeahead } from '~~/shared';
 
-export interface ATreeRootProps<T = Record<string, any>, U extends Record<string, any> = Record<string, any>> extends APrimitiveProps {
+export interface ATreeRootProps<T = Record<string, any>, U extends Record<string, any> = Record<string, any>, M extends boolean = false> extends APrimitiveProps {
   /** The controlled value of the tree. Can be binded with with `v-model`. */
-  modelValue?: Array<U> | U;
+  modelValue?: M extends true ? Array<U> : U;
   /** The value of the tree when initially rendered. Use when you do not need to control the state of the tree */
-  defaultValue?: Array<U> | U;
+  defaultValue?: M extends true ? Array<U> : U;
   /** List of items */
   items?: Array<T>;
   /** The controlled value of the expanded item. Can be binded with with `v-model`. */
@@ -20,7 +20,7 @@ export interface ATreeRootProps<T = Record<string, any>, U extends Record<string
   /** How multiple selection should behave in the collection. */
   selectionBehavior?: 'replace' | 'toggle';
   /** Whether multiple options can be selected or not.  */
-  multiple?: boolean;
+  multiple?: M;
   /** The reading direction of the listbox when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode. */
   dir?: Direction;
   /** When `true`, prevents the user from interacting with tree  */
@@ -31,8 +31,8 @@ export interface ATreeRootProps<T = Record<string, any>, U extends Record<string
   bubbleSelect?: boolean;
 }
 
-export type ATreeRootEmits<T = Record<string, any>> = {
-  'update:modelValue': [val: T];
+export type ATreeRootEmits<T = Record<string, any>, M extends boolean = false> = {
+  'update:modelValue': [val: M extends true ? Array<T> : T];
   'update:expanded': [val: Array<string>];
 };
 
@@ -77,7 +77,7 @@ export const [
 ] = createContext<TreeRootContext<any>>('ATreeRoot');
 </script>
 
-<script setup lang="ts" generic="T extends Record<string, any>, U extends Record<string, any>">
+<script setup lang="ts" generic="T extends Record<string, any>, U extends Record<string, any>, M extends boolean = false">
 import type { EventHook } from '@vueuse/core';
 import type { Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
@@ -89,19 +89,19 @@ import { MAP_KEY_TO_FOCUS_INTENT } from '~~/roving-focus/utils';
 import { flatten } from './utils';
 
 const props = withDefaults(
-  defineProps<ATreeRootProps<T, U>>(),
+  defineProps<ATreeRootProps<T, U, M>>(),
   {
     as: 'ul',
     selectionBehavior: 'toggle',
     getChildren: (val: T) => val.children,
   },
 );
-const emits = defineEmits<ATreeRootEmits<U>>();
+const emits = defineEmits<ATreeRootEmits<U, M>>();
 
 defineSlots<{
   default: (props: {
     flattenItems: Array<FlattenedItem<T>>;
-    modelValue: typeof modelValue.value;
+    modelValue: M extends true ? Array<U> : U;
     expanded: typeof expanded.value;
   }) => any;
 }>();
@@ -307,7 +307,7 @@ provideTreeRootContext({
     >
       <slot
         :flatten-items="expandedItems"
-        :model-value="modelValue"
+        :model-value="modelValue as M extends true ? Array<U> : U"
         :expanded="expanded"
       />
     </APrimitive>
