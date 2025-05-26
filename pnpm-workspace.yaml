@@ -4,8 +4,8 @@ packages:
   - docs
   - .histoire
 catalog:
-  '@commitlint/cli': ^19.8.0
-  '@commitlint/config-conventional': ^19.8.0
+  '@commitlint/cli': ^19.8.1
+  '@commitlint/config-conventional': ^19.8.1
   '@floating-ui/dom': ^1.6.13
   '@floating-ui/vue': ^1.1.6
   '@histoire/plugin-vue': ^0.17.17
@@ -28,7 +28,7 @@ catalog:
   '@unocss/nuxt': ^66.0.0
   '@unocss/vite': ^66.0.0
   '@vinicunca/eslint-config': ^3.14.0
-  '@vinicunca/perkakas': ^1.5.0
+  '@vinicunca/perkakas': ^1.6.0
   '@vinicunca/unocss-preset': ^1.14.0
   '@vitejs/plugin-vue': ^5.2.4
   '@vitejs/plugin-vue-jsx': ^4.1.1
@@ -38,20 +38,20 @@ catalog:
   '@vueuse/core': 12.5.0
   '@vueuse/shared': 12.5.0
   aria-hidden: ^1.2.4
-  bumpp: ^10.1.0
+  bumpp: ^10.1.1
   defu: ^6.1.4
-  eslint: ^9.25.1
+  eslint: ^9.27.0
   histoire: ^0.17.17
   jsdom: ^26.0.0
-  lint-staged: ^15.5.1
+  lint-staged: ^16.0.0
   mark.js: ^8.11.1
   minisearch: ^7.1.2
   nuxt: ^3.16.2
   postcss-preset-env: ^10.1.6
   rimraf: ^6.0.1
   simple-git-hooks: ^2.13.0
-  taze: ^19.0.4
-  tsx: ^4.19.3
+  taze: ^19.1.0
+  tsx: ^4.19.4
   typescript: ^5.8.3
   unbuild: ^3.5.0
   unocss: ^66.0.0
