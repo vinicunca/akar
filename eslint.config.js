@@ -20,6 +20,7 @@ export default vinicuncaESLint(
       'perfectionist/sort-modules': 'off',
       'sonar/cognitive-complexity': 'off',
       'sonar/no-invariant-returns': 'off',
+      'sonar/use-type-alias': 'off',
     },
   },
 

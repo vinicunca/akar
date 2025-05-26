@@ -23,7 +23,7 @@ const rootContext = injectACalendarRootContext();
     role="gridcell"
     :aria-selected="rootContext.isDateSelected(date) ? true : undefined"
     :aria-disabled="rootContext.isDateDisabled(date) || rootContext.isDateUnavailable?.(date)"
-    :data-disabled="rootContext.isDateDisabled(date) ? '' : undefined"
+    :data-disabled="rootContext.isDateDisabled(date) || rootContext.disableDaysOutsideCurrentView.value ? '' : undefined"
   >
     <slot />
   </APrimitive>

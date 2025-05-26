@@ -56,6 +56,7 @@ type RangeCalendarRootContext = {
   isPrevButtonDisabled: (prevPageFunc?: (date: DateValue) => DateValue) => boolean;
   formatter: UseDateFormatter;
   dir: Ref<Direction>;
+  disableDaysOutsideCurrentView: Ref<boolean>;
   fixedDate: Ref<'start' | 'end' | undefined>;
 };
 
@@ -108,6 +109,8 @@ export interface ARangeCalendarRootProps extends APrimitiveProps {
   nextPage?: (placeholder: DateValue) => DateValue;
   /** A function that returns the previous page of the calendar. It receives the current placeholder as an argument inside the component. */
   prevPage?: (placeholder: DateValue) => DateValue;
+  /** Whether or not to disable days outside the current view. */
+  disableDaysOutsideCurrentView?: boolean;
   /** Which part of the range should be fixed */
   fixedDate?: 'start' | 'end';
 }
@@ -151,6 +154,7 @@ const props = withDefaults(
     isDateUnavailable: undefined,
     isDateHighlightable: undefined,
     allowNonContiguousRanges: false,
+    disableDaysOutsideCurrentView: false,
   },
 );
 const emits = defineEmits<ARangeCalendarRootEmits>();
@@ -195,6 +199,7 @@ const {
   nextPage: propsNextPage,
   prevPage: propsPrevPage,
   allowNonContiguousRanges,
+  disableDaysOutsideCurrentView,
   fixedDate,
 } = toRefs(props);
 
@@ -406,6 +411,7 @@ provideRangeCalendarRootContext({
   dir,
   isHighlightedStart,
   isHighlightedEnd,
+  disableDaysOutsideCurrentView,
   fixedDate,
 });
 

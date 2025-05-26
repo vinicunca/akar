@@ -73,7 +73,6 @@ const labelText = computed(() => rootContext.formatter.custom({
   },
 }));
 
-const isDisabled = computed(() => rootContext.isDateDisabled(props.day));
 const isUnavailable = computed(() => rootContext.isDateUnavailable?.(props.day) ?? false);
 const isSelectedDate = computed(() => rootContext.isSelected(props.day));
 const isSelectionStart = computed(() => rootContext.isSelectionStart(props.day));
@@ -92,11 +91,18 @@ const allowNonContiguousRanges = computed(() => rootContext.allowNonContiguousRa
 const isDateToday = computed(() => {
   return isToday(props.day, getLocalTimeZone());
 });
+
 const isOutsideView = computed(() => {
   return !isSameMonth(props.day, props.month);
 });
+
 const isOutsideVisibleView = computed(() =>
   rootContext.isOutsideVisibleView(props.day),
+);
+
+const isDisabled = computed(() =>
+  rootContext.isDateDisabled(props.day)
+  || (rootContext.disableDaysOutsideCurrentView.value && isOutsideView.value),
 );
 
 const dayValue = computed(() => props.day.day.toLocaleString(rootContext.locale.value));
@@ -161,6 +167,10 @@ function changeDate(event: KeyboardEvent | MouseEvent, date: DateValue) {
 }
 
 function handleClick(event: MouseEvent) {
+  if (isDisabled.value) {
+    return;
+  }
+
   changeDate(event, props.day);
 }
 
@@ -172,6 +182,10 @@ function handleFocus() {
 }
 
 function handleArrowKey(event: KeyboardEvent) {
+  if (isDisabled.value) {
+    return;
+  }
+
   event.preventDefault();
   event.stopPropagation();
 

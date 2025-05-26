@@ -21,7 +21,7 @@ export function useId(deterministicId?: null | string | undefined, prefix = 'aka
   const configProviderContext = injectAConfigProviderContext({ useId: undefined });
 
   if (Object.hasOwn(vue, 'useId')) {
-    return `${prefix}-${vue.useId()}`;
+    return `${prefix}-${vue.useId?.()}`;
   } else if (configProviderContext.useId) {
     return `${prefix}-${configProviderContext.useId()}`;
   }

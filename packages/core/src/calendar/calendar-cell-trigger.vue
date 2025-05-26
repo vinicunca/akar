@@ -68,23 +68,31 @@ const labelText = computed(() => {
   });
 });
 
-const isDisabled = computed(() => rootContext.isDateDisabled(props.day));
 const isUnavailable = computed(() =>
   rootContext.isDateUnavailable?.(props.day) ?? false,
 );
+
 const isDateToday = computed(() => {
   return isToday(props.day, getLocalTimeZone());
 });
+
 const isOutsideView = computed(() => {
   return !isSameMonth(props.day, props.month);
 });
+
 const isOutsideVisibleView = computed(() =>
   rootContext.isOutsideVisibleView(props.day),
+);
+
+const isDisabled = computed(() =>
+  rootContext.isDateDisabled(props.day)
+  || (rootContext.disableDaysOutsideCurrentView.value && isOutsideView.value),
 );
 
 const isFocusedDate = computed(() => {
   return !rootContext.disabled.value && isSameDay(props.day, rootContext.placeholder.value);
 });
+
 const isSelectedDate = computed(() => rootContext.isDateSelected(props.day));
 
 function changeDate(date: DateValue) {
@@ -99,10 +107,18 @@ function changeDate(date: DateValue) {
 }
 
 function handleClick() {
+  if (isDisabled.value) {
+    return;
+  }
+
   changeDate(props.day);
 }
 
 function handleArrowKey(event: KeyboardEvent) {
+  if (isDisabled.value) {
+    return;
+  }
+
   event.preventDefault();
   event.stopPropagation();
   const parentElement = rootContext.parentElement.value!;
