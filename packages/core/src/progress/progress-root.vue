@@ -17,11 +17,15 @@ export interface AProgressRootProps extends APrimitiveProps {
   /** The maximum progress value. */
   max?: number;
   /**
-   * A function to get the accessible label text representing the current value in a human-readable format.
+   * A function to get the accessible label text in a human-readable format.
    *
    *  If not provided, the value label will be read as the numeric value as a percentage of the max value.
    */
   getValueLabel?: (value: number | null | undefined, max: number) => string | undefined;
+  /**
+   * A function to get the accessible value text representing the current value in a human-readable format.
+   */
+  getValueText?: (value: number | null | undefined, max: number) => string | undefined;
 }
 
 const DEFAULT_MAX = 100;
@@ -153,7 +157,7 @@ provideProgressRootContext({
     :aria-valuemax="max"
     :aria-valuemin="0"
     :aria-valuenow="isNumber(modelValue) ? modelValue : undefined"
-    :aria-valuetext="getValueLabel(modelValue, max)"
+    :aria-valuetext="getValueText?.(modelValue, max)"
     :aria-label="getValueLabel(modelValue, max)"
     role="progressbar"
     :data-state="progressState"
