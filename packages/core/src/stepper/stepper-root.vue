@@ -41,16 +41,22 @@ export type AStepperRootEmits = {
   'update:modelValue': [payload: number | undefined];
 };
 
-export const [injectAStepperRootContext, provideStepperRootContext]
-  = createContext<StepperRootContext>('AStepperRoot');
+export const [
+  injectAStepperRootContext,
+  provideStepperRootContext,
+] = createContext<StepperRootContext>('AStepperRoot');
 </script>
 
 <script setup lang="ts">
-const props = withDefaults(defineProps<AStepperRootProps>(), {
-  orientation: 'horizontal',
-  linear: true,
-  defaultValue: 1,
-});
+const props = withDefaults(
+  defineProps<AStepperRootProps>(),
+  {
+    orientation: 'horizontal',
+    linear: true,
+    defaultValue: 1,
+  },
+);
+
 const emits = defineEmits<AStepperRootEmits>();
 
 defineSlots<{
@@ -73,6 +79,10 @@ defineSlots<{
     nextStep: () => void;
     /** Go to the previous step */
     prevStep: () => void;
+    /** Whether or not there is a next step */
+    hasNext: () => boolean;
+    /** Whether or not there is a previous step */
+    hasPrev: () => boolean;
   }) => any;
 }>();
 
@@ -115,23 +125,47 @@ function goToStep(step: number) {
 
   modelValue.value = step;
 }
+
+function nextStep() {
+  goToStep((modelValue.value ?? 1) + 1);
+}
+
+function prevStep() {
+  goToStep((modelValue.value ?? 1) - 1);
+}
+
+function hasNext() {
+  return (modelValue.value ?? 1) < totalSteps.value;
+}
+
+function hasPrev() {
+  return (modelValue.value ?? 1) > 1;
+}
+
 const nextStepperItem = ref<HTMLElement | null>(null);
 const prevStepperItem = ref<HTMLElement | null>(null);
 const isNextDisabled = computed(() => nextStepperItem.value ? nextStepperItem.value.getAttribute('disabled') === '' : true);
 const isPrevDisabled = computed(() => prevStepperItem.value ? prevStepperItem.value.getAttribute('disabled') === '' : true);
 
-watch(modelValue, async () => {
-  await nextTick(() => {
-    nextStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! < totalStepperItemsArray.value.length ? totalStepperItemsArray.value[modelValue.value!] : null;
-    prevStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! > 1 ? totalStepperItemsArray.value[modelValue.value! - 2] : null;
-  });
-});
-watch(totalStepperItemsArray, async () => {
-  await nextTick(() => {
-    nextStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! < totalStepperItemsArray.value.length ? totalStepperItemsArray.value[modelValue.value!] : null;
-    prevStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! > 1 ? totalStepperItemsArray.value[modelValue.value! - 2] : null;
-  });
-});
+watch(
+  modelValue,
+  async () => {
+    await nextTick(() => {
+      nextStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! < totalStepperItemsArray.value.length ? totalStepperItemsArray.value[modelValue.value!] : null;
+      prevStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! > 1 ? totalStepperItemsArray.value[modelValue.value! - 2] : null;
+    });
+  },
+);
+
+watch(
+  totalStepperItemsArray,
+  async () => {
+    await nextTick(() => {
+      nextStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! < totalStepperItemsArray.value.length ? totalStepperItemsArray.value[modelValue.value!] : null;
+      prevStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! > 1 ? totalStepperItemsArray.value[modelValue.value! - 2] : null;
+    });
+  },
+);
 
 provideStepperRootContext({
   modelValue,
@@ -142,6 +176,20 @@ provideStepperRootContext({
   dir,
   linear,
   totalStepperItems,
+});
+
+defineExpose({
+  goToStep,
+  nextStep,
+  prevStep,
+  modelValue,
+  totalSteps,
+  isNextDisabled,
+  isPrevDisabled,
+  isFirstStep,
+  isLastStep,
+  hasNext,
+  hasPrev,
 });
 </script>
 
@@ -162,8 +210,10 @@ provideStepperRootContext({
       :is-first-step="isFirstStep"
       :is-last-step="isLastStep"
       :go-to-step="goToStep"
-      :next-step="() => goToStep((modelValue ?? 1) + 1)"
-      :prev-step="() => goToStep((modelValue ?? 1) - 1)"
+      :next-step="nextStep"
+      :prev-step="prevStep"
+      :has-next="hasNext"
+      :has-prev="hasPrev"
     />
 
     <div
