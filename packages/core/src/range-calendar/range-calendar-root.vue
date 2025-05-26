@@ -41,6 +41,7 @@ type RangeCalendarRootContext = {
   isDateUnavailable?: DateMatcher;
   isDateHighlightable?: DateMatcher;
   isOutsideVisibleView: (date: DateValue) => boolean;
+  allowNonContiguousRanges: Ref<boolean>;
   highlightedRange: Ref<null | { start: DateValue; end: DateValue }>;
   focusedValue: Ref<DateValue | undefined>;
   lastPressedDateValue: Ref<DateValue | undefined>;
@@ -387,6 +388,7 @@ provideRangeCalendarRootContext({
   headingValue,
   isInvalid,
   isDateDisabled,
+  allowNonContiguousRanges,
   highlightedRange,
   focusedValue,
   lastPressedDateValue,
