@@ -52,7 +52,7 @@ const props = withDefaults(defineProps<ADialogRootProps>(), {
 const emit = defineEmits<ADialogRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current open state */
     open: typeof open.value;
   }) => any;

@@ -10,7 +10,7 @@ import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
 const props = withDefaults(defineProps<ARangeCalendarHeadingProps>(), { as: 'div' });
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current month and year */
     headingValue: string;
   }) => any;

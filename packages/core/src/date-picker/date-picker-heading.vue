@@ -8,7 +8,7 @@ export interface ADatePickerHeadingProps extends ACalendarHeadingProps {}
 <script setup lang="ts">
 const props = defineProps<ADatePickerHeadingProps>();
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current month and year */
     headingValue: string;
   }) => any;

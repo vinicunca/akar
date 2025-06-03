@@ -75,7 +75,7 @@ const props = withDefaults(
 const emits = defineEmits<APinInputRootEmits<Type>>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current input values */
     modelValue: typeof modelValue.value;
   }) => any;

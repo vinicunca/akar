@@ -94,7 +94,7 @@ const props = withDefaults(defineProps<AListboxRootProps>(), {
 const emits = defineEmits<AListboxRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current active value */
     modelValue: typeof modelValue.value;
   }) => any;

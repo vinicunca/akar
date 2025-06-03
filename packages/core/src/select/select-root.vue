@@ -84,7 +84,7 @@ const props = withDefaults(defineProps<ASelectRootProps<T>>(), {
 const emits = defineEmits<ASelectRootEmits<T>>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current input values */
     modelValue: typeof modelValue.value;
     /** Current open state */

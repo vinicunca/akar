@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<ADropdownMenuRootProps>(), {
 const emit = defineEmits<ADropdownMenuRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current open state */
     open: typeof open.value;
   }) => any;

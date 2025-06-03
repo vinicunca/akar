@@ -69,7 +69,7 @@ const props = defineProps<ASplitterPanelProps>();
 const emits = defineEmits<ASplitterPanelEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Is the panel collapsed */
     isCollapsed: typeof isCollapsed.value;
     /** Is the panel expanded */

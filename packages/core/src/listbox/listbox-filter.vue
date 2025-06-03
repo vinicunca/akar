@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<AListboxFilterProps>(), {
 const emits = defineEmits<AListboxFilterEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current input values */
     modelValue: typeof modelValue.value;
   }) => any;

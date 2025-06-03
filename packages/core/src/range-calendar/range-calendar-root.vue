@@ -160,7 +160,7 @@ const props = withDefaults(
 const emits = defineEmits<ARangeCalendarRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** The current date of the placeholder */
     date: DateValue;
     /** The grid of dates */

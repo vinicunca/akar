@@ -45,7 +45,7 @@ const props = withDefaults(defineProps<ASwitchRootProps>(), {
 const emit = defineEmits<ASwitchRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current value */
     modelValue: typeof modelValue.value;
   }) => any;

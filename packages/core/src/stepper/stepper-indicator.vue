@@ -12,7 +12,7 @@ export interface AStepperIndicatorProps extends APrimitiveProps { }
 const props = defineProps<AStepperIndicatorProps>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current step */
     step: number;
   }) => any;

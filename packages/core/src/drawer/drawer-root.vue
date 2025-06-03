@@ -32,7 +32,7 @@ const props = withDefaults(
 const emits = defineEmits<ADrawerRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     open: typeof isOpen.value;
   }) => any;
 }>();

@@ -52,7 +52,7 @@ const props = withDefaults(
 const emit = defineEmits<AHoverCardRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current open state */
     open: typeof open.value;
   }) => any;

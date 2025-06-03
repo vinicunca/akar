@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<ADropdownMenuSubProps>(), {
 const emit = defineEmits<ADropdownMenuSubEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current open state */
     open: typeof open.value;
   }) => any;

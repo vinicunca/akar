@@ -18,7 +18,7 @@ export interface ARangeCalendarCellTriggerProps extends APrimitiveProps {
 }
 
 export interface RangeCalendarCellTriggerSlot {
-  default: (props: {
+  default?: (props: {
     /** Current day */
     dayValue: string;
     /** Current disable state */

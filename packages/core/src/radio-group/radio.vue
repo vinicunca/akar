@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
 const emits = defineEmits<RadioEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current checked state */
     checked: typeof checked.value;
   }) => any;

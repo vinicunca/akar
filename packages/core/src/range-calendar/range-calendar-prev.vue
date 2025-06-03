@@ -8,7 +8,7 @@ export interface ARangeCalendarPrevProps extends APrimitiveProps {
 }
 
 export interface RangeCalendarPrevSlot {
-  default: (props: {
+  default?: (props: {
     /** Current disable state */
     disabled: boolean;
   }) => any;

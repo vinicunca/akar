@@ -122,7 +122,7 @@ const props = withDefaults(
 const emits = defineEmits<ANavigationMenuRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current input values */
     modelValue: typeof modelValue.value;
   }) => any;

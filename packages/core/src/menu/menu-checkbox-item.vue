@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<AMenuCheckboxItemProps>(), {
 const emits = defineEmits<AMenuCheckboxItemEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current modelValue state */
     modelValue: typeof modelValue.value;
   }) => any;

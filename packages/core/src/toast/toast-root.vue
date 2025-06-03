@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<AToastRootProps>(), {
 const emits = defineEmits<AToastRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current open state */
     open: typeof open.value;
     /** Remaining time (in ms) */

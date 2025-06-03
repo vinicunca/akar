@@ -44,7 +44,7 @@ const props = withDefaults(
 const emits = defineEmits<ATreeItemEmits<T>>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     isExpanded: boolean;
     isSelected: boolean;
     isIndeterminate: boolean | undefined;

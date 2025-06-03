@@ -83,7 +83,7 @@ const props = withDefaults(defineProps<ATagsInputRootProps<T>>(), {
 const emits = defineEmits<ATagsInputRootEmits<T>>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current input values */
     modelValue: typeof modelValue.value;
   }) => any;

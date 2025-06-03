@@ -99,7 +99,7 @@ const props = withDefaults(
 const emits = defineEmits<ATreeRootEmits<U, M>>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     flattenItems: Array<FlattenedItem<T>>;
     modelValue: M extends true ? Array<U> : U;
     expanded: typeof expanded.value;

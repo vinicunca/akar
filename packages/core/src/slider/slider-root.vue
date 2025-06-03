@@ -102,7 +102,7 @@ const props = withDefaults(defineProps<ASliderRootProps>(), {
 const emits = defineEmits<ASliderRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current slider values */
     modelValue: typeof modelValue.value;
   }) => any;

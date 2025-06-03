@@ -102,7 +102,7 @@ const props = withDefaults(defineProps<ASplitterGroupProps>(), {
 const emits = defineEmits<ASplitterGroupEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current size of layout */
     layout: typeof layout.value;
   }) => any;

@@ -14,7 +14,7 @@ import { getRange, transform } from './utils';
 const props = defineProps<APaginationListProps>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Pages item */
     items: typeof transformedRange.value;
   }) => any;

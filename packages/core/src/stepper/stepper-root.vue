@@ -60,7 +60,7 @@ const props = withDefaults(
 const emits = defineEmits<AStepperRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current step */
     modelValue: number | undefined;
     /** Total number of steps */

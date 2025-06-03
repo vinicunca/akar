@@ -57,7 +57,7 @@ const props = withDefaults(defineProps<APaginationRootProps>(), {
 const emits = defineEmits<APaginationRootEmits>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current page state */
     page: typeof page.value;
     /** Number of pages */
