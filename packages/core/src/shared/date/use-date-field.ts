@@ -1,7 +1,7 @@
 import type { CalendarDateTime, CycleTimeOptions, DateFields, DateValue, TimeFields } from '@internationalized/date';
 import type { Ref } from 'vue';
 import type { UseDateFormatter } from '~~/shared';
-import type { AnyExceptLiteral, HourCycle, SegmentPart, SegmentValueObj } from './types';
+import type { AnyExceptLiteral, DateStep, HourCycle, SegmentPart, SegmentValueObj } from './types';
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import { getDaysInMonth, toDate } from '~~/date';
@@ -287,6 +287,7 @@ export interface UseDateFieldProps {
   lastKeyZero: Ref<boolean>;
   placeholder: Ref<DateValue>;
   hourCycle: HourCycle;
+  step: Ref<DateStep>;
   formatter: UseDateFormatter;
   segmentValues: Ref<SegmentValueObj>;
   disabled: Ref<boolean>;
@@ -298,7 +299,8 @@ export interface UseDateFieldProps {
 
 export function useDateField(props: UseDateFieldProps) {
   function minuteSecondIncrementation({ event, part, dateRef, prevValue }: MinuteSecondIncrementProps): number {
-    const sign = event.key === KEY_CODES.ARROW_UP ? 1 : -1;
+    const step = props.step.value[part] ?? 1;
+    const sign = event.key === KEY_CODES.ARROW_UP ? step : -step;
     const min = 0;
     const max = 59;
 
@@ -327,7 +329,8 @@ export function useDateField(props: UseDateFieldProps) {
   }
 
   function dateTimeValueIncrementation({ event, part, dateRef, prevValue, hourCycle }: DateTimeValueIncrementation): number {
-    const sign = event.key === KEY_CODES.ARROW_UP ? 1 : -1;
+    const step = props.step.value[part] ?? 1;
+    const sign = event.key === KEY_CODES.ARROW_UP ? step : -step;
 
     if (prevValue === null) {
       return dateRef[part as keyof Omit<DateFields, 'era'>];

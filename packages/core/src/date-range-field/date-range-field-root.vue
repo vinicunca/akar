@@ -5,7 +5,7 @@ import type { Ref } from 'vue';
 import type { DateMatcher } from '~~/date';
 import type { APrimitiveProps } from '~~/primitive';
 import type { UseDateFormatter } from '~~/shared';
-import type { DateRange, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '~~/shared/date';
+import type { DateRange, DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '~~/shared/date';
 import type { Direction, FormFieldProps } from '~~/shared/types';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import {
@@ -21,6 +21,7 @@ import {
   getSegmentElements,
   initializeSegmentValues,
   isSegmentNavigationKey,
+  normalizeDateStep,
   syncSegmentValues,
 } from '~~/shared/date';
 
@@ -37,6 +38,7 @@ type DateRangeFieldRootContext = {
   readonly: Ref<boolean>;
   formatter: UseDateFormatter;
   hourCycle: HourCycle;
+  step: Ref<DateStep>;
   segmentValues: Record<DateRangeType, Ref<SegmentValueObj>>;
   segmentContents: Ref<{ start: Array<{ part: SegmentPart; value: string }>; end: Array<{ part: SegmentPart; value: string }> }>;
   elements: Ref<Set<HTMLElement>>;
@@ -55,6 +57,8 @@ export interface ADateRangeFieldRootProps extends APrimitiveProps, FormFieldProp
   modelValue?: DateRange | null;
   /** The hour cycle used for formatting times. Defaults to the local preference */
   hourCycle?: HourCycle;
+  /** The stepping interval for the time fields. Defaults to `1`. */
+  step?: DateStep;
   /** The granularity to use for formatting times. Defaults to day if a CalendarDate is provided, otherwise defaults to minute. The field will render segments for each part of the date up to and including the specified granularity */
   granularity?: Granularity;
   /** Whether or not to hide the time zone segment of the field */
@@ -159,6 +163,8 @@ const placeholder = useVModel(
     passive: (props.placeholder === undefined) as false,
   },
 ) as Ref<DateValue>;
+
+const step = computed(() => normalizeDateStep(props));
 
 const inferredGranularity = computed(() => {
   if (props.granularity) {
@@ -409,6 +415,7 @@ provideDateRangeFieldRootContext({
   disabled,
   formatter,
   hourCycle: props.hourCycle,
+  step,
   readonly,
   segmentValues: { start: startSegmentValues, end: endSegmentValues },
   isInvalid,
