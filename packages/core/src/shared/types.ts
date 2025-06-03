@@ -41,7 +41,7 @@ interface ScrollBodyOption {
 
 // Exclude `boolean` type to prevent type casting
 // reference: https://vuejs.org/guide/components/props.html#boolean-casting
-type AcceptableValue = string | number | Record<string, any> | null;
+type AcceptableValue = string | number | bigint | Record<string, any> | null;
 type ArrayOrWrapped<T> = T extends Array<any> ? T : Array<T>;
 type StringOrNumber = number | string;
 
