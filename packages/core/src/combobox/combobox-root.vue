@@ -31,8 +31,10 @@ type ComboboxRootContext<T> = {
   ignoreFilter: Ref<boolean>;
 };
 
-export const [injectAComboboxRootContext, provideComboboxRootContext]
-  = createContext<ComboboxRootContext<AcceptableValue>>('AComboboxRoot');
+export const [
+  injectAComboboxRootContext,
+  provideComboboxRootContext,
+] = createContext<ComboboxRootContext<AcceptableValue>>('AComboboxRoot');
 
 export type AComboboxRootEmits<T = AcceptableValue> = {
   /** Event handler called when the value changes. */
@@ -92,7 +94,7 @@ const props = withDefaults(
 const emits = defineEmits<AComboboxRootEmits<T>>();
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current open state */
     open: typeof open.value;
     /** Current active value */

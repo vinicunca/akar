@@ -220,6 +220,24 @@ describe('dateField', async () => {
     expect(second).toHaveTextContent(cycle('second'));
   });
 
+  it('allow the maximum day to be 31 when no month field', async () => {
+    const { user, day } = setup({
+      dateFieldProps: {
+        /**
+         * Explicitly set the placeholder to avoid using current local time as placeholder.
+         * And use a month (here is April, 30 days) with less than 31 days to ensure the day can be 31
+         * when user input day segment first.
+         */
+        placeholder: new CalendarDate(2025, 4, 30),
+      },
+    });
+
+    await user.click(day);
+    await user.keyboard(kbd.ARROW_UP);
+    await user.keyboard(kbd.ARROW_UP);
+    expect(day).toHaveTextContent('31');
+  });
+
   it('navigates segments using the arrow keys', async () => {
     const { getByTestId, user, day, month, year } = setup({
       dateFieldProps: {

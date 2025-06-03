@@ -10,10 +10,7 @@ import type { Direction, FormFieldProps } from '~~/shared/types';
 import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { hasTime, isDateBefore } from '~~/date';
 import { createContext, useDateFormatter, useDirection, useLocale } from '~~/shared';
-import {
-  getDefaultDate,
-
-} from '~~/shared/date';
+import { getDefaultDate } from '~~/shared/date';
 import { createContent, getSegmentElements, initializeSegmentValues, isSegmentNavigationKey, syncSegmentValues } from '~~/shared/date';
 
 type DateFieldRootContext = {

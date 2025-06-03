@@ -8,7 +8,7 @@ export interface ACalendarNextProps extends APrimitiveProps {
 }
 
 export interface CalendarNextSlot {
-  default: (props: {
+  default?: (props: {
     /** Current disable state */
     disabled: boolean;
   }) => any;

@@ -130,16 +130,23 @@ function createContentObj(props: CreateContentObjProps) {
     if ('hour' in segmentValues) {
       const value = segmentValues[part];
       if (value !== null) {
-        /**
-         * Edge case for when the month field is filled and the day field snaps to the maximum value of the value of the placeholder month
-         */
-        if (part === 'day' && segmentValues.month !== null) {
+        if (part === 'day') {
           return formatter.part({
-            dateObj: props.dateRef.set({ [part as keyof DateFields]: value, month: segmentValues.month }),
+            dateObj: props.dateRef.set({
+              [part as keyof DateFields]: value,
+              /**
+               * Edge case for the day field:
+               *
+               * 1. If the month is filled,
+               *   we need to ensure that the day snaps to the maximum value of that month.
+               * 2. If the month is not filled,
+               *   we default to the month with the maximum number of days (here just using January, 31 days),
+               *   so that user can input any possible day.
+               */
+              month: segmentValues.month ?? 1,
+            }),
             type: part,
-            options: {
-              hourCycle: props.hourCycle === 24 ? 'h23' : undefined,
-            },
+            options: { hourCycle: props.hourCycle === 24 ? 'h23' : undefined },
           });
         }
 
@@ -160,6 +167,17 @@ function createContentObj(props: CreateContentObjProps) {
           if (part === 'day' && segmentValues.month !== null) {
             return formatter.part({
               dateObj: props.dateRef.set({ [part]: value, month: segmentValues.month }),
+              type: part,
+            });
+          }
+
+          if (part === 'day') {
+            return formatter.part({
+              dateObj: props.dateRef.set({
+                [part]: value,
+                // Same logic as above for the day field
+                month: segmentValues.month ?? 1,
+              }),
               type: part,
             });
           }

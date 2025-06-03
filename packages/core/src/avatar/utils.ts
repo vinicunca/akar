@@ -1,4 +1,5 @@
 import type { ImgHTMLAttributes, Ref } from 'vue';
+import { isBrowser } from '@vinicunca/perkakas';
 import {
   computed,
   onMounted,
@@ -40,7 +41,7 @@ export function useImageLoadingStatus(
       return null;
     }
 
-    if (!imageRef.value) {
+    if (!imageRef.value && isBrowser) {
       imageRef.value = new window.Image();
     }
 

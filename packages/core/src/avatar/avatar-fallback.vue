@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
+import { isBrowser } from '@vinicunca/perkakas';
 
 export interface AAvatarFallbackProps extends APrimitiveProps {
   /** Useful for delaying rendering so it only appears for those with slower connections. */
@@ -27,7 +28,7 @@ useForwardExpose();
 const canRender = ref(props.delayMs === undefined);
 
 watchEffect((onCleanup) => {
-  if (props.delayMs) {
+  if (props.delayMs && isBrowser) {
     const timerId = window.setTimeout(() => {
       canRender.value = true;
     }, props.delayMs);

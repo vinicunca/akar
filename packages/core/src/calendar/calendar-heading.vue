@@ -11,7 +11,7 @@ import { injectACalendarRootContext } from './calendar-root.vue';
 const props = withDefaults(defineProps<ACalendarHeadingProps>(), { as: 'div' });
 
 defineSlots<{
-  default: (props: {
+  default?: (props: {
     /** Current month and year */
     headingValue: string;
   }) => any;

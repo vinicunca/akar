@@ -20,7 +20,7 @@ export interface ACalendarCellTriggerProps extends APrimitiveProps {
 }
 
 export interface CalendarCellTriggerSlot {
-  default: (props: {
+  default?: (props: {
     /** Current day */
     dayValue: string;
     /** Current disable state */
