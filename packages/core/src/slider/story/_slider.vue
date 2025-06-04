@@ -4,7 +4,12 @@ import { ref } from 'vue';
 import { useForwardPropsEmits } from '~~/shared';
 import { ASliderRange, ASliderRoot, ASliderThumb, ASliderTrack } from '..';
 
-const props = defineProps<ASliderRootProps>();
+const props = withDefaults(
+  defineProps<ASliderRootProps>(),
+  {
+    inverted: false,
+  },
+);
 const emits = defineEmits<ASliderRootEmits>();
 
 const sliderValue = ref([50]);

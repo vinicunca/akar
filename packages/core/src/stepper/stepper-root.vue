@@ -88,7 +88,6 @@ defineSlots<{
 
 const { dir: propDir, orientation: propOrientation, linear } = toRefs(props);
 const dir = useDirection(propDir);
-useForwardExpose();
 
 const totalStepperItems = ref<Set<HTMLElement>>(new Set());
 
@@ -191,6 +190,8 @@ defineExpose({
   hasNext,
   hasPrev,
 });
+
+useForwardExpose();
 </script>
 
 <template>
