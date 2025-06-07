@@ -1,6 +1,6 @@
-import type { Ref } from 'vue';
+import type { MaybeRefOrGetter, Ref } from 'vue';
 import { isBrowser } from '@vinicunca/perkakas';
-import { nextTick, ref, watchEffect } from 'vue';
+import { nextTick, ref, toValue, watchEffect } from 'vue';
 import { handleAndDispatchCustomEvent } from '~~/shared';
 
 export type PointerDownOutsideEvent = CustomEvent<{
@@ -54,10 +54,12 @@ export function usePointerDownOutside(
   {
     element,
     onPointerDownOutside,
+    enabled = true,
   }:
   {
     element?: Ref<HTMLElement | undefined>;
     onPointerDownOutside?: (event: PointerDownOutsideEvent) => void;
+    enabled?: MaybeRefOrGetter<boolean>;
   },
 ) {
   const ownerDocument: Document = element?.value?.ownerDocument ?? globalThis?.document;
@@ -66,7 +68,7 @@ export function usePointerDownOutside(
   const handleClickRef = ref(() => {});
 
   watchEffect((cleanupFn) => {
-    if (!isBrowser) {
+    if (!isBrowser || !toValue(enabled)) {
       return;
     }
 
@@ -147,6 +149,10 @@ export function usePointerDownOutside(
 
   return {
     onPointerDownCapture: () => {
+      if (!toValue(enabled)) {
+        return;
+      }
+
       isPointerInsideDOMTree.value = true;
     },
   };
@@ -160,17 +166,19 @@ export function useFocusOutside(
   {
     element,
     onFocusOutside,
+    enabled = true,
   }:
   {
     element?: Ref<HTMLElement | undefined>;
     onFocusOutside?: (event: FocusOutsideEvent) => void;
+    enabled?: MaybeRefOrGetter<boolean>;
   },
 ) {
   const ownerDocument: Document = element?.value?.ownerDocument ?? globalThis?.document;
 
   const isFocusInsideDOMTree = ref(false);
   watchEffect((cleanupFn) => {
-    if (!isBrowser) {
+    if (!isBrowser || !toValue(enabled)) {
       return;
     }
 
@@ -212,9 +220,17 @@ export function useFocusOutside(
 
   return {
     onFocusCapture: () => {
+      if (!toValue(enabled)) {
+        return;
+      }
+
       isFocusInsideDOMTree.value = true;
     },
     onBlurCapture: () => {
+      if (!toValue(enabled)) {
+        return;
+      }
+
       isFocusInsideDOMTree.value = false;
     },
   };

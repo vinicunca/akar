@@ -189,11 +189,15 @@ function handleDismiss() {
 const pointerDownOutside = usePointerDownOutside({
   onPointerDownOutside: () => handleDismiss(),
   element: currentElement,
+  enabled: isEditing,
 });
+
 const focusOutside = useFocusOutside({
   onFocusOutside: () => handleDismiss(),
   element: currentElement,
+  enabled: isEditing,
 });
+
 const isEmpty = computed(() => modelValue.value === '');
 
 defineExpose({

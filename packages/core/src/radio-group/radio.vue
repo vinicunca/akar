@@ -51,6 +51,10 @@ const isFormControl = useFormControl(triggerElement);
 const ariaLabel = computed(() => props.id && triggerElement.value ? (document.querySelector(`[for="${props.id}"]`) as HTMLLabelElement)?.textContent ?? props.value : undefined);
 
 function handleClick(event: MouseEvent) {
+  if (props.disabled) {
+    return;
+  }
+
   handleSelect(event, props.value, (ev) => {
     emits('select', ev);
     if (ev?.defaultPrevented) {
