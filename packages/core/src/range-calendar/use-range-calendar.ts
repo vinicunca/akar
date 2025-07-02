@@ -7,7 +7,7 @@ import type { Ref } from 'vue';
 import type { DateMatcher } from '~~/date';
 import { isSameDay } from '@internationalized/date';
 import { computed } from 'vue';
-import { areAllDaysBetweenValid, isDateBefore, isDateBetween } from '~~/date';
+import { areAllDaysBetweenValid, getDaysBetween, isDateBefore, isDateBetween } from '~~/date';
 
 export interface UseRangeCalendarProps {
   start: Ref<DateValue | undefined>;
@@ -89,12 +89,40 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
       return true;
     }
 
-    if (!props.maximumDays?.value || !props.start.value || props.end.value || isSameDay(props.start.value, date)) {
-      return false;
+    if (props.maximumDays?.value) {
+      if (props.start.value && props.end.value) {
+        if (props.fixedDate.value) {
+          const diff = getDaysBetween(props.start.value, props.end.value).length;
+
+          if (diff <= props.maximumDays.value) {
+            const daysLeft = props.maximumDays.value - diff - 1;
+            const startLimit = props.start.value.subtract({ days: daysLeft });
+            const endLimit = props.start.value.add({ days: daysLeft });
+
+            return !isDateBetween({
+              date,
+              start: startLimit,
+              end: endLimit,
+            });
+          }
+        }
+
+        return false;
+      }
+
+      if (props.start.value) {
+        const maxDate = props.start.value.add({ days: props.maximumDays.value });
+        const minDate = props.start.value.subtract({ days: props.maximumDays.value });
+
+        return !isDateBetween({
+          date,
+          start: minDate,
+          end: maxDate,
+        });
+      }
     }
 
-    // Check if exceeds maximum days limit
-    return Math.abs(date.compare(props.start.value)) > props.maximumDays.value;
+    return false;
   };
 
   function isDateHighlightable(date: DateValue) {
@@ -125,7 +153,6 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
     if (
       props.maximumDays?.value
       && !props.end.value
-      && Math.abs(end.compare(start)) > props.maximumDays.value
     ) {
       // Determine the direction of selection and limit to maximum days
       const cappedEnd = isStartBeforeFocused
@@ -152,6 +179,7 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
         end,
       };
     }
+
     return null;
   });
 
@@ -159,6 +187,7 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
     if (!highlightedRange.value || !highlightedRange.value.start) {
       return false;
     }
+
     return isSameDay(highlightedRange.value.start, date);
   };
 
@@ -166,6 +195,7 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
     if (!highlightedRange.value || !highlightedRange.value.end) {
       return false;
     }
+
     return isSameDay(highlightedRange.value.end, date);
   };
 
