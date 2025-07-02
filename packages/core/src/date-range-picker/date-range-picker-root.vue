@@ -44,9 +44,10 @@ type DateRangePickerRootContext = {
   dir: Ref<Direction>;
   allowNonContiguousRanges: Ref<boolean>;
   fixedDate: Ref<'start' | 'end' | undefined>;
+  maximumDays?: Ref<number | undefined>;
 };
 
-export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable' | 'fixedDate'>;
+export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable' | 'fixedDate' | 'maximumDays'>;
 
 export type ADateRangePickerRootEmits = {
   /** Event handler called whenever the model value changes */
@@ -93,6 +94,7 @@ const props = withDefaults(
     isDateUnavailable: undefined,
     isDateHighlightable: undefined,
     allowNonContiguousRanges: false,
+    maximumDays: undefined,
   },
 );
 
@@ -124,6 +126,7 @@ const {
   dir: propsDir,
   allowNonContiguousRanges,
   fixedDate,
+  maximumDays,
 } = toRefs(props);
 
 const dir = useDirection(propsDir);
@@ -191,6 +194,7 @@ provideDateRangePickerRootContext({
   dateFieldRef,
   dir,
   fixedDate,
+  maximumDays,
   onStartValueChange(date: DateValue | undefined) {
     emits('update:startValue', date);
   },
