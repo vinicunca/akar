@@ -7,7 +7,7 @@ export interface ASelectItemTextProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import { APrimitive } from '~~/primitive';
 import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectASelectItemContext } from './select-item.vue';
@@ -47,7 +47,7 @@ onMounted(() => {
   rootContext.onOptionAdd(optionProps.value);
 });
 
-onBeforeUnmount(() => {
+onUnmounted(() => {
   rootContext.onOptionRemove(optionProps.value);
 });
 </script>
