@@ -5,13 +5,13 @@ export const components = {
     'AAccordionItem',
     'AAccordionRoot',
     'AAccordionTrigger',
-  ],
+  ] as const,
 
   avatar: [
     'AAvatarFallback',
     'AAvatarImage',
     'AAvatarRoot',
-  ],
+  ] as const,
 
   calendar: [
     'ACalendarCellTrigger',
@@ -26,19 +26,19 @@ export const components = {
     'ACalendarNext',
     'ACalendarPrev',
     'ACalendarRoot',
-  ],
+  ] as const,
 
   checkbox: [
     'ACheckboxGroupRoot',
     'ACheckboxIndicator',
     'ACheckboxRoot',
-  ],
+  ] as const,
 
   collapsible: [
     'ACollapsibleContent',
     'ACollapsibleRoot',
     'ACollapsibleTrigger',
-  ],
+  ] as const,
 
   combobox: [
     'AComboboxAnchor',
@@ -57,7 +57,7 @@ export const components = {
     'AComboboxTrigger',
     'AComboboxViewport',
     'AComboboxVirtualizer',
-  ],
+  ] as const,
 
   contextMenu: [
     'AContextMenuArrow',
@@ -76,16 +76,16 @@ export const components = {
     'AContextMenuSubTrigger',
     'AContextMenuSub',
     'AContextMenuTrigger',
-  ],
+  ] as const,
 
   configProvider: [
     'AConfigProvider',
-  ],
+  ] as const,
 
   dateField: [
     'ADateFieldInput',
     'ADateFieldRoot',
-  ],
+  ] as const,
 
   datePicker: [
     'ADatePickerAnchor',
@@ -108,12 +108,12 @@ export const components = {
     'ADatePickerPrev',
     'ADatePickerRoot',
     'ADatePickerTrigger',
-  ],
+  ] as const,
 
   dateRangeField: [
     'ADateRangeFieldInput',
     'ADateRangeFieldRoot',
-  ],
+  ] as const,
 
   dateRangePicker: [
     'ADateRangePickerAnchor',
@@ -136,7 +136,7 @@ export const components = {
     'ADateRangePickerPrev',
     'ADateRangePickerRoot',
     'ADateRangePickerTrigger',
-  ],
+  ] as const,
 
   dialog: [
     'ADialogClose',
@@ -147,7 +147,7 @@ export const components = {
     'ADialogRoot',
     'ADialogTitle',
     'ADialogTrigger',
-  ],
+  ] as const,
 
   drawer: [
     'ADrawerContent',
@@ -160,7 +160,7 @@ export const components = {
     'ADrawerPortal',
     'ADrawerTitle',
     'ADrawerTrigger',
-  ],
+  ] as const,
 
   dropdownMenu: [
     'ADropdownMenuArrow',
@@ -179,7 +179,7 @@ export const components = {
     'ADropdownMenuSubTrigger',
     'ADropdownMenuSub',
     'ADropdownMenuTrigger',
-  ],
+  ] as const,
 
   editable: [
     'AEditableArea',
@@ -189,11 +189,11 @@ export const components = {
     'AEditablePreview',
     'AEditableRoot',
     'AEditableSubmitTrigger',
-  ],
+  ] as const,
 
   focusScope: [
     'AFocusScope',
-  ],
+  ] as const,
 
   hoverCard: [
     'AHoverCardArrow',
@@ -201,11 +201,11 @@ export const components = {
     'AHoverCardPortal',
     'AHoverCardRoot',
     'AHoverCardTrigger',
-  ],
+  ] as const,
 
   label: [
     'ALabel',
-  ],
+  ] as const,
 
   listbox: [
     'AListboxContent',
@@ -216,7 +216,7 @@ export const components = {
     'AListboxItem',
     'AListboxRoot',
     'AListboxVirtualizer',
-  ],
+  ] as const,
 
   navigationMenu: [
     'ANavigationMenuContent',
@@ -228,14 +228,14 @@ export const components = {
     'ANavigationMenuSub',
     'ANavigationMenuTrigger',
     'ANavigationMenuViewport',
-  ],
+  ] as const,
 
   numberField: [
     'ANumberFieldDecrement',
     'ANumberFieldIncrement',
     'ANumberFieldInput',
     'ANumberFieldRoot',
-  ],
+  ] as const,
 
   pagination: [
     'APaginationEllipsis',
@@ -246,12 +246,12 @@ export const components = {
     'APaginationNext',
     'APaginationPrev',
     'APaginationRoot',
-  ],
+  ] as const,
 
   pinInput: [
     'APinInputInput',
     'APinInputRoot',
-  ],
+  ] as const,
 
   popover: [
     'APopoverAnchor',
@@ -261,27 +261,27 @@ export const components = {
     'APopoverPortal',
     'APopoverRoot',
     'APopoverTrigger',
-  ],
+  ] as const,
 
   presence: [
     'APresence',
-  ],
+  ] as const,
 
   primitive: [
     'APrimitive',
     'APrimitiveSlot',
-  ],
+  ] as const,
 
   progress: [
     'AProgressIndicator',
     'AProgressRoot',
-  ],
+  ] as const,
 
   radioGroup: [
     'ARadioGroupIndicator',
     'ARadioGroupItem',
     'ARadioGroupRoot',
-  ],
+  ] as const,
 
   rangeCalendar: [
     'ARangeCalendarCellTrigger',
@@ -296,12 +296,12 @@ export const components = {
     'ARangeCalendarNext',
     'ARangeCalendarPrev',
     'ARangeCalendarRoot',
-  ],
+  ] as const,
 
   rovingFocus: [
     'ARovingFocusGroup',
     'ARovingFocusItem',
-  ],
+  ] as const,
 
   scrollArea: [
     'AScrollAreaCorner',
@@ -309,7 +309,7 @@ export const components = {
     'AScrollAreaScrollbar',
     'AScrollAreaThumb',
     'AScrollAreaViewport',
-  ],
+  ] as const,
 
   select: [
     'ASelectArrow',
@@ -328,24 +328,24 @@ export const components = {
     'ASelectTrigger',
     'ASelectValue',
     'ASelectViewport',
-  ],
+  ] as const,
 
   separator: [
     'ASeparator',
-  ],
+  ] as const,
 
   slider: [
     'ASliderRange',
     'ASliderRoot',
     'ASliderThumb',
     'ASliderTrack',
-  ],
+  ] as const,
 
   splitter: [
     'ASplitterGroup',
     'ASplitterPanel',
     'ASplitterResizeHandle',
-  ],
+  ] as const,
 
   stepper: [
     'AStepperDescription',
@@ -355,12 +355,12 @@ export const components = {
     'AStepperSeparator',
     'AStepperTitle',
     'AStepperTrigger',
-  ],
+  ] as const,
 
   switch: [
     'ASwitchRoot',
     'ASwitchThumb',
-  ],
+  ] as const,
 
   tabs: [
     'ATabsContent',
@@ -368,7 +368,7 @@ export const components = {
     'ATabsList',
     'ATabsRoot',
     'ATabsTrigger',
-  ],
+  ] as const,
 
   tagsInput: [
     'ATagsInputClear',
@@ -377,12 +377,12 @@ export const components = {
     'ATagsInputItemText',
     'ATagsInputItem',
     'ATagsInputRoot',
-  ],
+  ] as const,
 
   timeField: [
     'ATimeFieldInput',
     'ATimeFieldRoot',
-  ],
+  ] as const,
 
   toast: [
     'AToastAction',
@@ -393,16 +393,16 @@ export const components = {
     'AToastRoot',
     'AToastTitle',
     'AToastViewport',
-  ],
+  ] as const,
 
   toggle: [
     'AToggle',
-  ],
+  ] as const,
 
   toggleGroup: [
     'AToggleGroupItem',
     'AToggleGroupRoot',
-  ],
+  ] as const,
 
   tooltip: [
     'ATooltipArrow',
@@ -411,21 +411,21 @@ export const components = {
     'ATooltipProvider',
     'ATooltipRoot',
     'ATooltipTrigger',
-  ],
+  ] as const,
 
   tree: [
     'ATreeItem',
     'ATreeRoot',
     'ATreeVirtualizer',
-  ],
+  ] as const,
 
   viewport: [
     'AViewport',
-  ],
+  ] as const,
 
   visuallyHidden: [
     'AVisuallyHidden',
-  ],
+  ] as const,
 };
 
 export const utilities = {
@@ -440,5 +440,7 @@ export const utilities = {
     'useForwardPropsEmits',
     'useId',
     'useStateMachine',
-  ],
+  ] as const,
 };
+
+export type Components = typeof components;
