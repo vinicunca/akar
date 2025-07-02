@@ -18,6 +18,7 @@ export interface UseRangeCalendarProps {
   focusedValue: Ref<DateValue | undefined>;
   allowNonContiguousRanges: Ref<boolean>;
   fixedDate: Ref<'start' | 'end' | undefined>;
+  maximumDays?: Ref<number | undefined>;
 }
 
 export function useRangeCalendarState(props: UseRangeCalendarProps) {
@@ -82,6 +83,20 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
     return false;
   };
 
+  // Check if a date exceeds maximum days limit from the start dateAdd commentMore actions
+  const rangeIsDateDisabled = (date: DateValue) => {
+    if (props.isDateDisabled(date)) {
+      return true;
+    }
+
+    if (!props.maximumDays?.value || !props.start.value || props.end.value || isSameDay(props.start.value, date)) {
+      return false;
+    }
+
+    // Check if exceeds maximum days limit
+    return Math.abs(date.compare(props.start.value)) > props.maximumDays.value;
+  };
+
   function isDateHighlightable(date: DateValue) {
     return Boolean(props.isDateHighlightable?.(date));
   }
@@ -105,11 +120,29 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
       };
     }
 
+    // If maximum days is set and the range exceeds it, limit the highlightAdd commentMore actions
+    // We only apply this when we're in the middle of a selection (no end date yet)
+    if (
+      props.maximumDays?.value
+      && !props.end.value
+      && Math.abs(end.compare(start)) > props.maximumDays.value
+    ) {
+      // Determine the direction of selection and limit to maximum days
+      const cappedEnd = isStartBeforeFocused
+        ? start.add({ days: props.maximumDays.value })
+        : start.subtract({ days: props.maximumDays.value });
+
+      return {
+        start,
+        end: cappedEnd,
+      };
+    }
+
     const isValid = props.allowNonContiguousRanges.value || areAllDaysBetweenValid({
       start,
       end,
-      isDisabled: props.isDateDisabled,
       isUnavailable: props.allowNonContiguousRanges.value ? () => false : props.isDateUnavailable,
+      isDisabled: rangeIsDateDisabled,
       isHighlightable: props.isDateHighlightable,
     });
 
@@ -145,5 +178,6 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
     isSelectionEnd,
     isHighlightedStart,
     isHighlightedEnd,
+    isDateDisabled: rangeIsDateDisabled,
   };
 }

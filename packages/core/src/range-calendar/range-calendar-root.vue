@@ -52,12 +52,17 @@ type RangeCalendarRootContext = {
   isHighlightedEnd: (date: DateValue) => boolean;
   prevPage: (prevPageFunc?: (date: DateValue) => DateValue) => void;
   nextPage: (nextPageFunc?: (date: DateValue) => DateValue) => void;
-  isNextButtonDisabled: (nextPageFunc?: (date: DateValue) => DateValue) => boolean;
-  isPrevButtonDisabled: (prevPageFunc?: (date: DateValue) => DateValue) => boolean;
+  isNextButtonDisabled: (
+    nextPageFunc?: (date: DateValue) => DateValue
+  ) => boolean;
+  isPrevButtonDisabled: (
+    prevPageFunc?: (date: DateValue) => DateValue
+  ) => boolean;
   formatter: UseDateFormatter;
   dir: Ref<Direction>;
   disableDaysOutsideCurrentView: Ref<boolean>;
   fixedDate: Ref<'start' | 'end' | undefined>;
+  maximumDays: Ref<number | undefined>;
 };
 
 export interface ARangeCalendarRootProps extends APrimitiveProps {
@@ -75,6 +80,8 @@ export interface ARangeCalendarRootProps extends APrimitiveProps {
   pagedNavigation?: boolean;
   /** Whether or not to prevent the user from deselecting a date without selecting another date first */
   preventDeselect?: boolean;
+  /** The maximum number of days that can be selected in a range */
+  maximumDays?: number;
   /** The day of the week to start the calendar on */
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   /** The format to use for the weekday strings provided via the weekdays slot prop */
@@ -154,6 +161,7 @@ const props = withDefaults(
     isDateUnavailable: undefined,
     isDateHighlightable: undefined,
     allowNonContiguousRanges: false,
+    maximumDays: undefined,
     disableDaysOutsideCurrentView: false,
   },
 );
@@ -201,6 +209,7 @@ const {
   allowNonContiguousRanges,
   disableDaysOutsideCurrentView,
   fixedDate,
+  maximumDays,
 } = toRefs(props);
 
 const {
@@ -283,6 +292,7 @@ const {
   isSelectionEnd,
   isHighlightedStart,
   isHighlightedEnd,
+  isDateDisabled: rangeIsDateDisabled,
 } = useRangeCalendarState({
   start: startValue,
   end: endValue,
@@ -292,12 +302,14 @@ const {
   focusedValue,
   allowNonContiguousRanges,
   fixedDate,
+  maximumDays,
 });
 
 watch(
   modelValue,
   (modelValue_, prevValue_) => {
-    if ((!prevValue_?.start && modelValue_?.start)
+    if (
+      (!prevValue_?.start && modelValue_?.start)
       || !modelValue_
       || !modelValue_.start
       || (startValue.value && !isEqualDay(modelValue_.start, startValue.value))
@@ -305,7 +317,8 @@ watch(
       startValue.value = modelValue_?.start?.copy?.();
     }
 
-    if ((!prevValue_?.end && modelValue_.end)
+    if (
+      (!prevValue_?.end && modelValue_.end)
       || !modelValue_
       || !modelValue_.end
       || (endValue.value && !isEqualDay(modelValue_.end, endValue.value))
@@ -331,7 +344,15 @@ watch(
   ([_startValue, _endValue]) => {
     const value = currentModelValue.value;
 
-    if (value && value.start && value.end && _startValue && _endValue && isEqualDay(value.start, _startValue) && isEqualDay(value.end, _endValue)) {
+    if (
+      value
+      && value.start
+      && value.end
+      && _startValue
+      && _endValue
+      && isEqualDay(value.start, _startValue)
+      && isEqualDay(value.end, _endValue)
+    ) {
       return;
     }
 
@@ -340,7 +361,12 @@ watch(
     if (_startValue && _endValue) {
       isEditing.value = false;
 
-      if (value.start && value.end && isEqualDay(value.start, _startValue) && isEqualDay(value.end, _endValue)) {
+      if (
+        value.start
+        && value.end
+        && isEqualDay(value.start, _startValue)
+        && isEqualDay(value.end, _endValue)
+      ) {
         return;
       }
 
@@ -392,7 +418,7 @@ provideRangeCalendarRootContext({
   fullCalendarLabel,
   headingValue,
   isInvalid,
-  isDateDisabled,
+  isDateDisabled: rangeIsDateDisabled,
   allowNonContiguousRanges,
   highlightedRange,
   focusedValue,
@@ -413,6 +439,7 @@ provideRangeCalendarRootContext({
   isHighlightedEnd,
   disableDaysOutsideCurrentView,
   fixedDate,
+  maximumDays,
 });
 
 onMounted(() => {
@@ -434,7 +461,20 @@ onMounted(() => {
     :data-invalid="isInvalid ? '' : undefined"
     :dir="dir"
   >
-    <div style="border: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; white-space: nowrap; width: 1px;">
+    <div
+      style="
+        border: 0px;
+        clip: rect(0px, 0px, 0px, 0px);
+        clip-path: inset(50%);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0px;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      "
+    >
       <div
         role="heading"
         aria-level="2"
