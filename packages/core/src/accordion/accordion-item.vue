@@ -99,7 +99,7 @@ function handleArrowKey(event: KeyboardEvent) {
 
   useArrowNavigation({
     event,
-    currentElement: currentElement.value,
+    currentElement: target,
     parentElement: rootContext.parentElement.value!,
     options: {
       arrowKeyOptions: rootContext.orientation,
