@@ -34,7 +34,7 @@ type ListboxRootContext<T> = {
   onKeydownTypeAhead: (event: KeyboardEvent) => void;
   onCompositionStart: () => void;
   onCompositionEnd: () => void;
-  highlightFirstItem: (event: InputEvent) => void;
+  highlightFirstItem: () => void;
 };
 
 export const [

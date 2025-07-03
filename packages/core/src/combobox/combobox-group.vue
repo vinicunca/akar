@@ -11,8 +11,10 @@ type ComboboxGroupContext = {
   labelId: string;
 };
 
-export const [injectAComboboxGroupContext, provideComboboxGroupContext]
-  = createContext<ComboboxGroupContext>('AComboboxGroup');
+export const [
+  injectAComboboxGroupContext,
+  provideComboboxGroupContext,
+] = createContext<ComboboxGroupContext>('AComboboxGroup');
 </script>
 
 <script setup lang="ts">
@@ -26,10 +28,10 @@ const isRender = computed(() => {
   if (rootContext.ignoreFilter.value) {
     return true;
   } else {
-    if (!rootContext.filterState.search) {
+    if (!rootContext.filterSearch.value) {
       return true;
     } else {
-      return rootContext.filterState.filtered.groups.has(id);
+      return rootContext.filterState.value.groups.has(id);
     }
   }
 });

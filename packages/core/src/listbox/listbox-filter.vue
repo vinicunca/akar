@@ -78,8 +78,8 @@ onUnmounted(() => {
     @keydown.down.up.home.end.prevent="rootContext.onKeydownNavigation"
     @keydown.enter="rootContext.onKeydownEnter"
     @input="(event: InputEvent) => {
-      modelValue = (event.target as HTMLInputElement).value
-      rootContext.highlightFirstItem(event)
+      modelValue = (event.target as HTMLInputElement).value;
+      rootContext.highlightFirstItem();
     }"
     @compositionstart="rootContext.onCompositionStart"
     @compositionend="rootContext.onCompositionEnd"

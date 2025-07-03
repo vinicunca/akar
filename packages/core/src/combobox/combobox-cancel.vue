@@ -21,7 +21,7 @@ const rootContext = injectAComboboxRootContext();
 
 function handleClick() {
   // Reset the search to show all options.
-  rootContext.filterState.search = '';
+  rootContext.filterSearch.value = '';
 
   if (rootContext.inputElement.value) {
     rootContext.inputElement.value.value = '';
