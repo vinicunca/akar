@@ -25,11 +25,11 @@ catalog:
   '@testing-library/vue': ^8.1.0
   '@tsconfig/node18': ^18.2.4
   '@types/node': ^22.13.10
-  '@unocss/nuxt': ^66.0.0
-  '@unocss/vite': ^66.0.0
-  '@vinicunca/eslint-config': ^3.16.1
+  '@unocss/nuxt': ^66.3.3
+  '@unocss/vite': ^66.3.3
+  '@vinicunca/eslint-config': ^3.17.0
   '@vinicunca/perkakas': ^1.6.0
-  '@vinicunca/unocss-preset': ^1.15.0
+  '@vinicunca/unocss-preset': ^1.16.1
   '@vitejs/plugin-vue': ^5.2.4
   '@vitejs/plugin-vue-jsx': ^4.1.1
   '@vitest/coverage-istanbul': ^2.1.9
@@ -38,23 +38,23 @@ catalog:
   '@vueuse/core': 12.5.0
   '@vueuse/shared': 12.5.0
   aria-hidden: ^1.2.4
-  bumpp: ^10.1.1
+  bumpp: ^10.2.0
   defu: ^6.1.4
-  eslint: ^9.27.0
+  eslint: ^9.31.0
   histoire: ^0.17.17
   jsdom: ^26.0.0
-  lint-staged: ^16.0.0
+  lint-staged: ^16.1.2
   mark.js: ^8.11.1
   minisearch: ^7.1.2
   nuxt: ^3.16.2
-  postcss-preset-env: ^10.1.6
+  postcss-preset-env: ^10.2.4
   rimraf: ^6.0.1
   simple-git-hooks: ^2.13.0
   taze: ^19.1.0
-  tsx: ^4.19.4
+  tsx: ^4.20.3
   typescript: ^5.8.3
   unbuild: ^3.5.0
-  unocss: ^66.0.0
+  unocss: ^66.3.3
   unplugin-vue-components: ^28.4.1
   vite: ^6.2.1
   vite-plugin-dts: ^4.5.4
