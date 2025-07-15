@@ -3,6 +3,7 @@ packages:
   - playground/*
   - docs
   - .histoire
+
 catalog:
   '@commitlint/cli': ^19.8.1
   '@commitlint/config-conventional': ^19.8.1
@@ -27,7 +28,7 @@ catalog:
   '@types/node': ^22.13.10
   '@unocss/nuxt': ^66.3.3
   '@unocss/vite': ^66.3.3
-  '@vinicunca/eslint-config': ^3.17.0
+  '@vinicunca/eslint-config': ^3.18.0
   '@vinicunca/perkakas': ^1.6.0
   '@vinicunca/unocss-preset': ^1.16.1
   '@vitejs/plugin-vue': ^5.2.4
