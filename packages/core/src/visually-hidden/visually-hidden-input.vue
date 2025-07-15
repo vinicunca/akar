@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T">
 import type { VisuallyHiddenInputBubbleProps } from './visually-hidden-input-bubble.vue';
-import { isBoolean, isNumber, isString } from '@vinicunca/perkakas';
+import { isBoolean, isNullish, isNumber, isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import VisuallyHiddenInputBubble from './visually-hidden-input-bubble.vue';
 
@@ -25,7 +25,7 @@ const isFormArrayEmptyAndRequired = computed(() =>
 
 const parsedValue = computed(() => {
   // if primitive value
-  if (isString(props.value) || isNumber(props.value) || isBoolean(props.value)) {
+  if (isString(props.value) || isNumber(props.value) || isBoolean(props.value) || isNullish(props.value)) {
     return [{ name: props.name, value: props.value }];
   } else if (typeof props.value === 'object' && Array.isArray(props.value)) { // if array value
     return props.value.flatMap((obj, index) => {
