@@ -63,8 +63,10 @@ export interface SliderRootContext {
   thumbAlignment: Ref<ThumbAlignment>;
 }
 
-export const [injectASliderRootContext, provideSliderRootContext]
-  = createContext<SliderRootContext>('ASliderRoot');
+export const [
+  injectASliderRootContext,
+  provideSliderRootContext,
+] = createContext<SliderRootContext>('ASliderRoot');
 </script>
 
 <script setup lang="ts">
