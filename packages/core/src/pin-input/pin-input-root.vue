@@ -8,8 +8,16 @@ import AVisuallyHiddenInput from '~~/visually-hidden/visually-hidden-input.vue';
 
 export type APinInputType = 'text' | 'number';
 
-// Using this type to avoid mixed arrays (string | number)[].
-export type APinInputValue<Type extends APinInputType = 'text'> = Type extends 'number' ? Array<number> : Array<string>;
+// The value type can be number[] only when the type is explicitly set to 'number'
+export type APinInputValue<Type extends APinInputType> = [Type] extends ['number'] ? Array<number> : Array<string>;
+
+// provide the mixed arrays because the `type` is dynamic in the context
+export type APinInputContextValue<Type extends APinInputType = 'text'>
+  = Type extends 'number'
+    ? Type extends 'string'
+      ? Array<string> | Array<number>
+      : Array<number>
+    : Array<string>;
 
 export type APinInputRootEmits<Type extends APinInputType = 'text'> = {
   'update:modelValue': [value: APinInputValue<Type>];
@@ -38,8 +46,8 @@ export interface APinInputRootProps<Type extends APinInputType = 'text'> extends
 }
 
 export interface PinInputRootContext<Type extends APinInputType = 'text'> {
-  modelValue: Ref<APinInputValue<Type>>;
-  currentModelValue: ComputedRef<APinInputValue<Type>>;
+  modelValue: Ref<APinInputContextValue<Type>>;
+  currentModelValue: ComputedRef<APinInputContextValue<Type>>;
   mask: Ref<boolean>;
   otp: Ref<boolean>;
   placeholder: Ref<string>;
@@ -57,7 +65,7 @@ export const [
 ] = createContext<PinInputRootContext<APinInputType>>('APinInputRoot');
 </script>
 
-<script setup lang="ts" generic="Type extends APinInputType = 'text'">
+<script setup lang="ts" generic="Type extends APinInputType">
 import { useVModel } from '@vueuse/core';
 import { APrimitive } from '~~/primitive';
 
