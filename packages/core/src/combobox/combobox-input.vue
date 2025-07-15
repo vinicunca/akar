@@ -121,6 +121,7 @@ watch(
     :as="as"
     :as-child="asChild"
     :auto-focus="autoFocus"
+    :disabled="disabled"
     :aria-expanded="rootContext.open.value"
     :aria-controls="rootContext.contentId"
     aria-autocomplete="list"
