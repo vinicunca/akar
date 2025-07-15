@@ -2,6 +2,7 @@
 import type { APrimitiveProps } from '~~/primitive';
 import { isBrowser } from '@vinicunca/perkakas';
 import { ref, toRefs, watch, watchEffect } from 'vue';
+import { useNonce } from '~~/shared/use-nonce';
 import { useWindowSplitterResizeHandlerBehavior } from './utils/composables/use-window-splitter-behavior';
 
 export interface ASplitterResizeHandleProps extends APrimitiveProps {
@@ -13,6 +14,10 @@ export interface ASplitterResizeHandleProps extends APrimitiveProps {
   tabindex?: number;
   /** Disable drag handle */
   disabled?: boolean;
+  /**
+   * Will add `nonce` attribute to the style tag which can be used by Content Security Policy. <br> If omitted, inherits globally from `ConfigProvider`.
+   */
+  nonce?: string;
 }
 
 export type PanelResizeHandleOnDragging = (isDragging: boolean) => void;
@@ -61,6 +66,8 @@ const resizeHandleId = useId(props.id, 'akar-splitter-resize-handle');
 const state = ref<ResizeHandlerState>('inactive');
 const isFocused = ref(false);
 const resizeHandler = ref<null | ResizeHandler>(null);
+const { nonce: propNonce } = toRefs(props);
+const nonce = useNonce(propNonce);
 
 watch(disabled, () => {
   if (!isBrowser) {
@@ -130,6 +137,7 @@ watchEffect((onCleanup) => {
       // Fine inputs (e.g. mouse)
       fine: props.hitAreaMargins?.fine ?? 5,
     },
+    nonce,
     setResizeHandlerState,
   ));
 });
