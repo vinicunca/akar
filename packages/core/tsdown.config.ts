@@ -4,7 +4,7 @@ export default defineConfig({
   entry: {
     index: './src/index.ts',
     date: './src/date/index.ts',
-    constant: './constants/index.ts',
+    constant: './constant/index.ts',
   },
   fromVite: true,
   platform: 'neutral',

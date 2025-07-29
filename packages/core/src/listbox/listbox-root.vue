@@ -8,7 +8,7 @@ import { getFocusIntent } from '~~/roving-focus/utils';
 import { createContext, findValuesBetween, useDirection, useFormControl, useTypeahead } from '~~/shared';
 
 type ListboxRootContext<T> = {
-  modelValue: Ref<Array<T> | T | undefined>;
+  modelValue: Ref<T | Array<T> | undefined>;
   onValueChange: (val: T) => void;
   multiple: Ref<boolean>;
   orientation: Ref<DataOrientation>;
@@ -20,9 +20,9 @@ type ListboxRootContext<T> = {
   virtualFocusHook: EventHook<Event | null | undefined>;
   virtualKeydownHook: EventHook<KeyboardEvent>;
   virtualHighlightHook: EventHook<any>;
-  by?: ((a: T, b: T) => boolean) | string;
+  by?: string | ((a: T, b: T) => boolean);
   firstValue?: Ref<T | undefined>;
-  selectionBehavior?: Ref<'replace' | 'toggle'>;
+  selectionBehavior?: Ref<'toggle' | 'replace'>;
 
   focusable: Ref<boolean>;
 
@@ -44,9 +44,9 @@ export const [
 
 export interface AListboxRootProps<T = AcceptableValue> extends APrimitiveProps, FormFieldProps {
   /** The controlled value of the listbox. Can be binded with with `v-model`. */
-  modelValue?: Array<T> | T;
+  modelValue?: T | Array<T>;
   /** The value of the listbox when initially rendered. Use when you do not need to control the state of the Listbox */
-  defaultValue?: Array<T> | T;
+  defaultValue?: T | Array<T>;
   /** Whether multiple options can be selected or not. */
   multiple?: boolean;
   /** The orientation of the listbox. <br>Mainly so arrow navigation is done accordingly (left & right vs. up & down) */
@@ -59,18 +59,18 @@ export interface AListboxRootProps<T = AcceptableValue> extends APrimitiveProps,
    * How multiple selection should behave in the collection.
    * @defaultValue 'toggle'
    */
-  selectionBehavior?: 'replace' | 'toggle';
+  selectionBehavior?: 'toggle' | 'replace';
   /** When `true`, hover over item will trigger highlight */
   highlightOnHover?: boolean;
   /** Use this to compare objects by a particular field, or pass your own comparison function for complete control over how objects are compared. */
-  by?: ((a: T, b: T) => boolean) | string;
+  by?: string | ((a: T, b: T) => boolean);
 }
 
 export type AListboxRootEmits<T = AcceptableValue> = {
   /** Event handler called when the value changes. */
   'update:modelValue': [value: T];
   /** Event handler when highlighted element changes. */
-  'highlight': [payload: undefined | { ref: HTMLElement; value: T }];
+  'highlight': [payload: { ref: HTMLElement; value: T } | undefined];
   /** Event handler called when container is being focused. Can be prevented. */
   'entryFocus': [event: CustomEvent];
   /** Event handler called when the mouse leave the container */
