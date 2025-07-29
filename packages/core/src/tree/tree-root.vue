@@ -20,7 +20,7 @@ export interface ATreeRootProps<T = Record<string, any>, U extends Record<string
   /** How multiple selection should behave in the collection. */
   selectionBehavior?: 'replace' | 'toggle';
   /** Whether multiple options can be selected or not.  */
-  multiple?: M;
+  multiple?: M | boolean;
   /** The reading direction of the listbox when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode. */
   dir?: Direction;
   /** When `true`, prevents the user from interacting with tree  */
@@ -125,7 +125,7 @@ const virtualKeydownHook = createEventHook<KeyboardEvent>();
 const modelValue = useVModel(props, 'modelValue', emits, {
   // @ts-expect-error idk
   defaultValue: props.defaultValue ?? (multiple.value ? [] : undefined),
-  passive: (props.modelValue === undefined) as false,
+  passive: true,
   deep: true,
 }) as Ref<Array<U> | U>;
 

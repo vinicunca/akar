@@ -18,11 +18,13 @@ export function useId(deterministicId?: null | string | undefined, prefix = 'aka
     return deterministicId;
   }
 
-  const configProviderContext = injectAConfigProviderContext({ useId: undefined });
-
   if (Object.hasOwn(vue, 'useId')) {
     return `${prefix}-${vue.useId?.()}`;
-  } else if (configProviderContext.useId) {
+  }
+
+  const configProviderContext = injectAConfigProviderContext({ useId: undefined });
+
+  if (configProviderContext.useId) {
     return `${prefix}-${configProviderContext.useId()}`;
   }
 

@@ -3,7 +3,7 @@ import type { DateValue } from '@internationalized/date';
 
 import type { Ref } from 'vue';
 import type { DateMatcher, WeekDayFormat } from '~~/date';
-import type { DateRange, Granularity, HourCycle } from '~~/shared/date';
+import type { DateRange, DateStep, Granularity, HourCycle } from '~~/shared/date';
 import type { Direction } from '~~/shared/types';
 
 import type { ADateRangeFieldRoot, ADateRangeFieldRootProps, APopoverRootEmits, APopoverRootProps, ARangeCalendarRootProps } from '..';
@@ -45,6 +45,7 @@ type DateRangePickerRootContext = {
   allowNonContiguousRanges: Ref<boolean>;
   fixedDate: Ref<'start' | 'end' | undefined>;
   maximumDays?: Ref<number | undefined>;
+  step: Ref<DateStep | undefined>;
 };
 
 export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable' | 'fixedDate' | 'maximumDays'>;
@@ -87,7 +88,6 @@ const props = withDefaults(
     numberOfMonths: 1,
     disabled: false,
     readonly: false,
-    initialFocus: false,
     placeholder: undefined,
     locale: 'en',
     isDateDisabled: undefined,
@@ -127,6 +127,7 @@ const {
   allowNonContiguousRanges,
   fixedDate,
   maximumDays,
+  step,
 } = toRefs(props);
 
 const dir = useDirection(propsDir);
@@ -195,6 +196,7 @@ provideDateRangePickerRootContext({
   dir,
   fixedDate,
   maximumDays,
+  step,
   onStartValueChange(date: DateValue | undefined) {
     emits('update:startValue', date);
   },

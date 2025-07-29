@@ -46,6 +46,7 @@ function handleUpdatePlaceholder(date: DateValue) {
       isDateUnavailable: rootContext.isDateUnavailable,
       required: rootContext.required.value,
       dir: rootContext.dir.value,
+      step: rootContext.step.value,
     }"
     @update:model-value="handleUpdateModelValue"
     @update:placeholder="handleUpdatePlaceholder"

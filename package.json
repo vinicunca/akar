@@ -37,6 +37,7 @@
     "@vinicunca/unocss-preset": "catalog:",
     "bumpp": "catalog:",
     "eslint": "catalog:",
+    "eslint-plugin-format": "^1.0.1",
     "lint-staged": "catalog:",
     "simple-git-hooks": "catalog:",
     "taze": "catalog:",

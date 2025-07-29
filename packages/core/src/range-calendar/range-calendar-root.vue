@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-
 import type { Ref } from 'vue';
 import type { DateGrid, DateMatcher, WeekDayFormat } from '~~/date';
 import type { APrimitiveProps } from '~~/primitive';
