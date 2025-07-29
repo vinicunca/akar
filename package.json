@@ -19,7 +19,6 @@
     "docs:gen": "pnpm --filter docs docs:gen",
     "docs:contributors": "pnpm --filter docs docs:contributors",
     "prepare": "pnpm simple-git-hooks",
-    "taze": "taze major -wIr",
     "test": "pnpm --filter @vinicunca/akar test",
     "test-update": "pnpm --filter @vinicunca/akar test-update",
     "lint": "eslint .",
@@ -28,25 +27,27 @@
     "pub:release": "cd packages/core && pnpm pub:release"
   },
   "devDependencies": {
-    "@commitlint/cli": "catalog:",
-    "@commitlint/config-conventional": "catalog:",
-    "@iconify/json": "catalog:",
-    "@types/node": "catalog:",
-    "@vinicunca/eslint-config": "catalog:",
-    "@vinicunca/perkakas": "catalog:",
-    "@vinicunca/unocss-preset": "catalog:",
-    "bumpp": "catalog:",
-    "eslint": "catalog:",
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@vinicunca/eslint-config": "^3.18.0",
+    "bumpp": "^10.2.0",
+    "eslint": "^9.31.0",
     "eslint-plugin-format": "^1.0.1",
-    "lint-staged": "catalog:",
-    "simple-git-hooks": "catalog:",
-    "taze": "catalog:",
-    "tsx": "catalog:",
-    "typescript": "catalog:"
+    "lint-staged": "^16.1.2",
+    "simple-git-hooks": "^2.13.0",
+    "tsx": "^4.20.3",
+    "typescript": "5.8.3"
   },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "simple-git-hooks",
+      "unrs-resolver"
     ]
   },
   "simple-git-hooks": {

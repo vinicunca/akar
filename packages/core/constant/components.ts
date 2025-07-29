@@ -430,7 +430,6 @@ export const components = {
 
 export const utilities = {
   utilities: [
-    'createContext',
     'useBodyScrollLock',
     'useDateFormatter',
     'useEmitAsProps',
@@ -440,6 +439,7 @@ export const utilities = {
     'useForwardPropsEmits',
     'useId',
     'useStateMachine',
+    'createContext',
   ] as const,
 };
 

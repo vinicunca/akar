@@ -18,11 +18,10 @@
     "stub": "unbuild --stub"
   },
   "dependencies": {
-    "@nuxt/kit": "catalog:",
-    "@nuxt/schema": "catalog:",
-    "@vinicunca/akar": "workspace:*",
-    "tsx": "catalog:",
-    "unbuild": "catalog:",
-    "unplugin-vue-components": "catalog:"
+    "@nuxt/kit": "^3.15.4",
+    "@nuxt/schema": "^3.15.4",
+    "@vinicunca/akar": "link:../core",
+    "unbuild": "^2.0.0",
+    "unplugin-vue-components": "^0.28.0"
   }
 }

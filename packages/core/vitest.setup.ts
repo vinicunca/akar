@@ -13,12 +13,6 @@ configureAxe({
       id: 'region',
       enabled: false,
     }],
-    checks: [
-      {
-        id: 'color-contrast',
-        enabled: false,
-      },
-    ],
   },
 });
 
