@@ -1,7 +1,7 @@
 {
   "name": "@vinicunca/akar",
   "type": "module",
-  "version": "1.7.4",
+  "version": "1.8.0",
   "description": "Vue UI components",
   "author": "Vinicunca Contributors (https://github.com/vinicunca)",
   "license": "MIT",
@@ -82,9 +82,9 @@
     "@internationalized/date": "^3.7.0",
     "@internationalized/number": "^3.6.0",
     "@tanstack/vue-virtual": "^3.12.0",
+    "@vinicunca/perkakas": "^1.7.0",
     "@vueuse/core": "^12.5.0",
     "@vueuse/shared": "^12.5.0",
-    "@vinicunca/perkakas": "^1.7.0",
     "aria-hidden": "^1.2.4",
     "defu": "^6.1.4"
   },
