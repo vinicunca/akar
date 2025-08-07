@@ -32,7 +32,43 @@ export default defineConfig({
       },
 
       typography: {
-        cssExtend: {},
+        cssExtend: {
+          'h1': {
+            'font-weight': 800,
+            'font-size': '2.25em',
+            'line-height': 1.1111111,
+          },
+          'h2': {
+            'font-weight': 700,
+            'font-size': '1.5em',
+            'line-height': 1.3333333,
+          },
+          'h3': {
+            'font-weight': 600,
+            'font-size': '1.25em',
+            'line-height': 1.6,
+          },
+          'a': {
+            'text-decoration': 'none',
+            'font-weight': 600,
+            'border-bottom': '1px solid hsl(var(--primary))',
+          },
+          'a:hover': {
+            'border-bottom-width': '2px',
+          },
+          'code': {
+            'border': '1px solid hsl(var(--border))',
+            'border-radius': '0.375rem',
+            'padding': '0.25rem',
+            'line-height': '1rem',
+          },
+          'code::before': {
+            content: 'normal',
+          },
+          'code::after': {
+            content: 'normal',
+          },
+        },
       },
     }),
   ],
@@ -49,6 +85,10 @@ export default defineConfig({
       'card-foreground': 'hsl(var(--card-foreground))',
       'primary': 'hsl(var(--primary))',
       'primary-foreground': 'hsl(var(--primary-foreground))',
+      'border': 'hsl(var(--border))',
+      'input': 'hsl(var(--input))',
+      'ring': 'hsl(var(--ring))',
+      'code': 'hsl(var(--code))',
     },
   },
 
@@ -61,4 +101,11 @@ export default defineConfig({
       },
     };
   },
+
+  safelist: [
+    ...'group relative border-none mb-4 lg:-ml-2 lg:pl-2 lg:pr-2 w-max'.split(' '),
+    ...'[&_span]:focus:opacity-100 [&_span_>_span]:focus:outline'.split(' '),
+    ...'absolute top-0 -ml-8 hidden items-center border-0 opacity-0 group-hover:opacity-100 focus:opacity-100 lg:flex'.split(' '),
+    ...'flex h-6 w-6 items-center justify-center rounded-md outline-2 outline-primary text-green-400 shadow-sm  hover:text-green-700 hover:shadow dark:bg-primary/20 dark:text-primary/80 dark:shadow-none  dark:hover:bg-primary/40 dark:hover:text-primary'.split(' '),
+  ],
 });

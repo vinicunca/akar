@@ -82,7 +82,7 @@ const isExamplePage = computed(() => path.value.includes('examples'));
         class="no-scrollbar py-12 pl-2 flex-shrink-0 flex-col h-[calc(100vh-7.25rem)] w-64 hidden top-[7.25rem] sticky overflow-y-auto space-y-6 xl:flex md:overflow-x-hidden"
       >
         <DocOutline />
-        <DocCommunity />
+        <!-- <DocCommunity /> -->
         <div class="grow" />
 
         <div class="bg-gradient-to-b h-12 w-64 bottom-0 fixed z-10 from-transparent to-background" />

@@ -1,6 +1,10 @@
+import anchor from 'markdown-it-anchor';
 import UnoCSS from 'unocss/vite';
 import { defineConfig, postcssIsolateStyles } from 'vitepress';
 import { akarName, akarShortName, discord, github, ogUrl } from './meta';
+import { createHoverTransformer } from './plugins/hover-transformer';
+
+// @unocss-include
 
 export default defineConfig({
   cleanUrls: true,
@@ -137,6 +141,9 @@ export default defineConfig({
   appearance: 'dark',
 
   themeConfig: {
+    outline: {
+      level: [2, 3],
+    },
     logo: '/logo.svg',
     nav: [
       { text: 'Docs', link: '/docs/overview/getting-started' },
@@ -410,6 +417,48 @@ export default defineConfig({
     editLink: {
       pattern: 'https://github.com/vinicunca/akar/edit/main/docs/content/:path',
     },
+  },
+
+  markdown: {
+    theme: 'github-dark',
+    headers: {
+      level: [2, 3],
+    },
+    anchor: {
+      callback(token) {
+        token.attrSet(
+          'class',
+          'group relative border-none mb-4 lg:-ml-2 lg:pl-2 lg:pr-2 w-max',
+        );
+      },
+      permalink: anchor.permalink.linkInsideHeader({
+        class: 'header-anchor [&_span]:focus:opacity-100 [&_span_>_span]:focus:outline',
+        symbol: '<span class="absolute top-0 -ml-8 hidden items-center border-0 opacity-0 group-hover:opacity-100 focus:opacity-100 lg:flex">&ZeroWidthSpace;<span class="flex h-6 w-6 items-center justify-center rounded-md outline-2 outline-primary text-green-400 shadow-sm  hover:text-green-700 hover:shadow dark:bg-primary/20 dark:text-primary/80 dark:shadow-none  dark:hover:bg-primary/40 dark:hover:text-primary"><svg width="12" height="12" fill="none" aria-hidden="true"><path d="M3.75 1v10M8.25 1v10M1 3.75h10M1 8.25h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg></span></span>',
+        renderAttrs: (slug, state) => {
+          // From: https://github.com/vuejs/vitepress/blob/256d742b733bfb62d54c78168b0e867b8eb829c9/src/node/markdown/markdown.ts#L263
+          // Find `heading_open` with the id identical to slug
+          const idx = state.tokens.findIndex((token) => {
+            const attrs = token.attrs;
+            const id = attrs?.find((attr) => attr[0] === 'id');
+            return id && slug === id[1];
+          });
+          // Get the actual heading content
+          const title = state.tokens[idx + 1].content;
+          return {
+            'aria-label': `Permalink to "${title}"`,
+          };
+        },
+      }),
+    },
+    codeTransformers: [createHoverTransformer()],
+  },
+
+  transformPageData(pageData) {
+    if (pageData.frontmatter.sidebar != null) {
+      return;
+    }
+    // hide sidebar on showcase page
+    pageData.frontmatter.sidebar = pageData.frontmatter.layout !== 'showcase';
   },
 
   vite: {
