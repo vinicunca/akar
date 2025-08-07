@@ -75,7 +75,7 @@
     }
   ],
   "ignoreDeps": [
-    "@vinicunca/akar",
+    "akar",
     "node",
     "typescript"
   ]

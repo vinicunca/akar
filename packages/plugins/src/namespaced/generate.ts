@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs';
-import { components } from '@vinicunca/akar/constant';
+import { components } from 'akar/constant';
 
 const excludedComponent = ['configProvider', 'primitive', 'visuallyHidden'];
 const filteredComponent = Object.keys(components).filter(
@@ -42,7 +42,7 @@ const namespaced = filteredComponent.map((curr) => {
   }
 });
 
-const template = `import { ${flattenComponents.join(', ')} } from '@vinicunca/akar';
+const template = `import { ${flattenComponents.join(', ')} } from 'akar';
 
 ${namespaced.map((component) => component).join('\n\n')}
 `;

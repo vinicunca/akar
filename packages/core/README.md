@@ -13,9 +13,9 @@ Craft accessible web apps with <a href="https://vuejs.org/">Vue</a>.
 <p>
 
 <p align="center">
-<a href="https://www.npmjs.com/package/@vinicunca/akar" target="__blank"><img src="https://img.shields.io/npm/v/@vinicunca/akar?style=flat&colorA=002438&colorB=41c399" alt="NPM version"></a>
-<a href="https://www.npmjs.com/package/@vinicunca/akar" target="__blank"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/@vinicunca/akar?flat&colorA=002438&colorB=41c399"></a>
-<a href="https://github.com/vinicunca/@vinicunca/akar" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/unovue/@vinicunca/akar?flat&colorA=002438&colorB=41c399"></a>
+<a href="https://www.npmjs.com/package/akar" target="__blank"><img src="https://img.shields.io/npm/v/akar?style=flat&colorA=002438&colorB=41c399" alt="NPM version"></a>
+<a href="https://www.npmjs.com/package/akar" target="__blank"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/akar?flat&colorA=002438&colorB=41c399"></a>
+<a href="https://github.com/vinicunca/akar" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/unovue/akar?flat&colorA=002438&colorB=41c399"></a>
 </p>
 
 <p align="center">
@@ -30,13 +30,13 @@ Craft accessible web apps with <a href="https://vuejs.org/">Vue</a>.
 ## Installation
 
 ```bash
-pnpm add @vinicunca/akar
+pnpm add akar
 ```
 ```bash
-npm install @vinicunca/akar
+npm install akar
 ```
 ```bash
-yarn add @vinicunca/akar
+yarn add akar
 ```
 
 ## Documentation
@@ -57,7 +57,7 @@ We would love to have your contributions! All PRs all welcomed! We need help bui
 
 1. Clone the repo
 2. Run `pnpm i`
-3. Run `pnpm build` to run build `@vinicunca/akar` locally
+3. Run `pnpm build` to run build `akar` locally
 3. Run `pnpm docs:dev` to run vitepress
 4. Open `http://localhost:5173`
 

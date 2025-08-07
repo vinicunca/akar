@@ -34,7 +34,7 @@ export default defineBuildConfig([
     clean: false,
     declaration: 'node16',
     externals: [
-      '@vinicunca/akar',
+      'akar',
     ],
     rollup: {
       emitCJS: true,
