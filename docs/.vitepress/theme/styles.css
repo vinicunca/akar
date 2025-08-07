@@ -1,0 +1,58 @@
+@layer default {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 60 8% 97%;
+    --card-foreground: 240 10% 3.9%;
+
+    --muted: 40 6% 91%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+  }
+
+  .dark {
+    --background: 141 17% 5%;
+    --foreground: 0 0% 95%;
+
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 168 2.6% 62.9%;
+
+    --primary: 151 62% 59%;
+    --primary-foreground: 144.9 80.4% 10%;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    font-variation-settings: normal;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background color-foreground min-h-screen antialiased;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Mobile tap highlight */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-tap-highlight-color */
+  html {
+    -webkit-tap-highlight-color: rgba(128, 128, 128, 0.5);
+  }
+
+  *:focus-visible {
+    @apply outline-primary;
+  }
+
+  ::selection {
+    background: hsl(var(--colors-primary) / 0.3);
+  }
+}
