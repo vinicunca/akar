@@ -22,7 +22,7 @@ watchPostEffect(() => {
     :aria-label="switchTitle"
   >
     <ASwitchThumb
-      class="text-xs text-muted-foreground my-auto will-change-transform border border-muted rounded-full bg-background flex h-5 w-5 translate-x-0.5 items-center justify-center data-[state=checked]:translate-x-5 !transition-transform"
+      class="text-xs color-muted-foreground my-auto will-change-transform border border-muted rounded-full bg-background flex h-5 w-5 translate-x-0.5 items-center justify-center data-[state=checked]:translate-x-5 !transition-transform"
     >
       <i
         v-if="isDark"

@@ -1,5 +1,17 @@
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist[wght].ttf');
+}
+@font-face {
+  font-family: 'GeistMono';
+  src: url('/fonts/GeistMono[wght].ttf');
+}
+
 @layer default {
   :root {
+    --font-geist-sans: 'Geist';
+    --font-geist-mono: 'GeistMono';
+
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -37,7 +49,7 @@
   }
 
   body {
-    @apply bg-background color-foreground min-h-screen antialiased;
+    @apply bg-background color-foreground min-h-screen antialiased font-sans;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
   }
@@ -55,4 +67,15 @@
   ::selection {
     background: hsl(var(--colors-primary) / 0.3);
   }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

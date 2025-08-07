@@ -3,6 +3,7 @@ import { toRefs, useScroll } from '@vueuse/core';
 import { ATooltipProvider } from 'akar';
 import { useData } from 'vitepress';
 import Navbar from '../components/navbar.vue';
+import Docs from './docs.vue';
 import Logo from './logo.vue';
 
 const { site, frontmatter } = useData();
@@ -58,7 +59,7 @@ const { top } = toRefs(arrivedState);
         v-else
         class="grow size-full max-w-[1440px]"
       >
-        <!-- <Docs /> -->
+        <Docs />
       </div>
     </div>
   </ATooltipProvider>

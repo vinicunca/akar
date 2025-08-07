@@ -15,15 +15,24 @@ export default defineConfig({
       theme: {
         extend: {
           keyframes: {
-            'slide-up-and-fade': {
-              from: { opacity: 0, transform: 'translateY(2px)' },
-              to: { opacity: 1, transform: 'translateY(0)' },
+            'collapsible-down': {
+              from: { height: 0 },
+              to: { height: 'var(--akar-collapsible-content-height)' },
+            },
+            'collapsible-up': {
+              from: { height: 'var(--akar-collapsible-content-height)' },
+              to: { height: 0 },
             },
           },
           animation: {
-            'slide-up-and-fade': 'slide-up-and-fade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+            'collapsible-down': 'collapsible-down 0.2s ease-in-out',
+            'collapsible-up': 'collapsible-up 0.2s ease-in-out',
           },
         },
+      },
+
+      typography: {
+        cssExtend: {},
       },
     }),
   ],
@@ -41,5 +50,15 @@ export default defineConfig({
       'primary': 'hsl(var(--primary))',
       'primary-foreground': 'hsl(var(--primary-foreground))',
     },
+  },
+
+  extendTheme: (theme) => {
+    return {
+      ...theme,
+      font: {
+        sans: `var(--font-geist-sans),${theme.font?.sans}`,
+        mono: `var(--font-geist-mono),${theme.font?.mono}`,
+      },
+    };
   },
 });

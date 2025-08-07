@@ -26,8 +26,8 @@ watch(
     >
       <a
         :href="nav.link"
-        class="text-sm text-muted-foreground font-semibold mx-3 py-2 inline-flex h-full items-center hover:text-foreground"
-        :class="{ '!text-primary': path.includes(nav.text.toLowerCase()) }"
+        class="text-sm color-muted-foreground font-semibold mx-3 py-2 inline-flex h-full items-center hover:color-foreground"
+        :class="{ '!color-primary': path.includes(nav.text.toLowerCase()) }"
       >
         {{ nav.text }}
       </a>
@@ -53,7 +53,7 @@ watch(
       :href="link.link"
       :aria-label="link.icon"
       target="_blank"
-      class="text-xl text-muted-foreground rounded-lg bg-transparent flex flex-shrink-0 h-9 w-9 items-center justify-center hover:text-foreground hover:bg-muted"
+      class="text-xl color-muted-foreground rounded-lg bg-transparent flex flex-shrink-0 h-9 w-9 items-center justify-center hover:color-foreground hover:bg-muted"
     >
       <Icon :icon="`simple-icons:${link.icon}`" />
     </a>
@@ -70,7 +70,7 @@ watch(
           side="bottom"
           :side-offset="5"
           align="end"
-          class="data-[state=open]:data-[side=bottom]:animate-slide-up-and-fade p-2 will-change-[transform,opacity] border border-muted rounded-xl bg-card w-[180px] shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] z-10 focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.green.700)]"
+          class="p-2 will-change-[transform,opacity] border border-muted rounded-xl bg-card w-[180px] shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] z-10 focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.green.700)] data-[state=open]:data-[side=bottom]:(animate-in fade-in slide-in-top-2)"
         >
           <nav class="flex flex-col">
             <template
@@ -81,13 +81,13 @@ watch(
                 v-if="nav.link"
                 as="a"
                 :href="nav.link"
-                class="text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full items-center hover:text-primary hover:bg-primary/10"
+                class="text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full items-center hover:color-primary hover:bg-primary/10"
               >
                 {{ nav.text }}
               </ADropdownMenuItem>
 
               <ADropdownMenuSub v-else-if="nav.items">
-                <ADropdownMenuSubTrigger class="text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full w-full items-center justify-between hover:text-primary hover:bg-primary/10">
+                <ADropdownMenuSubTrigger class="text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full w-full items-center justify-between hover:color-primary hover:bg-primary/10">
                   <span>{{ nav.text }}</span>
                   <i
                     class="i-lucide:chevron-down text-lg ml-1"
@@ -95,11 +95,11 @@ watch(
                 </ADropdownMenuSubTrigger>
 
                 <ADropdownMenuPortal>
-                  <ADropdownMenuSubContent class="data-[state=open]:data-[side=bottom]:animate-slide-up-and-fade p-2 will-change-[transform,opacity] border border-muted rounded-xl bg-card w-[180px] shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] z-10 focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.green.700)]">
+                  <ADropdownMenuSubContent class="p-2 will-change-[transform,opacity] border border-muted rounded-xl bg-card w-[180px] shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] z-10 focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.green.700)] data-[state=open]:data-[side=bottom]:(animate-in fade-in slide-in-top-2)">
                     <ADropdownMenuItem
                       v-for="item in nav.items"
                       :key="item.text"
-                      class="text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full w-full items-center hover:text-primary hover:bg-primary/10"
+                      class="text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full w-full items-center hover:color-primary hover:bg-primary/10"
                     >
                       <a
                         v-if="item.link"
@@ -155,7 +155,7 @@ watch(
                 :href="link.link"
                 :aria-label="link.icon"
                 target="_blank"
-                class="text-xl color-muted-foreground rounded-lg bg-transparent flex h-9 w-9 items-center justify-center hover:text-foreground hover:bg-muted"
+                class="text-xl color-muted-foreground rounded-lg bg-transparent flex h-9 w-9 items-center justify-center hover:color-foreground hover:bg-muted"
               >
                 <Icon :icon="`simple-icons:${link.icon}`" />
               </ADropdownMenuItem>
