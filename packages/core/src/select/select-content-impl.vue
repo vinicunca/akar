@@ -77,8 +77,10 @@ export interface SelectContentImplProps extends APopperContentProps {
   bodyLock?: boolean;
 }
 
-export const [injectSelectContentContext, provideSelectContentContext]
-  = createContext<SelectContentContext>('ASelectContent');
+export const [
+  injectSelectContentContext,
+  provideSelectContentContext,
+] = createContext<SelectContentContext>('ASelectContent');
 </script>
 
 <script setup lang="ts">
@@ -310,7 +312,14 @@ provideSelectContentContext({
           :id="rootContext.contentId"
           :ref="
             (vnode: ComponentPublicInstance) => {
-              content = unrefElement(vnode) as HTMLElement
+              const el = unrefElement(vnode) as HTMLElement | undefined;
+              // special case for PopperContent
+              if (el?.hasAttribute('data-akar-popper-content-wrapper')) {
+                content = el.firstElementChild as HTMLElement;
+              }
+              else {
+                content = el;
+              }
               return undefined
             }
           "
