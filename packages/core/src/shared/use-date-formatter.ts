@@ -134,7 +134,7 @@ export function useDateFormatter(initialLocale: string): UseDateFormatter {
 
     const value = parts.find((p) => p.type === 'dayPeriod')?.value;
 
-    if (value === 'PM') {
+    if (value === 'PM' || value === 'p.m.') {
       return 'PM';
     }
 
