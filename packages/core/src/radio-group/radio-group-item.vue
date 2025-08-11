@@ -5,7 +5,7 @@ import type { SelectEvent } from './utils';
 import { createContext, useForwardExpose } from '~~/shared';
 
 export interface ARadioGroupItemProps extends Omit<RadioProps, 'checked'> {}
-export type RadioGroupItemEmits = {
+export type ARadioGroupItemEmits = {
   select: [event: SelectEvent];
 };
 
@@ -14,8 +14,10 @@ interface RadioGroupItemContext {
   checked: ComputedRef<boolean>;
 }
 
-export const [injectARadioGroupItemContext, provideRadiogroupItemContext]
-  = createContext<RadioGroupItemContext>('ARadioGroupItem');
+export const [
+  injectARadioGroupItemContext,
+  provideRadiogroupItemContext,
+] = createContext<RadioGroupItemContext>('ARadioGroupItem');
 </script>
 
 <script setup lang="ts">
@@ -38,7 +40,7 @@ const props = withDefaults(
   },
 );
 
-const emits = defineEmits<RadioGroupItemEmits>();
+const emits = defineEmits<ARadioGroupItemEmits>();
 
 defineSlots<{
   default?: (props: {

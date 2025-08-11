@@ -4,6 +4,7 @@ export {
 } from './radio-group-indicator.vue';
 export {
   default as ARadioGroupItem,
+  type ARadioGroupItemEmits,
   type ARadioGroupItemProps,
   injectARadioGroupItemContext,
 } from './radio-group-item.vue';
