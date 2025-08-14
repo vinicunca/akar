@@ -16,7 +16,7 @@ import {
   >
     <Variant title="Horizontal Orientation">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
         orientation="horizontal"
       >

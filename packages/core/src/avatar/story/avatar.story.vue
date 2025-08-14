@@ -31,68 +31,68 @@ function rotateIndex() {
   <Story title="Avatar/Demo">
     <Variant title="default">
       <AAvatarRoot
-        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
+        class="bg-blackA3 align-middle rounded-full inline-flex h-[45px] w-[45px] select-none items-center justify-center overflow-hidden"
       >
         <AAvatarImage
-          class="h-full w-full rounded-[inherit] object-cover"
+          class="rounded-[inherit] h-full w-full object-cover"
           src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
           alt="Colm Tuite"
         />
         <AAvatarFallback
-          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
+          class="text-violet11 text-[15px] leading-1 font-medium bg-white flex h-full w-full items-center justify-center"
           :delay-ms="600"
         >
           CT
         </AAvatarFallback>
       </AAvatarRoot>
       <AAvatarRoot
-        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
+        class="bg-blackA3 align-middle rounded-full inline-flex h-[45px] w-[45px] select-none items-center justify-center overflow-hidden"
       >
         <AAvatarImage
-          class="h-full w-full rounded-[inherit] object-cover"
+          class="rounded-[inherit] h-full w-full object-cover"
           src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
           alt="Pedro Duarte"
         />
         <AAvatarFallback
-          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
+          class="text-violet11 text-[15px] leading-1 font-medium bg-white flex h-full w-full items-center justify-center"
         >
           JD
         </AAvatarFallback>
       </AAvatarRoot>
       <AAvatarRoot
-        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
+        class="bg-blackA3 align-middle rounded-full inline-flex h-[45px] w-[45px] select-none items-center justify-center overflow-hidden"
       >
         <AAvatarImage
-          class="h-full w-full rounded-[inherit] object-cover"
+          class="rounded-[inherit] h-full w-full object-cover"
           src="https://vinicunca.dev/og.jpg"
           alt="Pedro Duarte"
         />
         <AAvatarFallback
-          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
+          class="text-violet11 text-[15px] leading-1 font-medium bg-white flex h-full w-full items-center justify-center"
         >
           RD
         </AAvatarFallback>
       </AAvatarRoot>
       <AAvatarRoot
-        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
+        class="bg-blackA3 align-middle rounded-full inline-flex h-[45px] w-[45px] select-none items-center justify-center overflow-hidden"
       >
         <AAvatarFallback
-          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
+          class="text-violet11 text-[15px] leading-1 font-medium bg-white flex h-full w-full items-center justify-center"
         >
           PD
         </AAvatarFallback>
       </AAvatarRoot>
       <AAvatarRoot
-        class="h-[45px] w-[45px] inline-flex select-none items-center justify-center overflow-hidden rounded-full bg-blackA3 align-middle"
+        class="bg-blackA3 align-middle rounded-full inline-flex h-[45px] w-[45px] select-none items-center justify-center overflow-hidden"
         @click.prevent="rotateIndex"
       >
         <AAvatarImage
-          class="h-full w-full rounded-[inherit] object-cover"
+          class="rounded-[inherit] h-full w-full object-cover"
           :src="profile.src"
           :alt="profile.alt"
         />
         <AAvatarFallback
-          class="h-full w-full flex items-center justify-center bg-white text-[15px] text-violet11 font-medium leading-1"
+          class="text-violet11 text-[15px] leading-1 font-medium bg-white flex h-full w-full items-center justify-center"
           :delay-ms="600"
         >
           {{ profile.fallback }}

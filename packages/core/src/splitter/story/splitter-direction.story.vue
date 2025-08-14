@@ -15,7 +15,7 @@ const direction = ref<DataOrientation>('horizontal');
       <div class="w-full">
         <div>
           <button
-            class="rounded bg-white px-3 py-1.5 text-sm text-slate-800 capitalize hover:bg-slate-100"
+            class="text-sm text-slate-800 px-3 py-1.5 rounded bg-white capitalize hover:bg-slate-100"
             @click="direction = direction === 'horizontal' ? 'vertical' : 'horizontal'"
           >
             {{ direction }}
@@ -23,14 +23,14 @@ const direction = ref<DataOrientation>('horizontal');
         </div>
         <div class="mt-4 h-48 w-full">
           <ASplitterGroup :direction="direction">
-            <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
+            <ASplitterPanel class="bg-blackA8 rounded-lg flex items-center justify-center">
               Panel A
             </ASplitterPanel>
             <ASplitterResizeHandle
               class="transition data-[state=active]:bg-white"
               :class="direction === 'horizontal' ? 'w-2' : 'h-2'"
             />
-            <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
+            <ASplitterPanel class="bg-blackA8 rounded-lg flex items-center justify-center">
               Panel B
             </ASplitterPanel>
           </ASplitterGroup>

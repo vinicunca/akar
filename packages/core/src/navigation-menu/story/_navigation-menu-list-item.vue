@@ -11,9 +11,9 @@ const props = defineProps({
     <ANavigationMenuLink as-child>
       <a
         v-bind="$attrs"
-        class="block select-none rounded-[6px] p-3 text-[15px] leading-none no-underline outline-none transition-colors hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+        class="hover:bg-mauve3 focus:shadow-green7 text-[15px] leading-none p-3 outline-none rounded-[6px] no-underline block select-none transition-colors focus:shadow-[0_0_0_2px]"
       >
-        <div class="mb-[5px] text-green12 font-medium leading-[1.2]">
+        <div class="text-green12 leading-[1.2] font-medium mb-[5px]">
           {{ props.title }}
         </div>
         <p class="text-mauve11 leading-[1.4]">

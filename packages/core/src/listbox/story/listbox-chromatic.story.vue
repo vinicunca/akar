@@ -17,13 +17,13 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
     :layout="{ type: 'grid', iframe: false, width: '50%' }"
   >
     <Variant title="Uncontrolled (Single)">
-      <AListboxRoot class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9">
+      <AListboxRoot class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto">
         <AListboxContent>
           <AListboxItem
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -34,14 +34,14 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
     <Variant title="Uncontrolled (Multiple)">
       <AListboxRoot
         :multiple="true"
-        class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9"
+        class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto"
       >
         <AListboxContent>
           <AListboxItem
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -52,14 +52,14 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
     <Variant title="Controlled (Single)">
       <AListboxRoot
         v-model="singleControl"
-        class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9"
+        class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto"
       >
         <AListboxContent>
           <AListboxItem
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -71,14 +71,14 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
       <AListboxRoot
         v-model="multipleControl"
         :multiple="true"
-        class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9"
+        class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto"
       >
         <AListboxContent>
           <AListboxItem
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -87,13 +87,13 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
     </Variant>
 
     <Variant title="Object (Single)">
-      <AListboxRoot class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9">
+      <AListboxRoot class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto">
         <AListboxContent>
           <AListboxItem
             v-for="i in options.map(opt => ({ label: opt, value: opt.toLowerCase() }))"
             :key="i.value"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i.label }}
           </AListboxItem>
@@ -105,14 +105,14 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
       <AListboxRoot
         by="value"
         :multiple="true"
-        class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9"
+        class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto"
       >
         <AListboxContent>
           <AListboxItem
             v-for="i in options.map(opt => ({ label: opt, value: opt.toLowerCase() }))"
             :key="i.value"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i.label }}
           </AListboxItem>
@@ -124,14 +124,14 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
       <AListboxRoot
         :default-value="2"
         selection-behavior="replace"
-        class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9"
+        class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto"
       >
         <AListboxContent>
           <AListboxItem
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -143,14 +143,14 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
       <AListboxRoot
         multiple
         selection-behavior="replace"
-        class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9"
+        class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto"
       >
         <AListboxContent>
           <AListboxItem
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -161,14 +161,14 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
     <Variant title="Highlight on hover">
       <AListboxRoot
         highlight-on-hover
-        class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9"
+        class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto"
       >
         <AListboxContent>
           <AListboxItem
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -182,14 +182,14 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
       </button>
       <AListboxRoot
         ref="listboxRef"
-        class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9"
+        class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto"
       >
         <AListboxContent>
           <AListboxItem
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -199,7 +199,7 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
 
     <Variant title="Orientation (Horizontal)">
       <AListboxRoot
-        class="mx-auto h-full w-64 flex flex-col overflow-auto border rounded-lg bg-white p-1 text-green9"
+        class="text-green9 mx-auto p-1 border rounded-lg bg-white flex flex-col h-full w-64 overflow-auto"
         orientation="horizontal"
       >
         <AListboxContent class="flex flex-row">
@@ -207,7 +207,7 @@ const listboxRef = ref<GenericComponentInstance<typeof AListboxRoot>>();
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="text-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline data-[disabled]:opacity-50 focus:ring-0"
           >
             {{ i }}
           </AListboxItem>

@@ -9,7 +9,7 @@ import { ASeparator } from '.';
   >
     <Variant title="default">
       <div class="mx-[15px] max-w-[300px] w-full">
-        <div class="text-[15px] text-white font-medium leading-5">
+        <div class="text-[15px] text-white leading-5 font-medium">
           akar UI
         </div>
         <div class="text-[15px] text-white leading-5">
@@ -19,7 +19,7 @@ import { ASeparator } from '.';
           decorative
           class="my-[15px] bg-[#d7cff9] data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px"
         />
-        <div class="h-5 flex items-center">
+        <div class="flex h-5 items-center">
           <div class="text-[15px] text-white leading-5">
             Blog
           </div>

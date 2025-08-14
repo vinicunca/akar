@@ -19,11 +19,11 @@ function handleToggleVisibility() {
 </script>
 
 <template>
-  <form class="grid grid-cols-2 mb-8">
+  <form class="mb-8 grid grid-cols-2">
     <fieldset>
       <legend>Mount</legend>
       <button
-        class="rounded bg-green-700 px-2 py-0.5"
+        class="px-2 py-0.5 rounded bg-green-700"
         type="button"
         @click="emits('update:open', !open)"
       >
@@ -34,7 +34,7 @@ function handleToggleVisibility() {
     <fieldset>
       <legend>Visibility (triggers cancel event)</legend>
       <button
-        class="rounded bg-green-700 px-2 py-0.5"
+        class="px-2 py-0.5 rounded bg-green-700"
         type="button"
         @click="handleToggleVisibility"
       >

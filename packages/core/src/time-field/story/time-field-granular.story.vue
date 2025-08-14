@@ -11,7 +11,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
     <Variant title="Granular (second)">
       <div class="flex flex-col gap-2">
         <ALabel
-          class="text-sm text-gray9"
+          class="text-gray9 text-sm"
           for="time-field"
         >
           Time
@@ -20,7 +20,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
           id="time-field"
           v-slot="{ segments }"
           granularity="second"
-          class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+          class="border-gray9 text-green10 placeholder:text-mauve5 p-2 text-center border rounded bg-white flex select-none items-center data-[invalid]:border-red-500"
         >
           <template
             v-for="item in segments"
@@ -35,7 +35,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
             <ATimeFieldInput
               v-else
               :part="item.part"
-              class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+              class="data-[placeholder]:text-green9 px-1 rounded-5px focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
             >
               {{ item.value }}
             </ATimeFieldInput>
@@ -47,7 +47,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
     <Variant title="Granular (minute)">
       <div class="flex flex-col gap-2">
         <ALabel
-          class="text-sm text-gray9"
+          class="text-gray9 text-sm"
           for="time-field"
         >
           Time
@@ -56,7 +56,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
           id="time-field"
           v-slot="{ segments }"
           granularity="minute"
-          class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+          class="border-gray9 text-green10 placeholder:text-mauve5 p-2 text-center border rounded bg-white flex select-none items-center data-[invalid]:border-red-500"
         >
           <template
             v-for="item in segments"
@@ -71,7 +71,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
             <ATimeFieldInput
               v-else
               :part="item.part"
-              class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+              class="data-[placeholder]:text-green9 px-1 rounded-5px focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
             >
               {{ item.value }}
             </ATimeFieldInput>
@@ -83,7 +83,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
     <Variant title="Granular (hour)">
       <div class="flex flex-col gap-2">
         <ALabel
-          class="text-sm text-gray9"
+          class="text-gray9 text-sm"
           for="time-field"
         >
           Time
@@ -92,7 +92,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
           id="time-field"
           v-slot="{ segments }"
           granularity="hour"
-          class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+          class="border-gray9 text-green10 placeholder:text-mauve5 p-2 text-center border rounded bg-white flex select-none items-center data-[invalid]:border-red-500"
         >
           <template
             v-for="item in segments"
@@ -107,7 +107,7 @@ import { ATimeFieldInput, ATimeFieldRoot } from '..';
             <ATimeFieldInput
               v-else
               :part="item.part"
-              class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+              class="data-[placeholder]:text-green9 px-1 rounded-5px focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
             >
               {{ item.value }}
             </ATimeFieldInput>

@@ -25,7 +25,7 @@ const open = useVModel(props, 'open');
     <AMenuAnchor :style="{ display: 'inline-block' }" />
     <AMenuPortal>
       <AMenuContent
-        class="box-border inline-block min-w-[130px] border border-gray-100 rounded-[6px] bg-white p-[5px] text-[13px] font-sans shadow-md focus-within:border-black"
+        class="text-[13px] font-sans p-[5px] border border-gray-100 rounded-[6px] bg-white min-w-[130px] inline-block shadow-md box-border focus-within:border-black"
         align="start"
         @close-auto-focus.prevent
       >

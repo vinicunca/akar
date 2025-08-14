@@ -18,7 +18,7 @@ const items = ['One', 'Two', 'Three', 'Four'];
   >
     <Variant title="Uncontrolled (Single closed)">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
       >
         <AAccordionItem
@@ -44,7 +44,7 @@ const items = ['One', 'Two', 'Three', 'Four'];
 
     <Variant title="Uncontrolled (Single open)">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
         default-value="Two"
       >
@@ -71,7 +71,7 @@ const items = ['One', 'Two', 'Three', 'Four'];
 
     <Variant title="Uncontrolled (Multiple closed)">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="multiple"
       >
         <AAccordionItem
@@ -97,7 +97,7 @@ const items = ['One', 'Two', 'Three', 'Four'];
 
     <Variant title="Uncontrolled (Multiple open)">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="multiple"
         :default-value="['One', 'Two']"
       >
@@ -124,7 +124,7 @@ const items = ['One', 'Two', 'Three', 'Four'];
 
     <Variant title="Controlled (Single open)">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
         model-value="Three"
       >
@@ -151,7 +151,7 @@ const items = ['One', 'Two', 'Three', 'Four'];
 
     <Variant title="Controlled (Multiple open)">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="multiple"
         :model-value="['Two', 'Three']"
       >
@@ -178,7 +178,7 @@ const items = ['One', 'Two', 'Three', 'Four'];
 
     <Variant title="Disabled (whole)">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
         disabled
       >
@@ -205,7 +205,7 @@ const items = ['One', 'Two', 'Three', 'Four'];
 
     <Variant title="Disabled (item)">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
       >
         <AAccordionItem
@@ -232,7 +232,7 @@ const items = ['One', 'Two', 'Three', 'Four'];
 
     <Variant title="Disabled (with `disabled=false` on top-level)">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
         :disabled="false"
       >

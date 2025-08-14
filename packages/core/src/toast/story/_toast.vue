@@ -29,7 +29,7 @@ function handleClick() {
 <template>
   <AToastProvider swipe-direction="left">
     <button
-      class="h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] text-violet11 font-medium leading-[35px] shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+      class="text-violet11 shadow-blackA7 hover:bg-mauve3 text-[15px] leading-[35px] font-medium px-[15px] outline-none rounded bg-white inline-flex h-[35px] shadow-[0_2px_10px] items-center justify-center focus:shadow-[0_0_0_2px] focus:shadow-black"
       @click="handleClick"
     >
       Add to calendar
@@ -37,14 +37,14 @@ function handleClick() {
 
     <AToastRoot
       v-model:open="open"
-      class="data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=end]:animate-swipeOut [grid-template-areas:_'title_action'_'description_action'] grid grid-cols-[auto_max-content] items-center gap-x-[15px] rounded-md bg-white p-[15px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--akar-toast-swipe-move-x)]"
+      class="data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=end]:animate-swipeOut p-[15px] rounded-md bg-white gap-x-[15px] grid grid-cols-[auto_max-content] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] [grid-template-areas:_'title_action'_'description_action'] items-center data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--akar-toast-swipe-move-x)]"
     >
-      <AToastTitle class="[grid-area:_title] mb-[5px] text-[15px] text-slate12 font-medium">
+      <AToastTitle class="text-slate12 text-[15px] font-medium mb-[5px] [grid-area:_title]">
         Scheduled: Catch up
       </AToastTitle>
       <AToastDescription as-child>
         <time
-          class="[grid-area:_description] m-0 text-[13px] text-slate11 leading-[1.3]"
+          class="text-slate11 text-[13px] leading-[1.3] m-0 [grid-area:_description]"
           :dateTime="eventDateRef.toISOString()"
         >
           {{ prettyDate(eventDateRef) }}
@@ -55,11 +55,11 @@ function handleClick() {
         as-child
         alt-text="Goto schedule to undo"
       >
-        <button class="h-[25px] inline-flex items-center justify-center rounded bg-green2 px-[10px] text-xs text-green11 font-medium leading-[25px] shadow-[inset_0_0_0_1px] shadow-green7 focus:shadow-[0_0_0_2px] focus:shadow-green8 hover:shadow-[inset_0_0_0_1px] hover:shadow-green8">
+        <button class="bg-green2 text-green11 shadow-green7 focus:shadow-green8 hover:shadow-green8 text-xs leading-[25px] font-medium px-[10px] rounded inline-flex h-[25px] shadow-[inset_0_0_0_1px] items-center justify-center focus:shadow-[0_0_0_2px] hover:shadow-[inset_0_0_0_1px]">
           Close
         </button>
       </AToastAction>
     </AToastRoot>
-    <AToastViewport class="[--viewport-padding:_25px] fixed bottom-0 right-0 z-[2147483647] m-0 max-w-[100vw] w-[390px] flex flex-col list-none gap-[10px] p-[var(--viewport-padding)] outline-none" />
+    <AToastViewport class="m-0 p-[var(--viewport-padding)] outline-none list-none flex flex-col gap-[10px] max-w-[100vw] w-[390px] [--viewport-padding:_25px] bottom-0 right-0 fixed z-[2147483647]" />
   </AToastProvider>
 </template>

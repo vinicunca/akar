@@ -1,8 +1,8 @@
 <script lang="ts">
-export type TooltipTriggerDataState =
-  | 'closed'
-  | 'delayed-open'
-  | 'instant-open';
+export type TooltipTriggerDataState
+  = | 'closed'
+    | 'delayed-open'
+    | 'instant-open';
 
 export interface ATooltipTriggerProps extends APopperAnchorProps {}
 </script>

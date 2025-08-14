@@ -19,7 +19,7 @@ const selectedValue = ref(['item-1', 'item-2']);
   >
     <Variant title="Uncontrolled">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="multiple"
       >
         <AAccordionItem
@@ -77,7 +77,7 @@ const selectedValue = ref(['item-1', 'item-2']);
 
       <AAccordionRoot
         v-model="selectedValue"
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="multiple"
       >
         <AAccordionItem

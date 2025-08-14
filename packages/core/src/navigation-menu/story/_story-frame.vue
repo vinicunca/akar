@@ -1,8 +1,8 @@
 <template>
-  <div class="h-screen w-screen bg-gray-200">
+  <div class="bg-gray-200 h-screen w-screen">
     <div>
       <div
-        class="relative w-full flex items-center justify-between bg-green8 px-4 py-3 shadow-xl"
+        class="bg-green8 px-4 py-3 flex w-full shadow-xl items-center justify-between relative"
       >
         <button>Logo</button>
 
@@ -10,7 +10,7 @@
 
         <button>Login</button>
       </div>
-      <div class="m-auto max-w-[800px] px-4 pt-5">
+      <div class="m-auto px-4 pt-5 max-w-[800px]">
         <h2>Test page content</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam purus

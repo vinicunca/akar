@@ -38,17 +38,17 @@ const steps = [{
   >
     <Variant title="default">
       <AStepperRoot
-        class="flex gap-2 p-1"
+        class="p-1 flex gap-2"
       >
         <AStepperItem
           v-for="item in steps"
           :key="item.step"
-          class="group flex basis-1/5 cursor-pointer items-center gap-2 data-[disabled]:pointer-events-none"
+          class="group flex basis-1/5 gap-2 cursor-pointer items-center data-[disabled]:pointer-events-none"
           :step="item.step"
         >
-          <AStepperTrigger class="flex flex-col items-center gap-2 rounded-md p-2 text-center focus:shadow-[0_0_0_2px] focus:shadow-green11 focus:outline-none">
+          <AStepperTrigger class="focus:shadow-green11 p-2 text-center rounded-md flex flex-col gap-2 items-center focus:outline-none focus:shadow-[0_0_0_2px]">
             <AStepperIndicator
-              class="h-10 w-10 inline-flex shrink-0 items-center justify-center rounded-full bg-mauve6 text-grass11 shadow-[0_0_0_2px] group-data-[state=active]:bg-mauve12 group-data-[state=completed]:bg-green9 group-data-[disabled]:text-gray-400 group-data-[state=active]:text-white group-data-[state=completed]:text-white group-data-[state=active]:shadow-mauve12 group-data-[state=completed]:shadow-green9"
+              class="bg-mauve6 text-grass11 group-data-[state=active]:bg-mauve12 group-data-[state=completed]:bg-green9 group-data-[state=active]:shadow-mauve12 group-data-[state=completed]:shadow-green9 rounded-full inline-flex shrink-0 h-10 w-10 shadow-[0_0_0_2px] items-center justify-center group-data-[disabled]:text-gray-400 group-data-[state=active]:text-white group-data-[state=completed]:text-white"
             >
               <Icon
                 :icon="item.icon"
@@ -56,17 +56,17 @@ const steps = [{
               />
             </AStepperIndicator>
             <div class="flex flex-col">
-              <AStepperTitle class="text-md whitespace-nowrap font-medium">
+              <AStepperTitle class="text-md font-medium whitespace-nowrap">
                 {{ item.title }}
               </AStepperTitle>
-              <AStepperDescription class="hidden text-xs text-mauve8">
+              <AStepperDescription class="text-mauve8 text-xs hidden">
                 {{ item.description }}
               </AStepperDescription>
             </div>
           </AStepperTrigger>
           <AStepperSeparator
             v-if="item.step !== steps[steps.length - 1].step"
-            class="h-[1px] w-full bg-green5 group-data-[disabled]:bg-gray-300 group-data-[state=completed]:bg-green9"
+            class="bg-green5 group-data-[state=completed]:bg-green9 h-[1px] w-full group-data-[disabled]:bg-gray-300"
           />
         </AStepperItem>
       </AStepperRoot>

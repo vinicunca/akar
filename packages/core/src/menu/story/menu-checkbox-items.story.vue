@@ -26,7 +26,7 @@ function handleSelectAll() {
     <Variant title="default">
       <MenuWithAnchor>
         <AMenuCheckboxItem
-          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
+          class="text-black leading-[1] px-[10px] outline-none rounded-[3px] flex h-[25px] cursor-default select-none whitespace-nowrap items-center justify-between data-[disabled]:text-gray-100 data-[highlighted]:text-white data-[highlighted]:bg-black"
           :model-value="
             selection.length === options.length
               ? true
@@ -42,12 +42,12 @@ function handleSelectAll() {
           </AMenuItemIndicator>
         </AMenuCheckboxItem>
 
-        <AMenuSeparator class="mx-[10px] my-[5px] h-[1px] bg-gray-200" />
+        <AMenuSeparator class="mx-[10px] my-[5px] bg-gray-200 h-[1px]" />
 
         <AMenuCheckboxItem
           v-for="(option, index) in options"
           :key="index"
-          class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
+          class="text-black leading-[1] px-[10px] outline-none rounded-[3px] flex h-[25px] cursor-default select-none whitespace-nowrap items-center justify-between data-[disabled]:text-gray-100 data-[highlighted]:text-white data-[highlighted]:bg-black"
           :model-value="selection.includes(option)"
           @update:model-value="
             () => {

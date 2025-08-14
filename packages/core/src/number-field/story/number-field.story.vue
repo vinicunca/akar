@@ -14,11 +14,11 @@ import { ANumberFieldDecrement, ANumberFieldIncrement, ANumberFieldInput, ANumbe
         :min="0"
         :default-value="18"
       >
-        <div class="mt-1 flex items-center border border-blackA9 rounded-md bg-blackA7">
+        <div class="border-blackA9 bg-blackA7 mt-1 border rounded-md flex items-center">
           <ANumberFieldDecrement class="p-2 disabled:opacity-20">
             <Icon icon="radix-icons:minus" />
           </ANumberFieldDecrement>
-          <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+          <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
           <ANumberFieldIncrement class="p-2 disabled:opacity-20">
             <Icon icon="radix-icons:plus" />
           </ANumberFieldIncrement>

@@ -111,7 +111,7 @@ export const [
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { computed, onMounted, toRefs, watch } from 'vue';
+import { onMounted, toRefs, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 
 const props = withDefaults(

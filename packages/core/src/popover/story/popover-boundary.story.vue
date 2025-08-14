@@ -18,11 +18,11 @@ const boundary = ref<HTMLElement>();
     <Variant title="default">
       <div
         ref="boundary"
-        class="h-[200px] w-[200px] border border-3 border-red-600 border-dashed"
+        class="border border-3 border-red-600 border-dashed h-[200px] w-[200px]"
       >
         <APopoverRoot>
           <APopoverTrigger
-            class="h-[35px] w-[35px] inline-flex cursor-default items-center justify-center rounded-full bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="text-violet11 shadow-blackA7 hover:bg-violet3 outline-none rounded-full bg-white inline-flex h-[35px] w-[35px] cursor-default shadow-[0_2px_10px] items-center justify-center focus:shadow-[0_0_0_2px] focus:shadow-black"
             aria-label="Update dimensions"
             as-child
           >

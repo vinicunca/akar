@@ -13,7 +13,7 @@ const open = ref(false);
   >
     <AToastProvider>
       <ADialogRoot>
-        <ADialogTrigger class="h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] text-violet11 font-medium leading-[35px] shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black">
+        <ADialogTrigger class="text-violet11 shadow-blackA7 hover:bg-mauve3 text-[15px] leading-[35px] font-medium px-[15px] outline-none rounded bg-white inline-flex h-[35px] shadow-[0_2px_10px] items-center justify-center focus:shadow-[0_0_0_2px] focus:shadow-black">
           Open
         </ADialogTrigger>
         <ADialogOverlay />
@@ -23,7 +23,7 @@ const open = ref(false);
           </ADialogTitle>
           <ADialogDescription>Description</ADialogDescription>
           <button
-            class="h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] text-violet11 font-medium leading-[35px] shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="text-violet11 shadow-blackA7 hover:bg-mauve3 text-[15px] leading-[35px] font-medium px-[15px] outline-none rounded bg-white inline-flex h-[35px] shadow-[0_2px_10px] items-center justify-center focus:shadow-[0_0_0_2px] focus:shadow-black"
             @click="open = true"
           >
             Open toast
@@ -34,11 +34,11 @@ const open = ref(false);
 
       <AToastRoot
         v-model:open="open"
-        class="space-between pointer-events-auto flex items-center"
+        class="space-between flex pointer-events-auto items-center"
       >
         <AToastDescription>There was an error</AToastDescription>
         <AToastAction
-          class="h-[35px] inline-flex items-center justify-center rounded bg-white px-[15px] text-[15px] text-violet11 font-medium leading-[35px] shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-mauve3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+          class="text-violet11 shadow-blackA7 hover:bg-mauve3 text-[15px] leading-[35px] font-medium px-[15px] outline-none rounded bg-white inline-flex h-[35px] shadow-[0_2px_10px] items-center justify-center focus:shadow-[0_0_0_2px] focus:shadow-black"
           alt-text="Resubmit the form to try again."
           @click="() => {
             console.log('try again')
@@ -48,7 +48,7 @@ const open = ref(false);
         </AToastAction>
       </AToastRoot>
 
-      <AToastViewport class="fixed right-1/2 top-1/2 flex flex-col overflow-hidden border" />
+      <AToastViewport class="border flex flex-col right-1/2 top-1/2 fixed overflow-hidden" />
     </AToastProvider>
   </Story>
 </template>

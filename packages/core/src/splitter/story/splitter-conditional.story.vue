@@ -15,13 +15,13 @@ const isShowingB = ref(false);
       <div class="w-full">
         <div>
           <button
-            class="rounded bg-white px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-100"
+            class="text-sm text-slate-800 px-3 py-1.5 rounded bg-white hover:bg-slate-100"
             @click="isShowingA = !isShowingA"
           >
             {{ isShowingA ? 'Hide' : 'Show' }} A
           </button>
           <button
-            class="ml-2 rounded bg-white px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-100"
+            class="text-sm text-slate-800 ml-2 px-3 py-1.5 rounded bg-white hover:bg-slate-100"
             @click="isShowingB = !isShowingB"
           >
             {{ isShowingB ? 'Hide' : 'Show' }} B
@@ -33,7 +33,7 @@ const isShowingB = ref(false);
             <template v-if="isShowingA">
               <ASplitterPanel
                 :min-size="20"
-                class="flex items-center justify-center rounded-lg bg-blackA8"
+                class="bg-blackA8 rounded-lg flex items-center justify-center"
                 :order="1"
               >
                 Panel A
@@ -44,7 +44,7 @@ const isShowingB = ref(false);
             <template v-if="isShowingB">
               <ASplitterPanel
                 :min-size="20"
-                class="flex items-center justify-center rounded-lg bg-blackA8"
+                class="bg-blackA8 rounded-lg flex items-center justify-center"
                 :order="2"
               >
                 Panel B
@@ -54,7 +54,7 @@ const isShowingB = ref(false);
 
             <ASplitterPanel
               :min-size="20"
-              class="flex items-center justify-center rounded-lg bg-blackA8"
+              class="bg-blackA8 rounded-lg flex items-center justify-center"
               :order="3"
             >
               Panel C

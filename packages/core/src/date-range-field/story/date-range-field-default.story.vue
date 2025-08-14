@@ -8,7 +8,7 @@ import { ADateRangeFieldInput, ADateRangeFieldRoot } from '..';
       <ADateRangeFieldRoot
         id="date-field"
         v-slot="{ segments }"
-        class="flex select-none items-center border border-gray9 rounded-lg bg-white p-1 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="border-gray9 text-green10 placeholder:text-mauve5 p-1 text-center border rounded-lg bg-white flex select-none items-center data-[invalid]:border-red-500"
       >
         <template
           v-for="item in segments.start"
@@ -24,7 +24,7 @@ import { ADateRangeFieldInput, ADateRangeFieldRoot } from '..';
           <ADateRangeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 py-1 hover:bg-grass4 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="hover:bg-grass4 data-[placeholder]:text-green9 px-1 py-1 rounded-5px focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
             type="start"
           >
             {{ item.value }}
@@ -45,7 +45,7 @@ import { ADateRangeFieldInput, ADateRangeFieldRoot } from '..';
           <ADateRangeFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 py-1 hover:bg-grass4 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="hover:bg-grass4 data-[placeholder]:text-green9 px-1 py-1 rounded-5px focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
             type="end"
           >
             {{ item.value }}

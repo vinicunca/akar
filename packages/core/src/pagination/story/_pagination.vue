@@ -28,7 +28,7 @@ const rootProps = computed(() => ({ total: 100, ...props.root }));
     <APaginationList
       v-slot="{ items }"
       v-bind="props.list"
-      class="flex items-center gap-2"
+      class="flex gap-2 items-center"
     >
       <APaginationFirst v-bind="props.first" />
       <APaginationPrev v-bind="props.prev" />
@@ -36,7 +36,7 @@ const rootProps = computed(() => ({ total: 100, ...props.root }));
         <APaginationListItem
           v-if="page.type === 'page'"
           :key="index"
-          class="border rounded px-4 py-2 data-[selected]:bg-grass8"
+          class="data-[selected]:bg-grass8 px-4 py-2 border rounded"
           :value="page.value"
           v-bind="props.listItem"
         >
@@ -46,7 +46,7 @@ const rootProps = computed(() => ({ total: 100, ...props.root }));
           v-else
           :key="page.type"
           :index="index"
-          class="border rounded px-4 py-2"
+          class="px-4 py-2 border rounded"
           v-bind="props.ellipsis"
         >
           &#8230;

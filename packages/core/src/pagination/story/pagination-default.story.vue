@@ -15,7 +15,7 @@ import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList
       >
         <APaginationList
           v-slot="{ items }"
-          class="flex items-center gap-2"
+          class="flex gap-2 items-center"
         >
           <APaginationFirst />
           <APaginationPrev />
@@ -23,7 +23,7 @@ import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList
             <APaginationListItem
               v-if="page.type === 'page'"
               :key="index"
-              class="border rounded px-4 py-2 data-[selected]:bg-grass8"
+              class="data-[selected]:bg-grass8 px-4 py-2 border rounded"
               :value="page.value"
             >
               {{ page.value }}
@@ -32,7 +32,7 @@ import { APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList
               v-else
               :key="page.type"
               :index="index"
-              class="border rounded px-4 py-2"
+              class="px-4 py-2 border rounded"
             >
               &#8230;
             </APaginationEllipsis>

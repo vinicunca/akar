@@ -15,61 +15,61 @@ const checkboxThree = ref(false);
     <Variant title="default">
       <div class="flex flex-col gap-2.5">
         <label
-          class="flex flex-row items-center gap-4 [&>.checkbox]:hover:bg-neutral-100"
+          class="flex flex-row gap-4 items-center [&>.checkbox]:hover:bg-neutral-100"
         >
           <ACheckboxRoot
             v-model="checkboxOne"
-            class="h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
+            class="shadow-blackA7 hover:bg-violet3 appearance-none outline-none rounded-[4px] bg-white flex h-[25px] w-[25px] shadow-[0_2px_10px] items-center justify-center focus-within:shadow-[0_0_0_2px_black]"
           >
             <ACheckboxIndicator
-              class="h-full w-full flex items-center justify-center rounded bg-white"
+              class="rounded bg-white flex h-full w-full items-center justify-center"
             >
               <Icon
                 v-if="checkboxOne === 'indeterminate'"
                 icon="radix-icons:divider-horizontal"
-                class="h-4 w-4 text-black"
+                class="text-black h-4 w-4"
               />
               <Icon
                 v-else-if="checkboxOne"
                 icon="radix-icons:check"
-                class="h-4 w-4 text-black"
+                class="text-black h-4 w-4"
               />
             </ACheckboxIndicator>
           </ACheckboxRoot>
           <span class="select-none">Checkbox</span>
         </label>
         <label
-          class="flex flex-row items-center gap-4 [&>.checkbox]:hover:bg-neutral-100"
+          class="flex flex-row gap-4 items-center [&>.checkbox]:hover:bg-neutral-100"
         >
           <ACheckboxRoot
             disabled
-            class="focus-within-within:outline focus-within-within:outline-2 focus-within-within:outline-[#00000066] aspect-square h-6 flex items-center justify-center rounded bg-white shadow data-[disabled]:bg-mauve9"
+            class="focus-within-within:outline focus-within-within:outline-2 focus-within-within:outline-[#00000066] data-[disabled]:bg-mauve9 rounded bg-white flex h-6 aspect-square shadow items-center justify-center"
           >
             <ACheckboxIndicator
-              class="h-full w-full flex items-center justify-center rounded bg-white"
+              class="rounded bg-white flex h-full w-full items-center justify-center"
             >
               <Icon
                 icon="radix-icons:check"
-                class="h-3 w-3 text-black"
+                class="text-black h-3 w-3"
               />
             </ACheckboxIndicator>
           </ACheckboxRoot>
           <span class="select-none">Disabled Checkbox</span>
         </label>
         <label
-          class="flex flex-row items-center gap-4 [&>.checkbox]:hover:bg-neutral-100"
+          class="flex flex-row gap-4 items-center [&>.checkbox]:hover:bg-neutral-100"
         >
           <ACheckboxRoot
             v-model="checkboxThree"
             required
-            class="h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
+            class="shadow-blackA7 hover:bg-violet3 appearance-none outline-none rounded-[4px] bg-white flex h-[25px] w-[25px] shadow-[0_2px_10px] items-center justify-center focus-within:shadow-[0_0_0_2px_black]"
           >
             <ACheckboxIndicator
-              class="h-full w-full flex items-center justify-center rounded bg-white"
+              class="rounded bg-white flex h-full w-full items-center justify-center"
             >
               <Icon
                 icon="radix-icons:check"
-                class="h-3 w-3 text-black"
+                class="text-black h-3 w-3"
               />
             </ACheckboxIndicator>
           </ACheckboxRoot>

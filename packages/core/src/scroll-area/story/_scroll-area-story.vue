@@ -23,18 +23,18 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <AScrollAreaRoot
-    class="h-[200px] w-[200px] overflow-hidden rounded bg-white text-gray-900 shadow-lg"
+    class="text-gray-900 rounded bg-white h-[200px] w-[200px] shadow-lg overflow-hidden"
     style="--scrollbar-size: 10px"
     v-bind="props"
   >
-    <AScrollAreaViewport class="h-full w-full border-[inherit]">
+    <AScrollAreaViewport class="border-[inherit] h-full w-full">
       <div class="p-5">
         <slot />
       </div>
     </AScrollAreaViewport>
     <AScrollAreaScrollbar
       v-if="vertical"
-      class="flex touch-none select-none bg-black/10 p-0.5 transition data-[orientation=vertical]:w-[var(--scrollbar-size)] hover:bg-black/20"
+      class="p-0.5 bg-black/10 flex select-none transition touch-none hover:bg-black/20 data-[orientation=vertical]:w-[var(--scrollbar-size)]"
       :class="[animated
         && 'data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut']"
       orientation="vertical"
@@ -44,13 +44,13 @@ const props = withDefaults(defineProps<Props>(), {
           animated
             && 'data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut'
         "
-        class="relative flex-1 rounded-[var(--scrollbar-size)] bg-gray-400"
+        class="rounded-[var(--scrollbar-size)] bg-gray-400 flex-1 relative"
       />
     </AScrollAreaScrollbar>
 
     <AScrollAreaScrollbar
       v-if="horizontal"
-      class="flex touch-none select-none bg-black/10 p-0.5 transition data-[orientation=horizontal]:h-[var(--scrollbar-size)] data-[orientation=horizontal]:flex-col hover:bg-black/20"
+      class="p-0.5 bg-black/10 flex select-none transition touch-none hover:bg-black/20 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-[var(--scrollbar-size)]"
       :class="[animated
         && 'data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut']"
       orientation="horizontal"
@@ -60,7 +60,7 @@ const props = withDefaults(defineProps<Props>(), {
           animated
             && 'data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut'
         "
-        class="relative flex-1 rounded-[var(--scrollbar-size)] bg-gray-400"
+        class="rounded-[var(--scrollbar-size)] bg-gray-400 flex-1 relative"
       />
     </AScrollAreaScrollbar>
 

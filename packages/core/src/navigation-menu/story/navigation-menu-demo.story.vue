@@ -25,35 +25,35 @@ const currentTrigger = ref('');
       <div class="h-[600px] w-full">
         <ANavigationMenuRoot
           v-model="currentTrigger"
-          class="relative z-[1] w-full flex justify-center"
+          class="flex w-full justify-center relative z-[1]"
         >
-          <ANavigationMenuList class="center m-0 flex list-none border rounded-lg bg-white p-1 shadow-sm">
+          <ANavigationMenuList class="center m-0 p-1 list-none border rounded-lg bg-white flex shadow-sm">
             <ANavigationMenuItem>
               <ANavigationMenuTrigger
-                class="group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-sm text-grass11 font-medium leading-none outline-none hover:bg-green3 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+                class="group text-grass11 hover:bg-green3 focus:shadow-green7 text-sm leading-none font-medium px-3 py-2 outline-none rounded-[4px] flex gap-[2px] select-none items-center justify-between focus:shadow-[0_0_0_2px]"
               >
                 Learn
                 <Icon
                   icon="radix-icons:caret-down"
-                  class="relative top-[1px] text-green10 transition-transform duration-[150ms] ease-in group-data-[state=open]:-rotate-180"
+                  class="text-green10 transition-transform duration-[150ms] ease-in top-[1px] relative group-data-[state=open]:-rotate-180"
                 />
               </ANavigationMenuTrigger>
               <ANavigationMenuContent
-                class="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute left-0 top-0 w-full sm:w-auto"
+                class="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight w-full left-0 top-0 absolute sm:w-auto"
               >
-                <ul class="one grid m-0 list-none gap-x-[10px] p-[22px] sm:grid-cols-[0.75fr_1fr] sm:w-[500px]">
+                <ul class="one m-0 p-[22px] list-none gap-x-[10px] grid sm:grid-cols-[0.75fr_1fr] sm:w-[500px]">
                   <li class="grid row-span-3">
                     <ANavigationMenuLink as-child>
                       <a
-                        class="h-full w-full flex flex-col select-none justify-end rounded-lg bg-stone-900 p-[25px] no-underline outline-none focus:shadow-[0_0_0_2px] focus:shadow-green7"
+                        class="focus:shadow-green7 p-[25px] outline-none rounded-lg bg-stone-900 no-underline flex flex-col h-full w-full select-none justify-end focus:shadow-[0_0_0_2px]"
                         href="/"
                       >
                         <img
                           class="w-16"
                           src="https://akar-ui.com/logo.svg"
                         >
-                        <div class="mb-[7px] mt-4 text-[18px] text-white font-medium leading-[1.2]">akar UI</div>
-                        <p class="text-[14px] text-mauve4 leading-[1.3]">Unstyled, accessible components for Vue.</p>
+                        <div class="text-[18px] text-white leading-[1.2] font-medium mb-[7px] mt-4">akar UI</div>
+                        <p class="text-mauve4 text-[14px] leading-[1.3]">Unstyled, accessible components for Vue.</p>
                       </a>
                     </ANavigationMenuLink>
                   </li>
@@ -82,16 +82,16 @@ const currentTrigger = ref('');
 
             <ANavigationMenuItem>
               <ANavigationMenuTrigger
-                class="group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-sm text-grass11 font-medium leading-none outline-none hover:bg-green3 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+                class="group text-grass11 hover:bg-green3 focus:shadow-green7 text-sm leading-none font-medium px-3 py-2 outline-none rounded-[4px] flex gap-[2px] select-none items-center justify-between focus:shadow-[0_0_0_2px]"
               >
                 Overview
                 <Icon
                   icon="radix-icons:caret-down"
-                  class="relative top-[1px] text-green10 transition-transform duration-[150ms] ease-in group-data-[state=open]:-rotate-180"
+                  class="text-green10 transition-transform duration-[150ms] ease-in top-[1px] relative group-data-[state=open]:-rotate-180"
                 />
               </ANavigationMenuTrigger>
-              <ANavigationMenuContent class="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute left-0 top-0 w-full sm:w-auto">
-                <ul class="grid m-0 list-none gap-x-[10px] p-[22px] sm:grid-flow-col sm:grid-rows-3 sm:w-[600px]">
+              <ANavigationMenuContent class="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight w-full left-0 top-0 absolute sm:w-auto">
+                <ul class="m-0 p-[22px] list-none gap-x-[10px] grid sm:grid-flow-col sm:grid-rows-3 sm:w-[600px]">
                   <ANavigationMenuListItem
                     title="Introduction"
                     href="/docs/primitives/overview/introduction"
@@ -134,7 +134,7 @@ const currentTrigger = ref('');
 
             <ANavigationMenuItem>
               <ANavigationMenuLink
-                class="block select-none rounded-[4px] px-3 py-2 text-sm text-grass11 font-medium leading-none no-underline outline-none hover:bg-green3 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+                class="text-grass11 hover:bg-green3 focus:shadow-green7 text-sm leading-none font-medium px-3 py-2 outline-none rounded-[4px] no-underline block select-none focus:shadow-[0_0_0_2px]"
                 href="https://github.com/unovue/radix-vue"
               >
                 GitHub
@@ -142,15 +142,15 @@ const currentTrigger = ref('');
             </ANavigationMenuItem>
 
             <ANavigationMenuIndicator
-              class="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut transition-[all,transform_250ms_ease] absolute top-full z-[100] mt-[1px] h-[10px] w-[--akar-navigation-menu-indicator-size] flex translate-x-[--akar-navigation-menu-indicator-position] items-end justify-center overflow-hidden duration-200 data-[state=hidden]:opacity-0"
+              class="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut transition-[all,transform_250ms_ease] mt-[1px] flex h-[10px] w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] duration-200 items-end top-full justify-center absolute z-[100] overflow-hidden data-[state=hidden]:opacity-0"
             >
-              <div class="relative top-[70%] h-[12px] w-[12px] rotate-[45deg] border bg-white" />
+              <div class="border bg-white h-[12px] w-[12px] rotate-[45deg] top-[70%] relative" />
             </ANavigationMenuIndicator>
           </ANavigationMenuList>
 
-          <div class="absolute left-0 top-full w-full flex perspective-[2000px] justify-center">
+          <div class="flex w-full perspective-[2000px] left-0 top-full justify-center absolute">
             <ANavigationMenuViewport
-              class="data-[state=open]:animate-scaleIn data-[state=closed]:animate-scaleOut transition-[width,_height] relative mt-[10px] h-[var(--akar-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden border rounded-xl bg-white shadow-sm duration-300 sm:w-[var(--akar-navigation-menu-viewport-width)]"
+              class="data-[state=open]:animate-scaleIn data-[state=closed]:animate-scaleOut transition-[width,_height] mt-[10px] border rounded-xl bg-white h-[var(--akar-navigation-menu-viewport-height)] w-full shadow-sm origin-[top_center] duration-300 relative overflow-hidden sm:w-[var(--akar-navigation-menu-viewport-width)]"
             />
           </div>
         </ANavigationMenuRoot>

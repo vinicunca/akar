@@ -11,9 +11,9 @@ const switchState = ref(true);
     :layout="{ type: 'single', iframe: true }"
   >
     <Variant title="default">
-      <div class="flex items-center gap-2">
+      <div class="flex gap-2 items-center">
         <label
-          class="pr-[15px] text-[15px] text-white leading-none"
+          class="text-[15px] text-white leading-none pr-[15px]"
           for="airplane-mode"
         >
           Airplane mode
@@ -21,10 +21,10 @@ const switchState = ref(true);
         <ASwitchRoot
           id="airplane-mode"
           v-model="switchState"
-          class="relative h-[25px] w-[42px] flex cursor-default rounded-full bg-black/50 shadow-sm data-[state=checked]:bg-black focus-within:outline-black focus-within:outline"
+          class="rounded-full bg-black/50 flex h-[25px] w-[42px] cursor-default shadow-sm relative focus-within:outline-black focus-within:outline data-[state=checked]:bg-black"
         >
           <ASwitchThumb
-            class="my-auto block h-[21px] w-[21px] translate-x-0.5 rounded-full bg-white shadow-sm transition-transform duration-100 will-change-transform data-[state=checked]:translate-x-[19px]"
+            class="my-auto will-change-transform rounded-full bg-white h-[21px] w-[21px] block shadow-sm translate-x-0.5 transition-transform duration-100 data-[state=checked]:translate-x-[19px]"
           />
         </ASwitchRoot>
       </div>

@@ -13,7 +13,7 @@ const value = ref<Array<number>>([]);
     <Variant title="default">
       <APinInputRoot
         v-model="value"
-        class="flex items-center gap-2"
+        class="flex gap-2 items-center"
         type="number"
         :otp="true"
         @complete="e => console.log(e.join(''))"
@@ -21,7 +21,7 @@ const value = ref<Array<number>>([]);
         <APinInputInput
           v-for="(id, index) in 5"
           :key="id"
-          class="h-10 w-10 rounded text-center text-green10 placeholder:text-mauve5"
+          class="text-green10 placeholder:text-mauve5 text-center rounded h-10 w-10"
           :index="index"
         />
       </APinInputRoot>

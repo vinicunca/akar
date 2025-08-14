@@ -12,7 +12,7 @@ import { items } from './constants';
     <Variant title="default">
       <ATreeRoot
         v-slot="{ flattenItems }"
-        class="w-64 select-none list-none rounded-lg bg-white p-2 text-sm text-blackA11 font-medium"
+        class="text-blackA11 text-sm font-medium p-2 list-none rounded-lg bg-white w-64 select-none"
         :items="items"
         :get-key="(item) => item.title"
         multiple
@@ -25,7 +25,7 @@ import { items } from './constants';
           v-slot="{ handleSelect, isSelected, isIndeterminate }"
           v-bind="item.bind"
           :style="{ 'margin-left': `${item.level - 1}rem` }"
-          class="my-0.5 w-max flex items-center rounded px-2 py-1 outline-none data-[selected]:bg-grass4 focus:ring-2 focus:ring-grass9"
+          class="data-[selected]:bg-grass4 focus:ring-grass9 my-0.5 px-2 py-1 outline-none rounded flex w-max items-center focus:ring-2"
           @select="(event) => {
             if (event.detail.originalEvent.type === 'click')
               event.preventDefault()

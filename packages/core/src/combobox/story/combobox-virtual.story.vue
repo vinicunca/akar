@@ -28,20 +28,20 @@ const filteredOptions = computed(() => {
           name="test"
           multiple
         >
-          <AComboboxAnchor class="relative h-[35px] w-[200px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] text-grass11 leading-none shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-mauve3 data-[placeholder]:text-grass9 focus:shadow-[0_0_0_2px] focus:shadow-black">
+          <AComboboxAnchor class="text-grass11 hover:bg-mauve3 data-[placeholder]:text-grass9 text-[13px] leading-none px-[15px] outline-none rounded bg-white inline-flex gap-[5px] h-[35px] w-[200px] shadow-[0_2px_10px] shadow-black/10 items-center justify-between relative focus:shadow-[0_0_0_2px] focus:shadow-black">
             <AComboboxInput
               v-model="filterText"
-              class="bg-transparent text-grass11 outline-none placeholder-gray-400"
+              class="text-grass11 outline-none bg-transparent placeholder-gray-400"
               placeholder="Test"
             />
             <AComboboxTrigger>
               <Icon
                 icon="radix-icons:chevron-down"
-                class="h-4 w-4 text-grass11"
+                class="text-grass11 h-4 w-4"
               />
             </AComboboxTrigger>
           </AComboboxAnchor>
-          <AComboboxContent class="will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade absolute mt-2 w-[200px] rounded bg-white p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
+          <AComboboxContent class="data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade mt-2 p-[5px] will-change-[opacity,transform] rounded bg-white w-[200px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] absolute">
             <AComboboxViewport class="max-h-80 overflow-y-auto">
               <AComboboxVirtualizer
                 v-slot="{ option }"
@@ -50,11 +50,11 @@ const filteredOptions = computed(() => {
                 :text-content="(opt) => opt.label"
               >
                 <AComboboxItem
-                  class="relative h-[25px] w-full flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] text-grass11 leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-grass9 data-[disabled]:text-mauve8 data-[highlighted]:text-grass1 data-[highlighted]:outline-none"
+                  class="text-grass11 data-[highlighted]:bg-grass9 data-[disabled]:text-mauve8 data-[highlighted]:text-grass1 text-[13px] leading-none pl-[25px] pr-[35px] rounded-[3px] flex h-[25px] w-full select-none items-center relative data-[highlighted]:outline-none data-[disabled]:pointer-events-none"
                   :value="option"
                 >
                   <AComboboxItemIndicator
-                    class="absolute left-0 w-[25px] inline-flex items-center justify-center"
+                    class="inline-flex w-[25px] items-center left-0 justify-center absolute"
                   >
                     <Icon icon="radix-icons:check" />
                   </AComboboxItemIndicator>

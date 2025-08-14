@@ -24,7 +24,7 @@ const count = ref(1);
 
 <template>
   <AAccordionRoot
-    class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+    class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
     v-bind="useEmitAsProps(emits)"
     :type="type"
   >

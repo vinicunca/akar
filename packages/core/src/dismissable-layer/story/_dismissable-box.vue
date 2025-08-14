@@ -11,7 +11,7 @@ const buttonRef = ref<HTMLElement>();
 <template>
   <DismissableLayer
     v-bind="{ ...$attrs }"
-    class="rounded-xl bg-gray-100/10 p-4"
+    class="p-4 rounded-xl bg-gray-100/10"
   >
     <button
       ref="buttonRef"
