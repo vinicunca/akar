@@ -37,16 +37,21 @@ export default defineConfig({
             'font-weight': 800,
             'font-size': '2.25em',
             'line-height': 1.1111111,
+            'margin-top': 0,
           },
           'h2': {
             'font-weight': 700,
             'font-size': '1.5em',
+            'margin-top': '2em',
             'line-height': 1.3333333,
           },
           'h3': {
             'font-weight': 600,
             'font-size': '1.25em',
             'line-height': 1.6,
+          },
+          'p': {
+            margin: '1.25em 0',
           },
           'a': {
             'text-decoration': 'none',
@@ -60,13 +65,34 @@ export default defineConfig({
             'border': '1px solid hsl(var(--border))',
             'border-radius': '0.375rem',
             'padding': '0.25rem',
-            'line-height': '1rem',
           },
           'code::before': {
             content: 'normal',
           },
           'code::after': {
             content: 'normal',
+          },
+          'hr + *': {
+            'margin-top': '0',
+          },
+          'h2 + *': {
+            'margin-top': '0',
+          },
+          'h3 + *': {
+            'margin-top': '0',
+          },
+          'h4 + *': {
+            'margin-top': '0',
+          },
+          'strong': {
+            'font-weight': '600',
+          },
+          'p,ul,ol,pre': {
+            'line-height': 'inherit',
+          },
+          'pre code': {
+            'padding': '0',
+            'border-width': '0',
           },
         },
       },

@@ -3,6 +3,7 @@ import type { ShikiTransformer } from 'shiki';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { toKebabCase } from '@vinicunca/perkakas';
 import { components as componentsObj } from 'akar/constant';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -61,7 +62,8 @@ export function createHoverTransformer(): ShikiTransformer {
 
               if (!contentMap.get(value)) {
                 try {
-                  const raw = readFileSync(join(__dirname, `../../content/meta/${value}.md`), 'utf8');
+                  const fileName = toKebabCase(value);
+                  const raw = readFileSync(join(__dirname, `../../content/meta/${fileName}.md`), 'utf8');
 
                   const content = ['PropsTable', 'EmitsTable', 'SlotsTable', 'MethodsTable']
                     .map((tag) => extractAndTransformData(tag, raw))

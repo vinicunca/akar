@@ -2,7 +2,9 @@ import anchor from 'markdown-it-anchor';
 import UnoCSS from 'unocss/vite';
 import { defineConfig, postcssIsolateStyles } from 'vitepress';
 import { akarName, akarShortName, discord, github, ogUrl } from './meta';
+import ComponentPreviewPlugin from './plugins/component-preview';
 import { createHoverTransformer } from './plugins/hover-transformer';
+import InstallationTabsPlugin from './plugins/installation-tabs';
 
 // @unocss-include
 
@@ -450,6 +452,12 @@ export default defineConfig({
         },
       }),
     },
+
+    preConfig(md) {
+      md.use(ComponentPreviewPlugin);
+      md.use(InstallationTabsPlugin);
+    },
+
     codeTransformers: [createHoverTransformer()],
   },
 

@@ -3,7 +3,7 @@ import type vueuse from '@vueuse/core';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { nextTick } from 'vue';
-import ConfigProviderTest from './_config-provider.vue';
+import ConfigProviderTest from './_config-provider.story.vue';
 
 vi.mock('@vueuse/core', async (importOriginal) => {
   const mod: typeof vueuse = await importOriginal();

@@ -70,7 +70,7 @@ const isExamplePage = computed(() => path.value.includes('examples'));
           {{ activeSection?.text }}
         </div>
 
-        <article class="prose prose-stone dark:prose-invert max-w-none w-full">
+        <article class="max-w-none w-full prose prose-stone dark:prose-invert">
           <Content />
         </article>
 
