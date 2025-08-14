@@ -17,6 +17,26 @@ export default defineConfig({
 
       typography: {
         cssExtend: {
+          'h1': {
+            'font-weight': 800,
+            'font-size': '2.25em',
+            'line-height': 1.1111111,
+            'margin-top': 0,
+          },
+          'h2': {
+            'font-weight': 700,
+            'font-size': '1.5em',
+            'margin-top': '2em',
+            'line-height': 1.3333333,
+          },
+          'h3': {
+            'font-weight': 600,
+            'font-size': '1.25em',
+            'line-height': 1.6,
+          },
+          'p': {
+            margin: '1.25em 0',
+          },
           'a': {
             'text-decoration': 'none',
             'font-weight': 600,
