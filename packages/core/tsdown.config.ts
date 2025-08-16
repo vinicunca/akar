@@ -8,7 +8,7 @@ export default defineConfig({
   },
   fromVite: true,
   platform: 'neutral',
-  format: ['esm', 'cjs'],
+  format: ['esm'],
   tsconfig: './tsconfig.app.json',
   dts: { vue: true, sourcemap: true },
   sourcemap: true,

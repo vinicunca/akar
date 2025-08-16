@@ -27,31 +27,21 @@
     "pub:release": "cd packages/core && pnpm pub:release"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@vinicunca/eslint-config": "^3.21.0",
-    "bumpp": "^10.2.2",
-    "eslint": "^9.32.0",
-    "eslint-plugin-format": "^1.0.1",
-    "lint-staged": "^16.1.4",
-    "simple-git-hooks": "^2.13.1",
-    "tsx": "^4.20.3",
-    "typescript": "5.8.3"
+    "@commitlint/cli": "catalog:base",
+    "@commitlint/config-conventional": "catalog:base",
+    "@vinicunca/eslint-config": "catalog:base",
+    "bumpp": "catalog:base",
+    "eslint": "catalog:base",
+    "eslint-plugin-format": "catalog:base",
+    "lint-staged": "catalog:base",
+    "simple-git-hooks": "catalog:base",
+    "tsx": "catalog:base",
+    "typescript": "catalog:base"
   },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "simple-git-hooks",
-      "unrs-resolver"
-    ],
-    "patchedDependencies": {
-      "vitepress@1.6.3": "patches/vitepress@1.6.3.patch"
-    }
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
