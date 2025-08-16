@@ -1,0 +1,988 @@
+[
+  {
+    "timestamp": "2025-08-16T00:38:44.450Z",
+    "commit": "6ed81bb",
+    "branch": "feat/update-deps",
+    "sizes": {
+      "accordion/accordion-content.cjs": {
+        "bytes": 37925,
+        "kb": 37.04
+      },
+      "accordion/accordion-content.js": {
+        "bytes": 34294,
+        "kb": 33.49
+      },
+      "accordion/accordion-header.cjs": {
+        "bytes": 1813,
+        "kb": 1.77
+      },
+      "accordion/accordion-header.js": {
+        "bytes": 1486,
+        "kb": 1.45
+      },
+      "accordion/accordion-trigger.cjs": {
+        "bytes": 4329,
+        "kb": 4.23
+      },
+      "accordion/accordion-trigger.js": {
+        "bytes": 3690,
+        "kb": 3.6
+      },
+      "avatar/avatar-fallback.cjs": {
+        "bytes": 3415,
+        "kb": 3.33
+      },
+      "avatar/avatar-fallback.js": {
+        "bytes": 2672,
+        "kb": 2.61
+      },
+      "avatar/avatar-image.cjs": {
+        "bytes": 4010,
+        "kb": 3.92
+      },
+      "avatar/avatar-image.js": {
+        "bytes": 3591,
+        "kb": 3.51
+      },
+      "calendar/calendar-cell-trigger.cjs": {
+        "bytes": 8981,
+        "kb": 8.77
+      },
+      "calendar/calendar-cell-trigger.js": {
+        "bytes": 8113,
+        "kb": 7.92
+      },
+      "calendar/calendar-cell.cjs": {
+        "bytes": 41456,
+        "kb": 40.48
+      },
+      "calendar/calendar-cell.js": {
+        "bytes": 35410,
+        "kb": 34.58
+      },
+      "calendar/calendar-grid-body.cjs": {
+        "bytes": 1320,
+        "kb": 1.29
+      },
+      "calendar/calendar-grid-body.js": {
+        "bytes": 1068,
+        "kb": 1.04
+      },
+      "calendar/calendar-grid-head.cjs": {
+        "bytes": 1314,
+        "kb": 1.28
+      },
+      "calendar/calendar-grid-head.js": {
+        "bytes": 1047,
+        "kb": 1.02
+      },
+      "calendar/calendar-grid-row.cjs": {
+        "bytes": 1308,
+        "kb": 1.28
+      },
+      "calendar/calendar-grid-row.js": {
+        "bytes": 1057,
+        "kb": 1.03
+      },
+      "calendar/calendar-grid.cjs": {
+        "bytes": 1868,
+        "kb": 1.82
+      },
+      "calendar/calendar-grid.js": {
+        "bytes": 1561,
+        "kb": 1.52
+      },
+      "calendar/calendar-head-cell.cjs": {
+        "bytes": 1317,
+        "kb": 1.29
+      },
+      "calendar/calendar-head-cell.js": {
+        "bytes": 1065,
+        "kb": 1.04
+      },
+      "calendar/calendar-header.cjs": {
+        "bytes": 1291,
+        "kb": 1.26
+      },
+      "calendar/calendar-header.js": {
+        "bytes": 1042,
+        "kb": 1.02
+      },
+      "calendar/calendar-heading.cjs": {
+        "bytes": 1696,
+        "kb": 1.66
+      },
+      "calendar/calendar-heading.js": {
+        "bytes": 1383,
+        "kb": 1.35
+      },
+      "calendar/calendar-next.cjs": {
+        "bytes": 2127,
+        "kb": 2.08
+      },
+      "calendar/calendar-next.js": {
+        "bytes": 1825,
+        "kb": 1.78
+      },
+      "calendar/calendar-prev.cjs": {
+        "bytes": 2131,
+        "kb": 2.08
+      },
+      "calendar/calendar-prev.js": {
+        "bytes": 1829,
+        "kb": 1.79
+      },
+      "checkbox/checkbox-group-root.cjs": {
+        "bytes": 20450,
+        "kb": 19.97
+      },
+      "checkbox/checkbox-group-root.js": {
+        "bytes": 17702,
+        "kb": 17.29
+      },
+      "checkbox/checkbox-indicator.cjs": {
+        "bytes": 11768,
+        "kb": 11.49
+      },
+      "checkbox/checkbox-indicator.js": {
+        "bytes": 10193,
+        "kb": 9.95
+      },
+      "combobox/combobox-anchor.cjs": {
+        "bytes": 4056,
+        "kb": 3.96
+      },
+      "combobox/combobox-anchor.js": {
+        "bytes": 3226,
+        "kb": 3.15
+      },
+      "combobox/combobox-arrow.cjs": {
+        "bytes": 70879,
+        "kb": 69.22
+      },
+      "combobox/combobox-arrow.js": {
+        "bytes": 64084,
+        "kb": 62.58
+      },
+      "combobox/combobox-cancel.cjs": {
+        "bytes": 1799,
+        "kb": 1.76
+      },
+      "combobox/combobox-cancel.js": {
+        "bytes": 1478,
+        "kb": 1.44
+      },
+      "combobox/combobox-content.cjs": {
+        "bytes": 5686,
+        "kb": 5.55
+      },
+      "combobox/combobox-content.js": {
+        "bytes": 5083,
+        "kb": 4.96
+      },
+      "combobox/combobox-empty.cjs": {
+        "bytes": 1726,
+        "kb": 1.69
+      },
+      "combobox/combobox-empty.js": {
+        "bytes": 1471,
+        "kb": 1.44
+      },
+      "combobox/combobox-group.cjs": {
+        "bytes": 3894,
+        "kb": 3.8
+      },
+      "combobox/combobox-group.js": {
+        "bytes": 3022,
+        "kb": 2.95
+      },
+      "combobox/combobox-input.cjs": {
+        "bytes": 7919,
+        "kb": 7.73
+      },
+      "combobox/combobox-input.js": {
+        "bytes": 7123,
+        "kb": 6.96
+      },
+      "combobox/combobox-item-indicator.cjs": {
+        "bytes": 2744,
+        "kb": 2.68
+      },
+      "combobox/combobox-item-indicator.js": {
+        "bytes": 2255,
+        "kb": 2.2
+      },
+      "combobox/combobox-item.cjs": {
+        "bytes": 8112,
+        "kb": 7.92
+      },
+      "combobox/combobox-item.js": {
+        "bytes": 7123,
+        "kb": 6.96
+      },
+      "combobox/combobox-label.cjs": {
+        "bytes": 1708,
+        "kb": 1.67
+      },
+      "combobox/combobox-label.js": {
+        "bytes": 1351,
+        "kb": 1.32
+      },
+      "combobox/combobox-portal.cjs": {
+        "bytes": 2514,
+        "kb": 2.46
+      },
+      "combobox/combobox-portal.js": {
+        "bytes": 2130,
+        "kb": 2.08
+      },
+      "combobox/combobox-separator.cjs": {
+        "bytes": 1351,
+        "kb": 1.32
+      },
+      "combobox/combobox-separator.js": {
+        "bytes": 1066,
+        "kb": 1.04
+      },
+      "combobox/combobox-trigger.cjs": {
+        "bytes": 2580,
+        "kb": 2.52
+      },
+      "combobox/combobox-trigger.js": {
+        "bytes": 2207,
+        "kb": 2.16
+      },
+      "combobox/combobox-viewport.cjs": {
+        "bytes": 2910,
+        "kb": 2.84
+      },
+      "combobox/combobox-viewport.js": {
+        "bytes": 2407,
+        "kb": 2.35
+      },
+      "combobox/combobox-virtualizer.cjs": {
+        "bytes": 10135,
+        "kb": 9.9
+      },
+      "combobox/combobox-virtualizer.js": {
+        "bytes": 9184,
+        "kb": 8.97
+      },
+      "component/base-separator.cjs": {
+        "bytes": 2124,
+        "kb": 2.07
+      },
+      "component/base-separator.js": {
+        "bytes": 1844,
+        "kb": 1.8
+      },
+      "composables/use-window-splitter-behavior.cjs": {
+        "bytes": 4691,
+        "kb": 4.58
+      },
+      "composables/use-window-splitter-behavior.js": {
+        "bytes": 3620,
+        "kb": 3.54
+      },
+      "composables/use-window-splitter-panel-group-behavior.cjs": {
+        "bytes": 18086,
+        "kb": 17.66
+      },
+      "composables/use-window-splitter-panel-group-behavior.js": {
+        "bytes": 14881,
+        "kb": 14.53
+      },
+      "constant.cjs": {
+        "bytes": 227,
+        "kb": 0.22
+      },
+      "constant.js": {
+        "bytes": 130,
+        "kb": 0.13
+      },
+      "constant/components.cjs": {
+        "bytes": 7646,
+        "kb": 7.47
+      },
+      "constant/components.js": {
+        "bytes": 7442,
+        "kb": 7.27
+      },
+      "constant/index.cjs": {
+        "bytes": 0,
+        "kb": 0
+      },
+      "constant/index.js": {
+        "bytes": 0,
+        "kb": 0
+      },
+      "context-menu/context-menu-arrow.cjs": {
+        "bytes": 2753,
+        "kb": 2.69
+      },
+      "context-menu/context-menu-arrow.js": {
+        "bytes": 2275,
+        "kb": 2.22
+      },
+      "context-menu/context-menu-checkbox-item.cjs": {
+        "bytes": 38512,
+        "kb": 37.61
+      },
+      "context-menu/context-menu-checkbox-item.js": {
+        "bytes": 33686,
+        "kb": 32.9
+      },
+      "context-menu/context-menu-content.cjs": {
+        "bytes": 14995,
+        "kb": 14.64
+      },
+      "context-menu/context-menu-content.js": {
+        "bytes": 13312,
+        "kb": 13
+      },
+      "context-menu/context-menu-group.cjs": {
+        "bytes": 2280,
+        "kb": 2.23
+      },
+      "context-menu/context-menu-group.js": {
+        "bytes": 1844,
+        "kb": 1.8
+      },
+      "context-menu/context-menu-item-indicator.cjs": {
+        "bytes": 1634,
+        "kb": 1.6
+      },
+      "context-menu/context-menu-item-indicator.js": {
+        "bytes": 1309,
+        "kb": 1.28
+      },
+      "context-menu/context-menu-item.cjs": {
+        "bytes": 1868,
+        "kb": 1.82
+      },
+      "context-menu/context-menu-item.js": {
+        "bytes": 1479,
+        "kb": 1.44
+      },
+      "context-menu/context-menu-label.cjs": {
+        "bytes": 2313,
+        "kb": 2.26
+      },
+      "context-menu/context-menu-label.js": {
+        "bytes": 1856,
+        "kb": 1.81
+      },
+      "context-menu/context-menu-portal.cjs": {
+        "bytes": 2475,
+        "kb": 2.42
+      },
+      "context-menu/context-menu-portal.js": {
+        "bytes": 2046,
+        "kb": 2
+      },
+      "context-menu/context-menu-radio-group.cjs": {
+        "bytes": 3596,
+        "kb": 3.51
+      },
+      "context-menu/context-menu-radio-group.js": {
+        "bytes": 2821,
+        "kb": 2.75
+      },
+      "context-menu/context-menu-radio-item.cjs": {
+        "bytes": 3961,
+        "kb": 3.87
+      },
+      "context-menu/context-menu-radio-item.js": {
+        "bytes": 3265,
+        "kb": 3.19
+      },
+      "context-menu/context-menu-separator.cjs": {
+        "bytes": 2401,
+        "kb": 2.34
+      },
+      "context-menu/context-menu-separator.js": {
+        "bytes": 1957,
+        "kb": 1.91
+      },
+      "context-menu/context-menu-sub-content.cjs": {
+        "bytes": 8116,
+        "kb": 7.93
+      },
+      "context-menu/context-menu-sub-content.js": {
+        "bytes": 7134,
+        "kb": 6.97
+      },
+      "context-menu/context-menu-sub-trigger.cjs": {
+        "bytes": 8127,
+        "kb": 7.94
+      },
+      "context-menu/context-menu-sub-trigger.js": {
+        "bytes": 7018,
+        "kb": 6.85
+      },
+      "context-menu/context-menu-sub.cjs": {
+        "bytes": 3966,
+        "kb": 3.87
+      },
+      "context-menu/context-menu-sub.js": {
+        "bytes": 3138,
+        "kb": 3.06
+      },
+      "context-menu/context-menu-trigger.cjs": {
+        "bytes": 4142,
+        "kb": 4.04
+      },
+      "context-menu/context-menu-trigger.js": {
+        "bytes": 3669,
+        "kb": 3.58
+      },
+      "date-field/date-field-input.cjs": {
+        "bytes": 51125,
+        "kb": 49.93
+      },
+      "date-field/date-field-input.js": {
+        "bytes": 47767,
+        "kb": 46.65
+      },
+      "date-picker/date-picker-anchor.cjs": {
+        "bytes": 4829,
+        "kb": 4.72
+      },
+      "date-picker/date-picker-anchor.js": {
+        "bytes": 3949,
+        "kb": 3.86
+      },
+      "date-picker/date-picker-arrow.cjs": {
+        "bytes": 2775,
+        "kb": 2.71
+      },
+      "date-picker/date-picker-arrow.js": {
+        "bytes": 2295,
+        "kb": 2.24
+      },
+      "date-picker/date-picker-calendar.cjs": {
+        "bytes": 732245,
+        "kb": 715.08
+      },
+      "date-picker/date-picker-calendar.js": {
+        "bytes": 644988,
+        "kb": 629.87
+      },
+      "date.cjs": {
+        "bytes": 1908,
+        "kb": 1.86
+      },
+      "date.js": {
+        "bytes": 885,
+        "kb": 0.86
+      },
+      "index.cjs": {
+        "bytes": 37859,
+        "kb": 36.97
+      },
+      "index.js": {
+        "bytes": 27191,
+        "kb": 26.55
+      },
+      "rolldown-runtime.cjs": {
+        "bytes": 1090,
+        "kb": 1.06
+      }
+    },
+    "totalFiles": 121,
+    "totalSize": 2326315
+  },
+  {
+    "timestamp": "2025-08-16T00:41:26.836Z",
+    "commit": "6ed81bb",
+    "branch": "feat/update-deps",
+    "sizes": {
+      "accordion/accordion-content.cjs": {
+        "bytes": 37925,
+        "kb": 37.04
+      },
+      "accordion/accordion-content.js": {
+        "bytes": 34294,
+        "kb": 33.49
+      },
+      "accordion/accordion-header.cjs": {
+        "bytes": 1813,
+        "kb": 1.77
+      },
+      "accordion/accordion-header.js": {
+        "bytes": 1486,
+        "kb": 1.45
+      },
+      "accordion/accordion-trigger.cjs": {
+        "bytes": 4329,
+        "kb": 4.23
+      },
+      "accordion/accordion-trigger.js": {
+        "bytes": 3690,
+        "kb": 3.6
+      },
+      "avatar/avatar-fallback.cjs": {
+        "bytes": 3415,
+        "kb": 3.33
+      },
+      "avatar/avatar-fallback.js": {
+        "bytes": 2672,
+        "kb": 2.61
+      },
+      "avatar/avatar-image.cjs": {
+        "bytes": 4010,
+        "kb": 3.92
+      },
+      "avatar/avatar-image.js": {
+        "bytes": 3591,
+        "kb": 3.51
+      },
+      "calendar/calendar-cell-trigger.cjs": {
+        "bytes": 8981,
+        "kb": 8.77
+      },
+      "calendar/calendar-cell-trigger.js": {
+        "bytes": 8113,
+        "kb": 7.92
+      },
+      "calendar/calendar-cell.cjs": {
+        "bytes": 41456,
+        "kb": 40.48
+      },
+      "calendar/calendar-cell.js": {
+        "bytes": 35410,
+        "kb": 34.58
+      },
+      "calendar/calendar-grid-body.cjs": {
+        "bytes": 1320,
+        "kb": 1.29
+      },
+      "calendar/calendar-grid-body.js": {
+        "bytes": 1068,
+        "kb": 1.04
+      },
+      "calendar/calendar-grid-head.cjs": {
+        "bytes": 1314,
+        "kb": 1.28
+      },
+      "calendar/calendar-grid-head.js": {
+        "bytes": 1047,
+        "kb": 1.02
+      },
+      "calendar/calendar-grid-row.cjs": {
+        "bytes": 1308,
+        "kb": 1.28
+      },
+      "calendar/calendar-grid-row.js": {
+        "bytes": 1057,
+        "kb": 1.03
+      },
+      "calendar/calendar-grid.cjs": {
+        "bytes": 1868,
+        "kb": 1.82
+      },
+      "calendar/calendar-grid.js": {
+        "bytes": 1561,
+        "kb": 1.52
+      },
+      "calendar/calendar-head-cell.cjs": {
+        "bytes": 1317,
+        "kb": 1.29
+      },
+      "calendar/calendar-head-cell.js": {
+        "bytes": 1065,
+        "kb": 1.04
+      },
+      "calendar/calendar-header.cjs": {
+        "bytes": 1291,
+        "kb": 1.26
+      },
+      "calendar/calendar-header.js": {
+        "bytes": 1042,
+        "kb": 1.02
+      },
+      "calendar/calendar-heading.cjs": {
+        "bytes": 1696,
+        "kb": 1.66
+      },
+      "calendar/calendar-heading.js": {
+        "bytes": 1383,
+        "kb": 1.35
+      },
+      "calendar/calendar-next.cjs": {
+        "bytes": 2127,
+        "kb": 2.08
+      },
+      "calendar/calendar-next.js": {
+        "bytes": 1825,
+        "kb": 1.78
+      },
+      "calendar/calendar-prev.cjs": {
+        "bytes": 2131,
+        "kb": 2.08
+      },
+      "calendar/calendar-prev.js": {
+        "bytes": 1829,
+        "kb": 1.79
+      },
+      "checkbox/checkbox-group-root.cjs": {
+        "bytes": 20450,
+        "kb": 19.97
+      },
+      "checkbox/checkbox-group-root.js": {
+        "bytes": 17702,
+        "kb": 17.29
+      },
+      "checkbox/checkbox-indicator.cjs": {
+        "bytes": 11768,
+        "kb": 11.49
+      },
+      "checkbox/checkbox-indicator.js": {
+        "bytes": 10193,
+        "kb": 9.95
+      },
+      "combobox/combobox-anchor.cjs": {
+        "bytes": 4056,
+        "kb": 3.96
+      },
+      "combobox/combobox-anchor.js": {
+        "bytes": 3226,
+        "kb": 3.15
+      },
+      "combobox/combobox-arrow.cjs": {
+        "bytes": 70879,
+        "kb": 69.22
+      },
+      "combobox/combobox-arrow.js": {
+        "bytes": 64084,
+        "kb": 62.58
+      },
+      "combobox/combobox-cancel.cjs": {
+        "bytes": 1799,
+        "kb": 1.76
+      },
+      "combobox/combobox-cancel.js": {
+        "bytes": 1478,
+        "kb": 1.44
+      },
+      "combobox/combobox-content.cjs": {
+        "bytes": 5686,
+        "kb": 5.55
+      },
+      "combobox/combobox-content.js": {
+        "bytes": 5083,
+        "kb": 4.96
+      },
+      "combobox/combobox-empty.cjs": {
+        "bytes": 1726,
+        "kb": 1.69
+      },
+      "combobox/combobox-empty.js": {
+        "bytes": 1471,
+        "kb": 1.44
+      },
+      "combobox/combobox-group.cjs": {
+        "bytes": 3894,
+        "kb": 3.8
+      },
+      "combobox/combobox-group.js": {
+        "bytes": 3022,
+        "kb": 2.95
+      },
+      "combobox/combobox-input.cjs": {
+        "bytes": 7919,
+        "kb": 7.73
+      },
+      "combobox/combobox-input.js": {
+        "bytes": 7123,
+        "kb": 6.96
+      },
+      "combobox/combobox-item-indicator.cjs": {
+        "bytes": 2744,
+        "kb": 2.68
+      },
+      "combobox/combobox-item-indicator.js": {
+        "bytes": 2255,
+        "kb": 2.2
+      },
+      "combobox/combobox-item.cjs": {
+        "bytes": 8112,
+        "kb": 7.92
+      },
+      "combobox/combobox-item.js": {
+        "bytes": 7123,
+        "kb": 6.96
+      },
+      "combobox/combobox-label.cjs": {
+        "bytes": 1708,
+        "kb": 1.67
+      },
+      "combobox/combobox-label.js": {
+        "bytes": 1351,
+        "kb": 1.32
+      },
+      "combobox/combobox-portal.cjs": {
+        "bytes": 2514,
+        "kb": 2.46
+      },
+      "combobox/combobox-portal.js": {
+        "bytes": 2130,
+        "kb": 2.08
+      },
+      "combobox/combobox-separator.cjs": {
+        "bytes": 1351,
+        "kb": 1.32
+      },
+      "combobox/combobox-separator.js": {
+        "bytes": 1066,
+        "kb": 1.04
+      },
+      "combobox/combobox-trigger.cjs": {
+        "bytes": 2580,
+        "kb": 2.52
+      },
+      "combobox/combobox-trigger.js": {
+        "bytes": 2207,
+        "kb": 2.16
+      },
+      "combobox/combobox-viewport.cjs": {
+        "bytes": 2910,
+        "kb": 2.84
+      },
+      "combobox/combobox-viewport.js": {
+        "bytes": 2407,
+        "kb": 2.35
+      },
+      "combobox/combobox-virtualizer.cjs": {
+        "bytes": 10135,
+        "kb": 9.9
+      },
+      "combobox/combobox-virtualizer.js": {
+        "bytes": 9184,
+        "kb": 8.97
+      },
+      "component/base-separator.cjs": {
+        "bytes": 2124,
+        "kb": 2.07
+      },
+      "component/base-separator.js": {
+        "bytes": 1844,
+        "kb": 1.8
+      },
+      "composables/use-window-splitter-behavior.cjs": {
+        "bytes": 4691,
+        "kb": 4.58
+      },
+      "composables/use-window-splitter-behavior.js": {
+        "bytes": 3620,
+        "kb": 3.54
+      },
+      "composables/use-window-splitter-panel-group-behavior.cjs": {
+        "bytes": 18086,
+        "kb": 17.66
+      },
+      "composables/use-window-splitter-panel-group-behavior.js": {
+        "bytes": 14881,
+        "kb": 14.53
+      },
+      "constant.cjs": {
+        "bytes": 227,
+        "kb": 0.22
+      },
+      "constant.js": {
+        "bytes": 130,
+        "kb": 0.13
+      },
+      "constant/components.cjs": {
+        "bytes": 7646,
+        "kb": 7.47
+      },
+      "constant/components.js": {
+        "bytes": 7442,
+        "kb": 7.27
+      },
+      "constant/index.cjs": {
+        "bytes": 0,
+        "kb": 0
+      },
+      "constant/index.js": {
+        "bytes": 0,
+        "kb": 0
+      },
+      "context-menu/context-menu-arrow.cjs": {
+        "bytes": 2753,
+        "kb": 2.69
+      },
+      "context-menu/context-menu-arrow.js": {
+        "bytes": 2275,
+        "kb": 2.22
+      },
+      "context-menu/context-menu-checkbox-item.cjs": {
+        "bytes": 38512,
+        "kb": 37.61
+      },
+      "context-menu/context-menu-checkbox-item.js": {
+        "bytes": 33686,
+        "kb": 32.9
+      },
+      "context-menu/context-menu-content.cjs": {
+        "bytes": 14995,
+        "kb": 14.64
+      },
+      "context-menu/context-menu-content.js": {
+        "bytes": 13312,
+        "kb": 13
+      },
+      "context-menu/context-menu-group.cjs": {
+        "bytes": 2280,
+        "kb": 2.23
+      },
+      "context-menu/context-menu-group.js": {
+        "bytes": 1844,
+        "kb": 1.8
+      },
+      "context-menu/context-menu-item-indicator.cjs": {
+        "bytes": 1634,
+        "kb": 1.6
+      },
+      "context-menu/context-menu-item-indicator.js": {
+        "bytes": 1309,
+        "kb": 1.28
+      },
+      "context-menu/context-menu-item.cjs": {
+        "bytes": 1868,
+        "kb": 1.82
+      },
+      "context-menu/context-menu-item.js": {
+        "bytes": 1479,
+        "kb": 1.44
+      },
+      "context-menu/context-menu-label.cjs": {
+        "bytes": 2313,
+        "kb": 2.26
+      },
+      "context-menu/context-menu-label.js": {
+        "bytes": 1856,
+        "kb": 1.81
+      },
+      "context-menu/context-menu-portal.cjs": {
+        "bytes": 2475,
+        "kb": 2.42
+      },
+      "context-menu/context-menu-portal.js": {
+        "bytes": 2046,
+        "kb": 2
+      },
+      "context-menu/context-menu-radio-group.cjs": {
+        "bytes": 3596,
+        "kb": 3.51
+      },
+      "context-menu/context-menu-radio-group.js": {
+        "bytes": 2821,
+        "kb": 2.75
+      },
+      "context-menu/context-menu-radio-item.cjs": {
+        "bytes": 3961,
+        "kb": 3.87
+      },
+      "context-menu/context-menu-radio-item.js": {
+        "bytes": 3265,
+        "kb": 3.19
+      },
+      "context-menu/context-menu-separator.cjs": {
+        "bytes": 2401,
+        "kb": 2.34
+      },
+      "context-menu/context-menu-separator.js": {
+        "bytes": 1957,
+        "kb": 1.91
+      },
+      "context-menu/context-menu-sub-content.cjs": {
+        "bytes": 8116,
+        "kb": 7.93
+      },
+      "context-menu/context-menu-sub-content.js": {
+        "bytes": 7134,
+        "kb": 6.97
+      },
+      "context-menu/context-menu-sub-trigger.cjs": {
+        "bytes": 8127,
+        "kb": 7.94
+      },
+      "context-menu/context-menu-sub-trigger.js": {
+        "bytes": 7018,
+        "kb": 6.85
+      },
+      "context-menu/context-menu-sub.cjs": {
+        "bytes": 3966,
+        "kb": 3.87
+      },
+      "context-menu/context-menu-sub.js": {
+        "bytes": 3138,
+        "kb": 3.06
+      },
+      "context-menu/context-menu-trigger.cjs": {
+        "bytes": 4142,
+        "kb": 4.04
+      },
+      "context-menu/context-menu-trigger.js": {
+        "bytes": 3669,
+        "kb": 3.58
+      },
+      "date-field/date-field-input.cjs": {
+        "bytes": 51125,
+        "kb": 49.93
+      },
+      "date-field/date-field-input.js": {
+        "bytes": 47767,
+        "kb": 46.65
+      },
+      "date-picker/date-picker-anchor.cjs": {
+        "bytes": 4829,
+        "kb": 4.72
+      },
+      "date-picker/date-picker-anchor.js": {
+        "bytes": 3949,
+        "kb": 3.86
+      },
+      "date-picker/date-picker-arrow.cjs": {
+        "bytes": 2775,
+        "kb": 2.71
+      },
+      "date-picker/date-picker-arrow.js": {
+        "bytes": 2295,
+        "kb": 2.24
+      },
+      "date-picker/date-picker-calendar.cjs": {
+        "bytes": 732245,
+        "kb": 715.08
+      },
+      "date-picker/date-picker-calendar.js": {
+        "bytes": 644988,
+        "kb": 629.87
+      },
+      "date.cjs": {
+        "bytes": 1908,
+        "kb": 1.86
+      },
+      "date.js": {
+        "bytes": 885,
+        "kb": 0.86
+      },
+      "index.cjs": {
+        "bytes": 37859,
+        "kb": 36.97
+      },
+      "index.js": {
+        "bytes": 27191,
+        "kb": 26.55
+      },
+      "rolldown-runtime.cjs": {
+        "bytes": 1090,
+        "kb": 1.06
+      }
+    },
+    "totalFiles": 121,
+    "totalSize": 2326315
+  }
+]
