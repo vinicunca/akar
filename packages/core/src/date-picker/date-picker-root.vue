@@ -38,9 +38,13 @@ type DatePickerRootContext = {
   onPlaceholderChange: (date: DateValue) => void;
   dir: Ref<Direction>;
   step: Ref<DateStep | undefined>;
+  closeOnSelect: Ref<boolean>;
 };
 
-export type ADatePickerRootProps = ADateFieldRootProps & APopoverRootProps & Pick<ACalendarRootProps, 'fixedWeeks' | 'isDateDisabled' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn'>;
+export type ADatePickerRootProps = ADateFieldRootProps & APopoverRootProps & Pick<ACalendarRootProps, 'fixedWeeks' | 'isDateDisabled' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn'> & {
+  /** Whether or not to close the popover on date select */
+  closeOnSelect?: boolean;
+};
 
 export type ADatePickerRootEmits = {
   /** Event handler called whenever the model value changes */
@@ -85,6 +89,7 @@ const props = withDefaults(
     locale: 'en',
     isDateDisabled: undefined,
     isDateUnavailable: undefined,
+    closeOnSelect: false,
   },
 );
 
@@ -115,6 +120,7 @@ const {
   defaultValue,
   dir: propDir,
   step,
+  closeOnSelect,
 } = toRefs(props);
 
 const dir = useDirection(propDir);
@@ -148,6 +154,10 @@ watch(
   (value) => {
     if (value && value.compare(placeholder.value) !== 0) {
       placeholder.value = value.copy();
+    }
+
+    if (closeOnSelect.value) {
+      open.value = false;
     }
   },
 );
@@ -192,6 +202,7 @@ provideDatePickerRootContext({
   onPlaceholderChange(date: DateValue) {
     placeholder.value = date.copy();
   },
+  closeOnSelect,
 });
 </script>
 
