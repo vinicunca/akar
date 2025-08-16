@@ -1,490 +1,1790 @@
 {
-  "timestamp": "2025-08-16T00:30:32.444Z",
+  "timestamp": "2025-08-16T14:20:12.112Z",
   "commit": "local",
   "sizes": {
-    "accordion/accordion-content.cjs": {
-      "bytes": 37925,
-      "kb": 37.04
-    },
     "accordion/accordion-content.js": {
-      "bytes": 34294,
-      "kb": 33.49
-    },
-    "accordion/accordion-header.cjs": {
-      "bytes": 1813,
-      "kb": 1.77
+      "bytes": 2170,
+      "kb": 2.12
     },
     "accordion/accordion-header.js": {
-      "bytes": 1486,
-      "kb": 1.45
+      "bytes": 1615,
+      "kb": 1.58
     },
-    "accordion/accordion-trigger.cjs": {
-      "bytes": 4329,
-      "kb": 4.23
+    "accordion/accordion-item.js": {
+      "bytes": 3784,
+      "kb": 3.7
+    },
+    "accordion/accordion-root.js": {
+      "bytes": 2564,
+      "kb": 2.5
     },
     "accordion/accordion-trigger.js": {
-      "bytes": 3690,
-      "kb": 3.6
-    },
-    "avatar/avatar-fallback.cjs": {
-      "bytes": 3415,
-      "kb": 3.33
+      "bytes": 2318,
+      "kb": 2.26
     },
     "avatar/avatar-fallback.js": {
-      "bytes": 2672,
-      "kb": 2.61
-    },
-    "avatar/avatar-image.cjs": {
-      "bytes": 4010,
-      "kb": 3.92
+      "bytes": 1787,
+      "kb": 1.75
     },
     "avatar/avatar-image.js": {
-      "bytes": 3591,
-      "kb": 3.51
+      "bytes": 2081,
+      "kb": 2.03
     },
-    "calendar/calendar-cell-trigger.cjs": {
-      "bytes": 8981,
-      "kb": 8.77
+    "avatar/avatar-root.js": {
+      "bytes": 1305,
+      "kb": 1.27
+    },
+    "avatar/utils.js": {
+      "bytes": 1690,
+      "kb": 1.65
     },
     "calendar/calendar-cell-trigger.js": {
-      "bytes": 8113,
-      "kb": 7.92
-    },
-    "calendar/calendar-cell.cjs": {
-      "bytes": 41456,
-      "kb": 40.48
+      "bytes": 7973,
+      "kb": 7.79
     },
     "calendar/calendar-cell.js": {
-      "bytes": 35410,
-      "kb": 34.58
-    },
-    "calendar/calendar-grid-body.cjs": {
-      "bytes": 1320,
-      "kb": 1.29
+      "bytes": 1591,
+      "kb": 1.55
     },
     "calendar/calendar-grid-body.js": {
-      "bytes": 1068,
+      "bytes": 1060,
       "kb": 1.04
     },
-    "calendar/calendar-grid-head.cjs": {
-      "bytes": 1314,
-      "kb": 1.28
-    },
     "calendar/calendar-grid-head.js": {
-      "bytes": 1047,
-      "kb": 1.02
-    },
-    "calendar/calendar-grid-row.cjs": {
-      "bytes": 1308,
-      "kb": 1.28
+      "bytes": 1039,
+      "kb": 1.01
     },
     "calendar/calendar-grid-row.js": {
+      "bytes": 1049,
+      "kb": 1.02
+    },
+    "calendar/calendar-grid.js": {
+      "bytes": 1553,
+      "kb": 1.52
+    },
+    "calendar/calendar-head-cell.js": {
       "bytes": 1057,
       "kb": 1.03
     },
-    "calendar/calendar-grid.cjs": {
-      "bytes": 1868,
-      "kb": 1.82
-    },
-    "calendar/calendar-grid.js": {
-      "bytes": 1561,
-      "kb": 1.52
-    },
-    "calendar/calendar-head-cell.cjs": {
-      "bytes": 1317,
-      "kb": 1.29
-    },
-    "calendar/calendar-head-cell.js": {
-      "bytes": 1065,
-      "kb": 1.04
-    },
-    "calendar/calendar-header.cjs": {
-      "bytes": 1291,
-      "kb": 1.26
-    },
     "calendar/calendar-header.js": {
-      "bytes": 1042,
-      "kb": 1.02
-    },
-    "calendar/calendar-heading.cjs": {
-      "bytes": 1696,
-      "kb": 1.66
+      "bytes": 1034,
+      "kb": 1.01
     },
     "calendar/calendar-heading.js": {
-      "bytes": 1383,
-      "kb": 1.35
-    },
-    "calendar/calendar-next.cjs": {
-      "bytes": 2127,
-      "kb": 2.08
+      "bytes": 1375,
+      "kb": 1.34
     },
     "calendar/calendar-next.js": {
-      "bytes": 1825,
-      "kb": 1.78
-    },
-    "calendar/calendar-prev.cjs": {
-      "bytes": 2131,
-      "kb": 2.08
+      "bytes": 1817,
+      "kb": 1.77
     },
     "calendar/calendar-prev.js": {
-      "bytes": 1829,
-      "kb": 1.79
+      "bytes": 1821,
+      "kb": 1.78
     },
-    "checkbox/checkbox-group-root.cjs": {
-      "bytes": 20450,
-      "kb": 19.97
+    "calendar/calendar-root.js": {
+      "bytes": 8433,
+      "kb": 8.24
+    },
+    "calendar/calendar.utils.js": {
+      "bytes": 345,
+      "kb": 0.34
+    },
+    "calendar/use-calendar.js": {
+      "bytes": 9141,
+      "kb": 8.93
     },
     "checkbox/checkbox-group-root.js": {
-      "bytes": 17702,
-      "kb": 17.29
-    },
-    "checkbox/checkbox-indicator.cjs": {
-      "bytes": 11768,
-      "kb": 11.49
+      "bytes": 3444,
+      "kb": 3.36
     },
     "checkbox/checkbox-indicator.js": {
-      "bytes": 10193,
-      "kb": 9.95
+      "bytes": 1985,
+      "kb": 1.94
     },
-    "combobox/combobox-anchor.cjs": {
-      "bytes": 4056,
-      "kb": 3.96
+    "checkbox/checkbox-root.js": {
+      "bytes": 5419,
+      "kb": 5.29
+    },
+    "checkbox/utils.js": {
+      "bytes": 321,
+      "kb": 0.31
+    },
+    "collapsible/collapsible-content.js": {
+      "bytes": 4042,
+      "kb": 3.95
+    },
+    "collapsible/collapsible-root.js": {
+      "bytes": 2300,
+      "kb": 2.25
+    },
+    "collapsible/collapsible-trigger.js": {
+      "bytes": 1814,
+      "kb": 1.77
+    },
+    "collection/collection.js": {
+      "bytes": 2556,
+      "kb": 2.5
     },
     "combobox/combobox-anchor.js": {
-      "bytes": 3226,
-      "kb": 3.15
-    },
-    "combobox/combobox-arrow.cjs": {
-      "bytes": 70879,
-      "kb": 69.22
-    },
-    "combobox/combobox-arrow.js": {
-      "bytes": 64084,
-      "kb": 62.58
-    },
-    "combobox/combobox-cancel.cjs": {
-      "bytes": 1799,
-      "kb": 1.76
-    },
-    "combobox/combobox-cancel.js": {
-      "bytes": 1478,
-      "kb": 1.44
-    },
-    "combobox/combobox-content.cjs": {
-      "bytes": 5686,
-      "kb": 5.55
-    },
-    "combobox/combobox-content.js": {
-      "bytes": 5083,
-      "kb": 4.96
-    },
-    "combobox/combobox-empty.cjs": {
-      "bytes": 1726,
-      "kb": 1.69
-    },
-    "combobox/combobox-empty.js": {
       "bytes": 1471,
       "kb": 1.44
     },
-    "combobox/combobox-group.cjs": {
-      "bytes": 3894,
-      "kb": 3.8
+    "combobox/combobox-arrow.js": {
+      "bytes": 1734,
+      "kb": 1.69
+    },
+    "combobox/combobox-cancel.js": {
+      "bytes": 1519,
+      "kb": 1.48
+    },
+    "combobox/combobox-content-impl.js": {
+      "bytes": 6101,
+      "kb": 5.96
+    },
+    "combobox/combobox-content.js": {
+      "bytes": 3211,
+      "kb": 3.14
+    },
+    "combobox/combobox-empty.js": {
+      "bytes": 1462,
+      "kb": 1.43
     },
     "combobox/combobox-group.js": {
-      "bytes": 3022,
-      "kb": 2.95
-    },
-    "combobox/combobox-input.cjs": {
-      "bytes": 7919,
-      "kb": 7.73
+      "bytes": 2086,
+      "kb": 2.04
     },
     "combobox/combobox-input.js": {
-      "bytes": 7123,
-      "kb": 6.96
-    },
-    "combobox/combobox-item-indicator.cjs": {
-      "bytes": 2744,
-      "kb": 2.68
+      "bytes": 4382,
+      "kb": 4.28
     },
     "combobox/combobox-item-indicator.js": {
-      "bytes": 2255,
-      "kb": 2.2
-    },
-    "combobox/combobox-item.cjs": {
-      "bytes": 8112,
-      "kb": 7.92
+      "bytes": 1150,
+      "kb": 1.12
     },
     "combobox/combobox-item.js": {
-      "bytes": 7123,
-      "kb": 6.96
-    },
-    "combobox/combobox-label.cjs": {
-      "bytes": 1708,
-      "kb": 1.67
+      "bytes": 3414,
+      "kb": 3.33
     },
     "combobox/combobox-label.js": {
-      "bytes": 1351,
-      "kb": 1.32
-    },
-    "combobox/combobox-portal.cjs": {
-      "bytes": 2514,
-      "kb": 2.46
+      "bytes": 1431,
+      "kb": 1.4
     },
     "combobox/combobox-portal.js": {
-      "bytes": 2130,
-      "kb": 2.08
+      "bytes": 1137,
+      "kb": 1.11
     },
-    "combobox/combobox-separator.cjs": {
-      "bytes": 1351,
-      "kb": 1.32
+    "combobox/combobox-root.js": {
+      "bytes": 7166,
+      "kb": 7
     },
     "combobox/combobox-separator.js": {
-      "bytes": 1066,
-      "kb": 1.04
-    },
-    "combobox/combobox-trigger.cjs": {
-      "bytes": 2580,
-      "kb": 2.52
+      "bytes": 1108,
+      "kb": 1.08
     },
     "combobox/combobox-trigger.js": {
-      "bytes": 2207,
-      "kb": 2.16
-    },
-    "combobox/combobox-viewport.cjs": {
-      "bytes": 2910,
-      "kb": 2.84
+      "bytes": 2248,
+      "kb": 2.2
     },
     "combobox/combobox-viewport.js": {
-      "bytes": 2407,
-      "kb": 2.35
-    },
-    "combobox/combobox-virtualizer.cjs": {
-      "bytes": 10135,
-      "kb": 9.9
+      "bytes": 2240,
+      "kb": 2.19
     },
     "combobox/combobox-virtualizer.js": {
-      "bytes": 9184,
-      "kb": 8.97
+      "bytes": 1418,
+      "kb": 1.38
     },
-    "component/base-separator.cjs": {
-      "bytes": 2124,
-      "kb": 2.07
+    "component/arrow.js": {
+      "bytes": 1785,
+      "kb": 1.74
     },
     "component/base-separator.js": {
-      "bytes": 1844,
-      "kb": 1.8
-    },
-    "composables/use-window-splitter-behavior.cjs": {
-      "bytes": 4691,
-      "kb": 4.58
+      "bytes": 1836,
+      "kb": 1.79
     },
     "composables/use-window-splitter-behavior.js": {
-      "bytes": 3620,
-      "kb": 3.54
-    },
-    "composables/use-window-splitter-panel-group-behavior.cjs": {
-      "bytes": 18086,
-      "kb": 17.66
+      "bytes": 1895,
+      "kb": 1.85
     },
     "composables/use-window-splitter-panel-group-behavior.js": {
-      "bytes": 14881,
-      "kb": 14.53
+      "bytes": 4156,
+      "kb": 4.06
     },
-    "constant.cjs": {
-      "bytes": 227,
-      "kb": 0.22
+    "config-provider/config-provider.js": {
+      "bytes": 1419,
+      "kb": 1.39
     },
     "constant.js": {
       "bytes": 130,
       "kb": 0.13
     },
-    "constant/components.cjs": {
-      "bytes": 7646,
-      "kb": 7.47
-    },
     "constant/components.js": {
       "bytes": 7442,
       "kb": 7.27
-    },
-    "constant/index.cjs": {
-      "bytes": 0,
-      "kb": 0
     },
     "constant/index.js": {
       "bytes": 0,
       "kb": 0
     },
-    "context-menu/context-menu-arrow.cjs": {
-      "bytes": 2753,
-      "kb": 2.69
-    },
     "context-menu/context-menu-arrow.js": {
-      "bytes": 2275,
-      "kb": 2.22
-    },
-    "context-menu/context-menu-checkbox-item.cjs": {
-      "bytes": 38512,
-      "kb": 37.61
+      "bytes": 1359,
+      "kb": 1.33
     },
     "context-menu/context-menu-checkbox-item.js": {
-      "bytes": 33686,
-      "kb": 32.9
-    },
-    "context-menu/context-menu-content.cjs": {
-      "bytes": 14995,
-      "kb": 14.64
+      "bytes": 1653,
+      "kb": 1.61
     },
     "context-menu/context-menu-content.js": {
-      "bytes": 13312,
-      "kb": 13
-    },
-    "context-menu/context-menu-group.cjs": {
-      "bytes": 2280,
-      "kb": 2.23
+      "bytes": 3671,
+      "kb": 3.58
     },
     "context-menu/context-menu-group.js": {
-      "bytes": 1844,
-      "kb": 1.8
-    },
-    "context-menu/context-menu-item-indicator.cjs": {
-      "bytes": 1634,
-      "kb": 1.6
+      "bytes": 1149,
+      "kb": 1.12
     },
     "context-menu/context-menu-item-indicator.js": {
-      "bytes": 1309,
+      "bytes": 1306,
       "kb": 1.28
     },
-    "context-menu/context-menu-item.cjs": {
-      "bytes": 1868,
-      "kb": 1.82
-    },
     "context-menu/context-menu-item.js": {
-      "bytes": 1479,
-      "kb": 1.44
-    },
-    "context-menu/context-menu-label.cjs": {
-      "bytes": 2313,
-      "kb": 2.26
+      "bytes": 1465,
+      "kb": 1.43
     },
     "context-menu/context-menu-label.js": {
-      "bytes": 1856,
-      "kb": 1.81
-    },
-    "context-menu/context-menu-portal.cjs": {
-      "bytes": 2475,
-      "kb": 2.42
+      "bytes": 1149,
+      "kb": 1.12
     },
     "context-menu/context-menu-portal.js": {
-      "bytes": 2046,
-      "kb": 2
-    },
-    "context-menu/context-menu-radio-group.cjs": {
-      "bytes": 3596,
-      "kb": 3.51
+      "bytes": 1182,
+      "kb": 1.15
     },
     "context-menu/context-menu-radio-group.js": {
-      "bytes": 2821,
-      "kb": 2.75
-    },
-    "context-menu/context-menu-radio-item.cjs": {
-      "bytes": 3961,
-      "kb": 3.87
+      "bytes": 1498,
+      "kb": 1.46
     },
     "context-menu/context-menu-radio-item.js": {
-      "bytes": 3265,
-      "kb": 3.19
+      "bytes": 1582,
+      "kb": 1.54
     },
-    "context-menu/context-menu-separator.cjs": {
-      "bytes": 2401,
-      "kb": 2.34
+    "context-menu/context-menu-root.js": {
+      "bytes": 1996,
+      "kb": 1.95
     },
     "context-menu/context-menu-separator.js": {
-      "bytes": 1957,
-      "kb": 1.91
-    },
-    "context-menu/context-menu-sub-content.cjs": {
-      "bytes": 8116,
-      "kb": 7.93
+      "bytes": 1193,
+      "kb": 1.17
     },
     "context-menu/context-menu-sub-content.js": {
-      "bytes": 7134,
-      "kb": 6.97
-    },
-    "context-menu/context-menu-sub-trigger.cjs": {
-      "bytes": 8127,
-      "kb": 7.94
+      "bytes": 2984,
+      "kb": 2.91
     },
     "context-menu/context-menu-sub-trigger.js": {
-      "bytes": 7018,
-      "kb": 6.85
+      "bytes": 1327,
+      "kb": 1.3
     },
-    "context-menu/context-menu-sub.cjs": {
+    "context-menu/context-menu-sub.js": {
+      "bytes": 1480,
+      "kb": 1.45
+    },
+    "context-menu/context-menu-trigger.js": {
+      "bytes": 3622,
+      "kb": 3.54
+    },
+    "context-menu/utils.js": {
+      "bytes": 180,
+      "kb": 0.18
+    },
+    "date-field/date-field-input.js": {
+      "bytes": 2916,
+      "kb": 2.85
+    },
+    "date-field/date-field-root.js": {
+      "bytes": 9251,
+      "kb": 9.03
+    },
+    "date-picker/date-picker-anchor.js": {
+      "bytes": 1126,
+      "kb": 1.1
+    },
+    "date-picker/date-picker-arrow.js": {
+      "bytes": 1221,
+      "kb": 1.19
+    },
+    "date-picker/date-picker-calendar.js": {
+      "bytes": 2599,
+      "kb": 2.54
+    },
+    "date-picker/date-picker-cell-trigger.js": {
+      "bytes": 1294,
+      "kb": 1.26
+    },
+    "date-picker/date-picker-cell.js": {
+      "bytes": 1102,
+      "kb": 1.08
+    },
+    "date-picker/date-picker-close.js": {
+      "bytes": 1061,
+      "kb": 1.04
+    },
+    "date-picker/date-picker-content.js": {
+      "bytes": 3254,
+      "kb": 3.18
+    },
+    "date-picker/date-picker-field.js": {
+      "bytes": 2386,
+      "kb": 2.33
+    },
+    "date-picker/date-picker-grid-body.js": {
+      "bytes": 1109,
+      "kb": 1.08
+    },
+    "date-picker/date-picker-grid-head.js": {
+      "bytes": 1109,
+      "kb": 1.08
+    },
+    "date-picker/date-picker-grid-row.js": {
+      "bytes": 1098,
+      "kb": 1.07
+    },
+    "date-picker/date-picker-grid.js": {
+      "bytes": 1054,
+      "kb": 1.03
+    },
+    "date-picker/date-picker-head-cell.js": {
+      "bytes": 1109,
+      "kb": 1.08
+    },
+    "date-picker/date-picker-header.js": {
+      "bytes": 1076,
+      "kb": 1.05
+    },
+    "date-picker/date-picker-heading.js": {
+      "bytes": 1214,
+      "kb": 1.19
+    },
+    "date-picker/date-picker-input.js": {
+      "bytes": 1121,
+      "kb": 1.09
+    },
+    "date-picker/date-picker-next.js": {
+      "bytes": 1167,
+      "kb": 1.14
+    },
+    "date-picker/date-picker-prev.js": {
+      "bytes": 1167,
+      "kb": 1.14
+    },
+    "date-picker/date-picker-root.js": {
+      "bytes": 5847,
+      "kb": 5.71
+    },
+    "date-picker/date-picker-trigger.js": {
+      "bytes": 1415,
+      "kb": 1.38
+    },
+    "date-range-field/date-range-field-input.js": {
+      "bytes": 3207,
+      "kb": 3.13
+    },
+    "date-range-field/date-range-field-root.js": {
+      "bytes": 12299,
+      "kb": 12.01
+    },
+    "date-range-picker/date-range-picker-anchor.js": {
+      "bytes": 1186,
+      "kb": 1.16
+    },
+    "date-range-picker/date-range-picker-arrow.js": {
+      "bytes": 1281,
+      "kb": 1.25
+    },
+    "date-range-picker/date-range-picker-calendar.js": {
+      "bytes": 3209,
+      "kb": 3.13
+    },
+    "date-range-picker/date-range-picker-cell-trigger.js": {
+      "bytes": 1458,
+      "kb": 1.42
+    },
+    "date-range-picker/date-range-picker-cell.js": {
+      "bytes": 1186,
+      "kb": 1.16
+    },
+    "date-range-picker/date-range-picker-close.js": {
+      "bytes": 1121,
+      "kb": 1.09
+    },
+    "date-range-picker/date-range-picker-content.js": {
+      "bytes": 3314,
+      "kb": 3.24
+    },
+    "date-range-picker/date-range-picker-field.js": {
+      "bytes": 2744,
+      "kb": 2.68
+    },
+    "date-range-picker/date-range-picker-grid-body.js": {
+      "bytes": 1193,
+      "kb": 1.17
+    },
+    "date-range-picker/date-range-picker-grid-head.js": {
+      "bytes": 1193,
+      "kb": 1.17
+    },
+    "date-range-picker/date-range-picker-grid-row.js": {
+      "bytes": 1182,
+      "kb": 1.15
+    },
+    "date-range-picker/date-range-picker-grid.js": {
+      "bytes": 1138,
+      "kb": 1.11
+    },
+    "date-range-picker/date-range-picker-head-cell.js": {
+      "bytes": 1193,
+      "kb": 1.17
+    },
+    "date-range-picker/date-range-picker-header.js": {
+      "bytes": 1160,
+      "kb": 1.13
+    },
+    "date-range-picker/date-range-picker-heading.js": {
+      "bytes": 1298,
+      "kb": 1.27
+    },
+    "date-range-picker/date-range-picker-input.js": {
+      "bytes": 1255,
+      "kb": 1.23
+    },
+    "date-range-picker/date-range-picker-next.js": {
+      "bytes": 1251,
+      "kb": 1.22
+    },
+    "date-range-picker/date-range-picker-prev.js": {
+      "bytes": 1251,
+      "kb": 1.22
+    },
+    "date-range-picker/date-range-picker-root.js": {
+      "bytes": 6588,
+      "kb": 6.43
+    },
+    "date-range-picker/date-range-picker-trigger.js": {
+      "bytes": 1491,
+      "kb": 1.46
+    },
+    "date.js": {
+      "bytes": 952,
+      "kb": 0.93
+    },
+    "date/calendar.date.js": {
+      "bytes": 5019,
+      "kb": 4.9
+    },
+    "date/comparators.date.js": {
+      "bytes": 5883,
+      "kb": 5.75
+    },
+    "date/comparators.js": {
+      "bytes": 1765,
+      "kb": 1.72
+    },
+    "date/index.js": {
+      "bytes": 0,
+      "kb": 0
+    },
+    "date/parser.js": {
+      "bytes": 5034,
+      "kb": 4.92
+    },
+    "date/parts.js": {
+      "bytes": 864,
+      "kb": 0.84
+    },
+    "date/placeholders.js": {
+      "bytes": 6240,
+      "kb": 6.09
+    },
+    "date/segment.js": {
+      "bytes": 1262,
+      "kb": 1.23
+    },
+    "date/use-date-field.js": {
+      "bytes": 23957,
+      "kb": 23.4
+    },
+    "date/utils.js": {
+      "bytes": 1394,
+      "kb": 1.36
+    },
+    "dialog/dialog-close.js": {
+      "bytes": 1321,
+      "kb": 1.29
+    },
+    "dialog/dialog-content-impl.js": {
+      "bytes": 3945,
+      "kb": 3.85
+    },
+    "dialog/dialog-content-modal.js": {
+      "bytes": 2654,
+      "kb": 2.59
+    },
+    "dialog/dialog-content-non-modal.js": {
+      "bytes": 2820,
+      "kb": 2.75
+    },
+    "dialog/dialog-content.js": {
+      "bytes": 2407,
+      "kb": 2.35
+    },
+    "dialog/dialog-description.js": {
+      "bytes": 1253,
+      "kb": 1.22
+    },
+    "dialog/dialog-overlay-impl.js": {
+      "bytes": 1450,
+      "kb": 1.42
+    },
+    "dialog/dialog-overlay.js": {
+      "bytes": 1698,
+      "kb": 1.66
+    },
+    "dialog/dialog-portal.js": {
+      "bytes": 1117,
+      "kb": 1.09
+    },
+    "dialog/dialog-root.js": {
+      "bytes": 1762,
+      "kb": 1.72
+    },
+    "dialog/dialog-title.js": {
+      "bytes": 1200,
+      "kb": 1.17
+    },
+    "dialog/dialog-trigger.js": {
+      "bytes": 1903,
+      "kb": 1.86
+    },
+    "dialog/utils.js": {
+      "bytes": 1209,
+      "kb": 1.18
+    },
+    "dismissable-layer/dismissable-layer-branch.js": {
+      "bytes": 1439,
+      "kb": 1.41
+    },
+    "dismissable-layer/dismissable-layer.js": {
+      "bytes": 5076,
+      "kb": 4.96
+    },
+    "dismissable-layer/utils.js": {
+      "bytes": 5518,
+      "kb": 5.39
+    },
+    "drawer/drawer-content.js": {
+      "bytes": 2928,
+      "kb": 2.86
+    },
+    "drawer/drawer-handle.js": {
+      "bytes": 3190,
+      "kb": 3.12
+    },
+    "drawer/drawer-overlay.js": {
+      "bytes": 1186,
+      "kb": 1.16
+    },
+    "drawer/drawer-root-nested.js": {
+      "bytes": 2760,
+      "kb": 2.7
+    },
+    "drawer/drawer-root.js": {
       "bytes": 3966,
       "kb": 3.87
     },
-    "context-menu/context-menu-sub.js": {
-      "bytes": 3138,
-      "kb": 3.06
+    "drawer/drawer.browser.js": {
+      "bytes": 208,
+      "kb": 0.2
     },
-    "context-menu/context-menu-trigger.cjs": {
-      "bytes": 4142,
-      "kb": 4.04
+    "drawer/drawer.constants.js": {
+      "bytes": 539,
+      "kb": 0.53
     },
-    "context-menu/context-menu-trigger.js": {
-      "bytes": 3669,
-      "kb": 3.58
+    "drawer/drawer.context.js": {
+      "bytes": 313,
+      "kb": 0.31
     },
-    "date-field/date-field-input.cjs": {
-      "bytes": 51125,
-      "kb": 49.93
+    "drawer/drawer.controls.js": {
+      "bytes": 14272,
+      "kb": 13.94
     },
-    "date-field/date-field-input.js": {
-      "bytes": 47767,
-      "kb": 46.65
+    "drawer/drawer.utils.js": {
+      "bytes": 2088,
+      "kb": 2.04
     },
-    "date-picker/date-picker-anchor.cjs": {
-      "bytes": 4829,
-      "kb": 4.72
+    "drawer/use-position-fixed.js": {
+      "bytes": 2592,
+      "kb": 2.53
     },
-    "date-picker/date-picker-anchor.js": {
-      "bytes": 3949,
-      "kb": 3.86
+    "drawer/use-scale-background.js": {
+      "bytes": 2273,
+      "kb": 2.22
     },
-    "date-picker/date-picker-arrow.cjs": {
-      "bytes": 2775,
-      "kb": 2.71
+    "drawer/use-snap-points.js": {
+      "bytes": 8002,
+      "kb": 7.81
     },
-    "date-picker/date-picker-arrow.js": {
-      "bytes": 2295,
-      "kb": 2.24
+    "dropdown-menu/dropdown-menu-arrow.js": {
+      "bytes": 1369,
+      "kb": 1.34
     },
-    "date-picker/date-picker-calendar.cjs": {
-      "bytes": 732245,
-      "kb": 715.08
+    "dropdown-menu/dropdown-menu-checkbox-item.js": {
+      "bytes": 1663,
+      "kb": 1.62
     },
-    "date-picker/date-picker-calendar.js": {
-      "bytes": 644988,
-      "kb": 629.87
+    "dropdown-menu/dropdown-menu-content.js": {
+      "bytes": 4286,
+      "kb": 4.19
     },
-    "date.cjs": {
-      "bytes": 1908,
-      "kb": 1.86
+    "dropdown-menu/dropdown-menu-group.js": {
+      "bytes": 1159,
+      "kb": 1.13
     },
-    "date.js": {
-      "bytes": 885,
-      "kb": 0.86
+    "dropdown-menu/dropdown-menu-item-indicator.js": {
+      "bytes": 1316,
+      "kb": 1.29
     },
-    "index.cjs": {
-      "bytes": 37859,
-      "kb": 36.97
+    "dropdown-menu/dropdown-menu-item.js": {
+      "bytes": 1475,
+      "kb": 1.44
+    },
+    "dropdown-menu/dropdown-menu-label.js": {
+      "bytes": 1159,
+      "kb": 1.13
+    },
+    "dropdown-menu/dropdown-menu-portal.js": {
+      "bytes": 1192,
+      "kb": 1.16
+    },
+    "dropdown-menu/dropdown-menu-radio-group.js": {
+      "bytes": 1508,
+      "kb": 1.47
+    },
+    "dropdown-menu/dropdown-menu-radio-item.js": {
+      "bytes": 1583,
+      "kb": 1.55
+    },
+    "dropdown-menu/dropdown-menu-root.js": {
+      "bytes": 2336,
+      "kb": 2.28
+    },
+    "dropdown-menu/dropdown-menu-separator.js": {
+      "bytes": 1203,
+      "kb": 1.17
+    },
+    "dropdown-menu/dropdown-menu-sub-content.js": {
+      "bytes": 2999,
+      "kb": 2.93
+    },
+    "dropdown-menu/dropdown-menu-sub-trigger.js": {
+      "bytes": 1337,
+      "kb": 1.31
+    },
+    "dropdown-menu/dropdown-menu-sub.js": {
+      "bytes": 1499,
+      "kb": 1.46
+    },
+    "dropdown-menu/dropdown-menu-trigger.js": {
+      "bytes": 3145,
+      "kb": 3.07
+    },
+    "editable/editable-area.js": {
+      "bytes": 1720,
+      "kb": 1.68
+    },
+    "editable/editable-cancel-trigger.js": {
+      "bytes": 1713,
+      "kb": 1.67
+    },
+    "editable/editable-edit-trigger.js": {
+      "bytes": 1691,
+      "kb": 1.65
+    },
+    "editable/editable-input.js": {
+      "bytes": 3255,
+      "kb": 3.18
+    },
+    "editable/editable-preview.js": {
+      "bytes": 2120,
+      "kb": 2.07
+    },
+    "editable/editable-root.js": {
+      "bytes": 5996,
+      "kb": 5.86
+    },
+    "editable/editable-submit-trigger.js": {
+      "bytes": 1713,
+      "kb": 1.67
+    },
+    "focus-scope/focus-scope.js": {
+      "bytes": 5686,
+      "kb": 5.55
+    },
+    "focus-scope/stack.js": {
+      "bytes": 1068,
+      "kb": 1.04
+    },
+    "focus-scope/utils.js": {
+      "bytes": 3059,
+      "kb": 2.99
+    },
+    "hover-card/hover-card-arrow.js": {
+      "bytes": 1347,
+      "kb": 1.32
+    },
+    "hover-card/hover-card-content-impl.js": {
+      "bytes": 6026,
+      "kb": 5.88
+    },
+    "hover-card/hover-card-content.js": {
+      "bytes": 3073,
+      "kb": 3
+    },
+    "hover-card/hover-card-portal.js": {
+      "bytes": 1157,
+      "kb": 1.13
+    },
+    "hover-card/hover-card-root.js": {
+      "bytes": 2703,
+      "kb": 2.64
+    },
+    "hover-card/hover-card-trigger.js": {
+      "bytes": 2391,
+      "kb": 2.33
+    },
+    "hover-card/utils.js": {
+      "bytes": 700,
+      "kb": 0.68
     },
     "index.js": {
-      "bytes": 27191,
-      "kb": 26.55
+      "bytes": 45033,
+      "kb": 43.98
     },
-    "rolldown-runtime.cjs": {
-      "bytes": 1090,
+    "index2.js": {
+      "bytes": 0,
+      "kb": 0
+    },
+    "label/label.js": {
+      "bytes": 1182,
+      "kb": 1.15
+    },
+    "listbox/listbox-content.js": {
+      "bytes": 2556,
+      "kb": 2.5
+    },
+    "listbox/listbox-filter.js": {
+      "bytes": 3220,
+      "kb": 3.14
+    },
+    "listbox/listbox-group-label.js": {
+      "bytes": 1234,
+      "kb": 1.21
+    },
+    "listbox/listbox-group.js": {
+      "bytes": 1342,
+      "kb": 1.31
+    },
+    "listbox/listbox-item-indicator.js": {
+      "bytes": 1386,
+      "kb": 1.35
+    },
+    "listbox/listbox-item.js": {
+      "bytes": 4242,
+      "kb": 4.14
+    },
+    "listbox/listbox-root.js": {
+      "bytes": 10936,
+      "kb": 10.68
+    },
+    "listbox/listbox-virtualizer.js": {
+      "bytes": 8226,
+      "kb": 8.03
+    },
+    "listbox/utils.js": {
+      "bytes": 969,
+      "kb": 0.95
+    },
+    "menu/menu-anchor.js": {
+      "bytes": 1052,
+      "kb": 1.03
+    },
+    "menu/menu-arrow.js": {
+      "bytes": 1147,
+      "kb": 1.12
+    },
+    "menu/menu-checkbox-item.js": {
+      "bytes": 2033,
+      "kb": 1.99
+    },
+    "menu/menu-content-impl.js": {
+      "bytes": 10451,
+      "kb": 10.21
+    },
+    "menu/menu-content.js": {
+      "bytes": 3354,
+      "kb": 3.28
+    },
+    "menu/menu-group.js": {
+      "bytes": 938,
+      "kb": 0.92
+    },
+    "menu/menu-item-impl.js": {
+      "bytes": 3100,
+      "kb": 3.03
+    },
+    "menu/menu-item-indicator.js": {
+      "bytes": 1944,
+      "kb": 1.9
+    },
+    "menu/menu-item.js": {
+      "bytes": 2927,
+      "kb": 2.86
+    },
+    "menu/menu-label.js": {
+      "bytes": 986,
+      "kb": 0.96
+    },
+    "menu/menu-portal.js": {
+      "bytes": 1097,
+      "kb": 1.07
+    },
+    "menu/menu-radio-group.js": {
+      "bytes": 1613,
+      "kb": 1.58
+    },
+    "menu/menu-radio-item.js": {
+      "bytes": 1943,
+      "kb": 1.9
+    },
+    "menu/menu-root-content-modal.js": {
+      "bytes": 3249,
+      "kb": 3.17
+    },
+    "menu/menu-root-content-non-modal.js": {
+      "bytes": 2799,
+      "kb": 2.73
+    },
+    "menu/menu-root.js": {
+      "bytes": 2071,
+      "kb": 2.02
+    },
+    "menu/menu-separator.js": {
+      "bytes": 1019,
+      "kb": 1
+    },
+    "menu/menu-sub-content.js": {
+      "bytes": 4654,
+      "kb": 4.54
+    },
+    "menu/menu-sub-trigger.js": {
+      "bytes": 5207,
+      "kb": 5.08
+    },
+    "menu/menu-sub.js": {
+      "bytes": 1916,
+      "kb": 1.87
+    },
+    "menu/utils.js": {
+      "bytes": 1981,
+      "kb": 1.93
+    },
+    "navigation-menu/navigation-menu-content-impl.js": {
+      "bytes": 6662,
+      "kb": 6.51
+    },
+    "navigation-menu/navigation-menu-content.js": {
+      "bytes": 3865,
+      "kb": 3.77
+    },
+    "navigation-menu/navigation-menu-indicator.js": {
+      "bytes": 3216,
+      "kb": 3.14
+    },
+    "navigation-menu/navigation-menu-item.js": {
+      "bytes": 4065,
+      "kb": 3.97
+    },
+    "navigation-menu/navigation-menu-link.js": {
+      "bytes": 2249,
+      "kb": 2.2
+    },
+    "navigation-menu/navigation-menu-list.js": {
+      "bytes": 1772,
+      "kb": 1.73
+    },
+    "navigation-menu/navigation-menu-root.js": {
+      "bytes": 5085,
+      "kb": 4.97
+    },
+    "navigation-menu/navigation-menu-sub.js": {
+      "bytes": 3252,
+      "kb": 3.18
+    },
+    "navigation-menu/navigation-menu-trigger.js": {
+      "bytes": 5763,
+      "kb": 5.63
+    },
+    "navigation-menu/navigation-menu-viewport.js": {
+      "bytes": 5876,
+      "kb": 5.74
+    },
+    "navigation-menu/utils.js": {
+      "bytes": 2420,
+      "kb": 2.36
+    },
+    "number-field/number-field-decrement.js": {
+      "bytes": 2335,
+      "kb": 2.28
+    },
+    "number-field/number-field-increment.js": {
+      "bytes": 2335,
+      "kb": 2.28
+    },
+    "number-field/number-field-input.js": {
+      "bytes": 4870,
+      "kb": 4.76
+    },
+    "number-field/number-field-root.js": {
+      "bytes": 7416,
+      "kb": 7.24
+    },
+    "number-field/utils.js": {
+      "bytes": 2618,
+      "kb": 2.56
+    },
+    "pagination/pagination-ellipsis.js": {
+      "bytes": 1202,
+      "kb": 1.17
+    },
+    "pagination/pagination-first.js": {
+      "bytes": 1656,
+      "kb": 1.62
+    },
+    "pagination/pagination-last.js": {
+      "bytes": 1705,
+      "kb": 1.67
+    },
+    "pagination/pagination-list-item.js": {
+      "bytes": 2019,
+      "kb": 1.97
+    },
+    "pagination/pagination-list.js": {
+      "bytes": 1522,
+      "kb": 1.49
+    },
+    "pagination/pagination-next.js": {
+      "bytes": 1704,
+      "kb": 1.66
+    },
+    "pagination/pagination-prev.js": {
+      "bytes": 1682,
+      "kb": 1.64
+    },
+    "pagination/pagination-root.js": {
+      "bytes": 2412,
+      "kb": 2.36
+    },
+    "pagination/utils.js": {
+      "bytes": 2554,
+      "kb": 2.49
+    },
+    "pin-input/pin-input-input.js": {
+      "bytes": 6600,
+      "kb": 6.45
+    },
+    "pin-input/pin-input-root.js": {
+      "bytes": 3932,
+      "kb": 3.84
+    },
+    "popover/popover-anchor.js": {
+      "bytes": 1463,
+      "kb": 1.43
+    },
+    "popover/popover-arrow.js": {
+      "bytes": 1317,
+      "kb": 1.29
+    },
+    "popover/popover-close.js": {
+      "bytes": 1387,
+      "kb": 1.35
+    },
+    "popover/popover-content-impl.js": {
+      "bytes": 4893,
+      "kb": 4.78
+    },
+    "popover/popover-content-modal.js": {
+      "bytes": 3856,
+      "kb": 3.77
+    },
+    "popover/popover-content-non-modal.js": {
+      "bytes": 3793,
+      "kb": 3.7
+    },
+    "popover/popover-content.js": {
+      "bytes": 3520,
+      "kb": 3.44
+    },
+    "popover/popover-portal.js": {
+      "bytes": 1127,
+      "kb": 1.1
+    },
+    "popover/popover-root.js": {
+      "bytes": 1901,
+      "kb": 1.86
+    },
+    "popover/popover-trigger.js": {
+      "bytes": 2302,
+      "kb": 2.25
+    },
+    "popper/popper-anchor.js": {
+      "bytes": 1432,
+      "kb": 1.4
+    },
+    "popper/popper-arrow.js": {
+      "bytes": 2746,
+      "kb": 2.68
+    },
+    "popper/popper-content.js": {
+      "bytes": 8189,
+      "kb": 8
+    },
+    "popper/popper-root.js": {
+      "bytes": 910,
+      "kb": 0.89
+    },
+    "popper/utils.js": {
+      "bytes": 1684,
+      "kb": 1.64
+    },
+    "presence/presence.js": {
+      "bytes": 2039,
+      "kb": 1.99
+    },
+    "presence/use-presence.js": {
+      "bytes": 4930,
+      "kb": 4.81
+    },
+    "primitive/primitive.js": {
+      "bytes": 824,
+      "kb": 0.8
+    },
+    "primitive/slot-primitive.js": {
+      "bytes": 1502,
+      "kb": 1.47
+    },
+    "primitive/use-primitive-element.js": {
+      "bytes": 538,
+      "kb": 0.53
+    },
+    "progress/progress-indicator.js": {
+      "bytes": 1434,
+      "kb": 1.4
+    },
+    "progress/progress-root.js": {
+      "bytes": 4197,
+      "kb": 4.1
+    },
+    "radio-group/radio-group-indicator.js": {
+      "bytes": 1873,
+      "kb": 1.83
+    },
+    "radio-group/radio-group-item.js": {
+      "bytes": 4017,
+      "kb": 3.92
+    },
+    "radio-group/radio-group-root.js": {
+      "bytes": 3807,
+      "kb": 3.72
+    },
+    "radio-group/radio.js": {
+      "bytes": 3567,
+      "kb": 3.48
+    },
+    "radio-group/utils.js": {
+      "bytes": 450,
+      "kb": 0.44
+    },
+    "range-calendar/range-calendar-cell-trigger.js": {
+      "bytes": 11540,
+      "kb": 11.27
+    },
+    "range-calendar/range-calendar-cell.js": {
+      "bytes": 1721,
+      "kb": 1.68
+    },
+    "range-calendar/range-calendar-grid-body.js": {
+      "bytes": 1120,
+      "kb": 1.09
+    },
+    "range-calendar/range-calendar-grid-head.js": {
+      "bytes": 1099,
+      "kb": 1.07
+    },
+    "range-calendar/range-calendar-grid-row.js": {
+      "bytes": 1109,
+      "kb": 1.08
+    },
+    "range-calendar/range-calendar-grid.js": {
+      "bytes": 1629,
+      "kb": 1.59
+    },
+    "range-calendar/range-calendar-head-cell.js": {
+      "bytes": 1117,
+      "kb": 1.09
+    },
+    "range-calendar/range-calendar-header.js": {
+      "bytes": 1094,
+      "kb": 1.07
+    },
+    "range-calendar/range-calendar-heading.js": {
+      "bytes": 1451,
+      "kb": 1.42
+    },
+    "range-calendar/range-calendar-next.js": {
+      "bytes": 1850,
+      "kb": 1.81
+    },
+    "range-calendar/range-calendar-prev.js": {
+      "bytes": 1854,
+      "kb": 1.81
+    },
+    "range-calendar/range-calendar-root.js": {
+      "bytes": 10482,
+      "kb": 10.24
+    },
+    "range-calendar/use-range-calendar.js": {
+      "bytes": 4211,
+      "kb": 4.11
+    },
+    "roving-focus/roving-focus-group.js": {
+      "bytes": 4595,
+      "kb": 4.49
+    },
+    "roving-focus/roving-focus-item.js": {
+      "bytes": 3793,
+      "kb": 3.7
+    },
+    "roving-focus/utils.js": {
+      "bytes": 1631,
+      "kb": 1.59
+    },
+    "scroll-area/scroll-area-corner-impl.js": {
+      "bytes": 2217,
+      "kb": 2.17
+    },
+    "scroll-area/scroll-area-corner.js": {
+      "bytes": 1621,
+      "kb": 1.58
+    },
+    "scroll-area/scroll-area-root.js": {
+      "bytes": 3370,
+      "kb": 3.29
+    },
+    "scroll-area/scroll-area-scrollbar-auto.js": {
+      "bytes": 2416,
+      "kb": 2.36
+    },
+    "scroll-area/scroll-area-scrollbar-hover.js": {
+      "bytes": 2482,
+      "kb": 2.42
+    },
+    "scroll-area/scroll-area-scrollbar-impl.js": {
+      "bytes": 4830,
+      "kb": 4.72
+    },
+    "scroll-area/scroll-area-scrollbar-scroll.js": {
+      "bytes": 3327,
+      "kb": 3.25
+    },
+    "scroll-area/scroll-area-scrollbar-visible.js": {
+      "bytes": 4717,
+      "kb": 4.61
+    },
+    "scroll-area/scroll-area-scrollbar-x.js": {
+      "bytes": 2190,
+      "kb": 2.14
+    },
+    "scroll-area/scroll-area-scrollbar-y.js": {
+      "bytes": 2177,
+      "kb": 2.13
+    },
+    "scroll-area/scroll-area-scrollbar.js": {
+      "bytes": 3726,
+      "kb": 3.64
+    },
+    "scroll-area/scroll-area-thumb.js": {
+      "bytes": 3635,
+      "kb": 3.55
+    },
+    "scroll-area/scroll-area-viewport.js": {
+      "bytes": 2920,
+      "kb": 2.85
+    },
+    "scroll-area/utils.js": {
+      "bytes": 3055,
+      "kb": 2.98
+    },
+    "select/bubble-select.js": {
+      "bytes": 2357,
+      "kb": 2.3
+    },
+    "select/select-arrow.js": {
+      "bytes": 1672,
+      "kb": 1.63
+    },
+    "select/select-content-impl.js": {
+      "bytes": 10033,
+      "kb": 9.8
+    },
+    "select/select-content.js": {
+      "bytes": 4249,
+      "kb": 4.15
+    },
+    "select/select-group.js": {
+      "bytes": 1326,
+      "kb": 1.29
+    },
+    "select/select-icon.js": {
+      "bytes": 1075,
+      "kb": 1.05
+    },
+    "select/select-item-aligned-position.js": {
+      "bytes": 8374,
+      "kb": 8.18
+    },
+    "select/select-item-indicator.js": {
+      "bytes": 1283,
+      "kb": 1.25
+    },
+    "select/select-item-text.js": {
+      "bytes": 2260,
+      "kb": 2.21
+    },
+    "select/select-item.js": {
+      "bytes": 5670,
+      "kb": 5.54
+    },
+    "select/select-label.js": {
+      "bytes": 1173,
+      "kb": 1.15
+    },
+    "select/select-popper-position.js": {
+      "bytes": 2735,
+      "kb": 2.67
+    },
+    "select/select-portal.js": {
+      "bytes": 1117,
+      "kb": 1.09
+    },
+    "select/select-provider.js": {
+      "bytes": 982,
+      "kb": 0.96
+    },
+    "select/select-root.js": {
+      "bytes": 5707,
+      "kb": 5.57
+    },
+    "select/select-scroll-button-impl.js": {
+      "bytes": 2369,
+      "kb": 2.31
+    },
+    "select/select-scroll-down-button.js": {
+      "bytes": 2588,
+      "kb": 2.53
+    },
+    "select/select-scroll-up-button.js": {
+      "bytes": 2477,
+      "kb": 2.42
+    },
+    "select/select-separator.js": {
+      "bytes": 998,
+      "kb": 0.97
+    },
+    "select/select-trigger.js": {
+      "bytes": 4541,
+      "kb": 4.43
+    },
+    "select/select-value.js": {
+      "bytes": 2472,
+      "kb": 2.41
+    },
+    "select/select-viewport.js": {
+      "bytes": 3790,
+      "kb": 3.7
+    },
+    "select/utils.js": {
+      "bytes": 1162,
+      "kb": 1.13
+    },
+    "separator/separator.js": {
+      "bytes": 1126,
+      "kb": 1.1
+    },
+    "shared/arrays.js": {
+      "bytes": 2519,
+      "kb": 2.46
+    },
+    "shared/create-context.js": {
+      "bytes": 1637,
+      "kb": 1.6
+    },
+    "shared/get-active-element.js": {
+      "bytes": 446,
+      "kb": 0.44
+    },
+    "shared/handle-and-dispatch-custom-event.js": {
+      "bytes": 477,
+      "kb": 0.47
+    },
+    "shared/is-value-equal-or-exist.js": {
+      "bytes": 1044,
+      "kb": 1.02
+    },
+    "shared/numbers.js": {
+      "bytes": 2963,
+      "kb": 2.89
+    },
+    "shared/render-slot-fragments.js": {
+      "bytes": 380,
+      "kb": 0.37
+    },
+    "shared/use-arrow-navigation.js": {
+      "bytes": 3397,
+      "kb": 3.32
+    },
+    "shared/use-body-scroll-lock.js": {
+      "bytes": 3946,
+      "kb": 3.85
+    },
+    "shared/use-date-formatter.js": {
+      "bytes": 3285,
+      "kb": 3.21
+    },
+    "shared/use-direction.js": {
+      "bytes": 408,
+      "kb": 0.4
+    },
+    "shared/use-emit-as-props.js": {
+      "bytes": 1091,
+      "kb": 1.07
+    },
+    "shared/use-filter.js": {
+      "bytes": 1977,
+      "kb": 1.93
+    },
+    "shared/use-focus-guards.js": {
+      "bytes": 1332,
+      "kb": 1.3
+    },
+    "shared/use-form-control.js": {
+      "bytes": 349,
+      "kb": 0.34
+    },
+    "shared/use-forward-expose.js": {
+      "bytes": 1386,
+      "kb": 1.35
+    },
+    "shared/use-forward-props-emits.js": {
+      "bytes": 1242,
+      "kb": 1.21
+    },
+    "shared/use-forward-props.js": {
+      "bytes": 1361,
+      "kb": 1.33
+    },
+    "shared/use-grace-area.js": {
+      "bytes": 6133,
+      "kb": 5.99
+    },
+    "shared/use-hide-others.js": {
+      "bytes": 859,
+      "kb": 0.84
+    },
+    "shared/use-id.js": {
+      "bytes": 1088,
       "kb": 1.06
+    },
+    "shared/use-is-using-keyboard.js": {
+      "bytes": 711,
+      "kb": 0.69
+    },
+    "shared/use-locale.js": {
+      "bytes": 406,
+      "kb": 0.4
+    },
+    "shared/use-nonce.js": {
+      "bytes": 386,
+      "kb": 0.38
+    },
+    "shared/use-selection-behavior.js": {
+      "bytes": 1953,
+      "kb": 1.91
+    },
+    "shared/use-single-or-multiple-value.js": {
+      "bytes": 2444,
+      "kb": 2.39
+    },
+    "shared/use-size.js": {
+      "bytes": 1552,
+      "kb": 1.52
+    },
+    "shared/use-state-machine.js": {
+      "bytes": 1182,
+      "kb": 1.15
+    },
+    "shared/use-typeahead.js": {
+      "bytes": 2801,
+      "kb": 2.74
+    },
+    "slider/slider-horizontal.js": {
+      "bytes": 4274,
+      "kb": 4.17
+    },
+    "slider/slider-impl.js": {
+      "bytes": 2542,
+      "kb": 2.48
+    },
+    "slider/slider-range.js": {
+      "bytes": 2085,
+      "kb": 2.04
+    },
+    "slider/slider-root.js": {
+      "bytes": 7610,
+      "kb": 7.43
+    },
+    "slider/slider-thumb-impl.js": {
+      "bytes": 4025,
+      "kb": 3.93
+    },
+    "slider/slider-thumb.js": {
+      "bytes": 1417,
+      "kb": 1.38
+    },
+    "slider/slider-track.js": {
+      "bytes": 1367,
+      "kb": 1.33
+    },
+    "slider/slider-vertical.js": {
+      "bytes": 4124,
+      "kb": 4.03
+    },
+    "slider/utils.js": {
+      "bytes": 4029,
+      "kb": 3.93
+    },
+    "splitter/splitter-group.js": {
+      "bytes": 16773,
+      "kb": 16.38
+    },
+    "splitter/splitter-panel.js": {
+      "bytes": 4552,
+      "kb": 4.45
+    },
+    "splitter/splitter-resize-handle.js": {
+      "bytes": 4981,
+      "kb": 4.86
+    },
+    "stepper/stepper-description.js": {
+      "bytes": 1268,
+      "kb": 1.24
+    },
+    "stepper/stepper-indicator.js": {
+      "bytes": 1395,
+      "kb": 1.36
+    },
+    "stepper/stepper-item.js": {
+      "bytes": 2922,
+      "kb": 2.85
+    },
+    "stepper/stepper-root.js": {
+      "bytes": 5524,
+      "kb": 5.39
+    },
+    "stepper/stepper-separator.js": {
+      "bytes": 1592,
+      "kb": 1.55
+    },
+    "stepper/stepper-title.js": {
+      "bytes": 1215,
+      "kb": 1.19
+    },
+    "stepper/stepper-trigger.js": {
+      "bytes": 4015,
+      "kb": 3.92
+    },
+    "switch/switch-root.js": {
+      "bytes": 3820,
+      "kb": 3.73
+    },
+    "switch/switch-thumb.js": {
+      "bytes": 1381,
+      "kb": 1.35
+    },
+    "tabs/tabs-content.js": {
+      "bytes": 2756,
+      "kb": 2.69
+    },
+    "tabs/tabs-indicator.js": {
+      "bytes": 2281,
+      "kb": 2.23
+    },
+    "tabs/tabs-list.js": {
+      "bytes": 1869,
+      "kb": 1.83
+    },
+    "tabs/tabs-root.js": {
+      "bytes": 2533,
+      "kb": 2.47
+    },
+    "tabs/tabs-trigger.js": {
+      "bytes": 3229,
+      "kb": 3.15
+    },
+    "tabs/utils.js": {
+      "bytes": 276,
+      "kb": 0.27
+    },
+    "tags-input/tags-input-clear.js": {
+      "bytes": 1492,
+      "kb": 1.46
+    },
+    "tags-input/tags-input-input.js": {
+      "bytes": 4316,
+      "kb": 4.21
+    },
+    "tags-input/tags-input-item-delete.js": {
+      "bytes": 2172,
+      "kb": 2.12
+    },
+    "tags-input/tags-input-item-text.js": {
+      "bytes": 1521,
+      "kb": 1.49
+    },
+    "tags-input/tags-input-item.js": {
+      "bytes": 2551,
+      "kb": 2.49
+    },
+    "tags-input/tags-input-root.js": {
+      "bytes": 7809,
+      "kb": 7.63
+    },
+    "teleport/teleport.js": {
+      "bytes": 1183,
+      "kb": 1.16
+    },
+    "time-field/time-field-input.js": {
+      "bytes": 2916,
+      "kb": 2.85
+    },
+    "time-field/time-field-root.js": {
+      "bytes": 10408,
+      "kb": 10.16
+    },
+    "toast/focus-proxy.js": {
+      "bytes": 1380,
+      "kb": 1.35
+    },
+    "toast/toast-action.js": {
+      "bytes": 1615,
+      "kb": 1.58
+    },
+    "toast/toast-announce-exclude.js": {
+      "bytes": 1241,
+      "kb": 1.21
+    },
+    "toast/toast-announce.js": {
+      "bytes": 1403,
+      "kb": 1.37
+    },
+    "toast/toast-close.js": {
+      "bytes": 1534,
+      "kb": 1.5
+    },
+    "toast/toast-description.js": {
+      "bytes": 1115,
+      "kb": 1.09
+    },
+    "toast/toast-portal.js": {
+      "bytes": 1107,
+      "kb": 1.08
+    },
+    "toast/toast-provider.js": {
+      "bytes": 2036,
+      "kb": 1.99
+    },
+    "toast/toast-root-impl.js": {
+      "bytes": 9390,
+      "kb": 9.17
+    },
+    "toast/toast-root.js": {
+      "bytes": 4289,
+      "kb": 4.19
+    },
+    "toast/toast-title.js": {
+      "bytes": 1067,
+      "kb": 1.04
+    },
+    "toast/toast-viewport.js": {
+      "bytes": 7415,
+      "kb": 7.24
+    },
+    "toast/utils.js": {
+      "bytes": 1918,
+      "kb": 1.87
+    },
+    "toggle-group/toggle-group-item.js": {
+      "bytes": 2437,
+      "kb": 2.38
+    },
+    "toggle-group/toggle-group-root.js": {
+      "bytes": 3684,
+      "kb": 3.6
+    },
+    "toggle/toggle.js": {
+      "bytes": 3072,
+      "kb": 3
+    },
+    "tooltip/tooltip-arrow.js": {
+      "bytes": 1262,
+      "kb": 1.23
+    },
+    "tooltip/tooltip-content-hoverable.js": {
+      "bytes": 2694,
+      "kb": 2.63
+    },
+    "tooltip/tooltip-content-impl.js": {
+      "bytes": 5104,
+      "kb": 4.98
+    },
+    "tooltip/tooltip-content.js": {
+      "bytes": 2804,
+      "kb": 2.74
+    },
+    "tooltip/tooltip-portal.js": {
+      "bytes": 1127,
+      "kb": 1.1
+    },
+    "tooltip/tooltip-provider.js": {
+      "bytes": 2157,
+      "kb": 2.11
+    },
+    "tooltip/tooltip-root.js": {
+      "bytes": 4077,
+      "kb": 3.98
+    },
+    "tooltip/tooltip-trigger.js": {
+      "bytes": 3726,
+      "kb": 3.64
+    },
+    "tooltip/utils.js": {
+      "bytes": 140,
+      "kb": 0.14
+    },
+    "tree/tree-item.js": {
+      "bytes": 6719,
+      "kb": 6.56
+    },
+    "tree/tree-root.js": {
+      "bytes": 7953,
+      "kb": 7.77
+    },
+    "tree/tree-virtualizer.js": {
+      "bytes": 6110,
+      "kb": 5.97
+    },
+    "tree/utils.js": {
+      "bytes": 260,
+      "kb": 0.25
+    },
+    "utils/assert.js": {
+      "bytes": 260,
+      "kb": 0.25
+    },
+    "utils/calculate.js": {
+      "bytes": 3900,
+      "kb": 3.81
+    },
+    "utils/call-panel-callbacks.js": {
+      "bytes": 1085,
+      "kb": 1.06
+    },
+    "utils/compare.js": {
+      "bytes": 619,
+      "kb": 0.6
+    },
+    "utils/constants.js": {
+      "bytes": 137,
+      "kb": 0.13
+    },
+    "utils/debounce.js": {
+      "bytes": 363,
+      "kb": 0.35
+    },
+    "utils/dom.js": {
+      "bytes": 1726,
+      "kb": 1.69
+    },
+    "utils/events.js": {
+      "bytes": 967,
+      "kb": 0.94
+    },
+    "utils/layout.js": {
+      "bytes": 4988,
+      "kb": 4.87
+    },
+    "utils/pivot.js": {
+      "bytes": 394,
+      "kb": 0.38
+    },
+    "utils/rects.js": {
+      "bytes": 523,
+      "kb": 0.51
+    },
+    "utils/registry.js": {
+      "bytes": 6908,
+      "kb": 6.75
+    },
+    "utils/resize-panel.js": {
+      "bytes": 869,
+      "kb": 0.85
+    },
+    "utils/stacking-order.js": {
+      "bytes": 2881,
+      "kb": 2.81
+    },
+    "utils/storage.js": {
+      "bytes": 2050,
+      "kb": 2
+    },
+    "utils/style.js": {
+      "bytes": 2284,
+      "kb": 2.23
+    },
+    "utils/validation.js": {
+      "bytes": 1982,
+      "kb": 1.94
+    },
+    "viewport/viewport.js": {
+      "bytes": 1967,
+      "kb": 1.92
+    },
+    "visually-hidden/visually-hidden-input-bubble.js": {
+      "bytes": 2192,
+      "kb": 2.14
+    },
+    "visually-hidden/visually-hidden-input.js": {
+      "bytes": 3035,
+      "kb": 2.96
+    },
+    "visually-hidden/visually-hidden.js": {
+      "bytes": 1636,
+      "kb": 1.6
     }
   }
 }

@@ -8,6 +8,10 @@
     "paths": {
       "~~/*": ["./src/*"]
     },
+
+    "exactOptionalPropertyTypes": false,
+    "noUncheckedIndexedAccess": false,
+
     // TODO: set skipLibCheck to false
     // Ideally we should set this to false, but histoire and vueuse are being difficult...
     // For now, keep it disabled...
