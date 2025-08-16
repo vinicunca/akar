@@ -71,7 +71,11 @@
     "type-check": "vue-tsc -p tsconfig.check.json --noEmit",
     "test": "vitest",
     "test-update": "vitest -u",
-    "pub:release": "pnpm publish --access public --no-git-checks"
+    "pub:release": "pnpm publish --access public --no-git-checks",
+    "check-sizes": "node scripts/check-sizes.js",
+    "track-sizes": "node scripts/track-sizes.js",
+    "analyze-components": "node scripts/analyze-components.js",
+    "trend-analysis": "node scripts/trend-analysis.js"
   },
   "peerDependencies": {
     "vue": ">= 3.2.0"
