@@ -46,9 +46,13 @@ type DateRangePickerRootContext = {
   fixedDate: Ref<'start' | 'end' | undefined>;
   maximumDays?: Ref<number | undefined>;
   step: Ref<DateStep | undefined>;
+  closeOnSelect?: Ref<boolean>;
 };
 
-export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable' | 'fixedDate' | 'maximumDays'>;
+export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable' | 'fixedDate' | 'maximumDays'> & {
+  /** Whether or not to close the popover on range select */
+  closeOnSelect?: boolean;
+};
 
 export type ADateRangePickerRootEmits = {
   /** Event handler called whenever the model value changes */
@@ -95,6 +99,7 @@ const props = withDefaults(
     isDateHighlightable: undefined,
     allowNonContiguousRanges: false,
     maximumDays: undefined,
+    closeOnSelect: false,
   },
 );
 
@@ -128,6 +133,7 @@ const {
   fixedDate,
   maximumDays,
   step,
+  closeOnSelect,
 } = toRefs(props);
 
 const dir = useDirection(propsDir);
@@ -161,6 +167,12 @@ watch(
   (value) => {
     if (value && value.start && value.start.compare(placeholder.value) !== 0) {
       placeholder.value = value.start.copy();
+    }
+
+    if (value.start && value.end) {
+      if (closeOnSelect.value) {
+        open.value = false;
+      }
     }
   },
 );
@@ -206,6 +218,7 @@ provideDateRangePickerRootContext({
   onPlaceholderChange(date: DateValue) {
     placeholder.value = date.copy();
   },
+  closeOnSelect,
 });
 </script>
 

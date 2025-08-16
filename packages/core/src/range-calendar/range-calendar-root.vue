@@ -7,7 +7,7 @@ import type { UseDateFormatter } from '~~/shared';
 import type { DateRange } from '~~/shared/date';
 import type { Direction } from '~~/shared/types';
 import { isEqualDay } from '@internationalized/date';
-import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { useCalendar } from '~~/calendar/use-calendar';
 import { isDateBefore } from '~~/date';
 import { createContext, useDirection, useLocale } from '~~/shared';
@@ -124,6 +124,8 @@ export interface ARangeCalendarRootProps extends APrimitiveProps {
 export type ARangeCalendarRootEmits = {
   /** Event handler called whenever the model value changes */
   'update:modelValue': [date: DateRange];
+  /** Event handler called whenever there is a new validModel */
+  'update:validModelValue': [date: DateRange];
   /** Event handler called whenever the placeholder value changes */
   'update:placeholder': [date: DateValue];
   /** Event handler called whenever the start value changes */
@@ -138,7 +140,7 @@ export const [
 
 <script setup lang="ts">
 import { useEventListener, useVModel } from '@vueuse/core';
-import { computed, onMounted, ref, toRefs, watch } from 'vue';
+import { onMounted, ref, toRefs, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 
 const props = withDefaults(
@@ -227,11 +229,11 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   passive: (props.modelValue === undefined) as false,
 }) as Ref<DateRange>;
 
-const currentModelValue = computed(() =>
-  isNullish(modelValue.value)
-    ? { start: undefined, end: undefined }
-    : modelValue.value,
-);
+const validModelValue = ref(modelValue.value) as Ref<DateRange>;
+
+watch(validModelValue, (value) => {
+  emits('update:validModelValue', value);
+});
 
 const defaultDate = getDefaultDate({
   defaultPlaceholder: props.placeholder,
@@ -239,8 +241,8 @@ const defaultDate = getDefaultDate({
   locale: props.locale,
 });
 
-const startValue = ref(currentModelValue.value.start) as Ref<DateValue | undefined>;
-const endValue = ref(currentModelValue.value.end) as Ref<DateValue | undefined>;
+const startValue = ref(modelValue.value.start) as Ref<DateValue | undefined>;
+const endValue = ref(modelValue.value.end) as Ref<DateValue | undefined>;
 
 const placeholder = useVModel(props, 'placeholder', emits, {
   defaultValue: props.defaultPlaceholder ?? defaultDate.copy(),
@@ -341,7 +343,7 @@ watch(
 watch(
   [startValue, endValue],
   ([_startValue, _endValue]) => {
-    const value = currentModelValue.value;
+    const value = modelValue.value;
 
     if (
       value
@@ -357,18 +359,7 @@ watch(
 
     isEditing.value = true;
 
-    if (_startValue && _endValue) {
-      isEditing.value = false;
-
-      if (
-        value.start
-        && value.end
-        && isEqualDay(value.start, _startValue)
-        && isEqualDay(value.end, _endValue)
-      ) {
-        return;
-      }
-
+    if (_endValue && _startValue) {
       if (isDateBefore(_endValue, _startValue)) {
         modelValue.value = {
           start: _endValue.copy(),
@@ -380,6 +371,21 @@ watch(
           end: _endValue.copy(),
         };
       }
+
+      isEditing.value = false;
+      validModelValue.value = { start: modelValue.value.start?.copy(), end: modelValue.value.end?.copy() };
+    } else {
+      if (_startValue) {
+        modelValue.value = {
+          start: _startValue.copy(),
+          end: undefined,
+        };
+      } else {
+        modelValue.value = {
+          start: _endValue?.copy(),
+          end: undefined,
+        };
+      }
     }
   },
 );
@@ -389,8 +395,8 @@ useEventListener(
   (ev) => {
     if (ev.key === KEY_CODES.ESC && isEditing.value) {
       // Abort start and end selection
-      startValue.value = modelValue.value.start?.copy();
-      endValue.value = modelValue.value.end?.copy();
+      startValue.value = validModelValue.value.start?.copy();
+      endValue.value = validModelValue.value.end?.copy();
     }
   },
 );
