@@ -2,7 +2,8 @@ packages:
   - packages/*
   - docs
   - .histoire
-
+patchedDependencies:
+  vitepress@2.0.0-alpha.12: patches/vitepress@2.0.0-alpha.12.patch
 catalogs:
   base:
     '@commitlint/cli': ^19.8.1
@@ -82,6 +83,3 @@ onlyBuiltDependencies:
   - esbuild
   - simple-git-hooks
   - unrs-resolver
-
-patchedDependencies:
-  vitepress@2.0.0-alpha.12: patches/vitepress@2.0.0-alpha.12.patch

@@ -41,6 +41,10 @@ export default defineConfig({
   extendTheme: (theme) => {
     return {
       ...theme,
+      font: {
+        sans: `var(--font-geist-sans),${theme.font?.sans}`,
+        mono: `var(--font-geist-mono),${theme.font?.mono}`,
+      },
     };
   },
 });
