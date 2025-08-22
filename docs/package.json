@@ -35,7 +35,7 @@
     "markdown-it-anchor": "catalog:docs",
     "minisearch": "catalog:docs",
     "shiki": "catalog:docs",
-    "unocss": "catalog:docs",
+    "unocss": "catalog:base",
     "vitepress": "catalog:docs",
     "vue-component-meta": "catalog:docs"
   }

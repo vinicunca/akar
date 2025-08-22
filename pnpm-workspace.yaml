@@ -1,6 +1,7 @@
 packages:
   - 'packages/*'
   - docs
+  - .histoire
 patchedDependencies:
   vitepress@1.6.3: patches/vitepress@1.6.3.patch
 catalogs:
@@ -15,6 +16,7 @@ catalogs:
     simple-git-hooks: ^2.13.1
     tsx: ^4.20.3
     typescript: 5.8.3
+    unocss: ^66.4.1
   core:
     '@floating-ui/dom': ^1.7.3
     '@floating-ui/vue': ^1.1.8
@@ -65,9 +67,12 @@ catalogs:
     markdown-it-anchor: ^9.2.0
     minisearch: ^6.3.0
     shiki: ^1.29.2
-    unocss: ^66.4.1
     vitepress: 1.6.3
     vue-component-meta: ^2.2.12
+  histoire:
+    '@histoire/plugin-vue': ^0.17.17
+    '@rollup/plugin-alias': ^5.1.1
+    histoire: ^0.17.17
   plugins:
     '@nuxt/kit': ^3.15.4
     '@nuxt/schema': ^3.15.4

@@ -10,15 +10,14 @@
   },
   "peerDependencies": {
     "@vitejs/plugin-vue": "^4.6.2",
-    "@vueuse/core": "12.5.0",
-    "@vueuse/shared": "12.5.0",
     "vite": "^5.4.19",
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@histoire/plugin-vue": "^0.17.17",
-    "@radix-ui/colors": "^3.0.0",
-    "@rollup/plugin-alias": "^5.1.1",
-    "histoire": "^0.17.17"
+    "@histoire/plugin-vue": "catalog:histoire",
+    "@rollup/plugin-alias": "catalog:histoire",
+    "@vinicunca/unocss-preset": "catalog:docs",
+    "histoire": "catalog:histoire",
+    "unocss": "catalog:base"
   }
 }

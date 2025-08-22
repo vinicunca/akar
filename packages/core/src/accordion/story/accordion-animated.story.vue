@@ -45,7 +45,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
       </template>
 
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
       >
         <AAccordionItem
@@ -83,7 +83,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
       </template>
 
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
         default-value="One"
       >
@@ -115,7 +115,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
 
     <Variant title="Animated 2D">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
       >
         <AAccordionItem
@@ -132,7 +132,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
           <AAccordionContent
             class="accordion-animated-content data-[state=open]:animate-open2D data-[state=closed]:animate-close2D overflow-hidden"
           >
-            <div class="overflow-hidden px-5 py-4">
+            <div class="px-5 py-4 overflow-hidden">
               <div :style="{ width: 'calc(20em - 20px)', height: 100 }">
                 Per erat orci nostra luctus sociosqu mus risus penatibus, duis
                 elit vulputate viverra integer ullamcorper congue curabitur
@@ -147,7 +147,7 @@ const selectedValue = ref(['One', 'Two', 'Three', 'Four']);
     <Variant title="Animated Controlled">
       <AAccordionRoot
         v-model="selectedValue"
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="multiple"
       >
         <AAccordionItem
