@@ -7,12 +7,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup (Install node & pnpm)
         uses: ./.github/actions/setup
 
-      - name: Build Akar UI and plugins
+      - name: Build Akar and plugins
         run: pnpm run build
 
       - run: pnpm dlx pkg-pr-new publish --compact ./packages/core
