@@ -191,6 +191,19 @@ catalogs:
     vue-component-meta:
       specifier: ^2.2.12
       version: 2.2.12
+  plugins:
+    '@nuxt/kit':
+      specifier: ^3.15.4
+      version: 3.18.0
+    '@nuxt/schema':
+      specifier: ^3.15.4
+      version: 3.18.0
+    unbuild:
+      specifier: ^2.0.0
+      version: 2.0.0
+    unplugin-vue-components:
+      specifier: ^0.28.0
+      version: 0.28.0
 
 patchedDependencies:
   vitepress@1.6.3:
@@ -414,19 +427,19 @@ importers:
   packages/plugins:
     dependencies:
       '@nuxt/kit':
-        specifier: ^3.15.4
+        specifier: catalog:plugins
         version: 3.18.0(magicast@0.3.5)
       '@nuxt/schema':
-        specifier: ^3.15.4
+        specifier: catalog:plugins
         version: 3.18.0
       akar:
         specifier: link:../core
         version: link:../core
       unbuild:
-        specifier: ^2.0.0
+        specifier: catalog:plugins
         version: 2.0.0(typescript@5.8.3)(vue-tsc@2.2.12(typescript@5.8.3))
       unplugin-vue-components:
-        specifier: ^0.28.0
+        specifier: catalog:plugins
         version: 0.28.0(@babel/parser@7.28.0)(@nuxt/kit@3.18.0(magicast@0.3.5))(rollup@3.29.5)(vue@3.5.17(typescript@5.8.3))
 
 packages:
@@ -2590,14 +2603,6 @@ packages:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
     engines: {node: '>= 0.8'}
 
-  c12@3.1.0:
-    resolution: {integrity: sha512-uWoS8OU1MEIsOv8p/5a82c3H31LsWVR5qiyXVfBNOzfffjUWtPnhAb4BYI2uG2HfGmZmFjCtui5XNWaps+iFuw==}
-    peerDependencies:
-      magicast: ^0.3.5
-    peerDependenciesMeta:
-      magicast:
-        optional: true
-
   c12@3.2.0:
     resolution: {integrity: sha512-ixkEtbYafL56E6HiFuonMm1ZjoKtIo7TH68/uiEq4DAwv9NcUX2nJ95F8TrbMeNjqIkZpruo3ojXQJ+MGG5gcQ==}
     peerDependencies:
@@ -3087,10 +3092,6 @@ packages:
   dot-prop@5.3.0:
     resolution: {integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==}
     engines: {node: '>=8'}
-
-  dotenv@16.6.1:
-    resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
-    engines: {node: '>=12'}
 
   dotenv@17.2.1:
     resolution: {integrity: sha512-kQhDYKZecqnM0fCnzI5eIv5L4cAe/iRI+HqMbO/hbRdTAeXDG+M9FjipUxNfbARuEg4iHIbhnhs78BCHNbSxEQ==}
@@ -7349,7 +7350,7 @@ snapshots:
 
   '@nuxt/kit@3.18.0(magicast@0.3.5)':
     dependencies:
-      c12: 3.1.0(magicast@0.3.5)
+      c12: 3.2.0(magicast@0.3.5)
       consola: 3.4.2
       defu: 6.1.4
       destr: 2.0.5
@@ -8632,23 +8633,6 @@ snapshots:
 
   bytes@3.1.2: {}
 
-  c12@3.1.0(magicast@0.3.5):
-    dependencies:
-      chokidar: 4.0.3
-      confbox: 0.2.2
-      defu: 6.1.4
-      dotenv: 16.6.1
-      exsolve: 1.0.7
-      giget: 2.0.0
-      jiti: 2.5.1
-      ohash: 2.0.11
-      pathe: 2.0.3
-      perfect-debounce: 1.0.0
-      pkg-types: 2.2.0
-      rc9: 2.1.2
-    optionalDependencies:
-      magicast: 0.3.5
-
   c12@3.2.0(magicast@0.3.5):
     dependencies:
       chokidar: 4.0.3
@@ -9221,8 +9205,6 @@ snapshots:
   dot-prop@5.3.0:
     dependencies:
       is-obj: 2.0.0
-
-  dotenv@16.6.1: {}
 
   dotenv@17.2.1: {}
 
@@ -12670,7 +12652,7 @@ snapshots:
       '@rollup/plugin-node-resolve': 15.3.1(rollup@3.29.5)
       '@rollup/plugin-replace': 5.0.7(rollup@3.29.5)
       '@rollup/pluginutils': 5.2.0(rollup@3.29.5)
-      chalk: 5.4.1
+      chalk: 5.5.0
       citty: 0.1.6
       consola: 3.4.2
       defu: 6.1.4

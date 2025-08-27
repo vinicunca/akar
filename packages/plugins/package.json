@@ -18,10 +18,10 @@
     "stub": "unbuild --stub"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.15.4",
-    "@nuxt/schema": "^3.15.4",
+    "@nuxt/kit": "catalog:plugins",
+    "@nuxt/schema": "catalog:plugins",
     "akar": "link:../core",
-    "unbuild": "^2.0.0",
-    "unplugin-vue-components": "^0.28.0"
+    "unbuild": "catalog:plugins",
+    "unplugin-vue-components": "catalog:plugins"
   }
 }
