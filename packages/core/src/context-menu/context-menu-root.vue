@@ -13,9 +13,17 @@ type ContextMenuRootContext = {
   modal: Ref<boolean>;
   dir: Ref<Direction>;
   triggerElement: Ref<HTMLElement | undefined>;
+  pressOpenDelay: Ref<number>;
 };
 
-export interface AContextMenuRootProps extends Omit<AMenuProps, 'open'> {}
+export interface AContextMenuRootProps extends Omit<AMenuProps, 'open'> {
+  /**
+   * The duration from when the trigger is pressed until the menu openes.
+   *
+   * @defaultValue 700
+   */
+  pressOpenDelay?: number;
+}
 export type AContextMenuRootEmits = AMenuEmits;
 
 export const [
@@ -36,10 +44,11 @@ const props = withDefaults(
   defineProps<AContextMenuRootProps>(),
   {
     modal: true,
+    pressOpenDelay: 700,
   },
 );
 const emits = defineEmits<AContextMenuRootEmits>();
-const { dir: propDir, modal } = toRefs(props);
+const { dir: propDir, modal, pressOpenDelay } = toRefs(props);
 useForwardExpose();
 const dir = useDirection(propDir);
 
@@ -54,6 +63,7 @@ provideContextMenuRootContext({
   dir,
   modal,
   triggerElement,
+  pressOpenDelay,
 });
 
 watch(open, (value) => {
