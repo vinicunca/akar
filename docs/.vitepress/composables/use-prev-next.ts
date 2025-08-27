@@ -1,5 +1,6 @@
 /* eslint-disable sonar/no-nested-conditional */
 /* eslint-disable no-nested-ternary */
+import { isString } from '@vinicunca/perkakas';
 import { useData } from 'vitepress';
 import { computed } from 'vue';
 import { getFlatSideBarLinks, getSidebar, isActive } from './use-sidebar';
@@ -31,9 +32,9 @@ export function usePrevNext() {
         ? undefined
         : {
             text:
-              (typeof frontmatter.value.prev === 'string'
+              (isString(frontmatter.value.prev)
                 ? frontmatter.value.prev
-                : typeof frontmatter.value.prev === 'object'
+                : frontmatter.value.prev === 'object'
                   ? frontmatter.value.prev.text
                   : undefined)
                 ?? candidates[index - 1]?.docFooterText
@@ -47,7 +48,7 @@ export function usePrevNext() {
         ? undefined
         : {
             text:
-              (typeof frontmatter.value.next === 'string'
+              (isString(frontmatter.value.next)
                 ? frontmatter.value.next
                 : typeof frontmatter.value.next === 'object'
                   ? frontmatter.value.next.text

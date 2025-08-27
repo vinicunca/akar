@@ -93,19 +93,6 @@ function constructFiles(componentName: string, sources: Record<string, string>) 
       isBinary: false,
     },
     ...viteConfig,
-    'tailwind.config.js': sources['tailwind.config.js'] && {
-      content: sources['tailwind.config.js'],
-      isBinary: false,
-    },
-    'postcss.config.js': sources['tailwind.config.js'] && {
-      content: `module.exports = {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  }
-}`,
-      isBinary: false,
-    },
     'src/main.ts': {
       content: `import { createApp } from 'vue';
 import App from './App.vue';
@@ -124,10 +111,7 @@ createApp(App).mount('#app')`,
     },
     ...components,
     'src/global.css': {
-      content: `@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+      content: `
 body {
   font-family: system-ui;
   width: 100vw;

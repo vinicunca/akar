@@ -26,7 +26,7 @@ defineProps<{
           :class="{ '-rotate-90': !open }"
         />
       </ACollapsibleTrigger>
-      <ACollapsibleContent class="data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden">
+      <ACollapsibleContent class="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
         <DocSidebarItem
           v-for="subitem in item.items"
           :key="subitem.text"

@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<{
   type?: 'demo' | 'example';
 }>(), { type: 'demo' });
 
-const cssFramework = useStorage<'css' | 'tailwind' | 'pinceau'>('cssFramework', 'tailwind');
+const cssFramework = useStorage<'css' | 'unocss'>('cssFramework', 'unocss');
 const parsedFiles = computed(() => JSON.parse(decodeURIComponent(props.files ?? ''))[cssFramework.value]);
 </script>
 
@@ -28,7 +28,7 @@ const parsedFiles = computed(() => JSON.parse(decodeURIComponent(props.files ?? 
         v-model="cssFramework"
         :type="type"
       >
-        <slot name="tailwind" />
+        <slot name="unocss" />
         <slot name="css" />
       </HeroCodeGroup>
     </template>

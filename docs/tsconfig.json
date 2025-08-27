@@ -14,6 +14,8 @@
     "resolveJsonModule": true,
     "types": ["vitepress/client", "vue"],
     "strict": true,
+    "exactOptionalPropertyTypes": false,
+    "noUncheckedIndexedAccess": false,
     "declaration": false,
     "outDir": "dist",
     "sourceMap": true,

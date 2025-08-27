@@ -2,6 +2,7 @@
 /* eslint-disable no-nested-ternary */
 import type { DefaultTheme } from 'vitepress/theme';
 import type { Ref } from 'vue';
+import { isNumber, isObjectType } from '@vinicunca/perkakas';
 // Copied from https://github.com/vuejs/vitepress/blob/97f9469b6d4eb7ba9de9a1111986581d1f704ec3/src/client/theme-default/composables/outline.ts#L4
 import { getScrollOffset } from 'vitepress';
 import { onMounted, onUnmounted, onUpdated } from 'vue';
@@ -90,16 +91,15 @@ export function resolveHeaders(
   }
 
   const levelsRange
-    = (typeof range === 'object' && !Array.isArray(range)
+    = (isObjectType(range) && !Array.isArray(range)
       ? range.level
       : range) || 2;
 
-  const [high, low]: [number, number]
-    = typeof levelsRange === 'number'
-      ? [levelsRange, levelsRange]
-      : levelsRange === 'deep'
-        ? [2, 6]
-        : levelsRange;
+  const [high, low]: [number, number] = isNumber(levelsRange)
+    ? [levelsRange, levelsRange]
+    : levelsRange === 'deep'
+      ? [2, 6]
+      : levelsRange;
 
   headers = headers.filter((h) => h.level >= high && h.level <= low);
   // clear previous caches

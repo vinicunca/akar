@@ -1,9 +1,10 @@
 import type { MarkdownEnv, MarkdownRenderer } from 'vitepress';
 import { readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { isString, toKebabCase } from '@vinicunca/perkakas';
 
-export const rawPathRegexp
-  = /^(.+?(?:\.([a-z0-9]+))?)(#[\w-]+)?(?: ?\{(\d+(?:[,-]\d+)*)? ?(\S+)?\})? ?(?:\[(.+)\])?$/;
+// eslint-disable-next-line sonar/regex-complexity, regexp/no-super-linear-backtracking
+export const rawPathRegexp = /^(.+?(?:\.([a-z0-9]+))?)(#[\w-]+)?(?: ?\{(\d+(?:[,-]\d+)*)? ?(\S+)?\})? ?(?:\[(.+)\])?$/;
 
 function rawPathToToken(rawPath: string) {
   const [
@@ -22,7 +23,7 @@ function rawPathToToken(rawPath: string) {
 
 export default function (md: MarkdownRenderer) {
   md.core.ruler.after('inline', 'component-preview', (state) => {
-    const insertComponentImport = (importString: string) => {
+    function insertComponentImport(importString: string) {
       const index = state.tokens.findIndex((i) => i.type === 'html_block' && i.content.match(/<script setup>/g));
       if (index === -1) {
         const importComponent = new state.Token('html_block', '', 0);
@@ -33,9 +34,10 @@ export default function (md: MarkdownRenderer) {
         const content = state.tokens[index].content;
         state.tokens[index].content = content.replace('</script>', `${importString}\n</script>`);
       }
-    };
+    }
 
     // Define the regular expression to match the desired pattern
+    // eslint-disable-next-line regexp/no-super-linear-backtracking
     const regex = /<ComponentPreview\s+([^>]+)\/>/g;
 
     // Iterate through the Markdown content and replace the pattern
@@ -55,18 +57,27 @@ export default function (md: MarkdownRenderer) {
         props[propName] = propValue;
       }
 
-      const pathName = props.type === 'example' ? `../../components/examples/${props.name}` : `../../../components/demo/${props.name}`;
-      insertComponentImport(props.type === 'example' ? `import ${props.name} from '${pathName}/index.vue'` : `import ${props.name} from '${pathName}/tailwind/index.vue'`);
+      const fileName = toKebabCase(props.name);
+
+      const pathName = props.type === 'example'
+        ? `../../components/examples/${props.dir}/${fileName}`
+        : `../../../components/demo/${props.dir}/${fileName}`;
+
+      insertComponentImport(
+        `import ${props.name} from '${pathName}/index.vue'`,
+      );
 
       const index = state.tokens.findIndex((i) => i.content.match(regex));
 
       const { realPath, path: _path } = state.env as MarkdownEnv;
 
-      const childFiles = readdirSync(resolve(dirname(realPath ?? _path), pathName), { withFileTypes: false, recursive: true })
-        .map((file) => typeof file === 'string' ? file.split(/[/\\]/).join('/') : file);
+      const childFiles = readdirSync(
+        resolve(dirname(realPath ?? _path), pathName),
+        { withFileTypes: false, recursive: true },
+      ).map((file) => isString(file) ? file.split(/[/\\]/).join('/') : file);
 
       const groupedFiles = props.type === 'example'
-        ? { tailwind: childFiles }
+        ? { uno: childFiles }
         : childFiles.reduce((prev, curr) => {
             if (typeof curr !== 'string') {
               return prev;
@@ -80,7 +91,7 @@ export default function (md: MarkdownRenderer) {
             return prev;
           }, {} as { [key: string]: Array<string> });
 
-      state.tokens[index].content = `<ComponentPreview name="${props.name}" type="${props.type || 'demo'}"  files="${encodeURIComponent(JSON.stringify(groupedFiles))}" ><${props.name} />`;
+      state.tokens[index].content = `<ComponentPreview name="${props.name}" type="${props.type || 'demo'}" dir="${props.dir}" files="${encodeURIComponent(JSON.stringify(groupedFiles))}" ><${props.name} />`;
       const _dummyToken = new state.Token('', '', 0);
       const tokenArray: Array<typeof _dummyToken> = [];
 
@@ -89,12 +100,14 @@ export default function (md: MarkdownRenderer) {
         templateStart.content = `<template #${key}>`;
         tokenArray.push(templateStart);
 
+        // eslint-disable-next-line sonar/no-nested-functions
         value.forEach((file) => {
           const { filepath, extension, lines, lang, title } = rawPathToToken(`${pathName}/${file}`);
           const resolvedPath = resolve(dirname(realPath ?? _path), filepath);
 
           // Add code tokens for each line
           const token = new state.Token('fence', 'code', 0);
+          // eslint-disable-next-line sonar/no-nested-template-literals
           token.info = `${lang || extension}${lines ? `{${lines}}` : ''}${
             title ? `[${title}]` : ''
           }`;

@@ -88,7 +88,7 @@ Add styles where desired.
 
 Here's a complete demo.
 
-<ComponentPreview name="popover" />
+<!-- <BakComponentPreview name="popover" /> -->
 
 ## Summary
 

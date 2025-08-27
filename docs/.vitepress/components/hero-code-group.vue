@@ -23,12 +23,12 @@ defineOptions({
   inheritAttrs: false,
 });
 const props = defineProps<{
-  modelValue: 'css' | 'tailwind' | 'pinceau';
+  modelValue: 'css' | 'unocss';
   type?: 'demo' | 'example';
 
 }>();
 const emits = defineEmits<{
-  'update:modelValue': [payload: 'css' | 'tailwind' | 'pinceau'];
+  'update:modelValue': [payload: 'css' | 'unocss'];
 }>();
 const cssFramework = useVModel(props, 'modelValue', emits);
 
@@ -36,9 +36,8 @@ const slots = useSlots();
 const slotsFramework = computed(() => slots.default?.().map((slot) => slot.props?.key?.toString()?.replace('_', '')) ?? []);
 
 const cssFrameworkOptions = computed(() => [
-  { label: 'Tailwind 3', value: 'tailwind', icon: 'devicon:tailwindcss' },
+  { label: 'UnoCSS', value: 'unocss', icon: 'logos:unocss' },
   { label: 'CSS', value: 'css', icon: 'devicon:css3' },
-  { label: 'Pinceau', value: 'pinceau' },
 ].filter((i) => slotsFramework.value.includes(i.value)));
 
 const tabs = computed(
