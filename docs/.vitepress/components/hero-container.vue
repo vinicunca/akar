@@ -34,9 +34,7 @@ watch(() => props.cssFramework, () => {
     const fileExt = file.replace(`.${extension}`, '');
     const dirType = props.type === 'demo' ? 'demo' : 'examples';
 
-    const item = `../../components/${dirType}/${props.dir}/${props.name}/${fileExt}.${extension}?raw`;
-
-    import(item).then(
+    import(`../../components/${dirType}/${props.dir}/${props.name}/${fileExt}.${extension}?raw`).then(
       (res) => {
         sources.value[file] = res.default;
       },

@@ -9,8 +9,8 @@
 
 @layer default {
   :root {
-    --font-geist-sans: 'Geist';
-    --font-geist-mono: 'GeistMono';
+    /* --font-geist-sans: 'Geist';
+    --font-geist-mono: 'GeistMono'; */
 
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -176,4 +176,10 @@ mark {
   & .copied {
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzg4ODg4OCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIiIGQ9Ik0yMCA2TDkgMTdsLTUtNSIvPjwvc3ZnPg==');
   }
+}
+
+.custom-justify-center:before,
+.custom-justify-center:after {
+  content: '';
+  flex: 1;
 }

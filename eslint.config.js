@@ -10,7 +10,9 @@ export default vinicuncaESLint(
         'perfectionist/sort-objects': 'off',
       },
     },
-    unocss: true,
+    unocss: {
+      configPath: './docs/uno.config.ts',
+    },
     vue: true,
     pnpm: true,
   },

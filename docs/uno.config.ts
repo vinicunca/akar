@@ -15,6 +15,14 @@ export default defineConfig({
       theme: {
         extend: {
           keyframes: {
+            'accordion-down': {
+              from: { height: 0 },
+              to: { height: 'var(--akar-accordion-content-height)' },
+            },
+            'accordion-up': {
+              from: { height: 'var(--akar-accordion-content-height)' },
+              to: { height: 0 },
+            },
             'collapsible-down': {
               from: { height: 0 },
               to: { height: 'var(--akar-collapsible-content-height)' },
@@ -27,6 +35,8 @@ export default defineConfig({
           animation: {
             'collapsible-down': 'collapsible-down 0.2s ease-in-out',
             'collapsible-up': 'collapsible-up 0.2s ease-in-out',
+            'accordion-down': 'accordion-down 0.2s ease-out',
+            'accordion-up': 'accordion-up 0.2s ease-out',
           },
         },
       },
@@ -102,6 +112,10 @@ export default defineConfig({
   outputToCssLayers: true,
 
   theme: {
+    shadow: {
+      base: '0 2px 10px',
+      focus: '0 0 0 2px',
+    },
     colors: {
       'background': 'hsl(var(--background))',
       'foreground': 'hsl(var(--foreground))',
@@ -122,8 +136,8 @@ export default defineConfig({
     return {
       ...theme,
       font: {
-        sans: `var(--font-geist-sans),${theme.font?.sans}`,
-        mono: `var(--font-geist-mono),${theme.font?.mono}`,
+        sans: `Geist,${theme.font?.sans}`,
+        mono: `GeistMono,${theme.font?.mono}`,
       },
     };
   },
