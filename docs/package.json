@@ -20,7 +20,6 @@
     "@babel/traverse": "catalog:docs",
     "@iconify/json": "catalog:docs",
     "@iconify/vue": "catalog:core",
-    "@radix-ui/colors": "catalog:docs",
     "@types/babel__traverse": "catalog:docs",
     "@types/hast": "catalog:docs",
     "@types/markdown-it": "catalog:docs",

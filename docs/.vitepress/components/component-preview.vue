@@ -6,6 +6,7 @@ import HeroContainer from './hero-container.vue';
 
 const props = withDefaults(defineProps<{
   name: string;
+  dir: string;
   files?: string;
   type?: 'demo' | 'example';
 }>(), { type: 'demo' });
@@ -16,7 +17,8 @@ const parsedFiles = computed(() => JSON.parse(decodeURIComponent(props.files ?? 
 
 <template>
   <HeroContainer
-    :folder="name"
+    :dir="dir"
+    :name="name"
     :files="parsedFiles"
     :css-framework="cssFramework"
     :type="type"

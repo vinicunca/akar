@@ -11,12 +11,17 @@ import Stackblitz from '../../components/stackblitz.vue';
 const props = withDefaults(
   defineProps<{
     overflow?: boolean;
-    folder?: string;
+    dir?: string;
+    name?: string;
     files?: Array<string>;
     cssFramework?: string;
     type?: 'demo' | 'example';
   }>(),
-  { folder: '', files: () => [] },
+  {
+    dir: '',
+    name: '',
+    files: () => [],
+  },
 );
 
 const isCodeView = ref(false);
@@ -25,24 +30,17 @@ const sources = ref<Record<string, string>>({});
 watch(() => props.cssFramework, () => {
   sources.value = {}; // reset sources everytime the value changes
   props.files?.forEach((file) => {
-    const [folder, fileName] = file.split('/');
     const extension = file.split('.').pop();
+    const fileExt = file.replace(`.${extension}`, '');
+    const dirType = props.type === 'demo' ? 'demo' : 'examples';
 
-    if (props.type === 'demo') {
-      // eslint-disable-next-line sonar/no-nested-template-literals
-      import(`../../components/demo/${props.folder}/${folder}/${fileName.replace(`.${extension}`, '')}.${extension}?raw`).then(
-        (res) => {
-          sources.value[fileName] = res.default;
-        },
-      );
-    } else {
-      // eslint-disable-next-line sonar/no-nested-template-literals
-      import(`../../components/examples/${props.folder}/${file.replace(`.${extension}`, '')}.${extension}?raw`).then(
-        (res) => {
-          sources.value[file] = res.default;
-        },
-      );
-    }
+    const item = `../../components/${dirType}/${props.dir}/${props.name}/${fileExt}.${extension}?raw`;
+
+    import(item).then(
+      (res) => {
+        sources.value[file] = res.default;
+      },
+    );
   });
 }, { immediate: true });
 </script>
@@ -82,16 +80,16 @@ watch(() => props.cssFramework, () => {
         <slot />
 
         <Stackblitz
-          v-if="folder"
+          v-if="name"
           class="hidden bottom-4 right-12 absolute sm:block"
-          :name="folder"
+          :name="name"
           :files="files"
           :sources="sources"
         />
         <CodeSandbox
-          v-if="folder"
+          v-if="name"
           class="hidden bottom-4 right-4 absolute sm:block"
-          :name="folder"
+          :name="name"
           :files="files"
           :sources="sources"
         />

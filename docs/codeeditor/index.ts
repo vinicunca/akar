@@ -59,8 +59,7 @@ export default defineConfig({
 function constructFiles(componentName: string, sources: Record<string, string>) {
   const dependencies = {
     'vue': 'latest',
-    'reka-ui': version,
-    '@radix-ui/colors': 'latest',
+    'akar': version,
     '@iconify/vue': 'latest',
   };
 
@@ -68,9 +67,8 @@ function constructFiles(componentName: string, sources: Record<string, string>) 
     'vite': 'latest',
     '@vitejs/plugin-vue': 'latest',
     'vue-tsc': 'latest',
-    'tailwindcss': '^3.4.13',
+    'unocss': '66.4.2',
     'postcss': 'latest',
-    'autoprefixer': 'latest',
   };
 
   const componentFiles = Object.keys(sources).filter((key) => key.endsWith('.vue') && key !== 'index.vue');

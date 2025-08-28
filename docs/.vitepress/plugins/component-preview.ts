@@ -76,22 +76,9 @@ export default function (md: MarkdownRenderer) {
         { withFileTypes: false, recursive: true },
       ).map((file) => isString(file) ? file.split(/[/\\]/).join('/') : file);
 
-      const groupedFiles = props.type === 'example'
-        ? { uno: childFiles }
-        : childFiles.reduce((prev, curr) => {
-            if (typeof curr !== 'string') {
-              return prev;
-            }
-            if (!curr.includes('/')) {
-              prev[curr] = [];
-            } else {
-              const folder = curr.split('/')[0];
-              prev[folder].push(curr);
-            }
-            return prev;
-          }, {} as { [key: string]: Array<string> });
+      const groupedFiles = { unocss: childFiles };
 
-      state.tokens[index].content = `<ComponentPreview name="${props.name}" type="${props.type || 'demo'}" dir="${props.dir}" files="${encodeURIComponent(JSON.stringify(groupedFiles))}" ><${props.name} />`;
+      state.tokens[index].content = `<ComponentPreview name="${fileName}" type="${props.type || 'demo'}" dir="${props.dir}" files="${encodeURIComponent(JSON.stringify(groupedFiles))}" ><${props.name} />`;
       const _dummyToken = new state.Token('', '', 0);
       const tokenArray: Array<typeof _dummyToken> = [];
 

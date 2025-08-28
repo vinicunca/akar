@@ -1,23 +1,13 @@
 <script setup lang="ts">
 import type { VNode } from 'vue';
-import { Icon } from '@iconify/vue';
 import { useVModel } from '@vueuse/core';
 import {
-  ASelectContent,
-  ASelectItem,
-  ASelectItemIndicator,
-  ASelectItemText,
-  ASelectPortal,
-  ASelectRoot,
-  ASelectTrigger,
-  ASelectValue,
-  ASelectViewport,
   ATabsContent,
   ATabsList,
   ATabsRoot,
   ATabsTrigger,
 } from 'akar';
-import { capitalize, computed, ref, useSlots, watch } from 'vue';
+import { computed, ref, useSlots, watch } from 'vue';
 
 defineOptions({
   inheritAttrs: false,
@@ -33,12 +23,6 @@ const emits = defineEmits<{
 const cssFramework = useVModel(props, 'modelValue', emits);
 
 const slots = useSlots();
-const slotsFramework = computed(() => slots.default?.().map((slot) => slot.props?.key?.toString()?.replace('_', '')) ?? []);
-
-const cssFrameworkOptions = computed(() => [
-  { label: 'UnoCSS', value: 'unocss', icon: 'logos:unocss' },
-  { label: 'CSS', value: 'css', icon: 'devicon:css3' },
-].filter((i) => slotsFramework.value.includes(i.value)));
 
 const tabs = computed(
   () => {
@@ -87,54 +71,6 @@ watch(open, () => {
             {{ tab.label }}
           </ATabsTrigger>
         </ATabsList>
-        <div v-if="type === 'demo'">
-          <ASelectRoot
-            v-model="cssFramework"
-            @update:model-value="currentTab = 'index.vue'"
-          >
-            <ASelectTrigger
-              class="text-xs text-white px-2 py-1.5 rounded flex w-32 items-center justify-between hover:bg-code disabled:opacity-50"
-              aria-label="Select CSS framework"
-            >
-              <div class="inline-flex gap-2 items-center">
-                <Icon
-                  :icon="cssFrameworkOptions.find(opt => opt.value === cssFramework)?.icon ?? ''"
-                  class="text-base"
-                />
-
-                <ASelectValue>
-                  {{ cssFrameworkOptions.find(opt => opt.value === cssFramework)?.label }}
-                </ASelectValue>
-              </div>
-
-              <Icon
-                icon="lucide:chevron-down"
-                class="h-3.5 w-3.5"
-              />
-            </ASelectTrigger>
-
-            <ASelectPortal>
-              <ASelectContent class="data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade will-change-[opacity,transform] border border-stone-700 rounded-md bg-code min-w-32 shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] z-[100]">
-                <ASelectViewport class="p-[5px]">
-                  <ASelectItem
-                    v-for="framework in cssFrameworkOptions"
-                    :key="framework.label"
-                    class="data-[disabled]:text-mauve8 text-xs text-white leading-none pl-[25px] rounded-[3px] flex h-[25px] select-none items-center relative data-[highlighted]:text-primary data-[state=checked]:text-primary data-[highlighted]:outline-none data-[highlighted]:bg-primary/10 data-[disabled]:pointer-events-none"
-                    :value="framework.value"
-                  >
-                    <ASelectItemIndicator class="inline-flex w-[25px] items-center left-0 justify-center absolute">
-                      <Icon icon="lucide:check" />
-                    </ASelectItemIndicator>
-
-                    <ASelectItemText>
-                      {{ capitalize(framework.label ?? '') }}
-                    </ASelectItemText>
-                  </ASelectItem>
-                </ASelectViewport>
-              </ASelectContent>
-            </ASelectPortal>
-          </ASelectRoot>
-        </div>
       </div>
     </div>
     <div
