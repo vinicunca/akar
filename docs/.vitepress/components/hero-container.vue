@@ -59,7 +59,7 @@ watch(() => props.cssFramework, () => {
         <ASwitchRoot
           id="view-code"
           v-model="isCodeView"
-          class="ml-2 rounded-full flex h-5 w-[34px] transition relative data-[state=checked]:bg-primary data-[state=unchecked]:bg-primary/50"
+          class="ml-2 rounded-full flex h-5 w-[34px] transition relative data-[state=checked]:bg-docs-primary data-[state=unchecked]:bg-docs-primary/50"
           aria-label="View code"
         >
           <ASwitchThumb

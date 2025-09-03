@@ -71,7 +71,7 @@ const dialogOpen = ref(false);
           <div class="mt-[25px] flex justify-end">
             <ADialogClose as-child>
               <button
-                class="h-[35px] inline-flex items-center justify-center rounded-[4px] bg-green4 px-[15px] text-green11 font-medium leading-none hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7 focus:outline-none"
+                class="h-[35px] inline-flex items-center justify-center rounded-[4px] bg-green4 px-[15px] color-green11 font-medium leading-none hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7 focus:outline-none"
               >
                 Save changes
               </button>

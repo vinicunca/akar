@@ -23,7 +23,7 @@ const data = computed(() => JSON.parse(props.data));
       class="px-3 border-muted"
     >
       <div class="inline-flex flex-wrap gap-2 items-center">
-        <div class="text-xs text-primary font-bold font-mono">
+        <div class="color-docs-primary text-xs font-bold font-mono">
           {{ prop.name }}
         </div>
         <code class="text-xs text-foreground px-2 py-0.5 bg-muted">

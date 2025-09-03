@@ -29,7 +29,7 @@ const accordionItems = [
 
 <template>
   <AAccordionRoot
-    class="border rounded-lg bg-light-500 w-[300px] shadow-black/5 shadow-focus"
+    class="bg-white w-300px"
     default-value="item-1"
     type="single"
     :collapsible="true"
@@ -39,21 +39,22 @@ const accordionItems = [
       :key="item.value"
     >
       <AAccordionItem
-        class="mt-px overflow-hidden first:mt-0 first:rounded-t-[7px] last:rounded-b-[7px]"
+        class="border-b border-border last:border-b-0"
         :value="item.value"
       >
         <AAccordionHeader class="flex">
-          <AAccordionTrigger class="group text-sm color-green-800 leading-none px-5 bg-white flex flex-1 h-[45px] shadow-[0_1px_0] shadow-slate-300 transition-colors-280 items-center justify-between focus-visible:outline-primary hover:bg-light-600">
+          <AAccordionTrigger class="group text-sm font-medium py-3.5 outline-none rounded-md flex flex-1 gap-1.5 min-w-0 items-center focus-visible:(ring-3 ring-ring/50)">
             <span>{{ item.title }}</span>
             <Icon
               icon="radix-icons:chevron-down"
-              class="color-green-600 transition-transform-280 group-data-[state=open]:rotate-180"
+              class="color-primary ms-auto size-5 transition-transform-280 group-data-[state=open]:rotate-180"
               aria-label="Expand/Collapse"
             />
           </AAccordionTrigger>
         </AAccordionHeader>
-        <AAccordionContent class="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down text-sm color-slate-700 bg-light-500 overflow-hidden focus:outline-none">
-          <div class="px-5 py-4">
+
+        <AAccordionContent class="overflow-hidden focus:outline-none data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+          <div class="text-sm pb-3.5">
             {{ item.content }}
           </div>
         </AAccordionContent>

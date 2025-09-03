@@ -13,7 +13,7 @@ const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20
     :layout="{ type: 'grid', iframe: false, width: '50%' }"
   >
     <Variant title="Filter (Single)">
-      <AListboxRoot class="mx-auto w-48 flex flex-col border rounded-lg bg-white p-1 text-green9">
+      <AListboxRoot class="mx-auto w-48 flex flex-col border rounded-lg bg-white p-1 color-green9">
         <AListboxFilter
           v-model="searchTerm"
           class="border rounded"
@@ -23,7 +23,7 @@ const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="w-full select-none rounded px-2 py-1 text-sm color-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
           >
             {{ i }}
           </AListboxItem>
@@ -34,7 +34,7 @@ const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20
     <Variant title="Filter (Multiple)">
       <AListboxRoot
         :multiple="true"
-        class="mx-auto w-48 flex flex-col border rounded-lg bg-white p-1 text-green9"
+        class="mx-auto w-48 flex flex-col border rounded-lg bg-white p-1 color-green9"
       >
         <AListboxFilter
           v-model="searchTerm"
@@ -45,7 +45,7 @@ const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20
             v-for="i in options"
             :key="i"
             :value="i"
-            class="w-full select-none rounded px-2 py-1 text-sm text-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+            class="w-full select-none rounded px-2 py-1 text-sm color-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
           >
             {{ i }}
           </AListboxItem>

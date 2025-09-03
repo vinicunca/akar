@@ -36,7 +36,7 @@ const currentTrigger = ref('');
                 Products
                 <Icon
                   icon="radix-icons:caret-down"
-                  class="relative top-[1px] text-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                  class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
                 />
               </ANavigationMenuTrigger>
 
@@ -57,7 +57,7 @@ const currentTrigger = ref('');
                         Extensibility
                         <Icon
                           icon="radix-icons:caret-down"
-                          class="relative top-[1px] text-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                          class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
                         />
                       </ANavigationMenuTrigger>
 
@@ -84,7 +84,7 @@ const currentTrigger = ref('');
                         Security
                         <Icon
                           icon="radix-icons:caret-down"
-                          class="relative top-[1px] text-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                          class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
                         />
                       </ANavigationMenuTrigger>
                       <ANavigationMenuContent
@@ -107,7 +107,7 @@ const currentTrigger = ref('');
                         Authentication
                         <Icon
                           icon="radix-icons:caret-down"
-                          class="relative top-[1px] text-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                          class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
                         />
                       </ANavigationMenuTrigger>
                       <ANavigationMenuContent
@@ -140,7 +140,7 @@ const currentTrigger = ref('');
                 Company
                 <Icon
                   icon="radix-icons:caret-down"
-                  class="relative top-[1px] text-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                  class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
                 />
               </ANavigationMenuTrigger>
               <ANavigationMenuContent
@@ -162,7 +162,7 @@ const currentTrigger = ref('');
                         Customers
                         <Icon
                           icon="radix-icons:caret-down"
-                          class="relative top-[1px] text-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                          class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
                         />
                       </ANavigationMenuTrigger>
 
@@ -189,7 +189,7 @@ const currentTrigger = ref('');
                         Security
                         <Icon
                           icon="radix-icons:caret-down"
-                          class="relative top-[1px] text-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                          class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
                         />
                       </ANavigationMenuTrigger>
                       <ANavigationMenuContent
@@ -212,7 +212,7 @@ const currentTrigger = ref('');
                         Authentication
                         <Icon
                           icon="radix-icons:caret-down"
-                          class="relative top-[1px] text-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                          class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
                         />
                       </ANavigationMenuTrigger>
                       <ANavigationMenuContent

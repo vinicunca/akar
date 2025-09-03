@@ -66,7 +66,7 @@ const isExamplePage = computed(() => path.value.includes('examples'));
           </ACollapsibleContent>
         </ACollapsibleRoot>
 
-        <div class="text-sm text-primary font-bold mb-2">
+        <div class="color-docs-primary text-sm font-bold mb-2">
           {{ activeSection?.text }}
         </div>
 
@@ -85,7 +85,7 @@ const isExamplePage = computed(() => path.value.includes('examples'));
         <!-- <DocCommunity /> -->
         <div class="grow" />
 
-        <div class="bg-gradient-to-b h-12 w-64 bottom-0 fixed z-10 from-transparent to-background" />
+        <div class="h-12 w-64 bottom-0 fixed z-10 from-transparent to-background bg-gradient-to-b" />
       </div>
     </main>
   </div>

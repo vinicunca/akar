@@ -18,7 +18,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
     <Variant title="Empty default">
       <ADateFieldRoot
         v-slot="{ segments }"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -33,7 +33,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -45,7 +45,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
       <ADateFieldRoot
         v-slot="{ segments }"
         :default-value="defaultValue"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -60,7 +60,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -71,7 +71,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
     <Variant title="Uncontrolled">
       <ADateFieldRoot
         v-slot="{ segments }"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -86,7 +86,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -98,7 +98,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
       <ADateFieldRoot
         v-slot="{ segments }"
         v-model="modelValue"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -113,7 +113,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -126,7 +126,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
         v-slot="{ segments }"
         :default-value="defaultValue"
         :min-value="minValue"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -141,7 +141,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -154,7 +154,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
         v-slot="{ segments }"
         :default-value="defaultValue"
         :max-value="maxValue"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -169,7 +169,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -182,7 +182,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
         v-slot="{ segments }"
         :default-value="defaultValue"
         :disabled="true"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -197,7 +197,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -209,7 +209,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
       <ADateFieldRoot
         v-slot="{ segments }"
         locale="de"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -224,7 +224,7 @@ const maxValue = new CalendarDate(2024, 2, 29);
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>

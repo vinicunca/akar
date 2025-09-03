@@ -13,7 +13,7 @@ import { AEditableArea, AEditableCancelTrigger, AEditableEditTrigger, AEditableI
         placeholder="Enter text..."
         class="flex flex-col gap-4"
       >
-        <AEditableArea class="text-green10">
+        <AEditableArea class="color-green10">
           <AEditablePreview />
           <AEditableInput />
         </AEditableArea>

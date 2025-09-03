@@ -24,6 +24,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "bumpp": "bumpp package.json packages/*/package.json",
+    "taze": "taze patch -wIrl",
     "pub:release": "cd packages/core && pnpm pub:release"
   },
   "devDependencies": {
@@ -35,6 +36,7 @@
     "eslint-plugin-format": "catalog:base",
     "lint-staged": "catalog:base",
     "simple-git-hooks": "catalog:base",
+    "taze": "catalog:base",
     "tsx": "catalog:base",
     "typescript": "catalog:base"
   },

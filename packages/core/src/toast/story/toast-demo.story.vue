@@ -59,7 +59,7 @@ function handleClick() {
           as-child
           alt-text="Goto schedule to undo"
         >
-          <button class="h-[25px] inline-flex items-center justify-center rounded bg-green2 px-[10px] text-xs text-green11 font-medium leading-[25px] shadow-[inset_0_0_0_1px] shadow-green7 focus:shadow-[0_0_0_2px] focus:shadow-green8 hover:shadow-[inset_0_0_0_1px] hover:shadow-green8">
+          <button class="h-[25px] inline-flex items-center justify-center rounded bg-green2 px-[10px] text-xs color-green11 font-medium leading-[25px] shadow-[inset_0_0_0_1px] shadow-green7 focus:shadow-[0_0_0_2px] focus:shadow-green8 hover:shadow-[inset_0_0_0_1px] hover:shadow-green8">
             Undo
           </button>
         </AToastAction>
