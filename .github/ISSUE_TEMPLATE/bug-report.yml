@@ -26,12 +26,12 @@ body:
         Development/Production OS: Windows 10 19043.1110
         Node version: 16.0.0
         Package manager: pnpm@8.6.0
-        Radix Vue version: 1.0.0
+        Akar version: 1.0.0
         Vue version: 3.0.0
         Nuxt version: 3.0.0
         Nuxt mode: universal
         Nuxt target: server
-        CSS framework: tailwindcss@3.3.3
+        CSS framework: unocss@66.4.2
         Client OS: Windows 10 19043.1110
         Browser: Chrome 90.0.4430.212
       render: bash

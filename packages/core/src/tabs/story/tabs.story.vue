@@ -65,7 +65,7 @@ import { ATabsContent, ATabsIndicator, ATabsList, ATabsRoot, ATabsTrigger } from
           </fieldset>
           <div class="mt-5 flex justify-end">
             <button
-              class="h-[35px] inline-flex cursor-default items-center justify-center rounded bg-green4 px-[15px] text-[15px] text-green11 font-medium leading-none outline-none hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+              class="h-[35px] inline-flex cursor-default items-center justify-center rounded bg-green4 px-[15px] text-[15px] color-green11 font-medium leading-none outline-none hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7"
             >
               Save changes
             </button>
@@ -119,7 +119,7 @@ import { ATabsContent, ATabsIndicator, ATabsList, ATabsRoot, ATabsTrigger } from
           </fieldset>
           <div class="mt-5 flex justify-end">
             <button
-              class="h-[35px] inline-flex cursor-default items-center justify-center rounded bg-green4 px-[15px] text-[15px] text-green11 font-medium leading-none outline-none hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+              class="h-[35px] inline-flex cursor-default items-center justify-center rounded bg-green4 px-[15px] text-[15px] color-green11 font-medium leading-none outline-none hover:bg-green5 focus:shadow-[0_0_0_2px] focus:shadow-green7"
             >
               Change password
             </button>

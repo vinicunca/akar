@@ -2,25 +2,25 @@ import type { Component, PropType } from 'vue';
 import { defineComponent, h } from 'vue';
 import { APrimitiveSlot } from './slot-primitive';
 
-export type APrimitiveAsTag =
-  | 'a'
-  | 'button'
-  | 'div'
-  | 'form'
-  | 'h2'
-  | 'h3'
-  | 'img'
-  | 'input'
-  | 'label'
-  | 'li'
-  | 'nav'
-  | 'ol'
-  | 'p'
-  | 'span'
-  | 'svg'
-  | 'template'
-  | 'ul'
-  | (string & {}); // any other string
+export type APrimitiveAsTag
+  = | 'a'
+    | 'button'
+    | 'div'
+    | 'form'
+    | 'h2'
+    | 'h3'
+    | 'img'
+    | 'input'
+    | 'label'
+    | 'li'
+    | 'nav'
+    | 'ol'
+    | 'p'
+    | 'span'
+    | 'svg'
+    | 'template'
+    | 'ul'
+    | (string & {}); // any other string
 
 export interface APrimitiveProps {
   /**

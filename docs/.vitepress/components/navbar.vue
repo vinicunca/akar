@@ -81,13 +81,13 @@ watch(
                 v-if="nav.link"
                 as="a"
                 :href="nav.link"
-                class="text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full items-center hover:color-primary hover:bg-primary/10"
+                class="hover:bg-primary/10 hover:color-primary text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full items-center"
               >
                 {{ nav.text }}
               </ADropdownMenuItem>
 
               <ADropdownMenuSub v-else-if="nav.items">
-                <ADropdownMenuSubTrigger class="text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full w-full items-center justify-between hover:color-primary hover:bg-primary/10">
+                <ADropdownMenuSubTrigger class="hover:bg-primary/10 hover:color-primary text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full w-full items-center justify-between">
                   <span>{{ nav.text }}</span>
                   <i
                     class="i-lucide:chevron-down text-lg ml-1"
@@ -99,7 +99,7 @@ watch(
                     <ADropdownMenuItem
                       v-for="item in nav.items"
                       :key="item.text"
-                      class="text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full w-full items-center hover:color-primary hover:bg-primary/10"
+                      class="hover:bg-primary/10 hover:color-primary text-sm color-muted-foreground font-semibold p-2 rounded inline-flex h-full w-full items-center"
                     >
                       <a
                         v-if="item.link"

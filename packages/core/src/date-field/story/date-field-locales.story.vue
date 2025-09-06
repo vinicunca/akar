@@ -11,7 +11,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
       <ADateFieldRoot
         v-slot="{ segments }"
         granularity="second"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -26,7 +26,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="data-[placeholderdata-[placeholder]:text-green9 rounded-5px px-1 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="data-[placeholderdata-[placeholder]:color-green9 rounded-5px px-1 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -39,7 +39,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="ja"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -54,7 +54,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -67,7 +67,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="fa-IR"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -82,7 +82,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -95,7 +95,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="zh-TW"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -110,7 +110,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -123,7 +123,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="he"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -138,7 +138,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>
@@ -151,7 +151,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
         v-slot="{ segments }"
         granularity="second"
         locale="th"
-        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center text-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+        class="flex select-none items-center border border-gray9 rounded bg-white p-2 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
       >
         <template
           v-for="item in segments"
@@ -166,7 +166,7 @@ import { ADateFieldInput, ADateFieldRoot } from '..';
           <ADateFieldInput
             v-else
             :part="item.part"
-            class="rounded-5px px-1 data-[placeholder]:text-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="rounded-5px px-1 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             {{ item.value }}
           </ADateFieldInput>

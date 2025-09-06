@@ -24,7 +24,7 @@ const forwarded = useForwardPropsEmits(props, emits);
     v-bind="forwarded"
     class="flex flex-col gap-4"
   >
-    <AEditableArea class="text-green10">
+    <AEditableArea class="color-green10">
       <AEditablePreview />
       <AEditableInput />
     </AEditableArea>

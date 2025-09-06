@@ -27,7 +27,7 @@ const errorCaseMax = ref(100);
           :style="`transform: translateX(-${100 - interactive}%)`"
         />
         <div
-          class="pointer-events-none absolute text-center text-xs text-green-400 font-bold tracking-widest font-mono uppercase mix-blend-normal"
+          class="pointer-events-none absolute text-center text-xs color-green-400 font-bold tracking-widest font-mono uppercase mix-blend-normal"
         >
           {{ interactive.toFixed(2) }}%
         </div>
@@ -39,7 +39,7 @@ const errorCaseMax = ref(100);
       >
         <AProgressIndicator class="h-full w-full bg-white/20" />
         <div
-          class="pointer-events-none absolute text-center text-xs text-green-400 font-bold tracking-widest font-mono uppercase mix-blend-normal"
+          class="pointer-events-none absolute text-center text-xs color-green-400 font-bold tracking-widest font-mono uppercase mix-blend-normal"
         >
           Progress value is null
         </div>
@@ -49,7 +49,7 @@ const errorCaseMax = ref(100);
         class="mt-10 rounded-md bg-slate-500/80 px-3 py-4 text-sm text-slate-100"
       >
         When there is no value provided, the progress indicator will be
-        <code class="text-green-400">indeterminate</code>.
+        <code class="color-green-400">indeterminate</code>.
       </p>
     </Variant>
     <Variant title="Errors">
@@ -118,19 +118,19 @@ const errorCaseMax = ref(100);
             class="h-max rounded-md bg-slate-200 px-2 py-1 text-slate-800 hover:bg-slate-300"
             @click="errorCaseValue = 1000"
           >
-            Set <code class="text-green-600">value</code> to 1000
+            Set <code class="color-green-600">value</code> to 1000
           </button>
           <button
             class="h-max rounded-md bg-slate-200 px-2 py-1 text-slate-800 hover:bg-slate-300"
             @click="errorCaseValue = -1"
           >
-            Set <code class="text-green-600">value</code> to -1
+            Set <code class="color-green-600">value</code> to -1
           </button>
           <button
             class="h-max rounded-md bg-slate-200 px-2 py-1 text-slate-800 hover:bg-slate-300"
             @click="errorCaseMax = -1"
           >
-            Set <code class="text-green-600">max</code> to -1
+            Set <code class="color-green-600">max</code> to -1
           </button>
         </div>
       </div>

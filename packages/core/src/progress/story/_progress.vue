@@ -19,7 +19,7 @@ setTimeout(() => {
       :style="`transform: translateX(-${100 - interactive}%)`"
     />
     <div
-      class="pointer-events-none absolute text-center text-xs text-green-400 font-bold tracking-widest font-mono uppercase mix-blend-normal"
+      class="pointer-events-none absolute text-center text-xs color-green-400 font-bold tracking-widest font-mono uppercase mix-blend-normal"
     >
       {{ interactive.toFixed(2) }}%
     </div>

@@ -20,7 +20,7 @@ const selectedValue = ref('item-2');
     <Variant title="Uncontrolled">
       <AAccordionRoot
         type="single"
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
       >
         <AAccordionItem
           class="accordion-item"
@@ -77,7 +77,7 @@ const selectedValue = ref('item-2');
 
       <AAccordionRoot
         v-model="selectedValue"
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
       >
         <AAccordionItem
           class="accordion-item"
@@ -126,7 +126,7 @@ const selectedValue = ref('item-2');
 
     <Variant title="Collapsible">
       <AAccordionRoot
-        class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+        class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
         type="single"
         :collapsible="true"
         default-value="item-2"

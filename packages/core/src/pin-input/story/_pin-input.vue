@@ -25,7 +25,7 @@ const value = ref<Array<string>>([]);
     <APinInputInput
       v-for="(id, index) in 5"
       :key="id"
-      class="h-10 w-10 rounded text-center text-green10 placeholder:text-mauve5"
+      class="h-10 w-10 rounded text-center color-green10 placeholder:text-mauve5"
       :index="index"
     />
   </APinInputRoot>

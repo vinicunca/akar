@@ -25,19 +25,6 @@ const isExamplePage = computed(() => path.value.includes('examples'));
 
 <template>
   <div class="w-full">
-    <div
-      class="flex h-max w-full pointer-events-none inset-0 left-0 top-0 justify-center absolute z-0 overflow-hidden"
-    >
-      <div class="flex flex-none w-[108rem] justify-end">
-        <img
-          class="flex-none max-w-none w-[90rem]"
-          decoding="async"
-          src="/new-bg.png"
-          alt="backdrop"
-        >
-      </div>
-    </div>
-
     <DocTopbar />
 
     <main class="flex">
@@ -66,11 +53,11 @@ const isExamplePage = computed(() => path.value.includes('examples'));
           </ACollapsibleContent>
         </ACollapsibleRoot>
 
-        <div class="text-sm text-primary font-bold mb-2">
+        <div class="text-sm color-primary font-bold mb-2">
           {{ activeSection?.text }}
         </div>
 
-        <article class="prose prose-stone dark:prose-invert max-w-none w-full">
+        <article class="max-w-none w-full prose prose-stone dark:prose-invert">
           <Content />
         </article>
 
@@ -85,7 +72,7 @@ const isExamplePage = computed(() => path.value.includes('examples'));
         <!-- <DocCommunity /> -->
         <div class="grow" />
 
-        <div class="bg-gradient-to-b h-12 w-64 bottom-0 fixed z-10 from-transparent to-background" />
+        <div class="h-12 w-64 bottom-0 fixed z-10 from-transparent to-background bg-gradient-to-b" />
       </div>
     </main>
   </div>

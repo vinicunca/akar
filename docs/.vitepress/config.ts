@@ -2,7 +2,9 @@ import anchor from 'markdown-it-anchor';
 import UnoCSS from 'unocss/vite';
 import { defineConfig, postcssIsolateStyles } from 'vitepress';
 import { akarName, akarShortName, discord, github, ogUrl } from './meta';
+import ComponentPreviewPlugin from './plugins/component-preview';
 import { createHoverTransformer } from './plugins/hover-transformer';
+import InstallationTabsPlugin from './plugins/installation-tabs';
 
 // @unocss-include
 
@@ -201,22 +203,59 @@ export default defineConfig({
         icon: 'lucide:box',
         items: [
           {
+            text: 'General',
+            items: [
+              { text: 'Accordion', link: '/docs/components/a-accordion' },
+              { text: 'Alert Dialog', link: '/docs/components/a-alert-dialog' },
+              { text: 'Aspect Ratio', link: '/docs/components/a-aspect-ratio' },
+              { text: 'Avatar', link: '/docs/components/a-avatar' },
+              { text: 'Collapsible', link: '/docs/components/a-collapsible' },
+              { text: 'Context Menu', link: '/docs/components/a-context-menu' },
+              { text: 'Dialog', link: '/docs/components/a-dialog' },
+              { text: 'Dropdown Menu', link: '/docs/components/a-dropdown-menu' },
+              { text: 'Hover Card', link: '/docs/components/a-hover-card' },
+              { text: 'Menubar', link: '/docs/components/a-menubar' },
+              {
+                text: 'Navigation Menu',
+                link: '/docs/components/a-navigation-menu',
+              },
+              { text: 'Pagination', link: '/docs/components/a-pagination' },
+              { text: 'Popover', link: '/docs/components/a-popover' },
+              { text: 'Progress', link: '/docs/components/a-progress' },
+              { text: 'Scroll Area', link: '/docs/components/a-scroll-area' },
+              { text: 'Separator', link: '/docs/components/a-separator' },
+              { text: 'Splitter', link: '/docs/components/a-splitter' },
+              {
+                text: 'Stepper',
+                link: '/docs/components/a-stepper',
+              },
+              { text: 'Tabs', link: '/docs/components/a-tabs' },
+              { text: 'Toast', link: '/docs/components/a-toast' },
+              { text: 'Toolbar', link: '/docs/components/a-toolbar' },
+              { text: 'Tooltip', link: '/docs/components/a-tooltip' },
+              {
+                text: 'Tree',
+                link: '/docs/components/a-tree',
+              },
+            ],
+          },
+          {
             text: 'Form',
             items: [
-              { text: 'Checkbox', link: '/docs/components/checkbox' },
-              { text: 'Combobox', link: '/docs/components/combobox' },
-              { text: 'Editable', link: '/docs/components/editable' },
-              { text: 'Listbox', link: '/docs/components/listbox' },
-              { text: 'Number Field', link: '/docs/components/number-field' },
-              { text: 'Label', link: '/docs/components/label' },
-              { text: 'Pin Input', link: '/docs/components/pin-input' },
-              { text: 'Radio Group', link: '/docs/components/radio-group' },
-              { text: 'Select', link: '/docs/components/select' },
-              { text: 'Slider', link: '/docs/components/slider' },
-              { text: 'Switch', link: '/docs/components/switch' },
-              { text: 'Tags Input', link: '/docs/components/tags-input' },
-              { text: 'Toggle', link: '/docs/components/toggle' },
-              { text: 'Toggle Group', link: '/docs/components/toggle-group' },
+              { text: 'Checkbox', link: '/docs/components/a-checkbox' },
+              { text: 'Combobox', link: '/docs/components/a-combobox' },
+              { text: 'Editable', link: '/docs/components/a-editable' },
+              { text: 'Listbox', link: '/docs/components/a-listbox' },
+              { text: 'Number Field', link: '/docs/components/a-number-field' },
+              { text: 'Label', link: '/docs/components/a-label' },
+              { text: 'Pin Input', link: '/docs/components/a-pin-input' },
+              { text: 'Radio Group', link: '/docs/components/a-radio-group' },
+              { text: 'Select', link: '/docs/components/a-select' },
+              { text: 'Slider', link: '/docs/components/a-slider' },
+              { text: 'Switch', link: '/docs/components/a-switch' },
+              { text: 'Tags Input', link: '/docs/components/a-tags-input' },
+              { text: 'Toggle', link: '/docs/components/a-toggle' },
+              { text: 'Toggle Group', link: '/docs/components/a-toggle-group' },
             ],
           },
           {
@@ -224,68 +263,31 @@ export default defineConfig({
             items: [
               {
                 text: 'Calendar',
-                link: '/docs/components/calendar',
+                link: '/docs/components/a-calendar',
               },
               {
                 text: 'Date Field',
-                link: '/docs/components/date-field',
+                link: '/docs/components/a-date-field',
               },
               {
                 text: 'Date Picker',
-                link: '/docs/components/date-picker',
+                link: '/docs/components/a-date-picker',
               },
               {
                 text: 'Date Range Field',
-                link: '/docs/components/date-range-field',
+                link: '/docs/components/a-date-range-field',
               },
               {
                 text: 'Date Range Picker',
-                link: '/docs/components/date-range-picker',
+                link: '/docs/components/a-date-range-picker',
               },
               {
                 text: 'Range Calendar',
-                link: '/docs/components/range-calendar',
+                link: '/docs/components/a-range-calendar',
               },
               {
                 text: 'Time Field',
-                link: '/docs/components/time-field',
-              },
-            ],
-          },
-          {
-            text: 'General',
-            items: [
-              { text: 'Accordion', link: '/docs/components/accordion' },
-              { text: 'Alert Dialog', link: '/docs/components/alert-dialog' },
-              { text: 'Aspect Ratio', link: '/docs/components/aspect-ratio' },
-              { text: 'Avatar', link: '/docs/components/avatar' },
-              { text: 'Collapsible', link: '/docs/components/collapsible' },
-              { text: 'Context Menu', link: '/docs/components/context-menu' },
-              { text: 'Dialog', link: '/docs/components/dialog' },
-              { text: 'Dropdown Menu', link: '/docs/components/dropdown-menu' },
-              { text: 'Hover Card', link: '/docs/components/hover-card' },
-              { text: 'Menubar', link: '/docs/components/menubar' },
-              {
-                text: 'Navigation Menu',
-                link: '/docs/components/navigation-menu',
-              },
-              { text: 'Pagination', link: '/docs/components/pagination' },
-              { text: 'Popover', link: '/docs/components/popover' },
-              { text: 'Progress', link: '/docs/components/progress' },
-              { text: 'Scroll Area', link: '/docs/components/scroll-area' },
-              { text: 'Separator', link: '/docs/components/separator' },
-              { text: 'Splitter', link: '/docs/components/splitter' },
-              {
-                text: 'Stepper',
-                link: '/docs/components/stepper',
-              },
-              { text: 'Tabs', link: '/docs/components/tabs' },
-              { text: 'Toast', link: '/docs/components/toast' },
-              { text: 'Toolbar', link: '/docs/components/toolbar' },
-              { text: 'Tooltip', link: '/docs/components/tooltip' },
-              {
-                text: 'Tree',
-                link: '/docs/components/tree',
+                link: '/docs/components/a-time-field',
               },
             ],
           },
@@ -433,7 +435,7 @@ export default defineConfig({
       },
       permalink: anchor.permalink.linkInsideHeader({
         class: 'header-anchor [&_span]:focus:opacity-100 [&_span_>_span]:focus:outline',
-        symbol: '<span class="absolute top-0 -ml-8 hidden items-center border-0 opacity-0 group-hover:opacity-100 focus:opacity-100 lg:flex">&ZeroWidthSpace;<span class="flex h-6 w-6 items-center justify-center rounded-md outline-2 outline-primary text-green-400 shadow-sm  hover:text-green-700 hover:shadow dark:bg-primary/20 dark:text-primary/80 dark:shadow-none  dark:hover:bg-primary/40 dark:hover:text-primary"><svg width="12" height="12" fill="none" aria-hidden="true"><path d="M3.75 1v10M8.25 1v10M1 3.75h10M1 8.25h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg></span></span>',
+        symbol: '<span class="absolute top-0 -ml-8 hidden items-center border-0 opacity-0 group-hover:opacity-100 focus:opacity-100 lg:flex">&ZeroWidthSpace;<span class="flex h-6 w-6 items-center justify-center rounded-md outline-1 outline-primary color-primary-400 shadow-sm  hover:color-primary-700 hover:shadow dark:bg-primary/20 dark:color-primary/80 dark:shadow-none  dark:hover:bg-primary/40 dark:hover:color-primary transition-colors-280"><svg width="12" height="12" fill="none" aria-hidden="true"><path d="M3.75 1v10M8.25 1v10M1 3.75h10M1 8.25h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg></span></span>',
         renderAttrs: (slug, state) => {
           // From: https://github.com/vuejs/vitepress/blob/256d742b733bfb62d54c78168b0e867b8eb829c9/src/node/markdown/markdown.ts#L263
           // Find `heading_open` with the id identical to slug
@@ -450,6 +452,12 @@ export default defineConfig({
         },
       }),
     },
+
+    preConfig(md) {
+      md.use(ComponentPreviewPlugin);
+      md.use(InstallationTabsPlugin);
+    },
+
     codeTransformers: [createHoverTransformer()],
   },
 

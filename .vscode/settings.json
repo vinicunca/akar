@@ -13,7 +13,6 @@
   "eslint.codeAction.showDocumentation": {
     "enable": true
   },
-  "editor.gotoLocation.multipleDefinitions": "goto",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -39,7 +38,7 @@
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
 
-  "editor.quickSuggestions": {
-    "strings": true
-  }
+  "unocss.root": [
+    "./docs"
+  ]
 }
