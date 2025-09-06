@@ -1,0 +1,12 @@
+export { default as ProseA } from './prose-a.vue';
+export { default as ProseCodeInline } from './prose-code-inline.vue';
+export { default as ProseH1 } from './prose-h1.vue';
+export { default as ProseH2 } from './prose-h2.vue';
+export { default as ProseH3 } from './prose-h3.vue';
+export { default as ProseP } from './prose-p.vue';
+export { default as ProseTable } from './prose-table.vue';
+export { default as ProseTbody } from './prose-tbody.vue';
+export { default as ProseTd } from './prose-td.vue';
+export { default as ProseTh } from './prose-th.vue';
+export { default as ProseThead } from './prose-thead.vue';
+export { default as ProseTr } from './prose-tr.vue';

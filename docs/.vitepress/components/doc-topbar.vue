@@ -52,7 +52,7 @@ watch(path, () => {
           :key="tab.label"
           :href="tab.link"
           :class="{
-            '!border-b-docs-primary !color-foreground': `/${page.relativePath}`.includes(tab.link.split('/').slice(0, -1).join('/')),
+            '!border-b-primary !color-foreground': `/${page.relativePath}`.includes(tab.link.split('/').slice(0, -1).join('/')),
           }"
           class="text-sm color-muted-foreground font-semibold mx-4 py-2 border-b border-b-transparent inline-flex h-full items-center hover:text-foreground hover:border-b-muted"
         >
@@ -70,7 +70,7 @@ watch(path, () => {
           v-for="tab in sectionTabs.filter(i => i.label === 'Examples')"
           :key="tab.label"
           :href="tab.link"
-          :class="{ '!border-b-docs-primary !color-foreground': page.relativePath.includes(tab.label?.toLowerCase() ?? '') }"
+          :class="{ '!border-b-primary !color-foreground': page.relativePath.includes(tab.label?.toLowerCase() ?? '') }"
           class="text-sm color-muted-foreground font-semibold mx-4 py-2 border-b border-b-transparent inline-flex h-full items-center hover:color-foreground hover:border-b-muted"
         >
           <Icon
@@ -154,7 +154,7 @@ watch(path, () => {
       <div class="flex h-full items-center">
         <a
           href="/examples"
-          :class="{ '!border-b-docs-primary !font-semibold !color-foreground': page.relativePath.includes('examples') }"
+          :class="{ '!border-b-primary !font-semibold !color-foreground': page.relativePath.includes('examples') }"
           class="text-sm color-muted-foreground font-medium mx-4 py-2 border-b border-b-transparent inline-flex gap-2 h-full items-center hover:color-foreground hover:border-b-muted"
         >
           <Icon

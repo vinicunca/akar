@@ -27,7 +27,7 @@ useActiveAnchor(container, marker);
   >
     <div
       ref="marker"
-      class="rounded-full bg-docs-primary h-[18px] w-[2px] transition-[top,opacity] duration-300 ease-in-out left-0 absolute -translate-y-1"
+      class="rounded-full bg-primary h-[18px] w-[2px] transition-[top,opacity] duration-300 ease-in-out left-0 absolute -translate-y-1"
     />
 
     <div

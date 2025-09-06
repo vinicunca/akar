@@ -29,7 +29,7 @@ const accordionItems = [
 
 <template>
   <AAccordionRoot
-    class="bg-white w-300px"
+    class="border border-akar-border rounded-lg bg-white w-300px shadow-[0_2px_10px] shadow-black/5"
     default-value="item-1"
     type="single"
     :collapsible="true"
@@ -39,11 +39,11 @@ const accordionItems = [
       :key="item.value"
     >
       <AAccordionItem
-        class="border-b border-border last:border-b-0"
+        class="border-b border-akar-border last:border-b-0"
         :value="item.value"
       >
         <AAccordionHeader class="flex">
-          <AAccordionTrigger class="group text-sm font-medium py-3.5 outline-none rounded-md flex flex-1 gap-1.5 min-w-0 items-center focus-visible:(ring-3 ring-ring/50)">
+          <AAccordionTrigger class="group text-sm font-medium px-5 py-3.5 outline-none border-b border-akar-border flex flex-1 gap-1.5 min-w-0 items-center focus-visible:(ring-3 ring-akar-ring)">
             <span>{{ item.title }}</span>
             <Icon
               icon="radix-icons:chevron-down"
@@ -54,7 +54,7 @@ const accordionItems = [
         </AAccordionHeader>
 
         <AAccordionContent class="overflow-hidden focus:outline-none data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-          <div class="text-sm pb-3.5">
+          <div class="text-sm px-5 py-4">
             {{ item.content }}
           </div>
         </AAccordionContent>

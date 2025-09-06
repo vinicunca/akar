@@ -1,9 +1,8 @@
 packages:
-  - 'packages/*'
+  - packages/*
   - docs
   - .histoire
-patchedDependencies:
-  vitepress@1.6.3: patches/vitepress@1.6.3.patch
+
 catalogs:
   base:
     '@commitlint/cli': ^19.8.1
@@ -67,7 +66,7 @@ catalogs:
     markdown-it-anchor: ^9.2.0
     minisearch: ^6.3.0
     shiki: ^1.29.2
-    vitepress: 1.6.3
+    vitepress: 2.0.0-alpha.12
     vue-component-meta: ^2.2.12
   histoire:
     '@histoire/plugin-vue': ^0.17.17
@@ -78,7 +77,11 @@ catalogs:
     '@nuxt/schema': ^3.15.4
     unbuild: ^2.0.0
     unplugin-vue-components: ^0.28.0
+
 onlyBuiltDependencies:
   - esbuild
   - simple-git-hooks
   - unrs-resolver
+
+patchedDependencies:
+  vitepress@2.0.0-alpha.12: patches/vitepress@2.0.0-alpha.12.patch

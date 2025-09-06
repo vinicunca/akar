@@ -23,7 +23,7 @@ watch(isActiveLink, () => {
 <template>
   <div
     class="text-sm color-muted-foreground rounded-lg flex items-center hover:bg-card"
-    :class="{ 'is-active !bg-docs-primary/10 !color-docs-primary font-semibold': isActiveLink }"
+    :class="{ 'is-active !bg-primary/10 !color-primary font-semibold': isActiveLink }"
   >
     <a
       :href="item.link"
