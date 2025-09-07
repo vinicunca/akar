@@ -77,7 +77,7 @@ catalogs:
     '@nuxt/kit': ^3.15.4
     '@nuxt/schema': ^3.15.4
     unbuild: ^2.0.0
-    unplugin-vue-components: ^0.28.0
+    unplugin-vue-components: ^29.0.0
 
 onlyBuiltDependencies:
   - esbuild
