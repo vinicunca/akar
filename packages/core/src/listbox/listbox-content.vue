@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { refAutoReset } from '@vueuse/shared';
 import { APrimitive } from '~~/primitive';
 import { injectAListboxRootContext } from './listbox-root.vue';
@@ -16,6 +17,37 @@ const { ACollectionSlot } = useCollection();
 const rootContext = injectAListboxRootContext();
 
 const isClickFocus = refAutoReset(false, 10);
+
+function handleFocus(event: FocusEvent) {
+  if (isClickFocus.value) {
+    return;
+  }
+
+  rootContext.onEnter(event);
+}
+
+function handleKeydown(event: KeyboardEvent) {
+  if (
+    // when orientation is vertical, ignore left/right
+    (
+      rootContext.orientation.value === 'vertical'
+      && (event.key === KEY_CODES.ARROW_LEFT || event.key === KEY_CODES.ARROW_RIGHT)
+    )
+    // when orientation is horizontal, ignore up/down
+    || (
+      rootContext.orientation.value === 'horizontal'
+      && (event.key === KEY_CODES.ARROW_UP || event.key === KEY_CODES.ARROW_DOWN)
+    )
+  ) {
+    return;
+  }
+
+  event.preventDefault();
+
+  if (rootContext.focusable.value) {
+    rootContext.onKeydownNavigation(event);
+  }
+}
 </script>
 
 <template>
@@ -29,14 +61,8 @@ const isClickFocus = refAutoReset(false, 10);
       :aria-multiselectable="!!rootContext.multiple.value"
       :data-orientation="rootContext.orientation.value"
       @mousedown.left="isClickFocus = true"
-      @focus="(ev) => {
-        if (isClickFocus)
-          return
-        rootContext.onEnter(ev)
-      }"
-      @keydown.down.up.left.right.home.end.prevent="(event) => {
-        rootContext.focusable.value ? rootContext.onKeydownNavigation(event) : undefined
-      }"
+      @focus="handleFocus"
+      @keydown.down.up.left.right.home.end="handleKeydown"
       @keydown.enter="rootContext.onKeydownEnter"
       @keydown="rootContext.onKeydownTypeAhead"
     >
