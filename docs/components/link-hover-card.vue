@@ -20,10 +20,10 @@ const href = computed(() => {
   if (utilityComponent) {
     const hash = hyphenate(props.name.split(utilityComponent)?.[1]);
     // eslint-disable-next-line sonar/no-nested-template-literals
-    return `/docs/utilities/${hyphenate(utilityComponent)}${hash ? `#${hash}` : ''}`;
+    return `/core/utilities/${hyphenate(utilityComponent)}${hash ? `#${hash}` : ''}`;
   } else {
     const [last, ...parts] = hyphenate(props.name).split('-').reverse();
-    return `/docs/components/${parts.reverse().join('-')}#${last}`;
+    return `/core/components/${parts.reverse().join('-')}#${last}`;
   }
 });
 </script>

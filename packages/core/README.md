@@ -22,7 +22,7 @@ Craft accessible web apps with <a href="https://vuejs.org/">Vue</a>.
 <a href="https://chat.vinicunca.dev"><b>Get involved!</b></a>
 </p>
 <p align="center">
- <a href="https://akar.vinicunca.dev">Documentation</a> | <a href="https://akar.vinicunca.dev/docs/overview/getting-started">Getting Started</a> | <a href="https://akar.vinicunca.dev/examples">Examples</a> | <a href="https://akar.vinicunca.dev/docs/overview/introduction">Why Akar UI?</a>
+ <a href="https://akar.vinicunca.dev">Documentation</a> | <a href="https://akar.vinicunca.dev/core/overview/getting-started">Getting Started</a> | <a href="https://akar.vinicunca.dev/examples">Examples</a> | <a href="https://akar.vinicunca.dev/core/overview/introduction">Why Akar UI?</a>
 </p>
 
 ![hero image](https://akar.vinicunca.dev/og.jpg)

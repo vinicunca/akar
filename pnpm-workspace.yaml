@@ -2,13 +2,15 @@ packages:
   - packages/*
   - docs
   - .histoire
+overrides:
+  vite: ^7.1.5
 patchedDependencies:
   vitepress@2.0.0-alpha.12: patches/vitepress@2.0.0-alpha.12.patch
 catalogs:
   base:
     '@commitlint/cli': ^19.8.1
     '@commitlint/config-conventional': ^19.8.1
-    '@vinicunca/eslint-config': 3.24.0
+    '@vinicunca/eslint-config': 3.25.0
     bumpp: ^10.2.3
     eslint: ^9.35.0
     eslint-plugin-format: ^1.0.1
@@ -66,7 +68,7 @@ catalogs:
     markdown-it: ^14.1.0
     markdown-it-anchor: ^9.2.0
     minisearch: ^6.3.0
-    shiki: ^1.29.2
+    shiki: ^3.12.2
     vitepress: 2.0.0-alpha.12
     vue-component-meta: ^2.2.12
   histoire:

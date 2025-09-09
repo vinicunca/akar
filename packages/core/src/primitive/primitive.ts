@@ -26,7 +26,7 @@ export interface APrimitiveProps {
   /**
    * Change the default rendered element for the one passed as a child, merging their props and behavior.
    *
-   * Read our [Composition](https://akar.vinicunca.dev/docs/guides/composition) guide for more details.
+   * Read our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.
    */
   asChild?: boolean;
   /**

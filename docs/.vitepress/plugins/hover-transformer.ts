@@ -3,7 +3,7 @@ import type { ShikiTransformer } from 'shiki';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { toKebabCase } from '@vinicunca/perkakas';
+import { isIncludedIn, toKebabCase } from '@vinicunca/perkakas';
 import { components as componentsObj } from 'akar/constant';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -56,7 +56,7 @@ export function createHoverTransformer(): ShikiTransformer {
         for (const token of lineEl.children.flatMap((i) => i.type === 'element' ? i.children || [] : []) as Array<Text | Element>) {
           if ('value' in token && typeof token.value === 'string') {
             const value = token.value;
-            if (component.includes(value)) {
+            if (isIncludedIn(value, component)) {
               tokensMap.push([line, index, index + value.length, token, value]);
               index += value.length;
 
