@@ -3,6 +3,9 @@ import type { DefaultTheme } from 'vitepress';
 import { Icon } from '@iconify/vue';
 import { useScroll } from '@vueuse/core';
 import {
+  ACollapsibleContent,
+  ACollapsibleRoot,
+  ACollapsibleTrigger,
   ADialogContent,
   ADialogDescription,
   ADialogOverlay,
@@ -14,23 +17,34 @@ import {
 import { useData, useRoute } from 'vitepress';
 import { computed, ref, toRefs, watch } from 'vue';
 import { flatten } from '../functions/flatten';
+import { coreSidebarItems, pohonSidebarItems } from '../theme/sidebar';
 import DocSidebarItem from './doc-sidebar-item.vue';
 
 const { path } = toRefs(useRoute());
 const { page, theme } = useData();
 
 const isSidebarOpen = ref(false);
-const sidebar = computed(() => (theme.value.sidebar as Array<DefaultTheme.SidebarItem>));
 
-const sectionTabs = computed(() =>
-  sidebar.value.map(
+const isPohonPage = computed(() => path.value.includes('pohon'));
+const isCorePage = computed(() => path.value.includes('core'));
+
+const sectionTabs = computed(() => {
+  let navItems: Array<DefaultTheme.SidebarItem> = [];
+
+  if (isCorePage.value) {
+    navItems = coreSidebarItems.items ?? [];
+  } else if (isPohonPage.value) {
+    navItems = pohonSidebarItems.items ?? [];
+  }
+
+  return navItems.map(
     (val) => ({
       label: val.text,
       link: flatten(val.items ?? [], 'items').filter((i) => !!i.link)?.[0].link ?? '',
       icon: val.icon,
     }),
-  ),
-);
+  );
+});
 
 const { arrivedState } = useScroll(globalThis.window);
 const { top } = toRefs(arrivedState);
@@ -48,7 +62,7 @@ watch(path, () => {
     <div class="h-full hidden items-center justify-between md:flex">
       <div class="flex h-full items-center">
         <a
-          v-for="tab in sectionTabs.filter(i => i.label !== 'Examples')"
+          v-for="tab in sectionTabs"
           :key="tab.label"
           :href="tab.link"
           :class="{
@@ -112,7 +126,7 @@ watch(path, () => {
                 :key="group.text"
                 class="mb-4 px-4 pb-4 border-b border-muted"
               >
-                <div class="mb-2 ml-2 flex items-center">
+                <div class="text-xl mb-2 ml-2 flex items-center">
                   <Icon
                     v-if="group.icon"
                     :icon="group.icon"
@@ -125,19 +139,35 @@ watch(path, () => {
                   v-for="item in group.items"
                   :key="item.text"
                 >
-                  <ul
+                  <ACollapsibleRoot
                     v-if="item.items?.length"
+                    v-slot="{ open }"
                     class="[&:not(:last-child)]:mb-6"
+                    :default-open="true"
                   >
-                    <div class="text-sm font-bold pb-2 pl-4">
-                      {{ item.text }}
-                    </div>
-                    <DocSidebarItem
-                      v-for="subitem in item.items"
-                      :key="subitem.text"
-                      :item="subitem"
-                    />
-                  </ul>
+                    <ACollapsibleTrigger class="text-sm font-bold pb-2 pl-4 inline-flex gap-2 items-center">
+                      <Icon
+                        v-if="item.icon"
+                        :icon="item.icon"
+                        class="text-lg"
+                      />
+
+                      <span>{{ item.text }}</span>
+
+                      <i
+                        class="i-lucide:chevron-down text-lg text-muted-foreground transition group-hover:text-foreground"
+                        :class="{ '-rotate-90': !open }"
+                      />
+                    </ACollapsibleTrigger>
+
+                    <ACollapsibleContent class="ml-4 overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
+                      <DocSidebarItem
+                        v-for="subitem in item.items"
+                        :key="subitem.text"
+                        :item="subitem"
+                      />
+                    </ACollapsibleContent>
+                  </ACollapsibleRoot>
 
                   <DocSidebarItem
                     v-else

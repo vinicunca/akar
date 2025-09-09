@@ -8,17 +8,31 @@ import DocOutline from '../components/doc-outline.vue';
 import DocSidebar from '../components/doc-sidebar.vue';
 import DocTopbar from '../components/doc-topbar.vue';
 import { flatten } from '../functions/flatten';
+import { coreSidebarItems, pohonSidebarItems } from '../theme/sidebar';
 
 const { theme } = useData();
 const { path } = toRefs(useRoute());
 
+const isPohonPage = computed(() => path.value.includes('pohon'));
+const isCorePage = computed(() => path.value.includes('core'));
+
 const sidebar = computed(() => theme.value.sidebar as Array<DefaultTheme.SidebarItem>);
-const activeSection = computed(() =>
-  sidebar.value.find(
+const activeSection = computed(() => {
+  let navItems: Array<DefaultTheme.SidebarItem> = [];
+
+  if (isCorePage.value) {
+    navItems = coreSidebarItems.items ?? [];
+  } else if (isPohonPage.value) {
+    navItems = pohonSidebarItems.items ?? [];
+  } else {
+    navItems = sidebar.value ?? [];
+  }
+
+  return navItems.find(
     (section) => flatten(section.items ?? [], 'items')
       ?.find((item) => item.link === path.value.replace('.html', '')),
-  ),
-);
+  );
+});
 
 const isExamplePage = computed(() => path.value.includes('examples'));
 </script>
