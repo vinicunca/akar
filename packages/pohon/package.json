@@ -1,0 +1,157 @@
+{
+  "name": "pohon",
+  "version": "1.0.0",
+  "description": "A UI Library for Modern Web Apps, powered by Vue & UnoCSS.",
+  "license": "MIT",
+  "homepage": "https://github.com/vinicunca/akar#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinicunca/akar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vinicunca/akar/issues"
+  },
+  "keywords": [
+    "ui",
+    "vue",
+    "accessibility",
+    "headless",
+    "nuxt",
+    "components",
+    "unstyled",
+    "akar",
+    "pohon",
+    "vue3",
+    "unocss",
+    "component library",
+    "vuejs",
+    "vue.js",
+    "typescript",
+    "vue-components",
+    "framework",
+    "ui-framework"
+  ],
+  "imports": {
+    "#build/ui/*": "./.nuxt/ui/*.ts"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/module.d.mts",
+      "style": "./dist/runtime/index.css",
+      "import": "./dist/module.mjs"
+    },
+    "./unplugin": {
+      "types": "./dist/unplugin.d.mts",
+      "import": "./dist/unplugin.mjs"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.mts",
+      "import": "./dist/vite.mjs"
+    },
+    "./vue-plugin": {
+      "types": "./vue-plugin.d.ts"
+    },
+    "./runtime/*": "./dist/runtime/*",
+    "./components/*": "./dist/runtime/components/*",
+    "./composables/*": "./dist/runtime/composables/*",
+    "./utils": {
+      "types": "./dist/runtime/utils/index.d.ts",
+      "import": "./dist/runtime/utils/index.js"
+    },
+    "./utils/*": {
+      "types": "./dist/runtime/utils/*.d.ts",
+      "import": "./dist/runtime/utils/*.js"
+    },
+    "./locale": {
+      "types": "./dist/runtime/locale/index.d.ts",
+      "import": "./dist/runtime/locale/index.js"
+    }
+  },
+  "main": "./dist/module.mjs",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/module.d.mts"
+      ],
+      "unplugin": [
+        "./dist/unplugin.d.mts"
+      ],
+      "vite": [
+        "./dist/vite.d.mts"
+      ],
+      "vue-plugin": [
+        "./vue-plugin.d.ts"
+      ],
+      "runtime/*": [
+        "./dist/runtime/*"
+      ],
+      "components/*": [
+        "./dist/runtime/components/*"
+      ],
+      "composables/*": [
+        "./dist/runtime/composables/*"
+      ],
+      "utils": [
+        "./dist/runtime/utils/index.d.ts"
+      ],
+      "utils/*": [
+        "./dist/runtime/utils/*.d.ts"
+      ],
+      "locale": [
+        "./dist/runtime/locale/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    ".nuxt/ui",
+    "cli",
+    "dist",
+    "vue-plugin.d.ts"
+  ],
+  "scripts": {
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && pnpm dev:vue:build",
+    "dev:vue:build": "pnpm --filter './playgrounds/vue' build"
+  },
+  "peerDependencies": {
+    "@inertiajs/vue3": "^2.0.7",
+    "joi": "^17.13.0",
+    "superstruct": "^2.0.0",
+    "typescript": "^5.6.3",
+    "valibot": "^1.0.0",
+    "vue-router": "^4.5.0",
+    "yup": "^1.6.0",
+    "zod": "^3.24.0 || ^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@inertiajs/vue3": {
+      "optional": true
+    },
+    "joi": {
+      "optional": true
+    },
+    "valibot": {
+      "optional": true
+    },
+    "superstruct": {
+      "optional": true
+    },
+    "vue-router": {
+      "optional": true
+    },
+    "yup": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@unocss/nuxt": "catalog:pohon",
+    "@vinicunca/perkakas": "catalog:core"
+  },
+  "devDependencies": {
+    "@nuxt/module-builder": "catalog:pohon",
+    "defu": "^6.1.4",
+    "nuxt": "catalog:pohon"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "playground-vue",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc -p ./tsconfig.app.json"
+  },
+  "dependencies": {
+    "pohon": "workspace:*",
+    "vue": "catalog:core",
+    "vue-router": "catalog:base"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:core",
+    "typescript": "catalog:base",
+    "vite": "catalog:core",
+    "vue-tsc": "catalog:core"
+  }
+}

@@ -2,6 +2,8 @@ packages:
   - packages/*
   - docs
   - .histoire
+  - packages/pohon/playgrounds/nuxt
+  - packages/pohon/playgrounds/vue
 overrides:
   vite: ^7.1.5
 patchedDependencies:
@@ -20,6 +22,7 @@ catalogs:
     tsx: ^4.20.5
     typescript: 5.9.2
     unocss: 66.5.1
+    vue-router: ^4.5.1
   core:
     '@floating-ui/dom': ^1.7.4
     '@floating-ui/vue': ^1.1.9
@@ -76,12 +79,21 @@ catalogs:
     '@rollup/plugin-alias': ^5.1.1
     histoire: ^0.17.17
   plugins:
-    '@nuxt/kit': ^3.15.4
-    '@nuxt/schema': ^3.15.4
-    unbuild: ^2.0.0
+    '@nuxt/kit': 4.0.3
+    '@nuxt/schema': 4.0.3
+    unbuild: ^3.6.1
     unplugin-vue-components: ^29.0.0
-
+  pohon:
+    '@nuxt/module-builder': ^1.0.1
+    '@unocss/nuxt': 66.5.1
+    nuxt: 4.0.3
+ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - unrs-resolver
+  - vue-demi
 onlyBuiltDependencies:
   - esbuild
   - simple-git-hooks
   - unrs-resolver
+resolutions:
+  unplugin: ^2.3.10

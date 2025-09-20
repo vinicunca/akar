@@ -168,7 +168,7 @@ const isVirtual = ref(false);
 const isComposing = ref(false);
 const virtualFocusHook = createEventHook<Event | null | undefined>();
 const virtualKeydownHook = createEventHook<KeyboardEvent>();
-const virtualHighlightHook = createEventHook<T>();
+const virtualHighlightHook = createEventHook<Array<T>>();
 
 function getCollectionItem() {
   return getItems().map((i) => i.ref).filter((i) => i.dataset.disabled !== '');

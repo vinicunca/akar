@@ -1,0 +1,91 @@
+import type { PohonModuleOptions } from '../module';
+import { defuFn } from 'defu';
+import { fieldGroupVariant } from './field-group';
+import { inputTheme } from './input';
+
+export function selectTheme(options: Required<PohonModuleOptions>) {
+  return defuFn(
+    {
+      slots: {
+        root: '',
+        base: '',
+        value: '',
+        placeholder: '',
+        arrow: '',
+        content: '',
+        viewport: '',
+        group: '',
+        empty: '',
+        label: '',
+        separator: '',
+        item: '',
+        itemLeadingIcon: '',
+        itemLeadingAvatar: '',
+        itemLeadingAvatarSize: '',
+        itemLeadingChip: '',
+        itemLeadingChipSize: '',
+        itemTrailing: '',
+        itemTrailingIcon: '',
+        itemLabel: '',
+      },
+      variants: {
+        ...fieldGroupVariant,
+        size: {
+          xs: {
+            label: '',
+            item: '',
+            itemLeadingIcon: '',
+            itemLeadingAvatarSize: '',
+            itemLeadingChip: '',
+            itemLeadingChipSize: '',
+            itemTrailingIcon: '',
+            empty: '',
+          },
+          sm: {
+            label: '',
+            item: '',
+            itemLeadingIcon: '',
+            itemLeadingAvatarSize: '',
+            itemLeadingChip: '',
+            itemLeadingChipSize: '',
+            itemTrailingIcon: '',
+            empty: '',
+          },
+          md: {
+            label: '',
+            item: '',
+            itemLeadingIcon: '',
+            itemLeadingAvatarSize: '',
+            itemLeadingChip: '',
+            itemLeadingChipSize: '',
+            itemTrailingIcon: '',
+            empty: '',
+          },
+          lg: {
+            label: '',
+            item: '',
+            itemLeadingIcon: '',
+            itemLeadingAvatarSize: '',
+            itemLeadingChip: '',
+            itemLeadingChipSize: '',
+            itemTrailingIcon: '',
+            empty: '',
+          },
+          xl: {
+            label: '',
+            item: '',
+            itemLeadingIcon: '',
+            itemLeadingAvatarSize: '',
+            itemLeadingChip: '',
+            itemLeadingChipSize: '',
+            itemTrailingIcon: '',
+            empty: '',
+          },
+        },
+      },
+    },
+    inputTheme(options),
+  );
+};
+
+export type SelectTheme = ReturnType<typeof selectTheme>;
