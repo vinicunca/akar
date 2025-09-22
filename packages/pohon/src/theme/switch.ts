@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function switchTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -87,6 +87,4 @@ export function switchTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type SwitchTheme = ReturnType<typeof switchTheme>;
+};

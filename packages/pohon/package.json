@@ -147,7 +147,8 @@
   },
   "dependencies": {
     "@unocss/nuxt": "catalog:pohon",
-    "@vinicunca/perkakas": "catalog:core"
+    "@vinicunca/perkakas": "catalog:core",
+    "unocss-variants": "^1.0.0"
   },
   "devDependencies": {
     "@nuxt/module-builder": "catalog:pohon",

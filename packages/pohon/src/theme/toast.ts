@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function toastTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -48,6 +48,4 @@ export function toastTheme(options: Required<PohonModuleOptions>) {
       color: '',
     },
   };
-}
-
-export type ToastTheme = ReturnType<typeof toastTheme>;
+};

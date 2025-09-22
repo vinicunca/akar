@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function fileUploadTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -96,6 +96,4 @@ export function fileUploadTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type FileUploadTheme = ReturnType<typeof fileUploadTheme>;
+};

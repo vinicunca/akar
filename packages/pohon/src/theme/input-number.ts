@@ -1,8 +1,8 @@
 import type { PohonModuleOptions } from '../module';
 import { fieldGroupVariantWithRoot } from './field-group';
-import { inputTheme } from './input';
+import inputTheme from './input';
 
-export function inputNumberTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   const input = inputTheme(options);
 
   return {

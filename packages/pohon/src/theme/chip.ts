@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function chipTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -39,6 +39,4 @@ export function chipTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type ChipTheme = ReturnType<typeof chipTheme>;
+};

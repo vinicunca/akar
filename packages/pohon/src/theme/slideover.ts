@@ -1,4 +1,4 @@
-export const slideoverTheme = {
+export default {
   slots: {
     overlay: '',
     content: '',
@@ -32,5 +32,3 @@ export const slideoverTheme = {
     },
   },
 };
-
-export type SlideoverTheme = typeof slideoverTheme;

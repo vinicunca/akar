@@ -1,4 +1,4 @@
-export const breadcrumbTheme = {
+export default {
   slots: {
     root: '',
     list: '',
@@ -30,5 +30,3 @@ export const breadcrumbTheme = {
     },
   },
 };
-
-export type BreadcrumbTheme = typeof breadcrumbTheme;

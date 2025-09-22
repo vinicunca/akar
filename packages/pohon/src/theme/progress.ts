@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function progressTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -90,6 +90,4 @@ export function progressTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type ProgressTheme = ReturnType<typeof progressTheme>;
+};

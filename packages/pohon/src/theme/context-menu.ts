@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function contextMenuTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       content: '',
@@ -88,6 +88,4 @@ export function contextMenuTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type ContextMenuTheme = ReturnType<typeof contextMenuTheme>;
+};

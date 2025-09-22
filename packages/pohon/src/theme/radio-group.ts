@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function radioGroupTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -113,6 +113,4 @@ export function radioGroupTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type RadioGroupTheme = ReturnType<typeof radioGroupTheme>;
+};

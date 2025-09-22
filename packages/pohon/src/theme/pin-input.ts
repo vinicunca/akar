@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function pinInputTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -40,6 +40,4 @@ export function pinInputTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type PinInputTheme = ReturnType<typeof pinInputTheme>;
+};

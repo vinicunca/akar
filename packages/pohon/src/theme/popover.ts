@@ -1,8 +1,6 @@
-export const popoverTheme = {
+export default {
   slots: {
     content: '',
     arrow: '',
   },
 };
-
-export type PopoverTheme = typeof popoverTheme;

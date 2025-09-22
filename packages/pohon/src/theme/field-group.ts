@@ -18,7 +18,7 @@ export const fieldGroupVariantWithRoot = {
   },
 };
 
-export const fieldGroupTheme = {
+export default {
   base: '',
   variants: {
     size: {
@@ -34,5 +34,3 @@ export const fieldGroupTheme = {
     },
   },
 };
-
-export type FieldGroupTheme = typeof fieldGroupTheme;

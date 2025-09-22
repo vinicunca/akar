@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function dropdownMenuTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       content: '',
@@ -89,6 +89,4 @@ export function dropdownMenuTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type DropdownMenuTheme = ReturnType<typeof dropdownMenuTheme>;
+};

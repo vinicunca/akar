@@ -1,4 +1,4 @@
-export const tooltipTheme = {
+export default {
   slots: {
     content: '',
     arrow: '',
@@ -7,5 +7,3 @@ export const tooltipTheme = {
     kbdsSize: '',
   },
 };
-
-export type TooltipTheme = typeof tooltipTheme;

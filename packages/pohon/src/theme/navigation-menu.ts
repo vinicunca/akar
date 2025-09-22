@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function navigationMenuTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -110,6 +110,4 @@ export function navigationMenuTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type NavigationMenuTheme = ReturnType<typeof navigationMenuTheme>;
+};

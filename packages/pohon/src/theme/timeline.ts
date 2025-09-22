@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function timelineTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -57,6 +57,4 @@ export function timelineTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type TimelineTheme = ReturnType<typeof timelineTheme>;
+};

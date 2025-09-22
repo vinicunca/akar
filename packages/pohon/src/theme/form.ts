@@ -1,5 +1,3 @@
-export const formTheme = {
+export default {
   base: '',
 };
-
-export type FormTheme = typeof formTheme;

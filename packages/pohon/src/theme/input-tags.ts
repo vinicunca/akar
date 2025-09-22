@@ -1,8 +1,8 @@
 import type { PohonModuleOptions } from '../module';
 import { defuFn } from 'defu';
-import { inputTheme } from './input';
+import input from './input';
 
-export function inputTagsTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return defuFn(
     {
       slots: {
@@ -42,8 +42,6 @@ export function inputTagsTheme(options: Required<PohonModuleOptions>) {
         ),
       },
     },
-    inputTheme(options),
+    input(options),
   );
 };
-
-export type InputTagsTheme = ReturnType<typeof inputTagsTheme>;

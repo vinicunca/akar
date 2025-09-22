@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function sliderTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -53,6 +53,4 @@ export function sliderTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type SliderTheme = ReturnType<typeof sliderTheme>;
+};

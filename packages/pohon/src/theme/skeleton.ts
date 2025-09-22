@@ -1,5 +1,3 @@
-export const skeletonTheme = {
+export default {
   base: '',
 };
-
-export type SkeletonTheme = typeof skeletonTheme;

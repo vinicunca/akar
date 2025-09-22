@@ -1,4 +1,4 @@
-export const avatarTheme = {
+export default {
   slots: {
     root: '',
     image: '',
@@ -37,5 +37,3 @@ export const avatarTheme = {
     },
   },
 };
-
-export type AvatarTheme = typeof avatarTheme;

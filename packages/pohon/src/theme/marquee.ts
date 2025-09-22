@@ -1,4 +1,4 @@
-export const marqueeTheme = {
+export default {
   slots: {
     root: '',
     content: '',
@@ -29,5 +29,3 @@ export const marqueeTheme = {
     },
   },
 };
-
-export type MarqueeTheme = typeof marqueeTheme;

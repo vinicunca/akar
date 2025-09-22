@@ -1,4 +1,5 @@
 import { pick } from '@vinicunca/perkakas';
+import icons from './theme/icons';
 
 export const DEFAULT_OPTIONS = {
   prefix: 'P',
@@ -27,5 +28,6 @@ export function getDefaultPohonConfig(colors?: Array<string>) {
       },
       [...(colors || []), 'neutral' as any],
     ),
+    icons,
   };
 }

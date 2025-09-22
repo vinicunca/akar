@@ -1,4 +1,4 @@
-export const dialogTheme = {
+export default {
   slots: {
     overlay: '',
     content: '',
@@ -27,5 +27,3 @@ export const dialogTheme = {
     },
   },
 };
-
-export type DialogTheme = typeof dialogTheme;

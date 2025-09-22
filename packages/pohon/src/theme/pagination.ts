@@ -1,4 +1,4 @@
-export const paginationTheme = {
+export default {
   slots: {
     root: '',
     list: '',
@@ -11,5 +11,3 @@ export const paginationTheme = {
     last: '',
   },
 };
-
-export type PaginationTheme = typeof paginationTheme;

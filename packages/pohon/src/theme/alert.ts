@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function alertTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -41,6 +41,4 @@ export function alertTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type AlertTheme = ReturnType<typeof alertTheme>;
+};

@@ -1,7 +1,7 @@
 import type { PohonModuleOptions } from '../module';
 import { fieldGroupVariantWithRoot } from './field-group';
 
-export function inputTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -85,6 +85,4 @@ export function inputTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type InputTheme = ReturnType<typeof inputTheme>;
+};

@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function treeTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -71,6 +71,4 @@ export function treeTheme(options: Required<PohonModuleOptions>) {
       size: '',
     },
   };
-}
-
-export type TreeTheme = ReturnType<typeof treeTheme>;
+};

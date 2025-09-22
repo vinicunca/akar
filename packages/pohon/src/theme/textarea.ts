@@ -1,8 +1,8 @@
 import type { PohonModuleOptions } from '../module';
 import { defu } from 'defu';
-import { inputTheme } from './input';
+import input from './input';
 
-export function textareaTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return defu(
     {
       slots: {
@@ -39,8 +39,6 @@ export function textareaTheme(options: Required<PohonModuleOptions>) {
         },
       },
     },
-    inputTheme(options),
+    input(options),
   );
 };
-
-export type TextareaTheme = ReturnType<typeof textareaTheme>;

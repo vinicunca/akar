@@ -1,40 +1,38 @@
-export const drawerTheme = {
+export default {
   slots: {
-    overlay: 'fixed inset-0 bg-elevated/75',
-    content: 'fixed bg-default ring ring-default flex focus:outline-none',
+    overlay: '',
+    content: '',
     handle: '',
-    container: 'w-full flex flex-col gap-4 p-4 overflow-y-auto',
+    container: '',
     header: '',
-    title: 'text-highlighted font-semibold',
-    description: 'mt-1 text-muted text-sm',
-    body: 'flex-1',
-    footer: 'flex flex-col gap-1.5',
+    title: '',
+    description: '',
+    body: '',
+    footer: '',
   },
   variants: {
     direction: {
       top: {
-        content: 'mb-24 flex-col-reverse',
-        handle: 'mb-4',
+        content: '',
+        handle: '',
       },
       right: {
-        content: 'flex-row',
-        handle: '!ml-4',
+        content: '',
+        handle: '',
       },
       bottom: {
-        content: 'mt-24 flex-col',
-        handle: 'mt-4',
+        content: '',
+        handle: '',
       },
       left: {
-        content: 'flex-row-reverse',
-        handle: '!mr-4',
+        content: '',
+        handle: '',
       },
     },
     inset: {
       true: {
-        content: 'rounded-lg after:hidden overflow-hidden [--initial-transform:calc(100%+1.5rem)]',
+        content: '',
       },
     },
   },
 };
-
-export type DrawerTheme = typeof drawerTheme;

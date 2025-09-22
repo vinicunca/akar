@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function calendarTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -62,6 +62,4 @@ export function calendarTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type CalendarTheme = ReturnType<typeof calendarTheme>;
+};

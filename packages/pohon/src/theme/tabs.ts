@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function tabsTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -73,6 +73,4 @@ export function tabsTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type TabsTheme = ReturnType<typeof tabsTheme>;
+};

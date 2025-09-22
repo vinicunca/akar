@@ -1,8 +1,6 @@
-export const collapsibleTheme = {
+export default {
   slots: {
     root: '',
     content: '',
   },
 };
-
-export type CollapsibleTheme = typeof collapsibleTheme;

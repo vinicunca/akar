@@ -1,7 +1,7 @@
 import type { PohonModuleOptions } from '../module';
 import { fieldGroupVariant } from './field-group';
 
-export function badgeTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       base: '',
@@ -60,6 +60,4 @@ export function badgeTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type BadgeTheme = ReturnType<typeof badgeTheme>;
+};

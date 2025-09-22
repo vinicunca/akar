@@ -1,26 +1,24 @@
-export const cardTheme = {
+export default {
   slots: {
-    root: 'rounded-lg overflow-hidden',
-    header: 'p-4 sm:px-6',
-    body: 'p-4 sm:p-6',
-    footer: 'p-4 sm:px-6',
+    root: '',
+    header: '',
+    body: '',
+    footer: '',
   },
   variants: {
     variant: {
       solid: {
-        root: 'bg-inverted text-inverted',
+        root: '',
       },
       outline: {
-        root: 'bg-default ring ring-default divide-y divide-default',
+        root: '',
       },
       soft: {
-        root: 'bg-elevated/50 divide-y divide-default',
+        root: '',
       },
       subtle: {
-        root: 'bg-elevated/50 ring ring-default divide-y divide-default',
+        root: '',
       },
     },
   },
 };
-
-export type CardTheme = typeof cardTheme;

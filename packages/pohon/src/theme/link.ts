@@ -1,4 +1,4 @@
-export const linkTheme = {
+export default {
   base: '',
   variants: {
     active: {
@@ -10,5 +10,3 @@ export const linkTheme = {
     },
   },
 };
-
-export type LinkTheme = typeof linkTheme;

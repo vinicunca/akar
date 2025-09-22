@@ -1,4 +1,4 @@
-export const accordionTheme = {
+export default {
   slots: {
     root: '',
     item: '',
@@ -18,5 +18,3 @@ export const accordionTheme = {
     },
   },
 };
-
-export type AccordionTheme = typeof accordionTheme;

@@ -1,4 +1,4 @@
-export const commandPaletteTheme = {
+export default {
   slots: {
     root: '',
     input: '',
@@ -44,5 +44,3 @@ export const commandPaletteTheme = {
     },
   },
 };
-
-export type CommandPaletteTheme = typeof commandPaletteTheme;

@@ -1,9 +1,9 @@
 import type { PohonModuleOptions } from '../module';
 import { defuFn } from 'defu';
 import { fieldGroupVariant } from './field-group';
-import { inputTheme } from './input';
+import input from './input';
 
-export function selectTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return defuFn(
     {
       slots: {
@@ -84,8 +84,6 @@ export function selectTheme(options: Required<PohonModuleOptions>) {
         },
       },
     },
-    inputTheme(options),
+    input(options),
   );
 };
-
-export type SelectTheme = ReturnType<typeof selectTheme>;

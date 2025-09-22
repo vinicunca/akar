@@ -1,6 +1,6 @@
 import type { PohonModuleOptions } from '../module';
 
-export function checkboxGroupTheme(options: Required<PohonModuleOptions>) {
+export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       root: '',
@@ -57,6 +57,4 @@ export function checkboxGroupTheme(options: Required<PohonModuleOptions>) {
       },
     },
   };
-}
-
-export type CheckboxGroupTheme = ReturnType<typeof checkboxGroupTheme>;
+};

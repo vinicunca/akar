@@ -1,4 +1,4 @@
-export const toasterTheme = {
+export default {
   slots: {
     viewport: '',
     base: '',
@@ -35,5 +35,3 @@ export const toasterTheme = {
     position: '',
   },
 };
-
-export type ToasterTheme = typeof toasterTheme;
