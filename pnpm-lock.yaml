@@ -224,6 +224,9 @@ catalogs:
     nuxt:
       specifier: 4.0.3
       version: 4.0.3
+    unocss-variants:
+      specifier: ^1.0.0
+      version: 1.0.0
 
 overrides:
   vite: ^7.1.5
@@ -514,7 +517,7 @@ importers:
         specifier: ^5.6.3
         version: 5.9.2
       unocss-variants:
-        specifier: ^1.0.0
+        specifier: catalog:pohon
         version: 1.0.0
       valibot:
         specifier: ^1.0.0
@@ -533,7 +536,7 @@ importers:
         specifier: catalog:pohon
         version: 1.0.2(@nuxt/cli@3.28.0(magicast@0.3.5))(@vue/compiler-core@3.5.21)(esbuild@0.25.9)(typescript@5.9.2)(vue-tsc@2.2.12(typescript@5.9.2))(vue@3.5.21(typescript@5.9.2))
       defu:
-        specifier: ^6.1.4
+        specifier: catalog:core
         version: 6.1.4
       nuxt:
         specifier: catalog:pohon

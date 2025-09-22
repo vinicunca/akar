@@ -148,11 +148,11 @@
   "dependencies": {
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/perkakas": "catalog:core",
-    "unocss-variants": "^1.0.0"
+    "unocss-variants": "catalog:pohon"
   },
   "devDependencies": {
     "@nuxt/module-builder": "catalog:pohon",
-    "defu": "^6.1.4",
+    "defu": "catalog:core",
     "nuxt": "catalog:pohon"
   }
 }

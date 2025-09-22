@@ -127,43 +127,40 @@ export function getPohonTemplates(
     },
   });
 
-  // FIXME: `typeof colors[number]` should include all colors from the theme
   templates.push({
-    filename: 'types/ui.d.ts',
+    filename: 'types/pohon.d.ts',
     getContents: () => {
       const iconKeys = Object.keys(pohon?.icons || {});
       const iconUnion = iconKeys.length ? iconKeys.map((i) => JSON.stringify(i)).join(' | ') : 'string';
 
-      return `import * as ui from '#build/ui'
-import type { TVConfig } from '@nuxt/ui'
-import type { defaultConfig } from 'tailwind-variants'
-import colors from 'tailwindcss/colors'
+      return `import * as pohon from '#build/pohon';
+import type { UvConfig } from 'pohon';
+import type { colors } from 'unocss/preset-mini';
 
-type IconsConfig = Record<${iconUnion} | (string & {}), string>
+type IconsConfig = Record<${iconUnion} | (string & {}), string>;
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
-type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone';
+type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {});
 
-type AppConfigUI = {
+type AppConfigPohon = {
   colors?: {
     ${options.theme?.colors?.map((color) => `'${color}'?: Color`).join('\n\t\t')}
     neutral?: NeutralColor | (string & {})
-  }
-  icons?: Partial<IconsConfig>
-  tv?: typeof defaultConfig
-} & TVConfig<typeof ui>
+  };
+  icons?: Partial<IconsConfig>;
+} & UvConfig<typeof pohon>;
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {
     /**
-     * Nuxt UI theme configuration
-     * @see https://ui.nuxt.com/docs/getting-started/theme/components
+     * Pohon theme configuration
+     * @see https://akar.vinicunca.dev/pohon/getting-started/theme/components
      */
-    ui?: AppConfigUI
+    pohon?: AppConfigPohon;
   }
 }
 
-export {}
+export {};
 `;
     },
   });

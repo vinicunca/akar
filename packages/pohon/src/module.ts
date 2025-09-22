@@ -106,7 +106,6 @@ export default defineNuxtModule<PohonModuleOptions>({
       path: resolve('./runtime/components'),
       pathPrefix: false,
       prefix: options.prefix,
-      ignore: ['color-mode/**', 'content/**', 'prose/**'],
     });
 
     addImportsDir(resolve('./runtime/composables'));

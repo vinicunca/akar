@@ -87,6 +87,7 @@ catalogs:
     '@nuxt/module-builder': ^1.0.1
     '@unocss/nuxt': 66.5.1
     nuxt: 4.0.3
+    unocss-variants: ^1.0.0
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - unrs-resolver
@@ -96,4 +97,5 @@ onlyBuiltDependencies:
   - simple-git-hooks
   - unrs-resolver
 resolutions:
+  pohon: 'workspace:*'
   unplugin: ^2.3.10
