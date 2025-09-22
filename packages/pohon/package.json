@@ -148,6 +148,7 @@
   "dependencies": {
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/perkakas": "catalog:core",
+    "akar": "^1.11.0",
     "unocss-variants": "catalog:pohon"
   },
   "devDependencies": {

@@ -6,8 +6,7 @@ packages:
   - packages/pohon/playgrounds/vue
 overrides:
   vite: ^7.1.5
-patchedDependencies:
-  vitepress@2.0.0-alpha.12: patches/vitepress@2.0.0-alpha.12.patch
+
 catalogs:
   base:
     '@commitlint/cli': ^19.8.1
@@ -56,24 +55,13 @@ catalogs:
     vue-component-type-helpers: ^3.0.6
     vue-tsc: 2.2.12
   docs:
-    '@babel/traverse': ^7.26.10
-    '@iconify/json': ^2.2.382
-    '@stackblitz/sdk': ^1.11.0
-    '@types/babel__traverse': ^7.20.7
-    '@types/hast': ^3.0.4
-    '@types/markdown-it': ^14.1.2
+    '@nuxt/content': ^3.7.0
+    '@nuxt/image': ^1.11.0
     '@vinicunca/unocss-preset': ^1.23.0
-    autoprefixer: ^10.4.21
-    codesandbox: ^2.2.3
-    fast-glob: ^3.3.3
-    hast: ^1.0.0
-    mark.js: ^8.11.1
-    markdown-it: ^14.1.0
-    markdown-it-anchor: ^9.2.0
-    minisearch: ^6.3.0
-    shiki: ^3.12.2
-    vitepress: 2.0.0-alpha.12
-    vue-component-meta: ^2.2.12
+    better-sqlite3: ^12.2.0
+    nuxt-component-meta: ^0.14.0
+    nuxt-og-image: ^5.1.9
+    shiki-transformer-color-highlight: ^1.0.0
   histoire:
     '@histoire/plugin-vue': ^0.17.17
     '@rollup/plugin-alias': ^5.1.1
@@ -93,9 +81,11 @@ ignoredBuiltDependencies:
   - unrs-resolver
   - vue-demi
 onlyBuiltDependencies:
+  - better-sqlite3
   - esbuild
+  - sharp
   - simple-git-hooks
   - unrs-resolver
 resolutions:
-  pohon: 'workspace:*'
+  pohon: workspace:*
   unplugin: ^2.3.10

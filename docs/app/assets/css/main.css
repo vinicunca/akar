@@ -1,0 +1,8 @@
+body {
+  @apply antialiased bg-background color-text scheme-light dark:scheme-dark;
+}
+
+html[data-framework='nuxt'] .vue-only,
+html[data-framework='vue'] .nuxt-only {
+  display: none;
+}

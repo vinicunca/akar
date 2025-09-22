@@ -1,0 +1,28 @@
+{
+  "name": "pohon-docs",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@nuxt/content": "catalog:docs",
+    "@nuxt/image": "catalog:docs",
+    "akar": "workspace:*",
+    "better-sqlite3": "catalog:docs",
+    "nuxt": "catalog:pohon",
+    "nuxt-component-meta": "catalog:docs",
+    "nuxt-og-image": "catalog:docs",
+    "pohon": "workspace:*",
+    "shiki-transformer-color-highlight": "catalog:docs"
+  },
+  "devDependencies": {
+    "@unocss/nuxt": "catalog:pohon",
+    "@vinicunca/unocss-preset": "catalog:docs",
+    "unocss": "catalog:base"
+  }
+}
