@@ -4,6 +4,9 @@ packages:
   - .histoire
   - packages/pohon/playgrounds/nuxt
   - packages/pohon/playgrounds/vue
+
+shamefullyHoist: true
+
 overrides:
   vite: ^7.1.5
 
