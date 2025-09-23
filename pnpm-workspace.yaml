@@ -52,7 +52,7 @@ catalogs:
     vitest-axe: 0.1.0
     vitest-canvas-mock: ^0.3.3
     vue: 3.5.21
-    vue-component-type-helpers: ^3.0.6
+    vue-component-type-helpers: ^3.0.7
     vue-tsc: 2.2.12
   docs:
     '@nuxt/content': ^3.7.0
@@ -70,12 +70,31 @@ catalogs:
     '@nuxt/kit': 4.0.3
     '@nuxt/schema': 4.0.3
     unbuild: ^3.6.1
-    unplugin-vue-components: ^29.0.0
+    unplugin-vue-components: ^29.1.0
   pohon:
     '@nuxt/module-builder': ^1.0.1
+    '@nuxtjs/color-mode': ^3.5.2
+    '@standard-schema/spec': ^1.0.0
     '@unocss/nuxt': 66.5.1
+    colortranslator: ^5.0.0
+    embla-carousel-auto-height: ^8.6.0
+    embla-carousel-auto-scroll: ^8.6.0
+    embla-carousel-autoplay: ^8.6.0
+    embla-carousel-class-names: ^8.6.0
+    embla-carousel-fade: ^8.6.0
+    embla-carousel-vue: ^8.6.0
+    embla-carousel-wheel-gestures: ^8.1.0
+    fuse.js: ^7.1.0
+    hookable: ^5.5.3
+    magic-string: ^0.30.19
+    mlly: ^1.8.0
     nuxt: 4.0.3
+    ohash: ^2.0.11
+    pathe: ^2.0.3
+    tinyglobby: ^0.2.15
     unocss-variants: ^1.0.0
+    unplugin: ^2.3.10
+    unplugin-auto-import: ^20.1.0
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - unrs-resolver

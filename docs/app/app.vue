@@ -7,12 +7,10 @@ const appConfig = useAppConfig();
 
 <template>
   <PApp>
-    <div class="font-sans flex-vertical">
-      {{ appConfig }}
+    <div class="">
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
     </div>
-
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
   </PApp>
 </template>

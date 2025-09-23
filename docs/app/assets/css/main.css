@@ -1,5 +1,5 @@
 body {
-  @apply antialiased bg-background color-text scheme-light dark:scheme-dark;
+  @apply antialiased bg-background color-text scheme-light dark:scheme-dark font-sans;
 }
 
 html[data-framework='nuxt'] .vue-only,

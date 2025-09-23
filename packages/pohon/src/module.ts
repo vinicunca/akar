@@ -21,6 +21,14 @@ export interface PohonModuleOptions {
    * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#prefix
    */
   prefix?: string;
+
+  /**
+   * Enable or disable `@nuxtjs/color-mode` module
+   * @defaultValue `true`
+   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#colormode
+   */
+  colorMode?: boolean;
+
   /**
    * Customize how the theme is generated
    * @see https://akar.vinicunca.dev/pohon/overview/getting-started/theme
@@ -47,6 +55,17 @@ export interface PohonModuleOptions {
       size?: Size;
     };
   };
+
+  /**
+   * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
+   * @defaultValue false
+   */
+  mdc?: boolean;
+  /**
+   * Force the import of content & prose components even if `@nuxt/content` is not installed
+   * @defaultValue false
+   */
+  content?: boolean;
 }
 
 export default defineNuxtModule<PohonModuleOptions>({
@@ -102,10 +121,87 @@ export default defineNuxtModule<PohonModuleOptions>({
 
     await registerModule({ name: '@unocss/nuxt', key: 'unocss' });
 
+    if (options.colorMode) {
+      await registerModule({
+        name: '@nuxtjs/color-mode',
+        key: 'colorMode',
+        options: {
+          classSuffix: '',
+          disableTransition: true,
+        },
+      });
+    }
+
+    if ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content)) {
+      nuxt.options.mdc = defu(
+        nuxt.options.mdc,
+        {
+          highlight: {
+            theme: {
+              light: 'one-light',
+              default: 'one-dark-pro',
+              dark: 'one-dark-pro',
+            },
+          },
+          components: {
+            map: {
+              'accordion': 'ProseAccordion',
+              'accordion-item': 'ProseAccordionItem',
+              'badge': 'ProseBadge',
+              'callout': 'ProseCallout',
+              'card': 'ProseCard',
+              'card-group': 'ProseCardGroup',
+              'caution': 'ProseCaution',
+              'code-collapse': 'ProseCodeCollapse',
+              'code-group': 'ProseCodeGroup',
+              'code-icon': 'ProseCodeIcon',
+              'code-preview': 'ProseCodePreview',
+              'code-tree': 'ProseCodeTree',
+              'collapsible': 'ProseCollapsible',
+              'field': 'ProseField',
+              'field-group': 'ProseFieldGroup',
+              'icon': 'ProseIcon',
+              'kbd': 'ProseKbd',
+              'note': 'ProseNote',
+              'steps': 'ProseSteps',
+              'tabs': 'ProseTabs',
+              'tabs-item': 'ProseTabsItem',
+              'tip': 'ProseTip',
+              'warning': 'ProseWarning',
+            },
+          },
+        },
+      );
+
+      addComponentsDir({
+        path: resolve('./runtime/components/prose'),
+        pathPrefix: false,
+        prefix: 'Prose',
+        global: true,
+      });
+    }
+
+    if ((hasNuxtModule('@nuxt/content') || options.content)) {
+      addComponentsDir({
+        path: resolve('./runtime/components/content'),
+        pathPrefix: false,
+        prefix: options.prefix,
+      });
+    }
+
+    if (hasNuxtModule('@nuxtjs/color-mode')) {
+      addComponentsDir({
+        path: resolve('./runtime/components/color-mode'),
+        pathPrefix: false,
+        prefix: options.prefix,
+      });
+    }
+
     addComponentsDir({
       path: resolve('./runtime/components'),
       pathPrefix: false,
       prefix: options.prefix,
+      ignore: ['color-mode/**', 'content/**', 'prose/**'],
     });
 
     addImportsDir(resolve('./runtime/composables'));

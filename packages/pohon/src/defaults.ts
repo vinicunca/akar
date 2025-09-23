@@ -3,9 +3,12 @@ import icons from './theme/icons';
 
 export const DEFAULT_OPTIONS = {
   prefix: 'P',
+  colorMode: true,
   theme: {
     colors: undefined,
   },
+  mdc: false,
+  content: false,
 };
 
 export function resolveColors(colors?: Array<string>) {
