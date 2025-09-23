@@ -105,6 +105,7 @@
     "@vitest/coverage-istanbul": "catalog:core",
     "@vue/test-utils": "catalog:core",
     "@vue/tsconfig": "catalog:core",
+    "happy-dom": "catalog:core",
     "jsdom": "catalog:core",
     "tsdown": "catalog:core",
     "vite": "catalog:core",

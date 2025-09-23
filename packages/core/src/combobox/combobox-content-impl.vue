@@ -94,17 +94,17 @@ onUnmounted(() => {
       as-child
       :disable-outside-pointer-events="disableOutsidePointerEvents"
       @dismiss="rootContext.onOpenChange(false)"
-      @focus-outside="(ev) => {
+      @focus-outside="(event) => {
         // if clicking inside the combobox, prevent dismiss
-        if (rootContext.parentElement.value?.contains(ev.target as Node)) ev.preventDefault()
-        emits('focusOutside', ev)
+        if (rootContext.parentElement.value?.contains(event.target as Node)) event.preventDefault()
+        emits('focusOutside', event)
       }"
       @interact-outside="emits('interactOutside', $event)"
       @escape-key-down="emits('escapeKeyDown', $event)"
-      @pointer-down-outside="(ev) => {
+      @pointer-down-outside="(event) => {
         // if clicking inside the combobox, prevent dismiss
-        if (rootContext.parentElement.value?.contains(ev.target as Node)) ev.preventDefault()
-        emits('pointerDownOutside', ev)
+        if (rootContext.parentElement.value?.contains(event.target as Node)) event.preventDefault()
+        emits('pointerDownOutside', event)
       }"
     >
       <component

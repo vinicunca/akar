@@ -58,8 +58,8 @@ function fetchData(value: TreeNode) {
   });
 }
 
-async function fetchChildren(ev: ATreeItemToggleEvent<TreeNode>) {
-  const value = ev.detail.value;
+async function fetchChildren(event: ATreeItemToggleEvent<TreeNode>) {
+  const value = event.detail.value;
   if (!value?.children) {
     return;
   }

@@ -47,6 +47,22 @@ function handlePointerOpen(event: PointerEvent) {
     y: Math.round(event.pageY),
   };
 }
+
+function handleKeyDown(event: KeyboardEvent) {
+  const isTypingAhead = search.value !== '';
+  const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
+  if (!isModifierKey && event.key.length === 1) {
+    if (isTypingAhead && event.key === ' ') {
+      return;
+    }
+  }
+
+  handleTypeaheadSearch({ key: event.key, items: getItems() });
+  if (OPEN_KEYS.includes(event.key)) {
+    handleOpen();
+    event.preventDefault();
+  }
+}
 </script>
 
 <template>
@@ -108,20 +124,7 @@ function handlePointerOpen(event: PointerEvent) {
             handlePointerOpen(event)
         }
       "
-      @keydown="
-        (event) => {
-          const isTypingAhead = search !== '';
-          const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
-          if (!isModifierKey && event.key.length === 1)
-            if (isTypingAhead && event.key === ' ') return;
-
-          handleTypeaheadSearch({ key: event.key, items: getItems() });
-          if (OPEN_KEYS.includes(event.key)) {
-            handleOpen();
-            event.preventDefault();
-          }
-        }
-      "
+      @keydown="handleKeyDown"
     >
       <slot />
     </APrimitive>

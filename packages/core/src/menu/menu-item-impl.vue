@@ -64,6 +64,22 @@ async function handlePointerLeave(event: PointerEvent) {
 
   contentContext.onItemLeave(event);
 }
+
+async function handleFocus(event: FocusEvent) {
+  await nextTick();
+  if (event.defaultPrevented || props.disabled) {
+    return;
+  }
+  isFocused.value = true;
+}
+
+async function handleBlur(event: FocusEvent) {
+  await nextTick();
+  if (event.defaultPrevented) {
+    return;
+  }
+  isFocused.value = false;
+}
 </script>
 
 <template>
@@ -81,20 +97,8 @@ async function handlePointerLeave(event: PointerEvent) {
       :data-highlighted="isFocused ? '' : undefined"
       @pointermove="handlePointerMove"
       @pointerleave="handlePointerLeave"
-      @focus="
-        async (event) => {
-          await nextTick();
-          if (event.defaultPrevented || disabled) return;
-          isFocused = true;
-        }
-      "
-      @blur="
-        async (event) => {
-          await nextTick();
-          if (event.defaultPrevented) return;
-          isFocused = false;
-        }
-      "
+      @focus="handleFocus"
+      @blur="handleBlur"
     >
       <slot />
     </APrimitive>

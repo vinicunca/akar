@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { VNode } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import { useCollection } from '~~/collection';
 import { useForwardExpose } from '~~/shared';
@@ -58,12 +57,12 @@ function handlePointerEnter() {
   itemContext.wasEscapeCloseRef.value = false;
 }
 
-function handlePointerMove(ev: PointerEvent) {
+function handlePointerMove(event: PointerEvent) {
   if (menuContext.disableHoverTrigger.value) {
     return;
   }
 
-  if (ev.pointerType === 'mouse') {
+  if (event.pointerType === 'mouse') {
     if (
       props.disabled
       || wasClickCloseRef.value
@@ -78,12 +77,12 @@ function handlePointerMove(ev: PointerEvent) {
   }
 }
 
-function handlePointerLeave(ev: PointerEvent) {
+function handlePointerLeave(event: PointerEvent) {
   if (menuContext.disableHoverTrigger.value) {
     return;
   }
 
-  if (ev.pointerType === 'mouse') {
+  if (event.pointerType === 'mouse') {
     if (props.disabled) {
       return;
     }
@@ -111,28 +110,28 @@ function handleClick(event: PointerEvent) {
   wasClickCloseRef.value = open.value;
 }
 
-function handleKeydown(ev: KeyboardEvent) {
+function handleKeydown(event: KeyboardEvent) {
   const verticalEntryKey = menuContext.dir.value === 'rtl' ? 'ArrowLeft' : 'ArrowRight';
   const entryKey = { horizontal: 'ArrowDown', vertical: verticalEntryKey }[
     menuContext.orientation
   ];
-  if (open.value && ev.key === entryKey) {
+  if (open.value && event.key === entryKey) {
     itemContext.onEntryKeyDown();
     // Prevent FocusGroupItem from handling the event
-    ev.preventDefault();
-    ev.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
   }
 }
 
-function setFocusProxyRef(node: VNode) {
+function setFocusProxyRef(node: unknown) {
   // @ts-expect-error unrefElement expect MaybeRef, but also support Vnode
   itemContext.focusProxyRef.value = unrefElement(node);
   return undefined;
 }
 
-function handleVisuallyHiddenFocus(ev: FocusEvent) {
+function handleVisuallyHiddenFocus(event: FocusEvent) {
   const content = document.getElementById(itemContext.contentId);
-  const prevFocusedElement = ev.relatedTarget as HTMLElement | null;
+  const prevFocusedElement = event.relatedTarget as HTMLElement | null;
 
   const wasTriggerFocused = prevFocusedElement === triggerElement.value;
   const wasFocusFromContent = content?.contains(prevFocusedElement);

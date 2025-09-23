@@ -144,6 +144,10 @@ async function handleKeyDown(event: KeyboardEvent) {
   }
 }
 
+function handlePointerDown(event: PointerEvent) {
+  (event.currentTarget as HTMLElement).focus({ preventScroll: true });
+}
+
 if (props.value === '') {
   throw new Error(
     'A <ASelectItem /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.',
@@ -189,9 +193,7 @@ provideSelectItemContext({
       @focus="isFocused = true"
       @blur="isFocused = false"
       @pointerup="handleSelectCustomEvent"
-      @pointerdown="(event) => {
-        (event.currentTarget as HTMLElement).focus({ preventScroll: true })
-      }"
+      @pointerdown="handlePointerDown"
       @touchend.prevent.stop
       @pointermove="handlePointerMove"
       @pointerleave="handlePointerLeave"

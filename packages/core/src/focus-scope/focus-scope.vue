@@ -157,8 +157,8 @@ watchEffect(async (cleanupFn) => {
 
   if (!hasFocusedCandidate) {
     const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-    container.addEventListener(AUTOFOCUS_ON_MOUNT, (ev: Event) =>
-      emits('mountAutoFocus', ev));
+    container.addEventListener(AUTOFOCUS_ON_MOUNT, (event: Event) =>
+      emits('mountAutoFocus', event));
     container.dispatchEvent(mountEvent);
 
     if (!mountEvent.defaultPrevented) {
@@ -172,12 +172,12 @@ watchEffect(async (cleanupFn) => {
   }
 
   cleanupFn(() => {
-    container.removeEventListener(AUTOFOCUS_ON_MOUNT, (ev: Event) =>
-      emits('mountAutoFocus', ev));
+    container.removeEventListener(AUTOFOCUS_ON_MOUNT, (event: Event) =>
+      emits('mountAutoFocus', event));
 
     const unmountEvent = new CustomEvent(AUTOFOCUS_ON_UNMOUNT, EVENT_OPTIONS);
-    const unmountEventHandler = (ev: Event) => {
-      emits('unmountAutoFocus', ev);
+    const unmountEventHandler = (event: Event) => {
+      emits('unmountAutoFocus', event);
     };
     container.addEventListener(AUTOFOCUS_ON_UNMOUNT, unmountEventHandler);
     container.dispatchEvent(unmountEvent);

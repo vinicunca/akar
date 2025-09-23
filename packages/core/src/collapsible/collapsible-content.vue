@@ -86,12 +86,16 @@ onMounted(() => {
   });
 });
 
-useEventListener(currentElement, 'beforematch', (ev) => {
-  requestAnimationFrame(() => {
-    rootContext.onOpenToggle();
-    emits('contentFound');
-  });
-});
+useEventListener(
+  currentElement,
+  'beforematch',
+  () => {
+    requestAnimationFrame(() => {
+      rootContext.onOpenToggle();
+      emits('contentFound');
+    });
+  },
+);
 </script>
 
 <template>

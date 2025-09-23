@@ -46,6 +46,40 @@ async function handleSelect() {
     }
   }
 }
+
+async function handlePointerUp(event: MouseEvent) {
+  await nextTick();
+
+  if (event.defaultPrevented) {
+    return;
+  }
+
+  // Pointer down can move to a different menu item which should activate it on pointer up.
+  // We dispatch a click for selection to allow composition with click based triggers and to
+  // prevent Firefox from getting stuck in text selection mode when the menu closes.
+  if (!isPointerDownRef.value) {
+    (event.currentTarget as HTMLElement)?.click();
+  }
+}
+
+async function handleKeyDown(event: KeyboardEvent) {
+  const isTypingAhead = contentContext.searchRef.value !== '';
+
+  if (props.disabled || (isTypingAhead && event.key === ' ')) {
+    return;
+  }
+
+  if (SELECTION_KEYS.includes(event.key)) {
+    (event.currentTarget as HTMLElement).click();
+    /**
+     * We prevent default browser behavior for selection keys as they should trigger
+     * a selection only:
+     * - prevents space from scrolling the page.
+     * - if keydown causes focus to move, prevents keydown from firing on the new target.
+     */
+    event.preventDefault();
+  }
+}
 </script>
 
 <template>
@@ -58,32 +92,8 @@ async function handleSelect() {
         isPointerDownRef = true;
       }
     "
-    @pointerup="
-      async (event) => {
-        await nextTick();
-        if (event.defaultPrevented) return;
-        // Pointer down can move to a different menu item which should activate it on pointer up.
-        // We dispatch a click for selection to allow composition with click based triggers and to
-        // prevent Firefox from getting stuck in text selection mode when the menu closes.
-        if (!isPointerDownRef) event.currentTarget?.click();
-      }
-    "
-    @keydown="
-      async (event) => {
-        const isTypingAhead = contentContext.searchRef.value !== '';
-        if (disabled || (isTypingAhead && event.key === ' ')) return;
-        if (SELECTION_KEYS.includes(event.key)) {
-          event.currentTarget.click();
-          /**
-           * We prevent default browser behaviour for selection keys as they should trigger
-           * a selection only:
-           * - prevents space from scrolling the page.
-           * - if keydown causes focus to move, prevents keydown from firing on the new target.
-           */
-          event.preventDefault();
-        }
-      }
-    "
+    @pointerup="handlePointerUp"
+    @keydown="handleKeyDown"
   >
     <slot />
   </MenuItemImpl>

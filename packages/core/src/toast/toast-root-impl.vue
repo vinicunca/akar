@@ -230,11 +230,11 @@ provideToastRootContext({ onClose: handleClose });
           const eventDetail = { originalEvent: event, delta };
           if (hasSwipeMoveStarted) {
             swipeDeltaRef = delta;
-            handleAndDispatchCustomEvent(TOAST_SWIPE_MOVE, (ev: SwipeEvent) => emits('swipeMove', ev), eventDetail);
+            handleAndDispatchCustomEvent(TOAST_SWIPE_MOVE, (event: SwipeEvent) => emits('swipeMove', event), eventDetail);
           }
           else if (isDeltaInDirection(delta, providerContext.swipeDirection.value, moveStartBuffer)) {
             swipeDeltaRef = delta;
-            handleAndDispatchCustomEvent(TOAST_SWIPE_START, (ev: SwipeEvent) => emits('swipeStart', ev), eventDetail);
+            handleAndDispatchCustomEvent(TOAST_SWIPE_START, (event: SwipeEvent) => emits('swipeStart', event), eventDetail);
             (event.target as HTMLElement).setPointerCapture(event.pointerId);
           }
           else if (Math.abs(x) > moveStartBuffer || Math.abs(y) > moveStartBuffer) {
@@ -257,10 +257,10 @@ provideToastRootContext({ onClose: handleClose });
             if (
               isDeltaInDirection(delta, providerContext.swipeDirection.value, providerContext.swipeThreshold.value)
             ) {
-              handleAndDispatchCustomEvent(TOAST_SWIPE_END, (ev: SwipeEvent) => emits('swipeEnd', ev), eventDetail);
+              handleAndDispatchCustomEvent(TOAST_SWIPE_END, (event: SwipeEvent) => emits('swipeEnd', event), eventDetail);
             }
             else {
-              handleAndDispatchCustomEvent(TOAST_SWIPE_CANCEL, (ev: SwipeEvent) => emits('swipeCancel', ev), eventDetail);
+              handleAndDispatchCustomEvent(TOAST_SWIPE_CANCEL, (event: SwipeEvent) => emits('swipeCancel', event), eventDetail);
             }
             // Prevent click event from triggering on items within the toast when
             // pointer up is part of a swipe gesture

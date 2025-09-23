@@ -55,9 +55,9 @@ function handleClick(event: MouseEvent) {
     return;
   }
 
-  handleSelect(event, props.value, (ev) => {
-    emits('select', ev);
-    if (ev?.defaultPrevented) {
+  handleSelect(event, props.value, (event) => {
+    emits('select', event);
+    if (event?.defaultPrevented) {
       return;
     }
 
@@ -66,7 +66,7 @@ function handleClick(event: MouseEvent) {
     // if radio is in a form, stop propagation from the button so that we only propagate
     // one click event (from the input). We propagate changes from an input so that native
     // form validation works and form events reflect radio updates.
-      ev.stopPropagation();
+      event.stopPropagation();
     }
   });
 }

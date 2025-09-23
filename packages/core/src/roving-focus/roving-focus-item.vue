@@ -90,6 +90,17 @@ function handleKeydown(event: KeyboardEvent) {
     nextTick(() => focusFirst(candidateNodes));
   }
 }
+
+function handleMouseDown(event: MouseEvent) {
+// We prevent focusing non-focusable items on `mousedown`.
+  // Even though the item has tabIndex={-1}, that only means take it out of the tab order.
+  if (!props.focusable) {
+    event.preventDefault();
+  } else {
+    // Safari doesn't focus a button when clicked so we run our logic on mousedown also
+    context.onItemFocus(id.value);
+  }
+}
 </script>
 
 <template>
@@ -101,15 +112,7 @@ function handleKeydown(event: KeyboardEvent) {
       :data-disabled="!focusable ? '' : undefined"
       :as="as"
       :as-child="asChild"
-      @mousedown="
-        (event) => {
-          // We prevent focusing non-focusable items on `mousedown`.
-          // Even though the item has tabIndex={-1}, that only means take it out of the tab order.
-          if (!focusable) event.preventDefault();
-          // Safari doesn't focus a button when clicked so we run our logic on mousedown also
-          else context.onItemFocus(id);
-        }
-      "
+      @mousedown="handleMouseDown"
       @focus="context.onItemFocus(id)"
       @keydown="handleKeydown"
     >

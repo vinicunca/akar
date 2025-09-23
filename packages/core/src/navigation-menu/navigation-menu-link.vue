@@ -30,17 +30,17 @@ const emits = defineEmits<NavigationMenuLinkEmits>();
 const { ACollectionItem } = useCollection({ key: 'NavigationMenu' });
 useForwardExpose();
 
-async function handleClick(ev: MouseEvent) {
+async function handleClick(event: MouseEvent) {
   const linkSelectEvent = new CustomEvent(LINK_SELECT, {
     bubbles: true,
     cancelable: true,
     detail: {
-      originalEvent: ev,
+      originalEvent: event,
     },
   });
   emits('select', linkSelectEvent);
 
-  if (!linkSelectEvent.defaultPrevented && !ev.metaKey) {
+  if (!linkSelectEvent.defaultPrevented && !event.metaKey) {
     const rootContentDismissEvent = new CustomEvent(
       EVENT_ROOT_CONTENT_DISMISS,
       {
@@ -48,7 +48,7 @@ async function handleClick(ev: MouseEvent) {
         cancelable: true,
       },
     );
-    ev.target?.dispatchEvent(rootContentDismissEvent);
+    event.target?.dispatchEvent(rootContentDismissEvent);
   }
 }
 </script>

@@ -25,8 +25,8 @@ export function useEmitAsProps<Name extends string>(
     );
   }
 
-  events?.forEach((ev) => {
-    result[toHandlerKey(camelize(ev))] = (...arg: any) => emit(ev, ...arg);
+  events?.forEach((event) => {
+    result[toHandlerKey(camelize(event))] = (...arg: any) => emit(event, ...arg);
   });
 
   return result;

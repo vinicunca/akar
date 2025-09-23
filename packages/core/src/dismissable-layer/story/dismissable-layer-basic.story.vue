@@ -63,18 +63,18 @@ const openButtonRef = ref<HTMLElement>();
           }"
           @dismiss="open = false"
           @escape-key-down="
-            (ev) => {
-              if (state.isEscapeKeyDownPrevented) ev.preventDefault();
+            (event) => {
+              if (state.isEscapeKeyDownPrevented) event.preventDefault();
             }
           "
           @pointer-down-outside="
-            (ev) => {
-              if (state.isPointerDownOutsidePrevented) ev.preventDefault();
+            (event) => {
+              if (state.isPointerDownOutsidePrevented) event.preventDefault();
             }
           "
           @focus-outside="
-            (ev) => {
-              if (state.isFocusOutsidePrevented) ev.preventDefault();
+            (event) => {
+              if (state.isFocusOutsidePrevented) event.preventDefault();
             }
           "
         >
@@ -108,8 +108,8 @@ const openButtonRef = ref<HTMLElement>();
           disable-outside-pointer-events
           @dismiss="openWithFocusScope = false"
           @pointer-down-outside="
-            (ev) => {
-              if (ev.target === openButtonRef) ev.preventDefault();
+            (event) => {
+              if (event.target === openButtonRef) event.preventDefault();
             }
           "
         >

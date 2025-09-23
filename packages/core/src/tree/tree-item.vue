@@ -82,7 +82,7 @@ const isIndeterminate = computed(() => {
   }
 });
 
-function handleKeydownRight(ev: KeyboardEvent) {
+function handleKeydownRight(event: KeyboardEvent) {
   if (!hasChildren.value) {
     return;
   }
@@ -100,14 +100,14 @@ function handleKeydownRight(ev: KeyboardEvent) {
     }
   } else {
     //  open expanded
-    handleToggleCustomEvent(ev);
+    handleToggleCustomEvent(event);
   }
 }
 
-function handleKeydownLeft(ev: KeyboardEvent) {
+function handleKeydownLeft(event: KeyboardEvent) {
   if (isExpanded.value) {
     //  close expanded
-    handleToggleCustomEvent(ev);
+    handleToggleCustomEvent(event);
   } else {
     // go back to parent
     const collection = getItems().map((i) => i.ref);
@@ -122,29 +122,29 @@ function handleKeydownLeft(ev: KeyboardEvent) {
   }
 }
 
-async function handleSelect(ev: SelectEvent<T>) {
-  emits('select', ev);
-  if (ev?.defaultPrevented) {
+async function handleSelect(event: SelectEvent<T>) {
+  emits('select', event);
+  if (event?.defaultPrevented) {
     return;
   }
 
   rootContext.onSelect(props.value);
 }
-async function handleToggle(ev: ToggleEvent<T>) {
-  emits('toggle', ev);
-  if (ev?.defaultPrevented) {
+async function handleToggle(event: ToggleEvent<T>) {
+  emits('toggle', event);
+  if (event?.defaultPrevented) {
     return;
   }
 
   rootContext.onToggle(props.value);
 }
 
-async function handleSelectCustomEvent(ev?: KeyboardEvent | PointerEvent) {
-  if (!ev) {
+async function handleSelectCustomEvent(event?: KeyboardEvent | PointerEvent) {
+  if (!event) {
     return;
   }
 
-  const eventDetail = { originalEvent: ev, value: props.value, isExpanded: isExpanded.value, isSelected: isSelected.value };
+  const eventDetail = { originalEvent: event, value: props.value, isExpanded: isExpanded.value, isSelected: isSelected.value };
   handleAndDispatchCustomEvent({
     name: TREE_SELECT,
     handler: handleSelect,
@@ -152,12 +152,12 @@ async function handleSelectCustomEvent(ev?: KeyboardEvent | PointerEvent) {
   });
 }
 
-async function handleToggleCustomEvent(ev?: KeyboardEvent | PointerEvent) {
-  if (!ev) {
+async function handleToggleCustomEvent(event?: KeyboardEvent | PointerEvent) {
+  if (!event) {
     return;
   }
 
-  const eventDetail = { originalEvent: ev, value: props.value, isExpanded: isExpanded.value, isSelected: isSelected.value };
+  const eventDetail = { originalEvent: event, value: props.value, isExpanded: isExpanded.value, isSelected: isSelected.value };
   handleAndDispatchCustomEvent({
     name: TREE_TOGGLE,
     handler: handleToggle,
@@ -192,11 +192,11 @@ defineExpose({
       :data-selected="isSelected ? '' : undefined"
       :data-expanded="isExpanded ? '' : undefined"
       @keydown.enter.space.self.prevent="handleSelectCustomEvent"
-      @keydown.right.prevent="(ev) => rootContext.dir.value === 'ltr' ? handleKeydownRight(ev) : handleKeydownLeft(ev)"
-      @keydown.left.prevent="(ev) => rootContext.dir.value === 'ltr' ? handleKeydownLeft(ev) : handleKeydownRight(ev)"
-      @click.stop="(ev) => {
-        handleSelectCustomEvent(ev)
-        handleToggleCustomEvent(ev)
+      @keydown.right.prevent="(event: KeyboardEvent) => rootContext.dir.value === 'ltr' ? handleKeydownRight(event) : handleKeydownLeft(event)"
+      @keydown.left.prevent="(event: KeyboardEvent) => rootContext.dir.value === 'ltr' ? handleKeydownLeft(event) : handleKeydownRight(event)"
+      @click.stop="(event: KeyboardEvent | PointerEvent) => {
+        handleSelectCustomEvent(event)
+        handleToggleCustomEvent(event)
       }"
     >
       <slot

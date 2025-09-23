@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { ComponentPublicInstance } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 
 export interface AToastViewportProps extends APrimitiveProps {
@@ -176,9 +175,9 @@ function getSortedTabbableCandidates({ tabbingDirection }: { tabbingDirection: '
   >
     <FocusProxy
       v-if="hasToasts"
-      :ref="(node: ComponentPublicInstance) => {
-        headFocusProxyRef = unrefElement(node) as HTMLElement
-        return undefined
+      :ref="(node) => {
+        headFocusProxyRef = unrefElement(node as HTMLElement) as HTMLElement;
+        return undefined;
       }"
       @focus-from-outside-viewport="() => {
         const tabbableCandidates = getSortedTabbableCandidates({
@@ -187,6 +186,7 @@ function getSortedTabbableCandidates({ tabbingDirection }: { tabbingDirection: '
         focusFirst(tabbableCandidates)
       }"
     />
+
     <ACollectionSlot>
       <APrimitive
         :ref="forwardRef"
@@ -198,11 +198,12 @@ function getSortedTabbableCandidates({ tabbingDirection }: { tabbingDirection: '
         <slot />
       </APrimitive>
     </ACollectionSlot>
+
     <FocusProxy
       v-if="hasToasts"
-      :ref="(node: ComponentPublicInstance) => {
-        tailFocusProxyRef = unrefElement(node) as HTMLElement
-        return undefined
+      :ref="(node) => {
+        tailFocusProxyRef = unrefElement(node as HTMLElement) as HTMLElement;
+        return undefined;
       }"
       @focus-from-outside-viewport="() => {
         const tabbableCandidates = getSortedTabbableCandidates({

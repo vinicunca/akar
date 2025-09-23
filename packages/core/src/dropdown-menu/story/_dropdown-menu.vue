@@ -32,10 +32,10 @@ function handleClick() {
   // alert("hello!");
 }
 
-function handleCheck(ev: any) {
-  // checkboxOne.value = ev;
+function handleCheck(event: any) {
+  // checkboxOne.value = event;
   // eslint-disable-next-line no-console
-  console.log(ev);
+  console.log(event);
 }
 </script>
 

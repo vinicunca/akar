@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { useForwardExpose, useId } from '~~/shared';
 
 export interface ADropdownMenuTriggerProps extends APrimitiveProps {
@@ -29,6 +30,40 @@ onMounted(() => {
 });
 
 rootContext.triggerId ||= useId(undefined, 'akar-dropdown-menu-trigger');
+
+async function handleClick(event: MouseEvent) {
+  // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
+  // but not when the control key is pressed (avoiding MacOS right click)
+  if (!props.disabled && event.button === 0 && event.ctrlKey === false) {
+    rootContext?.onOpenToggle();
+    await nextTick();
+    // prevent trigger focusing when opening
+    // this allows the content to be given focus without competition
+    if (rootContext.open.value) {
+      event.preventDefault();
+    }
+  }
+}
+
+function handleKeyDown(event: KeyboardEvent) {
+  if (props.disabled) {
+    return;
+  }
+
+  if ([KEY_CODES.ENTER, ' '].includes(event.key)) {
+    rootContext.onOpenToggle();
+  }
+
+  if (event.key === 'ArrowDown') {
+    rootContext.onOpenChange(true);
+  }
+
+  // prevent keydown from scrolling window / first focused item to execute
+  // that keydown (inadvertently closing the menu)
+  if ([KEY_CODES.ENTER, ' ', KEY_CODES.ARROW_DOWN].includes(event.key)) {
+    event.preventDefault();
+  }
+}
 </script>
 
 <template>
@@ -45,30 +80,8 @@ rootContext.triggerId ||= useId(undefined, 'akar-dropdown-menu-trigger');
       :data-disabled="disabled ? '' : undefined"
       :disabled="disabled"
       :data-state="rootContext.open.value ? 'open' : 'closed'"
-      @click="
-        async (event) => {
-          // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
-          // but not when the control key is pressed (avoiding MacOS right click)
-          if (!disabled && event.button === 0 && event.ctrlKey === false) {
-            rootContext?.onOpenToggle();
-            await nextTick()
-            // prevent trigger focusing when opening
-            // this allows the content to be given focus without competition
-            if (rootContext.open.value) event.preventDefault();
-          }
-        }
-      "
-      @keydown.enter.space.arrow-down="
-        (event) => {
-          if (disabled) return;
-          if (['Enter', ' '].includes(event.key)) rootContext.onOpenToggle();
-          if (event.key === 'ArrowDown') rootContext.onOpenChange(true);
-          // prevent keydown from scrolling window / first focused item to execute
-          // that keydown (inadvertently closing the menu)
-          if (['Enter', ' ', 'ArrowDown'].includes(event.key))
-            event.preventDefault();
-        }
-      "
+      @click="handleClick"
+      @keydown.enter.space.arrow-down="handleKeyDown"
     >
       <slot />
     </APrimitive>

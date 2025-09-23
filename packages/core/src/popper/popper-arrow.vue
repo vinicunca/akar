@@ -36,8 +36,9 @@ const baseSide = computed(() => OPPOSITE_SIDE[contentContext.placedSide.value]);
 
 <template>
   <span
-    :ref="(el: HTMLElement) => {
-      contentContext.onArrowChange(el)
+    :ref="(el) => {
+      contentContext.onArrowChange(el as HTMLElement)
+
       return undefined
     }"
     :style="{

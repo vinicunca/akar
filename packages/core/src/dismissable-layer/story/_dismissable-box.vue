@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { DismissableLayer } from '..';
 
-import DismissableBox from './_DismissableBox.vue';
+import DismissableBox from './_dismissable-box.vue';
 
 const open = ref(false);
 const buttonRef = ref<HTMLElement>();
@@ -11,7 +11,7 @@ const buttonRef = ref<HTMLElement>();
 <template>
   <DismissableLayer
     v-bind="{ ...$attrs }"
-    class="rounded-xl bg-gray-100/10 p-4"
+    class="p-4 rounded-xl bg-gray-100/10"
   >
     <button
       ref="buttonRef"
@@ -26,9 +26,9 @@ const buttonRef = ref<HTMLElement>();
       @dismiss="open = false"
       @focus-outside.prevent
       @pointer-down-outside="
-        (ev) => {
-          if (ev.target === buttonRef) {
-            ev.preventDefault();
+        (event: any) => {
+          if (event.target === buttonRef) {
+            event.preventDefault();
           }
         }
       "

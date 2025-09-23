@@ -55,25 +55,41 @@ const isSelected = computed(() => valueComparator({
 
 const disabled = computed(() => rootContext.disabled.value || props.disabled);
 
-async function handleSelect(ev: SelectEvent<T>) {
-  emits('select', ev);
-  if (ev?.defaultPrevented) {
+async function handleSelect(event: SelectEvent<T>) {
+  emits('select', event);
+  if (event?.defaultPrevented) {
     return;
   }
 
-  if (!disabled.value && ev) {
+  if (!disabled.value && event) {
     rootContext.onValueChange(props.value);
     rootContext.changeHighlight(currentElement.value);
   }
 }
 
-function handleSelectCustomEvent(ev: PointerEvent) {
-  const eventDetail = { originalEvent: ev, value: props.value as T };
+function handleSelectCustomEvent(event: PointerEvent) {
+  const eventDetail = { originalEvent: event, value: props.value as T };
   handleAndDispatchCustomEvent({
     name: LISTBOX_SELECT,
     handler: handleSelect,
     detail: eventDetail,
   });
+}
+
+function handlePointerMove() {
+  if (rootContext.highlightedElement.value === currentElement.value) {
+    return;
+  }
+
+  if (rootContext.highlightOnHover.value) {
+    rootContext.changeHighlight(currentElement.value, false);
+  } else {
+    if (rootContext.focusable.value) {
+      return;
+    }
+
+    rootContext.changeHighlight(currentElement.value, false);
+  }
 }
 
 provideListboxItemContext({
@@ -99,15 +115,7 @@ provideListboxItemContext({
       :data-state="isSelected ? 'checked' : 'unchecked'"
       @click="handleSelectCustomEvent"
       @keydown.space.prevent="handleSelectCustomEvent"
-      @pointermove="(event) => {
-        if (rootContext.highlightedElement.value === currentElement)
-          return
-
-        if (rootContext.highlightOnHover.value)
-          rootContext.changeHighlight(currentElement, false)
-        else
-          rootContext.focusable.value ? undefined : rootContext.changeHighlight(currentElement, false)
-      }"
+      @pointermove="handlePointerMove"
     >
       <slot />
     </APrimitive>

@@ -35,7 +35,7 @@ onMounted(() => {
   }
 });
 
-function handleKeyDown(ev: KeyboardEvent) {
+function handleKeyDown() {
   if (!rootContext.open.value) {
     rootContext.onOpenChange(true);
   }

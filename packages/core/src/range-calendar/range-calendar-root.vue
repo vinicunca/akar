@@ -392,8 +392,8 @@ watch(
 
 useEventListener(
   'keydown',
-  (ev) => {
-    if (ev.key === KEY_CODES.ESC && isEditing.value) {
+  (event) => {
+    if (event.key === KEY_CODES.ESC && isEditing.value) {
       // Abort start and end selection
       startValue.value = validModelValue.value.start?.copy();
       endValue.value = validModelValue.value.end?.copy();

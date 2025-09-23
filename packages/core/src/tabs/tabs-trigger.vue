@@ -30,6 +30,17 @@ const triggerId = computed(() => makeTriggerId(rootContext.baseId, props.value))
 const contentId = computed(() => makeContentId(rootContext.baseId, props.value));
 
 const isSelected = computed(() => props.value === rootContext.modelValue.value);
+
+function handleMouseDown(event: MouseEvent) {
+  // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
+  // but not when the control key is pressed (avoiding MacOS right click)
+  if (!props.disabled && event.ctrlKey === false) {
+    rootContext.changeModelValue(props.value);
+  } else {
+    // prevent focus to avoid accidental activation
+    event.preventDefault();
+  }
+}
 </script>
 
 <template>
@@ -51,17 +62,7 @@ const isSelected = computed(() => props.value === rootContext.modelValue.value);
       :disabled="disabled"
       :data-disabled="disabled ? '' : undefined"
       :data-orientation="rootContext.orientation.value"
-      @mousedown.left="(event) => {
-        // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
-        // but not when the control key is pressed (avoiding MacOS right click)
-        if (!disabled && event.ctrlKey === false) {
-          rootContext.changeModelValue(value);
-        }
-        else {
-          // prevent focus to avoid accidental activation
-          event.preventDefault();
-        }
-      }"
+      @mousedown.left="handleMouseDown"
       @keydown.enter.space="rootContext.changeModelValue(value)"
       @focus="() => {
         // handle 'automatic' activation if necessary

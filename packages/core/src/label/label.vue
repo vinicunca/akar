@@ -16,15 +16,19 @@ const props = withDefaults(defineProps<ALabelProps>(), {
 });
 
 useForwardExpose();
+
+function handleMouseDown(event: MouseEvent) {
+  // prevent text selection when double clicking label
+  if (!event.defaultPrevented && event.detail > 1) {
+    event.preventDefault();
+  }
+}
 </script>
 
 <template>
   <APrimitive
     v-bind="props"
-    @mousedown="(event) => {
-      // prevent text selection when double clicking label
-      if (!event.defaultPrevented && event.detail > 1) event.preventDefault();
-    }"
+    @mousedown="handleMouseDown"
   >
     <slot />
   </APrimitive>

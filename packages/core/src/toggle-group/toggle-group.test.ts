@@ -109,8 +109,8 @@ describe('given multiple value AToggle Group', () => {
       attachTo: document.body,
       props: {
         'modelValue': ['center', 'right'],
-        'onUpdate:modelValue': (ev) => {
-          wrapper.setProps({ modelValue: ev });
+        'onUpdate:modelValue': (event) => {
+          wrapper.setProps({ modelValue: event });
         },
         'type': 'multiple',
       },

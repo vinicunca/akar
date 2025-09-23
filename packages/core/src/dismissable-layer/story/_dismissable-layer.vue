@@ -34,18 +34,18 @@ function handleDismiss() {
       id="layer"
       v-bind="useEmitAsProps(emits)"
       @dismiss="handleDismiss"
-      @escape-key-down="(ev) => {
+      @escape-key-down="(event) => {
         if (preventEscapeKeyDownEvent)
-          ev.preventDefault()
+          event.preventDefault()
       }"
-      @pointer-down-outside="(ev) => {
-        console.log(ev)
+      @pointer-down-outside="(event) => {
+        console.log(event)
         if (preventPointerDownOutsideEvent)
-          ev.preventDefault()
+          event.preventDefault()
       }"
-      @focus-outside="(ev) => {
+      @focus-outside="(event) => {
         if (preventFocusOutsideEvent)
-          ev.preventDefault()
+          event.preventDefault()
       }"
     >
       <div>Content</div>

@@ -80,31 +80,31 @@ const motionAttribute = computed(() => {
   return attribute;
 });
 
-function handleFocusOutside(ev: FocusOutsideEvent) {
-  emits('focusOutside', ev);
-  emits('interactOutside', ev);
+function handleFocusOutside(event: FocusOutsideEvent) {
+  emits('focusOutside', event);
+  emits('interactOutside', event);
 
-  const target = ev.detail.originalEvent.target as HTMLElement;
+  const target = event.detail.originalEvent.target as HTMLElement;
   if (target.hasAttribute('data-navigation-menu-trigger')) {
-    ev.preventDefault();
+    event.preventDefault();
   }
 
-  if (!ev.defaultPrevented) {
+  if (!event.defaultPrevented) {
     itemContext.onContentFocusOutside();
 
-    const target = ev.target as HTMLElement;
+    const target = event.target as HTMLElement;
     // Only dismiss content when focus moves outside of the menu
     if (menuContext.rootNavigationMenu?.value?.contains(target)) {
-      ev.preventDefault();
+      event.preventDefault();
     }
   }
 }
 
-function handlePointerDownOutside(ev: PointerDownOutsideEvent) {
-  emits('pointerDownOutside', ev);
+function handlePointerDownOutside(event: PointerDownOutsideEvent) {
+  emits('pointerDownOutside', event);
 
-  if (!ev.defaultPrevented) {
-    const target = ev.target as HTMLElement;
+  if (!event.defaultPrevented) {
+    const target = event.target as HTMLElement;
     const isTrigger = getItems().some((i) =>
       i.ref.contains(target),
     );
@@ -112,7 +112,7 @@ function handlePointerDownOutside(ev: PointerDownOutsideEvent) {
     = menuContext.isRootMenu && menuContext.viewport.value?.contains(target);
 
     if (isTrigger || isRootViewport || !menuContext.isRootMenu) {
-      ev.preventDefault();
+      event.preventDefault();
     }
   }
 }
@@ -136,10 +136,10 @@ watchEffect((cleanupFn) => {
   }
 });
 
-function handleEscapeKeyDown(ev: KeyboardEvent) {
-  emits('escapeKeyDown', ev);
+function handleEscapeKeyDown(event: KeyboardEvent) {
+  emits('escapeKeyDown', event);
 
-  if (!ev.defaultPrevented) {
+  if (!event.defaultPrevented) {
     menuContext.onItemDismiss();
     itemContext.triggerRef?.value?.focus();
     itemContext.wasEscapeCloseRef.value = true;
