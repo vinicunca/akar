@@ -13,8 +13,8 @@ export {
 } from './accordion-item.vue';
 export {
   default as AAccordionRoot,
+  type AAccordionRootEmits,
   type AAccordionRootProps,
-  type AccordionRootEmits,
   injectAAccordionRootContext,
 } from './accordion-root.vue';
 export {

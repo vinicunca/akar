@@ -59,13 +59,30 @@ catalogs:
     vue-component-type-helpers: ^3.0.8
     vue-tsc: 3.0.8
   docs:
+    '@babel/traverse': ^0.0.0
+    '@iconify/json': ^0.0.0
     '@nuxt/content': ^3.7.0
     '@nuxt/image': ^1.11.0
+    '@stackblitz/sdk': ^0.0.0
+    '@types/babel__traverse': ^0.0.0
+    '@types/hast': ^0.0.0
+    '@types/markdown-it': ^0.0.0
     '@vinicunca/unocss-preset': ^1.23.0
+    autoprefixer: ^0.0.0
     better-sqlite3: ^12.2.0
+    codesandbox: ^0.0.0
+    fast-glob: ^0.0.0
+    hast: ^0.0.0
+    mark.js: ^0.0.0
+    markdown-it: ^0.0.0
+    markdown-it-anchor: ^0.0.0
+    minisearch: ^0.0.0
     nuxt-component-meta: ^0.14.0
     nuxt-og-image: ^5.1.9
+    shiki: ^0.0.0
     shiki-transformer-color-highlight: ^1.0.0
+    vitepress: ^0.0.0
+    vue-component-meta: ^0.0.0
   histoire:
     '@histoire/plugin-vue': ^0.17.17
     '@rollup/plugin-alias': ^5.1.1
@@ -76,6 +93,7 @@ catalogs:
     unbuild: ^3.6.1
     unplugin-vue-components: ^29.1.0
   pohon:
+    '@nuxt/icon': ^2.0.0
     '@nuxt/module-builder': ^1.0.1
     '@nuxtjs/color-mode': ^3.5.2
     '@standard-schema/spec': ^1.0.0

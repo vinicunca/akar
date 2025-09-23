@@ -43,7 +43,7 @@ export interface AAccordionRootProps<T = string | Array<string>>
   unmountOnHide?: boolean;
 }
 
-export type AccordionRootEmits<T extends SingleOrMultipleType = SingleOrMultipleType> = {
+export type AAccordionRootEmits<T extends SingleOrMultipleType = SingleOrMultipleType> = {
   /**
    * Event handler called when the expanded state of an item changes
    */
@@ -84,7 +84,7 @@ const props = withDefaults(
   },
 );
 
-const emits = defineEmits<AccordionRootEmits<ExplicitType>>();
+const emits = defineEmits<AAccordionRootEmits<ExplicitType>>();
 
 defineSlots<{
   default?: (props: {

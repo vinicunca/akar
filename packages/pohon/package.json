@@ -146,6 +146,7 @@
     }
   },
   "dependencies": {
+    "@nuxt/icon": "catalog:pohon",
     "@nuxt/kit": "catalog:plugins",
     "@nuxt/schema": "catalog:plugins",
     "@nuxtjs/color-mode": "catalog:pohon",
@@ -176,6 +177,7 @@
     "vue-component-type-helpers": "catalog:core"
   },
   "devDependencies": {
+    "@nuxt/content": "catalog:docs",
     "@nuxt/module-builder": "catalog:pohon",
     "defu": "catalog:core",
     "nuxt": "catalog:pohon"

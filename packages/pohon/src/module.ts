@@ -121,6 +121,14 @@ export default defineNuxtModule<PohonModuleOptions>({
 
     await registerModule({ name: '@unocss/nuxt', key: 'unocss' });
 
+    await registerModule({
+      name: '@nuxt/icon',
+      key: 'icon',
+      options: {
+        cssLayer: 'components',
+      },
+    });
+
     if (options.colorMode) {
       await registerModule({
         name: '@nuxtjs/color-mode',
