@@ -17,7 +17,8 @@ export interface AMenuCheckboxItemProps extends AMenuItemProps {
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
+import { reactiveOmit, useVModel } from '@vueuse/core';
+import { useForwardProps } from '~~/shared';
 import { provideMenuItemIndicatorContext } from './menu-item-indicator.vue';
 import AMenuItem from './menu-item.vue';
 import { getCheckedState, isIndeterminate } from './utils';
@@ -34,6 +35,9 @@ defineSlots<{
   }) => any;
 }>();
 
+const delegatedProps = reactiveOmit(props, ['modelValue']);
+const forwarded = useForwardProps(delegatedProps);
+
 const modelValue = useVModel(props, 'modelValue', emits);
 
 provideMenuItemIndicatorContext({ modelValue });
@@ -42,7 +46,7 @@ provideMenuItemIndicatorContext({ modelValue });
 <template>
   <AMenuItem
     role="menuitemcheckbox"
-    v-bind="props"
+    v-bind="forwarded"
     :aria-checked="isIndeterminate(modelValue) ? 'mixed' : modelValue"
     :data-state="getCheckedState(modelValue)"
     @select="
