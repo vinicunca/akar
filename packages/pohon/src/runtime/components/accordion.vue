@@ -8,7 +8,7 @@ import theme from '#build/pohon/accordion';
 
 type Accordion = ComponentConfig<typeof theme, AppConfig, 'accordion'>;
 
-export interface AccordionItem {
+export interface PAccordionItem {
   label?: string;
   /**
    * @IconifyIcon
@@ -28,7 +28,7 @@ export interface AccordionItem {
   [key: string]: any;
 }
 
-export interface AccordionProps<T extends AccordionItem = AccordionItem> extends Pick<AAccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled' | 'unmountOnHide'> {
+export interface PAccordionProps<T extends PAccordionItem = PAccordionItem> extends Pick<AAccordionRootProps, 'collapsible' | 'defaultValue' | 'modelValue' | 'type' | 'disabled' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -37,7 +37,7 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
   items?: Array<T>;
   /**
    * The icon displayed on the right side of the trigger.
-   * @defaultValue appConfig.ui.icons.chevronDown
+   * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
   trailingIcon?: IconProps['name'];
@@ -50,11 +50,11 @@ export interface AccordionProps<T extends AccordionItem = AccordionItem> extends
   pohon?: Accordion['slots'];
 }
 
-export interface AccordionEmits extends AAccordionRootEmits {}
+export interface PAccordionEmits extends AAccordionRootEmits {}
 
-type SlotProps<T extends AccordionItem> = (props: { item: T; index: number; open: boolean }) => any;
+type SlotProps<T extends PAccordionItem> = (props: { item: T; index: number; open: boolean }) => any;
 
-export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
+export type PAccordionSlots<T extends PAccordionItem = PAccordionItem> = {
   leading: SlotProps<T>;
   default: SlotProps<T>;
   trailing: SlotProps<T>;
@@ -63,7 +63,7 @@ export type AccordionSlots<T extends AccordionItem = AccordionItem> = {
 } & DynamicSlots<T, 'body', { index: number; open: boolean }>;
 </script>
 
-<script setup lang="ts" generic="T extends AccordionItem">
+<script setup lang="ts" generic="T extends PAccordionItem">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import {
@@ -80,7 +80,7 @@ import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
 
 const props = withDefaults(
-  defineProps<AccordionProps<T>>(),
+  defineProps<PAccordionProps<T>>(),
   {
     type: 'single',
     collapsible: true,
@@ -88,8 +88,8 @@ const props = withDefaults(
     labelKey: 'label',
   },
 );
-const emits = defineEmits<AccordionEmits>();
-const slots = defineSlots<AccordionSlots<T>>();
+const emits = defineEmits<PAccordionEmits>();
+const slots = defineSlots<PAccordionSlots<T>>();
 
 const appConfig = useAppConfig() as Accordion['AppConfig'];
 
@@ -131,16 +131,16 @@ const pohon = computed(() =>
       :value="item.value || String(index)"
       :disabled="item.disabled"
       :class="pohon.item({
-        class: [props.pohon?.item, item.ui?.item, item.class],
+        class: [props.pohon?.item, item.pohon?.item, item.class],
       })"
     >
       <AAccordionHeader
         as="div"
-        :class="pohon.header({ class: [props.pohon?.header, item.ui?.header] })"
+        :class="pohon.header({ class: [props.pohon?.header, item.pohon?.header] })"
       >
         <AAccordionTrigger
           :class="pohon.trigger({
-            class: [props.pohon?.trigger, item.ui?.trigger], disabled: item.disabled,
+            class: [props.pohon?.trigger, item.pohon?.trigger], disabled: item.disabled,
           })"
         >
           <slot
@@ -152,13 +152,13 @@ const pohon = computed(() =>
             <PIcon
               v-if="item.icon"
               :name="item.icon"
-              :class="pohon.leadingIcon({ class: [props.pohon?.leadingIcon, item?.ui?.leadingIcon] })"
+              :class="pohon.leadingIcon({ class: [props.pohon?.leadingIcon, item?.pohon?.leadingIcon] })"
             />
           </slot>
 
           <span
             v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots.default"
-            :class="pohon.label({ class: [props.pohon?.label, item.ui?.label] })"
+            :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
           >
             <slot
               :item="item"
@@ -175,25 +175,25 @@ const pohon = computed(() =>
           >
             <PIcon
               :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
-              :class="pohon.trailingIcon({ class: [props.pohon?.trailingIcon, item.ui?.trailingIcon] })"
+              :class="pohon.trailingIcon({ class: [props.pohon?.trailingIcon, item.pohon?.trailingIcon] })"
             />
           </slot>
         </AAccordionTrigger>
       </AAccordionHeader>
 
       <AAccordionContent
-        v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof AccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof AccordionSlots<T>])"
-        :class="pohon.content({ class: [props.pohon?.content, item.ui?.content] })"
+        v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof PAccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof PAccordionSlots<T>])"
+        :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content] })"
       >
         <slot
-          :name="(item.slot || 'content') as keyof AccordionSlots<T>"
+          :name="(item.slot || 'content') as keyof PAccordionSlots<T>"
           :item="item as Extract<T, { slot: string; }>"
           :index="index"
           :open="open"
         >
-          <div :class="pohon.body({ class: [props.pohon?.body, item.ui?.body] })">
+          <div :class="pohon.body({ class: [props.pohon?.body, item.pohon?.body] })">
             <slot
-              :name="(item.slot ? `${item.slot}-body` : 'body') as keyof AccordionSlots<T>"
+              :name="(item.slot ? `${item.slot}-body` : 'body') as keyof PAccordionSlots<T>"
               :item="item as Extract<T, { slot: string; }>"
               :index="index"
               :open="open"

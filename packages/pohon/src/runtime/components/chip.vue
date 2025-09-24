@@ -1,0 +1,104 @@
+<script lang="ts">
+import type { AppConfig } from '@nuxt/schema';
+import type { APrimitiveProps } from 'akar';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/chip';
+
+type Chip = ComponentConfig<typeof theme, AppConfig, 'chip'>;
+
+export interface ChipProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: APrimitiveProps['as'];
+  /** Display some text inside the chip. */
+  text?: string | number;
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: Chip['variants']['color'];
+  /**
+   * @defaultValue 'md'
+   */
+  size?: Chip['variants']['size'];
+  /**
+   * The position of the chip.
+   * @defaultValue 'top-right'
+   */
+  position?: Chip['variants']['position'];
+  /** When `true`, keep the chip inside the component for rounded elements. */
+  inset?: boolean;
+  /** When `true`, render the chip relatively to the parent. */
+  standalone?: boolean;
+  class?: any;
+  pohon?: Chip['slots'];
+}
+
+export interface ChipEmits {
+  'update:show': [value: boolean];
+}
+
+export interface ChipSlots {
+  default: (props?: object) => any;
+  content: (props?: object) => any;
+}
+</script>
+
+<script setup lang="ts">
+import { useAppConfig } from '#imports';
+import { APrimitive, APrimitiveSlot } from 'akar';
+import { computed } from 'vue';
+import { useAvatarGroup } from '../composables/use-avatar-group';
+import { uv } from '../utils/uv';
+
+defineOptions({ inheritAttrs: false });
+
+const props = withDefaults(
+  defineProps<ChipProps>(),
+  {
+    inset: false,
+    standalone: false,
+  },
+);
+
+defineSlots<ChipSlots>();
+
+const show = defineModel<boolean>('show', { default: true });
+
+const { size } = useAvatarGroup(props);
+const appConfig = useAppConfig() as Chip['AppConfig'];
+
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.chip || {}),
+  })({
+    color: props.color,
+    size: size.value,
+    position: props.position,
+    inset: props.inset,
+    standalone: props.standalone,
+  }),
+);
+</script>
+
+<template>
+  <APrimitive
+    :as="as"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+  >
+    <APrimitiveSlot v-bind="$attrs">
+      <slot />
+    </APrimitiveSlot>
+
+    <span
+      v-if="show"
+      :class="pohon.base({ class: props.pohon?.base })"
+    >
+      <slot name="content">
+        {{ text }}
+      </slot>
+    </span>
+  </APrimitive>
+</template>

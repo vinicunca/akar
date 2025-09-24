@@ -11,6 +11,8 @@ import { name, version } from '../package.json';
 import { DEFAULT_OPTIONS, getDefaultPohonConfig, resolveColors } from './defaults';
 import { addPohonTemplates } from './templates';
 
+export type * from './runtime/types';
+
 type Color = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | (string & {});
 type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | (string & {});
 
@@ -25,7 +27,7 @@ export interface PohonModuleOptions {
   /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
-   * @see https://ui.nuxt.com/docs/getting-started/installation/nuxt#colormode
+   * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#colormode
    */
   colorMode?: boolean;
 

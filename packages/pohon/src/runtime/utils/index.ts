@@ -27,3 +27,14 @@ export function getProp(
 
   return result !== undefined ? result : defaultValue;
 }
+
+export function mergeClasses(appConfigClass?: string | Array<string>, propClass?: string) {
+  if (!appConfigClass && !propClass) {
+    return '';
+  }
+
+  return [
+    ...(Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass]),
+    propClass,
+  ].filter(Boolean);
+}

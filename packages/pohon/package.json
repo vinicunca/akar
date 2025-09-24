@@ -32,7 +32,7 @@
     "ui-framework"
   ],
   "imports": {
-    "#build/ui/*": "./.nuxt/ui/*.ts"
+    "#build/pohon/*": "./.nuxt/pohon/*.ts"
   },
   "exports": {
     ".": {

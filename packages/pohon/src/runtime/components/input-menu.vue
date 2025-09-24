@@ -1,0 +1,679 @@
+<script lang="ts">
+import type { AppConfig } from '@nuxt/schema';
+import type { ComboboxArrowProps, ComboboxContentEmits, ComboboxContentProps, ComboboxRootEmits, ComboboxRootProps } from 'akar';
+import type { InputHTMLAttributes } from 'vue';
+import type { UseComponentIconsProps } from '../composables/use-component-icons';
+import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types';
+import type { AcceptableValue, ArrayOrNested, EmitsToProps, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/input-menu';
+
+type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>;
+
+export type InputMenuValue = AcceptableValue;
+export type InputMenuItem = InputMenuValue | {
+  label?: string;
+  /**
+   * @IconifyIcon
+   */
+  icon?: IconProps['name'];
+  avatar?: AvatarProps;
+  chip?: ChipProps;
+  /**
+   * The item type.
+   * @defaultValue 'item'
+   */
+  type?: 'label' | 'separator' | 'item';
+  disabled?: boolean;
+  onSelect?: (e?: Event) => void;
+  class?: any;
+  pohon?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>;
+  [key: string]: any;
+};
+
+export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus'>, UseComponentIconsProps {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: APrimitiveProps['as'];;
+  id?: string;
+  type?: InputHTMLAttributes['type'];
+  /** The placeholder text when the input is empty. */
+  placeholder?: string;
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: InputMenu['variants']['color'];
+  /**
+   * @defaultValue 'outline'
+   */
+  variant?: InputMenu['variants']['variant'];
+  /**
+   * @defaultValue 'md'
+   */
+  size?: InputMenu['variants']['size'];
+  required?: boolean;
+  autofocus?: boolean;
+  autofocusDelay?: number;
+  /**
+   * The icon displayed to open the menu.
+   * @defaultValue appConfig.pohon.icons.chevronDown
+   * @IconifyIcon
+   */
+  trailingIcon?: IconProps['name'];
+  /**
+   * The icon displayed when an item is selected.
+   * @defaultValue appConfig.pohon.icons.check
+   * @IconifyIcon
+   */
+  selectedIcon?: IconProps['name'];
+  /**
+   * The icon displayed to delete a tag.
+   * Works only when `multiple` is `true`.
+   * @defaultValue appConfig.pohon.icons.close
+   * @IconifyIcon
+   */
+  deleteIcon?: IconProps['name'];
+  /**
+   * The content of the menu.
+   * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
+   */
+  content?: Omit<ComboboxContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ComboboxContentEmits>>;
+  /**
+   * Display an arrow alongside the menu.
+   * @defaultValue false
+   */
+  arrow?: boolean | Omit<ComboboxArrowProps, 'as' | 'asChild'>;
+  /**
+   * Render the menu in a portal.
+   * @defaultValue true
+   */
+  portal?: boolean | string | HTMLElement;
+  /**
+   * When `items` is an array of objects, select the field to use as the value instead of the object itself.
+   * @defaultValue undefined
+   */
+  valueKey?: VK;
+  /**
+   * When `items` is an array of objects, select the field to use as the label.
+   * @defaultValue 'label'
+   */
+  labelKey?: GetItemKeys<T>;
+  items?: T;
+  /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
+  defaultValue?: GetModelValue<T, VK, M>;
+  /** The controlled value of the InputMenu. Can be binded-with with `v-model`. */
+  modelValue?: GetModelValue<T, VK, M>;
+  /** Whether multiple options can be selected or not. */
+  multiple?: M & boolean;
+  /** Highlight the ring color like a focus state. */
+  highlight?: boolean;
+  /**
+   * Determines if custom user input that does not exist in options can be added.
+   * @defaultValue false
+   */
+  createItem?: boolean | 'always' | { position?: 'top' | 'bottom'; when?: 'empty' | 'always' };
+  /**
+   * Fields to filter items by.
+   * @defaultValue [labelKey]
+   */
+  filterFields?: Array<string>;
+  /**
+   * When `true`, disable the default filters, useful for custom filtering (useAsyncData, useFetch, etc.).
+   * @defaultValue false
+   */
+  ignoreFilter?: boolean;
+  class?: any;
+  pohon?: InputMenu['slots'];
+}
+
+export type InputMenuEmits<A extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<ComboboxRootEmits, 'update:open'> & {
+  'change': [event: Event];
+  'blur': [event: FocusEvent];
+  'focus': [event: FocusEvent];
+  'create': [item: string];
+  /** Event handler when highlighted element changes. */
+  'highlight': [payload: {
+    ref: HTMLElement;
+    value: GetModelValue<A, VK, M>;
+  } | undefined];
+  'remove-tag': [item: GetModelValue<A, VK, M>];
+} & GetModelValueEmits<A, VK, M>;
+
+type SlotProps<T extends InputMenuItem> = (props: { item: T; index: number }) => any;
+
+export interface InputMenuSlots<
+  A extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>,
+  VK extends GetItemKeys<A> | undefined = undefined,
+  M extends boolean = false,
+  T extends NestedItem<A> = NestedItem<A>,
+> {
+  'leading': (props: {
+    modelValue?: GetModelValue<A, VK, M>;
+    open: boolean;
+    pohon: { [K in keyof Required<InputMenu['slots']>]: (props?: Record<string, any>) => string };
+  }) => any;
+  'trailing': (props: {
+    modelValue?: GetModelValue<A, VK, M>;
+    open: boolean;
+    pohon: { [K in keyof Required<InputMenu['slots']>]: (props?: Record<string, any>) => string };
+  }) => any;
+  'empty': (props: { searchTerm?: string }) => any;
+  'item': SlotProps<T>;
+  'item-leading': SlotProps<T>;
+  'item-label': SlotProps<T>;
+  'item-trailing': SlotProps<T>;
+  'tags-item-text': SlotProps<T>;
+  'tags-item-delete': SlotProps<T>;
+  'content-top': (props?: object) => any;
+  'content-bottom': (props?: object) => any;
+  'create-item-label': (props: { item: string }) => any;
+}
+</script>
+
+<script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
+import { useAppConfig } from '#imports';
+import { isNonNullish } from '@vinicunca/perkakas';
+import { createReusableTemplate, reactivePick } from '@vueuse/core';
+import { ComboboxAnchor, ComboboxArrow, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxPortal, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot, useFilter, useForwardPropsEmits } from 'akar';
+import { defu } from 'defu';
+import { isEqual } from 'ohash/utils';
+import { computed, nextTick, onMounted, ref, toRaw, toRef } from 'vue';
+import { useComponentIcons } from '../composables/use-component-icons';
+import { useLocale } from '../composables/use-locale';
+import { useFieldGroup } from '../composables/useFieldGroup';
+import { useFormField } from '../composables/use-form-field';
+import { usePortal } from '../composables/usePortal';
+import { compare, get, getDisplayValue, isArrayOfArray } from '../utils';
+import { uv } from '../utils/uv';
+import PAvatar from './avatar.vue';
+import UChip from './Chip.vue';
+import PIcon from './icon.vue';
+
+defineOptions({ inheritAttrs: false });
+
+const props = withDefaults(defineProps<InputMenuProps<T, VK, M>>(), {
+  type: 'text',
+  autofocusDelay: 0,
+  portal: true,
+  labelKey: 'label',
+  resetSearchTermOnBlur: true,
+  resetSearchTermOnSelect: true,
+});
+const emits = defineEmits<InputMenuEmits<T, VK, M>>();
+const slots = defineSlots<InputMenuSlots<T, VK, M>>();
+
+const searchTerm = defineModel<string>('searchTerm', { default: '' });
+
+const { t } = useLocale();
+const appConfig = useAppConfig() as InputMenu['AppConfig'];
+const { contains } = useFilter({ sensitivity: 'base' });
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'highlightOnHover', 'openOnClick', 'openOnFocus'), emits);
+const portalProps = usePortal(toRef(() => props.portal));
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps);
+const arrowProps = toRef(() => props.arrow as ComboboxArrowProps);
+
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props);
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown })));
+
+const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);
+
+const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate();
+
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.inputMenu || {}) })({
+  color: color.value,
+  variant: props.variant,
+  size: inputSize?.value,
+  loading: props.loading,
+  highlight: highlight.value,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing,
+  multiple: props.multiple,
+  fieldGroup: orientation.value,
+}));
+
+const items = computed(() => groups.value.flatMap((group) => group) as Array<T>);
+
+function displayValue(value: GetItemValue<T, VK>): string {
+  return getDisplayValue<Array<T>, GetItemValue<T, VK>>(items.value, value, {
+    labelKey: props.labelKey,
+    valueKey: props.valueKey,
+  }) ?? '';
+}
+
+const groups = computed<Array<Array<InputMenuItem>>>(() =>
+  props.items?.length
+    ? isArrayOfArray(props.items)
+      ? props.items
+      : [props.items]
+    : [],
+);
+
+const filteredGroups = computed(() => {
+  if (props.ignoreFilter || !searchTerm.value) {
+    return groups.value;
+  }
+
+  const fields = Array.isArray(props.filterFields) ? props.filterFields : [props.labelKey] as Array<string>;
+
+  return groups.value.map((items) => items.filter((item) => {
+    if (item === undefined || item === null) {
+      return false;
+    }
+
+    if (typeof item !== 'object') {
+      return contains(String(item), searchTerm.value);
+    }
+
+    if (item.type && ['label', 'separator'].includes(item.type)) {
+      return true;
+    }
+
+    return fields.some((field) => {
+      const value = get(item, field);
+      return isNonNullish(value) && contains(String(value), searchTerm.value);
+    });
+  })).filter((group) => group.filter((item) =>
+    !isInputItem(item) || (!item.type || !['label', 'separator'].includes(item.type)),
+  ).length > 0);
+});
+const filteredItems = computed(() => filteredGroups.value.flatMap((group) => group));
+
+const createItem = computed(() => {
+  if (!props.createItem || !searchTerm.value) {
+    return false;
+  }
+
+  const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value;
+
+  if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
+    return !filteredItems.value.find((item) => compare(item, newItem, props.valueKey as string));
+  }
+
+  return !filteredItems.value.length;
+});
+const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom');
+
+const inputRef = ref<InstanceType<typeof ComboboxInput> | null>(null);
+
+function autoFocus() {
+  if (props.autofocus) {
+    inputRef.value?.$el?.focus();
+  }
+}
+
+onMounted(() => {
+  nextTick(() => {
+    searchTerm.value = '';
+  });
+
+  setTimeout(() => {
+    autoFocus();
+  }, props.autofocusDelay);
+});
+
+function onUpdate(value: any) {
+  if (toRaw(props.modelValue) === value) {
+    return;
+  }
+  // @ts-expect-error - 'target' does not exist in type 'EventInit'
+  const event = new Event('change', { target: { value } });
+  emits('change', event);
+  emitFormChange();
+  emitFormInput();
+
+  if (props.resetSearchTermOnSelect) {
+    searchTerm.value = '';
+  }
+}
+
+function onBlur(event: FocusEvent) {
+  emits('blur', event);
+  emitFormBlur();
+}
+
+function onFocus(event: FocusEvent) {
+  emits('focus', event);
+  emitFormFocus();
+}
+
+function onUpdateOpen(value: boolean) {
+  let timeoutId;
+
+  if (!value) {
+    const event = new FocusEvent('blur');
+
+    emits('blur', event);
+    emitFormBlur();
+
+    // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
+    // https://akar.com/docs/components/combobox#api-reference
+    if (props.resetSearchTermOnBlur) {
+      const STATE_ANIMATION_DELAY_MS = 100;
+
+      timeoutId = setTimeout(() => {
+        searchTerm.value = '';
+      }, STATE_ANIMATION_DELAY_MS);
+    }
+  } else {
+    const event = new FocusEvent('focus');
+    emits('focus', event);
+    emitFormFocus();
+    clearTimeout(timeoutId);
+  }
+}
+
+function onRemoveTag(event: any) {
+  if (props.multiple) {
+    const modelValue = props.modelValue as GetModelValue<T, VK, true>;
+    const filteredValue = modelValue.filter((value) => !isEqual(value, event));
+    emits('update:modelValue', filteredValue as GetModelValue<T, VK, M>);
+    emits('remove-tag', event);
+    onUpdate(filteredValue);
+  }
+}
+
+function onSelect(e: Event, item: InputMenuItem) {
+  if (!isInputItem(item)) {
+    return;
+  }
+
+  if (item.disabled) {
+    e.preventDefault();
+    return;
+  }
+
+  item.onSelect?.(e);
+}
+
+function isInputItem(item: InputMenuItem): item is Exclude<InputMenuItem, InputMenuValue> {
+  return typeof item === 'object' && item !== null;
+}
+
+defineExpose({
+  inputRef,
+});
+</script>
+
+<!-- eslint-disable vue/no-template-shadow -->
+<template>
+  <DefineCreateItemTemplate>
+    <ComboboxGroup :class="pohon.group({ class: props.pohon?.group })">
+      <ComboboxItem
+        :class="pohon.item({ class: props.pohon?.item })"
+        :value="searchTerm"
+        @select.prevent="emits('create', searchTerm)"
+      >
+        <span :class="pohon.itemLabel({ class: props.pohon?.itemLabel })">
+          <slot
+            name="create-item-label"
+            :item="searchTerm"
+          >
+            {{ t('inputMenu.create', { label: searchTerm }) }}
+          </slot>
+        </span>
+      </ComboboxItem>
+    </ComboboxGroup>
+  </DefineCreateItemTemplate>
+
+  <ComboboxRoot
+    v-slot="{ modelValue, open }"
+    v-bind="rootProps"
+    :name="name"
+    :disabled="disabled"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :as-child="!!multiple"
+    ignore-filter
+    @update:model-value="onUpdate"
+    @update:open="onUpdateOpen"
+    @keydown.enter="$event.preventDefault()"
+  >
+    <ComboboxAnchor
+      :as-child="!multiple"
+      :class="pohon.base({ class: props.pohon?.base })"
+    >
+      <TagsInputRoot
+        v-if="multiple"
+        v-slot="{ modelValue: tags }"
+        :model-value="(modelValue as string[])"
+        :disabled="disabled"
+        :required="required"
+        delimiter=""
+        as-child
+        @blur="onBlur"
+        @focus="onFocus"
+        @remove-tag="onRemoveTag"
+      >
+        <TagsInputItem
+          v-for="(item, index) in tags"
+          :key="index"
+          :value="isInputItem(item) ? item : String(item)"
+          :class="pohon.tagsItem({ class: [props.pohon?.tagsItem, isInputItem(item) && item.ui?.tagsItem] })"
+        >
+          <TagsInputItemText :class="pohon.tagsItemText({ class: [props.pohon?.tagsItemText, isInputItem(item) && item.ui?.tagsItemText] })">
+            <slot
+              name="tags-item-text"
+              :item="(item as NestedItem<T>)"
+              :index="index"
+            >
+              {{ displayValue(item as GetItemValue<T, VK>) }}
+            </slot>
+          </TagsInputItemText>
+
+          <TagsInputItemDelete
+            :class="pohon.tagsItemDelete({ class: [props.pohon?.tagsItemDelete, isInputItem(item) && item.ui?.tagsItemDelete] })"
+            :disabled="disabled"
+          >
+            <slot
+              name="tags-item-delete"
+              :item="(item as NestedItem<T>)"
+              :index="index"
+            >
+              <PIcon
+                :name="deleteIcon || appConfig.pohon.icons.close"
+                :class="pohon.tagsItemDeleteIcon({ class: [props.pohon?.tagsItemDeleteIcon, isInputItem(item) && item.ui?.tagsItemDeleteIcon] })"
+              />
+            </slot>
+          </TagsInputItemDelete>
+        </TagsInputItem>
+
+        <ComboboxInput
+          v-model="searchTerm"
+          as-child
+        >
+          <TagsInputInput
+            :id="id"
+            ref="inputRef"
+            v-bind="{ ...$attrs, ...ariaAttrs }"
+            :placeholder="placeholder"
+            :class="pohon.tagsInput({ class: props.pohon?.tagsInput })"
+            @keydown.enter.prevent
+          />
+        </ComboboxInput>
+      </TagsInputRoot>
+
+      <ComboboxInput
+        v-else
+        :id="id"
+        ref="inputRef"
+        :display-value="displayValue"
+        v-bind="{ ...$attrs, ...ariaAttrs }"
+        :type="type"
+        :placeholder="placeholder"
+        :required="required"
+        @blur="onBlur"
+        @focus="onFocus"
+        @update:model-value="searchTerm = $event"
+      />
+
+      <span
+        v-if="isLeading || !!avatar || !!slots.leading"
+        :class="pohon.leading({ class: props.pohon?.leading })"
+      >
+        <slot
+          name="leading"
+          :model-value="(modelValue as GetModelValue<T, VK, M>)"
+          :open="open"
+          :ui="ui"
+        >
+          <PIcon
+            v-if="isLeading && leadingIconName"
+            :name="leadingIconName"
+            :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+          />
+          <PAvatar
+            v-else-if="!!avatar"
+            :size="((props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as AvatarProps['size'])"
+            v-bind="avatar"
+            :class="pohon.itemLeadingAvatar({ class: props.pohon?.itemLeadingAvatar })"
+          />
+        </slot>
+      </span>
+
+      <ComboboxTrigger
+        v-if="isTrailing || !!slots.trailing"
+        :class="pohon.trailing({ class: props.pohon?.trailing })"
+      >
+        <slot
+          name="trailing"
+          :model-value="(modelValue as GetModelValue<T, VK, M>)"
+          :open="open"
+          :ui="ui"
+        >
+          <PIcon
+            v-if="trailingIconName"
+            :name="trailingIconName"
+            :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+          />
+        </slot>
+      </ComboboxTrigger>
+    </ComboboxAnchor>
+
+    <ComboboxPortal v-bind="portalProps">
+      <ComboboxContent
+        :class="pohon.content({ class: props.pohon?.content })"
+        v-bind="contentProps"
+        @focus-outside.prevent
+      >
+        <slot name="content-top" />
+
+        <ComboboxEmpty :class="pohon.empty({ class: props.pohon?.empty })">
+          <slot
+            name="empty"
+            :search-term="searchTerm"
+          >
+            {{ searchTerm ? t('inputMenu.noMatch', { searchTerm }) : t('inputMenu.noData') }}
+          </slot>
+        </ComboboxEmpty>
+
+        <div
+          role="presentation"
+          :class="pohon.viewport({ class: props.pohon?.viewport })"
+        >
+          <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
+
+          <ComboboxGroup
+            v-for="(group, groupIndex) in filteredGroups"
+            :key="`group-${groupIndex}`"
+            :class="pohon.group({ class: props.pohon?.group })"
+          >
+            <template
+              v-for="(item, index) in group"
+              :key="`group-${groupIndex}-${index}`"
+            >
+              <ComboboxLabel
+                v-if="isInputItem(item) && item.type === 'label'"
+                :class="pohon.label({ class: [props.pohon?.label, item.ui?.label, item.class] })"
+              >
+                {{ get(item, props.labelKey as string) }}
+              </ComboboxLabel>
+
+              <ComboboxSeparator
+                v-else-if="isInputItem(item) && item.type === 'separator'"
+                :class="pohon.separator({ class: [props.pohon?.separator, item.ui?.separator, item.class] })"
+              />
+
+              <ComboboxItem
+                v-else
+                :class="pohon.item({ class: [props.pohon?.item, isInputItem(item) && item.ui?.item, isInputItem(item) && item.class] })"
+                :disabled="isInputItem(item) && item.disabled"
+                :value="props.valueKey && isInputItem(item) ? get(item, props.valueKey as string) : item"
+                @select="onSelect($event, item)"
+              >
+                <slot
+                  name="item"
+                  :item="(item as NestedItem<T>)"
+                  :index="index"
+                >
+                  <slot
+                    name="item-leading"
+                    :item="(item as NestedItem<T>)"
+                    :index="index"
+                  >
+                    <PIcon
+                      v-if="isInputItem(item) && item.icon"
+                      :name="item.icon"
+                      :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.ui?.itemLeadingIcon] })"
+                    />
+                    <PAvatar
+                      v-else-if="isInputItem(item) && item.avatar"
+                      :size="((item.ui?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as AvatarProps['size'])"
+                      v-bind="item.avatar"
+                      :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })"
+                    />
+                    <UChip
+                      v-else-if="isInputItem(item) && item.chip"
+                      :size="((item.ui?.itemLeadingChipSize || props.pohon?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as ChipProps['size'])"
+                      inset
+                      standalone
+                      v-bind="item.chip"
+                      :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.ui?.itemLeadingChip] })"
+                    />
+                  </slot>
+
+                  <span :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isInputItem(item) && item.ui?.itemLabel] })">
+                    <slot
+                      name="item-label"
+                      :item="(item as NestedItem<T>)"
+                      :index="index"
+                    >
+                      {{ isInputItem(item) ? get(item, props.labelKey as string) : item }}
+                    </slot>
+                  </span>
+
+                  <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isInputItem(item) && item.ui?.itemTrailing] })">
+                    <slot
+                      name="item-trailing"
+                      :item="(item as NestedItem<T>)"
+                      :index="index"
+                    />
+
+                    <ComboboxItemIndicator as-child>
+                      <PIcon
+                        :name="selectedIcon || appConfig.pohon.icons.check"
+                        :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isInputItem(item) && item.ui?.itemTrailingIcon] })"
+                      />
+                    </ComboboxItemIndicator>
+                  </span>
+                </slot>
+              </ComboboxItem>
+            </template>
+          </ComboboxGroup>
+
+          <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
+        </div>
+
+        <slot name="content-bottom" />
+
+        <ComboboxArrow
+          v-if="!!arrow"
+          v-bind="arrowProps"
+          :class="pohon.arrow({ class: props.pohon?.arrow })"
+        />
+      </ComboboxContent>
+    </ComboboxPortal>
+  </ComboboxRoot>
+</template>
