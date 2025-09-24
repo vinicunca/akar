@@ -18,7 +18,7 @@ export interface ANavigationMenuViewportProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core';
-import { computed, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import { APresence } from '~~/presence';
 import { APrimitive } from '~~/primitive';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
@@ -52,15 +52,17 @@ watch(currentElement, () => {
 const content = ref<HTMLElement>();
 
 watch([modelValue, open], () => {
-  if (!currentElement.value) {
-    return;
-  }
+  nextTick(() => {
+    if (!currentElement.value) {
+      return;
+    }
 
-  requestAnimationFrame(() => {
-    const el = (currentElement.value as HTMLElement)?.querySelector('[data-state=open]') as HTMLElement | undefined;
-    content.value = el;
+    requestAnimationFrame(() => {
+      const el = (currentElement.value as HTMLElement)?.querySelector('[data-state=open]') as HTMLElement | undefined;
+      content.value = el;
+    });
   });
-}, { immediate: true, flush: 'post' });
+}, { immediate: true });
 
 function updatePosition() {
   if (content.value && activeTrigger.value && rootNavigationMenu.value) {
