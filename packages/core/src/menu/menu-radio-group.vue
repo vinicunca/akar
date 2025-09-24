@@ -23,7 +23,8 @@ export const [injectMenuRadioGroupContext, provideMenuRadioGroupContext]
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
+import { reactiveOmit, useVModel } from '@vueuse/core';
+import { useForwardProps } from '~~/shared';
 import AMenuGroup from './menu-group.vue';
 
 const props = withDefaults(defineProps<AMenuRadioGroupProps>(), {
@@ -38,6 +39,9 @@ defineSlots<{
   }) => any;
 }>();
 
+const delegatedProps = reactiveOmit(props, ['modelValue']);
+const forwarded = useForwardProps(delegatedProps);
+
 const modelValue = useVModel(props, 'modelValue', emits);
 
 provideMenuRadioGroupContext({
@@ -49,7 +53,7 @@ provideMenuRadioGroupContext({
 </script>
 
 <template>
-  <AMenuGroup v-bind="props">
+  <AMenuGroup v-bind="forwarded">
     <slot :model-value="modelValue" />
   </AMenuGroup>
 </template>

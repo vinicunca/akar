@@ -33,8 +33,7 @@ const { forwardRef } = useForwardExpose();
   <component
     :is="rootContext.rovingFocus.value ? ARovingFocusItem : APrimitive"
     as-child
-    :focusable="!disabled"
-    :active="pressed"
+    v-bind="rootContext.rovingFocus.value ? { focusable: !disabled, active: pressed } : {}"
   >
     <AToggle
       v-bind="props"

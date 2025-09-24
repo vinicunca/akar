@@ -13,7 +13,9 @@ export interface AMenuRadioItemProps extends AMenuItemProps {
 </script>
 
 <script setup lang="ts">
+import { reactiveOmit } from '@vueuse/shared';
 import { computed, toRefs } from 'vue';
+import { useForwardProps } from '~~/shared';
 import { provideMenuItemIndicatorContext } from './menu-item-indicator.vue';
 import AMenuItem from './menu-item.vue';
 import { injectMenuRadioGroupContext } from './menu-radio-group.vue';
@@ -21,6 +23,9 @@ import { getCheckedState } from './utils';
 
 const props = defineProps<AMenuRadioItemProps>();
 const emits = defineEmits<AMenuRadioItemEmits>();
+
+const delegatedProps = reactiveOmit(props, ['value']);
+const forwarded = useForwardProps(delegatedProps);
 
 const { value } = toRefs(props);
 const radioGroupContext = injectMenuRadioGroupContext();
@@ -34,7 +39,7 @@ provideMenuItemIndicatorContext({ modelValue });
 <template>
   <AMenuItem
     role="menuitemradio"
-    v-bind="props"
+    v-bind="forwarded"
     :aria-checked="modelValue"
     :data-state="getCheckedState(modelValue)"
     @select="

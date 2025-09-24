@@ -31,7 +31,8 @@ const rootContext = injectARangeCalendarRootContext();
 
 <template>
   <APrimitive
-    v-bind="props"
+    :as="as"
+    :as-child="asChild"
     aria-label="Next page"
     :type="as === 'button' ? 'button' : undefined"
     :aria-disabled="disabled || undefined"
