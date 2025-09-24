@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { APrimitiveProps } from 'akar';
 import type {
   ButtonProps,
   FormFieldProps,
@@ -26,7 +27,7 @@ type AuthFormField = FormFieldProps & {
   otp?: PinInputProps;
 };
 
-export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> {
+export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -67,7 +68,7 @@ export interface AuthFormProps<T extends FormSchema = FormSchema<object>, F exte
   pohon?: AuthForm['slots'];
 }
 
-export type AuthFormEmits<T extends object> = {
+export type PAuthFormEmits<T extends object> = {
   submit: [payload: FormSubmitEvent<T>];
 };
 
@@ -75,7 +76,7 @@ type DynamicFieldSlots<T, F, SlotProps = { field: F; state: T }> = Record<string
 
 type DynamicFormFieldSlots<T> = Record<string, (props?: object) => any> & Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}`, (props?: object) => any>;
 
-export type AuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
+export type PAuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
   header: (props?: object) => any;
   leading: (props?: object) => any;
   title: (props?: object) => any;
@@ -85,33 +86,35 @@ export type AuthFormSlots<T extends object = object, F extends AuthFormField = A
   submit: (props: { loading: boolean }) => any;
   footer: (props?: object) => any;
 } & DynamicFieldSlots<T, F> & DynamicFormFieldSlots<T>;
-
 </script>
 
 <script setup lang="ts" generic="T extends FormSchema, F extends AuthFormField">
 import { useAppConfig } from '#imports';
+import { omit } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed, reactive, ref, useTemplateRef } from 'vue';
 import { useLocale } from '../composables/use-locale';
-import { omit } from '../utils';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UFormField from './form-field.vue';
-import PIcon from './icon.vue';
-import UPinInput from './pin-input.vue';
 import PCheckbox from './checkbox.vue';
-import UForm from './xForm.vue';
-import UInput from './xInput.vue';
-import USelectMenu from './xSelectMenu.vue';
-import USeparator from './xSeparator.vue';
+import PFormField from './form-field.vue';
+import PIcon from './icon.vue';
+import PPinInput from './pin-input.vue';
+import PForm from './xForm.vue';
+import PInput from './xInput.vue';
+import PSelectMenu from './xSelectMenu.vue';
+import PSeparator from './xSeparator.vue';
 
-const props = withDefaults(defineProps<AuthFormProps<T, F>>(), {
-  separator: 'or',
-});
+const props = withDefaults(
+  defineProps<PAuthFormProps<T, F>>(),
+  {
+    separator: 'or',
+  },
+);
 
-defineEmits<AuthFormEmits<typeof state>>();
+defineEmits<PAuthFormEmits<typeof state>>();
 
-const slots = defineSlots<AuthFormSlots<typeof state, F>>();
+const slots = defineSlots<PAuthFormSlots<typeof state, F>>();
 
 type FormStateType = InferInput<T>;
 
@@ -120,12 +123,15 @@ type TypedAuthFormField = AuthFormField & {
   defaultValue?: FormStateType[keyof FormStateType];
 };
 
-const state = reactive<FormStateType>((props.fields as Array<TypedAuthFormField> || []).reduce<FormStateType>((acc, field) => {
-  if (field.name) {
-    acc[field.name] = field.defaultValue;
-  }
-  return acc;
-}, {} as FormStateType));
+const state = reactive<FormStateType>(
+  (props.fields as Array<TypedAuthFormField> || [])
+    .reduce<FormStateType>((acc, field) => {
+      if (field.name) {
+        acc[field.name] = field.defaultValue;
+      }
+      return acc;
+    }, {} as FormStateType),
+);
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as AuthForm['AppConfig'];
@@ -201,13 +207,13 @@ defineExpose({
         </slot>
       </div>
 
-      <USeparator
+      <PSeparator
         v-if="providers?.length && fields?.length"
         v-bind="typeof separator === 'object' ? separator : { label: separator }"
         :class="pohon.separator({ class: props.pohon?.separator })"
       />
 
-      <UForm
+      <PForm
         v-if="fields?.length"
         ref="formRef"
         :state="state"
@@ -219,7 +225,7 @@ defineExpose({
         :loading-auto="loadingAuto"
         @submit="onSubmit"
       >
-        <UFormField
+        <PFormField
           v-for="field in fields"
           :key="field.name"
           :label="field.type === 'checkbox' ? '' : field.label ?? ''"
@@ -241,13 +247,13 @@ defineExpose({
               :class="pohon.checkbox({ class: props.pohon?.checkbox })"
               v-bind="omit(field, ['description', 'help', 'hint', 'size'])"
             />
-            <USelectMenu
+            <PSelectMenu
               v-else-if="field.type === 'select'"
               v-model="state[field.name]"
               :class="pohon.select({ class: props.pohon?.select })"
               v-bind="omit(field, ['description', 'help', 'hint', 'size'])"
             />
-            <UInput
+            <PInput
               v-else-if="field.type === 'password'"
               v-model="state[field.name]"
               :class="pohon.password({ class: props.pohon?.password })"
@@ -267,8 +273,8 @@ defineExpose({
                   @click="passwordVisibility = !passwordVisibility"
                 />
               </template>
-            </UInput>
-            <UPinInput
+            </PInput>
+            <PPinInput
               v-else-if="field.type === 'otp'"
               :id="field.name"
               v-model="state[field.name]"
@@ -276,7 +282,7 @@ defineExpose({
               otp
               v-bind="field.otp"
             />
-            <UInput
+            <PInput
               v-else
               v-model="state[field.name]"
               :class="pohon.input({ class: props.pohon?.input })"
@@ -314,7 +320,7 @@ defineExpose({
           >
             <slot :name="`${field.name}-error`" />
           </template>
-        </UFormField>
+        </PFormField>
 
         <slot
           v-if="!!slots.validation"
@@ -334,7 +340,7 @@ defineExpose({
             v-bind="submit"
           />
         </slot>
-      </UForm>
+      </PForm>
     </div>
 
     <div

@@ -1,7 +1,7 @@
-import type { Messages } from '../types';
+import type { PMessages } from '../types';
 import { defineLocale } from '../composables/define-locale';
 
-export default defineLocale<Messages>({
+export default defineLocale<PMessages>({
   name: 'العربية',
   code: 'ar',
   dir: 'rtl',

@@ -1,10 +1,10 @@
 import type { ComputedRef, InjectionKey } from 'vue';
-import type { AvatarGroupProps } from '../types';
+import type { PAvatarGroupProps } from '../types';
 import { computed, inject, provide } from 'vue';
 
-export const avatarGroupInjectionKey: InjectionKey<ComputedRef<{ size: AvatarGroupProps['size'] }>> = Symbol('pohon.avatar-group');
+export const avatarGroupInjectionKey: InjectionKey<ComputedRef<{ size: PAvatarGroupProps['size'] }>> = Symbol('pohon.avatar-group');
 
-export function useAvatarGroup(props: { size: AvatarGroupProps['size'] }) {
+export function useAvatarGroup(props: { size: PAvatarGroupProps['size'] }) {
   const avatarGroup = inject(avatarGroupInjectionKey, undefined);
 
   const size = computed(() => props.size ?? avatarGroup?.value.size);

@@ -7,7 +7,7 @@ import theme from '#build/pohon/alert';
 
 type Alert = ComponentConfig<typeof theme, AppConfig, 'alert'>;
 
-export interface AlertProps {
+export interface PAlertProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -57,11 +57,11 @@ export interface AlertProps {
   pohon?: Alert['slots'];
 }
 
-export interface AlertEmits {
+export interface PAlertEmits {
   'update:open': [value: boolean];
 }
 
-export interface AlertSlots {
+export interface PAlertSlots {
   leading: (props?: object) => any;
   title: (props?: object) => any;
   description: (props?: object) => any;
@@ -81,13 +81,13 @@ import PButton from './button.vue';
 import PIcon from './icon.vue';
 
 const props = withDefaults(
-  defineProps<AlertProps>(),
+  defineProps<PAlertProps>(),
   {
     orientation: 'vertical',
   },
 );
-const emits = defineEmits<AlertEmits>();
-const slots = defineSlots<AlertSlots>();
+const emits = defineEmits<PAlertEmits>();
+const slots = defineSlots<PAlertSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Alert['AppConfig'];

@@ -17,7 +17,7 @@ export interface ColorModeButtonProps extends /** @vue-ignore */ Pick<ButtonProp
 import { computed } from 'vue'
 import { useColorMode, useAppConfig } from '#imports'
 import { useLocale } from '../../composables/useLocale'
-import UButton from '../Button.vue'
+import UButton from '../button.vue'
 
 defineOptions({ inheritAttrs: false })
 

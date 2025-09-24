@@ -2,24 +2,27 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { IconProps, LinkProps } from '../../types';
 import type { ComponentConfig } from '../../types/tv';
-import theme from '#build/ui/prose/callout';
+import theme from '#build/ui/prose/card';
 
-type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'ui.prose'>;
+type ProseCard = ComponentConfig<typeof theme, AppConfig, 'card', 'ui.prose'>;
 
-export interface ProseCalloutProps {
+export interface ProseCardProps {
   to?: LinkProps['to'];
   target?: LinkProps['target'];
   icon?: IconProps['name'];
+  title?: string;
+  description?: string;
   /**
-   * @defaultValue 'neutral'
+   * @defaultValue 'primary'
    */
-  color?: ProseCallout['variants']['color'];
+  color?: ProseCard['variants']['color'];
   class?: any;
-  ui?: ProseCallout['slots'];
+  ui?: ProseCard['slots'];
 }
 
-export interface ProseCalloutSlots {
-  default: (props?: {}) => any;
+export interface ProseCardSlots {
+  default: (props?: object) => any;
+  title: (props?: object) => any;
 }
 </script>
 
@@ -32,23 +35,27 @@ import ULink from '../Link.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = defineProps<ProseCalloutProps>();
-defineSlots<ProseCalloutSlots>();
+const props = defineProps<ProseCardProps>();
+const slots = defineSlots<ProseCardSlots>();
 
-const appConfig = useAppConfig() as ProseCallout['AppConfig'];
+const appConfig = useAppConfig() as ProseCard['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.callout || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.card || {}) })({
   color: props.color,
   to: !!props.to,
+  title: !!props.title,
 }));
 
 const target = computed(() => props.target || (!!props.to && isString(props.to) && props.to.startsWith('http') ? '_blank' : undefined));
+
+const ariaLabel = computed(() => (props.title || 'Card link').trim());
 </script>
 
 <template>
   <div :class="ui.base({ class: props.class })">
     <ULink
       v-if="to"
+      :aria-label="ariaLabel"
       v-bind="{ to, target, ...$attrs }"
       class="focus:outline-none"
       tabindex="-1"
@@ -71,6 +78,25 @@ const target = computed(() => props.target || (!!props.to && isString(props.to) 
       :class="ui.externalIcon({ class: props.ui?.externalIcon })"
     />
 
-    <slot mdc-unwrap="p" />
+    <p
+      v-if="title || !!slots.title"
+      :class="ui.title({ class: props.ui?.title })"
+    >
+      <slot
+        name="title"
+        mdc-unwrap="p"
+      >
+        {{ title }}
+      </slot>
+    </p>
+
+    <div
+      v-if="!!slots.default"
+      :class="ui.description({ class: props.ui?.description })"
+    >
+      <slot>
+        {{ description }}
+      </slot>
+    </div>
   </div>
 </template>

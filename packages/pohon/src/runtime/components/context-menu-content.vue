@@ -46,9 +46,9 @@ import { pickLinkProps } from '../utils/link';
 import PAvatar from './avatar.vue';
 import UContextMenuContent from './context-menu-content.vue';
 import PIcon from './icon.vue';
-import PLink from './link.vue';
 import PLinkBase from './link-base.vue';
-import UKbd from './xKbd.vue';
+import PLink from './link.vue';
+import PKbd from './xKbd.vue';
 
 const props = defineProps<ContextMenuContentProps<T>>();
 const emits = defineEmits<ContextMenuContentEmits>();
@@ -119,7 +119,7 @@ const groups = computed<Array<Array<ContextMenuItem>>>(() =>
 
         <PIcon
           v-if="item.target === '_blank' && externalIcon !== false"
-          :name="typeof externalIcon === 'string' ? externalIcon : appConfig.pohon.icons.external"
+          :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
           :class="pohon.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active })"
         />
       </span>
@@ -140,11 +140,11 @@ const groups = computed<Array<Array<ContextMenuItem>>>(() =>
             v-else-if="item.kbds?.length"
             :class="pohon.itemTrailingKbds({ class: [uiOverride?.itemTrailingKbds, item.ui?.itemTrailingKbds] })"
           >
-            <UKbd
+            <PKbd
               v-for="(kbd, kbdIndex) in item.kbds"
               :key="kbdIndex"
               :size="((item.ui?.itemTrailingKbdsSize || uiOverride?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as KbdProps['size'])"
-              v-bind="typeof kbd === 'string' ? { value: kbd } : kbd"
+              v-bind="isString(kbd) ? { value: kbd } : kbd"
             />
           </span>
         </slot>

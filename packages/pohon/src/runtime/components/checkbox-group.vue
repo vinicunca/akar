@@ -83,7 +83,7 @@ export interface CheckboxGroupSlots<T extends Array<CheckboxGroupItem> = Array<C
 
 <script setup lang="ts" generic="T extends CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { useAppConfig } from '#imports';
-import { omit } from '@vinicunca/perkakas';
+import { isNumber, isString, omit } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { ACheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'akar';
 import { computed, useId } from 'vue';
@@ -127,7 +127,7 @@ function normalizeItem(item: any) {
     };
   }
 
-  if (typeof item === 'string' || typeof item === 'number') {
+  if (isString(item) || isNumber(item)) {
     return {
       id: `${id}:${item}`,
       value: String(item),

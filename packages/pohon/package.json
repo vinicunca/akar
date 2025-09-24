@@ -153,6 +153,7 @@
     "@standard-schema/spec": "catalog:pohon",
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/perkakas": "catalog:core",
+    "@vueuse/core": "catalog:core",
     "akar": "workspace:*",
     "colortranslator": "catalog:pohon",
     "defu": "catalog:core",

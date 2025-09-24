@@ -185,7 +185,7 @@ import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import UChip from './Chip.vue';
 import PIcon from './icon.vue';
-import UInput from './xInput.vue';
+import PInput from './xInput.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -505,7 +505,7 @@ defineExpose({
             :display-value="() => searchTerm"
             as-child
           >
-            <UInput
+            <PInput
               autofocus
               autocomplete="off"
               :size="size"

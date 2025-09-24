@@ -9,7 +9,7 @@ export interface ColorModeSelectProps extends /** @vue-ignore */ Pick<SelectMenu
 import { computed } from 'vue'
 import { useColorMode, useAppConfig } from '#imports'
 import { useLocale } from '../../composables/useLocale'
-import USelectMenu from '../SelectMenu.vue'
+import PSelectMenu from '../SelectMenu.vue'
 
 defineOptions({ inheritAttrs: false })
 
@@ -37,7 +37,7 @@ const preference = computed({
 
 <template>
   <ClientOnly v-if="!colorMode?.forced">
-    <USelectMenu
+    <PSelectMenu
       v-model="preference"
       :search-input="false"
       :icon="preference?.icon"
@@ -46,7 +46,7 @@ const preference = computed({
     />
 
     <template #fallback>
-      <USelectMenu
+      <PSelectMenu
         :search-input="false"
         :icon="items[0]?.icon"
         v-bind="$attrs"

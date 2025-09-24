@@ -63,7 +63,7 @@ export default vinicuncaESLint(
   },
 
   {
-    files: ['packages/pohon/src/runtime/components/*.vue'],
+    files: ['packages/pohon/src/runtime/components/**/*.vue'],
     rules: {
       'vue/no-extra-parens': 'off',
     },

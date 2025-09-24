@@ -15,7 +15,7 @@ export interface ProseKbdProps {
 import { computed } from 'vue'
 import { useAppConfig } from '#imports'
 import { tv } from '../../utils/tv'
-import UKbd from '../Kbd.vue'
+import PKbd from '../Kbd.vue'
 
 const props = defineProps<ProseKbdProps>()
 
@@ -25,5 +25,5 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.kbd |
 </script>
 
 <template>
-  <UKbd :value="value" :class="ui({ class: props.class })" />
+  <PKbd :value="value" :class="ui({ class: props.class })" />
 </template>

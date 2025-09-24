@@ -6,7 +6,7 @@ import theme from '#build/pohon/avatar-group';
 
 type AvatarGroup = ComponentConfig<typeof theme, AppConfig, 'avatarGroup'>;
 
-export interface AvatarGroupProps {
+export interface PAvatarGroupProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -24,7 +24,7 @@ export interface AvatarGroupProps {
   pohon?: AvatarGroup['slots'];
 }
 
-export interface AvatarGroupSlots {
+export interface PAvatarGroupSlots {
   default: (props?: object) => any;
 }
 </script>
@@ -38,8 +38,8 @@ import { avatarGroupInjectionKey } from '../composables/use-avatar-group';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 
-const props = defineProps<AvatarGroupProps>();
-const slots = defineSlots<AvatarGroupSlots>();
+const props = defineProps<PAvatarGroupProps>();
+const slots = defineSlots<PAvatarGroupSlots>();
 
 const appConfig = useAppConfig() as AvatarGroup['AppConfig'];
 

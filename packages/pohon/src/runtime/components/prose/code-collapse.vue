@@ -41,7 +41,7 @@ import { computed } from 'vue'
 import { useAppConfig } from '#imports'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
-import UButton from '../Button.vue'
+import UButton from '../button.vue'
 
 const props = defineProps<ProseCodeCollapseProps>()
 defineSlots<ProseCodeCollapseSlots>()

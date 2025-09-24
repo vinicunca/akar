@@ -1,4 +1,4 @@
-export interface Messages {
+export interface PMessages {
   alert: {
     close: string;
   };
@@ -133,11 +133,11 @@ export interface Messages {
   };
 }
 
-export type Direction = 'ltr' | 'rtl';
+export type PDirection = 'ltr' | 'rtl';
 
-export interface Locale<M> {
+export interface PLocale<M> {
   name: string;
   code: string;
-  dir: Direction;
+  dir: PDirection;
   messages: M;
 }

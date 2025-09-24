@@ -59,37 +59,20 @@ catalogs:
     vue-component-type-helpers: ^3.0.8
     vue-tsc: 3.0.8
   docs:
-    '@babel/traverse': ^0.0.0
-    '@iconify/json': ^0.0.0
     '@nuxt/content': ^3.7.0
     '@nuxt/image': ^1.11.0
-    '@stackblitz/sdk': ^0.0.0
-    '@types/babel__traverse': ^0.0.0
-    '@types/hast': ^0.0.0
-    '@types/markdown-it': ^0.0.0
     '@vinicunca/unocss-preset': ^1.23.0
-    autoprefixer: ^0.0.0
     better-sqlite3: ^12.2.0
-    codesandbox: ^0.0.0
-    fast-glob: ^0.0.0
-    hast: ^0.0.0
-    mark.js: ^0.0.0
-    markdown-it: ^0.0.0
-    markdown-it-anchor: ^0.0.0
-    minisearch: ^0.0.0
     nuxt-component-meta: ^0.14.0
     nuxt-og-image: ^5.1.9
-    shiki: ^0.0.0
     shiki-transformer-color-highlight: ^1.0.0
-    vitepress: ^0.0.0
-    vue-component-meta: ^0.0.0
   histoire:
     '@histoire/plugin-vue': ^0.17.17
     '@rollup/plugin-alias': ^5.1.1
     histoire: ^0.17.17
   plugins:
-    '@nuxt/kit': 4.0.3
-    '@nuxt/schema': 4.0.3
+    '@nuxt/kit': 4.1.2
+    '@nuxt/schema': 4.1.2
     unbuild: ^3.6.1
     unplugin-vue-components: ^29.1.0
   pohon:
@@ -110,7 +93,7 @@ catalogs:
     hookable: ^5.5.3
     magic-string: ^0.30.19
     mlly: ^1.8.0
-    nuxt: 4.0.3
+    nuxt: 4.1.2
     ohash: ^2.0.11
     pathe: ^2.0.3
     tinyglobby: ^0.2.15

@@ -1,28 +1,28 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { StepperRootProps, StepperRootEmits } from 'akar'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/stepper'
-import type { IconProps } from '../types'
-import type { DynamicSlots } from '../types/utils'
-import type { ComponentConfig } from '../types/uv'
+import type { AppConfig } from '@nuxt/schema';
+import type { StepperRootEmits, StepperRootProps } from 'akar';
+import type { IconProps } from '../types';
+import type { DynamicSlots } from '../types/utils';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/stepper';
 
-type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>
+type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>;
 
 export interface StepperItem {
-  slot?: string
-  value?: string | number
-  title?: string
-  description?: string
+  slot?: string;
+  value?: string | number;
+  title?: string;
+  description?: string;
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name']
-  content?: string
-  disabled?: boolean
-  class?: any
-  pohon?: Pick<Stepper['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>
-  [key: string]: any
+  icon?: IconProps['name'];
+  content?: string;
+  disabled?: boolean;
+  class?: any;
+  pohon?: Pick<Stepper['slots'], 'item' | 'container' | 'trigger' | 'indicator' | 'icon' | 'separator' | 'wrapper' | 'title' | 'description'>;
+  [key: string]: any;
 }
 
 export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<StepperRootProps, 'linear'> {
@@ -31,109 +31,113 @@ export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<
    * @defaultValue 'div'
    */
   as?: APrimitiveProps['as'];
-  items: T[]
+  items: Array<T>;
   /**
    * @defaultValue 'md'
    */
-  size?: Stepper['variants']['size']
+  size?: Stepper['variants']['size'];
   /**
    * @defaultValue 'primary'
    */
-  color?: Stepper['variants']['color']
+  color?: Stepper['variants']['color'];
   /**
    * The orientation of the stepper.
    * @defaultValue 'horizontal'
    */
-  orientation?: Stepper['variants']['orientation']
+  orientation?: Stepper['variants']['orientation'];
   /**
    * The value of the step that should be active when initially rendered. Use when you do not need to control the state of the steps.
    */
-  defaultValue?: string | number
-  disabled?: boolean
-  class?: any
-  pohon?: Stepper['slots']
+  defaultValue?: string | number;
+  disabled?: boolean;
+  class?: any;
+  pohon?: Stepper['slots'];
 }
 
 export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRootEmits, 'update:modelValue'> & {
-  next: [value: T]
-  prev: [value: T]
-}
+  next: [value: T];
+  prev: [value: T];
+};
 
-type SlotProps<T extends StepperItem> = (props: { item: T }) => any
+type SlotProps<T extends StepperItem> = (props: { item: T }) => any;
 
 export type StepperSlots<T extends StepperItem = StepperItem> = {
-  indicator: SlotProps<T>
-  title: SlotProps<T>
-  description: SlotProps<T>
-  content: SlotProps<T>
-} & DynamicSlots<T>
+  indicator: SlotProps<T>;
+  title: SlotProps<T>;
+  description: SlotProps<T>;
+  content: SlotProps<T>;
+} & DynamicSlots<T>;
 
 </script>
 
 <script setup lang="ts" generic="T extends StepperItem">
-import { computed } from 'vue'
-import { StepperRoot, StepperItem, StepperTrigger, StepperIndicator, StepperSeparator, StepperTitle, StepperDescription, useForwardProps } from 'akar'
-import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { uv } from '../utils/uv'
-import PIcon from './icon.vue'
+import { useAppConfig } from '#imports';
+import { reactivePick } from '@vueuse/core';
+import { StepperDescription, StepperIndicator, StepperItem, StepperRoot, StepperSeparator, StepperTitle, StepperTrigger, useForwardProps } from 'akar';
+import { computed } from 'vue';
+import { uv } from '../utils/uv';
+import PIcon from './icon.vue';
 
 const props = withDefaults(defineProps<StepperProps<T>>(), {
   orientation: 'horizontal',
-  linear: true
-})
-const emits = defineEmits<StepperEmits<T>>()
-const slots = defineSlots<StepperSlots<T>>()
+  linear: true,
+});
+const emits = defineEmits<StepperEmits<T>>();
+const slots = defineSlots<StepperSlots<T>>();
 
-const modelValue = defineModel<string | number>()
+const modelValue = defineModel<string | number>();
 
-const appConfig = useAppConfig() as Stepper['AppConfig']
+const appConfig = useAppConfig() as Stepper['AppConfig'];
 
-const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'linear'))
+const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'linear'));
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.stepper || {}) })({
   orientation: props.orientation,
   size: props.size,
-  color: props.color
-}))
+  color: props.color,
+}));
 
 const currentStepIndex = computed({
   get() {
-    const value = modelValue.value ?? props.defaultValue
+    const value = modelValue.value ?? props.defaultValue;
 
-    return ((typeof value === 'string')
-      ? props.items.findIndex(item => item.value === value)
-      : value) ?? 0
+    return ((isString(value))
+      ? props.items.findIndex((item) => item.value === value)
+      : value) ?? 0;
   },
   set(value: number) {
-    modelValue.value = props.items?.[value]?.value ?? value
-  }
-})
+    modelValue.value = props.items?.[value]?.value ?? value;
+  },
+});
 
-const currentStep = computed(() => props.items?.[currentStepIndex.value])
-const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1)
-const hasPrev = computed(() => currentStepIndex.value > 0)
+const currentStep = computed(() => props.items?.[currentStepIndex.value]);
+const hasNext = computed(() => currentStepIndex.value < props.items?.length - 1);
+const hasPrev = computed(() => currentStepIndex.value > 0);
 
 defineExpose({
   next() {
     if (hasNext.value) {
-      currentStepIndex.value += 1
-      emits('next', currentStep.value as T)
+      currentStepIndex.value += 1;
+      emits('next', currentStep.value as T);
     }
   },
   prev() {
     if (hasPrev.value) {
-      currentStepIndex.value -= 1
-      emits('prev', currentStep.value as T)
+      currentStepIndex.value -= 1;
+      emits('prev', currentStep.value as T);
     }
   },
   hasNext,
-  hasPrev
-})
+  hasPrev,
+});
 </script>
 
 <template>
-  <StepperRoot v-bind="rootProps" v-model="currentStepIndex" :class="pohon.root({ class: [props.pohon?.root, props.class] })">
+  <StepperRoot
+    v-bind="rootProps"
+    v-model="currentStepIndex"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+  >
     <div :class="pohon.header({ class: props.pohon?.header })">
       <StepperItem
         v-for="(item, count) in items"
@@ -145,8 +149,15 @@ defineExpose({
         <div :class="pohon.container({ class: [props.pohon?.container, item.ui?.container] })">
           <StepperTrigger :class="pohon.trigger({ class: [props.pohon?.trigger, item.ui?.trigger] })">
             <StepperIndicator :class="pohon.indicator({ class: [props.pohon?.indicator, item.ui?.indicator] })">
-              <slot name="indicator" :item="item">
-                <PIcon v-if="item.icon" :name="item.icon" :class="pohon.icon({ class: [props.pohon?.icon, item.ui?.icon] })" />
+              <slot
+                name="indicator"
+                :item="item"
+              >
+                <PIcon
+                  v-if="item.icon"
+                  :name="item.icon"
+                  :class="pohon.icon({ class: [props.pohon?.icon, item.ui?.icon] })"
+                />
                 <template v-else>
                   {{ count + 1 }}
                 </template>
@@ -161,13 +172,25 @@ defineExpose({
         </div>
 
         <div :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.ui?.wrapper] })">
-          <StepperTitle as="div" :class="pohon.title({ class: [props.pohon?.title, item.ui?.title] })">
-            <slot name="title" :item="item">
+          <StepperTitle
+            as="div"
+            :class="pohon.title({ class: [props.pohon?.title, item.ui?.title] })"
+          >
+            <slot
+              name="title"
+              :item="item"
+            >
               {{ item.title }}
             </slot>
           </StepperTitle>
-          <StepperDescription as="div" :class="pohon.description({ class: [props.pohon?.description, item.ui?.description] })">
-            <slot name="description" :item="item">
+          <StepperDescription
+            as="div"
+            :class="pohon.description({ class: [props.pohon?.description, item.ui?.description] })"
+          >
+            <slot
+              name="description"
+              :item="item"
+            >
               {{ item.description }}
             </slot>
           </StepperDescription>
@@ -175,7 +198,10 @@ defineExpose({
       </StepperItem>
     </div>
 
-    <div v-if="currentStep?.content || !!slots.content || currentStep?.slot" :class="pohon.content({ class: props.pohon?.content })">
+    <div
+      v-if="currentStep?.content || !!slots.content || currentStep?.slot"
+      :class="pohon.content({ class: props.pohon?.content })"
+    >
       <slot
         :name="((currentStep?.slot || 'content') as keyof StepperSlots<T>)"
         :item="(currentStep as Extract<T, { slot: string }>)"

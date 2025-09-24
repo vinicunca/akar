@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { SelectMenuProps } from '../../types'
-import type { Locale } from '../../types/locale'
+import type { PLocale } from '../../types/locale'
 
 export interface LocaleSelectProps extends /** @vue-ignore */ Pick<SelectMenuProps<any>, 'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'ui'> {
-  locales?: Locale<any>[]
+  locales?: PLocale<any>[]
 }
 </script>
 
 <script setup lang="ts">
-import USelectMenu from '../SelectMenu.vue'
+import PSelectMenu from '../SelectMenu.vue'
 
 defineProps<LocaleSelectProps>()
 
@@ -54,7 +54,7 @@ function getEmojiFlag(locale: string): string {
 </script>
 
 <template>
-  <USelectMenu
+  <PSelectMenu
     v-model="modelValue"
     :search-input="false"
     value-key="code"
@@ -72,5 +72,5 @@ function getEmojiFlag(locale: string): string {
         {{ getEmojiFlag(item.code) }}
       </span>
     </template>
-  </USelectMenu>
+  </PSelectMenu>
 </template>

@@ -30,7 +30,7 @@ import { useAppConfig } from '#imports'
 import { useLocale } from '../../composables/useLocale'
 import { tv } from '../../utils/tv'
 import UCodeIcon from './CodeIcon.vue'
-import UButton from '../Button.vue'
+import UButton from '../button.vue'
 
 const props = defineProps<ProsePreProps>()
 defineSlots<ProsePreSlots>()

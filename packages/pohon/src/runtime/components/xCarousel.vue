@@ -1,26 +1,26 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
-import type { AutoplayOptionsType } from 'embla-carousel-autoplay'
-import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll'
-import type { AutoHeightOptionsType } from 'embla-carousel-auto-height'
-import type { ClassNamesOptionsType } from 'embla-carousel-class-names'
-import type { FadeOptionsType } from 'embla-carousel-fade'
-import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures'
-import theme from '#build/pohon/carousel'
-import type { ButtonProps, IconProps } from '../types'
-import type { AcceptableValue } from '../types/utils'
-import type { ComponentConfig } from '../types/uv'
+import type { AppConfig } from '@nuxt/schema';
+import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
+import type { AutoHeightOptionsType } from 'embla-carousel-auto-height';
+import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll';
+import type { AutoplayOptionsType } from 'embla-carousel-autoplay';
+import type { ClassNamesOptionsType } from 'embla-carousel-class-names';
+import type { FadeOptionsType } from 'embla-carousel-fade';
+import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures';
+import type { ButtonProps, IconProps } from '../types';
+import type { AcceptableValue } from '../types/utils';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/carousel';
 
-type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>
+type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>;
 
-export type CarouselValue = AcceptableValue
+export type CarouselValue = AcceptableValue;
 export type CarouselItem = CarouselValue | {
-  class?: any
-  pohon?: Pick<Carousel['slots'], 'item'>
-  [key: string]: any
-}
+  class?: any;
+  pohon?: Pick<Carousel['slots'], 'item'>;
+  [key: string]: any;
+};
 
 export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
@@ -32,96 +32,96 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * Configure the prev button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
-  prev?: ButtonProps
+  prev?: ButtonProps;
   /**
    * The icon displayed in the prev button.
    * @defaultValue appConfig.pohon.icons.arrowLeft
    * @IconifyIcon
    */
-  prevIcon?: IconProps['name']
+  prevIcon?: IconProps['name'];
   /**
    * Configure the next button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
-  next?: ButtonProps
+  next?: ButtonProps;
   /**
    * The icon displayed in the next button.
    * @defaultValue appConfig.pohon.icons.arrowRight
    * @IconifyIcon
    */
-  nextIcon?: IconProps['name']
+  nextIcon?: IconProps['name'];
   /**
    * Display prev and next buttons to scroll the carousel.
    * @defaultValue false
    */
-  arrows?: boolean
+  arrows?: boolean;
   /**
    * Display dots to scroll to a specific slide.
    * @defaultValue false
    */
-  dots?: boolean
+  dots?: boolean;
   /**
    * The orientation of the carousel.
    * @defaultValue 'horizontal'
    */
-  orientation?: Carousel['variants']['orientation']
-  items?: T[]
+  orientation?: Carousel['variants']['orientation'];
+  items?: Array<T>;
   /**
    * Enable Autoplay plugin
    * @see https://www.embla-carousel.com/plugins/autoplay/
    */
-  autoplay?: boolean | AutoplayOptionsType
+  autoplay?: boolean | AutoplayOptionsType;
   /**
    * Enable Auto Scroll plugin
    * @see https://www.embla-carousel.com/plugins/auto-scroll/
    */
-  autoScroll?: boolean | AutoScrollOptionsType
+  autoScroll?: boolean | AutoScrollOptionsType;
   /**
    * Enable Auto Height plugin
    * @see https://www.embla-carousel.com/plugins/auto-height/
    */
-  autoHeight?: boolean | AutoHeightOptionsType
+  autoHeight?: boolean | AutoHeightOptionsType;
   /**
    * Enable Class Names plugin
    * @see https://www.embla-carousel.com/plugins/class-names/
    */
-  classNames?: boolean | ClassNamesOptionsType
+  classNames?: boolean | ClassNamesOptionsType;
   /**
    * Enable Fade plugin
    * @see https://www.embla-carousel.com/plugins/fade/
    */
-  fade?: boolean | FadeOptionsType
+  fade?: boolean | FadeOptionsType;
   /**
    * Enable Wheel Gestures plugin
    * @see https://www.embla-carousel.com/plugins/wheel-gestures/
    */
-  wheelGestures?: boolean | WheelGesturesPluginOptions
-  class?: any
-  pohon?: Carousel['slots']
+  wheelGestures?: boolean | WheelGesturesPluginOptions;
+  class?: any;
+  pohon?: Carousel['slots'];
 }
 
 export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
-  default(props: { item: T, index: number }): any
-}
+  default: (props: { item: T; index: number }) => any;
+};
 
 export interface CarouselEmits {
   /**
    * Emitted when the selected slide changes
    * @param selectedIndex The index of the selected slide
    */
-  select: [selectedIndex: number]
+  select: [selectedIndex: number];
 }
 </script>
 
 <script setup lang="ts" generic="T extends CarouselItem">
-import { computed, ref, watch, onMounted } from 'vue'
-import useEmblaCarousel from 'embla-carousel-vue'
-import { APrimitive, useForwardProps } from 'akar'
-import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useLocale } from '../composables/use-locale'
-import { uv } from '../utils/uv'
-import PButton from './button.vue'
+import { useAppConfig } from '#imports';
+import { reactivePick } from '@vueuse/core';
+import { APrimitive, useForwardProps } from 'akar';
+import useEmblaCarousel from 'embla-carousel-vue';
+import { computed, onMounted, ref, watch } from 'vue';
+import { useLocale } from '../composables/use-locale';
+import { uv } from '../utils/uv';
+import PButton from './button.vue';
 
 const props = withDefaults(defineProps<CarouselProps<T>>(), {
   orientation: 'horizontal',
@@ -150,140 +150,139 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
   autoHeight: false,
   classNames: false,
   fade: false,
-  wheelGestures: false
-})
-defineSlots<CarouselSlots<T>>()
-const emits = defineEmits<CarouselEmits>()
+  wheelGestures: false,
+});
+const emits = defineEmits<CarouselEmits>();
+defineSlots<CarouselSlots<T>>();
+const { dir, t } = useLocale();
+const appConfig = useAppConfig() as Carousel['AppConfig'];
 
-const { dir, t } = useLocale()
-const appConfig = useAppConfig() as Carousel['AppConfig']
+const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'));
 
-const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'))
-
-const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.arrowRight : appConfig.pohon.icons.arrowLeft))
-const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.arrowLeft : appConfig.pohon.icons.arrowRight))
+const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.arrowRight : appConfig.pohon.icons.arrowLeft));
+const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.arrowLeft : appConfig.pohon.icons.arrowRight));
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.carousel || {}) })({
-  orientation: props.orientation
-}))
+  orientation: props.orientation,
+}));
 
 const options = computed<EmblaOptionsType>(() => ({
   ...(props.fade ? { align: 'center', containScroll: false } : {}),
   ...rootProps.value,
   axis: props.orientation === 'horizontal' ? 'x' : 'y',
-  direction: dir.value === 'rtl' ? 'rtl' : 'ltr'
-}))
+  direction: dir.value === 'rtl' ? 'rtl' : 'ltr',
+}));
 
-const plugins = ref<EmblaPluginType[]>([])
+const plugins = ref<Array<EmblaPluginType>>([]);
 
 async function loadPlugins() {
-  const emblaPlugins: EmblaPluginType[] = []
+  const emblaPlugins: Array<EmblaPluginType> = [];
 
   if (props.autoplay) {
-    const AutoplayPlugin = await import('embla-carousel-autoplay').then(r => r.default)
-    emblaPlugins.push(AutoplayPlugin(typeof props.autoplay === 'boolean' ? {} : props.autoplay))
+    const AutoplayPlugin = await import('embla-carousel-autoplay').then((r) => r.default);
+    emblaPlugins.push(AutoplayPlugin(isBoolean(props.autoplay) ? {} : props.autoplay));
   }
 
   if (props.autoScroll) {
-    const AutoScrollPlugin = await import('embla-carousel-auto-scroll').then(r => r.default)
-    emblaPlugins.push(AutoScrollPlugin(typeof props.autoScroll === 'boolean' ? {} : props.autoScroll))
+    const AutoScrollPlugin = await import('embla-carousel-auto-scroll').then((r) => r.default);
+    emblaPlugins.push(AutoScrollPlugin(isBoolean(props.autoScroll) ? {} : props.autoScroll));
   }
 
   if (props.autoHeight) {
-    const AutoHeightPlugin = await import('embla-carousel-auto-height').then(r => r.default)
-    emblaPlugins.push(AutoHeightPlugin(typeof props.autoHeight === 'boolean' ? {} : props.autoHeight))
+    const AutoHeightPlugin = await import('embla-carousel-auto-height').then((r) => r.default);
+    emblaPlugins.push(AutoHeightPlugin(isBoolean(props.autoHeight) ? {} : props.autoHeight));
   }
 
   if (props.classNames) {
-    const ClassNamesPlugin = await import('embla-carousel-class-names').then(r => r.default)
-    emblaPlugins.push(ClassNamesPlugin(typeof props.classNames === 'boolean' ? {} : props.classNames))
+    const ClassNamesPlugin = await import('embla-carousel-class-names').then((r) => r.default);
+    emblaPlugins.push(ClassNamesPlugin(isBoolean(props.classNames) ? {} : props.classNames));
   }
 
   if (props.fade) {
-    const FadePlugin = await import('embla-carousel-fade').then(r => r.default)
-    emblaPlugins.push(FadePlugin(typeof props.fade === 'boolean' ? {} : props.fade))
+    const FadePlugin = await import('embla-carousel-fade').then((r) => r.default);
+    emblaPlugins.push(FadePlugin(isBoolean(props.fade) ? {} : props.fade));
   }
 
   if (props.wheelGestures) {
-    const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures')
-    emblaPlugins.push(WheelGesturesPlugin(typeof props.wheelGestures === 'boolean' ? {} : props.wheelGestures))
+    const { WheelGesturesPlugin } = await import('embla-carousel-wheel-gestures');
+    emblaPlugins.push(WheelGesturesPlugin(isBoolean(props.wheelGestures) ? {} : props.wheelGestures));
   }
 
-  plugins.value = emblaPlugins
+  plugins.value = emblaPlugins;
 }
 
-watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true })
+watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true });
 
-const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value)
+const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value);
 
 watch([options, plugins], () => {
-  emblaApi.value?.reInit(options.value, plugins.value)
-})
+  emblaApi.value?.reInit(options.value, plugins.value);
+});
 
 function scrollPrev() {
-  emblaApi.value?.scrollPrev()
+  emblaApi.value?.scrollPrev();
 }
 function scrollNext() {
-  emblaApi.value?.scrollNext()
+  emblaApi.value?.scrollNext();
 }
 function scrollTo(index: number) {
-  emblaApi.value?.scrollTo(index)
+  emblaApi.value?.scrollTo(index);
 }
 
 function onKeyDown(event: KeyboardEvent) {
-  const prevKey = props.orientation === 'vertical' ? 'ArrowUp' : 'ArrowLeft'
-  const nextKey = props.orientation === 'vertical' ? 'ArrowDown' : 'ArrowRight'
+  const prevKey = props.orientation === 'vertical' ? 'ArrowUp' : 'ArrowLeft';
+  const nextKey = props.orientation === 'vertical' ? 'ArrowDown' : 'ArrowRight';
 
   if (event.key === prevKey) {
-    event.preventDefault()
-    scrollPrev()
+    event.preventDefault();
+    scrollPrev();
 
-    return
+    return;
   }
 
   if (event.key === nextKey) {
-    event.preventDefault()
-    scrollNext()
+    event.preventDefault();
+    scrollNext();
   }
 }
 
-const canScrollNext = ref(false)
-const canScrollPrev = ref(false)
-const selectedIndex = ref<number>(0)
-const scrollSnaps = ref<number[]>([])
+const canScrollNext = ref(false);
+const canScrollPrev = ref(false);
+const selectedIndex = ref<number>(0);
+const scrollSnaps = ref<Array<number>>([]);
 
 function onInit(api: EmblaCarouselType) {
-  scrollSnaps.value = api?.scrollSnapList() || []
+  scrollSnaps.value = api?.scrollSnapList() || [];
 }
 
 function onSelect(api: EmblaCarouselType) {
-  canScrollNext.value = api?.canScrollNext() || false
-  canScrollPrev.value = api?.canScrollPrev() || false
-  selectedIndex.value = api?.selectedScrollSnap() || 0
+  canScrollNext.value = api?.canScrollNext() || false;
+  canScrollPrev.value = api?.canScrollPrev() || false;
+  selectedIndex.value = api?.selectedScrollSnap() || 0;
 
-  emits('select', selectedIndex.value)
+  emits('select', selectedIndex.value);
 }
 
 function isCarouselItem(item: CarouselItem): item is Exclude<CarouselItem, CarouselValue> {
-  return typeof item === 'object' && item !== null
+  return typeof item === 'object' && item !== null;
 }
 
 onMounted(() => {
   if (!emblaApi.value) {
-    return
+    return;
   }
 
-  emblaApi.value?.on('init', onInit)
-  emblaApi.value?.on('init', onSelect)
-  emblaApi.value?.on('reInit', onInit)
-  emblaApi.value?.on('reInit', onSelect)
-  emblaApi.value?.on('select', onSelect)
-})
+  emblaApi.value?.on('init', onInit);
+  emblaApi.value?.on('init', onSelect);
+  emblaApi.value?.on('reInit', onInit);
+  emblaApi.value?.on('reInit', onSelect);
+  emblaApi.value?.on('select', onSelect);
+});
 
 defineExpose({
   emblaRef,
-  emblaApi
-})
+  emblaApi,
+});
 </script>
 
 <template>
@@ -295,7 +294,10 @@ defineExpose({
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     @keydown="onKeyDown"
   >
-    <div ref="emblaRef" :class="pohon.viewport({ class: props.pohon?.viewport })">
+    <div
+      ref="emblaRef"
+      :class="pohon.viewport({ class: props.pohon?.viewport })"
+    >
       <div :class="pohon.container({ class: props.pohon?.container })">
         <div
           v-for="(item, index) in items"
@@ -303,13 +305,22 @@ defineExpose({
           v-bind="dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
           :class="pohon.item({ class: [props.pohon?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
         >
-          <slot :item="item" :index="index" />
+          <slot
+            :item="item"
+            :index="index"
+          />
         </div>
       </div>
     </div>
 
-    <div v-if="arrows || dots" :class="pohon.controls({ class: props.pohon?.controls })">
-      <div v-if="arrows" :class="pohon.arrows({ class: props.pohon?.arrows })">
+    <div
+      v-if="arrows || dots"
+      :class="pohon.controls({ class: props.pohon?.controls })"
+    >
+      <div
+        v-if="arrows"
+        :class="pohon.arrows({ class: props.pohon?.arrows })"
+      >
         <PButton
           :disabled="!canScrollPrev"
           :icon="prevIcon"
@@ -332,8 +343,16 @@ defineExpose({
         />
       </div>
 
-      <div v-if="dots" role="tablist" :aria-label="t('carousel.dots')" :class="pohon.dots({ class: props.pohon?.dots })">
-        <template v-for="(_, index) in scrollSnaps" :key="index">
+      <div
+        v-if="dots"
+        role="tablist"
+        :aria-label="t('carousel.dots')"
+        :class="pohon.dots({ class: props.pohon?.dots })"
+      >
+        <template
+          v-for="(_, index) in scrollSnaps"
+          :key="index"
+        >
           <button
             type="button"
             role="tab"
