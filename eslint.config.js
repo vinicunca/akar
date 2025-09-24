@@ -23,6 +23,7 @@ export default vinicuncaESLint(
       'sonar/cognitive-complexity': 'off',
       'sonar/no-invariant-returns': 'off',
       'sonar/use-type-alias': 'off',
+      'sonar/no-hardcoded-passwords': 'off',
     },
   },
 
@@ -62,9 +63,9 @@ export default vinicuncaESLint(
   },
 
   {
-    files: ['packages/pohon-cli/**/*.ts'],
+    files: ['packages/pohon/src/runtime/components/*.vue'],
     rules: {
-      'node/prefer-global/process': 'off',
+      'vue/no-extra-parens': 'off',
     },
   },
 );
