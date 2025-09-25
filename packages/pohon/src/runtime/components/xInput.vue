@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { InputHTMLAttributes } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { AvatarProps } from '../types';
+import type { PAvatarProps } from '../types';
 import type { ModelModifiers } from '../types/input';
 import type { AcceptableValue } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -211,7 +211,7 @@ defineExpose({
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as AvatarProps['size'])"
+          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
         />

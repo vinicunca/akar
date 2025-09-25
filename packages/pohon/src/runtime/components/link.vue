@@ -54,7 +54,7 @@ interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
   noPrefetch?: boolean;
 }
 
-export interface LinkProps extends NuxtLinkProps {
+export interface PLinkProps extends NuxtLinkProps {
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
@@ -82,7 +82,7 @@ export interface LinkProps extends NuxtLinkProps {
   class?: any;
 }
 
-export interface LinkSlots {
+export interface PLinkSlots {
   default: (props: { active: boolean }) => any;
 }
 </script>
@@ -102,7 +102,7 @@ import PLinkBase from './link-base.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<LinkProps>(),
+  defineProps<PLinkProps>(),
   {
     as: 'button',
     type: 'button',
@@ -110,7 +110,7 @@ const props = withDefaults(
     active: undefined,
   },
 );
-defineSlots<LinkSlots>();
+defineSlots<PLinkSlots>();
 
 const route = useRoute();
 const appConfig = useAppConfig() as Link['AppConfig'];

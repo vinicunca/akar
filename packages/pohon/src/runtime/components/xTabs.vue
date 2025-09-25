@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { TabsRootEmits, TabsRootProps } from 'akar';
-import type { AvatarProps, BadgeProps, IconProps } from '../types';
+import type { IconProps, PAvatarProps, PBadgeProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/tabs';
@@ -15,12 +15,12 @@ export interface TabsItem {
    * @IconifyIcon
    */
   icon?: IconProps['name'];
-  avatar?: AvatarProps;
+  avatar?: PAvatarProps;
   /**
    * Display a badge on the item.
    * `{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
    */
-  badge?: string | number | BadgeProps;
+  badge?: string | number | PBadgeProps;
   slot?: string;
   content?: string;
   /** A unique value for the tab item. Defaults to the index. */
@@ -144,7 +144,7 @@ defineExpose({
         :ref="el => (triggersRef[index] = el as ComponentPublicInstance)"
         :value="item.value ?? String(index)"
         :disabled="item.disabled"
-        :class="pohon.trigger({ class: [props.pohon?.trigger, item.ui?.trigger] })"
+        :class="pohon.trigger({ class: [props.pohon?.trigger, item.pohon?.trigger] })"
       >
         <slot
           name="leading"
@@ -154,19 +154,19 @@ defineExpose({
           <PIcon
             v-if="item.icon"
             :name="item.icon"
-            :class="pohon.leadingIcon({ class: [props.pohon?.leadingIcon, item.ui?.leadingIcon] })"
+            :class="pohon.leadingIcon({ class: [props.pohon?.leadingIcon, item.pohon?.leadingIcon] })"
           />
           <PAvatar
             v-else-if="item.avatar"
-            :size="((item.ui?.leadingAvatarSize || props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as AvatarProps['size'])"
+            :size="((item.pohon?.leadingAvatarSize || props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="item.avatar"
-            :class="pohon.leadingAvatar({ class: [props.pohon?.leadingAvatar, item.ui?.leadingAvatar] })"
+            :class="pohon.leadingAvatar({ class: [props.pohon?.leadingAvatar, item.pohon?.leadingAvatar] })"
           />
         </slot>
 
         <span
           v-if="get(item, props.labelKey as string) || !!slots.default"
-          :class="pohon.label({ class: [props.pohon?.label, item.ui?.label] })"
+          :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
         >
           <slot
             :item="item"
@@ -183,9 +183,9 @@ defineExpose({
             v-if="item.badge !== undefined"
             color="neutral"
             variant="outline"
-            :size="((item.ui?.trailingBadgeSize || props.pohon?.trailingBadgeSize || pohon.trailingBadgeSize()) as BadgeProps['size'])"
+            :size="((item.pohon?.trailingBadgeSize || props.pohon?.trailingBadgeSize || pohon.trailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(item.badge) || isNumber(item.badge)) ? { label: item.badge } : item.badge"
-            :class="pohon.trailingBadge({ class: [props.pohon?.trailingBadge, item.ui?.trailingBadge] })"
+            :class="pohon.trailingBadge({ class: [props.pohon?.trailingBadge, item.pohon?.trailingBadge] })"
           />
         </slot>
       </TabsTrigger>
@@ -198,7 +198,7 @@ defineExpose({
         v-for="(item, index) of items"
         :key="index"
         :value="item.value ?? String(index)"
-        :class="pohon.content({ class: [props.pohon?.content, item.ui?.content, item.class] })"
+        :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content, item.class] })"
       >
         <slot
           :name="((item.slot || 'content') as keyof TabsSlots<T>)"

@@ -1,5 +1,5 @@
 import type { MaybeRefOrGetter } from 'vue';
-import type { AvatarProps, IconProps } from '../types';
+import type { PAvatarProps, IconProps } from '../types';
 import { useAppConfig } from '#imports';
 import { computed, toValue } from 'vue';
 
@@ -10,7 +10,7 @@ export interface UseComponentIconsProps {
    */
   icon?: IconProps['name'];
   /** Display an avatar on the left side. */
-  avatar?: AvatarProps;
+  avatar?: PAvatarProps;
   /** When `true`, the icon will be displayed on the left side. */
   leading?: boolean;
   /**

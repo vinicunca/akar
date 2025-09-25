@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 import theme from '#build/ui/prose/field-group'
 
 type ProseFieldGroup = ComponentConfig<typeof theme, AppConfig, 'fieldGroup', 'ui.prose'>
@@ -30,7 +30,7 @@ defineSlots<ProseFieldGroupSlots>()
 
 const appConfig = useAppConfig() as ProseFieldGroup['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.fieldGroup || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.fieldGroup || {}) }))
 </script>
 
 <template>

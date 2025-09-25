@@ -6,7 +6,7 @@ import theme from '#build/pohon/chip';
 
 type Chip = ComponentConfig<typeof theme, AppConfig, 'chip'>;
 
-export interface ChipProps {
+export interface PChipProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -35,11 +35,11 @@ export interface ChipProps {
   pohon?: Chip['slots'];
 }
 
-export interface ChipEmits {
+export interface PChipEmits {
   'update:show': [value: boolean];
 }
 
-export interface ChipSlots {
+export interface PChipSlots {
   default: (props?: object) => any;
   content: (props?: object) => any;
 }
@@ -55,14 +55,14 @@ import { uv } from '../utils/uv';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<ChipProps>(),
+  defineProps<PChipProps>(),
   {
     inset: false,
     standalone: false,
   },
 );
 
-defineSlots<ChipSlots>();
+defineSlots<PChipSlots>();
 
 const show = defineModel<boolean>('show', { default: true });
 

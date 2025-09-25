@@ -144,11 +144,11 @@ defineExpose({
         :key="item.value ?? count"
         :step="count"
         :disabled="item.disabled || props.disabled"
-        :class="pohon.item({ class: [props.pohon?.item, item.ui?.item, item.class] })"
+        :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
       >
-        <div :class="pohon.container({ class: [props.pohon?.container, item.ui?.container] })">
-          <StepperTrigger :class="pohon.trigger({ class: [props.pohon?.trigger, item.ui?.trigger] })">
-            <StepperIndicator :class="pohon.indicator({ class: [props.pohon?.indicator, item.ui?.indicator] })">
+        <div :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })">
+          <StepperTrigger :class="pohon.trigger({ class: [props.pohon?.trigger, item.pohon?.trigger] })">
+            <StepperIndicator :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })">
               <slot
                 name="indicator"
                 :item="item"
@@ -156,7 +156,7 @@ defineExpose({
                 <PIcon
                   v-if="item.icon"
                   :name="item.icon"
-                  :class="pohon.icon({ class: [props.pohon?.icon, item.ui?.icon] })"
+                  :class="pohon.icon({ class: [props.pohon?.icon, item.pohon?.icon] })"
                 />
                 <template v-else>
                   {{ count + 1 }}
@@ -167,14 +167,14 @@ defineExpose({
 
           <StepperSeparator
             v-if="count < items.length - 1"
-            :class="pohon.separator({ class: [props.pohon?.separator, item.ui?.separator] })"
+            :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator] })"
           />
         </div>
 
-        <div :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.ui?.wrapper] })">
+        <div :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })">
           <StepperTitle
             as="div"
-            :class="pohon.title({ class: [props.pohon?.title, item.ui?.title] })"
+            :class="pohon.title({ class: [props.pohon?.title, item.pohon?.title] })"
           >
             <slot
               name="title"
@@ -185,7 +185,7 @@ defineExpose({
           </StepperTitle>
           <StepperDescription
             as="div"
-            :class="pohon.description({ class: [props.pohon?.description, item.ui?.description] })"
+            :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
           >
             <slot
               name="description"

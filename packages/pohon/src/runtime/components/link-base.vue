@@ -1,16 +1,16 @@
 <script lang="ts">
 import type { APrimitiveProps } from 'akar';
-import type { LinkProps } from '../types';
+import type { PLinkProps } from '../types';
 
-export interface LinkBaseProps {
+export interface PLinkBaseProps {
   as?: APrimitiveProps['as'];
   type?: string;
   disabled?: boolean;
-  onClick?: ((e: MouseEvent) => void | Promise<void>) | Array<((e: MouseEvent) => void | Promise<void>)>;
+  onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>;
   href?: string;
-  navigate?: (e: MouseEvent) => void;
-  target?: LinkProps['target'];
-  rel?: LinkProps['rel'];
+  navigate?: (event: MouseEvent) => void;
+  target?: PLinkProps['target'];
+  rel?: PLinkProps['rel'];
   active?: boolean;
   isExternal?: boolean;
 }
@@ -20,7 +20,7 @@ export interface LinkBaseProps {
 import { APrimitive } from 'akar';
 
 const props = withDefaults(
-  defineProps<LinkBaseProps>(),
+  defineProps<PLinkBaseProps>(),
   {
     as: 'button',
     type: 'button',

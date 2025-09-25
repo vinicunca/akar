@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/code-tree'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProseCodeTree = ComponentConfig<typeof theme, AppConfig, 'codeTree', 'ui.prose'>
 
@@ -23,7 +23,7 @@ export interface ProseCodeTreeProps {
    */
   expandAll?: boolean
   class?: any
-  ui?: ProseCodeTree['slots']
+  pohon?: ProseCodeTree['slots']
 }
 
 export interface ProseCodeTreeSlots {
@@ -50,7 +50,7 @@ const appConfig = useAppConfig() as ProseCodeTree['AppConfig']
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items: TreeNode[], level: number }>()
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeTree || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.codeTree || {}) })())
 
 const model = ref(props.defaultValue ? { path: props.defaultValue } : undefined)
 const lastSelectedItem = ref()
@@ -152,32 +152,32 @@ onBeforeUpdate(() => rerenderCount.value++)
       v-slot="{ isExpanded, isSelected }"
       :level="level"
       :value="item"
-      :class="level > 1 ? ui.itemWithChildren({ class: props.ui?.itemWithChildren }) : ui.item({ class: props.ui?.item })"
+      :class="level > 1 ? ui.itemWithChildren({ class: props.pohon?.itemWithChildren }) : ui.item({ class: props.pohon?.item })"
     >
       <button
         type="button"
         :data-expanded="isExpanded"
-        :class="ui.link({ class: props.ui?.link, active: isSelected })"
+        :class="ui.link({ class: props.pohon?.link, active: isSelected })"
       >
         <UIcon
           v-if="item.children?.length"
           :name="isExpanded ? appConfig.ui.icons.folderOpen : appConfig.ui.icons.folder"
-          :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
+          :class="ui.linkLeadingIcon({ class: props.pohon?.linkLeadingIcon })"
         />
         <UCodeIcon
           v-else
           :filename="item.label"
-          :class="ui.linkLeadingIcon({ class: props.ui?.linkLeadingIcon })"
+          :class="ui.linkLeadingIcon({ class: props.pohon?.linkLeadingIcon })"
         />
 
-        <span :class="ui.linkLabel({ class: props.ui?.linkLabel })">
+        <span :class="ui.linkLabel({ class: props.pohon?.linkLabel })">
           {{ item.label }}
         </span>
 
-        <span v-if="item.children?.length" :class="ui.linkTrailing({ class: props.ui?.linkTrailing })">
+        <span v-if="item.children?.length" :class="ui.linkTrailing({ class: props.pohon?.linkTrailing })">
           <UIcon
             :name="appConfig.ui.icons.chevronDown"
-            :class="ui.linkTrailingIcon({ class: props.ui?.linkTrailingIcon })"
+            :class="ui.linkTrailingIcon({ class: props.pohon?.linkTrailingIcon })"
           />
         </span>
       </button>
@@ -185,17 +185,17 @@ onBeforeUpdate(() => rerenderCount.value++)
       <ul
         v-if="item.children?.length && isExpanded"
         role="group"
-        :class="ui.listWithChildren({ class: props.ui?.listWithChildren })"
+        :class="ui.listWithChildren({ class: props.pohon?.listWithChildren })"
       >
         <ReuseTreeTemplate :items="item.children" :level="level + 1" />
       </ul>
     </TreeItem>
   </DefineTreeTemplate>
 
-  <div v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <div v-bind="$attrs" :class="ui.root({ class: [props.pohon?.root, props.class] })">
     <TreeRoot
       v-model="model"
-      :class="ui.list({ class: props.ui?.list })"
+      :class="ui.list({ class: props.pohon?.list })"
       :items="items"
       :get-key="(item) => item.path"
       :default-expanded="expanded"
@@ -203,7 +203,7 @@ onBeforeUpdate(() => rerenderCount.value++)
       <ReuseTreeTemplate :items="items" :level="1" />
     </TreeRoot>
 
-    <div :class="ui.content({ class: props.ui?.content })">
+    <div :class="ui.content({ class: props.pohon?.content })">
       <component :is="lastSelectedItem?.component" />
     </div>
   </div>

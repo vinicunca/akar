@@ -1,105 +1,163 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/footer-columns'
-import type { IconProps, LinkProps } from '../types'
-import type { ComponentConfig } from '../types/uv'
+import type { AppConfig } from '@nuxt/schema';
+import type { APrimitiveProps } from 'akar';
+import type { IconProps, PLinkProps } from '../types';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/footer-columns';
 
-type FooterColumns = ComponentConfig<typeof theme, AppConfig, 'footerColumns'>
+type FooterColumns = ComponentConfig<typeof theme, AppConfig, 'footerColumns'>;
 
-export interface FooterColumnLink extends Omit<LinkProps, 'custom'> {
-  label: string
+export interface PFooterColumnLink extends Omit<PLinkProps, 'custom'> {
+  label: string;
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name']
-  class?: any
-  pohon?: Pick<FooterColumns['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>
+  icon?: IconProps['name'];
+  class?: any;
+  pohon?: Pick<FooterColumns['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>;
 }
 
-export interface FooterColumn<T extends FooterColumnLink = FooterColumnLink> {
-  label: string
-  children?: T[]
+export interface PFooterColumn<T extends PFooterColumnLink = PFooterColumnLink> {
+  label: string;
+  children?: Array<T>;
 }
 
-export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLink> {
+export interface PFooterColumnsProps<T extends PFooterColumnLink = PFooterColumnLink> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: APrimitiveProps['as'];
-  class?: any
-  columns?: FooterColumn<T>[]
-  pohon?: FooterColumns['slots']
+  class?: any;
+  columns?: Array<PFooterColumn<T>>;
+  pohon?: FooterColumns['slots'];
 }
 
-type SlotProps<T> = (props: { link: T, active: boolean }) => any
+type SlotProps<T> = (props: { link: T; active: boolean }) => any;
 
-export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLink> {
-  'left'(props?: object): any
-  'default'(props?: object): any
-  'right'(props?: object): any
-  'column-label'?: (props: { column: FooterColumn<T> }) => any
-  'link': SlotProps<T>
-  'link-leading': SlotProps<T>
-  'link-label': SlotProps<T>
-  'link-trailing': SlotProps<T>
+export interface FooterColumnsSlots<T extends PFooterColumnLink = PFooterColumnLink> {
+  'left': (props?: object) => any;
+  'default': (props?: object) => any;
+  'right': (props?: object) => any;
+  'column-label'?: (props: { column: PFooterColumn<T> }) => any;
+  'link': SlotProps<T>;
+  'link-leading': SlotProps<T>;
+  'link-label': SlotProps<T>;
+  'link-trailing': SlotProps<T>;
 }
 </script>
 
-<script setup lang="ts" generic="T extends FooterColumnLink">
-import { computed } from 'vue'
-import { APrimitive } from 'akar'
-import { useAppConfig } from '#imports'
-import { pickLinkProps } from '../utils/link'
-import { uv } from '../utils/uv'
-import PLink from './link.vue'
-import PLinkBase from './link-base.vue'
-import PIcon from './icon.vue'
+<script setup lang="ts" generic="T extends PFooterColumnLink">
+import { useAppConfig } from '#imports';
+import { APrimitive } from 'akar';
+import { computed } from 'vue';
+import { pickLinkProps } from '../utils/link';
+import { uv } from '../utils/uv';
+import PIcon from './icon.vue';
+import PLinkBase from './link-base.vue';
+import PLink from './link.vue';
 
-const props = withDefaults(defineProps<FooterColumnsProps<T>>(), {
-  as: 'nav'
-})
-const slots = defineSlots<FooterColumnsSlots<T>>()
+const props = withDefaults(
+  defineProps<PFooterColumnsProps<T>>(),
+  {
+    as: 'nav',
+  },
+);
+const slots = defineSlots<FooterColumnsSlots<T>>();
 
-const appConfig = useAppConfig() as FooterColumns['AppConfig']
+const appConfig = useAppConfig() as FooterColumns['AppConfig'];
 
-// eslint-disable-next-line vue/no-dupe-keys
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footerColumns || {}) })())
+const pohon = computed(() =>
+  uv({ extend: uv(theme), ...(appConfig.pohon?.footerColumns || {}) })(),
+);
 </script>
 
 <template>
-  <APrimitive :as="as" :class="pohon.root({ class: [props.pohon?.root, props.class] })">
-    <div v-if="!!slots.left" :class="pohon.left({ class: props.pohon?.left })">
+  <APrimitive
+    :as="as"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+  >
+    <div
+      v-if="!!slots.left"
+      :class="pohon.left({ class: props.pohon?.left })"
+    >
       <slot name="left" />
     </div>
 
-    <div v-if="!!slots.default || columns?.length" :class="pohon.center({ class: props.pohon?.center })">
+    <div
+      v-if="!!slots.default || columns?.length"
+      :class="pohon.center({ class: props.pohon?.center })"
+    >
       <slot>
-        <div v-for="(column, index) in columns" :key="index">
+        <div
+          v-for="(column, index) in columns"
+          :key="index"
+        >
           <h3 :class="pohon.label({ class: props.pohon?.label })">
-            <slot name="column-label" :column="column">
+            <slot
+              name="column-label"
+              :column="column"
+            >
               {{ column.label }}
             </slot>
           </h3>
 
           <ul :class="pohon.list({ class: props.pohon?.list })">
-            <li v-for="(link, linkIndex) in column.children" :key="linkIndex" :class="pohon.item({ class: [props.pohon?.item, link.ui?.item] })">
-              <PLink v-slot="{ active, ...slotProps }" v-bind="pickLinkProps(link)" custom>
-                <PLinkBase v-bind="slotProps" :class="pohon.link({ class: [props.pohon?.link, link.ui?.link, link.class], active })">
-                  <slot name="link" :link="(link as T)" :active="active">
-                    <slot name="link-leading" :link="(link as T)" :active="active">
-                      <PIcon v-if="link.icon" :name="link.icon" :class="pohon.linkLeadingIcon({ class: [props.pohon?.linkLeadingIcon, link.ui?.linkLeadingIcon], active })" />
+            <li
+              v-for="(link, linkIndex) in column.children"
+              :key="linkIndex"
+              :class="pohon.item({ class: [props.pohon?.item, link.pohon?.item] })"
+            >
+              <PLink
+                v-slot="{ active, ...slotProps }"
+                v-bind="pickLinkProps(link)"
+                custom
+              >
+                <PLinkBase
+                  v-bind="slotProps"
+                  :class="pohon.link({ class: [props.pohon?.link, link.pohon?.link, link.class], active })"
+                >
+                  <slot
+                    name="link"
+                    :link="(link as T)"
+                    :active="active"
+                  >
+                    <slot
+                      name="link-leading"
+                      :link="(link as T)"
+                      :active="active"
+                    >
+                      <PIcon
+                        v-if="link.icon"
+                        :name="link.icon"
+                        :class="pohon.linkLeadingIcon({ class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon], active })"
+                      />
                     </slot>
 
-                    <span v-if="link.label || !!slots['link-label']" :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, link.ui?.linkLabel], active })">
-                      <slot name="link-label" :link="(link as T)" :active="active">
+                    <span
+                      v-if="link.label || !!slots['link-label']"
+                      :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, link.pohon?.linkLabel], active })"
+                    >
+                      <slot
+                        name="link-label"
+                        :link="(link as T)"
+                        :active="active"
+                      >
                         {{ (link as T).label }}
                       </slot>
 
-                      <PIcon v-if="link.target === '_blank'" :name="appConfig.pohon.icons.external" :class="pohon.linkLabelExternalIcon({ class: [props.pohon?.linkLabelExternalIcon, link.ui?.linkLabelExternalIcon], active })" />
+                      <PIcon
+                        v-if="link.target === '_blank'"
+                        :name="appConfig.pohon.icons.external"
+                        :class="pohon.linkLabelExternalIcon({ class: [props.pohon?.linkLabelExternalIcon, link.pohon?.linkLabelExternalIcon], active })"
+                      />
                     </span>
 
-                    <slot name="link-trailing" :link="(link as T)" :active="active" />
+                    <slot
+                      name="link-trailing"
+                      :link="(link as T)"
+                      :active="active"
+                    />
                   </slot>
                 </PLinkBase>
               </PLink>
@@ -109,7 +167,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer
       </slot>
     </div>
 
-    <div v-if="!!slots.right" :class="pohon.right({ class: props.pohon?.right })">
+    <div
+      v-if="!!slots.right"
+      :class="pohon.right({ class: props.pohon?.right })"
+    >
       <slot name="right" />
     </div>
   </APrimitive>

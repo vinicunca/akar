@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/code-collapse'
 import type { IconProps } from '../../types'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProseCodeCollapse = ComponentConfig<typeof theme, AppConfig, 'codeCollapse', 'ui.prose'>
 
@@ -28,7 +28,7 @@ export interface ProseCodeCollapseProps {
    */
   closeText?: string
   class?: any
-  ui?: ProseCodeCollapse['slots']
+  pohon?: ProseCodeCollapse['slots']
 }
 
 export interface ProseCodeCollapseSlots {
@@ -52,24 +52,24 @@ const { t } = useLocale()
 const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeCollapse || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.codeCollapse || {}) })({
   open: open.value
 }))
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <div :class="ui.root({ class: [props.pohon?.root, props.class] })">
     <slot />
 
-    <div :class="ui.footer({ class: props.ui?.footer })">
+    <div :class="ui.footer({ class: props.pohon?.footer })">
       <UButton
         :icon="icon || appConfig.ui.icons.chevronDown"
         color="neutral"
         variant="outline"
         :data-state="open ? 'open' : 'closed'"
         :label="`${open ? (props.closeText || t('prose.codeCollapse.closeText')) : (props.openText || t('prose.codeCollapse.openText'))} ${props.name || t('prose.codeCollapse.name')}`"
-        :class="ui.trigger({ class: props.ui?.trigger })"
-        :ui="{ leadingIcon: ui.triggerIcon({ class: props.ui?.triggerIcon }) }"
+        :class="ui.trigger({ class: props.pohon?.trigger })"
+        :ui="{ leadingIcon: ui.triggerIcon({ class: props.pohon?.triggerIcon }) }"
         @click="open = !open"
       />
     </div>

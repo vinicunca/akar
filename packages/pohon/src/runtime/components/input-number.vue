@@ -1,166 +1,224 @@
 <script lang="ts">
-import type { NumberFieldRootProps } from 'akar'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/input-number'
-import type { ButtonProps, IconProps } from '../types'
-import type { ModelModifiers } from '../types/input'
-import type { ComponentConfig } from '../types/uv'
+import type { AppConfig } from '@nuxt/schema';
+import type { ANumberFieldRootProps, APrimitiveProps } from 'akar';
+import type { IconProps, PButtonProps } from '../types';
+import type { ModelModifiers } from '../types/input';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/input-number';
 
-type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>
+type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>;
 
-export interface InputNumberProps extends Pick<NumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'> {
+export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: APrimitiveProps['as'];
   /** The placeholder text when the input is empty. */
-  placeholder?: string
-  color?: InputNumber['variants']['color']
-  variant?: InputNumber['variants']['variant']
-  size?: InputNumber['variants']['size']
+  placeholder?: string;
+  color?: InputNumber['variants']['color'];
+  variant?: InputNumber['variants']['variant'];
+  size?: InputNumber['variants']['size'];
   /** Highlight the ring color like a focus state. */
-  highlight?: boolean
+  highlight?: boolean;
   /**
    * The orientation of the input menu.
    * @defaultValue 'horizontal'
    */
-  orientation?: 'vertical' | 'horizontal'
+  orientation?: 'vertical' | 'horizontal';
   /**
    * Configure the increment button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  increment?: ButtonProps
+  increment?: PButtonProps;
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.pohon.icons.plus
    * @IconifyIcon
    */
-  incrementIcon?: IconProps['name']
+  incrementIcon?: IconProps['name'];
   /** Disable the increment button. */
-  incrementDisabled?: boolean
+  incrementDisabled?: boolean;
   /**
    * Configure the decrement button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  decrement?: ButtonProps
+  decrement?: PButtonProps;
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.pohon.icons.minus
    * @IconifyIcon
    */
-  decrementIcon?: IconProps['name']
+  decrementIcon?: IconProps['name'];
   /** Disable the decrement button. */
-  decrementDisabled?: boolean
-  autofocus?: boolean
-  autofocusDelay?: number
-  modelModifiers?: Pick<ModelModifiers, 'optional'>
+  decrementDisabled?: boolean;
+  autofocus?: boolean;
+  autofocusDelay?: number;
+  modelModifiers?: Pick<ModelModifiers, 'optional'>;
   /**
    * The locale to use for formatting and parsing numbers.
    * @defaultValue UApp.locale.code
    */
-  locale?: string
-  class?: any
-  pohon?: InputNumber['slots']
+  locale?: string;
+  class?: any;
+  pohon?: InputNumber['slots'];
 }
 
-export interface InputNumberEmits {
-  'update:modelValue': [value: number]
-  'blur': [event: FocusEvent]
-  'change': [event: Event]
+export interface PInputNumberEmits {
+  'update:modelValue': [value: number];
+  'blur': [event: FocusEvent];
+  'change': [event: Event];
 }
 
-export interface InputNumberSlots {
-  increment(props?: object): any
-  decrement(props?: object): any
+export interface PInputNumberSlots {
+  increment: (props?: object) => any;
+  decrement: (props?: object) => any;
 }
 </script>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
-import { NumberFieldRoot, NumberFieldInput, NumberFieldDecrement, NumberFieldIncrement, useForwardPropsEmits } from 'akar'
-import { reactivePick, useVModel } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useFieldGroup } from '../composables/useFieldGroup'
-import { useFormField } from '../composables/use-form-field'
-import { useLocale } from '../composables/use-locale'
-import { uv } from '../utils/uv'
-import PButton from './button.vue'
+import { useAppConfig } from '#imports';
+import { reactivePick, useVModel } from '@vueuse/core';
+import {
+  ANumberFieldDecrement,
+  ANumberFieldIncrement,
+  ANumberFieldInput,
+  ANumberFieldRoot,
+  useForwardPropsEmits,
+} from 'akar';
+import { computed, onMounted, ref } from 'vue';
+import { useFieldGroup } from '../composables/use-field-group';
+import { useFormField } from '../composables/use-form-field';
+import { useLocale } from '../composables/use-locale';
+import { uv } from '../utils/uv';
+import PButton from './button.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<InputNumberProps>(), {
-  orientation: 'horizontal',
-  disabledIncrement: false,
-  disabledDecrement: false
-})
-const emits = defineEmits<InputNumberEmits>()
-defineSlots<InputNumberSlots>()
+const props = withDefaults(
+  defineProps<PInputNumberProps>(),
+  {
+    orientation: 'horizontal',
+    disabledIncrement: false,
+    disabledDecrement: false,
+  },
+);
 
-const modelValue = useVModel<InputNumberProps, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue })
+const emits = defineEmits<PInputNumberEmits>();
 
-const { t, code: codeLocale } = useLocale()
-const appConfig = useAppConfig() as InputNumber['AppConfig']
+defineSlots<PInputNumberSlots>();
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultValue', 'min', 'max', 'step', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'readonly'), emits)
+const modelValue = useVModel<PInputNumberProps, 'modelValue', 'update:modelValue'>(
+  props,
+  'modelValue',
+  emits,
+  { defaultValue: props.defaultValue },
+);
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formGroupSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps>(props)
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps>(props)
+const { t, code: codeLocale } = useLocale();
+const appConfig = useAppConfig() as InputNumber['AppConfig'];
 
-const locale = computed(() => props.locale || codeLocale.value)
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value)
+const rootProps = useForwardPropsEmits(
+  reactivePick(
+    props,
+    'as',
+    'defaultValue',
+    'min',
+    'max',
+    'step',
+    'stepSnapping',
+    'formatOptions',
+    'disableWheelChange',
+    'invertWheelChange',
+    'readonly',
+  ),
+  emits,
+);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.inputNumber || {}) })({
-  color: color.value,
-  variant: props.variant,
-  size: inputSize.value,
-  highlight: highlight.value,
-  orientation: props.orientation,
-  fieldGroup: orientation.value
-}))
+const {
+  emitFormBlur,
+  emitFormFocus,
+  emitFormChange,
+  emitFormInput,
+  id,
+  color,
+  size: formGroupSize,
+  name,
+  highlight,
+  disabled,
+  ariaAttrs,
+} = useFormField<PInputNumberProps>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputNumberProps>(props);
 
-const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.pohon.icons.plus : appConfig.pohon.icons.chevronUp))
-const decrementIcon = computed(() => props.decrementIcon || (props.orientation === 'horizontal' ? appConfig.pohon.icons.minus : appConfig.pohon.icons.chevronDown))
+const locale = computed(() => props.locale || codeLocale.value);
+const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);
 
-const inputRef = ref<InstanceType<typeof NumberFieldInput> | null>(null)
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.inputNumber || {}),
+  })({
+    color: color.value,
+    variant: props.variant,
+    size: inputSize.value,
+    highlight: highlight.value,
+    orientation: props.orientation,
+    fieldGroup: orientation.value,
+  }),
+);
+
+const incrementIcon = computed(() =>
+  props.incrementIcon
+  || (props.orientation === 'horizontal'
+    ? appConfig.pohon.icons.plus
+    : appConfig.pohon.icons.chevronUp),
+);
+const decrementIcon = computed(() =>
+  props.decrementIcon
+  || (props.orientation === 'horizontal'
+    ? appConfig.pohon.icons.minus
+    : appConfig.pohon.icons.chevronDown),
+);
+
+const inputRef = ref<InstanceType<typeof ANumberFieldInput> | null>(null);
 
 function onUpdate(value: number | undefined) {
   if (props.modelModifiers?.optional) {
-    value = value ?? undefined
+    value = value ?? undefined;
   }
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const event = new Event('change', { target: { value } })
-  emits('change', event)
+  const event = new Event('change', { target: { value } });
+  emits('change', event);
 
-  emitFormChange()
-  emitFormInput()
+  emitFormChange();
+  emitFormInput();
 }
 
 function onBlur(event: FocusEvent) {
-  emitFormBlur()
-  emits('blur', event)
+  emitFormBlur();
+  emits('blur', event);
 }
 
 function autoFocus() {
   if (props.autofocus) {
-    inputRef.value?.$el?.focus()
+    inputRef.value?.$el?.focus();
   }
 }
 
 onMounted(() => {
   setTimeout(() => {
-    autoFocus()
-  }, props.autofocusDelay)
-})
+    autoFocus();
+  }, props.autofocusDelay);
+});
 
 defineExpose({
-  inputRef
-})
+  inputRef,
+});
 </script>
 
 <template>
-  <NumberFieldRoot
+  <ANumberFieldRoot
     v-bind="rootProps"
     :id="id"
     :model-value="modelValue"
@@ -170,7 +228,7 @@ defineExpose({
     :locale="locale"
     @update:model-value="onUpdate"
   >
-    <NumberFieldInput
+    <ANumberFieldInput
       v-bind="{ ...$attrs, ...ariaAttrs }"
       ref="inputRef"
       :placeholder="placeholder"
@@ -181,7 +239,10 @@ defineExpose({
     />
 
     <div :class="pohon.increment({ class: props.pohon?.increment })">
-      <NumberFieldIncrement as-child :disabled="disabled || incrementDisabled">
+      <ANumberFieldIncrement
+        as-child
+        :disabled="disabled || incrementDisabled"
+      >
         <slot name="increment">
           <PButton
             :icon="incrementIcon"
@@ -192,11 +253,14 @@ defineExpose({
             v-bind="typeof increment === 'object' ? increment : undefined"
           />
         </slot>
-      </NumberFieldIncrement>
+      </ANumberFieldIncrement>
     </div>
 
     <div :class="pohon.decrement({ class: props.pohon?.decrement })">
-      <NumberFieldDecrement as-child :disabled="disabled || decrementDisabled">
+      <ANumberFieldDecrement
+        as-child
+        :disabled="disabled || decrementDisabled"
+      >
         <slot name="decrement">
           <PButton
             :icon="decrementIcon"
@@ -207,7 +271,7 @@ defineExpose({
             v-bind="typeof decrement === 'object' ? decrement : undefined"
           />
         </slot>
-      </NumberFieldDecrement>
+      </ANumberFieldDecrement>
     </div>
-  </NumberFieldRoot>
+  </ANumberFieldRoot>
 </template>

@@ -1,87 +1,87 @@
 <script lang="ts">
-import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'akar'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/slideover'
-import type { ButtonProps, IconProps } from '../types'
-import type { EmitsToProps } from '../types/utils'
-import type { ComponentConfig } from '../types/uv'
+import type { AppConfig } from '@nuxt/schema';
+import type { DialogContentEmits, DialogContentProps, DialogRootEmits, DialogRootProps } from 'akar';
+import type { IconProps, PButtonProps } from '../types';
+import type { EmitsToProps } from '../types/utils';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/slideover';
 
-type Slideover = ComponentConfig<typeof theme, AppConfig, 'slideover'>
+type Slideover = ComponentConfig<typeof theme, AppConfig, 'slideover'>;
 
 export interface SlideoverProps extends DialogRootProps {
-  title?: string
-  description?: string
+  title?: string;
+  description?: string;
   /** The content of the slideover. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>
+  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>;
   /**
    * Render an overlay behind the slideover.
    * @defaultValue true
    */
-  overlay?: boolean
+  overlay?: boolean;
   /**
    * Animate the slideover when opening or closing.
    * @defaultValue true
    */
-  transition?: boolean
+  transition?: boolean;
   /**
    * The side of the slideover.
    * @defaultValue 'right'
    */
-  side?: Slideover['variants']['side']
+  side?: Slideover['variants']['side'];
   /**
    * Render the slideover in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: boolean | string | HTMLElement;
   /**
    * Display a close button to dismiss the slideover.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Partial<PButtonProps>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  closeIcon?: IconProps['name']
+  closeIcon?: IconProps['name'];
   /**
    * When `false`, the slideover will not close when clicking outside or pressing escape.
    * @defaultValue true
    */
-  dismissible?: boolean
-  class?: any
-  pohon?: Slideover['slots']
+  dismissible?: boolean;
+  class?: any;
+  pohon?: Slideover['slots'];
 }
 
 export interface SlideoverEmits extends DialogRootEmits {
-  'after:leave': []
-  'after:enter': []
-  'close:prevent': []
+  'after:leave': [];
+  'after:enter': [];
+  'close:prevent': [];
 }
 
 export interface SlideoverSlots {
-  default(props: { open: boolean }): any
-  content(props: { close: () => void }): any
-  header(props: { close: () => void }): any
-  title(props?: object): any
-  description(props?: object): any
-  actions(props?: object): any
-  close(props: { close: () => void, pohon: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }): any
-  body(props: { close: () => void }): any
-  footer(props: { close: () => void }): any
+  default: (props: { open: boolean }) => any;
+  content: (props: { close: () => void }) => any;
+  header: (props: { close: () => void }) => any;
+  title: (props?: object) => any;
+  description: (props?: object) => any;
+  actions: (props?: object) => any;
+  close: (props: { close: () => void; pohon: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }) => any;
+  body: (props: { close: () => void }) => any;
+  footer: (props: { close: () => void }) => any;
 }
 </script>
 
 <script setup lang="ts">
-import { computed, toRef } from 'vue'
-import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'akar'
-import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useLocale } from '../composables/use-locale'
-import { usePortal } from '../composables/usePortal'
-import { uv } from '../utils/uv'
-import PButton from './button.vue'
+import { useAppConfig } from '#imports';
+import { reactivePick } from '@vueuse/core';
+import { DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger, useForwardPropsEmits, VisuallyHidden } from 'akar';
+import { computed, toRef } from 'vue';
+import { useLocale } from '../composables/use-locale';
+import { usePortal } from '../composables/usePortal';
+import { uv } from '../utils/uv';
+import PButton from './button.vue';
 
 const props = withDefaults(defineProps<SlideoverProps>(), {
   close: true,
@@ -90,52 +90,62 @@ const props = withDefaults(defineProps<SlideoverProps>(), {
   transition: true,
   modal: true,
   dismissible: true,
-  side: 'right'
-})
-const emits = defineEmits<SlideoverEmits>()
-const slots = defineSlots<SlideoverSlots>()
+  side: 'right',
+});
+const emits = defineEmits<SlideoverEmits>();
+const slots = defineSlots<SlideoverSlots>();
 
-const { t } = useLocale()
-const appConfig = useAppConfig() as Slideover['AppConfig']
+const { t } = useLocale();
+const appConfig = useAppConfig() as Slideover['AppConfig'];
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
-const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = toRef(() => props.content)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits);
+const portalProps = usePortal(toRef(() => props.portal));
+const contentProps = toRef(() => props.content);
 const contentEvents = computed(() => {
   const defaultEvents = {
-    closeAutoFocus: (e: Event) => e.preventDefault()
-  }
+    closeAutoFocus: (event: Event) => event.preventDefault(),
+  };
 
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'];
 
     return events.reduce((acc, curr) => {
-      acc[curr] = (e: Event) => {
-        e.preventDefault()
-        emits('close:prevent')
-      }
-      return acc
-    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
+      acc[curr] = (event: Event) => {
+        event.preventDefault();
+        emits('close:prevent');
+      };
+      return acc;
+    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (event: Event) => void>);
   }
 
-  return defaultEvents
-})
+  return defaultEvents;
+});
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideover || {}) })({
   transition: props.transition,
-  side: props.side
-}))
+  side: props.side,
+}));
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DialogRoot v-slot="{ open, close }" v-bind="rootProps">
-    <DialogTrigger v-if="!!slots.default" as-child :class="props.class">
+  <DialogRoot
+    v-slot="{ open, close }"
+    v-bind="rootProps"
+  >
+    <DialogTrigger
+      v-if="!!slots.default"
+      as-child
+      :class="props.class"
+    >
       <slot :open="open" />
     </DialogTrigger>
 
     <DialogPortal v-bind="portalProps">
-      <DialogOverlay v-if="overlay" :class="pohon.overlay({ class: props.pohon?.overlay })" />
+      <DialogOverlay
+        v-if="overlay"
+        :class="pohon.overlay({ class: props.pohon?.overlay })"
+      />
 
       <DialogContent
         :data-side="side"
@@ -159,17 +169,32 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideo
           </DialogDescription>
         </VisuallyHidden>
 
-        <slot name="content" :close="close">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" :class="pohon.header({ class: props.pohon?.header })">
-            <slot name="header" :close="close">
+        <slot
+          name="content"
+          :close="close"
+        >
+          <div
+            v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)"
+            :class="pohon.header({ class: props.pohon?.header })"
+          >
+            <slot
+              name="header"
+              :close="close"
+            >
               <div :class="pohon.wrapper({ class: props.pohon?.wrapper })">
-                <DialogTitle v-if="title || !!slots.title" :class="pohon.title({ class: props.pohon?.title })">
+                <DialogTitle
+                  v-if="title || !!slots.title"
+                  :class="pohon.title({ class: props.pohon?.title })"
+                >
                   <slot name="title">
                     {{ title }}
                   </slot>
                 </DialogTitle>
 
-                <DialogDescription v-if="description || !!slots.description" :class="pohon.description({ class: props.pohon?.description })">
+                <DialogDescription
+                  v-if="description || !!slots.description"
+                  :class="pohon.description({ class: props.pohon?.description })"
+                >
                   <slot name="description">
                     {{ description }}
                   </slot>
@@ -178,15 +203,22 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideo
 
               <slot name="actions" />
 
-              <DialogClose v-if="props.close || !!slots.close" as-child>
-                <slot name="close" :close="close" :ui="ui">
+              <DialogClose
+                v-if="props.close || !!slots.close"
+                as-child
+              >
+                <slot
+                  name="close"
+                  :close="close"
+                  :ui="ui"
+                >
                   <PButton
                     v-if="props.close"
                     :icon="closeIcon || appConfig.pohon.icons.close"
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('slideover.close')"
-                    v-bind="(typeof props.close === 'object' ? props.close as Partial<ButtonProps> : {})"
+                    v-bind="(typeof props.close === 'object' ? props.close as Partial<PButtonProps> : {})"
                     :class="pohon.close({ class: props.pohon?.close })"
                   />
                 </slot>
@@ -195,11 +227,20 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideo
           </div>
 
           <div :class="pohon.body({ class: props.pohon?.body })">
-            <slot name="body" :close="close" />
+            <slot
+              name="body"
+              :close="close"
+            />
           </div>
 
-          <div v-if="!!slots.footer" :class="pohon.footer({ class: props.pohon?.footer })">
-            <slot name="footer" :close="close" />
+          <div
+            v-if="!!slots.footer"
+            :class="pohon.footer({ class: props.pohon?.footer })"
+          >
+            <slot
+              name="footer"
+              :close="close"
+            />
           </div>
         </slot>
       </DialogContent>

@@ -4,12 +4,12 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/content/content-search'
-import type { ButtonProps, InputProps, LinkProps, ModalProps, CommandPaletteProps, CommandPaletteSlots, CommandPaletteGroup, CommandPaletteItem, IconProps } from '../../types'
-import type { ComponentConfig } from '../../types/tv'
+import type { PButtonProps, InputProps, PLinkProps, PDialogProps, PCommandPaletteProps, PCommandPaletteSlots, PCommandPaletteGroup, PCommandPaletteItem, IconProps } from '../../types'
+import type { ComponentConfig } from '../../types/uv'
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>
 
-export interface ContentSearchLink extends Omit<LinkProps, 'custom'> {
+export interface ContentSearchLink extends Omit<PLinkProps, 'custom'> {
   label?: string
   description?: string
   /**
@@ -27,7 +27,7 @@ export interface ContentSearchFile {
   content: string
 }
 
-export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPaletteItem {
+export interface ContentSearchItem extends Omit<PLinkProps, 'custom'>, PCommandPaletteItem {
   level?: number
   /**
    * @IconifyIcon
@@ -35,7 +35,7 @@ export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPal
   icon?: IconProps['name']
 }
 
-export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends /* @vue-ignore */ Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends /* @vue-ignore */ Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.ui.icons.search
@@ -66,7 +66,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    * @emits 'update:open'
    * @defaultValue true
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Partial<PButtonProps>
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.ui.icons.close
@@ -82,7 +82,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   links?: T[]
   navigation?: ContentNavigationItem[]
   /** Custom groups displayed between navigation and color mode group. */
-  groups?: CommandPaletteGroup<ContentSearchItem>[]
+  groups?: PCommandPaletteGroup<ContentSearchItem>[]
   files?: ContentSearchFile[]
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
@@ -95,10 +95,10 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   colorMode?: boolean
   class?: any
-  ui?: ContentSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['ui']
+  pohon?: ContentSearch['slots'] & PCommandPaletteProps<PCommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['ui']
 }
 
-export type ContentSearchSlots = CommandPaletteSlots<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
+export type ContentSearchSlots = PCommandPaletteSlots<PCommandPaletteGroup<ContentSearchItem>, ContentSearchItem> & {
   content(props?: {}): any
 }
 
@@ -143,7 +143,7 @@ const fuse = computed(() => defu({}, props.fuse, {
 }))
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearch || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentSearch || {}) })())
 
 function mapLinksItems(links: T[]): ContentSearchItem[] {
   return links.flatMap(link => [{
@@ -269,7 +269,7 @@ defineExpose({
     v-model:open="open"
     :title="t('contentSearch.title')"
     :description="t('contentSearch.description')"
-    :class="ui.modal({ class: [props.ui?.modal, props.class] })"
+    :class="ui.modal({ class: [props.pohon?.modal, props.class] })"
   >
     <template #content>
       <slot name="content">

@@ -23,8 +23,8 @@ export type PTreeItem = {
   disabled?: boolean;
   slot?: string;
   children?: Array<PTreeItem>;
-  onToggle?: (e: Event) => void;
-  onSelect?: (e?: Event) => void;
+  onToggle?: (event: Event) => void;
+  onSelect?: (event?: Event) => void;
   class?: any;
   pohon?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>;
   [key: string]: any;

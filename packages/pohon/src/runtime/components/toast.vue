@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { APrimitiveProps, AToastRootEmits, AToastRootProps } from 'akar';
-import type { AvatarProps, ButtonProps, IconProps, ProgressProps } from '../types';
+import type { PAvatarProps, PButtonProps, IconProps, ProgressProps } from '../types';
 import type { StringOrVNode } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/toast';
@@ -20,7 +20,7 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
    * @IconifyIcon
    */
   icon?: IconProps['name'];
-  avatar?: AvatarProps;
+  avatar?: PAvatarProps;
   /**
    * @defaultValue 'primary'
    */
@@ -35,7 +35,7 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: boolean | Partial<ButtonProps>;
+  close?: boolean | Partial<PButtonProps>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
@@ -48,7 +48,7 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
    * - next to the close button when orientation is `horizontal`
    * `{ size: 'xs' }`{lang="ts-type"}
    */
-  actions?: Array<ButtonProps>;
+  actions?: Array<PButtonProps>;
   /**
    * Display a progress bar showing the toast's remaining duration.
    * `{ size: 'sm' }`{lang="ts-type"}
@@ -146,7 +146,7 @@ defineExpose({
     <slot name="leading">
       <PAvatar
         v-if="avatar"
-        :size="((props.pohon?.avatarSize || pohon.avatarSize()) as AvatarProps['size'])"
+        :size="((props.pohon?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
         :class="pohon.avatar({ class: props.pohon?.avatar })"
       />
@@ -253,7 +253,7 @@ defineExpose({
             color="neutral"
             variant="link"
             :aria-label="t('toast.close')"
-            v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
+            v-bind="(typeof close === 'object' ? close as Partial<PButtonProps> : {})"
             :class="pohon.close({ class: props.pohon?.close })"
             @click.stop
           />

@@ -1,8 +1,8 @@
-import type { LinkProps } from '../types';
+import type { PLinkProps } from '../types';
 import { reactivePick } from '@vueuse/core';
 import { diff, isEqual } from 'ohash/utils';
 
-export function pickLinkProps(link: LinkProps & { [key: string]: any }) {
+export function pickLinkProps(link: PLinkProps & { [key: string]: any }) {
   const keys = Object.keys(link);
 
   const ariaKeys = keys.filter((key) => key.startsWith('aria-'));

@@ -1,200 +1,280 @@
 <script lang="ts">
-import type { DialogRootProps, DialogRootEmits, DialogContentProps, DialogContentEmits } from 'akar'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/modal'
-import type { ButtonProps, IconProps } from '../types'
-import type { EmitsToProps } from '../types/utils'
-import type { ComponentConfig } from '../types/uv'
+import type { AppConfig } from '@nuxt/schema';
+import type {
+  ADialogContentEmits,
+  ADialogContentProps,
+  ADialogRootEmits,
+  ADialogRootProps,
+} from 'akar';
+import type { IconProps, PButtonProps } from '../types';
+import type { EmitsToProps } from '../types/utils';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/dialog';
 
-type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>
+type Dialog = ComponentConfig<typeof theme, AppConfig, 'modal'>;
 
-export interface ModalProps extends DialogRootProps {
-  title?: string
-  description?: string
+export interface PDialogProps extends ADialogRootProps {
+  title?: string;
+  description?: string;
   /** The content of the modal. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>
+  content?: Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ADialogContentEmits>>;
   /**
    * Render an overlay behind the modal.
    * @defaultValue true
    */
-  overlay?: boolean
+  overlay?: boolean;
   /**
    * Animate the modal when opening or closing.
    * @defaultValue true
    */
-  transition?: boolean
+  transition?: boolean;
   /**
    * When `true`, the modal will take up the full screen.
    * @defaultValue false
    */
-  fullscreen?: boolean
+  fullscreen?: boolean;
   /**
    * Render the modal in a portal.
    * @defaultValue true
    */
-  portal?: boolean | string | HTMLElement
+  portal?: boolean | string | HTMLElement;
   /**
    * Display a close button to dismiss the modal.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: boolean | Partial<ButtonProps>
+  close?: boolean | Partial<PButtonProps>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  closeIcon?: IconProps['name']
+  closeIcon?: IconProps['name'];
   /**
    * When `false`, the modal will not close when clicking outside or pressing escape.
    * @defaultValue true
    */
-  dismissible?: boolean
-  class?: any
-  pohon?: Modal['slots']
+  dismissible?: boolean;
+  class?: any;
+  pohon?: Dialog['slots'];
 }
 
-export interface ModalEmits extends DialogRootEmits {
-  'after:leave': []
-  'after:enter': []
-  'close:prevent': []
+export interface PDialogEmits extends ADialogRootEmits {
+  'after:leave': [];
+  'after:enter': [];
+  'close:prevent': [];
 }
 
 export interface ModalSlots {
-  default(props: { open: boolean }): any
-  content(props: { close: () => void }): any
-  header(props: { close: () => void }): any
-  title(props?: object): any
-  description(props?: object): any
-  actions(props?: object): any
-  close(props: { close: () => void, pohon: { [K in keyof Required<Modal['slots']>]: (props?: Record<string, any>) => string } }): any
-  body(props: { close: () => void }): any
-  footer(props: { close: () => void }): any
+  default: (props: { open: boolean }) => any;
+  content: (props: { close: () => void }) => any;
+  header: (props: { close: () => void }) => any;
+  title: (props?: object) => any;
+  description: (props?: object) => any;
+  actions: (props?: object) => any;
+  close: (props: { close: () => void; pohon: { [K in keyof Required<Dialog['slots']>]: (props?: Record<string, any>) => string } }) => any;
+  body: (props: { close: () => void }) => any;
+  footer: (props: { close: () => void }) => any;
 }
 </script>
 
 <script setup lang="ts">
-import { computed, toRef } from 'vue'
-import { DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, VisuallyHidden, useForwardPropsEmits } from 'akar'
-import { reactivePick } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useLocale } from '../composables/use-locale'
-import { usePortal } from '../composables/usePortal'
-import { uv } from '../utils/uv'
-import PButton from './button.vue'
+import { useAppConfig } from '#imports';
+import { reactivePick } from '@vueuse/core';
+import {
+  ADialogClose,
+  ADialogContent,
+  ADialogDescription,
+  ADialogOverlay,
+  ADialogPortal,
+  ADialogRoot,
+  ADialogTitle,
+  ADialogTrigger,
+  AVisuallyHidden,
+  useForwardPropsEmits,
+} from 'akar';
+import { computed, toRef } from 'vue';
+import { useLocale } from '../composables/use-locale';
+import { usePortal } from '../composables/use-portal';
+import { uv } from '../utils/uv';
+import PButton from './button.vue';
 
-const props = withDefaults(defineProps<ModalProps>(), {
-  close: true,
-  portal: true,
-  overlay: true,
-  transition: true,
-  modal: true,
-  dismissible: true
-})
-const emits = defineEmits<ModalEmits>()
-const slots = defineSlots<ModalSlots>()
+const props = withDefaults(
+  defineProps<PDialogProps>(),
+  {
+    close: true,
+    portal: true,
+    overlay: true,
+    transition: true,
+    modal: true,
+    dismissible: true,
+  },
+);
+const emits = defineEmits<PDialogEmits>();
+const slots = defineSlots<ModalSlots>();
 
-const { t } = useLocale()
-const appConfig = useAppConfig() as Modal['AppConfig']
+const { t } = useLocale();
+const appConfig = useAppConfig() as Dialog['AppConfig'];
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits)
-const portalProps = usePortal(toRef(() => props.portal))
-const contentProps = toRef(() => props.content)
+const rootProps = useForwardPropsEmits(
+  reactivePick(props, 'open', 'defaultOpen', 'modal'),
+  emits,
+);
+const portalProps = usePortal(toRef(() => props.portal));
+const contentProps = toRef(() => props.content);
 const contentEvents = computed(() => {
   const defaultEvents = {
-    closeAutoFocus: (e: Event) => e.preventDefault()
-  }
+    closeAutoFocus: (event: Event) => event.preventDefault(),
+  };
 
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown']
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'];
 
-    return events.reduce((acc, curr) => {
-      acc[curr] = (e: Event) => {
-        e.preventDefault()
-        emits('close:prevent')
-      }
-      return acc
-    }, defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (e: Event) => void>)
+    return events.reduce(
+      (acc, curr) => {
+        acc[curr] = (event: Event) => {
+          event.preventDefault();
+          emits('close:prevent');
+        };
+        return acc;
+      },
+      defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (event: Event) => void>,
+    );
   }
 
-  return defaultEvents
-})
+  return defaultEvents;
+});
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal || {}) })({
-  transition: props.transition,
-  fullscreen: props.fullscreen
-}))
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.modal || {}),
+  })({
+    transition: props.transition,
+    fullscreen: props.fullscreen,
+  }),
+);
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DialogRoot v-slot="{ open, close }" v-bind="rootProps">
-    <DialogTrigger v-if="!!slots.default" as-child :class="props.class">
+  <ADialogRoot
+    v-slot="{ open, close }"
+    v-bind="rootProps"
+  >
+    <ADialogTrigger
+      v-if="!!slots.default"
+      as-child
+      :class="props.class"
+    >
       <slot :open="open" />
-    </DialogTrigger>
+    </ADialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
-      <DialogOverlay v-if="overlay" :class="pohon.overlay({ class: props.pohon?.overlay })" />
+    <ADialogPortal v-bind="portalProps">
+      <ADialogOverlay
+        v-if="overlay"
+        :class="pohon.overlay({ class: props.pohon?.overlay })"
+      />
 
-      <DialogContent :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })" v-bind="contentProps" @after-enter="emits('after:enter')" @after-leave="emits('after:leave')" v-on="contentEvents">
-        <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
-          <DialogTitle v-if="title || !!slots.title">
+      <ADialogContent
+        :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
+        v-bind="contentProps"
+        @after-enter="emits('after:enter')"
+        @after-leave="emits('after:leave')"
+        v-on="contentEvents"
+      >
+        <AVisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
+          <ADialogTitle v-if="title || !!slots.title">
             <slot name="title">
               {{ title }}
             </slot>
-          </DialogTitle>
+          </ADialogTitle>
 
-          <DialogDescription v-if="description || !!slots.description">
+          <ADialogDescription v-if="description || !!slots.description">
             <slot name="description">
               {{ description }}
             </slot>
-          </DialogDescription>
-        </VisuallyHidden>
+          </ADialogDescription>
+        </AVisuallyHidden>
 
-        <slot name="content" :close="close">
-          <div v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)" :class="pohon.header({ class: props.pohon?.header })">
-            <slot name="header" :close="close">
+        <slot
+          name="content"
+          :close="close"
+        >
+          <div
+            v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)"
+            :class="pohon.header({ class: props.pohon?.header })"
+          >
+            <slot
+              name="header"
+              :close="close"
+            >
               <div :class="pohon.wrapper({ class: props.pohon?.wrapper })">
-                <DialogTitle v-if="title || !!slots.title" :class="pohon.title({ class: props.pohon?.title })">
+                <ADialogTitle
+                  v-if="title || !!slots.title"
+                  :class="pohon.title({ class: props.pohon?.title })"
+                >
                   <slot name="title">
                     {{ title }}
                   </slot>
-                </DialogTitle>
+                </ADialogTitle>
 
-                <DialogDescription v-if="description || !!slots.description" :class="pohon.description({ class: props.pohon?.description })">
+                <ADialogDescription
+                  v-if="description || !!slots.description"
+                  :class="pohon.description({ class: props.pohon?.description })"
+                >
                   <slot name="description">
                     {{ description }}
                   </slot>
-                </DialogDescription>
+                </ADialogDescription>
               </div>
 
               <slot name="actions" />
 
-              <DialogClose v-if="props.close || !!slots.close" as-child>
-                <slot name="close" :close="close" :ui="ui">
+              <ADialogClose
+                v-if="props.close || !!slots.close"
+                as-child
+              >
+                <slot
+                  name="close"
+                  :close="close"
+                  :pohon="pohon"
+                >
                   <PButton
                     v-if="props.close"
                     :icon="closeIcon || appConfig.pohon.icons.close"
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('modal.close')"
-                    v-bind="(typeof props.close === 'object' ? props.close as Partial<ButtonProps> : {})"
+                    v-bind="(typeof props.close === 'object' ? props.close as Partial<PButtonProps> : {})"
                     :class="pohon.close({ class: props.pohon?.close })"
                   />
                 </slot>
-              </DialogClose>
+              </ADialogClose>
             </slot>
           </div>
 
-          <div v-if="!!slots.body" :class="pohon.body({ class: props.pohon?.body })">
-            <slot name="body" :close="close" />
+          <div
+            v-if="!!slots.body"
+            :class="pohon.body({ class: props.pohon?.body })"
+          >
+            <slot
+              name="body"
+              :close="close"
+            />
           </div>
 
-          <div v-if="!!slots.footer" :class="pohon.footer({ class: props.pohon?.footer })">
-            <slot name="footer" :close="close" />
+          <div
+            v-if="!!slots.footer"
+            :class="pohon.footer({ class: props.pohon?.footer })"
+          >
+            <slot
+              name="footer"
+              :close="close"
+            />
           </div>
         </slot>
-      </DialogContent>
-    </DialogPortal>
-  </DialogRoot>
+      </ADialogContent>
+    </ADialogPortal>
+  </ADialogRoot>
 </template>

@@ -1,11 +1,11 @@
 import type { ComputedRef, InjectionKey } from 'vue';
-import type { FieldGroupProps } from '../components/field-group.vue';
+import type { PFieldGroupProps } from '../components/field-group.vue';
 import type { GetObjectField } from '../types/utils';
 import { computed, inject } from 'vue';
 
 export const fieldGroupInjectionKey: InjectionKey<ComputedRef<{
-  size: FieldGroupProps['size'];
-  orientation: FieldGroupProps['orientation'];
+  size: PFieldGroupProps['size'];
+  orientation: PFieldGroupProps['orientation'];
 }>> = Symbol('pohon.field-group');
 
 interface Props<T> {

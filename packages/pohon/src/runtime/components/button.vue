@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { AvatarProps, LinkProps } from '../types';
+import type { PLinkProps, PAvatarProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 
 import theme from '#build/pohon/button';
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>;
 
-export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'raw' | 'custom'> {
+export interface PButtonProps extends UseComponentIconsProps, Omit<PLinkProps, 'raw' | 'custom'> {
   label?: string;
   /**
    * @defaultValue 'primary'
@@ -35,7 +35,7 @@ export interface ButtonProps extends UseComponentIconsProps, Omit<LinkProps, 'ra
   pohon?: Button['slots'];
 }
 
-export interface ButtonSlots {
+export interface PButtonSlots {
   leading: (props?: object) => any;
   default: (props?: object) => any;
   trailing: (props?: object) => any;
@@ -60,11 +60,11 @@ import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
 
-const props = defineProps<ButtonProps>();
-const slots = defineSlots<ButtonSlots>();
+const props = defineProps<PButtonProps>();
+const slots = defineSlots<PButtonSlots>();
 
 const appConfig = useAppConfig() as Button['AppConfig'];
-const { orientation, size: buttonSize } = useFieldGroup<ButtonProps>(props);
+const { orientation, size: buttonSize } = useFieldGroup<PButtonProps>(props);
 
 const linkProps = useForwardProps(pickLinkProps(props));
 
@@ -150,7 +150,7 @@ const pohon = computed(() =>
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as AvatarProps['size'])"
+          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar, active })"
         />

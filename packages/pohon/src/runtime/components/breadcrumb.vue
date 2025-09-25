@@ -2,27 +2,27 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { APrimitiveProps } from 'akar';
-import type { AvatarProps, IconProps, LinkProps } from '../types';
+import type { IconProps, PLinkProps, PAvatarProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/breadcrumb';
 
 type Breadcrumb = ComponentConfig<typeof theme, AppConfig, 'breadcrumb'>;
 
-export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
+export interface PBreadcrumbItem extends Omit<PLinkProps, 'raw' | 'custom'> {
   label?: string;
   /**
    * @IconifyIcon
    */
   icon?: IconProps['name'];
-  avatar?: AvatarProps;
+  avatar?: PAvatarProps;
   slot?: string;
   class?: any;
   pohon?: Pick<Breadcrumb['slots'], 'item' | 'link' | 'linkLeadingIcon' | 'linkLeadingAvatar' | 'linkLabel' | 'separator' | 'separatorIcon'>;
   [key: string]: any;
 }
 
-export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
+export interface PBreadcrumbProps<T extends PBreadcrumbItem = PBreadcrumbItem> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'
@@ -44,9 +44,9 @@ export interface BreadcrumbProps<T extends BreadcrumbItem = BreadcrumbItem> {
   pohon?: Breadcrumb['slots'];
 }
 
-type SlotProps<T extends BreadcrumbItem> = (props: { item: T; index: number; active?: boolean }) => any;
+type SlotProps<T extends PBreadcrumbItem> = (props: { item: T; index: number; active?: boolean }) => any;
 
-export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
+export type PBreadcrumbSlots<T extends PBreadcrumbItem = PBreadcrumbItem> = {
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': SlotProps<T>;
@@ -56,7 +56,7 @@ export type BreadcrumbSlots<T extends BreadcrumbItem = BreadcrumbItem> = {
 
 </script>
 
-<script setup lang="ts" generic="T extends BreadcrumbItem">
+<script setup lang="ts" generic="T extends PBreadcrumbItem">
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
@@ -70,13 +70,13 @@ import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
 
 const props = withDefaults(
-  defineProps<BreadcrumbProps<T>>(),
+  defineProps<PBreadcrumbProps<T>>(),
   {
     as: 'nav',
     labelKey: 'label',
   },
 );
-const slots = defineSlots<BreadcrumbSlots<T>>();
+const slots = defineSlots<PBreadcrumbSlots<T>>();
 
 const { dir } = useLocale();
 const appConfig = useAppConfig() as Breadcrumb['AppConfig'];
@@ -118,12 +118,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
               })"
             >
               <slot
-                :name="((item.slot || 'item') as keyof BreadcrumbSlots<T>)"
+                :name="((item.slot || 'item') as keyof PBreadcrumbSlots<T>)"
                 :item="item"
                 :index="index"
               >
                 <slot
-                  :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof BreadcrumbSlots<T>)"
+                  :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PBreadcrumbSlots<T>)"
                   :item="item"
                   :active="index === items!.length - 1"
                   :index="index"
@@ -138,7 +138,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                   />
                   <PAvatar
                     v-else-if="item.avatar"
-                    :size="((props.pohon?.linkLeadingAvatarSize || pohon.linkLeadingAvatarSize()) as AvatarProps['size'])"
+                    :size="((props.pohon?.linkLeadingAvatarSize || pohon.linkLeadingAvatarSize()) as PAvatarProps['size'])"
                     v-bind="item.avatar"
                     :class="pohon.linkLeadingAvatar({
                       class: [props.pohon?.linkLeadingAvatar, item.pohon?.linkLeadingAvatar],
@@ -148,11 +148,11 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                 </slot>
 
                 <span
-                  v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof BreadcrumbSlots<T>]"
+                  v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PBreadcrumbSlots<T>]"
                   :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
                 >
                   <slot
-                    :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof BreadcrumbSlots<T>)"
+                    :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PBreadcrumbSlots<T>)"
                     :item="item"
                     :active="index === items!.length - 1"
                     :index="index"
@@ -162,7 +162,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                 </span>
 
                 <slot
-                  :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof BreadcrumbSlots<T>)"
+                  :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PBreadcrumbSlots<T>)"
                   :item="item"
                   :active="index === items!.length - 1"
                   :index="index"

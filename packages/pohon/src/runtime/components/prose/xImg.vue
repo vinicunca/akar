@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 import theme from '#build/ui/prose/img'
 
 type ProseImg = ComponentConfig<typeof theme, AppConfig, 'img', 'ui.prose'>
@@ -16,7 +16,7 @@ export interface ProseImgProps {
    * @defaultValue true
    */
   zoom?: boolean
-  ui?: ProseImg['slots']
+  pohon?: ProseImg['slots']
 }
 </script>
 
@@ -42,7 +42,7 @@ const [DefineImageTemplate, ReuseImageTemplate] = createReusableTemplate()
 
 const open = ref(false)
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.img || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.img || {}) })({
   zoom: props.zoom,
   open: open.value
 }))
@@ -75,7 +75,7 @@ if (props.zoom) {
       :width="width"
       :height="height"
       v-bind="$attrs"
-      :class="ui.base({ class: [props.ui?.base, props.class] })"
+      :class="ui.base({ class: [props.pohon?.base, props.class] })"
     />
   </DefineImageTemplate>
 
@@ -88,9 +88,9 @@ if (props.zoom) {
 
     <DialogPortal>
       <AnimatePresence>
-        <Motion v-if="open" :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :exit="{ opacity: 0 }" :class="ui.overlay({ class: [props.ui?.overlay] })" />
+        <Motion v-if="open" :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" :exit="{ opacity: 0 }" :class="ui.overlay({ class: [props.pohon?.overlay] })" />
 
-        <div v-if="open" :class="ui.content({ class: [props.ui?.content] })" @click="close">
+        <div v-if="open" :class="ui.content({ class: [props.pohon?.content] })" @click="close">
           <Motion as-child :layout-id="layoutId" :transition="{ type: 'spring', bounce: 0.2, duration: 0.4 }">
             <ReuseImageTemplate />
           </Motion>

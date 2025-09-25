@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/tabs'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProseTabs = ComponentConfig<typeof theme, AppConfig, 'tabs', 'ui.prose'>
 
@@ -43,7 +43,7 @@ const model = defineModel<string>()
 
 const appConfig = useAppConfig() as ProseTabs['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.tabs || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.tabs || {}) }))
 
 const rerenderCount = ref(1)
 

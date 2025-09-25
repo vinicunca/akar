@@ -1,6 +1,6 @@
 import type { UseEventBusReturn } from '@vueuse/core';
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
-import type { FormFieldProps } from '../types';
+import type { PFormFieldProps } from '../types';
 import type { FormErrorWithId, FormEvent, FormFieldInjectedOptions, FormInjectedOptions, FormInputEvents } from '../types/form';
 import type { GetObjectField } from '../types/utils';
 import { useDebounceFn } from '@vueuse/core';
@@ -18,7 +18,7 @@ interface Props<T> {
 export const formOptionsInjectionKey: InjectionKey<ComputedRef<FormInjectedOptions>> = Symbol('pohon.form-options');
 export const formBusInjectionKey: InjectionKey<UseEventBusReturn<FormEvent<any>, string>> = Symbol('pohon.form-events');
 export const formStateInjectionKey: InjectionKey<ComputedRef<Record<string, any> | undefined>> = Symbol('pohon.form-state');
-export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<FormFieldProps>> | undefined> = Symbol('pohon.form-field');
+export const formFieldInjectionKey: InjectionKey<ComputedRef<FormFieldInjectedOptions<PFormFieldProps>> | undefined> = Symbol('pohon.form-field');
 export const inputIdInjectionKey: InjectionKey<Ref<string | undefined>> = Symbol('pohon.input-id');
 export const formInputsInjectionKey: InjectionKey<Ref<Record<string, { id?: string; pattern?: RegExp }>>> = Symbol('pohon.form-inputs');
 export const formLoadingInjectionKey: InjectionKey<Readonly<Ref<boolean>>> = Symbol('pohon.form-loading');

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 import theme from '#build/ui/prose/code-group'
 
 type ProseCodeGroup = ComponentConfig<typeof theme, AppConfig, 'codeGroup', 'ui.prose'>
@@ -16,7 +16,7 @@ export interface ProseCodeGroupProps {
    */
   sync?: string
   class?: any
-  ui?: ProseCodeGroup['slots']
+  pohon?: ProseCodeGroup['slots']
 }
 
 export interface ProseCodeGroupSlots {
@@ -41,7 +41,7 @@ const model = defineModel<string>()
 const appConfig = useAppConfig() as ProseCodeGroup['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.codeGroup || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.codeGroup || {}) })())
 
 const rerenderCount = ref(1)
 
@@ -92,14 +92,14 @@ onBeforeUpdate(() => rerenderCount.value++)
 </script>
 
 <template>
-  <TabsRoot v-model="model" :default-value="defaultValue" :unmount-on-hide="false" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <TabsList :class="ui.list({ class: props.ui?.list })">
-      <TabsIndicator :class="ui.indicator({ class: props.ui?.indicator })" />
+  <TabsRoot v-model="model" :default-value="defaultValue" :unmount-on-hide="false" :class="ui.root({ class: [props.pohon?.root, props.class] })">
+    <TabsList :class="ui.list({ class: props.pohon?.list })">
+      <TabsIndicator :class="ui.indicator({ class: props.pohon?.indicator })" />
 
-      <TabsTrigger v-for="(item, index) of items" :key="index" :value="String(index)" :class="ui.trigger({ class: props.ui?.trigger })">
-        <UCodeIcon :icon="item.icon" :filename="item.label" :class="ui.triggerIcon({ class: props.ui?.triggerIcon })" />
+      <TabsTrigger v-for="(item, index) of items" :key="index" :value="String(index)" :class="ui.trigger({ class: props.pohon?.trigger })">
+        <UCodeIcon :icon="item.icon" :filename="item.label" :class="ui.triggerIcon({ class: props.pohon?.triggerIcon })" />
 
-        <span :class="ui.triggerLabel({ class: props.ui?.triggerLabel })">{{ item.label }}</span>
+        <span :class="ui.triggerLabel({ class: props.pohon?.triggerLabel })">{{ item.label }}</span>
       </TabsTrigger>
     </TabsList>
 

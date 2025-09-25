@@ -3,7 +3,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-surround'
 import type { IconProps } from '../../types'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ContentSurround = ComponentConfig<typeof theme, AppConfig, 'contentSurround'>
 
@@ -14,7 +14,7 @@ export interface ContentSurroundLink extends ContentNavigationItem {
    */
   icon?: IconProps['name']
   class?: any
-  ui?: Pick<ContentSurround['slots'], 'link' | 'linkLeading' | 'linkLeadingIcon' | 'linkTitle' | 'linkDescription'>
+  pohon?: Pick<ContentSurround['slots'], 'link' | 'linkLeading' | 'linkLeadingIcon' | 'linkTitle' | 'linkDescription'>
 }
 
 export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSurroundLink> {
@@ -37,7 +37,7 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
   nextIcon?: IconProps['name']
   surround?: T[]
   class?: any
-  ui?: ContentSurround['slots']
+  pohon?: ContentSurround['slots']
 }
 
 type SlotProps<T> = (props: { link: T }) => any
@@ -76,26 +76,26 @@ const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: 
 })
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurround || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentSurround || {}) })())
 </script>
 
 <template>
   <DefineLinkTemplate v-slot="{ link, icon, direction }">
-    <ULink v-if="link" :to="link.path" raw :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], direction })">
+    <ULink v-if="link" :to="link.path" raw :class="ui.link({ class: [props.pohon?.link, link.pohon?.link, link.class], direction })">
       <slot name="link" :link="(link as T)">
-        <div :class="ui.linkLeading({ class: [props.ui?.linkLeading, link.ui?.linkLeading] })">
+        <div :class="ui.linkLeading({ class: [props.pohon?.linkLeading, link.pohon?.linkLeading] })">
           <slot name="link-leading" :link="(link as T)">
-            <UIcon :name="link.icon || icon" :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], direction })" />
+            <UIcon :name="link.icon || icon" :class="ui.linkLeadingIcon({ class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon], direction })" />
           </slot>
         </div>
 
-        <p :class="ui.linkTitle({ class: [props.ui?.linkTitle, link.ui?.linkTitle] })">
+        <p :class="ui.linkTitle({ class: [props.pohon?.linkTitle, link.pohon?.linkTitle] })">
           <slot name="link-title" :link="(link as T)">
             {{ link.title }}
           </slot>
         </p>
 
-        <p :class="ui.linkDescription({ class: [props.ui?.linkDescription, link.ui?.linkDescription] })">
+        <p :class="ui.linkDescription({ class: [props.pohon?.linkDescription, link.pohon?.linkDescription] })">
           <slot name="link-description" :link="(link as T)">
             {{ link.description }}
           </slot>
@@ -105,7 +105,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSurro
     <span v-else class="hidden lg:block">&nbsp;</span>
   </DefineLinkTemplate>
 
-  <Primitive v-if="surround" :as="as" v-bind="$attrs" :class="ui.root({ class: [props.ui?.root, props.class] })">
+  <Primitive v-if="surround" :as="as" v-bind="$attrs" :class="ui.root({ class: [props.pohon?.root, props.class] })">
     <ReuseLinkTemplate :link="surround[0]" :icon="prevIcon || appConfig.ui.icons.arrowLeft" direction="left" />
     <ReuseLinkTemplate :link="surround[1]" :icon="nextIcon || appConfig.ui.icons.arrowRight" direction="right" />
   </Primitive>

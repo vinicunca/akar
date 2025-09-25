@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/pre'
 import type { IconProps } from '../../types'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProsePre = ComponentConfig<typeof theme, AppConfig, 'pre', 'ui.prose'>
 
@@ -15,7 +15,7 @@ export interface ProsePreProps {
   hideHeader?: boolean
   meta?: string
   class?: any
-  ui?: ProsePre['slots']
+  pohon?: ProsePre['slots']
 }
 
 export interface ProsePreSlots {
@@ -40,15 +40,15 @@ const { copy, copied } = useClipboard()
 const appConfig = useAppConfig() as ProsePre['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.pre || {}) })())
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.ui?.root], filename: !!filename })">
-    <div v-if="filename && !hideHeader" :class="ui.header({ class: props.ui?.header })">
-      <UCodeIcon :icon="icon" :filename="filename" :class="ui.icon({ class: props.ui?.icon })" />
+  <div :class="ui.root({ class: [props.pohon?.root], filename: !!filename })">
+    <div v-if="filename && !hideHeader" :class="ui.header({ class: props.pohon?.header })">
+      <UCodeIcon :icon="icon" :filename="filename" :class="ui.icon({ class: props.pohon?.icon })" />
 
-      <span :class="ui.filename({ class: props.ui?.filename })">{{ filename }}</span>
+      <span :class="ui.filename({ class: props.pohon?.filename })">{{ filename }}</span>
     </div>
 
     <UButton
@@ -57,12 +57,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.pre |
       variant="outline"
       size="sm"
       :aria-label="t('prose.pre.copy')"
-      :class="ui.copy({ class: props.ui?.copy })"
+      :class="ui.copy({ class: props.pohon?.copy })"
       tabindex="-1"
       @click="copy(props.code || '')"
     />
 
-    <pre :class="ui.base({ class: [props.ui?.base, props.class] })" v-bind="$attrs"><slot /></pre>
+    <pre :class="ui.base({ class: [props.pohon?.base, props.class] })" v-bind="$attrs"><slot /></pre>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 import theme from '#build/ui/prose/hr'
 
 type ProseHr = ComponentConfig<typeof theme, AppConfig, 'hr', 'ui.prose'>
@@ -19,7 +19,7 @@ const props = defineProps<ProseHrProps>()
 
 const appConfig = useAppConfig() as ProseHr['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.hr || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.hr || {}) }))
 </script>
 
 <template>

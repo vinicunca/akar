@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { SelectArrowProps, SelectContentEmits, SelectContentProps, SelectRootEmits, SelectRootProps } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { AvatarProps, ChipProps, IconProps, InputProps } from '../types';
+import type { IconProps, InputProps, PAvatarProps, PChipProps } from '../types';
 import type { AcceptableValue, ArrayOrNested, EmitsToProps, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/select';
@@ -16,8 +16,8 @@ export type SelectItem = SelectValue | {
    * @IconifyIcon
    */
   icon?: IconProps['name'];
-  avatar?: AvatarProps;
-  chip?: ChipProps;
+  avatar?: PAvatarProps;
+  chip?: PChipProps;
   /**
    * The item type.
    * @defaultValue 'item'
@@ -25,7 +25,7 @@ export type SelectItem = SelectValue | {
   type?: 'label' | 'separator' | 'item';
   value?: SelectValue;
   disabled?: boolean;
-  onSelect?: (e?: Event) => void;
+  onSelect?: (event?: Event) => void;
   class?: any;
   pohon?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>;
   [key: string]: any;
@@ -144,13 +144,13 @@ import { SelectItem as RSelectItem, SelectArrow, SelectContent, SelectGroup, Sel
 import { defu } from 'defu';
 import { computed, onMounted, ref, toRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
-import { useFieldGroup } from '../composables/useFieldGroup';
 import { useFormField } from '../composables/use-form-field';
+import { useFieldGroup } from '../composables/useFieldGroup';
 import { usePortal } from '../composables/usePortal';
 import { get, getDisplayValue, isArrayOfArray } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
-import UChip from './Chip.vue';
+import PChip from './Chip.vue';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
@@ -201,18 +201,26 @@ const items = computed(() => groups.value.flatMap((group) => group) as Array<T>)
 function displayValue(value: GetItemValue<T, VK> | Array<GetItemValue<T, VK>>): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK>>(items.value, item, {
-        labelKey: props.labelKey,
-        valueKey: props.valueKey,
+      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK>>({
+        items: items.value,
+        value: item,
+        options: {
+          labelKey: props.labelKey,
+          valueKey: props.valueKey,
+        },
       }))
       .filter((v): v is string => v != null && v !== '');
 
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined;
   }
 
-  return getDisplayValue<Array<T>, GetItemValue<T, VK>>(items.value, value as GetItemValue<T, VK>, {
-    labelKey: props.labelKey,
-    valueKey: props.valueKey,
+  return getDisplayValue<Array<T>, GetItemValue<T, VK>>({
+    items: items.value,
+    value: value as GetItemValue<T, VK>,
+    options: {
+      labelKey: props.labelKey,
+      valueKey: props.valueKey,
+    },
   });
 }
 
@@ -297,7 +305,7 @@ defineExpose({
           />
           <PAvatar
             v-else-if="!!avatar"
-            :size="((props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as AvatarProps['size'])"
+            :size="((props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
             :class="pohon.itemLeadingAvatar({ class: props.pohon?.itemLeadingAvatar })"
           />
@@ -368,19 +376,19 @@ defineExpose({
             >
               <SelectLabel
                 v-if="isSelectItem(item) && item.type === 'label'"
-                :class="pohon.label({ class: [props.pohon?.label, item.ui?.label, item.class] })"
+                :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
               >
                 {{ get(item, props.labelKey as string) }}
               </SelectLabel>
 
               <SelectSeparator
                 v-else-if="isSelectItem(item) && item.type === 'separator'"
-                :class="pohon.separator({ class: [props.pohon?.separator, item.ui?.separator, item.class] })"
+                :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator, item.class] })"
               />
 
               <RSelectItem
                 v-else
-                :class="pohon.item({ class: [props.pohon?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
+                :class="pohon.item({ class: [props.pohon?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
                 :value="isSelectItem(item) ? get(item, props.valueKey as string) : item"
                 @select="isSelectItem(item) && item.onSelect?.($event)"
@@ -398,25 +406,25 @@ defineExpose({
                     <PIcon
                       v-if="isSelectItem(item) && item.icon"
                       :name="item.icon"
-                      :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.ui?.itemLeadingIcon] })"
+                      :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
                     />
                     <PAvatar
                       v-else-if="isSelectItem(item) && item.avatar"
-                      :size="((item.ui?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as AvatarProps['size'])"
+                      :size="((item.pohon?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
                       v-bind="item.avatar"
-                      :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })"
+                      :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
                     />
-                    <UChip
+                    <PChip
                       v-else-if="isSelectItem(item) && item.chip"
-                      :size="((item.ui?.itemLeadingChipSize || props.pohon?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as ChipProps['size'])"
+                      :size="((item.pohon?.itemLeadingChipSize || props.pohon?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
-                      :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.ui?.itemLeadingChip] })"
+                      :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
                     />
                   </slot>
 
-                  <SelectItemText :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
+                  <SelectItemText :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel] })">
                     <slot
                       name="item-label"
                       :item="(item as NestedItem<T>)"
@@ -426,7 +434,7 @@ defineExpose({
                     </slot>
                   </SelectItemText>
 
-                  <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
+                  <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })">
                     <slot
                       name="item-trailing"
                       :item="(item as NestedItem<T>)"
@@ -436,7 +444,7 @@ defineExpose({
                     <SelectItemIndicator as-child>
                       <PIcon
                         :name="selectedIcon || appConfig.pohon.icons.check"
-                        :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })"
+                        :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
                       />
                     </SelectItemIndicator>
                   </span>

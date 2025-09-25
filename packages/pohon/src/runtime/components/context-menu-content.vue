@@ -1,14 +1,17 @@
 <script lang="ts">
 import type theme from '#build/pohon/context-menu';
 import type { AppConfig } from '@nuxt/schema';
-import type { ContextMenuContentEmits as RekaContextMenuContentEmits, ContextMenuContentProps as RekaContextMenuContentProps } from 'akar';
-import type { AvatarProps, ContextMenuItem, ContextMenuSlots, IconProps, KbdProps } from '../types';
+import type {
+  AContextMenuContentEmits as AkarContextMenuContentEmits,
+  AContextMenuContentProps as AkarContextMenuContentProps,
+} from 'akar';
+import type { IconProps, KbdProps, PAvatarProps, PContextMenuItem, PContextMenuSlots } from '../types';
 import type { ArrayOrNested, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>;
 
-interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> extends Omit<RekaContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
+interface ContextMenuContentProps<T extends ArrayOrNested<PContextMenuItem>> extends Omit<AkarContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> {
   items?: T;
   portal?: boolean | string | HTMLElement;
   sub?: boolean;
@@ -27,24 +30,25 @@ interface ContextMenuContentProps<T extends ArrayOrNested<ContextMenuItem>> exte
   externalIcon?: boolean | IconProps['name'];
   class?: any;
   pohon: { [K in keyof Required<ContextMenu['slots']>]: (props?: Record<string, any>) => string };
-  uiOverride?: ContextMenu['slots'];
+  pohonOverride?: ContextMenu['slots'];
 }
 
-interface ContextMenuContentEmits extends RekaContextMenuContentEmits {}
+interface ContextMenuContentEmits extends AkarContextMenuContentEmits {}
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<ContextMenuItem>">
+<script setup lang="ts" generic="T extends ArrayOrNested<PContextMenuItem>">
 import { useAppConfig } from '#imports';
+import { isString, omit } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
-import { ContextMenu } from 'akar/namespaced';
+import { AContextMenu } from 'akar/namespaced';
 import { computed, toRef } from 'vue';
 import { useLocale } from '../composables/use-locale';
-import { usePortal } from '../composables/usePortal';
-import { get, isArrayOfArray, omit } from '../utils';
+import { usePortal } from '../composables/use-portal';
+import { getProp, isArrayOfArray } from '../utils';
 import { pickLinkProps } from '../utils/link';
 import PAvatar from './avatar.vue';
-import UContextMenuContent from './context-menu-content.vue';
+import PContextMenuContent from './context-menu-content.vue';
 import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
@@ -52,36 +56,61 @@ import PKbd from './xKbd.vue';
 
 const props = defineProps<ContextMenuContentProps<T>>();
 const emits = defineEmits<ContextMenuContentEmits>();
-const slots = defineSlots<ContextMenuSlots<T>>();
+const slots = defineSlots<PContextMenuSlots<T>>();
 
 const { dir } = useLocale();
 const appConfig = useAppConfig();
 
 const portalProps = usePortal(toRef(() => props.portal));
-const contentProps = useForwardPropsEmits(reactiveOmit(props, 'sub', 'items', 'portal', 'labelKey', 'checkedIcon', 'loadingIcon', 'externalIcon', 'class', 'ui', 'uiOverride'), emits);
+const contentProps = useForwardPropsEmits(
+  reactiveOmit(
+    props,
+    'sub',
+    'items',
+    'portal',
+    'labelKey',
+    'checkedIcon',
+    'loadingIcon',
+    'externalIcon',
+    'class',
+    'pohon',
+    'pohonOverride',
+  ),
+  emits,
+);
 const getProxySlots = () => omit(slots, ['default']);
 
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: ContextMenuItem; active?: boolean; index: number }>();
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
+  item: PContextMenuItem;
+  active?: boolean;
+  index: number;
+}>();
 
-const childrenIcon = computed(() => dir.value === 'rtl' ? appConfig.pohon.icons.chevronLeft : appConfig.pohon.icons.chevronRight);
-const groups = computed<Array<Array<ContextMenuItem>>>(() =>
-  props.items?.length
-    ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
-    : [],
+const childrenIcon = computed(() =>
+  dir.value === 'rtl'
+    ? appConfig.pohon.icons.chevronLeft
+    : appConfig.pohon.icons.chevronRight,
 );
+const groups = computed<Array<Array<PContextMenuItem>>>(() => {
+  if (props.items?.length) {
+    return isArrayOfArray(props.items)
+      ? props.items
+      : [props.items];
+  }
+
+  return [];
+});
 </script>
 
 <template>
   <DefineItemTemplate v-slot="{ item, active, index }">
     <slot
-      :name="((item.slot || 'item') as keyof ContextMenuSlots<T>)"
+      :name="((item.slot || 'item') as keyof PContextMenuSlots<T>)"
       :item="item"
       :index="index"
     >
       <slot
-        :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof ContextMenuSlots<T>)"
+        :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PContextMenuSlots<T>)"
         :item="item"
         :active="active"
         :index="index"
@@ -89,44 +118,55 @@ const groups = computed<Array<Array<ContextMenuItem>>>(() =>
         <PIcon
           v-if="item.loading"
           :name="loadingIcon || appConfig.pohon.icons.loading"
-          :class="pohon.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, loading: true })"
+          :class="pohon.itemLeadingIcon({
+            class: [pohonOverride?.itemLeadingIcon, item.pohon?.itemLeadingIcon],
+            color: item?.color,
+            loading: true,
+          })"
         />
         <PIcon
           v-else-if="item.icon"
           :name="item.icon"
-          :class="pohon.itemLeadingIcon({ class: [uiOverride?.itemLeadingIcon, item.ui?.itemLeadingIcon], color: item?.color, active })"
+          :class="pohon.itemLeadingIcon({
+            class: [pohonOverride?.itemLeadingIcon, item.pohon?.itemLeadingIcon],
+            color: item?.color,
+            active,
+          })"
         />
         <PAvatar
           v-else-if="item.avatar"
-          :size="((item.ui?.itemLeadingAvatarSize || uiOverride?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as AvatarProps['size'])"
+          :size="((item.pohon?.itemLeadingAvatarSize || pohonOverride?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="item.avatar"
-          :class="pohon.itemLeadingAvatar({ class: [uiOverride?.itemLeadingAvatar, item.ui?.itemLeadingAvatar], active })"
+          :class="pohon.itemLeadingAvatar({
+            class: [pohonOverride?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar],
+            active,
+          })"
         />
       </slot>
 
       <span
-        v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof ContextMenuSlots<T>]"
-        :class="pohon.itemLabel({ class: [uiOverride?.itemLabel, item.ui?.itemLabel], active })"
+        v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PContextMenuSlots<T>]"
+        :class="pohon.itemLabel({ class: [pohonOverride?.itemLabel, item.pohon?.itemLabel], active })"
       >
         <slot
-          :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof ContextMenuSlots<T>)"
+          :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PContextMenuSlots<T>)"
           :item="item"
           :active="active"
           :index="index"
         >
-          {{ get(item, props.labelKey as string) }}
+          {{ getProp({ object: item, path: props.labelKey as string }) }}
         </slot>
 
         <PIcon
           v-if="item.target === '_blank' && externalIcon !== false"
           :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
-          :class="pohon.itemLabelExternalIcon({ class: [uiOverride?.itemLabelExternalIcon, item.ui?.itemLabelExternalIcon], color: item?.color, active })"
+          :class="pohon.itemLabelExternalIcon({ class: [pohonOverride?.itemLabelExternalIcon, item.pohon?.itemLabelExternalIcon], color: item?.color, active })"
         />
       </span>
 
-      <span :class="pohon.itemTrailing({ class: [uiOverride?.itemTrailing, item.ui?.itemTrailing] })">
+      <span :class="pohon.itemTrailing({ class: [pohonOverride?.itemTrailing, item.pohon?.itemTrailing] })">
         <slot
-          :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof ContextMenuSlots<T>)"
+          :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PContextMenuSlots<T>)"
           :item="item"
           :active="active"
           :index="index"
@@ -134,34 +174,34 @@ const groups = computed<Array<Array<ContextMenuItem>>>(() =>
           <PIcon
             v-if="item.children?.length"
             :name="childrenIcon"
-            :class="pohon.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color, active })"
+            :class="pohon.itemTrailingIcon({ class: [pohonOverride?.itemTrailingIcon, item.pohon?.itemTrailingIcon], color: item?.color, active })"
           />
           <span
             v-else-if="item.kbds?.length"
-            :class="pohon.itemTrailingKbds({ class: [uiOverride?.itemTrailingKbds, item.ui?.itemTrailingKbds] })"
+            :class="pohon.itemTrailingKbds({ class: [pohonOverride?.itemTrailingKbds, item.pohon?.itemTrailingKbds] })"
           >
             <PKbd
               v-for="(kbd, kbdIndex) in item.kbds"
               :key="kbdIndex"
-              :size="((item.ui?.itemTrailingKbdsSize || uiOverride?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as KbdProps['size'])"
+              :size="((item.pohon?.itemTrailingKbdsSize || pohonOverride?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as KbdProps['size'])"
               v-bind="isString(kbd) ? { value: kbd } : kbd"
             />
           </span>
         </slot>
 
-        <ContextMenu.ItemIndicator as-child>
+        <AContextMenu.ItemIndicator as-child>
           <PIcon
             :name="checkedIcon || appConfig.pohon.icons.check"
-            :class="pohon.itemTrailingIcon({ class: [uiOverride?.itemTrailingIcon, item.ui?.itemTrailingIcon], color: item?.color })"
+            :class="pohon.itemTrailingIcon({ class: [pohonOverride?.itemTrailingIcon, item.pohon?.itemTrailingIcon], color: item?.color })"
           />
-        </ContextMenu.ItemIndicator>
+        </AContextMenu.ItemIndicator>
       </span>
     </slot>
   </DefineItemTemplate>
 
-  <ContextMenu.Portal v-bind="portalProps">
+  <AContextMenu.Portal v-bind="portalProps">
     <component
-      :is="sub ? ContextMenu.SubContent : ContextMenu.Content"
+      :is="sub ? AContextMenu.SubContent : AContextMenu.Content"
       :class="props.class"
       v-bind="contentProps"
     >
@@ -169,53 +209,53 @@ const groups = computed<Array<Array<ContextMenuItem>>>(() =>
 
       <div
         role="presentation"
-        :class="pohon.viewport({ class: uiOverride?.viewport })"
+        :class="pohon.viewport({ class: pohonOverride?.viewport })"
       >
-        <ContextMenu.Group
+        <AContextMenu.Group
           v-for="(group, groupIndex) in groups"
           :key="`group-${groupIndex}`"
-          :class="pohon.group({ class: uiOverride?.group })"
+          :class="pohon.group({ class: pohonOverride?.group })"
         >
           <template
             v-for="(item, index) in group"
             :key="`group-${groupIndex}-${index}`"
           >
-            <ContextMenu.Label
+            <AContextMenu.Label
               v-if="item.type === 'label'"
-              :class="pohon.label({ class: [uiOverride?.label, item.ui?.label, item.class] })"
+              :class="pohon.label({ class: [pohonOverride?.label, item.pohon?.label, item.class] })"
             >
               <ReuseItemTemplate
                 :item="item"
                 :index="index"
               />
-            </ContextMenu.Label>
-            <ContextMenu.Separator
+            </AContextMenu.Label>
+            <AContextMenu.Separator
               v-else-if="item.type === 'separator'"
-              :class="pohon.separator({ class: [uiOverride?.separator, item.ui?.separator, item.class] })"
+              :class="pohon.separator({ class: [pohonOverride?.separator, item.pohon?.separator, item.class] })"
             />
-            <ContextMenu.Sub
+            <AContextMenu.Sub
               v-else-if="item?.children?.length"
               :open="item.open"
               :default-open="item.defaultOpen"
             >
-              <ContextMenu.SubTrigger
+              <AContextMenu.SubTrigger
                 as="button"
                 type="button"
                 :disabled="item.disabled"
-                :text-value="get(item, props.labelKey as string)"
-                :class="pohon.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+                :text-value="getProp({ object: item, path: props.labelKey as string })"
+                :class="pohon.item({ class: [pohonOverride?.item, item.pohon?.item, item.class], color: item?.color })"
               >
                 <ReuseItemTemplate
                   :item="item"
                   :index="index"
                 />
-              </ContextMenu.SubTrigger>
+              </AContextMenu.SubTrigger>
 
-              <UContextMenuContent
+              <PContextMenuContent
                 sub
                 :class="props.class"
-                :ui="ui"
-                :ui-override="uiOverride"
+                :pohon="pohon"
+                :pohon-override="pohonOverride"
                 :portal="portal"
                 :items="(item.children as T)"
                 :align-offset="-4"
@@ -230,18 +270,18 @@ const groups = computed<Array<Array<ContextMenuItem>>>(() =>
                   #[name]="slotData"
                 >
                   <slot
-                    :name="(name as keyof ContextMenuSlots<T>)"
+                    :name="(name as keyof PContextMenuSlots<T>)"
                     v-bind="slotData"
                   />
                 </template>
-              </UContextMenuContent>
-            </ContextMenu.Sub>
-            <ContextMenu.CheckboxItem
+              </PContextMenuContent>
+            </AContextMenu.Sub>
+            <AContextMenu.CheckboxItem
               v-else-if="item.type === 'checkbox'"
               :model-value="item.checked"
               :disabled="item.disabled"
-              :text-value="get(item, props.labelKey as string)"
-              :class="pohon.item({ class: [uiOverride?.item, item.ui?.item, item.class], color: item?.color })"
+              :text-value="getProp({ object: item, path: props.labelKey as string })"
+              :class="pohon.item({ class: [pohonOverride?.item, item.pohon?.item, item.class], color: item?.color })"
               @update:model-value="item.onUpdateChecked"
               @select="item.onSelect"
             >
@@ -249,22 +289,22 @@ const groups = computed<Array<Array<ContextMenuItem>>>(() =>
                 :item="item"
                 :index="index"
               />
-            </ContextMenu.CheckboxItem>
-            <ContextMenu.Item
+            </AContextMenu.CheckboxItem>
+            <AContextMenu.Item
               v-else
               as-child
               :disabled="item.disabled"
-              :text-value="get(item, props.labelKey as string)"
+              :text-value="getProp({ object: item, path: props.labelKey as string })"
               @select="item.onSelect"
             >
               <PLink
                 v-slot="{ active, ...slotProps }"
-                v-bind="pickLinkProps(item as Omit<ContextMenuItem, 'type'>)"
+                v-bind="pickLinkProps(item as Omit<PContextMenuItem, 'type'>)"
                 custom
               >
                 <PLinkBase
                   v-bind="slotProps"
-                  :class="pohon.item({ class: [uiOverride?.item, item.ui?.item, item.class], active, color: item?.color })"
+                  :class="pohon.item({ class: [pohonOverride?.item, item.pohon?.item, item.class], active, color: item?.color })"
                 >
                   <ReuseItemTemplate
                     :item="item"
@@ -273,14 +313,14 @@ const groups = computed<Array<Array<ContextMenuItem>>>(() =>
                   />
                 </PLinkBase>
               </PLink>
-            </ContextMenu.Item>
+            </AContextMenu.Item>
           </template>
-        </ContextMenu.Group>
+        </AContextMenu.Group>
       </div>
 
       <slot />
 
       <slot name="content-bottom" />
     </component>
-  </ContextMenu.Portal>
+  </AContextMenu.Portal>
 </template>

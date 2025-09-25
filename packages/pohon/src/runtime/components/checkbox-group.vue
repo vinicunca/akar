@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ACheckboxGroupRootEmits, ACheckboxGroupRootProps, APrimitiveProps } from 'akar';
-import type { CheckboxProps } from '../types';
+import type { PCheckboxProps } from '../types';
 import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/checkbox-group';
@@ -9,22 +9,22 @@ import theme from '#build/pohon/checkbox-group';
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>;
 
 export type CheckboxGroupValue = AcceptableValue;
-export type CheckboxGroupItem = CheckboxGroupValue | {
+export type PCheckboxGroupItem = CheckboxGroupValue | {
   label?: string;
   description?: string;
   disabled?: boolean;
   value?: string;
   class?: any;
-  pohon?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<CheckboxProps>['pohon'], 'root'>;
+  pohon?: Pick<CheckboxGroup['slots'], 'item'> & Omit<Required<PCheckboxProps>['pohon'], 'root'>;
   [key: string]: any;
 };
 
-export interface CheckboxGroupProps<
-  T extends Array<CheckboxGroupItem> = Array<CheckboxGroupItem>,
+export interface PCheckboxGroupProps<
+  T extends Array<PCheckboxGroupItem> = Array<PCheckboxGroupItem>,
   VK extends GetItemKeys<T> = 'value',
 > extends
   Pick<ACheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>,
-  Pick<CheckboxProps, 'color' | 'indicator' | 'icon'> {
+  Pick<PCheckboxProps, 'color' | 'indicator' | 'icon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -65,23 +65,23 @@ export interface CheckboxGroupProps<
    */
   orientation?: ACheckboxGroupRootProps['orientation'];
   class?: any;
-  pohon?: CheckboxGroup['slots'] & CheckboxProps['pohon'];
+  pohon?: CheckboxGroup['slots'] & PCheckboxProps['pohon'];
 }
 
-export type CheckboxGroupEmits<T extends Array<CheckboxGroupItem> = Array<CheckboxGroupItem>> = ACheckboxGroupRootEmits<T[number]> & {
+export type PCheckboxGroupEmits<T extends Array<PCheckboxGroupItem> = Array<PCheckboxGroupItem>> = ACheckboxGroupRootEmits<T[number]> & {
   change: [event: Event];
 };
 
-type SlotProps<T extends CheckboxGroupItem> = (props: { item: T & { id: string } }) => any;
+type SlotProps<T extends PCheckboxGroupItem> = (props: { item: T & { id: string } }) => any;
 
-export interface CheckboxGroupSlots<T extends Array<CheckboxGroupItem> = Array<CheckboxGroupItem>> {
+export interface PCheckboxGroupSlots<T extends Array<PCheckboxGroupItem> = Array<PCheckboxGroupItem>> {
   legend: (props?: object) => any;
   label: SlotProps<T[number]>;
   description: SlotProps<T[number]>;
 }
 </script>
 
-<script setup lang="ts" generic="T extends CheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'">
+<script setup lang="ts" generic="T extends PCheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { useAppConfig } from '#imports';
 import { isNumber, isString, omit } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
@@ -92,22 +92,39 @@ import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PCheckbox from './checkbox.vue';
 
-const props = withDefaults(defineProps<CheckboxGroupProps<T, VK>>(), {
-  labelKey: 'label',
-  descriptionKey: 'description',
-  valueKey: 'value' as never,
-  orientation: 'vertical',
-});
-const emits = defineEmits<CheckboxGroupEmits<T>>();
-const slots = defineSlots<CheckboxGroupSlots<T>>();
+const props = withDefaults(
+  defineProps<PCheckboxGroupProps<T, VK>>(),
+  {
+    labelKey: 'label',
+    descriptionKey: 'description',
+    valueKey: 'value' as never,
+    orientation: 'vertical',
+  },
+);
+const emits = defineEmits<PCheckboxGroupEmits<T>>();
+const slots = defineSlots<PCheckboxGroupSlots<T>>();
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig'];
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'), emits);
-const checkboxProps = useForwardProps(reactivePick(props, 'variant', 'indicator', 'icon'));
+const rootProps = useForwardPropsEmits(
+  reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'),
+  emits,
+);
+const checkboxProps = useForwardProps(
+  reactivePick(props, 'variant', 'indicator', 'icon'),
+);
 const getProxySlots = () => omit(slots, ['legend']);
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<CheckboxGroupProps<T>>(props, { bind: false });
+const {
+  emitFormChange,
+  emitFormInput,
+  color,
+  name,
+  size,
+  id: _id,
+  disabled,
+  ariaAttrs,
+} = useFormField<PCheckboxGroupProps<T>>(props, { bind: false });
 const id = _id.value ?? useId();
 
 const pohon = computed(() => uv({ extend: theme, ...(appConfig.pohon?.checkboxGroup || {}) })({
@@ -196,14 +213,14 @@ function onUpdate(value: any) {
         :name="name"
         :disabled="item.disabled || disabled"
         :ui="{ ...(props.pohon ? omit(props.pohon, ['root']) : undefined), ...(item.ui || {}) }"
-        :class="pohon.item({ class: [props.pohon?.item, item.ui?.item, item.class] })"
+        :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
       >
         <template
           v-for="(_, name) in getProxySlots()"
           #[name]
         >
           <slot
-            :name="(name as keyof CheckboxGroupSlots<T>)"
+            :name="(name as keyof PCheckboxGroupSlots<T>)"
             :item="item"
           />
         </template>

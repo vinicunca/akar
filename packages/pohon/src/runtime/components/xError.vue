@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import type { NuxtError } from '#app'
-import theme from '#build/pohon/error'
-import type { ButtonProps } from '../types'
-import type { ComponentConfig } from '../types/uv'
+import type { NuxtError } from '#app';
+import type { AppConfig } from '@nuxt/schema';
+import type { PButtonProps } from '../types';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/error';
 
-type Error = ComponentConfig<typeof theme, AppConfig, 'error'>
+type Error = ComponentConfig<typeof theme, AppConfig, 'error'>;
 
 export interface ErrorProps {
   /**
@@ -13,75 +13,89 @@ export interface ErrorProps {
    * @defaultValue 'div'
    */
   as?: APrimitiveProps['as'];
-  error?: Partial<NuxtError & { message: string }>
+  error?: Partial<NuxtError & { message: string }>;
   /**
    * The URL to redirect to when the error is cleared.
    * @defaultValue '/'
    */
-  redirect?: string
+  redirect?: string;
   /**
    * Display a button to clear the error in the links slot.
    * `{ size: 'lg', color: 'primary', variant: 'solid', label: 'Back to home' }`{lang="ts-type"}
    * @defaultValue true
    */
-  clear?: boolean | Partial<ButtonProps>
-  class?: any
-  pohon?: Error['slots']
+  clear?: boolean | Partial<PButtonProps>;
+  class?: any;
+  pohon?: Error['slots'];
 }
 
 export interface ErrorSlots {
-  default(props?: object): any
-  statusCode(props?: object): any
-  statusMessage(props?: object): any
-  message(props?: object): any
-  links(props?: object): any
+  default: (props?: object) => any;
+  statusCode: (props?: object) => any;
+  statusMessage: (props?: object) => any;
+  message: (props?: object) => any;
+  links: (props?: object) => any;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { APrimitive } from 'akar'
-import { clearError, useAppConfig } from '#imports'
-import { useLocale } from '../composables/use-locale'
-import { uv } from '../utils/uv'
-import PButton from './button.vue'
+import { clearError, useAppConfig } from '#imports';
+import { APrimitive } from 'akar';
+import { computed } from 'vue';
+import { useLocale } from '../composables/use-locale';
+import { uv } from '../utils/uv';
+import PButton from './button.vue';
 
 const props = withDefaults(defineProps<ErrorProps>(), {
   as: 'main',
   redirect: '/',
-  clear: true
-})
-const slots = defineSlots<ErrorSlots>()
+  clear: true,
+});
+const slots = defineSlots<ErrorSlots>();
 
-const { t } = useLocale()
-const appConfig = useAppConfig() as Error['AppConfig']
+const { t } = useLocale();
+const appConfig = useAppConfig() as Error['AppConfig'];
 
-// eslint-disable-next-line vue/no-dupe-keys
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.error || {}) })())
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.error || {}) })());
 
 function handleError() {
-  clearError({ redirect: props.redirect })
+  clearError({ redirect: props.redirect });
 }
 </script>
 
 <template>
-  <APrimitive :as="as" :class="pohon.root({ class: [props.pohon?.root, props.class] })">
-    <p v-if="!!props.error?.statusCode || !!slots.statusCode" :class="pohon.statusCode({ class: props.pohon?.statusCode })">
+  <APrimitive
+    :as="as"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+  >
+    <p
+      v-if="!!props.error?.statusCode || !!slots.statusCode"
+      :class="pohon.statusCode({ class: props.pohon?.statusCode })"
+    >
       <slot name="statusCode">
         {{ props.error?.statusCode }}
       </slot>
     </p>
-    <h1 v-if="!!props.error?.statusMessage || !!slots.statusMessage" :class="pohon.statusMessage({ class: props.pohon?.statusMessage })">
+    <h1
+      v-if="!!props.error?.statusMessage || !!slots.statusMessage"
+      :class="pohon.statusMessage({ class: props.pohon?.statusMessage })"
+    >
       <slot name="statusMessage">
         {{ props.error?.statusMessage }}
       </slot>
     </h1>
-    <p v-if="(props.error?.message && props.error.message !== props.error.statusMessage) || !!slots.message" :class="pohon.message({ class: props.pohon?.message })">
+    <p
+      v-if="(props.error?.message && props.error.message !== props.error.statusMessage) || !!slots.message"
+      :class="pohon.message({ class: props.pohon?.message })"
+    >
       <slot name="message">
         {{ props.error?.message }}
       </slot>
     </p>
-    <div v-if="!!clear || !!slots.links" :class="pohon.links({ class: props.pohon?.links })">
+    <div
+      v-if="!!clear || !!slots.links"
+      :class="pohon.links({ class: props.pohon?.links })"
+    >
       <slot name="links">
         <PButton
           v-if="clear"
@@ -89,7 +103,7 @@ function handleError() {
           color="primary"
           variant="solid"
           :label="t('error.clear')"
-          v-bind="(typeof clear === 'object' ? clear as Partial<ButtonProps> : {})"
+          v-bind="(typeof clear === 'object' ? clear as Partial<PButtonProps> : {})"
           @click="handleError"
         />
       </slot>

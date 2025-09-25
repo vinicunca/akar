@@ -1,307 +1,353 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import type { UseFileDialogReturn } from '@vueuse/core'
-import theme from '#build/pohon/file-upload'
-import type { ButtonProps, IconProps } from '../types'
-import type { ComponentConfig } from '../types/uv'
+import type { AppConfig } from '@nuxt/schema';
+import type { UseFileDialogReturn } from '@vueuse/core';
+import type { IconProps, PButtonProps } from '../types';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/file-upload';
 
-type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>
+type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>;
 
-export interface FileUploadProps<M extends boolean = false> {
+export interface PFileUploadProps<M extends boolean = false> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: APrimitiveProps['as'];
-  id?: string
-  name?: string
+  id?: string;
+  name?: string;
   /**
    * The icon to display.
    * @defaultValue appConfig.pohon.icons.upload
    * @IconifyIcon
    */
-  icon?: IconProps['name']
-  label?: string
-  description?: string
+  icon?: IconProps['name'];
+  label?: string;
+  description?: string;
   /**
    * @defaultValue 'primary'
    */
-  color?: FileUpload['variants']['color']
+  color?: FileUpload['variants']['color'];
   /**
    * The `button` variant is only available when `multiple` is `false`.
    * @defaultValue 'area'
    */
-  variant?: FileUpload['variants']['variant']
+  variant?: FileUpload['variants']['variant'];
   /**
    * @defaultValue 'md'
    */
-  size?: FileUpload['variants']['size']
+  size?: FileUpload['variants']['size'];
   /**
    * The layout of how files are displayed.
    * Only works when `variant` is `area`.
    * @defaultValue 'list'
    */
-  layout?: FileUpload['variants']['layout']
+  layout?: FileUpload['variants']['layout'];
   /**
    * The position of the files.
    * Only works when `variant` is `area` and when `layout` is `list`.
    * @defaultValue 'outside'
    */
-  position?: FileUpload['variants']['position']
+  position?: FileUpload['variants']['position'];
   /** Highlight the ring color like a focus state. */
-  highlight?: boolean
+  highlight?: boolean;
   /**
    * Specifies the allowed file types for the input. Provide a comma-separated list of MIME types or file extensions (e.g., "image/png,application/pdf,.jpg").
    * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/accept
    * @defaultValue '*'
    */
-  accept?: string
-  multiple?: M & boolean
+  accept?: string;
+  multiple?: M & boolean;
   /**
    * Reset the file input when the dialog is opened.
    * @defaultValue false
    */
-  reset?: boolean
+  reset?: boolean;
   /**
    * Create a zone that allows the user to drop files onto it.
    * @defaultValue true
    */
-  dropzone?: boolean
+  dropzone?: boolean;
   /**
    * Make the dropzone interactive when the user is clicking on it.
    * @defaultValue true
    */
-  interactive?: boolean
-  required?: boolean
-  disabled?: boolean
+  interactive?: boolean;
+  required?: boolean;
+  disabled?: boolean;
   /**
    * The icon to display for the file.
    * @defaultValue appConfig.pohon.icons.file
    * @IconifyIcon
    */
-  fileIcon?: IconProps['name']
+  fileIcon?: IconProps['name'];
   /**
    * Configure the delete button for the file.
    * When `layout` is `grid`, the default is `{ color: 'neutral', variant: 'solid', size: 'xs' }`{lang="ts-type"}
    * When `layout` is `list`, the default is `{ color: 'neutral', variant: 'link' }`{lang="ts-type"}
    */
-  fileDelete?: boolean | Partial<ButtonProps>
+  fileDelete?: boolean | Partial<PButtonProps>;
   /**
    * The icon displayed to delete a file.
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  fileDeleteIcon?: IconProps['name']
-  class?: any
-  pohon?: FileUpload['slots']
+  fileDeleteIcon?: IconProps['name'];
+  class?: any;
+  pohon?: FileUpload['slots'];
 }
 
 export interface FileUploadEmits {
-  change: [event: Event]
+  change: [event: Event];
 }
 
-type FileUploadFiles<M> = (M extends true ? File[] : File) | null
+type FileUploadFiles<M> = (M extends true ? Array<File> : File) | null;
 
 export interface FileUploadSlots<M extends boolean = false> {
-  'default'(props: {
-    open: UseFileDialogReturn['open']
-    removeFile: (index?: number) => void
-  }): any
-  'leading'(props?: object): any
-  'label'(props?: object): any
-  'description'(props?: object): any
-  'actions'(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): any
-  'files'(props: { files?: FileUploadFiles<M> }): any
-  'files-top'(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): any
-  'files-bottom'(props: { files?: FileUploadFiles<M>, open: UseFileDialogReturn['open'], removeFile: (index?: number) => void }): any
-  'file'(props: { file: File, index: number }): any
-  'file-leading'(props: { file: File, index: number }): any
-  'file-name'(props: { file: File, index: number }): any
-  'file-size'(props: { file: File, index: number }): any
-  'file-trailing'(props: { file: File, index: number }): any
+  'default': (props: {
+    open: UseFileDialogReturn['open'];
+    removeFile: (index?: number) => void;
+  }) => any;
+  'leading': (props?: object) => any;
+  'label': (props?: object) => any;
+  'description': (props?: object) => any;
+  'actions': (props: { files?: FileUploadFiles<M>; open: UseFileDialogReturn['open']; removeFile: (index?: number) => void }) => any;
+  'files': (props: { files?: FileUploadFiles<M> }) => any;
+  'files-top': (props: { files?: FileUploadFiles<M>; open: UseFileDialogReturn['open']; removeFile: (index?: number) => void }) => any;
+  'files-bottom': (props: { files?: FileUploadFiles<M>; open: UseFileDialogReturn['open']; removeFile: (index?: number) => void }) => any;
+  'file': (props: { file: File; index: number }) => any;
+  'file-leading': (props: { file: File; index: number }) => any;
+  'file-name': (props: { file: File; index: number }) => any;
+  'file-size': (props: { file: File; index: number }) => any;
+  'file-trailing': (props: { file: File; index: number }) => any;
 }
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { computed, watch } from 'vue'
-import { APrimitive } from 'akar'
-import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig, useLocale } from '#imports'
-import { useFormField } from '../composables/use-form-field'
-import { useFileUpload } from '../composables/useFileUpload'
-import { uv } from '../utils/uv'
-import PAvatar from './avatar.vue'
-import PButton from './button.vue'
-import PIcon from './icon.vue'
+import type { APrimitiveProps } from 'akar';
+import { useAppConfig, useLocale } from '#imports';
+import { createReusableTemplate } from '@vueuse/core';
+import { APrimitive } from 'akar';
+import { computed, watch } from 'vue';
+import { useFileUpload } from '../composables/use-file-upload';
+import { useFormField } from '../composables/use-form-field';
+import { uv } from '../utils/uv';
+import PAvatar from './avatar.vue';
+import PButton from './button.vue';
+import PIcon from './icon.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<FileUploadProps<M>>(), {
-  accept: '*',
-  multiple: false as never,
-  reset: false,
-  dropzone: true,
-  interactive: true,
-  layout: 'grid',
-  position: 'outside'
-})
-const emits = defineEmits<FileUploadEmits>()
-const slots = defineSlots<FileUploadSlots<M>>()
+const props = withDefaults(
+  defineProps<PFileUploadProps<M>>(),
+  {
+    accept: '*',
+    multiple: false as never,
+    reset: false,
+    dropzone: true,
+    interactive: true,
+    layout: 'grid',
+    position: 'outside',
+  },
+);
+const emits = defineEmits<FileUploadEmits>();
+const slots = defineSlots<FileUploadSlots<M>>();
 
-const modelValue = defineModel<(M extends true ? File[] : File) | null>()
+const modelValue = defineModel<(M extends true ? Array<File> : File) | null>();
 
-const appConfig = useAppConfig() as FileUpload['AppConfig']
+const appConfig = useAppConfig() as FileUpload['AppConfig'];
 
-const { t } = useLocale()
+const { t } = useLocale();
 
-const [DefineFilesTemplate, ReuseFilesTemplate] = createReusableTemplate()
+const [DefineFilesTemplate, ReuseFilesTemplate] = createReusableTemplate();
 
 const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   accept: props.accept,
   reset: props.reset,
   multiple: props.multiple,
   dropzone: props.dropzone,
-  onUpdate
-})
-const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props)
+  onUpdate,
+});
+const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<PFileUploadProps>(props);
 
-const variant = computed(() => props.multiple ? 'area' : props.variant)
-const layout = computed(() => props.variant === 'button' && !props.multiple ? 'grid' : props.layout)
+const variant = computed(() => props.multiple ? 'area' : props.variant);
+const layout = computed(() => props.variant === 'button' && !props.multiple ? 'grid' : props.layout);
 const position = computed(() => {
   if (layout.value === 'grid' && props.multiple) {
-    return 'inside'
+    return 'inside';
   }
   if (variant.value === 'button') {
-    return 'outside'
+    return 'outside';
   }
 
-  return props.position
-})
+  return props.position;
+});
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.fileUpload || {}) })({
-  dropzone: props.dropzone,
-  interactive: props.interactive,
-  color: props.color,
-  size: props.size,
-  variant: variant.value,
-  layout: layout.value,
-  position: position.value,
-  multiple: props.multiple,
-  highlight: props.highlight,
-  disabled: props.disabled
-}))
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.fileUpload || {}),
+  })({
+    dropzone: props.dropzone,
+    interactive: props.interactive,
+    color: props.color,
+    size: props.size,
+    variant: variant.value,
+    layout: layout.value,
+    position: position.value,
+    multiple: props.multiple,
+    highlight: props.highlight,
+    disabled: props.disabled,
+  }),
+);
 
 function createObjectUrl(file: File): string {
-  return URL.createObjectURL(file)
+  return URL.createObjectURL(file);
 }
 
 function formatFileSize(bytes: number): string {
   if (bytes === 0) {
-    return '0B'
+    return '0B';
   }
 
-  const k = 1024
-  const sizes = ['B', 'KB', 'MB', 'GB']
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  const size = bytes / Math.pow(k, i)
-  const formattedSize = i === 0 ? size.toString() : size.toFixed(0)
+  const size = bytes / k ** i;
+  const formattedSize = i === 0 ? size.toString() : size.toFixed(0);
 
-  return `${formattedSize}${sizes[i]}`
+  return `${formattedSize}${sizes[i]}`;
 }
 
-function onUpdate(files: File[], reset = false) {
+function onUpdate(files: Array<File>, reset = false) {
   if (props.multiple) {
     if (reset) {
-      modelValue.value = files as (M extends true ? File[] : File) | null
+      modelValue.value = files as (M extends true ? Array<File> : File) | null;
     } else {
-      const existingFiles = (modelValue.value as File[]) || []
-      modelValue.value = [...existingFiles, ...(files || [])] as (M extends true ? File[] : File) | null
+      const existingFiles = (modelValue.value as Array<File>) || [];
+      modelValue.value = [...existingFiles, ...(files || [])] as (M extends true ? Array<File> : File) | null;
     }
   } else {
-    modelValue.value = files?.[0] as (M extends true ? File[] : File) | null
+    modelValue.value = files?.[0] as (M extends true ? Array<File> : File) | null;
   }
 
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
-  const event = new Event('change', { target: { value: modelValue.value } })
-  emits('change', event)
-  emitFormChange()
-  emitFormInput()
+  const event = new Event('change', { target: { value: modelValue.value } });
+  emits('change', event);
+  emitFormChange();
+  emitFormInput();
 }
 
 function removeFile(index?: number) {
   if (!modelValue.value) {
-    return
+    return;
   }
 
   if (!props.multiple || index === undefined) {
-    onUpdate([], true)
+    onUpdate([], true);
 
-    dropzoneRef.value?.focus()
-    return
+    dropzoneRef.value?.focus();
+    return;
   }
 
-  const files = [...modelValue.value as File[]]
-  files.splice(index, 1)
+  const files = [...modelValue.value as Array<File>];
+  files.splice(index, 1);
 
-  onUpdate(files, true)
+  onUpdate(files, true);
 
-  dropzoneRef.value?.focus()
+  dropzoneRef.value?.focus();
 }
 
 watch(modelValue, (newValue) => {
-  const hasModelReset = !Array.isArray(newValue) || !newValue.length
+  const hasModelReset = !Array.isArray(newValue) || !newValue.length;
 
   if (hasModelReset && inputRef.value) {
-    inputRef.value.value = ''
+    inputRef.value.value = '';
   }
-})
+});
 
 defineExpose({
   inputRef,
-  dropzoneRef
-})
+  dropzoneRef,
+});
 </script>
 
 <template>
   <DefineFilesTemplate>
     <template v-if="modelValue && (Array.isArray(modelValue) ? modelValue.length : true)">
-      <slot name="files-top" :files="modelValue" :open="open" :remove-file="removeFile" />
+      <slot
+        name="files-top"
+        :files="modelValue"
+        :open="open"
+        :remove-file="removeFile"
+      />
 
       <div :class="pohon.files({ class: props.pohon?.files })">
-        <slot name="files" :files="modelValue">
-          <div v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]" :key="(file as File).name" :class="pohon.file({ class: props.pohon?.file })">
-            <slot name="file" :file="file" :index="index">
-              <slot name="file-leading" :file="file" :index="index">
-                <PAvatar :src="createObjectUrl(file)" :icon="fileIcon || appConfig.pohon.icons.file" :size="props.size" :class="pohon.fileLeadingAvatar({ class: props.pohon?.fileLeadingAvatar })" />
+        <slot
+          name="files"
+          :files="modelValue"
+        >
+          <div
+            v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]"
+            :key="(file as File).name"
+            :class="pohon.file({ class: props.pohon?.file })"
+          >
+            <slot
+              name="file"
+              :file="file"
+              :index="index"
+            >
+              <slot
+                name="file-leading"
+                :file="file"
+                :index="index"
+              >
+                <PAvatar
+                  :src="createObjectUrl(file)"
+                  :icon="fileIcon || appConfig.pohon.icons.file"
+                  :size="props.size"
+                  :class="pohon.fileLeadingAvatar({ class: props.pohon?.fileLeadingAvatar })"
+                />
               </slot>
 
               <div :class="pohon.fileWrapper({ class: props.pohon?.fileWrapper })">
                 <span :class="pohon.fileName({ class: props.pohon?.fileName })">
-                  <slot name="file-name" :file="file" :index="index">
+                  <slot
+                    name="file-name"
+                    :file="file"
+                    :index="index"
+                  >
                     {{ (file as File).name }}
                   </slot>
                 </span>
 
                 <span :class="pohon.fileSize({ class: props.pohon?.fileSize })">
-                  <slot name="file-size" :file="file" :index="index">
+                  <slot
+                    name="file-size"
+                    :file="file"
+                    :index="index"
+                  >
                     {{ formatFileSize((file as File).size) }}
                   </slot>
                 </span>
               </div>
 
-              <slot name="file-trailing" :file="file" :index="index">
+              <slot
+                name="file-trailing"
+                :file="file"
+                :index="index"
+              >
                 <PButton
                   color="neutral"
                   v-bind="{
                     ...(layout === 'grid' ? {
                       variant: 'solid',
-                      size: 'xs'
+                      size: 'xs',
                     } : {
                       variant: 'link',
-                      size
+                      size,
                     }),
-                    ...typeof fileDelete === 'object' ? fileDelete : undefined
+                    ...typeof fileDelete === 'object' ? fileDelete : undefined,
                   }"
                   :aria-label="t('fileUpload.removeFile', { filename: (file as File).name })"
                   :trailing-icon="fileDeleteIcon || appConfig.pohon.icons.close"
@@ -314,12 +360,23 @@ defineExpose({
         </slot>
       </div>
 
-      <slot name="files-bottom" :files="modelValue" :open="open" :remove-file="removeFile" />
+      <slot
+        name="files-bottom"
+        :files="modelValue"
+        :open="open"
+        :remove-file="removeFile"
+      />
     </template>
   </DefineFilesTemplate>
 
-  <APrimitive :as="as" :class="pohon.root({ class: [props.pohon?.root, props.class] })">
-    <slot :open="open" :remove-file="removeFile">
+  <APrimitive
+    :as="as"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+  >
+    <slot
+      :open="open"
+      :remove-file="removeFile"
+    >
       <component
         :is="variant === 'button' ? 'button' : 'div'"
         ref="dropzoneRef"
@@ -334,26 +391,52 @@ defineExpose({
       >
         <ReuseFilesTemplate v-if="position === 'inside'" />
 
-        <div v-if="position === 'inside' ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true" :class="pohon.wrapper({ class: props.pohon?.wrapper })">
+        <div
+          v-if="position === 'inside' ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true"
+          :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+        >
           <slot name="leading">
-            <PIcon v-if="variant === 'button'" :name="icon || appConfig.pohon.icons.upload" :class="pohon.icon({ class: props.pohon?.icon })" />
-            <PAvatar v-else :icon="icon || appConfig.pohon.icons.upload" :size="props.size" :class="pohon.avatar({ class: props.pohon?.avatar })" />
+            <PIcon
+              v-if="variant === 'button'"
+              :name="icon || appConfig.pohon.icons.upload"
+              :class="pohon.icon({ class: props.pohon?.icon })"
+            />
+            <PAvatar
+              v-else
+              :icon="icon || appConfig.pohon.icons.upload"
+              :size="props.size"
+              :class="pohon.avatar({ class: props.pohon?.avatar })"
+            />
           </slot>
 
           <template v-if="variant !== 'button'">
-            <div v-if="label || !!slots.label" :class="pohon.label({ class: props.pohon?.label })">
+            <div
+              v-if="label || !!slots.label"
+              :class="pohon.label({ class: props.pohon?.label })"
+            >
               <slot name="label">
                 {{ label }}
               </slot>
             </div>
-            <div v-if="description || !!slots.description" :class="pohon.description({ class: props.pohon?.description })">
+            <div
+              v-if="description || !!slots.description"
+              :class="pohon.description({ class: props.pohon?.description })"
+            >
               <slot name="description">
                 {{ description }}
               </slot>
             </div>
 
-            <div v-if="!!slots.actions" :class="pohon.actions({ class: props.pohon?.actions })">
-              <slot name="actions" :files="modelValue" :open="open" :remove-file="removeFile" />
+            <div
+              v-if="!!slots.actions"
+              :class="pohon.actions({ class: props.pohon?.actions })"
+            >
+              <slot
+                name="actions"
+                :files="modelValue"
+                :open="open"
+                :remove-file="removeFile"
+              />
             </div>
           </template>
         </div>

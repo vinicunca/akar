@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, LinkProps } from '../../types';
-import type { ComponentConfig } from '../../types/tv';
+import type { IconProps, PLinkProps } from '../../types';
+import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/ui/prose/card';
 
 type ProseCard = ComponentConfig<typeof theme, AppConfig, 'card', 'ui.prose'>;
 
 export interface ProseCardProps {
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   icon?: IconProps['name'];
   title?: string;
   description?: string;
@@ -17,7 +17,7 @@ export interface ProseCardProps {
    */
   color?: ProseCard['variants']['color'];
   class?: any;
-  ui?: ProseCard['slots'];
+  pohon?: ProseCard['slots'];
 }
 
 export interface ProseCardSlots {
@@ -40,7 +40,7 @@ const slots = defineSlots<ProseCardSlots>();
 
 const appConfig = useAppConfig() as ProseCard['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.card || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.card || {}) })({
   color: props.color,
   to: !!props.to,
   title: !!props.title,
@@ -70,17 +70,17 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim());
     <UIcon
       v-if="icon"
       :name="icon"
-      :class="ui.icon({ class: props.ui?.icon })"
+      :class="ui.icon({ class: props.pohon?.icon })"
     />
     <UIcon
       v-if="!!to && target === '_blank'"
       :name="appConfig.ui.icons.external"
-      :class="ui.externalIcon({ class: props.ui?.externalIcon })"
+      :class="ui.externalIcon({ class: props.pohon?.externalIcon })"
     />
 
     <p
       v-if="title || !!slots.title"
-      :class="ui.title({ class: props.ui?.title })"
+      :class="ui.title({ class: props.pohon?.title })"
     >
       <slot
         name="title"
@@ -92,7 +92,7 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim());
 
     <div
       v-if="!!slots.default"
-      :class="ui.description({ class: props.ui?.description })"
+      :class="ui.description({ class: props.pohon?.description })"
     >
       <slot>
         {{ description }}

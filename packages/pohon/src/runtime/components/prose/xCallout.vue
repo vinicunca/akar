@@ -1,21 +1,21 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, LinkProps } from '../../types';
-import type { ComponentConfig } from '../../types/tv';
+import type { IconProps, PLinkProps } from '../../types';
+import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/ui/prose/callout';
 
 type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'ui.prose'>;
 
 export interface ProseCalloutProps {
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   icon?: IconProps['name'];
   /**
    * @defaultValue 'neutral'
    */
   color?: ProseCallout['variants']['color'];
   class?: any;
-  ui?: ProseCallout['slots'];
+  pohon?: ProseCallout['slots'];
 }
 
 export interface ProseCalloutSlots {
@@ -37,7 +37,7 @@ defineSlots<ProseCalloutSlots>();
 
 const appConfig = useAppConfig() as ProseCallout['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.callout || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.callout || {}) })({
   color: props.color,
   to: !!props.to,
 }));
@@ -63,12 +63,12 @@ const target = computed(() => props.target || (!!props.to && isString(props.to) 
     <UIcon
       v-if="icon"
       :name="icon"
-      :class="ui.icon({ class: props.ui?.icon })"
+      :class="ui.icon({ class: props.pohon?.icon })"
     />
     <UIcon
       v-if="!!to && target === '_blank'"
       :name="appConfig.ui.icons.external"
-      :class="ui.externalIcon({ class: props.ui?.externalIcon })"
+      :class="ui.externalIcon({ class: props.pohon?.externalIcon })"
     />
 
     <slot mdc-unwrap="p" />

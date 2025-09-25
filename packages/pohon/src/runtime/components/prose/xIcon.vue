@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/icon'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProseIcon = ComponentConfig<typeof theme, AppConfig, 'icon', 'ui.prose'>
 
@@ -21,7 +21,7 @@ const props = defineProps<ProseIconProps>()
 
 const appConfig = useAppConfig() as ProseIcon['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.icon || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.icon || {}) }))
 </script>
 
 <template>

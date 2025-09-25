@@ -1,11 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { APrimitiveProps } from 'akar';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/form-field';
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>;
 
-export interface FormFieldProps {
+export interface PFormFieldProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -36,7 +37,7 @@ export interface FormFieldProps {
   pohon?: FormField['slots'];
 }
 
-export interface FormFieldSlots {
+export interface PFormFieldSlots {
   label: (props: { label?: string }) => any;
   hint: (props: { hint?: string }) => any;
   description: (props: { description?: string }) => any;
@@ -50,24 +51,34 @@ export interface FormFieldSlots {
 import type { Ref } from 'vue';
 import type { FormError, FormFieldInjectedOptions } from '../types/form';
 import { useAppConfig } from '#imports';
-import { APrimitive, Label } from 'akar';
+import { isString } from '@vinicunca/perkakas';
+import { ALabel, APrimitive } from 'akar';
 import { computed, inject, provide, ref, useId, watch } from 'vue';
 import { formErrorsInjectionKey, formFieldInjectionKey, formInputsInjectionKey, inputIdInjectionKey } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 
-const props = defineProps<FormFieldProps>();
-const slots = defineSlots<FormFieldSlots>();
+const props = defineProps<PFormFieldProps>();
+const slots = defineSlots<PFormFieldSlots>();
 
 const appConfig = useAppConfig() as FormField['AppConfig'];
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.formField || {}) })({
-  size: props.size,
-  required: props.required,
-}));
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.formField || {}),
+  })({
+    size: props.size,
+    required: props.required,
+  }),
+);
 
 const formErrors = inject<Ref<Array<FormError>> | null>(formErrorsInjectionKey, null);
 
-const error = computed(() => props.error || formErrors?.value?.find((error) => error.name === props.name || (props.errorPattern && error.name?.match(props.errorPattern)))?.message);
+const error = computed(() =>
+  props.error
+  || formErrors?.value?.find((error) => error.name === props.name
+    || (props.errorPattern && error.name?.match(props.errorPattern)))?.message,
+);
 
 const id = ref(useId());
 // Copies id's initial value to bind aria-attributes such as aria-describedby.
@@ -75,26 +86,33 @@ const id = ref(useId());
 const ariaId = id.value;
 
 const formInputs = inject(formInputsInjectionKey, undefined);
-watch(id, () => {
-  if (formInputs && props.name) {
-    formInputs.value[props.name] = { id: id.value, pattern: props.errorPattern };
-  }
-}, { immediate: true });
+watch(
+  id,
+  () => {
+    if (formInputs && props.name) {
+      formInputs.value[props.name] = { id: id.value, pattern: props.errorPattern };
+    }
+  },
+  { immediate: true },
+);
 
 provide(inputIdInjectionKey, id);
 
-provide(formFieldInjectionKey, computed(() => ({
-  error: error.value,
-  name: props.name,
-  size: props.size,
-  eagerValidation: props.eagerValidation,
-  validateOnInputDelay: props.validateOnInputDelay,
-  errorPattern: props.errorPattern,
-  hint: props.hint,
-  description: props.description,
-  help: props.help,
-  ariaId,
-}) as FormFieldInjectedOptions<FormFieldProps>));
+provide(
+  formFieldInjectionKey,
+  computed(() => ({
+    error: error.value,
+    name: props.name,
+    size: props.size,
+    eagerValidation: props.eagerValidation,
+    validateOnInputDelay: props.validateOnInputDelay,
+    errorPattern: props.errorPattern,
+    hint: props.hint,
+    description: props.description,
+    help: props.help,
+    ariaId,
+  }) as FormFieldInjectedOptions<PFormFieldProps>),
+);
 </script>
 
 <template>
@@ -107,7 +125,7 @@ provide(formFieldInjectionKey, computed(() => ({
         v-if="label || !!slots.label"
         :class="pohon.labelWrapper({ class: props.pohon?.labelWrapper })"
       >
-        <Label
+        <ALabel
           :for="id"
           :class="pohon.label({ class: props.pohon?.label })"
         >
@@ -117,7 +135,7 @@ provide(formFieldInjectionKey, computed(() => ({
           >
             {{ label }}
           </slot>
-        </Label>
+        </ALabel>
         <span
           v-if="hint || !!slots.hint"
           :id="`${ariaId}-hint`"

@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/code-icon'
 import type { IconProps } from '../../types'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProseCodeIcon = ComponentConfig<typeof theme, AppConfig, 'codeIcon', 'ui.prose'>
 
@@ -22,7 +22,7 @@ const props = defineProps<ProseCodeIconProps>()
 
 const appConfig = useAppConfig() as ProseCodeIcon['AppConfig']
 
-const icons = computed<any>(() => defu(appConfig.ui?.prose?.codeIcon || {}, theme))
+const icons = computed<any>(() => defu(appConfig.pohon?.prose?.codeIcon || {}, theme))
 
 const icon = computed(() => {
   if (props.icon) {

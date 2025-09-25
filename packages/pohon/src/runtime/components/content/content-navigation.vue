@@ -2,8 +2,8 @@
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
 import type { AccordionRootEmits, AccordionRootProps } from 'reka-ui';
-import type { BadgeProps, IconProps, LinkProps } from '../../types';
-import type { ComponentConfig } from '../../types/tv';
+import type { IconProps, PBadgeProps, PLinkProps } from '../../types';
+import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/ui/content/content-navigation';
 
 type ContentNavigation = ComponentConfig<typeof theme, AppConfig, 'contentNavigation'>;
@@ -17,8 +17,8 @@ export interface ContentNavigationLink extends ContentNavigationItem {
    * Display a badge on the link.
    * `{ color: 'neutral', variant: 'outline', size: 'sm' }`{lang="ts-type"}
    */
-  badge?: string | number | BadgeProps;
-  target?: LinkProps['target'];
+  badge?: string | number | PBadgeProps;
+  target?: PLinkProps['target'];
   /**
    * @IconifyIcon
    */
@@ -28,7 +28,7 @@ export interface ContentNavigationLink extends ContentNavigationItem {
   defaultOpen?: boolean;
   active?: boolean;
   class?: any;
-  ui?: Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingIcon' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>;
+  pohon?: Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingIcon' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>;
 }
 
 export interface ContentNavigationProps<T extends ContentNavigationLink = ContentNavigationLink> extends Pick<AccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'> {
@@ -75,7 +75,7 @@ export interface ContentNavigationProps<T extends ContentNavigationLink = Conten
   level?: number;
   navigation?: Array<T>;
   class?: any;
-  ui?: ContentNavigation['slots'];
+  pohon?: ContentNavigation['slots'];
 }
 
 export interface ContentNavigationEmits extends AccordionRootEmits {}
@@ -125,7 +125,7 @@ const appConfig = useAppConfig() as ContentNavigation['AppConfig'];
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link: ContentNavigationLink; active?: boolean }>();
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentNavigation || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentNavigation || {}) })({
   color: props.color,
   variant: props.variant,
   highlight: props.highlight,
@@ -166,13 +166,13 @@ const defaultValue = computed(() => {
         <UIcon
           v-if="link.icon"
           :name="link.icon"
-          :class="ui.linkLeadingIcon({ class: [props.ui?.linkLeadingIcon, link.ui?.linkLeadingIcon], active })"
+          :class="ui.linkLeadingIcon({ class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon], active })"
         />
       </slot>
 
       <span
         v-if="link.title || !!slots['link-title']"
-        :class="ui.linkTitle({ class: [props.ui?.linkTitle, link.ui?.linkTitle], active })"
+        :class="ui.linkTitle({ class: [props.pohon?.linkTitle, link.pohon?.linkTitle], active })"
       >
         <slot
           name="link-title"
@@ -185,13 +185,13 @@ const defaultValue = computed(() => {
         <UIcon
           v-if="link.target === '_blank'"
           :name="appConfig.ui.icons.external"
-          :class="ui.linkTitleExternalIcon({ class: [props.ui?.linkTitleExternalIcon, link.ui?.linkTitleExternalIcon], active })"
+          :class="ui.linkTitleExternalIcon({ class: [props.pohon?.linkTitleExternalIcon, link.pohon?.linkTitleExternalIcon], active })"
         />
       </span>
 
       <span
         v-if="link.badge || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']"
-        :class="ui.linkTrailing({ class: [props.ui?.linkTrailing, link.ui?.linkTrailing] })"
+        :class="ui.linkTrailing({ class: [props.pohon?.linkTrailing, link.pohon?.linkTrailing] })"
       >
         <slot
           name="link-trailing"
@@ -202,19 +202,19 @@ const defaultValue = computed(() => {
             v-if="link.badge"
             color="neutral"
             variant="outline"
-            :size="((props.ui?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as BadgeProps['size'])"
+            :size="((props.pohon?.linkTrailingBadgeSize || ui.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(link.badge) || isNumber(link.badge)) ? { label: link.badge } : link.badge"
-            :class="ui.linkTrailingBadge({ class: props.ui?.linkTrailingBadge })"
+            :class="ui.linkTrailingBadge({ class: props.pohon?.linkTrailingBadge })"
           />
           <UIcon
             v-if="link.children?.length && !disabled"
             :name="link.trailingIcon || trailingIcon || appConfig.ui.icons.chevronDown"
-            :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, link.ui?.linkTrailingIcon] })"
+            :class="ui.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon] })"
           />
           <UIcon
             v-else-if="link.trailingIcon"
             :name="link.trailingIcon"
-            :class="ui.linkTrailingIcon({ class: [props.ui?.linkTrailingIcon, link.ui?.linkTrailingIcon] })"
+            :class="ui.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon] })"
           />
         </slot>
       </span>
@@ -225,14 +225,14 @@ const defaultValue = computed(() => {
     :as="as"
     v-bind="$attrs"
     :as-child="level > 0"
-    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    :class="ui.root({ class: [props.pohon?.root, props.class] })"
   >
     <AccordionRoot
       as="ul"
       :disabled="disabled"
       v-bind="rootProps"
       :default-value="defaultValue"
-      :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })"
+      :class="level > 0 ? ui.listWithChildren({ class: props.pohon?.listWithChildren }) : ui.list({ class: props.pohon?.list })"
     >
       <template
         v-for="(link, index) in navigation"
@@ -241,14 +241,14 @@ const defaultValue = computed(() => {
         <AccordionItem
           v-if="link.children?.length"
           as="li"
-          :class="ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren], level: level > 0 })"
+          :class="ui.itemWithChildren({ class: [props.pohon?.itemWithChildren, link.pohon?.itemWithChildren], level: level > 0 })"
           :value="String(index)"
         >
           <AccordionTrigger
             as="button"
             :class="[
-              ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: link.active, disabled: !!link.disabled || disabled }),
-              ui.trigger({ class: [props.ui?.trigger, link.ui?.trigger], disabled }),
+              ui.link({ class: [props.pohon?.link, link.pohon?.link, link.class], active: link.active, disabled: !!link.disabled || disabled }),
+              ui.trigger({ class: [props.pohon?.trigger, link.pohon?.trigger], disabled }),
             ]"
           >
             <ReuseLinkTemplate
@@ -257,7 +257,7 @@ const defaultValue = computed(() => {
             />
           </AccordionTrigger>
 
-          <AccordionContent :class="ui.content({ class: [props.ui?.content, link.ui?.content] })">
+          <AccordionContent :class="ui.content({ class: [props.pohon?.content, link.pohon?.content] })">
             <UContentNavigation
               v-bind="rootProps"
               :navigation="link.children"
@@ -286,7 +286,7 @@ const defaultValue = computed(() => {
 
         <li
           v-else
-          :class="ui.item({ class: [props.ui?.item, link.ui?.item], level: level > 0 })"
+          :class="ui.item({ class: [props.pohon?.item, link.pohon?.item], level: level > 0 })"
         >
           <ULink
             v-slot="{ active, ...slotProps }"
@@ -295,7 +295,7 @@ const defaultValue = computed(() => {
           >
             <PLinkBase
               v-bind="slotProps"
-              :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active, disabled: !!link.disabled, level: level > 0 })"
+              :class="ui.link({ class: [props.pohon?.link, link.pohon?.link, link.class], active, disabled: !!link.disabled, level: level > 0 })"
             >
               <ReuseLinkTemplate
                 :link="link"

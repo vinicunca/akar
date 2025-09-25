@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/accordion'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProseAccordion = ComponentConfig<typeof theme, AppConfig, 'accordion', 'ui.prose'>
 
@@ -29,7 +29,7 @@ const slots = defineSlots<ProseAccordionSlots>()
 
 const appConfig = useAppConfig() as ProseAccordion['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.accordion || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.accordion || {}) }))
 
 const rerenderCount = ref(1)
 

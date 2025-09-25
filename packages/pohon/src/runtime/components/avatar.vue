@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { APrimitiveProps } from 'akar';
-import type { ChipProps, IconProps } from '../types';
+import type { PChipProps, IconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/avatar';
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>;
 
-export interface AvatarProps {
+export interface PAvatarProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
@@ -24,13 +24,13 @@ export interface AvatarProps {
    * @defaultValue 'md'
    */
   size?: Avatar['variants']['size'];
-  chip?: boolean | ChipProps;
+  chip?: boolean | PChipProps;
   class?: any;
   style?: any;
   pohon?: Avatar['slots'];
 }
 
-export interface AvatarSlots {
+export interface PAvatarSlots {
   default: (props?: object) => any;
 }
 </script>
@@ -46,7 +46,10 @@ import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<AvatarProps>(), { as: 'span' });
+const props = withDefaults(
+  defineProps<PAvatarProps>(),
+  { as: 'span' },
+);
 
 const fallback = computed(() =>
   props.text || (props.alt || '')

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 import theme from '#build/ui/prose/th'
 
 type ProseTh = ComponentConfig<typeof theme, AppConfig, 'th', 'ui.prose'>
@@ -24,7 +24,7 @@ defineSlots<ProseThSlots>()
 
 const appConfig = useAppConfig() as ProseTh['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.th || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.th || {}) }))
 </script>
 
 <template>

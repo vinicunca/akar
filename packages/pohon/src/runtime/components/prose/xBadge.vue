@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/badge'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProseBadge = ComponentConfig<typeof theme, AppConfig, 'badge', 'ui.prose'>
 
@@ -25,7 +25,7 @@ defineSlots<ProseBadgeSlots>()
 
 const appConfig = useAppConfig() as ProseBadge['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.badge || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.badge || {}) }))
 </script>
 
 <template>

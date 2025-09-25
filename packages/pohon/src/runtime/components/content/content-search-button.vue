@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ButtonProps, ButtonSlots, IconProps, KbdProps, PTooltipProps } from '../../types';
-import type { ComponentConfig } from '../../types/tv';
+import type { IconProps, KbdProps, PButtonProps, PButtonSlots, PTooltipProps } from '../../types';
+import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/ui/content/content-search-button';
 
 type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSearchButton'>;
@@ -22,13 +22,13 @@ export interface ContentSearchButtonProps {
    * The color of the button.
    * @defaultValue 'neutral'
    */
-  color?: ButtonProps['color'];
+  color?: PButtonProps['color'];
   /**
    * The variant of the button.
    * Defaults to 'outline' when not collapsed, 'ghost' when collapsed.
    */
-  variant?: ButtonProps['variant'];
-  size?: ButtonProps['size'];
+  variant?: PButtonProps['variant'];
+  size?: PButtonProps['size'];
   /**
    * Whether the button is collapsed.
    * @defaultValue true
@@ -45,7 +45,7 @@ export interface ContentSearchButtonProps {
    * @defaultValue ['meta', 'k']
    */
   kbds?: Array<KbdProps['value']> | Array<KbdProps>;
-  ui?: ContentSearchButton['slots'] & ButtonProps['ui'];
+  pohon?: ContentSearchButton['slots'] & PButtonProps['ui'];
   class?: any;
 }
 </script>
@@ -72,7 +72,7 @@ const props = withDefaults(defineProps<ContentSearchButtonProps>(), {
   tooltip: false,
   kbds: () => ['meta', 'k'],
 });
-const slots = defineSlots<ButtonSlots>();
+const slots = defineSlots<PButtonSlots>();
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate();
 
@@ -85,7 +85,7 @@ const { t } = useLocale();
 const { open } = useContentSearch();
 const appConfig = useAppConfig() as ContentSearchButton['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearchButton || {}) })());
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentSearchButton || {}) })());
 </script>
 
 <template>
@@ -103,7 +103,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
         } : {}),
         ...$attrs,
       }"
-      :class="ui.base({ class: [props.ui?.base, props.class] })"
+      :class="ui.base({ class: [props.pohon?.base, props.class] })"
       :ui="transformUI(ui, props.ui)"
       @click="open = true"
     >
@@ -121,7 +121,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentSearc
         v-if="!collapsed"
         #trailing
       >
-        <div :class="ui.trailing({ class: props.ui?.trailing })">
+        <div :class="ui.trailing({ class: props.pohon?.trailing })">
           <slot name="trailing">
             <template v-if="kbds?.length">
               <PKbd

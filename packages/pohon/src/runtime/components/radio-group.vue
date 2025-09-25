@@ -197,28 +197,28 @@ function onUpdate(value: any) {
         :is="(!variant || variant === 'list') ? 'div' : Label"
         v-for="item in normalizedItems"
         :key="item.value"
-        :class="pohon.item({ class: [props.pohon?.item, item.ui?.item, item.class] })"
+        :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
       >
-        <div :class="pohon.container({ class: [props.pohon?.container, item.ui?.container] })">
+        <div :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })">
           <RRadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled"
-            :class="pohon.base({ class: [props.pohon?.base, item.ui?.base], disabled: item.disabled })"
+            :class="pohon.base({ class: [props.pohon?.base, item.pohon?.base], disabled: item.disabled })"
           >
-            <RadioGroupIndicator :class="pohon.indicator({ class: [props.pohon?.indicator, item.ui?.indicator] })" />
+            <RadioGroupIndicator :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })" />
           </RRadioGroupItem>
         </div>
 
         <div
           v-if="(item.label || !!slots.label) || (item.description || !!slots.description)"
-          :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.ui?.wrapper] })"
+          :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })"
         >
           <component
             :is="(!variant || variant === 'list') ? Label : 'p'"
             v-if="item.label || !!slots.label"
             :for="item.id"
-            :class="pohon.label({ class: [props.pohon?.label, item.ui?.label] })"
+            :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
           >
             <slot
               name="label"
@@ -230,7 +230,7 @@ function onUpdate(value: any) {
           </component>
           <p
             v-if="item.description || !!slots.description"
-            :class="pohon.description({ class: [props.pohon?.description, item.ui?.description] })"
+            :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
           >
             <slot
               name="description"

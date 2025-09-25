@@ -4,9 +4,11 @@ import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema';
 import type { PohonModuleOptions } from './module';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
-import { addTemplate, addTypeTemplate } from '@nuxt/kit';
+import { addTemplate, addTypeTemplate, hasNuxtModule } from '@nuxt/kit';
 import { isFunction, toKebabCase } from '@vinicunca/perkakas';
 import * as theme from './theme';
+import * as themeContent from './theme/content';
+import * as themeProse from './theme/prose';
 
 export function addPohonTemplates(
   { options, nuxt, resolve }:
@@ -19,6 +21,7 @@ export function addPohonTemplates(
   const templates = getPohonTemplates({
     options,
     pohon: nuxt.options.appConfig.pohon,
+    nuxt,
   });
 
   for (const template of templates) {
@@ -37,20 +40,25 @@ export function addPohonTemplates(
 }
 
 export function getPohonTemplates(
-  { options, pohon }:
+  { options, pohon, nuxt }:
   {
     options: PohonModuleOptions;
     pohon: Nuxt['options']['appConfig']['pohon'];
+    nuxt?: Nuxt;
   },
 ) {
   const templates: Array<NuxtTemplate> = [];
 
+  let hasProse = false;
+  let hasContent = false;
+
   const isDev = process.argv.includes('--pohonDev');
 
-  function writeThemeTemplate(theme: Record<string, any>) {
+  function writeThemeTemplate(theme: Record<string, any>, path?: string) {
     for (const component of Object.keys(theme)) {
       templates.push({
-        filename: `pohon/${toKebabCase(component)}.ts`,
+        // eslint-disable-next-line sonar/no-nested-template-literals
+        filename: `pohon/${path ? `${path}/` : ''}${toKebabCase(component)}.ts`,
         write: true,
         getContents: async () => {
           const template = theme[component];
@@ -91,7 +99,8 @@ export function getPohonTemplates(
 
           // For local development, import directly from theme
           if (isDev) {
-            const templatePath = fileURLToPath(new URL(`./theme/${toKebabCase(component)}`, import.meta.url));
+            // eslint-disable-next-line sonar/no-nested-template-literals
+            const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${toKebabCase(component)}`, import.meta.url));
             return [
               `import template from ${JSON.stringify(templatePath)}`,
               ...generateVariantDeclarations(variants),
@@ -113,15 +122,50 @@ export function getPohonTemplates(
     }
   }
 
+  if (
+    !!nuxt && (
+      (hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content)
+    )
+  ) {
+    hasProse = true;
+
+    const path = 'prose';
+
+    writeThemeTemplate(themeProse, path);
+
+    templates.push({
+      filename: `ui/${path}/index.ts`,
+      write: true,
+      getContents: () => Object.keys(themeProse).map((component) => `export { default as ${component} } from './${toKebabCase(component)}'`).join('\n'),
+    });
+  }
+
+  if (!!nuxt && (hasNuxtModule('@nuxt/content') || options.content)) {
+    hasContent = true;
+
+    writeThemeTemplate(themeContent, 'content');
+  }
+
   writeThemeTemplate(theme);
 
   templates.push({
     filename: 'pohon/index.ts',
     write: true,
     getContents: () => {
-      const contents = Object.keys(theme)
-        .map((component) => `export { default as ${component} } from './${toKebabCase(component)}'`)
+      let contents = Object.keys(theme)
+        .map((component) =>
+          `export { default as ${component} } from './${toKebabCase(component)}'`,
+        )
         .join('\n');
+
+      if (hasContent) {
+        contents += '\n';
+        contents += Object.keys(themeContent).map((component) => `export { default as ${component} } from './content/${toKebabCase(component)}'`).join('\n');
+      }
+
+      if (hasProse) {
+        contents += '\nexport * as prose from \'./prose\'\n';
+      }
 
       return contents;
     },

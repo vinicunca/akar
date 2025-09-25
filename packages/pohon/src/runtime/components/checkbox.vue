@@ -7,7 +7,7 @@ import theme from '#build/pohon/checkbox';
 
 type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>;
 
-export interface CheckboxProps extends Pick<ACheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'> {
+export interface PCheckboxProps extends Pick<ACheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -48,11 +48,11 @@ export interface CheckboxProps extends Pick<ACheckboxRootProps, 'disabled' | 're
   pohon?: Checkbox['slots'];
 }
 
-export type CheckboxEmits = {
+export type PCheckboxEmits = {
   change: [event: Event];
 };
 
-export interface CheckboxSlots {
+export interface PCheckboxSlots {
   label: (props: { label?: string }) => any;
   description: (props: { description?: string }) => any;
 }
@@ -75,9 +75,9 @@ import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = defineProps<CheckboxProps>();
-const emits = defineEmits<CheckboxEmits>();
-const slots = defineSlots<CheckboxSlots>();
+const props = defineProps<PCheckboxProps>();
+const emits = defineEmits<PCheckboxEmits>();
+const slots = defineSlots<PCheckboxSlots>();
 const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined });
 
 const appConfig = useAppConfig() as Checkbox['AppConfig'];
@@ -93,7 +93,7 @@ const {
   name,
   disabled,
   ariaAttrs,
-} = useFormField<CheckboxProps>(props);
+} = useFormField<PCheckboxProps>(props);
 const id = _id.value ?? useId();
 
 const pohon = computed(() =>

@@ -4,13 +4,13 @@ import type { TocLink } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/content/content-toc'
 import type { IconProps } from '../../types'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>
 
 export type ContentTocLink = TocLink & {
   class?: any
-  ui?: Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>
+  pohon?: Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>
 }
 
 export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
@@ -45,7 +45,7 @@ export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> exte
   highlightColor?: ContentToc['variants']['highlightColor']
   links?: T[]
   class?: any
-  ui?: ContentToc['slots']
+  pohon?: ContentToc['slots']
 }
 
 export type ContentTocEmits = CollapsibleRootEmits & {
@@ -98,7 +98,7 @@ const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: 
 })
 const [DefineTriggerTemplate, ReuseTriggerTemplate] = createReusableTemplate<{ open: boolean }>()
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.contentToc || {}) })({
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentToc || {}) })({
   color: props.color,
   highlight: props.highlight,
   highlightColor: props.highlightColor || props.color
@@ -145,11 +145,11 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
 <template>
   <!-- eslint-disable-next-line vue/no-template-shadow -->
   <DefineListTemplate v-slot="{ links, level }">
-    <ul :class="level > 0 ? ui.listWithChildren({ class: props.ui?.listWithChildren }) : ui.list({ class: props.ui?.list })">
-      <li v-for="(link, index) in links" :key="index" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [props.ui?.itemWithChildren, link.ui?.itemWithChildren] }) : ui.item({ class: [props.ui?.item, link.ui?.item] })">
-        <a :href="`#${link.id}`" :class="ui.link({ class: [props.ui?.link, link.ui?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
+    <ul :class="level > 0 ? ui.listWithChildren({ class: props.pohon?.listWithChildren }) : ui.list({ class: props.pohon?.list })">
+      <li v-for="(link, index) in links" :key="index" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [props.pohon?.itemWithChildren, link.pohon?.itemWithChildren] }) : ui.item({ class: [props.pohon?.item, link.pohon?.item] })">
+        <a :href="`#${link.id}`" :class="ui.link({ class: [props.pohon?.link, link.pohon?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
           <slot name="link" :link="link">
-            <span :class="ui.linkText({ class: [props.ui?.linkText, link.ui?.linkText] })">
+            <span :class="ui.linkText({ class: [props.pohon?.linkText, link.pohon?.linkText] })">
               {{ link.text }}
             </span>
           </slot>
@@ -163,20 +163,20 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
   <DefineTriggerTemplate v-slot="{ open }">
     <slot name="leading" :open="open" />
 
-    <span :class="ui.title({ class: props.ui?.title })">
+    <span :class="ui.title({ class: props.pohon?.title })">
       <slot :open="open">{{ title || t('contentToc.title') }}</slot>
     </span>
 
-    <span :class="ui.trailing({ class: props.ui?.trailing })">
+    <span :class="ui.trailing({ class: props.pohon?.trailing })">
       <slot name="trailing" :open="open">
-        <UIcon :name="trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+        <UIcon :name="trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon({ class: props.pohon?.trailingIcon })" />
       </slot>
     </span>
   </DefineTriggerTemplate>
 
-  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="defaultOpen" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
-      <div v-if="!!slots.top" :class="ui.top({ class: props.ui?.top })">
+  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="defaultOpen" :class="ui.root({ class: [props.pohon?.root, props.class] })">
+    <div :class="ui.container({ class: props.pohon?.container })">
+      <div v-if="!!slots.top" :class="ui.top({ class: props.pohon?.top })">
         <slot name="top" :links="links" />
       </div>
 
@@ -185,8 +185,8 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
           <ReuseTriggerTemplate :open="open" />
         </CollapsibleTrigger>
 
-        <CollapsibleContent :class="ui.content({ class: [props.ui?.content, 'lg:hidden'] })">
-          <div v-if="highlight" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+        <CollapsibleContent :class="ui.content({ class: [props.pohon?.content, 'lg:hidden'] })">
+          <div v-if="highlight" :class="ui.indicator({ class: props.pohon?.indicator })" :style="indicatorStyle" />
 
           <slot name="content" :links="links">
             <ReuseListTemplate :links="links" :level="0" />
@@ -197,8 +197,8 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div :class="ui.content({ class: [props.ui?.content, 'hidden lg:flex'] })">
-          <div v-if="highlight" :class="ui.indicator({ class: props.ui?.indicator })" :style="indicatorStyle" />
+        <div :class="ui.content({ class: [props.pohon?.content, 'hidden lg:flex'] })">
+          <div v-if="highlight" :class="ui.indicator({ class: props.pohon?.indicator })" :style="indicatorStyle" />
 
           <slot name="content" :links="links">
             <ReuseListTemplate :links="links" :level="0" />
@@ -206,7 +206,7 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
         </div>
       </template>
 
-      <div v-if="!!slots.bottom" :class="ui.bottom({ class: props.ui?.bottom, body: !!slots.top || !!links?.length })">
+      <div v-if="!!slots.bottom" :class="ui.bottom({ class: props.pohon?.bottom, body: !!slots.top || !!links?.length })">
         <slot name="bottom" :links="links" />
       </div>
     </div>

@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/h2'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProseH2 = ComponentConfig<typeof theme, AppConfig, 'h2', 'ui.prose'>
 
 export interface ProseH2Props {
   id?: string
   class?: any
-  ui?: ProseH2['slots']
+  pohon?: ProseH2['slots']
 }
 
 export interface ProseH2Slots {
@@ -29,16 +29,16 @@ const appConfig = useAppConfig() as ProseH2['AppConfig']
 const { headings } = useRuntimeConfig().public?.mdc || {}
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.h2 || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.h2 || {}) })())
 
 const generate = computed(() => props.id && typeof headings?.anchorLinks === 'object' && headings.anchorLinks.h2)
 </script>
 
 <template>
   <h2 :id="id" :class="ui.base({ class: props.class })">
-    <a v-if="id && generate" :href="`#${id}`" :class="ui.link({ class: props.ui?.link })">
-      <span :class="ui.leading({ class: props.ui?.leading })">
-        <UIcon :name="appConfig.ui.icons.hash" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+    <a v-if="id && generate" :href="`#${id}`" :class="ui.link({ class: props.pohon?.link })">
+      <span :class="ui.leading({ class: props.pohon?.leading })">
+        <UIcon :name="appConfig.ui.icons.hash" :class="ui.leadingIcon({ class: props.pohon?.leadingIcon })" />
       </span>
 
       <slot />

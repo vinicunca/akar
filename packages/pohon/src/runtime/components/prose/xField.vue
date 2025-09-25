@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 import theme from '#build/ui/prose/field'
 
 type ProseField = ComponentConfig<typeof theme, AppConfig, 'field', 'ui.prose'>
@@ -28,7 +28,7 @@ export interface ProseFieldProps {
    */
   required?: boolean
   class?: any
-  ui?: ProseField['slots']
+  pohon?: ProseField['slots']
 }
 
 export interface ProseFieldSlots {
@@ -48,28 +48,28 @@ const slots = defineSlots<ProseFieldSlots>()
 const appConfig = useAppConfig() as ProseField['AppConfig']
 
 // eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.field || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.field || {}) })())
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui.root({ class: [props.ui?.root, props.class] })">
-    <div :class="ui.container({ class: props.ui?.container })">
-      <span v-if="name" :class="ui.name({ class: props.ui?.name })">
+  <Primitive :as="as" :class="ui.root({ class: [props.pohon?.root, props.class] })">
+    <div :class="ui.container({ class: props.pohon?.container })">
+      <span v-if="name" :class="ui.name({ class: props.pohon?.name })">
         {{ name }}
       </span>
 
-      <div v-if="type || required" :class="ui.wrapper({ class: props.ui?.wrapper })">
-        <span v-if="type" :class="ui.type({ class: props.ui?.type })">
+      <div v-if="type || required" :class="ui.wrapper({ class: props.pohon?.wrapper })">
+        <span v-if="type" :class="ui.type({ class: props.pohon?.type })">
           {{ type }}
         </span>
 
-        <span v-if="required" :class="ui.required({ class: props.ui?.required })">
+        <span v-if="required" :class="ui.required({ class: props.pohon?.required })">
           required
         </span>
       </div>
     </div>
 
-    <div v-if="!!slots.default || description" :class="ui.description({ class: props.ui?.description })">
+    <div v-if="!!slots.default || description" :class="ui.description({ class: props.pohon?.description })">
       <slot mdc-unwrap="p">
         {{ description }}
       </slot>

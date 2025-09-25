@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useOverlay } from '../composables/useOverlay'
-import type { Overlay } from '../composables/useOverlay'
+import type { Overlay } from '../composables/use-overlay';
+import { computed } from 'vue';
+import { useOverlay } from '../composables/use-overlay';
 
-const { overlays, unmount, close } = useOverlay()
+const { overlays, unmount, close } = useOverlay();
 
-const mountedOverlays = computed(() => overlays.filter((overlay: Overlay) => overlay.isMounted))
+const mountedOverlays = computed(() => overlays.filter((overlay: Overlay) => overlay.isMounted));
 
-const onAfterLeave = (id: symbol) => {
-  close(id)
-  unmount(id)
+function onAfterLeave(id: symbol) {
+  close(id);
+  unmount(id);
 }
 
-const onClose = (id: symbol, value: any) => {
-  close(id, value)
+function onClose(id: symbol, value: any) {
+  close(id, value);
 }
 </script>
 

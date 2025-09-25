@@ -3,11 +3,11 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { APrimitiveProps } from 'akar';
 import type {
-  ButtonProps,
-  FormFieldProps,
   FormProps,
   IconProps,
-  PinInputProps,
+  PButtonProps,
+  PFormFieldProps,
+  PPinInputProps,
   SeparatorProps,
 } from '../types';
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form';
@@ -16,7 +16,7 @@ import theme from '#build/pohon/auth-form';
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>;
 
-type AuthFormField = FormFieldProps & {
+type AuthFormField = PFormFieldProps & {
   name: string;
   type?: 'checkbox' | 'select' | 'password' | 'text' | 'otp' | 'email';
   defaultValue?: any;
@@ -24,7 +24,7 @@ type AuthFormField = FormFieldProps & {
    * The optional props for the `otp` type.
    * `{ otp: true }`{lang="ts-type"}
    */
-  otp?: PinInputProps;
+  otp?: PPinInputProps;
 };
 
 export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> {
@@ -45,7 +45,7 @@ export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F ext
    * Display a list of Button under the description.
    * `{ color: 'neutral', variant: 'subtle', block: true }`{lang="ts-type"}
    */
-  providers?: Array<ButtonProps>;
+  providers?: Array<PButtonProps>;
   /**
    * The text displayed in the separator.
    * @defaultValue 'or'
@@ -55,13 +55,13 @@ export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F ext
    * Display a submit button at the bottom of the form.
    * `{ label: 'Continue', block: true }`{lang="ts-type"}
    */
-  submit?: ButtonProps;
+  submit?: PButtonProps;
   schema?: T;
   validate?: FormProps<T>['validate'];
   validateOn?: FormProps<T>['validateOn'];
   validateOnInputDelay?: FormProps<T>['validateOnInputDelay'];
   disabled?: FormProps<T>['disabled'];
-  loading?: ButtonProps['loading'];
+  loading?: PButtonProps['loading'];
   loadingAuto?: FormProps<T>['loadingAuto'];
   class?: any;
   onSubmit?: FormProps<T>['onSubmit'];

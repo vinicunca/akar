@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/prose/a'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 
 type ProseA = ComponentConfig<typeof theme, AppConfig, 'a', 'ui.prose'>
 
@@ -24,7 +24,7 @@ import ULink from '../Link.vue'
 
 const appConfig = useAppConfig() as ProseA['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.a || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.a || {}) }))
 
 const props = defineProps<ProseAProps>()
 defineSlots<ProseASlots>()

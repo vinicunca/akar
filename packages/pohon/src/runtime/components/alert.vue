@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { APrimitiveProps } from 'akar';
-import type { AvatarProps, ButtonProps, IconProps } from '../types';
+import type { PAvatarProps, PButtonProps, IconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/alert';
 
@@ -19,7 +19,7 @@ export interface PAlertProps {
    * @IconifyIcon
    */
   icon?: IconProps['name'];
-  avatar?: AvatarProps;
+  avatar?: PAvatarProps;
   /**
    * @defaultValue 'primary'
    */
@@ -39,14 +39,14 @@ export interface PAlertProps {
    * - next to the close button when orientation is `horizontal`
    * `{ size: 'xs' }`{lang="ts-type"}
    */
-  actions?: Array<ButtonProps>;
+  actions?: Array<PButtonProps>;
   /**
    * Display a close button to dismiss the alert.
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: boolean | Partial<ButtonProps>;
+  close?: boolean | Partial<PButtonProps>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
@@ -114,7 +114,7 @@ const pohon = computed(() =>
     <slot name="leading">
       <PAvatar
         v-if="avatar"
-        :size="((props.pohon?.avatarSize || pohon.avatarSize()) as AvatarProps['size'])"
+        :size="((props.pohon?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
         :class="pohon.avatar({ class: props.pohon?.avatar })"
       />
@@ -183,7 +183,7 @@ const pohon = computed(() =>
           color="neutral"
           variant="link"
           :aria-label="t('alert.close')"
-          v-bind="typeof close === 'object' ? close as Partial<ButtonProps> : {}"
+          v-bind="typeof close === 'object' ? close as Partial<PButtonProps> : {}"
           :class="pohon.close({ class: props.pohon?.close })"
           @click="emits('update:open', false)"
         />

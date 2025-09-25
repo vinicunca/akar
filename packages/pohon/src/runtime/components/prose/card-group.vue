@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/tv'
+import type { ComponentConfig } from '../../types/uv'
 import theme from '#build/ui/prose/card-group'
 
 type ProseCardGroup = ComponentConfig<typeof theme, AppConfig, 'cardGroup', 'ui.prose'>
@@ -24,7 +24,7 @@ defineSlots<ProseCardGroupSlots>()
 
 const appConfig = useAppConfig() as ProseCardGroup['AppConfig']
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.prose?.cardGroup || {}) }))
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.cardGroup || {}) }))
 </script>
 
 <template>

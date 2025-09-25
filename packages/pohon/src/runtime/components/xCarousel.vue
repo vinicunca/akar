@@ -8,7 +8,7 @@ import type { AutoplayOptionsType } from 'embla-carousel-autoplay';
 import type { ClassNamesOptionsType } from 'embla-carousel-class-names';
 import type { FadeOptionsType } from 'embla-carousel-fade';
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures';
-import type { ButtonProps, IconProps } from '../types';
+import type { IconProps, PButtonProps } from '../types';
 import type { AcceptableValue } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/carousel';
@@ -32,7 +32,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * Configure the prev button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
-  prev?: ButtonProps;
+  prev?: PButtonProps;
   /**
    * The icon displayed in the prev button.
    * @defaultValue appConfig.pohon.icons.arrowLeft
@@ -43,7 +43,7 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
    * Configure the next button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
    */
-  next?: ButtonProps;
+  next?: PButtonProps;
   /**
    * The icon displayed in the next button.
    * @defaultValue appConfig.pohon.icons.arrowRight
@@ -303,7 +303,7 @@ defineExpose({
           v-for="(item, index) in items"
           :key="index"
           v-bind="dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
-          :class="pohon.item({ class: [props.pohon?.item, isCarouselItem(item) && item.ui?.item, isCarouselItem(item) && item.class] })"
+          :class="pohon.item({ class: [props.pohon?.item, isCarouselItem(item) && item.pohon?.item, isCarouselItem(item) && item.class] })"
         >
           <slot
             :item="item"

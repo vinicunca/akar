@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { APrimitiveProps } from 'akar';
-import type { ButtonProps, IconProps, LinkProps } from '../types';
+import type { IconProps, PLinkProps, PButtonProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/banner';
 
 type Banner = ComponentConfig<typeof theme, AppConfig, 'banner'>;
 
-export interface BannerProps {
+export interface PBannerProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -29,9 +29,9 @@ export interface BannerProps {
    * Display a list of actions next to the title.
    * `{ color: 'neutral', size: 'xs' }`{lang="ts-type"}
    */
-  actions?: Array<ButtonProps>;
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  actions?: Array<PButtonProps>;
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   /**
    * @defaultValue 'primary'
    */
@@ -42,7 +42,7 @@ export interface BannerProps {
    * @emits `close`
    * @defaultValue false
    */
-  close?: boolean | Partial<ButtonProps>;
+  close?: boolean | Partial<PButtonProps>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
@@ -53,14 +53,14 @@ export interface BannerProps {
   pohon?: Banner['slots'];
 }
 
-export interface BannerSlots {
+export interface PBannerSlots {
   leading: (props?: object) => any;
   title: (props?: object) => any;
   actions: (props?: object) => any;
   close: (props: { pohon: any }) => any;
 }
 
-export interface BannerEmits {
+export interface PBannerEmits {
   close: [];
 }
 </script>
@@ -78,9 +78,9 @@ import PContainer from './xContainer.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = defineProps<BannerProps>();
-const emits = defineEmits<BannerEmits>();
-const slots = defineSlots<BannerSlots>();
+const props = defineProps<PBannerProps>();
+const emits = defineEmits<PBannerEmits>();
+const slots = defineSlots<PBannerSlots>();
 const { t } = useLocale();
 const appConfig = useAppConfig() as Banner['AppConfig'];
 
@@ -194,7 +194,7 @@ function onClose() {
             color="neutral"
             variant="ghost"
             :aria-label="t('banner.close')"
-            v-bind="(typeof close === 'object' ? close as Partial<ButtonProps> : {})"
+            v-bind="(typeof close === 'object' ? close as Partial<PButtonProps> : {})"
             :class="pohon.close({ class: props.pohon?.close })"
             @click="onClose"
           />
