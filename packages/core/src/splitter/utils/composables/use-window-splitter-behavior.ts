@@ -1,5 +1,6 @@
 import type { Ref } from 'vue';
 import type { ResizeHandler } from '../types';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { watchEffect } from 'vue';
 import { assert } from '../assert';
 import { getResizeHandleElement, getResizeHandleElementIndex, getResizeHandleElementsForGroup } from '../dom';
@@ -34,12 +35,12 @@ export function useWindowSplitterResizeHandlerBehavior({
       }
 
       switch (event.key) {
-        case 'ArrowDown':
-        case 'ArrowLeft':
-        case 'ArrowRight':
-        case 'ArrowUp':
-        case 'End':
-        case 'Home': {
+        case KEY_CODES.ARROW_DOWN:
+        case KEY_CODES.ARROW_LEFT:
+        case KEY_CODES.ARROW_RIGHT:
+        case KEY_CODES.ARROW_UP:
+        case KEY_CODES.END:
+        case KEY_CODES.HOME: {
           event.preventDefault();
 
           resizeHandler.value?.(event);

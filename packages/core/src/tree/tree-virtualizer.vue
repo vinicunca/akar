@@ -147,7 +147,7 @@ rootContext.virtualKeydownHook.on((event) => {
       const item = intent === 'first' ? items[0] : items[items.length - 1];
       item.ref.focus();
     });
-  } else if (intent === 'prev' && event.key !== 'ArrowUp') {
+  } else if (intent === 'prev' && event.key !== KEY_CODES.ARROW_UP) {
     const currentElement = getActiveElement() as HTMLElement;
     const currentIndex = Number(currentElement.getAttribute('data-index'));
     const currentLevel = Number(currentElement.getAttribute('data-indent'));

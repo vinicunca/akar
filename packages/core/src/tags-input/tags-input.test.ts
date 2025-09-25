@@ -1,5 +1,6 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import userEvent from '@testing-library/user-event';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -63,7 +64,7 @@ describe('given default TagsInput', () => {
     describe('after pressing on ArrowLeft on input', () => {
       beforeEach(async () => {
         await input.trigger('keydown', {
-          key: 'ArrowLeft',
+          key: KEY_CODES.ARROW_LEFT,
         });
       });
 
@@ -73,7 +74,7 @@ describe('given default TagsInput', () => {
 
       it('should select the previous tag when press ArrowLeft', async () => {
         await input.trigger('keydown', {
-          key: 'ArrowLeft',
+          key: KEY_CODES.ARROW_LEFT,
         });
         expect(tags[tags.length - 1].attributes('data-state')).toBe('inactive');
         expect(tags[tags.length - 2].attributes('data-state')).toBe('active');
@@ -81,7 +82,7 @@ describe('given default TagsInput', () => {
 
       it('should select the first item when press Home', async () => {
         await input.trigger('keydown', {
-          key: 'Home',
+          key: KEY_CODES.HOME,
         });
         expect(tags[0].attributes('data-state')).toBe('active');
         expect(tags[tags.length - 1].attributes('data-state')).toBe('inactive');
@@ -89,10 +90,10 @@ describe('given default TagsInput', () => {
 
       it('should select the last item when press End', async () => {
         await input.trigger('keydown', {
-          key: 'Home',
+          key: KEY_CODES.HOME,
         });
         await input.trigger('keydown', {
-          key: 'End',
+          key: KEY_CODES.END,
         });
         expect(tags[0].attributes('data-state')).toBe('inactive');
         expect(tags[tags.length - 1].attributes('data-state')).toBe('active');
@@ -100,7 +101,7 @@ describe('given default TagsInput', () => {
 
       it('should remove active state when press ArrowRight', async () => {
         await input.trigger('keydown', {
-          key: 'ArrowRight',
+          key: KEY_CODES.ARROW_RIGHT,
         });
         expect(tags[tags.length - 1].attributes('data-state')).toBe('inactive');
       });

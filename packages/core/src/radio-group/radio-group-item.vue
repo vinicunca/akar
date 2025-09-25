@@ -21,7 +21,7 @@ export const [
 </script>
 
 <script setup lang="ts">
-import { isDeepEqual } from '@vinicunca/perkakas';
+import { isDeepEqual, isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { useEventListener } from '@vueuse/core';
 import { computed, ref } from 'vue';
 import { ARovingFocusItem } from '~~/roving-focus';
@@ -64,10 +64,10 @@ const checked = computed(() => isDeepEqual(rootContext.modelValue?.value, props.
 provideRadiogroupItemContext({ disabled, checked });
 
 const isArrowKeyPressed = ref(false);
-const ARROW_KEYS = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+const ARROW_KEYS = [KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_RIGHT];
 
 useEventListener('keydown', (event) => {
-  if (ARROW_KEYS.includes(event.key)) {
+  if (isIncludedIn(event.key, ARROW_KEYS)) {
     isArrowKeyPressed.value = true;
   }
 });

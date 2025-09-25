@@ -1,5 +1,6 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import type SliderImpl from './slider-impl.vue';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -66,7 +67,7 @@ describe('given default Slider', () => {
 
       it('arrowRight should decrease by 1', async () => {
         const currentValue = slider.attributes('aria-valuenow');
-        await slider.trigger('keydown', { key: 'ArrowRight' });
+        await slider.trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
         const newValue = slider.attributes('aria-valuenow');
         const diff = Number(newValue) - Number(currentValue);
         expect(slider.attributes('aria-valuenow')).toBe('49');
@@ -75,7 +76,7 @@ describe('given default Slider', () => {
 
       it('arrowLeft should increase by 1', async () => {
         const currentValue = slider.attributes('aria-valuenow');
-        await slider.trigger('keydown', { key: 'ArrowLeft' });
+        await slider.trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
         const newValue = slider.attributes('aria-valuenow');
         const diff = Number(newValue) - Number(currentValue);
         expect(slider.attributes('aria-valuenow')).toBe('51');
@@ -84,7 +85,7 @@ describe('given default Slider', () => {
 
       it('arrowUp should increase by 1', async () => {
         const currentValue = slider.attributes('aria-valuenow');
-        await slider.trigger('keydown', { key: 'ArrowUp' });
+        await slider.trigger('keydown', { key: KEY_CODES.ARROW_UP });
         const newValue = slider.attributes('aria-valuenow');
         const diff = Number(newValue) - Number(currentValue);
         expect(slider.attributes('aria-valuenow')).toBe('51');
@@ -93,7 +94,7 @@ describe('given default Slider', () => {
 
       it('arrowDown should decrease by 1', async () => {
         const currentValue = slider.attributes('aria-valuenow');
-        await slider.trigger('keydown', { key: 'ArrowDown' });
+        await slider.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
         const newValue = slider.attributes('aria-valuenow');
         const diff = Number(newValue) - Number(currentValue);
         expect(slider.attributes('aria-valuenow')).toBe('49');
@@ -119,12 +120,12 @@ describe('given default Slider', () => {
       });
 
       it('home should set value to 0', async () => {
-        await slider.trigger('keydown', { key: 'Home' });
+        await slider.trigger('keydown', { key: KEY_CODES.HOME });
         expect(slider.attributes('aria-valuenow')).toBe('0');
       });
 
       it('end should set value to max', async () => {
-        await slider.trigger('keydown', { key: 'End' });
+        await slider.trigger('keydown', { key: KEY_CODES.END });
         expect(slider.attributes('aria-valuenow')).toBe('100');
       });
     });
@@ -149,7 +150,7 @@ describe('given default Slider', () => {
 
         it('arrowRight should increase by 1', async () => {
           const currentValue = slider.attributes('aria-valuenow');
-          await slider.trigger('keydown', { key: 'ArrowRight' });
+          await slider.trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
           const newValue = slider.attributes('aria-valuenow');
           const diff = Number(newValue) - Number(currentValue);
           expect(slider.attributes('aria-valuenow')).toBe('51');
@@ -158,7 +159,7 @@ describe('given default Slider', () => {
 
         it('arrowLeft should decrease by 1', async () => {
           const currentValue = slider.attributes('aria-valuenow');
-          await slider.trigger('keydown', { key: 'ArrowLeft' });
+          await slider.trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
           const newValue = slider.attributes('aria-valuenow');
           const diff = Number(newValue) - Number(currentValue);
           expect(slider.attributes('aria-valuenow')).toBe('49');
@@ -167,7 +168,7 @@ describe('given default Slider', () => {
 
         it('arrowUp should decrease by 1', async () => {
           const currentValue = slider.attributes('aria-valuenow');
-          await slider.trigger('keydown', { key: 'ArrowUp' });
+          await slider.trigger('keydown', { key: KEY_CODES.ARROW_UP });
           const newValue = slider.attributes('aria-valuenow');
           const diff = Number(newValue) - Number(currentValue);
           expect(slider.attributes('aria-valuenow')).toBe('49');
@@ -176,7 +177,7 @@ describe('given default Slider', () => {
 
         it('arrowDown should increase by 1', async () => {
           const currentValue = slider.attributes('aria-valuenow');
-          await slider.trigger('keydown', { key: 'ArrowDown' });
+          await slider.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
           const newValue = slider.attributes('aria-valuenow');
           const diff = Number(newValue) - Number(currentValue);
           expect(slider.attributes('aria-valuenow')).toBe('51');
@@ -202,12 +203,12 @@ describe('given default Slider', () => {
         });
 
         it('home should set value to 100', async () => {
-          await slider.trigger('keydown', { key: 'Home' });
+          await slider.trigger('keydown', { key: KEY_CODES.HOME });
           expect(slider.attributes('aria-valuenow')).toBe('0');
         });
 
         it('end should set value to 0', async () => {
-          await slider.trigger('keydown', { key: 'End' });
+          await slider.trigger('keydown', { key: KEY_CODES.END });
           expect(slider.attributes('aria-valuenow')).toBe('100');
         });
       });
@@ -222,7 +223,7 @@ describe('given default Slider', () => {
 
       it('arrowRight should increase by 1', async () => {
         const currentValue = slider.attributes('aria-valuenow');
-        await slider.trigger('keydown', { key: 'ArrowRight' });
+        await slider.trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
         const newValue = slider.attributes('aria-valuenow');
         const diff = Number(newValue) - Number(currentValue);
         expect(slider.attributes('aria-valuenow')).toBe('51');
@@ -231,7 +232,7 @@ describe('given default Slider', () => {
 
       it('arrowLeft should decrease by 1', async () => {
         const currentValue = slider.attributes('aria-valuenow');
-        await slider.trigger('keydown', { key: 'ArrowLeft' });
+        await slider.trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
         const newValue = slider.attributes('aria-valuenow');
         const diff = Number(newValue) - Number(currentValue);
         expect(slider.attributes('aria-valuenow')).toBe('49');
@@ -240,7 +241,7 @@ describe('given default Slider', () => {
 
       it('arrowUp should increase by 1', async () => {
         const currentValue = slider.attributes('aria-valuenow');
-        await slider.trigger('keydown', { key: 'ArrowUp' });
+        await slider.trigger('keydown', { key: KEY_CODES.ARROW_UP });
         const newValue = slider.attributes('aria-valuenow');
         const diff = Number(newValue) - Number(currentValue);
         expect(slider.attributes('aria-valuenow')).toBe('51');
@@ -249,7 +250,7 @@ describe('given default Slider', () => {
 
       it('arrowDown should decrease by 1', async () => {
         const currentValue = slider.attributes('aria-valuenow');
-        await slider.trigger('keydown', { key: 'ArrowDown' });
+        await slider.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
         const newValue = slider.attributes('aria-valuenow');
         const diff = Number(newValue) - Number(currentValue);
         expect(slider.attributes('aria-valuenow')).toBe('49');
@@ -275,12 +276,12 @@ describe('given default Slider', () => {
       });
 
       it('home should set value to 0', async () => {
-        await slider.trigger('keydown', { key: 'Home' });
+        await slider.trigger('keydown', { key: KEY_CODES.HOME });
         expect(slider.attributes('aria-valuenow')).toBe('0');
       });
 
       it('end should set value to max', async () => {
-        await slider.trigger('keydown', { key: 'End' });
+        await slider.trigger('keydown', { key: KEY_CODES.END });
         expect(slider.attributes('aria-valuenow')).toBe('100');
       });
     });
@@ -334,7 +335,7 @@ describe('given default Slider', () => {
 
     it('arrowRight should increase by 1', async () => {
       const currentValue = slider.attributes('aria-valuenow');
-      await slider.trigger('keydown', { key: 'ArrowRight' });
+      await slider.trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
       const newValue = slider.attributes('aria-valuenow');
       const diff = Number(newValue) - Number(currentValue);
       expect(slider.attributes('aria-valuenow')).toBe('51');
@@ -343,7 +344,7 @@ describe('given default Slider', () => {
 
     it('arrowLeft should decrease by 1', async () => {
       const currentValue = slider.attributes('aria-valuenow');
-      await slider.trigger('keydown', { key: 'ArrowLeft' });
+      await slider.trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
       const newValue = slider.attributes('aria-valuenow');
       const diff = Number(newValue) - Number(currentValue);
       expect(slider.attributes('aria-valuenow')).toBe('49');
@@ -352,7 +353,7 @@ describe('given default Slider', () => {
 
     it('arrowUp should increase by 1', async () => {
       const currentValue = slider.attributes('aria-valuenow');
-      await slider.trigger('keydown', { key: 'ArrowUp' });
+      await slider.trigger('keydown', { key: KEY_CODES.ARROW_UP });
       const newValue = slider.attributes('aria-valuenow');
       const diff = Number(newValue) - Number(currentValue);
       expect(slider.attributes('aria-valuenow')).toBe('51');
@@ -361,7 +362,7 @@ describe('given default Slider', () => {
 
     it('arrowDown should decrease by 1', async () => {
       const currentValue = slider.attributes('aria-valuenow');
-      await slider.trigger('keydown', { key: 'ArrowDown' });
+      await slider.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
       const newValue = slider.attributes('aria-valuenow');
       const diff = Number(newValue) - Number(currentValue);
       expect(slider.attributes('aria-valuenow')).toBe('49');
@@ -387,12 +388,12 @@ describe('given default Slider', () => {
     });
 
     it('home should set value to 0', async () => {
-      await slider.trigger('keydown', { key: 'Home' });
+      await slider.trigger('keydown', { key: KEY_CODES.HOME });
       expect(slider.attributes('aria-valuenow')).toBe('0');
     });
 
     it('end should set value to max', async () => {
-      await slider.trigger('keydown', { key: 'End' });
+      await slider.trigger('keydown', { key: KEY_CODES.END });
       expect(slider.attributes('aria-valuenow')).toBe('100');
     });
   });
@@ -426,7 +427,7 @@ describe('given slider in a form', async () => {
     beforeEach(async () => {
       const slider = wrapper.find('[role="slider"]');
       await slider.trigger('focus');
-      await slider.trigger('keydown', { key: 'ArrowRight' });
+      await slider.trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
       await wrapper.find('form').trigger('submit');
     });
 

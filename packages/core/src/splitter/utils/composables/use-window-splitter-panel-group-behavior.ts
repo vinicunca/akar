@@ -1,6 +1,7 @@
 /* eslint-disable sonar/no-nested-functions */
 import type { Ref } from 'vue';
 import type { PanelData } from '../../splitter-panel.vue';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { watchEffect } from 'vue';
 import { assert } from '../assert';
 import { calculateAriaValues } from '../calculate';
@@ -118,7 +119,7 @@ export function useWindowSplitterPanelGroupBehavior({
 
         // eslint-disable-next-line sonar/no-small-switch
         switch (event.key) {
-          case 'Enter': {
+          case KEY_CODES.ENTER: {
             event.preventDefault();
 
             const index = panelDataArray.findIndex(

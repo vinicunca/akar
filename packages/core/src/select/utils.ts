@@ -1,8 +1,8 @@
 import type { AcceptableValue } from '~~/shared/types';
-import { isDeepEqual } from '@vinicunca/perkakas';
+import { isDeepEqual, KEY_CODES } from '@vinicunca/perkakas';
 
-export const OPEN_KEYS = [' ', 'Enter', 'ArrowUp', 'ArrowDown'];
-export const SELECTION_KEYS = [' ', 'Enter'];
+export const OPEN_KEYS = [' ', KEY_CODES.ENTER, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN];
+export const SELECTION_KEYS = [' ', KEY_CODES.ENTER];
 export const CONTENT_MARGIN = 10;
 
 export function valueComparator<T>(value: T | Array<T> | undefined, currentValue: T, comparator?: string | ((a: T, b: T) => boolean)) {

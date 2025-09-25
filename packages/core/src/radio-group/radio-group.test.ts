@@ -1,6 +1,6 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { fireEvent } from '@testing-library/vue';
-import { sleep } from '@vinicunca/perkakas';
+import { KEY_CODES, sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -33,7 +33,7 @@ describe('given a default RadioGroup', () => {
   describe('on keyboard navigation', () => {
     beforeEach(async () => {
       radios[0].element.focus();
-      await fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
+      await fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_DOWN });
       await sleep(0);
     });
 
@@ -55,7 +55,7 @@ describe('given a default RadioGroup', () => {
 
     describe('on arrow up', () => {
       it('should select the first item again', async () => {
-        await fireEvent.keyDown(document.activeElement!, { key: 'ArrowUp' });
+        await fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_UP });
         await sleep(0);
         expect(radios[0].attributes('data-state')).toBe('checked');
         expect(radios[2].attributes('data-state')).toBe('unchecked');

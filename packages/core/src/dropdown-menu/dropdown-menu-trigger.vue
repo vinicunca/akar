@@ -54,7 +54,7 @@ function handleKeyDown(event: KeyboardEvent) {
     rootContext.onOpenToggle();
   }
 
-  if (event.key === 'ArrowDown') {
+  if (event.key === KEY_CODES.ARROW_DOWN) {
     rootContext.onOpenChange(true);
   }
 

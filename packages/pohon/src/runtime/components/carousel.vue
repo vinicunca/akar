@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { APrimitiveProps } from 'akar';
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import type { AutoHeightOptionsType } from 'embla-carousel-auto-height';
 import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll';
@@ -15,14 +16,14 @@ import theme from '#build/pohon/carousel';
 
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>;
 
-export type CarouselValue = AcceptableValue;
-export type CarouselItem = CarouselValue | {
+export type PCarouselValue = AcceptableValue;
+export type PCarouselItem = PCarouselValue | {
   class?: any;
   pohon?: Pick<Carousel['slots'], 'item'>;
   [key: string]: any;
 };
 
-export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
+export interface PCarouselProps<T extends PCarouselItem = PCarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -100,11 +101,11 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   pohon?: Carousel['slots'];
 }
 
-export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
+export type PCarouselSlots<T extends PCarouselItem = PCarouselItem> = {
   default: (props: { item: T; index: number }) => any;
 };
 
-export interface CarouselEmits {
+export interface PCarouselEmits {
   /**
    * Emitted when the selected slide changes
    * @param selectedIndex The index of the selected slide
@@ -113,8 +114,9 @@ export interface CarouselEmits {
 }
 </script>
 
-<script setup lang="ts" generic="T extends CarouselItem">
+<script setup lang="ts" generic="T extends PCarouselItem">
 import { useAppConfig } from '#imports';
+import { isBoolean, KEY_CODES } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import useEmblaCarousel from 'embla-carousel-vue';
@@ -123,44 +125,75 @@ import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<CarouselProps<T>>(), {
-  orientation: 'horizontal',
-  arrows: false,
-  dots: false,
-  // Embla Options
-  active: true,
-  align: 'center',
-  breakpoints: () => ({}),
-  containScroll: 'trimSnaps',
-  dragFree: false,
-  dragThreshold: 10,
-  duration: 25,
-  inViewThreshold: 0,
-  loop: false,
-  skipSnaps: false,
-  slidesToScroll: 1,
-  startIndex: 0,
-  watchDrag: true,
-  watchResize: true,
-  watchSlides: true,
-  watchFocus: true,
-  // Embla Plugins
-  autoplay: false,
-  autoScroll: false,
-  autoHeight: false,
-  classNames: false,
-  fade: false,
-  wheelGestures: false,
-});
-const emits = defineEmits<CarouselEmits>();
-defineSlots<CarouselSlots<T>>();
+const props = withDefaults(
+  defineProps<PCarouselProps<T>>(),
+  {
+    orientation: 'horizontal',
+    arrows: false,
+    dots: false,
+    // Embla Options
+    active: true,
+    align: 'center',
+    breakpoints: () => ({}),
+    containScroll: 'trimSnaps',
+    dragFree: false,
+    dragThreshold: 10,
+    duration: 25,
+    inViewThreshold: 0,
+    loop: false,
+    skipSnaps: false,
+    slidesToScroll: 1,
+    startIndex: 0,
+    watchDrag: true,
+    watchResize: true,
+    watchSlides: true,
+    watchFocus: true,
+    // Embla Plugins
+    autoplay: false,
+    autoScroll: false,
+    autoHeight: false,
+    classNames: false,
+    fade: false,
+    wheelGestures: false,
+  },
+);
+const emits = defineEmits<PCarouselEmits>();
+defineSlots<PCarouselSlots<T>>();
 const { dir, t } = useLocale();
 const appConfig = useAppConfig() as Carousel['AppConfig'];
 
-const rootProps = useForwardProps(reactivePick(props, 'active', 'align', 'breakpoints', 'containScroll', 'dragFree', 'dragThreshold', 'duration', 'inViewThreshold', 'loop', 'skipSnaps', 'slidesToScroll', 'startIndex', 'watchDrag', 'watchResize', 'watchSlides', 'watchFocus'));
+const rootProps = useForwardProps(
+  reactivePick(
+    props,
+    'active',
+    'align',
+    'breakpoints',
+    'containScroll',
+    'dragFree',
+    'dragThreshold',
+    'duration',
+    'inViewThreshold',
+    'loop',
+    'skipSnaps',
+    'slidesToScroll',
+    'startIndex',
+    'watchDrag',
+    'watchResize',
+    'watchSlides',
+    'watchFocus',
+  ),
+);
 
-const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.arrowRight : appConfig.pohon.icons.arrowLeft));
-const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.arrowLeft : appConfig.pohon.icons.arrowRight));
+const prevIcon = computed(() =>
+  props.prevIcon || (dir.value === 'rtl'
+    ? appConfig.pohon.icons.arrowRight
+    : appConfig.pohon.icons.arrowLeft),
+);
+const nextIcon = computed(() =>
+  props.nextIcon || (dir.value === 'rtl'
+    ? appConfig.pohon.icons.arrowLeft
+    : appConfig.pohon.icons.arrowRight),
+);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.carousel || {}) })({
   orientation: props.orientation,
@@ -211,7 +244,18 @@ async function loadPlugins() {
   plugins.value = emblaPlugins;
 }
 
-watch(() => [props.autoplay, props.autoScroll, props.autoHeight, props.classNames, props.fade, props.wheelGestures], loadPlugins, { immediate: true });
+watch(
+  () => [
+    props.autoplay,
+    props.autoScroll,
+    props.autoHeight,
+    props.classNames,
+    props.fade,
+    props.wheelGestures,
+  ],
+  loadPlugins,
+  { immediate: true },
+);
 
 const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value);
 
@@ -230,8 +274,8 @@ function scrollTo(index: number) {
 }
 
 function onKeyDown(event: KeyboardEvent) {
-  const prevKey = props.orientation === 'vertical' ? 'ArrowUp' : 'ArrowLeft';
-  const nextKey = props.orientation === 'vertical' ? 'ArrowDown' : 'ArrowRight';
+  const prevKey = props.orientation === 'vertical' ? KEY_CODES.ARROW_UP : KEY_CODES.ARROW_LEFT;
+  const nextKey = props.orientation === 'vertical' ? KEY_CODES.ARROW_DOWN : KEY_CODES.ARROW_RIGHT;
 
   if (event.key === prevKey) {
     event.preventDefault();
@@ -263,7 +307,7 @@ function onSelect(api: EmblaCarouselType) {
   emits('select', selectedIndex.value);
 }
 
-function isCarouselItem(item: CarouselItem): item is Exclude<CarouselItem, CarouselValue> {
+function isCarouselItem(item: PCarouselItem): item is Exclude<PCarouselItem, PCarouselValue> {
   return typeof item === 'object' && item !== null;
 }
 

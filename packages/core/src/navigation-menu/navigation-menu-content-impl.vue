@@ -15,6 +15,7 @@ export interface NavigationMenuContentImplProps extends DismissableLayerProps {}
 </script>
 
 <script setup lang="ts">
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, ref, watchEffect } from 'vue';
 import { DismissableLayer } from '~~/dismissable-layer';
 import { getActiveElement, useArrowNavigation, useForwardExpose } from '~~/shared';
@@ -109,7 +110,7 @@ function handlePointerDownOutside(event: PointerDownOutsideEvent) {
       i.ref.contains(target),
     );
     const isRootViewport
-    = menuContext.isRootMenu && menuContext.viewport.value?.contains(target);
+      = menuContext.isRootMenu && menuContext.viewport.value?.contains(target);
 
     if (isTrigger || isRootViewport || !menuContext.isRootMenu) {
       event.preventDefault();
@@ -153,7 +154,7 @@ function handleKeydown(event: KeyboardEvent) {
   }
 
   const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
-  const isTabKey = event.key === 'Tab' && !isMetaKey;
+  const isTabKey = event.key === KEY_CODES.TAB && !isMetaKey;
   const candidates = getTabbableCandidates(event.currentTarget as HTMLElement);
 
   if (isTabKey) {

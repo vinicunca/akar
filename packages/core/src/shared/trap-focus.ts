@@ -1,3 +1,4 @@
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { getActiveElement } from './get-active-element';
 
 export function trapFocus(element: HTMLElement) {
@@ -22,7 +23,7 @@ export function trapFocus(element: HTMLElement) {
     }
 
     element.addEventListener('keydown', (e) => {
-      const isTabPressed = e.key === 'Tab' || e.keyCode === KEYCODE_TAB;
+      const isTabPressed = e.key === KEY_CODES.TAB || e.keyCode === KEYCODE_TAB;
 
       if (!isTabPressed) {
         return;

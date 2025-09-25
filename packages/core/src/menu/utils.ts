@@ -1,3 +1,4 @@
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { getActiveElement } from '~~/shared';
 
 export type CheckedState = 'indeterminate' | boolean;
@@ -5,17 +6,17 @@ export type Direction = 'ltr' | 'rtl';
 
 export const ITEM_NAME = 'AMenuItem';
 export const ITEM_SELECT = 'menu.itemSelect';
-export const SELECTION_KEYS = ['Enter', ' '];
-export const FIRST_KEYS = ['ArrowDown', 'PageUp', 'Home'];
-export const LAST_KEYS = ['ArrowUp', 'PageDown', 'End'];
+export const SELECTION_KEYS = [KEY_CODES.ENTER, ' '];
+export const FIRST_KEYS = [KEY_CODES.ARROW_DOWN, KEY_CODES.PAGE_UP, KEY_CODES.HOME];
+export const LAST_KEYS = [KEY_CODES.ARROW_UP, KEY_CODES.PAGE_DOWN, KEY_CODES.END];
 export const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
 export const SUB_OPEN_KEYS: Record<Direction, Array<string>> = {
-  ltr: [...SELECTION_KEYS, 'ArrowRight'],
-  rtl: [...SELECTION_KEYS, 'ArrowLeft'],
+  ltr: [...SELECTION_KEYS, KEY_CODES.ARROW_RIGHT],
+  rtl: [...SELECTION_KEYS, KEY_CODES.ARROW_LEFT],
 };
 export const SUB_CLOSE_KEYS: Record<Direction, Array<string>> = {
-  ltr: ['ArrowLeft'],
-  rtl: ['ArrowRight'],
+  ltr: [KEY_CODES.ARROW_LEFT],
+  rtl: [KEY_CODES.ARROW_RIGHT],
 };
 
 export function getOpenState(open: boolean) {

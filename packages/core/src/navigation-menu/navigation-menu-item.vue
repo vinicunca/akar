@@ -32,6 +32,7 @@ export const [
 </script>
 
 <script setup lang="ts">
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { ref } from 'vue';
 import { APrimitive } from '~~/primitive';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
@@ -104,7 +105,7 @@ function handleClose() {
 
 function handleKeydown(event: KeyboardEvent) {
   const currentFocus = getActiveElement() as HTMLElement;
-  if (event.keyCode === 32 || event.key === 'Enter') {
+  if (event.keyCode === 32 || event.key === KEY_CODES.ENTER) {
     if (context.modelValue.value === value) {
       handleClose();
       event.preventDefault();

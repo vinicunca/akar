@@ -1,5 +1,6 @@
 import type { PanelData } from '../splitter-panel.vue';
 import type { Direction, DragState, ResizeEvent } from './types';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { assert } from './assert';
 import { getPanelGroupElement, getResizeHandleElement } from './dom';
 import { getResizeEventCursorPosition, isKeyDown } from './events';
@@ -56,22 +57,22 @@ export function calculateDeltaPercentage(
 
     let movement = 0;
     switch (event.key) {
-      case 'ArrowDown':
+      case KEY_CODES.ARROW_DOWN:
         movement = isHorizontal ? 0 : delta;
         break;
-      case 'ArrowLeft':
+      case KEY_CODES.ARROW_LEFT:
         movement = isHorizontal ? -delta : 0;
         break;
-      case 'ArrowRight':
+      case KEY_CODES.ARROW_RIGHT:
         movement = isHorizontal ? delta : 0;
         break;
-      case 'ArrowUp':
+      case KEY_CODES.ARROW_UP:
         movement = isHorizontal ? 0 : -delta;
         break;
-      case 'End':
+      case KEY_CODES.END:
         movement = 100;
         break;
-      case 'Home':
+      case KEY_CODES.HOME:
         movement = -100;
         break;
     }

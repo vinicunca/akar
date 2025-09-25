@@ -1,5 +1,5 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
-import { sleep } from '@vinicunca/perkakas';
+import { KEY_CODES, sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -292,7 +292,7 @@ describe('given combobox in a form', async () => {
     valueBox = wrapper.find('input');
     enterEventBubbledToForm = false;
     wrapper.find('form').element.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
+      if (event.key === KEY_CODES.ENTER) {
         enterEventBubbledToForm = true;
       }
     });
@@ -336,7 +336,7 @@ describe('given combobox in a form', async () => {
     beforeEach(async () => {
       await wrapper.find('button').trigger('click');
       await valueBox.setValue('B');
-      await valueBox.trigger('keydown', { key: 'Enter' });
+      await valueBox.trigger('keydown', { key: KEY_CODES.ENTER });
     });
 
     it('should show value correctly', () => {

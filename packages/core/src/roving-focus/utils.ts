@@ -1,3 +1,4 @@
+import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { getActiveElement } from '~~/shared';
 
 export type Orientation = 'horizontal' | 'vertical';
@@ -7,14 +8,14 @@ export const ENTRY_FOCUS = 'rovingFocusGroup.onEntryFocus';
 export const EVENT_OPTIONS = { bubbles: false, cancelable: true };
 
 export const MAP_KEY_TO_FOCUS_INTENT: Record<string, FocusIntent> = {
-  ArrowLeft: 'prev',
-  ArrowUp: 'prev',
-  ArrowRight: 'next',
-  ArrowDown: 'next',
-  PageUp: 'first',
-  Home: 'first',
-  PageDown: 'last',
-  End: 'last',
+  [KEY_CODES.ARROW_LEFT]: 'prev',
+  [KEY_CODES.ARROW_UP]: 'prev',
+  [KEY_CODES.ARROW_RIGHT]: 'next',
+  [KEY_CODES.ARROW_DOWN]: 'next',
+  [KEY_CODES.PAGE_UP]: 'first',
+  [KEY_CODES.HOME]: 'first',
+  [KEY_CODES.PAGE_DOWN]: 'last',
+  [KEY_CODES.END]: 'last',
 };
 
 export function getDirectionAwareKey(key: string, dir?: Direction) {
@@ -22,12 +23,12 @@ export function getDirectionAwareKey(key: string, dir?: Direction) {
     return key;
   }
 
-  if (key === 'ArrowLeft') {
-    return 'ArrowRight';
+  if (key === KEY_CODES.ARROW_LEFT) {
+    return KEY_CODES.ARROW_RIGHT;
   }
 
-  if (key === 'ArrowRight') {
-    return 'ArrowLeft';
+  if (key === KEY_CODES.ARROW_RIGHT) {
+    return KEY_CODES.ARROW_LEFT;
   }
 
   return key;
@@ -41,10 +42,10 @@ export function getFocusIntent(
   dir?: Direction,
 ) {
   const key = getDirectionAwareKey(event.key, dir);
-  if (orientation === 'vertical' && ['ArrowLeft', 'ArrowRight'].includes(key)) {
+  if (orientation === 'vertical' && isIncludedIn(key, [KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_RIGHT])) {
     return undefined;
   }
-  if (orientation === 'horizontal' && ['ArrowUp', 'ArrowDown'].includes(key)) {
+  if (orientation === 'horizontal' && isIncludedIn(key, [KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN])) {
     return undefined;
   }
   return MAP_KEY_TO_FOCUS_INTENT[key];

@@ -1,7 +1,7 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/vue';
-import { sleep } from '@vinicunca/perkakas';
+import { KEY_CODES, sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { useDebounceFn } from '@vueuse/core';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -70,7 +70,7 @@ describe('given default NavigationMenu', () => {
 
     describe('after pressing down key', async () => {
       beforeEach(async () => {
-        await fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
+        await fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_DOWN });
         await sleep(0);
       });
 
@@ -82,7 +82,7 @@ describe('given default NavigationMenu', () => {
       it('should focus on the last item in menu', async () => {
         const links = content.findAll('a');
         for (let i = 0; i < links.length; i++) {
-          await fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
+          await fireEvent.keyDown(document.activeElement!, { key: KEY_CODES.ARROW_DOWN });
           await sleep(0);
         }
         expect(links[links.length - 1].element).toBe(document.activeElement);

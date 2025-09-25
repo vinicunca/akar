@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { useCollection } from '~~/collection';
 import { useForwardExpose } from '~~/shared';
 
@@ -111,8 +112,8 @@ function handleClick(event: PointerEvent) {
 }
 
 function handleKeydown(event: KeyboardEvent) {
-  const verticalEntryKey = menuContext.dir.value === 'rtl' ? 'ArrowLeft' : 'ArrowRight';
-  const entryKey = { horizontal: 'ArrowDown', vertical: verticalEntryKey }[
+  const verticalEntryKey = menuContext.dir.value === 'rtl' ? KEY_CODES.ARROW_LEFT : KEY_CODES.ARROW_RIGHT;
+  const entryKey = { horizontal: KEY_CODES.ARROW_DOWN, vertical: verticalEntryKey }[
     menuContext.orientation
   ];
   if (open.value && event.key === entryKey) {

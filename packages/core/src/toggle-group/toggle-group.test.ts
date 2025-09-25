@@ -1,4 +1,5 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -46,7 +47,7 @@ describe('given default AToggle Group', () => {
   describe('after triggering ArrowRight', () => {
     beforeEach(async () => {
       triggers[1].element.focus();
-      await triggers[1].trigger('keydown', { key: 'ArrowRight' });
+      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
     });
 
     it('should received focus for the next toggle', () => {
@@ -66,7 +67,7 @@ describe('given default AToggle Group', () => {
 
       describe('after triggering ArrowRight again', () => {
         beforeEach(async () => {
-          await triggers[2].trigger('keydown', { key: 'ArrowRight' });
+          await triggers[2].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
         });
 
         it('should received focus for the first toggle', () => {
@@ -79,7 +80,7 @@ describe('given default AToggle Group', () => {
   describe('after triggering ArrowLeft', () => {
     beforeEach(async () => {
       triggers[1].element.focus();
-      await triggers[1].trigger('keydown', { key: 'ArrowLeft' });
+      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
     });
 
     it('should received focus for the next toggle', () => {
@@ -131,7 +132,7 @@ describe('given multiple value AToggle Group', () => {
   describe('after triggering ArrowRight', () => {
     beforeEach(async () => {
       triggers[1].element.focus();
-      await triggers[1].trigger('keydown', { key: 'ArrowRight' });
+      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
     });
 
     it('should received focus for the next toggle', () => {
@@ -151,7 +152,7 @@ describe('given multiple value AToggle Group', () => {
 
       describe('after triggering ArrowRight again', () => {
         beforeEach(async () => {
-          await triggers[2].trigger('keydown', { key: 'ArrowRight' });
+          await triggers[2].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
         });
 
         it('should received focus for the first toggle', () => {
@@ -164,7 +165,7 @@ describe('given multiple value AToggle Group', () => {
   describe('after triggering ArrowLeft', () => {
     beforeEach(async () => {
       triggers[1].element.focus();
-      await triggers[1].trigger('keydown', { key: 'ArrowLeft' });
+      await triggers[1].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
     });
 
     it('should received focus for the next toggle', () => {

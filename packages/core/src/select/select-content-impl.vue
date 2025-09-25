@@ -199,15 +199,15 @@ function handleKeyDown(event: KeyboardEvent) {
     handleTypeaheadSearch({ key: event.key, items: getItems() });
   }
 
-  if (['ArrowDown', 'ArrowUp', 'End', 'Home'].includes(event.key)) {
+  if ([KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_UP, KEY_CODES.END, KEY_CODES.HOME].includes(event.key)) {
     const collectionItems = getItems().map((i) => i.ref);
     let candidateNodes = [...collectionItems];
 
-    if (['ArrowUp', 'End'].includes(event.key)) {
+    if ([KEY_CODES.ARROW_UP, KEY_CODES.END].includes(event.key)) {
       candidateNodes = candidateNodes.slice().reverse();
     }
 
-    if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+    if ([KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_UP].includes(event.key)) {
       const currentElement = event.target as HTMLElement;
       const currentIndex = candidateNodes.indexOf(currentElement);
       candidateNodes = candidateNodes.slice(currentIndex + 1);

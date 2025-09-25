@@ -2,6 +2,7 @@
 import type { Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { Direction, FormFieldProps } from '~~/shared/types';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, ref, toRefs } from 'vue';
 import { createContext, useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '~~/shared';
 
@@ -162,18 +163,18 @@ provideTagsInputRootContext({
     }
     const lastTag = collection.at(-1);
     switch (event.key) {
-      case 'ArrowDown':
-      case 'ArrowUp': {
+      case KEY_CODES.ARROW_DOWN:
+      case KEY_CODES.ARROW_UP: {
         if (selectedElement.value) {
           event.preventDefault();
         }
         break;
       }
-      case 'ArrowLeft':
-      case 'ArrowRight':
-      case 'End':
-      case 'Home': {
-        const isArrowRight = (event.key === 'ArrowRight' && dir.value === 'ltr') || (event.key === 'ArrowLeft' && dir.value === 'rtl');
+      case KEY_CODES.ARROW_LEFT:
+      case KEY_CODES.ARROW_RIGHT:
+      case KEY_CODES.END:
+      case KEY_CODES.HOME: {
+        const isArrowRight = (event.key === KEY_CODES.ARROW_RIGHT && dir.value === 'ltr') || (event.key === KEY_CODES.ARROW_LEFT && dir.value === 'rtl');
         const isArrowLeft = !isArrowRight;
         // only focus on tags when cursor is at the first position
         if (target.selectionStart !== 0 || target.selectionEnd !== 0) {

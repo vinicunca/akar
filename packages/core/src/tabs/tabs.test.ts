@@ -1,4 +1,5 @@
 import type { VueWrapper } from '@vue/test-utils';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -25,7 +26,7 @@ describe('given default Tabs', () => {
   describe('after changing tab', () => {
     beforeEach(async () => {
       const trigger = wrapper.find('button');
-      await trigger.trigger('keydown', { key: 'ArrowRight' });
+      await trigger.trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
     });
 
     it('should focus on next tab', () => {

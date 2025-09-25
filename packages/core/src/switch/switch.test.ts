@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/vue';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -42,10 +43,10 @@ describe('test switch functionalities', () => {
     const button = container.querySelector('button')!;
     screen.getByText('unchecked');
 
-    await fireEvent.keyDown(button, { key: 'Enter' });
+    await fireEvent.keyDown(button, { key: KEY_CODES.ENTER });
     screen.getByText('checked');
 
-    await fireEvent.keyDown(button, { key: 'Enter' });
+    await fireEvent.keyDown(button, { key: KEY_CODES.ENTER });
     screen.getByText('unchecked');
   });
 });
