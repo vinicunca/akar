@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { SliderRootProps } from 'akar';
+import type { APrimitiveProps, ASliderRootProps } from 'akar';
 import type { PTooltipProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/slider';
 
 type Slider = ComponentConfig<typeof theme, AppConfig, 'slider'>;
 
-export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' | 'inverted' | 'min' | 'max' | 'step' | 'minStepsBetweenThumbs'> {
+export interface PSliderProps extends Pick<ASliderRootProps, 'name' | 'disabled' | 'inverted' | 'min' | 'max' | 'step' | 'minStepsBetweenThumbs'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -25,7 +25,7 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
    * The orientation of the slider.
    * @defaultValue 'horizontal'
    */
-  orientation?: SliderRootProps['orientation'];
+  orientation?: ASliderRootProps['orientation'];
   /**
    * Display a tooltip around the slider thumbs with the current value.
    * `{ disableClosingTrigger: true }`{lang="ts-type"}
@@ -38,35 +38,66 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
   pohon?: Slider['slots'];
 }
 
-export interface SliderEmits {
+export interface PSliderEmits {
   change: [event: Event];
 }
 </script>
 
 <script setup lang="ts" generic="T extends number | number[]">
 import { useAppConfig } from '#imports';
+import { isNumber } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
-import { SliderRange, SliderRoot, SliderThumb, SliderTrack, useForwardPropsEmits } from 'akar';
+import {
+  ASliderRange,
+  ASliderRoot,
+  ASliderThumb,
+  ASliderTrack,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed } from 'vue';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
-import UTooltip from './Tooltip.vue';
+import PTooltip from './tooltip.vue';
 
-const props = withDefaults(defineProps<SliderProps>(), {
-  min: 0,
-  max: 100,
-  step: 1,
-  orientation: 'horizontal',
-});
-const emits = defineEmits<SliderEmits>();
+const props = withDefaults(
+  defineProps<PSliderProps>(),
+  {
+    min: 0,
+    max: 100,
+    step: 1,
+    orientation: 'horizontal',
+  },
+);
+const emits = defineEmits<PSliderEmits>();
 
 const modelValue = defineModel<T>();
 
 const appConfig = useAppConfig() as Slider['AppConfig'];
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits);
+const rootProps = useForwardPropsEmits(
+  reactivePick(
+    props,
+    'as',
+    'orientation',
+    'min',
+    'max',
+    'step',
+    'minStepsBetweenThumbs',
+    'inverted',
+  ),
+  emits,
+);
 
-const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SliderProps>(props);
+const {
+  id,
+  emitFormChange,
+  emitFormInput,
+  size,
+  color,
+  name,
+  disabled,
+  ariaAttrs,
+} = useFormField<PSliderProps>(props);
 
 const defaultSliderValue = computed(() => {
   if (isNumber(props.defaultValue)) {
@@ -89,12 +120,17 @@ const sliderValue = computed({
 
 const thumbs = computed(() => sliderValue.value?.length ?? 1);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slider || {}) })({
-  disabled: disabled.value,
-  size: size.value,
-  color: color.value,
-  orientation: props.orientation,
-}));
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.slider || {}),
+  })({
+    disabled: disabled.value,
+    size: size.value,
+    color: color.value,
+    orientation: props.orientation,
+  }),
+);
 
 function onChange(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -105,7 +141,7 @@ function onChange(value: any) {
 </script>
 
 <template>
-  <SliderRoot
+  <ASliderRoot
     v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     v-model="sliderValue"
@@ -116,26 +152,26 @@ function onChange(value: any) {
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
-    <SliderTrack :class="pohon.track({ class: props.pohon?.track })">
-      <SliderRange :class="pohon.range({ class: props.pohon?.range })" />
-    </SliderTrack>
+    <ASliderTrack :class="pohon.track({ class: props.pohon?.track })">
+      <ASliderRange :class="pohon.range({ class: props.pohon?.range })" />
+    </ASliderTrack>
 
     <template
       v-for="thumb in thumbs"
       :key="thumb"
     >
-      <UTooltip
+      <PTooltip
         v-if="!!tooltip"
         :text="thumbs > 1 ? String(sliderValue?.[thumb - 1]) : String(sliderValue)"
         disable-closing-trigger
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
-        <SliderThumb :class="pohon.thumb({ class: props.pohon?.thumb })" />
-      </UTooltip>
-      <SliderThumb
+        <ASliderThumb :class="pohon.thumb({ class: props.pohon?.thumb })" />
+      </PTooltip>
+      <ASliderThumb
         v-else
         :class="pohon.thumb({ class: props.pohon?.thumb })"
       />
     </template>
-  </SliderRoot>
+  </ASliderRoot>
 </template>

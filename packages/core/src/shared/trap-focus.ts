@@ -22,23 +22,23 @@ export function trapFocus(element: HTMLElement) {
       firstFocusableEl.focus();
     }
 
-    element.addEventListener('keydown', (e) => {
-      const isTabPressed = e.key === KEY_CODES.TAB || e.keyCode === KEYCODE_TAB;
+    element.addEventListener('keydown', (event) => {
+      const isTabPressed = event.key === KEY_CODES.TAB || event.keyCode === KEYCODE_TAB;
 
       if (!isTabPressed) {
         return;
       }
 
-      if (e.shiftKey) {
+      if (event.shiftKey) {
         /* shift + tab */ if (getActiveElement() === firstFocusableEl) {
           lastFocusableEl.focus();
-          e.preventDefault();
+          event.preventDefault();
         }
       } else {
       /* tab */
         if (getActiveElement() === lastFocusableEl) {
           firstFocusableEl.focus();
-          e.preventDefault();
+          event.preventDefault();
         }
       }
     });

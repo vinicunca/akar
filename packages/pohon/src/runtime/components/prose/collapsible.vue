@@ -40,7 +40,7 @@ export interface ProseCollapsibleSlots {
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
 import { useLocale } from '../../composables/use-locale';
-import { transformUI } from '../../utils';
+import { transformPohon } from '../../utils';
 import { tv } from '../../utils/tv';
 import UCollapsible from '../Collapsible.vue';
 import UIcon from '../Icon.vue';
@@ -58,7 +58,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.co
   <UCollapsible
     :unmount-on-hide="false"
     :class="props.class"
-    :ui="transformUI(ui)"
+    :ui="transformPohon(ui)"
   >
     <template #default="{ open }">
       <button :class="ui.trigger({ class: props.pohon?.trigger })">

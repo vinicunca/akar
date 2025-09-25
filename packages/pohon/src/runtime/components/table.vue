@@ -34,12 +34,12 @@ import type {
   VisibilityOptions,
   VisibilityState,
 } from '@tanstack/vue-table';
+import type { APrimitiveProps } from 'akar';
 import type { Ref, WatchOptions } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/table';
 
 declare module '@tanstack/table-core' {
-
   interface ColumnMeta<TData extends RowData, TValue> {
     class?: {
       th?: string | ((cell: Header<TData, TValue>) => string);
@@ -71,24 +71,24 @@ declare module '@tanstack/table-core' {
 
 type Table = ComponentConfig<typeof theme, AppConfig, 'table'>;
 
-export type TableRow<T> = Row<T>;
-export type TableData = RowData;
-export type TableColumn<T extends TableData, D = unknown> = ColumnDef<T, D>;
+export type PTableRow<T> = Row<T>;
+export type PTableData = RowData;
+export type PTableColumn<T extends PTableData, D = unknown> = ColumnDef<T, D>;
 
-export interface TableOptions<T extends TableData = TableData> extends Omit<CoreOptions<T>, 'data' | 'columns' | 'getCoreRowModel' | 'state' | 'onStateChange' | 'renderFallbackValue'> {
+export interface PTableOptions<T extends PTableData = PTableData> extends Omit<CoreOptions<T>, 'data' | 'columns' | 'getCoreRowModel' | 'state' | 'onStateChange' | 'renderFallbackValue'> {
   state?: CoreOptions<T>['state'];
   onStateChange?: CoreOptions<T>['onStateChange'];
   renderFallbackValue?: CoreOptions<T>['renderFallbackValue'];
 }
 
-export interface TableProps<T extends TableData = TableData> extends TableOptions<T> {
+export interface PTableProps<T extends PTableData = PTableData> extends PTableOptions<T> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: APrimitiveProps['as'];
   data?: Array<T>;
-  columns?: Array<TableColumn<T>>;
+  columns?: Array<PTableColumn<T>>;
   caption?: string;
   meta?: TableMeta<T>;
   /**
@@ -178,9 +178,9 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>;
-  onSelect?: (row: TableRow<T>, e?: Event) => void;
-  onHover?: (event: Event, row: TableRow<T> | null) => void;
-  onContextmenu?: ((event: Event, row: TableRow<T>) => void) | Array<((event: Event, row: TableRow<T>) => void)>;
+  onSelect?: (options: { event?: Event; row: PTableRow<T> }) => void;
+  onHover?: (options: { event: Event; row: PTableRow<T> | null }) => void;
+  onContextmenu?: ((options: { event: Event; row: PTableRow<T> }) => void) | Array<((options: { event: Event; row: PTableRow<T> }) => void)>;
   class?: any;
   pohon?: Table['slots'];
 }
@@ -189,7 +189,7 @@ type DynamicHeaderSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T
 type DynamicFooterSlots<T, K = keyof T> = Record<string, (props: HeaderContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-footer`, (props: HeaderContext<T, unknown>) => any>;
 type DynamicCellSlots<T, K = keyof T> = Record<string, (props: CellContext<T, unknown>) => any> & Record<`${K extends string ? K : never}-cell`, (props: CellContext<T, unknown>) => any>;
 
-export type TableSlots<T extends TableData = TableData> = {
+export type PTableSlots<T extends PTableData = PTableData> = {
   'expanded': (props: { row: Row<T> }) => any;
   'empty': (props?: object) => any;
   'loading': (props?: object) => any;
@@ -197,47 +197,64 @@ export type TableSlots<T extends TableData = TableData> = {
   'body-top': (props?: object) => any;
   'body-bottom': (props?: object) => any;
 } & DynamicHeaderSlots<T> & DynamicFooterSlots<T> & DynamicCellSlots<T>;
-
 </script>
 
-<script setup lang="ts" generic="T extends TableData">
+<script setup lang="ts" generic="T extends PTableData">
 import { useAppConfig } from '#imports';
-import { FlexRender, getCoreRowModel, getExpandedRowModel, getFilteredRowModel, getSortedRowModel, useVueTable } from '@tanstack/vue-table';
+import {
+  FlexRender,
+  getCoreRowModel,
+  getExpandedRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useVueTable,
+} from '@tanstack/vue-table';
+import { toSentenceCase } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitive } from 'akar';
-import { upperFirst } from 'scule';
 import { computed, ref, watch } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<TableProps<T>>(), {
-  watchOptions: () => ({
-    deep: true,
-  }),
-});
-const slots = defineSlots<TableSlots<T>>();
+const props = withDefaults(
+  defineProps<PTableProps<T>>(),
+  {
+    watchOptions: () => ({
+      deep: true,
+    }),
+  },
+);
+const slots = defineSlots<PTableSlots<T>>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Table['AppConfig'];
 
 const data = ref(props.data ?? []) as Ref<Array<T>>;
-const columns = computed<Array<TableColumn<T>>>(() => props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) })));
+const columns = computed<Array<PTableColumn<T>>>(() =>
+  props.columns ?? Object.keys(data.value[0] ?? {})
+    .map((accessorKey: string) => ({ accessorKey, header: toSentenceCase(accessorKey) })),
+);
 const meta = computed(() => props.meta ?? {});
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.table || {}) })({
-  sticky: props.sticky,
-  loading: props.loading,
-  loadingColor: props.loadingColor,
-  loadingAnimation: props.loadingAnimation,
-}));
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.table || {}),
+  })({
+    sticky: props.sticky,
+    loading: props.loading,
+    loadingColor: props.loadingColor,
+    loadingAnimation: props.loadingAnimation,
+  }),
+);
 
 const hasFooter = computed(() => {
-  function hasFooterRecursive(columns: Array<TableColumn<T>>): boolean {
+  function hasFooterRecursive(columns: Array<PTableColumn<T>>): boolean {
     for (const column of columns) {
       if ('footer' in column) {
         return true;
       }
-      if ('columns' in column && hasFooterRecursive(column.columns as Array<TableColumn<T>>)) {
+      if ('columns' in column && hasFooterRecursive(column.columns as Array<PTableColumn<T>>)) {
         return true;
       }
     }
@@ -264,7 +281,19 @@ const paginationState = defineModel<PaginationState>('pagination', { default: {}
 const tableRef = ref<HTMLTableElement | null>(null);
 
 const tableApi = useVueTable({
-  ...reactiveOmit(props, 'as', 'data', 'columns', 'caption', 'sticky', 'loading', 'loadingColor', 'loadingAnimation', 'class', 'ui'),
+  ...reactiveOmit(
+    props,
+    'as',
+    'data',
+    'columns',
+    'caption',
+    'sticky',
+    'loading',
+    'loadingColor',
+    'loadingAnimation',
+    'class',
+    'pohon',
+  ),
   data,
   get columns() {
     return columns.value;
@@ -346,7 +375,7 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue;
 }
 
-function onRowSelect(event: Event, row: TableRow<T>) {
+function onRowSelect(event: Event, row: PTableRow<T>) {
   if (!props.onSelect) {
     return;
   }
@@ -359,27 +388,28 @@ function onRowSelect(event: Event, row: TableRow<T>) {
   event.preventDefault();
   event.stopPropagation();
 
-  // FIXME: `event` should be the first argument for consistency
-  props.onSelect(row, event);
+  props.onSelect({ event, row });
 }
 
-function onRowHover(event: Event, row: TableRow<T> | null) {
+function onRowHover(event: Event, row: PTableRow<T> | null) {
   if (!props.onHover) {
     return;
   }
 
-  props.onHover(event, row);
+  props.onHover({ event, row });
 }
 
-function onRowContextmenu(event: Event, row: TableRow<T>) {
+function onRowContextmenu(event: Event, row: PTableRow<T>) {
   if (!props.onContextmenu) {
     return;
   }
 
   if (Array.isArray(props.onContextmenu)) {
-    props.onContextmenu.forEach((fn) => fn(event, row));
+    props.onContextmenu.forEach((fn) => {
+      fn({ event, row });
+    });
   } else {
-    props.onContextmenu(event, row);
+    props.onContextmenu({ event, row });
   }
 }
 

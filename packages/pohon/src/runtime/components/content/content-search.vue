@@ -4,7 +4,7 @@ import type { ContentNavigationItem } from '@nuxt/content'
 import type { AppConfig } from '@nuxt/schema'
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse'
 import theme from '#build/ui/content/content-search'
-import type { PButtonProps, InputProps, PLinkProps, PDialogProps, PCommandPaletteProps, PCommandPaletteSlots, PCommandPaletteGroup, PCommandPaletteItem, IconProps } from '../../types'
+import type { PButtonProps, PInputProps, PLinkProps, PDialogProps, PCommandPaletteProps, PCommandPaletteSlots, PCommandPaletteGroup, PCommandPaletteItem, IconProps } from '../../types'
 import type { ComponentConfig } from '../../types/uv'
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>
@@ -46,7 +46,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
    */
-  placeholder?: InputProps['placeholder']
+  placeholder?: PInputProps['placeholder']
   /**
    * Automatically focus the input when component is mounted.
    * @defaultValue true
@@ -112,7 +112,7 @@ import { reactivePick } from '@vueuse/core'
 import { useAppConfig, useColorMode, defineShortcuts } from '#imports'
 import { useContentSearch } from '../../composables/useContentSearch'
 import { useLocale } from '../../composables/useLocale'
-import { omit, transformUI } from '../../utils'
+import { omit, transformPohon } from '../../utils'
 import { tv } from '../../utils/tv'
 import UModal from '../Modal.vue'
 import UCommandPalette from '../CommandPalette.vue'
@@ -279,7 +279,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :ui="transformUI(omit(ui, ['modal']), props.ui)"
+          :ui="transformPohon(omit(ui, ['modal']), props.ui)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

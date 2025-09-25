@@ -41,7 +41,7 @@ export function mergeClasses(appConfigClass?: string | Array<string>, propClass?
   ].filter(Boolean);
 }
 
-export function transformUI(pohon: any, pohonProp?: any) {
+export function transformPohon(pohon: any, pohonProp?: any) {
   return Object.entries(pohon)
     .reduce(
       (acc, [key, value]) => {
@@ -122,4 +122,18 @@ export function getDisplayValue<T extends Array<any>, V>(
 export function looseToNumber(val: any): any {
   const n = Number.parseFloat(val);
   return Number.isNaN(n) ? val : n;
+}
+
+export function getSlotChildrenText(children: any) {
+  return children.map((node: any) => {
+    if (!node.children || isString(node.children)) {
+      return node.children || '';
+    } else if (Array.isArray(node.children)) {
+      return getSlotChildrenText(node.children);
+    } else if (node.children.default) {
+      return getSlotChildrenText(node.children.default());
+    }
+
+    return undefined;
+  }).join('');
 }

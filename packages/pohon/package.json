@@ -1,5 +1,6 @@
 {
   "name": "pohon",
+  "type": "module",
   "version": "1.0.0",
   "description": "A UI Library for Modern Web Apps, powered by Vue & UnoCSS.",
   "license": "MIT",
@@ -151,6 +152,7 @@
     "@nuxt/schema": "catalog:plugins",
     "@nuxtjs/color-mode": "catalog:pohon",
     "@standard-schema/spec": "catalog:pohon",
+    "@tanstack/vue-table": "catalog:pohon",
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/perkakas": "catalog:core",
     "@vueuse/core": "catalog:core",
@@ -181,6 +183,7 @@
   "devDependencies": {
     "@nuxt/content": "catalog:docs",
     "@nuxt/module-builder": "catalog:pohon",
+    "@nuxt/test-utils": "catalog:pohon",
     "defu": "catalog:core",
     "nuxt": "catalog:pohon"
   }

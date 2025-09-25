@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, KbdProps, PButtonProps, PButtonSlots, PTooltipProps } from '../../types';
+import type { IconProps, PButtonProps, PButtonSlots, PKbdProps, PTooltipProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/ui/content/content-search-button';
 
@@ -44,7 +44,7 @@ export interface ContentSearchButtonProps {
    * `{ variant: 'subtle' }`{lang="ts-type"}
    * @defaultValue ['meta', 'k']
    */
-  kbds?: Array<KbdProps['value']> | Array<KbdProps>;
+  kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   pohon?: ContentSearchButton['slots'] & PButtonProps['ui'];
   class?: any;
 }
@@ -58,11 +58,11 @@ import { useForwardProps } from 'reka-ui';
 import { computed, toRef } from 'vue';
 import { useContentSearch } from '../../composables/useContentSearch';
 import { useLocale } from '../../composables/useLocale';
-import { omit, transformUI } from '../../utils';
+import { omit, transformPohon } from '../../utils';
 import { tv } from '../../utils/tv';
 import UButton from '../button.vue';
 import PKbd from '../Kbd.vue';
-import UTooltip from '../Tooltip.vue';
+import UTooltip from '../tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -104,7 +104,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentSe
         ...$attrs,
       }"
       :class="ui.base({ class: [props.pohon?.base, props.class] })"
-      :ui="transformUI(ui, props.ui)"
+      :ui="transformPohon(ui, props.ui)"
       @click="open = true"
     >
       <template

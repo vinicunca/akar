@@ -1,11 +1,12 @@
 packages:
   - packages/*
   - docs
-  - .histoire
   - packages/pohon/playgrounds/nuxt
   - packages/pohon/playgrounds/vue
 
 shamefullyHoist: true
+autoInstallPeers: true
+ignoreWorkspaceRootCheck: true
 
 overrides:
   vite: ^7.1.7
@@ -67,10 +68,6 @@ catalogs:
     nuxt-component-meta: ^0.14.0
     nuxt-og-image: ^5.1.9
     shiki-transformer-color-highlight: ^1.0.0
-  histoire:
-    '@histoire/plugin-vue': ^0.17.17
-    '@rollup/plugin-alias': ^5.1.1
-    histoire: ^0.17.17
   plugins:
     '@nuxt/kit': 4.1.2
     '@nuxt/schema': 4.1.2
@@ -79,8 +76,10 @@ catalogs:
   pohon:
     '@nuxt/icon': ^2.0.0
     '@nuxt/module-builder': ^1.0.1
+    '@nuxt/test-utils': ^3.19.2
     '@nuxtjs/color-mode': ^3.5.2
     '@standard-schema/spec': ^1.0.0
+    '@tanstack/vue-table': ^8.21.3
     '@unocss/nuxt': 66.5.1
     colortranslator: ^5.0.0
     embla-carousel-auto-height: ^8.6.0

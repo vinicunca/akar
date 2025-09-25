@@ -10,7 +10,7 @@ import type {
 } from 'akar';
 import type { InputHTMLAttributes } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { IconProps, InputProps, PAvatarProps, PChipProps } from '../types';
+import type { IconProps, PInputProps, PAvatarProps, PChipProps } from '../types';
 import type {
   AcceptableValue,
   ArrayOrNested,
@@ -284,8 +284,8 @@ const {
   highlight,
   disabled,
   ariaAttrs,
-} = useFormField<InputProps>(props);
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props);
+} = useFormField<PInputProps>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputProps>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown })));
 
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);

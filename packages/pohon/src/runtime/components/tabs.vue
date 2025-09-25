@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { TabsRootEmits, TabsRootProps } from 'akar';
+import type { APrimitiveProps, ATabsRootEmits, ATabsRootProps } from 'akar';
 import type { IconProps, PAvatarProps, PBadgeProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -9,7 +9,7 @@ import theme from '#build/pohon/tabs';
 
 type Tabs = ComponentConfig<typeof theme, AppConfig, 'tabs'>;
 
-export interface TabsItem {
+export interface PTabsItem {
   label?: string;
   /**
    * @IconifyIcon
@@ -31,7 +31,7 @@ export interface TabsItem {
   [key: string]: any;
 }
 
-export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'> {
+export interface PTabsProps<T extends PTabsItem = PTabsItem> extends Pick<ATabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -54,7 +54,7 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
    * The orientation of the tabs.
    * @defaultValue 'horizontal'
    */
-  orientation?: TabsRootProps['orientation'];
+  orientation?: ATabsRootProps['orientation'];
   /**
    * The content of the tabs, can be disabled to prevent rendering the content.
    * @defaultValue true
@@ -69,11 +69,11 @@ export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootP
   pohon?: Tabs['slots'];
 }
 
-export interface TabsEmits extends TabsRootEmits<string | number> {}
+export interface PTabsEmits extends ATabsRootEmits<string | number> {}
 
-type SlotProps<T extends TabsItem> = (props: { item: T; index: number }) => any;
+type SlotProps<T extends PTabsItem> = (props: { item: T; index: number }) => any;
 
-export type TabsSlots<T extends TabsItem = TabsItem> = {
+export type PTabsSlots<T extends PTabsItem = PTabsItem> = {
   'leading': SlotProps<T>;
   'default': SlotProps<T>;
   'trailing': SlotProps<T>;
@@ -81,41 +81,59 @@ export type TabsSlots<T extends TabsItem = TabsItem> = {
   'list-leading': (props?: object) => any;
   'list-trailing': (props?: object) => any;
 } & DynamicSlots<T, undefined, { index: number }>;
-
 </script>
 
-<script setup lang="ts" generic="T extends TabsItem">
+<script setup lang="ts" generic="T extends PTabsItem">
 import type { ComponentPublicInstance } from 'vue';
 import { useAppConfig } from '#imports';
+import { isNumber, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
-import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger, useForwardPropsEmits } from 'akar';
+import {
+  ATabsContent,
+  ATabsIndicator,
+  ATabsList,
+  ATabsRoot,
+  ATabsTrigger,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed, ref } from 'vue';
-import { get } from '../utils';
+import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
-import UBadge from './badge.vue';
+import PBadge from './badge.vue';
 import PIcon from './icon.vue';
 
-const props = withDefaults(defineProps<TabsProps<T>>(), {
-  content: true,
-  defaultValue: '0',
-  orientation: 'horizontal',
-  unmountOnHide: true,
-  labelKey: 'label',
-});
-const emits = defineEmits<TabsEmits>();
-const slots = defineSlots<TabsSlots<T>>();
+const props = withDefaults(
+  defineProps<PTabsProps<T>>(),
+  {
+    content: true,
+    defaultValue: '0',
+    orientation: 'horizontal',
+    unmountOnHide: true,
+    labelKey: 'label',
+  },
+);
+const emits = defineEmits<PTabsEmits>();
+const slots = defineSlots<PTabsSlots<T>>();
 
 const appConfig = useAppConfig() as Tabs['AppConfig'];
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'unmountOnHide'), emits);
+const rootProps = useForwardPropsEmits(
+  reactivePick(props, 'as', 'unmountOnHide'),
+  emits,
+);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.tabs || {}) })({
-  color: props.color,
-  variant: props.variant,
-  size: props.size,
-  orientation: props.orientation,
-}));
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.tabs || {}),
+  })({
+    color: props.color,
+    variant: props.variant,
+    size: props.size,
+    orientation: props.orientation,
+  }),
+);
 
 const triggersRef = ref<Array<ComponentPublicInstance>>([]);
 
@@ -125,7 +143,7 @@ defineExpose({
 </script>
 
 <template>
-  <TabsRoot
+  <ATabsRoot
     v-bind="rootProps"
     :model-value="modelValue"
     :default-value="defaultValue"
@@ -133,12 +151,12 @@ defineExpose({
     :activation-mode="activationMode"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
   >
-    <TabsList :class="pohon.list({ class: props.pohon?.list })">
-      <TabsIndicator :class="pohon.indicator({ class: props.pohon?.indicator })" />
+    <ATabsList :class="pohon.list({ class: props.pohon?.list })">
+      <ATabsIndicator :class="pohon.indicator({ class: props.pohon?.indicator })" />
 
       <slot name="list-leading" />
 
-      <TabsTrigger
+      <ATabsTrigger
         v-for="(item, index) of items"
         :key="index"
         :ref="el => (triggersRef[index] = el as ComponentPublicInstance)"
@@ -165,13 +183,13 @@ defineExpose({
         </slot>
 
         <span
-          v-if="get(item, props.labelKey as string) || !!slots.default"
+          v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots.default"
           :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
         >
           <slot
             :item="item"
             :index="index"
-          >{{ get(item, props.labelKey as string) }}</slot>
+          >{{ getProp({ object: item, path: props.labelKey as string }) }}</slot>
         </span>
 
         <slot
@@ -179,7 +197,7 @@ defineExpose({
           :item="item"
           :index="index"
         >
-          <UBadge
+          <PBadge
             v-if="item.badge !== undefined"
             color="neutral"
             variant="outline"
@@ -188,26 +206,26 @@ defineExpose({
             :class="pohon.trailingBadge({ class: [props.pohon?.trailingBadge, item.pohon?.trailingBadge] })"
           />
         </slot>
-      </TabsTrigger>
+      </ATabsTrigger>
 
       <slot name="list-trailing" />
-    </TabsList>
+    </ATabsList>
 
     <template v-if="!!content">
-      <TabsContent
+      <ATabsContent
         v-for="(item, index) of items"
         :key="index"
         :value="item.value ?? String(index)"
         :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content, item.class] })"
       >
         <slot
-          :name="((item.slot || 'content') as keyof TabsSlots<T>)"
+          :name="((item.slot || 'content') as keyof PTabsSlots<T>)"
           :item="(item as Extract<T, { slot: string; }>)"
           :index="index"
         >
           {{ item.content }}
         </slot>
-      </TabsContent>
+      </ATabsContent>
     </template>
-  </TabsRoot>
+  </ATabsRoot>
 </template>

@@ -5,7 +5,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import type { AListboxRootEmits, AListboxRootProps, APrimitiveProps } from 'akar';
 import type { FuseResult } from 'fuse.js';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { IconProps, InputProps, KbdProps, PLinkProps, PAvatarProps, PButtonProps, PChipProps } from '../types';
+import type { IconProps, PInputProps, PKbdProps, PLinkProps, PAvatarProps, PButtonProps, PChipProps } from '../types';
 import type { GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/command-palette';
@@ -22,7 +22,7 @@ export interface PCommandPaletteItem extends Omit<PLinkProps, 'type' | 'raw' | '
   icon?: IconProps['name'];
   avatar?: PAvatarProps;
   chip?: PChipProps;
-  kbds?: Array<KbdProps['value']> | Array<KbdProps>;
+  kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   active?: boolean;
   loading?: boolean;
   disabled?: boolean;
@@ -86,7 +86,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
    */
-  placeholder?: InputProps['placeholder'];
+  placeholder?: PInputProps['placeholder'];
   /**
    * Automatically focus the input when component is mounted.
    * @defaultValue true
@@ -188,8 +188,8 @@ import PChip from './chip.vue';
 import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
-import PInput from './xInput.vue';
-import PKbd from './xKbd.vue';
+import PInput from './input.vue';
+import PKbd from './kbd.vue';
 
 const props = withDefaults(
   defineProps<PCommandPaletteProps<G, T>>(),
@@ -528,7 +528,7 @@ function onSelect(event: Event, item: T) {
                         <PKbd
                           v-for="(kbd, kbdIndex) in item.kbds"
                           :key="kbdIndex"
-                          :size="((item.pohon?.itemTrailingKbdsSize || props.pohon?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as KbdProps['size'])"
+                          :size="((item.pohon?.itemTrailingKbdsSize || props.pohon?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as PKbdProps['size'])"
                           v-bind="isString(kbd) ? { value: kbd } : kbd"
                         />
                       </span>

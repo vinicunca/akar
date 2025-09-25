@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PAvatarProps } from 'pohon';
 
-export interface ColorModeAvatarProps extends /** @vue-ignore */ Omit<PAvatarProps, 'src'> {
+export interface PColorModeAvatarProps extends /** @vue-ignore */ Omit<PAvatarProps, 'src'> {
   light: string;
   dark: string;
 }
@@ -12,7 +12,7 @@ import PAvatar from '../avatar.vue';
 
 defineOptions({ inheritAttrs: false });
 
-defineProps<ColorModeAvatarProps>();
+defineProps<PColorModeAvatarProps>();
 </script>
 
 <template>

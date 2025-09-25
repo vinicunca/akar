@@ -1,7 +1,11 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { StepperRootEmits, StepperRootProps } from 'akar';
+import type {
+  APrimitiveProps,
+  AStepperRootEmits,
+  AStepperRootProps,
+} from 'akar';
 import type { IconProps } from '../types';
 import type { DynamicSlots } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -9,7 +13,7 @@ import theme from '#build/pohon/stepper';
 
 type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>;
 
-export interface StepperItem {
+export interface PStepperItem {
   slot?: string;
   value?: string | number;
   title?: string;
@@ -25,7 +29,7 @@ export interface StepperItem {
   [key: string]: any;
 }
 
-export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<StepperRootProps, 'linear'> {
+export interface PStepperProps<T extends PStepperItem = PStepperItem> extends Pick<AStepperRootProps, 'linear'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -54,14 +58,14 @@ export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<
   pohon?: Stepper['slots'];
 }
 
-export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRootEmits, 'update:modelValue'> & {
+export type PStepperEmits<T extends PStepperItem = PStepperItem> = Omit<AStepperRootEmits, 'update:modelValue'> & {
   next: [value: T];
   prev: [value: T];
 };
 
-type SlotProps<T extends StepperItem> = (props: { item: T }) => any;
+type SlotProps<T extends PStepperItem> = (props: { item: T }) => any;
 
-export type StepperSlots<T extends StepperItem = StepperItem> = {
+export type PStepperSlots<T extends PStepperItem = PStepperItem> = {
   indicator: SlotProps<T>;
   title: SlotProps<T>;
   description: SlotProps<T>;
@@ -70,20 +74,33 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
 
 </script>
 
-<script setup lang="ts" generic="T extends StepperItem">
+<script setup lang="ts" generic="T extends PStepperItem">
 import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
-import { StepperDescription, StepperIndicator, StepperItem, StepperRoot, StepperSeparator, StepperTitle, StepperTrigger, useForwardProps } from 'akar';
+import {
+  AStepperDescription,
+  AStepperIndicator,
+  AStepperItem,
+  AStepperRoot,
+  AStepperSeparator,
+  AStepperTitle,
+  AStepperTrigger,
+  useForwardProps,
+} from 'akar';
 import { computed } from 'vue';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
 
-const props = withDefaults(defineProps<StepperProps<T>>(), {
-  orientation: 'horizontal',
-  linear: true,
-});
-const emits = defineEmits<StepperEmits<T>>();
-const slots = defineSlots<StepperSlots<T>>();
+const props = withDefaults(
+  defineProps<PStepperProps<T>>(),
+  {
+    orientation: 'horizontal',
+    linear: true,
+  },
+);
+const emits = defineEmits<PStepperEmits<T>>();
+const slots = defineSlots<PStepperSlots<T>>();
 
 const modelValue = defineModel<string | number>();
 
@@ -91,11 +108,16 @@ const appConfig = useAppConfig() as Stepper['AppConfig'];
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'linear'));
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.stepper || {}) })({
-  orientation: props.orientation,
-  size: props.size,
-  color: props.color,
-}));
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.stepper || {}),
+  })({
+    orientation: props.orientation,
+    size: props.size,
+    color: props.color,
+  }),
+);
 
 const currentStepIndex = computed({
   get() {
@@ -133,13 +155,13 @@ defineExpose({
 </script>
 
 <template>
-  <StepperRoot
+  <AStepperRoot
     v-bind="rootProps"
     v-model="currentStepIndex"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
   >
     <div :class="pohon.header({ class: props.pohon?.header })">
-      <StepperItem
+      <AStepperItem
         v-for="(item, count) in items"
         :key="item.value ?? count"
         :step="count"
@@ -147,8 +169,8 @@ defineExpose({
         :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
       >
         <div :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })">
-          <StepperTrigger :class="pohon.trigger({ class: [props.pohon?.trigger, item.pohon?.trigger] })">
-            <StepperIndicator :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })">
+          <AStepperTrigger :class="pohon.trigger({ class: [props.pohon?.trigger, item.pohon?.trigger] })">
+            <AStepperIndicator :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })">
               <slot
                 name="indicator"
                 :item="item"
@@ -162,17 +184,17 @@ defineExpose({
                   {{ count + 1 }}
                 </template>
               </slot>
-            </StepperIndicator>
-          </StepperTrigger>
+            </AStepperIndicator>
+          </AStepperTrigger>
 
-          <StepperSeparator
+          <AStepperSeparator
             v-if="count < items.length - 1"
             :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator] })"
           />
         </div>
 
         <div :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })">
-          <StepperTitle
+          <AStepperTitle
             as="div"
             :class="pohon.title({ class: [props.pohon?.title, item.pohon?.title] })"
           >
@@ -182,8 +204,8 @@ defineExpose({
             >
               {{ item.title }}
             </slot>
-          </StepperTitle>
-          <StepperDescription
+          </AStepperTitle>
+          <AStepperDescription
             as="div"
             :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
           >
@@ -193,9 +215,9 @@ defineExpose({
             >
               {{ item.description }}
             </slot>
-          </StepperDescription>
+          </AStepperDescription>
         </div>
-      </StepperItem>
+      </AStepperItem>
     </div>
 
     <div
@@ -203,11 +225,11 @@ defineExpose({
       :class="pohon.content({ class: props.pohon?.content })"
     >
       <slot
-        :name="((currentStep?.slot || 'content') as keyof StepperSlots<T>)"
+        :name="((currentStep?.slot || 'content') as keyof PStepperSlots<T>)"
         :item="(currentStep as Extract<T, { slot: string }>)"
       >
         {{ currentStep?.content }}
       </slot>
     </div>
-  </StepperRoot>
+  </AStepperRoot>
 </template>

@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { NuxtError } from '#app';
 import type { AppConfig } from '@nuxt/schema';
+import type { APrimitiveProps } from 'akar';
 import type { PButtonProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/error';
@@ -46,17 +47,22 @@ import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<ErrorProps>(), {
-  as: 'main',
-  redirect: '/',
-  clear: true,
-});
+const props = withDefaults(
+  defineProps<ErrorProps>(),
+  {
+    as: 'main',
+    redirect: '/',
+    clear: true,
+  },
+);
 const slots = defineSlots<ErrorSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Error['AppConfig'];
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.error || {}) })());
+const pohon = computed(() =>
+  uv({ extend: uv(theme), ...(appConfig.pohon?.error || {}) })(),
+);
 
 function handleError() {
   clearError({ redirect: props.redirect });

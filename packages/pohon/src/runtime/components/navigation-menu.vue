@@ -9,7 +9,7 @@ import type {
   ANavigationMenuRootProps,
   APrimitiveProps,
 } from 'akar';
-import type { IconProps, PAvatarProps, PBadgeProps, PLinkProps, PopoverProps, PTooltipProps } from '../types';
+import type { IconProps, PAvatarProps, PBadgeProps, PLinkProps, PPopoverProps, PTooltipProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/navigation-menu';
@@ -43,7 +43,7 @@ export interface PNavigationMenuItem extends Omit<PLinkProps, 'type' | 'raw' | '
    * Display a popover on the item when the menu is collapsed with the children list.
    * This has priority over the global `popover` prop.
    */
-  popover?: boolean | PopoverProps;
+  popover?: boolean | PPopoverProps;
   /**
    * @IconifyIcon
    */
@@ -120,7 +120,7 @@ export interface PNavigationMenuProps<T extends ArrayOrNested<PNavigationMenuIte
    * `{ mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }`{lang="ts-type"}
    * @defaultValue false
    */
-  popover?: boolean | PopoverProps;
+  popover?: boolean | PPopoverProps;
   /** Display a line next to the active item. */
   highlight?: boolean;
   /**
@@ -197,8 +197,8 @@ import PBadge from './badge.vue';
 import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
-import PTooltip from './Tooltip.vue';
-import PPopover from './xPopover.vue';
+import PTooltip from './tooltip.vue';
+import PPopover from './popover.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -248,7 +248,7 @@ const popoverProps = toRef(() => defu(
     ? {}
     : props.popover,
   { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } },
-) as PopoverProps);
+) as PPopoverProps);
 
 const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: PNavigationMenuItem; index: number; active?: boolean }>();
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: PNavigationMenuItem; index: number; level?: number }>({
@@ -421,7 +421,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           <PPopover
             v-if="orientation === 'vertical' && collapsed && item.children?.length && (!!props.popover || !!item.popover)"
             v-bind="{ ...popoverProps, ...(isBoolean(item.popover) ? {} : item.popover || {}) }"
-            :ui="{ content: pohon.content({ class: [props.pohon?.content, item.pohon?.content] }) }"
+            :pohon="{ content: pohon.content({ class: [props.pohon?.content, item.pohon?.content] }) }"
           >
             <PLinkBase
               v-bind="slotProps"

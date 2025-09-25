@@ -1,15 +1,16 @@
+/* eslint-disable ts/method-signature-style */
 import type { StandardSchemaV1 } from '@standard-schema/spec';
 import type { Struct as SuperstructSchema } from 'superstruct';
 import type { ComputedRef, DeepReadonly, Ref } from 'vue';
 import type { GetObjectField } from './utils';
 
 export interface Form<S extends FormSchema> {
-  validate: <T extends boolean>(opts?: { name?: keyof FormData<S, false> | Array<keyof FormData<S, false>>; silent?: boolean; nested?: boolean; transform?: T }) => Promise<FormData<S, T> | false>;
-  clear: (path?: keyof FormData<S, false> | string | RegExp) => void;
+  validate<T extends boolean>(opts?: { name?: keyof FormData<S, false> | Array<keyof FormData<S, false>>; silent?: boolean; nested?: boolean; transform?: T }): Promise<FormData<S, T> | false>;
+  clear (path?: keyof FormData<S, false> | string | RegExp): void;
   errors: Ref<Array<FormError>>;
-  setErrors: (errs: Array<FormError>, name?: keyof FormData<S, false> | string | RegExp) => void;
-  getErrors: (name?: keyof FormData<S, false> | string | RegExp) => Array<FormError>;
-  submit: () => Promise<void>;
+  setErrors (errs: Array<FormError>, name?: keyof FormData<S, false> | string | RegExp): void;
+  getErrors (name?: keyof FormData<S, false> | string | RegExp): Array<FormError>;
+  submit (): Promise<void>;
   disabled: ComputedRef<boolean>;
   dirty: ComputedRef<boolean>;
   loading: Ref<boolean>;

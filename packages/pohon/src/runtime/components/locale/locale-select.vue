@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { SelectMenuProps } from '../../types'
+import type { PSelectMenuProps } from '../../types'
 import type { PLocale } from '../../types/locale'
 
-export interface LocaleSelectProps extends /** @vue-ignore */ Pick<SelectMenuProps<any>, 'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'ui'> {
+export interface LocaleSelectProps extends /** @vue-ignore */ Pick<PSelectMenuProps<any>, 'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'ui'> {
   locales?: PLocale<any>[]
 }
 </script>

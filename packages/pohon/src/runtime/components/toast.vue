@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { APrimitiveProps, AToastRootEmits, AToastRootProps } from 'akar';
-import type { PAvatarProps, PButtonProps, IconProps, ProgressProps } from '../types';
+import type { PAvatarProps, PButtonProps, IconProps, PProgressProps } from '../types';
 import type { StringOrVNode } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/toast';
@@ -54,7 +54,7 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
    * `{ size: 'sm' }`{lang="ts-type"}
    * @defaultValue true
    */
-  progress?: boolean | Pick<ProgressProps, 'color' | 'pohon'>;
+  progress?: boolean | Pick<PProgressProps, 'color' | 'pohon'>;
   class?: any;
   pohon?: Toast['slots'];
 }
@@ -87,7 +87,7 @@ import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PIcon from './icon.vue';
-import PProgress from './xProgress.vue';
+import PProgress from './progress.vue';
 
 const props = withDefaults(
   defineProps<PToastProps>(),
@@ -265,7 +265,7 @@ defineExpose({
       v-if="progress && open && remaining > 0 && duration"
       :model-value="remaining / duration * 100"
       :color="color"
-      v-bind="(typeof progress === 'object' ? progress as Partial<ProgressProps> : {})"
+      v-bind="(typeof progress === 'object' ? progress as Partial<PProgressProps> : {})"
       size="sm"
       :class="pohon.progress({ class: props.pohon?.progress })"
     />

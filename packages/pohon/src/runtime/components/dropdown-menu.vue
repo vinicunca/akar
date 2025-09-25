@@ -8,7 +8,7 @@ import type {
   ADropdownMenuRootEmits,
   ADropdownMenuRootProps,
 } from 'akar';
-import type { IconProps, KbdProps, PLinkProps, PAvatarProps } from '../types';
+import type { IconProps, PKbdProps, PLinkProps, PAvatarProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dropdown-menu';
@@ -24,7 +24,7 @@ export interface PDropdownMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'cu
   color?: DropdownMenu['variants']['color'];
   avatar?: PAvatarProps;
   content?: Omit<ADropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ADropdownMenuContentEmits>>;
-  kbds?: Array<KbdProps['value']> | Array<KbdProps>;
+  kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   /**
    * The item type.
    * @defaultValue 'link'

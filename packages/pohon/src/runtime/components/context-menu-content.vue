@@ -5,7 +5,13 @@ import type {
   AContextMenuContentEmits as AkarContextMenuContentEmits,
   AContextMenuContentProps as AkarContextMenuContentProps,
 } from 'akar';
-import type { IconProps, KbdProps, PAvatarProps, PContextMenuItem, PContextMenuSlots } from '../types';
+import type {
+  IconProps,
+  PAvatarProps,
+  PContextMenuItem,
+  PContextMenuSlots,
+  PKbdProps,
+} from '../types';
 import type { ArrayOrNested, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 
@@ -50,9 +56,9 @@ import { pickLinkProps } from '../utils/link';
 import PAvatar from './avatar.vue';
 import PContextMenuContent from './context-menu-content.vue';
 import PIcon from './icon.vue';
+import PKbd from './kbd.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
-import PKbd from './xKbd.vue';
 
 const props = defineProps<ContextMenuContentProps<T>>();
 const emits = defineEmits<ContextMenuContentEmits>();
@@ -183,7 +189,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
             <PKbd
               v-for="(kbd, kbdIndex) in item.kbds"
               :key="kbdIndex"
-              :size="((item.pohon?.itemTrailingKbdsSize || pohonOverride?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as KbdProps['size'])"
+              :size="((item.pohon?.itemTrailingKbdsSize || pohonOverride?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as PKbdProps['size'])"
               v-bind="isString(kbd) ? { value: kbd } : kbd"
             />
           </span>

@@ -1,12 +1,25 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { Form, FormData, FormError, FormErrorEvent, FormErrorWithId, FormEvent, FormInputEvents, FormSchema, FormSubmitEvent, InferInput, InferOutput } from '../types/form';
+import type {
+  Form,
+  FormData,
+  FormError,
+  FormErrorEvent,
+  FormErrorWithId,
+  FormEvent,
+  FormInputEvents,
+  FormSchema,
+  FormSubmitEvent,
+  InferInput,
+  InferOutput,
+} from '../types/form';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/form';
+import { isString } from '@vinicunca/perkakas';
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>;
 
-export type FormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
+export type PFormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
   id?: string | number;
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: S;
@@ -62,12 +75,12 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>);
 };
 
-export interface FormEmits<S extends FormSchema, T extends boolean = true> {
+export interface PFormEmits<S extends FormSchema, T extends boolean = true> {
   submit: [event: FormSubmitEvent<FormData<S, T>>];
   error: [event: FormErrorEvent];
 }
 
-export interface FormSlots {
+export interface PFormSlots {
   default: (props: { errors: Array<FormError>; loading: boolean }) => any;
 }
 </script>
@@ -75,8 +88,26 @@ export interface FormSlots {
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
 import { useAppConfig } from '#imports';
 import { useEventBus } from '@vueuse/core';
-import { computed, inject, nextTick, onMounted, onUnmounted, provide, reactive, readonly, ref, useId } from 'vue';
-import { formBusInjectionKey, formErrorsInjectionKey, formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey, formStateInjectionKey } from '../composables/use-form-field';
+import {
+  computed,
+  inject,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  provide,
+  reactive,
+  readonly,
+  ref,
+  useId,
+} from 'vue';
+import {
+  formBusInjectionKey,
+  formErrorsInjectionKey,
+  formInputsInjectionKey,
+  formLoadingInjectionKey,
+  formOptionsInjectionKey,
+  formStateInjectionKey,
+} from '../composables/use-form-field';
 import { FormValidationException } from '../types/form';
 import { getAtPath, setAtPath, validateSchema } from '../utils/form';
 import { uv } from '../utils/uv';
@@ -84,21 +115,26 @@ import { uv } from '../utils/uv';
 type I = InferInput<S>;
 type O = InferOutput<S>;
 
-const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
-  validateOn() {
-    return ['input', 'blur', 'change'] as Array<FormInputEvents>;
+const props = withDefaults(
+  defineProps<PFormProps<S, T, N>>(),
+  {
+    validateOn() {
+      return ['input', 'blur', 'change'] as Array<FormInputEvents>;
+    },
+    validateOnInputDelay: 300,
+    transform: () => true as T,
+    loadingAuto: true,
   },
-  validateOnInputDelay: 300,
-  transform: () => true as T,
-  loadingAuto: true,
-});
+);
 
-const emits = defineEmits<FormEmits<S, T>>();
-defineSlots<FormSlots>();
+const emits = defineEmits<PFormEmits<S, T>>();
+defineSlots<PFormSlots>();
 
 const appConfig = useAppConfig() as FormConfig['AppConfig'];
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.form || {}) }));
+const pohon = computed(() =>
+  uv({ extend: uv(theme), ...(appConfig.pohon?.form || {}) }),
+);
 
 const formId = props.id ?? useId() as string;
 
@@ -128,7 +164,13 @@ const nestedForms = ref<Map<string | number, { validate: typeof _validate; name?
 onMounted(async () => {
   if (parentBus) {
     await nextTick();
-    parentBus.emit({ type: 'attach', validate: _validate, formId, name: props.name, api });
+    parentBus.emit({
+      type: 'attach',
+      validate: _validate,
+      formId,
+      name: props.name,
+      api,
+    });
   }
 });
 
@@ -146,9 +188,7 @@ onMounted(async () => {
     } else if (event.type === 'detach') {
       nestedForms.value.delete(event.formId);
     } else if (props.validateOn?.includes(event.type) && !loading.value) {
-      if (event.type !== 'input') {
-        await _validate({ name: event.name, silent: true, nested: false });
-      } else if (event.eager || blurredFields.has(event.name)) {
+      if (event.type !== 'input' || event.eager || blurredFields.has(event.name)) {
         await _validate({ name: event.name, silent: true, nested: false });
       }
     }
@@ -157,11 +197,18 @@ onMounted(async () => {
       blurredFields.add(event.name);
     }
 
-    if (event.type === 'change' || event.type === 'input' || event.type === 'blur' || event.type === 'focus') {
+    if (
+      event.type === 'change'
+      || event.type === 'input'
+      || event.type === 'blur'
+      || event.type === 'focus'
+    ) {
       touchedFields.add(event.name);
     }
 
-    if (event.type === 'change' || event.type === 'input') {
+    if (event.type === 'change'
+      || event.type === 'input'
+    ) {
       dirtyFields.add(event.name);
     }
   });
@@ -205,7 +252,9 @@ async function getErrors(): Promise<Array<FormErrorWithId>> {
 type ValidateOpts<Silent extends boolean, Transform extends boolean> = { name?: keyof I | Array<keyof I>; silent?: Silent; nested?: boolean; transform?: Transform };
 async function _validate<T extends boolean>(opts: ValidateOpts<false, T>): Promise<FormData<S, T>>;
 async function _validate<T extends boolean>(opts: ValidateOpts<true, T>): Promise<FormData<S, T> | false>;
-async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: false, transform: false }): Promise<FormData<S, T> | false> {
+async function _validate<T extends boolean>(
+  opts: ValidateOpts<boolean, boolean> = { silent: false, nested: false, transform: false },
+): Promise<FormData<S, T> | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as Array<keyof O>;
 
   // Validate nested forms if needed
@@ -220,7 +269,7 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
 
     nestedErrors = results
       .filter((r) => r.error)
-      .flatMap((r) => r.error!.errors.map((e) => addFormPath(e, r.name)));
+      .flatMap((r) => r.error!.errors.map((err) => addFormPath(err, r.name)));
 
     nestedResults = results.filter((r) => r.output !== undefined);
   }
@@ -248,7 +297,7 @@ async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean>
   if (opts.transform) {
     nestedResults.forEach((result) => {
       if (result.name) {
-        setAtPath(transformedState.value, result.name, result.output);
+        setAtPath({ data: transformedState.value, path: result.name, value: result.output });
       } else {
         Object.assign(transformedState.value, result.output);
       }
@@ -263,7 +312,7 @@ const loading = ref(false);
 provide(formLoadingInjectionKey, readonly(loading));
 
 async function onSubmitWrapper(payload: Event) {
-  loading.value = props.loadingAuto && true;
+  loading.value = props.loadingAuto;
 
   const event = payload as FormSubmitEvent<FormData<S, T>>;
 
@@ -294,7 +343,10 @@ provide(formOptionsInjectionKey, computed(() => ({
 })));
 
 // Simple helper functions for nested forms
-async function validateNestedForm(form: { validate: typeof _validate; name?: string }, opts: ValidateOpts<boolean, boolean>) {
+async function validateNestedForm(
+  form: { validate: typeof _validate; name?: string },
+  opts: ValidateOpts<boolean, boolean>,
+) {
   try {
     const result = await form.validate({ ...opts, silent: false });
     return { name: form.name, output: result };
@@ -327,13 +379,13 @@ function filterFormErrors(errors: Array<FormError>, formPath?: string): Array<Fo
   }
 
   return errors
-    .filter((e) => e?.name?.startsWith(`${formPath}.`))
-    .map((e) => stripFormPath(e, formPath));
+    .filter((err) => err?.name?.startsWith(`${formPath}.`))
+    .map((err) => stripFormPath(err, formPath));
 }
 
 function getFormErrors(form: { name?: string; api: Form<any> }): Array<FormErrorWithId> {
-  return form.api.getErrors().map((e) =>
-    form.name ? { ...e, name: `${form.name}.${e.name}` } : e,
+  return form.api.getErrors().map((err) =>
+    form.name ? { ...err, name: `${form.name}.${err.name}` } : err,
   );
 }
 
@@ -474,7 +526,7 @@ defineExpose(api);
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="ui({ class: props.class })"
+    :class="pohon({ class: props.class })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot

@@ -30,7 +30,7 @@ export interface ProseTabsSlots {
 <script setup lang="ts">
 import { computed, watch, onMounted, ref, onBeforeUpdate } from 'vue'
 import { useState, useAppConfig } from '#imports'
-import { transformUI } from '../../utils'
+import { transformPohon } from '../../utils'
 import { tv } from '../../utils/tv'
 import UTabs from '../Tabs.vue'
 
@@ -112,7 +112,7 @@ onBeforeUpdate(() => rerenderCount.value++)
     :items="items"
     :class="props.class"
     :unmount-on-hide="false"
-    :ui="transformUI(ui())"
+    :ui="transformPohon(ui())"
     @update:model-value="onUpdateModelValue"
   >
     <template #content="{ item }">

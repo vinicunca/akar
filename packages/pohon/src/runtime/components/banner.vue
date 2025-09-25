@@ -74,7 +74,7 @@ import { uv } from '../utils/uv';
 import PButton from './button.vue';
 import PIcon from './icon.vue';
 import PLink from './link.vue';
-import PContainer from './xContainer.vue';
+import PContainer from './container.vue';
 
 defineOptions({ inheritAttrs: false });
 

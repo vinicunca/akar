@@ -3,12 +3,12 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { APrimitiveProps } from 'akar';
 import type {
-  FormProps,
   IconProps,
   PButtonProps,
   PFormFieldProps,
+  PFormProps,
   PPinInputProps,
-  SeparatorProps,
+  PSeparatorProps,
 } from '../types';
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form';
 import type { ComponentConfig } from '../types/uv';
@@ -50,21 +50,21 @@ export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F ext
    * The text displayed in the separator.
    * @defaultValue 'or'
    */
-  separator?: string | SeparatorProps;
+  separator?: string | PSeparatorProps;
   /**
    * Display a submit button at the bottom of the form.
    * `{ label: 'Continue', block: true }`{lang="ts-type"}
    */
   submit?: PButtonProps;
   schema?: T;
-  validate?: FormProps<T>['validate'];
-  validateOn?: FormProps<T>['validateOn'];
-  validateOnInputDelay?: FormProps<T>['validateOnInputDelay'];
-  disabled?: FormProps<T>['disabled'];
+  validate?: PFormProps<T>['validate'];
+  validateOn?: PFormProps<T>['validateOn'];
+  validateOnInputDelay?: PFormProps<T>['validateOnInputDelay'];
+  disabled?: PFormProps<T>['disabled'];
   loading?: PButtonProps['loading'];
-  loadingAuto?: FormProps<T>['loadingAuto'];
+  loadingAuto?: PFormProps<T>['loadingAuto'];
   class?: any;
-  onSubmit?: FormProps<T>['onSubmit'];
+  onSubmit?: PFormProps<T>['onSubmit'];
   pohon?: AuthForm['slots'];
 }
 
@@ -98,12 +98,12 @@ import { uv } from '../utils/uv';
 import PButton from './button.vue';
 import PCheckbox from './checkbox.vue';
 import PFormField from './form-field.vue';
+import PForm from './form.vue';
 import PIcon from './icon.vue';
+import PInput from './input.vue';
 import PPinInput from './pin-input.vue';
-import PForm from './xForm.vue';
-import PInput from './xInput.vue';
-import PSelectMenu from './xSelectMenu.vue';
-import PSeparator from './xSeparator.vue';
+import PSelectMenu from './select-menu.vue';
+import PSeparator from './separator.vue';
 
 const props = withDefaults(
   defineProps<PAuthFormProps<T, F>>(),

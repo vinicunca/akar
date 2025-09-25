@@ -1,11 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { APrimitiveProps } from 'akar';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/marquee';
 
 type Marquee = ComponentConfig<typeof theme, AppConfig, 'marquee'>;
 
-export interface MarqueeProps {
+export interface PMarqueeProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -20,7 +21,7 @@ export interface MarqueeProps {
   pohon?: Marquee['slots'];
 }
 
-export interface MarqueeSlots {
+export interface PMarqueeSlots {
   default: (props?: object) => any;
 }
 </script>
@@ -31,21 +32,26 @@ import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<MarqueeProps>(), {
-  orientation: 'horizontal',
-  repeat: 4,
-  overlay: true,
-});
-defineSlots<MarqueeSlots>();
+const props = withDefaults(
+  defineProps<PMarqueeProps>(),
+  {
+    orientation: 'horizontal',
+    repeat: 4,
+    overlay: true,
+  },
+);
+defineSlots<PMarqueeSlots>();
 
 const appConfig = useAppConfig() as Marquee['AppConfig'];
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.marquee || {}) })({
-  pauseOnHover: props.pauseOnHover,
-  orientation: props.orientation,
-  reverse: props.reverse,
-  overlay: props.overlay,
-}));
+const pohon = computed(() =>
+  uv({ extend: uv(theme), ...(appConfig.pohon?.marquee || {}) })({
+    pauseOnHover: props.pauseOnHover,
+    orientation: props.orientation,
+    reverse: props.reverse,
+    overlay: props.overlay,
+  }),
+);
 </script>
 
 <template>

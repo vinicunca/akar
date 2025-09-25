@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { APrimitiveProps } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps } from '../types';
 import type { ModelModifiers } from '../types/input';
@@ -10,7 +11,7 @@ type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>;
 
 type TextareaValue = string | number | null;
 
-export interface TextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps {
+export interface PTextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -49,13 +50,13 @@ export interface TextareaProps<T extends TextareaValue = TextareaValue> extends 
   pohon?: Textarea['slots'];
 }
 
-export interface TextareaEmits<T extends TextareaValue = TextareaValue> {
+export interface PTextareaEmits<T extends TextareaValue = TextareaValue> {
   'update:modelValue': [value: T];
   'blur': [event: FocusEvent];
   'change': [event: Event];
 }
 
-export interface TextareaSlots {
+export interface PTextareaSlots {
   leading: (props?: object) => any;
   default: (props?: object) => any;
   trailing: (props?: object) => any;
@@ -76,32 +77,66 @@ import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<TextareaProps<T>>(), {
-  rows: 3,
-  maxrows: 0,
-  autofocusDelay: 0,
-  autoresizeDelay: 0,
-});
-const emits = defineEmits<TextareaEmits<T>>();
-const slots = defineSlots<TextareaSlots>();
+const props = withDefaults(
+  defineProps<PTextareaProps<T>>(),
+  {
+    rows: 3,
+    maxrows: 0,
+    autofocusDelay: 0,
+    autoresizeDelay: 0,
+  },
+);
+const emits = defineEmits<PTextareaEmits<T>>();
+const slots = defineSlots<PTextareaSlots>();
 
-const modelValue = useVModel<TextareaProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue });
+const modelValue = useVModel<
+  PTextareaProps<T>,
+  'modelValue',
+  'update:modelValue'
+>(
+  props,
+  'modelValue',
+  emits,
+  { defaultValue: props.defaultValue },
+);
 
 const appConfig = useAppConfig() as Textarea['AppConfig'];
 
-const { emitFormFocus, emitFormBlur, emitFormInput, emitFormChange, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<TextareaProps<T>>(props, { deferInputValidation: true });
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
+const {
+  emitFormFocus,
+  emitFormBlur,
+  emitFormInput,
+  emitFormChange,
+  size,
+  color,
+  id,
+  name,
+  highlight,
+  disabled,
+  ariaAttrs,
+} = useFormField<PTextareaProps<T>>(props, { deferInputValidation: true });
+const {
+  isLeading,
+  isTrailing,
+  leadingIconName,
+  trailingIconName,
+} = useComponentIcons(props);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.textarea || {}) })({
-  color: color.value,
-  variant: props.variant,
-  size: size?.value,
-  loading: props.loading,
-  highlight: highlight.value,
-  autoresize: props.autoresize,
-  leading: isLeading.value || !!props.avatar || !!slots.leading,
-  trailing: isTrailing.value || !!slots.trailing,
-}));
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.textarea || {}),
+  })({
+    color: color.value,
+    variant: props.variant,
+    size: size?.value,
+    loading: props.loading,
+    highlight: highlight.value,
+    autoresize: props.autoresize,
+    leading: isLeading.value || !!props.avatar || !!slots.leading,
+    trailing: isTrailing.value || !!slots.trailing,
+  }),
+);
 
 const textareaRef = ref<HTMLTextAreaElement | null>(null);
 

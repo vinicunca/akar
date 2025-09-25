@@ -1,52 +1,56 @@
 <script lang="ts">
-import type { ButtonProps } from '@nuxt/ui'
+import type { PButtonProps } from 'pohon';
 
-export interface ColorModeButtonProps extends /** @vue-ignore */ Pick<ButtonProps, 'as' | 'size' | 'disabled' | 'ui'> {
+export interface PColorModeButtonProps extends /** @vue-ignore */ Pick<PButtonProps, 'as' | 'size' | 'disabled' | 'pohon'> {
   /**
    * @defaultValue 'neutral'
    */
-  color?: ButtonProps['color']
+  color?: PButtonProps['color'];
   /**
    * @defaultValue 'ghost'
    */
-  variant?: ButtonProps['variant']
+  variant?: PButtonProps['variant'];
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useColorMode, useAppConfig } from '#imports'
-import { useLocale } from '../../composables/useLocale'
-import UButton from '../button.vue'
+import { useAppConfig, useColorMode } from '#imports';
+import { computed } from 'vue';
+import { useLocale } from '../../composables/use-locale';
+import PButton from '../button.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-withDefaults(defineProps<ColorModeButtonProps>(), {
-  color: 'neutral',
-  variant: 'ghost'
-})
+withDefaults(
+  defineProps<PColorModeButtonProps>(),
+  {
+    color: 'neutral',
+    variant: 'ghost',
+  },
+);
+
 defineSlots<{
-  fallback(props?: {}): any
-}>()
+  fallback: (props?: object) => any;
+}>();
 
-const { t } = useLocale()
-const colorMode = useColorMode()
-const appConfig = useAppConfig()
+const { t } = useLocale();
+const colorMode = useColorMode();
+const appConfig = useAppConfig();
 
 const isDark = computed({
   get() {
-    return colorMode.value === 'dark'
+    return colorMode.value === 'dark';
   },
   set(_isDark: boolean) {
-    colorMode.preference = _isDark ? 'dark' : 'light'
-  }
-})
+    colorMode.preference = _isDark ? 'dark' : 'light';
+  },
+});
 </script>
 
 <template>
   <ClientOnly v-if="!colorMode?.forced">
-    <UButton
-      :icon="isDark ? appConfig.ui.icons.dark : appConfig.ui.icons.light"
+    <PButton
+      :icon="isDark ? appConfig.pohon.icons.dark : appConfig.pohon.icons.light"
       :color="color"
       :variant="variant"
       :aria-label="isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark')"

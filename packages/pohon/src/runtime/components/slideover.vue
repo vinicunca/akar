@@ -1,6 +1,11 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { DialogContentEmits, DialogContentProps, DialogRootEmits, DialogRootProps } from 'akar';
+import type {
+  ADialogContentEmits,
+  ADialogContentProps,
+  ADialogRootEmits,
+  ADialogRootProps,
+} from 'akar';
 import type { IconProps, PButtonProps } from '../types';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -8,11 +13,11 @@ import theme from '#build/pohon/slideover';
 
 type Slideover = ComponentConfig<typeof theme, AppConfig, 'slideover'>;
 
-export interface SlideoverProps extends DialogRootProps {
+export interface PSlideoverProps extends ADialogRootProps {
   title?: string;
   description?: string;
   /** The content of the slideover. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>;
+  content?: Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ADialogContentEmits>>;
   /**
    * Render an overlay behind the slideover.
    * @defaultValue true
@@ -54,13 +59,13 @@ export interface SlideoverProps extends DialogRootProps {
   pohon?: Slideover['slots'];
 }
 
-export interface SlideoverEmits extends DialogRootEmits {
+export interface PSlideoverEmits extends ADialogRootEmits {
   'after:leave': [];
   'after:enter': [];
   'close:prevent': [];
 }
 
-export interface SlideoverSlots {
+export interface PSlideoverSlots {
   default: (props: { open: boolean }) => any;
   content: (props: { close: () => void }) => any;
   header: (props: { close: () => void }) => any;
@@ -76,29 +81,46 @@ export interface SlideoverSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger, useForwardPropsEmits, VisuallyHidden } from 'akar';
+import {
+  ADialogClose,
+  ADialogContent,
+  ADialogDescription,
+  ADialogOverlay,
+  ADialogPortal,
+  ADialogRoot,
+  ADialogTitle,
+  ADialogTrigger,
+  AVisuallyHidden,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed, toRef } from 'vue';
 import { useLocale } from '../composables/use-locale';
-import { usePortal } from '../composables/usePortal';
+import { usePortal } from '../composables/use-portal';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<SlideoverProps>(), {
-  close: true,
-  portal: true,
-  overlay: true,
-  transition: true,
-  modal: true,
-  dismissible: true,
-  side: 'right',
-});
-const emits = defineEmits<SlideoverEmits>();
-const slots = defineSlots<SlideoverSlots>();
+const props = withDefaults(
+  defineProps<PSlideoverProps>(),
+  {
+    close: true,
+    portal: true,
+    overlay: true,
+    transition: true,
+    modal: true,
+    dismissible: true,
+    side: 'right',
+  },
+);
+const emits = defineEmits<PSlideoverEmits>();
+const slots = defineSlots<PSlideoverSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Slideover['AppConfig'];
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits);
+const rootProps = useForwardPropsEmits(
+  reactivePick(props, 'open', 'defaultOpen', 'modal'),
+  emits,
+);
 const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => props.content);
 const contentEvents = computed(() => {
@@ -121,33 +143,35 @@ const contentEvents = computed(() => {
   return defaultEvents;
 });
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideover || {}) })({
-  transition: props.transition,
-  side: props.side,
-}));
+const pohon = computed(() =>
+  uv({ extend: uv(theme), ...(appConfig.pohon?.slideover || {}) })({
+    transition: props.transition,
+    side: props.side,
+  }),
+);
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DialogRoot
+  <ADialogRoot
     v-slot="{ open, close }"
     v-bind="rootProps"
   >
-    <DialogTrigger
+    <ADialogTrigger
       v-if="!!slots.default"
       as-child
       :class="props.class"
     >
       <slot :open="open" />
-    </DialogTrigger>
+    </ADialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
-      <DialogOverlay
+    <ADialogPortal v-bind="portalProps">
+      <ADialogOverlay
         v-if="overlay"
         :class="pohon.overlay({ class: props.pohon?.overlay })"
       />
 
-      <DialogContent
+      <ADialogContent
         :data-side="side"
         :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
         v-bind="contentProps"
@@ -155,19 +179,19 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideo
         @after-leave="emits('after:leave')"
         v-on="contentEvents"
       >
-        <VisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
-          <DialogTitle v-if="title || !!slots.title">
+        <AVisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
+          <ADialogTitle v-if="title || !!slots.title">
             <slot name="title">
               {{ title }}
             </slot>
-          </DialogTitle>
+          </ADialogTitle>
 
-          <DialogDescription v-if="description || !!slots.description">
+          <ADialogDescription v-if="description || !!slots.description">
             <slot name="description">
               {{ description }}
             </slot>
-          </DialogDescription>
-        </VisuallyHidden>
+          </ADialogDescription>
+        </AVisuallyHidden>
 
         <slot
           name="content"
@@ -182,35 +206,35 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideo
               :close="close"
             >
               <div :class="pohon.wrapper({ class: props.pohon?.wrapper })">
-                <DialogTitle
+                <ADialogTitle
                   v-if="title || !!slots.title"
                   :class="pohon.title({ class: props.pohon?.title })"
                 >
                   <slot name="title">
                     {{ title }}
                   </slot>
-                </DialogTitle>
+                </ADialogTitle>
 
-                <DialogDescription
+                <ADialogDescription
                   v-if="description || !!slots.description"
                   :class="pohon.description({ class: props.pohon?.description })"
                 >
                   <slot name="description">
                     {{ description }}
                   </slot>
-                </DialogDescription>
+                </ADialogDescription>
               </div>
 
               <slot name="actions" />
 
-              <DialogClose
+              <ADialogClose
                 v-if="props.close || !!slots.close"
                 as-child
               >
                 <slot
                   name="close"
                   :close="close"
-                  :ui="ui"
+                  :pohon="pohon"
                 >
                   <PButton
                     v-if="props.close"
@@ -222,7 +246,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideo
                     :class="pohon.close({ class: props.pohon?.close })"
                   />
                 </slot>
-              </DialogClose>
+              </ADialogClose>
             </slot>
           </div>
 
@@ -243,7 +267,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideo
             />
           </div>
         </slot>
-      </DialogContent>
-    </DialogPortal>
-  </DialogRoot>
+      </ADialogContent>
+    </ADialogPortal>
+  </ADialogRoot>
 </template>

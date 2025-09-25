@@ -8,7 +8,7 @@ import type {
   ATooltipRootProps,
   ATooltipTriggerProps,
 } from 'akar';
-import type { KbdProps } from '../types';
+import type { PKbdProps } from '../types';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/tooltip';
@@ -19,7 +19,7 @@ export interface PTooltipProps extends ATooltipRootProps {
   /** The text content of the tooltip. */
   text?: string;
   /** The keyboard keys to display in the tooltip. */
-  kbds?: Array<KbdProps['value']> | Array<KbdProps>;
+  kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   /**
    * The content of the tooltip.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
@@ -69,7 +69,7 @@ import { defu } from 'defu';
 import { computed, toRef } from 'vue';
 import { usePortal } from '../composables/use-portal';
 import { uv } from '../utils/uv';
-import PKbd from './xKbd.vue';
+import PKbd from './kbd.vue';
 
 const props = withDefaults(
   defineProps<PTooltipProps>(),
@@ -137,7 +137,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.toolti
             <PKbd
               v-for="(kbd, index) in kbds"
               :key="index"
-              :size="((props.pohon?.kbdsSize || pohon.kbdsSize()) as KbdProps['size'])"
+              :size="((props.pohon?.kbdsSize || pohon.kbdsSize()) as PKbdProps['size'])"
               v-bind="isString(kbd) ? { value: kbd } : kbd"
             />
           </span>

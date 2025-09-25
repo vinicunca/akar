@@ -1,16 +1,31 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { SelectArrowProps, SelectContentEmits, SelectContentProps, SelectRootEmits, SelectRootProps } from 'akar';
+import type {
+  ASelectArrowProps,
+  ASelectContentEmits,
+  ASelectContentProps,
+  ASelectRootEmits,
+  ASelectRootProps,
+} from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { IconProps, InputProps, PAvatarProps, PChipProps } from '../types';
-import type { AcceptableValue, ArrayOrNested, EmitsToProps, GetItemKeys, GetItemValue, GetModelValue, GetModelValueEmits, NestedItem } from '../types/utils';
+import type { IconProps, PAvatarProps, PChipProps, PInputProps } from '../types';
+import type {
+  AcceptableValue,
+  ArrayOrNested,
+  EmitsToProps,
+  GetItemKeys,
+  GetItemValue,
+  GetModelValue,
+  GetModelValueEmits,
+  NestedItem,
+} from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/select';
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>;
 
-export type SelectValue = AcceptableValue;
-export type SelectItem = SelectValue | {
+export type PSelectValue = AcceptableValue;
+export type PSelectItem = PSelectValue | {
   label?: string;
   /**
    * @IconifyIcon
@@ -23,7 +38,7 @@ export type SelectItem = SelectValue | {
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item';
-  value?: SelectValue;
+  value?: PSelectValue;
   disabled?: boolean;
   onSelect?: (event?: Event) => void;
   class?: any;
@@ -31,7 +46,7 @@ export type SelectItem = SelectValue | {
   [key: string]: any;
 };
 
-export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<SelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
+export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<ASelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
   id?: string;
   /** The placeholder text when the select is empty. */
   placeholder?: string;
@@ -63,12 +78,12 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
-  content?: Omit<SelectContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<SelectContentEmits>>;
+  content?: Omit<ASelectContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ASelectContentEmits>>;
   /**
    * Display an arrow alongside the menu.
    * @defaultValue false
    */
-  arrow?: boolean | Omit<SelectArrowProps, 'as' | 'asChild'>;
+  arrow?: boolean | Omit<ASelectArrowProps, 'as' | 'asChild'>;
   /**
    * Render the menu in a portal.
    * @defaultValue true
@@ -99,16 +114,16 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
   pohon?: Select['slots'];
 }
 
-export type SelectEmits<A extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<SelectRootEmits, 'update:modelValue'> & {
+export type PSelectEmits<A extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<ASelectRootEmits, 'update:modelValue'> & {
   change: [event: Event];
   blur: [event: FocusEvent];
   focus: [event: FocusEvent];
 } & GetModelValueEmits<A, VK, M>;
 
-type SlotProps<T extends SelectItem> = (props: { item: T; index: number }) => any;
+type SlotProps<T extends PSelectItem> = (props: { item: T; index: number }) => any;
 
-export interface SelectSlots<
-  A extends ArrayOrNested<SelectItem> = ArrayOrNested<SelectItem>,
+export interface PSelectSlots<
+  A extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>,
   VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>,
@@ -136,65 +151,128 @@ export interface SelectSlots<
 }
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<SelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
+<script setup lang="ts" generic="T extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
 import { useAppConfig } from '#imports';
 import { isNonNullish } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
-import { SelectItem as RSelectItem, SelectArrow, SelectContent, SelectGroup, SelectItemIndicator, SelectItemText, SelectLabel, SelectPortal, SelectRoot, SelectSeparator, SelectTrigger, useForwardPropsEmits } from 'akar';
+import {
+  ASelectArrow,
+  ASelectContent,
+  ASelectGroup,
+  ASelectItem,
+  ASelectItemIndicator,
+  ASelectItemText,
+  ASelectLabel,
+  ASelectPortal,
+  ASelectRoot,
+  ASelectSeparator,
+  ASelectTrigger,
+  useForwardPropsEmits,
+} from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, ref, toRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
-import { useFieldGroup } from '../composables/useFieldGroup';
-import { usePortal } from '../composables/usePortal';
-import { get, getDisplayValue, isArrayOfArray } from '../utils';
+import { usePortal } from '../composables/use-portal';
+import { getDisplayValue, getProp, isArrayOfArray } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
-import PChip from './Chip.vue';
+import PChip from './chip.vue';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<SelectProps<T, VK, M>>(), {
-  valueKey: 'value' as never,
-  labelKey: 'label',
-  portal: true,
-  autofocusDelay: 0,
-});
-const emits = defineEmits<SelectEmits<T, VK, M>>();
-const slots = defineSlots<SelectSlots<T, VK, M>>();
+const props = withDefaults(
+  defineProps<PSelectProps<T, VK, M>>(),
+  {
+    valueKey: 'value' as never,
+    labelKey: 'label',
+    portal: true,
+    autofocusDelay: 0,
+  },
+);
+const emits = defineEmits<PSelectEmits<T, VK, M>>();
+const slots = defineSlots<PSelectSlots<T, VK, M>>();
 
 const appConfig = useAppConfig() as Select['AppConfig'];
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'disabled', 'autocomplete', 'required', 'multiple'), emits);
+const rootProps = useForwardPropsEmits(
+  reactivePick(
+    props,
+    'open',
+    'defaultOpen',
+    'disabled',
+    'autocomplete',
+    'required',
+    'multiple',
+  ),
+  emits,
+);
 const portalProps = usePortal(toRef(() => props.portal));
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as SelectContentProps);
-const arrowProps = toRef(() => props.arrow as SelectArrowProps);
+const contentProps = toRef(() =>
+  defu(
+    props.content,
+    {
+      side: 'bottom',
+      sideOffset: 8,
+      collisionPadding: 8,
+      position: 'popper',
+    },
+  ) as ASelectContentProps,
+);
+const arrowProps = toRef(() => props.arrow as ASelectArrowProps);
 
-const { emitFormChange, emitFormInput, emitFormBlur, emitFormFocus, size: formGroupSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props);
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props);
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown })));
+const {
+  emitFormChange,
+  emitFormInput,
+  emitFormBlur,
+  emitFormFocus,
+  size: formGroupSize,
+  color,
+  id,
+  name,
+  highlight,
+  disabled,
+  ariaAttrs,
+} = useFormField<PInputProps>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputProps>(props);
+const {
+  isLeading,
+  isTrailing,
+  leadingIconName,
+  trailingIconName,
+} = useComponentIcons(
+  toRef(() => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown })),
+);
 
 const selectSize = computed(() => fieldGroupSize.value || formGroupSize.value);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.select || {}) })({
-  color: color.value,
-  variant: props.variant,
-  size: selectSize?.value,
-  loading: props.loading,
-  highlight: highlight.value,
-  leading: isLeading.value || !!props.avatar || !!slots.leading,
-  trailing: isTrailing.value || !!slots.trailing,
-  fieldGroup: orientation.value,
-}));
-
-const groups = computed<Array<Array<SelectItem>>>(() =>
-  props.items?.length
-    ? isArrayOfArray(props.items)
-      ? props.items
-      : [props.items]
-    : [],
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.select || {}),
+  })({
+    color: color.value,
+    variant: props.variant,
+    size: selectSize?.value,
+    loading: props.loading,
+    highlight: highlight.value,
+    leading: isLeading.value || !!props.avatar || !!slots.leading,
+    trailing: isTrailing.value || !!slots.trailing,
+    fieldGroup: orientation.value,
+  }),
 );
+
+const groups = computed<Array<Array<PSelectItem>>>(() => {
+  if (props.items?.length) {
+    return isArrayOfArray(props.items)
+      ? props.items
+      : [props.items];
+  }
+
+  return [];
+});
 
 const items = computed(() => groups.value.flatMap((group) => group) as Array<T>);
 
@@ -224,7 +302,7 @@ function displayValue(value: GetItemValue<T, VK> | Array<GetItemValue<T, VK>>): 
   });
 }
 
-const triggerRef = ref<InstanceType<typeof SelectTrigger> | null>(null);
+const triggerRef = ref<InstanceType<typeof ASelectTrigger> | null>(null);
 
 function autoFocus() {
   if (props.autofocus) {
@@ -260,7 +338,7 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
-function isSelectItem(item: SelectItem): item is Exclude<SelectItem, SelectValue> {
+function isSelectItem(item: PSelectItem): item is Exclude<PSelectItem, PSelectValue> {
   return typeof item === 'object' && item !== null;
 }
 
@@ -271,18 +349,18 @@ defineExpose({
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <SelectRoot
+  <ASelectRoot
     v-slot="{ modelValue, open }"
     :name="name"
     v-bind="rootProps"
     :autocomplete="autocomplete"
     :disabled="disabled"
-    :default-value="(defaultValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
-    :model-value="(modelValue as Exclude<SelectItem, boolean> | Exclude<SelectItem, boolean>[])"
+    :default-value="(defaultValue as Exclude<PSelectItem, boolean> | Exclude<PSelectItem, boolean>[])"
+    :model-value="(modelValue as Exclude<PSelectItem, boolean> | Exclude<PSelectItem, boolean>[])"
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
   >
-    <SelectTrigger
+    <ASelectTrigger
       :id="id"
       ref="triggerRef"
       :class="pohon.base({ class: [props.pohon?.base, props.class] })"
@@ -296,7 +374,7 @@ defineExpose({
           name="leading"
           :model-value="(modelValue as GetModelValue<T, VK, M>)"
           :open="open"
-          :ui="ui"
+          :pohon="pohon"
         >
           <PIcon
             v-if="isLeading && leadingIconName"
@@ -343,7 +421,7 @@ defineExpose({
           name="trailing"
           :model-value="(modelValue as GetModelValue<T, VK, M>)"
           :open="open"
-          :ui="ui"
+          :pohon="pohon"
         >
           <PIcon
             v-if="trailingIconName"
@@ -352,10 +430,10 @@ defineExpose({
           />
         </slot>
       </span>
-    </SelectTrigger>
+    </ASelectTrigger>
 
-    <SelectPortal v-bind="portalProps">
-      <SelectContent
+    <ASelectPortal v-bind="portalProps">
+      <ASelectContent
         :class="pohon.content({ class: props.pohon?.content })"
         v-bind="contentProps"
       >
@@ -365,7 +443,7 @@ defineExpose({
           role="presentation"
           :class="pohon.viewport({ class: props.pohon?.viewport })"
         >
-          <SelectGroup
+          <ASelectGroup
             v-for="(group, groupIndex) in groups"
             :key="`group-${groupIndex}`"
             :class="pohon.group({ class: props.pohon?.group })"
@@ -374,23 +452,23 @@ defineExpose({
               v-for="(item, index) in group"
               :key="`group-${groupIndex}-${index}`"
             >
-              <SelectLabel
+              <ASelectLabel
                 v-if="isSelectItem(item) && item.type === 'label'"
                 :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
               >
-                {{ get(item, props.labelKey as string) }}
-              </SelectLabel>
+                {{ getProp({ object: item, path: props.labelKey as string }) }}
+              </ASelectLabel>
 
-              <SelectSeparator
+              <ASelectSeparator
                 v-else-if="isSelectItem(item) && item.type === 'separator'"
                 :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator, item.class] })"
               />
 
-              <RSelectItem
+              <ASelectItem
                 v-else
                 :class="pohon.item({ class: [props.pohon?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
-                :value="isSelectItem(item) ? get(item, props.valueKey as string) : item"
+                :value="isSelectItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
                 @select="isSelectItem(item) && item.onSelect?.($event)"
               >
                 <slot
@@ -424,44 +502,50 @@ defineExpose({
                     />
                   </slot>
 
-                  <SelectItemText :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel] })">
+                  <ASelectItemText :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel] })">
                     <slot
                       name="item-label"
                       :item="(item as NestedItem<T>)"
                       :index="index"
                     >
-                      {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
+                      {{ isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
                     </slot>
-                  </SelectItemText>
+                  </ASelectItemText>
 
-                  <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })">
+                  <span
+                    :class="pohon.itemTrailing({
+                      class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing],
+                    })"
+                  >
                     <slot
                       name="item-trailing"
                       :item="(item as NestedItem<T>)"
                       :index="index"
                     />
 
-                    <SelectItemIndicator as-child>
+                    <ASelectItemIndicator as-child>
                       <PIcon
                         :name="selectedIcon || appConfig.pohon.icons.check"
-                        :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
+                        :class="pohon.itemTrailingIcon({
+                          class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon],
+                        })"
                       />
-                    </SelectItemIndicator>
+                    </ASelectItemIndicator>
                   </span>
                 </slot>
-              </RSelectItem>
+              </ASelectItem>
             </template>
-          </SelectGroup>
+          </ASelectGroup>
         </div>
 
         <slot name="content-bottom" />
 
-        <SelectArrow
+        <ASelectArrow
           v-if="!!arrow"
           v-bind="arrowProps"
           :class="pohon.arrow({ class: props.pohon?.arrow })"
         />
-      </SelectContent>
-    </SelectPortal>
-  </SelectRoot>
+      </ASelectContent>
+    </ASelectPortal>
+  </ASelectRoot>
 </template>

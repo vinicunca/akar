@@ -1,15 +1,21 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { DrawerProps, PButtonProps, PDialogProps, SlideoverProps } from '../types';
+import type { APrimitiveProps } from 'akar';
+import type {
+  PButtonProps,
+  PDialogProps,
+  PDrawerProps,
+  PSlideoverProps,
+} from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/header';
 
 type Header = ComponentConfig<typeof theme, AppConfig, 'header'>;
 
 type HeaderMode = 'modal' | 'slideover' | 'drawer';
-type HeaderMenu<T> = T extends 'modal' ? PDialogProps : T extends 'slideover' ? SlideoverProps : T extends 'drawer' ? DrawerProps : never;
+type HeaderMenu<T> = T extends 'modal' ? PDialogProps : T extends 'slideover' ? PSlideoverProps : T extends 'drawer' ? PDrawerProps : never;
 
-export interface HeaderProps<T extends HeaderMode = HeaderMode> {
+export interface PHeaderProps<T extends HeaderMode = HeaderMode> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'header'
@@ -40,7 +46,7 @@ export interface HeaderProps<T extends HeaderMode = HeaderMode> {
   pohon?: Header['slots'];
 }
 
-export interface HeaderSlots {
+export interface PHeaderSlots {
   title: (props?: object) => any;
   left: (props?: object) => any;
   default: (props?: object) => any;
@@ -63,23 +69,26 @@ import { useLocale } from '../composables/use-locale';
 import { getSlotChildrenText } from '../utils';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UModal from './dialog.vue';
+import PContainer from './container.vue';
+import PDialog from './dialog.vue';
+import PDrawer from './drawer.vue';
 import PLink from './link.vue';
-import PContainer from './xContainer.vue';
-import UDrawer from './xDrawer.vue';
-import USlideover from './xSlideover.vue';
+import PSlideover from './slideover.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<HeaderProps<T>>(), {
-  as: 'header',
-  mode: 'modal' as never,
-  toggle: true,
-  toggleSide: 'right',
-  to: '/',
-  title: 'Nuxt UI',
-});
-const slots = defineSlots<HeaderSlots>();
+const props = withDefaults(
+  defineProps<PHeaderProps<T>>(),
+  {
+    as: 'header',
+    mode: 'modal' as never,
+    toggle: true,
+    toggleSide: 'right',
+    to: '/',
+    title: 'Nuxt UI',
+  },
+);
+const slots = defineSlots<PHeaderSlots>();
 
 const open = defineModel<boolean>('open', { default: false });
 
@@ -100,19 +109,27 @@ watch(() => route.fullPath, () => {
   open.value = false;
 });
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.header || {}) })());
+const pohon = computed(() =>
+  uv({ extend: uv(theme), ...(appConfig.pohon?.header || {}) })(),
+);
 
-const Menu = computed(() => ({
-  slideover: USlideover,
-  modal: UModal,
-  drawer: UDrawer,
+const MenuComponent = computed(() => ({
+  slideover: PSlideover,
+  modal: PDialog,
+  drawer: PDrawer,
 })[props.mode as HeaderMode]);
 
-const menuProps = toRef(() => defu(props.menu, {
-  content: {
-    onOpenAutoFocus: (event: Event) => event.preventDefault(),
-  },
-}, props.mode === 'modal' ? { fullscreen: true, transition: false } : {}) as HeaderMenu<T>);
+const menuProps = toRef(() =>
+  defu(
+    props.menu,
+    {
+      content: {
+        onOpenAutoFocus: (event: Event) => event.preventDefault(),
+      },
+    },
+    props.mode === 'modal' ? { fullscreen: true, transition: false } : {},
+  ) as HeaderMenu<T>,
+);
 
 function toggleOpen() {
   open.value = !open.value;
@@ -185,7 +202,7 @@ function toggleOpen() {
     <slot name="bottom" />
   </APrimitive>
 
-  <Menu
+  <MenuComponent
     v-model:open="open"
     :title="t('header.title')"
     :description="t('header.description')"
@@ -211,5 +228,5 @@ function toggleOpen() {
         </div>
       </slot>
     </template>
-  </Menu>
+  </MenuComponent>
 </template>

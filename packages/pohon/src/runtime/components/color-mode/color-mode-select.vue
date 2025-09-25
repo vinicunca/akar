@@ -1,38 +1,41 @@
 <script lang="ts">
-import type { SelectMenuProps } from '@nuxt/ui'
+import type { PSelectMenuProps } from 'pohon';
 
-export interface ColorModeSelectProps extends /** @vue-ignore */ Pick<SelectMenuProps<any>, 'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'ui'> {
+export interface PColorModeSelectProps extends /** @vue-ignore */ Pick<
+  PSelectMenuProps<any>,
+'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'pohon'
+> {
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useColorMode, useAppConfig } from '#imports'
-import { useLocale } from '../../composables/useLocale'
-import PSelectMenu from '../SelectMenu.vue'
+import { useAppConfig, useColorMode } from '#imports';
+import { computed } from 'vue';
+import { useLocale } from '../../composables/use-locale';
+import PSelectMenu from '../select-menu.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-defineProps<ColorModeSelectProps>()
+defineProps<PColorModeSelectProps>();
 
-const { t } = useLocale()
-const colorMode = useColorMode()
-const appConfig = useAppConfig()
+const { t } = useLocale();
+const colorMode = useColorMode();
+const appConfig = useAppConfig();
 
 const items = computed(() => [
-  { label: t('colorMode.system'), value: 'system', icon: appConfig.ui.icons.system },
-  { label: t('colorMode.light'), value: 'light', icon: appConfig.ui.icons.light },
-  { label: t('colorMode.dark'), value: 'dark', icon: appConfig.ui.icons.dark }
-])
+  { label: t('colorMode.system'), value: 'system', icon: appConfig.pohon.icons.system },
+  { label: t('colorMode.light'), value: 'light', icon: appConfig.pohon.icons.light },
+  { label: t('colorMode.dark'), value: 'dark', icon: appConfig.pohon.icons.dark },
+]);
 
 const preference = computed({
   get() {
-    return items.value.find(option => option.value === colorMode.preference) || items.value[0]
+    return items.value.find((option) => option.value === colorMode.preference) || items.value[0];
   },
   set(option) {
-    colorMode.preference = option!.value
-  }
-})
+    colorMode.preference = option!.value;
+  },
+});
 </script>
 
 <template>

@@ -6,7 +6,7 @@ import type {
   ADropdownMenuContentEmits as AkarDropdownMenuContentEmits,
   ADropdownMenuContentProps as AkarDropdownMenuContentProps,
 } from 'akar';
-import type { PDropdownMenuItem, PDropdownMenuSlots, IconProps, KbdProps, PAvatarProps } from '../types';
+import type { PDropdownMenuItem, PDropdownMenuSlots, IconProps, PKbdProps, PAvatarProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 
@@ -61,7 +61,7 @@ import PDropdownMenuContent from './dropdown-menu-content.vue';
 import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
-import PKbd from './xKbd.vue';
+import PKbd from './kbd.vue';
 
 const props = defineProps<DropdownMenuContentProps<T>>();
 const emits = defineEmits<DropdownMenuContentEmits>();
@@ -178,7 +178,7 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
             <PKbd
               v-for="(kbd, kbdIndex) in item.kbds"
               :key="kbdIndex"
-              :size="((item.pohon?.itemTrailingKbdsSize || pohonOverride?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as KbdProps['size'])"
+              :size="((item.pohon?.itemTrailingKbdsSize || pohonOverride?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as PKbdProps['size'])"
               v-bind="isString(kbd) ? { value: kbd } : kbd"
             />
           </span>

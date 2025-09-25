@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { PaginationRootEmits, PaginationRootProps } from 'akar';
+import type { APaginationRootEmits, APaginationRootProps, APrimitiveProps } from 'akar';
 import type { IconProps, PButtonProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/pagination';
 
 type Pagination = ComponentConfig<typeof theme, AppConfig, 'pagination'>;
 
-export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
+export interface PPaginationProps extends Partial<Pick<APaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -79,9 +79,9 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
   pohon?: Pagination['slots'];
 }
 
-export interface PaginationEmits extends PaginationRootEmits {}
+export interface PPaginationEmits extends APaginationRootEmits {}
 
-export interface PaginationSlots {
+export interface PPaginationSlots {
   first: (props?: object) => any;
   prev: (props?: object) => any;
   next: (props?: object) => any;
@@ -104,50 +104,98 @@ export interface PaginationSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { PaginationEllipsis, PaginationFirst, PaginationLast, PaginationList, PaginationListItem, PaginationNext, PaginationPrev, PaginationRoot, useForwardPropsEmits } from 'akar';
+import {
+  APaginationEllipsis,
+  APaginationFirst,
+  APaginationLast,
+  APaginationList,
+  APaginationListItem,
+  APaginationNext,
+  APaginationPrev,
+  APaginationRoot,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<PaginationProps>(), {
-  color: 'neutral',
-  variant: 'outline',
-  activeColor: 'primary',
-  activeVariant: 'solid',
-  showControls: true,
-  showEdges: false,
-  itemsPerPage: 10,
-  siblingCount: 2,
-  total: 0,
-});
-const emits = defineEmits<PaginationEmits>();
-const slots = defineSlots<PaginationSlots>();
+const props = withDefaults(
+  defineProps<PPaginationProps>(),
+  {
+    color: 'neutral',
+    variant: 'outline',
+    activeColor: 'primary',
+    activeVariant: 'solid',
+    showControls: true,
+    showEdges: false,
+    itemsPerPage: 10,
+    siblingCount: 2,
+    total: 0,
+  },
+);
+const emits = defineEmits<PPaginationEmits>();
+const slots = defineSlots<PPaginationSlots>();
 
 const { dir } = useLocale();
 const appConfig = useAppConfig() as Pagination['AppConfig'];
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultPage', 'disabled', 'itemsPerPage', 'page', 'showEdges', 'siblingCount', 'total'), emits);
+const rootProps = useForwardPropsEmits(
+  reactivePick(
+    props,
+    'as',
+    'defaultPage',
+    'disabled',
+    'itemsPerPage',
+    'page',
+    'showEdges',
+    'siblingCount',
+    'total',
+  ),
+  emits,
+);
 
-const firstIcon = computed(() => props.firstIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.chevronDoubleRight : appConfig.pohon.icons.chevronDoubleLeft));
-const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.chevronRight : appConfig.pohon.icons.chevronLeft));
-const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.chevronLeft : appConfig.pohon.icons.chevronRight));
-const lastIcon = computed(() => props.lastIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.chevronDoubleLeft : appConfig.pohon.icons.chevronDoubleRight));
+const firstIcon = computed(() =>
+  props.firstIcon || (dir.value === 'rtl'
+    ? appConfig.pohon.icons.chevronDoubleRight
+    : appConfig.pohon.icons.chevronDoubleLeft
+  ),
+);
+const prevIcon = computed(() =>
+  props.prevIcon || (dir.value === 'rtl'
+    ? appConfig.pohon.icons.chevronRight
+    : appConfig.pohon.icons.chevronLeft
+  ),
+);
+const nextIcon = computed(() =>
+  props.nextIcon || (dir.value === 'rtl'
+    ? appConfig.pohon.icons.chevronLeft
+    : appConfig.pohon.icons.chevronRight
+  ),
+);
+const lastIcon = computed(() =>
+  props.lastIcon || (dir.value === 'rtl'
+    ? appConfig.pohon.icons.chevronDoubleLeft
+    : appConfig.pohon.icons.chevronDoubleRight
+  ),
+);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagination || {}) })());
+const pohon = computed(() =>
+  uv({ extend: uv(theme), ...(appConfig.pohon?.pagination || {}) })(),
+);
 </script>
 
 <template>
-  <PaginationRoot
+  <APaginationRoot
     v-slot="{ page, pageCount }"
     v-bind="rootProps"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
   >
-    <PaginationList
+    <APaginationList
       v-slot="{ items }"
       :class="pohon.list({ class: props.pohon?.list })"
     >
-      <PaginationFirst
+      <APaginationFirst
         v-if="showControls || !!slots.first"
         as-child
         :class="pohon.first({ class: props.pohon?.first })"
@@ -161,8 +209,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
             :to="to?.(1)"
           />
         </slot>
-      </PaginationFirst>
-      <PaginationPrev
+      </APaginationFirst>
+      <APaginationPrev
         v-if="showControls || !!slots.prev"
         as-child
         :class="pohon.prev({ class: props.pohon?.prev })"
@@ -176,10 +224,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
             :to="page > 1 ? to?.(page - 1) : undefined"
           />
         </slot>
-      </PaginationPrev>
+      </APaginationPrev>
 
       <template v-for="(item, index) in items">
-        <PaginationListItem
+        <APaginationListItem
           v-if="item.type === 'page'"
           :key="index"
           as-child
@@ -200,9 +248,9 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
               square
             />
           </slot>
-        </PaginationListItem>
+        </APaginationListItem>
 
-        <PaginationEllipsis
+        <APaginationEllipsis
           v-else
           :key="item.type"
           :index="index"
@@ -217,10 +265,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
               :icon="ellipsisIcon || appConfig.pohon.icons.ellipsis"
             />
           </slot>
-        </PaginationEllipsis>
+        </APaginationEllipsis>
       </template>
 
-      <PaginationNext
+      <APaginationNext
         v-if="showControls || !!slots.next"
         as-child
         :class="pohon.next({ class: props.pohon?.next })"
@@ -234,8 +282,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
             :to="page < pageCount ? to?.(page + 1) : undefined"
           />
         </slot>
-      </PaginationNext>
-      <PaginationLast
+      </APaginationNext>
+      <APaginationLast
         v-if="showControls || !!slots.last"
         as-child
         :class="pohon.last({ class: props.pohon?.last })"
@@ -249,7 +297,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
             :to="to?.(pageCount)"
           />
         </slot>
-      </PaginationLast>
-    </PaginationList>
-  </PaginationRoot>
+      </APaginationLast>
+    </APaginationList>
+  </APaginationRoot>
 </template>

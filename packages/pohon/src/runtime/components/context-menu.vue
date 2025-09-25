@@ -7,7 +7,7 @@ import type {
   AContextMenuRootEmits,
   AContextMenuRootProps,
 } from 'akar';
-import type { IconProps, KbdProps, PLinkProps, PAvatarProps } from '../types';
+import type { IconProps, PKbdProps, PLinkProps, PAvatarProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/context-menu';
@@ -23,7 +23,7 @@ export interface PContextMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'cus
   color?: ContextMenu['variants']['color'];
   avatar?: PAvatarProps;
   content?: Omit<AContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<AContextMenuContentEmits>>;
-  kbds?: Array<KbdProps['value']> | Array<KbdProps>;
+  kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   /**
    * The item type.
    * @defaultValue 'link'

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { APrimitiveProps } from 'akar';
 import type { InputHTMLAttributes } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps } from '../types';
@@ -10,8 +11,8 @@ import theme from '#build/pohon/input';
 
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>;
 
-export type InputValue = AcceptableValue;
-export interface InputProps<T extends InputValue = InputValue> extends UseComponentIconsProps {
+export type PInputValue = AcceptableValue;
+export interface PInputProps<T extends PInputValue = PInputValue> extends UseComponentIconsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -48,27 +49,28 @@ export interface InputProps<T extends InputValue = InputValue> extends UseCompon
   pohon?: Input['slots'];
 }
 
-export interface InputEmits<T extends InputValue = InputValue> {
+export interface PInputEmits<T extends PInputValue = PInputValue> {
   'update:modelValue': [value: T];
   'blur': [event: FocusEvent];
   'change': [event: Event];
 }
 
-export interface InputSlots {
+export interface PInputSlots {
   leading: (props?: object) => any;
   default: (props?: object) => any;
   trailing: (props?: object) => any;
 }
 </script>
 
-<script setup lang="ts" generic="T extends InputValue">
+<script setup lang="ts" generic="T extends PInputValue">
 import { useAppConfig } from '#imports';
+import { isNumber } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, onMounted, ref } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
-import { useFieldGroup } from '../composables/useFieldGroup';
 import { looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
@@ -76,35 +78,64 @@ import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<InputProps<T>>(), {
-  type: 'text',
-  autocomplete: 'off',
-  autofocusDelay: 0,
-});
-const emits = defineEmits<InputEmits<T>>();
-const slots = defineSlots<InputSlots>();
+const props = withDefaults(
+  defineProps<PInputProps<T>>(),
+  {
+    type: 'text',
+    autocomplete: 'off',
+    autofocusDelay: 0,
+  },
+);
+const emits = defineEmits<PInputEmits<T>>();
+const slots = defineSlots<PInputSlots>();
 
-const modelValue = useVModel<InputProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue });
+const modelValue = useVModel<
+  PInputProps<T>,
+  'modelValue',
+  'update:modelValue'
+>(
+  props,
+  'modelValue',
+  emits,
+  { defaultValue: props.defaultValue },
+);
 
 const appConfig = useAppConfig() as Input['AppConfig'];
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formGroupSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(props, { deferInputValidation: true });
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps<T>>(props);
+const {
+  emitFormBlur,
+  emitFormInput,
+  emitFormChange,
+  size: formGroupSize,
+  color,
+  id,
+  name,
+  highlight,
+  disabled,
+  emitFormFocus,
+  ariaAttrs,
+} = useFormField<PInputProps<T>>(props, { deferInputValidation: true });
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputProps<T>>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.input || {}) })({
-  type: props.type as Input['variants']['type'],
-  color: color.value,
-  variant: props.variant,
-  size: inputSize?.value,
-  loading: props.loading,
-  highlight: highlight.value,
-  leading: isLeading.value || !!props.avatar || !!slots.leading,
-  trailing: isTrailing.value || !!slots.trailing,
-  fieldGroup: orientation.value,
-}));
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.input || {}),
+  })({
+    type: props.type as Input['variants']['type'],
+    color: color.value,
+    variant: props.variant,
+    size: inputSize?.value,
+    loading: props.loading,
+    highlight: highlight.value,
+    leading: isLeading.value || !!props.avatar || !!slots.leading,
+    trailing: isTrailing.value || !!slots.trailing,
+    fieldGroup: orientation.value,
+  }),
+);
 
 const inputRef = ref<HTMLInputElement | null>(null);
 
