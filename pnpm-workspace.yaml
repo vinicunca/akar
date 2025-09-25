@@ -93,6 +93,7 @@ catalogs:
     hookable: ^5.5.3
     magic-string: ^0.30.19
     mlly: ^1.8.0
+    motion-v: ^1.7.1
     nuxt: 4.1.2
     ohash: ^2.0.11
     pathe: ^2.0.3

@@ -5,7 +5,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import type { AListboxRootEmits, AListboxRootProps, APrimitiveProps } from 'akar';
 import type { FuseResult } from 'fuse.js';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { IconProps, PInputProps, PKbdProps, PLinkProps, PAvatarProps, PButtonProps, PChipProps } from '../types';
+import type { IconProps, PAvatarProps, PButtonProps, PChipProps, PInputProps, PKbdProps, PLinkProps } from '../types';
 import type { GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/command-palette';
@@ -93,7 +93,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    */
   autofocus?: boolean;
   /**
-   * Display a close button in the input (useful when inside a Modal for example).
+   * Display a close button in the input (useful when inside a Dialog for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue false
@@ -186,10 +186,10 @@ import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PChip from './chip.vue';
 import PIcon from './icon.vue';
-import PLinkBase from './link-base.vue';
-import PLink from './link.vue';
 import PInput from './input.vue';
 import PKbd from './kbd.vue';
+import PLinkBase from './link-base.vue';
+import PLink from './link.vue';
 
 const props = withDefaults(
   defineProps<PCommandPaletteProps<G, T>>(),

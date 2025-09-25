@@ -11,35 +11,35 @@ import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dialog';
 
-type Dialog = ComponentConfig<typeof theme, AppConfig, 'modal'>;
+type Dialog = ComponentConfig<typeof theme, AppConfig, 'dialog'>;
 
 export interface PDialogProps extends ADialogRootProps {
   title?: string;
   description?: string;
-  /** The content of the modal. */
+  /** The content of the dialog. */
   content?: Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ADialogContentEmits>>;
   /**
-   * Render an overlay behind the modal.
+   * Render an overlay behind the dialog.
    * @defaultValue true
    */
   overlay?: boolean;
   /**
-   * Animate the modal when opening or closing.
+   * Animate the dialog when opening or closing.
    * @defaultValue true
    */
   transition?: boolean;
   /**
-   * When `true`, the modal will take up the full screen.
+   * When `true`, the dialog will take up the full screen.
    * @defaultValue false
    */
   fullscreen?: boolean;
   /**
-   * Render the modal in a portal.
+   * Render the dialog in a portal.
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement;
   /**
-   * Display a close button to dismiss the modal.
+   * Display a close button to dismiss the dialog.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
@@ -51,7 +51,7 @@ export interface PDialogProps extends ADialogRootProps {
    */
   closeIcon?: IconProps['name'];
   /**
-   * When `false`, the modal will not close when clicking outside or pressing escape.
+   * When `false`, the dialog will not close when clicking outside or pressing escape.
    * @defaultValue true
    */
   dismissible?: boolean;
@@ -65,7 +65,7 @@ export interface PDialogEmits extends ADialogRootEmits {
   'close:prevent': [];
 }
 
-export interface ModalSlots {
+export interface PDialogSlots {
   default: (props: { open: boolean }) => any;
   content: (props: { close: () => void }) => any;
   header: (props: { close: () => void }) => any;
@@ -111,7 +111,7 @@ const props = withDefaults(
   },
 );
 const emits = defineEmits<PDialogEmits>();
-const slots = defineSlots<ModalSlots>();
+const slots = defineSlots<PDialogSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Dialog['AppConfig'];
@@ -148,7 +148,7 @@ const contentEvents = computed(() => {
 const pohon = computed(() =>
   uv({
     extend: uv(theme),
-    ...(appConfig.pohon?.modal || {}),
+    ...(appConfig.pohon?.dialog || {}),
   })({
     transition: props.transition,
     fullscreen: props.fullscreen,
@@ -245,7 +245,7 @@ const pohon = computed(() =>
                     :icon="closeIcon || appConfig.pohon.icons.close"
                     color="neutral"
                     variant="ghost"
-                    :aria-label="t('modal.close')"
+                    :aria-label="t('dialog.close')"
                     v-bind="(typeof props.close === 'object' ? props.close as Partial<PButtonProps> : {})"
                     :class="pohon.close({ class: props.pohon?.close })"
                   />

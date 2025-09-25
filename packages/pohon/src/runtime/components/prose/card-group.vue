@@ -1,34 +1,39 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/uv'
-import theme from '#build/ui/prose/card-group'
+import type { AppConfig } from '@nuxt/schema';
+import type { ComponentConfig } from '../../types/uv';
+import theme from '#build/pohon/prose/card-group';
 
-type ProseCardGroup = ComponentConfig<typeof theme, AppConfig, 'cardGroup', 'ui.prose'>
+type ProseCardGroup = ComponentConfig<typeof theme, AppConfig, 'cardGroup', 'pohon.prose'>;
 
 export interface ProseCardGroupProps {
-  class?: any
+  class?: any;
 }
 
 export interface ProseCardGroupSlots {
-  default(props?: {}): any
+  default: (props?: object) => any;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { tv } from '../../utils/tv'
+import { useAppConfig } from '#imports';
+import { computed } from 'vue';
+import { uv } from '../../utils/uv';
 
-const props = defineProps<ProseCardGroupProps>()
-defineSlots<ProseCardGroupSlots>()
+const props = defineProps<ProseCardGroupProps>();
+defineSlots<ProseCardGroupSlots>();
 
-const appConfig = useAppConfig() as ProseCardGroup['AppConfig']
+const appConfig = useAppConfig() as ProseCardGroup['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.cardGroup || {}) }))
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.prose?.cardGroup || {}),
+  }),
+);
 </script>
 
 <template>
-  <div :class="ui({ class: props.class })">
+  <div :class="pohon({ class: props.class })">
     <slot />
   </div>
 </template>

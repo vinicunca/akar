@@ -1,36 +1,41 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/uv'
-import theme from '#build/ui/prose/accordion-item'
+import type { AppConfig } from '@nuxt/schema';
+import type { ComponentConfig } from '../../types/uv';
+import theme from '#build/pohon/prose/accordion-item';
 
-type ProseAccordionItem = ComponentConfig<typeof theme, AppConfig, 'accordionItem', 'ui.prose'>
+type ProseAccordionItem = ComponentConfig<typeof theme, AppConfig, 'accordionItem', 'pohon.prose'>;
 
 export interface ProseAccordionItemProps {
-  label: string
-  description?: string
-  class?: any
+  label: string;
+  description?: string;
+  class?: any;
 }
 
 export interface ProseAccordionItemSlots {
-  default(props?: {}): any
+  default: (props?: object) => any;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { tv } from '../../utils/tv'
+import { useAppConfig } from '#imports';
+import { computed } from 'vue';
+import { uv } from '../../utils/uv';
 
-const props = defineProps<ProseAccordionItemProps>()
-defineSlots<ProseAccordionItemSlots>()
+const props = defineProps<ProseAccordionItemProps>();
+defineSlots<ProseAccordionItemSlots>();
 
-const appConfig = useAppConfig() as ProseAccordionItem['AppConfig']
+const appConfig = useAppConfig() as ProseAccordionItem['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.accordionItem || {}) }))
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.prose?.accordionItem || {}),
+  }),
+);
 </script>
 
 <template>
-  <div :class="ui({ class: props.class })">
+  <div :class="pohon({ class: props.class })">
     <slot>
       {{ description }}
     </slot>

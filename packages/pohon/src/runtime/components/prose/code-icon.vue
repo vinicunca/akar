@@ -1,47 +1,50 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/prose/code-icon'
-import type { IconProps } from '../../types'
-import type { ComponentConfig } from '../../types/uv'
+import type { AppConfig } from '@nuxt/schema';
+import type { IconProps } from '../../types';
+import type { ComponentConfig } from '../../types/uv';
+import theme from '#build/pohon/prose/code-icon';
 
-type ProseCodeIcon = ComponentConfig<typeof theme, AppConfig, 'codeIcon', 'ui.prose'>
+type ProseCodeIcon = ComponentConfig<typeof theme, AppConfig, 'codeIcon', 'pohon.prose'>;
 
 export interface ProseCodeIconProps {
-  icon?: IconProps['name']
-  filename?: string
+  icon?: IconProps['name'];
+  filename?: string;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { defu } from 'defu'
-import { useAppConfig } from '#imports'
-import UIcon from '../Icon.vue'
+import { useAppConfig } from '#imports';
+import { defu } from 'defu';
+import { computed } from 'vue';
+import PIcon from '../icon.vue';
 
-const props = defineProps<ProseCodeIconProps>()
+const props = defineProps<ProseCodeIconProps>();
 
-const appConfig = useAppConfig() as ProseCodeIcon['AppConfig']
+const appConfig = useAppConfig() as ProseCodeIcon['AppConfig'];
 
-const icons = computed<any>(() => defu(appConfig.pohon?.prose?.codeIcon || {}, theme))
+const icons = computed<any>(() => defu(appConfig.pohon?.prose?.codeIcon || {}, theme));
 
 const icon = computed(() => {
   if (props.icon) {
-    return props.icon
+    return props.icon;
   }
 
   if (!props.filename) {
-    return
+    return;
   }
 
-  const cleanFilename = props.filename.replace(/\s*\(.*\)\s*$/, '')
+  const cleanFilename = props.filename.replace(/\s*\(.*\)\s*$/, '');
 
-  const extension = cleanFilename.includes('.') && cleanFilename.split('.').pop()
-  const name = cleanFilename.split('/').pop()
+  const extension = cleanFilename.includes('.') && cleanFilename.split('.').pop();
+  const name = cleanFilename.split('/').pop();
 
-  return (name && icons.value[name.toLowerCase()]) ?? (extension && (icons.value[extension] ?? `i-vscode-icons-file-type-${extension}`))
-})
+  return (name && icons.value[name.toLowerCase()]) ?? (extension && (icons.value[extension] ?? `i-vscode-icons-file-type-${extension}`));
+});
 </script>
 
 <template>
-  <UIcon v-if="icon" :name="icon" />
+  <PIcon
+    v-if="icon"
+    :name="icon"
+  />
 </template>

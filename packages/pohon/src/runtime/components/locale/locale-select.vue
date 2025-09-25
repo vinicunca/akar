@@ -1,18 +1,18 @@
 <script lang="ts">
-import type { PSelectMenuProps } from '../../types'
-import type { PLocale } from '../../types/locale'
+import type { PSelectMenuProps } from '../../types';
+import type { PLocale } from '../../types/locale';
 
-export interface LocaleSelectProps extends /** @vue-ignore */ Pick<PSelectMenuProps<any>, 'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'ui'> {
-  locales?: PLocale<any>[]
+export interface PLocaleSelectProps extends /** @vue-ignore */ Pick<PSelectMenuProps<any>, 'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'pohon'> {
+  locales?: Array<PLocale<any>>;
 }
 </script>
 
 <script setup lang="ts">
-import PSelectMenu from '../SelectMenu.vue'
+import PSelectMenu from '../select-menu.vue';
 
-defineProps<LocaleSelectProps>()
+defineProps<PLocaleSelectProps>();
 
-const modelValue = defineModel<string>()
+const modelValue = defineModel<string>();
 
 function getEmojiFlag(locale: string): string {
   const languageToCountry: Record<string, string> = {
@@ -40,16 +40,16 @@ function getEmojiFlag(locale: string): string {
     sv: 'se', // Swedish -> Sweden
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan
-    vi: 'vn' // Vietnamese -> Vietnam
-  }
+    vi: 'vn', // Vietnamese -> Vietnam
+  };
 
-  const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale
-  const countryCode = languageToCountry[baseLanguage] || locale.replace(/^.*-/, '').slice(0, 2)
+  const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale;
+  const countryCode = languageToCountry[baseLanguage] || locale.replace(/^.*-/, '').slice(0, 2);
 
   return countryCode.toUpperCase()
     .split('')
-    .map(char => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
-    .join('')
+    .map((char) => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
+    .join('');
 }
 </script>
 
@@ -62,13 +62,16 @@ function getEmojiFlag(locale: string): string {
     :items="locales"
   >
     <template #leading>
-      <span v-if="modelValue" class="size-5 text-center">
+      <span
+        v-if="modelValue"
+        class="text-center size-5"
+      >
         {{ getEmojiFlag(modelValue) }}
       </span>
     </template>
 
     <template #item-leading="{ item }">
-      <span class="size-5 text-center">
+      <span class="text-center size-5">
         {{ getEmojiFlag(item.code) }}
       </span>
     </template>

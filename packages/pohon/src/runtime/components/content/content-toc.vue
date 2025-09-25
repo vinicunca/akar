@@ -1,214 +1,290 @@
 <script lang="ts">
-import type { CollapsibleRootProps, CollapsibleRootEmits } from 'reka-ui'
-import type { TocLink } from '@nuxt/content'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/content/content-toc'
-import type { IconProps } from '../../types'
-import type { ComponentConfig } from '../../types/uv'
+import type { TocLink } from '@nuxt/content';
+import type { AppConfig } from '@nuxt/schema';
+import type { ACollapsibleRootEmits, ACollapsibleRootProps, APrimitiveProps } from 'akar';
+import type { IconProps } from '../../types';
+import type { ComponentConfig } from '../../types/uv';
+import theme from '#build/pohon/content/content-toc';
 
-type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>
+type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>;
 
-export type ContentTocLink = TocLink & {
-  class?: any
-  pohon?: Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>
-}
+export type PContentTocLink = TocLink & {
+  class?: any;
+  pohon?: Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>;
+};
 
-export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
+export interface PContentTocProps<T extends PContentTocLink = PContentTocLink> extends Pick<ACollapsibleRootProps, 'defaultOpen' | 'open'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'
    */
-  as?: any
+  as?: APrimitiveProps['as'];
   /**
    * The icon displayed to collapse the content.
-   * @defaultValue appConfig.ui.icons.chevronDown
+   * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name']
+  trailingIcon?: IconProps['name'];
   /**
    * The title of the table of contents.
    * @defaultValue t('contentToc.title')
    */
-  title?: string
+  title?: string;
   /**
    * @defaultValue 'primary'
    */
-  color?: ContentToc['variants']['color']
+  color?: ContentToc['variants']['color'];
   /**
    * Display a line next to the active link.
    * @defaultValue false
    */
-  highlight?: boolean
+  highlight?: boolean;
   /**
    * @defaultValue 'primary'
    */
-  highlightColor?: ContentToc['variants']['highlightColor']
-  links?: T[]
-  class?: any
-  pohon?: ContentToc['slots']
+  highlightColor?: ContentToc['variants']['highlightColor'];
+  links?: Array<T>;
+  class?: any;
+  pohon?: ContentToc['slots'];
 }
 
-export type ContentTocEmits = CollapsibleRootEmits & {
-  move: [id: string]
-}
+export type PContentTocEmits = ACollapsibleRootEmits & {
+  move: [id: string];
+};
 
-type SlotProps<T> = (props: { link: T }) => any
+type SlotProps<T> = (props: { link: T }) => any;
 
-export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
-  leading(props: { open: boolean }): any
-  default(props: { open: boolean }): any
-  trailing(props: { open: boolean }): any
-  content(props: { links: T[] }): any
-  link: SlotProps<T>
-  top(props: { links?: T[] }): any
-  bottom(props: { links?: T[] }): any
+export interface PContentTocSlots<T extends PContentTocLink = PContentTocLink> {
+  leading: (props: { open: boolean }) => any;
+  default: (props: { open: boolean }) => any;
+  trailing: (props: { open: boolean }) => any;
+  content: (props: { links: Array<T> }) => any;
+  link: SlotProps<T>;
+  top: (props: { links?: Array<T> }) => any;
+  bottom: (props: { links?: Array<T> }) => any;
 }
 </script>
 
-<script setup lang="ts" generic="T extends ContentTocLink">
-import { computed } from 'vue'
-import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, useForwardPropsEmits } from 'reka-ui'
-import { reactivePick, createReusableTemplate } from '@vueuse/core'
-import { useRouter, useAppConfig, useNuxtApp } from '#imports'
-import { useScrollspy } from '../../composables/useScrollspy'
-import { useLocale } from '../../composables/useLocale'
-import { tv } from '../../utils/tv'
-import UIcon from '../Icon.vue'
+<script setup lang="ts" generic="T extends PContentTocLink">
+import { useAppConfig, useNuxtApp, useRouter } from '#imports';
+import { createReusableTemplate, reactivePick } from '@vueuse/core';
+import {
+  ACollapsibleContent,
+  ACollapsibleRoot,
+  ACollapsibleTrigger,
+  useForwardPropsEmits,
+} from 'akar';
+import { computed } from 'vue';
+import { useLocale } from '../../composables/use-locale';
+import { useScrollspy } from '../../composables/use-scrollspy';
+import { uv } from '../../utils/uv';
+import PIcon from '../icon.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<ContentTocProps<T>>(), {
-  as: 'nav'
-})
-const emits = defineEmits<ContentTocEmits>()
-const slots = defineSlots<ContentTocSlots<T>>()
+const props = withDefaults(
+  defineProps<PContentTocProps<T>>(),
+  {
+    as: 'nav',
+  },
+);
+const emits = defineEmits<PContentTocEmits>();
+const slots = defineSlots<PContentTocSlots<T>>();
 
-const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'open', 'defaultOpen'), emits)
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'open', 'defaultOpen'), emits);
 
-const { t } = useLocale()
-const router = useRouter()
-const appConfig = useAppConfig() as ContentToc['AppConfig']
-const { activeHeadings, updateHeadings } = useScrollspy()
+const { t } = useLocale();
+const router = useRouter();
+const appConfig = useAppConfig() as ContentToc['AppConfig'];
+const { activeHeadings, updateHeadings } = useScrollspy();
 
-const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: T[], level: number }>({
+const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: Array<T>; level: number }>({
   props: {
     links: Array,
-    level: Number
-  }
-})
-const [DefineTriggerTemplate, ReuseTriggerTemplate] = createReusableTemplate<{ open: boolean }>()
+    level: Number,
+  },
+});
+const [DefineTriggerTemplate, ReuseTriggerTemplate] = createReusableTemplate<{ open: boolean }>();
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentToc || {}) })({
-  color: props.color,
-  highlight: props.highlight,
-  highlightColor: props.highlightColor || props.color
-}))
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.contentToc || {}),
+  })({
+    color: props.color,
+    highlight: props.highlight,
+    highlightColor: props.highlightColor || props.color,
+  }),
+);
 
 function scrollToHeading(id: string) {
-  const encodedId = encodeURIComponent(id)
-  router.push(`#${encodedId}`)
-  emits('move', id)
+  const encodedId = encodeURIComponent(id);
+  router.push(`#${encodedId}`);
+  emits('move', id);
 }
 
-function flattenLinks(links: T[]): T[] {
-  return links.flatMap(link => [link, ...(link.children ? flattenLinks(link.children as T[]) : [])])
+function flattenLinks(links: Array<T>): Array<T> {
+  return links.flatMap((link) => [link, ...(link.children ? flattenLinks(link.children as Array<T>) : [])]);
 }
 
 const indicatorStyle = computed(() => {
   if (!activeHeadings.value?.length) {
-    return
+    return;
   }
 
-  const flatLinks = flattenLinks(props.links || [])
-  const activeIndex = flatLinks.findIndex(link => activeHeadings.value.includes(link.id))
-  const linkHeight = 28
-  const gapSize = 0
+  const flatLinks = flattenLinks(props.links || []);
+  const activeIndex = flatLinks.findIndex((link) => activeHeadings.value.includes(link.id));
+  const linkHeight = 28;
+  const gapSize = 0;
 
   return {
     '--indicator-size': `${(linkHeight * activeHeadings.value.length) + (gapSize * (activeHeadings.value.length - 1))}px`,
-    '--indicator-position': activeIndex >= 0 ? `${activeIndex * (linkHeight + gapSize)}px` : '0px'
-  }
-})
+    '--indicator-position': activeIndex >= 0 ? `${activeIndex * (linkHeight + gapSize)}px` : '0px',
+  };
+});
 
-const nuxtApp = useNuxtApp()
+const nuxtApp = useNuxtApp();
 
 nuxtApp.hooks.hook('page:loading:end', () => {
-  const headings = Array.from(document.querySelectorAll('h2, h3'))
-  updateHeadings(headings)
-})
+  const headings = Array.from(document.querySelectorAll('h2, h3'));
+  updateHeadings(headings);
+});
 nuxtApp.hooks.hook('page:transition:finish', () => {
-  const headings = Array.from(document.querySelectorAll('h2, h3'))
-  updateHeadings(headings)
-})
+  const headings = Array.from(document.querySelectorAll('h2, h3'));
+  updateHeadings(headings);
+});
 </script>
 
 <template>
   <!-- eslint-disable-next-line vue/no-template-shadow -->
   <DefineListTemplate v-slot="{ links, level }">
-    <ul :class="level > 0 ? ui.listWithChildren({ class: props.pohon?.listWithChildren }) : ui.list({ class: props.pohon?.list })">
-      <li v-for="(link, index) in links" :key="index" :class="link.children && link.children.length > 0 ? ui.itemWithChildren({ class: [props.pohon?.itemWithChildren, link.pohon?.itemWithChildren] }) : ui.item({ class: [props.pohon?.item, link.pohon?.item] })">
-        <a :href="`#${link.id}`" :class="ui.link({ class: [props.pohon?.link, link.pohon?.link, link.class], active: activeHeadings.includes(link.id) })" @click.prevent="scrollToHeading(link.id)">
-          <slot name="link" :link="link">
-            <span :class="ui.linkText({ class: [props.pohon?.linkText, link.pohon?.linkText] })">
+    <ul :class="level > 0 ? pohon.listWithChildren({ class: props.pohon?.listWithChildren }) : pohon.list({ class: props.pohon?.list })">
+      <li
+        v-for="(link, index) in links"
+        :key="index"
+        :class="link.children && link.children.length > 0
+          ? pohon.itemWithChildren({ class: [props.pohon?.itemWithChildren, link.pohon?.itemWithChildren] })
+          : pohon.item({ class: [props.pohon?.item, link.pohon?.item] })"
+      >
+        <a
+          :href="`#${link.id}`"
+          :class="pohon.link({ class: [props.pohon?.link, link.pohon?.link, link.class], active: activeHeadings.includes(link.id) })"
+          @click.prevent="scrollToHeading(link.id)"
+        >
+          <slot
+            name="link"
+            :link="link"
+          >
+            <span :class="pohon.linkText({ class: [props.pohon?.linkText, link.pohon?.linkText] })">
               {{ link.text }}
             </span>
           </slot>
         </a>
 
-        <ReuseListTemplate v-if="link.children?.length" :links="(link.children as T[])" :level="level + 1" />
+        <ReuseListTemplate
+          v-if="link.children?.length"
+          :links="(link.children as T[])"
+          :level="level + 1"
+        />
       </li>
     </ul>
   </DefineListTemplate>
 
   <DefineTriggerTemplate v-slot="{ open }">
-    <slot name="leading" :open="open" />
+    <slot
+      name="leading"
+      :open="open"
+    />
 
-    <span :class="ui.title({ class: props.pohon?.title })">
+    <span :class="pohon.title({ class: props.pohon?.title })">
       <slot :open="open">{{ title || t('contentToc.title') }}</slot>
     </span>
 
-    <span :class="ui.trailing({ class: props.pohon?.trailing })">
-      <slot name="trailing" :open="open">
-        <UIcon :name="trailingIcon || appConfig.ui.icons.chevronDown" :class="ui.trailingIcon({ class: props.pohon?.trailingIcon })" />
+    <span :class="pohon.trailing({ class: props.pohon?.trailing })">
+      <slot
+        name="trailing"
+        :open="open"
+      >
+        <PIcon
+          :name="trailingIcon || appConfig.pohon.icons.chevronDown"
+          :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+        />
       </slot>
     </span>
   </DefineTriggerTemplate>
 
-  <CollapsibleRoot v-slot="{ open }" v-bind="{ ...rootProps, ...$attrs }" :default-open="defaultOpen" :class="ui.root({ class: [props.pohon?.root, props.class] })">
-    <div :class="ui.container({ class: props.pohon?.container })">
-      <div v-if="!!slots.top" :class="ui.top({ class: props.pohon?.top })">
-        <slot name="top" :links="links" />
+  <ACollapsibleRoot
+    v-slot="{ open }"
+    v-bind="{ ...rootProps, ...$attrs }"
+    :default-open="defaultOpen"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+  >
+    <div :class="pohon.container({ class: props.pohon?.container })">
+      <div
+        v-if="!!slots.top"
+        :class="pohon.top({ class: props.pohon?.top })"
+      >
+        <slot
+          name="top"
+          :links="links"
+        />
       </div>
 
       <template v-if="links?.length">
-        <CollapsibleTrigger :class="ui.trigger({ class: 'lg:hidden' })">
+        <ACollapsibleTrigger :class="pohon.trigger({ class: 'lg:hidden' })">
           <ReuseTriggerTemplate :open="open" />
-        </CollapsibleTrigger>
+        </ACollapsibleTrigger>
 
-        <CollapsibleContent :class="ui.content({ class: [props.pohon?.content, 'lg:hidden'] })">
-          <div v-if="highlight" :class="ui.indicator({ class: props.pohon?.indicator })" :style="indicatorStyle" />
+        <ACollapsibleContent :class="pohon.content({ class: [props.pohon?.content, 'lg:hidden'] })">
+          <div
+            v-if="highlight"
+            :class="pohon.indicator({ class: props.pohon?.indicator })"
+            :style="indicatorStyle"
+          />
 
-          <slot name="content" :links="links">
-            <ReuseListTemplate :links="links" :level="0" />
+          <slot
+            name="content"
+            :links="links"
+          >
+            <ReuseListTemplate
+              :links="links"
+              :level="0"
+            />
           </slot>
-        </CollapsibleContent>
+        </ACollapsibleContent>
 
-        <p :class="ui.trigger({ class: 'hidden lg:flex' })">
+        <p :class="pohon.trigger({ class: 'hidden lg:flex' })">
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div :class="ui.content({ class: [props.pohon?.content, 'hidden lg:flex'] })">
-          <div v-if="highlight" :class="ui.indicator({ class: props.pohon?.indicator })" :style="indicatorStyle" />
+        <div :class="pohon.content({ class: [props.pohon?.content, 'hidden lg:flex'] })">
+          <div
+            v-if="highlight"
+            :class="pohon.indicator({ class: props.pohon?.indicator })"
+            :style="indicatorStyle"
+          />
 
-          <slot name="content" :links="links">
-            <ReuseListTemplate :links="links" :level="0" />
+          <slot
+            name="content"
+            :links="links"
+          >
+            <ReuseListTemplate
+              :links="links"
+              :level="0"
+            />
           </slot>
         </div>
       </template>
 
-      <div v-if="!!slots.bottom" :class="ui.bottom({ class: props.pohon?.bottom, body: !!slots.top || !!links?.length })">
-        <slot name="bottom" :links="links" />
+      <div
+        v-if="!!slots.bottom"
+        :class="pohon.bottom({ class: props.pohon?.bottom, body: !!slots.top || !!links?.length })"
+      >
+        <slot
+          name="bottom"
+          :links="links"
+        />
       </div>
     </div>
-  </CollapsibleRoot>
+  </ACollapsibleRoot>
 </template>

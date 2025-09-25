@@ -12,8 +12,8 @@ import theme from '#build/pohon/header';
 
 type Header = ComponentConfig<typeof theme, AppConfig, 'header'>;
 
-type HeaderMode = 'modal' | 'slideover' | 'drawer';
-type HeaderMenu<T> = T extends 'modal' ? PDialogProps : T extends 'slideover' ? PSlideoverProps : T extends 'drawer' ? PDrawerProps : never;
+type HeaderMode = 'dialog' | 'slideover' | 'drawer';
+type HeaderMenu<T> = T extends 'dialog' ? PDialogProps : T extends 'slideover' ? PSlideoverProps : T extends 'drawer' ? PDrawerProps : never;
 
 export interface PHeaderProps<T extends HeaderMode = HeaderMode> {
   /**
@@ -25,7 +25,7 @@ export interface PHeaderProps<T extends HeaderMode = HeaderMode> {
   to?: string;
   /**
    * The mode of the header menu.
-   * @defaultValue 'modal'
+   * @defaultValue 'dialog'
    */
   mode?: T;
   /**
@@ -81,7 +81,7 @@ const props = withDefaults(
   defineProps<PHeaderProps<T>>(),
   {
     as: 'header',
-    mode: 'modal' as never,
+    mode: 'dialog' as never,
     toggle: true,
     toggleSide: 'right',
     to: '/',
@@ -115,7 +115,7 @@ const pohon = computed(() =>
 
 const MenuComponent = computed(() => ({
   slideover: PSlideover,
-  modal: PDialog,
+  dialog: PDialog,
   drawer: PDrawer,
 })[props.mode as HeaderMode]);
 
@@ -127,7 +127,7 @@ const menuProps = toRef(() =>
         onOpenAutoFocus: (event: Event) => event.preventDefault(),
       },
     },
-    props.mode === 'modal' ? { fullscreen: true, transition: false } : {},
+    props.mode === 'dialog' ? { fullscreen: true, transition: false } : {},
   ) as HeaderMenu<T>,
 );
 

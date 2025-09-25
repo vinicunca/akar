@@ -274,8 +274,15 @@ function scrollTo(index: number) {
 }
 
 function onKeyDown(event: KeyboardEvent) {
-  const prevKey = props.orientation === 'vertical' ? KEY_CODES.ARROW_UP : KEY_CODES.ARROW_LEFT;
-  const nextKey = props.orientation === 'vertical' ? KEY_CODES.ARROW_DOWN : KEY_CODES.ARROW_RIGHT;
+  let prevKey;
+  let nextKey;
+  if (props.orientation === 'horizontal') {
+    prevKey = dir.value === 'ltr' ? KEY_CODES.ARROW_LEFT : KEY_CODES.ARROW_RIGHT;
+    nextKey = dir.value === 'ltr' ? KEY_CODES.ARROW_RIGHT : KEY_CODES.ARROW_LEFT;
+  } else {
+    prevKey = 'ArrowUp';
+    nextKey = 'ArrowDown';
+  }
 
   if (event.key === prevKey) {
     event.preventDefault();

@@ -1,36 +1,36 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import type { ComponentConfig } from '../../types/uv'
-import theme from '#build/ui/prose/tabs-item'
+import type { AppConfig } from '@nuxt/schema';
+import type { ComponentConfig } from '../../types/uv';
+import theme from '#build/pohon/prose/tabs-item';
 
-type ProseTabsItem = ComponentConfig<typeof theme, AppConfig, 'tabsItem', 'ui.prose'>
+type ProseTabsItem = ComponentConfig<typeof theme, AppConfig, 'tabsItem', 'pohon.prose'>;
 
 export interface ProseTabsItemProps {
-  label: string
-  description?: string
-  class?: any
+  label: string;
+  description?: string;
+  class?: any;
 }
 
 export interface ProseTabsItemSlots {
-  default(props?: {}): any
+  default: (props?: object) => any;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { tv } from '../../utils/tv'
+import { useAppConfig } from '#imports';
+import { computed } from 'vue';
+import { uv } from '../../utils/uv';
 
-const props = defineProps<ProseTabsItemProps>()
-defineSlots<ProseTabsItemSlots>()
+const props = defineProps<ProseTabsItemProps>();
+defineSlots<ProseTabsItemSlots>();
 
-const appConfig = useAppConfig() as ProseTabsItem['AppConfig']
+const appConfig = useAppConfig() as ProseTabsItem['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.tabsItem || {}) }))
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.tabsItem || {}) }));
 </script>
 
 <template>
-  <div :class="ui({ class: props.class })">
+  <div :class="pohon({ class: props.class })">
     <slot>
       {{ description }}
     </slot>

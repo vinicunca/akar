@@ -6,10 +6,10 @@ import theme from '#build/pohon/prose/collapsible';
 
 type ProseCollapsible = ComponentConfig<typeof theme, AppConfig, 'collapsible', 'pohon.prose'>;
 
-export interface PProseCollapsibleProps {
+export interface ProseCollapsibleProps {
   /**
    * The icon displayed to toggle the collapsible.
-   * @defaultValue appConfig.ui.icons.chevronDown
+   * @defaultValue appConfig.pohon.icons.chevronDown
    */
   icon?: IconProps['name'];
   /**
@@ -41,33 +41,33 @@ import { useAppConfig } from '#imports';
 import { computed } from 'vue';
 import { useLocale } from '../../composables/use-locale';
 import { transformPohon } from '../../utils';
-import { tv } from '../../utils/tv';
-import UCollapsible from '../Collapsible.vue';
-import UIcon from '../Icon.vue';
+import { uv } from '../../utils/uv';
+import PCollapsible from '../collapsible.vue';
+import PIcon from '../icon.vue';
 
-const props = defineProps<PProseCollapsibleProps>();
+const props = defineProps<ProseCollapsibleProps>();
 defineSlots<ProseCollapsibleSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as ProseCollapsible['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.collapsible || {}) })());
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.collapsible || {}) })());
 </script>
 
 <template>
-  <UCollapsible
+  <PCollapsible
     :unmount-on-hide="false"
     :class="props.class"
-    :ui="transformPohon(ui)"
+    :pohon="transformPohon(pohon)"
   >
     <template #default="{ open }">
-      <button :class="ui.trigger({ class: props.pohon?.trigger })">
-        <UIcon
-          :name="icon || appConfig.ui.icons.chevronDown"
-          :class="ui.triggerIcon({ class: props.pohon?.triggerIcon })"
+      <button :class="pohon.trigger({ class: props.pohon?.trigger })">
+        <PIcon
+          :name="icon || appConfig.pohon.icons.chevronDown"
+          :class="pohon.triggerIcon({ class: props.pohon?.triggerIcon })"
         />
 
-        <span :class="ui.triggerLabel({ class: props.pohon?.triggerLabel })">
+        <span :class="pohon.triggerLabel({ class: props.pohon?.triggerLabel })">
           {{ open ? (props.closeText || t('prose.collapsible.closeText')) : (props.openText || t('prose.collapsible.openText')) }} {{ props.name || t('prose.collapsible.name') }}
         </span>
       </button>
@@ -76,5 +76,5 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.co
     <template #content>
       <slot />
     </template>
-  </UCollapsible>
+  </PCollapsible>
 </template>

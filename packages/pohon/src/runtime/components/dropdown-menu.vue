@@ -8,7 +8,7 @@ import type {
   ADropdownMenuRootEmits,
   ADropdownMenuRootProps,
 } from 'akar';
-import type { IconProps, PKbdProps, PLinkProps, PAvatarProps } from '../types';
+import type { IconProps, PAvatarProps, PKbdProps, PLinkProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dropdown-menu';

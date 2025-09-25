@@ -1,75 +1,74 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/ui/prose/code-collapse'
-import type { IconProps } from '../../types'
-import type { ComponentConfig } from '../../types/uv'
+import type { AppConfig } from '@nuxt/schema';
+import type { IconProps } from '../../types';
+import type { ComponentConfig } from '../../types/uv';
+import theme from '#build/pohon/prose/code-collapse';
 
-type ProseCodeCollapse = ComponentConfig<typeof theme, AppConfig, 'codeCollapse', 'ui.prose'>
+type ProseCodeCollapse = ComponentConfig<typeof theme, AppConfig, 'codeCollapse', 'pohon.prose'>;
 
 export interface ProseCodeCollapseProps {
   /**
    * The icon displayed to toggle the code.
-   * @defaultValue appConfig.ui.icons.chevronDown
+   * @defaultValue appConfig.pohon.icons.chevronDown
    */
-  icon?: IconProps['name']
+  icon?: IconProps['name'];
   /**
    * The name displayed in the trigger label.
    * @defaultValue t('prose.codeCollapse.name')
    */
-  name?: string
+  name?: string;
   /**
    * The text displayed when the code is collapsed.
    * @defaultValue t('prose.codeCollapse.openText')
    */
-  openText?: string
+  openText?: string;
   /**
    * The text displayed when the code is expanded.
    * @defaultValue t('prose.codeCollapse.closeText')
    */
-  closeText?: string
-  class?: any
-  pohon?: ProseCodeCollapse['slots']
+  closeText?: string;
+  class?: any;
+  pohon?: ProseCodeCollapse['slots'];
 }
 
 export interface ProseCodeCollapseSlots {
-  default(props?: {}): any
+  default: (props?: object) => any;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAppConfig } from '#imports'
-import { useLocale } from '../../composables/useLocale'
-import { tv } from '../../utils/tv'
-import UButton from '../button.vue'
+import { useAppConfig } from '#imports';
+import { computed } from 'vue';
+import { useLocale } from '../../composables/use-locale';
+import { uv } from '../../utils/uv';
+import PButton from '../button.vue';
 
-const props = defineProps<ProseCodeCollapseProps>()
-defineSlots<ProseCodeCollapseSlots>()
+const props = defineProps<ProseCodeCollapseProps>();
+defineSlots<ProseCodeCollapseSlots>();
 
-const open = defineModel<boolean>('open', { default: false })
+const open = defineModel<boolean>('open', { default: false });
 
-const { t } = useLocale()
-const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig']
+const { t } = useLocale();
+const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig'];
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.prose?.codeCollapse || {}) })({
-  open: open.value
-}))
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.codeCollapse || {}) })({
+  open: open.value,
+}));
 </script>
 
 <template>
-  <div :class="ui.root({ class: [props.pohon?.root, props.class] })">
+  <div :class="pohon.root({ class: [props.pohon?.root, props.class] })">
     <slot />
 
-    <div :class="ui.footer({ class: props.pohon?.footer })">
-      <UButton
-        :icon="icon || appConfig.ui.icons.chevronDown"
+    <div :class="pohon.footer({ class: props.pohon?.footer })">
+      <PButton
+        :icon="icon || appConfig.pohon.icons.chevronDown"
         color="neutral"
         variant="outline"
         :data-state="open ? 'open' : 'closed'"
         :label="`${open ? (props.closeText || t('prose.codeCollapse.closeText')) : (props.openText || t('prose.codeCollapse.openText'))} ${props.name || t('prose.codeCollapse.name')}`"
-        :class="ui.trigger({ class: props.pohon?.trigger })"
-        :ui="{ leadingIcon: ui.triggerIcon({ class: props.pohon?.triggerIcon }) }"
+        :class="pohon.trigger({ class: props.pohon?.trigger })"
+        :ui="{ leadingIcon: pohon.triggerIcon({ class: props.pohon?.triggerIcon }) }"
         @click="open = !open"
       />
     </div>

@@ -2,14 +2,14 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { IconProps, PButtonProps, PButtonSlots, PKbdProps, PTooltipProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
-import theme from '#build/ui/content/content-search-button';
+import theme from '#build/pohon/content/content-search-button';
 
 type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSearchButton'>;
 
-export interface ContentSearchButtonProps {
+export interface PContentSearchButtonProps {
   /**
    * The icon displayed in the button.
-   * @defaultValue appConfig.ui.icons.search
+   * @defaultValue appConfig.pohon.icons.search
    * @IconifyIcon
    */
   icon?: IconProps['name'];
@@ -45,33 +45,37 @@ export interface ContentSearchButtonProps {
    * @defaultValue ['meta', 'k']
    */
   kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
-  pohon?: ContentSearchButton['slots'] & PButtonProps['ui'];
+  pohon?: ContentSearchButton['slots'] & PButtonProps['pohon'];
   class?: any;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isBoolean, isString, omit } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
+import { useForwardProps } from 'akar';
 import { defu } from 'defu';
-import { useForwardProps } from 'reka-ui';
 import { computed, toRef } from 'vue';
-import { useContentSearch } from '../../composables/useContentSearch';
-import { useLocale } from '../../composables/useLocale';
-import { omit, transformPohon } from '../../utils';
-import { tv } from '../../utils/tv';
-import UButton from '../button.vue';
-import PKbd from '../Kbd.vue';
-import UTooltip from '../tooltip.vue';
+import { useContentSearch } from '../../composables/use-content-search';
+import { useLocale } from '../../composables/use-locale';
+import { transformPohon } from '../../utils';
+import { uv } from '../../utils/uv';
+import PButton from '../button.vue';
+import PKbd from '../kbd.vue';
+import PTooltip from '../tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<ContentSearchButtonProps>(), {
-  color: 'neutral',
-  collapsed: true,
-  tooltip: false,
-  kbds: () => ['meta', 'k'],
-});
+const props = withDefaults(
+  defineProps<PContentSearchButtonProps>(),
+  {
+    color: 'neutral',
+    collapsed: true,
+    tooltip: false,
+    kbds: () => ['meta', 'k'],
+  },
+);
 const slots = defineSlots<PButtonSlots>();
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate();
@@ -79,19 +83,27 @@ const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate();
 const getProxySlots = () => omit(slots, ['trailing']);
 
 const rootProps = useForwardProps(reactivePick(props, 'color', 'size'));
-const tooltipProps = toRef(() => defu(isBoolean(props.tooltip) ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as PTooltipProps);
+const tooltipProps = toRef(() => defu(
+  isBoolean(props.tooltip) ? {} : props.tooltip,
+  { delayDuration: 0, content: { side: 'right' } },
+) as PTooltipProps);
 
 const { t } = useLocale();
 const { open } = useContentSearch();
 const appConfig = useAppConfig() as ContentSearchButton['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentSearchButton || {}) })());
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.contentSearchButton || {}),
+  })(),
+);
 </script>
 
 <template>
   <DefineButtonTemplate>
-    <UButton
-      :icon="icon || appConfig.ui.icons.search"
+    <PButton
+      :icon="icon || appConfig.pohon.icons.search"
       :label="label || t('contentSearchButton.label')"
       :variant="variant || (collapsed ? 'ghost' : 'outline')"
       v-bind="{
@@ -103,8 +115,8 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentSe
         } : {}),
         ...$attrs,
       }"
-      :class="ui.base({ class: [props.pohon?.base, props.class] })"
-      :ui="transformPohon(ui, props.ui)"
+      :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+      :ui="transformPohon(pohon, props.pohon)"
       @click="open = true"
     >
       <template
@@ -121,7 +133,7 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentSe
         v-if="!collapsed"
         #trailing
       >
-        <div :class="ui.trailing({ class: props.pohon?.trailing })">
+        <div :class="pohon.trailing({ class: props.pohon?.trailing })">
           <slot name="trailing">
             <template v-if="kbds?.length">
               <PKbd
@@ -134,15 +146,15 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.contentSe
           </slot>
         </div>
       </template>
-    </UButton>
+    </PButton>
   </DefineButtonTemplate>
 
-  <UTooltip
+  <PTooltip
     v-if="collapsed && tooltip"
     :text="label || t('contentSearchButton.label')"
     v-bind="tooltipProps"
   >
     <ReuseButtonTemplate />
-  </UTooltip>
+  </PTooltip>
   <ReuseButtonTemplate v-else />
 </template>
