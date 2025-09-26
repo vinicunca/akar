@@ -8,22 +8,6 @@ export default defineConfig({
   presets: [
     presetVinicunca({
       akar: true,
-      webFonts: {
-        provider: 'fontsource',
-        fonts: {
-          sans: {
-            name: 'Public Sans',
-            variable: {
-              wght: {
-                default: '400',
-                min: '100',
-                max: '900',
-                step: '1',
-              },
-            },
-          },
-        },
-      },
     }),
   ],
 
@@ -139,5 +123,13 @@ export default defineConfig({
         inverted: 'var(--pohon-border-inverted)',
       },
     },
+  },
+  extendTheme: (theme) => {
+    return {
+      ...theme,
+      font: {
+        sans: `'Geist', ${theme.font?.sans}`,
+      },
+    };
   },
 });

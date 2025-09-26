@@ -10,8 +10,11 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@nuxt/content": "catalog:docs",
+    "@nuxt/content": "catalog:pohon",
+    "@nuxt/fonts": "catalog:pohon",
     "@nuxt/image": "catalog:docs",
+    "@vueuse/core": "catalog:core",
+    "@vueuse/integrations": "catalog:core",
     "akar": "workspace:*",
     "better-sqlite3": "catalog:docs",
     "nuxt": "catalog:pohon",

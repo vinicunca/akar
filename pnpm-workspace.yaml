@@ -61,7 +61,6 @@ catalogs:
     vue-component-type-helpers: ^3.0.8
     vue-tsc: 3.0.8
   docs:
-    '@nuxt/content': ^3.7.0
     '@nuxt/image': ^1.11.0
     '@vinicunca/unocss-preset': ^1.23.0
     better-sqlite3: ^12.2.0
@@ -74,6 +73,8 @@ catalogs:
     unbuild: ^3.6.1
     unplugin-vue-components: ^29.1.0
   pohon:
+    '@nuxt/content': ^3.7.0
+    '@nuxt/fonts': ^0.11.4
     '@nuxt/icon': ^2.0.0
     '@nuxt/module-builder': ^1.0.1
     '@nuxt/test-utils': ^3.19.2
@@ -101,6 +102,7 @@ catalogs:
     unocss-variants: ^1.0.0
     unplugin: ^2.3.10
     unplugin-auto-import: ^20.1.0
+    zod: ^4.1.11
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - unrs-resolver

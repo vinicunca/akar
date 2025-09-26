@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import { useRoute } from '#app';
-import { useHeader } from '#imports';
+import { PHeader } from '#components';
+import { useHeader, useRoute } from '#imports';
 
 const route = useRoute();
 const { desktopLinks } = useHeader();
 </script>
 
 <template>
-  <UHeader
+  <PHeader
     :ui="{ left: 'min-w-0' }"
-    class="flex flex-col"
+    class="flex-vertical"
   >
     <template #left>
       <HeaderLogo />
-
-      <VersionMenu />
     </template>
 
     <UNavigationMenu
@@ -57,5 +55,5 @@ const { desktopLinks } = useHeader();
     >
       <HeaderBottom />
     </template>
-  </UHeader>
+  </PHeader>
 </template>

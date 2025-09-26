@@ -1,0 +1,21 @@
+{
+  "name": "pohon-playground",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@internationalized/date": "catalog:core",
+    "nuxt": "catalog:pohon",
+    "pohon": "workspace:*",
+    "zod": "catalog:pohon"
+  },
+  "devDependencies": {
+    "typescript": "catalog:base",
+    "vue-tsc": "catalog:core"
+  }
+}

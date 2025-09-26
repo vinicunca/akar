@@ -3,6 +3,7 @@ import icons from './theme/icons';
 
 export const DEFAULT_OPTIONS = {
   prefix: 'P',
+  fonts: true,
   colorMode: true,
   theme: {
     colors: undefined,
@@ -21,7 +22,7 @@ export function getDefaultPohonConfig(colors?: Array<string>) {
   return {
     colors: pick(
       {
-        primary: 'green',
+        primary: 'violet',
         secondary: 'blue',
         success: 'green',
         info: 'blue',

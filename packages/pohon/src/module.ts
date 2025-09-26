@@ -25,6 +25,13 @@ export interface PohonModuleOptions {
   prefix?: string;
 
   /**
+   * Enable or disable `@nuxt/fonts` module
+   * @defaultValue `true`
+   * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#fonts
+   */
+  fonts?: boolean;
+
+  /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
    * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#colormode
@@ -130,6 +137,18 @@ export default defineNuxtModule<PohonModuleOptions>({
         cssLayer: 'components',
       },
     });
+
+    if (options.fonts) {
+      await registerModule({
+        name: '@nuxt/fonts',
+        key: 'fonts',
+        options: {
+          defaults: {
+            weights: [400, 500, 600, 700],
+          },
+        },
+      });
+    }
 
     if (options.colorMode) {
       await registerModule({
