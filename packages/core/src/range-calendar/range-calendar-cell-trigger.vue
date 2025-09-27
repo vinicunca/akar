@@ -1,16 +1,6 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
 import type { APrimitiveProps } from '~~/primitive';
-import {
-
-  getLocalTimeZone,
-  isSameDay,
-  isSameMonth,
-  isToday,
-} from '@internationalized/date';
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { computed, nextTick } from 'vue';
-import { getSelectableCells } from '~~/calendar/calendar.utils';
 
 export interface ARangeCalendarCellTriggerProps extends APrimitiveProps {
   day: DateValue;
@@ -48,7 +38,16 @@ export interface RangeCalendarCellTriggerSlot {
 </script>
 
 <script setup lang="ts">
-import { getDaysInMonth, isDateBetweenInclusive, toDate } from '~~/date';
+import {
+  getLocalTimeZone,
+  isSameDay,
+  isSameMonth,
+  isToday,
+} from '@internationalized/date';
+import { KEY_CODES } from '@vinicunca/perkakas';
+import { computed, nextTick } from 'vue';
+import { getSelectableCells } from '~~/calendar/calendar.utils';
+import { getDaysInMonth, isDateBetweenInclusive, parseStringToDateValue, toDate } from '~~/date';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
@@ -221,9 +220,18 @@ function handleArrowKey(event: KeyboardEvent) {
     const newIndex = index + add;
 
     if (newIndex >= 0 && newIndex < allCollectionItems.length) {
+      const newDate = allCollectionItems[newIndex].getAttribute('data-value');
+      const newDateValue = parseStringToDateValue(newDate!, rootContext.placeholder.value);
+      const minValue = rootContext.minValue.value;
+      const maxValue = rootContext.maxValue.value;
+      if ((minValue && newDateValue.compare(minValue) < 0) || (maxValue && newDateValue.compare(maxValue) > 0)) {
+        return;
+      }
+
       if (allCollectionItems[newIndex].hasAttribute('data-disabled')) {
         shiftFocus(allCollectionItems[newIndex], add);
       }
+      rootContext.onPlaceholderChange(newDateValue);
       allCollectionItems[newIndex].focus();
       return;
     }
@@ -232,15 +240,12 @@ function handleArrowKey(event: KeyboardEvent) {
       if (rootContext.isPrevButtonDisabled()) {
         return;
       }
-
       rootContext.prevPage();
-
       nextTick(() => {
         const newCollectionItems: Array<HTMLElement> = getSelectableCells(parentElement);
         if (!newCollectionItems.length) {
           return;
         }
-
         if (!rootContext.pagedNavigation.value && rootContext.numberOfMonths.value > 1) {
         // Placeholder is set to first month of the new page
           const numberOfDays = getDaysInMonth(rootContext.placeholder.value);
@@ -248,6 +253,8 @@ function handleArrowKey(event: KeyboardEvent) {
           if (newCollectionItems[computedIndex].hasAttribute('data-disabled')) {
             shiftFocus(newCollectionItems[computedIndex], add);
           }
+          const newDate = newCollectionItems[computedIndex].getAttribute('data-value');
+          rootContext.onPlaceholderChange(parseStringToDateValue(newDate!, rootContext.placeholder.value));
           newCollectionItems[
             computedIndex
           ].focus();
@@ -257,6 +264,8 @@ function handleArrowKey(event: KeyboardEvent) {
         if (newCollectionItems[computedIndex].hasAttribute('data-disabled')) {
           shiftFocus(newCollectionItems[computedIndex], add);
         }
+        const newDate = newCollectionItems[computedIndex].getAttribute('data-value');
+        rootContext.onPlaceholderChange(parseStringToDateValue(newDate!, rootContext.placeholder.value));
         newCollectionItems[
           computedIndex
         ].focus();
@@ -278,9 +287,7 @@ function handleArrowKey(event: KeyboardEvent) {
         if (!rootContext.pagedNavigation.value && rootContext.numberOfMonths.value > 1) {
         // Placeholder is set to first month of the new page
           const numberOfDays = getDaysInMonth(
-            rootContext.placeholder.value.add({
-              months: rootContext.numberOfMonths.value - 1,
-            }),
+            rootContext.placeholder.value.add({ months: rootContext.numberOfMonths.value - 1 }),
           );
 
           const computedIndex = newIndex - allCollectionItems.length + (newCollectionItems.length - numberOfDays);
@@ -288,6 +295,8 @@ function handleArrowKey(event: KeyboardEvent) {
           if (newCollectionItems[computedIndex].hasAttribute('data-disabled')) {
             shiftFocus(newCollectionItems[computedIndex], add);
           }
+          const newDate = newCollectionItems[computedIndex].getAttribute('data-value');
+          rootContext.onPlaceholderChange(parseStringToDateValue(newDate!, rootContext.placeholder.value));
           newCollectionItems[computedIndex].focus();
           return;
         }
@@ -297,6 +306,8 @@ function handleArrowKey(event: KeyboardEvent) {
           shiftFocus(newCollectionItems[computedIndex], add);
         }
 
+        const newDate = newCollectionItems[computedIndex].getAttribute('data-value');
+        rootContext.onPlaceholderChange(parseStringToDateValue(newDate!, rootContext.placeholder.value));
         newCollectionItems[computedIndex].focus();
       });
     }

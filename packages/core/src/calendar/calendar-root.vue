@@ -43,6 +43,8 @@ type CalendarRootContext = {
   formatter: UseDateFormatter;
   dir: Ref<Direction>;
   disableDaysOutsideCurrentView: Ref<boolean>;
+  minValue: Ref<DateValue | undefined>;
+  maxValue: Ref<DateValue | undefined>;
 };
 
 export interface ACalendarRootProps extends APrimitiveProps {
@@ -111,7 +113,7 @@ export const [
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { computed, onMounted, toRefs, watch } from 'vue';
+import { onMounted, toRefs, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '~~/primitive';
 
 const props = withDefaults(
@@ -329,6 +331,8 @@ provideCalendarRootContext({
   onPlaceholderChange,
   onDateChange,
   disableDaysOutsideCurrentView,
+  minValue,
+  maxValue,
 });
 </script>
 

@@ -62,6 +62,8 @@ type RangeCalendarRootContext = {
   disableDaysOutsideCurrentView: Ref<boolean>;
   fixedDate: Ref<'start' | 'end' | undefined>;
   maximumDays: Ref<number | undefined>;
+  minValue: Ref<DateValue | undefined>;
+  maxValue: Ref<DateValue | undefined>;
 };
 
 export interface ARangeCalendarRootProps extends APrimitiveProps {
@@ -445,6 +447,8 @@ provideRangeCalendarRootContext({
   disableDaysOutsideCurrentView,
   fixedDate,
   maximumDays,
+  minValue,
+  maxValue,
 });
 
 onMounted(() => {
