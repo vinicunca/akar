@@ -28,6 +28,7 @@ export default (options: Required<PohonModuleOptions>) => {
         itemTrailingIcon: '',
         itemLabel: '',
       },
+
       variants: {
         ...fieldGroupVariant,
         size: {
@@ -83,6 +84,9 @@ export default (options: Required<PohonModuleOptions>) => {
           },
         },
       },
+
+      compoundVariants: [],
+
     },
     input(options),
   );

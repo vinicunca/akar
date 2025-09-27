@@ -10,6 +10,7 @@ export default {
     description: '',
     close: '',
   },
+
   variants: {
     side: {
       top: {
@@ -31,4 +32,7 @@ export default {
       },
     },
   },
+
+  compoundVariants: [],
+
 };

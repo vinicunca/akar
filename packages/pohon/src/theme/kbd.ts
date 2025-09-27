@@ -21,6 +21,8 @@ export default (options: Required<PohonModuleOptions>) => {
       },
     },
 
+    compoundVariants: [],
+
     defaultVariants: {
       variant: 'outline',
       color: 'neutral',

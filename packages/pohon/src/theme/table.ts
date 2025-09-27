@@ -16,6 +16,7 @@ export default (options: Required<PohonModuleOptions>) => {
       empty: '',
       loading: '',
     },
+
     variants: {
       pinned: {
         true: {
@@ -51,6 +52,9 @@ export default (options: Required<PohonModuleOptions>) => {
         neutral: '',
       },
     },
+
+    compoundVariants: [],
+
     defaultVariants: {
       loadingColor: 'primary',
       loadingAnimation: 'carousel',

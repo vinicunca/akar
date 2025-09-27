@@ -13,6 +13,7 @@ export default (options: Required<PohonModuleOptions>) => {
       actions: '',
       close: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
@@ -40,6 +41,9 @@ export default (options: Required<PohonModuleOptions>) => {
         },
       },
     },
+
+    compoundVariants: [],
+
     defaultVariants: {
       color: 'primary',
       variant: 'solid',

@@ -11,6 +11,7 @@ export default {
     separator: '',
     separatorIcon: '',
   },
+
   variants: {
     active: {
       true: {
@@ -29,4 +30,6 @@ export default {
       true: '',
     },
   },
+
+  compoundVariants: [],
 };

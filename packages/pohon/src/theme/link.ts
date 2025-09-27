@@ -1,5 +1,6 @@
 export default {
   base: '',
+
   variants: {
     active: {
       true: '',
@@ -9,4 +10,6 @@ export default {
       true: '',
     },
   },
+
+  compoundVariants: [],
 };

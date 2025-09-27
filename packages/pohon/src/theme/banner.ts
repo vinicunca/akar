@@ -30,6 +30,8 @@ export default (options: Required<NuxtOptions['pohon']>) => ({
     },
   },
 
+  compoundVariants: [],
+
   defaultVariants: {
     color: 'primary',
   },

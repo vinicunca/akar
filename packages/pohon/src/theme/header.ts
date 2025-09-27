@@ -12,6 +12,7 @@ export default {
     header: '',
     body: '',
   },
+
   variants: {
     toggleSide: {
       left: {

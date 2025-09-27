@@ -9,6 +9,7 @@ export default (options: Required<PohonModuleOptions>) => {
         leading: '',
         trailing: '',
       },
+
       variants: {
         autoresize: {
           true: {

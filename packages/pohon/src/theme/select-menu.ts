@@ -10,6 +10,9 @@ export default (options: Required<PohonModuleOptions>) => {
         focusScope: '',
         content: '',
       },
+
+      compoundVariants: [],
+
     },
     select(options),
   );

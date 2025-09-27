@@ -10,6 +10,7 @@ export default {
     trailingIcon: '',
     label: '',
   },
+
   variants: {
     disabled: {
       true: {
@@ -17,4 +18,6 @@ export default {
       },
     },
   },
+
+  compoundVariants: [],
 };

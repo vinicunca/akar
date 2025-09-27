@@ -91,6 +91,8 @@ export default (options: Required<PohonModuleOptions>) => {
       },
     },
 
+    compoundVariants: [],
+
     defaultVariants: {
       animation: 'carousel',
       color: 'primary',

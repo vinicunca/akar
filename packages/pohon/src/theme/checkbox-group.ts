@@ -58,6 +58,8 @@ export default (options: Required<PohonModuleOptions>) => {
       },
     },
 
+    compoundVariants: [],
+
     defaultVariants: {
       size: 'md',
       variant: 'list',

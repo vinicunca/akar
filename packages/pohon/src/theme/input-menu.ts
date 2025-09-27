@@ -30,6 +30,7 @@ export default (options: Required<PohonModuleOptions>) => {
         tagsItemDeleteIcon: '',
         tagsInput: '',
       },
+
       variants: {
         multiple: {
           true: {
@@ -102,6 +103,8 @@ export default (options: Required<PohonModuleOptions>) => {
           },
         },
       },
+
+      compoundVariants: [],
     },
     input(options),
   );

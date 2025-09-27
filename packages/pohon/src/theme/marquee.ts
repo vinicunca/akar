@@ -3,6 +3,7 @@ export default {
     root: '',
     content: '',
   },
+
   variants: {
     orientation: {
       horizontal: {
@@ -28,4 +29,6 @@ export default {
       },
     },
   },
+
+  compoundVariants: [],
 };

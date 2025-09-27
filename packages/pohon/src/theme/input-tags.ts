@@ -14,6 +14,7 @@ export default (options: Required<PohonModuleOptions>) => {
         itemDeleteIcon: '',
         input: '',
       },
+
       variants: {
         size: {
           xs: {
@@ -41,6 +42,8 @@ export default (options: Required<PohonModuleOptions>) => {
           Object.entries(prev).map(([key]) => [key, '']),
         ),
       },
+
+      compoundVariants: [],
     },
     input(options),
   );

@@ -10,6 +10,7 @@ export default {
     body: '',
     footer: '',
   },
+
   variants: {
     direction: {
       top: {
@@ -35,4 +36,6 @@ export default {
       },
     },
   },
+
+  compoundVariants: [],
 };

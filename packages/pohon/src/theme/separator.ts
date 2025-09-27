@@ -11,6 +11,7 @@ export default (options: Required<PohonModuleOptions>) => {
       avatarSize: '',
       label: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, { border: '' }])),
@@ -47,6 +48,8 @@ export default (options: Required<PohonModuleOptions>) => {
         },
       },
     },
+
+    compoundVariants: [],
 
     defaultVariants: {
       color: 'neutral',

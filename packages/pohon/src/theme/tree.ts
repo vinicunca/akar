@@ -13,6 +13,7 @@ export default (options: Required<PohonModuleOptions>) => {
       linkTrailing: '',
       linkTrailingIcon: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [
@@ -66,6 +67,9 @@ export default (options: Required<PohonModuleOptions>) => {
         },
       },
     },
+
+    compoundVariants: [],
+
     defaultVariants: {
       color: 'primary',
       size: 'md',

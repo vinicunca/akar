@@ -3,6 +3,7 @@ export default {
     viewport: '',
     base: '',
   },
+
   variants: {
     position: {
       'top-left': {
@@ -31,6 +32,9 @@ export default {
       left: '',
     },
   },
+
+  compoundVariants: [],
+
   defaultVariants: {
     position: 'bottom-right',
   },
