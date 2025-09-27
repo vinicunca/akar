@@ -10,6 +10,7 @@ export default (options: Required<PohonModuleOptions>) => {
       steps: '',
       step: '',
     },
+
     variants: {
       animation: {
         'carousel': '',
@@ -88,6 +89,12 @@ export default (options: Required<PohonModuleOptions>) => {
           status: '',
         },
       },
+    },
+
+    defaultVariants: {
+      animation: 'carousel',
+      color: 'primary',
+      size: 'md',
     },
   };
 };

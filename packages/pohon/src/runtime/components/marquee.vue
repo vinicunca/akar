@@ -57,6 +57,7 @@ const pohon = computed(() =>
 <template>
   <APrimitive
     :as="as"
+    :data-orientation="orientation"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
   >
     <div

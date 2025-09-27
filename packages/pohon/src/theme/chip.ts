@@ -6,6 +6,7 @@ export default (options: Required<PohonModuleOptions>) => {
       root: '',
       base: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [
@@ -37,6 +38,12 @@ export default (options: Required<PohonModuleOptions>) => {
       standalone: {
         false: '',
       },
+    },
+
+    defaultVariants: {
+      size: 'md',
+      color: 'primary',
+      position: 'top-right',
     },
   };
 };

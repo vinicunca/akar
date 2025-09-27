@@ -7,4 +7,7 @@ export default {
       4: '',
     },
   },
+  defaultVariants: {
+    level: '3',
+  },
 };

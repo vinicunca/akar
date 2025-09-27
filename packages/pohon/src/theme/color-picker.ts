@@ -8,6 +8,7 @@ export default {
     track: '',
     trackThumb: '',
   },
+
   variants: {
     size: {
       xs: {
@@ -31,5 +32,9 @@ export default {
         track: '',
       },
     },
+  },
+
+  defaultVariants: {
+    size: 'md',
   },
 };

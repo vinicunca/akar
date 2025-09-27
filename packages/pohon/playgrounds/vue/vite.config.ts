@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     vue(),
     pohon({
-      ui: {
+      pohon: {
         colors: {
           primary: 'green',
           neutral: 'slate',
@@ -23,6 +23,6 @@ export default defineConfig({
   ],
   optimizeDeps: {
     // prevents reloading page when navigating between components
-    include: ['@unhead/vue/client', '@iconify/vue', '@internationalized/date', '@vueuse/shared', '@vueuse/integrations/useFuse', '@tanstack/vue-table', 'reka-ui', 'reka-ui/namespaced', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures', 'colortranslator', 'tailwindcss/colors', 'tailwind-variants', 'ufo', 'zod', 'vaul-vue'],
+    include: ['@unhead/vue/client', '@iconify/vue', '@internationalized/date', '@vueuse/shared', '@vueuse/integrations/useFuse', '@tanstack/vue-table', 'akar', 'akar/namespaced', 'embla-carousel-vue', 'embla-carousel-autoplay', 'embla-carousel-auto-scroll', 'embla-carousel-auto-height', 'embla-carousel-class-names', 'embla-carousel-fade', 'embla-carousel-wheel-gestures', 'colortranslator', 'tailwindcss/colors', 'tailwind-variants', 'ufo', 'zod', 'vaul-vue'],
   },
 });

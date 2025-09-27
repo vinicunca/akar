@@ -243,7 +243,7 @@ const pohon = computed(() =>
               :variant="page === item.value ? activeVariant : variant"
               :size="size"
               :label="String(item.value)"
-              :ui="{ label: pohon.label() }"
+              :pohon="{ label: pohon.label() }"
               :to="to?.(item.value)"
               square
             />

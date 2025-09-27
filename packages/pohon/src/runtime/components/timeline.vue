@@ -139,7 +139,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
           :icon="item.icon"
           v-bind="typeof item.avatar === 'object' ? item.avatar : {}"
           :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })"
-          :ui="{ icon: 'text-inherit', fallback: 'text-inherit' }"
+          :pohon="{ icon: 'text-inherit', fallback: 'text-inherit' }"
         >
           <slot
             :name="((item.slot ? `${item.slot}-indicator` : 'indicator') as keyof PTimelineSlots<T>)"

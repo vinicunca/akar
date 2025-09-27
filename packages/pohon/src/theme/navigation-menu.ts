@@ -33,6 +33,7 @@ export default (options: Required<PohonModuleOptions>) => {
       indicator: '',
       arrow: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [
@@ -108,6 +109,12 @@ export default (options: Required<PohonModuleOptions>) => {
       collapsed: {
         true: '',
       },
+    },
+
+    defaultVariants: {
+      color: 'primary',
+      highlightColor: 'primary',
+      variant: 'pill',
     },
   };
 };

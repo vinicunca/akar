@@ -134,7 +134,7 @@ export function getPohonTemplates(
     writeThemeTemplate(themeProse, path);
 
     templates.push({
-      filename: `ui/${path}/index.ts`,
+      filename: `pohon/${path}/index.ts`,
       write: true,
       getContents: () => Object.keys(themeProse).map((component) => `export { default as ${component} } from './${toKebabCase(component)}'`).join('\n'),
     });

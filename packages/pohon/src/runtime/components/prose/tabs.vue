@@ -119,7 +119,7 @@ onBeforeUpdate(() => rerenderCount.value++);
     :items="items"
     :class="props.class"
     :unmount-on-hide="false"
-    :ui="transformPohon(pohon())"
+    :pohon="transformPohon(pohon())"
     @update:model-value="onUpdateModelValue"
   >
     <template #content="{ item }">

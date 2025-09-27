@@ -85,7 +85,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
    */
   closeIcon?: IconProps['name'];
   /**
-   * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
+   * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://akara.vinicunca.dev/pohon/composables/define-shortcuts))
    * @defaultValue 'meta_k'
    */
   shortcut?: string;
@@ -96,7 +96,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
   groups?: Array<PCommandPaletteGroup<PContentSearchItem>>;
   files?: Array<PContentSearchFile>;
   /**
-   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
+   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://akara.vinicunca.dev/pohon/components/command-palette).
    * @defaultValue { fuseOptions: { includeMatches: true } }
    */
   fuse?: UseFuseOptions<T>;

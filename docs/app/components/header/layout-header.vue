@@ -15,22 +15,22 @@ const { desktopLinks } = useHeader();
       <HeaderLogo />
     </template>
 
-    <UNavigationMenu
+    <!-- <UNavigationMenu
       :items="desktopLinks"
       variant="link"
-    />
+    /> -->
 
     <template #right>
-      <ThemePicker />
+      <!-- <ThemePicker /> -->
 
-      <UTooltip
+      <!-- <UTooltip
         text="Search"
         :kbds="['meta', 'K']"
       >
         <UContentSearchButton />
-      </UTooltip>
+      </UTooltip> -->
 
-      <UTooltip
+      <!-- <UTooltip
         text="Open on GitHub"
         class="hidden lg:flex"
       >
@@ -42,18 +42,18 @@ const { desktopLinks } = useHeader();
           icon="i-simple-icons-github"
           aria-label="GitHub"
         />
-      </UTooltip>
+      </UTooltip> -->
     </template>
 
     <template #body>
-      <HeaderBody />
+      <!-- <HeaderBody /> -->
     </template>
 
     <template
       v-if="route.path.startsWith('/docs/')"
       #bottom
     >
-      <HeaderBottom />
+      <!-- <HeaderBottom /> -->
     </template>
   </PHeader>
 </template>

@@ -5,7 +5,7 @@ import { computed, inject, toRef } from 'vue';
 import en from '../locale/en';
 import { buildLocaleContext } from '../utils/locale';
 
-export const localeContextInjectionKey: InjectionKey<Ref<PLocale<unknown> | undefined>> = Symbol.for('nuxt-ui.locale-context');
+export const localeContextInjectionKey: InjectionKey<Ref<PLocale<unknown> | undefined>> = Symbol.for('pohon.locale-context');
 
 function _useLocale(localeOverrides?: Ref<PLocale<PMessages> | undefined>) {
   const locale = localeOverrides || toRef(inject<PLocale<PMessages>>(localeContextInjectionKey, en));

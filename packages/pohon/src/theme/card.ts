@@ -5,6 +5,7 @@ export default {
     body: '',
     footer: '',
   },
+
   variants: {
     variant: {
       solid: {
@@ -20,5 +21,9 @@ export default {
         root: '',
       },
     },
+  },
+
+  defaultVariants: {
+    variant: 'outline',
   },
 };

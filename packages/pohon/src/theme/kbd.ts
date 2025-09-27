@@ -20,5 +20,11 @@ export default (options: Required<PohonModuleOptions>) => {
         lg: '',
       },
     },
+
+    defaultVariants: {
+      variant: 'outline',
+      color: 'neutral',
+      size: 'md',
+    },
   };
 };

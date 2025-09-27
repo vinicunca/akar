@@ -82,11 +82,13 @@ function onSelect(item: any) {
 }
 
 defineShortcuts({
-  meta_k: () => isCommandPaletteOpen.value = true,
+  meta_k: () => {
+    isCommandPaletteOpen.value = true;
+  },
 });
 
 useHead({
-  title: 'Nuxt UI - Playground',
+  title: 'Pohon - Playground',
 });
 </script>
 

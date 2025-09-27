@@ -14,6 +14,7 @@ export default (options: Required<PohonModuleOptions>) => {
       label: '',
       description: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [color, {
@@ -111,6 +112,14 @@ export default (options: Required<PohonModuleOptions>) => {
           legend: '',
         },
       },
+    },
+
+    defaultVariants: {
+      size: 'md',
+      color: 'primary',
+      variant: 'list',
+      orientation: 'vertical',
+      indicator: 'start',
     },
   };
 };

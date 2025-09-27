@@ -341,6 +341,7 @@ defineExpose({
     :as="as"
     role="region"
     aria-roledescription="carousel"
+    :data-orientation="orientation"
     tabindex="0"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     @keydown="onKeyDown"

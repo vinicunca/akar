@@ -8,4 +8,7 @@ export default (options: Required<NuxtOptions['pohon']>) => ({
       neutral: '',
     },
   },
+  defaultVariants: {
+    color: 'neutral',
+  },
 });

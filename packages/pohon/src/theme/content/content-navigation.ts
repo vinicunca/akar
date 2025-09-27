@@ -64,4 +64,9 @@ export default (options: Required<NuxtOptions['pohon']>) => ({
       },
     },
   },
+  defaultVariants: {
+    color: 'primary',
+    highlightColor: 'primary',
+    variant: 'pill',
+  },
 });

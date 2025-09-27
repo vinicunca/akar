@@ -11,6 +11,7 @@ export default (options: Required<PohonModuleOptions>) => {
       leadingAvatarSize: '',
       trailingIcon: '',
     },
+
     variants: {
       ...fieldGroupVariant,
       color: {
@@ -83,6 +84,12 @@ export default (options: Required<PohonModuleOptions>) => {
           base: '',
         },
       },
+    },
+
+    defaultVariants: {
+      color: 'primary',
+      variant: 'solid',
+      size: 'md',
     },
   };
 };

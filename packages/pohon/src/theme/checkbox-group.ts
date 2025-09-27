@@ -8,6 +8,7 @@ export default (options: Required<PohonModuleOptions>) => {
       legend: '',
       item: '',
     },
+
     variants: {
       orientation: {
         horizontal: {
@@ -55,6 +56,12 @@ export default (options: Required<PohonModuleOptions>) => {
           legend: '',
         },
       },
+    },
+
+    defaultVariants: {
+      size: 'md',
+      variant: 'list',
+      color: 'primary',
     },
   };
 };

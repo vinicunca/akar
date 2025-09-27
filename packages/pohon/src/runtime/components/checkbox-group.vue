@@ -212,7 +212,7 @@ function onUpdate(value: any) {
         :size="size"
         :name="name"
         :disabled="item.disabled || disabled"
-        :ui="{ ...(props.pohon ? omit(props.pohon, ['root']) : undefined), ...(item.ui || {}) }"
+        :pohon="{ ...(props.pohon ? omit(props.pohon, ['root']) : undefined), ...(item.pohon || {}) }"
         :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
       >
         <template

@@ -12,6 +12,7 @@ export default (options: Required<NuxtOptions['pohon']>) => ({
     actions: '',
     close: '',
   },
+
   variants: {
     color: {
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [
@@ -27,5 +28,9 @@ export default (options: Required<NuxtOptions['pohon']>) => ({
     to: {
       true: '',
     },
+  },
+
+  defaultVariants: {
+    color: 'primary',
   },
 });

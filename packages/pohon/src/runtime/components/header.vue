@@ -85,7 +85,7 @@ const props = withDefaults(
     toggle: true,
     toggleSide: 'right',
     to: '/',
-    title: 'Nuxt UI',
+    title: 'Pohon',
   },
 );
 const slots = defineSlots<PHeaderSlots>();
@@ -102,7 +102,7 @@ const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate();
 
 const ariaLabel = computed(() => {
   const slotText = slots.title && getSlotChildrenText(slots.title());
-  return (slotText || props.title || 'Nuxt UI').trim();
+  return (slotText || props.title || 'Pohon').trim();
 });
 
 watch(() => route.fullPath, () => {
@@ -207,7 +207,7 @@ function toggleOpen() {
     :title="t('header.title')"
     :description="t('header.description')"
     v-bind="menuProps"
-    :ui="{
+    :pohon="{
       overlay: pohon.overlay({ class: props.pohon?.overlay }),
       content: pohon.content({ class: props.pohon?.content }),
     }"

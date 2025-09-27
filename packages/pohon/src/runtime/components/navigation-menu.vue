@@ -16,7 +16,7 @@ import theme from '#build/pohon/navigation-menu';
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>;
 
-export interface PNavigationMenuChildItem extends Omit<PNavigationMenuItem, 'type' | 'ui'> {
+export interface PNavigationMenuChildItem extends Omit<PNavigationMenuItem, 'type' | 'pohon'> {
   /** Description is only used when `orientation` is `horizontal`. */
   description?: string;
   [key: string]: any;
@@ -197,8 +197,8 @@ import PBadge from './badge.vue';
 import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
-import PTooltip from './tooltip.vue';
 import PPopover from './popover.vue';
+import PTooltip from './tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
 

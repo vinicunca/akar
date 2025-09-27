@@ -68,7 +68,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
         :data-state="open ? 'open' : 'closed'"
         :label="`${open ? (props.closeText || t('prose.codeCollapse.closeText')) : (props.openText || t('prose.codeCollapse.openText'))} ${props.name || t('prose.codeCollapse.name')}`"
         :class="pohon.trigger({ class: props.pohon?.trigger })"
-        :ui="{ leadingIcon: pohon.triggerIcon({ class: props.pohon?.triggerIcon }) }"
+        :pohon="{ leadingIcon: pohon.triggerIcon({ class: props.pohon?.triggerIcon }) }"
         @click="open = !open"
       />
     </div>

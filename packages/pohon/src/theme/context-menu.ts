@@ -19,6 +19,7 @@ export default (options: Required<PohonModuleOptions>) => {
       itemLabel: '',
       itemLabelExternalIcon: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
@@ -86,6 +87,10 @@ export default (options: Required<PohonModuleOptions>) => {
           itemTrailingKbdsSize: '',
         },
       },
+    },
+
+    defaultVariants: {
+      size: 'md',
     },
   };
 };

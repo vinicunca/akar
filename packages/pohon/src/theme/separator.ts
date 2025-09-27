@@ -47,5 +47,11 @@ export default (options: Required<PohonModuleOptions>) => {
         },
       },
     },
+
+    defaultVariants: {
+      color: 'neutral',
+      size: 'xs',
+      type: 'solid',
+    },
   };
 };

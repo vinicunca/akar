@@ -67,7 +67,7 @@ onBeforeUpdate(() => rerenderCount.value++);
     :items="items"
     :unmount-on-hide="false"
     :class="props.class"
-    :ui="transformPohon(pohon())"
+    :pohon="transformPohon(pohon())"
   >
     <template #content="{ item }">
       <component :is="item.component" />

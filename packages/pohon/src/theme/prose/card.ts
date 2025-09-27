@@ -29,4 +29,7 @@ export default (options: Required<NuxtOptions['pohon']>) => ({
       },
     },
   },
+  defaultVariants: {
+    color: 'primary',
+  },
 });

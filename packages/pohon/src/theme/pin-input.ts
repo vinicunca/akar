@@ -6,6 +6,7 @@ export default (options: Required<PohonModuleOptions>) => {
       root: '',
       base: '',
     },
+
     variants: {
       size: {
         xs: {
@@ -38,6 +39,12 @@ export default (options: Required<PohonModuleOptions>) => {
       highlight: {
         true: '',
       },
+    },
+
+    defaultVariants: {
+      size: 'md',
+      color: 'primary',
+      variant: 'outline',
     },
   };
 };

@@ -72,5 +72,10 @@ export default (options: Required<PohonModuleOptions>) => {
         },
       },
     },
+    defaultVariants: {
+      color: 'primary',
+      variant: 'pill',
+      size: 'md',
+    },
   };
 };

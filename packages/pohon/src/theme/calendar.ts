@@ -15,6 +15,7 @@ export default (options: Required<PohonModuleOptions>) => {
       cell: '',
       cellTrigger: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [
@@ -60,6 +61,11 @@ export default (options: Required<PohonModuleOptions>) => {
           cellTrigger: '',
         },
       },
+    },
+
+    defaultVariants: {
+      size: 'md',
+      color: 'primary',
     },
   };
 };

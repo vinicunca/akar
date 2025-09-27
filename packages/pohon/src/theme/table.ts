@@ -51,5 +51,9 @@ export default (options: Required<PohonModuleOptions>) => {
         neutral: '',
       },
     },
+    defaultVariants: {
+      loadingColor: 'primary',
+      loadingAnimation: 'carousel',
+    },
   };
 };

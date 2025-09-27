@@ -12,6 +12,7 @@ export default (options: Required<PohonModuleOptions>) => {
       label: '',
       description: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [
@@ -90,6 +91,13 @@ export default (options: Required<PohonModuleOptions>) => {
       checked: {
         true: '',
       },
+    },
+
+    defaultVariants: {
+      size: 'md',
+      color: 'primary',
+      variant: 'list',
+      indicator: 'start',
     },
   };
 };

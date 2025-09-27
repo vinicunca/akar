@@ -104,7 +104,7 @@
     }
   },
   "files": [
-    ".nuxt/ui",
+    ".nuxt/pohon",
     "cli",
     "dist",
     "vue-plugin.d.ts"

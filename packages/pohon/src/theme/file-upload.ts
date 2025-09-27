@@ -19,6 +19,7 @@ export default (options: Required<PohonModuleOptions>) => {
       fileSize: '',
       fileTrailingButton: '',
     },
+
     variants: {
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
@@ -94,6 +95,12 @@ export default (options: Required<PohonModuleOptions>) => {
       disabled: {
         true: '',
       },
+    },
+
+    defaultVariants: {
+      color: 'primary',
+      variant: 'area',
+      size: 'md',
     },
   };
 };

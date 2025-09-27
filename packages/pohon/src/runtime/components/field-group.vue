@@ -63,6 +63,7 @@ provide(fieldGroupInjectionKey, computed(() => ({
 <template>
   <APrimitive
     :as="as"
+    :data-orientation="orientation"
     :class="pohon({ orientation, class: props.class })"
   >
     <slot />

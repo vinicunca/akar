@@ -10,6 +10,7 @@ export default {
     hint: '',
     help: '',
   },
+
   variants: {
     size: {
       xs: { root: '' },
@@ -23,5 +24,9 @@ export default {
         label: '',
       },
     },
+  },
+
+  defaultVariants: {
+    size: 'md',
   },
 };

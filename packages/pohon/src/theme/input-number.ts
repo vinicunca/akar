@@ -12,6 +12,7 @@ export default (options: Required<PohonModuleOptions>) => {
       increment: '',
       decrement: '',
     },
+
     variants: {
       ...fieldGroupVariantWithRoot,
       color: {
@@ -48,6 +49,12 @@ export default (options: Required<PohonModuleOptions>) => {
       highlight: {
         true: '',
       },
+    },
+
+    defaultVariants: {
+      size: 'md',
+      color: 'primary',
+      variant: 'outline',
     },
   };
 };

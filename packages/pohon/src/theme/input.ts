@@ -13,6 +13,7 @@ export default (options: Required<PohonModuleOptions>) => {
       trailing: '',
       trailingIcon: '',
     },
+
     variants: {
       ...fieldGroupVariantWithRoot,
       size: {
@@ -83,6 +84,12 @@ export default (options: Required<PohonModuleOptions>) => {
       type: {
         file: '',
       },
+    },
+
+    defaultVariants: {
+      size: 'md',
+      color: 'primary',
+      variant: 'outline',
     },
   };
 };

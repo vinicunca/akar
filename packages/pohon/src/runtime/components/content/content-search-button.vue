@@ -116,7 +116,7 @@ const pohon = computed(() =>
         ...$attrs,
       }"
       :class="pohon.base({ class: [props.pohon?.base, props.class] })"
-      :ui="transformPohon(pohon, props.pohon)"
+      :pohon="transformPohon(pohon, props.pohon)"
       @click="open = true"
     >
       <template

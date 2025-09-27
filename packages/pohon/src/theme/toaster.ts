@@ -31,4 +31,7 @@ export default {
       left: '',
     },
   },
+  defaultVariants: {
+    position: 'bottom-right',
+  },
 };

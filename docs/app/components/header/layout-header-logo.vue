@@ -3,6 +3,7 @@ import { PContextMenu } from '#components';
 import { useToast } from '#imports';
 import { useClipboard } from '@vueuse/core';
 import { ref } from 'vue';
+import BaseLogo from '../base-logo.vue';
 
 const logoRef = ref();
 
@@ -44,7 +45,7 @@ const items = [
       class="text-highlighted text-xl font-bold flex shrink-0 gap-2 min-w-0 items-end focus-visible:outline-primary"
       aria-label="Nuxt UI"
     >
-      <Logo
+      <BaseLogo
         ref="logoRef"
         class="shrink-0 h-6 w-auto"
       />
