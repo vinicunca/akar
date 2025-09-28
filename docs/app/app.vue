@@ -81,3 +81,11 @@ useFaviconFromTheme();
     </div>
   </PApp>
 </template>
+
+<style lang="postcss">
+@media (min-width: 1024px) {
+  .root {
+    --pohon-header-height: 112px;
+  }
+}
+</style>

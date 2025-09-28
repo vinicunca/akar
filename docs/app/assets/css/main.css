@@ -1,3 +1,7 @@
+:root {
+  --pohon-header-height: calc(var(--spacing) * 16);
+}
+
 body {
   @apply antialiased bg-background color-text scheme-light dark:scheme-dark font-sans;
 }

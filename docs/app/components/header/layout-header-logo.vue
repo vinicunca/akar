@@ -42,8 +42,8 @@ const items = [
   <PContextMenu :items="items">
     <NuxtLink
       to="/"
-      class="text-highlighted text-xl font-bold flex shrink-0 gap-2 min-w-0 items-end focus-visible:outline-primary"
-      aria-label="Nuxt UI"
+      class="text-xl color-text-highlighted font-bold flex shrink-0 gap-2 min-w-0 items-end focus-visible:outline-primary"
+      aria-label="Akar"
     >
       <BaseLogo
         ref="logoRef"

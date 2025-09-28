@@ -123,6 +123,10 @@ export default defineConfig({
         inverted: 'var(--pohon-border-inverted)',
       },
     },
+
+    container: {
+      '8xl': '90rem',
+    },
   },
   extendTheme: (theme) => {
     return {

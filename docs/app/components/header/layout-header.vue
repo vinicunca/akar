@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { PHeader } from '#components';
-import { useHeader, useRoute } from '#imports';
+import { PHeader, PNavigationMenu } from '#components';
+import { useRoute } from '#imports';
+import { useHeader } from '~/composables/use-header';
+import LayoutHeaderLogo from './layout-header-logo.vue';
 
 const route = useRoute();
 const { desktopLinks } = useHeader();
@@ -8,17 +10,17 @@ const { desktopLinks } = useHeader();
 
 <template>
   <PHeader
-    :ui="{ left: 'min-w-0' }"
+    :pohon="{ left: 'min-w-0' }"
     class="flex-vertical"
   >
     <template #left>
-      <HeaderLogo />
+      <LayoutHeaderLogo />
     </template>
 
-    <!-- <UNavigationMenu
+    <PNavigationMenu
       :items="desktopLinks"
       variant="link"
-    /> -->
+    />
 
     <template #right>
       <!-- <ThemePicker /> -->
