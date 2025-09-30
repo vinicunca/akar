@@ -6,7 +6,7 @@ import type {
 import type { PointerDownOutsideEvent } from '~~/dismissable-layer';
 import type { APopperContentProps } from '~~/popper';
 import type { AcceptableValue } from '~~/shared/types';
-import { KEY_CODES } from '@vinicunca/perkakas';
+import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { useCollection } from '~~/collection';
 import {
   createContext,
@@ -199,15 +199,15 @@ function handleKeyDown(event: KeyboardEvent) {
     handleTypeaheadSearch({ key: event.key, items: getItems() });
   }
 
-  if ([KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_UP, KEY_CODES.END, KEY_CODES.HOME].includes(event.key)) {
+  if (isIncludedIn(event.key, [KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_UP, KEY_CODES.END, KEY_CODES.HOME])) {
     const collectionItems = getItems().map((i) => i.ref);
     let candidateNodes = [...collectionItems];
 
-    if ([KEY_CODES.ARROW_UP, KEY_CODES.END].includes(event.key)) {
+    if (isIncludedIn(event.key, [KEY_CODES.ARROW_UP, KEY_CODES.END])) {
       candidateNodes = candidateNodes.slice().reverse();
     }
 
-    if ([KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_UP].includes(event.key)) {
+    if (isIncludedIn(event.key, [KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_UP])) {
       const currentElement = event.target as HTMLElement;
       const currentIndex = candidateNodes.indexOf(currentElement);
       candidateNodes = candidateNodes.slice(currentIndex + 1);

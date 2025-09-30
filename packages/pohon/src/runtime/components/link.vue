@@ -138,14 +138,17 @@ const nuxtLinkProps = useForwardProps(
 const pohon = computed(() =>
   uv({
     extend: uv(theme),
-    ...defu({
-      variants: {
-        active: {
-          true: mergeClasses(appConfig.pohon?.link?.variants?.active?.true, props.activeClass),
-          false: mergeClasses(appConfig.pohon?.link?.variants?.active?.false, props.inactiveClass),
+    ...defu(
+      {
+        variants: {
+          active: {
+            true: mergeClasses(appConfig.pohon?.link?.variants?.active?.true, props.activeClass),
+            false: mergeClasses(appConfig.pohon?.link?.variants?.active?.false, props.inactiveClass),
+          },
         },
       },
-    }, appConfig.pohon?.link || {}),
+      appConfig.pohon?.link || {},
+    ),
   }),
 );
 
@@ -188,7 +191,11 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
     return [props.class, active ? props.activeClass : props.inactiveClass];
   }
 
-  return pohon.value({ class: props.class, active, disabled: props.disabled });
+  return pohon.value({
+    class: props.class,
+    active,
+    disabled: props.disabled,
+  });
 }
 </script>
 

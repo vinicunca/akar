@@ -1,5 +1,6 @@
 :root {
   --pohon-header-height: calc(var(--spacing) * 16);
+  --default-mono-font-family: var(--font-mono);
 }
 
 body {

@@ -12,7 +12,7 @@ import type {
   Side,
 } from './utils';
 
-import { KEY_CODES } from '@vinicunca/perkakas';
+import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import {
   createContext,
   getActiveElement,
@@ -214,14 +214,16 @@ function handleKeyDown(event: KeyboardEvent) {
   if (event.target !== contentElement.value) {
     return;
   }
-  if (!FIRST_LAST_KEYS.includes(event.key)) {
+
+  if (!isIncludedIn(event.key, FIRST_LAST_KEYS)) {
     return;
   }
+
   event.preventDefault();
 
   const candidateNodes = [...collectionItems.map((item) => item.ref)];
 
-  if (LAST_KEYS.includes(event.key)) {
+  if (isIncludedIn(event.key, LAST_KEYS)) {
     candidateNodes.reverse();
   }
 

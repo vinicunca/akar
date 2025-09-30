@@ -7,12 +7,15 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "postinstall": "nuxt prepare",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "docs:gen:dev": "tsx watch scripts/autogen.ts",
+    "docs:gen": "tsx scripts/autogen.ts"
   },
   "dependencies": {
     "@nuxt/content": "catalog:pohon",
     "@nuxt/fonts": "catalog:pohon",
     "@nuxt/image": "catalog:docs",
+    "@vinicunca/perkakas": "catalog:core",
     "@vueuse/core": "catalog:core",
     "@vueuse/integrations": "catalog:core",
     "akar": "workspace:*",
@@ -24,6 +27,7 @@
     "shiki-transformer-color-highlight": "catalog:docs"
   },
   "devDependencies": {
+    "@iconify/json": "catalog:base",
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/unocss-preset": "catalog:docs",
     "unocss": "catalog:base"

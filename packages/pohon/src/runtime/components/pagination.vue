@@ -226,10 +226,12 @@ const pohon = computed(() =>
         </slot>
       </APaginationPrev>
 
-      <template v-for="(item, index) in items">
+      <template
+        v-for="(item, index) in items"
+        :key="index"
+      >
         <APaginationListItem
           v-if="item.type === 'page'"
-          :key="index"
           as-child
           :value="item.value"
           :class="pohon.item({ class: props.pohon?.item })"
@@ -252,13 +254,12 @@ const pohon = computed(() =>
 
         <APaginationEllipsis
           v-else
-          :key="item.type"
-          :index="index"
           as-child
           :class="pohon.ellipsis({ class: props.pohon?.ellipsis })"
         >
           <slot name="ellipsis">
             <PButton
+              as="div"
               :color="color"
               :variant="variant"
               :size="size"

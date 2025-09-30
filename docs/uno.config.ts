@@ -8,6 +8,13 @@ export default defineConfig({
   presets: [
     presetVinicunca({
       akar: true,
+      icons: {
+        extraProperties: {
+          'display': 'inline-block',
+          'vertical-align': 'middle',
+        },
+        warn: true,
+      },
     }),
   ],
 
@@ -133,6 +140,7 @@ export default defineConfig({
       ...theme,
       font: {
         sans: `'Geist', ${theme.font?.sans}`,
+        mono: `'Geist Mono', ${theme.font?.mono}`,
       },
     };
   },

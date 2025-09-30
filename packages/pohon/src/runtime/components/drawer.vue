@@ -52,7 +52,9 @@ export interface PDrawerProps extends Pick<ADrawerRootProps, 'activeSnapPoint' |
   pohon?: Drawer['slots'];
 }
 
-export interface PDrawerEmits extends ADrawerRootEmits {}
+export interface PDrawerEmits extends ADrawerRootEmits {
+  (event: 'close:prevent'): void;
+}
 
 export interface PDrawerSlots {
   default: (props?: object) => any;
@@ -125,9 +127,29 @@ const rootProps = useForwardPropsEmits(
 );
 const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => props.content);
-const contentEvents = {
-  closeAutoFocus: (event: Event) => event.preventDefault(),
-};
+const contentEvents = computed(() => {
+  const defaultEvents = {
+    closeAutoFocus: (event: Event) => event.preventDefault(),
+  };
+
+  if (!props.dismissible) {
+    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'];
+
+    return events.reduce(
+      (acc, curr) => {
+        acc[curr] = (event: Event) => {
+          event.preventDefault();
+          emits('close:prevent');
+        };
+
+        return acc;
+      },
+      defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (event: Event) => void>,
+    );
+  }
+
+  return defaultEvents;
+});
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.drawer || {}) })({
   direction: props.direction,
