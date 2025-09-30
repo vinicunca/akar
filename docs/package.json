@@ -27,9 +27,15 @@
     "shiki-transformer-color-highlight": "catalog:docs"
   },
   "devDependencies": {
+    "@babel/traverse": "catalog:docs",
     "@iconify/json": "catalog:base",
+    "@types/babel__traverse": "catalog:docs",
+    "@types/markdown-it": "catalog:docs",
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/unocss-preset": "catalog:docs",
-    "unocss": "catalog:base"
+    "fast-glob": "catalog:docs",
+    "markdown-it": "catalog:docs",
+    "unocss": "catalog:base",
+    "vue-component-meta": "catalog:docs"
   }
 }

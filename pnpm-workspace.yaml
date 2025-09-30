@@ -62,12 +62,18 @@ catalogs:
     vue-component-type-helpers: 3.1.0
     vue-tsc: 3.1.0
   docs:
+    '@babel/traverse': ^7.28.4
     '@nuxt/image': ^1.11.0
+    '@types/babel__traverse': ^7.28.0
+    '@types/markdown-it': ^14.1.2
     '@vinicunca/unocss-preset': ^1.23.0
     better-sqlite3: ^12.2.0
+    fast-glob: ^3.3.3
+    markdown-it: ^14.1.0
     nuxt-component-meta: ^0.14.0
     nuxt-og-image: ^5.1.9
     shiki-transformer-color-highlight: ^1.0.0
+    vue-component-meta: ^3.1.0
   plugins:
     '@nuxt/kit': 4.1.2
     '@nuxt/schema': 4.1.2
@@ -117,3 +123,4 @@ onlyBuiltDependencies:
 resolutions:
   pohon: workspace:*
   unplugin: ^2.3.10
+  vue-tsc: 3.1.0
