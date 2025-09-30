@@ -21,7 +21,6 @@
     "akar": "workspace:*",
     "better-sqlite3": "catalog:docs",
     "nuxt": "catalog:pohon",
-    "nuxt-component-meta": "catalog:docs",
     "nuxt-og-image": "catalog:docs",
     "pohon": "workspace:*",
     "shiki-transformer-color-highlight": "catalog:docs"
