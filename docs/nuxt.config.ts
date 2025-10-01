@@ -12,6 +12,22 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc', 'blade', 'edge'],
+        },
+      },
+    },
+  },
+
+  mdc: {
+    highlight: {
+      noApiRoute: false,
+    },
+  },
+
   fonts: {
     families: [
       { name: 'Geist', provider: 'fontsource', weights: ['100 900'] },
@@ -43,10 +59,27 @@ export default defineNuxtConfig({
     optimizeDeps: {
       // prevents reloading page when navigating between components
       include: [
+        '@vueuse/shared',
+        '@vueuse/integrations/useFuse',
+        '@tanstack/vue-table',
         'akar',
+        'akar/namespaced',
+        'embla-carousel-vue',
+        'embla-carousel-autoplay',
+        'embla-carousel-auto-scroll',
+        'embla-carousel-auto-height',
+        'embla-carousel-class-names',
+        'embla-carousel-fade',
+        'embla-carousel-wheel-gestures',
+        'colortranslator',
+        'ufo',
+        'zod',
+        'json5',
+        'ohash',
+        'shiki-transformer-color-highlight',
         '@internationalized/date',
         'unocss-variants',
-        'shiki-transformer-color-highlight',
+        '@vinicunca/perkakas',
       ],
     },
   },

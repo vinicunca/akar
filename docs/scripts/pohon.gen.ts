@@ -26,7 +26,7 @@ const allComponents = fg.sync([
   absolute: true,
 });
 
-const metaDirPath = resolve(__dirname, '../content/_meta');
+const metaDirPath = resolve(__dirname, '../content/docs/_meta');
 // if meta dir doesn't exist create
 mkdirSync(metaDirPath, { recursive: true });
 

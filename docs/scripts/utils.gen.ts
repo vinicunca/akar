@@ -35,7 +35,10 @@ function transformJSDocLinks(md: MarkdownIt) {
 export function stringifyJson(obj: any) {
   return JSON
     .stringify(obj, null, 2)
-    .replace(/"/g, '\'');
+    // Nuxt content's MDC is picky with quotes so we need the triple slashes
+    .replace(/\\"/g, '\\\'')
+    // This one also the line breaks seems not being rendered so we need to double escape them
+    .replace(/\\n/g, '\\\\n');
 }
 
 export function parseTypeFromSchema(schema: PropertyMetaSchema): string {
@@ -82,7 +85,7 @@ export function parseMetaProps(metaProps: ComponentMeta['props']) {
 
       return ({
         name,
-        description: md.render(description),
+        description,
         type: type.replace(/\s*\|\s*undefined/g, ''),
         required,
         default: defaultValue ?? undefined,

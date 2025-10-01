@@ -45,7 +45,7 @@ const primitiveComponents = allComponents.filter((i) => {
   return listOfComponents.includes(fileName);
 });
 
-const metaDirPath = resolve(__dirname, '../content/_meta');
+const metaDirPath = resolve(__dirname, '../content/docs/_meta');
 // if meta dir doesn't exist create
 mkdirSync(metaDirPath, { recursive: true });
 
@@ -54,7 +54,8 @@ export function generateMetaAkar() {
   allComponents.forEach(generateDependencies);
 
   // 2. Generate component meta
-  primitiveComponents.forEach((componentPath) => {
+  // primitiveComponents.forEach((componentPath) => {
+  primitiveComponents.slice(3, 4).forEach((componentPath) => {
     const dir = parse(componentPath).dir.split('/').at(-1) ?? '';
     const flattenDeps = [dir, ...getDependencies(dir)];
     if (!arraysAreEqual(prevDeps, flattenDeps)) {
@@ -74,22 +75,22 @@ export function generateMetaAkar() {
 
     const metaProps = parseMetaProps(meta.props);
     if (metaProps.length) {
-      parsedString += `<DocsPropsTable :data="${stringifyJson(metaProps)}" />\n`;
+      parsedString += `:docs-props-table{:data='${stringifyJson(metaProps)}'} \n`;
     }
 
     const metaEvents = parseMetaEvents(meta.events, eventDescriptionMap);
     if (metaEvents.length) {
-      parsedString += `\n<DocsEmitsTable :data="${stringifyJson(metaEvents)}" />\n`;
+      parsedString += `\n:docs-emits-table{:data='${stringifyJson(metaEvents)}'} \n`;
     }
 
     const metaSlots = parseMetaSlots(meta.slots);
     if (metaSlots.length) {
-      parsedString += `\n<DocsSlotsTable :data="${stringifyJson(metaSlots)}" />\n`;
+      parsedString += `\n:docs-slots-table{:data='${stringifyJson(metaSlots)}'} \n`;
     }
 
     const metaExposed = parseMetaExposed(meta.exposed);
     if (metaExposed.length) {
-      parsedString += `\n<DocsExposedTable :data="${stringifyJson(metaExposed)}" />\n`;
+      parsedString += `\n:docs-exposed-table{:data='${stringifyJson(metaExposed)}'} \n`;
     }
 
     writeFileSync(metaMdFilePath, parsedString);

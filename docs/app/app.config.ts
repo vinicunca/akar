@@ -513,6 +513,9 @@ export default defineAppConfig({
       p: {
         base: 'my-5 leading-7 text-pretty',
       },
+      a: {
+        base: 'text-primary border-b border-transparent hover:border-primary font-medium focus-visible:outline-primary [&>code]:border-dashed hover:[&>code]:border-primary hover:[&>code]:text-primary transition-colors [&>code]:transition-colors',
+      },
       li: {
         base: 'my-1.5 ps-1.5 leading-7 [&>ul]:my-0',
       },
@@ -550,6 +553,24 @@ export default defineAppConfig({
             },
           },
         },
+      },
+      table: {
+        slots: {
+          root: 'relative my-5 overflow-x-auto',
+          base: 'w-full border-separate border-spacing-0 rounded-md',
+        },
+      },
+      thead: {
+        base: 'bg-background-muted',
+      },
+      td: {
+        base: 'py-3 px-4 text-sm text-left align-top border-e border-b first:border-s border-border-muted [&_code]:text-xs/5 [&_p]:my-0 [&_p]:leading-6 [&_ul]:my-0 [&_ol]:my-0 [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:leading-6 [&_li]:my-0.5',
+      },
+      th: {
+        base: 'py-3 px-4 font-semibold text-sm text-left border-e border-b first:border-s border-t border-border-muted',
+      },
+      tr: {
+        base: '[&:first-child>th:first-child]:rounded-tl-md [&:first-child>th:last-child]:rounded-tr-md [&:last-child>td:first-child]:rounded-bl-md [&:last-child>td:last-child]:rounded-br-md',
       },
     },
 

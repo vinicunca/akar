@@ -1,7 +1,16 @@
 <script lang="ts" setup>
 import type { Ref } from '#imports';
 import type { ContentNavigationItem } from '@nuxt/content';
-import { ContentRenderer, MDC, PBreadcrumb, PContentToc, PIcon, PLink, PLinkBase, PSeparator } from '#components';
+import {
+  ContentRenderer,
+  MDC,
+  PBreadcrumb,
+  PContentToc,
+  PIcon,
+  PLink,
+  PLinkBase,
+  PSeparator,
+} from '#components';
 import {
   computed,
   createError,

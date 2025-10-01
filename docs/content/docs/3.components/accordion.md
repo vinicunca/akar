@@ -10,7 +10,7 @@ Use the Accordion component to display a list of collapsible items.
 
 ## Features
 
-::doc-highlights
+::docs-highlights
 ---
 features:
   - Full keyboard navigation.
@@ -48,4 +48,4 @@ import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AA
 
 Contains all the parts of an Accordion
 
-:doc-component-props
+:docs-component-meta{name="a-accordion-root"}
