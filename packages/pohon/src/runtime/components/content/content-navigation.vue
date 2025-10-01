@@ -158,6 +158,13 @@ const disabled = computed(() =>
   props.disabled || (props.type === 'multiple' && props.collapsible === false),
 );
 
+function isRouteInTree(link: PContentNavigationLink, routePath: string): boolean {
+  if (link.children?.length) {
+    return link.children.some((child) => isRouteInTree(child, routePath));
+  }
+  return routePath === link.path;
+}
+
 const defaultValue = computed(() => {
   // When `defaultOpen` is `false`, return `undefined` to close all items
   if (props.defaultOpen === false) {
@@ -172,10 +179,14 @@ const defaultValue = computed(() => {
         .filter(Boolean) as Array<string>;
   }
   // When `defaultOpen` is `true`, open items based on the current route
-  const index = props.navigation?.findIndex((link) => route.path.startsWith(link.path));
-  const tyindex = index === -1 ? 0 : index;
+  const indices = props.navigation?.reduce((acc, link, index) => {
+    if (isRouteInTree(link, route.path)) {
+      acc.push(String(index));
+    }
+    return acc;
+  }, [] as Array<string>) || [];
 
-  return props.type === 'multiple' ? [String(tyindex)] : String(tyindex);
+  return props.type === 'multiple' ? indices : indices[0];
 });
 </script>
 

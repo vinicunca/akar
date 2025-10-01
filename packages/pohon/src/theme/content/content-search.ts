@@ -3,4 +3,11 @@ export default {
     dialog: '',
     input: '',
   },
+  variants: {
+    fullscreen: {
+      false: {
+        dialog: '',
+      },
+    },
+  },
 };

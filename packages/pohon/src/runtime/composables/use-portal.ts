@@ -1,23 +1,21 @@
 import type { InjectionKey, Ref } from 'vue';
 import { isBoolean } from '@vinicunca/perkakas';
-import { computed, inject, provide } from 'vue';
+import { computed, inject } from 'vue';
 
-export const portalTargetInjectionKey: InjectionKey<Ref<string | HTMLElement>> = Symbol('pohon.portal-target');
+export const portalTargetInjectionKey: InjectionKey<Ref<boolean | string | HTMLElement>> = Symbol('pohon.portal-target');
 
 export function usePortal(portal: Ref<string | HTMLElement | boolean | undefined>) {
-  const portalTarget = inject(portalTargetInjectionKey, undefined);
+  const globalPortal = inject(portalTargetInjectionKey, undefined);
 
-  const to = computed(() => {
-    if (isBoolean(portal.value) || portal.value === undefined) {
-      return portalTarget?.value ?? 'body';
-    }
+  const value = computed(() =>
+    portal.value === true
+      ? globalPortal?.value
+      : portal.value,
+  );
 
-    return portal.value;
-  });
+  const disabled = computed(() => typeof value.value === 'boolean' ? !value.value : false);
 
-  const disabled = computed(() => isBoolean(portal.value) ? !portal.value : false);
-
-  provide(portalTargetInjectionKey, computed(() => to.value));
+  const to = computed(() => isBoolean(value.value) ? 'body' : value.value);
 
   return computed(() => ({
     to: to.value,

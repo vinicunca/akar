@@ -7,7 +7,7 @@ export interface PAppProps<T extends PMessages = PMessages> extends Omit<AConfig
   tooltip?: ATooltipProviderProps;
   toaster?: PToasterProps | null;
   locale?: PLocale<T>;
-  portal?: string | HTMLElement;
+  portal?: boolean | string | HTMLElement;
 }
 
 export interface PAppSlots {

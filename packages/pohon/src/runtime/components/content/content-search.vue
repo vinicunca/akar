@@ -46,7 +46,7 @@ export interface PContentSearchItem extends Omit<PLinkProps, 'custom'>, PCommand
   icon?: IconProps['name'];
 }
 
-export interface PContentSearchProps<T extends PContentSearchLink = PContentSearchLink> extends /* @vue-ignore */ Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface PContentSearchProps<T extends PContentSearchLink = PContentSearchLink> extends Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.pohon.icons.search
@@ -135,6 +135,7 @@ const props = withDefaults(
     shortcut: 'meta_k',
     colorMode: true,
     close: true,
+    fullscreen: false,
   },
 );
 const slots = defineSlots<PContentSearchSlots>();
@@ -159,6 +160,9 @@ const commandPaletteProps = useForwardProps(
     'closeIcon',
   ),
 );
+const dialogProps = useForwardProps(
+  reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'),
+);
 
 const getProxySlots = () => omit(slots, ['content']);
 
@@ -176,7 +180,9 @@ const pohon = computed(() =>
   uv({
     extend: uv(theme),
     ...(appConfig.pohon?.contentSearch || {}),
-  })(),
+  })({
+    fullscreen: props.fullscreen,
+  }),
 );
 
 function mapLinksItems(links: Array<T>): Array<PContentSearchItem> {
@@ -312,8 +318,9 @@ defineExpose({
 <template>
   <PDialog
     v-model:open="open"
-    :title="t('contentSearch.title')"
-    :description="t('contentSearch.description')"
+    :title="title || t('contentSearch.title')"
+    :description="description || t('contentSearch.description')"
+    v-bind="dialogProps"
     :class="pohon.dialog({ class: [props.pohon?.dialog, props.class] })"
   >
     <template #content>

@@ -78,16 +78,7 @@ provide('navigation', rootNavigation);
         <!-- <Footer /> -->
 
         <ClientOnly>
-          <!-- <LazyUContentSearch
-            :links="links"
-            :files="files"
-            :groups="[{
-              id: 'framework',
-              label: 'Framework',
-              items: frameworks,
-            }]"
-            :navigation="navigationByFramework"
-            :fuse="{ resultLimit: 120 }"
+          <!-- <Search
           /> -->
         </ClientOnly>
       </template>
