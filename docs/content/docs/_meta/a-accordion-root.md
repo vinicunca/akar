@@ -1,6 +1,7 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-accordion-root' :data='[
   {
     "name": "as",
     "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
@@ -67,19 +68,23 @@
     "default": "true"
   }
 ]'} 
-<!-- 
-:docs-emits-table{:data='[
+
+#### Events
+
+:docs-emits-table{name='events-accordion-root' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the expanded state of an item changes</p>\\n",
+    "description": "Event handler called when the expanded state of an item changes",
     "type": "[value: string | string[]]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-accordion-root' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current active value</p>\\n",
+    "description": "Current active value",
     "type": "AcceptableValue | AcceptableValue[] | undefined"
   }
-]'}  -->
+]'} 

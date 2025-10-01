@@ -1,45 +1,50 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-popover-root' :data='[
   {
     "name": "defaultOpen",
-    "description": "<p>The open state of the popover when it is initially rendered. Use when you do not need to control its open state.</p>\n",
+    "description": "The open state of the popover when it is initially rendered. Use when you do not need to control its open state.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "modal",
-    "description": "<p>The modality of the popover. When set to true, interaction with outside elements will be disabled and only popover content will be visible to screen readers.</p>\n",
+    "description": "The modality of the popover. When set to true, interaction with outside elements will be disabled and only popover content will be visible to screen readers.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "open",
-    "description": "<p>The controlled open state of the popover.</p>\n",
+    "description": "The controlled open state of the popover.",
     "type": "boolean",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-popover-root' :data='[
   {
     "name": "update:open",
-    "description": "<p>Event handler called when the open state of the popover changes.</p>\n",
+    "description": "Event handler called when the open state of the popover changes.",
     "type": "[value: boolean]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-popover-root' :data='[
   {
     "name": "open",
-    "description": "<p>Current open state</p>\n",
+    "description": "Current open state",
     "type": "boolean"
   },
   {
     "name": "close",
-    "description": "<p>Close the popover</p>\n",
+    "description": "Close the popover",
     "type": "(): void"
   }
 ]'} 

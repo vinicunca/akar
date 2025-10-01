@@ -1,99 +1,104 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-navigation-menu-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"nav\""
+    "default": "\'nav\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "defaultValue",
-    "description": "<p>The value of the menu item that should be active when initially rendered.</p>\n<p>Use when you do not need to control the value state.</p>\n",
+    "description": "The value of the menu item that should be active when initially rendered.\\n\\nUse when you do not need to control the value state.",
     "type": "string",
     "required": false
   },
   {
     "name": "delayDuration",
-    "description": "<p>The duration from when the pointer enters the trigger until the tooltip gets opened.</p>\n",
+    "description": "The duration from when the pointer enters the trigger until the tooltip gets opened.",
     "type": "number",
     "required": false,
     "default": "200"
   },
   {
     "name": "dir",
-    "description": "<p>The reading direction of the combobox when applicable.</p>\n<p>If omitted, inherits globally from <code>ConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the combobox when applicable.\\n\\n If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "disableClickTrigger",
-    "description": "<p>If <code>true</code>, menu cannot be open by click on trigger</p>\n",
+    "description": "If `true`, menu cannot be open by click on trigger",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "disableHoverTrigger",
-    "description": "<p>If <code>true</code>, menu cannot be open by hover on trigger</p>\n",
+    "description": "If `true`, menu cannot be open by hover on trigger",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "disablePointerLeaveClose",
-    "description": "<p>If <code>true</code>, menu will not close during pointer leave event</p>\n",
+    "description": "If `true`, menu will not close during pointer leave event",
     "type": "boolean",
     "required": false
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled value of the menu item to activate. Can be used as <code>v-model</code>.</p>\n",
+    "description": "The controlled value of the menu item to activate. Can be used as `v-model`.",
     "type": "string",
     "required": false
   },
   {
     "name": "orientation",
-    "description": "<p>The orientation of the menu.</p>\n",
-    "type": "\"horizontal\" | \"vertical\"",
+    "description": "The orientation of the menu.",
+    "type": "\'horizontal\' | \'vertical\'",
     "required": false,
-    "default": "\"horizontal\""
+    "default": "\'horizontal\'"
   },
   {
     "name": "skipDelayDuration",
-    "description": "<p>How much time a user has to enter another trigger without incurring a delay again.</p>\n",
+    "description": "How much time a user has to enter another trigger without incurring a delay again.",
     "type": "number",
     "required": false,
     "default": "300"
   },
   {
     "name": "unmountOnHide",
-    "description": "<p>When <code>true</code>, the element will be unmounted on closed state.</p>\n",
+    "description": "When `true`, the element will be unmounted on closed state.",
     "type": "boolean",
     "required": false,
     "default": "true"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-navigation-menu-root' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the value changes.</p>\n",
+    "description": "Event handler called when the value changes.",
     "type": "[value: string]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-navigation-menu-root' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current input values</p>\n",
+    "description": "Current input values",
     "type": "string"
   }
 ]'} 

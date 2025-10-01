@@ -1,72 +1,79 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-progress-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "getValueLabel",
-    "description": "<p>A function to get the accessible label text in a human-readable format.</p>\n<p>If not provided, the value label will be read as the numeric value as a percentage of the max value.</p>\n",
+    "description": "A function to get the accessible label text in a human-readable format.\\n\\n If not provided, the value label will be read as the numeric value as a percentage of the max value.",
     "type": "((value: number | null, max: number) => string)",
     "required": false,
     "default": "isNumber(value) ? `${Math.round((value / max) * DEFAULT_MAX)}%` : undefined"
   },
   {
     "name": "getValueText",
-    "description": "<p>A function to get the accessible value text representing the current value in a human-readable format.</p>\n",
+    "description": "A function to get the accessible value text representing the current value in a human-readable format.",
     "type": "((value: number | null, max: number) => string)",
     "required": false
   },
   {
     "name": "max",
-    "description": "<p>The maximum progress value.</p>\n",
+    "description": "The maximum progress value.",
     "type": "number",
     "required": false,
     "default": "DEFAULT_MAX"
   },
   {
     "name": "modelValue",
-    "description": "<p>The progress value. Can be bind as <code>v-model</code>.</p>\n",
+    "description": "The progress value. Can be bind as `v-model`.",
     "type": "number | null",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-progress-root' :data='[
   {
     "name": "update:max",
-    "description": "<p>Event handler called when the max value changes</p>\n",
+    "description": "Event handler called when the max value changes",
     "type": "[value: number]"
   },
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the progress value changes</p>\n",
+    "description": "Event handler called when the progress value changes",
     "type": "[value: string[]]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-progress-root' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current input values</p>\n",
+    "description": "Current input values",
     "type": "number | null | undefined"
   }
 ]'} 
 
-:docs-exposed-table{:data='[
+#### Exposed
+
+:docs-exposed-table{name='exposed-progress-root' :data='[
   {
     "name": "getValueLabel",
-    "description": "<p>A function to get the accessible label text in a human-readable format.</p>\n<p>If not provided, the value label will be read as the numeric value as a percentage of the max value.</p>\n",
+    "description": "A function to get the accessible label text in a human-readable format.\\n\\n If not provided, the value label will be read as the numeric value as a percentage of the max value.",
     "type": "(value: number | null | undefined, max: number) => string | undefined"
   }
 ]'} 

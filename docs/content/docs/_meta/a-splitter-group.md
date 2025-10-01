@@ -1,66 +1,71 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-splitter-group' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "autoSaveId",
-    "description": "<p>Unique id used to auto-save group arrangement via <code>localStorage</code>.</p>\n",
+    "description": "Unique id used to auto-save group arrangement via `localStorage`.",
     "type": "string | null",
     "required": false,
     "default": "null"
   },
   {
     "name": "direction",
-    "description": "<p>The group orientation of splitter.</p>\n",
-    "type": "\"horizontal\" | \"vertical\"",
+    "description": "The group orientation of splitter.",
+    "type": "\'horizontal\' | \'vertical\'",
     "required": true
   },
   {
     "name": "id",
-    "description": "<p>Group id; falls back to <code>useId</code> when not provided.</p>\n",
+    "description": "Group id; falls back to `useId` when not provided.",
     "type": "string | null",
     "required": false
   },
   {
     "name": "keyboardResizeBy",
-    "description": "<p>Step size when arrow key was pressed.</p>\n",
+    "description": "Step size when arrow key was pressed.",
     "type": "number | null",
     "required": false,
     "default": "10"
   },
   {
     "name": "storage",
-    "description": "<p>Custom storage API; defaults to localStorage</p>\n",
+    "description": "Custom storage API; defaults to localStorage",
     "type": "PanelGroupStorage",
     "required": false,
     "default": "defaultStorage"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-splitter-group' :data='[
   {
     "name": "layout",
-    "description": "<p>Event handler called when group layout changes</p>\n",
+    "description": "Event handler called when group layout changes",
     "type": "[val: number[]]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-splitter-group' :data='[
   {
     "name": "layout",
-    "description": "<p>Current size of layout</p>\n",
+    "description": "Current size of layout",
     "type": "number[]"
   }
 ]'} 

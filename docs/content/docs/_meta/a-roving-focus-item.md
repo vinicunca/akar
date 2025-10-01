@@ -1,34 +1,35 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-roving-focus-item' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"span\""
+    "default": "\'span\'"
   },
   {
     "name": "active",
-    "description": "<p>When <code>true</code>, item will be initially focused.</p>\n",
+    "description": "When `true`, item will be initially focused.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "allowShiftKey",
-    "description": "<p>When <code>true</code>, shift + arrow key will allow focusing on next/previous item.</p>\n",
+    "description": "When `true`, shift + arrow key will allow focusing on next/previous item.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "focusable",
-    "description": "<p>When <code>false</code>, item will be not be focusable.</p>\n",
+    "description": "When `false`, item will be not be focusable.",
     "type": "boolean",
     "required": false,
     "default": "true"

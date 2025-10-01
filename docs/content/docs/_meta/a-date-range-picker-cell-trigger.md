@@ -1,16 +1,17 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-date-range-picker-cell-trigger' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
@@ -28,65 +29,67 @@
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-date-range-picker-cell-trigger' :data='[
   {
     "name": "dayValue",
-    "description": "<p>Current day</p>\n",
+    "description": "Current day",
     "type": "string"
   },
   {
     "name": "disabled",
-    "description": "<p>Current disable state</p>\n",
+    "description": "Current disable state",
     "type": "boolean"
   },
   {
     "name": "selected",
-    "description": "<p>Current selected state</p>\n",
+    "description": "Current selected state",
     "type": "boolean"
   },
   {
     "name": "today",
-    "description": "<p>Current today state</p>\n",
+    "description": "Current today state",
     "type": "boolean"
   },
   {
     "name": "outsideView",
-    "description": "<p>Current outside view state</p>\n",
+    "description": "Current outside view state",
     "type": "boolean"
   },
   {
     "name": "outsideVisibleView",
-    "description": "<p>Current outside visible view state</p>\n",
+    "description": "Current outside visible view state",
     "type": "boolean"
   },
   {
     "name": "unavailable",
-    "description": "<p>Current unavailable state</p>\n",
+    "description": "Current unavailable state",
     "type": "boolean"
   },
   {
     "name": "highlighted",
-    "description": "<p>Current highlighted state</p>\n",
+    "description": "Current highlighted state",
     "type": "boolean"
   },
   {
     "name": "highlightedStart",
-    "description": "<p>Current highlighted start state</p>\n",
+    "description": "Current highlighted start state",
     "type": "boolean"
   },
   {
     "name": "highlightedEnd",
-    "description": "<p>Current highlighted end state</p>\n",
+    "description": "Current highlighted end state",
     "type": "boolean"
   },
   {
     "name": "selectionStart",
-    "description": "<p>Current selection start state</p>\n",
+    "description": "Current selection start state",
     "type": "boolean"
   },
   {
     "name": "selectionEnd",
-    "description": "<p>Current selection end state</p>\n",
+    "description": "Current selection end state",
     "type": "boolean"
   }
 ]'} 

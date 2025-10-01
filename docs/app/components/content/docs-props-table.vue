@@ -1,38 +1,34 @@
 <script lang="ts" setup>
-import { useRoute } from '#app';
-import { ContentRenderer, DocsHighlightInlineType } from '#components';
-import { toKebabCase } from '@vinicunca/perkakas';
+import { DocsHighlightInlineType } from '#components';
 
 type PropDef = {
   name?: string;
   required?: boolean;
   default?: string;
   type: string;
-  typeSimple: string;
   description?: string;
 };
 
 interface PropsTableProps {
   data: Array<PropDef>;
+  name: string;
 }
 
 const props = defineProps<PropsTableProps>();
-
-const route = useRoute();
 </script>
 
 <template>
   <ProseTable>
     <ProseThead>
       <ProseTr>
-        <ProseTh class="w-1/6">
-          <span>Prop</span>
+        <ProseTh>
+          Prop
         </ProseTh>
-        <ProseTh class="w-1/6">
-          <span>Default</span>
+        <ProseTh>
+          Default
         </ProseTh>
-        <ProseTh class="w-2/3">
-          <span>Type</span>
+        <ProseTh>
+          Type
         </ProseTh>
       </ProseTr>
     </ProseThead>
@@ -70,7 +66,7 @@ const route = useRoute();
             v-if="prop.description"
             :value="prop.description"
             class="color-text-toned mt-1"
-            :cache-key="`${toKebabCase(route.path)}-${prop.name}-description`"
+            :cache-key="`${props.name}-${prop.name}-description`"
           />
 
           <!-- <ComponentPropsLinks v-if="prop.tags?.length" :prop="prop" />

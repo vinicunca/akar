@@ -1,125 +1,130 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-slider-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"span\""
+    "default": "\'span\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "defaultValue",
-    "description": "<p>The value of the slider when initially rendered. Use when you do not need to control the state of the slider.</p>\n",
+    "description": "The value of the slider when initially rendered. Use when you do not need to control the state of the slider.",
     "type": "number[]",
     "required": false,
     "default": "[0]"
   },
   {
     "name": "dir",
-    "description": "<p>The reading direction of the combobox when applicable. &lt;br&gt; If omitted, inherits globally from <code>AConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with the slider.</p>\n",
+    "description": "When `true`, prevents the user from interacting with the slider.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "inverted",
-    "description": "<p>Whether the slider is visually inverted.</p>\n",
+    "description": "Whether the slider is visually inverted.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "max",
-    "description": "<p>The maximum value for the range.</p>\n",
+    "description": "The maximum value for the range.",
     "type": "number",
     "required": false,
     "default": "100"
   },
   {
     "name": "min",
-    "description": "<p>The minimum value for the range.</p>\n",
+    "description": "The minimum value for the range.",
     "type": "number",
     "required": false,
     "default": "0"
   },
   {
     "name": "minStepsBetweenThumbs",
-    "description": "<p>The minimum permitted steps between multiple thumbs.</p>\n",
+    "description": "The minimum permitted steps between multiple thumbs.",
     "type": "number",
     "required": false,
     "default": "0"
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled value of the slider. Can be bind as <code>v-model</code>.</p>\n",
+    "description": "The controlled value of the slider. Can be bind as `v-model`.",
     "type": "number[] | null",
     "required": false
   },
   {
     "name": "name",
-    "description": "<p>The name of the field. Submitted with its owning form as part of a name/value pair.</p>\n",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
     "type": "string",
     "required": false
   },
   {
     "name": "orientation",
-    "description": "<p>The orientation of the slider.</p>\n",
-    "type": "\"horizontal\" | \"vertical\"",
+    "description": "The orientation of the slider.",
+    "type": "\'horizontal\' | \'vertical\'",
     "required": false,
-    "default": "\"horizontal\""
+    "default": "\'horizontal\'"
   },
   {
     "name": "required",
-    "description": "<p>When <code>true</code>, indicates that the user must set the value before the owning form can be submitted.</p>\n",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "step",
-    "description": "<p>The stepping interval.</p>\n",
+    "description": "The stepping interval.",
     "type": "number",
     "required": false,
     "default": "1"
   },
   {
     "name": "thumbAlignment",
-    "description": "<p>The alignment of the slider thumb.</p>\n<ul>\n<li><code>contain</code>: thumbs will be contained within the bounds of the track.</li>\n<li><code>overflow</code>: thumbs will not be bound by the track. No extra offset will be added.</li>\n</ul>\n",
-    "type": "\"contain\" | \"overflow\"",
+    "description": "The alignment of the slider thumb.\\n- `contain`: thumbs will be contained within the bounds of the track.\\n- `overflow`: thumbs will not be bound by the track. No extra offset will be added.",
+    "type": "\'contain\' | \'overflow\'",
     "required": false,
-    "default": "\"contain\""
+    "default": "\'contain\'"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-slider-root' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the slider value changes</p>\n",
+    "description": "Event handler called when the slider value changes",
     "type": "[payload: number[]]"
   },
   {
     "name": "valueCommit",
-    "description": "<p>Event handler called when the value changes at the end of an interaction.</p>\n<p>Useful when you only need to capture a final value e.g. to update a backend service.</p>\n",
+    "description": "Event handler called when the value changes at the end of an interaction.\\n   \\n    Useful when you only need to capture a final value e.g. to update a backend service.",
     "type": "[payload: number[]]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-slider-root' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current slider values</p>\n",
+    "description": "Current slider values",
     "type": "number[] | null"
   }
 ]'} 

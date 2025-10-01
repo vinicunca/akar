@@ -1,72 +1,77 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-tabs-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "activationMode",
-    "description": "<p>Whether a tab is activated automatically (on focus) or manually (on click).</p>\n",
-    "type": "\"automatic\" | \"manual\"",
+    "description": "Whether a tab is activated automatically (on focus) or manually (on click).",
+    "type": "\'automatic\' | \'manual\'",
     "required": false,
-    "default": "\"automatic\""
+    "default": "\'automatic\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "defaultValue",
-    "description": "<p>The value of the tab that should be active when initially rendered. Use when you do not need to control the state of the tabs</p>\n",
+    "description": "The value of the tab that should be active when initially rendered. Use when you do not need to control the state of the tabs",
     "type": "string | number",
     "required": false
   },
   {
     "name": "dir",
-    "description": "<p>The reading direction of the combobox when applicable. &lt;br&gt; If omitted, inherits globally from <code>AConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled value of the tab to activate. Can be bind as <code>v-model</code>.</p>\n",
+    "description": "The controlled value of the tab to activate. Can be bind as `v-model`.",
     "type": "string | number",
     "required": false
   },
   {
     "name": "orientation",
-    "description": "<p>The orientation the tabs are laid out.\nMainly so arrow navigation is done accordingly (left &amp; right vs. up &amp; down)</p>\n",
-    "type": "\"horizontal\" | \"vertical\"",
+    "description": "The orientation the tabs are laid out.\\nMainly so arrow navigation is done accordingly (left & right vs. up & down)",
+    "type": "\'horizontal\' | \'vertical\'",
     "required": false,
-    "default": "\"horizontal\""
+    "default": "\'horizontal\'"
   },
   {
     "name": "unmountOnHide",
-    "description": "<p>When <code>true</code>, the element will be unmounted on closed state.</p>\n",
+    "description": "When `true`, the element will be unmounted on closed state.",
     "type": "boolean",
     "required": false,
     "default": "true"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-tabs-root' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the value changes</p>\n",
+    "description": "Event handler called when the value changes",
     "type": "[payload: StringOrNumber]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-tabs-root' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current input values</p>\n",
+    "description": "Current input values",
     "type": "string | number"
   }
 ]'} 

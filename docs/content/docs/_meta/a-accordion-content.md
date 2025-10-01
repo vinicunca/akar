@@ -1,22 +1,23 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-accordion-content' :data='[
   {
     "name": "as",
     "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "'div'"
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "forceMount",
-    "description": "Used to force mounting when more control is needed. Useful when\ncontrolling animation with Vue animation libraries.",
+    "description": "Used to force mounting when more control is needed. Useful when\\ncontrolling animation with Vue animation libraries.",
     "type": "boolean",
     "required": false
   }

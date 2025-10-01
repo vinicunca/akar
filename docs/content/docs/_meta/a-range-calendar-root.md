@@ -1,270 +1,277 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-range-calendar-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "allowNonContiguousRanges",
-    "description": "<p>When combined with <code>isDateUnavailable</code>, determines whether non-contiguous ranges, i.e. ranges containing unavailable dates, may be selected.</p>\n",
+    "description": "When combined with `isDateUnavailable`, determines whether non-contiguous ranges, i.e. ranges containing unavailable dates, may be selected.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "calendarLabel",
-    "description": "<p>The accessible label for the calendar</p>\n",
+    "description": "The accessible label for the calendar",
     "type": "string",
     "required": false
   },
   {
     "name": "defaultPlaceholder",
-    "description": "<p>The default placeholder date</p>\n",
+    "description": "The default placeholder date",
     "type": "DateValue",
     "required": false
   },
   {
     "name": "defaultValue",
-    "description": "<p>The default value for the calendar</p>\n",
+    "description": "The default value for the calendar",
     "type": "DateRange",
     "required": false,
     "default": "{ start: undefined, end: undefined }"
   },
   {
     "name": "dir",
-    "description": "<p>The reading direction of the calendar when applicable. &lt;br&gt; If omitted, inherits globally from <code>AConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the calendar when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>Whether or not the calendar is disabled</p>\n",
+    "description": "Whether or not the calendar is disabled",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "disableDaysOutsideCurrentView",
-    "description": "<p>Whether or not to disable days outside the current view.</p>\n",
+    "description": "Whether or not to disable days outside the current view.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "fixedDate",
-    "description": "<p>Which part of the range should be fixed</p>\n",
-    "type": "\"start\" | \"end\"",
+    "description": "Which part of the range should be fixed",
+    "type": "\'start\' | \'end\'",
     "required": false
   },
   {
     "name": "fixedWeeks",
-    "description": "<p>Whether or not to always display 6 weeks in the calendar</p>\n",
+    "description": "Whether or not to always display 6 weeks in the calendar",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "initialFocus",
-    "description": "<p>If true, the calendar will focus the selected day, today, or the first day of the month depending on what is visible when the calendar is mounted</p>\n",
+    "description": "If true, the calendar will focus the selected day, today, or the first day of the month depending on what is visible when the calendar is mounted",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "isDateDisabled",
-    "description": "<p>A function that returns whether or not a date is disabled</p>\n",
+    "description": "A function that returns whether or not a date is disabled",
     "type": "DateMatcher",
     "required": false
   },
   {
     "name": "isDateHighlightable",
-    "description": "<p>A function that returns whether or not a date is hightable</p>\n",
+    "description": "A function that returns whether or not a date is hightable",
     "type": "DateMatcher",
     "required": false
   },
   {
     "name": "isDateUnavailable",
-    "description": "<p>A function that returns whether or not a date is unavailable</p>\n",
+    "description": "A function that returns whether or not a date is unavailable",
     "type": "DateMatcher",
     "required": false
   },
   {
     "name": "locale",
-    "description": "<p>The locale to use for formatting dates</p>\n",
+    "description": "The locale to use for formatting dates",
     "type": "string",
     "required": false
   },
   {
     "name": "maximumDays",
-    "description": "<p>The maximum number of days that can be selected in a range</p>\n",
+    "description": "The maximum number of days that can be selected in a range",
     "type": "number",
     "required": false
   },
   {
     "name": "maxValue",
-    "description": "<p>The maximum date that can be selected</p>\n",
+    "description": "The maximum date that can be selected",
     "type": "DateValue",
     "required": false
   },
   {
     "name": "minValue",
-    "description": "<p>The minimum date that can be selected</p>\n",
+    "description": "The minimum date that can be selected",
     "type": "DateValue",
     "required": false
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled checked state of the calendar. Can be bound as <code>v-model</code>.</p>\n",
+    "description": "The controlled checked state of the calendar. Can be bound as `v-model`.",
     "type": "DateRange | null",
     "required": false
   },
   {
     "name": "nextPage",
-    "description": "<p>A function that returns the next page of the calendar. It receives the current placeholder as an argument inside the component.</p>\n",
+    "description": "A function that returns the next page of the calendar. It receives the current placeholder as an argument inside the component.",
     "type": "((placeholder: DateValue) => DateValue)",
     "required": false
   },
   {
     "name": "numberOfMonths",
-    "description": "<p>The number of months to display at once</p>\n",
+    "description": "The number of months to display at once",
     "type": "number",
     "required": false,
     "default": "1"
   },
   {
     "name": "pagedNavigation",
-    "description": "<p>This property causes the previous and next buttons to navigate by the number of months displayed at once, rather than one month</p>\n",
+    "description": "This property causes the previous and next buttons to navigate by the number of months displayed at once, rather than one month",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "placeholder",
-    "description": "<p>The placeholder date, which is used to determine what month to display when no date is selected. This updates as the user navigates the calendar and can be used to programmatically control the calendar view</p>\n",
+    "description": "The placeholder date, which is used to determine what month to display when no date is selected. This updates as the user navigates the calendar and can be used to programmatically control the calendar view",
     "type": "DateValue",
     "required": false
   },
   {
     "name": "preventDeselect",
-    "description": "<p>Whether or not to prevent the user from deselecting a date without selecting another date first</p>\n",
+    "description": "Whether or not to prevent the user from deselecting a date without selecting another date first",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "prevPage",
-    "description": "<p>A function that returns the previous page of the calendar. It receives the current placeholder as an argument inside the component.</p>\n",
+    "description": "A function that returns the previous page of the calendar. It receives the current placeholder as an argument inside the component.",
     "type": "((placeholder: DateValue) => DateValue)",
     "required": false
   },
   {
     "name": "readonly",
-    "description": "<p>Whether or not the calendar is readonly</p>\n",
+    "description": "Whether or not the calendar is readonly",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "weekdayFormat",
-    "description": "<p>The format to use for the weekday strings provided via the weekdays slot prop</p>\n",
-    "type": "\"narrow\" | \"long\" | \"short\"",
+    "description": "The format to use for the weekday strings provided via the weekdays slot prop",
+    "type": "\'narrow\' | \'long\' | \'short\'",
     "required": false,
-    "default": "\"narrow\""
+    "default": "\'narrow\'"
   },
   {
     "name": "weekStartsOn",
-    "description": "<p>The day of the week to start the calendar on</p>\n",
+    "description": "The day of the week to start the calendar on",
     "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
     "required": false,
     "default": "0"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-range-calendar-root' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called whenever the model value changes</p>\n",
+    "description": "Event handler called whenever the model value changes",
     "type": "[date: DateRange]"
   },
   {
     "name": "update:placeholder",
-    "description": "<p>Event handler called whenever the placeholder value changes</p>\n",
+    "description": "Event handler called whenever the placeholder value changes",
     "type": "[date: DateValue]"
   },
   {
     "name": "update:startValue",
-    "description": "<p>Event handler called whenever the start value changes</p>\n",
+    "description": "Event handler called whenever the start value changes",
     "type": "[date: DateValue]"
   },
   {
     "name": "update:validModelValue",
-    "description": "<p>Event handler called whenever there is a new validModel</p>\n",
+    "description": "Event handler called whenever there is a new validModel",
     "type": "[date: DateRange]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-range-calendar-root' :data='[
   {
     "name": "date",
-    "description": "<p>The current date of the placeholder</p>\n",
+    "description": "The current date of the placeholder",
     "type": "DateValue"
   },
   {
     "name": "grid",
-    "description": "<p>The grid of dates</p>\n",
+    "description": "The grid of dates",
     "type": "DateGrid<DateValue>"
   },
   {
     "name": "weekDays",
-    "description": "<p>The days of the week</p>\n",
+    "description": "The days of the week",
     "type": "string[]"
   },
   {
     "name": "weekStartsOn",
-    "description": "<p>The start of the week</p>\n",
+    "description": "The start of the week",
     "type": "0 | 1 | 2 | 3 | 4 | 5 | 6"
   },
   {
     "name": "locale",
-    "description": "<p>The calendar locale</p>\n",
+    "description": "The calendar locale",
     "type": "string"
   },
   {
     "name": "fixedWeeks",
-    "description": "<p>Whether or not to always display 6 weeks in the calendar</p>\n",
+    "description": "Whether or not to always display 6 weeks in the calendar",
     "type": "boolean"
   },
   {
     "name": "modelValue",
-    "description": "<p>The current date range</p>\n",
+    "description": "The current date range",
     "type": "DateRange"
   }
 ]'} 
 
-:docs-exposed-table{:data='[
+#### Exposed
+
+:docs-exposed-table{name='exposed-range-calendar-root' :data='[
   {
     "name": "isDateDisabled",
-    "description": "<p>A function that returns whether or not a date is disabled</p>\n",
+    "description": "A function that returns whether or not a date is disabled",
     "type": "DateMatcher"
   },
   {
     "name": "isDateUnavailable",
-    "description": "<p>A function that returns whether or not a date is unavailable</p>\n",
+    "description": "A function that returns whether or not a date is unavailable",
     "type": "DateMatcher"
   },
   {
     "name": "isDateHighlightable",
-    "description": "<p>A function that returns whether or not a date is hightable</p>\n",
+    "description": "A function that returns whether or not a date is hightable",
     "type": "DateMatcher"
   }
 ]'} 

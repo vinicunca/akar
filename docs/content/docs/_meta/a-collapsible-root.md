@@ -1,59 +1,64 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-collapsible-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "defaultOpen",
-    "description": "<p>The open state of the collapsible when it is initially rendered. &lt;br&gt; Use when you do not need to control its open state.</p>\n",
+    "description": "The open state of the collapsible when it is initially rendered. <br> Use when you do not need to control its open state.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with the collapsible.</p>\n",
+    "description": "When `true`, prevents the user from interacting with the collapsible.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "open",
-    "description": "<p>The controlled open state of the collapsible. Can be binded with <code>v-model</code>.</p>\n",
+    "description": "The controlled open state of the collapsible. Can be binded with `v-model`.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "unmountOnHide",
-    "description": "<p>When <code>true</code>, the element will be unmounted on closed state.</p>\n",
+    "description": "When `true`, the element will be unmounted on closed state.",
     "type": "boolean",
     "required": false,
     "default": "true"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-collapsible-root' :data='[
   {
     "name": "update:open",
-    "description": "<p>Event handler called when the open state of the collapsible changes.</p>\n",
+    "description": "Event handler called when the open state of the collapsible changes.",
     "type": "[value: boolean]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-collapsible-root' :data='[
   {
     "name": "open",
-    "description": "<p>Current open state</p>\n",
+    "description": "Current open state",
     "type": "boolean"
   }
 ]'} 

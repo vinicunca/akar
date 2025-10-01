@@ -1,29 +1,30 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-stepper-separator' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "decorative",
-    "description": "<p>Whether or not the component is purely decorative. &lt;br&gt;When <code>true</code>, accessibility-related attributes\nare updated so that that the rendered element is removed from the accessibility tree.</p>\n",
+    "description": "Whether or not the component is purely decorative. <br>When `true`, accessibility-related attributes\\nare updated so that that the rendered element is removed from the accessibility tree.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "orientation",
-    "description": "<p>Orientation of the component.</p>\n<p>Either <code>vertical</code> or <code>horizontal</code>. Defaults to <code>horizontal</code>.</p>\n",
-    "type": "\"horizontal\" | \"vertical\"",
+    "description": "Orientation of the component.\\n\\nEither `vertical` or `horizontal`. Defaults to `horizontal`.",
+    "type": "\'horizontal\' | \'vertical\'",
     "required": false
   }
 ]'} 

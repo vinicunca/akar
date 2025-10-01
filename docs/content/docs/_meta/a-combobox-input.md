@@ -1,49 +1,52 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-combobox-input' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"input\""
+    "default": "\'input\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "autoFocus",
-    "description": "<p>Focus on element when mounted.</p>\n",
+    "description": "Focus on element when mounted.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with item</p>\n",
+    "description": "When `true`, prevents the user from interacting with item",
     "type": "boolean",
     "required": false
   },
   {
     "name": "displayValue",
-    "description": "<p>The display value of input for selected item. Does not work with <code>multiple</code>.</p>\n",
+    "description": "The display value of input for selected item. Does not work with `multiple`.",
     "type": "((val: any) => string)",
     "required": false
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled value of the filter. Can be binded with with v-model.</p>\n",
+    "description": "The controlled value of the filter. Can be binded with with v-model.",
     "type": "string",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-combobox-input' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the value changes.</p>\n",
+    "description": "Event handler called when the value changes.",
     "type": "[string]"
   }
 ]'} 

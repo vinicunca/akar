@@ -1,45 +1,48 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-config-provider' :data='[
   {
     "name": "dir",
-    "description": "<p>The global reading direction of your application. This will be inherited by all primitives.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The global reading direction of your application. This will be inherited by all primitives.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false,
-    "default": "\"ltr\""
+    "default": "\'ltr\'"
   },
   {
     "name": "locale",
-    "description": "<p>The global locale of your application. This will be inherited by all primitives.</p>\n",
+    "description": "The global locale of your application. This will be inherited by all primitives.",
     "type": "string",
     "required": false,
-    "default": "\"en\""
+    "default": "\'en\'"
   },
   {
     "name": "nonce",
-    "description": "<p>The global <code>nonce</code> value of your application. This will be inherited by the related primitives.</p>\n",
+    "description": "The global `nonce` value of your application. This will be inherited by the related primitives.",
     "type": "string",
     "required": false
   },
   {
     "name": "scrollBody",
-    "description": "<p>The global scroll body behavior of your application. This will be inherited by the related primitives.</p>\n",
+    "description": "The global scroll body behavior of your application. This will be inherited by the related primitives.",
     "type": "boolean | ScrollBodyOption",
     "required": false,
     "default": "true"
   },
   {
     "name": "useId",
-    "description": "<p>The global <code>useId</code> injection as a workaround for preventing hydration issue.</p>\n",
+    "description": "The global `useId` injection as a workaround for preventing hydration issue.",
     "type": "(() => string)",
     "required": false
   }
 ]'} 
 
-:docs-exposed-table{:data='[
+#### Exposed
+
+:docs-exposed-table{name='exposed-config-provider' :data='[
   {
     "name": "useId",
-    "description": "<p>The global <code>useId</code> injection as a workaround for preventing hydration issue.</p>\n",
+    "description": "The global `useId` injection as a workaround for preventing hydration issue.",
     "type": "() => string"
   }
 ]'} 

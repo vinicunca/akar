@@ -1,96 +1,101 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-select-root' :data='[
   {
     "name": "autocomplete",
-    "description": "<p>Native html input <code>autocomplete</code> attribute.</p>\n",
+    "description": "Native html input `autocomplete` attribute.",
     "type": "string",
     "required": false
   },
   {
     "name": "by",
-    "description": "<p>Use this to compare objects by a particular field, or pass your own comparison function for complete control over how objects are compared.</p>\n",
+    "description": "Use this to compare objects by a particular field, or pass your own comparison function for complete control over how objects are compared.",
     "type": "string | ((a: AcceptableValue, b: AcceptableValue) => boolean)",
     "required": false
   },
   {
     "name": "defaultOpen",
-    "description": "<p>The open state of the select when it is initially rendered. Use when you do not need to control its open state.</p>\n",
+    "description": "The open state of the select when it is initially rendered. Use when you do not need to control its open state.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "defaultValue",
-    "description": "<p>The value of the select when initially rendered. Use when you do not need to control the state of the Select</p>\n",
+    "description": "The value of the select when initially rendered. Use when you do not need to control the state of the Select",
     "type": "AcceptableValue | AcceptableValue[]",
     "required": false
   },
   {
     "name": "dir",
-    "description": "<p>The reading direction of the combobox when applicable. &lt;br&gt; If omitted, inherits globally from <code>AConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with Select</p>\n",
+    "description": "When `true`, prevents the user from interacting with Select",
     "type": "boolean",
     "required": false
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled value of the Select. Can be bind as <code>v-model</code>.</p>\n",
+    "description": "The controlled value of the Select. Can be bind as `v-model`.",
     "type": "AcceptableValue | AcceptableValue[]",
     "required": false
   },
   {
     "name": "multiple",
-    "description": "<p>Whether multiple options can be selected or not.</p>\n",
+    "description": "Whether multiple options can be selected or not.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "name",
-    "description": "<p>The name of the field. Submitted with its owning form as part of a name/value pair.</p>\n",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
     "type": "string",
     "required": false
   },
   {
     "name": "open",
-    "description": "<p>The controlled open state of the Select. Can be bind as <code>v-model:open</code>.</p>\n",
+    "description": "The controlled open state of the Select. Can be bind as `v-model:open`.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "required",
-    "description": "<p>When <code>true</code>, indicates that the user must set the value before the owning form can be submitted.</p>\n",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
     "type": "boolean",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-select-root' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the value changes.</p>\n",
+    "description": "Event handler called when the value changes.",
     "type": "[value: AcceptableValue]"
   },
   {
     "name": "update:open",
-    "description": "<p>Event handler called when the open state of the context menu changes.</p>\n",
+    "description": "Event handler called when the open state of the context menu changes.",
     "type": "[value: boolean]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-select-root' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current input values</p>\n",
+    "description": "Current input values",
     "type": "AcceptableValue | AcceptableValue[] | undefined"
   },
   {
     "name": "open",
-    "description": "<p>Current open state</p>\n",
+    "description": "Current open state",
     "type": "boolean"
   }
 ]'} 

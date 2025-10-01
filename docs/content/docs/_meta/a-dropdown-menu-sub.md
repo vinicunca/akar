@@ -1,32 +1,37 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-dropdown-menu-sub' :data='[
   {
     "name": "defaultOpen",
-    "description": "<p>The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.</p>\n",
+    "description": "The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "open",
-    "description": "<p>The controlled open state of the menu. Can be used as <code>v-model:open</code>.</p>\n",
+    "description": "The controlled open state of the menu. Can be used as `v-model:open`.",
     "type": "boolean",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-dropdown-menu-sub' :data='[
   {
     "name": "update:open",
-    "description": "<p>Event handler called when the open state of the dialog changes.</p>\n",
+    "description": "Event handler called when the open state of the dialog changes.",
     "type": "[payload: boolean]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-dropdown-menu-sub' :data='[
   {
     "name": "open",
-    "description": "<p>Current open state</p>\n",
+    "description": "Current open state",
     "type": "boolean"
   }
 ]'} 

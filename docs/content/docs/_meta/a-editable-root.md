@@ -1,183 +1,190 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-editable-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "activationMode",
-    "description": "<p>The activation event of the editable field</p>\n",
-    "type": "\"dblclick\" | \"focus\" | \"none\"",
+    "description": "The activation event of the editable field",
+    "type": "\'dblclick\' | \'focus\' | \'none\'",
     "required": false,
-    "default": "\"focus\""
+    "default": "\'focus\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "autoResize",
-    "description": "<p>Whether the editable field should auto resize</p>\n",
+    "description": "Whether the editable field should auto resize",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "defaultValue",
-    "description": "<p>The default value of the editable field</p>\n",
+    "description": "The default value of the editable field",
     "type": "string",
     "required": false
   },
   {
     "name": "dir",
-    "description": "<p>The reading direction of the calendar when applicable. &lt;br&gt; If omitted, inherits globally from <code>AConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the calendar when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>Whether the editable field is disabled</p>\n",
+    "description": "Whether the editable field is disabled",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "id",
-    "description": "<p>The id of the field</p>\n",
+    "description": "The id of the field",
     "type": "string",
     "required": false
   },
   {
     "name": "maxLength",
-    "description": "<p>The maximum number of characters allowed</p>\n",
+    "description": "The maximum number of characters allowed",
     "type": "number",
     "required": false
   },
   {
     "name": "modelValue",
-    "description": "<p>The value of the editable field</p>\n",
+    "description": "The value of the editable field",
     "type": "string | null",
     "required": false
   },
   {
     "name": "name",
-    "description": "<p>The name of the field. Submitted with its owning form as part of a name/value pair.</p>\n",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
     "type": "string",
     "required": false
   },
   {
     "name": "placeholder",
-    "description": "<p>The placeholder for the editable field</p>\n",
+    "description": "The placeholder for the editable field",
     "type": "string | { edit: string; preview: string; }",
     "required": false,
-    "default": "\"Enter text...\""
+    "default": "\'Enter text...\'"
   },
   {
     "name": "readonly",
-    "description": "<p>Whether the editable field is read-only</p>\n",
+    "description": "Whether the editable field is read-only",
     "type": "boolean",
     "required": false
   },
   {
     "name": "required",
-    "description": "<p>When <code>true</code>, indicates that the user must set the value before the owning form can be submitted.</p>\n",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "selectOnFocus",
-    "description": "<p>Whether to select the text in the input when it is focused.</p>\n",
+    "description": "Whether to select the text in the input when it is focused.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "startWithEditMode",
-    "description": "<p>Whether to start with the edit mode active</p>\n",
+    "description": "Whether to start with the edit mode active",
     "type": "boolean",
     "required": false
   },
   {
     "name": "submitMode",
-    "description": "<p>The submit event of the editable field</p>\n",
-    "type": "\"blur\" | \"none\" | \"both\" | \"enter\"",
+    "description": "The submit event of the editable field",
+    "type": "\'blur\' | \'none\' | \'both\' | \'enter\'",
     "required": false,
-    "default": "\"blur\""
+    "default": "\'blur\'"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-editable-root' :data='[
   {
     "name": "submit",
-    "description": "<p>Event handler called when a value is submitted</p>\n",
+    "description": "Event handler called when a value is submitted",
     "type": "[value: string | null]"
   },
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called whenever the model value changes</p>\n",
+    "description": "Event handler called whenever the model value changes",
     "type": "[value: string]"
   },
   {
     "name": "update:state",
-    "description": "<p>Event handler called when the editable field changes state</p>\n",
-    "type": "[state: \"cancel\" | \"submit\" | \"edit\"]"
+    "description": "Event handler called when the editable field changes state",
+    "type": "[state: \'cancel\' | \'submit\' | \'edit\']"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-editable-root' :data='[
   {
     "name": "isEditing",
-    "description": "<p>Whether the editable field is in edit mode</p>\n",
+    "description": "Whether the editable field is in edit mode",
     "type": "boolean"
   },
   {
     "name": "modelValue",
-    "description": "<p>The value of the editable field</p>\n",
+    "description": "The value of the editable field",
     "type": "string | null | undefined"
   },
   {
     "name": "isEmpty",
-    "description": "<p>Whether the editable field is empty</p>\n",
+    "description": "Whether the editable field is empty",
     "type": "boolean"
   },
   {
     "name": "submit",
-    "description": "<p>Function to submit the value of the editable</p>\n",
+    "description": "Function to submit the value of the editable",
     "type": "(): void"
   },
   {
     "name": "cancel",
-    "description": "<p>Function to cancel the value of the editable</p>\n",
+    "description": "Function to cancel the value of the editable",
     "type": "(): void"
   },
   {
     "name": "edit",
-    "description": "<p>Function to set the editable in edit mode</p>\n",
+    "description": "Function to set the editable in edit mode",
     "type": "(): void"
   }
 ]'} 
 
-:docs-exposed-table{:data='[
+#### Exposed
+
+:docs-exposed-table{name='exposed-editable-root' :data='[
   {
     "name": "submit",
-    "description": "<p>Function to submit the value of the editable</p>\n",
+    "description": "Function to submit the value of the editable",
     "type": "() => void"
   },
   {
     "name": "cancel",
-    "description": "<p>Function to cancel the value of the editable</p>\n",
+    "description": "Function to cancel the value of the editable",
     "type": "() => void"
   },
   {
     "name": "edit",
-    "description": "<p>Function to set the editable in edit mode</p>\n",
+    "description": "Function to set the editable in edit mode",
     "type": "() => void"
   }
 ]'} 

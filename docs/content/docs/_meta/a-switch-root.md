@@ -1,28 +1,29 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-switch-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"button\""
+    "default": "\'button\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "defaultValue",
-    "description": "<p>The state of the switch when it is initially rendered. Use when you do not need to control its state.</p>\n",
+    "description": "The state of the switch when it is initially rendered. Use when you do not need to control its state.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with the switch.</p>\n",
+    "description": "When `true`, prevents the user from interacting with the switch.",
     "type": "boolean",
     "required": false
   },
@@ -34,43 +35,47 @@
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled state of the switch. Can be bind as <code>v-model</code>.</p>\n",
+    "description": "The controlled state of the switch. Can be bind as `v-model`.",
     "type": "boolean | null",
     "required": false
   },
   {
     "name": "name",
-    "description": "<p>The name of the field. Submitted with its owning form as part of a name/value pair.</p>\n",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
     "type": "string",
     "required": false
   },
   {
     "name": "required",
-    "description": "<p>When <code>true</code>, indicates that the user must set the value before the owning form can be submitted.</p>\n",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "value",
-    "description": "<p>The value given as data when submitted with a <code>name</code>.</p>\n",
+    "description": "The value given as data when submitted with a `name`.",
     "type": "string",
     "required": false,
-    "default": "\"on\""
+    "default": "\'on\'"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-switch-root' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the value of the switch changes.</p>\n",
+    "description": "Event handler called when the value of the switch changes.",
     "type": "[payload: boolean]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-switch-root' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current value</p>\n",
+    "description": "Current value",
     "type": "boolean"
   }
 ]'} 

@@ -1,45 +1,50 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-dropdown-menu-root' :data='[
   {
     "name": "defaultOpen",
-    "description": "<p>The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.</p>\n",
+    "description": "The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "dir",
-    "description": "<p>The reading direction of the combobox when applicable.</p>\n<p>If omitted, inherits globally from <code>ConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the combobox when applicable.\\n\\nIf omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "modal",
-    "description": "<p>The modality of the dropdown menu.</p>\n<p>When set to <code>true</code>, interaction with outside elements will be disabled and only menu content will be visible to screen readers.</p>\n",
+    "description": "The modality of the dropdown menu.\\n\\nWhen set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.",
     "type": "boolean",
     "required": false,
     "default": "true"
   },
   {
     "name": "open",
-    "description": "<p>The controlled open state of the menu. Can be used as <code>v-model:open</code>.</p>\n",
+    "description": "The controlled open state of the menu. Can be used as `v-model:open`.",
     "type": "boolean",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-dropdown-menu-root' :data='[
   {
     "name": "update:open",
-    "description": "<p>Event handler called when the open state of the dialog changes.</p>\n",
+    "description": "Event handler called when the open state of the dialog changes.",
     "type": "[payload: boolean]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-dropdown-menu-root' :data='[
   {
     "name": "open",
-    "description": "<p>Current open state</p>\n",
+    "description": "Current open state",
     "type": "boolean"
   }
 ]'} 

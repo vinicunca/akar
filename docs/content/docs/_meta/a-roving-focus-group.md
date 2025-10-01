@@ -1,16 +1,17 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-roving-focus-group' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
@@ -28,21 +29,21 @@
   },
   {
     "name": "dir",
-    "description": "<p>The direction of navigation between items.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The direction of navigation between items.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "loop",
-    "description": "<p>Whether keyboard navigation should loop around</p>\n",
+    "description": "Whether keyboard navigation should loop around",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "orientation",
-    "description": "<p>The orientation of the group.\nMainly so arrow navigation is done accordingly (left &amp; right vs. up &amp; down)</p>\n",
-    "type": "\"horizontal\" | \"vertical\"",
+    "description": "The orientation of the group.\\nMainly so arrow navigation is done accordingly (left & right vs. up & down)",
+    "type": "\'horizontal\' | \'vertical\'",
     "required": false
   },
   {
@@ -54,10 +55,12 @@
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-roving-focus-group' :data='[
   {
     "name": "entryFocus",
-    "description": "<p>Event handler called when container is being focused. Can be prevented.</p>\n",
+    "description": "Event handler called when container is being focused. Can be prevented.",
     "type": "[event: Event]"
   },
   {
@@ -67,7 +70,9 @@
   }
 ]'} 
 
-:docs-exposed-table{:data='[
+#### Exposed
+
+:docs-exposed-table{name='exposed-roving-focus-group' :data='[
   {
     "name": "getItems",
     "description": "",

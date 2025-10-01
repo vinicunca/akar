@@ -1,40 +1,43 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-combobox-item' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with the item.</p>\n",
+    "description": "When `true`, prevents the user from interacting with the item.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "textValue",
-    "description": "<p>A string representation of the item contents.</p>\n<p>If the children are not plain text, then the <code>textValue</code> prop must also be set to a plain text representation, which will be used for autocomplete in the ComboBox.</p>\n",
+    "description": "A string representation of the item contents.\\n\\nIf the children are not plain text, then the `textValue` prop must also be set to a plain text representation, which will be used for autocomplete in the ComboBox.",
     "type": "string",
     "required": false
   },
   {
     "name": "value",
-    "description": "<p>The value given as data when submitted with a <code>name</code>.</p>\n",
+    "description": "The value given as data when submitted with a `name`.",
     "type": "AcceptableValue",
     "required": true
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-combobox-item' :data='[
   {
     "name": "select",
     "description": "",

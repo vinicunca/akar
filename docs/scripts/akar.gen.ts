@@ -54,8 +54,7 @@ export function generateMetaAkar() {
   allComponents.forEach(generateDependencies);
 
   // 2. Generate component meta
-  // primitiveComponents.forEach((componentPath) => {
-  primitiveComponents.slice(3, 4).forEach((componentPath) => {
+  primitiveComponents.forEach((componentPath) => {
     const dir = parse(componentPath).dir.split('/').at(-1) ?? '';
     const flattenDeps = [dir, ...getDependencies(dir)];
     if (!arraysAreEqual(prevDeps, flattenDeps)) {
@@ -75,22 +74,26 @@ export function generateMetaAkar() {
 
     const metaProps = parseMetaProps(meta.props);
     if (metaProps.length) {
-      parsedString += `:docs-props-table{:data='${stringifyJson(metaProps)}'} \n`;
+      parsedString += '#### Props\n';
+      parsedString += `:docs-props-table{name='props-${componentName}' :data='${stringifyJson(metaProps)}'} \n`;
     }
 
     const metaEvents = parseMetaEvents(meta.events, eventDescriptionMap);
     if (metaEvents.length) {
-      parsedString += `\n:docs-emits-table{:data='${stringifyJson(metaEvents)}'} \n`;
+      parsedString += '\n#### Events\n';
+      parsedString += `\n:docs-emits-table{name='events-${componentName}' :data='${stringifyJson(metaEvents)}'} \n`;
     }
 
     const metaSlots = parseMetaSlots(meta.slots);
     if (metaSlots.length) {
-      parsedString += `\n:docs-slots-table{:data='${stringifyJson(metaSlots)}'} \n`;
+      parsedString += '\n#### Slots\n';
+      parsedString += `\n:docs-slots-table{name='slots-${componentName}' :data='${stringifyJson(metaSlots)}'} \n`;
     }
 
     const metaExposed = parseMetaExposed(meta.exposed);
     if (metaExposed.length) {
-      parsedString += `\n:docs-exposed-table{:data='${stringifyJson(metaExposed)}'} \n`;
+      parsedString += '\n#### Exposed\n';
+      parsedString += `\n:docs-exposed-table{name='exposed-${componentName}' :data='${stringifyJson(metaExposed)}'} \n`;
     }
 
     writeFileSync(metaMdFilePath, parsedString);

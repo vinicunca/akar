@@ -1,31 +1,34 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-navigation-menu-link' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"a\""
+    "default": "\'a\'"
   },
   {
     "name": "active",
-    "description": "<p>Used to identify the link as the currently active page.</p>\n",
+    "description": "Used to identify the link as the currently active page.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-navigation-menu-link' :data='[
   {
     "name": "select",
-    "description": "<p>Event handler called when the user selects a link (via mouse or keyboard).</p>\n<p>Calling <code>event.preventDefault</code> in this handler will prevent the navigation menu from closing when selecting that link.</p>\n",
+    "description": "Event handler called when the user selects a link (via mouse or keyboard).\\n   \\n    Calling `event.preventDefault` in this handler will prevent the navigation menu from closing when selecting that link.",
     "type": "[payload: CustomEvent<{ originalEvent: Event; }>]"
   }
 ]'} 

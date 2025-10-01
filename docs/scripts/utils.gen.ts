@@ -122,7 +122,7 @@ export function parseMetaSlots(metaSlots: ComponentMeta['slots']) {
       Object.values(schema.schema).forEach((childMeta: PropertyMeta) => {
         slots.push({
           name: childMeta.name,
-          description: md.render(childMeta.description ?? ''),
+          description: childMeta.description ?? '',
           type: parseTypeFromSchema(childMeta.schema),
         });
       });
@@ -140,7 +140,7 @@ export function parseMetaEvents(
     .map(({ name, type }) => {
       return ({
         name,
-        description: md.render((eventDescriptionMap.get(name) ?? '').replace(/^[ \t]+/gm, '')),
+        description: eventDescriptionMap.get(name) ?? '',
         type: type.replace(/\s*\|\s*undefined/g, ''),
       });
     })
@@ -152,7 +152,7 @@ export function parseMetaExposed(metaExposed: ComponentMeta['exposed']) {
     .filter((expose) => typeof expose.schema === 'object' && expose.schema.kind === 'event')
     .map((expose) => ({
       name: expose.name,
-      description: md.render(expose.description),
+      description: expose.description,
       type: expose.type,
     }));
 }

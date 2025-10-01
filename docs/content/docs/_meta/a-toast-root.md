@@ -1,110 +1,115 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-toast-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"li\""
+    "default": "\'li\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "defaultOpen",
-    "description": "<p>The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.</p>\n",
+    "description": "The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.",
     "type": "boolean",
     "required": false,
     "default": "true"
   },
   {
     "name": "duration",
-    "description": "<p>Time in milliseconds that toast should remain visible for. Overrides value\ngiven to <code>AToastProvider</code>.</p>\n",
+    "description": "Time in milliseconds that toast should remain visible for. Overrides value\\ngiven to `AToastProvider`.",
     "type": "number",
     "required": false
   },
   {
     "name": "forceMount",
-    "description": "<p>Used to force mounting when more control is needed. Useful when\ncontrolling animation with Vue animation libraries.</p>\n",
+    "description": "Used to force mounting when more control is needed. Useful when\\ncontrolling animation with Vue animation libraries.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "open",
-    "description": "<p>The controlled open state of the dialog. Can be bind as <code>v-model:open</code>.</p>\n",
+    "description": "The controlled open state of the dialog. Can be bind as `v-model:open`.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "type",
-    "description": "<p>Control the sensitivity of the toast for accessibility purposes.</p>\n<p>For toasts that are the result of a user action, choose <code>foreground</code>. Toasts generated from background tasks should use <code>background</code>.</p>\n",
-    "type": "\"foreground\" | \"background\"",
+    "description": "Control the sensitivity of the toast for accessibility purposes.\\n\\nFor toasts that are the result of a user action, choose `foreground`. Toasts generated from background tasks should use `background`.",
+    "type": "\'foreground\' | \'background\'",
     "required": false,
-    "default": "\"foreground\""
+    "default": "\'foreground\'"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-toast-root' :data='[
   {
     "name": "escapeKeyDown",
-    "description": "<p>Event handler called when the escape key is down. It can be prevented by calling <code>event.preventDefault</code>.</p>\n",
+    "description": "Event handler called when the escape key is down. It can be prevented by calling `event.preventDefault`.",
     "type": "[event: KeyboardEvent]"
   },
   {
     "name": "pause",
-    "description": "<p>Event handler called when the dismiss timer is paused. This occurs when the pointer is moved over the viewport, the viewport is focused or when the window is blurred.</p>\n",
+    "description": "Event handler called when the dismiss timer is paused. This occurs when the pointer is moved over the viewport, the viewport is focused or when the window is blurred.",
     "type": "[]"
   },
   {
     "name": "resume",
-    "description": "<p>Event handler called when the dismiss timer is resumed. This occurs when the pointer is moved away from the viewport, the viewport is blurred or when the window is focused.</p>\n",
+    "description": "Event handler called when the dismiss timer is resumed. This occurs when the pointer is moved away from the viewport, the viewport is blurred or when the window is focused.",
     "type": "[]"
   },
   {
     "name": "swipeCancel",
-    "description": "<p>Event handler called when swipe interaction is cancelled. It can be prevented by calling <code>event.preventDefault</code>.</p>\n",
+    "description": "Event handler called when swipe interaction is cancelled. It can be prevented by calling `event.preventDefault`.",
     "type": "[event: SwipeEvent]"
   },
   {
     "name": "swipeEnd",
-    "description": "<p>Event handler called at the end of a swipe interaction. It can be prevented by calling <code>event.preventDefault</code>.</p>\n",
+    "description": "Event handler called at the end of a swipe interaction. It can be prevented by calling `event.preventDefault`.",
     "type": "[event: SwipeEvent]"
   },
   {
     "name": "swipeMove",
-    "description": "<p>Event handler called during a swipe interaction. It can be prevented by calling <code>event.preventDefault</code>.</p>\n",
+    "description": "Event handler called during a swipe interaction. It can be prevented by calling `event.preventDefault`.",
     "type": "[event: SwipeEvent]"
   },
   {
     "name": "swipeStart",
-    "description": "<p>Event handler called when starting a swipe interaction. It can be prevented by calling <code>event.preventDefault</code>.</p>\n",
+    "description": "Event handler called when starting a swipe interaction. It can be prevented by calling `event.preventDefault`.",
     "type": "[event: SwipeEvent]"
   },
   {
     "name": "update:open",
-    "description": "<p>Event handler called when the open state changes</p>\n",
+    "description": "Event handler called when the open state changes",
     "type": "[value: boolean]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-toast-root' :data='[
   {
     "name": "open",
-    "description": "<p>Current open state</p>\n",
+    "description": "Current open state",
     "type": "boolean"
   },
   {
     "name": "remaining",
-    "description": "<p>Remaining time (in ms)</p>\n",
+    "description": "Remaining time (in ms)",
     "type": "number"
   },
   {
     "name": "duration",
-    "description": "<p>Total time the toast will remain visible for (in ms)</p>\n",
+    "description": "Total time the toast will remain visible for (in ms)",
     "type": "number"
   }
 ]'} 

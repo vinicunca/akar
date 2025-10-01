@@ -1,16 +1,17 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-number-field-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
@@ -22,49 +23,49 @@
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with the Number Field.</p>\n",
+    "description": "When `true`, prevents the user from interacting with the Number Field.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "disableWheelChange",
-    "description": "<p>When <code>true</code>, prevents the value from changing on wheel scroll.</p>\n",
+    "description": "When `true`, prevents the value from changing on wheel scroll.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "formatOptions",
-    "description": "<p>Formatting options for the value displayed in the number field. This also affects what characters are allowed to be typed by the user.</p>\n",
+    "description": "Formatting options for the value displayed in the number field. This also affects what characters are allowed to be typed by the user.",
     "type": "Intl.NumberFormatOptions",
     "required": false
   },
   {
     "name": "id",
-    "description": "<p>Id of the element</p>\n",
+    "description": "Id of the element",
     "type": "string",
     "required": false
   },
   {
     "name": "invertWheelChange",
-    "description": "<p>When <code>true</code>, inverts the direction of the wheel change.</p>\n",
+    "description": "When `true`, inverts the direction of the wheel change.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "locale",
-    "description": "<p>The locale to use for formatting dates</p>\n",
+    "description": "The locale to use for formatting dates",
     "type": "string",
     "required": false
   },
   {
     "name": "max",
-    "description": "<p>The largest value allowed for the input.</p>\n",
+    "description": "The largest value allowed for the input.",
     "type": "number",
     "required": false
   },
   {
     "name": "min",
-    "description": "<p>The smallest value allowed for the input.</p>\n",
+    "description": "The smallest value allowed for the input.",
     "type": "number",
     "required": false
   },
@@ -76,47 +77,51 @@
   },
   {
     "name": "name",
-    "description": "<p>The name of the field. Submitted with its owning form as part of a name/value pair.</p>\n",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
     "type": "string",
     "required": false
   },
   {
     "name": "readonly",
-    "description": "<p>When <code>true</code>, the Number Field is read-only.</p>\n",
+    "description": "When `true`, the Number Field is read-only.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "required",
-    "description": "<p>When <code>true</code>, indicates that the user must set the value before the owning form can be submitted.</p>\n",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "step",
-    "description": "<p>The amount that the input value changes with each increment or decrement &quot;tick&quot;.</p>\n",
+    "description": "The amount that the input value changes with each increment or decrement \'tick\'.",
     "type": "number",
     "required": false,
     "default": "1"
   },
   {
     "name": "stepSnapping",
-    "description": "<p>When <code>false</code>, prevents the value from snapping to the nearest increment of the step value</p>\n",
+    "description": "When `false`, prevents the value from snapping to the nearest increment of the step value",
     "type": "boolean",
     "required": false,
     "default": "true"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-number-field-root' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the value changes.</p>\n",
+    "description": "Event handler called when the value changes.",
     "type": "[val: number]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-number-field-root' :data='[
   {
     "name": "modelValue",
     "description": "",

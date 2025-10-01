@@ -1,29 +1,30 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-date-range-field-input' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "part",
-    "description": "<p>The part of the date to render</p>\n",
-    "type": "\"day\" | \"month\" | \"year\" | \"hour\" | \"minute\" | \"second\" | \"dayPeriod\" | \"literal\" | \"timeZoneName\"",
+    "description": "The part of the date to render",
+    "type": "\'day\' | \'month\' | \'year\' | \'hour\' | \'minute\' | \'second\' | \'dayPeriod\' | \'literal\' | \'timeZoneName\'",
     "required": true
   },
   {
     "name": "type",
-    "description": "<p>The type of field to render (start or end)</p>\n",
-    "type": "\"start\" | \"end\"",
+    "description": "The type of field to render (start or end)",
+    "type": "\'start\' | \'end\'",
     "required": true
   }
 ]'} 

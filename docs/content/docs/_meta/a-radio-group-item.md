@@ -1,22 +1,23 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-radio-group-item' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"button\""
+    "default": "\'button\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with the radio item.</p>\n",
+    "description": "When `true`, prevents the user from interacting with the radio item.",
     "type": "boolean",
     "required": false,
     "default": "false"
@@ -29,46 +30,50 @@
   },
   {
     "name": "name",
-    "description": "<p>The name of the field. Submitted with its owning form as part of a name/value pair.</p>\n",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
     "type": "string",
     "required": false
   },
   {
     "name": "required",
-    "description": "<p>When <code>true</code>, indicates that the user must set the value before the owning form can be submitted.</p>\n",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "value",
-    "description": "<p>The value given as data when submitted with a <code>name</code>.</p>\n",
+    "description": "The value given as data when submitted with a `name`.",
     "type": "AcceptableValue",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-radio-group-item' :data='[
   {
     "name": "select",
-    "description": "<p>Event handler called when the user selects a link (via mouse or keyboard).</p>\n<p>Calling <code>event.preventDefault</code> in this handler will prevent the navigation menu from closing when selecting that link.</p>\n",
+    "description": "Event handler called when the user selects a link (via mouse or keyboard).\\n   \\n    Calling `event.preventDefault` in this handler will prevent the navigation menu from closing when selecting that link.",
     "type": "[event: SelectEvent]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-radio-group-item' :data='[
   {
     "name": "checked",
-    "description": "<p>Current checked state</p>\n",
+    "description": "Current checked state",
     "type": "boolean"
   },
   {
     "name": "required",
-    "description": "<p>Required state</p>\n",
+    "description": "Required state",
     "type": "boolean"
   },
   {
     "name": "disabled",
-    "description": "<p>Disabled state</p>\n",
+    "description": "Disabled state",
     "type": "boolean"
   }
 ]'} 

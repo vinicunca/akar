@@ -1,52 +1,57 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-navigation-menu-sub' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "defaultValue",
-    "description": "<p>The value of the menu item that should be active when initially rendered.</p>\n<p>Use when you do not need to control the value state.</p>\n",
+    "description": "The value of the menu item that should be active when initially rendered.\\n\\nUse when you do not need to control the value state.",
     "type": "string",
     "required": false
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled value of the sub menu item to activate. Can be used as <code>v-model</code>.</p>\n",
+    "description": "The controlled value of the sub menu item to activate. Can be used as `v-model`.",
     "type": "string",
     "required": false
   },
   {
     "name": "orientation",
-    "description": "<p>The orientation of the menu.</p>\n",
-    "type": "\"horizontal\" | \"vertical\"",
+    "description": "The orientation of the menu.",
+    "type": "\'horizontal\' | \'vertical\'",
     "required": false,
-    "default": "\"horizontal\""
+    "default": "\'horizontal\'"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-navigation-menu-sub' :data='[
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the value changes.</p>\n",
+    "description": "Event handler called when the value changes.",
     "type": "[value: string]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-navigation-menu-sub' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current input values</p>\n",
+    "description": "Current input values",
     "type": "string"
   }
 ]'} 

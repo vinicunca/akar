@@ -1,47 +1,52 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-tree-item' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"li\""
+    "default": "\'li\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "level",
-    "description": "<p>Level of depth</p>\n",
+    "description": "Level of depth",
     "type": "number",
     "required": true
   },
   {
     "name": "value",
-    "description": "<p>Value given to this item</p>\n",
+    "description": "Value given to this item",
     "type": "Record<string, any>",
     "required": true
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-tree-item' :data='[
   {
     "name": "select",
-    "description": "<p>Event handler called when the selecting item. &lt;br&gt; It can be prevented by calling <code>event.preventDefault</code>.</p>\n",
+    "description": "Event handler called when the selecting item. <br> It can be prevented by calling `event.preventDefault`.",
     "type": "[event: SelectEvent<Record<string, any>>]"
   },
   {
     "name": "toggle",
-    "description": "<p>Event handler called when the selecting item. &lt;br&gt; It can be prevented by calling <code>event.preventDefault</code>.</p>\n",
+    "description": "Event handler called when the selecting item. <br> It can be prevented by calling `event.preventDefault`.",
     "type": "[event: ToggleEvent<Record<string, any>>]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-tree-item' :data='[
   {
     "name": "isExpanded",
     "description": "",
@@ -69,7 +74,9 @@
   }
 ]'} 
 
-:docs-exposed-table{:data='[
+#### Exposed
+
+:docs-exposed-table{name='exposed-tree-item' :data='[
   {
     "name": "handleToggle",
     "description": "",

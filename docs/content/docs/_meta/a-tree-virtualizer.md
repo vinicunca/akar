@@ -1,27 +1,30 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-tree-virtualizer' :data='[
   {
     "name": "estimateSize",
-    "description": "<p>Estimated size (in px) of each item</p>\n",
+    "description": "Estimated size (in px) of each item",
     "type": "number",
     "required": false
   },
   {
     "name": "overscan",
-    "description": "<p>Number of items rendered outside the visible area</p>\n",
+    "description": "Number of items rendered outside the visible area",
     "type": "number",
     "required": false
   },
   {
     "name": "textContent",
-    "description": "<p>Text content for each item to achieve type-ahead feature</p>\n",
+    "description": "Text content for each item to achieve type-ahead feature",
     "type": "((item: Record<string, any>) => string)",
     "required": false
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-tree-virtualizer' :data='[
   {
     "name": "item",
     "description": "",

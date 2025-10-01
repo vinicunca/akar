@@ -1,31 +1,32 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-toast-viewport' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"ol\""
+    "default": "\'ol\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "hotkey",
-    "description": "<p>The keys to use as the keyboard shortcut that will move focus to the toast viewport.</p>\n",
+    "description": "The keys to use as the keyboard shortcut that will move focus to the toast viewport.",
     "type": "string[]",
     "required": false,
-    "default": "[\"F8\"]"
+    "default": "[\'F8\']"
   },
   {
     "name": "label",
-    "description": "<p>An author-localized label for the toast viewport to provide context for screen reader users\nwhen navigating page landmarks. The available <code>{hotkey}</code> placeholder will be replaced for you.\nAlternatively, you can pass in a custom function to generate the label.</p>\n",
+    "description": "An author-localized label for the toast viewport to provide context for screen reader users\\nwhen navigating page landmarks. The available `{hotkey}` placeholder will be replaced for you.\\nAlternatively, you can pass in a custom function to generate the label.",
     "type": "string | ((hotkey: string) => string)",
     "required": false,
-    "default": "\"Notifications ({hotkey})\""
+    "default": "\'Notifications ({hotkey})\'"
   }
 ]'} 

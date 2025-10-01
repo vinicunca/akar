@@ -1,40 +1,43 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-dropdown-menu-checkbox-item' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with the item.</p>\n",
+    "description": "When `true`, prevents the user from interacting with the item.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled checked state of the item. Can be used as <code>v-model</code>.</p>\n",
-    "type": "false | true | \"indeterminate\"",
+    "description": "The controlled checked state of the item. Can be used as `v-model`.",
+    "type": "false | true | \'indeterminate\'",
     "required": false
   },
   {
     "name": "textValue",
-    "description": "<p>Optional text used for typeahead purposes. By default the typeahead behavior will use the <code>.textContent</code> of the item. &lt;br&gt;\nUse this when the content is complex, or you have non-textual content inside.</p>\n",
+    "description": "Optional text used for typeahead purposes. By default the typeahead behavior will use the `.textContent` of the item. <br>\\n Use this when the content is complex, or you have non-textual content inside.",
     "type": "string",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-dropdown-menu-checkbox-item' :data='[
   {
     "name": "select",
     "description": "",
@@ -42,7 +45,7 @@
   },
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called whenever the model value changes</p>\n",
+    "description": "Event handler called whenever the model value changes",
     "type": "[payload: boolean]"
   }
 ]'} 

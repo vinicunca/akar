@@ -1,121 +1,128 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-listbox-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "by",
-    "description": "<p>Use this to compare objects by a particular field, or pass your own comparison function for complete control over how objects are compared.</p>\n",
+    "description": "Use this to compare objects by a particular field, or pass your own comparison function for complete control over how objects are compared.",
     "type": "string | ((a: AcceptableValue, b: AcceptableValue) => boolean)",
     "required": false
   },
   {
     "name": "defaultValue",
-    "description": "<p>The value of the listbox when initially rendered. Use when you do not need to control the state of the Listbox</p>\n",
+    "description": "The value of the listbox when initially rendered. Use when you do not need to control the state of the Listbox",
     "type": "AcceptableValue | AcceptableValue[]",
     "required": false
   },
   {
     "name": "dir",
-    "description": "<p>The reading direction of the listbox when applicable. &lt;br&gt; If omitted, inherits globally from <code>ConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the listbox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with listbox</p>\n",
+    "description": "When `true`, prevents the user from interacting with listbox",
     "type": "boolean",
     "required": false
   },
   {
     "name": "highlightOnHover",
-    "description": "<p>When <code>true</code>, hover over item will trigger highlight</p>\n",
+    "description": "When `true`, hover over item will trigger highlight",
     "type": "boolean",
     "required": false
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled value of the listbox. Can be binded with with <code>v-model</code>.</p>\n",
+    "description": "The controlled value of the listbox. Can be binded with with `v-model`.",
     "type": "AcceptableValue | AcceptableValue[]",
     "required": false
   },
   {
     "name": "multiple",
-    "description": "<p>Whether multiple options can be selected or not.</p>\n",
+    "description": "Whether multiple options can be selected or not.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "name",
-    "description": "<p>The name of the field. Submitted with its owning form as part of a name/value pair.</p>\n",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
     "type": "string",
     "required": false
   },
   {
     "name": "orientation",
-    "description": "<p>The orientation of the listbox. &lt;br&gt;Mainly so arrow navigation is done accordingly (left &amp; right vs. up &amp; down)</p>\n",
-    "type": "\"horizontal\" | \"vertical\"",
+    "description": "The orientation of the listbox. <br>Mainly so arrow navigation is done accordingly (left & right vs. up & down)",
+    "type": "\'horizontal\' | \'vertical\'",
     "required": false,
-    "default": "\"vertical\""
+    "default": "\'vertical\'"
   },
   {
     "name": "required",
-    "description": "<p>When <code>true</code>, indicates that the user must set the value before the owning form can be submitted.</p>\n",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "selectionBehavior",
-    "description": "<p>How multiple selection should behave in the collection.</p>\n",
-    "type": "\"replace\" | \"toggle\"",
+    "description": "How multiple selection should behave in the collection.",
+    "type": "\'replace\' | \'toggle\'",
     "required": false,
-    "default": "\"toggle\""
+    "default": "\'toggle\'"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-listbox-root' :data='[
   {
     "name": "entryFocus",
-    "description": "<p>Event handler called when container is being focused. Can be prevented.</p>\n",
+    "description": "Event handler called when container is being focused. Can be prevented.",
     "type": "[event: CustomEvent<any>]"
   },
   {
     "name": "highlight",
-    "description": "<p>Event handler when highlighted element changes.</p>\n",
+    "description": "Event handler when highlighted element changes.",
     "type": "[payload: { ref: HTMLElement; value: AcceptableValue; }]"
   },
   {
     "name": "leave",
-    "description": "<p>Event handler called when the mouse leave the container</p>\n",
+    "description": "Event handler called when the mouse leave the container",
     "type": "[event: Event]"
   },
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the value changes.</p>\n",
+    "description": "Event handler called when the value changes.",
     "type": "[value: AcceptableValue]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-listbox-root' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current active value</p>\n",
+    "description": "Current active value",
     "type": "AcceptableValue | AcceptableValue[] | undefined"
   }
 ]'} 
 
-:docs-exposed-table{:data='[
+#### Exposed
+
+:docs-exposed-table{name='exposed-listbox-root' :data='[
   {
     "name": "highlightItem",
     "description": "",

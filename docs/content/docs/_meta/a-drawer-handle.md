@@ -1,6 +1,7 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-drawer-handle' :data='[
   {
     "name": "preventCycle",
     "description": "",

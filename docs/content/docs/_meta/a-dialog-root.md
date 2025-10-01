@@ -1,45 +1,50 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-dialog-root' :data='[
   {
     "name": "defaultOpen",
-    "description": "<p>The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.</p>\n",
+    "description": "The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "modal",
-    "description": "<p>The modality of the dialog When set to <code>true</code>, &lt;br&gt;\ninteraction with outside elements will be disabled and only dialog content will be visible to screen readers.</p>\n",
+    "description": "The modality of the dialog When set to `true`, <br>\\ninteraction with outside elements will be disabled and only dialog content will be visible to screen readers.",
     "type": "boolean",
     "required": false,
     "default": "true"
   },
   {
     "name": "open",
-    "description": "<p>The controlled open state of the dialog. Can be binded as <code>v-model:open</code>.</p>\n",
+    "description": "The controlled open state of the dialog. Can be binded as `v-model:open`.",
     "type": "boolean",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-dialog-root' :data='[
   {
     "name": "update:open",
-    "description": "<p>Event handler called when the open state of the dialog changes.</p>\n",
+    "description": "Event handler called when the open state of the dialog changes.",
     "type": "[value: boolean]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-dialog-root' :data='[
   {
     "name": "open",
-    "description": "<p>Current open state</p>\n",
+    "description": "Current open state",
     "type": "boolean"
   },
   {
     "name": "close",
-    "description": "<p>Close the dialog</p>\n",
+    "description": "Close the dialog",
     "type": "(): void"
   }
 ]'} 

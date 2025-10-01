@@ -1,29 +1,30 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-navigation-menu-viewport' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "align",
-    "description": "<p>Placement of the viewport for css variables <code>(--akar-navigation-menu-viewport-left, --akar-navigation-menu-viewport-top)</code>.</p>\n",
-    "type": "\"start\" | \"center\" | \"end\"",
+    "description": "Placement of the viewport for css variables `(--akar-navigation-menu-viewport-left, --akar-navigation-menu-viewport-top)`.",
+    "type": "\'start\' | \'center\' | \'end\'",
     "required": false,
-    "default": "\"center\""
+    "default": "\'center\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "forceMount",
-    "description": "<p>Used to force mounting when more control is needed. Useful when\ncontrolling animation with Vue animation libraries.</p>\n",
+    "description": "Used to force mounting when more control is needed. Useful when\\ncontrolling animation with Vue animation libraries.",
     "type": "boolean",
     "required": false
   }

@@ -1,79 +1,80 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-tags-input-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"div\""
+    "default": "\'div\'"
   },
   {
     "name": "addOnBlur",
-    "description": "<p>When <code>true</code> allow adding tags blur input</p>\n",
+    "description": "When `true` allow adding tags blur input",
     "type": "boolean",
     "required": false
   },
   {
     "name": "addOnPaste",
-    "description": "<p>When <code>true</code>, allow adding tags on paste. Work in conjunction with delimiter prop.</p>\n",
+    "description": "When `true`, allow adding tags on paste. Work in conjunction with delimiter prop.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "addOnTab",
-    "description": "<p>When <code>true</code> allow adding tags on tab keydown</p>\n",
+    "description": "When `true` allow adding tags on tab keydown",
     "type": "boolean",
     "required": false
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "convertValue",
-    "description": "<p>Convert the input value to the desired type. Mandatory when using objects as values and using <code>ATagsInputInput</code></p>\n",
+    "description": "Convert the input value to the desired type. Mandatory when using objects as values and using `ATagsInputInput`",
     "type": "((value: string) => AcceptableInputValue)",
     "required": false
   },
   {
     "name": "defaultValue",
-    "description": "<p>The value of the tags that should be added. Use when you do not need to control the state of the tags input</p>\n",
+    "description": "The value of the tags that should be added. Use when you do not need to control the state of the tags input",
     "type": "AcceptableInputValue[]",
     "required": false,
     "default": "[]"
   },
   {
     "name": "delimiter",
-    "description": "<p>The character or regular expression to trigger the addition of a new tag. Also used to split tags for <code>@paste</code> event</p>\n",
+    "description": "The character or regular expression to trigger the addition of a new tag. Also used to split tags for `@paste` event",
     "type": "string | RegExp",
     "required": false,
-    "default": "\",\""
+    "default": "\',\'"
   },
   {
     "name": "dir",
-    "description": "<p>The reading direction of the combobox when applicable. &lt;br&gt; If omitted, inherits globally from <code>AConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with the tags input.</p>\n",
+    "description": "When `true`, prevents the user from interacting with the tags input.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "displayValue",
-    "description": "<p>Display the value of the tag. Useful when you want to apply modifications to the value like adding a suffix or when using object as values</p>\n",
+    "description": "Display the value of the tag. Useful when you want to apply modifications to the value like adding a suffix or when using object as values",
     "type": "((value: AcceptableInputValue) => string)",
     "required": false,
     "default": "value.toString()"
   },
   {
     "name": "duplicate",
-    "description": "<p>When <code>true</code>, allow duplicated tags.</p>\n",
+    "description": "When `true`, allow duplicated tags.",
     "type": "boolean",
     "required": false
   },
@@ -85,58 +86,62 @@
   },
   {
     "name": "max",
-    "description": "<p>Maximum number of tags.</p>\n",
+    "description": "Maximum number of tags.",
     "type": "number",
     "required": false,
     "default": "0"
   },
   {
     "name": "modelValue",
-    "description": "<p>The controlled value of the tags input. Can be bind as <code>v-model</code>.</p>\n",
+    "description": "The controlled value of the tags input. Can be bind as `v-model`.",
     "type": "AcceptableInputValue[] | null",
     "required": false
   },
   {
     "name": "name",
-    "description": "<p>The name of the field. Submitted with its owning form as part of a name/value pair.</p>\n",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
     "type": "string",
     "required": false
   },
   {
     "name": "required",
-    "description": "<p>When <code>true</code>, indicates that the user must set the value before the owning form can be submitted.</p>\n",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
     "type": "boolean",
     "required": false
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-tags-input-root' :data='[
   {
     "name": "addTag",
-    "description": "<p>Event handler called when tag is added</p>\n",
+    "description": "Event handler called when tag is added",
     "type": "[payload: AcceptableInputValue]"
   },
   {
     "name": "invalid",
-    "description": "<p>Event handler called when the value is invalid</p>\n",
+    "description": "Event handler called when the value is invalid",
     "type": "[payload: AcceptableInputValue]"
   },
   {
     "name": "removeTag",
-    "description": "<p>Event handler called when tag is removed</p>\n",
+    "description": "Event handler called when tag is removed",
     "type": "[payload: AcceptableInputValue]"
   },
   {
     "name": "update:modelValue",
-    "description": "<p>Event handler called when the value changes</p>\n",
+    "description": "Event handler called when the value changes",
     "type": "[payload: AcceptableInputValue[]]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-tags-input-root' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current input values</p>\n",
+    "description": "Current input values",
     "type": "string | Record<string, any>"
   }
 ]'} 

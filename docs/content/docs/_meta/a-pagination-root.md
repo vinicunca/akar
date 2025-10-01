@@ -1,84 +1,89 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-pagination-root' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"nav\""
+    "default": "\'nav\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "defaultPage",
-    "description": "<p>The value of the page that should be active when initially rendered.</p>\n<p>Use when you do not need to control the value state.</p>\n",
+    "description": "The value of the page that should be active when initially rendered.\\n\\nUse when you do not need to control the value state.",
     "type": "number",
     "required": false,
     "default": "1"
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with item</p>\n",
+    "description": "When `true`, prevents the user from interacting with item",
     "type": "boolean",
     "required": false
   },
   {
     "name": "itemsPerPage",
-    "description": "<p>Number of items per page</p>\n",
+    "description": "Number of items per page",
     "type": "number",
     "required": true
   },
   {
     "name": "page",
-    "description": "<p>The controlled value of the current page. Can be binded as <code>v-model:page</code>.</p>\n",
+    "description": "The controlled value of the current page. Can be binded as `v-model:page`.",
     "type": "number",
     "required": false
   },
   {
     "name": "showEdges",
-    "description": "<p>When <code>true</code>, always show first page, last page, and ellipsis</p>\n",
+    "description": "When `true`, always show first page, last page, and ellipsis",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "siblingCount",
-    "description": "<p>Number of sibling should be shown around the current page</p>\n",
+    "description": "Number of sibling should be shown around the current page",
     "type": "number",
     "required": false,
     "default": "2"
   },
   {
     "name": "total",
-    "description": "<p>Number of items in your list</p>\n",
+    "description": "Number of items in your list",
     "type": "number",
     "required": false,
     "default": "0"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-pagination-root' :data='[
   {
     "name": "update:page",
-    "description": "<p>Event handler called when the page value changes</p>\n",
+    "description": "Event handler called when the page value changes",
     "type": "[value: number]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-pagination-root' :data='[
   {
     "name": "page",
-    "description": "<p>Current page state</p>\n",
+    "description": "Current page state",
     "type": "number"
   },
   {
     "name": "pageCount",
-    "description": "<p>Number of pages</p>\n",
+    "description": "Number of pages",
     "type": "number"
   }
 ]'} 

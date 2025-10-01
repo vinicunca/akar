@@ -1,47 +1,52 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-hover-card-root' :data='[
   {
     "name": "closeDelay",
-    "description": "<p>The duration from when the mouse leaves the trigger or content until the hover card closes.</p>\n",
+    "description": "The duration from when the mouse leaves the trigger or content until the hover card closes.",
     "type": "number",
     "required": false,
     "default": "300"
   },
   {
     "name": "defaultOpen",
-    "description": "<p>The open state of the hover card when it is initially rendered. Use when you do not need to control its open state.</p>\n",
+    "description": "The open state of the hover card when it is initially rendered. Use when you do not need to control its open state.",
     "type": "boolean",
     "required": false,
     "default": "false"
   },
   {
     "name": "open",
-    "description": "<p>The controlled open state of the hover card. Can be binded as <code>v-model:open</code>.</p>\n",
+    "description": "The controlled open state of the hover card. Can be binded as `v-model:open`.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "openDelay",
-    "description": "<p>The duration from when the mouse enters the trigger until the hover card opens.</p>\n",
+    "description": "The duration from when the mouse enters the trigger until the hover card opens.",
     "type": "number",
     "required": false,
     "default": "700"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-hover-card-root' :data='[
   {
     "name": "update:open",
-    "description": "<p>Event handler called when the open state of the hover card changes.</p>\n",
+    "description": "Event handler called when the open state of the hover card changes.",
     "type": "[value: boolean]"
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-hover-card-root' :data='[
   {
     "name": "open",
-    "description": "<p>Current open state</p>\n",
+    "description": "Current open state",
     "type": "boolean"
   }
 ]'} 

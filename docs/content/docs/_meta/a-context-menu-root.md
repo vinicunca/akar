@@ -1,32 +1,35 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-context-menu-root' :data='[
   {
     "name": "dir",
-    "description": "<p>The reading direction of the combobox when applicable.</p>\n<p>If omitted, inherits globally from <code>ConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n",
-    "type": "\"ltr\" | \"rtl\"",
+    "description": "The reading direction of the combobox when applicable.\\n\\nIf omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "\'ltr\' | \'rtl\'",
     "required": false
   },
   {
     "name": "modal",
-    "description": "<p>The modality of the dropdown menu.</p>\n<p>When set to <code>true</code>, interaction with outside elements will be disabled and only menu content will be visible to screen readers.</p>\n",
+    "description": "The modality of the dropdown menu.\\n\\nWhen set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.",
     "type": "boolean",
     "required": false,
     "default": "true"
   },
   {
     "name": "pressOpenDelay",
-    "description": "<p>The duration from when the trigger is pressed until the menu openes.</p>\n",
+    "description": "The duration from when the trigger is pressed until the menu openes.",
     "type": "number",
     "required": false,
     "default": "700"
   }
 ]'} 
 
-:docs-emits-table{:data='[
+#### Events
+
+:docs-emits-table{name='events-context-menu-root' :data='[
   {
     "name": "update:open",
-    "description": "<p>Event handler called when the open state of the combobox changes.</p>\n",
+    "description": "Event handler called when the open state of the combobox changes.",
     "type": "[payload: boolean]"
   }
 ]'} 

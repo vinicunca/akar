@@ -1,34 +1,35 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-tags-input-input' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"input\""
+    "default": "\'input\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "autoFocus",
-    "description": "<p>Focus on element when mounted.</p>\n",
+    "description": "Focus on element when mounted.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "maxLength",
-    "description": "<p>Maximum number of character allowed.</p>\n",
+    "description": "Maximum number of character allowed.",
     "type": "number",
     "required": false
   },
   {
     "name": "placeholder",
-    "description": "<p>The placeholder character to use for empty tags input.</p>\n",
+    "description": "The placeholder character to use for empty tags input.",
     "type": "string",
     "required": false
   }

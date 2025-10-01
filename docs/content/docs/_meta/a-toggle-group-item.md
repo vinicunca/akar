@@ -1,52 +1,55 @@
 <!-- This file was automatic generated. Do not edit it manually -->
 
-:docs-props-table{:data='[
+#### Props
+:docs-props-table{name='props-toggle-group-item' :data='[
   {
     "name": "as",
-    "description": "<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
     "type": "APrimitiveAsTag | Component",
     "required": false,
-    "default": "\"button\""
+    "default": "\'button\'"
   },
   {
     "name": "asChild",
-    "description": "<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\"https://akar.vinicunca.dev/core/guides/composition\">Composition</a> guide for more details.</p>\n",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\\n\\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "disabled",
-    "description": "<p>When <code>true</code>, prevents the user from interacting with the toggle.</p>\n",
+    "description": "When `true`, prevents the user from interacting with the toggle.",
     "type": "boolean",
     "required": false
   },
   {
     "name": "value",
-    "description": "<p>A string value for the toggle group item. All items within a toggle group should use a unique value.</p>\n",
+    "description": "A string value for the toggle group item. All items within a toggle group should use a unique value.",
     "type": "AcceptableValue",
     "required": true
   }
 ]'} 
 
-:docs-slots-table{:data='[
+#### Slots
+
+:docs-slots-table{name='slots-toggle-group-item' :data='[
   {
     "name": "modelValue",
-    "description": "<p>Current value</p>\n",
+    "description": "Current value",
     "type": "boolean"
   },
   {
     "name": "state",
-    "description": "<p>Current state</p>\n",
-    "type": "\"on\" | \"off\""
+    "description": "Current state",
+    "type": "\'on\' | \'off\'"
   },
   {
     "name": "pressed",
-    "description": "<p>Current pressed state</p>\n",
+    "description": "Current pressed state",
     "type": "boolean"
   },
   {
     "name": "disabled",
-    "description": "<p>Current disabled state</p>\n",
+    "description": "Current disabled state",
     "type": "boolean"
   }
 ]'} 
