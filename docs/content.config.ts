@@ -39,6 +39,18 @@ export default defineContentConfig({
         ),
       }),
     }),
+    pohon: defineCollection({
+      type: 'page',
+      source: [{
+        include: 'pohon/**',
+      }],
+      schema: z.object({
+        framework: z.enum(['nuxt', 'vue']).optional(),
+        navigation: z.object({
+          title: z.string().optional(),
+        }),
+      }),
+    }),
     metadata: defineCollection({
       type: 'data',
       source: 'metadata/**.json',
@@ -54,7 +66,7 @@ export default defineContentConfig({
             schema: z.any().optional(),
           }),
         ),
-        emits: z.array(
+        events: z.array(
           z.object({
             name: z.string(),
             description: z.string().optional(),

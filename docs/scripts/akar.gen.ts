@@ -80,7 +80,7 @@ export function generateMetaAkar() {
 
     const metaEvents = parseMetaEvents(meta.events, eventDescriptionMap);
     if (metaEvents.length) {
-      payloadJson.emits = metaEvents;
+      payloadJson.events = metaEvents;
     }
 
     const metaSlots = parseMetaSlots(meta.slots);

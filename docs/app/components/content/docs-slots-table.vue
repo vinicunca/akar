@@ -1,15 +1,9 @@
 <script lang="ts" setup>
+import type { ComponentMeta } from 'vue-component-meta';
 import { DocsHighlightInlineType } from '#components';
 
-type PropDef = {
-  name?: string;
-  required?: boolean;
-  type?: string;
-  description?: string;
-};
-
 interface SlotsTableProps {
-  data: Array<PropDef>;
+  data: ComponentMeta['slots'];
   name: string;
 }
 const props = defineProps<SlotsTableProps>();

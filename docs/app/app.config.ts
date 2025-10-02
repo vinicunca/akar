@@ -483,6 +483,13 @@ export default defineAppConfig({
       ],
     },
 
+    collapsible: {
+      slots: {
+        root: '',
+        content: 'data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up overflow-hidden',
+      },
+    },
+
     prose: {
       h1: {
         base: 'text-4xl colortext-highlighted font-bold mb-8 scroll-mt-[calc(45px+var(--pohon-header-height))] lg:scroll-mt-$pohon-header-height',
@@ -571,6 +578,15 @@ export default defineAppConfig({
       },
       tr: {
         base: '[&:first-child>th:first-child]:rounded-tl-md [&:first-child>th:last-child]:rounded-tr-md [&:last-child>td:first-child]:rounded-bl-md [&:last-child>td:last-child]:rounded-br-md',
+      },
+      collapsible: {
+        slots: {
+          root: 'my-5',
+          trigger: 'group relative rounded-xs inline-flex items-center gap-1.5 color-text-muted hover:color-text text-sm focus-visible:ring-2 focus-visible:ring-primary focus:outline-none transition-colors',
+          triggerIcon: 'size-4 shrink-0 group-data-[state=open]:rotate-180 transition-transform-200',
+          triggerLabel: 'truncate',
+          content: '*:first:mt-2.5 *:last:mb-0 *:my-1.5',
+        },
       },
     },
 

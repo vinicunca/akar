@@ -34,10 +34,10 @@ const { data: metadata } = await useAsyncData(
     />
   </template>
 
-  <template v-if="metadata?.emits?.length">
+  <template v-if="metadata?.events?.length">
     <ProseH4>Emits</ProseH4>
     <DocsEmitsTable
-      :data="metadata.emits"
+      :data="metadata.events"
       :name="`emits-${props.name}`"
     />
   </template>

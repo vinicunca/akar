@@ -1,16 +1,9 @@
 <script lang="ts" setup>
+import type { ComponentMeta } from 'vue-component-meta';
 import { DocsHighlightInlineType } from '#components';
 
-type PropDef = {
-  name?: string;
-  required?: boolean;
-  default?: string;
-  type?: string;
-  description?: string;
-};
-
 interface EmitsTableProps {
-  data: Array<PropDef>;
+  data: ComponentMeta['events'];
   name: string;
 }
 
