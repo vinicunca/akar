@@ -35,6 +35,9 @@ export default {
         content: '',
       },
     },
+    snapPoints: {
+      true: '',
+    },
   },
 
   compoundVariants: [],

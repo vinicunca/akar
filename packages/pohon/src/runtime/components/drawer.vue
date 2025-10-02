@@ -151,10 +151,16 @@ const contentEvents = computed(() => {
   return defaultEvents;
 });
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.drawer || {}) })({
-  direction: props.direction,
-  inset: props.inset,
-}));
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.drawer || {}),
+  })({
+    direction: props.direction,
+    inset: props.inset,
+    snapPoints: props.snapPoints && props.snapPoints.length > 0,
+  }),
+);
 </script>
 
 <template>
