@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { APrimitiveProps } from 'akar';
-import type { PChipProps, IconProps } from '../types';
+import type { IconProps, PChipProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/avatar';
 

@@ -230,11 +230,37 @@ const { t } = useLocale();
 const appConfig = useAppConfig() as Table['AppConfig'];
 
 const data = ref(props.data ?? []) as Ref<Array<T>>;
-const columns = computed<Array<PTableColumn<T>>>(() =>
-  props.columns ?? Object.keys(data.value[0] ?? {})
-    .map((accessorKey: string) => ({ accessorKey, header: toSentenceCase(accessorKey) })),
-);
 const meta = computed(() => props.meta ?? {});
+
+const columns = computed<Array<PTableColumn<T>>>(() =>
+  processColumns(props.columns ?? Object.keys(data.value[0] ?? {})
+    .map((accessorKey: string) => ({
+      accessorKey,
+      header: toSentenceCase(accessorKey),
+    }))),
+);
+
+function processColumns(columns: Array<PTableColumn<T>>): Array<PTableColumn<T>> {
+  return columns.map((column) => {
+    const col = { ...column } as PTableColumn<T>;
+
+    if ('columns' in col && col.columns) {
+      col.columns = processColumns(col.columns as Array<PTableColumn<T>>);
+    }
+
+    if (!col.cell) {
+      col.cell = ({ getValue }) => {
+        const value = getValue();
+        if (value === '' || value === null || value === undefined) {
+          return '\u00A0';
+        }
+        return String(value);
+      };
+    }
+
+    return col;
+  });
+}
 
 const pohon = computed(() =>
   uv({
