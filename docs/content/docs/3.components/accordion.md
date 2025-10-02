@@ -50,7 +50,7 @@ Contains all the parts of an Accordion
 
 :docs-component-meta{name="a-accordion-root"}
 
-#### Data Attributes
+<!-- #### Data Attributes
 
 :docs-data-attributes-table{name="data-attributes-accordion-root" :data='[
   {
@@ -162,4 +162,4 @@ Contains the collapsible content for an item.
     "cssVariable": "--akar-accordion-content-height",
     "description": "The height of the content when it opens/closes"
   }
-]'}
+]'} -->

@@ -3,8 +3,8 @@ import { generateMetaPohon } from './pohon.gen';
 
 const startTime = performance.now();
 
-generateMetaAkar();
-// generateMetaPohon();
+// generateMetaAkar();
+generateMetaPohon();
 
 const endTime = performance.now();
 console.log(`Meta generated in ${(endTime - startTime).toFixed(2)} ms`);

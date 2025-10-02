@@ -5,7 +5,7 @@ type PropDef = {
   name?: string;
   required?: boolean;
   default?: string;
-  type: string;
+  type?: string;
   description?: string;
 };
 

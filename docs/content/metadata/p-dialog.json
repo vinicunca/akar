@@ -1,0 +1,487 @@
+{
+  "props": [
+  {
+    "name": "close",
+    "global": false,
+    "description": "Display a close button to dismiss the dialog.\n`{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang='ts-type'}",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | Partial<PButtonProps> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | Partial<PButtonProps> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true",
+        "3": "Partial<PButtonProps>"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "closeIcon",
+    "global": false,
+    "description": "The icon displayed in the close button.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.close"
+      },
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "content",
+    "global": false,
+    "description": "The content of the dialog.",
+    "tags": [],
+    "required": false,
+    "type": "(Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentImplEmits>>) | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "(Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentImplEmits>>) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentImplEmits>>",
+          "schema": {
+            "disableOutsidePointerEvents": {
+              "name": "disableOutsidePointerEvents",
+              "global": false,
+              "description": "When `true`, hover/focus/click interactions will be disabled on elements outside\nthe `DismissableLayer`. Users will need to click twice on outside elements to\ninteract with them: once to close the `DismissableLayer`, and again to trigger the element.",
+              "tags": [],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "boolean | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "false",
+                  "2": "true"
+                }
+              }
+            },
+            "onEscapeKeyDown": {
+              "name": "onEscapeKeyDown",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: KeyboardEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: KeyboardEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: KeyboardEvent): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "KeyboardEvent",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onPointerDownOutside": {
+              "name": "onPointerDownOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent): void",
+                    "schema": [
+                      "PointerDownOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onFocusOutside": {
+              "name": "onFocusOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: FocusOutsideEvent): void",
+                    "schema": [
+                      "FocusOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onInteractOutside": {
+              "name": "onInteractOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent | FocusOutsideEvent): void",
+                    "schema": [
+                      {
+                        "kind": "enum",
+                        "type": "PointerDownOutsideEvent | FocusOutsideEvent",
+                        "schema": [
+                          "PointerDownOutsideEvent",
+                          "FocusOutsideEvent"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onOpenAutoFocus": {
+              "name": "onOpenAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "Event",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onCloseAutoFocus": {
+              "name": "onCloseAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      "Event"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "defaultOpen",
+    "global": false,
+    "description": "The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "description",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "dismissible",
+    "global": false,
+    "description": "When `false`, the dialog will not close when clicking outside or pressing escape.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "fullscreen",
+    "global": false,
+    "description": "When `true`, the dialog will take up the full screen.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "modal",
+    "global": false,
+    "description": "The modality of the dialog When set to `true`, <br>\ninteraction with outside elements will be disabled and only dialog content will be visible to screen readers.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "open",
+    "global": false,
+    "description": "The controlled open state of the dialog. Can be binded as `v-model:open`.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "overlay",
+    "global": false,
+    "description": "Render an overlay behind the dialog.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "portal",
+    "global": false,
+    "description": "Render the dialog in a portal.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "string | boolean | HTMLElement | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | boolean | HTMLElement | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "false",
+        "3": "true",
+        "4": {
+          "kind": "object",
+          "type": "HTMLElement",
+          "schema": {}
+        }
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "title",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "transition",
+    "global": false,
+    "description": "Animate the dialog when opening or closing.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ overlay?: ClassValue; content?: ClassValue; header?: ClassValue; wrapper?: ClassValue; body?: ClassValue; footer?: ClassValue; title?: ClassValue; description?: ClassValue; close?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ overlay?: ClassValue; content?: ClassValue; header?: ClassValue; wrapper?: ClassValue; body?: ClassValue; footer?: ClassValue; title?: ClassValue; description?: ClassValue; close?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ overlay?: ClassValue; content?: ClassValue; header?: ClassValue; wrapper?: ClassValue; body?: ClassValue; footer?: ClassValue; title?: ClassValue; description?: ClassValue; close?: ClassValue; }"
+      }
+    }
+  }
+],
+  "emits": [
+  {
+    "name": "after:enter",
+    "description": "",
+    "type": "[]"
+  },
+  {
+    "name": "after:leave",
+    "description": "",
+    "type": "[]"
+  },
+  {
+    "name": "close:prevent",
+    "description": "",
+    "type": "[]"
+  },
+  {
+    "name": "update:open",
+    "description": "",
+    "type": "[value: boolean]"
+  }
+],
+  "slots": [
+  {
+    "name": "open",
+    "description": "",
+    "type": "boolean"
+  }
+]
+}

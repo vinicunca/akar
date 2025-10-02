@@ -29,11 +29,10 @@
     "@babel/traverse": "catalog:docs",
     "@iconify/json": "catalog:base",
     "@types/babel__traverse": "catalog:docs",
-    "@types/markdown-it": "catalog:docs",
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/unocss-preset": "catalog:docs",
     "fast-glob": "catalog:docs",
-    "markdown-it": "catalog:docs",
+    "nuxt-component-meta": "^0.14.0",
     "unocss": "catalog:base",
     "vue-component-meta": "catalog:docs"
   }

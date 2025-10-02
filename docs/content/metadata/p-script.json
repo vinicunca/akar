@@ -1,0 +1,13 @@
+{
+  "props": [
+  {
+    "name": "src",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string",
+    "schema": "string"
+  }
+]
+}

@@ -1,0 +1,1234 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'div'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any"
+  },
+  {
+    "name": "collapsible",
+    "global": false,
+    "description": "When type is 'single', allows closing content when clicking trigger for an open item.\nWhen type is 'multiple', this prop has no effect.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "defaultValue",
+    "global": false,
+    "description": "The default active value of the item(s).\n\nUse when you do not need to control the state of the item(s).",
+    "tags": [],
+    "required": false,
+    "type": "string | string[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | string[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": {
+          "kind": "array",
+          "type": "string[]",
+          "schema": [
+            "string"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "disabled",
+    "global": false,
+    "description": "When `true`, prevents the user from interacting with the accordion and all its items",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "items",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "PAccordionItem[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "PAccordionItem[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "PAccordionItem[]",
+          "schema": [
+            {
+              "kind": "object",
+              "type": "PAccordionItem",
+              "schema": {
+                "label": {
+                  "name": "label",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "string | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "string"
+                    }
+                  }
+                },
+                "icon": {
+                  "name": "icon",
+                  "global": false,
+                  "description": "",
+                  "tags": [
+                    {
+                      "name": "IconifyIcon"
+                    }
+                  ],
+                  "required": false,
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "string | object | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "string",
+                      "2": "object"
+                    }
+                  }
+                },
+                "trailingIcon": {
+                  "name": "trailingIcon",
+                  "global": false,
+                  "description": "",
+                  "tags": [
+                    {
+                      "name": "IconifyIcon"
+                    }
+                  ],
+                  "required": false,
+                  "type": "string | object | undefined",
+                  "schema": "string | object | undefined"
+                },
+                "slot": {
+                  "name": "slot",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": "string | undefined"
+                },
+                "content": {
+                  "name": "content",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": "string | undefined"
+                },
+                "value": {
+                  "name": "value",
+                  "global": false,
+                  "description": "A unique value for the accordion item. Defaults to the index.",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": "string | undefined"
+                },
+                "disabled": {
+                  "name": "disabled",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "boolean | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "false",
+                      "2": "true"
+                    }
+                  }
+                },
+                "class": {
+                  "name": "class",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "any",
+                  "schema": "any"
+                },
+                "pohon": {
+                  "name": "pohon",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'>"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "labelKey",
+    "global": false,
+    "description": "The key used to get the label from the item.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'label'"
+      }
+    ],
+    "required": false,
+    "type": "GetItemKeys<PAccordionItem> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "GetItemKeys<PAccordionItem> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    },
+    "default": "'label'"
+  },
+  {
+    "name": "modelValue",
+    "global": false,
+    "description": "The controlled value of the active item(s).\n\nUse this when you need to control the state of the items. Can be binded with `v-model`",
+    "tags": [],
+    "required": false,
+    "type": "string | string[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | string[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": {
+          "kind": "array",
+          "type": "string[]",
+          "schema": [
+            "string"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "trailingIcon",
+    "global": false,
+    "description": "The icon displayed on the right side of the trigger.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.chevronDown"
+      },
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "type",
+    "global": false,
+    "description": "Determines whether a 'single' or 'multiple' items can be pressed at a time.\n\nThis prop will overwrite the inferred type from `modelValue` and `defaultValue`.",
+    "tags": [],
+    "required": false,
+    "type": "SingleOrMultipleType | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "SingleOrMultipleType | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'multiple'",
+        "2": "'single'"
+      }
+    },
+    "default": "'single'"
+  },
+  {
+    "name": "unmountOnHide",
+    "global": false,
+    "description": "When `true`, the element will be unmounted on closed state.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "`true`"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }"
+      }
+    }
+  }
+],
+  "events": [
+  {
+    "name": "update:modelValue",
+    "description": "",
+    "tags": [],
+    "type": "[value: string | string[] | undefined]",
+    "signature": "(evt: 'update:modelValue', value: string | string[] | undefined): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "string | string[] | undefined",
+        "schema": [
+          "undefined",
+          "string",
+          {
+            "kind": "array",
+            "type": "string[]",
+            "schema": [
+              "string"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+],
+  "slots": [
+  {
+    "name": "leading",
+    "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PAccordionItem",
+          "schema": {
+            "kind": "object",
+            "type": "PAccordionItem",
+            "schema": {
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "content": {
+                "name": "content",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "value": {
+                "name": "value",
+                "global": false,
+                "description": "A unique value for the accordion item. Defaults to the index.",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "default",
+    "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PAccordionItem",
+          "schema": {
+            "kind": "object",
+            "type": "PAccordionItem",
+            "schema": {
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "content": {
+                "name": "content",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "value": {
+                "name": "value",
+                "global": false,
+                "description": "A unique value for the accordion item. Defaults to the index.",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "trailing",
+    "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PAccordionItem",
+          "schema": {
+            "kind": "object",
+            "type": "PAccordionItem",
+            "schema": {
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "content": {
+                "name": "content",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "value": {
+                "name": "value",
+                "global": false,
+                "description": "A unique value for the accordion item. Defaults to the index.",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "content",
+    "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PAccordionItem",
+          "schema": {
+            "kind": "object",
+            "type": "PAccordionItem",
+            "schema": {
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "content": {
+                "name": "content",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "value": {
+                "name": "value",
+                "global": false,
+                "description": "A unique value for the accordion item. Defaults to the index.",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "body",
+    "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PAccordionItem; index: number; open: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PAccordionItem",
+          "schema": {
+            "kind": "object",
+            "type": "PAccordionItem",
+            "schema": {
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "content": {
+                "name": "content",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "value": {
+                "name": "value",
+                "global": false,
+                "description": "A unique value for the accordion item. Defaults to the index.",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; header?: ClassValue; trigger?: ClassValue; content?: ClassValue; body?: ClassValue; leadingIcon?: ClassValue; trailingIcon?: ClassValue; label?: ClassValue; }, 'body' | 'trailingIcon' | 'label' | 'item' | 'header' | 'trigger' | 'content' | 'leadingIcon'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  }
+],
+  "exposed": []
+}

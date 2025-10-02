@@ -1,0 +1,37 @@
+{
+  "props": [
+  {
+    "name": "level",
+    "global": false,
+    "description": "The heading level to apply to the steps.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'3'"
+      }
+    ],
+    "required": false,
+    "type": "'2' | '3' | '4' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'2' | '3' | '4' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'2'",
+        "2": "'3'",
+        "3": "'4'"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "description": "",
+    "type": ""
+  },
+  {
+    "description": "",
+    "type": ""
+  }
+]
+}

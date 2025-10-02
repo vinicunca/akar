@@ -1,22 +1,12 @@
-import type { MetaCheckerOptions } from 'vue-component-meta';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import type { ComponentMeta } from 'vue-component-meta';
+import { mkdirSync } from 'node:fs';
 import { join, parse, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import fg from 'fast-glob';
-import { createChecker } from 'vue-component-meta';
-import { parseMetaEvents, parseMetaExposed, parseMetaProps, parseMetaSlots, stringifyJson } from './utils.gen';
-
-const checkerOptions: MetaCheckerOptions = {
-  forceUseTs: true,
-  printer: { newLine: 1 },
-};
+import { getComponentMeta } from 'nuxt-component-meta/parser';
+import { writeToJson } from './utils.gen';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-
-const tsconfigChecker = createChecker(
-  resolve(__dirname, '../../packages/pohon/tsconfig.json'),
-  checkerOptions,
-);
 
 const allComponents = fg.sync([
   'components/**/*.vue',
@@ -26,7 +16,7 @@ const allComponents = fg.sync([
   absolute: true,
 });
 
-const metaDirPath = resolve(__dirname, '../content/docs/_meta');
+const metaDirPath = resolve(__dirname, '../content/metadata');
 // if meta dir doesn't exist create
 mkdirSync(metaDirPath, { recursive: true });
 
@@ -34,32 +24,56 @@ export function generateMetaPohon() {
   allComponents.forEach((componentPath) => {
     const componentName = parse(componentPath).name;
 
-    const metaMdFilePath = join(metaDirPath, `p-${componentName}.md`);
+    const metaJsonFilePath = join(metaDirPath, `p-${componentName}.json`);
 
-    const meta = tsconfigChecker.getComponentMeta(componentPath);
+    const meta = getComponentMeta(componentPath);
 
-    let parsedString = '<!-- This file was automatic generated. Do not edit it manually -->\n\n';
+    const payloadJson = {
+      props: parseMetaProps(meta.props),
+      events: meta.events,
+      slots: meta.slots,
+      exposed: meta.exposed,
+    };
 
-    const metaProps = parseMetaProps(meta.props);
-    if (metaProps.length) {
-      parsedString += `<DocsPropsTable :data="${stringifyJson(metaProps)}" />\n`;
-    }
-
-    const metaEvents = parseMetaEvents(meta.events);
-    if (metaEvents.length) {
-      parsedString += `\n<DocsEmitsTable :data="${stringifyJson(metaEvents)}" />\n`;
-    }
-
-    const metaSlots = parseMetaSlots(meta.slots);
-    if (metaSlots.length) {
-      parsedString += `\n<DocsSlotsTable :data="${stringifyJson(metaSlots)}" />\n`;
-    }
-
-    const metaExposed = parseMetaExposed(meta.exposed);
-    if (metaExposed.length) {
-      parsedString += `\n<DocsExposedTable :data="${stringifyJson(metaExposed)}" />\n`;
-    }
-
-    writeFileSync(metaMdFilePath, parsedString);
+    writeToJson({
+      filePath: metaJsonFilePath,
+      data: payloadJson,
+    });
   });
+}
+
+function parseMetaProps(metaProps: ComponentMeta['props']) {
+  return metaProps
+    .map((prop) => {
+      if (prop.type.includes('APrimitiveAsTag')) {
+        const description = `${prop.description}\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.`;
+
+        return {
+          ...prop,
+          schema: 'any',
+          description,
+        };
+      }
+
+      return prop;
+    })
+    .sort((a, b) => {
+      if (a.name === 'as') {
+        return -1;
+      }
+
+      if (b.name === 'as') {
+        return 1;
+      }
+
+      if (a.name === 'pohon') {
+        return 1;
+      }
+
+      if (b.name === 'pohon') {
+        return -1;
+      }
+
+      return a.name.localeCompare(b.name);
+    });
 }

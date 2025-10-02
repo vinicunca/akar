@@ -4,7 +4,7 @@ import { DocsHighlightInlineType } from '#components';
 type PropDef = {
   name?: string;
   required?: boolean;
-  type: string;
+  type?: string;
   description?: string;
 };
 

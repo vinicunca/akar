@@ -39,5 +39,43 @@ export default defineContentConfig({
         ),
       }),
     }),
+    metadata: defineCollection({
+      type: 'data',
+      source: 'metadata/**.json',
+      schema: z.object({
+        props: z.array(
+          z.object({
+            name: z.string(),
+            description: z.string().optional(),
+            type: z.string().optional(),
+            required: z.boolean().optional(),
+            default: z.string().optional(),
+            tags: z.record(z.string()).optional(),
+            schema: z.any().optional(),
+          }),
+        ),
+        emits: z.array(
+          z.object({
+            name: z.string(),
+            description: z.string().optional(),
+            type: z.string().optional(),
+          }),
+        ),
+        slots: z.array(
+          z.object({
+            name: z.string(),
+            description: z.string().optional(),
+            type: z.string().optional(),
+          }),
+        ),
+        exposed: z.array(
+          z.object({
+            name: z.string(),
+            description: z.string().optional(),
+            type: z.string().optional(),
+          }),
+        ),
+      }),
+    }),
   },
 });

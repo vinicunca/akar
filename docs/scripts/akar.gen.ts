@@ -1,5 +1,6 @@
-import type { MetaCheckerOptions } from 'vue-component-meta';
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import type { DeepPartial } from '@vinicunca/perkakas';
+import type { ComponentMeta, MetaCheckerOptions } from 'vue-component-meta';
+import { mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { join, parse, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import _traverse from '@babel/traverse';
@@ -8,7 +9,7 @@ import { components } from 'akar/constant';
 import fg from 'fast-glob';
 import { createChecker } from 'vue-component-meta';
 import { babelParse, parse as sfcParse } from 'vue/compiler-sfc';
-import { parseMetaEvents, parseMetaExposed, parseMetaProps, parseMetaSlots, stringifyJson } from './utils.gen';
+import { parseMetaEvents, parseMetaExposed, parseMetaProps, parseMetaSlots, writeToJson } from './utils.gen';
 
 // @ts-expect-error ignore
 const traverse = _traverse.default as typeof _traverse;
@@ -45,7 +46,7 @@ const primitiveComponents = allComponents.filter((i) => {
   return listOfComponents.includes(fileName);
 });
 
-const metaDirPath = resolve(__dirname, '../content/docs/_meta');
+const metaDirPath = resolve(__dirname, '../content/metadata');
 // if meta dir doesn't exist create
 mkdirSync(metaDirPath, { recursive: true });
 
@@ -68,35 +69,34 @@ export function generateMetaAkar() {
 
     const meta = tsconfigChecker.getComponentMeta(componentPath);
 
-    const metaMdFilePath = join(metaDirPath, `a-${componentName}.md`);
+    const metaJsonFilePath = join(metaDirPath, `a-${componentName}.json`);
 
-    let parsedString = '<!-- This file was automatic generated. Do not edit it manually -->\n\n';
+    const payloadJson: DeepPartial<ComponentMeta> = {};
 
     const metaProps = parseMetaProps(meta.props);
     if (metaProps.length) {
-      parsedString += '#### Props\n';
-      parsedString += `:docs-props-table{name='props-${componentName}' :data='${stringifyJson(metaProps)}'} \n`;
+      payloadJson.props = metaProps;
     }
 
     const metaEvents = parseMetaEvents(meta.events, eventDescriptionMap);
     if (metaEvents.length) {
-      parsedString += '\n#### Events\n';
-      parsedString += `\n:docs-emits-table{name='events-${componentName}' :data='${stringifyJson(metaEvents)}'} \n`;
+      payloadJson.emits = metaEvents;
     }
 
     const metaSlots = parseMetaSlots(meta.slots);
     if (metaSlots.length) {
-      parsedString += '\n#### Slots\n';
-      parsedString += `\n:docs-slots-table{name='slots-${componentName}' :data='${stringifyJson(metaSlots)}'} \n`;
+      payloadJson.slots = metaSlots;
     }
 
     const metaExposed = parseMetaExposed(meta.exposed);
     if (metaExposed.length) {
-      parsedString += '\n#### Exposed\n';
-      parsedString += `\n:docs-exposed-table{name='exposed-${componentName}' :data='${stringifyJson(metaExposed)}'} \n`;
+      payloadJson.exposed = metaExposed;
     }
 
-    writeFileSync(metaMdFilePath, parsedString);
+    writeToJson({
+      filePath: metaJsonFilePath,
+      data: payloadJson,
+    });
   });
 }
 

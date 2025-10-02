@@ -1,0 +1,95 @@
+{
+  "props": [
+  {
+    "name": "alt",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string",
+    "schema": "string"
+  },
+  {
+    "name": "height",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    }
+  },
+  {
+    "name": "src",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string",
+    "schema": "string"
+  },
+  {
+    "name": "width",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    }
+  },
+  {
+    "name": "zoom",
+    "global": false,
+    "description": "Zoom image on click",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ base?: ClassValue; overlay?: ClassValue; content?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ base?: ClassValue; overlay?: ClassValue; content?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ base?: ClassValue; overlay?: ClassValue; content?: ClassValue; }"
+      }
+    }
+  }
+]
+}

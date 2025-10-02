@@ -1,44 +1,36 @@
 import type { ComponentMeta, PropertyMeta, PropertyMetaSchema } from 'vue-component-meta';
-import MarkdownIt from 'markdown-it';
-
-const md = new MarkdownIt();
-md.use(transformJSDocLinks);
-
-// Define a custom plugin to transform JSDoc @link tags
-function transformJSDocLinks(md: MarkdownIt) {
-  md.core.ruler.push('transform-jsdoc-links', (state) => {
-    state.tokens.forEach((token) => {
-      if (token.type === 'inline' && token.children?.length) {
-        for (let i = 0; i < token.children.length; i++) {
-          const child = token.children[i];
-          if (child.type === 'text' && child.content.startsWith('{@link')) {
-            // eslint-disable-next-line regexp/no-super-linear-backtracking
-            const matches = child.content.match(/\{@link\s+(.*?)\}/);
-            if (matches) {
-              const linkText = matches[1];
-              const linkNode = new state.Token('link_open', 'a', 1);
-              linkNode.attrSet('href', linkText);
-              linkNode.attrSet('target', '_blank');
-              const textNode = new state.Token('text', '', 0);
-              textNode.content = 'reference';
-              token.children.splice(i, 1, linkNode, textNode, new state.Token('link_close', 'a', -1));
-              // eslint-disable-next-line sonar/updated-loop-counter
-              i += 2; // Skip the added link and text tokens
-            }
-          }
-        }
-      }
-    });
-  });
-}
+import { createWriteStream } from 'node:fs';
 
 export function stringifyJson(obj: any) {
   return JSON
     .stringify(obj, null, 2)
     // Nuxt content's MDC is picky with quotes so we need the triple slashes
-    .replace(/\\"/g, '\\\'')
-    // This one also the line breaks seems not being rendered so we need to double escape them
-    .replace(/\\n/g, '\\\\n');
+    .replace(/\\"/g, '\'');
+}
+
+export function writeToJson(
+  { filePath, data }:
+  { filePath: string; data: any },
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const stream = createWriteStream(filePath);
+    stream.on('error', reject);
+    stream.on('finish', resolve);
+
+    stream.write('{\n');
+
+    const keys = Object.keys(data);
+
+    Object.keys(data).forEach((key, index) => {
+      stream.write(`  "${key}": ${stringifyJson(data[key])}`);
+      if (index < keys.length - 1) {
+        stream.write(',');
+      }
+      stream.write('\n');
+    });
+
+    stream.write('}\n');
+  });
 }
 
 export function parseTypeFromSchema(schema: PropertyMetaSchema): string {
@@ -64,7 +56,7 @@ export function parseTypeFromSchema(schema: PropertyMetaSchema): string {
 
 export function parseMetaProps(metaProps: ComponentMeta['props']) {
   return metaProps
-  // Exclude global props
+    // Exclude global props
     .filter((prop) => !prop.global)
     .map((prop) => {
       let defaultValue = prop.default;
@@ -83,13 +75,13 @@ export function parseMetaProps(metaProps: ComponentMeta['props']) {
         type = parseTypeFromSchema(prop.schema) || type;
       }
 
-      return ({
+      return {
         name,
         description,
         type: type.replace(/\s*\|\s*undefined/g, ''),
         required,
         default: defaultValue ?? undefined,
-      });
+      };
     })
     .sort((a, b) => {
       if (a.name === 'as') {
@@ -111,6 +103,32 @@ export function parseMetaProps(metaProps: ComponentMeta['props']) {
       return a.name.localeCompare(b.name);
     });
 };
+
+export function parsePohonMetaProps(metaProps: ComponentMeta['props']) {
+  return metaProps
+    // Exclude global props
+    .filter((prop) => !prop.global)
+    .map((sch) => stripeTypeScriptInternalTypesSchema(sch))
+    .sort((a, b) => {
+      if (a.name === 'as') {
+        return -1;
+      }
+
+      if (b.name === 'as') {
+        return 1;
+      }
+
+      if (a.name === 'pohon') {
+        return 1;
+      }
+
+      if (b.name === 'pohon') {
+        return -1;
+      }
+
+      return a.name.localeCompare(b.name);
+    });
+}
 
 export function parseMetaSlots(metaSlots: ComponentMeta['slots']) {
   const defaultSlot = metaSlots?.[0];
@@ -155,4 +173,55 @@ export function parseMetaExposed(metaExposed: ComponentMeta['exposed']) {
       description: expose.description,
       type: expose.type,
     }));
+}
+
+function stripeTypeScriptInternalTypesSchema(type: any, topLevel: boolean = true): any {
+  if (!type) {
+    return type;
+  }
+
+  if (!topLevel && type.declarations && type.declarations.find((d: any) => d.file.includes('node_modules/typescript') || d.file.includes('@vue/runtime-core'))) {
+    return false;
+  }
+
+  if (Array.isArray(type)) {
+    return type.map((sch: any) => stripeTypeScriptInternalTypesSchema(sch, false)).filter((r) => r !== false);
+  }
+
+  if (Array.isArray(type.schema)) {
+    return {
+      ...type,
+      declarations: undefined,
+      schema: type.schema.map((sch: any) => stripeTypeScriptInternalTypesSchema(sch, false)).filter((r: any) => r !== false),
+    };
+  }
+
+  if (!type.schema || typeof type.schema !== 'object') {
+    return typeof type === 'object' ? { ...type, declarations: undefined } : type;
+  }
+
+  const schema: any = {};
+  Object.keys(type.schema).forEach((sch) => {
+    if (sch === 'schema' && type.schema[sch]) {
+      schema[sch] = schema[sch] || {};
+      Object.keys(type.schema[sch]).forEach((sch2) => {
+        const res = stripeTypeScriptInternalTypesSchema(type.schema[sch][sch2], false);
+        if (res !== false) {
+          schema[sch][sch2] = res;
+        }
+      });
+      return;
+    }
+    const res = stripeTypeScriptInternalTypesSchema(type.schema[sch], false);
+
+    if (res !== false) {
+      schema[sch] = res;
+    }
+  });
+
+  return {
+    ...type,
+    declarations: undefined,
+    schema,
+  };
 }

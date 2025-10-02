@@ -1,0 +1,1263 @@
+{
+  "props": [
+  {
+    "name": "defaultValue",
+    "global": false,
+    "description": "The default tab to select.",
+    "tags": [
+      {
+        "name": "example",
+        "text": "'1'"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    },
+    "default": "'0'"
+  },
+  {
+    "name": "hash",
+    "global": false,
+    "description": "The hash to scroll to when the tab is selected.",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "modelValue",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "sync",
+    "global": false,
+    "description": "Sync the selected tab with a local storage key.",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  }
+],
+  "emits": [
+  {
+    "name": "update:modelValue",
+    "description": "",
+    "type": "[value: string]"
+  }
+],
+  "slots": [
+  {
+    "description": "",
+    "type": ""
+  },
+  {
+    "description": "",
+    "type": ""
+  }
+]
+}
+              {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuardWithThis<undefined> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuardWithThis<undefined> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteUpdate": {
+              "name": "beforeRouteUpdate",
+              "global": false,
+              "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuard | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteLeave": {
+              "name": "beforeRouteLeave",
+              "global": false,
+              "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": "NavigationGuard | undefined"
+            },
+            "head": {
+              "name": "head",
+              "global": false,
+              "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+              "tags": [],
+              "required": false,
+              "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                    "schema": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "20": {
+          "kind": "event",
+          "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+          "schema": []
+        },
+        "21": {
+          "kind": "object",
+          "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "activationMode",
+    "global": false,
+    "description": "Whether a tab is activated automatically (on focus) or manually (on click).",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "automatic"
+      }
+    ],
+    "required": false,
+    "type": "'automatic' | 'manual' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'automatic' | 'manual' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'automatic'",
+        "2": "'manual'"
+      }
+    }
+  },
+  {
+    "name": "color",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'primary'"
+      }
+    ],
+    "required": false,
+    "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'error'",
+        "2": "'primary'",
+        "3": "'secondary'",
+        "4": "'success'",
+        "5": "'info'",
+        "6": "'warning'",
+        "7": "'neutral'"
+      }
+    }
+  },
+  {
+    "name": "content",
+    "global": false,
+    "description": "The content of the tabs, can be disabled to prevent rendering the content.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "defaultValue",
+    "global": false,
+    "description": "The value of the tab that should be active when initially rendered. Use when you do not need to control the state of the tabs",
+    "tags": [],
+    "required": false,
+    "type": "string | number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    },
+    "default": "'0'"
+  },
+  {
+    "name": "items",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "PTabsItem[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "PTabsItem[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "PTabsItem[]",
+          "schema": [
+            {
+              "kind": "object",
+              "type": "PTabsItem",
+              "schema": {
+                "label": {
+                  "name": "label",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "string | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "string"
+                    }
+                  }
+                },
+                "icon": {
+                  "name": "icon",
+                  "global": false,
+                  "description": "",
+                  "tags": [
+                    {
+                      "name": "IconifyIcon"
+                    }
+                  ],
+                  "required": false,
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "string | object | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "string",
+                      "2": "object"
+                    }
+                  }
+                },
+                "avatar": {
+                  "name": "avatar",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "PAvatarProps | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "PAvatarProps | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": {
+                        "kind": "object",
+                        "type": "PAvatarProps",
+                        "schema": {
+                          "as": {
+                            "name": "as",
+                            "global": false,
+                            "description": "The element or component this component should render as.",
+                            "tags": [
+                              {
+                                "name": "defaultValue",
+                                "text": "'span'"
+                              }
+                            ],
+                            "required": false,
+                            "type": "APrimitiveAsTag | Component | undefined",
+                            "schema": {
+                              "kind": "enum",
+                              "type": "APrimitiveAsTag | Component | undefined",
+                              "schema": {
+                                "0": "undefined",
+                                "1": "'a'",
+                                "2": "'button'",
+                                "3": "'div'",
+                                "4": "'form'",
+                                "5": "'h2'",
+                                "6": "'h3'",
+                                "7": "'img'",
+                                "8": "'input'",
+                                "9": "'label'",
+                                "10": "'li'",
+                                "11": "'nav'",
+                                "12": "'ol'",
+                                "13": "'p'",
+                                "14": "'span'",
+                                "15": "'svg'",
+                                "16": "'template'",
+                                "17": "'ul'",
+                                "18": {
+                                  "kind": "object",
+                                  "type": "string & {}",
+                                  "schema": {}
+                                },
+                                "19": {
+                                  "kind": "object",
+                                  "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>",
+                                  "schema": {
+                                    "beforeRouteEnter": {
+                                      "name": "beforeRouteEnter",
+                                      "global": false,
+                                      "description": "Guard called when the router is navigating to the route that is rendering\nthis component from a different route. Differently from `beforeRouteUpdate`\nand `beforeRouteLeave`, `beforeRouteEnter` does not have access to the\ncomponent instance through `this` because it triggers before the component\nis even mounted.",
+                                      "tags": [
+                                        {
+                                          "name": "param",
+                                          "text": "to - RouteLocationRaw we are navigating to"
+                                        },
+                                        {
+                                          "name": "param",
+                                          "text": "from - RouteLocationRaw we are navigating from"
+                                        },
+                                        {
+                                          "name": "param",
+                                          "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                                        }
+                                      ],
+                                      "required": false,
+                                      "type": "NavigationGuardWithThis<undefined> | undefined",
+                                      "schema": {
+                                        "kind": "enum",
+                                        "type": "NavigationGuardWithThis<undefined> | undefined",
+                                        "schema": {
+                                          "0": "undefined",
+                                          "1": {
+                                            "kind": "event",
+                                            "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                                            "schema": []
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "beforeRouteUpdate": {
+                                      "name": "beforeRouteUpdate",
+                                      "global": false,
+                                      "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+                                      "tags": [
+                                        {
+                                          "name": "param",
+                                          "text": "to - RouteLocationRaw we are navigating to"
+                                        },
+                                        {
+                                          "name": "param",
+                                          "text": "from - RouteLocationRaw we are navigating from"
+                                        },
+                                        {
+                                          "name": "param",
+                                          "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                                        }
+                                      ],
+                                      "required": false,
+                                      "type": "NavigationGuard | undefined",
+                                      "schema": {
+                                        "kind": "enum",
+                                        "type": "NavigationGuard | undefined",
+                                        "schema": {
+                                          "0": "undefined",
+                                          "1": {
+                                            "kind": "event",
+                                            "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                                            "schema": []
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "beforeRouteLeave": {
+                                      "name": "beforeRouteLeave",
+                                      "global": false,
+                                      "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+                                      "tags": [
+                                        {
+                                          "name": "param",
+                                          "text": "to - RouteLocationRaw we are navigating to"
+                                        },
+                                        {
+                                          "name": "param",
+                                          "text": "from - RouteLocationRaw we are navigating from"
+                                        },
+                                        {
+                                          "name": "param",
+                                          "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                                        }
+                                      ],
+                                      "required": false,
+                                      "type": "NavigationGuard | undefined",
+                                      "schema": "NavigationGuard | undefined"
+                                    },
+                                    "head": {
+                                      "name": "head",
+                                      "global": false,
+                                      "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+                                      "tags": [],
+                                      "required": false,
+                                      "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                                      "schema": {
+                                        "kind": "enum",
+                                        "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                                        "schema": {
+                                          "0": "undefined",
+                                          "1": {
+                                            "kind": "event",
+                                            "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                                            "schema": []
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "20": {
+                                  "kind": "event",
+                                  "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+                                  "schema": []
+                                },
+                                "21": {
+                                  "kind": "object",
+                                  "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+                                  "schema": {}
+                                }
+                              }
+                            }
+                          },
+                          "src": {
+                            "name": "src",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "string | undefined",
+                            "schema": "string | undefined"
+                          },
+                          "alt": {
+                            "name": "alt",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "string | undefined",
+                            "schema": "string | undefined"
+                          },
+                          "icon": {
+                            "name": "icon",
+                            "global": false,
+                            "description": "",
+                            "tags": [
+                              {
+                                "name": "IconifyIcon"
+                              }
+                            ],
+                            "required": false,
+                            "type": "string | object | undefined",
+                            "schema": "string | object | undefined"
+                          },
+                          "text": {
+                            "name": "text",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "string | undefined",
+                            "schema": "string | undefined"
+                          },
+                          "size": {
+                            "name": "size",
+                            "global": false,
+                            "description": "",
+                            "tags": [
+                              {
+                                "name": "defaultValue",
+                                "text": "'md'"
+                              }
+                            ],
+                            "required": false,
+                            "type": "'md' | '3xs' | '2xs' | 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl' | undefined",
+                            "schema": {
+                              "kind": "enum",
+                              "type": "'md' | '3xs' | '2xs' | 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl' | undefined",
+                              "schema": {
+                                "0": "undefined",
+                                "1": "'md'",
+                                "2": "'3xs'",
+                                "3": "'2xs'",
+                                "4": "'xs'",
+                                "5": "'sm'",
+                                "6": "'lg'",
+                                "7": "'xl'",
+                                "8": "'2xl'",
+                                "9": "'3xl'"
+                              }
+                            }
+                          },
+                          "chip": {
+                            "name": "chip",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "boolean | PChipProps | undefined",
+                            "schema": {
+                              "kind": "enum",
+                              "type": "boolean | PChipProps | undefined",
+                              "schema": {
+                                "0": "undefined",
+                                "1": "false",
+                                "2": "true",
+                                "3": {
+                                  "kind": "object",
+                                  "type": "PChipProps",
+                                  "schema": {
+                                    "as": {
+                                      "name": "as",
+                                      "global": false,
+                                      "description": "The element or component this component should render as.",
+                                      "tags": [
+                                        {
+                                          "name": "defaultValue",
+                                          "text": "'div'"
+                                        }
+                                      ],
+                                      "required": false,
+                                      "type": "APrimitiveAsTag | Component | undefined",
+                                      "schema": "APrimitiveAsTag | Component | undefined"
+                                    },
+                                    "text": {
+                                      "name": "text",
+                                      "global": false,
+                                      "description": "Display some text inside the chip.",
+                                      "tags": [],
+                                      "required": false,
+                                      "type": "string | number | undefined",
+                                      "schema": {
+                                        "kind": "enum",
+                                        "type": "string | number | undefined",
+                                        "schema": {
+                                          "0": "undefined",
+                                          "1": "string",
+                                          "2": "number"
+                                        }
+                                      }
+                                    },
+                                    "color": {
+                                      "name": "color",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [
+                                        {
+                                          "name": "defaultValue",
+                                          "text": "'primary'"
+                                        }
+                                      ],
+                                      "required": false,
+                                      "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+                                      "schema": {
+                                        "kind": "enum",
+                                        "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+                                        "schema": {
+                                          "0": "undefined",
+                                          "1": "'error'",
+                                          "2": "'primary'",
+                                          "3": "'secondary'",
+                                          "4": "'success'",
+                                          "5": "'info'",
+                                          "6": "'warning'",
+                                          "7": "'neutral'"
+                                        }
+                                      }
+                                    },
+                                    "size": {
+                                      "name": "size",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [
+                                        {
+                                          "name": "defaultValue",
+                                          "text": "'md'"
+                                        }
+                                      ],
+                                      "required": false,
+                                      "type": "'md' | '3xs' | '2xs' | 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl' | undefined",
+                                      "schema": "'md' | '3xs' | '2xs' | 'xs' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl' | undefined"
+                                    },
+                                    "position": {
+                                      "name": "position",
+                                      "global": false,
+                                      "description": "The position of the chip.",
+                                      "tags": [
+                                        {
+                                          "name": "defaultValue",
+                                          "text": "'top-right'"
+                                        }
+                                      ],
+                                      "required": false,
+                                      "type": "'top-right' | 'bottom-right' | 'top-left' | 'bottom-left' | undefined",
+                                      "schema": {
+                                        "kind": "enum",
+                                        "type": "'top-right' | 'bottom-right' | 'top-left' | 'bottom-left' | undefined",
+                                        "schema": {
+                                          "0": "undefined",
+                                          "1": "'top-right'",
+                                          "2": "'bottom-right'",
+                                          "3": "'top-left'",
+                                          "4": "'bottom-left'"
+                                        }
+                                      }
+                                    },
+                                    "inset": {
+                                      "name": "inset",
+                                      "global": false,
+                                      "description": "When `true`, keep the chip inside the component for rounded elements.",
+                                      "tags": [],
+                                      "required": false,
+                                      "type": "boolean | undefined",
+                                      "schema": {
+                                        "kind": "enum",
+                                        "type": "boolean | undefined",
+                                        "schema": {
+                                          "0": "undefined",
+                                          "1": "false",
+                                          "2": "true"
+                                        }
+                                      }
+                                    },
+                                    "standalone": {
+                                      "name": "standalone",
+                                      "global": false,
+                                      "description": "When `true`, render the chip relatively to the parent.",
+                                      "tags": [],
+                                      "required": false,
+                                      "type": "boolean | undefined",
+                                      "schema": "boolean | undefined"
+                                    },
+                                    "class": {
+                                      "name": "class",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": false,
+                                      "type": "any",
+                                      "schema": "any"
+                                    },
+                                    "pohon": {
+                                      "name": "pohon",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": false,
+                                      "type": "{ root?: ClassValue; base?: ClassValue; } | undefined",
+                                      "schema": {
+                                        "kind": "enum",
+                                        "type": "{ root?: ClassValue; base?: ClassValue; } | undefined",
+                                        "schema": {
+                                          "0": "undefined",
+                                          "1": "{ root?: ClassValue; base?: ClassValue; }"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "class": {
+                            "name": "class",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "any",
+                            "schema": "any"
+                          },
+                          "style": {
+                            "name": "style",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "any",
+                            "schema": "any"
+                          },
+                          "pohon": {
+                            "name": "pohon",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "{ root?: ClassValue; image?: ClassValue; fallback?: ClassValue; icon?: ClassValue; } | undefined",
+                            "schema": {
+                              "kind": "enum",
+                              "type": "{ root?: ClassValue; image?: ClassValue; fallback?: ClassValue; icon?: ClassValue; } | undefined",
+                              "schema": {
+                                "0": "undefined",
+                                "1": "{ root?: ClassValue; image?: ClassValue; fallback?: ClassValue; icon?: ClassValue; }"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "badge": {
+                  "name": "badge",
+                  "global": false,
+                  "description": "Display a badge on the item.\n`{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang='ts-type'}",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | number | PBadgeProps | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "string | number | PBadgeProps | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "string",
+                      "2": "number",
+                      "3": {
+                        "kind": "object",
+                        "type": "PBadgeProps",
+                        "schema": {
+                          "as": {
+                            "name": "as",
+                            "global": false,
+                            "description": "The element or component this component should render as.",
+                            "tags": [
+                              {
+                                "name": "defaultValue",
+                                "text": "'span'"
+                              }
+                            ],
+                            "required": false,
+                            "type": "APrimitiveAsTag | Component | undefined",
+                            "schema": "APrimitiveAsTag | Component | undefined"
+                          },
+                          "label": {
+                            "name": "label",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "string | number | undefined",
+                            "schema": "string | number | undefined"
+                          },
+                          "color": {
+                            "name": "color",
+                            "global": false,
+                            "description": "",
+                            "tags": [
+                              {
+                                "name": "defaultValue",
+                                "text": "'primary'"
+                              }
+                            ],
+                            "required": false,
+                            "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+                            "schema": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined"
+                          },
+                          "variant": {
+                            "name": "variant",
+                            "global": false,
+                            "description": "",
+                            "tags": [
+                              {
+                                "name": "defaultValue",
+                                "text": "'solid'"
+                              }
+                            ],
+                            "required": false,
+                            "type": "'solid' | 'outline' | 'soft' | 'subtle' | undefined",
+                            "schema": {
+                              "kind": "enum",
+                              "type": "'solid' | 'outline' | 'soft' | 'subtle' | undefined",
+                              "schema": {
+                                "0": "undefined",
+                                "1": "'solid'",
+                                "2": "'outline'",
+                                "3": "'soft'",
+                                "4": "'subtle'"
+                              }
+                            }
+                          },
+                          "size": {
+                            "name": "size",
+                            "global": false,
+                            "description": "",
+                            "tags": [
+                              {
+                                "name": "defaultValue",
+                                "text": "'md'"
+                              }
+                            ],
+                            "required": false,
+                            "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+                            "schema": {
+                              "kind": "enum",
+                              "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+                              "schema": {
+                                "0": "undefined",
+                                "1": "'md'",
+                                "2": "'xs'",
+                                "3": "'sm'",
+                                "4": "'lg'",
+                                "5": "'xl'"
+                              }
+                            }
+                          },
+                          "square": {
+                            "name": "square",
+                            "global": false,
+                            "description": "Render the badge with equal padding on all sides.",
+                            "tags": [],
+                            "required": false,
+                            "type": "boolean | undefined",
+                            "schema": "boolean | undefined"
+                          },
+                          "class": {
+                            "name": "class",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "any",
+                            "schema": "any"
+                          },
+                          "pohon": {
+                            "name": "pohon",
+                            "global": false,
+                            "description": "",
+                            "tags": [],
+                            "required": false,
+                            "type": "{ base?: ClassValue; label?: ClassValue; leadingIcon?: ClassValue; leadingAvatar?: ClassValue; leadingAvatarSize?: ClassValue; trailingIcon?: ClassValue; } | undefined",
+                            "schema": {
+                              "kind": "enum",
+                              "type": "{ base?: ClassValue; label?: ClassValue; leadingIcon?: ClassValue; leadingAvatar?: ClassValue; leadingAvatarSize?: ClassValue; trailingIcon?: ClassValue; } | undefined",
+                              "schema": {
+                                "0": "undefined",
+                                "1": "{ base?: ClassValue; label?: ClassValue; leadingIcon?: ClassValue; leadingAvatar?: ClassValue; leadingAvatarSize?: ClassValue; trailingIcon?: ClassValue; }"
+                              }
+                            }
+                          },
+                          "trailingIcon": {
+                            "name": "trailingIcon",
+                            "global": false,
+                            "description": "Display an icon on the right side.",
+                            "tags": [
+                              {
+                                "name": "IconifyIcon"
+                              }
+                            ],
+                            "required": false,
+                            "type": "string | object | undefined",
+                            "schema": "string | object | undefined"
+                          },
+                          "leadingIcon": {
+                            "name": "leadingIcon",
+                            "global": false,
+                            "description": "Display an icon on the left side.",
+                            "tags": [
+                              {
+                                "name": "IconifyIcon"
+                              }
+                            ],
+                            "required": false,
+                            "type": "string | object | undefined",
+                            "schema": "string | object | undefined"
+                          },
+                          "leading": {
+                            "name": "leading",
+                            "global": false,
+                            "description": "When `true`, the icon will be displayed on the left side.",
+                            "tags": [],
+                            "required": false,
+                            "type": "boolean | undefined",
+                            "schema": "boolean | undefined"
+                          },
+                          "trailing": {
+                            "name": "trailing",
+                            "global": false,
+                            "description": "When `true`, the icon will be displayed on the right side.",
+                            "tags": [],
+                            "required": false,
+                            "type": "boolean | undefined",
+                            "schema": "boolean | undefined"
+                          },
+                          "icon": {
+                            "name": "icon",
+                            "global": false,
+                            "description": "Display an icon based on the `leading` and `trailing` props.",
+                            "tags": [
+                              {
+                                "name": "IconifyIcon"
+                              }
+                            ],
+                            "required": false,
+                            "type": "string | object | undefined",
+                            "schema": "string | object | undefined"
+                          },
+                          "avatar": {
+                            "name": "avatar",
+                            "global": false,
+                            "description": "Display an avatar on the left side.",
+                            "tags": [],
+                            "required": false,
+                            "type": "PAvatarProps | undefined",
+                            "schema": "PAvatarProps | undefined"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "slot": {
+                  "name": "slot",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": "string | undefined"
+                },
+                "content": {
+                  "name": "content",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": "string | undefined"
+                },
+                "value": {
+                  "name": "value",
+                  "global": false,
+                  "description": "A unique value for the tab item. Defaults to the index.",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | number | undefined",
+                  "schema": "string | number | undefined"
+                },
+                "disabled": {
+                  "name": "disabled",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "boolean | undefined",
+                  "schema": "boolean | undefined"
+                },
+                "class": {
+                  "name": "class",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "any",
+                  "schema": "any"
+                },
+                "pohon": {
+                  "name": "pohon",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "Pick<{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; leadingIcon?: ClassValue; leadingAvatar?: ClassValue; leadingAvatarSize?: ClassValue; label?: ClassValue; trailingBadge?: ClassValue; trailingBadgeSize?: ClassValue; content?: ClassValue; }, 'label' | 'trigger' | 'content' | 'leadingIcon' | 'leadingAvatar' | 'leadingAvatarSize' | 'trailingBadge' | 'trailingBadgeSize'> | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "Pick<{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; leadingIcon?: ClassValue; leadingAvatar?: ClassValue; leadingAvatarSize?: ClassValue; label?: ClassValue; trailingBadge?: ClassValue; trailingBadgeSize?: ClassValue; content?: ClassValue; }, 'label' | 'trigger' | 'content' | 'leadingIcon' | 'leadingAvatar' | 'leadingAvatarSize' | 'trailingBadge' | 'trailingBadgeSize'> | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "Pick<{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; leadingIcon?: ClassValue; leadingAvatar?: ClassValue; leadingAvatarSize?: ClassValue; label?: ClassValue; trailingBadge?: ClassValue; trailingBadgeSize?: ClassValue; content?: ClassValue; }, 'label' | 'trigger' | 'content' | 'leadingIcon' | 'leadingAvatar' | 'leadingAvatarSize' | 'trailingBadge' | 'trailingBadgeSize'>"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "labelKey",
+    "global": false,
+    "description": "The key used to get the label from the item.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'label'"
+      }
+    ],
+    "required": false,
+    "type": "GetItemKeys<PTabsItem> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "GetItemKeys<PTabsItem> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    },
+    "default": "'label'"
+  },
+  {
+    "name": "modelValue",
+    "global": false,
+    "description": "The controlled value of the tab to activate. Can be bind as `v-model`.",
+    "tags": [],
+    "required": false,
+    "type": "string | number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    }
+  },
+  {
+    "name": "orientation",
+    "global": false,
+    "description": "The orientation of the tabs.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'horizontal'"
+      }
+    ],
+    "required": false,
+    "type": "DataOrientation | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "DataOrientation | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'vertical'",
+        "2": "'horizontal'"
+      }
+    },
+    "default": "'horizontal'"
+  },
+  {
+    "name": "size",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'md'"
+      }
+    ],
+    "required": false,
+    "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'md'",
+        "2": "'xs'",
+        "3": "'sm'",
+        "4": "'lg'",
+        "5": "'xl'"
+      }
+    }
+  },
+  {
+    "name": "unmountOnHide",
+    "global": false,
+    "description": "When `true`, the element will be unmounted on closed state.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "`true`"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "variant",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'pill'"
+      }
+    ],
+    "required": false,
+    "type": "'link' | 'pill' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'link' | 'pill' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'link'",
+        "2": "'pill'"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; leadingIcon?: ClassValue; leadingAvatar?: ClassValue; leadingAvatarSize?: ClassValue; label?: ClassValue; trailingBadge?: ClassValue; trailingBadgeSize?: ClassValue; content?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; leadingIcon?: ClassValue; leadingAvatar?: ClassValue; leadingAvatarSize?: ClassValue; label?: ClassValue; trailingBadge?: ClassValue; trailingBadgeSize?: ClassValue; content?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; leadingIcon?: ClassValue; leadingAvatar?: ClassValue; leadingAvatarSize?: ClassValue; label?: ClassValue; trailingBadge?: ClassValue; trailingBadgeSize?: ClassValue; content?: ClassValue; }"
+      }
+    }
+  }
+],
+  "emits": [
+  {
+    "name": "update:modelValue",
+    "description": "",
+    "type": "[payload: string | number]"
+  }
+],
+  "slots": [
+  {
+    "name": "item",
+    "description": "",
+    "type": "PTabsItem"
+  },
+  {
+    "name": "index",
+    "description": "",
+    "type": "number"
+  }
+]
+}

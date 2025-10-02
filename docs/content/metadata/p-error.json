@@ -1,0 +1,259 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'div'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "APrimitiveAsTag | Component | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'a'",
+        "2": "'button'",
+        "3": "'div'",
+        "4": "'form'",
+        "5": "'h2'",
+        "6": "'h3'",
+        "7": "'img'",
+        "8": "'input'",
+        "9": "'label'",
+        "10": "'li'",
+        "11": "'nav'",
+        "12": "'ol'",
+        "13": "'p'",
+        "14": "'span'",
+        "15": "'svg'",
+        "16": "'template'",
+        "17": "'ul'",
+        "18": {
+          "kind": "object",
+          "type": "string & {}",
+          "schema": {}
+        },
+        "19": {
+          "kind": "object",
+          "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>",
+          "schema": {
+            "beforeRouteEnter": {
+              "name": "beforeRouteEnter",
+              "global": false,
+              "description": "Guard called when the router is navigating to the route that is rendering\nthis component from a different route. Differently from `beforeRouteUpdate`\nand `beforeRouteLeave`, `beforeRouteEnter` does not have access to the\ncomponent instance through `this` because it triggers before the component\nis even mounted.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuardWithThis<undefined> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuardWithThis<undefined> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteUpdate": {
+              "name": "beforeRouteUpdate",
+              "global": false,
+              "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuard | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteLeave": {
+              "name": "beforeRouteLeave",
+              "global": false,
+              "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": "NavigationGuard | undefined"
+            },
+            "head": {
+              "name": "head",
+              "global": false,
+              "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+              "tags": [],
+              "required": false,
+              "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                    "schema": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "20": {
+          "kind": "event",
+          "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+          "schema": []
+        },
+        "21": {
+          "kind": "object",
+          "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+          "schema": {}
+        }
+      }
+    },
+    "default": "'main'"
+  },
+  {
+    "name": "clear",
+    "global": false,
+    "description": "Display a button to clear the error in the links slot.\n`{ size: 'lg', color: 'primary', variant: 'solid', label: 'Back to home' }`{lang='ts-type'}",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | Partial<PButtonProps> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | Partial<PButtonProps> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true",
+        "3": "Partial<PButtonProps>"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "error",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "Partial<NuxtError<unknown> & { message: string; }> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "Partial<NuxtError<unknown> & { message: string; }> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "Partial<NuxtError<unknown> & { message: string; }>"
+      }
+    }
+  },
+  {
+    "name": "redirect",
+    "global": false,
+    "description": "The URL to redirect to when the error is cleared.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'/'"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    },
+    "default": "'/'"
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; statusCode?: ClassValue; statusMessage?: ClassValue; message?: ClassValue; links?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; statusCode?: ClassValue; statusMessage?: ClassValue; message?: ClassValue; links?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; statusCode?: ClassValue; statusMessage?: ClassValue; message?: ClassValue; links?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "description": "",
+    "type": ""
+  },
+  {
+    "description": "",
+    "type": ""
+  }
+]
+}

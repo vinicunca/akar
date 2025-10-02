@@ -1,0 +1,140 @@
+{
+  "props": [
+  {
+    "name": "closeText",
+    "global": false,
+    "description": "The text displayed when the code is expanded.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "t('prose.codeCollapse.closeText')"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "icon",
+    "global": false,
+    "description": "The icon displayed to toggle the code.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.chevronDown"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "name",
+    "global": false,
+    "description": "The name displayed in the trigger label.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "t('prose.codeCollapse.name')"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "open",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "false"
+  },
+  {
+    "name": "openText",
+    "global": false,
+    "description": "The text displayed when the code is collapsed.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "t('prose.codeCollapse.openText')"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; footer?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; footer?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; footer?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; }"
+      }
+    }
+  }
+],
+  "emits": [
+  {
+    "name": "update:open",
+    "description": "",
+    "type": "[value: boolean]"
+  }
+],
+  "slots": [
+  {
+    "description": "",
+    "type": ""
+  },
+  {
+    "description": "",
+    "type": ""
+  }
+]
+}

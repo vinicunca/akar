@@ -1,0 +1,109 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'div'"
+      }
+    ],
+    "required": false,
+    "type": "any",
+    "schema": "any"
+  },
+  {
+    "name": "description",
+    "global": false,
+    "description": "Description of the field",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "name",
+    "global": false,
+    "description": "The name of the field.",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "required",
+    "global": false,
+    "description": "Indicate whether the field is required",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "type",
+    "global": false,
+    "description": "Expected type of the field’s value",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; container?: ClassValue; name?: ClassValue; wrapper?: ClassValue; required?: ClassValue; type?: ClassValue; description?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; container?: ClassValue; name?: ClassValue; wrapper?: ClassValue; required?: ClassValue; type?: ClassValue; description?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; container?: ClassValue; name?: ClassValue; wrapper?: ClassValue; required?: ClassValue; type?: ClassValue; description?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "description": "",
+    "type": ""
+  },
+  {
+    "description": "",
+    "type": ""
+  }
+]
+}

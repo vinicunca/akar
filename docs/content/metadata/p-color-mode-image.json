@@ -1,0 +1,22 @@
+{
+  "props": [
+  {
+    "name": "dark",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string",
+    "schema": "string"
+  },
+  {
+    "name": "light",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string",
+    "schema": "string"
+  }
+]
+}

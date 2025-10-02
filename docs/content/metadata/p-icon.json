@@ -1,0 +1,79 @@
+{
+  "props": [
+  {
+    "name": "name",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string",
+    "schema": "string"
+  }
+]
+}
+ undefined, prefix?: string | undefined, provider?: string | undefined) => string) | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "((content: string, name?: string | undefined, prefix?: string | undefined, provider?: string | undefined) => string) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(content: string, name?: string | undefined, prefix?: string | undefined, provider?: string | undefined): string",
+          "schema": []
+        }
+      }
+    }
+  },
+  {
+    "name": "mode",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "'svg' | 'css' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'svg' | 'css' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'svg'",
+        "2": "'css'"
+      }
+    }
+  },
+  {
+    "name": "name",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string | object",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object",
+      "schema": {
+        "0": "string",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "size",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    }
+  }
+]
+}

@@ -68,4 +68,11 @@ export default vinicuncaESLint(
       'vue/no-extra-parens': 'off',
     },
   },
+
+  {
+    files: ['docs/content/metadata/*.json'],
+    rules: {
+      'jsonc/indent': 'off',
+    },
+  },
 );

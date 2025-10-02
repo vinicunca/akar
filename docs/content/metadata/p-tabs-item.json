@@ -1,0 +1,39 @@
+{
+  "props": [
+  {
+    "name": "description",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "label",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string",
+    "schema": "string"
+  }
+],
+  "slots": [
+  {
+    "description": "",
+    "type": ""
+  },
+  {
+    "description": "",
+    "type": ""
+  }
+]
+}
