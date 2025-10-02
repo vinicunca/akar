@@ -120,7 +120,7 @@ import { isBoolean, KEY_CODES } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import useEmblaCarousel from 'embla-carousel-vue';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
@@ -253,15 +253,22 @@ watch(
     props.fade,
     props.wheelGestures,
   ],
-  loadPlugins,
+  async () => {
+    await loadPlugins();
+    emblaApi.value?.reInit(options.value, plugins.value);
+  },
   { immediate: true },
 );
 
-const [emblaRef, emblaApi] = useEmblaCarousel(options.value, plugins.value);
+const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins);
 
-watch([options, plugins], () => {
-  emblaApi.value?.reInit(options.value, plugins.value);
-});
+watch(
+  options,
+  () => {
+    emblaApi.value?.reInit(options.value, plugins.value);
+  },
+  { flush: 'post' },
+);
 
 function scrollPrev() {
   emblaApi.value?.scrollPrev();
@@ -323,11 +330,23 @@ onMounted(() => {
     return;
   }
 
-  emblaApi.value?.on('init', onInit);
-  emblaApi.value?.on('init', onSelect);
-  emblaApi.value?.on('reInit', onInit);
-  emblaApi.value?.on('reInit', onSelect);
-  emblaApi.value?.on('select', onSelect);
+  emblaApi.value.on('init', onInit);
+  emblaApi.value.on('init', onSelect);
+  emblaApi.value.on('reInit', onInit);
+  emblaApi.value.on('reInit', onSelect);
+  emblaApi.value.on('select', onSelect);
+});
+
+onBeforeUnmount(() => {
+  if (!emblaApi.value) {
+    return;
+  }
+
+  emblaApi.value.off('init', onInit);
+  emblaApi.value.off('init', onSelect);
+  emblaApi.value.off('reInit', onInit);
+  emblaApi.value.off('reInit', onSelect);
+  emblaApi.value.off('select', onSelect);
 });
 
 defineExpose({
