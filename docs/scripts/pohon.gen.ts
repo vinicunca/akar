@@ -22,9 +22,16 @@ mkdirSync(metaDirPath, { recursive: true });
 
 export function generateMetaPohon() {
   allComponents.forEach((componentPath) => {
-    const componentName = parse(componentPath).name;
+    const parsedPath = parse(componentPath);
+    const componentName = parsedPath.name;
+    const parentFolder = parsedPath.dir.split('/').pop() || '';
 
-    const metaJsonFilePath = join(metaDirPath, `p-${componentName}.json`);
+    // Create filename with parent folder: p-prose-a.json
+    const fileName = parentFolder && parentFolder !== 'components'
+      ? `p-${parentFolder}-${componentName}.json`
+      : `p-${componentName}.json`;
+
+    const metaJsonFilePath = join(metaDirPath, fileName);
 
     const meta = getComponentMeta(componentPath);
 
