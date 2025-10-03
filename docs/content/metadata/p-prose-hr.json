@@ -1,0 +1,13 @@
+{
+  "props": [],
+  "slots": [],
+  "events": [],
+  "exposed": [
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  }
+]
+}

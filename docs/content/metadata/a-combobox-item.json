@@ -1,0 +1,42 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+    "type": "APrimitiveAsTag | Component",
+    "required": false,
+    "default": "'div'"
+  },
+  {
+    "name": "asChild",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "disabled",
+    "description": "When `true`, prevents the user from interacting with the item.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "textValue",
+    "description": "A string representation of the item contents.\n\nIf the children are not plain text, then the `textValue` prop must also be set to a plain text representation, which will be used for autocomplete in the ComboBox.",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "value",
+    "description": "The value given as data when submitted with a `name`.",
+    "type": "AcceptableValue",
+    "required": true
+  }
+],
+  "events": [
+  {
+    "name": "select",
+    "description": "",
+    "type": "[event: SelectEvent<AcceptableValue>]"
+  }
+]
+}

@@ -1,0 +1,824 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'div'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any"
+  },
+  {
+    "name": "description",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "eagerValidation",
+    "global": false,
+    "description": "If true, validation on input will be active immediately instead of waiting for a blur event.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "error",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "false",
+        "3": "true"
+      }
+    }
+  },
+  {
+    "name": "errorPattern",
+    "global": false,
+    "description": "A regular expression to match form error names.",
+    "tags": [],
+    "required": false,
+    "type": "RegExp | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "RegExp | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "RegExp",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "help",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "hint",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "label",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "name",
+    "global": false,
+    "description": "The name of the FormField. Also used to match form errors.",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "required",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "size",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'md'"
+      }
+    ],
+    "required": false,
+    "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'md'",
+        "2": "'xs'",
+        "3": "'sm'",
+        "4": "'lg'",
+        "5": "'xl'"
+      }
+    }
+  },
+  {
+    "name": "validateOnInputDelay",
+    "global": false,
+    "description": "Delay in milliseconds before validating the form on input events.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "`300`"
+      }
+    ],
+    "required": false,
+    "type": "number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "number"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; wrapper?: ClassValue; labelWrapper?: ClassValue; label?: ClassValue; container?: ClassValue; description?: ClassValue; error?: ClassValue; hint?: ClassValue; help?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; wrapper?: ClassValue; labelWrapper?: ClassValue; label?: ClassValue; container?: ClassValue; description?: ClassValue; error?: ClassValue; hint?: ClassValue; help?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; wrapper?: ClassValue; labelWrapper?: ClassValue; label?: ClassValue; container?: ClassValue; description?: ClassValue; error?: ClassValue; hint?: ClassValue; help?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "label",
+    "type": "{ label?: string | undefined; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ label?: string | undefined; }",
+      "schema": {
+        "label": {
+          "name": "label",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": false,
+          "type": "string | undefined",
+          "schema": {
+            "kind": "enum",
+            "type": "string | undefined",
+            "schema": {
+              "0": "undefined",
+              "1": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "hint",
+    "type": "{ hint?: string | undefined; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ hint?: string | undefined; }",
+      "schema": {
+        "hint": {
+          "name": "hint",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": false,
+          "type": "string | undefined",
+          "schema": {
+            "kind": "enum",
+            "type": "string | undefined",
+            "schema": {
+              "0": "undefined",
+              "1": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "description",
+    "type": "{ description?: string | undefined; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ description?: string | undefined; }",
+      "schema": {
+        "description": {
+          "name": "description",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": false,
+          "type": "string | undefined",
+          "schema": {
+            "kind": "enum",
+            "type": "string | undefined",
+            "schema": {
+              "0": "undefined",
+              "1": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "help",
+    "type": "{ help?: string | undefined; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ help?: string | undefined; }",
+      "schema": {
+        "help": {
+          "name": "help",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": false,
+          "type": "string | undefined",
+          "schema": {
+            "kind": "enum",
+            "type": "string | undefined",
+            "schema": {
+              "0": "undefined",
+              "1": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "error",
+    "type": "{ error?: string | boolean | undefined; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ error?: string | boolean | undefined; }",
+      "schema": {
+        "error": {
+          "name": "error",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": false,
+          "type": "string | boolean | undefined",
+          "schema": {
+            "kind": "enum",
+            "type": "string | boolean | undefined",
+            "schema": {
+              "0": "undefined",
+              "1": "string",
+              "2": "false",
+              "3": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "default",
+    "type": "{ error?: string | boolean | undefined; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ error?: string | boolean | undefined; }",
+      "schema": {
+        "error": {
+          "name": "error",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": false,
+          "type": "string | boolean | undefined",
+          "schema": {
+            "kind": "enum",
+            "type": "string | boolean | undefined",
+            "schema": {
+              "0": "undefined",
+              "1": "string",
+              "2": "false",
+              "3": "true"
+            }
+          }
+        }
+      }
+    }
+  }
+],
+  "events": [],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & PFormFieldSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & PFormFieldSlots",
+      "schema": {
+        "label": {
+          "name": "label",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props: { label?: string | undefined; }) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props: { label?: string | undefined; }): any",
+            "schema": {}
+          }
+        },
+        "hint": {
+          "name": "hint",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props: { hint?: string | undefined; }) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props: { hint?: string | undefined; }): any",
+            "schema": {}
+          }
+        },
+        "description": {
+          "name": "description",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props: { description?: string | undefined; }) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props: { description?: string | undefined; }): any",
+            "schema": {}
+          }
+        },
+        "help": {
+          "name": "help",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props: { help?: string | undefined; }) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props: { help?: string | undefined; }): any",
+            "schema": {}
+          }
+        },
+        "error": {
+          "name": "error",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props: { error?: string | boolean | undefined; }) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props: { error?: string | boolean | undefined; }): any",
+            "schema": {}
+          }
+        },
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props: { error?: string | boolean | undefined; }) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props: { error?: string | boolean | undefined; }): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "as",
+    "type": "APrimitiveAsTag | Component | undefined",
+    "description": "The element or component this component should render as.",
+    "schema": {
+      "kind": "enum",
+      "type": "APrimitiveAsTag | Component | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'a'",
+        "2": "'button'",
+        "3": "'div'",
+        "4": "'form'",
+        "5": "'h2'",
+        "6": "'h3'",
+        "7": "'img'",
+        "8": "'input'",
+        "9": "'label'",
+        "10": "'li'",
+        "11": "'nav'",
+        "12": "'ol'",
+        "13": "'p'",
+        "14": "'span'",
+        "15": "'svg'",
+        "16": "'template'",
+        "17": "'ul'",
+        "18": {
+          "kind": "object",
+          "type": "string & {}",
+          "schema": {}
+        },
+        "19": {
+          "kind": "object",
+          "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>",
+          "schema": {
+            "beforeRouteEnter": {
+              "name": "beforeRouteEnter",
+              "global": false,
+              "description": "Guard called when the router is navigating to the route that is rendering\nthis component from a different route. Differently from `beforeRouteUpdate`\nand `beforeRouteLeave`, `beforeRouteEnter` does not have access to the\ncomponent instance through `this` because it triggers before the component\nis even mounted.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuardWithThis<undefined> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuardWithThis<undefined> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteUpdate": {
+              "name": "beforeRouteUpdate",
+              "global": false,
+              "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuard | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteLeave": {
+              "name": "beforeRouteLeave",
+              "global": false,
+              "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": "NavigationGuard | undefined"
+            },
+            "head": {
+              "name": "head",
+              "global": false,
+              "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+              "tags": [],
+              "required": false,
+              "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                    "schema": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "20": {
+          "kind": "event",
+          "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+          "schema": []
+        },
+        "21": {
+          "kind": "object",
+          "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "pohon",
+    "type": "{ root?: ClassValue; wrapper?: ClassValue; labelWrapper?: ClassValue; label?: ClassValue; container?: ClassValue; description?: ClassValue; error?: ClassValue; hint?: ClassValue; help?: ClassValue; } | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; wrapper?: ClassValue; labelWrapper?: ClassValue; label?: ClassValue; container?: ClassValue; description?: ClassValue; error?: ClassValue; hint?: ClassValue; help?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; wrapper?: ClassValue; labelWrapper?: ClassValue; label?: ClassValue; container?: ClassValue; description?: ClassValue; error?: ClassValue; hint?: ClassValue; help?: ClassValue; }"
+      }
+    }
+  },
+  {
+    "name": "label",
+    "type": "string | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "name",
+    "type": "string | undefined",
+    "description": "The name of the FormField. Also used to match form errors.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "description",
+    "type": "string | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "size",
+    "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'md'",
+        "2": "'xs'",
+        "3": "'sm'",
+        "4": "'lg'",
+        "5": "'xl'"
+      }
+    }
+  },
+  {
+    "name": "error",
+    "type": "string | boolean | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "false",
+        "3": "true"
+      }
+    }
+  },
+  {
+    "name": "validateOnInputDelay",
+    "type": "number | undefined",
+    "description": "Delay in milliseconds before validating the form on input events.",
+    "schema": {
+      "kind": "enum",
+      "type": "number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "number"
+      }
+    }
+  },
+  {
+    "name": "required",
+    "type": "boolean | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "errorPattern",
+    "type": "RegExp | undefined",
+    "description": "A regular expression to match form error names.",
+    "schema": {
+      "kind": "enum",
+      "type": "RegExp | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "RegExp",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "help",
+    "type": "string | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "hint",
+    "type": "string | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "eagerValidation",
+    "type": "boolean | undefined",
+    "description": "If true, validation on input will be active immediately instead of waiting for a blur event.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  }
+]
+}

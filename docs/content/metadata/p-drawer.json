@@ -1,0 +1,1809 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'div'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any"
+  },
+  {
+    "name": "activeSnapPoint",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | number | null | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | number | null | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "null",
+        "2": "string",
+        "3": "number"
+      }
+    }
+  },
+  {
+    "name": "closeThreshold",
+    "global": false,
+    "description": "Number between 0 and 1 that determines when the drawer should be closed.\nExample: threshold of 0.5 would close the drawer if the user swiped for 50% of the height of the drawer or more.",
+    "tags": [
+      {
+        "name": "default",
+        "text": "0.25"
+      }
+    ],
+    "required": false,
+    "type": "number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "number"
+      }
+    }
+  },
+  {
+    "name": "content",
+    "global": false,
+    "description": "The content of the drawer.",
+    "tags": [],
+    "required": false,
+    "type": "(Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentImplEmits>>) | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "(Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentImplEmits>>) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentImplEmits>>",
+          "schema": {
+            "disableOutsidePointerEvents": {
+              "name": "disableOutsidePointerEvents",
+              "global": false,
+              "description": "When `true`, hover/focus/click interactions will be disabled on elements outside\nthe `DismissableLayer`. Users will need to click twice on outside elements to\ninteract with them: once to close the `DismissableLayer`, and again to trigger the element.",
+              "tags": [],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "boolean | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "false",
+                  "2": "true"
+                }
+              }
+            },
+            "onEscapeKeyDown": {
+              "name": "onEscapeKeyDown",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: KeyboardEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: KeyboardEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: KeyboardEvent): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "KeyboardEvent",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onPointerDownOutside": {
+              "name": "onPointerDownOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent): void",
+                    "schema": [
+                      "PointerDownOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onFocusOutside": {
+              "name": "onFocusOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: FocusOutsideEvent): void",
+                    "schema": [
+                      "FocusOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onInteractOutside": {
+              "name": "onInteractOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent | FocusOutsideEvent): void",
+                    "schema": [
+                      {
+                        "kind": "enum",
+                        "type": "PointerDownOutsideEvent | FocusOutsideEvent",
+                        "schema": [
+                          "PointerDownOutsideEvent",
+                          "FocusOutsideEvent"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onOpenAutoFocus": {
+              "name": "onOpenAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "Event",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onCloseAutoFocus": {
+              "name": "onCloseAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      "Event"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "defaultOpen",
+    "global": false,
+    "description": "Opened by default, skips initial enter animation. Still reacts to `open` state changes",
+    "tags": [
+      {
+        "name": "default",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "description",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "direction",
+    "global": false,
+    "description": "Direction of the drawer. Can be `top` or `bottom`, `left`, `right`.",
+    "tags": [
+      {
+        "name": "default",
+        "text": "'bottom'"
+      }
+    ],
+    "required": false,
+    "type": "ADrawerDirection | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "ADrawerDirection | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'top'",
+        "2": "'bottom'",
+        "3": "'left'",
+        "4": "'right'"
+      }
+    },
+    "default": "'bottom'"
+  },
+  {
+    "name": "dismissible",
+    "global": false,
+    "description": "When `false` dragging, clicking outside, pressing esc, etc. will not close the drawer.\nUse this in combination with the `open` prop, otherwise you won't be able to open/close the drawer.",
+    "tags": [
+      {
+        "name": "default",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "fixed",
+    "global": false,
+    "description": "When `true`, don't move the drawer upwards if there's space, but rather only change it's height so it's fully scrollable when the keyboard is open",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "handle",
+    "global": false,
+    "description": "Render a handle on the drawer.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "handleOnly",
+    "global": false,
+    "description": "When `true` only allows the drawer to be dragged by the `<ADrawer.Handle />` component.",
+    "tags": [
+      {
+        "name": "default",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "inset",
+    "global": false,
+    "description": "Whether to inset the drawer from the edges.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "modal",
+    "global": false,
+    "description": "When `false` it allows to interact with elements outside of the drawer without closing it.",
+    "tags": [
+      {
+        "name": "default",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "nested",
+    "global": false,
+    "description": "Whether the drawer is nested in another drawer.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "noBodyStyles",
+    "global": false,
+    "description": "When `true` the `body` doesn't get any styles assigned.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "open",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "overlay",
+    "global": false,
+    "description": "Render an overlay behind the drawer.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "portal",
+    "global": false,
+    "description": "Render the drawer in a portal.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "string | boolean | HTMLElement | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | boolean | HTMLElement | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "false",
+        "3": "true",
+        "4": {
+          "kind": "object",
+          "type": "HTMLElement",
+          "schema": {}
+        }
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "preventScrollRestoration",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "scrollLockTimeout",
+    "global": false,
+    "description": "Duration for which the drawer is not draggable after scrolling content inside of the drawer.",
+    "tags": [
+      {
+        "name": "default",
+        "text": "500ms"
+      }
+    ],
+    "required": false,
+    "type": "number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "number"
+      }
+    }
+  },
+  {
+    "name": "setBackgroundColorOnScale",
+    "global": false,
+    "description": "When `false` we don't change body's background color when the drawer is open.",
+    "tags": [
+      {
+        "name": "default",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "shouldScaleBackground",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "snapPoints",
+    "global": false,
+    "description": "Array of numbers from 0 to 100 that corresponds to % of the screen a given snap point should take up.\nShould go from least visible. Example `[0.2, 0.5, 0.8]`.\nYou can also use px values, which doesn't take screen height into account.",
+    "tags": [],
+    "required": false,
+    "type": "(string | number)[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "(string | number)[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "(string | number)[]",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "string | number",
+              "schema": [
+                "string",
+                "number"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "title",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ overlay?: ClassValue; content?: ClassValue; handle?: ClassValue; container?: ClassValue; header?: ClassValue; title?: ClassValue; description?: ClassValue; body?: ClassValue; footer?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ overlay?: ClassValue; content?: ClassValue; handle?: ClassValue; container?: ClassValue; header?: ClassValue; title?: ClassValue; description?: ClassValue; body?: ClassValue; footer?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ overlay?: ClassValue; content?: ClassValue; handle?: ClassValue; container?: ClassValue; header?: ClassValue; title?: ClassValue; description?: ClassValue; body?: ClassValue; footer?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "default",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "content",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "header",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "title",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "description",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "body",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "footer",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  }
+],
+  "events": [
+  {
+    "name": "close",
+    "description": "",
+    "tags": [],
+    "type": "[]",
+    "signature": "(event: 'close'): void",
+    "schema": []
+  },
+  {
+    "name": "drag",
+    "description": "",
+    "tags": [],
+    "type": "[percentageDragged: number]",
+    "signature": "(event: 'drag', percentageDragged: number): void",
+    "schema": [
+      "number"
+    ]
+  },
+  {
+    "name": "update:open",
+    "description": "",
+    "tags": [],
+    "type": "[open: boolean]",
+    "signature": "(event: 'update:open', open: boolean): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "boolean",
+        "schema": [
+          "false",
+          "true"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "close:prevent",
+    "description": "",
+    "tags": [],
+    "type": "[]",
+    "signature": "(event: 'close:prevent'): void",
+    "schema": []
+  },
+  {
+    "name": "release",
+    "description": "",
+    "tags": [],
+    "type": "[open: boolean]",
+    "signature": "(event: 'release', open: boolean): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "boolean",
+        "schema": [
+          "false",
+          "true"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "update:activeSnapPoint",
+    "description": "",
+    "tags": [],
+    "type": "[val: string | number]",
+    "signature": "(event: 'update:activeSnapPoint', val: string | number): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "string | number",
+        "schema": [
+          "string",
+          "number"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "animationEnd",
+    "description": "",
+    "tags": [],
+    "type": "[open: boolean]",
+    "signature": "(event: 'animationEnd', open: boolean): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "boolean",
+        "schema": [
+          "false",
+          "true"
+        ]
+      }
+    ]
+  }
+],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & PDrawerSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & PDrawerSlots",
+      "schema": {
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "content": {
+          "name": "content",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "header": {
+          "name": "header",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "title": {
+          "name": "title",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "description": {
+          "name": "description",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "body": {
+          "name": "body",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "footer": {
+          "name": "footer",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "portal",
+    "type": "string | boolean | HTMLElement",
+    "description": "Render the drawer in a portal.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | boolean | HTMLElement",
+      "schema": {
+        "0": "string",
+        "1": "false",
+        "2": "true",
+        "3": {
+          "kind": "object",
+          "type": "HTMLElement",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "modal",
+    "type": "boolean",
+    "description": "When `false` it allows to interact with elements outside of the drawer without closing it.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean",
+      "schema": {
+        "0": "false",
+        "1": "true"
+      }
+    }
+  },
+  {
+    "name": "direction",
+    "type": "ADrawerDirection",
+    "description": "Direction of the drawer. Can be `top` or `bottom`, `left`, `right`.",
+    "schema": {
+      "kind": "enum",
+      "type": "ADrawerDirection",
+      "schema": {
+        "0": "'top'",
+        "1": "'bottom'",
+        "2": "'left'",
+        "3": "'right'"
+      }
+    }
+  },
+  {
+    "name": "overlay",
+    "type": "boolean",
+    "description": "Render an overlay behind the drawer.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean",
+      "schema": {
+        "0": "false",
+        "1": "true"
+      }
+    }
+  },
+  {
+    "name": "dismissible",
+    "type": "boolean",
+    "description": "When `false` dragging, clicking outside, pressing esc, etc. will not close the drawer.\nUse this in combination with the `open` prop, otherwise you won't be able to open/close the drawer.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean",
+      "schema": {
+        "0": "false",
+        "1": "true"
+      }
+    }
+  },
+  {
+    "name": "handle",
+    "type": "boolean",
+    "description": "Render a handle on the drawer.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean",
+      "schema": {
+        "0": "false",
+        "1": "true"
+      }
+    }
+  },
+  {
+    "name": "as",
+    "type": "APrimitiveAsTag | Component | undefined",
+    "description": "The element or component this component should render as.",
+    "schema": {
+      "kind": "enum",
+      "type": "APrimitiveAsTag | Component | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'a'",
+        "2": "'button'",
+        "3": "'div'",
+        "4": "'form'",
+        "5": "'h2'",
+        "6": "'h3'",
+        "7": "'img'",
+        "8": "'input'",
+        "9": "'label'",
+        "10": "'li'",
+        "11": "'nav'",
+        "12": "'ol'",
+        "13": "'p'",
+        "14": "'span'",
+        "15": "'svg'",
+        "16": "'template'",
+        "17": "'ul'",
+        "18": {
+          "kind": "object",
+          "type": "string & {}",
+          "schema": {}
+        },
+        "19": {
+          "kind": "object",
+          "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>",
+          "schema": {
+            "beforeRouteEnter": {
+              "name": "beforeRouteEnter",
+              "global": false,
+              "description": "Guard called when the router is navigating to the route that is rendering\nthis component from a different route. Differently from `beforeRouteUpdate`\nand `beforeRouteLeave`, `beforeRouteEnter` does not have access to the\ncomponent instance through `this` because it triggers before the component\nis even mounted.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuardWithThis<undefined> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuardWithThis<undefined> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteUpdate": {
+              "name": "beforeRouteUpdate",
+              "global": false,
+              "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuard | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteLeave": {
+              "name": "beforeRouteLeave",
+              "global": false,
+              "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": "NavigationGuard | undefined"
+            },
+            "head": {
+              "name": "head",
+              "global": false,
+              "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+              "tags": [],
+              "required": false,
+              "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                    "schema": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "20": {
+          "kind": "event",
+          "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+          "schema": []
+        },
+        "21": {
+          "kind": "object",
+          "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "pohon",
+    "type": "{ overlay?: ClassValue; content?: ClassValue; handle?: ClassValue; container?: ClassValue; header?: ClassValue; title?: ClassValue; description?: ClassValue; body?: ClassValue; footer?: ClassValue; } | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "{ overlay?: ClassValue; content?: ClassValue; handle?: ClassValue; container?: ClassValue; header?: ClassValue; title?: ClassValue; description?: ClassValue; body?: ClassValue; footer?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ overlay?: ClassValue; content?: ClassValue; handle?: ClassValue; container?: ClassValue; header?: ClassValue; title?: ClassValue; description?: ClassValue; body?: ClassValue; footer?: ClassValue; }"
+      }
+    }
+  },
+  {
+    "name": "fixed",
+    "type": "boolean | undefined",
+    "description": "When `true`, don't move the drawer upwards if there's space, but rather only change it's height so it's fully scrollable when the keyboard is open",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "description",
+    "type": "string | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "content",
+    "type": "(Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentImplEmits>>) | undefined",
+    "description": "The content of the drawer.",
+    "schema": {
+      "kind": "enum",
+      "type": "(Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentImplEmits>>) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentImplEmits>>",
+          "schema": {
+            "disableOutsidePointerEvents": {
+              "name": "disableOutsidePointerEvents",
+              "global": false,
+              "description": "When `true`, hover/focus/click interactions will be disabled on elements outside\nthe `DismissableLayer`. Users will need to click twice on outside elements to\ninteract with them: once to close the `DismissableLayer`, and again to trigger the element.",
+              "tags": [],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "boolean | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "false",
+                  "2": "true"
+                }
+              }
+            },
+            "onEscapeKeyDown": {
+              "name": "onEscapeKeyDown",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: KeyboardEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: KeyboardEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: KeyboardEvent): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "KeyboardEvent",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onPointerDownOutside": {
+              "name": "onPointerDownOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent): void",
+                    "schema": [
+                      "PointerDownOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onFocusOutside": {
+              "name": "onFocusOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: FocusOutsideEvent): void",
+                    "schema": [
+                      "FocusOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onInteractOutside": {
+              "name": "onInteractOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent | FocusOutsideEvent): void",
+                    "schema": [
+                      {
+                        "kind": "enum",
+                        "type": "PointerDownOutsideEvent | FocusOutsideEvent",
+                        "schema": [
+                          "PointerDownOutsideEvent",
+                          "FocusOutsideEvent"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onOpenAutoFocus": {
+              "name": "onOpenAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "Event",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onCloseAutoFocus": {
+              "name": "onCloseAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      "Event"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "title",
+    "type": "string | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "onUpdate:open",
+    "type": "((open: boolean) => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "((open: boolean) => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(open: boolean): any",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "boolean",
+              "schema": [
+                "false",
+                "true"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "onDrag",
+    "type": "((percentageDragged: number) => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "((percentageDragged: number) => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(percentageDragged: number): any",
+          "schema": [
+            "number"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "inset",
+    "type": "boolean | undefined",
+    "description": "Whether to inset the drawer from the edges.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "nested",
+    "type": "boolean | undefined",
+    "description": "Whether the drawer is nested in another drawer.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "open",
+    "type": "boolean | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "defaultOpen",
+    "type": "boolean | undefined",
+    "description": "Opened by default, skips initial enter animation. Still reacts to `open` state changes",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "onClose",
+    "type": "(() => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "(() => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(): any",
+          "schema": []
+        }
+      }
+    }
+  },
+  {
+    "name": "onClose:prevent",
+    "type": "(() => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "(() => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(): any",
+          "schema": []
+        }
+      }
+    }
+  },
+  {
+    "name": "activeSnapPoint",
+    "type": "string | number | null | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | number | null | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "null",
+        "2": "string",
+        "3": "number"
+      }
+    }
+  },
+  {
+    "name": "closeThreshold",
+    "type": "number | undefined",
+    "description": "Number between 0 and 1 that determines when the drawer should be closed.\nExample: threshold of 0.5 would close the drawer if the user swiped for 50% of the height of the drawer or more.",
+    "schema": {
+      "kind": "enum",
+      "type": "number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "number"
+      }
+    }
+  },
+  {
+    "name": "shouldScaleBackground",
+    "type": "boolean | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "setBackgroundColorOnScale",
+    "type": "boolean | undefined",
+    "description": "When `false` we don't change body's background color when the drawer is open.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "scrollLockTimeout",
+    "type": "number | undefined",
+    "description": "Duration for which the drawer is not draggable after scrolling content inside of the drawer.",
+    "schema": {
+      "kind": "enum",
+      "type": "number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "number"
+      }
+    }
+  },
+  {
+    "name": "noBodyStyles",
+    "type": "boolean | undefined",
+    "description": "When `true` the `body` doesn't get any styles assigned.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "handleOnly",
+    "type": "boolean | undefined",
+    "description": "When `true` only allows the drawer to be dragged by the `<ADrawer.Handle />` component.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "preventScrollRestoration",
+    "type": "boolean | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "snapPoints",
+    "type": "(string | number)[] | undefined",
+    "description": "Array of numbers from 0 to 100 that corresponds to % of the screen a given snap point should take up.\nShould go from least visible. Example `[0.2, 0.5, 0.8]`.\nYou can also use px values, which doesn't take screen height into account.",
+    "schema": {
+      "kind": "enum",
+      "type": "(string | number)[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "(string | number)[]",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "string | number",
+              "schema": [
+                "string",
+                "number"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "onRelease",
+    "type": "((open: boolean) => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "((open: boolean) => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(open: boolean): any",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "boolean",
+              "schema": [
+                "false",
+                "true"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "onUpdate:activeSnapPoint",
+    "type": "((val: string | number) => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "((val: string | number) => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(val: string | number): any",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "string | number",
+              "schema": [
+                "string",
+                "number"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "onAnimationEnd",
+    "type": "((open: boolean) => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "((open: boolean) => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(open: boolean): any",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "boolean",
+              "schema": [
+                "false",
+                "true"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+]
+}

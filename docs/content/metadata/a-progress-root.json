@@ -1,0 +1,69 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+    "type": "APrimitiveAsTag | Component",
+    "required": false,
+    "default": "'div'"
+  },
+  {
+    "name": "asChild",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "getValueLabel",
+    "description": "A function to get the accessible label text in a human-readable format.\n\n If not provided, the value label will be read as the numeric value as a percentage of the max value.",
+    "type": "((value: number | null, max: number) => string)",
+    "required": false,
+    "default": "isNumber(value) ? `${Math.round((value / max) * DEFAULT_MAX)}%` : undefined"
+  },
+  {
+    "name": "getValueText",
+    "description": "A function to get the accessible value text representing the current value in a human-readable format.",
+    "type": "((value: number | null, max: number) => string)",
+    "required": false
+  },
+  {
+    "name": "max",
+    "description": "The maximum progress value.",
+    "type": "number",
+    "required": false,
+    "default": "DEFAULT_MAX"
+  },
+  {
+    "name": "modelValue",
+    "description": "The progress value. Can be bind as `v-model`.",
+    "type": "number | null",
+    "required": false
+  }
+],
+  "events": [
+  {
+    "name": "update:max",
+    "description": "Event handler called when the max value changes",
+    "type": "[value: number]"
+  },
+  {
+    "name": "update:modelValue",
+    "description": "Event handler called when the progress value changes",
+    "type": "[value: string[]]"
+  }
+],
+  "slots": [
+  {
+    "name": "modelValue",
+    "description": "Current input values",
+    "type": "number | null | undefined"
+  }
+],
+  "exposed": [
+  {
+    "name": "getValueLabel",
+    "description": "A function to get the accessible label text in a human-readable format.\n\n If not provided, the value label will be read as the numeric value as a percentage of the max value.",
+    "type": "(value: number | null | undefined, max: number) => string | undefined"
+  }
+]
+}

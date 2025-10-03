@@ -1,0 +1,461 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'div'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any"
+  },
+  {
+    "name": "defaultOpen",
+    "global": false,
+    "description": "The open state of the collapsible when it is initially rendered. <br> Use when you do not need to control its open state.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "disabled",
+    "global": false,
+    "description": "When `true`, prevents the user from interacting with the collapsible.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "open",
+    "global": false,
+    "description": "The controlled open state of the collapsible. Can be binded with `v-model`.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "unmountOnHide",
+    "global": false,
+    "description": "When `true`, the element will be unmounted on closed state.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; content?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; content?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; content?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "default",
+    "type": "{ open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ open: boolean; }",
+      "schema": {
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "content",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  }
+],
+  "events": [
+  {
+    "name": "update:open",
+    "description": "",
+    "tags": [],
+    "type": "[value: boolean]",
+    "signature": "(event: 'update:open', value: boolean): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "boolean",
+        "schema": [
+          "false",
+          "true"
+        ]
+      }
+    ]
+  }
+],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & PCollapsibleSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & PCollapsibleSlots",
+      "schema": {
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props: { open: boolean; }) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props: { open: boolean; }): any",
+            "schema": {}
+          }
+        },
+        "content": {
+          "name": "content",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "unmountOnHide",
+    "type": "boolean",
+    "description": "When `true`, the element will be unmounted on closed state.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean",
+      "schema": {
+        "0": "false",
+        "1": "true"
+      }
+    }
+  },
+  {
+    "name": "disabled",
+    "type": "boolean | undefined",
+    "description": "When `true`, prevents the user from interacting with the collapsible.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "as",
+    "type": "APrimitiveAsTag | Component | undefined",
+    "description": "The element or component this component should render as.",
+    "schema": {
+      "kind": "enum",
+      "type": "APrimitiveAsTag | Component | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'a'",
+        "2": "'button'",
+        "3": "'div'",
+        "4": "'form'",
+        "5": "'h2'",
+        "6": "'h3'",
+        "7": "'img'",
+        "8": "'input'",
+        "9": "'label'",
+        "10": "'li'",
+        "11": "'nav'",
+        "12": "'ol'",
+        "13": "'p'",
+        "14": "'span'",
+        "15": "'svg'",
+        "16": "'template'",
+        "17": "'ul'",
+        "18": {
+          "kind": "object",
+          "type": "string & {}",
+          "schema": {}
+        },
+        "19": {
+          "kind": "object",
+          "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>",
+          "schema": {
+            "beforeRouteEnter": {
+              "name": "beforeRouteEnter",
+              "global": false,
+              "description": "Guard called when the router is navigating to the route that is rendering\nthis component from a different route. Differently from `beforeRouteUpdate`\nand `beforeRouteLeave`, `beforeRouteEnter` does not have access to the\ncomponent instance through `this` because it triggers before the component\nis even mounted.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuardWithThis<undefined> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuardWithThis<undefined> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteUpdate": {
+              "name": "beforeRouteUpdate",
+              "global": false,
+              "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuard | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteLeave": {
+              "name": "beforeRouteLeave",
+              "global": false,
+              "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": "NavigationGuard | undefined"
+            },
+            "head": {
+              "name": "head",
+              "global": false,
+              "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+              "tags": [],
+              "required": false,
+              "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                    "schema": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "20": {
+          "kind": "event",
+          "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+          "schema": []
+        },
+        "21": {
+          "kind": "object",
+          "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "pohon",
+    "type": "{ root?: ClassValue; content?: ClassValue; } | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; content?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; content?: ClassValue; }"
+      }
+    }
+  },
+  {
+    "name": "onUpdate:open",
+    "type": "((value: boolean) => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "((value: boolean) => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(value: boolean): any",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "boolean",
+              "schema": [
+                "false",
+                "true"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "open",
+    "type": "boolean | undefined",
+    "description": "The controlled open state of the collapsible. Can be binded with `v-model`.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "defaultOpen",
+    "type": "boolean | undefined",
+    "description": "The open state of the collapsible when it is initially rendered. <br> Use when you do not need to control its open state.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  }
+]
+}

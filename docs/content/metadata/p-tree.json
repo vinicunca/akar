@@ -1,0 +1,2322 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'ul'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any"
+  },
+  {
+    "name": "bubbleSelect",
+    "global": false,
+    "description": "When `true`, selecting children will update the parent state.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "collapsedIcon",
+    "global": false,
+    "description": "The icon displayed when a parent node is collapsed.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.folder"
+      },
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "color",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'primary'"
+      }
+    ],
+    "required": false,
+    "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'error'",
+        "2": "'primary'",
+        "3": "'secondary'",
+        "4": "'success'",
+        "5": "'info'",
+        "6": "'warning'",
+        "7": "'neutral'"
+      }
+    }
+  },
+  {
+    "name": "defaultExpanded",
+    "global": false,
+    "description": "The value of the expanded tree when initially rendered. Use when you do not need to control the state of the expanded tree",
+    "tags": [],
+    "required": false,
+    "type": "string[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "string[]",
+          "schema": [
+            "string"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "defaultValue",
+    "global": false,
+    "description": "The value of the Tree when initially rendered. Use when you do not need to control the state of the Tree.",
+    "tags": [],
+    "required": false,
+    "type": "PTreeItem | PTreeItem[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "PTreeItem | PTreeItem[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "PTreeItem",
+          "schema": {
+            "icon": {
+              "name": "icon",
+              "global": false,
+              "description": "",
+              "tags": [
+                {
+                  "name": "IconifyIcon"
+                }
+              ],
+              "required": false,
+              "type": "string | object | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "string | object | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "string",
+                  "2": "object"
+                }
+              }
+            },
+            "label": {
+              "name": "label",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "string | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "string"
+                }
+              }
+            },
+            "trailingIcon": {
+              "name": "trailingIcon",
+              "global": false,
+              "description": "",
+              "tags": [
+                {
+                  "name": "IconifyIcon"
+                }
+              ],
+              "required": false,
+              "type": "string | object | undefined",
+              "schema": "string | object | undefined"
+            },
+            "defaultExpanded": {
+              "name": "defaultExpanded",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "boolean | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "false",
+                  "2": "true"
+                }
+              }
+            },
+            "disabled": {
+              "name": "disabled",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "slot": {
+              "name": "slot",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": "string | undefined"
+            },
+            "children": {
+              "name": "children",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "PTreeItem[] | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "PTreeItem[] | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "PTreeItem[]"
+                }
+              }
+            },
+            "onToggle": {
+              "name": "onToggle",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "onSelect": {
+              "name": "onSelect",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event?: Event | undefined) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event?: Event | undefined) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event?: Event | undefined): void",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "class": {
+              "name": "class",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "any",
+              "schema": "any"
+            },
+            "pohon": {
+              "name": "pohon",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'>"
+                }
+              }
+            }
+          }
+        },
+        "2": {
+          "kind": "array",
+          "type": "PTreeItem[]",
+          "schema": [
+            "PTreeItem"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "disabled",
+    "global": false,
+    "description": "When `true`, prevents the user from interacting with tree",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "expanded",
+    "global": false,
+    "description": "The controlled value of the expanded item. Can be binded with with `v-model`.",
+    "tags": [],
+    "required": false,
+    "type": "string[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "string[]",
+          "schema": [
+            "string"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "expandedIcon",
+    "global": false,
+    "description": "The icon displayed when a parent node is expanded.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.folderOpen"
+      },
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "getKey",
+    "global": false,
+    "description": "This function is passed the index of each item and should return a unique key for that item",
+    "tags": [],
+    "required": false,
+    "type": "((val: PTreeItem) => string) | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "((val: PTreeItem) => string) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(val: PTreeItem): string",
+          "schema": []
+        }
+      }
+    }
+  },
+  {
+    "name": "items",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "PTreeItem[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "PTreeItem[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "PTreeItem[]",
+          "schema": [
+            {
+              "kind": "object",
+              "type": "PTreeItem",
+              "schema": {
+                "icon": {
+                  "name": "icon",
+                  "global": false,
+                  "description": "",
+                  "tags": [
+                    {
+                      "name": "IconifyIcon"
+                    }
+                  ],
+                  "required": false,
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "string | object | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "string",
+                      "2": "object"
+                    }
+                  }
+                },
+                "label": {
+                  "name": "label",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "string | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "string"
+                    }
+                  }
+                },
+                "trailingIcon": {
+                  "name": "trailingIcon",
+                  "global": false,
+                  "description": "",
+                  "tags": [
+                    {
+                      "name": "IconifyIcon"
+                    }
+                  ],
+                  "required": false,
+                  "type": "string | object | undefined",
+                  "schema": "string | object | undefined"
+                },
+                "defaultExpanded": {
+                  "name": "defaultExpanded",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "boolean | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "false",
+                      "2": "true"
+                    }
+                  }
+                },
+                "disabled": {
+                  "name": "disabled",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "boolean | undefined",
+                  "schema": "boolean | undefined"
+                },
+                "slot": {
+                  "name": "slot",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": "string | undefined"
+                },
+                "children": {
+                  "name": "children",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "PTreeItem[] | undefined",
+                  "schema": "PTreeItem[] | undefined"
+                },
+                "onToggle": {
+                  "name": "onToggle",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "((event: Event) => void) | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "((event: Event) => void) | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": {
+                        "kind": "event",
+                        "type": "(event: Event): void",
+                        "schema": []
+                      }
+                    }
+                  }
+                },
+                "onSelect": {
+                  "name": "onSelect",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "((event?: Event | undefined) => void) | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "((event?: Event | undefined) => void) | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": {
+                        "kind": "event",
+                        "type": "(event?: Event | undefined): void",
+                        "schema": []
+                      }
+                    }
+                  }
+                },
+                "class": {
+                  "name": "class",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "any",
+                  "schema": "any"
+                },
+                "pohon": {
+                  "name": "pohon",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'>"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "labelKey",
+    "global": false,
+    "description": "The key used to get the label from the item.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'label'"
+      }
+    ],
+    "required": false,
+    "type": "GetItemKeys<PTreeItem[]> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "GetItemKeys<PTreeItem[]> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    },
+    "default": "'label'"
+  },
+  {
+    "name": "modelValue",
+    "global": false,
+    "description": "The controlled value of the Tree. Can be bind as `v-model`.",
+    "tags": [],
+    "required": false,
+    "type": "PTreeItem | PTreeItem[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "PTreeItem | PTreeItem[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "PTreeItem",
+          "schema": {
+            "icon": {
+              "name": "icon",
+              "global": false,
+              "description": "",
+              "tags": [
+                {
+                  "name": "IconifyIcon"
+                }
+              ],
+              "required": false,
+              "type": "string | object | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "string | object | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "string",
+                  "2": "object"
+                }
+              }
+            },
+            "label": {
+              "name": "label",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "string | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "string"
+                }
+              }
+            },
+            "trailingIcon": {
+              "name": "trailingIcon",
+              "global": false,
+              "description": "",
+              "tags": [
+                {
+                  "name": "IconifyIcon"
+                }
+              ],
+              "required": false,
+              "type": "string | object | undefined",
+              "schema": "string | object | undefined"
+            },
+            "defaultExpanded": {
+              "name": "defaultExpanded",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "boolean | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "false",
+                  "2": "true"
+                }
+              }
+            },
+            "disabled": {
+              "name": "disabled",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "slot": {
+              "name": "slot",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": "string | undefined"
+            },
+            "children": {
+              "name": "children",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "PTreeItem[] | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "PTreeItem[] | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "PTreeItem[]"
+                }
+              }
+            },
+            "onToggle": {
+              "name": "onToggle",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "onSelect": {
+              "name": "onSelect",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event?: Event | undefined) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event?: Event | undefined) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event?: Event | undefined): void",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "class": {
+              "name": "class",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "any",
+              "schema": "any"
+            },
+            "pohon": {
+              "name": "pohon",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'>"
+                }
+              }
+            }
+          }
+        },
+        "2": {
+          "kind": "array",
+          "type": "PTreeItem[]",
+          "schema": [
+            "PTreeItem"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "multiple",
+    "global": false,
+    "description": "Whether multiple options can be selected or not.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "propagateSelect",
+    "global": false,
+    "description": "When `true`, selecting parent will select the descendants.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "selectionBehavior",
+    "global": false,
+    "description": "How multiple selection should behave in the collection.",
+    "tags": [],
+    "required": false,
+    "type": "'replace' | 'toggle' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'replace' | 'toggle' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'replace'",
+        "2": "'toggle'"
+      }
+    }
+  },
+  {
+    "name": "size",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'md'"
+      }
+    ],
+    "required": false,
+    "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'md'",
+        "2": "'xs'",
+        "3": "'sm'",
+        "4": "'lg'",
+        "5": "'xl'"
+      }
+    }
+  },
+  {
+    "name": "trailingIcon",
+    "global": false,
+    "description": "The icon displayed on the right side of a parent node.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.chevronDown"
+      },
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "item-wrapper",
+    "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PTreeItem",
+          "schema": {
+            "kind": "object",
+            "type": "PTreeItem",
+            "schema": {
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "defaultExpanded": {
+                "name": "defaultExpanded",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": "boolean | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "PTreeItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "PTreeItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "PTreeItem[]",
+                      "schema": [
+                        "PTreeItem"
+                      ]
+                    }
+                  }
+                }
+              },
+              "onToggle": {
+                "name": "onToggle",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event: Event) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event: Event): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "onSelect": {
+                "name": "onSelect",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event?: Event | undefined) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event?: Event | undefined) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event?: Event | undefined): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "level": {
+          "name": "level",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "expanded": {
+          "name": "expanded",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        },
+        "selected": {
+          "name": "selected",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": "boolean"
+        }
+      }
+    }
+  },
+  {
+    "name": "item",
+    "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PTreeItem",
+          "schema": {
+            "kind": "object",
+            "type": "PTreeItem",
+            "schema": {
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "defaultExpanded": {
+                "name": "defaultExpanded",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": "boolean | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "PTreeItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "PTreeItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "PTreeItem[]",
+                      "schema": [
+                        "PTreeItem"
+                      ]
+                    }
+                  }
+                }
+              },
+              "onToggle": {
+                "name": "onToggle",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event: Event) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event: Event): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "onSelect": {
+                "name": "onSelect",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event?: Event | undefined) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event?: Event | undefined) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event?: Event | undefined): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "level": {
+          "name": "level",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "expanded": {
+          "name": "expanded",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        },
+        "selected": {
+          "name": "selected",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": "boolean"
+        }
+      }
+    }
+  },
+  {
+    "name": "item-leading",
+    "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PTreeItem",
+          "schema": {
+            "kind": "object",
+            "type": "PTreeItem",
+            "schema": {
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "defaultExpanded": {
+                "name": "defaultExpanded",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": "boolean | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "PTreeItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "PTreeItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "PTreeItem[]",
+                      "schema": [
+                        "PTreeItem"
+                      ]
+                    }
+                  }
+                }
+              },
+              "onToggle": {
+                "name": "onToggle",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event: Event) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event: Event): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "onSelect": {
+                "name": "onSelect",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event?: Event | undefined) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event?: Event | undefined) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event?: Event | undefined): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "level": {
+          "name": "level",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "expanded": {
+          "name": "expanded",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        },
+        "selected": {
+          "name": "selected",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": "boolean"
+        }
+      }
+    }
+  },
+  {
+    "name": "item-label",
+    "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PTreeItem",
+          "schema": {
+            "kind": "object",
+            "type": "PTreeItem",
+            "schema": {
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "defaultExpanded": {
+                "name": "defaultExpanded",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": "boolean | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "PTreeItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "PTreeItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "PTreeItem[]",
+                      "schema": [
+                        "PTreeItem"
+                      ]
+                    }
+                  }
+                }
+              },
+              "onToggle": {
+                "name": "onToggle",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event: Event) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event: Event): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "onSelect": {
+                "name": "onSelect",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event?: Event | undefined) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event?: Event | undefined) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event?: Event | undefined): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "level": {
+          "name": "level",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "expanded": {
+          "name": "expanded",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        },
+        "selected": {
+          "name": "selected",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": "boolean"
+        }
+      }
+    }
+  },
+  {
+    "name": "item-trailing",
+    "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PTreeItem; index: number; level: number; expanded: boolean; selected: boolean; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PTreeItem",
+          "schema": {
+            "kind": "object",
+            "type": "PTreeItem",
+            "schema": {
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "defaultExpanded": {
+                "name": "defaultExpanded",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": "boolean | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "PTreeItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "PTreeItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "PTreeItem[]",
+                      "schema": [
+                        "PTreeItem"
+                      ]
+                    }
+                  }
+                }
+              },
+              "onToggle": {
+                "name": "onToggle",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event: Event) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event: Event): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "onSelect": {
+                "name": "onSelect",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event?: Event | undefined) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event?: Event | undefined) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event?: Event | undefined): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "index": {
+          "name": "index",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "level": {
+          "name": "level",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "number",
+          "schema": "number"
+        },
+        "expanded": {
+          "name": "expanded",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        },
+        "selected": {
+          "name": "selected",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": "boolean"
+        }
+      }
+    }
+  }
+],
+  "events": [
+  {
+    "name": "update:modelValue",
+    "description": "",
+    "tags": [],
+    "type": "[val: PTreeItem | PTreeItem[]]",
+    "signature": "(evt: 'update:modelValue', val: PTreeItem | PTreeItem[]): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "PTreeItem | PTreeItem[]",
+        "schema": [
+          {
+            "kind": "object",
+            "type": "PTreeItem",
+            "schema": {
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "label": {
+                "name": "label",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "trailingIcon": {
+                "name": "trailingIcon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": "string | object | undefined"
+              },
+              "defaultExpanded": {
+                "name": "defaultExpanded",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "boolean | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "false",
+                    "2": "true"
+                  }
+                }
+              },
+              "disabled": {
+                "name": "disabled",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "boolean | undefined",
+                "schema": "boolean | undefined"
+              },
+              "slot": {
+                "name": "slot",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "PTreeItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "PTreeItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "PTreeItem[]"
+                  }
+                }
+              },
+              "onToggle": {
+                "name": "onToggle",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event: Event) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event: Event): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "onSelect": {
+                "name": "onSelect",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "((event?: Event | undefined) => void) | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "((event?: Event | undefined) => void) | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "event",
+                      "type": "(event?: Event | undefined): void",
+                      "schema": []
+                    }
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; }, 'link' | 'item' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren' | 'itemWithChildren'>"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "array",
+            "type": "PTreeItem[]",
+            "schema": [
+              "PTreeItem"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "update:expanded",
+    "description": "",
+    "tags": [],
+    "type": "[val: string[]]",
+    "signature": "(evt: 'update:expanded', val: string[]): void",
+    "schema": [
+      {
+        "kind": "array",
+        "type": "string[]",
+        "schema": [
+          "string"
+        ]
+      }
+    ]
+  }
+],
+  "exposed": []
+}

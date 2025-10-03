@@ -1,0 +1,29 @@
+{
+  "props": [
+  {
+    "name": "name",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string",
+    "schema": "string"
+  }
+],
+  "slots": [],
+  "events": [],
+  "exposed": [
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "",
+    "schema": "string"
+  }
+]
+}

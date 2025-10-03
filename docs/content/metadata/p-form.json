@@ -1,0 +1,519 @@
+{
+  "props": [
+  {
+    "name": "disabled",
+    "global": false,
+    "description": "Disable all inputs inside the form.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "id",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    }
+  },
+  {
+    "name": "loadingAuto",
+    "global": false,
+    "description": "When `true`, all form elements will be disabled on `@submit` event.\nThis will cause any focused input elements to lose their focus state.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "`true`"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "name",
+    "global": false,
+    "description": "Path of the form's state within it's parent form.\nUsed for nesting forms. Only available if `nested` is true.",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "nested",
+    "global": false,
+    "description": "If true, this form will attach to its parent Form and validate at the same time.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "`false`"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "schema",
+    "global": false,
+    "description": "Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs.",
+    "tags": [],
+    "required": false,
+    "type": "FormSchema | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "FormSchema | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "Struct<any, any>",
+        "2": "StandardSchemaV1<object, object>"
+      }
+    }
+  },
+  {
+    "name": "state",
+    "global": false,
+    "description": "An object representing the current state of the form.",
+    "tags": [],
+    "required": false,
+    "type": "Partial<any> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "Partial<any> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "Partial<any>"
+      }
+    }
+  },
+  {
+    "name": "transform",
+    "global": false,
+    "description": "If true, applies schema transformations on submit.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "`true`"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true as T"
+  },
+  {
+    "name": "validate",
+    "global": false,
+    "description": "Custom validation function to validate the form state.",
+    "tags": [
+      {
+        "name": "param",
+        "text": "state - The current state of the form."
+      },
+      {
+        "name": "returns",
+        "text": "A promise that resolves to an array of FormError objects, or an array of FormError objects directly."
+      }
+    ],
+    "required": false,
+    "type": "((state: Partial<any>) => FormError<string>[] | Promise<FormError<string>[]>) | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "((state: Partial<any>) => FormError<string>[] | Promise<FormError<string>[]>) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(state: Partial<any>): FormError<string>[] | Promise<FormError<string>[]>",
+          "schema": []
+        }
+      }
+    }
+  },
+  {
+    "name": "validateOn",
+    "global": false,
+    "description": "The list of input events that trigger the form validation.",
+    "tags": [
+      {
+        "name": "remarks",
+        "text": "The form always validates on submit."
+      },
+      {
+        "name": "defaultValue",
+        "text": "`['blur', 'change', 'input']`"
+      }
+    ],
+    "required": false,
+    "type": "FormInputEvents[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "FormInputEvents[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "FormInputEvents[]",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "FormInputEvents",
+              "schema": [
+                "'input'",
+                "'blur'",
+                "'change'",
+                "'focus'"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "validateOnInputDelay",
+    "global": false,
+    "description": "Delay in milliseconds before validating the form on input events.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "`300`"
+      }
+    ],
+    "required": false,
+    "type": "number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "number"
+      }
+    },
+    "default": "300"
+  }
+],
+  "slots": [
+  {
+    "name": "default",
+    "type": "{ errors: FormError<string>[]; loading: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ errors: FormError<string>[]; loading: boolean; }",
+      "schema": {
+        "errors": {
+          "name": "errors",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "FormError<string>[]",
+          "schema": {
+            "kind": "array",
+            "type": "FormError<string>[]",
+            "schema": {
+              "0": "FormError<string>"
+            }
+          }
+        },
+        "loading": {
+          "name": "loading",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  }
+],
+  "events": [
+  {
+    "name": "error",
+    "description": "",
+    "tags": [],
+    "type": "[event: FormErrorEvent]",
+    "signature": "(evt: 'error', event: FormErrorEvent): void",
+    "schema": [
+      {
+        "kind": "object",
+        "type": "FormErrorEvent",
+        "schema": {
+          "errors": {
+            "name": "errors",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": true,
+            "type": "FormErrorWithId[]",
+            "schema": {
+              "kind": "array",
+              "type": "FormErrorWithId[]",
+              "schema": {
+                "0": {
+                  "kind": "object",
+                  "type": "FormErrorWithId",
+                  "schema": {
+                    "id": {
+                      "name": "id",
+                      "global": false,
+                      "description": "",
+                      "tags": [],
+                      "required": false,
+                      "type": "string | undefined",
+                      "schema": {
+                        "kind": "enum",
+                        "type": "string | undefined",
+                        "schema": {
+                          "0": "undefined",
+                          "1": "string"
+                        }
+                      }
+                    },
+                    "name": {
+                      "name": "name",
+                      "global": false,
+                      "description": "",
+                      "tags": [],
+                      "required": false,
+                      "type": "string | undefined",
+                      "schema": "string | undefined"
+                    },
+                    "message": {
+                      "name": "message",
+                      "global": false,
+                      "description": "",
+                      "tags": [],
+                      "required": true,
+                      "type": "string",
+                      "schema": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "children": {
+            "name": "children",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": false,
+            "type": "FormErrorWithId[] | undefined",
+            "schema": {
+              "kind": "enum",
+              "type": "FormErrorWithId[] | undefined",
+              "schema": {
+                "0": "undefined",
+                "1": "FormErrorWithId[]"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "submit",
+    "description": "",
+    "tags": [],
+    "type": "[event: FormSubmitEvent<any>]",
+    "signature": "(evt: 'submit', event: FormSubmitEvent<any>): void",
+    "schema": [
+      {
+        "kind": "object",
+        "type": "FormSubmitEvent<any>",
+        "schema": {
+          "data": {
+            "name": "data",
+            "global": false,
+            "description": "",
+            "tags": [],
+            "required": true,
+            "type": "any",
+            "schema": "any"
+          }
+        }
+      }
+    ]
+  }
+],
+  "exposed": [
+  {
+    "name": "validate",
+    "type": "{ <T extends boolean>(opts: ValidateOpts<false, T>): Promise<FormData<FormSchema, T>>; <T extends boolean>(opts: ValidateOpts<true, T>): Promise<false | FormData<FormSchema, T>>; }",
+    "description": "",
+    "schema": "{ <T extends boolean>(opts: ValidateOpts<false, T>): Promise<FormData<FormSchema, T>>; <T extends boolean>(opts: ValidateOpts<true, T>): Promise<false | FormData<FormSchema, T>>; }"
+  },
+  {
+    "name": "errors",
+    "type": "{ id?: string | undefined; name?: string | undefined; message: string; }[]",
+    "description": "",
+    "schema": {
+      "kind": "array",
+      "type": "{ id?: string | undefined; name?: string | undefined; message: string; }[]",
+      "schema": {
+        "0": "{ id?: string | undefined; name?: string | undefined; message: string; }"
+      }
+    }
+  },
+  {
+    "name": "setErrors",
+    "type": "(errs: FormError<string>[], name?: string | number | symbol | RegExp | undefined) => void",
+    "description": "",
+    "schema": {
+      "kind": "event",
+      "type": "(errs: FormError<string>[], name?: string | number | symbol | RegExp | undefined): void",
+      "schema": {
+        "0": "FormError<string>"
+      }
+    }
+  },
+  {
+    "name": "submit",
+    "type": "() => Promise<void>",
+    "description": "",
+    "schema": {
+      "kind": "event",
+      "type": "(): Promise<void>"
+    }
+  },
+  {
+    "name": "getErrors",
+    "type": "(name?: string | number | symbol | RegExp | undefined) => { id?: string | undefined; name?: string | undefined; message: string; }[]",
+    "description": "",
+    "schema": {
+      "kind": "event",
+      "type": "(name?: string | number | symbol | RegExp | undefined): { id?: string | undefined; name?: string | undefined; message: string; }[]",
+      "schema": {}
+    }
+  },
+  {
+    "name": "clear",
+    "type": "(name?: string | number | symbol | RegExp | undefined) => void",
+    "description": "",
+    "schema": {
+      "kind": "event",
+      "type": "(name?: string | number | symbol | RegExp | undefined): void",
+      "schema": {}
+    }
+  },
+  {
+    "name": "disabled",
+    "type": "boolean",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean",
+      "schema": {
+        "0": "false",
+        "1": "true"
+      }
+    }
+  },
+  {
+    "name": "loading",
+    "type": "boolean",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean",
+      "schema": {
+        "0": "false",
+        "1": "true"
+      }
+    }
+  },
+  {
+    "name": "dirty",
+    "type": "boolean",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean",
+      "schema": {
+        "0": "false",
+        "1": "true"
+      }
+    }
+  },
+  {
+    "name": "dirtyFields",
+    "type": "ReadonlySet<string | number | symbol>",
+    "description": "",
+    "schema": "ReadonlySet<string | number | symbol>"
+  },
+  {
+    "name": "blurredFields",
+    "type": "ReadonlySet<string | number | symbol>",
+    "description": "",
+    "schema": "ReadonlySet<string | number | symbol>"
+  },
+  {
+    "name": "touchedFields",
+    "type": "ReadonlySet<string | number | symbol>",
+    "description": "",
+    "schema": "ReadonlySet<string | number | symbol>"
+  }
+]
+}

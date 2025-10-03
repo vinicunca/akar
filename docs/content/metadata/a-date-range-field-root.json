@@ -1,0 +1,163 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+    "type": "APrimitiveAsTag | Component",
+    "required": false,
+    "default": "'div'"
+  },
+  {
+    "name": "asChild",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "defaultPlaceholder",
+    "description": "The default placeholder date",
+    "type": "DateValue",
+    "required": false
+  },
+  {
+    "name": "defaultValue",
+    "description": "The default value for the calendar",
+    "type": "DateRange",
+    "required": false
+  },
+  {
+    "name": "dir",
+    "description": "The reading direction of the date field when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "'ltr' | 'rtl'",
+    "required": false
+  },
+  {
+    "name": "disabled",
+    "description": "Whether or not the date field is disabled",
+    "type": "boolean",
+    "required": false,
+    "default": "false"
+  },
+  {
+    "name": "granularity",
+    "description": "The granularity to use for formatting times. Defaults to day if a CalendarDate is provided, otherwise defaults to minute. The field will render segments for each part of the date up to and including the specified granularity",
+    "type": "'day' | 'hour' | 'minute' | 'second'",
+    "required": false
+  },
+  {
+    "name": "hideTimeZone",
+    "description": "Whether or not to hide the time zone segment of the field",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "hourCycle",
+    "description": "The hour cycle used for formatting times. Defaults to the local preference",
+    "type": "12 | 24",
+    "required": false
+  },
+  {
+    "name": "id",
+    "description": "Id of the element",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "isDateUnavailable",
+    "description": "A function that returns whether or not a date is unavailable",
+    "type": "DateMatcher",
+    "required": false
+  },
+  {
+    "name": "locale",
+    "description": "The locale to use for formatting dates",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "maxValue",
+    "description": "The maximum date that can be selected",
+    "type": "DateValue",
+    "required": false
+  },
+  {
+    "name": "minValue",
+    "description": "The minimum date that can be selected",
+    "type": "DateValue",
+    "required": false
+  },
+  {
+    "name": "modelValue",
+    "description": "The controlled checked state of the calendar. Can be bound as `v-model`.",
+    "type": "DateRange | null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "placeholder",
+    "description": "The placeholder date, which is used to determine what month to display when no date is selected. This updates as the user navigates the calendar and can be used to programmatically control the calendar view",
+    "type": "DateValue",
+    "required": false
+  },
+  {
+    "name": "readonly",
+    "description": "Whether or not the date field is readonly",
+    "type": "boolean",
+    "required": false,
+    "default": "false"
+  },
+  {
+    "name": "required",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "step",
+    "description": "The stepping interval for the time fields. Defaults to `1`.",
+    "type": "DateStep",
+    "required": false
+  }
+],
+  "events": [
+  {
+    "name": "update:modelValue",
+    "description": "Event handler called whenever the model value changes",
+    "type": "[DateRange]"
+  },
+  {
+    "name": "update:placeholder",
+    "description": "Event handler called whenever the placeholder value changes",
+    "type": "[date: DateValue]"
+  }
+],
+  "slots": [
+  {
+    "name": "modelValue",
+    "description": "",
+    "type": "DateRange | null"
+  },
+  {
+    "name": "segments",
+    "description": "",
+    "type": "{ start: { part: SegmentPart; value: string; }[]; end: { part: SegmentPart; value: string; }[]; }"
+  }
+],
+  "exposed": [
+  {
+    "name": "isDateUnavailable",
+    "description": "A function that returns whether or not a date is unavailable",
+    "type": "DateMatcher"
+  },
+  {
+    "name": "setFocusedElement",
+    "description": "",
+    "type": "(el: HTMLElement) => void"
+  }
+]
+}

@@ -1,0 +1,64 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+    "type": "APrimitiveAsTag | Component",
+    "required": false,
+    "default": "'div'"
+  },
+  {
+    "name": "asChild",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "autoSaveId",
+    "description": "Unique id used to auto-save group arrangement via `localStorage`.",
+    "type": "string | null",
+    "required": false,
+    "default": "null"
+  },
+  {
+    "name": "direction",
+    "description": "The group orientation of splitter.",
+    "type": "'horizontal' | 'vertical'",
+    "required": true
+  },
+  {
+    "name": "id",
+    "description": "Group id; falls back to `useId` when not provided.",
+    "type": "string | null",
+    "required": false
+  },
+  {
+    "name": "keyboardResizeBy",
+    "description": "Step size when arrow key was pressed.",
+    "type": "number | null",
+    "required": false,
+    "default": "10"
+  },
+  {
+    "name": "storage",
+    "description": "Custom storage API; defaults to localStorage",
+    "type": "PanelGroupStorage",
+    "required": false,
+    "default": "defaultStorage"
+  }
+],
+  "events": [
+  {
+    "name": "layout",
+    "description": "Event handler called when group layout changes",
+    "type": "[val: number[]]"
+  }
+],
+  "slots": [
+  {
+    "name": "layout",
+    "description": "Current size of layout",
+    "type": "number[]"
+  }
+]
+}

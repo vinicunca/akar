@@ -1,0 +1,11 @@
+{
+  "props": [
+  {
+    "name": "preventCycle",
+    "description": "",
+    "type": "boolean",
+    "required": false,
+    "default": "false"
+  }
+]
+}

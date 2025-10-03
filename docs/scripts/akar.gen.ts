@@ -1,5 +1,5 @@
 import type { DeepPartial } from '@vinicunca/perkakas';
-import type { ComponentMeta, MetaCheckerOptions } from 'vue-component-meta';
+import type { ComponentMeta, MetaCheckerOptions, PropertyMeta, PropertyMetaSchema } from 'vue-component-meta';
 import { mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { join, parse, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,7 +9,7 @@ import { components } from 'akar/constant';
 import fg from 'fast-glob';
 import { createChecker } from 'vue-component-meta';
 import { babelParse, parse as sfcParse } from 'vue/compiler-sfc';
-import { parseMetaEvents, parseMetaExposed, parseMetaProps, parseMetaSlots, writeToJson } from './utils.gen';
+import { writeToJson } from './utils.gen';
 
 // @ts-expect-error ignore
 const traverse = _traverse.default as typeof _traverse;
@@ -199,4 +199,120 @@ function getDependencies(dir: string, list = new Set<string>()) {
 
 function arraysAreEqual<T>(arr1: Array<T>, arr2: Array<T>): boolean {
   return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
+}
+
+function parseTypeFromSchema(schema: PropertyMetaSchema): string {
+  if (typeof schema === 'object' && (schema.kind === 'enum' || schema.kind === 'array')) {
+    const isFlatEnum = schema.schema?.every((val) => typeof val === 'string');
+    const enumValue = schema?.schema?.filter((i) => i !== 'undefined') ?? [];
+
+    if (isFlatEnum && /^[A-Z]/.test(schema.type)) {
+      return enumValue.join(' | ');
+    } else if (typeof schema.schema?.[0] === 'object' && schema.schema?.[0].kind === 'enum') {
+      return schema.schema.map((s: PropertyMetaSchema) => parseTypeFromSchema(s)).join(' | ');
+    } else {
+      return schema.type;
+    }
+  } else if (typeof schema === 'object' && (schema.kind === 'object' || schema.kind === 'event')) {
+    return schema.type;
+  } else if (typeof schema === 'string') {
+    return schema;
+  } else {
+    return '';
+  }
+}
+
+function parseMetaProps(metaProps: ComponentMeta['props']) {
+  return metaProps
+    // Exclude global props
+    .filter((prop) => !prop.global)
+    .map((prop) => {
+      let defaultValue = prop.default;
+      let type = prop.type;
+      const { name, description, required } = prop;
+
+      if (name === 'as') {
+        defaultValue = defaultValue ?? '"div"';
+      }
+
+      if (defaultValue === 'undefined') {
+        defaultValue = undefined;
+      }
+
+      if (!type.includes('AcceptableValue')) {
+        type = parseTypeFromSchema(prop.schema) || type;
+      }
+
+      return {
+        name,
+        description,
+        type: type.replace(/\s*\|\s*undefined/g, ''),
+        required,
+        default: defaultValue ?? undefined,
+      };
+    })
+    .sort((a, b) => {
+      if (a.name === 'as') {
+        return -1;
+      }
+
+      if (b.name === 'as') {
+        return 1;
+      }
+
+      if (a.name === 'pohon') {
+        return 1;
+      }
+
+      if (b.name === 'pohon') {
+        return -1;
+      }
+
+      return a.name.localeCompare(b.name);
+    });
+};
+
+function parseMetaSlots(metaSlots: ComponentMeta['slots']) {
+  const defaultSlot = metaSlots?.[0];
+  const slots: Array<{ name: string; description: string; type: string }> = [];
+
+  if (defaultSlot && defaultSlot.type !== '{}') {
+    const schema = defaultSlot.schema;
+    if (typeof schema === 'object' && schema.schema) {
+      Object.values(schema.schema).forEach((childMeta: PropertyMeta) => {
+        slots.push({
+          name: childMeta.name,
+          description: childMeta.description ?? '',
+          type: parseTypeFromSchema(childMeta.schema),
+        });
+      });
+    }
+  }
+
+  return slots;
+}
+
+function parseMetaEvents(
+  metaEvents: ComponentMeta['events'],
+  eventDescriptionMap: Map<string, string> = new Map(),
+) {
+  return metaEvents
+    .map(({ name, type }) => {
+      return ({
+        name,
+        description: eventDescriptionMap.get(name) ?? '',
+        type: type.replace(/\s*\|\s*undefined/g, ''),
+      });
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function parseMetaExposed(metaExposed: ComponentMeta['exposed']) {
+  return metaExposed
+    .filter((expose) => typeof expose.schema === 'object' && expose.schema.kind === 'event')
+    .map((expose) => ({
+      name: expose.name,
+      description: expose.description,
+      type: expose.type,
+    }));
 }

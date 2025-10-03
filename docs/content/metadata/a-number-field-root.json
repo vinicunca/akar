@@ -1,0 +1,128 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+    "type": "APrimitiveAsTag | Component",
+    "required": false,
+    "default": "'div'"
+  },
+  {
+    "name": "asChild",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "defaultValue",
+    "description": "",
+    "type": "number",
+    "required": false
+  },
+  {
+    "name": "disabled",
+    "description": "When `true`, prevents the user from interacting with the Number Field.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "disableWheelChange",
+    "description": "When `true`, prevents the value from changing on wheel scroll.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "formatOptions",
+    "description": "Formatting options for the value displayed in the number field. This also affects what characters are allowed to be typed by the user.",
+    "type": "Intl.NumberFormatOptions",
+    "required": false
+  },
+  {
+    "name": "id",
+    "description": "Id of the element",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "invertWheelChange",
+    "description": "When `true`, inverts the direction of the wheel change.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "locale",
+    "description": "The locale to use for formatting dates",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "max",
+    "description": "The largest value allowed for the input.",
+    "type": "number",
+    "required": false
+  },
+  {
+    "name": "min",
+    "description": "The smallest value allowed for the input.",
+    "type": "number",
+    "required": false
+  },
+  {
+    "name": "modelValue",
+    "description": "",
+    "type": "number | null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "readonly",
+    "description": "When `true`, the Number Field is read-only.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "required",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "step",
+    "description": "The amount that the input value changes with each increment or decrement 'tick'.",
+    "type": "number",
+    "required": false,
+    "default": "1"
+  },
+  {
+    "name": "stepSnapping",
+    "description": "When `false`, prevents the value from snapping to the nearest increment of the step value",
+    "type": "boolean",
+    "required": false,
+    "default": "true"
+  }
+],
+  "events": [
+  {
+    "name": "update:modelValue",
+    "description": "Event handler called when the value changes.",
+    "type": "[val: number]"
+  }
+],
+  "slots": [
+  {
+    "name": "modelValue",
+    "description": "",
+    "type": "number"
+  },
+  {
+    "name": "textValue",
+    "description": "",
+    "type": "string"
+  }
+]
+}

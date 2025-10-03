@@ -1,0 +1,39 @@
+{
+  "props": [
+  {
+    "name": "estimateSize",
+    "description": "Estimated size (in px) of each item",
+    "type": "number",
+    "required": false
+  },
+  {
+    "name": "overscan",
+    "description": "Number of items rendered outside the visible area",
+    "type": "number",
+    "required": false
+  },
+  {
+    "name": "textContent",
+    "description": "Text content for each item to achieve type-ahead feature",
+    "type": "((item: Record<string, any>) => string)",
+    "required": false
+  }
+],
+  "slots": [
+  {
+    "name": "item",
+    "description": "",
+    "type": "FlattenedItem<Record<string, any>>"
+  },
+  {
+    "name": "virtualizer",
+    "description": "",
+    "type": "Virtualizer<Element | Window, Element>"
+  },
+  {
+    "name": "virtualItem",
+    "description": "",
+    "type": "VirtualItem"
+  }
+]
+}

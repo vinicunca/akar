@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { ContentRenderer } from '#components';
-import { queryCollection, useAsyncData, useRoute } from '#imports';
-import { toCamelCase, toSentenceCase } from '@vinicunca/perkakas';
+import { queryCollection, useAsyncData } from '#imports';
 
 const props = withDefaults(
   defineProps<{
@@ -10,12 +8,6 @@ const props = withDefaults(
   }>(),
   {},
 );
-
-const route = useRoute();
-
-const camelName = toCamelCase(route.path.split('/').pop() ?? '');
-const upperName = toSentenceCase(camelName);
-const componentName = props.prose ? `Prose${upperName}` : `P${upperName}`;
 
 const { data: metadata } = await useAsyncData(
   props.name,

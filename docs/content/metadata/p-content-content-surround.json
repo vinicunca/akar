@@ -1,0 +1,1100 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'div'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any"
+  },
+  {
+    "name": "nextIcon",
+    "global": false,
+    "description": "The icon displayed in the next link.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.arrowRight"
+      },
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "prevIcon",
+    "global": false,
+    "description": "The icon displayed in the prev link.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.arrowLeft"
+      },
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "surround",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "PContentSurroundLink[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "PContentSurroundLink[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "PContentSurroundLink[]",
+          "schema": [
+            {
+              "kind": "object",
+              "type": "PContentSurroundLink",
+              "schema": {
+                "description": {
+                  "name": "description",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "string | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "string"
+                    }
+                  }
+                },
+                "icon": {
+                  "name": "icon",
+                  "global": false,
+                  "description": "",
+                  "tags": [
+                    {
+                      "name": "IconifyIcon"
+                    }
+                  ],
+                  "required": false,
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "string | object | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "string",
+                      "2": "object"
+                    }
+                  }
+                },
+                "class": {
+                  "name": "class",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "any",
+                  "schema": "any"
+                },
+                "pohon": {
+                  "name": "pohon",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'>"
+                    }
+                  }
+                },
+                "title": {
+                  "name": "title",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": true,
+                  "type": "string",
+                  "schema": "string"
+                },
+                "path": {
+                  "name": "path",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": true,
+                  "type": "string",
+                  "schema": "string"
+                },
+                "stem": {
+                  "name": "stem",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "string | undefined",
+                  "schema": "string | undefined"
+                },
+                "children": {
+                  "name": "children",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "ContentNavigationItem[] | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "ContentNavigationItem[] | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": {
+                        "kind": "array",
+                        "type": "ContentNavigationItem[]",
+                        "schema": [
+                          {
+                            "kind": "object",
+                            "type": "ContentNavigationItem",
+                            "schema": {
+                              "title": {
+                                "name": "title",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": true,
+                                "type": "string",
+                                "schema": "string"
+                              },
+                              "path": {
+                                "name": "path",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": true,
+                                "type": "string",
+                                "schema": "string"
+                              },
+                              "stem": {
+                                "name": "stem",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "string | undefined",
+                                "schema": "string | undefined"
+                              },
+                              "children": {
+                                "name": "children",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "ContentNavigationItem[] | undefined",
+                                "schema": "ContentNavigationItem[] | undefined"
+                              },
+                              "page": {
+                                "name": "page",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "false | undefined",
+                                "schema": {
+                                  "kind": "enum",
+                                  "type": "false | undefined",
+                                  "schema": {
+                                    "0": "undefined",
+                                    "1": "false"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "page": {
+                  "name": "page",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "false | undefined",
+                  "schema": "false | undefined"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "link",
+    "type": "{ link: PContentSurroundLink; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ link: PContentSurroundLink; }",
+      "schema": {
+        "link": {
+          "name": "link",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PContentSurroundLink",
+          "schema": {
+            "kind": "object",
+            "type": "PContentSurroundLink",
+            "schema": {
+              "description": {
+                "name": "description",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'>"
+                  }
+                }
+              },
+              "title": {
+                "name": "title",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "path": {
+                "name": "path",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "stem": {
+                "name": "stem",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "ContentNavigationItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "ContentNavigationItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "ContentNavigationItem[]",
+                      "schema": [
+                        {
+                          "kind": "object",
+                          "type": "ContentNavigationItem",
+                          "schema": {
+                            "title": {
+                              "name": "title",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "path": {
+                              "name": "path",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "stem": {
+                              "name": "stem",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "string | undefined",
+                              "schema": "string | undefined"
+                            },
+                            "children": {
+                              "name": "children",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ContentNavigationItem[] | undefined",
+                              "schema": "ContentNavigationItem[] | undefined"
+                            },
+                            "page": {
+                              "name": "page",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "false | undefined",
+                              "schema": {
+                                "kind": "enum",
+                                "type": "false | undefined",
+                                "schema": {
+                                  "0": "undefined",
+                                  "1": "false"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "page": {
+                "name": "page",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "false | undefined",
+                "schema": "false | undefined"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "link-leading",
+    "type": "{ link: PContentSurroundLink; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ link: PContentSurroundLink; }",
+      "schema": {
+        "link": {
+          "name": "link",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PContentSurroundLink",
+          "schema": {
+            "kind": "object",
+            "type": "PContentSurroundLink",
+            "schema": {
+              "description": {
+                "name": "description",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'>"
+                  }
+                }
+              },
+              "title": {
+                "name": "title",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "path": {
+                "name": "path",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "stem": {
+                "name": "stem",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "ContentNavigationItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "ContentNavigationItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "ContentNavigationItem[]",
+                      "schema": [
+                        {
+                          "kind": "object",
+                          "type": "ContentNavigationItem",
+                          "schema": {
+                            "title": {
+                              "name": "title",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "path": {
+                              "name": "path",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "stem": {
+                              "name": "stem",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "string | undefined",
+                              "schema": "string | undefined"
+                            },
+                            "children": {
+                              "name": "children",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ContentNavigationItem[] | undefined",
+                              "schema": "ContentNavigationItem[] | undefined"
+                            },
+                            "page": {
+                              "name": "page",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "false | undefined",
+                              "schema": {
+                                "kind": "enum",
+                                "type": "false | undefined",
+                                "schema": {
+                                  "0": "undefined",
+                                  "1": "false"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "page": {
+                "name": "page",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "false | undefined",
+                "schema": "false | undefined"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "link-title",
+    "type": "{ link: PContentSurroundLink; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ link: PContentSurroundLink; }",
+      "schema": {
+        "link": {
+          "name": "link",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PContentSurroundLink",
+          "schema": {
+            "kind": "object",
+            "type": "PContentSurroundLink",
+            "schema": {
+              "description": {
+                "name": "description",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'>"
+                  }
+                }
+              },
+              "title": {
+                "name": "title",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "path": {
+                "name": "path",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "stem": {
+                "name": "stem",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "ContentNavigationItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "ContentNavigationItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "ContentNavigationItem[]",
+                      "schema": [
+                        {
+                          "kind": "object",
+                          "type": "ContentNavigationItem",
+                          "schema": {
+                            "title": {
+                              "name": "title",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "path": {
+                              "name": "path",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "stem": {
+                              "name": "stem",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "string | undefined",
+                              "schema": "string | undefined"
+                            },
+                            "children": {
+                              "name": "children",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ContentNavigationItem[] | undefined",
+                              "schema": "ContentNavigationItem[] | undefined"
+                            },
+                            "page": {
+                              "name": "page",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "false | undefined",
+                              "schema": {
+                                "kind": "enum",
+                                "type": "false | undefined",
+                                "schema": {
+                                  "0": "undefined",
+                                  "1": "false"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "page": {
+                "name": "page",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "false | undefined",
+                "schema": "false | undefined"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "link-description",
+    "type": "{ link: PContentSurroundLink; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ link: PContentSurroundLink; }",
+      "schema": {
+        "link": {
+          "name": "link",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PContentSurroundLink",
+          "schema": {
+            "kind": "object",
+            "type": "PContentSurroundLink",
+            "schema": {
+              "description": {
+                "name": "description",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string"
+                  }
+                }
+              },
+              "icon": {
+                "name": "icon",
+                "global": false,
+                "description": "",
+                "tags": [
+                  {
+                    "name": "IconifyIcon"
+                  }
+                ],
+                "required": false,
+                "type": "string | object | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "string | object | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "string",
+                    "2": "object"
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; link?: ClassValue; linkLeading?: ClassValue; linkLeadingIcon?: ClassValue; linkTitle?: ClassValue; linkDescription?: ClassValue; }, 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkLeading' | 'linkDescription'>"
+                  }
+                }
+              },
+              "title": {
+                "name": "title",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "path": {
+                "name": "path",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "stem": {
+                "name": "stem",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "string | undefined",
+                "schema": "string | undefined"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "ContentNavigationItem[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "ContentNavigationItem[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "ContentNavigationItem[]",
+                      "schema": [
+                        {
+                          "kind": "object",
+                          "type": "ContentNavigationItem",
+                          "schema": {
+                            "title": {
+                              "name": "title",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "path": {
+                              "name": "path",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "stem": {
+                              "name": "stem",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "string | undefined",
+                              "schema": "string | undefined"
+                            },
+                            "children": {
+                              "name": "children",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ContentNavigationItem[] | undefined",
+                              "schema": "ContentNavigationItem[] | undefined"
+                            },
+                            "page": {
+                              "name": "page",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "false | undefined",
+                              "schema": {
+                                "kind": "enum",
+                                "type": "false | undefined",
+                                "schema": {
+                                  "0": "undefined",
+                                  "1": "false"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "page": {
+                "name": "page",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "false | undefined",
+                "schema": "false | undefined"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+],
+  "events": [],
+  "exposed": []
+}

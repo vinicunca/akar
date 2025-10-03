@@ -1,0 +1,357 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'footer'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any",
+    "default": "'footer'"
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; top?: ClassValue; bottom?: ClassValue; container?: ClassValue; left?: ClassValue; center?: ClassValue; right?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; top?: ClassValue; bottom?: ClassValue; container?: ClassValue; left?: ClassValue; center?: ClassValue; right?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; top?: ClassValue; bottom?: ClassValue; container?: ClassValue; left?: ClassValue; center?: ClassValue; right?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "left",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "default",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "right",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "top",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "bottom",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  }
+],
+  "events": [],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & PFooterSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & PFooterSlots",
+      "schema": {
+        "left": {
+          "name": "left",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "right": {
+          "name": "right",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "top": {
+          "name": "top",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "bottom": {
+          "name": "bottom",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "as",
+    "type": "APrimitiveAsTag | Component",
+    "description": "The element or component this component should render as.",
+    "schema": {
+      "kind": "enum",
+      "type": "APrimitiveAsTag | Component",
+      "schema": {
+        "0": "'a'",
+        "1": "'button'",
+        "2": "'div'",
+        "3": "'form'",
+        "4": "'h2'",
+        "5": "'h3'",
+        "6": "'img'",
+        "7": "'input'",
+        "8": "'label'",
+        "9": "'li'",
+        "10": "'nav'",
+        "11": "'ol'",
+        "12": "'p'",
+        "13": "'span'",
+        "14": "'svg'",
+        "15": "'template'",
+        "16": "'ul'",
+        "17": {
+          "kind": "object",
+          "type": "string & {}",
+          "schema": {}
+        },
+        "18": {
+          "kind": "object",
+          "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>",
+          "schema": {
+            "beforeRouteEnter": {
+              "name": "beforeRouteEnter",
+              "global": false,
+              "description": "Guard called when the router is navigating to the route that is rendering\nthis component from a different route. Differently from `beforeRouteUpdate`\nand `beforeRouteLeave`, `beforeRouteEnter` does not have access to the\ncomponent instance through `this` because it triggers before the component\nis even mounted.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuardWithThis<undefined> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuardWithThis<undefined> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteUpdate": {
+              "name": "beforeRouteUpdate",
+              "global": false,
+              "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuard | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteLeave": {
+              "name": "beforeRouteLeave",
+              "global": false,
+              "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": "NavigationGuard | undefined"
+            },
+            "head": {
+              "name": "head",
+              "global": false,
+              "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+              "tags": [],
+              "required": false,
+              "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                    "schema": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "19": {
+          "kind": "event",
+          "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+          "schema": []
+        },
+        "20": {
+          "kind": "object",
+          "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "pohon",
+    "type": "{ root?: ClassValue; top?: ClassValue; bottom?: ClassValue; container?: ClassValue; left?: ClassValue; center?: ClassValue; right?: ClassValue; } | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; top?: ClassValue; bottom?: ClassValue; container?: ClassValue; left?: ClassValue; center?: ClassValue; right?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; top?: ClassValue; bottom?: ClassValue; container?: ClassValue; left?: ClassValue; center?: ClassValue; right?: ClassValue; }"
+      }
+    }
+  }
+]
+}

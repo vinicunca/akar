@@ -357,32 +357,6 @@
     }
   }
 ],
-  "events": [
-  {
-    "name": "update:modelValue",
-    "description": "",
-    "tags": [],
-    "type": "[value: string | string[] | undefined]",
-    "signature": "(evt: 'update:modelValue', value: string | string[] | undefined): void",
-    "schema": [
-      {
-        "kind": "enum",
-        "type": "string | string[] | undefined",
-        "schema": [
-          "undefined",
-          "string",
-          {
-            "kind": "array",
-            "type": "string[]",
-            "schema": [
-              "string"
-            ]
-          }
-        ]
-      }
-    ]
-  }
-],
   "slots": [
   {
     "name": "leading",
@@ -1228,6 +1202,32 @@
         }
       }
     }
+  }
+],
+  "events": [
+  {
+    "name": "update:modelValue",
+    "description": "",
+    "tags": [],
+    "type": "[value: string | string[] | undefined]",
+    "signature": "(evt: 'update:modelValue', value: string | string[] | undefined): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "string | string[] | undefined",
+        "schema": [
+          "undefined",
+          "string",
+          {
+            "kind": "array",
+            "type": "string[]",
+            "schema": [
+              "string"
+            ]
+          }
+        ]
+      }
+    ]
   }
 ],
   "exposed": []

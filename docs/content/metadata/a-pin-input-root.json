@@ -1,0 +1,104 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+    "type": "APrimitiveAsTag | Component",
+    "required": false,
+    "default": "'div'"
+  },
+  {
+    "name": "asChild",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "defaultValue",
+    "description": "The default value of the pin inputs when it is initially rendered. Use when you do not need to control its checked state.",
+    "type": "string[]",
+    "required": false
+  },
+  {
+    "name": "dir",
+    "description": "The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "'ltr' | 'rtl'",
+    "required": false
+  },
+  {
+    "name": "disabled",
+    "description": "When `true`, prevents the user from interacting with the pin input",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "id",
+    "description": "Id of the element",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "mask",
+    "description": "When `true`, pin inputs will be treated as password.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "modelValue",
+    "description": "The controlled checked state of the pin input. Can be binded as `v-model`.",
+    "type": "string[] | null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "otp",
+    "description": "When `true`, mobile devices will autodetect the OTP from messages or clipboard, and enable the autocomplete field.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "placeholder",
+    "description": "The placeholder character to use for empty pin-inputs.",
+    "type": "string",
+    "required": false,
+    "default": "''"
+  },
+  {
+    "name": "required",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "type",
+    "description": "Input type for the inputs.",
+    "type": "'number' | 'text'",
+    "required": false,
+    "default": "'text' as any"
+  }
+],
+  "events": [
+  {
+    "name": "complete",
+    "description": "",
+    "type": "[value: string[]]"
+  },
+  {
+    "name": "update:modelValue",
+    "description": "Event handler called when the value changes.",
+    "type": "[value: string[]]"
+  }
+],
+  "slots": [
+  {
+    "name": "modelValue",
+    "description": "Current input values",
+    "type": "string[]"
+  }
+]
+}

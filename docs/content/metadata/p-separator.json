@@ -1,0 +1,1457 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'div'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any"
+  },
+  {
+    "name": "avatar",
+    "global": false,
+    "description": "Display an avatar in the middle.",
+    "tags": [],
+    "required": false,
+    "type": "PAvatarProps | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "PAvatarProps | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "PAvatarProps",
+          "schema": {
+            "as": {
+              "name": "as",
+              "global": false,
+              "description": "The element or component this component should render as.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'span'"
+                }
+              ],
+              "required": false,
+              "type": "APrimitiveAsTag | Component | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "APrimitiveAsTag | Component | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'a'",
+                  "2": "'button'",
+                  "3": "'div'",
+                  "4": "'form'",
+                  "5": "'h2'",
+                  "6": "'h3'",
+                  "7": "'img'",
+                  "8": "'input'",
+                  "9": "'label'",
+                  "10": "'li'",
+                  "11": "'nav'",
+                  "12": "'ol'",
+                  "13": "'p'",
+                  "14": "'span'",
+                  "15": "'svg'",
+                  "16": "'template'",
+                  "17": "'ul'",
+                  "18": {
+                    "kind": "object",
+                    "type": "string & {}",
+                    "schema": {}
+                  },
+                  "19": {
+                    "kind": "object",
+                    "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>",
+                    "schema": {
+                      "beforeRouteEnter": {
+                        "name": "beforeRouteEnter",
+                        "global": false,
+                        "description": "Guard called when the router is navigating to the route that is rendering\nthis component from a different route. Differently from `beforeRouteUpdate`\nand `beforeRouteLeave`, `beforeRouteEnter` does not have access to the\ncomponent instance through `this` because it triggers before the component\nis even mounted.",
+                        "tags": [
+                          {
+                            "name": "param",
+                            "text": "to - RouteLocationRaw we are navigating to"
+                          },
+                          {
+                            "name": "param",
+                            "text": "from - RouteLocationRaw we are navigating from"
+                          },
+                          {
+                            "name": "param",
+                            "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                          }
+                        ],
+                        "required": false,
+                        "type": "NavigationGuardWithThis<undefined> | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "NavigationGuardWithThis<undefined> | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "event",
+                              "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                              "schema": []
+                            }
+                          }
+                        }
+                      },
+                      "beforeRouteUpdate": {
+                        "name": "beforeRouteUpdate",
+                        "global": false,
+                        "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+                        "tags": [
+                          {
+                            "name": "param",
+                            "text": "to - RouteLocationRaw we are navigating to"
+                          },
+                          {
+                            "name": "param",
+                            "text": "from - RouteLocationRaw we are navigating from"
+                          },
+                          {
+                            "name": "param",
+                            "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                          }
+                        ],
+                        "required": false,
+                        "type": "NavigationGuard | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "NavigationGuard | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "event",
+                              "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                              "schema": []
+                            }
+                          }
+                        }
+                      },
+                      "beforeRouteLeave": {
+                        "name": "beforeRouteLeave",
+                        "global": false,
+                        "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+                        "tags": [
+                          {
+                            "name": "param",
+                            "text": "to - RouteLocationRaw we are navigating to"
+                          },
+                          {
+                            "name": "param",
+                            "text": "from - RouteLocationRaw we are navigating from"
+                          },
+                          {
+                            "name": "param",
+                            "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                          }
+                        ],
+                        "required": false,
+                        "type": "NavigationGuard | undefined",
+                        "schema": "NavigationGuard | undefined"
+                      },
+                      "head": {
+                        "name": "head",
+                        "global": false,
+                        "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+                        "tags": [],
+                        "required": false,
+                        "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "event",
+                              "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                              "schema": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "20": {
+                    "kind": "event",
+                    "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+                    "schema": []
+                  },
+                  "21": {
+                    "kind": "object",
+                    "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+                    "schema": {}
+                  }
+                }
+              }
+            },
+            "src": {
+              "name": "src",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "string | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "string"
+                }
+              }
+            },
+            "alt": {
+              "name": "alt",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": "string | undefined"
+            },
+            "icon": {
+              "name": "icon",
+              "global": false,
+              "description": "",
+              "tags": [
+                {
+                  "name": "IconifyIcon"
+                }
+              ],
+              "required": false,
+              "type": "string | object | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "string | object | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "string",
+                  "2": "object"
+                }
+              }
+            },
+            "text": {
+              "name": "text",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": "string | undefined"
+            },
+            "size": {
+              "name": "size",
+              "global": false,
+              "description": "",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'md'"
+                }
+              ],
+              "required": false,
+              "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | '3xs' | '2xs' | '2xl' | '3xl' | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | '3xs' | '2xs' | '2xl' | '3xl' | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'md'",
+                  "2": "'xs'",
+                  "3": "'sm'",
+                  "4": "'lg'",
+                  "5": "'xl'",
+                  "6": "'3xs'",
+                  "7": "'2xs'",
+                  "8": "'2xl'",
+                  "9": "'3xl'"
+                }
+              }
+            },
+            "chip": {
+              "name": "chip",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "boolean | PChipProps | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "boolean | PChipProps | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "false",
+                  "2": "true",
+                  "3": {
+                    "kind": "object",
+                    "type": "PChipProps",
+                    "schema": {
+                      "as": {
+                        "name": "as",
+                        "global": false,
+                        "description": "The element or component this component should render as.",
+                        "tags": [
+                          {
+                            "name": "defaultValue",
+                            "text": "'div'"
+                          }
+                        ],
+                        "required": false,
+                        "type": "APrimitiveAsTag | Component | undefined",
+                        "schema": "APrimitiveAsTag | Component | undefined"
+                      },
+                      "text": {
+                        "name": "text",
+                        "global": false,
+                        "description": "Display some text inside the chip.",
+                        "tags": [],
+                        "required": false,
+                        "type": "string | number | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "string | number | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "string",
+                            "2": "number"
+                          }
+                        }
+                      },
+                      "color": {
+                        "name": "color",
+                        "global": false,
+                        "description": "",
+                        "tags": [
+                          {
+                            "name": "defaultValue",
+                            "text": "'primary'"
+                          }
+                        ],
+                        "required": false,
+                        "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "'error'",
+                            "2": "'primary'",
+                            "3": "'secondary'",
+                            "4": "'success'",
+                            "5": "'info'",
+                            "6": "'warning'",
+                            "7": "'neutral'"
+                          }
+                        }
+                      },
+                      "size": {
+                        "name": "size",
+                        "global": false,
+                        "description": "",
+                        "tags": [
+                          {
+                            "name": "defaultValue",
+                            "text": "'md'"
+                          }
+                        ],
+                        "required": false,
+                        "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | '3xs' | '2xs' | '2xl' | '3xl' | undefined",
+                        "schema": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | '3xs' | '2xs' | '2xl' | '3xl' | undefined"
+                      },
+                      "position": {
+                        "name": "position",
+                        "global": false,
+                        "description": "The position of the chip.",
+                        "tags": [
+                          {
+                            "name": "defaultValue",
+                            "text": "'top-right'"
+                          }
+                        ],
+                        "required": false,
+                        "type": "'top-right' | 'bottom-right' | 'top-left' | 'bottom-left' | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "'top-right' | 'bottom-right' | 'top-left' | 'bottom-left' | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "'top-right'",
+                            "2": "'bottom-right'",
+                            "3": "'top-left'",
+                            "4": "'bottom-left'"
+                          }
+                        }
+                      },
+                      "inset": {
+                        "name": "inset",
+                        "global": false,
+                        "description": "When `true`, keep the chip inside the component for rounded elements.",
+                        "tags": [],
+                        "required": false,
+                        "type": "boolean | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "boolean | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "false",
+                            "2": "true"
+                          }
+                        }
+                      },
+                      "standalone": {
+                        "name": "standalone",
+                        "global": false,
+                        "description": "When `true`, render the chip relatively to the parent.",
+                        "tags": [],
+                        "required": false,
+                        "type": "boolean | undefined",
+                        "schema": "boolean | undefined"
+                      },
+                      "class": {
+                        "name": "class",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "any",
+                        "schema": "any"
+                      },
+                      "pohon": {
+                        "name": "pohon",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "{ root?: ClassValue; base?: ClassValue; } | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "{ root?: ClassValue; base?: ClassValue; } | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "{ root?: ClassValue; base?: ClassValue; }"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "class": {
+              "name": "class",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "any",
+              "schema": "any"
+            },
+            "style": {
+              "name": "style",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "any",
+              "schema": "any"
+            },
+            "pohon": {
+              "name": "pohon",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "{ root?: ClassValue; image?: ClassValue; fallback?: ClassValue; icon?: ClassValue; } | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "{ root?: ClassValue; image?: ClassValue; fallback?: ClassValue; icon?: ClassValue; } | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "{ root?: ClassValue; image?: ClassValue; fallback?: ClassValue; icon?: ClassValue; }"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "color",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'neutral'"
+      }
+    ],
+    "required": false,
+    "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'error'",
+        "2": "'primary'",
+        "3": "'secondary'",
+        "4": "'success'",
+        "5": "'info'",
+        "6": "'warning'",
+        "7": "'neutral'"
+      }
+    }
+  },
+  {
+    "name": "decorative",
+    "global": false,
+    "description": "Whether or not the component is purely decorative. <br>When `true`, accessibility-related attributes\nare updated so that that the rendered element is removed from the accessibility tree.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "icon",
+    "global": false,
+    "description": "Display an icon in the middle.",
+    "tags": [
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "label",
+    "global": false,
+    "description": "Display a label in the middle.",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "orientation",
+    "global": false,
+    "description": "The orientation of the separator.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'horizontal'"
+      }
+    ],
+    "required": false,
+    "type": "DataOrientation | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "DataOrientation | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'vertical'",
+        "2": "'horizontal'"
+      }
+    },
+    "default": "'horizontal'"
+  },
+  {
+    "name": "size",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'xs'"
+      }
+    ],
+    "required": false,
+    "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'md'",
+        "2": "'xs'",
+        "3": "'sm'",
+        "4": "'lg'",
+        "5": "'xl'"
+      }
+    }
+  },
+  {
+    "name": "type",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'solid'"
+      }
+    ],
+    "required": false,
+    "type": "'solid' | 'dashed' | 'dotted' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'solid' | 'dashed' | 'dotted' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'solid'",
+        "2": "'dashed'",
+        "3": "'dotted'"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; border?: ClassValue; container?: ClassValue; icon?: ClassValue; avatar?: ClassValue; avatarSize?: ClassValue; label?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; border?: ClassValue; container?: ClassValue; icon?: ClassValue; avatar?: ClassValue; avatarSize?: ClassValue; label?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; border?: ClassValue; container?: ClassValue; icon?: ClassValue; avatar?: ClassValue; avatarSize?: ClassValue; label?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "default",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  }
+],
+  "events": [],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & PSeparatorSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & PSeparatorSlots",
+      "schema": {
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "orientation",
+    "type": "DataOrientation",
+    "description": "The orientation of the separator.",
+    "schema": {
+      "kind": "enum",
+      "type": "DataOrientation",
+      "schema": {
+        "0": "'vertical'",
+        "1": "'horizontal'"
+      }
+    }
+  },
+  {
+    "name": "type",
+    "type": "'solid' | 'dashed' | 'dotted' | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "'solid' | 'dashed' | 'dotted' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'solid'",
+        "2": "'dashed'",
+        "3": "'dotted'"
+      }
+    }
+  },
+  {
+    "name": "as",
+    "type": "APrimitiveAsTag | Component | undefined",
+    "description": "The element or component this component should render as.",
+    "schema": {
+      "kind": "enum",
+      "type": "APrimitiveAsTag | Component | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'a'",
+        "2": "'button'",
+        "3": "'div'",
+        "4": "'form'",
+        "5": "'h2'",
+        "6": "'h3'",
+        "7": "'img'",
+        "8": "'input'",
+        "9": "'label'",
+        "10": "'li'",
+        "11": "'nav'",
+        "12": "'ol'",
+        "13": "'p'",
+        "14": "'span'",
+        "15": "'svg'",
+        "16": "'template'",
+        "17": "'ul'",
+        "18": {
+          "kind": "object",
+          "type": "string & {}",
+          "schema": {}
+        },
+        "19": {
+          "kind": "object",
+          "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>",
+          "schema": {
+            "beforeRouteEnter": {
+              "name": "beforeRouteEnter",
+              "global": false,
+              "description": "Guard called when the router is navigating to the route that is rendering\nthis component from a different route. Differently from `beforeRouteUpdate`\nand `beforeRouteLeave`, `beforeRouteEnter` does not have access to the\ncomponent instance through `this` because it triggers before the component\nis even mounted.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuardWithThis<undefined> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuardWithThis<undefined> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteUpdate": {
+              "name": "beforeRouteUpdate",
+              "global": false,
+              "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "NavigationGuard | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                    "schema": []
+                  }
+                }
+              }
+            },
+            "beforeRouteLeave": {
+              "name": "beforeRouteLeave",
+              "global": false,
+              "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+              "tags": [
+                {
+                  "name": "param",
+                  "text": "to - RouteLocationRaw we are navigating to"
+                },
+                {
+                  "name": "param",
+                  "text": "from - RouteLocationRaw we are navigating from"
+                },
+                {
+                  "name": "param",
+                  "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                }
+              ],
+              "required": false,
+              "type": "NavigationGuard | undefined",
+              "schema": "NavigationGuard | undefined"
+            },
+            "head": {
+              "name": "head",
+              "global": false,
+              "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+              "tags": [],
+              "required": false,
+              "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                    "schema": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "20": {
+          "kind": "event",
+          "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+          "schema": []
+        },
+        "21": {
+          "kind": "object",
+          "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "pohon",
+    "type": "{ root?: ClassValue; border?: ClassValue; container?: ClassValue; icon?: ClassValue; avatar?: ClassValue; avatarSize?: ClassValue; label?: ClassValue; } | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; border?: ClassValue; container?: ClassValue; icon?: ClassValue; avatar?: ClassValue; avatarSize?: ClassValue; label?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; border?: ClassValue; container?: ClassValue; icon?: ClassValue; avatar?: ClassValue; avatarSize?: ClassValue; label?: ClassValue; }"
+      }
+    }
+  },
+  {
+    "name": "label",
+    "type": "string | undefined",
+    "description": "Display a label in the middle.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "icon",
+    "type": "string | object | undefined",
+    "description": "Display an icon in the middle.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "size",
+    "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'md'",
+        "2": "'xs'",
+        "3": "'sm'",
+        "4": "'lg'",
+        "5": "'xl'"
+      }
+    }
+  },
+  {
+    "name": "avatar",
+    "type": "PAvatarProps | undefined",
+    "description": "Display an avatar in the middle.",
+    "schema": {
+      "kind": "enum",
+      "type": "PAvatarProps | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "PAvatarProps",
+          "schema": {
+            "as": {
+              "name": "as",
+              "global": false,
+              "description": "The element or component this component should render as.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'span'"
+                }
+              ],
+              "required": false,
+              "type": "APrimitiveAsTag | Component | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "APrimitiveAsTag | Component | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'a'",
+                  "2": "'button'",
+                  "3": "'div'",
+                  "4": "'form'",
+                  "5": "'h2'",
+                  "6": "'h3'",
+                  "7": "'img'",
+                  "8": "'input'",
+                  "9": "'label'",
+                  "10": "'li'",
+                  "11": "'nav'",
+                  "12": "'ol'",
+                  "13": "'p'",
+                  "14": "'span'",
+                  "15": "'svg'",
+                  "16": "'template'",
+                  "17": "'ul'",
+                  "18": {
+                    "kind": "object",
+                    "type": "string & {}",
+                    "schema": {}
+                  },
+                  "19": {
+                    "kind": "object",
+                    "type": "ComponentOptions<any, any, any, ComputedOptions, MethodOptions, any, any, any, string, {}, {}, string, {}, {}, {}, string, ComponentProvideOptions>",
+                    "schema": {
+                      "beforeRouteEnter": {
+                        "name": "beforeRouteEnter",
+                        "global": false,
+                        "description": "Guard called when the router is navigating to the route that is rendering\nthis component from a different route. Differently from `beforeRouteUpdate`\nand `beforeRouteLeave`, `beforeRouteEnter` does not have access to the\ncomponent instance through `this` because it triggers before the component\nis even mounted.",
+                        "tags": [
+                          {
+                            "name": "param",
+                            "text": "to - RouteLocationRaw we are navigating to"
+                          },
+                          {
+                            "name": "param",
+                            "text": "from - RouteLocationRaw we are navigating from"
+                          },
+                          {
+                            "name": "param",
+                            "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                          }
+                        ],
+                        "required": false,
+                        "type": "NavigationGuardWithThis<undefined> | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "NavigationGuardWithThis<undefined> | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "event",
+                              "type": "(this: undefined, to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                              "schema": []
+                            }
+                          }
+                        }
+                      },
+                      "beforeRouteUpdate": {
+                        "name": "beforeRouteUpdate",
+                        "global": false,
+                        "description": "Guard called whenever the route that renders this component has changed, but\nit is reused for the new route. This allows you to guard for changes in\nparams, the query or the hash.",
+                        "tags": [
+                          {
+                            "name": "param",
+                            "text": "to - RouteLocationRaw we are navigating to"
+                          },
+                          {
+                            "name": "param",
+                            "text": "from - RouteLocationRaw we are navigating from"
+                          },
+                          {
+                            "name": "param",
+                            "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                          }
+                        ],
+                        "required": false,
+                        "type": "NavigationGuard | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "NavigationGuard | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "event",
+                              "type": "(to: RouteLocationNormalizedGeneric, from: RouteLocationNormalizedLoadedGeneric, next: NavigationGuardNext): _Awaitable<...>",
+                              "schema": []
+                            }
+                          }
+                        }
+                      },
+                      "beforeRouteLeave": {
+                        "name": "beforeRouteLeave",
+                        "global": false,
+                        "description": "Guard called when the router is navigating away from the current route that\nis rendering this component.",
+                        "tags": [
+                          {
+                            "name": "param",
+                            "text": "to - RouteLocationRaw we are navigating to"
+                          },
+                          {
+                            "name": "param",
+                            "text": "from - RouteLocationRaw we are navigating from"
+                          },
+                          {
+                            "name": "param",
+                            "text": "next - function to validate, cancel or modify (by redirecting) the\nnavigation"
+                          }
+                        ],
+                        "required": false,
+                        "type": "NavigationGuard | undefined",
+                        "schema": "NavigationGuard | undefined"
+                      },
+                      "head": {
+                        "name": "head",
+                        "global": false,
+                        "description": "Available exclusively for `defineNuxtComponent`.\nIt will not be executed when using `defineComponent`.",
+                        "tags": [],
+                        "required": false,
+                        "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "((nuxtApp: NuxtApp) => U<Deprecated>) | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "event",
+                              "type": "(nuxtApp: NuxtApp): UseHeadInput<Deprecated>",
+                              "schema": []
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "20": {
+                    "kind": "event",
+                    "type": "(props: any, ctx: Omit<{ attrs: Data; slots: Readonly<InternalSlots>; emit: (event: string, ...args: any[]) => void; expose: <Exposed extends Record<string, any> = Record<string, any>>(exposed?: Exposed | undefined) => void; }, 'expose'>): any",
+                    "schema": []
+                  },
+                  "21": {
+                    "kind": "object",
+                    "type": "ComponentPublicInstanceConstructor<any, any, any, any, ComputedOptions, MethodOptions>",
+                    "schema": {}
+                  }
+                }
+              }
+            },
+            "src": {
+              "name": "src",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "string | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "string"
+                }
+              }
+            },
+            "alt": {
+              "name": "alt",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": "string | undefined"
+            },
+            "icon": {
+              "name": "icon",
+              "global": false,
+              "description": "",
+              "tags": [
+                {
+                  "name": "IconifyIcon"
+                }
+              ],
+              "required": false,
+              "type": "string | object | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "string | object | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "string",
+                  "2": "object"
+                }
+              }
+            },
+            "text": {
+              "name": "text",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "string | undefined",
+              "schema": "string | undefined"
+            },
+            "size": {
+              "name": "size",
+              "global": false,
+              "description": "",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'md'"
+                }
+              ],
+              "required": false,
+              "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | '3xs' | '2xs' | '2xl' | '3xl' | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | '3xs' | '2xs' | '2xl' | '3xl' | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'md'",
+                  "2": "'xs'",
+                  "3": "'sm'",
+                  "4": "'lg'",
+                  "5": "'xl'",
+                  "6": "'3xs'",
+                  "7": "'2xs'",
+                  "8": "'2xl'",
+                  "9": "'3xl'"
+                }
+              }
+            },
+            "chip": {
+              "name": "chip",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "boolean | PChipProps | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "boolean | PChipProps | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "false",
+                  "2": "true",
+                  "3": {
+                    "kind": "object",
+                    "type": "PChipProps",
+                    "schema": {
+                      "as": {
+                        "name": "as",
+                        "global": false,
+                        "description": "The element or component this component should render as.",
+                        "tags": [
+                          {
+                            "name": "defaultValue",
+                            "text": "'div'"
+                          }
+                        ],
+                        "required": false,
+                        "type": "APrimitiveAsTag | Component | undefined",
+                        "schema": "APrimitiveAsTag | Component | undefined"
+                      },
+                      "text": {
+                        "name": "text",
+                        "global": false,
+                        "description": "Display some text inside the chip.",
+                        "tags": [],
+                        "required": false,
+                        "type": "string | number | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "string | number | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "string",
+                            "2": "number"
+                          }
+                        }
+                      },
+                      "color": {
+                        "name": "color",
+                        "global": false,
+                        "description": "",
+                        "tags": [
+                          {
+                            "name": "defaultValue",
+                            "text": "'primary'"
+                          }
+                        ],
+                        "required": false,
+                        "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "'error'",
+                            "2": "'primary'",
+                            "3": "'secondary'",
+                            "4": "'success'",
+                            "5": "'info'",
+                            "6": "'warning'",
+                            "7": "'neutral'"
+                          }
+                        }
+                      },
+                      "size": {
+                        "name": "size",
+                        "global": false,
+                        "description": "",
+                        "tags": [
+                          {
+                            "name": "defaultValue",
+                            "text": "'md'"
+                          }
+                        ],
+                        "required": false,
+                        "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | '3xs' | '2xs' | '2xl' | '3xl' | undefined",
+                        "schema": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | '3xs' | '2xs' | '2xl' | '3xl' | undefined"
+                      },
+                      "position": {
+                        "name": "position",
+                        "global": false,
+                        "description": "The position of the chip.",
+                        "tags": [
+                          {
+                            "name": "defaultValue",
+                            "text": "'top-right'"
+                          }
+                        ],
+                        "required": false,
+                        "type": "'top-right' | 'bottom-right' | 'top-left' | 'bottom-left' | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "'top-right' | 'bottom-right' | 'top-left' | 'bottom-left' | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "'top-right'",
+                            "2": "'bottom-right'",
+                            "3": "'top-left'",
+                            "4": "'bottom-left'"
+                          }
+                        }
+                      },
+                      "inset": {
+                        "name": "inset",
+                        "global": false,
+                        "description": "When `true`, keep the chip inside the component for rounded elements.",
+                        "tags": [],
+                        "required": false,
+                        "type": "boolean | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "boolean | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "false",
+                            "2": "true"
+                          }
+                        }
+                      },
+                      "standalone": {
+                        "name": "standalone",
+                        "global": false,
+                        "description": "When `true`, render the chip relatively to the parent.",
+                        "tags": [],
+                        "required": false,
+                        "type": "boolean | undefined",
+                        "schema": "boolean | undefined"
+                      },
+                      "class": {
+                        "name": "class",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "any",
+                        "schema": "any"
+                      },
+                      "pohon": {
+                        "name": "pohon",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "{ root?: ClassValue; base?: ClassValue; } | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "{ root?: ClassValue; base?: ClassValue; } | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "{ root?: ClassValue; base?: ClassValue; }"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "class": {
+              "name": "class",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "any",
+              "schema": "any"
+            },
+            "style": {
+              "name": "style",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "any",
+              "schema": "any"
+            },
+            "pohon": {
+              "name": "pohon",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "{ root?: ClassValue; image?: ClassValue; fallback?: ClassValue; icon?: ClassValue; } | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "{ root?: ClassValue; image?: ClassValue; fallback?: ClassValue; icon?: ClassValue; } | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "{ root?: ClassValue; image?: ClassValue; fallback?: ClassValue; icon?: ClassValue; }"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "color",
+    "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'error'",
+        "2": "'primary'",
+        "3": "'secondary'",
+        "4": "'success'",
+        "5": "'info'",
+        "6": "'warning'",
+        "7": "'neutral'"
+      }
+    }
+  },
+  {
+    "name": "decorative",
+    "type": "boolean | undefined",
+    "description": "Whether or not the component is purely decorative. <br>When `true`, accessibility-related attributes\nare updated so that that the rendered element is removed from the accessibility tree.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  }
+]
+}

@@ -1,0 +1,1038 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'nav'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any",
+    "default": "'nav'"
+  },
+  {
+    "name": "color",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'primary'"
+      }
+    ],
+    "required": false,
+    "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'error'",
+        "2": "'primary'",
+        "3": "'secondary'",
+        "4": "'success'",
+        "5": "'info'",
+        "6": "'warning'",
+        "7": "'neutral'"
+      }
+    }
+  },
+  {
+    "name": "defaultOpen",
+    "global": false,
+    "description": "The open state of the collapsible when it is initially rendered. <br> Use when you do not need to control its open state.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "highlight",
+    "global": false,
+    "description": "Display a line next to the active link.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "highlightColor",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'primary'"
+      }
+    ],
+    "required": false,
+    "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'error'",
+        "2": "'primary'",
+        "3": "'secondary'",
+        "4": "'success'",
+        "5": "'info'",
+        "6": "'warning'",
+        "7": "'neutral'"
+      }
+    }
+  },
+  {
+    "name": "links",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "PContentTocLink[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "PContentTocLink[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "PContentTocLink[]",
+          "schema": [
+            {
+              "kind": "object",
+              "type": "PContentTocLink",
+              "schema": {
+                "id": {
+                  "name": "id",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": true,
+                  "type": "string",
+                  "schema": "string"
+                },
+                "text": {
+                  "name": "text",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": true,
+                  "type": "string",
+                  "schema": "string"
+                },
+                "depth": {
+                  "name": "depth",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": true,
+                  "type": "number",
+                  "schema": "number"
+                },
+                "children": {
+                  "name": "children",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "TocLink[] | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "TocLink[] | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": {
+                        "kind": "array",
+                        "type": "TocLink[]",
+                        "schema": [
+                          {
+                            "kind": "object",
+                            "type": "TocLink",
+                            "schema": {
+                              "id": {
+                                "name": "id",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": true,
+                                "type": "string",
+                                "schema": "string"
+                              },
+                              "text": {
+                                "name": "text",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": true,
+                                "type": "string",
+                                "schema": "string"
+                              },
+                              "depth": {
+                                "name": "depth",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": true,
+                                "type": "number",
+                                "schema": "number"
+                              },
+                              "children": {
+                                "name": "children",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "TocLink[] | undefined",
+                                "schema": "TocLink[] | undefined"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "class": {
+                  "name": "class",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "any",
+                  "schema": "any"
+                },
+                "pohon": {
+                  "name": "pohon",
+                  "global": false,
+                  "description": "",
+                  "tags": [],
+                  "required": false,
+                  "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                  "schema": {
+                    "kind": "enum",
+                    "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                    "schema": {
+                      "0": "undefined",
+                      "1": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'>"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "open",
+    "global": false,
+    "description": "The controlled open state of the collapsible. Can be binded with `v-model`.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "title",
+    "global": false,
+    "description": "The title of the table of contents.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "t('contentToc.title')"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "trailingIcon",
+    "global": false,
+    "description": "The icon displayed to collapse the content.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.chevronDown"
+      },
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "leading",
+    "type": "{ open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ open: boolean; }",
+      "schema": {
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "default",
+    "type": "{ open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ open: boolean; }",
+      "schema": {
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "trailing",
+    "type": "{ open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ open: boolean; }",
+      "schema": {
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "content",
+    "type": "{ links: PContentTocLink[]; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ links: PContentTocLink[]; }",
+      "schema": {
+        "links": {
+          "name": "links",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PContentTocLink[]",
+          "schema": {
+            "kind": "array",
+            "type": "PContentTocLink[]",
+            "schema": {
+              "0": {
+                "kind": "object",
+                "type": "PContentTocLink",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  },
+                  "text": {
+                    "name": "text",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  },
+                  "depth": {
+                    "name": "depth",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "number",
+                    "schema": "number"
+                  },
+                  "children": {
+                    "name": "children",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "TocLink[] | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "TocLink[] | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": {
+                          "kind": "array",
+                          "type": "TocLink[]",
+                          "schema": [
+                            {
+                              "kind": "object",
+                              "type": "TocLink",
+                              "schema": {
+                                "id": {
+                                  "name": "id",
+                                  "global": false,
+                                  "description": "",
+                                  "tags": [],
+                                  "required": true,
+                                  "type": "string",
+                                  "schema": "string"
+                                },
+                                "text": {
+                                  "name": "text",
+                                  "global": false,
+                                  "description": "",
+                                  "tags": [],
+                                  "required": true,
+                                  "type": "string",
+                                  "schema": "string"
+                                },
+                                "depth": {
+                                  "name": "depth",
+                                  "global": false,
+                                  "description": "",
+                                  "tags": [],
+                                  "required": true,
+                                  "type": "number",
+                                  "schema": "number"
+                                },
+                                "children": {
+                                  "name": "children",
+                                  "global": false,
+                                  "description": "",
+                                  "tags": [],
+                                  "required": false,
+                                  "type": "TocLink[] | undefined",
+                                  "schema": "TocLink[] | undefined"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "class": {
+                    "name": "class",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "any",
+                    "schema": "any"
+                  },
+                  "pohon": {
+                    "name": "pohon",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'>"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "link",
+    "type": "{ link: PContentTocLink; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ link: PContentTocLink; }",
+      "schema": {
+        "link": {
+          "name": "link",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PContentTocLink",
+          "schema": {
+            "kind": "object",
+            "type": "PContentTocLink",
+            "schema": {
+              "id": {
+                "name": "id",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "text": {
+                "name": "text",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "string",
+                "schema": "string"
+              },
+              "depth": {
+                "name": "depth",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": true,
+                "type": "number",
+                "schema": "number"
+              },
+              "children": {
+                "name": "children",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "TocLink[] | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "TocLink[] | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": {
+                      "kind": "array",
+                      "type": "TocLink[]",
+                      "schema": [
+                        {
+                          "kind": "object",
+                          "type": "TocLink",
+                          "schema": {
+                            "id": {
+                              "name": "id",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "text": {
+                              "name": "text",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "string",
+                              "schema": "string"
+                            },
+                            "depth": {
+                              "name": "depth",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": true,
+                              "type": "number",
+                              "schema": "number"
+                            },
+                            "children": {
+                              "name": "children",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "TocLink[] | undefined",
+                              "schema": "TocLink[] | undefined"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "class": {
+                "name": "class",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "any",
+                "schema": "any"
+              },
+              "pohon": {
+                "name": "pohon",
+                "global": false,
+                "description": "",
+                "tags": [],
+                "required": false,
+                "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                "schema": {
+                  "kind": "enum",
+                  "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                  "schema": {
+                    "0": "undefined",
+                    "1": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'>"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "top",
+    "type": "{ links?: PContentTocLink[] | undefined; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ links?: PContentTocLink[] | undefined; }",
+      "schema": {
+        "links": {
+          "name": "links",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": false,
+          "type": "PContentTocLink[] | undefined",
+          "schema": {
+            "kind": "enum",
+            "type": "PContentTocLink[] | undefined",
+            "schema": {
+              "0": "undefined",
+              "1": {
+                "kind": "array",
+                "type": "PContentTocLink[]",
+                "schema": [
+                  {
+                    "kind": "object",
+                    "type": "PContentTocLink",
+                    "schema": {
+                      "id": {
+                        "name": "id",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": true,
+                        "type": "string",
+                        "schema": "string"
+                      },
+                      "text": {
+                        "name": "text",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": true,
+                        "type": "string",
+                        "schema": "string"
+                      },
+                      "depth": {
+                        "name": "depth",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": true,
+                        "type": "number",
+                        "schema": "number"
+                      },
+                      "children": {
+                        "name": "children",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "TocLink[] | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "TocLink[] | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "array",
+                              "type": "TocLink[]",
+                              "schema": [
+                                {
+                                  "kind": "object",
+                                  "type": "TocLink",
+                                  "schema": {
+                                    "id": {
+                                      "name": "id",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": true,
+                                      "type": "string",
+                                      "schema": "string"
+                                    },
+                                    "text": {
+                                      "name": "text",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": true,
+                                      "type": "string",
+                                      "schema": "string"
+                                    },
+                                    "depth": {
+                                      "name": "depth",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": true,
+                                      "type": "number",
+                                      "schema": "number"
+                                    },
+                                    "children": {
+                                      "name": "children",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": false,
+                                      "type": "TocLink[] | undefined",
+                                      "schema": "TocLink[] | undefined"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "class": {
+                        "name": "class",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "any",
+                        "schema": "any"
+                      },
+                      "pohon": {
+                        "name": "pohon",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "bottom",
+    "type": "{ links?: PContentTocLink[] | undefined; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ links?: PContentTocLink[] | undefined; }",
+      "schema": {
+        "links": {
+          "name": "links",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": false,
+          "type": "PContentTocLink[] | undefined",
+          "schema": {
+            "kind": "enum",
+            "type": "PContentTocLink[] | undefined",
+            "schema": {
+              "0": "undefined",
+              "1": {
+                "kind": "array",
+                "type": "PContentTocLink[]",
+                "schema": [
+                  {
+                    "kind": "object",
+                    "type": "PContentTocLink",
+                    "schema": {
+                      "id": {
+                        "name": "id",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": true,
+                        "type": "string",
+                        "schema": "string"
+                      },
+                      "text": {
+                        "name": "text",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": true,
+                        "type": "string",
+                        "schema": "string"
+                      },
+                      "depth": {
+                        "name": "depth",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": true,
+                        "type": "number",
+                        "schema": "number"
+                      },
+                      "children": {
+                        "name": "children",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "TocLink[] | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "TocLink[] | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "array",
+                              "type": "TocLink[]",
+                              "schema": [
+                                {
+                                  "kind": "object",
+                                  "type": "TocLink",
+                                  "schema": {
+                                    "id": {
+                                      "name": "id",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": true,
+                                      "type": "string",
+                                      "schema": "string"
+                                    },
+                                    "text": {
+                                      "name": "text",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": true,
+                                      "type": "string",
+                                      "schema": "string"
+                                    },
+                                    "depth": {
+                                      "name": "depth",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": true,
+                                      "type": "number",
+                                      "schema": "number"
+                                    },
+                                    "children": {
+                                      "name": "children",
+                                      "global": false,
+                                      "description": "",
+                                      "tags": [],
+                                      "required": false,
+                                      "type": "TocLink[] | undefined",
+                                      "schema": "TocLink[] | undefined"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "class": {
+                        "name": "class",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "any",
+                        "schema": "any"
+                      },
+                      "pohon": {
+                        "name": "pohon",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'> | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "Pick<{ root?: ClassValue; container?: ClassValue; top?: ClassValue; bottom?: ClassValue; trigger?: ClassValue; title?: ClassValue; trailing?: ClassValue; trailingIcon?: ClassValue; content?: ClassValue; list?: ClassValue; listWithChildren?: ClassValue; item?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkText?: ClassValue; indicator?: ClassValue; }, 'link' | 'item' | 'itemWithChildren' | 'linkText'>"
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+],
+  "events": [
+  {
+    "name": "update:open",
+    "description": "",
+    "tags": [],
+    "type": "[value: boolean]",
+    "signature": "(evt: 'update:open', value: boolean): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "boolean",
+        "schema": [
+          "false",
+          "true"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "move",
+    "description": "",
+    "tags": [],
+    "type": "[id: string]",
+    "signature": "(evt: 'move', id: string): void",
+    "schema": [
+      "string"
+    ]
+  }
+],
+  "exposed": []
+}

@@ -1,0 +1,61 @@
+{
+  "props": [
+  {
+    "name": "defaultOpen",
+    "description": "The open state of the tooltip when it is initially rendered.\nUse when you do not need to control its open state.",
+    "type": "boolean",
+    "required": false,
+    "default": "false"
+  },
+  {
+    "name": "delayDuration",
+    "description": "Override the duration given to the `Provider` to customise\nthe open delay for a specific tooltip.",
+    "type": "number",
+    "required": false
+  },
+  {
+    "name": "disableClosingTrigger",
+    "description": "When `true`, clicking on trigger will not close the content.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "disabled",
+    "description": "When `true`, disable tooltip",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "disableHoverableContent",
+    "description": "Prevents Tooltip.Content from remaining open when hovering.\nDisabling this has accessibility consequences. Inherits\nfrom Tooltip.Provider.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "ignoreNonKeyboardFocus",
+    "description": "Prevent the tooltip from opening if the focus did not come from\nthe keyboard by matching against the `:focus-visible` selector.\nThis is useful if you want to avoid opening it when switching\nbrowser tabs or closing a dialog.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "open",
+    "description": "The controlled open state of the tooltip.",
+    "type": "boolean",
+    "required": false
+  }
+],
+  "events": [
+  {
+    "name": "update:open",
+    "description": "Event handler called when the open state of the tooltip changes.",
+    "type": "[value: boolean]"
+  }
+],
+  "slots": [
+  {
+    "name": "open",
+    "description": "Current open state",
+    "type": "boolean"
+  }
+]
+}

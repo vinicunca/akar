@@ -1,0 +1,96 @@
+{
+  "props": [
+  {
+    "name": "description",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "label",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": true,
+    "type": "string",
+    "schema": "string"
+  }
+],
+  "slots": [
+  {
+    "name": "default",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  }
+],
+  "events": [],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & ProseTabsItemSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & ProseTabsItemSlots",
+      "schema": {
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "label",
+    "type": "string",
+    "description": "",
+    "schema": "string"
+  },
+  {
+    "name": "description",
+    "type": "string | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  }
+]
+}

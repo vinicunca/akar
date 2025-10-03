@@ -1,0 +1,211 @@
+{
+  "props": [
+  {
+    "name": "defaultValue",
+    "global": false,
+    "description": "The default tab to select.",
+    "tags": [
+      {
+        "name": "example",
+        "text": "'1'"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    },
+    "default": "'0'"
+  },
+  {
+    "name": "modelValue",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "sync",
+    "global": false,
+    "description": "Sync the selected tab with a local storage key.",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "default",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  }
+],
+  "events": [
+  {
+    "name": "update:modelValue",
+    "description": "",
+    "tags": [],
+    "type": "[value: string | undefined]",
+    "signature": "(event: 'update:modelValue', value: string | undefined): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "string | undefined",
+        "schema": [
+          "undefined",
+          "string"
+        ]
+      }
+    ]
+  }
+],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & ProseCodeGroupSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & ProseCodeGroupSlots",
+      "schema": {
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "defaultValue",
+    "type": "string",
+    "description": "The default tab to select.",
+    "schema": "string"
+  },
+  {
+    "name": "modelValue",
+    "type": "string | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "onUpdate:modelValue",
+    "type": "((value: string | undefined) => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "((value: string | undefined) => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(value: string | undefined): any",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "string | undefined",
+              "schema": [
+                "undefined",
+                "string"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "pohon",
+    "type": "{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; } | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; list?: ClassValue; indicator?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; }"
+      }
+    }
+  },
+  {
+    "name": "sync",
+    "type": "string | undefined",
+    "description": "Sync the selected tab with a local storage key.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  }
+]
+}

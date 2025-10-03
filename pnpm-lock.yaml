@@ -377,9 +377,6 @@ importers:
       fast-glob:
         specifier: catalog:docs
         version: 3.3.3
-      nuxt-component-meta:
-        specifier: ^0.14.0
-        version: 0.14.0(magicast@0.3.5)
       unocss:
         specifier: catalog:base
         version: 66.5.1(@unocss/webpack@66.5.1(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.7(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))

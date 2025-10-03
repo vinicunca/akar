@@ -1,0 +1,219 @@
+{
+  "props": [
+  {
+    "name": "closeText",
+    "global": false,
+    "description": "The text displayed when the collapsible is closed.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "t('prose.collapsible.closeText')"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "icon",
+    "global": false,
+    "description": "The icon displayed to toggle the collapsible.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.chevronDown"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "name",
+    "global": false,
+    "description": "The name displayed in the trigger label.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "t('prose.collapsible.name')"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "openText",
+    "global": false,
+    "description": "The text displayed when the collapsible is open.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "t('prose.collapsible.openText')"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; content?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; content?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; content?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "default",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  }
+],
+  "events": [],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & ProseCollapsibleSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & ProseCollapsibleSlots",
+      "schema": {
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "pohon",
+    "type": "{ root?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; content?: ClassValue; } | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; content?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; trigger?: ClassValue; triggerIcon?: ClassValue; triggerLabel?: ClassValue; content?: ClassValue; }"
+      }
+    }
+  },
+  {
+    "name": "name",
+    "type": "string | undefined",
+    "description": "The name displayed in the trigger label.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "icon",
+    "type": "string | object | undefined",
+    "description": "The icon displayed to toggle the collapsible.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "closeText",
+    "type": "string | undefined",
+    "description": "The text displayed when the collapsible is closed.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "openText",
+    "type": "string | undefined",
+    "description": "The text displayed when the collapsible is open.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  }
+]
+}

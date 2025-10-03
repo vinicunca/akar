@@ -1,0 +1,1521 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "global": false,
+    "description": "The element or component this component should render as.\n\nRead our [primitive tag](https://akar.vinicunca.dev/core/guides/primitive-tag) guide for more details.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'div'"
+      }
+    ],
+    "required": false,
+    "type": "APrimitiveAsTag | Component | undefined",
+    "schema": "any"
+  },
+  {
+    "name": "color",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'primary'"
+      }
+    ],
+    "required": false,
+    "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'neutral' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'error'",
+        "2": "'primary'",
+        "3": "'secondary'",
+        "4": "'success'",
+        "5": "'info'",
+        "6": "'warning'",
+        "7": "'neutral'"
+      }
+    }
+  },
+  {
+    "name": "defaultValue",
+    "global": false,
+    "description": "The value of the CheckboxGroup when initially rendered. Use when you do not need to control the state of the CheckboxGroup.",
+    "tags": [],
+    "required": false,
+    "type": "any[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "any[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "any[]",
+          "schema": [
+            "any"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "descriptionKey",
+    "global": false,
+    "description": "When `items` is an array of objects, select the field to use as the description.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'description'"
+      }
+    ],
+    "required": false,
+    "type": "GetItemKeys<PCheckboxGroupItem[]> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "GetItemKeys<PCheckboxGroupItem[]> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    },
+    "default": "'description'"
+  },
+  {
+    "name": "disabled",
+    "global": false,
+    "description": "When `true`, prevents the user from interacting with the checkboxes",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "icon",
+    "global": false,
+    "description": "The icon displayed when checked.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "appConfig.pohon.icons.check"
+      },
+      {
+        "name": "IconifyIcon"
+      }
+    ],
+    "required": false,
+    "type": "string | object | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "object"
+      }
+    }
+  },
+  {
+    "name": "indicator",
+    "global": false,
+    "description": "Position of the indicator.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'start'"
+      }
+    ],
+    "required": false,
+    "type": "'hidden' | 'start' | 'end' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'hidden' | 'start' | 'end' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'hidden'",
+        "2": "'start'",
+        "3": "'end'"
+      }
+    }
+  },
+  {
+    "name": "items",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "PCheckboxGroupItem[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "PCheckboxGroupItem[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "PCheckboxGroupItem[]",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "PCheckboxGroupItem",
+              "schema": [
+                "null",
+                "string",
+                "number",
+                "bigint",
+                "false",
+                "true",
+                {
+                  "kind": "object",
+                  "type": "{ [key: string]: any; label?: string | undefined; description?: string | undefined; disabled?: boolean | undefined; value?: string | undefined; class?: any; pohon?: (Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined; }",
+                  "schema": {
+                    "label": {
+                      "name": "label",
+                      "global": false,
+                      "description": "",
+                      "tags": [],
+                      "required": false,
+                      "type": "string | undefined",
+                      "schema": {
+                        "kind": "enum",
+                        "type": "string | undefined",
+                        "schema": {
+                          "0": "undefined",
+                          "1": "string"
+                        }
+                      }
+                    },
+                    "description": {
+                      "name": "description",
+                      "global": false,
+                      "description": "",
+                      "tags": [],
+                      "required": false,
+                      "type": "string | undefined",
+                      "schema": "string | undefined"
+                    },
+                    "disabled": {
+                      "name": "disabled",
+                      "global": false,
+                      "description": "",
+                      "tags": [],
+                      "required": false,
+                      "type": "boolean | undefined",
+                      "schema": {
+                        "kind": "enum",
+                        "type": "boolean | undefined",
+                        "schema": {
+                          "0": "undefined",
+                          "1": "false",
+                          "2": "true"
+                        }
+                      }
+                    },
+                    "value": {
+                      "name": "value",
+                      "global": false,
+                      "description": "",
+                      "tags": [],
+                      "required": false,
+                      "type": "string | undefined",
+                      "schema": "string | undefined"
+                    },
+                    "class": {
+                      "name": "class",
+                      "global": false,
+                      "description": "",
+                      "tags": [],
+                      "required": false,
+                      "type": "any",
+                      "schema": "any"
+                    },
+                    "pohon": {
+                      "name": "pohon",
+                      "global": false,
+                      "description": "",
+                      "tags": [],
+                      "required": false,
+                      "type": "(Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined",
+                      "schema": {
+                        "kind": "enum",
+                        "type": "(Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined",
+                        "schema": {
+                          "0": "undefined",
+                          "1": {
+                            "kind": "object",
+                            "type": "Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>",
+                            "schema": {
+                              "item": {
+                                "name": "item",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "ClassValue",
+                                "schema": {
+                                  "kind": "enum",
+                                  "type": "ClassValue",
+                                  "schema": {
+                                    "0": "undefined",
+                                    "1": "null",
+                                    "2": "string",
+                                    "3": "false",
+                                    "4": "0",
+                                    "5": "0n",
+                                    "6": {
+                                      "kind": "array",
+                                      "type": "ClassNameArray",
+                                      "schema": [
+                                        "ClassValue"
+                                      ]
+                                    }
+                                  }
+                                }
+                              },
+                              "label": {
+                                "name": "label",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "ClassValue",
+                                "schema": "ClassValue"
+                              },
+                              "description": {
+                                "name": "description",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "ClassValue",
+                                "schema": "ClassValue"
+                              },
+                              "icon": {
+                                "name": "icon",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "ClassValue",
+                                "schema": "ClassValue"
+                              },
+                              "wrapper": {
+                                "name": "wrapper",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "ClassValue",
+                                "schema": "ClassValue"
+                              },
+                              "base": {
+                                "name": "base",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "ClassValue",
+                                "schema": "ClassValue"
+                              },
+                              "indicator": {
+                                "name": "indicator",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "ClassValue",
+                                "schema": "ClassValue"
+                              },
+                              "container": {
+                                "name": "container",
+                                "global": false,
+                                "description": "",
+                                "tags": [],
+                                "required": false,
+                                "type": "ClassValue",
+                                "schema": "ClassValue"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "labelKey",
+    "global": false,
+    "description": "When `items` is an array of objects, select the field to use as the label.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'label'"
+      }
+    ],
+    "required": false,
+    "type": "GetItemKeys<PCheckboxGroupItem[]> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "GetItemKeys<PCheckboxGroupItem[]> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    },
+    "default": "'label'"
+  },
+  {
+    "name": "legend",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "loop",
+    "global": false,
+    "description": "Whether keyboard navigation should loop around",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "modelValue",
+    "global": false,
+    "description": "The controlled value of the CheckboxGroup. Can be bind as `v-model`.",
+    "tags": [],
+    "required": false,
+    "type": "any[] | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "any[] | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "array",
+          "type": "any[]",
+          "schema": [
+            "any"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "name",
+    "global": false,
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+    "tags": [],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "orientation",
+    "global": false,
+    "description": "The orientation the checkbox buttons are laid out.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'vertical'"
+      }
+    ],
+    "required": false,
+    "type": "Orientation$1 | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "Orientation$1 | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'vertical'",
+        "2": "'horizontal'"
+      }
+    },
+    "default": "'vertical'"
+  },
+  {
+    "name": "required",
+    "global": false,
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "size",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'md'"
+      }
+    ],
+    "required": false,
+    "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'md' | 'xs' | 'sm' | 'lg' | 'xl' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'md'",
+        "2": "'xs'",
+        "3": "'sm'",
+        "4": "'lg'",
+        "5": "'xl'"
+      }
+    }
+  },
+  {
+    "name": "valueKey",
+    "global": false,
+    "description": "When `items` is an array of objects, select the field to use as the value.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'value'"
+      }
+    ],
+    "required": false,
+    "type": "GetItemKeys<PCheckboxGroupItem[]> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "GetItemKeys<PCheckboxGroupItem[]> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "number"
+      }
+    },
+    "default": "'value' as never"
+  },
+  {
+    "name": "variant",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'list'"
+      }
+    ],
+    "required": false,
+    "type": "'table' | 'list' | 'card' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'table' | 'list' | 'card' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'table'",
+        "2": "'list'",
+        "3": "'card'"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "({ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; } & { root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }) | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "({ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; } & { root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; } & { root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }",
+          "schema": {
+            "root": {
+              "name": "root",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": {
+                "kind": "enum",
+                "type": "ClassValue",
+                "schema": {
+                  "0": "undefined",
+                  "1": "null",
+                  "2": "string",
+                  "3": "false",
+                  "4": "0",
+                  "5": "0n",
+                  "6": {
+                    "kind": "array",
+                    "type": "ClassNameArray",
+                    "schema": [
+                      "ClassValue"
+                    ]
+                  }
+                }
+              }
+            },
+            "fieldset": {
+              "name": "fieldset",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            },
+            "legend": {
+              "name": "legend",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            },
+            "item": {
+              "name": "item",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            },
+            "container": {
+              "name": "container",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            },
+            "base": {
+              "name": "base",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            },
+            "indicator": {
+              "name": "indicator",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            },
+            "icon": {
+              "name": "icon",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            },
+            "wrapper": {
+              "name": "wrapper",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            },
+            "label": {
+              "name": "label",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            },
+            "description": {
+              "name": "description",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "ClassValue",
+              "schema": "ClassValue"
+            }
+          }
+        }
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "legend",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "label",
+    "type": "{ item: PCheckboxGroupItem & { id: string; }; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PCheckboxGroupItem & { id: string; }; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PCheckboxGroupItem & { id: string; }",
+          "schema": {
+            "kind": "enum",
+            "type": "PCheckboxGroupItem & { id: string; }",
+            "schema": {
+              "0": {
+                "kind": "object",
+                "type": "string & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "1": {
+                "kind": "object",
+                "type": "number & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "2": {
+                "kind": "object",
+                "type": "bigint & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "3": {
+                "kind": "object",
+                "type": "false & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "4": {
+                "kind": "object",
+                "type": "true & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "5": {
+                "kind": "object",
+                "type": "{ [key: string]: any; label?: string | undefined; description?: string | undefined; disabled?: boolean | undefined; value?: string | undefined; class?: any; pohon?: (Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined; } & { id: string; }",
+                "schema": {
+                  "label": {
+                    "name": "label",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "string | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "string | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": "string"
+                      }
+                    }
+                  },
+                  "description": {
+                    "name": "description",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "string | undefined",
+                    "schema": "string | undefined"
+                  },
+                  "disabled": {
+                    "name": "disabled",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "boolean | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "boolean | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": "false",
+                        "2": "true"
+                      }
+                    }
+                  },
+                  "value": {
+                    "name": "value",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "string | undefined",
+                    "schema": "string | undefined"
+                  },
+                  "class": {
+                    "name": "class",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "any",
+                    "schema": "any"
+                  },
+                  "pohon": {
+                    "name": "pohon",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "(Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "(Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": {
+                          "kind": "object",
+                          "type": "Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>",
+                          "schema": {
+                            "item": {
+                              "name": "item",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": {
+                                "kind": "enum",
+                                "type": "ClassValue",
+                                "schema": {
+                                  "0": "undefined",
+                                  "1": "null",
+                                  "2": "string",
+                                  "3": "false",
+                                  "4": "0",
+                                  "5": "0n",
+                                  "6": {
+                                    "kind": "array",
+                                    "type": "ClassNameArray",
+                                    "schema": [
+                                      "ClassValue"
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            "label": {
+                              "name": "label",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "description": {
+                              "name": "description",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "icon": {
+                              "name": "icon",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "wrapper": {
+                              "name": "wrapper",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "base": {
+                              "name": "base",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "indicator": {
+                              "name": "indicator",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "container": {
+                              "name": "container",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "description",
+    "type": "{ item: PCheckboxGroupItem & { id: string; }; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ item: PCheckboxGroupItem & { id: string; }; }",
+      "schema": {
+        "item": {
+          "name": "item",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "PCheckboxGroupItem & { id: string; }",
+          "schema": {
+            "kind": "enum",
+            "type": "PCheckboxGroupItem & { id: string; }",
+            "schema": {
+              "0": {
+                "kind": "object",
+                "type": "string & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "1": {
+                "kind": "object",
+                "type": "number & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "2": {
+                "kind": "object",
+                "type": "bigint & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "3": {
+                "kind": "object",
+                "type": "false & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "4": {
+                "kind": "object",
+                "type": "true & { id: string; }",
+                "schema": {
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              },
+              "5": {
+                "kind": "object",
+                "type": "{ [key: string]: any; label?: string | undefined; description?: string | undefined; disabled?: boolean | undefined; value?: string | undefined; class?: any; pohon?: (Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined; } & { id: string; }",
+                "schema": {
+                  "label": {
+                    "name": "label",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "string | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "string | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": "string"
+                      }
+                    }
+                  },
+                  "description": {
+                    "name": "description",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "string | undefined",
+                    "schema": "string | undefined"
+                  },
+                  "disabled": {
+                    "name": "disabled",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "boolean | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "boolean | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": "false",
+                        "2": "true"
+                      }
+                    }
+                  },
+                  "value": {
+                    "name": "value",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "string | undefined",
+                    "schema": "string | undefined"
+                  },
+                  "class": {
+                    "name": "class",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "any",
+                    "schema": "any"
+                  },
+                  "pohon": {
+                    "name": "pohon",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "(Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "(Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": {
+                          "kind": "object",
+                          "type": "Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>",
+                          "schema": {
+                            "item": {
+                              "name": "item",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": {
+                                "kind": "enum",
+                                "type": "ClassValue",
+                                "schema": {
+                                  "0": "undefined",
+                                  "1": "null",
+                                  "2": "string",
+                                  "3": "false",
+                                  "4": "0",
+                                  "5": "0n",
+                                  "6": {
+                                    "kind": "array",
+                                    "type": "ClassNameArray",
+                                    "schema": [
+                                      "ClassValue"
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            "label": {
+                              "name": "label",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "description": {
+                              "name": "description",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "icon": {
+                              "name": "icon",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "wrapper": {
+                              "name": "wrapper",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "base": {
+                              "name": "base",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "indicator": {
+                              "name": "indicator",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "container": {
+                              "name": "container",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "id": {
+                    "name": "id",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": true,
+                    "type": "string",
+                    "schema": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+],
+  "events": [
+  {
+    "name": "update:modelValue",
+    "description": "",
+    "tags": [],
+    "type": "[value: PCheckboxGroupItem[]]",
+    "signature": "(evt: 'update:modelValue', value: PCheckboxGroupItem[]): void",
+    "schema": [
+      {
+        "kind": "array",
+        "type": "PCheckboxGroupItem[]",
+        "schema": [
+          {
+            "kind": "enum",
+            "type": "PCheckboxGroupItem",
+            "schema": [
+              "null",
+              "string",
+              "number",
+              "bigint",
+              "false",
+              "true",
+              {
+                "kind": "object",
+                "type": "{ [key: string]: any; label?: string | undefined; description?: string | undefined; disabled?: boolean | undefined; value?: string | undefined; class?: any; pohon?: (Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined; }",
+                "schema": {
+                  "label": {
+                    "name": "label",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "string | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "string | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": "string"
+                      }
+                    }
+                  },
+                  "description": {
+                    "name": "description",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "string | undefined",
+                    "schema": "string | undefined"
+                  },
+                  "disabled": {
+                    "name": "disabled",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "boolean | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "boolean | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": "false",
+                        "2": "true"
+                      }
+                    }
+                  },
+                  "value": {
+                    "name": "value",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "string | undefined",
+                    "schema": "string | undefined"
+                  },
+                  "class": {
+                    "name": "class",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "any",
+                    "schema": "any"
+                  },
+                  "pohon": {
+                    "name": "pohon",
+                    "global": false,
+                    "description": "",
+                    "tags": [],
+                    "required": false,
+                    "type": "(Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined",
+                    "schema": {
+                      "kind": "enum",
+                      "type": "(Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>) | undefined",
+                      "schema": {
+                        "0": "undefined",
+                        "1": {
+                          "kind": "object",
+                          "type": "Pick<{ root?: ClassValue; fieldset?: ClassValue; legend?: ClassValue; item?: ClassValue; }, 'item'> & Omit<{ root?: ClassValue; container?: ClassValue; base?: ClassValue; indicator?: ClassValue; icon?: ClassValue; wrapper?: ClassValue; label?: ClassValue; description?: ClassValue; }, 'root'>",
+                          "schema": {
+                            "item": {
+                              "name": "item",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": {
+                                "kind": "enum",
+                                "type": "ClassValue",
+                                "schema": {
+                                  "0": "undefined",
+                                  "1": "null",
+                                  "2": "string",
+                                  "3": "false",
+                                  "4": "0",
+                                  "5": "0n",
+                                  "6": {
+                                    "kind": "array",
+                                    "type": "ClassNameArray",
+                                    "schema": [
+                                      "ClassValue"
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            "label": {
+                              "name": "label",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "description": {
+                              "name": "description",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "icon": {
+                              "name": "icon",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "wrapper": {
+                              "name": "wrapper",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "base": {
+                              "name": "base",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "indicator": {
+                              "name": "indicator",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            },
+                            "container": {
+                              "name": "container",
+                              "global": false,
+                              "description": "",
+                              "tags": [],
+                              "required": false,
+                              "type": "ClassValue",
+                              "schema": "ClassValue"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "change",
+    "description": "",
+    "tags": [],
+    "type": "[event: Event]",
+    "signature": "(evt: 'change', event: Event): void",
+    "schema": [
+      {
+        "kind": "object",
+        "type": "Event",
+        "schema": {}
+      }
+    ]
+  }
+],
+  "exposed": []
+}

@@ -1,0 +1,1805 @@
+{
+  "props": [
+  {
+    "name": "arrow",
+    "global": false,
+    "description": "Display an arrow alongside the popover.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | Omit<APopoverArrowProps, 'as' | 'asChild'> | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | Omit<APopoverArrowProps, 'as' | 'asChild'> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true",
+        "3": "Omit<APopoverArrowProps, 'as' | 'asChild'>"
+      }
+    }
+  },
+  {
+    "name": "closeDelay",
+    "global": false,
+    "description": "The duration from when the mouse leaves the trigger or content until the hover card closes.",
+    "tags": [],
+    "required": false,
+    "type": "number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "number"
+      }
+    },
+    "default": "0"
+  },
+  {
+    "name": "content",
+    "global": false,
+    "description": "The content of the popover.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "{ side: 'bottom', sideOffset: 8, collisionPadding: 8 }"
+      }
+    ],
+    "required": false,
+    "type": "(Omit<APopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentImplEmits>>) | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "(Omit<APopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentImplEmits>>) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "Omit<APopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentImplEmits>>",
+          "schema": {
+            "sticky": {
+              "name": "sticky",
+              "global": false,
+              "description": "The sticky behavior on the align axis. `partial` will keep the\ncontent in the boundary as long as the trigger is at least partially\nin the boundary whilst 'always' will keep the content in the boundary\nregardless.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'partial'"
+                }
+              ],
+              "required": false,
+              "type": "'partial' | 'always' | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "'partial' | 'always' | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'partial'",
+                  "2": "'always'"
+                }
+              }
+            },
+            "side": {
+              "name": "side",
+              "global": false,
+              "description": "The preferred side of the trigger to render against when open.\nWill be reversed when collisions occur and avoidCollisions\nis enabled.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'top'"
+                }
+              ],
+              "required": false,
+              "type": "Side | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Side | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'top'",
+                  "2": "'bottom'",
+                  "3": "'left'",
+                  "4": "'right'"
+                }
+              }
+            },
+            "sideOffset": {
+              "name": "sideOffset",
+              "global": false,
+              "description": "The distance in pixels from the trigger.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "0"
+                }
+              ],
+              "required": false,
+              "type": "number | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "number | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "number"
+                }
+              }
+            },
+            "sideFlip": {
+              "name": "sideFlip",
+              "global": false,
+              "description": "Flip to the opposite side when colliding with boundary.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "true"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "boolean | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "false",
+                  "2": "true"
+                }
+              }
+            },
+            "align": {
+              "name": "align",
+              "global": false,
+              "description": "The preferred alignment against the trigger.\nMay change when collisions occur.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'center'"
+                }
+              ],
+              "required": false,
+              "type": "Align | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Align | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'center'",
+                  "2": "'start'",
+                  "3": "'end'"
+                }
+              }
+            },
+            "alignOffset": {
+              "name": "alignOffset",
+              "global": false,
+              "description": "An offset in pixels from the `start` or `end` alignment options.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "0"
+                }
+              ],
+              "required": false,
+              "type": "number | undefined",
+              "schema": "number | undefined"
+            },
+            "alignFlip": {
+              "name": "alignFlip",
+              "global": false,
+              "description": "Flip alignment when colliding with boundary.\nMay only occur when `prioritizePosition` is true.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "true"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "avoidCollisions": {
+              "name": "avoidCollisions",
+              "global": false,
+              "description": "When `true`, overrides the side and align preferences\nto prevent collisions with boundary edges.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "true"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "collisionBoundary": {
+              "name": "collisionBoundary",
+              "global": false,
+              "description": "The element used as the collision boundary. By default\nthis is the viewport, though you can provide additional\nelement(s) to be included in this check.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "Array"
+                }
+              ],
+              "required": false,
+              "type": "Element | (Element | null)[] | null | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Element | (Element | null)[] | null | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "null",
+                  "2": {
+                    "kind": "object",
+                    "type": "Element",
+                    "schema": {}
+                  },
+                  "3": {
+                    "kind": "array",
+                    "type": "(Element | null)[]",
+                    "schema": [
+                      {
+                        "kind": "enum",
+                        "type": "Element | null",
+                        "schema": [
+                          "null",
+                          "Element"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "collisionPadding": {
+              "name": "collisionPadding",
+              "global": false,
+              "description": "The distance in pixels from the boundary edges where collision\ndetection should occur. Accepts a number (same for all sides),\nor a partial padding object, for example: { top: 20, left: 20 }.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "0"
+                }
+              ],
+              "required": false,
+              "type": "number | Partial<Record<Side, number>> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "number | Partial<Record<Side, number>> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "number",
+                  "2": "Partial<Record<Side, number>>"
+                }
+              }
+            },
+            "arrowPadding": {
+              "name": "arrowPadding",
+              "global": false,
+              "description": "The padding between the arrow and the edges of the content.\nIf your content has border-radius, this will prevent it from\noverflowing the corners.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "0"
+                }
+              ],
+              "required": false,
+              "type": "number | undefined",
+              "schema": "number | undefined"
+            },
+            "hideWhenDetached": {
+              "name": "hideWhenDetached",
+              "global": false,
+              "description": "Whether to hide the content when the trigger becomes fully occluded.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "false"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "positionStrategy": {
+              "name": "positionStrategy",
+              "global": false,
+              "description": "The type of CSS position property to use.",
+              "tags": [],
+              "required": false,
+              "type": "'fixed' | 'absolute' | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "'fixed' | 'absolute' | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'fixed'",
+                  "2": "'absolute'"
+                }
+              }
+            },
+            "updatePositionStrategy": {
+              "name": "updatePositionStrategy",
+              "global": false,
+              "description": "Strategy to update the position of the floating element on every animation frame.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'optimized'"
+                }
+              ],
+              "required": false,
+              "type": "'always' | 'optimized' | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "'always' | 'optimized' | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'always'",
+                  "2": "'optimized'"
+                }
+              }
+            },
+            "disableUpdateOnLayoutShift": {
+              "name": "disableUpdateOnLayoutShift",
+              "global": false,
+              "description": "Whether to disable the update position for the content when the layout shifted.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "false"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "prioritizePosition": {
+              "name": "prioritizePosition",
+              "global": false,
+              "description": "Force content to be position within the viewport.\n\nMight overlap the reference element, which may not be desired.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "false"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "reference": {
+              "name": "reference",
+              "global": false,
+              "description": "The custom element or virtual element that will be set as the reference\nto position the floating element.\n\nIf provided, it will replace the default anchor element.",
+              "tags": [],
+              "required": false,
+              "type": "ReferenceElement | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "ReferenceElement | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "Element",
+                  "2": {
+                    "kind": "object",
+                    "type": "VirtualElement",
+                    "schema": {
+                      "getBoundingClientRect": {
+                        "name": "getBoundingClientRect",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": true,
+                        "type": "() => { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }",
+                        "schema": {
+                          "kind": "event",
+                          "type": "(): { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }"
+                        }
+                      },
+                      "getClientRects": {
+                        "name": "getClientRects",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "(() => DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]) | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "(() => DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]) | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "event",
+                              "type": "(): DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]"
+                            }
+                          }
+                        }
+                      },
+                      "contextElement": {
+                        "name": "contextElement",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "Element | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "Element | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "Element"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "disableOutsidePointerEvents": {
+              "name": "disableOutsidePointerEvents",
+              "global": false,
+              "description": "When `true`, hover/focus/click interactions will be disabled on elements outside\nthe `DismissableLayer`. Users will need to click twice on outside elements to\ninteract with them: once to close the `DismissableLayer`, and again to trigger the element.",
+              "tags": [],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "trapFocus": {
+              "name": "trapFocus",
+              "global": false,
+              "description": "Whether focus should be trapped within the `AMenuContent`",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "false"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "onEscapeKeyDown": {
+              "name": "onEscapeKeyDown",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: KeyboardEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: KeyboardEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: KeyboardEvent): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "KeyboardEvent",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onPointerDownOutside": {
+              "name": "onPointerDownOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent): void",
+                    "schema": [
+                      "PointerDownOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onFocusOutside": {
+              "name": "onFocusOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: FocusOutsideEvent): void",
+                    "schema": [
+                      "FocusOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onInteractOutside": {
+              "name": "onInteractOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent | FocusOutsideEvent): void",
+                    "schema": [
+                      {
+                        "kind": "enum",
+                        "type": "PointerDownOutsideEvent | FocusOutsideEvent",
+                        "schema": [
+                          "PointerDownOutsideEvent",
+                          "FocusOutsideEvent"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onOpenAutoFocus": {
+              "name": "onOpenAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "Event",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onCloseAutoFocus": {
+              "name": "onCloseAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      "Event"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "defaultOpen",
+    "global": false,
+    "description": "The open state of the popover when it is initially rendered. Use when you do not need to control its open state.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "dismissible",
+    "global": false,
+    "description": "When `false`, the popover will not close when clicking outside or pressing escape.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "modal",
+    "global": false,
+    "description": "The modality of the popover. When set to true, interaction with outside elements will be disabled and only popover content will be visible to screen readers.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "mode",
+    "global": false,
+    "description": "The display mode of the popover.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "'click'"
+      }
+    ],
+    "required": false,
+    "type": "'click' | 'hover' | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "'click' | 'hover' | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "'click'",
+        "2": "'hover'"
+      }
+    },
+    "default": "'click'"
+  },
+  {
+    "name": "open",
+    "global": false,
+    "description": "The controlled open state of the popover.",
+    "tags": [],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "openDelay",
+    "global": false,
+    "description": "The duration from when the mouse enters the trigger until the hover card opens.",
+    "tags": [],
+    "required": false,
+    "type": "number | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "number | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "number"
+      }
+    },
+    "default": "0"
+  },
+  {
+    "name": "portal",
+    "global": false,
+    "description": "",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "true\nRender the popover in a portal."
+      }
+    ],
+    "required": false,
+    "type": "string | boolean | HTMLElement | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | boolean | HTMLElement | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string",
+        "2": "false",
+        "3": "true",
+        "4": {
+          "kind": "object",
+          "type": "HTMLElement",
+          "schema": {}
+        }
+      }
+    },
+    "default": "true"
+  },
+  {
+    "name": "reference",
+    "global": false,
+    "description": "The reference (or anchor) element that is being referred to for positioning.\n\nIf not provided will use the current component as anchor.",
+    "tags": [],
+    "required": false,
+    "type": "ReferenceElement | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "ReferenceElement | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "Element",
+          "schema": {}
+        },
+        "2": {
+          "kind": "object",
+          "type": "VirtualElement",
+          "schema": {
+            "getBoundingClientRect": {
+              "name": "getBoundingClientRect",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": true,
+              "type": "() => { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }",
+              "schema": {
+                "kind": "event",
+                "type": "(): { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }"
+              }
+            },
+            "getClientRects": {
+              "name": "getClientRects",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "(() => DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "(() => DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(): DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]"
+                  }
+                }
+              }
+            },
+            "contextElement": {
+              "name": "contextElement",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "Element | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Element | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "Element"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ content?: ClassValue; arrow?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ content?: ClassValue; arrow?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ content?: ClassValue; arrow?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "default",
+    "type": "{ open: boolean; }",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "{ open: boolean; }",
+      "schema": {
+        "open": {
+          "name": "open",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "boolean",
+          "schema": {
+            "kind": "enum",
+            "type": "boolean",
+            "schema": {
+              "0": "false",
+              "1": "true"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "content",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  },
+  {
+    "name": "anchor",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  }
+],
+  "events": [
+  {
+    "name": "update:open",
+    "description": "",
+    "tags": [],
+    "type": "[value: boolean]",
+    "signature": "(event: 'update:open', value: boolean): void",
+    "schema": [
+      {
+        "kind": "enum",
+        "type": "boolean",
+        "schema": [
+          "false",
+          "true"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "close:prevent",
+    "description": "",
+    "tags": [],
+    "type": "[]",
+    "signature": "(event: 'close:prevent'): void",
+    "schema": []
+  }
+],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & PPopoverSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & PPopoverSlots",
+      "schema": {
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props: { open: boolean; }) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props: { open: boolean; }): any",
+            "schema": {}
+          }
+        },
+        "content": {
+          "name": "content",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        },
+        "anchor": {
+          "name": "anchor",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "portal",
+    "type": "string | boolean | HTMLElement",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "string | boolean | HTMLElement",
+      "schema": {
+        "0": "string",
+        "1": "false",
+        "2": "true",
+        "3": {
+          "kind": "object",
+          "type": "HTMLElement",
+          "schema": {}
+        }
+      }
+    }
+  },
+  {
+    "name": "mode",
+    "type": "'click' | 'hover'",
+    "description": "The display mode of the popover.",
+    "schema": {
+      "kind": "enum",
+      "type": "'click' | 'hover'",
+      "schema": {
+        "0": "'click'",
+        "1": "'hover'"
+      }
+    }
+  },
+  {
+    "name": "dismissible",
+    "type": "boolean",
+    "description": "When `false`, the popover will not close when clicking outside or pressing escape.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean",
+      "schema": {
+        "0": "false",
+        "1": "true"
+      }
+    }
+  },
+  {
+    "name": "openDelay",
+    "type": "number",
+    "description": "The duration from when the mouse enters the trigger until the hover card opens.",
+    "schema": "number"
+  },
+  {
+    "name": "closeDelay",
+    "type": "number",
+    "description": "The duration from when the mouse leaves the trigger or content until the hover card closes.",
+    "schema": "number"
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "pohon",
+    "type": "{ content?: ClassValue; arrow?: ClassValue; } | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "{ content?: ClassValue; arrow?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ content?: ClassValue; arrow?: ClassValue; }"
+      }
+    }
+  },
+  {
+    "name": "content",
+    "type": "(Omit<APopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentImplEmits>>) | undefined",
+    "description": "The content of the popover.",
+    "schema": {
+      "kind": "enum",
+      "type": "(Omit<APopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentImplEmits>>) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "Omit<APopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentImplEmits>>",
+          "schema": {
+            "sticky": {
+              "name": "sticky",
+              "global": false,
+              "description": "The sticky behavior on the align axis. `partial` will keep the\ncontent in the boundary as long as the trigger is at least partially\nin the boundary whilst 'always' will keep the content in the boundary\nregardless.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'partial'"
+                }
+              ],
+              "required": false,
+              "type": "'partial' | 'always' | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "'partial' | 'always' | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'partial'",
+                  "2": "'always'"
+                }
+              }
+            },
+            "side": {
+              "name": "side",
+              "global": false,
+              "description": "The preferred side of the trigger to render against when open.\nWill be reversed when collisions occur and avoidCollisions\nis enabled.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'top'"
+                }
+              ],
+              "required": false,
+              "type": "Side | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Side | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'top'",
+                  "2": "'bottom'",
+                  "3": "'left'",
+                  "4": "'right'"
+                }
+              }
+            },
+            "sideOffset": {
+              "name": "sideOffset",
+              "global": false,
+              "description": "The distance in pixels from the trigger.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "0"
+                }
+              ],
+              "required": false,
+              "type": "number | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "number | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "number"
+                }
+              }
+            },
+            "sideFlip": {
+              "name": "sideFlip",
+              "global": false,
+              "description": "Flip to the opposite side when colliding with boundary.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "true"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "boolean | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "false",
+                  "2": "true"
+                }
+              }
+            },
+            "align": {
+              "name": "align",
+              "global": false,
+              "description": "The preferred alignment against the trigger.\nMay change when collisions occur.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'center'"
+                }
+              ],
+              "required": false,
+              "type": "Align | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Align | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'center'",
+                  "2": "'start'",
+                  "3": "'end'"
+                }
+              }
+            },
+            "alignOffset": {
+              "name": "alignOffset",
+              "global": false,
+              "description": "An offset in pixels from the `start` or `end` alignment options.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "0"
+                }
+              ],
+              "required": false,
+              "type": "number | undefined",
+              "schema": "number | undefined"
+            },
+            "alignFlip": {
+              "name": "alignFlip",
+              "global": false,
+              "description": "Flip alignment when colliding with boundary.\nMay only occur when `prioritizePosition` is true.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "true"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "avoidCollisions": {
+              "name": "avoidCollisions",
+              "global": false,
+              "description": "When `true`, overrides the side and align preferences\nto prevent collisions with boundary edges.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "true"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "collisionBoundary": {
+              "name": "collisionBoundary",
+              "global": false,
+              "description": "The element used as the collision boundary. By default\nthis is the viewport, though you can provide additional\nelement(s) to be included in this check.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "Array"
+                }
+              ],
+              "required": false,
+              "type": "Element | (Element | null)[] | null | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Element | (Element | null)[] | null | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "null",
+                  "2": {
+                    "kind": "object",
+                    "type": "Element",
+                    "schema": {}
+                  },
+                  "3": {
+                    "kind": "array",
+                    "type": "(Element | null)[]",
+                    "schema": [
+                      {
+                        "kind": "enum",
+                        "type": "Element | null",
+                        "schema": [
+                          "null",
+                          "Element"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "collisionPadding": {
+              "name": "collisionPadding",
+              "global": false,
+              "description": "The distance in pixels from the boundary edges where collision\ndetection should occur. Accepts a number (same for all sides),\nor a partial padding object, for example: { top: 20, left: 20 }.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "0"
+                }
+              ],
+              "required": false,
+              "type": "number | Partial<Record<Side, number>> | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "number | Partial<Record<Side, number>> | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "number",
+                  "2": "Partial<Record<Side, number>>"
+                }
+              }
+            },
+            "arrowPadding": {
+              "name": "arrowPadding",
+              "global": false,
+              "description": "The padding between the arrow and the edges of the content.\nIf your content has border-radius, this will prevent it from\noverflowing the corners.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "0"
+                }
+              ],
+              "required": false,
+              "type": "number | undefined",
+              "schema": "number | undefined"
+            },
+            "hideWhenDetached": {
+              "name": "hideWhenDetached",
+              "global": false,
+              "description": "Whether to hide the content when the trigger becomes fully occluded.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "false"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "positionStrategy": {
+              "name": "positionStrategy",
+              "global": false,
+              "description": "The type of CSS position property to use.",
+              "tags": [],
+              "required": false,
+              "type": "'fixed' | 'absolute' | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "'fixed' | 'absolute' | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'fixed'",
+                  "2": "'absolute'"
+                }
+              }
+            },
+            "updatePositionStrategy": {
+              "name": "updatePositionStrategy",
+              "global": false,
+              "description": "Strategy to update the position of the floating element on every animation frame.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "'optimized'"
+                }
+              ],
+              "required": false,
+              "type": "'always' | 'optimized' | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "'always' | 'optimized' | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "'always'",
+                  "2": "'optimized'"
+                }
+              }
+            },
+            "disableUpdateOnLayoutShift": {
+              "name": "disableUpdateOnLayoutShift",
+              "global": false,
+              "description": "Whether to disable the update position for the content when the layout shifted.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "false"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "prioritizePosition": {
+              "name": "prioritizePosition",
+              "global": false,
+              "description": "Force content to be position within the viewport.\n\nMight overlap the reference element, which may not be desired.",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "false"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "reference": {
+              "name": "reference",
+              "global": false,
+              "description": "The custom element or virtual element that will be set as the reference\nto position the floating element.\n\nIf provided, it will replace the default anchor element.",
+              "tags": [],
+              "required": false,
+              "type": "ReferenceElement | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "ReferenceElement | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "Element",
+                  "2": {
+                    "kind": "object",
+                    "type": "VirtualElement",
+                    "schema": {
+                      "getBoundingClientRect": {
+                        "name": "getBoundingClientRect",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": true,
+                        "type": "() => { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }",
+                        "schema": {
+                          "kind": "event",
+                          "type": "(): { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }"
+                        }
+                      },
+                      "getClientRects": {
+                        "name": "getClientRects",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "(() => DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]) | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "(() => DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]) | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": {
+                              "kind": "event",
+                              "type": "(): DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]"
+                            }
+                          }
+                        }
+                      },
+                      "contextElement": {
+                        "name": "contextElement",
+                        "global": false,
+                        "description": "",
+                        "tags": [],
+                        "required": false,
+                        "type": "Element | undefined",
+                        "schema": {
+                          "kind": "enum",
+                          "type": "Element | undefined",
+                          "schema": {
+                            "0": "undefined",
+                            "1": "Element"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "disableOutsidePointerEvents": {
+              "name": "disableOutsidePointerEvents",
+              "global": false,
+              "description": "When `true`, hover/focus/click interactions will be disabled on elements outside\nthe `DismissableLayer`. Users will need to click twice on outside elements to\ninteract with them: once to close the `DismissableLayer`, and again to trigger the element.",
+              "tags": [],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "trapFocus": {
+              "name": "trapFocus",
+              "global": false,
+              "description": "Whether focus should be trapped within the `AMenuContent`",
+              "tags": [
+                {
+                  "name": "defaultValue",
+                  "text": "false"
+                }
+              ],
+              "required": false,
+              "type": "boolean | undefined",
+              "schema": "boolean | undefined"
+            },
+            "onEscapeKeyDown": {
+              "name": "onEscapeKeyDown",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: KeyboardEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: KeyboardEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: KeyboardEvent): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "KeyboardEvent",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onPointerDownOutside": {
+              "name": "onPointerDownOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent): void",
+                    "schema": [
+                      "PointerDownOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onFocusOutside": {
+              "name": "onFocusOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: FocusOutsideEvent): void",
+                    "schema": [
+                      "FocusOutsideEvent"
+                    ]
+                  }
+                }
+              }
+            },
+            "onInteractOutside": {
+              "name": "onInteractOutside",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: PointerDownOutsideEvent | FocusOutsideEvent) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: PointerDownOutsideEvent | FocusOutsideEvent): void",
+                    "schema": [
+                      {
+                        "kind": "enum",
+                        "type": "PointerDownOutsideEvent | FocusOutsideEvent",
+                        "schema": [
+                          "PointerDownOutsideEvent",
+                          "FocusOutsideEvent"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onOpenAutoFocus": {
+              "name": "onOpenAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      {
+                        "kind": "object",
+                        "type": "Event",
+                        "schema": {}
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "onCloseAutoFocus": {
+              "name": "onCloseAutoFocus",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "((event: Event) => void) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "((event: Event) => void) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(event: Event): void",
+                    "schema": [
+                      "Event"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "onUpdate:open",
+    "type": "((value: boolean) => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "((value: boolean) => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(value: boolean): any",
+          "schema": [
+            {
+              "kind": "enum",
+              "type": "boolean",
+              "schema": [
+                "false",
+                "true"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "open",
+    "type": "boolean | undefined",
+    "description": "The controlled open state of the popover.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "defaultOpen",
+    "type": "boolean | undefined",
+    "description": "The open state of the popover when it is initially rendered. Use when you do not need to control its open state.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "arrow",
+    "type": "boolean | Omit<APopoverArrowProps, 'as' | 'asChild'> | undefined",
+    "description": "Display an arrow alongside the popover.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | Omit<APopoverArrowProps, 'as' | 'asChild'> | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true",
+        "3": "Omit<APopoverArrowProps, 'as' | 'asChild'>"
+      }
+    }
+  },
+  {
+    "name": "reference",
+    "type": "ReferenceElement | undefined",
+    "description": "The reference (or anchor) element that is being referred to for positioning.\n\nIf not provided will use the current component as anchor.",
+    "schema": {
+      "kind": "enum",
+      "type": "ReferenceElement | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "object",
+          "type": "Element",
+          "schema": {}
+        },
+        "2": {
+          "kind": "object",
+          "type": "VirtualElement",
+          "schema": {
+            "getBoundingClientRect": {
+              "name": "getBoundingClientRect",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": true,
+              "type": "() => { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }",
+              "schema": {
+                "kind": "event",
+                "type": "(): { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }"
+              }
+            },
+            "getClientRects": {
+              "name": "getClientRects",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "(() => DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]) | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "(() => DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]) | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": {
+                    "kind": "event",
+                    "type": "(): DOMRectList | { x: number; y: number; width: number; height: number; top: number; bottom: number; left: number; right: number; }[]"
+                  }
+                }
+              }
+            },
+            "contextElement": {
+              "name": "contextElement",
+              "global": false,
+              "description": "",
+              "tags": [],
+              "required": false,
+              "type": "Element | undefined",
+              "schema": {
+                "kind": "enum",
+                "type": "Element | undefined",
+                "schema": {
+                  "0": "undefined",
+                  "1": "Element"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "modal",
+    "type": "boolean | undefined",
+    "description": "The modality of the popover. When set to true, interaction with outside elements will be disabled and only popover content will be visible to screen readers.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "onClose:prevent",
+    "type": "(() => any) | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "(() => any) | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": {
+          "kind": "event",
+          "type": "(): any",
+          "schema": []
+        }
+      }
+    }
+  }
+]
+}

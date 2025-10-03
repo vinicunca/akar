@@ -32,7 +32,6 @@
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/unocss-preset": "catalog:docs",
     "fast-glob": "catalog:docs",
-    "nuxt-component-meta": "^0.14.0",
     "unocss": "catalog:base",
     "vue-component-meta": "catalog:docs"
   }

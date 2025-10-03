@@ -1,0 +1,151 @@
+{
+  "props": [
+  {
+    "name": "defaultValue",
+    "global": false,
+    "description": "The default path to select.",
+    "tags": [
+      {
+        "name": "example",
+        "text": "'package.json'"
+      }
+    ],
+    "required": false,
+    "type": "string | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "expandAll",
+    "global": false,
+    "description": "Expand all directories by default.",
+    "tags": [
+      {
+        "name": "defaultValue",
+        "text": "false"
+      }
+    ],
+    "required": false,
+    "type": "boolean | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  },
+  {
+    "name": "pohon",
+    "global": false,
+    "description": "",
+    "tags": [],
+    "required": false,
+    "type": "{ root?: ClassValue; list?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; content?: ClassValue; } | undefined",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; list?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; content?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; list?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; content?: ClassValue; }"
+      }
+    }
+  }
+],
+  "slots": [
+  {
+    "name": "default",
+    "type": "object | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "object | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "object"
+      }
+    }
+  }
+],
+  "events": [],
+  "exposed": [
+  {
+    "name": "$slots",
+    "type": "Readonly<InternalSlots> & ProseCodeTreeSlots",
+    "description": "",
+    "schema": {
+      "kind": "object",
+      "type": "Readonly<InternalSlots> & ProseCodeTreeSlots",
+      "schema": {
+        "default": {
+          "name": "default",
+          "global": false,
+          "description": "",
+          "tags": [],
+          "required": true,
+          "type": "(props?: object | undefined) => any",
+          "schema": {
+            "kind": "event",
+            "type": "(props?: object | undefined): any",
+            "schema": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "defaultValue",
+    "type": "string | undefined",
+    "description": "The default path to select.",
+    "schema": {
+      "kind": "enum",
+      "type": "string | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "string"
+      }
+    }
+  },
+  {
+    "name": "class",
+    "type": "any",
+    "description": "",
+    "schema": "any"
+  },
+  {
+    "name": "pohon",
+    "type": "{ root?: ClassValue; list?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; content?: ClassValue; } | undefined",
+    "description": "",
+    "schema": {
+      "kind": "enum",
+      "type": "{ root?: ClassValue; list?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; content?: ClassValue; } | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "{ root?: ClassValue; list?: ClassValue; item?: ClassValue; listWithChildren?: ClassValue; itemWithChildren?: ClassValue; link?: ClassValue; linkLeadingIcon?: ClassValue; linkLabel?: ClassValue; linkTrailing?: ClassValue; linkTrailingIcon?: ClassValue; content?: ClassValue; }"
+      }
+    }
+  },
+  {
+    "name": "expandAll",
+    "type": "boolean | undefined",
+    "description": "Expand all directories by default.",
+    "schema": {
+      "kind": "enum",
+      "type": "boolean | undefined",
+      "schema": {
+        "0": "undefined",
+        "1": "false",
+        "2": "true"
+      }
+    }
+  }
+]
+}

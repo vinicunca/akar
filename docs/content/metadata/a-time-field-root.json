@@ -1,0 +1,157 @@
+{
+  "props": [
+  {
+    "name": "as",
+    "description": "The element or component this component should render as. Can be overwritten by `asChild`.",
+    "type": "APrimitiveAsTag | Component",
+    "required": false,
+    "default": "'div'"
+  },
+  {
+    "name": "asChild",
+    "description": "Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our [Composition](https://akar.vinicunca.dev/core/guides/composition) guide for more details.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "defaultPlaceholder",
+    "description": "The default placeholder date",
+    "type": "TimeValue",
+    "required": false
+  },
+  {
+    "name": "defaultValue",
+    "description": "The default value for the calendar",
+    "type": "TimeValue",
+    "required": false
+  },
+  {
+    "name": "dir",
+    "description": "The reading direction of the time field when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode.",
+    "type": "'ltr' | 'rtl'",
+    "required": false
+  },
+  {
+    "name": "disabled",
+    "description": "Whether or not the time field is disabled",
+    "type": "boolean",
+    "required": false,
+    "default": "false"
+  },
+  {
+    "name": "granularity",
+    "description": "The granularity to use for formatting times. Defaults to minute if a Time is provided, otherwise defaults to minute. The field will render segments for each part of the date up to and including the specified granularity",
+    "type": "'hour' | 'minute' | 'second'",
+    "required": false
+  },
+  {
+    "name": "hideTimeZone",
+    "description": "Whether or not to hide the time zone segment of the field",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "hourCycle",
+    "description": "The hour cycle used for formatting times. Defaults to the local preference",
+    "type": "12 | 24",
+    "required": false
+  },
+  {
+    "name": "id",
+    "description": "Id of the element",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "locale",
+    "description": "The locale to use for formatting dates",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "maxValue",
+    "description": "The maximum date that can be selected",
+    "type": "TimeValue",
+    "required": false
+  },
+  {
+    "name": "minValue",
+    "description": "The minimum date that can be selected",
+    "type": "TimeValue",
+    "required": false
+  },
+  {
+    "name": "modelValue",
+    "description": "The controlled checked state of the field. Can be bound as `v-model`.",
+    "type": "TimeValue | null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "description": "The name of the field. Submitted with its owning form as part of a name/value pair.",
+    "type": "string",
+    "required": false
+  },
+  {
+    "name": "placeholder",
+    "description": "The placeholder date, which is used to determine what time to display when no time is selected. This updates as the user navigates the field",
+    "type": "TimeValue",
+    "required": false
+  },
+  {
+    "name": "readonly",
+    "description": "Whether or not the time field is readonly",
+    "type": "boolean",
+    "required": false,
+    "default": "false"
+  },
+  {
+    "name": "required",
+    "description": "When `true`, indicates that the user must set the value before the owning form can be submitted.",
+    "type": "boolean",
+    "required": false
+  },
+  {
+    "name": "step",
+    "description": "The stepping interval for the time fields. Defaults to `1`.",
+    "type": "DateStep",
+    "required": false
+  }
+],
+  "events": [
+  {
+    "name": "update:modelValue",
+    "description": "Event handler called whenever the model value changes",
+    "type": "[date: TimeValue]"
+  },
+  {
+    "name": "update:placeholder",
+    "description": "Event handler called whenever the placeholder value changes",
+    "type": "[date: TimeValue]"
+  }
+],
+  "slots": [
+  {
+    "name": "modelValue",
+    "description": "The current time of the field",
+    "type": "TimeValue | undefined"
+  },
+  {
+    "name": "segments",
+    "description": "The time field segment contents",
+    "type": "{ part: SegmentPart; value: string; }[]"
+  },
+  {
+    "name": "isInvalid",
+    "description": "Value if the input is invalid",
+    "type": "boolean"
+  }
+],
+  "exposed": [
+  {
+    "name": "setFocusedElement",
+    "description": "Helper to set the focused element inside the DateField",
+    "type": "(el: HTMLElement) => void"
+  }
+]
+}
