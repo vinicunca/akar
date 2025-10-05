@@ -16,7 +16,7 @@ export interface PProgressProps extends Pick<AProgressRootProps, 'getValueLabel'
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /** The maximum progress value. */
   max?: number | Array<any>;
   /** Display the current progress value. */

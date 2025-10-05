@@ -15,7 +15,7 @@ export interface PInputTagsProps<T extends PInputTagItem = PInputTagItem> extend
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /** The placeholder text when the input is empty. */
   placeholder?: string;
   /** The maximum number of character allowed. */

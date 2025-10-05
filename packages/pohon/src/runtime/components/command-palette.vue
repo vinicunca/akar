@@ -63,7 +63,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.pohon.icons.search

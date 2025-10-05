@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/form-field';
 
@@ -11,7 +11,7 @@ export interface PFormFieldProps {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /** The name of the FormField. Also used to match form errors. */
   name?: string;
   /** A regular expression to match form error names. */

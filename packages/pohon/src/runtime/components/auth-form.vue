@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type {
   IconProps,
   PButtonProps,
@@ -32,7 +32,7 @@ export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F ext
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * The icon displayed above the title.
    * @IconifyIcon

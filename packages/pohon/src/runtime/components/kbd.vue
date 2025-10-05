@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { KbdKey } from '../composables/use-kbd';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/kbd';
@@ -12,7 +12,7 @@ export interface PKbdProps {
    * The element or component this component should render as.
    * @defaultValue 'kbd'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   value?: KbdKey | string;
   /**
    * @defaultValue 'neutral'

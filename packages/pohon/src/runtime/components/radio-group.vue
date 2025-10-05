@@ -23,7 +23,7 @@ export interface PRadioGroupProps<T extends Array<PRadioGroupItem> = Array<PRadi
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   legend?: string;
   /**
    * When `items` is an array of objects, select the field to use as the value.

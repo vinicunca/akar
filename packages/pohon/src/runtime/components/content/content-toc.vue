@@ -18,7 +18,7 @@ export interface PContentTocProps<T extends PContentTocLink = PContentTocLink> e
    * The element or component this component should render as.
    * @defaultValue 'nav'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * The icon displayed to collapse the content.
    * @defaultValue appConfig.pohon.icons.chevronDown

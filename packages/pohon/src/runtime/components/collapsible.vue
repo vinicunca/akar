@@ -11,7 +11,7 @@ export interface PCollapsibleProps extends Pick<ACollapsibleRootProps, 'defaultO
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   class?: any;
   pohon?: Collapsible['slots'];
 }

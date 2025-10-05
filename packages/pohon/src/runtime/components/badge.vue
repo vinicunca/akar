@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
@@ -13,7 +13,7 @@ export interface PBadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'l
    * The element or component this component should render as.
    * @defaultValue 'span'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   label?: string | number;
   /**
    * @defaultValue 'primary'

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/main';
 
@@ -11,7 +11,7 @@ export interface PMainProps {
    * The element or component this component should render as.
    * @defaultValue 'main'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   class?: any;
 }
 

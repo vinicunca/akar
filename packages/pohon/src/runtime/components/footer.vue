@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/footer';
 
@@ -11,7 +11,7 @@ export interface PFooterProps {
    * The element or component this component should render as.
    * @defaultValue 'footer'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   class?: any;
   pohon?: Footer['slots'];
 }

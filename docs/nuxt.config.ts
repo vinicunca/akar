@@ -1,3 +1,7 @@
+import { createResolver } from '@nuxt/kit';
+
+const { resolve } = createResolver(import.meta.url);
+
 export default defineNuxtConfig({
   app: {
     rootAttrs: {
@@ -46,8 +50,30 @@ export default defineNuxtConfig({
     // 'akar/nuxt',
     '@unocss/nuxt',
     '@nuxt/content',
+    'nuxt-component-meta',
     '@nuxt/image',
   ],
+
+  componentMeta: {
+    exclude: [
+      '@nuxt/content',
+      '@nuxt/icon',
+      '@nuxt/image',
+      '@nuxtjs/color-mode',
+      '@nuxtjs/mdc',
+      '@nuxtjs/plausible',
+      'nuxt/dist',
+      'nuxt-og-image',
+      resolve('./app/components'),
+    ],
+    metaFields: {
+      type: false,
+      props: true,
+      slots: true,
+      events: true,
+      exposed: false,
+    },
+  },
 
   devtools: {
     enabled: true,

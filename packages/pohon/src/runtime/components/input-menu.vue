@@ -52,7 +52,7 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   id?: string;
   type?: InputHTMLAttributes['type'];
   /** The placeholder text when the input is empty. */

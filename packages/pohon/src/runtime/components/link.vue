@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { ButtonHTMLAttributes } from 'vue';
 import type { RouteLocationRaw, RouterLinkProps } from 'vue-router';
 import type { ComponentConfig } from '../types/uv';
@@ -59,7 +59,7 @@ export interface PLinkProps extends NuxtLinkProps {
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * The type of the button when not a link.
    * @defaultValue 'button'

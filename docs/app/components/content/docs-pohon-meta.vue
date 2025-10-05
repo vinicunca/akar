@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { queryCollection, useAsyncData } from '#imports';
+import { fetchComponentMeta } from '#imports';
 
 const props = withDefaults(
   defineProps<{
@@ -9,35 +9,30 @@ const props = withDefaults(
   {},
 );
 
-const { data: metadata } = await useAsyncData(
-  props.name,
-  () => queryCollection('metadata')
-    .where('stem', '=', `metadata/${props.name}`)
-    .first(),
-);
+const metadata = await fetchComponentMeta('PAccordion');
 </script>
 
 <template>
-  <template v-if="metadata?.props?.length">
+  <template v-if="metadata.meta?.props?.length">
     <ProseH4>Props</ProseH4>
     <DocsPropsTable
-      :data="(metadata.props as any)"
+      :data="metadata.meta.props"
       :name="`props-${props.name}`"
     />
   </template>
 
-  <template v-if="metadata?.events?.length">
+  <template v-if="metadata.meta?.events?.length">
     <ProseH4>Emits</ProseH4>
     <DocsEmitsTable
-      :data="(metadata.events as any)"
+      :data="metadata.meta.events"
       :name="`emits-${props.name}`"
     />
   </template>
 
-  <template v-if="metadata?.slots?.length">
+  <template v-if="metadata.meta?.slots?.length">
     <ProseH4>Slots</ProseH4>
     <DocsSlotsTable
-      :data="(metadata.slots as any)"
+      :data="metadata.meta.slots"
       :name="`slots-${props.name}`"
     />
   </template>

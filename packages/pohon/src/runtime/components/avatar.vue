@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { IconProps, PChipProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/avatar';
@@ -12,7 +12,7 @@ export interface PAvatarProps {
    * The element or component this component should render as.
    * @defaultValue 'span'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   src?: string;
   alt?: string;
   /**

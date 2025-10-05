@@ -36,7 +36,7 @@ export interface PTabsProps<T extends PTabsItem = PTabsItem> extends Pick<ATabsR
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   items?: Array<T>;
   /**
    * @defaultValue 'primary'

@@ -12,7 +12,7 @@ export interface PCheckboxProps extends Pick<ACheckboxRootProps, 'disabled' | 'r
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   label?: string;
   description?: string;
   /**

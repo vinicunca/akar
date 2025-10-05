@@ -18,7 +18,7 @@ export interface PDrawerProps extends Pick<ADrawerRootProps, 'activeSnapPoint' |
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   title?: string;
   description?: string;
   /**

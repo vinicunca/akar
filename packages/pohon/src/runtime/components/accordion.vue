@@ -33,7 +33,7 @@ export interface PAccordionProps<T extends PAccordionItem = PAccordionItem> exte
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: AAccordionRootProps['as'];
+  as?: any;
   items?: Array<T>;
   /**
    * The icon displayed on the right side of the trigger.

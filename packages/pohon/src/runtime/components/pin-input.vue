@@ -19,7 +19,7 @@ export interface PPinInputProps<T extends PinInputType = 'text'> extends Pick<AP
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * @defaultValue 'primary'
    */

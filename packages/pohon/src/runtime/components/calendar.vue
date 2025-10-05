@@ -35,7 +35,7 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * The icon to use for the next year control.
    * @defaultValue appConfig.pohon.icons.chevronDoubleRight

@@ -34,7 +34,7 @@ import type {
   VisibilityOptions,
   VisibilityState,
 } from '@tanstack/vue-table';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { Ref, WatchOptions } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/table';
@@ -86,7 +86,7 @@ export interface PTableProps<T extends PTableData = PTableData> extends PTableOp
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   data?: Array<T>;
   columns?: Array<PTableColumn<T>>;
   caption?: string;

@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import type { AutoHeightOptionsType } from 'embla-carousel-auto-height';
 import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll';
@@ -28,7 +28,7 @@ export interface PCarouselProps<T extends PCarouselItem = PCarouselItem> extends
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * Configure the prev button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }

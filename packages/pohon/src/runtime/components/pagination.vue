@@ -12,7 +12,7 @@ export interface PPaginationProps extends Partial<Pick<APaginationRootProps, 'de
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * The icon to use for the first page control.
    * @defaultValue appConfig.pohon.icons.chevronDoubleLeft

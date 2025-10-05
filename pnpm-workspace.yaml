@@ -73,6 +73,7 @@ catalogs:
     '@vinicunca/unocss-preset': ^1.23.0
     better-sqlite3: ^12.2.0
     fast-glob: ^3.3.3
+    nuxt-component-meta: ^0.14.0
     nuxt-og-image: ^5.1.9
     shiki-transformer-color-highlight: ^1.0.0
     vue-component-meta: ^3.1.0

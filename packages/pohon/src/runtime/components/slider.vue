@@ -12,7 +12,7 @@ export interface PSliderProps extends Pick<ASliderRootProps, 'name' | 'disabled'
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * @defaultValue 'md'
    */

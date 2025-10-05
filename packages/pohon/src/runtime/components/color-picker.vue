@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { MaybeRefOrGetter } from '@vueuse/shared';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { HSLObject } from 'colortranslator';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/color-picker';
@@ -42,7 +42,7 @@ export type PColorPickerProps = {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * Throttle time in ms for the color picker
    */

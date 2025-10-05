@@ -34,7 +34,7 @@ export interface PStepperProps<T extends PStepperItem = PStepperItem> extends Pi
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   items: Array<T>;
   /**
    * @defaultValue 'md'

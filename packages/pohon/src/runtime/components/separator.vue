@@ -12,7 +12,7 @@ export interface PSeparatorProps extends Pick<ASeparatorProps, 'decorative'> {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /** Display a label in the middle. */
   label?: string;
   /**

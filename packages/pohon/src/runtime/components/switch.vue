@@ -12,7 +12,7 @@ export interface PSwitchProps extends Pick<ASwitchRootProps, 'disabled' | 'id' |
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * @defaultValue 'primary'
    */

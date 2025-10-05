@@ -25,6 +25,10 @@ import {
 import { toKebabCase } from '@vinicunca/perkakas';
 import { pickLinkProps } from 'pohon/utils/link';
 
+const props = defineProps<{
+  type: 'akar' | 'pohon';
+}>();
+
 const route = useRoute();
 
 definePageMeta({
@@ -33,7 +37,7 @@ definePageMeta({
 
 const { data: page } = await useAsyncData(
   toKebabCase(route.path),
-  () => queryCollection('pohon').path(route.path).first(),
+  () => queryCollection('docs').path(route.path).first(),
 );
 
 if (!page.value) {
@@ -96,7 +100,6 @@ const communityLinks = computed(() => [
       <div class="py-8 border-b border-border relative">
         <!-- Headline -->
         <div class="text-sm color-primary font-semibold mb-2.5 flex gap-1.5 items-center">
-          {{ breadcrumbs }}
           <PBreadcrumb :items="breadcrumbs" />
         </div>
 

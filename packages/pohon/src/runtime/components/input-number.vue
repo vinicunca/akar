@@ -13,7 +13,7 @@ export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelVal
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /** The placeholder text when the input is empty. */
   placeholder?: string;
   color?: InputNumber['variants']['color'];

@@ -35,7 +35,7 @@ export interface PTreeProps<T extends Array<PTreeItem> = Array<PTreeItem>, M ext
    * The element or component this component should render as.
    * @defaultValue 'ul'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * @defaultValue 'primary'
    */

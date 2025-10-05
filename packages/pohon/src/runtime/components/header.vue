@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type {
   PButtonProps,
   PDialogProps,
@@ -20,7 +20,7 @@ export interface PHeaderProps<T extends HeaderMode = HeaderMode> {
    * The element or component this component should render as.
    * @defaultValue 'header'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   title?: string;
   to?: string;
   /**

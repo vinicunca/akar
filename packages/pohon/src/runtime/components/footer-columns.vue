@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { IconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/footer-columns';
@@ -27,7 +27,7 @@ export interface PFooterColumnsProps<T extends PFooterColumnLink = PFooterColumn
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   class?: any;
   columns?: Array<PFooterColumn<T>>;
   pohon?: FooterColumns['slots'];

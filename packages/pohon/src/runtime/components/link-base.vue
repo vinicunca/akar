@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { APrimitiveProps } from 'akar';
+ 
 import type { PLinkProps } from '../types';
 
 export interface PLinkBaseProps {
-  as?: APrimitiveProps['as'];
+  as?: any;
   type?: string;
   disabled?: boolean;
   onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>;

@@ -74,6 +74,7 @@ export default defineConfig({
 
   theme: {
     colors: {
+      card: 'hsl(var(--pohon-card))',
       text: {
         dimmed: 'var(--pohon-text-dimmed)',
         muted: 'var(--pohon-text-muted)',

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { NuxtError } from '#app';
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { PButtonProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/error';
@@ -13,7 +13,7 @@ export interface ErrorProps {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   error?: Partial<NuxtError & { message: string }>;
   /**
    * The URL to redirect to when the error is cleared.

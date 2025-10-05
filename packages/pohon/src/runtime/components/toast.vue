@@ -13,7 +13,7 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
    * The element or component this component should render as.
    * @defaultValue 'li'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   title?: StringOrVNode;
   description?: StringOrVNode;
   /**

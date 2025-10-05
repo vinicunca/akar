@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { IconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-surround';
@@ -23,7 +23,7 @@ export interface PContentSurroundProps<T extends PContentSurroundLink = PContent
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * The icon displayed in the prev link.
    * @defaultValue appConfig.pohon.icons.arrowLeft

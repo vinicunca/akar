@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps } from 'akar';
+ 
 import type { IconProps, PLinkProps, PAvatarProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -27,7 +27,7 @@ export interface PBreadcrumbProps<T extends PBreadcrumbItem = PBreadcrumbItem> {
    * The element or component this component should render as.
    * @defaultValue 'nav'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   items?: Array<T>;
   /**
    * The icon to use as a separator.

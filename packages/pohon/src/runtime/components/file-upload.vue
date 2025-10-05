@@ -12,7 +12,7 @@ export interface PFileUploadProps<M extends boolean = false> {
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   id?: string;
   name?: string;
   /**
@@ -123,7 +123,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import type { APrimitiveProps } from 'akar';
+ 
 import { useAppConfig, useLocale } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';

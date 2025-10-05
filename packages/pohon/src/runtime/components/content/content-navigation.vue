@@ -37,7 +37,7 @@ export interface PContentNavigationProps<T extends PContentNavigationLink = PCon
    * The element or component this component should render as.
    * @defaultValue 'nav'
    */
-  as?: APrimitiveProps['as'];
+  as?: any;
   /**
    * When `true`, the tree will be opened based on the current route.
    * When `false`, the tree will be closed.
