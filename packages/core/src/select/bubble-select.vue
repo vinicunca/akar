@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { AVisuallyHidden } from '~~/visually-hidden';
+import { injectASelectRootContext } from './select-root.vue';
 
 interface BubbleSelectProps {
   autocomplete?: string;
@@ -16,6 +17,7 @@ interface BubbleSelectProps {
 
 const props = defineProps<BubbleSelectProps>();
 const selectElement = ref<HTMLElement>();
+const rootContext = injectASelectRootContext();
 
 // This would bubble "change" event to form, with the target as Select element.
 watch(
@@ -36,6 +38,14 @@ watch(
 );
 
 /**
+ * Form autofill will trigger an `input` event on the `select` element.
+ * We listen to that event and update our internal state to support it.
+ */
+function handleInput(event: Event) {
+  rootContext.onValueChange((event.target as HTMLSelectElement).value);
+}
+
+/**
  * We purposefully use a `select` here to support form autofill as much
  * as possible.
  *
@@ -52,6 +62,7 @@ watch(
     <select
       ref="selectElement"
       v-bind="props"
+      @input="handleInput"
     >
       <slot />
     </select>
