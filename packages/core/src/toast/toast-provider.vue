@@ -7,6 +7,7 @@ import { createContext } from '~~/shared';
 type ToastProviderContext = {
   label: Ref<string>;
   duration: Ref<number>;
+  disableSwipe: Ref<boolean>;
   swipeDirection: Ref<SwipeDirection>;
   swipeThreshold: Ref<number>;
   toastCount: Ref<number>;
@@ -31,6 +32,11 @@ export interface AToastProviderProps {
    */
   duration?: number;
   /**
+   * Whether to disable the ability to swipe to close the toast.
+   * @defaultValue false
+   */
+  disableSwipe?: boolean;
+  /**
    * Direction of pointer swipe that should close the toast.
    * @defaultValue 'right'
    */
@@ -42,8 +48,10 @@ export interface AToastProviderProps {
   swipeThreshold?: number;
 }
 
-export const [injectAToastProviderContext, provideToastProviderContext]
-  = createContext<ToastProviderContext>('AToastProvider');
+export const [
+  injectAToastProviderContext,
+  provideToastProviderContext,
+] = createContext<ToastProviderContext>('AToastProvider');
 </script>
 
 <script setup lang="ts">
@@ -53,13 +61,16 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<AToastProviderProps>(), {
-  label: 'Notification',
-  duration: 5000,
-  swipeDirection: 'right',
-  swipeThreshold: 50,
-});
-const { label, duration, swipeDirection, swipeThreshold } = toRefs(props);
+const props = withDefaults(
+  defineProps<AToastProviderProps>(),
+  {
+    label: 'Notification',
+    duration: 5000,
+    swipeDirection: 'right',
+    swipeThreshold: 50,
+  },
+);
+const { label, duration, disableSwipe, swipeDirection, swipeThreshold } = toRefs(props);
 useCollection({ isProvider: true });
 
 const viewport = ref<HTMLElement>();
@@ -75,6 +86,7 @@ if (props.label && typeof props.label === 'string' && !props.label.trim()) {
 provideToastProviderContext({
   label,
   duration,
+  disableSwipe,
   swipeDirection,
   swipeThreshold,
   toastCount,
