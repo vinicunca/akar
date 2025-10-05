@@ -18,7 +18,7 @@ type ContextMenuRootContext = {
 
 export interface AContextMenuRootProps extends Omit<AMenuProps, 'open'> {
   /**
-   * The duration from when the trigger is pressed until the menu openes.
+   * The duration from when the trigger is pressed until the menu opens.
    *
    * @defaultValue 700
    */
