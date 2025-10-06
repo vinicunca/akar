@@ -12,9 +12,9 @@ async function renderAkarRaw() {
   const rawData = await import(`~~/app/components/demos/${props.name}.vue?raw`);
 
   const code = `
-  \`\`\`vue
-  ${rawData.default}
-  \`\`\`
+\`\`\`vue
+${rawData.default}
+\`\`\`
 `;
 
   return parseMarkdown(code);
@@ -40,11 +40,11 @@ const component = defineAsyncComponent(() => {
     <template #default="{ isCodeView }">
       <div
         v-if="!isCodeView"
-        class="not-prose bg-card p-4 border border-border-muted rounded-xl flex min-h-[400px] w-full items-center justify-center relative"
+        class="not-prose p-4 border border-border-muted rounded-xl bg-slate-900 flex min-h-[400px] w-full items-center justify-center relative"
       >
         <div
           v-if="component"
-          class="p-4 border border-b-0 border-border-muted flex justify-center relative z-[1]"
+          class="justify-center relative z-[1]"
         >
           <component
             :is="component"

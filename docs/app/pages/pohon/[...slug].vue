@@ -49,7 +49,6 @@ const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 const { findBreadcrumb } = useNavigation(navigation!);
 
 const breadcrumbs = computed(() => findBreadcrumb(page.value?.path as string));
-// const surround = computed(() => findSurround(page.value?.path as string))
 
 const title = page.value?.seo?.title ?? page.value?.navigation.title ?? page.value?.title;
 const prefix = page.value?.path.includes('components/') || page.value?.path.includes('composables/') ? 'Vue ' : '';

@@ -41,7 +41,7 @@ export default defineNuxtConfig({
 
   icon: {
     serverBundle: {
-      collections: ['lucide', 'radix'],
+      collections: ['lucide'],
     },
   },
 

@@ -6,9 +6,9 @@ export function useHeader() {
 
   const desktopLinks = computed(() => [
     {
-      label: 'Docs',
-      to: '/docs',
-      active: route.path.startsWith('/docs/'),
+      label: 'Akar',
+      to: '/akar',
+      active: route.path.startsWith('/akar/'),
     },
     {
       label: 'Pohon',

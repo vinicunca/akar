@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
 import {
   AAccordionContent,
   AAccordionHeader,
@@ -29,7 +28,7 @@ const items = [
 
 <template>
   <AAccordionRoot
-    class="bg-mauve6 border rounded-lg w-[300px] shadow-[0_2px_10px] shadow-black/5"
+    class="w-[300px]"
     default-value="item-1"
     type="single"
     :collapsible="true"
@@ -39,21 +38,21 @@ const items = [
       :key="item.value"
     >
       <AAccordionItem
-        class="focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 first:rounded-t-[7px] last:rounded-b-[7px] focus-within:shadow-[0_0_0_2px] focus-within:relative focus-within:z-10"
+        class="border-b border-border last:border-b-none"
         :value="item.value"
       >
         <AAccordionHeader class="flex">
-          <AAccordionTrigger class="text-grass11 shadow-mauve6 hover:bg-mauve2 group text-sm leading-none px-5 outline-none bg-white flex flex-1 h-[45px] cursor-default shadow-[0_1px_0] items-center justify-between">
+          <AAccordionTrigger class="group text-sm font-medium py-3.5 flex flex-1 gap-1.5 min-w-0 items-center focus-visible:outline-primary">
             <span>{{ item.title }}</span>
-            <Icon
-              icon="radix-icons:chevron-down"
-              class="text-green10 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180"
+            <i
+              class="i-radix-icons:chevron-down ms-auto shrink-0 size-5 transition-transform-280 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180"
               aria-label="Expand/Collapse"
             />
           </AAccordionTrigger>
         </AAccordionHeader>
-        <AAccordionContent class="text-mauve11 bg-mauve2 text-sm overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-          <div class="px-5 py-4">
+
+        <AAccordionContent class="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+          <div class="text-sm color-text-muted pb-4 pt-1">
             {{ item.content }}
           </div>
         </AAccordionContent>

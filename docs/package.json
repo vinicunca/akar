@@ -23,7 +23,8 @@
     "nuxt": "catalog:pohon",
     "nuxt-component-meta": "catalog:docs",
     "nuxt-og-image": "catalog:docs",
-    "pohon": "workspace:*",
+    "pohon-ui": "workspace:*",
+    "prettier": "catalog:docs",
     "shiki-transformer-color-highlight": "catalog:docs"
   },
   "devDependencies": {

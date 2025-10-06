@@ -7,7 +7,6 @@ type AttributeDef = {
 };
 
 interface DataAttributesTableProps {
-  name: string;
   data: Array<AttributeDef>;
 }
 const props = defineProps<DataAttributesTableProps>();

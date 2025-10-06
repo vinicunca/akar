@@ -11,7 +11,7 @@
   "dependencies": {
     "@internationalized/date": "catalog:core",
     "nuxt": "catalog:pohon",
-    "pohon": "workspace:*",
+    "pohon-ui": "workspace:*",
     "zod": "catalog:pohon"
   },
   "devDependencies": {

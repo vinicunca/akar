@@ -2,16 +2,29 @@
 import { PApp } from '#components';
 import {
   computed,
+  provide,
+  queryCollectionNavigation,
   useAppConfig,
+  useAsyncData,
   useColorMode,
   useFaviconFromTheme,
   useHead,
+  useNavigation,
   useServerSeoMeta,
 } from '#imports';
 import LayoutHeader from './components/header/layout-header.vue';
 
 const appConfig = useAppConfig();
 const colorMode = useColorMode();
+
+const { data: navigation } = useAsyncData(
+  'navigation',
+  () => queryCollectionNavigation('akar', [
+    'framework',
+    'category',
+    'description',
+  ]),
+);
 
 const color = computed(() => colorMode.value === 'dark' ? 'black' : 'white');
 const radius = computed(() => `:root { --pohon-radius: ${appConfig.theme.radius}rem; }`);
@@ -35,6 +48,10 @@ useServerSeoMeta({
 });
 
 useFaviconFromTheme();
+
+const { rootNavigation } = useNavigation(navigation);
+
+provide('navigation', rootNavigation);
 </script>
 
 <template>

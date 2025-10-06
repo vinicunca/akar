@@ -5,7 +5,6 @@ type VariableDef = {
 };
 
 interface CssVariablesTableProps {
-  name: string;
   data: Array<VariableDef>;
 }
 const props = defineProps<CssVariablesTableProps>();

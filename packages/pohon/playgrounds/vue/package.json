@@ -10,7 +10,7 @@
     "typecheck": "vue-tsc -p ./tsconfig.app.json"
   },
   "dependencies": {
-    "pohon": "workspace:*",
+    "pohon-ui": "workspace:*",
     "vue": "catalog:core",
     "vue-router": "catalog:base"
   },

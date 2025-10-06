@@ -5,11 +5,6 @@ export default vinicuncaESLint(
     formatters: {
       css: true,
     },
-    typescript: {
-      overrides: {
-        'perfectionist/sort-objects': 'off',
-      },
-    },
     unocss: {
       configPath: './docs/uno.config.ts',
     },

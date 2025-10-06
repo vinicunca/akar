@@ -14,7 +14,6 @@ import {
 import {
   computed,
   createError,
-  definePageMeta,
   inject,
   queryCollection,
   useAsyncData,
@@ -31,13 +30,9 @@ const props = defineProps<{
 
 const route = useRoute();
 
-definePageMeta({
-  layout: 'docs',
-});
-
 const { data: page } = await useAsyncData(
   toKebabCase(route.path),
-  () => queryCollection('docs').path(route.path).first(),
+  () => queryCollection(props.type).path(route.path).first(),
 );
 
 if (!page.value) {
@@ -53,7 +48,6 @@ const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 const { findBreadcrumb } = useNavigation(navigation!);
 
 const breadcrumbs = computed(() => findBreadcrumb(page.value?.path as string));
-// const surround = computed(() => findSurround(page.value?.path as string))
 
 const title = page.value?.seo?.title ?? page.value?.navigation.title ?? page.value?.title;
 const prefix = page.value?.path.includes('components/') || page.value?.path.includes('composables/') ? 'Vue ' : '';

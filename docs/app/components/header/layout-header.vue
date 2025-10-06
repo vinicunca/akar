@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { PHeader, PNavigationMenu } from '#components';
-import { useRoute } from '#imports';
 import { useHeader } from '~/composables/use-header';
 import LayoutHeaderLogo from './layout-header-logo.vue';
 
-const route = useRoute();
 const { desktopLinks } = useHeader();
 </script>
 
@@ -52,7 +50,6 @@ const { desktopLinks } = useHeader();
     </template>
 
     <template
-      v-if="route.path.startsWith('/docs/')"
       #bottom
     >
       <!-- <HeaderBottom /> -->

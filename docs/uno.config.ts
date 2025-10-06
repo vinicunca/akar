@@ -2,6 +2,8 @@ import { presetVinicunca } from '@vinicunca/unocss-preset';
 import { defineConfig } from 'unocss';
 import { theme } from 'unocss/preset-wind4';
 
+import { BRANDS } from './app/themes/constant';
+
 export default defineConfig({
   outputToCssLayers: true,
 
@@ -19,8 +21,19 @@ export default defineConfig({
   ],
 
   safelist: [
-    'bg-default',
     'isolate',
+    'bg-background-accented',
+    ...BRANDS.flatMap((color) => [
+      `border-${color}`,
+      `border-${color}/25`,
+      `bg-${color}/10`,
+      `color-${color}`,
+      `color-${color}/50`,
+      `dark:color-${color}-300`,
+      `dark:[&_code]:color-${color}-300`,
+      `color-${color}-600`,
+      `[&_code]:color-${color}-600`,
+    ]),
   ],
 
   preflights: [
@@ -56,7 +69,7 @@ export default defineConfig({
             --pohon-text-highlighted: ${slateColors[100]};
             --pohon-text-inverted: ${slateColors[900]};
 
-            --pohon-bg: ${slateColors[900]};
+            --pohon-bg: hsl(285 37% 5%);
             --pohon-bg-muted: ${slateColors[800]};
             --pohon-bg-elevated: ${slateColors[800]};
             --pohon-bg-accented: ${slateColors[700]};

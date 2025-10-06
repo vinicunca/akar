@@ -7,12 +7,6 @@ category: data
 
 Use the Accordion component to display a list of collapsible items.
 
-::docs-akar-preview
----
-name: 'a-accordion'
----
-::
-
 ## API Reference
 
 ### Root

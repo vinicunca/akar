@@ -7,7 +7,6 @@ import type {
   ANavigationMenuContentProps,
   ANavigationMenuRootEmits,
   ANavigationMenuRootProps,
-  APrimitiveProps,
 } from 'akar';
 import type { IconProps, PAvatarProps, PBadgeProps, PLinkProps, PPopoverProps, PTooltipProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
@@ -57,7 +56,7 @@ export interface PNavigationMenuItem extends Omit<PLinkProps, 'type' | 'raw' | '
   type?: 'label' | 'trigger' | 'link';
   slot?: string;
   /**
-   * The value of the item. Avoid using `index` as the value to prevent conflicts in horizontal orientation with Reka pohon.
+   * The value of the item. Avoid using `index` as the value to prevent conflicts in horizontal orientation with akar.
    * @defaultValue `item-${index}`
    */
   value?: string;

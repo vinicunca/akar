@@ -7,6 +7,11 @@ category: data
 
 Use the Accordion component to display a list of collapsible items.
 
+::docs-akar-preview
+---
+name: 'a-accordion'
+---
+::
 
 ## Features
 
@@ -48,17 +53,19 @@ import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AA
 
 Contains all the parts of an Accordion
 
-<!-- :docs-component-meta{name="a-accordion-root"} -->
-:docs-component-meta{name="p-breadcrumb"}
+:docs-component-meta{name="a-accordion-root"}
 
-<!-- #### Data Attributes
+#### Data Attributes
 
-:docs-data-attributes-table{name="data-attributes-accordion-root" :data='[
-  {
-    "attribute": "[data-orientation]",
-    "values": ["vertical", "horizontal"]
-  }
-]'}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 ### Item
 
@@ -68,66 +75,69 @@ Contains all the parts of a collapsible section.
 
 #### Data Attributes
 
-:docs-data-attributes-table{name="data-attributes-accordion-item" :data='[
-  {
-    "attribute": "[data-state]",
-    "values": ["open", "closed"]
-  },
-  {
-    "attribute": "[data-disabled]",
-    "values": "Present when disabled"
-  },
-  {
-    "attribute": "[data-orientation]",
-    "values": ["vertical", "horizontal"]
-  }
-]'}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 ### Header
 
-Wraps an `AccordionTrigger`. Use the `asChild` prop to update it to the appropriate heading level for your page.
+Wraps an `AAccordionTrigger`. Use the `asChild` prop to update it to the appropriate heading level for your page.
 
 :docs-component-meta{name="a-accordion-header"}
 
 #### Data Attributes
 
-:docs-data-attributes-table{name="data-attributes-accordion-header" :data='[
-  {
-    "attribute": "[data-state]",
-    "values": ["open", "closed"]
-  },
-  {
-    "attribute": "[data-disabled]",
-    "values": "Present when disabled"
-  },
-  {
-    "attribute": "[data-orientation]",
-    "values": ["vertical", "horizontal"]
-  }
-]'}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 ### Trigger
 
-Toggles the collapsed state of its associated item. It should be nested inside of an `AccordionHeader`.
+Toggles the collapsed state of its associated item. It should be nested inside of an `AAccordionHeader`.
 
 :docs-component-meta{name="a-accordion-trigger"}
 
 #### Data Attributes
 
-:docs-data-attributes-table{name="data-attributes-accordion-trigger" :data='[
-  {
-    "attribute": "[data-state]",
-    "values": ["open", "closed"]
-  },
-  {
-    "attribute": "[data-disabled]",
-    "values": "Present when disabled"
-  },
-  {
-    "attribute": "[data-orientation]",
-    "values": ["vertical", "horizontal"]
-  }
-]'}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 ### Content
 
@@ -137,30 +147,212 @@ Contains the collapsible content for an item.
 
 #### Data Attributes
 
-:docs-data-attributes-table{name="data-attributes-accordion-content" :data='[
-  {
-    "attribute": "[data-state]",
-    "values": ["open", "closed"]
-  },
-  {
-    "attribute": "[data-disabled]",
-    "values": "Present when disabled"
-  },
-  {
-    "attribute": "[data-orientation]",
-    "values": ["vertical", "horizontal"]
-  }
-]'}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 #### CSS Variables
 
-:docs-css-variables-table{name="css-variables-accordion-content" :data='[
-  {
-    "cssVariable": "--akar-accordion-content-width",
-    "description": "The width of the content when it opens/closes"
-  },
-  {
-    "cssVariable": "--akar-accordion-content-height",
-    "description": "The height of the content when it opens/closes"
+::docs-css-variables-table
+---
+data:
+  - cssVariable: --akar-accordion-content-width
+    description: The width of the content when it opens/closes
+  - cssVariable: --akar-accordion-content-height
+    description: The height of the content when it opens/closes
+---
+::
+
+## Examples
+
+### Expanded by default
+
+Use the `defaultValue` prop to define the open item by default.
+
+```vue {4}
+<template>
+  <AAccordionRoot
+    type="single"
+    default-value="item-2"
+  >
+    <AAccordionItem value="item-1">
+      …
+    </AAccordionItem>
+    <AAccordionItem value="item-2">
+      …
+    </AAccordionItem>
+  </AAccordionRoot>
+</template>
+```
+
+### Allow collapsing all items
+
+Use the `collapsible` prop to allow all items to close.
+
+```vue {4}
+<template>
+  <AAccordionRoot
+    type="single"
+    collapsible
+  >
+    <AAccordionItem value="item-1">
+      …
+    </AAccordionItem>
+    <AAccordionItem value="item-2">
+      …
+    </AAccordionItem>
+  </AAccordionRoot>
+</template>
+```
+
+### Multiple items open at the same time
+
+Set the `type` prop to `multiple` to enable opening multiple items at once.
+
+```vue {2}
+<template>
+  <AAccordionRoot type="multiple">
+    <AAccordionItem value="item-1">
+      …
+    </AAccordionItem>
+    <AAccordionItem value="item-2">
+      …
+    </AAccordionItem>
+  </AAccordionRoot>
+</template>
+```
+
+### Rotated icon when open
+
+You can add extra decorative elements, such as chevrons, and rotate it when the item is open.
+
+```vue {16}
+// index.vue
+<script setup>
+import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger } from 'akar'
+</script>
+
+<template>
+  <AAccordionRoot type="single">
+    <AAccordionItem value="item-1">
+      <AAccordionHeader>
+        <AAccordionTrigger class="group">
+          <span>Trigger text</span>
+          <i
+            class="i-radix-icons:chevron-down transition-transform-280 group-data-[state=open]:rotate-180"
+          />
+        </AAccordionTrigger>
+      </AAccordionHeader>
+      <AAccordionContent>…</AAccordionContent>
+    </AAccordionItem>
+  </AAccordionRoot>
+</template>
+```
+
+### Horizontal orientation
+
+Use the `orientation` prop to create a horizontal Accordion
+
+```vue {2}
+<template>
+  <AAccordionRoot orientation="horizontal">
+    <AAccordionItem value="item-1">
+      …
+    </AAccordionItem>
+    <AAccordionItem value="item-2">
+      …
+    </AAccordionItem>
+  </AAccordionRoot>
+</template>
+```
+
+### Animating content size
+
+Use the `--akar-accordion-content-width` and/or `--akar-accordion-content-height` CSS variables to animate the size of the content when it opens/closes:
+
+```vue {11}
+// index.vue
+<script setup>
+import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger } from 'akar'
+import './styles.css'
+</script>
+
+<template>
+  <AAccordionRoot type="single">
+    <AAccordionItem value="item-1">
+      <AAccordionHeader>…</AAccordionHeader>
+      <AAccordionContent class="AAccordionContent">
+        …
+      </AAccordionContent>
+    </AAccordionItem>
+  </AAccordionRoot>
+</template>
+```
+
+```css {17,23}
+/* styles.css */
+.AAccordionContent {
+  overflow: hidden;
+}
+.AAccordionContent[data-state="open"] {
+  animation: accordion-down 300ms ease-out;
+}
+.AAccordionContent[data-state="closed"] {
+  animation: accordion-up 300ms ease-out;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
   }
-]'} -->
+  to {
+    height: var(--akar-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--akar-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+```
+
+#### UnoCSS Preset
+
+::tip
+If you have [Vinicunca Preset](https://unocss.vinicunca.dev/) installed, the animation classes are available as `animate-accordion-up` and `animate-accordion-down`. So no need to create new keyframes.
+::
+
+### Render content even when closed
+
+By default hidden content will be removed, use `:unmountOnHide="false"` to keep the content always available.
+
+This will also allow browser to search the hidden text, and open the accordion.
+
+```vue line=2
+<template>
+  <AAccordionRoot :unmount-on-hide="false">
+    <AAccordionItem value="item-1">
+      …
+    </AAccordionItem>
+    <AAccordionItem value="item-2">
+      …
+    </AAccordionItem>
+  </AAccordionRoot>
+</template>
+```
