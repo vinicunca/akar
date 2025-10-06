@@ -5,6 +5,7 @@ import { BRANDS } from './themes/constant';
 import { containerTheme } from './themes/container.theme';
 import { contentTocTheme } from './themes/content-toc.theme';
 import { headerTheme } from './themes/header.theme';
+import { kbdTheme } from './themes/kbd.theme';
 import { linkTheme } from './themes/link.theme';
 import { mainTheme } from './themes/main.theme';
 import { navigationMenuTheme } from './themes/navigation-menu.theme';
@@ -36,6 +37,7 @@ export default defineAppConfig({
     main: mainTheme,
     navigationMenu: navigationMenuTheme,
     separator: separatorTheme,
+    kbd: kbdTheme,
 
     prose: {
       a: {

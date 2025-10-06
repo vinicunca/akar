@@ -356,3 +356,36 @@ This will also allow browser to search the hidden text, and open the accordion.
   </AAccordionRoot>
 </template>
 ```
+
+## Accessibility
+
+Adheres to the [Accordion WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion).
+
+### Keyboard Interactions
+
+::docs-keyboard-table
+---
+name: a-accordion-akar
+data:
+  - keys: ['Space']
+    description: When focus is on an <code>AAccordionTrigger</code> of a collapsed section, expands the section.
+  - keys: ['Enter']
+    description: When focus is on an <code>AAccordionTrigger</code> of a collapsed section, expands the section.
+  - keys: ['Tab']
+    description: Moves focus to the next focusable element.
+  - keys: ['Shift + Tab']
+    description: Moves focus to the previous focusable element.
+  - keys: ['ArrowDown']
+    description: Moves focus to the next <code>AAccordionTrigger</code> when <code>orientation</code> is <code>vertical</code>.
+  - keys: ['ArrowUp']
+    description: Moves focus to the previous <code>AAccordionTrigger</code> when <code>orientation</code> is <code>vertical</code>.
+  - keys: ['ArrowRight']
+    description: Moves focus to the next <code>AAccordionTrigger</code> when <code>orientation</code> is <code>horizontal</code>.
+  - keys: ['ArrowLeft']
+    description: Moves focus to the previous <code>AAccordionTrigger</code> when <code>orientation</code> is <code>horizontal</code>.
+  - keys: ['Home']
+    description: When focus is on an <code>AAccordionTrigger</code>, moves focus to the start <code>AAccordionTrigger</code>.
+  - keys: ['End']
+    description: When focus is on an <code>AAccordionTrigger</code>, moves focus to the last <code>AAccordionTrigger</code>.
+---
+::

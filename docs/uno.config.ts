@@ -17,6 +17,14 @@ export default defineConfig({
         },
         warn: true,
       },
+
+      typography: {
+        cssExtend: {
+          kbd: {
+            'font-weight': 500,
+          },
+        },
+      },
     }),
   ],
 
@@ -149,6 +157,7 @@ export default defineConfig({
       '8xl': '90rem',
     },
   },
+
   extendTheme: (theme) => {
     return {
       ...theme,
