@@ -47,7 +47,6 @@ export default defineNuxtConfig({
 
   modules: [
     'pohon',
-    // 'akar/nuxt',
     '@unocss/nuxt',
     '@nuxt/content',
     'nuxt-component-meta',
