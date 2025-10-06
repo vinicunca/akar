@@ -38,7 +38,6 @@
   "exports": {
     ".": {
       "types": "./dist/module.d.mts",
-      "style": "./dist/runtime/index.css",
       "import": "./dist/module.mjs"
     },
     "./unplugin": {
@@ -111,7 +110,9 @@
   ],
   "scripts": {
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && pnpm dev:vue:build",
-    "dev:vue:build": "pnpm --filter './playgrounds/vue' build"
+    "dev:vue:build": "pnpm --filter './playgrounds/vue' build",
+    "build": "nuxt-module-build build",
+    "prepack": "pnpm build"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",
