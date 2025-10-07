@@ -7,6 +7,18 @@ export const components = {
     'AAccordionTrigger',
   ] as const,
 
+  alertDialog: [
+    'AAlertDialogRoot',
+    'AAlertDialogTrigger',
+    'AAlertDialogPortal',
+    'AAlertDialogContent',
+    'AAlertDialogOverlay',
+    'AAlertDialogCancel',
+    'AAlertDialogTitle',
+    'AAlertDialogDescription',
+    'AAlertDialogAction',
+  ] as const,
+
   avatar: [
     'AAvatarFallback',
     'AAvatarImage',

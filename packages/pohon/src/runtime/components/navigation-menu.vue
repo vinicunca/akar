@@ -354,7 +354,17 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
 
       <component
         :is="orientation === 'vertical' && item.children?.length && !collapsed ? AAccordionTrigger : 'span'"
-        v-if="(!collapsed || orientation !== 'vertical') && (item.badge || (orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>])"
+        v-if="(!collapsed || orientation !== 'vertical')
+          && (
+            item.badge !== undefined
+            || (
+              orientation === 'horizontal'
+              && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])
+            )
+            || (orientation === 'vertical' && item.children?.length)
+            || item.trailingIcon
+            || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>]
+          )"
         as="span"
         :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
         @click.stop.prevent

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {
+  AAccordionRootEmits,
   AAccordionRootProps,
-  AccordionRootEmits,
 } from '..';
 import { ref } from 'vue';
 import { useEmitAsProps } from '~~/shared';
@@ -17,14 +17,14 @@ withDefaults(
   defineProps<{ type?: AAccordionRootProps['type'] }>(),
   { type: 'single' },
 );
-const emits = defineEmits<AccordionRootEmits>();
+const emits = defineEmits<AAccordionRootEmits>();
 const values = ['One', 'Two', 'Three', 'Four'];
 const count = ref(1);
 </script>
 
 <template>
   <AAccordionRoot
-    class="w-[300px] rounded-md bg-[--line-color] shadow-lg"
+    class="rounded-md bg-[--line-color] w-[300px] shadow-lg"
     v-bind="useEmitAsProps(emits)"
     :type="type"
   >

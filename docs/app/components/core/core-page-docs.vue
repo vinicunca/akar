@@ -103,9 +103,13 @@ const communityLinks = computed(() => [
             <h1 class="text-3xl color-text-highlighted font-bold text-pretty sm:text-4xl">
               {{ title }}
             </h1>
+
+            <div class="flex flex-wrap gap-1.5 items-center">
+              buttons
+            </div>
           </div>
 
-          <div class="text-lg color-text-muted text-pretty">
+          <div class="text-lg color-text-muted mt-4 text-pretty">
             <MDC
               v-if="page.description"
               :value="page.description"

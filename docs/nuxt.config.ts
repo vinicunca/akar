@@ -14,6 +14,17 @@ export default defineNuxtConfig({
     autoImport: false,
   },
 
+  $development: {
+    site: {
+      url: 'http://localhost:3000',
+    },
+  },
+  $production: {
+    site: {
+      url: 'https://akar.vinicunca.dev',
+    },
+  },
+
   css: ['~/assets/css/main.css'],
 
   content: {
@@ -40,9 +51,15 @@ export default defineNuxtConfig({
   },
 
   icon: {
-    serverBundle: {
-      collections: ['lucide'],
+    customCollections: [{
+      prefix: 'custom',
+      dir: resolve('./app/assets/icons'),
+    }],
+    clientBundle: {
+      scan: true,
+      includeCustomCollections: true,
     },
+    provider: 'iconify',
   },
 
   modules: [
@@ -50,14 +67,13 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@nuxt/content',
     'nuxt-component-meta',
-    '@nuxt/image',
+    'nuxt-og-image',
   ],
 
   componentMeta: {
     exclude: [
       '@nuxt/content',
       '@nuxt/icon',
-      '@nuxt/image',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
       '@nuxtjs/plausible',
