@@ -44,6 +44,7 @@ export * from './time-field';
 export * from './toast';
 export * from './toggle';
 export * from './toggle-group';
+export * from './toolbar';
 export * from './tooltip';
 export * from './tree';
 export * from './viewport';

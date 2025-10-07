@@ -416,6 +416,15 @@ export const components = {
     'AToggleGroupRoot',
   ] as const,
 
+  toolbar: [
+    'AToolbarRoot',
+    'AToolbarButton',
+    'AToolbarLink',
+    'AToolbarToggleGroup',
+    'AToolbarToggleItem',
+    'AToolbarSeparator',
+  ] as const,
+
   tooltip: [
     'ATooltipArrow',
     'ATooltipContent',

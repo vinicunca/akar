@@ -12,7 +12,7 @@ interface AlertDialogContentContext {
 export const [
   injectAAlertDialogContentContext,
   provideAAlertDialogContentContext,
-] = createContext<AlertDialogContentContext>('AlertDialogContent');
+] = createContext<AlertDialogContentContext>('AAlertDialogContent');
 
 export type AAlertDialogContentEmits = ADialogContentEmits;
 export interface AAlertDialogContentProps extends ADialogContentProps {}

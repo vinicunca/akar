@@ -1,6 +1,6 @@
 ---
 description: A vertically stacked set of interactive headings that each reveal an associated section of content.
-category: data
+category: element
 links:
   - label: Pohon
     to: /pohon/components/avatar
