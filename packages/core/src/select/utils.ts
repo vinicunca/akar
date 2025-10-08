@@ -1,5 +1,5 @@
 import type { AcceptableValue } from '~~/shared/types';
-import { isDeepEqual, KEY_CODES } from '@vinicunca/perkakas';
+import { isDeepEqual, isFunction, isString, KEY_CODES } from '@vinicunca/perkakas';
 
 export const OPEN_KEYS = [' ', KEY_CODES.ENTER, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN];
 export const SELECTION_KEYS = [' ', KEY_CODES.ENTER];
@@ -20,15 +20,15 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
     return false;
   }
 
-  if (typeof value === 'string') {
+  if (isString(value)) {
     return value === currentValue;
   }
 
-  if (typeof comparator === 'function') {
+  if (isFunction(comparator)) {
     return comparator(value, currentValue);
   }
 
-  if (typeof comparator === 'string') {
+  if (isString(comparator)) {
     return value?.[comparator as keyof T] === currentValue?.[comparator as keyof T];
   }
 

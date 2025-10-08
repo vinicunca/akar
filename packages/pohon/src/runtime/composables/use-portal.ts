@@ -13,7 +13,7 @@ export function usePortal(portal: Ref<string | HTMLElement | boolean | undefined
       : portal.value,
   );
 
-  const disabled = computed(() => typeof value.value === 'boolean' ? !value.value : false);
+  const disabled = computed(() => isBoolean(value.value) ? !value.value : false);
 
   const to = computed(() => isBoolean(value.value) ? 'body' : value.value);
 

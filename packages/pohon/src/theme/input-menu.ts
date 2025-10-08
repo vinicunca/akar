@@ -32,6 +32,14 @@ export default (options: Required<PohonModuleOptions>) => {
       },
 
       variants: {
+        virtualize: {
+          true: {
+            viewport: '',
+          },
+          false: {
+            viewport: '',
+          },
+        },
         multiple: {
           true: {
             root: '',

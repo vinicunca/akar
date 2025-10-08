@@ -1,4 +1,5 @@
 import type { Component, PropType } from 'vue';
+import { isString } from '@vinicunca/perkakas';
 import { defineComponent, h } from 'vue';
 import { APrimitiveSlot } from './slot-primitive';
 
@@ -55,7 +56,7 @@ export const APrimitive = defineComponent({
   setup(props, { attrs, slots }) {
     const asTag = props.asChild ? 'template' : props.as;
 
-    if (typeof asTag === 'string' && SELF_CLOSING_TAGS.includes(asTag)) {
+    if (isString(asTag) && SELF_CLOSING_TAGS.includes(asTag)) {
       return () => h(asTag, attrs);
     }
 

@@ -98,6 +98,23 @@ export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = Arr
    */
   portal?: boolean | string | HTMLElement;
   /**
+   * Enable virtualization for large lists.
+   * Note: when enabled, all groups are flattened into a single list due to a limitation of Reka UI (https://github.com/unovue/reka-ui/issues/1885).
+   * @defaultValue false
+   */
+  virtualize?: boolean | {
+    /**
+     * Number of items rendered outside the visible area
+     * @defaultValue 12
+     */
+    overscan?: number;
+    /**
+     * Estimated size (in px) of each item
+     * @defaultValue 32
+     */
+    estimateSize?: number;
+  };
+  /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
    * @defaultValue undefined
    */
@@ -184,7 +201,7 @@ export interface PSelectMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { useAppConfig } from '#imports';
-import { isNonNullish } from '@vinicunca/perkakas';
+import { isBoolean, isNonNullish } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AComboboxAnchor,
@@ -200,6 +217,7 @@ import {
   AComboboxRoot,
   AComboboxSeparator,
   AComboboxTrigger,
+  AComboboxVirtualizer,
   AFocusScope,
   useFilter,
   useForwardPropsEmits,
@@ -229,6 +247,7 @@ const props = withDefaults(
     resetSearchTermOnBlur: true,
     resetSearchTermOnSelect: true,
     autofocusDelay: 0,
+    virtualize: false,
   },
 );
 const emits = defineEmits<PSelectMenuEmits<T, VK, M>>();
@@ -263,6 +282,20 @@ const contentProps = toRef(() =>
   ) as AComboboxContentProps,
 );
 const arrowProps = toRef(() => props.arrow as AComboboxArrowProps);
+const virtualizerProps = toRef(() =>
+  !!props.virtualize && defu(
+    isBoolean(props.virtualize) ? {} : props.virtualize,
+    {
+      estimateSize: ({
+        xs: 24,
+        sm: 28,
+        md: 32,
+        lg: 36,
+        xl: 40,
+      })[props.size || 'md'],
+    },
+  ),
+);
 const searchInputProps = toRef(() =>
   defu(
     props.searchInput,
@@ -289,6 +322,21 @@ const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponen
 const selectSize = computed(() => fieldGroupSize.value || formGroupSize.value);
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate();
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
+  item: PSelectMenuItem;
+  index: number;
+}>({
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
+    index: {
+      type: Number,
+      required: false,
+    },
+  },
+});
 
 const pohon = computed(() =>
   uv({
@@ -303,6 +351,7 @@ const pohon = computed(() =>
     leading: isLeading.value || !!props.avatar || !!slots.leading,
     trailing: isTrailing.value || !!slots.trailing,
     fieldGroup: orientation.value,
+    virtualize: !!props.virtualize,
   }),
 );
 
@@ -476,23 +525,101 @@ defineExpose({
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DefineCreateItemTemplate>
-    <AComboboxGroup :class="pohon.group({ class: props.pohon?.group })">
-      <AComboboxItem
-        :class="pohon.item({ class: props.pohon?.item })"
-        :value="searchTerm"
-        @select.prevent="emits('create', searchTerm)"
+    <AComboboxItem
+      :class="pohon.item({ class: props.pohon?.item })"
+      :value="searchTerm"
+      @select.prevent="emits('create', searchTerm)"
+    >
+      <span :class="pohon.itemLabel({ class: props.pohon?.itemLabel })">
+        <slot
+          name="create-item-label"
+          :item="searchTerm"
+        >
+          {{ t('selectMenu.create', { label: searchTerm }) }}
+        </slot>
+      </span>
+    </AComboboxItem>
+  </DefineCreateItemTemplate>
+
+  <DefineItemTemplate v-slot="{ item, index }">
+    <AComboboxLabel
+      v-if="isSelectItem(item) && item.type === 'label'"
+      :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
+    >
+      {{ getProp({ object: item, path: props.labelKey as string }) }}
+    </AComboboxLabel>
+
+    <AComboboxSeparator
+      v-else-if="isSelectItem(item) && item.type === 'separator'"
+      :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator, item.class] })"
+    />
+
+    <AComboboxItem
+      v-else
+      :class="pohon.item({ class: [props.pohon?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
+      :disabled="isSelectItem(item) && item.disabled"
+      :value="props.valueKey && isSelectItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
+      @select="onSelect($event, item)"
+    >
+      <slot
+        name="item"
+        :item="(item as NestedItem<T>)"
+        :index="index"
       >
-        <span :class="pohon.itemLabel({ class: props.pohon?.itemLabel })">
+        <slot
+          name="item-leading"
+          :item="(item as NestedItem<T>)"
+          :index="index"
+        >
+          <UIcon
+            v-if="isSelectItem(item) && item.icon"
+            :name="item.icon"
+            :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
+          />
+          <PAvatar
+            v-else-if="isSelectItem(item) && item.avatar"
+            :size="((item.pohon?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
+            v-bind="item.avatar"
+            :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
+          />
+
+          <PChip
+            v-else-if="isSelectItem(item) && item.chip"
+            :size="((props.pohon?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
+            inset
+            standalone
+            v-bind="item.chip"
+            :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
+          />
+        </slot>
+
+        <span :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel] })">
           <slot
-            name="create-item-label"
-            :item="searchTerm"
+            name="item-label"
+            :item="(item as NestedItem<T>)"
+            :index="index"
           >
-            {{ t('selectMenu.create', { label: searchTerm }) }}
+            {{ isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
           </slot>
         </span>
-      </AComboboxItem>
-    </AComboboxGroup>
-  </DefineCreateItemTemplate>
+
+        <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })">
+          <slot
+            name="item-trailing"
+            :item="(item as NestedItem<T>)"
+            :index="index"
+          />
+
+          <AComboboxItemIndicator as-child>
+            <UIcon
+              :name="selectedIcon || appConfig.pohon.icons.check"
+              :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
+            />
+          </AComboboxItemIndicator>
+        </span>
+      </slot>
+    </AComboboxItem>
+  </DefineItemTemplate>
 
   <AComboboxRoot
     :id="id"
@@ -617,97 +744,52 @@ defineExpose({
             role="presentation"
             :class="pohon.viewport({ class: props.pohon?.viewport })"
           >
-            <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
+            <template v-if="!!virtualize">
+              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
-            <AComboboxGroup
-              v-for="(group, groupIndex) in filteredGroups"
-              :key="`group-${groupIndex}`"
-              :class="pohon.group({ class: props.pohon?.group })"
-            >
-              <template
-                v-for="(item, index) in group"
-                :key="`group-${groupIndex}-${index}`"
+              <AComboboxVirtualizer
+                v-slot="{ option: item, virtualItem }"
+                :options="(filteredItems as any[])"
+                :text-content="item => isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : String(item)"
+                v-bind="virtualizerProps"
               >
-                <AComboboxLabel
-                  v-if="isSelectItem(item) && item.type === 'label'"
-                  :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
-                >
-                  {{ getProp({ object: item, path: props.labelKey as string }) }}
-                </AComboboxLabel>
-
-                <AComboboxSeparator
-                  v-else-if="isSelectItem(item) && item.type === 'separator'"
-                  :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator, item.class] })"
+                <ReuseItemTemplate
+                  :item="item"
+                  :index="virtualItem.index"
                 />
+              </AComboboxVirtualizer>
 
-                <AComboboxItem
-                  v-else
-                  :class="pohon.item({ class: [props.pohon?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
-                  :disabled="isSelectItem(item) && item.disabled"
-                  :value="props.valueKey && isSelectItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
-                  @select="onSelect($event, item)"
-                >
-                  <slot
-                    name="item"
-                    :item="(item as NestedItem<T>)"
-                    :index="index"
-                  >
-                    <slot
-                      name="item-leading"
-                      :item="(item as NestedItem<T>)"
-                      :index="index"
-                    >
-                      <PIcon
-                        v-if="isSelectItem(item) && item.icon"
-                        :name="item.icon"
-                        :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
-                      />
-                      <PAvatar
-                        v-else-if="isSelectItem(item) && item.avatar"
-                        :size="((item.pohon?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
-                        v-bind="item.avatar"
-                        :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
-                      />
-                      <PChip
-                        v-else-if="isSelectItem(item) && item.chip"
-                        :size="((props.pohon?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
-                        inset
-                        standalone
-                        v-bind="item.chip"
-                        :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
-                      />
-                    </slot>
+              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
+            </template>
 
-                    <span :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel] })">
-                      <slot
-                        name="item-label"
-                        :item="(item as NestedItem<T>)"
-                        :index="index"
-                      >
-                        {{ isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
-                      </slot>
-                    </span>
+            <template v-else>
+              <AComboboxGroup
+                v-if="createItem && createItemPosition === 'top'"
+                :class="pohon.group({ class: props.pohon?.group })"
+              >
+                <ReuseCreateItemTemplate />
+              </AComboboxGroup>
 
-                    <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })">
-                      <slot
-                        name="item-trailing"
-                        :item="(item as NestedItem<T>)"
-                        :index="index"
-                      />
+              <AComboboxGroup
+                v-for="(group, groupIndex) in filteredGroups"
+                :key="`group-${groupIndex}`"
+                :class="pohon.group({ class: props.pohon?.group })"
+              >
+                <ReuseItemTemplate
+                  v-for="(item, index) in group"
+                  :key="`group-${groupIndex}-${index}`"
+                  :item="item"
+                  :index="index"
+                />
+              </AComboboxGroup>
 
-                      <AComboboxItemIndicator as-child>
-                        <PIcon
-                          :name="selectedIcon || appConfig.pohon.icons.check"
-                          :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
-                        />
-                      </AComboboxItemIndicator>
-                    </span>
-                  </slot>
-                </AComboboxItem>
-              </template>
-            </AComboboxGroup>
-
-            <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
+              <AComboboxGroup
+                v-if="createItem && createItemPosition === 'bottom'"
+                :class="pohon.group({ class: props.pohon?.group })"
+              >
+                <ReuseCreateItemTemplate />
+              </AComboboxGroup>
+            </template>
           </div>
 
           <slot name="content-bottom" />

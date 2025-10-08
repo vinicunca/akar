@@ -27,6 +27,14 @@ export default {
     itemLabelSuffix: '',
   },
   variants: {
+    virtualize: {
+      true: {
+        viewport: '',
+      },
+      false: {
+        viewport: '',
+      },
+    },
     active: {
       true: {
         item: '',

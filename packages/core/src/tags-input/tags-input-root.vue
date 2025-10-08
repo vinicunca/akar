@@ -2,9 +2,7 @@
 import type { Ref } from 'vue';
 import type { APrimitiveProps } from '~~/primitive';
 import type { Direction, FormFieldProps } from '~~/shared/types';
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { computed, ref, toRefs } from 'vue';
-import { createContext, useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '~~/shared';
+import { createContext } from '~~/shared';
 
 export type AcceptableInputValue = Record<string, any> | string;
 
@@ -65,14 +63,19 @@ export interface TagsInputRootContext<T = AcceptableInputValue> {
   displayValue: (value: T) => string;
 }
 
-export const [injectATagsInputRootContext, provideTagsInputRootContext]
-  = createContext<TagsInputRootContext>('ATagsInputRoot');
+export const [
+  injectATagsInputRootContext,
+  provideTagsInputRootContext,
+] = createContext<TagsInputRootContext>('ATagsInputRoot');
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableInputValue = string">
+import { isFunction, KEY_CODES } from '@vinicunca/perkakas';
 import { useFocusWithin, useVModel } from '@vueuse/core';
+import { computed, ref, toRefs } from 'vue';
 import { useCollection } from '~~/collection';
 import { APrimitive } from '~~/primitive';
+import { useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '~~/shared';
 import { AVisuallyHiddenInput } from '~~/visually-hidden';
 
 const props = withDefaults(defineProps<ATagsInputRootProps<T>>(), {
@@ -127,7 +130,7 @@ provideTagsInputRootContext({
 
     // Check if the value is an object and if the convertValue function is provided. We don't check this a type level because the use
     // of `ATagsInputInput` is optional.
-    if ((modelValueIsObject || defaultValueIsObject) && typeof props.convertValue !== 'function') {
+    if ((modelValueIsObject || defaultValueIsObject) && !isFunction(props.convertValue)) {
       throw new Error('You must provide a `convertValue` function when using objects as values.');
     }
     const payload = props.convertValue ? props.convertValue(_payload) : _payload as T;

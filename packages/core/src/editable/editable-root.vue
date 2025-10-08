@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { APrimitiveProps } from '~~/primitive';
 import type { Direction, FormFieldProps } from '~~/shared/types';
+import { isString } from '@vinicunca/perkakas';
 import { useFocusOutside, usePointerDownOutside } from '~~/dismissable-layer';
 import { createContext, useDirection, useFormControl } from '~~/shared';
 
@@ -142,7 +143,7 @@ const { primitiveElement, currentElement } = usePrimitiveElement();
 const isFormControl = useFormControl(currentElement);
 
 const placeholder = computed(() => {
-  return typeof propPlaceholder.value === 'string' ? { edit: propPlaceholder.value, preview: propPlaceholder.value } : propPlaceholder.value;
+  return isString(propPlaceholder.value) ? { edit: propPlaceholder.value, preview: propPlaceholder.value } : propPlaceholder.value;
 });
 
 const inputValue = ref(modelValue.value);

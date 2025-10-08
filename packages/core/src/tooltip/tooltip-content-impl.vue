@@ -2,7 +2,6 @@
 import type { VNode } from 'vue';
 import type { APopperContentProps } from '~~/popper';
 import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
 
 export type TooltipContentImplEmits = {
   /** Event handler called when focus moves to the destructive action after opening. It can be prevented by calling `event.preventDefault` */
@@ -41,10 +40,12 @@ export interface TooltipContentImplProps
 </script>
 
 <script setup lang="ts">
+import { isString } from '@vinicunca/perkakas';
 import { useEventListener } from '@vueuse/core';
 import { Comment, computed, onMounted, useSlots } from 'vue';
 import { DismissableLayer } from '~~/dismissable-layer';
 import { APopperContent } from '~~/popper';
+import { useForwardExpose } from '~~/shared';
 import { AVisuallyHidden } from '~~/visually-hidden';
 import { injectATooltipRootContext } from './tooltip-root.vue';
 import { TOOLTIP_OPEN } from './utils';
@@ -74,7 +75,7 @@ const ariaLabel = computed(() => {
   let content = '';
 
   function recursiveTextSearch(node: VNode) {
-    if (typeof node.children === 'string' && node.type !== Comment) {
+    if (isString(node.children) && node.type !== Comment) {
       content += node.children;
     } else if (Array.isArray(node.children)) {
       node.children.forEach((child) => {

@@ -72,6 +72,7 @@ export interface PToastSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isFunction } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   AToastAction,
@@ -165,7 +166,7 @@ defineExpose({
         <slot name="title">
           <component
             :is="title()"
-            v-if="typeof title === 'function'"
+            v-if="isFunction(title)"
           />
           <component
             :is="title"
@@ -183,7 +184,7 @@ defineExpose({
         <slot name="description">
           <component
             :is="description()"
-            v-if="typeof description === 'function'"
+            v-if="isFunction(description)"
           />
           <component
             :is="description"

@@ -11,6 +11,17 @@ export default (options: Required<PohonModuleOptions>) => {
         content: '',
       },
 
+      variants: {
+        virtualize: {
+          true: {
+            viewport: '',
+          },
+          false: {
+            viewport: '',
+          },
+        },
+      },
+
       compoundVariants: [],
 
     },

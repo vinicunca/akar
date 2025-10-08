@@ -1,4 +1,5 @@
 import type { ADrawerDirection, AnyFunction } from './drawer.types';
+import { isFunction } from '@vinicunca/perkakas';
 
 interface Style {
   [key: string]: string;
@@ -115,7 +116,7 @@ export function assignStyle(
 export function chain<T>(...fns: Array<T>) {
   return (...args: T extends AnyFunction ? Parameters<T> : never) => {
     for (const fn of fns) {
-      if (typeof fn === 'function') {
+      if (isFunction(fn)) {
         // eslint-disable-next-line ts/ban-ts-comment
         // @ts-ignore
         fn(...args);

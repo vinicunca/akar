@@ -15,6 +15,11 @@ export default (options: Required<PohonModuleOptions>) => {
     },
 
     variants: {
+      virtualize: {
+        true: {
+          root: '',
+        },
+      },
       color: {
         ...Object.fromEntries((options.theme.colors || []).map((color) => [
           color,
@@ -28,26 +33,31 @@ export default (options: Required<PohonModuleOptions>) => {
       },
       size: {
         xs: {
+          listWithChildren: '',
           link: '',
           linkLeadingIcon: '',
           linkTrailingIcon: '',
         },
         sm: {
+          listWithChildren: '',
           link: '',
           linkLeadingIcon: '',
           linkTrailingIcon: '',
         },
         md: {
+          listWithChildren: '',
           link: '',
           linkLeadingIcon: '',
           linkTrailingIcon: '',
         },
         lg: {
+          listWithChildren: '',
           link: '',
           linkLeadingIcon: '',
           linkTrailingIcon: '',
         },
         xl: {
+          listWithChildren: '',
           link: '',
           linkLeadingIcon: '',
           linkTrailingIcon: '',

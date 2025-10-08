@@ -3,8 +3,7 @@ import type { Ref } from 'vue';
 
 import type { APrimitiveProps } from '~~/primitive';
 import type { Direction, Orientation } from './utils';
-import { useCollection } from '~~/collection';
-import { createContext, useDirection, useForwardExpose, useId } from '~~/shared';
+import { createContext } from '~~/shared';
 
 export interface ANavigationMenuRootProps extends APrimitiveProps {
   /** The controlled value of the menu item to activate. Can be used as `v-model`. */
@@ -94,6 +93,7 @@ export const [
 </script>
 
 <script setup lang="ts">
+import { isString } from '@vinicunca/perkakas';
 import { refAutoReset, useDebounceFn, useVModel } from '@vueuse/core';
 import {
   computed,
@@ -101,9 +101,11 @@ import {
   toRefs,
   watchEffect,
 } from 'vue';
+import { useCollection } from '~~/collection';
 import {
   APrimitive,
 } from '~~/primitive';
+import { useDirection, useForwardExpose, useId } from '~~/shared';
 
 const props = withDefaults(
   defineProps<ANavigationMenuRootProps>(),
@@ -166,7 +168,7 @@ const computedDelay = computed(() => {
 
 const debouncedFn = useDebounceFn((val?: string) => {
   // passing `undefined` meant to reset the debounce timer
-  if (typeof val === 'string') {
+  if (isString(val)) {
     previousValue.value = modelValue.value;
     modelValue.value = val;
   }

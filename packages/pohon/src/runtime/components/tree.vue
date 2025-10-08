@@ -76,6 +76,29 @@ export interface PTreeProps<T extends Array<PTreeItem> = Array<PTreeItem>, M ext
   defaultValue?: M extends true ? Array<T[number]> : T[number];
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean;
+  /**
+   * Use nested DOM structure (children inside parents) vs flattened structure (all items at same level).
+   * When `virtualize` is enabled, this is automatically set to `false`.
+   * @defaultValue true
+   */
+  nested?: boolean;
+  /**
+   * Enable virtualization for large lists.
+   * Note: when enabled, the tree structure is flattened like if `nested` was set to `false`.
+   * @defaultValue false
+   */
+  virtualize?: boolean | {
+    /**
+     * Number of items rendered outside the visible area
+     * @defaultValue 12
+     */
+    overscan?: number;
+    /**
+     * Estimated size (in px) of each item
+     * @defaultValue 32
+     */
+    estimateSize?: number;
+  };
   class?: any;
   pohon?: Tree['slots'];
 }
@@ -97,9 +120,11 @@ export type PTreeSlots<
 
 <script setup lang="ts" generic="T extends PTreeItem[], M extends boolean = false">
 import { useAppConfig } from '#imports';
+import { isBoolean } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
-import { ATreeItem, ATreeRoot, useForwardPropsEmits } from 'akar';
-import { computed } from 'vue';
+import { ATreeItem, ATreeRoot, ATreeVirtualizer, useForwardPropsEmits } from 'akar';
+import { defu } from 'defu';
+import { computed, toRef } from 'vue';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
@@ -110,6 +135,8 @@ const props = withDefaults(
   defineProps<PTreeProps<T, M>>(),
   {
     labelKey: 'label',
+    nested: true,
+    virtualize: false,
   },
 );
 const emits = defineEmits<PTreeEmits<T, M>>();
@@ -131,7 +158,55 @@ const rootProps = useForwardPropsEmits(
   emits,
 );
 
+const nested = computed(() => props.virtualize ? false : props.nested);
+
+const flattenedPaddingFormula = computed(() => {
+  const sizeConfig = {
+    xs: { base: 2, perLevel: 5.5 }, // px-2, ms-4 + ps-1.5
+    sm: { base: 2.5, perLevel: 6 }, // px-2.5, ms-4.5 + ps-1.5
+    md: { base: 2.5, perLevel: 6.5 }, // px-2.5, ms-5 + ps-1.5
+    lg: { base: 3, perLevel: 7 }, // px-3, ms-5.5 + ps-1.5
+    xl: { base: 3, perLevel: 7.5 }, // px-3, ms-6 + ps-1.5
+  };
+  const config = sizeConfig[props.size || 'md'];
+  return (level: number) => `calc(var(--spacing) * ${(level - 1) * config.perLevel + config.base})`;
+});
+
+const virtualizerProps = toRef(() =>
+  !!props.virtualize && defu(
+    isBoolean(props.virtualize) ? {} : props.virtualize,
+    {
+      estimateSize: ({
+        xs: 24,
+        sm: 28,
+        md: 32,
+        lg: 36,
+        xl: 40,
+      })[props.size || 'md'],
+    },
+  ));
+
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: Array<PTreeItem>; level: number }, PTreeSlots<T>>();
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
+  item: PTreeItem;
+  index: number;
+  level: number;
+}, PTreeSlots<T>>({
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
+    index: {
+      type: Number,
+      required: true,
+    },
+    level: {
+      type: Number,
+      required: true,
+    },
+  },
+});
 
 const pohon = computed(() =>
   uv({
@@ -140,6 +215,7 @@ const pohon = computed(() =>
   })({
     color: props.color,
     size: props.size,
+    virtualize: !!props.virtualize,
   }),
 );
 
@@ -167,17 +243,16 @@ const defaultExpanded = computed(() =>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DefineTreeTemplate v-slot="{ items, level }">
+  <DefineItemTemplate v-slot="{ item, index, level }">
     <ATreeItem
-      v-for="(item, index) in items"
-      :key="`${level}-${index}`"
       v-slot="{ isExpanded, isSelected }"
       :level="level"
       :value="item"
-      :class="level > 1
-        ? pohon.itemWithChildren({ class: [props.pohon?.itemWithChildren, item.pohon?.itemWithChildren] })
-        : pohon.item({ class: [props.pohon?.item, item.pohon?.item] })
-      "
+      :class="!!nested && level > 1
+        ? pohon.itemWithChildren({
+          class: [props.pohon?.itemWithChildren, item.pohon?.itemWithChildren],
+        })
+        : pohon.item({ class: [props.pohon?.item, item.pohon?.item] })"
       @toggle="item.onToggle"
       @select="item.onSelect"
     >
@@ -191,8 +266,11 @@ const defaultExpanded = computed(() =>
           :disabled="item.disabled || disabled"
           :data-expanded="isExpanded"
           :class="pohon.link({
-            class: [props.pohon?.link, item.pohon?.link, item.class], selected: isSelected, disabled: item.disabled || disabled,
+            class: [props.pohon?.link, item.pohon?.link, item.class],
+            selected: isSelected,
+            disabled: item.disabled || disabled,
           })"
+          :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
         >
           <slot
             :name="((item.slot || 'item') as keyof PTreeSlots<T>)"
@@ -207,7 +285,10 @@ const defaultExpanded = computed(() =>
               <PIcon
                 v-if="item.icon"
                 :name="item.icon"
-                :class="pohon.linkLeadingIcon({ class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon] })"
+                :class="pohon.linkLeadingIcon({
+                  class:
+                    [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
+                })"
               />
               <PIcon
                 v-else-if="item.children?.length"
@@ -255,7 +336,7 @@ const defaultExpanded = computed(() =>
       </slot>
 
       <ul
-        v-if="item.children?.length && isExpanded"
+        v-if="nested && item.children?.length && isExpanded"
         role="group"
         :class="pohon.listWithChildren({ class: [props.pohon?.listWithChildren, item.pohon?.listWithChildren] })"
       >
@@ -265,9 +346,20 @@ const defaultExpanded = computed(() =>
         />
       </ul>
     </ATreeItem>
+  </DefineItemTemplate>
+
+  <DefineTreeTemplate v-slot="{ items, level }">
+    <ReuseItemTemplate
+      v-for="(item, index) in items"
+      :key="`${level}-${index}`"
+      :item="item"
+      :index="index"
+      :level="level"
+    />
   </DefineTreeTemplate>
 
   <ATreeRoot
+    v-slot="{ flattenItems }"
     v-bind="{ ...rootProps, ...$attrs }"
     :model-value="modelValue"
     :default-value="defaultValue"
@@ -276,7 +368,31 @@ const defaultExpanded = computed(() =>
     :default-expanded="defaultExpanded"
     :selection-behavior="selectionBehavior"
   >
+    <ATreeVirtualizer
+      v-if="!!virtualize"
+      v-slot="{ item, virtualItem }"
+      :text-content="item => getItemLabel(item.value)"
+      v-bind="virtualizerProps"
+    >
+      <ReuseItemTemplate
+        :item="item.value"
+        :index="virtualItem.index"
+        :level="item.level"
+      />
+    </ATreeVirtualizer>
+
+    <template v-else-if="!nested">
+      <ReuseItemTemplate
+        v-for="(item, index) in flattenItems"
+        :key="item._id"
+        :item="item.value"
+        :index="index"
+        :level="item.level"
+      />
+    </template>
+
     <ReuseTreeTemplate
+      v-else
       :items="items"
       :level="1"
     />

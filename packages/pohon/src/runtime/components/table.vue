@@ -34,6 +34,7 @@ import type {
   VisibilityOptions,
   VisibilityState,
 } from '@tanstack/vue-table';
+import type { VirtualizerOptions } from '@tanstack/vue-virtual';
 import type { Ref, WatchOptions } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/table';
@@ -91,12 +92,30 @@ export interface PTableProps<T extends PTableData = PTableData> extends PTableOp
   caption?: string;
   meta?: TableMeta<T>;
   /**
+   * Enable virtualization for large datasets.
+   * Note: when enabled, the divider between rows and sticky properties are not supported.
+   * @defaultValue false
+   */
+  virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'getScrollElement' | 'count' | 'estimateSize' | 'overscan'>> & {
+    /**
+     * Number of items rendered outside the visible area
+     * @defaultValue 12
+     */
+    overscan?: number;
+    /**
+     * Estimated size (in px) of each item
+     * @defaultValue 65
+     */
+    estimateSize?: number;
+  });
+  /**
    * The text to display when the table is empty.
    * @defaultValue t('table.noData')
    */
   empty?: string;
   /**
    * Whether the table should have a sticky header or footer. True for both, 'header' for header only, 'footer' for footer only.
+   * Note: this prop is not supported when `virtualize` is true.
    * @defaultValue false
    */
   sticky?: boolean | 'header' | 'footer';
@@ -208,12 +227,16 @@ import {
   getSortedRowModel,
   useVueTable,
 } from '@tanstack/vue-table';
-import { toSentenceCase } from '@vinicunca/perkakas';
-import { reactiveOmit } from '@vueuse/core';
+import { useVirtualizer } from '@tanstack/vue-virtual';
+import { isBoolean, isFunction, toSentenceCase } from '@vinicunca/perkakas';
+import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { APrimitive } from 'akar';
-import { computed, ref, watch } from 'vue';
+import { defu } from 'defu';
+import { computed, ref, toRef, watch } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
+
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
   defineProps<PTableProps<T>>(),
@@ -221,6 +244,7 @@ const props = withDefaults(
     watchOptions: () => ({
       deep: true,
     }),
+    virtualize: false,
   },
 );
 const slots = defineSlots<PTableSlots<T>>();
@@ -266,12 +290,30 @@ const pohon = computed(() =>
     extend: uv(theme),
     ...(appConfig.pohon?.table || {}),
   })({
-    sticky: props.sticky,
+    sticky: props.virtualize ? false : props.sticky,
     loading: props.loading,
     loadingColor: props.loadingColor,
     loadingAnimation: props.loadingAnimation,
+    virtualize: !!props.virtualize,
   }),
 );
+
+const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate();
+const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{
+  row: PTableRow<T>;
+  style?: Record<string, string>;
+}>({
+  props: {
+    row: {
+      type: Object,
+      required: true,
+    },
+    style: {
+      type: Object,
+      required: false,
+    },
+  },
+});
 
 const hasFooter = computed(() => {
   function hasFooterRecursive(columns: Array<PTableColumn<T>>): boolean {
@@ -303,6 +345,7 @@ const groupingState = defineModel<GroupingState>('grouping', { default: [] });
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} });
 const paginationState = defineModel<PaginationState>('pagination', { default: {} });
 
+const rootRef = ref();
 const tableRef = ref<HTMLTableElement | null>(null);
 
 const tableApi = useVueTable({
@@ -311,6 +354,7 @@ const tableApi = useVueTable({
     'as',
     'data',
     'columns',
+    'virtualize',
     'caption',
     'sticky',
     'loading',
@@ -396,8 +440,28 @@ const tableApi = useVueTable({
   },
 });
 
+const rows = computed(() => tableApi.getRowModel().rows);
+
+const virtualizerProps = toRef(() =>
+  defu(
+    isBoolean(props.virtualize) ? {} : props.virtualize,
+    {
+      estimateSize: 65,
+      overscan: 12,
+    },
+  ));
+
+const virtualizer = !!props.virtualize && useVirtualizer({
+  ...virtualizerProps.value,
+  get count() {
+    return rows.value.length;
+  },
+  getScrollElement: () => rootRef.value?.$el,
+  estimateSize: () => virtualizerProps.value.estimateSize,
+});
+
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
-  ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue;
+  ref.value = isFunction(updaterOrValue) ? updaterOrValue(ref.value) : updaterOrValue;
 }
 
 function onRowSelect(event: Event, row: PTableRow<T>) {
@@ -439,7 +503,7 @@ function onRowContextmenu(event: Event, row: PTableRow<T>) {
 }
 
 function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T | undefined {
-  if (typeof prop === 'function') {
+  if (isFunction(prop)) {
     // @ts-expect-error: TS can't know if prop is a function here
     return prop(arg);
   }
@@ -455,16 +519,76 @@ watch(
 );
 
 defineExpose({
+  rootRef,
   tableRef,
   tableApi,
 });
 </script>
 
 <template>
-  <APrimitive
-    :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
-  >
+  <DefineRowTemplate v-slot="{ row, style }">
+    <tr
+      :data-selected="row.getIsSelected()"
+      :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
+      :data-expanded="row.getIsExpanded()"
+      :role="props.onSelect ? 'button' : undefined"
+      :tabindex="props.onSelect ? 0 : undefined"
+      :class="pohon.tr({
+        class: [
+          props.pohon?.tr,
+          resolveValue(tableApi.options.meta?.class?.tr, row),
+        ],
+      })"
+      :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
+      @click="onRowSelect($event, row)"
+      @pointerenter="onRowHover($event, row)"
+      @pointerleave="onRowHover($event, null)"
+      @contextmenu="onRowContextmenu($event, row)"
+    >
+      <td
+        v-for="cell in row.getVisibleCells()"
+        :key="cell.id"
+        :data-pinned="cell.column.getIsPinned()"
+        :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
+        :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
+        :class="pohon.td({
+          class: [
+            props.pohon?.td,
+            resolveValue(cell.column.columnDef.meta?.class?.td, cell),
+          ],
+          pinned: !!cell.column.getIsPinned(),
+        })"
+        :style="resolveValue(cell.column.columnDef.meta?.style?.td, cell)"
+      >
+        <slot
+          :name="`${cell.column.id}-cell`"
+          v-bind="cell.getContext()"
+        >
+          <FlexRender
+            :render="cell.column.columnDef.cell"
+            :props="cell.getContext()"
+          />
+        </slot>
+      </td>
+    </tr>
+
+    <tr
+      v-if="row.getIsExpanded()"
+      :class="pohon.tr({ class: [props.pohon?.tr] })"
+    >
+      <td
+        :colspan="row.getAllCells().length"
+        :class="pohon.td({ class: [props.pohon?.td] })"
+      >
+        <slot
+          name="expanded"
+          :row="row"
+        />
+      </td>
+    </tr>
+  </DefineRowTemplate>
+
+  <DefineTableTemplate>
     <table
       ref="tableRef"
       :class="pohon.base({ class: [props.pohon?.base] })"
@@ -518,69 +642,28 @@ defineExpose({
       <tbody :class="pohon.tbody({ class: [props.pohon?.tbody] })">
         <slot name="body-top" />
 
-        <template v-if="tableApi.getRowModel().rows?.length">
-          <template
-            v-for="row in tableApi.getRowModel().rows"
-            :key="row.id"
-          >
-            <tr
-              :data-selected="row.getIsSelected()"
-              :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
-              :data-expanded="row.getIsExpanded()"
-              :role="props.onSelect ? 'button' : undefined"
-              :tabindex="props.onSelect ? 0 : undefined"
-              :class="pohon.tr({
-                class: [
-                  props.pohon?.tr,
-                  resolveValue(tableApi.options.meta?.class?.tr, row),
-                ],
-              })"
-              :style="resolveValue(tableApi.options.meta?.style?.tr, row)"
-              @click="onRowSelect($event, row)"
-              @pointerenter="onRowHover($event, row)"
-              @pointerleave="onRowHover($event, null)"
-              @contextmenu="onRowContextmenu($event, row)"
+        <template v-if="rows.length">
+          <template v-if="virtualizer">
+            <template
+              v-for="(virtualRow, index) in virtualizer.getVirtualItems()"
+              :key="rows[virtualRow.index]?.id"
             >
-              <td
-                v-for="cell in row.getVisibleCells()"
-                :key="cell.id"
-                :data-pinned="cell.column.getIsPinned()"
-                :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
-                :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
-                :class="pohon.td({
-                  class: [
-                    props.pohon?.td,
-                    resolveValue(cell.column.columnDef.meta?.class?.td, cell),
-                  ],
-                  pinned: !!cell.column.getIsPinned(),
-                })"
-                :style="resolveValue(cell.column.columnDef.meta?.style?.td, cell)"
-              >
-                <slot
-                  :name="`${cell.column.id}-cell`"
-                  v-bind="cell.getContext()"
-                >
-                  <FlexRender
-                    :render="cell.column.columnDef.cell"
-                    :props="cell.getContext()"
-                  />
-                </slot>
-              </td>
-            </tr>
-            <tr
-              v-if="row.getIsExpanded()"
-              :class="pohon.tr({ class: [props.pohon?.tr] })"
-            >
-              <td
-                :colspan="row.getAllCells().length"
-                :class="pohon.td({ class: [props.pohon?.td] })"
-              >
-                <slot
-                  name="expanded"
-                  :row="row"
-                />
-              </td>
-            </tr>
+              <ReuseRowTemplate
+                :row="rows[virtualRow.index]!"
+                :style="{
+                  height: `${virtualRow.size}px`,
+                  transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`,
+                }"
+              />
+            </template>
+          </template>
+
+          <template v-else>
+            <ReuseRowTemplate
+              v-for="row in rows"
+              :key="row.id"
+              :row="row"
+            />
           </template>
         </template>
 
@@ -610,6 +693,9 @@ defineExpose({
       <tfoot
         v-if="hasFooter"
         :class="pohon.tfoot({ class: [props.pohon?.tfoot] })"
+        :style="virtualizer ? {
+          transform: `translateY(${virtualizer.getTotalSize() - virtualizer.getVirtualItems().length * virtualizerProps.estimateSize}px)`,
+        } : undefined"
       >
         <tr :class="pohon.separator({ class: [props.pohon?.separator] })" />
 
@@ -647,5 +733,22 @@ defineExpose({
         </tr>
       </tfoot>
     </table>
+  </DefineTableTemplate>
+
+  <APrimitive
+    ref="rootRef"
+    :as="as"
+    v-bind="$attrs"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+  >
+    <div
+      v-if="virtualizer"
+      :style="{
+        height: `${virtualizer.getTotalSize()}px`,
+      }"
+    >
+      <ReuseTableTemplate />
+    </div>
+    <ReuseTableTemplate v-else />
   </APrimitive>
 </template>
