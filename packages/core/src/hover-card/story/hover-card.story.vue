@@ -19,7 +19,7 @@ const hoverState = ref(false);
     <Variant title="default">
       <AHoverCardRoot v-model:open="hoverState">
         <AHoverCardTrigger
-          class="inline-block cursor-pointer rounded-full shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] outline-none focus:shadow-[0_0_0_2px_white]"
+          class="outline-none rounded-full inline-block cursor-pointer shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:shadow-[0_0_0_2px_white]"
           href="https://twitter.com/unovue"
           target="_blank"
           rel="noreferrer noopener"
@@ -27,7 +27,7 @@ const hoverState = ref(false);
         >
           <a>
             <img
-              class="block h-[45px] w-[45px] rounded-full"
+              class="rounded-full h-[45px] w-[45px] block"
               src="https://pbs.twimg.com/profile_images/1833445381986045952/jwoHkIIq_400x400.jpg"
               alt="Radix UI"
             >
@@ -36,50 +36,50 @@ const hoverState = ref(false);
         <AHoverCardPortal>
           <Transition name="fade">
             <AHoverCardContent
-              class="w-[300px] rounded-md bg-white p-5 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px]"
+              class="p-5 rounded-md bg-white w-[300px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px]"
               :side-offset="5"
               as-child
             >
               <div>
                 <div class="flex flex-col gap-[7px]">
                   <img
-                    class="block h-[60px] w-[60px] rounded-full"
+                    class="rounded-full h-[60px] w-[60px] block"
                     src="https://pbs.twimg.com/profile_images/1833445381986045952/jwoHkIIq_400x400.jpg"
                     alt="Radix UI"
                   >
                   <div class="flex flex-col gap-[15px]">
                     <div>
                       <div
-                        class="m-0 text-[15px] text-mauve12 font-medium leading-[1.5]"
+                        class="text-mauve12 text-[15px] leading-[1.5] font-medium m-0"
                       >
                         Radix
                       </div>
-                      <div class="m-0 text-[15px] text-mauve10 leading-[1.5]">
+                      <div class="text-mauve10 text-[15px] leading-[1.5] m-0">
                         @radix_ui
                       </div>
                     </div>
-                    <div class="m-0 text-[15px] text-mauve12 leading-[1.5]">
+                    <div class="text-mauve12 text-[15px] leading-[1.5] m-0">
                       Components, icons, colors, and templates for building
                       high-quality, accessible UI. Free and open-source.
                     </div>
                     <div class="flex gap-[15px]">
                       <div class="flex gap-[5px]">
                         <div
-                          class="m-0 text-[15px] text-mauve12 font-medium leading-[1.5]"
+                          class="text-mauve12 text-[15px] leading-[1.5] font-medium m-0"
                         >
                           0
                         </div>
-                        <div class="m-0 text-[15px] text-mauve10 leading-[1.5]">
+                        <div class="text-mauve10 text-[15px] leading-[1.5] m-0">
                           Following
                         </div>
                       </div>
                       <div class="flex gap-[5px]">
                         <div
-                          class="m-0 text-[15px] text-mauve12 font-medium leading-[1.5]"
+                          class="text-mauve12 text-[15px] leading-[1.5] font-medium m-0"
                         >
                           2,900
                         </div>
-                        <div class="m-0 text-[15px] text-mauve10 leading-[1.5]">
+                        <div class="text-mauve10 text-[15px] leading-[1.5] m-0">
                           Followers
                         </div>
                       </div>

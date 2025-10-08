@@ -15,85 +15,85 @@ const controlledRtlMulti = ref([10, 30]);
   >
     <Variant title="Uncontrolled (LTR)">
       <ASliderRoot
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
         :default-value="[20]"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
     <Variant title="Uncontrolled (Multiple) ">
       <ASliderRoot
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
         :default-value="[10, 30]"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
 
     <Variant title="Uncontrolled (RTL) ">
       <ASliderRoot
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
         :default-value="[20]"
         dir="rtl"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
     <Variant title="Uncontrolled (Multiple RTL) ">
       <ASliderRoot
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
         :default-value="[10, 30]"
         dir="rtl"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
 
     <Variant title="Uncontrolled (Multiples)">
       <ASliderRoot
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
         :default-value="[10, 15, 20, 80]"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
@@ -101,13 +101,13 @@ const controlledRtlMulti = ref([10, 30]);
     <Variant title="Controlled">
       <ASliderRoot
         v-model="controlledLtr"
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
@@ -115,16 +115,16 @@ const controlledRtlMulti = ref([10, 30]);
     <Variant title="Controlled (Multiple)">
       <ASliderRoot
         v-model="controlledLtrMulti"
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
@@ -133,13 +133,13 @@ const controlledRtlMulti = ref([10, 30]);
       <ASliderRoot
         v-model="controlledRtl"
         dir="rtl"
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
@@ -147,16 +147,16 @@ const controlledRtlMulti = ref([10, 30]);
     <Variant title="Controlled (Multiple RTL)">
       <ASliderRoot
         v-model="controlledRtlMulti"
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
@@ -165,13 +165,13 @@ const controlledRtlMulti = ref([10, 30]);
       <ASliderRoot
         :default-value="[50]"
         thumb-alignment="overflow"
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
@@ -181,46 +181,46 @@ const controlledRtlMulti = ref([10, 30]);
         :default-value="[50]"
         thumb-alignment="overflow"
         dir="rtl"
-        class="relative h-5 w-[200px] flex touch-none select-none items-center"
+        class="flex h-5 w-[200px] select-none items-center relative touch-none"
       >
-        <ASliderTrack class="relative h-[3px] grow rounded-full bg-blackA10">
-          <ASliderRange class="absolute h-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full grow h-[3px] relative">
+          <ASliderRange class="rounded-full bg-white h-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
 
     <Variant title="Vertical Overflow">
       <ASliderRoot
-        class="relative h-[100px] w-5 flex touch-none select-none items-center justify-center"
+        class="flex h-[100px] w-5 select-none items-center justify-center relative touch-none"
         :default-value="[50]"
         thumb-alignment="overflow"
         orientation="vertical"
       >
-        <ASliderTrack class="relative h-full w-[3px] rounded-full bg-blackA10">
-          <ASliderRange class="absolute w-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full h-full w-[3px] relative">
+          <ASliderRange class="rounded-full bg-white w-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>
 
     <Variant title="Vertical Overflow (Inverted)">
       <ASliderRoot
-        class="relative h-[100px] w-5 flex touch-none select-none items-center justify-center"
+        class="flex h-[100px] w-5 select-none items-center justify-center relative touch-none"
         :default-value="[50]"
         thumb-alignment="overflow"
         orientation="vertical"
         :inverted="true"
       >
-        <ASliderTrack class="relative h-full w-[3px] rounded-full bg-blackA10">
-          <ASliderRange class="absolute w-full rounded-full bg-white" />
+        <ASliderTrack class="bg-blackA10 rounded-full h-full w-[3px] relative">
+          <ASliderRange class="rounded-full bg-white w-full absolute" />
         </ASliderTrack>
         <ASliderThumb
-          class="block h-5 w-5 rounded-[10px] bg-white shadow-[0_2px_10px] shadow-blackA7 hover:bg-violet3 focus:shadow-[0_0_0_5px] focus:shadow-blackA8 focus:outline-none"
+          class="shadow-blackA7 hover:bg-violet3 focus:shadow-blackA8 rounded-[10px] bg-white h-5 w-5 block shadow-[0_2px_10px] focus:outline-none focus:shadow-[0_0_0_5px]"
         />
       </ASliderRoot>
     </Variant>

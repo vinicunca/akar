@@ -31,7 +31,7 @@ const openButtonRef = ref();
       <button
         ref="openButtonRef"
         type="button"
-        class="rounded bg-gray-500 py-2 focus:outline-blue-500 focus:outline"
+        class="py-2 rounded bg-gray-500 focus:outline-blue-500 focus:outline"
         @click="open = !open"
       >
         {{ openLabel }}
@@ -52,7 +52,7 @@ const openButtonRef = ref();
           :trapped="trapped"
         >
           <APopperContent
-            class="min-h-[150px] min-w-[200px] flex items-start gap-4 rounded-md bg-white p-6"
+            class="p-6 rounded-md bg-white flex gap-4 min-h-[150px] min-w-[200px] items-start"
             :style="{
               backgroundColor: color,
             }"

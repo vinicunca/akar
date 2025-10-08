@@ -78,7 +78,7 @@ const openButtonRef = ref<HTMLElement>();
             }
           "
         >
-          <div class="bg-gray-400 p-4">
+          <div class="p-4 bg-gray-400">
             <input type="text">
           </div>
         </DismissableLayer>
@@ -116,7 +116,7 @@ const openButtonRef = ref<HTMLElement>();
           <AFocusScope
             trapped
             loop
-            class="h-[300px] w-[400px] flex flex-col items-center justify-center rounded bg-black"
+            class="rounded bg-black flex flex-col h-[300px] w-[400px] items-center justify-center"
           >
             <input type="text">
             <input type="text">

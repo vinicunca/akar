@@ -25,7 +25,7 @@ const toggleState = ref(false);
           :modal="false"
         >
           <APopoverTrigger
-            class="h-[35px] w-[35px] inline-flex cursor-default items-center justify-center rounded-full bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="text-violet11 shadow-blackA7 hover:bg-violet3 outline-none rounded-full bg-white inline-flex h-[35px] w-[35px] cursor-default shadow-[0_2px_10px] items-center justify-center focus:shadow-[0_0_0_2px] focus:shadow-black"
             aria-label="Update dimensions"
           >
             <button>
@@ -36,69 +36,69 @@ const toggleState = ref(false);
             <APopoverContent
               side="bottom"
               :side-offset="5"
-              class="will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade h-[150px] w-[260px] overflow-auto rounded bg-white p-5 shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)]"
+              class="data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade p-5 will-change-[transform,opacity] rounded bg-white h-[150px] w-[260px] shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] overflow-auto"
             >
               <div class="flex flex-col gap-2.5">
                 <p
-                  class="mb-2.5 text-[15px] text-mauve12 font-medium leading-[19px]"
+                  class="text-mauve12 text-[15px] leading-[19px] font-medium mb-2.5"
                 >
                   Dimensions
                 </p>
-                <fieldset class="flex items-center gap-5">
+                <fieldset class="flex gap-5 items-center">
                   <label
-                    class="w-[75px] text-[13px] text-violet11"
+                    class="text-violet11 text-[13px] w-[75px]"
                     for="width"
                   >
                     Width
                   </label>
                   <input
                     id="width"
-                    class="h-[25px] w-full inline-flex flex-1 items-center justify-center rounded px-2.5 text-[13px] text-violet11 leading-none shadow-[0_0_0_1px] shadow-violet7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet8"
+                    class="text-violet11 shadow-violet7 focus:shadow-violet8 text-[13px] leading-none px-2.5 outline-none rounded inline-flex flex-1 h-[25px] w-full shadow-[0_0_0_1px] items-center justify-center focus:shadow-[0_0_0_2px]"
                     defaultValue="100%"
                   >
                 </fieldset>
-                <fieldset class="flex items-center gap-5">
+                <fieldset class="flex gap-5 items-center">
                   <label
-                    class="w-[75px] text-[13px] text-violet11"
+                    class="text-violet11 text-[13px] w-[75px]"
                     for="maxWidth"
                   >
                     Max. width
                   </label>
                   <input
                     id="maxWidth"
-                    class="h-[25px] w-full inline-flex flex-1 items-center justify-center rounded px-2.5 text-[13px] text-violet11 leading-none shadow-[0_0_0_1px] shadow-violet7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet8"
+                    class="text-violet11 shadow-violet7 focus:shadow-violet8 text-[13px] leading-none px-2.5 outline-none rounded inline-flex flex-1 h-[25px] w-full shadow-[0_0_0_1px] items-center justify-center focus:shadow-[0_0_0_2px]"
                     defaultValue="300px"
                   >
                 </fieldset>
-                <fieldset class="flex items-center gap-5">
+                <fieldset class="flex gap-5 items-center">
                   <label
-                    class="w-[75px] text-[13px] text-violet11"
+                    class="text-violet11 text-[13px] w-[75px]"
                     for="height"
                   >
                     Height
                   </label>
                   <input
                     id="height"
-                    class="h-[25px] w-full inline-flex flex-1 items-center justify-center rounded px-2.5 text-[13px] text-violet11 leading-none shadow-[0_0_0_1px] shadow-violet7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet8"
+                    class="text-violet11 shadow-violet7 focus:shadow-violet8 text-[13px] leading-none px-2.5 outline-none rounded inline-flex flex-1 h-[25px] w-full shadow-[0_0_0_1px] items-center justify-center focus:shadow-[0_0_0_2px]"
                     defaultValue="25px"
                   >
                 </fieldset>
-                <fieldset class="flex items-center gap-5">
+                <fieldset class="flex gap-5 items-center">
                   <label
-                    class="w-[75px] text-[13px] text-violet11"
+                    class="text-violet11 text-[13px] w-[75px]"
                     for="maxHeight"
                   >
                     Max. height
                   </label>
                   <input
                     id="maxHeight"
-                    class="h-[25px] w-full inline-flex flex-1 items-center justify-center rounded px-2.5 text-[13px] text-violet11 leading-none shadow-[0_0_0_1px] shadow-violet7 outline-none focus:shadow-[0_0_0_2px] focus:shadow-violet8"
+                    class="text-violet11 shadow-violet7 focus:shadow-violet8 text-[13px] leading-none px-2.5 outline-none rounded inline-flex flex-1 h-[25px] w-full shadow-[0_0_0_1px] items-center justify-center focus:shadow-[0_0_0_2px]"
                     defaultValue="none"
                   >
                 </fieldset>
               </div>
               <APopoverClose
-                class="absolute right-[5px] top-[5px] h-[25px] w-[25px] inline-flex cursor-default items-center justify-center rounded-full text-violet11 outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
+                class="text-violet11 hover:bg-violet4 focus:shadow-violet7 outline-none rounded-full inline-flex h-[25px] w-[25px] cursor-default items-center right-[5px] top-[5px] justify-center absolute focus:shadow-[0_0_0_2px]"
                 aria-label="Close"
               >
                 <Icon icon="radix-icons:cross-2" />

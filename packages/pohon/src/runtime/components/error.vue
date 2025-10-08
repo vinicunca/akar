@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { NuxtError } from '#app';
 import type { AppConfig } from '@nuxt/schema';
- 
 import type { PButtonProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/error';

@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
- 
 import type {
   IconProps,
   PButtonProps,

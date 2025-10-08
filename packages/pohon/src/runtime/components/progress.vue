@@ -2,7 +2,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type {
-  APrimitiveProps,
   AProgressRootEmits,
   AProgressRootProps,
 } from 'akar';

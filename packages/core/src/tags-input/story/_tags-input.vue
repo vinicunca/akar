@@ -21,13 +21,13 @@ const modelValue = ref(['Test']);
     v-model="modelValue"
     :add-on-blur="addOnBlur"
     :add-on-tab="addOnTab"
-    class="w-[300px] flex flex-wrap items-center gap-2 border border-blackA7 rounded-lg bg-blackA7 p-2"
+    class="border-blackA7 bg-blackA7 p-2 border rounded-lg flex flex-wrap gap-2 w-[300px] items-center"
   >
     <ATagsInputItem
       v-for="item in modelValue"
       :key="item"
       :value="item"
-      class="flex items-center justify-center gap-2 rounded bg-green8 px-2 py-1 aria-[selected=true]:bg-green9"
+      class="bg-green8 aria-[selected=true]:bg-green9 px-2 py-1 rounded flex gap-2 items-center justify-center"
     >
       <ATagsInputItemText class="text-sm">
         {{ item }}
@@ -39,7 +39,7 @@ const modelValue = ref(['Test']);
 
     <ATagsInputInput
       placeholder="Anything..."
-      class="flex-1 rounded bg-transparent px-1 text-white placeholder:text-mauve10 focus:outline-none"
+      class="placeholder:text-mauve10 text-white px-1 rounded bg-transparent flex-1 focus:outline-none"
     />
   </ATagsInputRoot>
 </template>

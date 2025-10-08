@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ACheckboxRootProps, APrimitiveProps } from 'akar';
+import type { ACheckboxRootProps } from 'akar';
 import type { IconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/checkbox';

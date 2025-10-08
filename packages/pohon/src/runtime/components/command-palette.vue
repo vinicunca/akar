@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
-import type { AListboxRootEmits, AListboxRootProps, APrimitiveProps } from 'akar';
+import type { AListboxRootEmits, AListboxRootProps } from 'akar';
 import type { FuseResult } from 'fuse.js';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { IconProps, PAvatarProps, PButtonProps, PChipProps, PInputProps, PKbdProps, PLinkProps } from '../types';

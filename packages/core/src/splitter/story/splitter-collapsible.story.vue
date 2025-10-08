@@ -16,16 +16,16 @@ import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
             :default-size="20"
             :max-size="30"
             :min-size="15"
-            class="rounded-lg bg-blackA8"
+            class="bg-blackA8 rounded-lg"
           >
             <div class="p-4">
               Panel A
             </div>
           </ASplitterPanel>
           <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
-          <ASplitterPanel class="rounded-lg bg-blackA8">
+          <ASplitterPanel class="bg-blackA8 rounded-lg">
             <div class="h-full overflow-auto">
-              <div class="h-96 w-[30vw] p-4">
+              <div class="p-4 h-96 w-[30vw]">
                 Panel B
               </div>
             </div>

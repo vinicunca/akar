@@ -14,11 +14,11 @@ const forwarded = useForwardPropsEmits(props, emits);
   <ARangeCalendarRoot
     v-slot="{ weekDays, grid }"
     v-bind="forwarded"
-    class="mt-6 border border-black rounded-xl bg-white p-4 shadow-md"
+    class="mt-6 p-4 border border-black rounded-xl bg-white shadow-md"
   >
     <ARangeCalendarHeader class="flex items-center justify-between">
       <ARangeCalendarPrev
-        class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-lg bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+        class="text-black rounded-lg bg-transparent inline-flex h-10 w-10 cursor-pointer items-center justify-center hover:text-white hover:bg-black focus:shadow-[0_0_0_2px] focus:shadow-black active:scale-98 active:transition-all"
       >
         <Icon
           icon="radix-icons:chevron-left"
@@ -27,7 +27,7 @@ const forwarded = useForwardPropsEmits(props, emits);
       </ARangeCalendarPrev>
       <ARangeCalendarHeading class="text-[15px] text-black font-medium" />
       <ARangeCalendarNext
-        class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-lg bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+        class="text-black rounded-lg bg-transparent inline-flex h-10 w-10 cursor-pointer items-center justify-center hover:text-white hover:bg-black focus:shadow-[0_0_0_2px] focus:shadow-black active:scale-98 active:transition-all"
       >
         <Icon
           icon="radix-icons:chevron-right"
@@ -36,19 +36,19 @@ const forwarded = useForwardPropsEmits(props, emits);
       </ARangeCalendarNext>
     </ARangeCalendarHeader>
     <div
-      class="flex flex-col pt-4 sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0"
+      class="pt-4 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
     >
       <ARangeCalendarGrid
         v-for="month in grid"
         :key="month.value.toString()"
-        class="w-full border-collapse select-none space-y-1"
+        class="w-full select-none border-collapse space-y-1"
       >
         <ARangeCalendarGridHead>
           <ARangeCalendarGridRow class="grid grid-cols-7">
             <ARangeCalendarHeadCell
               v-for="day in weekDays"
               :key="day"
-              class="h-8 w-8 rounded-md text-xs text-black font-normal"
+              class="text-xs text-black font-normal rounded-md h-8 w-8"
             >
               <div>{{ day.slice(0, 2) }}</div>
             </ARangeCalendarHeadCell>
@@ -64,12 +64,12 @@ const forwarded = useForwardPropsEmits(props, emits);
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"
               :date="weekDate"
-              class="relative p-0 text-center text-sm"
+              class="text-sm p-0 text-center relative"
             >
               <ARangeCalendarCellTrigger
                 :day="weekDate"
                 :month="month.value"
-                class="relative h-8 w-8 flex items-center justify-center whitespace-nowrap border border-transparent rounded-lg bg-transparent text-sm text-black font-normal outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 hover:border-black before:rounded-full data-[highlighted]:rounded-none data-[selection-end]:rounded-none data-[selection-start]:rounded-none data-[selection-end]:rounded-r-[9px] data-[selection-start]:rounded-l-[9px] before:bg-white data-[highlighted]:bg-grass9/30 data-[selected]:bg-black data-[selection-end]:bg-black data-[selection-start]:bg-black data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:shadow-[0_0_0_2px] focus:shadow-black data-[today]:before:block data-[selected]:before:bg-white data-[today]:before:bg-grass9 data-[selected]:[&:not([data-selection-start])]:[&:not([data-selection-end])]:rounded-none"
+                class="data-[highlighted]:bg-grass9/30 data-[today]:before:bg-grass9 text-sm text-black font-normal outline-none border border-transparent rounded-lg bg-transparent flex h-8 w-8 whitespace-nowrap items-center justify-center relative data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium hover:border-black before:rounded-full data-[highlighted]:rounded-none data-[selection-end]:rounded-none data-[selection-start]:rounded-none data-[selection-end]:rounded-r-[9px] data-[selection-start]:rounded-l-[9px] before:bg-white data-[selected]:bg-black data-[selection-end]:bg-black data-[selection-start]:bg-black data-[unavailable]:line-through before:h-1 before:w-1 before:hidden focus:shadow-[0_0_0_2px] focus:shadow-black before:top-[5px] before:absolute data-[selected]:before:bg-white data-[today]:before:block data-[selected]:[&:not([data-selection-start])]:[&:not([data-selection-end])]:rounded-none"
               />
             </ARangeCalendarCell>
           </ARangeCalendarGridRow>

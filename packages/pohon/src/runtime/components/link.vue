@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
- 
 import type { ButtonHTMLAttributes } from 'vue';
 import type { RouteLocationRaw, RouterLinkProps } from 'vue-router';
 import type { ComponentConfig } from '../types/uv';

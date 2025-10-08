@@ -245,7 +245,6 @@ function createContentArr(props: CreateContentArrProps) {
         return false;
       }
 
-      // eslint-disable-next-line sonar/prefer-single-boolean-return
       if (
         segment.part === 'timeZoneName'
         && (!isZonedDateTime(props.dateRef) || hideTimeZone)

@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps, ATabsRootEmits, ATabsRootProps } from 'akar';
+import type { ATabsRootEmits, ATabsRootProps } from 'akar';
 import type { IconProps, PAvatarProps, PBadgeProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';

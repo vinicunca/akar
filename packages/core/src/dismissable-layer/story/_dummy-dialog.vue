@@ -14,7 +14,7 @@ const open = ref(false);
 
 <template>
   <button
-    class="rounded bg-gray-500 py-2 focus:outline-blue-500 focus:outline"
+    class="py-2 rounded bg-gray-500 focus:outline-blue-500 focus:outline"
     type="button"
     @click="open = !open"
   >
@@ -25,7 +25,7 @@ const open = ref(false);
     <FocusGuards>
       <Teleport to="body">
         <div
-          class="pointer-event-none fixed bottom-0 left-0 right-0 top-0 bg-black/30"
+          class="pointer-event-none bg-black/30 bottom-0 left-0 right-0 top-0 fixed"
         />
       </Teleport>
 
@@ -37,7 +37,7 @@ const open = ref(false);
         >
           <AFocusScope
             trapped
-            class="min-height-[200px] fixed left-1/2 top-1/2 min-w-[300px] flex items-start gap-4 rounded-lg bg-white bg-white p-8 shadow-xl -translate-x-1/2 -translate-y-1/2"
+            class="min-height-[200px] p-8 rounded-lg bg-white bg-white flex gap-4 min-w-[300px] shadow-xl items-start left-1/2 top-1/2 fixed -translate-x-1/2 -translate-y-1/2"
           >
             <slot />
             <button

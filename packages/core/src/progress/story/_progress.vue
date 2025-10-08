@@ -12,14 +12,14 @@ setTimeout(() => {
 <template>
   <AProgressRoot
     v-model="interactive"
-    class="full relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full bg-blackA9"
+    class="full bg-blackA9 rounded-full flex h-8 w-full items-center justify-center relative overflow-hidden"
   >
     <AProgressIndicator
-      class="h-full w-full bg-white transition-transform duration-1000"
+      class="bg-white h-full w-full transition-transform duration-1000"
       :style="`transform: translateX(-${100 - interactive}%)`"
     />
     <div
-      class="pointer-events-none absolute text-center text-xs color-green-400 font-bold tracking-widest font-mono uppercase mix-blend-normal"
+      class="text-xs color-green-400 tracking-widest font-bold font-mono text-center pointer-events-none uppercase absolute mix-blend-normal"
     >
       {{ interactive.toFixed(2) }}%
     </div>

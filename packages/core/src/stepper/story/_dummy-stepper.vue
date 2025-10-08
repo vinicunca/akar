@@ -45,12 +45,12 @@ const steps = [{
     <AStepperItem
       v-for="item in steps"
       :key="item.step"
-      class="group flex basis-1/5 cursor-pointer items-center gap-2 p-1 data-[disabled]:pointer-events-none data-[orientation=vertical]:flex-col"
+      class="group p-1 flex basis-1/5 gap-2 cursor-pointer items-center data-[orientation=vertical]:flex-col data-[disabled]:pointer-events-none"
       :step="item.step"
     >
-      <AStepperTrigger class="flex flex-col items-center gap-2 rounded-md p-1 text-center focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
+      <AStepperTrigger class="p-1 text-center rounded-md flex flex-col gap-2 items-center focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
         <AStepperIndicator
-          class="h-10 w-10 inline-flex shrink-0 items-center justify-center rounded-full bg-white text-grass11 shadow-[0_0_0_2px] group-data-[state=active]:bg-mauve12 group-data-[state=completed]:bg-green9 group-data-[disabled]:text-gray-400 group-data-[state=active]:text-white group-data-[state=completed]:text-white group-data-[state=active]:shadow-mauve12 group-data-[state=completed]:shadow-green9"
+          class="text-grass11 group-data-[state=active]:bg-mauve12 group-data-[state=completed]:bg-green9 group-data-[state=active]:shadow-mauve12 group-data-[state=completed]:shadow-green9 rounded-full bg-white inline-flex shrink-0 h-10 w-10 shadow-[0_0_0_2px] items-center justify-center group-data-[disabled]:text-gray-400 group-data-[state=active]:text-white group-data-[state=completed]:text-white"
         >
           <Icon
             :icon="item.icon"
@@ -68,7 +68,7 @@ const steps = [{
       </AStepperTrigger>
       <AStepperSeparator
         v-if="item.step !== steps[steps.length - 1].step"
-        class="h-px w-full bg-green5 group-data-[orientation=vertical]:h-[100px] group-data-[orientation=vertical]:w-px group-data-[disabled]:bg-gray-300 group-data-[state=completed]:bg-green9"
+        class="bg-green5 group-data-[state=completed]:bg-green9 h-px w-full group-data-[disabled]:bg-gray-300 group-data-[orientation=vertical]:h-[100px] group-data-[orientation=vertical]:w-px"
       />
     </AStepperItem>
   </AStepperRoot>

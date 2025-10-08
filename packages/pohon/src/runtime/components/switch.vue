@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps, ASwitchRootProps } from 'akar';
+import type { ASwitchRootProps } from 'akar';
 import type { IconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/switch';

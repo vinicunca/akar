@@ -5,7 +5,6 @@ import type {
   ACalendarCellTriggerProps,
   ACalendarRootEmits,
   ACalendarRootProps,
-  APrimitiveProps,
   ARangeCalendarRootEmits,
   ARangeCalendarRootProps,
   DateRange,

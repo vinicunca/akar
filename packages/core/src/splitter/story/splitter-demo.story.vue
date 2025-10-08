@@ -10,17 +10,17 @@ import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
     <Variant title="default">
       <div class="h-48 w-full">
         <ASplitterGroup direction="horizontal">
-          <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
+          <ASplitterPanel class="bg-blackA8 rounded-lg flex items-center justify-center">
             Panel A
           </ASplitterPanel>
           <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
-          <ASplitterPanel class="flex items-center justify-center rounded-lg">
+          <ASplitterPanel class="rounded-lg flex items-center justify-center">
             <ASplitterGroup direction="vertical">
-              <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
+              <ASplitterPanel class="bg-blackA8 rounded-lg flex items-center justify-center">
                 Panel B1
               </ASplitterPanel>
               <ASplitterResizeHandle class="h-2 transition data-[state=active]:bg-white" />
-              <ASplitterPanel class="flex items-center justify-center rounded-lg bg-blackA8">
+              <ASplitterPanel class="bg-blackA8 rounded-lg flex items-center justify-center">
                 Panel B2
               </ASplitterPanel>
             </ASplitterGroup>
@@ -28,7 +28,7 @@ import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
           <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
           <ASplitterPanel
             :max-size="20"
-            class="flex items-center justify-center rounded-lg bg-blackA8"
+            class="bg-blackA8 rounded-lg flex items-center justify-center"
           >
             Panel C
           </ASplitterPanel>

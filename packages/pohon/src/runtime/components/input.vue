@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
- 
 import type { InputHTMLAttributes } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps } from '../types';

@@ -22,7 +22,7 @@ const two = ref(0);
       <AToastRoot
         v-if="one > 0"
         :key="`one-${String(one)}`"
-        class="space-between pointer-events-auto flex items-center"
+        class="space-between flex pointer-events-auto items-center"
       >
         <AToastDescription>Toast one</AToastDescription>
       </AToastRoot>
@@ -30,12 +30,12 @@ const two = ref(0);
       <AToastRoot
         v-if="two > 0"
         :key="`two-${String(two)}`"
-        class="space-between pointer-events-auto flex items-center"
+        class="space-between flex pointer-events-auto items-center"
       >
         <AToastDescription>Toast two</AToastDescription>
       </AToastRoot>
 
-      <AToastViewport class="fixed right-1/2 top-1/2 flex flex-col overflow-hidden border" />
+      <AToastViewport class="border flex flex-col right-1/2 top-1/2 fixed overflow-hidden" />
     </AToastProvider>
   </Story>
 </template>

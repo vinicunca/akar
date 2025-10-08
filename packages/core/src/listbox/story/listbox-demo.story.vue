@@ -15,13 +15,13 @@ const filteredOptions = computed(() => {
     title="Listbox/Demo"
     :layout="{ type: 'single', iframe: false }"
   >
-    <AListboxRoot class="mx-auto h-72 w-48 flex flex-col overflow-auto border rounded-lg bg-white color-green9">
+    <AListboxRoot class="color-green9 mx-auto border rounded-lg bg-white flex flex-col h-72 w-48 overflow-auto">
       <AListboxContent class="p-1">
         <AListboxItem
           v-for="i in filteredOptions.map(i => i.label).slice(0, 50)"
           :key="i"
           :value="i"
-          class="w-full select-none rounded px-2 py-1 text-sm color-green9 outline-none data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:ring-1 focus:ring-1 data-[highlighted]:ring-green9 focus:ring-green9"
+          class="color-green9 data-[state=checked]:bg-green9 data-[highlighted]:ring-green9 focus:ring-green9 text-sm px-2 py-1 outline-none rounded w-full select-none data-[state=checked]:text-white data-[disabled]:opacity-50 data-[highlighted]:ring-1 focus:ring-1"
         >
           {{ i }}
         </AListboxItem>

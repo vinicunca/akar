@@ -2,7 +2,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type {
-  APrimitiveProps,
   AStepperRootEmits,
   AStepperRootProps,
 } from 'akar';

@@ -30,18 +30,18 @@ watch(values, () => {
         multiple
         class="my-4"
       >
-        <AComboboxAnchor class="w-[400px] inline-flex items-center justify-between gap-[5px] rounded-lg bg-white p-2 text-[13px] text-grass11 leading-none shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-mauve3 data-[placeholder]:text-grass9 focus:shadow-[0_0_0_2px] focus:shadow-black">
+        <AComboboxAnchor class="text-grass11 hover:bg-mauve3 data-[placeholder]:text-grass9 text-[13px] leading-none p-2 outline-none rounded-lg bg-white inline-flex gap-[5px] w-[400px] shadow-[0_2px_10px] shadow-black/10 items-center justify-between focus:shadow-[0_0_0_2px] focus:shadow-black">
           <ATagsInputRoot
             v-slot="{ modelValue: tags }"
             v-model="values"
             delimiter=""
-            class="flex flex-wrap items-center gap-2 rounded-lg"
+            class="rounded-lg flex flex-wrap gap-2 items-center"
           >
             <ATagsInputItem
               v-for="item in tags"
               :key="item"
               :value="item"
-              class="flex items-center justify-center gap-2 rounded bg-grass10 px-2 py-1 text-white aria-[current=true]:bg-grass11"
+              class="bg-grass10 aria-[current=true]:bg-grass11 text-white px-2 py-1 rounded flex gap-2 items-center justify-center"
             >
               <ATagsInputItemText class="text-sm" />
               <ATagsInputItemDelete>
@@ -55,7 +55,7 @@ watch(values, () => {
             >
               <ATagsInputInput
                 placeholder="Fruits..."
-                class="flex-1 rounded bg-transparent px-1 placeholder:text-mauve10 focus:outline-none"
+                class="placeholder:text-mauve10 px-1 rounded bg-transparent flex-1 focus:outline-none"
                 @keydown.enter.prevent
               />
             </AComboboxInput>
@@ -64,25 +64,25 @@ watch(values, () => {
           <AComboboxTrigger>
             <Icon
               icon="radix-icons:chevron-down"
-              class="h-4 w-4 text-grass11"
+              class="text-grass11 h-4 w-4"
             />
           </AComboboxTrigger>
         </AComboboxAnchor>
-        <AComboboxContent class="will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade mt-2 min-w-[160px] overflow-hidden rounded bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]">
+        <AComboboxContent class="data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade mt-2 will-change-[opacity,transform] rounded bg-white min-w-[160px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] overflow-hidden">
           <AComboboxViewport class="p-[5px]">
             <AComboboxGroup>
-              <AComboboxLabel class="px-[25px] text-xs text-mauve11 leading-[25px]">
+              <AComboboxLabel class="text-mauve11 text-xs leading-[25px] px-[25px]">
                 Fruits
               </AComboboxLabel>
 
               <AComboboxItem
                 v-for="(option, index) in filteredOptions"
                 :key="index"
-                class="relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] text-grass11 leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-grass9 data-[disabled]:text-mauve8 data-[highlighted]:text-grass1 data-[highlighted]:outline-none"
+                class="text-grass11 data-[highlighted]:bg-grass9 data-[disabled]:text-mauve8 data-[highlighted]:text-grass1 text-[13px] leading-none pl-[25px] pr-[35px] rounded-[3px] flex h-[25px] select-none items-center relative data-[highlighted]:outline-none data-[disabled]:pointer-events-none"
                 :value="option"
               >
                 <AComboboxItemIndicator
-                  class="absolute left-0 w-[25px] inline-flex items-center justify-center"
+                  class="inline-flex w-[25px] items-center left-0 justify-center absolute"
                 >
                   <Icon icon="radix-icons:check" />
                 </AComboboxItemIndicator>

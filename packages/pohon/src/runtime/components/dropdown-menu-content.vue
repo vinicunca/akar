@@ -6,7 +6,7 @@ import type {
   ADropdownMenuContentEmits as AkarDropdownMenuContentEmits,
   ADropdownMenuContentProps as AkarDropdownMenuContentProps,
 } from 'akar';
-import type { PDropdownMenuItem, PDropdownMenuSlots, IconProps, PKbdProps, PAvatarProps } from '../types';
+import type { IconProps, PAvatarProps, PDropdownMenuItem, PDropdownMenuSlots, PKbdProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 
@@ -59,9 +59,9 @@ import { pickLinkProps } from '../utils/link';
 import PAvatar from './avatar.vue';
 import PDropdownMenuContent from './dropdown-menu-content.vue';
 import PIcon from './icon.vue';
+import PKbd from './kbd.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
-import PKbd from './kbd.vue';
 
 const props = defineProps<DropdownMenuContentProps<T>>();
 const emits = defineEmits<DropdownMenuContentEmits>();

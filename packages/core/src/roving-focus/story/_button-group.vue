@@ -18,7 +18,7 @@ provide('rovingFocusDemo', {
 <template>
   <ARovingFocusGroup
     v-bind="props"
-    class="inline-flex gap-4 p-2"
+    class="p-2 inline-flex gap-4"
     :class="orientation === 'vertical' ? 'flex-col' : 'flex-row'"
   >
     <slot />

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps, ASliderRootProps } from 'akar';
+import type { ASliderRootProps } from 'akar';
 import type { PTooltipProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/slider';

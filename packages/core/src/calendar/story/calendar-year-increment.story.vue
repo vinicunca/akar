@@ -19,12 +19,12 @@ function paging(date: DateValue, sign: -1 | 1) {
     <Variant title="default">
       <ACalendarRoot
         v-slot="{ weekDays, grid }"
-        class="mt-6 border border-black rounded-xl bg-white p-4 shadow-md"
+        class="mt-6 p-4 border border-black rounded-xl bg-white shadow-md"
       >
         <ACalendarHeader class="flex items-center justify-between">
           <ACalendarPrev
             :prev-page="(date: DateValue) => paging(date, -1)"
-            class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+            class="text-black rounded-[9px] bg-transparent inline-flex h-10 w-10 cursor-pointer items-center justify-center hover:text-white hover:bg-black focus:shadow-[0_0_0_2px] focus:shadow-black active:scale-98 active:transition-all"
           >
             <Icon
               icon="radix-icons:double-arrow-left"
@@ -32,7 +32,7 @@ function paging(date: DateValue, sign: -1 | 1) {
             />
           </ACalendarPrev>
           <ACalendarPrev
-            class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+            class="text-black rounded-[9px] bg-transparent inline-flex h-10 w-10 cursor-pointer items-center justify-center hover:text-white hover:bg-black focus:shadow-[0_0_0_2px] focus:shadow-black active:scale-98 active:transition-all"
           >
             <Icon
               icon="radix-icons:chevron-left"
@@ -43,7 +43,7 @@ function paging(date: DateValue, sign: -1 | 1) {
           <ACalendarHeading class="text-[15px] text-black font-medium" />
 
           <ACalendarNext
-            class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+            class="text-black rounded-[9px] bg-transparent inline-flex h-10 w-10 cursor-pointer items-center justify-center hover:text-white hover:bg-black focus:shadow-[0_0_0_2px] focus:shadow-black active:scale-98 active:transition-all"
           >
             <Icon
               icon="radix-icons:chevron-right"
@@ -52,7 +52,7 @@ function paging(date: DateValue, sign: -1 | 1) {
           </ACalendarNext>
           <ACalendarNext
             :next-page="(date: DateValue) => paging(date, 1)"
-            class="h-10 w-10 inline-flex cursor-pointer items-center justify-center rounded-[9px] bg-transparent text-black active:scale-98 hover:bg-black hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+            class="text-black rounded-[9px] bg-transparent inline-flex h-10 w-10 cursor-pointer items-center justify-center hover:text-white hover:bg-black focus:shadow-[0_0_0_2px] focus:shadow-black active:scale-98 active:transition-all"
           >
             <Icon
               icon="radix-icons:double-arrow-right"
@@ -62,19 +62,19 @@ function paging(date: DateValue, sign: -1 | 1) {
         </ACalendarHeader>
 
         <div
-          class="flex flex-col pt-4 sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0"
+          class="pt-4 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
         >
           <ACalendarGrid
             v-for="month in grid"
             :key="month.value.toString()"
-            class="w-full border-collapse select-none space-y-1"
+            class="w-full select-none border-collapse space-y-1"
           >
             <ACalendarGridHead>
-              <ACalendarGridRow class="grid grid-cols-7 mb-1 w-full">
+              <ACalendarGridRow class="mb-1 grid grid-cols-7 w-full">
                 <ACalendarHeadCell
                   v-for="day in weekDays"
                   :key="day"
-                  class="rounded-md text-xs text-black !font-normal"
+                  class="text-xs text-black rounded-md !font-normal"
                 >
                   {{ day }}
                 </ACalendarHeadCell>
@@ -90,12 +90,12 @@ function paging(date: DateValue, sign: -1 | 1) {
                   v-for="weekDate in weekDates"
                   :key="weekDate.toString()"
                   :date="weekDate"
-                  class="relative text-center text-sm"
+                  class="text-sm text-center relative"
                 >
                   <ACalendarCellTrigger
                     :day="weekDate"
                     :month="month.value"
-                    class="relative h-8 w-8 flex items-center justify-center whitespace-nowrap border border-transparent rounded-lg bg-transparent text-sm text-black font-normal outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 hover:border-black before:rounded-full before:bg-white data-[selected]:bg-black data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:shadow-[0_0_0_2px] focus:shadow-black data-[today]:before:block data-[selected]:before:bg-white data-[today]:before:bg-grass9"
+                    class="data-[today]:before:bg-grass9 text-sm text-black font-normal outline-none border border-transparent rounded-lg bg-transparent flex h-8 w-8 whitespace-nowrap items-center justify-center relative data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium hover:border-black before:rounded-full before:bg-white data-[selected]:bg-black data-[unavailable]:line-through before:h-1 before:w-1 before:hidden focus:shadow-[0_0_0_2px] focus:shadow-black before:top-[5px] before:absolute data-[selected]:before:bg-white data-[today]:before:block"
                   />
                 </ACalendarCell>
               </ACalendarGridRow>

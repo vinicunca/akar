@@ -20,14 +20,14 @@ const errorCaseMax = ref(100);
     <Variant title="Loop">
       <AProgressRoot
         v-model="interactive"
-        class="full relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full bg-blackA9"
+        class="full bg-blackA9 rounded-full flex h-8 w-full items-center justify-center relative overflow-hidden"
       >
         <AProgressIndicator
-          class="h-full w-full bg-white transition-transform duration-1000"
+          class="bg-white h-full w-full transition-transform duration-1000"
           :style="`transform: translateX(-${100 - interactive}%)`"
         />
         <div
-          class="pointer-events-none absolute text-center text-xs color-green-400 font-bold tracking-widest font-mono uppercase mix-blend-normal"
+          class="text-xs color-green-400 tracking-widest font-bold font-mono text-center pointer-events-none uppercase absolute mix-blend-normal"
         >
           {{ interactive.toFixed(2) }}%
         </div>
@@ -35,18 +35,18 @@ const errorCaseMax = ref(100);
     </Variant>
     <Variant title="Indeterminate">
       <AProgressRoot
-        class="full relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full bg-blackA9"
+        class="full bg-blackA9 rounded-full flex h-8 w-full items-center justify-center relative overflow-hidden"
       >
-        <AProgressIndicator class="h-full w-full bg-white/20" />
+        <AProgressIndicator class="bg-white/20 h-full w-full" />
         <div
-          class="pointer-events-none absolute text-center text-xs color-green-400 font-bold tracking-widest font-mono uppercase mix-blend-normal"
+          class="text-xs color-green-400 tracking-widest font-bold font-mono text-center pointer-events-none uppercase absolute mix-blend-normal"
         >
           Progress value is null
         </div>
       </AProgressRoot>
 
       <p
-        class="mt-10 rounded-md bg-slate-500/80 px-3 py-4 text-sm text-slate-100"
+        class="text-sm text-slate-100 mt-10 px-3 py-4 rounded-md bg-slate-500/80"
       >
         When there is no value provided, the progress indicator will be
         <code class="color-green-400">indeterminate</code>.
@@ -58,20 +58,20 @@ const errorCaseMax = ref(100);
           Value:
           <input
             v-model="errorCaseValue"
-            class="bg-slate-300 text-slate-800"
+            class="text-slate-800 bg-slate-300"
             type="number"
           >
           Max:
           <input
             v-model="errorCaseMax"
-            class="bg-slate-300 text-slate-800"
+            class="text-slate-800 bg-slate-300"
             type="number"
           >
         </div>
       </template>
 
-      <div class="rounded-sm bg-slate-600 px-2 py-3 text-slate-200">
-        <p class="mb-4 rounded-md text-sm text-amber-300">
+      <div class="text-slate-200 px-2 py-3 rounded-sm bg-slate-600">
+        <p class="text-sm text-amber-300 mb-4 rounded-md">
           Change the values in the "Controls" tab to test.
           <br>
           Then, check the console for errors.
@@ -79,15 +79,15 @@ const errorCaseMax = ref(100);
 
         <AProgressRoot
           v-model="errorCaseValue"
-          class="relative h-8 w-full flex items-center justify-center overflow-hidden rounded-full bg-red-50"
+          class="rounded-full bg-red-50 flex h-8 w-full items-center justify-center relative overflow-hidden"
           :max="errorCaseMax"
         >
           <AProgressIndicator
-            class="h-full w-full bg-white"
+            class="bg-white h-full w-full"
             :style="`transform: translateX(${100 - errorCaseValue}%)`"
           />
           <div
-            class="pointer-events-none absolute text-center text-xs text-red-500 font-bold font-mono"
+            class="text-xs text-red-500 font-bold font-mono text-center pointer-events-none absolute"
           >
             <span class="opacity-60">Value:</span>
             <span class="tracking-widest">{{
@@ -104,7 +104,7 @@ const errorCaseMax = ref(100);
             Quick actions
           </h5>
           <button
-            class="ml-2 text-sm underline"
+            class="text-sm ml-2 underline"
             @click="
               errorCaseValue = 1;
               errorCaseMax = 100;
@@ -113,21 +113,21 @@ const errorCaseMax = ref(100);
             Reset values
           </button>
         </div>
-        <div class="mt-3 flex flex-wrap gap-2 text-sm">
+        <div class="text-sm mt-3 flex flex-wrap gap-2">
           <button
-            class="h-max rounded-md bg-slate-200 px-2 py-1 text-slate-800 hover:bg-slate-300"
+            class="text-slate-800 px-2 py-1 rounded-md bg-slate-200 h-max hover:bg-slate-300"
             @click="errorCaseValue = 1000"
           >
             Set <code class="color-green-600">value</code> to 1000
           </button>
           <button
-            class="h-max rounded-md bg-slate-200 px-2 py-1 text-slate-800 hover:bg-slate-300"
+            class="text-slate-800 px-2 py-1 rounded-md bg-slate-200 h-max hover:bg-slate-300"
             @click="errorCaseValue = -1"
           >
             Set <code class="color-green-600">value</code> to -1
           </button>
           <button
-            class="h-max rounded-md bg-slate-200 px-2 py-1 text-slate-800 hover:bg-slate-300"
+            class="text-slate-800 px-2 py-1 rounded-md bg-slate-200 h-max hover:bg-slate-300"
             @click="errorCaseMax = -1"
           >
             Set <code class="color-green-600">max</code> to -1

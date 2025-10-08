@@ -101,7 +101,7 @@ const open = ref(false);
     <Variant title="Dialog (with scrollbar)">
       <div class="flex flex-col gap-4">
         <button
-          class="rounded bg-gray-500 py-2 focus:outline-blue-500 focus:outline"
+          class="py-2 rounded bg-gray-500 focus:outline-blue-500 focus:outline"
           type="button"
           @click="open = !open"
         >
@@ -111,10 +111,10 @@ const open = ref(false);
         <template v-if="open">
           <Teleport to="body">
             <div
-              class="pointer-event-none fixed bottom-0 left-0 right-0 top-0 flex items-center justify-center overflow-y-auto bg-black/30"
+              class="pointer-event-none bg-black/30 flex items-center bottom-0 left-0 right-0 top-0 justify-center fixed overflow-y-auto"
             >
               <DismissableLayer @dismiss="open = false">
-                <div class="h-[200vh] flex items-center justify-center bg-gray-700 p-16 text-white">
+                <div class="text-white p-16 bg-gray-700 flex h-[200vh] items-center justify-center">
                   Long content. Clicking on scrollbar shouldn't dismiss the layer
                 </div>
               </DismissableLayer>

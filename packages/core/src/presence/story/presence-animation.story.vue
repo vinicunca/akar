@@ -52,7 +52,7 @@ watchEffect(() => {
 
     <Variant title="With Deferred Mount Animation">
       <div>
-        <p class="mb-4 text-xs">
+        <p class="text-xs mb-4">
           Deferred animation should unmount correctly when toggled. Content will
           flash briefly while we wait for animation to be applied.
         </p>

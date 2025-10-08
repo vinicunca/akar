@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps, ATreeRootEmits, ATreeRootProps } from 'akar';
+import type { ATreeRootEmits, ATreeRootProps } from 'akar';
 import type { IconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';

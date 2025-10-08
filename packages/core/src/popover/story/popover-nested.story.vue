@@ -18,10 +18,10 @@ const buttonRef = ref();
     :layout="{ type: 'single', iframe: true }"
   >
     <Variant title="default">
-      <div class="relative h-[300vh] flex flex-col items-center justify-center">
+      <div class="flex flex-col h-[300vh] items-center justify-center relative">
         <button
           type="button"
-          class="fixed left-6 top-6 border text-white"
+          class="text-white border left-6 top-6 fixed"
           @click="buttonRef.$el.focus()"
         >
           Focus popover button
@@ -30,7 +30,7 @@ const buttonRef = ref();
         <APopoverRoot>
           <APopoverTrigger
             ref="buttonRef"
-            class="inline-flex cursor-default items-center justify-center bg-white text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="text-violet11 shadow-blackA7 hover:bg-violet3 outline-none bg-white inline-flex cursor-default shadow-[0_2px_10px] items-center justify-center focus:shadow-[0_0_0_2px] focus:shadow-black"
           >
             Open popover
           </APopoverTrigger>
@@ -38,7 +38,7 @@ const buttonRef = ref();
             <APopoverContent
               side="bottom"
               :side-offset="5"
-              class="will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade w-[260px] rounded p-5 shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)]"
+              class="data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade p-5 will-change-[transform,opacity] rounded w-[260px] shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)]"
               style="background-color: crimson"
             >
               <APopoverRoot>
@@ -64,7 +64,7 @@ const buttonRef = ref();
               </APopoverRoot>
 
               <APopoverClose
-                class="h-[25px] w-[25px] inline-flex cursor-default items-center justify-center text-violet11 outline-none hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7"
+                class="text-violet11 hover:bg-violet4 focus:shadow-violet7 outline-none inline-flex h-[25px] w-[25px] cursor-default items-center justify-center focus:shadow-[0_0_0_2px]"
                 aria-label="Close"
               >
                 Close

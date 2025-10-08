@@ -8,16 +8,16 @@ import { ALabel } from '.';
     :layout="{ type: 'single', iframe: true }"
   >
     <Variant title="default">
-      <div class="flex flex-wrap items-center gap-[15px] px-5">
+      <div class="px-5 flex flex-wrap gap-[15px] items-center">
         <ALabel
-          class="text-[15px] text-white font-medium leading-[35px]"
+          class="text-[15px] text-white leading-[35px] font-medium"
           for="firstName"
         >
           First name
         </ALabel>
         <input
           id="firstName"
-          class="h-[35px] w-[200px] inline-flex appearance-none items-center justify-center rounded-[4px] bg-black/50 px-[10px] text-[15px] text-white leading-none shadow-[0_0_0_1px] shadow-black/40 outline-none selection:bg-black/80 selection:color-white focus:shadow-[0_0_0_2px_black]"
+          class="text-[15px] text-white leading-none px-[10px] appearance-none outline-none rounded-[4px] bg-black/50 inline-flex h-[35px] w-[200px] shadow-[0_0_0_1px] shadow-black/40 items-center justify-center selection:color-white selection:bg-black/80 focus:shadow-[0_0_0_2px_black]"
           type="text"
           value="Pedro Duarte"
         >

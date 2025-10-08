@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps, ARadioGroupRootEmits, ARadioGroupRootProps } from 'akar';
+import type { ARadioGroupRootEmits, ARadioGroupRootProps } from 'akar';
 import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/radio-group';

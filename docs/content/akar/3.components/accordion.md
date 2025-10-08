@@ -38,7 +38,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger } from 'akar'
+import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger } from 'akar';
 </script>
 
 <template>
@@ -247,7 +247,7 @@ You can add extra decorative elements, such as chevrons, and rotate it when the 
 ```vue {16}
 // index.vue
 <script setup>
-import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger } from 'akar'
+import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger } from 'akar';
 </script>
 
 <template>
@@ -291,8 +291,8 @@ Use the `--akar-accordion-content-width` and/or `--akar-accordion-content-height
 ```vue {11}
 // index.vue
 <script setup>
-import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger } from 'akar'
-import './styles.css'
+import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger } from 'akar';
+import './styles.css';
 </script>
 
 <template>
@@ -312,10 +312,10 @@ import './styles.css'
 .AAccordionContent {
   overflow: hidden;
 }
-.AAccordionContent[data-state="open"] {
+.AAccordionContent[data-state='open'] {
   animation: accordion-down 300ms ease-out;
 }
-.AAccordionContent[data-state="closed"] {
+.AAccordionContent[data-state='closed'] {
   animation: accordion-up 300ms ease-out;
 }
 

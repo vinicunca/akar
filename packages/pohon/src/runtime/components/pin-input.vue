@@ -4,7 +4,6 @@ import type { AppConfig } from '@nuxt/schema';
 import type {
   APinInputRootEmits,
   APinInputRootProps,
-  APrimitiveProps,
 } from 'akar';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/pin-input';

@@ -205,7 +205,6 @@ const isInvalid = computed(() => {
     return true;
   }
 
-  // eslint-disable-next-line sonar/prefer-single-boolean-return
   if (convertedMaxValue.value && isDateBefore(convertedMaxValue.value, convertedModelValue.value)) {
     return true;
   }

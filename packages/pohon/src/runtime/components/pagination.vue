@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APaginationRootEmits, APaginationRootProps, APrimitiveProps } from 'akar';
+import type { APaginationRootEmits, APaginationRootProps } from 'akar';
 import type { IconProps, PButtonProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/pagination';

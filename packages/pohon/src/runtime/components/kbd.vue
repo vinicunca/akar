@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
- 
 import type { KbdKey } from '../composables/use-kbd';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/kbd';

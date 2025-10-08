@@ -34,7 +34,7 @@ const forwarded = useForwardPropsEmits(props, emits);
   <ADateRangePickerRoot v-bind="forwarded">
     <ADateRangePickerField
       v-slot="{ segments }"
-      class="flex select-none items-center border border-gray9 rounded-lg bg-white p-1 text-center color-green10 data-[invalid]:border-red-500 placeholder:text-mauve5"
+      class="border-gray9 color-green10 placeholder:text-mauve5 p-1 text-center border rounded-lg bg-white flex select-none items-center data-[invalid]:border-red-500"
     >
       <template
         v-for="item in segments.start"
@@ -51,7 +51,7 @@ const forwarded = useForwardPropsEmits(props, emits);
           v-else
           type="start"
           :part="item.part"
-          class="rounded-md p-1 hover:bg-grass4 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+          class="hover:bg-grass4 data-[placeholder]:color-green9 p-1 rounded-md focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
         >
           {{ item.value }}
         </ADateRangePickerInput>
@@ -73,7 +73,7 @@ const forwarded = useForwardPropsEmits(props, emits);
           v-else
           type="end"
           :part="item.part"
-          class="rounded-md p-1 hover:bg-grass4 data-[placeholder]:color-green9 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+          class="hover:bg-grass4 data-[placeholder]:color-green9 p-1 rounded-md focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
         >
           {{ item.value }}
         </ADateRangePickerInput>
@@ -88,7 +88,7 @@ const forwarded = useForwardPropsEmits(props, emits);
 
     <ADateRangePickerContent
       :side-offset="10"
-      class="will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade rounded-lg bg-white shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)]"
+      class="data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade will-change-[transform,opacity] rounded-lg bg-white shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)]"
     >
       <ADateRangePickerArrow class="fill-white" />
       <ADateRangePickerCalendar
@@ -97,7 +97,7 @@ const forwarded = useForwardPropsEmits(props, emits);
       >
         <ADateRangePickerHeader class="flex items-center justify-between">
           <ADateRangePickerPrev
-            class="h-8 w-8 inline-flex cursor-pointer items-center justify-center rounded-md bg-transparent text-black active:scale-98 hover:bg-green10 hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+            class="hover:bg-green10 text-black rounded-md bg-transparent inline-flex h-8 w-8 cursor-pointer items-center justify-center hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:scale-98 active:transition-all"
           >
             <Icon
               icon="radix-icons:chevron-left"
@@ -107,7 +107,7 @@ const forwarded = useForwardPropsEmits(props, emits);
 
           <ADateRangePickerHeading class="text-[15px] text-black font-medium" />
           <ADateRangePickerNext
-            class="h-8 w-8 inline-flex cursor-pointer items-center justify-center rounded-md bg-transparent text-black active:scale-98 hover:bg-green10 hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:transition-all"
+            class="hover:bg-green10 text-black rounded-md bg-transparent inline-flex h-8 w-8 cursor-pointer items-center justify-center hover:text-white focus:shadow-[0_0_0_2px] focus:shadow-black active:scale-98 active:transition-all"
           >
             <Icon
               icon="radix-icons:chevron-right"
@@ -116,19 +116,19 @@ const forwarded = useForwardPropsEmits(props, emits);
           </ADateRangePickerNext>
         </ADateRangePickerHeader>
         <div
-          class="flex flex-col pt-4 sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0"
+          class="pt-4 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
         >
           <ADateRangePickerGrid
             v-for="month in grid"
             :key="month.value.toString()"
-            class="w-full border-collapse select-none space-y-1"
+            class="w-full select-none border-collapse space-y-1"
           >
             <ADateRangePickerGridHead>
-              <ADateRangePickerGridRow class="mb-1 w-full flex justify-between">
+              <ADateRangePickerGridRow class="mb-1 flex w-full justify-between">
                 <ADateRangePickerHeadCell
                   v-for="day in weekDays"
                   :key="day"
-                  class="h-8 w-8 rounded-md text-xs text-black font-normal"
+                  class="text-xs text-black font-normal rounded-md h-8 w-8"
                 >
                   {{ day }}
                 </ADateRangePickerHeadCell>
@@ -138,18 +138,18 @@ const forwarded = useForwardPropsEmits(props, emits);
               <ADateRangePickerGridRow
                 v-for="(weekDates, index) in month.rows"
                 :key="`weekDate-${index}`"
-                class="w-full flex"
+                class="flex w-full"
               >
                 <ADateRangePickerCell
                   v-for="weekDate in weekDates"
                   :key="weekDate.toString()"
                   :date="weekDate"
-                  class="relative p-0 text-center text-sm"
+                  class="text-sm p-0 text-center relative"
                 >
                   <ADateRangePickerCellTrigger
                     :day="weekDate"
                     :month="month.value"
-                    class="relative h-8 w-8 flex items-center justify-center whitespace-nowrap bg-transparent text-sm text-black font-normal outline-offset-0 outline-none before:absolute before:top-[5px] before:hidden before:h-1 before:w-1 data-[selection-end]:rounded-r-lg data-[selection-start]:rounded-l-lg before:bg-white data-[highlighted]:bg-grass9/30 data-[selected]:bg-green10 data-[selection-end]:bg-green10 data-[selection-start]:bg-green10 data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium data-[unavailable]:line-through focus:outline-black hover:outline-black data-[today]:before:block data-[selected]:before:bg-white data-[today]:before:bg-grass9"
+                    class="data-[highlighted]:bg-grass9/30 data-[selected]:bg-green10 data-[selection-end]:bg-green10 data-[selection-start]:bg-green10 data-[today]:before:bg-grass9 text-sm text-black font-normal outline-offset-0 outline-none bg-transparent flex h-8 w-8 whitespace-nowrap items-center justify-center relative data-[disabled]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[selected]:font-medium focus:outline-black hover:outline-black data-[selection-end]:rounded-r-lg data-[selection-start]:rounded-l-lg before:bg-white data-[unavailable]:line-through before:h-1 before:w-1 before:hidden before:top-[5px] before:absolute data-[selected]:before:bg-white data-[today]:before:block"
                   />
                 </ADateRangePickerCell>
               </ADateRangePickerGridRow>

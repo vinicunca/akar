@@ -20,12 +20,12 @@ const value = ref<Array<string>>([]);
     v-bind="{ ...props, ...useEmitAsProps(emits) }"
     v-model="value"
     placeholder="*"
-    class="flex items-center gap-2"
+    class="flex gap-2 items-center"
   >
     <APinInputInput
       v-for="(id, index) in 5"
       :key="id"
-      class="h-10 w-10 rounded text-center color-green10 placeholder:text-mauve5"
+      class="color-green10 placeholder:text-mauve5 text-center rounded h-10 w-10"
       :index="index"
     />
   </APinInputRoot>

@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
- 
 import type {
   PButtonProps,
   PDialogProps,

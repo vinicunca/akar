@@ -3,6 +3,7 @@ import { breadcrumbTheme } from './themes/breadcrumb.theme';
 import { collapsibleTheme } from './themes/collapsible.theme';
 import { BRANDS } from './themes/constant';
 import { containerTheme } from './themes/container.theme';
+import { contentNavigationTheme } from './themes/content-navigation.theme';
 import { contentTocTheme } from './themes/content-toc.theme';
 import { headerTheme } from './themes/header.theme';
 import { kbdTheme } from './themes/kbd.theme';
@@ -32,6 +33,7 @@ export default defineAppConfig({
     collapsible: collapsibleTheme,
     container: containerTheme,
     contentToc: contentTocTheme,
+    contentNavigation: contentNavigationTheme,
     header: headerTheme,
     link: linkTheme,
     main: mainTheme,

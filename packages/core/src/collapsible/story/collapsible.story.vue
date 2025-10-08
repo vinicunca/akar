@@ -29,7 +29,7 @@ const rootDisabled = ref(false);
             @peduarte starred 3 repos
           </span>
           <ACollapsibleTrigger
-            class="h-[25px] w-[25px] inline-flex cursor-default items-center justify-center rounded-full text-violet11 shadow-[0_2px_10px] shadow-blackA7 outline-none data-[state=closed]:bg-white data-[state=open]:bg-violet3 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="text-violet11 shadow-blackA7 data-[state=open]:bg-violet3 hover:bg-violet3 outline-none rounded-full inline-flex h-[25px] w-[25px] cursor-default shadow-[0_2px_10px] items-center justify-center data-[state=closed]:bg-white focus:shadow-[0_0_0_2px] focus:shadow-black"
           >
             <Icon
               v-if="rootOpen"
@@ -45,21 +45,21 @@ const rootDisabled = ref(false);
         </div>
 
         <div
-          class="my-[10px] rounded bg-white p-[10px] shadow-[0_2px_10px] shadow-blackA7"
+          class="shadow-blackA7 my-[10px] p-[10px] rounded bg-white shadow-[0_2px_10px]"
         >
-          <span class="text-[15px] text-violet11 leading-[25px]">unovue/radix-vue</span>
+          <span class="text-violet11 text-[15px] leading-[25px]">unovue/radix-vue</span>
         </div>
 
         <ACollapsibleContent class="data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
           <div
-            class="my-[10px] rounded bg-white p-[10px] shadow-[0_2px_10px] shadow-blackA7"
+            class="shadow-blackA7 my-[10px] p-[10px] rounded bg-white shadow-[0_2px_10px]"
           >
-            <span class="text-[15px] text-violet11 leading-[25px]">vuejs/core</span>
+            <span class="text-violet11 text-[15px] leading-[25px]">vuejs/core</span>
           </div>
           <div
-            class="my-[10px] rounded bg-white p-[10px] shadow-[0_2px_10px] shadow-blackA7"
+            class="shadow-blackA7 my-[10px] p-[10px] rounded bg-white shadow-[0_2px_10px]"
           >
-            <span class="text-[15px] text-violet11 leading-[25px]">@radix-ui/primitives</span>
+            <span class="text-violet11 text-[15px] leading-[25px]">@radix-ui/primitives</span>
           </div>
         </ACollapsibleContent>
       </ACollapsibleRoot>

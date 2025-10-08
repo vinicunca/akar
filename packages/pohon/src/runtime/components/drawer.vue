@@ -5,7 +5,6 @@ import type {
   ADialogContentProps,
   ADrawerRootEmits,
   ADrawerRootProps,
-  APrimitiveProps,
 } from 'akar';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';

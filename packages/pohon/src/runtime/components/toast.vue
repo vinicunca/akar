@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps, AToastRootEmits, AToastRootProps } from 'akar';
-import type { PAvatarProps, PButtonProps, IconProps, PProgressProps } from '../types';
+import type { AToastRootEmits, AToastRootProps } from 'akar';
+import type { IconProps, PAvatarProps, PButtonProps, PProgressProps } from '../types';
 import type { StringOrVNode } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/toast';

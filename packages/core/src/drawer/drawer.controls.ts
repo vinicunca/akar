@@ -478,8 +478,8 @@ export function useDrawer(props: UseADrawerProps & ADrawerEmitHandlers): ADrawer
       return;
     }
     const wrapper
-    = (document.querySelector('[data-akar-drawer-wrapper]') as HTMLElement)
-      || (document.querySelector('[akar-drawer-wrapper]') as HTMLElement);
+      = (document.querySelector('[data-akar-drawer-wrapper]') as HTMLElement)
+        || (document.querySelector('[akar-drawer-wrapper]') as HTMLElement);
 
     const currentSwipeAmount = getTranslate({
       element: drawerRef.value.$el,

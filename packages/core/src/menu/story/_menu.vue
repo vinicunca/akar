@@ -56,14 +56,14 @@ const foodGroups: Array<{
     >
       <AMenuLabel
         v-if="foodGroup.label"
-        class="my-2 h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3] px-[10px] text-black text-gray-400 leading-[1]"
+        class="text-black text-gray-400 leading-[1] my-2 px-[10px] rounded-[3] flex h-[25px] cursor-default select-none whitespace-nowrap items-center justify-between"
       >
         {{ foodGroup.label }}
       </AMenuLabel>
       <AMenuItem
         v-for="(food, i) in foodGroup.foods"
         :key="i"
-        class="h-[25px] flex cursor-default select-none items-center justify-between whitespace-nowrap rounded-[3px] px-[10px] text-black leading-[1] outline-none data-[highlighted]:bg-black data-[disabled]:text-gray-100 data-[highlighted]:text-white"
+        class="text-black leading-[1] px-[10px] outline-none rounded-[3px] flex h-[25px] cursor-default select-none whitespace-nowrap items-center justify-between data-[disabled]:text-gray-100 data-[highlighted]:text-white data-[highlighted]:bg-black"
         @select="emits('select', $event)"
       >
         {{ food.label }}

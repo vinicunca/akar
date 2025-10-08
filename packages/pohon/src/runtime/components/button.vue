@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { PLinkProps, PAvatarProps } from '../types';
+import type { PAvatarProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 
 import theme from '#build/pohon/button';

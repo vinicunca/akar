@@ -91,7 +91,7 @@ interface Point {
   x: number;
   y: number;
 }
-  type Polygon = Array<Point>;
+type Polygon = Array<Point>;
 
 function getExitSideFromRect(
   { point, rect }:

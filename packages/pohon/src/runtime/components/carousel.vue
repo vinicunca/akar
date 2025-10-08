@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
- 
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import type { AutoHeightOptionsType } from 'embla-carousel-auto-height';
 import type { AutoScrollOptionsType } from 'embla-carousel-auto-scroll';

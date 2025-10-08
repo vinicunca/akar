@@ -11,7 +11,7 @@ const props = defineProps<ANumberFieldRootProps>();
     v-bind="props"
     id="number-field"
     data-testid="root"
-    class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+    class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
   >
     <label
       for="number-field"
@@ -25,7 +25,7 @@ const props = defineProps<ANumberFieldRootProps>();
     </ANumberFieldDecrement>
     <ANumberFieldInput
       data-testid="input"
-      class="w-32 bg-transparent p-1 tabular-nums focus:outline-0"
+      class="p-1 bg-transparent w-32 tabular-nums focus:outline-0"
     />
     <ANumberFieldIncrement
       class="p-2"

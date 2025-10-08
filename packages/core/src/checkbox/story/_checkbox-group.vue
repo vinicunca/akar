@@ -19,26 +19,26 @@ const items = [{ name: 'jack' }, { name: 'john' }, { name: 'mike' }];
     <div
       v-for="item in items"
       :key="item.name"
-      class="flex flex-row items-center gap-4 [&>.checkbox]:hover:bg-neutral-100"
+      class="flex flex-row gap-4 items-center [&>.checkbox]:hover:bg-neutral-100"
     >
       <ACheckboxRoot
         :id="item.name"
         :value="item"
         :aria-label="item.name"
-        class="h-[25px] w-[25px] flex appearance-none items-center justify-center rounded-[4px] bg-white shadow-[0_2px_10px] shadow-blackA7 outline-none hover:bg-violet3 focus-within:shadow-[0_0_0_2px_black]"
+        class="shadow-blackA7 hover:bg-violet3 appearance-none outline-none rounded-[4px] bg-white flex h-[25px] w-[25px] shadow-[0_2px_10px] items-center justify-center focus-within:shadow-[0_0_0_2px_black]"
       >
         <ACheckboxIndicator
-          class="h-full w-full flex items-center justify-center rounded bg-white"
+          class="rounded bg-white flex h-full w-full items-center justify-center"
         >
           <Icon
             icon="radix-icons:check"
-            class="h-4 w-4 text-black"
+            class="text-black h-4 w-4"
           />
         </ACheckboxIndicator>
       </ACheckboxRoot>
       <label
         :for="item.name"
-        class="select-none text-white"
+        class="text-white select-none"
       >
         {{ item.name }}
       </label>

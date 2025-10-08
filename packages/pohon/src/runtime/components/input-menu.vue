@@ -6,11 +6,10 @@ import type {
   AComboboxContentProps,
   AComboboxRootEmits,
   AComboboxRootProps,
-  APrimitiveProps,
 } from 'akar';
 import type { InputHTMLAttributes } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { IconProps, PInputProps, PAvatarProps, PChipProps } from '../types';
+import type { IconProps, PAvatarProps, PChipProps, PInputProps } from '../types';
 import type {
   AcceptableValue,
   ArrayOrNested,

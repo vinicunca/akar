@@ -20,14 +20,14 @@ onMounted(() => {
     <Variant title="default">
       <div>
         <button
-          class="rounded bg-white px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-100"
+          class="text-sm text-slate-800 px-3 py-1.5 rounded bg-white hover:bg-slate-100"
           @click="panelRef?.isCollapsed ? panelRef?.expand() : panelRef?.collapse() "
         >
           {{ panelRef?.isCollapsed ? 'Expand' : 'Collapse' }}
         </button>
 
         <button
-          class="ml-2 rounded bg-white px-3 py-1.5 text-sm text-slate-800 hover:bg-slate-100"
+          class="text-sm text-slate-800 ml-2 px-3 py-1.5 rounded bg-white hover:bg-slate-100"
           @click="panelRef?.resize(20)"
         >
           Resize to 20
@@ -42,16 +42,16 @@ onMounted(() => {
               :default-size="20"
               :max-size="30"
               :min-size="15"
-              class="rounded-lg bg-blackA8"
+              class="bg-blackA8 rounded-lg"
             >
               <div class="p-4">
                 Collapsible
               </div>
             </ASplitterPanel>
             <ASplitterResizeHandle class="w-2 transition data-[state=active]:bg-white" />
-            <ASplitterPanel class="rounded-lg bg-blackA8">
+            <ASplitterPanel class="bg-blackA8 rounded-lg">
               <div class="h-full overflow-auto">
-                <div class="h-96 w-[30vw] p-4">
+                <div class="p-4 h-96 w-[30vw]">
                   Non-collapsible
                 </div>
               </div>

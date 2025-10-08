@@ -28,24 +28,24 @@ const state = reactive({
           v-model="currentTrigger"
           :delay-duration="state.delayDuration"
           :skip-delay-duration="state.skipDelayDuration"
-          class="relative z-[1] w-full flex justify-center"
+          class="flex w-full justify-center relative z-[1]"
         >
           <ANavigationMenuList
-            class="center m-0 flex list-none rounded-[6px] bg-white p-1 shadow-[0_2px_10px] shadow-blackA7"
+            class="center shadow-blackA7 m-0 p-1 list-none rounded-[6px] bg-white flex shadow-[0_2px_10px]"
           >
             <ANavigationMenuItem>
               <ANavigationMenuTrigger
-                class="group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] text-grass11 font-medium leading-none outline-none hover:bg-green3 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+                class="group text-grass11 hover:bg-green3 focus:shadow-green7 text-[15px] leading-none font-medium px-3 py-2 outline-none rounded-[4px] flex gap-[2px] select-none items-center justify-between focus:shadow-[0_0_0_2px]"
               >
                 Products
                 <Icon
                   icon="radix-icons:caret-down"
-                  class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                  class="color-green10 transition-transform duration-250 ease-in top-[1px] relative group-data-[state=open]:-rotate-180"
                 />
               </ANavigationMenuTrigger>
 
               <ANavigationMenuContent
-                class="absolute left-0 top-10 w-full rounded-xl bg-white sm:w-auto"
+                class="rounded-xl bg-white w-full left-0 top-10 absolute sm:w-auto"
               >
                 <LinkGroup
                   :items="[
@@ -62,16 +62,16 @@ const state = reactive({
 
             <ANavigationMenuItem>
               <ANavigationMenuTrigger
-                class="group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] text-grass11 font-medium leading-none outline-none hover:bg-green3 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+                class="group text-grass11 hover:bg-green3 focus:shadow-green7 text-[15px] leading-none font-medium px-3 py-2 outline-none rounded-[4px] flex gap-[2px] select-none items-center justify-between focus:shadow-[0_0_0_2px]"
               >
                 Company
                 <Icon
                   icon="radix-icons:caret-down"
-                  class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                  class="color-green10 transition-transform duration-250 ease-in top-[1px] relative group-data-[state=open]:-rotate-180"
                 />
               </ANavigationMenuTrigger>
               <ANavigationMenuContent
-                class="absolute left-0 top-10 w-full rounded-xl bg-white sm:w-auto"
+                class="rounded-xl bg-white w-full left-0 top-10 absolute sm:w-auto"
               >
                 <LinkGroup
                   :items="[
@@ -85,16 +85,16 @@ const state = reactive({
 
             <ANavigationMenuItem>
               <ANavigationMenuTrigger
-                class="group flex select-none items-center justify-between gap-[2px] rounded-[4px] px-3 py-2 text-[15px] text-grass11 font-medium leading-none outline-none hover:bg-green3 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+                class="group text-grass11 hover:bg-green3 focus:shadow-green7 text-[15px] leading-none font-medium px-3 py-2 outline-none rounded-[4px] flex gap-[2px] select-none items-center justify-between focus:shadow-[0_0_0_2px]"
               >
                 Developers
                 <Icon
                   icon="radix-icons:caret-down"
-                  class="relative top-[1px] color-green10 transition-transform duration-250 ease-in group-data-[state=open]:-rotate-180"
+                  class="color-green10 transition-transform duration-250 ease-in top-[1px] relative group-data-[state=open]:-rotate-180"
                 />
               </ANavigationMenuTrigger>
               <ANavigationMenuContent
-                class="absolute left-0 top-10 w-full rounded-xl bg-white sm:w-auto"
+                class="rounded-xl bg-white w-full left-0 top-10 absolute sm:w-auto"
               >
                 <LinkGroup :items="['Aliquam porttitor', 'Pellentesque']" />
               </ANavigationMenuContent>
@@ -102,7 +102,7 @@ const state = reactive({
 
             <ANavigationMenuItem>
               <ANavigationMenuLink
-                class="block select-none rounded-[4px] px-3 py-2 text-[15px] text-grass11 font-medium leading-none no-underline outline-none hover:bg-green3 focus:shadow-[0_0_0_2px] focus:shadow-green7"
+                class="text-grass11 hover:bg-green3 focus:shadow-green7 text-[15px] leading-none font-medium px-3 py-2 outline-none rounded-[4px] no-underline block select-none focus:shadow-[0_0_0_2px]"
                 href="https://github.com/unovue"
               >
                 Link
@@ -110,7 +110,7 @@ const state = reactive({
             </ANavigationMenuItem>
 
             <ANavigationMenuIndicator
-              class="absolute bottom-0 left-0 h-[2px] w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] rounded-full bg-green10 transition-[width,transform] duration-300"
+              class="bg-green10 rounded-full h-[2px] w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] transition-[width,transform] duration-300 bottom-0 left-0 absolute"
             />
           </ANavigationMenuList>
         </ANavigationMenuRoot>

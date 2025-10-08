@@ -34,7 +34,6 @@ import type {
   VisibilityOptions,
   VisibilityState,
 } from '@tanstack/vue-table';
- 
 import type { Ref, WatchOptions } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/table';

@@ -2,7 +2,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { MaybeRefOrGetter } from '@vueuse/shared';
- 
 import type { HSLObject } from 'colortranslator';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/color-picker';

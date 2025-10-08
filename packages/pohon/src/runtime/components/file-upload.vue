@@ -123,7 +123,6 @@ export interface FileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
- 
 import { useAppConfig, useLocale } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';

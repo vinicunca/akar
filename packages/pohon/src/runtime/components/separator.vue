@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { APrimitiveProps, ASeparatorProps } from 'akar';
+import type { ASeparatorProps } from 'akar';
 import type { IconProps, PAvatarProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/separator';

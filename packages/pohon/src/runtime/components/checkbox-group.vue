@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ACheckboxGroupRootEmits, ACheckboxGroupRootProps, APrimitiveProps } from 'akar';
+import type { ACheckboxGroupRootEmits, ACheckboxGroupRootProps } from 'akar';
 import type { PCheckboxProps } from '../types';
 import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';

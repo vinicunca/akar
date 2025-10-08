@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ANumberFieldRootProps, APrimitiveProps } from 'akar';
+import type { ANumberFieldRootProps } from 'akar';
 import type { IconProps, PButtonProps } from '../types';
 import type { ModelModifiers } from '../types/input';
 import type { ComponentConfig } from '../types/uv';

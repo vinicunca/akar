@@ -1,8 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
- 
-import type { IconProps, PLinkProps, PAvatarProps } from '../types';
+import type { IconProps, PAvatarProps, PLinkProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/breadcrumb';

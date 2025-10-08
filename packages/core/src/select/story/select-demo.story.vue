@@ -41,7 +41,7 @@ const POSITION = ['item-aligned', 'popper'] as const;
           multiple
         >
           <ASelectTrigger
-            class="h-[35px] min-w-[160px] inline-flex items-center justify-between gap-[5px] rounded bg-white px-[15px] text-[13px] text-violet11 leading-none shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-mauve3 data-[placeholder]:text-violet9 focus:shadow-[0_0_0_2px] focus:shadow-black"
+            class="text-violet11 hover:bg-mauve3 data-[placeholder]:text-violet9 text-[13px] leading-none px-[15px] outline-none rounded bg-white inline-flex gap-[5px] h-[35px] min-w-[160px] shadow-[0_2px_10px] shadow-black/10 items-center justify-between focus:shadow-[0_0_0_2px] focus:shadow-black"
             aria-label="Customise options"
           >
             <ASelectValue placeholder="Please select a fruit" />
@@ -54,28 +54,28 @@ const POSITION = ['item-aligned', 'popper'] as const;
           <ASelectPortal>
             <Transition>
               <ASelectContent
-                class="min-w-[160px] overflow-hidden rounded bg-white shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)]"
+                class="rounded bg-white min-w-[160px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] overflow-hidden"
                 :side-offset="5"
                 :position="position"
               >
                 <ASelectScrollUpButton
-                  class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
+                  class="text-violet11 bg-white flex h-[25px] cursor-default items-center justify-center"
                 >
                   <Icon icon="radix-icons:chevron-up" />
                 </ASelectScrollUpButton>
 
                 <ASelectViewport class="p-[5px]">
                   <ASelectLabel
-                    class="px-[25px] text-xs text-mauve11 leading-[25px]"
+                    class="text-mauve11 text-xs leading-[25px] px-[25px]"
                   >
                     Fruits
                   </ASelectLabel>
                   <ASelectGroup>
                     <SelectItemWrapper :options="options" />
                   </ASelectGroup>
-                  <ASelectSeparator class="m-[5px] h-[1px] bg-violet6" />
+                  <ASelectSeparator class="bg-violet6 m-[5px] h-[1px]" />
                   <ASelectLabel
-                    class="px-[25px] text-xs text-mauve11 leading-[25px]"
+                    class="text-mauve11 text-xs leading-[25px] px-[25px]"
                   >
                     Vegetables
                   </ASelectLabel>
@@ -83,12 +83,12 @@ const POSITION = ['item-aligned', 'popper'] as const;
                     <ASelectItem
                       v-for="(option, index) in vegetables"
                       :key="index"
-                      class="relative h-[25px] flex select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] text-violet11 leading-none data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 data-[highlighted]:outline-none"
+                      class="text-violet11 data-[highlighted]:bg-violet9 data-[disabled]:text-mauve8 data-[highlighted]:text-violet1 text-[13px] leading-none pl-[25px] pr-[35px] rounded-[3px] flex h-[25px] select-none items-center relative data-[highlighted]:outline-none data-[disabled]:pointer-events-none"
                       :value="option"
                       :disabled="option === 'Courgette'"
                     >
                       <ASelectItemIndicator
-                        class="absolute left-0 w-[25px] inline-flex items-center justify-center"
+                        class="inline-flex w-[25px] items-center left-0 justify-center absolute"
                       >
                         <Icon icon="radix-icons:check" />
                       </ASelectItemIndicator>
@@ -100,7 +100,7 @@ const POSITION = ['item-aligned', 'popper'] as const;
                 </ASelectViewport>
 
                 <ASelectScrollDownButton
-                  class="h-[25px] flex cursor-default items-center justify-center bg-white text-violet11"
+                  class="text-violet11 bg-white flex h-[25px] cursor-default items-center justify-center"
                 >
                   <Icon icon="radix-icons:chevron-down" />
                 </ASelectScrollDownButton>

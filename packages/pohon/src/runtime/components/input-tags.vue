@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { AcceptableInputValue, APrimitiveProps, ATagsInputRootEmits, ATagsInputRootProps } from 'akar';
+import type { AcceptableInputValue, ATagsInputRootEmits, ATagsInputRootProps } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { IconProps, PAvatarProps } from '../types';
 import type { ComponentConfig } from '../types/uv';

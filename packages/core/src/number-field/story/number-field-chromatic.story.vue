@@ -13,13 +13,13 @@ const value = ref(5);
   >
     <Variant title="Uncontrolled">
       <ANumberFieldRoot
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
         :default-value="5"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -29,12 +29,12 @@ const value = ref(5);
     <Variant title="Controlled">
       <ANumberFieldRoot
         v-model="value"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -49,12 +49,12 @@ const value = ref(5);
           minimumFractionDigits: 1,
           maximumFractionDigits: 2,
         }"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -68,12 +68,12 @@ const value = ref(5);
         :format-options="{
           style: 'percent',
         }"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -89,12 +89,12 @@ const value = ref(5);
           currencyDisplay: 'code',
           currencySign: 'accounting',
         }"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -109,12 +109,12 @@ const value = ref(5);
           unit: 'inch',
           unitDisplay: 'long',
         }"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -125,12 +125,12 @@ const value = ref(5);
       <ANumberFieldRoot
         :default-value="5"
         :min="0"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -141,12 +141,12 @@ const value = ref(5);
       <ANumberFieldRoot
         :default-value="5"
         :max="20"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -156,12 +156,12 @@ const value = ref(5);
     <Variant title="Step (3)">
       <ANumberFieldRoot
         :step="3"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -172,12 +172,12 @@ const value = ref(5);
       <ANumberFieldRoot
         :min="2"
         :step="3"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>
@@ -189,12 +189,12 @@ const value = ref(5);
         :min="2"
         :max="21"
         :step="3"
-        class="flex items-center border border-blackA9 rounded-md bg-blackA7 text-sm text-white"
+        class="border-blackA9 bg-blackA7 text-sm text-white border rounded-md flex items-center"
       >
         <ANumberFieldDecrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:minus" />
         </ANumberFieldDecrement>
-        <ANumberFieldInput class="w-20 bg-transparent p-1 tabular-nums focus:outline-0" />
+        <ANumberFieldInput class="p-1 bg-transparent w-20 tabular-nums focus:outline-0" />
         <ANumberFieldIncrement class="p-2 disabled:opacity-20">
           <Icon icon="radix-icons:plus" />
         </ANumberFieldIncrement>

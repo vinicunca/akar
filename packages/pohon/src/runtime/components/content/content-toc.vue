@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { TocLink } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
-import type { ACollapsibleRootEmits, ACollapsibleRootProps, APrimitiveProps } from 'akar';
+import type { ACollapsibleRootEmits, ACollapsibleRootProps } from 'akar';
 import type { IconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-toc';

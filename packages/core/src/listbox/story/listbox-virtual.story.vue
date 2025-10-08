@@ -16,7 +16,7 @@ const filteredOptions = computed(() => {
     :layout="{ type: 'grid', iframe: false, width: '50%' }"
   >
     <Variant title="Basic">
-      <AListboxRoot class="mx-auto w-48 border rounded-lg bg-white p-1 color-green9">
+      <AListboxRoot class="color-green9 mx-auto p-1 border rounded-lg bg-white w-48">
         <AListboxContent class="h-72 overflow-auto">
           <AListboxVirtualizer
             v-slot="{ option }"
@@ -25,7 +25,7 @@ const filteredOptions = computed(() => {
           >
             <AListboxItem
               :value="option"
-              class="w-full select-none rounded px-2 py-1 text-sm color-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+              class="color-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline focus:ring-0"
             >
               {{ option.label }}
             </AListboxItem>
@@ -35,12 +35,12 @@ const filteredOptions = computed(() => {
     </Variant>
 
     <Variant title="Filter">
-      <div class="mx-auto w-48 border rounded-lg bg-white p-1 color-green9">
+      <div class="color-green9 mx-auto p-1 border rounded-lg bg-white w-48">
         <AListboxRoot>
           <AListboxFilter
             v-model="filterText"
             type="text"
-            class="w-full border rounded bg-white"
+            class="border rounded bg-white w-full"
           />
           <AListboxContent class="h-64 w-full overflow-auto">
             <AListboxVirtualizer
@@ -50,7 +50,7 @@ const filteredOptions = computed(() => {
             >
               <AListboxItem
                 :value="option"
-                class="w-full select-none rounded px-2 py-1 text-sm color-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+                class="color-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline focus:ring-0"
               >
                 {{ option.label }}
               </AListboxItem>
@@ -61,7 +61,7 @@ const filteredOptions = computed(() => {
     </Variant>
 
     <Variant title="Single">
-      <div class="mx-auto w-48 border rounded-lg bg-white p-1 color-green9">
+      <div class="color-green9 mx-auto p-1 border rounded-lg bg-white w-48">
         <AListboxRoot>
           <AListboxContent class="h-64 w-full overflow-auto">
             <AListboxVirtualizer
@@ -71,7 +71,7 @@ const filteredOptions = computed(() => {
             >
               <AListboxItem
                 :value="option"
-                class="w-full select-none rounded px-2 py-1 text-sm color-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+                class="color-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline focus:ring-0"
               >
                 {{ option.label }}
               </AListboxItem>
@@ -82,7 +82,7 @@ const filteredOptions = computed(() => {
     </Variant>
 
     <Variant title="Multiple">
-      <div class="mx-auto w-48 border rounded-lg bg-white p-1 color-green9">
+      <div class="color-green9 mx-auto p-1 border rounded-lg bg-white w-48">
         <AListboxRoot multiple>
           <AListboxContent class="h-64 w-full overflow-auto">
             <AListboxVirtualizer
@@ -92,7 +92,7 @@ const filteredOptions = computed(() => {
             >
               <AListboxItem
                 :value="option"
-                class="w-full select-none rounded px-2 py-1 text-sm color-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+                class="color-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline focus:ring-0"
               >
                 {{ option.label }}
               </AListboxItem>
@@ -103,7 +103,7 @@ const filteredOptions = computed(() => {
     </Variant>
 
     <Variant title="Replace behavior (Single)">
-      <div class="mx-auto w-48 border rounded-lg bg-white p-1 color-green9">
+      <div class="color-green9 mx-auto p-1 border rounded-lg bg-white w-48">
         <AListboxRoot selection-behavior="replace">
           <AListboxContent class="h-64 w-full overflow-auto">
             <AListboxVirtualizer
@@ -113,7 +113,7 @@ const filteredOptions = computed(() => {
             >
               <AListboxItem
                 :value="option"
-                class="w-full select-none rounded px-2 py-1 text-sm color-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+                class="color-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline focus:ring-0"
               >
                 {{ option.label }}
               </AListboxItem>
@@ -124,7 +124,7 @@ const filteredOptions = computed(() => {
     </Variant>
 
     <Variant title="Replace behavior (Multiple)">
-      <div class="mx-auto w-48 border rounded-lg bg-white p-1 color-green9">
+      <div class="color-green9 mx-auto p-1 border rounded-lg bg-white w-48">
         <AListboxRoot
           multiple
           selection-behavior="replace"
@@ -137,7 +137,7 @@ const filteredOptions = computed(() => {
             >
               <AListboxItem
                 :value="option"
-                class="w-full select-none rounded px-2 py-1 text-sm color-green9 data-[state=checked]:bg-green9 data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline-green9 focus:outline-green9 data-[highlighted]:outline focus:ring-0"
+                class="color-green9 data-[state=checked]:bg-green9 data-[highlighted]:outline-green9 focus:outline-green9 text-sm px-2 py-1 rounded w-full select-none data-[state=checked]:text-white data-[highlighted]:outline-1 data-[highlighted]:outline focus:ring-0"
               >
                 {{ option.label }}
               </AListboxItem>

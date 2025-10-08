@@ -1,5 +1,4 @@
 <script lang="ts">
- 
 import type { PLinkProps } from '../types';
 
 export interface PLinkBaseProps {

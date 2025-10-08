@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
- 
-import type { IconProps, PLinkProps, PButtonProps } from '../types';
+import type { IconProps, PButtonProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/banner';
 
@@ -72,9 +71,9 @@ import { computed, watch } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
+import PContainer from './container.vue';
 import PIcon from './icon.vue';
 import PLink from './link.vue';
-import PContainer from './container.vue';
 
 defineOptions({ inheritAttrs: false });
 

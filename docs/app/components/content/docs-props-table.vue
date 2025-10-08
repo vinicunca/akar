@@ -106,9 +106,6 @@ const propsData = computed(() => {
             :prop="prop"
             :ignore="props.ignore"
           />
-
-          <!-- <ComponentPropsLinks v-if="prop.tags?.length" :prop="prop" />
-          <ComponentPropsSchema v-if="prop.schema" :prop="prop" :ignore="ignore" /> -->
         </ProseTd>
       </ProseTr>
     </ProseTbody>
