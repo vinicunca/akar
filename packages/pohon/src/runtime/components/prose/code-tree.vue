@@ -146,56 +146,61 @@ onBeforeUpdate(() => rerenderCount.value++);
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DefineTreeTemplate v-slot="{ items, level }">
-    <ATreeItem
+    <li
       v-for="(item, index) in items"
       :key="`${level}-${index}`"
-      v-slot="{ isExpanded, isSelected }"
-      :level="level"
-      :value="item"
+      role="presentation"
       :class="level > 1 ? pohon.itemWithChildren({ class: props.pohon?.itemWithChildren }) : pohon.item({ class: props.pohon?.item })"
     >
-      <button
-        type="button"
-        :data-expanded="isExpanded"
-        :class="pohon.link({ class: props.pohon?.link, active: isSelected })"
+      <ATreeItem
+        v-slot="{ isExpanded, isSelected }"
+        :level="level"
+        :value="item"
+        as-child
       >
-        <PIcon
-          v-if="item.children?.length"
-          :name="isExpanded ? appConfig.pohon.icons.folderOpen : appConfig.pohon.icons.folder"
-          :class="pohon.linkLeadingIcon({ class: props.pohon?.linkLeadingIcon })"
-        />
-        <PCodeIcon
-          v-else
-          :filename="item.label"
-          :class="pohon.linkLeadingIcon({ class: props.pohon?.linkLeadingIcon })"
-        />
-
-        <span :class="pohon.linkLabel({ class: props.pohon?.linkLabel })">
-          {{ item.label }}
-        </span>
-
-        <span
-          v-if="item.children?.length"
-          :class="pohon.linkTrailing({ class: props.pohon?.linkTrailing })"
+        <button
+          type="button"
+          :class="pohon.link({ class: props.pohon?.link, active: isSelected })"
+          tabindex="0"
         >
           <PIcon
-            :name="appConfig.pohon.icons.chevronDown"
-            :class="pohon.linkTrailingIcon({ class: props.pohon?.linkTrailingIcon })"
+            v-if="item.children?.length"
+            :name="isExpanded ? appConfig.pohon.icons.folderOpen : appConfig.pohon.icons.folder"
+            :class="pohon.linkLeadingIcon({ class: props.pohon?.linkLeadingIcon })"
           />
-        </span>
-      </button>
+          <PCodeIcon
+            v-else
+            :filename="item.label"
+            :class="pohon.linkLeadingIcon({ class: props.pohon?.linkLeadingIcon })"
+          />
 
-      <ul
-        v-if="item.children?.length && isExpanded"
-        role="group"
-        :class="pohon.listWithChildren({ class: props.pohon?.listWithChildren })"
-      >
-        <ReuseTreeTemplate
-          :items="item.children"
-          :level="level + 1"
-        />
-      </ul>
-    </ATreeItem>
+          <span :class="pohon.linkLabel({ class: props.pohon?.linkLabel })">
+            {{ item.label }}
+          </span>
+
+          <span
+            v-if="item.children?.length"
+            :class="pohon.linkTrailing({ class: props.pohon?.linkTrailing })"
+          >
+            <PIcon
+              :name="appConfig.pohon.icons.chevronDown"
+              :class="pohon.linkTrailingIcon({ class: props.pohon?.linkTrailingIcon })"
+            />
+          </span>
+        </button>
+
+        <ul
+          v-if="item.children?.length && isExpanded"
+          role="group"
+          :class="pohon.listWithChildren({ class: props.pohon?.listWithChildren })"
+        >
+          <ReuseTreeTemplate
+            :items="item.children"
+            :level="level + 1"
+          />
+        </ul>
+      </ATreeItem>
+    </li>
   </DefineTreeTemplate>
 
   <div

@@ -261,148 +261,121 @@ const defaultExpanded = computed(() =>
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
   <DefineItemTemplate v-slot="{ item, index, level }">
-    <ATreeItem
-      v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
-      :level="level"
-      :value="item"
+    <li
+      role="presentation"
       :class="!!nested && level > 1
-        ? pohon.itemWithChildren({
-          class: [props.pohon?.itemWithChildren, item.pohon?.itemWithChildren],
-        })
+        ? pohon.itemWithChildren({ class: [props.pohon?.itemWithChildren, item.pohon?.itemWithChildren] })
         : pohon.item({ class: [props.pohon?.item, item.pohon?.item] })"
-      @toggle="item.onToggle"
-      @select="item.onSelect"
     >
-      <slot
-        :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof PTreeSlots<T>)"
-        v-bind="{
-          index,
-          level,
-          expanded: isExpanded,
-          selected: isSelected,
-          indeterminate: isIndeterminate,
-          handleSelect,
-          handleToggle,
-        }"
-        :item="(item as Extract<T[number], { slot: string; }>)"
+      <ATreeItem
+        v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
+        :level="level"
+        :value="item"
+        as-child
+        @toggle="item.onToggle"
+        @select="item.onSelect"
       >
-        <button
-          type="button"
-          :disabled="item.disabled || disabled"
-          :data-expanded="isExpanded"
-          :class="pohon.link({
-            class: [props.pohon?.link, item.pohon?.link, item.class],
-            selected: isSelected,
-            disabled: item.disabled || disabled,
-          })"
-          :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
+        <slot
+          :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof PTreeSlots<T>)"
+          v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
+          :item="(item as Extract<T[number], { slot: string; }>)"
         >
-          <slot
-            :name="((item.slot || 'item') as keyof PTreeSlots<T>)"
-            v-bind="{
-              index,
-              level,
-              expanded: isExpanded,
+          <button
+            type="button"
+            :disabled="item.disabled || disabled"
+            :class="pohon.link({
+              class: [props.pohon?.link, item.pohon?.link, item.class],
               selected: isSelected,
-              indeterminate: isIndeterminate,
-              handleSelect,
-              handleToggle,
-            }"
-            :item="(item as Extract<T[number], { slot: string; }>)"
+              disabled: item.disabled || disabled,
+            })"
+            :style="!nested && level > 1
+              ? { paddingLeft: flattenedPaddingFormula(level) }
+              : undefined"
+            tabindex="0"
           >
             <slot
-              :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PTreeSlots<T>)"
-              v-bind="{
-                index,
-                level,
-                expanded: isExpanded,
-                selected: isSelected,
-                indeterminate: isIndeterminate,
-                handleSelect,
-                handleToggle,
-              }"
+              :name="((item.slot || 'item') as keyof PTreeSlots<T>)"
+              v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
               :item="(item as Extract<T[number], { slot: string; }>)"
             >
-              <PIcon
-                v-if="item.icon"
-                :name="item.icon"
-                :class="pohon.linkLeadingIcon({
-                  class:
-                    [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
-                })"
-              />
-              <PIcon
-                v-else-if="item.children?.length"
-                :name="isExpanded ? (expandedIcon ?? appConfig.pohon.icons.folderOpen) : (collapsedIcon ?? appConfig.pohon.icons.folder)"
-                :class="pohon.linkLeadingIcon({ class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon] })"
-              />
-            </slot>
-
-            <span
-              v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>]"
-              :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
-            >
               <slot
-                :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>)"
-                v-bind="{
-                  index,
-                  level,
-                  expanded: isExpanded,
-                  selected: isSelected,
-                  indeterminate: isIndeterminate,
-                  handleSelect,
-                  handleToggle,
-                }"
-                :item="(item as Extract<T[number], { slot: string; }>)"
-              >
-                {{ getItemLabel(item) }}
-              </slot>
-            </span>
-
-            <span
-              v-if="item.trailingIcon || item.children?.length || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>]"
-              :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
-            >
-              <slot
-                :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>)"
-                v-bind="{
-                  index,
-                  level,
-                  expanded: isExpanded,
-                  selected: isSelected,
-                  indeterminate: isIndeterminate,
-                  handleSelect,
-                  handleToggle,
-                }"
+                :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PTreeSlots<T>)"
+                v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
                 :item="(item as Extract<T[number], { slot: string; }>)"
               >
                 <PIcon
-                  v-if="item.trailingIcon"
-                  :name="item.trailingIcon"
-                  :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon] })"
+                  v-if="item.icon"
+                  :name="item.icon"
+                  :class="pohon.linkLeadingIcon({
+                    class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
+                  })"
                 />
+
                 <PIcon
                   v-else-if="item.children?.length"
-                  :name="trailingIcon ?? appConfig.pohon.icons.chevronDown"
-                  :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon] })"
+                  :name="isExpanded ? (expandedIcon ?? appConfig.pohon.icons.folderOpen) : (collapsedIcon ?? appConfig.pohon.icons.folder)"
+                  :class="pohon.linkLeadingIcon({
+                    class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
+                  })"
                 />
               </slot>
-            </span>
-          </slot>
-        </button>
-      </slot>
 
-      <ul
-        v-if="nested && item.children?.length && isExpanded"
-        role="group"
-        :class="pohon.listWithChildren({ class: [props.pohon?.listWithChildren, item.pohon?.listWithChildren] })"
-      >
-        <ReuseTreeTemplate
-          :items="item.children"
-          :level="level + 1"
-        />
-      </ul>
-    </ATreeItem>
+              <span
+                v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>]"
+                :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
+              >
+                <slot
+                  :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>)"
+                  v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
+                  :item="(item as Extract<T[number], { slot: string; }>)"
+                >
+                  {{ getItemLabel(item) }}
+                </slot>
+              </span>
+
+              <span
+                v-if="item.trailingIcon || item.children?.length || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>]"
+                :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
+              >
+                <slot
+                  :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>)"
+                  v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
+                  :item="(item as Extract<T[number], { slot: string; }>)"
+                >
+                  <PIcon
+                    v-if="item.trailingIcon"
+                    :name="item.trailingIcon"
+                    :class="pohon.linkTrailingIcon({
+                      class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
+                    })"
+                  />
+                  <PIcon
+                    v-else-if="item.children?.length"
+                    :name="trailingIcon ?? appConfig.pohon.icons.chevronDown"
+                    :class="pohon.linkTrailingIcon({
+                      class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
+                    })"
+                  />
+                </slot>
+              </span>
+            </slot>
+          </button>
+        </slot>
+
+        <ul
+          v-if="nested && item.children?.length && isExpanded"
+          role="group"
+          :class="pohon.listWithChildren({
+            class: [props.pohon?.listWithChildren, item.pohon?.listWithChildren],
+          })"
+        >
+          <ReuseTreeTemplate
+            :items="item.children"
+            :level="level + 1"
+          />
+        </ul>
+      </ATreeItem>
+    </li>
   </DefineItemTemplate>
 
   <DefineTreeTemplate v-slot="{ items, level }">
