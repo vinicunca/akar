@@ -84,6 +84,10 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    */
   color?: Calendar['variants']['color'];
   /**
+   * @defaultValue 'solid'
+   */
+  variant?: Calendar['variants']['variant'];
+  /**
    * @defaultValue 'md'
    */
   size?: Calendar['variants']['size'];
@@ -146,6 +150,7 @@ const rootProps = useForwardPropsEmits(
     'modelValue',
     'defaultValue',
     'color',
+    'variant',
     'size',
     'monthControls',
     'yearControls',
@@ -186,6 +191,7 @@ const pohon = computed(() =>
     ...(appConfig.pohon?.calendar || {}),
   })({
     color: props.color,
+    variant: props.variant,
     size: props.size,
   }),
 );

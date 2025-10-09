@@ -30,6 +30,12 @@ export default (options: Required<PohonModuleOptions>) => {
           cellTrigger: '',
         },
       },
+      variant: {
+        solid: '',
+        outline: '',
+        soft: '',
+        subtle: '',
+      },
       size: {
         xs: {
           heading: '',
@@ -66,6 +72,7 @@ export default (options: Required<PohonModuleOptions>) => {
     defaultVariants: {
       size: 'md',
       color: 'primary',
+      variant: 'solid',
     },
   };
 };
