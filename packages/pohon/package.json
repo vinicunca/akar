@@ -155,6 +155,7 @@
     "@nuxtjs/color-mode": "catalog:pohon",
     "@standard-schema/spec": "catalog:pohon",
     "@tanstack/vue-table": "catalog:pohon",
+    "@tanstack/vue-virtual": "catalog:core",
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/perkakas": "catalog:core",
     "@vueuse/core": "catalog:core",

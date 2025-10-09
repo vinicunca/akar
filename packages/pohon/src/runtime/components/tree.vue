@@ -105,7 +105,16 @@ export interface PTreeProps<T extends Array<PTreeItem> = Array<PTreeItem>, M ext
 
 export type PTreeEmits<T extends Array<PTreeItem> = Array<PTreeItem>, M extends boolean = false> = ATreeRootEmits<T[number], M>;
 
-type SlotProps<T extends PTreeItem> = (props: { item: T; index: number; level: number; expanded: boolean; selected: boolean }) => any;
+type SlotProps<T extends PTreeItem> = (props: {
+  item: T;
+  index: number;
+  level: number;
+  expanded: boolean;
+  selected: boolean;
+  indeterminate: boolean | undefined;
+  handleSelect: () => void;
+  handleToggle: () => void;
+}) => any;
 
 export type PTreeSlots<
   T extends Array<PTreeItem> = Array<PTreeItem>,
@@ -115,7 +124,15 @@ export type PTreeSlots<
   'item-leading': SlotProps<T[number]>;
   'item-label': SlotProps<T[number]>;
   'item-trailing': SlotProps<T[number]>;
-} & DynamicSlots<T[number], undefined, { index: number; level: number; expanded: boolean; selected: boolean }>;
+} & DynamicSlots<T[number], undefined, {
+  index: number;
+  level: number;
+  expanded: boolean;
+  selected: boolean;
+  indeterminate: boolean | undefined;
+  handleSelect: () => void;
+  handleToggle: () => void;
+}>;
 </script>
 
 <script setup lang="ts" generic="T extends PTreeItem[], M extends boolean = false">
@@ -245,7 +262,7 @@ const defaultExpanded = computed(() =>
 <template>
   <DefineItemTemplate v-slot="{ item, index, level }">
     <ATreeItem
-      v-slot="{ isExpanded, isSelected }"
+      v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
       :level="level"
       :value="item"
       :class="!!nested && level > 1
@@ -258,7 +275,15 @@ const defaultExpanded = computed(() =>
     >
       <slot
         :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof PTreeSlots<T>)"
-        v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+        v-bind="{
+          index,
+          level,
+          expanded: isExpanded,
+          selected: isSelected,
+          indeterminate: isIndeterminate,
+          handleSelect,
+          handleToggle,
+        }"
         :item="(item as Extract<T[number], { slot: string; }>)"
       >
         <button
@@ -274,12 +299,28 @@ const defaultExpanded = computed(() =>
         >
           <slot
             :name="((item.slot || 'item') as keyof PTreeSlots<T>)"
-            v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+            v-bind="{
+              index,
+              level,
+              expanded: isExpanded,
+              selected: isSelected,
+              indeterminate: isIndeterminate,
+              handleSelect,
+              handleToggle,
+            }"
             :item="(item as Extract<T[number], { slot: string; }>)"
           >
             <slot
               :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PTreeSlots<T>)"
-              v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+              v-bind="{
+                index,
+                level,
+                expanded: isExpanded,
+                selected: isSelected,
+                indeterminate: isIndeterminate,
+                handleSelect,
+                handleToggle,
+              }"
               :item="(item as Extract<T[number], { slot: string; }>)"
             >
               <PIcon
@@ -303,7 +344,15 @@ const defaultExpanded = computed(() =>
             >
               <slot
                 :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>)"
-                v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+                v-bind="{
+                  index,
+                  level,
+                  expanded: isExpanded,
+                  selected: isSelected,
+                  indeterminate: isIndeterminate,
+                  handleSelect,
+                  handleToggle,
+                }"
                 :item="(item as Extract<T[number], { slot: string; }>)"
               >
                 {{ getItemLabel(item) }}
@@ -316,7 +365,15 @@ const defaultExpanded = computed(() =>
             >
               <slot
                 :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>)"
-                v-bind="{ index, level, expanded: isExpanded, selected: isSelected }"
+                v-bind="{
+                  index,
+                  level,
+                  expanded: isExpanded,
+                  selected: isSelected,
+                  indeterminate: isIndeterminate,
+                  handleSelect,
+                  handleToggle,
+                }"
                 :item="(item as Extract<T[number], { slot: string; }>)"
               >
                 <PIcon
