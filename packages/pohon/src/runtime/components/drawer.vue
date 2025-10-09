@@ -127,10 +127,6 @@ const rootProps = useForwardPropsEmits(
 const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => props.content);
 const contentEvents = computed(() => {
-  const defaultEvents = {
-    closeAutoFocus: (event: Event) => event.preventDefault(),
-  };
-
   if (!props.dismissible) {
     const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'];
 
@@ -143,11 +139,11 @@ const contentEvents = computed(() => {
 
         return acc;
       },
-      defaultEvents as Record<typeof events[number] | keyof typeof defaultEvents, (event: Event) => void>,
+      {} as Record<typeof events[number], (event: Event) => void>,
     );
   }
 
-  return defaultEvents;
+  return {};
 });
 
 const pohon = computed(() =>

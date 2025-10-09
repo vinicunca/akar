@@ -194,7 +194,6 @@ const props = withDefaults(
 );
 const emits = defineEmits<PSelectEmits<T, VK, M>>();
 const slots = defineSlots<PSelectSlots<T, VK, M>>();
-
 const appConfig = useAppConfig() as Select['AppConfig'];
 
 const rootProps = useForwardPropsEmits(
