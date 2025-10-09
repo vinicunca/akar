@@ -14,13 +14,14 @@ import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/popover';
 
 type Popover = ComponentConfig<typeof theme, AppConfig, 'popover'>;
+type PopoverMode = 'click' | 'hover';
 
-export interface PPopoverProps extends APopoverRootProps, Pick<AHoverCardRootProps, 'openDelay' | 'closeDelay'> {
+export interface PPopoverProps<M extends PopoverMode = PopoverMode> extends APopoverRootProps, Pick<AHoverCardRootProps, 'openDelay' | 'closeDelay'> {
   /**
    * The display mode of the popover.
    * @defaultValue 'click'
    */
-  mode?: 'click' | 'hover';
+  mode?: M;
   /**
    * The content of the popover.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
@@ -55,14 +56,16 @@ export interface PPopoverEmits extends APopoverRootEmits {
   'close:prevent': [];
 }
 
-export interface PPopoverSlots {
+type SlotProps<M extends PopoverMode = PopoverMode> = [M] extends ['hover'] ? object : { close: () => void };
+
+export interface PPopoverSlots<M extends PopoverMode = PopoverMode> {
   default: (props: { open: boolean }) => any;
-  content: (props?: object) => any;
-  anchor: (props?: object) => any;
+  content: (props?: SlotProps<M>) => any;
+  anchor: (props?: SlotProps<M>) => any;
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="M extends PopoverMode">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
@@ -73,17 +76,17 @@ import { usePortal } from '../composables/use-portal';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
-  defineProps<PPopoverProps>(),
+  defineProps<PPopoverProps<M>>(),
   {
     portal: true,
-    mode: 'click',
+    mode: 'click' as never,
     openDelay: 0,
     closeDelay: 0,
     dismissible: true,
   },
 );
 const emits = defineEmits<PPopoverEmits>();
-const slots = defineSlots<PPopoverSlots>();
+const slots = defineSlots<PPopoverSlots<M>>();
 
 const appConfig = useAppConfig() as Popover['AppConfig'];
 
@@ -129,7 +132,7 @@ const Component = computed(() => props.mode === 'hover' ? AHoverCard : APopover)
 
 <template>
   <Component.Root
-    v-slot="{ open }"
+    v-slot="{ open, close }: { open: boolean; close?: () => void }"
     v-bind="rootProps"
   >
     <Component.Trigger
@@ -145,7 +148,10 @@ const Component = computed(() => props.mode === 'hover' ? AHoverCard : APopover)
       v-if="'Anchor' in Component && !!slots.anchor"
       as-child
     >
-      <slot name="anchor" />
+      <slot
+        name="anchor"
+        v-bind="((close ? { close } : {}) as SlotProps<M>)"
+      />
     </Component.Anchor>
 
     <Component.Portal v-bind="portalProps">
@@ -154,7 +160,10 @@ const Component = computed(() => props.mode === 'hover' ? AHoverCard : APopover)
         :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
         v-on="contentEvents"
       >
-        <slot name="content" />
+        <slot
+          name="content"
+          v-bind="((close ? { close } : {}) as SlotProps<M>)"
+        />
 
         <Component.Arrow
           v-if="!!arrow"
