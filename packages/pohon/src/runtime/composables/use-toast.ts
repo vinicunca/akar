@@ -1,7 +1,10 @@
+import type { InjectionKey, Ref } from 'vue';
 import type { PToastEmits, PToastProps } from '../types';
 import type { EmitsToProps } from '../types/utils';
 import { useState } from '#imports';
-import { nextTick, ref } from 'vue';
+import { inject, nextTick, ref } from 'vue';
+
+export const toastMaxInjectionKey: InjectionKey<Ref<number | undefined>> = Symbol('nuxt-ui.toast-max');
 
 export interface Toast extends Omit<PToastProps, 'defaultOpen'>, EmitsToProps<PToastEmits> {
   id: string | number;
@@ -10,7 +13,7 @@ export interface Toast extends Omit<PToastProps, 'defaultOpen'>, EmitsToProps<PT
 
 export function useToast() {
   const toasts = useState<Array<Toast>>('toasts', () => []);
-  const maxToasts = 5;
+  const max = inject(toastMaxInjectionKey, undefined);
   const running = ref(false);
   const queue: Array<Toast> = [];
 
@@ -29,7 +32,7 @@ export function useToast() {
       // eslint-disable-next-line no-await-in-loop
       await nextTick();
 
-      toasts.value = [...toasts.value, toast].slice(-maxToasts);
+      toasts.value = [...toasts.value, toast].slice(-(max?.value ?? 5));
     }
 
     running.value = false;

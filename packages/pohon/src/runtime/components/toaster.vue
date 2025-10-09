@@ -27,6 +27,11 @@ export interface PToasterProps extends Omit<AToastProviderProps, 'swipeDirection
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement;
+  /**
+   * Maximum number of toasts to display at once.
+   * @defaultValue 5
+   */
+  max?: number;
   class?: any;
   pohon?: Toaster['slots'];
 }
@@ -50,9 +55,9 @@ import {
   AToastViewport,
   useForwardProps,
 } from 'akar';
-import { computed, ref, toRef } from 'vue';
+import { computed, provide, ref, toRef } from 'vue';
 import { usePortal } from '../composables/use-portal';
-import { useToast } from '../composables/use-toast';
+import { toastMaxInjectionKey, useToast } from '../composables/use-toast';
 import { uv } from '../utils/uv';
 import PToast from './toast.vue';
 
@@ -63,6 +68,7 @@ const props = withDefaults(
     portal: true,
     duration: 5000,
     progress: true,
+    max: 5,
   },
 );
 
@@ -70,6 +76,7 @@ defineSlots<PToasterSlots>();
 
 const { toasts, remove } = useToast();
 const appConfig = useAppConfig() as Toaster['AppConfig'];
+provide(toastMaxInjectionKey, toRef(() => props.max));
 
 const providerProps = useForwardProps(reactivePick(props, 'duration', 'label', 'swipeThreshold'));
 const portalProps = usePortal(toRef(() => props.portal));
