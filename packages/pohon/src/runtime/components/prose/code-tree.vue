@@ -161,7 +161,6 @@ onBeforeUpdate(() => rerenderCount.value++);
         <button
           type="button"
           :class="pohon.link({ class: props.pohon?.link, active: isSelected })"
-          tabindex="0"
         >
           <PIcon
             v-if="item.children?.length"

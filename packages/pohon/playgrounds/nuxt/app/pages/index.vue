@@ -4,8 +4,9 @@ const value = ref('Backlog');
 </script>
 
 <template>
-  <PSelect
-    v-model="value"
-    :items="items"
+  <PInput
+    icon="i-mdi:email-outline"
+    leading
+    placeholder="Email"
   />
 </template>

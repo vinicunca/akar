@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ATreeRootEmits, ATreeRootProps } from 'akar';
+import type { ATreeItemSelectEvent, ATreeItemToggleEvent, ATreeRootEmits, ATreeRootProps } from 'akar';
 import type { IconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -23,8 +23,8 @@ export type PTreeItem = {
   disabled?: boolean;
   slot?: string;
   children?: Array<PTreeItem>;
-  onToggle?: (event: Event) => void;
-  onSelect?: (event?: Event) => void;
+  onToggle?: (event: ATreeItemToggleEvent<PTreeItem>) => void;
+  onSelect?: (event?: ATreeItemSelectEvent<PTreeItem>) => void;
   class?: any;
   pohon?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>;
   [key: string]: any;
@@ -35,7 +35,7 @@ export interface PTreeProps<T extends Array<PTreeItem> = Array<PTreeItem>, M ext
    * The element or component this component should render as.
    * @defaultValue 'ul'
    */
-  as?: any;
+  as?: any | { root?: any; link?: any };
   /**
    * @defaultValue 'primary'
    */
@@ -99,6 +99,8 @@ export interface PTreeProps<T extends Array<PTreeItem> = Array<PTreeItem>, M ext
      */
     estimateSize?: number;
   };
+  onSelect?: (e: ATreeItemSelectEvent<T[number]>, item: T[number]) => void;
+  onToggle?: (e: ATreeItemToggleEvent<T[number]>, item: T[number]) => void;
   class?: any;
   pohon?: Tree['slots'];
 }
@@ -137,7 +139,7 @@ export type PTreeSlots<
 
 <script setup lang="ts" generic="T extends PTreeItem[], M extends boolean = false">
 import { useAppConfig } from '#imports';
-import { isBoolean } from '@vinicunca/perkakas';
+import { isBoolean, isFunction, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import { ATreeItem, ATreeRoot, ATreeVirtualizer, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
@@ -164,7 +166,6 @@ const appConfig = useAppConfig() as Tree['AppConfig'];
 const rootProps = useForwardPropsEmits(
   reactivePick(
     props,
-    'as',
     'items',
     'multiple',
     'expanded',
@@ -174,6 +175,14 @@ const rootProps = useForwardPropsEmits(
   ),
   emits,
 );
+
+const as = computed(() => {
+  if (isString(props.as) || isFunction(props.as?.render)) {
+    return { root: props.as, link: 'button' };
+  }
+
+  return defu(props.as, { root: 'ul', link: 'button' });
+});
 
 const nested = computed(() => props.virtualize ? false : props.nested);
 
@@ -272,16 +281,17 @@ const defaultExpanded = computed(() =>
         :level="level"
         :value="item"
         as-child
-        @toggle="item.onToggle"
-        @select="item.onSelect"
+        @toggle="(item.onToggle ?? props.onToggle)?.($event, item)"
+        @select="(item.onSelect ?? props.onSelect)?.($event, item)"
       >
         <slot
           :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof PTreeSlots<T>)"
           v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
           :item="(item as Extract<T[number], { slot: string; }>)"
         >
-          <button
-            type="button"
+          <component
+            :is="as.link"
+            :type="as.link === 'button' ? 'button' : undefined"
             :disabled="item.disabled || disabled"
             :class="pohon.link({
               class: [props.pohon?.link, item.pohon?.link, item.class],
@@ -359,7 +369,7 @@ const defaultExpanded = computed(() =>
                 </slot>
               </span>
             </slot>
-          </button>
+          </component>
         </slot>
 
         <ul
@@ -391,6 +401,7 @@ const defaultExpanded = computed(() =>
   <ATreeRoot
     v-slot="{ flattenItems }"
     v-bind="{ ...rootProps, ...$attrs }"
+    :as="as.root"
     :model-value="modelValue"
     :default-value="defaultValue"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
