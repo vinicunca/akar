@@ -29,6 +29,7 @@ type ComboboxRootContext<T> = {
   ignoreFilter: Ref<boolean>;
   openOnFocus: Ref<boolean>;
   openOnClick: Ref<boolean>;
+  resetModelValueOnClear: Ref<boolean>;
 };
 
 export const [
@@ -74,6 +75,10 @@ export interface AComboboxRootProps<T = AcceptableValue> extends Omit<AListboxRo
    * When `true`, disable the default filters
    */
   ignoreFilter?: boolean;
+  /**
+   * When `true` the `modelValue` will be reset to `null` (or `[]` if `multiple`)
+   */
+  resetModelValueOnClear?: boolean;
 }
 </script>
 
@@ -99,6 +104,7 @@ const props = withDefaults(
     resetSearchTermOnSelect: true,
     openOnFocus: false,
     openOnClick: false,
+    resetModelValueOnClear: false,
   },
 );
 const emits = defineEmits<AComboboxRootEmits<T>>();
@@ -124,6 +130,7 @@ const {
   openOnFocus,
   openOnClick,
   dir: propDir,
+  resetModelValueOnClear,
 } = toRefs(props);
 
 const dir = useDirection(propDir);
@@ -266,6 +273,7 @@ provideComboboxRootContext({
   ignoreFilter,
   openOnFocus,
   openOnClick,
+  resetModelValueOnClear,
 });
 </script>
 
