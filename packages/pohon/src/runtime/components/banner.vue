@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, PButtonProps, PLinkProps } from '../types';
+import type { PButtonProps, PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/banner';
 
@@ -22,7 +22,7 @@ export interface PBannerProps {
    * The icon displayed next to the title.
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   title?: string;
   /**
    * Display a list of actions next to the title.
@@ -47,7 +47,7 @@ export interface PBannerProps {
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  closeIcon?: IconProps['name'];
+  closeIcon?: PIconProps['name'];
   class?: any;
   pohon?: Banner['slots'];
 }

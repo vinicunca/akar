@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { UseFileDialogReturn } from '@vueuse/core';
-import type { IconProps, PButtonProps } from '../types';
+import type { PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/file-upload';
 
@@ -20,7 +20,7 @@ export interface PFileUploadProps<M extends boolean = false> {
    * @defaultValue appConfig.pohon.icons.upload
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   label?: string;
   description?: string;
   /**
@@ -79,7 +79,7 @@ export interface PFileUploadProps<M extends boolean = false> {
    * @defaultValue appConfig.pohon.icons.file
    * @IconifyIcon
    */
-  fileIcon?: IconProps['name'];
+  fileIcon?: PIconProps['name'];
   /**
    * Configure the delete button for the file.
    * When `layout` is `grid`, the default is `{ color: 'neutral', variant: 'solid', size: 'xs' }`{lang="ts-type"}
@@ -91,7 +91,7 @@ export interface PFileUploadProps<M extends boolean = false> {
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  fileDeleteIcon?: IconProps['name'];
+  fileDeleteIcon?: PIconProps['name'];
   class?: any;
   pohon?: FileUpload['slots'];
 }

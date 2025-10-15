@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { AToastRootEmits, AToastRootProps } from 'akar';
-import type { IconProps, PAvatarProps, PButtonProps, PProgressProps } from '../types';
+import type { PAvatarProps, PButtonProps, PIconProps, PProgressProps } from '../types';
 import type { StringOrVNode } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/toast';
@@ -19,7 +19,7 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   avatar?: PAvatarProps;
   /**
    * @defaultValue 'primary'
@@ -41,7 +41,7 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  closeIcon?: IconProps['name'];
+  closeIcon?: PIconProps['name'];
   /**
    * Display a list of actions:
    * - under the title and description when orientation is `vertical`

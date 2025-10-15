@@ -5,7 +5,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import type { AListboxRootEmits, AListboxRootProps } from 'akar';
 import type { FuseResult } from 'fuse.js';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { IconProps, PAvatarProps, PButtonProps, PChipProps, PInputProps, PKbdProps, PLinkProps } from '../types';
+import type { PAvatarProps, PButtonProps, PChipProps, PIconProps, PInputProps, PKbdProps, PLinkProps } from '../types';
 import type { GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/command-palette';
@@ -19,7 +19,7 @@ export interface PCommandPaletteItem extends Omit<PLinkProps, 'type' | 'raw' | '
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   avatar?: PAvatarProps;
   chip?: PChipProps;
   kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
@@ -55,7 +55,7 @@ export interface PCommandPaletteGroup<T extends PCommandPaletteItem = PCommandPa
    * The icon displayed when an item is highlighted.
    * @IconifyIcon
    */
-  highlightedIcon?: IconProps['name'];
+  highlightedIcon?: PIconProps['name'];
 }
 
 export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PCommandPaletteGroup<any>, T extends PCommandPaletteItem = PCommandPaletteItem> extends Pick<AListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
@@ -69,19 +69,19 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * @defaultValue appConfig.pohon.icons.search
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.pohon.icons.check
    * @IconifyIcon
    */
-  selectedIcon?: IconProps['name'];
+  selectedIcon?: PIconProps['name'];
   /**
    * The icon displayed when an item has children.
    * @defaultValue appConfig.pohon.icons.chevronRight
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   /**
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
@@ -104,7 +104,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  closeIcon?: IconProps['name'];
+  closeIcon?: PIconProps['name'];
   /**
    * Display a button to navigate back in history.
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
@@ -116,7 +116,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * @defaultValue appConfig.pohon.icons.arrowLeft
    * @IconifyIcon
    */
-  backIcon?: IconProps['name'];
+  backIcon?: PIconProps['name'];
   groups?: Array<G>;
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).

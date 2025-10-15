@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 
-import type { IconProps, PAvatarProps, PButtonProps } from '../types';
+import type { PAvatarProps, PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/alert';
 
@@ -18,7 +18,7 @@ export interface PAlertProps {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   avatar?: PAvatarProps;
   /**
    * @defaultValue 'primary'
@@ -52,7 +52,7 @@ export interface PAlertProps {
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  closeIcon?: IconProps['name'];
+  closeIcon?: PIconProps['name'];
   class?: any;
   pohon?: Alert['slots'];
 }

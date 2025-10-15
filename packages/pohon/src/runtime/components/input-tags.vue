@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { AcceptableInputValue, ATagsInputRootEmits, ATagsInputRootProps } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { IconProps, PAvatarProps } from '../types';
+import type { PAvatarProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/input-tags';
 
@@ -39,7 +39,7 @@ export interface PInputTagsProps<T extends PInputTagItem = PInputTagItem> extend
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  deleteIcon?: IconProps['name'];
+  deleteIcon?: PIconProps['name'];
   /** Highlight the ring color like a focus state. */
   highlight?: boolean;
   class?: any;

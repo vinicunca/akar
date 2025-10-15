@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { AAccordionRootEmits, AAccordionRootProps } from 'akar';
-import type { IconProps } from '../types';
+import type { PIconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/accordion';
@@ -13,11 +13,11 @@ export interface PAccordionItem {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /**
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   slot?: string;
   content?: string;
   /** A unique value for the accordion item. Defaults to the index. */
@@ -40,7 +40,7 @@ export interface PAccordionProps<T extends PAccordionItem = PAccordionItem> exte
    * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'

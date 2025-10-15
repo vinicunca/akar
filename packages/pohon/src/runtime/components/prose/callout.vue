@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, PLinkProps } from '../../types';
+import type { PIconProps, PLinkProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/callout';
 
@@ -9,7 +9,7 @@ type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'pohon.p
 export interface ProseCalloutProps {
   to?: PLinkProps['to'];
   target?: PLinkProps['target'];
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /**
    * @defaultValue 'neutral'
    */

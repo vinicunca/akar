@@ -2,7 +2,7 @@
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
 import type { AAccordionRootEmits, AAccordionRootProps } from 'akar';
-import type { IconProps, PBadgeProps, PLinkProps } from '../../types';
+import type { PBadgeProps, PIconProps, PLinkProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-navigation';
 import { isNumber, isString } from '@vinicunca/perkakas';
@@ -13,7 +13,7 @@ export interface PContentNavigationLink extends ContentNavigationItem {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /**
    * Display a badge on the link.
    * `{ color: 'neutral', variant: 'outline', size: 'sm' }`{lang="ts-type"}
@@ -23,7 +23,7 @@ export interface PContentNavigationLink extends ContentNavigationItem {
   /**
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   disabled?: boolean;
   children?: Array<PContentNavigationLink>;
   defaultOpen?: boolean;
@@ -49,7 +49,7 @@ export interface PContentNavigationProps<T extends PContentNavigationLink = PCon
    * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   /**
    * @defaultValue 'primary'
    */

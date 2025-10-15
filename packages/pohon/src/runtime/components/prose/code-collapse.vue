@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps } from '../../types';
+import type { PIconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/code-collapse';
 
@@ -11,7 +11,7 @@ export interface ProseCodeCollapseProps {
    * The icon displayed to toggle the code.
    * @defaultValue appConfig.pohon.icons.chevronDown
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /**
    * The name displayed in the trigger label.
    * @defaultValue t('prose.codeCollapse.name')

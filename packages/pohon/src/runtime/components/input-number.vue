@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ANumberFieldRootProps } from 'akar';
-import type { IconProps, PButtonProps } from '../types';
+import type { PButtonProps, PIconProps } from '../types';
 import type { ModelModifiers } from '../types/input';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/input-number';
@@ -36,7 +36,7 @@ export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelVal
    * @defaultValue appConfig.pohon.icons.plus
    * @IconifyIcon
    */
-  incrementIcon?: IconProps['name'];
+  incrementIcon?: PIconProps['name'];
   /** Disable the increment button. */
   incrementDisabled?: boolean;
   /**
@@ -49,7 +49,7 @@ export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelVal
    * @defaultValue appConfig.pohon.icons.minus
    * @IconifyIcon
    */
-  decrementIcon?: IconProps['name'];
+  decrementIcon?: PIconProps['name'];
   /** Disable the decrement button. */
   decrementDisabled?: boolean;
   autofocus?: boolean;

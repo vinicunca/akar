@@ -1,12 +1,16 @@
 <script setup lang="ts">
-const items = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
-const value = ref('Backlog');
+import { PDashboardNavbar } from '#components';
 </script>
 
 <template>
-  <PInput
-    icon="i-mdi:email-outline"
-    leading
-    placeholder="Email"
-  />
+  <PDashboardNavbar class="inset-x-0 top-0 absolute lg:border-b-0" />
+
+  <div class="text-center space-y-4">
+    <h1 class="text-2xl color-primary font-bold">
+      Playground
+    </h1>
+    <p class="color-text-muted mx-auto max-w-sm">
+      Explore and test all Nuxt UI components in an interactive environment.
+    </p>
+  </div>
 </template>

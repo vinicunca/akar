@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ASwitchRootProps } from 'akar';
-import type { IconProps } from '../types';
+import type { PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/switch';
 
@@ -28,17 +28,17 @@ export interface PSwitchProps extends Pick<ASwitchRootProps, 'disabled' | 'id' |
    * @defaultValue appConfig.pohon.icons.loading
    * @IconifyIcon
    */
-  loadingIcon?: IconProps['name'];
+  loadingIcon?: PIconProps['name'];
   /**
    * Display an icon when the switch is checked.
    * @IconifyIcon
    */
-  checkedIcon?: IconProps['name'];
+  checkedIcon?: PIconProps['name'];
   /**
    * Display an icon when the switch is unchecked.
    * @IconifyIcon
    */
-  uncheckedIcon?: IconProps['name'];
+  uncheckedIcon?: PIconProps['name'];
   label?: string;
   description?: string;
   class?: any;

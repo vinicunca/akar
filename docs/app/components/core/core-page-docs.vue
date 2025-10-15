@@ -5,6 +5,7 @@ import {
   ContentRenderer,
   MDC,
   PBreadcrumb,
+  PButton,
   PContentToc,
   PIcon,
   PLink,
@@ -105,7 +106,18 @@ const communityLinks = computed(() => [
             </h1>
 
             <div class="flex flex-wrap gap-1.5 items-center">
-              buttons
+              <PButton
+                v-for="link in page.links"
+                :key="link.label"
+                color="neutral"
+                variant="outline"
+                :target="link.to?.startsWith('http') ? '_blank' : undefined"
+                v-bind="link"
+              >
+                <!-- <template v-if="link.avatar" #leading>
+            <UAvatar v-bind="link.avatar" size="2xs" :alt="`${link.label} avatar`" />
+          </template> -->
+              </PButton>
             </div>
           </div>
 

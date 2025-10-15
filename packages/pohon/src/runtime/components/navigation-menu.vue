@@ -8,7 +8,7 @@ import type {
   ANavigationMenuRootEmits,
   ANavigationMenuRootProps,
 } from 'akar';
-import type { IconProps, PAvatarProps, PBadgeProps, PLinkProps, PPopoverProps, PTooltipProps } from '../types';
+import type { PAvatarProps, PBadgeProps, PIconProps, PLinkProps, PPopoverProps, PTooltipProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/navigation-menu';
@@ -26,7 +26,7 @@ export interface PNavigationMenuItem extends Omit<PLinkProps, 'type' | 'raw' | '
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   avatar?: PAvatarProps;
   /**
    * Display a badge on the item.
@@ -46,7 +46,7 @@ export interface PNavigationMenuItem extends Omit<PLinkProps, 'type' | 'raw' | '
   /**
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   /**
    * The type of the item.
    * The `label` type is only displayed in `vertical` orientation.
@@ -80,14 +80,14 @@ export interface PNavigationMenuProps<T extends ArrayOrNested<PNavigationMenuIte
    * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   /**
    * The icon displayed when the item is an external link.
    * Set to `false` to hide the external icon.
    * @defaultValue appConfig.pohon.icons.external
    * @IconifyIcon
    */
-  externalIcon?: boolean | IconProps['name'];
+  externalIcon?: boolean | PIconProps['name'];
   items?: T;
   /**
    * @defaultValue 'primary'

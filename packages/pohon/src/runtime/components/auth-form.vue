@@ -2,10 +2,10 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type {
-  IconProps,
   PButtonProps,
   PFormFieldProps,
   PFormProps,
+  PIconProps,
   PPinInputProps,
   PSeparatorProps,
 } from '../types';
@@ -36,7 +36,7 @@ export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F ext
    * The icon displayed above the title.
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   title?: string;
   description?: string;
   fields?: Array<F>;

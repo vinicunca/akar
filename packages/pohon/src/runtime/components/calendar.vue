@@ -9,7 +9,7 @@ import type {
   ARangeCalendarRootProps,
   DateRange,
 } from 'akar';
-import type { IconProps, PButtonProps } from '../types';
+import type { PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/calendar';
 
@@ -40,7 +40,7 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    * @defaultValue appConfig.pohon.icons.chevronDoubleRight
    * @IconifyIcon
    */
-  nextYearIcon?: IconProps['name'];
+  nextYearIcon?: PIconProps['name'];
   /**
    * Configure the next year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -51,7 +51,7 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    * @defaultValue appConfig.pohon.icons.chevronRight
    * @IconifyIcon
    */
-  nextMonthIcon?: IconProps['name'];
+  nextMonthIcon?: PIconProps['name'];
   /**
    * Configure the next month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -62,7 +62,7 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    * @defaultValue appConfig.pohon.icons.chevronDoubleLeft
    * @IconifyIcon
    */
-  prevYearIcon?: IconProps['name'];
+  prevYearIcon?: PIconProps['name'];
   /**
    * Configure the prev year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -73,7 +73,7 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    * @defaultValue appConfig.pohon.icons.chevronLeft
    * @IconifyIcon
    */
-  prevMonthIcon?: IconProps['name'];
+  prevMonthIcon?: PIconProps['name'];
   /**
    * Configure the prev month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}

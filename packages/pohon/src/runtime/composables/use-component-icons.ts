@@ -1,5 +1,5 @@
 import type { MaybeRefOrGetter } from 'vue';
-import type { IconProps, PAvatarProps } from '../types';
+import type { PAvatarProps, PIconProps } from '../types';
 import { useAppConfig } from '#imports';
 import { computed, toValue } from 'vue';
 
@@ -8,7 +8,7 @@ export interface UseComponentIconsProps {
    * Display an icon based on the `leading` and `trailing` props.
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /** Display an avatar on the left side. */
   avatar?: PAvatarProps;
   /** When `true`, the icon will be displayed on the left side. */
@@ -17,14 +17,14 @@ export interface UseComponentIconsProps {
    * Display an icon on the left side.
    * @IconifyIcon
    */
-  leadingIcon?: IconProps['name'];
+  leadingIcon?: PIconProps['name'];
   /** When `true`, the icon will be displayed on the right side. */
   trailing?: boolean;
   /**
    * Display an icon on the right side.
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   /** When `true`, the loading icon will be displayed. */
   loading?: boolean;
   /**
@@ -32,7 +32,7 @@ export interface UseComponentIconsProps {
    * @defaultValue appConfig.pohon.icons.loading
    * @IconifyIcon
    */
-  loadingIcon?: IconProps['name'];
+  loadingIcon?: PIconProps['name'];
 }
 
 export function useComponentIcons(componentProps: MaybeRefOrGetter<UseComponentIconsProps>) {

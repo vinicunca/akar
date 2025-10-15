@@ -8,7 +8,7 @@ import type {
   ADropdownMenuRootEmits,
   ADropdownMenuRootProps,
 } from 'akar';
-import type { IconProps, PAvatarProps, PKbdProps, PLinkProps } from '../types';
+import type { PAvatarProps, PIconProps, PKbdProps, PLinkProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dropdown-menu';
@@ -20,7 +20,7 @@ export interface PDropdownMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'cu
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   color?: DropdownMenu['variants']['color'];
   avatar?: PAvatarProps;
   content?: Omit<ADropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ADropdownMenuContentEmits>>;
@@ -55,20 +55,20 @@ export interface PDropdownMenuProps<T extends ArrayOrNested<PDropdownMenuItem> =
    * @defaultValue appConfig.pohon.icons.check
    * @IconifyIcon
    */
-  checkedIcon?: IconProps['name'];
+  checkedIcon?: PIconProps['name'];
   /**
    * The icon displayed when an item is loading.
    * @defaultValue appConfig.pohon.icons.loading
    * @IconifyIcon
    */
-  loadingIcon?: IconProps['name'];
+  loadingIcon?: PIconProps['name'];
   /**
    * The icon displayed when the item is an external link.
    * Set to `false` to hide the external icon.
    * @defaultValue appConfig.pohon.icons.external
    * @IconifyIcon
    */
-  externalIcon?: boolean | IconProps['name'];
+  externalIcon?: boolean | PIconProps['name'];
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }

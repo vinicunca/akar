@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ASeparatorProps } from 'akar';
-import type { IconProps, PAvatarProps } from '../types';
+import type { PAvatarProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/separator';
 
@@ -19,7 +19,7 @@ export interface PSeparatorProps extends Pick<ASeparatorProps, 'decorative'> {
    * Display an icon in the middle.
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /** Display an avatar in the middle. */
   avatar?: PAvatarProps;
   /**

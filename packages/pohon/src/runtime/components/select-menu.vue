@@ -8,7 +8,7 @@ import type {
   AComboboxRootProps,
 } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { IconProps, PAvatarProps, PChipProps, PInputProps } from '../types';
+import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
 import type {
   AcceptableValue,
   ArrayOrNested,
@@ -30,7 +30,7 @@ export type PSelectMenuItem = PSelectMenuValue | {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   avatar?: PAvatarProps;
   chip?: PChipProps;
   /**
@@ -74,13 +74,13 @@ export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = Arr
    * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.pohon.icons.check
    * @IconifyIcon
    */
-  selectedIcon?: IconProps['name'];
+  selectedIcon?: PIconProps['name'];
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }

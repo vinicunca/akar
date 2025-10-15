@@ -6,7 +6,7 @@ import type {
   ADialogRootEmits,
   ADialogRootProps,
 } from 'akar';
-import type { IconProps, PButtonProps } from '../types';
+import type { PButtonProps, PIconProps } from '../types';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dialog';
@@ -49,7 +49,7 @@ export interface PDialogProps extends ADialogRootProps {
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  closeIcon?: IconProps['name'];
+  closeIcon?: PIconProps['name'];
   /**
    * When `false`, the dialog will not close when clicking outside or pressing escape.
    * @defaultValue true

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ACheckboxRootProps } from 'akar';
-import type { IconProps } from '../types';
+import type { PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/checkbox';
 
@@ -37,13 +37,13 @@ export interface PCheckboxProps extends Pick<ACheckboxRootProps, 'disabled' | 'r
    * @defaultValue appConfig.pohon.icons.check
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /**
    * The icon displayed when the checkbox is indeterminate.
    * @defaultValue appConfig.pohon.icons.minus
    * @IconifyIcon
    */
-  indeterminateIcon?: IconProps['name'];
+  indeterminateIcon?: PIconProps['name'];
   class?: any;
   pohon?: Checkbox['slots'];
 }

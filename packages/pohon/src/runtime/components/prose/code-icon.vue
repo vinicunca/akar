@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps } from '../../types';
+import type { PIconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/code-icon';
 
 type ProseCodeIcon = ComponentConfig<typeof theme, AppConfig, 'codeIcon', 'pohon.prose'>;
 
 export interface ProseCodeIconProps {
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   filename?: string;
 }
 </script>

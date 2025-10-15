@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, PAvatarProps, PLinkProps } from '../types';
+import type { PAvatarProps, PIconProps, PLinkProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/breadcrumb';
@@ -13,7 +13,7 @@ export interface PBreadcrumbItem extends Omit<PLinkProps, 'raw' | 'custom'> {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   avatar?: PAvatarProps;
   slot?: string;
   class?: any;
@@ -33,7 +33,7 @@ export interface PBreadcrumbProps<T extends PBreadcrumbItem = PBreadcrumbItem> {
    * @defaultValue appConfig.pohon.icons.chevronRight
    * @IconifyIcon
    */
-  separatorIcon?: IconProps['name'];
+  separatorIcon?: PIconProps['name'];
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'

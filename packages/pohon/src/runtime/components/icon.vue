@@ -1,5 +1,5 @@
 <script lang="ts">
-export interface IconProps {
+export interface PIconProps {
   name: string | object;
   mode?: 'svg' | 'css';
   size?: string | number;
@@ -18,7 +18,7 @@ import { isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 
-const props = defineProps<IconProps>();
+const props = defineProps<PIconProps>();
 
 const iconProps = useForwardProps(
   reactivePick(props, 'name', 'mode', 'size', 'customize'),

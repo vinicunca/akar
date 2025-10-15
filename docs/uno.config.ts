@@ -41,6 +41,7 @@ export default defineConfig({
       `dark:[&_code]:color-${color}-300`,
       `color-${color}-600`,
       `[&_code]:color-${color}-600`,
+      `after:bg-${color}`,
     ]),
   ],
 

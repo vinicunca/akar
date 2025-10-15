@@ -6,10 +6,10 @@ import type {
   AContextMenuContentProps as AkarContextMenuContentProps,
 } from 'akar';
 import type {
-  IconProps,
   PAvatarProps,
   PContextMenuItem,
   PContextMenuSlots,
+  PIconProps,
   PKbdProps,
 } from '../types';
 import type { ArrayOrNested, GetItemKeys } from '../types/utils';
@@ -25,15 +25,15 @@ interface ContextMenuContentProps<T extends ArrayOrNested<PContextMenuItem>> ext
   /**
    * @IconifyIcon
    */
-  checkedIcon?: IconProps['name'];
+  checkedIcon?: PIconProps['name'];
   /**
    * @IconifyIcon
    */
-  loadingIcon?: IconProps['name'];
+  loadingIcon?: PIconProps['name'];
   /**
    * @IconifyIcon
    */
-  externalIcon?: boolean | IconProps['name'];
+  externalIcon?: boolean | PIconProps['name'];
   class?: any;
   pohon: { [K in keyof Required<ContextMenu['slots']>]: (props?: Record<string, any>) => string };
   pohonOverride?: ContextMenu['slots'];

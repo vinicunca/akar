@@ -4,13 +4,13 @@ import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import type {
-  IconProps,
   PButtonProps,
   PCommandPaletteGroup,
   PCommandPaletteItem,
   PCommandPaletteProps,
   PCommandPaletteSlots,
   PDialogProps,
+  PIconProps,
   PInputProps,
   PLinkProps,
 } from '../../types';
@@ -26,7 +26,7 @@ export interface PContentSearchLink extends Omit<PLinkProps, 'custom'> {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   children?: Array<PContentSearchLink>;
 }
 
@@ -43,7 +43,7 @@ export interface PContentSearchItem extends Omit<PLinkProps, 'custom'>, PCommand
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
 }
 
 export interface PContentSearchProps<T extends PContentSearchLink = PContentSearchLink> extends Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
@@ -52,7 +52,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
    * @defaultValue appConfig.pohon.icons.search
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /**
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
@@ -70,7 +70,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
    * @defaultValue appConfig.pohon.icons.loading
    * @IconifyIcon
    */
-  loadingIcon?: IconProps['name'];
+  loadingIcon?: PIconProps['name'];
   /**
    * Display a close button in the input (useful when inside a Dialog for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -83,7 +83,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  closeIcon?: IconProps['name'];
+  closeIcon?: PIconProps['name'];
   /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://akara.vinicunca.dev/pohon/composables/define-shortcuts))
    * @defaultValue 'meta_k'

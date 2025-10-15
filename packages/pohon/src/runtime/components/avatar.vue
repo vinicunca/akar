@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, PChipProps } from '../types';
+import type { PChipProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/avatar';
 
@@ -17,7 +17,7 @@ export interface PAvatarProps {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   text?: string;
   /**
    * @defaultValue 'md'

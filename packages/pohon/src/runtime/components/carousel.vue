@@ -8,7 +8,7 @@ import type { AutoplayOptionsType } from 'embla-carousel-autoplay';
 import type { ClassNamesOptionsType } from 'embla-carousel-class-names';
 import type { FadeOptionsType } from 'embla-carousel-fade';
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures';
-import type { IconProps, PButtonProps } from '../types';
+import type { PButtonProps, PIconProps } from '../types';
 import type { AcceptableValue } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/carousel';
@@ -38,7 +38,7 @@ export interface PCarouselProps<T extends PCarouselItem = PCarouselItem> extends
    * @defaultValue appConfig.pohon.icons.arrowLeft
    * @IconifyIcon
    */
-  prevIcon?: IconProps['name'];
+  prevIcon?: PIconProps['name'];
   /**
    * Configure the next button when arrows are enabled.
    * @defaultValue { size: 'md', color: 'neutral', variant: 'link' }
@@ -49,7 +49,7 @@ export interface PCarouselProps<T extends PCarouselItem = PCarouselItem> extends
    * @defaultValue appConfig.pohon.icons.arrowRight
    * @IconifyIcon
    */
-  nextIcon?: IconProps['name'];
+  nextIcon?: PIconProps['name'];
   /**
    * Display prev and next buttons to scroll the carousel.
    * @defaultValue false

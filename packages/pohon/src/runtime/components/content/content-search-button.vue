@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, PButtonProps, PButtonSlots, PKbdProps, PTooltipProps } from '../../types';
+import type { PButtonProps, PButtonSlots, PIconProps, PKbdProps, PTooltipProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-search-button';
 
@@ -12,7 +12,7 @@ export interface PContentSearchButtonProps {
    * @defaultValue appConfig.pohon.icons.search
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   /**
    * The label displayed in the button.
    * @defaultValue t('contentSearchButton.label')

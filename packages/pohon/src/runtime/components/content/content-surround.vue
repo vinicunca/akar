@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps } from '../../types';
+import type { PIconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-surround';
 
@@ -12,7 +12,7 @@ export interface PContentSurroundLink extends ContentNavigationItem {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   class?: any;
   pohon?: Pick<ContentSurround['slots'], 'link' | 'linkLeading' | 'linkLeadingIcon' | 'linkTitle' | 'linkDescription'>;
 }
@@ -28,13 +28,13 @@ export interface PContentSurroundProps<T extends PContentSurroundLink = PContent
    * @defaultValue appConfig.pohon.icons.arrowLeft
    * @IconifyIcon
    */
-  prevIcon?: IconProps['name'];
+  prevIcon?: PIconProps['name'];
   /**
    * The icon displayed in the next link.
    * @defaultValue appConfig.pohon.icons.arrowRight
    * @IconifyIcon
    */
-  nextIcon?: IconProps['name'];
+  nextIcon?: PIconProps['name'];
   surround?: Array<T>;
   class?: any;
   pohon?: ContentSurround['slots'];
@@ -70,7 +70,7 @@ const appConfig = useAppConfig() as ContentSurround['AppConfig'];
 const [
   DefineLinkTemplate,
   ReuseLinkTemplate,
-] = createReusableTemplate<{ link?: PContentSurroundLink; icon: IconProps['name']; direction: 'left' | 'right' }>({
+] = createReusableTemplate<{ link?: PContentSurroundLink; icon: PIconProps['name']; direction: 'left' | 'right' }>({
   props: {
     link: Object,
     icon: String,

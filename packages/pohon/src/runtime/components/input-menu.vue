@@ -9,7 +9,7 @@ import type {
 } from 'akar';
 import type { InputHTMLAttributes } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { IconProps, PAvatarProps, PChipProps, PInputProps } from '../types';
+import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
 import type {
   AcceptableValue,
   ArrayOrNested,
@@ -31,7 +31,7 @@ export type PInputMenuItem = PInputMenuValue | {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   avatar?: PAvatarProps;
   chip?: PChipProps;
   /**
@@ -76,20 +76,20 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
    * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.pohon.icons.check
    * @IconifyIcon
    */
-  selectedIcon?: IconProps['name'];
+  selectedIcon?: PIconProps['name'];
   /**
    * The icon displayed to delete a tag.
    * Works only when `multiple` is `true`.
    * @defaultValue appConfig.pohon.icons.close
    * @IconifyIcon
    */
-  deleteIcon?: IconProps['name'];
+  deleteIcon?: PIconProps['name'];
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }

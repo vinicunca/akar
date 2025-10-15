@@ -5,7 +5,7 @@ import type {
   AStepperRootEmits,
   AStepperRootProps,
 } from 'akar';
-import type { IconProps } from '../types';
+import type { PIconProps } from '../types';
 import type { DynamicSlots } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/stepper';
@@ -20,7 +20,7 @@ export interface PStepperItem {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   content?: string;
   disabled?: boolean;
   class?: any;

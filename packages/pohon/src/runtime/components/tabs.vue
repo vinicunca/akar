@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ATabsRootEmits, ATabsRootProps } from 'akar';
-import type { IconProps, PAvatarProps, PBadgeProps } from '../types';
+import type { PAvatarProps, PBadgeProps, PIconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/tabs';
@@ -14,7 +14,7 @@ export interface PTabsItem {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   avatar?: PAvatarProps;
   /**
    * Display a badge on the item.

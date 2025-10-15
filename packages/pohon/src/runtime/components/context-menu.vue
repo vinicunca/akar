@@ -7,7 +7,7 @@ import type {
   AContextMenuRootEmits,
   AContextMenuRootProps,
 } from 'akar';
-import type { IconProps, PAvatarProps, PKbdProps, PLinkProps } from '../types';
+import type { PAvatarProps, PIconProps, PKbdProps, PLinkProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/context-menu';
@@ -19,7 +19,7 @@ export interface PContextMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'cus
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   color?: ContextMenu['variants']['color'];
   avatar?: PAvatarProps;
   content?: Omit<AContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<AContextMenuContentEmits>>;
@@ -54,20 +54,20 @@ export interface PContextMenuProps<T extends ArrayOrNested<PContextMenuItem> = A
    * @defaultValue appConfig.pohon.icons.check
    * @IconifyIcon
    */
-  checkedIcon?: IconProps['name'];
+  checkedIcon?: PIconProps['name'];
   /**
    * The icon displayed when an item is loading.
    * @defaultValue appConfig.pohon.icons.loading
    * @IconifyIcon
    */
-  loadingIcon?: IconProps['name'];
+  loadingIcon?: PIconProps['name'];
   /**
    * The icon displayed when the item is an external link.
    * Set to `false` to hide the external icon.
    * @defaultValue appConfig.pohon.icons.external
    * @IconifyIcon
    */
-  externalIcon?: boolean | IconProps['name'];
+  externalIcon?: boolean | PIconProps['name'];
   /** The content of the menu. */
   content?: Omit<AContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<AContextMenuContentEmits>>;
   /**

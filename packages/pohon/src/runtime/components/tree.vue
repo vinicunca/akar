@@ -2,7 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ATreeItemSelectEvent, ATreeItemToggleEvent, ATreeRootEmits, ATreeRootProps } from 'akar';
-import type { IconProps } from '../types';
+import type { PIconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/tree';
@@ -13,12 +13,12 @@ export type PTreeItem = {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   label?: string;
   /**
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   defaultExpanded?: boolean;
   disabled?: boolean;
   slot?: string;
@@ -56,19 +56,19 @@ export interface PTreeProps<T extends Array<PTreeItem> = Array<PTreeItem>, M ext
    * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
-  trailingIcon?: IconProps['name'];
+  trailingIcon?: PIconProps['name'];
   /**
    * The icon displayed when a parent node is expanded.
    * @defaultValue appConfig.pohon.icons.folderOpen
    * @IconifyIcon
    */
-  expandedIcon?: IconProps['name'];
+  expandedIcon?: PIconProps['name'];
   /**
    * The icon displayed when a parent node is collapsed.
    * @defaultValue appConfig.pohon.icons.folder
    * @IconifyIcon
    */
-  collapsedIcon?: IconProps['name'];
+  collapsedIcon?: PIconProps['name'];
   items?: T;
   /** The controlled value of the Tree. Can be bind as `v-model`. */
   modelValue?: M extends true ? Array<T[number]> : T[number];

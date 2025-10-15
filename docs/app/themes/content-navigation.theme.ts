@@ -62,7 +62,7 @@ export const contentNavigationTheme = {
       highlight: true,
       level: true,
       class: {
-        link: 'after:(rounded-full w-px block transition-colors inset-y-0.5 absolute -left-1.5)',
+        link: 'after:(content-empty rounded-full w-px block transition-colors inset-y-0.5 absolute -left-1.5)',
       },
     },
     {

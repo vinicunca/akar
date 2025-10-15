@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { APaginationRootEmits, APaginationRootProps } from 'akar';
-import type { IconProps, PButtonProps } from '../types';
+import type { PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/pagination';
 
@@ -18,31 +18,31 @@ export interface PPaginationProps extends Partial<Pick<APaginationRootProps, 'de
    * @defaultValue appConfig.pohon.icons.chevronDoubleLeft
    * @IconifyIcon
    */
-  firstIcon?: IconProps['name'];
+  firstIcon?: PIconProps['name'];
   /**
    * The icon to use for the previous page control.
    * @defaultValue appConfig.pohon.icons.chevronLeft
    * @IconifyIcon
    */
-  prevIcon?: IconProps['name'];
+  prevIcon?: PIconProps['name'];
   /**
    * The icon to use for the next page control.
    * @defaultValue appConfig.pohon.icons.chevronRight
    * @IconifyIcon
    */
-  nextIcon?: IconProps['name'];
+  nextIcon?: PIconProps['name'];
   /**
    * The icon to use for the last page control.
    * @defaultValue appConfig.pohon.icons.chevronDoubleRight
    * @IconifyIcon
    */
-  lastIcon?: IconProps['name'];
+  lastIcon?: PIconProps['name'];
   /**
    * The icon to use for the ellipsis control.
    * @defaultValue appConfig.pohon.icons.ellipsis
    * @IconifyIcon
    */
-  ellipsisIcon?: IconProps['name'];
+  ellipsisIcon?: PIconProps['name'];
   /**
    * The color of the pagination controls.
    * @defaultValue 'neutral'

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, PLinkProps } from '../../types';
+import type { PIconProps, PLinkProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/card';
 
@@ -9,7 +9,7 @@ type ProseCard = ComponentConfig<typeof theme, AppConfig, 'card', 'pohon.prose'>
 export interface ProseCardProps {
   to?: PLinkProps['to'];
   target?: PLinkProps['target'];
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   title?: string;
   description?: string;
   /**

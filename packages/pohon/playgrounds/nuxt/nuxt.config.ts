@@ -1,8 +1,12 @@
 export default defineNuxtConfig({
+  imports: {
+    autoImport: false,
+  },
+
   modules: [
     'pohon',
-    '@nuxt/content',
     '@nuxt/fonts',
+    '@unocss/nuxt',
   ],
 
   devtools: {
@@ -11,8 +15,7 @@ export default defineNuxtConfig({
 
   fonts: {
     families: [
-      { name: 'Geist', provider: 'fontsource', weights: ['100 900'] },
-      { name: 'Geist Mono', provider: 'fontsource', weights: ['100 900'] },
+      { name: 'Rubik', provider: 'fontsource', weights: ['100 900'] },
     ],
   },
 

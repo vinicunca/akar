@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, PAvatarProps } from '../types';
+import type { PAvatarProps, PIconProps } from '../types';
 import type { DynamicSlots } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/timeline';
@@ -12,7 +12,7 @@ export interface PTimelineItem {
   date?: string;
   title?: string;
   description?: string;
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   avatar?: PAvatarProps;
   value?: string | number;
   slot?: string;

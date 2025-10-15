@@ -209,6 +209,25 @@ defineExpose({
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
   >
+    <span
+      v-if="isLeading || !!avatar || !!slots.leading"
+      :class="pohon.leading({ class: props.pohon?.leading })"
+    >
+      <slot name="leading">
+        <PIcon
+          v-if="isLeading && leadingIconName"
+          :name="leadingIconName"
+          :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+        />
+        <PAvatar
+          v-else-if="!!avatar"
+          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
+          v-bind="avatar"
+          :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+        />
+      </slot>
+    </span>
+
     <input
       :id="id"
       ref="inputRef"
@@ -228,25 +247,6 @@ defineExpose({
     >
 
     <slot />
-
-    <span
-      v-if="isLeading || !!avatar || !!slots.leading"
-      :class="pohon.leading({ class: props.pohon?.leading })"
-    >
-      <slot name="leading">
-        <PIcon
-          v-if="isLeading && leadingIconName"
-          :name="leadingIconName"
-          :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
-        />
-        <PAvatar
-          v-else-if="!!avatar"
-          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
-          v-bind="avatar"
-          :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
-        />
-      </slot>
-    </span>
 
     <span
       v-if="isTrailing || !!slots.trailing"

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { IconProps, PLinkProps } from '../types';
+import type { PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/footer-columns';
 
@@ -11,7 +11,7 @@ export interface PFooterColumnLink extends Omit<PLinkProps, 'custom'> {
   /**
    * @IconifyIcon
    */
-  icon?: IconProps['name'];
+  icon?: PIconProps['name'];
   class?: any;
   pohon?: Pick<FooterColumns['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>;
 }

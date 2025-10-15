@@ -1,3 +1,4 @@
+import type { HookResult } from '@nuxt/schema';
 import {
   addComponentsDir,
   addImportsDir,
@@ -75,6 +76,14 @@ export interface PohonModuleOptions {
    * @defaultValue false
    */
   content?: boolean;
+}
+
+declare module '#app' {
+  interface RuntimeNuxtHooks {
+    'dashboard:search:toggle': () => HookResult;
+    'dashboard:sidebar:toggle': () => HookResult;
+    'dashboard:sidebar:collapse': (value: boolean) => HookResult;
+  }
 }
 
 export default defineNuxtModule<PohonModuleOptions>({

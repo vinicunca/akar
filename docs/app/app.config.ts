@@ -1,5 +1,6 @@
 import { defineAppConfig } from '#imports';
 import { breadcrumbTheme } from './themes/breadcrumb.theme';
+import { buttonTheme } from './themes/button.theme';
 import { collapsibleTheme } from './themes/collapsible.theme';
 import { BRANDS } from './themes/constant';
 import { containerTheme } from './themes/container.theme';
@@ -29,6 +30,7 @@ export default defineAppConfig({
       primary: 'purple',
     },
 
+    button: buttonTheme,
     breadcrumb: breadcrumbTheme,
     collapsible: collapsibleTheme,
     container: containerTheme,
