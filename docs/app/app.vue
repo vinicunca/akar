@@ -61,6 +61,8 @@ provide('navigation', rootNavigation);
       :height="2"
     />
 
+    <div class="data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg data-[state=closed]:(animate-out fade-out-0 zoom-out-95 slide-out-to-left-1/2) data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-left-1/2" />
+
     <div
       class="root"
     >

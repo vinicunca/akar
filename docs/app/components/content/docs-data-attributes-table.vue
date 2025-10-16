@@ -36,7 +36,7 @@ const props = defineProps<DataAttributesTableProps>();
           </ProseCode>
         </ProseTd>
 
-        <ProseTd class="uno-layer-vinicunca:align-middle">
+        <ProseTd class="akar:align-middle">
           <DocsHighlightInlineType
             v-if="Array.isArray(prop.values)"
             :type="prop.values.join(' | ')"

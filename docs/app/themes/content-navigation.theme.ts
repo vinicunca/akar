@@ -70,7 +70,7 @@ export const contentNavigationTheme = {
       active: false,
       variant: 'pill',
       class: {
-        link: 'hover:color-text-highlighted hover:before:bg-elevated/50 data-[state=open]:color-text-highlighted transition-colors before:transition-colors',
+        link: 'hover:color-text-highlighted hover:before:bg-background-elevated/50 data-[state=open]:color-text-highlighted transition-colors before:transition-colors',
         linkLeadingIcon: 'group-hover:color-text group-data-[state=open]:color-text transition-colors',
       },
     },

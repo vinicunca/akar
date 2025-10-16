@@ -34,7 +34,7 @@ const props = defineProps<CssVariablesTableProps>();
           </ProseCode>
         </ProseTd>
 
-        <ProseTd class="uno-layer-vinicunca:align-middle">
+        <ProseTd class="akar:align-middle">
           <span>
             {{ prop.description }}
           </span>

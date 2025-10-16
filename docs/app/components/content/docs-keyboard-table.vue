@@ -43,7 +43,7 @@ const props = defineProps<KeyboardTableProps>();
           </div>
         </ProseTd>
 
-        <ProseTd class="uno-layer-vinicunca:align-middle">
+        <ProseTd class="akar:align-middle">
           <MDC
             v-if="prop.description"
             :value="prop.description"

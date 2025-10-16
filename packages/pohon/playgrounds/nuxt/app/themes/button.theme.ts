@@ -7,13 +7,17 @@ import { BRANDS } from './constant';
 
 export const buttonTheme = {
   slots: {
-    base: 'font-medium rounded-md inline-flex transition-colors items-center aria-disabled:(opacity-75 cursor-not-allowed) disabled:(opacity-75 cursor-not-allowed)',
+    base: 'font-medium rounded-md inline-flex transition-colors-280 items-center aria-disabled:(opacity-75 cursor-not-allowed) disabled:(opacity-75 cursor-not-allowed)',
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     trailingIcon: 'shrink-0',
   },
   variants: {
+    fieldGroup: {
+      horizontal: 'first:not-[*:only-child]:rounded-e-none last:not-[*:only-child]:rounded-s-none not-last:not-first:rounded-none focus-visible:z-1',
+      vertical: 'first:not-[*:only-child]:rounded-b-none last:not-[*:only-child]:rounded-t-none not-last:not-first:rounded-none focus-visible:z-1',
+    },
     size: {
       xs: {
         base: 'px-2 py-1 text-xs gap-1',
@@ -57,32 +61,32 @@ export const buttonTheme = {
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'solid',
-      class: `color-text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}/75 disabled:bg-${color} aria-disabled:bg-${color} focus-visible:(outline-2 outline-offset-2) focus-visible:outline-${color}`,
+      class: `color-text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}-800 disabled:bg-${color} aria-disabled:bg-${color} shadow-md focus-visible:(outline-2 outline-offset-2) focus-visible:outline-${color}`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'outline',
-      class: `ring ring-inset ring-${color}/50 text-${color} hover:bg-${color}/10 active:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`,
+      class: `ring ring-inset ring-${color}/50 color-${color} hover:bg-${color}/10 active:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'soft',
-      class: `text-${color} bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 focus:outline-none focus-visible:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10`,
+      class: `color-${color} bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 focus:outline-none focus-visible:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'subtle',
-      class: `text-${color} ring ring-inset ring-${color}/25 bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`,
+      class: `color-${color} ring ring-inset ring-${color}/25 bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'ghost',
-      class: `text-${color} hover:bg-${color}/10 active:bg-${color}/10 focus:outline-none focus-visible:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`,
+      class: `color-${color} hover:bg-${color}/10 active:bg-${color}/10 focus:outline-none focus-visible:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'link',
-      class: `text-${color} hover:text-${color}/75 active:text-${color}/75 disabled:text-${color} aria-disabled:text-${color} focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`,
+      class: `color-${color} hover:color-${color}/75 active:color-${color}/75 disabled:color-${color} aria-disabled:color-${color} focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`,
     })),
     {
       color: 'neutral',
@@ -117,27 +121,27 @@ export const buttonTheme = {
     {
       size: 'xs',
       square: true,
-      class: 'p-1',
+      class: 'akar:p-1',
     },
     {
       size: 'sm',
       square: true,
-      class: 'p-1.5',
+      class: 'akar:p-1.5',
     },
     {
       size: 'md',
       square: true,
-      class: 'p-1.5',
+      class: 'akar:p-1.5',
     },
     {
       size: 'lg',
       square: true,
-      class: 'p-2',
+      class: 'akar:p-2',
     },
     {
       size: 'xl',
       square: true,
-      class: 'p-2',
+      class: 'akar:p-2',
     },
     {
       loading: true,

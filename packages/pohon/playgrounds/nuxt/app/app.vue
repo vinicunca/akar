@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import { useAppConfig, useRoute } from '#app';
-import { BaseLogo, BaseThemeDropdown, PApp, PDashboardGroup, PDashboardPanel, PDashboardSidebar } from '#components';
+import {
+  BaseLogo,
+  BaseThemeDropdown,
+  PApp,
+  PColorModeButton,
+  PDashboardGroup,
+  PDashboardPanel,
+  PDashboardSidebar,
+  PNavigationMenu,
+  PSeparator,
+} from '#components';
+import { provide, useNavigation } from '#imports';
 
 const route = useRoute();
 const appConfig = useAppConfig();
-// const { components, groups, items } = useNavigation()
+const { components, items } = useNavigation();
 
-// provide('components', components)
+provide('components', components);
 </script>
 
 <template>
@@ -28,23 +39,23 @@ const appConfig = useAppConfig();
           <div class="ms-auto flex items-center">
             <BaseThemeDropdown />
 
-            <!-- <UColorModeButton /> -->
+            <PColorModeButton />
           </div>
         </template>
 
         <!-- <UDashboardSearchButton /> -->
 
-        <!-- <UNavigationMenu
+        <PNavigationMenu
           :items="items"
           orientation="vertical"
-        /> -->
+        />
 
-        <!-- <USeparator type="dashed" /> -->
+        <PSeparator type="dashed" />
 
-        <!-- <UNavigationMenu
+        <PNavigationMenu
           :items="components"
           orientation="vertical"
-        /> -->
+        />
       </PDashboardSidebar>
 
       <PDashboardPanel :pohon="{ body: ['justify-center items-center', route.path.startsWith('/components') && 'mt-16'] }">
@@ -60,12 +71,16 @@ const appConfig = useAppConfig();
     </PDashboardGroup>
   </PApp>
 
-  <div class="color-text-inverted bg-background-inverted focus-visible:(outline-2 outline-outline-inverted outline-offset-2) active:bg-background-inverted/90 aria-disabled:bg-background-inverted disabled:bg-background-inverted hover:bg-background-inverted/90" />
+  <div class="data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg data-[state=closed]:(animate-out fade-out-0 zoom-out-95 slide-out-to-left-1/2) data-[state=open]:(animate-in fade-in-0 zoom-in-95 slide-in-from-left-1/2)" />
 </template>
 
 <style lang="postcss">
 :root {
   --pohon-header-height: 4rem;
+}
+
+html {
+  font-family: 'Rubik';
 }
 
 body {

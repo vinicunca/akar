@@ -36,7 +36,7 @@ export interface PAvatarSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { APrimitive, APrimitiveSlot } from 'akar';
+import { AAvatarFallback, AAvatarImage, AAvatarRoot, APrimitiveSlot } from 'akar';
 import { computed, ref, watch } from 'vue';
 import { useAvatarGroup } from '../composables/use-avatar-group';
 import { uv } from '../utils/uv';
@@ -97,13 +97,13 @@ function onError() {
 
 <template>
   <component
-    :is="props.chip ? PChip : APrimitive"
+    :is="props.chip ? PChip : AAvatarRoot"
     :as="as"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     :style="props.style"
   >
-    <img
+    <AAvatarImage
       v-if="src && !error"
       :src="src"
       :alt="alt"
@@ -112,7 +112,7 @@ function onError() {
       v-bind="$attrs"
       :class="pohon.image({ class: props.pohon?.image })"
       @error="onError"
-    >
+    />
 
     <APrimitiveSlot
       v-else
@@ -124,10 +124,12 @@ function onError() {
           :name="icon"
           :class="pohon.icon({ class: props.pohon?.icon })"
         />
-        <span
+        <AAvatarFallback
           v-else
           :class="pohon.fallback({ class: props.pohon?.fallback })"
-        >{{ fallback || '&nbsp;' }}</span>
+        >
+          {{ fallback || '&nbsp;' }}
+        </AAvatarFallback>
       </slot>
     </APrimitiveSlot>
   </component>

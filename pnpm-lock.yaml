@@ -89,8 +89,8 @@ catalogs:
       specifier: ^24.3.3
       version: 24.5.2
     '@vinicunca/perkakas':
-      specifier: ^1.7.1
-      version: 1.7.1
+      specifier: 1.8.0
+      version: 1.8.0
     '@vitejs/plugin-vue':
       specifier: ^6.0.1
       version: 6.0.1
@@ -156,8 +156,8 @@ catalogs:
       specifier: ^7.28.0
       version: 7.28.0
     '@vinicunca/unocss-preset':
-      specifier: 1.29.1
-      version: 1.29.1
+      specifier: 1.30.0
+      version: 1.30.0
     better-sqlite3:
       specifier: ^12.2.0
       version: 12.4.1
@@ -339,7 +339,7 @@ importers:
         version: 1.11.0(db0@0.3.2(better-sqlite3@12.4.1))(ioredis@5.8.0)(magicast@0.3.5)
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.7.1
+        version: 1.8.0
       '@vueuse/core':
         specifier: catalog:core
         version: 13.9.0(vue@3.5.21(typescript@5.9.2))
@@ -385,7 +385,7 @@ importers:
         version: 66.5.3(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3)
       '@vinicunca/unocss-preset':
         specifier: catalog:docs
-        version: 1.29.1(@vinicunca/perkakas@1.7.1)(unocss@66.5.3(@unocss/webpack@66.5.3(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
+        version: 1.30.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.3(@unocss/webpack@66.5.3(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
       fast-glob:
         specifier: catalog:docs
         version: 3.3.3
@@ -415,7 +415,7 @@ importers:
         version: 3.13.12(vue@3.5.21(typescript@5.9.2))
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.7.1
+        version: 1.8.0
       '@vueuse/core':
         specifier: catalog:core
         version: 13.9.0(vue@3.5.21(typescript@5.9.2))
@@ -548,7 +548,7 @@ importers:
         version: 66.5.3(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3(esbuild@0.25.10))
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.7.1
+        version: 1.8.0
       '@vueuse/core':
         specifier: catalog:core
         version: 13.9.0(vue@3.5.21(typescript@5.9.2))
@@ -682,7 +682,7 @@ importers:
         version: 66.5.3(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3)
       '@vinicunca/unocss-preset':
         specifier: catalog:docs
-        version: 1.29.1(@vinicunca/perkakas@1.7.1)(unocss@66.5.3(@unocss/webpack@66.5.3(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
+        version: 1.30.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.3(@unocss/webpack@66.5.3(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
       typescript:
         specifier: catalog:base
         version: 5.9.2
@@ -2908,12 +2908,12 @@ packages:
       svelte-eslint-parser:
         optional: true
 
-  '@vinicunca/perkakas@1.7.1':
-    resolution: {integrity: sha512-Ku00GkvAKvOmfpfyJvR8ib1EvnkkFXSpal1VR6ydLNxOP7VGpbinurhsumrSWz5n4NVF0/50UwgJ3PDo8mgV0Q==}
+  '@vinicunca/perkakas@1.8.0':
+    resolution: {integrity: sha512-6IJgdk9oPG0eX9+PZ8ccgBvDbj8hZaSbq+J95wX7eWgyrrNqzCkNH9lPf6Jffy22R7F41EW5AxlnPiQf1Wczyw==}
     engines: {node: '>=20.0.0'}
 
-  '@vinicunca/unocss-preset@1.29.1':
-    resolution: {integrity: sha512-7qhzLohfBzlDY7rjEGHdohK2z5Ysl8b2mUp9qj2CHUNcxx+aK6dLy7dYUlC8Yi9UlAqxhMTedkL64n2xrWaRbA==}
+  '@vinicunca/unocss-preset@1.30.0':
+    resolution: {integrity: sha512-F7F/wadIp069V7D+VBpYmwE5oH0IHD5+2V8JqMQqQQbAaCyAo4wXQPhYRj7yo7Vcs4OCwMn46FtZjvEvmxygGw==}
     peerDependencies:
       '@vinicunca/perkakas': ^1.7.1
       unocss: 66.5.3
@@ -10603,11 +10603,11 @@ snapshots:
       - typescript
       - vitest
 
-  '@vinicunca/perkakas@1.7.1':
+  '@vinicunca/perkakas@1.8.0':
     dependencies:
       type-fest: 4.41.0
 
-  '@vinicunca/unocss-preset@1.29.1(@vinicunca/perkakas@1.7.1)(unocss@66.5.3(@unocss/webpack@66.5.3(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))':
+  '@vinicunca/unocss-preset@1.30.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.3(@unocss/webpack@66.5.3(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))':
     dependencies:
       '@unocss/core': 66.5.3
       '@unocss/preset-icons': 66.5.3
@@ -10617,7 +10617,7 @@ snapshots:
       '@unocss/preset-wind4': 66.5.3
       '@unocss/transformer-directives': 66.5.3
       '@unocss/transformer-variant-group': 66.5.3
-      '@vinicunca/perkakas': 1.7.1
+      '@vinicunca/perkakas': 1.8.0
       defu: 6.1.4
       postcss: 8.5.6
       postcss-js: 5.0.1(postcss@8.5.6)
@@ -16112,7 +16112,7 @@ snapshots:
 
   unocss-variants@1.0.0:
     dependencies:
-      '@vinicunca/perkakas': 1.7.1
+      '@vinicunca/perkakas': 1.8.0
 
   unocss@66.5.3(@unocss/webpack@66.5.3(webpack@5.101.3(esbuild@0.25.10)))(postcss@8.5.6)(vite@7.1.9(@types/node@24.5.2)(jiti@2.5.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)):
     dependencies:
