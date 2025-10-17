@@ -20,7 +20,7 @@ const checkerOptions: MetaCheckerOptions = {
 };
 
 const tsconfigChecker = createChecker(
-  resolve(__dirname, '../../packages/core/tsconfig.app.json'),
+  resolve(__dirname, '../../tsconfig.app.json'),
   checkerOptions,
 );
 
@@ -34,7 +34,7 @@ const allComponents = fg.sync([
   '!src/**/stories/*.vue',
   '!src/**/*.story.vue',
 ], {
-  cwd: resolve(__dirname, '../../packages/core'),
+  cwd: resolve(__dirname, '../..'),
   absolute: true,
 });
 
@@ -103,7 +103,7 @@ export function generateMetaAkar() {
 // Utilities
 function getEventFromComponentPath(dir: string) {
   const files = readdirSync(
-    resolve(__dirname, '../../packages/core/src', dir),
+    resolve(__dirname, '../../src', dir),
     { withFileTypes: true },
   ).filter((file) => file.name.includes('.vue'));
 

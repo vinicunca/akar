@@ -114,14 +114,15 @@ catalogs:
     unplugin: ^2.3.10
     unplugin-auto-import: ^20.1.0
     zod: ^4.1.11
-  conflicts_akar_w:
-    akar: w
-  conflicts_akar_wo:
-    akar: wo
-  conflicts_akar_wor:
-    akar: wor
-  conflicts_akar_work:
-    akar: work
+  uno:
+    '@unocss/core': 66.5.4
+    '@unocss/preset-icons': 66.5.4
+    '@unocss/preset-mini': 66.5.4
+    '@unocss/preset-typography': 66.5.4
+    '@unocss/preset-web-fonts': 66.5.4
+    '@unocss/preset-wind4': 66.5.4
+    '@unocss/transformer-directives': 66.5.4
+    '@unocss/transformer-variant-group': 66.5.4
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - unrs-resolver
@@ -132,15 +133,3 @@ onlyBuiltDependencies:
   - sharp
   - simple-git-hooks
   - unrs-resolver
-catalog:
-  '@unocss/core': ^0.0.0
-  '@unocss/preset-icons': ^0.0.0
-  '@unocss/preset-mini': ^0.0.0
-  '@unocss/preset-typography': ^0.0.0
-  '@unocss/preset-web-fonts': ^0.0.0
-  '@unocss/preset-wind4': ^0.0.0
-  '@unocss/transformer-directives': ^0.0.0
-  '@unocss/transformer-variant-group': ^0.0.0
-  akar: 1.11.0
-  postcss: ^0.0.0
-  postcss-js: ^0.0.0

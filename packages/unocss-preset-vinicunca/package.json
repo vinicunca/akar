@@ -44,6 +44,8 @@
     "build": "tsdown",
     "stub": "tsdown --stub",
     "prepublishOnly": "pnpm run build",
+    "test": "vitest",
+    "test:update": "vitest --update",
     "publish:ci": "pnpm publish --access public --no-git-checks"
   },
   "peerDependencies": {
@@ -54,16 +56,14 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@unocss/core": "catalog:",
-    "@unocss/preset-icons": "catalog:",
-    "@unocss/preset-mini": "catalog:",
-    "@unocss/preset-typography": "catalog:",
-    "@unocss/preset-web-fonts": "catalog:",
-    "@unocss/preset-wind4": "catalog:",
-    "@unocss/transformer-directives": "catalog:",
-    "@unocss/transformer-variant-group": "catalog:",
-    "defu": "catalog:core",
-    "postcss": "catalog:",
-    "postcss-js": "catalog:"
+    "@unocss/core": "catalog:uno",
+    "@unocss/preset-icons": "catalog:uno",
+    "@unocss/preset-mini": "catalog:uno",
+    "@unocss/preset-typography": "catalog:uno",
+    "@unocss/preset-web-fonts": "catalog:uno",
+    "@unocss/preset-wind4": "catalog:uno",
+    "@unocss/transformer-directives": "catalog:uno",
+    "@unocss/transformer-variant-group": "catalog:uno",
+    "defu": "catalog:core"
   }
 }
