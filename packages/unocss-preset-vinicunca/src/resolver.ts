@@ -1,0 +1,231 @@
+/* eslint-disable no-await-in-loop */
+import type { Preset } from 'unocss';
+import type {
+  CustomStaticShortcuts,
+  PresetVinicuncaOptions,
+  ResolvedOptions,
+  VinicuncaAkarOptions,
+  VinicuncaTheme,
+} from './types';
+import {
+  isBoolean,
+  isObjectType,
+  isPlainObject,
+  isString,
+  mergeDeep,
+} from '@vinicunca/perkakas';
+import { defu } from 'defu';
+import {
+  DEFAULT_AKAR_OPTIONS,
+  DEFAULT_OPTIONS,
+  DEFAULT_PRESET_OPTIONS,
+} from './constants';
+import { cssObj2StrSync, resolveAnimation } from './utils';
+
+export async function resolveOptions(options: PresetVinicuncaOptions): Promise<ResolvedOptions> {
+  const optionsWithDefault = defu(
+    options,
+    DEFAULT_OPTIONS,
+  ) as Required<PresetVinicuncaOptions>;
+
+  if (optionsWithDefault.wind4 && optionsWithDefault.wind3) {
+    console.warn('wind3 and wind4 are mutually exclusive, only one can be enabled');
+    optionsWithDefault.wind3 = false;
+  }
+
+  if (!isString(optionsWithDefault.unColor)) {
+    optionsWithDefault.unColor = optionsWithDefault.unColor
+      ? '--un-color'
+      : false;
+  }
+
+  const presets = await resolvePresets(optionsWithDefault);
+  const transformers = await resolveTransformers(optionsWithDefault);
+  const {
+    theme: themeExtend,
+    shortcuts,
+    safelist,
+  } = resolveExtend(optionsWithDefault);
+
+  const theme_ = mergeDeep(
+    optionsWithDefault.theme,
+    themeExtend,
+  );
+
+  const enableAkar = Boolean(options.akar);
+
+  const layers: Preset['layers'] = {};
+
+  if (enableAkar) {
+    layers.akar = 10;
+  }
+
+  const variants: Preset['variants'] = [];
+
+  if (enableAkar) {
+    variants.push(
+      (matcher) => {
+        if (matcher.startsWith('akar:')) {
+          return {
+            matcher: matcher.replace('akar:', 'uno-layer-akar:'),
+          };
+        }
+      },
+    );
+  }
+
+  return {
+    ...optionsWithDefault,
+
+    theme: {
+      ...theme_,
+    },
+
+    meta: {
+      presets,
+      shortcuts,
+      transformers,
+      safelist,
+      layers,
+      variants,
+    },
+  };
+}
+
+async function resolvePresets(options: Required<PresetVinicuncaOptions>) {
+  const presets = [];
+
+  const presetMap = {
+    icons: import('@unocss/preset-icons').then((mod) => mod.presetIcons),
+    webFonts: import('@unocss/preset-web-fonts').then((mod) => mod.presetWebFonts),
+    typography: import('@unocss/preset-typography').then((mod) => mod.presetTypography),
+    wind3: import('unocss').then((m) => m.presetWind3),
+    wind4: import('unocss').then((m) => m.presetWind4),
+    scrollbar: import('./presets/scrollbar').then((mod) => mod.presetScrollbar),
+    magicCss: import('./presets/magic-css').then((mod) => mod.presetMagicss),
+    animation: import('./presets/animation').then((mod) => mod.presetAnimation),
+    fluid: import('./presets/fluid').then((mod) => mod.presetFluid),
+    akar: import('./presets/akar').then((mod) => mod.presetAkar),
+  };
+
+  for (const [key, preset] of Object.entries(presetMap)) {
+    const option = options[key as keyof typeof presetMap];
+    if (option) {
+      const p = await preset as any;
+      const defaultOptions = DEFAULT_PRESET_OPTIONS[key as keyof typeof DEFAULT_PRESET_OPTIONS] ?? {};
+      if (isPlainObject(option)) {
+        presets.push(p(
+          mergeDeep(
+            defaultOptions,
+            option,
+          ),
+        ));
+      } else {
+        presets.push(p(defaultOptions ?? {}));
+      }
+    }
+  }
+
+  return presets;
+}
+
+async function resolveTransformers(options: Required<PresetVinicuncaOptions>) {
+  const transformers = [];
+  const transformerMap = {
+    directives: import('unocss').then((m) => m.transformerDirectives),
+    variantGroup: import('unocss').then((m) => m.transformerVariantGroup),
+    alias: import('./transformer-alias').then((mod) => mod.transformerAlias),
+  };
+
+  for (const [key, transformer] of Object.entries(transformerMap)) {
+    const option = options[key as keyof typeof transformerMap];
+    if (option) {
+      const trans = await transformer as any;
+      transformers.push(
+        trans(
+          isBoolean(option) ? {} : option,
+        ),
+      );
+    }
+  }
+
+  return transformers;
+}
+
+export function resolveExtend(options: Required<PresetVinicuncaOptions>) {
+  const shortcuts_: CustomStaticShortcuts = [];
+  let {
+    animation = {},
+    keyframes = {},
+  } = options.theme.extend ?? {};
+  const safelist: Array<string> = [];
+
+  /**
+   * If akar is enabled we want to safelist the drawer animations.
+   * The drawer preflight uses these animations but they are not
+   * directly referenced in the code so we need to safelist them
+   * to ensure they are included in the final CSS.
+   */
+  const enableAkar = Boolean(options.akar);
+  let akarOptions = {} as VinicuncaAkarOptions;
+
+  if (enableAkar) {
+    akarOptions = defu(
+      options.akar,
+      DEFAULT_AKAR_OPTIONS,
+    );
+  }
+
+  if (enableAkar && akarOptions.enableDrawer) {
+    animation = mergeDeep(
+      animation,
+      akarOptions.animation ?? {},
+    );
+
+    keyframes = mergeDeep(
+      keyframes,
+      akarOptions.keyframes ?? {},
+    );
+
+    let akarAnimation = akarOptions.animation ?? {};
+    let akarKeyframes = akarOptions.keyframes ?? {};
+
+    if (isObjectType(options.akar)) {
+      akarAnimation = mergeDeep(
+        akarAnimation,
+        options.akar.animation ?? {},
+      );
+
+      akarKeyframes = mergeDeep(
+        akarKeyframes,
+        options.akar.keyframes ?? {},
+      );
+    }
+
+    const animationKeys = Object.keys(akarAnimation);
+    const keyframesKeys = Object.keys(akarKeyframes);
+
+    keyframesKeys.forEach((frameKey) => {
+      if (!animationKeys.includes(frameKey)) {
+        safelist.push(`animate-${frameKey}`);
+      }
+    });
+  }
+
+  // animation
+  const { animation: resolvedAnimation, shortcuts } = resolveAnimation(animation);
+  shortcuts_.push(...shortcuts);
+
+  // keyframes
+  resolvedAnimation.keyframes = {};
+
+  for (const key of Object.keys(keyframes)) {
+    resolvedAnimation.keyframes[key] = `{${cssObj2StrSync(keyframes[key])}}`;
+  }
+
+  return {
+    theme: { animation: resolvedAnimation } as VinicuncaTheme,
+    shortcuts: shortcuts_,
+    safelist,
+  };
+}

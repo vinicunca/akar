@@ -1,50 +1,69 @@
 {
-  "name": "@vinicunca/unocss-preset-monorepo",
+  "name": "@vinicunca/unocss-preset",
   "type": "module",
   "version": "1.31.0",
-  "packageManager": "pnpm@10.18.3",
-  "engines": {
-    "node": ">=20.0.0"
+  "description": "Opinionated UnoCSS preset",
+  "author": "praburangki<https://github.com/praburangki>",
+  "license": "MIT",
+  "homepage": "https://github.com/vinicunca/unocss-preset-vinicunca#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinicunca/unocss-preset-vinicunca.git"
   },
+  "bugs": {
+    "url": "https://github.com/vinicunca/unocss-preset-vinicunca/issues"
+  },
+  "keywords": [
+    "unocss",
+    "unocss-preset",
+    "unocss-preset-animation",
+    "unocss-preset-fluid"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "pnpm -r -F=./packages/* run build",
-    "stub": "pnpm -r -F=./packages/* --parallel run stub",
-    "dev": "pnpm stub",
-    "release": "bumpp -r",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "test": "vitest",
-    "test:update": "vitest --update",
-    "play": "pnpm -C playground run dev",
-    "taze": "taze major -wIrl",
-    "typecheck": "tsc --noEmit",
-    "publish:ci": "pnpm -F=./packages/core run publish:ci",
-    "build:docs": "pnpm -F=./docs run build",
-    "fb:deploy": "firebase deploy --only hosting:unocss"
+    "build": "tsdown",
+    "stub": "tsdown --stub",
+    "prepublishOnly": "pnpm run build",
+    "publish:ci": "pnpm publish --access public --no-git-checks"
   },
-  "devDependencies": {
-    "@types/node": "catalog:core",
-    "@vinicunca/eslint-config": "catalog:base",
+  "peerDependencies": {
     "@vinicunca/perkakas": "catalog:core",
-    "@vinicunca/unocss-preset": "workspace:*",
-    "eslint": "catalog:base",
-    "lint-staged": "catalog:base",
-    "magic-string": "catalog:pohon",
-    "prettier": "catalog:docs",
-    "simple-git-hooks": "catalog:base",
-    "taze": "catalog:base",
-    "tsdown": "catalog:core",
-    "typescript": "catalog:base",
-    "unocss": "catalog:base",
-    "vite": "catalog:core",
-    "vitest": "catalog:core"
+    "unocss": "catalog:base"
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
-  "lint-staged": {
-    "*.{js,ts,tsx,vue,md}": [
-      "eslint --cache --fix"
-    ]
+  "dependencies": {
+    "@unocss/core": "catalog:",
+    "@unocss/preset-icons": "catalog:",
+    "@unocss/preset-mini": "catalog:",
+    "@unocss/preset-typography": "catalog:",
+    "@unocss/preset-web-fonts": "catalog:",
+    "@unocss/preset-wind4": "catalog:",
+    "@unocss/transformer-directives": "catalog:",
+    "@unocss/transformer-variant-group": "catalog:",
+    "defu": "catalog:core",
+    "postcss": "catalog:",
+    "postcss-js": "catalog:"
   }
 }

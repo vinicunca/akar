@@ -20,7 +20,7 @@
   "dependencies": {
     "@nuxt/kit": "catalog:plugins",
     "@nuxt/schema": "catalog:plugins",
-    "akar": "link:../core",
+    "akar": "workspace:*",
     "unbuild": "catalog:plugins",
     "unplugin-vue-components": "catalog:plugins"
   }
