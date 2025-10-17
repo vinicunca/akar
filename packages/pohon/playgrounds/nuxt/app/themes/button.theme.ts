@@ -61,32 +61,32 @@ export const buttonTheme = {
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'solid',
-      class: `color-text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}-800 disabled:bg-${color} aria-disabled:bg-${color} shadow-md focus-visible:(outline-2 outline-offset-2) focus-visible:outline-${color}`,
+      class: `color-text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}-800 disabled:bg-${color} aria-disabled:bg-${color} shadow-md focus-visible:(outline-2 outline-offset-2) focus-visible:outline-${color} dark:active:bg-${color}-300`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'outline',
-      class: `ring ring-inset ring-${color}/50 color-${color} hover:bg-${color}/10 active:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`,
+      class: `ring ring-inset ring-${color}/50 color-${color} hover:bg-${color}/10 active:(bg-primary-500 color-white) disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-${color} dark:active:bg-${color}-300 dark:active:color-text-inverted`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'soft',
-      class: `color-${color} bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 focus:outline-none focus-visible:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10`,
+      class: `color-${color} bg-${color}/10 hover:bg-${color}/15 active:bg-${color}-200 focus:outline-none focus-visible:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10 dark:active:bg-${color}-300 dark:active:color-text-inverted`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'subtle',
-      class: `color-${color} ring ring-inset ring-${color}/25 bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`,
+      class: `color-${color} ring ring-inset ring-${color}/25 active:bg-${color}-200 bg-${color}/10 hover:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-${color} dark:active:bg-${color}-300 dark:active:color-text-inverted`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'ghost',
-      class: `color-${color} hover:bg-${color}/10 active:bg-${color}/10 focus:outline-none focus-visible:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`,
+      class: `color-${color} hover:bg-${color}/10 active:bg-${color}-200 focus:outline-none focus-visible:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent dark:active:bg-${color}-300 dark:active:color-text-inverted`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'link',
-      class: `color-${color} hover:color-${color}/75 active:color-${color}/75 disabled:color-${color} aria-disabled:color-${color} focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`,
+      class: `color-${color} hover:color-${color}/75 active:color-${color}-800 disabled:color-${color} aria-disabled:color-${color} focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color} dark:active:color-${color}-400`,
     })),
     {
       color: 'neutral',

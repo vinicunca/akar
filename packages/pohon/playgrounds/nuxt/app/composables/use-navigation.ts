@@ -5,6 +5,7 @@ const components = [
   // 'alert',
   'avatar',
   'button',
+  'input',
 ].map((component) => ({
   label: toSentenceCase(component.split('/').pop() as string),
   icon: 'i-lucide-box',

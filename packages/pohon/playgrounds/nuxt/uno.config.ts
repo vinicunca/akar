@@ -33,7 +33,6 @@ export default defineConfig({
     ...BRANDS.flatMap((color) => [
       `color-${color}`,
       `color-${color}/75`,
-      `before:bg-${color}/10`,
       `data-[highlighted]:color-${color}`,
       `group-data-[highlighted]:color-${color}`,
       `group-data-[state=open]:color-${color}`,
@@ -48,9 +47,11 @@ export default defineConfig({
       `hover:bg-${color}/10`,
       `hover:bg-${color}/15`,
       `hover:bg-${color}/75`,
+      `active:bg-${color}`,
       `active:bg-${color}/10`,
       `active:bg-${color}/15`,
       `active:bg-${color}/75`,
+      `active:bg-${color}-200`,
       `active:bg-${color}-800`,
       `disabled:bg-${color}`,
       `disabled:bg-${color}/10`,
@@ -59,14 +60,23 @@ export default defineConfig({
       `focus-visible:bg-${color}/10`,
       `focus-visible:bg-${color}/15`,
       `after:bg-${color}`,
+      `before:bg-${color}/10`,
+      `dark:active:bg-${color}-300`,
+      `dark:active:bg-${color}-400`,
 
+      `ring-${color}`,
       `ring-${color}/25`,
       `ring-${color}/50`,
       `focus-visible:ring-${color}`,
+      `akar:ring-${color}`,
 
       `focus-visible:before:ring-${color}`,
 
       `focus-visible:outline-${color}`,
+
+      'focus:ring-2',
+      'focus:ring-inset',
+      `focus:ring-${color}`,
     ]),
   ],
 });

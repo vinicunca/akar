@@ -80,7 +80,7 @@ provide('components', components);
 }
 
 html {
-  font-family: 'Rubik';
+  font-family: 'Inter';
 }
 
 body {
