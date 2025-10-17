@@ -28,6 +28,7 @@
     "pub:release": "cd packages/core && pnpm pub:release"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.7",
     "@commitlint/cli": "catalog:base",
     "@commitlint/config-conventional": "catalog:base",
     "@vinicunca/eslint-config": "catalog:base",
