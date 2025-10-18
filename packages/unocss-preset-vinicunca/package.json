@@ -24,6 +24,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./pohon": {
+      "types": "./dist/pohon.d.ts",
+      "import": "./dist/pohon.js"
     }
   },
   "main": "./dist/index.js",
@@ -42,7 +46,7 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "stub": "tsdown --stub",
+    "stub": "tsdown --watch",
     "prepublishOnly": "pnpm run build",
     "test": "vitest",
     "test:update": "vitest --update",
@@ -64,6 +68,7 @@
     "@unocss/preset-wind4": "catalog:uno",
     "@unocss/transformer-directives": "catalog:uno",
     "@unocss/transformer-variant-group": "catalog:uno",
-    "defu": "catalog:core"
+    "defu": "catalog:core",
+    "tsdown": "catalog:core"
   }
 }

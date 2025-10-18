@@ -70,7 +70,6 @@ catalogs:
     '@babel/traverse': ^7.28.4
     '@nuxt/image': ^1.11.0
     '@types/babel__traverse': ^7.28.0
-    '@vinicunca/unocss-preset': 1.31.0
     better-sqlite3: ^12.2.0
     fast-glob: ^3.3.3
     nuxt-component-meta: ^0.14.0

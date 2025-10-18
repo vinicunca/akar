@@ -1,10 +1,17 @@
 import { presetVinicunca } from '@vinicunca/unocss-preset';
 import { defineConfig } from 'unocss';
 
-import { BRANDS } from './app/themes/constant';
-
 export default defineConfig({
   outputToCssLayers: true,
+
+  content: {
+    pipeline: {
+      include: [
+        /\.(vue|svelte|[jt]sx|vine.ts|mdx?|astro|elm|php|phtml|html)($|\?)/,
+        /.*\/unocss-preset-vinicunca\/.*pohon.js$/,
+      ],
+    },
+  },
 
   presets: [
     presetVinicunca({
@@ -30,7 +37,8 @@ export default defineConfig({
   safelist: [
     'isolate',
 
-    ...BRANDS.flatMap((color) => [
+    // ...BRANDS.flatMap((color) => [
+    ...[].flatMap((color) => [
       `color-${color}`,
       `color-${color}/75`,
       `data-[highlighted]:color-${color}`,

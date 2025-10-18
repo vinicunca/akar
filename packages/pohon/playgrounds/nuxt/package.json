@@ -17,7 +17,7 @@
   "devDependencies": {
     "@iconify/json": "catalog:base",
     "@unocss/nuxt": "catalog:pohon",
-    "@vinicunca/unocss-preset": "catalog:docs",
+    "@vinicunca/unocss-preset": "workspace:*",
     "typescript": "catalog:base",
     "unocss": "catalog:base",
     "vue-tsc": "catalog:core"
