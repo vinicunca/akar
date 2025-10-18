@@ -1,8 +1,7 @@
 import type { PresetVinicuncaOptions, VinicuncaAkarOptions } from '../src/types';
-import { describe } from 'node:test';
 import { pick } from '@vinicunca/perkakas';
 import { createGenerator } from 'unocss';
-import { expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { presetVinicunca } from '../src';
 
 async function getGenerator(
