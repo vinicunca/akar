@@ -1,8 +1,8 @@
 import { toSentenceCase } from '@vinicunca/perkakas';
 
 const components = [
-  // 'accordion',
-  // 'alert',
+  'accordion',
+  'alert',
   'avatar',
   'button',
   'input',

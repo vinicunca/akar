@@ -1,6 +1,9 @@
 import { defineAppConfig } from '#imports';
+import { accordionTheme } from '~/themes/accordion.theme';
+import { alertTheme } from '~/themes/alert.theme';
 import { avatarThemes } from '~/themes/avatar.theme';
 import { buttonTheme } from '~/themes/button.theme';
+import { cardTheme } from '~/themes/card.theme';
 import { chipTheme } from '~/themes/chip.theme';
 import { dashboardTheme } from '~/themes/dashboard.theme';
 import { dialogTheme } from '~/themes/dialog.theme';
@@ -17,8 +20,11 @@ export default defineAppConfig({
     duration: 5000,
   },
   pohon: {
+    accordion: accordionTheme,
+    alert: alertTheme,
     ...avatarThemes,
     button: buttonTheme,
+    card: cardTheme,
     chip: chipTheme,
     ...dashboardTheme,
     dialog: dialogTheme,
