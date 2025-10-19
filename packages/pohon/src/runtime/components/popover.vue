@@ -60,7 +60,7 @@ type SlotProps<M extends PopoverMode = PopoverMode> = [M] extends ['hover'] ? ob
 
 export interface PPopoverSlots<M extends PopoverMode = PopoverMode> {
   default: (props: { open: boolean }) => any;
-  content: (props?: SlotProps<M>) => any;
+  content: (props: SlotProps<M>) => any;
   anchor: (props?: SlotProps<M>) => any;
 }
 </script>

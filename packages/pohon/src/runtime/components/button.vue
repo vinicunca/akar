@@ -36,9 +36,9 @@ export interface PButtonProps extends UseComponentIconsProps, Omit<PLinkProps, '
 }
 
 export interface PButtonSlots {
-  leading: (props?: object) => any;
-  default: (props?: object) => any;
-  trailing: (props?: object) => any;
+  leading: (props: { pohon: Button['pohon'] }) => any;
+  default: (props: { pohon: Button['pohon'] }) => any;
+  trailing: (props: { pohon: Button['pohon'] }) => any;
 }
 </script>
 
@@ -98,18 +98,21 @@ const {
 const pohon = computed(() =>
   uv({
     extend: uv(theme),
-    ...defu({
-      variants: {
-        active: {
-          true: {
-            base: mergeClasses(appConfig.pohon?.button?.variants?.active?.true?.base, props.activeClass),
-          },
-          false: {
-            base: mergeClasses(appConfig.pohon?.button?.variants?.active?.false?.base, props.inactiveClass),
+    ...defu(
+      {
+        variants: {
+          active: {
+            true: {
+              base: mergeClasses(appConfig.pohon?.button?.variants?.active?.true?.base, props.activeClass),
+            },
+            false: {
+              base: mergeClasses(appConfig.pohon?.button?.variants?.active?.false?.base, props.inactiveClass),
+            },
           },
         },
       },
-    }, appConfig.pohon?.button || {}),
+      appConfig.pohon?.button || {},
+    ),
   })({
     color: props.color,
     variant: props.variant,
@@ -142,7 +145,10 @@ const pohon = computed(() =>
       })"
       @click="onClickWrapper"
     >
-      <slot name="leading">
+      <slot
+        name="leading"
+        :pohon="pohon"
+      >
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
@@ -156,7 +162,7 @@ const pohon = computed(() =>
         />
       </slot>
 
-      <slot>
+      <slot :pohon="pohon">
         <span
           v-if="isNonNullish(label)"
           :class="pohon.label({ class: props.pohon?.label, active })"
@@ -165,7 +171,10 @@ const pohon = computed(() =>
         </span>
       </slot>
 
-      <slot name="trailing">
+      <slot
+        name="trailing"
+        :pohon="pohon"
+      >
         <PIcon
           v-if="isTrailing && trailingIconName"
           :name="trailingIconName"

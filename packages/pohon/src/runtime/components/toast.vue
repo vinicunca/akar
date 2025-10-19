@@ -62,11 +62,12 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
 export interface PToastEmits extends AToastRootEmits {}
 
 export interface PToastSlots {
-  leading: (props?: object) => any;
+  leading: (props: { pohon: Toast['pohon'] }) => any;
   title: (props?: object) => any;
   description: (props?: object) => any;
   actions: (props?: object) => any;
-  close: (props: { pohon: { [K in keyof Required<Toast['slots']>]: (props?: Record<string, any>) => string } }) => any;
+  close: (props: { pohon: Toast['pohon'] }) => any;
+
 }
 </script>
 
@@ -144,7 +145,10 @@ defineExpose({
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     :style="{ '--height': height }"
   >
-    <slot name="leading">
+    <slot
+      name="leading"
+      :pohon="pohon"
+    >
       <PAvatar
         v-if="avatar"
         :size="((props.pohon?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"

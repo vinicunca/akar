@@ -64,7 +64,7 @@ function useKbd_() {
       return kbdKeysSpecificMap[value as KbdKeySpecific];
     }
 
-    return kbdKeysMap[value as KbdKey] || value.toUpperCase();
+    return kbdKeysMap[value as KbdKey] || value;
   }
 
   return {

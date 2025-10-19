@@ -150,7 +150,7 @@ export interface PNavigationMenuProps<T extends ArrayOrNested<PNavigationMenuIte
 
 export interface PNavigationMenuEmits extends ANavigationMenuRootEmits {}
 
-type SlotProps<T extends PNavigationMenuItem> = (props: { item: T; index: number; active?: boolean }) => any;
+type SlotProps<T extends PNavigationMenuItem> = (props: { item: T; index: number; active?: boolean; pohon: NavigationMenu['pohon'] }) => any;
 
 export type NavigationMenuSlots<
   A extends ArrayOrNested<PNavigationMenuItem> = ArrayOrNested<PNavigationMenuItem>,
@@ -158,12 +158,14 @@ export type NavigationMenuSlots<
 > = {
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
-  'item-label': SlotProps<T>;
+  'item-label': (props: { item: T; index: number; active?: boolean }) => any;
   'item-trailing': SlotProps<T>;
-  'item-content': SlotProps<T>;
+  'item-content': SlotProps<T> & { close?: () => void };
   'list-leading': (props?: object) => any;
   'list-trailing': (props?: object) => any;
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing' | 'content', { index: number; active?: boolean }>;
+}
+& DynamicSlots<MergeTypes<T>, 'label', { index: number; active?: boolean; pohon: NavigationMenu['pohon'] }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing' | 'content', { index: number; active?: boolean; pohon: NavigationMenu['pohon'] }>;
 
 </script>
 
@@ -301,12 +303,15 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
       :name="((item.slot || 'item') as keyof NavigationMenuSlots<T>)"
       :item="item"
       :index="index"
+      :active="active"
+      :pohon="pohon"
     >
       <slot
         :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof NavigationMenuSlots<T>)"
         :item="item"
         :active="active"
         :index="index"
+        :pohon="pohon"
       >
         <PAvatar
           v-if="item.avatar"
@@ -374,6 +379,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           :item="item"
           :active="active"
           :index="index"
+          :pohon="pohon"
         >
           <PBadge
             v-if="item.badge !== undefined"
@@ -443,12 +449,14 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
               />
             </PLinkBase>
 
-            <template #content>
+            <template #content="{ close }">
               <slot
                 :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)"
                 :item="item"
                 :active="active || item.active"
                 :index="index"
+                :pohon="pohon"
+                :close="close"
               >
                 <ul :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })">
                   <li :class="pohon.childLabel({ class: [props.pohon?.childLabel, item.pohon?.childLabel] })">
@@ -535,6 +543,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
             :item="item"
             :active="active || item.active"
             :index="index"
+            :pohon="pohon"
           >
             <ul :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })">
               <li

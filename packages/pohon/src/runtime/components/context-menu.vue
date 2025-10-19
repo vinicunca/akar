@@ -87,7 +87,7 @@ export interface PContextMenuProps<T extends ArrayOrNested<PContextMenuItem> = A
 
 export interface PContextMenuEmits extends AContextMenuRootEmits {}
 
-type SlotProps<T extends PContextMenuItem> = (props: { item: T; active?: boolean; index: number }) => any;
+type SlotProps<T extends PContextMenuItem> = (props: { item: T; active?: boolean; index: number; pohon: ContextMenu['pohon'] }) => any;
 
 export type PContextMenuSlots<
   A extends ArrayOrNested<PContextMenuItem> = ArrayOrNested<PContextMenuItem>,
@@ -96,11 +96,13 @@ export type PContextMenuSlots<
   'default': (props?: object) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
-  'item-label': SlotProps<T>;
+  'item-label': (props: { item: T; active?: boolean; index: number }) => any;
   'item-trailing': SlotProps<T>;
   'content-top': (props?: object) => any;
   'content-bottom': (props?: object) => any;
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean; index: number }>;
+}
+& DynamicSlots<MergeTypes<T>, 'label', { active?: boolean; index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean; index: number; pohon: ContextMenu['pohon'] }>;
 
 </script>
 

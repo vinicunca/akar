@@ -65,7 +65,7 @@ export type PStepperEmits<T extends PStepperItem = PStepperItem> = Omit<AStepper
 type SlotProps<T extends PStepperItem> = (props: { item: T }) => any;
 
 export type PStepperSlots<T extends PStepperItem = PStepperItem> = {
-  indicator: SlotProps<T>;
+  indicator: (props: { item: T; pohon: Stepper['pohon'] }) => any;
   title: SlotProps<T>;
   description: SlotProps<T>;
   content: SlotProps<T>;
@@ -173,6 +173,7 @@ defineExpose({
               <slot
                 name="indicator"
                 :item="item"
+                :pohon="pohon"
               >
                 <PIcon
                   v-if="item.icon"

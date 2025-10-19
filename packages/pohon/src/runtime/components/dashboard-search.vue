@@ -76,7 +76,7 @@ export interface PDashboardSearchProps<T extends PCommandPaletteItem = PCommandP
 }
 
 export type PDashboardSearchSlots = PCommandPaletteSlots<PCommandPaletteGroup<PCommandPaletteItem>, PCommandPaletteItem> & {
-  content: (props?: object) => any;
+  content: (props: { close: () => void }) => any;
 };
 
 </script>
@@ -215,8 +215,11 @@ defineExpose({
     v-bind="modalProps"
     :class="pohon.modal({ class: [props.pohon?.modal, props.class] })"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot
+        name="content"
+        v-bind="contentData"
+      >
         <PCommandPalette
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"

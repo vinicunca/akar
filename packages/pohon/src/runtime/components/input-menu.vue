@@ -173,7 +173,7 @@ export type PInputMenuEmits<A extends ArrayOrNested<PInputMenuItem>, VK extends 
   removeTag: [item: GetModelValue<A, VK, M>];
 } & GetModelValueEmits<A, VK, M>;
 
-type SlotProps<T extends PInputMenuItem> = (props: { item: T; index: number }) => any;
+type SlotProps<T extends PInputMenuItem> = (props: { item: T; index: number; pohon: InputMenu['pohon'] }) => any;
 
 export interface PInputMenuSlots<
   A extends ArrayOrNested<PInputMenuItem> = ArrayOrNested<PInputMenuItem>,
@@ -181,22 +181,14 @@ export interface PInputMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: {
-    modelValue?: GetModelValue<A, VK, M>;
-    open: boolean;
-    pohon: { [K in keyof Required<InputMenu['slots']>]: (props?: Record<string, any>) => string };
-  }) => any;
-  'trailing': (props: {
-    modelValue?: GetModelValue<A, VK, M>;
-    open: boolean;
-    pohon: { [K in keyof Required<InputMenu['slots']>]: (props?: Record<string, any>) => string };
-  }) => any;
+  'leading': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: InputMenu['pohon'] }) => any;
+  'trailing': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: InputMenu['pohon'] }) => any;
   'empty': (props: { searchTerm?: string }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
-  'item-label': SlotProps<T>;
+  'item-label': (props: { item: T; index: number }) => any;
   'item-trailing': SlotProps<T>;
-  'tags-item-text': SlotProps<T>;
+  'tags-item-text': (props: { item: T; index: number }) => any;
   'tags-item-delete': SlotProps<T>;
   'content-top': (props?: object) => any;
   'content-bottom': (props?: object) => any;
@@ -328,7 +320,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
 }>({
   props: {
     item: {
-      type: Object,
+      type: [Object, String, Number, Boolean],
       required: true,
     },
     index: {
@@ -498,7 +490,7 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
-function onRemoveTag(event: any) {
+function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true>) {
   if (props.multiple) {
     const modelValue = props.modelValue as GetModelValue<T, VK, true>;
     const filteredValue = modelValue.filter((value) => !isEqual(value, event));
@@ -573,11 +565,13 @@ defineExpose({
         name="item"
         :item="(item as NestedItem<T>)"
         :index="index"
+        :pohon="pohon"
       >
         <slot
           name="item-leading"
           :item="(item as NestedItem<T>)"
           :index="index"
+          :pohon="pohon"
         >
           <PIcon
             v-if="isInputItem(item) && item.icon"
@@ -616,6 +610,7 @@ defineExpose({
             name="item-trailing"
             :item="(item as NestedItem<T>)"
             :index="index"
+            :pohon="pohon"
           />
 
           <AComboboxItemIndicator as-child>
@@ -655,12 +650,12 @@ defineExpose({
         as-child
         @blur="onBlur"
         @focus="onFocus"
-        @remove-tag="onRemoveTag"
+        @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true>)"
       >
         <ATagsInputItem
           v-for="(item, index) in tags"
           :key="index"
-          :value="isInputItem(item) ? item : String(item)"
+          :value="item"
           :class="pohon.tagsItem({ class: [props.pohon?.tagsItem, isInputItem(item) && item.pohon?.tagsItem] })"
         >
           <ATagsInputItemText
@@ -687,6 +682,7 @@ defineExpose({
               name="tags-item-delete"
               :item="(item as NestedItem<T>)"
               :index="index"
+              :pohon="pohon"
             >
               <PIcon
                 :name="deleteIcon || appConfig.pohon.icons.close"

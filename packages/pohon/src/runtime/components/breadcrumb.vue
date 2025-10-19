@@ -43,14 +43,19 @@ export interface PBreadcrumbProps<T extends PBreadcrumbItem = PBreadcrumbItem> {
   pohon?: Breadcrumb['slots'];
 }
 
-type SlotProps<T extends PBreadcrumbItem> = (props: { item: T; index: number; active?: boolean }) => any;
+type SlotProps<T extends PBreadcrumbItem> = (props: {
+  item: T;
+  index: number;
+  active?: boolean;
+  pohon: Breadcrumb['pohon'];
+}) => any;
 
 export type PBreadcrumbSlots<T extends PBreadcrumbItem = PBreadcrumbItem> = {
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
-  'item-label': SlotProps<T>;
-  'item-trailing': SlotProps<T>;
-  'separator': any;
+  'item-label': (props: { item: T; index: number; active?: boolean }) => any;
+  'item-trailing': (props: { item: T; index: number; active?: boolean }) => any;
+  'separator': (props: { pohon: Breadcrumb['pohon'] }) => any;
 } & DynamicSlots<T, 'leading' | 'label' | 'trailing', { index: number; active?: boolean }>;
 
 </script>
@@ -120,12 +125,14 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                 :name="((item.slot || 'item') as keyof PBreadcrumbSlots<T>)"
                 :item="item"
                 :index="index"
+                :pohon="pohon"
               >
                 <slot
                   :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PBreadcrumbSlots<T>)"
                   :item="item"
                   :active="index === items!.length - 1"
                   :index="index"
+                  :pohon="pohon"
                 >
                   <PIcon
                     v-if="item.icon"
@@ -151,8 +158,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                   :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
                 >
                   <slot
-                    :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PBreadcrumbSlots<T>)"
-                    :item="item"
+                    :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof DynamicSlots<T, 'label'>)"
+                    :item="(item as Extract<T, { slot: string; }>)"
                     :active="index === items!.length - 1"
                     :index="index"
                   >
@@ -161,8 +168,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                 </span>
 
                 <slot
-                  :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PBreadcrumbSlots<T>)"
-                  :item="item"
+                  :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof DynamicSlots<T, 'trailing'>)"
+                  :item="(item as Extract<T, { slot: string; }>)"
                   :active="index === items!.length - 1"
                   :index="index"
                 />
@@ -177,7 +184,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
           aria-hidden="true"
           :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator] })"
         >
-          <slot name="separator">
+          <slot
+            name="separator"
+            :pohon="pohon"
+          >
             <PIcon
               :name="separatorIcon"
               :class="pohon.separatorIcon({ class: [props.pohon?.separatorIcon, item.pohon?.separatorIcon] })"

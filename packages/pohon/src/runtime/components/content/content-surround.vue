@@ -40,7 +40,7 @@ export interface PContentSurroundProps<T extends PContentSurroundLink = PContent
   pohon?: ContentSurround['slots'];
 }
 
-type SlotProps<T> = (props: { link: T }) => any;
+type SlotProps<T> = (props: { link: T; pohon: ContentSurround['pohon'] }) => any;
 
 export interface PContentSurroundSlots<T extends PContentSurroundLink = PContentSurroundLink> {
   'link': SlotProps<T>;
@@ -97,11 +97,13 @@ const pohon = computed(() =>
       <slot
         name="link"
         :link="(link as T)"
+        :pohon="pohon"
       >
         <div :class="pohon.linkLeading({ class: [props.pohon?.linkLeading, link.pohon?.linkLeading] })">
           <slot
             name="link-leading"
             :link="(link as T)"
+            :pohon="pohon"
           >
             <PIcon
               :name="link.icon || icon"
@@ -114,6 +116,7 @@ const pohon = computed(() =>
           <slot
             name="link-title"
             :link="(link as T)"
+            :pohon="pohon"
           >
             {{ link.title }}
           </slot>
@@ -123,6 +126,7 @@ const pohon = computed(() =>
           <slot
             name="link-description"
             :link="(link as T)"
+            :pohon="pohon"
           >
             {{ link.description }}
           </slot>

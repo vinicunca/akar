@@ -72,7 +72,7 @@ export interface PDialogSlots {
   title: (props?: object) => any;
   description: (props?: object) => any;
   actions: (props?: object) => any;
-  close: (props: { close: () => void; pohon: { [K in keyof Required<Dialog['slots']>]: (props?: Record<string, any>) => string } }) => any;
+  close: (props: { pohon: Dialog['pohon'] }) => any;
   body: (props: { close: () => void }) => any;
   footer: (props: { close: () => void }) => any;
 }
@@ -233,7 +233,6 @@ const pohon = computed(() =>
               >
                 <slot
                   name="close"
-                  :close="close"
                   :pohon="pohon"
                 >
                   <PButton

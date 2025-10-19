@@ -161,13 +161,13 @@ export type PCommandPaletteEmits<T extends PCommandPaletteItem = PCommandPalette
   'update:open': [value: boolean];
 };
 
-type SlotProps<T> = (props: { item: T; index: number }) => any;
+type SlotProps<T> = (props: { item: T; index: number; pohon: CommandPalette['pohon'] }) => any;
 
 export type PCommandPaletteSlots<G extends PCommandPaletteGroup<T> = PCommandPaletteGroup<any>, T extends PCommandPaletteItem = PCommandPaletteItem> = {
   'empty': (props: { searchTerm?: string }) => any;
-  'footer': (props: { pohon: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }) => any;
-  'back': (props: { pohon: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }) => any;
-  'close': (props: { pohon: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }) => any;
+  'footer': (props: { pohon: CommandPalette['pohon'] }) => any;
+  'back': (props: { pohon: CommandPalette['pohon'] }) => any;
+  'close': (props: { pohon: CommandPalette['pohon'] }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': SlotProps<T>;
@@ -446,11 +446,13 @@ function onSelect(event: Event, item: T) {
             :name="((item.slot || group?.slot || 'item') as keyof PCommandPaletteSlots<G, T>)"
             :item="(item as any)"
             :index="index"
+            :pohon="pohon"
           >
             <slot
               :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof PCommandPaletteSlots<G, T>)"
               :item="(item as any)"
               :index="index"
+              :pohon="pohon"
             >
               <PIcon
                 v-if="item.loading"
@@ -502,6 +504,7 @@ function onSelect(event: Event, item: T) {
                 :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<G, T>)"
                 :item="(item as any)"
                 :index="index"
+                :pohon="pohon"
               >
                 <span
                   v-if="item.prefix"
@@ -531,6 +534,7 @@ function onSelect(event: Event, item: T) {
                 :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof PCommandPaletteSlots<G, T>)"
                 :item="(item as any)"
                 :index="index"
+                :pohon="pohon"
               >
                 <PIcon
                   v-if="item.children && item.children.length > 0"

@@ -30,7 +30,7 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<PDropdownMenuItem>> e
    */
   externalIcon?: boolean | PIconProps['name'];
   class?: any;
-  pohon: { [K in keyof Required<DropdownMenu['slots']>]: (props?: Record<string, any>) => string };
+  pohon: DropdownMenu['pohon'];
   pohonOverride?: DropdownMenu['slots'];
 }
 
@@ -41,7 +41,9 @@ type DropdownMenuContentSlots<
   T extends NestedItem<A> = NestedItem<A>,
 > = Pick<PDropdownMenuSlots<A>, 'item' | 'item-leading' | 'item-label' | 'item-trailing' | 'content-top' | 'content-bottom'> & {
   default: (props?: object) => any;
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean; index: number }>;
+}
+& DynamicSlots<MergeTypes<T>, 'label', { active?: boolean; index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean; index: number; pohon: DropdownMenu['pohon'] }>;
 
 </script>
 
@@ -110,12 +112,14 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
       :name="((item.slot || 'item') as keyof DropdownMenuContentSlots<T>)"
       :item="(item as Extract<NestedItem<T>, { slot: string; }>)"
       :index="index"
+      :pohon="pohon"
     >
       <slot
         :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof DropdownMenuContentSlots<T>)"
         :item="(item as Extract<NestedItem<T>, { slot: string; }>)"
         :active="active"
         :index="index"
+        :pohon="pohon"
       >
         <PIcon
           v-if="item.loading"
@@ -165,6 +169,7 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
           :item="(item as Extract<NestedItem<T>, { slot: string; }>)"
           :active="active"
           :index="index"
+          :pohon="pohon"
         >
           <PIcon
             v-if="item.children?.length"

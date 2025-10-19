@@ -5,6 +5,7 @@
     "noEmit": false
   },
   "include": [
-    "uno.config.ts"
+    "uno.config.ts",
+    "./app/themes/*.ts"
   ]
 }

@@ -32,7 +32,7 @@ export interface PFooterColumnsProps<T extends PFooterColumnLink = PFooterColumn
   pohon?: FooterColumns['slots'];
 }
 
-type SlotProps<T> = (props: { link: T; active: boolean }) => any;
+type SlotProps<T> = (props: { link: T; active: boolean; pohon: FooterColumns['pohon'] }) => any;
 
 export interface FooterColumnsSlots<T extends PFooterColumnLink = PFooterColumnLink> {
   'left': (props?: object) => any;
@@ -41,8 +41,8 @@ export interface FooterColumnsSlots<T extends PFooterColumnLink = PFooterColumnL
   'column-label'?: (props: { column: PFooterColumn<T> }) => any;
   'link': SlotProps<T>;
   'link-leading': SlotProps<T>;
-  'link-label': SlotProps<T>;
-  'link-trailing': SlotProps<T>;
+  'link-label': (props: { link: T; active: boolean }) => any;
+  'link-trailing': (props: { link: T; active: boolean }) => any;
 }
 </script>
 
@@ -120,11 +120,13 @@ const pohon = computed(() =>
                     name="link"
                     :link="(link as T)"
                     :active="active"
+                    :pohon="pohon"
                   >
                     <slot
                       name="link-leading"
                       :link="(link as T)"
                       :active="active"
+                      :pohon="pohon"
                     >
                       <PIcon
                         v-if="link.icon"

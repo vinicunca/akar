@@ -130,6 +130,7 @@ export type PTreeSlots<
   index: number;
   level: number;
   expanded: boolean;
+  pohon: Tree['pohon'];
   selected: boolean;
   indeterminate: boolean | undefined;
   handleSelect: () => void;
@@ -138,12 +139,13 @@ export type PTreeSlots<
 </script>
 
 <script setup lang="ts" generic="T extends PTreeItem[], M extends boolean = false">
+import type { ComponentPublicInstance } from 'vue';
 import { useAppConfig } from '#imports';
 import { isBoolean, isFunction, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import { ATreeItem, ATreeRoot, ATreeVirtualizer, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
-import { computed, toRef } from 'vue';
+import { computed, ref, toRef } from 'vue';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
@@ -245,6 +247,8 @@ const pohon = computed(() =>
   }),
 );
 
+const rootRef = ref<ComponentPublicInstance>();
+
 function getItemLabel<Item extends T[number]>(item: Item): string {
   return getProp({ object: item, path: props.labelKey as string });
 }
@@ -265,6 +269,12 @@ function getDefaultOpenedItems(item: T[number]): Array<string> {
 const defaultExpanded = computed(() =>
   props.defaultExpanded ?? props.items?.flatMap((item) => getDefaultOpenedItems(item)),
 );
+
+defineExpose({
+  get $el() {
+    return rootRef.value?.$el;
+  },
+});
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -286,7 +296,7 @@ const defaultExpanded = computed(() =>
       >
         <slot
           :name="((item.slot ? `${item.slot}-wrapper` : 'item-wrapper') as keyof PTreeSlots<T>)"
-          v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
+          v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle, pohon }"
           :item="(item as Extract<T[number], { slot: string; }>)"
         >
           <component
@@ -305,12 +315,12 @@ const defaultExpanded = computed(() =>
           >
             <slot
               :name="((item.slot || 'item') as keyof PTreeSlots<T>)"
-              v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
+              v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle, pohon }"
               :item="(item as Extract<T[number], { slot: string; }>)"
             >
               <slot
                 :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PTreeSlots<T>)"
-                v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
+                v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle, pohon }"
                 :item="(item as Extract<T[number], { slot: string; }>)"
               >
                 <PIcon
@@ -336,7 +346,7 @@ const defaultExpanded = computed(() =>
               >
                 <slot
                   :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>)"
-                  v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
+                  v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle, pohon }"
                   :item="(item as Extract<T[number], { slot: string; }>)"
                 >
                   {{ getItemLabel(item) }}
@@ -349,7 +359,7 @@ const defaultExpanded = computed(() =>
               >
                 <slot
                   :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>)"
-                  v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle }"
+                  v-bind="{ index, level, expanded: isExpanded, selected: isSelected, indeterminate: isIndeterminate, handleSelect, handleToggle, pohon }"
                   :item="(item as Extract<T[number], { slot: string; }>)"
                 >
                   <PIcon
@@ -399,6 +409,7 @@ const defaultExpanded = computed(() =>
   </DefineTreeTemplate>
 
   <ATreeRoot
+    ref="rootRef"
     v-slot="{ flattenItems }"
     v-bind="{ ...rootProps, ...$attrs }"
     :as="as.root"

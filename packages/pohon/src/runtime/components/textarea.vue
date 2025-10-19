@@ -56,9 +56,9 @@ export interface PTextareaEmits<T extends TextareaValue = TextareaValue> {
 }
 
 export interface PTextareaSlots {
-  leading: (props?: object) => any;
-  default: (props?: object) => any;
-  trailing: (props?: object) => any;
+  leading: (props: { pohon: Textarea['pohon'] }) => any;
+  default: (props: { pohon: Textarea['pohon'] }) => any;
+  trailing: (props: { pohon: Textarea['pohon'] }) => any;
 }
 </script>
 
@@ -259,13 +259,16 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <slot />
+    <slot :pohon="pohon" />
 
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
       :class="pohon.leading({ class: props.pohon?.leading })"
     >
-      <slot name="leading">
+      <slot
+        name="leading"
+        :pohon="pohon"
+      >
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
@@ -284,7 +287,10 @@ defineExpose({
       v-if="isTrailing || !!slots.trailing"
       :class="pohon.trailing({ class: props.pohon?.trailing })"
     >
-      <slot name="trailing">
+      <slot
+        name="trailing"
+        :pohon="pohon"
+      >
         <PIcon
           v-if="trailingIconName"
           :name="trailingIconName"

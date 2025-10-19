@@ -49,7 +49,7 @@ export interface PTooltipEmits extends ATooltipRootEmits {}
 
 export interface PTooltipSlots {
   default: (props: { open: boolean }) => any;
-  content: (props?: object) => any;
+  content: (props: { pohon: Tooltip['pohon'] }) => any;
 }
 </script>
 
@@ -124,7 +124,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.toolti
         v-bind="contentProps"
         :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
       >
-        <slot name="content">
+        <slot
+          name="content"
+          :pohon="pohon"
+        >
           <span
             v-if="text"
             :class="pohon.text({ class: props.pohon?.text })"

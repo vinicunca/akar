@@ -110,7 +110,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
 }
 
 export type PContentSearchSlots = PCommandPaletteSlots<PCommandPaletteGroup<PContentSearchItem>, PContentSearchItem> & {
-  content: (props?: object) => any;
+  content: (props: { close: () => void }) => any;
 };
 
 </script>
@@ -323,8 +323,11 @@ defineExpose({
     v-bind="dialogProps"
     :class="pohon.dialog({ class: [props.pohon?.dialog, props.class] })"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot
+        name="content"
+        v-bind="contentData"
+      >
         <PCommandPalette
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"

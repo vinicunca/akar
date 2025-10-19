@@ -86,7 +86,7 @@ export interface PPaginationSlots {
   prev: (props?: object) => any;
   next: (props?: object) => any;
   last: (props?: object) => any;
-  ellipsis: (props?: object) => any;
+  ellipsis: (props: { pohon: Pagination['pohon'] }) => any;
   item: (props: {
     page: number;
     pageCount: number;
@@ -257,7 +257,10 @@ const pohon = computed(() =>
           as-child
           :class="pohon.ellipsis({ class: props.pohon?.ellipsis })"
         >
-          <slot name="ellipsis">
+          <slot
+            name="ellipsis"
+            :pohon="pohon"
+          >
             <PButton
               as="div"
               :color="color"

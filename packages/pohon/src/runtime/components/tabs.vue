@@ -71,16 +71,16 @@ export interface PTabsProps<T extends PTabsItem = PTabsItem> extends Pick<ATabsR
 
 export interface PTabsEmits extends ATabsRootEmits<string | number> {}
 
-type SlotProps<T extends PTabsItem> = (props: { item: T; index: number }) => any;
+type SlotProps<T extends PTabsItem> = (props: { item: T; index: number; pohon: Tabs['pohon'] }) => any;
 
 export type PTabsSlots<T extends PTabsItem = PTabsItem> = {
   'leading': SlotProps<T>;
-  'default': SlotProps<T>;
+  'default': (props: { item: T; index: number }) => any;
   'trailing': SlotProps<T>;
   'content': SlotProps<T>;
   'list-leading': (props?: object) => any;
   'list-trailing': (props?: object) => any;
-} & DynamicSlots<T, undefined, { index: number }>;
+} & DynamicSlots<T, undefined, { index: number; pohon: Tabs['pohon'] }>;
 </script>
 
 <script setup lang="ts" generic="T extends PTabsItem">
@@ -168,6 +168,7 @@ defineExpose({
           name="leading"
           :item="item"
           :index="index"
+          :pohon="pohon"
         >
           <PIcon
             v-if="item.icon"
@@ -196,6 +197,7 @@ defineExpose({
           name="trailing"
           :item="item"
           :index="index"
+          :pohon="pohon"
         >
           <PBadge
             v-if="item.badge !== undefined"
@@ -222,6 +224,7 @@ defineExpose({
           :name="((item.slot || 'content') as keyof PTabsSlots<T>)"
           :item="(item as Extract<T, { slot: string; }>)"
           :index="index"
+          :pohon="pohon"
         >
           {{ item.content }}
         </slot>

@@ -55,9 +55,9 @@ export type PContentTocEmits = ACollapsibleRootEmits & {
 type SlotProps<T> = (props: { link: T }) => any;
 
 export interface PContentTocSlots<T extends PContentTocLink = PContentTocLink> {
-  leading: (props: { open: boolean }) => any;
+  leading: (props: { open: boolean; pohon: ContentToc['pohon'] }) => any;
   default: (props: { open: boolean }) => any;
-  trailing: (props: { open: boolean }) => any;
+  trailing: (props: { open: boolean; pohon: ContentToc['pohon'] }) => any;
   content: (props: { links: Array<T> }) => any;
   link: SlotProps<T>;
   top: (props: { links?: Array<T> }) => any;
@@ -194,6 +194,7 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
     <slot
       name="leading"
       :open="open"
+      :pohon="pohon"
     />
 
     <span :class="pohon.title({ class: props.pohon?.title })">
@@ -204,6 +205,7 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
       <slot
         name="trailing"
         :open="open"
+        :pohon="pohon"
       >
         <PIcon
           :name="trailingIcon || appConfig.pohon.icons.chevronDown"

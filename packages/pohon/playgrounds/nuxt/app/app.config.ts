@@ -1,6 +1,14 @@
 import { defineAppConfig } from '#imports';
-import { getVinicuncaTheme } from '@vinicunca/unocss-preset/pohon';
-import { BRANDS } from '~/themes/constant';
+import { avatarThemes } from '~/themes/avatar.theme';
+import { buttonTheme } from '~/themes/button.theme';
+import { chipTheme } from '~/themes/chip.theme';
+import { dashboardTheme } from '~/themes/dashboard.theme';
+import { dialogTheme } from '~/themes/dialog.theme';
+import { dropdownTheme } from '~/themes/dropdown.theme';
+import { inputTheme } from '~/themes/input.theme';
+import { navigationMenuTheme } from '~/themes/navigation-menu.theme';
+import { selectTheme } from '~/themes/select.theme';
+import { slideoverTheme } from '~/themes/slideover.theme';
 
 export default defineAppConfig({
   toaster: {
@@ -9,26 +17,24 @@ export default defineAppConfig({
     duration: 5000,
   },
   pohon: {
-    ...getVinicuncaTheme(BRANDS),
-    // ...dashboardTheme,
-    // button: buttonTheme,
-    // dropdownMenu: dropdownTheme,
-    // navigationMenu: navigationMenuTheme,
-    // dialog: dialogTheme,
-    // slideover: slideoverTheme,
-    // chip: chipTheme,
-    // input: inputTheme,
-    // select: selectTheme,
-    // ...avatarThemes,
-
-    // fieldGroup: {
-    //   base: 'relative',
-    //   variants: {
-    //     orientation: {
-    //       horizontal: 'inline-flex space-x-[-1px]',
-    //       vertical: 'flex flex-col space-y-[-1px]',
-    //     },
-    //   },
-    // },
+    ...avatarThemes,
+    button: buttonTheme,
+    chip: chipTheme,
+    ...dashboardTheme,
+    dialog: dialogTheme,
+    dropdownMenu: dropdownTheme,
+    fieldGroup: {
+      base: 'relative',
+      variants: {
+        orientation: {
+          horizontal: 'inline-flex space-x-[-1px]',
+          vertical: 'flex flex-col space-y-[-1px]',
+        },
+      },
+    },
+    navigationMenu: navigationMenuTheme,
+    slideover: slideoverTheme,
+    input: inputTheme,
+    select: selectTheme,
   },
 });

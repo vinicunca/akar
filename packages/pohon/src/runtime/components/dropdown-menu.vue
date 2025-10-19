@@ -96,7 +96,12 @@ export interface PDropdownMenuProps<T extends ArrayOrNested<PDropdownMenuItem> =
 
 export interface PDropdownMenuEmits extends ADropdownMenuRootEmits {}
 
-type SlotProps<T extends PDropdownMenuItem> = (props: { item: T; active?: boolean; index: number }) => any;
+type SlotProps<T extends PDropdownMenuItem> = (props: {
+  item: T;
+  active?: boolean;
+  index: number;
+  pohon: DropdownMenu['pohon'];
+}) => any;
 
 export type PDropdownMenuSlots<
   A extends ArrayOrNested<PDropdownMenuItem> = ArrayOrNested<PDropdownMenuItem>,
@@ -105,11 +110,13 @@ export type PDropdownMenuSlots<
   'default': (props: { open: boolean }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
-  'item-label': SlotProps<T>;
+  'item-label': (props: { item: T; active?: boolean; index: number }) => any;
   'item-trailing': SlotProps<T>;
   'content-top': (props?: object) => any;
   'content-bottom': (props?: object) => any;
-} & DynamicSlots<MergeTypes<T>, 'leading' | 'label' | 'trailing', { active?: boolean; index: number }>;
+}
+& DynamicSlots<MergeTypes<T>, 'label', { active?: boolean; index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean; index: number; pohon: DropdownMenu['pohon'] }>;
 
 </script>
 

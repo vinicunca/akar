@@ -1,6 +1,8 @@
 import { presetVinicunca } from '@vinicunca/unocss-preset';
 import { defineConfig } from 'unocss';
 
+import { BRANDS } from './app/themes/constant';
+
 export default defineConfig({
   outputToCssLayers: true,
 
@@ -37,8 +39,7 @@ export default defineConfig({
   safelist: [
     'isolate',
 
-    // ...BRANDS.flatMap((color) => [
-    ...[].flatMap((color) => [
+    ...BRANDS.flatMap((color) => [
       `color-${color}`,
       `color-${color}/75`,
       `data-[highlighted]:color-${color}`,

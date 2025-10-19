@@ -138,10 +138,13 @@ const pohon = computed(() =>
 
       <template
         v-if="!collapsed"
-        #trailing
+        #trailing="{ pohon: pohonProxy }"
       >
         <div :class="pohon.trailing({ class: props.pohon?.trailing })">
-          <slot name="trailing">
+          <slot
+            name="trailing"
+            :pohon="pohonProxy"
+          >
             <template v-if="kbds?.length">
               <PKbd
                 v-for="(kbd, index) in kbds"

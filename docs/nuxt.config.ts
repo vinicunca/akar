@@ -71,6 +71,12 @@ export default defineNuxtConfig({
   ],
 
   componentMeta: {
+    transformers: [(component, code) => {
+      // Simplify pohon in slot prop types: `leading(props: { pohon: Button['pohon'] })` -> `leading(props: { pohon: object })`
+      code = code.replace(/pohon:[^}]+(?=\})/g, 'pohon: object');
+
+      return { component, code };
+    }],
     exclude: [
       '@nuxt/content',
       '@nuxt/icon',
@@ -87,6 +93,22 @@ export default defineNuxtConfig({
       slots: true,
       events: true,
       exposed: false,
+    },
+  },
+
+  hooks: {
+    // @ts-expect-error - Hook is not typed correctly
+    'component-meta:schema': (schema: NuxtComponentMeta) => {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const componentName in schema) {
+        const component = schema[componentName];
+        // Delete schema from slots to reduce metadata file size
+        if (component?.meta?.slots) {
+          for (const slot of component.meta.slots) {
+            delete (slot as any).schema;
+          }
+        }
+      }
     },
   },
 

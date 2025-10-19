@@ -62,11 +62,11 @@ export interface PAlertEmits {
 }
 
 export interface PAlertSlots {
-  leading: (props?: object) => any;
+  leading: (props: { pohon: Alert['pohon'] }) => any;
   title: (props?: object) => any;
   description: (props?: object) => any;
   actions: (props?: object) => any;
-  close: (props: { pohon: { [K in keyof Required<Alert['slots']>]: (props?: Record<string, any>) => string } }) => any;
+  close: (props: { pohon: Alert['pohon'] }) => any;
 }
 </script>
 
@@ -111,7 +111,10 @@ const pohon = computed(() =>
     :data-orientation="orientation"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
   >
-    <slot name="leading">
+    <slot
+      name="leading"
+      :pohon="pohon"
+    >
       <PAvatar
         v-if="avatar"
         :size="((props.pohon?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"

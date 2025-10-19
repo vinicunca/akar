@@ -166,7 +166,7 @@ export type PSelectMenuEmits<A extends ArrayOrNested<PSelectMenuItem>, VK extend
   } | undefined];
 } & GetModelValueEmits<A, VK, M>;
 
-type SlotProps<T extends PSelectMenuItem> = (props: { item: T; index: number }) => any;
+type SlotProps<T extends PSelectMenuItem> = (props: { item: T; index: number; pohon: SelectMenu['pohon'] }) => any;
 
 export interface PSelectMenuSlots<
   A extends ArrayOrNested<PSelectMenuItem> = ArrayOrNested<PSelectMenuItem>,
@@ -174,24 +174,13 @@ export interface PSelectMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: {
-    modelValue?: GetModelValue<A, VK, M>;
-    open: boolean;
-    pohon: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string };
-  }) => any;
-  'default': (props: {
-    modelValue?: GetModelValue<A, VK, M>;
-    open: boolean;
-  }) => any;
-  'trailing': (props: {
-    modelValue?: GetModelValue<A, VK, M>;
-    open: boolean;
-    pohon: { [K in keyof Required<SelectMenu['slots']>]: (props?: Record<string, any>) => string };
-  }) => any;
+  'leading': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: SelectMenu['pohon'] }) => any;
+  'default': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: SelectMenu['pohon'] }) => any;
+  'trailing': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: SelectMenu['pohon'] }) => any;
   'empty': (props: { searchTerm?: string }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
-  'item-label': SlotProps<T>;
+  'item-label': (props: { item: T; index: number }) => any;
   'item-trailing': SlotProps<T>;
   'content-top': (props?: object) => any;
   'content-bottom': (props?: object) => any;
@@ -328,7 +317,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
 }>({
   props: {
     item: {
-      type: Object,
+      type: [Object, String, Number, Boolean],
       required: true,
     },
     index: {
@@ -565,11 +554,13 @@ defineExpose({
         name="item"
         :item="(item as NestedItem<T>)"
         :index="index"
+        :pohon="pohon"
       >
         <slot
           name="item-leading"
           :item="(item as NestedItem<T>)"
           :index="index"
+          :pohon="pohon"
         >
           <UIcon
             v-if="isSelectItem(item) && item.icon"
@@ -608,6 +599,7 @@ defineExpose({
             name="item-trailing"
             :item="(item as NestedItem<T>)"
             :index="index"
+            :pohon="pohon"
           />
 
           <AComboboxItemIndicator as-child>
@@ -665,6 +657,7 @@ defineExpose({
         <slot
           :model-value="(modelValue as GetModelValue<T, VK, M>)"
           :open="open"
+          :pohon="pohon"
         >
           <template
             v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]"

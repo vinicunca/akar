@@ -44,12 +44,13 @@ export interface PDashboardSidebarSlots {
   'header': (props: { collapsed?: boolean; collapse?: (value: boolean) => void }) => any;
   'default': (props: { collapsed?: boolean; collapse?: (value: boolean) => void }) => any;
   'footer': (props: { collapsed?: boolean; collapse?: (value: boolean) => void }) => any;
-  'toggle': (props: { open: boolean; toggle: () => void }) => any;
-  'content': (props?: object) => any;
+  'toggle': (props: { open: boolean; toggle: () => void; pohon: DashboardSidebar['pohon'] }) => any;
+  'content': (props: { close?: () => void }) => any;
   'resize-handle': (props: {
     onMouseDown: (event: MouseEvent) => void;
     onTouchStart: (event: TouchEvent) => void;
     onDoubleClick: (event: MouseEvent) => void;
+    pohon: DashboardSidebar['pohon'];
   }) => any;
 }
 </script>
@@ -193,6 +194,7 @@ function toggleOpen() {
       name="toggle"
       :open="open"
       :toggle="toggleOpen"
+      :pohon="pohon"
     >
       <PDashboardSidebarToggle
         v-if="toggle"
@@ -209,6 +211,7 @@ function toggleOpen() {
       :on-mouse-down="onMouseDown"
       :on-touch-start="onTouchStart"
       :on-double-click="onDoubleClick"
+      :pohon="pohon"
     >
       <PDashboardResizeHandle
         v-if="resizable"
@@ -274,8 +277,11 @@ function toggleOpen() {
       content: pohon.content({ class: props.pohon?.content }),
     }"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot
+        name="content"
+        v-bind="contentData"
+      >
         <div
           v-if="!!slots.header || mode !== 'drawer'"
           :class="pohon.header({ class: props.pohon?.header, menu: true })"

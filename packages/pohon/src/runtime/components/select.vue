@@ -120,7 +120,7 @@ export type PSelectEmits<A extends ArrayOrNested<PSelectItem>, VK extends GetIte
   focus: [event: FocusEvent];
 } & GetModelValueEmits<A, VK, M>;
 
-type SlotProps<T extends PSelectItem> = (props: { item: T; index: number }) => any;
+type SlotProps<T extends PSelectItem> = (props: { item: T; index: number; pohon: Select['pohon'] }) => any;
 
 export interface PSelectSlots<
   A extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>,
@@ -128,23 +128,12 @@ export interface PSelectSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: {
-    modelValue?: GetModelValue<A, VK, M>;
-    open: boolean;
-    pohon: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string };
-  }) => any;
-  'default': (props: {
-    modelValue?: GetModelValue<A, VK, M>;
-    open: boolean;
-  }) => any;
-  'trailing': (props: {
-    modelValue?: GetModelValue<A, VK, M>;
-    open: boolean;
-    pohon: { [K in keyof Required<Select['slots']>]: (props?: Record<string, any>) => string };
-  }) => any;
+  'leading': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: Select['pohon'] }) => any;
+  'default': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: Select['pohon'] }) => any;
+  'trailing': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: Select['pohon'] }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
-  'item-label': SlotProps<T>;
+  'item-label': (props: { item: T; index: number }) => any;
   'item-trailing': SlotProps<T>;
   'content-top': (props?: object) => any;
   'content-bottom': (props?: object) => any;
@@ -392,6 +381,7 @@ defineExpose({
       <slot
         :model-value="(modelValue as GetModelValue<T, VK, M>)"
         :open="open"
+        :pohon="pohon"
       >
         <template
           v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]"
@@ -474,11 +464,13 @@ defineExpose({
                   name="item"
                   :item="(item as NestedItem<T>)"
                   :index="index"
+                  :pohon="pohon"
                 >
                   <slot
                     name="item-leading"
                     :item="(item as NestedItem<T>)"
                     :index="index"
+                    :pohon="pohon"
                   >
                     <PIcon
                       v-if="isSelectItem(item) && item.icon"
@@ -520,6 +512,7 @@ defineExpose({
                       name="item-trailing"
                       :item="(item as NestedItem<T>)"
                       :index="index"
+                      :pohon="pohon"
                     />
 
                     <ASelectItemIndicator as-child>

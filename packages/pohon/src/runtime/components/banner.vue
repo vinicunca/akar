@@ -53,10 +53,10 @@ export interface PBannerProps {
 }
 
 export interface PBannerSlots {
-  leading: (props?: object) => any;
+  leading: (props: { pohon: Banner['pohon'] }) => any;
   title: (props?: object) => any;
   actions: (props?: object) => any;
-  close: (props: { pohon: any }) => any;
+  close: (props: { pohon: Banner['pohon'] }) => any;
 }
 
 export interface PBannerEmits {
@@ -148,7 +148,10 @@ function onClose() {
       <div :class="pohon.left({ class: props.pohon?.left })" />
 
       <div :class="pohon.center({ class: props.pohon?.center })">
-        <slot name="leading">
+        <slot
+          name="leading"
+          :pohon="pohon"
+        >
           <PIcon
             v-if="icon"
             :name="icon"

@@ -72,7 +72,7 @@ export interface PSlideoverSlots {
   title: (props?: object) => any;
   description: (props?: object) => any;
   actions: (props?: object) => any;
-  close: (props: { close: () => void; pohon: { [K in keyof Required<Slideover['slots']>]: (props?: Record<string, any>) => string } }) => any;
+  close: (props: { pohon: Slideover['pohon'] }) => any;
   body: (props: { close: () => void }) => any;
   footer: (props: { close: () => void }) => any;
 }
@@ -229,7 +229,6 @@ const pohon = computed(() =>
               >
                 <slot
                   name="close"
-                  :close="close"
                   :pohon="pohon"
                 >
                   <PButton

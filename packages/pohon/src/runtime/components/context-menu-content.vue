@@ -35,7 +35,7 @@ interface ContextMenuContentProps<T extends ArrayOrNested<PContextMenuItem>> ext
    */
   externalIcon?: boolean | PIconProps['name'];
   class?: any;
-  pohon: { [K in keyof Required<ContextMenu['slots']>]: (props?: Record<string, any>) => string };
+  pohon: ContextMenu['pohon'];
   pohonOverride?: ContextMenu['slots'];
 }
 
@@ -114,12 +114,14 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
       :name="((item.slot || 'item') as keyof PContextMenuSlots<T>)"
       :item="item"
       :index="index"
+      :pohon="pohon"
     >
       <slot
         :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PContextMenuSlots<T>)"
         :item="item"
         :active="active"
         :index="index"
+        :pohon="pohon"
       >
         <PIcon
           v-if="item.loading"
@@ -176,6 +178,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
           :item="item"
           :active="active"
           :index="index"
+          :pohon="pohon"
         >
           <PIcon
             v-if="item.children?.length"

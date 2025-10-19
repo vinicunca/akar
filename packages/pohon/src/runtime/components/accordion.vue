@@ -52,15 +52,15 @@ export interface PAccordionProps<T extends PAccordionItem = PAccordionItem> exte
 
 export interface PAccordionEmits extends AAccordionRootEmits {}
 
-type SlotProps<T extends PAccordionItem> = (props: { item: T; index: number; open: boolean }) => any;
+type SlotProps<T extends PAccordionItem> = (props: { item: T; index: number; open: boolean; pohon: Accordion['pohon'] }) => any;
 
 export type PAccordionSlots<T extends PAccordionItem = PAccordionItem> = {
   leading: SlotProps<T>;
-  default: SlotProps<T>;
+  default: (props: { item: T; index: number; open: boolean }) => any;
   trailing: SlotProps<T>;
   content: SlotProps<T>;
   body: SlotProps<T>;
-} & DynamicSlots<T, 'body', { index: number; open: boolean }>;
+} & DynamicSlots<T, 'body', { index: number; open: boolean; pohon: Accordion['pohon'] }>;
 </script>
 
 <script setup lang="ts" generic="T extends PAccordionItem">
@@ -148,6 +148,7 @@ const pohon = computed(() =>
             :item="item"
             :index="index"
             :open="open"
+            :pohon="pohon"
           >
             <PIcon
               v-if="item.icon"
@@ -172,6 +173,7 @@ const pohon = computed(() =>
             :item="item"
             :index="index"
             :open="open"
+            :pohon="pohon"
           >
             <PIcon
               :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
@@ -190,6 +192,7 @@ const pohon = computed(() =>
           :item="item as Extract<T, { slot: string; }>"
           :index="index"
           :open="open"
+          :pohon="pohon"
         >
           <div :class="pohon.body({ class: [props.pohon?.body, item.pohon?.body] })">
             <slot
@@ -197,6 +200,7 @@ const pohon = computed(() =>
               :item="item as Extract<T, { slot: string; }>"
               :index="index"
               :open="open"
+              :pohon="pohon"
             >
               {{ item.content }}
             </slot>

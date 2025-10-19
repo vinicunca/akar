@@ -33,9 +33,9 @@ export interface PBadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'l
 }
 
 export interface PBadgeSlots {
-  leading: (props?: object) => any;
-  default: (props?: object) => any;
-  trailing: (props?: object) => any;
+  leading: (props: { pohon: Badge['pohon'] }) => any;
+  default: (props: { pohon: Badge['pohon'] }) => any;
+  trailing: (props: { pohon: Badge['pohon'] }) => any;
 }
 </script>
 
@@ -81,7 +81,10 @@ const pohon = computed(() =>
     :as="as"
     :class="pohon.base({ class: [props.pohon?.base, props.class] })"
   >
-    <slot name="leading">
+    <slot
+      name="leading"
+      :pohon="pohon"
+    >
       <PIcon
         v-if="isLeading && leadingIconName"
         :name="leadingIconName"
@@ -95,7 +98,7 @@ const pohon = computed(() =>
       />
     </slot>
 
-    <slot>
+    <slot :pohon="pohon">
       <span
         v-if="isNonNullish(label)"
         :class="pohon.label({ class: props.pohon?.label })"
@@ -104,7 +107,10 @@ const pohon = computed(() =>
       </span>
     </slot>
 
-    <slot name="trailing">
+    <slot
+      name="trailing"
+      :pohon="pohon"
+    >
       <PIcon
         v-if="isTrailing && trailingIconName"
         :name="trailingIconName"

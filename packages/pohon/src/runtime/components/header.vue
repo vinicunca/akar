@@ -50,11 +50,11 @@ export interface PHeaderSlots {
   left: (props?: object) => any;
   default: (props?: object) => any;
   right: (props?: object) => any;
-  toggle: (props: { open: boolean; toggle: () => void }) => any;
+  toggle: (props: { open: boolean; toggle: () => void; pohon: Header['pohon'] }) => any;
   top: (props?: object) => any;
   bottom: (props?: object) => any;
   body: (props?: object) => any;
-  content: (props?: object) => any;
+  content: (props: { close?: () => void }) => any;
 }
 </script>
 
@@ -141,6 +141,7 @@ function toggleOpen() {
       name="toggle"
       :open="open"
       :toggle="toggleOpen"
+      :pohon="pohon"
     >
       <PButton
         v-if="toggle"
@@ -211,8 +212,11 @@ function toggleOpen() {
       content: pohon.content({ class: props.pohon?.content }),
     }"
   >
-    <template #content>
-      <slot name="content">
+    <template #content="contentData">
+      <slot
+        name="content"
+        v-bind="contentData"
+      >
         <div
           v-if="mode !== 'drawer'"
           :class="pohon.header({ class: props.pohon?.header })"

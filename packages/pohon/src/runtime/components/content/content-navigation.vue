@@ -81,7 +81,7 @@ export interface PContentNavigationProps<T extends PContentNavigationLink = PCon
 
 export interface PContentNavigationEmits extends AAccordionRootEmits {}
 
-type SlotProps<T> = (props: { link: T; active?: boolean }) => any;
+type SlotProps<T> = (props: { link: T; active?: boolean; pohon: ContentNavigation['pohon'] }) => any;
 
 export interface PContentNavigationSlots<T extends PContentNavigationLink = PContentNavigationLink> {
   'link': SlotProps<T>;
@@ -194,13 +194,15 @@ const defaultValue = computed(() => {
   <DefineLinkTemplate v-slot="{ link, active }">
     <slot
       name="link"
-      :link="link as T"
+      :link="(link as T)"
       :active="active"
+      :pohon="pohon"
     >
       <slot
         name="link-leading"
-        :link="link as T"
+        :link="(link as T)"
         :active="active"
+        :pohon="pohon"
       >
         <PIcon
           v-if="link.icon"
@@ -221,8 +223,9 @@ const defaultValue = computed(() => {
       >
         <slot
           name="link-title"
-          :link="link as T"
+          :link="(link as T)"
           :active="active"
+          :pohon="pohon"
         >
           {{ link.title }}
         </slot>
@@ -243,8 +246,9 @@ const defaultValue = computed(() => {
       >
         <slot
           name="link-trailing"
-          :link="link as T"
+          :link="(link as T)"
           :active="active"
+          :pohon="pohon"
         >
           <PBadge
             v-if="link.badge"
@@ -340,8 +344,7 @@ const defaultValue = computed(() => {
               >
                 <slot
                   :name="name"
-                  :link="(slotData.link as T)"
-                  :active="slotData.active"
+                  v-bind="{ ...slotData, link: link as T }"
                 />
               </template>
             </PContentNavigation>

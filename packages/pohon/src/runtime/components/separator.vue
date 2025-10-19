@@ -44,7 +44,7 @@ export interface PSeparatorProps extends Pick<ASeparatorProps, 'decorative'> {
 }
 
 export interface PSeparatorSlots {
-  default: (props?: object) => any;
+  default: (props: { pohon: Separator['pohon'] }) => any;
 }
 </script>
 
@@ -91,7 +91,7 @@ const pohon = computed(() =>
 
     <template v-if="label || icon || avatar || !!slots.default">
       <div :class="pohon.container({ class: props.pohon?.container })">
-        <slot>
+        <slot :pohon="pohon">
           <span
             v-if="label"
             :class="pohon.label({ class: props.pohon?.label })"

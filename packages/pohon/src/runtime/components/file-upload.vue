@@ -106,8 +106,9 @@ export interface FileUploadSlots<M extends boolean = false> {
   'default': (props: {
     open: UseFileDialogReturn['open'];
     removeFile: (index?: number) => void;
+    pohon: FileUpload['pohon'];
   }) => any;
-  'leading': (props?: object) => any;
+  'leading': (props: { pohon: FileUpload['pohon'] }) => any;
   'label': (props?: object) => any;
   'description': (props?: object) => any;
   'actions': (props: { files?: FileUploadFiles<M>; open: UseFileDialogReturn['open']; removeFile: (index?: number) => void }) => any;
@@ -115,10 +116,10 @@ export interface FileUploadSlots<M extends boolean = false> {
   'files-top': (props: { files?: FileUploadFiles<M>; open: UseFileDialogReturn['open']; removeFile: (index?: number) => void }) => any;
   'files-bottom': (props: { files?: FileUploadFiles<M>; open: UseFileDialogReturn['open']; removeFile: (index?: number) => void }) => any;
   'file': (props: { file: File; index: number }) => any;
-  'file-leading': (props: { file: File; index: number }) => any;
+  'file-leading': (props: { file: File; index: number; pohon: FileUpload['pohon'] }) => any;
   'file-name': (props: { file: File; index: number }) => any;
   'file-size': (props: { file: File; index: number }) => any;
-  'file-trailing': (props: { file: File; index: number }) => any;
+  'file-trailing': (props: { file: File; index: number; pohon: FileUpload['pohon'] }) => any;
 }
 </script>
 
@@ -143,6 +144,7 @@ const props = withDefaults(
     multiple: false as never,
     reset: false,
     dropzone: true,
+    fileDelete: true,
     interactive: true,
     layout: 'grid',
     position: 'outside',
@@ -300,6 +302,7 @@ defineExpose({
                 name="file-leading"
                 :file="file"
                 :index="index"
+                :pohon="pohon"
               >
                 <PAvatar
                   :src="createObjectUrl(file)"
@@ -335,8 +338,10 @@ defineExpose({
                 name="file-trailing"
                 :file="file"
                 :index="index"
+                :pohon="pohon"
               >
                 <PButton
+                  v-if="fileDelete"
                   color="neutral"
                   v-bind="{
                     ...(layout === 'grid' ? {
@@ -375,6 +380,7 @@ defineExpose({
     <slot
       :open="open"
       :remove-file="removeFile"
+      :pohon="pohon"
     >
       <component
         :is="variant === 'button' ? 'button' : 'div'"
@@ -394,7 +400,10 @@ defineExpose({
           v-if="position === 'inside' ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true"
           :class="pohon.wrapper({ class: props.pohon?.wrapper })"
         >
-          <slot name="leading">
+          <slot
+            name="leading"
+            :pohon="pohon"
+          >
             <PIcon
               v-if="variant === 'button'"
               :name="icon || appConfig.pohon.icons.upload"

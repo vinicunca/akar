@@ -72,7 +72,7 @@ catalogs:
     '@types/babel__traverse': ^7.28.0
     better-sqlite3: ^12.2.0
     fast-glob: ^3.3.3
-    nuxt-component-meta: ^0.14.0
+    nuxt-component-meta: ^0.14.1
     nuxt-og-image: ^5.1.11
     prettier: ^3.6.2
     shiki-transformer-color-highlight: ^1.0.0

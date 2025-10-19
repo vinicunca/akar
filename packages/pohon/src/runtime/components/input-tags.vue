@@ -52,12 +52,12 @@ export interface PInputTagsEmits<T extends PInputTagItem> extends ATagsInputRoot
   focus: [event: FocusEvent];
 }
 
-type SlotProps<T extends PInputTagItem> = (props: { item: T; index: number }) => any;
+type SlotProps<T extends PInputTagItem> = (props: { item: T; index: number; pohon: InputTags['pohon'] }) => any;
 
 export interface PInputTagsSlots<T extends PInputTagItem = PInputTagItem> {
-  'leading': (props?: object) => any;
-  'default': (props?: object) => any;
-  'trailing': (props?: object) => any;
+  'leading': (props: { pohon: InputTags['pohon'] }) => any;
+  'default': (props: { pohon: InputTags['pohon'] }) => any;
+  'trailing': (props: { pohon: InputTags['pohon'] }) => any;
   'item-text': SlotProps<T>;
   'item-delete': SlotProps<T>;
 }
@@ -212,6 +212,7 @@ defineExpose({
           name="item-text"
           :item="(item as T)"
           :index="index"
+          :pohon="pohon"
         />
       </ATagsInputItemText>
 
@@ -223,6 +224,7 @@ defineExpose({
           name="item-delete"
           :item="(item as T)"
           :index="index"
+          :pohon="pohon"
         >
           <PIcon
             :name="deleteIcon || appConfig.pohon.icons.close"
@@ -242,13 +244,16 @@ defineExpose({
       @focus="onFocus"
     />
 
-    <slot />
+    <slot :pohon="pohon" />
 
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
       :class="pohon.leading({ class: props.pohon?.leading })"
     >
-      <slot name="leading">
+      <slot
+        name="leading"
+        :pohon="pohon"
+      >
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
@@ -267,7 +272,10 @@ defineExpose({
       v-if="isTrailing || !!slots.trailing"
       :class="pohon.trailing({ class: props.pohon?.trailing })"
     >
-      <slot name="trailing">
+      <slot
+        name="trailing"
+        :pohon="pohon"
+      >
         <PIcon
           v-if="trailingIconName"
           :name="trailingIconName"
