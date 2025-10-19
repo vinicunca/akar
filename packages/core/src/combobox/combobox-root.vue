@@ -105,6 +105,7 @@ const props = withDefaults(
     openOnFocus: false,
     openOnClick: false,
     resetModelValueOnClear: false,
+    highlightOnHover: true,
   },
 );
 const emits = defineEmits<AComboboxRootEmits<T>>();
@@ -131,6 +132,7 @@ const {
   openOnClick,
   dir: propDir,
   resetModelValueOnClear,
+  highlightOnHover,
 } = toRefs(props);
 
 const dir = useDirection(propDir);
@@ -293,7 +295,7 @@ provideComboboxRootContext({
       :name="name"
       :required="required"
       :disabled="disabled"
-      :highlight-on-hover="true"
+      :highlight-on-hover="highlightOnHover"
       :by="props.by as any"
       @highlight="emits('highlight', $event as any)"
     >

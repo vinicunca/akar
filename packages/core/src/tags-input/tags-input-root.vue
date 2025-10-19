@@ -4,7 +4,7 @@ import type { APrimitiveProps } from '~~/primitive';
 import type { Direction, FormFieldProps } from '~~/shared/types';
 import { createContext } from '~~/shared';
 
-export type AcceptableInputValue = Record<string, any> | string;
+export type AcceptableInputValue = Record<string, any> | string | number | bigint;
 
 export interface ATagsInputRootProps<T = AcceptableInputValue> extends APrimitiveProps, FormFieldProps {
   /** The controlled value of the tags input. Can be bind as `v-model`. */

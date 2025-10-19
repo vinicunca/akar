@@ -81,13 +81,7 @@ function handlePointerMove() {
     return;
   }
 
-  if (rootContext.highlightOnHover.value) {
-    rootContext.changeHighlight(currentElement.value, false);
-  } else {
-    if (rootContext.focusable.value) {
-      return;
-    }
-
+  if (rootContext.highlightOnHover.value && !rootContext.focusable.value) {
     rootContext.changeHighlight(currentElement.value, false);
   }
 }
