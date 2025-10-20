@@ -1,6 +1,5 @@
 import { presetVinicunca } from '@vinicunca/unocss-preset';
 import { defineConfig } from 'unocss';
-import { theme } from 'unocss/preset-wind4';
 
 import { BRANDS } from './app/themes/constant';
 
@@ -9,13 +8,21 @@ export default defineConfig({
 
   presets: [
     presetVinicunca({
-      akar: true,
+      akar: {
+        enableDynamicBrands: true,
+      },
       icons: {
         extraProperties: {
           'display': 'inline-block',
           'vertical-align': 'middle',
         },
         warn: true,
+      },
+
+      wind4: {
+        preflights: {
+          theme: true,
+        },
       },
 
       typography: {
@@ -48,46 +55,45 @@ export default defineConfig({
   preflights: [
     {
       getCSS: () => {
-        const slateColors = theme.colors.slate;
         return `
           :root {
-            --pohon-text-dimmed: ${slateColors[400]};
-            --pohon-text-muted: ${slateColors[500]};
-            --pohon-text-toned: ${slateColors[600]};
-            --pohon-text: ${slateColors[700]};
-            --pohon-text-highlighted: ${slateColors[900]};
-            --pohon-text-inverted: ${slateColors[100]};
+            --pohon-text-dimmed: var(--akar-neutral-400);
+            --pohon-text-muted: var(--akar-neutral-500);
+            --pohon-text-toned: var(--akar-neutral-600);
+            --pohon-text: var(--akar-neutral-700);
+            --pohon-text-highlighted: var(--akar-neutral-900);
+            --pohon-text-inverted: var(--colors-white);
 
-            --pohon-bg: ${slateColors[100]};
-            --pohon-bg-muted: ${slateColors[50]};
-            --pohon-bg-elevated: ${slateColors[100]};
-            --pohon-bg-accented: ${slateColors[200]};
-            --pohon-bg-inverted: ${slateColors[900]};
+            --pohon-bg: var(--colors-white);
+            --pohon-bg-muted: var(--akar-neutral-50);
+            --pohon-bg-elevated: var(--akar-neutral-100);
+            --pohon-bg-accented: var(--akar-neutral-200);
+            --pohon-bg-inverted: var(--akar-neutral-900);
 
-            --pohon-border: ${slateColors[200]};
-            --pohon-border-muted: ${slateColors[200]};
-            --pohon-border-accented: ${slateColors[300]};
-            --pohon-border-inverted: ${slateColors[900]};
+            --pohon-border: var(--akar-neutral-200);
+            --pohon-border-muted: var(--akar-neutral-200);
+            --pohon-border-accented: var(--akar-neutral-300);
+            --pohon-border-inverted: var(--akar-neutral-900);
           }
 
           .dark {
-            --pohon-text-dimmed: ${slateColors[500]};
-            --pohon-text-muted: ${slateColors[400]};
-            --pohon-text-toned: ${slateColors[300]};
-            --pohon-text: ${slateColors[200]};
-            --pohon-text-highlighted: ${slateColors[100]};
-            --pohon-text-inverted: ${slateColors[900]};
+            --pohon-text-dimmed: var(--akar-neutral-500);
+            --pohon-text-muted: var(--akar-neutral-400);
+            --pohon-text-toned: var(--akar-neutral-300);
+            --pohon-text: var(--akar-neutral-200);
+            --pohon-text-highlighted: var(--colors-white);
+            --pohon-text-inverted: var(--akar-neutral-900);
 
-            --pohon-bg: hsl(285 37% 5%);
-            --pohon-bg-muted: ${slateColors[800]};
-            --pohon-bg-elevated: ${slateColors[800]};
-            --pohon-bg-accented: ${slateColors[700]};
-            --pohon-bg-inverted: ${slateColors[100]};
+            --pohon-bg: var(--akar-neutral-900);
+            --pohon-bg-muted: var(--akar-neutral-800);
+            --pohon-bg-elevated: var(--akar-neutral-800);
+            --pohon-bg-accented: var(--akar-neutral-700);
+            --pohon-bg-inverted: var(--colors-white);
 
-            --pohon-border: ${slateColors[800]};
-            --pohon-border-muted: ${slateColors[700]};
-            --pohon-border-accented: ${slateColors[700]};
-            --pohon-border-inverted: ${slateColors[100]};
+            --pohon-border: var(--akar-neutral-800);
+            --pohon-border-muted: var(--akar-neutral-700);
+            --pohon-border-accented: var(--akar-neutral-700);
+            --pohon-border-inverted: var(--colors-white);
           }
         `;
       },
@@ -95,8 +101,14 @@ export default defineConfig({
   ],
 
   theme: {
+    font: {
+      sans: 'Geist',
+      mono: 'Geist Mono',
+    },
+
     colors: {
       card: 'hsl(var(--pohon-card))',
+
       text: {
         dimmed: 'var(--pohon-text-dimmed)',
         muted: 'var(--pohon-text-muted)',
@@ -157,15 +169,5 @@ export default defineConfig({
     container: {
       '8xl': '90rem',
     },
-  },
-
-  extendTheme: (theme) => {
-    return {
-      ...theme,
-      font: {
-        sans: `'Geist', ${theme.font?.sans}`,
-        mono: `'Geist Mono', ${theme.font?.mono}`,
-      },
-    };
   },
 });

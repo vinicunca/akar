@@ -28,7 +28,7 @@ const items = [
 
 <template>
   <AAccordionRoot
-    class="w-[300px]"
+    class="px-4 rounded-md bg-background w-[300px]"
     default-value="item-1"
     type="single"
     :collapsible="true"

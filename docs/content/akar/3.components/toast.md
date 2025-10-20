@@ -1,5 +1,5 @@
 ---
-category: feedback
+category: overlay
 links:
   - label: Pohon
     to: /pohon/components/toast

@@ -47,6 +47,7 @@ export default defineNuxtConfig({
     families: [
       { name: 'Geist', provider: 'fontsource', weights: ['100 900'] },
       { name: 'Geist Mono', provider: 'fontsource', weights: ['100 900'] },
+      { name: 'Rubik', provider: 'fontsource', weights: ['100 900'] },
     ],
   },
 
@@ -66,6 +67,7 @@ export default defineNuxtConfig({
     'pohon',
     '@unocss/nuxt',
     '@nuxt/content',
+    '@nuxt/fonts',
     'nuxt-component-meta',
     'nuxt-og-image',
   ],

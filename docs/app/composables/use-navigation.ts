@@ -8,6 +8,10 @@ const CATEGORIES = {
   akar: {
     components: [
       {
+        id: 'element',
+        title: 'Element',
+      },
+      {
         id: 'data',
         title: 'Data',
       },
@@ -16,28 +20,12 @@ const CATEGORIES = {
         title: 'Dates & Time',
       },
       {
-        id: 'element',
-        title: 'Element',
-      },
-      {
-        id: 'feedback',
-        title: 'Feedback',
+        id: 'overlay',
+        title: 'Overlay',
       },
       {
         id: 'form',
         title: 'Form',
-      },
-      {
-        id: 'layout',
-        title: 'Layout',
-      },
-      {
-        id: 'navigation',
-        title: 'Navigation',
-      },
-      {
-        id: 'overlay',
-        title: 'Overlay',
       },
     ],
   },

@@ -1,5 +1,5 @@
 ---
-category: navigation
+category: element
 links:
   - label: Pohon
     to: /pohon/components/tabs

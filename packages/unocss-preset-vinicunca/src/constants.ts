@@ -197,7 +197,7 @@ export const DEFAULT_AKAR_OPTIONS: VinicuncaAkarOptions = {
   },
 
   brands: {
-    primary: 'violet',
+    primary: 'purple',
     secondary: 'blue',
     success: 'green',
     info: 'blue',

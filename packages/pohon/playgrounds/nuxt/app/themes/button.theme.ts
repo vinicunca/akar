@@ -91,32 +91,32 @@ export const buttonTheme = {
     {
       color: 'neutral',
       variant: 'solid',
-      class: 'color-text-inverted bg-background-inverted focus-visible:(outline-2 outline-outline-inverted outline-offset-2) active:bg-background-inverted/90 aria-disabled:bg-background-inverted disabled:bg-background-inverted hover:bg-background-inverted/90',
+      class: 'color-text-inverted bg-background-inverted shadow-md focus-visible:(outline-2 outline-outline-inverted outline-offset-2) active:bg-background-inverted/60 aria-disabled:bg-background-inverted/70 disabled:bg-background-inverted/70 hover:bg-background-inverted/80',
     },
     {
       color: 'neutral',
       variant: 'outline',
-      class: 'ring ring-inset ring-ring-accented color-text bg-background hover:bg-background-elevated active:bg-background-elevated disabled:bg-background aria-disabled:bg-background focus:outline-none focus-visible:(ring-2 ring-ring-inverted)',
+      class: 'ring ring-inset ring-ring-accented color-text bg-background hover:bg-background-elevated active:bg-background-accented disabled:bg-background aria-disabled:bg-background focus:outline-none focus-visible:(ring-2 ring-ring-inverted)',
     },
     {
       color: 'neutral',
       variant: 'soft',
-      class: 'color-text bg-background-elevated hover:bg-background-accented/75 active:bg-background-accented/75 focus:outline-none focus-visible:bg-background-accented/75 disabled:bg-background-elevated aria-disabled:bg-background-elevated',
+      class: 'color-text bg-background-elevated hover:bg-background-accented/75 active:bg-background-accented focus:outline-none focus-visible:bg-background-accented/75 disabled:bg-background-elevated aria-disabled:bg-background-elevated',
     },
     {
       color: 'neutral',
       variant: 'subtle',
-      class: 'ring ring-inset ring-ring-accented color-text bg-background-elevated hover:bg-background-accented/75 active:bg-background-accented/75 disabled:bg-background-elevated aria-disabled:bg-background-elevated focus:outline-none focus-visible:(ring-2 ring-ring-inverted)',
+      class: 'ring ring-inset ring-ring-accented color-text bg-background-elevated hover:bg-background-accented/75 active:bg-background-accented disabled:bg-background-elevated aria-disabled:bg-background-elevated focus:outline-none focus-visible:(ring-2 ring-ring-inverted)',
     },
     {
       color: 'neutral',
       variant: 'ghost',
-      class: 'color-text hover:bg-background-elevated active:bg-background-elevated focus:outline-none focus-visible:bg-background-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent',
+      class: 'color-text hover:bg-background-elevated active:bg-background-accented focus:outline-none focus-visible:bg-background-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent',
     },
     {
       color: 'neutral',
       variant: 'link',
-      class: 'color-text-muted hover:color-text active:color-text disabled:color-text-muted aria-disabled:color-text-muted focus:outline-none focus-visible:(ring-inset ring-2 ring-ring-inverted)',
+      class: 'color-text-muted hover:color-text active:color-text-toned disabled:color-text-muted aria-disabled:color-text-muted focus:outline-none focus-visible:(ring-inset ring-2 ring-ring-inverted)',
     },
     {
       size: 'xs',

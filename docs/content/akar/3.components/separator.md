@@ -1,5 +1,5 @@
 ---
-category: layout
+category: element
 links:
   - label: Pohon
     to: /pohon/components/separator

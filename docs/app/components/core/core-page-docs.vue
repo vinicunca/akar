@@ -24,6 +24,7 @@ import {
 } from '#imports';
 import { toKebabCase } from '@vinicunca/perkakas';
 import { pickLinkProps } from 'pohon/utils/link';
+import CorePageLinks from './core-page-links.vue';
 
 const props = defineProps<{
   type: 'akar' | 'pohon';

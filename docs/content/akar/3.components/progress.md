@@ -1,5 +1,5 @@
 ---
-category: feedback
+category: element
 links:
   - label: Pohon
     to: /pohon/components/progress

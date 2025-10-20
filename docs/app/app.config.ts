@@ -1,3 +1,5 @@
+// @unocss-include
+
 import { defineAppConfig } from '#imports';
 import { breadcrumbTheme } from './themes/breadcrumb.theme';
 import { buttonTheme } from './themes/button.theme';
@@ -13,7 +15,6 @@ import { mainTheme } from './themes/main.theme';
 import { navigationMenuTheme } from './themes/navigation-menu.theme';
 import { separatorTheme } from './themes/separator.theme';
 
-// @unocss-include
 export default defineAppConfig({
   theme: {
     blackAsPrimary: false,
@@ -124,7 +125,7 @@ export default defineAppConfig({
       },
       pre: {
         slots: {
-          base: 'group font-mono text-sm/6 border border-border-muted bg-background-muted rounded-md px-4 py-3 whitespace-pre-wrap break-words overflow-x-auto focus:outline-none',
+          base: 'group font-mono text-sm/6 border border-border-muted bg-[#282C34] rounded-md px-4 py-3 whitespace-pre-wrap break-words overflow-x-auto focus:outline-none',
           copy: 'absolute top-[11px] right-[11px] lg:opacity-0 lg:group-hover:opacity-100 transition',
           filename: 'color-text text-sm/6',
           header: 'flex items-center gap-1.5 border border-border-muted bg-background border-b-0 relative rounded-t-md px-4 py-3',

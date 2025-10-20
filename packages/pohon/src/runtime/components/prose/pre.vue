@@ -84,6 +84,6 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
   margin: 0 -16px;
   padding: 0 16px;
 
-  @apply bg-background-accented/50;
+  @apply bg-slate/30;
 }
 </style>
