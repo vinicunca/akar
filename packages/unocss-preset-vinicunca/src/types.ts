@@ -129,13 +129,6 @@ export interface PresetVinicuncaOptions {
   preflights?: boolean | PreflightOptions;
 
   /**
-   * Enable default shortcuts
-   *
-   * @default true
-   */
-  enableDefaultShortcuts?: boolean;
-
-  /**
    * Extract rgba color in css variable
    *
    * @default false

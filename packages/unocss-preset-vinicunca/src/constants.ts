@@ -8,8 +8,6 @@ import type {
 export const DEFAULT_OPTIONS: PresetVinicuncaOptions = {
   theme: {},
 
-  enableDefaultShortcuts: true,
-
   preflights: true,
 
   // presets
