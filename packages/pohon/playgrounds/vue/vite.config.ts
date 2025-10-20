@@ -1,5 +1,5 @@
 import vue from '@vitejs/plugin-vue';
-import pohon from 'pohon/vite';
+import pohon from 'pohon-ui/vite';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/

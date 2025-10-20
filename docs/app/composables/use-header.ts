@@ -7,16 +7,18 @@ export function useHeader() {
   const desktopLinks = computed(() => [
     {
       label: 'Akar',
-      to: '/akar',
-      active: route.path.startsWith('/akar/'),
+      to: '/docs/akar',
+      active: route.path.startsWith('/docs/akar/'),
     },
     {
       label: 'Pohon',
-      to: '/pohon',
+      to: '/docs/pohon',
+      active: route.path.startsWith('/docs/pohon/'),
     },
     {
-      label: 'Templates',
-      to: '/templates',
+      label: 'UnoCSS Preset',
+      to: '/docs/unocss/getting-started',
+      active: route.path.startsWith('/docs/unocss/'),
     },
   ]);
 

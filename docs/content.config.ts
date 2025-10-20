@@ -1,81 +1,42 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content';
 
+const Avatar = z.object({
+  src: z.string(),
+  alt: z.string().optional(),
+});
+
+const Button = z.object({
+  label: z.string(),
+  icon: z.string().optional(),
+  avatar: Avatar.optional(),
+  leadingIcon: z.string().optional(),
+  trailingIcon: z.string().optional(),
+  to: z.string().optional(),
+  target: z.enum(['_blank', '_self']).optional(),
+  color: z.enum(['primary', 'neutral', 'success', 'warning', 'error', 'info']).optional(),
+  size: z.enum(['xs', 'sm', 'md', 'lg', 'xl']).optional(),
+  variant: z.enum(['solid', 'outline', 'subtle', 'soft', 'ghost', 'link']).optional(),
+  id: z.string().optional(),
+  class: z.string().optional(),
+});
+
 export default defineContentConfig({
   collections: {
-    akar: defineCollection({
+    docs: defineCollection({
       type: 'page',
       source: [{
-        include: 'akar/**/*',
+        include: 'docs/**/*',
       }],
       schema: z.object({
-        category: z.enum([
-          'layout',
-          'form',
-          'element',
-          'navigation',
-          'data',
-          'overlay',
-          'dashboard',
-          'page',
-          'ai',
-          'color-mode',
-          'i18n',
-        ]).optional(),
+        category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'ai', 'color-mode', 'i18n']).optional(),
         framework: z.enum(['nuxt', 'vue']).optional(),
         navigation: z.object({
           title: z.string().optional(),
         }),
-        links: z.array(
-          z.object({
-            label: z.string(),
-            icon: z.string(),
-            avatar: z.object({
-              src: z.string(),
-              alt: z.string(),
-            }).optional(),
-            to: z.string(),
-            target: z.string().optional(),
-          }),
-        ),
+        links: z.array(Button),
       }),
     }),
-    pohon: defineCollection({
-      type: 'page',
-      source: [{
-        include: 'pohon/**',
-      }],
-      schema: z.object({
-        category: z.enum([
-          'layout',
-          'form',
-          'element',
-          'navigation',
-          'data',
-          'overlay',
-          'dashboard',
-          'page',
-          'ai',
-          'color-mode',
-          'i18n',
-        ]).optional(),
-        framework: z.enum(['nuxt', 'vue']).optional(),
-        navigation: z.object({
-          title: z.string().optional(),
-        }),
-        links: z.array(
-          z.object({
-            label: z.string(),
-            icon: z.string(),
-            avatar: z.object({
-              src: z.string(),
-              alt: z.string(),
-            }).optional(),
-            to: z.string(),
-            target: z.string().optional(),
-          }),
-        ),
-      }),
-    }),
+
     metadata: defineCollection({
       type: 'data',
       source: 'metadata/**.json',

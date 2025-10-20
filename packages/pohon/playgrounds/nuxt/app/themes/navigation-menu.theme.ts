@@ -32,7 +32,7 @@ export const navigationMenuTheme = {
     childLinkDescription: 'color-text-muted',
     separator: 'px-2 h-px bg-border',
     viewportWrapper: 'absolute top-full left-0 flex w-full',
-    viewport: 'relative overflow-hidden bg-background shadow-lg rounded-md ring ring-ring h-$navigation-menu-viewport-height w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1',
+    viewport: 'relative overflow-hidden bg-background shadow-lg rounded-md ring ring-ring h-$navigation-menu-viewport-height w-full transition-[width,height,left]-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1',
     content: '',
     indicator: 'absolute data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-[2] w-$navigation-menu-indicator-size translate-x-$navigation-menu-indicator-position flex h-2.5 items-end justify-center overflow-hidden transition-[translate,width] duration-200',
     arrow: 'relative top-[50%] size-2.5 rotate-45 border border-background bg-background z-1 rounded-xs',

@@ -10,16 +10,18 @@ import {
   useFaviconFromTheme,
   useHead,
   useNavigation,
+  useRoute,
   useServerSeoMeta,
 } from '#imports';
 import LayoutHeader from './components/header/layout-header.vue';
 
+const route = useRoute();
 const appConfig = useAppConfig();
 const colorMode = useColorMode();
 
 const { data: navigation } = useAsyncData(
   'navigation',
-  () => queryCollectionNavigation('akar', [
+  () => queryCollectionNavigation('docs', [
     'framework',
     'category',
     'description',
@@ -61,10 +63,10 @@ provide('navigation', rootNavigation);
       :height="2"
     />
 
-    <div class="data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg data-[state=closed]:(animate-out fade-out-0 zoom-out-95 slide-out-to-left-1/2) data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-left-1/2" />
-
     <div
-      class="root"
+      :class="[
+        (route.path.startsWith('/akar/') || route.path.startsWith('/pohon/')) && 'root',
+      ]"
     >
       <LayoutHeader />
 

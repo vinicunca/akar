@@ -2,7 +2,7 @@ import type { Ref } from '#imports';
 import type { ContentNavigationItem } from '@nuxt/content';
 import { computed, useRoute } from '#imports';
 import { findPageBreadcrumb, findPageChildren } from '@nuxt/content/utils';
-import { mapContentNavigation } from 'pohon/utils/content';
+import { mapContentNavigation } from 'pohon-ui/utils/content';
 
 const CATEGORIES = {
   akar: {
@@ -90,9 +90,6 @@ const CATEGORIES = {
   },
 } as const;
 
-type ParentCategory = keyof typeof CATEGORIES;
-type SlugCategory = keyof (typeof CATEGORIES)[ParentCategory];
-
 function processNavigationItem(
   item: ContentNavigationItem,
   parent?: ContentNavigationItem,
@@ -120,19 +117,28 @@ export function useNavigation(
   function findBreadcrumb(path: string) {
     const breadcrumb = findPageBreadcrumb(navigation?.value, path, { indexAsChild: true });
 
-    return mapContentNavigation(breadcrumb).map(({ icon, ...link }) => link);
+    return mapContentNavigation(
+      breadcrumb.slice(1),
+    ).map(({ icon, ...link }) => link);
   }
 
   const navigationByCategory = computed(() => {
     const route = useRoute();
 
-    const parent = route.path.split('/')[1] as ParentCategory;
-    const slug = route.params.slug?.[0] as SlugCategory;
+    const parent = route.path.split('/')[2] as string;
+    const slug = route.params.slug?.[1] as string;
+    let path = `/docs/${parent}/${slug}`;
+
+    if (parent === 'unocss') {
+      path = `/docs/${parent}`;
+    }
     const children = findPageChildren(
       navigation?.value,
-      `/${parent}/${slug}`,
+      // path,
+      `/docs/${parent}`,
       { indexAsChild: true },
     );
+    console.log('🚀 ~ useNavigation ~ children:', children);
 
     return groupChildrenByCategory({ items: children, parent, slug });
   });
@@ -147,8 +153,8 @@ export function useNavigation(
 function groupChildrenByCategory(
   { items, parent, slug }: {
     items: Array<ContentNavigationItem>;
-    parent: ParentCategory;
-    slug: SlugCategory;
+    parent: string;
+    slug: string;
   },
 ): Array<ContentNavigationItem> {
   if (!items.length) {
@@ -159,6 +165,7 @@ function groupChildrenByCategory(
 
   const categorized: Record<string, Array<ContentNavigationItem>> = {};
   const uncategorized: Array<ContentNavigationItem> = [];
+  console.log('🚀 ~ groupChildrenByCategory ~ uncategorized:', uncategorized);
 
   for (const item of items) {
     if (item.category) {
@@ -170,36 +177,38 @@ function groupChildrenByCategory(
     }
   }
 
-  if (uncategorized.length) {
-    const withChildren = uncategorized
-      .filter((item) => item.children?.length)
-      ?.map((item) => ({
-        ...item,
-        children: item.children?.map((child) => ({ ...child, icon: undefined })),
-      }));
-    const withoutChildren = uncategorized.filter((item) => !item.children?.length);
+  console.log('🚀 ~ groupChildrenByCategory ~ uncategorized:', uncategorized);
 
-    if (withoutChildren.length) {
-      groups.push({
-        title: 'Overview',
-        path: `/${parent}/${slug}`,
-        children: withoutChildren?.map((item) => ({ ...item, icon: undefined })),
-      });
-    }
+  // if (uncategorized.length) {
+  //   const withChildren = uncategorized
+  //     .filter((item) => item.children?.length)
+  //     ?.map((item) => ({
+  //       ...item,
+  //       children: item.children?.map((child) => ({ ...child, icon: undefined })),
+  //     }));
+  //   const withoutChildren = uncategorized.filter((item) => !item.children?.length);
 
-    groups.push(...withChildren);
-  }
+  //   if (withoutChildren.length) {
+  //     groups.push({
+  //       title: 'Overview',
+  //       path: `/${parent}/${slug}`,
+  //       children: withoutChildren?.map((item) => ({ ...item, icon: undefined })),
+  //     });
+  //   }
 
-  for (const category of CATEGORIES[parent][slug] || []) {
-    if (categorized[category.id]?.length) {
-      groups.push({
-        title: category.title,
-        path: `/docs/${slug}`,
-        class: 'framework' in category ? [`${category.framework}-only`] : undefined,
-        children: categorized[category.id],
-      });
-    }
-  }
+  //   groups.push(...withChildren);
+  // }
+
+  // for (const category of CATEGORIES[parent][slug] || []) {
+  //   if (categorized[category.id]?.length) {
+  //     groups.push({
+  //       title: category.title,
+  //       path: `/docs/${slug}`,
+  //       class: 'framework' in category ? [`${category.framework}-only`] : undefined,
+  //       children: categorized[category.id],
+  //     });
+  //   }
+  // }
 
   return groups;
 }

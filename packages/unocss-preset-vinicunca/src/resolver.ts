@@ -101,10 +101,10 @@ async function resolvePresets(options: Required<PresetVinicuncaOptions>) {
     typography: import('@unocss/preset-typography').then((mod) => mod.presetTypography),
     wind3: import('unocss').then((m) => m.presetWind3),
     wind4: import('unocss').then((m) => m.presetWind4),
-    scrollbar: import('./presets/scrollbar').then((mod) => mod.presetScrollbar),
-    magicCss: import('./presets/magic-css').then((mod) => mod.presetMagicss),
     animation: import('./presets/animation').then((mod) => mod.presetAnimation),
     fluid: import('./presets/fluid').then((mod) => mod.presetFluid),
+    scrollbar: import('./presets/scrollbar').then((mod) => mod.presetScrollbar),
+    magicCss: import('./presets/magic-css').then((mod) => mod.presetMagicss),
     akar: import('./presets/akar').then((mod) => mod.presetAkar),
   };
 

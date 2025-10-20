@@ -57,12 +57,14 @@ export {
   useBodyScrollLock,
   type UseDateFormatter,
   useDateFormatter,
+  useDirection,
   useEmitAsProps,
   useFilter,
   useForwardExpose,
   useForwardProps,
   useForwardPropsEmits,
   useId,
+  useLocale,
   useStateMachine,
 } from './shared';
 
