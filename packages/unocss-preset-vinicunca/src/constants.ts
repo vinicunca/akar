@@ -206,8 +206,6 @@ export const DEFAULT_AKAR_OPTIONS: VinicuncaAkarOptions = {
     neutral: 'slate',
   },
 
-  pohonThemes: true,
-
   enableDrawer: true,
 
   enableDynamicBrands: false,

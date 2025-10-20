@@ -107,23 +107,6 @@ export interface VinicuncaAkarOptions {
    * @default true
    */
   enableDrawer?: boolean;
-
-  /**
-   * Enable the pohon themes css variables and inject them into the theme config.
-   * Please note that the user are responsible to define the css variables values within their app.
-   * Currently we use the default settings:
-   * TODO: Allow custom themes and custom css variables.
-   *
-   * @default true
-   */
-  pohonThemes?: boolean | {
-    variables?: {
-      light?: Record<string, string>;
-      dark?: Record<string, string>;
-    };
-    themes?: ThemeWind4['colors'];
-  };
-
 }
 
 interface PreflightOptions {
