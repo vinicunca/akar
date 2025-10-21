@@ -4,6 +4,7 @@ import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import { nextTick } from 'vue';
 import PinInput from './story/_pin-input.vue';
 
 describe('given default PinInput', () => {
@@ -236,6 +237,23 @@ describe('give PinInput type=number', async () => {
 
     it('should emit \'complete\' with the result', () => {
       expect(wrapper.emitted('complete')?.[0]?.[0]).toStrictEqual([1, 2, 3, 4, 5]);
+    });
+  });
+
+  describe('autofill', () => {
+    it('should populate the opt code in each box', async () => {
+      /**
+       * https://github.com/unovue/reka-ui/issues/2210
+       * Password managers (like 1Password, Bitwarden, etc.) fill PIN inputs with `input` events
+       */
+      for (const input of inputs) {
+        input.setValue('0');
+        input.trigger('input', { data: undefined });
+      }
+      await nextTick();
+
+      expect(inputs.map((i) => i.element.value)).toStrictEqual(['0', '0', '0', '0', '0']);
+      expect(wrapper.emitted('complete')?.[0]?.[0]).toStrictEqual([0, 0, 0, 0, 0]);
     });
   });
 });

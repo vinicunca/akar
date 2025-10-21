@@ -48,7 +48,8 @@ function handleInput(event: InputEvent) {
     return;
   }
 
-  target.value = event.data ?? '';
+  target.value = event.data || target.value.slice(-1);
+
   updateModelValueAt({
     index: props.index,
     value: target.value,

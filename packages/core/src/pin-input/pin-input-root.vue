@@ -93,10 +93,16 @@ const { mask, otp, placeholder, type, disabled, dir: propDir } = toRefs(props);
 const { forwardRef } = useForwardExpose();
 const dir = useDirection(propDir);
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? [] as any,
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<APinInputValue<Type>>;
+const modelValue = useVModel(
+  props,
+  'modelValue',
+  emits,
+  {
+    defaultValue: props.defaultValue ?? [] as any,
+    passive: true,
+    deep: true,
+  },
+) as Ref<APinInputValue<Type>>;
 
 const currentModelValue = computed(() => Array.isArray(modelValue.value) ? [...modelValue.value] : []);
 

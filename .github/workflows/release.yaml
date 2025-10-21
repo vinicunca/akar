@@ -9,6 +9,7 @@ on:
 
 env:
   CI: true
+  SKIP_INSTALL_SIMPLE_GIT_HOOKS: 1
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -20,7 +21,7 @@ permissions:
 
 jobs:
   publish:
-    name: Publish to npm
+    name: Create Release PR or Publish to npm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
