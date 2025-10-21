@@ -70,7 +70,7 @@ export function defineShortcuts(
     return false;
   });
 
-  // Map config to full detailled shortcuts
+  // Map config to full detailed shortcuts
   const shortcuts = computed<Array<Shortcut>>(() => {
     return Object.entries(toValue(config)).map(([key, shortcutConfig]) => {
       if (!shortcutConfig) {
