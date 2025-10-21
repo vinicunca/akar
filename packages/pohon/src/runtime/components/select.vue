@@ -27,6 +27,7 @@ type Select = ComponentConfig<typeof theme, AppConfig, 'select'>;
 export type PSelectValue = AcceptableValue;
 export type PSelectItem = PSelectValue | {
   label?: string;
+  description?: string;
   /**
    * @IconifyIcon
    */
@@ -42,7 +43,7 @@ export type PSelectItem = PSelectValue | {
   disabled?: boolean;
   onSelect?: (event?: Event) => void;
   class?: any;
-  pohon?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>;
+  pohon?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>;
   [key: string]: any;
 };
 
@@ -99,6 +100,11 @@ export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNest
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>;
+  /**
+   * When `items` is an array of objects, select the field to use as the description.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>;
   items?: T;
   /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
   defaultValue?: GetModelValue<T, VK, M>;
@@ -134,6 +140,7 @@ export interface PSelectSlots<
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': (props: { item: T; index: number }) => any;
+  'item-description': (props: { item: T; index: number }) => any;
   'item-trailing': SlotProps<T>;
   'content-top': (props?: object) => any;
   'content-bottom': (props?: object) => any;
@@ -177,6 +184,7 @@ const props = withDefaults(
   {
     valueKey: 'value' as never,
     labelKey: 'label',
+    descriptionKey: 'description',
     portal: true,
     autofocusDelay: 0,
   },
@@ -493,15 +501,46 @@ defineExpose({
                     />
                   </slot>
 
-                  <ASelectItemText :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel] })">
-                    <slot
-                      name="item-label"
-                      :item="(item as NestedItem<T>)"
-                      :index="index"
+                  <span
+                    :class="pohon.itemWrapper({
+                      class: [
+                        props.pohon?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper,
+                      ],
+                    })"
+                  >
+                    <ASelectItemText
+                      :class="pohon.itemLabel({
+                        class: [
+                          props.pohon?.itemLabel, isSelectItem(item) && item.ui?.itemLabel,
+                        ],
+                      })"
                     >
-                      {{ isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
-                    </slot>
-                  </ASelectItemText>
+                      <slot
+                        name="item-label"
+                        :item="(item as NestedItem<T>)"
+                        :index="index"
+                      >
+                        {{ isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
+                      </slot>
+                    </ASelectItemText>
+
+                    <span
+                      v-if="isSelectItem(item) && (getProp({ object: item, path: props.descriptionKey as string }) || !!slots['item-description'])"
+                      :class="pohon.itemDescription({
+                        class: [
+                          props.pohon?.itemDescription, isSelectItem(item) && item.ui?.itemDescription,
+                        ],
+                      })"
+                    >
+                      <slot
+                        name="item-description"
+                        :item="(item as NestedItem<T>)"
+                        :index="index"
+                      >
+                        {{ getProp({ object: item, path: props.descriptionKey as string }) }}
+                      </slot>
+                    </span>
+                  </span>
 
                   <span
                     :class="pohon.itemTrailing({

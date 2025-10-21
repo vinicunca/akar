@@ -16,6 +16,7 @@ export interface PCommandPaletteItem extends Omit<PLinkProps, 'type' | 'raw' | '
   prefix?: string;
   label?: string;
   suffix?: string;
+  description?: string;
   /**
    * @IconifyIcon
    */
@@ -34,7 +35,7 @@ export interface PCommandPaletteItem extends Omit<PLinkProps, 'type' | 'raw' | '
   children?: Array<PCommandPaletteItem>;
   onSelect?: (event?: Event) => void;
   class?: any;
-  pohon?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>;
+  pohon?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>;
   [key: string]: any;
 }
 
@@ -153,6 +154,11 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>;
+  /**
+   * The key used to get the description from the item.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>;
   class?: any;
   pohon?: CommandPalette['slots'];
 }
@@ -171,6 +177,7 @@ export type PCommandPaletteSlots<G extends PCommandPaletteGroup<T> = PCommandPal
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': SlotProps<T>;
+  'item-description': SlotProps<T>;
   'item-trailing': SlotProps<T>;
 } & Record<string, SlotProps<G>> & Record<string, SlotProps<T>>;
 
@@ -214,6 +221,7 @@ const props = withDefaults(
   {
     modelValue: '',
     labelKey: 'label',
+    descriptionKey: 'description',
     autofocus: true,
     back: true,
     virtualize: false,
@@ -494,39 +502,46 @@ function onSelect(event: Event, item: T) {
             </slot>
 
             <span
-              v-if="item.labelHtml || getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<G, T>]"
-              :class="pohon.itemLabel({
-                class: [props.pohon?.itemLabel, item.pohon?.itemLabel],
-                active: active || item.active,
-              })"
+              v-if="(item.prefix || (item.labelHtml || getProp({ object: item, path: props.labelKey as string })) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<G, T>]) || (getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof PCommandPaletteSlots<G, T>])"
+              :class="pohon.itemWrapper({ class: [props.pohon?.itemWrapper, item.pohon?.itemWrapper] })"
             >
-              <slot
-                :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<G, T>)"
-                :item="(item as any)"
-                :index="index"
-                :pohon="pohon"
+              <span :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, item.pohon?.itemLabel], active: active || item.active })">
+                <slot
+                  :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<G, T>)"
+                  :item="(item as any)"
+                  :index="index"
+                  :pohon="pohon"
+                >
+                  <span
+                    v-if="item.prefix"
+                    :class="pohon.itemLabelPrefix({ class: [props.pohon?.itemLabelPrefix, item.pohon?.itemLabelPrefix] })"
+                  >{{ item.prefix }}</span>
+
+                  <span
+                    :class="pohon.itemLabelBase({ class: [props.pohon?.itemLabelBase, item.pohon?.itemLabelBase], active: active || item.active })"
+                    v-html="item.labelHtml || getProp({ object: item, path: props.labelKey as string })"
+                  />
+
+                  <span
+                    :class="pohon.itemLabelSuffix({ class: [props.pohon?.itemLabelSuffix, item.pohon?.itemLabelSuffix], active: active || item.active })"
+                    v-html="item.suffixHtml || item.suffix"
+                  />
+                </slot>
+              </span>
+
+              <span
+                v-if="getProp({ object: item, path: props.descriptionKey as string })"
+                :class="pohon.itemDescription({ class: [props.pohon?.itemDescription, item.pohon?.itemDescription] })"
               >
-                <span
-                  v-if="item.prefix"
-                  :class="pohon.itemLabelPrefix({ class: [props.pohon?.itemLabelPrefix, item.pohon?.itemLabelPrefix] })"
-                >{{ item.prefix }}</span>
-
-                <span
-                  :class="pohon.itemLabelBase({
-                    class: [props.pohon?.itemLabelBase, item.pohon?.itemLabelBase],
-                    active: active || item.active,
-                  })"
-                  v-html="item.labelHtml || getProp({ object: item, path: props.labelKey as string })"
-                />
-
-                <span
-                  :class="pohon.itemLabelSuffix({
-                    class: [props.pohon?.itemLabelSuffix, item.pohon?.itemLabelSuffix],
-                    active: active || item.active,
-                  })"
-                  v-html="item.suffixHtml || item.suffix"
-                />
-              </slot>
+                <slot
+                  :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof PCommandPaletteSlots<G, T>)"
+                  :item="(item as any)"
+                  :index="index"
+                  :pohon="pohon"
+                >
+                  {{ getProp({ object: item, path: props.descriptionKey as string }) }}
+                </slot>
+              </span>
             </span>
 
             <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, item.pohon?.itemTrailing] })">

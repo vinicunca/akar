@@ -16,6 +16,7 @@ type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>;
 
 export interface PContextMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'custom'> {
   label?: string;
+  description?: string;
   /**
    * @IconifyIcon
    */
@@ -39,7 +40,7 @@ export interface PContextMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'cus
   onSelect?: (event: Event) => void;
   onUpdateChecked?: (checked: boolean) => void;
   class?: any;
-  pohon?: Pick<ContextMenu['slots'], 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLabel' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>;
+  pohon?: Pick<ContextMenu['slots'], 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>;
   [key: string]: any;
 }
 
@@ -80,6 +81,11 @@ export interface PContextMenuProps<T extends ArrayOrNested<PContextMenuItem> = A
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>;
+  /**
+   * The key used to get the description from the item.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>;
   disabled?: boolean;
   class?: any;
   pohon?: ContextMenu['slots'];
@@ -97,11 +103,12 @@ export type PContextMenuSlots<
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': (props: { item: T; active?: boolean; index: number }) => any;
+  'item-description': (props: { item: T; active?: boolean; index: number }) => any;
   'item-trailing': SlotProps<T>;
   'content-top': (props?: object) => any;
   'content-bottom': (props?: object) => any;
 }
-& DynamicSlots<MergeTypes<T>, 'label', { active?: boolean; index: number }>
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean; index: number }>
 & DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean; index: number; pohon: ContextMenu['pohon'] }>;
 
 </script>
@@ -126,6 +133,7 @@ const props = withDefaults(
     modal: true,
     externalIcon: true,
     labelKey: 'label',
+    descriptionKey: 'description',
   },
 );
 const emits = defineEmits<PContextMenuEmits>();
@@ -166,6 +174,7 @@ const pohon = computed(() =>
       :items="items"
       :portal="portal"
       :label-key="(labelKey as keyof NestedItem<T>)"
+      :description-key="(descriptionKey as keyof NestedItem<T>)"
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"

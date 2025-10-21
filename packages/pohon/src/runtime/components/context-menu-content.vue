@@ -22,6 +22,7 @@ interface ContextMenuContentProps<T extends ArrayOrNested<PContextMenuItem>> ext
   portal?: boolean | string | HTMLElement;
   sub?: boolean;
   labelKey: GetItemKeys<T>;
+  descriptionKey: GetItemKeys<T>;
   /**
    * @IconifyIcon
    */
@@ -75,6 +76,7 @@ const contentProps = useForwardPropsEmits(
     'items',
     'portal',
     'labelKey',
+    'descriptionKey',
     'checkedIcon',
     'loadingIcon',
     'externalIcon',
@@ -153,23 +155,39 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
       </slot>
 
       <span
-        v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PContextMenuSlots<T>]"
-        :class="pohon.itemLabel({ class: [pohonOverride?.itemLabel, item.pohon?.itemLabel], active })"
+        v-if="(getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PContextMenuSlots<T>]) || (getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : 'item-description') as keyof PContextMenuSlots<T>])"
+        :class="pohon.itemWrapper({ class: [pohonOverride?.itemWrapper, item.pohon?.itemWrapper] })"
       >
-        <slot
-          :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PContextMenuSlots<T>)"
-          :item="item"
-          :active="active"
-          :index="index"
-        >
-          {{ getProp({ object: item, path: props.labelKey as string }) }}
-        </slot>
+        <span :class="pohon.itemLabel({ class: [pohonOverride?.itemLabel, item.pohon?.itemLabel], active })">
+          <slot
+            :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PContextMenuSlots<T>)"
+            :item="item"
+            :active="active"
+            :index="index"
+          >
+            {{ getProp({ object: item, path: props.labelKey as string }) }}
+          </slot>
 
-        <PIcon
-          v-if="item.target === '_blank' && externalIcon !== false"
-          :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
-          :class="pohon.itemLabelExternalIcon({ class: [pohonOverride?.itemLabelExternalIcon, item.pohon?.itemLabelExternalIcon], color: item?.color, active })"
-        />
+          <PIcon
+            v-if="item.target === '_blank' && externalIcon !== false"
+            :name="typeof externalIcon === 'string' ? externalIcon : appConfig.pohon.icons.external"
+            :class="pohon.itemLabelExternalIcon({ class: [pohonOverride?.itemLabelExternalIcon, item.pohon?.itemLabelExternalIcon], color: item?.color, active })"
+          />
+        </span>
+
+        <span
+          v-if="getProp({ object: item, path: props.descriptionKey as string })"
+          :class="pohon.itemDescription({ class: [pohonOverride?.itemDescription, item.pohon?.itemDescription] })"
+        >
+          <slot
+            :name="((item.slot ? `${item.slot}-description` : 'item-description') as keyof PContextMenuSlots<T>)"
+            :item="item"
+            :active="active"
+            :index="index"
+          >
+            {{ getProp({ object: item, path: props.descriptionKey as string }) }}
+          </slot>
+        </span>
       </span>
 
       <span :class="pohon.itemTrailing({ class: [pohonOverride?.itemTrailing, item.pohon?.itemTrailing] })">
@@ -269,6 +287,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
                 :items="(item.children as T)"
                 :align-offset="-4"
                 :label-key="labelKey"
+                :description-key="descriptionKey"
                 :checked-icon="checkedIcon"
                 :loading-icon="loadingIcon"
                 :external-icon="externalIcon"

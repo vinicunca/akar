@@ -27,6 +27,7 @@ type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>;
 export type PSelectMenuValue = AcceptableValue;
 export type PSelectMenuItem = PSelectMenuValue | {
   label?: string;
+  description?: string;
   /**
    * @IconifyIcon
    */
@@ -41,7 +42,7 @@ export type PSelectMenuItem = PSelectMenuValue | {
   disabled?: boolean;
   onSelect?: (event?: Event) => void;
   class?: any;
-  pohon?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>;
+  pohon?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>;
   [key: string]: any;
 };
 
@@ -124,6 +125,11 @@ export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = Arr
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>;
+  /**
+   * When `items` is an array of objects, select the field to use as the description.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>;
   items?: T;
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
   defaultValue?: GetModelValue<T, VK, M>;
@@ -181,6 +187,7 @@ export interface PSelectMenuSlots<
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': (props: { item: T; index: number }) => any;
+  'item-description': (props: { item: T; index: number }) => any;
   'item-trailing': SlotProps<T>;
   'content-top': (props?: object) => any;
   'content-bottom': (props?: object) => any;
@@ -233,6 +240,7 @@ const props = withDefaults(
     portal: true,
     searchInput: true,
     labelKey: 'label',
+    descriptionKey: 'description',
     resetSearchTermOnBlur: true,
     resetSearchTermOnSelect: true,
     autofocusDelay: 0,
@@ -562,7 +570,7 @@ defineExpose({
           :index="index"
           :pohon="pohon"
         >
-          <UIcon
+          <PIcon
             v-if="isSelectItem(item) && item.icon"
             :name="item.icon"
             :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
@@ -584,30 +592,61 @@ defineExpose({
           />
         </slot>
 
-        <span :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel] })">
-          <slot
-            name="item-label"
-            :item="(item as NestedItem<T>)"
-            :index="index"
+        <span
+          :class="pohon.itemWrapper({
+            class: [
+              props.pohon?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
+            ],
+          })"
+        >
+          <span
+            :class="pohon.itemLabel({
+              class: [
+                props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
+              ],
+            })"
           >
-            {{ isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
-          </slot>
-        </span>
+            <slot
+              name="item-label"
+              :item="(item as NestedItem<T>)"
+              :index="index"
+            >
+              {{ isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
+            </slot>
+          </span>
 
-        <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })">
-          <slot
-            name="item-trailing"
-            :item="(item as NestedItem<T>)"
-            :index="index"
-            :pohon="pohon"
-          />
+          <span
+            v-if="isSelectItem(item) && (getProp({ object: item, path: props.descriptionKey as string }) || !!slots['item-description'])"
+            :class="pohon.itemDescription({
+              class: [
+                props.pohon?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
+              ],
+            })"
+          >
+            <slot
+              name="item-description"
+              :item="(item as NestedItem<T>)"
+              :index="index"
+            >
+              {{ getProp({ object: item, path: props.descriptionKey as string }) }}
+            </slot>
+          </span>
 
-          <AComboboxItemIndicator as-child>
-            <UIcon
-              :name="selectedIcon || appConfig.pohon.icons.check"
-              :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
+          <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })">
+            <slot
+              name="item-trailing"
+              :item="(item as NestedItem<T>)"
+              :index="index"
+              :pohon="pohon"
             />
-          </AComboboxItemIndicator>
+
+            <AComboboxItemIndicator as-child>
+              <PIcon
+                :name="selectedIcon || appConfig.pohon.icons.check"
+                :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
+              />
+            </AComboboxItemIndicator>
+          </span>
         </span>
       </slot>
     </AComboboxItem>

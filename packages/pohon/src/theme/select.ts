@@ -26,7 +26,9 @@ export default (options: Required<PohonModuleOptions>) => {
         itemLeadingChipSize: '',
         itemTrailing: '',
         itemTrailingIcon: '',
+        itemWrapper: '',
         itemLabel: '',
+        itemDescription: '',
       },
 
       variants: {

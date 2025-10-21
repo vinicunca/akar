@@ -16,7 +16,9 @@ export default (options: Required<PohonModuleOptions>) => {
       itemTrailingIcon: '',
       itemTrailingKbds: '',
       itemTrailingKbdsSize: '',
+      itemWrapper: '',
       itemLabel: '',
+      itemDescription: '',
       itemLabelExternalIcon: '',
     },
 

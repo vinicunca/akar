@@ -17,6 +17,7 @@ interface DropdownMenuContentProps<T extends ArrayOrNested<PDropdownMenuItem>> e
   portal?: boolean | string | HTMLElement;
   sub?: boolean;
   labelKey: GetItemKeys<T>;
+  descriptionKey: GetItemKeys<T>;
   /**
    * @IconifyIcon
    */
@@ -39,10 +40,10 @@ interface DropdownMenuContentEmits extends AkarDropdownMenuContentEmits {}
 type DropdownMenuContentSlots<
   A extends ArrayOrNested<PDropdownMenuItem> = ArrayOrNested<PDropdownMenuItem>,
   T extends NestedItem<A> = NestedItem<A>,
-> = Pick<PDropdownMenuSlots<A>, 'item' | 'item-leading' | 'item-label' | 'item-trailing' | 'content-top' | 'content-bottom'> & {
+> = Pick<PDropdownMenuSlots<A>, 'item' | 'item-leading' | 'item-label' | 'item-description' | 'item-trailing' | 'content-top' | 'content-bottom'> & {
   default: (props?: object) => any;
 }
-& DynamicSlots<MergeTypes<T>, 'label', { active?: boolean; index: number }>
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean; index: number }>
 & DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean; index: number; pohon: DropdownMenu['pohon'] }>;
 
 </script>
@@ -80,6 +81,7 @@ const contentProps = useForwardPropsEmits(
     'items',
     'portal',
     'labelKey',
+    'descriptionKey',
     'checkedIcon',
     'loadingIcon',
     'externalIcon',
@@ -140,27 +142,39 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
       </slot>
 
       <span
-        v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof DropdownMenuContentSlots<T>]"
-        :class="pohon.itemLabel({ class: [pohonOverride?.itemLabel, item.pohon?.itemLabel], active })"
+        v-if="(getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PDropdownMenuSlots<T>]) || (getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : 'item-description') as keyof PDropdownMenuSlots<T>])"
+        :class="pohon.itemWrapper({ class: [pohonOverride?.itemWrapper, item.pohon?.itemWrapper] })"
       >
-        <slot
-          :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof DropdownMenuContentSlots<T>)"
-          :item="(item as Extract<NestedItem<T>, { slot: string; }>)"
-          :active="active"
-          :index="index"
-        >
-          {{ getProp({ object: item, path: props.labelKey as string }) }}
-        </slot>
+        <span :class="pohon.itemLabel({ class: [pohonOverride?.itemLabel, item.pohon?.itemLabel], active })">
+          <slot
+            :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof DropdownMenuContentSlots<T>)"
+            :item="(item as Extract<NestedItem<T>, { slot: string; }>)"
+            :active="active"
+            :index="index"
+          >
+            {{ getProp({ object: item, path: props.labelKey as string }) }}
+          </slot>
 
-        <PIcon
-          v-if="item.target === '_blank' && externalIcon !== false"
-          :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
-          :class="pohon.itemLabelExternalIcon({
-            class: [pohonOverride?.itemLabelExternalIcon, item.pohon?.itemLabelExternalIcon],
-            color: item?.color,
-            active,
-          })"
-        />
+          <PIcon
+            v-if="item.target === '_blank' && externalIcon !== false"
+            :name="typeof externalIcon === 'string' ? externalIcon : appConfig.pohon.icons.external"
+            :class="pohon.itemLabelExternalIcon({ class: [pohonOverride?.itemLabelExternalIcon, item.pohon?.itemLabelExternalIcon], color: item?.color, active })"
+          />
+        </span>
+
+        <span
+          v-if="getProp({ object: item, path: props.descriptionKey as string })"
+          :class="pohon.itemDescription({ class: [pohonOverride?.itemDescription, item.pohon?.itemDescription] })"
+        >
+          <slot
+            :name="((item.slot ? `${item.slot}-description` : 'item-description') as keyof DropdownMenuContentSlots<T>)"
+            :item="(item as Extract<NestedItem<T>, { slot: string; }>)"
+            :active="active"
+            :index="index"
+          >
+            {{ getProp({ object: item, path: props.descriptionKey as string }) }}
+          </slot>
+        </span>
       </span>
 
       <span :class="pohon.itemTrailing({ class: [pohonOverride?.itemTrailing, item.pohon?.itemTrailing] })">
@@ -262,6 +276,7 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
                 :align-offset="-4"
                 :side-offset="3"
                 :label-key="labelKey"
+                :description-key="descriptionKey"
                 :checked-icon="checkedIcon"
                 :loading-icon="loadingIcon"
                 :external-icon="externalIcon"

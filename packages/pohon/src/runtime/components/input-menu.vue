@@ -28,6 +28,7 @@ type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>;
 export type PInputMenuValue = AcceptableValue;
 export type PInputMenuItem = PInputMenuValue | {
   label?: string;
+  description?: string;
   /**
    * @IconifyIcon
    */
@@ -42,7 +43,7 @@ export type PInputMenuItem = PInputMenuValue | {
   disabled?: boolean;
   onSelect?: (event?: Event) => void;
   class?: any;
-  pohon?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>;
+  pohon?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>;
   [key: string]: any;
 };
 
@@ -132,6 +133,11 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>;
+  /**
+   * When `items` is an array of objects, select the field to use as the description.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: GetItemKeys<T>;
   items?: T;
   /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
   defaultValue?: GetModelValue<T, VK, M>;
@@ -187,6 +193,7 @@ export interface PInputMenuSlots<
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': (props: { item: T; index: number }) => any;
+  'item-description': (props: { item: T; index: number }) => any;
   'item-trailing': SlotProps<T>;
   'tags-item-text': (props: { item: T; index: number }) => any;
   'tags-item-delete': SlotProps<T>;
@@ -246,6 +253,7 @@ const props = withDefaults(
     autofocusDelay: 0,
     portal: true,
     labelKey: 'label',
+    descriptionKey: 'description',
     resetSearchTermOnBlur: true,
     resetSearchTermOnSelect: true,
     virtualize: false,
@@ -595,30 +603,55 @@ defineExpose({
           />
         </slot>
 
-        <span :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, isInputItem(item) && item.pohon?.itemLabel] })">
-          <slot
-            name="item-label"
-            :item="(item as NestedItem<T>)"
-            :index="index"
+        <span
+          :class="pohon.itemWrapper({
+            class: [
+              props.pohon?.itemWrapper, isInputItem(item) && item.pohon?.itemWrapper],
+          })"
+        >
+          <span
+            :class="pohon.itemLabel({
+              class: [
+                props.pohon?.itemLabel, isInputItem(item) && item.pohon?.itemLabel],
+            })"
           >
-            {{ isInputItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
-          </slot>
-        </span>
+            <slot
+              name="item-label"
+              :item="(item as NestedItem<T>)"
+              :index="index"
+            >
+              {{ isInputItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
+            </slot>
+          </span>
 
-        <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isInputItem(item) && item.pohon?.itemTrailing] })">
-          <slot
-            name="item-trailing"
-            :item="(item as NestedItem<T>)"
-            :index="index"
-            :pohon="pohon"
-          />
+          <span
+            v-if="isInputItem(item) && (getProp({ object: item, path: props.descriptionKey as string }) || !!slots['item-description'])"
+            :class="pohon.itemDescription({ class: [props.pohon?.itemDescription, isInputItem(item) && item.pohon?.itemDescription] })"
+          >
+            <slot
+              name="item-description"
+              :item="(item as NestedItem<T>)"
+              :index="index"
+            >
+              {{ getProp({ object: item, path: props.descriptionKey as string }) }}
+            </slot>
+          </span>
 
-          <AComboboxItemIndicator as-child>
-            <PIcon
-              :name="selectedIcon || appConfig.pohon.icons.check"
-              :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isInputItem(item) && item.pohon?.itemTrailingIcon] })"
+          <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isInputItem(item) && item.pohon?.itemTrailing] })">
+            <slot
+              name="item-trailing"
+              :item="(item as NestedItem<T>)"
+              :index="index"
+              :pohon="pohon"
             />
-          </AComboboxItemIndicator>
+
+            <AComboboxItemIndicator as-child>
+              <PIcon
+                :name="selectedIcon || appConfig.pohon.icons.check"
+                :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isInputItem(item) && item.pohon?.itemTrailingIcon] })"
+              />
+            </AComboboxItemIndicator>
+          </span>
         </span>
       </slot>
     </AComboboxItem>
