@@ -12,14 +12,14 @@ env:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: write # to create release (changesets/action)
+  issues: write # to post issue comments (changesets/action)
+  pull-requests: write # to create pull request (changesets/action)
+  id-token: write # to use OpenID Connect token for provenance (changesets/action)
+
 jobs:
   publish:
-    permissions:
-      contents: write # to create release (changesets/action)
-      issues: write # to post issue comments (changesets/action)
-      pull-requests: write # to create pull request (changesets/action)
-      id-token: write # to use OpenID Connect token for provenance (changesets/action)
-
     name: Publish to npm
     runs-on: ubuntu-latest
     steps:
@@ -31,22 +31,15 @@ jobs:
       - name: Setup (Install node & pnpm)
         uses: ./.github/actions/setup
 
-      # We need to run this before build so nuxt outputs the .nuxt directory
-      - name: Prepare
-        run: pnpm run dev:prepare
-
-      - name: Build packages
-        run: pnpm build
-
-      - name: Publish to npm
+      - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm ci:release
-          version: pnpm version
+          publish: pnpm ci:publish
+          version: pnpm ci:version
           title: 'chore: version packages'
           commit: 'chore: version packages'
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.VINICUNCA_NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.VINICUNCA_NPM_TOKEN }}

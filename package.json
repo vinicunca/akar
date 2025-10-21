@@ -23,8 +23,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "bump": "changeset",
-    "version": "changeset version",
-    "ci:release": "changeset publish",
+    "ci:version": "changeset version",
+    "ci:publish": "pnpm dev:prepare && pnpm build && changeset publish",
     "taze": "taze patch -wIrl"
   },
   "devDependencies": {
