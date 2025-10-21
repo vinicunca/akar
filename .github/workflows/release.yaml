@@ -84,6 +84,10 @@ jobs:
       - name: Setup (Install node & pnpm)
         uses: ./.github/actions/setup
 
+      # We need to run this before build so nuxt outputs the .nuxt directory
+      - name: Prepare
+        run: pnpm run dev:prepare
+
       - name: Build packages
         run: pnpm build
 
