@@ -113,24 +113,25 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
             <PLinkBase
               v-bind="slotProps"
               as="span"
-              :aria-current="active && (index === items!.length - 1) ? 'page' : undefined"
+              :aria-current="(item.active ?? active) && (index === items!.length - 1) ? 'page' : undefined"
               :class="pohon.link({
                 class: [props.pohon?.link, item.pohon?.link, item.class],
-                active: index === items!.length - 1,
+                active: item.active ?? (index === items!.length - 1),
                 disabled: !!item.disabled,
                 to: !!item.to,
               })"
             >
               <slot
                 :name="((item.slot || 'item') as keyof PBreadcrumbSlots<T>)"
-                :item="item"
+                :item="(item as Extract<T, { slot: string; }>)"
+                :active="item.active ?? (index === items!.length - 1)"
                 :index="index"
                 :pohon="pohon"
               >
                 <slot
                   :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PBreadcrumbSlots<T>)"
-                  :item="item"
-                  :active="index === items!.length - 1"
+                  :item="(item as Extract<T, { slot: string; }>)"
+                  :active="item.active ?? (index === items!.length - 1)"
                   :index="index"
                   :pohon="pohon"
                 >
@@ -139,7 +140,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                     :name="item.icon"
                     :class="pohon.linkLeadingIcon({
                       class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
-                      active: index === items!.length - 1,
+                      active: item.active ?? (index === items!.length - 1),
                     })"
                   />
                   <PAvatar
@@ -148,7 +149,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                     v-bind="item.avatar"
                     :class="pohon.linkLeadingAvatar({
                       class: [props.pohon?.linkLeadingAvatar, item.pohon?.linkLeadingAvatar],
-                      active: index === items!.length - 1,
+                      active: item.active ?? (index === items!.length - 1),
                     })"
                   />
                 </slot>
@@ -160,7 +161,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                   <slot
                     :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof DynamicSlots<T, 'label'>)"
                     :item="(item as Extract<T, { slot: string; }>)"
-                    :active="index === items!.length - 1"
+                    :active="item.active ?? (index === items!.length - 1)"
                     :index="index"
                   >
                     {{ getProp({ object: item, path: props.labelKey as string }) }}
@@ -170,7 +171,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                 <slot
                   :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof DynamicSlots<T, 'trailing'>)"
                   :item="(item as Extract<T, { slot: string; }>)"
-                  :active="index === items!.length - 1"
+                  :active="item.active ?? (index === items!.length - 1)"
                   :index="index"
                 />
               </slot>
