@@ -31,7 +31,7 @@
     "@iconify/json": "catalog:base",
     "@types/babel__traverse": "catalog:docs",
     "@unocss/nuxt": "catalog:pohon",
-    "@vinicunca/unocss-preset": "workspace:*",
+    "@vinicunca/unocss-preset": "catalog:pohon",
     "fast-glob": "catalog:docs",
     "unocss": "catalog:base",
     "vue-component-meta": "catalog:docs"

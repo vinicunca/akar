@@ -88,6 +88,7 @@ catalogs:
     '@standard-schema/spec': ^1.0.0
     '@tanstack/vue-table': ^8.21.3
     '@unocss/nuxt': 66.5.4
+    '@vinicunca/unocss-preset': 1.31.0
     colortranslator: ^5.0.0
     embla-carousel-auto-height: ^8.6.0
     embla-carousel-auto-scroll: ^8.6.0
