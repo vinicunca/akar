@@ -22,7 +22,6 @@ jobs:
 
     name: Publish to npm
     runs-on: ubuntu-latest
-    needs: check-version
     steps:
       - name: Setup (Install node & pnpm)
         uses: ./.github/actions/setup
