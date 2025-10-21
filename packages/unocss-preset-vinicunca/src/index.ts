@@ -5,7 +5,6 @@ import { getPreflights, postprocessWithUnColor } from './core';
 import { PRESET_NAME } from './meta';
 import { resolveOptions } from './resolver';
 
-// Test change for changesets
 export type { VinicuncaTheme };
 
 export const presetVinicunca = definePreset<PresetVinicuncaOptions, VinicuncaTheme>(
@@ -45,5 +44,3 @@ export const presetVinicunca = definePreset<PresetVinicuncaOptions, VinicuncaThe
     };
   },
 );
-
-// Testing out changesets 1

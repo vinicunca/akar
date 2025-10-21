@@ -22,7 +22,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "changeset": "changeset",
-    "version": "changeset version",
+    "bump": "changeset version",
     "release": "pnpm build && changeset publish",
     "bumpp": "bumpp package.json packages/*/package.json",
     "taze": "taze patch -wIrl",
