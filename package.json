@@ -22,8 +22,8 @@
     "prepare": "pnpm simple-git-hooks",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "bump:bak": "changeset && changeset version && git add . && git commit -m 'chore: bump versions' -n && git push",
-    "bump": "changeset && changeset version",
+    "bump": "changeset",
+    "version": "changeset version",
     "ci:release": "changeset publish",
     "taze": "taze patch -wIrl"
   },

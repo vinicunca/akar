@@ -11,11 +11,17 @@ const route = useRoute();
 const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 console.log('🚀 ~ navigation:', navigation);
 
-const items = computed(() =>
-  mapContentNavigation(navigation?.value.map((item) => ({ ...item, children: undefined })) ?? [])?.map((item) => ({
+const items = computed(() => {
+  // const parent = route.params.slug?.[0] as string;
+  // console.log('🚀 ~ route:', route);
+
+  return mapContentNavigation(
+    navigation?.value.map((item) => ({ ...item, children: undefined })) ?? [],
+  )?.map((item) => ({
     ...item,
     active: route.path.startsWith(item.to as string),
-  })));
+  }));
+});
 </script>
 
 <template>

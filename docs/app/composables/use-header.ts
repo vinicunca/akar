@@ -15,11 +15,6 @@ export function useHeader() {
       to: '/docs/pohon/getting-started',
       active: route.path.startsWith('/docs/pohon/'),
     },
-    {
-      label: 'UnoCSS Preset',
-      to: '/docs/unocss/getting-started',
-      active: route.path.startsWith('/docs/unocss/'),
-    },
   ]);
 
   const mobileLinks = computed(() => [

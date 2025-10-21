@@ -1,6 +1,5 @@
 import type { Ref } from 'vue';
 import type { Direction, ResizeEvent } from './types';
-import { isFunction } from '@vinicunca/perkakas';
 import { getResizeEventCoordinates } from './events';
 import { intersects } from './rects';
 import { compare } from './stacking-order';
@@ -32,7 +31,7 @@ export const EXCEEDED_VERTICAL_MIN = 0b0100;
 export const EXCEEDED_VERTICAL_MAX = 0b1000;
 
 function getInputType(): 'coarse' | 'fine' | undefined {
-  if (isFunction(matchMedia)) {
+  if (typeof matchMedia === 'function') {
     return matchMedia('(pointer:coarse)').matches ? 'coarse' : 'fine';
   }
 }

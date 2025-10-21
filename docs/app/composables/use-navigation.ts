@@ -110,9 +110,20 @@ function processNavigationItem(
 export function useNavigation(
   navigation: Ref<Array<ContentNavigationItem> | undefined>,
 ) {
-  const rootNavigation = computed(() =>
-    navigation.value?.[0]?.children?.map((item) => processNavigationItem(item)) as Array<ContentNavigationItem>,
-  );
+  const rootNavigation = computed(() => {
+    const route = useRoute();
+    const parentSlug = route.params.slug?.[0] as string;
+
+    const parent = navigation.value?.[0]?.children?.find(
+      (child) => child.path === `/docs/${parentSlug}`,
+    );
+
+    if (!parent) {
+      return [];
+    }
+
+    return parent.children?.map((item) => processNavigationItem(item)) as Array<ContentNavigationItem>;
+  });
 
   function findBreadcrumb(path: string) {
     const breadcrumb = findPageBreadcrumb(navigation?.value, path, { indexAsChild: true });
