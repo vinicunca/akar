@@ -463,7 +463,6 @@ onMounted(() => {
     ref="primitiveElement"
     :as="as"
     :as-child="asChild"
-    role="application"
     :aria-label="fullCalendarLabel"
     :data-readonly="readonly ? '' : undefined"
     :data-disabled="disabled ? '' : undefined"
