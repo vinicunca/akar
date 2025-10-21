@@ -3,7 +3,7 @@
   "changelog": false,
   "commit": false,
   "fixed": [],
-  "linked": [],
+  "linked": [["akar", "plugins"]],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
