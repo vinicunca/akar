@@ -13,7 +13,7 @@ export interface AScrollAreaScrollbarProps extends APrimitiveProps {
   forceMount?: boolean;
 }
 
-export interface ScrollAreaScollbarContext {
+export interface ScrollAreaScrollbarContext {
   as: Ref<APrimitiveProps['as']>;
   orientation: Ref<'horizontal' | 'vertical'>;
   forceMount?: Ref<boolean>;
@@ -21,8 +21,10 @@ export interface ScrollAreaScollbarContext {
   asChild: Ref<boolean>;
 }
 
-export const [injectAScrollAreaScrollbarContext, provideScrollAreaScrollbarContext]
-  = createContext<ScrollAreaScollbarContext>('AScrollAreaScrollbar');
+export const [
+  injectAScrollAreaScrollbarContext,
+  provideScrollAreaScrollbarContext,
+] = createContext<ScrollAreaScrollbarContext>('AScrollAreaScrollbar');
 </script>
 
 <script setup lang="ts">
