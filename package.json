@@ -22,7 +22,7 @@
     "prepare": "pnpm simple-git-hooks",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "bump": "changeset && changeset version && git add . && git commit -m 'chore: release' -n",
+    "bump": "changeset && changeset version && ./scripts/release.sh",
     "ci:release": "changeset publish",
     "taze": "taze patch -wIrl"
   },

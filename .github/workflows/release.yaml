@@ -4,12 +4,8 @@ name: Release
 
 on:
   push:
-    branches:
-      # - main
-      - feat/changesets
-    paths:
-      - 'packages/*/package.json'
-      - '.changeset/**'
+    tags:
+      - 'v*'
 
 env:
   CI: true
