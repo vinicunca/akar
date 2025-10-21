@@ -38,6 +38,7 @@ const props = withDefaults(defineProps<ProseImgProps>(), {
 const appConfig = useAppConfig() as ProseImg['AppConfig'];
 
 const [DefineImageTemplate, ReuseImageTemplate] = createReusableTemplate();
+const [DefineZoomedImageTemplate, ReuseZoomedImageTemplate] = createReusableTemplate();
 
 const open = ref(false);
 
@@ -77,6 +78,15 @@ if (props.zoom) {
     >
   </DefineImageTemplate>
 
+  <DefineZoomedImageTemplate>
+    <img
+      :src="refinedSrc"
+      :alt="alt"
+      v-bind="$attrs"
+      :class="pohon.zoomedImage({ class: [props.pohon?.zoomedImage] })"
+    >
+  </DefineZoomedImageTemplate>
+
   <ADialogRoot
     v-if="zoom"
     v-slot="{ close }"
@@ -87,7 +97,7 @@ if (props.zoom) {
       <Motion
         :layout-id="layoutId"
         as-child
-        :transition="{ type: 'spring', bounce: 0.2, duration: 0.4 }"
+        :transition="{ type: 'spring', bounce: 0.15, duration: 0.5, ease: 'easeInOut' }"
       >
         <ReuseImageTemplate />
       </Motion>
@@ -111,9 +121,9 @@ if (props.zoom) {
           <Motion
             as-child
             :layout-id="layoutId"
-            :transition="{ type: 'spring', bounce: 0.2, duration: 0.4 }"
+            :transition="{ type: 'spring', bounce: 0.15, duration: 0.5, ease: 'easeInOut' }"
           >
-            <ReuseImageTemplate />
+            <ReuseZoomedImageTemplate />
           </Motion>
         </div>
       </AnimatePresence>

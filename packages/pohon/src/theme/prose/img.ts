@@ -3,6 +3,7 @@ export default {
     base: '',
     overlay: '',
     content: '',
+    zoomedImage: '',
   },
   variants: {
     zoom: {
