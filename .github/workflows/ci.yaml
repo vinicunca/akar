@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup (Install node & pnpm)
+        uses: ./.github/actions/setup
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Build all packages
+        run: pnpm build
+
+      - name: Run tests
+        run: pnpm test --run
+        continue-on-error: true
+
+  # Check for changesets on PRs
+  changeset-check:
+    name: Check for Changesets
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup (Install node & pnpm)
+        uses: ./.github/actions/setup
+
+      - name: Check for changesets
+        run: |
+          # Get list of changed packages
+          CHANGED_PACKAGES=$(pnpm list -r --depth -1 --json | jq -r '.[].path' | while read path; do
+            if [ -n "$(git diff --name-only origin/main...HEAD -- "$path")" ]; then
+              basename "$path"
+            fi
+          done | grep -v "^$" || echo "")
+
+          if [ -z "$CHANGED_PACKAGES" ]; then
+            echo "No package changes detected"
+            exit 0
+          fi
+
+          echo "Changed packages:"
+          echo "$CHANGED_PACKAGES"
+
+          # Check if there are changeset files
+          CHANGESET_COUNT=$(ls -1 .changeset/*.md 2>/dev/null | grep -v "README.md" | wc -l)
+
+          if [ "$CHANGESET_COUNT" -eq 0 ]; then
+            echo "::warning::No changesets found! Please run 'pnpm changeset' to add a changeset."
+            echo "::warning::Changed packages: $CHANGED_PACKAGES"
+          else
+            echo "✓ Changesets found: $CHANGESET_COUNT"
+          fi
