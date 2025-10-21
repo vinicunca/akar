@@ -58,7 +58,7 @@ export function useGraceArea(
   watchEffect((cleanupFn) => {
     if (pointerGraceArea.value) {
       const handleTrackPointerGrace = (event: PointerEvent) => {
-        if (!pointerGraceArea.value || !(event.target instanceof HTMLElement)) {
+        if (!pointerGraceArea.value || !(event.target instanceof Element)) {
           return;
         }
         const target = event.target;
