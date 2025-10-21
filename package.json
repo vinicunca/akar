@@ -24,10 +24,9 @@
     "changeset": "changeset",
     "bump": "changeset version",
     "release": "pnpm build && changeset publish",
+    "ci:release": "changeset publish",
     "bumpp": "bumpp package.json packages/*/package.json",
-    "taze": "taze patch -wIrl",
-    "pub:release": "cd packages/core && pnpm pub:release",
-    "ci:release": "echo 'hehe'"
+    "taze": "taze patch -wIrl"
   },
   "devDependencies": {
     "@changesets/cli": "catalog:base",

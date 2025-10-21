@@ -1,3 +1,9 @@
+[files]
+extend-exclude = [
+  # Add directories to ignore here
+  "**/locale/*.ts",
+]
+
 [default]
 extend-ignore-re = [
   # Chalk.ist website
