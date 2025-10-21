@@ -21,10 +21,8 @@
     "prepare": "pnpm simple-git-hooks",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "changeset": "changeset",
-    "bump": "changeset version",
+    "bump": "changeset && changeset version",
     "ci:release": "changeset publish",
-    "bumpp": "bumpp package.json packages/*/package.json",
     "taze": "taze patch -wIrl"
   },
   "devDependencies": {
@@ -32,7 +30,6 @@
     "@commitlint/cli": "catalog:base",
     "@commitlint/config-conventional": "catalog:base",
     "@vinicunca/eslint-config": "catalog:base",
-    "bumpp": "catalog:base",
     "eslint": "catalog:base",
     "eslint-plugin-format": "catalog:base",
     "lint-staged": "catalog:base",

@@ -4,10 +4,6 @@ packages:
   - packages/pohon/playgrounds/nuxt
   - packages/pohon/playgrounds/vue
 
-shamefullyHoist: true
-autoInstallPeers: true
-ignoreWorkspaceRootCheck: true
-
 overrides:
   akar: workspace:*
   pohon-ui: workspace:*
@@ -23,7 +19,6 @@ catalogs:
     '@commitlint/config-conventional': ^19.8.1
     '@iconify/json': ^2.2.389
     '@vinicunca/eslint-config': 3.29.0
-    bumpp: ^10.2.3
     eslint: ^9.36.0
     eslint-plugin-format: ^1.0.2
     lint-staged: ^16.2.0
@@ -114,15 +109,6 @@ catalogs:
     unplugin: ^2.3.10
     unplugin-auto-import: ^20.1.0
     zod: ^4.1.11
-  uno:
-    '@unocss/core': 66.5.4
-    '@unocss/preset-icons': 66.5.4
-    '@unocss/preset-mini': 66.5.4
-    '@unocss/preset-typography': 66.5.4
-    '@unocss/preset-web-fonts': 66.5.4
-    '@unocss/preset-wind4': 66.5.4
-    '@unocss/transformer-directives': 66.5.4
-    '@unocss/transformer-variant-group': 66.5.4
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - unrs-resolver
