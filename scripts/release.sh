@@ -33,6 +33,6 @@ done
 
 echo ""
 
-# git push origin $(git branch --show-current)
+git push origin $(git branch --show-current)
 
-# git push --tags
+git push --tags
