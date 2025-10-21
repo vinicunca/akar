@@ -300,7 +300,7 @@ props:
 ::
 
 ::note
-The styling will be different wether you provide a `to` prop or an `image`.
+The styling will be different whether you provide a `to` prop or an `image`.
 ::
 
 ### Orientation

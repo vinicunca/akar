@@ -29,7 +29,7 @@ const type = computed(() => {
 });
 
 const { data: ast } = await useAsyncData(
-  `hightlight-inline-code-${hash(type.value).slice(0, 10)}`,
+  `highlight-inline-code-${hash(type.value).slice(0, 10)}`,
   () => parseMarkdown(`\`${type.value}\`{lang="ts-type"}`),
 );
 </script>

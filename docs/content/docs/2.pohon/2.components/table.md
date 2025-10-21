@@ -289,7 +289,7 @@ You can group rows based on a given column value and show/hide sub rows via some
 * Add `grouping-options` prop. It must include `getGroupedRowModel`, you can import it from `@tanstack/vue-table` or implement your own.
 * Expand rows via `row.toggleExpanded()` method on any cell of the row. Keep in mind, it also toggles `#expanded` slot.
 * Use `aggregateFn` on column definition to define how to aggregate the rows.
-* `agregatedCell` renderer on column definition only works if there is no `cell` renderer.
+* `aggregatedCell` renderer on column definition only works if there is no `cell` renderer.
 
 ::component-example
 ---
