@@ -56,7 +56,11 @@ function handleKeydown(event: KeyboardEvent) {
       role="listbox"
       :as="as"
       :as-child="asChild"
-      :tabindex="rootContext.focusable.value ? rootContext.highlightedElement.value ? '-1' : '0' : undefined"
+      :tabindex="rootContext.focusable.value
+        ? rootContext.highlightedElement.value
+          ? '-1'
+          : '0'
+        : '-1'"
       :aria-orientation="rootContext.orientation.value"
       :aria-multiselectable="!!rootContext.multiple.value"
       :data-orientation="rootContext.orientation.value"
