@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    'pohon',
+    'pohon-ui',
     '@nuxt/fonts',
     '@unocss/nuxt',
   ],
