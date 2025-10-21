@@ -5,7 +5,8 @@ name: Release
 on:
   push:
     branches:
-      - main
+      # - main
+      - feat/changesets
     paths:
       - 'packages/*/package.json'
       - '.changeset/**'
