@@ -72,6 +72,12 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    */
   icon?: PIconProps['name'];
   /**
+   * The icon displayed on the right side of the input.
+   * @defaultValue appConfig.ui.icons.search
+   * @IconifyIcon
+   */
+  trailingIcon?: PIconProps['name'];
+  /**
    * The icon displayed when an item is selected.
    * @defaultValue appConfig.pohon.icons.check
    * @IconifyIcon
@@ -82,7 +88,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * @defaultValue appConfig.pohon.icons.chevronRight
    * @IconifyIcon
    */
-  trailingIcon?: PIconProps['name'];
+  childrenIcon?: PIconProps['name'];
   /**
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
@@ -580,7 +586,7 @@ function onSelect(event: Event, item: T) {
               >
                 <PIcon
                   v-if="item.children && item.children.length > 0"
-                  :name="trailingIcon || appConfig.pohon.icons.chevronRight"
+                  :name="childrenIcon || appConfig.pohon.icons.chevronRight"
                   :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, item.pohon?.itemTrailingIcon] })"
                 />
 
@@ -635,6 +641,7 @@ function onSelect(event: Event, item: T) {
         :autofocus="autofocus"
         v-bind="inputProps"
         :loading-icon="loadingIcon"
+        :trailing-icon="trailingIcon"
         :icon="icon || appConfig.pohon.icons.search"
         :class="pohon.input({ class: props.pohon?.input })"
         @keydown.backspace="onBackspace"
