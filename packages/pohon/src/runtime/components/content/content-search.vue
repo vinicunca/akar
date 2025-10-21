@@ -190,6 +190,7 @@ function mapLinksItems(links: Array<T>): Array<PContentSearchItem> {
     {
       ...link,
       suffix: link.description,
+      description: undefined,
       icon: link.icon || appConfig.pohon.icons.file,
     },
     ...(
@@ -197,6 +198,7 @@ function mapLinksItems(links: Array<T>): Array<PContentSearchItem> {
         ...child,
         prefix: `${link.label} >`,
         suffix: child.description,
+        description: undefined,
         icon: child.icon || link.icon || appConfig.pohon.icons.file,
       })) || []
     ),
