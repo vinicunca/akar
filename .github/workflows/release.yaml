@@ -4,9 +4,11 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'akar@*'
-      - 'pohon-ui@*'
+    branches:
+      - main
+      - feat/changesets
+    paths:
+      - 'packages/**'
 
 env:
   CI: true
@@ -17,24 +19,6 @@ permissions:
   contents: write
 
 jobs:
-  changelog:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
-
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 22
-
-      - name: Generate changelog with changelogithub
-        run: npx changelogithub
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   # Check if there are version changes to publish
   check-version:
     name: Check for version changes
