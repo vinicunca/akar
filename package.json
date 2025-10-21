@@ -24,6 +24,7 @@
     "lint:fix": "eslint . --fix",
     "bump:bak": "changeset && changeset version && git add . && git commit -m 'chore: bump versions' -n && git push",
     "bump": "changeset && changeset version",
+    "bump:auto": "conventional-changelog -p angular",
     "ci:release": "changeset publish",
     "taze": "taze patch -wIrl"
   },
@@ -33,6 +34,7 @@
     "@commitlint/cli": "catalog:base",
     "@commitlint/config-conventional": "catalog:base",
     "@vinicunca/eslint-config": "catalog:base",
+    "conventional-changelog": "catalog:base",
     "eslint": "catalog:base",
     "eslint-plugin-format": "catalog:base",
     "lint-staged": "catalog:base",
