@@ -24,7 +24,7 @@ export interface PDropdownMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'cu
   icon?: PIconProps['name'];
   color?: DropdownMenu['variants']['color'];
   avatar?: PAvatarProps;
-  content?: Omit<ADropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ADropdownMenuContentEmits>>;
+  content?: Omit<ADropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & { class?: any } & Partial<EmitsToProps<ADropdownMenuContentEmits>>;
   kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   /**
    * The item type.
@@ -41,7 +41,7 @@ export interface PDropdownMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'cu
   onSelect?: (event: Event) => void;
   onUpdateChecked?: (checked: boolean) => void;
   class?: any;
-  pohon?: Pick<DropdownMenu['slots'], 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>;
+  pohon?: Pick<DropdownMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>;
   [key: string]: any;
 }
 

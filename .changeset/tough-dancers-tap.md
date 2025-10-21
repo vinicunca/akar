@@ -2,4 +2,6 @@
 "pohon-ui": patch
 ---
 
-feat(components): handle description in items
+feat(components): handle description in items;
+fix(Breadcrumb): handle active in items
+fix(ContextMenu/DropdownMenu): allow item content class override

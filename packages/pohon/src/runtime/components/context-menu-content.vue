@@ -229,7 +229,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
   <AContextMenu.Portal v-bind="portalProps">
     <component
       :is="sub ? AContextMenu.SubContent : AContextMenu.Content"
-      :class="props.class"
+      :class="pohon.content({ class: [pohonOverride?.content, props.class] })"
       v-bind="contentProps"
     >
       <slot name="content-top" />
@@ -280,7 +280,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
 
               <PContextMenuContent
                 sub
-                :class="props.class"
+                :class="item.pohon?.content"
                 :pohon="pohon"
                 :pohon-override="pohonOverride"
                 :portal="portal"

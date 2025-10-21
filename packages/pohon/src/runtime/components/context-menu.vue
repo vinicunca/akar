@@ -23,7 +23,7 @@ export interface PContextMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'cus
   icon?: PIconProps['name'];
   color?: ContextMenu['variants']['color'];
   avatar?: PAvatarProps;
-  content?: Omit<AContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<AContextMenuContentEmits>>;
+  content?: Omit<AContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & { class?: any } & Partial<EmitsToProps<AContextMenuContentEmits>>;
   kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   /**
    * The item type.
@@ -40,7 +40,7 @@ export interface PContextMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'cus
   onSelect?: (event: Event) => void;
   onUpdateChecked?: (checked: boolean) => void;
   class?: any;
-  pohon?: Pick<ContextMenu['slots'], 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>;
+  pohon?: Pick<ContextMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>;
   [key: string]: any;
 }
 
