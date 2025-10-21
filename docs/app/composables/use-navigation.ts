@@ -138,7 +138,7 @@ export function useNavigation(
       `/docs/${parent}`,
       { indexAsChild: true },
     );
-    console.log('🚀 ~ useNavigation ~ children:', children);
+    // console.log('🚀 ~ useNavigation ~ children:', children);
 
     return groupChildrenByCategory({ items: children, parent, slug });
   });
@@ -165,7 +165,7 @@ function groupChildrenByCategory(
 
   const categorized: Record<string, Array<ContentNavigationItem>> = {};
   const uncategorized: Array<ContentNavigationItem> = [];
-  console.log('🚀 ~ groupChildrenByCategory ~ uncategorized:', uncategorized);
+  // console.log('🚀 ~ groupChildrenByCategory ~ uncategorized:', uncategorized);
 
   for (const item of items) {
     if (item.category) {
@@ -177,7 +177,7 @@ function groupChildrenByCategory(
     }
   }
 
-  console.log('🚀 ~ groupChildrenByCategory ~ uncategorized:', uncategorized);
+  // console.log('🚀 ~ groupChildrenByCategory ~ uncategorized:', uncategorized);
 
   // if (uncategorized.length) {
   //   const withChildren = uncategorized

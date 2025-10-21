@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { useRoute } from '#app';
 import { PHeader, PNavigationMenu } from '#components';
 import { useHeader } from '~/composables/use-header';
 import LayoutHeaderBottom from './layout-header-bottom.vue';
 import LayoutHeaderLogo from './layout-header-logo.vue';
-import { useRoute } from '#app';
 
 const route = useRoute();
 const { desktopLinks } = useHeader();
@@ -52,7 +52,10 @@ const { desktopLinks } = useHeader();
       <!-- <HeaderBody /> -->
     </template>
 
-    <template v-if="route.path.startsWith('/akar/') || route.path.startsWith('/pohon/')" #bottom>
+    <template
+      v-if="route.path.startsWith('/docs/akar/') || route.path.startsWith('/docs/pohon/')"
+      #bottom
+    >
       <LayoutHeaderBottom />
     </template>
   </PHeader>

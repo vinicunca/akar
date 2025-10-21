@@ -65,7 +65,7 @@ provide('navigation', rootNavigation);
 
     <div
       :class="[
-        (route.path.startsWith('/akar/') || route.path.startsWith('/pohon/')) && 'root',
+        (route.path.startsWith('/docs/akar/') || route.path.startsWith('/docs/pohon/')) && 'root',
       ]"
     >
       <LayoutHeader />

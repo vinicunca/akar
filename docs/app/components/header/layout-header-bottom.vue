@@ -9,6 +9,7 @@ import { computed, inject } from 'vue';
 const route = useRoute();
 
 const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
+console.log('🚀 ~ navigation:', navigation);
 
 const items = computed(() =>
   mapContentNavigation(navigation?.value.map((item) => ({ ...item, children: undefined })) ?? [])?.map((item) => ({

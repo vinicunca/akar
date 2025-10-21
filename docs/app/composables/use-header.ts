@@ -7,12 +7,12 @@ export function useHeader() {
   const desktopLinks = computed(() => [
     {
       label: 'Akar',
-      to: '/docs/akar',
+      to: '/docs/akar/overview/introduction',
       active: route.path.startsWith('/docs/akar/'),
     },
     {
       label: 'Pohon',
-      to: '/docs/pohon',
+      to: '/docs/pohon/getting-started',
       active: route.path.startsWith('/docs/pohon/'),
     },
     {
