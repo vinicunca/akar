@@ -6,6 +6,9 @@ settings:
 
 catalogs:
   base:
+    '@changesets/changelog-github':
+      specifier: ^0.5.1
+      version: 0.5.1
     '@changesets/cli':
       specifier: ^2.29.7
       version: 2.29.7
@@ -293,7 +296,7 @@ importers:
   .:
     devDependencies:
       '@changesets/changelog-github':
-        specifier: ^0.5.1
+        specifier: catalog:base
         version: 0.5.1(encoding@0.1.13)
       '@changesets/cli':
         specifier: catalog:base
