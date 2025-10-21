@@ -6,6 +6,9 @@ settings:
 
 catalogs:
   base:
+    '@changesets/cli':
+      specifier: ^2.29.7
+      version: 2.29.7
     '@commitlint/cli':
       specifier: ^19.8.1
       version: 19.8.1
@@ -315,7 +318,7 @@ importers:
   .:
     devDependencies:
       '@changesets/cli':
-        specifier: ^2.29.7
+        specifier: catalog:base
         version: 2.29.7(@types/node@24.5.2)
       '@commitlint/cli':
         specifier: catalog:base

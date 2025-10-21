@@ -2,43 +2,47 @@
 
 name: Release
 
-permissions:
-  contents: write
-
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
+
+env:
+  CI: true
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
 
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Repo
         uses: actions/checkout@v5
-
-      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-
-      - run: npx changelogithub
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-  npm:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
 
       - name: Setup (Install node & pnpm)
         uses: ./.github/actions/setup
 
-      - name: Build Packages & Publish to npm
-        run: pnpm build && pnpm pub:release
+      # - name: Build packages
+      #   run: pnpm build
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: pnpm ci:release
+          title: 'chore: version packages'
+          commit: 'chore: version packages'
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.VINICUNCA_NPM_TOKEN }}
+          # Required for provenance https://docs.npmjs.com/generating-provenance-statements
           NODE_AUTH_TOKEN: ${{ secrets.VINICUNCA_NPM_TOKEN }}
