@@ -29,7 +29,8 @@ const { data: navigation } = useAsyncData(
 );
 
 const color = computed(() => colorMode.value === 'dark' ? 'black' : 'white');
-const radius = computed(() => `:root { --pohon-radius: ${appConfig.theme.radius}rem; }`);
+const radius = computed(() => `:root { --pohon-ui-radius: ${appConfig.theme.radius}rem; }`);
+const blackAsPrimary = computed(() => appConfig.theme.blackAsPrimary ? ':root { --akar-primary: black; } .dark { --akar-primary: white; }' : ':root {}');
 
 useHead({
   meta: [
@@ -37,7 +38,8 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color },
   ],
   style: [
-    { innerHTML: radius, id: 'pohon-radius', tagPriority: -2 },
+    { innerHTML: radius, id: 'pohon-ui-radius', tagPriority: -2 },
+    { innerHTML: blackAsPrimary, id: 'pohon-ui-black-as-primary', tagPriority: -2 },
   ],
   htmlAttrs: {
     lang: 'en',
@@ -52,13 +54,17 @@ useServerSeoMeta({
 useFaviconFromTheme();
 
 const { rootNavigation } = useNavigation(navigation);
-console.log('🚀 ~ rootNavigation:', rootNavigation);
 
 provide('navigation', rootNavigation);
 </script>
 
 <template>
-  <PApp :toaster="appConfig.toaster">
+  <PApp
+    :toaster="appConfig.toaster"
+    :tooltip="{
+      delayDuration: 300,
+    }"
+  >
     <NuxtLoadingIndicator
       color="var(--akar-brand-primary)"
       :height="2"

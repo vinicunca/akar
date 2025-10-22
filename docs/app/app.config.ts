@@ -7,13 +7,17 @@ import { collapsibleTheme } from './themes/collapsible.theme';
 import { BRANDS } from './themes/constant';
 import { containerTheme } from './themes/container.theme';
 import { contentNavigationTheme } from './themes/content-navigation.theme';
+import { contentSurroundTheme } from './themes/content-surround.theme';
 import { contentTocTheme } from './themes/content-toc.theme';
+import { dialogTheme } from './themes/dialog.theme';
 import { headerTheme } from './themes/header.theme';
 import { kbdTheme } from './themes/kbd.theme';
 import { linkTheme } from './themes/link.theme';
 import { mainTheme } from './themes/main.theme';
 import { navigationMenuTheme } from './themes/navigation-menu.theme';
+import { popoverTheme } from './themes/popover.theme';
 import { separatorTheme } from './themes/separator.theme';
+import { tooltipTheme } from './themes/tooltip.theme';
 
 export default defineAppConfig({
   theme: {
@@ -37,12 +41,16 @@ export default defineAppConfig({
     container: containerTheme,
     contentToc: contentTocTheme,
     contentNavigation: contentNavigationTheme,
+    contentSurround: contentSurroundTheme,
     header: headerTheme,
     link: linkTheme,
+    dialog: dialogTheme,
     main: mainTheme,
     navigationMenu: navigationMenuTheme,
     separator: separatorTheme,
     kbd: kbdTheme,
+    popover: popoverTheme,
+    tooltip: tooltipTheme,
 
     prose: {
       a: {

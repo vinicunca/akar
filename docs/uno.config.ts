@@ -169,5 +169,16 @@ export default defineConfig({
     container: {
       '8xl': '90rem',
     },
+
+    radius: {
+      'xs': 'calc(var(--pohon-ui-radius) * 0.5)',
+      'sm': 'var(--pohon-ui-radius)',
+      'md': 'calc(var(--pohon-ui-radius) * 1.5)',
+      'lg': 'calc(var(--pohon-ui-radius) * 2)',
+      'xl': 'calc(var(--pohon-ui-radius) * 3)',
+      '2xl': 'calc(var(--pohon-ui-radius) * 4)',
+      '3xl': 'calc(var(--pohon-ui-radius) * 6)',
+    },
+
   },
 });

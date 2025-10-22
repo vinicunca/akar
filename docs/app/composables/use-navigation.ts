@@ -1,6 +1,6 @@
 import type { Ref } from '#imports';
 import type { ContentNavigationItem } from '@nuxt/content';
-import { computed, useRoute } from '#imports';
+import { computed, useFrameworks, useRoute } from '#imports';
 import { findPageBreadcrumb, findPageChildren } from '@nuxt/content/utils';
 import { mapContentNavigation } from 'pohon-ui/utils/content';
 
@@ -109,6 +109,8 @@ function processNavigationItem(
 export function useNavigation(
   navigation: Ref<Array<ContentNavigationItem> | undefined>,
 ) {
+  const { framework } = useFrameworks();
+
   const rootNavigation = computed(() => {
     const route = useRoute();
 
@@ -129,7 +131,7 @@ export function useNavigation(
     const breadcrumb = findPageBreadcrumb(navigation?.value, path, { indexAsChild: true });
 
     return mapContentNavigation(
-      breadcrumb.slice(1),
+      breadcrumb.slice(0),
     ).map(({ icon, ...link }) => link);
   }
 
@@ -148,9 +150,23 @@ export function useNavigation(
     return groupChildrenByCategory({ items: children, parent, slug });
   });
 
+  function findSurround(path: string): [ContentNavigationItem | undefined, ContentNavigationItem | undefined] {
+    const flattenNavigation = navigationByCategory.value
+      ?.flatMap((item) => filterChildrenByFramework(item, framework.value)?.children) ?? [];
+
+    const index = flattenNavigation.findIndex((item) => item?.path === path);
+
+    if (index === -1) {
+      return [undefined, undefined];
+    }
+
+    return [flattenNavigation[index - 1], flattenNavigation[index + 1]];
+  }
+
   return {
     rootNavigation,
     findBreadcrumb,
+    findSurround,
     navigationByCategory,
   };
 }
@@ -215,4 +231,41 @@ function groupChildrenByCategory(
   }
 
   return groups;
+}
+
+function filterChildrenByFramework(item: ContentNavigationItem, framework: string): ContentNavigationItem {
+  const filteredChildren = item.children?.filter((child) => {
+    if (child.path.startsWith('/docs/akar/components')) {
+      return true;
+    }
+
+    if (child.framework && child.framework !== framework) {
+      return false;
+    }
+
+    return true;
+  })?.map((child) => filterChildrenByFramework(resolveNavigationIcon(child), framework));
+
+  return {
+    ...item,
+    children: filteredChildren?.length ? filteredChildren : undefined,
+  };
+}
+
+function resolveNavigationIcon(item: ContentNavigationItem) {
+  let icon = item.icon;
+  if (item.path.startsWith('/docs/components')) {
+    icon = 'i-lucide-square-code';
+  }
+  if (item.path.startsWith('/docs/composables')) {
+    icon = 'i-lucide-square-function';
+  }
+  if (item.path.startsWith('/docs/typography')) {
+    icon = 'i-lucide-square-pilcrow';
+  }
+
+  return {
+    ...item,
+    icon,
+  };
 }

@@ -4,7 +4,10 @@ import type { ContentNavigationItem } from '@nuxt/content';
 import {
   ContentRenderer,
   MDC,
+  PAvatar,
   PBreadcrumb,
+  PButton,
+  PContentSurround,
   PContentToc,
   PIcon,
   PLink,
@@ -48,9 +51,10 @@ if (!page.value) {
 
 const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 
-const { findBreadcrumb } = useNavigation(navigation!);
+const { findBreadcrumb, findSurround } = useNavigation(navigation!);
 
 const breadcrumbs = computed(() => findBreadcrumb(page.value?.path as string));
+const surround = computed(() => findSurround(page.value?.path as string));
 
 const title = page.value?.seo?.title ?? page.value?.navigation.title ?? page.value?.title;
 const prefix = page.value?.path.includes('components/') || page.value?.path.includes('composables/') ? 'Vue ' : '';
@@ -106,9 +110,31 @@ const communityLinks = computed(() => [
             <h1 class="text-3xl color-text-highlighted font-bold text-pretty sm:text-4xl">
               {{ title }}
             </h1>
+
+            <div class="flex flex-wrap gap-1.5 items-center">
+              <PButton
+                v-for="link in page.links"
+                :key="link.label"
+                color="neutral"
+                variant="outline"
+                :target="link.to?.startsWith('http') ? '_blank' : undefined"
+                v-bind="link"
+              >
+                <template
+                  v-if="link.avatar"
+                  #leading
+                >
+                  <PAvatar
+                    v-bind="link.avatar"
+                    size="2xs"
+                    :alt="`${link.label} avatar`"
+                  />
+                </template>
+              </PButton>
+            </div>
           </div>
 
-          <div class="text-lg color-text-muted text-pretty">
+          <div class="text-lg color-text-muted mt-4 text-pretty">
             <MDC
               v-if="page.description"
               :value="page.description"
@@ -125,6 +151,10 @@ const communityLinks = computed(() => [
           v-if="page.body"
           :value="page"
         />
+
+        <PSeparator v-if="surround?.filter(Boolean).length" />
+
+        <PContentSurround :surround="(surround as any)" />
       </div>
     </div>
 

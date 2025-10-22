@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useRoute } from '#app';
-import { PHeader, PNavigationMenu } from '#components';
+import { PButton, PContentSearchButton, PHeader, PNavigationMenu, PTooltip } from '#components';
 import { useHeader } from '~/composables/use-header';
+import LayoutHeaderBody from './layout-header-body.vue';
 import LayoutHeaderBottom from './layout-header-bottom.vue';
 import LayoutHeaderLogo from './layout-header-logo.vue';
+import LayoutHeaderThemePicker from './layout-header-theme-picker.vue';
 
 const route = useRoute();
 const { desktopLinks } = useHeader();
@@ -24,32 +26,32 @@ const { desktopLinks } = useHeader();
     />
 
     <template #right>
-      <!-- <ThemePicker /> -->
+      <LayoutHeaderThemePicker />
 
-      <!-- <UTooltip
+      <PTooltip
         text="Search"
         :kbds="['meta', 'K']"
       >
-        <UContentSearchButton />
-      </UTooltip> -->
+        <PContentSearchButton />
+      </PTooltip>
 
-      <!-- <UTooltip
+      <PTooltip
         text="Open on GitHub"
         class="hidden lg:flex"
       >
-        <UButton
+        <PButton
           color="neutral"
           variant="ghost"
-          to="https://github.com/nuxt/ui"
+          to="https://github.com/vinicunca/akar"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
         />
-      </UTooltip> -->
+      </PTooltip>
     </template>
 
     <template #body>
-      <!-- <HeaderBody /> -->
+      <LayoutHeaderBody />
     </template>
 
     <template

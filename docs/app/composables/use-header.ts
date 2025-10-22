@@ -19,16 +19,28 @@ export function useHeader() {
 
   const mobileLinks = computed(() => [
     {
-      label: 'Get Started',
-      icon: 'i-lucide-square-play',
-      to: '/docs/getting-started',
-      active: route.path.startsWith('/docs/getting-started'),
+      label: 'Akar Get Started',
+      icon: 'i-lucide:square-play',
+      to: '/docs/akar/overview',
+      active: route.path.startsWith('/docs/akar/overview'),
     },
     {
-      label: 'Components',
-      icon: 'i-lucide-square-code',
-      to: '/docs/components',
-      active: route.path.startsWith('/docs/components'),
+      label: 'Akar Guides',
+      icon: 'i-lucide:book-open',
+      to: '/docs/akar/guides',
+      active: route.path.startsWith('/docs/akar/guides'),
+    },
+    {
+      label: 'Akar Components',
+      icon: 'i-lucide:box',
+      to: '/docs/akar/components',
+      active: route.path.startsWith('/docs/akar/components'),
+    },
+    {
+      label: 'Akar Utilities',
+      icon: 'i-lucide:wrench',
+      to: '/docs/akar/components',
+      active: route.path.startsWith('/docs/akar/components'),
     },
     {
       label: 'Composables',

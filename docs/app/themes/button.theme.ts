@@ -117,27 +117,27 @@ export const buttonTheme = {
     {
       size: 'xs',
       square: true,
-      class: 'p-1',
+      class: 'akar:p-1',
     },
     {
       size: 'sm',
       square: true,
-      class: 'p-1.5',
+      class: 'akar:p-1.5',
     },
     {
       size: 'md',
       square: true,
-      class: 'p-1.5',
+      class: 'akar:p-1.5',
     },
     {
       size: 'lg',
       square: true,
-      class: 'p-2',
+      class: 'akar:p-2',
     },
     {
       size: 'xl',
       square: true,
-      class: 'p-2',
+      class: 'akar:p-2',
     },
     {
       loading: true,
