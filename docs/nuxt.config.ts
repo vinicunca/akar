@@ -3,82 +3,27 @@ import { createResolver } from '@nuxt/kit';
 const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
-  app: {
-    rootAttrs: {
-      'data-akar-drawer-wrapper': '',
-      'class': 'bg-default',
-    },
-  },
-
-  imports: {
-    autoImport: false,
-  },
-
   $development: {
     site: {
       url: 'http://localhost:3000',
     },
   },
+
   $production: {
     site: {
       url: 'https://akar.vinicunca.dev',
     },
   },
 
-  css: ['~/assets/css/main.css'],
-
-  content: {
-    build: {
-      markdown: {
-        highlight: {
-          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc', 'blade', 'edge'],
-        },
-      },
+  app: {
+    rootAttrs: {
+      'class': 'bg-default',
+      'data-akar-drawer-wrapper': '',
     },
   },
-
-  mdc: {
-    highlight: {
-      noApiRoute: false,
-    },
-  },
-
-  fonts: {
-    families: [
-      { name: 'Geist', provider: 'fontsource', weights: ['100 900'] },
-      { name: 'Geist Mono', provider: 'fontsource', weights: ['100 900'] },
-      { name: 'Rubik', provider: 'fontsource', weights: ['100 900'] },
-    ],
-  },
-
-  icon: {
-    customCollections: [{
-      prefix: 'custom',
-      dir: resolve('./app/assets/icons'),
-    }],
-    clientBundle: {
-      scan: true,
-      includeCustomCollections: true,
-    },
-    provider: 'iconify',
-  },
-
-  modules: [
-    'pohon-ui',
-    '@unocss/nuxt',
-    '@nuxt/content',
-    '@nuxt/fonts',
-    'nuxt-component-meta',
-    'nuxt-og-image',
-  ],
+  compatibilityDate: '2024-07-09',
 
   componentMeta: {
-    transformers: [(component, code) => {
-      // Simplify pohon in slot prop types: `leading(props: { pohon: Button['pohon'] })` -> `leading(props: { pohon: object })`
-      code = code.replace(/pohon:[^}]+(?=\})/g, 'pohon: object');
-
-      return { component, code };
-    }],
     exclude: [
       '@nuxt/content',
       '@nuxt/icon',
@@ -90,12 +35,42 @@ export default defineNuxtConfig({
       resolve('./app/components'),
     ],
     metaFields: {
-      type: false,
-      props: true,
-      slots: true,
       events: true,
       exposed: false,
+      props: true,
+      slots: true,
+      type: false,
     },
+    transformers: [(component, code) => {
+      // Simplify pohon in slot prop types: `leading(props: { pohon: Button['pohon'] })` -> `leading(props: { pohon: object })`
+      code = code.replace(/pohon:[^}]+(?=\})/g, 'pohon: object');
+
+      return { code, component };
+    }],
+  },
+
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc', 'blade', 'edge'],
+        },
+      },
+    },
+  },
+
+  css: ['~/assets/css/main.css'],
+
+  devtools: {
+    enabled: true,
+  },
+
+  fonts: {
+    families: [
+      { name: 'Geist', provider: 'fontsource', weights: ['100 900'] },
+      { name: 'Geist Mono', provider: 'fontsource', weights: ['100 900'] },
+      { name: 'Rubik', provider: 'fontsource', weights: ['100 900'] },
+    ],
   },
 
   hooks: {
@@ -114,11 +89,56 @@ export default defineNuxtConfig({
     },
   },
 
-  devtools: {
-    enabled: true,
+  icon: {
+    clientBundle: {
+      includeCustomCollections: true,
+      scan: true,
+    },
+    customCollections: [{
+      dir: resolve('./app/assets/icons'),
+      prefix: 'custom',
+    }],
+    provider: 'iconify',
   },
 
-  compatibilityDate: '2024-07-09',
+  imports: {
+    autoImport: false,
+  },
+
+  mdc: {
+    highlight: {
+      noApiRoute: false,
+    },
+  },
+
+  modules: [
+    'pohon-ui',
+    '@unocss/nuxt',
+    '@nuxt/content',
+    '@nuxt/fonts',
+    'nuxt-component-meta',
+    'nuxt-og-image',
+  ],
+
+  routeRules: {
+    '/docs/akar/components': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/docs/akar/components/accordion' },
+    },
+    '/docs/akar/guides': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/docs/akar/guides/styling' },
+    },
+    '/docs/akar/overview': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/docs/akar/overview/introduction' },
+    },
+    '/docs/akar/utilities': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/docs/akar/utilities/config-provider' },
+    },
+    '/docs/pohon/composables': { prerender: false, redirect: { statusCode: 301, to: '/docs/pohon/composables/define-shortcuts' } },
+  },
 
   vite: {
     optimizeDeps: {

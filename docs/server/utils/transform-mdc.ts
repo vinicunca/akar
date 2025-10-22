@@ -32,7 +32,6 @@ interface RawDocument {
 
 export function transformMdc(doc: RawDocument): RawDocument {
   const componentName = toCamelCase(doc.title);
-  console.log('🚀 ~ transformMDC ~ componentName:', componentName);
 
   return doc;
 }

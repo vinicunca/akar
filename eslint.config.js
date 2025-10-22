@@ -69,4 +69,11 @@ export default vinicuncaESLint(
       'jsonc/indent': 'off',
     },
   },
+
+  {
+    files: ['docs/nuxt.config.ts'],
+    rules: {
+      'perfectionist/sort-objects': 'error',
+    },
+  },
 );

@@ -15,6 +15,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "unbuild",
+    "build-only": "unbuild",
     "generate": "tsx ./src/namespaced/generate",
     "stub": "unbuild --stub"
   },

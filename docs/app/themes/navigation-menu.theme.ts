@@ -10,7 +10,7 @@ export const navigationMenuTheme = {
     list: 'isolate min-w-0',
     label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 color-text-highlighted px-2.5 py-1.5',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:absolute before:(-z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:(absolute content-empty -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -23,7 +23,7 @@ export const navigationMenuTheme = {
     childList: 'isolate',
     childLabel: 'text-xs color-text-highlighted',
     childItem: '',
-    childLink: 'group relative size-full flex items-start text-start text-sm before:(absolute -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    childLink: 'group relative size-full flex items-start text-start text-sm before:(content-empty absolute -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'truncate',
@@ -136,7 +136,7 @@ export const navigationMenuTheme = {
       orientation: 'horizontal',
       highlight: true,
       class: {
-        link: 'after:(absolute -bottom-2 inset-x-2.5 block h-px rounded-full transition-colors)',
+        link: 'after:(content-empty absolute -bottom-2 inset-x-2.5 block h-px rounded-full transition-colors)',
       },
     },
     {
@@ -144,7 +144,7 @@ export const navigationMenuTheme = {
       highlight: true,
       level: true,
       class: {
-        link: 'after:(absolute -start-1.5 inset-y-0.5 block w-px rounded-full transition-colors)',
+        link: 'after:(content-empty absolute -start-1.5 inset-y-0.5 block w-px rounded-full transition-colors)',
       },
     },
     {

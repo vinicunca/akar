@@ -22,7 +22,6 @@ const { navigationByCategory } = useNavigation(navigation!);
               <PContentNavigation
                 :key="route.path"
                 :navigation="navigationByCategory"
-                highlight
                 :pohon="{
                   linkTrailingBadge: 'font-semibold uppercase',
                 }"

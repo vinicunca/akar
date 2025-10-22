@@ -52,6 +52,7 @@ useServerSeoMeta({
 useFaviconFromTheme();
 
 const { rootNavigation } = useNavigation(navigation);
+console.log('🚀 ~ rootNavigation:', rootNavigation);
 
 provide('navigation', rootNavigation);
 </script>

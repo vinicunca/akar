@@ -13,7 +13,7 @@ export const contentNavigationTheme = {
     listWithChildren: 'ms-5 border-s border-border',
     itemWithChildren: 'flex flex-col data-[state=open]:mb-1.5',
     trigger: 'font-semibold',
-    link: 'group text-sm px-2.5 py-1.5 flex gap-1.5 w-full items-center relative focus-visible:outline-none focus:outline-none before:(rounded-md inset-x-0 inset-y-px absolute -z-1) focus-visible:before:ring-2 focus-visible:before:ring-inset',
+    link: 'group text-sm px-2.5 py-1.5 flex gap-1.5 w-full items-center relative focus-visible:outline-none focus:outline-none before:(content-empty rounded-md inset-x-0 inset-y-px absolute -z-1) focus-visible:before:ring-2 focus-visible:before:ring-inset',
     linkLeadingIcon: 'shrink-0 size-5',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     linkTrailingBadge: 'shrink-0',
