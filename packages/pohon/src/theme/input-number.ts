@@ -49,6 +49,12 @@ export default (options: Required<PohonModuleOptions>) => {
       highlight: {
         true: '',
       },
+      increment: {
+        false: '',
+      },
+      decrement: {
+        false: '',
+      },
     },
 
     compoundVariants: [],

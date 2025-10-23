@@ -30,7 +30,7 @@ export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelVal
    * Configure the increment button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  increment?: PButtonProps;
+  increment?: boolean | PButtonProps;
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.pohon.icons.plus
@@ -43,7 +43,7 @@ export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelVal
    * Configure the decrement button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  decrement?: PButtonProps;
+  decrement?: boolean | PButtonProps;
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.pohon.icons.minus
@@ -99,8 +99,8 @@ const props = withDefaults(
   defineProps<PInputNumberProps>(),
   {
     orientation: 'horizontal',
-    disabledIncrement: false,
-    disabledDecrement: false,
+    increment: true,
+    decrement: true,
   },
 );
 
@@ -164,6 +164,8 @@ const pohon = computed(() =>
     highlight: highlight.value,
     orientation: props.orientation,
     fieldGroup: orientation.value,
+    increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,
+    decrement: props.orientation === 'vertical' ? false : !!props.decrement,
   }),
 );
 
@@ -238,7 +240,10 @@ defineExpose({
       @focus="emitFormFocus"
     />
 
-    <div :class="pohon.increment({ class: props.pohon?.increment })">
+    <div
+      v-if="Boolean(increment)"
+      :class="pohon.increment({ class: props.pohon?.increment })"
+    >
       <ANumberFieldIncrement
         as-child
         :disabled="disabled || incrementDisabled"
@@ -256,7 +261,10 @@ defineExpose({
       </ANumberFieldIncrement>
     </div>
 
-    <div :class="pohon.decrement({ class: props.pohon?.decrement })">
+    <div
+      v-if="Boolean(decrement)"
+      :class="pohon.decrement({ class: props.pohon?.decrement })"
+    >
       <ANumberFieldDecrement
         as-child
         :disabled="disabled || decrementDisabled"
