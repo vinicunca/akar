@@ -176,7 +176,9 @@ export default defineNuxtModule<PohonModuleOptions>({
         {
           highlight: {
             theme: {
+              light: 'one-light',
               default: 'one-dark-pro',
+              dark: 'one-dark-pro',
             },
           },
           components: {

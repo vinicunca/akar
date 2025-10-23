@@ -14,6 +14,7 @@
     "@nuxt/content": "catalog:pohon",
     "@nuxt/fonts": "catalog:pohon",
     "@nuxt/image": "catalog:docs",
+    "@octokit/rest": "catalog:docs",
     "@vinicunca/perkakas": "catalog:core",
     "@vueuse/core": "catalog:core",
     "@vueuse/integrations": "catalog:core",
@@ -24,7 +25,8 @@
     "nuxt-og-image": "catalog:docs",
     "pohon-ui": "workspace:*",
     "prettier": "catalog:docs",
-    "shiki-transformer-color-highlight": "catalog:docs"
+    "shiki-transformer-color-highlight": "catalog:docs",
+    "sortablejs": "catalog:docs"
   },
   "devDependencies": {
     "@babel/traverse": "catalog:docs",

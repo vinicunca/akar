@@ -1,43 +1,41 @@
 ---
-description: A stacked set of collapsible panels.
+description: A vertically stacked set of interactive headings that each reveal an associated section of content.
 category: data
 links:
-  - label: Accordion
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/accordion
+  - label: Akar
+    to: /docs/akar/components/accordion
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Accordion.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/core/pohon/src/runtime/components/accordion.vue
 ---
 
 ## Usage
 
 Use the Accordion component to display a list of collapsible items.
 
-::component-code
+::docs-pohon-preview
 ---
-collapse: true
 ignore:
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 hide:
   - class
-  - ui
+  - pohon
   - defaultValue
 props:
   defaultValue: '0'
-  class: 'px-4 max-w-lg'
-  ui:
-    content: 'text-muted'
+  class: 'max-w-lg'
+  pohon:
+    content: 'color-text-muted'
   items:
-    - label: 'Is Nuxt UI free to use?'
-      content: 'Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.'
-    - label: 'Can I use Nuxt UI with Vue without Nuxt?'
-      content: 'Yes! While optimized for Nuxt, Nuxt UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.'
-    - label: 'Is Nuxt UI production-ready?'
-      content: 'Yes! Nuxt UI is used in production by thousands of applications with extensive tests, regular updates, and active maintenance.'
+    - label: 'Is it accessible?'
+      content: 'Yes. It adheres to the WAI-ARIA design pattern.'
+    - label: 'Is it unstyled?'
+      content: Yes. It's unstyled by default, giving you freedom over the look and feel.
+    - label: 'Can it be animated?'
+      content: 'Yes! You can use the transition prop to configure the animation.'
 ---
 ::
 
@@ -53,30 +51,27 @@ Use the `items` prop as an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, header?: ClassNameValue, trigger?: ClassNameValue, leadingIcon?: ClassNameValue, label?: ClassNameValue, trailingIcon?: ClassNameValue, content?: ClassNameValue, body?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { item?: ClassNameValue; header?: ClassNameValue; trigger?: ClassNameValue; leadingIcon?: ClassNameValue; label?: ClassNameValue; trailingIcon?: ClassNameValue; content?: ClassNameValue; body?: ClassNameValue }`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
 external:
   - items
 externalTypes:
-  - AccordionItem[]
-hide:
-  - class
+  - PAccordionItem[]
 props:
-  class: 'px-4'
   items:
-    - label: 'Icons'
-      icon: 'i-lucide-smile'
-      content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-    - label: 'Colors'
-      icon: 'i-lucide-swatch-book'
-      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
-    - label: 'Components'
-      icon: 'i-lucide-box'
-      content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+    - label: 'Is it accessible?'
+      icon: 'i-lucide:smile'
+      content: 'Yes. It adheres to the WAI-ARIA design pattern.'
+    - label: 'Is it unstyled?'
+      icon: 'i-lucide:swatch-book'
+      content: Yes. It's unstyled by default, giving you freedom over the look and feel.
+    - label: 'Can it be animated?'
+      icon: 'i-lucide:box'
+      content: 'Yes! You can use the transition prop to configure the animation.'
 ---
 ::
 
@@ -84,7 +79,7 @@ props:
 
 Set the `type` prop to `multiple` to allow multiple items to be active at the same time. Defaults to `single`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - type
@@ -92,30 +87,27 @@ ignore:
 external:
   - items
 externalTypes:
-  - AccordionItem[]
-hide:
-  - class
+  - PAccordionItem[]
 props:
-  class: 'px-4'
   type: 'multiple'
   items:
-    - label: 'Icons'
-      icon: 'i-lucide-smile'
-      content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-    - label: 'Colors'
-      icon: 'i-lucide-swatch-book'
-      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
-    - label: 'Components'
-      icon: 'i-lucide-box'
-      content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+    - label: 'Is it accessible?'
+      icon: 'i-lucide:smile'
+      content: 'Yes. It adheres to the WAI-ARIA design pattern.'
+    - label: 'Is it unstyled?'
+      icon: 'i-lucide:swatch-book'
+      content: Yes. It's unstyled by default, giving you freedom over the look and feel.
+    - label: 'Can it be animated?'
+      icon: 'i-lucide:box'
+      content: 'Yes! You can use the transition prop to configure the animation.'
 ---
 ::
 
 ### Collapsible
 
-When `type` is `single`, you can set the `collapsible` prop to `false` to prevent the active item from collapsing.
+When `type` is `single`, you can set the `collapsible` prop to `false` to prevent the **active** item from collapsing.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - collapsible
@@ -123,52 +115,47 @@ ignore:
 external:
   - items
 externalTypes:
-  - AccordionItem[]
-hide:
-  - class
+  - PAccordionItem[]
 props:
-  class: 'px-4'
   collapsible: false
   items:
-    - label: 'Icons'
-      icon: 'i-lucide-smile'
-      content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-    - label: 'Colors'
-      icon: 'i-lucide-swatch-book'
-      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
-    - label: 'Components'
-      icon: 'i-lucide-box'
-      content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+    - label: 'Is it accessible?'
+      icon: 'i-lucide:smile'
+      content: 'Yes. It adheres to the WAI-ARIA design pattern.'
+    - label: 'Is it unstyled?'
+      icon: 'i-lucide:swatch-book'
+      content: Yes. It's unstyled by default, giving you freedom over the look and feel.
+    - label: 'Can it be animated?'
+      icon: 'i-lucide:box'
+      content: 'Yes! You can use the transition prop to configure the animation.'
 ---
 ::
+
 
 ### Unmount
 
 Use the `unmount-on-hide` prop to prevent the content from being unmounted when the accordion is collapsed. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
 external:
   - items
 externalTypes:
-  - AccordionItem[]
-hide:
-  - class
+  - PAccordionItem[]
 props:
-  class: 'px-4'
   unmountOnHide: false
   items:
-    - label: 'Icons'
-      icon: 'i-lucide-smile'
-      content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-    - label: 'Colors'
-      icon: 'i-lucide-swatch-book'
-      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
-    - label: 'Components'
-      icon: 'i-lucide-box'
-      content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+    - label: 'Is it accessible?'
+      icon: 'i-lucide:smile'
+      content: 'Yes. It adheres to the WAI-ARIA design pattern.'
+    - label: 'Is it unstyled?'
+      icon: 'i-lucide:swatch-book'
+      content: Yes. It's unstyled by default, giving you freedom over the look and feel.
+    - label: 'Can it be animated?'
+      icon: 'i-lucide:box'
+      content: 'Yes! You can use the transition prop to configure the animation.'
 ---
 ::
 
@@ -176,38 +163,37 @@ props:
 You can inspect the DOM to see each item's content being rendered.
 ::
 
+
+
 ### Disabled
 
 Use the `disabled` property to disable the Accordion.
 
 You can also disable a specific item by using the `disabled` property in the item object.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
 external:
   - items
 externalTypes:
-  - AccordionItem[]
-hide:
-  - class
+  - PAccordionItem[]
 props:
-  class: 'px-4'
   disabled: true
   items:
-    - label: 'Icons'
-      icon: 'i-lucide-smile'
-      content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-    - label: 'Colors'
-      icon: 'i-lucide-swatch-book'
-      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
-      disabled: true
-    - label: 'Components'
-      icon: 'i-lucide-box'
-      content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+    - label: 'Is it accessible?'
+      icon: 'i-lucide:smile'
+      content: 'Yes. It adheres to the WAI-ARIA design pattern.'
+    - label: 'Is it unstyled?'
+      icon: 'i-lucide:swatch-book'
+      content: Yes. It's unstyled by default, giving you freedom over the look and feel.
+    - label: 'Can it be animated?'
+      icon: 'i-lucide:box'
+      content: 'Yes! You can use the transition prop to configure the animation.'
 ---
 ::
+
 
 ### Trailing Icon
 
@@ -217,42 +203,38 @@ Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/i
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
 external:
   - items
 externalTypes:
-  - AccordionItem[]
-hide:
-  - class
+  - PAccordionItem[]
 props:
-  class: 'px-4'
   trailingIcon: 'i-lucide-arrow-down'
   items:
-    - label: 'Icons'
-      icon: 'i-lucide-smile'
-      content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
-      trailingIcon: 'i-lucide-plus'
-    - label: 'Colors'
-      icon: 'i-lucide-swatch-book'
-      content: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
-    - label: 'Components'
-      icon: 'i-lucide-box'
-      content: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+    - label: 'Is it accessible?'
+      icon: 'i-lucide:smile'
+      content: 'Yes. It adheres to the WAI-ARIA design pattern.'
+    - label: 'Is it unstyled?'
+      icon: 'i-lucide:swatch-book'
+      content: Yes. It's unstyled by default, giving you freedom over the look and feel.
+    - label: 'Can it be animated?'
+      icon: 'i-lucide:box'
+      content: 'Yes! You can use the transition prop to configure the animation.'
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.chevronDown` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.chevronDown` key.
 :::
 ::
 
@@ -262,11 +244,9 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 You can control the active item(s) by using the `default-value` prop or the `v-model` directive with the index of the item.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'accordion-model-value-example'
-props:
-  class: 'px-4'
 ---
 ::
 
@@ -282,7 +262,7 @@ When `type="multiple"`, ensure to pass an array to the `default-value` prop or t
 
 Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Accordion. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'accordion-drag-and-drop-example'
 ---
@@ -292,11 +272,9 @@ name: 'accordion-drag-and-drop-example'
 
 Use the `#body` slot to customize the body of each item.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'accordion-body-slot-example'
-props:
-  class: 'px-4'
 ---
 ::
 
@@ -308,11 +286,9 @@ The `#body` slot includes some pre-defined styles, use the [`#content` slot](#wi
 
 Use the `#content` slot to customize the content of each item.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'accordion-content-slot-example'
-props:
-  class: 'px-4'
 ---
 ::
 
@@ -325,11 +301,9 @@ You will have access to the following slots:
 - `#{{ item.slot }}`{lang="ts-type"}
 - `#{{ item.slot }}-body`{lang="ts-type"}
 
-::component-example
+::docs-pohon-example
 ---
 name: 'accordion-custom-slot-example'
-props:
-  class: 'px-4'
 ---
 ::
 
@@ -337,32 +311,32 @@ props:
 
 You can use the [MDC](https://github.com/nuxt-modules/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to render markdown in the accordion items.
 
-::component-example
+::docs-pohon-example
 ---
-collapse: true
 name: 'accordion-markdown-example'
-class: 'px-8'
 ---
 ::
+
 
 ## API
 
 ### Props
 
-:component-props
-
-### Slots
-
-:component-slots
+:docs-pohon-props
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
+
+### Slots
+
+:docs-pohon-slots
+
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

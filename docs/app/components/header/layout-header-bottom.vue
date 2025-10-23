@@ -2,7 +2,7 @@
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { Ref } from 'vue';
 import { useRoute } from '#app';
-import { PNavigationMenu, PSeparator } from '#components';
+import { CoreFrameworksTabs, PNavigationMenu, PSeparator } from '#components';
 import { mapContentNavigation } from 'pohon-ui/utils/content';
 import { computed, inject } from 'vue';
 
@@ -31,6 +31,6 @@ const items = computed(() => {
       class="-mx-2.5 -mb-px"
     />
 
-    <!-- <FrameworkTabs class="w-40" /> -->
+    <CoreFrameworksTabs class="w-40" />
   </PContainer>
 </template>

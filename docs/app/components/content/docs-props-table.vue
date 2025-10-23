@@ -36,15 +36,38 @@ const props = withDefaults(
 );
 
 const propsData = computed(() => {
-  return props.data.map((prop) => {
+  return props.data
+    .filter((prop) => {
+      return !props.ignore?.includes(prop.name);
+    })
+    .map((prop) => {
     // @ts-expect-error - Type is not correct
-    prop.type = !prop.type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema)?.length
-    // @ts-expect-error - Type is not correct
-      ? Object.values(prop.schema.schema).map((schema) => schema?.type ? schema.type : schema).join(' | ')
-      : prop.type;
+      prop.type = !prop.type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema)?.length
+      // @ts-expect-error - Type is not correct
+        ? Object.values(prop.schema.schema).map((schema) => schema?.type ? schema.type : schema).join(' | ')
+        : prop.type;
 
-    return prop;
-  });
+      return prop;
+    })
+    .sort((a, b) => {
+      if (a.name === 'as') {
+        return -1;
+      }
+
+      if (b.name === 'as') {
+        return 1;
+      }
+
+      if (a.name === 'pohon') {
+        return 1;
+      }
+
+      if (b.name === 'pohon') {
+        return -1;
+      }
+
+      return 0;
+    });
 });
 </script>
 

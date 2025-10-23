@@ -66,6 +66,7 @@ catalogs:
   docs:
     '@babel/traverse': ^7.28.4
     '@nuxt/image': ^1.11.0
+    '@octokit/rest': ^22.0.0
     '@types/babel__traverse': ^7.28.0
     better-sqlite3: ^12.2.0
     fast-glob: ^3.3.3
@@ -73,6 +74,7 @@ catalogs:
     nuxt-og-image: ^5.1.11
     prettier: ^3.6.2
     shiki-transformer-color-highlight: ^1.0.0
+    sortablejs: ^1.15.6
     vue-component-meta: ^3.1.0
   plugins:
     '@nuxt/kit': 4.1.2

@@ -1,6 +1,7 @@
 // @unocss-include
 
 import { defineAppConfig } from '#imports';
+import { accordionTheme } from './themes/accordion.theme';
 import { breadcrumbTheme } from './themes/breadcrumb.theme';
 import { buttonTheme } from './themes/button.theme';
 import { collapsibleTheme } from './themes/collapsible.theme';
@@ -10,13 +11,17 @@ import { contentNavigationTheme } from './themes/content-navigation.theme';
 import { contentSurroundTheme } from './themes/content-surround.theme';
 import { contentTocTheme } from './themes/content-toc.theme';
 import { dialogTheme } from './themes/dialog.theme';
+import { formFieldTheme } from './themes/form-field.theme';
 import { headerTheme } from './themes/header.theme';
+import { inputTheme } from './themes/input.theme';
 import { kbdTheme } from './themes/kbd.theme';
 import { linkTheme } from './themes/link.theme';
 import { mainTheme } from './themes/main.theme';
 import { navigationMenuTheme } from './themes/navigation-menu.theme';
 import { popoverTheme } from './themes/popover.theme';
+import { selectTheme } from './themes/select.theme';
 import { separatorTheme } from './themes/separator.theme';
+import { tabsTheme } from './themes/tabs.theme';
 import { tooltipTheme } from './themes/tooltip.theme';
 
 export default defineAppConfig({
@@ -35,6 +40,7 @@ export default defineAppConfig({
       primary: 'purple',
     },
 
+    accordion: accordionTheme,
     button: buttonTheme,
     breadcrumb: breadcrumbTheme,
     collapsible: collapsibleTheme,
@@ -42,14 +48,18 @@ export default defineAppConfig({
     contentToc: contentTocTheme,
     contentNavigation: contentNavigationTheme,
     contentSurround: contentSurroundTheme,
+    formField: formFieldTheme,
     header: headerTheme,
     link: linkTheme,
     dialog: dialogTheme,
     main: mainTheme,
+    input: inputTheme,
+    select: selectTheme,
     navigationMenu: navigationMenuTheme,
     separator: separatorTheme,
     kbd: kbdTheme,
     popover: popoverTheme,
+    tabs: tabsTheme,
     tooltip: tooltipTheme,
 
     prose: {
@@ -95,6 +105,25 @@ export default defineAppConfig({
           trigger: 'relative inline-flex items-center gap-1.5 color-text data-[state=active]:color-text-highlighted hover:bg-background-elevated/50 px-2 py-1.5 text-sm rounded-md disabled:(cursor-not-allowed opacity-75) focus-visible:(ring-2 ring-inset ring-primary) focus:outline-none transition-colors',
           triggerIcon: 'size-4 shrink-0',
           triggerLabel: 'truncate',
+        },
+      },
+      codeCollapse: {
+        slots: {
+          root: 'relative [&_pre]:(h-[200px] border border-border-muted rounded-b-md)',
+          footer: 'h-16 absolute inset-x-px bottom-px rounded-b-md flex items-center justify-center',
+          trigger: 'group',
+          triggerIcon: 'group-data-[state=open]:rotate-180',
+        },
+        variants: {
+          open: {
+            true: {
+              root: '[&_pre]:h-auto [&_pre]:min-h-[200px] [&_pre]:max-h-[80vh] [&_pre]:pb-12',
+            },
+            false: {
+              root: '[&_pre]:overflow-hidden',
+              footer: 'bg-gradient-to-t from-background-muted',
+            },
+          },
         },
       },
       collapsible: {
@@ -143,12 +172,12 @@ export default defineAppConfig({
       },
       pre: {
         slots: {
-          base: 'group font-mono text-sm/6 border border-border-muted bg-[#282C34] rounded-md px-4 py-3 whitespace-pre-wrap break-words overflow-x-auto focus:outline-none',
+          base: 'group font-mono text-sm/6 bg-background-muted px-4 py-3 whitespace-pre-wrap break-words overflow-x-auto focus:outline-none',
           copy: 'absolute top-[11px] right-[11px] lg:opacity-0 lg:group-hover:opacity-100 transition',
           filename: 'color-text text-sm/6',
           header: 'flex items-center gap-1.5 border border-border-muted bg-background border-b-0 relative rounded-t-md px-4 py-3',
           icon: 'size-4 shrink-0',
-          root: 'relative my-5 group',
+          root: 'relative group',
         },
         variants: {
           filename: {

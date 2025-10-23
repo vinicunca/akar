@@ -30,6 +30,31 @@ export function getProp(
   return result !== undefined ? result : defaultValue;
 }
 
+export function setProp(
+  { object, path, value }:
+  { object: Record<string, any>; path: Array<string | number> | string; value: any },
+): void {
+  if (isString(path)) {
+    path = path.split('.').map((key) => {
+      const numKey = Number(key);
+      return Number.isNaN(numKey) ? key : numKey;
+    });
+  }
+
+  path.reduce(
+    (acc, key, i) => {
+      if (acc[key] === undefined) {
+        acc[key] = {};
+      }
+      if (i === path.length - 1) {
+        acc[key] = value;
+      }
+      return acc[key];
+    },
+    object,
+  );
+}
+
 export function mergeClasses(appConfigClass?: string | Array<string>, propClass?: string) {
   if (!appConfigClass && !propClass) {
     return '';
