@@ -3,7 +3,7 @@ description: A vertically stacked set of interactive headings that each reveal a
 category: dates
 links:
   - label: Pohon
-    to: /pohon/components/calendar
+    to: /docs/pohon/components/calendar
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/calendar/index.ts

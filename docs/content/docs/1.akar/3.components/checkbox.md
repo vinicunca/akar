@@ -2,7 +2,7 @@
 category: form
 links:
   - label: Pohon
-    to: /pohon/components/checkbox
+    to: /docs/pohon/components/checkbox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/checkbox/index.ts

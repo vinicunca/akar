@@ -13,7 +13,7 @@ export type AvatarRootContext = {
 export const [
   injectAAvatarRootContext,
   provideAvatarRootContext,
-] = createContext<AvatarRootContext>('AvatarRoot');
+] = createContext<AvatarRootContext>('AAvatarRoot');
 </script>
 
 <script setup lang="ts">

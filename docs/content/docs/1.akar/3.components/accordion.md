@@ -13,11 +13,7 @@ links:
 
 Use the Accordion component to display a list of collapsible items.
 
-::docs-akar-preview
----
-name: 'a-accordion'
----
-::
+:docs-akar-preview{name="a-accordion"}
 
 ## Features
 
@@ -341,7 +337,7 @@ import './styles.css';
 #### UnoCSS Preset
 
 ::tip
-If you have [Vinicunca Preset](https://unocss.vinicunca.dev/) installed, the animation classes are available as `animate-accordion-up` and `animate-accordion-down`. So no need to create new keyframes.
+By installing the [Vinicunca Preset](https://vinicunca.dev/unocss-preset/pohon-ui), you gain immediate access to pre-defined animation keyframes. This means the utility classes `animate-accordion-up` and `animate-accordion-down` are available right out of the box, saving you the step of manually creating them.
 ::
 
 ### Render content even when closed

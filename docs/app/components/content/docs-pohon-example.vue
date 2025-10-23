@@ -41,14 +41,10 @@ const component = defineAsyncComponent(() => {
     preview-classes="rounded-md min-h-[400px] w-full"
   >
     <template #preview>
-      <div
+      <component
+        :is="component"
         v-if="component"
-        class="w-full justify-center relative z-1"
-      >
-        <component
-          :is="component"
-        />
-      </div>
+      />
     </template>
 
     <template #code>

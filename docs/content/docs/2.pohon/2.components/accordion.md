@@ -332,10 +332,17 @@ name: 'accordion-markdown-example'
 
 :docs-pohon-slots
 
-
 ## Theme
 
 :docs-pohon-theme
+
+### Anatomy
+
+<!-- TODO: Create anatomy images for this component -->
+Here is the anatomy of themeable parts of the Accordion component:
+
+Coming soon...
+
 
 ## Changelog
 

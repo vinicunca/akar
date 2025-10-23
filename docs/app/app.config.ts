@@ -2,8 +2,10 @@
 
 import { defineAppConfig } from '#imports';
 import { accordionTheme } from './themes/accordion.theme';
+import { avatarThemes } from './themes/avatar.theme';
 import { breadcrumbTheme } from './themes/breadcrumb.theme';
 import { buttonTheme } from './themes/button.theme';
+import { chipTheme } from './themes/chip.theme';
 import { collapsibleTheme } from './themes/collapsible.theme';
 import { BRANDS } from './themes/constant';
 import { containerTheme } from './themes/container.theme';
@@ -41,8 +43,10 @@ export default defineAppConfig({
     },
 
     accordion: accordionTheme,
+    ...avatarThemes,
     button: buttonTheme,
     breadcrumb: breadcrumbTheme,
+    chip: chipTheme,
     collapsible: collapsibleTheme,
     container: containerTheme,
     contentToc: contentTocTheme,

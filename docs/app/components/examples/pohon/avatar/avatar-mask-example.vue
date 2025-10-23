@@ -1,5 +1,13 @@
+<script setup lang="ts">
+import { PAvatar } from '#components';
+</script>
+
 <template>
-  <UAvatar class="rounded-none squircle" src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" />
+  <PAvatar
+    class="squircle rounded-none"
+    src="https://github.com/praburangki.png"
+    alt="praburangki"
+  />
 </template>
 
 <style>
