@@ -18,14 +18,12 @@ export default defineCachedEventHandler(
 
     const octokit = new Octokit({ auth: process.env.NUXT_GITHUB_TOKEN });
 
-    console.log('🚀 ~ path:', path);
     const commits = await octokit.paginate(octokit.rest.repos.listCommits, {
       owner: 'vinicunca',
       repo: 'akar',
       path,
       since: '2025-03-12T14:33:00Z',
     });
-    console.log('🚀 ~ commits:', commits);
 
     return commits.map((commit) => ({
       sha: commit.sha,
