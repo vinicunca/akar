@@ -35,7 +35,7 @@ Each field must include a `type` property, which determines the input component 
 
 You can also pass any property from the [FormField](/docs/components/form-field#props) component to each field.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -87,7 +87,7 @@ props:
 
 Use the `title` prop to set the title of the Form.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -114,7 +114,7 @@ props:
 
 Use the `description` prop to set the description of the Form.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -143,7 +143,7 @@ props:
 
 Use the `icon` prop to set the icon of the Form.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -176,7 +176,7 @@ Use the `providers` prop to add providers to the form.
 
 You can pass any property from the [Button](/docs/components/button) component such as `variant`, `color`, `to`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -221,7 +221,7 @@ props:
 
 Use the `separator` prop to customize the [Separator](/docs/components/separator) between the providers and the fields. Defaults to `or`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -264,7 +264,7 @@ props:
 
 You can pass any property from the [Separator](/docs/components/separator#props) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -312,7 +312,7 @@ Use the `submit` prop to change the submit button of the Form.
 
 You can pass any property from the [Button](/docs/components/button) component such as `variant`, `color`, `to`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

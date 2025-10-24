@@ -12,7 +12,7 @@ links:
 
 Use the `v-model` directive to control the value of the ColorPicker.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -25,7 +25,7 @@ props:
 
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -38,7 +38,7 @@ props:
 
 Use the `format` prop to set `rgb` value of the ColorPicker.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -55,7 +55,7 @@ props:
 
 Use the `format` prop to set `hsl` value of the ColorPicker.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -72,7 +72,7 @@ props:
 
 Use the `format` prop to set `cmyk` value of the ColorPicker.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -89,7 +89,7 @@ props:
 
 Use the `format` prop to set `lab` value of the ColorPicker.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -106,7 +106,7 @@ props:
 
 Use the `throttle` prop to set the throttle value of the ColorPicker.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -122,7 +122,7 @@ props:
 
 Use the `size` prop to set the size of the ColorPicker.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   size: xl
@@ -133,7 +133,7 @@ props:
 
 Use the `disabled` prop to disable the ColorPicker.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   disabled: true

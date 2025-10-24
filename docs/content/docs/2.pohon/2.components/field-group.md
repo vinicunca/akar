@@ -12,7 +12,7 @@ links:
 
 Wrap multiple [Button](/components/button) within a FieldGroup to group them together.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 slots:
@@ -29,7 +29,7 @@ slots:
 
 Use the `size` prop to change the size of all the buttons.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -48,7 +48,7 @@ slots:
 
 Use the `orientation` prop to change the orientation of the buttons. Defaults to `horizontal`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -69,7 +69,7 @@ slots:
 
 You can use components like [Input](/components/input), [InputMenu](/components/input-menu), [Select](/components/select) [SelectMenu](/components/select-menu), etc. within a field group.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 slots:

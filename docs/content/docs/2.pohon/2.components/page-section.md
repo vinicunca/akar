@@ -51,7 +51,7 @@ Use it after a [PageHero](/docs/components/page-hero) component:
 
 Use the `title` prop to set the title of the section.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   title: 'Beautiful Vue UI components'
@@ -62,7 +62,7 @@ props:
 
 Use the `description` prop to set the description of the section.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -77,7 +77,7 @@ props:
 
 Use the `headline` prop to set the headline of the section.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -94,7 +94,7 @@ props:
 
 Use the `icon` prop to set the icon of the section.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -118,7 +118,7 @@ Use the `features` prop to display a list of [PageFeature](/docs/components/page
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:
@@ -150,7 +150,7 @@ props:
 
 Use the `links` prop to display a list of [Button](/docs/components/button) under the description.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:
@@ -179,7 +179,7 @@ props:
 
 Use the `orientation` prop to change the orientation with the default slot. Defaults to `vertical`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:
@@ -228,7 +228,7 @@ slots:
 
 Use the `reverse` prop to reverse the orientation of the default slot.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:

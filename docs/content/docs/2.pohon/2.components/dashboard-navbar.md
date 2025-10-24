@@ -50,7 +50,7 @@ In this example, we use the [Tabs](/docs/components/tabs) component in the right
 
 Use the `title` prop to set the title of the navbar.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -65,7 +65,7 @@ class: '!px-0 !pt-0'
 
 Use the `icon` prop to set the icon of the navbar.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class

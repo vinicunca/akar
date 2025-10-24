@@ -3,8 +3,8 @@ description: An input element to toggle between checked and unchecked states.
 category: form
 links:
   - label: Checkbox
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/checkbox
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/checkbox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Checkbox.vue
@@ -14,7 +14,7 @@ links:
 
 Use the `v-model` directive to control the checked state of the Checkbox.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -27,7 +27,7 @@ props:
 
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -40,7 +40,7 @@ props:
 
 Use the `indeterminate` value in the `v-model` directive or `default-value` prop to set the Checkbox to an [indeterminate state](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#indeterminate_state_checkboxes).
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -53,7 +53,7 @@ props:
 
 Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults to `i-lucide-minus`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -79,7 +79,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.mi
 
 Use the `label` prop to set the label of the Checkbox.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   label: Check me
@@ -88,7 +88,7 @@ props:
 
 When using the `required` prop, an asterisk is added next to the label.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -102,7 +102,7 @@ props:
 
 Use the `description` prop to set the description of the Checkbox.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -116,7 +116,7 @@ props:
 
 Use the `icon` prop to set the icon of the Checkbox when it is checked. Defaults to `i-lucide-check`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -144,7 +144,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `color` prop to change the color of the Checkbox.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -160,7 +160,7 @@ props:
 
 Use the `variant` prop to change the variant of the Checkbox.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -177,7 +177,7 @@ props:
 
 Use the `size` prop to change the size of the Checkbox.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -194,7 +194,7 @@ props:
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -211,7 +211,7 @@ props:
 
 Use the `disabled` prop to disable the Checkbox.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label

@@ -4,8 +4,8 @@ description: A list of links that can be displayed horizontally or vertically.
 category: navigation
 links:
   - label: NavigationMenu
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/navigation-menu
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/navigation-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/NavigationMenu.vue
@@ -15,7 +15,7 @@ links:
 
 Use the NavigationMenu component to display a list of links horizontally or vertically.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -125,7 +125,7 @@ Use the `items` prop as an array of objects with the following properties:
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -236,7 +236,7 @@ Use the `orientation` prop to change the orientation of the NavigationMenu.
 When orientation is `vertical`, an [Accordion](/docs/components/accordion) component is used to display each group. You can control the open state of each item using the `open` and `defaultOpen` properties and change the behavior using the [`collapsible`](/docs/components/accordion#collapsible) and [`type`](/docs/components/accordion#multiple) props.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -338,7 +338,7 @@ In `vertical` orientation, use the `collapsed` prop to collapse the NavigationMe
 You can use the [`tooltip`](#with-tooltip-in-items) and [`popover`](#with-popover-in-items) props to display more information on the collapsed items.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -443,7 +443,7 @@ Use the `highlight` prop to display a highlighted border for the active item.
 
 Use the `highlight-color` prop to change the color of the border. It defaults to the `color` prop.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 prettier: true
@@ -546,7 +546,7 @@ In `vertical` orientation, the `highlight` prop only highlights the border of ac
 
 Use the `color` prop to change the color of the NavigationMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
@@ -581,7 +581,7 @@ props:
 
 Use the `variant` prop to change the variant of the NavigationMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
@@ -626,7 +626,7 @@ Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/i
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -723,7 +723,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `arrow` prop to display an arrow on the NavigationMenu content when items have children.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -817,7 +817,7 @@ Use the `content-orientation` prop to change the orientation of the content.
 This prop only works when `orientation` is `horizontal`.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -890,7 +890,7 @@ props:
 
 Use the `unmount-on-hide` prop to control the content unmounting behavior. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -984,7 +984,7 @@ When orientation is `vertical` and the menu is `collapsed`, you can set the `too
 
 You can pass any property from the [Tooltip](/docs/components/tooltip) component globally or on each item.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -1089,7 +1089,7 @@ When orientation is `vertical` and the menu is `collapsed`, you can set the `pop
 
 You can pass any property from the [Popover](/docs/components/popover) component globally or on each item.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:

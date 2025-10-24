@@ -12,7 +12,7 @@ links:
 
 Use the `name` prop to display an icon:
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   name: 'i-lucide-lightbulb'

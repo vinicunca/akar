@@ -76,7 +76,7 @@ export default defineConfig({
 
 As the button is wrapped in a [ClientOnly](https://nuxt.com/docs/api/components/client-only) component, you can pass a `fallback` slot to display a placeholder while the component is loading.
 
-::component-code{prefix="color-mode"}
+::docs-pohon-preview{prefix="color-mode"}
 ---
 prettier: true
 slots:

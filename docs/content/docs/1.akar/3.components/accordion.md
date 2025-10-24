@@ -9,10 +9,6 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/accordion/index.ts
 ---
 
-## Usage
-
-Use the Accordion component to display a list of collapsible items.
-
 :docs-akar-preview{name="a-accordion"}
 
 ## Features
@@ -57,17 +53,7 @@ Contains all the parts of an Accordion
 
 :docs-component-meta{name="a-accordion-root"}
 
-#### Data Attributes
-
-::docs-data-attributes-table
----
-data:
-  - attribute: '[data-orientation]'
-    values:
-      - vertical
-      - horizontal
----
-::
+:docs-data-attributes-table{keys="orientation"}
 
 ### Item
 
@@ -75,23 +61,7 @@ Contains all the parts of a collapsible section.
 
 :docs-component-meta{name="a-accordion-item"}
 
-#### Data Attributes
-
-::docs-data-attributes-table
----
-data:
-  - attribute: '[data-state]'
-    values:
-      - open
-      - closed
-  - attribute: '[data-disabled]'
-    values: Present when disabled
-  - attribute: '[data-orientation]'
-    values:
-      - vertical
-      - horizontal
----
-::
+:docs-data-attributes-table{keys="state, disabled, orientation"}
 
 ### Header
 
@@ -99,23 +69,7 @@ Wraps an `AAccordionTrigger`. Use the `asChild` prop to update it to the appropr
 
 :docs-component-meta{name="a-accordion-header"}
 
-#### Data Attributes
-
-::docs-data-attributes-table
----
-data:
-  - attribute: '[data-state]'
-    values:
-      - open
-      - closed
-  - attribute: '[data-disabled]'
-    values: Present when disabled
-  - attribute: '[data-orientation]'
-    values:
-      - vertical
-      - horizontal
----
-::
+:docs-data-attributes-table{keys="state, disabled, orientation"}
 
 ### Trigger
 
@@ -123,23 +77,7 @@ Toggles the collapsed state of its associated item. It should be nested inside o
 
 :docs-component-meta{name="a-accordion-trigger"}
 
-#### Data Attributes
-
-::docs-data-attributes-table
----
-data:
-  - attribute: '[data-state]'
-    values:
-      - open
-      - closed
-  - attribute: '[data-disabled]'
-    values: Present when disabled
-  - attribute: '[data-orientation]'
-    values:
-      - vertical
-      - horizontal
----
-::
+:docs-data-attributes-table{keys="state, disabled, orientation"}
 
 ### Content
 
@@ -147,23 +85,7 @@ Contains the collapsible content for an item.
 
 :docs-component-meta{name="a-accordion-content"}
 
-#### Data Attributes
-
-::docs-data-attributes-table
----
-data:
-  - attribute: '[data-state]'
-    values:
-      - open
-      - closed
-  - attribute: '[data-disabled]'
-    values: Present when disabled
-  - attribute: '[data-orientation]'
-    values:
-      - vertical
-      - horizontal
----
-::
+:docs-data-attributes-table{keys="state, disabled, orientation"}
 
 #### CSS Variables
 
@@ -346,7 +268,7 @@ By default hidden content will be removed, use `:unmountOnHide="false"` to keep 
 
 This will also allow browser to search the hidden text, and open the accordion.
 
-```vue line=2
+```vue {2}
 <template>
   <AAccordionRoot :unmount-on-hide="false">
     <AAccordionItem value="item-1">

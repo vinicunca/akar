@@ -42,7 +42,7 @@ This component is purpose-built for AI chatbots with features like:
 
 Use the `messages` prop to display a list of chat messages.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:
@@ -79,7 +79,7 @@ props:
 
 Use the `status` prop to display a visual indicator when the assistant is processing.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:
@@ -114,7 +114,7 @@ Use the `user` prop to change the [ChatMessage](/docs/components/chat-message) p
 - `side: 'right'`{lang="ts-type"}
 - `variant: 'soft'`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:
@@ -170,7 +170,7 @@ Use the `assistant` prop to change the [ChatMessage](/docs/components/chat-messa
 - `side: 'left'`{lang="ts-type"}
 - `variant: 'naked'`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:
@@ -232,7 +232,7 @@ Use the `auto-scroll` prop to customize or hide the auto scroll button (with `fa
 
 You can pass any property from the [Button](/docs/components/button) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 collapse: true
@@ -287,7 +287,7 @@ props:
 
 Use the `auto-scroll-icon` prop to customize the auto scroll button [Icon](/docs/components/icon). Defaults to `i-lucide-arrow-down`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 collapse: true

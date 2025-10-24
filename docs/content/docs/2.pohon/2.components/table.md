@@ -31,7 +31,7 @@ This example demonstrates the most common use case of the `Table` component. Che
 
 Use the `data` prop as an array of objects, the columns will be generated based on the keys of the objects.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 class: '!p-0'
@@ -131,7 +131,7 @@ class: '!p-0'
 
 Use the `loading` prop to display a loading state, the `loading-color` prop to change its color and the `loading-animation` prop to change its animation.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 class: '!p-0'
@@ -178,7 +178,7 @@ props:
 
 Use the `sticky` prop to make the header or footer sticky.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 class: '!p-0'

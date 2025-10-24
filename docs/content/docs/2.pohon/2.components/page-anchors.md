@@ -12,7 +12,7 @@ links:
 
 Use the PageAnchors component to display a list of links.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 prettier: true
@@ -50,7 +50,7 @@ Use the `links` prop as an array of objects with the following properties:
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

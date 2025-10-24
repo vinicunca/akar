@@ -11,7 +11,7 @@ links:
 
 Use the `v-model` directive to control the value of the Textarea.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -26,7 +26,7 @@ props:
 
 Use the `rows` prop to set the number of rows. Defaults to `3`.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   rows: 12
@@ -37,7 +37,7 @@ props:
 
 Use the `placeholder` prop to set a placeholder text.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   placeholder: 'Type something...'
@@ -48,7 +48,7 @@ props:
 
 Use the `autoresize` prop to enable autoresizing the height of the Textarea.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -62,7 +62,7 @@ props:
 
 Use the `maxrows` prop to set the maximum number of rows when autoresizing. If set to `0`, the Textarea will grow indefinitely.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -79,7 +79,7 @@ props:
 
 Use the `color` prop to change the ring color when the Textarea is focused.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder
@@ -98,7 +98,7 @@ The `highlight` prop is used here to show the focus state. It's used internally 
 
 Use the `variant` prop to change the variant of the Textarea.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder
@@ -114,7 +114,7 @@ props:
 
 Use the `size` prop to change the size of the Textarea.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder
@@ -128,7 +128,7 @@ props:
 
 Use the `icon` prop to show an [Icon](/docs/components/icon) inside the Textarea.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -144,7 +144,7 @@ props:
 
 Use the `leading` and `trailing` props to set the icon position or the `leading-icon` and `trailing-icon` props to set a different icon for each position.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -161,7 +161,7 @@ props:
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Textarea.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -180,7 +180,7 @@ props:
 
 Use the `loading` prop to show a loading icon on the Textarea.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder
@@ -196,7 +196,7 @@ props:
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder
@@ -224,7 +224,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 
 Use the `disabled` prop to disable the Textarea.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder

@@ -43,7 +43,7 @@ Use the [`BlogPosts`](/docs/components/blog-posts) component to display multiple
 
 Use the `title` prop to display the title of the BlogPost.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -58,7 +58,7 @@ props:
 
 Use the `description` prop to display the description of the BlogPost.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -80,7 +80,7 @@ Use the `date` prop to display the date of the BlogPost.
 The date is automatically formatted to the [current locale](/docs/getting-started/integrations/i18n/nuxt#locale). You can either pass a `Date` object or a string.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -100,7 +100,7 @@ props:
 
 Use the `badge` prop to display a [Badge](/docs/components/badge) in the BlogPost.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -118,7 +118,7 @@ props:
 
 You can pass any property from the [Badge](/docs/components/badge#props) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -148,7 +148,7 @@ Use the `image` prop to display an image in the BlogPost.
 If [`@nuxt/image`](https://image.nuxt.com/get-started/installation) is installed, the `<NuxtImg>` component will be used instead of the native `img` tag.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -179,7 +179,7 @@ Use the `authors` prop to display a list of [User](/docs/components/user) in the
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -210,7 +210,7 @@ props:
 
 When the `authors` prop has more than one item, the [AvatarGroup](/docs/components/avatar-group) component is used.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -249,7 +249,7 @@ props:
 
 You can pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) component such as `to`, `target`, `rel`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -275,7 +275,7 @@ props:
 
 Use the `variant` prop to change the style of the BlogPost.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -307,7 +307,7 @@ The styling will be different whether you provide a `to` prop or an `image`.
 
 Use the `orientation` prop to change the BlogPost orientation. Defaults to `vertical`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:

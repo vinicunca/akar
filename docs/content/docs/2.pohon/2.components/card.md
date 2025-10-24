@@ -24,7 +24,7 @@ props:
 
 Use the `variant` prop to change the variant of the Card.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:

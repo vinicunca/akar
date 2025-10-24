@@ -28,7 +28,7 @@ The ChangelogVersions component provides a flexible layout to display a list of 
 
 Use the `versions` prop as an array of objects with the properties of the [ChangelogVersion](/docs/components/changelog-version#props) component.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -68,7 +68,7 @@ props:
 
 Use the `indicator` prop to hide the indicator bar on the left. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -109,7 +109,7 @@ props:
 
 Use the `indicator-motion` prop to customize or hide the motion effect on the indicator bar. Defaults to `true` with `{ damping: 30, restDelta: 0.001 }` [spring transition options](https://motion.dev/docs/vue-transitions#spring).
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:

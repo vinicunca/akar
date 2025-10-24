@@ -3,11 +3,11 @@ description: A non-modal dialog that floats around a trigger element.
 category: overlay
 links:
   - label: HoverCard
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/hover-card
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/hover-card
   - label: Popover
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/popover
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/popover
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Popover.vue
@@ -19,7 +19,7 @@ Use a [Button](/docs/components/button) or any other component in the default sl
 
 Then, use the `#content` slot to add the content displayed when the Popover is open.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 slots:
@@ -42,7 +42,7 @@ slots:
 
 Use the `mode` prop to change the mode of the Popover. Defaults to `click`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 items:
@@ -68,14 +68,14 @@ slots:
 ::
 
 ::note
-When using the `hover` mode, the Reka UI [`HoverCard`](https://reka-ui.com/docs/components/hover-card) component is used instead of the [`Popover`](https://reka-ui.com/docs/components/popover).
+When using the `hover` mode, the Reka UI [`HoverCard`](https://akar.com/docs/components/hover-card) component is used instead of the [`Popover`](https://akar.com/docs/components/popover).
 ::
 
 ### Delay
 
 When using the `hover` mode, you can use the `open-delay` and `close-delay` props to control the delay before the Popover is opened or closed.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -104,7 +104,7 @@ slots:
 
 Use the `content` prop to control how the Popover content is rendered, like its `align` or `side` for example.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 items:
@@ -142,7 +142,7 @@ slots:
 
 Use the `arrow` prop to display an arrow on the Popover.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -204,7 +204,7 @@ name: 'popover-command-palette-example'
 
 ### With following cursor
 
-You can make the Popover follow the cursor when hovering over an element using the [`reference`](https://reka-ui.com/docs/components/tooltip#trigger) prop:
+You can make the Popover follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/components/tooltip#trigger) prop:
 
 ::component-example
 ---
@@ -238,7 +238,7 @@ name: 'popover-anchor-slot-example'
 :component-slots
 
 ::note
-The `close` function is only available when `mode` is set to `click` because Reka UI exposes this for [`Popover`](https://reka-ui.com/docs/components/popover#close-using-slot-props) but not for [`HoverCard`](https://reka-ui.com/docs/components/hover-card).
+The `close` function is only available when `mode` is set to `click` because Reka UI exposes this for [`Popover`](https://akar.com/docs/components/popover#close-using-slot-props) but not for [`HoverCard`](https://akar.com/docs/components/hover-card).
 ::
 
 ### Emits

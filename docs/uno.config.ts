@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import { presetVinicunca } from '@vinicunca/unocss-preset';
 import { defineConfig } from 'unocss';
 
@@ -5,6 +6,12 @@ import { BRANDS } from './app/themes/constant';
 
 export default defineConfig({
   outputToCssLayers: true,
+
+  content: {
+    filesystem: [
+      resolve('./content/**/*.{md,mdx}'),
+    ],
+  },
 
   presets: [
     presetVinicunca({
@@ -41,21 +48,30 @@ export default defineConfig({
     ...BRANDS.flatMap((color) => [
       `border-${color}`,
       `border-${color}/25`,
+      `[&_code]:border-${color}/25`,
+      `[&_a]:hover:[&>code]:border-${color}`,
 
       `color-${color}`,
       `color-${color}/50`,
       `color-${color}/75`,
+      `color-${color}-600`,
+      `[&_a]:color-${color}`,
+      `[&_code]:color-${color}-600`,
+      `[&_a]:hover:[&>code]:color-${color}`,
       `dark:color-${color}-300`,
       `dark:[&_code]:color-${color}-300`,
-      `color-${color}-600`,
-      `[&_code]:color-${color}-600`,
       `data-[highlighted]:color-${color}`,
       `group-data-[highlighted]:color-${color}`,
       `group-data-[state=open]:color-${color}`,
+
+      `[&_a]:hover:border-${color}`,
       `hover:color-${color}/75`,
+
       `active:color-${color}/75`,
       `disabled:color-${color}`,
       `aria-disabled:color-${color}`,
+
+      `[&>ul]:marker:color-${color}/50`,
 
       `data-[highlighted]:before:bg-${color}/10`,
       `bg-${color}`,

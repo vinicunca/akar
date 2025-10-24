@@ -38,7 +38,7 @@ In this example, we use the [NavigationMenu](/docs/components/navigation-menu) c
 
 Use the `title` prop to change the title of the header. Defaults to `Nuxt UI`.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -51,7 +51,7 @@ class: '!px-0 !pt-0'
 
 You can also use the `title` slot to add your own logo.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 overflowHidden: true
@@ -74,7 +74,7 @@ class: '!px-0 !pt-0'
 
 Use the `to` prop to change the link of the title. Defaults to `/`.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -87,7 +87,7 @@ props:
 
 You can also use the `left` slot to override the link entirely.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 overflowHidden: true

@@ -3,8 +3,8 @@ description: A set of steps that are used to indicate progress through a multi-s
 category: navigation
 links:
   - label: Stepper
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/stepper
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/stepper
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Stepper.vue
@@ -14,7 +14,7 @@ links:
 
 Use the Stepper component to display a list of items in a stepper.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -52,7 +52,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, container?: ClassNameValue, trigger?: ClassNameValue, indicator?: ClassNameValue, icon?: ClassNameValue, separator?: ClassNameValue, wrapper?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
@@ -83,7 +83,7 @@ Click on the items to navigate through the steps.
 
 Use the `color` prop to change the color of the Stepper.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content
@@ -112,7 +112,7 @@ props:
 
 Use the `size` prop to change the size of the Stepper.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content
@@ -141,7 +141,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the Stepper. Defaults to `horizontal`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content
@@ -170,7 +170,7 @@ props:
 
 Use the `disabled` prop to disable navigation through the steps.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content

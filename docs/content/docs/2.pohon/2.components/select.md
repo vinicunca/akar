@@ -3,8 +3,8 @@ description: A select element to choose from a list of options.
 category: form
 links:
   - label: Select
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/select
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/select
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Select.vue
@@ -14,7 +14,7 @@ links:
 
 Use the `v-model` directive to control the value of the Select or the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -41,7 +41,7 @@ props:
 
 Use the `items` prop as an array of strings, numbers or booleans:
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -74,7 +74,7 @@ You can also pass an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `ui?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -106,7 +106,7 @@ When using objects, you need to reference the `value` property of the object in 
 
 You can also pass an array of arrays to the `items` prop to display separated groups of items.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -137,7 +137,7 @@ props:
 
 You can change the property that is used to set the value by using the `value-key` prop. Defaults to `value`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -169,7 +169,7 @@ props:
 
 Use the `multiple` prop to allow multiple selections, the selected items will be separated by a comma in the trigger.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -202,7 +202,7 @@ Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 
 Use the `placeholder` prop to set a placeholder text.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -225,7 +225,7 @@ props:
 
 Use the `content` prop to control how the Select content is rendered, like its `align` or `side` for example.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -264,7 +264,7 @@ props:
 
 Use the `arrow` prop to display an arrow on the Select.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -291,7 +291,7 @@ props:
 
 Use the `color` prop to change the ring color when the Select is focused.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -322,7 +322,7 @@ The `highlight` prop is used here to show the focus state. It's used internally 
 
 Use the `variant` prop to change the variant of the Select.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -350,7 +350,7 @@ props:
 
 Use the `size` prop to change the size of the Select.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -376,7 +376,7 @@ props:
 
 Use the `icon` prop to show an [Icon](/docs/components/icon) inside the Select.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -403,7 +403,7 @@ props:
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon). Defaults to `i-lucide-chevron-down`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -442,7 +442,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -481,7 +481,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Select.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -509,7 +509,7 @@ props:
 
 Use the `loading` prop to show a loading icon on the Select.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -536,7 +536,7 @@ props:
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -575,7 +575,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 
 Use the `disabled` prop to disable the Select.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -602,7 +602,7 @@ props:
 
 You can use the `type` property with `separator` to display a separator between items or `label` to display a label.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:

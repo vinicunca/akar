@@ -16,7 +16,7 @@ The PageFeature component is used by the [PageSection](/docs/components/page-sec
 
 Use the `title` prop to set the title of the feature.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -30,7 +30,7 @@ props:
 
 Use the `description` prop to set the description of the feature.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -48,7 +48,7 @@ props:
 
 Use the `icon` prop to set the icon of the feature.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -68,7 +68,7 @@ props:
 
 You can pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) component such as `to`, `target`, `rel`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -92,7 +92,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the feature. Defaults to `horizontal`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:

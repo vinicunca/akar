@@ -13,7 +13,7 @@ links:
 
 Use the `title` prop to set the title of the Alert.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   title: 'Heads up!'
@@ -24,7 +24,7 @@ props:
 
 Use the `description` prop to set the description of the Alert.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -37,7 +37,7 @@ props:
 
 Use the `icon` prop to show an [Icon](/docs/components/icon).
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -54,7 +54,7 @@ props:
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar).
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -71,7 +71,7 @@ props:
 
 Use the `color` prop to change the color of the Alert.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -90,7 +90,7 @@ props:
 
 Use the `variant` prop to change the variant of the Alert.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -114,7 +114,7 @@ Use the `close` prop to display a [Button](/docs/components/button) to dismiss t
 An `update:open` event will be emitted when the close button is clicked.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -134,7 +134,7 @@ props:
 
 You can pass any property from the [Button](/docs/components/button) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -160,7 +160,7 @@ props:
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -195,7 +195,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 Use the `actions` prop to add some [Button](/docs/components/button) actions to the Alert.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -220,7 +220,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the Alert.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -248,7 +248,7 @@ props:
 
 Use the `class` prop to override the base styles of the Alert.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -265,7 +265,7 @@ props:
 
 Use the `ui` prop to override the slots styles of the Alert.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

@@ -4,8 +4,8 @@ description: A menu to display actions when clicking on an element.
 category: overlay
 links:
   - label: DropdownMenu
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/dropdown-menu
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/dropdown-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/DropdownMenu.vue
@@ -15,7 +15,7 @@ links:
 
 Use a [Button](/docs/components/button) or any other component in the default slot of the DropdownMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 collapse: true
@@ -102,7 +102,7 @@ Use the `items` prop as an array of objects with the following properties:
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 collapse: true
@@ -184,7 +184,7 @@ Each item can take a `children` array of objects with the same properties as the
 
 Use the `content` prop to control how the DropdownMenu content is rendered, like its `align` or `side` for example.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -231,7 +231,7 @@ slots:
 
 Use the `arrow` prop to display an arrow on the DropdownMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -266,7 +266,7 @@ slots:
 
 Use the `size` prop to control the size of the DropdownMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -311,7 +311,7 @@ When using the same size, the DropdownMenu items will be perfectly aligned with 
 
 Use the `disabled` prop to disable the DropdownMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

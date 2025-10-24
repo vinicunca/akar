@@ -59,7 +59,7 @@ Most of the time, you will use the [`DashboardNavbar`](/docs/components/dashboar
 
 Use the `resizable` prop to make the panel resizable.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -88,7 +88,7 @@ class: '!p-0 !justify-start'
 
 Use the `min-size`,  `max-size` and `default-size` props to customize the size of the panel.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

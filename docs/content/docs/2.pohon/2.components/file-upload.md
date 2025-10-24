@@ -12,7 +12,7 @@ links:
 
 Use the `v-model` directive to control the value of the FileUpload.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -29,7 +29,7 @@ props:
 
 Use the `multiple` prop to allow multiple files to be selected.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - class
@@ -43,7 +43,7 @@ props:
 
 Use the `dropzone` prop to enable/disable the droppable area. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - class
@@ -61,7 +61,7 @@ Use the `interactive` prop to enable/disable the clickable area. Defaults to `tr
 This can be useful when adding a [`Button`](/docs/components/button) component in the `#actions` slot.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - class
@@ -75,7 +75,7 @@ props:
 
 Use the `accept` prop to specify the allowed file types for the input. Provide a comma-separated list of [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types) or file extensions (e.g., `image/png,application/pdf,.jpg`). Defaults to `*` (all file types).
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - accept
@@ -90,7 +90,7 @@ props:
 
 Use the `label` prop to set the label of the FileUpload.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -105,7 +105,7 @@ props:
 
 Use the `description` prop to set the description of the FileUpload.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -122,7 +122,7 @@ props:
 
 Use the `icon` prop to set the icon of the FileUpload. Defaults to `i-lucide-upload`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -153,7 +153,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.up
 
 Use the `color` prop to change the color of the FileUpload.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -177,7 +177,7 @@ The `highlight` prop is used here to show the focus state. It's used internally 
 
 Use the `variant` prop to change the variant of the FileUpload.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - class
@@ -190,7 +190,7 @@ props:
 
 Use the `size` prop to change the size of the FileUpload.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -213,7 +213,7 @@ Use the `layout` prop to change how the files are displayed in the FileUpload. D
 This prop only works when `variant` is `area`.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -241,7 +241,7 @@ Use the `position` prop to change the position of the files in the FileUpload. D
 This prop only works when `variant` is `area` and when `layout` is `list`.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

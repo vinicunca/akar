@@ -24,7 +24,7 @@ The ContentSearchButton component is used to open the [ContentSearch](/docs/comp
 
 It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
-::component-code{prefix="content"}
+::docs-pohon-preview{prefix="content"}
 ---
 ignore:
   - variant
@@ -41,7 +41,7 @@ The button defaults to `color="neutral"` and `variant="outline"` when not collap
 
 Use the `collapsed` prop to show the button's label and [kbds](#kbds). Defaults to `true`.
 
-::component-code{prefix="content"}
+::docs-pohon-preview{prefix="content"}
 ---
 prettier: true
 props:
@@ -53,7 +53,7 @@ props:
 
 Use the `kbds` prop to display keyboard keys in the button. Defaults to `['meta', 'K']`{lang="ts-type"} to match the default shortcut of the [ContentSearch](/docs/components/content-search#shortcut) component.
 
-::component-code{prefix="content"}
+::docs-pohon-preview{prefix="content"}
 ---
 prettier: true
 ignore:

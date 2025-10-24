@@ -35,6 +35,7 @@ const component = defineAsyncComponent(() => {
 <template>
   <CoreComponentPreview
     preview-classes="rounded-md min-h-[400px] w-full"
+    class="akar:border-t-none"
   >
     <template #preview>
       <div

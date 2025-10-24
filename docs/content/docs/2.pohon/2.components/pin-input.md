@@ -4,8 +4,8 @@ description: An input element to enter a pin.
 category: form
 links:
   - label: PinInput
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/pin-input
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/pin-input
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/PinInput.vue
@@ -15,7 +15,7 @@ links:
 
 Use the `v-model` directive to control the value of the PinInput.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -29,7 +29,7 @@ props:
 
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -43,7 +43,7 @@ props:
 
 Use the `type` prop to change the input type. Defaults to `text`.
 
-::component-code
+::docs-pohon-preview
 ---
 items:
   type:
@@ -62,7 +62,7 @@ When `type` is set to `number`, it will only accept numeric characters.
 
 Use the `mask` prop to treat the input like a password.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -78,7 +78,7 @@ props:
 
 Use the `otp` prop to enable One-Time Password functionality. When enabled, mobile devices can automatically detect and fill OTP codes from SMS messages or clipboard content, with autocomplete support.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   otp: true
@@ -89,7 +89,7 @@ props:
 
 Use the `length` prop to change the amount of inputs.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   length: 6
@@ -100,7 +100,7 @@ props:
 
 Use the `placeholder` prop to set a placeholder text.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   placeholder: '○'
@@ -111,7 +111,7 @@ props:
 
 Use the `color` prop to change the ring color when the PinInput is focused.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder
@@ -130,7 +130,7 @@ The `highlight` prop is used here to show the focus state. It's used internally 
 
 Use the `variant` prop to change the variant of the PinInput.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder
@@ -146,7 +146,7 @@ props:
 
 Use the `size` prop to change the size of the PinInput.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder
@@ -160,7 +160,7 @@ props:
 
 Use the `disabled` prop to disable the PinInput.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - placeholder

@@ -32,7 +32,7 @@ The grid columns will be automatically calculated based on the number of plans, 
 
 Use the `plans` prop as an array of objects with the properties of the [PricingPlan](/docs/components/pricing-plan#props) component.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -72,7 +72,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the PricingPlans. Defaults to `horizontal`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -120,7 +120,7 @@ When using the `plans` prop instead of the default slot, the `orientation` of th
 
 Use the `compact` prop to reduce the padding between the plans when one of the plans is scaled for a better visual balance.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -164,7 +164,7 @@ props:
 
 Use the `scale` prop to adjust the spacing between the plans when one of the plans is scaled for a better visual balance.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:

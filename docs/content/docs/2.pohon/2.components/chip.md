@@ -11,7 +11,7 @@ links:
 
 Wrap any component with a Chip to display an indicator.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 slots:
@@ -26,7 +26,7 @@ slots:
 
 Use the `color` prop to change the color of the Chip.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -43,7 +43,7 @@ slots:
 
 Use the `size` prop to change the size of the Chip.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -60,7 +60,7 @@ slots:
 
 Use the `text` prop to set the text of the Chip.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -78,7 +78,7 @@ slots:
 
 Use the `position` prop to change the position of the Chip.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -95,7 +95,7 @@ slots:
 
 Use the `inset` prop to display the Chip inside the component. This is useful when dealing with rounded components.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -112,7 +112,7 @@ slots:
 
 Use the `standalone` prop alongside the `inset` prop to display the Chip inline.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   standalone: true

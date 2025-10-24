@@ -3,8 +3,8 @@ description: A set of tab panels that are displayed one at a time.
 category: navigation
 links:
   - label: Tabs
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/tabs
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/tabs
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Tabs.vue
@@ -39,7 +39,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `ui?: { trigger?: ClassNameValue, leadingIcon?: ClassNameValue, leadingAvatar?: ClassNameValue, leadingAvatarSize?: ClassNameValue, label?: ClassNameValue, trailingBadge?: ClassNameValue, trailingBadgeSize?: ClassNameValue, content?: ClassNameValue }`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
@@ -64,7 +64,7 @@ props:
 
 Set the `content` prop to `false` to turn the Tabs into a toggle-only control without displaying any content. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content
@@ -91,7 +91,7 @@ props:
 
 Use the `unmount-on-hide` prop to prevent the content from being unmounted when the Tabs is collapsed. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content
@@ -122,7 +122,7 @@ You can inspect the DOM to see each item's content being rendered.
 
 Use the `color` prop to change the color of the Tabs.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content
@@ -146,7 +146,7 @@ props:
 
 Use the `variant` prop to change the variant of the Tabs.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content
@@ -171,7 +171,7 @@ props:
 
 Use the `size` prop to change the size of the Tabs.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content
@@ -196,7 +196,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the Tabs. Defaults to `horizontal`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - content

@@ -28,7 +28,7 @@ The BlogPosts component provides a flexible layout to display a list of [BlogPos
 
 Use the `posts` prop as an array of objects with the properties of the [BlogPost](/docs/components/blog-post#props) component.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -56,7 +56,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the BlogPosts. Defaults to `horizontal`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:

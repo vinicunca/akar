@@ -36,7 +36,7 @@ Use the [`ChatMessages`](/docs/components/chat-messages) component to display a 
 
 Use the `parts` prop to display the message content using the AI SDK v5 format.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -56,7 +56,7 @@ The `parts` prop is the recommended format for AI SDK v5. Each part has a `type`
 
 Use the `side` prop to display the message on the left or right.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -77,7 +77,7 @@ When using the [`ChatMessages`](/docs/components/chat-messages) component, the `
 
 Use the `variant` prop to change style of the message.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -98,7 +98,7 @@ When using the [`ChatMessages`](/docs/components/chat-messages) component, the `
 
 Use the `icon` prop to display an [Icon](/docs/components/icon) component next to the message.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -119,7 +119,7 @@ props:
 
 Use the `avatar` prop to display an [Avatar](/docs/components/avatar) component next to the message.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -139,7 +139,7 @@ props:
 
 You can also use the `avatar.icon` prop to display an icon as the avatar.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -157,7 +157,7 @@ props:
 
 Use the `actions` prop to display actions below the message that will be displayed when hovering over the message.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:

@@ -3,7 +3,7 @@ description: A drawer that smoothly slides in & out of the screen.
 category: overlay
 links:
   - label: Drawer
-    icon: i-custom-reka-ui
+    icon: i-custom-akar
     to: https://github.com/unovue/vaul-vue
   - label: GitHub
     icon: i-simple-icons-github
@@ -16,7 +16,7 @@ Use a [Button](/docs/components/button) or any other component in the default sl
 
 Then, use the `#content` slot to add the content displayed when the Drawer is open.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 slots:
@@ -41,7 +41,7 @@ You can also use the `#header`{lang="ts-type"}, `#body`{lang="ts-type"} and `#fo
 
 Use the `title` prop to set the title of the Drawer's header.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -66,7 +66,7 @@ slots:
 
 Use the `description` prop to set the description of the Drawer's header.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -94,7 +94,7 @@ slots:
 
 Use the `direction` prop to control the direction of the Drawer. Defaults to `bottom`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -119,7 +119,7 @@ slots:
 
 Use the `inset` prop to inset the Drawer from the edges.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -145,7 +145,7 @@ slots:
 
 Use the `handle` prop to control whether the Drawer has a handle or not. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -170,7 +170,7 @@ slots:
 
 Use the `handle-only` prop to only allow the Drawer to be dragged by the handle.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -195,7 +195,7 @@ slots:
 
 Use the `overlay` prop to control whether the Drawer has an overlay or not. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -220,7 +220,7 @@ slots:
 
 Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect. You can set the `set-background-color-on-scale` prop to `false` to prevent changing the background color.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:

@@ -1,18 +1,36 @@
 <script lang="ts" setup>
 import { DocsHighlightInlineType } from '#components';
+import { computed } from 'vue';
 
-type AttributeDef = {
-  attribute: string;
-  values: string | Array<string>;
+const props = defineProps<{
+  keys: string;
+}>();
+
+const DATA_ATTRIBUTES = {
+  state: {
+    attribute: '[data-state]',
+    values: ['open', 'closed'],
+  },
+  disabled: {
+    attribute: '[data-disabled]',
+    values: 'Present when disabled',
+  },
+  orientation: {
+    attribute: '[data-orientation]',
+    values: ['horizontal', 'vertical'],
+  },
 };
 
-interface DataAttributesTableProps {
-  data: Array<AttributeDef>;
-}
-const props = defineProps<DataAttributesTableProps>();
+const propData = computed(() => {
+  return props.keys
+    .split(',')
+    .map((key) => DATA_ATTRIBUTES[key.trim() as keyof typeof DATA_ATTRIBUTES]);
+});
 </script>
 
 <template>
+  <ProseH4>Data Attributes</ProseH4>
+
   <ProseTable>
     <ProseThead>
       <ProseTr>
@@ -27,11 +45,11 @@ const props = defineProps<DataAttributesTableProps>();
 
     <ProseTbody>
       <ProseTr
-        v-for="(prop, index) in props.data"
+        v-for="(prop, index) in propData"
         :key="`${prop.attribute}-${index}`"
       >
         <ProseTd>
-          <ProseCode>
+          <ProseCode class="akar:(color-primary-600 bg-primary/10)">
             {{ prop.attribute }}
           </ProseCode>
         </ProseTd>

@@ -19,7 +19,7 @@ The DashboardSearchButton component is used to open the [DashboardSearch](/docs/
 
 It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - variant
@@ -36,7 +36,7 @@ The button defaults to `color="neutral"` and `variant="outline"` when not collap
 
 Use the `collapsed` prop to hide the button's label and [kbds](#kbds). Defaults to `false`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -52,7 +52,7 @@ When using the button in the **DashboardSidebar** component, use the `collapsed`
 
 Use the `kbds` prop to display keyboard keys in the button. Defaults to `['meta', 'K']`{lang="ts-type"} to match the default shortcut of the [DashboardSearch](/docs/components/dashboard-search#shortcut) component.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

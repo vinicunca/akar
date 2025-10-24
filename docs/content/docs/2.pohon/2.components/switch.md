@@ -3,8 +3,8 @@ description: A control that toggles between two states.
 category: form
 links:
   - label: Switch
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/switch
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/switch
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Switch.vue
@@ -14,7 +14,7 @@ links:
 
 Use the `v-model` directive to control the checked state of the Switch.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -27,7 +27,7 @@ props:
 
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -40,7 +40,7 @@ props:
 
 Use the `label` prop to set the label of the Switch.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   label: Check me
@@ -49,7 +49,7 @@ props:
 
 When using the `required` prop, an asterisk is added next to the label.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -63,7 +63,7 @@ props:
 
 Use the `description` prop to set the description of the Switch.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -77,7 +77,7 @@ props:
 
 Use the `checked-icon` and `unchecked-icon` props to set the icons of the Switch when checked and unchecked.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -95,7 +95,7 @@ props:
 
 Use the `loading` prop to show a loading icon on the Switch.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -111,7 +111,7 @@ props:
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -140,7 +140,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 
 Use the `color` prop to change the color of the Switch.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -156,7 +156,7 @@ props:
 
 Use the `size` prop to change the size of the Switch.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label
@@ -172,7 +172,7 @@ props:
 
 Use the `disabled` prop to disable the Switch.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - label

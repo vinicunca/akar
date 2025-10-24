@@ -72,7 +72,7 @@ export default defineAppConfig({
       },
       callout: {
         slots: {
-          base: 'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-background [&_pre]:bg-background [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 [&>*]:last:!mb-0 [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0 transition-colors',
+          base: 'group relative block px-4 py-3 rounded-md text-sm/6 my-5 last:mb-0 [&_code]:text-xs/5 [&_code]:bg-background [&_pre]:bg-background [&>div]:my-2.5 [&_ul]:my-2.5 [&_ol]:my-2.5 [&>*]:last:!mb-0 [&_ul]:ps-4.5 [&_ol]:ps-4.5 [&_li]:my-0 transition-colors [&_a]:font-700',
           externalIcon: 'size-4 align-top absolute right-2 top-2 pointer-events-none transition-colors',
           icon: 'size-4 shrink-0 align-sub me-1.5 transition-colors',
         },
@@ -90,7 +90,7 @@ export default defineAppConfig({
         },
       },
       code: {
-        base: 'px-1.5 py-0.5 text-sm font-mono font-medium rounded-md inline-block',
+        base: 'px-1.5 py-0.5 text-sm font-mono font-600 rounded-md inline-block transition-colors-280 [&[language=ts-type]]:(bg-slate-700 dark:bg-slate-800)',
         variants: {
           color: {
             ...Object.fromEntries(BRANDS.map((color: string) => [
@@ -125,7 +125,7 @@ export default defineAppConfig({
             },
             false: {
               root: '[&_pre]:overflow-hidden',
-              footer: 'bg-gradient-to-t from-background-muted',
+              footer: 'bg-gradient-to-t from-slate-800',
             },
           },
         },
@@ -176,7 +176,7 @@ export default defineAppConfig({
       },
       pre: {
         slots: {
-          base: 'group font-mono text-sm/6 bg-background-muted px-4 py-3 whitespace-pre-wrap break-words overflow-x-auto focus:outline-none',
+          base: 'group font-mono text-sm/6 bg-slate-800 px-4 py-3 whitespace-pre-wrap break-words overflow-x-auto focus:outline-none rounded-md',
           copy: 'absolute top-[11px] right-[11px] lg:opacity-0 lg:group-hover:opacity-100 transition',
           filename: 'color-text text-sm/6',
           header: 'flex items-center gap-1.5 border border-border-muted bg-background border-b-0 relative rounded-t-md px-4 py-3',

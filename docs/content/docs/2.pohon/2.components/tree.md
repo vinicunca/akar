@@ -3,8 +3,8 @@ description: A tree view component to display and interact with hierarchical dat
 category: data
 links:
   - label: Tree
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/tree
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/tree
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Tree.vue
@@ -14,7 +14,7 @@ links:
 
 Use the Tree component to display a hierarchical structure of items.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -69,7 +69,7 @@ Use the `items` prop as an array of objects with the following properties:
 A unique identifier is required for each item. The component will use the `label` prop as identifier if no `get-key` is provided. Ideally you should provide a `get-key` function prop to return a unique identifier. Alternatively, you can use the `labelKey` prop to specify which property to use as the unique identifier.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -110,7 +110,7 @@ props:
 
 Use the `multiple` prop to allow multiple item selections.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -152,7 +152,7 @@ props:
 
 Use the `nested` prop to control whether the Tree is rendered with nested structure or as a flat list. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -198,7 +198,7 @@ When `nested` is `false`, all items are rendered at the same level with indentat
 
 Use the `color` prop to change the color of the Tree.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -240,7 +240,7 @@ props:
 
 Use the `size` prop to change the size of the Tree.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -286,7 +286,7 @@ Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/i
 If an icon is specified for an item, it will always take precedence over these props.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -341,7 +341,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `expanded-icon` and `collapsed-icon` props to customize the icons of a parent node when it is expanded or collapsed. Defaults to `i-lucide-folder-open` and `i-lucide-folder` respectively.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -396,7 +396,7 @@ You can customize these icons globally in your `vite.config.ts` under `ui.icons.
 
 Use the `disabled` prop to prevent any user interaction with the Tree.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:

@@ -93,8 +93,8 @@ const propsData = computed(() => {
         :key="`${prop.name}-${index}`"
       >
         <ProseTd>
-          <ProseCode>
-            {{ prop.name }}
+          <ProseCode class="akar:(color-$akar-primary bg-$akar-primary/10)">
+            {{ prop.name }}{{ prop.required ? '*' : '' }}
           </ProseCode>
         </ProseTd>
 

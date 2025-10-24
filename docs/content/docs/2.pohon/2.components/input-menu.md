@@ -4,8 +4,8 @@ description: An autocomplete input with real-time suggestions.
 category: form
 links:
   - label: Combobox
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/combobox
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputMenu.vue
@@ -15,7 +15,7 @@ links:
 
 Use the `v-model` directive to control the value of the InputMenu or the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -35,7 +35,7 @@ props:
 ::
 
 ::tip
-Use this over an [`Input`](/docs/components/input) to take advantage of Reka UI's [`Combobox`](https://reka-ui.com/docs/components/combobox) component that offers autocomplete capabilities.
+Use this over an [`Input`](/docs/components/input) to take advantage of Reka UI's [`Combobox`](https://akar.com/docs/components/combobox) component that offers autocomplete capabilities.
 ::
 
 ::note
@@ -46,7 +46,7 @@ This component is similar to the [`SelectMenu`](/docs/components/select-menu) bu
 
 Use the `items` prop as an array of strings, numbers or booleans:
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -77,7 +77,7 @@ You can also pass an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `ui?: { tagsItem?: ClassNameValue, tagsItemText?: ClassNameValue, tagsItemDelete?: ClassNameValue, tagsItemDeleteIcon?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue.label
@@ -100,7 +100,7 @@ props:
 
 You can also pass an array of arrays to the `items` prop to display separated groups of items.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -129,7 +129,7 @@ props:
 
 You can choose to bind a single property of the object rather than the whole object by using the `value-key` prop. Defaults to `undefined`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -160,7 +160,7 @@ props:
 
 Use the `multiple` prop to allow multiple selections, the selected items will be displayed as tags.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -191,7 +191,7 @@ Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 
 With `multiple`, use the `delete-icon` prop to customize the delete [Icon](/docs/components/icon) in the tags. Defaults to `i-lucide-x`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -231,7 +231,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 Use the `placeholder` prop to set a placeholder text.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -252,7 +252,7 @@ props:
 
 Use the `content` prop to control how the InputMenu content is rendered, like its `align` or `side` for example.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -289,7 +289,7 @@ props:
 
 Use the `arrow` prop to display an arrow on the InputMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -314,7 +314,7 @@ props:
 
 Use the `color` prop to change the ring color when the InputMenu is focused.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -343,7 +343,7 @@ The `highlight` prop is used here to show the focus state. It's used internally 
 
 Use the `variant` prop to change the variant of the InputMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -369,7 +369,7 @@ props:
 
 Use the `size` prop to change the size of the InputMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -393,7 +393,7 @@ props:
 
 Use the `icon` prop to show an [Icon](/docs/components/icon) inside the InputMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -418,7 +418,7 @@ props:
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon). Defaults to `i-lucide-chevron-down`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -455,7 +455,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -492,7 +492,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -518,7 +518,7 @@ props:
 
 Use the `loading` prop to show a loading icon on the InputMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -543,7 +543,7 @@ props:
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -580,7 +580,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 
 Use the `disabled` prop to disable the InputMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -605,7 +605,7 @@ props:
 
 You can use the `type` property with `separator` to display a separator between items or `label` to display a label.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -786,7 +786,7 @@ name: 'input-menu-filter-fields-example'
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
-::warning{to="https://github.com/unovue/reka-ui/issues/1885" target="_blank"}
+::warning{to="https://github.com/unovue/akar/issues/1885" target="_blank"}
 When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
 ::
 

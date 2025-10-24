@@ -56,7 +56,7 @@ Use the [`ChangelogVersions`](/docs/components/changelog-versions) component to 
 
 Use the `title` prop to display the title of the ChangelogVersion.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -73,7 +73,7 @@ props:
 
 Use the `description` prop to display the description of the ChangelogVersion.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -98,7 +98,7 @@ Use the `date` prop to display the date of the ChangelogVersion.
 The date is automatically formatted to the [current locale](/docs/getting-started/integrations/i18n/nuxt#locale). You can either pass a `Date` object or a string.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -121,7 +121,7 @@ props:
 
 Use the `badge` prop to display a [Badge](/docs/components/badge) on the ChangelogVersion.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -144,7 +144,7 @@ props:
 
 You can pass any property from the [Badge](/docs/components/badge#props) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -179,7 +179,7 @@ Use the `image` prop to display an image in the BlogPost.
 If [`@nuxt/image`](https://image.nuxt.com/get-started/installation) is installed, the `<NuxtImg>` component will be used instead of the native `img` tag.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -213,7 +213,7 @@ Use the `authors` prop to display a list of [User](/docs/components/user) in the
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -261,7 +261,7 @@ props:
 
 You can pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) component such as `to`, `target`, `rel`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -290,7 +290,7 @@ props:
 
 Use the `indicator` prop to hide the indicator dot on the left. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:

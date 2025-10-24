@@ -68,7 +68,7 @@ The ChatPrompt handles the following events:
 
 Use the `variant` prop to change the style of the prompt. Defaults to `outline`.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - autofocus

@@ -29,7 +29,7 @@ props:
 
 Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/docs/components/icon).
 
-::component-code{prefix="content"}
+::docs-pohon-preview{prefix="content"}
 ---
 prettier: true
 collapse: true

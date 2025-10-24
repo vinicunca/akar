@@ -4,8 +4,8 @@ description: A set of checklist buttons to select multiple option from a list.
 category: form
 links:
   - label: CheckboxGroup
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/checkbox#group-root
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/checkbox#group-root
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/CheckboxGroup.vue
@@ -16,7 +16,7 @@ links:
 
 Use the `v-model` directive to control the value of the CheckboxGroup or the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -39,7 +39,7 @@ props:
 
 Use the `items` prop as an array of strings or numbers:
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -67,7 +67,7 @@ You can also pass an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, icon?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -101,7 +101,7 @@ When using objects, you need to reference the `value` property of the object in 
 
 You can change the property that is used to set the value by using the `value-key` prop. Defaults to `value`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -133,7 +133,7 @@ props:
 
 Use the `legend` prop to set the legend of the CheckboxGroup.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -156,7 +156,7 @@ props:
 
 Use the `color` prop to change the color of the CheckboxGroup.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -188,7 +188,7 @@ props:
 
 Use the `variant` prop to change the variant of the CheckboxGroup.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -225,7 +225,7 @@ props:
 
 Use the `size` prop to change the size of the CheckboxGroup.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -254,7 +254,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the CheckboxGroup. Defaults to `vertical`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -283,7 +283,7 @@ props:
 
 Use the `indicator` prop to change the position or hide the indicator. Defaults to `start`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -316,7 +316,7 @@ props:
 
 Use the `disabled` prop to disable the CheckboxGroup.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

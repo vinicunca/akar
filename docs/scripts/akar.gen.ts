@@ -20,7 +20,7 @@ const checkerOptions: MetaCheckerOptions = {
 };
 
 const tsconfigChecker = createChecker(
-  resolve(__dirname, '../../tsconfig.app.json'),
+  resolve(__dirname, '../../packages/core/tsconfig.app.json'),
   checkerOptions,
 );
 

@@ -3,8 +3,8 @@ description: A popup that reveals information when hovering over an element.
 category: overlay
 links:
   - label: Tooltip
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/tooltip
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/tooltip
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Tooltip.vue
@@ -14,7 +14,7 @@ links:
 
 Use a [Button](/docs/components/button) or any other component in the default slot of the Tooltip.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -31,7 +31,7 @@ slots:
 ::
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/components/app) component which uses the [`TooltipProvider`](https://reka-ui.com/docs/components/tooltip#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/docs/components/app) component which uses the [`TooltipProvider`](https://akar.com/docs/components/tooltip#provider) component from Reka UI.
 ::
 
 ::tip{to="/docs/components/app#props"}
@@ -42,7 +42,7 @@ You can check the `App` component `tooltip` prop to see how to configure the Too
 
 Use the `text` prop to set the content of the Tooltip.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -60,7 +60,7 @@ slots:
 
 Use the `kbds` prop to render [Kbd](/docs/components/kbd) components in the Tooltip.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -88,7 +88,7 @@ You can use special keys like `meta` that displays as `⌘` on macOS and `Ctrl` 
 
 Use the `delay-duration` prop to change the delay before the Tooltip appears. For example, you can make it appear instantly by setting it to `0`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -113,7 +113,7 @@ This can be configured globally through the `tooltip.delayDuration` option in th
 
 Use the `content` prop to control how the Tooltip content is rendered, like its `align` or `side` for example.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -147,7 +147,7 @@ slots:
 
 Use the `arrow` prop to display an arrow on the Tooltip.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -169,7 +169,7 @@ slots:
 
 Use the `disabled` prop to disable the Tooltip.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -204,7 +204,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 ### With following cursor
 
-You can make the Tooltip follow the cursor when hovering over an element using the [`reference`](https://reka-ui.com/docs/components/tooltip#trigger) prop:
+You can make the Tooltip follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/components/tooltip#trigger) prop:
 
 ::component-example
 ---

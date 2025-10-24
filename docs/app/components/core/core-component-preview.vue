@@ -46,7 +46,7 @@ const isCodeView = ref(false);
 
       <div
         v-else
-        class="border border-border-muted rounded-md rounded-xl max-h-[50vh] overflow-auto"
+        class="border border-border-muted rounded-md max-h-[50vh] overflow-auto [&_pre]:rounded-none"
         :class="codeClasses"
       >
         <slot name="code" />

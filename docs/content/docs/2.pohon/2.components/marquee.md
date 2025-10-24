@@ -12,7 +12,7 @@ links:
 
 Use the default slot with your content to create an infinite scrolling animation.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 slots:
@@ -37,7 +37,7 @@ slots:
 
 Use the `pause-on-hover` prop to pause the animation when the user hovers over the content.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -64,7 +64,7 @@ slots:
 
 Use the `reverse` prop to reverse the direction of the animation.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -91,7 +91,7 @@ slots:
 
 Use the `orientation` prop to change the scrolling direction.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 class: 'h-96'
@@ -119,7 +119,7 @@ slots:
 
 Use the `repeat` prop to specify how many times the content should be repeated in the animation.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -146,7 +146,7 @@ slots:
 
 Use the `overlay` prop to remove the gradient overlays on the edges of the marquee.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:

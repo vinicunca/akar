@@ -12,7 +12,7 @@ links:
 
 The PageLogos component provides a flexible way to display a list of logos or images in your pages.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 prettier: true
@@ -36,7 +36,7 @@ props:
 
 Use the `title` prop to set the title above the logos.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -87,7 +87,7 @@ class: '[&>div]:my-10'
 
 Use the `marquee` prop to enable a marquee effect for the logos.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

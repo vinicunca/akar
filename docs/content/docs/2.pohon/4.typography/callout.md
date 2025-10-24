@@ -15,7 +15,7 @@ Use markdown in the default slot of the `callout` component to add eye-catching 
 
 Use the `icon` and `color` props to customize it. You can also pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) component.
 
-::component-code{slug="callout" prose}
+::docs-pohon-preview{slug="callout" prose}
 ---
 prettier: true
 props:

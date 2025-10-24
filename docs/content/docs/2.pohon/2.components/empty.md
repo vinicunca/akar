@@ -34,7 +34,7 @@ actions:
 
 Use the `title` prop to set the title of the empty state.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   title: No projects found
@@ -45,7 +45,7 @@ props:
 
 Use the `description` prop to set the description of the empty state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -60,7 +60,7 @@ props:
 
 Use the `icon` prop to set the icon of the empty state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -77,7 +77,7 @@ props:
 
 Use the `avatar` prop to set the avatar of the empty state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -95,7 +95,7 @@ props:
 
 Use the `actions` prop to add some [Button](/docs/components/button) actions to the empty state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -121,7 +121,7 @@ props:
 
 Use the `variant` prop to change the variant of the empty state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -146,7 +146,7 @@ props:
 
 Use the `size` prop to change the size of the empty state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

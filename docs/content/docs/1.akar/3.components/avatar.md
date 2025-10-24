@@ -57,7 +57,7 @@ The image to render. By default it will only render when it has loaded. You can 
 
 An element that renders when the image hasn't loaded. This means whilst it's loading, or if there was an error. If you notice a flash during loading, you can provide a `delayMs` prop to delay its rendering so it only renders for those with slower connections. For more control, use the `@loadingStatusChange` emit on `AAvatarImage`.
 
-:docs-component-meta{name="a-avatar-image"}
+:docs-component-meta{name="a-avatar-fallback"}
 
 ## Examples
 
@@ -65,7 +65,7 @@ An element that renders when the image hasn't loaded. This means whilst it's loa
 
 You can compose the Avatar with a [Tooltip](/docs/akar/components/tooltip) to display extra information.
 
-```vue line=6-7,9,11-15
+```vue {6-7,9,11-15}
 <script setup>
 import { AAvatarImage, AAvatarRoot, ATooltipArrow, ATooltipRoot, ATooltipTrigger } from 'akar';
 </script>

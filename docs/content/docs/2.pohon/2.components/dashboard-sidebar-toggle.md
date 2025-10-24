@@ -17,7 +17,7 @@ The DashboardSidebarToggle component is used by the [DashboardNavbar](/docs/comp
 
 It is automatically displayed on mobile to toggle the sidebar, **you don't have to add it manually**.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -28,7 +28,7 @@ props:
 
 It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class

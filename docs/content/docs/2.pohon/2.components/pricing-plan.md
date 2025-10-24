@@ -44,7 +44,7 @@ Use the [`PricingPlans`](/docs/components/pricing-plans) component to display mu
 
 Use the `title` prop to set the title of the PricingPlan.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - class
@@ -58,7 +58,7 @@ props:
 
 Use the `description` prop to set the description of the PricingPlan.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -75,7 +75,7 @@ props:
 
 Use the `badge` prop to display a [Badge](/docs/components/badge) next to the title of the PricingPlan.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -93,7 +93,7 @@ props:
 
 You can pass any property from the [Badge](/docs/components/badge#props) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -119,7 +119,7 @@ props:
 
 Use the `price` prop to set the price of the PricingPlan.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -139,7 +139,7 @@ props:
 
 Use the `discount` prop to set a discounted price that will be displayed alongside the original price (which will be shown with a strikethrough).
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -160,7 +160,7 @@ props:
 
 Use the `billing-cycle` and/or `billing-period` props to display the billing information of the PricingPlan.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -182,7 +182,7 @@ props:
 
 Use the `features` prop as an array of string to display a list of features on the PricingPlan:
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -223,7 +223,7 @@ You can also pass an array of objects with the following properties:
 - `title: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -258,7 +258,7 @@ props:
 
 Use the `button` prop with any property from the [Button](/docs/components/button) component to display a button at the bottom of the PricingPlan.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -292,7 +292,7 @@ Use the `onClick` field to add a click handler to trigger the plan purchase.
 
 Use the `variant` prop to change the variant of the PricingPlan.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -324,7 +324,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the PricingPlan. Defaults to `vertical`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -356,7 +356,7 @@ props:
 
 Use the `tagline` prop to display a tagline text above the price.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -389,7 +389,7 @@ props:
 
 Use the `terms` prop to display terms below the price.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -424,7 +424,7 @@ props:
 
 Use the `highlight` prop to display a highlighted border around the PricingPlan.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:

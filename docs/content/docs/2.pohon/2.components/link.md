@@ -26,7 +26,7 @@ It is used by the [`Breadcrumb`](/docs/components/breadcrumb), [`Button`](/docs/
 
 The `Link` components renders an `<a>` tag when a `to` prop is provided, otherwise it renders a `<button>` tag. You can use the `as` prop to change fallback tag.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   to: ''
@@ -44,7 +44,7 @@ You can inspect the rendered HTML by changing the `to` prop.
 
 By default, the link has default active and inactive styles, check out the [#theme](#theme) section.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   to: /docs/components/link
@@ -59,7 +59,7 @@ Try changing the `to` prop to see the active and inactive states.
 
 You can override this behavior by using the `raw` prop and provide your own styles using `class`, `active-class` and `inactive-class`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - raw

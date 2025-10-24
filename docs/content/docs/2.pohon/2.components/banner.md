@@ -14,7 +14,7 @@ links:
 
 Use the `title` prop to display a title on the Banner.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 class: '!p-0'
@@ -27,7 +27,7 @@ props:
 
 Use the `icon` prop to display an icon on the Banner.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 class: '!p-0'
@@ -43,7 +43,7 @@ props:
 
 Use the `color` prop to change the color of the Banner.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 class: '!p-0'
@@ -130,7 +130,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 Use the `actions` prop to add some [Button](/docs/components/button) actions to the Banner.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 class: '!p-0'
@@ -158,7 +158,7 @@ The action buttons default to `color="neutral"` and `size="xs"`. You can customi
 
 You can pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) component such as `to`, `target`, `rel`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 class: '!p-0'

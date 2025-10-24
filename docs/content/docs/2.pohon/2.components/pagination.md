@@ -3,8 +3,8 @@ description: A list of buttons or links to navigate through pages.
 category: navigation
 links:
   - label: Pagination
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/pagination
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/pagination
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Pagination.vue
@@ -14,7 +14,7 @@ links:
 
 Use the `default-page` prop or the `v-model:page` directive to control the current page.
 
-::component-code
+::docs-pohon-preview
 ---
 external:
   - page
@@ -37,7 +37,7 @@ The Pagination component uses some [`Button`](/docs/components/button) to displa
 
 Use the `total` prop to set the total number of items in the list.
 
-::component-code
+::docs-pohon-preview
 ---
 external:
   - page
@@ -53,7 +53,7 @@ props:
 
 Use the `items-per-page` prop to set the number of items per page. Defaults to `10`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page
@@ -72,7 +72,7 @@ props:
 
 Use the `sibling-count` prop to set the number of siblings to show. Defaults to `2`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page
@@ -92,7 +92,7 @@ props:
 
 Use the `show-edges` prop to always show the ellipsis, first and last pages. Defaults to `false`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page
@@ -113,7 +113,7 @@ props:
 
 Use the `show-controls` prop to show the first, prev, next and last buttons. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page
@@ -134,7 +134,7 @@ props:
 
 Use the `color` prop to set the color of the inactive controls. Defaults to `neutral`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page
@@ -163,7 +163,7 @@ props:
 
 Use the `variant` prop to set the variant of the inactive controls. Defaults to `outline`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page
@@ -200,7 +200,7 @@ props:
 
 Use the `active-color` prop to set the color of the active control. Defaults to `primary`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page
@@ -229,7 +229,7 @@ props:
 
 Use the `active-variant` prop to set the variant of the active control. Defaults to `solid`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page
@@ -266,7 +266,7 @@ props:
 
 Use the `size` prop to set the size of the controls. Defaults to `md`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page
@@ -293,7 +293,7 @@ props:
 
 Use the `disabled` prop to disable the pagination controls.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - page

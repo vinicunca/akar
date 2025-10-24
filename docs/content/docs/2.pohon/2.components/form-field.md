@@ -16,7 +16,7 @@ Wrap any form component with a FormField. Used in a [Form](/docs/components/form
 
 Use the `label` prop to set the label for the form control.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -36,7 +36,7 @@ The label `for` attribute and the form control are associated with a unique `id`
 
 When using the `required` prop, an asterisk is added next to the label.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -57,7 +57,7 @@ slots:
 
 Use the `description` prop to provide additional information below the label.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -78,7 +78,7 @@ slots:
 
 Use the `hint` prop to display a hint message next to the label.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -99,7 +99,7 @@ slots:
 
 Use the `help` prop to display a help message below the form control.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -122,7 +122,7 @@ Use the `error` prop to display an error message below the form control. When us
 
 When used inside a [Form](/docs/components/form), this is automatically set when a validation error occurs.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -147,7 +147,7 @@ This sets the `color` to `error` on the form control. You can change it globally
 
 Use the `size` prop to change the size of the FormField, the `size` is proxied to the form control.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

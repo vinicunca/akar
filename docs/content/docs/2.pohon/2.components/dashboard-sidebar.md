@@ -51,7 +51,7 @@ Drag the sidebar near the left edge of the screen to collapse it.
 
 Use the `resizable` prop to make the sidebar resizable.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -83,7 +83,7 @@ Use the `collapsible` prop to make the sidebar collapsible when dragging near th
 The [`DashboardSidebarCollapse`](/docs/components/dashboard-sidebar-collapse) component will have no effect if the sidebar is not **collapsible**.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -118,7 +118,7 @@ You can access the `collapsed` state in the slot props to customize the content 
 
 Use the `min-size`,  `max-size`, `default-size` and `collapsed-size` props to customize the size of the sidebar.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -156,7 +156,7 @@ The `collapsed-size` prop is set to `0` by default but the sidebar has a `min-w-
 
 Use the `side` prop to change the side of the sidebar. Defaults to `left`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

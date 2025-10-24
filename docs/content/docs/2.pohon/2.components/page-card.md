@@ -35,7 +35,7 @@ Use the [PageGrid](/docs/components/page-grid), [PageColumns](/docs/components/p
 
 Use the `title` prop to set the title of the card.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -49,7 +49,7 @@ props:
 
 Use the `description` prop to set the description of the card.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -67,7 +67,7 @@ props:
 
 Use the `icon` prop to set the icon of the card.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -87,7 +87,7 @@ props:
 
 You can pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) component such as `to`, `target`, `rel`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -111,7 +111,7 @@ props:
 
 Use the `variant` prop to change the style of the card.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -141,7 +141,7 @@ You can apply the `light` or `dark` class to the `links` slot when using the `so
 
 Use the `orientation` prop to change the orientation with the default slot. Defaults to `vertical`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -166,7 +166,7 @@ slots:
 
 Use the `reverse` prop to reverse the orientation of the default slot.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -192,7 +192,7 @@ slots:
 
 Use the `highlight` and `highlight-color` props to display a highlighted border around the card.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -226,7 +226,7 @@ Use the `spotlight` and `spotlight-color` props to display a spotlight effect th
 The spotlight effect will take over hover effects when using a `to` prop. It's best to use it with the `outline` variant.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:

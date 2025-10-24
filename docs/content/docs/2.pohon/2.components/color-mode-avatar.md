@@ -17,7 +17,7 @@ The ColorModeAvatar component extends the [Avatar](/docs/components/avatar) comp
 
 Use the `light` and `dark` props to define the source for light and dark mode.
 
-::component-code{prefix="color-mode"}
+::docs-pohon-preview{prefix="color-mode"}
 ---
 props:
   light: 'https://github.com/vuejs.png'

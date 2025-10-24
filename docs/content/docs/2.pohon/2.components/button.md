@@ -11,7 +11,7 @@ links:
 
 Use the default slot to set the label of the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 slots:
   default: Button
@@ -22,7 +22,7 @@ slots:
 
 Use the `label` prop to set the label of the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   label: Button
@@ -33,7 +33,7 @@ props:
 
 Use the `color` prop to change the color of the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   color: neutral
@@ -46,7 +46,7 @@ slots:
 
 Use the `variant` prop to change the variant of the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   color: neutral
@@ -60,7 +60,7 @@ slots:
 
 Use the `size` prop to change the size of the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   size: xl
@@ -73,7 +73,7 @@ slots:
 
 Use the `icon` prop to show an [Icon](/docs/components/icon) inside the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   icon: i-lucide-rocket
@@ -87,7 +87,7 @@ slots:
 
 Use the `leading` and `trailing` props to set the icon position or the `leading-icon` and `trailing-icon` props to set a different icon for each position.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   trailingIcon: i-lucide-arrow-right
@@ -99,7 +99,7 @@ slots:
 
 The `label` as prop or slot is optional so you can use the Button as an icon-only button.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   icon: i-lucide-search
@@ -113,7 +113,7 @@ props:
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -131,7 +131,7 @@ slots:
 
 The `label` as prop or slot is optional so you can use the Button as an avatar-only button.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -147,7 +147,7 @@ props:
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - target
@@ -161,7 +161,7 @@ slots:
 
 When the Button is a link or when using the `active` prop, you can use the `active-color` and `active-variant` props to customize the active state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -200,7 +200,7 @@ Button
 
 You can also use the `active-class` and `inactive-class` props to customize the active state.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   active: true
@@ -237,7 +237,7 @@ export default defineAppConfig({
 
 Use the `loading` prop to show a loading icon and disable the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   loading: true
@@ -260,7 +260,7 @@ This also works with the [Form](/docs/components/form) component.
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   loading: true
@@ -287,7 +287,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 
 Use the `disabled` prop to disable the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   disabled: true
@@ -304,7 +304,7 @@ Button
 
 Use the `class` prop to override the base styles of the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   class: 'font-bold rounded-full'
@@ -317,7 +317,7 @@ slots:
 
 Use the `ui` prop to override the slots styles of the Button.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

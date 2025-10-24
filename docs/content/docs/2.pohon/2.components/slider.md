@@ -3,8 +3,8 @@ description: An input to select a numeric value within a range.
 category: form
 links:
   - label: Slider
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/slider
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/slider
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Slider.vue
@@ -14,7 +14,7 @@ links:
 
 Use the `v-model` directive to control the value of the Slider.
 
-::component-code
+::docs-pohon-preview
 ---
 external:
   - modelValue
@@ -25,7 +25,7 @@ props:
 
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -38,7 +38,7 @@ props:
 
 Use the `min` and `max` props to set the minimum and maximum values of the Slider. Defaults to `0` and `100`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -53,7 +53,7 @@ props:
 
 Use the `step` prop to set the increment value of the Slider. Defaults to `1`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -67,7 +67,7 @@ props:
 
 Use the `v-model` directive or the `default-value` prop with an array of values to create a range Slider.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -80,7 +80,7 @@ props:
 
 Use the `min-steps-between-thumbs` prop to limit the minimum distance between the thumbs.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -96,7 +96,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the Slider. Defaults to `horizontal`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -112,7 +112,7 @@ props:
 
 Use the `color` prop to change the color of the Slider.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -126,7 +126,7 @@ props:
 
 Use the `size` prop to change the size of the Slider.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -140,7 +140,7 @@ props:
 
 Use the `tooltip` prop to display a [Tooltip](/docs/components/tooltip) around the Slider thumbs with the current value. You can set it to `true` for default behavior or pass an object to customize it with any property from the [Tooltip](/docs/components/tooltip#props) component.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -155,7 +155,7 @@ props:
 
 Use the `disabled` prop to disable the Slider.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -169,7 +169,7 @@ props:
 
 Use the `inverted` prop to visually invert the Slider.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue

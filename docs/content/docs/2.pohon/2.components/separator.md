@@ -3,8 +3,8 @@ description: Separates content horizontally or vertically.
 category: element
 links:
   - label: Separator
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/separator
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/separator
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Separator.vue
@@ -14,7 +14,7 @@ links:
 
 Use the Separator component as-is to separate content.
 
-::component-code
+::docs-pohon-preview
 ---
 class: 'p-8'
 ---
@@ -24,7 +24,7 @@ class: 'p-8'
 
 Use the `orientation` prop to change the orientation of the Separator. Defaults to `horizontal`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - class
@@ -39,7 +39,7 @@ props:
 
 Use the `label` prop to display a label in the middle of the Separator.
 
-::component-code
+::docs-pohon-preview
 ---
 class: 'p-8'
 props:
@@ -51,7 +51,7 @@ props:
 
 Use the `icon` prop to display an icon in the middle of the Separator.
 
-::component-code
+::docs-pohon-preview
 ---
 class: 'p-8'
 props:
@@ -63,7 +63,7 @@ props:
 
 Use the `avatar` prop to display an avatar in the middle of the Separator.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 class: 'p-8'
@@ -77,7 +77,7 @@ props:
 
 Use the `color` prop to change the color of the Separator. Defaults to `neutral`.
 
-::component-code
+::docs-pohon-preview
 ---
 class: 'p-8'
 props:
@@ -90,7 +90,7 @@ props:
 
 Use the `type` prop to change the type of the Separator. Defaults to `solid`.
 
-::component-code
+::docs-pohon-preview
 ---
 class: 'p-8'
 props:
@@ -102,7 +102,7 @@ props:
 
 Use the `size` prop to change the size of the Separator. Defaults to `xs`.
 
-::component-code
+::docs-pohon-preview
 ---
 class: 'p-8'
 props:

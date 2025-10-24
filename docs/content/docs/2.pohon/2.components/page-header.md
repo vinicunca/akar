@@ -28,7 +28,7 @@ Use it inside the default slot of the [Page](/docs/components/page) component, b
 
 Use the `title` prop to display a title in the header.
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -42,7 +42,7 @@ props:
 
 Use the `description` prop to display a description in the header.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -60,7 +60,7 @@ props:
 
 Use the `headline` prop to display a headline in the header.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -80,7 +80,7 @@ props:
 
 Use the `links` prop to display a list of [Button](/docs/components/button) in the header.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:

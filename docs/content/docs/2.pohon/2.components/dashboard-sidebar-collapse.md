@@ -19,7 +19,7 @@ The DashboardSidebarCollapse component is used to collapse/expand the [Dashboard
 
 It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - variant

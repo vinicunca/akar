@@ -35,7 +35,7 @@ description: 'A Nuxt/Vue-integrated UI library providing a rich set of fully-sty
 
 Use the `title` prop to set the title of the hero.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   title: 'Ultimate Vue UI library'
@@ -46,7 +46,7 @@ props:
 
 Use the `description` prop to set the description of the hero.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -61,7 +61,7 @@ props:
 
 Use the `headline` prop to set the headline of the hero.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -78,7 +78,7 @@ props:
 
 Use the `links` prop to display a list of [Button](/docs/components/button) under the description.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:
@@ -106,7 +106,7 @@ props:
 
 Use the `orientation` prop to change the orientation with the default slot. Defaults to `vertical`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:
@@ -143,7 +143,7 @@ slots:
 
 Use the `reverse` prop to reverse the orientation of the default slot.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 external:

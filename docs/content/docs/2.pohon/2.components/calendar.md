@@ -4,8 +4,8 @@ description: A calendar component for selecting single dates, multiple dates or 
 category: element
 links:
   - label: Calendar
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/calendar
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/calendar
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Calendar.vue
@@ -15,7 +15,7 @@ links:
 
 Use the `v-model` directive to control the selected date.
 
-::component-code
+::docs-pohon-preview
 ---
 cast:
   modelValue: DateValue
@@ -30,7 +30,7 @@ props:
 
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 cast:
   defaultValue: DateValue
@@ -51,7 +51,7 @@ This component relies on the [`@internationalized/date`](https://react-spectrum.
 
 Use the `multiple` prop to allow multiple selections.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 cast:
@@ -71,7 +71,7 @@ props:
 
 Use the `range` prop to select a range of dates.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 cast:
@@ -94,7 +94,7 @@ props:
 
 Use the `color` prop to change the color of the calendar.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   color: neutral
@@ -105,7 +105,7 @@ props:
 
 Use the `variant` prop to change the variant of the calendar.
 
-::component-code
+::docs-pohon-preview
 ---
 cast:
   defaultValue: DateRange
@@ -127,7 +127,7 @@ props:
 
 Use the `size` prop to change the size of the calendar.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   size: xl
@@ -138,7 +138,7 @@ props:
 
 Use the `disabled` prop to disable the calendar.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   disabled: true
@@ -149,7 +149,7 @@ props:
 
 Use the `numberOfMonths` prop to change the number of months in the calendar.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   numberOfMonths: 3
@@ -160,7 +160,7 @@ props:
 
 Use the `month-controls` prop to show the month controls. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   monthControls: false
@@ -171,7 +171,7 @@ props:
 
 Use the `year-controls` prop to show the year controls. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   yearControls: false
@@ -182,7 +182,7 @@ props:
 
 Use the `fixed-weeks` prop to display the calendar with fixed weeks.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   fixedWeeks: false

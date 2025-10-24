@@ -8,8 +8,8 @@ links:
     to: https://fusejs.io/
     target: _blank
   - label: Listbox
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/listbox
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/listbox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/CommandPalette.vue
@@ -19,7 +19,7 @@ links:
 
 Use the `v-model` directive to control the value of the CommandPalette or the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -116,7 +116,7 @@ Each group contains an `items` array of objects that define the commands. Each i
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -180,7 +180,7 @@ Each item can take a `children` array of objects with the following properties t
 
 Use the `multiple` prop to allow multiple selections.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -246,7 +246,7 @@ Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 
 Use the `placeholder` prop to change the placeholder text.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -277,7 +277,7 @@ props:
 
 Use the `icon` prop to customize the input [Icon](/docs/components/icon). Defaults to `i-lucide-search`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -320,7 +320,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.se
 
 Use the `selected-icon` prop to customize the selected item [Icon](/docs/components/icon). Defaults to `i-lucide-check`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -399,7 +399,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) when an item has children. Defaults to `i-lucide-chevron-right`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 prettier: true
@@ -446,7 +446,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `loading` prop to show a loading icon on the CommandPalette.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -477,7 +477,7 @@ props:
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -525,7 +525,7 @@ Use the `close` prop to display a [Button](/docs/components/button) to dismiss t
 An `update:open` event will be emitted when the close button is clicked.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -555,7 +555,7 @@ props:
 
 You can pass any property from the [Button](/docs/components/button) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 prettier: true
@@ -592,7 +592,7 @@ props:
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -639,7 +639,7 @@ Use the `back` prop to customize or hide the back button (with `false` value) di
 
 You can pass any property from the [Button](/docs/components/button) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 prettier: true
@@ -676,7 +676,7 @@ props:
 
 Use the `back-icon` prop to customize the back button [Icon](/docs/components/icon). Defaults to `i-lucide-arrow-left`.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -724,7 +724,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ar
 
 Use the `disabled` prop to disable the CommandPalette.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -893,7 +893,7 @@ props:
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
-::warning{to="https://github.com/unovue/reka-ui/issues/1885" target="_blank"}
+::warning{to="https://github.com/unovue/akar/issues/1885" target="_blank"}
 When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
 ::
 

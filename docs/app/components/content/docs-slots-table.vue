@@ -28,7 +28,7 @@ const props = defineProps<SlotsTableProps>();
         :key="`${prop.name}-${index}`"
       >
         <ProseTd>
-          <ProseCode>
+          <ProseCode class="akar:(color-primary-600 bg-primary/10)">
             {{ prop.name }}
           </ProseCode>
         </ProseTd>

@@ -11,7 +11,7 @@ links:
 
 Use the default slot to set the label of the Badge.
 
-::component-code
+::docs-pohon-preview
 ---
 slots:
   default: Badge
@@ -22,7 +22,7 @@ slots:
 
 Use the `label` prop to set the label of the Badge.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   label: Badge
@@ -33,7 +33,7 @@ props:
 
 Use the `color` prop to change the color of the Badge.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   color: neutral
@@ -46,7 +46,7 @@ slots:
 
 Use the `variant` props to change the variant of the Badge.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   color: neutral
@@ -60,7 +60,7 @@ slots:
 
 Use the `size` prop to change the size of the Badge.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   size: xl
@@ -73,7 +73,7 @@ slots:
 
 Use the `icon` prop to show an [Icon](/docs/components/icon) inside the Badge.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   icon: i-lucide-rocket
@@ -87,7 +87,7 @@ slots:
 
 Use the `leading` and `trailing` props to set the icon position or the `leading-icon` and `trailing-icon` props to set a different icon for each position.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   trailingIcon: i-lucide-arrow-right
@@ -101,7 +101,7 @@ slots:
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Badge.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -123,7 +123,7 @@ slots:
 
 Use the `class` prop to override the base styles of the Badge.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   class: 'font-bold rounded-full'

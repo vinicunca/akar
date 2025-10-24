@@ -4,8 +4,8 @@ description: An input for numerical values with a customizable range.
 category: form
 links:
   - label: NumberField
-    icon: i-custom-reka-ui
-    to: https://www.reka-ui.com/docs/components/number-field
+    icon: i-custom-akar
+    to: https://www.akar.com/docs/components/number-field
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputNumber.vue
@@ -15,7 +15,7 @@ links:
 
 Use the `v-model` directive to control the value of the InputNumber.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -28,7 +28,7 @@ props:
 
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - defaultValue
@@ -45,7 +45,7 @@ This component relies on the [`@internationalized/number`](https://react-spectru
 
 Use the `min` and `max` props to set the minimum and maximum values of the InputNumber.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -62,7 +62,7 @@ props:
 
 Use the `step` prop to set the step value of the InputNumber.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -78,7 +78,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the InputNumber.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -94,7 +94,7 @@ props:
 
 Use the `placeholder` prop to set a placeholder text.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   placeholder: 'Enter a number'
@@ -105,7 +105,7 @@ props:
 
 Use the `color` prop to change the ring color when the InputNumber is focused.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -122,7 +122,7 @@ props:
 
 Use the `variant` prop to change the variant of the InputNumber.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -140,7 +140,7 @@ props:
 
 Use the `size` prop to change the size of the InputNumber.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -156,7 +156,7 @@ props:
 
 Use the `disabled` prop to disable the InputNumber.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - modelValue
@@ -172,7 +172,7 @@ props:
 
 Use the `increment` and `decrement` props to customize the increment and decrement buttons with any [Button](/docs/components/button) props. Defaults to `{ variant: 'link' }`{lang="ts-type"}.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -202,7 +202,7 @@ props:
 
 Use the `increment-icon` and `decrement-icon` props to customize the buttons [Icon](/docs/components/icon). Defaults to `i-lucide-plus` / `i-lucide-minus`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

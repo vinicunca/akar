@@ -4,8 +4,8 @@ description: An input element that displays interactive tags.
 category: form
 links:
   - label: InputTags
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/tags-input
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/tags-input
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputTags.vue
@@ -15,7 +15,7 @@ links:
 
 Use the `v-model` directive to control the value of the InputTags.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -29,7 +29,7 @@ props:
 
 Use the `default-value` prop to set the initial value when you do not need to control its state.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -43,7 +43,7 @@ props:
 
 Use the `placeholder` prop to set a placeholder text.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   placeholder: 'Enter tags...'
@@ -54,7 +54,7 @@ props:
 
 Use the `max-length` prop to set the maximum number of characters allowed in a tag.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   maxLength: 4
@@ -65,7 +65,7 @@ props:
 
 Use the `color` prop to change the ring color when the InputTags is focused.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -87,7 +87,7 @@ The `highlight` prop is used here to show the focus state. It's used internally 
 
 Use the `variant` prop to change the appearance of the InputTags.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -106,7 +106,7 @@ props:
 
 Use the `size` prop to adjust the size of the InputTags.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -123,7 +123,7 @@ props:
 
 Use the `icon` prop to show an [Icon](/docs/components/icon) inside the InputTags.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -146,7 +146,7 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 
 Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputTags.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -166,7 +166,7 @@ props:
 
 Use the `delete-icon` prop to customize the delete [Icon](/docs/components/icon) in the tags. Defaults to `i-lucide-x`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -195,7 +195,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 Use the `loading` prop to show a loading icon on the InputTags.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -213,7 +213,7 @@ props:
 
 Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -243,7 +243,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 
 Use the `disabled` prop to disable the InputTags.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

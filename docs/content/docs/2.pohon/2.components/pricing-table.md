@@ -108,7 +108,7 @@ Use the `tiers` prop as an array of objects to define your pricing plans. Each t
 - `button?: ButtonProps`{lang="ts-type"} - Configure the CTA button `{ size: 'lg', block: true }`{lang="ts-type"}
 - `highlight?: boolean`{lang="ts-type"} - Whether to visually emphasize this tier as the recommended option
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 collapse: true
@@ -161,7 +161,7 @@ Use the `sections` prop to organize features into logical groups. Each section r
   - String values will be shown as text (e.g., "Unlimited", "Up to 5 users")
   - Numeric values will be displayed as is (e.g., 10, 100)
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 collapse: true

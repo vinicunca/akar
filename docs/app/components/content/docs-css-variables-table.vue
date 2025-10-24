@@ -29,7 +29,7 @@ const props = defineProps<CssVariablesTableProps>();
         :key="`${prop.cssVariable}-${index}`"
       >
         <ProseTd>
-          <ProseCode>
+          <ProseCode class="akar:(color-primary-600 bg-primary/10)">
             {{ prop.cssVariable }}
           </ProseCode>
         </ProseTd>

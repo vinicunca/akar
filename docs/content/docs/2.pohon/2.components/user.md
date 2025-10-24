@@ -14,7 +14,7 @@ links:
 
 Use the `name` prop to display a name for the user.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   name: 'John Doe'
@@ -25,7 +25,7 @@ props:
 
 Use the `description` prop to display a description for the user.
 
-::component-code
+::docs-pohon-preview
 ---
 props:
   name: 'John Doe'
@@ -37,7 +37,7 @@ props:
 
 Use the `avatar` prop to display an [Avatar](/docs/components/avatar) component.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -69,7 +69,7 @@ ignore:
 
 Use the `chip` prop to display a [Chip](/docs/components/chip) component.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -118,7 +118,7 @@ ignore:
 
 Use the `size` prop to change the size of the user avatar and text.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -139,7 +139,7 @@ props:
 
 Use the `orientation` prop to change the orientation. Defaults to `horizontal`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -156,7 +156,7 @@ props:
 
 You can pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/components/nuxt-link) component such as `to`, `target`, `rel`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

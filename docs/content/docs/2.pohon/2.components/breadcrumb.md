@@ -11,7 +11,7 @@ links:
 
 Use the Breadcrumb component to show the current page's location in your site's hierarchy.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 ignore:
@@ -45,7 +45,7 @@ Use the `items` prop as an array of objects with the following properties:
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
@@ -75,7 +75,7 @@ A `span` is rendered instead of a link when the `to` property is not defined.
 
 Use the `separator-icon` prop to customize the [Icon](/docs/components/icon) between each item. Defaults to `i-lucide-chevron-right`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items

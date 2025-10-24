@@ -44,7 +44,7 @@ When its status is `ready`{lang="ts-type"}, use the `color`, `variant` and `icon
 - `variant="solid"`{lang="ts-type"}
 - `icon="i-lucide-arrow-up"`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 items:
@@ -92,7 +92,7 @@ When its status is `submitted`{lang="ts-type"}, use the `submitted-color`, `subm
 The `stop` event is emitted when the user clicks on the Button.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -143,7 +143,7 @@ When its status is `streaming`{lang="ts-type"}, use the `streaming-color`, `stre
 The `stop` event is emitted when the user clicks on the Button.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -194,7 +194,7 @@ When its status is `error`{lang="ts-type"}, use the `error-color`, `error-varian
 The `reload` event is emitted when the user clicks on the Button.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

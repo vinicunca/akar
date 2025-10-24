@@ -329,7 +329,12 @@ const { data: ast } = await useAsyncData(
       !options.length && 'rounded-t-md',
       props.class,
       { 'overflow-hidden': props.overflowHidden },
-      'border-b-0 rounded-b-md',
+      'rounded-b-md',
+    ]"
+    :code-classes="[
+      {
+        'rounded-t-0': options.length,
+      },
     ]"
   >
     <div

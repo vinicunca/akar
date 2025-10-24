@@ -4,8 +4,8 @@ description: A menu to display actions when right-clicking on an element.
 category: overlay
 links:
   - label: ContextMenu
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/context-menu
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/context-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ContextMenu.vue
@@ -15,7 +15,7 @@ links:
 
 Use anything you like in the default slot of the ContextMenu, and right-click on it to display the menu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 collapse: true
@@ -103,7 +103,7 @@ Use the `items` prop as an array of objects with the following properties:
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 collapse: true
@@ -186,7 +186,7 @@ Each item can take a `children` array of objects with the same properties as the
 
 Use the `size` prop to change the size of the ContextMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -222,7 +222,7 @@ slots:
 
 Use the `disabled` prop to disable the ContextMenu.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

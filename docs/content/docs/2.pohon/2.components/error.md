@@ -24,7 +24,7 @@ Use the `error` prop to display an error message.
 In most cases, you will receive the `error` prop in your `error.vue` file.
 ::
 
-::component-code
+::docs-pohon-preview
 ---
 hide:
   - class
@@ -44,7 +44,7 @@ Use the `clear` prop to customize or hide the clear button (with `false` value).
 
 You can pass any property from the [Button](/docs/components/button) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:
@@ -75,7 +75,7 @@ props:
 
 Use the `redirect` prop to redirect the user to a different page when the clear button is clicked. Defaults to `/`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 hide:

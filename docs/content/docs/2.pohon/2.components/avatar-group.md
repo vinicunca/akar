@@ -12,7 +12,7 @@ links:
 
 Wrap multiple [Avatar](/docs/components/avatar) within an AvatarGroup to stack them.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 slots:
@@ -31,7 +31,7 @@ slots:
 
 Use the `size` prop to change the size of all the avatars.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -52,7 +52,7 @@ slots:
 
 Use the `max` prop to limit the number of avatars displayed. The rest is displayed as an `+X` avatar.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:

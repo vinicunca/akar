@@ -3,8 +3,8 @@ description: A dialog window that can be used to display a message or request us
 category: overlay
 links:
   - label: Dialog
-    icon: i-custom-reka-ui
-    to: https://reka-ui.com/docs/components/dialog
+    icon: i-custom-akar
+    to: https://akar.com/docs/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Modal.vue
@@ -16,7 +16,7 @@ Use a [Button](/docs/components/button) or any other component in the default sl
 
 Then, use the `#content` slot to add the content displayed when the Modal is open.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 slots:
@@ -41,7 +41,7 @@ You can also use the `#header`{lang="ts-type"}, `#body`{lang="ts-type"} and `#fo
 
 Use the `title` prop to set the title of the Modal's header.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 props:
@@ -66,7 +66,7 @@ slots:
 
 Use the `description` prop to set the description of the Modal's header.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -96,7 +96,7 @@ Use the `close` prop to customize or hide the close button (with `false` value) 
 
 You can pass any property from the [Button](/docs/components/button) component to customize it.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -133,7 +133,7 @@ The close button is not displayed if the `#content` slot is used as it's a part 
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -173,7 +173,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 Use the `overlay` prop to control whether the Modal has an overlay or not. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -201,7 +201,7 @@ slots:
 
 Use the `transition` prop to control whether the Modal is animated or not. Defaults to `true`.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -229,7 +229,7 @@ slots:
 
 Use the `fullscreen` prop to make the Modal fullscreen.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:
@@ -278,7 +278,7 @@ This allows you to move the trigger outside of the Modal or remove it entirely.
 
 Set the `dismissible` prop to `false` to prevent the Modal from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
-::component-code
+::docs-pohon-preview
 ---
 prettier: true
 ignore:

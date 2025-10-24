@@ -12,7 +12,7 @@ links:
 
 Use the Timeline component to display a list of items in a timeline.
 
-::component-code
+::docs-pohon-preview
 ---
 collapse: true
 hide:
@@ -61,7 +61,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `ui?: { item?: ClassNameValue, container?: ClassNameValue, indicator?: ClassNameValue, separator?: ClassNameValue, wrapper?: ClassNameValue, date?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
@@ -98,7 +98,7 @@ props:
 
 Use the `color` prop to change the color of the active items in a Timeline.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
@@ -136,7 +136,7 @@ props:
 
 Use the `size` prop to change the size of the Timeline.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
@@ -174,7 +174,7 @@ props:
 
 Use the `orientation` prop to change the orientation of the Timeline. Defaults to `vertical`.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
@@ -213,7 +213,7 @@ class: 'overflow-x-auto'
 
 Use the reverse prop to reverse the direction of the Timeline.
 
-::component-code
+::docs-pohon-preview
 ---
 ignore:
   - items
