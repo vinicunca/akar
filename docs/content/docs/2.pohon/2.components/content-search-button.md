@@ -70,16 +70,16 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog{prefix="content"}
+:docs-component-changelog{prefix="content"}

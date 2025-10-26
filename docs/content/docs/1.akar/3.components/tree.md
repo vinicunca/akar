@@ -1,5 +1,5 @@
 ---
-category: data
+category: element
 links:
   - label: Pohon
     to: /docs/pohon/components/tree

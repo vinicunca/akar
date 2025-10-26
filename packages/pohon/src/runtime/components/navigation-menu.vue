@@ -144,6 +144,7 @@ export interface PNavigationMenuProps<T extends ArrayOrNested<PNavigationMenuIte
    * @defaultValue 'label'
    */
   labelKey?: GetItemKeys<T>;
+  scrollToActive?: boolean;
   class?: any;
   pohon?: NavigationMenu['slots'];
 }
@@ -322,6 +323,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
             active,
             disabled: !!item.disabled,
           })"
+          data-pohon="navigation-menu-link-leading-avatar"
         />
         <PIcon
           v-else-if="item.icon"
@@ -331,12 +333,14 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
             active,
             disabled: !!item.disabled,
           })"
+          data-pohon="navigation-menu-link-leading-icon"
         />
       </slot>
 
       <span
         v-if="(!collapsed || orientation !== 'vertical') && (getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>])"
         :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
+        data-pohon="navigation-menu-link-label"
       >
         <slot
           :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>)"
@@ -354,6 +358,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
             class: [props.pohon?.linkLabelExternalIcon, item.pohon?.linkLabelExternalIcon],
             active,
           })"
+          data-pohon="navigation-menu-link-label-external-icon"
         />
       </span>
 
@@ -372,6 +377,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           )"
         as="span"
         :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
+        data-pohon="navigation-menu-link-trailing"
         @click.stop.prevent
       >
         <slot
@@ -388,17 +394,20 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
             :size="((item.pohon?.linkTrailingBadgeSize || props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(item.badge) || isNumber(item.badge)) ? { label: item.badge } : item.badge"
             :class="pohon.linkTrailingBadge({ class: [props.pohon?.linkTrailingBadge, item.pohon?.linkTrailingBadge] })"
+            data-pohon="navigation-menu-link-trailing-badge"
           />
 
           <PIcon
             v-if="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length)"
             :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
             :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
+            data-pohon="navigation-menu-link-trailing-icon"
           />
           <PIcon
             v-else-if="item.trailingIcon"
             :name="item.trailingIcon"
             :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
+            data-pohon="navigation-menu-link-trailing-icon"
           />
         </slot>
       </component>
@@ -414,6 +423,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
       <div
         v-if="orientation === 'vertical' && item.type === 'label' && !collapsed"
         :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
+        data-pohon="navigation-menu-label"
       >
         <ReuseLinkTemplate
           :item="item"
@@ -440,7 +450,13 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           >
             <PLinkBase
               v-bind="slotProps"
-              :class="pohon.link({ class: [props.pohon?.link, item.pohon?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })"
+              :class="pohon.link({
+                class: [props.pohon?.link, item.pohon?.link, item.class],
+                active: active || item.active,
+                disabled: !!item.disabled,
+                level: level > 0,
+              })"
+              data-pohon="navigation-menu-link"
             >
               <ReuseLinkTemplate
                 :item="item"
@@ -458,14 +474,21 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
                 :pohon="pohon"
                 :close="close"
               >
-                <ul :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })">
-                  <li :class="pohon.childLabel({ class: [props.pohon?.childLabel, item.pohon?.childLabel] })">
+                <ul
+                  :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })"
+                  data-pohon="navigation-menu-child-list"
+                >
+                  <li
+                    :class="pohon.childLabel({ class: [props.pohon?.childLabel, item.pohon?.childLabel] })"
+                    data-pohon="navigation-menu-child-label"
+                  >
                     {{ getProp({ object: item, path: props.labelKey as string }) }}
                   </li>
                   <li
                     v-for="(childItem, childIndex) in item.children"
                     :key="childIndex"
                     :class="pohon.childItem({ class: [props.pohon?.childItem, item.pohon?.childItem] })"
+                    data-pohon="navigation-menu-child-item"
                   >
                     <PLink
                       v-slot="{ active: childActive, ...childSlotProps }"
@@ -479,21 +502,39 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
                       >
                         <PLinkBase
                           v-bind="childSlotProps"
-                          :class="pohon.childLink({ class: [props.pohon?.childLink, item.pohon?.childLink, childItem.class], active: childActive })"
+                          :class="pohon.childLink({
+                            class: [props.pohon?.childLink, item.pohon?.childLink, childItem.class],
+                            active: childActive,
+                          })"
+                          data-pohon="navigation-menu-child-link"
                         >
                           <PIcon
                             v-if="childItem.icon"
                             :name="childItem.icon"
-                            :class="pohon.childLinkIcon({ class: [props.pohon?.childLinkIcon, item.pohon?.childLinkIcon], active: childActive })"
+                            :class="pohon.childLinkIcon({
+                              class: [props.pohon?.childLinkIcon, item.pohon?.childLinkIcon],
+                              active: childActive,
+                            })"
+                            data-pohon="navigation-menu-child-link-icon"
                           />
 
-                          <span :class="pohon.childLinkLabel({ class: [props.pohon?.childLinkLabel, item.pohon?.childLinkLabel], active: childActive })">
+                          <span
+                            :class="pohon.childLinkLabel({
+                              class: [props.pohon?.childLinkLabel, item.pohon?.childLinkLabel],
+                              active: childActive,
+                            })"
+                            data-pohon="navigation-menu-child-link-label"
+                          >
                             {{ getProp({ object: childItem, path: props.labelKey as string }) }}
 
                             <PIcon
                               v-if="childItem.target === '_blank' && externalIcon !== false"
                               :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
-                              :class="pohon.childLinkLabelExternalIcon({ class: [props.pohon?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon], active: childActive })"
+                              :class="pohon.childLinkLabelExternalIcon({
+                                class: [props.pohon?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon],
+                                active: childActive,
+                              })"
+                              data-pohon="navigation-menu-child-link-label-external-icon"
                             />
                           </span>
                         </PLinkBase>
@@ -511,7 +552,13 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           >
             <PLinkBase
               v-bind="slotProps"
-              :class="pohon.link({ class: [props.pohon?.link, item.pohon?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })"
+              :class="pohon.link({
+                class: [props.pohon?.link, item.pohon?.link, item.class],
+                active: active || item.active,
+                disabled: !!item.disabled,
+                level: level > 0,
+              })"
+              data-pohon="navigation-menu-link"
             >
               <ReuseLinkTemplate
                 :item="item"
@@ -523,7 +570,13 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           <PLinkBase
             v-else
             v-bind="slotProps"
-            :class="pohon.link({ class: [props.pohon?.link, item.pohon?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: orientation === 'horizontal' || level > 0 })"
+            :class="pohon.link({
+              class: [props.pohon?.link, item.pohon?.link, item.class],
+              active: active || item.active,
+              disabled: !!item.disabled,
+              level: orientation === 'horizontal' || level > 0,
+            })"
+            data-pohon="navigation-menu-link"
           >
             <ReuseLinkTemplate
               :item="item"
@@ -537,6 +590,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])"
           v-bind="contentProps"
           :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content] })"
+          data-pohon="navigation-menu-accordion-content"
         >
           <slot
             :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)"
@@ -545,11 +599,15 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
             :index="index"
             :pohon="pohon"
           >
-            <ul :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })">
+            <ul
+              :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })"
+              data-pohon="navigation-menu-child-list"
+            >
               <li
                 v-for="(childItem, childIndex) in item.children"
                 :key="childIndex"
                 :class="pohon.childItem({ class: [props.pohon?.childItem, item.pohon?.childItem] })"
+                data-pohon="navigation-menu-child-item"
               >
                 <PLink
                   v-slot="{ active: childActive, ...childSlotProps }"
@@ -563,27 +621,52 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
                   >
                     <PLinkBase
                       v-bind="childSlotProps"
-                      :class="pohon.childLink({ class: [props.pohon?.childLink, item.pohon?.childLink, childItem.class], active: childActive })"
+                      :class="pohon.childLink({
+                        class: [props.pohon?.childLink, item.pohon?.childLink, childItem.class],
+                        active: childActive,
+                      })"
+                      data-pohon="navigation-menu-child-link"
                     >
                       <PIcon
                         v-if="childItem.icon"
                         :name="childItem.icon"
-                        :class="pohon.childLinkIcon({ class: [props.pohon?.childLinkIcon, item.pohon?.childLinkIcon], active: childActive })"
+                        :class="pohon.childLinkIcon({
+                          class: [props.pohon?.childLinkIcon, item.pohon?.childLinkIcon],
+                          active: childActive,
+                        })"
+                        data-pohon="navigation-menu-child-link-icon"
                       />
 
-                      <div :class="pohon.childLinkWrapper({ class: [props.pohon?.childLinkWrapper, item.pohon?.childLinkWrapper] })">
-                        <p :class="pohon.childLinkLabel({ class: [props.pohon?.childLinkLabel, item.pohon?.childLinkLabel], active: childActive })">
+                      <div
+                        :class="pohon.childLinkWrapper({ class: [props.pohon?.childLinkWrapper, item.pohon?.childLinkWrapper] })"
+                        data-pohon="navigation-menu-child-link-wrapper"
+                      >
+                        <p
+                          :class="pohon.childLinkLabel({
+                            class: [props.pohon?.childLinkLabel, item.pohon?.childLinkLabel],
+                            active: childActive,
+                          })"
+                          data-pohon="navigation-menu-child-link-label"
+                        >
                           {{ getProp({ object: childItem, path: props.labelKey as string }) }}
 
                           <PIcon
                             v-if="childItem.target === '_blank' && externalIcon !== false"
                             :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
-                            :class="pohon.childLinkLabelExternalIcon({ class: [props.pohon?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon], active: childActive })"
+                            :class="pohon.childLinkLabelExternalIcon({
+                              class: [props.pohon?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon],
+                              active: childActive,
+                            })"
+                            data-pohon="navigation-menu-child-link-label-external-icon"
                           />
                         </p>
                         <p
                           v-if="childItem.description"
-                          :class="pohon.childLinkDescription({ class: [props.pohon?.childLinkDescription, item.pohon?.childLinkDescription], active: childActive })"
+                          :class="pohon.childLinkDescription({
+                            class: [props.pohon?.childLinkDescription, item.pohon?.childLinkDescription],
+                            active: childActive,
+                          })"
+                          data-pohon="navigation-menu-child-link-description"
                         >
                           {{ childItem.description }}
                         </p>
@@ -600,6 +683,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
       <AAccordionContent
         v-if="orientation === 'vertical' && item.children?.length && !collapsed"
         :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content] })"
+        data-pohon="navigation-menu-accordion-content"
       >
         <AAccordionRoot
           v-bind="({
@@ -608,6 +692,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           } as AAccordionRootProps)"
           as="ul"
           :class="pohon.childList({ class: props.pohon?.childList })"
+          data-pohon="navigation-menu-child-list"
         >
           <ReuseItemTemplate
             v-for="(childItem, childIndex) in item.children"
@@ -616,6 +701,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
             :index="childIndex"
             :level="level + 1"
             :class="pohon.childItem({ class: [props.pohon?.childItem, childItem.pohon?.childItem] })"
+            data-pohon="navigation-menu-child-item"
           />
         </AAccordionRoot>
       </AAccordionContent>
@@ -626,6 +712,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
     v-bind="{ ...rootProps, ...$attrs }"
     :data-collapsed="collapsed"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="navigation-menu-root"
   >
     <slot name="list-leading" />
 
@@ -641,6 +728,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
         :is="orientation === 'vertical' && !collapsed ? AAccordionRoot : ANavigationMenuList"
         as="ul"
         :class="pohon.list({ class: props.pohon?.list })"
+        data-pohon="navigation-menu-list"
       >
         <ReuseItemTemplate
           v-for="(item, index) in list"
@@ -648,12 +736,14 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           :item="item"
           :index="index"
           :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item] })"
+          data-pohon="navigation-menu-item"
         />
       </component>
 
       <div
         v-if="orientation === 'vertical' && listIndex < lists.length - 1"
         :class="pohon.separator({ class: props.pohon?.separator })"
+        data-pohon="navigation-menu-separator"
       />
     </template>
 
@@ -662,15 +752,23 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
     <div
       v-if="orientation === 'horizontal'"
       :class="pohon.viewportWrapper({ class: props.pohon?.viewportWrapper })"
+      data-pohon="navigation-menu-viewport-wrapper"
     >
       <ANavigationMenuIndicator
         v-if="arrow"
         :class="pohon.indicator({ class: props.pohon?.indicator })"
+        data-pohon="navigation-menu-indicator"
       >
-        <div :class="pohon.arrow({ class: props.pohon?.arrow })" />
+        <div
+          :class="pohon.arrow({ class: props.pohon?.arrow })"
+          data-pohon="navigation-menu-arrow"
+        />
       </ANavigationMenuIndicator>
 
-      <ANavigationMenuViewport :class="pohon.viewport({ class: props.pohon?.viewport })" />
+      <ANavigationMenuViewport
+        :class="pohon.viewport({ class: props.pohon?.viewport })"
+        data-pohon="navigation-menu-viewport"
+      />
     </div>
   </ANavigationMenuRoot>
 </template>

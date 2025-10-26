@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { object, string, nonempty, refine } from 'superstruct'
 import type { Infer } from 'superstruct'
-import type { FormSubmitEvent } from '@nuxt/ui'
+import type { FormSubmitEvent } from 'pohon-ui'
 
 const schema = object({
   email: nonempty(string()),

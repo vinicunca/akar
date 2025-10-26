@@ -4,7 +4,7 @@ category: element
 links:
   - label: Separator
     icon: i-custom-akar
-    to: https://akar.com/docs/components/separator
+    to: /docs/akar/components/separator
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Separator.vue
@@ -114,16 +114,16 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

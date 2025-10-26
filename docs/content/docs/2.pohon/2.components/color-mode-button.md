@@ -25,7 +25,7 @@ The button defaults to `color="neutral"` and `variant="ghost"`.
 
 ### With custom icons
 
-::framework-only
+::docs-framework-only
 #nuxt
 ::div
 
@@ -93,12 +93,12 @@ slots:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Changelog
 
-:component-changelog{prefix="color-mode"}
+:docs-component-changelog{prefix="color-mode"}

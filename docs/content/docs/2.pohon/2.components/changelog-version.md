@@ -327,7 +327,7 @@ You can use the `body` slot to display custom content between the image and the 
 - the [ContentRenderer](https://content.nuxt.com/docs/components/content-renderer) component from `@nuxt/content` to render the content of the page or list.
 - or use the `:u-changelog-version` component directly in your content with markdown inside the `body` slot as Nuxt UI provides pre-styled prose components.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'changelog-version-markdown-example'
@@ -339,16 +339,16 @@ collapse: true
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

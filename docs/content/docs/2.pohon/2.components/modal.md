@@ -4,7 +4,7 @@ category: overlay
 links:
   - label: Dialog
     icon: i-custom-akar
-    to: https://akar.com/docs/components/dialog
+    to: /docs/akar/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Modal.vue
@@ -26,7 +26,7 @@ slots:
 
   content: |
 
-    <Placeholder class="h-48 m-4" />
+    <CorePlaceholder class="h-48 m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -53,7 +53,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-48" />
+    <CorePlaceholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -81,7 +81,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-48" />
+    <CorePlaceholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -116,7 +116,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-48" />
+    <CorePlaceholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -148,7 +148,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-48" />
+    <CorePlaceholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -157,7 +157,7 @@ slots:
 :placeholder{class="h-48"}
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
@@ -188,7 +188,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-48" />
+    <CorePlaceholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -216,7 +216,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-48" />
+    <CorePlaceholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -245,7 +245,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-full" />
+    <CorePlaceholder class="h-full" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -260,7 +260,7 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'modal-open-example'
 ---
@@ -294,7 +294,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-48" />
+    <CorePlaceholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -313,7 +313,7 @@ Make sure to wrap your app with the [`App`](/docs/components/app) component whic
 
 First, create a modal component that will be opened programmatically:
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'modal-example'
@@ -327,7 +327,7 @@ We are emitting a `close` event when the modal is closed or dismissed here. You 
 
 Then, use it in your app:
 
-::component-example
+::docs-pohon-example
 ---
 name: 'modal-programmatic-example'
 ---
@@ -341,7 +341,7 @@ You can close the modal within the modal component by emitting `emit('close')`.
 
 You can nest modals within each other.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'modal-nested-example'
 ---
@@ -351,7 +351,7 @@ name: 'modal-nested-example'
 
 Use the `#footer` slot to add content after the Modal's body.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'modal-footer-slot-example'
 ---
@@ -361,7 +361,7 @@ name: 'modal-footer-slot-example'
 
 You can use a [CommandPalette](/docs/components/command-palette) component inside the Modal's content.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'modal-command-palette-example'
@@ -372,20 +372,20 @@ name: 'modal-command-palette-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

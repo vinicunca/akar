@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TabsItem } from '@nuxt/ui'
+import type { TabsItem } from 'pohon-ui'
 
 const items = [
   {
@@ -26,7 +26,7 @@ const state = reactive({
 </script>
 
 <template>
-  <UTabs :items="items" variant="link" :ui="{ trigger: 'grow' }" class="gap-4 w-full">
+  <UTabs :items="items" variant="link" :pohon="{ trigger: 'grow' }" class="gap-4 w-full">
     <template #account="{ item }">
       <p class="color-text-muted mb-4">
         {{ item.description }}

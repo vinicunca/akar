@@ -5,7 +5,7 @@ category: form
 links:
   - label: PinInput
     icon: i-custom-akar
-    to: https://akar.com/docs/components/pin-input
+    to: /docs/akar/components/pin-input
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/PinInput.vue
@@ -96,7 +96,7 @@ props:
 ---
 ::
 
-### Placeholder
+### CorePlaceholder
 
 Use the `placeholder` prop to set a placeholder text.
 
@@ -174,11 +174,11 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ### Expose
 
@@ -190,8 +190,8 @@ When accessing the component via a template ref, you can use the following:
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

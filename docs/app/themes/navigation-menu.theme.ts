@@ -31,9 +31,9 @@ export const navigationMenuTheme = {
     childLinkDescription: 'text-muted',
     separator: 'px-2 h-px bg-border',
     viewportWrapper: 'absolute top-full left-0 flex w-full',
-    viewport: 'relative overflow-hidden bg-background shadow-lg rounded-md ring ring-ring h-$akar-navigation-menu-viewport-height w-full transition-[width,height,left] duration-200 origin-[top_center] data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] z-1',
+    viewport: 'relative overflow-hidden bg-background shadow-lg rounded-md ring ring-ring h-$akar-navigation-menu-viewport-height w-full transition-[width,height,left]-200 origin-[top_center] data-[state=open]:(animate-in zoom-in-90) data-[state=closed]:(animate-out fade-out-0 zoom-out-95) z-1',
     content: '',
-    indicator: 'absolute data-[state=visible]:animate-[fade-in_100ms_ease-out] data-[state=hidden]:animate-[fade-out_100ms_ease-in] data-[state=hidden]:opacity-0 bottom-0 z-[2] w-$akar-navigation-menu-indicator-size translate-x-$akar-navigation-menu-indicator-position flex h-2.5 items-end justify-center overflow-hidden transition-property-[translate,width] duration-200',
+    indicator: 'absolute data-[state=visible]:(animate-in fade-in) data-[state=hidden]:(animate-out fade-out) bottom-0 z-1 w-$akar-navigation-menu-indicator-size translate-x-$akar-navigation-menu-indicator-position flex h-2.5 items-end justify-center overflow-hidden transition-[transform,width]-280',
     arrow: 'relative top-[50%] size-2.5 rotate-45 border border-border bg-background z-1 rounded-xs',
   },
 
@@ -74,7 +74,7 @@ export const navigationMenuTheme = {
     contentOrientation: {
       horizontal: {
         viewportWrapper: 'justify-center',
-        content: 'data-[motion=from-start]:animate-[enter-from-left_200ms_ease] data-[motion=from-end]:animate-[enter-from-right_200ms_ease] data-[motion=to-start]:animate-[exit-to-left_200ms_ease] data-[motion=to-end]:animate-[exit-to-right_200ms_ease]',
+        content: 'data-[motion^=from-]:(animate-in fade-in) data-[motion^=to-]:(animate-out fade-out) data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52',
       },
       vertical: {
         viewport: 'sm:w-$akar-navigation-menu-viewport-width left-$akar-navigation-menu-viewport-left',
@@ -121,7 +121,7 @@ export const navigationMenuTheme = {
       class: {
         childList: 'ms-5 border-s border-border',
         childItem: 'ps-1.5 -ms-px',
-        content: 'data-[state=open]:animate-[collapsible-down_200ms_ease-out] data-[state=closed]:animate-[collapsible-up_200ms_ease-out] overflow-hidden',
+        content: 'data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up overflow-hidden',
       },
     },
     {

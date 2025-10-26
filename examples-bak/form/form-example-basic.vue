@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormError, FormSubmitEvent } from '@nuxt/ui'
+import type { FormError, FormSubmitEvent } from 'pohon-ui'
 
 const state = reactive({
   email: undefined,

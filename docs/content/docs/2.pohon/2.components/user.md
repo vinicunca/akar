@@ -54,7 +54,7 @@ props:
 
 ::collapsible{name="all avatar properties"}
 
-::component-props
+::docs-pohon-props
 ---
 name: Avatar
 ignore:
@@ -102,7 +102,7 @@ props:
 
 ::collapsible{name="all chip properties"}
 
-::component-props
+::docs-pohon-props
 ---
 name: Chip
 ignore:
@@ -181,16 +181,16 @@ The `NuxtLink` component will inherit all other attributes you pass to the `User
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

@@ -6,7 +6,7 @@ const value = ref('Click to clear')
   <UInput
     v-model="value"
     placeholder="Type something..."
-    :ui="{ trailing: 'pe-1' }"
+    :pohon="{ trailing: 'pe-1' }"
   >
     <template v-if="value?.length" #trailing>
       <UButton

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn } from 'pohon-ui'
 
 const UCheckbox = resolveComponent('UCheckbox')
 const UButton = resolveComponent('UButton')
@@ -155,7 +155,7 @@ const expanded = ref({ 0: true })
     :columns="columns"
     :get-sub-rows="row => row.children"
     class="flex-1"
-    :ui="{
+    :pohon="{
       base: 'border-separate border-spacing-0',
       tbody: '[&>tr]:last:[&>td]:border-b-0',
       tr: 'group',

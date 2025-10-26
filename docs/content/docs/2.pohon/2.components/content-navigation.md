@@ -17,7 +17,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 Use the `navigation` prop with the `navigation`{lang="ts-type"} value you get when fetching the navigation of your app.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'content-navigation-example'
 class: 'h-96 overflow-y-auto'
@@ -273,20 +273,20 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog{prefix="content"}
+:docs-component-changelog{prefix="content"}

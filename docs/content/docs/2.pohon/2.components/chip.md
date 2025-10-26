@@ -140,20 +140,20 @@ In this example, the Chip has a color per status and is displayed when the statu
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

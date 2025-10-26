@@ -24,7 +24,7 @@ Use the Main component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{5-9}
 <template>
-  <UApp>
+  <PApp>
     <UHeader />
 
     <UMain>
@@ -34,7 +34,7 @@ Use the Main component in your `app.vue` or in a layout:
     </UMain>
 
     <UFooter />
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -42,16 +42,16 @@ Use the Main component in your `app.vue` or in a layout:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

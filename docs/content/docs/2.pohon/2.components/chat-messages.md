@@ -336,7 +336,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.arrowDown` key.
@@ -435,7 +435,7 @@ In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.
 
 You can customize the loading indicator that appears when the status is `submitted`.
 
-::component-example
+::docs-pohon-example
 ---
 name: "chat-messages-indicator-slot-example"
 collapse: true
@@ -447,11 +447,11 @@ collapse: true
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ::tip
 You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
@@ -473,8 +473,8 @@ import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

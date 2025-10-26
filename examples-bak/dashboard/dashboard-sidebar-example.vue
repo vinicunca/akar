@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from 'pohon-ui'
 
 const items: NavigationMenuItem[][] = [[{
   label: 'Home',
@@ -37,7 +37,7 @@ const items: NavigationMenuItem[][] = [[{
 </script>
 
 <template>
-  <UDashboardSidebar collapsible resizable :ui="{ footer: 'border-t border-default' }">
+  <UDashboardSidebar collapsible resizable :pohon="{ footer: 'border-t border-default' }">
     <template #header="{ collapsed }">
       <Logo v-if="!collapsed" class="h-5 w-auto shrink-0" />
       <UIcon v-else name="i-simple-icons-nuxtdotjs" class="size-5 text-primary mx-auto" />
@@ -60,13 +60,13 @@ const items: NavigationMenuItem[][] = [[{
         </template>
       </UButton>
 
-      <UNavigationMenu
+      <PNavigationMenu
         :collapsed="collapsed"
         :items="items[0]"
         orientation="vertical"
       />
 
-      <UNavigationMenu
+      <PNavigationMenu
         :collapsed="collapsed"
         :items="items[1]"
         orientation="vertical"

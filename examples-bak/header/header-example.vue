@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from 'pohon-ui'
 
 const route = useRoute()
 
@@ -28,7 +28,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
       <Logo class="h-6 w-auto" />
     </template>
 
-    <UNavigationMenu :items="items" />
+    <PNavigationMenu :items="items" />
 
     <template #right>
       <UColorModeButton />

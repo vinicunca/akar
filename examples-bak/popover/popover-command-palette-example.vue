@@ -40,7 +40,7 @@ const label = ref([])
         multiple
         placeholder="Search labels..."
         :groups="[{ id: 'labels', items }]"
-        :ui="{ input: '[&>input]:h-8 [&>input]:text-sm' }"
+        :pohon="{ input: '[&>input]:h-8 [&>input]:text-sm' }"
       />
     </template>
   </UPopover>

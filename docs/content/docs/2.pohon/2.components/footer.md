@@ -14,7 +14,7 @@ The Footer component renders a `<footer>` element.
 
 Use the `left`, `default` and `right` slots to customize the footer.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -41,7 +41,7 @@ Use the Footer component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{32-67}
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from 'pohon-ui'
 
 const items: NavigationMenuItem[] = [{
   label: 'Figma Kit',
@@ -59,7 +59,7 @@ const items: NavigationMenuItem[] = [{
 </script>
 
 <template>
-  <UApp>
+  <PApp>
     <UHeader />
 
     <UMain>
@@ -77,7 +77,7 @@ const items: NavigationMenuItem[] = [{
         </p>
       </template>
 
-      <UNavigationMenu :items="items" variant="link" />
+      <PNavigationMenu :items="items" variant="link" />
 
       <template #right>
         <UButton
@@ -106,7 +106,7 @@ const items: NavigationMenuItem[] = [{
         />
       </template>
     </UFooter>
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -118,16 +118,16 @@ In this example, we use the [Separator](/docs/components/separator) component to
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

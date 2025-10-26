@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AvatarProps } from '@nuxt/ui'
+import type { AvatarProps } from 'pohon-ui'
 
 const props = defineProps<{
   avatar: AvatarProps

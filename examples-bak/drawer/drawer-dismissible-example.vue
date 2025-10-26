@@ -3,7 +3,7 @@ const open = ref(false)
 </script>
 
 <template>
-  <UDrawer v-model:open="open" :dismissible="false" :handle="false" :ui="{ header: 'flex items-center justify-between' }">
+  <UDrawer v-model:open="open" :dismissible="false" :handle="false" :pohon="{ header: 'flex items-center justify-between' }">
     <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
     <template #header>
@@ -15,7 +15,7 @@ const open = ref(false)
     </template>
 
     <template #body>
-      <Placeholder class="h-48" />
+      <CorePlaceholder class="h-48" />
     </template>
   </UDrawer>
 </template>

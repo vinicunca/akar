@@ -4,7 +4,7 @@ category: element
 links:
   - label: Progress
     icon: i-custom-akar
-    to: https://akar.com/docs/components/progress
+    to: /docs/akar/components/progress
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Progress.vue
@@ -147,20 +147,20 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

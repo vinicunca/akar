@@ -132,7 +132,7 @@ const testimonials = ref([
       icon="i-logos-cloudflare-icon"
       title="Cloudflare's Workers LaunchPad"
       description="NuxtHub is part of the Cloudflare's Workers Launchpad Cohort to make sure you get a first-class experience on top of Cloudflare's network."
-      :ui="{ leadingIcon: 'size-10' }"
+      :pohon="{ leadingIcon: 'size-10' }"
     />
 
     <UPageCard
@@ -140,7 +140,7 @@ const testimonials = ref([
       :key="index"
       variant="subtle"
       :description="testimonial.quote"
-      :ui="{ description: 'before:content-[open-quote] after:content-[close-quote]' }"
+      :pohon="{ description: 'before:content-[open-quote] after:content-[close-quote]' }"
     >
       <template #footer>
         <UUser v-bind="testimonial.user" size="xl" />

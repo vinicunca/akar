@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DropdownMenuItem } from '@nuxt/ui'
+import type { DropdownMenuItem } from 'pohon-ui'
 
 const open = ref(false)
 
@@ -22,7 +22,7 @@ const items: DropdownMenuItem[] = [
 </script>
 
 <template>
-  <UDropdownMenu v-model:open="open" :items="items" :ui="{ content: 'w-48' }">
+  <UDropdownMenu v-model:open="open" :items="items" :pohon="{ content: 'w-48' }">
     <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
   </UDropdownMenu>
 </template>

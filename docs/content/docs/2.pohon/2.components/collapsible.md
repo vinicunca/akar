@@ -3,7 +3,7 @@ description: A collapsible element to toggle visibility of its content.
 category: element
 links:
   - label: Collapsible
-    to: https://akar.com/docs/components/collapsible
+    to: /docs/akar/components/collapsible
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Collapsible.vue
@@ -156,4 +156,4 @@ Coming soon...
 
 ## Changelog
 
-:docs-component-changelog
+::docs-component-changelog

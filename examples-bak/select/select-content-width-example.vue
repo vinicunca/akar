@@ -21,7 +21,7 @@ const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/use
     :items="users"
     placeholder="Select user"
     value-key="value"
-    :ui="{ content: 'min-w-fit' }"
+    :pohon="{ content: 'min-w-fit' }"
     class="w-48"
   >
     <template #item-label="{ item }">

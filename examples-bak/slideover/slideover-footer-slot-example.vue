@@ -3,11 +3,11 @@ const open = ref(false)
 </script>
 
 <template>
-  <USlideover v-model:open="open" title="Slideover with footer" description="This is useful when you want a form in a Slideover." :ui="{ footer: 'justify-end' }">
+  <USlideover v-model:open="open" title="Slideover with footer" description="This is useful when you want a form in a Slideover." :pohon="{ footer: 'justify-end' }">
     <UButton label="Open" color="neutral" variant="subtle" />
 
     <template #body>
-      <Placeholder class="h-full" />
+      <CorePlaceholder class="h-full" />
     </template>
 
     <template #footer="{ close }">

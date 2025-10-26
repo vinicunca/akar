@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from 'pohon-ui'
 
 const items: NavigationMenuItem[] = [{
   label: 'Home',
@@ -28,7 +28,7 @@ const items: NavigationMenuItem[] = [{
         <Logo class="h-5 w-auto" />
       </template>
 
-      <UNavigationMenu
+      <PNavigationMenu
         :items="items"
         orientation="vertical"
       />

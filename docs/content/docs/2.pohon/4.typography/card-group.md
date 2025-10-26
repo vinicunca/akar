@@ -113,12 +113,12 @@ A landing page you can use as starting point.
 
 ### Slots
 
-:component-slots{prose}
+:docs-pohon-slots{prose}
 
 ## Theme
 
-:component-theme{prose}
+:docs-pohon-theme{prose}
 
 ## Changelog
 
-:component-changelog{prefix="prose"}
+:docs-component-changelog{prefix="prose"}

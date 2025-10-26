@@ -22,7 +22,7 @@ Use the `level` prop to define which heading will be used for the steps.
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui']
+  modules: ['pohon-ui']
 })
 ```
 
@@ -49,7 +49,7 @@ npm run dev
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui']
+  modules: ['pohon-ui']
 })
 ```
 
@@ -74,16 +74,16 @@ npm run dev
 
 ### Props
 
-:component-props{prose}
+:docs-pohon-props{prose}
 
 ### Slots
 
-:component-slots{prose}
+:docs-pohon-slots{prose}
 
 ## Theme
 
-:component-theme{prose}
+:docs-pohon-theme{prose}
 
 ## Changelog
 
-:component-changelog{prefix="prose"}
+:docs-component-changelog{prefix="prose"}

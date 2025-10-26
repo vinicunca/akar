@@ -4,7 +4,7 @@ category: navigation
 links:
   - label: Pagination
     icon: i-custom-akar
-    to: https://akar.com/docs/components/pagination
+    to: /docs/akar/components/pagination
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Pagination.vue
@@ -315,7 +315,7 @@ props:
 
 Use the `to` prop to transform buttons into links. Pass a function that receives the page number and returns a route destination.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'pagination-links-example'
 ---
@@ -329,20 +329,20 @@ In this example we're adding the `#with-links` hash to avoid going to the top of
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

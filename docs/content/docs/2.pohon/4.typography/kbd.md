@@ -28,12 +28,12 @@ Use the `kbd` component to display a [Kbd](/docs/components/kbd) in your content
 
 ### Props
 
-:component-props{prose}
+:docs-pohon-props{prose}
 
 ## Theme
 
-:component-theme{prose}
+:docs-pohon-theme{prose}
 
 ## Changelog
 
-:component-changelog{prefix="prose"}
+:docs-component-changelog{prefix="prose"}

@@ -279,7 +279,7 @@ In this example, we're using the `useOverlay` composable to control multiple mod
 
 ### Provide / Inject
 
-When opening overlays programmatically (e.g. modals, slideovers, etc), the overlay component can only access injected values from the component containing `UApp` (typically `app.vue` or layout components). This is because overlays are mounted outside of the page context by the `UApp` component.
+When opening overlays programmatically (e.g. modals, slideovers, etc), the overlay component can only access injected values from the component containing `PApp` (typically `app.vue` or layout components). This is because overlays are mounted outside of the page context by the `PApp` component.
 
 As such, using `provide()` in pages or parent components isn't supported directly. To pass provided values to overlays, the recommended approach is to use props instead:
 

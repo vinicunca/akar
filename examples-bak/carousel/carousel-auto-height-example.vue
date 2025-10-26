@@ -16,7 +16,7 @@ const items = [
     arrows
     dots
     :items="items"
-    :ui="{
+    :pohon="{
       container: 'transition-[height]',
       controls: 'absolute -top-8 inset-x-12',
       dots: '-top-7',

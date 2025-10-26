@@ -195,7 +195,7 @@ The `to` prop is overridden here since `@nuxt/content` uses the `path` property.
 
 You can use the `ui` prop and the different slots to make the indicators sticky:
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -210,11 +210,11 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ::tip
 You can use all the slots of the [`ChangelogVersion`](/docs/components/changelog-version#slots) component inside ChangelogVersions, they are automatically forwarded allowing you to customize individual versions when using the `versions` prop.
@@ -232,8 +232,8 @@ You can use all the slots of the [`ChangelogVersion`](/docs/components/changelog
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

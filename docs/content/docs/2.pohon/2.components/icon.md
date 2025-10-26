@@ -20,7 +20,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::caution{to="/docs/getting-started/integrations/icons/nuxt#collections"}
 It's highly recommended to install the icons collections you need, read more about this.
@@ -33,7 +33,7 @@ It's highly recommended to install the icons collections you need, read more abo
 
 You can also pass a Vue component into the `name` prop:
 
-::component-example
+::docs-pohon-example
 ---
 name: 'icon-svg-example'
 ---
@@ -55,8 +55,8 @@ import IconLightbulb from '~icons/lucide/lightbulb'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

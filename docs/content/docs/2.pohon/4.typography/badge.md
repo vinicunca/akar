@@ -33,12 +33,12 @@ Use markdown in the default slot of the `badge` component to display a [Badge](/
 
 ### Slots
 
-:component-slots{prose}
+:docs-pohon-slots{prose}
 
 ## Theme
 
-:component-theme{prose}
+:docs-pohon-theme{prose}
 
 ## Changelog
 
-:component-changelog{prefix="prose"}
+:docs-component-changelog{prefix="prose"}

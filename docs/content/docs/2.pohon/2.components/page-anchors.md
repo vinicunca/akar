@@ -46,7 +46,7 @@ Use the `links` prop as an array of objects with the following properties:
 - `label: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeading?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeading?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
@@ -90,7 +90,7 @@ Use the PageAnchors component inside the [PageAside](/docs/components/page-aside
 
 ```vue [layouts/docs.vue]{35}
 <script setup lang="ts">
-import type { PageAnchor } from '@nuxt/ui'
+import type { PageAnchor } from 'pohon-ui'
 import type { ContentNavigationItem } from '@nuxt/content'
 
 const navigation = inject<ContentNavigationItem[]>('navigation')
@@ -137,16 +137,16 @@ const links: PageAnchor[] = [{
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

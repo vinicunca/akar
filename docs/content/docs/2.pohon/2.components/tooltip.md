@@ -4,7 +4,7 @@ category: overlay
 links:
   - label: Tooltip
     icon: i-custom-akar
-    to: https://akar.com/docs/components/tooltip
+    to: /docs/akar/components/tooltip
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Tooltip.vue
@@ -192,7 +192,7 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'tooltip-open-example'
 ---
@@ -206,7 +206,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 You can make the Tooltip follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/components/tooltip#trigger) prop:
 
-::component-example
+::docs-pohon-example
 ---
 name: 'tooltip-cursor-example'
 ---
@@ -216,20 +216,20 @@ name: 'tooltip-cursor-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

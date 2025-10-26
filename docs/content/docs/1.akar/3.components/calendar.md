@@ -1,6 +1,6 @@
 ---
 description: A vertically stacked set of interactive headings that each reveal an associated section of content.
-category: dates
+category: element
 links:
   - label: Pohon
     to: /docs/pohon/components/calendar

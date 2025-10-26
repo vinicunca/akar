@@ -38,7 +38,7 @@ This component does not have a single root element when using the `resizable` pr
 
 Use the `header`, `body` and `footer` slots to customize the panel or the default slot if you don't want a scrollable body with padding.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'dashboard-panel-example'
@@ -76,7 +76,7 @@ props:
 slots:
   body: |
 
-    <Placeholder class="h-96" />
+    <CorePlaceholder class="h-96" />
 class: '!p-0 !justify-start'
 ---
 
@@ -104,7 +104,7 @@ props:
 slots:
   body: |
 
-    <Placeholder class="h-96" />
+    <CorePlaceholder class="h-96" />
 class: '!p-0 !justify-start'
 ---
 
@@ -120,16 +120,16 @@ Sizes are calculated as percentages by default. You can change this using the `u
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

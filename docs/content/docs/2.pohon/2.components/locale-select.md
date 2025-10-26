@@ -15,7 +15,7 @@ links:
 
 The LocaleSelect component extends the [SelectMenu](/docs/components/select-menu) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
-::framework-only
+::docs-framework-only
 #nuxt
 ::note{to="/docs/getting-started/integrations/i18n/nuxt"}
 This component is meant to be used with the **i18n** system. Learn more about it in the guide.
@@ -36,7 +36,7 @@ The flags are displayed using Unicode characters. This may result in a different
 
 Use the `locales` prop with an array of locales from `@nuxt/ui/locale`.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'locale-select-example'
 ---
@@ -58,7 +58,7 @@ const locale = ref('en')
 
 ### Dynamic locale
 
-::framework-only
+::docs-framework-only
 #nuxt
 ::div
 You can use it with Nuxt i18n:
@@ -110,8 +110,8 @@ const { locale, setLocale } = useI18n()
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ## Changelog
 
-:component-changelog{prefix="locale"}
+:docs-component-changelog{prefix="locale"}

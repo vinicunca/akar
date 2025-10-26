@@ -4,10 +4,10 @@ category: overlay
 links:
   - label: HoverCard
     icon: i-custom-akar
-    to: https://akar.com/docs/components/hover-card
+    to: /docs/akar/components/hover-card
   - label: Popover
     icon: i-custom-akar
-    to: https://akar.com/docs/components/popover
+    to: /docs/akar/components/popover
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Popover.vue
@@ -29,7 +29,7 @@ slots:
 
   content: |
 
-    <Placeholder class="size-48 m-4 inline-flex" />
+    <CorePlaceholder class="size-48 m-4 inline-flex" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -58,7 +58,7 @@ slots:
 
   content: |
 
-    <Placeholder class="size-48 m-4 inline-flex" />
+    <CorePlaceholder class="size-48 m-4 inline-flex" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -91,7 +91,7 @@ slots:
 
   content: |
 
-    <Placeholder class="size-48 m-4 inline-flex" />
+    <CorePlaceholder class="size-48 m-4 inline-flex" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -129,7 +129,7 @@ slots:
 
   content: |
 
-    <Placeholder class="size-48 m-4 inline-flex" />
+    <CorePlaceholder class="size-48 m-4 inline-flex" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -156,7 +156,7 @@ slots:
 
   content: |
 
-    <Placeholder class="size-48 m-4 inline-flex" />
+    <CorePlaceholder class="size-48 m-4 inline-flex" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -171,7 +171,7 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'popover-open-example'
 ---
@@ -185,7 +185,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 Set the `dismissible` prop to `false` to prevent the Popover from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'popover-dismissible-example'
 ---
@@ -195,7 +195,7 @@ name: 'popover-dismissible-example'
 
 You can use a [CommandPalette](/docs/components/command-palette) component inside the Popover's content.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'popover-command-palette-example'
@@ -206,7 +206,7 @@ name: 'popover-command-palette-example'
 
 You can make the Popover follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/components/tooltip#trigger) prop:
 
-::component-example
+::docs-pohon-example
 ---
 name: 'popover-cursor-example'
 ---
@@ -220,7 +220,7 @@ You can use the `#anchor` slot to position the Popover against a custom element.
 This slot only works when `mode` is `click`.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'popover-anchor-slot-example'
@@ -231,11 +231,11 @@ name: 'popover-anchor-slot-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ::note
 The `close` function is only available when `mode` is set to `click` because Reka UI exposes this for [`Popover`](https://akar.com/docs/components/popover#close-using-slot-props) but not for [`HoverCard`](https://akar.com/docs/components/hover-card).
@@ -243,12 +243,12 @@ The `close` function is only available when `mode` is set to `click` because Rek
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

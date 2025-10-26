@@ -43,7 +43,7 @@ Use it inside a [PageSection](/docs/components/page-section) component or direct
 
   <UPageSection />
 
-  <UPageSection :ui="{ container: 'px-0' }">
+  <UPageSection :pohon="{ container: 'px-0' }">
     <UPageCTA class="rounded-none sm:rounded-xl" />
   </UPageSection>
 
@@ -209,16 +209,16 @@ slots:
 
 ### Props
 
-:component-props{slug="page-CTA"}
+:docs-pohon-props{slug="page-CTA"}
 
 ### Slots
 
-:component-slots{slug="page-CTA"}
+:docs-pohon-slots{slug="page-CTA"}
 
 ## Theme
 
-:component-theme{slug="page-CTA"}
+:docs-pohon-theme{slug="page-CTA"}
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

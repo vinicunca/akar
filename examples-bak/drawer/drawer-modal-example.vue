@@ -9,7 +9,7 @@ const open = ref(false)
     :overlay="false"
     :handle="false"
     :modal="false"
-    :ui="{ header: 'flex items-center justify-between' }"
+    :pohon="{ header: 'flex items-center justify-between' }"
   >
     <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
@@ -22,7 +22,7 @@ const open = ref(false)
     </template>
 
     <template #body>
-      <Placeholder class="h-48" />
+      <CorePlaceholder class="h-48" />
     </template>
   </UDrawer>
 </template>

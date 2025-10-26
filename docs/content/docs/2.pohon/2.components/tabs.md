@@ -4,7 +4,7 @@ category: navigation
 links:
   - label: Tabs
     icon: i-custom-akar
-    to: https://akar.com/docs/components/tabs
+    to: /docs/akar/components/tabs
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Tabs.vue
@@ -14,7 +14,7 @@ links:
 
 Use the Tabs component to display a list of items in a tabs.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 prettier: true
@@ -37,7 +37,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `class?: any`{lang="ts-type"}
-- `ui?: { trigger?: ClassNameValue, leadingIcon?: ClassNameValue, leadingAvatar?: ClassNameValue, leadingAvatarSize?: ClassNameValue, label?: ClassNameValue, trailingBadge?: ClassNameValue, trailingBadgeSize?: ClassNameValue, content?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { trigger?: ClassNameValue, leadingIcon?: ClassNameValue, leadingAvatar?: ClassNameValue, leadingAvatarSize?: ClassNameValue, label?: ClassNameValue, trailingBadge?: ClassNameValue, trailingBadgeSize?: ClassNameValue, content?: ClassNameValue }`{lang="ts-type"}
 
 ::docs-pohon-preview
 ---
@@ -245,15 +245,15 @@ You will have access to the following slots:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ### Expose
 
@@ -265,8 +265,8 @@ When accessing the component via a template ref, you can use the following:
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

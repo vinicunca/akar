@@ -5,7 +5,7 @@ import type { UvConfig } from 'pohon-ui';
 import { BRANDS } from './constant';
 
 export const kbdTheme = {
-  base: 'inline-flex items-center justify-center px-1 rounded-md font-medium font-sans py-0.5 shadow-[0_0_0_1px_rgba(255,255,255,10%),0_3px_0_rgba(255,255,255,10%)]',
+  base: 'inline-flex items-center justify-center px-1 rounded-md font-medium font-sans py-0.5',
   variants: {
     size: {
       sm: 'h-4 min-w-[16px] text-[10px]',
@@ -42,7 +42,7 @@ export const kbdTheme = {
     {
       color: 'neutral',
       variant: 'outline',
-      class: 'ring ring-inset ring-ring-accented color-text bg-background',
+      class: 'shadow-[0_0_0_1px_rgba(28,25,23,10%),0_3px_0_rgba(28,25,23,10%)] color-text bg-background',
     },
     {
       color: 'neutral',

@@ -18,7 +18,7 @@ Its height is defined through a `--ui-header-height` CSS variable.
 
 Use the `left`, `default` and `right` slots to customize the header and the `body` or `content` slots to customize the header menu.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 prettier: true
@@ -120,7 +120,7 @@ Use the `body` slot to fill the menu body (under the header) or the `content` sl
 You can use the `menu` prop to customize the menu of the header, it will adapt depending on the mode you choose.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 iframe:
@@ -147,7 +147,7 @@ Use the `toggle` prop to customize the toggle button displayed on mobile.
 
 You can pass any property from the [Button](/docs/components/button) component to customize it.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 iframe:
@@ -164,7 +164,7 @@ props:
 
 Use the `toggle-side` prop to change the side of the toggle button. Defaults to `right`.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 iframe:
@@ -185,7 +185,7 @@ Use the Header component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{28-51}
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from 'pohon-ui'
 
 const route = useRoute()
 
@@ -209,13 +209,13 @@ const items = computed<NavigationMenuItem[]>(() => [{
 </script>
 
 <template>
-  <UApp>
+  <PApp>
     <UHeader>
       <template #title>
         <Logo class="h-6 w-auto" />
       </template>
 
-      <UNavigationMenu :items="items" />
+      <PNavigationMenu :items="items" />
 
       <template #right>
         <UColorModeButton />
@@ -231,7 +231,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
       </template>
 
       <template #body>
-        <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+        <PNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
       </template>
     </UHeader>
 
@@ -242,7 +242,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
     </UMain>
 
     <UFooter />
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -250,20 +250,20 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

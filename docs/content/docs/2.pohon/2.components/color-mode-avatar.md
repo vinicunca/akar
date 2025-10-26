@@ -33,8 +33,8 @@ Switch between light and dark mode to see the different images: :u-color-mode-se
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ## Changelog
 
-:component-changelog{prefix="color-mode"}
+:docs-component-changelog{prefix="color-mode"}

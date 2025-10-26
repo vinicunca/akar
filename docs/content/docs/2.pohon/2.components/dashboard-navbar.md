@@ -32,7 +32,7 @@ definePageMeta({
 
 Use the `left`, `default` and `right` slots to customize the navbar.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'dashboard-navbar-example'
@@ -85,7 +85,7 @@ Use the `toggle` prop to customize the toggle button displayed on mobile that op
 
 You can pass any property from the [Button](/docs/components/button) component to customize it.
 
-::component-example
+::docs-pohon-example
 ---
 iframe: true
 iframeMobile: true
@@ -100,7 +100,7 @@ props:
 
 Use the `toggle-side` prop to change the side of the toggle button. Defaults to `right`.
 
-::component-example
+::docs-pohon-example
 ---
 iframe: true
 iframeMobile: true
@@ -115,16 +115,16 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

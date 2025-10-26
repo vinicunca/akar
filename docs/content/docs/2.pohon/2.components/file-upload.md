@@ -137,7 +137,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.upload` key.
@@ -269,7 +269,7 @@ props:
 
 You can use the FileUpload within a [Form](/docs/components/form) and [FormField](/docs/components/form-field) components to handle validation and error handling.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -281,7 +281,7 @@ name: 'file-upload-form-validation-example'
 
 You can use the default slot to make your own FileUpload component.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -293,7 +293,7 @@ name: 'file-upload-default-slot-example'
 
 You can use the `files-bottom` slot to add a [Button](/docs/components/button) under the files list to remove all files for example.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -309,7 +309,7 @@ The `interactive` prop is set to `false` in this example to prevent the default 
 
 You can use the `files-top` slot to add a [Button](/docs/components/button) above the files list to add new files for example.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -321,15 +321,15 @@ name: 'file-upload-files-top-slot-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ### Expose
 
@@ -342,8 +342,8 @@ When accessing the component via a template ref, you can use the following:
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

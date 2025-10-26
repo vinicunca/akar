@@ -15,7 +15,7 @@ const items = [
     class-names
     arrows
     :items="items"
-    :ui="{
+    :pohon="{
       item: 'basis-[70%] transition-opacity [&:not(.is-snapped)]:opacity-10'
     }"
     class="mx-auto max-w-sm"

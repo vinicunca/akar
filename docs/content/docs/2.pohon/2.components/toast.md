@@ -4,7 +4,7 @@ category: overlay
 links:
   - label: Toast
     icon: i-custom-akar
-    to: https://akar.com/docs/components/toast
+    to: /docs/akar/components/toast
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Toast.vue
@@ -14,7 +14,7 @@ links:
 
 Use the [useToast](/docs/composables/use-toast) composable to display a toast in your application.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 prettier: true
@@ -34,7 +34,7 @@ You can check the `App` component `toaster` prop to see how to configure the Toa
 
 Pass a `title` field to the `toast.add` method to display a title.
 
-::component-example
+::docs-pohon-example
 ---
 options:
   - name: 'title'
@@ -48,7 +48,7 @@ name: 'toast-title-example'
 
 Pass a `description` field to the `toast.add` method to display a description.
 
-::component-example
+::docs-pohon-example
 ---
 options:
   - name: 'title'
@@ -65,7 +65,7 @@ name: 'toast-description-example'
 
 Pass an `icon` field to the `toast.add` method to display an [Icon](/docs/components/icon).
 
-::component-example
+::docs-pohon-example
 ---
 options:
   - name: 'icon'
@@ -79,7 +79,7 @@ name: 'toast-icon-example'
 
 Pass an `avatar` field to the `toast.add` method to display an [Avatar](/docs/components/avatar).
 
-::component-example
+::docs-pohon-example
 ---
 options:
   - name: 'avatar.src'
@@ -95,7 +95,7 @@ name: 'toast-avatar-example'
 
 Pass a `color` field to the `toast.add` method to change the color of the Toast.
 
-::component-example
+::docs-pohon-example
 ---
 options:
   - name: 'color'
@@ -117,7 +117,7 @@ name: 'toast-color-example'
 
 Pass a `close` field to customize or hide the close [Button](/docs/components/button) (with `false` value).
 
-::component-example
+::docs-pohon-example
 ---
 name: 'toast-close-example'
 ---
@@ -127,7 +127,7 @@ name: 'toast-close-example'
 
 Pass a `closeIcon` field to customize the close button [Icon](/docs/components/icon). Default to `i-lucide-x`.
 
-::component-example
+::docs-pohon-example
 ---
 options:
   - name: 'closeIcon'
@@ -137,7 +137,7 @@ name: 'toast-close-icon-example'
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
@@ -153,7 +153,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 Pass an `actions` field to add some [Button](/docs/components/button) actions to the Toast.
 
-::component-example
+::docs-pohon-example
 ---
 options:
   - name: 'description'
@@ -171,7 +171,7 @@ Pass a `progress` field to customize or hide the [Progress](/docs/components/pro
 The Progress bar inherits the Toast color by default, but you can override it using the `progress.color` field.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 name: 'toast-progress-example'
 ---
@@ -181,7 +181,7 @@ name: 'toast-progress-example'
 
 Pass an `orientation` field to the `toast.add` method to change the orientation of the Toast.
 
-::component-example
+::docs-pohon-example
 ---
 options:
   - name: 'orientation'
@@ -210,13 +210,13 @@ const toaster = { position: 'bottom-right' }
 </script>
 
 <template>
-  <UApp :toaster="toaster">
+  <PApp :toaster="toaster">
     <NuxtPage />
-  </UApp>
+  </PApp>
 </template>
 ```
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'toast-example'
@@ -240,13 +240,13 @@ const toaster = { duration: 5000 }
 </script>
 
 <template>
-  <UApp :toaster="toaster">
+  <PApp :toaster="toaster">
     <NuxtPage />
-  </UApp>
+  </PApp>
 </template>
 ```
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'toast-example'
@@ -270,13 +270,13 @@ const toaster = { max: 3 }
 </script>
 
 <template>
-  <UApp :toaster="toaster">
+  <PApp :toaster="toaster">
     <NuxtPage />
-  </UApp>
+  </PApp>
 </template>
 ```
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'toast-example'
@@ -300,9 +300,9 @@ const toaster = { expand: true }
 </script>
 
 <template>
-  <UApp :toaster="toaster">
+  <PApp :toaster="toaster">
     <NuxtPage />
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -310,7 +310,7 @@ const toaster = { expand: true }
 You can hover over the toasts to expand them. This will also pause the timer of the toasts.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'toast-example'
@@ -328,20 +328,20 @@ In this example, we use the `AppConfig` to configure the `expand` prop of the `T
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

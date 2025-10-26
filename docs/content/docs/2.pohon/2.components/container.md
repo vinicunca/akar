@@ -15,7 +15,7 @@ Use the default slot to center and constrain the width of your content.
 Its max width is controlled by the `--ui-container` CSS variable.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 name: 'container-example'
 props:
@@ -27,16 +27,16 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

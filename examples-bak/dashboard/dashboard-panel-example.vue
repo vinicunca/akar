@@ -9,7 +9,7 @@
     </template>
 
     <template #body>
-      <Placeholder class="h-full" />
+      <CorePlaceholder class="h-full" />
     </template>
   </UDashboardPanel>
 </template>

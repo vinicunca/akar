@@ -9,7 +9,7 @@ links:
     target: _blank
   - label: Listbox
     icon: i-custom-akar
-    to: https://akar.com/docs/components/listbox
+    to: /docs/akar/components/listbox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/CommandPalette.vue
@@ -112,7 +112,7 @@ Each group contains an `items` array of objects that define the commands. Each i
 - `children?: CommandPaletteItem[]`{lang="ts-type"}
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
@@ -242,7 +242,7 @@ props:
 Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::
 
-### Placeholder
+### CorePlaceholder
 
 Use the `placeholder` prop to change the placeholder text.
 
@@ -304,7 +304,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.search` key.
@@ -383,7 +383,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
@@ -430,7 +430,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronRight` key.
@@ -505,7 +505,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
@@ -621,7 +621,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
@@ -708,7 +708,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.arrowLeft` key.
@@ -757,7 +757,7 @@ props:
 
 You can control the selected item(s) by using the `default-value` prop or the `v-model` directive, by using the `onSelect` field on each item or by using the `@update:model-value` event.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-select-example'
@@ -771,7 +771,7 @@ props:
 
 Use the `v-model:search-term` directive to control the search term.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-search-term-example'
@@ -789,7 +789,7 @@ This example uses the `@update:model-value` event to reset the search term when 
 
 You can create hierarchical menus by using the `children` property in items. When an item has children, it will automatically display a chevron icon and enable navigation into a submenu.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 prettier: true
@@ -811,7 +811,7 @@ When navigating into a submenu:
 
 You can fetch items from an API and use them in the CommandPalette.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-fetch-example'
@@ -825,7 +825,7 @@ props:
 
 You can set the `ignoreFilter` field to `true` on a group to disable the internal search and use your own search logic.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-ignore-filter-example'
@@ -843,7 +843,7 @@ This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refde
 
 You can use the `postFilter` field on a group to filter items after the search happened.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-post-filter-example'
@@ -879,7 +879,7 @@ The `fuseOptions` are the options of [Fuse.js](https://www.fusejs.io/api/options
 
 You can for example set `{ fuseOptions: { includeMatches: true } }`{lang="ts-type"} to highlight the search term in the items.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-fuse-example'
@@ -897,7 +897,7 @@ Use the `virtualize` prop to enable virtualization for large lists as a boolean 
 When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-virtualize-example'
@@ -911,7 +911,7 @@ props:
 
 You can use the CommandPalette component inside a [Popover](/docs/components/popover)'s content.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'popover-command-palette-example'
@@ -924,7 +924,7 @@ props:
 
 You can use the CommandPalette component inside a [Modal](/docs/components/modal)'s content.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'modal-command-palette-example'
@@ -937,7 +937,7 @@ props:
 
 You can use the CommandPalette component inside a [Drawer](/docs/components/drawer)'s content.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'drawer-command-palette-example'
@@ -950,7 +950,7 @@ props:
 
 When using the `close` prop, you can listen to the `update:open` event when the button is clicked.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-open-example'
@@ -967,7 +967,7 @@ This can be useful when using the CommandPalette inside a [`Modal`](/docs/compon
 
 Use the `#footer` slot to add custom content at the bottom of the CommandPalette, such as keyboard shortcuts help or additional actions.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-footer-slot-example'
@@ -993,7 +993,7 @@ You will have access to the following slots:
 - `#{{ group.slot }}-label`{lang="ts-type"}
 - `#{{ group.slot }}-trailing`{lang="ts-type"}
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'command-palette-custom-slot-example'
@@ -1011,20 +1011,20 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

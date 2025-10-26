@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { StepperItem } from '@nuxt/ui'
+import type { StepperItem } from 'pohon-ui'
 import { onMounted, ref } from 'vue'
 
 const items: StepperItem[] = [
@@ -30,9 +30,9 @@ onMounted(() => {
 <template>
   <UStepper v-model="active" :items="items" class="w-full">
     <template #content="{ item }">
-      <Placeholder class="aspect-video">
+      <CorePlaceholder class="aspect-video">
         This is the {{ item?.title }} step.
-      </Placeholder>
+      </CorePlaceholder>
     </template>
   </UStepper>
 </template>

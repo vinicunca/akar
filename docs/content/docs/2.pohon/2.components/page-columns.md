@@ -12,7 +12,7 @@ links:
 
 The PageColumns component displays content in a responsive multi-column layout. It works well with [PageCard](/docs/components/page-card) components or any other elements, adapting from single column on mobile to multiple columns on larger screens.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'page-columns-example'
@@ -24,16 +24,16 @@ class: 'p-8'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

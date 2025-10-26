@@ -4,7 +4,7 @@ category: data
 links:
   - label: Tree
     icon: i-custom-akar
-    to: https://akar.com/docs/components/tree
+    to: /docs/akar/components/tree
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Tree.vue
@@ -63,7 +63,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void`{lang="ts-type"}
 - `onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`{lang="ts-type"}
 
 ::note
 A unique identifier is required for each item. The component will use the `label` prop as identifier if no `get-key` is provided. Ideally you should provide a `get-key` function prop to return a unique identifier. Alternatively, you can use the `labelKey` prop to specify which property to use as the unique identifier.
@@ -325,7 +325,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
@@ -380,7 +380,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize these icons globally in your `app.config.ts` under `ui.icons.folder` and `ui.icons.folderOpen` keys.
@@ -449,7 +449,7 @@ You can also disable individual items using `item.disabled`.
 
 You can control the selected item(s) by using the `default-value` prop or the `v-model` directive.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'tree-model-value-example'
 collapse: true
@@ -460,7 +460,7 @@ props:
 
 If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property or the global `select` event:
 
-::component-example
+::docs-pohon-example
 ---
 name: 'tree-on-select-example'
 collapse: true
@@ -477,7 +477,7 @@ This lets you expand or collapse a parent item without selecting it.
 
 You can control the expanded items by using the `default-expanded` prop or the `v-model` directive.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'tree-expanded-example'
 collapse: true
@@ -488,7 +488,7 @@ props:
 
 If you want to prevent an item from being expanded, you can use the `item.onToggle()`{lang="ts-type"} property or the global `toggle` event:
 
-::component-example
+::docs-pohon-example
 ---
 name: 'tree-on-toggle-example'
 collapse: true
@@ -505,7 +505,7 @@ This lets you select a parent item without expanding or collapsing its children.
 
 You can use the `item-leading` slot to add a [Checkbox](/docs/components/checkbox) to the items. Use the `multiple`, `propagate-select` and `bubble-select` props to enable multi-selection with parent-child relationship and the `select` and `toggle` events to control the selected and expanded state of the items.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'tree-checkbox-items-example'
 collapse: true
@@ -522,7 +522,7 @@ This example uses the `as` prop to change the items from `button` to `div` as th
 
 Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Tree. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'tree-drag-and-drop-example'
 ---
@@ -540,7 +540,7 @@ Use the `virtualize` prop to enable virtualization for large lists as a boolean 
 When virtualization is enabled, the tree structure is flattened, similar to setting the `nested` prop to `false`.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'tree-virtualize-example'
@@ -561,7 +561,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-label`{lang="ts-type"}
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
 
-::component-example
+::docs-pohon-example
 ---
 name: 'tree-custom-slot-example'
 collapse: true
@@ -574,20 +574,20 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

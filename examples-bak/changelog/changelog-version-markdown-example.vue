@@ -68,7 +68,7 @@ const version = {
 </script>
 
 <template>
-  <UChangelogVersion v-bind="version" :ui="{ container: 'max-w-lg' }" class="w-full">
+  <UChangelogVersion v-bind="version" :pohon="{ container: 'max-w-lg' }" class="w-full">
     <template #body>
       <MDC :value="version.content" />
     </template>

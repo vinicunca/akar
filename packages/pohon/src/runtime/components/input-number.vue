@@ -57,7 +57,7 @@ export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelVal
   modelModifiers?: Pick<ModelModifiers, 'optional'>;
   /**
    * The locale to use for formatting and parsing numbers.
-   * @defaultValue UApp.locale.code
+   * @defaultValue PApp.locale.code
    */
   locale?: string;
   class?: any;

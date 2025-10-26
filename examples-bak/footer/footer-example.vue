@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from 'pohon-ui'
 
 const items: NavigationMenuItem[] = [{
   label: 'Figma Kit',
@@ -24,7 +24,7 @@ const items: NavigationMenuItem[] = [{
       </p>
     </template>
 
-    <UNavigationMenu :items="items" variant="link" />
+    <PNavigationMenu :items="items" variant="link" />
 
     <template #right>
       <UButton

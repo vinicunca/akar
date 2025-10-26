@@ -65,7 +65,7 @@ Use the `close` prop to display a [Button](/docs/components/button) to dismiss t
 A `close` event will be emitted when the close button is clicked.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 iframe:
   style: 'height: 48px;'
@@ -90,7 +90,7 @@ When closed, `banner-${id}` will be stored in the local storage to prevent it fr
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
 
-::component-example
+::docs-pohon-example
 ---
 iframe:
   style: 'height: 48px;'
@@ -114,7 +114,7 @@ props:
 
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
@@ -186,7 +186,7 @@ Use the Banner component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{3}
 <template>
-  <UApp>
+  <PApp>
     <UBanner icon="i-lucide-construction" title="Nuxt UI v4 has been released!" />
 
     <UHeader />
@@ -198,7 +198,7 @@ Use the Banner component in your `app.vue` or in a layout:
     </UMain>
 
     <UFooter />
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -206,20 +206,20 @@ Use the Banner component in your `app.vue` or in a layout:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

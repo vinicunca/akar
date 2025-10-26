@@ -19,6 +19,18 @@ const DATA_ATTRIBUTES = {
     attribute: '[data-orientation]',
     values: ['horizontal', 'vertical'],
   },
+  motion: {
+    attribute: '[data-motion]',
+    values: ['from-start', 'from-end', 'to-start', 'to-end'],
+  },
+  active: {
+    attribute: '[data-active]',
+    values: 'Present when active',
+  },
+  visible: {
+    attribute: '[data-visible]',
+    values: ['visible', 'hidden'],
+  },
 };
 
 const propData = computed(() => {

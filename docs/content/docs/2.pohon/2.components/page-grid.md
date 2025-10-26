@@ -12,7 +12,7 @@ links:
 
 The PageGrid component provides a responsive grid layout for displaying [PageCard](/docs/components/page-card) components or any other elements, automatically adjusting from 1 to 3 columns based on screen size.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'page-grid-example'
 class: 'p-8'
@@ -21,7 +21,7 @@ class: 'p-8'
 
 You can also use it to display a list of cards in a bento style layout by using `col-span-*` and `row-span-*` utility classes.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'page-grid-bento-example'
@@ -33,16 +33,16 @@ class: 'p-8'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

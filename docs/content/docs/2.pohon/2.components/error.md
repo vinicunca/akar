@@ -110,13 +110,13 @@ const props = defineProps<{
 </script>
 
 <template>
-  <UApp>
+  <PApp>
     <UHeader />
 
     <UError :error="error" />
 
     <UFooter />
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -146,16 +146,16 @@ if (!page.value) {
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

@@ -15,7 +15,7 @@ links:
 
 The Table component is built on top of [TanStack Table](https://tanstack.com/table/latest) and is powered by the [useVueTable](https://tanstack.com/table/latest/docs/framework/vue/vue-table#usevuetable) composable to provide a flexible and fully type-safe API. *Some features of TanStack Table are not supported yet, we'll add more over time.*
 
-::component-example
+::docs-pohon-example
 ---
 source: false
 name: 'table-example'
@@ -93,7 +93,7 @@ In order to render components or other HTML elements, you will need to use the V
 You can also use slots to customize the header and data cells of the table.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -118,7 +118,7 @@ Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/
 - `style`:
   - `tr`: [The style to apply to the `tr` element.]{class="text-muted"}
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -239,7 +239,7 @@ props:
 
 You can add a new column that renders a [DropdownMenu](/docs/components/dropdown-menu) component inside the `cell` to render row actions.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -259,7 +259,7 @@ You can add a new column that renders a [Button](/docs/components/button) compon
 You need to define the `#expanded` slot to render the expanded content which will receive the row as a parameter.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -291,7 +291,7 @@ You can group rows based on a given column value and show/hide sub rows via some
 * Use `aggregateFn` on column definition to define how to aggregate the rows.
 * `aggregatedCell` renderer on column definition only works if there is no `cell` renderer.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -307,7 +307,7 @@ class: '!p-0'
 
 You can add a new column that renders a [Checkbox](/docs/components/checkbox) component inside the `header` and `cell` to select rows using the TanStack Table [Row Selection APIs](https://tanstack.com/table/latest/docs/api/features/row-selection).
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -331,7 +331,7 @@ You can add a `@select` listener to make rows clickable with or without a checkb
 The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -355,7 +355,7 @@ You can add a `@contextmenu` listener to make rows right clickable and wrap the 
 The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -375,7 +375,7 @@ You can add a `@hover` listener to make rows hoverable and use a [Popover](/docs
 The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -395,7 +395,7 @@ This example is similar as the Popover [with following cursor example](/docs/com
 
 You can add a `footer` property to the column definition to render a footer for the column.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -411,7 +411,7 @@ class: '!p-0'
 
 You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/latest/docs/api/features/sorting).
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -429,7 +429,7 @@ You can use the `sorting` prop to control the sorting state of the columns (can 
 
 You can also create a reusable component to make any column header sortable.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -453,7 +453,7 @@ You can update a column `header` to render a [Button](/docs/components/button) c
 A pinned column will become sticky on the left or right side of the table.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -473,7 +473,7 @@ You can use the `column-pinning` prop to control the pinning state of the column
 
 You can use a [DropdownMenu](/docs/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -493,7 +493,7 @@ You can use the `column-visibility` prop to control the visibility state of the 
 
 You can use an [Input](/docs/components/input) component to filter per column the rows using the TanStack Table [Column Filtering APIs](https://tanstack.com/table/latest/docs/api/features/column-filtering).
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -513,7 +513,7 @@ You can use the `column-filters` prop to control the filters state of the column
 
 You can use an [Input](/docs/components/input) component to filter the rows using the TanStack Table [Global Filtering APIs](https://tanstack.com/table/latest/docs/api/features/global-filtering).
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -532,7 +532,7 @@ You can use a [Pagination](/docs/components/pagination) component to control the
 
 There are different pagination approaches as explained in [Pagination Guide](https://tanstack.com/table/latest/docs/guide/pagination#pagination-guide). In this example, we use client-side pagination so we need to manually pass `getPaginationRowModel()`{lang="ts-type"} function.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -549,7 +549,7 @@ You can use the `pagination` prop to control the pagination state (can be binded
 
 You can fetch data from an API and use them in the Table.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -562,7 +562,7 @@ class: '!p-0'
 
 If you use server-side pagination, you can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/#useinfinitescroll) composable to load more data when scrolling.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -580,10 +580,10 @@ class: '!p-0'
 You can use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Table. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
 ::note
-Since the table ref doesn't expose the tbody element, add a unique class to it via the `:ui` prop to target it with `useSortable` (e.g. `:ui="{ tbody: 'my-table-tbody' }"`).
+Since the table ref doesn't expose the tbody element, add a unique class to it via the `:pohon` prop to target it with `useSortable` (e.g. `:pohon="{ tbody: 'my-table-tbody' }"`).
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -603,7 +603,7 @@ Use the `virtualize` prop to enable virtualization for large datasets as a boole
 When virtualization is enabled, the divider between rows and sticky properties are not supported.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -621,7 +621,7 @@ A height constraint is required on the table for virtualization to work properly
 You can use the `get-sub-rows` prop to display hierarchical (tree) data in the table.
 For example, if your data objects have a `children` array, set `:get-sub-rows="row => row.children"` to enable expandable rows.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -640,7 +640,7 @@ Use the `#<column>-header` slot to customize the header of a column. You will ha
 
 Use the `#<column>-cell` slot to customize the cell of a column. You will have access to the `cell`, `column`, `getValue`, `renderValue`, `row`, and `table` properties in the slot scope.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -653,11 +653,11 @@ class: '!p-0'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Expose
 
@@ -682,8 +682,8 @@ This will give you access to the following:
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

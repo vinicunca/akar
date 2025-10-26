@@ -27,7 +27,7 @@ const open = ref(props.open);
       <AComboboxInput
         v-bind="props.input"
         class="text-grass11 outline-none bg-transparent placeholder-gray-400"
-        placeholder="Placeholder..."
+        placeholder="CorePlaceholder..."
       />
       <AComboboxTrigger>
         <Icon

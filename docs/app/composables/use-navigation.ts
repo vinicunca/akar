@@ -12,20 +12,16 @@ const CATEGORIES = {
         title: 'Element',
       },
       {
-        id: 'data',
-        title: 'Data',
+        id: 'form',
+        title: 'Form',
       },
       {
-        id: 'dates',
-        title: 'Dates & Time',
+        id: 'navigation',
+        title: 'Navigation',
       },
       {
         id: 'overlay',
         title: 'Overlay',
-      },
-      {
-        id: 'form',
-        title: 'Form',
       },
     ],
   },

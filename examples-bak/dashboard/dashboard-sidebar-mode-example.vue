@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from 'pohon-ui'
 
 defineProps<{
   mode: 'drawer' | 'slideover' | 'modal'
@@ -26,7 +26,7 @@ const items: NavigationMenuItem[] = [{
         <UIcon v-else name="i-simple-icons-nuxtdotjs" class="size-5 text-primary mx-auto" />
       </template>
 
-      <UNavigationMenu
+      <PNavigationMenu
         :items="items"
         orientation="vertical"
       />

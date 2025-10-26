@@ -33,7 +33,7 @@ props:
 ---
 ::
 
-### Placeholder
+### CorePlaceholder
 
 Use the `placeholder` prop to set a placeholder text.
 
@@ -208,7 +208,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
@@ -238,15 +238,15 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ### Expose
 
@@ -258,8 +258,8 @@ When accessing the component via a template ref, you can use the following:
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

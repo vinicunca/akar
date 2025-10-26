@@ -32,7 +32,7 @@ const filteredVege = computed(() => vegetables.filter((p) => contains({ string: 
     <AComboboxAnchor class="text-grass11 hover:bg-mauve3 data-[placeholder]:text-grass9 text-[13px] leading-none px-[15px] outline-none rounded bg-white inline-flex gap-[5px] h-[35px] min-w-[160px] shadow-[0_2px_10px] shadow-black/10 items-center justify-between focus:shadow-[0_0_0_2px] focus:shadow-black">
       <AComboboxInput
         class="text-grass11 outline-none bg-transparent placeholder-gray-400"
-        placeholder="Placeholder..."
+        placeholder="CorePlaceholder..."
       />
       <AComboboxTrigger>
         <Icon

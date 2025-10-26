@@ -173,7 +173,7 @@ props:
 
 Use the available slots to create a more complex empty state.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'empty-slots-example'
@@ -184,16 +184,16 @@ name: 'empty-slots-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

@@ -7,7 +7,7 @@ const value = ref('Backlog')
   <USelectMenu
     v-model="value"
     :items="items"
-    :ui="{
+    :pohon="{
       trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
     }"
     class="w-48"

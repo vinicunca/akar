@@ -45,16 +45,16 @@ Wrap your content with the `collapsible` component to display a [Collapsible](/d
 
 ### Props
 
-:component-props{prose}
+:docs-pohon-props{prose}
 
 ### Slots
 
-:component-slots{prose}
+:docs-pohon-slots{prose}
 
 ## Theme
 
-:component-theme{prose}
+:docs-pohon-theme{prose}
 
 ## Changelog
 
-:component-changelog{prefix="prose"}
+:docs-component-changelog{prefix="prose"}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from 'pohon-ui'
 
 const items: NavigationMenuItem[] = [{
   label: 'Home',
@@ -27,7 +27,7 @@ defineShortcuts({
       <UIcon v-else name="i-simple-icons-nuxtdotjs" class="size-5 text-primary mx-auto" />
     </template>
 
-    <UNavigationMenu
+    <PNavigationMenu
       :items="items"
       orientation="vertical"
     />

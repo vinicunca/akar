@@ -11,7 +11,7 @@ links:
 
 Use the `header`, `default` and `footer` slots to add content to the Card.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'card-example'
@@ -35,15 +35,15 @@ props:
 slots:
   header: |
 
-    <Placeholder class="h-8" />
+    <CorePlaceholder class="h-8" />
 
   default: |
 
-    <Placeholder class="h-32" />
+    <CorePlaceholder class="h-32" />
 
   footer: |
 
-    <Placeholder class="h-8" />
+    <CorePlaceholder class="h-8" />
 ---
 
 #header
@@ -60,16 +60,16 @@ slots:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

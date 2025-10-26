@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn } from 'pohon-ui'
 import { useInfiniteScroll } from '@vueuse/core'
 
 const UAvatar = resolveComponent('UAvatar')

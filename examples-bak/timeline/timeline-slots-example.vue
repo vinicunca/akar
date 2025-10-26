@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { TimelineItem } from '@nuxt/ui'
+import type { TimelineItem } from 'pohon-ui'
 import { useTimeAgo } from '@vueuse/core'
 
 const items = [{
@@ -42,7 +42,7 @@ const items = [{
   <UTimeline
     :items="items"
     size="xs"
-    :ui="{
+    :pohon="{
       date: 'float-end ms-1',
       description: 'px-3 py-2 ring ring-default mt-2 rounded-md text-default'
     }"

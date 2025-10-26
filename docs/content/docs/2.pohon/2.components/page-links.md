@@ -41,7 +41,7 @@ Use the `links` prop as an array of objects with the following properties:
 - `label: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
@@ -108,7 +108,7 @@ Use the PageLinks component in the `bottom` slot of the ContentToc component to 
 
 ```vue [pages/\[...slug\\].vue]{48-52}
 <script setup lang="ts">
-import type { PageLink } from '@nuxt/ui'
+import type { PageLink } from 'pohon-ui'
 
 const route = useRoute()
 
@@ -170,16 +170,16 @@ const links = computed<PageLink[]>(() => [{
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

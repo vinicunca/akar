@@ -3,7 +3,7 @@ const open = ref(false)
 </script>
 
 <template>
-  <UPopover v-model:open="open" :dismissible="false" :ui="{ content: 'p-4' }">
+  <UPopover v-model:open="open" :dismissible="false" :pohon="{ content: 'p-4' }">
     <UButton label="Open" color="neutral" variant="subtle" />
 
     <template #content>
@@ -15,7 +15,7 @@ const open = ref(false)
         <UButton color="neutral" variant="ghost" icon="i-lucide-x" @click="open = false" />
       </div>
 
-      <Placeholder class="size-full min-h-48" />
+      <CorePlaceholder class="size-full min-h-48" />
     </template>
   </UPopover>
 </template>

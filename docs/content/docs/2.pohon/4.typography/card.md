@@ -39,16 +39,16 @@ Best suited for small teams, startups and agencies with up to 5 developers.
 
 ### Props
 
-:component-props{prose}
+:docs-pohon-props{prose}
 
 ### Slots
 
-:component-slots{prose}
+:docs-pohon-slots{prose}
 
 ## Theme
 
-:component-theme{prose}
+:docs-pohon-theme{prose}
 
 ## Changelog
 
-:component-changelog{prefix="prose"}
+:docs-component-changelog{prefix="prose"}

@@ -45,16 +45,16 @@ Wrap any content with the `code-preview` component to display a live preview alo
 
 ### Props
 
-:component-props{prose}
+:docs-pohon-props{prose}
 
 ### Slots
 
-:component-slots{prose}
+:docs-pohon-slots{prose}
 
 ## Theme
 
-:component-theme{prose}
+:docs-pohon-theme{prose}
 
 ## Changelog
 
-:component-changelog{prefix="prose"}
+:docs-component-changelog{prefix="prose"}

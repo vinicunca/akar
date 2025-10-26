@@ -10,25 +10,25 @@ links:
 
 ## Usage
 
-This component implements Reka UI [ConfigProvider](https://akar.com/docs/utilities/config-provider) to provide global configuration to all components:
+This component implements Akar's [ConfigProvider](/docs/akar/utilities/config-provider) to provide global configuration to all components:
 
 - Enables all primitives to inherit global reading direction.
 - Enables changing the behavior of scroll body when setting body lock.
 - Much more controls to prevent layout shifts.
 
-It's also using [ToastProvider](https://akar.com/docs/components/toast#provider) and [TooltipProvider](https://akar.com/docs/components/tooltip#provider) to provide global toasts and tooltips, as well as programmatic modals and slideovers.
+It's also using [ToastProvider](/docs/akar/components/toast#provider) and [TooltipProvider](/docs/akar/components/tooltip#provider) to provide global toasts and tooltips, as well as programmatic modals and slideovers.
 
 Wrap your entire application with the App component in your `app.vue` file:
 
 ```vue [app.vue]
 <template>
-  <UApp>
+  <PApp>
     <NuxtPage />
-  </UApp>
+  </PApp>
 </template>
 ```
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/i18n/nuxt#locale"}
 Learn how to use the `locale` prop to change the locale of your app.
@@ -44,12 +44,12 @@ Learn how to use the `locale` prop to change the locale of your app.
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

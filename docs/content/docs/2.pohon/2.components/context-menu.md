@@ -5,7 +5,7 @@ category: overlay
 links:
   - label: ContextMenu
     icon: i-custom-akar
-    to: https://akar.com/docs/components/context-menu
+    to: /docs/akar/components/context-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ContextMenu.vue
@@ -99,7 +99,7 @@ Use the `items` prop as an array of objects with the following properties:
 - [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: ContextMenuItem[] | ContextMenuItem[][]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
@@ -260,7 +260,7 @@ slots:
 
 You can use the `type` property with `checkbox` and use the `checked` / `onUpdateChecked` properties to control the checked state of the item.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'context-menu-checkbox-items-example'
@@ -275,7 +275,7 @@ To ensure reactivity for the `checked` state of items, it's recommended to wrap 
 
 You can use the `color` property to highlight certain items with a color.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'context-menu-color-items-example'
 ---
@@ -292,7 +292,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-label`{lang="ts-type"}
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
 
-::component-example
+::docs-pohon-example
 ---
 name: 'context-menu-custom-slot-example'
 ---
@@ -376,20 +376,20 @@ In this example, :kbd{value="meta"} :kbd{value="S"}, :kbd{value="shift"} :kbd{va
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

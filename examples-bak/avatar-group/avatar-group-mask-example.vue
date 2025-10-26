@@ -1,5 +1,5 @@
 <template>
-  <UAvatarGroup :ui="{ base: 'rounded-none squircle' }">
+  <UAvatarGroup :pohon="{ base: 'rounded-none squircle' }">
     <UAvatar
       src="https://github.com/benjamincanac.png"
       alt="Benjamin Canac"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DropdownMenuItem } from '@nuxt/ui'
+import type { DropdownMenuItem } from 'pohon-ui'
 
 const items = [
   {
@@ -17,7 +17,7 @@ const items = [
 </script>
 
 <template>
-  <UDropdownMenu :items="items" :ui="{ content: 'w-48' }">
+  <UDropdownMenu :items="items" :pohon="{ content: 'w-48' }">
     <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
 
     <template #profile-trailing>

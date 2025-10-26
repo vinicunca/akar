@@ -67,14 +67,14 @@ You can display logos in two ways:
 
 ::tabs{class="gap-0"}
 
-::component-example{label="With items"}
+::docs-pohon-example{label="With items"}
 ---
 name: 'page-logos-with-items'
 class: '[&>div]:my-10'
 ---
 ::
 
-::component-example{label="With slot"}
+::docs-pohon-example{label="With slot"}
 ---
 name: 'page-logos-with-slot'
 class: '[&>div]:my-10'
@@ -117,16 +117,16 @@ When you use `marquee` mode, you can customize its behavior by passing props. Fo
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

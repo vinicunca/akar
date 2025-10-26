@@ -5,7 +5,7 @@ category: overlay
 links:
   - label: DropdownMenu
     icon: i-custom-akar
-    to: https://akar.com/docs/components/dropdown-menu
+    to: /docs/akar/components/dropdown-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/DropdownMenu.vue
@@ -98,7 +98,7 @@ Use the `items` prop as an array of objects with the following properties:
 - [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
 - `children?: DropdownMenuItem[] | DropdownMenuItem[][]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
@@ -347,7 +347,7 @@ slots:
 
 You can use the `type` property with `checkbox` and use the `checked` / `onUpdateChecked` properties to control the checked state of the item.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'dropdown-menu-checkbox-items-example'
@@ -362,7 +362,7 @@ To ensure reactivity for the `checked` state of items, it's recommended to wrap 
 
 You can use the `color` property to highlight certain items with a color.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'dropdown-menu-color-items-example'
 ---
@@ -372,7 +372,7 @@ name: 'dropdown-menu-color-items-example'
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'dropdown-menu-open-example'
 ---
@@ -393,7 +393,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-label`{lang="ts-type"}
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
 
-::component-example
+::docs-pohon-example
 ---
 name: 'dropdown-menu-custom-slot-example'
 ---
@@ -405,9 +405,9 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 
 ### With trigger content width
 
-You can expand the content to the full width of its button by adding the `w-(--reka-dropdown-menu-trigger-width)` class on the `ui.content` slot.
+You can expand the content to the full width of its button by adding the `w-(--akar-dropdown-menu-trigger-width)` class on the `ui.content` slot.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'dropdown-menu-content-width-example'
@@ -422,7 +422,7 @@ export default defineAppConfig({
   ui: {
     dropdownMenu: {
       slots: {
-        content: 'w-(--reka-dropdown-menu-trigger-width)'
+        content: 'w-(--akar-dropdown-menu-trigger-width)'
       }
     }
   }
@@ -438,7 +438,7 @@ Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility 
 
 ```vue
 <script setup lang="ts">
-import type { DropdownMenuItem } from '@nuxt/ui'
+import type { DropdownMenuItem } from 'pohon-ui'
 
 const items: DropdownMenuItem[] = [{
   label: 'Invite users',
@@ -479,20 +479,20 @@ In this example, :kbd{value="meta"} :kbd{value="E"}, :kbd{value="meta"} :kbd{val
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

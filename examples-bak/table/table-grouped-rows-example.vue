@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn } from 'pohon-ui'
 import { getGroupedRowModel } from '@tanstack/vue-table'
 import type { GroupingOptions } from '@tanstack/vue-table'
 
-const UBadge = resolveComponent('UBadge')
+const PBadge = resolveComponent('PBadge')
 
 type Account = {
   id: string
@@ -167,7 +167,7 @@ const grouping_options = ref<GroupingOptions>({
     :columns="columns"
     :grouping="['account_id', 'status']"
     :grouping-options="grouping_options"
-    :ui="{
+    :pohon="{
       root: 'min-w-full',
       td: 'empty:p-0' // helps with the colspaned row added for expand slot
     }"
@@ -190,14 +190,14 @@ const grouping_options = ref<GroupingOptions>({
         <strong v-if="row.groupingColumnId === 'account_id'">{{
           row.original.account.name
         }}</strong>
-        <UBadge
+        <PBadge
           v-else-if="row.groupingColumnId === 'status'"
           :color="getColorByStatus(row.original.status)"
           class="capitalize"
           variant="subtle"
         >
           {{ row.original.status }}
-        </UBadge>
+        </PBadge>
       </div>
     </template>
   </UTable>

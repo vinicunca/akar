@@ -3,9 +3,8 @@ title: NavigationMenu
 description: A list of links that can be displayed horizontally or vertically.
 category: navigation
 links:
-  - label: NavigationMenu
-    icon: i-custom-akar
-    to: https://akar.com/docs/components/navigation-menu
+  - label: Akar
+    to: /docs/akar/components/navigation-menu
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/NavigationMenu.vue
@@ -98,7 +97,7 @@ props:
     - label: Help
       icon: i-lucide-circle-help
       disabled: true
-  class: 'w-full justify-center'
+  class: 'w-full akar:justify-center bg-background'
 ---
 ::
 
@@ -121,7 +120,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `children?: NavigationMenuChildItem[]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
 
 You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
 
@@ -707,7 +706,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
@@ -1198,7 +1197,7 @@ You can use the `#content` slot to customize the content of the popover in the `
 
 You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'navigation-menu-model-value-example'
@@ -1225,7 +1224,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
 - `#{{ item.slot }}-content`{lang="ts-type"}
 
-::component-example
+::docs-pohon-example
 ---
 name: 'navigation-menu-custom-slot-example'
 ---
@@ -1239,7 +1238,7 @@ You can also use the `#item`, `#item-leading`, `#item-label`, `#item-trailing` a
 
 Use the `#item-content` slot or the `slot` property (`#{{ item.slot }}-content`) to customize the content of a specific item.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'navigation-menu-content-slot-example'
@@ -1247,27 +1246,35 @@ name: 'navigation-menu-content-slot-example'
 ::
 
 ::note
-In this example, we add the `sm:w-(--reka-navigation-menu-viewport-width)` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
+In this example, we add the `sm:w-(--akar-navigation-menu-viewport-width)` class on the `viewport` to have a dynamic width. This requires to set a width on the content's first child.
 ::
 
 ## API
 
 ### Props
 
-:component-props
-
-### Slots
-
-:component-slots
+:docs-pohon-props
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
+
+### Slots
+
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
+
+### Anatomy
+
+<!-- TODO: Create anatomy images for this component -->
+Here is the anatomy of themeable parts of the Accordion component:
+
+Coming soon...
+
 
 ## Changelog
 
-:component-changelog
+::docs-component-changelog

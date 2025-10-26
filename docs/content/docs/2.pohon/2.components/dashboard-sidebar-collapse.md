@@ -82,12 +82,12 @@ definePageMeta({
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

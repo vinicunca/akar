@@ -5,7 +5,7 @@ category: form
 links:
   - label: Combobox
     icon: i-custom-akar
-    to: https://akar.com/docs/components/combobox
+    to: /docs/akar/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputMenu.vue
@@ -75,7 +75,7 @@ You can also pass an array of objects with the following properties:
 - `disabled?: boolean`{lang="ts-type"}
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
-- `ui?: { tagsItem?: ClassNameValue, tagsItemText?: ClassNameValue, tagsItemDelete?: ClassNameValue, tagsItemDeleteIcon?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
+- `pohon?: { tagsItem?: ClassNameValue, tagsItemText?: ClassNameValue, tagsItemDelete?: ClassNameValue, tagsItemDeleteIcon?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
 ::docs-pohon-preview
 ---
@@ -215,7 +215,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
@@ -227,7 +227,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 :::
 ::
 
-### Placeholder
+### CorePlaceholder
 
 Use the `placeholder` prop to set a placeholder text.
 
@@ -439,7 +439,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
@@ -476,7 +476,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
@@ -564,7 +564,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
@@ -641,7 +641,7 @@ props:
 
 You can use the `icon` property to display an [Icon](/docs/components/icon) inside the items.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'input-menu-items-icon-example'
@@ -656,7 +656,7 @@ You can also use the `#leading` slot to display the selected icon.
 
 You can use the `avatar` property to display an [Avatar](/docs/components/avatar) inside the items.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'input-menu-items-avatar-example'
@@ -671,7 +671,7 @@ You can also use the `#leading` slot to display the selected avatar.
 
 You can use the `chip` property to display a [Chip](/docs/components/chip) inside the items.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'input-menu-items-chip-example'
@@ -686,7 +686,7 @@ In this example, the `#leading` slot is used to display the selected chip.
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'input-menu-open-example'
 ---
@@ -700,7 +700,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 You can use the `open-on-focus` or `open-on-click` props to open the menu when the input is focused or clicked.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'input-menu-open-focus-example'
 ---
@@ -710,7 +710,7 @@ name: 'input-menu-open-focus-example'
 
 Use the `v-model:search-term` directive to control the search term.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'input-menu-search-term-example'
 ---
@@ -720,7 +720,7 @@ name: 'input-menu-search-term-example'
 
 Here is an example with a rotating icon that indicates the open state of the InputMenu.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'input-menu-icon-example'
 ---
@@ -730,7 +730,7 @@ name: 'input-menu-icon-example'
 
 Use the `create-item` prop to enable users to add custom values that aren't in the predefined options.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'input-menu-create-item-example'
@@ -749,7 +749,7 @@ Use the `@create` event to handle the creation of the item. You will receive the
 
 You can fetch items from an API and use them in the InputMenu.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'input-menu-fetch-example'
@@ -760,7 +760,7 @@ name: 'input-menu-fetch-example'
 
 Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'input-menu-ignore-filter-example'
@@ -775,7 +775,7 @@ This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refde
 
 Use the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'input-menu-filter-fields-example'
@@ -790,7 +790,7 @@ Use the `virtualize` prop to enable virtualization for large lists as a boolean 
 When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'input-menu-virtualize-example'
@@ -801,7 +801,7 @@ name: 'input-menu-virtualize-example'
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'input-menu-content-width-example'
 collapse: true
@@ -828,7 +828,7 @@ export default defineAppConfig({
 
 This example demonstrates using the InputMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'input-menu-countries-example'
@@ -839,15 +839,15 @@ name: 'input-menu-countries-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ### Expose
 
@@ -859,8 +859,8 @@ When accessing the component via a template ref, you can use the following:
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

@@ -34,7 +34,7 @@ These chat components are designed to be used with the **AI SDK v5** from **Verc
 
 You can use the ChatPalette component inside a [Modal](/docs/components/modal)'s content.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 iframe:
@@ -49,7 +49,7 @@ name: 'chat-palette-modal-example'
 
 You can use the ChatPalette component conditionally inside [ContentSearch](/docs/components/content-search)'s content to display a chatbot interface when a user selects an item.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 iframe:
@@ -64,16 +64,16 @@ name: 'chat-palette-content-search-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

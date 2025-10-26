@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UserProps } from '@nuxt/ui'
+import type { UserProps } from 'pohon-ui'
 
 const members: UserProps[] = [
   {
@@ -71,13 +71,13 @@ const members: UserProps[] = [
           v-for="(member, index) in members"
           :key="index"
           :to="member.to"
-          :ui="{ container: 'sm:p-4' }"
+          :pohon="{ container: 'sm:p-4' }"
         >
           <UUser
             :avatar="member.avatar"
             :name="member.name"
             :description="member.description"
-            :ui="{ name: 'truncate' }"
+            :pohon="{ name: 'truncate' }"
           />
         </UPageCard>
       </div>

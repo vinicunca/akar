@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FooterColumn } from '@nuxt/ui'
+import type { FooterColumn } from 'pohon-ui'
 
 const columns: FooterColumn[] = [{
   label: 'Community',

@@ -61,13 +61,13 @@ const versions = [{
       v-bind="version"
       :badge="undefined"
       class="flex items-start"
-      :ui="{
+      :pohon="{
         container: 'max-w-lg me-0',
         indicator: 'sticky top-(--ui-header-height) pt-4 -mt-4 flex flex-col items-end'
       }"
     >
       <template #indicator>
-        <UBadge :label="version.badge" variant="soft" />
+        <PBadge :label="version.badge" variant="soft" />
 
         <span class="text-sm color-text-muted">{{ new Date(version.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }}</span>
       </template>

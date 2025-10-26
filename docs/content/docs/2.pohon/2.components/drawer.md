@@ -26,7 +26,7 @@ slots:
 
   content: |
 
-    <Placeholder class="h-48 m-4" />
+    <CorePlaceholder class="h-48 m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
@@ -53,7 +53,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-48" />
+    <CorePlaceholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
@@ -81,7 +81,7 @@ slots:
 
   body: |
 
-    <Placeholder class="h-48" />
+    <CorePlaceholder class="h-48" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
@@ -106,7 +106,7 @@ slots:
 
   content: |
 
-    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
+    <CorePlaceholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
@@ -132,7 +132,7 @@ slots:
 
   content: |
 
-    <Placeholder class="min-w-96 min-h-96 size-full m-4" />
+    <CorePlaceholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
@@ -157,7 +157,7 @@ slots:
 
   content: |
 
-    <Placeholder class="h-48 m-4" />
+    <CorePlaceholder class="h-48 m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
@@ -182,7 +182,7 @@ slots:
 
   content: |
 
-    <Placeholder class="h-48 m-4" />
+    <CorePlaceholder class="h-48 m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
@@ -207,7 +207,7 @@ slots:
 
   content: |
 
-    <Placeholder class="h-48 m-4" />
+    <CorePlaceholder class="h-48 m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
@@ -233,7 +233,7 @@ slots:
 
   content: |
 
-    <Placeholder class="h-48 m-4" />
+    <CorePlaceholder class="h-48 m-4" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
@@ -247,13 +247,13 @@ Make sure to add the `data-vaul-drawer-wrapper` directive to a parent element of
 
 ```vue [app.vue]
 <template>
-  <UApp>
+  <PApp>
     <div class="bg-default" data-vaul-drawer-wrapper>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
     </div>
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -276,7 +276,7 @@ export default defineNuxtConfig({
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'drawer-open-example'
@@ -295,7 +295,7 @@ This allows you to move the trigger outside of the Drawer or remove it entirely.
 
 Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'drawer-dismissible-example'
@@ -310,7 +310,7 @@ In this example, the `header` slot is used to add a close button which is not do
 
 Set the `overlay` and `modal` props to `false` alongside the `dismissible` prop to make the Drawer's background interactive without closing the Drawer.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'drawer-modal-example'
@@ -321,7 +321,7 @@ name: 'drawer-modal-example'
 
 You can render a [Modal](/docs/components/modal) component on desktop and a Drawer on mobile for example.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'drawer-responsive-example'
@@ -332,7 +332,7 @@ name: 'drawer-responsive-example'
 
 You can nest drawers within each other by using the `nested` prop.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 name: 'drawer-nested-example'
@@ -343,7 +343,7 @@ name: 'drawer-nested-example'
 
 Use the `#footer` slot to add content after the Drawer's body.
 
-::component-example
+::docs-pohon-example
 ---
 prettier: true
 collapse: true
@@ -355,7 +355,7 @@ name: 'drawer-footer-slot-example'
 
 You can use a [CommandPalette](/docs/components/command-palette) component inside the Drawer's content.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'drawer-command-palette-example'
@@ -366,20 +366,20 @@ name: 'drawer-command-palette-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

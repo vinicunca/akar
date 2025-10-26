@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TabsItem } from '@nuxt/ui'
+import type { TabsItem } from 'pohon-ui'
 
 const items: TabsItem[] = [{
   label: 'All',
@@ -17,7 +17,7 @@ const items: TabsItem[] = [{
     </template>
 
     <template #trailing>
-      <UBadge label="4" variant="subtle" />
+      <PBadge label="4" variant="subtle" />
     </template>
 
     <template #right>

@@ -30,7 +30,7 @@ This component does not have a single root element when using the `resizable` pr
 
 Use the `left`, `default` and `right` slots to customize the sidebar and the `body` or `content` slots to customize the sidebar menu.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'dashboard-sidebar-example'
@@ -68,7 +68,7 @@ props:
 slots:
   default: |
 
-    <Placeholder class="h-96" />
+    <CorePlaceholder class="h-96" />
 class: '!p-0 !justify-start'
 ---
 
@@ -103,7 +103,7 @@ props:
 slots:
   default: |
 
-    <Placeholder class="h-96" />
+    <CorePlaceholder class="h-96" />
 class: '!p-0 !justify-start'
 ---
 
@@ -137,7 +137,7 @@ props:
 slots:
   default: |
 
-    <Placeholder class="h-96" />
+    <CorePlaceholder class="h-96" />
 class: '!p-0 !justify-start'
 ---
 
@@ -178,7 +178,7 @@ props:
 slots:
   default: |
 
-    <Placeholder class="h-96" />
+    <CorePlaceholder class="h-96" />
 class: '!p-0 !justify-end'
 ---
 
@@ -195,7 +195,7 @@ Use the `body` slot to fill the menu body (under the header) or the `content` sl
 You can use the `menu` prop to customize the menu of the sidebar, it will adapt depending on the mode you choose.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 iframe:
@@ -226,7 +226,7 @@ Use the `toggle` prop to customize the [DashboardSidebarToggle](/docs/components
 
 You can pass any property from the [Button](/docs/components/button) component to customize it.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 iframe:
@@ -243,7 +243,7 @@ props:
 
 Use the `toggle-side` prop to change the side of the toggle button. Defaults to `left`.
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 iframe:
@@ -262,7 +262,7 @@ props:
 
 You can control the open state by using the `open` prop or the `v-model:open` directive.
 
-::component-example
+::docs-pohon-example
 ---
 iframe:
   height: 500px;
@@ -281,7 +281,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 You can control the collapsed state by using the `collapsed` prop or the `v-model:collapsed` directive.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'dashboard-sidebar-collapsed-example'
 class: '!p-0 !justify-start'
@@ -301,16 +301,16 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

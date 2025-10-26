@@ -92,7 +92,7 @@ If you're using VSCode and wish to get autocompletion for the classes `active-cl
 
 ### Props
 
-::component-props
+::docs-pohon-props
 ---
 ignore:
   - custom
@@ -101,12 +101,12 @@ ignore:
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

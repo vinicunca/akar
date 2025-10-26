@@ -66,7 +66,7 @@ provide('navigation', rootNavigation);
     }"
   >
     <NuxtLoadingIndicator
-      color="var(--akar-brand-primary)"
+      color="var(--akar-primary)"
       :height="2"
     />
 

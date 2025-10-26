@@ -15,7 +15,7 @@ links:
 
 Built on top of the [Form](/docs/components/form) component, the `AuthForm` component can be used in your pages or wrapped in a [PageCard](/docs/components/page-card).
 
-::component-example
+::docs-pohon-example
 ---
 name: 'auth-form-example'
 collapse: true
@@ -354,7 +354,7 @@ props:
 
 You can wrap the `AuthForm` component with the [PageCard](/docs/components/page-card) component to display it within a `login.vue` page for example.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'auth-form-page-example'
 collapse: true
@@ -365,15 +365,15 @@ collapse: true
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ### Expose
 
@@ -398,8 +398,8 @@ This gives you access to the following (exposed) properties:
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

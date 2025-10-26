@@ -138,4 +138,4 @@ You can use a CSS mask to display an Avatar with a custom shape instead of a sim
 
 ## Changelog
 
-:docs-component-changelog
+::docs-component-changelog

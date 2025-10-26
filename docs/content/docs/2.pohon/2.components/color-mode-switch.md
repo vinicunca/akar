@@ -21,7 +21,7 @@ The ColorModeSwitch component extends the [Switch](/docs/components/switch) comp
 
 ### With custom icons
 
-::framework-only
+::docs-framework-only
 #nuxt
 ::div
 
@@ -72,8 +72,8 @@ export default defineConfig({
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ## Changelog
 
-:component-changelog{prefix="color-mode"}
+:docs-component-changelog{prefix="color-mode"}

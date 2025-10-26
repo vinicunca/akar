@@ -5,7 +5,7 @@ category: form
 links:
   - label: InputTags
     icon: i-custom-akar
-    to: https://akar.com/docs/components/tags-input
+    to: /docs/akar/components/tags-input
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputTags.vue
@@ -39,7 +39,7 @@ props:
 ---
 ::
 
-### Placeholder
+### CorePlaceholder
 
 Use the `placeholder` prop to set a placeholder text.
 
@@ -179,7 +179,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
@@ -227,7 +227,7 @@ props:
 ---
 ::
 
-::framework-only
+::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
@@ -262,7 +262,7 @@ props:
 
 You can use the InputTags within a [FormField](/docs/components/form-field) component to display a label, help text, required indicator, etc.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'input-tags-form-field-example'
 ---
@@ -272,15 +272,15 @@ name: 'input-tags-form-field-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ### Expose
 
@@ -292,8 +292,8 @@ When accessing the component via a template ref, you can use the following:
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

@@ -9,7 +9,7 @@ const domain = ref(domains[0])
     <UInput
       v-model="value"
       placeholder="nuxt"
-      :ui="{
+      :pohon="{
         base: 'pl-14.5',
         leading: 'pointer-events-none'
       }"

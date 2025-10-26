@@ -4,7 +4,7 @@ category: form
 links:
   - label: Slider
     icon: i-custom-akar
-    to: https://akar.com/docs/components/slider
+    to: /docs/akar/components/slider
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Slider.vue
@@ -183,16 +183,16 @@ props:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

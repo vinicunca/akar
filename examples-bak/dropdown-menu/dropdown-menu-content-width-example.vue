@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DropdownMenuItem } from '@nuxt/ui'
+import type { DropdownMenuItem } from 'pohon-ui'
 
 const items: DropdownMenuItem[][] = [
   [
@@ -27,7 +27,7 @@ const items: DropdownMenuItem[][] = [
 </script>
 
 <template>
-  <UDropdownMenu :items="items" :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }">
+  <UDropdownMenu :items="items" :pohon="{ content: 'w-(--akar-dropdown-menu-trigger-width)' }">
     <UButton
       label="Open"
       class="w-46"

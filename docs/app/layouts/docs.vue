@@ -2,13 +2,39 @@
 import type { Ref } from '#imports';
 import type { ContentNavigationItem } from '@nuxt/content';
 import { PContainer, PMain } from '#components';
-import { inject, useNavigation, useRoute } from '#imports';
+import { inject, useNavigation, useRoute, watch } from '#imports';
+import { useDebounceFn } from '@vueuse/core';
 
 const route = useRoute();
 
 const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 
 const { navigationByCategory } = useNavigation(navigation!);
+
+function scrollToActiveItem() {
+  if (import.meta.server) {
+    return;
+  }
+  // Find the anchor tag inside the li tag and check if the href matches the current route
+  const activeElement = document.querySelector(`nav[data-akar="content-nav"] li a[href="${route.path}"]`) as HTMLElement;
+  if (activeElement) {
+    activeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',
+    });
+  }
+}
+
+const debouncedScroll = useDebounceFn(scrollToActiveItem, 320);
+
+watch(
+  () => route.path,
+  () => {
+    debouncedScroll();
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -21,6 +47,7 @@ const { navigationByCategory } = useNavigation(navigation!);
             <div class="relative">
               <PContentNavigation
                 :key="route.path"
+                data-akar="content-nav"
                 :navigation="navigationByCategory"
                 :pohon="{
                   linkTrailingBadge: 'font-semibold uppercase',

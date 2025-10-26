@@ -8,7 +8,7 @@ const maxLength = 15
     v-model="value"
     :maxlength="maxLength"
     aria-describedby="character-count"
-    :ui="{ trailing: 'pointer-events-none' }"
+    :pohon="{ trailing: 'pointer-events-none' }"
   >
     <template #trailing>
       <div

@@ -5,7 +5,7 @@ category: element
 links:
   - label: Calendar
     icon: i-custom-akar
-    to: https://akar.com/docs/components/calendar
+    to: /docs/akar/components/calendar
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Calendar.vue
@@ -195,7 +195,7 @@ props:
 
 Use the [Chip](/docs/components/chip) component to add events to specific days.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'calendar-events-example'
 ---
@@ -205,7 +205,7 @@ name: 'calendar-events-example'
 
 Use the `is-date-disabled` prop with a function to mark specific dates as disabled.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'calendar-disabled-dates-example'
 ---
@@ -215,7 +215,7 @@ name: 'calendar-disabled-dates-example'
 
 Use the `is-date-unavailable` prop with a function to mark specific dates as unavailable.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'calendar-unavailable-dates-example'
 ---
@@ -225,7 +225,7 @@ name: 'calendar-unavailable-dates-example'
 
 Use the `min-value` and `max-value` props to limit the dates.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'calendar-min-max-dates-example'
 ---
@@ -235,7 +235,7 @@ name: 'calendar-min-max-dates-example'
 
 You can use other calenders from `@internationalized/date` to implement a different calendar system.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'calendar-other-system-example'
 ---
@@ -249,7 +249,7 @@ You can check all the available calendars on `@internationalized/date` docs.
 
 You can control the calendar with external controls by manipulating the date passed in the `v-model`.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'calendar-external-controls-example'
 ---
@@ -259,7 +259,7 @@ name: 'calendar-external-controls-example'
 
 Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date picker.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'calendar-date-picker-example'
 ---
@@ -269,7 +269,7 @@ name: 'calendar-date-picker-example'
 
 Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date range picker.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'calendar-date-range-picker-example'
 ---
@@ -279,20 +279,20 @@ name: 'calendar-date-range-picker-example'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

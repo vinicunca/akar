@@ -17,7 +17,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 Use the `links` prop with the `page?.body?.toc?.links`{lang="ts-type"} you get when fetching a page.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'content-toc-example'
 props:
@@ -183,20 +183,20 @@ if (!page.value) {
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog{prefix="content"}
+:docs-component-changelog{prefix="content"}

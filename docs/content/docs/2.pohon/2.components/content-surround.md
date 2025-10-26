@@ -17,7 +17,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 Use the `surround` prop with the `surround`{lang="ts-type"} value you get when fetching a page surround.
 
-::component-example
+::docs-pohon-example
 ---
 name: 'content-surround-example'
 props:
@@ -91,16 +91,16 @@ if (!page.value) {
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog{prefix="content"}
+:docs-component-changelog{prefix="content"}

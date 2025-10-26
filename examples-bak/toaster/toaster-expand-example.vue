@@ -7,7 +7,7 @@ const appConfig = useAppConfig()
     <UFormField
       label="toaster.expand"
       size="sm"
-      :ui="{
+      :pohon="{
         wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-accented',
         label: 'color-text-muted px-2 py-1.5',
         container: 'mt-0'

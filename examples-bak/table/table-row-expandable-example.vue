@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
-import type { TableColumn } from '@nuxt/ui'
+import type { TableColumn } from 'pohon-ui'
 
 const UButton = resolveComponent('UButton')
-const UBadge = resolveComponent('UBadge')
+const PBadge = resolveComponent('PBadge')
 
 type Payment = {
   id: string
@@ -84,7 +84,7 @@ const columns: TableColumn<Payment>[] = [{
       refunded: 'neutral' as const
     })[row.getValue('status') as string]
 
-    return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
+    return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
   }
 }, {
   accessorKey: 'email',
@@ -112,7 +112,7 @@ const expanded = ref({ 1: true })
     v-model:expanded="expanded"
     :data="data"
     :columns="columns"
-    :ui="{ tr: 'data-[expanded=true]:bg-elevated/50' }"
+    :pohon="{ tr: 'data-[expanded=true]:bg-elevated/50' }"
     class="flex-1"
   >
     <template #expanded="{ row }">

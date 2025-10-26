@@ -22,7 +22,7 @@ The ContentSearch component extends the [CommandPalette](/docs/components/comman
 
 Use the `files` and `navigation` props with the `files`{lang="ts-type"} and `navigation`{lang="ts-type"} values you fetched using the `queryCollectionSearchSections` and `queryCollectionNavigation` composables from `@nuxt/content`.
 
-::component-example
+::docs-pohon-example
 ---
 iframe:
   height: 500px;
@@ -43,7 +43,7 @@ Use the `shortcut` prop to change the shortcut used in [defineShortcuts](/docs/c
 
 ```vue [app.vue]{6}
 <template>
-  <UApp>
+  <PApp>
     <ClientOnly>
       <LazyUContentSearch
         v-model:search-term="searchTerm"
@@ -53,7 +53,7 @@ Use the `shortcut` prop to change the shortcut used in [defineShortcuts](/docs/c
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -73,7 +73,7 @@ You can disable this behavior by setting the `color-mode` prop to `false`:
 
 ```vue [app.vue]{6}
 <template>
-  <UApp>
+  <PApp>
     <ClientOnly>
       <LazyUContentSearch
         v-model:search-term="searchTerm"
@@ -83,7 +83,7 @@ You can disable this behavior by setting the `color-mode` prop to `false`:
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -118,7 +118,7 @@ const searchTerm = ref('')
 </script>
 
 <template>
-  <UApp>
+  <PApp>
     <ClientOnly>
       <LazyUContentSearch
         v-model:search-term="searchTerm"
@@ -129,7 +129,7 @@ const searchTerm = ref('')
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -141,20 +141,20 @@ It is recommended to wrap the `ContentSearch` component in a [ClientOnly](https:
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog{prefix="content"}
+:docs-component-changelog{prefix="content"}

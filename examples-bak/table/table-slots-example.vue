@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableColumn, DropdownMenuItem } from '@nuxt/ui'
+import type { TableColumn, DropdownMenuItem } from 'pohon-ui'
 import { useClipboard } from '@vueuse/core'
 
 interface User {

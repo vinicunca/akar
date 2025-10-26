@@ -175,7 +175,7 @@ slots:
 
 Use the `Marquee` component to create an infinite scrolling animation for your testimonials.
 
-::component-example{label="With Items"}
+::docs-pohon-example{label="With Items"}
 ---
 prettier: true
 name: 'marquee-testimonials'
@@ -189,7 +189,7 @@ class: 'px-0'
 
 Use the `Marquee` component to create an infinite scrolling animation for your screenshots.
 
-::component-example{label="With Screenshots"}
+::docs-pohon-example{label="With Screenshots"}
 ---
 prettier: true
 name: 'marquee-screenshots'
@@ -203,16 +203,16 @@ class: '!p-0'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog

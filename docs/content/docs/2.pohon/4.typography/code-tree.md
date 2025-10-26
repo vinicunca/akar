@@ -19,7 +19,7 @@ Wrap your code blocks with a `code-tree` component in any particular order to di
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui'],
+  modules: ['pohon-ui'],
 
   css: ['~/assets/css/main.css']
 })
@@ -44,9 +44,9 @@ export default defineAppConfig({
 
 ```vue [app/app.vue]
 <template>
-  <UApp>
+  <PApp>
     <NuxtPage />
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -170,7 +170,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui'],
+  modules: ['pohon-ui'],
 
   css: ['~/assets/css/main.css']
 })
@@ -195,9 +195,9 @@ export default defineAppConfig({
 
 ```vue [app/app.vue]
 <template>
-  <UApp>
+  <PApp>
     <NuxtPage />
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -325,16 +325,16 @@ Like the `ProsePre` component, the `CodeTree` handles filenames, icons and copy 
 
 ### Props
 
-:component-props{prose}
+:docs-pohon-props{prose}
 
 ### Slots
 
-:component-slots{prose}
+:docs-pohon-slots{prose}
 
 ## Theme
 
-:component-theme{prose}
+:docs-pohon-theme{prose}
 
 ## Changelog
 
-:component-changelog{prefix="prose"}
+:docs-component-changelog{prefix="prose"}

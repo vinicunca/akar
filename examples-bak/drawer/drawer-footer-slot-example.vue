@@ -3,11 +3,11 @@ const open = ref(false)
 </script>
 
 <template>
-  <UDrawer v-model:open="open" title="Drawer with footer" description="This is useful when you want a form in a Drawer." :ui="{ container: 'max-w-xl mx-auto' }">
+  <UDrawer v-model:open="open" title="Drawer with footer" description="This is useful when you want a form in a Drawer." :pohon="{ container: 'max-w-xl mx-auto' }">
     <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
     <template #body>
-      <Placeholder class="h-48" />
+      <CorePlaceholder class="h-48" />
     </template>
 
     <template #footer>

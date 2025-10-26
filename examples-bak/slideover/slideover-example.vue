@@ -9,7 +9,7 @@ const emit = defineEmits<{ close: [boolean] }>()
 <template>
   <USlideover :close="{ onClick: () => emit('close', false) }" :description="`This slideover was opened programmatically ${count} times`">
     <template #body>
-      <Placeholder class="h-full" />
+      <CorePlaceholder class="h-full" />
     </template>
 
     <template #footer>

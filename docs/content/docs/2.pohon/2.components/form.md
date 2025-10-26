@@ -25,7 +25,7 @@ It requires two props:
 ::
 
 ::tabs{class="gap-0"}
-  ::component-example{label="Valibot"}
+  ::docs-pohon-example{label="Valibot"}
   ---
   name: 'form-example-valibot'
   props:
@@ -33,7 +33,7 @@ It requires two props:
   ---
   ::
 
-  ::component-example{label="Zod"}
+  ::docs-pohon-example{label="Zod"}
   ---
   name: 'form-example-zod'
   props:
@@ -41,7 +41,7 @@ It requires two props:
   ---
   ::
 
-  ::component-example{label="Regle"}
+  ::docs-pohon-example{label="Regle"}
   ---
   name: 'form-example-regle'
   props:
@@ -49,7 +49,7 @@ It requires two props:
   ---
   ::
 
-  ::component-example{label="Yup"}
+  ::docs-pohon-example{label="Yup"}
   ---
   name: 'form-example-yup'
   props:
@@ -57,7 +57,7 @@ It requires two props:
   ---
   ::
 
-  ::component-example{label="Joi"}
+  ::docs-pohon-example{label="Joi"}
   ---
   name: 'form-example-joi'
   props:
@@ -65,7 +65,7 @@ It requires two props:
   ---
   ::
 
-  ::component-example{label="Superstruct"}
+  ::docs-pohon-example{label="Superstruct"}
   ---
   name: 'form-example-superstruct'
   props:
@@ -91,7 +91,7 @@ The validation function must return a list of errors with the following attribut
 It can be used alongside the `schema` prop to handle complex use cases.
 ::
 
-::component-example
+::docs-pohon-example
 ---
 name: 'form-example-basic'
 props:
@@ -113,7 +113,7 @@ You can control when validation happens this using the `validate-on` prop.
 The form always validates on submit.
 ::
 
-::component-example{label="Default"}
+::docs-pohon-example{label="Default"}
 ---
 source: false
 name: 'form-example-elements'
@@ -146,7 +146,7 @@ You can listen to the `@error` event to handle errors. This event is triggered w
 
 Here's an example that focuses the first input element with an error after the form is submitted:
 
-::component-example
+::docs-pohon-example
 ---
 name: 'form-example-on-error'
 collapse: true
@@ -163,7 +163,7 @@ Nested forms directly inherit their parent's state, so you don't need to define 
 
 It can be used to dynamically add fields based on user's input:
 
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'form-example-nested'
@@ -171,7 +171,7 @@ name: 'form-example-nested'
 ::
 
 Or to validate list inputs:
-::component-example
+::docs-pohon-example
 ---
 collapse: true
 name: 'form-example-nested-list'
@@ -183,15 +183,15 @@ name: 'form-example-nested-list'
 
 ### Props
 
-:component-props
+:docs-pohon-props
 
 ### Slots
 
-:component-slots
+:docs-pohon-slots
 
 ### Emits
 
-:component-emits
+:docs-pohon-emits
 
 ### Expose
 
@@ -225,8 +225,8 @@ This will give you access to the following:
 
 ## Theme
 
-:component-theme
+:docs-pohon-theme
 
 ## Changelog
 
-:component-changelog
+:docs-component-changelog
