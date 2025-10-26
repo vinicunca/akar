@@ -24,7 +24,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -50,7 +50,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -74,7 +74,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -99,7 +99,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -137,7 +137,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -159,7 +159,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}
@@ -180,7 +180,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
 :u-button{label="Open" color="neutral" variant="subtle"}

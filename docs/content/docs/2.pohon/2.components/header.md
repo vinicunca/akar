@@ -199,7 +199,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
   active: route.path.startsWith('/docs/components')
 }, {
   label: 'Figma',
-  to: 'https://go.nuxt.com/figma-ui',
+  to: 'https://akar.vinicunca.dev/figma-ui',
   target: '_blank'
 }, {
   label: 'Releases',
@@ -220,7 +220,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
       <template #right>
         <UColorModeButton />
 
-        <UButton
+        <PButton
           color="neutral"
           variant="ghost"
           to="https://github.com/nuxt/ui"
@@ -235,11 +235,11 @@ const items = computed<NavigationMenuItem[]>(() => [{
       </template>
     </PHeader>
 
-    <UMain>
+    <PMain>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
-    </UMain>
+    </PMain>
 
     <PFooter />
   </PApp>

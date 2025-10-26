@@ -43,6 +43,6 @@ const items = computed(() => [{
 
 <template>
   <UDropdownMenu :items="items" :content="{ align: 'start' }" :pohon="{ content: 'w-48' }">
-    <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
+    <PButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
   </UDropdownMenu>
 </template>

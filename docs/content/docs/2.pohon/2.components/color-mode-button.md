@@ -82,7 +82,7 @@ prettier: true
 slots:
   fallback: |
 
-    <UButton loading variant="ghost" color="neutral" />
+    <PButton loading variant="ghost" color="neutral" />
 ---
 
 #fallback

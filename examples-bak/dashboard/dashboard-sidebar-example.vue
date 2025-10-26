@@ -44,7 +44,7 @@ const items: NavigationMenuItem[][] = [[{
     </template>
 
     <template #default="{ collapsed }">
-      <UButton
+      <PButton
         :label="collapsed ? undefined : 'Search...'"
         icon="i-lucide-search"
         color="neutral"
@@ -58,7 +58,7 @@ const items: NavigationMenuItem[][] = [[{
             <UKbd value="K" variant="subtle" />
           </div>
         </template>
-      </UButton>
+      </PButton>
 
       <PNavigationMenu
         :collapsed="collapsed"
@@ -75,7 +75,7 @@ const items: NavigationMenuItem[][] = [[{
     </template>
 
     <template #footer="{ collapsed }">
-      <UButton
+      <PButton
         :avatar="{
           src: 'https://github.com/benjamincanac.png'
         }"

@@ -18,8 +18,8 @@ prettier: true
 slots:
   default: |
 
-    <UButton color="neutral" variant="subtle" label="Button" />
-    <UButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
+    <PButton color="neutral" variant="subtle" label="Button" />
+    <PButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
 ---
 :u-button{color="neutral" variant="subtle" label="Button"}
 :u-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
@@ -37,8 +37,8 @@ props:
 slots:
   default: |
 
-    <UButton color="neutral" variant="subtle" label="Button" />
-    <UButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
+    <PButton color="neutral" variant="subtle" label="Button" />
+    <PButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
 ---
 :u-button{color="neutral" variant="subtle" label="Button"}
 :u-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
@@ -56,8 +56,8 @@ props:
 slots:
   default: |
 
-    <UButton color="neutral" variant="subtle" label="Submit" />
-    <UButton color="neutral" variant="outline" label="Cancel" />
+    <PButton color="neutral" variant="subtle" label="Submit" />
+    <PButton color="neutral" variant="outline" label="Cancel" />
 ---
 :u-button{color="neutral" variant="subtle" label="Submit"}
 :u-button{color="neutral" variant="outline" label="Cancel"}
@@ -75,9 +75,9 @@ prettier: true
 slots:
   default: |
 
-    <UInput color="neutral" variant="outline" placeholder="Enter token" />
+    <PInput color="neutral" variant="outline" placeholder="Enter token" />
 
-    <UButton color="neutral" variant="subtle" icon="i-lucide-clipboard" />
+    <PButton color="neutral" variant="subtle" icon="i-lucide-clipboard" />
 ---
 :u-input{color="neutral" variant="outline" placeholder="Enter token"}
 :u-button{color="neutral" variant="subtle" icon="i-lucide-clipboard"}

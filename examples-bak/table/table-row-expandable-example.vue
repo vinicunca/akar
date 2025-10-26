@@ -2,7 +2,7 @@
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from 'pohon-ui'
 
-const UButton = resolveComponent('UButton')
+const PButton = resolveComponent('PButton')
 const PBadge = resolveComponent('PBadge')
 
 type Payment = {
@@ -47,7 +47,7 @@ const data = ref<Payment[]>([{
 
 const columns: TableColumn<Payment>[] = [{
   id: 'expand',
-  cell: ({ row }) => h(UButton, {
+  cell: ({ row }) => h(PButton, {
     'color': 'neutral',
     'variant': 'ghost',
     'icon': 'i-lucide-chevron-down',

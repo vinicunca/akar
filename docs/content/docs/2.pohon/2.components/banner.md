@@ -191,11 +191,11 @@ Use the Banner component in your `app.vue` or in a layout:
 
     <PHeader />
 
-    <UMain>
+    <PMain>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
-    </UMain>
+    </PMain>
 
     <PFooter />
   </PApp>

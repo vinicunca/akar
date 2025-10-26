@@ -22,7 +22,7 @@ prettier: true
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 
   content: |
 
@@ -49,7 +49,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
@@ -77,7 +77,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
@@ -112,7 +112,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
@@ -144,7 +144,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
@@ -184,7 +184,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
@@ -212,7 +212,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
@@ -241,7 +241,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 
@@ -290,7 +290,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" />
+    <PButton label="Open" color="neutral" variant="subtle" />
 
   body: |
 

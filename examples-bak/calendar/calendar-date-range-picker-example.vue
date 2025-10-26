@@ -13,7 +13,7 @@ const modelValue = shallowRef({
 
 <template>
   <UPopover>
-    <UButton color="neutral" variant="subtle" icon="i-lucide-calendar">
+    <PButton color="neutral" variant="subtle" icon="i-lucide-calendar">
       <template v-if="modelValue.start">
         <template v-if="modelValue.end">
           {{ df.format(modelValue.start.toDate(getLocalTimeZone())) }} - {{ df.format(modelValue.end.toDate(getLocalTimeZone())) }}
@@ -26,7 +26,7 @@ const modelValue = shallowRef({
       <template v-else>
         Pick a date
       </template>
-    </UButton>
+    </PButton>
 
     <template #content>
       <UCalendar v-model="modelValue" class="p-2" :number-of-months="2" range />

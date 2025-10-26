@@ -6,7 +6,7 @@ const domain = ref(domains[0])
 
 <template>
   <UFieldGroup>
-    <UInput
+    <PInput
       v-model="value"
       placeholder="nuxt"
       :pohon="{
@@ -19,7 +19,7 @@ const domain = ref(domains[0])
           https://
         </p>
       </template>
-    </UInput>
+    </PInput>
 
     <USelectMenu v-model="domain" :items="domains" />
   </UFieldGroup>

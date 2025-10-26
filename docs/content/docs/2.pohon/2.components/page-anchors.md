@@ -30,7 +30,7 @@ props:
       to: /docs/components
     - label: 'Figma Kit'
       icon: i-simple-icons-figma
-      to: https://go.nuxt.com/figma-ui
+      to: https://akar.vinicunca.dev/figma-ui
       target: _blank
     - label: 'Releases'
       icon: i-simple-icons-github
@@ -69,7 +69,7 @@ props:
       to: /docs/components
     - label: 'Figma Kit'
       icon: i-simple-icons-figma
-      to: https://go.nuxt.com/figma-ui
+      to: https://akar.vinicunca.dev/figma-ui
       target: _blank
     - label: 'Releases'
       icon: i-simple-icons-github
@@ -106,7 +106,7 @@ const links: PageAnchor[] = [{
 }, {
   label: 'Figma Kit',
   icon: 'i-simple-icons-figma',
-  to: 'https://go.nuxt.com/figma-ui',
+  to: 'https://akar.vinicunca.dev/figma-ui',
   target: '_blank'
 }, {
   label: 'Releases',
@@ -122,7 +122,7 @@ const links: PageAnchor[] = [{
       <UPageAside>
         <UPageAnchors :links="links" />
 
-        <USeparator type="dashed" />
+        <PSeparator type="dashed" />
 
         <UContentNavigation :navigation="navigation" />
       </UPageAside>

@@ -40,7 +40,7 @@ async function open() {
 </script>
 
 <template>
-  <UButton
+  <PButton
     label="Open"
     color="neutral"
     variant="subtle"

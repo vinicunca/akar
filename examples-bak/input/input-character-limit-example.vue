@@ -4,7 +4,7 @@ const maxLength = 15
 </script>
 
 <template>
-  <UInput
+  <PInput
     v-model="value"
     :maxlength="maxLength"
     aria-describedby="character-count"
@@ -20,5 +20,5 @@ const maxLength = 15
         {{ value?.length }}/{{ maxLength }}
       </div>
     </template>
-  </UInput>
+  </PInput>
 </template>

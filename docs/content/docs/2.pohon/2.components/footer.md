@@ -16,8 +16,6 @@ Use the `left`, `default` and `right` slots to customize the footer.
 
 ::docs-pohon-example
 ---
-prettier: true
-collapse: true
 name: 'footer-example'
 class: '!p-0'
 props:
@@ -26,11 +24,11 @@ props:
 ::
 
 ::note
-In this example, we use the [NavigationMenu](/docs/components/navigation-menu) component to render the footer links in the center.
+In this example, we use the [NavigationMenu](/docs/pohon/components/navigation-menu) component to render the footer links in the center.
 ::
 
-::tip{to="/docs/components/footer-columns"}
-You can use the [FooterColumns](/docs/components/footer-columns) component to display a list of links inside the `top` slot.
+::tip{to="/docs/pohon/components/footer-columns"}
+You can use the [FooterColumns](/docs/pohon/components/footer-columns) component to display a list of links inside the `top` slot.
 ::
 
 ## Examples
@@ -41,19 +39,19 @@ Use the Footer component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{32-67}
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { PNavigationMenuItem } from 'pohon-ui'
 
-const items: NavigationMenuItem[] = [{
+const items: PNavigationMenuItem[] = [{
   label: 'Figma Kit',
-  to: 'https://go.nuxt.com/figma-ui',
+  to: 'https://go.vinicunca.dev/figma-ui',
   target: '_blank'
 }, {
   label: 'Playground',
-  to: 'https://stackblitz.com/edit/nuxt-ui',
+  to: 'https://stackblitz.com/edit/pohon-ui',
   target: '_blank'
 }, {
   label: 'Releases',
-  to: 'https://github.com/nuxt/ui/releases',
+  to: 'https://github.com/vinicunca/akar/releases',
   target: '_blank'
 }]
 </script>
@@ -62,13 +60,13 @@ const items: NavigationMenuItem[] = [{
   <PApp>
     <PHeader />
 
-    <UMain>
+    <PMain>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
-    </UMain>
+    </PMain>
 
-    <USeparator icon="i-simple-icons-nuxtdotjs" type="dashed" class="h-px" />
+    <PSeparator icon="i-simple-icons-nuxtdotjs" type="dashed" class="h-px" />
 
     <PFooter>
       <template #left>
@@ -80,23 +78,23 @@ const items: NavigationMenuItem[] = [{
       <PNavigationMenu :items="items" variant="link" />
 
       <template #right>
-        <UButton
+        <PButton
           icon="i-simple-icons-discord"
           color="neutral"
           variant="ghost"
-          to="https://go.nuxt.com/discord"
+          to="https://akar.vinicunca.dev/discord"
           target="_blank"
           aria-label="Discord"
         />
-        <UButton
+        <PButton
           icon="i-simple-icons-x"
           color="neutral"
           variant="ghost"
-          to="https://go.nuxt.com/x"
+          to="https://akar.vinicunca.dev/x"
           target="_blank"
           aria-label="X"
         />
-        <UButton
+        <PButton
           icon="i-simple-icons-github"
           color="neutral"
           variant="ghost"
@@ -111,7 +109,7 @@ const items: NavigationMenuItem[] = [{
 ```
 
 ::note
-In this example, we use the [Separator](/docs/components/separator) component to add a border above the footer.
+In this example, we use the [Separator](/docs/pohon/components/separator) component to add a border above the footer.
 ::
 
 ## API

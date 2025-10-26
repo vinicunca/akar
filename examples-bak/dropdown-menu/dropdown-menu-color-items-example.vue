@@ -28,6 +28,6 @@ const items: DropdownMenuItem[][] = [
 
 <template>
   <UDropdownMenu :items="items" :pohon="{ content: 'w-48' }">
-    <UButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
+    <PButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
   </UDropdownMenu>
 </template>

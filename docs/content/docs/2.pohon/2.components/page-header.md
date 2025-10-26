@@ -144,7 +144,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
     <UPageBody>
       <ContentRenderer :value="page" />
 
-      <USeparator />
+      <PSeparator />
 
       <UContentSurround :surround="surround" />
     </UPageBody>

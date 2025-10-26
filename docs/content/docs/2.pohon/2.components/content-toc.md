@@ -167,7 +167,7 @@ if (!page.value) {
     <UPageBody>
       <ContentRenderer v-if="page.body" :value="page" />
 
-      <USeparator v-if="surround?.filter(Boolean).length" />
+      <PSeparator v-if="surround?.filter(Boolean).length" />
 
       <UContentSurround :surround="(surround as any)" />
     </UPageBody>

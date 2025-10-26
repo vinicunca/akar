@@ -179,7 +179,7 @@ const grouping_options = ref<GroupingOptions>({
           :style="{ width: `calc(${row.depth} * 1rem)` }"
         />
 
-        <UButton
+        <PButton
           variant="outline"
           color="neutral"
           class="mr-2"

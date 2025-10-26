@@ -4,7 +4,7 @@ import type { TableColumn } from 'pohon-ui'
 import type { Column } from '@tanstack/vue-table'
 
 const PBadge = resolveComponent('PBadge')
-const UButton = resolveComponent('UButton')
+const PButton = resolveComponent('PButton')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
 type Payment = {
@@ -126,7 +126,7 @@ function getHeader(column: Column<Payment>, label: string) {
         }
       }
     }]
-  }, () => h(UButton, {
+  }, () => h(PButton, {
     'color': 'neutral',
     'variant': 'ghost',
     label,

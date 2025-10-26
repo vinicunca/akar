@@ -13,7 +13,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
   active: route.path.startsWith('/docs/components')
 }, {
   label: 'Figma',
-  to: 'https://go.nuxt.com/figma-ui',
+  to: 'https://akar.vinicunca.dev/figma-ui',
   target: '_blank'
 }, {
   label: 'Releases',
@@ -34,7 +34,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
       <UColorModeButton />
 
       <UTooltip text="Open on GitHub" :kbds="['meta', 'G']">
-        <UButton
+        <PButton
           color="neutral"
           variant="ghost"
           to="https://github.com/nuxt/ui"

@@ -34,8 +34,8 @@ const text = computed(() => {
 
 <template>
   <div class="space-y-2">
-    <UFormField label="Password">
-      <UInput
+    <PFormField label="Password">
+      <PInput
         v-model="password"
         placeholder="Password"
         :color="color"
@@ -46,7 +46,7 @@ const text = computed(() => {
         class="w-full"
       >
         <template #trailing>
-          <UButton
+          <PButton
             color="neutral"
             variant="link"
             size="sm"
@@ -57,8 +57,8 @@ const text = computed(() => {
             @click="show = !show"
           />
         </template>
-      </UInput>
-    </UFormField>
+      </PInput>
+    </PFormField>
 
     <UProgress
       :color="color"

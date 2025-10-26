@@ -63,85 +63,85 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 <template>
   <UForm ref="form" :state="state" :schema="schema" class="w-full" @submit="onSubmit">
     <div class="grid grid-cols-3 gap-4">
-      <UFormField label="Input" name="input">
-        <UInput v-model="state.input" placeholder="john@lennon.com" class="w-full" />
-      </UFormField>
+      <PFormField label="Input" name="input">
+        <PInput v-model="state.input" placeholder="john@lennon.com" class="w-full" />
+      </PFormField>
 
       <div class="flex flex-col gap-4">
-        <UFormField name="switch">
+        <PFormField name="switch">
           <USwitch v-model="state.switch" label="Switch me" />
-        </UFormField>
+        </PFormField>
 
-        <UFormField name="checkbox">
+        <PFormField name="checkbox">
           <UCheckbox v-model="state.checkbox" label="Check me" />
-        </UFormField>
+        </PFormField>
       </div>
 
-      <UFormField name="slider" label="Slider">
+      <PFormField name="slider" label="Slider">
         <USlider v-model="state.slider" />
-      </UFormField>
+      </PFormField>
 
-      <UFormField name="select" label="Select">
+      <PFormField name="select" label="Select">
         <USelect v-model="state.select" :items="items" class="w-full" />
-      </UFormField>
+      </PFormField>
 
-      <UFormField name="selectMultiple" label="Select (Multiple)">
+      <PFormField name="selectMultiple" label="Select (Multiple)">
         <USelect v-model="state.selectMultiple" multiple :items="items" class="w-full" />
-      </UFormField>
+      </PFormField>
 
-      <UFormField name="selectMenu" label="Select Menu">
+      <PFormField name="selectMenu" label="Select Menu">
         <USelectMenu v-model="state.selectMenu" :items="items" class="w-full" />
-      </UFormField>
+      </PFormField>
 
-      <UFormField name="selectMenuMultiple" label="Select Menu (Multiple)">
+      <PFormField name="selectMenuMultiple" label="Select Menu (Multiple)">
         <USelectMenu v-model="state.selectMenuMultiple" multiple :items="items" class="w-full" />
-      </UFormField>
+      </PFormField>
 
-      <UFormField name="inputMenu" label="Input Menu">
+      <PFormField name="inputMenu" label="Input Menu">
         <UInputMenu v-model="state.inputMenu" :items="items" class="w-full" />
-      </UFormField>
+      </PFormField>
 
-      <UFormField name="inputMenuMultiple" label="Input Menu (Multiple)">
+      <PFormField name="inputMenuMultiple" label="Input Menu (Multiple)">
         <UInputMenu v-model="state.inputMenuMultiple" multiple :items="items" class="w-full" />
-      </UFormField>
+      </PFormField>
 
-      <UFormField name="inputNumber" label="Input Number">
+      <PFormField name="inputNumber" label="Input Number">
         <UInputNumber v-model="state.inputNumber" class="w-full" />
-      </UFormField>
+      </PFormField>
 
-      <UFormField label="Textarea" name="textarea">
+      <PFormField label="Textarea" name="textarea">
         <UTextarea v-model="state.textarea" class="w-full" />
-      </UFormField>
+      </PFormField>
       <div class="flex gap-4">
-        <UFormField name="radioGroup">
+        <PFormField name="radioGroup">
           <URadioGroup v-model="state.radioGroup" legend="Radio group" :items="items" />
-        </UFormField>
-        <UFormField name="checkboxGroup">
+        </PFormField>
+        <PFormField name="checkboxGroup">
           <UCheckboxGroup v-model="state.checkboxGroup" legend="Checkbox group" :items="items" />
-        </UFormField>
+        </PFormField>
       </div>
-      <UFormField name="pin" label="Pin Input" :error-pattern="/(pin)\..*/">
+      <PFormField name="pin" label="Pin Input" :error-pattern="/(pin)\..*/">
         <UPinInput v-model="state.pin" />
-      </UFormField>
+      </PFormField>
 
-      <UFormField name="file" label="File Input">
+      <PFormField name="file" label="File Input">
         <UFileUpload
           v-model="state.file"
           label="Drop your image here"
           description="PNG (max. 1MB)"
           class="w-full min-h-44"
         />
-      </UFormField>
+      </PFormField>
     </div>
 
     <div class="flex gap-2 mt-8">
-      <UButton type="submit">
+      <PButton type="submit">
         Submit
-      </UButton>
+      </PButton>
 
-      <UButton variant="outline" @click="form?.clear()">
+      <PButton variant="outline" @click="form?.clear()">
         Clear
-      </UButton>
+      </PButton>
     </div>
   </UForm>
 </template>

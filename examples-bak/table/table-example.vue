@@ -4,7 +4,7 @@ import { upperFirst } from 'scule'
 import type { TableColumn } from 'pohon-ui'
 import { useClipboard } from '@vueuse/core'
 
-const UButton = resolveComponent('UButton')
+const PButton = resolveComponent('PButton')
 const UCheckbox = resolveComponent('UCheckbox')
 const PBadge = resolveComponent('PBadge')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
@@ -189,7 +189,7 @@ const columns: TableColumn<Payment>[] = [{
   header: ({ column }) => {
     const isSorted = column.getIsSorted()
 
-    return h(UButton, {
+    return h(PButton, {
       color: 'neutral',
       variant: 'ghost',
       label: 'Email',
@@ -249,7 +249,7 @@ const columns: TableColumn<Payment>[] = [{
       },
       items,
       'aria-label': 'Actions dropdown'
-    }, () => h(UButton, {
+    }, () => h(PButton, {
       'icon': 'i-lucide-ellipsis-vertical',
       'color': 'neutral',
       'variant': 'ghost',
@@ -269,14 +269,14 @@ function randomize() {
 <template>
   <div class="flex-1 divide-y divide-accented w-full">
     <div class="flex items-center gap-2 px-4 py-3.5 overflow-x-auto">
-      <UInput
+      <PInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
         class="max-w-sm min-w-[12ch]"
         placeholder="Filter emails..."
         @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
       />
 
-      <UButton color="neutral" label="Randomize" @click="randomize" />
+      <PButton color="neutral" label="Randomize" @click="randomize" />
 
       <UDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
@@ -292,7 +292,7 @@ function randomize() {
         }))"
         :content="{ align: 'end' }"
       >
-        <UButton
+        <PButton
           label="Columns"
           color="neutral"
           variant="outline"

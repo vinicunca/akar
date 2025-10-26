@@ -22,7 +22,7 @@ prettier: true
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
@@ -49,7 +49,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   body: |
 
@@ -77,7 +77,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   body: |
 
@@ -102,7 +102,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
@@ -128,7 +128,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
@@ -153,7 +153,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
@@ -178,7 +178,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
@@ -203,7 +203,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 
@@ -229,7 +229,7 @@ props:
 slots:
   default: |
 
-    <UButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
 
   content: |
 

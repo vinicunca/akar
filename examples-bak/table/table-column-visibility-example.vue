@@ -115,7 +115,7 @@ const columnVisibility = ref({
         }))"
         :content="{ align: 'end' }"
       >
-        <UButton
+        <PButton
           label="Columns"
           color="neutral"
           variant="outline"

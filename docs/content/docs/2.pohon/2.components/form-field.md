@@ -24,7 +24,7 @@ props:
 slots:
   default: |
 
-    <UInput placeholder="Enter your email" />
+    <PInput placeholder="Enter your email" />
 ---
 
 :u-input{placeholder="Enter your email"}
@@ -47,7 +47,7 @@ props:
 slots:
   default: |
 
-    <UInput placeholder="Enter your email" />
+    <PInput placeholder="Enter your email" />
 ---
 
 :u-input{placeholder="Enter your email"}
@@ -68,7 +68,7 @@ props:
 slots:
   default: |
 
-    <UInput placeholder="Enter your email" class="w-full" />
+    <PInput placeholder="Enter your email" class="w-full" />
 ---
 
 :u-input{placeholder="Enter your email" class="w-full"}
@@ -89,7 +89,7 @@ props:
 slots:
   default: |
 
-    <UInput placeholder="Enter your email" />
+    <PInput placeholder="Enter your email" />
 ---
 
 :u-input{placeholder="Enter your email"}
@@ -110,7 +110,7 @@ props:
 slots:
   default: |
 
-    <UInput placeholder="Enter your email" class="w-full" />
+    <PInput placeholder="Enter your email" class="w-full" />
 ---
 
 :u-input{placeholder="Enter your email" class="w-full"}
@@ -133,7 +133,7 @@ props:
 slots:
   default: |
 
-    <UInput placeholder="Enter your email" class="w-full" />
+    <PInput placeholder="Enter your email" class="w-full" />
 ---
 
 :u-input{placeholder="Enter your email" class="w-full"}
@@ -164,7 +164,7 @@ props:
 slots:
   default: |
 
-    <UInput placeholder="Enter your email" class="w-full" />
+    <PInput placeholder="Enter your email" class="w-full" />
 ---
 
 :u-input{placeholder="Enter your email" class="w-full"}

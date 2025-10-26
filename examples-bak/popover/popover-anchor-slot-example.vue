@@ -9,7 +9,7 @@ const open = ref(false)
     :pohon="{ content: 'w-(--akar-popper-anchor-width) p-4' }"
   >
     <template #anchor>
-      <UInput placeholder="Focus to open" @focus="open = true" @blur="open = false" />
+      <PInput placeholder="Focus to open" @focus="open = true" @blur="open = false" />
     </template>
 
     <template #content>

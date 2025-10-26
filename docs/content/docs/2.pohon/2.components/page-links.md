@@ -148,7 +148,7 @@ const links = computed<PageLink[]>(() => [{
     <UPageBody>
       <ContentRenderer :value="page" />
 
-      <USeparator />
+      <PSeparator />
 
       <UContentSurround :surround="surround" />
     </UPageBody>
@@ -156,7 +156,7 @@ const links = computed<PageLink[]>(() => [{
     <template #right>
       <UContentToc :links="page.body.toc.links">
         <template #bottom>
-          <USeparator type="dashed" />
+          <PSeparator type="dashed" />
 
           <UPageLinks title="Community" :links="links" />
         </template>

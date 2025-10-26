@@ -3,13 +3,13 @@ const value = ref('Click to clear')
 </script>
 
 <template>
-  <UInput
+  <PInput
     v-model="value"
     placeholder="Type something..."
     :pohon="{ trailing: 'pe-1' }"
   >
     <template v-if="value?.length" #trailing>
-      <UButton
+      <PButton
         color="neutral"
         variant="link"
         size="sm"
@@ -18,5 +18,5 @@ const value = ref('Click to clear')
         @click="value = ''"
       />
     </template>
-  </UInput>
+  </PInput>
 </template>

@@ -32,24 +32,24 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     class="gap-4 flex flex-col w-60"
     @submit="onSubmit"
   >
-    <UFormField label="Name" name="name">
-      <UInput v-model="state.name" placeholder="John Lennon" />
-    </UFormField>
+    <PFormField label="Name" name="name">
+      <PInput v-model="state.name" placeholder="John Lennon" />
+    </PFormField>
 
     <div>
       <UCheckbox v-model="state.news" name="news" label="Register to our newsletter" @update:model-value="state.email = undefined" />
     </div>
 
     <UForm v-if="state.news" :schema="nestedSchema" nested>
-      <UFormField label="Email" name="email">
-        <UInput v-model="state.email" placeholder="john@lennon.com" />
-      </UFormField>
+      <PFormField label="Email" name="email">
+        <PInput v-model="state.email" placeholder="john@lennon.com" />
+      </PFormField>
     </UForm>
 
     <div>
-      <UButton type="submit">
+      <PButton type="submit">
         Submit
-      </UButton>
+      </PButton>
     </div>
   </UForm>
 </template>

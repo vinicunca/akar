@@ -25,18 +25,16 @@ import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(
-  defineProps<PMainProps>(),
-  {
-    as: 'main',
-  },
-);
+const props = defineProps<PMainProps>();
 defineSlots<PMainSlots>();
 
 const appConfig = useAppConfig() as Main['AppConfig'];
 
 const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.main || {}) }),
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.main || {}),
+  }),
 );
 </script>
 

@@ -20,7 +20,7 @@ const groups = computed(() => [{
 
 <template>
   <UDrawer :handle="false">
-    <UButton
+    <PButton
       label="Search users..."
       color="neutral"
       variant="subtle"

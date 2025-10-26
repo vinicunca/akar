@@ -30,16 +30,16 @@ async function onError(event: FormErrorEvent) {
 
 <template>
   <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit" @error="onError">
-    <UFormField label="Email" name="email">
-      <UInput v-model="state.email" />
-    </UFormField>
+    <PFormField label="Email" name="email">
+      <PInput v-model="state.email" />
+    </PFormField>
 
-    <UFormField label="Password" name="password">
-      <UInput v-model="state.password" type="password" />
-    </UFormField>
+    <PFormField label="Password" name="password">
+      <PInput v-model="state.password" type="password" />
+    </PFormField>
 
-    <UButton type="submit">
+    <PButton type="submit">
       Submit
-    </UButton>
+    </PButton>
   </UForm>
 </template>

@@ -14,6 +14,7 @@ import {
   useServerSeoMeta,
 } from '#imports';
 import LayoutHeader from './components/header/layout-header.vue';
+import LayoutFooter from './components/layout-footer.vue';
 
 const route = useRoute();
 const appConfig = useAppConfig();
@@ -70,16 +71,14 @@ provide('navigation', rootNavigation);
       :height="2"
     />
 
-    <div
-      :class="[
-        (route.path.startsWith('/docs/akar/') || route.path.startsWith('/docs/pohon/')) && 'root',
-      ]"
-    >
+    <div :class="[route.path.startsWith('/docs/') && 'root']">
       <LayoutHeader />
 
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
+
+      <LayoutFooter />
     </div>
   </PApp>
 </template>

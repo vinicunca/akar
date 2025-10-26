@@ -17,7 +17,7 @@ prettier: true
 slots:
   default: |
 
-    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
 :u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
@@ -34,7 +34,7 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
 :u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
@@ -51,7 +51,7 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
 :u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
@@ -69,7 +69,7 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
 :u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
@@ -86,7 +86,7 @@ props:
 slots:
   default: |
 
-    <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
 :u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::

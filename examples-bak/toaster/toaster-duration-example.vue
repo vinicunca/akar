@@ -4,7 +4,7 @@ const appConfig = useAppConfig()
 
 <template>
   <div>
-    <UFormField
+    <PFormField
       label="toaster.duration"
       size="sm"
       :pohon="{
@@ -14,12 +14,12 @@ const appConfig = useAppConfig()
       }"
       class="inline-flex ring ring-accented rounded-sm"
     >
-      <UInput
+      <PInput
         v-model="appConfig.toaster.duration"
         color="neutral"
         variant="soft"
         :pohon="{ base: 'rounded-sm rounded-l-none min-w-12' }"
       />
-    </UFormField>
+    </PFormField>
   </div>
 </template>

@@ -4,7 +4,7 @@ import type { TableColumn } from 'pohon-ui'
 import type { Column } from '@tanstack/vue-table'
 
 const PBadge = resolveComponent('PBadge')
-const UButton = resolveComponent('UButton')
+const PButton = resolveComponent('PButton')
 
 type Payment = {
   id: string
@@ -86,7 +86,7 @@ const columns: TableColumn<Payment>[] = [{
 function getHeader(column: Column<Payment>, label: string, position: 'left' | 'right') {
   const isPinned = column.getIsPinned()
 
-  return h(UButton, {
+  return h(PButton, {
     color: 'neutral',
     variant: 'ghost',
     label,

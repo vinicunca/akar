@@ -28,7 +28,7 @@ const items: DropdownMenuItem[][] = [
 
 <template>
   <UDropdownMenu :items="items" :pohon="{ content: 'w-(--akar-dropdown-menu-trigger-width)' }">
-    <UButton
+    <PButton
       label="Open"
       class="w-46"
       color="neutral"
