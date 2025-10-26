@@ -224,9 +224,9 @@ const { data: plans } = await useAsyncData('plans', () => queryCollection('plans
     <UPageHero title="Pricing" />
 
     <UPageBody>
-      <UContainer>
+      <PContainer>
         <UPricingPlans :plans="plans" />
-      </UContainer>
+      </PContainer>
     </UPageBody>
   </UPage>
 </template>

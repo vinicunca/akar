@@ -176,12 +176,12 @@ export default defineAppConfig({
       },
       pre: {
         slots: {
+          root: 'relative group',
           base: 'group font-mono text-sm/6 bg-slate-800 px-4 py-3 whitespace-pre-wrap break-words overflow-x-auto focus:outline-none rounded-md',
-          copy: 'absolute top-[11px] right-[11px] lg:opacity-0 lg:group-hover:opacity-100 transition',
+          copy: 'absolute top-[11px] right-[11px] lg:opacity-0 lg:group-hover:opacity-100 transition color-neutral-200',
           filename: 'color-text text-sm/6',
           header: 'flex items-center gap-1.5 border border-border-muted bg-background border-b-0 relative rounded-t-md px-4 py-3',
           icon: 'size-4 shrink-0',
-          root: 'relative group mb-4',
         },
         variants: {
           filename: {

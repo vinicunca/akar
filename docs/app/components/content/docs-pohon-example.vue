@@ -38,7 +38,7 @@ const component = defineAsyncComponent(() => {
 
 <template>
   <CoreComponentPreview
-    preview-classes="rounded-md min-h-[400px] w-full"
+    preview-classes="rounded-md w-full"
   >
     <template #preview>
       <component

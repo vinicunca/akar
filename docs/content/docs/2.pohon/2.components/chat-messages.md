@@ -407,21 +407,21 @@ const handleSubmit = (e: Event) => {
 <template>
   <UDashboardPanel>
     <template #body>
-      <UContainer>
+      <PContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
           <template #content="{ message }">
             <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
           </template>
         </UChatMessages>
-      </UContainer>
+      </PContainer>
     </template>
 
     <template #footer>
-      <UContainer>
+      <PContainer>
         <UChatPrompt v-model="input" :error="chat.error" @submit="handleSubmit">
           <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
         </UChatPrompt>
-      </UContainer>
+      </PContainer>
     </template>
   </UDashboardPanel>
 </template>

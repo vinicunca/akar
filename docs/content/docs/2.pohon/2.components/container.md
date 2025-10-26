@@ -11,16 +11,17 @@ links:
 
 Use the default slot to center and constrain the width of your content.
 
-::tip{to="/docs/getting-started/theme/css-variables#container"}
-Its max width is controlled by the `--ui-container` CSS variable.
-::
-
 ::docs-pohon-example
 ---
 name: 'container-example'
 props:
   class: 'w-full'
 ---
+::
+
+::tip{to="/docs/getting-started/theme/css-variables#container"}
+In this example, its max width is controlled by the `max-w-$container-8xl` class,
+which `8xl` is defined in the UnoCSS theme.
 ::
 
 ## API

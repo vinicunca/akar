@@ -18,9 +18,9 @@ Use it in the `top` slot of the [Footer](/docs/components/footer) component:
 <template>
   <UFooter>
     <template #top>
-      <UContainer>
+      <PContainer>
         <UFooterColumns />
-      </UContainer>
+      </PContainer>
     </template>
   </UFooter>
 </template>

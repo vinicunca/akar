@@ -1,5 +1,5 @@
 <template>
-  <UContainer>
+  <PContainer>
     <CorePlaceholder class="h-32" />
-  </UContainer>
+  </PContainer>
 </template>

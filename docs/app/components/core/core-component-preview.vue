@@ -38,7 +38,7 @@ const isCodeView = ref(false);
 
       <div
         v-if="!isCodeView"
-        class="not-prose p-4 border border-border-muted bg-background-elevated flex items-center justify-center relative"
+        class="not-prose p-4 border border-border-muted bg-background flex items-center justify-center relative"
         :class="previewClasses"
       >
         <slot name="preview" />

@@ -117,21 +117,21 @@ const handleSubmit = (e: Event) => {
 <template>
   <UDashboardPanel>
     <template #body>
-      <UContainer>
+      <PContainer>
         <UChatMessages :messages="chat.messages" :status="chat.status">
           <template #content="{ message }">
             <MDC :value="getTextFromMessage(message)" :cache-key="message.id" unwrap="p" />
           </template>
         </UChatMessages>
-      </UContainer>
+      </PContainer>
     </template>
 
     <template #footer>
-      <UContainer>
+      <PContainer>
         <UChatPrompt v-model="input" :error="chat.error" @submit="handleSubmit">
           <UChatPromptSubmit :status="chat.status" @stop="chat.stop" @reload="chat.regenerate" />
         </UChatPrompt>
-      </UContainer>
+      </PContainer>
     </template>
   </UDashboardPanel>
 </template>
@@ -162,13 +162,13 @@ async function onSubmit() {
 <template>
   <UDashboardPanel>
     <template #body>
-      <UContainer>
+      <PContainer>
         <h1>How can I help you today?</h1>
 
         <UChatPrompt v-model="input" @submit="onSubmit">
           <UChatPromptSubmit :status="chat.status" />
         </UChatPrompt>
-      </UContainer>
+      </PContainer>
     </template>
   </UDashboardPanel>
 </template>
