@@ -261,11 +261,11 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 </script>
 
 <template>
-  <UHeader>
+  <PHeader>
     <template #body>
       <UContentNavigation :navigation="navigation" highlight />
     </template>
-  </UHeader>
+  </PHeader>
 </template>
 ```
 

@@ -189,7 +189,7 @@ Use the Banner component in your `app.vue` or in a layout:
   <PApp>
     <UBanner icon="i-lucide-construction" title="Nuxt UI v4 has been released!" />
 
-    <UHeader />
+    <PHeader />
 
     <UMain>
       <NuxtLayout>
@@ -197,7 +197,7 @@ Use the Banner component in your `app.vue` or in a layout:
       </NuxtLayout>
     </UMain>
 
-    <UFooter />
+    <PFooter />
   </PApp>
 </template>
 ```

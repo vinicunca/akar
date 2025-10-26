@@ -210,7 +210,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
 <template>
   <PApp>
-    <UHeader>
+    <PHeader>
       <template #title>
         <Logo class="h-6 w-auto" />
       </template>
@@ -233,7 +233,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
       <template #body>
         <PNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
       </template>
-    </UHeader>
+    </PHeader>
 
     <UMain>
       <NuxtLayout>
@@ -241,7 +241,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
       </NuxtLayout>
     </UMain>
 
-    <UFooter />
+    <PFooter />
   </PApp>
 </template>
 ```

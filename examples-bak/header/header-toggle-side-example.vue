@@ -27,7 +27,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
 </script>
 
 <template>
-  <UHeader toggle-side="left">
+  <PHeader toggle-side="left">
     <template #title>
       <Logo class="h-6 w-auto" />
     </template>
@@ -52,5 +52,5 @@ const items = computed<NavigationMenuItem[]>(() => [{
     <template #body>
       <PNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
     </template>
-  </UHeader>
+  </PHeader>
 </template>

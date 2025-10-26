@@ -23,7 +23,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
 </script>
 
 <template>
-  <UHeader>
+  <PHeader>
     <template #title>
       <Logo class="h-6 w-auto" />
     </template>
@@ -44,5 +44,5 @@ const items = computed<NavigationMenuItem[]>(() => [{
         />
       </UTooltip>
     </template>
-  </UHeader>
+  </PHeader>
 </template>

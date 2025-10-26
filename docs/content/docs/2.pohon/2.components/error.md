@@ -10,10 +10,10 @@ links:
 
 ## Usage
 
-The Error component renders a `<main>` element that works together with the [Header](/docs/components/header) component to create a full-height layout that extends to the viewport's available height.
+The Error component works together with the [Header](/docs/pohon/components/header) component to create a full-height layout that extends to the viewport's available height.
 
 ::tip{to="/docs/getting-started/theme/css-variables#header"}
-The Error component uses the `--ui-header-height` CSS variable to position itself correctly below the [Header](/docs/components/header).
+The Error component uses the `--pohon-header-height` CSS variable to position itself correctly below the [Header](/docs/pohon/components/header). Make sure to set this variable according to your header's height.
 ::
 
 ### Error
@@ -42,7 +42,7 @@ props:
 
 Use the `clear` prop to customize or hide the clear button (with `false` value).
 
-You can pass any property from the [Button](/docs/components/button) component to customize it.
+You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 
 ::docs-pohon-preview
 ---
@@ -62,7 +62,7 @@ props:
     color: neutral
     size: xl
     icon: i-lucide-arrow-left
-    class: 'rounded-full'
+    class: 'akar:rounded-full'
   error:
     statusCode: 404
     statusMessage: 'Page not found'
@@ -85,7 +85,7 @@ ignore:
   - error.statusMessage
   - error.message
 props:
-  redirect: '/docs/getting-started'
+  redirect: '/docs/pohon/getting-started'
   error:
     statusCode: 404
     statusMessage: 'Page not found'
@@ -111,17 +111,17 @@ const props = defineProps<{
 
 <template>
   <PApp>
-    <UHeader />
+    <PHeader />
 
-    <UError :error="error" />
+    <PError :error="error" />
 
-    <UFooter />
+    <PFooter />
   </PApp>
 </template>
 ```
 
 ::tip
-You might want to replicate the code of your `app.vue` inside your `error.vue` file to have the same layout and features, here is an example: <https://github.com/nuxt/ui/blob/v4/docs/app/error.vue>
+You might want to replicate the code of your `app.vue` inside your `error.vue` file to have the same layout and features, here is an example: <https://github.com/vinicunca/akar/blob/main/docs/app/error.vue>
 ::
 
 ::note

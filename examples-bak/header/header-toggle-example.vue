@@ -27,7 +27,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
 </script>
 
 <template>
-  <UHeader
+  <PHeader
     :toggle="{
       color: 'primary',
       variant: 'subtle',
@@ -58,5 +58,5 @@ const items = computed<NavigationMenuItem[]>(() => [{
     <template #body>
       <PNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
     </template>
-  </UHeader>
+  </PHeader>
 </template>

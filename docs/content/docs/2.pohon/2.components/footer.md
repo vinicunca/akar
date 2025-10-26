@@ -60,7 +60,7 @@ const items: NavigationMenuItem[] = [{
 
 <template>
   <PApp>
-    <UHeader />
+    <PHeader />
 
     <UMain>
       <NuxtLayout>
@@ -70,7 +70,7 @@ const items: NavigationMenuItem[] = [{
 
     <USeparator icon="i-simple-icons-nuxtdotjs" type="dashed" class="h-px" />
 
-    <UFooter>
+    <PFooter>
       <template #left>
         <p class="text-muted text-sm">
           Copyright © {{ new Date().getFullYear() }}
@@ -105,7 +105,7 @@ const items: NavigationMenuItem[] = [{
           aria-label="GitHub"
         />
       </template>
-    </UFooter>
+    </PFooter>
   </PApp>
 </template>
 ```

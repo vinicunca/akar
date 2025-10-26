@@ -13,6 +13,7 @@ import { contentNavigationTheme } from './themes/content-navigation.theme';
 import { contentSurroundTheme } from './themes/content-surround.theme';
 import { contentTocTheme } from './themes/content-toc.theme';
 import { dialogTheme } from './themes/dialog.theme';
+import { errorTheme } from './themes/error.theme';
 import { formFieldTheme } from './themes/form-field.theme';
 import { headerTheme } from './themes/header.theme';
 import { inputTheme } from './themes/input.theme';
@@ -52,6 +53,7 @@ export default defineAppConfig({
     contentToc: contentTocTheme,
     contentNavigation: contentNavigationTheme,
     contentSurround: contentSurroundTheme,
+    error: errorTheme,
     formField: formFieldTheme,
     header: headerTheme,
     link: linkTheme,

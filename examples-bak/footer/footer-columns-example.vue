@@ -39,7 +39,7 @@ const columns: FooterColumn[] = [{
 </script>
 
 <template>
-  <UFooterColumns :columns="columns">
+  <PFooterColumns :columns="columns">
     <template #right>
       <UFormField name="email" label="Subscribe to our newsletter" size="lg">
         <UInput type="email" class="w-full">
@@ -49,5 +49,5 @@ const columns: FooterColumn[] = [{
         </UInput>
       </UFormField>
     </template>
-  </UFooterColumns>
+  </PFooterColumns>
 </template>

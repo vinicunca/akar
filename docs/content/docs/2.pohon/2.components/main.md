@@ -25,7 +25,7 @@ Use the Main component in your `app.vue` or in a layout:
 ```vue [app.vue]{5-9}
 <template>
   <PApp>
-    <UHeader />
+    <PHeader />
 
     <UMain>
       <NuxtLayout>
@@ -33,7 +33,7 @@ Use the Main component in your `app.vue` or in a layout:
       </NuxtLayout>
     </UMain>
 
-    <UFooter />
+    <PFooter />
   </PApp>
 </template>
 ```

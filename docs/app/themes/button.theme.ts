@@ -57,7 +57,7 @@ export const buttonTheme = {
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'solid',
-      class: `text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}/75 disabled:bg-${color} aria-disabled:bg-${color} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}`,
+      class: `color-text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}/75 disabled:bg-${color} aria-disabled:bg-${color} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}`,
     })),
     ...BRANDS.map((color: string) => ({
       color,
@@ -87,7 +87,7 @@ export const buttonTheme = {
     {
       color: 'neutral',
       variant: 'solid',
-      class: 'text-inverted bg-background-inverted hover:bg-background-inverted/90 active:bg-background-inverted/90 disabled:bg-background-inverted aria-disabled:bg-background-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-outline-inverted',
+      class: 'color-text-inverted bg-background-inverted hover:bg-background-inverted/90 active:bg-background-inverted/90 disabled:bg-background-inverted aria-disabled:bg-background-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-outline-inverted',
     },
     {
       color: 'neutral',
