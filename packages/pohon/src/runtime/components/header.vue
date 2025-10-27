@@ -126,7 +126,7 @@ const menuProps = toRef(() =>
         onOpenAutoFocus: (event: Event) => event.preventDefault(),
       },
     },
-    props.mode === 'dialog' ? { fullscreen: true, transition: false } : {},
+    props.mode === 'dialog' ? { fullscreen: true } : {},
   ) as HeaderMenu<T>,
 );
 
@@ -151,13 +151,17 @@ function toggleOpen() {
         :icon="open ? appConfig.pohon.icons.close : appConfig.pohon.icons.menu"
         v-bind="(typeof toggle === 'object' ? toggle as Partial<PButtonProps> : {})"
         :class="pohon.toggle({ class: props.pohon?.toggle, toggleSide })"
+        data-pohon="header-toggle"
         @click="toggleOpen"
       />
     </slot>
   </DefineToggleTemplate>
 
   <DefineLeftTemplate>
-    <div :class="pohon.left({ class: props.pohon?.left })">
+    <div
+      :class="pohon.left({ class: props.pohon?.left })"
+      data-pohon="header-left"
+    >
       <ReuseToggleTemplate v-if="toggleSide === 'left'" />
 
       <slot name="left">
@@ -165,6 +169,7 @@ function toggleOpen() {
           :to="to"
           :aria-label="ariaLabel"
           :class="pohon.title({ class: props.pohon?.title })"
+          data-pohon="header-title"
         >
           <slot name="title">
             {{ title }}
@@ -175,7 +180,10 @@ function toggleOpen() {
   </DefineLeftTemplate>
 
   <DefineRightTemplate>
-    <div :class="pohon.right({ class: props.pohon?.right })">
+    <div
+      :class="pohon.right({ class: props.pohon?.right })"
+      data-pohon="header-right"
+    >
       <slot name="right" />
 
       <ReuseToggleTemplate v-if="toggleSide === 'right'" />
@@ -186,13 +194,20 @@ function toggleOpen() {
     :as="as"
     v-bind="$attrs"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="header-root"
   >
     <slot name="top" />
 
-    <PContainer :class="pohon.container({ class: props.pohon?.container })">
+    <PContainer
+      :class="pohon.container({ class: props.pohon?.container })"
+      data-pohon="header-container"
+    >
       <ReuseLeftTemplate />
 
-      <div :class="pohon.center({ class: props.pohon?.center })">
+      <div
+        :class="pohon.center({ class: props.pohon?.center })"
+        data-pohon="header-center"
+      >
         <slot />
       </div>
 
@@ -220,13 +235,17 @@ function toggleOpen() {
         <div
           v-if="mode !== 'drawer'"
           :class="pohon.header({ class: props.pohon?.header })"
+          data-pohon="header-header"
         >
           <ReuseLeftTemplate />
 
           <ReuseRightTemplate />
         </div>
 
-        <div :class="pohon.body({ class: props.pohon?.body })">
+        <div
+          :class="pohon.body({ class: props.pohon?.body })"
+          data-pohon="header-body"
+        >
           <slot name="body" />
         </div>
       </slot>

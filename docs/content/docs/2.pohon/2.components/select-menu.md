@@ -8,7 +8,7 @@ links:
     to: /docs/akar/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/SelectMenu.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/SelectMenu.vue
 ---
 
 ## Usage

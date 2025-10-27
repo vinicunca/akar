@@ -118,15 +118,21 @@ provide(
   <APrimitive
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="form-field-root"
   >
-    <div :class="pohon.wrapper({ class: props.pohon?.wrapper })">
+    <div
+      :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+      data-pohon="form-field-wrapper"
+    >
       <div
         v-if="label || !!slots.label"
         :class="pohon.labelWrapper({ class: props.pohon?.labelWrapper })"
+        data-pohon="form-field-label-wrapper"
       >
         <ALabel
           :for="id"
           :class="pohon.label({ class: props.pohon?.label })"
+          data-pohon="form-field-label"
         >
           <slot
             name="label"
@@ -135,10 +141,12 @@ provide(
             {{ label }}
           </slot>
         </ALabel>
+
         <span
           v-if="hint || !!slots.hint"
           :id="`${ariaId}-hint`"
           :class="pohon.hint({ class: props.pohon?.hint })"
+          data-pohon="form-field-hint"
         >
           <slot
             name="hint"
@@ -153,6 +161,7 @@ provide(
         v-if="description || !!slots.description"
         :id="`${ariaId}-description`"
         :class="pohon.description({ class: props.pohon?.description })"
+        data-pohon="form-field-description"
       >
         <slot
           name="description"
@@ -163,13 +172,17 @@ provide(
       </p>
     </div>
 
-    <div :class="[(label || !!slots.label || description || !!slots.description) && pohon.container({ class: props.pohon?.container })]">
+    <div
+      :class="[(label || !!slots.label || description || !!slots.description) && pohon.container({ class: props.pohon?.container })]"
+      data-pohon="form-field-container"
+    >
       <slot :error="error" />
 
       <div
         v-if="(isString(error) && error) || !!slots.error"
         :id="`${ariaId}-error`"
         :class="pohon.error({ class: props.pohon?.error })"
+        data-pohon="form-field-error"
       >
         <slot
           name="error"
@@ -182,6 +195,7 @@ provide(
         v-else-if="help || !!slots.help"
         :id="`${ariaId}-help`"
         :class="pohon.help({ class: props.pohon?.help })"
+        data-pohon="form-field-help"
       >
         <slot
           name="help"

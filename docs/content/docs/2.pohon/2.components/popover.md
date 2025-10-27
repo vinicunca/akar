@@ -10,12 +10,12 @@ links:
     to: /docs/akar/components/popover
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Popover.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Popover.vue
 ---
 
 ## Usage
 
-Use a [Button](/docs/components/button) or any other component in the default slot of the Popover.
+Use a [Button](/docs/pohon/components/button) or any other component in the default slot of the Popover.
 
 Then, use the `#content` slot to add the content displayed when the Popover is open.
 

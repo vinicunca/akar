@@ -8,7 +8,7 @@ links:
     to: https://tanstack.com/table/latest
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Table.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Table.vue
 ---
 
 ## Usage
@@ -253,7 +253,7 @@ class: '!p-0'
 
 ### With expandable rows
 
-You can add a new column that renders a [Button](/docs/components/button) component inside the `cell` to toggle the expandable state of a row using the TanStack Table [Expanding APIs](https://tanstack.com/table/latest/docs/api/features/expanding).
+You can add a new column that renders a [Button](/docs/pohon/components/button) component inside the `cell` to toggle the expandable state of a row using the TanStack Table [Expanding APIs](https://tanstack.com/table/latest/docs/api/features/expanding).
 
 ::caution
 You need to define the `#expanded` slot to render the expanded content which will receive the row as a parameter.
@@ -409,7 +409,7 @@ class: '!p-0'
 
 ### With column sorting
 
-You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/latest/docs/api/features/sorting).
+You can update a column `header` to render a [Button](/docs/pohon/components/button) component inside the `header` to toggle the sorting state using the TanStack Table [Sorting APIs](https://tanstack.com/table/latest/docs/api/features/sorting).
 
 ::docs-pohon-example
 ---
@@ -447,7 +447,7 @@ In this example, we use a function to define the column header but you can also 
 
 ### With column pinning
 
-You can update a column `header` to render a [Button](/docs/components/button) component inside the `header` to toggle the pinning state using the TanStack Table [Pinning APIs](https://tanstack.com/table/latest/docs/api/features/row-pinning).
+You can update a column `header` to render a [Button](/docs/pohon/components/button) component inside the `header` to toggle the pinning state using the TanStack Table [Pinning APIs](https://tanstack.com/table/latest/docs/api/features/row-pinning).
 
 ::note
 A pinned column will become sticky on the left or right side of the table.

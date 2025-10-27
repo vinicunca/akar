@@ -5,7 +5,7 @@ category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/PageSection.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/PageSection.vue
 ---
 
 ## Usage
@@ -148,7 +148,7 @@ props:
 
 ### Links
 
-Use the `links` prop to display a list of [Button](/docs/components/button) under the description.
+Use the `links` prop to display a list of [Button](/docs/pohon/components/button) under the description.
 
 ::docs-pohon-preview
 ---

@@ -12,7 +12,7 @@ const { copy, copied } = useClipboard()
     :pohon="{ trailing: 'pr-0.5' }"
   >
     <template v-if="value?.length" #trailing>
-      <UTooltip text="Copy to clipboard" :content="{ side: 'right' }">
+      <PTooltip text="Copy to clipboard" :content="{ side: 'right' }">
         <PButton
           :color="copied ? 'success' : 'neutral'"
           variant="link"
@@ -21,7 +21,7 @@ const { copy, copied } = useClipboard()
           aria-label="Copy to clipboard"
           @click="copy(value)"
         />
-      </UTooltip>
+      </PTooltip>
     </template>
   </PInput>
 </template>

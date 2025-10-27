@@ -63,7 +63,7 @@ const versions = [{
       class="flex items-start"
       :pohon="{
         container: 'max-w-lg me-0',
-        indicator: 'sticky top-(--ui-header-height) pt-4 -mt-4 flex flex-col items-end'
+        indicator: 'sticky top-(--pohon-header-height) pt-4 -mt-4 flex flex-col items-end'
       }"
     >
       <template #indicator>

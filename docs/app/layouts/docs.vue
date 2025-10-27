@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Ref } from '#imports';
 import type { ContentNavigationItem } from '@nuxt/content';
-import { PContainer, PMain } from '#components';
+import { PContainer, PContentNavigation, PMain } from '#components';
 import { inject, useNavigation, useRoute, watch } from '#imports';
 import { useDebounceFn } from '@vueuse/core';
 
@@ -60,8 +60,6 @@ watch(
         <div class="lg:col-span-8">
           <slot />
         </div>
-
-        <div class="after:(rounded-full w-px block transition-colors inset-y-0.5 absolute -left-1.5)" />
       </div>
     </PContainer>
   </PMain>

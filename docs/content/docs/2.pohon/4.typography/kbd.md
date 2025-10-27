@@ -6,7 +6,7 @@ category: components
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/prose/Kbd.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/prose/Kbd.vue
 ---
 
 ## Usage

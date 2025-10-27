@@ -4,11 +4,11 @@ description: 'A Button to collapse the sidebar on desktop.'
 category: dashboard
 links:
   - label: Button
-    to: /docs/components/button
+    to: /docs/pohon/components/button
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/DashboardSidebarCollapse.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/DashboardSidebarCollapse.vue
 ---
 
 ## Usage
@@ -17,7 +17,7 @@ The DashboardSidebarCollapse component is used to collapse/expand the [Dashboard
 
 :component-code
 
-It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
+It extends the [Button](/docs/pohon/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
 ::docs-pohon-preview
 ---

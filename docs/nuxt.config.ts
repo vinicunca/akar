@@ -118,6 +118,16 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     'nuxt-component-meta',
     'nuxt-og-image',
+    (_, nuxt) => {
+      nuxt.hook('components:dirs', (dirs) => {
+        dirs.unshift({
+          global: true,
+          path: resolve('./app/components/content/examples'),
+          pathPrefix: false,
+          prefix: '',
+        });
+      });
+    },
   ],
 
   routeRules: {
@@ -161,10 +171,19 @@ export default defineNuxtConfig({
         'zod',
         'json5',
         'ohash',
+        'ohash/utils',
         'shiki-transformer-color-highlight',
         '@internationalized/date',
         'unocss-variants',
+        'unocss/preset-wind4',
         '@vinicunca/perkakas',
+        '@nuxt/content/utils',
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+        'motion-v',
+        'prettier',
+        'shiki',
+        'shiki/engine-javascript.mjs',
       ],
     },
   },

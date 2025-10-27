@@ -7,12 +7,12 @@ links:
     to: /docs/akar/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Modal.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Modal.vue
 ---
 
 ## Usage
 
-Use a [Button](/docs/components/button) or any other component in the default slot of the Modal.
+Use a [Button](/docs/pohon/components/button) or any other component in the default slot of the Modal.
 
 Then, use the `#content` slot to add the content displayed when the Modal is open.
 
@@ -94,7 +94,7 @@ slots:
 
 Use the `close` prop to customize or hide the close button (with `false` value) displayed in the Modal's header.
 
-You can pass any property from the [Button](/docs/components/button) component to customize it.
+You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 
 ::docs-pohon-preview
 ---
@@ -308,7 +308,7 @@ slots:
 You can use the [`useOverlay`](/docs/composables/use-overlay) composable to open a Modal programmatically.
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/components/app) component which uses the [`OverlayProvider`](https://github.com/nuxt/ui/blob/v4/src/runtime/components/OverlayProvider.vue) component.
+Make sure to wrap your app with the [`App`](/docs/components/app) component which uses the [`OverlayProvider`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/OverlayProvider.vue) component.
 ::
 
 First, create a modal component that will be opened programmatically:

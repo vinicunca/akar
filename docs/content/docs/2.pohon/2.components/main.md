@@ -5,15 +5,15 @@ category: layout
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Main.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Main.vue
 ---
 
 ## Usage
 
-The Main component renders a `<main>` element that works together with the [Header](/docs/components/header) component to create a full-height layout that extends to the viewport's available height.
+The Main component renders a `<main>` element that works together with the [Header](/docs/pohon/components/header) component to create a full-height layout that extends to the viewport's available height.
 
 ::tip{to="/docs/getting-started/theme/css-variables#header"}
-The Main component uses the `--ui-header-height` CSS variable to position itself correctly below the [Header](/docs/components/header).
+The Main component uses the `--pohon-header-height` CSS variable to position itself correctly below the [Header](/docs/pohon/components/header). Make sure to set this variable according to your header's height.
 ::
 
 ## Examples

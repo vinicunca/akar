@@ -5,7 +5,7 @@ category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/FileUpload.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/FileUpload.vue
 ---
 
 ## Usage
@@ -58,7 +58,7 @@ props:
 Use the `interactive` prop to enable/disable the clickable area. Defaults to `true`.
 
 ::tip{to="#with-files-bottom-slot"}
-This can be useful when adding a [`Button`](/docs/components/button) component in the `#actions` slot.
+This can be useful when adding a [`Button`](/docs/pohon/components/button) component in the `#actions` slot.
 ::
 
 ::docs-pohon-preview
@@ -291,7 +291,7 @@ name: 'file-upload-default-slot-example'
 
 ### With files-bottom slot
 
-You can use the `files-bottom` slot to add a [Button](/docs/components/button) under the files list to remove all files for example.
+You can use the `files-bottom` slot to add a [Button](/docs/pohon/components/button) under the files list to remove all files for example.
 
 ::docs-pohon-example
 ---
@@ -307,7 +307,7 @@ The `interactive` prop is set to `false` in this example to prevent the default 
 
 ### With files-top slot
 
-You can use the `files-top` slot to add a [Button](/docs/components/button) above the files list to add new files for example.
+You can use the `files-top` slot to add a [Button](/docs/pohon/components/button) above the files list to add new files for example.
 
 ::docs-pohon-example
 ---

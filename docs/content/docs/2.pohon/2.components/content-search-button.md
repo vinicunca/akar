@@ -5,11 +5,11 @@ category: content
 framework: nuxt
 links:
   - label: Button
-    to: /docs/components/button
+    to: /docs/pohon/components/button
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/content/ContentSearchButton.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/content/ContentSearchButton.vue
 ---
 
 ::warning{to="/docs/getting-started/integrations/content"}
@@ -22,7 +22,7 @@ The ContentSearchButton component is used to open the [ContentSearch](/docs/comp
 
 :component-code{prefix="content"}
 
-It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
+It extends the [Button](/docs/pohon/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
 ::docs-pohon-preview{prefix="content"}
 ---

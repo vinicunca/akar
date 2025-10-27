@@ -5,7 +5,7 @@ category: data
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Empty.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Empty.vue
 navigation.badge: Soon
 ---
 
@@ -93,7 +93,7 @@ props:
 
 ### Actions
 
-Use the `actions` prop to add some [Button](/docs/components/button) actions to the empty state.
+Use the `actions` prop to add some [Button](/docs/pohon/components/button) actions to the empty state.
 
 ::docs-pohon-preview
 ---

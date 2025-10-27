@@ -7,7 +7,7 @@ links:
     to: /docs/akar/components/toast
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Toast.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Toast.vue
 ---
 
 ## Usage
@@ -23,7 +23,7 @@ name: 'toast-example'
 ::
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/components/app) component which uses our [`Toaster`](https://github.com/nuxt/ui/blob/v4/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://akar.com/docs/components/toast#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/docs/components/app) component which uses our [`Toaster`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://akar.com/docs/components/toast#provider) component from Reka UI.
 ::
 
 ::tip{to="/docs/components/app#props"}
@@ -115,7 +115,7 @@ name: 'toast-color-example'
 
 ### Close
 
-Pass a `close` field to customize or hide the close [Button](/docs/components/button) (with `false` value).
+Pass a `close` field to customize or hide the close [Button](/docs/pohon/components/button) (with `false` value).
 
 ::docs-pohon-example
 ---
@@ -151,7 +151,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 ### Actions
 
-Pass an `actions` field to add some [Button](/docs/components/button) actions to the Toast.
+Pass an `actions` field to add some [Button](/docs/pohon/components/button) actions to the Toast.
 
 ::docs-pohon-example
 ---
@@ -226,7 +226,7 @@ name: 'toast-example'
 :toaster-position-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L3"}
+::note{to="https://github.com/vinicunca/akar/blob/main/packages/pohon/docs/app/app.config.ts#L3"}
 In this example, we use the `AppConfig` to configure the `position` prop of the `Toaster` component globally.
 ::
 
@@ -256,7 +256,7 @@ name: 'toast-example'
 :toaster-duration-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L4"}
+::note{to="https://github.com/vinicunca/akar/blob/main/packages/pohon/docs/app/app.config.ts#L4"}
 In this example, we use the `AppConfig` to configure the `duration` prop of the `Toaster` component globally.
 ::
 
@@ -286,7 +286,7 @@ name: 'toast-example'
 :toaster-max-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L5"}
+::note{to="https://github.com/vinicunca/akar/blob/main/packages/pohon/docs/app/app.config.ts#L5"}
 In this example, we use the `AppConfig` to configure the `max` prop of the `Toaster` component globally.
 ::
 
@@ -320,7 +320,7 @@ name: 'toast-example'
 :toaster-expand-example
 ::
 
-::note{to="https://github.com/nuxt/ui/blob/v4/docs/app/app.config.ts#L6"}
+::note{to="https://github.com/vinicunca/akar/blob/main/packages/pohon/docs/app/app.config.ts#L6"}
 In this example, we use the `AppConfig` to configure the `expand` prop of the `Toaster` component globally.
 ::
 

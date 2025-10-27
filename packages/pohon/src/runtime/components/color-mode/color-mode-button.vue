@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PButtonProps } from 'pohon';
+import type { PButtonProps } from 'pohon-ui';
 
 export interface PColorModeButtonProps extends /** @vue-ignore */ Pick<PButtonProps, 'as' | 'size' | 'disabled' | 'pohon'> {
   /**

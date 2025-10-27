@@ -4,7 +4,7 @@ category: navigation
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Link.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Link.vue
 ---
 
 ## Usage
@@ -19,7 +19,7 @@ The Link component is a wrapper around [`<NuxtLink>`](https://nuxt.com/docs/api/
 The incentive behind this is to provide the same API as NuxtLink back in Nuxt 2 / Vue 2. You can read more about it in the Vue Router [migration from Vue 2](https://router.vuejs.org/guide/migration/#removal-of-the-exact-prop-in-router-link) guide.
 
 ::note
-It is used by the [`Breadcrumb`](/docs/components/breadcrumb), [`Button`](/docs/components/button), [`ContextMenu`](/docs/components/context-menu), [`DropdownMenu`](/docs/components/dropdown-menu) and [`NavigationMenu`](/docs/components/navigation-menu) components.
+It is used by the [`Breadcrumb`](/docs/components/breadcrumb), [`Button`](/docs/pohon/components/button), [`ContextMenu`](/docs/components/context-menu), [`DropdownMenu`](/docs/components/dropdown-menu) and [`NavigationMenu`](/docs/components/navigation-menu) components.
 ::
 
 ### Tag

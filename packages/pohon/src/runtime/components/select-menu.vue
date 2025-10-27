@@ -525,9 +525,13 @@ defineExpose({
     <AComboboxItem
       :class="pohon.item({ class: props.pohon?.item })"
       :value="searchTerm"
+      data-pohon="select-menu-item"
       @select.prevent="emits('create', searchTerm)"
     >
-      <span :class="pohon.itemLabel({ class: props.pohon?.itemLabel })">
+      <span
+        :class="pohon.itemLabel({ class: props.pohon?.itemLabel })"
+        data-pohon="select-menu-item-label"
+      >
         <slot
           name="create-item-label"
           :item="searchTerm"
@@ -541,6 +545,7 @@ defineExpose({
   <DefineItemTemplate v-slot="{ item, index }">
     <AComboboxLabel
       v-if="isSelectItem(item) && item.type === 'label'"
+      data-pohon="select-menu-label"
       :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
     >
       {{ getProp({ object: item, path: props.labelKey as string }) }}
@@ -554,6 +559,7 @@ defineExpose({
     <AComboboxItem
       v-else
       :class="pohon.item({ class: [props.pohon?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
+      data-pohon="select-menu-item"
       :disabled="isSelectItem(item) && item.disabled"
       :value="props.valueKey && isSelectItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
       @select="onSelect($event, item)"
@@ -574,12 +580,14 @@ defineExpose({
             v-if="isSelectItem(item) && item.icon"
             :name="item.icon"
             :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
+            data-pohon="select-menu-item-leading-icon"
           />
           <PAvatar
             v-else-if="isSelectItem(item) && item.avatar"
             :size="((item.pohon?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="item.avatar"
             :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
+            data-pohon="select-menu-item-leading-avatar"
           />
 
           <PChip
@@ -589,6 +597,7 @@ defineExpose({
             standalone
             v-bind="item.chip"
             :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
+            data-pohon="select-menu-item-leading-chip"
           />
         </slot>
 
@@ -598,6 +607,7 @@ defineExpose({
               props.pohon?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
             ],
           })"
+          data-pohon="select-menu-item-wrapper"
         >
           <span
             :class="pohon.itemLabel({
@@ -605,6 +615,7 @@ defineExpose({
                 props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
               ],
             })"
+            data-pohon="select-menu-item-label"
           >
             <slot
               name="item-label"
@@ -622,6 +633,7 @@ defineExpose({
                 props.pohon?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
               ],
             })"
+            data-pohon="select-menu-item-description"
           >
             <slot
               name="item-description"
@@ -631,22 +643,26 @@ defineExpose({
               {{ getProp({ object: item, path: props.descriptionKey as string }) }}
             </slot>
           </span>
+        </span>
 
-          <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })">
-            <slot
-              name="item-trailing"
-              :item="(item as NestedItem<T>)"
-              :index="index"
-              :pohon="pohon"
+        <span
+          :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })"
+          data-pohon="select-menu-item-trailing"
+        >
+          <slot
+            name="item-trailing"
+            :item="(item as NestedItem<T>)"
+            :index="index"
+            :pohon="pohon"
+          />
+
+          <AComboboxItemIndicator as-child>
+            <PIcon
+              :name="selectedIcon || appConfig.pohon.icons.check"
+              :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
+              data-pohon="select-menu-item-trailing-icon"
             />
-
-            <AComboboxItemIndicator as-child>
-              <PIcon
-                :name="selectedIcon || appConfig.pohon.icons.check"
-                :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
-              />
-            </AComboboxItemIndicator>
-          </span>
+          </AComboboxItemIndicator>
         </span>
       </slot>
     </AComboboxItem>

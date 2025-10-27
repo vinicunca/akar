@@ -4,16 +4,16 @@ description: 'A Button to switch between light and dark mode.'
 category: color-mode
 links:
   - label: Button
-    to: /docs/components/button
+    to: /docs/pohon/components/button
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/color-mode/ColorModeButton.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/color-mode/ColorModeButton.vue
 ---
 
 ## Usage
 
-The ColorModeButton component extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
+The ColorModeButton component extends the [Button](/docs/pohon/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
 :component-code{prefix="color-mode"}
 

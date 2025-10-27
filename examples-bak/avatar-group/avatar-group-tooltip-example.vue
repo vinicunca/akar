@@ -1,24 +1,24 @@
 <template>
   <UAvatarGroup>
-    <UTooltip text="benjamincanac">
+    <PTooltip text="benjamincanac">
       <UAvatar
         src="https://github.com/benjamincanac.png"
         alt="Benjamin Canac"
       />
-    </UTooltip>
+    </PTooltip>
 
-    <UTooltip text="romhml">
+    <PTooltip text="romhml">
       <UAvatar
         src="https://github.com/romhml.png"
         alt="Romain Hamel"
       />
-    </UTooltip>
+    </PTooltip>
 
-    <UTooltip text="noook">
+    <PTooltip text="noook">
       <UAvatar
         src="https://github.com/noook.png"
         alt="Neil Richter"
       />
-    </UTooltip>
+    </PTooltip>
   </UAvatarGroup>
 </template>

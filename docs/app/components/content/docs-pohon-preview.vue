@@ -3,7 +3,7 @@
 import type { PChipProps } from 'pohon-ui';
 import { useAsyncData, useNuxtApp, useRoute } from '#app';
 import * as theme from '#build/pohon';
-import { CoreComponentPreview, MDCRenderer, PChip, PFormField, PSelect } from '#components';
+import { MDCRenderer, PChip, PFormField, PSelect } from '#components';
 import { fetchComponentMeta, parseMarkdown } from '#imports';
 import { getProp, setProp } from '#pohon/utils';
 import { CalendarDate } from '@internationalized/date';
@@ -39,6 +39,11 @@ const props = defineProps<{
    * @defaultValue false
    */
   prettier?: boolean;
+  /**
+   * Whether to collapse the code block
+   * @defaultValue false
+   */
+  collapse?: boolean;
   /**
    * A list of line numbers to highlight in the code block
    */
@@ -204,6 +209,11 @@ ${props.slots?.default}
     return code;
   }
 
+  if (props.collapse) {
+    code += `::code-collapse
+`;
+  }
+
   code += `\`\`\`vue${props.highlights?.length ? ` {${props.highlights.join('-')}}` : ''}`;
 
   if (props.external?.length) {
@@ -295,6 +305,11 @@ ${props.slots?.default}
 \`\`\`
 `;
 
+  if (props.collapse) {
+    code += `
+::`;
+  }
+
   return code;
 });
 
@@ -324,78 +339,75 @@ const { data: ast } = await useAsyncData(
 </script>
 
 <template>
-  <CoreComponentPreview
-    :preview-classes="[
-      !options.length && 'rounded-t-md',
-      props.class,
-      { 'overflow-hidden': props.overflowHidden },
-      'rounded-b-md',
-    ]"
-    :code-classes="[
-      {
-        'rounded-t-0': options.length,
-      },
-    ]"
+  <div
+    class="my-5"
+    :style="{ '--pohon-header-height': '4rem' }"
   >
-    <div
-      v-if="options.length"
-      class="px-4 py-2.5 border border-b-0 border-border-muted rounded-t-md flex flex-wrap gap-2.5 items-center relative overflow-x-auto"
-    >
-      <template
-        v-for="option in options"
-        :key="option.name"
+    <div class="relative">
+      <div
+        v-if="options.length"
+        class="px-4 py-2.5 border border-b-0 border-border-muted rounded-t-md flex flex-wrap gap-2.5 items-center relative overflow-x-auto"
       >
-        <PFormField
-          :label="option.label"
-          size="sm"
-          class="rounded-sm inline-flex ring ring-ring-accented"
-          :pohon="{
-            wrapper: 'bg-background-elevated/50 rounded-l-sm flex border-r border-border-accented',
-            label: 'color-text-muted px-2 py-1.5',
-            container: 'akar:mt-0',
-          }"
+        <template
+          v-for="option in options"
+          :key="option.name"
         >
-          <PSelect
-            v-if="option.items?.length"
-            :model-value="getComponentProp(option.name)"
-            :items="option.items"
-            value-key="value"
-            color="neutral"
-            variant="soft"
-            class="rounded-sm rounded-l-none min-w-12"
-            :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
-            :pohon="{ itemLeadingChip: 'size-2' }"
-            @update:model-value="setComponentProp(option.name, $event)"
+          <PFormField
+            :label="option.label"
+            size="sm"
+            class="rounded-sm inline-flex ring ring-ring-accented"
+            :pohon="{
+              wrapper: 'bg-background-elevated/50 rounded-l-sm flex border-r border-border-accented',
+              label: 'color-text-muted px-2 py-1.5',
+              container: 'akar:mt-0',
+            }"
           >
-            <template
-              v-if="option.name.toLowerCase().endsWith('color')"
-              #leading="{ modelValue, pohon }"
+            <PSelect
+              v-if="option.items?.length"
+              :model-value="getComponentProp(option.name)"
+              :items="option.items"
+              value-key="value"
+              color="neutral"
+              variant="soft"
+              class="rounded-sm rounded-l-none min-w-12"
+              :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
+              :pohon="{ itemLeadingChip: 'size-2' }"
+              @update:model-value="setComponentProp(option.name, $event)"
             >
-              <PChip
-                v-if="modelValue"
-                inset
-                standalone
-                :color="(modelValue as any)"
-                :size="(pohon.itemLeadingChipSize() as PChipProps['size'])"
-                class="size-2"
-              />
-            </template>
-          </PSelect>
+              <template
+                v-if="option.name.toLowerCase().endsWith('color')"
+                #leading="{ modelValue, pohon }"
+              >
+                <PChip
+                  v-if="modelValue"
+                  inset
+                  standalone
+                  :color="(modelValue as any)"
+                  :size="(pohon.itemLeadingChipSize() as PChipProps['size'])"
+                  class="size-2"
+                />
+              </template>
+            </PSelect>
 
-          <PInput
-            v-else
-            :type="option.type?.includes('number') && typeof getComponentProp(option.name) === 'number' ? 'number' : 'text'"
-            :model-value="getComponentProp(option.name)"
-            color="neutral"
-            variant="soft"
-            :pohon="{ base: 'rounded-sm rounded-l-none min-w-12' }"
-            @update:model-value="setComponentProp(option.name, $event)"
-          />
-        </PFormField>
-      </template>
+            <PInput
+              v-else
+              :type="option.type?.includes('number') && typeof getComponentProp(option.name) === 'number' ? 'number' : 'text'"
+              :model-value="getComponentProp(option.name)"
+              color="neutral"
+              variant="soft"
+              :pohon="{ base: 'rounded-sm rounded-l-none min-w-12' }"
+              @update:model-value="setComponentProp(option.name, $event)"
+            />
+          </PFormField>
+        </template>
+      </div>
     </div>
 
-    <template #preview>
+    <div
+      v-if="component"
+      class="p-4 border border-b-0 border-border-muted flex justify-center relative z-[1]"
+      :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]"
+    >
       <component
         :is="component"
         v-bind="{ ...componentProps, ...componentEvents }"
@@ -413,15 +425,13 @@ const { data: ast } = await useAsyncData(
           </slot>
         </template>
       </component>
-    </template>
+    </div>
 
-    <template #code>
-      <MDCRenderer
-        v-if="ast"
-        :body="ast.body"
-        :data="ast.data"
-        class="[&_div.my-5]:!mt-0"
-      />
-    </template>
-  </CoreComponentPreview>
+    <MDCRenderer
+      v-if="ast"
+      :body="ast.body"
+      :data="ast.data"
+      class="[&_div.my-5]:!mt-0 [&_pre]:!rounded-t-none"
+    />
+  </div>
 </template>

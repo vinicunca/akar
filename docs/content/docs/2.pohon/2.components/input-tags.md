@@ -8,7 +8,7 @@ links:
     to: /docs/akar/components/tags-input
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputTags.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/InputTags.vue
 ---
 
 ## Usage

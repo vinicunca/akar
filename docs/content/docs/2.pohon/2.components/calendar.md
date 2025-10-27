@@ -8,7 +8,7 @@ links:
     to: /docs/akar/components/calendar
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Calendar.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Calendar.vue
 ---
 
 ## Usage
@@ -257,7 +257,7 @@ name: 'calendar-external-controls-example'
 
 ### As a DatePicker
 
-Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date picker.
+Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/components/popover) component to create a date picker.
 
 ::docs-pohon-example
 ---
@@ -267,7 +267,7 @@ name: 'calendar-date-picker-example'
 
 ### As a DateRangePicker
 
-Use a [Button](/docs/components/button) and a [Popover](/docs/components/popover) component to create a date range picker.
+Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/components/popover) component to create a date range picker.
 
 ::docs-pohon-example
 ---

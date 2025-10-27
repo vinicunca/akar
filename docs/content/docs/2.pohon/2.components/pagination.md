@@ -7,7 +7,7 @@ links:
     to: /docs/akar/components/pagination
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Pagination.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Pagination.vue
 ---
 
 ## Usage
@@ -30,7 +30,7 @@ props:
 ::
 
 ::note
-The Pagination component uses some [`Button`](/docs/components/button) to display the pages, use [`color`](#color), [`variant`](#variant) and [`size`](#size) props to style them.
+The Pagination component uses some [`Button`](/docs/pohon/components/button) to display the pages, use [`color`](#color), [`variant`](#variant) and [`size`](#size) props to style them.
 ::
 
 ### Total

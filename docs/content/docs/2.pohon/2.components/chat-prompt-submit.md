@@ -4,18 +4,18 @@ description: 'A Button for submitting chat prompts with automatic status handlin
 category: chat
 links:
   - label: Button
-    to: /docs/components/button
+    to: /docs/pohon/components/button
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatPromptSubmit.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/ChatPromptSubmit.vue
 ---
 
 ## Usage
 
 The ChatPromptSubmit component is used inside the [ChatPrompt](/docs/components/chat-prompt) component to submit the prompt. It automatically handles the different `status` values to control the chat.
 
-It extends the [Button](/docs/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
+It extends the [Button](/docs/pohon/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
 ::code-preview
 

@@ -8,7 +8,7 @@ links:
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/AuthForm.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/AuthForm.vue
 ---
 
 ## Usage
@@ -174,7 +174,7 @@ props:
 
 Use the `providers` prop to add providers to the form.
 
-You can pass any property from the [Button](/docs/components/button) component such as `variant`, `color`, `to`, etc.
+You can pass any property from the [Button](/docs/pohon/components/button) component such as `variant`, `color`, `to`, etc.
 
 ::docs-pohon-preview
 ---
@@ -310,7 +310,7 @@ props:
 
 Use the `submit` prop to change the submit button of the Form.
 
-You can pass any property from the [Button](/docs/components/button) component such as `variant`, `color`, `to`, etc.
+You can pass any property from the [Button](/docs/pohon/components/button) component such as `variant`, `color`, `to`, etc.
 
 ::docs-pohon-preview
 ---

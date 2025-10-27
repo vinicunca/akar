@@ -72,13 +72,13 @@ provide('navigation', rootNavigation);
     />
 
     <div :class="[route.path.startsWith('/docs/') && 'root']">
-      <LayoutHeader />
+      <LayoutHeader v-if="!route.path.startsWith('/examples')" />
 
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
 
-      <LayoutFooter />
+      <LayoutFooter v-if="!route.path.startsWith('/examples')" />
     </div>
   </PApp>
 </template>

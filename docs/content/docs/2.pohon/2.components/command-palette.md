@@ -12,7 +12,7 @@ links:
     to: /docs/akar/components/listbox
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/CommandPalette.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/CommandPalette.vue
 ---
 
 ## Usage
@@ -519,7 +519,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.lo
 
 ### Close
 
-Use the `close` prop to display a [Button](/docs/components/button) to dismiss the CommandPalette.
+Use the `close` prop to display a [Button](/docs/pohon/components/button) to dismiss the CommandPalette.
 
 ::tip
 An `update:open` event will be emitted when the close button is clicked.
@@ -553,7 +553,7 @@ props:
 ---
 ::
 
-You can pass any property from the [Button](/docs/components/button) component to customize it.
+You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 
 ::docs-pohon-preview
 ---
@@ -637,7 +637,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 Use the `back` prop to customize or hide the back button (with `false` value) displayed when navigating into a submenu.
 
-You can pass any property from the [Button](/docs/components/button) component to customize it.
+You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 
 ::docs-pohon-preview
 ---

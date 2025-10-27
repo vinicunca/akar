@@ -5,7 +5,7 @@ category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/DashboardPanel.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/DashboardPanel.vue
 ---
 
 ## Usage

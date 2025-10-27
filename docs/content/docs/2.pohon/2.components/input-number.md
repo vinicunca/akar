@@ -8,7 +8,7 @@ links:
     to: https://www.akar.com/docs/components/number-field
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/InputNumber.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/InputNumber.vue
 ---
 
 ## Usage
@@ -170,7 +170,7 @@ props:
 
 ### Increment / Decrement
 
-Use the `increment` and `decrement` props to customize the increment and decrement buttons with any [Button](/docs/components/button) props. Defaults to `{ variant: 'link' }`{lang="ts-type"}.
+Use the `increment` and `decrement` props to customize the increment and decrement buttons with any [Button](/docs/pohon/components/button) props. Defaults to `{ variant: 'link' }`{lang="ts-type"}.
 
 ::docs-pohon-preview
 ---

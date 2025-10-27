@@ -636,22 +636,22 @@ defineExpose({
               {{ getProp({ object: item, path: props.descriptionKey as string }) }}
             </slot>
           </span>
+        </span>
 
-          <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isInputItem(item) && item.pohon?.itemTrailing] })">
-            <slot
-              name="item-trailing"
-              :item="(item as NestedItem<T>)"
-              :index="index"
-              :pohon="pohon"
+        <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isInputItem(item) && item.pohon?.itemTrailing] })">
+          <slot
+            name="item-trailing"
+            :item="(item as NestedItem<T>)"
+            :index="index"
+            :pohon="pohon"
+          />
+
+          <AComboboxItemIndicator as-child>
+            <PIcon
+              :name="selectedIcon || appConfig.pohon.icons.check"
+              :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isInputItem(item) && item.pohon?.itemTrailingIcon] })"
             />
-
-            <AComboboxItemIndicator as-child>
-              <PIcon
-                :name="selectedIcon || appConfig.pohon.icons.check"
-                :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isInputItem(item) && item.pohon?.itemTrailingIcon] })"
-              />
-            </AComboboxItemIndicator>
-          </span>
+          </AComboboxItemIndicator>
         </span>
       </slot>
     </AComboboxItem>

@@ -5,7 +5,7 @@ category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/PricingPlan.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/PricingPlan.vue
 ---
 
 ## Usage
@@ -256,7 +256,7 @@ props:
 
 ### Button
 
-Use the `button` prop with any property from the [Button](/docs/components/button) component to display a button at the bottom of the PricingPlan.
+Use the `button` prop with any property from the [Button](/docs/pohon/components/button) component to display a button at the bottom of the PricingPlan.
 
 ::docs-pohon-preview
 ---

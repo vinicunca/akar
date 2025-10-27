@@ -6,7 +6,7 @@ framework: nuxt
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/content/ContentSurround.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/content/ContentSurround.vue
 ---
 
 ::warning{to="/docs/getting-started/integrations/content"}

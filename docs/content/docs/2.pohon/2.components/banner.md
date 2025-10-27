@@ -5,7 +5,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Banner.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Banner.vue
 ---
 
 ## Usage
@@ -59,7 +59,7 @@ props:
 
 ### Close
 
-Use the `close` prop to display a [Button](/docs/components/button) to dismiss the Banner. Defaults to `false`.
+Use the `close` prop to display a [Button](/docs/pohon/components/button) to dismiss the Banner. Defaults to `false`.
 
 ::tip
 A `close` event will be emitted when the close button is clicked.
@@ -128,7 +128,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 ### Actions
 
-Use the `actions` prop to add some [Button](/docs/components/button) actions to the Banner.
+Use the `actions` prop to add some [Button](/docs/pohon/components/button) actions to the Banner.
 
 ::docs-pohon-preview
 ---

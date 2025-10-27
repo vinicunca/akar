@@ -17,7 +17,7 @@ const reference = computed(() => ({
 </script>
 
 <template>
-  <UTooltip
+  <PTooltip
     :open="open"
     :reference="reference"
     :content="{ side: 'top', sideOffset: 16, updatePositionStrategy: 'always' }"
@@ -37,5 +37,5 @@ const reference = computed(() => ({
     <template #content>
       {{ anchor.x.toFixed(0) }} - {{ anchor.y.toFixed(0) }}
     </template>
-  </UTooltip>
+  </PTooltip>
 </template>

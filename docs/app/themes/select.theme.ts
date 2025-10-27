@@ -28,6 +28,8 @@ export const selectTheme = {
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     itemTrailingIcon: 'shrink-0',
     itemLabel: 'truncate',
+    itemWrapper: 'flex-1 flex flex-col min-w-0',
+    itemDescription: 'truncate color-text-muted',
     ...inputSlots,
   },
   variants: defu(

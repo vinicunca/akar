@@ -5,7 +5,7 @@ category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/DashboardSidebar.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/DashboardSidebar.vue
 ---
 
 ## Usage
@@ -224,7 +224,7 @@ These examples contain the [`DashboardGroup`](/docs/components/dashboard-group),
 
 Use the `toggle` prop to customize the [DashboardSidebarToggle](/docs/components/dashboard-sidebar-toggle) component displayed on mobile.
 
-You can pass any property from the [Button](/docs/components/button) component to customize it.
+You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 
 ::docs-pohon-example
 ---

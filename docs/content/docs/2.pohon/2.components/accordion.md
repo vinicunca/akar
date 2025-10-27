@@ -6,7 +6,7 @@ links:
     to: /docs/akar/components/accordion
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/core/pohon/src/runtime/components/accordion.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/accordion.vue
 ---
 
 ## Usage

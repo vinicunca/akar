@@ -7,12 +7,12 @@ links:
     to: https://github.com/unovue/vaul-vue
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Drawer.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Drawer.vue
 ---
 
 ## Usage
 
-Use a [Button](/docs/components/button) or any other component in the default slot of the Drawer.
+Use a [Button](/docs/pohon/components/button) or any other component in the default slot of the Drawer.
 
 Then, use the `#content` slot to add the content displayed when the Drawer is open.
 

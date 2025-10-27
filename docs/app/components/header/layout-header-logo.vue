@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { PContextMenu } from '#components';
+import { BaseLogo, PContextMenu } from '#components';
 import { useToast } from '#imports';
 import { useClipboard } from '@vueuse/core';
 import { ref } from 'vue';
-import BaseLogo from '../base-logo.vue';
 
 const logoRef = ref();
 

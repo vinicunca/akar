@@ -1,4 +1,5 @@
-export interface PMessages {
+/* eslint-disable ts/consistent-type-definitions */
+export type PMessages = {
   alert: {
     close: string;
   };
@@ -131,13 +132,13 @@ export interface PMessages {
   toast: {
     close: string;
   };
-}
+};
 
 export type PDirection = 'ltr' | 'rtl';
 
-export interface PLocale<M> {
+export type PLocale<M> = {
   name: string;
   code: string;
   dir: PDirection;
   messages: M;
-}
+};

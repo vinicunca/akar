@@ -9,7 +9,7 @@ links:
     target: _blank
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/ChatMessages.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/ChatMessages.vue
 ---
 
 ## Usage
@@ -230,7 +230,7 @@ Use the `auto-scroll` prop to customize or hide the auto scroll button (with `fa
 - `color: 'neutral'`{lang="ts-type"}
 - `variant: 'outline'`{lang="ts-type"}
 
-You can pass any property from the [Button](/docs/components/button) component to customize it.
+You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 
 ::docs-pohon-preview
 ---

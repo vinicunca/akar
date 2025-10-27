@@ -4,7 +4,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Button.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Button.vue
 ---
 
 ## Usage
@@ -344,7 +344,7 @@ slots:
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/blob/v4/src/runtime/components/Link.vue#L13"}
+::callout{icon="i-simple-icons-github" to="https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Link.vue#L13"}
 The `Button` component extends the `Link` component. Check out the source code on GitHub.
 ::
 

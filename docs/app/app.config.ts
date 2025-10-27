@@ -13,6 +13,7 @@ import { contentNavigationTheme } from './themes/content-navigation.theme';
 import { contentSurroundTheme } from './themes/content-surround.theme';
 import { contentTocTheme } from './themes/content-toc.theme';
 import { dialogTheme } from './themes/dialog.theme';
+import { drawerTheme } from './themes/drawer.theme';
 import { errorTheme } from './themes/error.theme';
 import { footerTheme } from './themes/footer.theme';
 import { formFieldTheme } from './themes/form-field.theme';
@@ -23,8 +24,10 @@ import { linkTheme } from './themes/link.theme';
 import { mainTheme } from './themes/main.theme';
 import { navigationMenuTheme } from './themes/navigation-menu.theme';
 import { popoverTheme } from './themes/popover.theme';
+import { selectMenuTheme } from './themes/select-menu.theme';
 import { selectTheme } from './themes/select.theme';
 import { separatorTheme } from './themes/separator.theme';
+import { slideoverTheme } from './themes/slideover.theme';
 import { tabsTheme } from './themes/tabs.theme';
 import { tooltipTheme } from './themes/tooltip.theme';
 
@@ -60,9 +63,12 @@ export default defineAppConfig({
     header: headerTheme,
     link: linkTheme,
     dialog: dialogTheme,
+    drawer: drawerTheme,
     main: mainTheme,
     input: inputTheme,
     select: selectTheme,
+    selectMenu: selectMenuTheme,
+    slideover: slideoverTheme,
     navigationMenu: navigationMenuTheme,
     separator: separatorTheme,
     kbd: kbdTheme,

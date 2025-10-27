@@ -8,7 +8,7 @@ links:
     to: /docs/akar/components/radio-group
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/RadioGroup.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/RadioGroup.vue
 ---
 
 ## Usage

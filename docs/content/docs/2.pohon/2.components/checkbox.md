@@ -7,7 +7,7 @@ links:
     to: /docs/akar/components/checkbox
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Checkbox.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Checkbox.vue
 ---
 
 ## Usage

@@ -5,7 +5,7 @@ category: page
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/PageLinks.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/PageLinks.vue
 ---
 
 ## Usage
@@ -24,7 +24,7 @@ props:
   links:
     - label: 'Edit this page'
       icon: i-lucide-file-pen
-      to: https://github.com/nuxt/ui/blob/v4/docs/content/3.components/page-links.md
+      to: https://github.com/vinicunca/akar/blob/main/packages/pohon/docs/content/3.components/page-links.md
     - label: 'Star on GitHub'
       icon: i-lucide-star
       to: https://github.com/nuxt/ui
@@ -58,7 +58,7 @@ props:
   links:
     - label: 'Edit this page'
       icon: i-lucide-file-pen
-      to: https://github.com/nuxt/ui/blob/v4/docs/content/3.components/page-links.md
+      to: https://github.com/vinicunca/akar/blob/main/packages/pohon/docs/content/3.components/page-links.md
     - label: 'Star on GitHub'
       icon: i-lucide-star
       to: https://github.com/nuxt/ui
@@ -86,7 +86,7 @@ props:
   links:
     - label: 'Edit this page'
       icon: i-lucide-file-pen
-      to: https://github.com/nuxt/ui/blob/v4/docs/content/3.components/page-links.md
+      to: https://github.com/vinicunca/akar/blob/main/packages/pohon/docs/content/3.components/page-links.md
     - label: 'Star on GitHub'
       icon: i-lucide-star
       to: https://github.com/nuxt/ui

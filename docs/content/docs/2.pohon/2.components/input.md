@@ -4,7 +4,7 @@ category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Input.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Input.vue
 ---
 
 ## Usage
@@ -215,7 +215,7 @@ props:
 
 ### With clear button
 
-You can put a [Button](/docs/components/button) inside the `#trailing` slot to clear the Input.
+You can put a [Button](/docs/pohon/components/button) inside the `#trailing` slot to clear the Input.
 
 ::docs-pohon-example
 ---
@@ -225,7 +225,7 @@ name: 'input-clear-button-example'
 
 ### With copy button
 
-You can put a [Button](/docs/components/button) inside the `#trailing` slot to copy the value to the clipboard.
+You can put a [Button](/docs/pohon/components/button) inside the `#trailing` slot to copy the value to the clipboard.
 
 ::docs-pohon-example
 ---
@@ -235,7 +235,7 @@ name: 'input-copy-button-example'
 
 ### With password toggle
 
-You can put a [Button](/docs/components/button) inside the `#trailing` slot to toggle the password visibility.
+You can put a [Button](/docs/pohon/components/button) inside the `#trailing` slot to toggle the password visibility.
 
 ::docs-pohon-example
 ---

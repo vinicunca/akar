@@ -5,15 +5,15 @@ category: layout
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/blob/v4/src/runtime/components/Header.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/header.vue
 ---
 
 ## Usage
 
 The Header component renders a `<header>` element.
 
-::tip{to="/docs/getting-started/theme/css-variables#header"}
-Its height is defined through a `--ui-header-height` CSS variable.
+::tip{to="/docs/pohon/getting-started/theme/css-variables#header"}
+Its height is defined through a `--pohon-header-height` CSS variable. Make sure to set this variable according to your header's height.
 ::
 
 Use the `left`, `default` and `right` slots to customize the header and the `body` or `content` slots to customize the header menu.
@@ -31,19 +31,19 @@ props:
 ::
 
 ::note
-In this example, we use the [NavigationMenu](/docs/components/navigation-menu) component to render the header links in the center.
+In this example, we use the [NavigationMenu](/docs/pohon/components/navigation-menu) component to render the header links in the center.
 ::
 
 ### Title
 
-Use the `title` prop to change the title of the header. Defaults to `Nuxt UI`.
+Use the `title` prop to change the title of the header. Defaults to `Akar`.
 
 ::docs-pohon-preview
 ---
 hide:
   - class
 props:
-  title: 'Nuxt UI'
+  title: 'Akar'
   class: 'w-full'
 class: '!px-0 !pt-0'
 ---
@@ -62,12 +62,12 @@ props:
 slots:
   title: |
 
-    <Logo class="h-6 w-auto" />
+    <BaseLogo class="h-6 w-auto" />
 class: '!px-0 !pt-0'
 ---
 
 #title
-:logo{class="h-6 w-auto"}
+:base-logo{class="h-6 w-auto"}
 ::
 
 ### To
@@ -100,19 +100,20 @@ slots:
   left: |
 
     <NuxtLink to="/docs">
-      <Logo class="h-6 w-auto" />
+      <BaseLogo class="h-6 w-auto" />
     </NuxtLink>
 ---
 
 #left
 ::nuxt-link{to="/docs"}
-:logo{class="h-6 w-auto"}
+:base-logo{class="h-6 w-auto"}
 ::
+
 ::
 
 ### Mode
 
-Use the `mode` prop to change the mode of the header menu. Defaults to `modal`.
+Use the `mode` prop to change the mode of the header menu. Defaults to `dialog`.
 
 Use the `body` slot to fill the menu body (under the header) or the `content` slot to fill the entire menu.
 
@@ -131,9 +132,9 @@ name: 'header-menu-example'
 options:
   - name: 'mode'
     label: 'mode'
-    default: 'drawer'
+    default: 'dialog'
     items:
-      - modal
+      - dialog
       - slideover
       - drawer
 props:
@@ -145,7 +146,7 @@ props:
 
 Use the `toggle` prop to customize the toggle button displayed on mobile.
 
-You can pass any property from the [Button](/docs/components/button) component to customize it.
+You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 
 ::docs-pohon-example
 ---
@@ -185,11 +186,11 @@ Use the Header component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{28-51}
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { PNavigationMenuItem } from 'pohon-ui'
 
 const route = useRoute()
 
-const items = computed<NavigationMenuItem[]>(() => [{
+const items = computed<PNavigationMenuItem[]>(() => [{
   label: 'Docs',
   to: '/docs/getting-started',
   active: route.path.startsWith('/docs/getting-started')
@@ -212,13 +213,13 @@ const items = computed<NavigationMenuItem[]>(() => [{
   <PApp>
     <PHeader>
       <template #title>
-        <Logo class="h-6 w-auto" />
+        <LayoutHeaderLogo class="h-6 w-auto" />
       </template>
 
       <PNavigationMenu :items="items" />
 
       <template #right>
-        <UColorModeButton />
+        <PColorModeButton />
 
         <PButton
           color="neutral"
