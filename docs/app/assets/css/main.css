@@ -2,6 +2,7 @@
   --pohon-header-height: calc(var(--spacing) * 16);
   --default-mono-font-family: var(--font-mono);
   --pohon-card: 24 9.8% 10%;
+  --pohon-container: var(--container-8xl);
 }
 
 body {

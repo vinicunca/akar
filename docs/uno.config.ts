@@ -79,6 +79,7 @@ export default defineConfig({
       `hover:bg-${color}/10`,
       `hover:bg-${color}/15`,
       `hover:bg-${color}/75`,
+      `hover:bg-${color}/90`,
       `active:bg-${color}`,
       `active:bg-${color}/10`,
       `active:bg-${color}/15`,

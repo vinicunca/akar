@@ -2,6 +2,7 @@ export * from './accordion.theme';
 export * from './alert.theme';
 export * from './avatar.theme';
 export * from './badge.theme';
+export * from './banner.theme';
 export * from './breadcrumb.theme';
 export * from './button.theme';
 export * from './chip.theme';

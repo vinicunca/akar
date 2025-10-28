@@ -5,7 +5,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Banner.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/banner.vue
 ---
 
 ## Usage
@@ -76,7 +76,7 @@ name: 'banner-example'
 
 ```vue
 <template>
-  <UBanner id="example" title="This is a closable banner." close />
+  <PBanner id="example" title="This is a closable banner." close />
 </template>
 ```
 
@@ -104,7 +104,7 @@ props:
 
 ```vue
 <template>
-  <UBanner
+  <PBanner
     title="This is a closable banner with a custom close icon."
     close
     close-icon="i-lucide-x-circle"
@@ -187,7 +187,7 @@ Use the Banner component in your `app.vue` or in a layout:
 ```vue [app.vue]{3}
 <template>
   <PApp>
-    <UBanner icon="i-lucide-construction" title="Nuxt UI v4 has been released!" />
+    <PBanner icon="i-lucide-construction" title="Nuxt UI v4 has been released!" />
 
     <PHeader />
 
