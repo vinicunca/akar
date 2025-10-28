@@ -28,7 +28,7 @@ props:
   items:
     - - label: Benjamin
         avatar:
-          src: 'https://github.com/benjamincanac.png'
+          src: 'https://github.com/praburangki.png'
         type: label
     - - label: Profile
         icon: i-lucide-user
@@ -62,7 +62,7 @@ props:
         target: _blank
       - label: Support
         icon: i-lucide-life-buoy
-        to: '/docs/components/dropdown-menu'
+        to: '/docs/pohon/components/dropdown-menu'
       - label: API
         icon: i-lucide-cloud
         disabled: true
@@ -100,7 +100,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `pohon?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-preview
 ---
@@ -117,7 +117,7 @@ props:
   items:
     - - label: Benjamin
         avatar:
-          src: 'https://github.com/benjamincanac.png'
+          src: 'https://github.com/praburangki.png'
         type: label
     - - label: Profile
         icon: i-lucide-user
@@ -151,7 +151,7 @@ props:
         target: _blank
       - label: Support
         icon: i-lucide-life-buoy
-        to: '/docs/components/dropdown-menu'
+        to: '/docs/pohon/components/dropdown-menu'
       - label: API
         icon: i-lucide-cloud
         disabled: true
@@ -432,7 +432,7 @@ export default defineAppConfig({
 
 ### Extract shortcuts
 
-When you have some items with `kbds` property (displaying some [Kbd](/docs/components/kbd)), you can easily make them work with the [defineShortcuts](/docs/composables/define-shortcuts) composable.
+When you have some items with `kbds` property (displaying some [Kbd](/docs/pohon/components/kbd)), you can easily make them work with the [defineShortcuts](/docs/composables/define-shortcuts) composable.
 
 Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility that will extract the shortcuts recursively from the items and return an object that you can pass to `defineShortcuts`. It will automatically call the `select` function of the item when the shortcut is pressed.
 

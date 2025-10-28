@@ -13,10 +13,10 @@ links:
 The PageAside component is a sticky `<aside>` element that is only displayed starting from the [`lg` breakpoint](https://tailwindcss.com/docs/breakpoints).
 
 ::tip{to="/docs/getting-started/theme/css-variables#header"}
-The PageAside component uses the `--pohon-header-height` CSS variable to position itself correctly below the [Header](/docs/components/header).
+The PageAside component uses the `--pohon-header-height` CSS variable to position itself correctly below the [Header](/docs/pohon/components/header).
 ::
 
-Use it inside the `left` or `right` slot of the [Page](/docs/components/page) component:
+Use it inside the `left` or `right` slot of the [Page](/docs/pohon/components/page) component:
 
 ```vue {4}
 <template>

@@ -36,8 +36,8 @@ class: 'w-96'
 
 ::
 
-::tip{to="/docs/components/pricing-plans"}
-Use the [`PricingPlans`](/docs/components/pricing-plans) component to display multiple pricing plans in a responsive grid layout.
+::tip{to="/docs/pohon/components/pricing-plans"}
+Use the [`PricingPlans`](/docs/pohon/components/pricing-plans) component to display multiple pricing plans in a responsive grid layout.
 ::
 
 ### Title
@@ -73,7 +73,7 @@ props:
 
 ### Badge
 
-Use the `badge` prop to display a [Badge](/docs/components/badge) next to the title of the PricingPlan.
+Use the `badge` prop to display a [Badge](/docs/pohon/components/badge) next to the title of the PricingPlan.
 
 ::docs-pohon-preview
 ---
@@ -91,7 +91,7 @@ props:
 ---
 ::
 
-You can pass any property from the [Badge](/docs/components/badge#props) component to customize it.
+You can pass any property from the [Badge](/docs/pohon/components/badge#props) component to customize it.
 
 ::docs-pohon-preview
 ---
@@ -456,7 +456,7 @@ props:
 
 Use the `scale` prop to make a PricingPlan bigger than the others.
 
-::note{to="/docs/components/pricing-plans#scale"}
+::note{to="/docs/pohon/components/pricing-plans#scale"}
 Check out the PricingPlans's `scale` example to see how it works as it's hard to demonstrate by itself.
 ::
 

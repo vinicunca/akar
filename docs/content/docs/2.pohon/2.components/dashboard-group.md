@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The DashboardGroup component is the main layout that wraps the [DashboardSidebar](/docs/components/dashboard-sidebar) and [DashboardPanel](/docs/components/dashboard-panel) components to create a responsive dashboard interface.
+The DashboardGroup component is the main layout that wraps the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) and [DashboardPanel](/docs/pohon/components/dashboard-panel) components to create a responsive dashboard interface.
 
 Use it in a layout or in your `app.vue`:
 

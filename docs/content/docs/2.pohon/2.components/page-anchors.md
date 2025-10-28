@@ -27,7 +27,7 @@ props:
       to: /docs/getting-started
     - label: 'Components'
       icon: i-lucide-box
-      to: /docs/components
+      to: /docs/pohon/components
     - label: 'Figma Kit'
       icon: i-simple-icons-figma
       to: https://akar.vinicunca.dev/figma-ui
@@ -48,7 +48,7 @@ Use the `links` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeading?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`{lang="ts-type"}
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-preview
 ---
@@ -66,7 +66,7 @@ props:
       to: /docs/getting-started
     - label: 'Components'
       icon: i-lucide-box
-      to: /docs/components
+      to: /docs/pohon/components
     - label: 'Figma Kit'
       icon: i-simple-icons-figma
       to: https://akar.vinicunca.dev/figma-ui
@@ -86,7 +86,7 @@ While these examples use [Nuxt Content](https://content.nuxt.com), the component
 
 ### Within a layout
 
-Use the PageAnchors component inside the [PageAside](/docs/components/page-aside) component to display a list of links above the navigation.
+Use the PageAnchors component inside the [PageAside](/docs/pohon/components/page-aside) component to display a list of links above the navigation.
 
 ```vue [layouts/docs.vue]{35}
 <script setup lang="ts">
@@ -102,7 +102,7 @@ const links: PageAnchor[] = [{
 }, {
   label: 'Components',
   icon: 'i-lucide-box',
-  to: '/docs/components'
+  to: '/docs/pohon/components'
 }, {
   label: 'Figma Kit',
   icon: 'i-simple-icons-figma',

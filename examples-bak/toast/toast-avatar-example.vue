@@ -10,7 +10,7 @@ const toast = useToast()
 function showToast() {
   toast.add({
     title: 'User invited',
-    description: 'benjamincanac was invited to the team.',
+    description: 'praburangki was invited to the team.',
     avatar: props.avatar
   })
 }

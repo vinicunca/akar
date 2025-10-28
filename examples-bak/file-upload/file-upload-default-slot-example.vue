@@ -71,7 +71,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
     <PFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max.">
       <UFileUpload v-slot="{ open, removeFile }" v-model="state.avatar" accept="image/*">
         <div class="flex flex-wrap items-center gap-3">
-          <UAvatar size="lg" :src="state.avatar ? createObjectUrl(state.avatar) : undefined" icon="i-lucide-image" />
+          <PAvatar size="lg" :src="state.avatar ? createObjectUrl(state.avatar) : undefined" icon="i-lucide-image" />
 
           <PButton :label="state.avatar ? 'Change image' : 'Upload image'" color="neutral" variant="outline" @click="open()" />
         </div>

@@ -237,7 +237,7 @@ props:
 
 ### With row actions
 
-You can add a new column that renders a [DropdownMenu](/docs/components/dropdown-menu) component inside the `cell` to render row actions.
+You can add a new column that renders a [DropdownMenu](/docs/pohon/components/dropdown-menu) component inside the `cell` to render row actions.
 
 ::docs-pohon-example
 ---
@@ -276,7 +276,7 @@ You can use the `expanded` prop to control the expandable state of the rows (can
 ::
 
 ::note
-You could also add this action to the [`DropdownMenu`](/docs/components/dropdown-menu) component inside the `actions` column.
+You could also add this action to the [`DropdownMenu`](/docs/pohon/components/dropdown-menu) component inside the `actions` column.
 ::
 
 ### With grouped rows
@@ -305,7 +305,7 @@ class: '!p-0'
 
 ### With row selection
 
-You can add a new column that renders a [Checkbox](/docs/components/checkbox) component inside the `header` and `cell` to select rows using the TanStack Table [Row Selection APIs](https://tanstack.com/table/latest/docs/api/features/row-selection).
+You can add a new column that renders a [Checkbox](/docs/pohon/components/checkbox) component inside the `header` and `cell` to select rows using the TanStack Table [Row Selection APIs](https://tanstack.com/table/latest/docs/api/features/row-selection).
 
 ::docs-pohon-example
 ---
@@ -349,7 +349,7 @@ You can use this to navigate to a page, open a modal or even to select the row m
 
 ### With row context menu event
 
-You can add a `@contextmenu` listener to make rows right clickable and wrap the Table in a [ContextMenu](/docs/components/context-menu) component to display row actions for example.
+You can add a `@contextmenu` listener to make rows right clickable and wrap the Table in a [ContextMenu](/docs/pohon/components/context-menu) component to display row actions for example.
 
 ::note
 The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
@@ -369,7 +369,7 @@ class: '!p-0'
 
 ### With row hover event
 
-You can add a `@hover` listener to make rows hoverable and use a [Popover](/docs/components/popover) or a [Tooltip](/docs/components/tooltip) component to display row details for example.
+You can add a `@hover` listener to make rows hoverable and use a [Popover](/docs/pohon/components/popover) or a [Tooltip](/docs/pohon/components/tooltip) component to display row details for example.
 
 ::note
 The handler function receives the `Event` and `TableRow` instance as the first and second arguments respectively.
@@ -388,7 +388,7 @@ class: '!p-0'
 ::
 
 ::note
-This example is similar as the Popover [with following cursor example](/docs/components/popover#with-following-cursor) and uses a [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to prevent the Popover from opening and closing too quickly when moving the cursor from one row to another.
+This example is similar as the Popover [with following cursor example](/docs/pohon/components/popover#with-following-cursor) and uses a [`refDebounced`](https://vueuse.org/shared/refDebounced/#refdebounced) to prevent the Popover from opening and closing too quickly when moving the cursor from one row to another.
 ::
 
 ### With column footer
@@ -471,7 +471,7 @@ You can use the `column-pinning` prop to control the pinning state of the column
 
 ### With column visibility
 
-You can use a [DropdownMenu](/docs/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
+You can use a [DropdownMenu](/docs/pohon/components/dropdown-menu) component to toggle the visibility of the columns using the TanStack Table [Column Visibility APIs](https://tanstack.com/table/latest/docs/api/features/column-visibility).
 
 ::docs-pohon-example
 ---
@@ -491,7 +491,7 @@ You can use the `column-visibility` prop to control the visibility state of the 
 
 ### With column filters
 
-You can use an [Input](/docs/components/input) component to filter per column the rows using the TanStack Table [Column Filtering APIs](https://tanstack.com/table/latest/docs/api/features/column-filtering).
+You can use an [Input](/docs/pohon/components/input) component to filter per column the rows using the TanStack Table [Column Filtering APIs](https://tanstack.com/table/latest/docs/api/features/column-filtering).
 
 ::docs-pohon-example
 ---
@@ -511,7 +511,7 @@ You can use the `column-filters` prop to control the filters state of the column
 
 ### With global filter
 
-You can use an [Input](/docs/components/input) component to filter the rows using the TanStack Table [Global Filtering APIs](https://tanstack.com/table/latest/docs/api/features/global-filtering).
+You can use an [Input](/docs/pohon/components/input) component to filter the rows using the TanStack Table [Global Filtering APIs](https://tanstack.com/table/latest/docs/api/features/global-filtering).
 
 ::docs-pohon-example
 ---
@@ -528,7 +528,7 @@ You can use the `global-filter` prop to control the global filter state (can be 
 
 ### With pagination
 
-You can use a [Pagination](/docs/components/pagination) component to control the pagination state using the [Pagination APIs](https://tanstack.com/table/latest/docs/api/features/pagination).
+You can use a [Pagination](/docs/pohon/components/pagination) component to control the pagination state using the [Pagination APIs](https://tanstack.com/table/latest/docs/api/features/pagination).
 
 There are different pagination approaches as explained in [Pagination Guide](https://tanstack.com/table/latest/docs/guide/pagination#pagination-guide). In this example, we use client-side pagination so we need to manually pass `getPaginationRowModel()`{lang="ts-type"} function.
 

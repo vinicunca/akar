@@ -25,7 +25,7 @@ const items = [{
     {
       src: 'https://github.com/J-Michalek.png'
     }, {
-      src: 'https://github.com/benjamincanac.png'
+      src: 'https://github.com/praburangki.png'
     }
   ]
 }, {
@@ -43,9 +43,9 @@ const items = [{
       <div class="flex items-center gap-1">
         <span>{{ item.title }}</span>
 
-        <UAvatarGroup size="2xs">
-          <UAvatar v-for="(developer, index) of item.developers" :key="index" v-bind="developer" />
-        </UAvatarGroup>
+        <PAvatarGroup size="2xs">
+          <PAvatar v-for="(developer, index) of item.developers" :key="index" v-bind="developer" />
+        </PAvatarGroup>
       </div>
     </template>
   </UTimeline>

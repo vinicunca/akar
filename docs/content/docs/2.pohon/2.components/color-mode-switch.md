@@ -4,7 +4,7 @@ description: 'A switch to toggle between light and dark mode.'
 category: color-mode
 links:
   - label: Switch
-    to: /docs/components/switch
+    to: /docs/pohon/components/switch
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The ColorModeSwitch component extends the [Switch](/docs/components/switch) component, so you can pass any property such as `color`, `size`, etc.
+The ColorModeSwitch component extends the [Switch](/docs/pohon/components/switch) component, so you can pass any property such as `color`, `size`, etc.
 
 :component-code{prefix="color-mode"}
 

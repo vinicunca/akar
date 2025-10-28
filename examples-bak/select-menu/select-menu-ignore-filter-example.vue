@@ -29,7 +29,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     class="w-48"
   >
     <template #leading="{ modelValue, ui }">
-      <UAvatar
+      <PAvatar
         v-if="modelValue"
         v-bind="modelValue.avatar"
         :size="(ui.leadingAvatarSize() as AvatarProps['size'])"

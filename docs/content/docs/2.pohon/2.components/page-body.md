@@ -12,7 +12,7 @@ links:
 
 The PageBody component wraps your main content and adds some padding for consistent spacing.
 
-Use it inside the default slot of the [Page](/docs/components/page) component, after the [PageHeader](/docs/components/page-header) component:
+Use it inside the default slot of the [Page](/docs/pohon/components/page) component, after the [PageHeader](/docs/pohon/components/page-header) component:
 
 ```vue {5}
 <template>
@@ -71,7 +71,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 ```
 
 ::note
-In this example, we use the [`ContentRenderer`](https://content.nuxt.com/docs/components/content-renderer) component from `@nuxt/content` to render the content of the page.
+In this example, we use the [`ContentRenderer`](https://content.nuxt.com/docs/pohon/components/content-renderer) component from `@nuxt/content` to render the content of the page.
 ::
 
 ## API

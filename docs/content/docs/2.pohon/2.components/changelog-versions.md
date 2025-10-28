@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The ChangelogVersions component provides a flexible layout to display a list of [ChangelogVersion](/docs/components/changelog-version) components using either the default slot or the `versions` prop.
+The ChangelogVersions component provides a flexible layout to display a list of [ChangelogVersion](/docs/pohon/components/changelog-version) components using either the default slot or the `versions` prop.
 
 ```vue {2,8}
 <template>
@@ -26,7 +26,7 @@ The ChangelogVersions component provides a flexible layout to display a list of 
 
 ### Versions
 
-Use the `versions` prop as an array of objects with the properties of the [ChangelogVersion](/docs/components/changelog-version#props) component.
+Use the `versions` prop as an array of objects with the properties of the [ChangelogVersion](/docs/pohon/components/changelog-version#props) component.
 
 ::docs-pohon-preview
 ---
@@ -217,7 +217,7 @@ props:
 :docs-pohon-slots
 
 ::tip
-You can use all the slots of the [`ChangelogVersion`](/docs/components/changelog-version#slots) component inside ChangelogVersions, they are automatically forwarded allowing you to customize individual versions when using the `versions` prop.
+You can use all the slots of the [`ChangelogVersion`](/docs/pohon/components/changelog-version#slots) component inside ChangelogVersions, they are automatically forwarded allowing you to customize individual versions when using the `versions` prop.
 
 ```vue{3-5}
 <template>

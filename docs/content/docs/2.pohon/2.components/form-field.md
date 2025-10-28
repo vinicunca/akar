@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-Wrap any form component with a FormField. Used in a [Form](/docs/components/form), it provides validation and error handling.
+Wrap any form component with a FormField. Used in a [Form](/docs/pohon/components/form), it provides validation and error handling.
 
 ### Label
 
@@ -120,7 +120,7 @@ slots:
 
 Use the `error` prop to display an error message below the form control. When used together with the `help` prop, the `error` prop takes precedence.
 
-When used inside a [Form](/docs/components/form), this is automatically set when a validation error occurs.
+When used inside a [Form](/docs/pohon/components/form), this is automatically set when a validation error occurs.
 
 ::docs-pohon-preview
 ---

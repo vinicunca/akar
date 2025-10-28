@@ -267,7 +267,7 @@ props:
 
 ### With Form validation
 
-You can use the FileUpload within a [Form](/docs/components/form) and [FormField](/docs/components/form-field) components to handle validation and error handling.
+You can use the FileUpload within a [Form](/docs/pohon/components/form) and [FormField](/docs/pohon/components/form-field) components to handle validation and error handling.
 
 ::docs-pohon-example
 ---

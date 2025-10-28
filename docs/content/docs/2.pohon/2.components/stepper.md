@@ -204,13 +204,13 @@ This can be useful when you want to force navigation with controls.
 
 You can add additional controls for the stepper using buttons.
 
-:component-example{name="stepper-with-controls-example"}
+:docs-pohon-example{name="stepper-with-controls-example"}
 
 ### Control active item
 
 You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
 
-:component-example{name="stepper-model-value-example"}
+:docs-pohon-example{name="stepper-model-value-example"}
 
 ::tip
 You can also pass the `value` of one of the items if provided.
@@ -220,7 +220,7 @@ You can also pass the `value` of one of the items if provided.
 
 Use the `#content` slot to customize the content of each item.
 
-:component-example{name="stepper-content-slot-example"}
+:docs-pohon-example{name="stepper-content-slot-example"}
 
 ### With custom slot
 
@@ -230,7 +230,7 @@ You will have access to the following slots:
 
 - `#{{ item.slot }}`{lang="ts-type"}
 
-:component-example{name="stepper-custom-slot-example"}
+:docs-pohon-example{name="stepper-custom-slot-example"}
 
 ## API
 

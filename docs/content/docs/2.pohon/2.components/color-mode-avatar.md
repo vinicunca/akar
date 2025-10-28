@@ -4,7 +4,7 @@ description: 'An Avatar with a different source for light and dark mode.'
 category: color-mode
 links:
   - label: Avatar
-    to: /docs/components/avatar
+    to: /docs/pohon/components/avatar
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The ColorModeAvatar component extends the [Avatar](/docs/components/avatar) component, so you can pass any property such as `size`, `icon`, etc.
+The ColorModeAvatar component extends the [Avatar](/docs/pohon/components/avatar) component, so you can pass any property such as `size`, `icon`, etc.
 
 Use the `light` and `dark` props to define the source for light and dark mode.
 

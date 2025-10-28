@@ -11,7 +11,7 @@ links:
 
 ## Usage
 
-Use the `icon` component to display an [Icon](/docs/components/icon) in your content.
+Use the `icon` component to display an [Icon](/docs/pohon/components/icon) in your content.
 
 ::code-preview
 :icon{name="i-simple-icons-nuxtdotjs"}

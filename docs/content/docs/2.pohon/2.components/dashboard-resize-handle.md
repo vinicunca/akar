@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The DashboardResizeHandle component is used by the [DashboardSidebar](/docs/components/dashboard-sidebar) and [DashboardPanel](/docs/components/dashboard-panel) components.
+The DashboardResizeHandle component is used by the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) and [DashboardPanel](/docs/pohon/components/dashboard-panel) components.
 
 It is automatically displayed when the `resizable` prop is set, **you don't have to add it manually**.
 
@@ -18,7 +18,7 @@ It is automatically displayed when the `resizable` prop is set, **you don't have
 
 ### Within `resize-handle` slot
 
-Even though this component is automatically displayed when the `resizable` prop is set, you can use the `resize-handle` slot of the [DashboardSidebar](/docs/components/dashboard-sidebar) and [DashboardPanel](/docs/components/dashboard-panel) components to customize the handle.
+Even though this component is automatically displayed when the `resizable` prop is set, you can use the `resize-handle` slot of the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) and [DashboardPanel](/docs/pohon/components/dashboard-panel) components to customize the handle.
 
 ::code-group
 

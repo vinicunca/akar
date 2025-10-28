@@ -11,7 +11,7 @@ links:
 
 ## Usage
 
-Wrap your content with the `collapsible` component to display a [Collapsible](/docs/components/collapsible) in your content.
+Wrap your content with the `collapsible` component to display a [Collapsible](/docs/pohon/components/collapsible) in your content.
 
 ::code-preview{class="[&>div]:*:w-full [&>div]:*:my-0"}
 

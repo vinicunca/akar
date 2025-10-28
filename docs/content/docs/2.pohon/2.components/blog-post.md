@@ -35,8 +35,8 @@ class: 'w-96'
 
 ::
 
-::tip{to="/docs/components/blog-posts"}
-Use the [`BlogPosts`](/docs/components/blog-posts) component to display multiple blog posts in a responsive grid layout.
+::tip{to="/docs/pohon/components/blog-posts"}
+Use the [`BlogPosts`](/docs/pohon/components/blog-posts) component to display multiple blog posts in a responsive grid layout.
 ::
 
 ### Title
@@ -98,7 +98,7 @@ props:
 
 ### Badge
 
-Use the `badge` prop to display a [Badge](/docs/components/badge) in the BlogPost.
+Use the `badge` prop to display a [Badge](/docs/pohon/components/badge) in the BlogPost.
 
 ::docs-pohon-preview
 ---
@@ -116,7 +116,7 @@ props:
 ---
 ::
 
-You can pass any property from the [Badge](/docs/components/badge#props) component to customize it.
+You can pass any property from the [Badge](/docs/pohon/components/badge#props) component to customize it.
 
 ::docs-pohon-preview
 ---
@@ -168,7 +168,7 @@ props:
 
 ### Authors
 
-Use the `authors` prop to display a list of [User](/docs/components/user) in the BlogPost as an array of objects with the following properties:
+Use the `authors` prop to display a list of [User](/docs/pohon/components/user) in the BlogPost as an array of objects with the following properties:
 
 - `name?: string`{lang="ts-type"}
 - `description?: string`{lang="ts-type"}
@@ -177,7 +177,7 @@ Use the `authors` prop to display a list of [User](/docs/components/user) in the
 - `size?: UserProps['size']`{lang="ts-type"}
 - `orientation?: UserProps['orientation']`{lang="ts-type"}
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-preview
 ---
@@ -208,7 +208,7 @@ props:
 ---
 ::
 
-When the `authors` prop has more than one item, the [AvatarGroup](/docs/components/avatar-group) component is used.
+When the `authors` prop has more than one item, the [AvatarGroup](/docs/pohon/components/avatar-group) component is used.
 
 ::docs-pohon-preview
 ---
@@ -235,11 +235,11 @@ props:
         src: https://github.com/antfu.png
       to: https://github.com/antfu
       target: _blank
-    - name: Benjamin Canac
-      description: benjamincanac
+    - name: praburangki
+      description: praburangki
       avatar:
-        src: https://github.com/benjamincanac.png
-      to: https://github.com/benjamincanac
+        src: https://github.com/praburangki.png
+      to: https://github.com/praburangki
       target: _blank
   class: 'w-96'
 ---

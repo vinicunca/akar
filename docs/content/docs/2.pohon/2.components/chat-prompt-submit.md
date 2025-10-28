@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The ChatPromptSubmit component is used inside the [ChatPrompt](/docs/components/chat-prompt) component to submit the prompt. It automatically handles the different `status` values to control the chat.
+The ChatPromptSubmit component is used inside the [ChatPrompt](/docs/pohon/components/chat-prompt) component to submit the prompt. It automatically handles the different `status` values to control the chat.
 
 It extends the [Button](/docs/pohon/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
@@ -33,7 +33,7 @@ It extends the [Button](/docs/pohon/components/button) component, so you can pas
 ::
 
 ::note
-You can also use it inside the `footer` slot of the [`ChatPrompt`](/docs/components/chat-prompt) component.
+You can also use it inside the `footer` slot of the [`ChatPrompt`](/docs/pohon/components/chat-prompt) component.
 ::
 
 ### Ready

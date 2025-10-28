@@ -71,7 +71,7 @@ slots:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/docs/components/icon) inside the Button.
+Use the `icon` prop to show an [Icon](/docs/pohon/components/icon) inside the Button.
 
 ::docs-pohon-preview
 ---
@@ -111,7 +111,7 @@ props:
 
 ### Avatar
 
-Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Button.
+Use the `avatar` prop to show an [Avatar](/docs/pohon/components/avatar) inside the Button.
 
 ::docs-pohon-preview
 ---
@@ -145,7 +145,7 @@ props:
 
 ### Link
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-preview
 ---
@@ -250,11 +250,11 @@ Button
 
 Use the `loading-auto` prop to show the loading icon automatically while the `@click` promise is pending.
 
-:component-example{name="button-loading-auto-example"}
+:docs-pohon-example{name="button-loading-auto-example"}
 
-This also works with the [Form](/docs/components/form) component.
+This also works with the [Form](/docs/pohon/components/form) component.
 
-:component-example{name="button-loading-auto-form-example"}
+:docs-pohon-example{name="button-loading-auto-form-example"}
 
 ### Loading Icon
 

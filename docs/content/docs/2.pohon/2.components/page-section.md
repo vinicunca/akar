@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The PageSection component wraps your content in a [Container](/docs/components/container) while maintaining full-width flexibility making it easy to add background colors, images or patterns. It provides a flexible way to display content with an illustration in the default slot.
+The PageSection component wraps your content in a [Container](/docs/pohon/components/container) while maintaining full-width flexibility making it easy to add background colors, images or patterns. It provides a flexible way to display content with an illustration in the default slot.
 
 ::code-preview
 
@@ -37,7 +37,7 @@ features:
 
 ::
 
-Use it after a [PageHero](/docs/components/page-hero) component:
+Use it after a [PageHero](/docs/pohon/components/page-hero) component:
 
 ```vue {4}
 <template>
@@ -109,14 +109,14 @@ props:
 
 ### Features
 
-Use the `features` prop to display a list of [PageFeature](/docs/components/page-feature) under the description as an array of objects with the following properties:
+Use the `features` prop to display a list of [PageFeature](/docs/pohon/components/page-feature) under the description as an array of objects with the following properties:
 
 - `title?: string`{lang="ts-type"}
 - `description?: string`{lang="ts-type"}
 - `icon?: string`{lang="ts-type"}
 - `orientation?: 'horizontal' | 'vertical'`{lang="ts-type"}
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-preview
 ---
@@ -168,7 +168,7 @@ props:
       icon: 'i-lucide-square-play'
       color: 'neutral'
     - label: 'Explore components'
-      to: '/docs/components/app'
+      to: '/docs/pohon/components/app'
       color: 'neutral'
       variant: 'subtle'
       trailingIcon: 'i-lucide-arrow-right'
@@ -211,7 +211,7 @@ props:
       to: '/docs/getting-started/integrations/color-mode'
   links:
     - label: 'Explore components'
-      to: '/docs/components/app'
+      to: '/docs/pohon/components/app'
       color: 'neutral'
       variant: 'subtle'
       trailingIcon: 'i-lucide-arrow-right'
@@ -261,7 +261,7 @@ props:
       to: '/docs/getting-started/integrations/color-mode'
   links:
     - label: 'Explore components'
-      to: '/docs/components/app'
+      to: '/docs/pohon/components/app'
       color: 'neutral'
       variant: 'subtle'
       trailingIcon: 'i-lucide-arrow-right'

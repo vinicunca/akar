@@ -21,11 +21,11 @@ description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings
 image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
 date: 2025-03-12
 authors:
-  - name: Benjamin Canac
-    description: '@benjamincanac'
+  - name: praburangki
+    description: '@praburangki'
     avatar:
-      src: https://github.com/benjamincanac.png
-    to: https://x.com/benjamincanac
+      src: https://github.com/praburangki.png
+    to: https://x.com/praburangki
     target: _blank
   - name: Sebastien Chopin
     description: '@atinux'
@@ -48,8 +48,8 @@ ui.container: 'max-w-lg'
 
 ::
 
-::tip{to="/docs/components/changelog-versions"}
-Use the [`ChangelogVersions`](/docs/components/changelog-versions) component to display multiple changelog versions in a timeline with an indicator bar on the left.
+::tip{to="/docs/pohon/components/changelog-versions"}
+Use the [`ChangelogVersions`](/docs/pohon/components/changelog-versions) component to display multiple changelog versions in a timeline with an indicator bar on the left.
 ::
 
 ### Title
@@ -119,7 +119,7 @@ props:
 
 ### Badge
 
-Use the `badge` prop to display a [Badge](/docs/components/badge) on the ChangelogVersion.
+Use the `badge` prop to display a [Badge](/docs/pohon/components/badge) on the ChangelogVersion.
 
 ::docs-pohon-preview
 ---
@@ -142,7 +142,7 @@ props:
 ---
 ::
 
-You can pass any property from the [Badge](/docs/components/badge#props) component to customize it.
+You can pass any property from the [Badge](/docs/pohon/components/badge#props) component to customize it.
 
 ::docs-pohon-preview
 ---
@@ -202,7 +202,7 @@ props:
 
 ### Authors
 
-Use the `authors` prop to display a list of [User](/docs/components/user) in the ChangelogVersion as an array of objects with the following properties:
+Use the `authors` prop to display a list of [User](/docs/pohon/components/user) in the ChangelogVersion as an array of objects with the following properties:
 
 - `name?: string`{lang="ts-type"}
 - `description?: string`{lang="ts-type"}
@@ -211,7 +211,7 @@ Use the `authors` prop to display a list of [User](/docs/components/user) in the
 - `size?: UserProps['size']`{lang="ts-type"}
 - `orientation?: UserProps['orientation']`{lang="ts-type"}
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-preview
 ---
@@ -234,11 +234,11 @@ props:
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   authors:
-    - name: Benjamin Canac
-      description: '@benjamincanac'
+    - name: praburangki
+      description: '@praburangki'
       avatar:
-        src: https://github.com/benjamincanac.png
-      to: https://x.com/benjamincanac
+        src: https://github.com/praburangki.png
+      to: https://x.com/praburangki
       target: _blank
     - name: Sebastien Chopin
       description: '@atinux'
@@ -324,7 +324,7 @@ When the `indicator` prop is `false`, the date will be displayed over the title.
 You can use the `body` slot to display custom content between the image and the authors with:
 
 - the [MDC](https://github.com/nuxt-modules/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to display some markdown.
-- the [ContentRenderer](https://content.nuxt.com/docs/components/content-renderer) component from `@nuxt/content` to render the content of the page or list.
+- the [ContentRenderer](https://content.nuxt.com/docs/pohon/components/content-renderer) component from `@nuxt/content` to render the content of the page or list.
 - or use the `:u-changelog-version` component directly in your content with markdown inside the `body` slot as Nuxt UI provides pre-styled prose components.
 
 ::docs-pohon-example

@@ -3,27 +3,27 @@ import type { SelectMenuItem } from 'pohon-ui'
 
 const items = ref([
   {
-    label: 'benjamincanac',
-    value: 'benjamincanac',
+    label: 'praburangki',
+    value: 'praburangki',
     avatar: {
-      src: 'https://github.com/benjamincanac.png',
-      alt: 'benjamincanac'
+      src: 'https://github.com/praburangki.png',
+      alt: 'praburangki'
     }
   },
   {
-    label: 'romhml',
-    value: 'romhml',
+    label: 'wahyu-ivan',
+    value: 'wahyu-ivan',
     avatar: {
-      src: 'https://github.com/romhml.png',
-      alt: 'romhml'
+      src: 'https://github.com/wahyu-ivan.png',
+      alt: 'wahyu-ivan'
     }
   },
   {
-    label: 'noook',
-    value: 'noook',
+    label: 'GunawanAhmad',
+    value: 'GunawanAhmad',
     avatar: {
-      src: 'https://github.com/noook.png',
-      alt: 'noook'
+      src: 'https://github.com/GunawanAhmad.png',
+      alt: 'GunawanAhmad'
     }
   },
   {

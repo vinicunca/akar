@@ -14,11 +14,11 @@ items:
     to: 'https://compodium.dev/'
     target: '_blank'
     user:
-      name: 'romhml'
-      to: 'https://github.com/romhml'
+      name: 'wahyu-ivan'
+      to: 'https://github.com/wahyu-ivan'
       target: '_blank'
       avatar:
-        src: 'https://github.com/romhml.png'
+        src: 'https://github.com/wahyu-ivan.png'
   - label: 'Raycast Extension'
     description: 'Quickly search, browse, and copy Nuxt UI component code snippets without leaving your editor.'
     avatar:

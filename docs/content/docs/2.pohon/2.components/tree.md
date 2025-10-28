@@ -280,7 +280,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) of a parent node. Defaults to `i-lucide-chevron-down`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) of a parent node. Defaults to `i-lucide-chevron-down`.
 
 ::note
 If an icon is specified for an item, it will always take precedence over these props.
@@ -503,7 +503,7 @@ This lets you select a parent item without expanding or collapsing its children.
 
 ### With checkbox in items :badge{label="Soon"}
 
-You can use the `item-leading` slot to add a [Checkbox](/docs/components/checkbox) to the items. Use the `multiple`, `propagate-select` and `bubble-select` props to enable multi-selection with parent-child relationship and the `select` and `toggle` events to control the selected and expanded state of the items.
+You can use the `item-leading` slot to add a [Checkbox](/docs/pohon/components/checkbox) to the items. Use the `multiple`, `propagate-select` and `bubble-select` props to enable multi-selection with parent-child relationship and the `select` and `toggle` events to control the selected and expanded state of the items.
 
 ::docs-pohon-example
 ---
@@ -515,7 +515,7 @@ props:
 ::
 
 ::note
-This example uses the `as` prop to change the items from `button` to `div` as the [`Checkbox`](/docs/components/checkbox) is also rendered as a `button`.
+This example uses the `as` prop to change the items from `button` to `div` as the [`Checkbox`](/docs/pohon/components/checkbox) is also rendered as a `button`.
 ::
 
 ### With drag and drop :badge{label="Soon"}

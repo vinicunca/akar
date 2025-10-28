@@ -44,7 +44,7 @@ To upgrade your project:
 
 ## 🙏 Acknowledgements
 
-This release represents thousands of hours of work from our team and the community. We'd like to thank everyone who contributed to making Nuxt UI v3 a reality, especially @romhml, @sandros94, and @hywax for their tremendous work.
+This release represents thousands of hours of work from our team and the community. We'd like to thank everyone who contributed to making Nuxt UI v3 a reality, especially @wahyu-ivan, @sandros94, and @hywax for their tremendous work.
 `
 
 const version = {
@@ -56,12 +56,12 @@ const version = {
   target: '_blank',
   content,
   authors: [{
-    name: 'Benjamin Canac',
+    name: 'praburangki',
     avatar: {
-      src: 'https://github.com/benjamincanac.png',
-      alt: 'Benjamin Canac'
+      src: 'https://github.com/praburangki.png',
+      alt: 'praburangki'
     },
-    to: 'https://github.com/benjamincanac',
+    to: 'https://github.com/praburangki',
     target: '_blank'
   }]
 }

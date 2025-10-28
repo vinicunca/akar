@@ -30,15 +30,15 @@ const groups = [
     slot: 'users' as const,
     items: [
       {
-        label: 'Benjamin Canac',
-        suffix: 'benjamincanac',
-        to: 'https://github.com/benjamincanac',
+        label: 'praburangki',
+        suffix: 'praburangki',
+        to: 'https://github.com/praburangki',
         target: '_blank'
       },
       {
-        label: 'Romain Hamel',
-        suffix: 'romhml',
-        to: 'https://github.com/romhml',
+        label: 'Wahyu Ivan',
+        suffix: 'wahyu-ivan',
+        to: 'https://github.com/wahyu-ivan',
         target: '_blank'
       },
       {
@@ -85,7 +85,7 @@ const groups = [
 <template>
   <UCommandPalette :groups="groups" class="flex-1 h-80">
     <template #users-leading="{ item }">
-      <UAvatar :src="`https://github.com/${item.suffix}.png`" size="2xs" />
+      <PAvatar :src="`https://github.com/${item.suffix}.png`" size="2xs" />
     </template>
 
     <template #billing-label="{ item }">

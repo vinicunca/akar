@@ -19,7 +19,7 @@ The Link component is a wrapper around [`<NuxtLink>`](https://nuxt.com/docs/api/
 The incentive behind this is to provide the same API as NuxtLink back in Nuxt 2 / Vue 2. You can read more about it in the Vue Router [migration from Vue 2](https://router.vuejs.org/guide/migration/#removal-of-the-exact-prop-in-router-link) guide.
 
 ::note
-It is used by the [`Breadcrumb`](/docs/components/breadcrumb), [`Button`](/docs/pohon/components/button), [`ContextMenu`](/docs/components/context-menu), [`DropdownMenu`](/docs/components/dropdown-menu) and [`NavigationMenu`](/docs/components/navigation-menu) components.
+It is used by the [`Breadcrumb`](/docs/pohon/components/breadcrumb), [`Button`](/docs/pohon/components/button), [`ContextMenu`](/docs/pohon/components/context-menu), [`DropdownMenu`](/docs/pohon/components/dropdown-menu) and [`NavigationMenu`](/docs/pohon/components/navigation-menu) components.
 ::
 
 ### Tag
@@ -47,7 +47,7 @@ By default, the link has default active and inactive styles, check out the [#the
 ::docs-pohon-preview
 ---
 props:
-  to: /docs/components/link
+  to: /docs/pohon/components/link
 slots:
   default: Link
 ---
@@ -65,7 +65,7 @@ ignore:
   - raw
 props:
   raw: true
-  to: /docs/components/link
+  to: /docs/pohon/components/link
   activeClass: 'font-bold'
   inactiveClass: 'text-muted'
 slots:

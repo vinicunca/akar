@@ -18,7 +18,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 ## Usage
 
-The ContentSearchButton component is used to open the [ContentSearch](/docs/components/content-search) modal.
+The ContentSearchButton component is used to open the [ContentSearch](/docs/pohon/components/content-search) modal.
 
 :component-code{prefix="content"}
 
@@ -51,7 +51,7 @@ props:
 
 ### Kbds
 
-Use the `kbds` prop to display keyboard keys in the button. Defaults to `['meta', 'K']`{lang="ts-type"} to match the default shortcut of the [ContentSearch](/docs/components/content-search#shortcut) component.
+Use the `kbds` prop to display keyboard keys in the button. Defaults to `['meta', 'K']`{lang="ts-type"} to match the default shortcut of the [ContentSearch](/docs/pohon/components/content-search#shortcut) component.
 
 ::docs-pohon-preview{prefix="content"}
 ---

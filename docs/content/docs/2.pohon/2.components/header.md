@@ -196,8 +196,8 @@ const items = computed<PNavigationMenuItem[]>(() => [{
   active: route.path.startsWith('/docs/getting-started')
 }, {
   label: 'Components',
-  to: '/docs/components',
-  active: route.path.startsWith('/docs/components')
+  to: '/docs/pohon/components',
+  active: route.path.startsWith('/docs/pohon/components')
 }, {
   label: 'Figma',
   to: 'https://akar.vinicunca.dev/figma-ui',

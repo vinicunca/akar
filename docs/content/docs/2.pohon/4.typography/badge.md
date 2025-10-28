@@ -11,7 +11,7 @@ links:
 
 ## Usage
 
-Use markdown in the default slot of the `badge` component to display a [Badge](/docs/components/badge) in your content.
+Use markdown in the default slot of the `badge` component to display a [Badge](/docs/pohon/components/badge) in your content.
 
 ::code-preview
 

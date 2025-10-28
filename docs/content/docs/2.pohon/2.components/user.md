@@ -35,7 +35,7 @@ props:
 
 ### Avatar
 
-Use the `avatar` prop to display an [Avatar](/docs/components/avatar) component.
+Use the `avatar` prop to display an [Avatar](/docs/pohon/components/avatar) component.
 
 ::docs-pohon-preview
 ---
@@ -67,7 +67,7 @@ ignore:
 
 ### Chip
 
-Use the `chip` prop to display a [Chip](/docs/components/chip) component.
+Use the `chip` prop to display a [Chip](/docs/pohon/components/chip) component.
 
 ::docs-pohon-preview
 ---
@@ -165,11 +165,11 @@ ignore:
   - avatar.src
   - target
 props:
-  to: 'https://github.com/benjamincanac'
+  to: 'https://github.com/praburangki'
   target: '_blank'
-  name: 'Benjamin Canac'
+  name: 'praburangki'
   description: 'Software Engineer'
-  avatar.src: 'https://github.com/benjamincanac.png'
+  avatar.src: 'https://github.com/praburangki.png'
 ---
 ::
 

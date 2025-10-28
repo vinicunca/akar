@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The PageFeature component is used by the [PageSection](/docs/components/page-section) component to display [features](/docs/components/page-section#features).
+The PageFeature component is used by the [PageSection](/docs/pohon/components/page-section) component to display [features](/docs/pohon/components/page-section#features).
 
 ### Title
 

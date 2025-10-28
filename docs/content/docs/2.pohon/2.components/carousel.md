@@ -94,7 +94,7 @@ class: 'p-8'
 
 ### Prev / Next Icons
 
-Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/docs/components/icon). Defaults to `i-lucide-arrow-left` / `i-lucide-arrow-right`.
+Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-arrow-left` / `i-lucide-arrow-right`.
 
 ::docs-pohon-example
 ---

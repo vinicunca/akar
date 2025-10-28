@@ -4,7 +4,7 @@ description: 'An enhanced Textarea for submitting prompts in AI chat interfaces.
 category: chat
 links:
   - label: Textarea
-    to: /docs/components/textarea
+    to: /docs/pohon/components/textarea
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The ChatPrompt component renders a `<form>` element and extends the [Textarea](/docs/components/textarea) component so you can pass any property such as `icon`, `placeholder`, `autofocus`, etc.
+The ChatPrompt component renders a `<form>` element and extends the [Textarea](/docs/pohon/components/textarea) component so you can pass any property such as `icon`, `placeholder`, `autofocus`, etc.
 
 ::code-preview
 

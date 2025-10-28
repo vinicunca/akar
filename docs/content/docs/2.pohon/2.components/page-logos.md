@@ -62,7 +62,7 @@ You can display logos in two ways:
 
 1. Using the `items` prop to provide a list of logos. Each item can be either:
   - An icon name (e.g., `i-simple-icons-github`)
-  - An object containing `src` and `alt` properties for images, which will be utilized in a `UAvatar` component
+  - An object containing `src` and `alt` properties for images, which will be utilized in a `PAvatar` component
 2. Using the default slot to have complete control over the content
 
 ::tabs{class="gap-0"}
@@ -109,8 +109,8 @@ props:
 ---
 ::
 
-::note{to="/docs/components/marquee"}
-When you use `marquee` mode, you can customize its behavior by passing props. For more info, check out the [Marquee](/docs/components/marquee) component.
+::note{to="/docs/pohon/components/marquee"}
+When you use `marquee` mode, you can customize its behavior by passing props. For more info, check out the [Marquee](/docs/pohon/components/marquee) component.
 ::
 
 ## API

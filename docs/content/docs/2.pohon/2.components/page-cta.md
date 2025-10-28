@@ -33,7 +33,7 @@ links:
 
 ::
 
-Use it inside a [PageSection](/docs/components/page-section) component or directly in your page:
+Use it inside a [PageSection](/docs/pohon/components/page-section) component or directly in your page:
 
 ```vue {4,8-10}
 <template>

@@ -4,7 +4,7 @@ description: 'A customizable Form to create login, register or password reset fo
 category: page
 links:
   - label: Form
-    to: /docs/components/form
+    to: /docs/pohon/components/form
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-Built on top of the [Form](/docs/components/form) component, the `AuthForm` component can be used in your pages or wrapped in a [PageCard](/docs/components/page-card).
+Built on top of the [Form](/docs/pohon/components/form) component, the `AuthForm` component can be used in your pages or wrapped in a [PageCard](/docs/pohon/components/page-card).
 
 ::docs-pohon-example
 ---
@@ -31,9 +31,9 @@ Use the `fields` prop as an array of objects with the following properties:
 - `name?: string`{lang="ts-type"}
 - `type?: 'text' | 'password' | 'email' | 'number' | 'checkbox' | 'select' | 'otp'`{lang="ts-type"}
 
-Each field must include a `type` property, which determines the input component and any additional props applied: `checkbox` fields use [Checkbox](/docs/components/checkbox#props) props, `select` fields use [SelectMenu](/docs/components/select-menu#props) props, `otp` fields use [PinInput](/docs/components/pin-input#props) props, and all other types use [Input](/docs/components/input#props) props.
+Each field must include a `type` property, which determines the input component and any additional props applied: `checkbox` fields use [Checkbox](/docs/pohon/components/checkbox#props) props, `select` fields use [SelectMenu](/docs/pohon/components/select-menu#props) props, `otp` fields use [PinInput](/docs/pohon/components/pin-input#props) props, and all other types use [Input](/docs/pohon/components/input#props) props.
 
-You can also pass any property from the [FormField](/docs/components/form-field#props) component to each field.
+You can also pass any property from the [FormField](/docs/pohon/components/form-field#props) component to each field.
 
 ::docs-pohon-preview
 ---
@@ -219,7 +219,7 @@ props:
 
 ### Separator
 
-Use the `separator` prop to customize the [Separator](/docs/components/separator) between the providers and the fields. Defaults to `or`.
+Use the `separator` prop to customize the [Separator](/docs/pohon/components/separator) between the providers and the fields. Defaults to `or`.
 
 ::docs-pohon-preview
 ---
@@ -262,7 +262,7 @@ props:
 ---
 ::
 
-You can pass any property from the [Separator](/docs/components/separator#props) component to customize it.
+You can pass any property from the [Separator](/docs/pohon/components/separator#props) component to customize it.
 
 ::docs-pohon-preview
 ---
@@ -352,7 +352,7 @@ props:
 
 ### Within a page
 
-You can wrap the `AuthForm` component with the [PageCard](/docs/components/page-card) component to display it within a `login.vue` page for example.
+You can wrap the `AuthForm` component with the [PageCard](/docs/pohon/components/page-card) component to display it within a `login.vue` page for example.
 
 ::docs-pohon-example
 ---

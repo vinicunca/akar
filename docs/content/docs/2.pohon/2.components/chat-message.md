@@ -22,14 +22,14 @@ parts:
 side: 'right'
 variant: 'soft'
 avatar:
-  src: 'https://github.com/benjamincanac.png'
+  src: 'https://github.com/praburangki.png'
 ---
 ::
 
 ::
 
-::tip{to="/docs/components/chat-messages"}
-Use the [`ChatMessages`](/docs/components/chat-messages) component to display a list of chat messages.
+::tip{to="/docs/pohon/components/chat-messages"}
+Use the [`ChatMessages`](/docs/pohon/components/chat-messages) component to display a list of chat messages.
 ::
 
 ### Parts
@@ -70,7 +70,7 @@ props:
 ::
 
 ::note
-When using the [`ChatMessages`](/docs/components/chat-messages) component, the `side` prop is set to `left` for `assistant` messages and `right` for `user` messages.
+When using the [`ChatMessages`](/docs/pohon/components/chat-messages) component, the `side` prop is set to `left` for `assistant` messages and `right` for `user` messages.
 ::
 
 ### Variant
@@ -91,12 +91,12 @@ props:
 ::
 
 ::note
-When using the [`ChatMessages`](/docs/components/chat-messages) component, the `variant` prop is set to `naked` for `assistant` messages and `soft` for `user` messages.
+When using the [`ChatMessages`](/docs/pohon/components/chat-messages) component, the `variant` prop is set to `naked` for `assistant` messages and `soft` for `user` messages.
 ::
 
 ### Icon
 
-Use the `icon` prop to display an [Icon](/docs/components/icon) component next to the message.
+Use the `icon` prop to display an [Icon](/docs/pohon/components/icon) component next to the message.
 
 ::docs-pohon-preview
 ---
@@ -117,7 +117,7 @@ props:
 
 ### Avatar
 
-Use the `avatar` prop to display an [Avatar](/docs/components/avatar) component next to the message.
+Use the `avatar` prop to display an [Avatar](/docs/pohon/components/avatar) component next to the message.
 
 ::docs-pohon-preview
 ---
@@ -128,7 +128,7 @@ ignore:
   - variant
 props:
   avatar:
-    src: 'https://github.com/benjamincanac.png'
+    src: 'https://github.com/praburangki.png'
   variant: 'soft'
   side: 'right'
   parts:

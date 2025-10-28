@@ -197,7 +197,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) of each item. Defaults to `i-lucide-chevron-down`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) of each item. Defaults to `i-lucide-chevron-down`.
 
 ::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.

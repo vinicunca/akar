@@ -12,7 +12,7 @@ links:
 
 The FooterColumns component renders a list of columns to display in your Footer.
 
-Use it in the `top` slot of the [Footer](/docs/components/footer) component:
+Use it in the `top` slot of the [Footer](/docs/pohon/components/footer) component:
 
 ```vue {3-7}
 <template>
@@ -40,7 +40,7 @@ Each column contains a `children` array of objects that define the links. Each l
 - `class?: any`{lang="ts-type"}
 - `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`{lang="ts-type"}
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-example
 ---

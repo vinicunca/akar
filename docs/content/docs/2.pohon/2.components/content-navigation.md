@@ -227,7 +227,7 @@ props:
 
 ### Within a layout
 
-Use the ContentNavigation component inside a [PageAside](/docs/components/page-aside) component within a layout to display the navigation of the page:
+Use the ContentNavigation component inside a [PageAside](/docs/pohon/components/page-aside) component within a layout to display the navigation of the page:
 
 ```vue [layouts/docs.vue]{11}
 <script setup lang="ts">
@@ -251,7 +251,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 
 ### Within a header
 
-Use the ContentNavigation component inside the `content` slot of a [Header](/docs/components/header) component to display the navigation of the page on mobile:
+Use the ContentNavigation component inside the `content` slot of a [Header](/docs/pohon/components/header) component to display the navigation of the page on mobile:
 
 ```vue [components/Header.vue]{9-11}
 <script setup lang="ts">

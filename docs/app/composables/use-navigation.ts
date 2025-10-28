@@ -107,7 +107,28 @@ export function useNavigation(
 ) {
   const { framework } = useFrameworks();
 
+  function flatAllRoutes(items: Array<ContentNavigationItem> = []): Array<ContentNavigationItem> {
+    const flattened: Array<ContentNavigationItem> = [];
+
+    for (const item of items) {
+      // Add the current item (without children to avoid duplication)
+      flattened.push({
+        ...item,
+        children: undefined,
+      });
+
+      // Recursively flatten children if they exist
+      if (item.children?.length) {
+        flattened.push(...flatAllRoutes(item.children));
+      }
+    }
+
+    return flattened;
+  }
+
   const rootNavigation = computed(() => {
+    const flatItems = flatAllRoutes(navigation.value);
+    console.log('🚀 ~ useNavigation ~ flatItems:', flatItems);
     const route = useRoute();
 
     const parentSlug = route.params.slug?.[0] as string;

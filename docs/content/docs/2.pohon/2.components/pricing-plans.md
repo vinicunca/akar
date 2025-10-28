@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The PricingPlans component provides a flexible layout to display a list of [PricingPlan](/docs/components/pricing-plan) components using either the default slot or the `plans` prop.
+The PricingPlans component provides a flexible layout to display a list of [PricingPlan](/docs/pohon/components/pricing-plan) components using either the default slot or the `plans` prop.
 
 ```vue {2,8}
 <template>
@@ -30,7 +30,7 @@ The grid columns will be automatically calculated based on the number of plans, 
 
 ### Plans
 
-Use the `plans` prop as an array of objects with the properties of the [PricingPlan](/docs/components/pricing-plan#props) component.
+Use the `plans` prop as an array of objects with the properties of the [PricingPlan](/docs/pohon/components/pricing-plan#props) component.
 
 ::docs-pohon-preview
 ---

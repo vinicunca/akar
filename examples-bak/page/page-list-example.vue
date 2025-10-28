@@ -1,23 +1,23 @@
 <script setup lang="ts">
 const users = ref([
   {
-    name: 'Benjamin Canac',
-    description: 'benjamincanac',
-    to: 'https://github.com/benjamincanac',
+    name: 'praburangki',
+    description: 'praburangki',
+    to: 'https://github.com/praburangki',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/benjamincanac.png',
-      alt: 'benjamincanac'
+      src: 'https://github.com/praburangki.png',
+      alt: 'praburangki'
     }
   },
   {
-    name: 'Romain Hamel',
-    description: 'romhml',
-    to: 'https://github.com/romhml',
+    name: 'Wahyu Ivan',
+    description: 'wahyu-ivan',
+    to: 'https://github.com/wahyu-ivan',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/romhml.png',
-      alt: 'romhml'
+      src: 'https://github.com/wahyu-ivan.png',
+      alt: 'wahyu-ivan'
     }
   },
   {

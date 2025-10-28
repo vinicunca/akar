@@ -10,9 +10,9 @@ links:
 
 ## Usage
 
-The DashboardSidebar component is used to display a sidebar. Its state (size, collapsed, etc.) will be saved based on the `storage` and `storage-key` props you provide to the [DashboardGroup](/docs/components/dashboard-group#props) component.
+The DashboardSidebar component is used to display a sidebar. Its state (size, collapsed, etc.) will be saved based on the `storage` and `storage-key` props you provide to the [DashboardGroup](/docs/pohon/components/dashboard-group#props) component.
 
-Use it inside the default slot of the [DashboardGroup](/docs/components/dashboard-group) component:
+Use it inside the default slot of the [DashboardGroup](/docs/pohon/components/dashboard-group) component:
 
 ```vue [layouts/dashboard.vue]{3}
 <template>
@@ -80,7 +80,7 @@ class: '!p-0 !justify-start'
 Use the `collapsible` prop to make the sidebar collapsible when dragging near the edge of the screen.
 
 ::warning
-The [`DashboardSidebarCollapse`](/docs/components/dashboard-sidebar-collapse) component will have no effect if the sidebar is not **collapsible**.
+The [`DashboardSidebarCollapse`](/docs/pohon/components/dashboard-sidebar-collapse) component will have no effect if the sidebar is not **collapsible**.
 ::
 
 ::docs-pohon-preview
@@ -144,7 +144,7 @@ class: '!p-0 !justify-start'
 :placeholder{class="h-96"}
 ::
 
-::tip{to="/docs/components/dashboard-group#props"}
+::tip{to="/docs/pohon/components/dashboard-group#props"}
 Sizes are calculated as percentages by default. You can change this using the `unit` prop on the `DashboardGroup` component.
 ::
 
@@ -217,12 +217,12 @@ props:
 ::
 
 ::note
-These examples contain the [`DashboardGroup`](/docs/components/dashboard-group), [`DashboardPanel`](/docs/components/dashboard-panel) and [`DashboardNavbar`](/docs/components/dashboard-navbar) components as they are required to demonstrate the sidebar on mobile.
+These examples contain the [`DashboardGroup`](/docs/pohon/components/dashboard-group), [`DashboardPanel`](/docs/pohon/components/dashboard-panel) and [`DashboardNavbar`](/docs/pohon/components/dashboard-navbar) components as they are required to demonstrate the sidebar on mobile.
 ::
 
 ### Toggle
 
-Use the `toggle` prop to customize the [DashboardSidebarToggle](/docs/components/dashboard-sidebar-toggle) component displayed on mobile.
+Use the `toggle` prop to customize the [DashboardSidebarToggle](/docs/pohon/components/dashboard-sidebar-toggle) component displayed on mobile.
 
 You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 

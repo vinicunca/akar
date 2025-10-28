@@ -25,10 +25,10 @@ props:
       to: '/docs'
     - label: 'Components'
       icon: 'i-lucide-box'
-      to: '/docs/components'
+      to: '/docs/pohon/components'
     - label: 'Breadcrumb'
       icon: 'i-lucide-link'
-      to: '/docs/components/breadcrumb'
+      to: '/docs/pohon/components/breadcrumb'
 ---
 ::
 
@@ -43,7 +43,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLabel?: ClassNameValue, separator?: ClassNameValue, separatorIcon?: ClassNameValue }`{lang="ts-type"}
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-preview
 ---
@@ -60,10 +60,10 @@ props:
       to: '/docs'
     - label: 'Components'
       icon: 'i-lucide-box'
-      to: '/docs/components'
+      to: '/docs/pohon/components'
     - label: 'Breadcrumb'
       icon: 'i-lucide-link'
-      to: '/docs/components/breadcrumb'
+      to: '/docs/pohon/components/breadcrumb'
 ---
 ::
 
@@ -73,7 +73,7 @@ A `span` is rendered instead of a link when the `to` property is not defined.
 
 ### Separator Icon
 
-Use the `separator-icon` prop to customize the [Icon](/docs/components/icon) between each item. Defaults to `i-lucide-chevron-right`.
+Use the `separator-icon` prop to customize the [Icon](/docs/pohon/components/icon) between each item. Defaults to `i-lucide-chevron-right`.
 
 ::docs-pohon-preview
 ---
@@ -91,10 +91,10 @@ props:
       to: '/docs'
     - label: 'Components'
       icon: 'i-lucide-box'
-      to: '/docs/components'
+      to: '/docs/pohon/components'
     - label: 'Breadcrumb'
       icon: 'i-lucide-link'
-      to: '/docs/components/breadcrumb'
+      to: '/docs/pohon/components/breadcrumb'
 ---
 ::
 
@@ -116,7 +116,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `#separator` slot to customize the separator between each item.
 
-:component-example{name="breadcrumb-separator-slot-example"}
+:docs-pohon-example{name="breadcrumb-separator-slot-example"}
 
 ### With custom slot
 
@@ -129,7 +129,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-label`{lang="ts-type"}
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
 
-:component-example{name="breadcrumb-custom-slot-example"}
+:docs-pohon-example{name="breadcrumb-custom-slot-example"}
 
 ::tip{to="#slots"}
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.

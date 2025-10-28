@@ -12,7 +12,7 @@ links:
 
 The PageHeader component displays a header for your page.
 
-Use it inside the default slot of the [Page](/docs/components/page) component, before the [PageBody](/docs/components/page-body) component:
+Use it inside the default slot of the [Page](/docs/pohon/components/page) component, before the [PageBody](/docs/pohon/components/page-body) component:
 
 ```vue {3}
 <template>

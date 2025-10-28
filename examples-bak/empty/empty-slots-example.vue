@@ -33,13 +33,13 @@ const members: UserProps[] = [
     }
   },
   {
-    name: 'Benjamin Canac',
-    description: 'benjamincanac',
-    to: 'https://github.com/benjamincanac',
+    name: 'praburangki',
+    description: 'praburangki',
+    to: 'https://github.com/praburangki',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/benjamincanac.png',
-      alt: 'benjamincanac'
+      src: 'https://github.com/praburangki.png',
+      alt: 'praburangki'
     }
   }
 ]
@@ -57,10 +57,10 @@ const members: UserProps[] = [
     }]"
   >
     <template #leading>
-      <UAvatarGroup size="xl">
-        <UAvatar src="https://github.com/nuxt.png" alt="Nuxt" />
-        <UAvatar src="https://github.com/unjs.png" alt="Unjs" />
-      </UAvatarGroup>
+      <PAvatarGroup size="xl">
+        <PAvatar src="https://github.com/nuxt.png" alt="Nuxt" />
+        <PAvatar src="https://github.com/unjs.png" alt="Unjs" />
+      </PAvatarGroup>
     </template>
 
     <template #footer>

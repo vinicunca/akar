@@ -5,7 +5,7 @@ category: form
 links:
   - label: NumberField
     icon: i-custom-akar
-    to: https://www.akar.com/docs/components/number-field
+    to: https://www.akar.com/docs/pohon/components/number-field
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/InputNumber.vue
@@ -200,7 +200,7 @@ props:
 
 ### Increment / Decrement Icons
 
-Use the `increment-icon` and `decrement-icon` props to customize the buttons [Icon](/docs/components/icon). Defaults to `i-lucide-plus` / `i-lucide-minus`.
+Use the `increment-icon` and `decrement-icon` props to customize the buttons [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-plus` / `i-lucide-minus`.
 
 ::docs-pohon-preview
 ---
@@ -250,7 +250,7 @@ name: 'input-number-currency-example'
 
 ### Within a FormField
 
-You can use the InputNumber within a [FormField](/docs/components/form-field) component to display a label, help text, required indicator, etc.
+You can use the InputNumber within a [FormField](/docs/pohon/components/form-field) component to display a label, help text, required indicator, etc.
 
 ::docs-pohon-example
 ---

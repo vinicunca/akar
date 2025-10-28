@@ -126,7 +126,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/docs/components/icon) inside the Textarea.
+Use the `icon` prop to show an [Icon](/docs/pohon/components/icon) inside the Textarea.
 
 ::docs-pohon-preview
 ---
@@ -159,7 +159,7 @@ props:
 
 ### Avatar
 
-Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Textarea.
+Use the `avatar` prop to show an [Avatar](/docs/pohon/components/avatar) inside the Textarea.
 
 ::docs-pohon-preview
 ---

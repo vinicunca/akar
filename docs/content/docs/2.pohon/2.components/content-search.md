@@ -5,7 +5,7 @@ category: content
 framework: nuxt
 links:
   - label: CommandPalette
-    to: /docs/components/command-palette
+    to: /docs/pohon/components/command-palette
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -18,7 +18,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 ## Usage
 
-The ContentSearch component extends the [CommandPalette](/docs/components/command-palette) component, so you can pass any property such as `icon`, `placeholder`, etc.
+The ContentSearch component extends the [CommandPalette](/docs/pohon/components/command-palette) component, so you can pass any property such as `icon`, `placeholder`, etc.
 
 Use the `files` and `navigation` props with the `files`{lang="ts-type"} and `navigation`{lang="ts-type"} values you fetched using the `queryCollectionSearchSections` and `queryCollectionNavigation` composables from `@nuxt/content`.
 
@@ -34,7 +34,7 @@ name: 'content-search-example'
 ::
 
 ::tip
-You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K"}, by using the [ContentSearchButton](/docs/components/content-search-button) component or by using the `useContentSearch` composable: `const { open } = useContentSearch()`{lang="ts"}.
+You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K"}, by using the [ContentSearchButton](/docs/pohon/components/content-search-button) component or by using the `useContentSearch` composable: `const { open } = useContentSearch()`{lang="ts"}.
 ::
 
 ### Shortcut
@@ -107,7 +107,7 @@ const links = [{
 }, {
   label: 'Components',
   icon: 'i-lucide-box',
-  to: '/docs/components'
+  to: '/docs/pohon/components'
 }, {
   label: 'Showcase',
   icon: 'i-lucide-presentation',

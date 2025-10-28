@@ -3,21 +3,21 @@ const open = ref(false)
 
 const users = [
   {
-    label: 'Benjamin Canac',
-    suffix: 'benjamincanac',
-    to: 'https://github.com/benjamincanac',
+    label: 'praburangki',
+    suffix: 'praburangki',
+    to: 'https://github.com/praburangki',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/benjamincanac.png'
+      src: 'https://github.com/praburangki.png'
     }
   },
   {
-    label: 'Romain Hamel',
-    suffix: 'romhml',
-    to: 'https://github.com/romhml',
+    label: 'Wahyu Ivan',
+    suffix: 'wahyu-ivan',
+    to: 'https://github.com/wahyu-ivan',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/romhml.png'
+      src: 'https://github.com/wahyu-ivan.png'
     }
   },
   {

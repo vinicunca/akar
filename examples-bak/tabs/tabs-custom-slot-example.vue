@@ -17,8 +17,8 @@ const items = [
 ] satisfies TabsItem[]
 
 const state = reactive({
-  name: 'Benjamin Canac',
-  username: 'benjamincanac',
+  name: 'praburangki',
+  username: 'praburangki',
   currentPassword: '',
   newPassword: '',
   confirmPassword: ''

@@ -193,7 +193,7 @@ props:
 
 ### With chip events
 
-Use the [Chip](/docs/components/chip) component to add events to specific days.
+Use the [Chip](/docs/pohon/components/chip) component to add events to specific days.
 
 ::docs-pohon-example
 ---
@@ -257,7 +257,7 @@ name: 'calendar-external-controls-example'
 
 ### As a DatePicker
 
-Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/components/popover) component to create a date picker.
+Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/pohon/components/popover) component to create a date picker.
 
 ::docs-pohon-example
 ---
@@ -267,7 +267,7 @@ name: 'calendar-date-picker-example'
 
 ### As a DateRangePicker
 
-Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/components/popover) component to create a date range picker.
+Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/pohon/components/popover) component to create a date range picker.
 
 ::docs-pohon-example
 ---

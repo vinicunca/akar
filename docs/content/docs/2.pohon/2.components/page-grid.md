@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The PageGrid component provides a responsive grid layout for displaying [PageCard](/docs/components/page-card) components or any other elements, automatically adjusting from 1 to 3 columns based on screen size.
+The PageGrid component provides a responsive grid layout for displaying [PageCard](/docs/pohon/components/page-card) components or any other elements, automatically adjusting from 1 to 3 columns based on screen size.
 
 ::docs-pohon-example
 ---

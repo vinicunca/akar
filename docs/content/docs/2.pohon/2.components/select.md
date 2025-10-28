@@ -374,7 +374,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/docs/components/icon) inside the Select.
+Use the `icon` prop to show an [Icon](/docs/pohon/components/icon) inside the Select.
 
 ::docs-pohon-preview
 ---
@@ -401,7 +401,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon). Defaults to `i-lucide-chevron-down`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-chevron-down`.
 
 ::docs-pohon-preview
 ---
@@ -479,7 +479,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 ### Avatar
 
-Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Select.
+Use the `avatar` prop to show an [Avatar](/docs/pohon/components/avatar) inside the Select.
 
 ::docs-pohon-preview
 ---
@@ -638,7 +638,7 @@ props:
 
 ### With icon in items
 
-You can use the `icon` property to display an [Icon](/docs/components/icon) inside the items.
+You can use the `icon` property to display an [Icon](/docs/pohon/components/icon) inside the items.
 
 ::docs-pohon-example
 ---
@@ -657,7 +657,7 @@ You can also use the `#leading` slot to display the selected icon.
 
 ### With avatar in items
 
-You can use the `avatar` property to display an [Avatar](/docs/components/avatar) inside the items.
+You can use the `avatar` property to display an [Avatar](/docs/pohon/components/avatar) inside the items.
 
 ::docs-pohon-example
 ---
@@ -676,7 +676,7 @@ You can also use the `#leading` slot to display the selected avatar.
 
 ### With chip in items
 
-You can use the `chip` property to display a [Chip](/docs/components/chip) inside the items.
+You can use the `chip` property to display a [Chip](/docs/pohon/components/chip) inside the items.
 
 ::docs-pohon-example
 ---

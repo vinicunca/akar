@@ -14,7 +14,7 @@ links:
 
 ## Usage
 
-The ChatMessages component displays a list of [ChatMessage](/docs/components/chat-message) components using either the default slot or the `messages` prop.
+The ChatMessages component displays a list of [ChatMessage](/docs/pohon/components/chat-message) components using either the default slot or the `messages` prop.
 
 ```vue {2,8}
 <template>
@@ -109,7 +109,7 @@ Here's the detail of the different statuses from the AI SDK v5 Chat class:
 
 ### User
 
-Use the `user` prop to change the [ChatMessage](/docs/components/chat-message) props for `user` messages. Defaults to:
+Use the `user` prop to change the [ChatMessage](/docs/pohon/components/chat-message) props for `user` messages. Defaults to:
 
 - `side: 'right'`{lang="ts-type"}
 - `variant: 'soft'`{lang="ts-type"}
@@ -138,7 +138,7 @@ props:
     side: left
     variant: solid
     avatar:
-      src: https://github.com/benjamincanac.png
+      src: https://github.com/praburangki.png
   messages:
     - id: '6045235a-a435-46b8-989d-2df38ca2eb47'
       role: user
@@ -165,7 +165,7 @@ props:
 
 ### Assistant
 
-Use the `assistant` prop to change the [ChatMessage](/docs/components/chat-message) props for `assistant` messages. Defaults to:
+Use the `assistant` prop to change the [ChatMessage](/docs/pohon/components/chat-message) props for `assistant` messages. Defaults to:
 
 - `side: 'left'`{lang="ts-type"}
 - `variant: 'naked'`{lang="ts-type"}
@@ -285,7 +285,7 @@ props:
 
 ### Auto Scroll Icon
 
-Use the `auto-scroll-icon` prop to customize the auto scroll button [Icon](/docs/components/icon). Defaults to `i-lucide-arrow-down`.
+Use the `auto-scroll-icon` prop to customize the auto scroll button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-arrow-down`.
 
 ::docs-pohon-preview
 ---
@@ -454,7 +454,7 @@ collapse: true
 :docs-pohon-slots
 
 ::tip
-You can use all the slots of the [`ChatMessage`](/docs/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
+You can use all the slots of the [`ChatMessage`](/docs/pohon/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded allowing you to customize individual messages when using the `messages` prop.
 
 ```vue{3-5}
 <script setup lang="ts">

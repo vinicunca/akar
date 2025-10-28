@@ -4,7 +4,7 @@ description: 'A Select to switch between locales.'
 category: i18n
 links:
   - label: SelectMenu
-    to: /docs/components/select-menu
+    to: /docs/pohon/components/select-menu
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The LocaleSelect component extends the [SelectMenu](/docs/components/select-menu) component, so you can pass any property such as `color`, `variant`, `size`, etc.
+The LocaleSelect component extends the [SelectMenu](/docs/pohon/components/select-menu) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
 ::docs-framework-only
 #nuxt

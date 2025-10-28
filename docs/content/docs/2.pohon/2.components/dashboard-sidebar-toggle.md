@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The DashboardSidebarToggle component is used by the [DashboardNavbar](/docs/components/dashboard-navbar) and [DashboardSidebar](/docs/components/dashboard-sidebar) components.
+The DashboardSidebarToggle component is used by the [DashboardNavbar](/docs/pohon/components/dashboard-navbar) and [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) components.
 
 It is automatically displayed on mobile to toggle the sidebar, **you don't have to add it manually**.
 
@@ -48,7 +48,7 @@ The button defaults to `color="neutral"` and `variant="ghost"`.
 
 ### Within `toggle` slot
 
-Even though this component is automatically displayed on mobile, you can use the `toggle` slot of the [DashboardNavbar](/docs/components/dashboard-navbar) and [DashboardSidebar](/docs/components/dashboard-sidebar) components to customize the button.
+Even though this component is automatically displayed on mobile, you can use the `toggle` slot of the [DashboardNavbar](/docs/pohon/components/dashboard-navbar) and [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) components to customize the button.
 
 ::code-group
 

@@ -11,7 +11,7 @@ links:
 
 ## Usage
 
-Use the `tabs` and `tabs-item` components to display [Tabs](/docs/components/tabs) in your content.
+Use the `tabs` and `tabs-item` components to display [Tabs](/docs/pohon/components/tabs) in your content.
 
 ::code-preview{class="[&>div]:*:my-0"}
 

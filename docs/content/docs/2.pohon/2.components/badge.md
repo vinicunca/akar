@@ -71,7 +71,7 @@ slots:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/docs/components/icon) inside the Badge.
+Use the `icon` prop to show an [Icon](/docs/pohon/components/icon) inside the Badge.
 
 ::docs-pohon-preview
 ---
@@ -99,7 +99,7 @@ slots:
 
 ### Avatar
 
-Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Badge.
+Use the `avatar` prop to show an [Avatar](/docs/pohon/components/avatar) inside the Badge.
 
 ::docs-pohon-preview
 ---

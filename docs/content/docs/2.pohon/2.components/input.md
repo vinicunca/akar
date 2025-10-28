@@ -26,7 +26,7 @@ props:
 
 Use the `type` prop to change the input type. Defaults to `text`.
 
-Some types have been implemented in their own components such as [Checkbox](/docs/components/checkbox), [Radio](/docs/components/radio-group), [InputNumber](/docs/components/input-number) etc. and others have been styled like `file` for example.
+Some types have been implemented in their own components such as [Checkbox](/docs/pohon/components/checkbox), [Radio](/docs/pohon/components/radio-group), [InputNumber](/docs/pohon/components/input-number) etc. and others have been styled like `file` for example.
 
 ::docs-pohon-preview
 ---
@@ -108,7 +108,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/docs/components/icon) inside the Input.
+Use the `icon` prop to show an [Icon](/docs/pohon/components/icon) inside the Input.
 
 ::docs-pohon-preview
 ---
@@ -139,7 +139,7 @@ props:
 
 ### Avatar
 
-Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the Input.
+Use the `avatar` prop to show an [Avatar](/docs/pohon/components/avatar) inside the Input.
 
 ::docs-pohon-preview
 ---
@@ -245,7 +245,7 @@ name: 'input-password-toggle-example'
 
 ### With password strength indicator
 
-You can use the [Progress](/docs/components/progress) component to display the password strength indicator.
+You can use the [Progress](/docs/pohon/components/progress) component to display the password strength indicator.
 
 ::docs-pohon-example
 ---
@@ -266,7 +266,7 @@ name: 'input-character-limit-example'
 
 ### With keyboard shortcut
 
-You can use the [Kbd](/docs/components/kbd) component inside the `#trailing` slot to add a keyboard shortcut to the Input.
+You can use the [Kbd](/docs/pohon/components/kbd) component inside the `#trailing` slot to add a keyboard shortcut to the Input.
 
 ::docs-pohon-example
 ---
@@ -300,7 +300,7 @@ name: 'input-floating-label-example'
 
 ### Within a FormField
 
-You can use the Input within a [FormField](/docs/components/form-field) component to display a label, help text, required indicator, etc.
+You can use the Input within a [FormField](/docs/pohon/components/form-field) component to display a label, help text, required indicator, etc.
 
 ::docs-pohon-example
 ---
@@ -308,7 +308,7 @@ name: 'input-form-field-example'
 ---
 ::
 
-::tip{to="/docs/components/form"}
+::tip{to="/docs/pohon/components/form"}
 It also provides validation and error handling when used within a **Form** component.
 ::
 

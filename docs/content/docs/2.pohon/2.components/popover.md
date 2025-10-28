@@ -68,7 +68,7 @@ slots:
 ::
 
 ::note
-When using the `hover` mode, the Reka UI [`HoverCard`](https://akar.com/docs/components/hover-card) component is used instead of the [`Popover`](https://akar.com/docs/components/popover).
+When using the `hover` mode, the Reka UI [`HoverCard`](https://akar.com/docs/pohon/components/hover-card) component is used instead of the [`Popover`](https://akar.com/docs/pohon/components/popover).
 ::
 
 ### Delay
@@ -193,7 +193,7 @@ name: 'popover-dismissible-example'
 
 ### With command palette
 
-You can use a [CommandPalette](/docs/components/command-palette) component inside the Popover's content.
+You can use a [CommandPalette](/docs/pohon/components/command-palette) component inside the Popover's content.
 
 ::docs-pohon-example
 ---
@@ -204,7 +204,7 @@ name: 'popover-command-palette-example'
 
 ### With following cursor
 
-You can make the Popover follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/components/tooltip#trigger) prop:
+You can make the Popover follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/pohon/components/tooltip#trigger) prop:
 
 ::docs-pohon-example
 ---
@@ -238,7 +238,7 @@ name: 'popover-anchor-slot-example'
 :docs-pohon-slots
 
 ::note
-The `close` function is only available when `mode` is set to `click` because Reka UI exposes this for [`Popover`](https://akar.com/docs/components/popover#close-using-slot-props) but not for [`HoverCard`](https://akar.com/docs/components/hover-card).
+The `close` function is only available when `mode` is set to `click` because Reka UI exposes this for [`Popover`](https://akar.com/docs/pohon/components/popover#close-using-slot-props) but not for [`HoverCard`](https://akar.com/docs/pohon/components/hover-card).
 ::
 
 ### Emits

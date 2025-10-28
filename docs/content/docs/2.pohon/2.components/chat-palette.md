@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The ChatPalette component is a structured layout wrapper that organizes [ChatMessages](/docs/components/chat-messages) in a scrollable content area and [ChatPrompt](/docs/components/chat-prompt) in a fixed bottom section, creating cohesive chatbot interfaces for modals, slideovers, or drawers.
+The ChatPalette component is a structured layout wrapper that organizes [ChatMessages](/docs/pohon/components/chat-messages) in a scrollable content area and [ChatPrompt](/docs/pohon/components/chat-prompt) in a fixed bottom section, creating cohesive chatbot interfaces for modals, slideovers, or drawers.
 
 ```vue{2,8}
 <template>
@@ -32,7 +32,7 @@ These chat components are designed to be used with the **AI SDK v5** from **Verc
 
 ### Within a Modal
 
-You can use the ChatPalette component inside a [Modal](/docs/components/modal)'s content.
+You can use the ChatPalette component inside a [Modal](/docs/pohon/components/modal)'s content.
 
 ::docs-pohon-example
 ---
@@ -47,7 +47,7 @@ name: 'chat-palette-modal-example'
 
 ### Within ContentSearch
 
-You can use the ChatPalette component conditionally inside [ContentSearch](/docs/components/content-search)'s content to display a chatbot interface when a user selects an item.
+You can use the ChatPalette component conditionally inside [ContentSearch](/docs/pohon/components/content-search)'s content to display a chatbot interface when a user selects an item.
 
 ::docs-pohon-example
 ---

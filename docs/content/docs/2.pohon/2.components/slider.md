@@ -138,7 +138,7 @@ props:
 
 ### Tooltip
 
-Use the `tooltip` prop to display a [Tooltip](/docs/components/tooltip) around the Slider thumbs with the current value. You can set it to `true` for default behavior or pass an object to customize it with any property from the [Tooltip](/docs/components/tooltip#props) component.
+Use the `tooltip` prop to display a [Tooltip](/docs/pohon/components/tooltip) around the Slider thumbs with the current value. You can set it to `true` for default behavior or pass an object to customize it with any property from the [Tooltip](/docs/pohon/components/tooltip#props) component.
 
 ::docs-pohon-preview
 ---

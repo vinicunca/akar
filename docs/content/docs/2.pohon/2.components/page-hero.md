@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The PageHero component wraps your content in a [Container](/docs/components/container) while maintaining full-width flexibility making it easy to add background colors, images or patterns. It provides a flexible way to display content with an illustration in the default slot.
+The PageHero component wraps your content in a [Container](/docs/pohon/components/container) while maintaining full-width flexibility making it easy to add background colors, images or patterns. It provides a flexible way to display content with an illustration in the default slot.
 
 ::code-preview
 

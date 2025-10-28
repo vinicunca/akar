@@ -4,7 +4,7 @@ description: 'A Select to switch between system, dark & light mode.'
 category: color-mode
 links:
   - label: SelectMenu
-    to: /docs/components/select-menu
+    to: /docs/pohon/components/select-menu
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The ColorModeSelect component extends the [SelectMenu](/docs/components/select-menu) component, so you can pass any property such as `color`, `variant`, `size`, etc.
+The ColorModeSelect component extends the [SelectMenu](/docs/pohon/components/select-menu) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
 :component-code{prefix="color-mode"}
 

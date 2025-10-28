@@ -10,9 +10,9 @@ links:
 
 ## Usage
 
-The DashboardToolbar component is used to display a toolbar under the [DashboardNavbar](/docs/components/dashboard-navbar) component.
+The DashboardToolbar component is used to display a toolbar under the [DashboardNavbar](/docs/pohon/components/dashboard-navbar) component.
 
-Use it inside the `header` slot of the [DashboardPanel](/docs/components/dashboard-panel) component:
+Use it inside the `header` slot of the [DashboardPanel](/docs/pohon/components/dashboard-panel) component:
 
 ```vue [pages/index.vue]{9-13}
 <script setup lang="ts">
@@ -45,7 +45,7 @@ props:
 ::
 
 ::note
-In this example, we use the [NavigationMenu](/docs/components/navigation-menu) component to render some links.
+In this example, we use the [NavigationMenu](/docs/pohon/components/navigation-menu) component to render some links.
 ::
 
 ## API

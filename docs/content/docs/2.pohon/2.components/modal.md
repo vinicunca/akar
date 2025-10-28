@@ -131,7 +131,7 @@ The close button is not displayed if the `#content` slot is used as it's a part 
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
 
 ::docs-pohon-preview
 ---
@@ -308,7 +308,7 @@ slots:
 You can use the [`useOverlay`](/docs/composables/use-overlay) composable to open a Modal programmatically.
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/components/app) component which uses the [`OverlayProvider`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/OverlayProvider.vue) component.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`OverlayProvider`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/OverlayProvider.vue) component.
 ::
 
 First, create a modal component that will be opened programmatically:
@@ -359,7 +359,7 @@ name: 'modal-footer-slot-example'
 
 ### With command palette
 
-You can use a [CommandPalette](/docs/components/command-palette) component inside the Modal's content.
+You can use a [CommandPalette](/docs/pohon/components/command-palette) component inside the Modal's content.
 
 ::docs-pohon-example
 ---

@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The PageList component provides a flexible way to display content in a vertical list layout. It's perfect for creating stacked lists of [PageCard](/docs/components/page-card) components or any other elements, with optional dividers between items.
+The PageList component provides a flexible way to display content in a vertical list layout. It's perfect for creating stacked lists of [PageCard](/docs/pohon/components/page-card) components or any other elements, with optional dividers between items.
 
 ::docs-pohon-example
 ---

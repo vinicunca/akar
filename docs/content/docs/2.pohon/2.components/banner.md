@@ -88,7 +88,7 @@ When closed, `banner-${id}` will be stored in the local storage to prevent it fr
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
 
 ::docs-pohon-example
 ---

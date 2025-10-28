@@ -13,7 +13,7 @@ links:
 
 ## Usage
 
-The DashboardSidebarCollapse component is used to collapse/expand the [DashboardSidebar](/docs/components/dashboard-sidebar) component **when its `collapsible` prop is set**.
+The DashboardSidebarCollapse component is used to collapse/expand the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) component **when its `collapsible` prop is set**.
 
 :component-code
 
@@ -36,7 +36,7 @@ The button defaults to `color="neutral"` and `variant="ghost"`.
 
 ### Within `header` slot
 
-You can put this component in the `header` slot of the [DashboardSidebar](/docs/components/dashboard-sidebar) component and use the `collapsed` prop to hide the left part of the header for example:
+You can put this component in the `header` slot of the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) component and use the `collapsed` prop to hide the left part of the header for example:
 
 ```vue [layouts/dashboard.vue]{4-8}
 <template>
@@ -56,7 +56,7 @@ You can put this component in the `header` slot of the [DashboardSidebar](/docs/
 
 ### Within `leading` slot
 
-You can put this component in the `leading` slot of the [DashboardNavbar](/docs/components/dashboard-navbar) component to display it before the title for example:
+You can put this component in the `leading` slot of the [DashboardNavbar](/docs/pohon/components/dashboard-navbar) component to display it before the title for example:
 
 ```vue [pages/index.vue]{11-13}
 <script setup lang="ts">

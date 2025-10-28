@@ -56,7 +56,7 @@ The `<img>` element's `width` and `height` are automatically set based on the `s
 
 ### Icon
 
-Use the `icon` prop to display a fallback [Icon](/docs/components/icon).
+Use the `icon` prop to display a fallback [Icon](/docs/pohon/components/icon).
 
 ::docs-pohon-preview
 ---

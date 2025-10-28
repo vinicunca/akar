@@ -122,7 +122,7 @@ const data = {
     />
     <PAlert
       :title="data.title"
-      :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+      :avatar="{ src: 'https://github.com/praburangki.png' }"
       :close="data.close"
       :description="data.description"
       v-bind="props"

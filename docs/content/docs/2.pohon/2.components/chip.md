@@ -103,9 +103,9 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://github.com/benjamincanac.png" />
+    <PAvatar src="https://github.com/praburangki.png" />
 ---
-:u-avatar{src="https://github.com/benjamincanac.png"}
+:p-avatar{src="https://github.com/praburangki.png"}
 ::
 
 ### Standalone
@@ -121,7 +121,7 @@ props:
 ::
 
 ::note
-It's used this way in the [`CommandPalette`](/docs/components/command-palette), [`InputMenu`](/docs/components/input-menu), [`Select`](/docs/components/select) or [`SelectMenu`](/docs/components/select-menu) components for example.
+It's used this way in the [`CommandPalette`](/docs/pohon/components/command-palette), [`InputMenu`](/docs/pohon/components/input-menu), [`Select`](/docs/pohon/components/select) or [`SelectMenu`](/docs/pohon/components/select-menu) components for example.
 ::
 
 ## Examples
@@ -130,7 +130,7 @@ It's used this way in the [`CommandPalette`](/docs/components/command-palette), 
 
 You can control the visibility of the Chip using the `show` prop.
 
-:component-example{name="chip-show-example"}
+:docs-pohon-example{name="chip-show-example"}
 
 ::note
 In this example, the Chip has a color per status and is displayed when the status is not `offline`.

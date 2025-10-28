@@ -11,7 +11,7 @@ links:
 
 ## Usage
 
-Use the `accordion` and `accordion-item` components to display an [Accordion](/docs/components/accordion) in your content.
+Use the `accordion` and `accordion-item` components to display an [Accordion](/docs/pohon/components/accordion) in your content.
 
 ::code-preview{class="[&>div]:*:my-0"}
 

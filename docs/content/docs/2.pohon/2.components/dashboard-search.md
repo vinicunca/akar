@@ -4,7 +4,7 @@ description: 'A ready to use CommandPalette to add to your dashboard.'
 category: dashboard
 links:
   - label: CommandPalette
-    to: /docs/components/command-palette
+    to: /docs/pohon/components/command-palette
     icon: i-simple-icons-nuxtdotjs
   - label: GitHub
     icon: i-simple-icons-github
@@ -13,9 +13,9 @@ links:
 
 ## Usage
 
-The DashboardSearch component extends the [CommandPalette](/docs/components/command-palette) component, so you can pass any property such as `icon`, `placeholder`, etc.
+The DashboardSearch component extends the [CommandPalette](/docs/pohon/components/command-palette) component, so you can pass any property such as `icon`, `placeholder`, etc.
 
-Use it inside the default slot of the [DashboardGroup](/docs/components/dashboard-group) component:
+Use it inside the default slot of the [DashboardGroup](/docs/pohon/components/dashboard-group) component:
 
 ```vue [layouts/dashboard.vue]{3}
 <template>
@@ -32,7 +32,7 @@ Use it inside the default slot of the [DashboardGroup](/docs/components/dashboar
 ```
 
 ::tip
-You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K"}, by using the [DashboardSearchButton](/docs/components/dashboard-search-button) component or by using a `v-model:open`{lang="ts"} directive.
+You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K"}, by using the [DashboardSearchButton](/docs/pohon/components/dashboard-search-button) component or by using a `v-model:open`{lang="ts"} directive.
 ::
 
 ### Shortcut

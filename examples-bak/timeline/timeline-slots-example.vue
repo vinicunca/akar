@@ -15,12 +15,12 @@ const items = [{
   action: 'marked this pull request as ready for review',
   icon: 'i-lucide-check-circle'
 }, {
-  username: 'benjamincanac',
+  username: 'praburangki',
   date: '2025-05-27T11:01:20Z',
   action: 'commented on this',
   description: 'I\'ve made a few changes, let me know what you think! Basically I updated the design, removed unnecessary divs, used Avatar component for the indicator since it supports icon already.',
   avatar: {
-    src: 'https://github.com/benjamincanac.png'
+    src: 'https://github.com/praburangki.png'
   }
 }, {
   username: 'J-Michalek',
@@ -31,7 +31,7 @@ const items = [{
     src: 'https://github.com/J-Michalek.png'
   }
 }, {
-  username: 'benjamincanac',
+  username: 'praburangki',
   date: '2025-05-27T11:01:20Z',
   action: 'merged this',
   icon: 'i-lucide-git-merge'

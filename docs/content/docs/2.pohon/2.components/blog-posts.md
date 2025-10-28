@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The BlogPosts component provides a flexible layout to display a list of [BlogPost](/docs/components/blog-post) components using either the default slot or the `posts` prop.
+The BlogPosts component provides a flexible layout to display a list of [BlogPost](/docs/pohon/components/blog-post) components using either the default slot or the `posts` prop.
 
 ```vue {2,8}
 <template>
@@ -26,7 +26,7 @@ The BlogPosts component provides a flexible layout to display a list of [BlogPos
 
 ### Posts
 
-Use the `posts` prop as an array of objects with the properties of the [BlogPost](/docs/components/blog-post#props) component.
+Use the `posts` prop as an array of objects with the properties of the [BlogPost](/docs/pohon/components/blog-post#props) component.
 
 ::docs-pohon-preview
 ---

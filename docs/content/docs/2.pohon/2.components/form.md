@@ -11,7 +11,7 @@ links:
 
 Use the Form component to validate form data using any validation library supporting [Standard Schema](https://github.com/standard-schema/standard-schema) such as [Valibot](https://github.com/fabian-hiller/valibot), [Zod](https://github.com/colinhacks/zod), [Regle](https://github.com/victorgarciaesgi/regle), [Yup](https://github.com/jquense/yup), [Joi](https://github.com/hapijs/joi) or [Superstruct](https://github.com/ianstormtaylor/superstruct) or your own validation logic.
 
-It works with the [FormField](/docs/components/form-field) component to display error messages around form elements automatically.
+It works with the [FormField](/docs/pohon/components/form-field) component to display error messages around form elements automatically.
 
 ### Schema validation
 
@@ -74,7 +74,7 @@ It requires two props:
   ::
 ::
 
-Errors are reported directly to the [FormField](/docs/components/form-field) component based on the `name` or `error-pattern` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
+Errors are reported directly to the [FormField](/docs/pohon/components/form-field) component based on the `name` or `error-pattern` prop. This means the validation rules defined for the `email` attribute in your schema will be applied to `<FormField name="email">`{lang="vue"}.
 
 Nested validation rules are handled using dot notation. For example, a rule like `{ user: z.object({ email: z.string() }) }`{lang="ts"} will be applied to `<FormField name="user.email">`{lang="vue"}.
 

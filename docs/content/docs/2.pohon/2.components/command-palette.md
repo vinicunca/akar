@@ -39,14 +39,14 @@ props:
     - id: 'users'
       label: 'Users'
       items:
-        - label: 'Benjamin Canac'
-          suffix: 'benjamincanac'
+        - label: 'praburangki'
+          suffix: 'praburangki'
           avatar:
-            src: 'https://github.com/benjamincanac.png'
-        - label: 'Romain Hamel'
-          suffix: 'romhml'
+            src: 'https://github.com/praburangki.png'
+        - label: 'Wahyu Ivan'
+          suffix: 'wahyu-ivan'
           avatar:
-            src: 'https://github.com/romhml.png'
+            src: 'https://github.com/wahyu-ivan.png'
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
@@ -114,7 +114,7 @@ Each group contains an `items` array of objects that define the commands. Each i
 - `class?: any`{lang="ts-type"}
 - `pohon?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-preview
 ---
@@ -136,14 +136,14 @@ props:
     - id: 'users'
       label: 'Users'
       items:
-        - label: 'Benjamin Canac'
-          suffix: 'benjamincanac'
+        - label: 'praburangki'
+          suffix: 'praburangki'
           avatar:
-            src: 'https://github.com/benjamincanac.png'
-        - label: 'Romain Hamel'
-          suffix: 'romhml'
+            src: 'https://github.com/praburangki.png'
+        - label: 'Wahyu Ivan'
+          suffix: 'wahyu-ivan'
           avatar:
-            src: 'https://github.com/romhml.png'
+            src: 'https://github.com/wahyu-ivan.png'
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
@@ -202,14 +202,14 @@ props:
     - id: 'users'
       label: 'Users'
       items:
-        - label: 'Benjamin Canac'
-          suffix: 'benjamincanac'
+        - label: 'praburangki'
+          suffix: 'praburangki'
           avatar:
-            src: 'https://github.com/benjamincanac.png'
-        - label: 'Romain Hamel'
-          suffix: 'romhml'
+            src: 'https://github.com/praburangki.png'
+        - label: 'Wahyu Ivan'
+          suffix: 'wahyu-ivan'
           avatar:
-            src: 'https://github.com/romhml.png'
+            src: 'https://github.com/wahyu-ivan.png'
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
@@ -275,7 +275,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to customize the input [Icon](/docs/components/icon). Defaults to `i-lucide-search`.
+Use the `icon` prop to customize the input [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-search`.
 
 ::docs-pohon-preview
 ---
@@ -318,7 +318,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.se
 
 ### Selected Icon
 
-Use the `selected-icon` prop to customize the selected item [Icon](/docs/components/icon). Defaults to `i-lucide-check`.
+Use the `selected-icon` prop to customize the selected item [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-check`.
 
 ::docs-pohon-preview
 ---
@@ -338,23 +338,23 @@ props:
   multiple: true
   autofocus: false
   modelValue:
-    - label: 'Benjamin Canac'
-      suffix: 'benjamincanac'
+    - label: 'praburangki'
+      suffix: 'praburangki'
       avatar:
-        src: 'https://github.com/benjamincanac.png'
+        src: 'https://github.com/praburangki.png'
   selectedIcon: 'i-lucide-circle-check'
   groups:
     - id: 'users'
       label: 'Users'
       items:
-        - label: 'Benjamin Canac'
-          suffix: 'benjamincanac'
+        - label: 'praburangki'
+          suffix: 'praburangki'
           avatar:
-            src: 'https://github.com/benjamincanac.png'
-        - label: 'Romain Hamel'
-          suffix: 'romhml'
+            src: 'https://github.com/praburangki.png'
+        - label: 'Wahyu Ivan'
+          suffix: 'wahyu-ivan'
           avatar:
-            src: 'https://github.com/romhml.png'
+            src: 'https://github.com/wahyu-ivan.png'
         - label: 'Sébastien Chopin'
           suffix: 'atinux'
           avatar:
@@ -397,7 +397,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) when an item has children. Defaults to `i-lucide-chevron-right`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) when an item has children. Defaults to `i-lucide-chevron-right`.
 
 ::docs-pohon-preview
 ---
@@ -590,7 +590,7 @@ props:
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
 
 ::docs-pohon-preview
 ---
@@ -674,7 +674,7 @@ props:
 
 ### Back Icon
 
-Use the `back-icon` prop to customize the back button [Icon](/docs/components/icon). Defaults to `i-lucide-arrow-left`.
+Use the `back-icon` prop to customize the back button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-arrow-left`.
 
 ::docs-pohon-preview
 ---
@@ -909,7 +909,7 @@ props:
 
 ### Within a Popover
 
-You can use the CommandPalette component inside a [Popover](/docs/components/popover)'s content.
+You can use the CommandPalette component inside a [Popover](/docs/pohon/components/popover)'s content.
 
 ::docs-pohon-example
 ---
@@ -922,7 +922,7 @@ props:
 
 ### Within a Modal
 
-You can use the CommandPalette component inside a [Modal](/docs/components/modal)'s content.
+You can use the CommandPalette component inside a [Modal](/docs/pohon/components/modal)'s content.
 
 ::docs-pohon-example
 ---
@@ -935,7 +935,7 @@ props:
 
 ### Within a Drawer
 
-You can use the CommandPalette component inside a [Drawer](/docs/components/drawer)'s content.
+You can use the CommandPalette component inside a [Drawer](/docs/pohon/components/drawer)'s content.
 
 ::docs-pohon-example
 ---
@@ -960,7 +960,7 @@ props:
 ::
 
 ::note
-This can be useful when using the CommandPalette inside a [`Modal`](/docs/components/modal) for example.
+This can be useful when using the CommandPalette inside a [`Modal`](/docs/pohon/components/modal) for example.
 ::
 
 ### With footer slot

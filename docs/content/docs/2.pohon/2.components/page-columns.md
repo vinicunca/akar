@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-The PageColumns component displays content in a responsive multi-column layout. It works well with [PageCard](/docs/components/page-card) components or any other elements, adapting from single column on mobile to multiple columns on larger screens.
+The PageColumns component displays content in a responsive multi-column layout. It works well with [PageCard](/docs/pohon/components/page-card) components or any other elements, adapting from single column on mobile to multiple columns on larger screens.
 
 ::docs-pohon-example
 ---

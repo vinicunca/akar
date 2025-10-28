@@ -39,11 +39,11 @@ props:
 ::
 
 ::tip
-Use this over a [`Select`](/docs/components/select) to take advantage of Reka UI's [`Combobox`](https://akar.com/docs/components/combobox) component that offers search capabilities and multiple selection.
+Use this over a [`Select`](/docs/pohon/components/select) to take advantage of Reka UI's [`Combobox`](https://akar.com/docs/pohon/components/combobox) component that offers search capabilities and multiple selection.
 ::
 
 ::note
-This component is similar to the [`InputMenu`](/docs/components/input-menu) but it's using a Select instead of an Input with the search inside the menu.
+This component is similar to the [`InputMenu`](/docs/pohon/components/input-menu) but it's using a Select instead of an Input with the search inside the menu.
 ::
 
 ### Items
@@ -107,7 +107,7 @@ props:
 ::
 
 ::caution
-Unlike the [`Select`](/docs/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
+Unlike the [`Select`](/docs/pohon/components/select) component, the SelectMenu expects the whole object to be passed to the `v-model` directive or the `default-value` prop by default.
 ::
 
 You can also pass an array of arrays to the `items` prop to display separated groups of items.
@@ -232,7 +232,7 @@ props:
 
 Use the `search-input` prop to customize or hide the search input (with `false` value).
 
-You can pass any property from the [Input](/docs/components/input) component to customize it.
+You can pass any property from the [Input](/docs/pohon/components/input) component to customize it.
 
 ::docs-pohon-preview
 ---
@@ -424,7 +424,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/docs/components/icon) inside the SelectMenu.
+Use the `icon` prop to show an [Icon](/docs/pohon/components/icon) inside the SelectMenu.
 
 ::docs-pohon-preview
 ---
@@ -451,7 +451,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon). Defaults to `i-lucide-chevron-down`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-chevron-down`.
 
 ::docs-pohon-preview
 ---
@@ -529,7 +529,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 ### Avatar
 
-Use the `avatar` prop to display an [Avatar](/docs/components/avatar) inside the SelectMenu.
+Use the `avatar` prop to display an [Avatar](/docs/pohon/components/avatar) inside the SelectMenu.
 
 ::docs-pohon-preview
 ---
@@ -688,7 +688,7 @@ props:
 
 ### With icon in items
 
-You can use the `icon` property to display an [Icon](/docs/components/icon) inside the items.
+You can use the `icon` property to display an [Icon](/docs/pohon/components/icon) inside the items.
 
 ::docs-pohon-example
 ---
@@ -703,7 +703,7 @@ You can also use the `#leading` slot to display the selected icon.
 
 ### With avatar in items
 
-You can use the `avatar` property to display an [Avatar](/docs/components/avatar) inside the items.
+You can use the `avatar` property to display an [Avatar](/docs/pohon/components/avatar) inside the items.
 
 ::docs-pohon-example
 ---
@@ -718,7 +718,7 @@ You can also use the `#leading` slot to display the selected avatar.
 
 ### With chip in items
 
-You can use the `chip` property to display a [Chip](/docs/components/chip) inside the items.
+You can use the `chip` property to display a [Chip](/docs/pohon/components/chip) inside the items.
 
 ::docs-pohon-example
 ---

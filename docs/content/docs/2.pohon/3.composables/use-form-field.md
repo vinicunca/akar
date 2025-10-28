@@ -6,7 +6,7 @@ navigation: false
 
 ## Usage
 
-Use the auto-imported `useFormField` composable to integrate custom inputs with a [Form](/docs/components/form).
+Use the auto-imported `useFormField` composable to integrate custom inputs with a [Form](/docs/pohon/components/form).
 
 ```vue
 <script setup lang="ts">

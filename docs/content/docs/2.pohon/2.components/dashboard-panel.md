@@ -10,9 +10,9 @@ links:
 
 ## Usage
 
-The DashboardPanel component is used to display a panel. Its state (size, collapsed, etc.) will be saved based on the `storage` and `storage-key` props you provide to the [DashboardGroup](/docs/components/dashboard-group#props) component.
+The DashboardPanel component is used to display a panel. Its state (size, collapsed, etc.) will be saved based on the `storage` and `storage-key` props you provide to the [DashboardGroup](/docs/pohon/components/dashboard-group#props) component.
 
-Use it inside the default slot of the [DashboardGroup](/docs/components/dashboard-group) component, you can put multiple panels next to each other:
+Use it inside the default slot of the [DashboardGroup](/docs/pohon/components/dashboard-group) component, you can put multiple panels next to each other:
 
 ```vue [pages/index.vue]{8,10}
 <script setup lang="ts">
@@ -52,7 +52,7 @@ props:
 ::
 
 ::note
-Most of the time, you will use the [`DashboardNavbar`](/docs/components/dashboard-navbar) component in the `header` slot.
+Most of the time, you will use the [`DashboardNavbar`](/docs/pohon/components/dashboard-navbar) component in the `header` slot.
 ::
 
 ### Resizable
@@ -112,7 +112,7 @@ class: '!p-0 !justify-start'
 :placeholder{class="h-96"}
 ::
 
-::tip{to="/docs/components/dashboard-group#props"}
+::tip{to="/docs/pohon/components/dashboard-group#props"}
 Sizes are calculated as percentages by default. You can change this using the `unit` prop on the `DashboardGroup` component.
 ::
 

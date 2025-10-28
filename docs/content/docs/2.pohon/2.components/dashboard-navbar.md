@@ -10,9 +10,9 @@ links:
 
 ## Usage
 
-The DashboardNavbar component is a responsive navigation bar that integrates with the [DashboardSidebar](/docs/components/dashboard-sidebar) component. It includes a mobile toggle button to enable responsive navigation in dashboard layouts.
+The DashboardNavbar component is a responsive navigation bar that integrates with the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) component. It includes a mobile toggle button to enable responsive navigation in dashboard layouts.
 
-Use it inside the `header` slot of the [DashboardPanel](/docs/components/dashboard-panel) component:
+Use it inside the `header` slot of the [DashboardPanel](/docs/pohon/components/dashboard-panel) component:
 
 ```vue [pages/index.vue]{9-11}
 <script setup lang="ts">
@@ -43,7 +43,7 @@ props:
 ::
 
 ::note
-In this example, we use the [Tabs](/docs/components/tabs) component in the right slot to display some tabs.
+In this example, we use the [Tabs](/docs/pohon/components/tabs) component in the right slot to display some tabs.
 ::
 
 ### Title
@@ -81,7 +81,7 @@ class: '!px-0 !pt-0'
 
 ### Toggle
 
-Use the `toggle` prop to customize the toggle button displayed on mobile that opens the [DashboardSidebar](/docs/components/dashboard-sidebar) component.
+Use the `toggle` prop to customize the toggle button displayed on mobile that opens the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) component.
 
 You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 

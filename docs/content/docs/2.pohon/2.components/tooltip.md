@@ -31,10 +31,10 @@ slots:
 ::
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/components/app) component which uses the [`TooltipProvider`](https://akar.com/docs/components/tooltip#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`TooltipProvider`](https://akar.com/docs/pohon/components/tooltip#provider) component from Reka UI.
 ::
 
-::tip{to="/docs/components/app#props"}
+::tip{to="/docs/pohon/components/app#props"}
 You can check the `App` component `tooltip` prop to see how to configure the Tooltip globally.
 ::
 
@@ -58,7 +58,7 @@ slots:
 
 ### Kbds
 
-Use the `kbds` prop to render [Kbd](/docs/components/kbd) components in the Tooltip.
+Use the `kbds` prop to render [Kbd](/docs/pohon/components/kbd) components in the Tooltip.
 
 ::docs-pohon-preview
 ---
@@ -106,7 +106,7 @@ slots:
 ::
 
 ::tip
-This can be configured globally through the `tooltip.delayDuration` option in the [`App`](/docs/components/app) component.
+This can be configured globally through the `tooltip.delayDuration` option in the [`App`](/docs/pohon/components/app) component.
 ::
 
 ### Content
@@ -204,7 +204,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 ### With following cursor
 
-You can make the Tooltip follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/components/tooltip#trigger) prop:
+You can make the Tooltip follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/pohon/components/tooltip#trigger) prop:
 
 ::docs-pohon-example
 ---

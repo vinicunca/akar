@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-Wrap multiple [Avatar](/docs/components/avatar) within an AvatarGroup to stack them.
+Wrap multiple [Avatar](/docs/pohon/components/avatar) within an AvatarGroup to stack them.
 
 ::docs-pohon-preview
 ---
@@ -18,13 +18,13 @@ prettier: true
 slots:
   default: |
 
-    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+    <PAvatar src="https://github.com/praburangki.png" alt="praburangki" />
+    <PAvatar src="https://github.com/wahyu-ivan.png" alt="Wahyu Ivan" />
+    <PAvatar src="https://github.com/GunawanAhmad.png" alt="Gunawan Ahmad" />
 ---
-:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
+:p-avatar{src="https://github.com/praburangki.png" alt="praburangki"}
+:p-avatar{src="https://github.com/wahyu-ivan.png" alt="Wahyu Ivan"}
+:p-avatar{src="https://github.com/GunawanAhmad.png" alt="Gunawan Ahmad"}
 ::
 
 ### Size
@@ -39,13 +39,13 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+    <PAvatar src="https://github.com/praburangki.png" alt="praburangki" />
+    <PAvatar src="https://github.com/wahyu-ivan.png" alt="Wahyu Ivan" />
+    <PAvatar src="https://github.com/GunawanAhmad.png" alt="Gunawan Ahmad" />
 ---
-:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
+:p-avatar{src="https://github.com/praburangki.png" alt="praburangki"}
+:p-avatar{src="https://github.com/wahyu-ivan.png" alt="Wahyu Ivan"}
+:p-avatar{src="https://github.com/GunawanAhmad.png" alt="Gunawan Ahmad"}
 ::
 
 ### Max
@@ -60,40 +60,40 @@ props:
 slots:
   default: |
 
-    <UAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" />
-    <UAvatar src="https://github.com/romhml.png" alt="Romain Hamel" />
-    <UAvatar src="https://github.com/noook.png" alt="Neil Richter" />
+    <PAvatar src="https://github.com/praburangki.png" alt="praburangki" />
+    <PAvatar src="https://github.com/wahyu-ivan.png" alt="Wahyu Ivan" />
+    <PAvatar src="https://github.com/GunawanAhmad.png" alt="Gunawan Ahmad" />
 ---
-:u-avatar{src="https://github.com/benjamincanac.png" alt="Benjamin Canac"}
-:u-avatar{src="https://github.com/romhml.png" alt="Romain Hamel"}
-:u-avatar{src="https://github.com/noook.png" alt="Neil Richter"}
+:p-avatar{src="https://github.com/praburangki.png" alt="praburangki"}
+:p-avatar{src="https://github.com/wahyu-ivan.png" alt="Wahyu Ivan"}
+:p-avatar{src="https://github.com/GunawanAhmad.png" alt="Gunawan Ahmad"}
 ::
 
 ## Examples
 
 ### With tooltip
 
-Wrap each avatar with a [Tooltip](/docs/components/tooltip) to display a tooltip on hover.
+Wrap each avatar with a [Tooltip](/docs/pohon/components/tooltip) to display a tooltip on hover.
 
-:component-example{name="avatar-group-tooltip-example"}
+:docs-pohon-example{name="avatar-group-tooltip-example"}
 
 ### With chip
 
-Wrap each avatar with a [Chip](/docs/components/chip) to display a chip around the avatar.
+Wrap each avatar with a [Chip](/docs/pohon/components/chip) to display a chip around the avatar.
 
-:component-example{name="avatar-group-chip-example"}
+:docs-pohon-example{name="avatar-group-chip-example"}
 
 ### With link
 
-Wrap each avatar with a [Link](/docs/components/link) to make them clickable.
+Wrap each avatar with a [Link](/docs/pohon/components/link) to make them clickable.
 
-:component-example{name="avatar-group-link-example"}
+:docs-pohon-example{name="avatar-group-link-example"}
 
 ### With mask
 
 Wrap an avatar with a CSS mask to display it with a custom shape.
 
-:component-example{name="avatar-group-mask-example"}
+:docs-pohon-example{name="avatar-group-mask-example"}
 
 ::warning
 The `chip` prop does not work correctly when using a mask. Chips may be cut depending on the mask shape.

@@ -23,10 +23,10 @@ name: 'toast-example'
 ::
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/components/app) component which uses our [`Toaster`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://akar.com/docs/components/toast#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses our [`Toaster`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://akar.com/docs/pohon/components/toast#provider) component from Reka UI.
 ::
 
-::tip{to="/docs/components/app#props"}
+::tip{to="/docs/pohon/components/app#props"}
 You can check the `App` component `toaster` prop to see how to configure the Toaster globally.
 ::
 
@@ -63,7 +63,7 @@ name: 'toast-description-example'
 
 ### Icon
 
-Pass an `icon` field to the `toast.add` method to display an [Icon](/docs/components/icon).
+Pass an `icon` field to the `toast.add` method to display an [Icon](/docs/pohon/components/icon).
 
 ::docs-pohon-example
 ---
@@ -77,7 +77,7 @@ name: 'toast-icon-example'
 
 ### Avatar
 
-Pass an `avatar` field to the `toast.add` method to display an [Avatar](/docs/components/avatar).
+Pass an `avatar` field to the `toast.add` method to display an [Avatar](/docs/pohon/components/avatar).
 
 ::docs-pohon-example
 ---
@@ -86,7 +86,7 @@ options:
     alias: 'avatar'
     label: 'avatar.src'
     default:
-      src: 'https://github.com/benjamincanac.png'
+      src: 'https://github.com/praburangki.png'
 name: 'toast-avatar-example'
 ---
 ::
@@ -125,7 +125,7 @@ name: 'toast-close-example'
 
 ### Close Icon
 
-Pass a `closeIcon` field to customize the close button [Icon](/docs/components/icon). Default to `i-lucide-x`.
+Pass a `closeIcon` field to customize the close button [Icon](/docs/pohon/components/icon). Default to `i-lucide-x`.
 
 ::docs-pohon-example
 ---
@@ -165,7 +165,7 @@ name: 'toast-actions-example'
 
 ### Progress
 
-Pass a `progress` field to customize or hide the [Progress](/docs/components/progress) bar (with `false` value).
+Pass a `progress` field to customize or hide the [Progress](/docs/pohon/components/progress) bar (with `false` value).
 
 ::tip
 The Progress bar inherits the Toast color by default, but you can override it using the `progress.color` field.
@@ -202,7 +202,7 @@ Nuxt UI provides an **App** component that wraps your app to provide global conf
 
 ### Change global position
 
-Change the `toaster.position` prop on the [App](/docs/components/app#props) component to change the position of the toasts.
+Change the `toaster.position` prop on the [App](/docs/pohon/components/app#props) component to change the position of the toasts.
 
 ```vue [app.vue]
 <script setup lang="ts">
@@ -232,7 +232,7 @@ In this example, we use the `AppConfig` to configure the `position` prop of the 
 
 ### Change global duration
 
-Change the `toaster.duration` prop on the [App](/docs/components/app#props) component to change the duration of the toasts.
+Change the `toaster.duration` prop on the [App](/docs/pohon/components/app#props) component to change the duration of the toasts.
 
 ```vue [app.vue]
 <script setup lang="ts">
@@ -262,7 +262,7 @@ In this example, we use the `AppConfig` to configure the `duration` prop of the 
 
 ### Change global max :badge{label="Soon"}
 
-Change the `toaster.max` prop on the [App](/docs/components/app#props) component to change the max number of toasts displayed at once.
+Change the `toaster.max` prop on the [App](/docs/pohon/components/app#props) component to change the max number of toasts displayed at once.
 
 ```vue [app.vue]
 <script setup lang="ts">
@@ -292,7 +292,7 @@ In this example, we use the `AppConfig` to configure the `max` prop of the `Toas
 
 ### Stacked toasts
 
-Set the `toaster.expand` prop to `false` on the [App](/docs/components/app#props) component to display stacked toasts (inspired by [Sonner](https://sonner.emilkowal.ski/)).
+Set the `toaster.expand` prop to `false` on the [App](/docs/pohon/components/app#props) component to display stacked toasts (inspired by [Sonner](https://sonner.emilkowal.ski/)).
 
 ```vue [app.vue]
 <script setup lang="ts">

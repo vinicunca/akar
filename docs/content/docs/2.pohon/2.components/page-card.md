@@ -28,7 +28,7 @@ class: 'w-96'
 ::
 
 ::tip
-Use the [PageGrid](/docs/components/page-grid), [PageColumns](/docs/components/page-columns) or [PageList](/docs/components/page-list) components to display multiple PageCard.
+Use the [PageGrid](/docs/pohon/components/page-grid), [PageColumns](/docs/pohon/components/page-columns) or [PageList](/docs/pohon/components/page-list) components to display multiple PageCard.
 ::
 
 ### Title
@@ -266,7 +266,7 @@ You can also customize the color and size by using the `--spotlight-color` and `
 
 ### As a testimonial
 
-Use the [User](/docs/components/user) component in the `header` or `footer` slot to make the card look like a testimonial.
+Use the [User](/docs/pohon/components/user) component in the `header` or `footer` slot to make the card look like a testimonial.
 
 ::docs-pohon-example
 ---
@@ -274,8 +274,8 @@ name: 'page-card-testimonial-example'
 ---
 ::
 
-::tip{to="/docs/components/page-columns"}
-You can use the [`PageColumns`](/docs/components/page-columns) component to display multiple PageCard in a multi-column layout.
+::tip{to="/docs/pohon/components/page-columns"}
+You can use the [`PageColumns`](/docs/pohon/components/page-columns) component to display multiple PageCard in a multi-column layout.
 ::
 
 ## API

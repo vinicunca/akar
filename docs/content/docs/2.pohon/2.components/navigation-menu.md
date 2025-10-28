@@ -62,33 +62,33 @@ props:
           to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /docs/components
+      to: /docs/pohon/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /docs/components/link
+          to: /docs/pohon/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/components/modal
+          to: /docs/pohon/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /docs/components/navigation-menu
+          to: /docs/pohon/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /docs/components/pagination
+          to: /docs/pohon/components/pagination
         - label: Popover
           icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
-          to: /docs/components/popover
+          to: /docs/pohon/components/popover
         - label: Progress
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
-          to: /docs/components/progress
+          to: /docs/pohon/components/progress
     - label: GitHub
       icon: i-simple-icons-github
       badge: 3.8k
@@ -122,7 +122,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `class?: any`{lang="ts-type"}
 - `pohon?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
 
-You can pass any property from the [Link](/docs/components/link#props) component such as `to`, `target`, etc.
+You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
 ::docs-pohon-preview
 ---
@@ -173,33 +173,33 @@ props:
           to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /docs/components
+      to: /docs/pohon/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /docs/components/link
+          to: /docs/pohon/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/components/modal
+          to: /docs/pohon/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /docs/components/navigation-menu
+          to: /docs/pohon/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /docs/components/pagination
+          to: /docs/pohon/components/pagination
         - label: Popover
           icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
-          to: /docs/components/popover
+          to: /docs/pohon/components/popover
         - label: Progress
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
-          to: /docs/components/progress
+          to: /docs/pohon/components/progress
     - label: GitHub
       icon: i-simple-icons-github
       badge: 3.8k
@@ -232,7 +232,7 @@ Each item can take a `children` array of objects with the following properties t
 Use the `orientation` prop to change the orientation of the NavigationMenu.
 
 ::note
-When orientation is `vertical`, an [Accordion](/docs/components/accordion) component is used to display each group. You can control the open state of each item using the `open` and `defaultOpen` properties and change the behavior using the [`collapsible`](/docs/components/accordion#collapsible) and [`type`](/docs/components/accordion#multiple) props.
+When orientation is `vertical`, an [Accordion](/docs/pohon/components/accordion) component is used to display each group. You can control the open state of each item using the `open` and `defaultOpen` properties and change the behavior using the [`collapsible`](/docs/pohon/components/accordion#collapsible) and [`type`](/docs/pohon/components/accordion#multiple) props.
 ::
 
 ::docs-pohon-preview
@@ -285,34 +285,34 @@ props:
             to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /docs/components
+        to: /docs/pohon/components
         active: true
         defaultOpen: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /docs/components/link
+            to: /docs/pohon/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/components/modal
+            to: /docs/pohon/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /docs/components/navigation-menu
+            to: /docs/pohon/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /docs/components/pagination
+            to: /docs/pohon/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /docs/components/popover
+            to: /docs/pohon/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /docs/components/progress
+            to: /docs/pohon/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k
@@ -398,33 +398,33 @@ props:
             to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /docs/components
+        to: /docs/pohon/components
         active: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /docs/components/link
+            to: /docs/pohon/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/components/modal
+            to: /docs/pohon/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /docs/components/navigation-menu
+            to: /docs/pohon/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /docs/components/pagination
+            to: /docs/pohon/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /docs/components/popover
+            to: /docs/pohon/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /docs/components/progress
+            to: /docs/pohon/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k
@@ -493,34 +493,34 @@ props:
             to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /docs/components
+        to: /docs/pohon/components
         active: true
         defaultOpen: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /docs/components/link
+            to: /docs/pohon/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/components/modal
+            to: /docs/pohon/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /docs/components/navigation-menu
+            to: /docs/pohon/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /docs/components/pagination
+            to: /docs/pohon/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /docs/components/popover
+            to: /docs/pohon/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /docs/components/progress
+            to: /docs/pohon/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k
@@ -565,7 +565,7 @@ props:
         to: /docs/composables
       - label: Components
         icon: i-lucide-box
-        to: /docs/components
+        to: /docs/pohon/components
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
@@ -602,7 +602,7 @@ props:
         to: /docs/composables
       - label: Components
         icon: i-lucide-box
-        to: /docs/components
+        to: /docs/pohon/components
         active: true
     - - label: GitHub
         icon: i-simple-icons-github
@@ -619,7 +619,7 @@ The `highlight` prop changes the `pill` variant active item style. Try it out to
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/components/icon) of each item. Defaults to `i-lucide-chevron-down`. This icon is only displayed when an item has children.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) of each item. Defaults to `i-lucide-chevron-down`. This icon is only displayed when an item has children.
 
 ::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
@@ -675,33 +675,33 @@ props:
           to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /docs/components
+      to: /docs/pohon/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /docs/components/link
+          to: /docs/pohon/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/components/modal
+          to: /docs/pohon/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /docs/components/navigation-menu
+          to: /docs/pohon/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /docs/components/pagination
+          to: /docs/pohon/components/pagination
         - label: Popover
           icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
-          to: /docs/components/popover
+          to: /docs/pohon/components/popover
         - label: Progress
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
-          to: /docs/components/progress
+          to: /docs/pohon/components/progress
   class: 'w-full justify-center'
 ---
 ::
@@ -773,33 +773,33 @@ props:
           to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /docs/components
+      to: /docs/pohon/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /docs/components/link
+          to: /docs/pohon/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/components/modal
+          to: /docs/pohon/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /docs/components/navigation-menu
+          to: /docs/pohon/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /docs/components/pagination
+          to: /docs/pohon/components/pagination
         - label: Popover
           icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
-          to: /docs/components/popover
+          to: /docs/pohon/components/popover
         - label: Progress
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
-          to: /docs/components/progress
+          to: /docs/pohon/components/progress
   class: 'w-full justify-center'
 ---
 ::
@@ -862,25 +862,25 @@ props:
           to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /docs/components
+      to: /docs/pohon/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /docs/components/link
+          to: /docs/pohon/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/components/modal
+          to: /docs/pohon/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /docs/components/navigation-menu
+          to: /docs/pohon/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /docs/components/pagination
+          to: /docs/pohon/components/pagination
   class: 'w-full justify-center'
 ---
 ::
@@ -940,33 +940,33 @@ props:
           to: /docs/composables/use-toast
     - label: Components
       icon: i-lucide-box
-      to: /docs/components
+      to: /docs/pohon/components
       active: true
       children:
         - label: Link
           icon: i-lucide-file-text
           description: Use NuxtLink with superpowers.
-          to: /docs/components/link
+          to: /docs/pohon/components/link
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/components/modal
+          to: /docs/pohon/components/modal
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
-          to: /docs/components/navigation-menu
+          to: /docs/pohon/components/navigation-menu
         - label: Pagination
           icon: i-lucide-file-text
           description: Display a list of pages.
-          to: /docs/components/pagination
+          to: /docs/pohon/components/pagination
         - label: Popover
           icon: i-lucide-file-text
           description: Display a non-modal dialog that floats around a trigger element.
-          to: /docs/components/popover
+          to: /docs/pohon/components/popover
         - label: Progress
           icon: i-lucide-file-text
           description: Show a horizontal bar to indicate task progression.
-          to: /docs/components/progress
+          to: /docs/pohon/components/progress
   class: 'w-full justify-center'
 ---
 ::
@@ -979,9 +979,9 @@ You can inspect the DOM to see each item's content being rendered.
 
 ### With tooltip in items
 
-When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip.
+When orientation is `vertical` and the menu is `collapsed`, you can set the `tooltip` prop to `true` to display a [Tooltip](/docs/pohon/components/tooltip) around items with their label but you can also use the `tooltip` property on each item to override the default tooltip.
 
-You can pass any property from the [Tooltip](/docs/components/tooltip) component globally or on each item.
+You can pass any property from the [Tooltip](/docs/pohon/components/tooltip) component globally or on each item.
 
 ::docs-pohon-preview
 ---
@@ -1040,33 +1040,33 @@ props:
             to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /docs/components
+        to: /docs/pohon/components
         active: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /docs/components/link
+            to: /docs/pohon/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/components/modal
+            to: /docs/pohon/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /docs/components/navigation-menu
+            to: /docs/pohon/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /docs/components/pagination
+            to: /docs/pohon/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /docs/components/popover
+            to: /docs/pohon/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /docs/components/progress
+            to: /docs/pohon/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k
@@ -1084,9 +1084,9 @@ props:
 
 ### With popover in items
 
-When orientation is `vertical` and the menu is `collapsed`, you can set the `popover` prop to `true` to display a [Popover](/docs/components/popover) around items with their children but you can also use the `popover` property on each item to override the default popover.
+When orientation is `vertical` and the menu is `collapsed`, you can set the `popover` prop to `true` to display a [Popover](/docs/pohon/components/popover) around items with their children but you can also use the `popover` property on each item to override the default popover.
 
-You can pass any property from the [Popover](/docs/components/popover) component globally or on each item.
+You can pass any property from the [Popover](/docs/pohon/components/popover) component globally or on each item.
 
 ::docs-pohon-preview
 ---
@@ -1147,33 +1147,33 @@ props:
             to: /docs/composables/use-toast
       - label: Components
         icon: i-lucide-box
-        to: /docs/components
+        to: /docs/pohon/components
         active: true
         children:
           - label: Link
             icon: i-lucide-file-text
             description: Use NuxtLink with superpowers.
-            to: /docs/components/link
+            to: /docs/pohon/components/link
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/components/modal
+            to: /docs/pohon/components/modal
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
-            to: /docs/components/navigation-menu
+            to: /docs/pohon/components/navigation-menu
           - label: Pagination
             icon: i-lucide-file-text
             description: Display a list of pages.
-            to: /docs/components/pagination
+            to: /docs/pohon/components/pagination
           - label: Popover
             icon: i-lucide-file-text
             description: Display a non-modal dialog that floats around a trigger element.
-            to: /docs/components/popover
+            to: /docs/pohon/components/popover
           - label: Progress
             icon: i-lucide-file-text
             description: Show a horizontal bar to indicate task progression.
-            to: /docs/components/progress
+            to: /docs/pohon/components/progress
     - - label: GitHub
         icon: i-simple-icons-github
         badge: 3.8k

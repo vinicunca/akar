@@ -319,7 +319,7 @@ name: 'drawer-modal-example'
 
 ### Responsive drawer
 
-You can render a [Modal](/docs/components/modal) component on desktop and a Drawer on mobile for example.
+You can render a [Modal](/docs/pohon/components/modal) component on desktop and a Drawer on mobile for example.
 
 ::docs-pohon-example
 ---
@@ -353,7 +353,7 @@ name: 'drawer-footer-slot-example'
 
 ### With command palette
 
-You can use a [CommandPalette](/docs/components/command-palette) component inside the Drawer's content.
+You can use a [CommandPalette](/docs/pohon/components/command-palette) component inside the Drawer's content.
 
 ::docs-pohon-example
 ---

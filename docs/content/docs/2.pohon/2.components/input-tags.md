@@ -121,7 +121,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/docs/components/icon) inside the InputTags.
+Use the `icon` prop to show an [Icon](/docs/pohon/components/icon) inside the InputTags.
 
 ::docs-pohon-preview
 ---
@@ -144,7 +144,7 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 
 ### Avatar
 
-Use the `avatar` prop to show an [Avatar](/docs/components/avatar) inside the InputTags.
+Use the `avatar` prop to show an [Avatar](/docs/pohon/components/avatar) inside the InputTags.
 
 ::docs-pohon-preview
 ---
@@ -164,7 +164,7 @@ props:
 
 ### Delete Icon
 
-Use the `delete-icon` prop to customize the delete [Icon](/docs/components/icon) in the tags. Defaults to `i-lucide-x`.
+Use the `delete-icon` prop to customize the delete [Icon](/docs/pohon/components/icon) in the tags. Defaults to `i-lucide-x`.
 
 ::docs-pohon-preview
 ---
@@ -260,7 +260,7 @@ props:
 
 ### Within a FormField
 
-You can use the InputTags within a [FormField](/docs/components/form-field) component to display a label, help text, required indicator, etc.
+You can use the InputTags within a [FormField](/docs/pohon/components/form-field) component to display a label, help text, required indicator, etc.
 
 ::docs-pohon-example
 ---
