@@ -21,24 +21,21 @@ const { data: metadata } = await useAsyncData(
   <template v-if="metadata?.props?.length">
     <ProseH4>Props</ProseH4>
     <DocsPropsTable
-      :data="(metadata.props as any)"
-      :name="`props-${props.name}`"
+      :meta-props="(metadata.props as any)"
     />
   </template>
 
   <template v-if="metadata?.events?.length">
     <ProseH4>Emits</ProseH4>
     <DocsEmitsTable
-      :data="(metadata.events as any)"
-      :name="`emits-${props.name}`"
+      :meta-events="(metadata.events as any)"
     />
   </template>
 
   <template v-if="metadata?.slots?.length">
     <ProseH4>Slots</ProseH4>
     <DocsSlotsTable
-      :data="(metadata.slots as any)"
-      :name="`slots-${props.name}`"
+      :meta-slots="(metadata.slots as any)"
     />
   </template>
 

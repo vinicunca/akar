@@ -36,8 +36,6 @@ const props = withDefaults(
 
 const { componentName, slug } = useComponentName(props);
 
-const propsKey = computed(() => `props-pohon-${slug}`);
-
 const camelName = toCamelCase(slug);
 const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName];
 
@@ -97,65 +95,5 @@ const metaProps = computed<ComponentMeta['props']>(() => {
 </script>
 
 <template>
-  <ProseTable>
-    <ProseThead>
-      <ProseTr>
-        <ProseTh>
-          Prop
-        </ProseTh>
-        <ProseTh>
-          Default
-        </ProseTh>
-        <ProseTh>
-          Type
-        </ProseTh>
-      </ProseTr>
-    </ProseThead>
-
-    <ProseTbody>
-      <ProseTr
-        v-for="(prop, index) in metaProps"
-        :key="`${prop.name}-${index}`"
-      >
-        <ProseTd>
-          <ProseCode class="akar:(color-$akar-primary bg-$akar-primary/10)">
-            {{ prop.name }}{{ prop.required ? '*' : '' }}
-          </ProseCode>
-        </ProseTd>
-
-        <ProseTd>
-          <DocsHighlightInlineType
-            v-if="prop.default"
-            :type="prop.default"
-          />
-
-          <i
-            v-else
-            class="i-radix-icons:divider-horizontal"
-          />
-        </ProseTd>
-
-        <ProseTd>
-          <DocsHighlightInlineType
-            v-if="prop.type"
-            :type="prop.type"
-          />
-
-          <MDC
-            v-if="prop.description"
-            :value="prop.description"
-            class="color-text-toned mt-1"
-            :cache-key="`${propsKey}-${prop.name}-description`"
-          />
-
-          <DocsPropsSchema
-            v-if="prop.schema"
-            :name="propsKey"
-            :prop="prop"
-            :ignore="props.ignore"
-          />
-        </ProseTd>
-      </ProseTr>
-    </ProseTbody>
-  </ProseTable>
+  <DocsPropsTable :meta-props="metaProps" />
 </template>
