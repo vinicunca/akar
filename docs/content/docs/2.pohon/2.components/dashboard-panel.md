@@ -38,7 +38,7 @@ This component does not have a single root element when using the `resizable` pr
 
 Use the `header`, `body` and `footer` slots to customize the panel or the default slot if you don't want a scrollable body with padding.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'dashboard-panel-example'

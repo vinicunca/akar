@@ -22,7 +22,7 @@ The ContentSearch component extends the [CommandPalette](/docs/pohon/components/
 
 Use the `files` and `navigation` props with the `files`{lang="ts-type"} and `navigation`{lang="ts-type"} values you fetched using the `queryCollectionSearchSections` and `queryCollectionNavigation` composables from `@nuxt/content`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 iframe:
   height: 500px;

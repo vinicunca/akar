@@ -18,7 +18,7 @@ Its height is defined through a `--pohon-header-height` CSS variable. Make sure 
 
 Use the `left`, `default` and `right` slots to customize the header and the `body` or `content` slots to customize the header menu.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 prettier: true
@@ -50,6 +50,10 @@ class: '!px-0 !pt-0'
 ::
 
 You can also use the `title` slot to add your own logo.
+
+::tip{to="#props"}
+You should still add the `title` prop to replace the default `aria-label` of the link.
+::
 
 ::docs-pohon-preview
 ---
@@ -121,7 +125,7 @@ Use the `body` slot to fill the menu body (under the header) or the `content` sl
 You can use the `menu` prop to customize the menu of the header, it will adapt depending on the mode you choose.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 iframe:
@@ -148,7 +152,7 @@ Use the `toggle` prop to customize the toggle button displayed on mobile.
 
 You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 iframe:
@@ -165,7 +169,7 @@ props:
 
 Use the `toggle-side` prop to change the side of the toggle button. Defaults to `right`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 iframe:

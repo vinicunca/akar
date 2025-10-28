@@ -244,7 +244,7 @@ You can customize this icon globally in your `vite.config.ts` under `pohon.icons
 
 You can control the active item(s) by using the `default-value` prop or the `v-model` directive with the index of the item.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'accordion-model-value-example'
 ---
@@ -262,7 +262,7 @@ When `type="multiple"`, ensure to pass an array to the `default-value` prop or t
 
 Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Accordion. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'accordion-drag-and-drop-example'
 ---
@@ -272,7 +272,7 @@ name: 'accordion-drag-and-drop-example'
 
 Use the `#body` slot to customize the body of each item.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'accordion-body-slot-example'
 ---
@@ -286,7 +286,7 @@ The `#body` slot includes some pre-defined styles, use the [`#content` slot](#wi
 
 Use the `#content` slot to customize the content of each item.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'accordion-content-slot-example'
 ---
@@ -301,7 +301,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}`{lang="ts-type"}
 - `#{{ item.slot }}-body`{lang="ts-type"}
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'accordion-custom-slot-example'
 ---
@@ -311,7 +311,7 @@ name: 'accordion-custom-slot-example'
 
 You can use the [MDC](https://github.com/nuxt-modules/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to render markdown in the accordion items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'accordion-markdown-example'
 ---

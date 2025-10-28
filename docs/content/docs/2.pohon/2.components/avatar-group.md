@@ -75,25 +75,25 @@ slots:
 
 Wrap each avatar with a [Tooltip](/docs/pohon/components/tooltip) to display a tooltip on hover.
 
-:docs-pohon-example{name="avatar-group-tooltip-example"}
+:docs-component-example{name="avatar-group-tooltip-example"}
 
 ### With chip
 
 Wrap each avatar with a [Chip](/docs/pohon/components/chip) to display a chip around the avatar.
 
-:docs-pohon-example{name="avatar-group-chip-example"}
+:docs-component-example{name="avatar-group-chip-example"}
 
 ### With link
 
 Wrap each avatar with a [Link](/docs/pohon/components/link) to make them clickable.
 
-:docs-pohon-example{name="avatar-group-link-example"}
+:docs-component-example{name="avatar-group-link-example"}
 
 ### With mask
 
 Wrap an avatar with a CSS mask to display it with a custom shape.
 
-:docs-pohon-example{name="avatar-group-mask-example"}
+:docs-component-example{name="avatar-group-mask-example"}
 
 ::warning
 The `chip` prop does not work correctly when using a mask. Chips may be cut depending on the mask shape.

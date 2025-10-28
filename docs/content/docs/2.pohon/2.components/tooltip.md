@@ -192,7 +192,7 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'tooltip-open-example'
 ---
@@ -206,7 +206,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 You can make the Tooltip follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/pohon/components/tooltip#trigger) prop:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'tooltip-cursor-example'
 ---

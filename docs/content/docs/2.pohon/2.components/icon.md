@@ -33,7 +33,7 @@ It's highly recommended to install the icons collections you need, read more abo
 
 You can also pass a Vue component into the `name` prop:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'icon-svg-example'
 ---

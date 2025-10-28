@@ -87,19 +87,19 @@ slots:
 
 You can use a [Tooltip](/components/tooltip) within a field group.
 
-:docs-pohon-example{name="field-group-tooltip-example"}
+:docs-component-example{name="field-group-tooltip-example"}
 
 ### With dropdown
 
 You can use a [DropdownMenu](/components/dropdown-menu) within a field group.
 
-:docs-pohon-example{name="field-group-dropdown-example"}
+:docs-component-example{name="field-group-dropdown-example"}
 
 ### With badge
 
 You can use a [Badge](/components/badge) within a field group.
 
-:docs-pohon-example{name="field-group-badge-example"}
+:docs-component-example{name="field-group-badge-example"}
 
 ## API
 

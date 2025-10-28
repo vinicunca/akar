@@ -268,7 +268,7 @@ You can also customize the color and size by using the `--spotlight-color` and `
 
 Use the [User](/docs/pohon/components/user) component in the `header` or `footer` slot to make the card look like a testimonial.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'page-card-testimonial-example'
 ---

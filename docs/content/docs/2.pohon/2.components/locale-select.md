@@ -36,7 +36,7 @@ The flags are displayed using Unicode characters. This may result in a different
 
 Use the `locales` prop with an array of locales from `@nuxt/ui/locale`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'locale-select-example'
 ---

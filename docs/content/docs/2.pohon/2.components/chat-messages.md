@@ -435,7 +435,7 @@ In this example, we use the `MDC` component from [`@nuxtjs/mdc`](https://github.
 
 You can customize the loading indicator that appears when the status is `submitted`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: "chat-messages-indicator-slot-example"
 collapse: true

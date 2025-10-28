@@ -276,7 +276,7 @@ export default defineNuxtConfig({
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'drawer-open-example'
@@ -295,7 +295,7 @@ This allows you to move the trigger outside of the Drawer or remove it entirely.
 
 Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'drawer-dismissible-example'
@@ -310,7 +310,7 @@ In this example, the `header` slot is used to add a close button which is not do
 
 Set the `overlay` and `modal` props to `false` alongside the `dismissible` prop to make the Drawer's background interactive without closing the Drawer.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'drawer-modal-example'
@@ -321,7 +321,7 @@ name: 'drawer-modal-example'
 
 You can render a [Modal](/docs/pohon/components/modal) component on desktop and a Drawer on mobile for example.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'drawer-responsive-example'
@@ -332,7 +332,7 @@ name: 'drawer-responsive-example'
 
 You can nest drawers within each other by using the `nested` prop.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'drawer-nested-example'
@@ -343,7 +343,7 @@ name: 'drawer-nested-example'
 
 Use the `#footer` slot to add content after the Drawer's body.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 collapse: true
@@ -355,7 +355,7 @@ name: 'drawer-footer-slot-example'
 
 You can use a [CommandPalette](/docs/pohon/components/command-palette) component inside the Drawer's content.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'drawer-command-palette-example'

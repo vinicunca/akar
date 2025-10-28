@@ -262,7 +262,7 @@ props:
 
 You can use the InputTags within a [FormField](/docs/pohon/components/form-field) component to display a label, help text, required indicator, etc.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-tags-form-field-example'
 ---

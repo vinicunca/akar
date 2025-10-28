@@ -757,7 +757,7 @@ props:
 
 You can control the selected item(s) by using the `default-value` prop or the `v-model` directive, by using the `onSelect` field on each item or by using the `@update:model-value` event.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-select-example'
@@ -771,7 +771,7 @@ props:
 
 Use the `v-model:search-term` directive to control the search term.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-search-term-example'
@@ -789,7 +789,7 @@ This example uses the `@update:model-value` event to reset the search term when 
 
 You can create hierarchical menus by using the `children` property in items. When an item has children, it will automatically display a chevron icon and enable navigation into a submenu.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 prettier: true
@@ -811,7 +811,7 @@ When navigating into a submenu:
 
 You can fetch items from an API and use them in the CommandPalette.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-fetch-example'
@@ -825,7 +825,7 @@ props:
 
 You can set the `ignoreFilter` field to `true` on a group to disable the internal search and use your own search logic.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-ignore-filter-example'
@@ -843,7 +843,7 @@ This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refde
 
 You can use the `postFilter` field on a group to filter items after the search happened.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-post-filter-example'
@@ -879,7 +879,7 @@ The `fuseOptions` are the options of [Fuse.js](https://www.fusejs.io/api/options
 
 You can for example set `{ fuseOptions: { includeMatches: true } }`{lang="ts-type"} to highlight the search term in the items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-fuse-example'
@@ -897,7 +897,7 @@ Use the `virtualize` prop to enable virtualization for large lists as a boolean 
 When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-virtualize-example'
@@ -911,7 +911,7 @@ props:
 
 You can use the CommandPalette component inside a [Popover](/docs/pohon/components/popover)'s content.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'popover-command-palette-example'
@@ -924,7 +924,7 @@ props:
 
 You can use the CommandPalette component inside a [Modal](/docs/pohon/components/modal)'s content.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'modal-command-palette-example'
@@ -937,7 +937,7 @@ props:
 
 You can use the CommandPalette component inside a [Drawer](/docs/pohon/components/drawer)'s content.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'drawer-command-palette-example'
@@ -950,7 +950,7 @@ props:
 
 When using the `close` prop, you can listen to the `update:open` event when the button is clicked.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-open-example'
@@ -967,7 +967,7 @@ This can be useful when using the CommandPalette inside a [`Modal`](/docs/pohon/
 
 Use the `#footer` slot to add custom content at the bottom of the CommandPalette, such as keyboard shortcuts help or additional actions.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-footer-slot-example'
@@ -993,7 +993,7 @@ You will have access to the following slots:
 - `#{{ group.slot }}-label`{lang="ts-type"}
 - `#{{ group.slot }}-trailing`{lang="ts-type"}
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'command-palette-custom-slot-example'

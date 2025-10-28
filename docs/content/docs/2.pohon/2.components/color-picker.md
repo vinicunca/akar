@@ -146,7 +146,7 @@ props:
 
 Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/pohon/components/popover) component to create a color chooser.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'color-picker-chooser-example'
 ---

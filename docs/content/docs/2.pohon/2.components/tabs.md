@@ -14,7 +14,7 @@ links:
 
 Use the Tabs component to display a list of items in a tabs.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 prettier: true
@@ -223,13 +223,13 @@ props:
 
 You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
 
-:docs-pohon-example{name="tabs-model-value-example"}
+:docs-component-example{name="tabs-model-value-example"}
 
 ### With content slot
 
 Use the `#content` slot to customize the content of each item.
 
-:docs-pohon-example{name="tabs-content-slot-example"}
+:docs-component-example{name="tabs-content-slot-example"}
 
 ### With custom slot
 
@@ -239,7 +239,7 @@ You will have access to the following slots:
 
 - `#{{ item.slot }}`{lang="ts-type"}
 
-:docs-pohon-example{name="tabs-custom-slot-example"}
+:docs-component-example{name="tabs-custom-slot-example"}
 
 ## API
 

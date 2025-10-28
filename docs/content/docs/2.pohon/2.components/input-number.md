@@ -222,7 +222,7 @@ props:
 
 Use the `format-options` prop to customize the format of the value.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-number-decimal-example'
 ---
@@ -232,7 +232,7 @@ name: 'input-number-decimal-example'
 
 Use the `format-options` prop with `style: 'percent'` to customize the format of the value.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-number-percentage-example'
 ---
@@ -242,7 +242,7 @@ name: 'input-number-percentage-example'
 
 Use the `format-options` prop with `style: 'currency'` to customize the format of the value.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-number-currency-example'
 ---
@@ -252,7 +252,7 @@ name: 'input-number-currency-example'
 
 You can use the InputNumber within a [FormField](/docs/pohon/components/form-field) component to display a label, help text, required indicator, etc.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-number-form-field-example'
 ---
@@ -262,7 +262,7 @@ name: 'input-number-form-field-example'
 
 Use the `#increment` and `#decrement` slots to customize the buttons.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-number-slots-example'
 ---

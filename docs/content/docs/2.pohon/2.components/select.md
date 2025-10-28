@@ -640,7 +640,7 @@ props:
 
 You can use the `icon` property to display an [Icon](/docs/pohon/components/icon) inside the items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-items-icon-example'
@@ -659,7 +659,7 @@ You can also use the `#leading` slot to display the selected icon.
 
 You can use the `avatar` property to display an [Avatar](/docs/pohon/components/avatar) inside the items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-items-avatar-example'
@@ -678,7 +678,7 @@ You can also use the `#leading` slot to display the selected avatar.
 
 You can use the `chip` property to display a [Chip](/docs/pohon/components/chip) inside the items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-items-chip-example'
@@ -693,7 +693,7 @@ In this example, the `#leading` slot is used to display the selected chip.
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'select-open-example'
 ---
@@ -707,7 +707,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 Here is an example with a rotating icon that indicates the open state of the Select.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'select-icon-example'
 ---
@@ -717,7 +717,7 @@ name: 'select-icon-example'
 
 You can fetch items from an API and use them in the Select.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'select-fetch-example'
 collapse: true
@@ -728,7 +728,7 @@ collapse: true
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'select-content-width-example'
 collapse: true

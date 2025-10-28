@@ -42,7 +42,7 @@ Each column contains a `children` array of objects that define the links. Each l
 
 You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'footer-columns-example'

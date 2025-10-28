@@ -690,7 +690,7 @@ props:
 
 You can use the `icon` property to display an [Icon](/docs/pohon/components/icon) inside the items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-menu-items-icon-example'
@@ -705,7 +705,7 @@ You can also use the `#leading` slot to display the selected icon.
 
 You can use the `avatar` property to display an [Avatar](/docs/pohon/components/avatar) inside the items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-menu-items-avatar-example'
@@ -720,7 +720,7 @@ You can also use the `#leading` slot to display the selected avatar.
 
 You can use the `chip` property to display a [Chip](/docs/pohon/components/chip) inside the items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-menu-items-chip-example'
@@ -735,7 +735,7 @@ In this example, the `#leading` slot is used to display the selected chip.
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'select-menu-open-example'
 ---
@@ -749,7 +749,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 Use the `v-model:search-term` directive to control the search term.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'select-menu-search-term-example'
 ---
@@ -759,7 +759,7 @@ name: 'select-menu-search-term-example'
 
 Here is an example with a rotating icon that indicates the open state of the SelectMenu.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'select-menu-icon-example'
 ---
@@ -769,7 +769,7 @@ name: 'select-menu-icon-example'
 
 Use the `create-item` prop to enable users to add custom values that aren't in the predefined options.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-menu-create-item-example'
@@ -788,7 +788,7 @@ Use the `@create` event to handle the creation of the item. You will receive the
 
 You can fetch items from an API and use them in the SelectMenu.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-menu-fetch-example'
@@ -799,7 +799,7 @@ name: 'select-menu-fetch-example'
 
 Set the `ignore-filter` prop to `true` to disable the internal search and use your own search logic.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-menu-ignore-filter-example'
@@ -814,7 +814,7 @@ This example uses [`refDebounced`](https://vueuse.org/shared/refDebounced/#refde
 
 Use the `filter-fields` prop with an array of fields to filter on. Defaults to `[labelKey]`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-menu-filter-fields-example'
@@ -829,7 +829,7 @@ Use the `virtualize` prop to enable virtualization for large lists as a boolean 
 When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'select-menu-virtualize-example'
@@ -840,7 +840,7 @@ name: 'select-menu-virtualize-example'
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'select-menu-content-width-example'
 collapse: true
@@ -867,7 +867,7 @@ export default defineAppConfig({
 
 This example demonstrates using the SelectMenu as a country picker with lazy loading - countries are only fetched when the menu is opened.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'select-menu-countries-example'

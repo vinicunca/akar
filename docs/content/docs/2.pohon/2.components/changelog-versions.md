@@ -195,7 +195,7 @@ The `to` prop is overridden here since `@nuxt/content` uses the `path` property.
 
 You can use the `ui` prop and the different slots to make the indicators sticky:
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 collapse: true

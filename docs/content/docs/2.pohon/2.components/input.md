@@ -217,7 +217,7 @@ props:
 
 You can put a [Button](/docs/pohon/components/button) inside the `#trailing` slot to clear the Input.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-clear-button-example'
 ---
@@ -227,7 +227,7 @@ name: 'input-clear-button-example'
 
 You can put a [Button](/docs/pohon/components/button) inside the `#trailing` slot to copy the value to the clipboard.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-copy-button-example'
 ---
@@ -237,7 +237,7 @@ name: 'input-copy-button-example'
 
 You can put a [Button](/docs/pohon/components/button) inside the `#trailing` slot to toggle the password visibility.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-password-toggle-example'
 ---
@@ -247,7 +247,7 @@ name: 'input-password-toggle-example'
 
 You can use the [Progress](/docs/pohon/components/progress) component to display the password strength indicator.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'input-password-strength-indicator-example'
@@ -258,7 +258,7 @@ name: 'input-password-strength-indicator-example'
 
 You can use the `#trailing` slot to add a character limit to the Input.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-character-limit-example'
 ---
@@ -268,7 +268,7 @@ name: 'input-character-limit-example'
 
 You can use the [Kbd](/docs/pohon/components/kbd) component inside the `#trailing` slot to add a keyboard shortcut to the Input.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-kbd-example'
 ---
@@ -282,7 +282,7 @@ This example uses the `defineShortcuts` composable to focus the Input when the :
 
 There's no built-in support for masks, but you can use libraries like [maska](https://github.com/beholdr/maska) to mask the Input.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-mask-example'
 ---
@@ -292,7 +292,7 @@ name: 'input-mask-example'
 
 You can use the `#default` slot to add a floating label to the Input.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-floating-label-example'
 ---
@@ -302,7 +302,7 @@ name: 'input-floating-label-example'
 
 You can use the Input within a [FormField](/docs/pohon/components/form-field) component to display a label, help text, required indicator, etc.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-form-field-example'
 ---
@@ -316,7 +316,7 @@ It also provides validation and error handling when used within a **Form** compo
 
 You can use the Input within a [FieldGroup](/components/field-group) component to group multiple elements together.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'input-field-group-example'
 ---

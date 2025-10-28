@@ -34,7 +34,7 @@ definePageMeta({
 
 Use the `left`, `default` and `right` slots to customize the toolbar.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'dashboard-toolbar-example'

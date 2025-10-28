@@ -117,13 +117,13 @@ props:
 
 You can use a [Tooltip](/docs/pohon/components/tooltip) component to display a tooltip when hovering the Avatar.
 
-:docs-pohon-example{name="avatar-tooltip-example"}
+:docs-component-example{name="avatar-tooltip-example"}
 
 ### With mask
 
 You can use a CSS mask to display an Avatar with a custom shape instead of a simple circle.
 
-:docs-pohon-example{name="avatar-mask-example"}
+:docs-component-example{name="avatar-mask-example"}
 
 
 ## API

@@ -226,7 +226,7 @@ props:
 
 The PricingTable component provides powerful slot customization options to tailor the display of your content. You can customize individual elements using generic slots or target specific items using their IDs.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'pricing-table-slots-example'

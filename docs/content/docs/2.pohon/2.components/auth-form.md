@@ -15,7 +15,7 @@ links:
 
 Built on top of the [Form](/docs/pohon/components/form) component, the `AuthForm` component can be used in your pages or wrapped in a [PageCard](/docs/pohon/components/page-card).
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'auth-form-example'
 collapse: true
@@ -354,7 +354,7 @@ props:
 
 You can wrap the `AuthForm` component with the [PageCard](/docs/pohon/components/page-card) component to display it within a `login.vue` page for example.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'auth-form-page-example'
 collapse: true

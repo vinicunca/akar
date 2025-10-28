@@ -25,7 +25,7 @@ It requires two props:
 ::
 
 ::tabs{class="gap-0"}
-  ::docs-pohon-example{label="Valibot"}
+  ::docs-component-example{label="Valibot"}
   ---
   name: 'form-example-valibot'
   props:
@@ -33,7 +33,7 @@ It requires two props:
   ---
   ::
 
-  ::docs-pohon-example{label="Zod"}
+  ::docs-component-example{label="Zod"}
   ---
   name: 'form-example-zod'
   props:
@@ -41,7 +41,7 @@ It requires two props:
   ---
   ::
 
-  ::docs-pohon-example{label="Regle"}
+  ::docs-component-example{label="Regle"}
   ---
   name: 'form-example-regle'
   props:
@@ -49,7 +49,7 @@ It requires two props:
   ---
   ::
 
-  ::docs-pohon-example{label="Yup"}
+  ::docs-component-example{label="Yup"}
   ---
   name: 'form-example-yup'
   props:
@@ -57,7 +57,7 @@ It requires two props:
   ---
   ::
 
-  ::docs-pohon-example{label="Joi"}
+  ::docs-component-example{label="Joi"}
   ---
   name: 'form-example-joi'
   props:
@@ -65,7 +65,7 @@ It requires two props:
   ---
   ::
 
-  ::docs-pohon-example{label="Superstruct"}
+  ::docs-component-example{label="Superstruct"}
   ---
   name: 'form-example-superstruct'
   props:
@@ -91,7 +91,7 @@ The validation function must return a list of errors with the following attribut
 It can be used alongside the `schema` prop to handle complex use cases.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'form-example-basic'
 props:
@@ -113,7 +113,7 @@ You can control when validation happens this using the `validate-on` prop.
 The form always validates on submit.
 ::
 
-::docs-pohon-example{label="Default"}
+::docs-component-example{label="Default"}
 ---
 source: false
 name: 'form-example-elements'
@@ -146,7 +146,7 @@ You can listen to the `@error` event to handle errors. This event is triggered w
 
 Here's an example that focuses the first input element with an error after the form is submitted:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'form-example-on-error'
 collapse: true
@@ -163,7 +163,7 @@ Nested forms directly inherit their parent's state, so you don't need to define 
 
 It can be used to dynamically add fields based on user's input:
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'form-example-nested'
@@ -171,7 +171,7 @@ name: 'form-example-nested'
 ::
 
 Or to validate list inputs:
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'form-example-nested-list'

@@ -12,7 +12,7 @@ links:
 
 The PageList component provides a flexible way to display content in a vertical list layout. It's perfect for creating stacked lists of [PageCard](/docs/pohon/components/page-card) components or any other elements, with optional dividers between items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'page-list-example'
@@ -25,7 +25,7 @@ props:
 
 Use the `divide` prop to add a divider between each child element.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'page-list-divide-example'

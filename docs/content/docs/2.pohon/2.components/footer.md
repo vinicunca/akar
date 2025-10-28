@@ -14,7 +14,7 @@ The Footer component renders a `<footer>` element.
 
 Use the `left`, `default` and `right` slots to customize the footer.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 collapse: true

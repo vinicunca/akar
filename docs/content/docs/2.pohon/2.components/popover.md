@@ -171,7 +171,7 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'popover-open-example'
 ---
@@ -185,7 +185,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 Set the `dismissible` prop to `false` to prevent the Popover from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'popover-dismissible-example'
 ---
@@ -195,7 +195,7 @@ name: 'popover-dismissible-example'
 
 You can use a [CommandPalette](/docs/pohon/components/command-palette) component inside the Popover's content.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'popover-command-palette-example'
@@ -206,7 +206,7 @@ name: 'popover-command-palette-example'
 
 You can make the Popover follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/pohon/components/tooltip#trigger) prop:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'popover-cursor-example'
 ---
@@ -220,7 +220,7 @@ You can use the `#anchor` slot to position the Popover against a custom element.
 This slot only works when `mode` is `click`.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'popover-anchor-slot-example'

@@ -315,7 +315,7 @@ props:
 
 Use the `to` prop to transform buttons into links. Pass a function that receives the page number and returns a route destination.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'pagination-links-example'
 ---

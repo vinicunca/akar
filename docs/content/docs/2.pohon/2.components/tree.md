@@ -449,7 +449,7 @@ You can also disable individual items using `item.disabled`.
 
 You can control the selected item(s) by using the `default-value` prop or the `v-model` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'tree-model-value-example'
 collapse: true
@@ -460,7 +460,7 @@ props:
 
 If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property or the global `select` event:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'tree-on-select-example'
 collapse: true
@@ -477,7 +477,7 @@ This lets you expand or collapse a parent item without selecting it.
 
 You can control the expanded items by using the `default-expanded` prop or the `v-model` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'tree-expanded-example'
 collapse: true
@@ -488,7 +488,7 @@ props:
 
 If you want to prevent an item from being expanded, you can use the `item.onToggle()`{lang="ts-type"} property or the global `toggle` event:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'tree-on-toggle-example'
 collapse: true
@@ -505,7 +505,7 @@ This lets you select a parent item without expanding or collapsing its children.
 
 You can use the `item-leading` slot to add a [Checkbox](/docs/pohon/components/checkbox) to the items. Use the `multiple`, `propagate-select` and `bubble-select` props to enable multi-selection with parent-child relationship and the `select` and `toggle` events to control the selected and expanded state of the items.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'tree-checkbox-items-example'
 collapse: true
@@ -522,7 +522,7 @@ This example uses the `as` prop to change the items from `button` to `div` as th
 
 Use the [`useSortable`](https://vueuse.org/integrations/useSortable/) composable from [`@vueuse/integrations`](https://vueuse.org/integrations/README.html) to enable drag and drop functionality on the Tree. This integration wraps [Sortable.js](https://sortablejs.github.io/Sortable/) to provide a seamless drag and drop experience.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'tree-drag-and-drop-example'
 ---
@@ -540,7 +540,7 @@ Use the `virtualize` prop to enable virtualization for large lists as a boolean 
 When virtualization is enabled, the tree structure is flattened, similar to setting the `nested` prop to `false`.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'tree-virtualize-example'
@@ -561,7 +561,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-label`{lang="ts-type"}
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'tree-custom-slot-example'
 collapse: true

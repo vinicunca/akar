@@ -14,7 +14,7 @@ links:
 
 Use the [useToast](/docs/composables/use-toast) composable to display a toast in your application.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 prettier: true
@@ -34,7 +34,7 @@ You can check the `App` component `toaster` prop to see how to configure the Toa
 
 Pass a `title` field to the `toast.add` method to display a title.
 
-::docs-pohon-example
+::docs-component-example
 ---
 options:
   - name: 'title'
@@ -48,7 +48,7 @@ name: 'toast-title-example'
 
 Pass a `description` field to the `toast.add` method to display a description.
 
-::docs-pohon-example
+::docs-component-example
 ---
 options:
   - name: 'title'
@@ -65,7 +65,7 @@ name: 'toast-description-example'
 
 Pass an `icon` field to the `toast.add` method to display an [Icon](/docs/pohon/components/icon).
 
-::docs-pohon-example
+::docs-component-example
 ---
 options:
   - name: 'icon'
@@ -79,7 +79,7 @@ name: 'toast-icon-example'
 
 Pass an `avatar` field to the `toast.add` method to display an [Avatar](/docs/pohon/components/avatar).
 
-::docs-pohon-example
+::docs-component-example
 ---
 options:
   - name: 'avatar.src'
@@ -95,7 +95,7 @@ name: 'toast-avatar-example'
 
 Pass a `color` field to the `toast.add` method to change the color of the Toast.
 
-::docs-pohon-example
+::docs-component-example
 ---
 options:
   - name: 'color'
@@ -117,7 +117,7 @@ name: 'toast-color-example'
 
 Pass a `close` field to customize or hide the close [Button](/docs/pohon/components/button) (with `false` value).
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'toast-close-example'
 ---
@@ -127,7 +127,7 @@ name: 'toast-close-example'
 
 Pass a `closeIcon` field to customize the close button [Icon](/docs/pohon/components/icon). Default to `i-lucide-x`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 options:
   - name: 'closeIcon'
@@ -153,7 +153,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 
 Pass an `actions` field to add some [Button](/docs/pohon/components/button) actions to the Toast.
 
-::docs-pohon-example
+::docs-component-example
 ---
 options:
   - name: 'description'
@@ -171,7 +171,7 @@ Pass a `progress` field to customize or hide the [Progress](/docs/pohon/componen
 The Progress bar inherits the Toast color by default, but you can override it using the `progress.color` field.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'toast-progress-example'
 ---
@@ -181,7 +181,7 @@ name: 'toast-progress-example'
 
 Pass an `orientation` field to the `toast.add` method to change the orientation of the Toast.
 
-::docs-pohon-example
+::docs-component-example
 ---
 options:
   - name: 'orientation'
@@ -216,7 +216,7 @@ const toaster = { position: 'bottom-right' }
 </template>
 ```
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'toast-example'
@@ -246,7 +246,7 @@ const toaster = { duration: 5000 }
 </template>
 ```
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'toast-example'
@@ -276,7 +276,7 @@ const toaster = { max: 3 }
 </template>
 ```
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'toast-example'
@@ -310,7 +310,7 @@ const toaster = { expand: true }
 You can hover over the toasts to expand them. This will also pause the timer of the toasts.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'toast-example'

@@ -65,7 +65,7 @@ Use the `close` prop to display a [Button](/docs/pohon/components/button) to dis
 A `close` event will be emitted when the close button is clicked.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 iframe:
   style: 'height: 48px;'
@@ -90,7 +90,7 @@ When closed, `banner-${id}` will be stored in the local storage to prevent it fr
 
 Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 iframe:
   style: 'height: 48px;'

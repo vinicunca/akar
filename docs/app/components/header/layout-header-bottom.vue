@@ -31,6 +31,9 @@ const items = computed(() => {
       class="-mx-2.5 -mb-px"
     />
 
-    <CoreFrameworksTabs class="w-40" />
+    <CoreFrameworksTabs
+      v-if="route.path.startsWith('/docs/pohon')"
+      class="w-40"
+    />
   </PContainer>
 </template>

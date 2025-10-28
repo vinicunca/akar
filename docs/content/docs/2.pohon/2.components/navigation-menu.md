@@ -1197,7 +1197,7 @@ You can use the `#content` slot to customize the content of the popover in the `
 
 You can control the active item by using the `default-value` prop or the `v-model` directive with the index of the item.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'navigation-menu-model-value-example'
@@ -1224,7 +1224,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
 - `#{{ item.slot }}-content`{lang="ts-type"}
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'navigation-menu-custom-slot-example'
 ---
@@ -1238,7 +1238,7 @@ You can also use the `#item`, `#item-leading`, `#item-label`, `#item-trailing` a
 
 Use the `#item-content` slot or the `slot` property (`#{{ item.slot }}-content`) to customize the content of a specific item.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'navigation-menu-content-slot-example'

@@ -11,6 +11,7 @@ export function useFrameworks() {
       onSelect: () => {
         framework.value = 'nuxt';
       },
+      active: framework.value === 'nuxt',
     },
     {
       label: 'Vue',
@@ -19,11 +20,9 @@ export function useFrameworks() {
       onSelect: () => {
         framework.value = 'vue';
       },
+      active: framework.value === 'vue',
     },
-  ].map((frame) => ({
-    ...frame,
-    active: framework.value === frame.value,
-  })));
+  ]);
 
   return {
     framework,

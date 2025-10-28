@@ -11,7 +11,7 @@ links:
 
 Use the Skeleton component as-is to display a placeholder.
 
-:docs-pohon-example{name="skeleton-example"}
+:docs-component-example{name="skeleton-example"}
 
 ## API
 

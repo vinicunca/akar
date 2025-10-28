@@ -30,7 +30,7 @@ This component does not have a single root element when using the `resizable` pr
 
 Use the `left`, `default` and `right` slots to customize the sidebar and the `body` or `content` slots to customize the sidebar menu.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'dashboard-sidebar-example'
@@ -195,7 +195,7 @@ Use the `body` slot to fill the menu body (under the header) or the `content` sl
 You can use the `menu` prop to customize the menu of the sidebar, it will adapt depending on the mode you choose.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 iframe:
@@ -226,7 +226,7 @@ Use the `toggle` prop to customize the [DashboardSidebarToggle](/docs/pohon/comp
 
 You can pass any property from the [Button](/docs/pohon/components/button) component to customize it.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 iframe:
@@ -243,7 +243,7 @@ props:
 
 Use the `toggle-side` prop to change the side of the toggle button. Defaults to `left`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 iframe:
@@ -262,7 +262,7 @@ props:
 
 You can control the open state by using the `open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 iframe:
   height: 500px;
@@ -281,7 +281,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 You can control the collapsed state by using the `collapsed` prop or the `v-model:collapsed` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'dashboard-sidebar-collapsed-example'
 class: '!p-0 !justify-start'

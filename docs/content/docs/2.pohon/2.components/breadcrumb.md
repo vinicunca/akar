@@ -116,7 +116,7 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 
 Use the `#separator` slot to customize the separator between each item.
 
-:docs-pohon-example{name="breadcrumb-separator-slot-example"}
+:docs-component-example{name="breadcrumb-separator-slot-example"}
 
 ### With custom slot
 
@@ -129,7 +129,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-label`{lang="ts-type"}
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
 
-:docs-pohon-example{name="breadcrumb-custom-slot-example"}
+:docs-component-example{name="breadcrumb-custom-slot-example"}
 
 ::tip{to="#slots"}
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.

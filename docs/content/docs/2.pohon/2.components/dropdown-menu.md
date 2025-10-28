@@ -347,7 +347,7 @@ slots:
 
 You can use the `type` property with `checkbox` and use the `checked` / `onUpdateChecked` properties to control the checked state of the item.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'dropdown-menu-checkbox-items-example'
@@ -362,7 +362,7 @@ To ensure reactivity for the `checked` state of items, it's recommended to wrap 
 
 You can use the `color` property to highlight certain items with a color.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'dropdown-menu-color-items-example'
 ---
@@ -372,7 +372,7 @@ name: 'dropdown-menu-color-items-example'
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'dropdown-menu-open-example'
 ---
@@ -393,7 +393,7 @@ You will have access to the following slots:
 - `#{{ item.slot }}-label`{lang="ts-type"}
 - `#{{ item.slot }}-trailing`{lang="ts-type"}
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'dropdown-menu-custom-slot-example'
 ---
@@ -407,7 +407,7 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 
 You can expand the content to the full width of its button by adding the `w-(--akar-dropdown-menu-trigger-width)` class on the `ui.content` slot.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'dropdown-menu-content-width-example'

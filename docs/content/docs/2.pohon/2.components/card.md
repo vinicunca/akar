@@ -11,7 +11,7 @@ links:
 
 Use the `header`, `default` and `footer` slots to add content to the Card.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'card-example'

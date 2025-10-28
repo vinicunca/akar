@@ -195,7 +195,7 @@ props:
 
 Use the [Chip](/docs/pohon/components/chip) component to add events to specific days.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'calendar-events-example'
 ---
@@ -205,7 +205,7 @@ name: 'calendar-events-example'
 
 Use the `is-date-disabled` prop with a function to mark specific dates as disabled.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'calendar-disabled-dates-example'
 ---
@@ -215,7 +215,7 @@ name: 'calendar-disabled-dates-example'
 
 Use the `is-date-unavailable` prop with a function to mark specific dates as unavailable.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'calendar-unavailable-dates-example'
 ---
@@ -225,7 +225,7 @@ name: 'calendar-unavailable-dates-example'
 
 Use the `min-value` and `max-value` props to limit the dates.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'calendar-min-max-dates-example'
 ---
@@ -235,7 +235,7 @@ name: 'calendar-min-max-dates-example'
 
 You can use other calenders from `@internationalized/date` to implement a different calendar system.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'calendar-other-system-example'
 ---
@@ -249,7 +249,7 @@ You can check all the available calendars on `@internationalized/date` docs.
 
 You can control the calendar with external controls by manipulating the date passed in the `v-model`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'calendar-external-controls-example'
 ---
@@ -259,7 +259,7 @@ name: 'calendar-external-controls-example'
 
 Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/pohon/components/popover) component to create a date picker.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'calendar-date-picker-example'
 ---
@@ -269,7 +269,7 @@ name: 'calendar-date-picker-example'
 
 Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/pohon/components/popover) component to create a date range picker.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'calendar-date-range-picker-example'
 ---

@@ -67,14 +67,14 @@ You can display logos in two ways:
 
 ::tabs{class="gap-0"}
 
-::docs-pohon-example{label="With items"}
+::docs-component-example{label="With items"}
 ---
 name: 'page-logos-with-items'
 class: '[&>div]:my-10'
 ---
 ::
 
-::docs-pohon-example{label="With slot"}
+::docs-component-example{label="With slot"}
 ---
 name: 'page-logos-with-slot'
 class: '[&>div]:my-10'

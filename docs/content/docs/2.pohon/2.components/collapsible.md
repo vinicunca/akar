@@ -104,7 +104,7 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'collapsible-open-example'
 ---
@@ -122,7 +122,7 @@ This allows you to move the trigger outside of the Collapsible or remove it enti
 
 Here is an example with a rotating icon in the Button that indicates the open state of the Collapsible.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'collapsible-icon-example'
 ---

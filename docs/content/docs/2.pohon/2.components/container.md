@@ -11,7 +11,7 @@ links:
 
 Use the default slot to center and constrain the width of your content.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'container-example'
 props:

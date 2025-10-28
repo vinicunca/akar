@@ -269,7 +269,7 @@ props:
 
 You can use the FileUpload within a [Form](/docs/pohon/components/form) and [FormField](/docs/pohon/components/form-field) components to handle validation and error handling.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 collapse: true
@@ -281,7 +281,7 @@ name: 'file-upload-form-validation-example'
 
 You can use the default slot to make your own FileUpload component.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 collapse: true
@@ -293,7 +293,7 @@ name: 'file-upload-default-slot-example'
 
 You can use the `files-bottom` slot to add a [Button](/docs/pohon/components/button) under the files list to remove all files for example.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 collapse: true
@@ -309,7 +309,7 @@ The `interactive` prop is set to `false` in this example to prevent the default 
 
 You can use the `files-top` slot to add a [Button](/docs/pohon/components/button) above the files list to add new files for example.
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 collapse: true

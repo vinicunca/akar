@@ -260,7 +260,7 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'modal-open-example'
 ---
@@ -313,7 +313,7 @@ Make sure to wrap your app with the [`App`](/docs/pohon/components/app) componen
 
 First, create a modal component that will be opened programmatically:
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'modal-example'
@@ -327,7 +327,7 @@ We are emitting a `close` event when the modal is closed or dismissed here. You 
 
 Then, use it in your app:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'modal-programmatic-example'
 ---
@@ -341,7 +341,7 @@ You can close the modal within the modal component by emitting `emit('close')`.
 
 You can nest modals within each other.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'modal-nested-example'
 ---
@@ -351,7 +351,7 @@ name: 'modal-nested-example'
 
 Use the `#footer` slot to add content after the Modal's body.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'modal-footer-slot-example'
 ---
@@ -361,7 +361,7 @@ name: 'modal-footer-slot-example'
 
 You can use a [CommandPalette](/docs/pohon/components/command-palette) component inside the Modal's content.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'modal-command-palette-example'

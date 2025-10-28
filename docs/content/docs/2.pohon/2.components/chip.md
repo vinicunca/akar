@@ -130,7 +130,7 @@ It's used this way in the [`CommandPalette`](/docs/pohon/components/command-pale
 
 You can control the visibility of the Chip using the `show` prop.
 
-:docs-pohon-example{name="chip-show-example"}
+:docs-component-example{name="chip-show-example"}
 
 ::note
 In this example, the Chip has a color per status and is displayed when the status is not `offline`.

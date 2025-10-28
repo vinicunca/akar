@@ -14,7 +14,7 @@ links:
 
 Use the Carousel component to display a list of items in a carousel.
 
-::docs-pohon-example
+::docs-component-example
 ---
 collapse: true
 name: 'carousel-items-example'
@@ -30,7 +30,7 @@ Use your mouse to drag the carousel horizontally on desktop.
 
 Use the `items` prop as an array and render each item using the default slot:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-items-example'
 class: 'p-8'
@@ -44,7 +44,7 @@ You can also pass an array of objects with the following properties:
 
 You can control how many items are visible by using the [`basis`](https://tailwindcss.com/docs/flex-basis) / [`width`](https://tailwindcss.com/docs/width) utility classes on the `item`:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-items-multiple-example'
 class: 'p-8 px-16'
@@ -59,7 +59,7 @@ Use the `orientation` prop to change the orientation of the Progress. Defaults t
 Use your mouse to drag the carousel vertically on desktop.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-orientation-example'
 class: 'p-8'
@@ -74,7 +74,7 @@ You need to specify a `height` on the container in vertical orientation.
 
 Use the `arrows` prop to display prev and next buttons.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-arrows-example'
 class: 'p-8'
@@ -85,7 +85,7 @@ class: 'p-8'
 
 Use the `prev` and `next` props to customize the prev and next buttons with any [Button](/docs/pohon/components/button) props.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-prev-next-example'
 class: 'p-8'
@@ -96,7 +96,7 @@ class: 'p-8'
 
 Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-arrow-left` / `i-lucide-arrow-right`.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-prev-next-icon-example'
 class: 'p-8'
@@ -126,7 +126,7 @@ You can customize these icons globally in your `vite.config.ts` under `ui.icons.
 
 Use the `dots` prop to display a list of dots to scroll to a specific slide.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-dots-example'
 class: 'p-8 pb-12'
@@ -135,7 +135,7 @@ class: 'p-8 pb-12'
 
 The number of dots is based on the number of slides displayed in the view:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-dots-multiple-example'
 class: 'p-8 px-16 pb-12'
@@ -152,7 +152,7 @@ This plugin is used to extend Embla Carousel with **autoplay** functionality.
 
 Use the `autoplay` prop as a boolean or an object to configure the [Autoplay plugin](https://www.embla-carousel.com/plugins/autoplay/).
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-autoplay-example'
 class: 'p-8 px-16 pb-12'
@@ -169,7 +169,7 @@ This plugin is used to extend Embla Carousel with **auto scroll** functionality.
 
 Use the `auto-scroll` prop as a boolean or an object to configure the [Auto Scroll plugin](https://www.embla-carousel.com/plugins/auto-scroll/).
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-auto-scroll-example'
 class: 'p-8 px-16 pb-12'
@@ -186,7 +186,7 @@ This plugin is used to extend Embla Carousel with **auto height** functionality.
 
 Use the `auto-height` prop as a boolean or an object to configure the [Auto Height plugin](https://www.embla-carousel.com/plugins/auto-height/).
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-auto-height-example'
 class: 'p-8 pt-16'
@@ -203,7 +203,7 @@ Class Names is a **class name toggle** utility plugin for Embla Carousel that en
 
 Use the `class-names` prop as a boolean or an object to configure the [Class Names plugin](https://www.embla-carousel.com/plugins/class-names/).
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-class-names-example'
 class: 'p-8'
@@ -220,7 +220,7 @@ This plugin is used to replace the Embla Carousel scroll functionality with **fa
 
 Use the `fade` prop as a boolean or an object to configure the [Fade plugin](https://www.embla-carousel.com/plugins/fade/).
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-fade-example'
 class: 'p-8 pb-12'
@@ -237,7 +237,7 @@ Use the `wheel-gestures` prop as a boolean or an object to configure the [Wheel 
 Use your mouse wheel to scroll the carousel.
 ::
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-wheel-gestures-example'
 class: 'p-8 px-16'
@@ -250,7 +250,7 @@ class: 'p-8 px-16'
 
 You can use the [`emblaApi`](#expose) function [scrollTo](https://www.embla-carousel.com/api/methods/#scrollto) to display thumbnails under the carousel that allows you to navigate to a specific slide.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'carousel-thumbnails-example'
 class: 'p-8 px-16'

@@ -250,11 +250,11 @@ Button
 
 Use the `loading-auto` prop to show the loading icon automatically while the `@click` promise is pending.
 
-:docs-pohon-example{name="button-loading-auto-example"}
+:docs-component-example{name="button-loading-auto-example"}
 
 This also works with the [Form](/docs/pohon/components/form) component.
 
-:docs-pohon-example{name="button-loading-auto-form-example"}
+:docs-component-example{name="button-loading-auto-form-example"}
 
 ### Loading Icon
 

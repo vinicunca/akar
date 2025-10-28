@@ -259,7 +259,7 @@ slots:
 
 You can control the open state by using the `default-open` prop or the `v-model:open` directive.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'slideover-open-example'
 ---
@@ -312,7 +312,7 @@ Make sure to wrap your app with the [`App`](/docs/pohon/components/app) componen
 
 First, create a slideover component that will be opened programmatically:
 
-::docs-pohon-example
+::docs-component-example
 ---
 prettier: true
 name: 'slideover-example'
@@ -326,7 +326,7 @@ We are emitting a `close` event when the slideover is closed or dismissed here. 
 
 Then, use it in your app:
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'slideover-programmatic-example'
 ---
@@ -340,7 +340,7 @@ You can close the slideover within the slideover component by emitting `emit('cl
 
 You can nest slideovers within each other.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'slideover-nested-example'
 ---
@@ -350,7 +350,7 @@ name: 'slideover-nested-example'
 
 Use the `#footer` slot to add content after the Slideover's body.
 
-::docs-pohon-example
+::docs-component-example
 ---
 name: 'slideover-footer-slot-example'
 ---
