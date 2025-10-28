@@ -35,7 +35,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to show an [Icon](/docs/components/icon).
+Use the `icon` prop to show an [Icon](/docs/pohon/components/icon).
 
 ::docs-pohon-preview
 ---
@@ -52,7 +52,7 @@ props:
 
 ### Avatar
 
-Use the `avatar` prop to show an [Avatar](/docs/components/avatar).
+Use the `avatar` prop to show an [Avatar](/docs/pohon/components/avatar).
 
 ::docs-pohon-preview
 ---
@@ -152,13 +152,13 @@ props:
   close:
     color: primary
     variant: outline
-    class: 'rounded-full'
+    class: 'akar:rounded-full'
 ---
 ::
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/docs/components/icon). Defaults to `i-lucide-x`.
+Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
 
 ::docs-pohon-preview
 ---
@@ -261,15 +261,15 @@ props:
 ---
 ::
 
-### `ui` prop
+### `pohon` prop
 
-Use the `ui` prop to override the slots styles of the Alert.
+Use the `pohon` prop to override the slots styles of the Alert.
 
 ::docs-pohon-preview
 ---
 prettier: true
 ignore:
-  - ui
+  - pohon
   - title
   - description
   - icon
@@ -277,8 +277,8 @@ props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
   icon: i-lucide-rocket
-  ui:
-    icon: 'size-11'
+  pohon:
+    icon: 'akar:size-11'
 ---
 ::
 

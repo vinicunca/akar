@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { ComponentMeta } from 'vue-component-meta';
+import * as theme from '#build/pohon';
 import { computed, fetchComponentMeta, useComponentName } from '#imports';
+import { isString, toCamelCase } from '@vinicunca/perkakas';
 
 const props = withDefaults(
   defineProps<{
@@ -36,6 +38,9 @@ const { componentName, slug } = useComponentName(props);
 
 const propsKey = computed(() => `props-pohon-${slug}`);
 
+const camelName = toCamelCase(slug);
+const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName];
+
 const metadata = await fetchComponentMeta(componentName);
 
 const metaProps = computed<ComponentMeta['props']>(() => {
@@ -50,6 +55,15 @@ const metaProps = computed<ComponentMeta['props']>(() => {
     .map((prop) => {
       if (prop.default) {
         prop.default = prop.default.replace(' as never', '').replace(/^"(.*)"$/, '\'$1\'');
+      } else {
+        const tag = prop.tags?.find((tag) => tag.name === 'defaultValue')?.text;
+        if (tag) {
+          prop.default = tag;
+        } else if (componentTheme?.defaultVariants?.[prop.name]) {
+          prop.default = isString(componentTheme?.defaultVariants?.[prop.name])
+            ? `'${componentTheme?.defaultVariants?.[prop.name]}'`
+            : componentTheme?.defaultVariants?.[prop.name];
+        }
       }
 
       // @ts-expect-error - Type is not correct

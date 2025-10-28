@@ -1,35 +1,39 @@
 // @unocss-include
 
 import { defineAppConfig } from '#imports';
-import { accordionTheme } from './themes/accordion.theme';
-import { avatarThemes } from './themes/avatar.theme';
-import { breadcrumbTheme } from './themes/breadcrumb.theme';
-import { buttonTheme } from './themes/button.theme';
-import { chipTheme } from './themes/chip.theme';
-import { collapsibleTheme } from './themes/collapsible.theme';
+import {
+  accordionTheme,
+  alertTheme,
+  avatarThemes,
+  breadcrumbTheme,
+  buttonTheme,
+  chipTheme,
+  collapsibleTheme,
+  containerTheme,
+  contentNavigationTheme,
+  contentSurroundTheme,
+  contentTocTheme,
+  dialogTheme,
+  drawerTheme,
+  errorTheme,
+  footerTheme,
+  formFieldTheme,
+  headerTheme,
+  inputTheme,
+  kbdTheme,
+  linkTheme,
+  mainTheme,
+  navigationMenuTheme,
+  popoverTheme,
+  selectMenuTheme,
+  selectTheme,
+  separatorTheme,
+  slideoverTheme,
+  tabsTheme,
+  tooltipTheme,
+} from './themes';
+
 import { BRANDS } from './themes/constant';
-import { containerTheme } from './themes/container.theme';
-import { contentNavigationTheme } from './themes/content-navigation.theme';
-import { contentSurroundTheme } from './themes/content-surround.theme';
-import { contentTocTheme } from './themes/content-toc.theme';
-import { dialogTheme } from './themes/dialog.theme';
-import { drawerTheme } from './themes/drawer.theme';
-import { errorTheme } from './themes/error.theme';
-import { footerTheme } from './themes/footer.theme';
-import { formFieldTheme } from './themes/form-field.theme';
-import { headerTheme } from './themes/header.theme';
-import { inputTheme } from './themes/input.theme';
-import { kbdTheme } from './themes/kbd.theme';
-import { linkTheme } from './themes/link.theme';
-import { mainTheme } from './themes/main.theme';
-import { navigationMenuTheme } from './themes/navigation-menu.theme';
-import { popoverTheme } from './themes/popover.theme';
-import { selectMenuTheme } from './themes/select-menu.theme';
-import { selectTheme } from './themes/select.theme';
-import { separatorTheme } from './themes/separator.theme';
-import { slideoverTheme } from './themes/slideover.theme';
-import { tabsTheme } from './themes/tabs.theme';
-import { tooltipTheme } from './themes/tooltip.theme';
 
 export default defineAppConfig({
   theme: {
@@ -48,6 +52,7 @@ export default defineAppConfig({
     },
 
     accordion: accordionTheme,
+    alert: alertTheme,
     ...avatarThemes,
     button: buttonTheme,
     breadcrumb: breadcrumbTheme,
