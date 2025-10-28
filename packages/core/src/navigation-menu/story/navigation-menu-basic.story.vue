@@ -28,7 +28,7 @@ const state = reactive({
           v-model="currentTrigger"
           :delay-duration="state.delayDuration"
           :skip-delay-duration="state.skipDelayDuration"
-          class="flex w-full justify-center relative z-[1]"
+          class="flex w-full justify-center relative z-1"
         >
           <ANavigationMenuList
             class="center shadow-blackA7 m-0 p-1 list-none rounded-[6px] bg-white flex shadow-[0_2px_10px]"

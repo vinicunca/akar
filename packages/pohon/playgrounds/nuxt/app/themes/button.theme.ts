@@ -4,6 +4,7 @@ import type * as pohon from '#build/pohon';
 import type { UvConfig } from 'pohon-ui';
 
 import { BRANDS } from './constant';
+import { fieldGroupVariant } from './field-group.theme';
 
 export const buttonTheme = {
   slots: {
@@ -14,10 +15,7 @@ export const buttonTheme = {
     trailingIcon: 'shrink-0',
   },
   variants: {
-    fieldGroup: {
-      horizontal: 'first:not-[*:only-child]:rounded-e-none last:not-[*:only-child]:rounded-s-none not-last:not-first:rounded-none focus-visible:z-1',
-      vertical: 'first:not-[*:only-child]:rounded-b-none last:not-[*:only-child]:rounded-t-none not-last:not-first:rounded-none focus-visible:z-1',
-    },
+    ...fieldGroupVariant,
     size: {
       xs: {
         base: 'px-2 py-1 text-xs gap-1',

@@ -405,7 +405,7 @@ const { data: ast } = await useAsyncData(
 
     <div
       v-if="component"
-      class="p-4 border border-b-0 border-border-muted flex justify-center relative z-[1]"
+      class="p-4 border border-b-0 border-border-muted flex justify-center relative z-1"
       :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]"
     >
       <component

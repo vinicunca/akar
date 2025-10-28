@@ -25,7 +25,7 @@ const currentTrigger = ref('');
       <div class="h-[600px] w-full">
         <ANavigationMenuRoot
           v-model="currentTrigger"
-          class="flex w-full justify-center relative z-[1]"
+          class="flex w-full justify-center relative z-1"
         >
           <ANavigationMenuList class="center m-0 p-1 list-none border rounded-lg bg-white flex shadow-sm">
             <ANavigationMenuItem>
