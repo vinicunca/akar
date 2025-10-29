@@ -105,11 +105,13 @@ provide(
   <APrimitive
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="avatar-group-root"
   >
     <PAvatar
       v-if="hiddenCount > 0"
       :text="`+${hiddenCount}`"
       :class="pohon.base({ class: props.pohon?.base })"
+      data-pohon="avatar-group-base"
     />
 
     <component
@@ -117,6 +119,7 @@ provide(
       v-for="(avatar, count) in visibleAvatars"
       :key="count"
       :class="pohon.base({ class: props.pohon?.base })"
+      data-pohon="avatar-group-base"
     />
   </APrimitive>
 </template>

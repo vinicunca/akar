@@ -3,7 +3,7 @@ const open = ref(false)
 </script>
 
 <template>
-  <UPopover v-model:open="open" :dismissible="false" :pohon="{ content: 'p-4' }">
+  <PPopover v-model:open="open" :dismissible="false" :pohon="{ content: 'p-4' }">
     <PButton label="Open" color="neutral" variant="subtle" />
 
     <template #content>
@@ -17,5 +17,5 @@ const open = ref(false)
 
       <CorePlaceholder class="size-full min-h-48" />
     </template>
-  </UPopover>
+  </PPopover>
 </template>

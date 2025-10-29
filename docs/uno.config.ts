@@ -46,11 +46,14 @@ export default defineConfig({
     'isolate',
     'bg-background-accented',
     ...BRANDS.flatMap((color) => [
+      // Borders
       `border-${color}`,
       `border-${color}/25`,
       `[&_code]:border-${color}/25`,
       `[&_a]:hover:[&>code]:border-${color}`,
+      `[&_a]:hover:border-${color}`,
 
+      // Texts
       `color-${color}`,
       `color-${color}/50`,
       `color-${color}/75`,
@@ -58,21 +61,20 @@ export default defineConfig({
       `[&_a]:color-${color}`,
       `[&_code]:color-${color}-600`,
       `[&_a]:hover:[&>code]:color-${color}`,
-      `dark:color-${color}-300`,
-      `dark:[&_code]:color-${color}-300`,
       `data-[highlighted]:color-${color}`,
       `group-data-[highlighted]:color-${color}`,
       `group-data-[state=open]:color-${color}`,
-
-      `[&_a]:hover:border-${color}`,
       `hover:color-${color}/75`,
-
       `active:color-${color}/75`,
       `disabled:color-${color}`,
       `aria-disabled:color-${color}`,
-
       `[&>ul]:marker:color-${color}/50`,
+      `data-[today]:not-[[data-selected]]:color-${color}`,
+      `data-[selected]:color-${color}`,
+      `dark:color-${color}-300`,
+      `dark:[&_code]:color-${color}-300`,
 
+      // Backgrounds
       `data-[highlighted]:before:bg-${color}/10`,
       `bg-${color}`,
       `bg-${color}/10`,
@@ -96,20 +98,26 @@ export default defineConfig({
       `before:bg-${color}/10`,
       `dark:active:bg-${color}-300`,
       `dark:active:bg-${color}-400`,
+      `data-[selected]:bg-${color}`,
+      `data-[selected]:bg-${color}/10`,
+      `data-[highlighted]:bg-${color}/20`,
+      `hover:not-[[data-selected]]:bg-${color}/10`,
+      `hover:not-[[data-selected]]:bg-${color}/20`,
+      `akar:data-[selected]:bg-${color}`,
 
+      // Rings and outlines
       `ring-${color}`,
       `ring-${color}/25`,
       `ring-${color}/50`,
       `focus-visible:ring-${color}`,
       `akar:ring-${color}`,
-
       `focus-visible:before:ring-${color}`,
-
       `focus-visible:outline-${color}`,
-
       'focus:ring-2',
       'focus:ring-inset',
       `focus:ring-${color}`,
+      `data-[selected]:ring-${color}/25`,
+      `data-[selected]:ring-${color}/50`,
     ]),
   ],
 

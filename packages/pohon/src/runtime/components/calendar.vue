@@ -212,12 +212,16 @@ const CalendarComponent = computed(() => props.range ? ARangeCalendar : ACalenda
     v-slot="{ weekDays, grid }"
     v-bind="rootProps"
     :model-value="(modelValue as DateValue | DateValue[])"
-    :default-value="defaultValue as DateValue"
+    :default-value="(defaultValue as DateValue)"
     :locale="locale"
     :dir="dir"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="calendar-root"
   >
-    <CalendarComponent.Header :class="pohon.header({ class: props.pohon?.header })">
+    <CalendarComponent.Header
+      :class="pohon.header({ class: props.pohon?.header })"
+      data-pohon="calendar-header"
+    >
       <CalendarComponent.Prev
         v-if="props.yearControls"
         :prev-page="(date: DateValue) => paginateYear(date, -1)"
@@ -245,9 +249,11 @@ const CalendarComponent = computed(() => props.range ? ARangeCalendar : ACalenda
           v-bind="props.prevMonth"
         />
       </CalendarComponent.Prev>
+
       <CalendarComponent.Heading
         v-slot="{ headingValue }"
         :class="pohon.heading({ class: props.pohon?.heading })"
+        data-pohon="calendar-heading"
       >
         <slot
           name="heading"
@@ -256,6 +262,7 @@ const CalendarComponent = computed(() => props.range ? ARangeCalendar : ACalenda
           {{ headingValue }}
         </slot>
       </CalendarComponent.Heading>
+
       <CalendarComponent.Next
         v-if="props.monthControls"
         :aria-label="t('calendar.nextMonth')"
@@ -269,6 +276,7 @@ const CalendarComponent = computed(() => props.range ? ARangeCalendar : ACalenda
           v-bind="props.nextMonth"
         />
       </CalendarComponent.Next>
+
       <CalendarComponent.Next
         v-if="props.yearControls"
         :next-page="(date: DateValue) => paginateYear(date, 1)"
@@ -284,18 +292,27 @@ const CalendarComponent = computed(() => props.range ? ARangeCalendar : ACalenda
         />
       </CalendarComponent.Next>
     </CalendarComponent.Header>
-    <div :class="pohon.body({ class: props.pohon?.body })">
+
+    <div
+      :class="pohon.body({ class: props.pohon?.body })"
+      data-pohon="calendar-body"
+    >
       <CalendarComponent.Grid
         v-for="month in grid"
         :key="month.value.toString()"
         :class="pohon.grid({ class: props.pohon?.grid })"
+        data-pohon="calendar-grid"
       >
         <CalendarComponent.GridHead>
-          <CalendarComponent.GridRow :class="pohon.gridWeekDaysRow({ class: props.pohon?.gridWeekDaysRow })">
+          <CalendarComponent.GridRow
+            :class="pohon.gridWeekDaysRow({ class: props.pohon?.gridWeekDaysRow })"
+            data-pohon="calendar-grid-week-days-row"
+          >
             <CalendarComponent.HeadCell
               v-for="day in weekDays"
               :key="day"
               :class="pohon.headCell({ class: props.pohon?.headCell })"
+              data-pohon="calendar-head-cell"
             >
               <slot
                 name="week-day"
@@ -306,22 +323,28 @@ const CalendarComponent = computed(() => props.range ? ARangeCalendar : ACalenda
             </CalendarComponent.HeadCell>
           </CalendarComponent.GridRow>
         </CalendarComponent.GridHead>
-        <CalendarComponent.GridBody :class="pohon.gridBody({ class: props.pohon?.gridBody })">
+        <CalendarComponent.GridBody
+          :class="pohon.gridBody({ class: props.pohon?.gridBody })"
+          data-pohon="calendar-grid-body"
+        >
           <CalendarComponent.GridRow
             v-for="(weekDates, index) in month.rows"
             :key="`weekDate-${index}`"
             :class="pohon.gridRow({ class: props.pohon?.gridRow })"
+            data-pohon="calendar-grid-row"
           >
             <CalendarComponent.Cell
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"
               :date="weekDate"
               :class="pohon.cell({ class: props.pohon?.cell })"
+              data-pohon="calendar-cell"
             >
               <CalendarComponent.CellTrigger
                 :day="weekDate"
                 :month="month.value"
                 :class="pohon.cellTrigger({ class: props.pohon?.cellTrigger })"
+                data-pohon="calendar-cell-trigger"
               >
                 <slot
                   name="day"

@@ -3,7 +3,7 @@ const open = ref(false)
 </script>
 
 <template>
-  <UPopover
+  <PPopover
     v-model:open="open"
     :dismissible="false"
     :pohon="{ content: 'w-(--akar-popper-anchor-width) p-4' }"
@@ -15,5 +15,5 @@ const open = ref(false)
     <template #content>
       <CorePlaceholder class="w-full aspect-square" />
     </template>
-  </UPopover>
+  </PPopover>
 </template>

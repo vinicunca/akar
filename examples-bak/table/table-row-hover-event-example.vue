@@ -142,7 +142,7 @@ function onHover(_e: Event, row: TableRow<Payment> | null) {
       @hover="onHover"
     />
 
-    <UPopover
+    <PPopover
       :content="{ side: 'top', sideOffset: 16, updatePositionStrategy: 'always' }"
       :open="openDebounced"
       :reference="reference"
@@ -152,6 +152,6 @@ function onHover(_e: Event, row: TableRow<Payment> | null) {
           {{ selectedRow?.original?.id }}
         </div>
       </template>
-    </UPopover>
+    </PPopover>
   </div>
 </template>

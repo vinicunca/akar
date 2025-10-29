@@ -143,6 +143,7 @@ const pohon = computed(() =>
         ...(active && activeVariant ? { variant: activeVariant } : {}),
         ...(active && activeColor ? { color: activeColor } : {}),
       })"
+      data-pohon="button-base"
       @click="onClickWrapper"
     >
       <slot
@@ -153,12 +154,14 @@ const pohon = computed(() =>
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
           :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon, active })"
+          data-pohon="button-leading-icon"
         />
         <PAvatar
           v-else-if="!!avatar"
           :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar, active })"
+          data-pohon="button-leading-avatar"
         />
       </slot>
 
@@ -166,6 +169,7 @@ const pohon = computed(() =>
         <span
           v-if="isNonNullish(label)"
           :class="pohon.label({ class: props.pohon?.label, active })"
+          data-pohon="button-label"
         >
           {{ label }}
         </span>
@@ -179,6 +183,7 @@ const pohon = computed(() =>
           v-if="isTrailing && trailingIconName"
           :name="trailingIconName"
           :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon, active })"
+          data-pohon="button-trailing-icon"
         />
       </slot>
     </PLinkBase>

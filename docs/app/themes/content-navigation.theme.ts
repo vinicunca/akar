@@ -6,10 +6,8 @@ import { BRANDS } from './constant';
 
 export const contentNavigationTheme = {
   slots: {
-    root: '',
     content: 'data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden focus:outline-none',
     list: 'isolate -mx-2.5 -mt-1.5',
-    item: '',
     listWithChildren: 'ms-5 border-s border-border',
     itemWithChildren: 'flex flex-col data-[state=open]:mb-1.5',
     trigger: 'font-semibold',

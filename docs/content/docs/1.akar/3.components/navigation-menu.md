@@ -526,7 +526,7 @@ See [this example](/docs/akar/components/navigation-menu#with-client-side-routin
 
 ::docs-keyboard-table
 ---
-name: a-collapsible-akar
+name: keyboard-a-navigation-menu
 data:
   - keys: ['Space', 'Enter']
     description: '<span>When focus is on <code>ANavigationMenuTrigger</code>, opens the content.</span>'

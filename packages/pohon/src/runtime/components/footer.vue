@@ -50,24 +50,38 @@ const pohon = computed(() =>
   <APrimitive
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="footer-root"
   >
     <div
       v-if="!!slots.top"
       :class="pohon.top({ class: props.pohon?.top })"
+      data-pohon="footer-top"
     >
       <slot name="top" />
     </div>
 
-    <PContainer :class="pohon.container({ class: props.pohon?.container })">
-      <div :class="pohon.right({ class: props.pohon?.right })">
+    <PContainer
+      :class="pohon.container({ class: props.pohon?.container })"
+      data-pohon="footer-container"
+    >
+      <div
+        :class="pohon.right({ class: props.pohon?.right })"
+        data-pohon="footer-right"
+      >
         <slot name="right" />
       </div>
 
-      <div :class="pohon.center({ class: props.pohon?.center })">
+      <div
+        :class="pohon.center({ class: props.pohon?.center })"
+        data-pohon="footer-center"
+      >
         <slot />
       </div>
 
-      <div :class="pohon.left({ class: props.pohon?.left })">
+      <div
+        :class="pohon.left({ class: props.pohon?.left })"
+        data-pohon="footer-left"
+      >
         <slot name="left" />
       </div>
     </PContainer>
@@ -75,6 +89,7 @@ const pohon = computed(() =>
     <div
       v-if="!!slots.bottom"
       :class="pohon.bottom({ class: props.pohon?.bottom })"
+      data-pohon="footer-bottom"
     >
       <slot name="bottom" />
     </div>

@@ -102,6 +102,7 @@ function onError() {
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     :style="props.style"
+    data-pohon="avatar-root"
   >
     <img
       v-if="src && !error"
@@ -111,6 +112,7 @@ function onError() {
       :height="sizePx"
       v-bind="$attrs"
       :class="pohon.image({ class: props.pohon?.image })"
+      data-pohon="avatar-image"
       @error="onError"
     >
 
@@ -123,10 +125,12 @@ function onError() {
           v-if="icon"
           :name="icon"
           :class="pohon.icon({ class: props.pohon?.icon })"
+          data-pohon="avatar-icon"
         />
         <span
           v-else
           :class="pohon.fallback({ class: props.pohon?.fallback })"
+          data-pohon="avatar-fallback"
         >
           {{ fallback || '&nbsp;' }}
         </span>

@@ -26,7 +26,7 @@ const label = ref([])
 </script>
 
 <template>
-  <UPopover :content="{ side: 'right', align: 'start' }">
+  <PPopover :content="{ side: 'right', align: 'start' }">
     <PButton
       icon="i-lucide-tag"
       label="Select labels"
@@ -43,5 +43,5 @@ const label = ref([])
         :pohon="{ input: '[&>input]:h-8 [&>input]:text-sm' }"
       />
     </template>
-  </UPopover>
+  </PPopover>
 </template>

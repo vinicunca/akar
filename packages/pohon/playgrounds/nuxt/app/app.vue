@@ -71,7 +71,7 @@ provide('components', components);
     </PDashboardGroup>
   </PApp>
 
-  <div class="data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg data-[state=closed]:(animate-out fade-out-0 zoom-out-95 slide-out-to-left-1/2) data-[state=open]:(animate-in fade-in-0 zoom-in-95 slide-in-from-left-1/2)" />
+  <div class="data-[highlighted]:bg-background-inverted/20 data-[today]:not-[[data-selected]]:color-text-highlighted hover:not-[[data-selected]]:bg-background-inverted/10 akar:(data-[selected]:color-text data-[selected]:bg-background-elevated data-[selected]:ring data-[selected]:ring-ring-accented data-[selected]:ring-inset)" />
 </template>
 
 <style lang="postcss">

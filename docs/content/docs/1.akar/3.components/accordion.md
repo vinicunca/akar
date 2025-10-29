@@ -289,7 +289,7 @@ Adheres to the [Accordion WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/a
 
 ::docs-keyboard-table
 ---
-name: a-accordion-akar
+name: keyboard-a-accordion
 data:
   - keys: ['Space']
     description: When focus is on an <code>AAccordionTrigger</code> of a collapsed section, expands the section.

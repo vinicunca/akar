@@ -4,7 +4,6 @@ description: A calendar component for selecting single dates, multiple dates or 
 category: element
 links:
   - label: Calendar
-    icon: i-custom-akar
     to: /docs/akar/components/calendar
   - label: GitHub
     icon: i-simple-icons-github
@@ -252,26 +251,6 @@ You can control the calendar with external controls by manipulating the date pas
 ::docs-component-example
 ---
 name: 'calendar-external-controls-example'
----
-::
-
-### As a DatePicker
-
-Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/pohon/components/popover) component to create a date picker.
-
-::docs-component-example
----
-name: 'calendar-date-picker-example'
----
-::
-
-### As a DateRangePicker
-
-Use a [Button](/docs/pohon/components/button) and a [Popover](/docs/pohon/components/popover) component to create a date range picker.
-
-::docs-component-example
----
-name: 'calendar-date-range-picker-example'
 ---
 ::
 

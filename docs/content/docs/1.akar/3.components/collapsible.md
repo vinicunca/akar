@@ -162,7 +162,7 @@ Adheres to the [Disclosure WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/
 
 ::docs-keyboard-table
 ---
-name: a-collapsible-akar
+name: keyboard-a-collapsible
 data:
   - keys: ['Space']
     description: 'Opens/closes the collapsible'

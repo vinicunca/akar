@@ -80,6 +80,7 @@ const pohon = computed(() =>
   <APrimitive
     :as="as"
     :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+    data-pohon="badge-base"
   >
     <slot
       name="leading"
@@ -89,12 +90,14 @@ const pohon = computed(() =>
         v-if="isLeading && leadingIconName"
         :name="leadingIconName"
         :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+        data-pohon="badge-leading-icon"
       />
       <PAvatar
         v-else-if="!!avatar"
         :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
         :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+        data-pohon="badge-leading-avatar"
       />
     </slot>
 
@@ -102,6 +105,7 @@ const pohon = computed(() =>
       <span
         v-if="isNonNullish(label)"
         :class="pohon.label({ class: props.pohon?.label })"
+        data-pohon="badge-label"
       >
         {{ label }}
       </span>
@@ -115,6 +119,7 @@ const pohon = computed(() =>
         v-if="isTrailing && trailingIconName"
         :name="trailingIconName"
         :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+        data-pohon="badge-trailing-icon"
       />
     </slot>
   </APrimitive>

@@ -127,8 +127,8 @@ function onClose() {
 <template>
   <APrimitive
     :as="as"
-    class="banner"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="banner-root"
   >
     <PLink
       v-if="to"
@@ -144,10 +144,19 @@ function onClose() {
       />
     </PLink>
 
-    <PContainer :class="pohon.container({ class: props.pohon?.container })">
-      <div :class="pohon.left({ class: props.pohon?.left })" />
+    <PContainer
+      :class="pohon.container({ class: props.pohon?.container })"
+      data-pohon="banner-container"
+    >
+      <div
+        :class="pohon.left({ class: props.pohon?.left })"
+        data-pohon="banner-left"
+      />
 
-      <div :class="pohon.center({ class: props.pohon?.center })">
+      <div
+        :class="pohon.center({ class: props.pohon?.center })"
+        data-pohon="banner-center"
+      >
         <slot
           name="leading"
           :pohon="pohon"
@@ -156,12 +165,14 @@ function onClose() {
             v-if="icon"
             :name="icon"
             :class="pohon.icon({ class: props.pohon?.icon })"
+            data-pohon="banner-icon"
           />
         </slot>
 
         <div
           v-if="title || !!slots.title"
           :class="pohon.title({ class: props.pohon?.title })"
+          data-pohon="banner-title"
         >
           <slot name="title">
             {{ title }}
@@ -171,6 +182,7 @@ function onClose() {
         <div
           v-if="actions?.length || !!slots.actions"
           :class="pohon.actions({ class: props.pohon?.actions })"
+          data-pohon="banner-actions"
         >
           <slot name="actions">
             <PButton
@@ -184,7 +196,10 @@ function onClose() {
         </div>
       </div>
 
-      <div :class="pohon.right({ class: props.pohon?.right })">
+      <div
+        :class="pohon.right({ class: props.pohon?.right })"
+        data-pohon="banner-right"
+      >
         <slot
           name="close"
           :pohon="pohon"
@@ -198,6 +213,7 @@ function onClose() {
             :aria-label="t('banner.close')"
             v-bind="(typeof close === 'object' ? close as Partial<PButtonProps> : {})"
             :class="pohon.close({ class: props.pohon?.close })"
+            data-pohon="banner-close"
             @click="onClose"
           />
         </slot>
@@ -207,7 +223,7 @@ function onClose() {
 </template>
 
 <style scoped>
-.hide-banner .banner {
+.hide-banner [data-pohon='banner-root'] {
   display: none;
 }
 </style>

@@ -21,7 +21,7 @@ export const selectTheme = {
     label: 'font-semibold color-text-highlighted',
     separator: '-mx-1 my-1 h-px bg-border',
     item: 'group cursor-pointer relative w-full flex items-center select-none outline-none before:(content-empty absolute -z-1 inset-px rounded-md transition-colors) data-disabled:(cursor-not-allowed opacity-75) transition-colors-280 data-[state=checked]:(color-primary before:bg-background-elevated) data-[highlighted]:not-[[data-state=checked]]:(color-black before:bg-primary/30)',
-    itemLeadingIcon: 'shrink-0 color-text-dimmed group-data-highlighted:not-group-data-disabled:color-text-default transition-colors',
+    itemLeadingIcon: 'shrink-0 color-text-dimmed group-data-[highlighted]:group-not-[[data-disabled]]:color-text transition-colors',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingChip: 'shrink-0',
     itemLeadingChipSize: '',

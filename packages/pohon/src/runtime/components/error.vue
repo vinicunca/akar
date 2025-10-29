@@ -72,10 +72,12 @@ function handleError() {
   <APrimitive
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="error-root"
   >
     <p
       v-if="!!props.error?.statusCode || !!slots.statusCode"
       :class="pohon.statusCode({ class: props.pohon?.statusCode })"
+      data-pohon="error-status-code"
     >
       <slot name="statusCode">
         {{ props.error?.statusCode }}
@@ -84,6 +86,7 @@ function handleError() {
     <h1
       v-if="!!props.error?.statusMessage || !!slots.statusMessage"
       :class="pohon.statusMessage({ class: props.pohon?.statusMessage })"
+      data-pohon="error-status-message"
     >
       <slot name="statusMessage">
         {{ props.error?.statusMessage }}
@@ -92,6 +95,7 @@ function handleError() {
     <p
       v-if="(props.error?.message && props.error.message !== props.error.statusMessage) || !!slots.message"
       :class="pohon.message({ class: props.pohon?.message })"
+      data-pohon="error-message"
     >
       <slot name="message">
         {{ props.error?.message }}
@@ -100,6 +104,7 @@ function handleError() {
     <div
       v-if="!!clear || !!slots.links"
       :class="pohon.links({ class: props.pohon?.links })"
+      data-pohon="error-links"
     >
       <slot name="links">
         <PButton

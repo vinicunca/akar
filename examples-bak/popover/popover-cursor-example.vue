@@ -17,7 +17,7 @@ const reference = computed(() => ({
 </script>
 
 <template>
-  <UPopover
+  <PPopover
     :open="open"
     :reference="reference"
     :content="{ side: 'top', sideOffset: 16, updatePositionStrategy: 'always' }"
@@ -39,5 +39,5 @@ const reference = computed(() => ({
         {{ anchor.x.toFixed(0) }} - {{ anchor.y.toFixed(0) }}
       </div>
     </template>
-  </UPopover>
+  </PPopover>
 </template>

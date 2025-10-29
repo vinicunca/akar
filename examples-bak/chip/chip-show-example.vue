@@ -17,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <UChip :color="color" :show="show" inset>
+  <PChip :color="color" :show="show" inset>
     <PAvatar src="https://github.com/praburangki.png" />
-  </UChip>
+  </PChip>
 </template>

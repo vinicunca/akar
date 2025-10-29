@@ -56,7 +56,7 @@ const steps = [{
               />
             </AStepperIndicator>
             <div class="flex flex-col">
-              <AStepperTitle class="text-md font-medium whitespace-nowrap">
+              <AStepperTitle class="text-base font-medium whitespace-nowrap">
                 {{ item.title }}
               </AStepperTitle>
               <AStepperDescription class="text-mauve8 text-xs hidden">
