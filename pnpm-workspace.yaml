@@ -4,14 +4,6 @@ packages:
   - packages/pohon/playgrounds/nuxt
   - packages/pohon/playgrounds/vue
 
-overrides:
-  akar: workspace:*
-  pohon-ui: workspace:*
-  # There's a weird issue within rolldown where when building akar not all components are included in the build. Since all the deps are hoisted, nuxt deps uses a newer version of rolldown therefore causing that particular issue. #TODO: Remove this when rolldown is fixed
-  rolldown: 1.0.0-beta.26
-  unplugin: ^2.3.10
-  vite: ^7.1.12
-
 catalogs:
   base:
     '@changesets/changelog-github': ^0.5.1
@@ -77,8 +69,8 @@ catalogs:
     sortablejs: ^1.15.6
     vue-component-meta: ^3.1.0
   plugins:
-    '@nuxt/kit': 4.1.3
-    '@nuxt/schema': 4.1.3
+    '@nuxt/kit': 4.2.0
+    '@nuxt/schema': 4.2.0
     unbuild: ^3.6.1
     unplugin-vue-components: ^29.1.0
   pohon:
@@ -105,7 +97,7 @@ catalogs:
     magic-string: ^0.30.19
     mlly: ^1.8.0
     motion-v: ^1.7.1
-    nuxt: 4.1.3
+    nuxt: 4.2.0
     ohash: ^2.0.11
     pathe: ^2.0.3
     tinyglobby: ^0.2.15
@@ -113,13 +105,25 @@ catalogs:
     unplugin: ^2.3.10
     unplugin-auto-import: ^20.1.0
     zod: ^4.1.11
+
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - unrs-resolver
   - vue-demi
+
 onlyBuiltDependencies:
   - better-sqlite3
   - esbuild
   - sharp
   - simple-git-hooks
   - unrs-resolver
+
+overrides:
+  akar: workspace:*
+  pohon-ui: workspace:*
+  rolldown: 1.0.0-beta.26
+  unplugin: ^2.3.10
+  vite: ^7.1.12
+
+patchedDependencies:
+  '@nuxt/vite-builder': patches/@nuxt__vite-builder.patch
