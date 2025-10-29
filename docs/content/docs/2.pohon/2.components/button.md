@@ -4,7 +4,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Button.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/button.vue
 ---
 
 ## Usage
@@ -307,21 +307,21 @@ Use the `class` prop to override the base styles of the Button.
 ::docs-pohon-preview
 ---
 props:
-  class: 'font-bold rounded-full'
+  class: 'akar:font-bold akar:rounded-full'
 slots:
   default: Button
 ---
 ::
 
-### `ui` prop
+### `pohon` prop
 
-Use the `ui` prop to override the slots styles of the Button.
+Use the `pohon` prop to override the slots styles of the Button.
 
 ::docs-pohon-preview
 ---
 prettier: true
 ignore:
-  - ui
+  - pohon
   - color
   - variant
   - icon
@@ -329,8 +329,8 @@ props:
   icon: i-lucide-rocket
   color: neutral
   variant: outline
-  ui:
-    leadingIcon: 'text-primary'
+  pohon:
+    leadingIcon: 'color-primary'
 slots:
   default: |
 
@@ -344,7 +344,7 @@ slots:
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-github" to="https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Link.vue#L13"}
+::callout{icon="i-simple-icons-github" to="https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/link.vue#L13"}
 The `Button` component extends the `Link` component. Check out the source code on GitHub.
 ::
 

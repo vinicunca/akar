@@ -29,7 +29,7 @@ async function onError(event: FormErrorEvent) {
 </script>
 
 <template>
-  <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit" @error="onError">
+  <PForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit" @error="onError">
     <PFormField label="Email" name="email">
       <PInput v-model="state.email" />
     </PFormField>
@@ -41,5 +41,5 @@ async function onError(event: FormErrorEvent) {
     <PButton type="submit">
       Submit
     </PButton>
-  </UForm>
+  </PForm>
 </template>

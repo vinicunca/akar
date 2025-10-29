@@ -32,7 +32,7 @@ const state = reactive({
         {{ item.description }}
       </p>
 
-      <UForm :state="state" class="flex flex-col gap-4">
+      <PForm :state="state" class="flex flex-col gap-4">
         <PFormField label="Name" name="name">
           <PInput v-model="state.name" class="w-full" />
         </PFormField>
@@ -41,7 +41,7 @@ const state = reactive({
         </PFormField>
 
         <PButton label="Save changes" type="submit" variant="soft" class="self-end" />
-      </UForm>
+      </PForm>
     </template>
 
     <template #password="{ item }">
@@ -49,7 +49,7 @@ const state = reactive({
         {{ item.description }}
       </p>
 
-      <UForm :state="state" class="flex flex-col gap-4">
+      <PForm :state="state" class="flex flex-col gap-4">
         <PFormField label="Current Password" name="current" required>
           <PInput v-model="state.currentPassword" type="password" required class="w-full" />
         </PFormField>
@@ -61,7 +61,7 @@ const state = reactive({
         </PFormField>
 
         <PButton label="Change password" type="submit" variant="soft" class="self-end" />
-      </UForm>
+      </PForm>
     </template>
   </UTabs>
 </template>

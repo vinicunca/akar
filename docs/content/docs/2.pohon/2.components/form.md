@@ -203,7 +203,7 @@ const form = useTemplateRef('form')
 </script>
 
 <template>
-  <UForm ref="form" />
+  <PForm ref="form" />
 </template>
 ```
 

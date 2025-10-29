@@ -61,7 +61,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UForm ref="form" :state="state" :schema="schema" class="w-full" @submit="onSubmit">
+  <PForm ref="form" :state="state" :schema="schema" class="w-full" @submit="onSubmit">
     <div class="grid grid-cols-3 gap-4">
       <PFormField label="Input" name="input">
         <PInput v-model="state.input" placeholder="john@lennon.com" class="w-full" />
@@ -143,5 +143,5 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         Clear
       </PButton>
     </div>
-  </UForm>
+  </PForm>
 </template>

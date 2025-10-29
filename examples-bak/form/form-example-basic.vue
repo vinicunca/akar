@@ -21,7 +21,7 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
 </script>
 
 <template>
-  <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
+  <PForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
     <PFormField label="Email" name="email">
       <PInput v-model="state.email" />
     </PFormField>
@@ -33,5 +33,5 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
     <PButton type="submit">
       Submit
     </PButton>
-  </UForm>
+  </PForm>
 </template>

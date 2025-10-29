@@ -105,6 +105,14 @@ export default defineAppConfig({
                 externalIcon: `color-${color}-600 dark:color-${color}-300`,
               },
             ])),
+            neutral: {
+              base: 'border border-border-muted bg-background-muted color-text',
+              icon: 'color-text-highlighted',
+              externalIcon: 'color-text-dimmed',
+            },
+          },
+          to: {
+            true: 'border-dashed',
           },
         },
       },

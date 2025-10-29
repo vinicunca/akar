@@ -25,7 +25,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UForm
+  <PForm
     ref="form"
     :state="state"
     :schema="schema"
@@ -40,16 +40,16 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UCheckbox v-model="state.news" name="news" label="Register to our newsletter" @update:model-value="state.email = undefined" />
     </div>
 
-    <UForm v-if="state.news" :schema="nestedSchema" nested>
+    <PForm v-if="state.news" :schema="nestedSchema" nested>
       <PFormField label="Email" name="email">
         <PInput v-model="state.email" placeholder="john@lennon.com" />
       </PFormField>
-    </UForm>
+    </PForm>
 
     <div>
       <PButton type="submit">
         Submit
       </PButton>
     </div>
-  </UForm>
+  </PForm>
 </template>

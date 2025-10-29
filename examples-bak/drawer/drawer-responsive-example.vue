@@ -16,13 +16,13 @@ const description = 'Make changes to your profile here. Click save when you\'re 
 
 <template>
   <DefineFormTemplate>
-    <UForm :state="state" class="space-y-4">
+    <PForm :state="state" class="space-y-4">
       <PFormField label="Email" name="email" required>
         <PInput v-model="state.email" placeholder="shadcn@example.com" required />
       </PFormField>
 
       <PButton label="Save changes" type="submit" />
-    </UForm>
+    </PForm>
   </DefineFormTemplate>
 
   <UModal v-if="isDesktop" v-model:open="open" :title="title" :description="description">

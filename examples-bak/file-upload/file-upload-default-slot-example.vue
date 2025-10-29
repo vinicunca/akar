@@ -67,7 +67,7 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
 </script>
 
 <template>
-  <UForm :schema="schema" :state="state" class="space-y-4 w-64" @submit="onSubmit">
+  <PForm :schema="schema" :state="state" class="space-y-4 w-64" @submit="onSubmit">
     <PFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max.">
       <UFileUpload v-slot="{ open, removeFile }" v-model="state.avatar" accept="image/*">
         <div class="flex flex-wrap items-center gap-3">
@@ -92,5 +92,5 @@ async function onSubmit(event: FormSubmitEvent<schema>) {
     </PFormField>
 
     <PButton type="submit" label="Submit" color="neutral" />
-  </UForm>
+  </PForm>
 </template>
