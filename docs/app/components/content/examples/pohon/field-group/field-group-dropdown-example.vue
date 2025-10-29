@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { DropdownMenuItem } from 'pohon-ui'
+import type { PDropdownMenuItem } from 'pohon-ui';
 
-const items: DropdownMenuItem[] = [
+const items: Array<PDropdownMenuItem> = [
   {
     label: 'Team',
-    icon: 'i-lucide-users'
+    icon: 'i-lucide-users',
   },
   {
     label: 'Invite users',
@@ -12,31 +12,35 @@ const items: DropdownMenuItem[] = [
     children: [
       {
         label: 'Invite by email',
-        icon: 'i-lucide-send-horizontal'
+        icon: 'i-lucide-send-horizontal',
       },
       {
         label: 'Invite by link',
-        icon: 'i-lucide-link'
-      }
-    ]
+        icon: 'i-lucide-link',
+      },
+    ],
   },
   {
     label: 'New team',
-    icon: 'i-lucide-plus'
-  }
-]
+    icon: 'i-lucide-plus',
+  },
+];
 </script>
 
 <template>
-  <UFieldGroup>
-    <PButton color="neutral" variant="subtle" label="Settings" />
+  <PFieldGroup>
+    <PButton
+      color="neutral"
+      variant="subtle"
+      label="Settings"
+    />
 
-    <UDropdownMenu :items="items">
+    <PDropdownMenu :items="items">
       <PButton
         color="neutral"
         variant="outline"
         icon="i-lucide-chevron-down"
       />
-    </UDropdownMenu>
-  </UFieldGroup>
+    </PDropdownMenu>
+  </PFieldGroup>
 </template>

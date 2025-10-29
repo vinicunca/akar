@@ -42,7 +42,7 @@ const items = computed(() => [{
 </script>
 
 <template>
-  <UDropdownMenu :items="items" :content="{ align: 'start' }" :pohon="{ content: 'w-48' }">
+  <PDropdownMenu :items="items" :content="{ align: 'start' }" :pohon="{ content: 'w-48' }">
     <PButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
-  </UDropdownMenu>
+  </PDropdownMenu>
 </template>

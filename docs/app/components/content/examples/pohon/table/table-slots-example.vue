@@ -110,9 +110,9 @@ function getDropdownActions(user: User): DropdownMenuItem[][] {
       </div>
     </template>
     <template #action-cell="{ row }">
-      <UDropdownMenu :items="getDropdownActions(row.original)">
+      <PDropdownMenu :items="getDropdownActions(row.original)">
         <PButton icon="i-lucide-ellipsis-vertical" color="neutral" variant="ghost" aria-label="Actions" />
-      </UDropdownMenu>
+      </PDropdownMenu>
     </template>
   </UTable>
 </template>

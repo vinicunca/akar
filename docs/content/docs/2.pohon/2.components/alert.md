@@ -4,7 +4,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Alert.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/alert.vue
 ---
 
 ## Usage

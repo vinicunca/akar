@@ -5,7 +5,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/AvatarGroup.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/avatar-group.vue
 ---
 
 ## Usage

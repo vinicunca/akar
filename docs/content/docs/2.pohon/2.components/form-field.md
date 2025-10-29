@@ -27,7 +27,7 @@ slots:
     <PInput placeholder="Enter your email" />
 ---
 
-:u-input{placeholder="Enter your email"}
+:p-input{placeholder="Enter your email"}
 ::
 
 ::note
@@ -50,7 +50,7 @@ slots:
     <PInput placeholder="Enter your email" />
 ---
 
-:u-input{placeholder="Enter your email"}
+:p-input{placeholder="Enter your email"}
 ::
 
 ### Description
@@ -71,7 +71,7 @@ slots:
     <PInput placeholder="Enter your email" class="w-full" />
 ---
 
-:u-input{placeholder="Enter your email" class="w-full"}
+:p-input{placeholder="Enter your email" class="w-full"}
 ::
 
 ### Hint
@@ -92,7 +92,7 @@ slots:
     <PInput placeholder="Enter your email" />
 ---
 
-:u-input{placeholder="Enter your email"}
+:p-input{placeholder="Enter your email"}
 ::
 
 ### Help
@@ -113,7 +113,7 @@ slots:
     <PInput placeholder="Enter your email" class="w-full" />
 ---
 
-:u-input{placeholder="Enter your email" class="w-full"}
+:p-input{placeholder="Enter your email" class="w-full"}
 ::
 
 ### Error
@@ -136,7 +136,7 @@ slots:
     <PInput placeholder="Enter your email" class="w-full" />
 ---
 
-:u-input{placeholder="Enter your email" class="w-full"}
+:p-input{placeholder="Enter your email" class="w-full"}
 ::
 
 ::tip{to="/docs/getting-started/theme/design-system#colors"}
@@ -167,7 +167,7 @@ slots:
     <PInput placeholder="Enter your email" class="w-full" />
 ---
 
-:u-input{placeholder="Enter your email" class="w-full"}
+:p-input{placeholder="Enter your email" class="w-full"}
 ::
 
 ## API

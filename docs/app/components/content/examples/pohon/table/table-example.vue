@@ -7,7 +7,7 @@ import { useClipboard } from '@vueuse/core'
 const PButton = resolveComponent('PButton')
 const UCheckbox = resolveComponent('UCheckbox')
 const PBadge = resolveComponent('PBadge')
-const UDropdownMenu = resolveComponent('UDropdownMenu')
+const PDropdownMenu = resolveComponent('PDropdownMenu')
 
 const toast = useToast()
 const { copy } = useClipboard()
@@ -243,7 +243,7 @@ const columns: TableColumn<Payment>[] = [{
       label: 'View payment details'
     }]
 
-    return h('div', { class: 'text-right' }, h(UDropdownMenu, {
+    return h('div', { class: 'text-right' }, h(PDropdownMenu, {
       'content': {
         align: 'end'
       },
@@ -278,7 +278,7 @@ function randomize() {
 
       <PButton color="neutral" label="Randomize" @click="randomize" />
 
-      <UDropdownMenu
+      <PDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
           label: upperFirst(column.id),
           type: 'checkbox' as const,
@@ -300,7 +300,7 @@ function randomize() {
           class="ml-auto"
           aria-label="Columns select dropdown"
         />
-      </UDropdownMenu>
+      </PDropdownMenu>
     </div>
 
     <UTable

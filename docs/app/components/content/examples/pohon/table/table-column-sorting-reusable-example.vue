@@ -5,7 +5,7 @@ import type { Column } from '@tanstack/vue-table'
 
 const PBadge = resolveComponent('PBadge')
 const PButton = resolveComponent('PButton')
-const UDropdownMenu = resolveComponent('UDropdownMenu')
+const PDropdownMenu = resolveComponent('PDropdownMenu')
 
 type Payment = {
   id: string
@@ -96,7 +96,7 @@ const columns: TableColumn<Payment>[] = [{
 function getHeader(column: Column<Payment>, label: string) {
   const isSorted = column.getIsSorted()
 
-  return h(UDropdownMenu, {
+  return h(PDropdownMenu, {
     'content': {
       align: 'start'
     },

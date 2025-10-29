@@ -1,5 +1,8 @@
 // @unocss-include
 
+import type * as pohon from '#build/pohon';
+import type { UvConfig } from 'pohon-ui';
+
 export const fieldGroupVariant = {
   fieldGroup: {
     horizontal: 'first:not-[*:only-child]:rounded-e-none last:not-[*:only-child]:rounded-s-none not-last:not-first:rounded-none focus-visible:z-1',
@@ -19,3 +22,13 @@ export const fieldGroupVariantWithRoot = {
     },
   },
 };
+
+export const fieldGroupTheme = {
+  base: 'relative',
+  variants: {
+    orientation: {
+      horizontal: 'inline-flex -space-x-px',
+      vertical: 'flex flex-col -space-y-px',
+    },
+  },
+} satisfies UvConfig<typeof pohon>['fieldGroup'];

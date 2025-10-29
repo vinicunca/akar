@@ -27,7 +27,7 @@ const items: DropdownMenuItem[][] = [
 </script>
 
 <template>
-  <UDropdownMenu :items="items" :pohon="{ content: 'w-48' }">
+  <PDropdownMenu :items="items" :pohon="{ content: 'w-48' }">
     <PButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
-  </UDropdownMenu>
+  </PDropdownMenu>
 </template>
