@@ -4,7 +4,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Card.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/card.vue
 ---
 
 ## Usage
@@ -47,13 +47,13 @@ slots:
 ---
 
 #header
-:placeholder{class="h-8"}
+:core-placeholder{class="h-8"}
 
 #default
-:placeholder{class="h-32"}
+:core-placeholder{class="h-32"}
 
 #footer
-:placeholder{class="h-8"}
+:core-placeholder{class="h-8"}
 ::
 
 ## API

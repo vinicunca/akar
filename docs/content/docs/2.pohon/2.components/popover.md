@@ -35,7 +35,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
-:placeholder{class="size-48 m-4 inline-flex"}
+:core-placeholder{class="size-48 m-4 inline-flex"}
 ::
 
 ### Mode
@@ -64,7 +64,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
-:placeholder{class="size-48 m-4 inline-flex"}
+:core-placeholder{class="size-48 m-4 inline-flex"}
 ::
 
 ::note
@@ -97,7 +97,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
-:placeholder{class="size-48 m-4 inline-flex"}
+:core-placeholder{class="size-48 m-4 inline-flex"}
 ::
 
 ### Content
@@ -135,7 +135,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
-:placeholder{class="size-48 m-4 inline-flex"}
+:core-placeholder{class="size-48 m-4 inline-flex"}
 ::
 
 ### Arrow
@@ -162,7 +162,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle"}
 
 #content
-:placeholder{class="size-48 m-4 inline-flex"}
+:core-placeholder{class="size-48 m-4 inline-flex"}
 ::
 
 ## Examples

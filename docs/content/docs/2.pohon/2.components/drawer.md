@@ -32,7 +32,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="h-48 m-4"}
+:core-placeholder{class="h-48 m-4"}
 ::
 
 You can also use the `#header`{lang="ts-type"}, `#body`{lang="ts-type"} and `#footer`{lang="ts-type"} slots to customize the Drawer's content.
@@ -59,7 +59,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #body
-:placeholder{class="h-48"}
+:core-placeholder{class="h-48"}
 ::
 
 ### Description
@@ -87,7 +87,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #body
-:placeholder{class="h-48"}
+:core-placeholder{class="h-48"}
 ::
 
 ### Direction
@@ -112,7 +112,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="min-w-96 min-h-96 size-full m-4"}
+:core-placeholder{class="min-w-96 min-h-96 size-full m-4"}
 ::
 
 ### Inset
@@ -138,7 +138,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="min-w-96 min-h-96 size-full m-4"}
+:core-placeholder{class="min-w-96 min-h-96 size-full m-4"}
 ::
 
 ### Handle
@@ -163,7 +163,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="h-48 m-4"}
+:core-placeholder{class="h-48 m-4"}
 ::
 
 ### Handle Only
@@ -188,7 +188,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="h-48 m-4"}
+:core-placeholder{class="h-48 m-4"}
 ::
 
 ### Overlay
@@ -213,7 +213,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="h-48 m-4"}
+:core-placeholder{class="h-48 m-4"}
 ::
 
 ### Scale Background
@@ -239,7 +239,7 @@ slots:
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
-:placeholder{class="h-screen m-4"}
+:core-placeholder{class="h-screen m-4"}
 ::
 
 ::warning

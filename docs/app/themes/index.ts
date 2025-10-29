@@ -6,6 +6,7 @@ export * from './banner.theme';
 export * from './breadcrumb.theme';
 export * from './button.theme';
 export * from './calendar.theme';
+export * from './card.theme';
 export * from './chip.theme';
 export * from './collapsible.theme';
 export * from './container.theme';

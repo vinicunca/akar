@@ -81,7 +81,7 @@ class: '!p-0 !justify-start'
 ---
 
 #body
-:placeholder{class="h-96"}
+:core-placeholder{class="h-96"}
 ::
 
 ### Size
@@ -109,7 +109,7 @@ class: '!p-0 !justify-start'
 ---
 
 #body
-:placeholder{class="h-96"}
+:core-placeholder{class="h-96"}
 ::
 
 ::tip{to="/docs/pohon/components/dashboard-group#props"}

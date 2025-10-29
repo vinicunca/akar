@@ -72,7 +72,7 @@ slots:
 class: '!p-0 !justify-start'
 ---
 
-:placeholder{class="h-96"}
+:core-placeholder{class="h-96"}
 ::
 
 ### Collapsible
@@ -107,7 +107,7 @@ slots:
 class: '!p-0 !justify-start'
 ---
 
-:placeholder{class="h-96"}
+:core-placeholder{class="h-96"}
 ::
 
 ::tip{to="#slots"}
@@ -141,7 +141,7 @@ slots:
 class: '!p-0 !justify-start'
 ---
 
-:placeholder{class="h-96"}
+:core-placeholder{class="h-96"}
 ::
 
 ::tip{to="/docs/pohon/components/dashboard-group#props"}
@@ -182,7 +182,7 @@ slots:
 class: '!p-0 !justify-end'
 ---
 
-:placeholder{class="h-96"}
+:core-placeholder{class="h-96"}
 ::
 
 ### Mode

@@ -1,5 +1,5 @@
 <template>
-  <UCard>
+  <PCard>
     <template #header>
       <CorePlaceholder class="h-8" />
     </template>
@@ -9,5 +9,5 @@
     <template #footer>
       <CorePlaceholder class="h-8" />
     </template>
-  </UCard>
+  </PCard>
 </template>
