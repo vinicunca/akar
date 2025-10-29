@@ -241,7 +241,7 @@ const defaultValue = computed(() => {
       </span>
 
       <span
-        v-if="link.badge || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']"
+        v-if="(link.badge || link.badge === 0) || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']"
         :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, link.pohon?.linkTrailing] })"
       >
         <slot
@@ -251,7 +251,7 @@ const defaultValue = computed(() => {
           :pohon="pohon"
         >
           <PBadge
-            v-if="link.badge"
+            v-if="(link.badge || link.badge === 0)"
             color="neutral"
             variant="outline"
             :size="((props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"

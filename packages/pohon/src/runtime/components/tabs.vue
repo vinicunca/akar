@@ -200,7 +200,7 @@ defineExpose({
           :pohon="pohon"
         >
           <PBadge
-            v-if="item.badge !== undefined"
+            v-if="item.badge || item.badge === 0"
             color="neutral"
             variant="outline"
             :size="((item.pohon?.trailingBadgeSize || props.pohon?.trailingBadgeSize || pohon.trailingBadgeSize()) as PBadgeProps['size'])"

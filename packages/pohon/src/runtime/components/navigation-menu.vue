@@ -366,7 +366,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
         :is="orientation === 'vertical' && item.children?.length && !collapsed ? AAccordionTrigger : 'span'"
         v-if="(!collapsed || orientation !== 'vertical')
           && (
-            item.badge !== undefined
+            (item.badge || item.badge === 0)
             || (
               orientation === 'horizontal'
               && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])
@@ -388,7 +388,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           :pohon="pohon"
         >
           <PBadge
-            v-if="item.badge !== undefined"
+            v-if="item.badge || item.badge === 0"
             color="neutral"
             variant="outline"
             :size="((item.pohon?.linkTrailingBadgeSize || props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
