@@ -78,7 +78,7 @@ slots:
     <PButton icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ### Items
@@ -169,7 +169,7 @@ slots:
     <PButton icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ::note
@@ -224,7 +224,7 @@ slots:
     <PButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ### Arrow
@@ -259,7 +259,7 @@ slots:
     <PButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ### Size
@@ -296,7 +296,7 @@ slots:
     <PButton size="xl" label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{size="xl" label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{size="xl" label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ::warning
@@ -338,7 +338,7 @@ slots:
     <PButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
 ---
 
-:u-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
 ::
 
 ## Examples

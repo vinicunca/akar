@@ -86,7 +86,7 @@ slots:
 ---
 
 #fallback
-:u-button{variant="ghost" color="neutral" loading}
+:p-button{variant="ghost" color="neutral" loading}
 ::
 
 ## API

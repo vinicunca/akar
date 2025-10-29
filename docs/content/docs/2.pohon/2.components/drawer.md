@@ -29,7 +29,7 @@ slots:
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :core-placeholder{class="h-48 m-4"}
@@ -56,7 +56,7 @@ slots:
     <CorePlaceholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #body
 :core-placeholder{class="h-48"}
@@ -84,7 +84,7 @@ slots:
     <CorePlaceholder class="h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #body
 :core-placeholder{class="h-48"}
@@ -109,7 +109,7 @@ slots:
     <CorePlaceholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :core-placeholder{class="min-w-96 min-h-96 size-full m-4"}
@@ -135,7 +135,7 @@ slots:
     <CorePlaceholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :core-placeholder{class="min-w-96 min-h-96 size-full m-4"}
@@ -160,7 +160,7 @@ slots:
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :core-placeholder{class="h-48 m-4"}
@@ -185,7 +185,7 @@ slots:
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :core-placeholder{class="h-48 m-4"}
@@ -210,7 +210,7 @@ slots:
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :core-placeholder{class="h-48 m-4"}
@@ -236,7 +236,7 @@ slots:
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
 #content
 :core-placeholder{class="h-screen m-4"}

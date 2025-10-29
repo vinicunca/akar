@@ -370,7 +370,7 @@ const { data: ast } = await useAsyncData(
               color="neutral"
               variant="soft"
               class="rounded-sm rounded-l-none min-w-12"
-              :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
+              :class="[option.name.toLowerCase().endsWith('color') && 'akar:pl-6']"
               :pohon="{ itemLeadingChip: 'size-2' }"
               @update:model-value="setComponentProp(option.name, $event)"
             >

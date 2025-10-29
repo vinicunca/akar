@@ -4,6 +4,15 @@ packages:
   - packages/pohon/playgrounds/nuxt
   - packages/pohon/playgrounds/vue
 
+overrides:
+  akar: workspace:*
+  pohon-ui: workspace:*
+  rolldown: 1.0.0-beta.26
+  unplugin: ^2.3.10
+  vite: ^7.1.12
+
+patchedDependencies:
+  '@nuxt/vite-builder': patches/@nuxt__vite-builder.patch
 catalogs:
   base:
     '@changesets/changelog-github': ^0.5.1
@@ -117,13 +126,3 @@ onlyBuiltDependencies:
   - sharp
   - simple-git-hooks
   - unrs-resolver
-
-overrides:
-  akar: workspace:*
-  pohon-ui: workspace:*
-  rolldown: 1.0.0-beta.26
-  unplugin: ^2.3.10
-  vite: ^7.1.12
-
-patchedDependencies:
-  '@nuxt/vite-builder': patches/@nuxt__vite-builder.patch

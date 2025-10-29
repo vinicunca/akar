@@ -27,7 +27,7 @@ slots:
     <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ::warning
@@ -53,7 +53,7 @@ slots:
     <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ### Kbds
@@ -77,7 +77,7 @@ slots:
     <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ::tip
@@ -102,7 +102,7 @@ slots:
     <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ::tip
@@ -140,7 +140,7 @@ slots:
     <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ### Arrow
@@ -162,7 +162,7 @@ slots:
     <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ### Disabled
@@ -183,7 +183,7 @@ slots:
     <PButton label="Open" color="neutral" variant="subtle" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 ::
 
 ## Examples

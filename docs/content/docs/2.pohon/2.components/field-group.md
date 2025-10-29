@@ -21,8 +21,8 @@ slots:
     <PButton color="neutral" variant="subtle" label="Button" />
     <PButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
 ---
-:u-button{color="neutral" variant="subtle" label="Button"}
-:u-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
+:p-button{color="neutral" variant="subtle" label="Button"}
+:p-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
 ::
 
 ### Size
@@ -40,8 +40,8 @@ slots:
     <PButton color="neutral" variant="subtle" label="Button" />
     <PButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
 ---
-:u-button{color="neutral" variant="subtle" label="Button"}
-:u-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
+:p-button{color="neutral" variant="subtle" label="Button"}
+:p-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
 ::
 
 ### Orientation
@@ -59,8 +59,8 @@ slots:
     <PButton color="neutral" variant="subtle" label="Submit" />
     <PButton color="neutral" variant="outline" label="Cancel" />
 ---
-:u-button{color="neutral" variant="subtle" label="Submit"}
-:u-button{color="neutral" variant="outline" label="Cancel"}
+:p-button{color="neutral" variant="subtle" label="Submit"}
+:p-button{color="neutral" variant="outline" label="Cancel"}
 ::
 
 ## Examples
@@ -80,7 +80,7 @@ slots:
     <PButton color="neutral" variant="subtle" icon="i-lucide-clipboard" />
 ---
 :u-input{color="neutral" variant="outline" placeholder="Enter token"}
-:u-button{color="neutral" variant="subtle" icon="i-lucide-clipboard"}
+:p-button{color="neutral" variant="subtle" icon="i-lucide-clipboard"}
 ::
 
 ### With tooltip

@@ -29,7 +29,7 @@ slots:
     <CorePlaceholder class="h-full m-4" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 
 #content
 :core-placeholder{class="h-full m-4"}
@@ -56,7 +56,7 @@ slots:
     <CorePlaceholder class="h-full" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :core-placeholder{class="h-full"}
@@ -84,7 +84,7 @@ slots:
     <CorePlaceholder class="h-full" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :core-placeholder{class="h-full"}
@@ -119,7 +119,7 @@ slots:
     <CorePlaceholder class="h-full" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :core-placeholder{class="h-full"}
@@ -151,7 +151,7 @@ slots:
     <CorePlaceholder class="h-full" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :core-placeholder{class="h-full"}
@@ -191,7 +191,7 @@ slots:
     <CorePlaceholder class="h-full min-h-48" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :core-placeholder{class="h-full min-h-48"}
@@ -219,7 +219,7 @@ slots:
     <CorePlaceholder class="h-full" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :core-placeholder{class="h-full"}
@@ -247,7 +247,7 @@ slots:
     <CorePlaceholder class="h-full" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :core-placeholder{class="h-full"}
@@ -296,7 +296,7 @@ slots:
     <CorePlaceholder class="h-full" />
 ---
 
-:u-button{label="Open" color="neutral" variant="subtle"}
+:p-button{label="Open" color="neutral" variant="subtle"}
 
 #body
 :core-placeholder{class="h-full"}

@@ -4,7 +4,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Chip.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/chip.vue
 ---
 
 ## Usage
@@ -19,7 +19,7 @@ slots:
 
     <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Color
@@ -36,7 +36,7 @@ slots:
 
     <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Size
@@ -53,7 +53,7 @@ slots:
 
     <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Text
@@ -71,7 +71,7 @@ slots:
 
     <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Position
@@ -88,7 +88,7 @@ slots:
 
     <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
 ---
-:u-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
 ::
 
 ### Inset
