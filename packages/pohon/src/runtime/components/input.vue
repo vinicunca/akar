@@ -63,7 +63,6 @@ export interface PInputSlots {
 
 <script setup lang="ts" generic="T extends PInputValue">
 import { useAppConfig } from '#imports';
-import { isNumber } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, onMounted, ref } from 'vue';
@@ -144,7 +143,7 @@ function updateInput(value: string | null | undefined) {
     value = value?.trim() ?? null;
   }
 
-  if (props.modelModifiers?.number || isNumber(props.type)) {
+  if (props.modelModifiers?.number || props.type === 'number') {
     value = looseToNumber(value);
   }
 

@@ -188,10 +188,12 @@ const pohon = computed(() =>
     :as="as"
     :data-orientation="orientation"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="progress-root"
   >
     <div
       v-if="!isIndeterminate && (status || !!slots.status)"
       :class="pohon.status({ class: props.pohon?.status })"
+      data-pohon="progress-status"
       :style="statusStyle"
     >
       <slot
@@ -206,10 +208,12 @@ const pohon = computed(() =>
       v-bind="rootProps"
       :max="realMax"
       :class="pohon.base({ class: props.pohon?.base })"
+      data-pohon="progress-base"
       style="transform: translateZ(0)"
     >
       <AProgressIndicator
         :class="pohon.indicator({ class: props.pohon?.indicator })"
+        data-pohon="progress-indicator"
         :style="indicatorStyle"
       />
     </AProgressRoot>
@@ -217,11 +221,13 @@ const pohon = computed(() =>
     <div
       v-if="hasSteps"
       :class="pohon.steps({ class: props.pohon?.steps })"
+      data-pohon="progress-steps"
     >
       <div
         v-for="(step, index) in max"
         :key="index"
         :class="pohon.step({ class: props.pohon?.step, step: stepVariant(index) })"
+        data-pohon="progress-step"
       >
         <slot
           :name="`step-${index}`"

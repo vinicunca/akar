@@ -3,11 +3,10 @@ description: An indicator showing the progress of a task.
 category: element
 links:
   - label: Progress
-    icon: custom-akar
     to: /docs/akar/components/progress
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Progress.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/progress.vue
 ---
 
 ## Usage
@@ -105,7 +104,7 @@ ignore:
   - class
 props:
   orientation: vertical
-  class: 'h-48'
+  class: 'akar:h-48'
 ---
 ::
 

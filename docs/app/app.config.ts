@@ -30,6 +30,7 @@ import {
   mainTheme,
   navigationMenuTheme,
   popoverTheme,
+  progressTheme,
   selectMenuTheme,
   selectTheme,
   separatorTheme,
@@ -90,6 +91,7 @@ export default defineAppConfig({
     popover: popoverTheme,
     tabs: tabsTheme,
     tooltip: tooltipTheme,
+    progress: progressTheme,
 
     prose: {
       a: {

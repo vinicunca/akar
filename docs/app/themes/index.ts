@@ -26,6 +26,7 @@ export * from './link.theme';
 export * from './main.theme';
 export * from './navigation-menu.theme';
 export * from './popover.theme';
+export * from './progress.theme';
 export * from './select-menu.theme';
 export * from './select.theme';
 export * from './separator.theme';
