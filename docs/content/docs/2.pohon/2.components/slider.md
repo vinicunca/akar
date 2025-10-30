@@ -3,7 +3,7 @@ description: An input to select a numeric value within a range.
 category: form
 links:
   - label: Slider
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/slider
   - label: GitHub
     icon: i-simple-icons-github

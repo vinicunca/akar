@@ -5,7 +5,7 @@ links:
   - label: Icônes
     to: https://icones.js.org/
     target: _blank
-    icon: i-custom-icones-js
+    icon: custom-icones-js
 ---
 
 ## Usage
@@ -22,7 +22,7 @@ props:
 
 ::docs-framework-only
 #nuxt
-:::caution{to="/docs/getting-started/integrations/icons/nuxt#collections"}
+:::caution{to="/docs/pohon/getting-started/integrations/icons/nuxt#collections"}
 It's highly recommended to install the icons collections you need, read more about this.
 :::
 ::
@@ -47,7 +47,7 @@ import IconLightbulb from '~icons/lucide/lightbulb'
 </script>
 
 <template>
-  <UIcon :name="IconLightbulb" class="size-5" />
+  <PIcon :name="IconLightbulb" class="size-5" />
 </template>
 ```
 

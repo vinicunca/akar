@@ -4,7 +4,7 @@ description: An advanced searchable select element.
 category: form
 links:
   - label: Combobox
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/combobox
   - label: GitHub
     icon: i-simple-icons-github

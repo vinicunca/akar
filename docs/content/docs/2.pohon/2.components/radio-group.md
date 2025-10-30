@@ -4,7 +4,7 @@ description: A set of radio buttons to select a single option from a list.
 category: form
 links:
   - label: RadioGroup
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/radio-group
   - label: GitHub
     icon: i-simple-icons-github

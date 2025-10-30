@@ -4,7 +4,7 @@ description: An input for numerical values with a customizable range.
 category: form
 links:
   - label: NumberField
-    icon: i-custom-akar
+    icon: custom-akar
     to: https://www.akar.com/docs/pohon/components/number-field
   - label: GitHub
     icon: i-simple-icons-github

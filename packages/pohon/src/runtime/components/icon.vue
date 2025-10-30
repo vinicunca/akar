@@ -1,6 +1,8 @@
 <script lang="ts">
+import type { Component } from 'vue';
+
 export interface PIconProps {
-  name: string | object;
+  name: string | object | Component;
   mode?: 'svg' | 'css';
   size?: string | number;
   customize?: (

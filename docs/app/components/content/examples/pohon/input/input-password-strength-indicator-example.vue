@@ -79,7 +79,7 @@ const text = computed(() => {
         class="flex items-center gap-0.5"
         :class="req.met ? 'text-success' : 'color-text-muted'"
       >
-        <UIcon :name="req.met ? 'i-lucide-circle-check' : 'i-lucide-circle-x'" class="size-4 shrink-0" />
+        <PIcon :name="req.met ? 'i-lucide-circle-check' : 'i-lucide-circle-x'" class="size-4 shrink-0" />
 
         <span class="text-xs font-light">
           {{ req.text }}

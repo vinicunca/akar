@@ -3,7 +3,7 @@ description: A select element to choose from a list of options.
 category: form
 links:
   - label: Select
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/select
   - label: GitHub
     icon: i-simple-icons-github

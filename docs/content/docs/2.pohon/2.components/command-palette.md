@@ -4,11 +4,11 @@ description: A command palette with full-text search powered by Fuse.js for effi
 category: navigation
 links:
   - label: Fuse.js
-    icon: i-custom-fuse-js
+    icon: custom-fuse-js
     to: https://fusejs.io/
     target: _blank
   - label: Listbox
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/listbox
   - label: GitHub
     icon: i-simple-icons-github

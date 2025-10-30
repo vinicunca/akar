@@ -4,7 +4,7 @@ description: An input element that displays interactive tags.
 category: form
 links:
   - label: InputTags
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/tags-input
   - label: GitHub
     icon: i-simple-icons-github

@@ -4,7 +4,7 @@ description: A set of checklist buttons to select multiple option from a list.
 category: form
 links:
   - label: CheckboxGroup
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/checkbox#group-root
   - label: GitHub
     icon: i-simple-icons-github

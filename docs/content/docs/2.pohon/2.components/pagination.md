@@ -3,7 +3,7 @@ description: A list of buttons or links to navigate through pages.
 category: navigation
 links:
   - label: Pagination
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/pagination
   - label: GitHub
     icon: i-simple-icons-github

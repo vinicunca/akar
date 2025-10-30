@@ -3,7 +3,7 @@ description: Separates content horizontally or vertically.
 category: element
 links:
   - label: Separator
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/separator
   - label: GitHub
     icon: i-simple-icons-github

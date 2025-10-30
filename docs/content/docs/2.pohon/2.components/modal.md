@@ -3,7 +3,7 @@ description: A dialog window that can be used to display a message or request us
 category: overlay
 links:
   - label: Dialog
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/dialog
   - label: GitHub
     icon: i-simple-icons-github

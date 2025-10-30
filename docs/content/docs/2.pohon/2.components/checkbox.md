@@ -3,7 +3,7 @@ description: An input element to toggle between checked and unchecked states.
 category: form
 links:
   - label: Checkbox
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/checkbox
   - label: GitHub
     icon: i-simple-icons-github

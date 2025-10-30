@@ -3,7 +3,7 @@ description: A dialog that slides in from any side of the screen.
 category: overlay
 links:
   - label: Dialog
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/dialog
   - label: GitHub
     icon: i-simple-icons-github

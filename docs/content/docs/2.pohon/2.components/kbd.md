@@ -5,7 +5,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Kbd.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/kbd.vue
 ---
 
 ## Usage
@@ -111,7 +111,7 @@ Use the `class` prop to override the base styles of the Badge.
 ::docs-pohon-preview
 ---
 props:
-  class: 'font-bold rounded-full'
+  class: 'akar:font-bold akar:rounded-full'
   variant: subtle
 slots:
   default: K

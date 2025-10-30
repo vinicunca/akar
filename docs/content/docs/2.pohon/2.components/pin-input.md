@@ -4,7 +4,7 @@ description: An input element to enter a pin.
 category: form
 links:
   - label: PinInput
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/pin-input
   - label: GitHub
     icon: i-simple-icons-github

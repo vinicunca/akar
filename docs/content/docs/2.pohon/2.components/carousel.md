@@ -4,7 +4,7 @@ category: data
 links:
   - label: Embla
     to: https://www.embla-carousel.com/api/
-    icon: i-custom-embla-carousel
+    icon: custom-embla-carousel
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/carousel.vue

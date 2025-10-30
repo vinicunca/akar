@@ -3,7 +3,7 @@ description: A tree view component to display and interact with hierarchical dat
 category: data
 links:
   - label: Tree
-    icon: i-custom-akar
+    icon: custom-akar
     to: /docs/akar/components/tree
   - label: GitHub
     icon: i-simple-icons-github
