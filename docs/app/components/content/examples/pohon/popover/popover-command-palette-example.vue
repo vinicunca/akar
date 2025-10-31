@@ -1,28 +1,30 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 const items = ref([
   {
     label: 'bug',
     value: 'bug',
     chip: {
-      color: 'error' as const
-    }
+      color: 'error' as const,
+    },
   },
   {
     label: 'feature',
     value: 'feature',
     chip: {
-      color: 'success' as const
-    }
+      color: 'success' as const,
+    },
   },
   {
     label: 'enhancement',
     value: 'enhancement',
     chip: {
-      color: 'info' as const
-    }
-  }
-])
-const label = ref([])
+      color: 'info' as const,
+    },
+  },
+]);
+const label = ref([]);
 </script>
 
 <template>
@@ -35,7 +37,7 @@ const label = ref([])
     />
 
     <template #content>
-      <UCommandPalette
+      <PCommandPalette
         v-model="label"
         multiple
         placeholder="Search labels..."

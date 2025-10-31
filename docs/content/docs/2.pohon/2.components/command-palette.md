@@ -86,7 +86,7 @@ The CommandPalette component filters groups and ranks matching commands by relev
 - `id: string`{lang="ts-type"}
 - `label?: string`{lang="ts-type"}
 - `slot?: string`{lang="ts-type"}
-- `items?: CommandPaletteItem[]`{lang="ts-type"}
+- `items?: PCommandPaletteItem[]`{lang="ts-type"}
 - [`ignoreFilter?: boolean`{lang="ts-type"}](#with-ignore-filter)
 - [`postFilter?: (searchTerm: string, items: T[]) => T[]`{lang="ts-type"}](#with-post-filtered-items)
 - `highlightedIcon?: string`{lang="ts-type"}
@@ -109,7 +109,7 @@ Each group contains an `items` array of objects that define the commands. Each i
 - `disabled?: boolean`{lang="ts-type"}
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `placeholder?: string`{lang="ts-type"}
-- `children?: CommandPaletteItem[]`{lang="ts-type"}
+- `children?: PCommandPaletteItem[]`{lang="ts-type"}
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `pohon?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}

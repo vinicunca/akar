@@ -1,16 +1,24 @@
 <script setup lang="ts">
-const page = ref(5)
+import { ref } from 'vue';
+
+const page = ref(5);
 
 function to(page: number) {
   return {
     query: {
-      page
+      page,
     },
-    hash: '#with-links'
-  }
+    hash: '#with-links',
+  };
 }
 </script>
 
 <template>
-  <UPagination v-model:page="page" :total="100" :to="to" :sibling-count="1" show-edges />
+  <PPagination
+    v-model:page="page"
+    :total="100"
+    :to="to"
+    :sibling-count="1"
+    show-edges
+  />
 </template>

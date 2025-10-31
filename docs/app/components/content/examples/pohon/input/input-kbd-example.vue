@@ -1,11 +1,17 @@
 <script setup lang="ts">
-const input = useTemplateRef('input')
+import { defineShortcuts } from '#imports';
+import { useTemplateRef } from 'vue';
+
+const input = useTemplateRef('input');
 
 defineShortcuts({
-  '/': () => {
-    input.value?.inputRef?.focus()
-  }
-})
+  config:
+  {
+    '/': () => {
+      input.value?.inputRef?.focus();
+    },
+  },
+});
 </script>
 
 <template>
@@ -15,7 +21,7 @@ defineShortcuts({
     placeholder="Search..."
   >
     <template #trailing>
-      <UKbd value="/" />
+      <PKbd value="/" />
     </template>
   </PInput>
 </template>

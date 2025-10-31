@@ -20,6 +20,7 @@
     "@vueuse/integrations": "catalog:core",
     "akar": "workspace:*",
     "better-sqlite3": "catalog:docs",
+    "maska": "catalog:docs",
     "nuxt": "catalog:pohon",
     "nuxt-component-meta": "catalog:docs",
     "nuxt-og-image": "catalog:docs",

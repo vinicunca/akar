@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { TreeItemSelectEvent } from 'reka-ui'
-import type { TreeItem } from 'pohon-ui'
+import type { ATreeItemSelectEvent } from 'akar';
+import type { PTreeItem } from 'pohon-ui';
+import { ref } from 'vue';
 
-const items: TreeItem[] = [
+const items: Array<PTreeItem> = [
   {
     label: 'app/',
     defaultExpanded: true,
@@ -11,34 +12,34 @@ const items: TreeItem[] = [
         label: 'composables/',
         children: [
           { label: 'useAuth.ts' },
-          { label: 'useUser.ts' }
-        ]
+          { label: 'useUser.ts' },
+        ],
       },
       {
         label: 'components/',
         defaultExpanded: true,
         children: [
           { label: 'Card.vue' },
-          { label: 'Button.vue' }
-        ]
-      }
-    ]
+          { label: 'Button.vue' },
+        ],
+      },
+    ],
   },
   { label: 'app.vue' },
-  { label: 'nuxt.config.ts' }
-]
+  { label: 'nuxt.config.ts' },
+];
 
-const value = ref<(typeof items)>([])
+const value = ref<(typeof items)>([]);
 
-function onSelect(e: TreeItemSelectEvent<TreeItem>) {
+function onSelect(e: ATreeItemSelectEvent<PTreeItem>) {
   if (e.detail.originalEvent.type === 'click') {
-    e.preventDefault()
+    e.preventDefault();
   }
 }
 </script>
 
 <template>
-  <UTree
+  <PTree
     v-model="value"
     :as="{ link: 'div' }"
     :items="items"
@@ -48,12 +49,12 @@ function onSelect(e: TreeItemSelectEvent<TreeItem>) {
     @select="onSelect"
   >
     <template #item-leading="{ selected, indeterminate, handleSelect }">
-      <UCheckbox
+      <PCheckbox
         :model-value="indeterminate ? 'indeterminate' : selected"
         tabindex="-1"
         @change="handleSelect"
         @click.stop
       />
     </template>
-  </UTree>
+  </PTree>
 </template>

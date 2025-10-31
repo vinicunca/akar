@@ -1,10 +1,10 @@
 <template>
-  <UDashboardNavbar
+  <PDashboardNavbar
     title="Dashboard"
     :toggle="{
       color: 'primary',
       variant: 'subtle',
-      class: 'rounded-full'
+      class: 'rounded-full',
     }"
   />
 </template>

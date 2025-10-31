@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import theme from '#build/ui/toaster'
+import { useAppConfig } from '#app';
+import theme from '#build/pohon/toaster';
 
-const positions = Object.keys(theme.variants.position)
-const appConfig = useAppConfig()
+const positions = Object.keys(theme.variants.position);
+const appConfig = useAppConfig();
 </script>
 
 <template>
@@ -13,11 +14,11 @@ const appConfig = useAppConfig()
       :pohon="{
         wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-accented',
         label: 'color-text-muted px-2 py-1.5',
-        container: 'mt-0'
+        container: 'mt-0',
       }"
-      class="inline-flex ring ring-accented rounded-sm"
+      class="ring-accented rounded-sm inline-flex ring"
     >
-      <USelectMenu
+      <PSelectMenu
         v-model="appConfig.toaster.position"
         :items="positions"
         color="neutral"

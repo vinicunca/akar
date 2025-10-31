@@ -146,11 +146,11 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
 
       <PSeparator />
 
-      <UContentSurround :surround="surround" />
+      <PContentSurround :surround="surround" />
     </UPageBody>
 
     <template #right>
-      <UContentToc :links="page.body.toc.links" />
+      <PContentToc :links="page.body.toc.links" />
     </template>
   </UPage>
 </template>

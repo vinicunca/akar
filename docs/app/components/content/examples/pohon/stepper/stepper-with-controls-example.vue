@@ -1,35 +1,41 @@
 <script setup lang="ts">
-import type { StepperItem } from 'pohon-ui'
+import type { PStepperItem } from 'pohon-ui';
+import { useTemplateRef } from 'vue';
 
-const items: StepperItem[] = [
+const items: Array<PStepperItem> = [
   {
     title: 'Address',
     description: 'Add your address here',
-    icon: 'i-lucide-house'
-  }, {
+    icon: 'i-lucide-house',
+  },
+  {
     title: 'Shipping',
     description: 'Set your preferred shipping method',
-    icon: 'i-lucide-truck'
-  }, {
+    icon: 'i-lucide-truck',
+  },
+  {
     title: 'Checkout',
-    description: 'Confirm your order'
-  }
-]
+    description: 'Confirm your order',
+  },
+];
 
-const stepper = useTemplateRef('stepper')
+const stepper = useTemplateRef('stepper');
 </script>
 
 <template>
   <div class="w-full">
-    <UStepper ref="stepper" :items="items">
+    <PStepper
+      ref="stepper"
+      :items="items"
+    >
       <template #content="{ item }">
         <CorePlaceholder class="aspect-video">
           {{ item.title }}
         </CorePlaceholder>
       </template>
-    </UStepper>
+    </PStepper>
 
-    <div class="flex gap-2 justify-between mt-4">
+    <div class="mt-4 flex gap-2 justify-between">
       <PButton
         leading-icon="i-lucide-arrow-left"
         :disabled="!stepper?.hasPrev"

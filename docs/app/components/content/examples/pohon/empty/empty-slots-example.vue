@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { UserProps } from 'pohon-ui'
+import type { UserProps } from 'pohon-ui';
 
-const members: UserProps[] = [
+const members: Array<UserProps> = [
   {
     name: 'Daniel Roe',
     description: 'danielroe',
@@ -9,8 +9,8 @@ const members: UserProps[] = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/danielroe.png',
-      alt: 'danielroe'
-    }
+      alt: 'danielroe',
+    },
   },
   {
     name: 'Pooya Parsa',
@@ -19,8 +19,8 @@ const members: UserProps[] = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/pi0.png',
-      alt: 'pi0'
-    }
+      alt: 'pi0',
+    },
   },
   {
     name: 'Sébastien Chopin',
@@ -29,8 +29,8 @@ const members: UserProps[] = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/atinux.png',
-      alt: 'atinux'
-    }
+      alt: 'atinux',
+    },
   },
   {
     name: 'praburangki',
@@ -39,34 +39,40 @@ const members: UserProps[] = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/praburangki.png',
-      alt: 'praburangki'
-    }
-  }
-]
+      alt: 'praburangki',
+    },
+  },
+];
 </script>
 
 <template>
-  <UEmpty
+  <PEmpty
     title="No team members"
     description="Invite your team to collaborate on this project."
     variant="naked"
     :actions="[{
       label: 'Invite members',
       icon: 'i-lucide-user-plus',
-      color: 'neutral'
+      color: 'neutral',
     }]"
   >
     <template #leading>
       <PAvatarGroup size="xl">
-        <PAvatar src="https://github.com/nuxt.png" alt="Nuxt" />
-        <PAvatar src="https://github.com/unjs.png" alt="Unjs" />
+        <PAvatar
+          src="https://github.com/nuxt.png"
+          alt="Nuxt"
+        />
+        <PAvatar
+          src="https://github.com/unjs.png"
+          alt="Unjs"
+        />
       </PAvatarGroup>
     </template>
 
     <template #footer>
       <PSeparator class="my-4" />
 
-      <div class="grid grid-cols-2 gap-4">
+      <div class="gap-4 grid grid-cols-2">
         <UPageCard
           v-for="(member, index) in members"
           :key="index"
@@ -82,5 +88,5 @@ const members: UserProps[] = [
         </UPageCard>
       </div>
     </template>
-  </UEmpty>
+  </PEmpty>
 </template>

@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { CommandPaletteItem } from 'pohon-ui'
+import type { PCommandPaletteItem } from 'pohon-ui';
 
-const items: CommandPaletteItem[] = Array(1000)
+const items: Array<PCommandPaletteItem> = Array(1000)
   .fill(0)
   .map((_, value) => ({
     label: `item-${value}`,
-    value
-  }))
+    value,
+  }));
 
 const groups = [
   {
     id: 'items',
-    items
-  }
-]
+    items,
+  },
+];
 </script>
 
 <template>
-  <UCommandPalette
+  <PCommandPalette
     virtualize
     :fuse="{ resultLimit: 1000 }"
     :groups="groups"

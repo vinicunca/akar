@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content';
+import { useLazyAsyncData } from '#app';
+import { inject, queryCollectionSearchSections, ref } from '#imports';
 
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
-  server: false
-})
+  server: false,
+});
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 
-const searchTerm = ref('')
+const searchTerm = ref('');
 </script>
 
 <template>

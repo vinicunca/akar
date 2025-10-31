@@ -1,22 +1,32 @@
 <script setup lang="ts">
 defineProps<{
-  count: number
-}>()
+  count: number;
+}>();
 
-const emit = defineEmits<{ close: [boolean] }>()
+const emit = defineEmits<{ close: [boolean] }>();
 </script>
 
 <template>
-  <USlideover :close="{ onClick: () => emit('close', false) }" :description="`This slideover was opened programmatically ${count} times`">
+  <PSlideover
+    :close="{ onClick: () => emit('close', false) }"
+    :description="`This slideover was opened programmatically ${count} times`"
+  >
     <template #body>
       <CorePlaceholder class="h-full" />
     </template>
 
     <template #footer>
       <div class="flex gap-2">
-        <PButton color="neutral" label="Dismiss" @click="emit('close', false)" />
-        <PButton label="Success" @click="emit('close', true)" />
+        <PButton
+          color="neutral"
+          label="Dismiss"
+          @click="emit('close', false)"
+        />
+        <PButton
+          label="Success"
+          @click="emit('close', true)"
+        />
       </div>
     </template>
-  </USlideover>
+  </PSlideover>
 </template>

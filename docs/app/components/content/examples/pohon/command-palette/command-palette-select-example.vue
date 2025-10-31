@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const toast = useToast()
+import { ref, useToast } from '#imports';
+
+const toast = useToast();
 
 const groups = ref([
   {
@@ -12,8 +14,8 @@ const groups = ref([
         to: 'https://github.com/praburangki',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/praburangki.png'
-        }
+          src: 'https://github.com/praburangki.png',
+        },
       },
       {
         label: 'Wahyu Ivan',
@@ -21,8 +23,8 @@ const groups = ref([
         to: 'https://github.com/wahyu-ivan',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/wahyu-ivan.png'
-        }
+          src: 'https://github.com/wahyu-ivan.png',
+        },
       },
       {
         label: 'Sébastien Chopin',
@@ -30,8 +32,8 @@ const groups = ref([
         to: 'https://github.com/atinux',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/atinux.png'
-        }
+          src: 'https://github.com/atinux.png',
+        },
       },
       {
         label: 'Hugo Richard',
@@ -39,8 +41,8 @@ const groups = ref([
         to: 'https://github.com/HugoRCD',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/HugoRCD.png'
-        }
+          src: 'https://github.com/HugoRCD.png',
+        },
       },
       {
         label: 'Sandro Circi',
@@ -48,8 +50,8 @@ const groups = ref([
         to: 'https://github.com/sandros94',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/sandros94.png'
-        }
+          src: 'https://github.com/sandros94.png',
+        },
       },
       {
         label: 'Daniel Roe',
@@ -57,8 +59,8 @@ const groups = ref([
         to: 'https://github.com/danielroe',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/danielroe.png'
-        }
+          src: 'https://github.com/danielroe.png',
+        },
       },
       {
         label: 'Jakub Michálek',
@@ -66,8 +68,8 @@ const groups = ref([
         to: 'https://github.com/J-Michalek',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/J-Michalek.png'
-        }
+          src: 'https://github.com/J-Michalek.png',
+        },
       },
       {
         label: 'Eugen Istoc',
@@ -75,10 +77,10 @@ const groups = ref([
         to: 'https://github.com/genu',
         target: '_blank',
         avatar: {
-          src: 'https://github.com/genu.png'
-        }
-      }
-    ]
+          src: 'https://github.com/genu.png',
+        },
+      },
+    ],
   },
   {
     id: 'actions',
@@ -89,11 +91,11 @@ const groups = ref([
         icon: 'i-lucide-file-plus',
         kbds: [
           'meta',
-          'N'
+          'N',
         ],
         onSelect() {
-          toast.add({ title: 'Add new file' })
-        }
+          toast.add({ title: 'Add new file' });
+        },
       },
       {
         label: 'Add new folder',
@@ -101,11 +103,11 @@ const groups = ref([
         icon: 'i-lucide-folder-plus',
         kbds: [
           'meta',
-          'F'
+          'F',
         ],
         onSelect() {
-          toast.add({ title: 'Add new folder' })
-        }
+          toast.add({ title: 'Add new folder' });
+        },
       },
       {
         label: 'Add hashtag',
@@ -113,11 +115,11 @@ const groups = ref([
         icon: 'i-lucide-hash',
         kbds: [
           'meta',
-          'H'
+          'H',
         ],
         onSelect() {
-          toast.add({ title: 'Add hashtag' })
-        }
+          toast.add({ title: 'Add hashtag' });
+        },
       },
       {
         label: 'Add label',
@@ -125,23 +127,23 @@ const groups = ref([
         icon: 'i-lucide-tag',
         kbds: [
           'meta',
-          'L'
+          'L',
         ],
         onSelect() {
-          toast.add({ title: 'Add label' })
-        }
-      }
-    ]
-  }
-])
+          toast.add({ title: 'Add label' });
+        },
+      },
+    ],
+  },
+]);
 
 function onSelect(item: any) {
-  console.log(item)
+  console.log(item);
 }
 </script>
 
 <template>
-  <UCommandPalette
+  <PCommandPalette
     :groups="groups"
     class="flex-1 h-80"
     @update:model-value="onSelect"

@@ -77,11 +77,11 @@ if (!page.value) {
 
       <PSeparator v-if="surround?.filter(Boolean).length" />
 
-      <UContentSurround :surround="(surround as any)" />
+      <PContentSurround :surround="(surround as any)" />
     </UPageBody>
 
     <template v-if="page?.body?.toc?.links?.length" #right>
-      <UContentToc :links="page.body.toc.links" />
+      <PContentToc :links="page.body.toc.links" />
     </template>
   </UPage>
 </template>

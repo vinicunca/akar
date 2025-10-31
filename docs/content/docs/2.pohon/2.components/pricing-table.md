@@ -14,7 +14,7 @@ The PricingTable component provides a responsive and customizable way to display
 
 ::code-preview
 
-::u-pricing-table
+::p-pricing-table
 ---
 tiers:
   - id: 'solo'

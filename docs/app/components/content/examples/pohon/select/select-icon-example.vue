@@ -1,14 +1,16 @@
 <script setup lang="ts">
-const items = ref(['Backlog', 'Todo', 'In Progress', 'Done'])
-const value = ref('Backlog')
+import { ref } from 'vue';
+
+const items = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
+const value = ref('Backlog');
 </script>
 
 <template>
-  <USelect
+  <PSelect
     v-model="value"
     :items="items"
     :pohon="{
-      trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+      trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
     }"
     class="w-48"
   />

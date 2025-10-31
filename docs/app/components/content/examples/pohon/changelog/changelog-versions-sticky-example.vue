@@ -11,11 +11,11 @@ const versions = [{
     name: 'Daniel Roe',
     avatar: {
       src: 'https://github.com/danielroe.png',
-      alt: 'Daniel Roe'
+      alt: 'Daniel Roe',
     },
     to: 'https://github.com/danielroe',
-    target: '_blank'
-  }]
+    target: '_blank',
+  }],
 }, {
   title: 'Nuxt 3.16',
   description: 'Nuxt 3.16 is out - packed with features and performance improvements!',
@@ -28,11 +28,11 @@ const versions = [{
     name: 'Daniel Roe',
     avatar: {
       src: 'https://github.com/danielroe.png',
-      alt: 'Daniel Roe'
+      alt: 'Daniel Roe',
     },
     to: 'https://github.com/danielroe',
-    target: '_blank'
-  }]
+    target: '_blank',
+  }],
 }, {
   title: 'Nuxt 3.15',
   description: 'Nuxt 3.15 is out - with Vite 6, better HMR and faster performance!',
@@ -45,17 +45,17 @@ const versions = [{
     name: 'Daniel Roe',
     avatar: {
       src: 'https://github.com/danielroe.png',
-      alt: 'Daniel Roe'
+      alt: 'Daniel Roe',
     },
     to: 'https://github.com/danielroe',
-    target: '_blank'
-  }]
-}]
+    target: '_blank',
+  }],
+}];
 </script>
 
 <template>
-  <UChangelogVersions :indicator="false">
-    <UChangelogVersion
+  <PChangelogVersions :indicator="false">
+    <PChangelogVersion
       v-for="version in versions"
       :key="version.title"
       v-bind="version"
@@ -63,14 +63,17 @@ const versions = [{
       class="flex items-start"
       :pohon="{
         container: 'max-w-lg me-0',
-        indicator: 'sticky top-(--pohon-header-height) pt-4 -mt-4 flex flex-col items-end'
+        indicator: 'sticky top-(--pohon-header-height) pt-4 -mt-4 flex flex-col items-end',
       }"
     >
       <template #indicator>
-        <PBadge :label="version.badge" variant="soft" />
+        <PBadge
+          :label="version.badge"
+          variant="soft"
+        />
 
         <span class="text-sm color-text-muted">{{ new Date(version.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }}</span>
       </template>
-    </UChangelogVersion>
-  </UChangelogVersions>
+    </PChangelogVersion>
+  </PChangelogVersions>
 </template>

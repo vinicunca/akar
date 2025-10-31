@@ -14,7 +14,7 @@ The ChangelogVersion component provides a flexible way to display an `<article>`
 
 ::code-preview
 
-::u-changelog-version
+::p-changelog-version
 ---
 title: 'Introducing Nuxt UI v3'
 description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
@@ -325,7 +325,7 @@ You can use the `body` slot to display custom content between the image and the 
 
 - the [MDC](https://github.com/nuxt-modules/mdc?tab=readme-ov-file#mdc) component from `@nuxtjs/mdc` to display some markdown.
 - the [ContentRenderer](https://content.nuxt.com/docs/pohon/components/content-renderer) component from `@nuxt/content` to render the content of the page or list.
-- or use the `:u-changelog-version` component directly in your content with markdown inside the `body` slot as Nuxt UI provides pre-styled prose components.
+- or use the `:p-changelog-version` component directly in your content with markdown inside the `body` slot as Nuxt UI provides pre-styled prose components.
 
 ::docs-component-example
 ---

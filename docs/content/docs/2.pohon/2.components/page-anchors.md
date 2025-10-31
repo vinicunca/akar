@@ -124,7 +124,7 @@ const links: PageAnchor[] = [{
 
         <PSeparator type="dashed" />
 
-        <UContentNavigation :navigation="navigation" />
+        <PContentNavigation :navigation="navigation" />
       </UPageAside>
     </template>
 

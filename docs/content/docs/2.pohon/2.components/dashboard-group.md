@@ -16,11 +16,11 @@ Use it in a layout or in your `app.vue`:
 
 ```vue [layouts/dashboard.vue]{2,6}
 <template>
-  <UDashboardGroup>
-    <UDashboardSidebar />
+  <PDashboardGroup>
+    <PDashboardSidebar />
 
     <slot />
-  </UDashboardGroup>
+  </PDashboardGroup>
 </template>
 ```
 

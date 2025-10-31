@@ -22,9 +22,9 @@ definePageMeta({
 </script>
 
 <template>
-  <UDashboardPanel id="inbox-1" resizable />
+  <PDashboardPanel id="inbox-1" resizable />
 
-  <UDashboardPanel id="inbox-2" class="hidden lg:flex" />
+  <PDashboardPanel id="inbox-2" class="hidden lg:flex" />
 </template>
 ```
 

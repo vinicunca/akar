@@ -22,13 +22,13 @@ definePageMeta({
 </script>
 
 <template>
-  <UDashboardPanel>
+  <PDashboardPanel>
     <template #header>
-      <UDashboardNavbar />
+      <PDashboardNavbar />
 
-      <UDashboardToolbar />
+      <PDashboardToolbar />
     </template>
-  </UDashboardPanel>
+  </PDashboardPanel>
 </template>
 ```
 

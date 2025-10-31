@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { SelectMenuItem } from 'pohon-ui'
+import type { PSelectMenuItem } from 'pohon-ui';
+import { ref } from 'vue';
 
 const items = ref([
   {
@@ -7,38 +8,43 @@ const items = ref([
     value: 'praburangki',
     avatar: {
       src: 'https://github.com/praburangki.png',
-      alt: 'praburangki'
-    }
+      alt: 'praburangki',
+    },
   },
   {
     label: 'wahyu-ivan',
     value: 'wahyu-ivan',
     avatar: {
       src: 'https://github.com/wahyu-ivan.png',
-      alt: 'wahyu-ivan'
-    }
+      alt: 'wahyu-ivan',
+    },
   },
   {
     label: 'GunawanAhmad',
     value: 'GunawanAhmad',
     avatar: {
       src: 'https://github.com/GunawanAhmad.png',
-      alt: 'GunawanAhmad'
-    }
+      alt: 'GunawanAhmad',
+    },
   },
   {
     label: 'sandros94',
     value: 'sandros94',
     avatar: {
       src: 'https://github.com/sandros94.png',
-      alt: 'sandros94'
-    }
-  }
-] satisfies SelectMenuItem[])
+      alt: 'sandros94',
+    },
+  },
+] satisfies Array<PSelectMenuItem>);
 
-const value = ref(items.value[0])
+const value = ref(items.value[0]);
 </script>
 
 <template>
-  <USelectMenu v-model="value" :avatar="value?.avatar" :items="items" class="w-48" />
+  <PSelectMenu
+    v-model="value"
+    :avatar="value?.avatar"
+    :items="items"
+    class="w-48"
+  />
 </template>

@@ -1,9 +1,11 @@
 <script setup lang="ts">
-const toast = useToast()
+import { useToast } from '#imports';
 
 const props = defineProps<{
-  description: string
-}>()
+  description: string;
+}>();
+
+const toast = useToast();
 
 function showToast() {
   toast.add({
@@ -15,13 +17,18 @@ function showToast() {
       color: 'neutral',
       variant: 'outline',
       onClick: (e) => {
-        e?.stopPropagation()
-      }
-    }]
-  })
+        e?.stopPropagation();
+      },
+    }],
+  });
 }
 </script>
 
 <template>
-  <PButton label="Show toast" color="neutral" variant="outline" @click="showToast" />
+  <PButton
+    label="Show toast"
+    color="neutral"
+    variant="outline"
+    @click="showToast"
+  />
 </template>

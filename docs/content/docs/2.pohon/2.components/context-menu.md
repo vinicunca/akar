@@ -97,7 +97,7 @@ Use the `items` prop as an array of objects with the following properties:
 - [`slot?: string`{lang="ts-type"}](#with-custom-slot)
 - `onSelect?: (e: Event) => void`{lang="ts-type"}
 - [`onUpdateChecked?: (checked: boolean) => void`{lang="ts-type"}](#with-checkbox-items)
-- `children?: ContextMenuItem[] | ContextMenuItem[][]`{lang="ts-type"}
+- `children?: PContextMenuItem[] | PContextMenuItem[][]`{lang="ts-type"}
 - `class?: any`{lang="ts-type"}
 - `pohon?: { item?: ClassNameValue, label?: ClassNameValue, separator?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelExternalIcon?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue }`{lang="ts-type"}
 
@@ -113,7 +113,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - ContextMenuItem[][]
+  - PContextMenuItem[][]
 props:
   items:
     - - label: Appearance
@@ -195,7 +195,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - ContextMenuItem[]
+  - PContextMenuItem[]
 props:
   size: xl
   items:
@@ -231,7 +231,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - ContextMenuItem[]
+  - PContextMenuItem[]
 props:
   disabled: true
   items:

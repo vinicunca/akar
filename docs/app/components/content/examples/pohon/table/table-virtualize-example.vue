@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { h, resolveComponent } from 'vue'
-import type { TableColumn } from 'pohon-ui'
+import type { PPTableColumn } from 'pohon-ui';
+import { h, ref, resolveComponent } from 'vue';
 
-const PBadge = resolveComponent('PBadge')
+const PBadge = resolveComponent('PBadge');
 
 type Payment = {
-  id: string
-  date: string
-  status: 'paid' | 'failed' | 'refunded'
-  email: string
-  amount: number
-}
+  id: string;
+  date: string;
+  status: 'paid' | 'failed' | 'refunded';
+  email: string;
+  amount: number;
+};
 
-const data = ref<Payment[]>(Array(1000).fill(0).map((_, i) => ({
+const data = ref<Array<Payment>>(Array(1000).fill(0).map((_, i) => ({
   id: `4600-${i}`,
   date: '2024-03-11T15:30:00',
   status: 'paid',
   email: 'james.anderson@example.com',
-  amount: 594
-})))
+  amount: 594,
+})));
 
-const columns: TableColumn<Payment>[] = [{
+const columns: Array<PPTableColumn<Payment>> = [{
   accessorKey: 'id',
   header: '#',
-  cell: ({ row }) => `#${row.getValue('id')}`
+  cell: ({ row }) => `#${row.getValue('id')}`,
 }, {
   accessorKey: 'date',
   header: 'Date',
@@ -33,9 +33,9 @@ const columns: TableColumn<Payment>[] = [{
       month: 'short',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false
-    })
-  }
+      hour12: false,
+    });
+  },
 }, {
   accessorKey: 'status',
   header: 'Status',
@@ -43,32 +43,32 @@ const columns: TableColumn<Payment>[] = [{
     const color = ({
       paid: 'success' as const,
       failed: 'error' as const,
-      refunded: 'neutral' as const
-    })[row.getValue('status') as string]
+      refunded: 'neutral' as const,
+    })[row.getValue('status') as string];
 
-    return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
-  }
+    return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'));
+  },
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: 'Email',
 }, {
   accessorKey: 'amount',
   header: () => h('div', { class: 'text-right' }, 'Amount'),
   cell: ({ row }) => {
-    const amount = Number.parseFloat(row.getValue('amount'))
+    const amount = Number.parseFloat(row.getValue('amount'));
 
     const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'EUR'
-    }).format(amount)
+      currency: 'EUR',
+    }).format(amount);
 
-    return h('div', { class: 'text-right font-medium' }, formatted)
-  }
-}]
+    return h('div', { class: 'text-right font-medium' }, formatted);
+  },
+}];
 </script>
 
 <template>
-  <UTable
+  <PTable
     virtualize
     :data="data"
     :columns="columns"

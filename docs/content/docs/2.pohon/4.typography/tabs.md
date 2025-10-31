@@ -80,7 +80,7 @@ Lorem velit voluptate ex reprehenderit ullamco et culpa.
 ::docs-pohon-theme{prose}
 ---
 extra:
-  - tabsItem
+  - PTabsItem
 ---
 ::
 

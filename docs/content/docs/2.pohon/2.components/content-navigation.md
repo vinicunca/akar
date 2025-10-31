@@ -240,7 +240,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
   <UPage>
     <template #left>
       <UPageAside>
-        <UContentNavigation :navigation="navigation" highlight />
+        <PContentNavigation :navigation="navigation" highlight />
       </UPageAside>
     </template>
 
@@ -263,7 +263,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
 <template>
   <PHeader>
     <template #body>
-      <UContentNavigation :navigation="navigation" highlight />
+      <PContentNavigation :navigation="navigation" highlight />
     </template>
   </PHeader>
 </template>

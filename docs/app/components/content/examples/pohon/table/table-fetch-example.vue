@@ -1,31 +1,33 @@
 <script setup lang="ts">
-import type { TableColumn } from 'pohon-ui'
+import type { PTableColumn } from 'pohon-ui';
+import { useFetch } from '#app';
+import { h, resolveComponent } from 'vue';
 
-const PAvatar = resolveComponent('PAvatar')
+const PAvatar = resolveComponent('PAvatar');
 
 type User = {
-  id: number
-  name: string
-  username: string
-  email: string
-  avatar: { src: string }
-  company: { name: string }
-}
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  avatar: { src: string };
+  company: { name: string };
+};
 
-const { data, status } = await useFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
+const { data, status } = await useFetch<Array<User>>('https://jsonplaceholder.typicode.com/users', {
   key: 'table-users',
   transform: (data) => {
-    return data?.map(user => ({
+    return data?.map((user) => ({
       ...user,
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, alt: `${user.name} avatar` }
-    })) || []
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, alt: `${user.name} avatar` },
+    })) || [];
   },
-  lazy: true
-})
+  lazy: true,
+});
 
-const columns: TableColumn<User>[] = [{
+const columns: Array<PTableColumn<User>> = [{
   accessorKey: 'id',
-  header: 'ID'
+  header: 'ID',
 }, {
   accessorKey: 'name',
   header: 'Name',
@@ -33,24 +35,29 @@ const columns: TableColumn<User>[] = [{
     return h('div', { class: 'flex items-center gap-3' }, [
       h(PAvatar, {
         ...row.original.avatar,
-        size: 'lg'
+        size: 'lg',
       }),
       h('div', undefined, [
         h('p', { class: 'font-medium text-highlighted' }, row.original.name),
-        h('p', { class: '' }, `@${row.original.username}`)
-      ])
-    ])
-  }
+        h('p', { class: '' }, `@${row.original.username}`),
+      ]),
+    ]);
+  },
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: 'Email',
 }, {
   accessorKey: 'company',
   header: 'Company',
-  cell: ({ row }) => row.original.company.name
-}]
+  cell: ({ row }) => row.original.company.name,
+}];
 </script>
 
 <template>
-  <UTable :data="data" :columns="columns" :loading="status === 'pending'" class="flex-1 h-80" />
+  <PTable
+    :data="data"
+    :columns="columns"
+    :loading="status === 'pending'"
+    class="flex-1 h-80"
+  />
 </template>

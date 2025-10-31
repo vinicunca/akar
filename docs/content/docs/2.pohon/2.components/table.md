@@ -669,7 +669,7 @@ const table = useTemplateRef('table')
 </script>
 
 <template>
-  <UTable ref="table" />
+  <PTable ref="table" />
 </template>
 ```
 

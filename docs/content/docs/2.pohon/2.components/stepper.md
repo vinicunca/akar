@@ -256,7 +256,7 @@ const stepper = useTemplateRef('stepper')
 </script>
 
 <template>
-  <UStepper ref="stepper" />
+  <PStepper ref="stepper" />
 </template>
 ```
 

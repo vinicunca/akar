@@ -14,7 +14,7 @@ The PageCTA component provides a flexible way to display a call to action in you
 
 ::code-preview
 
-::u-page-c-t-a
+::p-page-c-t-a
 ---
 title: 'Trusted and supported by our amazing community'
 description: 'Preview the latest Tailwind CSS v4 and get started with Nuxt UI.'

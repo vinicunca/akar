@@ -16,11 +16,11 @@ Use it inside the default slot of the [DashboardGroup](/docs/pohon/components/da
 
 ```vue [layouts/dashboard.vue]{3}
 <template>
-  <UDashboardGroup>
-    <UDashboardSidebar />
+  <PDashboardGroup>
+    <PDashboardSidebar />
 
     <slot />
-  </UDashboardGroup>
+  </PDashboardGroup>
 </template>
 ```
 

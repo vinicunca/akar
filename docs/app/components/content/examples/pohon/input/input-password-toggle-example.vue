@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const show = ref(false)
-const password = ref('')
+import { ref } from 'vue';
+
+const show = ref(false);
+const password = ref('');
 </script>
 
 <template>
@@ -28,6 +30,6 @@ const password = ref('')
 <style>
 /* Hide the password reveal button in Edge */
 ::-ms-reveal {
-    display: none;
+  display: none;
 }
 </style>

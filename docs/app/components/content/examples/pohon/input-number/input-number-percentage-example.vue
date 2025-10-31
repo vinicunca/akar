@@ -1,13 +1,15 @@
 <script setup lang="ts">
-const value = ref(0.05)
+import { ref } from 'vue';
+
+const value = ref(0.05);
 </script>
 
 <template>
-  <UInputNumber
+  <PInputNumber
     v-model="value"
     :step="0.01"
     :format-options="{
-      style: 'percent'
+      style: 'percent',
     }"
   />
 </template>

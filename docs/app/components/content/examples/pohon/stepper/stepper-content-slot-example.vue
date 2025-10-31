@@ -1,28 +1,34 @@
 <script setup lang="ts">
-import type { StepperItem } from 'pohon-ui'
+import type { PStepperItem } from 'pohon-ui';
 
-const items: StepperItem[] = [
+const items: Array<PStepperItem> = [
   {
     title: 'Address',
     description: 'Add your address here',
-    icon: 'i-lucide-house'
-  }, {
+    icon: 'i-lucide-house',
+  },
+  {
     title: 'Shipping',
     description: 'Set your preferred shipping method',
-    icon: 'i-lucide-truck'
-  }, {
+    icon: 'i-lucide-truck',
+  },
+  {
     title: 'Checkout',
-    description: 'Confirm your order'
-  }
-]
+    description: 'Confirm your order',
+  },
+];
 </script>
 
 <template>
-  <UStepper ref="stepper" :items="items" class="w-full">
+  <PStepper
+    ref="stepper"
+    :items="items"
+    class="w-full"
+  >
     <template #content="{ item }">
       <CorePlaceholder class="aspect-video">
         This is the {{ item?.title }} step.
       </CorePlaceholder>
     </template>
-  </UStepper>
+  </PStepper>
 </template>

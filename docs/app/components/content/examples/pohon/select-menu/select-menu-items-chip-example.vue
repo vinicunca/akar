@@ -1,44 +1,49 @@
 <script setup lang="ts">
-import type { SelectMenuItem, ChipProps } from 'pohon-ui'
+import type { PChipProps, PSelectMenuItem } from 'pohon-ui';
+import { ref } from 'vue';
 
 const items = ref([
   {
     label: 'bug',
     value: 'bug',
     chip: {
-      color: 'error'
-    }
+      color: 'error',
+    },
   },
   {
     label: 'feature',
     value: 'feature',
     chip: {
-      color: 'success'
-    }
+      color: 'success',
+    },
   },
   {
     label: 'enhancement',
     value: 'enhancement',
     chip: {
-      color: 'info'
-    }
-  }
-] satisfies SelectMenuItem[])
+      color: 'info',
+    },
+  },
+] satisfies Array<PSelectMenuItem>);
 
-const value = ref(items.value[0])
+const value = ref(items.value[0]);
 </script>
 
 <template>
-  <USelectMenu v-model="value" :items="items" class="w-48">
-    <template #leading="{ modelValue, ui }">
+  <PSelectMenu
+    v-model="value"
+    :items="items"
+    class="w-48"
+  >
+    <template #leading="{ modelValue, pohon }">
       <PChip
         v-if="modelValue"
         v-bind="modelValue.chip"
         inset
         standalone
-        :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
-        :class="ui.itemLeadingChip()"
+        :size="(pohon.itemLeadingChipSize() as PChipProps['size'])"
+        :class="pohon.itemLeadingChip()"
       />
     </template>
-  </USelectMenu>
+  </PSelectMenu>
 </template>

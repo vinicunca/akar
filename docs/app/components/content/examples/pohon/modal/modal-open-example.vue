@@ -1,17 +1,28 @@
 <script setup lang="ts">
-const open = ref(false)
+import { defineShortcuts } from '#imports';
+import { ref } from 'vue';
+
+const open = ref(false);
 
 defineShortcuts({
-  o: () => open.value = !open.value
-})
+  config: {
+    o: () => {
+      open.value = !open.value;
+    },
+  },
+});
 </script>
 
 <template>
-  <UModal v-model:open="open">
-    <PButton label="Open" color="neutral" variant="subtle" />
+  <PDialog v-model:open="open">
+    <PButton
+      label="Open"
+      color="neutral"
+      variant="subtle"
+    />
 
     <template #content>
-      <CorePlaceholder class="h-48 m-4" />
+      <CorePlaceholder class="m-4 h-48" />
     </template>
-  </UModal>
+  </PDialog>
 </template>

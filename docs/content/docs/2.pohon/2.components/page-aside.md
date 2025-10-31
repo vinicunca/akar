@@ -49,7 +49,7 @@ const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
   <UPage>
     <template #left>
       <UPageAside>
-        <UContentNavigation :navigation="navigation" />
+        <PContentNavigation :navigation="navigation" />
       </UPageAside>
     </template>
 

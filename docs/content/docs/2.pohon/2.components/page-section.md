@@ -14,7 +14,7 @@ The PageSection component wraps your content in a [Container](/docs/pohon/compon
 
 ::code-preview
 
-::u-page-section
+::p-page-section
 ---
 title: 'Beautiful Vue UI components'
 description: 'Nuxt UI provides a comprehensive suite of components and utilities to help you build beautiful and accessible web applications with Vue and Nuxt.'

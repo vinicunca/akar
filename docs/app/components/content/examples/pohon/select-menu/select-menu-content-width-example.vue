@@ -1,20 +1,22 @@
 <script setup lang="ts">
+import { useFetch } from '#app';
+
 const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users-email',
-  transform: (data: { id: number, name: string, email: string }[]) => {
-    return data?.map(user => ({
+  transform: (data: Array<{ id: number; name: string; email: string }>) => {
+    return data?.map((user) => ({
       label: user.name,
       email: user.email,
       value: String(user.id),
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
-    }))
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` },
+    }));
   },
-  lazy: true
-})
+  lazy: true,
+});
 </script>
 
 <template>
-  <USelectMenu
+  <PSelectMenu
     :items="users"
     icon="i-lucide-user"
     placeholder="Select user"
@@ -28,5 +30,5 @@ const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/use
         {{ item.email }}
       </span>
     </template>
-  </USelectMenu>
+  </PSelectMenu>
 </template>

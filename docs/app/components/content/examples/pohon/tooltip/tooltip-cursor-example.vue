@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const open = ref(false)
-const anchor = ref({ x: 0, y: 0 })
+import { computed, ref } from 'vue';
+
+const open = ref(false);
+const anchor = ref({ x: 0, y: 0 });
 
 const reference = computed(() => ({
   getBoundingClientRect: () =>
@@ -11,9 +13,9 @@ const reference = computed(() => ({
       right: anchor.value.x,
       top: anchor.value.y,
       bottom: anchor.value.y,
-      ...anchor.value
-    } as DOMRect)
-}))
+      ...anchor.value,
+    } as DOMRect),
+}));
 </script>
 
 <template>
@@ -23,7 +25,7 @@ const reference = computed(() => ({
     :content="{ side: 'top', sideOffset: 16, updatePositionStrategy: 'always' }"
   >
     <div
-      class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"
+      class="border-accented text-sm border rounded-md border-dashed flex w-72 aspect-video items-center justify-center"
       @pointerenter="open = true"
       @pointerleave="open = false"
       @pointermove="(ev) => {

@@ -1,15 +1,17 @@
 <script setup lang="ts">
-const value = ref(1500)
+import { ref } from 'vue';
+
+const value = ref(1500);
 </script>
 
 <template>
-  <UInputNumber
+  <PInputNumber
     v-model="value"
     :format-options="{
       style: 'currency',
       currency: 'EUR',
       currencyDisplay: 'code',
-      currencySign: 'accounting'
+      currencySign: 'accounting',
     }"
   />
 </template>

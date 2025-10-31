@@ -1,35 +1,48 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { PNavigationMenuItem } from 'pohon-ui';
+import { defineShortcuts } from '#imports';
+import { ref } from 'vue';
 
-const items: NavigationMenuItem[] = [{
+const items: Array<PNavigationMenuItem> = [{
   label: 'Home',
   icon: 'i-lucide-house',
-  active: true
+  active: true,
 }, {
   label: 'Inbox',
-  icon: 'i-lucide-inbox'
+  icon: 'i-lucide-inbox',
 }, {
   label: 'Contacts',
-  icon: 'i-lucide-users'
-}]
+  icon: 'i-lucide-users',
+}];
 
-const open = ref(true)
+const open = ref(true);
 
 defineShortcuts({
-  o: () => open.value = !open.value
-})
+  config: {
+    o: () => {
+      open.value = !open.value;
+    },
+  },
+});
 </script>
 
 <template>
-  <UDashboardSidebar v-model:open="open">
+  <PDashboardSidebar v-model:open="open">
     <template #header="{ collapsed }">
-      <Logo v-if="!collapsed" class="h-5 w-auto" />
-      <PIcon v-else name="i-simple-icons-nuxtdotjs" class="size-5 text-primary mx-auto" />
+      <Logo
+        v-if="!collapsed"
+        class="h-5 w-auto"
+      />
+      <PIcon
+        v-else
+        name="i-simple-icons-nuxtdotjs"
+        class="text-primary mx-auto size-5"
+      />
     </template>
 
     <PNavigationMenu
       :items="items"
       orientation="vertical"
     />
-  </UDashboardSidebar>
+  </PDashboardSidebar>
 </template>

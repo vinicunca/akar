@@ -14,7 +14,7 @@ The PricingPlan component provides a flexible way to display a pricing plan with
 
 ::code-preview
 
-::u-pricing-plan
+::p-pricing-plan
 ---
 title: 'Solo'
 description: 'For bootstrappers and indie hackers.'

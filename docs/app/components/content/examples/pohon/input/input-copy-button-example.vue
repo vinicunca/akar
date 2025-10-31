@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { useClipboard } from '@vueuse/core'
+import { useClipboard } from '@vueuse/core';
+import { ref } from 'vue';
 
-const value = ref('npx nuxt module add ui')
+const value = ref('npx nuxt module add ui');
 
-const { copy, copied } = useClipboard()
+const { copy, copied } = useClipboard();
 </script>
 
 <template>
@@ -11,8 +12,14 @@ const { copy, copied } = useClipboard()
     v-model="value"
     :pohon="{ trailing: 'pr-0.5' }"
   >
-    <template v-if="value?.length" #trailing>
-      <PTooltip text="Copy to clipboard" :content="{ side: 'right' }">
+    <template
+      v-if="value?.length"
+      #trailing
+    >
+      <PTooltip
+        text="Copy to clipboard"
+        :content="{ side: 'right' }"
+      >
         <PButton
           :color="copied ? 'success' : 'neutral'"
           variant="link"

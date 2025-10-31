@@ -52,7 +52,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - BreadcrumbItem[]
+  - PBreadcrumbItem[]
 props:
   items:
     - label: 'Docs'
@@ -82,7 +82,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - BreadcrumbItem[]
+  - PBreadcrumbItem[]
 props:
   separatorIcon: 'i-lucide-arrow-right'
   items:

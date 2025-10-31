@@ -1,18 +1,28 @@
 <script setup lang="ts">
 defineProps<{
-  count: number
-}>()
+  count: number;
+}>();
 
-const emit = defineEmits<{ close: [boolean] }>()
+const emit = defineEmits<{ close: [boolean] }>();
 </script>
 
 <template>
-  <UModal :close="{ onClick: () => emit('close', false) }" :title="`This modal was opened programmatically ${count} times`">
+  <PDialog
+    :close="{ onClick: () => emit('close', false) }"
+    :title="`This modal was opened programmatically ${count} times`"
+  >
     <template #footer>
       <div class="flex gap-2">
-        <PButton color="neutral" label="Dismiss" @click="emit('close', false)" />
-        <PButton label="Success" @click="emit('close', true)" />
+        <PButton
+          color="neutral"
+          label="Dismiss"
+          @click="emit('close', false)"
+        />
+        <PButton
+          label="Success"
+          @click="emit('close', true)"
+        />
       </div>
     </template>
-  </UModal>
+  </PDialog>
 </template>

@@ -1,38 +1,44 @@
 <script setup lang="ts">
-import type { StepperItem } from 'pohon-ui'
-import { onMounted, ref } from 'vue'
+import type { PStepperItem } from 'pohon-ui';
+import { onMounted, ref } from 'vue';
 
-const items: StepperItem[] = [
+const items: Array<PStepperItem> = [
   {
     title: 'Address',
     description: 'Add your address here',
-    icon: 'i-lucide-house'
-  }, {
+    icon: 'i-lucide-house',
+  },
+  {
     title: 'Shipping',
     description: 'Set your preferred shipping method',
-    icon: 'i-lucide-truck'
-  }, {
+    icon: 'i-lucide-truck',
+  },
+  {
     title: 'Checkout',
-    description: 'Confirm your order'
-  }
-]
+    description: 'Confirm your order',
+  },
+];
 
-const active = ref(0)
+const active = ref(0);
 
 // Note: This is for demonstration purposes only. Don't do this at home.
 onMounted(() => {
   setInterval(() => {
-    active.value = (active.value + 1) % items.length
-  }, 2000)
-})
+    active.value = (active.value + 1) % items.length;
+  }, 2000);
+});
 </script>
 
 <template>
-  <UStepper v-model="active" :items="items" class="w-full">
+  <PStepper
+    v-model="active"
+    :items="items"
+    class="w-full"
+  >
     <template #content="{ item }">
       <CorePlaceholder class="aspect-video">
         This is the {{ item?.title }} step.
       </CorePlaceholder>
     </template>
-  </UStepper>
+  </PStepper>
 </template>

@@ -26,7 +26,7 @@ props:
 ::
 
 ::note
-Switch between light and dark mode to see the different images: :u-color-mode-select{size="sm"}
+Switch between light and dark mode to see the different images: :p-color-mode-select{size="sm"}
 ::
 
 ## API

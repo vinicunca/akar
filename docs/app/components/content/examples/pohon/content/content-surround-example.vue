@@ -1,13 +1,16 @@
 <script setup lang="ts">
-const route = useRoute()
+import { useAsyncData, useRoute } from '#app';
+import { queryCollectionItemSurroundings } from '#imports';
+
+const route = useRoute();
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
   return queryCollectionItemSurroundings('docs', route.path, {
-    fields: ['description']
-  })
-})
+    fields: ['description'],
+  });
+});
 </script>
 
 <template>
-  <UContentSurround :surround="(surround as any)" />
+  <PContentSurround :surround="(surround as any)" />
 </template>

@@ -14,13 +14,13 @@ The PageHero component wraps your content in a [Container](/docs/pohon/component
 
 ::code-preview
 
-:::u-page-hero
+:::p-page-hero
 ---
 title: 'Ultimate Vue UI library'
 description: 'A Nuxt/Vue-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.'
 ---
 
-::::u-page-card{variant="subtle" class="rounded-lg"}
+::::p-page-card{variant="subtle" class="rounded-lg"}
 
 #default{unwrap="p"}
 ![App screenshot](/blocks/image4.png){width="4804" height="3000" class="rounded-sm shadow-2xl ring ring-default"}

@@ -13,7 +13,7 @@ navigation.badge: Soon
 
 ::code-preview
 
-:::u-empty
+:::p-empty
 ---
 icon: i-lucide-file
 title: No projects found

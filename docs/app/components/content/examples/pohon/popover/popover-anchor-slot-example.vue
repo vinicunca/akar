@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-const open = ref(false)
+import { ref } from 'vue';
+
+const open = ref(false);
 </script>
 
 <template>
@@ -9,7 +11,11 @@ const open = ref(false)
     :pohon="{ content: 'w-(--akar-popper-anchor-width) p-4' }"
   >
     <template #anchor>
-      <PInput placeholder="Focus to open" @focus="open = true" @blur="open = false" />
+      <PInput
+        placeholder="Focus to open"
+        @focus="open = true"
+        @blur="open = false"
+      />
     </template>
 
     <template #content>

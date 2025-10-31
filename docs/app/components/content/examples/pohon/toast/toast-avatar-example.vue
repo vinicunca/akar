@@ -1,21 +1,27 @@
 <script setup lang="ts">
-import type { AvatarProps } from 'pohon-ui'
+import type { PAvatarProps } from 'pohon-ui';
+import { useToast } from '#imports';
 
 const props = defineProps<{
-  avatar: AvatarProps
-}>()
+  avatar: PAvatarProps;
+}>();
 
-const toast = useToast()
+const toast = useToast();
 
 function showToast() {
   toast.add({
     title: 'User invited',
     description: 'praburangki was invited to the team.',
-    avatar: props.avatar
-  })
+    avatar: props.avatar,
+  });
 }
 </script>
 
 <template>
-  <PButton label="Invite user" color="neutral" variant="outline" @click="showToast" />
+  <PButton
+    label="Invite user"
+    color="neutral"
+    variant="outline"
+    @click="showToast"
+  />
 </template>

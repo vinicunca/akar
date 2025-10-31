@@ -14,13 +14,13 @@ The ChangelogVersions component provides a flexible layout to display a list of 
 
 ```vue {2,8}
 <template>
-  <UChangelogVersions>
-    <UChangelogVersion
+  <PChangelogVersions>
+    <PChangelogVersion
       v-for="(version, index) in versions"
       :key="index"
       v-bind="post"
     />
-  </UChangelogVersions>
+  </PChangelogVersions>
 </template>
 ```
 
@@ -170,14 +170,14 @@ const { data: versions } = await useAsyncData('versions', () => queryCollection(
     <UPageHero title="Changelog" />
 
     <UPageBody>
-      <UChangelogVersions>
-        <UChangelogVersion
+      <PChangelogVersions>
+        <PChangelogVersion
           v-for="(version, index) in versions"
           :key="index"
           v-bind="version"
           :to="version.path"
         />
-      </UChangelogVersions>
+      </PChangelogVersions>
     </UPageBody>
   </UPage>
 </template>
@@ -221,11 +221,11 @@ You can use all the slots of the [`ChangelogVersion`](/docs/pohon/components/cha
 
 ```vue{3-5}
 <template>
-  <UChangelogVersions :versions="versions">
+  <PChangelogVersions :versions="versions">
     <template #body="{ version }">
       <MDC v-if="version.content" :value="version.content" />
     </template>
-  </UChangelogVersions>
+  </PChangelogVersions>
 </template>
 ```
 ::

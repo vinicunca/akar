@@ -1,13 +1,15 @@
 <script setup lang="ts">
-const value = ref(5)
+import { ref } from 'vue';
+
+const value = ref(5);
 </script>
 
 <template>
-  <UInputNumber
+  <PInputNumber
     v-model="value"
     :format-options="{
       signDisplay: 'exceptZero',
-      minimumFractionDigits: 1
+      minimumFractionDigits: 1,
     }"
   />
 </template>

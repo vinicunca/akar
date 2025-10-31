@@ -1,6 +1,11 @@
 <template>
-  <div class="relative w-full h-[400px] bg-muted overflow-hidden">
-    <UMarquee reverse orientation="vertical" :overlay="false" :pohon="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+  <div class="bg-muted h-[400px] w-full relative overflow-hidden">
+    <PMarquee
+      reverse
+      orientation="vertical"
+      :overlay="false"
+      :pohon="{ root: '[--duration:40s] absolute w-[460px] -left-[100px] -top-[300px] h-[940px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }"
+    >
       <img
         v-for="i in 4"
         :key="i"
@@ -8,10 +13,14 @@
         width="460"
         height="258"
         :alt="`Nuxt UI Screenshot ${i}`"
-        class="aspect-video border border-default rounded-lg bg-white"
+        class="border-default border rounded-lg bg-white aspect-video"
       >
-    </UMarquee>
-    <UMarquee orientation="vertical" :overlay="false" :pohon="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+    </PMarquee>
+    <PMarquee
+      orientation="vertical"
+      :overlay="false"
+      :pohon="{ root: '[--duration:40s] absolute w-[460px] -top-[400px] left-[480px] h-[1160px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }"
+    >
       <img
         v-for="i in [5, 6, 7, 8]"
         :key="i"
@@ -19,10 +28,15 @@
         width="460"
         height="258"
         :alt="`Nuxt UI Screenshot ${i}`"
-        class="aspect-video border border-default rounded-lg bg-white"
+        class="border-default border rounded-lg bg-white aspect-video"
       >
-    </UMarquee>
-    <UMarquee reverse orientation="vertical" :overlay="false" :pohon="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }">
+    </PMarquee>
+    <PMarquee
+      reverse
+      orientation="vertical"
+      :overlay="false"
+      :pohon="{ root: 'hidden md:flex [--duration:40s] absolute w-[460px] -top-[300px] left-[1020px] h-[1060px] transform-3d rotate-x-55 rotate-y-0 rotate-z-30' }"
+    >
       <img
         v-for="i in [9, 10, 11, 12]"
         :key="i"
@@ -30,8 +44,8 @@
         width="460"
         height="258"
         :alt="`Nuxt UI Screenshot ${i}`"
-        class="aspect-video border border-default rounded-lg bg-white"
+        class="border-default border rounded-lg bg-white aspect-video"
       >
-    </UMarquee>
+    </PMarquee>
   </div>
 </template>

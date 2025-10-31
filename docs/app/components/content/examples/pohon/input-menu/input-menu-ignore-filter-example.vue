@@ -1,25 +1,27 @@
 <script setup lang="ts">
-import { refDebounced } from '@vueuse/core'
-import type { AvatarProps } from 'pohon-ui'
+import type { PAvatarProps } from 'pohon-ui';
+import { useFetch } from '#app';
+import { refDebounced } from '@vueuse/core';
+import { ref } from 'vue';
 
-const searchTerm = ref('')
-const searchTermDebounced = refDebounced(searchTerm, 200)
+const searchTerm = ref('');
+const searchTermDebounced = refDebounced(searchTerm, 200);
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   params: { q: searchTermDebounced },
-  transform: (data: { id: number, name: string }[]) => {
-    return data?.map(user => ({
+  transform: (data: Array<{ id: number; name: string }>) => {
+    return data?.map((user) => ({
       label: user.name,
       value: String(user.id),
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
-    }))
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` },
+    }));
   },
-  lazy: true
-})
+  lazy: true,
+});
 </script>
 
 <template>
-  <UInputMenu
+  <PInputMenu
     v-model:search-term="searchTerm"
     :items="users"
     :loading="status === 'pending'"
@@ -27,13 +29,13 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     icon="i-lucide-user"
     placeholder="Select user"
   >
-    <template #leading="{ modelValue, ui }">
+    <template #leading="{ modelValue, pohon }">
       <PAvatar
         v-if="modelValue"
         v-bind="modelValue.avatar"
-        :size="(ui.leadingAvatarSize() as AvatarProps['size'])"
-        :class="ui.leadingAvatar()"
+        :size="(pohon.leadingAvatarSize() as PAvatarProps['size'])"
+        :class="pohon.leadingAvatar()"
       />
     </template>
-  </UInputMenu>
+  </PInputMenu>
 </template>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const value = ref('Click to clear')
+import { ref } from 'vue';
+
+const value = ref('Click to clear');
 </script>
 
 <template>
@@ -8,7 +10,10 @@ const value = ref('Click to clear')
     placeholder="Type something..."
     :pohon="{ trailing: 'pe-1' }"
   >
-    <template v-if="value?.length" #trailing>
+    <template
+      v-if="value?.length"
+      #trailing
+    >
       <PButton
         color="neutral"
         variant="link"

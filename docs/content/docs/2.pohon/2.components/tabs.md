@@ -47,7 +47,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TabsItem[]
+  - PTabsItem[]
 props:
   items:
     - label: Account
@@ -73,7 +73,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TabsItem[]
+  - PTabsItem[]
 props:
   content: false
   items:
@@ -100,7 +100,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TabsItem[]
+  - PTabsItem[]
 props:
   unmountOnHide: false
   items:
@@ -131,7 +131,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TabsItem[]
+  - PTabsItem[]
 props:
   color: neutral
   content: false
@@ -155,7 +155,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TabsItem[]
+  - PTabsItem[]
 props:
   color: neutral
   variant: link
@@ -180,7 +180,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TabsItem[]
+  - PTabsItem[]
 props:
   size: md
   variant: pill
@@ -205,7 +205,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - TabsItem[]
+  - PTabsItem[]
 props:
   orientation: vertical
   variant: pill

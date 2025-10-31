@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useOverlay, useToast } from '#imports';
+import { ref } from 'vue';
 import SlideoverExample from './slideover-example.vue';
 
 const count = ref(0);

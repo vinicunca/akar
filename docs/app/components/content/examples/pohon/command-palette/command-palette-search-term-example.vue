@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 const users = [
   {
     label: 'praburangki',
@@ -6,8 +8,8 @@ const users = [
     to: 'https://github.com/praburangki',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/praburangki.png'
-    }
+      src: 'https://github.com/praburangki.png',
+    },
   },
   {
     label: 'Wahyu Ivan',
@@ -15,8 +17,8 @@ const users = [
     to: 'https://github.com/wahyu-ivan',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/wahyu-ivan.png'
-    }
+      src: 'https://github.com/wahyu-ivan.png',
+    },
   },
   {
     label: 'Sébastien Chopin',
@@ -24,8 +26,8 @@ const users = [
     to: 'https://github.com/atinux',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/atinux.png'
-    }
+      src: 'https://github.com/atinux.png',
+    },
   },
   {
     label: 'Hugo Richard',
@@ -33,8 +35,8 @@ const users = [
     to: 'https://github.com/HugoRCD',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/HugoRCD.png'
-    }
+      src: 'https://github.com/HugoRCD.png',
+    },
   },
   {
     label: 'Sandro Circi',
@@ -42,8 +44,8 @@ const users = [
     to: 'https://github.com/sandros94',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/sandros94.png'
-    }
+      src: 'https://github.com/sandros94.png',
+    },
   },
   {
     label: 'Daniel Roe',
@@ -51,8 +53,8 @@ const users = [
     to: 'https://github.com/danielroe',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/danielroe.png'
-    }
+      src: 'https://github.com/danielroe.png',
+    },
   },
   {
     label: 'Jakub Michálek',
@@ -60,8 +62,8 @@ const users = [
     to: 'https://github.com/J-Michalek',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/J-Michalek.png'
-    }
+      src: 'https://github.com/J-Michalek.png',
+    },
   },
   {
     label: 'Eugen Istoc',
@@ -69,20 +71,20 @@ const users = [
     to: 'https://github.com/genu',
     target: '_blank',
     avatar: {
-      src: 'https://github.com/genu.png'
-    }
-  }
-]
+      src: 'https://github.com/genu.png',
+    },
+  },
+];
 
-const searchTerm = ref('B')
+const searchTerm = ref('B');
 
 function onSelect() {
-  searchTerm.value = ''
+  searchTerm.value = '';
 }
 </script>
 
 <template>
-  <UCommandPalette
+  <PCommandPalette
     v-model:search-term="searchTerm"
     :groups="[{ id: 'users', items: users }]"
     class="flex-1"

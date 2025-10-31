@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { PDropdownMenuItem } from 'pohon-ui';
+import type { PPDropdownMenuItem } from 'pohon-ui';
 
-const items: Array<PDropdownMenuItem> = [
+const items: Array<PPDropdownMenuItem> = [
   {
     label: 'Team',
     icon: 'i-lucide-users',

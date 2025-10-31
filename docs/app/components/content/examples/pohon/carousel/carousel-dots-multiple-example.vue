@@ -5,12 +5,22 @@ const items = [
   'https://picsum.photos/640/640?random=3',
   'https://picsum.photos/640/640?random=4',
   'https://picsum.photos/640/640?random=5',
-  'https://picsum.photos/640/640?random=6'
-]
+  'https://picsum.photos/640/640?random=6',
+];
 </script>
 
 <template>
-  <UCarousel v-slot="{ item }" dots :items="items" :pohon="{ item: 'basis-1/3' }">
-    <img :src="item" width="320" height="320" class="rounded-lg">
-  </UCarousel>
+  <PCarousel
+    v-slot="{ item }"
+    dots
+    :items="items"
+    :pohon="{ item: 'basis-1/3' }"
+  >
+    <img
+      :src="item"
+      width="320"
+      height="320"
+      class="rounded-lg"
+    >
+  </PCarousel>
 </template>

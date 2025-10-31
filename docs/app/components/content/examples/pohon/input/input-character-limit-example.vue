@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const value = ref('')
-const maxLength = 15
+import { ref } from 'vue';
+
+const value = ref('');
+const maxLength = 15;
 </script>
 
 <template>

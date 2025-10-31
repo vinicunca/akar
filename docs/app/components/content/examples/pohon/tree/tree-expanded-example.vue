@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { TreeItem } from 'pohon-ui'
+import type { PTreeItem } from 'pohon-ui';
+import { ref } from 'vue';
 
 const items = [
   {
@@ -11,26 +12,30 @@ const items = [
         id: 'app/composables',
         children: [
           { label: 'useAuth.ts', icon: 'i-vscode-icons-file-type-typescript' },
-          { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' }
-        ]
+          { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' },
+        ],
       },
       {
         label: 'components/',
         id: 'app/components',
         children: [
           { label: 'Card.vue', icon: 'i-vscode-icons-file-type-vue' },
-          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' }
-        ]
-      }
-    ]
+          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' },
+        ],
+      },
+    ],
   },
   { label: 'app.vue', id: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
-  { label: 'nuxt.config.ts', id: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
-] satisfies TreeItem[]
+  { label: 'nuxt.config.ts', id: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' },
+] satisfies Array<PTreeItem>;
 
-const expanded = ref(['app', 'app/composables'])
+const expanded = ref(['app', 'app/composables']);
 </script>
 
 <template>
-  <UTree v-model:expanded="expanded" :items="items" :get-key="i => i.id" />
+  <PTree
+    v-model:expanded="expanded"
+    :items="items"
+    :get-key="i => i.id"
+  />
 </template>

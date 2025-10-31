@@ -281,7 +281,7 @@ const carousel = useTemplateRef('carousel')
 </script>
 
 <template>
-  <UCarousel ref="carousel" />
+  <PCarousel ref="carousel" />
 </template>
 ```
 

@@ -6,23 +6,23 @@ const groups = [
       {
         label: 'Profile',
         icon: 'i-lucide-user',
-        kbds: ['meta', 'P']
+        kbds: ['meta', 'P'],
       },
       {
         label: 'Billing',
         icon: 'i-lucide-credit-card',
         kbds: ['meta', 'B'],
-        slot: 'billing' as const
+        slot: 'billing' as const,
       },
       {
         label: 'Notifications',
-        icon: 'i-lucide-bell'
+        icon: 'i-lucide-bell',
       },
       {
         label: 'Security',
-        icon: 'i-lucide-lock'
-      }
-    ]
+        icon: 'i-lucide-lock',
+      },
+    ],
   },
   {
     id: 'users',
@@ -33,67 +33,76 @@ const groups = [
         label: 'praburangki',
         suffix: 'praburangki',
         to: 'https://github.com/praburangki',
-        target: '_blank'
+        target: '_blank',
       },
       {
         label: 'Wahyu Ivan',
         suffix: 'wahyu-ivan',
         to: 'https://github.com/wahyu-ivan',
-        target: '_blank'
+        target: '_blank',
       },
       {
         label: 'Sébastien Chopin',
         suffix: 'atinux',
         to: 'https://github.com/atinux',
-        target: '_blank'
+        target: '_blank',
       },
       {
         label: 'Hugo Richard',
         suffix: 'HugoRCD',
         to: 'https://github.com/HugoRCD',
-        target: '_blank'
+        target: '_blank',
       },
       {
         label: 'Sandro Circi',
         suffix: 'sandros94',
         to: 'https://github.com/sandros94',
-        target: '_blank'
+        target: '_blank',
       },
       {
         label: 'Daniel Roe',
         suffix: 'danielroe',
         to: 'https://github.com/danielroe',
-        target: '_blank'
+        target: '_blank',
       },
       {
         label: 'Jakub Michálek',
         suffix: 'J-Michalek',
         to: 'https://github.com/J-Michalek',
-        target: '_blank'
+        target: '_blank',
       },
       {
         label: 'Eugen Istoc',
         suffix: 'genu',
         to: 'https://github.com/genu',
-        target: '_blank'
-      }
-    ]
-  }
-]
+        target: '_blank',
+      },
+    ],
+  },
+];
 </script>
 
 <template>
-  <UCommandPalette :groups="groups" class="flex-1 h-80">
+  <PCommandPalette
+    :groups="groups"
+    class="flex-1 h-80"
+  >
     <template #users-leading="{ item }">
-      <PAvatar :src="`https://github.com/${item.suffix}.png`" size="2xs" />
+      <PAvatar
+        :src="`https://github.com/${item.suffix}.png`"
+        size="2xs"
+      />
     </template>
 
     <template #billing-label="{ item }">
-      <span class="font-medium text-primary">{{ item.label }}</span>
+      <span class="text-primary font-medium">{{ item.label }}</span>
 
-      <PBadge variant="subtle" size="sm">
+      <PBadge
+        variant="subtle"
+        size="sm"
+      >
         50% off
       </PBadge>
     </template>
-  </UCommandPalette>
+  </PCommandPalette>
 </template>

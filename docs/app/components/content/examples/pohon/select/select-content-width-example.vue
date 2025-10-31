@@ -1,22 +1,25 @@
 <script setup lang="ts">
-const value = ref<string>()
+import { useFetch } from '#app';
+import { ref } from 'vue';
+
+const value = ref<string>();
 
 const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users-email',
-  transform: (data: { id: number, name: string, email: string }[]) => {
-    return data?.map(user => ({
+  transform: (data: Array<{ id: number; name: string; email: string }>) => {
+    return data?.map((user) => ({
       label: user.name,
       email: user.email,
       value: String(user.id),
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` }
-    }))
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}` },
+    }));
   },
-  lazy: true
-})
+  lazy: true,
+});
 </script>
 
 <template>
-  <USelect
+  <PSelect
     v-model="value"
     :items="users"
     placeholder="Select user"
@@ -31,5 +34,5 @@ const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/use
         {{ item.email }}
       </span>
     </template>
-  </USelect>
+  </PSelect>
 </template>

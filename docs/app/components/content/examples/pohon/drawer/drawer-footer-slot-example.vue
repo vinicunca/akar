@@ -1,18 +1,40 @@
 <script setup lang="ts">
-const open = ref(false)
+import { ref } from 'vue';
+
+const open = ref(false);
 </script>
 
 <template>
-  <UDrawer v-model:open="open" title="Drawer with footer" description="This is useful when you want a form in a Drawer." :pohon="{ container: 'max-w-xl mx-auto' }">
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+  <PDrawer
+    v-model:open="open"
+    title="Drawer with footer"
+    description="This is useful when you want a form in a Drawer."
+    :pohon="{ container: 'max-w-xl mx-auto' }"
+  >
+    <PButton
+      label="Open"
+      color="neutral"
+      variant="subtle"
+      trailing-icon="i-lucide-chevron-up"
+    />
 
     <template #body>
       <CorePlaceholder class="h-48" />
     </template>
 
     <template #footer>
-      <PButton label="Submit" color="neutral" class="justify-center" />
-      <PButton label="Cancel" color="neutral" variant="outline" class="justify-center" @click="open = false" />
+      <PButton
+        label="Submit"
+        color="neutral"
+        class="justify-center"
+      />
+      <PButton
+        label="Cancel"
+        color="neutral"
+        variant="outline"
+        class="justify-center"
+        @click="open = false"
+      />
     </template>
-  </UDrawer>
+  </PDrawer>
 </template>

@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import type { InputMenuItem } from 'pohon-ui'
+import type { PInputMenuItem } from 'pohon-ui';
 
-const items: InputMenuItem[] = Array(1000).fill(0).map((_, i) => ({
+const items: Array<PInputMenuItem> = Array(1000).fill(0).map((_, i) => ({
   label: `item-${i}`,
-  value: i
-}))
+  value: i,
+}));
 </script>
 
 <template>
-  <UInputMenu virtualize :items="items" class="w-48" />
+  <PInputMenu
+    virtualize
+    :items="items"
+    class="w-48"
+  />
 </template>

@@ -1,17 +1,28 @@
 <script setup lang="ts">
-const open = ref(false)
+import { defineShortcuts } from '#imports';
+import { ref } from 'vue';
+
+const open = ref(false);
 
 defineShortcuts({
-  o: () => open.value = !open.value
-})
+  config: {
+    o: () => {
+      open.value = !open.value;
+    },
+  },
+});
 </script>
 
 <template>
-  <USlideover v-model:open="open">
-    <PButton label="Open" color="neutral" variant="subtle" />
+  <PSlideover v-model:open="open">
+    <PButton
+      label="Open"
+      color="neutral"
+      variant="subtle"
+    />
 
     <template #content>
-      <CorePlaceholder class="h-full m-4" />
+      <CorePlaceholder class="m-4 h-full" />
     </template>
-  </USlideover>
+  </PSlideover>
 </template>

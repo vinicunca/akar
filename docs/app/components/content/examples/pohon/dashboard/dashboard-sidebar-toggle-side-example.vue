@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { PNavigationMenuItem } from 'pohon-ui';
 
-const items: NavigationMenuItem[] = [{
+const items: Array<PNavigationMenuItem> = [{
   label: 'Home',
   icon: 'i-lucide-house',
-  active: true
+  active: true,
 }, {
   label: 'Inbox',
-  icon: 'i-lucide-inbox'
+  icon: 'i-lucide-inbox',
 }, {
   label: 'Contacts',
-  icon: 'i-lucide-users'
-}]
+  icon: 'i-lucide-users',
+}];
 </script>
 
 <template>
-  <UDashboardGroup>
-    <UDashboardSidebar
+  <PDashboardGroup>
+    <PDashboardSidebar
       open
       toggle-side="right"
     >
@@ -28,12 +28,12 @@ const items: NavigationMenuItem[] = [{
         :items="items"
         orientation="vertical"
       />
-    </UDashboardSidebar>
+    </PDashboardSidebar>
 
-    <UDashboardPanel>
+    <PDashboardPanel>
       <template #header>
-        <UDashboardNavbar title="Dashboard" />
+        <PDashboardNavbar title="Dashboard" />
       </template>
-    </UDashboardPanel>
-  </UDashboardGroup>
+    </PDashboardPanel>
+  </PDashboardGroup>
 </template>

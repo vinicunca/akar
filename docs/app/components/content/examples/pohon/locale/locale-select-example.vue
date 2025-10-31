@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import * as locales from '@nuxt/ui/locale'
+import * as locales from 'pohon-ui/locale';
+import { ref } from 'vue';
 
-const locale = ref('en')
+const locale = ref('en');
 </script>
 
 <template>
-  <ULocaleSelect v-model="locale" :locales="Object.values(locales)" class="w-48" />
+  <PLocaleSelect
+    v-model="locale"
+    :locales="Object.values(locales)"
+    class="w-48"
+  />
 </template>

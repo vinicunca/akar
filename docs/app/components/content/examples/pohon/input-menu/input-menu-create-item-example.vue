@@ -1,16 +1,18 @@
 <script setup lang="ts">
-const items = ref(['Backlog', 'Todo', 'In Progress', 'Done'])
-const value = ref('Backlog')
+import { ref } from 'vue';
+
+const items = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
+const value = ref('Backlog');
 
 function onCreate(item: string) {
-  items.value.push(item)
+  items.value.push(item);
 
-  value.value = item
+  value.value = item;
 }
 </script>
 
 <template>
-  <UInputMenu
+  <PInputMenu
     v-model="value"
     create-item
     :items="items"

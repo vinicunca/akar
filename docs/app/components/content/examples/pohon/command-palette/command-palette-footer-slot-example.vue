@@ -7,27 +7,27 @@ const groups = [
         label: 'Add new file',
         suffix: 'Create a new file in the current directory',
         icon: 'i-lucide-file-plus',
-        kbds: ['meta', 'N']
+        kbds: ['meta', 'N'],
       },
       {
         label: 'Add new folder',
         suffix: 'Create a new folder in the current directory',
         icon: 'i-lucide-folder-plus',
-        kbds: ['meta', 'F']
+        kbds: ['meta', 'F'],
       },
       {
         label: 'Search files',
         suffix: 'Search across all files in the project',
         icon: 'i-lucide-search',
-        kbds: ['meta', 'P']
+        kbds: ['meta', 'P'],
       },
       {
         label: 'Settings',
         suffix: 'Open application settings',
         icon: 'i-lucide-settings',
-        kbds: ['meta', ',']
-      }
-    ]
+        kbds: ['meta', ','],
+      },
+    ],
   },
   {
     id: 'recent',
@@ -36,43 +36,64 @@ const groups = [
       {
         label: 'project.vue',
         suffix: 'components/',
-        icon: 'i-vscode-icons-file-type-vue'
+        icon: 'i-vscode-icons-file-type-vue',
       },
       {
         label: 'readme.md',
         suffix: 'docs/',
-        icon: 'i-vscode-icons-file-type-markdown'
+        icon: 'i-vscode-icons-file-type-markdown',
       },
       {
         label: 'package.json',
         suffix: 'root/',
-        icon: 'i-vscode-icons-file-type-node'
-      }
-    ]
-  }
-]
+        icon: 'i-vscode-icons-file-type-node',
+      },
+    ],
+  },
+];
 </script>
 
 <template>
-  <UCommandPalette :groups="groups" class="flex-1 h-80">
+  <PCommandPalette
+    :groups="groups"
+    class="flex-1 h-80"
+  >
     <template #footer>
-      <div class="flex items-center justify-between gap-2">
-        <PIcon name="i-simple-icons-nuxtdotjs" class="size-5 text-dimmed ml-1" />
-        <div class="flex items-center gap-1">
-          <PButton color="neutral" variant="ghost" label="Open Command" class="text-dimmed" size="xs">
+      <div class="flex gap-2 items-center justify-between">
+        <PIcon
+          name="i-simple-icons-nuxtdotjs"
+          class="text-dimmed ml-1 size-5"
+        />
+        <div class="flex gap-1 items-center">
+          <PButton
+            color="neutral"
+            variant="ghost"
+            label="Open Command"
+            class="text-dimmed"
+            size="xs"
+          >
             <template #trailing>
-              <UKbd value="enter" />
+              <PKbd value="enter" />
             </template>
           </PButton>
-          <PSeparator orientation="vertical" class="h-4" />
-          <PButton color="neutral" variant="ghost" label="Actions" class="text-dimmed" size="xs">
+          <PSeparator
+            orientation="vertical"
+            class="h-4"
+          />
+          <PButton
+            color="neutral"
+            variant="ghost"
+            label="Actions"
+            class="text-dimmed"
+            size="xs"
+          >
             <template #trailing>
-              <UKbd value="meta" />
-              <UKbd value="k" />
+              <PKbd value="meta" />
+              <PKbd value="k" />
             </template>
           </PButton>
         </div>
       </div>
     </template>
-  </UCommandPalette>
+  </PCommandPalette>
 </template>

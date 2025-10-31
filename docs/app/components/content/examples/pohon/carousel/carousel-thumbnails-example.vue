@@ -1,57 +1,69 @@
 <script setup lang="ts">
+import { ref, useTemplateRef } from 'vue';
+
 const items = [
   'https://picsum.photos/640/640?random=1',
   'https://picsum.photos/640/640?random=2',
   'https://picsum.photos/640/640?random=3',
   'https://picsum.photos/640/640?random=4',
   'https://picsum.photos/640/640?random=5',
-  'https://picsum.photos/640/640?random=6'
-]
+  'https://picsum.photos/640/640?random=6',
+];
 
-const carousel = useTemplateRef('carousel')
-const activeIndex = ref(0)
+const carousel = useTemplateRef('carousel');
+const activeIndex = ref(0);
 
 function onClickPrev() {
-  activeIndex.value--
+  activeIndex.value--;
 }
 function onClickNext() {
-  activeIndex.value++
+  activeIndex.value++;
 }
 function onSelect(index: number) {
-  activeIndex.value = index
+  activeIndex.value = index;
 }
 
 function select(index: number) {
-  activeIndex.value = index
+  activeIndex.value = index;
 
-  carousel.value?.emblaApi?.scrollTo(index)
+  carousel.value?.emblaApi?.scrollTo(index);
 }
 </script>
 
 <template>
   <div class="flex-1 w-full">
-    <UCarousel
+    <PCarousel
       ref="carousel"
       v-slot="{ item }"
       arrows
       :items="items"
       :prev="{ onClick: onClickPrev }"
       :next="{ onClick: onClickNext }"
-      class="w-full max-w-xs mx-auto"
+      class="mx-auto max-w-xs w-full"
       @select="onSelect"
     >
-      <img :src="item" width="320" height="320" class="rounded-lg">
-    </UCarousel>
+      <img
+        :src="item"
+        width="320"
+        height="320"
+        class="rounded-lg"
+      >
+    </PCarousel>
 
-    <div class="flex gap-1 justify-between pt-4 max-w-xs mx-auto">
+    <div class="mx-auto pt-4 flex gap-1 max-w-xs justify-between">
       <div
         v-for="(item, index) in items"
         :key="index"
-        class="size-11 opacity-25 hover:opacity-100 transition-opacity"
+        class="opacity-25 size-11 transition-opacity hover:opacity-100"
         :class="{ 'opacity-100': activeIndex === index }"
         @click="select(index)"
       >
-        <img :src="item" width="44" height="44" class="rounded-lg">
+        <img
+          :src="item"
+          width="44"
+          height="44"
+          class="rounded-lg"
+        >
       </div>
     </div>
   </div>

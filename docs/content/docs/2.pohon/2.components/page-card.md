@@ -14,7 +14,7 @@ The PageCard component provides a flexible way to display content in a card with
 
 ::code-preview
 
-::u-page-card
+::p-page-card
 ---
 title: 'Tailwind CSS'
 description: 'Nuxt UI integrates with latest Tailwind CSS v4, bringing significant improvements.'

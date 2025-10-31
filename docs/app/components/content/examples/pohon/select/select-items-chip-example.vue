@@ -1,48 +1,54 @@
 <script setup lang="ts">
-import type { SelectItem, ChipProps } from 'pohon-ui'
+import type { PChipProps, PSelectItem } from 'pohon-ui';
+import { ref } from 'vue';
 
 const items = ref([
   {
     label: 'bug',
     value: 'bug',
     chip: {
-      color: 'error'
-    }
+      color: 'error',
+    },
   },
   {
     label: 'feature',
     value: 'feature',
     chip: {
-      color: 'success'
-    }
+      color: 'success',
+    },
   },
   {
     label: 'enhancement',
     value: 'enhancement',
     chip: {
-      color: 'info'
-    }
-  }
-] satisfies SelectItem[])
+      color: 'info',
+    },
+  },
+] satisfies Array<PSelectItem>);
 
-const value = ref(items.value[0]?.value)
+const value = ref(items.value[0]?.value);
 
 function getChip(value: string) {
-  return items.value.find(item => item.value === value)?.chip
+  return items.value.find((item) => item.value === value)?.chip;
 }
 </script>
 
 <template>
-  <USelect v-model="value" :items="items" value-key="value" class="w-48">
-    <template #leading="{ modelValue, ui }">
+  <PSelect
+    v-model="value"
+    :items="items"
+    value-key="value"
+    class="w-48"
+  >
+    <template #leading="{ modelValue, pohon }">
       <PChip
         v-if="modelValue"
         v-bind="getChip(modelValue)"
         inset
         standalone
-        :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
-        :class="ui.itemLeadingChip()"
+        :size="(pohon.itemLeadingChipSize() as PChipProps['size'])"
+        :class="pohon.itemLeadingChip()"
       />
     </template>
-  </USelect>
+  </PSelect>
 </template>
