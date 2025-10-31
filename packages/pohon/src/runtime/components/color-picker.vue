@@ -301,20 +301,27 @@ const trackThumbStyle = computed(() => ({
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     :data-disabled="disabled ? true : undefined"
+    data-pohon="color-picker-root"
   >
-    <div :class="pohon.picker({ class: props.pohon?.picker })">
+    <div
+      :class="pohon.picker({ class: props.pohon?.picker })"
+      data-pohon="color-picker-picker"
+    >
       <div
         ref="selectorRef"
         :class="pohon.selector({ class: props.pohon?.selector })"
+        data-pohon="color-picker-selector"
         :style="selectorStyle"
       >
         <div
           :class="pohon.selectorBackground({ class: props.pohon?.selectorBackground })"
+          data-pohon="color-picker-selector-background"
           data-color-picker-background
         >
           <div
             ref="selectorThumbRef"
             :class="pohon.selectorThumb({ class: props.pohon?.selectorThumb })"
+            data-pohon="color-picker-selector-thumb"
             :style="selectorThumbStyle"
             :data-disabled="disabled ? true : undefined"
           />
@@ -323,11 +330,13 @@ const trackThumbStyle = computed(() => ({
       <div
         ref="trackRef"
         :class="pohon.track({ class: props.pohon?.track })"
+        data-pohon="color-picker-track"
         data-color-picker-track
       >
         <div
           ref="trackThumbRef"
           :class="pohon.trackThumb({ class: props.pohon?.trackThumb })"
+          data-pohon="color-picker-track-thumb"
           :style="trackThumbStyle"
           :data-disabled="disabled ? true : undefined"
         />

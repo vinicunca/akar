@@ -19,6 +19,7 @@ export * from './dialog.theme';
 export * from './drawer.theme';
 export * from './error.theme';
 export * from './field-group.theme';
+export * from './file-upload.theme';
 export * from './footer.theme';
 export * from './form-field.theme';
 export * from './header.theme';

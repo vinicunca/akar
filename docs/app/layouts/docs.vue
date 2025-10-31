@@ -2,7 +2,7 @@
 import type { Ref } from '#imports';
 import type { ContentNavigationItem } from '@nuxt/content';
 import { PContainer, PContentNavigation, PMain } from '#components';
-import { inject, useNavigation, useRoute, useTemplateRef, watch } from '#imports';
+import { inject, onMounted, useNavigation, useRoute, useTemplateRef, watch } from '#imports';
 import { useDebounceFn } from '@vueuse/core';
 
 const route = useRoute();
@@ -43,6 +43,10 @@ watch(
   },
   { immediate: true },
 );
+
+onMounted(() => {
+  scrollToActiveItem();
+});
 </script>
 
 <template>

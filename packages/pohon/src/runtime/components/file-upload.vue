@@ -283,7 +283,10 @@ defineExpose({
         :remove-file="removeFile"
       />
 
-      <div :class="pohon.files({ class: props.pohon?.files })">
+      <div
+        :class="pohon.files({ class: props.pohon?.files })"
+        data-pohon="file-upload-files"
+      >
         <slot
           name="files"
           :files="modelValue"
@@ -292,6 +295,7 @@ defineExpose({
             v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]"
             :key="(file as File).name"
             :class="pohon.file({ class: props.pohon?.file })"
+            data-pohon="file-upload-file"
           >
             <slot
               name="file"
@@ -309,11 +313,18 @@ defineExpose({
                   :icon="fileIcon || appConfig.pohon.icons.file"
                   :size="props.size"
                   :class="pohon.fileLeadingAvatar({ class: props.pohon?.fileLeadingAvatar })"
+                  data-pohon="file-upload-file-leading-avatar"
                 />
               </slot>
 
-              <div :class="pohon.fileWrapper({ class: props.pohon?.fileWrapper })">
-                <span :class="pohon.fileName({ class: props.pohon?.fileName })">
+              <div
+                :class="pohon.fileWrapper({ class: props.pohon?.fileWrapper })"
+                data-pohon="file-upload-file-wrapper"
+              >
+                <span
+                  :class="pohon.fileName({ class: props.pohon?.fileName })"
+                  data-pohon="file-upload-file-name"
+                >
                   <slot
                     name="file-name"
                     :file="file"
@@ -323,7 +334,10 @@ defineExpose({
                   </slot>
                 </span>
 
-                <span :class="pohon.fileSize({ class: props.pohon?.fileSize })">
+                <span
+                  :class="pohon.fileSize({ class: props.pohon?.fileSize })"
+                  data-pohon="file-upload-file-size"
+                >
                   <slot
                     name="file-size"
                     :file="file"
@@ -356,6 +370,7 @@ defineExpose({
                   :aria-label="t('fileUpload.removeFile', { filename: (file as File).name })"
                   :trailing-icon="fileDeleteIcon || appConfig.pohon.icons.close"
                   :class="pohon.fileTrailingButton({ class: props.pohon?.fileTrailingButton })"
+                  data-pohon="file-upload-file-trailing-button"
                   @click.stop.prevent="removeFile(index)"
                 />
               </slot>
@@ -376,6 +391,7 @@ defineExpose({
   <APrimitive
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="file-upload-root"
   >
     <slot
       :open="open"
@@ -399,6 +415,7 @@ defineExpose({
         <div
           v-if="position === 'inside' ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true"
           :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+          data-pohon="file-upload-wrapper"
         >
           <slot
             name="leading"
@@ -408,12 +425,14 @@ defineExpose({
               v-if="variant === 'button'"
               :name="icon || appConfig.pohon.icons.upload"
               :class="pohon.icon({ class: props.pohon?.icon })"
+              data-pohon="file-upload-icon"
             />
             <PAvatar
               v-else
               :icon="icon || appConfig.pohon.icons.upload"
               :size="props.size"
               :class="pohon.avatar({ class: props.pohon?.avatar })"
+              data-pohon="file-upload-avatar"
             />
           </slot>
 
@@ -421,6 +440,7 @@ defineExpose({
             <div
               v-if="label || !!slots.label"
               :class="pohon.label({ class: props.pohon?.label })"
+              data-pohon="file-upload-label"
             >
               <slot name="label">
                 {{ label }}
@@ -429,6 +449,7 @@ defineExpose({
             <div
               v-if="description || !!slots.description"
               :class="pohon.description({ class: props.pohon?.description })"
+              data-pohon="file-upload-description"
             >
               <slot name="description">
                 {{ description }}
@@ -438,6 +459,7 @@ defineExpose({
             <div
               v-if="!!slots.actions"
               :class="pohon.actions({ class: props.pohon?.actions })"
+              data-pohon="file-upload-actions"
             >
               <slot
                 name="actions"

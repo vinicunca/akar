@@ -189,15 +189,18 @@ function onUpdate(value: any) {
     :name="name"
     :disabled="disabled"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="checkbox-group-root"
     @update:model-value="onUpdate"
   >
     <fieldset
       :class="pohon.fieldset({ class: props.pohon?.fieldset })"
+      data-pohon="checkbox-group-fieldset"
       v-bind="ariaAttrs"
     >
       <legend
         v-if="legend || !!slots.legend"
         :class="pohon.legend({ class: props.pohon?.legend })"
+        data-pohon="checkbox-group-legend"
       >
         <slot name="legend">
           {{ legend }}
@@ -214,6 +217,7 @@ function onUpdate(value: any) {
         :disabled="item.disabled || disabled"
         :pohon="{ ...(props.pohon ? omit(props.pohon, ['root']) : undefined), ...(item.pohon || {}) }"
         :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
+        data-pohon="checkbox-group-item"
       >
         <template
           v-for="(_, name) in getProxySlots()"

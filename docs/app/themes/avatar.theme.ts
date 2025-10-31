@@ -8,7 +8,7 @@ type Avatar = Pick<UvConfig<typeof pohon>, 'avatar' | 'avatarGroup'>;
 export const avatarThemes = {
   avatar: {
     slots: {
-      root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-background-accented',
+      root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-background-elevated',
       image: 'size-full rounded-inherit object-cover',
       fallback: 'font-medium leading-none color-text-muted truncate',
       icon: 'color-text-muted shrink-0',

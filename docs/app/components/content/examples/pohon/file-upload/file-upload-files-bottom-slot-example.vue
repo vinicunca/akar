@@ -1,9 +1,11 @@
 <script setup lang="ts">
-const value = ref<File[]>([])
+import { ref } from 'vue';
+
+const value = ref<Array<File>>([]);
 </script>
 
 <template>
-  <UFileUpload
+  <PFileUpload
     v-model="value"
     icon="i-lucide-image"
     label="Drop your images here"
@@ -11,7 +13,7 @@ const value = ref<File[]>([])
     layout="list"
     multiple
     :interactive="false"
-    class="w-96 min-h-48"
+    class="min-h-48 w-96"
   >
     <template #actions="{ open }">
       <PButton
@@ -31,5 +33,5 @@ const value = ref<File[]>([])
         @click="removeFile()"
       />
     </template>
-  </UFileUpload>
+  </PFileUpload>
 </template>

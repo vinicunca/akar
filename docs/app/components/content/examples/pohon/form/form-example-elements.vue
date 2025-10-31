@@ -125,7 +125,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       </PFormField>
 
       <PFormField name="file" label="File Input">
-        <UFileUpload
+        <PFileUpload
           v-model="state.file"
           label="Drop your image here"
           description="PNG (max. 1MB)"
