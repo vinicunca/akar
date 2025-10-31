@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import type { PChipProps } from 'pohon-ui';
 import { MDCRenderer } from '#components';
-import { fetchComponentExample, parseMarkdown, useAsyncData, useNuxtApp } from '#imports';
+import { fetchComponentExample, parseMarkdown, useAsyncData, useComponentName, useNuxtApp } from '#imports';
 import { getProp, setProp } from '#pohon/utils';
 import { toCamelCase } from '@vinicunca/perkakas';
 import { useElementSize } from '@vueuse/core';
@@ -85,10 +85,20 @@ const data = await fetchComponentExample(camelName);
 
 const componentProps = reactive({ ...(props.props || {}) });
 
+const { parentSlug } = useComponentName(props);
+
+const isCollapsed = computed(() => {
+  if (parentSlug === 'akar') {
+    return true;
+  }
+
+  return props.collapse;
+});
+
 const code = computed(() => {
   let code = '';
 
-  if (props.collapse) {
+  if (isCollapsed.value) {
     code += `::code-collapse
 `;
   }
@@ -97,7 +107,7 @@ const code = computed(() => {
 ${data?.code ?? ''}
 \`\`\``;
 
-  if (props.collapse) {
+  if (isCollapsed.value) {
     code += `
 ::`;
   }
@@ -106,7 +116,7 @@ ${data?.code ?? ''}
 });
 
 const { data: ast } = await useAsyncData(
-  `component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`,
+  `component-example-${camelName}${hash({ props: componentProps, collapse: isCollapsed.value })}`,
   async () => {
     if (!props.prettier) {
       return parseMarkdown(code.value);

@@ -9,12 +9,7 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/calendar/index.ts
 ---
 
-::docs-component-example
----
-name: a-calendar
-collapse: true
----
-::
+:docs-component-example{name="a-calendar"}
 
 ## Features
 
@@ -241,45 +236,25 @@ data:
 
 This example showcases a calendar which allows incrementing the year.
 
-::docs-component-example
----
-name: a-calendar-year-increment
-collapse: true
----
-::
+:docs-component-example{name="a-calendar-year-increment"}
 
 ### Calendar with Locale and Calendar System Selection
 
 This example showcases some of the available locales and how the calendar systems are displayed.
 
-::docs-component-example
----
-name: a-calendar-select
-collapse: true
----
-::
+:docs-component-example{name="a-calendar-select"}
 
 ### Calendar swipe gesture navigation
 
 This component demonstrates intuitive calendar navigation using touch-based swipe gestures, user-friendly way to browse through months.
 
-::docs-component-example
----
-name: a-calendar-swipe
-collapse: true
----
-::
+:docs-component-example{name="a-calendar-swipe"}
 
 ### Calendar week numbers
 
 This example showcases usage of the CalendarWeek component used to display the number of the week.
 
-::docs-component-example
----
-name: a-calendar-weeks
-collapse: true
----
-::
+:docs-component-example{name="a-calendar-weeks"}
 
 ## Accessibility
 

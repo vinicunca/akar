@@ -84,6 +84,9 @@ export default defineAppConfig({
     input: inputTheme,
     select: selectTheme,
     selectMenu: selectMenuTheme,
+    skeleton: {
+      base: 'animate-pulse rounded-md bg-background-elevated',
+    },
     slideover: slideoverTheme,
     navigationMenu: navigationMenuTheme,
     separator: separatorTheme,

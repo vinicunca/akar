@@ -9,12 +9,7 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/avatar/index.ts
 ---
 
-::docs-component-example
----
-name: a-avatar
-collapse: true
----
-::
+:docs-component-example{name="a-avatar"}
 
 ## Features
 

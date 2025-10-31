@@ -9,12 +9,7 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/collapsible/index.ts
 ---
 
-::docs-component-example
----
-name: a-collapsible
-collapse: true
----
-::
+:docs-component-example{name="a-collapsible"}
 
 ## Features
 

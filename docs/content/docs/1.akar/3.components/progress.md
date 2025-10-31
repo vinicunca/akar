@@ -8,12 +8,7 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/progress/index.ts
 ---
 
-::docs-component-example
----
-name: a-progress
-collapse: true
----
-::
+:docs-component-example{name="a-progress"}
 
 ## Features
 

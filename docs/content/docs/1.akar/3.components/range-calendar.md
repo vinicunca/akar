@@ -9,12 +9,7 @@ links:
 ---
 
 
-::docs-component-example
----
-name: a-range-calendar
-collapse: true
----
-::
+:docs-component-example{name="a-range-calendar"}
 
 ## Features
 

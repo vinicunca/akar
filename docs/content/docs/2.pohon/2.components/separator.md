@@ -2,12 +2,11 @@
 description: Separates content horizontally or vertically.
 category: element
 links:
-  - label: Separator
-    icon: custom-akar
+  - label: Akar
     to: /docs/akar/components/separator
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Separator.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/separator.vue
 ---
 
 ## Usage
@@ -31,7 +30,7 @@ ignore:
 class: 'p-8'
 props:
   orientation: vertical
-  class: 'h-48'
+  class: 'akar:h-48'
 ---
 ::
 
