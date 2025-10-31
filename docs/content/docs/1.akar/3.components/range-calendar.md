@@ -90,7 +90,17 @@ Contains all the parts of a calendar
 
 :docs-component-meta{name="a-range-calendar-root"}
 
-:docs-data-attributes-table{keys="readonly, disabled, invalid"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-readonly]'
+    values: Present when readonly
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-invalid]'
+    values: Present when invalid
+---
+::
 
 ### Header
 
@@ -102,7 +112,13 @@ Contains the navigation buttons and the heading segments.
 
 Calendar navigation button. It navigates the calendar one month/year/decade in the past based on the current calendar view.
 
-:docs-data-attributes-table{keys="disabled"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+---
+::
 
 :docs-component-meta{name="a-range-calendar-prev"}
 
@@ -112,7 +128,13 @@ Calendar navigation button. It navigates the calendar one month/year/decade in t
 
 :docs-component-meta{name="a-range-calendar-next"}
 
-:docs-data-attributes-table{keys="disabled"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+---
+::
 
 ### Heading
 
@@ -120,7 +142,13 @@ Heading for displaying the current month and year.
 
 :docs-component-meta{name="a-range-calendar-heading"}
 
-:docs-data-attributes-table{keys="disabled"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+---
+::
 
 ### Grid
 
@@ -128,7 +156,15 @@ Container for wrapping the calendar grid.
 
 :docs-component-meta{name="a-range-calendar-grid"}
 
-:docs-data-attributes-table{keys="readonly, disabled"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-readonly]'
+    values: Present when readonly
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+---
+::
 
 ### Grid Head
 
@@ -160,7 +196,13 @@ Container for wrapping the calendar cells.
 
 :docs-component-meta{name="a-range-calendar-cell"}
 
-:docs-data-attributes-table{keys="disabled"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+---
+::
 
 ### Cell Trigger
 
@@ -168,7 +210,39 @@ Interactable container for displaying the cell dates. Clicking it selects the da
 
 :docs-component-meta{name="a-range-calendar-cell-trigger"}
 
-:docs-data-attributes-table{keys="selected, disabled, value, unavailable, today, outsideView, outsideVisibleView, focused, selectionStart, selectionEnd, highlighted, highlightedStart, highlightedEnd"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-selected]'
+    values: Present when selected
+  - attribute: '[data-value]'
+    values: The ISO string value of the date.
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-unavailable]'
+    values: Present when unavailable
+  - attribute: '[data-today]'
+    values: Present when today
+  - attribute: '[data-outside-view]'
+    values: Present when the date is outside the current month it is displayed in.
+  - attribute: '[data-outside-visible-view]'
+    values: Present when the date is outside the months that are visible on the calendar.
+  - attribute: '[data-focused]'
+    values: Present when focused
+  - attribute: '[data-selection-start]'
+    values: 'Present when the date is the start of the selection.'
+  - attribute: '[data-selection-end]'
+    values: 'Present when the date is the end of the selection.'
+  - attribute: '[data-highlighted]'
+    values: 'Present when the date is highlighted by the user as they select a range.'
+  - attribute: '[data-highlighted-start]'
+    values: 'Present when the date is the start of the range that is highlighted by the user.'
+  - attribute: '[data-highlighted-end]'
+    values: 'Present when the date is the end of the range that is highlighted by the user.'
+  - attribute: '[data-focused]'
+    values: 'Present when focused'
+---
+::
 
 ## Accessibility
 

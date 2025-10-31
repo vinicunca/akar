@@ -53,7 +53,15 @@ Contains all the parts of an Accordion
 
 :docs-component-meta{name="a-accordion-root"}
 
-:docs-data-attributes-table{keys="orientation"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 ### Item
 
@@ -61,7 +69,21 @@ Contains all the parts of a collapsible section.
 
 :docs-component-meta{name="a-accordion-item"}
 
-:docs-data-attributes-table{keys="state, disabled, orientation"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 ### Header
 
@@ -69,7 +91,21 @@ Wraps an `AAccordionTrigger`. Use the `asChild` prop to update it to the appropr
 
 :docs-component-meta{name="a-accordion-header"}
 
-:docs-data-attributes-table{keys="state, disabled, orientation"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 ### Trigger
 
@@ -77,7 +113,21 @@ Toggles the collapsed state of its associated item. It should be nested inside o
 
 :docs-component-meta{name="a-accordion-trigger"}
 
-:docs-data-attributes-table{keys="state, disabled, orientation"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 ### Content
 
@@ -85,7 +135,21 @@ Contains the collapsible content for an item.
 
 :docs-component-meta{name="a-accordion-content"}
 
-:docs-data-attributes-table{keys="state, disabled, orientation"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: Present when disabled
+  - attribute: '[data-orientation]'
+    values:
+      - vertical
+      - horizontal
+---
+::
 
 #### CSS Variables
 

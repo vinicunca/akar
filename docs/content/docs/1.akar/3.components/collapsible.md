@@ -9,7 +9,12 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/collapsible/index.ts
 ---
 
-:docs-akar-preview{name="a-collapsible"}
+::docs-component-example
+---
+name: a-collapsible
+collapse: true
+---
+::
 
 ## Features
 
@@ -46,7 +51,17 @@ Contains all the parts of a collapsible
 
 :docs-component-meta{name="a-collapsible-root"}
 
-:docs-data-attributes-table{keys="state, disabled"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: 'Present when disabled'
+---
+::
 
 ### Trigger
 
@@ -54,7 +69,17 @@ The button that toggles the collapsible
 
 :docs-component-meta{name="a-collapsible-trigger"}
 
-:docs-data-attributes-table{keys="state, disabled"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: 'Present when disabled'
+---
+::
 
 ### Content
 
@@ -64,7 +89,17 @@ The component that contains the collapsible content.
 
 :docs-component-meta{name="a-collapsible-content"}
 
-:docs-data-attributes-table{keys="state, disabled"}
+::docs-data-attributes-table
+---
+data:
+  - attribute: '[data-state]'
+    values:
+      - open
+      - closed
+  - attribute: '[data-disabled]'
+    values: 'Present when disabled'
+---
+::
 
 ::docs-css-variables-table
 ---

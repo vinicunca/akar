@@ -2,7 +2,7 @@
 description: An indicator showing the progress of a task.
 category: element
 links:
-  - label: Progress
+  - label: Akar
     to: /docs/akar/components/progress
   - label: GitHub
     icon: i-simple-icons-github

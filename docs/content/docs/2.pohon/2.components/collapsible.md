@@ -2,7 +2,7 @@
 description: A collapsible element to toggle visibility of its content.
 category: element
 links:
-  - label: Collapsible
+  - label: Akar
     to: /docs/akar/components/collapsible
   - label: GitHub
     icon: i-simple-icons-github

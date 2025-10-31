@@ -83,7 +83,7 @@ catalogs:
     unbuild: ^3.6.1
     unplugin-vue-components: ^29.1.0
   pohon:
-    '@nuxt/content': 3.7.1
+    '@nuxt/content': 3.8.0
     '@nuxt/fonts': ^0.11.4
     '@nuxt/icon': ^2.0.0
     '@nuxt/module-builder': ^1.0.1
