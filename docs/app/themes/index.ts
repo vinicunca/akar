@@ -10,6 +10,7 @@ export * from './card.theme';
 export * from './checkbox.theme';
 export * from './chip.theme';
 export * from './collapsible.theme';
+export * from './color-picker.theme';
 export * from './container.theme';
 export * from './content-navigation.theme';
 export * from './content-surround.theme';
