@@ -4,7 +4,6 @@ description: A set of checklist buttons to select multiple option from a list.
 category: form
 links:
   - label: CheckboxGroup
-    icon: custom-akar
     to: /docs/akar/components/checkbox#group-root
   - label: GitHub
     icon: i-simple-icons-github
@@ -76,7 +75,7 @@ external:
   - items
   - modelValue
 externalTypes:
-  - CheckboxGroupItem[]
+  - PCheckboxGroupItem[]
 props:
   modelValue:
     - 'system'
@@ -111,7 +110,7 @@ external:
   - items
   - modelValue
 externalTypes:
-  - CheckboxGroupItem[]
+  - PCheckboxGroupItem[]
 props:
   modelValue:
     - 'light'

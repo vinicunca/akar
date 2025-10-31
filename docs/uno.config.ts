@@ -52,6 +52,7 @@ export default defineConfig({
       `[&_code]:border-${color}/25`,
       `[&_a]:hover:[&>code]:border-${color}`,
       `[&_a]:hover:border-${color}`,
+      `has-data-[state=checked]:border-${color}`,
 
       // Texts
       `color-${color}`,
@@ -104,6 +105,7 @@ export default defineConfig({
       `hover:not-[[data-selected]]:bg-${color}/10`,
       `hover:not-[[data-selected]]:bg-${color}/20`,
       `akar:data-[selected]:bg-${color}`,
+      `has-data-[state=checked]:bg-${color}/10`,
 
       // Rings and outlines
       `ring-${color}`,

@@ -124,8 +124,12 @@ function onUpdate(value: any) {
   <APrimitive
     :as="(!variant || variant === 'list') ? as : ALabel"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="checkbox-root"
   >
-    <div :class="pohon.container({ class: props.pohon?.container })">
+    <div
+      :class="pohon.container({ class: props.pohon?.container })"
+      data-pohon="checkbox-container"
+    >
       <ACheckboxRoot
         :id="id"
         v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
@@ -133,19 +137,26 @@ function onUpdate(value: any) {
         :name="name"
         :disabled="disabled"
         :class="pohon.base({ class: props.pohon?.base })"
+        data-pohon="checkbox-base"
         @update:model-value="onUpdate"
       >
         <template #default="{ modelValue }">
-          <ACheckboxIndicator :class="pohon.indicator({ class: props.pohon?.indicator })">
+          <ACheckboxIndicator
+            :class="pohon.indicator({ class: props.pohon?.indicator })"
+            data-pohon="checkbox-indicator"
+          >
             <PIcon
               v-if="modelValue === 'indeterminate'"
               :name="indeterminateIcon || appConfig.pohon.icons.minus"
               :class="pohon.icon({ class: props.pohon?.icon })"
+              data-pohon="checkbox-icon"
             />
+
             <PIcon
               v-else
               :name="icon || appConfig.pohon.icons.check"
               :class="pohon.icon({ class: props.pohon?.icon })"
+              data-pohon="checkbox-icon"
             />
           </ACheckboxIndicator>
         </template>
@@ -155,12 +166,14 @@ function onUpdate(value: any) {
     <div
       v-if="(label || !!slots.label) || (description || !!slots.description)"
       :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+      data-pohon="checkbox-wrapper"
     >
       <component
         :is="(!variant || variant === 'list') ? ALabel : 'p'"
         v-if="label || !!slots.label"
         :for="id"
         :class="pohon.label({ class: props.pohon?.label })"
+        data-pohon="checkbox-label"
       >
         <slot
           name="label"
@@ -172,6 +185,7 @@ function onUpdate(value: any) {
       <p
         v-if="description || !!slots.description"
         :class="pohon.description({ class: props.pohon?.description })"
+        data-pohon="checkbox-description"
       >
         <slot
           name="description"
