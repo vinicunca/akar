@@ -158,4 +158,4 @@ export const inputTheme = {
       },
     },
   ],
-} satisfies UvConfig<typeof pohon>['input'];
+} satisfies NonNullable<UvConfig<typeof pohon>['input']>;

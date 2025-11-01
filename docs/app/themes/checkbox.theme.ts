@@ -199,7 +199,7 @@ export const checkboxGroupTheme = {
       color: 'neutral',
       variant: 'table',
       class: {
-        item: 'has-data-[state=checked]:bg-elevated has-data-[state=checked]:border-border-inverted/50 has-data-[state=checked]:z-1',
+        item: 'has-data-[state=checked]:bg-background-elevated has-data-[state=checked]:border-border-inverted/50 has-data-[state=checked]:z-1',
       },
     },
     {

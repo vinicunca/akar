@@ -6,6 +6,7 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "generate": "nuxt generate",
+    "prepare": "nuxt prepare",
     "typecheck": "nuxt typecheck",
     "docs:gen:dev": "tsx watch scripts/autogen.ts",
     "docs:gen": "tsx scripts/autogen.ts"
@@ -20,6 +21,7 @@
     "@vueuse/integrations": "catalog:core",
     "akar": "workspace:*",
     "better-sqlite3": "catalog:docs",
+    "joi": "catalog:docs",
     "maska": "catalog:docs",
     "nuxt": "catalog:pohon",
     "nuxt-component-meta": "catalog:docs",
@@ -27,7 +29,10 @@
     "pohon-ui": "workspace:*",
     "prettier": "catalog:docs",
     "shiki-transformer-color-highlight": "catalog:docs",
-    "sortablejs": "catalog:docs"
+    "sortablejs": "catalog:docs",
+    "valibot": "catalog:docs",
+    "yup": "catalog:docs",
+    "zod": "catalog:pohon"
   },
   "devDependencies": {
     "@babel/traverse": "catalog:docs",

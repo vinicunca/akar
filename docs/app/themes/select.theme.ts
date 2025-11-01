@@ -2,36 +2,37 @@
 
 import type * as pohon from '#build/pohon';
 import type { UvConfig } from 'pohon-ui';
-import { isString } from '@vinicunca/perkakas';
+import { isString, omit } from '@vinicunca/perkakas';
 import { defu } from 'defu';
 import { inputTheme } from '~/themes/input.theme';
 
-const { root, base, ...inputSlots } = inputTheme.slots;
+const inputSlots = omit(inputTheme.slots, ['root', 'base']);
 
 export const selectTheme = {
-  slots: {
-    base: 'relative group rounded-md inline-flex items-center focus:outline-none disabled:(cursor-not-allowed opacity-75) transition-colors-280',
-    value: 'truncate pointer-events-none',
-    placeholder: 'truncate color-text-dimmed',
-    arrow: 'fill-fill',
-    content: 'max-h-60 w-$akar-select-trigger-width shadow-lg bg-white rounded-md ring ring-ring overflow-hidden pointer-events-auto flex-vertical origin-$akar-select-content-transform-origin data-[state=open]:(animate-in fade-in-0 animate-duration-280 data-[side=bottom]:slide-in-top-5%) data-[state=closed]:(animate-out fade-out-0 animate-duration-280 data-[side=bottom]:slide-out-top-5%)',
-    viewport: 'relative divide-y divide-divide scroll-py-1 overflow-y-auto flex-1',
-    group: 'p-1 isolate',
-    empty: 'text-center color-text-muted',
-    label: 'font-semibold color-text-highlighted',
-    separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group cursor-pointer relative w-full flex items-center select-none outline-none before:(content-empty absolute -z-1 inset-px rounded-md transition-colors) data-disabled:(cursor-not-allowed opacity-75) transition-colors-280 data-[state=checked]:(color-primary before:bg-background-elevated) data-[highlighted]:not-[[data-state=checked]]:(color-black before:bg-primary/30)',
-    itemLeadingIcon: 'shrink-0 color-text-dimmed group-data-[highlighted]:group-not-[[data-disabled]]:color-text transition-colors',
-    itemLeadingAvatar: 'shrink-0',
-    itemLeadingChip: 'shrink-0',
-    itemLeadingChipSize: '',
-    itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-    itemTrailingIcon: 'shrink-0',
-    itemLabel: 'truncate',
-    itemWrapper: 'flex-1 flex flex-col min-w-0',
-    itemDescription: 'truncate color-text-muted',
-    ...inputSlots,
-  },
+  slots: defu(
+    {
+      base: 'relative group rounded-md inline-flex items-center focus:outline-none disabled:(cursor-not-allowed opacity-75) transition-colors-280',
+      value: 'truncate pointer-events-none',
+      placeholder: 'truncate color-text-dimmed',
+      arrow: 'fill-fill',
+      content: 'max-h-60 w-$akar-select-trigger-width shadow-lg bg-white rounded-md ring ring-ring overflow-hidden pointer-events-auto flex-vertical origin-$akar-select-content-transform-origin data-[state=open]:(animate-in fade-in-0 animate-duration-280 data-[side=bottom]:slide-in-top-5%) data-[state=closed]:(animate-out fade-out-0 animate-duration-280 data-[side=bottom]:slide-out-top-5%)',
+      viewport: 'relative divide-y divide-divide scroll-py-1 overflow-y-auto flex-1',
+      group: 'p-1 isolate',
+      empty: 'text-center color-text-muted',
+      label: 'font-semibold color-text-highlighted',
+      separator: '-mx-1 my-1 h-px bg-border',
+      item: 'group cursor-pointer relative w-full flex items-center select-none outline-none before:(content-empty absolute -z-1 inset-px rounded-md transition-colors-280) data-disabled:(cursor-not-allowed opacity-75) transition-colors-280 data-[state=checked]:(color-primary before:bg-background-elevated) data-[highlighted]:not-[[data-state=checked]]:(color-black before:bg-primary/30)',
+      itemLeadingIcon: 'shrink-0 color-text-dimmed group-data-[highlighted]:group-not-[[data-disabled]]:color-text transition-colors-280',
+      itemLeadingAvatar: 'shrink-0',
+      itemLeadingChip: 'shrink-0',
+      itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
+      itemTrailingIcon: 'shrink-0',
+      itemLabel: 'truncate',
+      itemWrapper: 'flex-1 flex flex-col min-w-0',
+      itemDescription: 'truncate color-text-muted',
+    },
+    inputSlots,
+  ),
   variants: defu(
     {
       size: {

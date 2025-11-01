@@ -32,9 +32,6 @@ export const chipTheme = {
       'top-left': 'top-0 left-0',
       'bottom-left': 'bottom-0 left-0',
     },
-    inset: {
-      false: '',
-    },
     standalone: {
       false: 'absolute',
     },

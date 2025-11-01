@@ -71,7 +71,7 @@ provide('components', components);
     </PDashboardGroup>
   </PApp>
 
-  <div class="data-[highlighted]:bg-background-inverted/20 data-[today]:not-[[data-selected]]:color-text-highlighted hover:not-[[data-selected]]:bg-background-inverted/10 akar:(data-[selected]:color-text data-[selected]:bg-background-elevated data-[selected]:ring data-[selected]:ring-ring-accented data-[selected]:ring-inset)" />
+  <div class="group text-sm flex w-full select-none items-center relative focus-visible:outline-none focus:outline-none before:(rounded-md content-empty inset-x-0 inset-y-px absolute -z-1) focus-visible:before:ring-2 focus-visible:before:ring-inset" />
 </template>
 
 <style lang="postcss">

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ARadioGroupRootEmits, ARadioGroupRootProps } from 'akar';
-import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils';
+import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/radio-group';
 
@@ -71,9 +71,9 @@ export interface PRadioGroupProps<T extends Array<PRadioGroupItem> = Array<PRadi
   pohon?: RadioGroup['slots'];
 }
 
-export type PRadioGroupEmits = ARadioGroupRootEmits & {
+export type PRadioGroupEmits<T extends Array<PRadioGroupItem> = Array<PRadioGroupItem>, VK extends GetItemKeys<T> = 'value'> = Omit<ARadioGroupRootEmits, 'update:modelValue'> & {
   change: [event: Event];
-};
+} & GetModelValueEmits<T, VK, false>;
 
 type NormalizeItem<T extends PRadioGroupItem> = Exclude<T & { id: string }, PRadioGroupValue>;
 
@@ -111,7 +111,7 @@ const props = withDefaults(
     orientation: 'vertical',
   },
 );
-const emits = defineEmits<PRadioGroupEmits>();
+const emits = defineEmits<PRadioGroupEmits<T, VK>>();
 const slots = defineSlots<PRadioGroupSlots<T>>();
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig'];

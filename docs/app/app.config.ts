@@ -1,48 +1,65 @@
 // @unocss-include
 
 import { defineAppConfig } from '#imports';
-import {
-  accordionTheme,
-  alertTheme,
-  avatarThemes,
-  badgeTheme,
-  bannerTheme,
-  breadcrumbTheme,
-  buttonTheme,
-  calendarTheme,
-  cardTheme,
-  checkboxGroupTheme,
-  checkboxTheme,
-  chipTheme,
-  collapsibleTheme,
-  colorPickerTheme,
-  containerTheme,
-  contentNavigationTheme,
-  contentSurroundTheme,
-  contentTocTheme,
-  dialogTheme,
-  drawerTheme,
-  errorTheme,
-  fieldGroupTheme,
-  fileUploadTheme,
-  footerTheme,
-  formFieldTheme,
-  headerTheme,
-  inputTheme,
-  kbdTheme,
-  linkTheme,
-  mainTheme,
-  navigationMenuTheme,
-  popoverTheme,
-  progressTheme,
-  selectMenuTheme,
-  selectTheme,
-  separatorTheme,
-  slideoverTheme,
-  tabsTheme,
-  tooltipTheme,
-} from './themes';
-
+import { accordionTheme } from '~/themes/accordion.theme';
+import { alertTheme } from '~/themes/alert.theme';
+import { avatarThemes } from '~/themes/avatar.theme';
+import { badgeTheme } from '~/themes/badge.theme';
+import { bannerTheme } from '~/themes/banner.theme';
+import { breadcrumbTheme } from '~/themes/breadcrumb.theme';
+import { buttonTheme } from '~/themes/button.theme';
+import { calendarTheme } from '~/themes/calendar.theme';
+import { cardTheme } from '~/themes/card.theme';
+import { carouselTheme } from '~/themes/carousel.theme';
+import { checkboxGroupTheme, checkboxTheme } from '~/themes/checkbox.theme';
+import { chipTheme } from '~/themes/chip.theme';
+import { collapsibleTheme } from '~/themes/collapsible.theme';
+import { colorPickerTheme } from '~/themes/color-picker.theme';
+import { commandPaletteTheme } from '~/themes/command-palette.theme';
+import { containerTheme } from '~/themes/container.theme';
+import { contentNavigationTheme } from '~/themes/content-navigation.theme';
+import { contentSurroundTheme } from '~/themes/content-surround.theme';
+import { contentTocTheme } from '~/themes/content-toc.theme';
+import { contextMenuTheme } from '~/themes/context-menu.theme';
+import { dialogTheme } from '~/themes/dialog.theme';
+import { drawerTheme } from '~/themes/drawer.theme';
+import { dropdownMenuTheme } from '~/themes/dropdown-menu.theme';
+import { emptyTheme } from '~/themes/empty.theme';
+import { errorTheme } from '~/themes/error.theme';
+import { fieldGroupTheme } from '~/themes/field-group.theme';
+import { fileUploadTheme } from '~/themes/file-upload.theme';
+import { footerTheme } from '~/themes/footer.theme';
+import { formFieldTheme } from '~/themes/form-field.theme';
+import { headerTheme } from '~/themes/header.theme';
+import { inputMenuTheme } from '~/themes/input-menu.theme';
+import { inputNumberTheme } from '~/themes/input-number.theme';
+import { inputTagsTheme } from '~/themes/input-tags.theme';
+import { inputTheme } from '~/themes/input.theme';
+import { kbdTheme } from '~/themes/kbd.theme';
+import { linkTheme } from '~/themes/link.theme';
+import { mainTheme } from '~/themes/main.theme';
+import { marqueeTheme } from '~/themes/marquee.theme';
+import { navigationMenuTheme } from '~/themes/navigation-menu.theme';
+import { paginationTheme } from '~/themes/pagination.theme';
+import { pinInputTheme } from '~/themes/pin-input.theme';
+import { popoverTheme } from '~/themes/popover.theme';
+import { progressTheme } from '~/themes/progress.theme';
+import { radioGroupTheme } from '~/themes/radio-group.theme';
+import { selectMenuTheme } from '~/themes/select-menu.theme';
+import { selectTheme } from '~/themes/select.theme';
+import { separatorTheme } from '~/themes/separator.theme';
+import { slideoverTheme } from '~/themes/slideover.theme';
+import { sliderTheme } from '~/themes/slider.theme';
+import { stepperTheme } from '~/themes/stepper.theme';
+import { switchTheme } from '~/themes/switch.theme';
+import { tableTheme } from '~/themes/table.theme';
+import { tabsTheme } from '~/themes/tabs.theme';
+import { textAreaTheme } from '~/themes/textarea.theme';
+import { timelineTheme } from '~/themes/timeline.theme';
+import { toastTheme } from '~/themes/toast.theme';
+import { toasterTheme } from '~/themes/toaster.theme';
+import { tooltipTheme } from '~/themes/tooltip.theme';
+import { treeTheme } from '~/themes/tree.theme';
 import { BRANDS } from './themes/constant';
 
 export default defineAppConfig({
@@ -66,43 +83,65 @@ export default defineAppConfig({
     ...avatarThemes,
     badge: badgeTheme,
     banner: bannerTheme,
-    button: buttonTheme,
     breadcrumb: breadcrumbTheme,
+    button: buttonTheme,
     calendar: calendarTheme,
     card: cardTheme,
-    chip: chipTheme,
-    collapsible: collapsibleTheme,
-    container: containerTheme,
-    contentToc: contentTocTheme,
+    carousel: carouselTheme,
     checkbox: checkboxTheme,
     checkboxGroup: checkboxGroupTheme,
+    chip: chipTheme,
+    collapsible: collapsibleTheme,
     colorPicker: colorPickerTheme,
+    commandPalette: commandPaletteTheme,
+    container: containerTheme,
     contentNavigation: contentNavigationTheme,
     contentSurround: contentSurroundTheme,
+    contentToc: contentTocTheme,
+    contextMenu: contextMenuTheme,
+    dialog: dialogTheme,
+    drawer: drawerTheme,
+    dropdownMenu: dropdownMenuTheme,
+    empty: emptyTheme,
     error: errorTheme,
     fieldGroup: fieldGroupTheme,
     fileUpload: fileUploadTheme,
     footer: footerTheme,
     formField: formFieldTheme,
     header: headerTheme,
-    link: linkTheme,
-    dialog: dialogTheme,
-    drawer: drawerTheme,
-    main: mainTheme,
+    inputMenu: inputMenuTheme,
+    inputNumber: inputNumberTheme,
+    inputTags: inputTagsTheme,
     input: inputTheme,
-    select: selectTheme,
+    kbd: kbdTheme,
+    link: linkTheme,
+    main: mainTheme,
+    marquee: marqueeTheme,
+    navigationMenu: navigationMenuTheme,
+    pagination: paginationTheme,
+    pinInput: pinInputTheme,
+    popover: popoverTheme,
+    progress: progressTheme,
+    radioGroup: radioGroupTheme,
     selectMenu: selectMenuTheme,
+    select: selectTheme,
+    separator: separatorTheme,
+    slideover: slideoverTheme,
+    slider: sliderTheme,
+    stepper: stepperTheme,
+    switch: switchTheme,
+    table: tableTheme,
+    tabs: tabsTheme,
+    textarea: textAreaTheme,
+    timeline: timelineTheme,
+    toast: toastTheme,
+    toaster: toasterTheme,
+    tooltip: tooltipTheme,
+    tree: treeTheme,
+
     skeleton: {
       base: 'animate-pulse rounded-md bg-background-elevated',
     },
-    slideover: slideoverTheme,
-    navigationMenu: navigationMenuTheme,
-    separator: separatorTheme,
-    kbd: kbdTheme,
-    popover: popoverTheme,
-    tabs: tabsTheme,
-    tooltip: tooltipTheme,
-    progress: progressTheme,
 
     prose: {
       a: {

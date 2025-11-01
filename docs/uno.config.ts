@@ -42,6 +42,17 @@ export default defineConfig({
     }),
   ],
 
+  rules: [
+    [/^p-toaster-base$/, () => {
+      return `
+.p-toaster-base {
+  transform: var(--transform);
+  transition-property: transform,translate,height;
+}
+`;
+    }],
+  ],
+
   safelist: [
     'isolate',
     'bg-background-accented',
@@ -76,7 +87,6 @@ export default defineConfig({
       `dark:[&_code]:color-${color}-300`,
 
       // Backgrounds
-      `data-[highlighted]:before:bg-${color}/10`,
       `bg-${color}`,
       `bg-${color}/10`,
       `hover:bg-${color}/10`,
@@ -102,17 +112,21 @@ export default defineConfig({
       `data-[selected]:bg-${color}`,
       `data-[selected]:bg-${color}/10`,
       `data-[highlighted]:bg-${color}/20`,
+      `data-[highlighted]:before:bg-${color}/10`,
+      `data-[state=open]:before:bg-${color}/10`,
       `hover:not-[[data-selected]]:bg-${color}/10`,
       `hover:not-[[data-selected]]:bg-${color}/20`,
       `akar:data-[selected]:bg-${color}`,
       `has-data-[state=checked]:bg-${color}/10`,
+      `group-data-[state=completed]:bg-${color}`,
+      `group-data-[state=active]:bg-${color}`,
 
       // Rings and outlines
       `ring-${color}`,
       `ring-${color}/25`,
       `ring-${color}/50`,
-      `focus-visible:ring-${color}`,
       `akar:ring-${color}`,
+      `focus-visible:ring-${color}`,
       `focus-visible:before:ring-${color}`,
       `focus-visible:outline-${color}`,
       'focus:ring-2',
@@ -120,6 +134,8 @@ export default defineConfig({
       `focus:ring-${color}`,
       `data-[selected]:ring-${color}/25`,
       `data-[selected]:ring-${color}/50`,
+      `has-focus:ring-${color}`,
+      `has-focus-visible:ring-${color}`,
     ]),
   ],
 

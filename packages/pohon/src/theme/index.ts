@@ -31,6 +31,7 @@ export { default as dashboardToolbar } from './dashboard-toolbar';
 export { default as dialog } from './dialog';
 export { default as drawer } from './drawer';
 export { default as dropdownMenu } from './dropdown-menu';
+export { default as empty } from './empty';
 export { default as error } from './error';
 export { default as fieldGroup } from './field-group';
 export { default as fileUpload } from './file-upload';

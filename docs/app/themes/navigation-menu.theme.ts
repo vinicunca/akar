@@ -22,17 +22,15 @@ export const navigationMenuTheme = {
     linkLabelExternalIcon: 'inline-block size-3 align-top color-text-dimmed',
     childList: 'isolate',
     childLabel: 'text-xs color-text-highlighted',
-    childItem: '',
     childLink: 'group relative size-full flex items-start text-start text-sm before:(content-empty absolute -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-5 shrink-0',
     childLinkLabel: 'truncate',
     childLinkLabelExternalIcon: 'inline-block size-3 align-top color-text-dimmed',
-    childLinkDescription: 'text-muted',
+    childLinkDescription: 'color-text-muted',
     separator: 'px-2 h-px bg-border',
     viewportWrapper: 'absolute top-full left-0 flex w-full',
     viewport: 'relative overflow-hidden bg-background shadow-lg rounded-md ring ring-ring h-$akar-navigation-menu-viewport-height w-full transition-[width,height,left]-200 origin-[top_center] data-[state=open]:(animate-in zoom-in-90) data-[state=closed]:(animate-out fade-out-0 zoom-out-95) z-1',
-    content: '',
     indicator: 'absolute data-[state=visible]:(animate-in fade-in) data-[state=hidden]:(animate-out fade-out) bottom-0 z-1 w-$akar-navigation-menu-indicator-size translate-x-$akar-navigation-menu-indicator-position flex h-2.5 items-end justify-center overflow-hidden transition-[transform,width]-280',
     arrow: 'relative top-[50%] size-2.5 rotate-45 border border-border bg-background z-1 rounded-xs',
   },
@@ -88,8 +86,8 @@ export const navigationMenuTheme = {
       false: {
         link: 'color-text-muted',
         linkLeadingIcon: 'color-text-dimmed',
-        childLink: 'hover:before:bg-background-elevated/50 color-text hover:color-text-highlighted transition-colors before:transition-colors',
-        childLinkIcon: 'color-text-dimmed group-hover:color-text transition-colors',
+        childLink: 'hover:before:bg-background-elevated/50 color-text hover:color-text-highlighted transition-colors-280 before:transition-colors-280',
+        childLinkIcon: 'color-text-dimmed group-hover:color-text transition-colors-280',
       },
     },
     disabled: {
@@ -136,7 +134,7 @@ export const navigationMenuTheme = {
       orientation: 'horizontal',
       highlight: true,
       class: {
-        link: 'after:(content-empty absolute -bottom-2 inset-x-2.5 block h-px rounded-full transition-colors)',
+        link: 'after:(content-empty absolute -bottom-2 inset-x-2.5 block h-px rounded-full transition-colors-280)',
       },
     },
     {
@@ -144,7 +142,7 @@ export const navigationMenuTheme = {
       highlight: true,
       level: true,
       class: {
-        link: 'after:(content-empty absolute -start-1.5 inset-y-0.5 block w-px rounded-full transition-colors)',
+        link: 'after:(content-empty absolute -start-1.5 inset-y-0.5 block w-px rounded-full transition-colors-280)',
       },
     },
     {
@@ -152,8 +150,8 @@ export const navigationMenuTheme = {
       active: false,
       variant: 'pill',
       class: {
-        link: 'hover:color-text-highlighted hover:before:bg-background-elevated/50 transition-colors before:transition-colors',
-        linkLeadingIcon: 'group-hover:color-text transition-colors',
+        link: 'hover:color-text-highlighted hover:before:bg-background-elevated/50 transition-colors-280 before:transition-colors-280',
+        linkLeadingIcon: 'group-hover:color-text transition-colors-280',
       },
     },
     {
@@ -217,7 +215,7 @@ export const navigationMenuTheme = {
       highlight: true,
       disabled: false,
       class: {
-        link: 'hover:before:bg-background-elevated/50 before:transition-colors',
+        link: 'hover:before:bg-background-elevated/50 before:transition-colors-280',
       },
     },
     {
@@ -225,8 +223,8 @@ export const navigationMenuTheme = {
       active: false,
       variant: 'link',
       class: {
-        link: 'hover:color-text-highlighted transition-colors',
-        linkLeadingIcon: 'group-hover:color-text transition-colors',
+        link: 'hover:color-text-highlighted transition-colors-280',
+        linkLeadingIcon: 'group-hover:color-text transition-colors-280',
       },
     },
     {

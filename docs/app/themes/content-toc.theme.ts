@@ -8,7 +8,6 @@ export const contentTocTheme = {
   slots: {
     root: 'sticky top-$pohon-header-height z-10 bg-background/75 lg:bg-[initial] backdrop-blur -mx-4 px-4 sm:px-6 sm:-mx-6 overflow-y-auto max-h-[calc(100vh-var(--pohon-header-height))]',
     container: 'pt-4 sm:pt-6 pb-2.5 sm:pb-4.5 lg:py-8 border-b border-dashed border-border lg:border-0 flex flex-col',
-    top: '',
     bottom: 'hidden lg:flex lg:flex-col gap-6',
     trigger: 'group text-sm font-semibold flex-1 flex items-center gap-1.5 py-1.5 -mt-1.5 focus-visible:outline-primary',
     title: 'truncate',
@@ -18,7 +17,6 @@ export const contentTocTheme = {
     list: 'min-w-0',
     listWithChildren: 'ms-3',
     item: 'min-w-0',
-    itemWithChildren: '',
     link: 'group relative text-sm flex items-center focus-visible:outline-primary py-1',
     linkText: 'truncate',
     indicator: 'absolute ms-2.5 transition-property-[translate,height] duration-200 h-$indicator-size translate-y-$indicator-position w-px rounded-full',
@@ -34,7 +32,7 @@ export const contentTocTheme = {
     },
     active: {
       false: {
-        link: ['color-text-muted hover:color-text transition-colors'],
+        link: ['color-text-muted hover:color-text transition-colors-280'],
       },
     },
     highlight: {

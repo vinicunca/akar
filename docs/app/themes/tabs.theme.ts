@@ -9,7 +9,7 @@ export const tabsTheme = {
     root: 'flex items-center gap-2',
     list: 'relative flex p-1 group',
     indicator: 'absolute transition-[transform,width]-200',
-    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:color-text-muted hover:data-[state=inactive]:not-disabled:color-text font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors',
+    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:color-text-muted hover:data-[state=inactive]:not-disabled:color-text font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors-280',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     label: 'truncate',
@@ -114,8 +114,8 @@ export const tabsTheme = {
       color: 'neutral',
       variant: 'pill',
       class: {
-        indicator: 'bg-inverted',
-        trigger: 'data-[state=active]:color-text-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted',
+        indicator: 'bg-background-inverted',
+        trigger: 'data-[state=active]:color-text-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-outline-inverted',
       },
     },
     ...BRANDS.map((color: string) => ({
@@ -131,7 +131,7 @@ export const tabsTheme = {
       variant: 'link',
       class: {
         indicator: 'bg-background-inverted',
-        trigger: 'data-[state=active]:color-text-highlighted focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-inverted',
+        trigger: 'data-[state=active]:color-text-highlighted focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring-inverted',
       },
     },
   ],

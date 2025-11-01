@@ -30,8 +30,8 @@ export const contentNavigationTheme = {
         },
       ])),
       neutral: {
-        trigger: 'focus-visible:ring-inverted',
-        link: 'focus-visible:before:ring-inverted',
+        trigger: 'focus-visible:ring-ring-inverted',
+        link: 'focus-visible:before:ring-ring-inverted',
       },
     },
     active: {
@@ -60,7 +60,7 @@ export const contentNavigationTheme = {
       highlight: true,
       level: true,
       class: {
-        link: 'after:(content-empty rounded-full w-px block transition-colors inset-y-0.5 absolute -left-1.5)',
+        link: 'after:(content-empty rounded-full w-px block transition-colors-280 inset-y-0.5 absolute -left-1.5)',
       },
     },
     {
@@ -68,8 +68,8 @@ export const contentNavigationTheme = {
       active: false,
       variant: 'pill',
       class: {
-        link: 'hover:color-text-highlighted hover:before:bg-background-elevated/50 data-[state=open]:color-text-highlighted transition-colors before:transition-colors',
-        linkLeadingIcon: 'group-hover:color-text group-data-[state=open]:color-text transition-colors',
+        link: 'hover:color-text-highlighted hover:before:bg-background-elevated/50 data-[state=open]:color-text-highlighted transition-colors-280 before:transition-colors-280',
+        linkLeadingIcon: 'group-hover:color-text group-data-[state=open]:color-text transition-colors-280',
       },
     },
     ...BRANDS.map((color) => ({
@@ -104,7 +104,7 @@ export const contentNavigationTheme = {
       highlight: true,
       disabled: false,
       class: {
-        link: 'hover:before:bg-background-elevated/50 before:transition-colors',
+        link: 'hover:before:bg-background-elevated/50 before:transition-colors-280',
       },
     },
     {
@@ -112,8 +112,8 @@ export const contentNavigationTheme = {
       active: false,
       variant: 'link',
       class: {
-        link: 'hover:color-text-highlighted data-[state=open]:color-text-highlighted transition-colors',
-        linkLeadingIcon: 'group-hover:color-text group-data-[state=open]:color-text transition-colors',
+        link: 'hover:color-text-highlighted data-[state=open]:color-text-highlighted transition-colors-280',
+        linkLeadingIcon: 'group-hover:color-text group-data-[state=open]:color-text transition-colors-280',
       },
     },
     ...BRANDS.map((color) => ({

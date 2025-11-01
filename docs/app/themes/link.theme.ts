@@ -18,7 +18,7 @@ export const linkTheme = {
     {
       active: false,
       disabled: false,
-      class: 'hover:color-text transition-colors',
+      class: 'hover:color-text transition-colors-280',
     },
   ],
 } satisfies UvConfig<typeof pohon>['link'];

@@ -71,13 +71,16 @@ catalogs:
     '@types/babel__traverse': ^7.28.0
     better-sqlite3: ^12.2.0
     fast-glob: ^3.3.3
+    joi: ^18.0.1
     maska: ^3.2.0
     nuxt-component-meta: ^0.14.1
     nuxt-og-image: ^5.1.11
     prettier: ^3.6.2
     shiki-transformer-color-highlight: ^1.0.0
     sortablejs: ^1.15.6
+    valibot: ^1.1.0
     vue-component-meta: ^3.1.0
+    yup: ^1.7.1
   plugins:
     '@nuxt/kit': 4.2.0
     '@nuxt/schema': 4.2.0
@@ -93,7 +96,7 @@ catalogs:
     '@standard-schema/spec': ^1.0.0
     '@tanstack/vue-table': ^8.21.3
     '@unocss/nuxt': 66.5.4
-    '@vinicunca/unocss-preset': 1.33.0
+    '@vinicunca/unocss-preset': 1.34.0
     colortranslator: ^5.0.0
     embla-carousel-auto-height: ^8.6.0
     embla-carousel-auto-scroll: ^8.6.0

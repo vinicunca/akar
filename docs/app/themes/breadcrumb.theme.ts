@@ -37,7 +37,7 @@ export const breadcrumbTheme = {
       active: false,
       to: true,
       class: {
-        link: 'hover:color-text transition-colors',
+        link: 'hover:color-text transition-colors-280',
       },
     },
   ],

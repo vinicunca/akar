@@ -16,7 +16,7 @@ export const cardTheme = {
         root: 'bg-background-inverted color-text-inverted',
       },
       outline: {
-        root: 'bg-background-default ring ring-ring divide-y divide-divide',
+        root: 'bg-background ring ring-ring divide-y divide-divide',
       },
       soft: {
         root: 'bg-background-elevated/50 divide-y divide-divide',

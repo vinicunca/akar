@@ -11,7 +11,6 @@ export const badgeTheme = {
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
-    leadingAvatarSize: '',
     trailingIcon: 'shrink-0',
   },
   variants: {
@@ -47,9 +46,6 @@ export const badgeTheme = {
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-6',
       },
-    },
-    square: {
-      true: '',
     },
   },
   compoundVariants: [
@@ -91,7 +87,7 @@ export const badgeTheme = {
     {
       color: 'neutral',
       variant: 'subtle',
-      class: 'ring ring-inset ring-accented color-text bg-background-elevated',
+      class: 'ring ring-inset ring-ring-accented color-text bg-background-elevated',
     },
     {
       size: 'xs',
