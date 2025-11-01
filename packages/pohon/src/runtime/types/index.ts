@@ -69,4 +69,5 @@ export * from '../components/tooltip.vue';
 export * from '../components/tree.vue';
 export * from './form';
 export * from './locale';
+export * from './theme';
 export * from './uv';

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
+    "prepare": "nuxt prepare",
     "generate": "nuxt generate",
     "typecheck": "nuxt typecheck"
   },

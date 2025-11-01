@@ -178,7 +178,7 @@ export function getPohonTemplates(
       const iconUnion = iconKeys.length ? iconKeys.map((i) => JSON.stringify(i)).join(' | ') : 'string';
 
       return `import * as pohon from '#build/pohon';
-import type { UvConfig } from 'pohon';
+import type { UvConfig } from 'pohon-ui';
 import type { colors } from 'unocss/preset-mini';
 
 type IconsConfig = Record<${iconUnion} | (string & {}), string>;

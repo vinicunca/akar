@@ -1,6 +1,5 @@
 // @unocss-include
 
-import { defineAppConfig } from '#imports';
 import { accordionTheme } from '~/themes/accordion.theme';
 import { alertTheme } from '~/themes/alert.theme';
 import { avatarThemes } from '~/themes/avatar.theme';
