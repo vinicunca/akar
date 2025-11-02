@@ -266,6 +266,5 @@ export default defineConfig({
       '2xl': 'calc(var(--pohon-ui-radius) * 4)',
       '3xl': 'calc(var(--pohon-ui-radius) * 6)',
     },
-
   },
 });

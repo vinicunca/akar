@@ -65,7 +65,8 @@
     "./locale": {
       "types": "./dist/runtime/locale/index.d.ts",
       "import": "./dist/runtime/locale/index.js"
-    }
+    },
+    "./layer": "./layer/nuxt.config.ts"
   },
   "main": "./dist/module.mjs",
   "typesVersions": {
@@ -106,6 +107,7 @@
     ".nuxt/pohon",
     "cli",
     "dist",
+    "layer",
     "vue-plugin.d.ts"
   ],
   "scripts": {

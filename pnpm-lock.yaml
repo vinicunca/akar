@@ -239,8 +239,8 @@ catalogs:
       specifier: 66.5.4
       version: 66.5.4
     '@vinicunca/unocss-preset':
-      specifier: 1.34.0
-      version: 1.34.0
+      specifier: 1.35.0
+      version: 1.35.0
     colortranslator:
       specifier: ^5.0.0
       version: 5.0.0
@@ -435,7 +435,7 @@ importers:
         version: 66.5.4(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3)
       '@vinicunca/unocss-preset':
         specifier: catalog:pohon
-        version: 1.34.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
+        version: 1.35.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
       fast-glob:
         specifier: catalog:docs
         version: 3.3.3
@@ -732,7 +732,7 @@ importers:
         version: 66.5.4(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3)
       '@vinicunca/unocss-preset':
         specifier: catalog:pohon
-        version: 1.34.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
+        version: 1.35.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
       typescript:
         specifier: catalog:base
         version: 5.9.2
@@ -3424,8 +3424,8 @@ packages:
     resolution: {integrity: sha512-6IJgdk9oPG0eX9+PZ8ccgBvDbj8hZaSbq+J95wX7eWgyrrNqzCkNH9lPf6Jffy22R7F41EW5AxlnPiQf1Wczyw==}
     engines: {node: '>=20.0.0'}
 
-  '@vinicunca/unocss-preset@1.34.0':
-    resolution: {integrity: sha512-OVFZqLTiBf9euQvIQO1/JR7U27d/Md/xH3bDEQETDPBSlF5K5JHYMEf+U9z2VTqspLWzKGFFA59ts1Nu8RsfEw==}
+  '@vinicunca/unocss-preset@1.35.0':
+    resolution: {integrity: sha512-SXpWFq/Tt+fMgCKxp0H6xPDNM1vg3W1g6p4KTnxea0QhVXAkpVEyQq++TwrBJIzsu4y4k8b9sTz4EVI3e2zhBQ==}
     peerDependencies:
       '@vinicunca/perkakas': ^1.8.0
       unocss: 66.5.4
@@ -12021,7 +12021,7 @@ snapshots:
     dependencies:
       type-fest: 4.41.0
 
-  '@vinicunca/unocss-preset@1.34.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))':
+  '@vinicunca/unocss-preset@1.35.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))':
     dependencies:
       '@unocss/core': 66.5.4
       '@unocss/preset-icons': 66.5.4
