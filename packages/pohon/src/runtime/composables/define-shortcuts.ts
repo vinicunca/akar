@@ -9,16 +9,16 @@ import { useKbd } from './use-kbd';
 
 type Handler = (event?: any) => void;
 
-export interface ShortcutConfig {
+export interface PShortcutConfig {
   handler: Handler;
   usingInput?: string | boolean;
 }
 
-export interface ShortcutsConfig {
-  [key: string]: ShortcutConfig | Handler | false | null | undefined;
+export interface PShortcutsConfig {
+  [key: string]: PShortcutConfig | Handler | false | null | undefined;
 }
 
-export interface ShortcutsOptions {
+export interface PShortcutsOptions {
   chainDelay?: number;
 }
 
@@ -41,10 +41,7 @@ const combinedShortcutRegex = /^[^_]+.*_.*[^_]+$/;
 // keyboard keys which can be combined with Shift modifier (in addition to alphabet keys)
 const shiftableKeys = ['arrowleft', 'arrowright', 'arrowup', 'arrowright', 'tab', 'escape', 'enter', 'backspace'];
 
-export function defineShortcuts(
-  { config, options = {} }:
-  { config: MaybeRef<ShortcutsConfig>; options?: ShortcutsOptions },
-) {
+export function defineShortcuts(config: MaybeRef<PShortcutsConfig>, options: PShortcutsOptions = {}) {
   const chainedInputs = ref<Array<string>>([]);
   const clearChainedInput = () => {
     chainedInputs.value.splice(0, chainedInputs.value.length);
@@ -128,10 +125,10 @@ export function defineShortcuts(
       }
 
       let enabled = true;
-      if (!(shortcutConfig as ShortcutConfig).usingInput) {
+      if (!(shortcutConfig as PShortcutConfig).usingInput) {
         enabled = !usingInput.value;
-      } else if (isString((shortcutConfig as ShortcutConfig).usingInput)) {
-        enabled = usingInput.value === (shortcutConfig as ShortcutConfig).usingInput;
+      } else if (isString((shortcutConfig as PShortcutConfig).usingInput)) {
+        enabled = usingInput.value === (shortcutConfig as PShortcutConfig).usingInput;
       }
       shortcut.enabled = enabled;
 
@@ -198,4 +195,27 @@ export function defineShortcuts(
   }
 
   return useEventListener('keydown', onKeyDown);
+}
+
+export function extractShortcuts(items: Array<any> | Array<Array<any>>) {
+  const shortcuts: Record<string, Handler> = {};
+
+  function traverse(items: Array<any>) {
+    items.forEach((item) => {
+      if (item.kbds?.length && (item.onSelect || item.onClick)) {
+        const shortcutKey = item.kbds.join('_');
+        shortcuts[shortcutKey] = item.onSelect || item.onClick;
+      }
+      if (item.children) {
+        traverse(item.children.flat());
+      }
+      if (item.items) {
+        traverse(item.items.flat());
+      }
+    });
+  }
+
+  traverse(items.flat());
+
+  return shortcuts;
 }

@@ -161,7 +161,16 @@ const commandPaletteProps = useForwardProps(
   ),
 );
 const dialogProps = useForwardProps(
-  reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'),
+  reactivePick(
+    props,
+    'overlay',
+    'transition',
+    'content',
+    'dismissible',
+    'fullscreen',
+    'modal',
+    'portal',
+  ),
 );
 
 const getProxySlots = () => omit(slots, ['content']);
@@ -300,12 +309,10 @@ function onSelect(item: PContentSearchItem) {
 }
 
 defineShortcuts({
-  config: {
-    [props.shortcut]: {
-      usingInput: true,
-      handler: () => {
-        open.value = !open.value;
-      },
+  [props.shortcut]: {
+    usingInput: true,
+    handler: () => {
+      open.value = !open.value;
     },
   },
 });

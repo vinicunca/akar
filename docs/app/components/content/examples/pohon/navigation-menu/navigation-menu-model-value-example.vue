@@ -97,16 +97,14 @@ const items: Array<PNavigationMenuItem> = [
 const active = ref();
 
 defineShortcuts({
-  config: {
-    1: () => {
-      active.value = '0';
-    },
-    2: () => {
-      active.value = '1';
-    },
-    3: () => {
-      active.value = '2';
-    },
+  1: () => {
+    active.value = '0';
+  },
+  2: () => {
+    active.value = '1';
+  },
+  3: () => {
+    active.value = '2';
   },
 });
 </script>

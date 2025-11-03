@@ -18,10 +18,8 @@ const items: Array<PNavigationMenuItem> = [{
 const collapsed = ref(false);
 
 defineShortcuts({
-  config: {
-    c: () => {
-      collapsed.value = !collapsed.value;
-    },
+  c: () => {
+    collapsed.value = !collapsed.value;
   },
 });
 </script>

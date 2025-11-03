@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PSwitchProps } from 'pohon';
+import type { PSwitchProps } from 'pohon-ui';
 
 export interface PColorModeSwitchProps extends /** @vue-ignore */ Pick<PSwitchProps, 'as' | 'color' | 'size' | 'disabled' | 'pohon'> {
 }

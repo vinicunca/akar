@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PSelectMenuProps } from 'pohon';
+import type { PSelectMenuProps } from 'pohon-ui';
 
 export interface PColorModeSelectProps extends /** @vue-ignore */ Pick<
   PSelectMenuProps<any>,

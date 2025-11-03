@@ -504,14 +504,14 @@ defineExpose({
                   <span
                     :class="pohon.itemWrapper({
                       class: [
-                        props.pohon?.itemWrapper, isSelectItem(item) && item.ui?.itemWrapper,
+                        props.pohon?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
                       ],
                     })"
                   >
                     <ASelectItemText
                       :class="pohon.itemLabel({
                         class: [
-                          props.pohon?.itemLabel, isSelectItem(item) && item.ui?.itemLabel,
+                          props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
                         ],
                       })"
                     >
@@ -528,7 +528,7 @@ defineExpose({
                       v-if="isSelectItem(item) && (getProp({ object: item, path: props.descriptionKey as string }) || !!slots['item-description'])"
                       :class="pohon.itemDescription({
                         class: [
-                          props.pohon?.itemDescription, isSelectItem(item) && item.ui?.itemDescription,
+                          props.pohon?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
                         ],
                       })"
                     >

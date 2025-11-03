@@ -76,4 +76,14 @@ export default vinicuncaESLint(
       'perfectionist/sort-objects': 'error',
     },
   },
+
+  {
+    files: [
+      'packages/pohon/playgrounds/nuxt/app/pages/components/**/*.vue',
+      'docs/app/components/content/examples/pohon/**/*.vue',
+    ],
+    rules: {
+      'no-console': 'off',
+    },
+  },
 );

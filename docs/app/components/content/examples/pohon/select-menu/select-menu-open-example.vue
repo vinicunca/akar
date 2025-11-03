@@ -7,10 +7,8 @@ const items = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
 const value = ref('Backlog');
 
 defineShortcuts({
-  config: {
-    o: () => {
-      open.value = !open.value;
-    },
+  o: () => {
+    open.value = !open.value;
   },
 });
 </script>

@@ -22,10 +22,8 @@ function navigate(index: number) {
 }
 
 defineShortcuts({
-  config: {
-    j: () => navigate(index.value + 1),
-    k: () => navigate(index.value - 1),
-  },
+  j: () => navigate(index.value + 1),
+  k: () => navigate(index.value - 1),
 });
 </script>
 

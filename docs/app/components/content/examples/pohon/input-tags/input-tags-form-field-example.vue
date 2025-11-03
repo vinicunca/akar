@@ -9,7 +9,7 @@ const tags = ref(['Vue']);
     label="Tags"
     required
   >
-    <UInputTags
+    <PInputTags
       v-model="tags"
       placeholder="Enter tags..."
     />

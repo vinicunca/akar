@@ -6,10 +6,8 @@ import { ref } from 'vue';
 const open = ref(true);
 
 defineShortcuts({
-  config: {
-    o: () => {
-      open.value = !open.value;
-    },
+  o: () => {
+    open.value = !open.value;
   },
 });
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PAvatarProps } from 'pohon';
+import type { PAvatarProps } from 'pohon-ui';
 
 export interface PColorModeAvatarProps extends /** @vue-ignore */ Omit<PAvatarProps, 'src'> {
   light: string;

@@ -190,12 +190,10 @@ function onSelect(item: PCommandPaletteItem) {
 }
 
 defineShortcuts({
-  config: {
-    [props.shortcut]: {
-      usingInput: true,
-      handler: () => {
-        open.value = !open.value;
-      },
+  [props.shortcut]: {
+    usingInput: true,
+    handler: () => {
+      open.value = !open.value;
     },
   },
 });

@@ -1,8 +1,27 @@
 import { presetVinicunca } from '@vinicunca/unocss-preset';
 import { defineConfig } from 'unocss';
+import { BRANDS } from './app/themes/constant';
+
+const COLOR_PATTERN = /([^\s`]*\$\{color\}[^\s`]*)/g;
 
 export default defineConfig({
   outputToCssLayers: true,
+
+  extractors: [
+    {
+      name: 'pohon-colors-extractor',
+      extract({ code }) {
+        const matches = code.match(COLOR_PATTERN);
+
+        if (matches !== null) {
+          return matches.flatMap((match) => {
+            // eslint-disable-next-line no-template-curly-in-string
+            return BRANDS.map((brand) => match.replace('${color}', brand));
+          });
+        }
+      },
+    },
+  ],
 
   presets: [
     presetVinicunca({

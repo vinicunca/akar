@@ -38,6 +38,7 @@ export const alertTheme = {
       variant: 'solid',
       class: {
         root: `bg-${color} color-text-inverted`,
+        close: 'akar:color-text-inverted',
       },
     })),
     ...BRANDS.map((color: string) => ({

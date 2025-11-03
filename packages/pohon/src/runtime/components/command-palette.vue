@@ -33,7 +33,7 @@ export interface PCommandPaletteItem extends Omit<PLinkProps, 'type' | 'raw' | '
    */
   placeholder?: string;
   children?: Array<PCommandPaletteItem>;
-  onSelect?: (event?: Event) => void;
+  onSelect?: (event: Event) => void;
   class?: any;
   pohon?: Pick<CommandPalette['slots'], 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelPrefix' | 'itemLabelBase' | 'itemLabelSuffix' | 'itemTrailing' | 'itemTrailingKbds' | 'itemTrailingKbdsSize' | 'itemTrailingHighlightedIcon' | 'itemTrailingIcon'>;
   [key: string]: any;
@@ -73,7 +73,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
   icon?: PIconProps['name'];
   /**
    * The icon displayed on the right side of the input.
-   * @defaultValue appConfig.ui.icons.search
+   * @defaultValue appConfig.pohon.icons.search
    * @IconifyIcon
    */
   trailingIcon?: PIconProps['name'];
