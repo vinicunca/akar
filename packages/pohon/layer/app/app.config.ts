@@ -11,7 +11,7 @@ import { buttonTheme } from './themes/button.theme';
 import { calendarTheme } from './themes/calendar.theme';
 import { cardTheme } from './themes/card.theme';
 import { carouselTheme } from './themes/carousel.theme';
-import { checkboxTheme } from './themes/checkbox.theme';
+import { checkboxGroupTheme, checkboxTheme } from './themes/checkbox.theme';
 import { chipTheme } from './themes/chip.theme';
 import { colorPickerTheme } from './themes/color-picker.theme';
 import { commandPaletteTheme } from './themes/command-palette.theme';
@@ -72,6 +72,7 @@ export default defineAppConfig({
     card: cardTheme,
     carousel: carouselTheme,
     checkbox: checkboxTheme,
+    checkboxGroup: checkboxGroupTheme,
     chip: chipTheme,
     collapsible: {
       slots: {

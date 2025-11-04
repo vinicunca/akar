@@ -7,10 +7,10 @@ import { BRANDS } from './constant';
 export const switchTheme = {
   slots: {
     root: 'relative flex items-start',
-    base: 'inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-background-accented transition-[background] duration-200',
+    base: 'inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-background-accented transition-[background] duration-280',
     container: 'flex items-center',
-    thumb: 'group pointer-events-none rounded-full bg-background shadow-lg ring-0 transition-transform duration-200 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center',
-    icon: ['absolute shrink-0 group-data-[state=unchecked]:color-text-dimmed opacity-0 size-10/12', options.theme.transitions && 'transition-[color,opacity] duration-200'],
+    thumb: 'group pointer-events-none rounded-full bg-background shadow-lg ring-0 transition-transform-280 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center',
+    icon: ['absolute shrink-0 group-data-[state=unchecked]:color-text-dimmed opacity-0 size-10/12', options.theme.transitions && 'transition-[color,opacity] duration-280'],
     wrapper: 'ms-2',
     label: 'block font-medium color-text',
     description: 'color-text-muted',

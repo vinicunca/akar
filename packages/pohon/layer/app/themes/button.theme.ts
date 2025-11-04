@@ -16,31 +16,31 @@ export const buttonTheme = {
     ...fieldGroupVariant,
     size: {
       xs: {
-        base: 'px-2 py-1 text-xs gap-1',
+        base: 'text-xs px-2 py-1 gap-1',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4',
       },
       sm: {
-        base: 'px-2.5 py-1.5 text-xs gap-1.5',
+        base: 'text-xs px-2.5 py-1.5 gap-1.5',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
         trailingIcon: 'size-4',
       },
       md: {
-        base: 'px-2.5 py-1.5 text-sm gap-1.5',
+        base: 'text-sm px-2.5 py-1.5 gap-1.5',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5',
       },
       lg: {
-        base: 'px-3 py-2 text-sm gap-2',
+        base: 'text-sm px-3 py-2 gap-2',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
         trailingIcon: 'size-5',
       },
       xl: {
-        base: 'px-3 py-2 text-base gap-2',
+        base: 'text-base px-3 py-2 gap-2',
         leadingIcon: 'size-6',
         leadingAvatarSize: 'xs',
         trailingIcon: 'size-6',
@@ -87,32 +87,32 @@ export const buttonTheme = {
     {
       color: 'neutral',
       variant: 'solid',
-      class: 'color-text-inverted bg-background-inverted hover:bg-background-inverted/90 active:bg-background-inverted/90 disabled:bg-background-inverted aria-disabled:bg-background-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-outline-inverted',
+      class: 'color-text-inverted bg-background-inverted focus-visible:(outline-2 outline-outline-inverted outline-offset-2) active:bg-background-inverted/90 aria-disabled:bg-background-inverted disabled:bg-background-inverted hover:bg-background-inverted/90',
     },
     {
       color: 'neutral',
       variant: 'outline',
-      class: 'ring ring-inset ring-ring-accented color-text bg-background hover:bg-background-elevated active:bg-background-elevated disabled:bg-background aria-disabled:bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring-inverted',
+      class: 'color-text bg-background ring ring-ring-accented ring-inset focus:outline-none active:bg-background-elevated aria-disabled:bg-background disabled:bg-background hover:bg-background-elevated focus-visible:(ring-2 ring-ring-inverted)',
     },
     {
       color: 'neutral',
       variant: 'soft',
-      class: 'color-text bg-background-elevated hover:bg-background-accented/75 active:bg-background-accented/75 focus:outline-none focus-visible:bg-background-accented/75 disabled:bg-background-elevated aria-disabled:bg-background-elevated',
+      class: 'color-text bg-background-elevated focus:(outline-none) active:bg-background-accented/75 aria-disabled:bg-background-elevated disabled:bg-background-elevated focus-visible:bg-background-accented/75 hover:bg-background-accented/75',
     },
     {
       color: 'neutral',
       variant: 'subtle',
-      class: 'ring ring-inset ring-ring-accented color-text bg-background-elevated hover:bg-background-accented/75 active:bg-background-accented/75 disabled:bg-background-elevated aria-disabled:bg-background-elevated focus:outline-none focus-visible:ring-2 focus-visible:ring-ring-inverted',
+      class: 'color-text bg-background-elevated ring ring-ring-accented ring-inset focus:(outline-none) active:bg-background-accented/75 aria-disabled:bg-background-elevated disabled:bg-background-elevated hover:bg-background-accented/75 focus-visible:ring-2 focus-visible:ring-ring-inverted',
     },
     {
       color: 'neutral',
       variant: 'ghost',
-      class: 'color-text hover:bg-background-elevated active:bg-background-elevated focus:outline-none focus-visible:bg-background-elevated hover:disabled:bg-transparent dark:hover:disabled:bg-transparent hover:aria-disabled:bg-transparent dark:hover:aria-disabled:bg-transparent',
+      class: 'color-text focus:(outline-none) active:bg-background-elevated focus-visible:bg-background-elevated hover:bg-background-elevated hover:aria-disabled:bg-transparent hover:disabled:bg-transparent dark:hover:aria-disabled:bg-transparent dark:hover:disabled:bg-transparent',
     },
     {
       color: 'neutral',
       variant: 'link',
-      class: 'color-text-muted hover:color-text active:color-text disabled:color-text-muted aria-disabled:color-text-muted focus:outline-none focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-ring-inverted',
+      class: 'color-text-muted active:color-text aria-disabled:color-text-muted disabled:color-text-muted hover:color-text focus:(outline-none) focus-visible:ring-2 focus-visible:ring-ring-inverted focus-visible:ring-inset',
     },
     {
       size: 'xs',

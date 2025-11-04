@@ -6,8 +6,8 @@ import { inputTheme } from './input.theme';
 export const textAreaTheme = {
   slots: {
     ...inputTheme.slots,
-    leading: 'absolute start-0 flex items-start',
-    trailing: 'absolute end-0 flex items-start',
+    leading: 'flex items-start start-0 absolute',
+    trailing: 'flex items-start end-0 absolute',
   },
   variants: {
     ...inputTheme.variants,

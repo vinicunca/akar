@@ -16,7 +16,7 @@ const appConfig = useAppConfig();
       variant="outline"
       label="Open"
       block
-      :pohon="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+      :pohon="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform-280' }"
     />
 
     <template #content>

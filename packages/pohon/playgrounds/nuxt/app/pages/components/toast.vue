@@ -46,13 +46,13 @@ function templates(id: number) {
     title: 'Toast',
     description: `This is the toast ${id}`,
     avatar: {
-      src: 'https://github.com/benjamincanac.png',
+      src: 'https://github.com/praburangki.png',
     },
   }, {
     title: 'Toast',
     description: `This is the toast ${id}`,
     avatar: {
-      src: 'https://github.com/benjamincanac.png',
+      src: 'https://github.com/praburangki.png',
     },
     actions: [{
       label: 'Action',

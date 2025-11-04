@@ -79,7 +79,7 @@ const value = ref('Value');
       v-bind="props"
     />
     <PTextarea
-      :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+      :avatar="{ src: 'https://github.com/praburangki.png' }"
       icon="i-lucide-search"
       trailing
       placeholder="Search..."

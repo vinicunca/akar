@@ -10,7 +10,7 @@ const value = ref('Backlog');
     v-model="value"
     :items="items"
     :pohon="{
-      trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
+      trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform-280',
     }"
     class="w-48"
   />

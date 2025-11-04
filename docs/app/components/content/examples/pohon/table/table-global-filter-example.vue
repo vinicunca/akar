@@ -95,7 +95,7 @@ const globalFilter = ref('45');
 
 <template>
   <div class="flex flex-1 flex-col w-full">
-    <div class="border-accented px-4 py-3.5 border-b flex">
+    <div class="border-border-accented px-4 py-3.5 border-b flex">
       <PInput
         v-model="globalFilter"
         class="max-w-sm"

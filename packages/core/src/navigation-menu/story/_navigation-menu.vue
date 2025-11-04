@@ -166,7 +166,7 @@ const currentTrigger = ref('');
         </ANavigationMenuItem>
 
         <ANavigationMenuIndicator
-          class="transition-[all,transform_250ms_ease] data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut mt-[1px] flex h-[10px] w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] duration-200 items-end top-full justify-center absolute z-[100] overflow-hidden data-[state=hidden]:opacity-0"
+          class="transition-[all,transform_250ms_ease] data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut mt-[1px] flex h-[10px] w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] duration-280 items-end top-full justify-center absolute z-[100] overflow-hidden data-[state=hidden]:opacity-0"
         >
           <div
             class="rounded-tl-[2px] bg-white h-[10px] w-[10px] rotate-[45deg] top-[70%] relative"

@@ -51,10 +51,12 @@ const pohon = computed(() =>
   <APrimitive
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="card-root"
   >
     <div
       v-if="!!slots.header"
       :class="pohon.header({ class: props.pohon?.header })"
+      data-pohon="card-header"
     >
       <slot name="header" />
     </div>
@@ -62,6 +64,7 @@ const pohon = computed(() =>
     <div
       v-if="!!slots.default"
       :class="pohon.body({ class: props.pohon?.body })"
+      data-pohon="card-body"
     >
       <slot />
     </div>
@@ -69,6 +72,7 @@ const pohon = computed(() =>
     <div
       v-if="!!slots.footer"
       :class="pohon.footer({ class: props.pohon?.footer })"
+      data-pohon="card-footer"
     >
       <slot name="footer" />
     </div>

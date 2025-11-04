@@ -25,7 +25,7 @@ const reference = computed(() => ({
     :content="{ side: 'top', sideOffset: 16, updatePositionStrategy: 'always' }"
   >
     <div
-      class="border-accented text-sm border rounded-md border-dashed flex w-72 aspect-video items-center justify-center"
+      class="border-border-accented text-sm border rounded-md border-dashed flex w-72 aspect-video items-center justify-center"
       @pointerenter="open = true"
       @pointerleave="open = false"
       @pointermove="(ev) => {

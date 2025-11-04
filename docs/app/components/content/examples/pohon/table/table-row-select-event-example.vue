@@ -120,7 +120,7 @@ function onSelect(e: Event, row: PPTableRow<Payment>) {
         @select="onSelect"
       />
 
-      <div class="border-accented text-sm color-text-muted px-4 py-3.5 border-t">
+      <div class="border-border-accented text-sm color-text-muted px-4 py-3.5 border-t">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>

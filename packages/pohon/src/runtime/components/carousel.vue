@@ -362,18 +362,24 @@ defineExpose({
     :data-orientation="orientation"
     tabindex="0"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="carousel-root"
     @keydown="onKeyDown"
   >
     <div
       ref="emblaRef"
       :class="pohon.viewport({ class: props.pohon?.viewport })"
+      data-pohon="carousel-viewport"
     >
-      <div :class="pohon.container({ class: props.pohon?.container })">
+      <div
+        :class="pohon.container({ class: props.pohon?.container })"
+        data-pohon="carousel-container"
+      >
         <div
           v-for="(item, index) in items"
           :key="index"
           v-bind="dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
           :class="pohon.item({ class: [props.pohon?.item, isCarouselItem(item) && item.pohon?.item, isCarouselItem(item) && item.class] })"
+          data-pohon="carousel-item"
         >
           <slot
             :item="item"
@@ -386,10 +392,12 @@ defineExpose({
     <div
       v-if="arrows || dots"
       :class="pohon.controls({ class: props.pohon?.controls })"
+      data-pohon="carousel-controls"
     >
       <div
         v-if="arrows"
         :class="pohon.arrows({ class: props.pohon?.arrows })"
+        data-pohon="carousel-arrows"
       >
         <PButton
           :disabled="!canScrollPrev"
@@ -399,6 +407,7 @@ defineExpose({
           :aria-label="t('carousel.prev')"
           v-bind="typeof prev === 'object' ? prev : undefined"
           :class="pohon.prev({ class: props.pohon?.prev })"
+          data-pohon="carousel-prev"
           @click="scrollPrev"
         />
         <PButton
@@ -409,6 +418,7 @@ defineExpose({
           :aria-label="t('carousel.next')"
           v-bind="typeof next === 'object' ? next : undefined"
           :class="pohon.next({ class: props.pohon?.next })"
+          data-pohon="carousel-next"
           @click="scrollNext"
         />
       </div>
@@ -418,6 +428,7 @@ defineExpose({
         role="tablist"
         :aria-label="t('carousel.dots')"
         :class="pohon.dots({ class: props.pohon?.dots })"
+        data-pohon="carousel-dots"
       >
         <template
           v-for="(_, index) in scrollSnaps"
@@ -429,6 +440,7 @@ defineExpose({
             :aria-label="t('carousel.goto', { slide: index + 1 })"
             :aria-selected="selectedIndex === index"
             :class="pohon.dot({ class: props.pohon?.dot, active: selectedIndex === index })"
+            data-pohon="carousel-dot"
             :data-state="selectedIndex === index ? 'active' : undefined"
             @click="scrollTo(index)"
           />

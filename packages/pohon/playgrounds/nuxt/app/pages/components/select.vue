@@ -145,7 +145,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!]);
     />
     <PSelect
       placeholder="Search..."
-      :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+      :avatar="{ src: 'https://github.com/praburangki.png' }"
       :items="items"
       v-bind="props"
     />

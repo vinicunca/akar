@@ -155,6 +155,7 @@ function getOffset(index: number) {
         '--transform': 'translateY(var(--translate)) scale(var(--scale))',
       }"
       :class="pohon.base({ class: [props.pohon?.base, toast.onClick ? 'cursor-pointer' : undefined] })"
+      data-pohon="toaster-base"
       @update:open="onUpdateOpen($event, toast.id)"
       @click="toast.onClick && toast.onClick(toast)"
     />
@@ -163,6 +164,7 @@ function getOffset(index: number) {
       <AToastViewport
         :data-expanded="expanded"
         :class="pohon.viewport({ class: [props.pohon?.viewport, props.class] })"
+        data-pohon="toaster-viewport"
         :style="{
           '--scale-factor': '0.05',
           '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',
@@ -176,3 +178,4 @@ function getOffset(index: number) {
     </AToastPortal>
   </AToastProvider>
 </template>
+40

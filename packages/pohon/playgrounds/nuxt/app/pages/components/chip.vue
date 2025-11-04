@@ -68,7 +68,7 @@ const items = [{
       text="1"
       v-bind="props"
     >
-      <PAvatar src="https://github.com/benjamincanac.png" />
+      <PAvatar src="https://github.com/praburangki.png" />
     </PChip>
   </BaseMatrix>
 </template>

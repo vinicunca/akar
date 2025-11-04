@@ -6,7 +6,7 @@ import type { UvConfig } from 'pohon-ui';
 export const toasterTheme = {
   slots: {
     viewport: 'fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none',
-    base: 'p-toaster-base pointer-events-auto uno-layer-vinicunca:absolute inset-x-0 z-3000 data-[expanded=false]:data-[front-false]:h-$front-height data-[expanded=false]:data-[front=false]:*:opacity-0 data-[front=false]:*:transition-opacity data-[state=closed]:animate-toast-closed data-[state=x]:data-[expanded=false]:data-[front=false]:animate-toast-collapsed-closed data-[swipe=move]:transition-none duration-200 ease-out',
+    base: 'p-toaster-base pointer-events-auto uno-layer-vinicunca:absolute inset-x-0 z-3000 data-[expanded=false]:data-[front-false]:h-$front-height data-[expanded=false]:data-[front=false]:*:opacity-0 data-[front=false]:*:transition-opacity data-[state=closed]:animate-toast-closed data-[state=x]:data-[expanded=false]:data-[front=false]:animate-toast-collapsed-closed data-[swipe=move]:transition-none duration-280 ease-out',
   },
   variants: {
     position: {
@@ -41,14 +41,14 @@ export const toasterTheme = {
       position: ['top-left', 'top-center', 'top-right'],
       class: {
         viewport: 'top-4',
-        base: 'top-0 data-[state=open]:(animate-in animate-duration-200 slide-in-from-top)',
+        base: 'top-0 data-[state=open]:(animate-in animate-duration-280 slide-in-from-top)',
       },
     },
     {
       position: ['bottom-left', 'bottom-center', 'bottom-right'],
       class: {
         viewport: 'bottom-4',
-        base: 'bottom-0 data-[state=open]:(animate-in animate-duration-200 slide-in-from-bottom)',
+        base: 'bottom-0 data-[state=open]:(animate-in animate-duration-280 slide-in-from-bottom)',
       },
     },
     {

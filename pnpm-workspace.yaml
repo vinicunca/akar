@@ -8,6 +8,7 @@ overrides:
   akar: workspace:*
   pohon-ui: workspace:*
   rolldown: 1.0.0-beta.26
+  typescript: 5.8.3
   unplugin: ^2.3.10
   vite: ^7.1.12
 
@@ -27,7 +28,7 @@ catalogs:
     simple-git-hooks: ^2.13.1
     taze: ^19.7.0
     tsx: ^4.20.5
-    typescript: 5.9.2
+    typescript: 5.8.3
     unocss: 66.5.4
     vue-router: ^4.5.1
   core:

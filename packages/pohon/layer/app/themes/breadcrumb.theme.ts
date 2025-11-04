@@ -4,16 +4,16 @@ import type { PThemeBreadcrumb } from 'pohon-ui';
 
 export const breadcrumbTheme = {
   slots: {
-    root: 'relative min-w-0',
-    list: 'flex items-center gap-1.5',
+    root: 'min-w-0 relative',
+    list: 'flex gap-1.5 items-center',
     item: 'flex min-w-0',
-    link: 'group relative flex items-center gap-1.5 text-sm min-w-0 focus-visible:outline-primary',
+    link: 'group text-sm flex gap-1.5 min-w-0 items-center relative focus-visible:outline-primary',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
     linkLabel: 'truncate',
     separator: 'flex',
-    separatorIcon: 'shrink-0 size-5 color-text-muted',
+    separatorIcon: 'color-text-muted shrink-0 size-5',
   },
   variants: {
     active: {
@@ -26,7 +26,7 @@ export const breadcrumbTheme = {
     },
     disabled: {
       true: {
-        link: 'cursor-not-allowed opacity-75',
+        link: 'opacity-75 cursor-not-allowed',
       },
     },
   },

@@ -4,39 +4,39 @@ import type { PThemeAvatar, PThemeAvatarGroup } from 'pohon-ui';
 
 export const avatarTheme = {
   slots: {
-    root: 'inline-flex items-center justify-center shrink-0 select-none rounded-full align-middle bg-background-elevated',
-    image: 'size-full rounded-inherit object-cover',
-    fallback: 'font-medium leading-none color-text-muted truncate',
+    root: 'align-middle rounded-full bg-background-elevated inline-flex shrink-0 select-none items-center justify-center',
+    image: 'rounded-inherit size-full object-cover',
+    fallback: 'color-text-muted leading-none font-medium truncate',
     icon: 'color-text-muted shrink-0',
   },
   variants: {
     size: {
       '3xs': {
-        root: 'size-4 text-[8px]',
+        root: 'text-[8px] size-4',
       },
       '2xs': {
-        root: 'size-5 text-[10px]',
+        root: 'text-[10px] size-5',
       },
       'xs': {
-        root: 'size-6 text-xs',
+        root: 'text-xs size-6',
       },
       'sm': {
-        root: 'size-7 text-sm',
+        root: 'text-sm size-7',
       },
       'md': {
-        root: 'size-8 text-base',
+        root: 'text-base size-8',
       },
       'lg': {
-        root: 'size-9 text-lg',
+        root: 'text-lg size-9',
       },
       'xl': {
-        root: 'size-10 text-xl',
+        root: 'text-xl size-10',
       },
       '2xl': {
-        root: 'size-11 text-[22px]',
+        root: 'text-[22px] size-11',
       },
       '3xl': {
-        root: 'size-12 text-2xl',
+        root: 'text-2xl size-12',
       },
     },
   },
@@ -45,7 +45,7 @@ export const avatarTheme = {
 export const avatarGroupTheme = {
   slots: {
     root: 'inline-flex flex-row-reverse justify-end',
-    base: 'relative rounded-full ring-ring-bg first:me-0',
+    base: 'rounded-full ring-ring-bg relative first:me-0',
   },
   variants: {
     size: {

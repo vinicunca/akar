@@ -46,7 +46,7 @@ const attrs = reactive({
       v-bind="props"
     />
     <PBadge
-      :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+      :avatar="{ src: 'https://github.com/praburangki.png' }"
       label="Avatar"
       v-bind="props"
     />
@@ -55,7 +55,7 @@ const attrs = reactive({
       v-bind="props"
     />
     <PBadge
-      :avatar="{ src: 'https://github.com/benjamincanac.png' }"
+      :avatar="{ src: 'https://github.com/praburangki.png' }"
       v-bind="props"
     />
   </BaseMatrix>

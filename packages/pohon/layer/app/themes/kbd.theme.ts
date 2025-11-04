@@ -4,7 +4,7 @@ import type { PThemeKbd } from 'pohon-ui';
 import { BRANDS } from './constant';
 
 export const kbdTheme = {
-  base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans py-0.5',
+  base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase',
   variants: {
     size: {
       sm: 'h-4 min-w-[16px] text-[10px]',

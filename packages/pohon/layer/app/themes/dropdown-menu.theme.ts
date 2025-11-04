@@ -5,13 +5,13 @@ import { BRANDS } from './constant';
 
 export const dropdownMenuTheme = {
   slots: {
-    content: 'min-w-32 bg-background shadow-lg rounded-md ring ring-ring overflow-hiddendata-[state=closed]:(animate-out fade-out-0 zoom-out-95) data-[state=open]:(animate-in fade-in-0 zoom-in-95) data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-$akar-dropdown-menu-content-transform-origin flex flex-col',
+    content: 'min-w-32 bg-background shadow-lg rounded-md ring ring-ring overflow-hidden data-[state=closed]:(animate-out fade-out-0 zoom-out-95) data-[state=open]:(animate-in fade-in-0 zoom-in-95) data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-$akar-dropdown-menu-content-transform-origin flex flex-col',
     viewport: 'relative divide-y divide-divide scroll-py-1 overflow-y-auto flex-1',
     arrow: 'fill-fill',
     group: 'p-1 isolate',
     label: 'w-full flex items-center font-semibold color-text-highlighted',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start select-none outline-none before:absolute before:-z-1 before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75',
+    item: 'group relative w-full flex items-start select-none outline-none before:(content-empty absolute -z-1 inset-px rounded-md) data-[disabled]:(cursor-not-allowed opacity-75)',
     itemLeadingIcon: 'shrink-0',
     itemLeadingAvatar: 'shrink-0',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
@@ -91,16 +91,16 @@ export const dropdownMenuTheme = {
       color,
       active: false,
       class: {
-        item: `color-${color} data-[highlighted]:color-${color} data-[highlighted]:before:bg-${color}/10 data-[state=open]:before:bg-${color}/10`,
-        itemLeadingIcon: `color-${color}/75 group-data-[highlighted]:color-${color} group-data-[state=open]:color-${color}`,
+        item: `akar:color-${color} data-[highlighted]:color-${color} data-[highlighted]:before:bg-${color}/10 data-[state=open]:before:bg-${color}/10`,
+        itemLeadingIcon: `akar:color-${color}/75 group-data-[highlighted]:color-${color} group-data-[state=open]:color-${color}`,
       },
     })),
     ...BRANDS.map((color: string) => ({
       color,
       active: true,
       class: {
-        item: `color-${color} before:bg-${color}/10`,
-        itemLeadingIcon: `color-${color}`,
+        item: `akar:color-${color} before:bg-${color}/10`,
+        itemLeadingIcon: `akar:color-${color}`,
       },
     })),
   ],

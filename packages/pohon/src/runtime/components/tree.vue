@@ -285,6 +285,7 @@ defineExpose({
       :class="!!nested && level > 1
         ? pohon.itemWithChildren({ class: [props.pohon?.itemWithChildren, item.pohon?.itemWithChildren] })
         : pohon.item({ class: [props.pohon?.item, item.pohon?.item] })"
+      data-pohon="tree-item"
     >
       <ATreeItem
         v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
@@ -312,6 +313,7 @@ defineExpose({
               ? { paddingLeft: flattenedPaddingFormula(level) }
               : undefined"
             tabindex="0"
+            data-pohon="tree-link"
           >
             <slot
               :name="((item.slot || 'item') as keyof PTreeSlots<T>)"
@@ -329,6 +331,7 @@ defineExpose({
                   :class="pohon.linkLeadingIcon({
                     class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
                   })"
+                  data-pohon="tree-link-leading-icon"
                 />
 
                 <PIcon
@@ -337,12 +340,14 @@ defineExpose({
                   :class="pohon.linkLeadingIcon({
                     class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
                   })"
+                  data-pohon="tree-link-leading-icon"
                 />
               </slot>
 
               <span
                 v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>]"
                 :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
+                data-pohon="tree-link-label"
               >
                 <slot
                   :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>)"
@@ -356,6 +361,7 @@ defineExpose({
               <span
                 v-if="item.trailingIcon || item.children?.length || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>]"
                 :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
+                data-pohon="tree-link-trailing"
               >
                 <slot
                   :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>)"
@@ -368,6 +374,7 @@ defineExpose({
                     :class="pohon.linkTrailingIcon({
                       class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
                     })"
+                    data-pohon="tree-link-trailing-icon"
                   />
                   <PIcon
                     v-else-if="item.children?.length"
@@ -375,6 +382,7 @@ defineExpose({
                     :class="pohon.linkTrailingIcon({
                       class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
                     })"
+                    data-pohon="tree-link-trailing-icon"
                   />
                 </slot>
               </span>
@@ -388,6 +396,7 @@ defineExpose({
           :class="pohon.listWithChildren({
             class: [props.pohon?.listWithChildren, item.pohon?.listWithChildren],
           })"
+          data-pohon="tree-list-with-children"
         >
           <ReuseTreeTemplate
             :items="item.children"
@@ -416,6 +425,7 @@ defineExpose({
     :model-value="modelValue"
     :default-value="defaultValue"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="tree-root"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"
     :selection-behavior="selectionBehavior"

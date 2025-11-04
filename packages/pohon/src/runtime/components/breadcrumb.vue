@@ -98,13 +98,20 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
     :as="as"
     aria-label="breadcrumb"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="breadcrumb-root"
   >
-    <ol :class="pohon.list({ class: props.pohon?.list })">
+    <ol
+      :class="pohon.list({ class: props.pohon?.list })"
+      data-pohon="breadcrumb-list"
+    >
       <template
         v-for="(item, index) in items"
         :key="index"
       >
-        <li :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item] })">
+        <li
+          :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item] })"
+          data-pohon="breadcrumb-item"
+        >
           <PLink
             v-slot="{ active, ...slotProps }"
             v-bind="pickLinkProps(item)"
@@ -120,6 +127,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                 disabled: !!item.disabled,
                 to: !!item.to,
               })"
+              data-pohon="breadcrumb-link"
             >
               <slot
                 :name="((item.slot || 'item') as keyof PBreadcrumbSlots<T>)"
@@ -142,6 +150,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                       class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
                       active: item.active ?? (index === items!.length - 1),
                     })"
+                    data-pohon="breadcrumb-link-leading-icon"
                   />
                   <PAvatar
                     v-else-if="item.avatar"
@@ -151,12 +160,14 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                       class: [props.pohon?.linkLeadingAvatar, item.pohon?.linkLeadingAvatar],
                       active: item.active ?? (index === items!.length - 1),
                     })"
+                    data-pohon="breadcrumb-link-leading-avatar"
                   />
                 </slot>
 
                 <span
                   v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PBreadcrumbSlots<T>]"
                   :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
+                  data-pohon="breadcrumb-link-label"
                 >
                   <slot
                     :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof DynamicSlots<T, 'label'>)"
@@ -184,6 +195,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
           role="presentation"
           aria-hidden="true"
           :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator] })"
+          data-pohon="breadcrumb-separator"
         >
           <slot
             name="separator"
@@ -192,6 +204,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
             <PIcon
               :name="separatorIcon"
               :class="pohon.separatorIcon({ class: [props.pohon?.separatorIcon, item.pohon?.separatorIcon] })"
+              data-pohon="breadcrumb-separator-icon"
             />
           </slot>
         </li>

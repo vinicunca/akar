@@ -234,7 +234,7 @@ defineShortcuts({
         <div class="flex gap-2 items-center justify-between">
           <PIcon
             name="i-simple-icons-nuxtdotjs"
-            class="text-dimmed ml-1 size-5"
+            class="color-text-dimmed ml-1 size-5"
           />
           <div class="flex gap-1 items-center">
             <PButton
@@ -244,7 +244,7 @@ defineShortcuts({
               size="xs"
             >
               <template #trailing>
-                <UKbd value="enter" />
+                <PKbd value="enter" />
               </template>
             </PButton>
 
@@ -260,8 +260,8 @@ defineShortcuts({
               size="xs"
             >
               <template #trailing>
-                <UKbd value="meta" />
-                <UKbd value="k" />
+                <PKbd value="meta" />
+                <PKbd value="k" />
               </template>
             </PButton>
           </div>

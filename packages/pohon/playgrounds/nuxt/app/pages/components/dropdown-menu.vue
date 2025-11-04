@@ -9,7 +9,7 @@ const items = computed(() => [
   [{
     label: 'My account',
     avatar: {
-      src: 'https://github.com/benjamincanac.png',
+      src: 'https://github.com/praburangki.png',
     },
     type: 'label' as const,
   }],

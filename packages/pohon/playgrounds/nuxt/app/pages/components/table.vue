@@ -457,7 +457,7 @@ onMounted(() => {
           },
         }"
         sticky
-        class="border-accented border rounded-sm"
+        class="border-border-accented border rounded-sm"
         @select="onSelect"
         @contextmenu="onContextmenu"
         @pointermove="(ev: PointerEvent) => {

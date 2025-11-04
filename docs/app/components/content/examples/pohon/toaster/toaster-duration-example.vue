@@ -10,7 +10,7 @@ const appConfig = useAppConfig();
       label="toaster.duration"
       size="sm"
       :pohon="{
-        wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-accented',
+        wrapper: 'bg-elevated/50 rounded-l-sm flex border-r border-border-accented',
         label: 'color-text-muted px-2 py-1.5',
         container: 'mt-0',
       }"

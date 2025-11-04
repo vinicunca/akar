@@ -175,16 +175,19 @@ const pohon = computed(() =>
       <ADrawerOverlay
         v-if="overlay"
         :class="pohon.overlay({ class: props.pohon?.overlay })"
+        data-pohon="drawer-overlay"
       />
 
       <ADrawerContent
         :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
         v-bind="contentProps"
+        data-pohon="drawer-content"
         v-on="contentEvents"
       >
         <ADrawerHandle
           v-if="handle"
           :class="pohon.handle({ class: props.pohon?.handle })"
+          data-pohon="drawer-handle"
         />
 
         <AVisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
@@ -202,15 +205,20 @@ const pohon = computed(() =>
         </AVisuallyHidden>
 
         <slot name="content">
-          <div :class="pohon.container({ class: props.pohon?.container })">
+          <div
+            :class="pohon.container({ class: props.pohon?.container })"
+            data-pohon="drawer-container"
+          >
             <div
               v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)"
               :class="pohon.header({ class: props.pohon?.header })"
+              data-pohon="drawer-header"
             >
               <slot name="header">
                 <ADrawerTitle
                   v-if="title || !!slots.title"
                   :class="pohon.title({ class: props.pohon?.title })"
+                  data-pohon="drawer-title"
                 >
                   <slot name="title">
                     {{ title }}
@@ -220,6 +228,7 @@ const pohon = computed(() =>
                 <ADrawerDescription
                   v-if="description || !!slots.description"
                   :class="pohon.description({ class: props.pohon?.description })"
+                  data-pohon="drawer-description"
                 >
                   <slot name="description">
                     {{ description }}
@@ -231,6 +240,7 @@ const pohon = computed(() =>
             <div
               v-if="!!slots.body"
               :class="pohon.body({ class: props.pohon?.body })"
+              data-pohon="drawer-body"
             >
               <slot name="body" />
             </div>
@@ -238,6 +248,7 @@ const pohon = computed(() =>
             <div
               v-if="!!slots.footer"
               :class="pohon.footer({ class: props.pohon?.footer })"
+              data-pohon="drawer-footer"
             >
               <slot name="footer" />
             </div>

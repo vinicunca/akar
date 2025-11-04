@@ -14,7 +14,7 @@ export const treeTheme = {
     linkLeadingIcon: 'shrink-0 relative',
     linkLabel: 'truncate',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-    linkTrailingIcon: 'shrink-0 transform transition-transform duration-200 group-data-[expanded]:rotate-180',
+    linkTrailingIcon: 'shrink-0 transform transition-transform-280 group-data-[expanded]:rotate-180',
   },
   variants: {
     virtualize: {

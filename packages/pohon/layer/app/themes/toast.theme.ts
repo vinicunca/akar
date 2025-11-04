@@ -5,15 +5,15 @@ import { BRANDS } from './constant';
 
 export const toastTheme = {
   slots: {
-    root: 'relative group overflow-hidden bg-background shadow-lg rounded-lg ring ring-ring p-4 flex gap-2.5 focus:outline-none',
-    wrapper: 'w-0 flex-1 flex flex-col',
-    title: 'text-sm font-medium color-text-highlighted',
+    root: 'group p-4 rounded-lg bg-background flex gap-2.5 ring ring-ring shadow-lg relative overflow-hidden focus:outline-none',
+    wrapper: 'flex flex-1 flex-col w-0',
+    title: 'text-sm color-text-highlighted font-medium',
     description: 'text-sm color-text-muted',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     avatarSize: '2xl',
-    actions: 'flex gap-1.5 shrink-0',
-    progress: 'absolute inset-x-0 bottom-0',
+    actions: 'flex shrink-0 gap-1.5',
+    progress: 'inset-x-0 bottom-0 absolute',
     close: 'p-0',
   },
   variants: {
@@ -26,7 +26,7 @@ export const toastTheme = {
         },
       ])),
       neutral: {
-        root: 'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring-inverted',
+        root: 'focus-visible:(ring-2 ring-ring-inverted ring-inset)',
         icon: 'color-text-highlighted',
       },
     },
@@ -37,7 +37,7 @@ export const toastTheme = {
       },
       vertical: {
         root: 'items-start',
-        actions: 'items-start mt-2.5',
+        actions: 'mt-2.5 items-start',
       },
     },
     title: {
@@ -50,8 +50,8 @@ export const toastTheme = {
 
 export const toasterTheme = {
   slots: {
-    viewport: 'fixed flex flex-col w-[calc(100%-2rem)] sm:w-96 z-[100] data-[expanded=true]:h-(--height) focus:outline-none',
-    base: '[transform:var(--transform)] transition-[transform,height] pointer-events-auto uno-layer-vinicunca:absolute inset-x-0 z-3000 data-[expanded=false]:data-[front-false]:h-$front-height data-[expanded=false]:data-[front=false]:*:opacity-0 data-[front=false]:*:transition-opacity data-[state=closed]:animate-toast-closed data-[state=x]:data-[expanded=false]:data-[front=false]:animate-toast-collapsed-closed data-[swipe=move]:transition-none duration-200 ease-out',
+    viewport: 'flex flex-col w-[calc(100%-2rem)] fixed z-100 focus:outline-none data-[expanded=true]:h-$height sm:w-96',
+    base: 'pointer-events-auto transition-[transform,height]-280 ease-out [transform:var(--transform)] inset-x-0 z-300 data-[swipe=move]:transition-none uno-layer-vinicunca:absolute data-[state=closed]:animate-toast-closed data-[expanded=false]:data-[front-false]:h-$front-height data-[front=false]:*:transition-opacity data-[expanded=false]:data-[front=false]:*:opacity-0 data-[state=x]:data-[expanded=false]:data-[front=false]:animate-toast-collapsed-closed',
   },
   variants: {
     position: {
@@ -59,7 +59,7 @@ export const toasterTheme = {
         viewport: 'left-4',
       },
       'top-center': {
-        viewport: 'left-1/2 transform -translate-x-1/2',
+        viewport: 'transform left-1/2 -translate-x-1/2',
       },
       'top-right': {
         viewport: 'right-4',
@@ -68,7 +68,7 @@ export const toasterTheme = {
         viewport: 'left-4',
       },
       'bottom-center': {
-        viewport: 'left-1/2 transform -translate-x-1/2',
+        viewport: 'transform left-1/2 -translate-x-1/2',
       },
       'bottom-right': {
         viewport: 'right-4',
@@ -86,14 +86,14 @@ export const toasterTheme = {
       position: ['top-left', 'top-center', 'top-right'],
       class: {
         viewport: 'top-4',
-        base: 'top-0 data-[state=open]:(animate-in animate-duration-200 slide-in-from-top)',
+        base: 'top-0 data-[state=open]:(animate-in animate-duration-280 slide-in-from-top)',
       },
     },
     {
       position: ['bottom-left', 'bottom-center', 'bottom-right'],
       class: {
         viewport: 'bottom-4',
-        base: 'bottom-0 data-[state=open]:(animate-in animate-duration-200 slide-in-from-bottom)',
+        base: 'bottom-0 data-[state=open]:(animate-in animate-duration-280 slide-in-from-bottom)',
       },
     },
     {

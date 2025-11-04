@@ -123,6 +123,7 @@ const pohon = computed(() =>
     :class="pohon.root({
       class: [props.pohon?.root, props.class],
     })"
+    data-pohon="accordion-root"
   >
     <AAccordionItem
       v-for="(item, index) in props.items"
@@ -133,15 +134,18 @@ const pohon = computed(() =>
       :class="pohon.item({
         class: [props.pohon?.item, item.pohon?.item, item.class],
       })"
+      data-pohon="accordion-item"
     >
       <AAccordionHeader
         as="div"
         :class="pohon.header({ class: [props.pohon?.header, item.pohon?.header] })"
+        data-pohon="accordion-header"
       >
         <AAccordionTrigger
           :class="pohon.trigger({
             class: [props.pohon?.trigger, item.pohon?.trigger], disabled: item.disabled,
           })"
+          data-pohon="accordion-trigger"
         >
           <slot
             name="leading"
@@ -154,12 +158,14 @@ const pohon = computed(() =>
               v-if="item.icon"
               :name="item.icon"
               :class="pohon.leadingIcon({ class: [props.pohon?.leadingIcon, item?.pohon?.leadingIcon] })"
+              data-pohon="accordion-leading-icon"
             />
           </slot>
 
           <span
             v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots.default"
             :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
+            data-pohon="accordion-label"
           >
             <slot
               :item="item"
@@ -178,6 +184,7 @@ const pohon = computed(() =>
             <PIcon
               :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
               :class="pohon.trailingIcon({ class: [props.pohon?.trailingIcon, item.pohon?.trailingIcon] })"
+              data-pohon="accordion-trailing-icon"
             />
           </slot>
         </AAccordionTrigger>
@@ -186,18 +193,22 @@ const pohon = computed(() =>
       <AAccordionContent
         v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof PAccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof PAccordionSlots<T>])"
         :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content] })"
+        data-pohon="accordion-content"
       >
         <slot
-          :name="(item.slot || 'content') as keyof PAccordionSlots<T>"
+          :name="((item.slot || 'content') as keyof PAccordionSlots<T>)"
           :item="item as Extract<T, { slot: string; }>"
           :index="index"
           :open="open"
           :pohon="pohon"
         >
-          <div :class="pohon.body({ class: [props.pohon?.body, item.pohon?.body] })">
+          <div
+            :class="pohon.body({ class: [props.pohon?.body, item.pohon?.body] })"
+            data-pohon="accordion-body"
+          >
             <slot
-              :name="(item.slot ? `${item.slot}-body` : 'body') as keyof PAccordionSlots<T>"
-              :item="item as Extract<T, { slot: string; }>"
+              :name="((item.slot ? `${item.slot}-body` : 'body') as keyof PAccordionSlots<T>)"
+              :item="(item as Extract<T, { slot: string; }>)"
               :index="index"
               :open="open"
               :pohon="pohon"

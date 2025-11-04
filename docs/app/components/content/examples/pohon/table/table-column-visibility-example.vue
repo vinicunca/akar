@@ -100,7 +100,7 @@ const columnVisibility = ref({
 
 <template>
   <div class="flex flex-1 flex-col w-full">
-    <div class="border-accented px-4 py-3.5 border-b flex justify-end">
+    <div class="border-border-accented px-4 py-3.5 border-b flex justify-end">
       <PDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
           label: upperFirst(column.id),

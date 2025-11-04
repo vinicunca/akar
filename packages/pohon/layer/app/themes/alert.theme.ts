@@ -5,14 +5,14 @@ import { BRANDS } from './constant';
 
 export const alertTheme = {
   slots: {
-    root: 'relative overflow-hidden w-full rounded-lg p-4 flex gap-2.5',
-    wrapper: 'min-w-0 flex-1 flex flex-col',
+    root: 'p-4 rounded-lg flex gap-2.5 w-full relative overflow-hidden',
+    wrapper: 'flex flex-1 flex-col min-w-0',
     title: 'text-sm font-medium',
     description: 'text-sm opacity-90',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     avatarSize: '2xl',
-    actions: 'flex flex-wrap gap-1.5 shrink-0',
+    actions: 'flex shrink-0 flex-wrap gap-1.5',
     close: 'p-0',
   },
   variants: {
@@ -23,7 +23,7 @@ export const alertTheme = {
       },
       vertical: {
         root: 'items-start',
-        actions: 'items-start mt-2.5',
+        actions: 'mt-2.5 items-start',
       },
     },
     title: {

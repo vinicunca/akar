@@ -86,4 +86,15 @@ export default vinicuncaESLint(
       'no-console': 'off',
     },
   },
+
+  {
+    files: [
+      'packages/pohon/layer/app/themes/*.ts',
+    ],
+    rules: {
+      'unocss/order': ['warn', {
+        unoVariables: ['Theme?$'],
+      }],
+    },
+  },
 );

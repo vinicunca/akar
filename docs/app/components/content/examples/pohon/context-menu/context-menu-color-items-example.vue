@@ -31,7 +31,7 @@ const items: Array<Array<PContextMenuItem>> = [
     :items="items"
     :pohon="{ content: 'w-48' }"
   >
-    <div class="border-accented text-sm border rounded-md border-dashed flex w-72 aspect-video items-center justify-center">
+    <div class="border-border-accented text-sm border rounded-md border-dashed flex w-72 aspect-video items-center justify-center">
       Right click here
     </div>
   </PContextMenu>

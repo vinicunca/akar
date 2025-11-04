@@ -6,15 +6,15 @@ import { BRANDS } from './constant';
 export const calendarTheme = {
   slots: {
     header: 'flex items-center justify-between',
-    body: 'flex flex-col space-y-4 pt-4 sm:(flex-row space-x-4 space-y-0)',
-    heading: 'text-center font-medium truncate mx-auto',
-    grid: 'w-full border-collapse select-none space-y-1 focus:outline-none',
+    body: 'pt-4 flex flex-col space-y-4 sm:(flex-row space-x-4 space-y-0)',
+    heading: 'font-medium mx-auto text-center truncate',
+    grid: 'w-full select-none border-collapse space-y-1 focus:outline-none',
     gridRow: 'grid grid-cols-7 place-items-center',
-    gridWeekDaysRow: 'mb-1 grid w-full grid-cols-7',
+    gridWeekDaysRow: 'mb-1 grid grid-cols-7 w-full',
     gridBody: 'grid',
     headCell: 'rounded-md',
-    cell: 'relative text-center',
-    cellTrigger: 'm-0.5 relative flex items-center justify-center rounded-full whitespace-nowrap focus-visible:ring-2 focus:outline-none data-[disabled]:(color-text-dimmed cursor-not-allowed) data-[unavailable]:(line-through color-text-muted pointer-events-none) data-[today]:font-semibold data-[outside-view]:color-text-muted transition-colors-280',
+    cell: 'text-center relative',
+    cellTrigger: 'm-0.5 rounded-full flex whitespace-nowrap transition-colors-280 items-center justify-center relative data-[disabled]:(color-text-dimmed cursor-not-allowed) data-[outside-view]:color-text-muted data-[unavailable]:(color-text-muted line-through pointer-events-none) data-[today]:font-semibold focus:outline-none focus-visible:ring-2',
   },
   variants: {
     color: {
@@ -36,7 +36,7 @@ export const calendarTheme = {
         cell: 'text-xs',
         headCell: 'text-[10px]',
         cellTrigger: 'size-7',
-        body: 'space-y-2 pt-2',
+        body: 'pt-2 space-y-2',
       },
       sm: {
         heading: 'text-xs',
@@ -53,12 +53,12 @@ export const calendarTheme = {
       lg: {
         heading: 'text-base',
         headCell: 'text-base',
-        cellTrigger: 'size-9 text-base',
+        cellTrigger: 'text-base size-9',
       },
       xl: {
         heading: 'text-lg',
         headCell: 'text-lg',
-        cellTrigger: 'size-10 text-lg',
+        cellTrigger: 'text-lg size-10',
       },
     },
   },

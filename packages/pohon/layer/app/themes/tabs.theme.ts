@@ -5,21 +5,21 @@ import { BRANDS } from './constant';
 
 export const tabsTheme = {
   slots: {
-    root: 'flex items-center gap-2',
-    list: 'relative flex p-1 group',
-    indicator: 'absolute transition-[transform,width]-200',
-    trigger: 'group relative inline-flex items-center min-w-0 data-[state=inactive]:color-text-muted hover:data-[state=inactive]:not-disabled:color-text font-medium rounded-md disabled:cursor-not-allowed disabled:opacity-75 transition-colors-280',
+    root: 'flex gap-2 items-center',
+    list: 'group p-1 flex relative',
+    indicator: 'transition-[transform,width]-200 absolute',
+    trigger: 'group font-medium rounded-md inline-flex min-w-0 transition-colors-280 items-center relative data-[state=inactive]:color-text-muted disabled:(opacity-75 cursor-not-allowed) hover:data-[state=inactive]:not-disabled:color-text',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
     label: 'truncate',
     trailingBadge: 'shrink-0',
     trailingBadgeSize: 'sm',
-    content: 'focus:outline-none w-full',
+    content: 'w-full focus:outline-none',
   },
   variants: {
     variant: {
       pill: {
-        list: 'bg-background-elevated rounded-lg',
+        list: 'rounded-lg bg-background-elevated',
         trigger: 'grow',
         indicator: 'rounded-md shadow-xs',
       },
@@ -33,37 +33,37 @@ export const tabsTheme = {
       horizontal: {
         root: 'flex-col',
         list: 'w-full',
-        indicator: 'left-0 w-$akar-tabs-indicator-size translate-x-$akar-tabs-indicator-position',
+        indicator: 'w-$akar-tabs-indicator-size translate-x-$akar-tabs-indicator-position left-0',
         trigger: 'justify-center',
       },
       vertical: {
         list: 'flex-col',
-        indicator: 'top-0 h-$akar-tabs-indicator-size translate-y-$akar-tabs-indicator-position',
+        indicator: 'h-$akar-tabs-indicator-size translate-y-$akar-tabs-indicator-position top-0',
       },
     },
     size: {
       xs: {
-        trigger: 'px-2 py-1 text-xs gap-1',
+        trigger: 'text-xs px-2 py-1 gap-1',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
       },
       sm: {
-        trigger: 'px-2.5 py-1.5 text-xs gap-1.5',
+        trigger: 'text-xs px-2.5 py-1.5 gap-1.5',
         leadingIcon: 'size-4',
         leadingAvatarSize: '3xs',
       },
       md: {
-        trigger: 'px-3 py-1.5 text-sm gap-1.5',
+        trigger: 'text-sm px-3 py-1.5 gap-1.5',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
       },
       lg: {
-        trigger: 'px-3 py-2 text-sm gap-2',
+        trigger: 'text-sm px-3 py-2 gap-2',
         leadingIcon: 'size-5',
         leadingAvatarSize: '2xs',
       },
       xl: {
-        trigger: 'px-3 py-2 text-base gap-2',
+        trigger: 'text-base px-3 py-2 gap-2',
         leadingIcon: 'size-6',
         leadingAvatarSize: 'xs',
       },
@@ -114,7 +114,7 @@ export const tabsTheme = {
       variant: 'pill',
       class: {
         indicator: 'bg-background-inverted',
-        trigger: 'data-[state=active]:color-text-inverted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-outline-inverted',
+        trigger: 'data-[state=active]:color-text-inverted focus-visible:(outline-2 outline-offset-2 outline-outline-inverted)',
       },
     },
     ...BRANDS.map((color: string) => ({
@@ -130,7 +130,7 @@ export const tabsTheme = {
       variant: 'link',
       class: {
         indicator: 'bg-background-inverted',
-        trigger: 'data-[state=active]:color-text-highlighted focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring-inverted',
+        trigger: 'data-[state=active]:color-text-highlighted focus-visible:(ring-2 ring-inset ring-ring-inverted)',
       },
     },
   ],

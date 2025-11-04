@@ -65,6 +65,7 @@ const pohon = computed(() =>
     v-slot="{ open }"
     v-bind="rootProps"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="collapsible-root"
   >
     <ACollapsibleTrigger
       v-if="!!slots.default"
@@ -73,7 +74,10 @@ const pohon = computed(() =>
       <slot :open="open" />
     </ACollapsibleTrigger>
 
-    <ACollapsibleContent :class="pohon.content({ class: props.pohon?.content })">
+    <ACollapsibleContent
+      :class="pohon.content({ class: props.pohon?.content })"
+      data-pohon="collapsible-content"
+    >
       <slot name="content" />
     </ACollapsibleContent>
   </ACollapsibleRoot>

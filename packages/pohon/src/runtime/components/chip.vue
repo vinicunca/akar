@@ -86,6 +86,7 @@ const pohon = computed(() =>
   <APrimitive
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="chip-root"
   >
     <APrimitiveSlot v-bind="$attrs">
       <slot />
@@ -94,6 +95,7 @@ const pohon = computed(() =>
     <span
       v-if="show"
       :class="pohon.base({ class: props.pohon?.base })"
+      data-pohon="chip-base"
     >
       <slot name="content">
         {{ text }}

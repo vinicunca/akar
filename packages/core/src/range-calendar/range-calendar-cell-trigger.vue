@@ -113,6 +113,7 @@ function changeDate(event: KeyboardEvent | MouseEvent, date: DateValue) {
   if (rootContext.readonly.value) {
     return;
   }
+
   if (rootContext.isDateDisabled(date) || rootContext.isDateUnavailable?.(date)) {
     return;
   }
@@ -133,7 +134,13 @@ function changeDate(event: KeyboardEvent | MouseEvent, date: DateValue) {
     }
   }
 
-  if (rootContext.startValue.value && rootContext.endValue.value && isSameDay(rootContext.endValue.value, date) && !rootContext.preventDeselect.value) {
+  if (
+    rootContext.startValue.value
+    && rootContext.endValue.value
+    && isSameDay(rootContext.startValue.value, rootContext.endValue.value)
+    && isSameDay(rootContext.endValue.value, date)
+    && !rootContext.preventDeselect.value
+  ) {
     rootContext.startValue.value = undefined;
     rootContext.endValue.value = undefined;
     rootContext.onPlaceholderChange(date);

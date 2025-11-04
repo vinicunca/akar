@@ -133,6 +133,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
             color: item?.color,
             loading: true,
           })"
+          data-pohon="context-menu-item-leading-icon"
         />
         <PIcon
           v-else-if="item.icon"
@@ -142,6 +143,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
             color: item?.color,
             active,
           })"
+          data-pohon="context-menu-item-leading-icon"
         />
         <PAvatar
           v-else-if="item.avatar"
@@ -151,14 +153,19 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
             class: [pohonOverride?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar],
             active,
           })"
+          data-pohon="context-menu-item-leading-avatar"
         />
       </slot>
 
       <span
         v-if="(getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PContextMenuSlots<T>]) || (getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : 'item-description') as keyof PContextMenuSlots<T>])"
         :class="pohon.itemWrapper({ class: [pohonOverride?.itemWrapper, item.pohon?.itemWrapper] })"
+        data-pohon="context-menu-item-wrapper"
       >
-        <span :class="pohon.itemLabel({ class: [pohonOverride?.itemLabel, item.pohon?.itemLabel], active })">
+        <span
+          :class="pohon.itemLabel({ class: [pohonOverride?.itemLabel, item.pohon?.itemLabel], active })"
+          data-pohon="context-menu-item-label"
+        >
           <slot
             :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PContextMenuSlots<T>)"
             :item="item"
@@ -172,12 +179,14 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
             v-if="item.target === '_blank' && externalIcon !== false"
             :name="typeof externalIcon === 'string' ? externalIcon : appConfig.pohon.icons.external"
             :class="pohon.itemLabelExternalIcon({ class: [pohonOverride?.itemLabelExternalIcon, item.pohon?.itemLabelExternalIcon], color: item?.color, active })"
+            data-pohon="context-menu-item-label-external-icon"
           />
         </span>
 
         <span
           v-if="getProp({ object: item, path: props.descriptionKey as string })"
           :class="pohon.itemDescription({ class: [pohonOverride?.itemDescription, item.pohon?.itemDescription] })"
+          data-pohon="context-menu-item-description"
         >
           <slot
             :name="((item.slot ? `${item.slot}-description` : 'item-description') as keyof PContextMenuSlots<T>)"
@@ -190,7 +199,10 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
         </span>
       </span>
 
-      <span :class="pohon.itemTrailing({ class: [pohonOverride?.itemTrailing, item.pohon?.itemTrailing] })">
+      <span
+        :class="pohon.itemTrailing({ class: [pohonOverride?.itemTrailing, item.pohon?.itemTrailing] })"
+        data-pohon="context-menu-item-trailing"
+      >
         <slot
           :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PContextMenuSlots<T>)"
           :item="item"
@@ -202,10 +214,12 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
             v-if="item.children?.length"
             :name="childrenIcon"
             :class="pohon.itemTrailingIcon({ class: [pohonOverride?.itemTrailingIcon, item.pohon?.itemTrailingIcon], color: item?.color, active })"
+            data-pohon="context-menu-item-trailing-icon"
           />
           <span
             v-else-if="item.kbds?.length"
             :class="pohon.itemTrailingKbds({ class: [pohonOverride?.itemTrailingKbds, item.pohon?.itemTrailingKbds] })"
+            data-pohon="context-menu-item-trailing-kbds"
           >
             <PKbd
               v-for="(kbd, kbdIndex) in item.kbds"
@@ -220,6 +234,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
           <PIcon
             :name="checkedIcon || appConfig.pohon.icons.check"
             :class="pohon.itemTrailingIcon({ class: [pohonOverride?.itemTrailingIcon, item.pohon?.itemTrailingIcon], color: item?.color })"
+            data-pohon="context-menu-item-trailing-icon"
           />
         </AContextMenu.ItemIndicator>
       </span>
@@ -230,6 +245,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
     <component
       :is="sub ? AContextMenu.SubContent : AContextMenu.Content"
       :class="pohon.content({ class: [pohonOverride?.content, props.class] })"
+      data-pohon="context-menu-content"
       v-bind="contentProps"
     >
       <slot name="content-top" />
@@ -237,11 +253,13 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
       <div
         role="presentation"
         :class="pohon.viewport({ class: pohonOverride?.viewport })"
+        data-pohon="context-menu-viewport"
       >
         <AContextMenu.Group
           v-for="(group, groupIndex) in groups"
           :key="`group-${groupIndex}`"
           :class="pohon.group({ class: pohonOverride?.group })"
+          data-pohon="context-menu-group"
         >
           <template
             v-for="(item, index) in group"
@@ -250,6 +268,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
             <AContextMenu.Label
               v-if="item.type === 'label'"
               :class="pohon.label({ class: [pohonOverride?.label, item.pohon?.label, item.class] })"
+              data-pohon="context-menu-label"
             >
               <ReuseItemTemplate
                 :item="item"
@@ -259,6 +278,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
             <AContextMenu.Separator
               v-else-if="item.type === 'separator'"
               :class="pohon.separator({ class: [pohonOverride?.separator, item.pohon?.separator, item.class] })"
+              data-pohon="context-menu-separator"
             />
             <AContextMenu.Sub
               v-else-if="item?.children?.length"
@@ -271,6 +291,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
                 :disabled="item.disabled"
                 :text-value="getProp({ object: item, path: props.labelKey as string })"
                 :class="pohon.item({ class: [pohonOverride?.item, item.pohon?.item, item.class], color: item?.color })"
+                data-pohon="context-menu-item"
               >
                 <ReuseItemTemplate
                   :item="item"
@@ -310,6 +331,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
               :disabled="item.disabled"
               :text-value="getProp({ object: item, path: props.labelKey as string })"
               :class="pohon.item({ class: [pohonOverride?.item, item.pohon?.item, item.class], color: item?.color })"
+              data-pohon="context-menu-item"
               @update:model-value="item.onUpdateChecked"
               @select="item.onSelect"
             >
@@ -333,6 +355,7 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
                 <PLinkBase
                   v-bind="slotProps"
                   :class="pohon.item({ class: [pohonOverride?.item, item.pohon?.item, item.class], active, color: item?.color })"
+                  data-pohon="context-menu-item"
                 >
                   <ReuseItemTemplate
                     :item="item"

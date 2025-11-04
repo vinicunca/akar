@@ -12,16 +12,16 @@ export const cardTheme = {
   variants: {
     variant: {
       solid: {
-        root: 'bg-background-inverted color-text-inverted',
+        root: 'color-text-inverted bg-background-inverted',
       },
       outline: {
-        root: 'bg-background ring ring-ring divide-y divide-divide',
+        root: 'bg-background ring ring-ring divide-divide divide-y',
       },
       soft: {
-        root: 'bg-background-elevated/50 divide-y divide-divide',
+        root: 'bg-background-elevated/50 divide-divide divide-y',
       },
       subtle: {
-        root: 'bg-background-elevated/50 ring ring-ring divide-y divide-divide',
+        root: 'bg-background-elevated/50 ring ring-ring divide-divide divide-y',
       },
     },
   },

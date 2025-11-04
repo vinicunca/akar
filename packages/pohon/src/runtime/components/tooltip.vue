@@ -123,6 +123,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.toolti
       <ATooltipContent
         v-bind="contentProps"
         :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
+        data-pohon="tooltip-content"
       >
         <slot
           name="content"
@@ -131,11 +132,13 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.toolti
           <span
             v-if="text"
             :class="pohon.text({ class: props.pohon?.text })"
+            data-pohon="tooltip-text"
           >{{ text }}</span>
 
           <span
             v-if="kbds?.length"
             :class="pohon.kbds({ class: props.pohon?.kbds })"
+            data-pohon="tooltip-kbds"
           >
             <PKbd
               v-for="(kbd, index) in kbds"
@@ -150,6 +153,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.toolti
           v-if="!!arrow"
           v-bind="arrowProps"
           :class="pohon.arrow({ class: props.pohon?.arrow })"
+          data-pohon="tooltip-arrow"
         />
       </ATooltipContent>
     </ATooltipPortal>
