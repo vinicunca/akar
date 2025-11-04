@@ -7,8 +7,9 @@ import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/input-number';
 
 type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>;
+type InputNumberValue = number | null;
 
-export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'> {
+export interface PInputNumberProps<T extends InputNumberValue = InputNumberValue> extends Pick<ANumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -54,7 +55,7 @@ export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelVal
   decrementDisabled?: boolean;
   autofocus?: boolean;
   autofocusDelay?: number;
-  modelModifiers?: Pick<ModelModifiers, 'optional'>;
+  modelModifiers?: Pick<ModelModifiers<T>, 'optional'>;
   /**
    * The locale to use for formatting and parsing numbers.
    * @defaultValue PApp.locale.code
@@ -64,8 +65,8 @@ export interface PInputNumberProps extends Pick<ANumberFieldRootProps, 'modelVal
   pohon?: InputNumber['slots'];
 }
 
-export interface PInputNumberEmits {
-  'update:modelValue': [value: number];
+export interface PInputNumberEmits<T extends InputNumberValue = InputNumberValue> {
+  'update:modelValue': [value: T];
   'blur': [event: FocusEvent];
   'change': [event: Event];
 }
@@ -76,7 +77,7 @@ export interface PInputNumberSlots {
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue">
 import { useAppConfig } from '#imports';
 import { reactivePick, useVModel } from '@vueuse/core';
 import {
@@ -96,7 +97,7 @@ import PButton from './button.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<PInputNumberProps>(),
+  defineProps<PInputNumberProps<T>>(),
   {
     orientation: 'horizontal',
     increment: true,
@@ -104,11 +105,11 @@ const props = withDefaults(
   },
 );
 
-const emits = defineEmits<PInputNumberEmits>();
+const emits = defineEmits<PInputNumberEmits<T>>();
 
 defineSlots<PInputNumberSlots>();
 
-const modelValue = useVModel<PInputNumberProps, 'modelValue', 'update:modelValue'>(
+const modelValue = useVModel<PInputNumberProps<T>, 'modelValue', 'update:modelValue'>(
   props,
   'modelValue',
   emits,
@@ -147,8 +148,8 @@ const {
   highlight,
   disabled,
   ariaAttrs,
-} = useFormField<PInputNumberProps>(props);
-const { orientation, size: fieldGroupSize } = useFieldGroup<PInputNumberProps>(props);
+} = useFormField<PInputNumberProps<T>>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputNumberProps<T>>(props);
 
 const locale = computed(() => props.locale || codeLocale.value);
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);

@@ -44,7 +44,7 @@ export interface PTextareaProps<T extends TextareaValue = TextareaValue> extends
   highlight?: boolean;
   modelValue?: T;
   defaultValue?: T;
-  modelModifiers?: ModelModifiers;
+  modelModifiers?: ModelModifiers<T>;
   class?: any;
   pohon?: Textarea['slots'];
 }

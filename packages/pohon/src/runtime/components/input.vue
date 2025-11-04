@@ -43,7 +43,7 @@ export interface PInputProps<T extends PInputValue = PInputValue> extends UseCom
   highlight?: boolean;
   modelValue?: T;
   defaultValue?: T;
-  modelModifiers?: ModelModifiers;
+  modelModifiers?: ModelModifiers<T>;
   class?: any;
   pohon?: Input['slots'];
 }
