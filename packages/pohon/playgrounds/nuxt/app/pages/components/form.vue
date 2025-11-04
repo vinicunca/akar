@@ -72,7 +72,7 @@ const disabled = ref(false);
       <FormExampleNestedList />
     </div>
 
-    <div class="border-border border rounded-lg">
+    <div class="border border-border rounded-lg">
       <div class="px-4 py-2 flex gap-4 items-center">
         <PFormField
           label="Validate on"
@@ -94,7 +94,7 @@ const disabled = ref(false);
       <FormExampleElements
         :validate-on="validateOn"
         :disabled="disabled"
-        class="border-border p-4 border-t"
+        class="p-4 border-t border-border"
       />
     </div>
   </div>

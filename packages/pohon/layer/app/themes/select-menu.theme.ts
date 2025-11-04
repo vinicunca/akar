@@ -10,7 +10,7 @@ export const selectMenuTheme = {
     ...selectTheme.slots,
     input: 'border-b border-border',
     focusScope: 'flex flex-col min-h-0',
-    content: [selectTheme.slots.content, 'origin-$akar-combobox-content-transform-origin w-$akar-combobox-trigger-width'],
+    content: [selectTheme.slots.content, 'origin-$akar-combobox-content-transform-origin akar:w-$akar-combobox-trigger-width'],
     viewport: 'flex-1 relative overflow-y-auto scroll-py-1',
   },
   variants: defu(

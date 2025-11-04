@@ -260,15 +260,17 @@ function removeFile(index?: number) {
 }
 
 watch(modelValue, (newValue) => {
-  const hasModelReset = !Array.isArray(newValue) || !newValue.length;
+  const hasModelReset = props.multiple ? !(newValue as Array<File>)?.length : !newValue;
 
   if (hasModelReset && inputRef.value) {
-    inputRef.value.value = '';
+    inputRef.value.$el.value = '';
   }
 });
 
 defineExpose({
-  inputRef,
+  get inputRef() {
+    return inputRef.value?.$el as HTMLInputElement;
+  },
   dropzoneRef,
 });
 </script>

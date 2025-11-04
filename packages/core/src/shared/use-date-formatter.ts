@@ -5,10 +5,8 @@
 import type { DateValue, ZonedDateTime } from '@internationalized/date';
 import {
   DateFormatter,
-
   getLocalTimeZone,
   today,
-
 } from '@internationalized/date';
 import { ref } from 'vue';
 

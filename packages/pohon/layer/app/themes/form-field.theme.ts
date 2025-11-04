@@ -5,12 +5,12 @@ import type { PThemeFormField } from 'pohon-ui';
 export const formFieldTheme = {
   slots: {
     labelWrapper: 'flex content-center items-center justify-between',
-    label: 'block font-medium color-text',
+    label: 'color-text font-medium block',
     container: 'mt-1 relative',
     description: 'color-text-muted',
-    error: 'mt-2 text-error',
+    error: 'text-error mt-2',
     hint: 'color-text-muted',
-    help: 'mt-2 color-text-muted',
+    help: 'color-text-muted mt-2',
   },
   variants: {
     size: {
@@ -22,7 +22,7 @@ export const formFieldTheme = {
     },
     required: {
       true: {
-        label: 'after:(content-[\'*\'] ms-0.5 text-error)',
+        label: 'after:(text-error ms-0.5 content-["*"])',
       },
     },
   },
