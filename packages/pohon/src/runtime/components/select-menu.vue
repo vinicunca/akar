@@ -219,7 +219,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { defu } from 'defu';
-import { computed, onMounted, ref, toRaw, toRef } from 'vue';
+import { computed, onMounted, toRaw, toRef, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
@@ -439,7 +439,7 @@ const createItem = computed(() => {
 });
 const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom');
 
-const triggerRef = ref<InstanceType<typeof AComboboxTrigger> | null>(null);
+const triggerRef = useTemplateRef('triggerRef');
 
 function autoFocus() {
   if (props.autofocus) {
@@ -515,7 +515,7 @@ function isSelectItem(item: PSelectMenuItem): item is Exclude<PSelectMenuItem, P
 }
 
 defineExpose({
-  triggerRef,
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
 });
 </script>
 

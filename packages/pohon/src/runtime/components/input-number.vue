@@ -87,7 +87,7 @@ import {
   ANumberFieldRoot,
   useForwardPropsEmits,
 } from 'akar';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, toRef, useTemplateRef } from 'vue';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { useLocale } from '../composables/use-locale';
@@ -183,7 +183,7 @@ const decrementIcon = computed(() =>
     : appConfig.pohon.icons.chevronDown),
 );
 
-const inputRef = ref<InstanceType<typeof ANumberFieldInput> | null>(null);
+const inputRef = useTemplateRef('inputRef');
 
 function onUpdate(value: number | undefined) {
   if (props.modelModifiers?.optional) {
@@ -216,7 +216,7 @@ onMounted(() => {
 });
 
 defineExpose({
-  inputRef,
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
 });
 </script>
 

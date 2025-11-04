@@ -74,7 +74,7 @@ import {
   ATagsInputRoot,
   useForwardPropsEmits,
 } from 'akar';
-import { computed, onMounted, ref, toRaw } from 'vue';
+import { computed, onMounted, toRaw, toRef, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
@@ -147,7 +147,7 @@ const pohon = computed(() =>
   }),
 );
 
-const inputRef = ref<InstanceType<typeof ATagsInputInput> | null>(null);
+const inputRef = useTemplateRef('inputRef');
 
 onMounted(() => {
   setTimeout(() => {
@@ -183,7 +183,7 @@ function onFocus(event: FocusEvent) {
 }
 
 defineExpose({
-  inputRef,
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
 });
 </script>
 

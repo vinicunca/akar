@@ -232,7 +232,7 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { isEqual } from 'ohash/utils';
-import { computed, nextTick, onMounted, ref, toRaw, toRef } from 'vue';
+import { computed, nextTick, onMounted, toRaw, toRef, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
@@ -428,7 +428,7 @@ const createItem = computed(() => {
 });
 const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom');
 
-const inputRef = ref<InstanceType<typeof AComboboxInput> | null>(null);
+const inputRef = useTemplateRef('inputRef');
 
 function autoFocus() {
   if (props.autofocus) {
@@ -526,7 +526,7 @@ function isInputItem(item: PInputMenuItem): item is Exclude<PInputMenuItem, PInp
 }
 
 defineExpose({
-  inputRef,
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
 });
 </script>
 

@@ -65,7 +65,7 @@ export interface PInputSlots {
 import { useAppConfig } from '#imports';
 import { useVModel } from '@vueuse/core';
 import { APrimitive } from 'akar';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
@@ -135,7 +135,7 @@ const pohon = computed(() =>
   }),
 );
 
-const inputRef = ref<HTMLInputElement | null>(null);
+const inputRef = useTemplateRef('inputRef');
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null | undefined) {

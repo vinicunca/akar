@@ -145,7 +145,7 @@ import { isBoolean, isFunction, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import { ATreeItem, ATreeRoot, ATreeVirtualizer, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
-import { computed, ref, toRef } from 'vue';
+import { computed, toRef, useTemplateRef } from 'vue';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
@@ -247,7 +247,7 @@ const pohon = computed(() =>
   }),
 );
 
-const rootRef = ref<ComponentPublicInstance>();
+const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef');
 
 function getItemLabel<Item extends T[number]>(item: Item): string {
   return getProp({ object: item, path: props.labelKey as string });
@@ -272,7 +272,7 @@ const defaultExpanded = computed(() =>
 
 defineExpose({
   get $el() {
-    return rootRef.value?.$el;
+    return rootRef.value?.$el as HTMLElement;
   },
 });
 </script>

@@ -166,7 +166,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { defu } from 'defu';
-import { computed, onMounted, ref, toRef } from 'vue';
+import { computed, onMounted, toRef, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
@@ -298,7 +298,7 @@ function displayValue(value: GetItemValue<T, VK> | Array<GetItemValue<T, VK>>): 
   });
 }
 
-const triggerRef = ref<InstanceType<typeof ASelectTrigger> | null>(null);
+const triggerRef = useTemplateRef('triggerRef');
 
 function autoFocus() {
   if (props.autofocus) {
@@ -339,7 +339,7 @@ function isSelectItem(item: PSelectItem): item is Exclude<PSelectItem, PSelectVa
 }
 
 defineExpose({
-  triggerRef,
+  triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
 });
 </script>
 

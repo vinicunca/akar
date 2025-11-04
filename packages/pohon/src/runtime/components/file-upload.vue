@@ -127,7 +127,7 @@ export interface FileUploadSlots<M extends boolean = false> {
 import { useAppConfig, useLocale } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
-import { computed, watch } from 'vue';
+import { computed, toRef, watch } from 'vue';
 import { useFileUpload } from '../composables/use-file-upload';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
@@ -268,9 +268,7 @@ watch(modelValue, (newValue) => {
 });
 
 defineExpose({
-  get inputRef() {
-    return inputRef.value?.$el as HTMLInputElement;
-  },
+  inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),
   dropzoneRef,
 });
 </script>

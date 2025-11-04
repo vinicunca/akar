@@ -83,7 +83,7 @@ import {
   AToastTitle,
   useForwardPropsEmits,
 } from 'akar';
-import { computed, nextTick, onMounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
@@ -118,16 +118,16 @@ const pohon = computed(() =>
   }),
 );
 
-const el = ref();
+const rootRef = useTemplateRef('rootRef');
 const height = ref(0);
 
 onMounted(() => {
-  if (!el.value) {
+  if (!rootRef.value) {
     return;
   }
 
   nextTick(() => {
-    height.value = el.value?.$el?.getBoundingClientRect()?.height;
+    height.value = rootRef.value?.$el?.getBoundingClientRect()?.height;
   });
 });
 
@@ -138,7 +138,7 @@ defineExpose({
 
 <template>
   <AToastRoot
-    ref="el"
+    ref="rootRef"
     v-slot="{ remaining, duration, open }"
     v-bind="rootProps"
     :data-orientation="orientation"

@@ -66,7 +66,7 @@ export interface PTextareaSlots {
 import { useAppConfig } from '#imports';
 import { useVModel } from '@vueuse/core';
 import { APrimitive } from 'akar';
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, useTemplateRef, watch } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useFormField } from '../composables/use-form-field';
 import { looseToNumber } from '../utils';
@@ -137,7 +137,7 @@ const pohon = computed(() =>
   }),
 );
 
-const textareaRef = ref<HTMLTextAreaElement | null>(null);
+const textareaRef = useTemplateRef('textareaRef');
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null | undefined) {

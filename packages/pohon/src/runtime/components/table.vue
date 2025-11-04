@@ -35,7 +35,7 @@ import type {
   VisibilityState,
 } from '@tanstack/vue-table';
 import type { VirtualizerOptions } from '@tanstack/vue-virtual';
-import type { Ref, WatchOptions } from 'vue';
+import type { ComponentPublicInstance, Ref, WatchOptions } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/table';
 
@@ -232,7 +232,7 @@ import { isBoolean, isFunction, toSentenceCase } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
-import { computed, ref, toRef, watch } from 'vue';
+import { computed, ref, toRef, useTemplateRef, watch } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 
@@ -345,8 +345,8 @@ const groupingState = defineModel<GroupingState>('grouping', { default: [] });
 const expandedState = defineModel<ExpandedState>('expanded', { default: {} });
 const paginationState = defineModel<PaginationState>('pagination', { default: {} });
 
-const rootRef = ref<InstanceType<typeof APrimitive>>();
-const tableRef = ref<HTMLTableElement | null>(null);
+const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef');
+const tableRef = useTemplateRef<HTMLTableElement>('tableRef');
 
 const tableApi = useVueTable({
   ...reactiveOmit(
@@ -520,7 +520,7 @@ watch(
 
 defineExpose({
   get $el() {
-    return rootRef.value?.$el;
+    return rootRef.value?.$el as HTMLElement;
   },
   tableRef,
   tableApi,

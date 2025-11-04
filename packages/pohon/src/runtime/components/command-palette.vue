@@ -413,7 +413,7 @@ const filteredItems = computed(() =>
   filteredGroups.value?.flatMap((group) => group.items || []),
 );
 
-const listboxRootRef = useTemplateRef('listboxRootRef');
+const rootRef = useTemplateRef('rootRef');
 
 function navigate(item: T) {
   if (!item.children?.length) {
@@ -430,7 +430,7 @@ function navigate(item: T) {
 
   searchTerm.value = '';
 
-  listboxRootRef.value?.highlightFirstItem();
+  rootRef.value?.highlightFirstItem();
 }
 
 function navigateBack() {
@@ -442,7 +442,7 @@ function navigateBack() {
 
   searchTerm.value = '';
 
-  listboxRootRef.value?.highlightFirstItem();
+  rootRef.value?.highlightFirstItem();
 }
 
 function onBackspace() {
@@ -647,7 +647,7 @@ function onSelect(event: Event, item: T) {
 
   <AListboxRoot
     v-bind="rootProps"
-    ref="listboxRootRef"
+    ref="rootRef"
     :selection-behavior="selectionBehavior"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     data-pohon="command-palette-root"

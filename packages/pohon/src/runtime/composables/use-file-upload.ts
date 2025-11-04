@@ -1,5 +1,5 @@
 import type { MaybeRef } from '@vueuse/core';
-import type { AVisuallyHidden } from 'akar';
+import type { ComponentPublicInstance } from 'vue';
 import { useDropZone, useFileDialog } from '@vueuse/core';
 import { computed, onMounted, reactive, ref, unref, watch } from 'vue';
 
@@ -46,7 +46,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
     dropzone = true,
     onUpdate,
   } = options;
-  const inputRef = ref<InstanceType<typeof AVisuallyHidden>>();
+  const inputRef = ref<ComponentPublicInstance>();
   const dropzoneRef = ref<HTMLDivElement>();
 
   const dataTypes = computed(() => parseAcceptToDataTypes(unref(accept)));
