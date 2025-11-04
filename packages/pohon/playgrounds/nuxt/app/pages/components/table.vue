@@ -452,12 +452,12 @@ onMounted(() => {
           paginationOptions: {
             getPaginationRowModel: getPaginationRowModel(),
           },
-          ui: {
-            tr: 'divide-x divide-default',
+          pohon: {
+            tr: 'divide-x divide-divide',
           },
         }"
         sticky
-        class="border-border-accented border rounded-sm"
+        class="border border-border-accented rounded-sm"
         @select="onSelect"
         @contextmenu="onContextmenu"
         @pointermove="(ev: PointerEvent) => {

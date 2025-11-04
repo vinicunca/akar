@@ -78,18 +78,6 @@ function openModal() {
     </PDialog>
 
     <PDialog
-      title="Modal without transition"
-      description="This modal has `transition: false` prop."
-      :transition="false"
-    >
-      <PButton
-        label="Open without transition"
-        color="neutral"
-        variant="outline"
-      />
-    </PDialog>
-
-    <PDialog
       title="Modal without portal"
       description="This modal has `portal: false` prop."
       :portal="false"
@@ -170,6 +158,34 @@ function openModal() {
         <PButton
           label="Close with scoped slot close"
           @click="close"
+        />
+      </template>
+    </PDialog>
+
+    <PDialog
+      title="Modal scrollable"
+      description="This modal has `scrollable: true` prop. Content scrolls within the overlay, preventing accidental closes on scrollbar clicks."
+      scrollable
+    >
+      <PButton
+        color="neutral"
+        variant="subtle"
+        label="Open scrollable"
+      />
+
+      <template #body>
+        <BasePlaceholder class="h-[300vh] w-full" />
+      </template>
+
+      <template #footer>
+        <PButton
+          label="Submit"
+          color="primary"
+        />
+        <PButton
+          label="Cancel"
+          color="neutral"
+          variant="ghost"
         />
       </template>
     </PDialog>

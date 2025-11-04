@@ -165,12 +165,14 @@ const pohon = computed(() =>
       <ADialogOverlay
         v-if="overlay"
         :class="pohon.overlay({ class: props.pohon?.overlay })"
+        data-pohon="slideover-overlay"
       />
 
       <ADialogContent
         :data-side="side"
         :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
         v-bind="contentProps"
+        data-pohon="slideover-content"
         @after-enter="emits('after:enter')"
         @after-leave="emits('after:leave')"
         v-on="contentEvents"
@@ -196,6 +198,7 @@ const pohon = computed(() =>
           <div
             v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)"
             :class="pohon.header({ class: props.pohon?.header })"
+            data-pohon="slideover-header"
           >
             <slot
               name="header"
@@ -205,6 +208,7 @@ const pohon = computed(() =>
                 <ADialogTitle
                   v-if="title || !!slots.title"
                   :class="pohon.title({ class: props.pohon?.title })"
+                  data-pohon="slideover-title"
                 >
                   <slot name="title">
                     {{ title }}
@@ -214,6 +218,7 @@ const pohon = computed(() =>
                 <ADialogDescription
                   v-if="description || !!slots.description"
                   :class="pohon.description({ class: props.pohon?.description })"
+                  data-pohon="slideover-description"
                 >
                   <slot name="description">
                     {{ description }}
@@ -239,13 +244,17 @@ const pohon = computed(() =>
                     :aria-label="t('slideover.close')"
                     v-bind="(typeof props.close === 'object' ? props.close as Partial<PButtonProps> : {})"
                     :class="pohon.close({ class: props.pohon?.close })"
+                    data-pohon="slideover-close"
                   />
                 </slot>
               </ADialogClose>
             </slot>
           </div>
 
-          <div :class="pohon.body({ class: props.pohon?.body })">
+          <div
+            :class="pohon.body({ class: props.pohon?.body })"
+            data-pohon="slideover-body"
+          >
             <slot
               name="body"
               :close="close"
@@ -255,6 +264,7 @@ const pohon = computed(() =>
           <div
             v-if="!!slots.footer"
             :class="pohon.footer({ class: props.pohon?.footer })"
+            data-pohon="slideover-footer"
           >
             <slot
               name="footer"

@@ -190,15 +190,18 @@ const pohon = computed(() =>
     v-slot="{ page, pageCount }"
     v-bind="rootProps"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="pagination-root"
   >
     <APaginationList
       v-slot="{ items }"
       :class="pohon.list({ class: props.pohon?.list })"
+      data-pohon="pagination-list"
     >
       <APaginationFirst
         v-if="showControls || !!slots.first"
         as-child
         :class="pohon.first({ class: props.pohon?.first })"
+        data-pohon="pagination-first"
       >
         <slot name="first">
           <PButton
@@ -214,6 +217,7 @@ const pohon = computed(() =>
         v-if="showControls || !!slots.prev"
         as-child
         :class="pohon.prev({ class: props.pohon?.prev })"
+        data-pohon="pagination-prev"
       >
         <slot name="prev">
           <PButton
@@ -235,6 +239,7 @@ const pohon = computed(() =>
           as-child
           :value="item.value"
           :class="pohon.item({ class: props.pohon?.item })"
+          data-pohon="pagination-item"
         >
           <slot
             name="item"
@@ -256,6 +261,7 @@ const pohon = computed(() =>
           v-else
           as-child
           :class="pohon.ellipsis({ class: props.pohon?.ellipsis })"
+          data-pohon="pagination-ellipsis"
         >
           <slot
             name="ellipsis"
@@ -276,6 +282,7 @@ const pohon = computed(() =>
         v-if="showControls || !!slots.next"
         as-child
         :class="pohon.next({ class: props.pohon?.next })"
+        data-pohon="pagination-next"
       >
         <slot name="next">
           <PButton
@@ -291,6 +298,7 @@ const pohon = computed(() =>
         v-if="showControls || !!slots.last"
         as-child
         :class="pohon.last({ class: props.pohon?.last })"
+        data-pohon="pagination-last"
       >
         <slot name="last">
           <PButton

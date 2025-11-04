@@ -5,13 +5,13 @@ import { BRANDS } from './constant';
 
 export const switchTheme = {
   slots: {
-    root: 'relative flex items-start',
-    base: 'inline-flex items-center shrink-0 rounded-full border-2 border-transparent focus-visible:outline-2 focus-visible:outline-offset-2 data-[state=unchecked]:bg-background-accented transition-[background] duration-280',
+    root: 'flex items-start relative',
+    base: 'border-2 border-transparent rounded-full inline-flex shrink-0 transition-colors-280 items-center focus-visible:(outline-2 outline-offset-2) data-[state=unchecked]:bg-background-accented',
     container: 'flex items-center',
-    thumb: 'group pointer-events-none rounded-full bg-background shadow-lg ring-0 transition-transform-280 data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0 flex items-center justify-center',
-    icon: 'absolute shrink-0 group-data-[state=unchecked]:color-text-dimmed opacity-0 size-10/12 transition-[color,opacity]-280',
+    thumb: 'group rounded-full bg-background flex pointer-events-none ring-0 shadow-lg transition-transform-280 items-center justify-center data-[state=unchecked]:translate-x-0 data-[state=unchecked]:rtl:-translate-x-0',
+    icon: 'opacity-0 shrink-0 size-10/12 transition-[color,opacity]-280 absolute group-data-[state=unchecked]:color-text-dimmed',
     wrapper: 'ms-2',
-    label: 'block font-medium color-text',
+    label: 'color-text font-medium block',
     description: 'color-text-muted',
   },
   variants: {
@@ -21,7 +21,7 @@ export const switchTheme = {
         icon: `group-data-[state=checked]:color-${color}`,
       }])),
       neutral: {
-        base: 'data-[state=checked]:bg-background-inverted focus-visible:outline-outline-inverted',
+        base: 'focus-visible:outline-outline-inverted data-[state=checked]:bg-background-inverted',
         icon: 'group-data-[state=checked]:color-text-highlighted',
       },
     },
@@ -74,14 +74,14 @@ export const switchTheme = {
     },
     required: {
       true: {
-        label: 'after:content-[\'*\'] after:ms-0.5 after:text-error',
+        label: 'after:(text-error ms-0.5 content-["*"])',
       },
     },
     disabled: {
       true: {
-        base: 'cursor-not-allowed opacity-75',
-        label: 'cursor-not-allowed opacity-75',
-        description: 'cursor-not-allowed opacity-75',
+        base: 'opacity-75 cursor-not-allowed',
+        label: 'opacity-75 cursor-not-allowed',
+        description: 'opacity-75 cursor-not-allowed',
       },
     },
   },

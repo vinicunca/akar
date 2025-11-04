@@ -4,12 +4,12 @@ import type { PThemeKbd } from 'pohon-ui';
 import { BRANDS } from './constant';
 
 export const kbdTheme = {
-  base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans uppercase',
+  base: 'font-medium font-sans px-1 rounded-sm inline-flex uppercase items-center justify-center',
   variants: {
     size: {
-      sm: 'h-4 min-w-[16px] text-[10px]',
-      md: 'h-5 min-w-[20px] text-[11px]',
-      lg: 'h-6 min-w-[24px] text-[12px]',
+      sm: 'text-[10px] h-4 min-w-[16px]',
+      md: 'text-[11px] h-5 min-w-[20px]',
+      lg: 'text-[12px] h-6 min-w-[24px]',
     },
   },
   compoundVariants: [
@@ -31,12 +31,12 @@ export const kbdTheme = {
     ...BRANDS.map((color: string) => ({
       color,
       variant: 'subtle',
-      class: `color-${color} ring ring-inset ring-${color}/25 bg-${color}/10`,
+      class: `shadow-[0_0_0_1px_rgba(28,25,23,10%),0_3px_0_rgba(28,25,23,10%)] color-${color} ring ring-inset ring-${color}/25 bg-${color}/10`,
     })),
     {
       color: 'neutral',
       variant: 'solid',
-      class: 'color-text-inverted bg-background-inverted',
+      class: 'shadow-[0_0_0_1px_rgba(28,25,23,10%),0_3px_0_rgba(28,25,23,10%)] color-text-inverted bg-background-inverted',
     },
     {
       color: 'neutral',
@@ -46,12 +46,12 @@ export const kbdTheme = {
     {
       color: 'neutral',
       variant: 'soft',
-      class: 'color-text bg-background-elevated',
+      class: 'shadow-[0_0_0_1px_rgba(28,25,23,10%),0_3px_0_rgba(28,25,23,10%)] color-text bg-background-elevated',
     },
     {
       color: 'neutral',
       variant: 'subtle',
-      class: 'ring ring-inset ring-ring-accented color-text bg-background-elevated',
+      class: 'shadow-[0_0_0_1px_rgba(28,25,23,10%),0_3px_0_rgba(28,25,23,10%)] ring ring-inset ring-ring-accented color-text bg-background-elevated',
     },
   ],
 } satisfies PThemeKbd;

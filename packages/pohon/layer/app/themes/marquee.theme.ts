@@ -4,7 +4,7 @@ import type { PThemeMarquee } from 'pohon-ui';
 
 export const marqueeTheme = {
   slots: {
-    root: 'group relative flex items-center overflow-hidden gap-$gap [--gap:--spacing(16)] [--duration:20s]',
+    root: 'group relative flex items-center overflow-hidden gap-$gap [--gap:calc(var(--spacing)*16)] [--duration:20s]',
     content: 'flex items-center shrink-0 justify-around gap-$gap min-w-max',
   },
   variants: {

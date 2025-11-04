@@ -9,7 +9,7 @@ export const navigationMenuTheme = {
     list: 'isolate min-w-0',
     label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 color-text-highlighted px-2.5 py-1.5',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:(absolute content-empty -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'group relative w-full grid grid-cols-[min-content_1fr_min-content] items-center gap-1.5 font-medium text-sm before:(absolute content-empty -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -29,8 +29,8 @@ export const navigationMenuTheme = {
     childLinkDescription: 'color-text-muted',
     separator: 'px-2 h-px bg-border',
     viewportWrapper: 'absolute top-full left-0 flex w-full',
-    viewport: 'relative overflow-hidden bg-background shadow-lg rounded-md ring ring-ring h-$akar-navigation-menu-viewport-height w-full transition-[width,height,left]-200 origin-[top_center] data-[state=open]:(animate-in zoom-in-90) data-[state=closed]:(animate-out fade-out-0 zoom-out-95) z-1',
-    indicator: 'absolute data-[state=visible]:(animate-in fade-in) data-[state=hidden]:(animate-out fade-out) bottom-0 z-1 w-$akar-navigation-menu-indicator-size translate-x-$akar-navigation-menu-indicator-position flex h-2.5 items-end justify-center overflow-hidden transition-[transform,width]-280',
+    viewport: 'relative overflow-hidden bg-background shadow-lg rounded-md ring ring-ring h-$akar-navigation-menu-viewport-height w-full transition-[width,height,left]-280 origin-[top_center] data-[state=open]:(animate-in zoom-in-90) data-[state=closed]:(animate-out fade-out-0 zoom-out-95) z-1',
+    indicator: 'absolute data-[state=visible]:(animate-in fade-in) data-[state=hidden]:(animate-out fade-out) bottom-0 z-2 w-$akar-navigation-menu-indicator-size translate-x-$akar-navigation-menu-indicator-position flex h-2.5 items-end justify-center overflow-hidden transition-[transform,width]-280',
     arrow: 'relative top-[50%] size-2.5 rotate-45 border border-border bg-background z-1 rounded-xs',
   },
 
@@ -109,7 +109,7 @@ export const navigationMenuTheme = {
       contentOrientation: 'vertical',
       class: {
         childList: 'gap-1',
-        content: 'w-60',
+        content: 'akar:w-60',
       },
     },
     {
@@ -119,6 +119,7 @@ export const navigationMenuTheme = {
         childList: 'ms-5 border-s border-border',
         childItem: 'ps-1.5 -ms-px',
         content: 'data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up overflow-hidden',
+        link: 'text-left',
       },
     },
     {
@@ -141,7 +142,7 @@ export const navigationMenuTheme = {
       highlight: true,
       level: true,
       class: {
-        link: 'after:(content-empty absolute -start-1.5 inset-y-0.5 block w-px rounded-full transition-colors-280)',
+        link: 'after:(content-empty absolute -start-1.5 inset-y-0.5 block w-px rounded-full transition-colors-280) text-left',
       },
     },
     {
@@ -254,13 +255,13 @@ export const navigationMenuTheme = {
         linkLeadingIcon: 'color-text-highlighted group-data-[state=open]:color-text-highlighted',
       },
     },
-    ...BRANDS.map((highlightColor: string) => ({
-      highlightColor,
+    ...BRANDS.map((color: string) => ({
+      highlightColor: color,
       highlight: true,
       level: true,
       active: true,
       class: {
-        link: `after:bg-${highlightColor}`,
+        link: `after:bg-${color}`,
       },
     })),
     {

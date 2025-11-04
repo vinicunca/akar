@@ -360,11 +360,13 @@ defineExpose({
       :id="id"
       ref="triggerRef"
       :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+      data-pohon="select-base"
       v-bind="{ ...$attrs, ...ariaAttrs }"
     >
       <span
         v-if="isLeading || !!avatar || !!slots.leading"
         :class="pohon.leading({ class: props.pohon?.leading })"
+        data-pohon="select-leading"
       >
         <slot
           name="leading"
@@ -376,12 +378,14 @@ defineExpose({
             v-if="isLeading && leadingIconName"
             :name="leadingIconName"
             :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+            data-pohon="select-leading-icon"
           />
           <PAvatar
             v-else-if="!!avatar"
             :size="((props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
             :class="pohon.itemLeadingAvatar({ class: props.pohon?.itemLeadingAvatar })"
+            data-pohon="select-leading-avatar"
           />
         </slot>
       </span>
@@ -398,12 +402,14 @@ defineExpose({
           <span
             v-if="isNonNullish(displayedModelValue)"
             :class="pohon.value({ class: props.pohon?.value })"
+            data-pohon="select-value"
           >
             {{ displayedModelValue }}
           </span>
           <span
             v-else
             :class="pohon.placeholder({ class: props.pohon?.placeholder })"
+            data-pohon="select-placeholder"
           >
             {{ placeholder ?? '&nbsp;' }}
           </span>
@@ -413,6 +419,7 @@ defineExpose({
       <span
         v-if="isTrailing || !!slots.trailing"
         :class="pohon.trailing({ class: props.pohon?.trailing })"
+        data-pohon="select-trailing"
       >
         <slot
           name="trailing"
@@ -424,6 +431,7 @@ defineExpose({
             v-if="trailingIconName"
             :name="trailingIconName"
             :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+            data-pohon="select-trailing-icon"
           />
         </slot>
       </span>
@@ -433,17 +441,20 @@ defineExpose({
       <ASelectContent
         :class="pohon.content({ class: props.pohon?.content })"
         v-bind="contentProps"
+        data-pohon="select-content"
       >
         <slot name="content-top" />
 
         <div
           role="presentation"
           :class="pohon.viewport({ class: props.pohon?.viewport })"
+          data-pohon="select-viewport"
         >
           <ASelectGroup
             v-for="(group, groupIndex) in groups"
             :key="`group-${groupIndex}`"
             :class="pohon.group({ class: props.pohon?.group })"
+            data-pohon="select-group"
           >
             <template
               v-for="(item, index) in group"
@@ -452,6 +463,7 @@ defineExpose({
               <ASelectLabel
                 v-if="isSelectItem(item) && item.type === 'label'"
                 :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
+                data-pohon="select-label"
               >
                 {{ getProp({ object: item, path: props.labelKey as string }) }}
               </ASelectLabel>
@@ -459,6 +471,7 @@ defineExpose({
               <ASelectSeparator
                 v-else-if="isSelectItem(item) && item.type === 'separator'"
                 :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator, item.class] })"
+                data-pohon="select-separator"
               />
 
               <ASelectItem
@@ -466,6 +479,7 @@ defineExpose({
                 :class="pohon.item({ class: [props.pohon?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
                 :value="isSelectItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
+                data-pohon="select-item"
                 @select="isSelectItem(item) && item.onSelect?.($event)"
               >
                 <slot
@@ -484,12 +498,14 @@ defineExpose({
                       v-if="isSelectItem(item) && item.icon"
                       :name="item.icon"
                       :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
+                      data-pohon="select-item-leading-icon"
                     />
                     <PAvatar
                       v-else-if="isSelectItem(item) && item.avatar"
                       :size="((item.pohon?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
                       v-bind="item.avatar"
                       :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
+                      data-pohon="select-item-leading-avatar"
                     />
                     <PChip
                       v-else-if="isSelectItem(item) && item.chip"
@@ -498,6 +514,7 @@ defineExpose({
                       standalone
                       v-bind="item.chip"
                       :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
+                      data-pohon="select-item-leading-chip"
                     />
                   </slot>
 
@@ -507,6 +524,7 @@ defineExpose({
                         props.pohon?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
                       ],
                     })"
+                    data-pohon="select-item-wrapper"
                   >
                     <ASelectItemText
                       :class="pohon.itemLabel({
@@ -514,6 +532,7 @@ defineExpose({
                           props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
                         ],
                       })"
+                      data-pohon="select-item-label"
                     >
                       <slot
                         name="item-label"
@@ -531,6 +550,7 @@ defineExpose({
                           props.pohon?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
                         ],
                       })"
+                      data-pohon="select-item-description"
                     >
                       <slot
                         name="item-description"
@@ -546,6 +566,7 @@ defineExpose({
                     :class="pohon.itemTrailing({
                       class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing],
                     })"
+                    data-pohon="select-item-trailing"
                   >
                     <slot
                       name="item-trailing"
@@ -560,6 +581,7 @@ defineExpose({
                         :class="pohon.itemTrailingIcon({
                           class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon],
                         })"
+                        data-pohon="select-item-trailing-icon"
                       />
                     </ASelectItemIndicator>
                   </span>
@@ -575,6 +597,7 @@ defineExpose({
           v-if="!!arrow"
           v-bind="arrowProps"
           :class="pohon.arrow({ class: props.pohon?.arrow })"
+          data-pohon="select-arrow"
         />
       </ASelectContent>
     </ASelectPortal>

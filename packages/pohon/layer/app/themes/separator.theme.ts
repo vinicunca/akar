@@ -5,8 +5,8 @@ import { BRANDS } from './constant';
 
 export const separatorTheme = {
   slots: {
-    root: 'flex items-center align-middle text-center',
-    container: 'font-medium color-text flex',
+    root: 'text-center align-middle flex items-center',
+    container: 'color-text font-medium flex',
     icon: 'shrink-0 size-5',
     avatar: 'shrink-0',
     avatarSize: '2xs',
@@ -19,12 +19,12 @@ export const separatorTheme = {
     },
     orientation: {
       horizontal: {
-        root: 'w-full flex-row',
+        root: 'flex-row w-full',
         border: 'w-full',
         container: 'mx-3 whitespace-nowrap',
       },
       vertical: {
-        root: 'h-full flex-col',
+        root: 'flex-col h-full',
         border: 'h-full',
         container: 'my-2',
       },

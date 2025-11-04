@@ -75,6 +75,7 @@ const props = withDefaults(
   defineProps<PTooltipProps>(),
   {
     portal: true,
+    delayDuration: 300,
   },
 );
 const emits = defineEmits<PTooltipEmits>();

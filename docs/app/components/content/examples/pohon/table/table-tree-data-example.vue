@@ -110,7 +110,7 @@ const columns: Array<PTableColumn<Payment>> = [{
           size: 'xs',
           icon: row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus',
           class: !row.getCanExpand() && 'invisible',
-          ui: {
+          pohon: {
             base: 'p-0 rounded-sm',
             leadingIcon: 'size-4',
           },
@@ -164,7 +164,7 @@ const expanded = ref({ 0: true });
       base: 'border-separate border-spacing-0',
       tbody: '[&>tr]:last:[&>td]:border-b-0',
       tr: 'group',
-      td: 'empty:p-0 group-has-[td:not(:empty)]:border-b border-default',
+      td: 'empty:p-0 group-has-[td:not(:empty)]:border-b border-border',
     }"
   />
 </template>

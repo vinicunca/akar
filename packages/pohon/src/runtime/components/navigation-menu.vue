@@ -430,6 +430,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           :index="index"
         />
       </div>
+
       <PLink
         v-else-if="item.type !== 'label'"
         v-slot="{ active, ...slotProps }"
@@ -545,6 +546,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
               </slot>
             </template>
           </PPopover>
+
           <PTooltip
             v-else-if="orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)"
             :text="getProp({ object: item, path: props.labelKey as string })"

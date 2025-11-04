@@ -23,7 +23,7 @@ description: 'A Nuxt/Vue-integrated UI library providing a rich set of fully-sty
 ::::p-page-card{variant="subtle" class="rounded-lg"}
 
 #default{unwrap="p"}
-![App screenshot](/blocks/image4.png){width="4804" height="3000" class="rounded-sm shadow-2xl ring ring-default"}
+![App screenshot](/blocks/image4.png){width="4804" height="3000" class="rounded-sm shadow-2xl ring ring-ring"}
 
 ::::
 
@@ -133,10 +133,10 @@ props:
 slots:
   default: |
 
-    <img src="/blocks/image4.png" alt="App screenshot" class="rounded-lg shadow-2xl ring ring-default" />
+    <img src="/blocks/image4.png" alt="App screenshot" class="rounded-lg shadow-2xl ring ring-ring" />
 ---
 
-![App screenshot](/blocks/image4.png){class="rounded-lg shadow-2xl ring ring-default"}
+![App screenshot](/blocks/image4.png){class="rounded-lg shadow-2xl ring ring-ring"}
 ::
 
 ### Reverse
@@ -171,10 +171,10 @@ props:
 slots:
   default: |
 
-    <img src="/blocks/image4.png" alt="App screenshot" class="rounded-lg shadow-2xl ring ring-default" />
+    <img src="/blocks/image4.png" alt="App screenshot" class="rounded-lg shadow-2xl ring ring-ring" />
 ---
 
-![App screenshot](/blocks/image4.png){class="rounded-lg shadow-2xl ring ring-default"}
+![App screenshot](/blocks/image4.png){class="rounded-lg shadow-2xl ring ring-ring"}
 ::
 
 ## API

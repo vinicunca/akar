@@ -248,7 +248,7 @@ Make sure to add the `data-vaul-drawer-wrapper` directive to a parent element of
 ```vue [app.vue]
 <template>
   <PApp>
-    <div class="bg-default" data-vaul-drawer-wrapper>
+    <div class="bg-background" data-vaul-drawer-wrapper>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -262,7 +262,7 @@ export default defineNuxtConfig({
   app: {
     rootAttrs: {
       'data-vaul-drawer-wrapper': '',
-      'class': 'bg-default'
+      'class': 'bg-background'
     }
   }
 })
@@ -319,7 +319,7 @@ name: 'drawer-modal-example'
 
 ### Responsive drawer
 
-You can render a [Modal](/docs/pohon/components/modal) component on desktop and a Drawer on mobile for example.
+You can render a [Modal](/docs/pohon/components/dialog) component on desktop and a Drawer on mobile for example.
 
 ::docs-component-example
 ---

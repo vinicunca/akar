@@ -122,7 +122,7 @@ export const radioGroupTheme = {
       variant: 'table',
       class: {
         item: 'first-of-type:rounded-s-lg last-of-type:rounded-e-lg',
-        fieldset: 'gap-0 -space-x-px',
+        fieldset: 'gap-0 space-x-[-1px]',
       },
     },
     {
@@ -130,7 +130,7 @@ export const radioGroupTheme = {
       variant: 'table',
       class: {
         item: 'first-of-type:rounded-t-lg last-of-type:rounded-b-lg',
-        fieldset: 'gap-0 -space-y-px',
+        fieldset: 'gap-0 space-y-[-1px]',
       },
     },
     ...BRANDS.map((color: string) => ({

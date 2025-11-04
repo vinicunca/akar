@@ -207,10 +207,12 @@ defineExpose({
   <APrimitive
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="input-root"
   >
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
       :class="pohon.leading({ class: props.pohon?.leading })"
+      data-pohon="input-leading"
     >
       <slot
         name="leading"
@@ -220,12 +222,14 @@ defineExpose({
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
           :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+          data-pohon="input-leading-icon"
         />
         <PAvatar
           v-else-if="!!avatar"
           :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+          data-pohon="input-leading-avatar"
         />
       </slot>
     </span>
@@ -242,6 +246,7 @@ defineExpose({
       :required="required"
       :autocomplete="autocomplete"
       v-bind="{ ...$attrs, ...ariaAttrs }"
+      data-pohon="input-base"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
@@ -253,6 +258,7 @@ defineExpose({
     <span
       v-if="isTrailing || !!slots.trailing"
       :class="pohon.trailing({ class: props.pohon?.trailing })"
+      data-pohon="input-trailing"
     >
       <slot
         name="trailing"
@@ -262,6 +268,7 @@ defineExpose({
           v-if="trailingIconName"
           :name="trailingIconName"
           :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+          data-pohon="input-trailing-icon"
         />
       </slot>
     </span>

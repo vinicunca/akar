@@ -26,8 +26,8 @@ export const fieldGroupTheme = {
   base: 'relative',
   variants: {
     orientation: {
-      horizontal: 'inline-flex -space-x-px',
-      vertical: 'flex flex-col -space-y-px',
+      horizontal: 'inline-flex space-x-[-1px]',
+      vertical: 'flex flex-col space-y-[-1px]',
     },
   },
 } satisfies PThemeFieldGroup;

@@ -5,32 +5,32 @@ import { BRANDS } from './constant';
 
 export const pinInputTheme = {
   slots: {
-    root: 'relative inline-flex items-center gap-1.5',
-    base: 'rounded-md border-0 placeholder:color-text-dimmed text-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 transition-colors-280',
+    root: 'inline-flex gap-1.5 items-center relative',
+    base: 'text-center border-0 rounded-md transition-colors-280 placeholder:color-text-dimmed focus:outline-none disabled:opacity-75 disabled:cursor-not-allowed',
   },
   variants: {
     size: {
       xs: {
-        base: 'size-6 text-xs',
+        base: 'text-xs size-6',
       },
       sm: {
-        base: 'size-7 text-xs',
+        base: 'text-xs size-7',
       },
       md: {
-        base: 'size-8 text-sm',
+        base: 'text-sm size-8',
       },
       lg: {
-        base: 'size-9 text-sm',
+        base: 'text-sm size-9',
       },
       xl: {
-        base: 'size-10 text-base',
+        base: 'text-base size-10',
       },
     },
     variant: {
-      outline: 'color-text-highlighted bg-background ring ring-inset ring-ring-accented',
-      soft: 'color-text-highlighted bg-background-elevated/50 hover:bg-background-elevated focus:bg-background-elevated disabled:bg-background-elevated/50',
-      subtle: 'color-text-highlighted bg-background-elevated ring ring-inset ring-ring-accented',
-      ghost: 'color-text-highlighted bg-transparent hover:bg-background-elevated focus:bg-background-elevated disabled:bg-transparent dark:disabled:bg-transparent',
+      outline: 'color-text-highlighted bg-background ring ring-ring-accented ring-inset',
+      soft: 'color-text-highlighted bg-background-elevated/50 disabled:bg-background-elevated/50 focus:bg-background-elevated hover:bg-background-elevated',
+      subtle: 'color-text-highlighted bg-background-elevated ring ring-ring-accented ring-inset',
+      ghost: 'color-text-highlighted bg-transparent disabled:bg-transparent focus:bg-background-elevated hover:bg-background-elevated dark:disabled:bg-transparent',
       none: 'color-text-highlighted bg-transparent',
     },
   },

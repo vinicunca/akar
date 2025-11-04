@@ -16,27 +16,27 @@ export const emptyTheme = {
   variants: {
     size: {
       xs: {
-        avatar: 'size-8 text-base',
+        avatar: 'akar:(size-8 text-base)',
         title: 'text-sm',
         description: 'text-xs',
       },
       sm: {
-        avatar: 'size-9 text-lg',
+        avatar: 'akar:(size-9 text-lg)',
         title: 'text-sm',
         description: 'text-xs',
       },
       md: {
-        avatar: 'size-10 text-xl',
+        avatar: 'akar:(size-10 text-xl)',
         title: 'text-base',
         description: 'text-sm',
       },
       lg: {
-        avatar: 'size-11 text-[22px]',
+        avatar: 'akar:(size-11 text-[22px])',
         title: 'text-base',
         description: 'text-sm',
       },
       xl: {
-        avatar: 'size-12 text-2xl',
+        avatar: 'akar:(size-12 text-2xl)',
         title: 'text-lg',
         description: 'text-base',
       },
@@ -53,11 +53,11 @@ export const emptyTheme = {
       },
       soft: {
         root: 'bg-background-elevated/50',
-        description: 'text-toned',
+        description: 'color-text-toned',
       },
       subtle: {
         root: 'bg-background-elevated/50 ring ring-ring',
-        description: 'text-toned',
+        description: 'color-text-toned',
       },
       naked: {
         description: 'color-text-muted',

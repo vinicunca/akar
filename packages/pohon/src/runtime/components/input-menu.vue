@@ -536,9 +536,13 @@ defineExpose({
     <AComboboxItem
       :class="pohon.item({ class: props.pohon?.item })"
       :value="searchTerm"
+      data-pohon="input-menu-item"
       @select.prevent="emits('create', searchTerm)"
     >
-      <span :class="pohon.itemLabel({ class: props.pohon?.itemLabel })">
+      <span
+        :class="pohon.itemLabel({ class: props.pohon?.itemLabel })"
+        data-pohon="input-menu-item-label"
+      >
         <slot
           name="create-item-label"
           :item="searchTerm"
@@ -553,6 +557,7 @@ defineExpose({
     <AComboboxLabel
       v-if="isInputItem(item) && item.type === 'label'"
       :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
+      data-pohon="input-menu-label"
     >
       {{ getProp({ object: item, path: props.labelKey as string }) }}
     </AComboboxLabel>
@@ -560,6 +565,7 @@ defineExpose({
     <AComboboxSeparator
       v-else-if="isInputItem(item) && item.type === 'separator'"
       :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator, item.class] })"
+      data-pohon="input-menu-separator"
     />
 
     <AComboboxItem
@@ -567,6 +573,7 @@ defineExpose({
       :class="pohon.item({ class: [props.pohon?.item, isInputItem(item) && item.pohon?.item, isInputItem(item) && item.class] })"
       :disabled="isInputItem(item) && item.disabled"
       :value="props.valueKey && isInputItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
+      data-pohon="input-menu-item"
       @select="onSelect($event, item)"
     >
       <slot
@@ -585,6 +592,7 @@ defineExpose({
             v-if="isInputItem(item) && item.icon"
             :name="item.icon"
             :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
+            data-pohon="input-menu-item-leading-icon"
           />
 
           <PAvatar
@@ -592,6 +600,7 @@ defineExpose({
             :size="((item.pohon?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="item.avatar"
             :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
+            data-pohon="input-menu-item-leading-avatar"
           />
           <PChip
             v-else-if="isInputItem(item) && item.chip"
@@ -600,6 +609,7 @@ defineExpose({
             standalone
             v-bind="item.chip"
             :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
+            data-pohon="input-menu-item-leading-chip"
           />
         </slot>
 
@@ -608,12 +618,14 @@ defineExpose({
             class: [
               props.pohon?.itemWrapper, isInputItem(item) && item.pohon?.itemWrapper],
           })"
+          data-pohon="input-menu-item-wrapper"
         >
           <span
             :class="pohon.itemLabel({
               class: [
                 props.pohon?.itemLabel, isInputItem(item) && item.pohon?.itemLabel],
             })"
+            data-pohon="input-menu-item-label"
           >
             <slot
               name="item-label"
@@ -627,6 +639,7 @@ defineExpose({
           <span
             v-if="isInputItem(item) && (getProp({ object: item, path: props.descriptionKey as string }) || !!slots['item-description'])"
             :class="pohon.itemDescription({ class: [props.pohon?.itemDescription, isInputItem(item) && item.pohon?.itemDescription] })"
+            data-pohon="input-menu-item-description"
           >
             <slot
               name="item-description"
@@ -638,7 +651,10 @@ defineExpose({
           </span>
         </span>
 
-        <span :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isInputItem(item) && item.pohon?.itemTrailing] })">
+        <span
+          :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, isInputItem(item) && item.pohon?.itemTrailing] })"
+          data-pohon="input-menu-item-trailing"
+        >
           <slot
             name="item-trailing"
             :item="(item as NestedItem<T>)"
@@ -650,6 +666,7 @@ defineExpose({
             <PIcon
               :name="selectedIcon || appConfig.pohon.icons.check"
               :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, isInputItem(item) && item.pohon?.itemTrailingIcon] })"
+              data-pohon="input-menu-item-trailing-icon"
             />
           </AComboboxItemIndicator>
         </span>
@@ -672,6 +689,7 @@ defineExpose({
     <AComboboxAnchor
       :as-child="!multiple"
       :class="pohon.base({ class: props.pohon?.base })"
+      data-pohon="input-menu-base"
     >
       <ATagsInputRoot
         v-if="multiple"
@@ -690,11 +708,13 @@ defineExpose({
           :key="index"
           :value="item"
           :class="pohon.tagsItem({ class: [props.pohon?.tagsItem, isInputItem(item) && item.pohon?.tagsItem] })"
+          data-pohon="input-menu-tags-item"
         >
           <ATagsInputItemText
             :class="pohon.tagsItemText({
               class: [props.pohon?.tagsItemText, isInputItem(item) && item.pohon?.tagsItemText],
             })"
+            data-pohon="input-menu-tags-item-text"
           >
             <slot
               name="tags-item-text"
@@ -710,6 +730,7 @@ defineExpose({
               class: [props.pohon?.tagsItemDelete, isInputItem(item) && item.pohon?.tagsItemDelete],
             })"
             :disabled="disabled"
+            data-pohon="input-menu-tags-item-delete"
           >
             <slot
               name="tags-item-delete"
@@ -722,6 +743,7 @@ defineExpose({
                 :class="pohon.tagsItemDeleteIcon({
                   class: [props.pohon?.tagsItemDeleteIcon, isInputItem(item) && item.pohon?.tagsItemDeleteIcon],
                 })"
+                data-pohon="input-menu-tags-item-delete-icon"
               />
             </slot>
           </ATagsInputItemDelete>
@@ -737,6 +759,7 @@ defineExpose({
             v-bind="{ ...$attrs, ...ariaAttrs }"
             :placeholder="placeholder"
             :class="pohon.tagsInput({ class: props.pohon?.tagsInput })"
+            data-pohon="input-menu-tags-input"
             @keydown.enter.prevent
           />
         </AComboboxInput>
@@ -759,6 +782,7 @@ defineExpose({
       <span
         v-if="isLeading || !!avatar || !!slots.leading"
         :class="pohon.leading({ class: props.pohon?.leading })"
+        data-pohon="input-menu-leading"
       >
         <slot
           name="leading"
@@ -770,12 +794,14 @@ defineExpose({
             v-if="isLeading && leadingIconName"
             :name="leadingIconName"
             :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+            data-pohon="input-menu-leading-icon"
           />
           <PAvatar
             v-else-if="!!avatar"
             :size="((props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
             :class="pohon.itemLeadingAvatar({ class: props.pohon?.itemLeadingAvatar })"
+            data-pohon="input-menu-leading-avatar"
           />
         </slot>
       </span>
@@ -783,6 +809,7 @@ defineExpose({
       <AComboboxTrigger
         v-if="isTrailing || !!slots.trailing"
         :class="pohon.trailing({ class: props.pohon?.trailing })"
+        data-pohon="input-menu-trailing"
       >
         <slot
           name="trailing"
@@ -794,6 +821,7 @@ defineExpose({
             v-if="trailingIconName"
             :name="trailingIconName"
             :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+            data-pohon="input-menu-trailing-icon"
           />
         </slot>
       </AComboboxTrigger>
@@ -802,12 +830,16 @@ defineExpose({
     <AComboboxPortal v-bind="portalProps">
       <AComboboxContent
         :class="pohon.content({ class: props.pohon?.content })"
+        data-pohon="input-menu-content"
         v-bind="contentProps"
         @focus-outside.prevent
       >
         <slot name="content-top" />
 
-        <AComboboxEmpty :class="pohon.empty({ class: props.pohon?.empty })">
+        <AComboboxEmpty
+          :class="pohon.empty({ class: props.pohon?.empty })"
+          data-pohon="input-menu-empty"
+        >
           <slot
             name="empty"
             :search-term="searchTerm"
@@ -819,6 +851,7 @@ defineExpose({
         <div
           role="presentation"
           :class="pohon.viewport({ class: props.pohon?.viewport })"
+          data-pohon="input-menu-viewport"
         >
           <template v-if="!!virtualize">
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
@@ -842,6 +875,7 @@ defineExpose({
             <AComboboxGroup
               v-if="createItem && createItemPosition === 'top'"
               :class="pohon.group({ class: props.pohon?.group })"
+              data-pohon="input-menu-group"
             >
               <ReuseCreateItemTemplate />
             </AComboboxGroup>
@@ -850,6 +884,7 @@ defineExpose({
               v-for="(group, groupIndex) in filteredGroups"
               :key="`group-${groupIndex}`"
               :class="pohon.group({ class: props.pohon?.group })"
+              data-pohon="input-menu-group"
             >
               <ReuseItemTemplate
                 v-for="(item, index) in group"
@@ -862,6 +897,7 @@ defineExpose({
             <AComboboxGroup
               v-if="createItem && createItemPosition === 'bottom'"
               :class="pohon.group({ class: props.pohon?.group })"
+              data-pohon="input-menu-group"
             >
               <ReuseCreateItemTemplate />
             </AComboboxGroup>
@@ -874,6 +910,7 @@ defineExpose({
           v-if="!!arrow"
           v-bind="arrowProps"
           :class="pohon.arrow({ class: props.pohon?.arrow })"
+          data-pohon="input-menu-arrow"
         />
       </AComboboxContent>
     </AComboboxPortal>

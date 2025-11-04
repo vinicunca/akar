@@ -13,7 +13,7 @@
         width="460"
         height="258"
         :alt="`Nuxt UI Screenshot ${i}`"
-        class="border-default border rounded-lg bg-white aspect-video"
+        class="border-border border rounded-lg bg-white aspect-video"
       >
     </PMarquee>
     <PMarquee
@@ -28,7 +28,7 @@
         width="460"
         height="258"
         :alt="`Nuxt UI Screenshot ${i}`"
-        class="border-default border rounded-lg bg-white aspect-video"
+        class="border-border border rounded-lg bg-white aspect-video"
       >
     </PMarquee>
     <PMarquee
@@ -44,7 +44,7 @@
         width="460"
         height="258"
         :alt="`Nuxt UI Screenshot ${i}`"
-        class="border-default border rounded-lg bg-white aspect-video"
+        class="border-border border rounded-lg bg-white aspect-video"
       >
     </PMarquee>
   </div>

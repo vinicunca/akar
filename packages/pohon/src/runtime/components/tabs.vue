@@ -150,9 +150,16 @@ defineExpose({
     :orientation="orientation"
     :activation-mode="activationMode"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="tabs-root"
   >
-    <ATabsList :class="pohon.list({ class: props.pohon?.list })">
-      <ATabsIndicator :class="pohon.indicator({ class: props.pohon?.indicator })" />
+    <ATabsList
+      :class="pohon.list({ class: props.pohon?.list })"
+      data-pohon="tabs-list"
+    >
+      <ATabsIndicator
+        :class="pohon.indicator({ class: props.pohon?.indicator })"
+        data-pohon="tabs-indicator"
+      />
 
       <slot name="list-leading" />
 
@@ -163,6 +170,7 @@ defineExpose({
         :value="item.value ?? String(index)"
         :disabled="item.disabled"
         :class="pohon.trigger({ class: [props.pohon?.trigger, item.pohon?.trigger] })"
+        data-pohon="tabs-trigger"
       >
         <slot
           name="leading"
@@ -174,18 +182,21 @@ defineExpose({
             v-if="item.icon"
             :name="item.icon"
             :class="pohon.leadingIcon({ class: [props.pohon?.leadingIcon, item.pohon?.leadingIcon] })"
+            data-pohon="tabs-leading-icon"
           />
           <PAvatar
             v-else-if="item.avatar"
             :size="((item.pohon?.leadingAvatarSize || props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="item.avatar"
             :class="pohon.leadingAvatar({ class: [props.pohon?.leadingAvatar, item.pohon?.leadingAvatar] })"
+            data-pohon="tabs-leading-avatar"
           />
         </slot>
 
         <span
           v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots.default"
           :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
+          data-pohon="tabs-label"
         >
           <slot
             :item="item"
@@ -206,6 +217,7 @@ defineExpose({
             :size="((item.pohon?.trailingBadgeSize || props.pohon?.trailingBadgeSize || pohon.trailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(item.badge) || isNumber(item.badge)) ? { label: item.badge } : item.badge"
             :class="pohon.trailingBadge({ class: [props.pohon?.trailingBadge, item.pohon?.trailingBadge] })"
+            data-pohon="tabs-trailing-badge"
           />
         </slot>
       </ATabsTrigger>
@@ -219,6 +231,7 @@ defineExpose({
         :key="index"
         :value="item.value ?? String(index)"
         :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content, item.class] })"
+        data-pohon="tabs-content"
       >
         <slot
           :name="((item.slot || 'content') as keyof PTabsSlots<T>)"

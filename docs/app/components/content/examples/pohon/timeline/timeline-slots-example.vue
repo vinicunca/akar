@@ -44,7 +44,7 @@ const items = [{
     size="xs"
     :pohon="{
       date: 'float-end ms-1',
-      description: 'px-3 py-2 ring ring-default mt-2 rounded-md text-default',
+      description: 'px-3 py-2 ring ring-ring mt-2 rounded-md color-text',
     }"
     class="w-96"
   >

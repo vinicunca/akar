@@ -72,7 +72,7 @@ props:
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/pohon/components/modal
+          to: /docs/pohon/components/dialog
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
@@ -183,7 +183,7 @@ props:
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/pohon/components/modal
+          to: /docs/pohon/components/dialog
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
@@ -296,7 +296,7 @@ props:
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/pohon/components/modal
+            to: /docs/pohon/components/dialog
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
@@ -408,7 +408,7 @@ props:
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/pohon/components/modal
+            to: /docs/pohon/components/dialog
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
@@ -504,7 +504,7 @@ props:
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/pohon/components/modal
+            to: /docs/pohon/components/dialog
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
@@ -529,7 +529,7 @@ props:
       - label: Help
         icon: i-lucide-circle-help
         disabled: true
-  class: 'data-[orientation=horizontal]:border-b border-default data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
+  class: 'data-[orientation=horizontal]:border-b border-border data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
 ---
 ::
 
@@ -685,7 +685,7 @@ props:
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/pohon/components/modal
+          to: /docs/pohon/components/dialog
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
@@ -783,7 +783,7 @@ props:
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/pohon/components/modal
+          to: /docs/pohon/components/dialog
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
@@ -872,7 +872,7 @@ props:
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/pohon/components/modal
+          to: /docs/pohon/components/dialog
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
@@ -950,7 +950,7 @@ props:
         - label: Modal
           icon: i-lucide-file-text
           description: Display a modal within your application.
-          to: /docs/pohon/components/modal
+          to: /docs/pohon/components/dialog
         - label: NavigationMenu
           icon: i-lucide-file-text
           description: Display a list of links.
@@ -1050,7 +1050,7 @@ props:
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/pohon/components/modal
+            to: /docs/pohon/components/dialog
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.
@@ -1157,7 +1157,7 @@ props:
           - label: Modal
             icon: i-lucide-file-text
             description: Display a modal within your application.
-            to: /docs/pohon/components/modal
+            to: /docs/pohon/components/dialog
           - label: NavigationMenu
             icon: i-lucide-file-text
             description: Display a list of links.

@@ -6,11 +6,11 @@ import { BRANDS } from './constant';
 export const progressTheme = {
   slots: {
     root: 'gap-2',
-    base: 'relative overflow-hidden rounded-full bg-background-accented',
+    base: 'rounded-full bg-background-accented relative overflow-hidden',
     indicator: 'rounded-full size-full transition-transform-280 ease-out',
-    status: 'flex color-text-dimmed transition-[width]-280',
+    status: 'color-text-dimmed flex transition-[width]-280',
     steps: 'grid items-end',
-    step: 'truncate text-end row-start-1 col-start-1 transition-opacity',
+    step: 'text-end col-start-1 row-start-1 truncate transition-opacity',
   },
   variants: {
     color: {
@@ -61,7 +61,7 @@ export const progressTheme = {
         step: 'opacity-100',
       },
       first: {
-        step: 'opacity-100 color-text-muted',
+        step: 'color-text-muted opacity-100',
       },
       other: {
         step: 'opacity-0',
@@ -69,14 +69,14 @@ export const progressTheme = {
     },
     orientation: {
       horizontal: {
-        root: 'w-full flex flex-col',
+        root: 'flex flex-col w-full',
         base: 'w-full',
-        status: 'flex-row items-center justify-end min-w-fit',
+        status: 'flex-row min-w-fit items-center justify-end',
       },
       vertical: {
-        root: 'h-full flex flex-row-reverse',
+        root: 'flex flex-row-reverse h-full',
         base: 'h-full',
-        status: 'flex-col justify-end min-h-fit',
+        status: 'flex-col min-h-fit justify-end',
       },
     },
     inverted: {

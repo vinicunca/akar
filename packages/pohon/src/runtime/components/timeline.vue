@@ -125,20 +125,26 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
     :as="as"
     :data-orientation="orientation"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="timeline-root"
   >
     <div
       v-for="(item, index) in items"
       :key="item.value ?? index"
       :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
       :data-state="getItemState(index)"
+      data-pohon="timeline-item"
     >
-      <div :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })">
+      <div
+        :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })"
+        data-pohon="timeline-container"
+      >
         <PAvatar
           :size="size"
           :icon="item.icon"
           v-bind="typeof item.avatar === 'object' ? item.avatar : {}"
           :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })"
-          :pohon="{ icon: 'text-inherit', fallback: 'text-inherit' }"
+          :pohon="{ icon: 'akar:color-inherit', fallback: 'color-inherit' }"
+          data-pohon="timeline-indicator"
         >
           <slot
             :name="((item.slot ? `${item.slot}-indicator` : 'indicator') as keyof PTimelineSlots<T>)"
@@ -150,13 +156,18 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
           v-if="index < items.length - 1"
           :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator] })"
           :orientation="props.orientation"
+          data-pohon="timeline-separator"
         />
       </div>
 
-      <div :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })">
+      <div
+        :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })"
+        data-pohon="timeline-wrapper"
+      >
         <div
           v-if="item.date"
           :class="pohon.date({ class: [props.pohon?.date, item.pohon?.date] })"
+          data-pohon="timeline-date"
         >
           <slot
             :name="((item.slot ? `${item.slot}-date` : 'date') as keyof PTimelineSlots<T>)"
@@ -168,6 +179,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
         <div
           v-if="item.title || !!slots.title"
           :class="pohon.title({ class: [props.pohon?.title, item.pohon?.title] })"
+          data-pohon="timeline-title"
         >
           <slot
             :name="((item.slot ? `${item.slot}-title` : 'title') as keyof PTimelineSlots<T>)"
@@ -179,6 +191,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
         <div
           v-if="item.description || !!slots.description"
           :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
+          data-pohon="timeline-description"
         >
           <slot
             :name="((item.slot ? `${item.slot}-description` : 'description') as keyof PTimelineSlots<T>)"

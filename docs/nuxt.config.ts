@@ -17,7 +17,7 @@ export default defineNuxtConfig({
 
   app: {
     rootAttrs: {
-      'class': 'bg-default',
+      'class': 'bg-background',
       'data-akar-drawer-wrapper': '',
     },
   },

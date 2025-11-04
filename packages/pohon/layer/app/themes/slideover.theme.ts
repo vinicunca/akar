@@ -4,33 +4,33 @@ import type { PThemeSlideover } from 'pohon-ui';
 
 export const slideoverTheme = {
   slots: {
-    overlay: 'fixed inset-0 bg-background-elevated/75',
-    content: 'fixed bg-background divide-y divide-divide sm:ring ring-ring sm:shadow-lg flex flex-col focus:outline-none',
-    header: 'flex items-center gap-1.5 p-4 sm:px-6 min-h-16',
-    body: 'flex-1 overflow-y-auto p-4 sm:p-6',
-    footer: 'flex items-center gap-1.5 p-4 sm:px-6',
+    overlay: 'bg-background-elevated/75 inset-0 fixed',
+    content: 'bg-background flex flex-col ring-ring fixed divide-divide divide-y focus:outline-none sm:ring sm:shadow-lg',
+    header: 'p-4 flex gap-1.5 min-h-16 items-center sm:px-6',
+    body: 'p-4 flex-1 overflow-y-auto sm:p-6',
+    footer: 'p-4 flex gap-1.5 items-center sm:px-6',
     title: 'color-text-highlighted font-semibold',
-    description: 'mt-1 color-text-muted text-sm',
-    close: 'absolute top-4 end-4',
+    description: 'text-sm color-text-muted mt-1',
+    close: 'end-4 top-4 absolute',
   },
   variants: {
     side: {
       top: {
-        content: 'inset-x-0 top-0 max-h-full',
+        content: 'max-h-full inset-x-0 top-0',
       },
       right: {
-        content: 'right-0 inset-y-0 w-full max-w-md',
+        content: 'max-w-md w-full inset-y-0 right-0',
       },
       bottom: {
-        content: 'inset-x-0 bottom-0 max-h-full',
+        content: 'max-h-full inset-x-0 bottom-0',
       },
       left: {
-        content: 'left-0 inset-y-0 w-full max-w-md',
+        content: 'max-w-md w-full inset-y-0 left-0',
       },
     },
     transition: {
       true: {
-        overlay: 'data-[state=open]:(animate-in fade-in-0) data-[state=closed]:(animate-out fade-out-0)',
+        overlay: 'data-[state=closed]:(animate-out fade-out-0) data-[state=open]:(animate-in fade-in-0)',
       },
     },
   },

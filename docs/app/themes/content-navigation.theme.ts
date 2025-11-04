@@ -134,13 +134,13 @@ export const contentNavigationTheme = {
         linkLeadingIcon: 'color-text-highlighted group-data-[state=open]:color-text-highlighted',
       },
     },
-    ...BRANDS.map((highlightColor) => ({
-      highlightColor,
+    ...BRANDS.map((color) => ({
+      highlightColor: color,
       highlight: true,
       level: true,
       active: true,
       class: {
-        link: `after:bg-${highlightColor}`,
+        link: `after:bg-${color}`,
       },
     })),
     {

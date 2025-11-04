@@ -5,7 +5,7 @@ description: 'A composable to programmatically control overlays.'
 
 ## Usage
 
-Use the auto-imported `useOverlay` composable to programmatically control [Modal](/docs/pohon/components/modal) and [Slideover](/docs/pohon/components/slideover) components.
+Use the auto-imported `useOverlay` composable to programmatically control [Modal](/docs/pohon/components/dialog) and [Slideover](/docs/pohon/components/slideover) components.
 
 ```vue
 <script setup lang="ts">

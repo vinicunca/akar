@@ -228,6 +228,7 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     :locale="locale"
+    data-pohon="input-number-root"
     @update:model-value="onUpdate"
   >
     <ANumberFieldInput
@@ -236,6 +237,7 @@ defineExpose({
       :placeholder="placeholder"
       :required="required"
       :class="pohon.base({ class: props.pohon?.base })"
+      data-pohon="input-number-base"
       @blur="onBlur"
       @focus="emitFormFocus"
     />
@@ -243,6 +245,7 @@ defineExpose({
     <div
       v-if="Boolean(increment)"
       :class="pohon.increment({ class: props.pohon?.increment })"
+      data-pohon="input-number-increment"
     >
       <ANumberFieldIncrement
         as-child
@@ -264,6 +267,7 @@ defineExpose({
     <div
       v-if="Boolean(decrement)"
       :class="pohon.decrement({ class: props.pohon?.decrement })"
+      data-pohon="input-number-decrement"
     >
       <ANumberFieldDecrement
         as-child

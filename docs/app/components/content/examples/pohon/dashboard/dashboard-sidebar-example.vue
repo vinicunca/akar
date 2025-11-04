@@ -40,7 +40,7 @@ const items: Array<Array<PNavigationMenuItem>> = [[{
   <PDashboardSidebar
     collapsible
     resizable
-    :pohon="{ footer: 'border-t border-default' }"
+    :pohon="{ footer: 'border-t border-border' }"
   >
     <template #header="{ collapsed }">
       <Logo

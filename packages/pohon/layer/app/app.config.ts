@@ -27,6 +27,7 @@ import { emptyTheme } from './themes/empty.theme';
 import { errorTheme } from './themes/error.theme';
 import { fieldGroupTheme } from './themes/field-group.theme';
 import { fileUploadTheme } from './themes/file-upload.theme';
+import { footerColumnsTheme } from './themes/footer-columns.theme';
 import { footerTheme } from './themes/footer.theme';
 import { formFieldTheme } from './themes/form-field.theme';
 import { headerTheme } from './themes/header.theme';
@@ -97,6 +98,7 @@ export default defineAppConfig({
     fieldGroup: fieldGroupTheme,
     fileUpload: fileUploadTheme,
     footer: footerTheme,
+    footerColumns: footerColumnsTheme,
     formField: formFieldTheme,
     header: headerTheme,
     inputMenu: inputMenuTheme,
@@ -118,6 +120,9 @@ export default defineAppConfig({
     selectMenu: selectMenuTheme,
     select: selectTheme,
     separator: separatorTheme,
+    skeleton: {
+      base: 'animate-pulse rounded-md bg-background-elevated',
+    },
     slideover: slideoverTheme,
     slider: sliderTheme,
     stepper: stepperTheme,

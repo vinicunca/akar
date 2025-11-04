@@ -922,7 +922,7 @@ props:
 
 ### Within a Modal
 
-You can use the CommandPalette component inside a [Modal](/docs/pohon/components/modal)'s content.
+You can use the CommandPalette component inside a [Modal](/docs/pohon/components/dialog)'s content.
 
 ::docs-component-example
 ---
@@ -960,7 +960,7 @@ props:
 ::
 
 ::note
-This can be useful when using the CommandPalette inside a [`Modal`](/docs/pohon/components/modal) for example.
+This can be useful when using the CommandPalette inside a [`Modal`](/docs/pohon/components/dialog) for example.
 ::
 
 ### With footer slot

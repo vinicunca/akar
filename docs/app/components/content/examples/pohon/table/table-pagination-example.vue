@@ -163,7 +163,7 @@ const pagination = ref({
       class="flex-1"
     />
 
-    <div class="border-default pt-4 border-t flex justify-center">
+    <div class="border-border pt-4 border-t flex justify-center">
       <PPagination
         :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
         :items-per-page="table?.tableApi?.getState().pagination.pageSize"

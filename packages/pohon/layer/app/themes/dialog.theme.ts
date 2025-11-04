@@ -5,7 +5,7 @@ import type { PThemeDialog } from 'pohon-ui';
 export const dialogTheme = {
   slots: {
     overlay: 'fixed inset-0 bg-background-elevated/75 data-[state=open]:(animate-in fade-in-0) data-[state=closed]:(animate-out fade-out-0)',
-    content: 'fixed bg-background divide-y divide-divide flex flex-col focus:outline-none data-[state=open]:(animate-in fade-in-0 zoom-in-95 slide-in-from-left-1/2 slide-in-from-top-[48%]) data-[state=closed]:(animate-out fade-out-0 zoom-out-95 slide-out-to-left-1/2 slide-out-to-top-[48%])',
+    content: 'fixed bg-background divide-y divide-divide grid grid-rows-[min-content_1fr_min-content] focus:outline-none data-[state=open]:(animate-in fade-in-0 zoom-in-95) data-[state=closed]:(animate-out fade-out-0 zoom-out-95)',
     header: 'flex items-center gap-1.5 p-4 sm:px-6 min-h-16',
     body: 'flex-1 overflow-y-auto p-4 sm:p-6',
     footer: 'flex items-center gap-1.5 p-4 sm:px-6',

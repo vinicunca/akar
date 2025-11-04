@@ -8,7 +8,7 @@ export const timelineTheme = {
     root: 'flex gap-1.5',
     item: 'group flex flex-1 gap-3 relative',
     container: 'flex gap-1.5 items-center relative',
-    indicator: 'color-text-muted group-data-[state=active]:color-text-inverted group-data-[state=completed]:color-text-inverted',
+    indicator: 'color-text-muted group-data-[state="active"]:color-text-inverted group-data-[state="completed"]:color-text-inverted',
     separator: 'rounded-full bg-background-elevated flex-1',
     wrapper: 'w-full',
     date: 'text-xs/5 color-text-dimmed',

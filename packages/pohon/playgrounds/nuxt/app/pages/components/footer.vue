@@ -56,7 +56,7 @@ const columns = [
 <template>
   <BaseNavbar />
 
-  <PFooter class="border-default divide-default border-t min-h-0 w-full divide-y">
+  <PFooter class="border-border divide-divide border-t min-h-0 w-full divide-y">
     <template #top>
       <PContainer>
         <PFooterColumns :columns="columns">

@@ -16,7 +16,7 @@ const attrs = reactive({
 
 const highlight = ref(true);
 const highlightColor = ref();
-const orientation = ref('horizontal' as keyof typeof theme.variants.orientation);
+const orientation = ref('vertical' as keyof typeof theme.variants.orientation);
 const contentOrientation = ref('horizontal' as keyof typeof theme.variants.contentOrientation);
 const collapsed = ref(false);
 const arrow = ref(false);
@@ -65,7 +65,7 @@ const items = [
         label: 'Modal',
         icon: 'i-lucide-square',
         description: 'Display a modal dialog overlay for important content.',
-        to: '/components/modal',
+        to: '/components/dialog',
       }, {
         label: 'NavigationMenu',
         icon: 'i-lucide-list',
@@ -163,7 +163,7 @@ const items = [
       :highlight="highlight"
       :highlight-color="highlightColor"
       v-bind="props"
-      :class="highlight && 'data-[orientation=horizontal]:border-b border-default'"
+      :class="highlight && 'data-[orientation=horizontal]:border-b border-border'"
       class="data-[orientation=vertical]:data-[collapsed=false]:w-48"
     />
   </BaseMatrix>

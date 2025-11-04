@@ -541,6 +541,7 @@ defineExpose({
           resolveValue(tableApi.options.meta?.class?.tr, row),
         ],
       })"
+      data-pohon="table-tr"
       :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
       @click="onRowSelect($event, row)"
       @pointerenter="onRowHover($event, row)"
@@ -560,6 +561,7 @@ defineExpose({
           ],
           pinned: !!cell.column.getIsPinned(),
         })"
+        data-pohon="table-td"
         :style="resolveValue(cell.column.columnDef.meta?.style?.td, cell)"
       >
         <slot
@@ -577,10 +579,12 @@ defineExpose({
     <tr
       v-if="row.getIsExpanded()"
       :class="pohon.tr({ class: [props.pohon?.tr] })"
+      data-pohon="table-tr"
     >
       <td
         :colspan="row.getAllCells().length"
         :class="pohon.td({ class: [props.pohon?.td] })"
+        data-pohon="table-td"
       >
         <slot
           name="expanded"
@@ -594,21 +598,27 @@ defineExpose({
     <table
       ref="tableRef"
       :class="pohon.base({ class: [props.pohon?.base] })"
+      data-pohon="table-base"
     >
       <caption
         v-if="caption || !!slots.caption"
         :class="pohon.caption({ class: [props.pohon?.caption] })"
+        data-pohon="table-caption"
       >
         <slot name="caption">
           {{ caption }}
         </slot>
       </caption>
 
-      <thead :class="pohon.thead({ class: [props.pohon?.thead] })">
+      <thead
+        :class="pohon.thead({ class: [props.pohon?.thead] })"
+        data-pohon="table-thead"
+      >
         <tr
           v-for="headerGroup in tableApi.getHeaderGroups()"
           :key="headerGroup.id"
           :class="pohon.tr({ class: [props.pohon?.tr] })"
+          data-pohon="table-tr"
         >
           <th
             v-for="header in headerGroup.headers"
@@ -624,6 +634,7 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned(),
             })"
+            data-pohon="table-th"
           >
             <slot
               :name="`${header.id}-header`"
@@ -638,10 +649,16 @@ defineExpose({
           </th>
         </tr>
 
-        <tr :class="pohon.separator({ class: [props.pohon?.separator] })" />
+        <tr
+          :class="pohon.separator({ class: [props.pohon?.separator] })"
+          data-pohon="table-separator"
+        />
       </thead>
 
-      <tbody :class="pohon.tbody({ class: [props.pohon?.tbody] })">
+      <tbody
+        :class="pohon.tbody({ class: [props.pohon?.tbody] })"
+        data-pohon="table-tbody"
+      >
         <slot name="body-top" />
 
         <template v-if="rows.length">
@@ -673,6 +690,7 @@ defineExpose({
           <td
             :colspan="tableApi.getAllLeafColumns().length"
             :class="pohon.loading({ class: props.pohon?.loading })"
+            data-pohon="table-loading"
           >
             <slot name="loading" />
           </td>
@@ -682,6 +700,7 @@ defineExpose({
           <td
             :colspan="tableApi.getAllLeafColumns().length"
             :class="pohon.empty({ class: props.pohon?.empty })"
+            data-pohon="table-empty"
           >
             <slot name="empty">
               {{ empty || t('table.noData') }}
@@ -698,6 +717,7 @@ defineExpose({
         :style="virtualizer ? {
           transform: `translateY(${virtualizer.getTotalSize() - virtualizer.getVirtualItems().length * virtualizerProps.estimateSize}px)`,
         } : undefined"
+        data-pohon="table-tfoot"
       >
         <tr :class="pohon.separator({ class: [props.pohon?.separator] })" />
 
@@ -705,6 +725,7 @@ defineExpose({
           v-for="footerGroup in tableApi.getFooterGroups()"
           :key="footerGroup.id"
           :class="pohon.tr({ class: [props.pohon?.tr] })"
+          data-pohon="table-tr"
         >
           <th
             v-for="header in footerGroup.headers"
@@ -720,6 +741,7 @@ defineExpose({
               pinned: !!header.column.getIsPinned(),
             })"
             :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
+            data-pohon="table-th"
           >
             <slot
               :name="`${header.id}-footer`"
@@ -742,6 +764,7 @@ defineExpose({
     :as="as"
     v-bind="$attrs"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="table-root"
   >
     <div
       v-if="virtualizer"

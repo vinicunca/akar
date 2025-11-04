@@ -5,10 +5,10 @@ import { BRANDS } from './constant';
 
 export const sliderTheme = {
   slots: {
-    root: 'relative flex items-center select-none touch-none',
-    track: 'relative bg-background-accented overflow-hidden rounded-full grow',
-    range: 'absolute rounded-full',
-    thumb: 'rounded-full bg-background ring-2 focus-visible:outline-2 focus-visible:outline-offset-2',
+    root: 'flex select-none items-center relative touch-none',
+    track: 'rounded-full bg-background-accented grow relative overflow-hidden',
+    range: 'rounded-full absolute',
+    thumb: 'rounded-full bg-background ring-2 focus-visible:(outline-2 outline-offset-2)',
   },
   variants: {
     color: {

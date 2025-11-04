@@ -198,6 +198,7 @@ defineExpose({
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
+    data-pohon="input-tags-root"
     @update:model-value="onUpdate"
   >
     <ATagsInputItem
@@ -205,8 +206,12 @@ defineExpose({
       :key="index"
       :value="item"
       :class="pohon.item({ class: [props.pohon?.item] })"
+      data-pohon="input-tags-item"
     >
-      <ATagsInputItemText :class="pohon.itemText({ class: [props.pohon?.itemText] })">
+      <ATagsInputItemText
+        :class="pohon.itemText({ class: [props.pohon?.itemText] })"
+        data-pohon="input-tags-item-text"
+      >
         <slot
           v-if="!!slots['item-text']"
           name="item-text"
@@ -219,6 +224,7 @@ defineExpose({
       <ATagsInputItemDelete
         :class="pohon.itemDelete({ class: [props.pohon?.itemDelete] })"
         :disabled="disabled"
+        data-pohon="input-tags-item-delete"
       >
         <slot
           name="item-delete"
@@ -229,6 +235,7 @@ defineExpose({
           <PIcon
             :name="deleteIcon || appConfig.pohon.icons.close"
             :class="pohon.itemDeleteIcon({ class: [props.pohon?.itemDeleteIcon] })"
+            data-pohon="input-tags-item-delete-icon"
           />
         </slot>
       </ATagsInputItemDelete>
@@ -240,6 +247,7 @@ defineExpose({
       :placeholder="placeholder"
       :max-length="maxLength"
       :class="pohon.input({ class: props.pohon?.input })"
+      data-pohon="input-tags-input"
       @blur="onBlur"
       @focus="onFocus"
     />
@@ -249,6 +257,7 @@ defineExpose({
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
       :class="pohon.leading({ class: props.pohon?.leading })"
+      data-pohon="input-tags-leading"
     >
       <slot
         name="leading"
@@ -258,12 +267,14 @@ defineExpose({
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
           :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+          data-pohon="input-tags-leading-icon"
         />
         <PAvatar
           v-else-if="!!avatar"
           :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+          data-pohon="input-tags-leading-avatar"
         />
       </slot>
     </span>
@@ -271,6 +282,7 @@ defineExpose({
     <span
       v-if="isTrailing || !!slots.trailing"
       :class="pohon.trailing({ class: props.pohon?.trailing })"
+      data-pohon="input-tags-trailing"
     >
       <slot
         name="trailing"
@@ -280,6 +292,7 @@ defineExpose({
           v-if="trailingIconName"
           :name="trailingIconName"
           :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+          data-pohon="input-tags-trailing-icon"
         />
       </slot>
     </span>
