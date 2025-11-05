@@ -46,25 +46,25 @@ export const proseTheme = {
       to: {
         true: 'border-dashed',
       },
-      compoundVariants: [
-        ...BRANDS.map((color: string) => ({
-          color,
-          to: true,
-          class: {
-            base: `hover:border-${color}`,
-            externalIcon: `group-hover:text-${color}`,
-          },
-        })),
-        {
-          color: 'neutral',
-          to: true,
-          class: {
-            base: 'hover:border-border-inverted',
-            externalIcon: 'group-hover:color-text-highlighted',
-          },
-        },
-      ],
     },
+    compoundVariants: [
+      ...BRANDS.map((color) => ({
+        color,
+        to: true,
+        class: {
+          base: `hover:border-${color}`,
+          externalIcon: `group-hover:text-${color}`,
+        },
+      })),
+      {
+        color: 'neutral',
+        to: true,
+        class: {
+          base: 'hover:border-border-inverted',
+          externalIcon: 'group-hover:color-text-highlighted',
+        },
+      },
+    ],
   },
   card: {
     slots: {
@@ -76,7 +76,7 @@ export const proseTheme = {
     },
     variants: {
       color: {
-        ...Object.fromEntries(BRANDS.map((color: string) => [
+        ...Object.fromEntries(BRANDS.map((color) => [
           color,
           {
             icon: `color-${color}`,
@@ -96,7 +96,7 @@ export const proseTheme = {
       },
     },
     compoundVariants: [
-      ...BRANDS.map((color: string) => ({
+      ...BRANDS.map((color) => ({
         color,
         to: true,
         class: {
@@ -121,7 +121,7 @@ export const proseTheme = {
     base: 'text-sm font-600 font-mono px-1.5 py-0.5 rounded-md inline-block transition-colors-280 [&[language=ts-type]]:(bg-slate-700 dark:bg-slate-800)',
     variants: {
       color: {
-        ...Object.fromEntries(BRANDS.map((color: string) => [
+        ...Object.fromEntries(BRANDS.map((color) => [
           color,
           `border border-${color}/25 bg-${color}/10 color-${color}`,
         ])),

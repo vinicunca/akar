@@ -101,7 +101,7 @@ export const tabsTheme = {
         indicator: '-start-px w-px',
       },
     },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'pill',
       class: {
@@ -117,7 +117,7 @@ export const tabsTheme = {
         trigger: 'data-[state=active]:color-text-inverted focus-visible:(outline-2 outline-offset-2 outline-outline-inverted)',
       },
     },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'link',
       class: {

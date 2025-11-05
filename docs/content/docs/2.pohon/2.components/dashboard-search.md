@@ -89,6 +89,15 @@ You can disable this behavior by setting the `color-mode` prop to `false`:
 
 :docs-pohon-emits
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `commandPaletteRef` | `Ref<InstanceType<typeof PCommandPalette> \| null>` |
+
+
 ## Theme
 
 :docs-pohon-theme

@@ -18,7 +18,7 @@ export const radioGroupTheme = {
   },
   variants: {
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [color, {
+      ...Object.fromEntries(BRANDS.map((color) => [color, {
         base: `focus-visible:outline-${color}`,
         indicator: `bg-${color}`,
       }])),
@@ -133,7 +133,7 @@ export const radioGroupTheme = {
         fieldset: 'gap-0 space-y-[-1px]',
       },
     },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'card',
       class: {
@@ -147,7 +147,7 @@ export const radioGroupTheme = {
         item: 'has-data-[state=checked]:border-border-inverted',
       },
     },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'table',
       class: {

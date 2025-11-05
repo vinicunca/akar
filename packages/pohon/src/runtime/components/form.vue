@@ -13,6 +13,7 @@ import type {
   InferInput,
   InferOutput,
 } from '../types/form';
+import type { FormHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/form';
 import { isString } from '@vinicunca/perkakas';
@@ -73,7 +74,7 @@ export type PFormProps<S extends FormSchema, T extends boolean = true, N extends
   loadingAuto?: boolean;
   class?: any;
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>);
-};
+} & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>;
 
 export interface PFormEmits<S extends FormSchema, T extends boolean = true> {
   submit: [event: FormSubmitEvent<FormData<S, T>>];

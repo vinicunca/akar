@@ -2,7 +2,7 @@
 import { useClipboard } from '@vueuse/core';
 import { ref } from 'vue';
 
-const value = ref('npx nuxt module add ui');
+const value = ref('npx nuxt module add pohon-ui');
 
 const { copy, copied } = useClipboard();
 </script>

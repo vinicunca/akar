@@ -2,12 +2,13 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { UseFileDialogReturn } from '@vueuse/core';
 import type { PButtonProps, PIconProps } from '../types';
+import type { InputHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/file-upload';
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>;
 
-export interface PFileUploadProps<M extends boolean = false> {
+export interface PFileUploadProps<M extends boolean = false> extends /** @vue-ignore */ Pick<InputHTMLAttributes, 'form' | 'formaction' | 'formenctype' | 'formmethod' | 'formnovalidate' | 'formtarget'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -259,13 +260,16 @@ function removeFile(index?: number) {
   dropzoneRef.value?.focus();
 }
 
-watch(modelValue, (newValue) => {
-  const hasModelReset = props.multiple ? !(newValue as Array<File>)?.length : !newValue;
+watch(
+  modelValue,
+  (newValue) => {
+    const hasModelReset = props.multiple ? !(newValue as Array<File>)?.length : !newValue;
 
-  if (hasModelReset && inputRef.value) {
-    inputRef.value.$el.value = '';
-  }
-});
+    if (hasModelReset && inputRef.value) {
+      inputRef.value.$el.value = '';
+    }
+  },
+);
 
 defineExpose({
   inputRef: toRef(() => inputRef.value?.$el as HTMLInputElement),

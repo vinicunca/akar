@@ -18,7 +18,7 @@ export const calendarTheme = {
   },
   variants: {
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [
+      ...Object.fromEntries(BRANDS.map((color) => [
         color,
         {
           headCell: `color-${color}`,
@@ -63,28 +63,28 @@ export const calendarTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'solid',
       class: {
         cellTrigger: `akar:data-[selected]:bg-${color} akar:data-[selected]:color-text-inverted data-[today]:not-[[data-selected]]:color-${color} data-[highlighted]:bg-${color}/20 hover:not-[[data-selected]]:bg-${color}/20`,
       },
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'outline',
       class: {
         cellTrigger: `akar:data-[selected]:ring akar:data-[selected]:ring-inset akar:data-[selected]:ring-${color}/50 akar:data-[selected]:color-${color} data-[today]:not-[[data-selected]]:color-${color} data-[highlighted]:bg-${color}/10 hover:not-[[data-selected]]:bg-${color}/10`,
       },
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'soft',
       class: {
         cellTrigger: `akar:data-[selected]:bg-${color}/10 akar:data-[selected]:color-${color} data-[today]:not-[[data-selected]]:color-${color} data-[highlighted]:bg-${color}/20 hover:not-[[data-selected]]:bg-${color}/20`,
       },
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'subtle',
       class: {

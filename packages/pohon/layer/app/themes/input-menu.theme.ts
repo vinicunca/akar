@@ -131,7 +131,7 @@ export const inputMenuTheme = {
       multiple: true,
       class: 'has-focus:bg-background-elevated',
     },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       multiple: true,
       variant: ['outline', 'subtle'],

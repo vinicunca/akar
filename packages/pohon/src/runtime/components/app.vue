@@ -3,7 +3,7 @@ import type { AConfigProviderProps, ATooltipProviderProps } from 'akar';
 import type { PToasterProps } from '../types';
 import type { PLocale, PMessages } from '../types/locale';
 
-export interface PAppProps<T extends PMessages = PMessages> extends Omit<AConfigProviderProps, 'useId' | 'dir' | 'locale'> {
+export interface PAppProps<T extends PMessages = PMessages> extends Omit<AConfigProviderProps, 'useId' | 'locale'> {
   tooltip?: ATooltipProviderProps;
   toaster?: PToasterProps | null;
   locale?: PLocale<T>;
@@ -51,7 +51,7 @@ provide(portalTargetInjectionKey, portal);
 <template>
   <AConfigProvider
     :use-id="() => useId()"
-    :dir="locale?.dir"
+    :dir="props.dir || locale?.dir"
     :locale="locale?.code"
     v-bind="configProviderProps"
   >

@@ -31,7 +31,7 @@ export const timelineTheme = {
     },
 
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [
+      ...Object.fromEntries(BRANDS.map((color) => [
         color,
         {
           indicator: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color}`,
@@ -45,14 +45,14 @@ export const timelineTheme = {
   },
 
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       reverse: false,
       class: {
         separator: `group-data-[state=completed]:bg-${color}`,
       },
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       reverse: true,
       class: {

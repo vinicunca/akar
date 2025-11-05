@@ -6,8 +6,7 @@ import theme from '#build/pohon/dashboard-sidebar-collapse';
 
 type DashboardSidebarCollapse = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarCollapse'>;
 
-export interface PDashboardSidebarCollapseProps extends /** @vue-ignore */ Pick<PButtonProps, 'as' | 'size' | 'disabled' | 'pohon'> {
-  side?: 'left' | 'right';
+export interface PDashboardSidebarCollapseProps extends Omit<PButtonProps, 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
@@ -16,13 +15,17 @@ export interface PDashboardSidebarCollapseProps extends /** @vue-ignore */ Pick<
    * @defaultValue 'ghost'
    */
   variant?: PButtonProps['variant'];
-  class?: any;
+  /**
+   * The side of the sidebar to collapse.
+   * @defaultValue 'left'
+   */
+  side?: 'left' | 'right';
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { reactivePick } from '@vueuse/core';
+import { reactiveOmit } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { computed, ref } from 'vue';
 import { useLocale } from '../composables/use-locale';
@@ -39,8 +42,8 @@ const props = withDefaults(
   },
 );
 
-const rootProps = useForwardProps(
-  reactivePick(props, 'color', 'variant', 'size'),
+const buttonProps = useForwardProps(
+  reactiveOmit(props, 'icon', 'side', 'class'),
 );
 
 const { t } = useLocale();
@@ -57,9 +60,12 @@ const pohon = computed(() =>
 
 <template>
   <PButton
-    v-bind="rootProps"
-    :aria-label="sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse')"
-    :icon="sidebarCollapsed ? appConfig.pohon.icons.panelOpen : appConfig.pohon.icons.panelClose"
+    v-bind="{
+      ...buttonProps,
+      'icon': props.icon || (sidebarCollapsed ? appConfig.pohon.icons.panelOpen : appConfig.pohon.icons.panelClose),
+      'aria-label': sidebarCollapsed ? t('dashboardSidebarCollapse.expand') : t('dashboardSidebarCollapse.collapse'),
+      ...$attrs,
+    }"
     :class="pohon({ class: props.class, side: props.side })"
     @click="collapseSidebar?.(!sidebarCollapsed)"
   />

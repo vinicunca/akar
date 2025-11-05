@@ -51,15 +51,15 @@ props:
 
 Use the `items` prop as an array of objects with the following properties:
 
-- `date?: string`{lang="ts-type"}
-- `title?: string`{lang="ts-type"}
-- `description?: AvatarProps`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `avatar?: AvatarProps`{lang="ts-type"}
-- `value?: string | number`{lang="ts-type"}
-- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue, container?: ClassNameValue, indicator?: ClassNameValue, separator?: ClassNameValue, wrapper?: ClassNameValue, date?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
+- `date?: string`
+- `title?: string`
+- `description?: AvatarProps`
+- `icon?: string`
+- `avatar?: AvatarProps`
+- `value?: string | number`
+- [`slot?: string`](#with-custom-slot)
+- `class?: any`
+- `pohon?: { item?: ClassNameValue, container?: ClassNameValue, indicator?: ClassNameValue, separator?: ClassNameValue, wrapper?: ClassNameValue, date?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue }`
 
 ::docs-pohon-preview
 ---
@@ -273,10 +273,10 @@ Use the `slot` property to customize a specific item.
 
 You will have access to the following slots:
 
-- `#{{ item.slot }}-indicator`{lang="ts-type"}
-- `#{{ item.slot }}-date`{lang="ts-type"}
-- `#{{ item.slot }}-title`{lang="ts-type"}
-- `#{{ item.slot }}-description`{lang="ts-type"}
+- `#{{ item.slot }}-indicator`
+- `#{{ item.slot }}-date`
+- `#{{ item.slot }}-title`
+- `#{{ item.slot }}-description`
 
 :docs-component-example{name="timeline-custom-slot-example" prettier}
 

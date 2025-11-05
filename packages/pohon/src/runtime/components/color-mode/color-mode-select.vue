@@ -1,26 +1,34 @@
 <script lang="ts">
-import type { PSelectMenuProps } from 'pohon-ui';
+import type { PSelectMenuItem, PSelectMenuProps } from '../../types';
 
-export interface PColorModeSelectProps extends /** @vue-ignore */ Pick<
-  PSelectMenuProps<any>,
-'color' | 'variant' | 'size' | 'trailingIcon' | 'selectedIcon' | 'content' | 'arrow' | 'portal' | 'disabled' | 'pohon'
+export interface PColorModeSelectProps extends Omit<
+  PSelectMenuProps<Array<PSelectMenuItem>>,
+'icon' | 'items' | 'modelValue'
 > {
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig, useColorMode } from '#imports';
+import { useForwardProps } from 'akar';
 import { computed } from 'vue';
 import { useLocale } from '../../composables/use-locale';
 import PSelectMenu from '../select-menu.vue';
 
 defineOptions({ inheritAttrs: false });
 
-defineProps<PColorModeSelectProps>();
+const props = withDefaults(
+  defineProps<PColorModeSelectProps>(),
+  {
+    searchInput: false,
+  },
+);
 
 const { t } = useLocale();
 const colorMode = useColorMode();
 const appConfig = useAppConfig();
+
+const selectMenuProps = useForwardProps(props);
 
 const items = computed(() => [
   { label: t('colorMode.system'), value: 'system', icon: appConfig.pohon.icons.system },
@@ -30,7 +38,7 @@ const items = computed(() => [
 
 const preference = computed({
   get() {
-    return items.value.find((option) => option.value === colorMode.preference) || items.value[0];
+    return items.value.find((option) => option.value === colorMode.preference) || items.value[0]!;
   },
   set(option) {
     colorMode.preference = option!.value;
@@ -42,17 +50,15 @@ const preference = computed({
   <ClientOnly v-if="!colorMode?.forced">
     <PSelectMenu
       v-model="preference"
-      :search-input="false"
       :icon="preference?.icon"
-      v-bind="$attrs"
+      v-bind="{ ...(selectMenuProps as any), ...$attrs }"
       :items="items"
     />
 
     <template #fallback>
       <PSelectMenu
-        :search-input="false"
         :icon="items[0]?.icon"
-        v-bind="$attrs"
+        v-bind="{ ...(selectMenuProps as any), ...$attrs }"
         :model-value="items[0]"
         :items="items"
         disabled

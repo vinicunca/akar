@@ -50,11 +50,11 @@ export const tableTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((loadingColor: string) => ({
+    ...BRANDS.map((color) => ({
       loading: true,
-      loadingColor,
+      loadingColor: color,
       class: {
-        thead: `after:bg-${loadingColor}`,
+        thead: `after:bg-${color}`,
       },
     })),
     {

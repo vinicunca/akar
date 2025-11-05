@@ -96,7 +96,7 @@ props:
 ---
 ::
 
-### CorePlaceholder
+### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
 

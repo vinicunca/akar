@@ -3,6 +3,7 @@ import type { AppConfig } from '@nuxt/schema';
 import type { AcceptableInputValue, ATagsInputRootEmits, ATagsInputRootProps } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PIconProps } from '../types';
+import type { InputHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/input-tags';
 
@@ -10,7 +11,7 @@ type InputTags = ComponentConfig<typeof theme, AppConfig, 'inputTags'>;
 
 export type PInputTagItem = AcceptableInputValue;
 
-export interface PInputTagsProps<T extends PInputTagItem = PInputTagItem> extends Pick<ATagsInputRootProps<T>, 'modelValue' | 'defaultValue' | 'addOnPaste' | 'addOnTab' | 'addOnBlur' | 'duplicate' | 'disabled' | 'delimiter' | 'max' | 'id' | 'convertValue' | 'displayValue' | 'name' | 'required'>, UseComponentIconsProps {
+export interface PInputTagsProps<T extends PInputTagItem = PInputTagItem> extends Pick<ATagsInputRootProps<T>, 'modelValue' | 'defaultValue' | 'addOnPaste' | 'addOnTab' | 'addOnBlur' | 'duplicate' | 'disabled' | 'delimiter' | 'max' | 'id' | 'convertValue' | 'displayValue' | 'name' | 'required'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'max' | 'required' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'step'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

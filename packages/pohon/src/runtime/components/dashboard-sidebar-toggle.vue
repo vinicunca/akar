@@ -6,8 +6,7 @@ import theme from '#build/pohon/dashboard-sidebar-toggle';
 
 type DashboardSidebarToggle = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarToggle'>;
 
-export interface PDashboardSidebarToggleProps extends /** @vue-ignore */ Pick<PButtonProps, 'as' | 'size' | 'disabled' | 'pohon'> {
-  side?: 'left' | 'right';
+export interface PDashboardSidebarToggleProps extends Omit<PButtonProps, 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
@@ -16,19 +15,25 @@ export interface PDashboardSidebarToggleProps extends /** @vue-ignore */ Pick<PB
    * @defaultValue 'ghost'
    */
   variant?: PButtonProps['variant'];
-  class?: any;
+  /**
+   * The side of the sidebar to toggle.
+   * @defaultValue 'left'
+   */
+  side?: 'left' | 'right';
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { reactivePick } from '@vueuse/core';
+import { reactiveOmit } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { computed, ref } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { useDashboard } from '../utils/dashboard';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
+
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
   defineProps<PDashboardSidebarToggleProps>(),
@@ -39,7 +44,9 @@ const props = withDefaults(
   },
 );
 
-const rootProps = useForwardProps(reactivePick(props, 'color', 'variant', 'size'));
+const buttonProps = useForwardProps(
+  reactiveOmit(props, 'icon', 'side', 'class'),
+);
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig'];
@@ -55,9 +62,12 @@ const pohon = computed(() =>
 
 <template>
   <PButton
-    v-bind="rootProps"
-    :aria-label="sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open')"
-    :icon="sidebarOpen ? appConfig.pohon.icons.close : appConfig.pohon.icons.menu"
+    v-bind="{
+      ...buttonProps,
+      'icon': props.icon || (sidebarOpen ? appConfig.pohon.icons.close : appConfig.pohon.icons.menu),
+      'aria-label': sidebarOpen ? t('dashboardSidebarToggle.close') : t('dashboardSidebarToggle.open'),
+      ...$attrs,
+    }"
     :class="pohon({ class: props.class, side: props.side })"
     @click="toggleSidebar"
   />

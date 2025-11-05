@@ -71,12 +71,12 @@ export const inputTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: ['outline', 'subtle'],
       class: `focus-visible:(ring-2 ring-inset) focus-visible:ring-${color}`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       highlight: true,
       class: `ring ring-inset akar:ring-${color}`,

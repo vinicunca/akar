@@ -1,29 +1,35 @@
 <script lang="ts">
-import type { PAvatarProps } from 'pohon-ui';
+import type { PAvatarProps } from '../../types';
 
-export interface PColorModeAvatarProps extends /** @vue-ignore */ Omit<PAvatarProps, 'src'> {
+export interface PColorModeAvatarProps extends Omit<PAvatarProps, 'src'> {
   light: string;
   dark: string;
 }
 </script>
 
 <script setup lang="ts">
+import { reactiveOmit } from '@vueuse/core';
+import { useForwardProps } from 'akar';
 import PAvatar from '../avatar.vue';
 
 defineOptions({ inheritAttrs: false });
 
-defineProps<PColorModeAvatarProps>();
+const props = defineProps<PColorModeAvatarProps>();
+
+const avatarProps = useForwardProps(
+  reactiveOmit(props, ['light', 'dark']),
+);
 </script>
 
 <template>
   <PAvatar
     :src="light"
     class="dark:hidden"
-    v-bind="$attrs"
+    v-bind="{ ...avatarProps, ...$attrs }"
   />
   <PAvatar
     :src="dark"
     class="hidden dark:block"
-    v-bind="$attrs"
+    v-bind="{ ...avatarProps, ...$attrs }"
   />
 </template>

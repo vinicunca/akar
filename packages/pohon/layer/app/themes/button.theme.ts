@@ -54,32 +54,32 @@ export const buttonTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'solid',
       class: `color-text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}/75 disabled:bg-${color} aria-disabled:bg-${color} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'outline',
       class: `ring ring-inset ring-${color}/50 color-${color} hover:bg-${color}/10 active:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'soft',
       class: `color-${color} bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 focus:outline-none focus-visible:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'subtle',
       class: `color-${color} ring ring-inset ring-${color}/25 bg-${color}/10 hover:bg-${color}/15 active:bg-${color}/15 disabled:bg-${color}/10 aria-disabled:bg-${color}/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-${color}`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'ghost',
       class: `color-${color} hover:bg-${color}/10 active:bg-${color}/10 focus:outline-none focus-visible:bg-${color}/10 disabled:bg-transparent aria-disabled:bg-transparent dark:disabled:bg-transparent dark:aria-disabled:bg-transparent`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'link',
       class: `color-${color} hover:color-${color}/75 active:color-${color}/75 disabled:color-${color} aria-disabled:color-${color} focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`,

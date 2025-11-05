@@ -36,6 +36,10 @@ Switch between light and dark mode to see the different images: :p-color-mode-se
 
 :docs-pohon-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attributes" target="_blank"}
+This component also supports all native `<img>` HTML attributes.
+::
+
 ## Changelog
 
 :docs-component-changelog{prefix="color-mode"}

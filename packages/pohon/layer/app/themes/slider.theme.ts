@@ -12,7 +12,7 @@ export const sliderTheme = {
   },
   variants: {
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [color, {
+      ...Object.fromEntries(BRANDS.map((color) => [color, {
         range: `bg-${color}`,
         thumb: `ring-${color} focus-visible:outline-${color}/50`,
       }])),

@@ -64,15 +64,15 @@ props:
 
 You can also pass an array of objects with the following properties:
 
-- `label?: string`{lang="ts-type"}
-- [`value?: string`{lang="ts-type"}](#value-key)
-- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-items-type)
-- [`icon?: string`{lang="ts-type"}](#with-icons-in-items)
-- [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
-- [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
-- `disabled?: boolean`{lang="ts-type"}
-- `class?: any`{lang="ts-type"}
-- `pohon?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
+- `label?: string`
+- [`value?: string`](#value-key)
+- [`type?: "label" | "separator" | "item"`](#with-items-type)
+- [`icon?: string`](#with-icons-in-items)
+- [`avatar?: AvatarProps`](#with-avatar-in-items)
+- [`chip?: ChipProps`](#with-chip-in-items)
+- `disabled?: boolean`
+- `class?: any`
+- `pohon?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`
 
 ::docs-pohon-preview
 ---
@@ -198,7 +198,7 @@ props:
 Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::
 
-### CorePlaceholder
+### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
 
@@ -757,6 +757,10 @@ export default defineAppConfig({
 
 :docs-pohon-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+This component also supports all native `<button>` HTML attributes.
+::
+
 ### Slots
 
 :docs-pohon-slots
@@ -771,8 +775,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `triggerRef`{lang="ts-type"} | `Ref<HTMLButtonElement \| null>`{lang="ts-type"} |
-
+| `triggerRef` | `Ref<HTMLButtonElement \| null>` |
 
 ## Theme
 

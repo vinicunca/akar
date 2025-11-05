@@ -33,7 +33,7 @@ export const alertTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'solid',
       class: {
@@ -41,21 +41,21 @@ export const alertTheme = {
         close: 'akar:color-text-inverted',
       },
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'outline',
       class: {
         root: `color-${color} ring ring-inset ring-${color}/25`,
       },
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'soft',
       class: {
         root: `bg-${color}/10 color-${color}`,
       },
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'subtle',
       class: {

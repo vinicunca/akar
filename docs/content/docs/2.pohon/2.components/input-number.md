@@ -90,7 +90,7 @@ props:
 ---
 ::
 
-### CorePlaceholder
+### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
 
@@ -170,7 +170,7 @@ props:
 
 ### Increment / Decrement
 
-Use the `increment` and `decrement` props to customize the increment and decrement buttons with any [Button](/docs/pohon/components/button) props. Defaults to `{ variant: 'link' }`{lang="ts-type"}.
+Use the `increment` and `decrement` props to customize the increment and decrement buttons with any [Button](/docs/pohon/components/button) props. Defaults to `{ variant: 'link' }`.
 
 ::docs-pohon-preview
 ---
@@ -274,6 +274,10 @@ name: 'input-number-slots-example'
 
 :docs-pohon-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
+
 ### Slots
 
 :docs-pohon-slots
@@ -288,7 +292,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
+| `inputRef` | `Ref<HTMLInputElement \| null>` |
 
 ## Theme
 

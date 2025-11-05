@@ -35,7 +35,7 @@ const filteredPeople = computed(() => people.filter((p) => startsWith({
       <AComboboxInput
         v-bind="props.input"
         class="text-grass11 outline-none bg-transparent placeholder-gray-400"
-        placeholder="CorePlaceholder..."
+        placeholder="placeholder..."
         @change="(event: InputEvent) => query = (event.target as HTMLInputElement)?.value"
       />
       <AComboboxTrigger>

@@ -77,11 +77,11 @@ export const fileUploadTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       class: `focus-visible:outline-${color}`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       highlight: true,
       class: `border-${color}`,

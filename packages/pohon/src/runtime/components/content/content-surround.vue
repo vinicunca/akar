@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
+import type { PropType } from 'vue';
 import type { PIconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-surround';
@@ -51,7 +52,6 @@ export interface PContentSurroundSlots<T extends PContentSurroundLink = PContent
 </script>
 
 <script setup lang="ts" generic="T extends PContentSurroundLink">
-import type { PropType } from 'vue';
 import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';

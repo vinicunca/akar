@@ -2,12 +2,13 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { ASwitchRootProps } from 'akar';
 import type { PIconProps } from '../types';
+import type { ButtonHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/switch';
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>;
 
-export interface PSwitchProps extends Pick<ASwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue'> {
+export interface PSwitchProps extends Pick<ASwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

@@ -14,7 +14,7 @@ export const progressTheme = {
   },
   variants: {
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [
+      ...Object.fromEntries(BRANDS.map((color) => [
         color,
         {
           indicator: `bg-${color}`,

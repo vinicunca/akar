@@ -2,12 +2,13 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { ACheckboxRootProps } from 'akar';
 import type { PIconProps } from '../types';
+import type { ButtonHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/checkbox';
 
 type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>;
 
-export interface PCheckboxProps extends Pick<ACheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'> {
+export interface PCheckboxProps extends Pick<ACheckboxRootProps, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'value' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

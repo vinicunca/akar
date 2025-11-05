@@ -33,7 +33,7 @@ props:
 ---
 ::
 
-### CorePlaceholder
+### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
 
@@ -240,6 +240,10 @@ props:
 
 :docs-pohon-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attributes" target="_blank"}
+This component also supports all native `<textarea>` HTML attributes.
+::
+
 ### Slots
 
 :docs-pohon-slots
@@ -254,7 +258,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `textareaRef`{lang="ts-type"} | `Ref<HTMLTextAreaElement \| null>`{lang="ts-type"} |
+| `textareaRef` | `Ref<HTMLTextAreaElement \| null>` |
 
 ## Theme
 

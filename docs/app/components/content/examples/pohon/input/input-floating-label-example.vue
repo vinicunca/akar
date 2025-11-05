@@ -10,7 +10,7 @@ const value = ref('');
     placeholder=""
     :pohon="{ base: 'peer' }"
   >
-    <label class="text-highlighted peer-focus:text-highlighted peer-placeholder-shown:text-dimmed text-xs font-medium px-1.5 pointer-events-none transition-all left-0 absolute peer-focus:text-xs peer-placeholder-shown:text-sm peer-focus:font-medium peer-placeholder-shown:font-normal -top-2.5 peer-placeholder-shown:top-1.5 peer-focus:-top-2.5">
+    <label class="peer-placeholder-shown:(text-sm color-text-dimmed font-normal top-1.5) akar:(text-xs color-text-highlighted font-medium px-1.5 pointer-events-none transition-all left-0 absolute -top-2.5) akar:peer-focus:(text-xs color-text-highlighted font-medium -top-2.5)">
       <span class="px-1 bg-background inline-flex">Email address</span>
     </label>
   </PInput>

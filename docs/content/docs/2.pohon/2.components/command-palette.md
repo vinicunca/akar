@@ -242,7 +242,7 @@ props:
 Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::
 
-### CorePlaceholder
+### Placeholder
 
 Use the `placeholder` prop to change the placeholder text.
 

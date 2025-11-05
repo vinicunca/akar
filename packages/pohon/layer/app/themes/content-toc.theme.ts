@@ -22,7 +22,7 @@ export const contentTocTheme = {
   },
   variants: {
     highlightColor: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [color, {
+      ...Object.fromEntries(BRANDS.map((color) => [color, {
         indicator: `bg-${color}`,
       }])),
       neutral: {
@@ -47,7 +47,7 @@ export const contentTocTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       active: true,
       class: {

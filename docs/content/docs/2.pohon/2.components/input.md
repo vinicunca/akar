@@ -46,7 +46,7 @@ props:
 You can check all the available types on the MDN Web Docs.
 ::
 
-### CorePlaceholder
+### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
 
@@ -288,16 +288,6 @@ name: 'input-mask-example'
 ---
 ::
 
-### With floating label
-
-You can use the `#default` slot to add a floating label to the Input.
-
-::docs-component-example
----
-name: 'input-floating-label-example'
----
-::
-
 ### Within a FormField
 
 You can use the Input within a [FormField](/docs/pohon/components/form-field) component to display a label, help text, required indicator, etc.
@@ -328,6 +318,10 @@ name: 'input-field-group-example'
 
 :docs-pohon-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
+
 ### Slots
 
 :docs-pohon-slots
@@ -342,7 +336,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
+| `inputRef` | `Ref<HTMLInputElement \| null>` |
 
 ## Theme
 

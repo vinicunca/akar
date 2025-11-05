@@ -183,7 +183,7 @@ export const navigationMenuTheme = {
         link: 'data-[state=open]:before:bg-background-elevated/50',
       },
     },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'pill',
       active: true,
@@ -237,7 +237,7 @@ export const navigationMenuTheme = {
         linkLeadingIcon: 'group-data-[state=open]:color-text',
       },
     },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'link',
       active: true,
@@ -255,7 +255,7 @@ export const navigationMenuTheme = {
         linkLeadingIcon: 'color-text-highlighted group-data-[state=open]:color-text-highlighted',
       },
     },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       highlightColor: color,
       highlight: true,
       level: true,

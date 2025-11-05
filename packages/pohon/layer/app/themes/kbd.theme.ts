@@ -13,22 +13,22 @@ export const kbdTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'solid',
       class: `color-text-inverted bg-${color}`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'outline',
       class: `ring ring-inset ring-${color}/50 color-${color}`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'soft',
       class: `color-${color} bg-${color}/10`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'subtle',
       class: `shadow-[0_0_0_1px_rgba(28,25,23,10%),0_3px_0_rgba(28,25,23,10%)] color-${color} ring ring-inset ring-${color}/25 bg-${color}/10`,

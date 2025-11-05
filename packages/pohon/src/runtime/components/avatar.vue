@@ -1,12 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { PChipProps, PIconProps } from '../types';
+import type { ImgHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/avatar';
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>;
 
-export interface PAvatarProps {
+export interface PAvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 'src' | 'alt'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'

@@ -19,9 +19,9 @@ Wrap your content with the `collapsible` component to display a [Collapsible](/d
 
 | Prop    | Default   | Type                     |
 |---------|-----------|--------------------------|
-| `name`  |           | `string`{lang="ts-type"} |
-| `size`  | `md`      | `string`{lang="ts-type"} |
-| `color` | `neutral` | `string`{lang="ts-type"} |
+| `name`  |           | `string` |
+| `size`  | `md`      | `string` |
+| `color` | `neutral` | `string` |
 
 ::
 
@@ -32,9 +32,9 @@ Wrap your content with the `collapsible` component to display a [Collapsible](/d
 
 | Prop    | Default   | Type                     |
 |---------|-----------|--------------------------|
-| `name`  |           | `string`{lang="ts-type"} |
-| `size`  | `md`      | `string`{lang="ts-type"} |
-| `color` | `neutral` | `string`{lang="ts-type"} |
+| `name`  |           | `string` |
+| `size`  | `md`      | `string` |
+| `color` | `neutral` | `string` |
 
 ::
 ```

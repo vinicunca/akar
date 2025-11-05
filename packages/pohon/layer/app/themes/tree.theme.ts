@@ -22,7 +22,7 @@ export const treeTheme = {
       },
     },
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [
+      ...Object.fromEntries(BRANDS.map((color) => [
         color,
         {
           link: `focus-visible:before:ring-${color}`,
@@ -76,7 +76,7 @@ export const treeTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       selected: true,
       class: {

@@ -48,22 +48,22 @@ export const badgeTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'solid',
       class: `bg-${color} color-text-inverted`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'outline',
       class: `color-${color} ring ring-inset ring-${color}/50`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'soft',
       class: `bg-${color}/10 color-${color}`,
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'subtle',
       class: `bg-${color}/10 color-${color} ring ring-inset ring-${color}/25`,

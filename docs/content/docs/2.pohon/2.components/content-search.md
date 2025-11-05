@@ -151,6 +151,15 @@ It is recommended to wrap the `ContentSearch` component in a [ClientOnly](https:
 
 :docs-pohon-emits
 
+### Expose
+
+When accessing the component via a template ref, you can use the following:
+
+| Name | Type |
+| ---- | ---- |
+| `commandPaletteRef` | `Ref<InstanceType<typeof PCommandPalette> \| null>` |
+
+
 ## Theme
 
 :docs-pohon-theme

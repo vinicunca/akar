@@ -2,6 +2,7 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { ANumberFieldRootProps } from 'akar';
 import type { PButtonProps, PIconProps } from '../types';
+import type { InputHTMLAttributes } from '../types/html';
 import type { ModelModifiers } from '../types/input';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/input-number';
@@ -9,7 +10,7 @@ import theme from '#build/pohon/input-number';
 type InputNumber = ComponentConfig<typeof theme, AppConfig, 'inputNumber'>;
 type InputNumberValue = number | null;
 
-export interface PInputNumberProps<T extends InputNumberValue = InputNumberValue> extends Pick<ANumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'> {
+export interface PInputNumberProps<T extends InputNumberValue = InputNumberValue> extends Pick<ANumberFieldRootProps, 'modelValue' | 'defaultValue' | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

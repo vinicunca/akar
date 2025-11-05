@@ -86,7 +86,7 @@ export const contextMenuTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       active: false,
       class: {
@@ -94,7 +94,7 @@ export const contextMenuTheme = {
         itemLeadingIcon: `akar:color-${color}/75 group-data-[highlighted]:color-${color} group-data-[state=open]:color-${color}`,
       },
     })),
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       active: true,
       class: {

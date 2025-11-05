@@ -38,7 +38,10 @@ defineSlots<ProseCalloutSlots>();
 
 const appConfig = useAppConfig() as ProseCallout['AppConfig'];
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.callout || {}) })({
+const pohon = computed(() => uv({
+  extend: uv(theme),
+  ...(appConfig.pohon?.prose?.callout || {}),
+})({
   color: props.color,
   to: !!props.to,
 }));

@@ -344,7 +344,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `height`{lang="ts-type"} | `Ref<number>`{lang="ts-type"} |
+| `height`| `Ref<number>`|
 
 
 ## Theme

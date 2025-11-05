@@ -6,7 +6,7 @@ import theme from '#build/pohon/content/content-search-button';
 
 type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSearchButton'>;
 
-export interface PContentSearchButtonProps {
+export interface PContentSearchButtonProps extends Omit<PButtonProps, 'icon' | 'label' | 'color' | 'variant'> {
   /**
    * The icon displayed in the button.
    * @defaultValue appConfig.pohon.icons.search
@@ -28,7 +28,6 @@ export interface PContentSearchButtonProps {
    * Defaults to 'outline' when not collapsed, 'ghost' when collapsed.
    */
   variant?: PButtonProps['variant'];
-  size?: PButtonProps['size'];
   /**
    * Whether the button is collapsed.
    * @defaultValue true
@@ -53,7 +52,7 @@ export interface PContentSearchButtonProps {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { isBoolean, isString, omit } from '@vinicunca/perkakas';
-import { createReusableTemplate, reactivePick } from '@vueuse/core';
+import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
@@ -82,7 +81,9 @@ const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate();
 
 const getProxySlots = () => omit(slots, ['trailing']);
 
-const rootProps = useForwardProps(reactivePick(props, 'color', 'size'));
+const buttonProps = useForwardProps(
+  reactiveOmit(props, 'icon', 'label', 'variant', 'collapsed', 'tooltip', 'kbds', 'class', 'pohon'),
+);
 const tooltipProps = toRef(() => defu(
   isBoolean(props.tooltip) ? {} : props.tooltip,
   { delayDuration: 0, content: { side: 'right' } },
@@ -107,7 +108,7 @@ const pohon = computed(() =>
       :label="label || t('contentSearchButton.label')"
       :variant="variant || (collapsed ? 'ghost' : 'outline')"
       v-bind="{
-        ...rootProps,
+        ...buttonProps,
         ...(collapsed ? {
           'square': true,
           'label': undefined,

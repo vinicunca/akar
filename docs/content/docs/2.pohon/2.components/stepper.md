@@ -42,15 +42,15 @@ props:
 
 Use the `items` prop as an array of objects with the following properties:
 
-- `title?: string`{lang="ts-type"}
-- `description?: AvatarProps`{lang="ts-type"}
-- `content?: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `value?: string | number`{lang="ts-type"}
-- `disabled?: boolean`{lang="ts-type"}
-- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue, container?: ClassNameValue, trigger?: ClassNameValue, indicator?: ClassNameValue, icon?: ClassNameValue, separator?: ClassNameValue, wrapper?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
+- `title?: string`
+- `description?: AvatarProps`
+- `content?: string`
+- `icon?: string`
+- `value?: string | number`
+- `disabled?: boolean`
+- [`slot?: string`](#with-custom-slot)
+- `class?: any`
+- `pohon?: { item?: ClassNameValue, container?: ClassNameValue, trigger?: ClassNameValue, indicator?: ClassNameValue, icon?: ClassNameValue, separator?: ClassNameValue, wrapper?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue }`
 
 ::docs-pohon-preview
 ---
@@ -228,7 +228,7 @@ Use the `slot` property to customize a specific item.
 
 You will have access to the following slots:
 
-- `#{{ item.slot }}`{lang="ts-type"}
+- `#{{ item.slot }}`
 
 :docs-component-example{name="stepper-custom-slot-example"}
 
@@ -264,10 +264,10 @@ This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |
-| `next`{lang="ts-type"} | `() => void`{lang="ts-type"} |
-| `prev`{lang="ts-type"} | `() => void`{lang="ts-type"} |
-| `hasNext`{lang="ts-type"} | `Ref<boolean>`{lang="ts-type"} |
-| `hasPrev`{lang="ts-type"} | `Ref<boolean>`{lang="ts-type"} |
+| `next` | `() => void` |
+| `prev` | `() => void` |
+| `hasNext` | `Ref<boolean>` |
+| `hasPrev` | `Ref<boolean>` |
 
 ## Theme
 

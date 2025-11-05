@@ -47,7 +47,7 @@ const localTimezonePlaceholder = now(getLocalTimeZone());
       />
     </Variant>
 
-    <Variant title="CorePlaceholder">
+    <Variant title="Placeholder">
       <DateRangeField :default-placeholder="defaultPlaceholder" />
     </Variant>
 

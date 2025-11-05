@@ -72,7 +72,7 @@ export const stepperTheme = {
     },
 
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [color, {
+      ...Object.fromEntries(BRANDS.map((color) => [color, {
         trigger: `group-data-[state=completed]:bg-${color} group-data-[state=active]:bg-${color} focus-visible:outline-${color}`,
         separator: `group-data-[state=completed]:bg-${color}`,
       }])),

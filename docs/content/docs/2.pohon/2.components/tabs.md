@@ -28,16 +28,16 @@ props:
 
 Use the `items` prop as an array of objects with the following properties:
 
-- `label?: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `avatar?: AvatarProps`{lang="ts-type"}
-- `badge?: string | number | BadgeProps`{lang="ts-type"}
-- `content?: string`{lang="ts-type"}
-- `value?: string | number`{lang="ts-type"}
-- `disabled?: boolean`{lang="ts-type"}
-- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `class?: any`{lang="ts-type"}
-- `pohon?: { trigger?: ClassNameValue, leadingIcon?: ClassNameValue, leadingAvatar?: ClassNameValue, leadingAvatarSize?: ClassNameValue, label?: ClassNameValue, trailingBadge?: ClassNameValue, trailingBadgeSize?: ClassNameValue, content?: ClassNameValue }`{lang="ts-type"}
+- `label?: string`
+- `icon?: string`
+- `avatar?: AvatarProps`
+- `badge?: string | number | BadgeProps`
+- `content?: string`
+- `value?: string | number`
+- `disabled?: boolean`
+- [`slot?: string`](#with-custom-slot)
+- `class?: any`
+- `pohon?: { trigger?: ClassNameValue, leadingIcon?: ClassNameValue, leadingAvatar?: ClassNameValue, leadingAvatarSize?: ClassNameValue, label?: ClassNameValue, trailingBadge?: ClassNameValue, trailingBadgeSize?: ClassNameValue, content?: ClassNameValue }`
 
 ::docs-pohon-preview
 ---
@@ -237,7 +237,7 @@ Use the `slot` property to customize a specific item.
 
 You will have access to the following slots:
 
-- `#{{ item.slot }}`{lang="ts-type"}
+- `#{{ item.slot }}`
 
 :docs-component-example{name="tabs-custom-slot-example"}
 
@@ -261,7 +261,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `triggersRef`{lang="ts-type"} | `Ref<ComponentPublicInstance[]>`{lang="ts-type"} |
+| `triggersRef` | `Ref<ComponentPublicInstance[]>` |
 
 ## Theme
 

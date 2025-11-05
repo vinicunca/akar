@@ -2,6 +2,7 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps } from '../types';
+import type { TextareaHTMLAttributes } from '../types/html';
 import type { ModelModifiers } from '../types/input';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/textarea';
@@ -10,7 +11,7 @@ type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>;
 
 type TextareaValue = string | number | null;
 
-export interface PTextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps {
+export interface PTextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'name' | 'placeholder' | 'required' | 'autofocus' | 'disabled' | 'rows'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

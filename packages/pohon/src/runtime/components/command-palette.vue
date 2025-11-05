@@ -228,6 +228,8 @@ import PKbd from './kbd.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
 
+defineOptions({ inheritAttrs: false });
+
 const props = withDefaults(
   defineProps<PCommandPaletteProps<G, T>>(),
   {
@@ -646,7 +648,7 @@ function onSelect(event: Event, item: T) {
   </DefineItemTemplate>
 
   <AListboxRoot
-    v-bind="rootProps"
+    v-bind="{ ...rootProps, ...$attrs }"
     ref="rootRef"
     :selection-behavior="selectionBehavior"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"

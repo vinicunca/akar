@@ -36,7 +36,7 @@ describe('given default Combobox', () => {
   });
 
   it('should show placeholder', () => {
-    expect(wrapper.html()).toContain('CorePlaceholder...');
+    expect(wrapper.html()).toContain('placeholder...');
   });
 
   describe('opening the popup', () => {

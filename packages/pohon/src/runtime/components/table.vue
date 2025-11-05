@@ -36,6 +36,7 @@ import type {
 } from '@tanstack/vue-table';
 import type { VirtualizerOptions } from '@tanstack/vue-virtual';
 import type { ComponentPublicInstance, Ref, WatchOptions } from 'vue';
+import type { TableHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/table';
 
@@ -81,7 +82,7 @@ export interface PTableOptions<T extends PTableData = PTableData> extends Omit<C
   renderFallbackValue?: CoreOptions<T>['renderFallbackValue'];
 }
 
-export interface PTableProps<T extends PTableData = PTableData> extends PTableOptions<T> {
+export interface PTableProps<T extends PTableData = PTableData> extends PTableOptions<T>, /** @vue-ignore */ TableHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

@@ -4,6 +4,8 @@ import { defineConfig } from 'unocss';
 
 import { BRANDS } from './app/themes/constant';
 
+const COLOR_PATTERN = /([^\s`]*\$\{color\}[^\s`]*)/g;
+
 export default defineConfig({
   outputToCssLayers: true,
 
@@ -42,101 +44,24 @@ export default defineConfig({
     }),
   ],
 
-  rules: [
-    [/^p-toaster-base$/, () => {
-      return `
-.p-toaster-base {
-  transform: var(--transform);
-  transition-property: transform,translate,height;
-}
-`;
-    }],
+  extractors: [
+    {
+      name: 'pohon-colors-extractor',
+      extract({ code }) {
+        const matches = code.match(COLOR_PATTERN);
+
+        if (matches !== null) {
+          return matches.flatMap((match) => {
+            // eslint-disable-next-line no-template-curly-in-string
+            return BRANDS.map((brand) => match.replace('${color}', brand));
+          });
+        }
+      },
+    },
   ],
 
   safelist: [
     'isolate',
-    'bg-background-accented',
-    ...BRANDS.flatMap((color) => [
-      // Borders
-      `border-${color}`,
-      `border-${color}/25`,
-      `[&_code]:border-${color}/25`,
-      `[&_a]:hover:[&>code]:border-${color}`,
-      `[&_a]:hover:border-${color}`,
-      `has-data-[state=checked]:border-${color}`,
-
-      // Texts
-      `color-${color}`,
-      `color-${color}/50`,
-      `color-${color}/75`,
-      `color-${color}-600`,
-      `[&_a]:color-${color}`,
-      `[&_code]:color-${color}-600`,
-      `[&_a]:hover:[&>code]:color-${color}`,
-      `data-[highlighted]:color-${color}`,
-      `group-data-[highlighted]:color-${color}`,
-      `group-data-[state=open]:color-${color}`,
-      `hover:color-${color}/75`,
-      `active:color-${color}/75`,
-      `disabled:color-${color}`,
-      `aria-disabled:color-${color}`,
-      `[&>ul]:marker:color-${color}/50`,
-      `data-[today]:not-[[data-selected]]:color-${color}`,
-      `data-[selected]:color-${color}`,
-      `dark:color-${color}-300`,
-      `dark:[&_code]:color-${color}-300`,
-
-      // Backgrounds
-      `bg-${color}`,
-      `bg-${color}/10`,
-      `hover:bg-${color}/10`,
-      `hover:bg-${color}/15`,
-      `hover:bg-${color}/75`,
-      `hover:bg-${color}/90`,
-      `active:bg-${color}`,
-      `active:bg-${color}/10`,
-      `active:bg-${color}/15`,
-      `active:bg-${color}/75`,
-      `active:bg-${color}-200`,
-      `active:bg-${color}-800`,
-      `disabled:bg-${color}`,
-      `disabled:bg-${color}/10`,
-      `aria-disabled:bg-${color}`,
-      `aria-disabled:bg-${color}/10`,
-      `focus-visible:bg-${color}/10`,
-      `focus-visible:bg-${color}/15`,
-      `after:bg-${color}`,
-      `before:bg-${color}/10`,
-      `dark:active:bg-${color}-300`,
-      `dark:active:bg-${color}-400`,
-      `data-[selected]:bg-${color}`,
-      `data-[selected]:bg-${color}/10`,
-      `data-[highlighted]:bg-${color}/20`,
-      `data-[highlighted]:before:bg-${color}/10`,
-      `data-[state=open]:before:bg-${color}/10`,
-      `hover:not-[[data-selected]]:bg-${color}/10`,
-      `hover:not-[[data-selected]]:bg-${color}/20`,
-      `akar:data-[selected]:bg-${color}`,
-      `has-data-[state=checked]:bg-${color}/10`,
-      `group-data-[state=completed]:bg-${color}`,
-      `group-data-[state=active]:bg-${color}`,
-
-      // Rings and outlines
-      `ring-${color}`,
-      `ring-${color}/25`,
-      `ring-${color}/50`,
-      `akar:ring-${color}`,
-      `focus-visible:ring-${color}`,
-      `focus-visible:before:ring-${color}`,
-      `focus-visible:outline-${color}`,
-      'focus:ring-2',
-      'focus:ring-inset',
-      `focus:ring-${color}`,
-      `data-[selected]:ring-${color}/25`,
-      `data-[selected]:ring-${color}/50`,
-      `has-focus:ring-${color}`,
-      `has-focus-visible:ring-${color}`,
-    ]),
   ],
 
   preflights: [

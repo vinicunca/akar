@@ -53,17 +53,17 @@ props:
 
 Use the `items` prop as an array of objects with the following properties:
 
-- `icon?: string`{lang="ts-type"}
-- `label?: string`{lang="ts-type"}
-- `trailingIcon?: string`{lang="ts-type"}
-- `defaultExpanded?: boolean`{lang="ts-type"}
-- `disabled?: boolean`{lang="ts-type"}
-- `slot?: string`{lang="ts-type"}
-- `children?: TreeItem[]`{lang="ts-type"}
-- `onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void`{lang="ts-type"}
-- `onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void`{lang="ts-type"}
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`{lang="ts-type"}
+- `icon?: string`
+- `label?: string`
+- `trailingIcon?: string`
+- `defaultExpanded?: boolean`
+- `disabled?: boolean`
+- `slot?: string`
+- `children?: TreeItem[]`
+- `onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void`
+- `onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void`
+- `class?: any`
+- `pohon?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`
 
 ::note
 A unique identifier is required for each item. The component will use the `label` prop as identifier if no `get-key` is provided. Ideally you should provide a `get-key` function prop to return a unique identifier. Alternatively, you can use the `labelKey` prop to specify which property to use as the unique identifier.
@@ -458,7 +458,7 @@ props:
 ---
 ::
 
-If you want to prevent an item from being selected, you can use the `item.onSelect()`{lang="ts-type"} property or the global `select` event:
+If you want to prevent an item from being selected, you can use the `item.onSelect()` property or the global `select` event:
 
 ::docs-component-example
 ---
@@ -486,7 +486,7 @@ props:
 ---
 ::
 
-If you want to prevent an item from being expanded, you can use the `item.onToggle()`{lang="ts-type"} property or the global `toggle` event:
+If you want to prevent an item from being expanded, you can use the `item.onToggle()` property or the global `toggle` event:
 
 ::docs-component-example
 ---
@@ -555,11 +555,11 @@ Use the `slot` property to customize a specific item.
 
 You will have access to the following slots:
 
-- `#{{ item.slot }}-wrapper`{lang="ts-type"}
-- `#{{ item.slot }}`{lang="ts-type"}
-- `#{{ item.slot }}-leading`{lang="ts-type"}
-- `#{{ item.slot }}-label`{lang="ts-type"}
-- `#{{ item.slot }}-trailing`{lang="ts-type"}
+- `#{{ item.slot }}-wrapper`
+- `#{{ item.slot }}`
+- `#{{ item.slot }}-leading`
+- `#{{ item.slot }}-label`
+- `#{{ item.slot }}-trailing`
 
 ::docs-component-example
 ---

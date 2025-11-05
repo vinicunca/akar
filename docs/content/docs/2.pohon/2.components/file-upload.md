@@ -323,6 +323,10 @@ name: 'file-upload-files-top-slot-example'
 
 :docs-pohon-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+This component also supports all native `<input>` HTML attributes.
+::
+
 ### Slots
 
 :docs-pohon-slots
@@ -337,8 +341,8 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `inputRef`{lang="ts-type"} | `Ref<HTMLInputElement \| null>`{lang="ts-type"} |
-| `dropzoneRef`{lang="ts-type"} | `Ref<HTMLDivElement \| null>`{lang="ts-type"} |
+| `inputRef` | `Ref<HTMLInputElement \| null>` |
+| `dropzoneRef` | `Ref<HTMLDivElement \| null>` |
 
 ## Theme
 

@@ -17,7 +17,7 @@ export const bannerTheme = {
   },
   variants: {
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [
+      ...Object.fromEntries(BRANDS.map((color) => [
         color,
         {
           root: `bg-${color}`,
@@ -29,7 +29,7 @@ export const bannerTheme = {
     },
   },
   compoundVariants: [
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       to: true,
       class: {

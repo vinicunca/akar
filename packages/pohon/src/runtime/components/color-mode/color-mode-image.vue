@@ -1,10 +1,16 @@
+<script lang="ts">
+import type { ImgHTMLAttributes } from '../../types/html';
+
+export interface PColorModeImageProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 'src'> {
+  dark: string;
+  light: string;
+}
+</script>
+
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false });
 
-defineProps<{
-  dark: string;
-  light: string;
-}>();
+defineProps<PColorModeImageProps>();
 </script>
 
 <template>

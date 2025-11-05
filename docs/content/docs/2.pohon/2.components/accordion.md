@@ -43,15 +43,15 @@ props:
 
 Use the `items` prop as an array of objects with the following properties:
 
-- `label?: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `trailingIcon?: string`{lang="ts-type"}
-- `content?: string`{lang="ts-type"}
-- `value?: string`{lang="ts-type"}
-- `disabled?: boolean`{lang="ts-type"}
-- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue; header?: ClassNameValue; trigger?: ClassNameValue; leadingIcon?: ClassNameValue; label?: ClassNameValue; trailingIcon?: ClassNameValue; content?: ClassNameValue; body?: ClassNameValue }`{lang="ts-type"}
+- `label?: string`
+- `icon?: string`
+- `trailingIcon?: string`
+- `content?: string`
+- `value?: string`
+- `disabled?: boolean`
+- [`slot?: string`](#with-custom-slot)
+- `class?: any`
+- `pohon?: { item?: ClassNameValue; header?: ClassNameValue; trigger?: ClassNameValue; leadingIcon?: ClassNameValue; label?: ClassNameValue; trailingIcon?: ClassNameValue; content?: ClassNameValue; body?: ClassNameValue }`
 
 ::docs-pohon-preview
 ---
@@ -298,8 +298,8 @@ Use the `slot` property to customize a specific item.
 
 You will have access to the following slots:
 
-- `#{{ item.slot }}`{lang="ts-type"}
-- `#{{ item.slot }}-body`{lang="ts-type"}
+- `#{{ item.slot }}`
+- `#{{ item.slot }}-body`
 
 ::docs-component-example
 ---

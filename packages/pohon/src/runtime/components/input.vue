@@ -11,7 +11,7 @@ import theme from '#build/pohon/input';
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>;
 
 export type PInputValue = AcceptableValue;
-export interface PInputProps<T extends PInputValue = PInputValue> extends UseComponentIconsProps {
+export interface PInputProps<T extends PInputValue = PInputValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'

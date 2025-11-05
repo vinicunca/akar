@@ -16,7 +16,7 @@ export const switchTheme = {
   },
   variants: {
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [color, {
+      ...Object.fromEntries(BRANDS.map((color) => [color, {
         base: `data-[state=checked]:bg-${color} focus-visible:outline-${color}`,
         icon: `group-data-[state=checked]:color-${color}`,
       }])),

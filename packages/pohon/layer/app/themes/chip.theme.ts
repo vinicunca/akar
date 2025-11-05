@@ -11,7 +11,7 @@ export const chipTheme = {
   },
   variants: {
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [color, `bg-${color}`])),
+      ...Object.fromEntries(BRANDS.map((color) => [color, `bg-${color}`])),
       neutral: 'bg-background-inverted',
     },
     size: {

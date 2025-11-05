@@ -9,6 +9,7 @@ import type {
 } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
+import type { ButtonHTMLAttributes } from '../types/html';
 import type {
   AcceptableValue,
   ArrayOrNested,
@@ -46,7 +47,7 @@ export type PSelectMenuItem = PSelectMenuValue | {
   [key: string]: any;
 };
 
-export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps {
+export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string;
   /** The placeholder text when the select is empty. */
   placeholder?: string;

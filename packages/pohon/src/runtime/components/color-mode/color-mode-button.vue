@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { PButtonProps } from 'pohon-ui';
+import type { PButtonProps } from '../../types';
 
-export interface PColorModeButtonProps extends /** @vue-ignore */ Pick<PButtonProps, 'as' | 'size' | 'disabled' | 'pohon'> {
+export interface PColorModeButtonProps extends Omit<PButtonProps, 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
@@ -15,13 +15,15 @@ export interface PColorModeButtonProps extends /** @vue-ignore */ Pick<PButtonPr
 
 <script setup lang="ts">
 import { useAppConfig, useColorMode } from '#imports';
+import { reactiveOmit } from '@vueuse/core';
+import { useForwardProps } from 'akar';
 import { computed } from 'vue';
 import { useLocale } from '../../composables/use-locale';
 import PButton from '../button.vue';
 
 defineOptions({ inheritAttrs: false });
 
-withDefaults(
+const props = withDefaults(
   defineProps<PColorModeButtonProps>(),
   {
     color: 'neutral',
@@ -37,6 +39,8 @@ const { t } = useLocale();
 const colorMode = useColorMode();
 const appConfig = useAppConfig();
 
+const buttonProps = useForwardProps(reactiveOmit(props, 'icon'));
+
 const isDark = computed({
   get() {
     return colorMode.value === 'dark';
@@ -50,11 +54,11 @@ const isDark = computed({
 <template>
   <ClientOnly v-if="!colorMode?.forced">
     <PButton
-      :icon="isDark ? appConfig.pohon.icons.dark : appConfig.pohon.icons.light"
-      :color="color"
-      :variant="variant"
-      :aria-label="isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark')"
-      v-bind="$attrs"
+      v-bind="{
+        ...buttonProps,
+        'icon': props.icon || (isDark ? appConfig.pohon.icons.dark : appConfig.pohon.icons.light),
+        'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
+      }"
       @click="isDark = !isDark"
     />
 

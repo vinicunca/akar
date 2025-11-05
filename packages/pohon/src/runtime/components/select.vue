@@ -9,6 +9,7 @@ import type {
 } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
+import type { ButtonHTMLAttributes } from '../types/html';
 import type {
   AcceptableValue,
   ArrayOrNested,
@@ -47,7 +48,7 @@ export type PSelectItem = PSelectValue | {
   [key: string]: any;
 };
 
-export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<ASelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps {
+export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<ASelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string;
   /** The placeholder text when the select is empty. */
   placeholder?: string;

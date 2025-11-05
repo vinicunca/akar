@@ -18,7 +18,7 @@ export const toastTheme = {
   },
   variants: {
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [
+      ...Object.fromEntries(BRANDS.map((color) => [
         color,
         {
           root: `focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-${color}`,

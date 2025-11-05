@@ -205,7 +205,7 @@ props:
 Ensure to pass an array to the `default-value` prop or the `v-model` directive.
 ::
 
-### CorePlaceholder
+### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
 
@@ -882,6 +882,10 @@ name: 'select-menu-countries-example'
 
 :docs-pohon-props
 
+::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+This component also supports all native `<button>` HTML attributes.
+::
+
 ### Slots
 
 :docs-pohon-slots
@@ -896,7 +900,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `triggerRef`{lang="ts-type"} | `Ref<HTMLButtonElement \| null>`{lang="ts-type"} |
+| `triggerRef` | `Ref<HTMLButtonElement \| null>` |
 
 ## Theme
 

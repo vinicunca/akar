@@ -16,7 +16,7 @@ export const checkboxTheme = {
   },
   variants: {
     color: {
-      ...Object.fromEntries(BRANDS.map((color: string) => [
+      ...Object.fromEntries(BRANDS.map((color) => [
         color,
         {
           base: `focus-visible:outline-${color}`,
@@ -93,7 +93,7 @@ export const checkboxTheme = {
     { size: 'md', variant: 'card', class: { root: 'p-3.5' } },
     { size: 'lg', variant: 'card', class: { root: 'p-4' } },
     { size: 'xl', variant: 'card', class: { root: 'p-4.5' } },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'card',
       class: {
@@ -187,7 +187,7 @@ export const checkboxGroupTheme = {
         fieldset: 'akar:gap-0 space-y-[-1px]',
       },
     },
-    ...BRANDS.map((color: string) => ({
+    ...BRANDS.map((color) => ({
       color,
       variant: 'table',
       class: {
