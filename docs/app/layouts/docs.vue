@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
   <PMain>
     <PContainer>
-      <div class="flex-vertical lg:(gap-10 grid grid-cols-10)">
+      <div class="flex flex-col lg:(gap-10 grid grid-cols-10)">
         <!-- Left Aside -->
         <div class="lg-col-span-2">
           <div

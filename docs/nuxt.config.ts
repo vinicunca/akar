@@ -65,6 +65,10 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
+  extends: [
+    'pohon-ui/layer',
+  ],
+
   fonts: {
     families: [
       { name: 'Geist', provider: 'fontsource', weights: ['100 900'] },

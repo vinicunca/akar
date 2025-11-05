@@ -94,7 +94,7 @@ const communityLinks = computed(() => [
 <template>
   <div
     v-if="page"
-    class="flex-vertical lg:(gap-10 grid grid-cols-10)"
+    class="flex flex-col lg:(gap-10 grid grid-cols-10)"
   >
     <div class="lg:col-span-8">
       <!-- Page header -->
@@ -106,7 +106,7 @@ const communityLinks = computed(() => [
 
         <div>
           <!-- Wrapper -->
-          <div class="flex-vertical gap-4 lg:(flex-row items-center justify-between)">
+          <div class="flex flex-col gap-4 lg:(flex-row items-center justify-between)">
             <h1 class="text-3xl color-text-highlighted font-bold text-pretty sm:text-4xl">
               {{ title }}
             </h1>
@@ -170,12 +170,12 @@ const communityLinks = computed(() => [
           type="dashed"
         />
 
-        <nav class="flex-vertical gap-3">
+        <nav class="flex flex-col gap-3">
           <p class="text-sm font-semibold flex gap-1.5 items-center">
             Community
           </p>
 
-          <ul class="flex-vertical gap-2">
+          <ul class="flex flex-col gap-2">
             <li
               v-for="(link, index) in communityLinks"
               :key="index"

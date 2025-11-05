@@ -14,7 +14,7 @@ const { desktopLinks } = useHeader();
 <template>
   <PHeader
     :pohon="{ left: 'min-w-0' }"
-    class="flex-vertical"
+    class="flex flex-col"
   >
     <template #left>
       <LayoutHeaderLogo />

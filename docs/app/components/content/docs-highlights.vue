@@ -7,7 +7,7 @@ const props = defineProps<HighlightsProps>();
 </script>
 
 <template>
-  <ul class="flex-vertical gap-1 !pl-0">
+  <ul class="flex flex-col gap-1 !pl-0">
     <li
       v-for="(feature, index) in props.features"
       :key="index"

@@ -14,7 +14,7 @@ export const selectTheme = {
       value: 'pointer-events-none truncate',
       placeholder: 'color-text-dimmed truncate',
       arrow: 'fill-fill',
-      content: 'flex-vertical rounded-md bg-white max-h-60 w-$akar-select-trigger-width pointer-events-auto ring ring-ring shadow-lg origin-$akar-select-content-transform-origin overflow-hidden data-[state=closed]:(animate-out animate-duration-280 fade-out-0 data-[side=bottom]:slide-out-top-5%) data-[state=open]:(animate-in animate-duration-280 fade-in-0 data-[side=bottom]:slide-in-top-5%)',
+      content: 'flex flex-col rounded-md bg-white max-h-60 w-$akar-select-trigger-width pointer-events-auto ring ring-ring shadow-lg origin-$akar-select-content-transform-origin overflow-hidden data-[state=closed]:(animate-out animate-duration-280 fade-out-0 data-[side=bottom]:slide-out-top-5%) data-[state=open]:(animate-in animate-duration-280 fade-in-0 data-[side=bottom]:slide-in-top-5%)',
       viewport: 'flex-1 relative overflow-y-auto scroll-py-1 divide-divide divide-y',
       group: 'p-1 isolate',
       empty: 'color-text-muted text-center',

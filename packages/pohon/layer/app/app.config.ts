@@ -43,6 +43,7 @@ import { paginationTheme } from './themes/pagination.theme';
 import { pinInputTheme } from './themes/pin-input.theme';
 import { popoverTheme } from './themes/popover.theme';
 import { progressTheme } from './themes/progress.theme';
+import { proseTheme } from './themes/prose.theme';
 import { radioGroupTheme } from './themes/radio-group.theme';
 import { selectMenuTheme } from './themes/select-menu.theme';
 import { selectTheme } from './themes/select.theme';
@@ -136,5 +137,6 @@ export default defineAppConfig({
     tooltip: tooltipTheme,
     tree: treeTheme,
 
+    prose: proseTheme,
   },
 });

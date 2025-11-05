@@ -22,7 +22,7 @@ watch(framework, () => {
     :content="false"
     color="neutral"
     :pohon="{
-      indicator: 'bg-background',
+      indicator: 'akar:bg-background',
       trigger: 'px-1 akar:data-[state=active]:color-text-highlighted w-full',
     }"
     size="xs"
