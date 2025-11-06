@@ -149,11 +149,18 @@ function onChange(value: any) {
     :disabled="disabled"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     :default-value="defaultSliderValue"
+    data-pohon="slider-root"
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
-    <ASliderTrack :class="pohon.track({ class: props.pohon?.track })">
-      <ASliderRange :class="pohon.range({ class: props.pohon?.range })" />
+    <ASliderTrack
+      :class="pohon.track({ class: props.pohon?.track })"
+      data-pohon="slider-track"
+    >
+      <ASliderRange
+        :class="pohon.range({ class: props.pohon?.range })"
+        data-pohon="slider-range"
+      />
     </ASliderTrack>
 
     <template
@@ -166,11 +173,15 @@ function onChange(value: any) {
         disable-closing-trigger
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
-        <ASliderThumb :class="pohon.thumb({ class: props.pohon?.thumb })" />
+        <ASliderThumb
+          :class="pohon.thumb({ class: props.pohon?.thumb })"
+          data-pohon="slider-thumb"
+        />
       </PTooltip>
       <ASliderThumb
         v-else
         :class="pohon.thumb({ class: props.pohon?.thumb })"
+        data-pohon="slider-thumb"
       />
     </template>
   </ASliderRoot>

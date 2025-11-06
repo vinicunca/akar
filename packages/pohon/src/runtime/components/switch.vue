@@ -120,8 +120,12 @@ function onUpdate(value: any) {
   <APrimitive
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="switch-root"
   >
-    <div :class="pohon.container({ class: props.pohon?.container })">
+    <div
+      :class="pohon.container({ class: props.pohon?.container })"
+      data-pohon="switch-container"
+    >
       <ASwitchRoot
         :id="id"
         v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
@@ -129,24 +133,31 @@ function onUpdate(value: any) {
         :name="name"
         :disabled="disabled || loading"
         :class="pohon.base({ class: props.pohon?.base })"
+        data-pohon="switch-base"
         @update:model-value="onUpdate"
       >
-        <ASwitchThumb :class="pohon.thumb({ class: props.pohon?.thumb })">
+        <ASwitchThumb
+          :class="pohon.thumb({ class: props.pohon?.thumb })"
+          data-pohon="switch-thumb"
+        >
           <PIcon
             v-if="loading"
             :name="loadingIcon || appConfig.pohon.icons.loading"
             :class="pohon.icon({ class: props.pohon?.icon, checked: true, unchecked: true })"
+            data-pohon="switch-icon"
           />
           <template v-else>
             <PIcon
               v-if="checkedIcon"
               :name="checkedIcon"
               :class="pohon.icon({ class: props.pohon?.icon, checked: true })"
+              data-pohon="switch-icon"
             />
             <PIcon
               v-if="uncheckedIcon"
               :name="uncheckedIcon"
               :class="pohon.icon({ class: props.pohon?.icon, unchecked: true })"
+              data-pohon="switch-icon"
             />
           </template>
         </ASwitchThumb>
@@ -155,11 +166,13 @@ function onUpdate(value: any) {
     <div
       v-if="(label || !!slots.label) || (description || !!slots.description)"
       :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+      data-pohon="switch-wrapper"
     >
       <ALabel
         v-if="label || !!slots.label"
         :for="id"
         :class="pohon.label({ class: props.pohon?.label })"
+        data-pohon="switch-label"
       >
         <slot
           name="label"
@@ -171,6 +184,7 @@ function onUpdate(value: any) {
       <p
         v-if="description || !!slots.description"
         :class="pohon.description({ class: props.pohon?.description })"
+        data-pohon="switch-description"
       >
         <slot
           name="description"

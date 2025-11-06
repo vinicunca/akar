@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import theme from '#build/pohon/checkbox';
+import { ACheckboxIndicator, ACheckboxRoot } from 'akar';
 import { reactive, ref } from 'vue';
 
 const colors = Object.keys(theme.variants.color);
@@ -40,6 +41,27 @@ const value = ref(true);
       multiple
     />
   </BaseNavbar>
+
+  <div class="flex flex-row items-start relative">
+    <div class="flex h-5 items-center">
+      <ACheckboxRoot
+        v-model="value"
+        class="rounded-sm size-4 ring ring-ring-accented ring-inset overflow-hidden focus-visible:(outline-2 outline-primary outline-offset-2)"
+      >
+        <ACheckboxIndicator class="color-text-inverted bg-primary flex size-full items-center justify-center">
+          <i
+            class="i-lucide:check shrink-0 size-full"
+          />
+        </ACheckboxIndicator>
+      </ACheckboxRoot>
+    </div>
+
+    <div class="text-sm ms-2 w-full">
+      <label class="color-text font-medium block">
+        Accept terms and conditions.
+      </label>
+    </div>
+  </div>
 
   <BaseMatrix
     v-slot="props"

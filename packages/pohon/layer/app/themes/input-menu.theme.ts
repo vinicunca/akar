@@ -20,7 +20,7 @@ export const inputMenuTheme = {
       empty: 'color-text-muted text-center',
       label: 'color-text-highlighted font-semibold',
       separator: 'my-1 bg-border h-px -mx-1',
-      item: 'group text-sm color-text p-1.5 outline-none flex gap-1.5 w-full select-none transition-colors-280 items-start relative before:(rounded-md content-empty transition-colors-280 inset-px absolute -z-1) data-[disabled]:(opacity-75 cursor-not-allowed) data-[highlighted]:not-[[data-disabled]]:color-text-highlighted data-[highlighted]:not-[[data-disabled]]:before:bg-background-elevated/50',
+      item: 'group text-sm color-text p-1.5 outline-none flex gap-1.5 w-full select-none transition-colors-280 items-start relative before:(rounded-md content-empty transition-colors-280 inset-px absolute -z-1) data-[disabled]:(opacity-75 cursor-not-allowed) data-[highlighted]:not-[[data-disabled]]:color-text-highlighted data-[highlighted]:not-[[data-disabled]]:before:bg-background-elevated/50 not-[[data-disabled]]:cursor-pointer',
       itemLeadingIcon: 'color-text-dimmed shrink-0 transition-colors-280 group-data-[highlighted]:group-not-[[data-disabled]]:color-text',
       itemLeadingAvatar: 'shrink-0',
       itemLeadingChip: 'shrink-0',

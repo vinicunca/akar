@@ -6,7 +6,7 @@ import { BRANDS } from './constant';
 export const pinInputTheme = {
   slots: {
     root: 'inline-flex gap-1.5 items-center relative',
-    base: 'text-center border-0 rounded-md transition-colors-280 placeholder:color-text-dimmed focus:outline-none disabled:opacity-75 disabled:cursor-not-allowed',
+    base: 'text-center border-0 rounded-md transition-colors-280 placeholder:color-text-dimmed focus:outline-none disabled:(opacity-75 cursor-not-allowed)',
   },
   variants: {
     size: {

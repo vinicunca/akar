@@ -19,10 +19,12 @@ export interface ComboboxContentImplProps extends APopperContentProps, Dismissab
   bodyLock?: boolean;
 }
 
-export const [injectComboboxContentContext, provideComboboxContentContext]
-  = createContext<{
-    position: Ref<'inline' | 'popper'>;
-  }>('AComboboxContent');
+export const [
+  injectComboboxContentContext,
+  provideComboboxContentContext,
+] = createContext<{
+  position: Ref<'inline' | 'popper'>;
+}>('AComboboxContent');
 </script>
 
 <script setup lang="ts">

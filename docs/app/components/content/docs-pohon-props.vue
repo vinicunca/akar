@@ -66,7 +66,7 @@ const metaProps = computed<ComponentMeta['props']>(() => {
 
       // @ts-expect-error - Type is not correct
       prop.type = !prop.type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema)?.length
-      // @ts-expect-error - Type is not correct
+        // @ts-expect-error - Type is not correct
         ? Object.values(prop.schema.schema).map((schema) => schema?.type ? schema.type : schema).join(' | ')
         : prop.type;
 

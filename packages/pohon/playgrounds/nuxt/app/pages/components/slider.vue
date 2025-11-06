@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import theme from '#build/pohon/slider';
+import { ASliderRange, ASliderRoot, ASliderThumb, ASliderTrack } from 'akar';
 import { reactive, ref } from 'vue';
 
 const colors = Object.keys(theme.variants.color);
@@ -33,6 +34,20 @@ const value = ref(50);
       :items="orientations"
     />
   </BaseNavbar>
+
+  <ASliderRoot
+    class="flex w-full select-none items-center relative touch-none"
+    :max="100"
+    :step="1"
+  >
+    <ASliderTrack class="rounded-full bg-background-accented grow h-[8px] relative overflow-hidden">
+      <ASliderRange class="rounded-full bg-primary h-full absolute" />
+    </ASliderTrack>
+    <ASliderThumb
+      class="rounded-full bg-background size-4 ring-2 ring-primary focus-visible:(outline-2 outline-primary/50 outline-offset-2)"
+      aria-label="Volume"
+    />
+  </ASliderRoot>
 
   <BaseMatrix
     v-slot="props"

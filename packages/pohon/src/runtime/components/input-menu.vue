@@ -7,9 +7,9 @@ import type {
   AComboboxRootEmits,
   AComboboxRootProps,
 } from 'akar';
-import type { InputHTMLAttributes } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
+import type { InputHTMLAttributes } from '../types/html';
 import type {
   AcceptableValue,
   ArrayOrNested,

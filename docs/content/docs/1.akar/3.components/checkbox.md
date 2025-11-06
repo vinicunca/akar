@@ -1,5 +1,6 @@
 ---
 category: form
+description: A control that allows the user to toggle between checked and not checked.
 links:
   - label: Pohon
     to: /docs/pohon/components/checkbox

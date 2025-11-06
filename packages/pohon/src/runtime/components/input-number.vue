@@ -233,6 +233,28 @@ defineExpose({
     data-pohon="input-number-root"
     @update:model-value="onUpdate"
   >
+    <div
+      v-if="Boolean(decrement)"
+      :class="pohon.decrement({ class: props.pohon?.decrement })"
+      data-pohon="input-number-decrement"
+    >
+      <ANumberFieldDecrement
+        as-child
+        :disabled="disabled || decrementDisabled"
+      >
+        <slot name="decrement">
+          <PButton
+            :icon="decrementIcon"
+            :color="color"
+            :size="size"
+            variant="link"
+            :aria-label="t('inputNumber.decrement')"
+            v-bind="typeof decrement === 'object' ? decrement : undefined"
+          />
+        </slot>
+      </ANumberFieldDecrement>
+    </div>
+
     <ANumberFieldInput
       v-bind="{ ...$attrs, ...ariaAttrs }"
       ref="inputRef"
@@ -264,28 +286,6 @@ defineExpose({
           />
         </slot>
       </ANumberFieldIncrement>
-    </div>
-
-    <div
-      v-if="Boolean(decrement)"
-      :class="pohon.decrement({ class: props.pohon?.decrement })"
-      data-pohon="input-number-decrement"
-    >
-      <ANumberFieldDecrement
-        as-child
-        :disabled="disabled || decrementDisabled"
-      >
-        <slot name="decrement">
-          <PButton
-            :icon="decrementIcon"
-            :color="color"
-            :size="size"
-            variant="link"
-            :aria-label="t('inputNumber.decrement')"
-            v-bind="typeof decrement === 'object' ? decrement : undefined"
-          />
-        </slot>
-      </ANumberFieldDecrement>
     </div>
   </ANumberFieldRoot>
 </template>

@@ -199,15 +199,18 @@ function onUpdate(value: any) {
     :name="name"
     :disabled="disabled"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="radio-group-root"
     @update:model-value="onUpdate"
   >
     <fieldset
       :class="pohon.fieldset({ class: props.pohon?.fieldset })"
+      data-pohon="radio-group-fieldset"
       v-bind="ariaAttrs"
     >
       <legend
         v-if="legend || !!slots.legend"
         :class="pohon.legend({ class: props.pohon?.legend })"
+        data-pohon="radio-group-legend"
       >
         <slot name="legend">
           {{ legend }}
@@ -219,27 +222,37 @@ function onUpdate(value: any) {
         v-for="item in normalizedItems"
         :key="item.value"
         :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
+        data-pohon="radio-group-item"
       >
-        <div :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })">
+        <div
+          :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })"
+          data-pohon="radio-group-container"
+        >
           <ARadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled"
             :class="pohon.base({ class: [props.pohon?.base, item.pohon?.base], disabled: item.disabled })"
+            data-pohon="radio-group-base"
           >
-            <ARadioGroupIndicator :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })" />
+            <ARadioGroupIndicator
+              :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })"
+              data-pohon="radio-group-indicator"
+            />
           </ARadioGroupItem>
         </div>
 
         <div
           v-if="(item.label || !!slots.label) || (item.description || !!slots.description)"
           :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })"
+          data-pohon="radio-group-wrapper"
         >
           <component
             :is="(!variant || variant === 'list') ? ALabel : 'p'"
             v-if="item.label || !!slots.label"
             :for="item.id"
             :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
+            data-pohon="radio-group-label"
           >
             <slot
               name="label"
@@ -252,6 +265,7 @@ function onUpdate(value: any) {
           <p
             v-if="item.description || !!slots.description"
             :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
+            data-pohon="radio-group-description"
           >
             <slot
               name="description"
