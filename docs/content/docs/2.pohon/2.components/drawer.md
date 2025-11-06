@@ -3,7 +3,6 @@ description: A drawer that smoothly slides in & out of the screen.
 category: overlay
 links:
   - label: Drawer
-    icon: custom-akar
     to: https://github.com/unovue/vaul-vue
   - label: GitHub
     icon: i-simple-icons-github

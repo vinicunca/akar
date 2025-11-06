@@ -3,10 +3,8 @@ description: A non-modal dialog that floats around a trigger element.
 category: overlay
 links:
   - label: HoverCard
-    icon: custom-akar
     to: /docs/akar/components/hover-card
   - label: Popover
-    icon: custom-akar
     to: /docs/akar/components/popover
   - label: GitHub
     icon: i-simple-icons-github

@@ -3,7 +3,6 @@ description: A set of tab panels that are displayed one at a time.
 category: navigation
 links:
   - label: Tabs
-    icon: custom-akar
     to: /docs/akar/components/tabs
   - label: GitHub
     icon: i-simple-icons-github

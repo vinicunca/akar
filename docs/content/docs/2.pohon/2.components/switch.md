@@ -3,7 +3,6 @@ description: A control that toggles between two states.
 category: form
 links:
   - label: Switch
-    icon: custom-akar
     to: /docs/akar/components/switch
   - label: GitHub
     icon: i-simple-icons-github

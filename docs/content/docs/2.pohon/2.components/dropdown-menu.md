@@ -4,7 +4,6 @@ description: A menu to display actions when clicking on an element.
 category: overlay
 links:
   - label: DropdownMenu
-    icon: custom-akar
     to: /docs/akar/components/dropdown-menu
   - label: GitHub
     icon: i-simple-icons-github

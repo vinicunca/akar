@@ -3,7 +3,6 @@ description: A popup that reveals information when hovering over an element.
 category: overlay
 links:
   - label: Tooltip
-    icon: custom-akar
     to: /docs/akar/components/tooltip
   - label: GitHub
     icon: i-simple-icons-github

@@ -8,7 +8,6 @@ links:
     to: https://fusejs.io/
     target: _blank
   - label: Listbox
-    icon: custom-akar
     to: /docs/akar/components/listbox
   - label: GitHub
     icon: i-simple-icons-github

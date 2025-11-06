@@ -3,7 +3,6 @@ description: A set of steps that are used to indicate progress through a multi-s
 category: navigation
 links:
   - label: Stepper
-    icon: custom-akar
     to: /docs/akar/components/stepper
   - label: GitHub
     icon: i-simple-icons-github
