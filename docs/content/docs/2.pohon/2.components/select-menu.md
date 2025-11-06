@@ -73,15 +73,15 @@ props:
 
 You can also pass an array of objects with the following properties:
 
-- `label?: string`{lang="ts-type"}
-- [`type?: "label" | "separator" | "item"`{lang="ts-type"}](#with-items-type)
-- [`icon?: string`{lang="ts-type"}](#with-icons-in-items)
-- [`avatar?: AvatarProps`{lang="ts-type"}](#with-avatar-in-items)
-- [`chip?: ChipProps`{lang="ts-type"}](#with-chip-in-items)
-- `disabled?: boolean`{lang="ts-type"}
-- `onSelect?: (e: Event) => void`{lang="ts-type"}
-- `class?: any`{lang="ts-type"}
-- `pohon?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
+- `label?: string`
+- [`type?: "label" | "separator" | "item"`](#with-items-type)
+- [`icon?: string`](#with-icons-in-items)
+- [`avatar?: AvatarProps`](#with-avatar-in-items)
+- [`chip?: ChipProps`](#with-chip-in-items)
+- `disabled?: boolean`
+- `onSelect?: (e: Event) => void`
+- `class?: any`
+- `pohon?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`
 
 ::docs-pohon-preview
 ---
@@ -479,12 +479,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.chevronDown` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.chevronDown` key.
 :::
 ::
 
@@ -518,12 +518,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.check` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.check` key.
 :::
 ::
 
@@ -612,12 +612,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.loading` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.loading` key.
 :::
 ::
 
@@ -821,7 +821,7 @@ name: 'select-menu-filter-fields-example'
 ---
 ::
 
-### With virtualization :badge{label="Soon"}
+### With virtualization
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
@@ -838,7 +838,7 @@ name: 'select-menu-virtualize-example'
 
 ### With full content width
 
-You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
+You can expand the content to the full width of its items by adding the `min-w-fit` class on the `pohon.content` slot.
 
 ::docs-component-example
 ---
@@ -852,7 +852,7 @@ You can also change the content width globally in your `app.config.ts`:
 
 ```
 export default defineAppConfig({
-  ui: {
+  pohon: {
     selectMenu: {
       slots: {
         content: 'min-w-fit'

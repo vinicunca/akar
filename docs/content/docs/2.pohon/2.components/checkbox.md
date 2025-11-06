@@ -65,12 +65,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.minus` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.minus` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.minus` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.minus` key.
 :::
 ::
 
@@ -130,12 +130,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.check` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.check` key.
 :::
 ::
 

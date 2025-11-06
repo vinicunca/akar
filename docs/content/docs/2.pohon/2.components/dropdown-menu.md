@@ -21,7 +21,7 @@ prettier: true
 collapse: true
 ignore:
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 props:
@@ -108,7 +108,7 @@ prettier: true
 collapse: true
 ignore:
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 externalTypes:
@@ -161,7 +161,7 @@ props:
           - shift
           - meta
           - q
-  ui:
+  pohon:
     content: 'w-48'
 slots:
   default: |
@@ -189,7 +189,7 @@ Use the `content` prop to control how the DropdownMenu content is rendered, like
 prettier: true
 ignore:
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 externalTypes:
@@ -216,7 +216,7 @@ props:
     align: start
     side: bottom
     sideOffset: 8
-  ui:
+  pohon:
     content: 'w-48'
 slots:
   default: |
@@ -237,7 +237,7 @@ prettier: true
 ignore:
   - arrow
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 externalTypes:
@@ -251,7 +251,7 @@ props:
       icon: i-lucide-credit-card
     - label: Settings
       icon: i-lucide-cog
-  ui:
+  pohon:
     content: 'w-48'
 slots:
   default: |
@@ -272,7 +272,7 @@ prettier: true
 ignore:
   - items
   - content.align
-  - ui.content
+  - pohon.content
 external:
   - items
 externalTypes:
@@ -288,7 +288,7 @@ props:
       icon: i-lucide-cog
   content:
     align: start
-  ui:
+  pohon:
     content: 'w-48'
 slots:
   default: |
@@ -316,7 +316,7 @@ Use the `disabled` prop to disable the DropdownMenu.
 prettier: true
 ignore:
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 externalTypes:
@@ -330,7 +330,7 @@ props:
       icon: i-lucide-credit-card
     - label: Settings
       icon: i-lucide-cog
-  ui:
+  pohon:
     content: 'w-48'
 slots:
   default: |
@@ -405,7 +405,7 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 
 ### With trigger content width
 
-You can expand the content to the full width of its button by adding the `w-(--akar-dropdown-menu-trigger-width)` class on the `ui.content` slot.
+You can expand the content to the full width of its button by adding the `w-(--akar-dropdown-menu-trigger-width)` class on the `pohon.content` slot.
 
 ::docs-component-example
 ---
@@ -419,7 +419,7 @@ You can also change the content width globally in your `app.config.ts`:
 
 ```
 export default defineAppConfig({
-  ui: {
+  pohon: {
     dropdownMenu: {
       slots: {
         content: 'w-(--akar-dropdown-menu-trigger-width)'

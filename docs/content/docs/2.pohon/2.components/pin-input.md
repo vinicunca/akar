@@ -3,8 +3,7 @@ title: PinInput
 description: An input element to enter a pin.
 category: form
 links:
-  - label: PinInput
-    icon: custom-akar
+  - label: Akar
     to: /docs/akar/components/pin-input
   - label: GitHub
     icon: i-simple-icons-github
@@ -186,7 +185,7 @@ When accessing the component via a template ref, you can use the following:
 
 | Name | Type |
 | ---- | ---- |
-| `inputsRef`{lang="ts-type"} | `Ref<ComponentPublicInstance[]>`{lang="ts-type"} |
+| `inputsRef` | `Ref<ComponentPublicInstance[]>` |
 
 ## Theme
 

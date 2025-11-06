@@ -78,12 +78,15 @@ import { APrimitive } from '~~/primitive';
 import { useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '~~/shared';
 import { AVisuallyHiddenInput } from '~~/visually-hidden';
 
-const props = withDefaults(defineProps<ATagsInputRootProps<T>>(), {
-  defaultValue: () => [],
-  delimiter: ',',
-  max: 0,
-  displayValue: (value: T) => value.toString(),
-});
+const props = withDefaults(
+  defineProps<ATagsInputRootProps<T>>(),
+  {
+    defaultValue: () => [],
+    delimiter: ',',
+    max: 0,
+    displayValue: (value: T) => value.toString(),
+  },
+);
 const emits = defineEmits<ATagsInputRootEmits<T>>();
 
 defineSlots<{
@@ -96,11 +99,16 @@ defineSlots<{
 const { addOnPaste, disabled, delimiter, max, id, dir: propDir, addOnBlur, addOnTab } = toRefs(props);
 const dir = useDirection(propDir);
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue,
-  passive: true,
-  deep: true,
-}) as Ref<Array<AcceptableInputValue>>;
+const modelValue = useVModel(
+  props,
+  'modelValue',
+  emits,
+  {
+    defaultValue: props.defaultValue,
+    passive: true,
+    deep: true,
+  },
+) as Ref<Array<AcceptableInputValue>>;
 
 const { forwardRef, currentElement } = useForwardExpose();
 const { focused } = useFocusWithin(currentElement);

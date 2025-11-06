@@ -712,6 +712,9 @@ importers:
       '@internationalized/date':
         specifier: catalog:core
         version: 3.9.0
+      akar:
+        specifier: workspace:*
+        version: link:../../../core
       nuxt:
         specifier: catalog:pohon
         version: 4.2.0(@parcel/watcher@2.5.1)(@types/node@24.5.2)(@vue/compiler-sfc@3.5.22)(better-sqlite3@12.4.1)(db0@0.3.4(better-sqlite3@12.4.1))(encoding@0.1.13)(eslint@9.36.0(jiti@2.6.1))(ioredis@5.8.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rolldown@1.0.0-beta.26)(rollup@4.52.5)(terser@5.44.0)(tsx@4.20.5)(typescript@5.8.3)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.1)

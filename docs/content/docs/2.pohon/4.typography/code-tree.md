@@ -33,7 +33,7 @@ export default defineNuxtConfig({
 
 ```ts [app/app.config.ts]
 export default defineAppConfig({
-  ui: {
+  pohon: {
     colors: {
       primary: 'sky',
       colors: 'slate'
@@ -184,7 +184,7 @@ export default defineNuxtConfig({
 
 ```ts [app/app.config.ts]
 export default defineAppConfig({
-  ui: {
+  pohon: {
     colors: {
       primary: 'sky',
       colors: 'slate'

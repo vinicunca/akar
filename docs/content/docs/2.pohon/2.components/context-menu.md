@@ -21,7 +21,7 @@ prettier: true
 collapse: true
 ignore:
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 props:
@@ -109,7 +109,7 @@ prettier: true
 collapse: true
 ignore:
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 externalTypes:
@@ -161,7 +161,7 @@ props:
                 - option
                 - meta
                 - j
-  ui:
+  pohon:
     content: 'w-48'
 slots:
   default: |
@@ -191,7 +191,7 @@ Use the `size` prop to change the size of the ContextMenu.
 prettier: true
 ignore:
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 externalTypes:
@@ -205,7 +205,7 @@ props:
       icon: i-lucide-sun
     - label: Dark
       icon: i-lucide-moon
-  ui:
+  pohon:
     content: 'w-48'
 slots:
   default: |
@@ -227,7 +227,7 @@ Use the `disabled` prop to disable the ContextMenu.
 prettier: true
 ignore:
   - items
-  - ui.content
+  - pohon.content
 external:
   - items
 externalTypes:
@@ -241,7 +241,7 @@ props:
       icon: i-lucide-sun
     - label: Dark
       icon: i-lucide-moon
-  ui:
+  pohon:
     content: 'w-48'
 slots:
   default: |

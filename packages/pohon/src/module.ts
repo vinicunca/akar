@@ -140,8 +140,6 @@ export default defineNuxtModule<PohonModuleOptions>({
       }
     }
 
-    await registerModule({ name: '@unocss/nuxt', key: 'unocss' });
-
     await registerModule({
       name: '@nuxt/icon',
       key: 'icon',

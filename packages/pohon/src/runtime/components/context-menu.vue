@@ -178,7 +178,6 @@ const pohon = computed(() =>
       :checked-icon="checkedIcon"
       :loading-icon="loadingIcon"
       :external-icon="externalIcon"
-      data-pohon="context-menu-content"
     >
       <template
         v-for="(_, name) in getProxySlots()"

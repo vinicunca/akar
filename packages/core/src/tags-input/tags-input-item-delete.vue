@@ -26,7 +26,7 @@ function handleDelete() {
   if (disabled.value) {
     return;
   }
-  const index = context.modelValue.value.findIndex((i) => isDeepEqual(i === itemContext.value.value));
+  const index = context.modelValue.value.findIndex((i) => isDeepEqual(i, itemContext.value.value));
   context.onRemoveValue(index);
 }
 </script>

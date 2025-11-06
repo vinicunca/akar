@@ -60,6 +60,7 @@ const components = [
   'textarea',
   'timeline',
   'toast',
+  'toggle-group',
   'tooltip',
   'tree',
 ].map((component) => ({

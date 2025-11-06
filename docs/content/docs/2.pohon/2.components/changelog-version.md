@@ -42,7 +42,7 @@ authors:
 to: 'https://nuxt.com/blog/nuxt-ui-v3'
 target: '_blank'
 class: 'w-full'
-ui.container: 'max-w-lg'
+pohon.container: 'max-w-lg'
 ---
 ::
 
@@ -61,11 +61,11 @@ Use the `title` prop to display the title of the ChangelogVersion.
 hide:
   - class
   - ui
-  - ui.container
+  - pohon.container
 props:
   title: 'Introducing Nuxt UI v3'
   class: 'w-full'
-  ui.container: 'max-w-lg'
+  pohon.container: 'max-w-lg'
 ---
 ::
 
@@ -79,14 +79,14 @@ prettier: true
 hide:
   - class
   - ui
-  - ui.container
+  - pohon.container
 ignore:
   - title
 props:
   title: 'Introducing Nuxt UI v3'
   description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
   class: 'w-full'
-  ui.container: 'max-w-lg'
+  pohon.container: 'max-w-lg'
 ---
 ::
 
@@ -104,7 +104,7 @@ prettier: true
 hide:
   - class
   - ui
-  - ui.container
+  - pohon.container
 ignore:
   - title
   - description
@@ -113,7 +113,7 @@ props:
   description: 'Nuxt UI v3 is out! After 1500+ commits, this major redesign brings improved accessibility, Tailwind CSS v4 support, and full Vue compatibility.'
   date: 2025-03-12
   class: 'w-full'
-  ui.container: 'max-w-lg'
+  pohon.container: 'max-w-lg'
 ---
 ::
 
@@ -127,7 +127,7 @@ prettier: true
 hide:
   - class
   - ui
-  - ui.container
+  - pohon.container
 ignore:
   - title
   - description
@@ -138,7 +138,7 @@ props:
   date: 2025-03-12
   badge: 'Release'
   class: 'w-full'
-  ui.container: 'max-w-lg'
+  pohon.container: 'max-w-lg'
 ---
 ::
 
@@ -150,7 +150,7 @@ prettier: true
 hide:
   - class
   - ui
-  - ui.container
+  - pohon.container
 ignore:
   - title
   - description
@@ -167,7 +167,7 @@ props:
     color: primary
     variant: outline
   class: 'w-full'
-  ui.container: 'max-w-lg'
+  pohon.container: 'max-w-lg'
 ---
 ::
 
@@ -185,7 +185,7 @@ prettier: true
 hide:
   - class
   - ui
-  - ui.container
+  - pohon.container
 ignore:
   - title
   - description
@@ -196,7 +196,7 @@ props:
   date: 2025-03-12
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   class: 'w-full'
-  ui.container: 'max-w-lg'
+  pohon.container: 'max-w-lg'
 ---
 ::
 
@@ -219,7 +219,7 @@ prettier: true
 hide:
   - class
   - ui
-  - ui.container
+  - pohon.container
 external:
   - authors
 ignore:
@@ -253,7 +253,7 @@ props:
       to: https://x.com/hugorcd__
       target: _blank
   class: 'w-full'
-  ui.container: 'max-w-lg'
+  pohon.container: 'max-w-lg'
 ---
 ::
 
@@ -267,7 +267,7 @@ prettier: true
 hide:
   - class
   - ui
-  - ui.container
+  - pohon.container
 ignore:
   - title
   - description
@@ -282,7 +282,7 @@ props:
   to: 'https://nuxt.com/blog/nuxt-ui-v3'
   target: _blank
   class: 'w-full'
-  ui.container: 'max-w-lg'
+  pohon.container: 'max-w-lg'
 ---
 ::
 
@@ -296,7 +296,7 @@ prettier: true
 hide:
   - class
   - ui
-  - ui.container
+  - pohon.container
 ignore:
   - title
   - description
@@ -309,7 +309,7 @@ props:
   image: 'https://nuxt.com/assets/blog/nuxt-ui-v3.png'
   indicator: false
   class: 'w-full'
-  ui.container: 'max-w-lg'
+  pohon.container: 'max-w-lg'
 ---
 ::
 

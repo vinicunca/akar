@@ -4,7 +4,6 @@ description: An input element that displays interactive tags.
 category: form
 links:
   - label: InputTags
-    icon: custom-akar
     to: /docs/akar/components/tags-input
   - label: GitHub
     icon: i-simple-icons-github
@@ -181,12 +180,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.close` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.close` key.
 :::
 ::
 
@@ -229,12 +228,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.loading` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.loading` key.
 :::
 ::
 

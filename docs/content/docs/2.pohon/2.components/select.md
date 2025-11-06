@@ -429,12 +429,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.chevronDown` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.chevronDown` key.
 :::
 ::
 
@@ -468,12 +468,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.check` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.check` key.
 :::
 ::
 
@@ -562,12 +562,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.loading` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.loading` key.
 :::
 ::
 
@@ -726,7 +726,7 @@ collapse: true
 
 ### With full content width
 
-You can expand the content to the full width of its items by adding the `min-w-fit` class on the `ui.content` slot.
+You can expand the content to the full width of its items by adding the `min-w-fit` class on the `pohon.content` slot.
 
 ::docs-component-example
 ---
@@ -740,7 +740,7 @@ You can also change the content width globally in your `app.config.ts`:
 
 ```
 export default defineAppConfig({
-  ui: {
+  pohon: {
     select: {
       slots: {
         content: 'min-w-fit'

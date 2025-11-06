@@ -27,6 +27,13 @@ const props = withDefaults(
       'external',
       'onClick',
       'viewTransition',
+      'enterKeyHint',
+      'form',
+      'formaction',
+      'formenctype',
+      'formmethod',
+      'formnovalidate',
+      'formtarget',
     ],
   },
 );

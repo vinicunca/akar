@@ -2,6 +2,46 @@ import type { PLinkProps } from '../types';
 import { reactivePick } from '@vueuse/core';
 import { diff, isEqual } from 'ohash/utils';
 
+export const linkKeys = [
+  'active',
+  'activeClass',
+  'ariaCurrentValue',
+  'as',
+  'disabled',
+  'download',
+  'exact',
+  'exactActiveClass',
+  'exactHash',
+  'exactQuery',
+  'external',
+  'form',
+  'formaction',
+  'formenctype',
+  'formmethod',
+  'formnovalidate',
+  'formtarget',
+  'href',
+  'hreflang',
+  'inactiveClass',
+  'media',
+  'noPrefetch',
+  'noRel',
+  'onClick',
+  'ping',
+  'prefetch',
+  'prefetchOn',
+  'prefetchedClass',
+  'referrerpolicy',
+  'rel',
+  'replace',
+  'target',
+  'title',
+  'to',
+  'trailingSlash',
+  'type',
+  'viewTransition',
+] as const;
+
 export function pickLinkProps(link: PLinkProps & { [key: string]: any }) {
   const keys = Object.keys(link);
 
@@ -9,30 +49,7 @@ export function pickLinkProps(link: PLinkProps & { [key: string]: any }) {
   const dataKeys = keys.filter((key) => key.startsWith('data-'));
 
   const propsToInclude = [
-    'active',
-    'activeClass',
-    'ariaCurrentValue',
-    'as',
-    'disabled',
-    'exact',
-    'exactActiveClass',
-    'exactHash',
-    'exactQuery',
-    'external',
-    'href',
-    'download',
-    'inactiveClass',
-    'noPrefetch',
-    'noRel',
-    'prefetch',
-    'prefetchedClass',
-    'rel',
-    'replace',
-    'target',
-    'to',
-    'type',
-    'title',
-    'onClick',
+    ...linkKeys,
     ...ariaKeys,
     ...dataKeys,
   ];

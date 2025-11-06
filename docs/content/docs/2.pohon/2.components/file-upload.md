@@ -140,12 +140,12 @@ props:
 ::docs-framework-only
 #nuxt
 :::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
-You can customize this icon globally in your `app.config.ts` under `ui.icons.upload` key.
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.upload` key.
 :::
 
 #vue
 :::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
-You can customize this icon globally in your `vite.config.ts` under `ui.icons.upload` key.
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.upload` key.
 :::
 ::
 
@@ -221,14 +221,14 @@ ignore:
   - description
   - multiple
   - class
-  - ui.base
+  - pohon.base
 props:
   layout: list
   multiple: true
   label: 'Drop your images here'
   description: 'SVG, PNG, JPG or GIF (max. 2MB)'
   class: 'w-96'
-  ui:
+  pohon:
     base: 'min-h-48'
 ---
 ::
@@ -250,7 +250,7 @@ ignore:
   - multiple
   - layout
   - class
-  - ui.base
+  - pohon.base
 props:
   position: inside
   layout: list
@@ -258,7 +258,7 @@ props:
   label: 'Drop your images here'
   description: 'SVG, PNG, JPG or GIF (max. 2MB)'
   class: 'w-96'
-  ui:
+  pohon:
     base: 'min-h-48'
 ---
 ::
