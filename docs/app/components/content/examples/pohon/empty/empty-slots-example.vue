@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { UserProps } from 'pohon-ui';
+import type { PUserProps } from 'pohon-ui';
 
-const members: Array<UserProps> = [
+const members: Array<PUserProps> = [
   {
     name: 'Daniel Roe',
     description: 'danielroe',
@@ -73,19 +73,31 @@ const members: Array<UserProps> = [
       <PSeparator class="my-4" />
 
       <div class="gap-4 grid grid-cols-2">
-        <UPageCard
+        <div
           v-for="(member, index) in members"
           :key="index"
-          :to="member.to"
-          :pohon="{ container: 'sm:p-4' }"
+          class="rounded-lg bg-background flex ring ring-ring transition relative hover:bg-background-elevated/50 has-focus-visible:(ring-2 ring-primary)"
         >
-          <UUser
-            :avatar="member.avatar"
-            :name="member.name"
-            :description="member.description"
-            :pohon="{ name: 'truncate' }"
-          />
-        </UPageCard>
+          <div class="p-4 flex flex-1 flex-col gap-x-8 gap-y-4 relative sm:p-4 lg:grid">
+            <PUser
+              :avatar="member.avatar"
+              :name="member.name"
+              :description="member.description"
+              :pohon="{ name: 'truncate' }"
+            />
+          </div>
+
+          <a
+            :href="member.to"
+            rel="noopener"
+            aria-label="Card link"
+            class="peer focus:outline-none"
+            :target="member.target"
+          ><span
+            class="inset-0 absolute"
+            aria-hidden="true"
+          /></a>
+        </div>
       </div>
     </template>
   </PEmpty>

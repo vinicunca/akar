@@ -105,22 +105,22 @@ props:
 
 Use the `items` prop as an array of objects with the following properties:
 
-- `label?: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `avatar?: AvatarProps`{lang="ts-type"}
-- `badge?: string | number | BadgeProps`{lang="ts-type"}
-- `tooltip?: TooltipProps`{lang="ts-type"}
-- `trailingIcon?: string`{lang="ts-type"}
-- `type?: 'label' | 'trigger' | 'link'`{lang="ts-type"}
-- `defaultOpen?: boolean`{lang="ts-type"}
-- `open?: boolean`{lang="ts-type"}
-- `value?: string`{lang="ts-type"}
-- `disabled?: boolean`{lang="ts-type"}
-- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `onSelect?: (e: Event) => void`{lang="ts-type"}
-- `children?: NavigationMenuChildItem[]`{lang="ts-type"}
-- `class?: any`{lang="ts-type"}
-- `pohon?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`{lang="ts-type"}
+- `label?: string`
+- `icon?: string`
+- `avatar?: AvatarProps`
+- `badge?: string | number | BadgeProps`
+- `tooltip?: TooltipProps`
+- `trailingIcon?: string`
+- `type?: 'label' | 'trigger' | 'link'`
+- `defaultOpen?: boolean`
+- `open?: boolean`
+- `value?: string`
+- `disabled?: boolean`
+- [`slot?: string`](#with-custom-slot)
+- `onSelect?: (e: Event) => void`
+- `children?: NavigationMenuChildItem[]`
+- `class?: any`
+- `pohon?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`
 
 You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
@@ -1218,11 +1218,11 @@ Use the `slot` property to customize a specific item.
 
 You will have access to the following slots:
 
-- `#{{ item.slot }}`{lang="ts-type"}
-- `#{{ item.slot }}-leading`{lang="ts-type"}
-- `#{{ item.slot }}-label`{lang="ts-type"}
-- `#{{ item.slot }}-trailing`{lang="ts-type"}
-- `#{{ item.slot }}-content`{lang="ts-type"}
+- `#{{ item.slot }}`
+- `#{{ item.slot }}-leading`
+- `#{{ item.slot }}-label`
+- `#{{ item.slot }}-trailing`
+- `#{{ item.slot }}-content`
 
 ::docs-component-example
 ---

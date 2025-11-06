@@ -27,13 +27,13 @@ Learn how to customize the appearance and behavior of toasts in the **Toast** co
 
 ## API
 
-`useToast()`{lang="ts-type"}
+`useToast()`
 
 The `useToast` composable provides methods to manage toast notifications globally.
 
 ### add()
 
-`add(toast: Partial<Toast>): Toast`{lang="ts-type"}
+`add(toast: Partial<Toast>): Toast`
 
 Adds a new toast notification.
 
@@ -79,7 +79,7 @@ function showToast() {
 
 ### update()
 
-`update(id: string | number, toast: Partial<Toast>): void`{lang="ts-type"}
+`update(id: string | number, toast: Partial<Toast>): void`
 
 Updates an existing toast notification.
 
@@ -110,7 +110,7 @@ function updateToast(id: string | number) {
 
 ### remove()
 
-`remove(id: string | number): void`{lang="ts-type"}
+`remove(id: string | number): void`
 
 Removes a toast notification.
 
@@ -134,7 +134,7 @@ function removeToast(id: string | number) {
 
 ### clear()
 
-`clear(): void`{lang="ts-type"}
+`clear(): void`
 
 Removes all toast notifications.
 
@@ -150,7 +150,7 @@ function clearAllToasts() {
 
 ### `toasts`
 
-`toasts: Ref<Toast[]>`{lang="ts-type"}
+`toasts: Ref<Toast[]>`
 
 - Type: `Ref<Toast[]>`
 - Description: A reactive array containing all current toast notifications.

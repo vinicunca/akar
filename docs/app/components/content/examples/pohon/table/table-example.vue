@@ -268,7 +268,7 @@ function randomize() {
 </script>
 
 <template>
-  <div class="divide-accented flex-1 w-full divide-y">
+  <div class="flex-1 w-full divide-divide-accented divide-y">
     <div class="px-4 py-3.5 flex gap-2 items-center overflow-x-auto">
       <PInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"

@@ -59,6 +59,7 @@ import { timelineTheme } from './themes/timeline.theme';
 import { toasterTheme, toastTheme } from './themes/toast.theme';
 import { tooltipTheme } from './themes/tooltip.theme';
 import { treeTheme } from './themes/tree.theme';
+import { userTheme } from './themes/user.theme';
 
 export default defineAppConfig({
   pohon: {
@@ -136,6 +137,7 @@ export default defineAppConfig({
     toaster: toasterTheme,
     tooltip: tooltipTheme,
     tree: treeTheme,
+    user: userTheme,
 
     prose: proseTheme,
   },

@@ -20,7 +20,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 The ContentSearch component extends the [CommandPalette](/docs/pohon/components/command-palette) component, so you can pass any property such as `icon`, `placeholder`, etc.
 
-Use the `files` and `navigation` props with the `files`{lang="ts-type"} and `navigation`{lang="ts-type"} values you fetched using the `queryCollectionSearchSections` and `queryCollectionNavigation` composables from `@nuxt/content`.
+Use the `files` and `navigation` props with the `files` and `navigation` values you fetched using the `queryCollectionSearchSections` and `queryCollectionNavigation` composables from `@nuxt/content`.
 
 ::docs-component-example
 ---

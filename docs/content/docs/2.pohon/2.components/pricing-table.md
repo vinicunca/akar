@@ -97,16 +97,16 @@ sections:
 
 Use the `tiers` prop as an array of objects to define your pricing plans. Each tier object supports the following properties:
 
-- `id: string`{lang="ts-type"} - Unique identifier for the tier (required)
-- `title?: string`{lang="ts-type"} - Name of the pricing plan
-- `description?: string`{lang="ts-type"} - Short description of the plan
-- `price?: string`{lang="ts-type"} - The current price of the plan (e.g., "$99", "€99", "Free")
-- `discount?: string`{lang="ts-type"} - The discounted price that will display the `price` with strikethrough (e.g., "$79", "€79")
-- `billingCycle?: string`{lang="ts-type"} - The unit price period that appears next to the price (e.g., "/month", "/seat/month")
-- `billingPeriod?: string`{lang="ts-type"} - Additional billing context that appears above the billing cycle (e.g., "billed monthly")
-- `badge?: string | BadgeProps`{lang="ts-type"} - Display a badge next to the title `{ color: 'primary', variant: 'subtle' }`{lang="ts-type"}
-- `button?: ButtonProps`{lang="ts-type"} - Configure the CTA button `{ size: 'lg', block: true }`{lang="ts-type"}
-- `highlight?: boolean`{lang="ts-type"} - Whether to visually emphasize this tier as the recommended option
+- `id: string` - Unique identifier for the tier (required)
+- `title?: string` - Name of the pricing plan
+- `description?: string` - Short description of the plan
+- `price?: string` - The current price of the plan (e.g., "$99", "€99", "Free")
+- `discount?: string` - The discounted price that will display the `price` with strikethrough (e.g., "$79", "€79")
+- `billingCycle?: string` - The unit price period that appears next to the price (e.g., "/month", "/seat/month")
+- `billingPeriod?: string` - Additional billing context that appears above the billing cycle (e.g., "billed monthly")
+- `badge?: string | BadgeProps` - Display a badge next to the title `{ color: 'primary', variant: 'subtle' }`
+- `button?: ButtonProps` - Configure the CTA button `{ size: 'lg', block: true }`
+- `highlight?: boolean` - Whether to visually emphasize this tier as the recommended option
 
 ::docs-pohon-preview
 ---
@@ -154,8 +154,8 @@ props:
 
 Use the `sections` prop to organize features into logical groups. Each section represents a category of features that you want to compare across different pricing tiers.
 
-- `title: string`{lang="ts-type"} - The heading for the feature section
-- `features: PricingTableSectionFeature[]`{lang="ts-type"} - An array of features with their availability in each tier:
+- `title: string` - The heading for the feature section
+- `features: PricingTableSectionFeature[]` - An array of features with their availability in each tier:
   - Each feature requires a `title` and a `tiers` object mapping tier IDs to values
   - Boolean values (`true`/`false`) will display as checkmarks (✓) or minus icons (-)
   - String values will be shown as text (e.g., "Unlimited", "Up to 5 users")

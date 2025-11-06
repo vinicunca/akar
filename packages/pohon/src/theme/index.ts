@@ -70,3 +70,4 @@ export { default as toast } from './toast';
 export { default as toaster } from './toaster';
 export { default as tooltip } from './tooltip';
 export { default as tree } from './tree';
+export { default as user } from './user';

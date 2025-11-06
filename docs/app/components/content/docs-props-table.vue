@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { ComponentMeta } from 'vue-component-meta';
 import { computed, useComponentName } from '#imports';
+import DocsPropsLinks from './docs-props-links.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -93,6 +94,11 @@ const propsKey = computed(() => `props-${parentSlug}-${slug}`);
             :value="prop.description"
             class="color-text-toned mt-1"
             :cache-key="`${propsKey}-${prop.name}-description`"
+          />
+
+          <DocsPropsLinks
+            v-if="prop.tags?.length"
+            :prop="prop"
           />
 
           <DocsPropsSchema

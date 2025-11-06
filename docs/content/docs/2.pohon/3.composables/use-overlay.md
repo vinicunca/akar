@@ -30,13 +30,13 @@ In order to return a value from the overlay, the `overlay.open()` can be awaited
 
 ## API
 
-`useOverlay()`{lang="ts-type"}
+`useOverlay()`
 
 The `useOverlay` composable provides methods to manage overlays globally. Each created overlay returns an instance with its own methods.
 
 ### create()
 
-`create(component: T, options: OverlayOptions): OverlayInstance`{lang="ts-type"}
+`create(component: T, options: OverlayOptions): OverlayInstance`
 
 Create an overlay, and return a factory instance.
 
@@ -70,7 +70,7 @@ Create an overlay, and return a factory instance.
 
 ### open()
 
-`open(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T>`{lang="ts-type"}
+`open(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T>`
 
 Open an overlay by its `id`.
 
@@ -88,7 +88,7 @@ Open an overlay by its `id`.
 
 ### close()
 
-`close(id: symbol, value?: any): void`{lang="ts-type"}
+`close(id: symbol, value?: any): void`
 
 Close an overlay by its `id`.
 
@@ -106,7 +106,7 @@ Close an overlay by its `id`.
 
 ### patch()
 
-`patch(id: symbol, props: ComponentProps<T>): void`{lang="ts-type"}
+`patch(id: symbol, props: ComponentProps<T>): void`
 
 Update an overlay by its `id`.
 
@@ -124,7 +124,7 @@ Update an overlay by its `id`.
 
 ### unmount()
 
-`unmount(id: symbol): void`{lang="ts-type"}
+`unmount(id: symbol): void`
 
 Remove an overlay from the DOM by its `id`.
 
@@ -138,7 +138,7 @@ Remove an overlay from the DOM by its `id`.
 
 ### isOpen()
 
-`isOpen(id: symbol): boolean`{lang="ts-type"}
+`isOpen(id: symbol): boolean`
 
 Check if an overlay is open using its `id`.
 
@@ -152,7 +152,7 @@ Check if an overlay is open using its `id`.
 
 ### overlays
 
-`overlays: Overlay[]`{lang="ts-type"}
+`overlays: Overlay[]`
 
 In-memory list of all overlays that were created.
 
@@ -160,7 +160,7 @@ In-memory list of all overlays that were created.
 
 ### open()
 
-`open(props?: ComponentProps<T>): Promise<OpenedOverlay<T>>`{lang="ts-type"}
+`open(props?: ComponentProps<T>): Promise<OpenedOverlay<T>>`
 
 Open the overlay.
 
@@ -190,7 +190,7 @@ function openModal() {
 
 ### close()
 
-`close(value?: any): void`{lang="ts-type"}
+`close(value?: any): void`
 
 Close the overlay.
 
@@ -204,7 +204,7 @@ Close the overlay.
 
 ### patch()
 
-`patch(props: ComponentProps<T>): void`{lang="ts-type"}
+`patch(props: ComponentProps<T>): void`
 
 Update the props of the overlay.
 

@@ -50,7 +50,7 @@ When using the button in the **DashboardSidebar** component, use the `collapsed`
 
 ### Kbds
 
-Use the `kbds` prop to display keyboard keys in the button. Defaults to `['meta', 'K']`{lang="ts-type"} to match the default shortcut of the [DashboardSearch](/docs/pohon/components/dashboard-search#shortcut) component.
+Use the `kbds` prop to display keyboard keys in the button. Defaults to `['meta', 'K']` to match the default shortcut of the [DashboardSearch](/docs/pohon/components/dashboard-search#shortcut) component.
 
 ::docs-pohon-preview
 ---

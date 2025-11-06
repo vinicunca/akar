@@ -34,7 +34,7 @@ slots:
 :core-placeholder{class="h-48 m-4"}
 ::
 
-You can also use the `#header`{lang="ts-type"}, `#body`{lang="ts-type"} and `#footer`{lang="ts-type"} slots to customize the Modal's content.
+You can also use the `#header`, `#body` and `#footer` slots to customize the Modal's content.
 
 ### Title
 

@@ -15,7 +15,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 ## Usage
 
-Use the `links` prop with the `page?.body?.toc?.links`{lang="ts-type"} you get when fetching a page.
+Use the `links` prop with the `page?.body?.toc?.links` you get when fetching a page.
 
 ::docs-component-example
 ---

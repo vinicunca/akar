@@ -220,8 +220,8 @@ You can customize this icon globally in your `vite.config.ts` under `pohon.icons
 
 You can also pass an array of objects with the following properties:
 
-- `title: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
+- `title: string`
+- `icon?: string`
 
 ::docs-pohon-preview
 ---

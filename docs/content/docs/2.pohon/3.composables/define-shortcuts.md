@@ -29,7 +29,7 @@ Learn how to display shortcuts in components in the **Kbd** component documentat
 
 ## API
 
-`defineShortcuts(config: ShortcutsConfig, options?: ShortcutsOptions): void`{lang="ts-type"}
+`defineShortcuts(config: ShortcutsConfig, options?: ShortcutsOptions): void`
 
 Define keyboard shortcuts for your application.
 
@@ -75,7 +75,7 @@ Shortcuts are defined using the following format:
 
 Each shortcut can be defined as a function or an object with the following properties:
 
-`interface ShortcutConfig { handler: () => void; usingInput?: boolean | string }`{lang="ts-type"}
+`interface ShortcutConfig { handler: () => void; usingInput?: boolean | string }`
 
 #### Parameters
 

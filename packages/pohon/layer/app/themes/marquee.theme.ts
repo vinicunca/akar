@@ -32,29 +32,34 @@ export const marqueeTheme = {
       },
     },
   },
-  compoundVariants: [{
-    orientation: 'horizontal',
-    class: {
-      root: 'flex-row',
-      content: 'flex-row animate-marquee rtl:animate-marquee-rtl backface-hidden',
+  compoundVariants: [
+    {
+      orientation: 'horizontal',
+      class: {
+        root: 'flex-row',
+        content: 'flex-row animate-marquee rtl:animate-marquee-rtl backface-hidden',
+      },
     },
-  }, {
-    orientation: 'horizontal',
-    overlay: true,
-    class: {
-      root: 'backface-hidden after:(h-full w-1/3 content-empty inset-y-0 right-0 bg-gradient-to-l) before:(h-full w-1/3 content-empty inset-y-0 left-0 bg-gradient-to-r)',
+    {
+      orientation: 'horizontal',
+      overlay: true,
+      class: {
+        root: 'backface-hidden after:(h-full w-1/3 content-empty inset-y-0 right-0 bg-gradient-to-l) before:(h-full w-1/3 content-empty inset-y-0 left-0 bg-gradient-to-r)',
+      },
     },
-  }, {
-    orientation: 'vertical',
-    class: {
-      root: 'flex-col',
-      content: 'flex-col animate-marquee rtl:animate-marquee-rtl h-[fit-content] backface-hidden',
+    {
+      orientation: 'vertical',
+      class: {
+        root: 'flex-col',
+        content: 'flex-col animate-marquee-vertical rtl:animate-marquee-vertical-rtl h-[fit-content] backface-hidden',
+      },
     },
-  }, {
-    orientation: 'vertical',
-    overlay: true,
-    class: {
-      root: 'backface-hidden after:(h-1/3 w-full content-empty inset-x-0 bottom-0 bg-gradient-to-t) before:(h-1/3 w-full content-empty inset-x-0 top-0 bg-gradient-to-b)',
+    {
+      orientation: 'vertical',
+      overlay: true,
+      class: {
+        root: 'backface-hidden after:(h-1/3 w-full content-empty inset-x-0 bottom-0 bg-gradient-to-t) before:(h-1/3 w-full content-empty inset-x-0 top-0 bg-gradient-to-b)',
+      },
     },
-  }],
+  ],
 } satisfies PThemeMarquee;

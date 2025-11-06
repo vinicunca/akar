@@ -82,13 +82,13 @@ You can also use the `@update:model-value` event to listen to the selected item(
 
 The CommandPalette component filters groups and ranks matching commands by relevance as users type. It provides dynamic, instant search results for efficient command discovery. Use the `groups` prop as an array of objects with the following properties:
 
-- `id: string`{lang="ts-type"}
-- `label?: string`{lang="ts-type"}
-- `slot?: string`{lang="ts-type"}
-- `items?: PCommandPaletteItem[]`{lang="ts-type"}
-- [`ignoreFilter?: boolean`{lang="ts-type"}](#with-ignore-filter)
-- [`postFilter?: (searchTerm: string, items: T[]) => T[]`{lang="ts-type"}](#with-post-filtered-items)
-- `highlightedIcon?: string`{lang="ts-type"}
+- `id: string`
+- `label?: string`
+- `slot?: string`
+- `items?: PCommandPaletteItem[]`
+- [`ignoreFilter?: boolean`](#with-ignore-filter)
+- [`postFilter?: (searchTerm: string, items: T[]) => T[]`](#with-post-filtered-items)
+- `highlightedIcon?: string`
 
 ::caution
 You must provide an `id` for each group otherwise the group will be ignored.
@@ -96,22 +96,22 @@ You must provide an `id` for each group otherwise the group will be ignored.
 
 Each group contains an `items` array of objects that define the commands. Each item can have the following properties:
 
-- `prefix?: string`{lang="ts-type"}
-- `label?: string`{lang="ts-type"}
-- `suffix?: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `avatar?: AvatarProps`{lang="ts-type"}
-- `chip?: ChipProps`{lang="ts-type"}
-- `kbds?: string[] | KbdProps[]`{lang="ts-type"}
-- `active?: boolean`{lang="ts-type"}
-- `loading?: boolean`{lang="ts-type"}
-- `disabled?: boolean`{lang="ts-type"}
-- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `placeholder?: string`{lang="ts-type"}
-- `children?: PCommandPaletteItem[]`{lang="ts-type"}
-- `onSelect?: (e: Event) => void`{lang="ts-type"}
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`{lang="ts-type"}
+- `prefix?: string`
+- `label?: string`
+- `suffix?: string`
+- `icon?: string`
+- `avatar?: AvatarProps`
+- `chip?: ChipProps`
+- `kbds?: string[] | KbdProps[]`
+- `active?: boolean`
+- `loading?: boolean`
+- `disabled?: boolean`
+- [`slot?: string`](#with-custom-slot)
+- `placeholder?: string`
+- `children?: PCommandPaletteItem[]`
+- `onSelect?: (e: Event) => void`
+- `class?: any`
+- `pohon?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`
 
 You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
@@ -876,7 +876,7 @@ You can use the `fuse` prop to override the options of [useFuse](https://vueuse.
 The `fuseOptions` are the options of [Fuse.js](https://www.fusejs.io/api/options.html), the `resultLimit` is the maximum number of results to return and the `matchAllWhenSearchEmpty` is a boolean to match all items when the search term is empty.
 ::
 
-You can for example set `{ fuseOptions: { includeMatches: true } }`{lang="ts-type"} to highlight the search term in the items.
+You can for example set `{ fuseOptions: { includeMatches: true } }` to highlight the search term in the items.
 
 ::docs-component-example
 ---
@@ -888,7 +888,7 @@ props:
 ---
 ::
 
-### With virtualization :badge{label="Soon"}
+### With virtualization
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
@@ -982,15 +982,15 @@ Use the `slot` property to customize a specific item or group.
 
 You will have access to the following slots:
 
-- `#{{ item.slot }}`{lang="ts-type"}
-- `#{{ item.slot }}-leading`{lang="ts-type"}
-- `#{{ item.slot }}-label`{lang="ts-type"}
-- `#{{ item.slot }}-trailing`{lang="ts-type"}
+- `#{{ item.slot }}`
+- `#{{ item.slot }}-leading`
+- `#{{ item.slot }}-label`
+- `#{{ item.slot }}-trailing`
 
-- `#{{ group.slot }}`{lang="ts-type"}
-- `#{{ group.slot }}-leading`{lang="ts-type"}
-- `#{{ group.slot }}-label`{lang="ts-type"}
-- `#{{ group.slot }}-trailing`{lang="ts-type"}
+- `#{{ group.slot }}`
+- `#{{ group.slot }}-leading`
+- `#{{ group.slot }}-label`
+- `#{{ group.slot }}-trailing`
 
 ::docs-component-example
 ---

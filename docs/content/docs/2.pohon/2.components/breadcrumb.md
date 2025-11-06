@@ -36,12 +36,12 @@ props:
 
 Use the `items` prop as an array of objects with the following properties:
 
-- `label?: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `avatar?: AvatarProps`{lang="ts-type"}
-- [`slot?: string`{lang="ts-type"}](#with-custom-slot)
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLabel?: ClassNameValue, separator?: ClassNameValue, separatorIcon?: ClassNameValue }`{lang="ts-type"}
+- `label?: string`
+- `icon?: string`
+- `avatar?: AvatarProps`
+- [`slot?: string`](#with-custom-slot)
+- `class?: any`
+- `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLabel?: ClassNameValue, separator?: ClassNameValue, separatorIcon?: ClassNameValue }`
 
 You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
@@ -124,10 +124,10 @@ Use the `slot` property to customize a specific item.
 
 You will have access to the following slots:
 
-- `#{{ item.slot }}`{lang="ts-type"}
-- `#{{ item.slot }}-leading`{lang="ts-type"}
-- `#{{ item.slot }}-label`{lang="ts-type"}
-- `#{{ item.slot }}-trailing`{lang="ts-type"}
+- `#{{ item.slot }}`
+- `#{{ item.slot }}-leading`
+- `#{{ item.slot }}-label`
+- `#{{ item.slot }}-trailing`
 
 :docs-component-example{name="breadcrumb-custom-slot-example"}
 

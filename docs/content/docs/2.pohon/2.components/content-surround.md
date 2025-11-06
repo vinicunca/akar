@@ -15,7 +15,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 ## Usage
 
-Use the `surround` prop with the `surround`{lang="ts-type"} value you get when fetching a page surround.
+Use the `surround` prop with the `surround` value you get when fetching a page surround.
 
 ::docs-component-example
 ---

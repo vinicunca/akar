@@ -39,8 +39,8 @@ class: 'p-8'
 
 You can also pass an array of objects with the following properties:
 
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue }`{lang="ts-type"}
+- `class?: any`
+- `pohon?: { item?: ClassNameValue }`
 
 You can control how many items are visible by using the [`basis`](https://tailwindcss.com/docs/flex-basis) / [`width`](https://tailwindcss.com/docs/width) utility classes on the `item`:
 
@@ -289,8 +289,8 @@ This will give you access to the following:
 
 | Name | Type |
 | ---- | ---- |
-| `emblaRef`{lang="ts-type"} | `Ref<HTMLElement \| null>`{lang="ts-type"} |
-| `emblaApi`{lang="ts-type"} | [`Ref<EmblaCarouselType \| null>`{lang="ts-type"}](https://www.embla-carousel.com/api/methods/#typescript) |
+| `emblaRef` | `Ref<HTMLElement \| null>` |
+| `emblaApi` | [`Ref<EmblaCarouselType \| null>`](https://www.embla-carousel.com/api/methods/#typescript) |
 
 ## Theme
 

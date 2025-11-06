@@ -67,6 +67,7 @@ export * from '../components/toast.vue';
 export * from '../components/toaster.vue';
 export * from '../components/tooltip.vue';
 export * from '../components/tree.vue';
+export * from '../components/user.vue';
 export * from './form';
 export * from './locale';
 export * from './theme';

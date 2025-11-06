@@ -28,8 +28,8 @@ The Form will construct itself based on the `fields` prop and the state will be 
 
 Use the `fields` prop as an array of objects with the following properties:
 
-- `name?: string`{lang="ts-type"}
-- `type?: 'text' | 'password' | 'email' | 'number' | 'checkbox' | 'select' | 'otp'`{lang="ts-type"}
+- `name?: string`
+- `type?: 'text' | 'password' | 'email' | 'number' | 'checkbox' | 'select' | 'otp'`
 
 Each field must include a `type` property, which determines the input component and any additional props applied: `checkbox` fields use [Checkbox](/docs/pohon/components/checkbox#props) props, `select` fields use [SelectMenu](/docs/pohon/components/select-menu#props) props, `otp` fields use [PinInput](/docs/pohon/components/pin-input#props) props, and all other types use [Input](/docs/pohon/components/input#props) props.
 
@@ -393,8 +393,8 @@ This gives you access to the following (exposed) properties:
 
 | Name | Type |
 | ---- | ---- |
-| `formRef`{lang="ts-type"} | `Ref<HTMLFormElement \| null>`{lang="ts-type"} |
-| `state`{lang="ts-type"} | `Reactive<FormStateType>`{lang="ts-type"} |
+| `formRef` | `Ref<HTMLFormElement \| null>` |
+| `state` | `Reactive<FormStateType>` |
 
 ## Theme
 

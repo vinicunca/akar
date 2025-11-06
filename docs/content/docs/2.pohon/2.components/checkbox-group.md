@@ -59,12 +59,12 @@ props:
 
 You can also pass an array of objects with the following properties:
 
-- `label?: string`{lang="ts-type"}
-- `description?: string`{lang="ts-type"}
-- [`value?: string`{lang="ts-type"}](#value-key)
-- `disabled?: boolean`{lang="ts-type"}
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, icon?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, description?: ClassNameValue }`{lang="ts-type"}
+- `label?: string`
+- `description?: string`
+- [`value?: string`](#value-key)
+- `disabled?: boolean`
+- `class?: any`
+- `pohon?: { item?: ClassNameValue, container?: ClassNameValue, base?: ClassNameValue, 'indicator'?: ClassNameValue, icon?: ClassNameValue, wrapper?: ClassNameValue, label?: ClassNameValue, description?: ClassNameValue }`
 
 ::docs-pohon-preview
 ---

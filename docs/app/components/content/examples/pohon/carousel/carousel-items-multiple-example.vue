@@ -13,7 +13,7 @@ const items = [
   <PCarousel
     v-slot="{ item }"
     :items="items"
-    :pohon="{ item: 'basis-1/3' }"
+    :pohon="{ item: 'akar:basis-1/3' }"
   >
     <img
       :src="item"

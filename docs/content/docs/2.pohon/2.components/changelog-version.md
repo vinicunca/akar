@@ -204,12 +204,12 @@ props:
 
 Use the `authors` prop to display a list of [User](/docs/pohon/components/user) in the ChangelogVersion as an array of objects with the following properties:
 
-- `name?: string`{lang="ts-type"}
-- `description?: string`{lang="ts-type"}
-- `avatar?: Omit<AvatarProps, 'size'>`{lang="ts-type"}
-- `chip?: boolean | Omit<ChipProps, 'size' | 'inset'>`{lang="ts-type"}
-- `size?: UserProps['size']`{lang="ts-type"}
-- `orientation?: UserProps['orientation']`{lang="ts-type"}
+- `name?: string`
+- `description?: string`
+- `avatar?: Omit<AvatarProps, 'size'>`
+- `chip?: boolean | Omit<ChipProps, 'size' | 'inset'>`
+- `size?: UserProps['size']`
+- `orientation?: UserProps['orientation']`
 
 You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 

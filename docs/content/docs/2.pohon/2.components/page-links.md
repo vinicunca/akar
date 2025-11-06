@@ -38,10 +38,10 @@ props:
 
 Use the `links` prop as an array of objects with the following properties:
 
-- `label: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`{lang="ts-type"}
+- `label: string`
+- `icon?: string`
+- `class?: any`
+- `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`
 
 You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 

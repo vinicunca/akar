@@ -247,7 +247,7 @@ name: 'table-row-actions-example'
 highlights:
   - 110
   - 134
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -267,7 +267,7 @@ name: 'table-row-expandable-example'
 highlights:
   - 55
   - 71
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -299,7 +299,7 @@ name: 'table-grouped-rows-example'
 highlights:
   - 159
   - 169
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -315,7 +315,7 @@ name: 'table-row-selection-example'
 highlights:
   - 55
   - 72
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -339,7 +339,7 @@ name: 'table-row-select-event-example'
 highlights:
   - 123
   - 130
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -363,7 +363,7 @@ name: 'table-row-context-menu-event-example'
 highlights:
   - 130
   - 170
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -383,7 +383,7 @@ name: 'table-row-hover-event-example'
 highlights:
   - 126
   - 149
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -403,7 +403,7 @@ name: 'table-column-footer-example'
 highlights:
   - 94
   - 108
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -419,7 +419,7 @@ name: 'table-column-sorting-example'
 highlights:
   - 90
   - 105
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -437,7 +437,7 @@ name: 'table-column-sorting-reusable-example'
 highlights:
   - 110
   - 161
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -481,7 +481,7 @@ name: 'table-column-visibility-example'
 highlights:
   - 135
   - 142
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -501,7 +501,7 @@ name: 'table-column-filters-example'
 highlights:
   - 135
   - 142
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -518,7 +518,7 @@ You can use an [Input](/docs/pohon/components/input) component to filter the row
 prettier: true
 collapse: true
 name: 'table-global-filter-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -537,7 +537,7 @@ There are different pagination approaches as explained in [Pagination Guide](htt
 prettier: true
 collapse: true
 name: 'table-pagination-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -554,7 +554,7 @@ You can fetch data from an API and use them in the Table.
 prettier: true
 collapse: true
 name: 'table-fetch-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -571,7 +571,7 @@ highlights:
   - 83
 overflowHidden: true
 name: 'table-infinite-scroll-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -591,11 +591,11 @@ highlights:
   - 76
   - 78
 name: 'table-drag-and-drop-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
-### With virtualization :badge{label="Soon"}
+### With virtualization
 
 Use the `virtualize` prop to enable virtualization for large datasets as a boolean or an object with options like `{ estimateSize: 65, overscan: 12 }`. You can also pass other [TanStack Virtual options](https://tanstack.com/virtual/latest/docs/api/virtualizer#optional-options) to customize the virtualization behavior.
 
@@ -608,7 +608,7 @@ When virtualization is enabled, the divider between rows and sticky properties a
 prettier: true
 collapse: true
 name: 'table-virtualize-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -628,7 +628,7 @@ collapse: true
 highlights:
   - 175
 name: 'table-tree-data-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -645,7 +645,7 @@ Use the `#<column>-cell` slot to customize the cell of a column. You will have a
 prettier: true
 collapse: true
 name: 'table-slots-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 

@@ -111,10 +111,10 @@ props:
 
 Use the `features` prop to display a list of [PageFeature](/docs/pohon/components/page-feature) under the description as an array of objects with the following properties:
 
-- `title?: string`{lang="ts-type"}
-- `description?: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `orientation?: 'horizontal' | 'vertical'`{lang="ts-type"}
+- `title?: string`
+- `description?: string`
+- `icon?: string`
+- `orientation?: 'horizontal' | 'vertical'`
 
 You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 

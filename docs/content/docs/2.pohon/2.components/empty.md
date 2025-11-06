@@ -6,7 +6,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Empty.vue
-navigation.badge: Soon
 ---
 
 ## Usage

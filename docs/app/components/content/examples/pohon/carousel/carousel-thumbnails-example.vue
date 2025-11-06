@@ -54,8 +54,8 @@ function select(index: number) {
       <div
         v-for="(item, index) in items"
         :key="index"
-        class="opacity-25 size-11 transition-opacity hover:opacity-100"
-        :class="{ 'opacity-100': activeIndex === index }"
+        class="size-11 transition-opacity hover:opacity-100"
+        :class="[activeIndex === index ? 'opacity-100' : 'opacity-25']"
         @click="select(index)"
       >
         <img

@@ -11,7 +11,7 @@ export const dropdownMenuTheme = {
     group: 'p-1 isolate',
     label: 'w-full flex items-center font-semibold color-text-highlighted',
     separator: '-mx-1 my-1 h-px bg-border',
-    item: 'group relative w-full flex items-start select-none outline-none before:(content-empty absolute -z-1 inset-px rounded-md) data-[disabled]:(cursor-not-allowed opacity-75)',
+    item: 'group relative w-full flex items-start select-none outline-none before:(content-empty absolute -z-1 inset-px rounded-md) data-[disabled]:(cursor-not-allowed opacity-75) cursor-pointer',
     itemLeadingIcon: 'shrink-0',
     itemLeadingAvatar: 'shrink-0',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',

@@ -781,7 +781,7 @@ name: 'input-menu-filter-fields-example'
 ---
 ::
 
-### With virtualization :badge{label="Soon"}
+### With virtualization
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 

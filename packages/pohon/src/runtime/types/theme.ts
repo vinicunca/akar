@@ -75,6 +75,7 @@ export type PThemeToast = UvConfig<typeof pohon>['toast'];
 export type PThemeToaster = UvConfig<typeof pohon>['toaster'];
 export type PThemeTooltip = UvConfig<typeof pohon>['tooltip'];
 export type PThemeTree = UvConfig<typeof pohon>['tree'];
+export type PThemeUser = UvConfig<typeof pohon>['user'];
 export type PThemeContentNavigation = UvConfig<typeof pohon>['contentNavigation'];
 export type PThemeContentSearch = UvConfig<typeof pohon>['contentSearch'];
 export type PThemeContentSearchButton = UvConfig<typeof pohon>['contentSearchButton'];

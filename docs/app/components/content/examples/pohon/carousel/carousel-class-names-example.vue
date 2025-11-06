@@ -16,7 +16,7 @@ const items = [
     arrows
     :items="items"
     :pohon="{
-      item: 'basis-[70%] transition-opacity [&:not(.is-snapped)]:opacity-10',
+      item: 'akar:basis-[70%] transition-opacity [&:not(.is-snapped)]:opacity-10',
     }"
     class="mx-auto max-w-sm"
   >

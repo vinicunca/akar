@@ -30,15 +30,15 @@ Use it in the `top` slot of the [Footer](/docs/pohon/components/footer) componen
 
 Use the `columns` prop as an array of objects with the following properties:
 
-- `label: string`{lang="ts-type"}
-- `children?: FooterColumnLink[]`{lang="ts-type"}
+- `label: string`
+- `children?: FooterColumnLink[]`
 
 Each column contains a `children` array of objects that define the links. Each link can have the following properties:
 
-- `label?: string`{lang="ts-type"}
-- `icon?: string`{lang="ts-type"}
-- `class?: any`{lang="ts-type"}
-- `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`{lang="ts-type"}
+- `label?: string`
+- `icon?: string`
+- `class?: any`
+- `pohon?: { item?: ClassNameValue, link?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkLeadingIcon?: ClassNameValue }`
 
 You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 

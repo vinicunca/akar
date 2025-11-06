@@ -185,19 +185,6 @@ class: 'px-0'
 ---
 ::
 
-### Screenshots
-
-Use the `Marquee` component to create an infinite scrolling animation for your screenshots.
-
-::docs-component-example{label="With Screenshots"}
----
-prettier: true
-name: 'marquee-screenshots'
-collapse: true
-overflowHidden: true
-class: '!p-0'
----
-::
 
 ## API
 

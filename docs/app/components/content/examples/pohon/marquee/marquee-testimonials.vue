@@ -90,34 +90,40 @@ const testimonials = [{
     <PMarquee
       pause-on-hover
       :overlay="false"
-      :pohon="{ root: '[--gap:--spacing(4)]', content: 'w-auto py-1' }"
+      :pohon="{ root: '[--gap:calc(var(--spacing)*4)]', content: 'w-auto py-1' }"
     >
-      <UPageCard
+      <div
         v-for="(testimonial, index) in testimonials"
         :key="index"
-        variant="subtle"
-        :description="testimonial.quote"
-        :pohon="{
-          description: 'before:content-[open-quote] after:content-[close-quote] line-clamp-3',
-        }"
-        class="shrink-0 w-64"
+        class="rounded-lg bg-background-elevated/50 flex shrink-0 w-64 ring ring-ring relative"
       >
-        <template #footer>
-          <UUser
-            v-bind="testimonial.user"
-            size="xl"
-            :pohon="{ description: 'line-clamp-1' }"
-          />
-        </template>
-      </UPageCard>
+        <div class="p-4 flex flex-1 flex-col gap-x-8 gap-y-4 relative sm:p-6 lg:grid">
+          <div class="flex flex-1 flex-col items-start">
+            <div class="flex-1">
+              <div
+                class="text-[15px] color-text-toned text-pretty line-clamp-3 after:content-[close-quote] before:content-[open-quote]"
+              >
+                {{ testimonial.quote }}
+              </div>
+            </div>
+            <div class="mt-auto pt-4">
+              <PUser
+                v-bind="testimonial.user"
+                size="xl"
+                :pohon="{ description: 'line-clamp-1' }"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </PMarquee>
     <PMarquee
       pause-on-hover
       reverse
       :overlay="false"
-      :pohon="{ root: '[--gap:--spacing(4)]', content: 'w-auto py-1' }"
+      :pohon="{ root: '[--gap:calc(var(--spacing)*4)]', content: 'w-auto py-1' }"
     >
-      <UPageCard
+      <div
         v-for="(testimonial, index) in testimonials"
         :key="index"
         variant="subtle"
@@ -125,16 +131,27 @@ const testimonials = [{
         :pohon="{
           description: 'before:content-[open-quote] after:content-[close-quote] line-clamp-3',
         }"
-        class="shrink-0 w-64"
+        class="rounded-lg bg-background-elevated/50 flex shrink-0 w-64 ring ring-ring relative"
       >
-        <template #footer>
-          <UUser
-            v-bind="testimonial.user"
-            size="xl"
-            :pohon="{ description: 'line-clamp-1' }"
-          />
-        </template>
-      </UPageCard>
+        <div class="p-4 flex flex-1 flex-col gap-x-8 gap-y-4 relative sm:p-6 lg:grid">
+          <div class="flex flex-1 flex-col items-start">
+            <div class="flex-1">
+              <div
+                class="text-[15px] color-text-toned text-pretty line-clamp-3 after:content-[close-quote] before:content-[open-quote]"
+              >
+                {{ testimonial.quote }}
+              </div>
+            </div>
+            <div class="mt-auto pt-4">
+              <PUser
+                v-bind="testimonial.user"
+                size="xl"
+                :pohon="{ description: 'line-clamp-1' }"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </PMarquee>
   </div>
 </template>

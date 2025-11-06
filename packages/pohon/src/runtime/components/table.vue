@@ -197,9 +197,9 @@ export interface PTableProps<T extends PTableData = PTableData> extends PTableOp
    * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>;
-  onSelect?: (options: { event?: Event; row: PTableRow<T> }) => void;
-  onHover?: (options: { event: Event; row: PTableRow<T> | null }) => void;
-  onContextmenu?: ((options: { event: Event; row: PTableRow<T> }) => void) | Array<((options: { event: Event; row: PTableRow<T> }) => void)>;
+  onSelect?: (event: Event, row: PTableRow<T>) => void;
+  onHover?: (event: Event, row: PTableRow<T> | null) => void;
+  onContextmenu?: ((event: Event, row: PTableRow<T>) => void) | Array<((event: Event, row: PTableRow<T>) => void)>;
   class?: any;
   pohon?: Table['slots'];
 }
@@ -478,7 +478,7 @@ function onRowSelect(event: Event, row: PTableRow<T>) {
   event.preventDefault();
   event.stopPropagation();
 
-  props.onSelect({ event, row });
+  props.onSelect(event, row);
 }
 
 function onRowHover(event: Event, row: PTableRow<T> | null) {
@@ -486,7 +486,7 @@ function onRowHover(event: Event, row: PTableRow<T> | null) {
     return;
   }
 
-  props.onHover({ event, row });
+  props.onHover(event, row);
 }
 
 function onRowContextmenu(event: Event, row: PTableRow<T>) {
@@ -496,10 +496,10 @@ function onRowContextmenu(event: Event, row: PTableRow<T>) {
 
   if (Array.isArray(props.onContextmenu)) {
     props.onContextmenu.forEach((fn) => {
-      fn({ event, row });
+      fn(event, row);
     });
   } else {
-    props.onContextmenu({ event, row });
+    props.onContextmenu(event, row);
   }
 }
 

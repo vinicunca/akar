@@ -15,7 +15,7 @@ This component is only available when the `@nuxt/content` module is installed.
 
 ## Usage
 
-Use the `navigation` prop with the `navigation`{lang="ts-type"} value you get when fetching the navigation of your app.
+Use the `navigation` prop with the `navigation` value you get when fetching the navigation of your app.
 
 ::docs-component-example
 ---
