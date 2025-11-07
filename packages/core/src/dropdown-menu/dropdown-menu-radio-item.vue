@@ -2,8 +2,8 @@
 import type {
   AMenuRadioItemEmits,
   AMenuRadioItemProps,
-} from '~~/menu';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+} from '../menu';
+import { useForwardExpose, useForwardPropsEmits } from '../shared';
 
 export type ADropdownMenuRadioItemEmits = AMenuRadioItemEmits;
 
@@ -11,7 +11,7 @@ export interface ADropdownMenuRadioItemProps extends AMenuRadioItemProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuRadioItem } from '~~/menu';
+import { AMenuRadioItem } from '../menu';
 
 const props = defineProps<ADropdownMenuRadioItemProps>();
 const emits = defineEmits<ADropdownMenuRadioItemEmits>();

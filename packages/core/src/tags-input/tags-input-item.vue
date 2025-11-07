@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { AcceptableInputValue } from './tags-input-root.vue';
 import { computed, toRefs } from 'vue';
-import { createContext, useForwardExpose } from '~~/shared';
+import { createContext, useForwardExpose } from '../shared';
 import { injectATagsInputRootContext } from './tags-input-root.vue';
 
 export interface ATagsInputItemProps extends APrimitiveProps {
@@ -26,8 +26,8 @@ export const [injectATagsInputItemContext, provideTagsInputItemContext]
 </script>
 
 <script setup lang="ts">
-import { useCollection } from '~~/collection';
-import { APrimitive } from '~~/primitive';
+import { useCollection } from '../collection';
+import { APrimitive } from '../primitive';
 
 const props = defineProps<ATagsInputItemProps>();
 const { value } = toRefs(props);

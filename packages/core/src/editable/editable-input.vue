@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { APrimitive, usePrimitiveElement } from '../primitive';
 
 export interface AEditableInputProps extends APrimitiveProps {
 }

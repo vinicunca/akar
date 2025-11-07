@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { APopperArrowProps } from '~~/popper';
+import type { APopperArrowProps } from '../popper';
 
 export interface AComboboxArrowProps extends APopperArrowProps {}
 </script>
 
 <script setup lang="ts">
-import { APopperArrow } from '~~/popper';
-import { useForwardExpose } from '~~/shared';
+import { APopperArrow } from '../popper';
+import { useForwardExpose } from '../shared';
 import { injectComboboxContentContext } from './combobox-content-impl.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 

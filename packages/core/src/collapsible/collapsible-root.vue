@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { toRefs } from 'vue';
-import { createContext, useForwardExpose } from '~~/shared';
+import { createContext, useForwardExpose } from '../shared';
 
 export interface ACollapsibleRootProps extends APrimitiveProps {
   /** The open state of the collapsible when it is initially rendered. <br> Use when you do not need to control its open state. */
@@ -36,7 +36,7 @@ export const [
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(
   defineProps<ACollapsibleRootProps>(),

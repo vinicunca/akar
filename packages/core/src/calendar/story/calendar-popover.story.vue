@@ -4,12 +4,12 @@ import type { Ref } from 'vue';
 import { Icon } from '@iconify/vue';
 import { CalendarDate, getLocalTimeZone, today } from '@internationalized/date';
 import { ref } from 'vue';
-import { createDecade, createYear, toDate } from '~~/date';
-
-import { useDateFormatter } from '~~/shared';
-
 import { ACalendarCell, ACalendarCellTrigger, ACalendarGrid, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot } from '..';
-import CalendarPopover from './_CalendarPopover.vue';
+
+import { createDecade, createYear, toDate } from '../../date';
+
+import { useDateFormatter } from '../../shared';
+import CalendarPopover from './_calendar-popover.vue';
 
 const value = ref(new CalendarDate(2024, 3, 20)) as Ref<DateValue>;
 

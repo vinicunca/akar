@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import { createContext, useForwardExpose } from '~~/shared';
+import { createContext, useForwardExpose } from '../shared';
 
 export interface ATooltipRootProps {
   /**
@@ -73,7 +73,7 @@ export const [injectATooltipRootContext, provideTooltipRootContext]
 <script setup lang="ts">
 import { useTimeoutFn, useVModel } from '@vueuse/core';
 import { computed, ref, watch } from 'vue';
-import { APopperRoot } from '~~/popper';
+import { APopperRoot } from '../popper';
 import { injectATooltipProviderContext } from './tooltip-provider.vue';
 import { TOOLTIP_OPEN } from './utils';
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import { computed, ref } from 'vue';
-import { useFilter } from '~~/shared';
-import { countryList } from '~~/shared/constant';
+import { useFilter } from '../../shared';
+import { countryList } from '../shared/constant';
 import { AComboboxAnchor, AComboboxContent, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxRoot, AComboboxTrigger, AComboboxViewport, AComboboxVirtualizer } from '..';
 
 const { startsWith } = useFilter({ sensitivity: 'base' });

@@ -1,10 +1,10 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { computed, toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { createContext, useForwardExpose, useId } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { createContext, useForwardExpose, useId } from '../shared';
 import { injectAStepperRootContext } from './stepper-root.vue';
 
 export const [injectAStepperItemContext, provideStepperItemContext] = createContext<StepperItemContext>('AStepperItem');

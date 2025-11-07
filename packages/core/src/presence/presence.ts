@@ -10,7 +10,7 @@ import {
   ref,
   toRefs,
 } from 'vue';
-import { renderSlotFragments } from '~~/shared';
+import { renderSlotFragments } from '../shared';
 import { usePresence } from './use-presence';
 
 export interface APresenceProps {

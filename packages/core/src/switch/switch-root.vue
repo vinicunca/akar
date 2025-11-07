@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { FormFieldProps } from '~~/shared/types';
-import { createContext, useFormControl, useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import type { FormFieldProps } from '../shared/types';
+import { createContext, useFormControl, useForwardExpose } from '../shared';
 
 export interface ASwitchRootProps extends APrimitiveProps, FormFieldProps {
   /** The state of the switch when it is initially rendered. Use when you do not need to control its state. */
@@ -34,8 +34,8 @@ export const [injectASwitchRootContext, provideSwitchRootContext]
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { computed, toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { APrimitive } from '../primitive';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 
 const props = withDefaults(defineProps<ASwitchRootProps>(), {
   as: 'button',

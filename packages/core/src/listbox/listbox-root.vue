@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '~~/shared/types';
+import type { APrimitiveProps } from '../primitive';
+import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '../shared/types';
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { usePrimitiveElement } from '~~/primitive';
-import { APrimitive } from '~~/primitive';
-import { getFocusIntent } from '~~/roving-focus/utils';
-import { createContext, findValuesBetween, useDirection, useFormControl, useTypeahead } from '~~/shared';
+import { usePrimitiveElement } from '../primitive';
+import { APrimitive } from '../primitive';
+import { getFocusIntent } from '../roving-focus/utils';
+import { createContext, findValuesBetween, useDirection, useFormControl, useTypeahead } from '../shared';
 
 type ListboxRootContext<T> = {
   modelValue: Ref<T | Array<T> | undefined>;
@@ -83,8 +83,8 @@ import type { EventHook } from '@vueuse/core';
 import type { Ref } from 'vue';
 import { createEventHook, useVModel } from '@vueuse/core';
 import { nextTick, ref, toRefs, watch } from 'vue';
-import { useCollection } from '~~/collection';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { useCollection } from '../collection';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 import { compare } from './utils';
 
 const props = withDefaults(defineProps<AListboxRootProps>(), {

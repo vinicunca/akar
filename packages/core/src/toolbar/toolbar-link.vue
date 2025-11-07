@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AToolbarLinkProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
-import { ARovingFocusItem } from '~~/roving-focus';
-import { useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { ARovingFocusItem } from '../roving-focus';
+import { useForwardExpose } from '../shared';
 
 const props = withDefaults(
   defineProps<AToolbarLinkProps>(),

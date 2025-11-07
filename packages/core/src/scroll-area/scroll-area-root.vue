@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { Direction, ScrollType } from './types';
-import { createContext, useDirection, useForwardExpose } from '~~/shared';
+import { createContext, useDirection, useForwardExpose } from '../shared';
 
 export interface ScrollAreaRootContext {
   type: Ref<ScrollType>;
@@ -47,7 +47,7 @@ export interface AScrollAreaRootProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { ref, toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(defineProps<AScrollAreaRootProps>(), {
   type: 'hover',

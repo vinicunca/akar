@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface ASwitchThumbProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectASwitchRootContext } from './switch-root.vue';
 
 withDefaults(defineProps<ASwitchThumbProps>(), { as: 'span' });

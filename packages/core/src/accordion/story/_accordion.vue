@@ -4,7 +4,6 @@ import type {
   AAccordionRootProps,
 } from '..';
 import { ref } from 'vue';
-import { useEmitAsProps } from '~~/shared';
 import {
   AAccordionContent,
   AAccordionHeader,
@@ -12,6 +11,7 @@ import {
   AAccordionRoot,
   AAccordionTrigger,
 } from '..';
+import { useEmitAsProps } from '../../shared';
 
 withDefaults(
   defineProps<{ type?: AAccordionRootProps['type'] }>(),

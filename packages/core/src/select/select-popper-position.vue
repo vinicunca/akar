@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { APopperContentProps } from '~~/popper';
+import type { APopperContentProps } from '../popper';
 
 export interface SelectPopperPositionProps extends APopperContentProps {}
 </script>
 
 <script setup lang="ts">
-import { APopperContent } from '~~/popper';
+import { APopperContent } from '../popper';
 import { useForwardProps } from '..';
 import { CONTENT_MARGIN } from './utils';
 

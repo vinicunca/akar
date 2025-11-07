@@ -16,8 +16,8 @@ export interface AMenuContentProps extends MenuRootContentTypeProps {
 </script>
 
 <script setup lang="ts">
-import { APresence } from '~~/presence';
-import { useForwardPropsEmits } from '~~/shared';
+import { APresence } from '../presence';
+import { useForwardPropsEmits } from '../shared';
 import MenuRootContentModal from './menu-root-content-modal.vue';
 import MenuRootContentNonModal from './menu-root-content-non-modal.vue';
 import { injectAMenuContext, injectAMenuRootContext } from './menu-root.vue';

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ADateRangeFieldRootEmits, ADateRangeFieldRootProps } from '..';
-import { useForwardPropsEmits } from '~~/shared';
+import { useForwardPropsEmits } from '../../shared';
 import { ADateRangeFieldInput, ADateRangeFieldRoot } from '..';
 
 const props = defineProps<ADateRangeFieldRootProps>();

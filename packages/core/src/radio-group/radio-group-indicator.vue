@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface ARadioGroupIndicatorProps extends APrimitiveProps {
   /**
@@ -12,8 +12,8 @@ export interface ARadioGroupIndicatorProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APresence } from '~~/presence';
-import { APrimitive } from '~~/primitive';
+import { APresence } from '../presence';
+import { APrimitive } from '../primitive';
 import { injectARadioGroupItemContext } from './radio-group-item.vue';
 
 withDefaults(defineProps<ARadioGroupIndicatorProps>(), {

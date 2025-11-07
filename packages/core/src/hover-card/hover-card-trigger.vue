@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { APopperAnchorProps } from '~~/popper';
+import type { APopperAnchorProps } from '../popper';
 
 export interface AHoverCardTriggerProps extends APopperAnchorProps {}
 </script>
 
 <script setup lang="ts">
-import { APopperAnchor } from '~~/popper';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { APopperAnchor } from '../popper';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectAHoverCardRootContext } from './hover-card-root.vue';
 import { excludeTouch } from './utils';
 

@@ -16,8 +16,8 @@ export interface ADialogContentProps extends Omit<DialogContentImplProps, 'trapF
 </script>
 
 <script setup lang="ts">
-import { APresence } from '~~/presence';
-import { useEmitAsProps, useForwardExpose } from '~~/shared';
+import { APresence } from '../presence';
+import { useEmitAsProps, useForwardExpose } from '../shared';
 import DialogContentModal from './dialog-content-modal.vue';
 import DialogContentNonModal from './dialog-content-non-modal.vue';
 import { injectDialogRootContext } from './dialog-root.vue';

@@ -1,4 +1,4 @@
-import type { StringOrNumber } from '~~/shared/types';
+import type { StringOrNumber } from '../shared/types';
 
 export function makeTriggerId(baseId: string, value: StringOrNumber) {
   return `${baseId}-trigger-${value}`;

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { VNode } from 'vue';
-import type { APopperContentProps } from '~~/popper';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APopperContentProps } from '../popper';
+import type { APrimitiveProps } from '../primitive';
 
 export type TooltipContentImplEmits = {
   /** Event handler called when focus moves to the destructive action after opening. It can be prevented by calling `event.preventDefault` */
@@ -43,10 +43,10 @@ export interface TooltipContentImplProps
 import { isString } from '@vinicunca/perkakas';
 import { useEventListener } from '@vueuse/core';
 import { Comment, computed, onMounted, useSlots } from 'vue';
-import { DismissableLayer } from '~~/dismissable-layer';
-import { APopperContent } from '~~/popper';
-import { useForwardExpose } from '~~/shared';
-import { AVisuallyHidden } from '~~/visually-hidden';
+import { DismissableLayer } from '../dismissable-layer';
+import { APopperContent } from '../popper';
+import { useForwardExpose } from '../shared';
+import { AVisuallyHidden } from '../visually-hidden';
 import { injectATooltipRootContext } from './tooltip-root.vue';
 import { TOOLTIP_OPEN } from './utils';
 

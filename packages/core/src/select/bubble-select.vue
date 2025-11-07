@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { AVisuallyHidden } from '~~/visually-hidden';
+import { AVisuallyHidden } from '../visually-hidden';
 import { injectASelectRootContext } from './select-root.vue';
 
 interface BubbleSelectProps {

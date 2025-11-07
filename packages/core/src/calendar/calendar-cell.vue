@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ACalendarCellProps extends APrimitiveProps {
   /** The date value for the cell */
@@ -9,7 +9,7 @@ export interface ACalendarCellProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
 withDefaults(defineProps<ACalendarCellProps>(), { as: 'td' });

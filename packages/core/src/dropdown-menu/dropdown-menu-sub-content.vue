@@ -2,8 +2,8 @@
 import type {
   AMenuSubContentEmits,
   AMenuSubContentProps,
-} from '~~/menu';
-import { useForwardExpose } from '~~/shared';
+} from '../menu';
+import { useForwardExpose } from '../shared';
 
 export type ADropdownMenuSubContentEmits = AMenuSubContentEmits;
 
@@ -11,7 +11,7 @@ export interface ADropdownMenuSubContentProps extends AMenuSubContentProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuSubContent } from '~~/menu';
+import { AMenuSubContent } from '../menu';
 import { useForwardPropsEmits } from '..';
 
 const props = defineProps<ADropdownMenuSubContentProps>();

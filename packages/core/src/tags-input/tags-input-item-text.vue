@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose, useId } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose, useId } from '../shared';
 import { injectATagsInputItemContext } from './tags-input-item.vue';
 
 export interface ATagsInputItemTextProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(defineProps<ATagsInputItemTextProps>(), {
   as: 'span',

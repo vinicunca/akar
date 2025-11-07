@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useCollection } from '~~/collection';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useCollection } from '../collection';
+import { useForwardExpose } from '../shared';
 
 export type NavigationMenuLinkEmits = {
   /**
@@ -18,7 +18,7 @@ export interface ANavigationMenuLinkProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { EVENT_ROOT_CONTENT_DISMISS, LINK_SELECT } from './utils';
 
 const props = withDefaults(defineProps<ANavigationMenuLinkProps>(), {

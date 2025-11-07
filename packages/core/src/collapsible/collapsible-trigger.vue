@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ACollapsibleTriggerProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectACollapsibleRootContext } from './collapsible-root.vue';
 
 const props = withDefaults(

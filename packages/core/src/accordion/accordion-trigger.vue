@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AAccordionTriggerProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { ACollapsibleTrigger } from '~~/collapsible';
-import { useId } from '~~/shared';
+import { ACollapsibleTrigger } from '../collapsible';
+import { useId } from '../shared';
 import { injectAAccordionItemContext } from './accordion-item.vue';
 import { injectAAccordionRootContext } from './accordion-root.vue';
 

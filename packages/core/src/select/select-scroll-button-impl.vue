@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref, watchEffect } from 'vue';
-import { useCollection } from '~~/collection';
-import { APrimitive } from '~~/primitive';
-import { getActiveElement } from '~~/shared';
+import { useCollection } from '../collection';
+import { APrimitive } from '../primitive';
+import { getActiveElement } from '../shared';
 import { injectSelectContentContext } from './select-content-impl.vue';
 
 export type SelectScrollButtonImplEmits = {

@@ -2,7 +2,7 @@
 import type {
   AToggleGroupRootEmits,
   AToggleGroupRootProps,
-} from '~~/toggle-group';
+} from '../toggle-group';
 
 export type AToolbarToggleGroupEmits = AToggleGroupRootEmits;
 
@@ -10,8 +10,8 @@ export interface AToolbarToggleGroupProps extends AToggleGroupRootProps {}
 </script>
 
 <script setup lang="ts">
-import { useEmitAsProps, useForwardExpose } from '~~/shared';
-import { AToggleGroupRoot } from '~~/toggle-group';
+import { useEmitAsProps, useForwardExpose } from '../shared';
+import { AToggleGroupRoot } from '../toggle-group';
 import { injectAToolbarRootContext } from './toolbar-root.vue';
 
 const props = defineProps<AToolbarToggleGroupProps>();

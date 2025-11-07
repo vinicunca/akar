@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface ACheckboxIndicatorProps extends APrimitiveProps {
   /**
@@ -12,8 +12,8 @@ export interface ACheckboxIndicatorProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APresence } from '~~/presence';
-import { APrimitive } from '~~/primitive';
+import { APresence } from '../presence';
+import { APrimitive } from '../primitive';
 import { injectACheckboxRootContext } from './checkbox-root.vue';
 import { getState, isIndeterminate } from './utils';
 

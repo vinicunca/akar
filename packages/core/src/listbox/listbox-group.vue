@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { createContext, useId } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { createContext, useId } from '../shared';
 
 export interface AListboxGroupProps extends APrimitiveProps {}
 
@@ -13,7 +13,7 @@ export const [injectAListboxGroupContext, provideListboxGroupContext]
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = defineProps<AListboxGroupProps>();
 

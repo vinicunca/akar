@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface ATabsListProps extends APrimitiveProps {
   /** When `true`, keyboard navigation will loop from last tab to first, and vice versa. */
@@ -10,8 +10,8 @@ export interface ATabsListProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { ARovingFocusGroup } from '~~/roving-focus';
+import { APrimitive } from '../primitive';
+import { ARovingFocusGroup } from '../roving-focus';
 import { injectATabsRootContext } from './tabs-root.vue';
 
 const props = withDefaults(defineProps<ATabsListProps>(), {

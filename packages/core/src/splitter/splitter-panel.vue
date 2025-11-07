@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useId } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useId } from '../shared';
 import { PRECISION } from './utils/constants';
 
 export interface ASplitterPanelProps extends APrimitiveProps {
@@ -62,7 +62,7 @@ export type PanelData = {
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, watch } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectPanelGroupContext } from './splitter-group.vue';
 
 const props = defineProps<ASplitterPanelProps>();

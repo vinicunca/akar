@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import { useCollection } from '~~/collection';
-import { createContext, getActiveElement, useArrowNavigation, useForwardExpose, useId } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useCollection } from '../collection';
+import { createContext, getActiveElement, useArrowNavigation, useForwardExpose, useId } from '../shared';
 
 export interface ANavigationMenuItemProps extends APrimitiveProps {
   /**
@@ -34,7 +34,7 @@ export const [
 <script setup lang="ts">
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { ref } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 import {
   focusFirst,

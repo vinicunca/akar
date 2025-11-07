@@ -2,7 +2,7 @@
 import type {
   AMenuItemEmits,
   AMenuRadioItemProps,
-} from '~~/menu';
+} from '../menu';
 
 export type AContextMenuRadioItemEmits = AMenuItemEmits;
 
@@ -10,8 +10,8 @@ export interface AContextMenuRadioItemProps extends AMenuRadioItemProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuRadioItem } from '~~/menu';
-import { useEmitAsProps, useForwardExpose } from '~~/shared';
+import { AMenuRadioItem } from '../menu';
+import { useEmitAsProps, useForwardExpose } from '../shared';
 
 const props = defineProps<AContextMenuRadioItemProps>();
 const emits = defineEmits<AContextMenuRadioItemEmits>();

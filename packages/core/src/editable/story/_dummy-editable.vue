@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { AEditableRootEmits, AEditableRootProps } from '~~/editable';
+import type { AEditableRootEmits, AEditableRootProps } from '../editable';
 import {
   AEditableArea,
   AEditableCancelTrigger,
@@ -9,8 +9,8 @@ import {
   AEditableRoot,
 
   AEditableSubmitTrigger,
-} from '~~/editable';
-import { useForwardPropsEmits } from '~~/shared';
+} from '../editable';
+import { useForwardPropsEmits } from '../../shared';
 
 const props = defineProps<AEditableRootProps>();
 const emits = defineEmits<AEditableRootEmits>();

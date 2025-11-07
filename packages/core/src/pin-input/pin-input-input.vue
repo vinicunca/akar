@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface APinInputInputProps extends APrimitiveProps {
   /** Position of the value this input binds to. */
@@ -13,8 +13,8 @@ export interface APinInputInputProps extends APrimitiveProps {
 import type { APinInputContextValue } from './pin-input-root.vue';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick, onMounted, onUnmounted, watch } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
-import { getActiveElement, useArrowNavigation } from '~~/shared';
+import { APrimitive, usePrimitiveElement } from '../primitive';
+import { getActiveElement, useArrowNavigation } from '../shared';
 import { injectAPinInputRootContext } from './pin-input-root.vue';
 
 const props = withDefaults(
@@ -30,7 +30,6 @@ const currentValue = computed(() => context.currentModelValue.value[props.index]
 
 const disabled = computed(() => props.disabled || context.disabled.value);
 const isOtpMode = computed(() => context.otp.value);
-const isNumericMode = computed(() => context.type.value === 'number');
 const isPasswordMode = computed(() => context.mask.value);
 
 const { primitiveElement, currentElement } = usePrimitiveElement();
@@ -43,7 +42,7 @@ function handleInput(event: InputEvent) {
     return;
   }
 
-  if (isNumericMode.value && !/^\d*$/.test(target.value)) {
+  if (context.isNumericMode.value && !/^\d*$/.test(target.value)) {
     target.value = target.value.replace(/\D/g, '');
     return;
   }
@@ -143,21 +142,19 @@ function handlePaste(event: ClipboardEvent) {
 }
 
 function handleMultipleCharacter(values: string) {
-  const tempModelValue = [...context.currentModelValue.value] as typeof context.modelValue.value;
+  const tempModelValue = [...context.currentModelValue.value] as typeof context.currentModelValue.value;
   const initialIndex = values.length >= inputElements.value.length ? 0 : props.index;
   const lastIndex = Math.min(initialIndex + values.length, inputElements.value.length);
-
   for (let i = initialIndex; i < lastIndex; i++) {
     const input = inputElements.value[i];
     const value = values[i - initialIndex];
-    if (isNumericMode.value && !/^\d*$/.test(value)) {
+    if (context.isNumericMode.value && !/^\d*$/.test(value)) {
       continue;
     }
 
     tempModelValue[i] = value;
     input.focus();
   }
-
   context.modelValue.value = tempModelValue;
   inputElements.value[lastIndex]?.focus();
 }
@@ -178,7 +175,19 @@ function updateModelValueAt(
   { index: number; value: string },
 ) {
   const tempModelValue = [...context.currentModelValue.value] as typeof context.modelValue.value;
-  tempModelValue[index] = isNumericMode.value ? +value : value;
+  if (context.isNumericMode.value) {
+    const num = +value;
+
+    if (value === '' || Number.isNaN(num)) {
+      // eslint-disable-next-line ts/no-dynamic-delete
+      delete tempModelValue[index];
+    } else {
+      tempModelValue[index] = num;
+    }
+  } else {
+    tempModelValue[index] = value;
+  }
+
   context.modelValue.value = removeTrailingEmptyStrings(tempModelValue);
 }
 
@@ -208,10 +217,10 @@ onUnmounted(() => {
     :as-child="asChild"
     :autocomplete="isOtpMode ? 'one-time-code' : 'false'"
     :type="isPasswordMode ? 'password' : 'text'"
-    :inputmode="isNumericMode ? 'numeric' : 'text'"
-    :pattern="isNumericMode ? '[0-9]*' : undefined"
+    :inputmode="context.isNumericMode.value ? 'numeric' : 'text'"
+    :pattern="context.isNumericMode.value ? '[0-9]*' : undefined"
     :placeholder="context.placeholder.value"
-    :value="context.modelValue.value[index]"
+    :value="currentValue"
     :disabled="disabled"
     :data-disabled="disabled ? '' : undefined"
     :data-complete="context.isCompleted.value ? '' : undefined"

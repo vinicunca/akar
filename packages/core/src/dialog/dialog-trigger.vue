@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ADialogTriggerProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose, useId } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose, useId } from '../shared';
 import { injectDialogRootContext } from './dialog-root.vue';
 
 const props = withDefaults(defineProps<ADialogTriggerProps>(), {

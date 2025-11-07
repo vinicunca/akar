@@ -2,15 +2,15 @@
 import type {
   AMenuSubContentEmits,
   AMenuSubContentProps,
-} from '~~/menu';
+} from '../menu';
 
 export type AContextMenuSubContentEmits = AMenuSubContentEmits;
 export interface AContextMenuSubContentProps extends AMenuSubContentProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuSubContent } from '~~/menu';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { AMenuSubContent } from '../menu';
+import { useForwardExpose, useForwardPropsEmits } from '../shared';
 
 const props = defineProps<AContextMenuSubContentProps>();
 

@@ -1,21 +1,17 @@
 import type { DateFields, DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { UseDateFormatter } from '~~/shared';
 import type { DateSegmentPart, Granularity, HourCycle, SegmentContentObj, SegmentPart, SegmentValueObj, TimeSegmentPart } from '.';
-import { isZonedDateTime, toDate } from '~~/date';
+import type { UseDateFormatter } from '../../shared';
 import {
   DATE_SEGMENT_PARTS,
-
   EDITABLE_SEGMENT_PARTS,
   getOptsByGranularity,
   getPlaceholder,
-
   isDateSegmentPart,
   isSegmentPart,
-
   TIME_SEGMENT_PARTS,
-
 } from '.';
+import { isZonedDateTime, toDate } from '../../date';
 
 const calendarDateTimeGranularities = ['hour', 'minute', 'second'];
 

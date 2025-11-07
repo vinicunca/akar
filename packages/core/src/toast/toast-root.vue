@@ -2,7 +2,7 @@
 import type { Ref } from 'vue';
 import type { ToastRootImplEmits, ToastRootImplProps } from './toast-root-impl.vue';
 import type { SwipeEvent } from './utils';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose } from '../shared';
 
 export type AToastRootEmits = Omit<ToastRootImplEmits, 'close'> & {
   /** Event handler called when the open state changes */
@@ -22,7 +22,7 @@ export interface AToastRootProps extends ToastRootImplProps {
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { APresence } from '~~/presence';
+import { APresence } from '../presence';
 import ToastRootImpl from './toast-root-impl.vue';
 
 const props = withDefaults(defineProps<AToastRootProps>(), {

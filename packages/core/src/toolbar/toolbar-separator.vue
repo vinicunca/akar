@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AToolbarSeparatorProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose } from '../shared';
 import BaseSeparator from '../shared/component/base-separator.vue';
 import { injectAToolbarRootContext } from './toolbar-root.vue';
 

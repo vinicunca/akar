@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AVisuallyHidden } from '~~/visually-hidden';
+import { AVisuallyHidden } from '../visually-hidden';
 import { injectAToastProviderContext } from './toast-provider.vue';
 
 const emits = defineEmits<{

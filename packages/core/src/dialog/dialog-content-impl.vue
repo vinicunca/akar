@@ -2,7 +2,7 @@
 import type {
   DismissableLayerEmits,
   DismissableLayerProps,
-} from '~~/dismissable-layer';
+} from '../dismissable-layer';
 
 export type DialogContentImplEmits = DismissableLayerEmits & {
   /**
@@ -34,10 +34,10 @@ export interface DialogContentImplProps extends DismissableLayerProps {
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { DismissableLayer } from '~~/dismissable-layer';
-import { AFocusScope } from '~~/focus-scope';
-import { getOpenState } from '~~/menu/utils';
-import { getActiveElement, useForwardExpose, useId } from '~~/shared';
+import { DismissableLayer } from '../dismissable-layer';
+import { AFocusScope } from '../focus-scope';
+import { getOpenState } from '../menu/utils';
+import { getActiveElement, useForwardExpose, useId } from '../shared';
 import { injectDialogRootContext } from './dialog-root.vue';
 import { useWarning } from './utils';
 

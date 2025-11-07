@@ -2,15 +2,15 @@
 import type {
   ADialogRootEmits,
   ADialogRootProps,
-} from '~~/dialog';
+} from '../dialog';
 
 export type AAlertDialogEmits = ADialogRootEmits;
 export interface AAlertDialogProps extends Omit<ADialogRootProps, 'modal'> {}
 </script>
 
 <script setup lang="ts">
-import { ADialogRoot } from '~~/dialog';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { ADialogRoot } from '../dialog';
+import { useForwardExpose, useForwardPropsEmits } from '../shared';
 
 const props = defineProps<AAlertDialogProps>();
 const emits = defineEmits<AAlertDialogEmits>();

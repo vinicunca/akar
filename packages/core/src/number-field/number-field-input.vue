@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ANumberFieldInputProps extends APrimitiveProps {
 }
@@ -7,8 +7,8 @@ export interface ANumberFieldInputProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
-import { getActiveElement } from '~~/shared';
+import { APrimitive, usePrimitiveElement } from '../primitive';
+import { getActiveElement } from '../shared';
 import { injectANumberFieldRootContext } from './number-field-root.vue';
 
 const props = withDefaults(defineProps<ANumberFieldInputProps>(), {

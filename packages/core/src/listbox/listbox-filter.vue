@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { injectAListboxRootContext } from './listbox-root.vue';
 
 export interface AListboxFilterProps extends APrimitiveProps {
@@ -19,7 +19,7 @@ export type AListboxFilterEmits = {
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { computed, onMounted, onUnmounted, ref, watchSyncEffect } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { APrimitive, usePrimitiveElement } from '../primitive';
 
 const props = withDefaults(defineProps<AListboxFilterProps>(), {
   as: 'input',

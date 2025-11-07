@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ARangeCalendarPrevProps extends APrimitiveProps {
   /** The function to be used for the prev page. Overwrites the `prevPage` function set on the `range-calendar-root`. */
@@ -17,7 +17,7 @@ export interface RangeCalendarPrevSlot {
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
 const props = withDefaults(defineProps<ARangeCalendarPrevProps>(), { as: 'button' });

@@ -14,16 +14,16 @@ export interface AListboxVirtualizerProps<T extends AcceptableValue = Acceptable
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual';
 import type { Ref, VNode } from 'vue';
-import type { AcceptableValue } from '~~/shared/types';
+import type { AcceptableValue } from '../shared/types';
 import { useVirtualizer } from '@tanstack/vue-virtual';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { useParentElement } from '@vueuse/core';
 import { refAutoReset } from '@vueuse/shared';
 import { cloneVNode, computed, Fragment, useSlots } from 'vue';
-import { useCollection } from '~~/collection';
-import { MAP_KEY_TO_FOCUS_INTENT } from '~~/roving-focus/utils';
-import { findValuesBetween, getActiveElement } from '~~/shared';
-import { getNextMatch } from '~~/shared/use-typeahead';
+import { useCollection } from '../collection';
+import { MAP_KEY_TO_FOCUS_INTENT } from '../roving-focus/utils';
+import { findValuesBetween, getActiveElement } from '../shared';
+import { getNextMatch } from '../shared/use-typeahead';
 import { injectAListboxRootContext } from './listbox-root.vue';
 import { compare, queryCheckedElement } from './utils';
 

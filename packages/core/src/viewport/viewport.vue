@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { toRefs } from 'vue';
-import { useForwardExpose } from '~~/shared';
-import { useNonce } from '~~/shared/use-nonce';
+import { useForwardExpose } from '../shared';
+import { useNonce } from '../shared/use-nonce';
 
 export interface AViewportProps extends APrimitiveProps {
   /**
@@ -13,7 +13,7 @@ export interface AViewportProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = defineProps<AViewportProps>();
 const { forwardRef } = useForwardExpose();

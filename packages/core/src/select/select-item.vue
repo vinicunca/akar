@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { AcceptableValue } from '~~/shared/types';
-import { createContext } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import type { AcceptableValue } from '../shared/types';
+import { createContext } from '../shared';
 
 interface SelectItemContext<T = AcceptableValue> {
   value: T;
@@ -48,9 +48,9 @@ import {
   ref,
   toRefs,
 } from 'vue';
-import { useCollection } from '~~/collection';
-import { APrimitive } from '~~/primitive';
-import { getActiveElement, handleAndDispatchCustomEvent, useForwardExpose, useId } from '~~/shared';
+import { useCollection } from '../collection';
+import { APrimitive } from '../primitive';
+import { getActiveElement, handleAndDispatchCustomEvent, useForwardExpose, useId } from '../shared';
 import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectASelectRootContext } from './select-root.vue';
 import { SELECTION_KEYS, valueComparator } from './utils';

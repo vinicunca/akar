@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectAStepperItemContext } from './stepper-item.vue';
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 export interface AStepperIndicatorProps extends APrimitiveProps { }
 

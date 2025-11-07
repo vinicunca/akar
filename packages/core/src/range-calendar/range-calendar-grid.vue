@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ARangeCalendarGridProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
 const props = withDefaults(defineProps<ARangeCalendarGridProps>(), { as: 'table' });

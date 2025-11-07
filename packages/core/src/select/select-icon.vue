@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ASelectIconProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 withDefaults(defineProps<ASelectIconProps>(), {
   as: 'span',

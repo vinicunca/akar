@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { AListboxGroupProps } from '~~/listbox';
+import type { AListboxGroupProps } from '../listbox';
 import { computed, onMounted, onUnmounted } from 'vue';
-import { createContext, useId } from '~~/shared';
+import { createContext, useId } from '../shared';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
 export interface AComboboxGroupProps extends AListboxGroupProps {}
@@ -18,7 +18,7 @@ export const [
 </script>
 
 <script setup lang="ts">
-import { AListboxGroup } from '~~/listbox';
+import { AListboxGroup } from '../listbox';
 
 const props = defineProps<AComboboxGroupProps>();
 const id = useId(undefined, 'akar-combobox-group');

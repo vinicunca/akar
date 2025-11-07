@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DataOrientation } from '~~/shared/types';
+import type { DataOrientation } from '../shared/types';
 import { ref } from 'vue';
 import { ASplitterGroup, ASplitterPanel, ASplitterResizeHandle } from '..';
 

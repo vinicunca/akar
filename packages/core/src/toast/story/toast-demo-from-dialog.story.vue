@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ADialogClose, ADialogContent, ADialogDescription, ADialogOverlay, ADialogRoot, ADialogTitle, ADialogTrigger } from '~~/dialog';
+import { ADialogClose, ADialogContent, ADialogDescription, ADialogOverlay, ADialogRoot, ADialogTitle, ADialogTrigger } from '../dialog';
 import { AToastAction, AToastDescription, AToastProvider, AToastRoot, AToastViewport } from '..';
 
 const open = ref(false);

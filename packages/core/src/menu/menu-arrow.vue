@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { APopperArrowProps } from '~~/popper';
+import type { APopperArrowProps } from '../popper';
 
 export interface AMenuArrowProps extends APopperArrowProps {}
 </script>
 
 <script setup lang="ts">
-import { APopperArrow } from '~~/popper';
+import { APopperArrow } from '../popper';
 
 const props = defineProps<AMenuArrowProps>();
 </script>

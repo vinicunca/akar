@@ -13,8 +13,8 @@ export interface AHoverCardContentProps extends HoverCardContentImplProps {
 </script>
 
 <script setup lang="ts">
-import { APresence } from '~~/presence';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { APresence } from '../presence';
+import { useForwardExpose, useForwardPropsEmits } from '../shared';
 import HoverCardContentImpl from './hover-card-content-impl.vue';
 import { injectAHoverCardRootContext } from './hover-card-root.vue';
 import { excludeTouch } from './utils';

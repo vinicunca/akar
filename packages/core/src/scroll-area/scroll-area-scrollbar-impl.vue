@@ -13,8 +13,8 @@ export interface ScrollAreaScrollbarImplProps {
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core';
 import { onMounted, onUnmounted, ref } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 import { injectScrollAreaScrollbarVisibleContext } from './scroll-area-scrollbar-visible.vue';
 import { injectAScrollAreaScrollbarContext } from './scroll-area-scrollbar.vue';

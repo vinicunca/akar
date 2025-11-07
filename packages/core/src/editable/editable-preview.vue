@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { computed } from 'vue';
 import { injectAEditableRootContext } from './editable-root.vue';
 
@@ -7,7 +7,7 @@ export interface AEditablePreviewProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(defineProps<AEditablePreviewProps>(), { as: 'span' });
 

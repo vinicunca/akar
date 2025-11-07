@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { AStepperRootEmits, AStepperRootProps } from '..';
 import { Icon } from '@iconify/vue';
-import { useForwardPropsEmits } from '~~/shared';
+import { useForwardPropsEmits } from '../../shared';
 import { AStepperDescription, AStepperIndicator, AStepperItem, AStepperRoot, AStepperSeparator, AStepperTitle, AStepperTrigger } from '..';
 
 const props = defineProps<AStepperRootProps>();

@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectATagsInputRootContext } from './tags-input-root.vue';
 
 export interface ATagsInputClearProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(defineProps<ATagsInputClearProps>(), {
   as: 'button',

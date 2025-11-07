@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { RangeCalendarCellTriggerSlot } from '~~/range-calendar/range-calendar-cell-trigger.vue';
+import type { RangeCalendarCellTriggerSlot } from '../range-calendar/range-calendar-cell-trigger.vue';
 import type { ARangeCalendarCellTriggerProps } from '..';
 import { ARangeCalendarCellTrigger } from '..';
 

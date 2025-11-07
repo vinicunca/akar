@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { ASelectRootEmits, ASelectRootProps } from '..';
 import { Icon } from '@iconify/vue';
-import { useForwardPropsEmits } from '~~/shared';
 import {
   ASelectContent,
   ASelectGroup,
@@ -11,12 +10,12 @@ import {
   ASelectLabel,
   ASelectPortal,
   ASelectRoot,
-
   ASelectSeparator,
   ASelectTrigger,
   ASelectValue,
   ASelectViewport,
 } from '..';
+import { useForwardPropsEmits } from '../../shared';
 
 const props = withDefaults(defineProps<ASelectRootProps & { options?: Array<any> }>(), {
   options: () => ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'],

@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { computed } from 'vue';
 
 export interface AComboboxEmptyProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
 const props = defineProps<AComboboxEmptyProps>();

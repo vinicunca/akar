@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 import type {
   FocusOutsideEvent,
@@ -11,7 +11,7 @@ import {
   reactive,
   watchEffect,
 } from 'vue';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose } from '../shared';
 
 export interface DismissableLayerProps extends APrimitiveProps {
   /**
@@ -64,7 +64,7 @@ export const context = reactive({
 import { onKeyStroke } from '@vueuse/core';
 import {
   APrimitive,
-} from '~~/primitive';
+} from '../primitive';
 import {
   useFocusOutside,
   usePointerDownOutside,

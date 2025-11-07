@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { CalendarNextSlot } from '~~/calendar/calendar-next.vue';
+import type { CalendarNextSlot } from '../calendar/calendar-next.vue';
 import type { ACalendarNextProps } from '..';
 import { ACalendarNext } from '..';
 

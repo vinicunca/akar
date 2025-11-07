@@ -1,5 +1,5 @@
 import type { DateValue, DayOfWeek } from '@internationalized/date';
-import type { DateRange } from '~~/shared';
+import type { DateRange } from '../shared';
 import type { DateGrid } from './types.date';
 import {
   CalendarDate,

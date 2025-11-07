@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { AListboxItemIndicatorProps } from '~~/listbox';
+import type { AListboxItemIndicatorProps } from '../listbox';
 
 export interface AComboboxItemIndicatorProps extends AListboxItemIndicatorProps {}
 </script>
 
 <script setup lang="ts">
-import { AListboxItemIndicator } from '~~/listbox';
+import { AListboxItemIndicator } from '../listbox';
 
 const props = withDefaults(defineProps<AComboboxItemIndicatorProps>(), {
   as: 'span',

@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { isNullish, isNumber } from '@vinicunca/perkakas';
-import { createContext, useForwardExpose } from '~~/shared';
+import { createContext, useForwardExpose } from '../shared';
 
 export type AProgressRootEmits = {
   /** Event handler called when the progress value changes */
@@ -82,7 +82,7 @@ function validateMax(max: number): number {
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, watch } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(defineProps<AProgressRootProps>(), {
   max: DEFAULT_MAX,

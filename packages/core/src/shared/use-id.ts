@@ -1,5 +1,5 @@
 import * as vue from 'vue';
-import { injectAConfigProviderContext } from '~~/config-provider/config-provider.vue';
+import { injectAConfigProviderContext } from '../config-provider/config-provider.vue';
 
 // Inspired from https://github.com/tailwindlabs/headlessui/issues/2913
 // as the alternative, and a fallback for Vue version < 3.5

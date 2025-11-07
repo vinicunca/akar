@@ -12,8 +12,8 @@ export interface AComboboxContentProps extends ComboboxContentImplProps {
 </script>
 
 <script setup lang="ts">
-import { APresence } from '~~/presence';
-import { useForwardExpose, useForwardPropsEmits, useId } from '~~/shared';
+import { APresence } from '../presence';
+import { useForwardExpose, useForwardPropsEmits, useId } from '../shared';
 import ComboboxContentImpl from './combobox-content-impl.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 

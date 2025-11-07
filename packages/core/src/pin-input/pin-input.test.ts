@@ -96,7 +96,7 @@ describe('given default PinInput', () => {
 
   describe('after pressing ArrowRight key', () => {
     beforeEach(async () => {
-      await inputs[0].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
+      await inputs[0].trigger('keydown', { key: 'ArrowRight' });
     });
 
     it('should navigate to 2nd box', () => {
@@ -105,7 +105,7 @@ describe('given default PinInput', () => {
 
     describe('after pressing ArrowRight key', () => {
       beforeEach(async () => {
-        await inputs[1].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
+        await inputs[1].trigger('keydown', { key: 'ArrowRight' });
       });
 
       it('should navigate to 3rd box', () => {
@@ -114,8 +114,8 @@ describe('given default PinInput', () => {
 
       describe('after pressing ArrowLeft key twice', () => {
         beforeEach(async () => {
-          await inputs[2].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
-          await inputs[1].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
+          await inputs[2].trigger('keydown', { key: 'ArrowLeft' });
+          await inputs[1].trigger('keydown', { key: 'ArrowLeft' });
         });
 
         it('should navigate back to 1st box', () => {
@@ -237,6 +237,40 @@ describe('give PinInput type=number', async () => {
 
     it('should emit \'complete\' with the result', () => {
       expect(wrapper.emitted('complete')?.[0]?.[0]).toStrictEqual([1, 2, 3, 4, 5]);
+    });
+
+    it('should delete the last input when pressing Backspace', async () => {
+      await inputs[4].trigger('keydown', { key: 'Backspace' });
+      expect(inputs[4].element).toBe(document.activeElement);
+      expect(inputs.map((i) => i.element.value)).toStrictEqual(['1', '2', '3', '4', '']);
+    });
+
+    it('should delete all values input when pressing Backspace for each input', async () => {
+      // Delete the last value
+      await inputs[4].trigger('keydown', { key: 'Backspace' });
+      // Press again to move focus to the previous input
+      await inputs[4].trigger('keydown', { key: 'Backspace' });
+      await inputs[3].trigger('keydown', { key: 'Backspace' });
+      await inputs[2].trigger('keydown', { key: 'Backspace' });
+      await inputs[1].trigger('keydown', { key: 'Backspace' });
+      await inputs[0].trigger('keydown', { key: 'Backspace' });
+
+      expect(inputs[0].element).toBe(document.activeElement);
+      expect(inputs.map((i) => i.element.value)).toStrictEqual(['', '', '', '', '']);
+    });
+  });
+
+  describe('after user input numeric word consisting only of zeros', () => {
+    beforeEach(async () => {
+      await userEvent.keyboard('00000');
+    });
+
+    it('should populate the word in each box', () => {
+      expect(inputs.map((i) => i.element.value)).toStrictEqual(['0', '0', '0', '0', '0']);
+    });
+
+    it('should emit \'complete\' with the result', () => {
+      expect(wrapper.emitted('complete')?.[0]?.[0]).toStrictEqual([0, 0, 0, 0, 0]);
     });
   });
 

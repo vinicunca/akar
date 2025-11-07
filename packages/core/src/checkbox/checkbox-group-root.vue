@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { ARovingFocusGroupProps } from '~~/roving-focus';
-import type { AcceptableValue, FormFieldProps } from '~~/shared/types';
+import type { ARovingFocusGroupProps } from '../roving-focus';
+import type { AcceptableValue, FormFieldProps } from '../shared/types';
 import { useVModel } from '@vueuse/core';
 import { computed, toRefs } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
-import { createContext, useDirection, useFormControl } from '~~/shared';
+import { APrimitive, usePrimitiveElement } from '../primitive';
+import { createContext, useDirection, useFormControl } from '../shared';
 
 export interface ACheckboxGroupRootProps<T = AcceptableValue> extends FormFieldProps, Pick<ARovingFocusGroupProps, 'as' | 'asChild' | 'dir' | 'loop' | 'orientation'> {
   /** The value of the checkbox when it is initially rendered. Use when you do not need to control its value. */
@@ -36,8 +36,8 @@ export const [
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
-import { ARovingFocusGroup } from '~~/roving-focus';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { ARovingFocusGroup } from '../roving-focus';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 
 const props = withDefaults(defineProps<ACheckboxGroupRootProps<T>>(), {
   rovingFocus: true,

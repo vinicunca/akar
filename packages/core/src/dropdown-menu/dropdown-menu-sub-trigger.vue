@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { AMenuSubTriggerProps } from '~~/menu';
-import { useForwardExpose } from '~~/shared';
+import type { AMenuSubTriggerProps } from '../menu';
+import { useForwardExpose } from '../shared';
 
 export interface ADropdownMenuSubTriggerProps extends AMenuSubTriggerProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuSubTrigger } from '~~/menu';
+import { AMenuSubTrigger } from '../menu';
 
 const props = defineProps<ADropdownMenuSubTriggerProps>();
 useForwardExpose();

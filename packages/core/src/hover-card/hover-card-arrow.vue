@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { APopperArrowProps } from '~~/popper';
-import { useForwardExpose } from '~~/shared';
+import type { APopperArrowProps } from '../popper';
+import { useForwardExpose } from '../shared';
 
 export interface AHoverCardArrowProps extends APopperArrowProps {}
 </script>
 
 <script setup lang="ts">
-import { APopperArrow } from '~~/popper';
+import { APopperArrow } from '../popper';
 
 const props = withDefaults(
   defineProps<AHoverCardArrowProps>(),

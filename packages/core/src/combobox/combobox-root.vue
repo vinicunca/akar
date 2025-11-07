@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
-import type { AListboxRootProps } from '~~/listbox';
-import type { AcceptableValue, GenericComponentInstance } from '~~/shared/types';
-import { usePrimitiveElement } from '~~/primitive';
-import { createContext, useDirection, useFilter } from '~~/shared';
+import type { AListboxRootProps } from '../listbox';
+import type { AcceptableValue, GenericComponentInstance } from '../shared/types';
+import { usePrimitiveElement } from '../primitive';
+import { createContext, useDirection, useFilter } from '../shared';
 
 type ComboboxRootContext<T> = {
   modelValue: Ref<Array<T> | T>;
@@ -93,8 +93,8 @@ import {
   ref,
   toRefs,
 } from 'vue';
-import { AListboxRoot } from '~~/listbox';
-import { APopperRoot } from '~~/popper';
+import { AListboxRoot } from '../listbox';
+import { APopperRoot } from '../popper';
 
 const props = withDefaults(
   defineProps<AComboboxRootProps<T>>(),

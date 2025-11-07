@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import type { AcceptableValue, FormFieldProps } from '~~/shared/types';
+import type { APrimitiveProps } from '../primitive';
+import type { AcceptableValue, FormFieldProps } from '../shared/types';
 import type { SelectEvent } from './utils';
 
 export type RadioEmits = {
@@ -21,9 +21,9 @@ export interface RadioProps extends APrimitiveProps, FormFieldProps {
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { computed, toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { useFormControl, useForwardExpose } from '~~/shared';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { APrimitive } from '../primitive';
+import { useFormControl, useForwardExpose } from '../shared';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 import { handleSelect } from './utils';
 
 const props = withDefaults(defineProps<RadioProps>(), {

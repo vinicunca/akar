@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { GenericComponentInstance } from '~~/shared/types';
+import type { GenericComponentInstance } from '../shared/types';
 import { computed, ref } from 'vue';
-import { countryList } from '~~/shared/constant';
+import { countryList } from '../shared/constant';
 import { AListboxContent, AListboxItem, AListboxRoot } from '..';
 
 const options = computed(() => countryList.slice(0, 20));

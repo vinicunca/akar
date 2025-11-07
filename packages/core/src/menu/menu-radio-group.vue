@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import type { AMenuGroupProps } from './menu-group.vue';
-import { createContext } from '~~/shared';
+import { createContext } from '../shared';
 
 interface MenuRadioGroupContext {
   modelValue: Ref<string>;
@@ -24,7 +24,7 @@ export const [injectMenuRadioGroupContext, provideMenuRadioGroupContext]
 
 <script setup lang="ts">
 import { reactiveOmit, useVModel } from '@vueuse/core';
-import { useForwardProps } from '~~/shared';
+import { useForwardProps } from '../shared';
 import AMenuGroup from './menu-group.vue';
 
 const props = withDefaults(defineProps<AMenuRadioGroupProps>(), {

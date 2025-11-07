@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { DataOrientation, Direction, StringOrNumber } from '../shared/types';
 import { useVModel } from '@vueuse/core';
-import { createContext, useDirection, useForwardExpose, useId } from '~~/shared';
+import { createContext, useDirection, useForwardExpose, useId } from '../shared';
 
 export interface TabsRootContext {
   modelValue: Ref<StringOrNumber | undefined>;
@@ -56,7 +56,7 @@ export const [injectATabsRootContext, provideTabsRootContext]
 
 <script setup lang="ts" generic="T extends StringOrNumber = StringOrNumber">
 import { ref, toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(defineProps<ATabsRootProps<T>>(), {
   orientation: 'horizontal',

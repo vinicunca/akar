@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { Direction, FormFieldProps } from '~~/shared/types';
-import { createContext } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import type { Direction, FormFieldProps } from '../shared/types';
+import { createContext } from '../shared';
 
 export type AcceptableInputValue = Record<string, any> | string | number | bigint;
 
@@ -73,10 +73,10 @@ export const [
 import { isFunction, KEY_CODES } from '@vinicunca/perkakas';
 import { useFocusWithin, useVModel } from '@vueuse/core';
 import { computed, ref, toRefs } from 'vue';
-import { useCollection } from '~~/collection';
-import { APrimitive } from '~~/primitive';
-import { useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '~~/shared';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { useCollection } from '../collection';
+import { APrimitive } from '../primitive';
+import { useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '../shared';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 
 const props = withDefaults(
   defineProps<ATagsInputRootProps<T>>(),

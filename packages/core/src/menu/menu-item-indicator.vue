@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { CheckedState } from './utils';
-import { createContext } from '~~/shared';
+import { createContext } from '../shared';
 
 interface MenuItemIndicatorContext {
   modelValue: Ref<CheckedState>;
@@ -25,8 +25,8 @@ export const [injectMenuItemIndicatorContext, provideMenuItemIndicatorContext]
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { APresence } from '~~/presence';
-import { APrimitive } from '~~/primitive';
+import { APresence } from '../presence';
+import { APrimitive } from '../primitive';
 import { getCheckedState, isIndeterminate } from './utils';
 
 withDefaults(defineProps<AMenuItemIndicatorProps>(), {

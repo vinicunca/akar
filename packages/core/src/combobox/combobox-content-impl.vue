@@ -1,10 +1,10 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { DismissableLayerEmits, DismissableLayerProps } from '~~/dismissable-layer';
-import type { APopperContentProps } from '~~/popper';
+import type { DismissableLayerEmits, DismissableLayerProps } from '../dismissable-layer';
+import type { APopperContentProps } from '../popper';
 
-import { createContext, useForwardExpose, useForwardProps, useHideOthers } from '~~/shared';
-import { useBodyScrollLock } from '~~/shared/use-body-scroll-lock';
+import { createContext, useForwardExpose, useForwardProps, useHideOthers } from '../shared';
+import { useBodyScrollLock } from '../shared/use-body-scroll-lock';
 
 export type ComboboxContentImplEmits = DismissableLayerEmits;
 
@@ -29,10 +29,10 @@ export const [
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, toRefs } from 'vue';
-import { DismissableLayer } from '~~/dismissable-layer';
-import { AListboxContent } from '~~/listbox';
-import { APopperContent } from '~~/popper';
-import { APrimitive } from '~~/primitive';
+import { DismissableLayer } from '../dismissable-layer';
+import { AListboxContent } from '../listbox';
+import { APopperContent } from '../popper';
+import { APrimitive } from '../primitive';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
 const props = withDefaults(defineProps<ComboboxContentImplProps>(), {

@@ -17,10 +17,10 @@ import { useVirtualizer } from '@tanstack/vue-virtual';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { refAutoReset, useParentElement } from '@vueuse/core';
 import { cloneVNode, computed, nextTick, useSlots } from 'vue';
-import { useCollection } from '~~/collection';
-import { MAP_KEY_TO_FOCUS_INTENT } from '~~/roving-focus/utils';
-import { getActiveElement } from '~~/shared';
-import { getNextMatch } from '~~/shared/use-typeahead';
+import { useCollection } from '../collection';
+import { MAP_KEY_TO_FOCUS_INTENT } from '../roving-focus/utils';
+import { getActiveElement } from '../shared';
+import { getNextMatch } from '../shared/use-typeahead';
 import { injectATreeRootContext } from './tree-root.vue';
 
 const props = defineProps<ATreeVirtualizerProps>();

@@ -3,9 +3,9 @@ import type { Ref } from 'vue';
 import type {
   AMenuEmits,
   AMenuProps,
-} from '~~/menu';
-import type { Direction } from '~~/shared/types';
-import { createContext, useDirection, useForwardExpose } from '~~/shared';
+} from '../menu';
+import type { Direction } from '../shared/types';
+import { createContext, useDirection, useForwardExpose } from '../shared';
 
 type ContextMenuRootContext = {
   open: Ref<boolean>;
@@ -34,7 +34,7 @@ export const [
 
 <script setup lang="ts">
 import { ref, toRefs, watch } from 'vue';
-import { AMenuRoot } from '~~/menu';
+import { AMenuRoot } from '../menu';
 
 defineOptions({
   inheritAttrs: false,

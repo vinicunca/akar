@@ -1,13 +1,14 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { Direction, FormFieldProps } from '~~/shared/types';
+import type { APrimitiveProps } from '../primitive';
+import type { Direction, FormFieldProps } from '../shared/types';
 import { computed, ref, toRefs, watch } from 'vue';
-import { createContext, useDirection, useForwardExpose } from '~~/shared';
-import AVisuallyHiddenInput from '~~/visually-hidden/visually-hidden-input.vue';
+import { createContext, useDirection, useForwardExpose } from '../shared';
+import AVisuallyHiddenInput from '../visually-hidden/visually-hidden-input.vue';
 
 export type APinInputType = 'text' | 'number';
 
+// Using this type to avoid mixed arrays (string | number)[].
 // The value type can be number[] only when the type is explicitly set to 'number'
 export type APinInputValue<Type extends APinInputType> = [Type] extends ['number'] ? Array<number> : Array<string>;
 
@@ -57,6 +58,7 @@ export interface PinInputRootContext<Type extends APinInputType = 'text'> {
   isCompleted: ComputedRef<boolean>;
   inputElements?: Ref<Set<HTMLInputElement>>;
   onInputElementChange: (el: HTMLInputElement) => void;
+  isNumericMode: ComputedRef<boolean>;
 }
 
 export const [
@@ -67,7 +69,7 @@ export const [
 
 <script setup lang="ts" generic="Type extends APinInputType">
 import { useVModel } from '@vueuse/core';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 defineOptions({
   inheritAttrs: false,
@@ -111,16 +113,21 @@ function onInputElementChange(el: HTMLInputElement) {
   inputElements.value.add(el);
 }
 
+const isNumericMode = computed(() => props.type === 'number');
 const isCompleted = computed(() => {
-  const modelValues = currentModelValue.value.filter((i) => !!i);
+  const modelValues = currentModelValue.value.filter((i) => !!i || (isNumericMode.value && i === 0));
   return modelValues.length === inputElements.value.size;
 });
 
-watch(modelValue, () => {
-  if (isCompleted.value) {
-    emits('complete', modelValue.value);
-  }
-}, { deep: true });
+watch(
+  modelValue,
+  () => {
+    if (isCompleted.value) {
+      emits('complete', modelValue.value);
+    }
+  },
+  { deep: true },
+);
 
 providePinInputRootContext({
   modelValue,
@@ -134,6 +141,7 @@ providePinInputRootContext({
   isCompleted,
   inputElements,
   onInputElementChange,
+  isNumericMode,
 });
 </script>
 

@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { AMenuEmits, AMenuProps } from '~~/menu';
+import type { AMenuEmits, AMenuProps } from '../menu';
 import type { Direction } from '../shared/types';
-import { createContext, useDirection, useForwardExpose } from '~~/shared';
+import { createContext, useDirection, useForwardExpose } from '../shared';
 
 export interface ADropdownMenuRootProps extends AMenuProps {
   /** The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state. */
@@ -28,7 +28,7 @@ export const [injectADropdownMenuRootContext, provideDropdownMenuRootContext]
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { ref, toRefs } from 'vue';
-import { AMenuRoot } from '~~/menu';
+import { AMenuRoot } from '../menu';
 
 const props = withDefaults(defineProps<ADropdownMenuRootProps>(), {
   modal: true,

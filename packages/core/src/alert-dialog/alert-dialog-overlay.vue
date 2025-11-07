@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { ADialogOverlayProps } from '~~/dialog';
+import type { ADialogOverlayProps } from '../dialog';
 
 export interface AAlertDialogOverlayProps extends ADialogOverlayProps {}
 </script>
 
 <script setup lang="ts">
-import { ADialogOverlay } from '~~/dialog';
-import { useForwardExpose } from '~~/shared';
+import { ADialogOverlay } from '../dialog';
+import { useForwardExpose } from '../shared';
 
 const props = defineProps<AAlertDialogOverlayProps>();
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ALabel } from '~~/label';
+import { ALabel } from '../label';
 import { ADateFieldInput, ADateFieldRoot } from '..';
 </script>
 

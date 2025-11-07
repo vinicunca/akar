@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface ATooltipArrowProps extends APrimitiveProps {
   /**
@@ -20,7 +20,7 @@ export interface ATooltipArrowProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APopperArrow } from '~~/popper';
+import { APopperArrow } from '../popper';
 
 const props = withDefaults(defineProps<ATooltipArrowProps>(), {
   width: 10,

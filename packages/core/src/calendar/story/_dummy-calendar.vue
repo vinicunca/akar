@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ACalendarRootEmits, ACalendarRootProps } from '..';
 import { Icon } from '@iconify/vue';
-import { useForwardPropsEmits } from '~~/shared';
 import { ACalendarCell, ACalendarCellTrigger, ACalendarGrid, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot } from '..';
+import { useForwardPropsEmits } from '../../shared';
 
 const props = defineProps<ACalendarRootProps>();
 const emits = defineEmits<ACalendarRootEmits>();

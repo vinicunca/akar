@@ -15,7 +15,7 @@ export interface AMenuRadioItemProps extends AMenuItemProps {
 <script setup lang="ts">
 import { reactiveOmit } from '@vueuse/shared';
 import { computed, toRefs } from 'vue';
-import { useForwardProps } from '~~/shared';
+import { useForwardProps } from '../shared';
 import { provideMenuItemIndicatorContext } from './menu-item-indicator.vue';
 import AMenuItem from './menu-item.vue';
 import { injectMenuRadioGroupContext } from './menu-radio-group.vue';

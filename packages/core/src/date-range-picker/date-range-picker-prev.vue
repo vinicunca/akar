@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { RangeCalendarPrevSlot } from '~~/range-calendar/range-calendar-prev.vue';
+import type { RangeCalendarPrevSlot } from '../range-calendar/range-calendar-prev.vue';
 import type { ARangeCalendarPrevProps } from '..';
 import { ARangeCalendarPrev } from '..';
 

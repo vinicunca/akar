@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import {
 
   getLocalTimeZone,
@@ -39,8 +39,8 @@ export interface CalendarCellTriggerSlot {
 </script>
 
 <script setup lang="ts">
-import { toDate } from '~~/date';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { toDate } from '../date';
+import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
 const props = withDefaults(defineProps<ACalendarCellTriggerProps>(), {

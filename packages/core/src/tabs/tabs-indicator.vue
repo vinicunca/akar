@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { nextTick, ref, watch } from 'vue';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose } from '../shared';
 import { injectATabsRootContext } from './tabs-root.vue';
 
 export interface ATabsIndicatorProps extends APrimitiveProps {}
@@ -9,7 +9,7 @@ export interface ATabsIndicatorProps extends APrimitiveProps {}
 
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = defineProps<ATabsIndicatorProps>();
 const context = injectATabsRootContext();

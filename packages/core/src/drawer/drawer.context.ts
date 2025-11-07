@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, Ref } from 'vue';
 import type { ADrawerDirection } from './drawer.types';
-import { createContext } from '~~/shared';
+import { createContext } from '../shared';
 
 export interface ADrawerRootContext {
   open: Ref<boolean>;

@@ -1,10 +1,10 @@
 <script lang="ts">
 import type { HTMLAttributes, Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { FormFieldProps } from '~~/shared/types';
+import type { APrimitiveProps } from '../primitive';
+import type { FormFieldProps } from '../shared/types';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs } from 'vue';
-import { createContext, snapValueToStep, useFormControl, useLocale } from '~~/shared';
+import { createContext, snapValueToStep, useFormControl, useLocale } from '../shared';
 
 export interface ANumberFieldRootProps extends APrimitiveProps, FormFieldProps {
   defaultValue?: number;
@@ -67,8 +67,8 @@ export const [
 
 <script setup lang="ts">
 import { clamp } from '@vinicunca/perkakas';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { APrimitive, usePrimitiveElement } from '../primitive';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 import { handleDecimalOperation, useNumberFormatter, useNumberParser } from './utils';
 
 defineOptions({

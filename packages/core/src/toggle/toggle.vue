@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import type { FormFieldProps } from '~~/shared/types';
-import { useFormControl, useForwardExpose } from '~~/shared';
-import { injectAToggleGroupRootContext } from '~~/toggle-group/toggle-group-root.vue';
-import AVisuallyHiddenInput from '~~/visually-hidden/visually-hidden-input.vue';
+import type { APrimitiveProps } from '../primitive';
+import type { FormFieldProps } from '../shared/types';
+import { useFormControl, useForwardExpose } from '../shared';
+import { injectAToggleGroupRootContext } from '../toggle-group/toggle-group-root.vue';
+import AVisuallyHiddenInput from '../visually-hidden/visually-hidden-input.vue';
 
 export type AToggleEmits = {
   /** Event handler called when the value of the toggle changes. */
@@ -32,7 +32,7 @@ export interface AToggleProps extends APrimitiveProps, FormFieldProps {
 import type { Ref } from 'vue';
 import { useVModel } from '@vueuse/core';
 import { computed } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(defineProps<AToggleProps>(), {
   modelValue: undefined,

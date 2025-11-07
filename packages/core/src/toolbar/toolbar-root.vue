@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { DataOrientation, Direction } from '~~/shared/types';
-import { createContext } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import type { DataOrientation, Direction } from '../shared/types';
+import { createContext } from '../shared';
 
 export interface AToolbarRootProps extends APrimitiveProps {
   /** The orientation of the toolbar */
@@ -26,9 +26,9 @@ export const [
 
 <script setup lang="ts">
 import { toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { ARovingFocusGroup } from '~~/roving-focus';
-import { useDirection, useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { ARovingFocusGroup } from '../roving-focus';
+import { useDirection, useForwardExpose } from '../shared';
 
 const props = withDefaults(
   defineProps<AToolbarRootProps>(),

@@ -2,7 +2,7 @@
 import type { ComputedRef } from 'vue';
 import type { RadioProps } from './radio.vue';
 import type { SelectEvent } from './utils';
-import { createContext, useForwardExpose } from '~~/shared';
+import { createContext, useForwardExpose } from '../shared';
 
 export interface ARadioGroupItemProps extends Omit<RadioProps, 'checked'> {}
 export type ARadioGroupItemEmits = {
@@ -24,7 +24,7 @@ export const [
 import { isDeepEqual, isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { useEventListener } from '@vueuse/core';
 import { computed, ref } from 'vue';
-import { ARovingFocusItem } from '~~/roving-focus';
+import { ARovingFocusItem } from '../roving-focus';
 import { injectARadioGroupRootContext } from './radio-group-root.vue';
 import Radio from './radio.vue';
 

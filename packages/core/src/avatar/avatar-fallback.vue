@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { isBrowser } from '@vinicunca/perkakas';
 
 export interface AAvatarFallbackProps extends APrimitiveProps {
@@ -10,8 +10,8 @@ export interface AAvatarFallbackProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 import { injectAAvatarRootContext } from './avatar-root.vue';
 

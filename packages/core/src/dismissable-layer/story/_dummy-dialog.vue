@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { AFocusScope } from '~~/focus-scope';
-import { FocusGuards } from '~~/FocusGuards';
+import { AFocusScope } from '../focus-scope';
+import { FocusGuards } from '../FocusGuards';
 import { DismissableLayer } from '..';
 
 defineProps<{

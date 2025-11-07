@@ -1,6 +1,6 @@
 import type { ComputedRef } from 'vue';
 import { clamp, KEY_CODES } from '@vinicunca/perkakas';
-import { createContext } from '~~/shared';
+import { createContext } from '../shared';
 
 export interface SliderOrientationPrivateProps {
   min: number;

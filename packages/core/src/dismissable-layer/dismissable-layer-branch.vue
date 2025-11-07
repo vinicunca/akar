@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface DismissableLayerBranchProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { context } from './dismissable-layer.vue';
 
 const props = defineProps<DismissableLayerBranchProps>();

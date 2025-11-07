@@ -3,7 +3,7 @@ import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { handleSubmit } from '~~/test';
+import { handleSubmit } from '../test';
 import Switch from './_switch.vue';
 
 describe('test switch functionalities', () => {

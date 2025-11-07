@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { ADialogTitleProps } from '~~/dialog';
+import type { ADialogTitleProps } from '../dialog';
 
 export interface AAlertDialogTitleProps extends ADialogTitleProps {}
 </script>
 
 <script setup lang="ts">
-import { ADialogTitle } from '~~/dialog';
-import { useForwardExpose } from '~~/shared';
+import { ADialogTitle } from '../dialog';
+import { useForwardExpose } from '../shared';
 
 const props = withDefaults(
   defineProps<AAlertDialogTitleProps>(),

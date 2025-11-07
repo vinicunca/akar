@@ -4,9 +4,9 @@ export interface AComboboxVirtualizerProps<T extends AcceptableValue = Acceptabl
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual';
-import type { AListboxVirtualizerProps } from '~~/listbox/listbox-virtualizer.vue';
-import type { AcceptableValue } from '~~/shared/types';
-import AListboxVirtualizer from '~~/listbox/listbox-virtualizer.vue';
+import type { AListboxVirtualizerProps } from '../listbox/listbox-virtualizer.vue';
+import type { AcceptableValue } from '../shared/types';
+import AListboxVirtualizer from '../listbox/listbox-virtualizer.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
 const props = defineProps<AComboboxVirtualizerProps<T>>();

@@ -7,8 +7,8 @@ export interface ScrollAreaScrollbarScrollProps {
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core';
 import { computed, watchEffect } from 'vue';
-import { APresence } from '~~/presence';
-import { useForwardExpose } from '~~/shared';
+import { APresence } from '../presence';
+import { useForwardExpose } from '../shared';
 import { useStateMachine } from '../shared/use-state-machine';
 import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 import ScrollAreaScrollbarVisible from './scroll-area-scrollbar-visible.vue';

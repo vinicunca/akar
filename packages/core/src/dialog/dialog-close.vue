@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ADialogCloseProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectDialogRootContext } from './dialog-root.vue';
 
 const props = withDefaults(defineProps<ADialogCloseProps>(), {

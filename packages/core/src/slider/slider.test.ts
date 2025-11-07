@@ -4,7 +4,7 @@ import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
-import { handleSubmit } from '~~/test';
+import { handleSubmit } from '../test';
 import Slider from './story/_slider.vue';
 
 describe('given default Slider', () => {

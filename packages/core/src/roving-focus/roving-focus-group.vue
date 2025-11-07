@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type {
   Direction,
   Orientation,
 } from './utils';
-import { createContext, useDirection } from '~~/shared';
+import { createContext, useDirection } from '../shared';
 
 export interface ARovingFocusGroupProps extends APrimitiveProps {
   /**
@@ -50,8 +50,8 @@ export const [injectRovingFocusGroupContext, provideRovingFocusGroupContext]
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { ref, toRefs } from 'vue';
-import { useCollection } from '~~/collection';
-import { APrimitive } from '~~/primitive';
+import { useCollection } from '../collection';
+import { APrimitive } from '../primitive';
 import { ENTRY_FOCUS, EVENT_OPTIONS, focusFirst } from './utils';
 
 const props = withDefaults(defineProps<ARovingFocusGroupProps>(), {

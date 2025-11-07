@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { Direction } from './types';
 import { computed, ref } from 'vue';
 
-import { injectAConfigProviderContext } from '~~/config-provider/config-provider.vue';
+import { injectAConfigProviderContext } from '../config-provider/config-provider.vue';
 
 /**
  * The `useDirection` function provides a way to access the current direction in your application.

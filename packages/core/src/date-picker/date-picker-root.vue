@@ -2,11 +2,11 @@
 import type { DateValue } from '@internationalized/date';
 
 import type { Ref } from 'vue';
-import type { DateMatcher, WeekDayFormat } from '~~/date';
-import type { DateStep, Granularity, HourCycle } from '~~/shared/date';
-import type { Direction } from '~~/shared/types';
 import type { ACalendarRootProps, ADateFieldRoot, ADateFieldRootProps, APopoverRootEmits, APopoverRootProps } from '..';
-import { createContext, useDirection } from '~~/shared';
+import type { DateMatcher, WeekDayFormat } from '../date';
+import type { DateStep, Granularity, HourCycle } from '../shared/date';
+import type { Direction } from '../shared/types';
+import { createContext, useDirection } from '../shared';
 
 type DatePickerRootContext = {
   id: Ref<string | undefined>;
@@ -63,8 +63,8 @@ export const [
 import { isSameDay } from '@internationalized/date';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs, watch } from 'vue';
-import { getDefaultDate } from '~~/shared/date';
 import { APopoverRoot } from '..';
+import { getDefaultDate } from '../shared/date';
 
 defineOptions({
   inheritAttrs: false,

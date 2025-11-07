@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectASelectRootContext } from './select-root.vue';
 
 export interface ASelectItemTextProps extends APrimitiveProps {}
@@ -8,7 +8,7 @@ export interface ASelectItemTextProps extends APrimitiveProps {}
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectASelectItemContext } from './select-item.vue';
 

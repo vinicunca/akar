@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { isDeepEqual } from '@vinicunca/perkakas';
 import { computed } from 'vue';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose } from '../shared';
 import { injectATagsInputItemContext } from './tags-input-item.vue';
 import { injectATagsInputRootContext } from './tags-input-root.vue';
 
@@ -10,7 +10,7 @@ export interface ATagsInputItemDeleteProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(defineProps<ATagsInputItemDeleteProps>(), {
   as: 'button',

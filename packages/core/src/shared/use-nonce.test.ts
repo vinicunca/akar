@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useNonce } from './use-nonce';
 
 describe('useNonce', () => {
-  vi.mock('~~/config-provider/config-provider.vue', async () => {
+  vi.mock('../config-provider/config-provider.vue', async () => {
     return {
       injectAConfigProviderContext: () => {
         return {

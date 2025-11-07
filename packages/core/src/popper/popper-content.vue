@@ -5,12 +5,12 @@ import type {
   ReferenceElement,
 } from '@floating-ui/vue';
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type {
   Align,
   Side,
 } from './utils';
-import { createContext, useForwardExpose, useSize } from '~~/shared';
+import { createContext, useForwardExpose, useSize } from '../shared';
 
 export const APopperContentPropsDefaultValue = {
   side: 'bottom' as Side,
@@ -194,7 +194,7 @@ import { computedEager } from '@vueuse/core';
 import { computed, ref, watchEffect, watchPostEffect } from 'vue';
 import {
   APrimitive,
-} from '~~/primitive';
+} from '../primitive';
 import { injectAPopperRootContext } from './popper-root.vue';
 import {
   getSideAndAlignFromPlacement,

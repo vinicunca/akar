@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import type { Direction, FormFieldProps } from '~~/shared/types';
+import type { APrimitiveProps } from '../primitive';
+import type { Direction, FormFieldProps } from '../shared/types';
 import { isString } from '@vinicunca/perkakas';
-import { useFocusOutside, usePointerDownOutside } from '~~/dismissable-layer';
-import { createContext, useDirection, useFormControl } from '~~/shared';
+import { useFocusOutside, usePointerDownOutside } from '../dismissable-layer';
+import { createContext, useDirection, useFormControl } from '../shared';
 
 type ActivationMode = 'dblclick' | 'focus' | 'none';
 type SubmitMode = 'blur' | 'both' | 'enter' | 'none';
@@ -76,8 +76,8 @@ export const [injectAEditableRootContext, provideEditableRootContext]
 import type { Ref } from 'vue';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs, watch } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { APrimitive, usePrimitiveElement } from '../primitive';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 
 defineOptions({
   inheritAttrs: false,

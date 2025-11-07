@@ -7,7 +7,7 @@ import {
 import { isIOS, tryOnBeforeUnmount } from '@vueuse/shared';
 import { defu } from 'defu';
 import { computed, nextTick, ref, watch } from 'vue';
-import { injectAConfigProviderContext } from '~~/config-provider/config-provider.vue';
+import { injectAConfigProviderContext } from '../config-provider/config-provider.vue';
 
 const useBodyLockStackCount = createSharedComposable(() => {
   const map = ref<Map<string, boolean>>(new Map());

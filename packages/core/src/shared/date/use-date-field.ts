@@ -1,10 +1,10 @@
 import type { CalendarDateTime, CycleTimeOptions, DateFields, DateValue, TimeFields } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { UseDateFormatter } from '~~/shared';
+import type { UseDateFormatter } from '../../shared';
 import type { AnyExceptLiteral, DateStep, HourCycle, SegmentPart, SegmentValueObj } from './types';
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { computed } from 'vue';
-import { getDaysInMonth, toDate } from '~~/date';
+import { getDaysInMonth, toDate } from '../../date';
 import { isAcceptableSegmentKey, isNumberString, isSegmentNavigationKey } from './segment';
 
 interface MinuteSecondIncrementProps {

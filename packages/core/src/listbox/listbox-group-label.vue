@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AListboxGroupLabelProps extends APrimitiveProps {
   for?: string;
@@ -7,7 +7,7 @@ export interface AListboxGroupLabelProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectAListboxGroupContext } from './listbox-group.vue';
 
 const props = withDefaults(defineProps<AListboxGroupLabelProps>(), {

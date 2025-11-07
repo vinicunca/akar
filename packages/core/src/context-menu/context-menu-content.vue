@@ -2,7 +2,7 @@
 import type {
   AMenuContentEmits,
   AMenuContentProps,
-} from '~~/menu';
+} from '../menu';
 
 export type AContextMenuContentEmits = AMenuContentEmits;
 
@@ -19,9 +19,9 @@ export interface AContextMenuContentProps
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { AMenuContent } from '~~/menu';
+import { AMenuContent } from '../menu';
 
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { useForwardExpose, useForwardPropsEmits } from '../shared';
 import { injectAContextMenuRootContext } from './context-menu-root.vue';
 
 const props = withDefaults(

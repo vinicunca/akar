@@ -1,5 +1,5 @@
 import { cloneVNode, Comment, defineComponent, mergeProps } from 'vue';
-import { renderSlotFragments } from '~~/shared';
+import { renderSlotFragments } from '../shared';
 
 export const APrimitiveSlot = defineComponent({
   name: 'APrimitiveSlot',

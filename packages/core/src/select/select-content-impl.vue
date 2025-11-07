@@ -3,19 +3,19 @@ import type {
   ComponentPublicInstance,
   Ref,
 } from 'vue';
-import type { PointerDownOutsideEvent } from '~~/dismissable-layer';
-import type { APopperContentProps } from '~~/popper';
-import type { AcceptableValue } from '~~/shared/types';
+import type { PointerDownOutsideEvent } from '../dismissable-layer';
+import type { APopperContentProps } from '../popper';
+import type { AcceptableValue } from '../shared/types';
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
-import { useCollection } from '~~/collection';
+import { useCollection } from '../collection';
 import {
   createContext,
   useFocusGuards,
   useForwardProps,
   useHideOthers,
   useTypeahead,
-} from '~~/shared';
-import { useBodyScrollLock } from '~~/shared/use-body-scroll-lock';
+} from '../shared';
+import { useBodyScrollLock } from '../shared/use-body-scroll-lock';
 import { valueComparator } from './utils';
 
 export interface SelectContentContext {
@@ -91,9 +91,9 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-import { DismissableLayer } from '~~/dismissable-layer';
-import { AFocusScope } from '~~/focus-scope';
-import { focusFirst } from '~~/menu/utils';
+import { DismissableLayer } from '../dismissable-layer';
+import { AFocusScope } from '../focus-scope';
+import { focusFirst } from '../menu/utils';
 import SelectItemAlignedPosition from './select-item-aligned-position.vue';
 import SelectPopperPosition from './select-popper-position.vue';
 import { injectASelectRootContext } from './select-root.vue';

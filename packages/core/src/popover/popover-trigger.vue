@@ -1,14 +1,14 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose, useId } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose, useId } from '../shared';
 
 export interface APopoverTriggerProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { APopperAnchor } from '~~/popper';
-import { APrimitive } from '~~/primitive';
+import { APopperAnchor } from '../popper';
+import { APrimitive } from '../primitive';
 import { injectAPopoverRootContext } from './popover-root.vue';
 
 const props = withDefaults(defineProps<APopoverTriggerProps>(), {

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ACalendarPrevProps extends APrimitiveProps {
   /** The function to be used for the prev page. Overwrites the `prevPage` function set on the `ACalendarRoot`. */
@@ -17,7 +17,7 @@ export interface CalendarPrevSlot {
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
 const props = withDefaults(defineProps<ACalendarPrevProps>(), { as: 'button', step: 'month' });

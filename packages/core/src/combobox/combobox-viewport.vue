@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { toRefs } from 'vue';
-import { useForwardExpose } from '~~/shared';
-import { useNonce } from '~~/shared/use-nonce';
+import { useForwardExpose } from '../shared';
+import { useNonce } from '../shared/use-nonce';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
 export interface AComboboxViewportProps extends APrimitiveProps {
@@ -14,7 +14,7 @@ export interface AComboboxViewportProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = defineProps<AComboboxViewportProps>();
 const { forwardRef } = useForwardExpose();

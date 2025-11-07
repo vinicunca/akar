@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ARangeCalendarCellTriggerProps extends APrimitiveProps {
   day: DateValue;
@@ -46,8 +46,8 @@ import {
 } from '@internationalized/date';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
-import { isDateBetweenInclusive, toDate } from '~~/date';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { isDateBetweenInclusive, toDate } from '../date';
+import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
 const props = withDefaults(

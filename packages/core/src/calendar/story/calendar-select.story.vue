@@ -2,8 +2,8 @@
 import { Icon } from '@iconify/vue';
 import { createCalendar, getLocalTimeZone, toCalendar, today } from '@internationalized/date';
 import { computed, ref } from 'vue';
-import { ALabel } from '~~/label';
-import { ASelectContent, ASelectGroup, ASelectItem, ASelectItemIndicator, ASelectItemText, ASelectLabel, ASelectPortal, ASelectRoot, ASelectScrollDownButton, ASelectScrollUpButton, ASelectSeparator, ASelectTrigger, ASelectValue, ASelectViewport } from '~~/select';
+import { ALabel } from '../label';
+import { ASelectContent, ASelectGroup, ASelectItem, ASelectItemIndicator, ASelectItemText, ASelectLabel, ASelectPortal, ASelectRoot, ASelectScrollDownButton, ASelectScrollUpButton, ASelectSeparator, ASelectTrigger, ASelectValue, ASelectViewport } from '../select';
 import { ACalendarCell, ACalendarCellTrigger, ACalendarGrid, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot } from '..';
 
 const preferences = [

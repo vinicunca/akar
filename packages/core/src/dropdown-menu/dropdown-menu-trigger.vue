@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { useForwardExpose, useId } from '~~/shared';
+import { useForwardExpose, useId } from '../shared';
 
 export interface ADropdownMenuTriggerProps extends APrimitiveProps {
   /** When `true`, prevents the user from interacting with item */
@@ -11,10 +11,10 @@ export interface ADropdownMenuTriggerProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { nextTick, onMounted } from 'vue';
-import { AMenuAnchor } from '~~/menu';
+import { AMenuAnchor } from '../menu';
 import {
   APrimitive,
-} from '~~/primitive';
+} from '../primitive';
 import { injectADropdownMenuRootContext } from './dropdown-menu-root.vue';
 
 const props = withDefaults(defineProps<ADropdownMenuTriggerProps>(), {

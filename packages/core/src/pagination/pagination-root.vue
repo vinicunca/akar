@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import { createContext, useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { createContext, useForwardExpose } from '../shared';
 
 type PaginationRootContext = {
   page: Ref<number>;
@@ -45,7 +45,7 @@ export const [injectAPaginationRootContext, providePaginationRootContext]
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { computed, toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = withDefaults(defineProps<APaginationRootProps>(), {
   as: 'nav',

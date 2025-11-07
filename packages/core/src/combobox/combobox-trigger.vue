@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AComboboxTriggerProps extends APrimitiveProps {
   /** When `true`, prevents the user from interacting with item */
@@ -9,8 +9,8 @@ export interface AComboboxTriggerProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
 const props = withDefaults(defineProps<AComboboxTriggerProps>(), {

@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ARangeCalendarHeadingProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
 const props = withDefaults(defineProps<ARangeCalendarHeadingProps>(), { as: 'div' });

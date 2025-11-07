@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { Point } from '~~/menu/utils';
-import type { APrimitiveProps } from '~~/primitive';
+import type { Point } from '../menu/utils';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AContextMenuTriggerProps extends APrimitiveProps {
   /**
@@ -14,9 +14,9 @@ export interface AContextMenuTriggerProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, toRefs } from 'vue';
-import { AMenuAnchor } from '~~/menu';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { AMenuAnchor } from '../menu';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectAContextMenuRootContext } from './context-menu-root.vue';
 import { isTouchOrPen } from './utils';
 

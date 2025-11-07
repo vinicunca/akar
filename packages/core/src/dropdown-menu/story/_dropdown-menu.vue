@@ -4,7 +4,6 @@ import type {
 } from '..';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
-import { useEmitAsProps } from '~~/shared';
 import {
   ADropdownMenuArrow,
   ADropdownMenuCheckboxItem,
@@ -19,6 +18,7 @@ import {
   ADropdownMenuSeparator,
   ADropdownMenuTrigger,
 } from '..';
+import { useEmitAsProps } from '../../shared';
 
 const props = defineProps<{ defaultOpen?: boolean }>();
 

@@ -2,7 +2,7 @@
 import type {
   AMenuContentEmits,
   AMenuContentProps,
-} from '~~/menu';
+} from '../menu';
 
 export type ADropdownMenuContentEmits = AMenuContentEmits;
 
@@ -11,8 +11,8 @@ export interface ADropdownMenuContentProps extends AMenuContentProps {}
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { AMenuContent } from '~~/menu';
-import { useForwardExpose, useForwardPropsEmits, useId } from '~~/shared';
+import { AMenuContent } from '../menu';
+import { useForwardExpose, useForwardPropsEmits, useId } from '../shared';
 import { injectADropdownMenuRootContext } from './dropdown-menu-root.vue';
 
 const props = defineProps<ADropdownMenuContentProps>();

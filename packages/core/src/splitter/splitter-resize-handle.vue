@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { isBrowser } from '@vinicunca/perkakas';
 import { ref, toRefs, watch, watchEffect } from 'vue';
-import { useNonce } from '~~/shared/use-nonce';
+import { useNonce } from '../shared/use-nonce';
 import { useWindowSplitterResizeHandlerBehavior } from './utils/composables/use-window-splitter-behavior';
 
 export interface ASplitterResizeHandleProps extends APrimitiveProps {
@@ -32,8 +32,8 @@ export type ASplitterResizeHandleEmits = {
 <script setup lang="ts">
 import type { PointerHitAreaMargins, ResizeHandlerAction } from './utils/registry';
 import type { ResizeEvent, ResizeHandler } from './utils/types';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose, useId } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose, useId } from '../shared';
 import { injectPanelGroupContext } from './splitter-group.vue';
 import { assert } from './utils/assert';
 import { registerResizeHandle } from './utils/registry';

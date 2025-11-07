@@ -1,4 +1,4 @@
-import { getActiveElement } from '~~/shared';
+import { getActiveElement } from '../shared';
 
 export type Orientation = 'vertical' | 'horizontal';
 export type Direction = 'ltr' | 'rtl';

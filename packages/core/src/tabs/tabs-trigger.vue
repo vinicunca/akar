@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import type { StringOrNumber } from '~~/shared/types';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import type { StringOrNumber } from '../shared/types';
+import { useForwardExpose } from '../shared';
 
 export interface ATabsTriggerProps extends APrimitiveProps {
   /** A unique value that associates the trigger with a content. */
@@ -13,8 +13,8 @@ export interface ATabsTriggerProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { ARovingFocusItem } from '~~/roving-focus';
+import { APrimitive } from '../primitive';
+import { ARovingFocusItem } from '../roving-focus';
 import { injectATabsRootContext } from './tabs-root.vue';
 import { makeContentId, makeTriggerId } from './utils';
 

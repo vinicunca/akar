@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { CSSProperties, Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { computed, ref, toRefs, watch, watchEffect } from 'vue';
-import { areArrayEqual, createContext, useDirection, useForwardExpose, useId } from '~~/shared';
+import { areArrayEqual, createContext, useDirection, useForwardExpose, useId } from '../shared';
 import { useWindowSplitterPanelGroupBehavior } from './utils/composables/use-window-splitter-panel-group-behavior';
 import {
   initializeDefaultStorage,
@@ -75,7 +75,7 @@ export const [injectPanelGroupContext, providePanelGroupContext] = createContext
 import type { PanelConstraints, PanelData } from './splitter-panel.vue';
 
 import type { Direction, DragState, ResizeEvent, ResizeHandler } from './utils/types';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { assert } from './utils/assert';
 import { calculateDeltaPercentage, calculateUnsafeDefaultLayout } from './utils/calculate';
 import { callPanelCallbacks } from './utils/call-panel-callbacks';

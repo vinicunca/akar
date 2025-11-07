@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { Orientation } from './utils';
-import { useCollection } from '~~/collection';
+import { useCollection } from '../collection';
 
 export type ANavigationMenuSubEmits = {
   /** Event handler called when the value changes. */
@@ -26,8 +26,8 @@ export interface ANavigationMenuSubProps extends APrimitiveProps {
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { ref, watchEffect } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectANavigationMenuContext, provideNavigationMenuContext } from './navigation-menu-root.vue';
 
 const props = withDefaults(

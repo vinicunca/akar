@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ReferenceElement } from '@floating-ui/vue';
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface APopperAnchorProps extends APrimitiveProps {
   /**
@@ -17,7 +17,7 @@ export interface APopperAnchorProps extends APrimitiveProps {
 import { watchPostEffect } from 'vue';
 import {
   APrimitive,
-} from '~~/primitive';
+} from '../primitive';
 import { injectAPopperRootContext } from './popper-root.vue';
 
 const props = defineProps<APopperAnchorProps>();

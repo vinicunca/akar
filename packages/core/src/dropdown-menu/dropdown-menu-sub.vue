@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { AMenuSubEmits, AMenuSubProps } from '~~/menu';
+import type { AMenuSubEmits, AMenuSubProps } from '../menu';
 
 export type ADropdownMenuSubEmits = AMenuSubEmits;
 export interface ADropdownMenuSubProps extends AMenuSubProps {
@@ -11,8 +11,8 @@ export interface ADropdownMenuSubProps extends AMenuSubProps {
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { AMenuSub } from '~~/menu';
-import { useForwardExpose } from '~~/shared';
+import { AMenuSub } from '../menu';
+import { useForwardExpose } from '../shared';
 
 const props = withDefaults(defineProps<ADropdownMenuSubProps>(), {
   open: undefined,

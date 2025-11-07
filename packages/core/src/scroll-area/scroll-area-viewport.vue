@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
-import { useNonce } from '~~/shared/use-nonce';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
+import { useNonce } from '../shared/use-nonce';
 
 export interface AScrollAreaViewportProps extends APrimitiveProps {
   /**
@@ -13,7 +13,7 @@ export interface AScrollAreaViewportProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { onMounted, ref, toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 
 defineOptions({

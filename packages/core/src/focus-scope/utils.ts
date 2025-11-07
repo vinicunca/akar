@@ -1,4 +1,4 @@
-import { getActiveElement } from '~~/shared';
+import { getActiveElement } from '../shared';
 
 export const AUTOFOCUS_ON_MOUNT = 'focusScope.autoFocusOnMount';
 export const AUTOFOCUS_ON_UNMOUNT = 'focusScope.autoFocusOnUnmount';

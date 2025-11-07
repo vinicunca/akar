@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MenuContentImplEmits, MenuRootContentTypeProps } from './menu-content-impl.vue';
-import { useForwardExpose, useForwardPropsEmits, useHideOthers } from '~~/shared';
+import { useForwardExpose, useForwardPropsEmits, useHideOthers } from '../shared';
 import MenuContentImpl from './menu-content-impl.vue';
 import { injectAMenuContext } from './menu-root.vue';
 

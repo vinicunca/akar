@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ADrawerRootEmits, ADrawerRootProps } from './drawer.controls';
-import { useForwardPropsEmits } from '~~/shared';
+import { useForwardPropsEmits } from '../shared';
 import ADrawerRoot from './drawer-root.vue';
 import { injectADrawerRootContext } from './drawer.context';
 

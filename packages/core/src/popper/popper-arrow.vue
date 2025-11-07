@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import type { ArrowProps } from '~~/shared/component/arrow.vue';
+import type { APrimitiveProps } from '../primitive';
+import type { ArrowProps } from '../shared/component/arrow.vue';
 import type { Side } from './utils';
 
 const OPPOSITE_SIDE: Record<Side, Side> = {
@@ -15,8 +15,8 @@ export interface APopperArrowProps extends APrimitiveProps, ArrowProps {}
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useForwardExpose } from '~~/shared';
-import Arrow from '~~/shared/component/arrow.vue';
+import { useForwardExpose } from '../shared';
+import Arrow from '../shared/component/arrow.vue';
 import { injectPopperContentContext } from './popper-content.vue';
 
 defineOptions({

@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import type { AcceptableValue } from '~~/shared/types';
+import type { APrimitiveProps } from '../primitive';
+import type { AcceptableValue } from '../shared/types';
 import { valueComparator } from './utils';
 
 export interface ASelectValueProps extends APrimitiveProps {
@@ -11,8 +11,8 @@ export interface ASelectValueProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectASelectRootContext } from './select-root.vue';
 
 const props = withDefaults(defineProps<ASelectValueProps>(), {

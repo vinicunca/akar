@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { SwipeEvent } from './utils';
-import { createContext } from '~~/shared';
+import { createContext } from '../shared';
 
 export type ToastRootImplEmits = {
   close: [];
@@ -49,9 +49,9 @@ export const [
 import { onKeyStroke, useRafFn } from '@vueuse/core';
 import { isClient } from '@vueuse/shared';
 import { computed, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
-import { useCollection } from '~~/collection';
-import { APrimitive } from '~~/primitive';
-import { getActiveElement, useForwardExpose } from '~~/shared';
+import { useCollection } from '../collection';
+import { APrimitive } from '../primitive';
+import { getActiveElement, useForwardExpose } from '../shared';
 import ToastAnnounce from './toast-announce.vue';
 import { injectAToastProviderContext } from './toast-provider.vue';
 import { getAnnounceTextContent, handleAndDispatchCustomEvent, isDeltaInDirection, TOAST_SWIPE_CANCEL, TOAST_SWIPE_END, TOAST_SWIPE_MOVE, TOAST_SWIPE_START, VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AStepperTriggerProps extends APrimitiveProps {
 }
@@ -8,8 +8,8 @@ export interface AStepperTriggerProps extends APrimitiveProps {
 <script setup lang="ts">
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { computed, onMounted, onUnmounted } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { getActiveElement, useArrowNavigation, useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { getActiveElement, useArrowNavigation, useForwardExpose } from '../shared';
 import { injectAStepperItemContext } from './stepper-item.vue';
 import { injectAStepperRootContext } from './stepper-root.vue';
 

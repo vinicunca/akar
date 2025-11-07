@@ -12,7 +12,7 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-import { APrimitiveSlot, usePrimitiveElement } from '~~/primitive';
+import { APrimitiveSlot, usePrimitiveElement } from '../primitive';
 
 interface CollectionContext<ItemData = {}> {
   collectionRef: Ref<HTMLElement | undefined>;

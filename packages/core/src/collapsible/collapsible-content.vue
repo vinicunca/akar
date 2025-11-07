@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ACollapsibleContentProps extends APrimitiveProps {
   /**
@@ -17,11 +17,11 @@ export type ACollapsibleContentEmits = {
 <script setup lang="ts">
 import { useEventListener } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
-import { APresence } from '~~/presence';
+import { APresence } from '../presence';
 import {
   APrimitive,
-} from '~~/primitive';
-import { useForwardExpose, useId } from '~~/shared';
+} from '../primitive';
+import { useForwardExpose, useId } from '../shared';
 import { injectACollapsibleRootContext } from './collapsible-root.vue';
 
 defineOptions({

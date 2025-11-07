@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { computed } from 'vue';
 import { injectANumberFieldRootContext } from './number-field-root.vue';
 import { usePressedHold } from './utils';
@@ -10,7 +10,7 @@ export interface ANumberFieldDecrementProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { APrimitive, usePrimitiveElement } from '../primitive';
 
 const props = withDefaults(defineProps<ANumberFieldDecrementProps>(), {
   as: 'button',

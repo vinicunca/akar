@@ -1,5 +1,5 @@
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
-import { getActiveElement } from '~~/shared';
+import { getActiveElement } from '../shared';
 
 export type Orientation = 'horizontal' | 'vertical';
 export type Direction = 'ltr' | 'rtl';

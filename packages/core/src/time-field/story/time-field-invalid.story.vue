@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ALabel } from '~~/label';
+import { ALabel } from '../label';
 import { ATimeFieldInput, ATimeFieldRoot } from '..';
 </script>
 

@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface ANavigationMenuListProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 
 defineOptions({

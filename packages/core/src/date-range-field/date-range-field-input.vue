@@ -1,10 +1,10 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import type { SegmentPart } from '~~/shared/date';
+import type { APrimitiveProps } from '../primitive';
+import type { SegmentPart } from '../shared/date';
 import type { DateRangeType } from './date-range-field-root.vue';
 import { computed, ref } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { useDateField } from '~~/shared/date/use-date-field';
+import { APrimitive } from '../primitive';
+import { useDateField } from '../shared/date/use-date-field';
 import { injectADateRangeFieldRootContext } from './date-range-field-root.vue';
 
 export interface ADateRangeFieldInputProps extends APrimitiveProps {

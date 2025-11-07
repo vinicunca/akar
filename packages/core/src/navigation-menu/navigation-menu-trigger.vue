@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { useCollection } from '~~/collection';
-import { useForwardExpose } from '~~/shared';
+import { useCollection } from '../collection';
+import { useForwardExpose } from '../shared';
 
 export interface ANavigationMenuTriggerProps extends APrimitiveProps {
   /** When `true`, prevents the user from interacting with item */
@@ -13,8 +13,8 @@ export interface ANavigationMenuTriggerProps extends APrimitiveProps {
 <script setup lang="ts">
 import { refAutoReset, unrefElement } from '@vueuse/core';
 import { computed, onMounted, ref } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { AVisuallyHidden } from '~~/visually-hidden';
+import { APrimitive } from '../primitive';
+import { AVisuallyHidden } from '../visually-hidden';
 import { injectANavigationMenuItemContext } from './navigation-menu-item.vue';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 import { getOpenState, makeContentId, makeTriggerId } from './utils';

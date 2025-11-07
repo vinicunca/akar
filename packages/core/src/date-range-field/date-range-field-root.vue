@@ -2,19 +2,19 @@
 import type { DateValue } from '@internationalized/date';
 
 import type { Ref } from 'vue';
-import type { DateMatcher } from '~~/date';
-import type { APrimitiveProps } from '~~/primitive';
-import type { UseDateFormatter } from '~~/shared';
-import type { DateRange, DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '~~/shared/date';
-import type { Direction, FormFieldProps } from '~~/shared/types';
+import type { DateMatcher } from '../date';
+import type { APrimitiveProps } from '../primitive';
+import type { UseDateFormatter } from '../shared';
+import type { DateRange, DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '../shared/date';
+import type { Direction, FormFieldProps } from '../shared/types';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import {
   areAllDaysBetweenValid,
   hasTime,
   isDateBefore,
   isDateBeforeOrSame,
-} from '~~/date';
-import { createContext, useDateFormatter, useDirection, useLocale } from '~~/shared';
+} from '../date';
+import { createContext, useDateFormatter, useDirection, useLocale } from '../shared';
 import {
   createContent,
   getDefaultDate,
@@ -23,7 +23,7 @@ import {
   isSegmentNavigationKey,
   normalizeDateStep,
   syncSegmentValues,
-} from '~~/shared/date';
+} from '../shared/date';
 
 export type DateRangeType = 'end' | 'start';
 
@@ -97,8 +97,8 @@ export const [
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
-import { AVisuallyHidden } from '~~/visually-hidden';
+import { APrimitive, usePrimitiveElement } from '../primitive';
+import { AVisuallyHidden } from '../visually-hidden';
 
 defineOptions({
   inheritAttrs: false,

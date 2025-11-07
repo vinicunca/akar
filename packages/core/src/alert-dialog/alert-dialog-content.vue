@@ -2,8 +2,8 @@
 import type {
   ADialogContentEmits,
   ADialogContentProps,
-} from '~~/dialog';
-import { createContext } from '~~/shared';
+} from '../dialog';
+import { createContext } from '../shared';
 
 interface AlertDialogContentContext {
   onCancelElementChange: (el: HTMLElement | undefined) => void;
@@ -20,8 +20,8 @@ export interface AAlertDialogContentProps extends ADialogContentProps {}
 
 <script setup lang="ts">
 import { nextTick, ref } from 'vue';
-import { ADialogContent } from '~~/dialog';
-import { useEmitAsProps, useForwardExpose } from '~~/shared';
+import { ADialogContent } from '../dialog';
+import { useEmitAsProps, useForwardExpose } from '../shared';
 
 const props = defineProps<AAlertDialogContentProps>();
 const emits = defineEmits<AAlertDialogContentEmits>();

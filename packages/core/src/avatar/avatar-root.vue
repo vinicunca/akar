@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { ImageLoadingStatus } from './utils';
-import { createContext, useForwardExpose } from '~~/shared';
+import { createContext, useForwardExpose } from '../shared';
 
 export interface AAvatarRootProps extends APrimitiveProps {}
 
@@ -18,7 +18,7 @@ export const [
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 withDefaults(
   defineProps<AAvatarRootProps>(),

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface MenuItemImplProps extends APrimitiveProps {
   /** When `true`, prevents the user from interacting with the item. */
@@ -14,11 +14,11 @@ export interface MenuItemImplProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { nextTick, ref } from 'vue';
-import { useCollection } from '~~/collection';
+import { useCollection } from '../collection';
 import {
   APrimitive,
-} from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+} from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectMenuContentContext } from './menu-content-impl.vue';
 import { isMouseEvent } from './utils';
 

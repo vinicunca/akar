@@ -1,5 +1,5 @@
 <script lang="ts">
-import { createContext, handleAndDispatchCustomEvent, useForwardExpose, useId } from '~~/shared';
+import { createContext, handleAndDispatchCustomEvent, useForwardExpose, useId } from '../shared';
 
 export interface AListboxItemProps<T = AcceptableValue> extends APrimitiveProps {
   /** The value given as data when submitted with a `name`. */
@@ -28,11 +28,11 @@ export const [
 
 <script setup lang="ts"  generic="T extends AcceptableValue = AcceptableValue">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { AcceptableValue } from '~~/shared/types';
+import type { APrimitiveProps } from '../primitive';
+import type { AcceptableValue } from '../shared/types';
 import { computed } from 'vue';
-import { useCollection } from '~~/collection';
-import { APrimitive } from '~~/primitive';
+import { useCollection } from '../collection';
+import { APrimitive } from '../primitive';
 import { injectAListboxRootContext } from './listbox-root.vue';
 import { valueComparator } from './utils';
 

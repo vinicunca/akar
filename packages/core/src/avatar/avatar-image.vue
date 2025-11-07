@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { ImageLoadingStatus } from './utils';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose } from '../shared';
 
 export type AAvatarImageEmits = {
   /**
@@ -20,7 +20,7 @@ export interface AAvatarImageProps extends APrimitiveProps {
 <script setup lang="ts">
 import type { ImgHTMLAttributes } from 'vue';
 import { toRefs, watch } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectAAvatarRootContext } from './avatar-root.vue';
 import { useImageLoadingStatus } from './utils';
 

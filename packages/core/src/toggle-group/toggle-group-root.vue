@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { AcceptableValue, DataOrientation, Direction, FormFieldProps, SingleOrMultipleProps } from '../shared/types';
-import { createContext, useDirection, useFormControl, useForwardExpose } from '~~/shared';
-import AVisuallyHiddenInput from '~~/visually-hidden/visually-hidden-input.vue';
+import { createContext, useDirection, useFormControl, useForwardExpose } from '../shared';
+import AVisuallyHiddenInput from '../visually-hidden/visually-hidden-input.vue';
 
 export interface AToggleGroupRootProps<T = AcceptableValue | Array<AcceptableValue>>
   extends APrimitiveProps, FormFieldProps, SingleOrMultipleProps<T> {
@@ -40,9 +40,9 @@ export const [injectAToggleGroupRootContext, provideToggleGroupRootContext]
 
 <script setup lang="ts">
 import { toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { ARovingFocusGroup } from '~~/roving-focus';
-import { useSingleOrMultipleValue } from '~~/shared/use-single-or-multiple-value';
+import { APrimitive } from '../primitive';
+import { ARovingFocusGroup } from '../roving-focus';
+import { useSingleOrMultipleValue } from '../shared/use-single-or-multiple-value';
 
 const props = withDefaults(defineProps<AToggleGroupRootProps>(), {
   loop: true,

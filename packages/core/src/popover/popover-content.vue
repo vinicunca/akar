@@ -16,8 +16,8 @@ export interface APopoverContentProps extends PopoverContentImplProps {
 </script>
 
 <script setup lang="ts">
-import { APresence } from '~~/presence';
-import { useForwardExpose, useForwardPropsEmits, useId } from '~~/shared';
+import { APresence } from '../presence';
+import { useForwardExpose, useForwardPropsEmits, useId } from '../shared';
 import PopoverContentModal from './popover-content-modal.vue';
 import PopoverContentNonModal from './popover-content-non-modal.vue';
 import { injectAPopoverRootContext } from './popover-root.vue';

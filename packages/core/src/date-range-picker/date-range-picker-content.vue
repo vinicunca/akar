@@ -13,7 +13,7 @@ export interface ADateRangePickerContentEmits extends APopoverContentEmits {}
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { handleCalendarInitialFocus } from '~~/shared/date';
+import { handleCalendarInitialFocus } from '../shared/date';
 
 const props = defineProps<ADateRangePickerContentProps>();
 const emits = defineEmits<ADateRangePickerContentEmits>();

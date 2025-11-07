@@ -1,10 +1,10 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { DataOrientation, Direction, FormFieldProps } from '../shared/types';
 import { clamp, isIncludedIn } from '@vinicunca/perkakas';
-import { useCollection } from '~~/collection';
-import { createContext, useDirection, useFormControl, useForwardExpose } from '~~/shared';
+import { useCollection } from '../collection';
+import { createContext, useDirection, useFormControl, useForwardExpose } from '../shared';
 
 type ThumbAlignment = 'contain' | 'overflow';
 
@@ -72,7 +72,7 @@ export const [
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRaw, toRefs } from 'vue';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 import SliderHorizontal from './slider-horizontal.vue';
 import SliderVertical from './slider-vertical.vue';
 import {

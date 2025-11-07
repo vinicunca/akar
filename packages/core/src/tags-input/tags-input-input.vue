@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface ATagsInputInputProps extends APrimitiveProps {
   /** The placeholder character to use for empty tags input. */
@@ -14,7 +14,7 @@ export interface ATagsInputInputProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { nextTick, onMounted, ref } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectATagsInputRootContext } from './tags-input-root.vue';
 
 const props = withDefaults(defineProps<ATagsInputInputProps>(), {

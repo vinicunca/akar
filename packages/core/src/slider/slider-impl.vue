@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 
 export type SliderImplEmits = {
@@ -15,7 +15,7 @@ export interface SliderImplProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectASliderRootContext } from './slider-root.vue';
 import { ARROW_KEYS, PAGE_KEYS } from './utils';
 

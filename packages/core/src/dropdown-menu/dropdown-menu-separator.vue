@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { AMenuSeparatorProps } from '~~/menu';
-import { useForwardExpose } from '~~/shared';
+import type { AMenuSeparatorProps } from '../menu';
+import { useForwardExpose } from '../shared';
 
 export interface ADropdownMenuSeparatorProps extends AMenuSeparatorProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuSeparator } from '~~/menu';
+import { AMenuSeparator } from '../menu';
 
 const props = defineProps<ADropdownMenuSeparatorProps>();
 useForwardExpose();

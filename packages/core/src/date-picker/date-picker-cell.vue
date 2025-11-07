@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { ACalendarCellProps } from '~~/calendar';
-import { ACalendarCell } from '~~/calendar';
+import type { ACalendarCellProps } from '../calendar';
+import { ACalendarCell } from '../calendar';
 
 export interface ADatePickerCellProps extends ACalendarCellProps {}
 </script>

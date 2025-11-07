@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { useTestKeyboard } from '~~/shared';
+import { useTestKeyboard } from '../shared';
 import DatePicker from './story/_date-picker.vue';
 
 const calendarDate = new CalendarDate(1980, 1, 20);

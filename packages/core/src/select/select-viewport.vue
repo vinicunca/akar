@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
-import { useNonce } from '~~/shared/use-nonce';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
+import { useNonce } from '../shared/use-nonce';
 
 export interface ASelectViewportProps extends APrimitiveProps {
   /**
@@ -15,7 +15,7 @@ export interface ASelectViewportProps extends APrimitiveProps {
 import { onMounted, ref, toRefs } from 'vue';
 import {
   APrimitive,
-} from '~~/primitive';
+} from '../primitive';
 import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectSelectItemAlignedPositionContext } from './select-item-aligned-position.vue';
 import { CONTENT_MARGIN } from './utils';

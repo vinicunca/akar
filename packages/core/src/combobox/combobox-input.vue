@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { AListboxFilterEmits, AListboxFilterProps } from '~~/listbox';
+import type { AListboxFilterEmits, AListboxFilterProps } from '../listbox';
 import { useVModel } from '@vueuse/core';
 import { nextTick, onMounted, watch } from 'vue';
-import { usePrimitiveElement } from '~~/primitive';
+import { usePrimitiveElement } from '../primitive';
 
 export type AComboboxInputEmits = AListboxFilterEmits;
 export interface AComboboxInputProps extends AListboxFilterProps {
@@ -12,8 +12,8 @@ export interface AComboboxInputProps extends AListboxFilterProps {
 </script>
 
 <script setup lang="ts">
-import { AListboxFilter } from '~~/listbox';
-import { injectAListboxRootContext } from '~~/listbox/listbox-root.vue';
+import { AListboxFilter } from '../listbox';
+import { injectAListboxRootContext } from '../listbox/listbox-root.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
 const props = withDefaults(defineProps<AComboboxInputProps>(), {

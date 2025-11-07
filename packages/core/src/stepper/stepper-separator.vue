@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { ASeparatorProps } from '~~/separator';
-import { ASeparator } from '~~/separator';
-import { useForwardExpose } from '~~/shared';
+import type { ASeparatorProps } from '../separator';
+import { ASeparator } from '../separator';
+import { useForwardExpose } from '../shared';
 import { injectAStepperItemContext } from './stepper-item.vue';
 import { injectAStepperRootContext } from './stepper-root.vue';
 </script>

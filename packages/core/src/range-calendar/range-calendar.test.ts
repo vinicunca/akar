@@ -6,7 +6,7 @@ import { render } from '@testing-library/vue';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { useTestKeyboard } from '~~/shared';
+import { useTestKeyboard } from '../shared';
 import RangeCalendar from './story/_range-calendar.vue';
 
 it('should pass axe accessibility tests', async () => {

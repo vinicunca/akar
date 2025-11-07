@@ -2,7 +2,7 @@
 import { useRafFn } from '@vueuse/core';
 import { useTimeout } from '@vueuse/shared';
 import { ref } from 'vue';
-import { AVisuallyHidden } from '~~/visually-hidden';
+import { AVisuallyHidden } from '../visually-hidden';
 import { injectAToastProviderContext } from './toast-provider.vue';
 
 const providerContext = injectAToastProviderContext();

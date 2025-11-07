@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { useResizeObserver } from '@vueuse/core';
-import { useCollection } from '~~/collection';
-import { createContext, useForwardExpose } from '~~/shared';
+import { useCollection } from '../collection';
+import { createContext, useForwardExpose } from '../shared';
 
 interface SelectItemAlignedPositionContext {
   contentWrapper?: Ref<HTMLElement | undefined>;
@@ -20,7 +20,7 @@ export const [injectSelectItemAlignedPositionContext, provideSelectItemAlignedPo
 <script setup lang="ts">
 import { clamp } from '@vinicunca/perkakas';
 import { nextTick, onMounted, ref } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectASelectRootContext } from './select-root.vue';
 import { CONTENT_MARGIN } from './utils';

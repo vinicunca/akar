@@ -15,8 +15,8 @@ export interface ANavigationMenuContentProps extends NavigationMenuContentImplPr
 <script setup lang="ts">
 import { isClient, reactiveOmit } from '@vueuse/shared';
 import { computed } from 'vue';
-import { APresence } from '~~/presence';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { APresence } from '../presence';
+import { useForwardExpose, useForwardPropsEmits } from '../shared';
 import NavigationMenuContentImpl from './navigation-menu-content-impl.vue';
 import { injectANavigationMenuItemContext } from './navigation-menu-item.vue';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AVisuallyHiddenProps extends APrimitiveProps {
   feature?: 'focusable' | 'fully-hidden';
@@ -7,7 +7,7 @@ export interface AVisuallyHiddenProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 withDefaults(defineProps<AVisuallyHiddenProps>(), { as: 'span', feature: 'focusable' });
 </script>

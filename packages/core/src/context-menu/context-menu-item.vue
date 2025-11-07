@@ -2,7 +2,7 @@
 import type {
   AMenuItemEmits,
   AMenuItemProps,
-} from '~~/menu';
+} from '../menu';
 
 export type AContextMenuItemEmits = AMenuItemEmits;
 
@@ -10,8 +10,8 @@ export interface AContextMenuItemProps extends AMenuItemProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuItem } from '~~/menu';
-import { useEmitAsProps, useForwardExpose } from '~~/shared';
+import { AMenuItem } from '../menu';
+import { useEmitAsProps, useForwardExpose } from '../shared';
 
 const props = defineProps<AMenuItemProps>();
 const emits = defineEmits<AMenuItemEmits>();

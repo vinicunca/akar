@@ -2,9 +2,9 @@
 import type {
   DismissableLayerEmits,
   DismissableLayerProps,
-} from '~~/dismissable-layer';
-import type { FocusScopeProps } from '~~/focus-scope';
-import type { APopperContentProps } from '~~/popper';
+} from '../dismissable-layer';
+import type { FocusScopeProps } from '../focus-scope';
+import type { APopperContentProps } from '../popper';
 import { reactiveOmit } from '@vueuse/shared';
 
 export type PopoverContentImplEmits = DismissableLayerEmits & {
@@ -32,10 +32,10 @@ export interface PopoverContentImplProps
 </script>
 
 <script setup lang="ts">
-import { DismissableLayer } from '~~/dismissable-layer';
-import { AFocusScope } from '~~/focus-scope';
-import { APopperContent } from '~~/popper';
-import { useFocusGuards, useForwardExpose, useForwardProps } from '~~/shared';
+import { DismissableLayer } from '../dismissable-layer';
+import { AFocusScope } from '../focus-scope';
+import { APopperContent } from '../popper';
+import { useFocusGuards, useForwardExpose, useForwardProps } from '../shared';
 import { injectAPopoverRootContext } from './popover-root.vue';
 
 const props = defineProps<PopoverContentImplProps>();

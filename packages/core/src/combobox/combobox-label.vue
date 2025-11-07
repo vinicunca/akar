@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AComboboxLabelProps extends APrimitiveProps {
   for?: string;
@@ -7,8 +7,8 @@ export interface AComboboxLabelProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose, useId } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { useForwardExpose, useId } from '../shared';
 import { injectAComboboxGroupContext } from './combobox-group.vue';
 
 const props = withDefaults(defineProps<AComboboxLabelProps>(), {

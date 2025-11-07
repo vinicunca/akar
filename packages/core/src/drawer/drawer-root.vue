@@ -3,7 +3,7 @@ import type { WritableComputedRef } from 'vue';
 import type { ADrawerRootEmits, ADrawerRootProps } from './drawer.controls';
 import { useVModel } from '@vueuse/core';
 import { computed, toRefs } from 'vue';
-import { ADialogRoot } from '~~/dialog';
+import { ADialogRoot } from '../dialog';
 import { CLOSE_THRESHOLD, SCROLL_LOCK_TIMEOUT, TRANSITIONS } from './drawer.constants';
 import { provideADrawerRootContext } from './drawer.context.ts';
 import { useDrawer } from './drawer.controls';

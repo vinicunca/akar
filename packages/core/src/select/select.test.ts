@@ -6,7 +6,7 @@ import { mount } from '@vue/test-utils';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
-import { handleSubmit } from '~~/test';
+import { handleSubmit } from '../test';
 import Select from './story/_select-test.vue';
 
 beforeAll(() => {

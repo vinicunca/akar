@@ -1,15 +1,15 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { refAutoReset } from '@vueuse/shared';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectAListboxRootContext } from './listbox-root.vue';
 
 export interface AListboxContentProps extends APrimitiveProps { }
 </script>
 
 <script setup lang="ts">
-import { useCollection } from '~~/collection';
+import { useCollection } from '../collection';
 
 defineProps<AListboxContentProps>();
 

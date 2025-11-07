@@ -4,7 +4,7 @@ import { KEY_CODES, sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { handleSubmit } from '~~/test';
+import { handleSubmit } from '../test';
 import RadioGroup from './story/_radio-group.vue';
 import Radio from './story/_radio.vue';
 

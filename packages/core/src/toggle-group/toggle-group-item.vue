@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { AcceptableValue } from '~~/shared/types';
-import type { AToggleProps } from '~~/toggle';
-import { isValueEqualOrExist, useForwardExpose } from '~~/shared';
+import type { AcceptableValue } from '../shared/types';
+import type { AToggleProps } from '../toggle';
+import { isValueEqualOrExist, useForwardExpose } from '../shared';
 
 export interface AToggleGroupItemProps extends Omit<AToggleProps, 'name' | 'required' | 'modelValue' | 'defaultValue'> {
   /**
@@ -13,9 +13,9 @@ export interface AToggleGroupItemProps extends Omit<AToggleProps, 'name' | 'requ
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { ARovingFocusItem } from '~~/roving-focus';
-import { AToggle } from '~~/toggle';
+import { APrimitive } from '../primitive';
+import { ARovingFocusItem } from '../roving-focus';
+import { AToggle } from '../toggle';
 import { injectAToggleGroupRootContext } from './toggle-group-root.vue';
 
 const props = withDefaults(defineProps<AToggleGroupItemProps>(), {

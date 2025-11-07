@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { DataOrientation, Direction } from '../shared/types';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, ref, toRefs, watch } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { createContext, useDirection, useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { createContext, useDirection, useForwardExpose } from '../shared';
 
 export interface StepperRootContext {
   modelValue: Ref<number | undefined>;

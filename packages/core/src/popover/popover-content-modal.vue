@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PopoverContentImplEmits, PopoverContentImplProps } from './popover-content-impl.vue';
 import { ref } from 'vue';
-import { useForwardExpose, useForwardPropsEmits, useHideOthers } from '~~/shared';
-import { useBodyScrollLock } from '~~/shared/use-body-scroll-lock';
+import { useForwardExpose, useForwardPropsEmits, useHideOthers } from '../shared';
+import { useBodyScrollLock } from '../shared/use-body-scroll-lock';
 import PopoverContentImpl from './popover-content-impl.vue';
 import { injectAPopoverRootContext } from './popover-root.vue';
 

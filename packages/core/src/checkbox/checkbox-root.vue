@@ -1,11 +1,11 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { AcceptableValue, FormFieldProps } from '~~/shared/types';
+import type { APrimitiveProps } from '../primitive';
+import type { AcceptableValue, FormFieldProps } from '../shared/types';
 import type { CheckboxCheckedState } from './utils';
 import { isDeepEqual, isNullish } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
-import { createContext, isValueEqualOrExist, useFormControl, useForwardExpose } from '~~/shared';
+import { createContext, isValueEqualOrExist, useFormControl, useForwardExpose } from '../shared';
 import { injectACheckboxGroupRootContext } from './checkbox-group-root.vue';
 
 export interface ACheckboxRootProps extends APrimitiveProps, FormFieldProps {
@@ -42,9 +42,9 @@ export const [
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { ARovingFocusItem } from '~~/roving-focus';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { APrimitive } from '../primitive';
+import { ARovingFocusItem } from '../roving-focus';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 import { getState, isIndeterminate } from './utils';
 
 defineOptions({

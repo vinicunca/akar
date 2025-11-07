@@ -2,16 +2,16 @@
 import type { DateValue } from '@internationalized/date';
 
 import type { Ref } from 'vue';
-import type { DateMatcher } from '~~/date';
-import type { APrimitiveProps } from '~~/primitive';
-import type { UseDateFormatter } from '~~/shared';
-import type { DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '~~/shared/date';
-import type { Direction, FormFieldProps } from '~~/shared/types';
+import type { DateMatcher } from '../date';
+import type { APrimitiveProps } from '../primitive';
+import type { UseDateFormatter } from '../shared';
+import type { DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '../shared/date';
+import type { Direction, FormFieldProps } from '../shared/types';
 import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
-import { hasTime, isDateBefore } from '~~/date';
-import { createContext, useDateFormatter, useDirection, useLocale } from '~~/shared';
-import { getDefaultDate, normalizeDateStep } from '~~/shared/date';
-import { createContent, getSegmentElements, initializeSegmentValues, isSegmentNavigationKey, syncSegmentValues } from '~~/shared/date';
+import { hasTime, isDateBefore } from '../date';
+import { createContext, useDateFormatter, useDirection, useLocale } from '../shared';
+import { getDefaultDate, normalizeDateStep } from '../shared/date';
+import { createContent, getSegmentElements, initializeSegmentValues, isSegmentNavigationKey, syncSegmentValues } from '../shared/date';
 
 type DateFieldRootContext = {
   locale: Ref<string>;
@@ -82,8 +82,8 @@ export const [
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
-import { AVisuallyHidden } from '~~/visually-hidden';
+import { APrimitive, usePrimitiveElement } from '../primitive';
+import { AVisuallyHidden } from '../visually-hidden';
 
 defineOptions({
   inheritAttrs: false,

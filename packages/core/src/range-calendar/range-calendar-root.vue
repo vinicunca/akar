@@ -1,17 +1,17 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { DateGrid, DateMatcher, WeekDayFormat } from '~~/date';
-import type { APrimitiveProps } from '~~/primitive';
-import type { UseDateFormatter } from '~~/shared';
-import type { DateRange } from '~~/shared/date';
-import type { Direction } from '~~/shared/types';
+import type { DateGrid, DateMatcher, WeekDayFormat } from '../date';
+import type { APrimitiveProps } from '../primitive';
+import type { UseDateFormatter } from '../shared';
+import type { DateRange } from '../shared/date';
+import type { Direction } from '../shared/types';
 import { isEqualDay } from '@internationalized/date';
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { useCalendar } from '~~/calendar/use-calendar';
-import { isDateBefore } from '~~/date';
-import { createContext, useDirection, useLocale } from '~~/shared';
-import { getDefaultDate, handleCalendarInitialFocus } from '~~/shared/date';
+import { useCalendar } from '../calendar/use-calendar';
+import { isDateBefore } from '../date';
+import { createContext, useDirection, useLocale } from '../shared';
+import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
 import { useRangeCalendarState } from './use-range-calendar';
 
 type RangeCalendarRootContext = {
@@ -143,7 +143,7 @@ export const [
 <script setup lang="ts">
 import { useEventListener, useVModel } from '@vueuse/core';
 import { onMounted, ref, toRefs, watch } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { APrimitive, usePrimitiveElement } from '../primitive';
 
 const props = withDefaults(
   defineProps<ARangeCalendarRootProps>(),

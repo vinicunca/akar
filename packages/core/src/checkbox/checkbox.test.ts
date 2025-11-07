@@ -2,7 +2,7 @@ import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { handleSubmit } from '~~/test';
+import { handleSubmit } from '../test';
 import CheckboxGroup from './story/_checkbox-group.vue';
 import Checkbox from './story/_checkbox.vue';
 

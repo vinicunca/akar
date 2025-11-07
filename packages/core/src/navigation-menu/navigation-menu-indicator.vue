@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ANavigationMenuIndicatorProps extends APrimitiveProps {
   /**
@@ -13,9 +13,9 @@ export interface ANavigationMenuIndicatorProps extends APrimitiveProps {
 <script setup lang="ts">
 import { useResizeObserver } from '@vueuse/core';
 import { computed, ref, watchEffect } from 'vue';
-import { APresence } from '~~/presence';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import { APresence } from '../presence';
+import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 
 defineOptions({

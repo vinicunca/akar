@@ -1,4 +1,4 @@
-import type { AcceptableValue } from '~~/shared/types';
+import type { AcceptableValue } from '../shared/types';
 import { isDeepEqual, isFunction, isString, KEY_CODES } from '@vinicunca/perkakas';
 
 export const OPEN_KEYS = [' ', KEY_CODES.ENTER, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN];

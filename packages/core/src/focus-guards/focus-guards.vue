@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useFocusGuards } from '~~/shared';
+import { useFocusGuards } from '../shared';
 
 useFocusGuards();
 </script>

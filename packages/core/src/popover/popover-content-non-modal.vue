@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PopoverContentImplEmits, PopoverContentImplProps } from './popover-content-impl.vue';
 import { ref } from 'vue';
-import { useForwardPropsEmits } from '~~/shared';
+import { useForwardPropsEmits } from '../shared';
 import PopoverContentImpl from './popover-content-impl.vue';
 import { injectAPopoverRootContext } from './popover-root.vue';
 

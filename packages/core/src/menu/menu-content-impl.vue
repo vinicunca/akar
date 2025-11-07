@@ -3,10 +3,10 @@ import type { Ref } from 'vue';
 import type {
   DismissableLayerEmits,
   DismissableLayerProps,
-} from '~~/dismissable-layer';
-import type { FocusScopeProps } from '~~/focus-scope';
-import type { APopperContentProps } from '~~/popper';
-import type { ARovingFocusGroupEmits } from '~~/roving-focus';
+} from '../dismissable-layer';
+import type { FocusScopeProps } from '../focus-scope';
+import type { APopperContentProps } from '../popper';
+import type { ARovingFocusGroupEmits } from '../roving-focus';
 import type {
   GraceIntent,
   Side,
@@ -20,8 +20,8 @@ import {
   useFocusGuards,
   useForwardExpose,
   useTypeahead,
-} from '~~/shared';
-import { useBodyScrollLock } from '~~/shared/use-body-scroll-lock';
+} from '../shared';
+import { useBodyScrollLock } from '../shared/use-body-scroll-lock';
 
 export interface MenuContentContext {
   onItemEnter: (event: PointerEvent) => boolean;
@@ -92,13 +92,13 @@ import {
   toRefs,
   watch,
 } from 'vue';
-import { DismissableLayer } from '~~/dismissable-layer';
-import { AFocusScope } from '~~/focus-scope';
+import { DismissableLayer } from '../dismissable-layer';
+import { AFocusScope } from '../focus-scope';
 import {
   APopperContent,
   APopperContentPropsDefaultValue,
-} from '~~/popper';
-import { ARovingFocusGroup } from '~~/roving-focus';
+} from '../popper';
+import { ARovingFocusGroup } from '../roving-focus';
 import { injectAMenuContext, injectAMenuRootContext } from './menu-root.vue';
 import {
   FIRST_LAST_KEYS,

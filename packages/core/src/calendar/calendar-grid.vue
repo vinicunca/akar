@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ACalendarGridProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
 const props = withDefaults(defineProps<ACalendarGridProps>(), { as: 'table' });

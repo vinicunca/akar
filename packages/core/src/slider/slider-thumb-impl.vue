@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface SliderThumbImplProps extends APrimitiveProps {
   index: number;
@@ -9,9 +9,9 @@ export interface SliderThumbImplProps extends APrimitiveProps {
 <script setup lang="ts">
 import { useMounted } from '@vueuse/core';
 import { computed, onMounted, onUnmounted } from 'vue';
-import { useCollection } from '~~/collection';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose, useSize } from '~~/shared';
+import { useCollection } from '../collection';
+import { APrimitive } from '../primitive';
+import { useForwardExpose, useSize } from '../shared';
 import { injectASliderRootContext } from './slider-root.vue';
 import { convertValueToPercentage, getLabel, getThumbInBoundsOffset, injectSliderOrientationContext } from './utils';
 

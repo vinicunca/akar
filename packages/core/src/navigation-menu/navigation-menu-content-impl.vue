@@ -3,9 +3,9 @@ import type {
   DismissableLayerEmits,
   DismissableLayerProps,
   FocusOutsideEvent,
-} from '~~/dismissable-layer';
-import type { PointerDownOutsideEvent } from '~~/dismissable-layer/utils';
-import { useCollection } from '~~/collection';
+} from '../dismissable-layer';
+import type { PointerDownOutsideEvent } from '../dismissable-layer/utils';
+import { useCollection } from '../collection';
 
 type MotionAttribute = 'to-start' | 'to-end' | 'from-start' | 'from-end';
 
@@ -17,8 +17,8 @@ export interface NavigationMenuContentImplProps extends DismissableLayerProps {}
 <script setup lang="ts">
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, ref, watchEffect } from 'vue';
-import { DismissableLayer } from '~~/dismissable-layer';
-import { getActiveElement, useArrowNavigation, useForwardExpose } from '~~/shared';
+import { DismissableLayer } from '../dismissable-layer';
+import { getActiveElement, useArrowNavigation, useForwardExpose } from '../shared';
 import { injectANavigationMenuItemContext } from './navigation-menu-item.vue';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 import {

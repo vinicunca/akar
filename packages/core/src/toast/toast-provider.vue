@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import type { SwipeDirection } from './utils';
-import { createContext } from '~~/shared';
+import { createContext } from '../shared';
 
 type ToastProviderContext = {
   label: Ref<string>;
@@ -56,7 +56,7 @@ export const [
 <script setup lang="ts">
 import { isString } from '@vinicunca/perkakas';
 import { ref, toRefs } from 'vue';
-import { useCollection } from '~~/collection';
+import { useCollection } from '../collection';
 
 defineOptions({
   inheritAttrs: false,

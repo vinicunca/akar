@@ -13,8 +13,8 @@ export interface ATooltipContentProps extends TooltipContentImplProps {
 </script>
 
 <script setup lang="ts">
-import { APresence } from '~~/presence';
-import { useForwardExpose, useForwardPropsEmits } from '~~/shared';
+import { APresence } from '../presence';
+import { useForwardExpose, useForwardPropsEmits } from '../shared';
 import TooltipContentHoverable from './tooltip-content-hoverable.vue';
 import TooltipContentImpl from './tooltip-content-impl.vue';
 import { injectATooltipRootContext } from './tooltip-root.vue';

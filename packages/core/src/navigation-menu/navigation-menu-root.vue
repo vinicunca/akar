@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import type { Direction, Orientation } from './utils';
-import { createContext } from '~~/shared';
+import { createContext } from '../shared';
 
 export interface ANavigationMenuRootProps extends APrimitiveProps {
   /** The controlled value of the menu item to activate. Can be used as `v-model`. */
@@ -101,11 +101,11 @@ import {
   toRefs,
   watchEffect,
 } from 'vue';
-import { useCollection } from '~~/collection';
+import { useCollection } from '../collection';
 import {
   APrimitive,
-} from '~~/primitive';
-import { useDirection, useForwardExpose, useId } from '~~/shared';
+} from '../primitive';
+import { useDirection, useForwardExpose, useId } from '../shared';
 
 const props = withDefaults(
   defineProps<ANavigationMenuRootProps>(),

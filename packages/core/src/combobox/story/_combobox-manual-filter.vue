@@ -2,7 +2,7 @@
 import type { AComboboxInputProps, AComboboxRootProps } from '..';
 import { Icon } from '@iconify/vue';
 import { computed, ref } from 'vue';
-import { useFilter } from '~~/shared';
+import { useFilter } from '../../shared';
 import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, AComboboxTrigger, AComboboxViewport } from '..';
 
 const props = defineProps<AComboboxRootProps & { input?: AComboboxInputProps }>();

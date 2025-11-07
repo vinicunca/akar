@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { AMenuGroupProps } from '~~/menu';
-import { useForwardExpose } from '~~/shared';
+import type { AMenuGroupProps } from '../menu';
+import { useForwardExpose } from '../shared';
 
 export interface ADropdownMenuGroupProps extends AMenuGroupProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuGroup } from '~~/menu';
+import { AMenuGroup } from '../menu';
 
 const props = defineProps<ADropdownMenuGroupProps>();
 useForwardExpose();

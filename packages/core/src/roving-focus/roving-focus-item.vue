@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { KEY_CODES } from '@vinicunca/perkakas';
 
 export interface ARovingFocusItemProps extends APrimitiveProps {
@@ -18,9 +18,9 @@ export interface ARovingFocusItemProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted } from 'vue';
-import { useCollection } from '~~/collection';
-import { APrimitive } from '~~/primitive';
-import { useId } from '~~/shared';
+import { useCollection } from '../collection';
+import { APrimitive } from '../primitive';
+import { useId } from '../shared';
 import { injectRovingFocusGroupContext } from './roving-focus-group.vue';
 import { focusFirst, getFocusIntent, wrapArray } from './utils';
 

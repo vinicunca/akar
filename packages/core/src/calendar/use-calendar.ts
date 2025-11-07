@@ -4,8 +4,8 @@
 
 import type { DateFields, DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { DateGrid, DateMatcher, WeekDayFormat } from '~~/date';
-import type { DateFormatterOptions } from '~~/shared/use-date-formatter';
+import type { DateGrid, DateMatcher, WeekDayFormat } from '../date';
+import type { DateFormatterOptions } from '../shared/use-date-formatter';
 import { isEqualMonth, isSameDay } from '@internationalized/date';
 import { computed, ref, watch } from 'vue';
 import {
@@ -16,8 +16,8 @@ import {
   isDateBefore,
   toDate,
 
-} from '~~/date';
-import { useDateFormatter } from '~~/shared';
+} from '../date';
+import { useDateFormatter } from '../shared';
 
 export interface UseCalendarProps {
   locale: Ref<string>;

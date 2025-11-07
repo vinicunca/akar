@@ -7,7 +7,7 @@ export interface AMenuSubTriggerProps extends MenuItemImplProps {}
 
 <script setup lang="ts">
 import { nextTick, onUnmounted, ref } from 'vue';
-import { useId } from '~~/shared';
+import { useId } from '../shared';
 import AMenuAnchor from './menu-anchor.vue';
 import { injectMenuContentContext } from './menu-content-impl.vue';
 import MenuItemImpl from './menu-item-impl.vue';

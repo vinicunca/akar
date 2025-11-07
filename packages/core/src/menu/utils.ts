@@ -1,5 +1,5 @@
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { getActiveElement } from '~~/shared';
+import { getActiveElement } from '../shared';
 
 export type CheckedState = 'indeterminate' | boolean;
 export type Direction = 'ltr' | 'rtl';

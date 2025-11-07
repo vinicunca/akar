@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { MenuItemImplProps } from './menu-item-impl.vue';
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose } from '../shared';
 
 export type AMenuItemEmits = {
   /**

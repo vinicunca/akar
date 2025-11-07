@@ -1,13 +1,13 @@
 import type { DateFields, TimeFields } from '@internationalized/date';
 
-import type { TimeValue } from '~~/shared/date';
+import type { TimeValue } from '../shared/date';
 import type { ATimeFieldRootProps } from './time-field-root.vue';
 import { CalendarDateTime, now, parseAbsoluteToLocal, Time, toZoned } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { useTestKeyboard } from '~~/shared';
+import { useTestKeyboard } from '../shared';
 import TimeField from './story/_time-field.vue';
 
 const time = new Time(9, 15, 29);

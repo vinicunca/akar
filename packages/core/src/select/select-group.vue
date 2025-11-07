@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { createContext, useId } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { createContext, useId } from '../shared';
 
 export interface ASelectGroupProps extends APrimitiveProps {}
 
@@ -13,7 +13,7 @@ export const [injectASelectGroupContext, provideSelectGroupContext]
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 
 const props = defineProps<ASelectGroupProps>();
 

@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { AMenuGroupProps } from '~~/menu';
+import type { AMenuGroupProps } from '../menu';
 
 export interface AContextMenuGroupProps extends AMenuGroupProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuGroup } from '~~/menu';
-import { useForwardExpose } from '~~/shared';
+import { AMenuGroup } from '../menu';
+import { useForwardExpose } from '../shared';
 
 const props = defineProps<AContextMenuGroupProps>();
 useForwardExpose();

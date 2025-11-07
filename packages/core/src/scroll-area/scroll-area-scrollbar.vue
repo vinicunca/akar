@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import { createContext, useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { createContext, useForwardExpose } from '../shared';
 
 export interface AScrollAreaScrollbarProps extends APrimitiveProps {
   /** The orientation of the scrollbar */

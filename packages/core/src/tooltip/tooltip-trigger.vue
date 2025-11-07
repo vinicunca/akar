@@ -1,4 +1,6 @@
 <script lang="ts">
+import type { APopperAnchorProps } from '../popper';
+
 export type TooltipTriggerDataState
   = | 'closed'
     | 'delayed-open'
@@ -8,11 +10,10 @@ export interface ATooltipTriggerProps extends APopperAnchorProps {}
 </script>
 
 <script setup lang="ts">
-import type { APopperAnchorProps } from '~~/popper';
 import { computed, onMounted, ref } from 'vue';
-import { APopperAnchor } from '~~/popper';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose, useId } from '~~/shared';
+import { APopperAnchor } from '../popper';
+import { APrimitive } from '../primitive';
+import { useForwardExpose, useId } from '../shared';
 import { injectATooltipProviderContext } from './tooltip-provider.vue';
 import { injectATooltipRootContext } from './tooltip-root.vue';
 

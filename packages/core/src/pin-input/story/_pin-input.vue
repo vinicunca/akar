@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { APinInputRootEmits, APinInputRootProps } from '..';
 import { ref } from 'vue';
-import { ALabel } from '~~/label';
-import { useEmitAsProps } from '~~/shared';
 import { APinInputInput, APinInputRoot } from '..';
+import { ALabel } from '../../label';
+import { useEmitAsProps } from '../../shared';
 
 const props = defineProps<APinInputRootProps>();
 const emits = defineEmits<APinInputRootEmits>();

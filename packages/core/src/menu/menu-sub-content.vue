@@ -17,8 +17,8 @@ export interface AMenuSubContentProps extends Omit<MenuContentImplProps, 'align'
 </script>
 
 <script setup lang="ts">
-import { APresence } from '~~/presence';
-import { useForwardExpose, useForwardPropsEmits, useId } from '~~/shared';
+import { APresence } from '../presence';
+import { useForwardExpose, useForwardPropsEmits, useId } from '../shared';
 import MenuContentImpl from './menu-content-impl.vue';
 import { injectAMenuContext, injectAMenuRootContext } from './menu-root.vue';
 import { injectMenuSubContext } from './menu-sub.vue';

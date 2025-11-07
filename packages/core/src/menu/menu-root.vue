@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import type { Direction } from './utils';
-import { createContext, useDirection } from '~~/shared';
-import { useIsUsingKeyboard } from '~~/shared/use-is-using-keyboard';
+import { createContext, useDirection } from '../shared';
+import { useIsUsingKeyboard } from '../shared/use-is-using-keyboard';
 
 export interface MenuContext {
   open: Ref<boolean>;
@@ -52,7 +52,7 @@ import {
   ref,
   toRefs,
 } from 'vue';
-import { APopperRoot } from '~~/popper';
+import { APopperRoot } from '../popper';
 
 const props = withDefaults(defineProps<AMenuProps>(), {
   open: false,

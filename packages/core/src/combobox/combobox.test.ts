@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
-import { handleSubmit } from '~~/test';
+import { handleSubmit } from '../test';
 import ComboboxObject from './story/_combobox-object.vue';
 import Combobox from './story/_combobox.vue';
 

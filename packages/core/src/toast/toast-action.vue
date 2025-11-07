@@ -13,7 +13,7 @@ export interface AToastActionProps extends AToastCloseProps {
 </script>
 
 <script setup lang="ts">
-import { useForwardExpose } from '~~/shared';
+import { useForwardExpose } from '../shared';
 import ToastAnnounceExclude from './toast-announce-exclude.vue';
 import AToastClose from './toast-close.vue';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import type { StringOrNumber } from '~~/shared/types';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import type { StringOrNumber } from '../shared/types';
+import { useForwardExpose } from '../shared';
 
 export interface ATabsContentProps extends APrimitiveProps {
   /** A unique value that associates the content with a trigger. */
@@ -16,8 +16,8 @@ export interface ATabsContentProps extends APrimitiveProps {
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { APresence } from '~~/presence';
-import { APrimitive } from '~~/primitive';
+import { APresence } from '../presence';
+import { APrimitive } from '../primitive';
 import { injectATabsRootContext } from './tabs-root.vue';
 import { makeContentId, makeTriggerId } from './utils';
 

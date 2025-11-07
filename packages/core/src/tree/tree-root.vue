@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { Direction } from '~~/shared/types';
-import { createContext, getActiveElement, useDirection, useSelectionBehavior, useTypeahead } from '~~/shared';
+import type { Direction } from '../shared/types';
+import { createContext, getActiveElement, useDirection, useSelectionBehavior, useTypeahead } from '../shared';
 
 export interface ATreeRootProps<T = Record<string, any>, U extends Record<string, any> = Record<string, any>, M extends boolean = false> extends APrimitiveProps {
   /** The controlled value of the tree. Can be binded with with `v-model`. */
@@ -80,12 +80,12 @@ export const [
 <script setup lang="ts" generic="T extends Record<string, any>, U extends Record<string, any>, M extends boolean = false">
 import type { EventHook } from '@vueuse/core';
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { createEventHook, useVModel } from '@vueuse/core';
 import { computed, nextTick, ref, toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { ARovingFocusGroup } from '~~/roving-focus';
-import { MAP_KEY_TO_FOCUS_INTENT } from '~~/roving-focus/utils';
+import { APrimitive } from '../primitive';
+import { ARovingFocusGroup } from '../roving-focus';
+import { MAP_KEY_TO_FOCUS_INTENT } from '../roving-focus/utils';
 import { flatten } from './utils';
 
 const props = withDefaults(

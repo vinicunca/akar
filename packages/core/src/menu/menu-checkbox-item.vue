@@ -18,7 +18,7 @@ export interface AMenuCheckboxItemProps extends AMenuItemProps {
 
 <script setup lang="ts">
 import { reactiveOmit, useVModel } from '@vueuse/core';
-import { useForwardProps } from '~~/shared';
+import { useForwardProps } from '../shared';
 import { provideMenuItemIndicatorContext } from './menu-item-indicator.vue';
 import AMenuItem from './menu-item.vue';
 import { getCheckedState, isIndeterminate } from './utils';

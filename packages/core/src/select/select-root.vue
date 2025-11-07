@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { AcceptableValue, Direction, FormFieldProps } from '~~/shared/types';
+import type { AcceptableValue, Direction, FormFieldProps } from '../shared/types';
 import { isNullish } from '@vinicunca/perkakas';
-import { useCollection } from '~~/collection';
-import { createContext, useDirection, useFormControl } from '~~/shared';
+import { useCollection } from '../collection';
+import { createContext, useDirection, useFormControl } from '../shared';
 import { compare, valueComparator } from './utils';
 
 export interface ASelectRootProps<T = AcceptableValue> extends FormFieldProps {
@@ -70,7 +70,7 @@ interface SelectOption {
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs } from 'vue';
-import { APopperRoot } from '~~/popper';
+import { APopperRoot } from '../popper';
 import BubbleSelect from './bubble-select.vue';
 
 defineOptions({

@@ -17,8 +17,8 @@ export interface ASelectContentProps extends SelectContentImplProps {
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
-import { APresence } from '~~/presence';
-import { useForwardPropsEmits } from '~~/shared';
+import { APresence } from '../presence';
+import { useForwardPropsEmits } from '../shared';
 import SelectContentImpl from './select-content-impl.vue';
 import SelectProvider from './select-provider.vue';
 import { injectASelectRootContext } from './select-root.vue';

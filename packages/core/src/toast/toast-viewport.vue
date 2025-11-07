@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AToastViewportProps extends APrimitiveProps {
   /**
@@ -21,11 +21,11 @@ export interface AToastViewportProps extends APrimitiveProps {
 import { isString, KEY_CODES } from '@vinicunca/perkakas';
 import { onKeyStroke, unrefElement } from '@vueuse/core';
 import { computed, onMounted, ref, toRefs, watchEffect } from 'vue';
-import { useCollection } from '~~/collection';
-import { DismissableLayerBranch } from '~~/dismissable-layer';
-import { focusFirst, getTabbableCandidates } from '~~/focus-scope/utils';
-import { APrimitive } from '~~/primitive';
-import { getActiveElement, useForwardExpose } from '~~/shared';
+import { useCollection } from '../collection';
+import { DismissableLayerBranch } from '../dismissable-layer';
+import { focusFirst, getTabbableCandidates } from '../focus-scope/utils';
+import { APrimitive } from '../primitive';
+import { getActiveElement, useForwardExpose } from '../shared';
 import FocusProxy from './focus-proxy.vue';
 import { injectAToastProviderContext } from './toast-provider.vue';
 import { VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';

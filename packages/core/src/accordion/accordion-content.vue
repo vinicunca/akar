@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { ACollapsibleContentProps } from '~~/collapsible';
+import type { ACollapsibleContentProps } from '../collapsible';
 
 export interface AAccordionContentProps extends ACollapsibleContentProps {}
 </script>
 
 <script setup lang="ts">
-import { ACollapsibleContent } from '~~/collapsible';
-import { useForwardExpose } from '~~/shared';
+import { ACollapsibleContent } from '../collapsible';
+import { useForwardExpose } from '../shared';
 import { injectAAccordionItemContext } from './accordion-item.vue';
 import { injectAAccordionRootContext } from './accordion-root.vue';
 

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { DateValue } from '@internationalized/date';
 import type { ADateRangePickerRootProps } from '..';
-import { ALabel } from '~~/label';
 import {
   ADateRangePickerCalendar,
   ADateRangePickerCell,
@@ -21,6 +20,7 @@ import {
   ADateRangePickerRoot,
   ADateRangePickerTrigger,
 } from '..';
+import { ALabel } from '../../label';
 
 const props = defineProps<{ dateFieldProps?: ADateRangePickerRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>();
 </script>

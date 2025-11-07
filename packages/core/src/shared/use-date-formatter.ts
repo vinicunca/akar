@@ -10,7 +10,7 @@ import {
 } from '@internationalized/date';
 import { ref } from 'vue';
 
-import { hasTime, isZonedDateTime, toDate } from '~~/date';
+import { hasTime, isZonedDateTime, toDate } from '../date';
 
 export interface DateFormatterOptions extends Intl.DateTimeFormatOptions {
   calendar?: string;

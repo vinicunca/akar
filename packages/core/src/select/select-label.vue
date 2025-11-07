@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface ASelectLabelProps extends APrimitiveProps {
   for?: string;
@@ -7,7 +7,7 @@ export interface ASelectLabelProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectASelectGroupContext } from './select-group.vue';
 
 const props = withDefaults(defineProps<ASelectLabelProps>(), {

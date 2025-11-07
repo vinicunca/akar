@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { AFocusScope } from '~~/focus-scope';
+import { AFocusScope } from '../focus-scope';
 import { DismissableLayer } from '..';
 import DismissableBox from './_DismissableBox.vue';
 

@@ -5,7 +5,7 @@ import {
   ADialogContent,
   ADialogRoot,
   ADialogTrigger,
-} from '~~/dialog';
+} from '../dialog';
 import {
   ASelectContent,
   ASelectGroup,

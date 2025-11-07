@@ -4,10 +4,10 @@
 
 import type { DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { DateMatcher } from '~~/date';
+import type { DateMatcher } from '../date';
 import { isSameDay } from '@internationalized/date';
 import { computed } from 'vue';
-import { areAllDaysBetweenValid, getDaysBetween, isDateBefore, isDateBetween } from '~~/date';
+import { areAllDaysBetweenValid, getDaysBetween, isDateBefore, isDateBetween } from '../date';
 
 export interface UseRangeCalendarProps {
   start: Ref<DateValue | undefined>;

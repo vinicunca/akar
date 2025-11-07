@@ -1,5 +1,5 @@
 <script lang="ts">
-import { useCollection } from '~~/collection';
+import { useCollection } from '../collection';
 
 export interface ASelectTriggerProps extends APopperAnchorProps {
   disabled?: boolean;
@@ -7,11 +7,11 @@ export interface ASelectTriggerProps extends APopperAnchorProps {
 </script>
 
 <script setup lang="ts">
-import type { APopperAnchorProps } from '~~/popper';
+import type { APopperAnchorProps } from '../popper';
 import { computed, onMounted } from 'vue';
-import { APopperAnchor } from '~~/popper';
-import { APrimitive } from '~~/primitive';
-import { useForwardExpose, useId, useTypeahead } from '~~/shared';
+import { APopperAnchor } from '../popper';
+import { APrimitive } from '../primitive';
+import { useForwardExpose, useId, useTypeahead } from '../shared';
 import {
   injectASelectRootContext,
 } from './select-root.vue';

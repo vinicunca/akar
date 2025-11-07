@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
-import { useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import { useForwardExpose } from '../shared';
 
 export interface AScrollAreaThumbProps extends APrimitiveProps {}
 </script>
@@ -8,7 +8,7 @@ export interface AScrollAreaThumbProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { watchOnce } from '@vueuse/core';
 import { computed, onUnmounted, ref } from 'vue';
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 import { injectScrollAreaScrollbarVisibleContext } from './scroll-area-scrollbar-visible.vue';
 import { addUnlinkedScrollListener } from './utils';

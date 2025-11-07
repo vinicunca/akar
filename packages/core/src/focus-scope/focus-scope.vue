@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 import { KEY_CODES } from '@vinicunca/perkakas';
 
 export type AFocusScopeEmits = {
@@ -36,8 +36,8 @@ export interface AFocusScopeProps extends APrimitiveProps {
 <script setup lang="ts">
 import { isClient } from '@vueuse/shared';
 import { nextTick, reactive, ref, watchEffect } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { getActiveElement, useForwardExpose } from '~~/shared';
+import { APrimitive } from '../primitive';
+import { getActiveElement, useForwardExpose } from '../shared';
 import { createFocusScopesStack, removeLinks } from './stack';
 import {
   AUTOFOCUS_ON_MOUNT,

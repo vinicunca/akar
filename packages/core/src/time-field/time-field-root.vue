@@ -2,19 +2,19 @@
 import type { DateValue } from '@internationalized/date';
 
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { UseDateFormatter } from '~~/shared';
-import type { DateStep, HourCycle, SegmentPart, SegmentValueObj, TimeValue } from '~~/shared/date';
-import type { Direction, FormFieldProps } from '~~/shared/types';
+import type { APrimitiveProps } from '../primitive';
+import type { UseDateFormatter } from '../shared';
+import type { DateStep, HourCycle, SegmentPart, SegmentValueObj, TimeValue } from '../shared/date';
+import type { Direction, FormFieldProps } from '../shared/types';
 import { getLocalTimeZone, isEqualDay, Time, toCalendarDateTime, today } from '@internationalized/date';
 import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
-import { isDateBefore } from '~~/date';
+import { isDateBefore } from '../date';
 import {
   createContext,
   useDateFormatter,
   useDirection,
   useLocale,
-} from '~~/shared';
+} from '../shared';
 import {
   createContent,
   getDefaultTime,
@@ -23,7 +23,7 @@ import {
   isSegmentNavigationKey,
   normalizeDateStep,
   syncTimeSegmentValues,
-} from '~~/shared/date';
+} from '../shared/date';
 
 type TimeFieldRootContext = {
   locale: Ref<string>;
@@ -97,8 +97,8 @@ function convertValue(value: TimeValue, date: DateValue = today(getLocalTimeZone
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
-import { AVisuallyHidden } from '~~/visually-hidden';
+import { APrimitive, usePrimitiveElement } from '../primitive';
+import { AVisuallyHidden } from '../visually-hidden';
 
 defineOptions({
   inheritAttrs: false,

@@ -1,14 +1,14 @@
 <script lang="ts">
-import type { AListboxItemEmits, AListboxItemProps } from '~~/listbox';
-import type { SelectEvent } from '~~/listbox/listbox-item.vue';
-import type { AcceptableValue } from '~~/shared/types';
+import type { AListboxItemEmits, AListboxItemProps } from '../listbox';
+import type { SelectEvent } from '../listbox/listbox-item.vue';
+import type { AcceptableValue } from '../shared/types';
 import { computed, onMounted, onUnmounted } from 'vue';
-import { usePrimitiveElement } from '~~/primitive';
-import { useId } from '~~/shared';
+import { usePrimitiveElement } from '../primitive';
+import { useId } from '../shared';
 import { injectAComboboxGroupContext } from './combobox-group.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
-export { injectAListboxItemContext as injectComboboxItemContext } from '~~/listbox';
+export { injectAListboxItemContext as injectComboboxItemContext } from '../listbox';
 
 export type AComboboxItemEmits<T = AcceptableValue> = AListboxItemEmits<T>;
 export interface AComboboxItemProps<T = AcceptableValue> extends AListboxItemProps<T> {
@@ -22,7 +22,7 @@ export interface AComboboxItemProps<T = AcceptableValue> extends AListboxItemPro
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
-import { AListboxItem } from '~~/listbox';
+import { AListboxItem } from '../listbox';
 
 const props = defineProps<AComboboxItemProps<T>>();
 const emits = defineEmits<AComboboxItemEmits<T>>();

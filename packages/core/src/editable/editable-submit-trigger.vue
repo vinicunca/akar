@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { APrimitiveProps } from '~~/primitive';
+import type { APrimitiveProps } from '../primitive';
 
 export interface AEditableSubmitTriggerProps extends APrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { APrimitive } from '~~/primitive';
+import { APrimitive } from '../primitive';
 import { injectAEditableRootContext } from './editable-root.vue';
 
 const props = withDefaults(defineProps<AEditableSubmitTriggerProps>(), { as: 'button' });

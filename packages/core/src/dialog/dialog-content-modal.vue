@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DialogContentImplEmits, DialogContentImplProps } from './dialog-content-impl.vue';
-import { useEmitAsProps, useForwardExpose, useHideOthers } from '~~/shared';
+import { useEmitAsProps, useForwardExpose, useHideOthers } from '../shared';
 import DialogContentImpl from './dialog-content-impl.vue';
 import { injectDialogRootContext } from './dialog-root.vue';
 

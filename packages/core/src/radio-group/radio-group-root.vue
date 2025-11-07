@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import type { APrimitiveProps } from '~~/primitive';
-import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '~~/shared/types';
-import { createContext, useDirection, useFormControl, useForwardExpose } from '~~/shared';
+import type { APrimitiveProps } from '../primitive';
+import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '../shared/types';
+import { createContext, useDirection, useFormControl, useForwardExpose } from '../shared';
 
 export interface ARadioGroupRootProps extends APrimitiveProps, FormFieldProps {
   /** The controlled value of the radio item to check. Can be binded as `v-model`. */
@@ -44,9 +44,9 @@ export const [injectARadioGroupRootContext, provideRadioGroupRootContext]
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { toRefs } from 'vue';
-import { APrimitive } from '~~/primitive';
-import { ARovingFocusGroup } from '~~/roving-focus';
-import { AVisuallyHiddenInput } from '~~/visually-hidden';
+import { APrimitive } from '../primitive';
+import { ARovingFocusGroup } from '../roving-focus';
+import { AVisuallyHiddenInput } from '../visually-hidden';
 
 const props = withDefaults(defineProps<ARadioGroupRootProps>(), {
   disabled: false,

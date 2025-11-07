@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { DateGrid, DateMatcher, WeekDayFormat } from '~~/date';
-import type { APrimitiveProps } from '~~/primitive';
-import type { UseDateFormatter } from '~~/shared';
-import type { Direction } from '~~/shared/types';
+import type { DateGrid, DateMatcher, WeekDayFormat } from '../date';
+import type { APrimitiveProps } from '../primitive';
+import type { UseDateFormatter } from '../shared';
+import type { Direction } from '../shared/types';
 import { isEqualDay, isSameDay } from '@internationalized/date';
-import { createContext, useDirection, useLocale } from '~~/shared';
-import { getDefaultDate, handleCalendarInitialFocus } from '~~/shared/date';
+import { createContext, useDirection, useLocale } from '../shared';
+import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
 import { useCalendar, useCalendarState } from './use-calendar';
 
 type CalendarRootContext = {
@@ -114,7 +114,7 @@ export const [
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
 import { onMounted, toRefs, watch } from 'vue';
-import { APrimitive, usePrimitiveElement } from '~~/primitive';
+import { APrimitive, usePrimitiveElement } from '../primitive';
 
 const props = withDefaults(
   defineProps<ACalendarRootProps>(),
