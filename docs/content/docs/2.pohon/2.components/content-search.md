@@ -6,9 +6,9 @@ framework: nuxt
 links:
   - label: CommandPalette
     to: /docs/pohon/components/command-palette
-    icon: i-simple-icons-nuxtdotjs
+    icon: i-simple-icons:nuxtdotjs
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/content/ContentSearch.vue
 ---
 
@@ -102,15 +102,15 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
 
 const links = [{
   label: 'Docs',
-  icon: 'i-lucide-book',
+  icon: 'i-lucide:book',
   to: '/docs/getting-started'
 }, {
   label: 'Components',
-  icon: 'i-lucide-box',
+  icon: 'i-lucide:box',
   to: '/docs/pohon/components'
 }, {
   label: 'Showcase',
-  icon: 'i-lucide-presentation',
+  icon: 'i-lucide:presentation',
   to: '/showcase'
 }]
 

@@ -15,7 +15,7 @@ const props = defineProps<HighlightsProps>();
     >
       <span class="border border-primary/10 rounded-full bg-primary/10 flex flex-none h-6 aspect-square items-center justify-center !w-6">
         <i
-          class="i-radix-icons:check color-primary size-4"
+          class="i-lucide:check color-primary size-4"
         />
       </span>
 

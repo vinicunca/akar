@@ -137,7 +137,7 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
             <PAvatar
               size="lg"
               :src="state.avatar ? createObjectUrl(state.avatar) : undefined"
-              icon="i-lucide-image"
+              icon="i-lucide:image"
             />
 
             <PButton
@@ -185,7 +185,7 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
 
     <PFileUpload
       v-model="valueMultiple"
-      icon="i-lucide-image"
+      icon="i-lucide:image"
       label="Drop your images here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
       multiple
@@ -199,7 +199,7 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
       <template #actions="{ open }">
         <PButton
           label="Select images"
-          icon="i-lucide-upload"
+          icon="i-lucide:upload"
           color="neutral"
           variant="outline"
           :size="props?.size"

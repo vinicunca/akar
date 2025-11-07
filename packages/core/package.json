@@ -26,53 +26,30 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "import": "./src/index.ts"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./constant": {
-      "import": "./src/constant.ts"
+      "import": "./dist/constant.js",
+      "require": "./dist/constant.cjs"
     },
     "./date": {
-      "import": "./src/date.ts"
+      "import": "./dist/date.js",
+      "require": "./dist/date.cjs"
     },
     "./namespaced": {
-      "import": "./src/namespaced.ts"
+      "import": "./dist/namespaced/index.mjs",
+      "require": "./dist/namespaced/index.cjs"
     },
     "./nuxt": {
-      "import": "./src/nuxt/index.ts"
+      "import": "./dist/nuxt/index.mjs",
+      "require": "./dist/nuxt/index.cjs"
     },
     "./resolver": {
-      "import": "./src/resolver/index.ts"
+      "import": "./dist/resolver/index.mjs",
+      "require": "./dist/resolver/index.cjs"
     },
     "./package.json": "./package.json"
-  },
-  "publishConfig": {
-    "exports": {
-      ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
-      },
-      "./constant": {
-        "import": "./dist/constant.js",
-        "require": "./dist/constant.cjs"
-      },
-      "./date": {
-        "import": "./dist/date.js",
-        "require": "./dist/date.cjs"
-      },
-      "./namespaced": {
-        "import": "./dist/namespaced/index.mjs",
-        "require": "./dist/namespaced/index.cjs"
-      },
-      "./nuxt": {
-        "import": "./dist/nuxt/index.mjs",
-        "require": "./dist/nuxt/index.cjs"
-      },
-      "./resolver": {
-        "import": "./dist/resolver/index.mjs",
-        "require": "./dist/resolver/index.cjs"
-      },
-      "./package.json": "./package.json"
-    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

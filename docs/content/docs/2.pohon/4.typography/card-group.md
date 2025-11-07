@@ -5,7 +5,7 @@ framework: nuxt
 category: components
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/prose/CardGroup.vue
 ---
 
@@ -20,7 +20,7 @@ Wrap your `card` components with the `card-group` component to group them togeth
 ::card
 ---
 title: Dashboard
-icon: i-simple-icons-github
+icon: i-simple-icons:github
 to: https://github.com/nuxt-ui-templates/dashboard
 target: _blank
 ---
@@ -30,7 +30,7 @@ A dashboard with multi-column layout.
 ::card
 ---
 title: SaaS
-icon: i-simple-icons-github
+icon: i-simple-icons:github
 to: https://github.com/nuxt-ui-templates/saas
 target: _blank
 ---
@@ -40,7 +40,7 @@ A template with landing, pricing, docs and blog.
 ::card
 ---
 title: Docs
-icon: i-simple-icons-github
+icon: i-simple-icons:github
 to: https://github.com/nuxt-ui-templates/docs
 target: _blank
 ---
@@ -50,7 +50,7 @@ A documentation with `@nuxt/content`.
 ::card
 ---
 title: Landing
-icon: i-simple-icons-github
+icon: i-simple-icons:github
 to: https://github.com/nuxt-ui-templates/landing
 target: _blank
 ---
@@ -67,7 +67,7 @@ A landing page you can use as starting point.
 ::card
 ---
 title: Dashboard
-icon: i-simple-icons-github
+icon: i-simple-icons:github
 to: https://github.com/nuxt-ui-templates/dashboard
 target: _blank
 ---
@@ -77,7 +77,7 @@ A dashboard with multi-column layout.
 ::card
 ---
 title: SaaS
-icon: i-simple-icons-github
+icon: i-simple-icons:github
 to: https://github.com/nuxt-ui-templates/saas
 target: _blank
 ---
@@ -87,7 +87,7 @@ A template with landing, pricing, docs and blog.
 ::card
 ---
 title: Docs
-icon: i-simple-icons-github
+icon: i-simple-icons:github
 to: https://github.com/nuxt-ui-templates/docs
 target: _blank
 ---
@@ -97,7 +97,7 @@ A documentation with `@nuxt/content`.
 ::card
 ---
 title: Landing
-icon: i-simple-icons-github
+icon: i-simple-icons:github
 to: https://github.com/nuxt-ui-templates/landing
 target: _blank
 ---

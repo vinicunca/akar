@@ -5,7 +5,7 @@ links:
   - label: Tree
     to: /docs/akar/components/tree
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/tree.vue
 ---
 
@@ -30,20 +30,20 @@ props:
         - label: 'composables/'
           children:
             - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
             - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
         - label: 'components/'
           defaultExpanded: true
           children:
             - label: 'Card.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
             - label: 'Button.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
     - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
+      icon: 'i-vscode-icons:file-type-vue'
     - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
+      icon: 'i-vscode-icons:file-type-nuxt'
   class: 'w-60'
 ---
 ::
@@ -87,20 +87,20 @@ props:
         - label: 'composables/'
           children:
             - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
             - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
         - label: 'components/'
           defaultExpanded: true
           children:
             - label: 'Card.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
             - label: 'Button.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
     - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
+      icon: 'i-vscode-icons:file-type-vue'
     - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
+      icon: 'i-vscode-icons:file-type-nuxt'
   class: 'w-60'
 ---
 ::
@@ -129,20 +129,20 @@ props:
         - label: 'composables/'
           children:
             - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
             - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
         - label: 'components/'
           defaultExpanded: true
           children:
             - label: 'Card.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
             - label: 'Button.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
     - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
+      icon: 'i-vscode-icons:file-type-vue'
     - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
+      icon: 'i-vscode-icons:file-type-nuxt'
   class: 'w-60'
 ---
 ::
@@ -171,20 +171,20 @@ props:
         - label: 'composables/'
           children:
             - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
             - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
         - label: 'components/'
           defaultExpanded: true
           children:
             - label: 'Card.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
             - label: 'Button.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
     - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
+      icon: 'i-vscode-icons:file-type-vue'
     - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
+      icon: 'i-vscode-icons:file-type-nuxt'
   class: 'w-60'
 ---
 ::
@@ -217,20 +217,20 @@ props:
         - label: 'composables/'
           children:
             - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
             - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
         - label: 'components/'
           defaultExpanded: true
           children:
             - label: 'Card.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
             - label: 'Button.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
     - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
+      icon: 'i-vscode-icons:file-type-vue'
     - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
+      icon: 'i-vscode-icons:file-type-nuxt'
   class: 'w-60'
 ---
 ::
@@ -259,27 +259,27 @@ props:
         - label: 'composables/'
           children:
             - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
             - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
         - label: 'components/'
           defaultExpanded: true
           children:
             - label: 'Card.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
             - label: 'Button.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
     - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
+      icon: 'i-vscode-icons:file-type-vue'
     - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
+      icon: 'i-vscode-icons:file-type-nuxt'
   class: 'w-60'
 ---
 ::
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) of a parent node. Defaults to `i-lucide-chevron-down`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) of a parent node. Defaults to `i-lucide:chevron-down`.
 
 ::note
 If an icon is specified for an item, it will always take precedence over these props.
@@ -297,29 +297,29 @@ external:
 externalTypes:
   - TreeItem[]
 props:
-  trailingIcon: 'i-lucide-arrow-down'
+  trailingIcon: 'i-lucide:arrow-down'
   items:
     - label: 'app/'
       defaultExpanded: true
       children:
         - label: 'composables/'
-          trailingIcon: 'i-lucide-chevron-down'
+          trailingIcon: 'i-lucide:chevron-down'
           children:
             - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
             - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
         - label: 'components/'
           defaultExpanded: true
           children:
             - label: 'Card.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
             - label: 'Button.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
     - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
+      icon: 'i-vscode-icons:file-type-vue'
     - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
+      icon: 'i-vscode-icons:file-type-nuxt'
   class: 'w-60'
 ---
 ::
@@ -338,7 +338,7 @@ You can customize this icon globally in your `vite.config.ts` under `pohon.icons
 
 ### Expanded Icon
 
-Use the `expanded-icon` and `collapsed-icon` props to customize the icons of a parent node when it is expanded or collapsed. Defaults to `i-lucide-folder-open` and `i-lucide-folder` respectively.
+Use the `expanded-icon` and `collapsed-icon` props to customize the icons of a parent node when it is expanded or collapsed. Defaults to `i-lucide:folder-open` and `i-lucide:folder` respectively.
 
 ::docs-pohon-preview
 ---
@@ -352,8 +352,8 @@ external:
 externalTypes:
   - TreeItem[]
 props:
-  expandedIcon: 'i-lucide-book-open'
-  collapsedIcon: 'i-lucide-book'
+  expandedIcon: 'i-lucide:book-open'
+  collapsedIcon: 'i-lucide:book'
   items:
     - label: 'app/'
       defaultExpanded: true
@@ -361,20 +361,20 @@ props:
         - label: 'composables/'
           children:
             - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
             - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
         - label: 'components/'
           defaultExpanded: true
           children:
             - label: 'Card.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
             - label: 'Button.vue'
-              icon: 'i-vscode-icons-file-type-vue'
+              icon: 'i-vscode-icons:file-type-vue'
     - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
+      icon: 'i-vscode-icons:file-type-vue'
     - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
+      icon: 'i-vscode-icons:file-type-nuxt'
   class: 'w-60'
 ---
 ::
@@ -410,30 +410,30 @@ props:
   disabled: true
   items:
     - label: 'app'
-      icon: 'i-lucide-folder'
+      icon: 'i-lucide:folder'
       defaultExpanded: true
       children:
         - label: 'composables'
-          icon: 'i-lucide-folder'
+          icon: 'i-lucide:folder'
           children:
             - label: 'useAuth.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
             - label: 'useUser.ts'
-              icon: 'i-vscode-icons-file-type-typescript'
+              icon: 'i-vscode-icons:file-type-typescript'
         - label: 'components'
-          icon: 'i-lucide-folder'
+          icon: 'i-lucide:folder'
           children:
             - label: 'Home'
-              icon: 'i-lucide-folder'
+              icon: 'i-lucide:folder'
               children:
                 - label: 'Card.vue'
-                  icon: 'i-vscode-icons-file-type-vue'
+                  icon: 'i-vscode-icons:file-type-vue'
                 - label: 'Button.vue'
-                  icon: 'i-vscode-icons-file-type-vue'
+                  icon: 'i-vscode-icons:file-type-vue'
     - label: 'app.vue'
-      icon: 'i-vscode-icons-file-type-vue'
+      icon: 'i-vscode-icons:file-type-vue'
     - label: 'nuxt.config.ts'
-      icon: 'i-vscode-icons-file-type-nuxt'
+      icon: 'i-vscode-icons:file-type-nuxt'
   class: 'w-60'
 ---
 ::

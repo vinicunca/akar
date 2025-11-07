@@ -26,7 +26,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
     :items="users"
     :loading="status === 'pending'"
     ignore-filter
-    icon="i-lucide-user"
+    icon="i-lucide:user"
     placeholder="Select user"
     class="w-48"
   >

@@ -21,7 +21,7 @@ function onOpen() {
     :items="countries"
     :loading="status === 'pending'"
     label-key="name"
-    :search-input="{ icon: 'i-lucide-search' }"
+    :search-input="{ icon: 'i-lucide:search' }"
     placeholder="Select country"
     class="w-48"
     @update:open="onOpen"
@@ -35,7 +35,7 @@ function onOpen() {
       </span>
       <PIcon
         v-else
-        name="i-lucide-earth"
+        name="i-lucide:earth"
         :class="pohon.leadingIcon()"
       />
     </template>

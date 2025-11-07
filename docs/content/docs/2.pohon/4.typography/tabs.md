@@ -5,7 +5,7 @@ framework: nuxt
 category: components
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/prose/Tabs.vue
 ---
 
@@ -17,7 +17,7 @@ Use the `tabs` and `tabs-item` components to display [Tabs](/docs/pohon/componen
 
 :::tabs{class="w-full"}
 
-:::tabs-item{label="Code" icon="i-lucide-code"}
+:::tabs-item{label="Code" icon="i-lucide:code"}
 
 ```mdc
 ::callout
@@ -27,7 +27,7 @@ Lorem velit voluptate ex reprehenderit ullamco et culpa.
 
 :::
 
-:::tabs-item{label="Preview" icon="i-lucide-eye"}
+:::tabs-item{label="Preview" icon="i-lucide:eye"}
 
 ::callout
 Lorem velit voluptate ex reprehenderit ullamco et culpa.
@@ -42,7 +42,7 @@ Lorem velit voluptate ex reprehenderit ullamco et culpa.
 ````mdc
 ::tabs
 
-:::tabs-item{label="Code" icon="i-lucide-code"}
+:::tabs-item{label="Code" icon="i-lucide:code"}
 
 ```mdc
 ::callout
@@ -52,7 +52,7 @@ Lorem velit voluptate ex reprehenderit ullamco et culpa.
 
 :::
 
-:::tabs-item{label="Preview" icon="i-lucide-eye"}
+:::tabs-item{label="Preview" icon="i-lucide:eye"}
 
 ::callout
 Lorem velit voluptate ex reprehenderit ullamco et culpa.

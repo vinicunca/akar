@@ -4,25 +4,25 @@ import type { PPDropdownMenuItem } from 'pohon-ui';
 const items: Array<PPDropdownMenuItem> = [
   {
     label: 'Team',
-    icon: 'i-lucide-users',
+    icon: 'i-lucide:users',
   },
   {
     label: 'Invite users',
-    icon: 'i-lucide-user-plus',
+    icon: 'i-lucide:user-plus',
     children: [
       {
         label: 'Invite by email',
-        icon: 'i-lucide-send-horizontal',
+        icon: 'i-lucide:send-horizontal',
       },
       {
         label: 'Invite by link',
-        icon: 'i-lucide-link',
+        icon: 'i-lucide:link',
       },
     ],
   },
   {
     label: 'New team',
-    icon: 'i-lucide-plus',
+    icon: 'i-lucide:plus',
   },
 ];
 </script>
@@ -39,7 +39,7 @@ const items: Array<PPDropdownMenuItem> = [
       <PButton
         color="neutral"
         variant="outline"
-        icon="i-lucide-chevron-down"
+        icon="i-lucide:chevron-down"
       />
     </PDropdownMenu>
   </PFieldGroup>

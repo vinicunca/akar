@@ -50,7 +50,7 @@ const columns: Array<PTableColumn<Payment>> = [{
   cell: ({ row }) => h(PButton, {
     'color': 'neutral',
     'variant': 'ghost',
-    'icon': 'i-lucide-chevron-down',
+    'icon': 'i-lucide:chevron-down',
     'square': true,
     'aria-label': 'Expand',
     'ui': {

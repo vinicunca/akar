@@ -38,7 +38,7 @@ const icon = computed(() => {
   const extension = cleanFilename.includes('.') && cleanFilename.split('.').pop();
   const name = cleanFilename.split('/').pop();
 
-  return (name && icons.value[name.toLowerCase()]) ?? (extension && (icons.value[extension] ?? `i-vscode-icons-file-type-${extension}`));
+  return (name && icons.value[name.toLowerCase()]) ?? (extension && (icons.value[extension] ?? `i-vscode-icons:file-type-${extension}`));
 });
 </script>
 

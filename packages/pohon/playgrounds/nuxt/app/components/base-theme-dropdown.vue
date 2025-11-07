@@ -49,7 +49,7 @@ const items = computed<Array<PDropdownMenuItem>>(() => {
     :content="{ side: 'right', align: 'start' }"
   >
     <PButton
-      icon="i-lucide-swatch-book"
+      icon="i-lucide:swatch-book"
       color="neutral"
       variant="ghost"
       class="data-[state=open]:bg-background-elevated"

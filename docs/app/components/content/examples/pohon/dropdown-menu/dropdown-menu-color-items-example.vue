@@ -5,22 +5,22 @@ const items: Array<Array<PDropdownMenuItem>> = [
   [
     {
       label: 'View',
-      icon: 'i-lucide-eye',
+      icon: 'i-lucide:eye',
     },
     {
       label: 'Copy',
-      icon: 'i-lucide-copy',
+      icon: 'i-lucide:copy',
     },
     {
       label: 'Edit',
-      icon: 'i-lucide-pencil',
+      icon: 'i-lucide:pencil',
     },
   ],
   [
     {
       label: 'Delete',
       color: 'error',
-      icon: 'i-lucide-trash',
+      icon: 'i-lucide:trash',
     },
   ],
 ];
@@ -35,7 +35,7 @@ const items: Array<Array<PDropdownMenuItem>> = [
       label="Open"
       color="neutral"
       variant="outline"
-      icon="i-lucide-menu"
+      icon="i-lucide:menu"
     />
   </PDropdownMenu>
 </template>

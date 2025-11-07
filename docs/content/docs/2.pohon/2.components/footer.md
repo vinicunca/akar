@@ -4,7 +4,7 @@ description: 'A responsive footer component.'
 category: layout
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/footer.vue
 ---
 
@@ -68,7 +68,7 @@ const items: PNavigationMenuItem[] = [{
       </NuxtLayout>
     </PMain>
 
-    <PSeparator icon="i-simple-icons-nuxtdotjs" type="dashed" class="h-px" />
+    <PSeparator icon="i-simple-icons:nuxtdotjs" type="dashed" class="h-px" />
 
     <PFooter>
       <template #left>
@@ -81,7 +81,7 @@ const items: PNavigationMenuItem[] = [{
 
       <template #right>
         <PButton
-          icon="i-simple-icons-discord"
+          icon="i-simple-icons:discord"
           color="neutral"
           variant="ghost"
           to="https://akar.vinicunca.dev/discord"
@@ -89,7 +89,7 @@ const items: PNavigationMenuItem[] = [{
           aria-label="Discord"
         />
         <PButton
-          icon="i-simple-icons-x"
+          icon="i-simple-icons:x"
           color="neutral"
           variant="ghost"
           to="https://akar.vinicunca.dev/x"
@@ -97,7 +97,7 @@ const items: PNavigationMenuItem[] = [{
           aria-label="X"
         />
         <PButton
-          icon="i-simple-icons-github"
+          icon="i-simple-icons:github"
           color="neutral"
           variant="ghost"
           to="https://github.com/nuxt/nuxt"

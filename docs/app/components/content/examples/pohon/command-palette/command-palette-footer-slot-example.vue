@@ -6,25 +6,25 @@ const groups = [
       {
         label: 'Add new file',
         suffix: 'Create a new file in the current directory',
-        icon: 'i-lucide-file-plus',
+        icon: 'i-lucide:file-plus',
         kbds: ['meta', 'N'],
       },
       {
         label: 'Add new folder',
         suffix: 'Create a new folder in the current directory',
-        icon: 'i-lucide-folder-plus',
+        icon: 'i-lucide:folder-plus',
         kbds: ['meta', 'F'],
       },
       {
         label: 'Search files',
         suffix: 'Search across all files in the project',
-        icon: 'i-lucide-search',
+        icon: 'i-lucide:search',
         kbds: ['meta', 'P'],
       },
       {
         label: 'Settings',
         suffix: 'Open application settings',
-        icon: 'i-lucide-settings',
+        icon: 'i-lucide:settings',
         kbds: ['meta', ','],
       },
     ],
@@ -36,17 +36,17 @@ const groups = [
       {
         label: 'project.vue',
         suffix: 'components/',
-        icon: 'i-vscode-icons-file-type-vue',
+        icon: 'i-vscode-icons:file-type-vue',
       },
       {
         label: 'readme.md',
         suffix: 'docs/',
-        icon: 'i-vscode-icons-file-type-markdown',
+        icon: 'i-vscode-icons:file-type-markdown',
       },
       {
         label: 'package.json',
         suffix: 'root/',
-        icon: 'i-vscode-icons-file-type-node',
+        icon: 'i-vscode-icons:file-type-node',
       },
     ],
   },
@@ -61,7 +61,7 @@ const groups = [
     <template #footer>
       <div class="flex gap-2 items-center justify-between">
         <PIcon
-          name="i-simple-icons-nuxtdotjs"
+          name="i-simple-icons:nuxtdotjs"
           class="text-dimmed ml-1 size-5"
         />
         <div class="flex gap-1 items-center">

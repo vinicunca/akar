@@ -19,7 +19,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
   <PSelectMenu
     :items="users"
     :loading="status === 'pending'"
-    icon="i-lucide-user"
+    icon="i-lucide:user"
     placeholder="Select user"
     class="w-48"
   >

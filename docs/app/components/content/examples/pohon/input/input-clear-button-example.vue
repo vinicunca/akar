@@ -18,7 +18,7 @@ const value = ref('Click to clear');
         color="neutral"
         variant="link"
         size="sm"
-        icon="i-lucide-circle-x"
+        icon="i-lucide:circle-x"
         aria-label="Clear input"
         @click="value = ''"
       />

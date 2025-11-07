@@ -27,31 +27,31 @@ const statuses = [
     label: 'Backlog',
     value: 'backlog',
     description: 'Issues that have been identified but not yet prioritized',
-    icon: 'i-lucide-circle-help',
+    icon: 'i-lucide:circle-help',
   },
   {
     label: 'Todo',
     value: 'todo',
     description: 'Issues that are ready to be worked on',
-    icon: 'i-lucide-circle-plus',
+    icon: 'i-lucide:circle-plus',
   },
   {
     label: 'In Progress',
     value: 'in_progress',
     description: 'Issues that are currently being worked on',
-    icon: 'i-lucide-circle-arrow-up',
+    icon: 'i-lucide:circle-arrow-up',
   },
   {
     label: 'Done',
     value: 'done',
     description: 'Issues that have been completed successfully',
-    icon: 'i-lucide-circle-check',
+    icon: 'i-lucide:circle-check',
   },
   {
     label: 'Canceled',
     value: 'canceled',
     description: 'Issues that have been cancelled or rejected',
-    icon: 'i-lucide-circle-x',
+    icon: 'i-lucide:circle-x',
   },
 ] satisfies Array<PInputMenuItem>;
 
@@ -230,13 +230,13 @@ const options = [
     />
     <PInputMenu
       placeholder="Search..."
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       :items="items"
       v-bind="props"
     />
     <PInputMenu
       placeholder="Search..."
-      trailing-icon="i-lucide-search"
+      trailing-icon="i-lucide:search"
       :items="items"
       v-bind="props"
     />
@@ -262,15 +262,15 @@ const options = [
     <PInputMenu
       placeholder="Loading..."
       loading
-      icon="i-lucide-search"
-      trailing-icon="i-lucide-arrow-right"
+      icon="i-lucide:search"
+      trailing-icon="i-lucide:arrow-right"
       :items="items"
       v-bind="props"
     />
     <PInputMenu
       placeholder="Search status..."
-      icon="i-lucide-search"
-      trailing-icon="i-lucide-chevrons-up-down"
+      icon="i-lucide:search"
+      trailing-icon="i-lucide:chevrons-up-down"
       :items="statuses"
       v-bind="props"
     >
@@ -285,7 +285,7 @@ const options = [
     <PInputMenu
       v-model:search-term="searchTerm"
       placeholder="Search users..."
-      icon="i-lucide-user"
+      icon="i-lucide:user"
       ignore-filter
       :items="users"
       :loading="status === 'pending'"
@@ -300,7 +300,7 @@ const options = [
       </template>
     </PInputMenu>
     <PInputMenu
-      icon="i-lucide-layout-list"
+      icon="i-lucide:layout-list"
       placeholder="Search virtualized..."
       virtualize
       :items="[Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i }))]"

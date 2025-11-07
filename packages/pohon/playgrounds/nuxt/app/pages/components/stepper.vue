@@ -15,19 +15,19 @@ const items = [
     slot: 'address' as const,
     title: 'Address',
     description: 'Add your address here',
-    icon: 'i-lucide-house',
+    icon: 'i-lucide:house',
   },
   {
     slot: 'shipping' as const,
     title: 'Shipping',
     description: 'Set your preferred shipping method',
-    icon: 'i-lucide-truck',
+    icon: 'i-lucide:truck',
   },
   {
     slot: 'payment' as const,
     title: 'Payment',
     description: 'Select your payment method',
-    icon: 'i-lucide-credit-card',
+    icon: 'i-lucide:credit-card',
   },
   {
     slot: 'checkout' as const,
@@ -93,7 +93,7 @@ const stepper = useTemplateRef('stepper');
 
     <div class="flex gap-2 justify-between">
       <PButton
-        leading-icon="i-lucide-arrow-left"
+        leading-icon="i-lucide:arrow-left"
         :disabled="!stepper?.hasPrev"
         @click="stepper?.prev()"
       >
@@ -101,7 +101,7 @@ const stepper = useTemplateRef('stepper');
       </PButton>
 
       <PButton
-        trailing-icon="i-lucide-arrow-right"
+        trailing-icon="i-lucide:arrow-right"
         :disabled="!stepper?.hasNext"
         @click="stepper?.next()"
       >

@@ -32,14 +32,14 @@ const attrs = reactive({
     :attrs="attrs"
   >
     <PEmpty
-      icon="i-lucide-file"
+      icon="i-lucide:file"
       title="No projects found"
       description="It looks like you haven't added any projects. Create one to get started."
       :actions="[{
-        icon: 'i-lucide-plus',
+        icon: 'i-lucide:plus',
         label: 'Create new',
       }, {
-        icon: 'i-lucide-refresh-ccw',
+        icon: 'i-lucide:refresh-ccw',
         label: 'Refresh',
         color: 'neutral',
         variant: 'subtle',

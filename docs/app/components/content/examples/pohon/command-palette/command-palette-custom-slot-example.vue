@@ -5,22 +5,22 @@ const groups = [
     items: [
       {
         label: 'Profile',
-        icon: 'i-lucide-user',
+        icon: 'i-lucide:user',
         kbds: ['meta', 'P'],
       },
       {
         label: 'Billing',
-        icon: 'i-lucide-credit-card',
+        icon: 'i-lucide:credit-card',
         kbds: ['meta', 'B'],
         slot: 'billing' as const,
       },
       {
         label: 'Notifications',
-        icon: 'i-lucide-bell',
+        icon: 'i-lucide:bell',
       },
       {
         label: 'Security',
-        icon: 'i-lucide-lock',
+        icon: 'i-lucide:lock',
       },
     ],
   },

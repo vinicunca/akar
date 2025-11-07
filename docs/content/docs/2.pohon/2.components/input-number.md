@@ -6,7 +6,7 @@ links:
   - label: NumberField
     to: https://www.akar.com/docs/pohon/components/number-field
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/input-number.vue
 ---
 
@@ -199,7 +199,7 @@ props:
 
 ### Increment / Decrement Icons
 
-Use the `increment-icon` and `decrement-icon` props to customize the buttons [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-plus` / `i-lucide-minus`.
+Use the `increment-icon` and `decrement-icon` props to customize the buttons [Icon](/docs/pohon/components/icon). Defaults to `i-lucide:plus` / `i-lucide:minus`.
 
 ::docs-pohon-preview
 ---
@@ -210,8 +210,8 @@ external:
   - modelValue
 props:
   modelValue: 5
-  incrementIcon: 'i-lucide-arrow-right'
-  decrementIcon: 'i-lucide-arrow-left'
+  incrementIcon: 'i-lucide:arrow-right'
+  decrementIcon: 'i-lucide:arrow-left'
 ---
 ::
 
@@ -273,7 +273,7 @@ name: 'input-number-slots-example'
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
 This component also supports all native `<input>` HTML attributes.
 ::
 

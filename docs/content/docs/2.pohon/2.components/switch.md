@@ -5,7 +5,7 @@ links:
   - label: Switch
     to: /docs/akar/components/switch
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/switch.vue
 ---
 
@@ -83,8 +83,8 @@ ignore:
   - label
   - defaultValue
 props:
-  uncheckedIcon: 'i-lucide-x'
-  checkedIcon: 'i-lucide-check'
+  uncheckedIcon: 'i-lucide:x'
+  checkedIcon: 'i-lucide:check'
   defaultValue: true
   label: Check me
 ---
@@ -108,7 +108,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide:loader-circle`.
 
 ::docs-pohon-preview
 ---
@@ -117,7 +117,7 @@ ignore:
   - defaultValue
 props:
   loading: true
-  loadingIcon: 'i-lucide-loader'
+  loadingIcon: 'i-lucide:loader'
   defaultValue: true
   label: Check me
 ---
@@ -187,7 +187,7 @@ props:
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
 This component also supports all native `<button>` HTML attributes.
 ::
 

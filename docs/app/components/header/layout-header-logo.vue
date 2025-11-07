@@ -12,7 +12,7 @@ const { copy } = useClipboard();
 const items = [
   [{
     label: 'Copy logo as SVG',
-    icon: 'i-simple-icons-nuxtdotjs',
+    icon: 'i-simple-icons:nuxtdotjs',
     onSelect() {
       if (!logoRef.value) {
         return;
@@ -23,14 +23,14 @@ const items = [
       toast.add({
         title: 'Akar logo copied as SVG',
         description: 'You can now paste it into your project',
-        icon: 'i-lucide-circle-check',
+        icon: 'i-lucide:circle-check',
         color: 'success',
       });
     },
   }],
   [{
     label: 'Browse design kit',
-    icon: 'i-lucide-shapes',
+    icon: 'i-lucide:shapes',
     to: 'https://akar.vinicunca.dev/pohon/design-kit',
     target: '_blank',
   }],

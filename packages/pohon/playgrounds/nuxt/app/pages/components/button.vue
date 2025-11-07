@@ -83,12 +83,12 @@ function onClick() {
     />
     <PButton
       label="Icon"
-      icon="i-lucide-rocket"
+      icon="i-lucide:rocket"
       v-bind="props"
     />
     <PButton
       label="Icon"
-      icon="i-lucide-chevron-down"
+      icon="i-lucide:chevron-down"
       trailing
       v-bind="props"
     />
@@ -98,7 +98,7 @@ function onClick() {
       v-bind="props"
     />
     <PButton
-      icon="i-lucide-rocket"
+      icon="i-lucide:rocket"
       v-bind="props"
       square
     />

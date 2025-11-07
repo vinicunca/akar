@@ -16,7 +16,7 @@ const items = computed(() => [
   [{
     label: 'Profile',
     description: 'View your profile',
-    icon: 'i-lucide-user',
+    icon: 'i-lucide:user',
     slot: 'custom' as const,
     onSelect(e: Event) {
       e.preventDefault();
@@ -25,14 +25,14 @@ const items = computed(() => [
   }, {
     label: 'Billing',
     description: 'Manage billing',
-    icon: 'i-lucide-credit-card',
+    icon: 'i-lucide:credit-card',
     kbds: ['meta', 'b'],
     onSelect() {
       console.log('Billing clicked');
     },
   }, {
     label: 'Settings',
-    icon: 'i-lucide-cog',
+    icon: 'i-lucide:cog',
     kbds: ['?'],
     onSelect() {
       console.log('Settings clicked');
@@ -40,16 +40,16 @@ const items = computed(() => [
   }],
   [{
     label: 'Team',
-    icon: 'i-lucide-users',
+    icon: 'i-lucide:users',
   }, {
     label: 'Invite users',
-    icon: 'i-lucide-user-plus',
+    icon: 'i-lucide:user-plus',
     children: [[{
       label: 'Invite by email',
-      icon: 'i-lucide-send-horizontal',
+      icon: 'i-lucide:send-horizontal',
     }, {
       label: 'Invite by link',
-      icon: 'i-lucide-link',
+      icon: 'i-lucide:link',
       kbds: ['meta', 'i'],
       onSelect(e: Event) {
         e.preventDefault();
@@ -58,10 +58,10 @@ const items = computed(() => [
     }], [{
       label: 'More',
       description: 'Import from more sources',
-      icon: 'i-lucide-circle-plus',
+      icon: 'i-lucide:circle-plus',
       children: [{
         label: 'Import from Slack',
-        icon: 'i-simple-icons-slack',
+        icon: 'i-simple-icons:slack',
         to: 'https://slack.com',
         target: '_blank',
         onSelect(e: Event) {
@@ -70,14 +70,14 @@ const items = computed(() => [
         },
       }, {
         label: 'Import from Trello',
-        icon: 'i-simple-icons-trello',
+        icon: 'i-simple-icons:trello',
         onSelect(e: Event) {
           e.preventDefault();
           console.log('Import from Trello clicked');
         },
       }, {
         label: 'Import from Asana',
-        icon: 'i-simple-icons-asana',
+        icon: 'i-simple-icons:asana',
         onSelect(e: Event) {
           e.preventDefault();
           console.log('Import from Asana clicked');
@@ -86,7 +86,7 @@ const items = computed(() => [
     }]],
   }, {
     label: 'New team',
-    icon: 'i-lucide-plus',
+    icon: 'i-lucide:plus',
     kbds: ['meta', 'n'],
     loading: loading.value,
     onSelect(e: Event) {
@@ -100,7 +100,7 @@ const items = computed(() => [
   }],
   [{
     label: 'GitHub',
-    icon: 'i-simple-icons-github',
+    icon: 'i-simple-icons:github',
     to: 'https://github.com/nuxt/ui',
     target: '_blank',
     onSelect(e: Event) {
@@ -108,21 +108,21 @@ const items = computed(() => [
     },
   }, {
     label: 'Support',
-    icon: 'i-lucide-life-buoy',
+    icon: 'i-lucide:life-buoy',
     to: '/components/dropdown-menu',
   }, {
     type: 'separator' as const,
   }, {
     label: 'Keyboard Shortcuts',
-    icon: 'i-lucide-key-round',
+    icon: 'i-lucide:key-round',
   }, {
     label: 'API',
-    icon: 'i-lucide-box',
+    icon: 'i-lucide:box',
     disabled: true,
   }],
   [{
     label: 'Logout',
-    icon: 'i-lucide-log-out',
+    icon: 'i-lucide:log-out',
     color: 'error',
     kbds: ['shift', 'meta', 'q'],
     onSelect() {
@@ -170,12 +170,12 @@ defineShortcuts(extractShortcuts(items.value));
         label="Open"
         color="neutral"
         variant="outline"
-        icon="i-lucide-menu"
+        icon="i-lucide:menu"
       />
 
       <template #custom-trailing>
         <PIcon
-          name="i-lucide-badge-check"
+          name="i-lucide:badge-check"
           class="text-primary shrink-0 size-5"
         />
       </template>

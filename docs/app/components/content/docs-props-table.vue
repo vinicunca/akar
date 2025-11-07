@@ -79,7 +79,7 @@ const propsKey = computed(() => `props-${parentSlug}-${slug}`);
 
           <i
             v-else
-            class="i-radix-icons:divider-horizontal"
+            class="i-lucide:minus"
           />
         </ProseTd>
 

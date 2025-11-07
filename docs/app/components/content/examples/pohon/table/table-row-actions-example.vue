@@ -106,7 +106,7 @@ const columns: Array<PTableColumn<Payment>> = [{
       'items': getRowItems(row),
       'aria-label': 'Actions dropdown',
     }, () => h(PButton, {
-      'icon': 'i-lucide-ellipsis-vertical',
+      'icon': 'i-lucide:ellipsis-vertical',
       'color': 'neutral',
       'variant': 'ghost',
       'class': 'ml-auto',
@@ -127,7 +127,7 @@ function getRowItems(row: Row<Payment>) {
       toast.add({
         title: 'Payment ID copied to clipboard!',
         color: 'success',
-        icon: 'i-lucide-circle-check',
+        icon: 'i-lucide:circle-check',
       });
     },
   }, {

@@ -108,7 +108,7 @@ const columns: Array<PTableColumn<Payment>> = [{
           color: 'neutral',
           variant: 'outline',
           size: 'xs',
-          icon: row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus',
+          icon: row.getIsExpanded() ? 'i-lucide:minus' : 'i-lucide:plus',
           class: !row.getCanExpand() && 'invisible',
           pohon: {
             base: 'p-0 rounded-sm',

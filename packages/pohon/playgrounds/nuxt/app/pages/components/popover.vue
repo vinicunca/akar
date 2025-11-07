@@ -93,7 +93,7 @@ function send() {
             <PButton
               label="Send"
               color="neutral"
-              trailing-icon="i-lucide-send-horizontal"
+              trailing-icon="i-lucide:send-horizontal"
               :loading="loading"
               @click="send"
             />

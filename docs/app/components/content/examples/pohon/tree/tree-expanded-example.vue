@@ -11,22 +11,22 @@ const items = [
         label: 'composables/',
         id: 'app/composables',
         children: [
-          { label: 'useAuth.ts', icon: 'i-vscode-icons-file-type-typescript' },
-          { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' },
+          { label: 'useAuth.ts', icon: 'i-vscode-icons:file-type-typescript' },
+          { label: 'useUser.ts', icon: 'i-vscode-icons:file-type-typescript' },
         ],
       },
       {
         label: 'components/',
         id: 'app/components',
         children: [
-          { label: 'Card.vue', icon: 'i-vscode-icons-file-type-vue' },
-          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' },
+          { label: 'Card.vue', icon: 'i-vscode-icons:file-type-vue' },
+          { label: 'Button.vue', icon: 'i-vscode-icons:file-type-vue' },
         ],
       },
     ],
   },
-  { label: 'app.vue', id: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
-  { label: 'nuxt.config.ts', id: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' },
+  { label: 'app.vue', id: 'app.vue', icon: 'i-vscode-icons:file-type-vue' },
+  { label: 'nuxt.config.ts', id: 'nuxt.config.ts', icon: 'i-vscode-icons:file-type-nuxt' },
 ] satisfies Array<PTreeItem>;
 
 const expanded = ref(['app', 'app/composables']);

@@ -5,7 +5,7 @@ links:
 - label: Akar
   to: /docs/akar/components/avatar
 - label: GitHub
-  icon: i-simple-icons-github
+  icon: i-simple-icons:github
   to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/avatar.vue
 ---
 
@@ -61,7 +61,7 @@ Use the `icon` prop to display a fallback [Icon](/docs/pohon/components/icon).
 ::docs-pohon-preview
 ---
 props:
-  icon: 'i-lucide-image'
+  icon: 'i-lucide:image'
   size: md
 ---
 ::
@@ -132,7 +132,7 @@ You can use a CSS mask to display an Avatar with a custom shape instead of a sim
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attributes" target="_blank"}
 This component also supports all native `<img>` HTML attributes.
 ::
 

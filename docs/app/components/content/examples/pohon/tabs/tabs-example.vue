@@ -4,12 +4,12 @@ import { reactive } from 'vue';
 const items = [
   {
     label: 'Account',
-    icon: 'i-lucide-user',
+    icon: 'i-lucide:user',
     slot: 'account',
   },
   {
     label: 'Password',
-    icon: 'i-lucide-lock',
+    icon: 'i-lucide:lock',
     slot: 'password',
   },
 ];

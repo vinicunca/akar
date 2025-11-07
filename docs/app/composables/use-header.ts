@@ -44,45 +44,45 @@ export function useHeader() {
     },
     {
       label: 'Composables',
-      icon: 'i-lucide-square-function',
+      icon: 'i-lucide:square-function',
       to: '/docs/composables',
       active: route.path.startsWith('/docs/composables'),
     },
     {
       label: 'Typography',
-      icon: 'i-lucide-square-pilcrow',
+      icon: 'i-lucide:square-pilcrow',
       to: '/docs/typography',
       active: route.path.startsWith('/docs/typography'),
     },
     {
       label: 'Figma',
-      icon: 'i-simple-icons-figma',
+      icon: 'i-simple-icons:figma',
       to: '/figma',
     },
     {
       label: 'Templates',
-      icon: 'i-lucide-panels-top-left',
+      icon: 'i-lucide:panels-top-left',
       to: '/templates',
     },
     {
       label: 'Showcase',
-      icon: 'i-lucide-presentation',
+      icon: 'i-lucide:presentation',
       to: '/showcase',
     },
     {
       label: 'Team',
-      icon: 'i-lucide-users',
+      icon: 'i-lucide:users',
       to: '/team',
     },
     {
       label: 'Releases',
-      icon: 'i-lucide-newspaper',
+      icon: 'i-lucide:newspaper',
       to: '/releases',
     },
     {
       label: 'GitHub',
       to: 'https://github.com/nuxt/ui',
-      icon: 'i-simple-icons-github',
+      icon: 'i-simple-icons:github',
       target: '_blank',
     },
   ]);

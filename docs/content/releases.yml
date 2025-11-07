@@ -10,4 +10,4 @@ hero:
       variant: outline
       to: https://github.com/nuxt/ui
       target: _blank
-      icon: i-lucide-star
+      icon: i-lucide:star

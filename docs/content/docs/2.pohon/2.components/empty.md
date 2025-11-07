@@ -4,7 +4,7 @@ description: 'A component to display an empty state.'
 category: data
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/empty.vue
 ---
 
@@ -14,13 +14,13 @@ links:
 
 :::p-empty
 ---
-icon: i-lucide-file
+icon: i-lucide:file
 title: No projects found
 description: It looks like you haven't added any projects. Create one to get started.
 actions:
-  - icon: i-lucide-plus
+  - icon: i-lucide:plus
     label: Create new
-  - icon: i-lucide-refresh-cw
+  - icon: i-lucide:refresh-cw
     label: Refresh
     color: neutral
     variant: subtle
@@ -66,7 +66,7 @@ ignore:
   - title
   - description
 props:
-  icon: i-lucide-file
+  icon: i-lucide:file
   title: No projects found
   description: It looks like you haven't added any projects. Create one to get started.
 ---
@@ -103,13 +103,13 @@ ignore:
   - description
   - actions
 props:
-  icon: i-lucide-file
+  icon: i-lucide:file
   title: No projects found
   description: It looks like you haven't added any projects. Create one to get started.
   actions:
-    - icon: i-lucide-plus
+    - icon: i-lucide:plus
       label: Create new
-    - icon: i-lucide-refresh-cw
+    - icon: i-lucide:refresh-cw
       label: Refresh
       color: neutral
       variant: subtle
@@ -130,11 +130,11 @@ ignore:
   - actions
 props:
   variant: naked
-  icon: i-lucide-bell
+  icon: i-lucide:bell
   title: No notifications
   description: You're all caught up. New notifications will appear here.
   actions:
-    - icon: i-lucide-refresh-cw
+    - icon: i-lucide:refresh-cw
       label: Refresh
       color: neutral
       variant: subtle
@@ -155,11 +155,11 @@ ignore:
   - actions
 props:
   size: xl
-  icon: i-lucide-bell
+  icon: i-lucide:bell
   title: No notifications
   description: You're all caught up. New notifications will appear here.
   actions:
-    - icon: i-lucide-refresh-cw
+    - icon: i-lucide:refresh-cw
       label: Refresh
       color: neutral
       variant: subtle

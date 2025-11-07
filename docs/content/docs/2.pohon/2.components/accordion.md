@@ -5,7 +5,7 @@ links:
   - label: Akar
     to: /docs/akar/components/accordion
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/accordion.vue
 ---
 
@@ -197,7 +197,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) of each item. Defaults to `i-lucide-chevron-down`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) of each item. Defaults to `i-lucide:chevron-down`.
 
 ::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
@@ -212,7 +212,7 @@ external:
 externalTypes:
   - PAccordionItem[]
 props:
-  trailingIcon: 'i-lucide-arrow-down'
+  trailingIcon: 'i-lucide:arrow-down'
   items:
     - label: 'Is it accessible?'
       icon: 'i-lucide:smile'

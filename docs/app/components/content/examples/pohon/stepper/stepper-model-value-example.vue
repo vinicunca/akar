@@ -6,12 +6,12 @@ const items: Array<PStepperItem> = [
   {
     title: 'Address',
     description: 'Add your address here',
-    icon: 'i-lucide-house',
+    icon: 'i-lucide:house',
   },
   {
     title: 'Shipping',
     description: 'Set your preferred shipping method',
-    icon: 'i-lucide-truck',
+    icon: 'i-lucide:truck',
   },
   {
     title: 'Checkout',

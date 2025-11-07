@@ -17,7 +17,7 @@ const open = ref(false);
       label="Open"
       color="neutral"
       variant="subtle"
-      trailing-icon="i-lucide-chevron-up"
+      trailing-icon="i-lucide:chevron-up"
     />
 
     <template #header>
@@ -28,7 +28,7 @@ const open = ref(false);
       <PButton
         color="neutral"
         variant="ghost"
-        icon="i-lucide-x"
+        icon="i-lucide:x"
         @click="open = false"
       />
     </template>

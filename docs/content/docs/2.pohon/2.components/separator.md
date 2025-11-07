@@ -5,7 +5,7 @@ links:
   - label: Akar
     to: /docs/akar/components/separator
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/separator.vue
 ---
 
@@ -54,7 +54,7 @@ Use the `icon` prop to display an icon in the middle of the Separator.
 ---
 class: 'p-8'
 props:
-  icon: 'i-simple-icons-nuxtdotjs'
+  icon: 'i-simple-icons:nuxtdotjs'
 ---
 ::
 

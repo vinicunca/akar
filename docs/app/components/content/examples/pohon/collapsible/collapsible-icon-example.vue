@@ -9,7 +9,7 @@ import { CorePlaceholder, PButton, PCollapsible } from '#components';
       label="Open"
       color="neutral"
       variant="subtle"
-      trailing-icon="i-lucide-chevron-down"
+      trailing-icon="i-lucide:chevron-down"
       :pohon="{
         trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform-280',
       }"

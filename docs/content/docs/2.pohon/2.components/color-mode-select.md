@@ -5,9 +5,9 @@ category: color-mode
 links:
   - label: SelectMenu
     to: /docs/pohon/components/select-menu
-    icon: i-simple-icons-nuxtdotjs
+    icon: i-simple-icons:nuxtdotjs
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/color-mode/ColorModeSelect.vue
 ---
 
@@ -31,9 +31,9 @@ Use the `app.config.ts` to customize the icon with the `pohon.icons` property:
 export default defineAppConfig({
   pohon: {
     icons: {
-      system: 'i-ph-desktop',
-      light: 'i-ph-sun',
-      dark: 'i-ph-moon'
+      system: 'i-ph:desktop',
+      light: 'i-ph:sun',
+      dark: 'i-ph:moon'
     }
   }
 })
@@ -56,8 +56,8 @@ export default defineConfig({
     pohon({
       pohon: {
         icons: {
-          light: 'i-ph-sun',
-          dark: 'i-ph-moon'
+          light: 'i-ph:sun',
+          dark: 'i-ph:moon'
         }
       }
     })

@@ -6,12 +6,12 @@ const items: Array<PStepperItem> = [
   {
     title: 'Address',
     description: 'Add your address here',
-    icon: 'i-lucide-house',
+    icon: 'i-lucide:house',
   },
   {
     title: 'Shipping',
     description: 'Set your preferred shipping method',
-    icon: 'i-lucide-truck',
+    icon: 'i-lucide:truck',
   },
   {
     title: 'Checkout',
@@ -37,7 +37,7 @@ const stepper = useTemplateRef('stepper');
 
     <div class="mt-4 flex gap-2 justify-between">
       <PButton
-        leading-icon="i-lucide-arrow-left"
+        leading-icon="i-lucide:arrow-left"
         :disabled="!stepper?.hasPrev"
         @click="stepper?.prev()"
       >
@@ -45,7 +45,7 @@ const stepper = useTemplateRef('stepper');
       </PButton>
 
       <PButton
-        trailing-icon="i-lucide-arrow-right"
+        trailing-icon="i-lucide:arrow-right"
         :disabled="!stepper?.hasNext"
         @click="stepper?.next()"
       >

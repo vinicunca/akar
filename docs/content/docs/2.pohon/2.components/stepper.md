@@ -5,7 +5,7 @@ links:
   - label: Stepper
     to: /docs/akar/components/stepper
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/stepper.vue
 ---
 
@@ -27,10 +27,10 @@ props:
   items:
     - title: 'Address'
       description: 'Add your address here'
-      icon: 'i-lucide-house'
+      icon: 'i-lucide:house'
     - title: 'Shipping'
       description: 'Set your preferred shipping method'
-      icon: 'i-lucide-truck'
+      icon: 'i-lucide:truck'
     - title: 'Checkout'
       description: 'Confirm your order'
   class: 'w-full'
@@ -64,10 +64,10 @@ props:
   items:
     - title: 'Address'
       description: 'Add your address here'
-      icon: 'i-lucide-house'
+      icon: 'i-lucide:house'
     - title: 'Shipping'
       description: 'Set your preferred shipping method'
-      icon: 'i-lucide-truck'
+      icon: 'i-lucide:truck'
     - title: 'Checkout'
       description: 'Confirm your order'
   class: 'w-full'
@@ -97,10 +97,10 @@ props:
   items:
     - title: 'Address'
       description: 'Add your address here'
-      icon: 'i-lucide-house'
+      icon: 'i-lucide:house'
     - title: 'Shipping'
       description: 'Set your preferred shipping method'
-      icon: 'i-lucide-truck'
+      icon: 'i-lucide:truck'
     - title: 'Checkout'
       description: 'Confirm your order'
   class: 'w-full'
@@ -126,10 +126,10 @@ props:
   items:
     - title: 'Address'
       description: 'Add your address here'
-      icon: 'i-lucide-house'
+      icon: 'i-lucide:house'
     - title: 'Shipping'
       description: 'Set your preferred shipping method'
-      icon: 'i-lucide-truck'
+      icon: 'i-lucide:truck'
     - title: 'Checkout'
       description: 'Confirm your order'
   class: 'w-full'
@@ -155,10 +155,10 @@ props:
   items:
     - title: 'Address'
       description: 'Add your address here'
-      icon: 'i-lucide-house'
+      icon: 'i-lucide:house'
     - title: 'Shipping'
       description: 'Set your preferred shipping method'
-      icon: 'i-lucide-truck'
+      icon: 'i-lucide:truck'
     - title: 'Checkout'
       description: 'Confirm your order'
   class: 'w-full'
@@ -184,10 +184,10 @@ props:
   items:
     - title: 'Address'
       description: 'Add your address here'
-      icon: 'i-lucide-house'
+      icon: 'i-lucide:house'
     - title: 'Shipping'
       description: 'Set your preferred shipping method'
-      icon: 'i-lucide-truck'
+      icon: 'i-lucide:truck'
     - title: 'Checkout'
       description: 'Confirm your order'
 ---

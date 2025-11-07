@@ -47,7 +47,7 @@ function multipleActions(color: string) {
     {
       label: 'And one more',
       color: color as any,
-      icon: 'i-lucide-info',
+      icon: 'i-lucide:info',
       onClick() {
         console.log('And one more clicked');
       },
@@ -55,7 +55,7 @@ function multipleActions(color: string) {
     {
       label: 'Last one',
       color: color as any,
-      icon: 'i-lucide-info',
+      icon: 'i-lucide:info',
       onClick() {
         console.log('Last one clicked');
       },
@@ -66,7 +66,7 @@ function multipleActions(color: string) {
 const data = {
   title: 'Heads up!',
   description: 'You can change the primary color in your app config.',
-  icon: 'i-lucide-terminal',
+  icon: 'i-lucide:terminal',
   close: true,
 };
 </script>

@@ -5,7 +5,7 @@ links:
   - label: Toast
     to: /docs/akar/components/toast
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/toast.vue
 ---
 
@@ -69,7 +69,7 @@ Pass an `icon` field to the `toast.add` method to display an [Icon](/docs/pohon/
 options:
   - name: 'icon'
     label: 'icon'
-    default: 'i-lucide-wifi'
+    default: 'i-lucide:wifi'
 name: 'toast-icon-example'
 ---
 ::
@@ -124,14 +124,14 @@ name: 'toast-close-example'
 
 ### Close Icon
 
-Pass a `closeIcon` field to customize the close button [Icon](/docs/pohon/components/icon). Default to `i-lucide-x`.
+Pass a `closeIcon` field to customize the close button [Icon](/docs/pohon/components/icon). Default to `i-lucide:x`.
 
 ::docs-component-example
 ---
 options:
   - name: 'closeIcon'
     label: 'closeIcon'
-    default: 'i-lucide-arrow-right'
+    default: 'i-lucide:arrow-right'
 name: 'toast-close-icon-example'
 ---
 ::

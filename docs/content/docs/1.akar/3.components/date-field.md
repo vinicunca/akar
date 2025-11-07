@@ -4,6 +4,6 @@ links:
   - label: Pohon
     to: /docs/pohon/components/date-field
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/date-field/index.ts
 ---

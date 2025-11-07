@@ -90,7 +90,7 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
           <PAvatar
             size="lg"
             :src="state.avatar ? createObjectUrl(state.avatar) : undefined"
-            icon="i-lucide-image"
+            icon="i-lucide:image"
           />
 
           <PButton

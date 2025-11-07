@@ -78,8 +78,8 @@ const value = ref(true);
     <PSwitch
       label="Icon"
       :default-value="true"
-      checked-icon="i-lucide-check"
-      unchecked-icon="i-lucide-x"
+      checked-icon="i-lucide:check"
+      unchecked-icon="i-lucide:x"
       v-bind="props"
     />
     <PSwitch
@@ -91,7 +91,7 @@ const value = ref(true);
     <PSwitch
       label="Loading icon"
       loading
-      loading-icon="i-lucide-loader"
+      loading-icon="i-lucide:loader"
       :default-value="true"
       v-bind="props"
     />

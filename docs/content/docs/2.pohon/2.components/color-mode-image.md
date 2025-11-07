@@ -4,7 +4,7 @@ description: 'An image element with a different source for light and dark mode.'
 category: color-mode
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/color-mode/ColorModeImage.vue
 ---
 
@@ -36,7 +36,7 @@ Switch between light and dark mode to see the different images: :p-color-mode-se
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attributes" target="_blank"}
 This component also supports all native `<img>` HTML attributes.
 ::
 

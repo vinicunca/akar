@@ -5,7 +5,7 @@ links:
   - label: Dialog
     to: /docs/akar/components/dialog
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/slideover.vue
 ---
 
@@ -130,7 +130,7 @@ The close button is not displayed if the `#content` slot is used as it's a part 
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
+Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide:x`.
 
 ::docs-pohon-preview
 ---
@@ -139,7 +139,7 @@ ignore:
   - title
 props:
   title: 'Slideover with close button'
-  closeIcon: 'i-lucide-arrow-right'
+  closeIcon: 'i-lucide:arrow-right'
 slots:
   default: |
 

@@ -66,7 +66,7 @@ const text = computed(() => {
             color="neutral"
             variant="link"
             size="sm"
-            :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+            :icon="show ? 'i-lucide:eye-off' : 'i-lucide:eye'"
             :aria-label="show ? 'Hide password' : 'Show password'"
             :aria-pressed="show"
             aria-controls="password"
@@ -102,7 +102,7 @@ const text = computed(() => {
         :class="req.met ? 'text-success' : 'color-text-muted'"
       >
         <PIcon
-          :name="req.met ? 'i-lucide-circle-check' : 'i-lucide-circle-x'"
+          :name="req.met ? 'i-lucide:circle-check' : 'i-lucide:circle-x'"
           class="shrink-0 size-4"
         />
 

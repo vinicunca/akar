@@ -73,23 +73,23 @@ function getDropdownActions(user: User): Array<Array<PDropdownMenuItem>> {
   return [
     [{
       label: 'Copy user Id',
-      icon: 'i-lucide-copy',
+      icon: 'i-lucide:copy',
       onSelect: () => {
         copy(user.id.toString());
 
         toast.add({
           title: 'User ID copied to clipboard!',
           color: 'success',
-          icon: 'i-lucide-circle-check',
+          icon: 'i-lucide:circle-check',
         });
       },
     }],
     [{
       label: 'Edit',
-      icon: 'i-lucide-edit',
+      icon: 'i-lucide:edit',
     }, {
       label: 'Delete',
-      icon: 'i-lucide-trash',
+      icon: 'i-lucide:trash',
       color: 'error',
     }],
   ];
@@ -122,7 +122,7 @@ function getDropdownActions(user: User): Array<Array<PDropdownMenuItem>> {
     <template #action-cell="{ row }">
       <PDropdownMenu :items="getDropdownActions(row.original)">
         <PButton
-          icon="i-lucide-ellipsis-vertical"
+          icon="i-lucide:ellipsis-vertical"
           color="neutral"
           variant="ghost"
           aria-label="Actions"

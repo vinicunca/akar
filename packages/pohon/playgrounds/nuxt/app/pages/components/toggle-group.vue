@@ -91,18 +91,18 @@ const modelValue = ref(['Apple', 'Banana']);
     />
     <PInputTags
       placeholder="Search..."
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       v-bind="props"
     />
     <PInputTags
       placeholder="Search..."
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       trailing
       v-bind="props"
     />
     <PInputTags
       :avatar="{ src: 'https://github.com/vuejs.png' }"
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       trailing
       placeholder="Search..."
       v-bind="props"
@@ -121,8 +121,8 @@ const modelValue = ref(['Apple', 'Banana']);
     <PInputTags
       placeholder="Loading..."
       loading
-      icon="i-lucide-search"
-      trailing-icon="i-lucide-chevron-down"
+      icon="i-lucide:search"
+      trailing-icon="i-lucide:chevron-down"
       v-bind="props"
     />
   </BaseMatrix>

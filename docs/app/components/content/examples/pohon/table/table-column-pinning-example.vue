@@ -90,7 +90,7 @@ function getHeader(column: Column<Payment>, label: string, position: 'left' | 'r
     color: 'neutral',
     variant: 'ghost',
     label,
-    icon: isPinned ? 'i-lucide-pin-off' : 'i-lucide-pin',
+    icon: isPinned ? 'i-lucide:pin-off' : 'i-lucide:pin',
     class: '-mx-2.5',
     onClick() {
       column.pin(isPinned === position ? false : position);

@@ -65,14 +65,14 @@ const components = [
   'tree',
 ].map((component) => ({
   label: toSentenceCase(component.split('/').pop() as string),
-  icon: 'i-lucide-box',
+  icon: 'i-lucide:box',
   to: `/components/${component}`,
 }));
 
 export function useNavigation() {
   const items = [
-    { label: 'Home', icon: 'i-lucide-home', to: '/' },
-    // { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' },
+    { label: 'Home', icon: 'i-lucide:home', to: '/' },
+    // { label: 'Chat', icon: 'i-lucide:message-circle', to: '/chat' },
   ];
 
   return {

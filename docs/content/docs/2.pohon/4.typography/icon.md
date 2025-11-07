@@ -5,7 +5,7 @@ framework: nuxt
 category: components
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/prose/Icon.vue
 ---
 
@@ -14,12 +14,12 @@ links:
 Use the `icon` component to display an [Icon](/docs/pohon/components/icon) in your content.
 
 ::code-preview
-:icon{name="i-simple-icons-nuxtdotjs"}
+:icon{name="i-simple-icons:nuxtdotjs"}
 
 #code
 
 ```mdc
-:icon{name="i-simple-icons-nuxtdotjs"}
+:icon{name="i-simple-icons:nuxtdotjs"}
 ```
 
 ::

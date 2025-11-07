@@ -7,7 +7,7 @@ links:
       src: https://github.com/tanstack.png
     to: https://tanstack.com/table/latest
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/table.vue
 ---
 
@@ -23,7 +23,7 @@ class: 'akar:p-0'
 ---
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/akar/tree/main/docs/app/components/content/examples/table/table-example.vue" aria-label="View source code"}
+::callout{icon="i-simple-icons:github" to="https://github.com/akar/tree/main/docs/app/components/content/examples/table/table-example.vue" aria-label="View source code"}
 This example demonstrates the most common use case of the `Table` component. Check out the source code on GitHub.
 ::
 
@@ -655,7 +655,7 @@ class: 'akar:p-0'
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#attributes" target="_blank"}
 This component also supports all native `<table>` HTML attributes.
 ::
 

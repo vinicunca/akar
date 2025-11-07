@@ -35,7 +35,7 @@ defineShortcuts({
     <template #leading>
       <PFieldGroup size="sm">
         <PButton
-          icon="i-lucide-chevron-left"
+          icon="i-lucide:chevron-left"
           color="neutral"
           variant="outline"
           :disabled="index === 0"
@@ -44,7 +44,7 @@ defineShortcuts({
           @click="navigate(index - 1)"
         />
         <PButton
-          icon="i-lucide-chevron-right"
+          icon="i-lucide:chevron-right"
           color="neutral"
           variant="outline"
           :disabled="index === (components?.length ?? 0) - 1"
@@ -58,7 +58,7 @@ defineShortcuts({
     <template #trailing>
       <slot name="trailing">
         <PButton
-          icon="i-lucide-external-link"
+          icon="i-lucide:external-link"
           :to="to || `https://ui.nuxt.com/docs/components/${name}`"
           color="neutral"
           variant="ghost"

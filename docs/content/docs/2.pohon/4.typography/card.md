@@ -5,7 +5,7 @@ framework: nuxt
 category: components
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/prose/Card.vue
 ---
 
@@ -24,7 +24,7 @@ ignore:
 props:
   class: 'my-0 w-96'
   title: Startup
-  icon: i-lucide-users
+  icon: i-lucide:users
   color: primary
   to: 'https://nuxt.lemonsqueezy.com'
   target: '_blank'

@@ -12,11 +12,11 @@ const attrs = reactive({
 
 const items = [{
   name: 'messages',
-  icon: 'i-lucide-message-circle',
+  icon: 'i-lucide:message-circle',
   count: 3,
 }, {
   name: 'notifications',
-  icon: 'i-lucide-bell',
+  icon: 'i-lucide:bell',
   count: 0,
 }];
 </script>
@@ -43,7 +43,7 @@ const items = [{
       v-bind="props"
     >
       <PButton
-        icon="i-lucide-inbox"
+        icon="i-lucide:inbox"
         color="neutral"
         variant="subtle"
       />

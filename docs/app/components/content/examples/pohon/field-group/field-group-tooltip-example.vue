@@ -10,7 +10,7 @@
       <PButton
         color="neutral"
         variant="subtle"
-        icon="i-lucide-clipboard"
+        icon="i-lucide:clipboard"
       />
     </PTooltip>
   </PFieldGroup>

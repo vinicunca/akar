@@ -4,7 +4,7 @@ import type { PNavigationMenuItem } from 'pohon-ui';
 const items = [
   {
     label: 'Docs',
-    icon: 'i-lucide-book-open',
+    icon: 'i-lucide:book-open',
     slot: 'docs' as const,
     children: [
       {
@@ -23,7 +23,7 @@ const items = [
   },
   {
     label: 'Components',
-    icon: 'i-lucide-box',
+    icon: 'i-lucide:box',
     slot: 'components' as const,
     children: [
       {
@@ -54,7 +54,7 @@ const items = [
   },
   {
     label: 'GitHub',
-    icon: 'i-simple-icons-github',
+    icon: 'i-simple-icons:github',
   },
 ] satisfies Array<PNavigationMenuItem>;
 </script>

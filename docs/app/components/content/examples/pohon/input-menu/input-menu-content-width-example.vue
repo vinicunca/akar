@@ -18,7 +18,7 @@ const { data: users } = await useFetch('https://jsonplaceholder.typicode.com/use
 <template>
   <PInputMenu
     :items="users"
-    icon="i-lucide-user"
+    icon="i-lucide:user"
     placeholder="Select user"
     :pohon="{ content: 'min-w-fit' }"
   >

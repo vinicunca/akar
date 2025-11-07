@@ -4,7 +4,7 @@ description: 'A customizable article to display in a changelog.'
 category: page
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/changelog-version.vue
 ---
 

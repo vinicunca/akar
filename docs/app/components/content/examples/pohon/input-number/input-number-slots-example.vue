@@ -9,14 +9,14 @@ const value = ref(5);
     <template #decrement>
       <PButton
         size="xs"
-        icon="i-lucide-minus"
+        icon="i-lucide:minus"
       />
     </template>
 
     <template #increment>
       <PButton
         size="xs"
-        icon="i-lucide-plus"
+        icon="i-lucide:plus"
       />
     </template>
   </PInputNumber>

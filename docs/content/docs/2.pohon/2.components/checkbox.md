@@ -5,7 +5,7 @@ links:
   - label: Akar
     to: /docs/akar/components/checkbox
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/checkbox.vue
 ---
 
@@ -50,7 +50,7 @@ props:
 
 ### Indeterminate Icon
 
-Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults to `i-lucide-minus`.
+Use the `indeterminate-icon` prop to customize the indeterminate icon. Defaults to `i-lucide:minus`.
 
 ::docs-pohon-preview
 ---
@@ -58,7 +58,7 @@ ignore:
   - defaultValue
 props:
   defaultValue: 'indeterminate'
-  indeterminateIcon: 'i-lucide-plus'
+  indeterminateIcon: 'i-lucide:plus'
 ---
 ::
 
@@ -113,7 +113,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to set the icon of the Checkbox when it is checked. Defaults to `i-lucide-check`.
+Use the `icon` prop to set the icon of the Checkbox when it is checked. Defaults to `i-lucide:check`.
 
 ::docs-pohon-preview
 ---
@@ -121,7 +121,7 @@ ignore:
   - label
   - defaultValue
 props:
-  icon: 'i-lucide-heart'
+  icon: 'i-lucide:heart'
   defaultValue: true
   label: Check me
 ---
@@ -234,7 +234,7 @@ props:
 
 :docs-pohon-emits
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
 This component also supports all native `<button>` HTML attributes.
 ::
 

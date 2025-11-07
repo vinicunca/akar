@@ -8,7 +8,7 @@ const items = [
   },
   {
     slot: 'dropdown' as const,
-    icon: 'i-lucide-ellipsis',
+    icon: 'i-lucide:ellipsis',
     children: [
       {
         label: 'Documentation',

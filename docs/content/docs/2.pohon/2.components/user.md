@@ -4,7 +4,7 @@ description: 'Display user information with name, description and avatar.'
 category: data
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/user.vue
 ---
 
@@ -48,7 +48,7 @@ props:
   description: 'Software Engineer'
   avatar:
     src: 'https://i.pravatar.cc/150?u=john-doe'
-    icon: i-lucide-image
+    icon: i-lucide:image
 ---
 ::
 

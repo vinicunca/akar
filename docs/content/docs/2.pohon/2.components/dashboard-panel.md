@@ -4,7 +4,7 @@ description: 'A resizable panel to display in a dashboard.'
 category: dashboard
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-panel.vue
 ---
 

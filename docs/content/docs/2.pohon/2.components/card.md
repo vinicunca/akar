@@ -3,7 +3,7 @@ description: Display content in a card with a header, body and footer.
 category: element
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/card.vue
 ---
 

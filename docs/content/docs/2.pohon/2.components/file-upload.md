@@ -4,7 +4,7 @@ description: 'An input element to upload files.'
 category: form
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/file-upload.vue
 ---
 
@@ -120,7 +120,7 @@ props:
 
 ### Icon
 
-Use the `icon` prop to set the icon of the FileUpload. Defaults to `i-lucide-upload`.
+Use the `icon` prop to set the icon of the FileUpload. Defaults to `i-lucide:upload`.
 
 ::docs-pohon-preview
 ---
@@ -130,7 +130,7 @@ ignore:
   - description
   - class
 props:
-  icon: 'i-lucide-image'
+  icon: 'i-lucide:image'
   label: 'Drop your image here'
   description: 'SVG, PNG, JPG or GIF (max. 2MB)'
   class: 'w-96 min-h-48'
@@ -323,7 +323,7 @@ name: 'file-upload-files-top-slot-example'
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
 This component also supports all native `<input>` HTML attributes.
 ::
 

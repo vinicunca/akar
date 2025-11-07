@@ -5,7 +5,7 @@ category: content
 framework: nuxt
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/content/ContentSurround.vue
 ---
 
@@ -38,8 +38,8 @@ ignore:
 external:
   - surround
 props:
-  prevIcon: 'i-lucide-chevron-left'
-  nextIcon: 'i-lucide-chevron-right'
+  prevIcon: 'i-lucide:chevron-left'
+  nextIcon: 'i-lucide:chevron-right'
   surround:
   - title: ContentSearchButton
     path: /components/content-search-button

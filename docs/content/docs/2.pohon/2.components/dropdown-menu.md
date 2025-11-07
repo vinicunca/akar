@@ -6,7 +6,7 @@ links:
   - label: DropdownMenu
     to: /docs/akar/components/dropdown-menu
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dropdown-menu.vue
 ---
 
@@ -30,43 +30,43 @@ props:
           src: 'https://github.com/praburangki.png'
         type: label
     - - label: Profile
-        icon: i-lucide-user
+        icon: i-lucide:user
       - label: Billing
-        icon: i-lucide-credit-card
+        icon: i-lucide:credit-card
       - label: Settings
-        icon: i-lucide-cog
+        icon: i-lucide:cog
         kbds:
           - ','
       - label: Keyboard shortcuts
-        icon: i-lucide-monitor
+        icon: i-lucide:monitor
     - - label: Team
-        icon: i-lucide-users
+        icon: i-lucide:users
       - label: Invite users
-        icon: i-lucide-user-plus
+        icon: i-lucide:user-plus
         children:
           - - label: Email
-              icon: i-lucide-mail
+              icon: i-lucide:mail
             - label: Message
-              icon: i-lucide-message-square
+              icon: i-lucide:message-square
           - - label: More
-              icon: i-lucide-circle-plus
+              icon: i-lucide:circle-plus
       - label: New team
-        icon: i-lucide-plus
+        icon: i-lucide:plus
         kbds:
           - meta
           - n
     - - label: GitHub
-        icon: i-simple-icons-github
+        icon: i-simple-icons:github
         to: 'https://github.com/nuxt/ui'
         target: _blank
       - label: Support
-        icon: i-lucide-life-buoy
+        icon: i-lucide:life-buoy
         to: '/docs/pohon/components/dropdown-menu'
       - label: API
-        icon: i-lucide-cloud
+        icon: i-lucide:cloud
         disabled: true
     - - label: Logout
-        icon: i-lucide-log-out
+        icon: i-lucide:log-out
         kbds:
           - shift
           - meta
@@ -74,10 +74,10 @@ props:
 slots:
   default: |
 
-    <PButton icon="i-lucide-menu" color="neutral" variant="outline" />
+    <PButton icon="i-lucide:menu" color="neutral" variant="outline" />
 ---
 
-:p-button{icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{icon="i-lucide:menu" color="neutral" variant="outline"}
 ::
 
 ### Items
@@ -119,43 +119,43 @@ props:
           src: 'https://github.com/praburangki.png'
         type: label
     - - label: Profile
-        icon: i-lucide-user
+        icon: i-lucide:user
       - label: Billing
-        icon: i-lucide-credit-card
+        icon: i-lucide:credit-card
       - label: Settings
-        icon: i-lucide-cog
+        icon: i-lucide:cog
         kbds:
           - ','
       - label: Keyboard shortcuts
-        icon: i-lucide-monitor
+        icon: i-lucide:monitor
     - - label: Team
-        icon: i-lucide-users
+        icon: i-lucide:users
       - label: Invite users
-        icon: i-lucide-user-plus
+        icon: i-lucide:user-plus
         children:
           - - label: Email
-              icon: i-lucide-mail
+              icon: i-lucide:mail
             - label: Message
-              icon: i-lucide-message-square
+              icon: i-lucide:message-square
           - - label: More
-              icon: i-lucide-circle-plus
+              icon: i-lucide:circle-plus
       - label: New team
-        icon: i-lucide-plus
+        icon: i-lucide:plus
         kbds:
           - meta
           - n
     - - label: GitHub
-        icon: i-simple-icons-github
+        icon: i-simple-icons:github
         to: 'https://github.com/nuxt/ui'
         target: _blank
       - label: Support
-        icon: i-lucide-life-buoy
+        icon: i-lucide:life-buoy
         to: '/docs/pohon/components/dropdown-menu'
       - label: API
-        icon: i-lucide-cloud
+        icon: i-lucide:cloud
         disabled: true
     - - label: Logout
-        icon: i-lucide-log-out
+        icon: i-lucide:log-out
         kbds:
           - shift
           - meta
@@ -165,10 +165,10 @@ props:
 slots:
   default: |
 
-    <PButton icon="i-lucide-menu" color="neutral" variant="outline" />
+    <PButton icon="i-lucide:menu" color="neutral" variant="outline" />
 ---
 
-:p-button{icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{icon="i-lucide:menu" color="neutral" variant="outline"}
 ::
 
 ::note
@@ -206,11 +206,11 @@ items:
 props:
   items:
     - label: Profile
-      icon: i-lucide-user
+      icon: i-lucide:user
     - label: Billing
-      icon: i-lucide-credit-card
+      icon: i-lucide:credit-card
     - label: Settings
-      icon: i-lucide-cog
+      icon: i-lucide:cog
   content:
     align: start
     side: bottom
@@ -220,10 +220,10 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
+    <PButton label="Open" icon="i-lucide:menu" color="neutral" variant="outline" />
 ---
 
-:p-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{label="Open" icon="i-lucide:menu" color="neutral" variant="outline"}
 ::
 
 ### Arrow
@@ -245,20 +245,20 @@ props:
   arrow: true
   items:
     - label: Profile
-      icon: i-lucide-user
+      icon: i-lucide:user
     - label: Billing
-      icon: i-lucide-credit-card
+      icon: i-lucide:credit-card
     - label: Settings
-      icon: i-lucide-cog
+      icon: i-lucide:cog
   pohon:
     content: 'w-48'
 slots:
   default: |
 
-    <PButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
+    <PButton label="Open" icon="i-lucide:menu" color="neutral" variant="outline" />
 ---
 
-:p-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{label="Open" icon="i-lucide:menu" color="neutral" variant="outline"}
 ::
 
 ### Size
@@ -280,11 +280,11 @@ props:
   size: xl
   items:
     - label: Profile
-      icon: i-lucide-user
+      icon: i-lucide:user
     - label: Billing
-      icon: i-lucide-credit-card
+      icon: i-lucide:credit-card
     - label: Settings
-      icon: i-lucide-cog
+      icon: i-lucide:cog
   content:
     align: start
   pohon:
@@ -292,10 +292,10 @@ props:
 slots:
   default: |
 
-    <PButton size="xl" label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
+    <PButton size="xl" label="Open" icon="i-lucide:menu" color="neutral" variant="outline" />
 ---
 
-:p-button{size="xl" label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{size="xl" label="Open" icon="i-lucide:menu" color="neutral" variant="outline"}
 ::
 
 ::warning
@@ -324,20 +324,20 @@ props:
   disabled: true
   items:
     - label: Profile
-      icon: i-lucide-user
+      icon: i-lucide:user
     - label: Billing
-      icon: i-lucide-credit-card
+      icon: i-lucide:credit-card
     - label: Settings
-      icon: i-lucide-cog
+      icon: i-lucide:cog
   pohon:
     content: 'w-48'
 slots:
   default: |
 
-    <PButton label="Open" icon="i-lucide-menu" color="neutral" variant="outline" />
+    <PButton label="Open" icon="i-lucide:menu" color="neutral" variant="outline" />
 ---
 
-:p-button{label="Open" icon="i-lucide-menu" color="neutral" variant="outline"}
+:p-button{label="Open" icon="i-lucide:menu" color="neutral" variant="outline"}
 ::
 
 ## Examples
@@ -441,17 +441,17 @@ import type { DropdownMenuItem } from 'pohon-ui'
 
 const items: DropdownMenuItem[] = [{
   label: 'Invite users',
-  icon: 'i-lucide-user-plus',
+  icon: 'i-lucide:user-plus',
   children: [{
     label: 'Invite by email',
-    icon: 'i-lucide-send-horizontal',
+    icon: 'i-lucide:send-horizontal',
     kbds: ['meta', 'e'],
     onSelect() {
       console.log('Invite by email clicked')
     }
   }, {
     label: 'Invite by link',
-    icon: 'i-lucide-link',
+    icon: 'i-lucide:link',
     kbds: ['meta', 'i'],
     onSelect() {
       console.log('Invite by link clicked')
@@ -459,7 +459,7 @@ const items: DropdownMenuItem[] = [{
   }]
 }, {
   label: 'New team',
-  icon: 'i-lucide-plus',
+  icon: 'i-lucide:plus',
   kbds: ['meta', 'n'],
   onSelect() {
     console.log('New team clicked')

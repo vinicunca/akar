@@ -6,13 +6,13 @@ const items = [
   {
     label: 'Account',
     description: 'Make changes to your account here. Click save when you\'re done.',
-    icon: 'i-lucide-user',
+    icon: 'i-lucide:user',
     slot: 'account' as const,
   },
   {
     label: 'Password',
     description: 'Change your password here. After saving, you\'ll be logged out.',
-    icon: 'i-lucide-lock',
+    icon: 'i-lucide:lock',
     slot: 'password' as const,
   },
 ] satisfies Array<PTabsItem>;

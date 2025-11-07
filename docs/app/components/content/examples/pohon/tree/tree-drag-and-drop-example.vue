@@ -11,22 +11,22 @@ const items = shallowRef<Array<PTreeItem>>([
       {
         label: 'composables/',
         children: [
-          { label: 'useAuth.ts', icon: 'i-vscode-icons-file-type-typescript' },
-          { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' },
+          { label: 'useAuth.ts', icon: 'i-vscode-icons:file-type-typescript' },
+          { label: 'useUser.ts', icon: 'i-vscode-icons:file-type-typescript' },
         ],
       },
       {
         label: 'components/',
         defaultExpanded: true,
         children: [
-          { label: 'Card.vue', icon: 'i-vscode-icons-file-type-vue' },
-          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' },
+          { label: 'Card.vue', icon: 'i-vscode-icons:file-type-vue' },
+          { label: 'Button.vue', icon: 'i-vscode-icons:file-type-vue' },
         ],
       },
     ],
   },
-  { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
-  { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' },
+  { label: 'app.vue', icon: 'i-vscode-icons:file-type-vue' },
+  { label: 'nuxt.config.ts', icon: 'i-vscode-icons:file-type-nuxt' },
 ]);
 
 function flatten(items: Array<PTreeItem>, parent = items): Array<{ item: PTreeItem; parent: Array<PTreeItem>; index: number }> {

@@ -5,9 +5,9 @@ category: i18n
 links:
   - label: SelectMenu
     to: /docs/pohon/components/select-menu
-    icon: i-simple-icons-nuxtdotjs
+    icon: i-simple-icons:nuxtdotjs
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/locale/LocaleSelect.vue
 ---
 

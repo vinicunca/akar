@@ -144,7 +144,7 @@ const items = Array.from({ length: 6 }).map((_, index) => ({
         :label="`Options (${options.filter(option => option.checked).length})`"
         color="neutral"
         variant="outline"
-        trailing-icon="i-lucide-chevron-down"
+        trailing-icon="i-lucide:chevron-down"
       />
     </PDropdownMenu>
     <PDropdownMenu
@@ -156,7 +156,7 @@ const items = Array.from({ length: 6 }).map((_, index) => ({
         :label="`Plugins (${plugins.filter(plugin => plugin.checked).length})`"
         color="neutral"
         variant="outline"
-        trailing-icon="i-lucide-chevron-down"
+        trailing-icon="i-lucide:chevron-down"
       />
     </PDropdownMenu>
     <PSelect

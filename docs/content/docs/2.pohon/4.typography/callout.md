@@ -5,7 +5,7 @@ framework: nuxt
 category: components
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/prose/Callout.vue
 ---
 
@@ -19,7 +19,7 @@ Use the `icon` and `color` props to customize it. You can also pass any property
 ---
 prettier: true
 props:
-  icon: i-lucide-square-play
+  icon: i-lucide:square-play
   color: neutral
   to: '/docs/getting-started/installation/nuxt'
   class: 'w-full my-0'

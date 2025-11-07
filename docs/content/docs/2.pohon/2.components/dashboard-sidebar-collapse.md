@@ -5,9 +5,9 @@ category: dashboard
 links:
   - label: Button
     to: /docs/pohon/components/button
-    icon: i-simple-icons-nuxtdotjs
+    icon: i-simple-icons:nuxtdotjs
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-sidebar-collapse.vue
 ---
 
@@ -84,7 +84,7 @@ definePageMeta({
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
 This component also supports all native `<button>` HTML attributes.
 ::
 

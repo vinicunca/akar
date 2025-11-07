@@ -5,7 +5,7 @@ links:
   - label: Akar
     to: /docs/akar/components/collapsible
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/collapsible.vue
 ---
 
@@ -25,14 +25,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-down" block />
 
   content: |
 
     <CorePlaceholder class="h-48" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-down" block}
 
 #content
 :core-placeholder{class="h-48"}
@@ -53,14 +53,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-down" block />
 
   content: |
 
     <CorePlaceholder class="h-48" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-down" block}
 
 #content
 :core-placeholder{class="h-48"}
@@ -85,14 +85,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-down" block />
 
   content: |
 
     <CorePlaceholder class="h-48" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-down" block}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-down" block}
 
 #content
 :core-placeholder{class="h-48"}

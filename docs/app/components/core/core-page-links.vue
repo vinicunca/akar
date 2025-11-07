@@ -15,7 +15,7 @@ async function copyPage() {
   <PFieldGroup>
     <PButton
       label="Copy page"
-      :icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+      :icon="copied ? 'i-lucide:copy-check' : 'i-lucide:copy'"
       color="neutral"
       variant="outline"
       :pohon="{

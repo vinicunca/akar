@@ -5,7 +5,7 @@ links:
   - label: Pohon
     to: /docs/pohon/components/accordion
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/accordion/index.ts
 ---
 
@@ -239,7 +239,7 @@ import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AA
         <AAccordionTrigger class="group">
           <span>Trigger text</span>
           <i
-            class="i-radix-icons:chevron-down transition-transform-280 group-data-[state=open]:rotate-180"
+            class="i-lucide:chevron-down transition-transform-280 group-data-[state=open]:rotate-180"
           />
         </AAccordionTrigger>
       </AAccordionHeader>

@@ -4,16 +4,16 @@ import type { PDropdownMenuItem } from 'pohon-ui';
 const items = [
   {
     label: 'Profile',
-    icon: 'i-lucide-user',
+    icon: 'i-lucide:user',
     slot: 'profile' as const,
   },
   {
     label: 'Billing',
-    icon: 'i-lucide-credit-card',
+    icon: 'i-lucide:credit-card',
   },
   {
     label: 'Settings',
-    icon: 'i-lucide-cog',
+    icon: 'i-lucide:cog',
   },
 ] satisfies Array<PDropdownMenuItem>;
 </script>
@@ -27,12 +27,12 @@ const items = [
       label="Open"
       color="neutral"
       variant="outline"
-      icon="i-lucide-menu"
+      icon="i-lucide:menu"
     />
 
     <template #profile-trailing>
       <PIcon
-        name="i-lucide-badge-check"
+        name="i-lucide:badge-check"
         class="text-primary shrink-0 size-5"
       />
     </template>

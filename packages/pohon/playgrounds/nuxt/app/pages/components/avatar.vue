@@ -29,7 +29,7 @@ const attrs = reactive({
       v-bind="props"
     />
     <PAvatar
-      icon="i-lucide-image"
+      icon="i-lucide:image"
       v-bind="props"
     />
     <PAvatar

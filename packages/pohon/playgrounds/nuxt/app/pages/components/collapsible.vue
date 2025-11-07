@@ -10,7 +10,7 @@ const appConfig = useAppConfig();
   <PCollapsible class="flex flex-col gap-2 w-48">
     <PButton
       class="group"
-      icon="i-lucide-lightbulb"
+      icon="i-lucide:lightbulb"
       :trailing-icon="appConfig.pohon.icons.chevronDown"
       color="neutral"
       variant="outline"

@@ -4,7 +4,7 @@ description: Group multiple button-like elements together.
 category: element
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/field-group.vue
 ---
 
@@ -19,10 +19,10 @@ slots:
   default: |
 
     <PButton color="neutral" variant="subtle" label="Button" />
-    <PButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
+    <PButton color="neutral" variant="outline" icon="i-lucide:chevron-down" />
 ---
 :p-button{color="neutral" variant="subtle" label="Button"}
-:p-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
+:p-button{color="neutral" variant="outline" icon="i-lucide:chevron-down"}
 ::
 
 ### Size
@@ -38,10 +38,10 @@ slots:
   default: |
 
     <PButton color="neutral" variant="subtle" label="Button" />
-    <PButton color="neutral" variant="outline" icon="i-lucide-chevron-down" />
+    <PButton color="neutral" variant="outline" icon="i-lucide:chevron-down" />
 ---
 :p-button{color="neutral" variant="subtle" label="Button"}
-:p-button{color="neutral" variant="outline" icon="i-lucide-chevron-down"}
+:p-button{color="neutral" variant="outline" icon="i-lucide:chevron-down"}
 ::
 
 ### Orientation
@@ -77,10 +77,10 @@ slots:
 
     <PInput color="neutral" variant="outline" placeholder="Enter token" />
 
-    <PButton color="neutral" variant="subtle" icon="i-lucide-clipboard" />
+    <PButton color="neutral" variant="subtle" icon="i-lucide:clipboard" />
 ---
 :p-input{color="neutral" variant="outline" placeholder="Enter token"}
-:p-button{color="neutral" variant="subtle" icon="i-lucide-clipboard"}
+:p-button{color="neutral" variant="subtle" icon="i-lucide:clipboard"}
 ::
 
 ### With tooltip

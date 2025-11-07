@@ -7,7 +7,7 @@ function showToast() {
   toast.add({
     title: 'Uh oh! Something went wrong.',
     description: 'There was a problem with your request.',
-    icon: 'i-lucide-wifi',
+    icon: 'i-lucide:wifi',
     close: {
       color: 'primary',
       variant: 'outline',

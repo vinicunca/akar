@@ -28,12 +28,12 @@ const attrs = reactive({
       id="banner"
       title="Nuxt UI v4 is officially released!"
       to="https://github.com/nuxt/ui/releases/tag/v4.0.0"
-      icon="i-lucide-rocket"
+      icon="i-lucide:rocket"
       :actions="[{
         label: 'Read the post',
         color: 'neutral',
         variant: 'outline',
-        trailingIcon: 'i-lucide-arrow-right',
+        trailingIcon: 'i-lucide:arrow-right',
         to: 'https://nuxt.com/blog/nuxt-ui-v4',
         target: '_blank',
         class: 'ring-0',

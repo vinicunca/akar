@@ -3,7 +3,7 @@ description: A wrapper around <NuxtLink> with extra props.
 category: navigation
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/link.vue
 ---
 
@@ -99,7 +99,7 @@ ignore:
 ---
 ::
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes" target="_blank"}
 This component also supports all native `<a>` HTML attributes.
 ::
 

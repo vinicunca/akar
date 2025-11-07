@@ -4,7 +4,7 @@ description: 'A responsive navbar to display in a dashboard.'
 category: dashboard
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-navbar.vue
 ---
 
@@ -73,7 +73,7 @@ ignore:
   - title
 props:
   title: 'Dashboard'
-  icon: 'i-lucide-house'
+  icon: 'i-lucide:house'
   class: 'w-full'
 class: 'akar:px-0 akar:pt-0'
 ---

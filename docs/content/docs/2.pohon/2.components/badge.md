@@ -3,7 +3,7 @@ description: A short text to represent a status or a category.
 category: element
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/badge.vue
 ---
 
@@ -76,7 +76,7 @@ Use the `icon` prop to show an [Icon](/docs/pohon/components/icon) inside the Ba
 ::docs-pohon-preview
 ---
 props:
-  icon: i-lucide-rocket
+  icon: i-lucide:rocket
   size: md
   color: primary
   variant: solid
@@ -90,7 +90,7 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 ::docs-pohon-preview
 ---
 props:
-  trailingIcon: i-lucide-arrow-right
+  trailingIcon: i-lucide:arrow-right
   size: md
 slots:
   default: Badge

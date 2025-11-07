@@ -4,7 +4,7 @@ description: 'A pre-built error component with NuxtError support.'
 category: layout
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/error.vue
 ---
 
@@ -61,7 +61,7 @@ props:
   clear:
     color: neutral
     size: xl
-    icon: i-lucide-arrow-left
+    icon: i-lucide:arrow-left
     class: 'akar:rounded-full'
   error:
     statusCode: 404

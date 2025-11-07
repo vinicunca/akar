@@ -5,7 +5,7 @@ links:
   - label: Drawer
     to: https://github.com/unovue/vaul-vue
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/drawer.vue
 ---
 
@@ -21,14 +21,14 @@ prettier: true
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
 
   content: |
 
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
 #content
 :core-placeholder{class="h-48 m-4"}
@@ -48,14 +48,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
 
   body: |
 
     <CorePlaceholder class="h-48" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
 #body
 :core-placeholder{class="h-48"}
@@ -76,14 +76,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
 
   body: |
 
     <CorePlaceholder class="h-48" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
 #body
 :core-placeholder{class="h-48"}
@@ -101,14 +101,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
 
   content: |
 
     <CorePlaceholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
 #content
 :core-placeholder{class="min-w-96 min-h-96 size-full m-4"}
@@ -127,14 +127,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
 
   content: |
 
     <CorePlaceholder class="min-w-96 min-h-96 size-full m-4" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
 #content
 :core-placeholder{class="min-w-96 min-h-96 size-full m-4"}
@@ -152,14 +152,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
 
   content: |
 
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
 #content
 :core-placeholder{class="h-48 m-4"}
@@ -177,14 +177,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
 
   content: |
 
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
 #content
 :core-placeholder{class="h-48 m-4"}
@@ -202,14 +202,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
 
   content: |
 
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
 #content
 :core-placeholder{class="h-48 m-4"}
@@ -228,14 +228,14 @@ props:
 slots:
   default: |
 
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
 
   content: |
 
     <CorePlaceholder class="h-48 m-4" />
 ---
 
-:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
 #content
 :core-placeholder{class="h-screen m-4"}

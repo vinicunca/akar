@@ -6,7 +6,7 @@ links:
   - label: RadioGroup
     to: /docs/akar/components/radio-group
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/radio-group.vue
 ---
 

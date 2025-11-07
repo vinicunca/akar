@@ -12,7 +12,7 @@ import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar
         class="group color-primary outline-none border rounded-full inline-flex size-6 transition-colors-280 items-center justify-center data-[state=closed]:bg-white data-[state=open]:(bg-background-accented) hover:(bg-background-accented)"
       >
         <i
-          class="group-data-[state=open]:i-radix-icons:cross-2 group-data-[state=closed]:i-radix-icons:row-spacing size-3.5"
+          class="group-data-[state=open]:i-lucide:x group-data-[state=closed]:i-lucide:arrow-down size-3.5"
         />
       </ACollapsibleTrigger>
     </div>

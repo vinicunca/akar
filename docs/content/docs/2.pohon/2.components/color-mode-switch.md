@@ -5,9 +5,9 @@ category: color-mode
 links:
   - label: Switch
     to: /docs/pohon/components/switch
-    icon: i-simple-icons-nuxtdotjs
+    icon: i-simple-icons:nuxtdotjs
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/color-mode/ColorModeSwitch.vue
 ---
 
@@ -31,8 +31,8 @@ Use the `app.config.ts` to customize the icon with the `pohon.icons` property:
 export default defineAppConfig({
   pohon: {
     icons: {
-      light: 'i-ph-sun',
-      dark: 'i-ph-moon'
+      light: 'i-ph:sun',
+      dark: 'i-ph:moon'
     }
   }
 })
@@ -55,8 +55,8 @@ export default defineConfig({
     pohon({
       pohon: {
         icons: {
-          light: 'i-ph-sun',
-          dark: 'i-ph-moon'
+          light: 'i-ph:sun',
+          dark: 'i-ph:moon'
         }
       }
     })

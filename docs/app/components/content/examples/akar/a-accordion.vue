@@ -45,7 +45,7 @@ const items = [
           <AAccordionTrigger class="group text-sm font-medium py-3.5 flex flex-1 gap-1.5 min-w-0 items-center focus-visible:outline-primary">
             <span>{{ item.title }}</span>
             <i
-              class="i-radix-icons:chevron-down ms-auto shrink-0 size-5 transition-transform-280 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180"
+              class="i-lucide:chevron-down ms-auto shrink-0 size-5 transition-transform-280 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180"
               aria-label="Expand/Collapse"
             />
           </AAccordionTrigger>

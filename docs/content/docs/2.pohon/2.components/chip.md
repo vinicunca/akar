@@ -3,7 +3,7 @@ description: An indicator of a numeric value or a state.
 category: element
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/chip.vue
 ---
 
@@ -17,9 +17,9 @@ prettier: true
 slots:
   default: |
 
-    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide:mail" color="neutral" variant="subtle" />
 ---
-:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide:mail" color="neutral" variant="subtle"}
 ::
 
 ### Color
@@ -34,9 +34,9 @@ props:
 slots:
   default: |
 
-    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide:mail" color="neutral" variant="subtle" />
 ---
-:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide:mail" color="neutral" variant="subtle"}
 ::
 
 ### Size
@@ -51,9 +51,9 @@ props:
 slots:
   default: |
 
-    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide:mail" color="neutral" variant="subtle" />
 ---
-:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide:mail" color="neutral" variant="subtle"}
 ::
 
 ### Text
@@ -69,9 +69,9 @@ props:
 slots:
   default: |
 
-    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide:mail" color="neutral" variant="subtle" />
 ---
-:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide:mail" color="neutral" variant="subtle"}
 ::
 
 ### Position
@@ -86,9 +86,9 @@ props:
 slots:
   default: |
 
-    <PButton icon="i-lucide-mail" color="neutral" variant="subtle" />
+    <PButton icon="i-lucide:mail" color="neutral" variant="subtle" />
 ---
-:p-button{icon="i-lucide-mail" color="neutral" variant="subtle"}
+:p-button{icon="i-lucide:mail" color="neutral" variant="subtle"}
 ::
 
 ### Inset

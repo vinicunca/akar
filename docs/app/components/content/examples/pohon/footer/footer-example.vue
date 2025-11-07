@@ -32,7 +32,7 @@ const items: Array<PNavigationMenuItem> = [{
 
     <template #right>
       <PButton
-        icon="i-simple-icons-discord"
+        icon="i-simple-icons:discord"
         color="neutral"
         variant="ghost"
         to="https://akar.vinicunca.dev/discord"
@@ -40,7 +40,7 @@ const items: Array<PNavigationMenuItem> = [{
         aria-label="Discord"
       />
       <PButton
-        icon="i-simple-icons-x"
+        icon="i-simple-icons:x"
         color="neutral"
         variant="ghost"
         to="https://akar.vinicunca.dev/x"
@@ -48,7 +48,7 @@ const items: Array<PNavigationMenuItem> = [{
         aria-label="X"
       />
       <PButton
-        icon="i-simple-icons-github"
+        icon="i-simple-icons:github"
         color="neutral"
         variant="ghost"
         to="https://github.com/nuxt/nuxt"

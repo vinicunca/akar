@@ -4,11 +4,11 @@ import type { PTabsItem } from 'pohon-ui';
 const items: Array<PTabsItem> = [
   {
     label: 'Account',
-    icon: 'i-lucide-user',
+    icon: 'i-lucide:user',
   },
   {
     label: 'Password',
-    icon: 'i-lucide-lock',
+    icon: 'i-lucide:lock',
   },
 ];
 </script>

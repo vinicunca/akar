@@ -3,7 +3,7 @@ description: A form component with built-in validation and submission handling.
 category: form
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/form.vue
 ---
 
@@ -177,7 +177,7 @@ name: 'form-example-nested-list'
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form#attributes" target="_blank"}
 This component also supports all native `<form>` HTML attributes.
 ::
 

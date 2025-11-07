@@ -2,22 +2,22 @@
 const items = [
   {
     label: 'Docs',
-    icon: 'i-lucide-book-open',
+    icon: 'i-lucide:book-open',
   },
   {
     label: 'Components',
-    icon: 'i-lucide-box',
+    icon: 'i-lucide:box',
     active: true,
   },
   {
     label: 'Figma',
-    icon: 'i-simple-icons-figma',
+    icon: 'i-simple-icons:figma',
     to: 'https://go.nuxt.com/figma-ui',
     target: '_blank',
   },
   {
     label: 'Releases',
-    icon: 'i-lucide-rocket',
+    icon: 'i-lucide:rocket',
     to: 'https://github.com/nuxt/ui/releases',
     target: '_blank',
   },
@@ -78,7 +78,7 @@ const items = [
           variant="ghost"
           to="https://github.com/nuxt/ui"
           target="_blank"
-          icon="i-simple-icons-github"
+          icon="i-simple-icons:github"
           aria-label="GitHub"
         />
       </PTooltip>

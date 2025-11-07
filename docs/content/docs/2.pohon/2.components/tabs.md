@@ -5,7 +5,7 @@ links:
   - label: Tabs
     to: /docs/akar/components/tabs
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/tabs.vue
 ---
 
@@ -50,10 +50,10 @@ externalTypes:
 props:
   items:
     - label: Account
-      icon: 'i-lucide-user'
+      icon: 'i-lucide:user'
       content: 'This is the account content.'
     - label: Password
-      icon: 'i-lucide-lock'
+      icon: 'i-lucide:lock'
       content: 'This is the password content.'
   class: 'w-full'
 ---
@@ -77,10 +77,10 @@ props:
   content: false
   items:
     - label: Account
-      icon: 'i-lucide-user'
+      icon: 'i-lucide:user'
       content: 'This is the account content.'
     - label: Password
-      icon: 'i-lucide-lock'
+      icon: 'i-lucide:lock'
       content: 'This is the password content.'
   class: 'w-full'
 ---
@@ -104,10 +104,10 @@ props:
   unmountOnHide: false
   items:
     - label: Account
-      icon: 'i-lucide-user'
+      icon: 'i-lucide:user'
       content: 'This is the account content.'
     - label: Password
-      icon: 'i-lucide-lock'
+      icon: 'i-lucide:lock'
       content: 'This is the password content.'
   class: 'w-full'
 ---

@@ -4,7 +4,7 @@ description: 'A main element that fills the available viewport height.'
 category: layout
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/main.vue
 ---
 

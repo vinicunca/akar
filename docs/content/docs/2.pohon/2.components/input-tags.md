@@ -6,7 +6,7 @@ links:
   - label: InputTags
     to: /docs/akar/components/tags-input
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/input-tags.vue
 ---
 
@@ -130,7 +130,7 @@ external:
   - modelValue
 props:
   modelValue: ['Vue']
-  icon: 'i-lucide-search'
+  icon: 'i-lucide:search'
   size: md
   variant: outline
 ---
@@ -162,7 +162,7 @@ props:
 
 ### Delete Icon
 
-Use the `delete-icon` prop to customize the delete [Icon](/docs/pohon/components/icon) in the tags. Defaults to `i-lucide-x`.
+Use the `delete-icon` prop to customize the delete [Icon](/docs/pohon/components/icon) in the tags. Defaults to `i-lucide:x`.
 
 ::docs-pohon-preview
 ---
@@ -173,7 +173,7 @@ external:
   - modelValue
 props:
   modelValue: ['Vue']
-  deleteIcon: 'i-lucide-trash'
+  deleteIcon: 'i-lucide:trash'
 ---
 ::
 
@@ -209,7 +209,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide:loader-circle`.
 
 ::docs-pohon-preview
 ---
@@ -221,7 +221,7 @@ external:
 props:
   modelValue: ['Vue']
   loading: true
-  loadingIcon: 'i-lucide-loader'
+  loadingIcon: 'i-lucide:loader'
 ---
 ::
 
@@ -272,7 +272,7 @@ name: 'input-tags-form-field-example'
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes" target="_blank"}
 This component also supports all native `<input>` HTML attributes.
 ::
 

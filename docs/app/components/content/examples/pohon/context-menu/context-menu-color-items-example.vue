@@ -5,22 +5,22 @@ const items: Array<Array<PContextMenuItem>> = [
   [
     {
       label: 'View',
-      icon: 'i-lucide-eye',
+      icon: 'i-lucide:eye',
     },
     {
       label: 'Copy',
-      icon: 'i-lucide-copy',
+      icon: 'i-lucide:copy',
     },
     {
       label: 'Edit',
-      icon: 'i-lucide-pencil',
+      icon: 'i-lucide:pencil',
     },
   ],
   [
     {
       label: 'Delete',
       color: 'error' as const,
-      icon: 'i-lucide-trash',
+      icon: 'i-lucide:trash',
     },
   ],
 ];

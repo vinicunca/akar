@@ -38,27 +38,27 @@ const statuses = [{
   label: 'Backlog',
   value: 'backlog',
   description: 'Issues that have been identified but not yet prioritized',
-  icon: 'i-lucide-circle-help',
+  icon: 'i-lucide:circle-help',
 }, {
   label: 'Todo',
   value: 'todo',
   description: 'Issues that are ready to be worked on',
-  icon: 'i-lucide-circle-plus',
+  icon: 'i-lucide:circle-plus',
 }, {
   label: 'In Progress',
   value: 'in_progress',
   description: 'Issues that are currently being worked on',
-  icon: 'i-lucide-circle-arrow-up',
+  icon: 'i-lucide:circle-arrow-up',
 }, {
   label: 'Done',
   value: 'done',
   description: 'Issues that have been completed successfully',
-  icon: 'i-lucide-circle-check',
+  icon: 'i-lucide:circle-check',
 }, {
   label: 'Canceled',
   value: 'canceled',
   description: 'Issues that have been cancelled or rejected',
-  icon: 'i-lucide-circle-x',
+  icon: 'i-lucide:circle-x',
 }] satisfies Array<PSelectItem>;
 
 const { data: users, status } = await useFetch('https://jsonplaceholder.typicode.com/users', {
@@ -69,7 +69,7 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 });
 
 function getStatusIcon(value: string) {
-  return statuses.find((status) => status.value === value)?.icon || 'i-lucide-user';
+  return statuses.find((status) => status.value === value)?.icon || 'i-lucide:user';
 }
 
 function getUserAvatar(value: string) {
@@ -220,13 +220,13 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!]);
     />
     <PSelect
       placeholder="Search..."
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       :items="items"
       v-bind="props"
     />
     <PSelect
       placeholder="Search..."
-      trailing-icon="i-lucide-search"
+      trailing-icon="i-lucide:search"
       :items="items"
       v-bind="props"
     />
@@ -252,15 +252,15 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!]);
     <PSelect
       placeholder="Loading..."
       loading
-      icon="i-lucide-search"
-      trailing-icon="i-lucide-arrow-right"
+      icon="i-lucide:search"
+      trailing-icon="i-lucide:arrow-right"
       :items="items"
       v-bind="props"
     />
     <PSelect
       placeholder="Search status..."
-      icon="i-lucide-search"
-      trailing-icon="i-lucide-chevrons-up-down"
+      icon="i-lucide:search"
+      trailing-icon="i-lucide:chevrons-up-down"
       :items="statuses"
       v-bind="props"
     >
@@ -274,7 +274,7 @@ const valueMultiple = ref([fruits[0]!, vegetables[0]!]);
     </PSelect>
     <PSelect
       placeholder="Search users..."
-      icon="i-lucide-user"
+      icon="i-lucide:user"
       ignore-filter
       :loading="status === 'pending'"
       :items="users"

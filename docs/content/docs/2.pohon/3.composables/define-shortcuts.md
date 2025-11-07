@@ -139,14 +139,14 @@ The `extractShortcuts` utility can be used to automatically define shortcuts fro
 <script setup lang="ts">
 const items = [{
   label: 'Save',
-  icon: 'i-lucide-file-down',
+  icon: 'i-lucide:file-down',
   kbds: ['meta', 'S'],
   onSelect() {
     save()
   }
 }, {
   label: 'Copy',
-  icon: 'i-lucide-copy',
+  icon: 'i-lucide:copy',
   kbds: ['meta', 'C'],
   onSelect() {
     copy()

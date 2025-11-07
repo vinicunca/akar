@@ -9,6 +9,10 @@ const COLOR_PATTERN = /([^\s`]*\$\{color\}[^\s`]*)/g;
 export default defineConfig({
   outputToCssLayers: true,
 
+  layers: {
+    pohon: 20,
+  },
+
   content: {
     filesystem: [
       resolve('./content/**/*.{md,mdx}'),

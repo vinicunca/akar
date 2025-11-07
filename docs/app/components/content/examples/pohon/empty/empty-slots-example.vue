@@ -52,7 +52,7 @@ const members: Array<PUserProps> = [
     variant="naked"
     :actions="[{
       label: 'Invite members',
-      icon: 'i-lucide-user-plus',
+      icon: 'i-lucide:user-plus',
       color: 'neutral',
     }]"
   >

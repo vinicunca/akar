@@ -10,7 +10,7 @@
     </div>
 
     <PSeparator
-      icon="i-simple-icons-nuxtdotjs"
+      icon="i-simple-icons:nuxtdotjs"
       type="dashed"
     />
 

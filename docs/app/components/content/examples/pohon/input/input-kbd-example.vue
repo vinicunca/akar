@@ -17,7 +17,7 @@ defineShortcuts({
 <template>
   <PInput
     ref="input"
-    icon="i-lucide-search"
+    icon="i-lucide:search"
     placeholder="Search..."
   >
     <template #trailing>

@@ -88,7 +88,7 @@ const groups = ref([
       {
         label: 'Add new file',
         suffix: 'Create a new file in the current directory or workspace.',
-        icon: 'i-lucide-file-plus',
+        icon: 'i-lucide:file-plus',
         kbds: [
           'meta',
           'N',
@@ -100,7 +100,7 @@ const groups = ref([
       {
         label: 'Add new folder',
         suffix: 'Create a new folder in the current directory or workspace.',
-        icon: 'i-lucide-folder-plus',
+        icon: 'i-lucide:folder-plus',
         kbds: [
           'meta',
           'F',
@@ -112,7 +112,7 @@ const groups = ref([
       {
         label: 'Add hashtag',
         suffix: 'Add a hashtag to the current item.',
-        icon: 'i-lucide-hash',
+        icon: 'i-lucide:hash',
         kbds: [
           'meta',
           'H',
@@ -124,7 +124,7 @@ const groups = ref([
       {
         label: 'Add label',
         suffix: 'Add a label to the current item.',
-        icon: 'i-lucide-tag',
+        icon: 'i-lucide:tag',
         kbds: [
           'meta',
           'L',

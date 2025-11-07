@@ -187,7 +187,7 @@ const grouping_options = ref<GroupingOptions>({
           color="neutral"
           class="mr-2"
           size="xs"
-          :icon="row.getIsExpanded() ? 'i-lucide-minus' : 'i-lucide-plus'"
+          :icon="row.getIsExpanded() ? 'i-lucide:minus' : 'i-lucide:plus'"
           @click="row.toggleExpanded()"
         />
         <strong v-if="row.groupingColumnId === 'account_id'">{{

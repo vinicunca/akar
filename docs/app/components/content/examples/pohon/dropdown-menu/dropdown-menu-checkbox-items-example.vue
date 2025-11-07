@@ -8,13 +8,13 @@ const showDownloads = ref(false);
 
 const items = computed(() => [{
   label: 'Interface',
-  icon: 'i-lucide-app-window',
+  icon: 'i-lucide:app-window',
   type: 'label' as const,
 }, {
   type: 'separator' as const,
 }, {
   label: 'Show Bookmarks',
-  icon: 'i-lucide-bookmark',
+  icon: 'i-lucide:bookmark',
   type: 'checkbox' as const,
   checked: showBookmarks.value,
   onUpdateChecked(checked: boolean) {
@@ -25,7 +25,7 @@ const items = computed(() => [{
   },
 }, {
   label: 'Show History',
-  icon: 'i-lucide-clock',
+  icon: 'i-lucide:clock',
   type: 'checkbox' as const,
   checked: showHistory.value,
   onUpdateChecked(checked: boolean) {
@@ -33,7 +33,7 @@ const items = computed(() => [{
   },
 }, {
   label: 'Show Downloads',
-  icon: 'i-lucide-download',
+  icon: 'i-lucide:download',
   type: 'checkbox' as const,
   checked: showDownloads.value,
   onUpdateChecked(checked: boolean) {
@@ -52,7 +52,7 @@ const items = computed(() => [{
       label="Open"
       color="neutral"
       variant="outline"
-      icon="i-lucide-menu"
+      icon="i-lucide:menu"
     />
   </PDropdownMenu>
 </template>

@@ -3,18 +3,18 @@ import type { PNavigationMenuItem } from 'pohon-ui';
 
 const items: Array<Array<PNavigationMenuItem>> = [[{
   label: 'Home',
-  icon: 'i-lucide-house',
+  icon: 'i-lucide:house',
   active: true,
 }, {
   label: 'Inbox',
-  icon: 'i-lucide-inbox',
+  icon: 'i-lucide:inbox',
   badge: '4',
 }, {
   label: 'Contacts',
-  icon: 'i-lucide-users',
+  icon: 'i-lucide:users',
 }, {
   label: 'Settings',
-  icon: 'i-lucide-settings',
+  icon: 'i-lucide:settings',
   defaultOpen: true,
   children: [{
     label: 'General',
@@ -25,12 +25,12 @@ const items: Array<Array<PNavigationMenuItem>> = [[{
   }],
 }], [{
   label: 'Feedback',
-  icon: 'i-lucide-message-circle',
+  icon: 'i-lucide:message-circle',
   to: 'https://github.com/nuxt-ui-templates/dashboard',
   target: '_blank',
 }, {
   label: 'Help & Support',
-  icon: 'i-lucide-info',
+  icon: 'i-lucide:info',
   to: 'https://github.com/nuxt/ui',
   target: '_blank',
 }]];
@@ -49,7 +49,7 @@ const items: Array<Array<PNavigationMenuItem>> = [[{
       />
       <PIcon
         v-else
-        name="i-simple-icons-nuxtdotjs"
+        name="i-simple-icons:nuxtdotjs"
         class="text-primary mx-auto size-5"
       />
     </template>
@@ -57,7 +57,7 @@ const items: Array<Array<PNavigationMenuItem>> = [[{
     <template #default="{ collapsed }">
       <PButton
         :label="collapsed ? undefined : 'Search...'"
-        icon="i-lucide-search"
+        icon="i-lucide:search"
         color="neutral"
         variant="outline"
         block

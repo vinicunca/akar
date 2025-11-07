@@ -30,7 +30,7 @@ const label = ref([]);
 <template>
   <PPopover :content="{ side: 'right', align: 'start' }">
     <PButton
-      icon="i-lucide-tag"
+      icon="i-lucide:tag"
       label="Select labels"
       color="neutral"
       variant="subtle"

@@ -7,14 +7,14 @@ import { vMaska } from 'maska/vue';
     <PInput
       v-maska="'#### #### #### ####'"
       placeholder="4242 4242 4242 4242"
-      icon="i-lucide-credit-card"
+      icon="i-lucide:credit-card"
     />
 
     <div class="flex gap-2 items-center">
       <PInput
         v-maska="'##/##'"
         placeholder="MM/YY"
-        icon="i-lucide-calendar"
+        icon="i-lucide:calendar"
       />
       <PInput
         v-maska="'###'"

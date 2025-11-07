@@ -4,15 +4,15 @@ import type { PAccordionItem } from 'pohon-ui';
 const items: Array<PAccordionItem> = [
   {
     label: 'Icons',
-    icon: 'i-lucide-smile',
+    icon: 'i-lucide:smile',
   },
   {
     label: 'Colors',
-    icon: 'i-lucide-swatch-book',
+    icon: 'i-lucide:swatch-book',
   },
   {
     label: 'Components',
-    icon: 'i-lucide-box',
+    icon: 'i-lucide:box',
   },
 ];
 </script>

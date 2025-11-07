@@ -3,7 +3,7 @@ description: A button element that can act as a link or trigger an action.
 category: element
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/button.vue
 ---
 
@@ -76,7 +76,7 @@ Use the `icon` prop to show an [Icon](/docs/pohon/components/icon) inside the Bu
 ::docs-pohon-preview
 ---
 props:
-  icon: i-lucide-rocket
+  icon: i-lucide:rocket
   size: md
   color: primary
   variant: solid
@@ -90,7 +90,7 @@ Use the `leading` and `trailing` props to set the icon position or the `leading-
 ::docs-pohon-preview
 ---
 props:
-  trailingIcon: i-lucide-arrow-right
+  trailingIcon: i-lucide:arrow-right
   size: md
 slots:
   default: Button
@@ -102,7 +102,7 @@ The `label` as prop or slot is optional so you can use the Button as an icon-onl
 ::docs-pohon-preview
 ---
 props:
-  icon: i-lucide-search
+  icon: i-lucide:search
   size: md
   color: primary
   variant: solid
@@ -258,13 +258,13 @@ This also works with the [Form](/docs/pohon/components/form) component.
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide:loader-circle`.
 
 ::docs-pohon-preview
 ---
 props:
   loading: true
-  loadingIcon: 'i-lucide-loader'
+  loadingIcon: 'i-lucide:loader'
 slots:
   default: Button
 ---
@@ -326,7 +326,7 @@ ignore:
   - variant
   - icon
 props:
-  icon: i-lucide-rocket
+  icon: i-lucide:rocket
   color: neutral
   variant: outline
   pohon:
@@ -344,7 +344,7 @@ slots:
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-github" to="https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/link.vue#L13"}
+::callout{icon="i-simple-icons:github" to="https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/link.vue#L13"}
 The `Button` component extends the `Link` component. Check out the source code on GitHub.
 ::
 
@@ -352,7 +352,7 @@ The `Button` component extends the `Link` component. Check out the source code o
 
 :docs-pohon-slots
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
 This component also supports all native `<button>` HTML attributes.
 ::
 

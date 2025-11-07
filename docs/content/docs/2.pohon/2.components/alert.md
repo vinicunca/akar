@@ -3,7 +3,7 @@ description: A callout to draw user's attention.
 category: element
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/alert.vue
 ---
 
@@ -46,7 +46,7 @@ ignore:
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  icon: 'i-lucide-terminal'
+  icon: 'i-lucide:terminal'
 ---
 ::
 
@@ -82,7 +82,7 @@ props:
   color: neutral
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  icon: 'i-lucide-terminal'
+  icon: 'i-lucide:terminal'
 ---
 ::
 
@@ -102,7 +102,7 @@ props:
   variant: subtle
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  icon: 'i-lucide-terminal'
+  icon: 'i-lucide:terminal'
 ---
 ::
 
@@ -158,7 +158,7 @@ props:
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
+Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide:x`.
 
 ::docs-pohon-preview
 ---
@@ -175,7 +175,7 @@ props:
   color: neutral
   variant: outline
   close: true
-  closeIcon: 'i-lucide-arrow-right'
+  closeIcon: 'i-lucide:arrow-right'
 ---
 ::
 
@@ -276,7 +276,7 @@ ignore:
 props:
   title: 'Heads up!'
   description: 'You can change the primary color in your app config.'
-  icon: i-lucide-rocket
+  icon: i-lucide:rocket
   pohon:
     icon: 'akar:size-11'
 ---

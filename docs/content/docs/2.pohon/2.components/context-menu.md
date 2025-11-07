@@ -6,7 +6,7 @@ links:
   - label: ContextMenu
     to: /docs/akar/components/context-menu
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/context-menu.vue
 ---
 
@@ -28,11 +28,11 @@ props:
     - - label: Appearance
         children:
           - label: System
-            icon: i-lucide-monitor
+            icon: i-lucide:monitor
           - label: Light
-            icon: i-lucide-sun
+            icon: i-lucide:sun
           - label: Dark
-            icon: i-lucide-moon
+            icon: i-lucide:moon
     - - label: Show Sidebar
         kbds:
           - meta
@@ -118,11 +118,11 @@ props:
     - - label: Appearance
         children:
           - label: System
-            icon: i-lucide-monitor
+            icon: i-lucide:monitor
           - label: Light
-            icon: i-lucide-sun
+            icon: i-lucide:sun
           - label: Dark
-            icon: i-lucide-moon
+            icon: i-lucide:moon
     - - label: Show Sidebar
         kbds:
           - meta
@@ -199,11 +199,11 @@ props:
   size: xl
   items:
     - label: System
-      icon: i-lucide-monitor
+      icon: i-lucide:monitor
     - label: Light
-      icon: i-lucide-sun
+      icon: i-lucide:sun
     - label: Dark
-      icon: i-lucide-moon
+      icon: i-lucide:moon
   pohon:
     content: 'w-48'
 slots:
@@ -235,11 +235,11 @@ props:
   disabled: true
   items:
     - label: System
-      icon: i-lucide-monitor
+      icon: i-lucide:monitor
     - label: Light
-      icon: i-lucide-sun
+      icon: i-lucide:sun
     - label: Dark
-      icon: i-lucide-moon
+      icon: i-lucide:moon
   pohon:
     content: 'w-48'
 slots:

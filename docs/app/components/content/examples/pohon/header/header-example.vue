@@ -50,7 +50,7 @@ const items = computed<Array<PNavigationMenuItem>>(() => [
           variant="ghost"
           to="https://github.com/nuxt/ui"
           target="_blank"
-          icon="i-simple-icons-github"
+          icon="i-simple-icons:github"
           aria-label="GitHub"
         />
       </PTooltip>

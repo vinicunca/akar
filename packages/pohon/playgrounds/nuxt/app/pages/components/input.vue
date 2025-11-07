@@ -65,18 +65,18 @@ const value = ref('Model value');
     />
     <PInput
       placeholder="Search..."
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       v-bind="props"
     />
     <PInput
       placeholder="Search..."
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       trailing
       v-bind="props"
     />
     <PInput
       :avatar="{ src: 'https://github.com/praburangki.png' }"
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       placeholder="Search..."
       trailing
       v-bind="props"
@@ -95,29 +95,29 @@ const value = ref('Model value');
     <PInput
       placeholder="Loading..."
       loading
-      icon="i-lucide-search"
-      trailing-icon="i-lucide-chevron-down"
+      icon="i-lucide:search"
+      trailing-icon="i-lucide:chevron-down"
       v-bind="props"
     />
     <PInput
-      icon="i-lucide-calculator"
+      icon="i-lucide:calculator"
       type="number"
       :model-value="10"
       v-bind="props"
     />
     <PInput
-      icon="i-lucide-folder"
+      icon="i-lucide:folder"
       type="file"
       v-bind="props"
     />
     <PInput
-      icon="i-lucide-calendar"
+      icon="i-lucide:calendar"
       type="date"
       :model-value="new Date().toISOString().substring(0, 10)"
       v-bind="props"
     />
     <PInput
-      icon="i-lucide-lock"
+      icon="i-lucide:lock"
       type="password"
       model-value="password"
       v-bind="props"

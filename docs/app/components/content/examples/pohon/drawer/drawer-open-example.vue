@@ -17,7 +17,7 @@ defineShortcuts({
       label="Open"
       color="neutral"
       variant="subtle"
-      trailing-icon="i-lucide-chevron-up"
+      trailing-icon="i-lucide:chevron-up"
     />
 
     <template #content>

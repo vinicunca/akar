@@ -7,7 +7,7 @@ hero:
   links:
     - label: Open Figma Kit
       to: 'https://go.nuxt.com/figma-ui'
-      icon: i-logos-figma
+      icon: i-logos:figma
       color: neutral
       variant: outline
       target: _blank
@@ -15,13 +15,13 @@ features1:
   features:
     - title: Advanced Figma Features
       description: Components, Local Variables, Auto Layout, Variants and more.
-      icon: i-logos-figma
+      icon: i-logos:figma
     - title: Instant Theming
       description: Customize your design system instantly using local variables and tokens.
-      icon: i-lucide-swatch-book
+      icon: i-lucide:swatch-book
     - title: Complete Design Kit
       description: Access all components, blocks, and templates in one comprehensive kit.
-      icon: i-lucide-files
+      icon: i-lucide:files
 cta1:
   title: Everything you need in a [single file]{class="text-primary"}.
   description: Design and development in perfect sync with our comprehensive [Nuxt UI design kit](https://go.nuxt.com/figma-ui). Developers can implement designs faster, while designers work with production-ready components.
@@ -31,11 +31,11 @@ section1:
   reverse: true
   features:
     - title: Style with color variables powered by Tailwind CSS colors
-      icon: i-simple-icons-tailwindcss
+      icon: i-simple-icons:tailwindcss
     - title: Apply over 500+ local variables across your entire file
-      icon: i-lucide-layers-2
+      icon: i-lucide:layers-2
     - title: Build with unified tokens for consistency
-      icon: i-lucide-bolt
+      icon: i-lucide:bolt
   tabs:
     - label: Define your tokens
       src: /figma/local-variables.png
@@ -51,7 +51,7 @@ section1:
     - label: Open Figma Kit
       to: 'https://go.nuxt.com/figma-ui'
       target: _blank
-      icon: i-logos-figma
+      icon: i-logos:figma
       color: neutral
       variant: outline
 section2:
@@ -59,11 +59,11 @@ section2:
   description: Create unlimited variations through nested components and swappable instances. Every element is fully themeable with props and slots, giving you complete control.
   features:
     - title: Choose between 20k+ components and variants
-      icon: i-lucide-component
+      icon: i-lucide:component
     - title: Customize designs with swap instance
-      icon: i-lucide-square-dashed-mouse-pointer
+      icon: i-lucide:square-dashed-mouse-pointer
     - title: Switch between light and dark modes in one click
-      icon: i-lucide-moon
+      icon: i-lucide:moon
   image:
     src: /figma/component.png
     width: 656
@@ -73,7 +73,7 @@ section2:
     - label: Open Figma Kit
       to: 'https://go.nuxt.com/figma-ui'
       target: _blank
-      icon: i-logos-figma
+      icon: i-logos:figma
       color: neutral
       variant: outline
 section3:
@@ -82,11 +82,11 @@ section3:
   reverse: true
   features:
     - title: Match development standards using the same props and tokens
-      icon: i-lucide-square-code
+      icon: i-lucide:square-code
     - title: Access Nuxt UI components through direct links
-      icon: i-lucide-link
+      icon: i-lucide:link
     - title: Work together as design and dev teams share one component language
-      icon: i-lucide-handshake
+      icon: i-lucide:handshake
   image:
     src: /figma/nuxt-ui-figma-to-code.png
     width: 656
@@ -95,7 +95,7 @@ section3:
   links:
     - label: Open Figma Kit
       to: 'https://go.nuxt.com/figma-ui'
-      icon: i-logos-figma
+      icon: i-logos:figma
       color: neutral
       variant: outline
       target: _blank
@@ -103,20 +103,20 @@ features2:
   features:
     - title: Ready-to-use Templates
       description: Production-ready templates for marketing sites, documentation, and more included.
-      icon: i-lucide-panels-top-left
+      icon: i-lucide:panels-top-left
     - title: Well-Documented System
       description: Complete guides for designers and developers to master your design system.
-      icon: i-lucide-book-open-text
+      icon: i-lucide:book-open-text
     - title: Icons Pack
       description: Complete Lucide icon library included - 1500+ ready components.
-      icon: i-lucide-smile
+      icon: i-lucide:smile
 section4:
   title: Start designing now.
   description: '**From Figma to deployment in simple steps.** :br Get instant access to production-ready components and start creating.'
   links:
     - label: Open Figma Kit
       to: 'https://go.nuxt.com/figma-ui'
-      icon: i-logos-figma
+      icon: i-logos:figma
       color: neutral
       variant: outline
       target: _blank

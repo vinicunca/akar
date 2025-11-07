@@ -23,7 +23,7 @@ const links = [{
 
 <template>
   <PSeparator
-    :icon="route.path === '/' ? undefined : 'i-simple-icons-nuxtdotjs'"
+    :icon="route.path === '/' ? undefined : 'i-simple-icons:nuxtdotjs'"
     class="h-px"
   />
 
@@ -47,7 +47,7 @@ const links = [{
     <template #right>
       <PButton
         aria-label="Nuxt Website"
-        icon="i-simple-icons-nuxtdotjs"
+        icon="i-simple-icons:nuxtdotjs"
         to="https://nuxt.com"
         target="_blank"
         color="neutral"
@@ -56,7 +56,7 @@ const links = [{
       />
       <PButton
         aria-label="Nuxt on Discord"
-        icon="i-simple-icons-discord"
+        icon="i-simple-icons:discord"
         to="https://go.nuxt.com/discord"
         target="_blank"
         color="neutral"
@@ -65,7 +65,7 @@ const links = [{
       />
       <PButton
         aria-label="Nuxt on X"
-        icon="i-simple-icons-x"
+        icon="i-simple-icons:x"
         to="https://go.nuxt.com/x"
         target="_blank"
         color="neutral"
@@ -74,7 +74,7 @@ const links = [{
       />
       <PButton
         aria-label="Nuxt on BlueSky"
-        icon="i-simple-icons-bluesky"
+        icon="i-simple-icons:bluesky"
         to="https://go.nuxt.com/bluesky"
         target="_blank"
         color="neutral"
@@ -83,7 +83,7 @@ const links = [{
       />
       <PButton
         aria-label="Nuxt UI on GitHub"
-        icon="i-simple-icons-github"
+        icon="i-simple-icons:github"
         to="https://github.com/nuxt/ui"
         target="_blank"
         color="neutral"

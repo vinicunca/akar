@@ -5,9 +5,9 @@ category: page
 links:
   - label: Form
     to: /docs/pohon/components/form
-    icon: i-simple-icons-nuxtdotjs
+    icon: i-simple-icons:nuxtdotjs
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/authForm.vue
 ---
 
@@ -158,7 +158,7 @@ externalTypes:
 props:
   title: 'Login'
   description: 'Enter your credentials to access your account.'
-  icon: 'i-lucide-user'
+  icon: 'i-lucide:user'
   fields:
     - name: 'email'
       type: text
@@ -196,14 +196,14 @@ externalTypes:
 props:
   title: 'Login'
   description: 'Enter your credentials to access your account.'
-  icon: 'i-lucide-user'
+  icon: 'i-lucide:user'
   providers:
     - label: 'Google'
-      icon: 'i-simple-icons-google'
+      icon: 'i-simple-icons:google'
       color: 'neutral'
       variant: 'subtle'
     - label: 'GitHub'
-      icon: 'i-simple-icons-github'
+      icon: 'i-simple-icons:github'
       color: 'neutral'
       variant: 'subtle'
   fields:
@@ -240,14 +240,14 @@ externalTypes:
 props:
   title: 'Login'
   description: 'Enter your credentials to access your account.'
-  icon: 'i-lucide-user'
+  icon: 'i-lucide:user'
   providers:
     - label: 'Google'
-      icon: 'i-simple-icons-google'
+      icon: 'i-simple-icons:google'
       color: 'neutral'
       variant: 'subtle'
     - label: 'GitHub'
-      icon: 'i-simple-icons-github'
+      icon: 'i-simple-icons:github'
       color: 'neutral'
       variant: 'subtle'
   fields:
@@ -283,14 +283,14 @@ externalTypes:
 props:
   title: 'Login'
   description: 'Enter your credentials to access your account.'
-  icon: 'i-lucide-user'
+  icon: 'i-lucide:user'
   providers:
     - label: 'Google'
-      icon: 'i-simple-icons-google'
+      icon: 'i-simple-icons:google'
       color: 'neutral'
       variant: 'subtle'
     - label: 'GitHub'
-      icon: 'i-simple-icons-github'
+      icon: 'i-simple-icons:github'
       color: 'neutral'
       variant: 'subtle'
   fields:
@@ -301,7 +301,7 @@ props:
       type: 'password'
       label: 'Password'
   separator:
-    icon: 'i-lucide-user'
+    icon: 'i-lucide:user'
   class: 'max-w-md'
 ---
 ::
@@ -332,7 +332,7 @@ externalTypes:
 props:
   title: 'Login'
   description: 'Enter your credentials to access your account.'
-  icon: 'i-lucide-user'
+  icon: 'i-lucide:user'
   fields:
     - name: 'email'
       type: text

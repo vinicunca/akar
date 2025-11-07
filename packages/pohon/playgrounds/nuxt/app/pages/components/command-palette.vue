@@ -33,7 +33,7 @@ const groups = computed(() => [
     items: [{
       label: 'Add new file',
       suffix: 'Create a new file in the current directory or workspace.',
-      icon: 'i-lucide-file-plus',
+      icon: 'i-lucide:file-plus',
       loading: loading.value,
       onSelect(e: Event) {
         e.preventDefault();
@@ -50,7 +50,7 @@ const groups = computed(() => [
     }, {
       label: 'Add new folder',
       suffix: 'Create a new folder in the current directory or workspace.',
-      icon: 'i-lucide-folder-plus',
+      icon: 'i-lucide:folder-plus',
       onSelect(e: Event) {
         e.preventDefault();
 
@@ -60,7 +60,7 @@ const groups = computed(() => [
     }, {
       label: 'Add hashtag',
       suffix: 'Add a hashtag to the current item.',
-      icon: 'i-lucide-hash',
+      icon: 'i-lucide:hash',
       onSelect(e: Event) {
         e.preventDefault();
 
@@ -70,7 +70,7 @@ const groups = computed(() => [
     }, {
       label: 'Add label',
       suffix: 'Add a label to the current item.',
-      icon: 'i-lucide-tag',
+      icon: 'i-lucide:tag',
       onSelect(e: Event) {
         e.preventDefault();
 
@@ -80,12 +80,12 @@ const groups = computed(() => [
     }, {
       label: 'More actions',
       description: 'More actions to perform on the current item.',
-      icon: 'i-lucide-ellipsis',
+      icon: 'i-lucide:ellipsis',
       placeholder: 'Search actions...',
       children: [{
         label: 'Create new file',
         suffix: 'Create a new file in the current directory or workspace.',
-        icon: 'i-lucide-file-plus',
+        icon: 'i-lucide:file-plus',
         onSelect(e: Event) {
           e.preventDefault();
 
@@ -94,7 +94,7 @@ const groups = computed(() => [
       }, {
         label: 'Create new folder',
         suffix: 'Create a new folder in the current directory or workspace.',
-        icon: 'i-lucide-folder-plus',
+        icon: 'i-lucide:folder-plus',
         onSelect(e: Event) {
           e.preventDefault();
 
@@ -103,11 +103,11 @@ const groups = computed(() => [
       }, {
         label: 'Share',
         placeholder: 'Search share options...',
-        icon: 'i-lucide-share',
+        icon: 'i-lucide:share',
         children: [{
           label: 'Share with everyone',
           suffix: 'Share with everyone in the current directory or workspace.',
-          icon: 'i-lucide-share',
+          icon: 'i-lucide:share',
           onSelect(e: Event) {
             e.preventDefault();
 
@@ -116,7 +116,7 @@ const groups = computed(() => [
         }, {
           label: 'Share with team',
           suffix: 'Share with the team in the current directory or workspace.',
-          icon: 'i-lucide-users',
+          icon: 'i-lucide:users',
           onSelect(e: Event) {
             e.preventDefault();
 
@@ -233,7 +233,7 @@ defineShortcuts({
       <template #footer>
         <div class="flex gap-2 items-center justify-between">
           <PIcon
-            name="i-simple-icons-nuxtdotjs"
+            name="i-simple-icons:nuxtdotjs"
             class="color-text-dimmed ml-1 size-5"
           />
           <div class="flex gap-1 items-center">
@@ -279,7 +279,7 @@ defineShortcuts({
       virtualize
       :fuse="{ resultLimit: 1000 }"
       placeholder="Search virtualized items..."
-      :groups="[{ id: 'items', items: Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide-file' })) }]"
+      :groups="[{ id: 'items', items: Array(1000).fill(0).map((_, i) => ({ label: `item-${i}`, value: i, icon: 'i-lucide:file' })) }]"
       class="sm:max-h-96"
     />
 

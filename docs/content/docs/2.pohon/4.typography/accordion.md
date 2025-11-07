@@ -5,7 +5,7 @@ framework: nuxt
 category: components
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/prose/Accordion.vue
 ---
 
@@ -21,15 +21,15 @@ defaultValue:
   - '1'
 ---
 
-::accordion-item{label="Is Nuxt UI free to use?" icon="i-lucide-circle-help"}
+::accordion-item{label="Is Nuxt UI free to use?" icon="i-lucide:circle-help"}
 Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.
 ::
 
-::accordion-item{label="Can I use Nuxt UI with Vue without Nuxt?" icon="i-lucide-circle-help"}
+::accordion-item{label="Can I use Nuxt UI with Vue without Nuxt?" icon="i-lucide:circle-help"}
 Yes! While optimized for Nuxt, Nuxt UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
 ::
 
-::accordion-item{label="Is Nuxt UI production-ready?" icon="i-lucide-circle-help"}
+::accordion-item{label="Is Nuxt UI production-ready?" icon="i-lucide:circle-help"}
 Yes! Nuxt UI is used in production by thousands of applications with extensive tests, regular updates, and active maintenance.
 ::
 
@@ -44,15 +44,15 @@ defaultValue:
   - '1'
 ---
 
-::accordion-item{label="Is Nuxt UI free to use?" icon="i-lucide-circle-help"}
+::accordion-item{label="Is Nuxt UI free to use?" icon="i-lucide:circle-help"}
 Yes! Nuxt UI is completely free and open source under the MIT license. All 100+ components are available to everyone.
 ::
 
-::accordion-item{label="Can I use Nuxt UI with Vue without Nuxt?" icon="i-lucide-circle-help"}
+::accordion-item{label="Can I use Nuxt UI with Vue without Nuxt?" icon="i-lucide:circle-help"}
 Yes! While optimized for Nuxt, Nuxt UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
 ::
 
-::accordion-item{label="Is Nuxt UI production-ready?" icon="i-lucide-circle-help"}
+::accordion-item{label="Is Nuxt UI production-ready?" icon="i-lucide:circle-help"}
 Yes! Nuxt UI is used in production by thousands of applications with extensive tests, regular updates, and active maintenance.
 ::
 

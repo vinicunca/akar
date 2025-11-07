@@ -41,7 +41,7 @@ const attrs = reactive({
       v-bind="props"
     />
     <PBadge
-      icon="i-lucide-rocket"
+      icon="i-lucide:rocket"
       label="Icon"
       v-bind="props"
     />
@@ -51,7 +51,7 @@ const attrs = reactive({
       v-bind="props"
     />
     <PBadge
-      icon="i-lucide-rocket"
+      icon="i-lucide:rocket"
       v-bind="props"
     />
     <PBadge

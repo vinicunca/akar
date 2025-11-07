@@ -14,7 +14,7 @@ export const toastTheme = {
     avatarSize: '2xl',
     actions: 'flex shrink-0 gap-1.5',
     progress: 'inset-x-0 bottom-0 absolute',
-    close: 'p-0',
+    close: 'uno-layer-pohon:p-0',
   },
   variants: {
     color: {

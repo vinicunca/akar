@@ -34,7 +34,7 @@ items:
   - label: Figma to Code
     description: Transform your Figma designs into production-ready Nuxt UI components with one click.
     avatar:
-      icon: i-logos-figma
+      icon: i-logos:figma
     to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui'
     target: _blank
     user:

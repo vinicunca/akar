@@ -251,13 +251,13 @@ function filterChildrenByFramework(item: ContentNavigationItem, framework: strin
 function resolveNavigationIcon(item: ContentNavigationItem) {
   let icon = item.icon;
   if (item.path.startsWith('/docs/components')) {
-    icon = 'i-lucide-square-code';
+    icon = 'i-lucide:square-code';
   }
   if (item.path.startsWith('/docs/composables')) {
-    icon = 'i-lucide-square-function';
+    icon = 'i-lucide:square-function';
   }
   if (item.path.startsWith('/docs/typography')) {
-    icon = 'i-lucide-square-pilcrow';
+    icon = 'i-lucide:square-pilcrow';
   }
 
   return {

@@ -23,22 +23,22 @@ const items = [
       label: 'composables',
       defaultExpanded: true,
       children: [
-        { label: 'useAuth.ts', icon: 'i-vscode-icons-file-type-typescript' },
-        { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' },
+        { label: 'useAuth.ts', icon: 'i-vscode-icons:file-type-typescript' },
+        { label: 'useUser.ts', icon: 'i-vscode-icons:file-type-typescript' },
       ],
     }, {
       label: 'components',
       children: [{
         label: 'Home',
         children: [
-          { label: 'Card.vue', icon: 'i-vscode-icons-file-type-vue' },
-          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' },
+          { label: 'Card.vue', icon: 'i-vscode-icons:file-type-vue' },
+          { label: 'Button.vue', icon: 'i-vscode-icons:file-type-vue' },
         ],
       }],
     }],
   },
-  { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
-  { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' },
+  { label: 'app.vue', icon: 'i-vscode-icons:file-type-vue' },
+  { label: 'nuxt.config.ts', icon: 'i-vscode-icons:file-type-nuxt' },
 ] satisfies Array<PTreeItem>;
 
 const itemsWithMappedId = [
@@ -49,10 +49,10 @@ const itemsWithMappedId = [
 
 const largeItems = Array(1000).fill(0).map((_, i) => ({
   label: `Item ${i + 1}`,
-  icon: 'i-lucide-file',
+  icon: 'i-lucide:file',
   children: [
-    { label: `Child ${i + 1}-1`, icon: 'i-lucide-file-text' },
-    { label: `Child ${i + 1}-2`, icon: 'i-lucide-file-text' },
+    { label: `Child ${i + 1}-1`, icon: 'i-lucide:file-text' },
+    { label: `Child ${i + 1}-2`, icon: 'i-lucide:file-text' },
   ],
 })) satisfies Array<PTreeItem>;
 

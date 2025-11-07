@@ -92,7 +92,7 @@ defineShortcuts(shortcuts);
             Logs
           </h3>
           <PButton
-            icon="i-lucide-trash"
+            icon="i-lucide:trash"
             size="sm"
             color="neutral"
             class="-my-1"

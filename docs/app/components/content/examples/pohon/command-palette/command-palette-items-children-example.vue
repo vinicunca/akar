@@ -8,10 +8,10 @@ const groups = [{
   label: 'Actions',
   items: [{
     label: 'Create new',
-    icon: 'i-lucide-plus',
+    icon: 'i-lucide:plus',
     children: [{
       label: 'New file',
-      icon: 'i-lucide-file-plus',
+      icon: 'i-lucide:file-plus',
       suffix: 'Create a new file in the current directory',
       onSelect(e: Event) {
         e.preventDefault();
@@ -20,7 +20,7 @@ const groups = [{
       kbds: ['meta', 'N'],
     }, {
       label: 'New folder',
-      icon: 'i-lucide-folder-plus',
+      icon: 'i-lucide:folder-plus',
       suffix: 'Create a new folder in the current directory',
       onSelect(e: Event) {
         e.preventDefault();
@@ -29,7 +29,7 @@ const groups = [{
       kbds: ['meta', 'F'],
     }, {
       label: 'New project',
-      icon: 'i-lucide-folder-git',
+      icon: 'i-lucide:folder-git',
       suffix: 'Create a new project from a template',
       onSelect(e: Event) {
         e.preventDefault();
@@ -39,10 +39,10 @@ const groups = [{
     }],
   }, {
     label: 'Share',
-    icon: 'i-lucide-share',
+    icon: 'i-lucide:share',
     children: [{
       label: 'Copy link',
-      icon: 'i-lucide-link',
+      icon: 'i-lucide:link',
       suffix: 'Copy a link to the current item',
       onSelect(e: Event) {
         e.preventDefault();
@@ -51,7 +51,7 @@ const groups = [{
       kbds: ['meta', 'L'],
     }, {
       label: 'Share via email',
-      icon: 'i-lucide-mail',
+      icon: 'i-lucide:mail',
       suffix: 'Share the current item via email',
       onSelect(e: Event) {
         e.preventDefault();
@@ -59,25 +59,25 @@ const groups = [{
       },
     }, {
       label: 'Share on social',
-      icon: 'i-lucide-share-2',
+      icon: 'i-lucide:share-2',
       suffix: 'Share the current item on social media',
       children: [{
         label: 'Twitter',
-        icon: 'i-simple-icons-twitter',
+        icon: 'i-simple-icons:twitter',
         onSelect(e: Event) {
           e.preventDefault();
           toast.add({ title: 'Shared on Twitter!' });
         },
       }, {
         label: 'LinkedIn',
-        icon: 'i-simple-icons-linkedin',
+        icon: 'i-simple-icons:linkedin',
         onSelect(e: Event) {
           e.preventDefault();
           toast.add({ title: 'Shared on LinkedIn!' });
         },
       }, {
         label: 'Facebook',
-        icon: 'i-simple-icons-facebook',
+        icon: 'i-simple-icons:facebook',
         onSelect(e: Event) {
           e.preventDefault();
           toast.add({ title: 'Shared on Facebook!' });
@@ -86,10 +86,10 @@ const groups = [{
     }],
   }, {
     label: 'Settings',
-    icon: 'i-lucide-settings',
+    icon: 'i-lucide:settings',
     children: [{
       label: 'General',
-      icon: 'i-lucide-sliders',
+      icon: 'i-lucide:sliders',
       suffix: 'Configure general settings',
       onSelect(e: Event) {
         e.preventDefault();
@@ -97,7 +97,7 @@ const groups = [{
       },
     }, {
       label: 'Appearance',
-      icon: 'i-lucide-palette',
+      icon: 'i-lucide:palette',
       suffix: 'Customize the appearance',
       onSelect(e: Event) {
         e.preventDefault();
@@ -105,7 +105,7 @@ const groups = [{
       },
     }, {
       label: 'Security',
-      icon: 'i-lucide-shield',
+      icon: 'i-lucide:shield',
       suffix: 'Manage security settings',
       onSelect(e: Event) {
         e.preventDefault();

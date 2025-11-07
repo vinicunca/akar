@@ -3,7 +3,7 @@ description: A textarea element to input multi-line text.
 category: form
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/textarea.vue
 ---
 
@@ -134,7 +134,7 @@ prettier: true
 ignore:
   - placeholder
 props:
-  icon: 'i-lucide-search'
+  icon: 'i-lucide:search'
   size: md
   variant: outline
   placeholder: 'Search...'
@@ -150,7 +150,7 @@ prettier: true
 ignore:
   - placeholder
 props:
-  trailingIcon: i-lucide-at-sign
+  trailingIcon: i-lucide:at-sign
   placeholder: 'Enter your email'
   size: md
   rows: 1
@@ -194,7 +194,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide:loader-circle`.
 
 ::docs-pohon-preview
 ---
@@ -202,7 +202,7 @@ ignore:
   - placeholder
 props:
   loading: true
-  loadingIcon: 'i-lucide-loader'
+  loadingIcon: 'i-lucide:loader'
   placeholder: 'Search...'
   rows: 1
 ---
@@ -240,7 +240,7 @@ props:
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#attributes" target="_blank"}
 This component also supports all native `<textarea>` HTML attributes.
 ::
 

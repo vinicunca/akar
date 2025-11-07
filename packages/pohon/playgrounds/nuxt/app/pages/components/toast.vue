@@ -21,7 +21,7 @@ function templates(id: number) {
   }, {
     title: 'Toast',
     description: `This is the toast ${id}`,
-    icon: 'i-lucide-rocket',
+    icon: 'i-lucide:rocket',
     actions: [{
       label: 'Action 1',
       color: 'neutral' as const,
@@ -38,10 +38,10 @@ function templates(id: number) {
     }],
   }, {
     title: `Toast ${id}`,
-    icon: 'i-lucide-rocket',
+    icon: 'i-lucide:rocket',
   }, {
     description: `This is the toast ${id}`,
-    icon: 'i-lucide-rocket',
+    icon: 'i-lucide:rocket',
   }, {
     title: 'Toast',
     description: `This is the toast ${id}`,
@@ -62,7 +62,7 @@ function templates(id: number) {
     }],
   }, {
     title: `Toast ${id}`,
-    icon: 'i-lucide-rocket',
+    icon: 'i-lucide:rocket',
     orientation: 'horizontal' as const,
     actions: [{
       label: 'Action 1',
@@ -80,7 +80,7 @@ function templates(id: number) {
     }],
   }, {
     description: `This is the toast ${id}`,
-    icon: 'i-lucide-rocket',
+    icon: 'i-lucide:rocket',
     orientation: 'horizontal' as const,
     actions: [{
       label: 'Action',

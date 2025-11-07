@@ -4,7 +4,7 @@ description: 'A component to create infinite scrolling content.'
 category: data
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/marquee.vue
 ---
 
@@ -18,19 +18,19 @@ prettier: true
 slots:
   default: |
 
-    <PIcon name="i-simple-icons-github" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-x" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:github" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:discord" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:x" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:instagram" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:linkedin" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:facebook" class="size-10 shrink-0" />
 ---
-:p-icon{name="i-simple-icons-github" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-discord" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-x" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-instagram" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-linkedin" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-facebook" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:github" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:discord" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:x" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:instagram" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:linkedin" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:facebook" class="size-10 shrink-0"}
 ::
 
 ### Pause on Hover
@@ -45,19 +45,19 @@ props:
 slots:
   default: |
 
-    <PIcon name="i-simple-icons-github" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-x" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:github" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:discord" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:x" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:instagram" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:linkedin" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:facebook" class="size-10 shrink-0" />
 ---
-:p-icon{name="i-simple-icons-github" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-discord" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-x" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-instagram" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-linkedin" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-facebook" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:github" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:discord" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:x" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:instagram" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:linkedin" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:facebook" class="size-10 shrink-0"}
 ::
 
 ### Reverse
@@ -72,19 +72,19 @@ props:
 slots:
   default: |
 
-    <PIcon name="i-simple-icons-github" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-x" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:github" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:discord" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:x" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:instagram" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:linkedin" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:facebook" class="size-10 shrink-0" />
 ---
-:p-icon{name="i-simple-icons-github" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-discord" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-x" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-instagram" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-linkedin" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-facebook" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:github" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:discord" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:x" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:instagram" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:linkedin" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:facebook" class="size-10 shrink-0"}
 ::
 
 ### Orientation
@@ -100,19 +100,19 @@ props:
 slots:
   default: |
 
-    <PIcon name="i-simple-icons-github" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-x" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:github" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:discord" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:x" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:instagram" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:linkedin" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:facebook" class="size-10 shrink-0" />
 ---
-:p-icon{name="i-simple-icons-github" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-discord" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-x" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-instagram" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-linkedin" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-facebook" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:github" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:discord" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:x" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:instagram" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:linkedin" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:facebook" class="size-10 shrink-0"}
 ::
 
 ### Repeat
@@ -127,19 +127,19 @@ props:
 slots:
   default: |
 
-    <PIcon name="i-simple-icons-github" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-x" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:github" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:discord" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:x" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:instagram" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:linkedin" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:facebook" class="size-10 shrink-0" />
 ---
-:p-icon{name="i-simple-icons-github" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-discord" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-x" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-instagram" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-linkedin" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-facebook" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:github" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:discord" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:x" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:instagram" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:linkedin" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:facebook" class="size-10 shrink-0"}
 ::
 
 ### Overlay
@@ -154,19 +154,19 @@ props:
 slots:
   default: |
 
-    <PIcon name="i-simple-icons-github" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-x" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
-    <PIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:github" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:discord" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:x" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:instagram" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:linkedin" class="size-10 shrink-0" />
+    <PIcon name="i-simple-icons:facebook" class="size-10 shrink-0" />
 ---
-:p-icon{name="i-simple-icons-github" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-discord" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-x" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-instagram" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-linkedin" class="size-10 shrink-0"}
-:p-icon{name="i-simple-icons-facebook" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:github" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:discord" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:x" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:instagram" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:linkedin" class="size-10 shrink-0"}
+:p-icon{name="i-simple-icons:facebook" class="size-10 shrink-0"}
 ::
 
 ## Examples

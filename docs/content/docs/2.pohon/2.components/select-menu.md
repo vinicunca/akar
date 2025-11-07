@@ -6,7 +6,7 @@ links:
   - label: Combobox
     to: /docs/akar/components/combobox
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/select-menu.vue
 ---
 
@@ -249,19 +249,19 @@ externalTypes:
 props:
   modelValue:
     label: 'Backlog'
-    icon: 'i-lucide-circle-help'
+    icon: 'i-lucide:circle-help'
   searchInput:
     placeholder: 'Filter...'
-    icon: 'i-lucide-search'
+    icon: 'i-lucide:search'
   items:
     - label: Backlog
-      icon: 'i-lucide-circle-help'
+      icon: 'i-lucide:circle-help'
     - label: Todo
-      icon: 'i-lucide-circle-plus'
+      icon: 'i-lucide:circle-plus'
     - label: In Progress
-      icon: 'i-lucide-circle-arrow-up'
+      icon: 'i-lucide:circle-arrow-up'
     - label: Done
-      icon: 'i-lucide-circle-check'
+      icon: 'i-lucide:circle-check'
   class: 'w-48'
 ---
 ::
@@ -437,7 +437,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  icon: 'i-lucide-search'
+  icon: 'i-lucide:search'
   size: md
   items:
     - Backlog
@@ -450,7 +450,7 @@ props:
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-chevron-down`.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon). Defaults to `i-lucide:chevron-down`.
 
 ::docs-pohon-preview
 ---
@@ -464,7 +464,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  trailingIcon: 'i-lucide-arrow-down'
+  trailingIcon: 'i-lucide:arrow-down'
   size: md
   items:
     - Backlog
@@ -489,7 +489,7 @@ You can customize this icon globally in your `vite.config.ts` under `pohon.icons
 
 ### Selected Icon
 
-Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide-check`.
+Use the `selected-icon` prop to customize the icon when an item is selected. Defaults to `i-lucide:check`.
 
 ::docs-pohon-preview
 ---
@@ -503,7 +503,7 @@ external:
   - modelValue
 props:
   modelValue: 'Backlog'
-  selectedIcon: 'i-lucide-flame'
+  selectedIcon: 'i-lucide:flame'
   size: md
   items:
     - Backlog
@@ -583,7 +583,7 @@ props:
 
 ### Loading Icon
 
-Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide-loader-circle`.
+Use the `loading-icon` prop to customize the loading icon. Defaults to `i-lucide:loader-circle`.
 
 ::docs-pohon-preview
 ---
@@ -598,7 +598,7 @@ external:
 props:
   modelValue: 'Backlog'
   loading: true
-  loadingIcon: 'i-lucide-loader'
+  loadingIcon: 'i-lucide:loader'
   items:
     - Backlog
     - Todo
@@ -881,7 +881,7 @@ name: 'select-menu-countries-example'
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
 This component also supports all native `<button>` HTML attributes.
 ::
 

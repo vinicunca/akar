@@ -25,7 +25,7 @@ const open = ref(false);
         <PButton
           color="neutral"
           variant="ghost"
-          icon="i-lucide-x"
+          icon="i-lucide:x"
           @click="open = false"
         />
       </div>

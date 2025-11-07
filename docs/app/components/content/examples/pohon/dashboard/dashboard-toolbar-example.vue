@@ -3,22 +3,22 @@ import type { PNavigationMenuItem } from 'pohon-ui';
 
 const items: Array<Array<PNavigationMenuItem>> = [[{
   label: 'General',
-  icon: 'i-lucide-user',
+  icon: 'i-lucide:user',
   active: true,
 }, {
   label: 'Members',
-  icon: 'i-lucide-users',
+  icon: 'i-lucide:users',
 }, {
   label: 'Notifications',
-  icon: 'i-lucide-bell',
+  icon: 'i-lucide:bell',
 }], [{
   label: 'Documentation',
-  icon: 'i-lucide-book-open',
+  icon: 'i-lucide:book-open',
   to: 'https://ui.nuxt.com/docs',
   target: '_blank',
 }, {
   label: 'Help & Feedback',
-  icon: 'i-lucide-help-circle',
+  icon: 'i-lucide:help-circle',
   to: 'https://github.com/nuxt/ui/issues',
   target: '_blank',
 }]];

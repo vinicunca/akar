@@ -191,7 +191,7 @@ function getRowItems(row: PTableRow<Payment>) {
       toast.add({
         title: 'Payment ID copied to clipboard!',
         color: 'success',
-        icon: 'i-lucide-circle-check',
+        icon: 'i-lucide:circle-check',
       });
     },
   }, {
@@ -266,7 +266,7 @@ const columns: Array<PTableColumn<Payment>> = [{
       variant: 'ghost',
       label: 'Email',
       // eslint-disable-next-line no-nested-ternary, sonar/no-nested-conditional
-      icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
+      icon: isSorted ? (isSorted === 'asc' ? 'i-lucide:arrow-up-narrow-wide' : 'i-lucide:arrow-down-wide-narrow') : 'i-lucide:arrow-up-down',
       class: '-mx-2.5',
       onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
     });
@@ -306,7 +306,7 @@ const columns: Array<PTableColumn<Payment>> = [{
       'items': getRowItems(row),
       'aria-label': 'Actions dropdown',
     }, () => h(PButton, {
-      'icon': 'i-lucide-ellipsis-vertical',
+      'icon': 'i-lucide:ellipsis-vertical',
       'color': 'neutral',
       'variant': 'ghost',
       'class': 'ms-auto',
@@ -428,7 +428,7 @@ onMounted(() => {
         label="Columns"
         color="neutral"
         variant="outline"
-        trailing-icon="i-lucide-chevron-down"
+        trailing-icon="i-lucide:chevron-down"
         class="ms-auto"
       />
     </PDropdownMenu>

@@ -19,13 +19,13 @@ const items = computed(() => [
       description: 'Change the appearance of the app',
       children: [{
         label: 'System',
-        icon: 'i-lucide-monitor',
+        icon: 'i-lucide:monitor',
       }, {
         label: 'Light',
-        icon: 'i-lucide-sun',
+        icon: 'i-lucide:sun',
       }, {
         label: 'Dark',
-        icon: 'i-lucide-moon',
+        icon: 'i-lucide:moon',
       }],
     },
   ],

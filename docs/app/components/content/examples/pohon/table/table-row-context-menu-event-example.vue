@@ -122,7 +122,7 @@ function getRowItems(row: PTableRow<Payment>) {
       toast.add({
         title: 'Payment ID copied to clipboard!',
         color: 'success',
-        icon: 'i-lucide-circle-check',
+        icon: 'i-lucide:circle-check',
       });
     },
   }, {

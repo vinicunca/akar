@@ -6,7 +6,7 @@ links:
     to: https://www.embla-carousel.com/api/
     icon: custom-embla-carousel
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/carousel.vue
 ---
 
@@ -94,7 +94,7 @@ class: 'p-8'
 
 ### Prev / Next Icons
 
-Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-arrow-left` / `i-lucide-arrow-right`.
+Use the `prev-icon` and `next-icon` props to customize the buttons [Icon](/docs/pohon/components/icon). Defaults to `i-lucide:arrow-left` / `i-lucide:arrow-right`.
 
 ::docs-component-example
 ---
@@ -103,10 +103,10 @@ class: 'p-8'
 options:
   - name: 'prevIcon'
     label: 'prevIcon'
-    default: 'i-lucide-chevron-left'
+    default: 'i-lucide:chevron-left'
   - name: 'nextIcon'
     label: 'nextIcon'
-    default: 'i-lucide-chevron-right'
+    default: 'i-lucide:chevron-right'
 ---
 ::
 

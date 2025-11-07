@@ -3,7 +3,7 @@ description: A hierarchy of links to navigate through a website.
 category: navigation
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/breadcrumb.vue
 ---
 
@@ -21,13 +21,13 @@ external:
 props:
   items:
     - label: 'Docs'
-      icon: 'i-lucide-book-open'
+      icon: 'i-lucide:book-open'
       to: '/docs'
     - label: 'Components'
-      icon: 'i-lucide-box'
+      icon: 'i-lucide:box'
       to: '/docs/pohon/components'
     - label: 'Breadcrumb'
-      icon: 'i-lucide-link'
+      icon: 'i-lucide:link'
       to: '/docs/pohon/components/breadcrumb'
 ---
 ::
@@ -56,13 +56,13 @@ externalTypes:
 props:
   items:
     - label: 'Docs'
-      icon: 'i-lucide-book-open'
+      icon: 'i-lucide:book-open'
       to: '/docs'
     - label: 'Components'
-      icon: 'i-lucide-box'
+      icon: 'i-lucide:box'
       to: '/docs/pohon/components'
     - label: 'Breadcrumb'
-      icon: 'i-lucide-link'
+      icon: 'i-lucide:link'
       to: '/docs/pohon/components/breadcrumb'
 ---
 ::
@@ -73,7 +73,7 @@ A `span` is rendered instead of a link when the `to` property is not defined.
 
 ### Separator Icon
 
-Use the `separator-icon` prop to customize the [Icon](/docs/pohon/components/icon) between each item. Defaults to `i-lucide-chevron-right`.
+Use the `separator-icon` prop to customize the [Icon](/docs/pohon/components/icon) between each item. Defaults to `i-lucide:chevron-right`.
 
 ::docs-pohon-preview
 ---
@@ -84,16 +84,16 @@ external:
 externalTypes:
   - PBreadcrumbItem[]
 props:
-  separatorIcon: 'i-lucide-arrow-right'
+  separatorIcon: 'i-lucide:arrow-right'
   items:
     - label: 'Docs'
-      icon: 'i-lucide-book-open'
+      icon: 'i-lucide:book-open'
       to: '/docs'
     - label: 'Components'
-      icon: 'i-lucide-box'
+      icon: 'i-lucide:box'
       to: '/docs/pohon/components'
     - label: 'Breadcrumb'
-      icon: 'i-lucide-link'
+      icon: 'i-lucide:link'
       to: '/docs/pohon/components/breadcrumb'
 ---
 ::

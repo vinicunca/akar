@@ -14,15 +14,15 @@ defineShortcuts({
 const items: Array<PDropdownMenuItem> = [
   {
     label: 'Profile',
-    icon: 'i-lucide-user',
+    icon: 'i-lucide:user',
   },
   {
     label: 'Billing',
-    icon: 'i-lucide-credit-card',
+    icon: 'i-lucide:credit-card',
   },
   {
     label: 'Settings',
-    icon: 'i-lucide-cog',
+    icon: 'i-lucide:cog',
   },
 ];
 </script>
@@ -37,7 +37,7 @@ const items: Array<PDropdownMenuItem> = [
       label="Open"
       color="neutral"
       variant="outline"
-      icon="i-lucide-menu"
+      icon="i-lucide:menu"
     />
   </PDropdownMenu>
 </template>

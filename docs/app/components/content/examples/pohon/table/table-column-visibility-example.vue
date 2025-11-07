@@ -119,7 +119,7 @@ const columnVisibility = ref({
           label="Columns"
           color="neutral"
           variant="outline"
-          trailing-icon="i-lucide-chevron-down"
+          trailing-icon="i-lucide:chevron-down"
         />
       </PDropdownMenu>
     </div>

@@ -84,7 +84,7 @@ const value = ref(true);
     />
     <PCheckbox
       label="Icon"
-      icon="i-lucide-heart"
+      icon="i-lucide:heart"
       v-bind="props"
       :model-value="true"
     />

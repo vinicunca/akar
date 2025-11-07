@@ -6,7 +6,7 @@ links:
   - label: Akar
     to: /docs/akar/components/navigation-menu
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/navigation-menu.vue
 ---
 
@@ -26,76 +26,76 @@ external:
 props:
   items:
     - label: Guide
-      icon: i-lucide-book-open
+      icon: i-lucide:book-open
       to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
-          icon: i-lucide-house
+          icon: i-lucide:house
         - label: Installation
           description: Learn how to install and configure Nuxt UI in your application.
-          icon: i-lucide-cloud-download
+          icon: i-lucide:cloud-download
         - label: 'Icons'
-          icon: 'i-lucide-smile'
+          icon: 'i-lucide:smile'
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
-          icon: 'i-lucide-swatch-book'
+          icon: 'i-lucide:swatch-book'
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
-          icon: 'i-lucide-cog'
+          icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
-      icon: i-lucide-database
+      icon: i-lucide:database
       to: /docs/composables
       children:
         - label: defineShortcuts
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Define shortcuts for your application.
           to: /docs/composables/define-shortcuts
         - label: useOverlay
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
           to: /docs/composables/use-overlay
         - label: useToast
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a toast within your application.
           to: /docs/composables/use-toast
     - label: Components
-      icon: i-lucide-box
+      icon: i-lucide:box
       to: /docs/pohon/components
       active: true
       children:
         - label: Link
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Use NuxtLink with superpowers.
           to: /docs/pohon/components/link
         - label: Modal
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal within your application.
           to: /docs/pohon/components/dialog
         - label: NavigationMenu
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of links.
           to: /docs/pohon/components/navigation-menu
         - label: Pagination
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of pages.
           to: /docs/pohon/components/pagination
         - label: Popover
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /docs/pohon/components/popover
         - label: Progress
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Show a horizontal bar to indicate task progression.
           to: /docs/pohon/components/progress
     - label: GitHub
-      icon: i-simple-icons-github
+      icon: i-simple-icons:github
       badge: 3.8k
       to: https://github.com/nuxt/ui
       target: _blank
     - label: Help
-      icon: i-lucide-circle-help
+      icon: i-lucide:circle-help
       disabled: true
   class: 'w-full akar:justify-center bg-background'
 ---
@@ -137,76 +137,76 @@ externalTypes:
 props:
   items:
     - label: Guide
-      icon: i-lucide-book-open
+      icon: i-lucide:book-open
       to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
-          icon: i-lucide-house
+          icon: i-lucide:house
         - label: Installation
           description: Learn how to install and configure Nuxt UI in your application.
-          icon: i-lucide-cloud-download
+          icon: i-lucide:cloud-download
         - label: 'Icons'
-          icon: 'i-lucide-smile'
+          icon: 'i-lucide:smile'
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
-          icon: 'i-lucide-swatch-book'
+          icon: 'i-lucide:swatch-book'
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
-          icon: 'i-lucide-cog'
+          icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
-      icon: i-lucide-database
+      icon: i-lucide:database
       to: /docs/composables
       children:
         - label: defineShortcuts
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Define shortcuts for your application.
           to: /docs/composables/define-shortcuts
         - label: useOverlay
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
           to: /docs/composables/use-overlay
         - label: useToast
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a toast within your application.
           to: /docs/composables/use-toast
     - label: Components
-      icon: i-lucide-box
+      icon: i-lucide:box
       to: /docs/pohon/components
       active: true
       children:
         - label: Link
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Use NuxtLink with superpowers.
           to: /docs/pohon/components/link
         - label: Modal
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal within your application.
           to: /docs/pohon/components/dialog
         - label: NavigationMenu
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of links.
           to: /docs/pohon/components/navigation-menu
         - label: Pagination
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of pages.
           to: /docs/pohon/components/pagination
         - label: Popover
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /docs/pohon/components/popover
         - label: Progress
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Show a horizontal bar to indicate task progression.
           to: /docs/pohon/components/progress
     - label: GitHub
-      icon: i-simple-icons-github
+      icon: i-simple-icons:github
       badge: 3.8k
       to: https://github.com/nuxt/ui
       target: _blank
     - label: Help
-      icon: i-lucide-circle-help
+      icon: i-lucide:circle-help
       disabled: true
   class: 'w-full justify-center'
 ---
@@ -251,75 +251,75 @@ props:
     - - label: Links
         type: 'label'
       - label: Guide
-        icon: i-lucide-book-open
+        icon: i-lucide:book-open
         children:
           - label: Introduction
             description: Fully styled and customizable components for Nuxt.
-            icon: i-lucide-house
+            icon: i-lucide:house
           - label: Installation
             description: Learn how to install and configure Nuxt UI in your application.
-            icon: i-lucide-cloud-download
+            icon: i-lucide:cloud-download
           - label: 'Icons'
-            icon: 'i-lucide-smile'
+            icon: 'i-lucide:smile'
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
-            icon: 'i-lucide-swatch-book'
+            icon: 'i-lucide:swatch-book'
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
-            icon: 'i-lucide-cog'
+            icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       - label: Composables
-        icon: i-lucide-database
+        icon: i-lucide:database
         children:
           - label: defineShortcuts
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Define shortcuts for your application.
             to: /docs/composables/define-shortcuts
           - label: useOverlay
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
             to: /docs/composables/use-overlay
           - label: useToast
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a toast within your application.
             to: /docs/composables/use-toast
       - label: Components
-        icon: i-lucide-box
+        icon: i-lucide:box
         to: /docs/pohon/components
         active: true
         defaultOpen: true
         children:
           - label: Link
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Use NuxtLink with superpowers.
             to: /docs/pohon/components/link
           - label: Modal
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal within your application.
             to: /docs/pohon/components/dialog
           - label: NavigationMenu
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of links.
             to: /docs/pohon/components/navigation-menu
           - label: Pagination
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of pages.
             to: /docs/pohon/components/pagination
           - label: Popover
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a non-modal dialog that floats around a trigger element.
             to: /docs/pohon/components/popover
           - label: Progress
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Show a horizontal bar to indicate task progression.
             to: /docs/pohon/components/progress
     - - label: GitHub
-        icon: i-simple-icons-github
+        icon: i-simple-icons:github
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
-        icon: i-lucide-circle-help
+        icon: i-lucide:circle-help
         disabled: true
   class: 'data-[orientation=vertical]:w-48'
 ---
@@ -364,74 +364,74 @@ props:
     - - label: Links
         type: 'label'
       - label: Guide
-        icon: i-lucide-book-open
+        icon: i-lucide:book-open
         children:
           - label: Introduction
             description: Fully styled and customizable components for Nuxt.
-            icon: i-lucide-house
+            icon: i-lucide:house
           - label: Installation
             description: Learn how to install and configure Nuxt UI in your application.
-            icon: i-lucide-cloud-download
+            icon: i-lucide:cloud-download
           - label: 'Icons'
-            icon: 'i-lucide-smile'
+            icon: 'i-lucide:smile'
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
-            icon: 'i-lucide-swatch-book'
+            icon: 'i-lucide:swatch-book'
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
-            icon: 'i-lucide-cog'
+            icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       - label: Composables
-        icon: i-lucide-database
+        icon: i-lucide:database
         children:
           - label: defineShortcuts
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Define shortcuts for your application.
             to: /docs/composables/define-shortcuts
           - label: useOverlay
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
             to: /docs/composables/use-overlay
           - label: useToast
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a toast within your application.
             to: /docs/composables/use-toast
       - label: Components
-        icon: i-lucide-box
+        icon: i-lucide:box
         to: /docs/pohon/components
         active: true
         children:
           - label: Link
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Use NuxtLink with superpowers.
             to: /docs/pohon/components/link
           - label: Modal
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal within your application.
             to: /docs/pohon/components/dialog
           - label: NavigationMenu
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of links.
             to: /docs/pohon/components/navigation-menu
           - label: Pagination
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of pages.
             to: /docs/pohon/components/pagination
           - label: Popover
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a non-modal dialog that floats around a trigger element.
             to: /docs/pohon/components/popover
           - label: Progress
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Show a horizontal bar to indicate task progression.
             to: /docs/pohon/components/progress
     - - label: GitHub
-        icon: i-simple-icons-github
+        icon: i-simple-icons:github
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
-        icon: i-lucide-circle-help
+        icon: i-lucide:circle-help
         disabled: true
 ---
 ::
@@ -459,75 +459,75 @@ props:
   orientation: 'horizontal'
   items:
     - - label: Guide
-        icon: i-lucide-book-open
+        icon: i-lucide:book-open
         children:
           - label: Introduction
             description: Fully styled and customizable components for Nuxt.
-            icon: i-lucide-house
+            icon: i-lucide:house
           - label: Installation
             description: Learn how to install and configure Nuxt UI in your application.
-            icon: i-lucide-cloud-download
+            icon: i-lucide:cloud-download
           - label: 'Icons'
-            icon: 'i-lucide-smile'
+            icon: 'i-lucide:smile'
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
-            icon: 'i-lucide-swatch-book'
+            icon: 'i-lucide:swatch-book'
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
-            icon: 'i-lucide-cog'
+            icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       - label: Composables
-        icon: i-lucide-database
+        icon: i-lucide:database
         children:
           - label: defineShortcuts
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Define shortcuts for your application.
             to: /docs/composables/define-shortcuts
           - label: useOverlay
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
             to: /docs/composables/use-overlay
           - label: useToast
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a toast within your application.
             to: /docs/composables/use-toast
       - label: Components
-        icon: i-lucide-box
+        icon: i-lucide:box
         to: /docs/pohon/components
         active: true
         defaultOpen: true
         children:
           - label: Link
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Use NuxtLink with superpowers.
             to: /docs/pohon/components/link
           - label: Modal
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal within your application.
             to: /docs/pohon/components/dialog
           - label: NavigationMenu
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of links.
             to: /docs/pohon/components/navigation-menu
           - label: Pagination
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of pages.
             to: /docs/pohon/components/pagination
           - label: Popover
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a non-modal dialog that floats around a trigger element.
             to: /docs/pohon/components/popover
           - label: Progress
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Show a horizontal bar to indicate task progression.
             to: /docs/pohon/components/progress
     - - label: GitHub
-        icon: i-simple-icons-github
+        icon: i-simple-icons:github
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
       - label: Help
-        icon: i-lucide-circle-help
+        icon: i-lucide:circle-help
         disabled: true
   class: 'data-[orientation=horizontal]:border-b border-border data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-48'
 ---
@@ -558,17 +558,17 @@ props:
   color: neutral
   items:
     - - label: Guide
-        icon: i-lucide-book-open
+        icon: i-lucide:book-open
         to: /docs/getting-started
       - label: Composables
-        icon: i-lucide-database
+        icon: i-lucide:database
         to: /docs/composables
       - label: Components
-        icon: i-lucide-box
+        icon: i-lucide:box
         to: /docs/pohon/components
         active: true
     - - label: GitHub
-        icon: i-simple-icons-github
+        icon: i-simple-icons:github
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
@@ -595,17 +595,17 @@ props:
   highlight: false
   items:
     - - label: Guide
-        icon: i-lucide-book-open
+        icon: i-lucide:book-open
         to: /docs/getting-started
       - label: Composables
-        icon: i-lucide-database
+        icon: i-lucide:database
         to: /docs/composables
       - label: Components
-        icon: i-lucide-box
+        icon: i-lucide:box
         to: /docs/pohon/components
         active: true
     - - label: GitHub
-        icon: i-simple-icons-github
+        icon: i-simple-icons:github
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
@@ -619,7 +619,7 @@ The `highlight` prop changes the `pill` variant active item style. Try it out to
 
 ### Trailing Icon
 
-Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) of each item. Defaults to `i-lucide-chevron-down`. This icon is only displayed when an item has children.
+Use the `trailing-icon` prop to customize the trailing [Icon](/docs/pohon/components/icon) of each item. Defaults to `i-lucide:chevron-down`. This icon is only displayed when an item has children.
 
 ::tip
 You can also set an icon for a specific item by using the `trailingIcon` property in the item object.
@@ -636,70 +636,70 @@ external:
 externalTypes:
   - NavigationMenuItem[]
 props:
-  trailingIcon: 'i-lucide-arrow-down'
+  trailingIcon: 'i-lucide:arrow-down'
   items:
     - label: Guide
-      icon: i-lucide-book-open
+      icon: i-lucide:book-open
       to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
-          icon: i-lucide-house
+          icon: i-lucide:house
         - label: Installation
           description: Learn how to install and configure Nuxt UI in your application.
-          icon: i-lucide-cloud-download
+          icon: i-lucide:cloud-download
         - label: 'Icons'
-          icon: 'i-lucide-smile'
+          icon: 'i-lucide:smile'
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
-          icon: 'i-lucide-swatch-book'
+          icon: 'i-lucide:swatch-book'
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
-          icon: 'i-lucide-cog'
+          icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
-      icon: i-lucide-database
+      icon: i-lucide:database
       to: /docs/composables
       children:
         - label: defineShortcuts
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Define shortcuts for your application.
           to: /docs/composables/define-shortcuts
         - label: useOverlay
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
           to: /docs/composables/use-overlay
         - label: useToast
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a toast within your application.
           to: /docs/composables/use-toast
     - label: Components
-      icon: i-lucide-box
+      icon: i-lucide:box
       to: /docs/pohon/components
       active: true
       children:
         - label: Link
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Use NuxtLink with superpowers.
           to: /docs/pohon/components/link
         - label: Modal
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal within your application.
           to: /docs/pohon/components/dialog
         - label: NavigationMenu
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of links.
           to: /docs/pohon/components/navigation-menu
         - label: Pagination
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of pages.
           to: /docs/pohon/components/pagination
         - label: Popover
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /docs/pohon/components/popover
         - label: Progress
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Show a horizontal bar to indicate task progression.
           to: /docs/pohon/components/progress
   class: 'w-full justify-center'
@@ -737,67 +737,67 @@ props:
   arrow: true
   items:
     - label: Guide
-      icon: i-lucide-book-open
+      icon: i-lucide:book-open
       to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
-          icon: i-lucide-house
+          icon: i-lucide:house
         - label: Installation
           description: Learn how to install and configure Nuxt UI in your application.
-          icon: i-lucide-cloud-download
+          icon: i-lucide:cloud-download
         - label: 'Icons'
-          icon: 'i-lucide-smile'
+          icon: 'i-lucide:smile'
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
-          icon: 'i-lucide-swatch-book'
+          icon: 'i-lucide:swatch-book'
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
-          icon: 'i-lucide-cog'
+          icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
-      icon: i-lucide-database
+      icon: i-lucide:database
       to: /docs/composables
       children:
         - label: defineShortcuts
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Define shortcuts for your application.
           to: /docs/composables/define-shortcuts
         - label: useOverlay
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
           to: /docs/composables/use-overlay
         - label: useToast
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a toast within your application.
           to: /docs/composables/use-toast
     - label: Components
-      icon: i-lucide-box
+      icon: i-lucide:box
       to: /docs/pohon/components
       active: true
       children:
         - label: Link
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Use NuxtLink with superpowers.
           to: /docs/pohon/components/link
         - label: Modal
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal within your application.
           to: /docs/pohon/components/dialog
         - label: NavigationMenu
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of links.
           to: /docs/pohon/components/navigation-menu
         - label: Pagination
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of pages.
           to: /docs/pohon/components/pagination
         - label: Popover
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /docs/pohon/components/popover
         - label: Progress
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Show a horizontal bar to indicate task progression.
           to: /docs/pohon/components/progress
   class: 'w-full justify-center'
@@ -832,53 +832,53 @@ props:
   contentOrientation: 'vertical'
   items:
     - label: Guide
-      icon: i-lucide-book-open
+      icon: i-lucide:book-open
       to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
-          icon: i-lucide-house
+          icon: i-lucide:house
         - label: Installation
           description: Learn how to install and configure Nuxt UI in your application.
-          icon: i-lucide-cloud-download
+          icon: i-lucide:cloud-download
         - label: 'Icons'
-          icon: 'i-lucide-smile'
+          icon: 'i-lucide:smile'
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: Composables
-      icon: i-lucide-database
+      icon: i-lucide:database
       to: /docs/composables
       children:
         - label: defineShortcuts
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Define shortcuts for your application.
           to: /docs/composables/define-shortcuts
         - label: useOverlay
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
           to: /docs/composables/use-overlay
         - label: useToast
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a toast within your application.
           to: /docs/composables/use-toast
     - label: Components
-      icon: i-lucide-box
+      icon: i-lucide:box
       to: /docs/pohon/components
       active: true
       children:
         - label: Link
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Use NuxtLink with superpowers.
           to: /docs/pohon/components/link
         - label: Modal
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal within your application.
           to: /docs/pohon/components/dialog
         - label: NavigationMenu
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of links.
           to: /docs/pohon/components/navigation-menu
         - label: Pagination
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of pages.
           to: /docs/pohon/components/pagination
   class: 'w-full justify-center'
@@ -904,67 +904,67 @@ props:
   unmountOnHide: false
   items:
     - label: Guide
-      icon: i-lucide-book-open
+      icon: i-lucide:book-open
       to: /docs/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
-          icon: i-lucide-house
+          icon: i-lucide:house
         - label: Installation
           description: Learn how to install and configure Nuxt UI in your application.
-          icon: i-lucide-cloud-download
+          icon: i-lucide:cloud-download
         - label: 'Icons'
-          icon: 'i-lucide-smile'
+          icon: 'i-lucide:smile'
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
-          icon: 'i-lucide-swatch-book'
+          icon: 'i-lucide:swatch-book'
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
-          icon: 'i-lucide-cog'
+          icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
-      icon: i-lucide-database
+      icon: i-lucide:database
       to: /docs/composables
       children:
         - label: defineShortcuts
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Define shortcuts for your application.
           to: /docs/composables/define-shortcuts
         - label: useOverlay
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
           to: /docs/composables/use-overlay
         - label: useToast
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a toast within your application.
           to: /docs/composables/use-toast
     - label: Components
-      icon: i-lucide-box
+      icon: i-lucide:box
       to: /docs/pohon/components
       active: true
       children:
         - label: Link
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Use NuxtLink with superpowers.
           to: /docs/pohon/components/link
         - label: Modal
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a modal within your application.
           to: /docs/pohon/components/dialog
         - label: NavigationMenu
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of links.
           to: /docs/pohon/components/navigation-menu
         - label: Pagination
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a list of pages.
           to: /docs/pohon/components/pagination
         - label: Popover
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Display a non-modal dialog that floats around a trigger element.
           to: /docs/pohon/components/popover
         - label: Progress
-          icon: i-lucide-file-text
+          icon: i-lucide:file-text
           description: Show a horizontal bar to indicate task progression.
           to: /docs/pohon/components/progress
   class: 'w-full justify-center'
@@ -1006,69 +1006,69 @@ props:
     - - label: Links
         type: 'label'
       - label: Guide
-        icon: i-lucide-book-open
+        icon: i-lucide:book-open
         children:
           - label: Introduction
             description: Fully styled and customizable components for Nuxt.
-            icon: i-lucide-house
+            icon: i-lucide:house
           - label: Installation
             description: Learn how to install and configure Nuxt UI in your application.
-            icon: i-lucide-cloud-download
+            icon: i-lucide:cloud-download
           - label: 'Icons'
-            icon: 'i-lucide-smile'
+            icon: 'i-lucide:smile'
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
-            icon: 'i-lucide-swatch-book'
+            icon: 'i-lucide:swatch-book'
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
-            icon: 'i-lucide-cog'
+            icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       - label: Composables
-        icon: i-lucide-database
+        icon: i-lucide:database
         children:
           - label: defineShortcuts
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Define shortcuts for your application.
             to: /docs/composables/define-shortcuts
           - label: useOverlay
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
             to: /docs/composables/use-overlay
           - label: useToast
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a toast within your application.
             to: /docs/composables/use-toast
       - label: Components
-        icon: i-lucide-box
+        icon: i-lucide:box
         to: /docs/pohon/components
         active: true
         children:
           - label: Link
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Use NuxtLink with superpowers.
             to: /docs/pohon/components/link
           - label: Modal
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal within your application.
             to: /docs/pohon/components/dialog
           - label: NavigationMenu
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of links.
             to: /docs/pohon/components/navigation-menu
           - label: Pagination
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of pages.
             to: /docs/pohon/components/pagination
           - label: Popover
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a non-modal dialog that floats around a trigger element.
             to: /docs/pohon/components/popover
           - label: Progress
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Show a horizontal bar to indicate task progression.
             to: /docs/pohon/components/progress
     - - label: GitHub
-        icon: i-simple-icons-github
+        icon: i-simple-icons:github
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
@@ -1077,7 +1077,7 @@ props:
           kbds:
             - 3.8k
       - label: Help
-        icon: i-lucide-circle-help
+        icon: i-lucide:circle-help
         disabled: true
 ---
 ::
@@ -1111,71 +1111,71 @@ props:
     - - label: Links
         type: 'label'
       - label: Guide
-        icon: i-lucide-book-open
+        icon: i-lucide:book-open
         children:
           - label: Introduction
             description: Fully styled and customizable components for Nuxt.
-            icon: i-lucide-house
+            icon: i-lucide:house
           - label: Installation
             description: Learn how to install and configure Nuxt UI in your application.
-            icon: i-lucide-cloud-download
+            icon: i-lucide:cloud-download
           - label: 'Icons'
-            icon: 'i-lucide-smile'
+            icon: 'i-lucide:smile'
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
-            icon: 'i-lucide-swatch-book'
+            icon: 'i-lucide:swatch-book'
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
-            icon: 'i-lucide-cog'
+            icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
       - label: Composables
-        icon: i-lucide-database
+        icon: i-lucide:database
         popover:
           mode: 'click'
         children:
           - label: defineShortcuts
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Define shortcuts for your application.
             to: /docs/composables/define-shortcuts
           - label: useOverlay
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
             to: /docs/composables/use-overlay
           - label: useToast
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a toast within your application.
             to: /docs/composables/use-toast
       - label: Components
-        icon: i-lucide-box
+        icon: i-lucide:box
         to: /docs/pohon/components
         active: true
         children:
           - label: Link
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Use NuxtLink with superpowers.
             to: /docs/pohon/components/link
           - label: Modal
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a modal within your application.
             to: /docs/pohon/components/dialog
           - label: NavigationMenu
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of links.
             to: /docs/pohon/components/navigation-menu
           - label: Pagination
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a list of pages.
             to: /docs/pohon/components/pagination
           - label: Popover
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Display a non-modal dialog that floats around a trigger element.
             to: /docs/pohon/components/popover
           - label: Progress
-            icon: i-lucide-file-text
+            icon: i-lucide:file-text
             description: Show a horizontal bar to indicate task progression.
             to: /docs/pohon/components/progress
     - - label: GitHub
-        icon: i-simple-icons-github
+        icon: i-simple-icons:github
         badge: 3.8k
         to: https://github.com/nuxt/ui
         target: _blank
@@ -1184,7 +1184,7 @@ props:
           kbds:
             - 3.8k
       - label: Help
-        icon: i-lucide-circle-help
+        icon: i-lucide:circle-help
         disabled: true
 ---
 ::

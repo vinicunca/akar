@@ -77,13 +77,13 @@ useSeoMeta({
 
 const communityLinks = computed(() => [
   {
-    icon: 'i-lucide-file-pen',
+    icon: 'i-lucide:file-pen',
     label: 'Edit this page',
     to: `https://github.com/vinicunca/akar/edit/main/docs/content/${page?.value?.stem}.md`,
     target: '_blank',
   },
   {
-    icon: 'i-lucide-star',
+    icon: 'i-lucide:star',
     label: 'Star on GitHub',
     to: 'https://github.com/vinicunca/akar',
     target: '_blank',
@@ -205,7 +205,7 @@ const communityLinks = computed(() => [
 
                     <PIcon
                       v-if="link.target === '_blank'"
-                      name="i-lucide-arrow-up-right"
+                      name="i-lucide:arrow-up-right"
                       class="color-text-dimmed size-3 top-0 absolute"
                     />
                   </span>

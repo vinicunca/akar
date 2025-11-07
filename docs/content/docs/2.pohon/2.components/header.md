@@ -4,7 +4,7 @@ description: 'A responsive header component.'
 category: layout
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/header.vue
 ---
 
@@ -230,7 +230,7 @@ const items = computed<PNavigationMenuItem[]>(() => [{
           variant="ghost"
           to="https://github.com/nuxt/ui"
           target="_blank"
-          icon="i-simple-icons-github"
+          icon="i-simple-icons:github"
           aria-label="GitHub"
         />
       </template>

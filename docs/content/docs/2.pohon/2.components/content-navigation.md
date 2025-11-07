@@ -5,7 +5,7 @@ category: content
 framework: nuxt
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/content/ContentNavigation.vue
 ---
 
@@ -49,7 +49,7 @@ props:
   type: 'single'
   navigation:
     - title: 'Guide'
-      icon: 'i-lucide-book-open'
+      icon: 'i-lucide:book-open'
       path: '#getting-started'
       children:
         - title: 'Introduction'
@@ -58,7 +58,7 @@ props:
         - title: 'Installation'
           path: '#installation'
     - title: 'Composables'
-      icon: 'i-lucide-database'
+      icon: 'i-lucide:database'
       path: '#composables'
       children:
         - title: 'defineShortcuts'
@@ -86,7 +86,7 @@ props:
   color: 'neutral'
   navigation:
   - title: 'Guide'
-    icon: 'i-lucide-book-open'
+    icon: 'i-lucide:book-open'
     path: '#getting-started'
     children:
     - title: 'Introduction'
@@ -95,7 +95,7 @@ props:
     - title: 'Installation'
       path: '#installation'
   - title: 'Composables'
-    icon: 'i-lucide-database'
+    icon: 'i-lucide:database'
     path: '#composables'
     children:
     - title: 'defineShortcuts'
@@ -127,7 +127,7 @@ props:
   variant: 'link'
   navigation:
     - title: 'Guide'
-      icon: 'i-lucide-book-open'
+      icon: 'i-lucide:book-open'
       path: '#getting-started'
       children:
       - title: 'Introduction'
@@ -136,7 +136,7 @@ props:
       - title: 'Installation'
         path: '#installation'
     - title: 'Composables'
-      icon: 'i-lucide-database'
+      icon: 'i-lucide:database'
       path: '#composables'
       children:
       - title: 'defineShortcuts'
@@ -169,7 +169,7 @@ props:
   variant: 'pill'
   navigation:
     - title: 'Guide'
-      icon: 'i-lucide-book-open'
+      icon: 'i-lucide:book-open'
       path: '#getting-started'
       children:
       - title: 'Introduction'
@@ -178,7 +178,7 @@ props:
       - title: 'Installation'
         path: '#installation'
     - title: 'Composables'
-      icon: 'i-lucide-database'
+      icon: 'i-lucide:database'
       path: '#composables'
       children:
       - title: 'defineShortcuts'
@@ -201,10 +201,10 @@ hide:
   - navigation
 props:
   class: 'w-full'
-  trailingIcon: 'i-lucide-arrow-up'
+  trailingIcon: 'i-lucide:arrow-up'
   navigation:
   - title: 'Guide'
-    icon: 'i-lucide-book-open'
+    icon: 'i-lucide:book-open'
     path: '#getting-started'
     children:
     - title: 'Introduction'
@@ -213,7 +213,7 @@ props:
     - title: 'Installation'
       path: '#installation'
   - title: 'Composables'
-    icon: 'i-lucide-database'
+    icon: 'i-lucide:database'
     path: '#composables'
     children:
     - title: 'defineShortcuts'

@@ -5,9 +5,9 @@ category: color-mode
 links:
   - label: Button
     to: /docs/pohon/components/button
-    icon: i-simple-icons-nuxtdotjs
+    icon: i-simple-icons:nuxtdotjs
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/color-mode/ColorModeButton.vue
 ---
 
@@ -35,8 +35,8 @@ Use the `app.config.ts` to customize the icon with the `pohon.icons` property:
 export default defineAppConfig({
   pohon: {
     icons: {
-      light: 'i-ph-sun',
-      dark: 'i-ph-moon'
+      light: 'i-ph:sun',
+      dark: 'i-ph:moon'
     }
   }
 })
@@ -59,8 +59,8 @@ export default defineConfig({
     pohon({
       pohon: {
         icons: {
-          light: 'i-ph-sun',
-          dark: 'i-ph-moon'
+          light: 'i-ph:sun',
+          dark: 'i-ph:moon'
         }
       }
     })
@@ -95,7 +95,7 @@ slots:
 
 :docs-pohon-props
 
-::callout{icon="i-simple-icons-mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
+::callout{icon="i-simple-icons:mdnwebdocs" to="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes" target="_blank"}
 This component also supports all native `<button>` HTML attributes.
 ::
 

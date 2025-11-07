@@ -4,7 +4,7 @@ description: 'Display a banner at the top of your website to inform users about 
 category: element
 links:
   - label: GitHub
-    icon: i-simple-icons-github
+    icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/banner.vue
 ---
 
@@ -34,7 +34,7 @@ class: 'akar:p-0'
 ignore:
   - title
 props:
-  icon: i-lucide-info
+  icon: i-lucide:info
   title: 'This is a banner with an icon.'
 ---
 ::
@@ -52,7 +52,7 @@ ignore:
   - title
 props:
   color: 'neutral'
-  icon: i-lucide-info
+  icon: i-lucide:info
   title: 'This is a banner with an icon.'
 ---
 ::
@@ -88,7 +88,7 @@ When closed, `banner-${id}` will be stored in the local storage to prevent it fr
 
 ### Close Icon
 
-Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
+Use the `close-icon` prop to customize the close button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide:x`.
 
 ::docs-component-example
 ---
@@ -98,7 +98,7 @@ overflowHidden: true
 name: 'banner-example'
 props:
   title: 'This is a closable banner with a custom close icon.'
-  closeIcon: 'i-lucide-x-circle'
+  closeIcon: 'i-lucide:x-circle'
 ---
 #code
 
@@ -107,7 +107,7 @@ props:
   <PBanner
     title="This is a closable banner with a custom close icon."
     close
-    close-icon="i-lucide-x-circle"
+    close-icon="i-lucide:x-circle"
   />
 </template>
 ```
@@ -146,7 +146,7 @@ props:
     - label: Action 1
       variant: outline
     - label: Action 2
-      trailingIcon: i-lucide-arrow-right
+      trailingIcon: i-lucide:arrow-right
 ---
 ::
 
@@ -187,7 +187,7 @@ Use the Banner component in your `app.vue` or in a layout:
 ```vue [app.vue]{3}
 <template>
   <PApp>
-    <PBanner icon="i-lucide-construction" title="Nuxt UI v4 has been released!" />
+    <PBanner icon="i-lucide:construction" title="Nuxt UI v4 has been released!" />
 
     <PHeader />
 

@@ -34,7 +34,7 @@ const items = [
     <template #refresh-trailing>
       <PIcon
         v-if="loading"
-        name="i-lucide-loader-circle"
+        name="i-lucide:loader-circle"
         class="text-primary shrink-0 size-5 animate-spin"
       />
     </template>

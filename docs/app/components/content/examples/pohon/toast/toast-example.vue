@@ -10,7 +10,7 @@ function addToCalendar() {
   toast.add({
     title: 'Event added to calendar',
     description: `This event is scheduled for ${formattedDate}.`,
-    icon: 'i-lucide-calendar-days',
+    icon: 'i-lucide:calendar-days',
   });
 }
 </script>
@@ -20,7 +20,7 @@ function addToCalendar() {
     label="Add to calendar"
     color="neutral"
     variant="outline"
-    icon="i-lucide-plus"
+    icon="i-lucide:plus"
     @click="addToCalendar"
   />
 </template>

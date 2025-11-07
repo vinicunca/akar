@@ -66,13 +66,13 @@ const value = ref('Value');
       v-bind="props"
     />
     <PTextarea
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       placeholder="Search..."
       :rows="1"
       v-bind="props"
     />
     <PTextarea
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       trailing
       placeholder="Search..."
       :rows="1"
@@ -80,7 +80,7 @@ const value = ref('Value');
     />
     <PTextarea
       :avatar="{ src: 'https://github.com/praburangki.png' }"
-      icon="i-lucide-search"
+      icon="i-lucide:search"
       trailing
       placeholder="Search..."
       :rows="1"
@@ -101,8 +101,8 @@ const value = ref('Value');
     />
     <PTextarea
       loading
-      icon="i-lucide-search"
-      trailing-icon="i-lucide-chevron-down"
+      icon="i-lucide:search"
+      trailing-icon="i-lucide:chevron-down"
       placeholder="Loading..."
       :rows="1"
       v-bind="props"

@@ -15,7 +15,7 @@ Use the `name` prop to display an icon:
 ::docs-pohon-preview
 ---
 props:
-  name: 'i-lucide-lightbulb'
+  name: 'i-lucide:lightbulb'
   class: 'size-5'
 ---
 ::

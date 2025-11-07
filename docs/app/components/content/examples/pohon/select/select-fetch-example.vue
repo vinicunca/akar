@@ -23,7 +23,7 @@ function getUserAvatar(value: string) {
   <PSelect
     :items="users"
     :loading="status === 'pending'"
-    icon="i-lucide-user"
+    icon="i-lucide:user"
     placeholder="Select user"
     value-key="value"
     class="w-48"

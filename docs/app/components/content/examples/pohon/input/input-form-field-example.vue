@@ -13,7 +13,7 @@ const email = ref('');
     <PInput
       v-model="email"
       placeholder="Enter your email"
-      icon="i-lucide-at-sign"
+      icon="i-lucide:at-sign"
     />
   </PFormField>
 </template>

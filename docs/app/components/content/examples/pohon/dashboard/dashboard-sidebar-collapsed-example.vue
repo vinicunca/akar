@@ -5,14 +5,14 @@ import { ref } from 'vue';
 
 const items: Array<PNavigationMenuItem> = [{
   label: 'Home',
-  icon: 'i-lucide-house',
+  icon: 'i-lucide:house',
   active: true,
 }, {
   label: 'Inbox',
-  icon: 'i-lucide-inbox',
+  icon: 'i-lucide:inbox',
 }, {
   label: 'Contacts',
-  icon: 'i-lucide-users',
+  icon: 'i-lucide:users',
 }];
 
 const collapsed = ref(false);
@@ -36,7 +36,7 @@ defineShortcuts({
       />
       <PIcon
         v-else
-        name="i-simple-icons-nuxtdotjs"
+        name="i-simple-icons:nuxtdotjs"
         class="text-primary mx-auto size-5"
       />
     </template>
