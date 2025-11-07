@@ -208,7 +208,7 @@ props:
     - label: Help
       icon: i-lucide:circle-help
       disabled: true
-  class: 'w-full justify-center'
+  class: 'w-full akar:justify-center'
 ---
 ::
 
@@ -702,7 +702,7 @@ props:
           icon: i-lucide:file-text
           description: Show a horizontal bar to indicate task progression.
           to: /docs/pohon/components/progress
-  class: 'w-full justify-center'
+  class: 'w-full akar:justify-center'
 ---
 ::
 
@@ -800,7 +800,7 @@ props:
           icon: i-lucide:file-text
           description: Show a horizontal bar to indicate task progression.
           to: /docs/pohon/components/progress
-  class: 'w-full justify-center'
+  class: 'w-full akar:justify-center'
 ---
 ::
 
@@ -881,7 +881,7 @@ props:
           icon: i-lucide:file-text
           description: Display a list of pages.
           to: /docs/pohon/components/pagination
-  class: 'w-full justify-center'
+  class: 'w-full akar:justify-center'
 ---
 ::
 
@@ -967,7 +967,7 @@ props:
           icon: i-lucide:file-text
           description: Show a horizontal bar to indicate task progression.
           to: /docs/pohon/components/progress
-  class: 'w-full justify-center'
+  class: 'w-full akar:justify-center'
 ---
 ::
 
@@ -1205,7 +1205,7 @@ name: 'navigation-menu-model-value-example'
 ::
 
 ::note
-In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can switch the active item by pressing :kbd{value="1"}, :kbd{value="2"}, or :kbd{value="3"}.
+In this example, leveraging [`defineShortcuts`](/docs/pohon/composables/define-shortcuts), you can switch the active item by pressing :kbd{value="1"}, :kbd{value="2"}, or :kbd{value="3"}.
 ::
 
 ::tip

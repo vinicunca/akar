@@ -1007,10 +1007,6 @@ props:
 You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing` slots to customize all items.
 ::
 
-
-
-
-
 ## API
 
 ### Props

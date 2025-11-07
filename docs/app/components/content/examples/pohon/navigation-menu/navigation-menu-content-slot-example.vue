@@ -68,7 +68,7 @@ const items = [
       childList: 'sm:w-96',
       childLinkDescription: 'text-balance line-clamp-2',
     }"
-    class="w-full justify-center"
+    class="w-full akar:justify-center"
   >
     <template #docs-content="{ item }">
       <ul class="p-4 gap-2 grid lg:grid-cols-[minmax(0,.75fr)_minmax(0,1fr)] lg:w-[500px]">

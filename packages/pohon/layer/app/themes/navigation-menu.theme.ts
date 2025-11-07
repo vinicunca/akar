@@ -126,7 +126,7 @@ export const navigationMenuTheme = {
       orientation: 'vertical',
       collapsed: true,
       class: {
-        link: 'px-1.5',
+        link: 'akar:(px-1.5 grid-cols-[min-content])',
         content: 'shadow-sm rounded-sm min-h-6 p-1',
       },
     },

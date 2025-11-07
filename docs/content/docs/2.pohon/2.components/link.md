@@ -75,19 +75,6 @@ slots:
 Link
 ::
 
-## IntelliSense
-
-If you're using VSCode and wish to get autocompletion for the classes `active-class` and `inactive-class`, you can add the following settings to your `.vscode/settings.json`:
-
-```json [.vscode/settings.json]
-{
-  "tailwindCSS.classAttributes": [
-    "active-class",
-    "inactive-class"
-  ]
-}
-```
-
 ## API
 
 ### Props

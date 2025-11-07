@@ -113,6 +113,6 @@ defineShortcuts({
   <PNavigationMenu
     v-model="active"
     :items="items"
-    class="w-full justify-center"
+    class="w-full akar:justify-center"
   />
 </template>

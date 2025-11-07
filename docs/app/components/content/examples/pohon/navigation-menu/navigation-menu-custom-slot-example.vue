@@ -21,7 +21,7 @@ const items = [
 <template>
   <PNavigationMenu
     :items="items"
-    class="w-full justify-center"
+    class="w-full akar:justify-center"
   >
     <template #components-trailing>
       <PBadge
