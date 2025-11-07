@@ -6,9 +6,14 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-toolbar.vue
+navigation.badge: Soon
 ---
 
-## Usage
+## Work in Progress
+
+This component is currently being developed and is not yet ready for production use.
+
+<!-- ## Usage
 
 The DashboardToolbar component is used to display a toolbar under the [DashboardNavbar](/docs/pohon/components/dashboard-navbar) component.
 
@@ -64,4 +69,4 @@ In this example, we use the [NavigationMenu](/docs/pohon/components/navigation-m
 
 ## Changelog
 
-:docs-component-changelog
+:docs-component-changelog -->

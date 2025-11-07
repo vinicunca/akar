@@ -9,9 +9,14 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-search.vue
+navigation.badge: Soon
 ---
 
-## Usage
+## Work in Progress
+
+This component is currently being developed and is not yet ready for production use.
+
+<!-- ## Usage
 
 The DashboardSearch component extends the [CommandPalette](/docs/pohon/components/command-palette) component, so you can pass any property such as `icon`, `placeholder`, etc.
 
@@ -104,4 +109,4 @@ When accessing the component via a template ref, you can use the following:
 
 ## Changelog
 
-:docs-component-changelog
+:docs-component-changelog -->

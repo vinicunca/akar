@@ -9,13 +9,18 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-sidebar-collapse.vue
+navigation.badge: Soon
 ---
 
-## Usage
+## Work in Progress
+
+This component is currently being developed and is not yet ready for production use.
+
+<!-- ## Usage
 
 The DashboardSidebarCollapse component is used to collapse/expand the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) component **when its `collapsible` prop is set**.
 
-:component-code
+:docs-pohon-preview
 
 It extends the [Button](/docs/pohon/components/button) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
@@ -94,4 +99,4 @@ This component also supports all native `<button>` HTML attributes.
 
 ## Changelog
 
-:docs-component-changelog
+:docs-component-changelog -->

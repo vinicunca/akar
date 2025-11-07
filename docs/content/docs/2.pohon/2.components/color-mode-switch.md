@@ -15,7 +15,7 @@ links:
 
 The ColorModeSwitch component extends the [Switch](/docs/pohon/components/switch) component, so you can pass any property such as `color`, `size`, etc.
 
-:component-code{prefix="color-mode"}
+:docs-pohon-preview{prefix="color-mode"}
 
 ## Examples
 
@@ -47,7 +47,7 @@ Use the `vite.config.ts` to customize the icon with the `pohon.icons` property:
 ```ts [vite.config.ts]
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import ui from '@nuxt/ui/vite'
+import pohon from '@nuxt/ui/vite'
 
 export default defineConfig({
   plugins: [

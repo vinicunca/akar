@@ -6,9 +6,14 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-resize-handle.vue
+navigation.badge: Soon
 ---
 
-## Usage
+## Work in Progress
+
+This component is currently being developed and is not yet ready for production use.
+
+<!-- ## Usage
 
 The DashboardResizeHandle component is used by the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) and [DashboardPanel](/docs/pohon/components/dashboard-panel) components.
 
@@ -84,4 +89,4 @@ In this example, we add an `after` pseudo-element to display a vertical line on 
 
 ## Changelog
 
-:docs-component-changelog
+:docs-component-changelog -->

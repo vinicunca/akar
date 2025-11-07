@@ -6,9 +6,14 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-navbar.vue
+navigation.badge: Soon
 ---
 
-## Usage
+## Work in Progress
+
+This component is currently being developed and is not yet ready for production use.
+
+<!-- ## Usage
 
 The DashboardNavbar component is a responsive navigation bar that integrates with the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) component. It includes a mobile toggle button to enable responsive navigation in dashboard layouts.
 
@@ -127,4 +132,4 @@ props:
 
 ## Changelog
 
-:docs-component-changelog
+:docs-component-changelog -->

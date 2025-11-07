@@ -9,9 +9,14 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-sidebar-toggle.vue
+navigation.badge: Soon
 ---
 
-## Usage
+## Work in Progress
+
+This component is currently being developed and is not yet ready for production use.
+
+<!-- ## Usage
 
 The DashboardSidebarToggle component is used by the [DashboardNavbar](/docs/pohon/components/dashboard-navbar) and [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) components.
 
@@ -108,4 +113,4 @@ This component also supports all native `<button>` HTML attributes.
 
 ## Changelog
 
-:docs-component-changelog
+:docs-component-changelog -->
