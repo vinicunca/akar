@@ -2,7 +2,7 @@
 description: A dialog that slides in from any side of the screen.
 category: overlay
 links:
-  - label: Dialog
+  - label: Akar
     to: /docs/akar/components/dialog
   - label: GitHub
     icon: i-simple-icons:github
@@ -107,7 +107,7 @@ props:
   close:
     color: primary
     variant: outline
-    class: 'rounded-full'
+    class: 'akar:rounded-full'
 slots:
   default: |
 
@@ -224,9 +224,13 @@ slots:
 :core-placeholder{class="h-full"}
 ::
 
-### Transition
+### Modal
 
-Use the `transition` prop to control whether the Slideover is animated or not. Defaults to `true`.
+Use the `modal` prop to control whether the Slideover blocks interaction with outside content. Defaults to `true`.
+
+::note
+When `modal` is set to `false`, the overlay is automatically disabled and outside content becomes interactive.
+::
 
 ::docs-pohon-preview
 ---
@@ -234,8 +238,45 @@ prettier: true
 ignore:
   - title
 props:
-  transition: false
-  title: 'Slideover without transition'
+  modal: false
+  title: 'Slideover interactive'
+slots:
+  default: |
+
+    <PButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <CorePlaceholder class="h-full" />
+---
+
+:p-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:core-placeholder{class="h-full"}
+::
+
+### Dismissible
+
+Use the `dismissible` prop to control whether the Slideover is dismissible when clicking outside of it or pressing escape. Defaults to `true`.
+
+::note
+A `close:prevent` event will be emitted when the user tries to close it.
+::
+
+::tip
+You can combine `modal: false` with `dismissible: false` to make the Slideover's background interactive without closing it.
+::
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - title
+props:
+  dismissible: false
+  modal: true
+  title: 'Slideover non-dismissible'
 slots:
   default: |
 
@@ -270,35 +311,6 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 ::tip
 This allows you to move the trigger outside of the Slideover or remove it entirely.
-::
-
-### Disable dismissal
-
-Set the `dismissible` prop to `false` to prevent the Slideover from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
-
-::docs-pohon-preview
----
-prettier: true
-ignore:
-  - title
-  - dismissible
-props:
-  dismissible: false
-  title: 'Slideover non-dismissible'
-slots:
-  default: |
-
-    <PButton label="Open" color="neutral" variant="subtle" />
-
-  body: |
-
-    <CorePlaceholder class="h-full" />
----
-
-:p-button{label="Open" color="neutral" variant="subtle"}
-
-#body
-:core-placeholder{class="h-full"}
 ::
 
 ### Programmatic usage

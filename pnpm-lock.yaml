@@ -89,8 +89,8 @@ catalogs:
       specifier: ^24.3.3
       version: 24.5.2
     '@vinicunca/perkakas':
-      specifier: 1.8.0
-      version: 1.8.0
+      specifier: 1.9.0
+      version: 1.9.0
     '@vitejs/plugin-vue':
       specifier: ^6.0.1
       version: 6.0.1
@@ -369,7 +369,7 @@ importers:
         version: 22.0.0
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.8.0
+        version: 1.9.0
       '@vueuse/core':
         specifier: catalog:core
         version: 13.9.0(vue@3.5.22(typescript@5.8.3))
@@ -433,7 +433,7 @@ importers:
         version: 66.5.4(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3)
       '@vinicunca/unocss-preset':
         specifier: catalog:pohon
-        version: 1.35.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
+        version: 1.35.0(@vinicunca/perkakas@1.9.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
       fast-glob:
         specifier: catalog:docs
         version: 3.3.3
@@ -463,7 +463,7 @@ importers:
         version: 3.13.12(vue@3.5.21(typescript@5.8.3))
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.8.0
+        version: 1.9.0
       '@vueuse/core':
         specifier: catalog:core
         version: 13.9.0(vue@3.5.21(typescript@5.8.3))
@@ -596,7 +596,7 @@ importers:
         version: 66.5.4(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3(esbuild@0.25.11))
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.8.0
+        version: 1.9.0
       '@vueuse/core':
         specifier: catalog:core
         version: 13.9.0(vue@3.5.22(typescript@5.8.3))
@@ -733,7 +733,7 @@ importers:
         version: 66.5.4(magicast@0.3.5)(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(webpack@5.101.3)
       '@vinicunca/unocss-preset':
         specifier: catalog:pohon
-        version: 1.35.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
+        version: 1.35.0(@vinicunca/perkakas@1.9.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -3421,8 +3421,8 @@ packages:
       svelte-eslint-parser:
         optional: true
 
-  '@vinicunca/perkakas@1.8.0':
-    resolution: {integrity: sha512-6IJgdk9oPG0eX9+PZ8ccgBvDbj8hZaSbq+J95wX7eWgyrrNqzCkNH9lPf6Jffy22R7F41EW5AxlnPiQf1Wczyw==}
+  '@vinicunca/perkakas@1.9.0':
+    resolution: {integrity: sha512-P6pJQlc1Cwmk4mthIRqBHrLZKDOlzBP0Xh3zhAIH6Bb+T6gFV+NXvT9j/w/FuQRIxsusq3m5gVhwcScH7ZaftQ==}
     engines: {node: '>=20.0.0'}
 
   '@vinicunca/unocss-preset@1.35.0':
@@ -12018,11 +12018,11 @@ snapshots:
       - typescript
       - vitest
 
-  '@vinicunca/perkakas@1.8.0':
+  '@vinicunca/perkakas@1.9.0':
     dependencies:
       type-fest: 4.41.0
 
-  '@vinicunca/unocss-preset@1.35.0(@vinicunca/perkakas@1.8.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))':
+  '@vinicunca/unocss-preset@1.35.0(@vinicunca/perkakas@1.9.0)(unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)))':
     dependencies:
       '@unocss/core': 66.5.4
       '@unocss/preset-icons': 66.5.4
@@ -12032,7 +12032,7 @@ snapshots:
       '@unocss/preset-wind4': 66.5.4
       '@unocss/transformer-directives': 66.5.4
       '@unocss/transformer-variant-group': 66.5.4
-      '@vinicunca/perkakas': 1.8.0
+      '@vinicunca/perkakas': 1.9.0
       defu: 6.1.4
       postcss: 8.5.6
       postcss-js: 5.0.1(postcss@8.5.6)
@@ -17914,7 +17914,7 @@ snapshots:
 
   unocss-variants@1.0.0:
     dependencies:
-      '@vinicunca/perkakas': 1.8.0
+      '@vinicunca/perkakas': 1.9.0
 
   unocss@66.5.4(@unocss/webpack@66.5.4(webpack@5.101.3(esbuild@0.25.11)))(postcss@8.5.6)(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)):
     dependencies:

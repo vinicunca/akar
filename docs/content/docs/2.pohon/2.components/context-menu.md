@@ -3,7 +3,7 @@ title: ContextMenu
 description: A menu to display actions when right-clicking on an element.
 category: overlay
 links:
-  - label: ContextMenu
+  - label: Akar
     to: /docs/akar/components/context-menu
   - label: GitHub
     icon: i-simple-icons:github
@@ -215,6 +215,42 @@ slots:
 ---
 
 :div{class="flex items-center justify-center rounded-md border border-dashed border-border-accented text-sm aspect-video w-72"}[Right click here]
+::
+
+### Modal
+
+Use the `modal` prop to control whether the ContextMenu blocks interaction with outside content. Defaults to `true`.
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - items
+  - poihon.content
+external:
+  - items
+externalTypes:
+  - PContextMenuItem[]
+props:
+  modal: false
+  items:
+    - label: System
+      icon: i-lucide:monitor
+    - label: Light
+      icon: i-lucide:sun
+    - label: Dark
+      icon: i-lucide:moon
+  pohon:
+    content: 'w-48'
+slots:
+  default: |
+
+    <div class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72">
+      Right click here
+    </div>
+---
+
+:div{class="flex items-center justify-center rounded-md border border-dashed border-accented text-sm aspect-video w-72"}[Right click here]
 ::
 
 ### Disabled

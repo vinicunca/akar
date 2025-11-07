@@ -2,7 +2,7 @@
 description: A dialog window that can be used to display a message or request user input.
 category: overlay
 links:
-  - label: Dialog
+  - label: Akar
     to: /docs/akar/components/dialog
   - label: GitHub
     icon: i-simple-icons:github
@@ -196,9 +196,13 @@ slots:
 :core-placeholder{class="h-48"}
 ::
 
-### Transition
+### Modal
 
-Use the `transition` prop to control whether the Modal is animated or not. Defaults to `true`.
+Use the `modal` prop to control whether the Modal blocks interaction with outside content. Defaults to `true`.
+
+::note
+When `modal` is set to `false`, the overlay is automatically disabled and outside content becomes interactive.
+::
 
 ::docs-pohon-preview
 ---
@@ -206,8 +210,45 @@ prettier: true
 ignore:
   - title
 props:
-  transition: false
-  title: 'Modal without transition'
+  modal: false
+  title: 'Modal interactive'
+slots:
+  default: |
+
+    <PButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <CorePlaceholder class="h-48" />
+---
+
+:p-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:core-placeholder{class="h-48"}
+::
+
+### Dismissible
+
+Use the `dismissible` prop to control whether the Modal is dismissible when clicking outside of it or pressing escape. Defaults to `true`.
+
+::note
+A `close:prevent` event will be emitted when the user tries to close it.
+::
+
+::tip
+You can combine `modal: false` with `dismissible: false` to make the Modal's background interactive without closing it.
+::
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - title
+props:
+  dismissible: false
+  modal: true
+  title: 'Modal non-dismissible'
 slots:
   default: |
 
@@ -271,35 +312,6 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 ::tip
 This allows you to move the trigger outside of the Modal or remove it entirely.
-::
-
-### Disable dismissal
-
-Set the `dismissible` prop to `false` to prevent the Modal from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
-
-::docs-pohon-preview
----
-prettier: true
-ignore:
-  - title
-  - dismissible
-props:
-  dismissible: false
-  title: 'Modal non-dismissible'
-slots:
-  default: |
-
-    <PButton label="Open" color="neutral" variant="subtle" />
-
-  body: |
-
-    <CorePlaceholder class="h-48" />
----
-
-:p-button{label="Open" color="neutral" variant="subtle"}
-
-#body
-:core-placeholder{class="h-48"}
 ::
 
 ### Programmatic usage

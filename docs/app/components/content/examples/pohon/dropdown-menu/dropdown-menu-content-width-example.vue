@@ -33,7 +33,7 @@ const items: Array<Array<PDropdownMenuItem>> = [
   >
     <PButton
       label="Open"
-      class="w-46"
+      class="akar:w-46"
       color="neutral"
       variant="outline"
       block

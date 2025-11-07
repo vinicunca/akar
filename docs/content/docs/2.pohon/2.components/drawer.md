@@ -2,7 +2,7 @@
 description: A drawer that smoothly slides in & out of the screen.
 category: overlay
 links:
-  - label: Drawer
+  - label: Akar
     to: https://github.com/unovue/vaul-vue
   - label: GitHub
     icon: i-simple-icons:github
@@ -215,6 +215,54 @@ slots:
 :core-placeholder{class="h-48 m-4"}
 ::
 
+### Modal
+
+Use the `modal` prop to control whether the Drawer blocks interaction with outside content. Defaults to `true`.
+
+::note
+When `modal` is set to `false`, the overlay is automatically disabled and outside content becomes interactive.
+::
+
+::docs-pohon-preview
+---
+prettier: true
+props:
+  modal: false
+slots:
+  default: |
+
+    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up" />
+
+  content: |
+
+    <CorePlaceholder class="h-48 m-4" />
+---
+
+:p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
+
+#content
+:core-placeholder{class="h-48 m-4"}
+::
+
+### Dismissible
+
+Use the `dismissible` prop to control whether the Drawer is dismissible when clicking outside of it or pressing escape. Defaults to `true`.
+
+::note
+A `close:prevent` event will be emitted when the user tries to close it.
+::
+
+::tip
+You can combine `modal: false` with `dismissible: false` to make the Drawer's background interactive without closing it.
+::
+
+::docs-component-example
+---
+prettier: true
+name: 'drawer-dismissible-example'
+---
+::
+
 ### Scale Background
 
 Use the `should-scale-background` prop to scale the background when the Drawer is open, creating a visual depth effect. You can set the `set-background-color-on-scale` prop to `false` to prevent changing the background color.
@@ -290,35 +338,9 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 This allows you to move the trigger outside of the Drawer or remove it entirely.
 ::
 
-### Disable dismissal
-
-Set the `dismissible` prop to `false` to prevent the Drawer from being closed when clicking outside of it or pressing escape. A `close:prevent` event will be emitted when the user tries to close it.
-
-::docs-component-example
----
-prettier: true
-name: 'drawer-dismissible-example'
----
-::
-
-::note
-In this example, the `header` slot is used to add a close button which is not done by default.
-::
-
-### With interactive background
-
-Set the `overlay` and `modal` props to `false` alongside the `dismissible` prop to make the Drawer's background interactive without closing the Drawer.
-
-::docs-component-example
----
-prettier: true
-name: 'drawer-modal-example'
----
-::
-
 ### Responsive drawer
 
-You can render a [Modal](/docs/pohon/components/dialog) component on desktop and a Drawer on mobile for example.
+You can render a [Dialog](/docs/pohon/components/dialog) component on desktop and a Drawer on mobile for example.
 
 ::docs-component-example
 ---

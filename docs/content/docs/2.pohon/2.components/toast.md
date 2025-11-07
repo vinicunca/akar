@@ -2,7 +2,7 @@
 description: A succinct message to provide information or feedback to the user.
 category: overlay
 links:
-  - label: Toast
+  - label: Akar
     to: /docs/akar/components/toast
   - label: GitHub
     icon: i-simple-icons:github

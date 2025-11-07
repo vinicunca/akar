@@ -2,7 +2,7 @@
 description: A set of steps that are used to indicate progress through a multi-step process.
 category: navigation
 links:
-  - label: Stepper
+  - label: Akar
     to: /docs/akar/components/stepper
   - label: GitHub
     icon: i-simple-icons:github

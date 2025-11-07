@@ -1,5 +1,5 @@
 import type { GetItemKeys } from '../types/utils';
-import { isEmpty, isFunction, isNullish, isString } from '@vinicunca/perkakas';
+import { isEmptyish, isFunction, isNullish, isString } from '@vinicunca/perkakas';
 import { isEqual } from 'ohash/utils';
 
 export function getProp(
@@ -123,17 +123,17 @@ export function getDisplayValue<T extends Array<any>, V>(
     return compare({ value: itemValue, currentValue: value });
   });
 
-  if ((value === null || value === undefined || isEmpty(value)) && foundItem) {
+  if (isEmptyish(value) && foundItem) {
     return labelKey ? getProp({ object: foundItem as Record<string, any>, path: labelKey as string }) : undefined;
   }
 
-  if (value === null || value === undefined || isEmpty(value)) {
+  if (isEmptyish(value)) {
     return undefined;
   }
 
   const source = foundItem ?? value;
 
-  if (source === null || source === undefined) {
+  if (isNullish(source)) {
     return undefined;
   }
 

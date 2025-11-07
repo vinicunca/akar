@@ -3,7 +3,7 @@ title: DropdownMenu
 description: A menu to display actions when clicking on an element.
 category: overlay
 links:
-  - label: DropdownMenu
+  - label: Akar
     to: /docs/akar/components/dropdown-menu
   - label: GitHub
     icon: i-simple-icons:github
@@ -111,7 +111,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - DropdownMenuItem[][]
+  - PDropdownMenuItem[][]
 props:
   items:
     - - label: Benjamin
@@ -192,7 +192,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - DropdownMenuItem[]
+  - PDropdownMenuItem[]
 items:
   content.align:
     - start
@@ -240,7 +240,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - DropdownMenuItem[]
+  - PDropdownMenuItem[]
 props:
   arrow: true
   items:
@@ -275,7 +275,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - DropdownMenuItem[]
+  - PDropdownMenuItem[]
 props:
   size: xl
   items:
@@ -306,6 +306,40 @@ The `size` prop will not be proxied to the Button, you need to set it yourself.
 When using the same size, the DropdownMenu items will be perfectly aligned with the Button.
 ::
 
+### Modal
+
+Use the `modal` prop to control whether the DropdownMenu blocks interaction with outside content. Defaults to `true`.
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - items
+  - pohon.content
+external:
+  - items
+externalTypes:
+  - PDropdownMenuItem[]
+props:
+  modal: false
+  items:
+    - label: Profile
+      icon: i-lucide:user
+    - label: Billing
+      icon: i-lucide:credit-card
+    - label: Settings
+      icon: i-lucide:cog
+  pohon:
+    content: 'w-48'
+slots:
+  default: |
+
+    <PButton label="Open" icon="i-lucide:menu" color="neutral" variant="outline" />
+---
+
+:p-button{label="Open" icon="i-lucide:menu" color="neutral" variant="outline"}
+::
+
 ### Disabled
 
 Use the `disabled` prop to disable the DropdownMenu.
@@ -319,7 +353,7 @@ ignore:
 external:
   - items
 externalTypes:
-  - DropdownMenuItem[]
+  - PDropdownMenuItem[]
 props:
   disabled: true
   items:
@@ -404,7 +438,7 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 
 ### With trigger content width
 
-You can expand the content to the full width of its button by adding the `w-(--akar-dropdown-menu-trigger-width)` class on the `pohon.content` slot.
+You can expand the content to the full width of its button by adding the `w-$akar-dropdown-menu-trigger-width` class on the `pohon.content` slot.
 
 ::docs-component-example
 ---
@@ -421,7 +455,7 @@ export default defineAppConfig({
   pohon: {
     dropdownMenu: {
       slots: {
-        content: 'w-(--akar-dropdown-menu-trigger-width)'
+        content: 'w-$akar-dropdown-menu-trigger-width'
       }
     }
   }
