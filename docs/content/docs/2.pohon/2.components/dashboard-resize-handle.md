@@ -5,7 +5,7 @@ category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/DashboardResizeHandle.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-resize-handle.vue
 ---
 
 ## Usage

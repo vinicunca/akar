@@ -5,7 +5,7 @@ category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/DashboardNavbar.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-navbar.vue
 ---
 
 ## Usage
@@ -36,7 +36,7 @@ Use the `left`, `default` and `right` slots to customize the navbar.
 ---
 prettier: true
 name: 'dashboard-navbar-example'
-class: '!px-0 !pt-0'
+class: 'akar:px-0 akar:pt-0'
 props:
   class: 'w-full'
 ---
@@ -57,7 +57,7 @@ hide:
 props:
   title: 'Dashboard'
   class: 'w-full'
-class: '!px-0 !pt-0'
+class: 'akar:px-0 akar:pt-0'
 ---
 ::
 
@@ -75,7 +75,7 @@ props:
   title: 'Dashboard'
   icon: 'i-lucide-house'
   class: 'w-full'
-class: '!px-0 !pt-0'
+class: 'akar:px-0 akar:pt-0'
 ---
 ::
 

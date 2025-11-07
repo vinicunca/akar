@@ -7,7 +7,7 @@ links:
     to: /docs/akar/components/pin-input
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/PinInput.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/pin-input.vue
 ---
 
 ## Usage

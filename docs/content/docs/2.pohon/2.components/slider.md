@@ -6,7 +6,7 @@ links:
     to: /docs/akar/components/slider
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Slider.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/slider.vue
 ---
 
 ## Usage

@@ -23,7 +23,7 @@ Use the `left`, `default` and `right` slots to customize the header and the `bod
 collapse: true
 prettier: true
 name: 'header-example'
-class: '!px-0 !pt-0'
+class: 'akar:px-0 akar:pt-0'
 overflowHidden: true
 props:
   class: 'w-full'
@@ -45,7 +45,7 @@ hide:
 props:
   title: 'Akar'
   class: 'w-full'
-class: '!px-0 !pt-0'
+class: 'akar:px-0 akar:pt-0'
 ---
 ::
 
@@ -67,7 +67,7 @@ slots:
   title: |
 
     <BaseLogo class="h-6 w-auto" />
-class: '!px-0 !pt-0'
+class: 'akar:px-0 akar:pt-0'
 ---
 
 #title
@@ -82,7 +82,7 @@ Use the `to` prop to change the link of the title. Defaults to `/`.
 ---
 hide:
   - class
-class: '!px-0 !pt-0'
+class: 'akar:px-0 akar:pt-0'
 props:
   to: '/docs'
   class: 'w-full'
@@ -97,7 +97,7 @@ prettier: true
 overflowHidden: true
 hide:
   - class
-class: '!px-0 !pt-0'
+class: 'akar:px-0 akar:pt-0'
 props:
   class: 'w-full'
 slots:

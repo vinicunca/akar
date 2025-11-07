@@ -240,6 +240,7 @@ const props = withDefaults(
     back: true,
     virtualize: false,
     preserveGroupOrder: false,
+    highlightOnHover: true,
   },
 );
 const emits = defineEmits<PCommandPaletteEmits<T>>();

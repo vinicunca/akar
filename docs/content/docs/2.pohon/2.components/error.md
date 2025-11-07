@@ -5,7 +5,7 @@ category: layout
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Error.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/error.vue
 ---
 
 ## Usage
@@ -34,7 +34,7 @@ props:
     statusCode: 404
     statusMessage: 'Page not found'
     message: 'The page you are looking for does not exist.'
-  class: '!min-h-96'
+  class: 'akar:min-h-96'
 ---
 ::
 
@@ -67,7 +67,7 @@ props:
     statusCode: 404
     statusMessage: 'Page not found'
     message: 'The page you are looking for does not exist.'
-  class: '!min-h-96'
+  class: 'akar:min-h-96'
 ---
 ::
 
@@ -90,7 +90,7 @@ props:
     statusCode: 404
     statusMessage: 'Page not found'
     message: 'The page you are looking for does not exist.'
-  class: '!min-h-96'
+  class: 'akar:min-h-96'
 ---
 ::
 

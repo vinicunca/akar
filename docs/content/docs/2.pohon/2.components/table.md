@@ -8,7 +8,7 @@ links:
     to: https://tanstack.com/table/latest
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Table.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/table.vue
 ---
 
 ## Usage
@@ -19,11 +19,11 @@ The Table component is built on top of [TanStack Table](https://tanstack.com/tab
 ---
 source: false
 name: 'table-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
-::callout{icon="i-simple-icons-github" to="https://github.com/nuxt/ui/tree/v4/docs/app/components/content/examples/table/TableExample.vue" aria-label="View source code"}
+::callout{icon="i-simple-icons-github" to="https://github.com/akar/tree/main/docs/app/components/content/examples/table/table-example.vue" aria-label="View source code"}
 This example demonstrates the most common use case of the `Table` component. Check out the source code on GitHub.
 ::
 
@@ -34,7 +34,7 @@ Use the `data` prop as an array of objects, the columns will be generated based 
 ::docs-pohon-preview
 ---
 collapse: true
-class: '!p-0'
+class: 'akar:p-0'
 ignore:
   - data
   - class
@@ -97,7 +97,7 @@ You can also use slots to customize the header and data cells of the table.
 ---
 prettier: true
 collapse: true
-class: '!p-0'
+class: 'akar:p-0'
 name: 'table-columns-example'
 highlights:
   - 53
@@ -123,7 +123,7 @@ Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/
 prettier: true
 collapse: true
 name: 'table-custom-meta-example'
-class: '!p-0'
+class: 'akar:p-0'
 ---
 ::
 
@@ -134,7 +134,7 @@ Use the `loading` prop to display a loading state, the `loading-color` prop to c
 ::docs-pohon-preview
 ---
 collapse: true
-class: '!p-0'
+class: 'akar:p-0'
 ignore:
   - data
   - class
@@ -181,7 +181,7 @@ Use the `sticky` prop to make the header or footer sticky.
 ::docs-pohon-preview
 ---
 collapse: true
-class: '!p-0'
+class: 'akar:p-0'
 ignore:
   - data
   - class
@@ -461,7 +461,7 @@ name: 'table-column-pinning-example'
 highlights:
   - 100
   - 113
-class: '!p-0 overflow-clip'
+class: 'akar:p-0 overflow-clip'
 ---
 ::
 

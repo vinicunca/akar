@@ -6,7 +6,7 @@ links:
     to: /docs/akar/components/dialog
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Slideover.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/slideover.vue
 ---
 
 ## Usage
@@ -306,7 +306,7 @@ slots:
 You can use the [`useOverlay`](/docs/composables/use-overlay) composable to open a Slideover programmatically.
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`OverlayProvider`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/OverlayProvider.vue) component.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`OverlayProvider`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/overlay-provider.vue) component.
 ::
 
 First, create a slideover component that will be opened programmatically:

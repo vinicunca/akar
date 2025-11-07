@@ -5,7 +5,7 @@ category: layout
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Footer.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/footer.vue
 ---
 
 ## Usage
@@ -19,7 +19,7 @@ Use the `left`, `default` and `right` slots to customize the footer.
 prettier: true
 collapse: true
 name: 'footer-example'
-class: '!p-0'
+class: 'akar:p-0'
 props:
   class: 'w-full'
 ---

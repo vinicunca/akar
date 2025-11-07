@@ -13,7 +13,7 @@ export const commandPaletteTheme = {
     group: 'p-1 isolate',
     empty: 'py-6 text-center text-sm color-text-muted',
     label: 'p-1.5 text-xs font-semibold color-text-highlighted',
-    item: 'group text-sm p-1.5 outline-none flex gap-1.5 w-full select-none items-start relative before:(rounded-md inset-px absolute -z-1) data-[disabled]:(opacity-75 cursor-not-allowed)',
+    item: 'group text-sm p-1.5 outline-none flex gap-1.5 w-full select-none items-start relative before:(content-empty rounded-md inset-px absolute -z-1) data-[disabled]:(opacity-75 cursor-not-allowed)',
     itemLeadingIcon: 'shrink-0 size-5',
     itemLeadingAvatar: 'shrink-0',
     itemLeadingAvatarSize: '2xs',

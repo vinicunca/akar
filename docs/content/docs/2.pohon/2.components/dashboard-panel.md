@@ -5,7 +5,7 @@ category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/DashboardPanel.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-panel.vue
 ---
 
 ## Usage
@@ -42,12 +42,12 @@ Use the `header`, `body` and `footer` slots to customize the panel or the defaul
 ---
 collapse: true
 name: 'dashboard-panel-example'
-class: '!p-0 !justify-start'
+class: 'akar:p-0 akar:justify-start'
 props:
   minSize: 22
   defaultSize: 35
   maxSize: 40
-  class: '!min-h-96 h-136'
+  class: 'akar:min-h-96 h-136'
 ---
 ::
 
@@ -72,12 +72,12 @@ props:
   minSize: 22
   defaultSize: 35
   maxSize: 40
-  class: '!min-h-96'
+  class: 'akar:min-h-96'
 slots:
   body: |
 
     <CorePlaceholder class="h-96" />
-class: '!p-0 !justify-start'
+class: 'akar:p-0 akar:justify-start'
 ---
 
 #body
@@ -100,12 +100,12 @@ props:
   minSize: 22
   defaultSize: 35
   maxSize: 40
-  class: '!min-h-96'
+  class: 'akar:min-h-96'
 slots:
   body: |
 
     <CorePlaceholder class="h-96" />
-class: '!p-0 !justify-start'
+class: 'akar:p-0 akar:justify-start'
 ---
 
 #body

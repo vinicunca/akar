@@ -6,7 +6,7 @@ links:
     to: /docs/akar/components/switch
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Switch.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/switch.vue
 ---
 
 ## Usage

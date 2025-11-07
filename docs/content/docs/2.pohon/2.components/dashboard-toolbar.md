@@ -5,7 +5,7 @@ category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/DashboardToolbar.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-toolbar.vue
 ---
 
 ## Usage
@@ -38,7 +38,7 @@ Use the `left`, `default` and `right` slots to customize the toolbar.
 ---
 prettier: true
 name: 'dashboard-toolbar-example'
-class: '!px-0 !pt-0'
+class: 'akar:px-0 akar:pt-0'
 props:
   class: 'w-full'
 ---

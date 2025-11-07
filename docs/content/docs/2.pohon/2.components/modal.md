@@ -307,7 +307,7 @@ slots:
 You can use the [`useOverlay`](/docs/composables/use-overlay) composable to open a Modal programmatically.
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`OverlayProvider`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/OverlayProvider.vue) component.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`OverlayProvider`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/overlay-provider.vue) component.
 ::
 
 First, create a modal component that will be opened programmatically:

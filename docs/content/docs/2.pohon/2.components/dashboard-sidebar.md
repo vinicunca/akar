@@ -5,7 +5,7 @@ category: dashboard
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/DashboardSidebar.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-sidebar.vue
 ---
 
 ## Usage
@@ -34,12 +34,12 @@ Use the `left`, `default` and `right` slots to customize the sidebar and the `bo
 ---
 collapse: true
 name: 'dashboard-sidebar-example'
-class: '!p-0 !justify-start'
+class: 'akar:p-0 akar:justify-start'
 props:
   minSize: 22
   defaultSize: 35
   maxSize: 40
-  class: '!min-h-96 h-136'
+  class: 'akar:min-h-96 h-136'
 ---
 ::
 
@@ -64,12 +64,12 @@ props:
   minSize: 22
   defaultSize: 35
   maxSize: 40
-  class: '!min-h-96'
+  class: 'akar:min-h-96'
 slots:
   default: |
 
     <CorePlaceholder class="h-96" />
-class: '!p-0 !justify-start'
+class: 'akar:p-0 akar:justify-start'
 ---
 
 :core-placeholder{class="h-96"}
@@ -99,12 +99,12 @@ props:
   minSize: 22
   defaultSize: 35
   maxSize: 40
-  class: '!min-h-96'
+  class: 'akar:min-h-96'
 slots:
   default: |
 
     <CorePlaceholder class="h-96" />
-class: '!p-0 !justify-start'
+class: 'akar:p-0 akar:justify-start'
 ---
 
 :core-placeholder{class="h-96"}
@@ -133,12 +133,12 @@ props:
   defaultSize: 35
   maxSize: 40
   collapsedSize: 0
-  class: '!min-h-96'
+  class: 'akar:min-h-96'
 slots:
   default: |
 
     <CorePlaceholder class="h-96" />
-class: '!p-0 !justify-start'
+class: 'akar:p-0 akar:justify-start'
 ---
 
 :core-placeholder{class="h-96"}
@@ -174,12 +174,12 @@ props:
   minSize: 22
   defaultSize: 35
   maxSize: 40
-  class: '!min-h-96'
+  class: 'akar:min-h-96'
 slots:
   default: |
 
     <CorePlaceholder class="h-96" />
-class: '!p-0 !justify-end'
+class: 'akar:p-0 akar:justify-end'
 ---
 
 :core-placeholder{class="h-96"}
@@ -269,7 +269,7 @@ iframe:
 iframeMobile: true
 overflowHidden: true
 name: 'dashboard-sidebar-open-example'
-class: '!p-0 !justify-start'
+class: 'akar:p-0 akar:justify-start'
 ---
 ::
 
@@ -284,12 +284,12 @@ You can control the collapsed state by using the `collapsed` prop or the `v-mode
 ::docs-component-example
 ---
 name: 'dashboard-sidebar-collapsed-example'
-class: '!p-0 !justify-start'
+class: 'akar:p-0 akar:justify-start'
 props:
   minSize: 22
   defaultSize: 35
   maxSize: 40
-  class: '!min-h-96 h-136'
+  class: 'akar:min-h-96 h-136'
 ---
 ::
 

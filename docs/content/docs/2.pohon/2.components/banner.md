@@ -17,7 +17,7 @@ Use the `title` prop to display a title on the Banner.
 ::docs-pohon-preview
 ---
 prettier: true
-class: '!p-0'
+class: 'akar:p-0'
 props:
   title: 'This is a banner with an important message.'
 ---
@@ -30,7 +30,7 @@ Use the `icon` prop to display an icon on the Banner.
 ::docs-pohon-preview
 ---
 prettier: true
-class: '!p-0'
+class: 'akar:p-0'
 ignore:
   - title
 props:
@@ -46,7 +46,7 @@ Use the `color` prop to change the color of the Banner.
 ::docs-pohon-preview
 ---
 prettier: true
-class: '!p-0'
+class: 'akar:p-0'
 ignore:
   - icon
   - title
@@ -133,7 +133,7 @@ Use the `actions` prop to add some [Button](/docs/pohon/components/button) actio
 ::docs-pohon-preview
 ---
 prettier: true
-class: '!p-0'
+class: 'akar:p-0'
 ignore:
   - title
   - actions
@@ -161,7 +161,7 @@ You can pass any property from the [`<NuxtLink>`](https://nuxt.com/docs/api/comp
 ::docs-pohon-preview
 ---
 prettier: true
-class: '!p-0'
+class: 'akar:p-0'
 overflowHidden: true
 ignore:
   - title

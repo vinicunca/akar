@@ -6,7 +6,7 @@ links:
     to: /docs/akar/components/toast
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Toast.vue
+    to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/toast.vue
 ---
 
 ## Usage
@@ -22,7 +22,7 @@ name: 'toast-example'
 ::
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses our [`Toaster`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/Toaster.vue) component which uses the [`ToastProvider`](https://akar.com/docs/pohon/components/toast#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses our [`Toaster`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/toaster.vue) component which uses the [`ToastProvider`](https://akar.com/docs/pohon/components/toast#provider) component from Reka UI.
 ::
 
 ::tip{to="/docs/pohon/components/app#props"}
