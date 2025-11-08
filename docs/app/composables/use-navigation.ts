@@ -93,6 +93,10 @@ function processNavigationItem(
   item: ContentNavigationItem,
   parent?: ContentNavigationItem,
 ): ContentNavigationItem | Array<ContentNavigationItem> {
+  if (item.shadow) {
+    return item.children?.flatMap((child) => processNavigationItem(child, item)) || [];
+  }
+
   return {
     ...item,
     title: parent?.title ? parent.title : item.title,

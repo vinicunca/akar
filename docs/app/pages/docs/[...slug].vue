@@ -19,16 +19,20 @@ import {
   createError,
   definePageMeta,
   inject,
+  navigateTo,
   queryCollection,
   useAsyncData,
+  useFrameworks,
   useNavigation,
   useRoute,
   useSeoMeta,
+  watch,
 } from '#imports';
 import { toKebabCase } from '@vinicunca/perkakas';
 import { pickLinkProps } from 'pohon-ui/utils/link';
 
 const route = useRoute();
+const { framework } = useFrameworks();
 
 definePageMeta({
   layout: 'docs',
@@ -49,12 +53,38 @@ if (!page.value) {
   });
 }
 
+// Update the framework if the page has different one
+watch(
+  page,
+  () => {
+    if (page.value?.framework && page.value?.framework !== framework.value) {
+      framework.value = page.value?.framework as string;
+    }
+  },
+  { immediate: true },
+);
+
 const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 
 const { findBreadcrumb, findSurround } = useNavigation(navigation!);
 
 const breadcrumbs = computed(() => findBreadcrumb(page.value?.path as string));
 const surround = computed(() => findSurround(page.value?.path as string));
+
+if (!import.meta.prerender) {
+  // Redirect to the correct framework version if the page is not the current framework
+  watch(framework, () => {
+    const route = useRoute();
+
+    if (page.value?.path === route.path && page.value?.framework && page.value?.framework !== framework.value) {
+      if (route.path.endsWith(`/${page.value?.framework}`)) {
+        navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`);
+      } else {
+        navigateTo('/docs/pohon/getting-started');
+      }
+    }
+  });
+}
 
 const title = page.value?.seo?.title ?? page.value?.navigation.title ?? page.value?.title;
 const prefix = page.value?.path.includes('components/') || page.value?.path.includes('composables/') ? 'Vue ' : '';

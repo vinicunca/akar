@@ -115,7 +115,7 @@ export const proseTheme = {
     ],
   },
   cardGroup: {
-    base: 'my-5 gap-5 grid grid-cols-1 *:my-0 sm:grid-cols-2',
+    base: 'my-5 gap-5 grid grid-cols-1 sm:grid-cols-2 akar:*:my-0',
   },
   code: {
     base: 'text-sm font-600 font-mono px-1.5 py-0.5 rounded-md inline-block transition-colors-280 [&[language=ts-type]]:(bg-slate-700 dark:bg-slate-800)',
@@ -368,9 +368,9 @@ export const proseTheme = {
     base: 'ms-4 ps-8 border-s border-border [counter-reset:step]',
     variants: {
       level: {
-        2: '[&>h2>a>span.absolute]:hidden [&>h2]:[counter-increment:step] [&>h2]:relative [&>h2]:before:(text-sm font-semibold rounded-full bg-background-elevated inline-flex size-8 content-[counter(step)] content-empty ring-4 ring-ring-bg items-center justify-center absolute tabular-nums -ms-[48.5px] -mt-0)',
-        3: '[&>h3>a>span.absolute]:hidden [&>h3]:[counter-increment:step] [&>h3]:relative [&>h3]:before:(text-sm font-semibold rounded-full bg-background-elevated inline-flex size-7 content-[counter(step)] content-empty ring-4 ring-ring-bg items-center inset-x-0.5 justify-center absolute tabular-nums -ms-[48.5px])',
-        4: '[&>h4>a>span.absolute]:hidden [&>h4]:[counter-increment:step] [&>h4]:relative [&>h4]:before:(text-sm font-semibold rounded-full bg-background-elevated inline-flex size-7 content-[counter(step)] content-empty ring-4 ring-ring-bg items-center inset-x-0.5 justify-center absolute tabular-nums -ms-[48.5px])',
+        2: '[&>h2>a>span.absolute]:hidden [&>h2]:[counter-increment:step] [&>h2]:relative [&>h2]:before:(text-sm font-semibold rounded-full bg-background-elevated inline-flex size-8 content-[counter(step)] ring-4 ring-ring-bg items-center justify-center absolute tabular-nums -ms-[48.5px] -mt-0)',
+        3: '[&>h3>a>span.absolute]:hidden [&>h3]:[counter-increment:step] [&>h3]:relative [&>h3]:before:(text-sm font-semibold rounded-full bg-background-elevated inline-flex size-7 content-[counter(step)] ring-4 ring-ring-bg items-center inset-x-0.5 justify-center absolute tabular-nums -ms-[48.5px])',
+        4: '[&>h4>a>span.absolute]:hidden [&>h4]:[counter-increment:step] [&>h4]:relative [&>h4]:before:(text-sm font-semibold rounded-full bg-background-elevated inline-flex size-7 content-[counter(step)] ring-4 ring-ring-bg items-center inset-x-0.5 justify-center absolute tabular-nums -ms-[48.5px])',
       },
     },
   },
