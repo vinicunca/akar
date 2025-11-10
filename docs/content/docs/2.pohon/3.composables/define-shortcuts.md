@@ -19,6 +19,21 @@ defineShortcuts({
 </script>
 ```
 
+Or you don't want to use the auto import functionality.
+
+```vue
+<script setup lang="ts">
+import { defineShortcuts } from '#imports';
+const open = ref(false);
+
+defineShortcuts({
+  meta_k: () => {
+    open.value = !open.value
+  }
+})
+</script>
+```
+
 - Shortcuts are automatically adjusted for non-macOS platforms, converting `meta` to `ctrl`.
 - The composable uses VueUse's [`useEventListener`](https://vueuse.org/core/useEventListener/) to handle keydown events.
 - For a complete list of available shortcut keys, refer to the [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values) API documentation. Note that the key should be written in lowercase.

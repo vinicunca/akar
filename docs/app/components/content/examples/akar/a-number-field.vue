@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
 import { ANumberFieldDecrement, ANumberFieldIncrement, ANumberFieldInput, ANumberFieldRoot } from 'akar';
 </script>
 
@@ -8,20 +7,17 @@ import { ANumberFieldDecrement, ANumberFieldIncrement, ANumberFieldInput, ANumbe
     id="age"
     :min="0"
     :default-value="18"
+    class="inline-flex items-center relative"
   >
-    <label
-      for="age"
-      class="text-stone-700 dark:text-white"
-    >
-      Age
-    </label>
-    <div class="mt-1 border rounded-lg bg-white flex h-9 shadow-sm items-center hover:bg-stone-50 focus-within:shadow-[0_0_0_2px] focus-within:shadow-stone-800">
-      <ANumberFieldDecrement class="p-2 disabled:opacity-20">
-        <Icon icon="radix-icons:minus" />
+    <div class="ps-1 flex items-center start-0 inset-y-0 absolute">
+      <ANumberFieldDecrement class="text-sm color-primary font-medium px-2.5 py-1.5 rounded-md inline-flex gap-1.5 transition-colors-280 items-center active:color-primary/75 aria-disabled:(color-primary opacity-75 cursor-not-allowed) disabled:(color-primary opacity-75 cursor-not-allowed) hover:color-primary/75 focus:outline-none focus-visible:(ring-2 ring-primary ring-inset) akar:p-1.5">
+        <i class="i-lucide:minus shrink-0 size-5" />
       </ANumberFieldDecrement>
-      <ANumberFieldInput class="p-1 text-center bg-transparent w-20 tabular-nums focus:outline-0" />
-      <ANumberFieldIncrement class="p-2 disabled:opacity-20">
-        <Icon icon="radix-icons:plus" />
+    </div>
+    <ANumberFieldInput class="text-sm color-text-highlighted px-2.5 py-1.5 pe-9 ps-9 text-center border-0 rounded-md bg-background gap-1.5 w-full ring ring-ring-accented ring-inset transition-colors-280 placeholder:color-text-dimmed focus:outline-none disabled:(opacity-75 cursor-not-allowed) focus-visible:(ring-2 ring-primary ring-inset)" />
+    <div class="pe-1 flex items-center end-0 inset-y-0 absolute">
+      <ANumberFieldIncrement class="text-sm color-primary font-medium px-2.5 py-1.5 rounded-md inline-flex gap-1.5 transition-colors-280 items-center active:color-primary/75 aria-disabled:(color-primary opacity-75 cursor-not-allowed) disabled:(color-primary opacity-75 cursor-not-allowed) hover:color-primary/75 focus:outline-none focus-visible:(ring-2 ring-primary ring-inset) akar:p-1.5">
+        <i class="i-lucide:plus shrink-0 size-5" />
       </ANumberFieldIncrement>
     </div>
   </ANumberFieldRoot>

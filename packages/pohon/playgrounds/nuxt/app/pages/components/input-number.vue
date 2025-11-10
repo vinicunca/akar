@@ -46,12 +46,6 @@ const value = ref(50);
     v-slot="props"
     :attrs="attrs"
   >
-    <PInputNumber
-      v-model="value"
-      :orientation="orientation"
-      v-bind="props"
-    />
-
     <ANumberFieldRoot
       id="age"
       :min="0"
@@ -70,6 +64,12 @@ const value = ref(50);
         </ANumberFieldIncrement>
       </div>
     </ANumberFieldRoot>
+
+    <PInputNumber
+      v-model="value"
+      :orientation="orientation"
+      v-bind="props"
+    />
 
     <PInputNumber
       :default-value="75"

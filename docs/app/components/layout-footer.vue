@@ -32,9 +32,9 @@ const links = [{
       <NuxtLink
         to="https://github.com/nuxt/ui"
         target="_blank"
-        class="text-muted text-sm"
+        class="text-sm color-text-muted"
       >
-        Published under <span class="text-highlighted">MIT License</span>
+        Published under <span class="color-text-highlighted">MIT License</span>
       </NuxtLink>
     </template>
 

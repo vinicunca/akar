@@ -12,7 +12,6 @@ export const contextMenuTheme = {
     separator: '-mx-1 my-1 h-px bg-border',
     item: 'group relative w-full flex items-start select-none outline-none before:(content-empty absolute -z-1 inset-px rounded-md) data-[disabled]:(cursor-not-allowed opacity-75)',
     itemLeadingIcon: 'shrink-0',
-    itemLeadingAvatar: 'shrink-0',
     itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
     itemTrailingIcon: 'shrink-0',
     itemTrailingKbds: 'hidden lg:inline-flex items-center shrink-0',

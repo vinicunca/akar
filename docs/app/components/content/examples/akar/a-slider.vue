@@ -16,7 +16,7 @@ const value = ref([50]);
       <ASliderRange class="rounded-full bg-primary h-full absolute" />
     </ASliderTrack>
     <ASliderThumb
-      class="frounded-full bg-background size-4 ring-2 ring-primary focus-visible:(outline-2 outline-primary/50 outline-offset-2)"
+      class="rounded-full bg-background size-4 ring-2 ring-primary focus-visible:(outline-2 outline-primary/50 outline-offset-2)"
       aria-label="Volume"
     />
   </ASliderRoot>

@@ -6,7 +6,7 @@ import { fieldGroupVariant } from './field-group.theme';
 
 export const buttonTheme = {
   slots: {
-    base: 'font-medium rounded-md inline-flex transition-colors-280 items-center aria-disabled:(opacity-75 cursor-not-allowed) disabled:(opacity-75 cursor-not-allowed)',
+    base: 'font-500 rounded-md inline-flex transition-colors-280 items-center aria-disabled:(opacity-75 cursor-not-allowed) disabled:(opacity-75 cursor-not-allowed)',
     label: 'truncate',
     leadingIcon: 'shrink-0',
     leadingAvatar: 'shrink-0',
@@ -57,7 +57,7 @@ export const buttonTheme = {
     ...BRANDS.map((color) => ({
       color,
       variant: 'solid',
-      class: `color-text-inverted bg-${color} hover:bg-${color}/75 active:bg-${color}/75 disabled:bg-${color} aria-disabled:bg-${color} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}`,
+      class: `color-text-inverted shadow-md bg-${color} hover:bg-${color}/75 active:bg-${color}/75 disabled:bg-${color} aria-disabled:bg-${color} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${color}`,
     })),
     ...BRANDS.map((color) => ({
       color,

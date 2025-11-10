@@ -9,7 +9,7 @@ const toggleState = ref(false);
   <AToggle
     v-model="toggleState"
     aria-label="Toggle italic"
-    class="text-base text-stone-700 leading-4 border rounded-lg bg-white flex size-9 shadow-sm items-center justify-center focus-within:outline-none data-[state=on]:bg-stone-100 hover:bg-stone-50 focus-within:shadow-[0_0_0_2px]"
+    class="color-text rounded-lg bg-background bg-white flex size-9 ring ring-ring-accented ring-inset shadow-sm transition-colors-280 items-center justify-center data-[state=on]:bg-background-accented hover:bg-background-elevated focus-within:(ring-2 ring-ring-inverted)"
   >
     <i
       class="i-lucide:italic size-6"
