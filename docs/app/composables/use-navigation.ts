@@ -206,7 +206,7 @@ function groupChildrenByCategory(
       }));
     const withoutChildren = uncategorized.filter((item) => !item.children?.length);
 
-    if (withoutChildren.every((item) => Boolean(item.shadow))) {
+    if (parent === 'akar' && slug !== 'components') {
       groups.push(...withoutChildren);
     } else if (withoutChildren.length) {
       groups.push({
