@@ -34,7 +34,7 @@ props:
 ::
 
 ::tip
-Use this over an [`Input`](/docs/pohon/components/input) to take advantage of Akar's [`Combobox`](https://akar.com/docs/akar/components/combobox) component that offers autocomplete capabilities.
+Use this over an [`Input`](/docs/pohon/components/input) to take advantage of Akar's [`ACombobox`](/docs/akar/components/combobox) component that offers autocomplete capabilities.
 ::
 
 ::note

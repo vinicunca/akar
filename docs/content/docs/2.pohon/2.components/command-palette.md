@@ -115,7 +115,6 @@ Each group contains an `items` array of objects that define the commands. Each i
 
 You can pass any property from the [Link](/docs/pohon/components/link#props) component such as `to`, `target`, etc.
 
-
 ::docs-pohon-preview
 ---
 collapse: true
@@ -894,7 +893,7 @@ props:
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
 ::warning{to="https://github.com/unovue/akar/issues/1885" target="_blank"}
-When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
+When enabled, all groups are flattened into a single list due to a limitation of Akar.
 ::
 
 ::docs-component-example

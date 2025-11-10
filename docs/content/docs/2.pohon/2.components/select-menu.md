@@ -38,7 +38,7 @@ props:
 ::
 
 ::tip
-Use this over a [`Select`](/docs/pohon/components/select) to take advantage of Reka UI's [`Combobox`](https://akar.com/docs/pohon/components/combobox) component that offers search capabilities and multiple selection.
+Use this over a [`Select`](/docs/pohon/components/select) to take advantage of Akar's [`Combobox`](/docs/akar/components/combobox) component that offers search capabilities and multiple selection.
 ::
 
 ::note
@@ -825,7 +825,7 @@ name: 'select-menu-filter-fields-example'
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
 
 ::warning{to="https://github.com/unovue/akar/issues/1885" target="_blank"}
-When enabled, all groups are flattened into a single list due to a limitation of Reka UI.
+When enabled, all groups are flattened into a single list due to a limitation of Akar.
 ::
 
 ::docs-component-example
@@ -872,8 +872,6 @@ collapse: true
 name: 'select-menu-countries-example'
 ---
 ::
-
-
 
 ## API
 

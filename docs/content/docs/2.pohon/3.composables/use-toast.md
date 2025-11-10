@@ -9,7 +9,7 @@ Use the auto-imported `useToast` composable to display [Toast](/docs/pohon/compo
 
 ```vue
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 </script>
 ```
 
@@ -18,7 +18,7 @@ const toast = useToast()
 - When removing a toast, there's a 200ms delay before it's actually removed from the state, allowing for exit animations.
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses our [`Toaster`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/toaster.vue) component which uses the [`ToastProvider`](https://akar.com/docs/pohon/components/toast#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses our [`Toaster`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/toaster.vue) component which uses the [`AToastProvider`](/docs/akar/components/toast#provider) component from Akar.
 ::
 
 ::tip{to="/docs/pohon/components/toast"}
@@ -65,14 +65,14 @@ Adds a new toast notification.
 
 ```vue
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function showToast() {
   toast.add({
     title: 'Success',
     description: 'Your action was completed successfully.',
     color: 'success'
-  })
+  });
 }
 </script>
 ```
@@ -97,13 +97,13 @@ Updates an existing toast notification.
 
 ```vue
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function updateToast(id: string | number) {
   toast.update(id, {
     title: 'Updated Toast',
     description: 'This toast has been updated.'
-  })
+  });
 }
 </script>
 ```
@@ -124,10 +124,10 @@ Removes a toast notification.
 
 ```vue
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function removeToast(id: string | number) {
-  toast.remove(id)
+  toast.remove(id);
 }
 </script>
 ```
@@ -140,10 +140,10 @@ Removes all toast notifications.
 
 ```vue
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function clearAllToasts() {
-  toast.clear()
+  toast.clear();
 }
 </script>
 ```

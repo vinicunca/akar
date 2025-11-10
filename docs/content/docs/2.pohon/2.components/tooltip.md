@@ -30,7 +30,7 @@ slots:
 ::
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`TooltipProvider`](https://akar.com/docs/pohon/components/tooltip#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`ATooltipProvider`](docs/akar/components/tooltip#provider) component from Akar.
 ::
 
 ::tip{to="/docs/pohon/components/app#props"}
@@ -203,7 +203,7 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 ### With following cursor
 
-You can make the Tooltip follow the cursor when hovering over an element using the [`reference`](https://akar.com/docs/pohon/components/tooltip#trigger) prop:
+You can make the Tooltip follow the cursor when hovering over an element using the [`reference`](/docs/akar/components/tooltip#trigger) prop:
 
 ::docs-component-example
 ---

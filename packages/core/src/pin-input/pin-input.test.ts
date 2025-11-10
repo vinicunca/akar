@@ -276,10 +276,6 @@ describe('give PinInput type=number', async () => {
 
   describe('autofill', () => {
     it('should populate the opt code in each box', async () => {
-      /**
-       * https://github.com/unovue/reka-ui/issues/2210
-       * Password managers (like 1Password, Bitwarden, etc.) fill PIN inputs with `input` events
-       */
       for (const input of inputs) {
         input.setValue('0');
         input.trigger('input', { data: undefined });

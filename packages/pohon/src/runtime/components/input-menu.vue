@@ -481,7 +481,7 @@ function onUpdateOpen(value: boolean) {
     emitFormBlur();
 
     // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
-    // https://akar.com/docs/components/combobox#api-reference
+    // https://akar.vinicunca.dev/docs/akar/components/combobox#api-reference
     if (props.resetSearchTermOnBlur) {
       const STATE_ANIMATION_DELAY_MS = 100;
 

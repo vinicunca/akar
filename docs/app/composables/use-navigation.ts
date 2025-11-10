@@ -24,6 +24,16 @@ const CATEGORIES = {
         title: 'Overlay',
       },
     ],
+    utilities: [
+      {
+        id: 'components',
+        title: 'Components',
+      },
+      {
+        id: 'composables',
+        title: 'Composables',
+      },
+    ],
   },
   pohon: {
     components: [

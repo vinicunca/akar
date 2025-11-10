@@ -22,7 +22,7 @@ name: 'toast-example'
 ::
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses our [`Toaster`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/toaster.vue) component which uses the [`ToastProvider`](https://akar.com/docs/pohon/components/toast#provider) component from Reka UI.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses our [`Toaster`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/toaster.vue) component which uses the [`AToastProvider`](/docs/akar/components/toast#provider) component from Akar.
 ::
 
 ::tip{to="/docs/pohon/components/app#props"}
@@ -205,7 +205,7 @@ Change the `toaster.position` prop on the [App](/docs/pohon/components/app#props
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { position: 'bottom-right' }
+const toaster = { position: 'bottom-right' };
 </script>
 
 <template>
@@ -235,7 +235,7 @@ Change the `toaster.duration` prop on the [App](/docs/pohon/components/app#props
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { duration: 5000 }
+const toaster = { duration: 5000 };
 </script>
 
 <template>
@@ -265,7 +265,7 @@ Change the `toaster.max` prop on the [App](/docs/pohon/components/app#props) com
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { max: 3 }
+const toaster = { max: 3 };
 </script>
 
 <template>
@@ -295,7 +295,7 @@ Set the `toaster.expand` prop to `false` on the [App](/docs/pohon/components/app
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { expand: true }
+const toaster = { expand: true };
 </script>
 
 <template>
@@ -344,7 +344,6 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `height`| `Ref<number>`|
-
 
 ## Theme
 
