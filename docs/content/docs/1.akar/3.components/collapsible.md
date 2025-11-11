@@ -27,7 +27,7 @@ Import the components and piece the parts together.
 
 ```vue
 <script setup>
-import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar'
+import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar';
 </script>
 
 <template>
@@ -37,6 +37,10 @@ import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar
   </ACollapsibleRoot>
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/collapsible"}
 
 ## API Reference
 
@@ -115,8 +119,8 @@ Use the `--akar-collapsible-content-width` and/or `--akar-collapsible-content-he
 ```vue {10}
 // index.vue
 <script setup>
-import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar'
-import './styles.css'
+import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar';
+import './styles.css';
 </script>
 
 <template>
@@ -134,10 +138,10 @@ import './styles.css'
 .ACollapsibleContent {
   overflow: hidden;
 }
-.ACollapsibleContent[data-state="open"] {
+.ACollapsibleContent[data-state='open'] {
   animation: collapsible-down 300ms ease-out;
 }
-.ACollapsibleContent[data-state="closed"] {
+.ACollapsibleContent[data-state='closed'] {
   animation: collapsible-up 300ms ease-out;
 }
 
@@ -174,7 +178,7 @@ This will also allow browser to search the hidden text, and open the collapsible
 
 ```vue {6}
 <script setup>
-import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar'
+import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar';
 </script>
 
 <template>

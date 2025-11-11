@@ -131,7 +131,6 @@ props:
 ---
 ::
 
-
 ### Unmount
 
 Use the `unmount-on-hide` prop to prevent the content from being unmounted when the accordion is collapsed. Defaults to `true`.
@@ -163,8 +162,6 @@ props:
 You can inspect the DOM to see each item's content being rendered.
 ::
 
-
-
 ### Disabled
 
 Use the `disabled` property to disable the Accordion.
@@ -193,7 +190,6 @@ props:
       content: 'Yes! You can use the transition prop to configure the animation.'
 ---
 ::
-
 
 ### Trailing Icon
 
@@ -317,7 +313,6 @@ name: 'accordion-markdown-example'
 ---
 ::
 
-
 ## API
 
 ### Props
@@ -343,6 +338,9 @@ Here is the anatomy of themeable parts of the Accordion component:
 
 Coming soon...
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/accordion" mode="pohon"}
 
 ## Changelog
 

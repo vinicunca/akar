@@ -1,5 +1,5 @@
 ---
-description: A collapsible element to toggle visibility of its content.
+description: An interactive component which expands/collapses a panel.
 category: element
 links:
   - label: Akar
@@ -149,10 +149,13 @@ name: 'collapsible-icon-example'
 ### Anatomy
 
 <!-- TODO: Create anatomy images for this component -->
-Here is the anatomy of themeable parts of the Accordion component:
+Here is the anatomy of themeable parts of the Collapsible component:
 
 Coming soon...
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/calendar" mode="pohon"}
 
 ## Changelog
 

@@ -52,7 +52,7 @@ import {
   ACalendarNext,
   ACalendarPrev,
   ACalendarRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -79,6 +79,10 @@ import {
   </ACalendarRoot>
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/calendar"}
 
 ## API Reference
 
@@ -144,7 +148,7 @@ Heading for displaying the current month and year
 ---
 data:
   - attribute: '[data-disabled]'
-    values: Present when disabled  
+    values: Present when disabled
 ---
 ::
 
@@ -271,6 +275,6 @@ data:
   - keys: ['Enter']
     description: <span>When the focus is on either <Code>CalendarNext</Code> or <Code>CalendarPrev</Code>, it navigates the calendar. Otherwise, it selects the date.</span>
   - keys: ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']
-    description: When the focus is on <Code>CalendarCellTrigger</Code>, it navigates the dates, changing the month/year/decade if necessary.  
+    description: When the focus is on <Code>CalendarCellTrigger</Code>, it navigates the dates, changing the month/year/decade if necessary.
 ---
 ::

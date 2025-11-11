@@ -1,6 +1,6 @@
 ---
 category: element
-description: A collection of links for navigating websites.
+description: A list of links that can be displayed horizontally or vertically.
 links:
   - label: Pohon
     to: /docs/pohon/components/navigation-menu
@@ -9,7 +9,7 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/navigation-menu/index.ts
 ---
 
-:docs-akar-preview{name="a-navigation-menu"}
+:docs-component-example{name="a-navigation-menu"}
 
 ## Features
 
@@ -76,6 +76,10 @@ import {
   </ANavigationMenuRoot>
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/navigation-menu"}
 
 ## API Reference
 
@@ -185,15 +189,11 @@ You can create a vertical menu by using the `orientation` prop.
 <script setup lang="ts">
 import {
   ANavigationMenuContent,
-  ANavigationMenuIndicator,
   ANavigationMenuItem,
-  ANavigationMenuLink,
   ANavigationMenuList,
   ANavigationMenuRoot,
-  ANavigationMenuSub,
   ANavigationMenuTrigger,
-  ANavigationMenuViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -227,7 +227,7 @@ import {
   ANavigationMenuRoot,
   ANavigationMenuTrigger,
   ANavigationMenuViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -263,7 +263,7 @@ import {
   ANavigationMenuRoot,
   ANavigationMenuTrigger,
   ANavigationMenuViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -291,10 +291,13 @@ import {
 .ANavigationMenuIndicator {
   background-color: grey;
   position: absolute;
-  transition: width, transform, 250ms ease;
+  transition:
+    width,
+    transform,
+    250ms ease;
 }
 
-.ANavigationMenuIndicator[data-orientation="horizontal"] {
+.ANavigationMenuIndicator[data-orientation='horizontal'] {
   left: 0;
   height: 3px;
   transform: translateX(var(--akar-navigation-menu-indicator-position));
@@ -317,8 +320,7 @@ import {
   ANavigationMenuRoot,
   ANavigationMenuSub,
   ANavigationMenuTrigger,
-  ANavigationMenuViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -357,7 +359,7 @@ This will ensure accessibility and consistent keyboard control is maintained:
 
 ```vue {12-14,19-21}
 <script setup lang="ts">
-import { ANavigationMenuItem, ANavigationMenuList, ANavigationMenuRoot } from 'akar'
+import { ANavigationMenuItem, ANavigationMenuList, ANavigationMenuRoot } from 'akar';
 
 // RouterLink should be injected by default if using `vue-router`
 </script>
@@ -401,7 +403,7 @@ import {
   ANavigationMenuRoot,
   ANavigationMenuTrigger,
   ANavigationMenuViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -426,8 +428,6 @@ import {
 </template>
 ```
 
-
-
 ```css {9-20,24,25}
 /* styles.css */
 .ANavigationMenuContent {
@@ -437,16 +437,16 @@ import {
   animation-duration: 250ms;
   animation-timing-function: ease;
 }
-.ANavigationMenuContent[data-motion="from-start"] {
+.ANavigationMenuContent[data-motion='from-start'] {
   animation-name: enterFromLeft;
 }
-.ANavigationMenuContent[data-motion="from-end"] {
+.ANavigationMenuContent[data-motion='from-end'] {
   animation-name: enterFromRight;
 }
-.ANavigationMenuContent[data-motion="to-start"] {
+.ANavigationMenuContent[data-motion='to-start'] {
   animation-name: exitToLeft;
 }
-.ANavigationMenuContent[data-motion="to-end"] {
+.ANavigationMenuContent[data-motion='to-end'] {
   animation-name: exitToRight;
 }
 
@@ -454,7 +454,10 @@ import {
   position: relative;
   width: var(--akar-navigation-menu-viewport-width);
   height: var(--akar-navigation-menu-viewport-height);
-  transition: width, height, 250ms ease;
+  transition:
+    width,
+    height,
+    250ms ease;
 }
 
 @keyframes enterFromRight {

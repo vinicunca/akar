@@ -237,7 +237,10 @@ const rootProps = useForwardPropsEmits(
   })),
   emits,
 );
-const accordionProps = useForwardPropsEmits(reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'), emits);
+const accordionProps = useForwardPropsEmits(
+  reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'),
+  emits,
+);
 const contentProps = toRef(() => props.content);
 const tooltipProps = toRef(() => defu(
   isBoolean(props.tooltip)

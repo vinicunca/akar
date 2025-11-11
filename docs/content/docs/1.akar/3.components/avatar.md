@@ -28,7 +28,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { AAvatarImage, AAvatarRoot, AAvatarFallback } from 'akar';
+import { AAvatarFallback, AAvatarImage, AAvatarRoot } from 'akar';
 </script>
 
 <template>
@@ -38,6 +38,10 @@ import { AAvatarImage, AAvatarRoot, AAvatarFallback } from 'akar';
   </AAvatarRoot>
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/avatar"}
 
 ## API Reference
 
@@ -67,7 +71,7 @@ You can compose the Avatar with a [Tooltip](/docs/akar/components/tooltip) to di
 
 ```vue {6-7,9,11-15}
 <script setup>
-import { AAvatarImage, AAvatarRoot, ATooltipArrow, ATooltipRoot, ATooltipTrigger } from 'akar';
+import { AAvatarRoot, ATooltipArrow, ATooltipRoot, ATooltipTrigger } from 'akar';
 </script>
 
 <template>

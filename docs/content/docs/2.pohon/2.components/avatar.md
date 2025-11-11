@@ -20,7 +20,6 @@ props:
 ---
 ::
 
-
 ::note
 You can pass any property from the HTML `<img>` element such as `alt`, `loading`, etc.
 ::
@@ -125,7 +124,6 @@ You can use a CSS mask to display an Avatar with a custom shape instead of a sim
 
 :docs-component-example{name="avatar-mask-example"}
 
-
 ## API
 
 ### Props
@@ -139,6 +137,10 @@ This component also supports all native `<img>` HTML attributes.
 ## Theme
 
 :docs-pohon-theme
+
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/avatar" mode="pohon"}
 
 ## Changelog
 

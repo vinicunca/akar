@@ -1,6 +1,6 @@
 ---
 title: Calendar
-description: A calendar component for selecting single dates, multiple dates or date ranges.
+description: Displays dates and days of the week, facilitating date-related interactions.
 category: element
 links:
   - label: Calendar
@@ -271,6 +271,10 @@ name: 'calendar-external-controls-example'
 ## Theme
 
 :docs-pohon-theme
+
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/calendar" mode="pohon"}
 
 ## Changelog
 

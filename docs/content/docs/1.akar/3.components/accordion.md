@@ -9,7 +9,7 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/accordion/index.ts
 ---
 
-:docs-akar-preview{name="a-accordion"}
+:docs-component-example{name="a-accordion"}
 
 ## Features
 
@@ -44,6 +44,10 @@ import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AA
   </AAccordionRoot>
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/accordion"}
 
 ## API Reference
 
@@ -273,7 +277,7 @@ Use the `--akar-accordion-content-width` and/or `--akar-accordion-content-height
 ```vue {11}
 // index.vue
 <script setup>
-import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger } from 'akar';
+import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot } from 'akar';
 import './styles.css';
 </script>
 

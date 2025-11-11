@@ -342,6 +342,10 @@ In this example we're adding the `#with-links` hash to avoid going to the top of
 
 :docs-pohon-theme
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/accordion" mode="pohon"}
+
 ## Changelog
 
 :docs-component-changelog

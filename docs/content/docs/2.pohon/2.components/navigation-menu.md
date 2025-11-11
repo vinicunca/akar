@@ -1270,10 +1270,13 @@ In this example, we add the `sm:w-(--akar-navigation-menu-viewport-width)` class
 ### Anatomy
 
 <!-- TODO: Create anatomy images for this component -->
-Here is the anatomy of themeable parts of the Accordion component:
+Here is the anatomy of themeable parts of the Navigation Menu component:
 
 Coming soon...
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/navigation-menu" mode="pohon"}
 
 ## Changelog
 
