@@ -1,6 +1,6 @@
 ---
 title: PinInput
-description: An input element to enter a pin.
+description: A sequence of one-character alphanumeric inputs.
 category: form
 links:
   - label: Akar
@@ -190,6 +190,10 @@ When accessing the component via a template ref, you can use the following:
 ## Theme
 
 :docs-pohon-theme
+
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/pin-input" mode="pohon"}
 
 ## Changelog
 

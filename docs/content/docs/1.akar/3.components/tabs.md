@@ -147,7 +147,7 @@ data:
 
 You can create vertical tabs by using the `orientation` prop.
 
-```vue line=8
+```vue{8}
 <script setup>
 import { ATabsContent, ATabsList, ATabsRoot, ATabsTrigger } from 'akar';
 </script>
