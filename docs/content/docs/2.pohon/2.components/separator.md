@@ -123,6 +123,10 @@ props:
 
 :docs-pohon-theme
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/separator" mode="pohon"}
+
 ## Changelog
 
 :docs-component-changelog

@@ -1,4 +1,5 @@
 ---
+description: Separates content horizontally or vertically.
 category: element
 links:
   - label: Pohon
@@ -25,13 +26,17 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { ASeparator } from 'akar'
+import { ASeparator } from 'akar';
 </script>
 
 <template>
   <ASeparator />
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/separator"}
 
 ## API Reference
 

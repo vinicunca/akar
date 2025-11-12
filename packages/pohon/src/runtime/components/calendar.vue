@@ -140,7 +140,7 @@ const props = withDefaults(
 const emits = defineEmits<PCalendarEmits<R, M>>();
 defineSlots<PCalendarSlots>();
 
-const { code: locale, dir, t } = useLocale();
+const { dir, t } = useLocale();
 const appConfig = useAppConfig() as Calendar['AppConfig'];
 
 const rootProps = useForwardPropsEmits(
@@ -213,8 +213,6 @@ const CalendarComponent = computed(() => props.range ? ARangeCalendar : ACalenda
     v-bind="rootProps"
     :model-value="(modelValue as DateValue | DateValue[])"
     :default-value="(defaultValue as DateValue)"
-    :locale="locale"
-    :dir="dir"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     data-pohon="calendar-root"
   >

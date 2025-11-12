@@ -1,4 +1,5 @@
 ---
+description: Presents a calendar view tailored for selecting date ranges.
 category: element
 links:
   - label: Pohon
@@ -7,7 +8,6 @@ links:
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/range-calendar/index.ts
 ---
-
 
 :docs-component-example{name="a-range-calendar"}
 
@@ -49,7 +49,7 @@ import {
   ARangeCalendarNext,
   ARangeCalendarPrev,
   ARangeCalendarRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -76,6 +76,10 @@ import {
   </ARangeCalendarRoot>
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/calendar#range"}
 
 ## API Reference
 
@@ -254,6 +258,6 @@ data:
   - keys: ['Enter']
     description: <span>When the focus is on either <Code>CalendarNext</Code> or <Code>CalendarPrev</Code>, it navigates the calendar. Otherwise, it selects the date.</span>
   - keys: ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']
-    description: When the focus is on <Code>CalendarCellTrigger</Code>, it navigates the dates, changing the month/year/decade if necessary.  
+    description: When the focus is on <Code>CalendarCellTrigger</Code>, it navigates the dates, changing the month/year/decade if necessary.
 ---
 ::

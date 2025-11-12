@@ -278,6 +278,10 @@ The `close` function is only available when `mode` is set to `click` because Aka
 
 :docs-pohon-theme
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/accordion" mode="pohon"}
+
 ## Changelog
 
 :docs-component-changelog

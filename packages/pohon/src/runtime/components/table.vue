@@ -635,6 +635,7 @@ defineExpose({
               ],
               pinned: !!header.column.getIsPinned(),
             })"
+            :style="resolveValue(header.column.columnDef.meta?.style?.th, header)"
             data-pohon="table-th"
           >
             <slot

@@ -587,6 +587,10 @@ props:
 
 :docs-pohon-theme
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/tree" mode="pohon"}
+
 ## Changelog
 
 :docs-component-changelog

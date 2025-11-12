@@ -57,11 +57,6 @@ export interface PInputNumberProps<T extends InputNumberValue = InputNumberValue
   autofocus?: boolean;
   autofocusDelay?: number;
   modelModifiers?: Pick<ModelModifiers<T>, 'optional'>;
-  /**
-   * The locale to use for formatting and parsing numbers.
-   * @defaultValue PApp.locale.code
-   */
-  locale?: string;
   class?: any;
   pohon?: InputNumber['slots'];
 }
@@ -117,7 +112,7 @@ const modelValue = useVModel<PInputNumberProps<T>, 'modelValue', 'update:modelVa
   { defaultValue: props.defaultValue },
 );
 
-const { t, code: codeLocale } = useLocale();
+const { t } = useLocale();
 const appConfig = useAppConfig() as InputNumber['AppConfig'];
 
 const rootProps = useForwardPropsEmits(
@@ -152,7 +147,6 @@ const {
 } = useFormField<PInputNumberProps<T>>(props);
 const { orientation, size: fieldGroupSize } = useFieldGroup<PInputNumberProps<T>>(props);
 
-const locale = computed(() => props.locale || codeLocale.value);
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);
 
 const pohon = computed(() =>
@@ -229,7 +223,6 @@ defineExpose({
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     :name="name"
     :disabled="disabled"
-    :locale="locale"
     data-pohon="input-number-root"
     @update:model-value="onUpdate"
   >

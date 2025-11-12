@@ -11,15 +11,14 @@ withDefaults(
 </script>
 
 <template>
+  <!-- eslint-disable vue/singleline-html-element-content-newline -->
   <template v-if="mode === 'akar'">
     <ProseP>
       One benefit of using Akar is its flexibility and low-level control over the components. However, this also means that you may need to manually construct more complex UI elements by combining multiple Akar components together.
     </ProseP>
 
     <ProseP>
-      If you feel there's a lot of elements that needs to be constructed manually using Akar, consider using <ProseA :to="to">
-        Pohon UI
-      </ProseA> instead. It provides a higher-level abstraction over Akar components with pre-defined styles and behaviors that can help you build UIs faster.
+      If you feel there's a lot of elements that needs to be constructed manually using Akar, consider using <ProseA :to="to">Pohon UI</ProseA> instead. It provides a higher-level abstraction over Akar components with pre-defined styles and behaviors that can help you build UIs faster.
     </ProseP>
   </template>
 
@@ -31,9 +30,7 @@ withDefaults(
     </ProseP>
 
     <ProseP>
-      If this is a deal breaker for you, you can always stick to using <ProseA :to="to">
-        Akar
-      </ProseA> and build your own custom components on top of it.
+      If this is a deal breaker for you, you can always stick to using <ProseA :to="to">Akar</ProseA> and build your own custom components on top of it.
     </ProseP>
   </template>
 </template>

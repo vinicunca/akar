@@ -1,4 +1,5 @@
 ---
+description: A tree view component to display and interact with hierarchical data structures.
 category: element
 links:
   - label: Pohon
@@ -44,6 +45,10 @@ import { ATreeItem, ATreeRoot, ATreeVirtualizer } from 'akar';
   </ATreeRoot>
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/tree"}
 
 ## API Reference
 

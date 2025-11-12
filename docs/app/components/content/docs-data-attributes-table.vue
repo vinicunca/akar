@@ -38,7 +38,7 @@ const props = defineProps<{
         <ProseTd class="akar:align-middle">
           <DocsHighlightInlineType
             v-if="Array.isArray(prop.values)"
-            :type="prop.values.join(' | ')"
+            :type="prop.values.map(val => `'${val}'`).join(' | ')"
           />
 
           <span v-else>

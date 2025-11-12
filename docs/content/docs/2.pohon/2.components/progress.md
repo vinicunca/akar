@@ -160,6 +160,10 @@ props:
 
 :docs-pohon-theme
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/progress" mode="pohon"}
+
 ## Changelog
 
 :docs-component-changelog

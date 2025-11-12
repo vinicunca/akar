@@ -1,4 +1,5 @@
 ---
+description: An indicator showing the progress of a task.
 category: element
 links:
   - label: Pohon
@@ -25,7 +26,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { AProgressIndicator, AProgressRoot } from 'akar'
+import { AProgressIndicator, AProgressRoot } from 'akar';
 </script>
 
 <template>
