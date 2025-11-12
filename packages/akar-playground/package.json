@@ -1,0 +1,20 @@
+{
+  "name": "playground-vue",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "akar": "link:../core",
+    "vue": "catalog:core"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:core",
+    "vite": "catalog:core",
+    "vue-tsc": "catalog:core"
+  }
+}

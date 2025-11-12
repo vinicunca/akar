@@ -28,7 +28,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { ACheckboxGroupRoot, ACheckboxIndicator, ACheckboxRoot } from 'akar'
+import { ACheckboxGroupRoot, ACheckboxIndicator, ACheckboxRoot } from 'akar';
 </script>
 
 <template>
@@ -44,6 +44,10 @@ import { ACheckboxGroupRoot, ACheckboxIndicator, ACheckboxRoot } from 'akar'
   </ACheckboxGroupRoot>
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/checkbox"}
 
 ## API Reference
 
@@ -101,10 +105,10 @@ You can set the checkbox to `indeterminate` by taking control of its state.
 
 ```vue {5,9-14,16-18}
 <script setup>
-import { Icon } from '@iconify/vue'
-import { ACheckboxIndicator, ACheckboxRoot } from 'akar'
+import { Icon } from '@iconify/vue';
+import { ACheckboxIndicator, ACheckboxRoot } from 'akar';
 
-const checked = ref('indeterminate')
+const checked = ref('indeterminate');
 </script>
 
 <template>

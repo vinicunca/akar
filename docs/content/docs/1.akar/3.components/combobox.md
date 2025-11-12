@@ -47,7 +47,7 @@ import {
   AComboboxSeparator,
   AComboboxTrigger,
   AComboboxViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -80,6 +80,10 @@ import {
   </AComboboxRoot>
 </template>
 ```
+
+## Pohon
+
+:docs-akar-to-pohon{to="/docs/pohon/components/combobox"}
 
 ## API Reference
 
@@ -262,8 +266,8 @@ Make sure to set the `displayValue` prop to set the input value on item selectio
 
 ```vue {12,17,23}
 <script setup lang="ts">
-import { AComboboxContent, AComboboxInput, AComboboxItem, AComboboxPortal, AComboboxRoot } from 'akar'
-import { ref } from 'vue'
+import { AComboboxContent, AComboboxInput, AComboboxItem, AComboboxPortal, AComboboxRoot } from 'akar';
+import { ref } from 'vue';
 
 const people = [
   { id: 1, name: 'Durward Reynolds' },
@@ -271,8 +275,8 @@ const people = [
   { id: 3, name: 'Therese Wunsch' },
   { id: 4, name: 'Benedict Kessler' },
   { id: 5, name: 'Katelyn Rohan' },
-]
-const selectedPeople = ref(people[0])
+];
+const selectedPeople = ref(people[0]);
 </script>
 
 <template>
@@ -300,8 +304,8 @@ The `Combobox` component allows you to select multiple values. You can enable th
 
 ```vue {12,17-18}
 <script setup lang="ts">
-import { AComboboxRoot } from 'akar'
-import { ref } from 'vue'
+import { AComboboxRoot } from 'akar';
+import { ref } from 'vue';
 
 const people = [
   { id: 1, name: 'Durward Reynolds' },
@@ -309,8 +313,8 @@ const people = [
   { id: 3, name: 'Therese Wunsch' },
   { id: 4, name: 'Benedict Kessler' },
   { id: 5, name: 'Katelyn Rohan' },
-]
-const selectedPeople = ref([people[0], people[1]])
+];
+const selectedPeople = ref([people[0], people[1]]);
 </script>
 
 <template>
@@ -331,8 +335,8 @@ However, you may also provide your own custom filtering logic together with sett
 
 ```vue {15,16,22,28}
 <script setup lang="ts">
-import { AComboboxContent, AComboboxInput, AComboboxItem, AComboboxPortal, AComboboxRoot, useFilter } from 'akar'
-import { ref } from 'vue'
+import { AComboboxContent, AComboboxInput, AComboboxItem, AComboboxPortal, AComboboxRoot, useFilter } from 'akar';
+import { ref } from 'vue';
 
 const people = [
   { id: 1, name: 'Durward Reynolds' },
@@ -340,12 +344,12 @@ const people = [
   { id: 3, name: 'Therese Wunsch' },
   { id: 4, name: 'Benedict Kessler' },
   { id: 5, name: 'Katelyn Rohan' },
-]
-const selectedPeople = ref(people[0])
-const searchTerm = ref('')
+];
+const selectedPeople = ref(people[0]);
+const searchTerm = ref('');
 
-const { startsWith } = useFilter({ sensitivity: 'base' })
-const filteredPeople = computed(() => people.filter(p => startsWith(p.name, searchTerm.value)))
+const { startsWith } = useFilter({ sensitivity: 'base' });
+const filteredPeople = computed(() => people.filter((p) => startsWith(p.name, searchTerm.value)));
 </script>
 
 <template>
@@ -375,8 +379,7 @@ By default the `Combobox` will use the input contents as the label for screenrea
 
 ```vue {8,10}
 <script setup lang="ts">
-import { AComboboxInput, AComboboxRoot, Label } from 'akar'
-import { ref } from 'vue'
+import { AComboboxInput, AComboboxRoot, Label } from 'akar';
 </script>
 
 <template>
@@ -403,8 +406,7 @@ import {
   AComboboxItem,
   AComboboxPortal,
   AComboboxRoot,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
 </script>
 
 <template>
@@ -427,7 +429,7 @@ import { ref } from 'vue'
 ```css {2}
 /* styles.css */
 .AComboboxItem[data-disabled] {
-  color: "gainsboro";
+  color: 'gainsboro';
 }
 ```
 
@@ -444,8 +446,7 @@ import {
   AComboboxPortal,
   AComboboxRoot,
   AComboboxSeparator
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
 </script>
 
 <template>
@@ -480,8 +481,7 @@ import {
   AComboboxLabel,
   AComboboxPortal,
   AComboboxRoot
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
 </script>
 
 <template>
@@ -509,15 +509,12 @@ You can use custom content in your items.
 <script setup lang="ts">
 import {
   AComboboxContent,
-  AComboboxGroup,
   AComboboxInput,
   AComboboxItem,
   AComboboxItemIndicator,
-  AComboboxLabel,
   AComboboxPortal,
   AComboboxRoot
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
 </script>
 
 <template>
@@ -544,8 +541,7 @@ You can prevent this behavior by preventing default `@select.prevent`.
 
 ```vue {11}
 <script setup lang="ts">
-import { AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxPortal, AComboboxRoot } from 'akar'
-import { ref } from 'vue'
+import { AComboboxContent, AComboboxInput, AComboboxItem, AComboboxPortal, AComboboxRoot } from 'akar';
 </script>
 
 <template>
@@ -563,7 +559,7 @@ import { ref } from 'vue'
 </template>
 ```
 
-### Virtualized Acombobox with working filtering
+### Virtualized combobox with working filtering
 
 ACombobox items **must** be filtered manually before passing them over to the virtualizer.
 
@@ -571,15 +567,15 @@ See the [virtualization guide](../guides/virtualization.md) for more general inf
 
 ```vue {9-10,17,19-28}
 <script setup lang="ts">
-import { AComboboxContent, AComboboxInput, AComboboxItem, AComboboxPortal, AComboboxRoot, AComboboxViewport, AComboboxVirtualizer, useFilter } from 'akar'
-import { computed, ref } from 'vue'
+import { AComboboxContent, AComboboxInput, AComboboxItem, AComboboxPortal, AComboboxRoot, AComboboxViewport, AComboboxVirtualizer, useFilter } from 'akar';
+import { computed, ref } from 'vue';
 
-const people = Array.from({ length: 100000 }).map((_, id) => ({ id, name: `Person #${id}` }))
-const selectedPeople = ref(people[0])
-const searchTerm = ref('')
+const people = Array.from({ length: 100000 }).map((_, id) => ({ id, name: `Person #${id}` }));
+const selectedPeople = ref(people[0]);
+const searchTerm = ref('');
 
-const { contains } = useFilter({ sensitivity: 'base' })
-const filteredPeople = computed(() => people.filter(p => contains(p.name, searchTerm.value)))
+const { contains } = useFilter({ sensitivity: 'base' });
+const filteredPeople = computed(() => people.filter((p) => contains(p.name, searchTerm.value)));
 </script>
 
 <template>
@@ -621,14 +617,13 @@ data:
     description: '<span>When focus is on <Code>AComboboxItem</Code>, selects the focused item. </span>',
   - keys: ['ArrowDown']
     description: '<span> When focus is on <Code>AComboboxInput</Code>, opens the Acombobox content. <br /> When focus is on an item, moves focus to the next item. </span>'
-    
+
   - keys: ['ArrowUp'],
     description: '<span> When focus is on <Code>AComboboxInput</Code>, opens the Acombobox content. <br /> When focus is on an item, moves focus to the previous item. </span>',
   - keys: ['Esc'],
     description: '<span> Closes Acombobox and restores the selected item in the <Code>AComboboxInput</Code> field. </span>'
 ---
 ::
-
 
 ## Custom APIs
 
@@ -642,7 +637,7 @@ ACombobox can be use to build your own Command Menu.
 
 ```vue
 <script setup lang="ts">
-import { Command, CommandItem } from './your-command'
+import { Command, CommandItem } from './your-command';
 </script>
 
 <template>
@@ -664,21 +659,20 @@ import { Command, CommandItem } from './your-command'
 
 ```ts
 // your-command.ts
-export { default as Command } from 'Command.vue'
-export { default as CommandItem } from 'CommandItem.vue'
+export { default as Command } from 'Command.vue';
+export { default as CommandItem } from 'CommandItem.vue';
 ```
 
 ```vue
 <!-- Command.vue -->
 <script setup lang="ts">
-import type { AComboboxRootEmits, AComboboxRootProps } from 'akar'
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon, } from '@radix-icons/vue'
-import { AComboboxContent, AComboboxInput, AComboboxPortal, AComboboxRoot, useForwardPropsEmits } from 'akar'
+import type { AComboboxRootEmits, AComboboxRootProps } from 'akar';
+import { AComboboxContent, AComboboxInput, AComboboxPortal, AComboboxRoot, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<AComboboxRootProps>()
-const emits = defineEmits<AComboboxRootEmits>()
+const props = defineProps<AComboboxRootProps>();
+const emits = defineEmits<AComboboxRootEmits>();
 
-const forward = useForwardPropsEmits(props, emits)
+const forward = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
@@ -708,11 +702,10 @@ const forward = useForwardPropsEmits(props, emits)
 ```vue
 <!-- AComboboxItem.vue -->
 <script setup lang="ts">
-import type { AComboboxItemProps } from 'akar'
-import { CheckIcon } from '@radix-icons/vue'
-import { AComboboxItem } from 'akar'
+import type { AComboboxItemProps } from 'akar';
+import { AComboboxItem } from 'akar';
 
-const props = defineProps<AComboboxItemProps>()
+const props = defineProps<AComboboxItemProps>();
 </script>
 
 <template>

@@ -1,12 +1,13 @@
 <script lang="ts">
-import type { RangeCalendarCellTriggerSlot } from '../range-calendar/range-calendar-cell-trigger.vue';
 import type { ARangeCalendarCellTriggerProps } from '..';
-import { ARangeCalendarCellTrigger } from '..';
+import type { RangeCalendarCellTriggerSlot } from '../range-calendar/range-calendar-cell-trigger.vue';
 
 export interface ADateRangePickerCellTriggerProps extends ARangeCalendarCellTriggerProps {}
 </script>
 
 <script setup lang="ts">
+import { ARangeCalendarCellTrigger } from '..';
+
 const props = defineProps<ADateRangePickerCellTriggerProps>();
 
 defineSlots<RangeCalendarCellTriggerSlot>();
@@ -17,6 +18,6 @@ defineSlots<RangeCalendarCellTriggerSlot>();
     v-slot="slotProps"
     v-bind="props"
   >
-    <slot v-bind="slotProps" />>
+    <slot v-bind="slotProps" />
   </ARangeCalendarCellTrigger>
 </template>

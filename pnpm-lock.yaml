@@ -444,6 +444,25 @@ importers:
         specifier: catalog:docs
         version: 3.1.0(typescript@5.8.3)
 
+  packages/akar-playground:
+    dependencies:
+      akar:
+        specifier: workspace:*
+        version: link:../core
+      vue:
+        specifier: catalog:core
+        version: 3.5.21(typescript@5.8.3)
+    devDependencies:
+      '@vitejs/plugin-vue':
+        specifier: catalog:core
+        version: 6.0.1(vite@7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))(vue@3.5.21(typescript@5.8.3))
+      vite:
+        specifier: ^7.1.12
+        version: 7.1.12(@types/node@24.5.2)(jiti@2.6.1)(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1)
+      vue-tsc:
+        specifier: catalog:core
+        version: 3.1.2(typescript@5.8.3)
+
   packages/core:
     dependencies:
       '@floating-ui/dom':
@@ -10509,7 +10528,7 @@ snapshots:
       ufo: 1.6.1
       unplugin: 2.3.10
       vitest-environment-nuxt: 1.0.1(@testing-library/vue@8.1.0(@vue/compiler-sfc@3.5.22)(vue@3.5.22(typescript@5.8.3)))(@vue/test-utils@2.4.6)(happy-dom@18.0.1)(jsdom@27.0.0(postcss@8.5.6))(magicast@0.3.5)(playwright-core@1.55.1)(typescript@5.8.3)(vitest@3.2.4(@types/debug@4.1.12)(@types/node@24.5.2)(happy-dom@18.0.1)(jiti@2.6.1)(jsdom@27.0.0(postcss@8.5.6))(terser@5.44.0)(tsx@4.20.5)(yaml@2.8.1))
-      vue: 3.5.21(typescript@5.8.3)
+      vue: 3.5.22(typescript@5.8.3)
     optionalDependencies:
       '@testing-library/vue': 8.1.0(@vue/compiler-sfc@3.5.22)(vue@3.5.22(typescript@5.8.3))
       '@vue/test-utils': 2.4.6
@@ -11732,7 +11751,7 @@ snapshots:
       '@unocss/config': 66.5.4
       '@unocss/core': 66.5.4
       '@unocss/rule-utils': 66.5.4
-      magic-string: 0.30.19
+      magic-string: 0.30.21
       synckit: 0.11.11
     transitivePeerDependencies:
       - eslint
@@ -11882,7 +11901,7 @@ snapshots:
   '@unocss/rule-utils@66.5.1':
     dependencies:
       '@unocss/core': 66.5.4
-      magic-string: 0.30.19
+      magic-string: 0.30.21
 
   '@unocss/rule-utils@66.5.4':
     dependencies:
@@ -12218,7 +12237,7 @@ snapshots:
       '@vue/compiler-ssr': 3.5.21
       '@vue/shared': 3.5.21
       estree-walker: 2.0.2
-      magic-string: 0.30.18
+      magic-string: 0.30.21
       postcss: 8.5.6
       source-map-js: 1.2.1
 
@@ -12275,8 +12294,8 @@ snapshots:
   '@vue/language-core@3.1.0(typescript@5.8.3)':
     dependencies:
       '@volar/language-core': 2.4.23
-      '@vue/compiler-dom': 3.5.21
-      '@vue/shared': 3.5.21
+      '@vue/compiler-dom': 3.5.22
+      '@vue/shared': 3.5.22
       alien-signals: 3.0.0
       muggle-string: 0.4.1
       path-browserify: 1.0.1
@@ -17765,7 +17784,7 @@ snapshots:
     dependencies:
       acorn: 8.15.0
       estree-walker: 3.0.3
-      magic-string: 0.30.18
+      magic-string: 0.30.21
       unplugin: 2.3.10
 
   undici-types@6.21.0: {}
