@@ -45,7 +45,7 @@ const columns = [
       to: 'https://image.nuxt.com/',
       target: '_blank',
     }, {
-      label: 'Nuxt UI',
+      label: 'Pohon UI',
       to: 'https://ui.nuxt.com/',
       target: '_blank',
     }],

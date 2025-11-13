@@ -1,12 +1,12 @@
 title: Community
-description: Explore amazing projects built around Nuxt UI by the community.
+description: Explore amazing projects built around Pohon UI by the community.
 navigation: false
 hero:
   title: Community
-  description: Explore amazing projects built around Nuxt UI by the community.
+  description: Explore amazing projects built around Pohon UI by the community.
 items:
   - label: Compodium
-    description: 'Preview, customize, and generate Nuxt UI component code directly within Nuxt DevTools for faster development.'
+    description: 'Preview, customize, and generate Pohon UI component code directly within Nuxt DevTools for faster development.'
     avatar:
       src: 'https://compodium.dev/favicon.svg'
       pohon:
@@ -20,7 +20,7 @@ items:
       avatar:
         src: 'https://github.com/wahyu-ivan.png'
   - label: Raycast Extension
-    description: 'Quickly search, browse, and copy Nuxt UI component code snippets without leaving your editor.'
+    description: 'Quickly search, browse, and copy Pohon UI component code snippets without leaving your editor.'
     avatar:
       src: 'https://github.com/raycast.png'
     to: 'https://www.raycast.com/HugoRCD/nuxt'
@@ -32,7 +32,7 @@ items:
       avatar:
         src: 'https://github.com/HugoRCD.png'
   - label: Figma to Code
-    description: Transform your Figma designs into production-ready Nuxt UI components with one click.
+    description: Transform your Figma designs into production-ready Pohon UI components with one click.
     avatar:
       icon: i-logos:figma
     to: 'https://github.com/Justineo/tempad-dev-plugin-nuxt-ui'
@@ -44,7 +44,7 @@ items:
       avatar:
         src: 'https://github.com/Justineo.png'
   - label: Nuxt Auto Form
-    description: Auto-generate Nuxt UI forms from your Zod 4 schemas with zero boilerplate.
+    description: Auto-generate Pohon UI forms from your Zod 4 schemas with zero boilerplate.
     avatar:
       src: 'https://nuxt-auto-form.norbiros.dev/logo.png'
       pohon:
@@ -58,7 +58,7 @@ items:
       avatar:
         src: 'https://github.com/Norbiros.png'
   - label: Nuxt Charts
-    description: 'Build interactive, responsive charts and data visualizations seamlessly integrated with Nuxt UI.'
+    description: 'Build interactive, responsive charts and data visualizations seamlessly integrated with Pohon UI.'
     avatar:
       src: 'https://nuxtcharts.com/favicons/favicon-96x96.png'
       pohon:
@@ -72,7 +72,7 @@ items:
       avatar:
         src: 'https://github.com/dennisadriaans.png'
   - label: Nuxt QRCode
-    description: 'Generate and read QR codes with Nuxt, a perfect addition to your Nuxt UI projects.'
+    description: 'Generate and read QR codes with Nuxt, a perfect addition to your Pohon UI projects.'
     avatar:
       src: 'https://qrcode.s94.dev/favicon.svg'
       pohon:

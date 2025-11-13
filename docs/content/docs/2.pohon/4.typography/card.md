@@ -22,7 +22,7 @@ hide:
 ignore:
   - target
 props:
-  class: 'my-0 w-96'
+  class: 'akar:my-0 w-96'
   title: Startup
   icon: i-lucide:users
   color: primary

@@ -10,8 +10,6 @@ links:
 
 ## Usage
 
-The ColorModeImage component uses the `<NuxtImg>` component when [`@nuxt/image`](https://github.com/nuxt/image) is installed, falling back to `img` otherwise.
-
 ::docs-pohon-preview{prefix="color-mode"}
 ---
 prettier: true

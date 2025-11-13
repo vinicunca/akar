@@ -13,7 +13,7 @@ links:
 
 Use the `kbd` component to display a [Kbd](/docs/pohon/components/kbd) in your content.
 
-::code-preview{class="[&>div]:*:my-0"}
+::code-preview{class="[&>div>*]:my-0"}
 :kbd{value="meta"} :kbd{value="K"}
 
 #code

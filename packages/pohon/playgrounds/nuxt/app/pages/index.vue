@@ -10,7 +10,7 @@ import { PDashboardNavbar } from '#components';
       Playground
     </h1>
     <p class="color-text-muted mx-auto max-w-sm">
-      Explore and test all Nuxt UI components in an interactive environment.
+      Explore and test all Pohon UI components in an interactive environment.
     </p>
   </div>
 </template>

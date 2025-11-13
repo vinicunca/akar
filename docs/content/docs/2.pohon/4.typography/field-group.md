@@ -15,7 +15,7 @@ Group fields together in a list.
 
 ::code-preview
 
-::field-group{class="my-0"}
+::field-group{class="akar:my-0"}
 
   ::field{name="analytics" type="boolean"}
   Default to `false` - Enables analytics for your project (coming soon).

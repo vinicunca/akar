@@ -18,24 +18,27 @@ Use the `level` prop to define which heading will be used for the steps.
 :::code-preview{class="[&>div]:*:w-full"}
 ::steps{level="4"}
 
-#### Add the Nuxt UI module in your `nuxt.config.ts`
+#### Add the Pohon UI module in your `nuxt.config.ts`
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
   modules: ['pohon-ui']
-})
+});
 ```
 
-#### Import Tailwind CSS in your CSS
+#### Create a config for UnoCSS and add the module
 
-```css [assets/css/main.css]
-@import "tailwindcss";
+```ts [uno.config.ts]
+import { defineConfig } from 'unocss';
+
+export default defineConfig({
+});
 ```
 
 #### Start your development server
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ::
@@ -45,7 +48,7 @@ npm run dev
 ````mdc
 ::steps{level="4"}
 
-#### Add the Nuxt UI module in your `nuxt.config.ts`
+#### Add the Pohon UI module in your `nuxt.config.ts`
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
@@ -53,10 +56,13 @@ export default defineNuxtConfig({
 })
 ```
 
-#### Import Tailwind CSS in your CSS
+#### Create a config for UnoCSS and add the module
 
-```css [assets/css/main.css]
-@import "tailwindcss";
+```ts [uno.config.ts]
+import { defineConfig } from 'unocss';
+
+export default defineConfig({
+});
 ```
 
 #### Start your development server

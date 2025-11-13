@@ -15,7 +15,7 @@ Wrap your `card` components with the `card-group` component to group them togeth
 
 ::code-preview
 
-:::card-group{class="w-full my-0"}
+:::card-group{class="w-full akar:my-0"}
 
 ::card
 ---

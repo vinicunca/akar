@@ -6,10 +6,10 @@ export function useComponentName(props: {
   [key: string]: any;
 }) {
   const route = useRoute();
-  const slug = route.params.slug?.at(-1) as string;
+  const slug = props.slug ?? route.params.slug?.at(-1) as string;
   const parentSlug = route.params.slug?.[0] as string;
-  const pascalName = `P${toPascalCase(slug)}`;
-  const componentName = props.prose ? `Prose${pascalName}` : pascalName;
+  const pascalName = toPascalCase(slug);
+  const componentName = props.prose ? `Prose${pascalName}` : `P${pascalName}`;
 
   return { componentName, slug, parentSlug };
 }

@@ -16,7 +16,7 @@ export const proseTheme = {
     base: 'color-text-muted pb-4 *:my-1.5 *:first:mt-0 *:last:mb-0',
   },
   badge: {
-    base: 'rounded-full',
+    base: 'akar:rounded-full',
   },
   blockquote: {
     base: 'ps-4 border-s-4 border-border-accented italic',

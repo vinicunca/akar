@@ -13,7 +13,7 @@ links:
 
 Wrap your code blocks with a `code-tree` component in any particular order to display a tree view of your files.
 
-::code-preview{class="[&>div]:*:my-0 [&>div]:*:w-full"}
+::code-preview{class="[&>div>*]:my-0 [&>div>*]:w-full"}
 
 ::code-tree{defaultValue="app/app.config.ts"}
 
@@ -22,13 +22,12 @@ export default defineNuxtConfig({
   modules: ['pohon-ui'],
 
   css: ['~/assets/css/main.css']
-})
-
+});
 ```
 
 ```css [app/assets/css/main.css]
-@import "tailwindcss";
-@import "@nuxt/ui";
+@import 'tailwindcss';
+@import '@nuxt/ui';
 ```
 
 ```ts [app/app.config.ts]
@@ -39,7 +38,7 @@ export default defineAppConfig({
       colors: 'slate'
     }
   }
-})
+});
 ```
 
 ```vue [app/app.vue]
@@ -97,9 +96,6 @@ npm install
 # pnpm
 pnpm install
 
-# yarn
-yarn install
-
 # bun
 bun install
 ```
@@ -114,9 +110,6 @@ npm run dev
 
 # pnpm
 pnpm run dev
-
-# yarn
-yarn dev
 
 # bun
 bun run dev
@@ -133,9 +126,6 @@ npm run build
 # pnpm
 pnpm run build
 
-# yarn
-yarn build
-
 # bun
 bun run build
 ```
@@ -148,9 +138,6 @@ npm run preview
 
 # pnpm
 pnpm run preview
-
-# yarn
-yarn preview
 
 # bun
 bun run preview
@@ -248,9 +235,6 @@ npm install
 # pnpm
 pnpm install
 
-# yarn
-yarn install
-
 # bun
 bun install
 ```
@@ -265,9 +249,6 @@ npm run dev
 
 # pnpm
 pnpm run dev
-
-# yarn
-yarn dev
 
 # bun
 bun run dev
@@ -284,9 +265,6 @@ npm run build
 # pnpm
 pnpm run build
 
-# yarn
-yarn build
-
 # bun
 bun run build
 ```
@@ -299,9 +277,6 @@ npm run preview
 
 # pnpm
 pnpm run preview
-
-# yarn
-yarn preview
 
 # bun
 bun run preview

@@ -21,15 +21,15 @@ prettier: true
 props:
   icon: i-lucide:square-play
   color: neutral
-  to: '/docs/getting-started/installation/nuxt'
-  class: 'w-full my-0'
+  to: '/docs/pohon/getting-started/installation/nuxt'
+  class: 'w-full akar:my-0'
 hide:
   - class
 slots:
   default: This is a `callout` with full **markdown** support.
 ---
 
-Learn how to install `@nuxt/ui` in your project.
+Learn how to install `pohon-ui` in your project.
 ::
 
 ## Shortcuts
@@ -40,19 +40,19 @@ You can also use the `note`, `tip`, `warning` and `caution` shortcuts with pre-d
 
 :::div{class="flex flex-col gap-4 w-full"}
 
-::note{class="w-full my-0"}
+::note{class="w-full akar:my-0"}
 Here's some additional information for you.
 ::
 
-::tip{class="w-full my-0"}
+::tip{class="w-full akar:my-0"}
 Here's a helpful suggestion.
 ::
 
-::warning{class="w-full my-0"}
+::warning{class="w-full akar:my-0"}
 Be careful with this action as it might have unexpected results.
 ::
 
-::caution{class="w-full my-0"}
+::caution{class="w-full akar:my-0"}
 This action cannot be undone.
 ::
 

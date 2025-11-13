@@ -196,7 +196,7 @@ name: 'toast-orientation-example'
 ## Examples
 
 ::note{to="/components/app"}
-Nuxt UI provides an **App** component that wraps your app to provide global configurations.
+Pohon UI provides an **App** component that wraps your app to provide global configurations.
 ::
 
 ### Change global position

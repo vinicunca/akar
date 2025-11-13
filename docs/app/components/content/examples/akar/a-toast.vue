@@ -37,7 +37,7 @@ function handleClick() {
 
     <AToastRoot
       v-model:open="open"
-      class="p-[15px] border rounded-lg bg-background gap-x-[15px] grid grid-cols-[auto_max-content] shadow-sm [grid-template-areas:_'title_action'_'description_action'] items-center z-100 data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--reka-toast-swipe-move-x)] data-[state=open]:(animate-in animate-duration-280 slide-in-from-bottom)"
+      class="p-[15px] border rounded-lg bg-background gap-x-[15px] grid grid-cols-[auto_max-content] shadow-sm [grid-template-areas:_'title_action'_'description_action'] items-center z-100 data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--akar-toast-swipe-move-x)] data-[state=open]:(animate-in animate-duration-280 slide-in-from-bottom)"
     >
       <AToastTitle class="text-slate12 text-sm font-medium mb-[5px] [grid-area:_title]">
         Scheduled: Catch up

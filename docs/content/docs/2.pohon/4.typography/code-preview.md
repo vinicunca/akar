@@ -13,7 +13,7 @@ links:
 
 Wrap any content with the `code-preview` component to display a live preview alongside its source code using the `code` slot.
 
-::code-preview{class="[&>div]:*:my-0 [&>div]:*:w-full" label="Preview"}
+::code-preview{class="[&>div>*]:my-0 [&>div>*]:w-full" label="Preview"}
 
 ::code-preview{class="[&>div]:*:my-0"}
 `inline code`

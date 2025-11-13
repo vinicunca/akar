@@ -82,7 +82,7 @@ const links = [{
         size="sm"
       />
       <PButton
-        aria-label="Nuxt UI on GitHub"
+        aria-label="Pohon UI on GitHub"
         icon="i-simple-icons:github"
         to="https://github.com/nuxt/ui"
         target="_blank"

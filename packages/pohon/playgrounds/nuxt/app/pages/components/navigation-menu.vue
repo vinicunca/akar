@@ -37,7 +37,7 @@ const items = [
         icon: 'i-lucide:house',
       }, {
         label: 'Installation',
-        description: 'Learn how to install and configure Nuxt UI in your application.',
+        description: 'Learn how to install and configure Pohon UI in your application.',
         icon: 'i-lucide:cloud-download',
       }, {
         label: 'Theming',
