@@ -17,7 +17,7 @@ const items = [
       },
       {
         label: 'Theme',
-        description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.',
+        description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.',
       },
     ],
   },

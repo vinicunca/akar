@@ -43,7 +43,7 @@ props:
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
-          description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+          description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
       to: /docs/composables
@@ -154,7 +154,7 @@ props:
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
-          description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+          description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
       to: /docs/composables
@@ -267,7 +267,7 @@ props:
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
-            description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+            description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
       - label: Composables
         icon: i-lucide:database
         children:
@@ -380,7 +380,7 @@ props:
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
-            description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+            description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
       - label: Composables
         icon: i-lucide:database
         children:
@@ -475,7 +475,7 @@ props:
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
-            description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+            description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
       - label: Composables
         icon: i-lucide:database
         children:
@@ -656,7 +656,7 @@ props:
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
-          description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+          description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
       to: /docs/composables
@@ -754,7 +754,7 @@ props:
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
-          description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+          description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
       to: /docs/composables
@@ -921,7 +921,7 @@ props:
           description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
-          description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+          description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
       to: /docs/composables
@@ -1022,7 +1022,7 @@ props:
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
-            description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+            description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
       - label: Composables
         icon: i-lucide:database
         children:
@@ -1127,7 +1127,7 @@ props:
             description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
-            description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
+            description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
       - label: Composables
         icon: i-lucide:database
         popover:

@@ -26,8 +26,9 @@ export default defineNuxtConfig({
 ```
 
 ```css [app/assets/css/main.css]
-@import 'tailwindcss';
-@import '@nuxt/ui';
+body {
+  @apply min-h-screen;
+}
 ```
 
 ```ts [app/app.config.ts]
@@ -165,8 +166,9 @@ export default defineNuxtConfig({
 ```
 
 ```css [app/assets/css/main.css]
-@import "tailwindcss";
-@import "@nuxt/ui";
+body {
+  @apply min-h-screen;
+}
 ```
 
 ```ts [app/app.config.ts]

@@ -263,7 +263,7 @@ You can also pass the `value` of one of the items if provided.
 
 ### With alternating layout
 
-Use the `ui` prop to create a Timeline with alternating layout.
+Use the `pohon` prop to create a Timeline with alternating layout.
 
 :docs-component-example{name="timeline-alternating-layout-example" prettier}
 

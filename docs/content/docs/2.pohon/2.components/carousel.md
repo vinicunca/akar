@@ -42,7 +42,7 @@ You can also pass an array of objects with the following properties:
 - `class?: any`
 - `pohon?: { item?: ClassNameValue }`
 
-You can control how many items are visible by using the [`basis`](https://tailwindcss.com/docs/flex-basis) / [`width`](https://tailwindcss.com/docs/width) utility classes on the `item`:
+You can control how many items are visible by using the flex-basis or width utility classes on the `item`:
 
 ::docs-component-example
 ---
@@ -277,7 +277,7 @@ You can access the typed component instance using [`useTemplateRef`](https://vue
 
 ```vue
 <script setup lang="ts">
-const carousel = useTemplateRef('carousel')
+const carousel = useTemplateRef('carousel');
 </script>
 
 <template>

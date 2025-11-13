@@ -1,17 +1,13 @@
 ---
 title: Customize components
-description: Learn how to customize Pohon UI components with the Tailwind Variants API for advanced, flexible, and maintainable styling.
+description: Learn how to customize Pohon UI components with the UnoCSS Variants API for advanced, flexible, and maintainable styling.
 navigation.title: Components
 navigation.icon: 'i-lucide:layout-grid'
-navigation.badge: Soon
 ---
 
-## Work in Progress
+## Tailwind Variants
 
-This page is currently being developed and is not yet ready for production use.
-<!-- ## Tailwind Variants
-
-Pohon UI components are styled using the [Tailwind Variants](https://www.tailwind-variants.org/) API, which provides a powerful way to create variants and manage component styles.
+Pohon UI components are styled using the [UnoCSS Variants](https://vinicunca.dev/unocss-variants) API, which provides a powerful way to create variants and manage component styles.
 
 ### Slots
 
@@ -29,7 +25,7 @@ export default {
     body: 'p-4 sm:p-6',
     footer: 'p-4 sm:px-6'
   }
-}
+};
 ```
 
 ```vue [src/runtime/components/card.vue]
@@ -58,8 +54,8 @@ Some components don't have slots, they are just composed of a single root elemen
 
 ```ts [src/theme/container.ts]
 export default {
-  base: 'max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8'
-}
+  base: 'max-w-$pohon-container mx-auto px-4 sm:px-6 lg:px-8'
+};
 ```
 
 ```vue [src/runtime/components/container.vue]
@@ -73,7 +69,7 @@ export default {
 ::
 
 ::warning
-Components without slots don't have a [`ui` prop](#ui-prop), only the [`class` prop](#class-prop) is available to override styles.
+Components without slots don't have a [`pohon` prop](#ui-prop), only the [`class` prop](#class-prop) is available to override styles.
 ::
 
 ### Variants
@@ -104,7 +100,7 @@ export default {
   defaultVariants: {
     size: 'md'
   }
-}
+};
 ```
 
 This way, the `size` prop will apply the corresponding styles to the `root` slot:
@@ -147,7 +143,7 @@ export default {
   defaultVariants: {
     size: 'md'
   }
-}
+};
 ```
 
 ::docs-framework-only
@@ -169,11 +165,11 @@ Some components use the `compoundVariants` property to apply classes when multip
 For example, the [Button](/docs/pohon/components/button) component uses the `compoundVariants` property to apply classes for a specific `color` and `variant` combination:
 
 ```ts [src/theme/button.ts] {27-31}
-import type { ModuleOptions } from '../module'
+import type { ModuleOptions } from '../module';
 
 export default (options: Required<ModuleOptions>) => ({
   slots: {
-    base: ['rounded-md font-medium inline-flex items-center disabled:cursor-not-allowed aria-disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75', options.theme.transitions && 'transition-colors']
+    base: 'font-500 rounded-md inline-flex transition-colors-280 items-center aria-disabled:(opacity-75 cursor-not-allowed) disabled:(opacity-75 cursor-not-allowed)',
   },
   variants: {
     color: {
@@ -205,22 +201,22 @@ export default (options: Required<ModuleOptions>) => ({
     color: 'primary',
     variant: 'solid'
   }
-})
+});
 ```
 
 ## Customize theme
 
 You have multiple ways to customize the appearance of Pohon UI components, you can do it for all components at once or on a per-component basis.
 
-::note
-Tailwind Variants uses [`tailwind-merge`](https://github.com/dcastil/tailwind-merge) under the hood to merge classes so you don't have to worry about conflicting classes.
+::caution
+UnoCSS Variants doesn't support merging classes, so there's a possibility you might have the same class defined in multiple places or conflicting classes such as `p-1 px-5`. So it's your responsibility to ensure that the classes you define don't conflict with each other. One way to handle this is to use [UnoCSS Layers](https://unocss.dev/config/layers#layers-using-variants). There will be no implementation for merging classes based on [this comment](https://github.com/unocss/unocss/issues/2748#issuecomment-1902572595).
 ::
 
 ::tip
 You can explore the theme for each component in two ways:
 
 - Check the `Theme` section in the documentation of each individual component.
-- Browse the source code directly in the GitHub repository at [`src/theme`](https://github.com/nuxt/ui/tree/v4/src/theme).
+- Browse the source code directly in the GitHub repository at [`src/theme`](https://github.com/vinicunca/akar/tree/main/packages/pohon/src/theme).
 ::
 
 ### Global config
@@ -262,16 +258,16 @@ export default defineAppConfig({
       }
     }
   }
-})
+});
 ```
 :::
 
 #vue
 :::div
 ```ts [vite.config.ts]
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import pohon from '@nuxt/ui/vite'
+import pohon from '@nuxt/ui/vite';
+import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
@@ -280,19 +276,19 @@ export default defineConfig({
       pohon: {
         button: {
           slots: {
-            base: 'font-bold'
+            base: 'uno-layer-variants:font-bold'
           },
           variants: {
             size: {
               md: {
-                leadingIcon: 'size-4'
+                leadingIcon: 'uno-layer-variants:size-4'
               }
             }
           },
           compoundVariants: [{
             color: 'neutral',
             variant: 'outline',
-            class: 'ring-ring hover:bg-accented'
+            class: 'uno-layer-variants:(ring-ring hover:bg-accented)'
           }],
           defaultVariants: {
             color: 'neutral',
@@ -302,18 +298,18 @@ export default defineConfig({
       }
     })
   ]
-})
+});
 ```
 :::
 ::
 
 ::note
-In this example, `font-bold` overrides `font-medium` on all buttons, `size-4` overrides `size-5` class on the leading icon when `size="md"` and `ring-ring hover:bg-accented` overrides `ring-accented hover:bg-elevated` when `color="neutral"` and `variant="outline"`. The buttons now defaults to `color="neutral"` and `variant="outline"`.
+In this example, `font-bold` will have a higher specificity compared to `font-medium` on all buttons, `size-4` will have a higher specificity compared to `size-5` class on the leading icon when `size="md"` and `ring-ring hover:bg-accented` will have a higher specificity compared to `ring-accented hover:bg-elevated` when `color="neutral"` and `variant="outline"`. The buttons now defaults to `color="neutral"` and `variant="outline"`.
 ::
 
-### `ui` prop
+### `pohon` prop
 
-You can also override a component's **slots** using the `ui` prop. This takes priority over both global config and resolved `variants`.
+You can also override a component's **slots** using the `pohon` prop. This takes priority over both global config and resolved `variants`.
 
 ::docs-pohon-preview{slug="button"}
 ---
@@ -330,7 +326,7 @@ props:
   color: neutral
   variant: outline
   pohon:
-    trailingIcon: 'rotate-90 size-3'
+    trailingIcon: 'akar:rotate-90 akar:size-3'
 slots:
   default: |
 
@@ -349,7 +345,7 @@ The `class` prop allows you to override the classes of the `root` or `base` slot
 ::docs-pohon-preview{slug="button"}
 ---
 props:
-  class: 'font-bold rounded-full'
+  class: 'akar:font-bold akar:rounded-full'
 slots:
   default: Button
 ---
@@ -357,4 +353,4 @@ slots:
 
 ::note
 In this example, the `font-bold` class will override the default `font-medium` class on this button.
-:: -->
+::
