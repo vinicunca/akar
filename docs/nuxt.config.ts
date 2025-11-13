@@ -115,6 +115,63 @@ export default defineNuxtConfig({
     autoImport: false,
   },
 
+  llms: {
+    description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
+    domain: 'https://akar.vinicunca.dev',
+    full: {
+      description: 'This is the full documentation for Pohon UI. It includes all the Markdown files written with the MDC syntax.',
+      title: 'Pohon UI Full Documentation',
+    },
+    notes: [
+      'The content is automatically generated from the same source as the official documentation.',
+    ],
+    sections: [
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: 'docs/akar/getting-started%' },
+        ],
+        title: 'Akar Getting Started',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/docs/akar/components/%' },
+        ],
+        title: 'Akar Components',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/docs/akar/utilities/%' },
+        ],
+        title: 'Akar Utilities',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: 'docs/pohon/getting-started%' },
+        ],
+        title: 'Pohon Getting Started',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/docs/pohon/components/%' },
+        ],
+        title: 'Pohon Components',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/docs/pohon/composables/%' },
+        ],
+        title: 'Pohon Composables',
+      },
+    ],
+    title: 'Pohon UI',
+  },
+
   mdc: {
     highlight: {
       noApiRoute: false,
@@ -138,6 +195,7 @@ export default defineNuxtConfig({
         });
       });
     },
+    'nuxt-llms',
   ],
 
   routeRules: {
