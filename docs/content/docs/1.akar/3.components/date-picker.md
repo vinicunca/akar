@@ -349,15 +349,15 @@ data:
   - keys: ['Tab']
     description: 'When focus moves onto the date field, focuses the first segment.'
   - keys: ['Space']
-    description: '<span>When the focus is on either <Code>ADatePickerNext</Code> or <Code>ADatePickerPrev</Code>, it navigates the calendar. Otherwise, it selects the date. If the focus is on <Code>ADatePickerTrigger</Code>, it opens/closes the popover.</span>'
+    description: 'When the focus is on either `ADatePickerNext` or `ADatePickerPrev`, it navigates the calendar. Otherwise, it selects the date. If the focus is on `ADatePickerTrigger`, it opens/closes the popover.'
   - keys: ['Enter']
-    description: '<span> When the focus is on either <Code>ADatePickerNext</Code> or <Code>ADatePickerPrev</Code>, it navigates the calendar. Otherwise it selects the date. If the focus is on <Code>ADatePickerTrigger</Code>, it opens/closes the popover.</span>'
+    description: ' When the focus is on either `ADatePickerNext` or `ADatePickerPrev`, it navigates the calendar. Otherwise it selects the date. If the focus is on `ADatePickerTrigger`, it opens/closes the popover.'
   - keys: ['ArrowLeft', 'ArrowRight']
-    description: 'Navigates between the date field segments. If the focus is on the <Code>ADatePickerCalendar</Code>, it navigates between dates.'
+    description: 'Navigates between the date field segments. If the focus is on the `ADatePickerCalendar`, it navigates between dates.'
   - keys: ['ArrowUp', 'ArrowDown']
-    description: 'Increments/changes the value of the segment. If the focus is on the <Code>ADatePickerCalendar</Code>, it navigates between the dates.'
+    description: 'Increments/changes the value of the segment. If the focus is on the `ADatePickerCalendar`, it navigates between the dates.'
   - keys: ['0-9']
-    description: 'When the focus is on a numeric <Code>ADatePickerInput</Code>, it types in the number and focuses the next segment if the next input would result in an invalid value.'
+    description: 'When the focus is on a numeric `ADatePickerInput`, it types in the number and focuses the next segment if the next input would result in an invalid value.'
   - keys: ['Backspace']
     description: 'Deletes a digit from the focused numeric segments.'
   - keys: ['A', 'P']

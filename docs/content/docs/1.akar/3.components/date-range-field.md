@@ -127,7 +127,7 @@ data:
   - keys: ['ArrowUp', 'ArrowDown']
     description: 'Increments/changes the value of the segment.'
   - keys: ['0-9']
-    description: When the focus is on a numeric <Code>ADateFieldInput</Code>, it types in number and focuses the next segment if the next input would result in an invalid value.
+    description: When the focus is on a numeric `ADateFieldInput`, it types in number and focuses the next segment if the next input would result in an invalid value.
   - keys: ['Backspace']
     description: 'Deletes a digit from the focused numeric segments.'
   - keys: ['A', 'P']

@@ -203,6 +203,10 @@ This component also supports all native `<button>` HTML attributes.
 
 :docs-pohon-theme
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/slider" mode="pohon"}
+
 ## Changelog
 
 :docs-component-changelog

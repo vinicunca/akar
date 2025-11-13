@@ -251,7 +251,7 @@ You can access the typed component instance using [`useTemplateRef`](https://vue
 
 ```vue
 <script setup lang="ts">
-const stepper = useTemplateRef('stepper')
+const stepper = useTemplateRef('stepper');
 </script>
 
 <template>
@@ -271,6 +271,10 @@ This will give you access to the following:
 ## Theme
 
 :docs-pohon-theme
+
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/slider" mode="pohon"}
 
 ## Changelog
 

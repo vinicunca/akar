@@ -174,17 +174,17 @@ data:
 
 ::docs-css-variables-table
 ---
-  data:
-    - cssVariable: '--akar-combobox-content-transform-origin',
-      description: 'The <Code>transform-origin</Code> computed from the content and arrow positions/offsets. Only present when <Code>position=&quot;popper&quot;</Code>.',
-    - cssVariable: '--akar-combobox-content-available-width',
-      description: 'The remaining width between the trigger and the boundary edge. Only present when <Code>position=&quot;popper&quot;</Code>.',
-    - cssVariable: '--akar-combobox-content-available-height',
-      description: 'The remaining height between the trigger and the boundary edge. Only present when <Code>position=&quot;popper&quot;</Code>.',
-    - cssVariable: '--akar-combobox-trigger-width',
-      description: 'The width of the trigger. Only present when <Code>position=&quot;popper&quot;</Code>.',
-    - cssVariable: '--akar-combobox-trigger-height',
-      description: 'The height of the trigger. Only present when <Code>position=&quot;popper&quot;</Code>.',
+data:
+  - cssVariable: --akar-combobox-content-transform-origin
+    description: The `transform-origin` computed from the content and arrow positions/offsets. Only present when `position="popper"`
+  - cssVariable: --akar-combobox-content-available-width
+    description: The remaining width between the trigger and the boundary edge. Only present when `position="popper"`
+  - cssVariable: --akar-combobox-content-available-height
+    description: The remaining height between the trigger and the boundary edge. Only present when `position="popper"`
+  - cssVariable: --akar-combobox-trigger-width
+    description: The width of the trigger. Only present when `position="popper"`
+  - cssVariable: --akar-combobox-trigger-height
+    description: The height of the trigger. Only present when `position="popper"`
 ---
 ::
 
@@ -614,14 +614,14 @@ See the W3C [ACombobox Autocomplete List](https://www.w3.org/WAI/ARIA/apg/patter
 name: keyboard-a-combobox
 data:
   - keys: ['Enter']
-    description: '<span>When focus is on <Code>AComboboxItem</Code>, selects the focused item. </span>',
+    description: 'When focus is on `AComboboxItem`, selects the focused item.',
   - keys: ['ArrowDown']
-    description: '<span> When focus is on <Code>AComboboxInput</Code>, opens the Acombobox content. <br /> When focus is on an item, moves focus to the next item. </span>'
+    description: ' When focus is on `AComboboxInput`, opens the ACombobox content. <br /> When focus is on an item, moves focus to the next item.'
 
   - keys: ['ArrowUp'],
-    description: '<span> When focus is on <Code>AComboboxInput</Code>, opens the Acombobox content. <br /> When focus is on an item, moves focus to the previous item. </span>',
+    description: ' When focus is on `AComboboxInput`, opens the ACombobox content. <br /> When focus is on an item, moves focus to the previous item.',
   - keys: ['Esc'],
-    description: '<span> Closes Acombobox and restores the selected item in the <Code>AComboboxInput</Code> field. </span>'
+    description: ' Closes ACombobox and restores the selected item in the `AComboboxInput` field.'
 ---
 ::
 

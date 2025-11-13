@@ -239,6 +239,6 @@ data:
   - keys: ['Shift + Tab']
     description: 'Moves focus to the previous focusable element.'
   - keys: ['Esc']
-    description: 'Closes the dialog and moves focus to <Code>AAlertDialogTrigger</code>.'
+    description: 'Closes the dialog and moves focus to `AAlertDialogTrigger`.'
 ---
 ::

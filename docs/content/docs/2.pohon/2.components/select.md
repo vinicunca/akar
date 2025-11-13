@@ -780,6 +780,10 @@ When accessing the component via a template ref, you can use the following:
 
 :docs-pohon-theme
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/select" mode="pohon"}
+
 ## Changelog
 
 :docs-component-changelog

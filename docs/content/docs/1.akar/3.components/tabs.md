@@ -113,9 +113,9 @@ The indicator that highlights the current active tab.
 ---
 data:
   - cssVariable: --akar-tabs-indicator-size
-    description: The size of the indicator.
+    description: The size of the indicator
   - cssVariable: --akar-tabs-indicator-position
-    description: The position of the indicator.
+    description: The position of the indicator
 ---
 ::
 
@@ -192,18 +192,18 @@ Adheres to the [ATabs WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/p
 name: keyboard-a-tabs
 data:
   - keys: ['Tab']
-    description: '<span> When focus moves onto the tabs, focuses the active trigger. When a trigger is focused, moves focus to the active content.</span>'
+    description: 'When focus moves onto the tabs, focuses the active trigger. When a trigger is focused, moves focus to the active content.'
   - keys: ['ArrowDown']
-    description: '<span> Moves focus to the next trigger depending on <Code>orientation</Code> and activates its associated content.</span>'
+    description: 'Moves focus to the next trigger depending on `orientation` and activates its associated content.'
   - keys: ['ArrowRight']
-    description: '<span> Moves focus to the next trigger depending on <Code>orientation</Code> and activates its associated content.</span>'
+    description: 'Moves focus to the next trigger depending on `orientation` and activates its associated content.'
   - keys: ['ArrowUp']
-    description: '<span> Moves focus to the previous trigger depending on <Code>orientation</Code> and activates its associated content.</span>'
+    description: 'Moves focus to the previous trigger depending on `orientation` and activates its associated content.'
   - keys: ['ArrowLeft']
-    description: '<span> Moves focus to the previous trigger depending on <Code>orientation</Code> and activates its associated content.</span>'
+    description: 'Moves focus to the previous trigger depending on `orientation` and activates its associated content.'
   - keys: ['Home']
-    description: '<span> Moves focus to the first trigger and activates its associated content.</span>'
+    description: 'Moves focus to the first trigger and activates its associated content.'
   - keys: ['End']
-    description: '<span> Moves focus to the last trigger and activates its associated content.</span>'
+    description: 'Moves focus to the last trigger and activates its associated content.'
 ---
 ::

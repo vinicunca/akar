@@ -121,7 +121,7 @@ data:
 ---
 data:
   - cssVariable: '--akar-popover-content-transform-origin'
-    description: The <code>transform-origin</code> computed from the content and arrow positions/offsets
+    description: The `transform-origin` computed from the content and arrow positions/offsets
   - cssVariable: '--akar-popover-content-available-width'
     description: The remaining width between the trigger and the boundary edge
   - cssVariable: '--akar-popover-content-available-height'

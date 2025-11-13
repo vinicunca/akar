@@ -155,8 +155,6 @@ data:
 ---
 ::
 
-#### CSS Variables
-
 ::docs-css-variables-table
 ---
 data:

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   AContextMenuContent,
+  AContextMenuGroup,
   AContextMenuItem,
   AContextMenuLabel,
   AContextMenuPortal,

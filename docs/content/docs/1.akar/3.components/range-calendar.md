@@ -254,10 +254,10 @@ data:
   - keys: ['Tab']
     description: 'When focus moves onto the calendar, focuses the first navigation button.'
   - keys: ['Space']
-    description: <span>When the focus is on either <Code>CalendarNext</Code> or <Code>CalendarPrev</Code>, it navigates the calendar. Otherwise, it selects the date. </span>
+    description: When the focus is on either `CalendarNext` or `CalendarPrev`, it navigates the calendar. Otherwise, it selects the date.
   - keys: ['Enter']
-    description: <span>When the focus is on either <Code>CalendarNext</Code> or <Code>CalendarPrev</Code>, it navigates the calendar. Otherwise, it selects the date.</span>
+    description: When the focus is on either `CalendarNext` or `CalendarPrev`, it navigates the calendar. Otherwise, it selects the date.
   - keys: ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']
-    description: When the focus is on <Code>CalendarCellTrigger</Code>, it navigates the dates, changing the month/year/decade if necessary.
+    description: When the focus is on `CalendarCellTrigger`, it navigates the dates, changing the month/year/decade if necessary.
 ---
 ::

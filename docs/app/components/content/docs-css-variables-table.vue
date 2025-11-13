@@ -11,6 +11,8 @@ const props = defineProps<CssVariablesTableProps>();
 </script>
 
 <template>
+  <ProseH4>CSS Variables</ProseH4>
+
   <ProseTable>
     <ProseThead>
       <ProseTr>
@@ -29,15 +31,17 @@ const props = defineProps<CssVariablesTableProps>();
         :key="`${prop.cssVariable}-${index}`"
       >
         <ProseTd>
-          <ProseCode class="akar:(color-primary-600 bg-primary/10)">
+          <ProseCode class="akar:(color-primary-600 bg-primary/10 whitespace-nowrap)">
             {{ prop.cssVariable }}
           </ProseCode>
         </ProseTd>
 
         <ProseTd class="akar:align-middle">
-          <span>
-            {{ prop.description }}
-          </span>
+          <MDC
+            v-if="prop.description"
+            :value="prop.description"
+            :cache-key="`${prop.cssVariable}-description`"
+          />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

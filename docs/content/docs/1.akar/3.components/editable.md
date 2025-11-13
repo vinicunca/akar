@@ -152,10 +152,10 @@ In this case, we want to submit only when user click on `AEditableSubmitTrigger`
 name: a-keyboard-table
 data:
   - keys: ['Tab']
-    description: '<span>When focus moves onto the editable field, switches into the editable mode if the <Code>activation-mode</Code> is set to focus.</span>'
+    description: 'When focus moves onto the editable field, switches into the editable mode if the `activation-mode` is set to focus.'
   - keys: ['Enter']
-    description: '<span>If the <Code>submit-mode</Code> is set to <Code>enter</Code> or <Code>both</Code>, it submits the changes.</span>'
+    description: 'If the `submit-mode` is set to `enter` or `both`, it submits the changes.'
   - keys: ['Escape']
-    description: '<span>When the focus is on the editable field, it cancels the changes.</span>'
+    description: 'When the focus is on the editable field, it cancels the changes.'
 ---
 ::

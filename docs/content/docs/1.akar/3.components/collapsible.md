@@ -178,7 +178,7 @@ This will also allow browser to search the hidden text, and open the collapsible
 
 ```vue {6}
 <script setup>
-import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar';
+import { ACollapsibleRoot } from 'akar';
 </script>
 
 <template>
