@@ -229,6 +229,10 @@ name: 'tooltip-cursor-example'
 
 :docs-pohon-theme
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/tooltip" mode="pohon"}
+
 ## Changelog
 
 :docs-component-changelog

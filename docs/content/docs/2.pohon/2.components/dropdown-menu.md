@@ -526,6 +526,10 @@ In this example, :kbd{value="meta"} :kbd{value="E"}, :kbd{value="meta"} :kbd{val
 
 :docs-pohon-theme
 
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/dropdown-menu" mode="pohon"}
+
 ## Changelog
 
 :docs-component-changelog

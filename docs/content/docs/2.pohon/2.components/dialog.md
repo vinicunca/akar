@@ -1,5 +1,5 @@
 ---
-description: A dialog window that can be used to display a message or request user input.
+description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
 category: overlay
 links:
   - label: Akar
@@ -396,6 +396,10 @@ name: 'modal-command-palette-example'
 ## Theme
 
 :docs-pohon-theme
+
+## Akar
+
+:docs-akar-to-pohon{to="/docs/akar/components/dialog" mode="pohon"}
 
 ## Changelog
 
