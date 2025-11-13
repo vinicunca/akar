@@ -11,10 +11,6 @@ overrides:
   typescript: 5.8.3
   unplugin: ^2.3.10
   vite: ^7.1.12
-
-patchedDependencies:
-  '@nuxt/vite-builder': patches/@nuxt__vite-builder.patch
-
 catalogs:
   base:
     '@changesets/changelog-github': ^0.5.1
@@ -85,8 +81,8 @@ catalogs:
     vue-component-meta: ^3.1.0
     yup: ^1.7.1
   plugins:
-    '@nuxt/kit': 4.2.0
-    '@nuxt/schema': 4.2.0
+    '@nuxt/kit': 4.2.1
+    '@nuxt/schema': 4.2.1
     unbuild: ^3.6.1
     unplugin-vue-components: ^29.1.0
   pohon:
@@ -113,7 +109,7 @@ catalogs:
     magic-string: ^0.30.19
     mlly: ^1.8.0
     motion-v: ^1.7.1
-    nuxt: 4.2.0
+    nuxt: 4.2.1
     ohash: ^2.0.11
     pathe: ^2.0.3
     tinyglobby: ^0.2.15
