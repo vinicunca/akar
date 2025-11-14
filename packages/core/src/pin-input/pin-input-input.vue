@@ -123,6 +123,13 @@ function handleFocus(event: FocusEvent) {
   if (!target.value) {
     target.placeholder = '';
   }
+
+  // check again after DOM flushes
+  setTimeout(() => {
+    if (!target.value) {
+      target.placeholder = '';
+    }
+  });
 }
 
 function handleBlur() {

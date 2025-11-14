@@ -31,9 +31,11 @@ import { footerColumnsTheme } from './themes/footer-columns.theme';
 import { footerTheme } from './themes/footer.theme';
 import { formFieldTheme } from './themes/form-field.theme';
 import { headerTheme } from './themes/header.theme';
+import { inputDateTheme } from './themes/input-date.theme';
 import { inputMenuTheme } from './themes/input-menu.theme';
 import { inputNumberTheme } from './themes/input-number.theme';
 import { inputTagsTheme } from './themes/input-tags.theme';
+import { inputTimeTheme } from './themes/input-time.theme';
 import { inputTheme } from './themes/input.theme';
 import { kbdTheme } from './themes/kbd.theme';
 import { linkTheme } from './themes/link.theme';
@@ -103,9 +105,11 @@ export default defineAppConfig({
     footerColumns: footerColumnsTheme,
     formField: formFieldTheme,
     header: headerTheme,
+    inputDate: inputDateTheme,
     inputMenu: inputMenuTheme,
     inputNumber: inputNumberTheme,
     inputTags: inputTagsTheme,
+    inputTime: inputTimeTheme,
     input: inputTheme,
     kbd: kbdTheme,
     link: linkTheme,

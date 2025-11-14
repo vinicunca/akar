@@ -3,7 +3,7 @@ title: InputTime
 description: Enables users to input specific times within a designated field.
 category: form
 links:
-  - label: TimeField
+  - label: Akar
     to: /docs/akar/components/time-field
   - label: GitHub
     icon: i-simple-icons:github

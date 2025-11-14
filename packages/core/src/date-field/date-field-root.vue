@@ -89,14 +89,19 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<ADateFieldRootProps>(), {
-  defaultValue: undefined,
-  disabled: false,
-  readonly: false,
-  placeholder: undefined,
-  isDateUnavailable: undefined,
-});
+const props = withDefaults(
+  defineProps<ADateFieldRootProps>(),
+  {
+    defaultValue: undefined,
+    disabled: false,
+    readonly: false,
+    placeholder: undefined,
+    isDateUnavailable: undefined,
+  },
+);
+
 const emits = defineEmits<ADateFieldRootEmits>();
+
 defineSlots<{
   default?: (props: {
     /** The current date of the field */

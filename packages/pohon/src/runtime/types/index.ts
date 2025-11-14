@@ -36,6 +36,7 @@ export * from '../components/form-field.vue';
 export * from '../components/form.vue';
 export * from '../components/header.vue';
 export * from '../components/icon.vue';
+export * from '../components/input-date.vue';
 export * from '../components/input-menu.vue';
 export * from '../components/input-number.vue';
 export * from '../components/input-tags.vue';

@@ -54,6 +54,7 @@ export {
   createContext,
   type DateRange,
   type DateValue,
+  type SegmentPart,
   useBodyScrollLock,
   type UseDateFormatter,
   useDateFormatter,

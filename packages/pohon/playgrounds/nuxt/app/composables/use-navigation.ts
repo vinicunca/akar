@@ -31,6 +31,7 @@ const components = [
   'form-field',
   'form',
   'header',
+  'input-date',
   'input-menu',
   'input-number',
   'input-tags',
