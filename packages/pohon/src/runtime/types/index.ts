@@ -39,6 +39,7 @@ export * from '../components/icon.vue';
 export * from '../components/input-menu.vue';
 export * from '../components/input-number.vue';
 export * from '../components/input-tags.vue';
+export * from '../components/input-time.vue';
 export * from '../components/input.vue';
 export * from '../components/kbd.vue';
 export * from '../components/link.vue';

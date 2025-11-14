@@ -6,7 +6,7 @@ import * as theme from '#build/pohon';
 import { MDCRenderer, PChip, PFormField, PSelect } from '#components';
 import { fetchComponentMeta, parseMarkdown } from '#imports';
 import { getProp, setProp } from '#pohon/utils';
-import { CalendarDate } from '@internationalized/date';
+import { CalendarDate, Time } from '@internationalized/date';
 import { isBoolean, toCamelCase, toKebabCase, toPascalCase } from '@vinicunca/perkakas';
 import json5 from 'json5';
 import { hash } from 'ohash';
@@ -60,6 +60,7 @@ interface Cast {
 }
 
 type CastDateValue = [number, number, number];
+type CastTimeValue = [number, number, number];
 
 const castMap: Record<string, Cast> = {
   'DateValue': {
@@ -85,6 +86,12 @@ const castMap: Record<string, Cast> = {
       }
 
       return `{ start: new CalendarDate(${value.start.year}, ${value.start.month}, ${value.start.day}), end: new CalendarDate(${value.end.year}, ${value.end.month}, ${value.end.day}) }`;
+    },
+  },
+  'TimeValue': {
+    get: (args: CastTimeValue) => new Time(...args),
+    template: (value: Time) => {
+      return value ? `new Time(${value.hour}, ${value.minute}, ${value.second})` : 'null';
     },
   },
 };

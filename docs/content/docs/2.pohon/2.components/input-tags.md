@@ -37,6 +37,7 @@ props:
   defaultValue: ['Vue']
 ---
 ::
+
 ### Placeholder
 
 Use the `placeholder` prop to set a placeholder text.
