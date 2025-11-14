@@ -210,7 +210,7 @@ defineExpose({
     v-model:open="open"
     :title="title || t('dashboardSearch.title')"
     :description="description || t('dashboardSearch.description')"
-    v-bind="modalProps"
+    v-bind="(modalProps as any)"
     :class="pohon.modal({ class: [props.pohon?.modal, props.class] })"
   >
     <template #content="contentData">

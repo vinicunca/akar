@@ -198,7 +198,7 @@ export type PCommandPaletteSlots<G extends PCommandPaletteGroup<T> = PCommandPal
 <script setup lang="ts" generic="G extends PCommandPaletteGroup<T>, T extends PCommandPaletteItem">
 import { useAppConfig } from '#imports';
 import { isBoolean, isFunction, isString, omit } from '@vinicunca/perkakas';
-import { createReusableTemplate, reactivePick } from '@vueuse/core';
+import { createReusableTemplate, reactivePick, refThrottled } from '@vueuse/core';
 import { useFuse } from '@vueuse/integrations/useFuse';
 import {
   AListboxContent,
@@ -341,15 +341,17 @@ const items = computed(() =>
 );
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse);
+const throttledFuseResults = refThrottled(fuseResults, 16, true);
 
-function getGroupWithItems(group: G, items: Array<T & { matches?: FuseResult<T>['matches'] }>) {
+function processGroupItems(group: G, items: Array<T & { matches?: FuseResult<T>['matches'] }>) {
+  let processedItems = items;
   if (group?.postFilter && isFunction(group.postFilter)) {
-    items = group.postFilter(searchTerm.value, items);
+    processedItems = group.postFilter(searchTerm.value, processedItems);
   }
 
   return {
     ...group,
-    items: items.slice(0, fuse.value.resultLimit).map((item) => {
+    items: processedItems.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
         labelHtml: highlight<T>({ item, searchTerm: searchTerm.value, forceKey: props.labelKey }),
@@ -360,7 +362,9 @@ function getGroupWithItems(group: G, items: Array<T & { matches?: FuseResult<T>[
 }
 
 const filteredGroups = computed(() => {
-  const groupsById = fuseResults.value.reduce((acc, result) => {
+  const currentGroups = groups.value;
+
+  const groupsById = throttledFuseResults.value.reduce((acc, result) => {
     const { item, matches } = result;
     if (!item.group) {
       return acc;
@@ -373,19 +377,23 @@ const filteredGroups = computed(() => {
   }, {} as Record<string, Array<T & { matches?: FuseResult<T>['matches'] }>>);
 
   if (props.preserveGroupOrder) {
-    const processedGroups: Array<ReturnType<typeof getGroupWithItems>> = [];
+    const processedGroups: Array<ReturnType<typeof processGroupItems>> = [];
 
-    for (const group of groups.value || []) {
+    for (const group of currentGroups || []) {
       if (!group.items?.length) {
         continue;
       }
 
-      const items = group.ignoreFilter
-        ? group.items
-        : groupsById[group.id];
+      const items = group.ignoreFilter ? group.items : groupsById[group.id];
+      if (!items?.length) {
+        continue;
+      }
 
-      if (items?.length) {
-        processedGroups.push(getGroupWithItems(group, items));
+      const processedGroup = processGroupItems(group, items);
+
+      // Filter out groups that become empty after postFilter
+      if (processedGroup.items?.length) {
+        processedGroups.push(processedGroup);
       }
     }
 
@@ -393,18 +401,25 @@ const filteredGroups = computed(() => {
   }
 
   const fuseGroups = Object.entries(groupsById).map(([id, items]) => {
-    const group = groups.value?.find((group) => group.id === id);
+    const group = currentGroups?.find((group) => group.id === id);
     if (!group) {
       return undefined;
     }
 
-    return getGroupWithItems(group, items);
+    const processedGroup = processGroupItems(group, items);
+    // Filter out groups without items after postFilter
+    return processedGroup.items?.length ? processedGroup : undefined;
   }).filter((group) => !!group);
 
-  const nonFuseGroups = groups.value
+  const nonFuseGroups = currentGroups
     ?.map((group, index) => ({ ...group, index }))
     ?.filter((group) => group.ignoreFilter && group.items?.length)
-    ?.map((group) => ({ ...getGroupWithItems(group, group.items || []), index: group.index })) || [];
+    ?.map((group) => {
+      const processedGroup = processGroupItems(group, group.items || []);
+      return { ...processedGroup, index: group.index };
+    })
+    // Filter out groups without items after postFilter
+    ?.filter((group) => group.items?.length) || [];
 
   return nonFuseGroups.reduce((acc, group) => {
     acc.splice(group.index, 0, group);
@@ -564,16 +579,47 @@ function onSelect(event: Event, item: T) {
                   >{{ item.prefix }}</span>
 
                   <span
-                    :class="pohon.itemLabelBase({ class: [props.pohon?.itemLabelBase, item.pohon?.itemLabelBase], active: active || item.active })"
+                    :class="pohon.itemLabelBase({
+                      class: [props.pohon?.itemLabelBase, item.pohon?.itemLabelBase],
+                      active: active || item.active,
+                    })"
                     data-pohon="command-palette-item-label-base"
                     v-html="item.labelHtml || getProp({ object: item, path: props.labelKey as string })"
                   />
 
                   <span
-                    :class="pohon.itemLabelSuffix({ class: [props.pohon?.itemLabelSuffix, item.pohon?.itemLabelSuffix], active: active || item.active })"
-                    data-pohon="command-palette-item-label-suffix"
-                    v-html="item.suffixHtml || item.suffix"
+                    v-if="item.labelHtml"
+                    data-pohon="command-palette-item-label-base"
+                    :class="pohon.itemLabelBase({
+                      class: [props.pohon?.itemLabelBase, item.pohon?.itemLabelBase],
+                      active: active || item.active,
+                    })"
+                    v-html="item.labelHtml"
                   />
+                  <span
+                    v-else
+                    data-pohon="command-palette-item-label-base"
+                    :class="pohon.itemLabelBase({
+                      class: [props.pohon?.itemLabelBase, item.pohon?.itemLabelBase],
+                      active: active || item.active,
+                    })"
+                  >{{ getProp({ object: item, path: props.labelKey as string }) }}</span>
+
+                  <span
+                    v-if="item.suffixHtml"
+                    :class="pohon.itemLabelSuffix({
+                      class: [props.pohon?.itemLabelSuffix, item.pohon?.itemLabelSuffix],
+                      active: active || item.active,
+                    })"
+                    v-html="item.suffixHtml"
+                  />
+                  <span
+                    v-else-if="item.suffix"
+                    :class="pohon.itemLabelSuffix({
+                      class: [props.pohon?.itemLabelSuffix, item.pohon?.itemLabelSuffix],
+                      active: active || item.active,
+                    })"
+                  >{{ item.suffix }}</span>
                 </slot>
               </span>
 

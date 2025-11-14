@@ -93,6 +93,11 @@ export interface PFileUploadProps<M extends boolean = false> extends /** @vue-ig
    * @IconifyIcon
    */
   fileDeleteIcon?: PIconProps['name'];
+  /**
+   * Show the file preview/list after upload.
+   * @defaultValue true
+   */
+  preview?: boolean;
   class?: any;
   pohon?: FileUpload['slots'];
 }
@@ -149,6 +154,7 @@ const props = withDefaults(
     interactive: true,
     layout: 'grid',
     position: 'outside',
+    preview: true,
   },
 );
 const emits = defineEmits<FileUploadEmits>();
@@ -279,7 +285,7 @@ defineExpose({
 
 <template>
   <DefineFilesTemplate>
-    <template v-if="modelValue && (Array.isArray(modelValue) ? modelValue.length : true)">
+    <template v-if="props.preview && modelValue && (Array.isArray(modelValue) ? modelValue.length : true)">
       <slot
         name="files-top"
         :files="modelValue"

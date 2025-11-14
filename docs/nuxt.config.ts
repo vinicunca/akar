@@ -35,10 +35,10 @@ export default defineNuxtConfig({
       resolve('./app/components'),
     ],
     metaFields: {
-      events: true,
+      events: 'no-schema',
       exposed: false,
       props: true,
-      slots: true,
+      slots: 'no-schema',
       type: false,
     },
     transformers: [(component, code) => {
@@ -75,28 +75,6 @@ export default defineNuxtConfig({
       { name: 'Geist Mono', provider: 'fontsource', weights: ['100 900'] },
       { name: 'Rubik', provider: 'fontsource', weights: ['100 900'] },
     ],
-  },
-
-  hooks: {
-    // @ts-expect-error - Hook is not typed correctly
-    'component-meta:schema': (schema: NuxtComponentMeta) => {
-      // eslint-disable-next-line no-restricted-syntax
-      for (const componentName in schema) {
-        const component = schema[componentName];
-        // Delete schema from slots to reduce metadata file size
-        if (component?.meta?.slots) {
-          for (const slot of component.meta.slots) {
-            delete (slot as any).schema;
-          }
-        }
-
-        if (component?.meta?.events) {
-          for (const event of component.meta.events) {
-            delete (event as any).schema;
-          }
-        }
-      }
-    },
   },
 
   icon: {
