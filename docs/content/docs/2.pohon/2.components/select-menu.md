@@ -3,7 +3,7 @@ title: SelectMenu
 description: An advanced searchable select element.
 category: form
 links:
-  - label: Combobox
+  - label: Akar
     to: /docs/akar/components/combobox
   - label: GitHub
     icon: i-simple-icons:github

@@ -17,7 +17,7 @@ defineOptions({ inheritAttrs: false });
 const props = withDefaults(
   defineProps<PLocaleSelectProps>(),
   {
-    searchInput: false,
+    searchInput: true,
     valueKey: 'code',
     labelKey: 'name',
   },
