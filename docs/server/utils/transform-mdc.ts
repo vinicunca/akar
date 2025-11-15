@@ -182,7 +182,7 @@ export async function transformMdc(event: H3Event, doc: RawDocument): Promise<Ra
 
     // eslint-disable-next-line no-await-in-loop
     const components = await queryCollection(event, 'docs')
-      .where('path', 'LIKE', '/docs/components/%')
+      .where('path', 'LIKE', '/docs/pohon/components/%')
       .where('extension', '=', 'md')
       .where('category', '=', category)
       .select('path', 'title')
