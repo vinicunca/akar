@@ -241,7 +241,7 @@ const currentTrigger = ref('');
             <ANavigationMenuItem>
               <ANavigationMenuLink
                 class="text-grass11 hover:bg-green3 focus:shadow-green7 text-[15px] leading-none font-medium px-3 py-2 outline-none rounded-[4px] no-underline block select-none focus:shadow-[0_0_0_2px]"
-                href="https://github.com/unovue"
+                href="https://github.com/vinicunca"
               >
                 Link
               </ANavigationMenuLink>

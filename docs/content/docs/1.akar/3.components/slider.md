@@ -355,7 +355,7 @@ const forward = useForwardPropsEmits(props, emits);
 
 ### Mouse events are not fired
 
-Because of [a limitation](https://github.com/unovue/akar/blob/v2/packages/core/src/ASlider/ASliderImpl.vue#L48-L49) we faced during implementation, the following example won't work as expected and the `@mousedown` and `@mousedown` event handlers won't be fired:
+Because of [a limitation](https://github.com/vinicunca/akar/blob/main/packages/core/src/slider/slider-impl.vue#L48-L49) we faced during implementation, the following example won't work as expected and the `@mousedown` and `@mousedown` event handlers won't be fired:
 
 ```vue
 <ASliderRoot

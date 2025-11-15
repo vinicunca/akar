@@ -33,7 +33,6 @@ withDefaults(defineProps<AVisuallyHiddenProps>(), { as: 'span', feature: 'focusa
       whiteSpace: 'nowrap',
       wordWrap: 'normal',
       // Prevent causing unnecessary container scroll
-      // @see https://github.com/unovue/reka-ui/issues/2127
       top: '-1px',
       left: '-1px',
     }"

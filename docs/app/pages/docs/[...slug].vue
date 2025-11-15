@@ -161,6 +161,8 @@ const communityLinks = computed(() => [
                   />
                 </template>
               </PButton>
+
+              <CorePageLinks />
             </div>
           </div>
 

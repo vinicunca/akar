@@ -255,7 +255,7 @@ Background toasts are announced at the next graceful opportunity, for example, w
   </AToastRoot>
 
   <AToastRoot type="background">
-    <AToastDescription>We've just released Reka UI 2.0.</AToastDescription>
+    <AToastDescription>We've just released akar</AToastDescription>
     <AToastClose>Dismiss</AToastClose>
   </AToastRoot>
 </template>
@@ -271,7 +271,7 @@ You can direct the user to a permanent place in your application where they can 
 <template>
   <AToastRoot type="background">
     <AToastTitle>Upgrade Available!</AToastTitle>
-    <AToastDescription>We've just released Reka UI 2.0.</AToastDescription>
+    <AToastDescription>We've just released akar</AToastDescription>
     <AToastAction alt-text="Goto account settings to upgrade">
       Upgrade
     </AToastAction>

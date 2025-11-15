@@ -18,7 +18,7 @@ const hoverState = ref(false);
   >
     <AHoverCardTrigger
       class="outline-none rounded-full inline-block cursor-pointer shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:shadow-[0_0_0_2px_white]"
-      href="https://twitter.com/unovue"
+      href="https://twitter.com/vinicunca"
       target="_blank"
       rel="noreferrer noopener"
     >

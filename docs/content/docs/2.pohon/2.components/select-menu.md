@@ -823,10 +823,7 @@ name: 'select-menu-filter-fields-example'
 ### With virtualization
 
 Use the `virtualize` prop to enable virtualization for large lists as a boolean or an object with options like `{ estimateSize: 32, overscan: 12 }`.
-
-::warning{to="https://github.com/unovue/akar/issues/1885" target="_blank"}
 When enabled, all groups are flattened into a single list due to a limitation of Akar.
-::
 
 ::docs-component-example
 ---

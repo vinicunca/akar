@@ -15,7 +15,7 @@ Craft accessible web apps with <a href="https://vuejs.org/">Vue</a>.
 <p align="center">
 <a href="https://www.npmjs.com/package/akar" target="__blank"><img src="https://img.shields.io/npm/v/akar?style=flat&colorA=002438&colorB=41c399" alt="NPM version"></a>
 <a href="https://www.npmjs.com/package/akar" target="__blank"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/akar?flat&colorA=002438&colorB=41c399"></a>
-<a href="https://github.com/vinicunca/akar" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/unovue/akar?flat&colorA=002438&colorB=41c399"></a>
+<a href="https://github.com/vinicunca/akar" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/vinicunca/akar?flat&colorA=002438&colorB=41c399"></a>
 </p>
 
 <p align="center">

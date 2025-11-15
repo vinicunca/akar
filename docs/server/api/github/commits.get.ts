@@ -22,7 +22,7 @@ export default defineCachedEventHandler(
       owner: 'vinicunca',
       repo: 'akar',
       path,
-      since: '2025-03-12T14:33:00Z',
+      since: '2026-01-01T14:33:00Z',
     });
 
     return commits.map((commit) => ({

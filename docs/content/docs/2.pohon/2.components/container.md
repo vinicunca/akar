@@ -19,7 +19,7 @@ props:
 ---
 ::
 
-::tip{to="/docs/getting-started/theme/css-variables#container"}
+::tip
 In this example, its max width is controlled by the `max-w-$container-8xl` class,
 which `8xl` is defined in the UnoCSS theme.
 ::

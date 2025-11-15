@@ -7,14 +7,15 @@ import { transformMdc } from '~~/server/utils/transform-mdc';
 export default eventHandler(async (event) => {
   const params = getRouterParams(event)['slug.md'];
 
-  const parent = params.split('/')[0] as 'akar' | 'pohon';
+  const parent = params.split('/')[1] as 'akar' | 'pohon';
 
   if (!params?.endsWith('.md')) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
   }
 
   const path = withLeadingSlash(params.replace('.md', ''));
-  const page = await queryCollection(event, parent).path(path).first();
+  const page = await queryCollection(event, 'docs').path(path).first();
+
   if (!page) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
   }
@@ -25,10 +26,14 @@ export default eventHandler(async (event) => {
     page.body.value.unshift(['h1', {}, page.title]);
   }
 
-  const transformedPage = transformMdc({
-    title: page.title,
-    body: page.body,
-  });
+  const transformedPage = await transformMdc(
+    event,
+    {
+      title: page.title,
+      body: page.body,
+      parent,
+    },
+  );
 
   setHeader(event, 'Content-Type', 'text/markdown; charset=utf-8');
 

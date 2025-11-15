@@ -140,7 +140,6 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
   fuse?: UseFuseOptions<T>;
   /**
    * Enable virtualization for large lists.
-   * Note: when enabled, all groups are flattened into a single list due to a limitation of Akar (https://github.com/unovue/reka-ui/issues/1885).
    * @defaultValue false
    */
   virtualize?: boolean | {

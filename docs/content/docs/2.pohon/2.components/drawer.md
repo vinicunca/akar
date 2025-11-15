@@ -3,7 +3,7 @@ description: A drawer that smoothly slides in & out of the screen.
 category: overlay
 links:
   - label: Akar
-    to: https://github.com/unovue/vaul-vue
+    to: /docs/akar/components/drawer
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/drawer.vue
@@ -295,7 +295,10 @@ Make sure to add the `data-vaul-drawer-wrapper` directive to a parent element of
 ```vue [app.vue]
 <template>
   <PApp>
-    <div class="bg-background" data-vaul-drawer-wrapper>
+    <div
+      class="bg-background"
+      data-vaul-drawer-wrapper
+    >
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -312,7 +315,7 @@ export default defineNuxtConfig({
       'class': 'bg-background'
     }
   }
-})
+});
 ```
 
 ::

@@ -101,7 +101,6 @@ export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = Arr
   portal?: boolean | string | HTMLElement;
   /**
    * Enable virtualization for large lists.
-   * Note: when enabled, all groups are flattened into a single list due to a limitation of Reka UI (https://github.com/unovue/reka-ui/issues/1885).
    * @defaultValue false
    */
   virtualize?: boolean | {

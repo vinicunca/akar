@@ -47,7 +47,7 @@ const rootDisabled = ref(false);
         <div
           class="shadow-blackA7 my-[10px] p-[10px] rounded bg-white shadow-[0_2px_10px]"
         >
-          <span class="text-violet11 text-[15px] leading-[25px]">unovue/radix-vue</span>
+          <span class="text-violet11 text-[15px] leading-[25px]">akar</span>
         </div>
 
         <ACollapsibleContent class="data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">
