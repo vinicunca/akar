@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Chip > renders with as correctly 1`] = `"<span class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></span>"`;
+
+exports[`Chip > renders with class correctly 1`] = `"<div class="mx-auto" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with color neutral correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with content slot correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base">Content slot</span></div>"`;
+
+exports[`Chip > renders with default slot correctly 1`] = `"<div class="" data-pohon="chip-root">Default slot<span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with inset correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with position bottom-left correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with position bottom-right correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with position top-left correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with position top-right correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with size 2xl correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with size 2xs correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with size 3xl correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with size 3xs correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with size lg correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with size md correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with size sm correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with size xl correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with size xs correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders with text correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="" data-pohon="chip-base">Text</span></div>"`;
+
+exports[`Chip > renders with ui correctly 1`] = `"<div class="" data-pohon="chip-root"><span class="text-muted" data-pohon="chip-base"></span></div>"`;
+
+exports[`Chip > renders without show correctly 1`] = `
+"<div class="" data-pohon="chip-root">
+  <!--v-if-->
+</div>"
+`;

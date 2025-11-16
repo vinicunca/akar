@@ -1,0 +1,38 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dashboardToolbar > renders with as correctly 1`] = `
+"<section class="">
+  <div class=""></div>
+  <div class=""></div>
+</section>"
+`;
+
+exports[`dashboardToolbar > renders with class correctly 1`] = `
+"<div class="px-8">
+  <div class=""></div>
+  <div class=""></div>
+</div>"
+`;
+
+exports[`dashboardToolbar > renders with default slot correctly 1`] = `"<div class="">Default slot</div>"`;
+
+exports[`dashboardToolbar > renders with left slot correctly 1`] = `
+"<div class="">
+  <div class="">Left slot</div>
+  <div class=""></div>
+</div>"
+`;
+
+exports[`dashboardToolbar > renders with right slot correctly 1`] = `
+"<div class="">
+  <div class=""></div>
+  <div class="">Right slot</div>
+</div>"
+`;
+
+exports[`dashboardToolbar > renders with ui correctly 1`] = `
+"<div class="">
+  <div class="items-center">Left slot</div>
+  <div class=""></div>
+</div>"
+`;

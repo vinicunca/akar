@@ -34,7 +34,7 @@ export interface PFooterColumnsProps<T extends PFooterColumnLink = PFooterColumn
 
 type SlotProps<T> = (props: { link: T; active: boolean; pohon: FooterColumns['pohon'] }) => any;
 
-export interface FooterColumnsSlots<T extends PFooterColumnLink = PFooterColumnLink> {
+export interface PFooterColumnsSlots<T extends PFooterColumnLink = PFooterColumnLink> {
   'left': (props?: object) => any;
   'default': (props?: object) => any;
   'right': (props?: object) => any;
@@ -62,7 +62,7 @@ const props = withDefaults(
     as: 'nav',
   },
 );
-const slots = defineSlots<FooterColumnsSlots<T>>();
+const slots = defineSlots<PFooterColumnsSlots<T>>();
 
 const appConfig = useAppConfig() as FooterColumns['AppConfig'];
 

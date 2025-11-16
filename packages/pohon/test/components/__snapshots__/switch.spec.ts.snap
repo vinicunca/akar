@@ -1,0 +1,237 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`switch > renders with ariaLabel correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button aria-label="Aria label" data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with as correctly 1`] = `
+"<section class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`switch > renders with checkedIcon correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="" data-pohon="switch-thumb"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="switch-icon"></span>
+      <!--v-if--></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with class correctly 1`] = `
+"<div class="inline-flex" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with color neutral correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with defaultValue correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with description correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <div class="" data-pohon="switch-wrapper"><label for="v-0-0" class="" data-pohon="switch-label">Label</label>
+    <p class="" data-pohon="switch-description">Description</p>
+  </div>
+</div>"
+`;
+
+exports[`switch > renders with description slot correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <div class="" data-pohon="switch-wrapper"><label for="v-0-0" class="" data-pohon="switch-label">Description slot</label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`switch > renders with disabled correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with id correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="id" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with label correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <div class="" data-pohon="switch-wrapper"><label for="v-0-0" class="" data-pohon="switch-label">Label</label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`switch > renders with label slot correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <div class="" data-pohon="switch-wrapper"><label for="v-0-0" class="" data-pohon="switch-label">Label slot</label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`switch > renders with loading correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="" data-pohon="switch-thumb"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="switch-icon"></span></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with loadingIcon correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="" value="on"><span data-state="unchecked" data-disabled="" class="" data-pohon="switch-thumb"><span class="iconify i-lucide:loader" aria-hidden="true" data-pohon="switch-icon"></span></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with modelValue correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="true" aria-required="false" data-state="checked" value="on"><span data-state="checked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with name correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with required correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="true" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <div class="" data-pohon="switch-wrapper"><label for="v-0-0" class="" data-pohon="switch-label">Label</label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`switch > renders with size lg correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with size md correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with size sm correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with size xl correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with size xs correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with ui correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with uncheckedIcon correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="on"><span data-state="unchecked" class="" data-pohon="switch-thumb"><!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="switch-icon"></span></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`switch > renders with value correctly 1`] = `
+"<div class="" data-pohon="switch-root">
+  <div class="" data-pohon="switch-container"><button data-pohon="switch-base" id="v-0-0" role="switch" type="button" aria-checked="false" aria-required="false" data-state="unchecked" value="value"><span data-state="unchecked" class="" data-pohon="switch-thumb"></span>
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;

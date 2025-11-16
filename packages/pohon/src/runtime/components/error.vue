@@ -7,7 +7,7 @@ import theme from '#build/pohon/error';
 
 type Error = ComponentConfig<typeof theme, AppConfig, 'error'>;
 
-export interface ErrorProps {
+export interface PErrorProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -29,7 +29,7 @@ export interface ErrorProps {
   pohon?: Error['slots'];
 }
 
-export interface ErrorSlots {
+export interface PErrorSlots {
   default: (props?: object) => any;
   statusCode: (props?: object) => any;
   statusMessage: (props?: object) => any;
@@ -47,14 +47,14 @@ import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
 const props = withDefaults(
-  defineProps<ErrorProps>(),
+  defineProps<PErrorProps>(),
   {
     as: 'main',
     redirect: '/',
     clear: true,
   },
 );
-const slots = defineSlots<ErrorSlots>();
+const slots = defineSlots<PErrorSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Error['AppConfig'];

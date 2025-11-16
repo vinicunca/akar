@@ -97,4 +97,13 @@ export default vinicuncaESLint(
       }],
     },
   },
+
+  {
+    files: [
+      'packages/pohon/test/**/*.ts',
+    ],
+    rules: {
+      'sonar/assertions-in-tests': 'off',
+    },
+  },
 );

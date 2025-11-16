@@ -1,0 +1,274 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dashboardNavbar > renders with as correctly 1`] = `
+"<div class="">
+  <!---->
+  <section>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </section>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with class correctly 1`] = `
+"<div class="">
+  <!---->
+  <div class="px-8">
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with default slot correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 class=""></h1>
+    </div>
+    <div class="">Default slot</div>
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with icon correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button><span class="iconify i-lucide:house" aria-hidden="true"></span>
+      <h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with leading slot correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>Leading slot<h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with left slot correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>Left slot</div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with right slot correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class="">Right slot
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with title correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 class="">Dashboard</h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with title slot correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 class="">Title slot</h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with toggle correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with toggle slot correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class="">Toggle slot
+      <!--v-if-->
+      <h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with toggleSide correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+      <h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with trailing slot correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 class=""></h1>Trailing slot
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders with ui correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class="gap-3"><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button>
+      <!--v-if-->
+      <h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`dashboardNavbar > renders without toggle correctly 1`] = `
+"<div class="">
+  <!---->
+  <div>
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+      <h1 class=""></h1>
+    </div>
+    <!--v-if-->
+    <div class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;

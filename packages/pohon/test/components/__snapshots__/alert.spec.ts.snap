@@ -1,0 +1,306 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`alert > renders with actions correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <div class="" data-pohon="alert-actions"><button type="button" class="" data-pohon="button-base">
+        <!--v-if--><span class="" data-pohon="button-label">Action</span>
+        <!--v-if-->
+      </button></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with as correctly 1`] = `
+"<article data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`alert > renders with avatar correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span>
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with class correctly 1`] = `
+"<div data-orientation="vertical" class="w-48" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with close correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="" data-pohon="alert-actions-actions">
+    <!--v-if--><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+</div>"
+`;
+
+exports[`alert > renders with close slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with closeIcon correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="" data-pohon="alert-actions-actions">
+    <!--v-if--><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:trash" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+</div>"
+`;
+
+exports[`alert > renders with description correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <div class="" data-pohon="alert-description">Description</div>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with description slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <div class="" data-pohon="alert-description">Description slot</div>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with icon correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root"><span class="iconify i-lucide:lightbulb" aria-hidden="true" data-pohon="alert-icon"></span>
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with leading slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Leading slot</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with neutral variant outline correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with neutral variant soft correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with neutral variant solid correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with neutral variant subtle correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with orientation horizontal correctly 1`] = `
+"<div data-orientation="horizontal" class="" data-pohon="alert-root"><span class="iconify i-lucide:lightbulb" aria-hidden="true" data-pohon="alert-icon"></span>
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <div class="" data-pohon="alert-description">This is a description</div>
+    <!--v-if-->
+  </div>
+  <div class="" data-pohon="alert-actions-actions"><button type="button" class="" data-pohon="button-base">
+      <!--v-if--><span class="" data-pohon="button-label">Action</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`alert > renders with orientation vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root"><span class="iconify i-lucide:lightbulb" aria-hidden="true" data-pohon="alert-icon"></span>
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <div class="" data-pohon="alert-description">This is a description</div>
+    <div class="" data-pohon="alert-actions"><button type="button" class="" data-pohon="button-base">
+        <!--v-if--><span class="" data-pohon="button-label">Action</span>
+        <!--v-if-->
+      </button></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with primary variant outline correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with primary variant soft correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with primary variant solid correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with primary variant subtle correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with title correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with title slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Title slot</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`alert > renders with ui correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="font-bold" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;

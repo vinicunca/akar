@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dashboardSidebarCollapse > renders with class correctly 1`] = `
+"<div class=""><button type="button" aria-label="Collapse sidebar" class="p-3" data-pohon="button-base"><span class="iconify i-lucide:panel-left-close" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;
+
+exports[`dashboardSidebarCollapse > renders with color correctly 1`] = `
+"<div class=""><button type="button" aria-label="Collapse sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:panel-left-close" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;
+
+exports[`dashboardSidebarCollapse > renders with side correctly 1`] = `
+"<div class=""><button type="button" aria-label="Collapse sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:panel-left-close" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;
+
+exports[`dashboardSidebarCollapse > renders with variant correctly 1`] = `
+"<div class=""><button type="button" aria-label="Collapse sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:panel-left-close" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;

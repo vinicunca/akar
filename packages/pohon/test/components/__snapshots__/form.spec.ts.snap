@@ -1,0 +1,377 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`form > custom validation works > with error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="true" data-pohon="input-base" value="short" aria-describedby="v-0-0-1-error">
+        <!--v-if-->
+      </div>
+      <div id="v-0-0-1-error" class="" data-pohon="form-field-error">Must be at least 8 characters</div>
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > custom validation works > without error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="validpassword">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > joi validation works > with error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="true" data-pohon="input-base" value="short" aria-describedby="v-0-0-1-error">
+        <!--v-if-->
+      </div>
+      <div id="v-0-0-1-error" class="" data-pohon="form-field-error">Must be at least 8 characters</div>
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > joi validation works > without error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="validpassword">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > renders with default slot correctly 1`] = `"<form id="v-0-0" class="">Form slot</form>"`;
+
+exports[`form > renders with state correctly 1`] = `"<form id="v-0-0" class=""></form>"`;
+
+exports[`form > superstruct validation works > with error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="true" data-pohon="input-base" value="short" aria-describedby="v-0-0-1-error">
+        <!--v-if-->
+      </div>
+      <div id="v-0-0-1-error" class="" data-pohon="form-field-error">Must be at least 8 characters</div>
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > superstruct validation works > without error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="validpassword">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > valibot validation works > with error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="true" data-pohon="input-base" value="short" aria-describedby="v-0-0-1-error">
+        <!--v-if-->
+      </div>
+      <div id="v-0-0-1-error" class="" data-pohon="form-field-error">Must be at least 8 characters</div>
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > valibot validation works > without error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="validpassword">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > yup validation works > with error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="true" data-pohon="input-base" value="short" aria-describedby="v-0-0-1-error">
+        <!--v-if-->
+      </div>
+      <div id="v-0-0-1-error" class="" data-pohon="form-field-error">Must be at least 8 characters</div>
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > yup validation works > without error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="validpassword">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > zod validation works > with error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="true" data-pohon="input-base" value="short" aria-describedby="v-0-0-1-error">
+        <!--v-if-->
+      </div>
+      <div id="v-0-0-1-error" class="" data-pohon="form-field-error">Must be at least 8 characters</div>
+    </div>
+  </div>
+</form>"
+`;
+
+exports[`form > zod validation works > without error 1`] = `
+"<form id="42" class="">
+  <div class="" data-pohon="form-field-root" id="emailField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="email" type="text" name="email" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="bob@dylan.com">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="form-field-root" id="passwordField">
+    <div class="" data-pohon="form-field-wrapper">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div class="" data-pohon="form-field-container">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input id="password" type="text" name="password" autocomplete="off" aria-invalid="false" data-pohon="input-base" value="validpassword">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+</form>"
+`;

@@ -153,7 +153,7 @@ export interface PNavigationMenuEmits extends ANavigationMenuRootEmits {}
 
 type SlotProps<T extends PNavigationMenuItem> = (props: { item: T; index: number; active?: boolean; pohon: NavigationMenu['pohon'] }) => any;
 
-export type NavigationMenuSlots<
+export type PNavigationMenuSlots<
   A extends ArrayOrNested<PNavigationMenuItem> = ArrayOrNested<PNavigationMenuItem>,
   T extends NestedItem<A> = NestedItem<A>,
 > = {
@@ -218,7 +218,7 @@ const props = withDefaults(
   },
 );
 const emits = defineEmits<PNavigationMenuEmits>();
-const slots = defineSlots<NavigationMenuSlots<T>>();
+const slots = defineSlots<PNavigationMenuSlots<T>>();
 
 const appConfig = useAppConfig() as NavigationMenu['AppConfig'];
 
@@ -304,14 +304,14 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
 <template>
   <DefineLinkTemplate v-slot="{ item, active, index }">
     <slot
-      :name="((item.slot || 'item') as keyof NavigationMenuSlots<T>)"
+      :name="((item.slot || 'item') as keyof PNavigationMenuSlots<T>)"
       :item="item"
       :index="index"
       :active="active"
       :pohon="pohon"
     >
       <slot
-        :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof NavigationMenuSlots<T>)"
+        :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PNavigationMenuSlots<T>)"
         :item="item"
         :active="active"
         :index="index"
@@ -341,12 +341,12 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
       </slot>
 
       <span
-        v-if="(!collapsed || orientation !== 'vertical') && (getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>])"
+        v-if="(!collapsed || orientation !== 'vertical') && (getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PNavigationMenuSlots<T>])"
         :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
         data-pohon="navigation-menu-link-label"
       >
         <slot
-          :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>)"
+          :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PNavigationMenuSlots<T>)"
           :item="item"
           :active="active"
           :index="index"
@@ -372,11 +372,11 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
             (item.badge || item.badge === 0)
             || (
               orientation === 'horizontal'
-              && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])
+              && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])
             )
             || (orientation === 'vertical' && item.children?.length)
             || item.trailingIcon
-            || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>]
+            || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PNavigationMenuSlots<T>]
           )"
         as="span"
         :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
@@ -384,7 +384,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
         @click.stop.prevent
       >
         <slot
-          :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)"
+          :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PNavigationMenuSlots<T>)"
           :item="item"
           :active="active"
           :index="index"
@@ -401,7 +401,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           />
 
           <PIcon
-            v-if="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length)"
+            v-if="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length)"
             :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
             :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
             data-pohon="navigation-menu-link-trailing-icon"
@@ -441,7 +441,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
         custom
       >
         <component
-          :is="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? ANavigationMenuTrigger : ((orientation === 'vertical' && item.children?.length && !collapsed && !(slotProps as any).href) ? AAccordionTrigger : ANavigationMenuLink)"
+          :is="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])) ? ANavigationMenuTrigger : ((orientation === 'vertical' && item.children?.length && !collapsed && !(slotProps as any).href) ? AAccordionTrigger : ANavigationMenuLink)"
           as-child
           :active="active || item.active"
           :disabled="item.disabled"
@@ -471,7 +471,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
 
             <template #content="{ close }">
               <slot
-                :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)"
+                :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>)"
                 :item="item"
                 :active="active || item.active"
                 :index="index"
@@ -592,13 +592,13 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
         </component>
 
         <ANavigationMenuContent
-          v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])"
+          v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])"
           v-bind="contentProps"
           :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content] })"
           data-pohon="navigation-menu-accordion-content"
         >
           <slot
-            :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)"
+            :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>)"
             :item="item"
             :active="active || item.active"
             :index="index"

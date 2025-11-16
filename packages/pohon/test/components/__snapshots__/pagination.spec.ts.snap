@@ -1,0 +1,1682 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PPagination > renders with as correctly 1`] = `
+"<div data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</div>"
+`;
+
+exports[`PPagination > renders with class correctly 1`] = `
+"<nav class="relative" data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with defaultPage correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with disabled correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" disabled="" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" disabled="" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" disabled="" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" disabled="" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with ellipsis slot correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button>Ellipsis slot<button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 6" data-pohon="button-base" class="" value="6">
+      <!--v-if--><span class="" data-pohon="button-label">6</span>
+      <!--v-if-->
+    </button>Ellipsis slot<button type="button" data-type="page" aria-label="Page 10" data-pohon="button-base" class="" value="10">
+      <!--v-if--><span class="" data-pohon="button-label">10</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with ellipsisIcon correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button>
+    <div data-type="ellipsis" data-pohon="button-base" class=""><span class="iconify i-lucide:ellipsis-vertical" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 6" data-pohon="button-base" class="" value="6">
+      <!--v-if--><span class="" data-pohon="button-label">6</span>
+      <!--v-if-->
+    </button>
+    <div data-type="ellipsis" data-pohon="button-base" class=""><span class="iconify i-lucide:ellipsis-vertical" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" data-type="page" aria-label="Page 10" data-pohon="button-base" class="" value="10">
+      <!--v-if--><span class="" data-pohon="button-label">10</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+</nav>"
+`;
+
+exports[`PPagination > renders with first slot correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list">First slot<button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with firstIcon correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with item slot correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>Item slotItem slotItem slotItem slotItem slot<button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with itemsPerPage correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with last slot correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>Last slot</div>
+</nav>"
+`;
+
+exports[`PPagination > renders with lastIcon correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral active variant ghost correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral active variant link correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral active variant outline correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral active variant soft correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral active variant solid correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral active variant subtle correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral variant ghost correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral variant link correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral variant outline correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral variant soft correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral variant solid correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with neutral variant subtle correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with next slot correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button>Next slot<button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with nextIcon correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with page correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with prev slot correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>Prev slot<button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with prevIcon correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary active variant ghost correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary active variant link correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary active variant outline correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary active variant soft correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary active variant solid correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary active variant subtle correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary variant ghost correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary variant link correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary variant outline correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary variant soft correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary variant solid correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with primary variant subtle correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with showEdges correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 6" data-pohon="button-base" class="" value="6">
+      <!--v-if--><span class="" data-pohon="button-label">6</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 7" data-pohon="button-base" class="" value="7">
+      <!--v-if--><span class="" data-pohon="button-label">7</span>
+      <!--v-if-->
+    </button>
+    <div data-type="ellipsis" data-pohon="button-base" class=""><span class="iconify i-lucide:ellipsis" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" data-type="page" aria-label="Page 10" data-pohon="button-base" class="" value="10">
+      <!--v-if--><span class="" data-pohon="button-label">10</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+</nav>"
+`;
+
+exports[`PPagination > renders with siblingCount correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button>
+    <div data-type="ellipsis" data-pohon="button-base" class=""><span class="iconify i-lucide:ellipsis" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 6" data-pohon="button-base" class="" value="6">
+      <!--v-if--><span class="" data-pohon="button-label">6</span>
+      <!--v-if-->
+    </button>
+    <div data-type="ellipsis" data-pohon="button-base" class=""><span class="iconify i-lucide:ellipsis" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" data-type="page" aria-label="Page 10" data-pohon="button-base" class="" value="10">
+      <!--v-if--><span class="" data-pohon="button-label">10</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+</nav>"
+`;
+
+exports[`PPagination > renders with size lg correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with size md correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with size sm correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with size xl correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with size xs correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with total correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class=""><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders with ui correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="gap-3" data-pohon="pagination-list"><button type="button" disabled="" aria-label="First Page" data-pohon="button-base" class="rounded-full"><span class="iconify i-lucide:chevrons-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" disabled="" aria-label="Previous Page" data-pohon="button-base" class="rounded-full"><span class="iconify i-lucide:chevron-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="rounded-full" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="rounded-full" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="rounded-full" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="rounded-full" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="rounded-full" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button><button type="button" aria-label="Next Page" data-pohon="button-base" class="rounded-full"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button type="button" aria-label="Last Page" data-pohon="button-base" class="rounded-full"><span class="iconify i-lucide:chevrons-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+</nav>"
+`;
+
+exports[`PPagination > renders without showControls correctly 1`] = `
+"<nav data-pohon="pagination-root">
+  <div class="" data-pohon="pagination-list">
+    <!--v-if-->
+    <!--v-if--><button type="button" data-type="page" aria-label="Page 1" aria-current="page" data-selected="true" data-pohon="button-base" class="" value="1">
+      <!--v-if--><span class="" data-pohon="button-label">1</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 2" data-pohon="button-base" class="" value="2">
+      <!--v-if--><span class="" data-pohon="button-label">2</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 3" data-pohon="button-base" class="" value="3">
+      <!--v-if--><span class="" data-pohon="button-label">3</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 4" data-pohon="button-base" class="" value="4">
+      <!--v-if--><span class="" data-pohon="button-label">4</span>
+      <!--v-if-->
+    </button><button type="button" data-type="page" aria-label="Page 5" data-pohon="button-base" class="" value="5">
+      <!--v-if--><span class="" data-pohon="button-label">5</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</nav>"
+`;

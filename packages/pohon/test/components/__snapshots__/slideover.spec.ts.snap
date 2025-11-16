@@ -1,0 +1,502 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PSlideover > renders with actions slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div>Actions slot<button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with body slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body">Body slot</div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with bottom side correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="bottom" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="slideover-title">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="slideover-description">Description</p>
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with class correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1" class="bg-elevated">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with close slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div>Close slot
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with closeIcon correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:trash" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with content slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->Content slot
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with default slot correctly 1`] = `
+"Default slot
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="akar-dialog-content-v-0-0-0" role="dialog" aria-describedby="akar-dialog-description-v-0-0-2" aria-labelledby="akar-dialog-title-v-0-0-1" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with description correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="slideover-title">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="slideover-description">Description</p>
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with description slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="slideover-description">Description slot</p>
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with footer slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <div class="" data-pohon="slideover-footer">Footer slot</div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with header slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">Header slot</div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with left side correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="left" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="slideover-title">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="slideover-description">Description</p>
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with open correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1" style="pointer-events: auto;">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with title correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="slideover-title">Title</h2>
+      <!--v-if-->
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with title slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="slideover-title">Title slot</h2>
+      <!--v-if-->
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with top side correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="top" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="slideover-title">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="slideover-description">Description</p>
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders with ui correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <!--v-if-->
+      <!--v-if-->
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class="end-2"><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders without close correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="slideover-title">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="slideover-description">Description</p>
+    </div>
+    <!--v-if-->
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders without overlay correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<!--v-if-->
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="slideover-title">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="slideover-description">Description</p>
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`PSlideover > renders without transition correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1">
+  <!--v-if-->
+  <div class="" data-pohon="slideover-header">
+    <div class="">
+      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="slideover-title">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="slideover-description">Description</p>
+    </div><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button>
+  </div>
+  <div class="" data-pohon="slideover-body"></div>
+  <!--v-if-->
+</div>
+
+
+<!--teleport end-->"
+`;

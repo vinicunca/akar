@@ -1,0 +1,272 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input > renders with ariaLabel correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" aria-label="Aria label" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with as correctly 1`] = `
+"<section class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</section>"
+`;
+
+exports[`Input > renders with avatar and leadingIcon correctly 1`] = `
+"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="input-leading-icon"></span></span><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with avatar and trailingIcon correctly 1`] = `"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></span><input type="text" autocomplete="off" data-pohon="input-base"><span class="" data-pohon="input-trailing"><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="input-trailing-icon"></span></span></div>"`;
+
+exports[`Input > renders with avatar correctly 1`] = `
+"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></span><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with class correctly 1`] = `
+"<div class="absolute" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with default slot correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">Default slot
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with disabled correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" disabled="" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with file type correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="file" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with icon correctly 1`] = `
+"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span class="iconify i-lucide:search" aria-hidden="true" data-pohon="input-leading-icon"></span></span><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with id correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input id="id" type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with leading and icon correctly 1`] = `
+"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="input-leading-icon"></span></span><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with leading slot correctly 1`] = `
+"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading">Leading slot</span><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with leadingIcon correctly 1`] = `
+"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="input-leading-icon"></span></span><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with loading and avatar correctly 1`] = `
+"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="input-leading-icon"></span></span><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with loading correctly 1`] = `
+"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="input-leading-icon"></span></span><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with loading trailing and avatar correctly 1`] = `"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></span><input type="text" autocomplete="off" data-pohon="input-base"><span class="" data-pohon="input-trailing"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="input-trailing-icon"></span></span></div>"`;
+
+exports[`Input > renders with loading trailing correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base"><span class="" data-pohon="input-trailing"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="input-trailing-icon"></span></span>
+</div>"
+`;
+
+exports[`Input > renders with loadingIcon correctly 1`] = `
+"<div class="" data-pohon="input-root"><span class="" data-pohon="input-leading"><span class="iconify i-lucide:loader" aria-hidden="true" data-pohon="input-leading-icon"></span></span><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with name correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" name="name" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant ghost correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant none correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant outline correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant soft correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with neutral variant subtle correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with placeholder correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" placeholder="Search..." autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with primary variant ghost correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with primary variant none correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with primary variant outline correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with primary variant soft correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with primary variant subtle correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with required correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" required="" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with size lg correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with size md correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with size sm correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with size xl correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with size xs correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with trailing and icon correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base"><span class="" data-pohon="input-trailing"><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="input-trailing-icon"></span></span>
+</div>"
+`;
+
+exports[`Input > renders with trailing slot correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base"><span class="" data-pohon="input-trailing">Trailing slot</span>
+</div>"
+`;
+
+exports[`Input > renders with trailingIcon correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base"><span class="" data-pohon="input-trailing"><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="input-trailing-icon"></span></span>
+</div>"
+`;
+
+exports[`Input > renders with type correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="password" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Input > renders with ui correctly 1`] = `
+"<div class="" data-pohon="input-root">
+  <!--v-if--><input type="text" class="rounded-full" autocomplete="off" data-pohon="input-base">
+  <!--v-if-->
+</div>"
+`;

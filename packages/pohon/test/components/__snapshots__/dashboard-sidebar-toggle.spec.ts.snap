@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dashboardSidebarToggle > renders with class correctly 1`] = `
+"<div class=""><button type="button" aria-label="Open sidebar" class="p-3" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;
+
+exports[`dashboardSidebarToggle > renders with color correctly 1`] = `
+"<div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;
+
+exports[`dashboardSidebarToggle > renders with side correctly 1`] = `
+"<div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;
+
+exports[`dashboardSidebarToggle > renders with variant correctly 1`] = `
+"<div class=""><button type="button" aria-label="Open sidebar" class="" data-pohon="button-base"><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </button></div>"
+`;

@@ -1,0 +1,132 @@
+/* eslint-disable sonar/no-identical-functions */
+/* eslint-disable sonar/no-nested-functions */
+import type { PButtonProps, PButtonSlots } from '../../src/runtime/components/button.vue';
+import theme from '#build/pohon/button';
+import { PForm } from '#components';
+import { mountSuspended } from '@nuxt/test-utils/runtime';
+import { flushPromises } from '@vue/test-utils';
+import { describe, expect, it } from 'vitest';
+import { axe } from 'vitest-axe';
+import { ref } from 'vue';
+import PButton from '../../src/runtime/components/button.vue';
+import ComponentRender from '../component-render';
+
+describe('button', () => {
+  const sizes = Object.keys(theme.variants.size) as any;
+  const variants = Object.keys(theme.variants.variant) as any;
+
+  it.each([
+    // Props
+    ['with label', { props: { label: 'Button' } }],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Button', size } }]),
+    ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { label: 'Button', variant } }]),
+    ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { label: 'Button', variant, color: 'neutral' } }]),
+    ...variants.map((activeVariant: string) => [`with active variant ${activeVariant}`, { props: { label: 'Button', active: true, activeVariant } }]),
+    ['with icon', { props: { icon: 'i-lucide-rocket' } }],
+    ['with leading and icon', { props: { leading: true, icon: 'i-lucide-arrow-left' } }],
+    ['with leadingIcon', { props: { leadingIcon: 'i-lucide-arrow-left' } }],
+    ['with trailing and icon', { props: { trailing: true, icon: 'i-lucide-arrow-right' } }],
+    ['with trailingIcon', { props: { trailingIcon: 'i-lucide-arrow-right' } }],
+    ['with avatar', { props: { avatar: { src: 'https://github.com/benjamincanac.png' } } }],
+    ['with avatar and leadingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, leadingIcon: 'i-lucide-arrow-left' } }],
+    ['with avatar and trailingIcon', { props: { avatar: { src: 'https://github.com/benjamincanac.png' }, trailingIcon: 'i-lucide-arrow-right' } }],
+    ['with loading', { props: { loading: true } }],
+    ['with loading and avatar', { props: { loading: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
+    ['with loading trailing', { props: { loading: true, trailing: true } }],
+    ['with loading trailing and avatar', { props: { loading: true, trailing: true, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
+    ['with loadingIcon', { props: { loading: true, loadingIcon: 'i-lucide-loader' } }],
+    ['with disabled', { props: { label: 'Button', disabled: true } }],
+    ['with disabled and with link', { props: { label: 'Button', disabled: true, to: '/link' } }],
+    ['with block', { props: { label: 'Button', block: true } }],
+    ['with square', { props: { label: 'Button', square: true } }],
+    ['with as', { props: { label: 'Button', as: 'div' } }],
+    ['with class', { props: { label: 'Button', class: 'rounded-full font-bold' } }],
+    ['with activeClass', { props: { label: 'Button', active: true, activeClass: 'font-bold' } }],
+    ['with inactiveClass', { props: { label: 'Button', active: false, inactiveClass: 'font-light' } }],
+    ['with ui', { props: { label: 'Button', pohon: { label: 'font-bold' } } }],
+    // Slots
+    ['with default slot', { slots: { default: () => 'Default slot' } }],
+    ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
+    ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PButtonProps; slots?: Partial<PButtonSlots> }) => {
+    const html = await ComponentRender(nameOrHtml, options, PButton);
+    expect(html).toMatchSnapshot();
+  });
+
+  it('with loading-auto works', async () => {
+    let resolve: any | null = null;
+    const wrapper = await mountSuspended({
+      components: { PButton },
+      setup() {
+        function onClick() {
+          return new Promise((res) => {
+            resolve = res;
+          });
+        }
+
+        return { onClick };
+      },
+      template: `
+        <PButton loading-auto @click="onClick"> Click </PButton>
+      `,
+    });
+
+    const button = wrapper.find('button');
+    button.trigger('click');
+    await flushPromises();
+
+    const icon = wrapper.findComponent({ name: 'PIcon' });
+
+    expect(icon?.vm?.name).toBe('i-lucide:loader-circle');
+
+    resolve?.(null);
+  });
+
+  it('with loading-auto works with forms', async () => {
+    let resolve: any | null = null;
+    const wrapper = await mountSuspended({
+      components: { PButton, PForm },
+      setup() {
+        function onSubmit() {
+          return new Promise((res) => {
+            resolve = res;
+          });
+        }
+
+        const form = ref();
+        return { form, onSubmit };
+      },
+      template: `
+        <PForm :state="{}" ref="form" @submit="onSubmit">
+          <PButton type="submit" loading-auto> Click </PButton>
+        </PForm>
+      `,
+    });
+
+    const form = wrapper.setupState.form;
+    form.value.submit();
+    await flushPromises();
+
+    const icon = wrapper.findComponent({ name: 'PIcon' });
+
+    expect(icon?.vm?.name).toBe('i-lucide:loader-circle');
+
+    resolve?.(null);
+  });
+
+  it('passes accessibility tests', async () => {
+    const wrapper = await mountSuspended(PButton, {
+      props: {
+        label: 'Button',
+        avatar: {
+          src: 'https://github.com/benjamincanac.png',
+          alt: 'Benjamin Canac',
+        },
+        trailingIcon: 'i-lucide-arrow-right',
+
+      },
+    });
+
+    expect(await axe(wrapper.element)).toHaveNoViolations();
+  });
+});

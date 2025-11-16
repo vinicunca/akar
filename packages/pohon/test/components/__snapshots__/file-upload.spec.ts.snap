@@ -1,0 +1,976 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`fileUpload > renders with accept correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="image/*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with actions slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <div class="" data-pohon="file-upload-actions">Actions slot</div>
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with ariaLabel correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" aria-label="Aria label" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with as correctly 1`] = `
+"<section class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</section>"
+`;
+
+exports[`fileUpload > renders with class correctly 1`] = `
+"<div class="w-full gap-4" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with default slot correctly 1`] = `"<div class="" data-pohon="file-upload-root">Default slot<input type="file" accept="*" class="sr-only" tabindex="-1"></div>"`;
+
+exports[`fileUpload > renders with description correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <div class="" data-pohon="file-upload-description">SVG, PNG, JPG or GIF (max. 2MB)</div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with description slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <div class="" data-pohon="file-upload-description">Description slot</div>
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with disabled correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="-1">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" disabled="" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with disabled correctly 2`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="-1">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" disabled="" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with file slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file">File slot</div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with file-leading slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file">File leading slot<div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button></div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with file-name slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">File name slot</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with file-size slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">File size slot</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with file-trailing slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div>File trailing slot
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with fileDelete correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with fileDeleteIcon correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:trash" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with fileIcon correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with files slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">Files slot</div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with files-bottom slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div>Files bottom slot<input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with files-top slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>Files top slot<div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with icon correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:image" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with id correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input id="id" type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with label correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <div class="" data-pohon="file-upload-label">Drop your image here</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with label slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <div class="" data-pohon="file-upload-label">Label slot</div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with layout grid correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with layout grid multiple correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <div class="" data-pohon="file-upload-files">
+      <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+        <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+          <!--v-if-->
+          <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" multiple="" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with layout list correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with layout list multiple correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" multiple="" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with leading slot correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper">Leading slot
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with modelValue correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with multiple correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <div class="" data-pohon="file-upload-files">
+      <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+        <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+          <!--v-if-->
+          <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" multiple="" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with name correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" name="name" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with neutral color correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with position inside correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <div class="" data-pohon="file-upload-files">
+      <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+        <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+          <!--v-if-->
+          <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with position inside multiple correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <div class="" data-pohon="file-upload-files">
+      <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+        <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+          <!--v-if-->
+          <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" multiple="" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with position outside correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with position outside multiple correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <div class="" data-pohon="file-upload-files">
+      <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+        <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+          <!--v-if-->
+          <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+        </button>
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+  <!--v-if--><input type="file" accept="*" multiple="" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with required correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" required="" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with required correctly 2`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" required="" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size lg correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="36" height="36" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size lg variant button correctly 1`] = `
+"<div class="" data-pohon="file-upload-root"><button type="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="file-upload-icon"></span>
+      <!--v-if-->
+    </div>
+  </button>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="36" height="36" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size md correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size md variant button correctly 1`] = `
+"<div class="" data-pohon="file-upload-root"><button type="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="file-upload-icon"></span>
+      <!--v-if-->
+    </div>
+  </button>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size sm correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="28" height="28" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size sm variant button correctly 1`] = `
+"<div class="" data-pohon="file-upload-root"><button type="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="file-upload-icon"></span>
+      <!--v-if-->
+    </div>
+  </button>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="28" height="28" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size xl correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="40" height="40" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size xl variant button correctly 1`] = `
+"<div class="" data-pohon="file-upload-root"><button type="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="file-upload-icon"></span>
+      <!--v-if-->
+    </div>
+  </button>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="40" height="40" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size xs correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="24" height="24" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with size xs variant button correctly 1`] = `
+"<div class="" data-pohon="file-upload-root"><button type="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="file-upload-icon"></span>
+      <!--v-if-->
+    </div>
+  </button>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="24" height="24" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with ui correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="rounded-xl" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with variant area correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders with variant button correctly 1`] = `
+"<div class="" data-pohon="file-upload-root"><button type="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="file-upload-icon"></span>
+      <!--v-if-->
+    </div>
+  </button>
+  <div class="" data-pohon="file-upload-files">
+    <div class="" data-pohon="file-upload-file"><span data-pohon="avatar-root"><img src="blob:mock-url-file.txt" width="32" height="32" data-pohon="avatar-image"></span>
+      <div class="" data-pohon="file-upload-file-wrapper"><span class="" data-pohon="file-upload-file-name">file.txt</span><span class="" data-pohon="file-upload-file-size">0B</span></div><button type="button" aria-label="Remove file.txt" data-pohon="button-base" class="">
+        <!--v-if-->
+        <!--v-if--><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+      </button>
+    </div>
+  </div><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders without dropzone correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders without interactive correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="-1">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;
+
+exports[`fileUpload > renders without preview correctly 1`] = `
+"<div class="" data-pohon="file-upload-root">
+  <div role="button" data-dragging="false" class="" tabindex="0">
+    <!--v-if-->
+    <div class="" data-pohon="file-upload-wrapper"><span data-pohon="avatar-root"><span class="iconify i-lucide:upload" aria-hidden="true" data-pohon="avatar-icon"></span></span>
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+  </div>
+  <!--v-if--><input type="file" accept="*" class="sr-only" tabindex="-1">
+</div>"
+`;

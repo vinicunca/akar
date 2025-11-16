@@ -1,0 +1,159 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`breadcrumb > renders with as correctly 1`] = `
+"<div aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="breadcrumb-link-label">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</div>"
+`;
+
+exports[`breadcrumb > renders with class correctly 1`] = `
+"<nav aria-label="breadcrumb" class="w-48" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="breadcrumb-link-label">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with custom slot correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="breadcrumb-link-label">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link">Custom slot</a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with item slot correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link">Item slot</a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link">Item slot</span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with item-label slot correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="breadcrumb-link-label">Item label slot</span></a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Item label slot</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with item-leading slot correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link">Item leading slot<span class="" data-pohon="breadcrumb-link-label">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link">Item leading slot<span class="" data-pohon="breadcrumb-link-label">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with item-trailing slot correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="breadcrumb-link-label">Home</span>Item trailing slot</a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Components</span>Item trailing slot</span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with items correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="breadcrumb-link-label">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with labelKey correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+        <!--v-if-->
+      </a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">i-lucide-box</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">i-lucide-link</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with separator slot correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="breadcrumb-link-label">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator">/</li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator">/</li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with separatorIcon correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="breadcrumb-link-label">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;
+
+exports[`breadcrumb > renders with ui correctly 1`] = `
+"<nav aria-label="breadcrumb" class="" data-pohon="breadcrumb-root">
+  <ol class="" data-pohon="breadcrumb-list">
+    <li class="" data-pohon="breadcrumb-item"><a href="/" class="font-bold" data-pohon="breadcrumb-link"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="breadcrumb-link-label">Home</span></a></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><span class="font-bold" data-pohon="breadcrumb-link"><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Components</span></span></li>
+    <li role="presentation" aria-hidden="true" class="" data-pohon="breadcrumb-separator"><span class="iconify i-lucide:chevron-right" aria-hidden="true" data-pohon="breadcrumb-separator-icon"></span></li>
+    <li class="" data-pohon="breadcrumb-item"><a href="/components/breadcrumb" class="font-bold" data-pohon="breadcrumb-link"><span class="iconify i-lucide:link" aria-hidden="true" data-pohon="breadcrumb-link-leading-icon"></span><span class="" data-pohon="breadcrumb-link-label">Breadcrumb</span></a></li>
+    <!--v-if-->
+  </ol>
+</nav>"
+`;

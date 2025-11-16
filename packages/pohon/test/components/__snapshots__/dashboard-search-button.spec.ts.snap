@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dashboardSearchButton > renders with class correctly 1`] = `
+"<button type="button" class="w-full" data-pohon="button-base"><span class="iconify i-lucide:search" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Search...</span>
+  <div class=""><kbd class="">Ctrl</kbd><kbd class="">k</kbd></div>
+</button>"
+`;
+
+exports[`dashboardSearchButton > renders with collapsed correctly 1`] = `
+"<button type="button" aria-label="Search..." class="" data-pohon="button-base"><span class="iconify i-lucide:search" aria-hidden="true" data-pohon="button-leading-icon"></span>
+  <!--v-if-->
+  <!--v-if-->
+</button>"
+`;
+
+exports[`dashboardSearchButton > renders with icon correctly 1`] = `
+"<button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:house" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Search...</span>
+  <div class=""><kbd class="">Ctrl</kbd><kbd class="">k</kbd></div>
+</button>"
+`;
+
+exports[`dashboardSearchButton > renders with kbds correctly 1`] = `
+"<button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:search" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Search...</span>
+  <div class=""><kbd class="">Alt</kbd><kbd class="">o</kbd></div>
+</button>"
+`;
+
+exports[`dashboardSearchButton > renders with label correctly 1`] = `
+"<button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:search" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Open</span>
+  <div class=""><kbd class="">Ctrl</kbd><kbd class="">k</kbd></div>
+</button>"
+`;

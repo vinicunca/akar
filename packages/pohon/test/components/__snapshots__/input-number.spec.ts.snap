@@ -1,0 +1,461 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`inputNumber > renders with .optional modifier correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with ariaLabel correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" aria-label="Aria label" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with as correctly 1`] = `
+"<section data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`inputNumber > renders with class correctly 1`] = `
+"<div class="absolute" data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with decrement slot correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement">-</div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with decrementIcon correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with disabled correctly 1`] = `
+"<div data-pohon="input-number-root" role="group" data-disabled="">
+  <div class="" data-pohon="input-number-decrement"><button type="button" disabled="" aria-label="Decrement" tabindex="-1" data-disabled="" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" disabled="" data-disabled="" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" disabled="" aria-label="Increment" tabindex="-1" data-disabled="" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with increment slot correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment">+</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with incrementIcon correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with name correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with neutral variant ghost correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with neutral variant none correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with neutral variant outline correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with neutral variant soft correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with neutral variant subtle correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with orientation vertical correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:chevron-up" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with placeholder correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" placeholder="Number..." data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with primary variant ghost correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with primary variant none correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with primary variant outline correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with primary variant soft correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with primary variant subtle correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with required correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" required="" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with size lg correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with size md correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with size sm correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with size xl correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with size xs correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders with ui correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" class="rounded-full" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders without decrement correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <!--v-if--><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders without decrement vertical correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <!--v-if--><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <div class="" data-pohon="input-number-increment"><button type="button" aria-label="Increment" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:chevron-up" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders without increment and decrement correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <!--v-if--><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders without increment and decrement vertical correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <!--v-if--><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders without increment correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:minus" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputNumber > renders without increment vertical correctly 1`] = `
+"<div data-pohon="input-number-root" role="group">
+  <div class="" data-pohon="input-number-decrement"><button type="button" aria-label="Decrement" tabindex="-1" class="" data-pohon="button-base"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="button-leading-icon"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button></div><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-pohon="input-number-base" value="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;

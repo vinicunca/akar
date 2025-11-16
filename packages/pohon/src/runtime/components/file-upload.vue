@@ -108,7 +108,7 @@ export interface FileUploadEmits {
 
 type FileUploadFiles<M> = (M extends true ? Array<File> : File) | null;
 
-export interface FileUploadSlots<M extends boolean = false> {
+export interface PFileUploadSlots<M extends boolean = false> {
   'default': (props: {
     open: UseFileDialogReturn['open'];
     removeFile: (index?: number) => void;
@@ -158,7 +158,7 @@ const props = withDefaults(
   },
 );
 const emits = defineEmits<FileUploadEmits>();
-const slots = defineSlots<FileUploadSlots<M>>();
+const slots = defineSlots<PFileUploadSlots<M>>();
 
 const modelValue = defineModel<(M extends true ? Array<File> : File) | null>();
 

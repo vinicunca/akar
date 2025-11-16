@@ -5,7 +5,7 @@ import theme from '#build/pohon/skeleton';
 
 type Skeleton = ComponentConfig<typeof theme, AppConfig, 'skeleton'>;
 
-export interface SkeletonProps {
+export interface PSkeletonProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -21,7 +21,7 @@ import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { uv } from '../utils/uv';
 
-const props = defineProps<SkeletonProps>();
+const props = defineProps<PSkeletonProps>();
 
 const appConfig = useAppConfig() as Skeleton['AppConfig'];
 

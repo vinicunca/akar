@@ -1,0 +1,89 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`fieldGroup > renders orientation vertical with default slot correctly 1`] = `
+"<div data-orientation="vertical" class="">
+  <div class="" data-pohon="input-root">
+    <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+    <!--v-if-->
+  </div> <button type="button" class="" data-pohon="button-base">
+    <!--v-if--> Click me!
+    <!--v-if-->
+  </button>
+</div>"
+`;
+
+exports[`fieldGroup > renders with as correctly 1`] = `"<section data-orientation="horizontal" class=""></section>"`;
+
+exports[`fieldGroup > renders with class correctly 1`] = `"<div data-orientation="horizontal" class="absolute"></div>"`;
+
+exports[`fieldGroup > renders with default slot correctly 1`] = `
+"<div data-orientation="horizontal" class="">
+  <div class="" data-pohon="input-root">
+    <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+    <!--v-if-->
+  </div> <button type="button" class="" data-pohon="button-base">
+    <!--v-if--> Click me!
+    <!--v-if-->
+  </button>
+</div>"
+`;
+
+exports[`fieldGroup > renders with size lg correctly 1`] = `
+"<div data-orientation="horizontal" class="">
+  <div class="" data-pohon="input-root">
+    <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+    <!--v-if-->
+  </div> <button type="button" class="" data-pohon="button-base">
+    <!--v-if--> Click me!
+    <!--v-if-->
+  </button>
+</div>"
+`;
+
+exports[`fieldGroup > renders with size md correctly 1`] = `
+"<div data-orientation="horizontal" class="">
+  <div class="" data-pohon="input-root">
+    <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+    <!--v-if-->
+  </div> <button type="button" class="" data-pohon="button-base">
+    <!--v-if--> Click me!
+    <!--v-if-->
+  </button>
+</div>"
+`;
+
+exports[`fieldGroup > renders with size sm correctly 1`] = `
+"<div data-orientation="horizontal" class="">
+  <div class="" data-pohon="input-root">
+    <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+    <!--v-if-->
+  </div> <button type="button" class="" data-pohon="button-base">
+    <!--v-if--> Click me!
+    <!--v-if-->
+  </button>
+</div>"
+`;
+
+exports[`fieldGroup > renders with size xl correctly 1`] = `
+"<div data-orientation="horizontal" class="">
+  <div class="" data-pohon="input-root">
+    <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+    <!--v-if-->
+  </div> <button type="button" class="" data-pohon="button-base">
+    <!--v-if--> Click me!
+    <!--v-if-->
+  </button>
+</div>"
+`;
+
+exports[`fieldGroup > renders with size xs correctly 1`] = `
+"<div data-orientation="horizontal" class="">
+  <div class="" data-pohon="input-root">
+    <!--v-if--><input type="text" autocomplete="off" data-pohon="input-base">
+    <!--v-if-->
+  </div> <button type="button" class="" data-pohon="button-base">
+    <!--v-if--> Click me!
+    <!--v-if-->
+  </button>
+</div>"
+`;

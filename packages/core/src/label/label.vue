@@ -11,9 +11,12 @@ export interface ALabelProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
-const props = withDefaults(defineProps<ALabelProps>(), {
-  as: 'label',
-});
+const props = withDefaults(
+  defineProps<ALabelProps>(),
+  {
+    as: 'label',
+  },
+);
 
 useForwardExpose();
 

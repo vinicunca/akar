@@ -1,0 +1,268 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`banner > renders with actions correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center"><span data-v-99da65f1="" class="iconify i-lucide:rocket" aria-hidden="true" data-pohon="banner-icon"></span>
+      <div data-v-99da65f1="" class="" data-pohon="banner-title">Title</div>
+      <div data-v-99da65f1="" class="" data-pohon="banner-actions"><button type="button" class="" data-pohon="button-base">
+          <!--v-if--><span class="" data-pohon="button-label">Learn more</span><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="button-trailing-icon"></span>
+        </button></div>
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with actions slot correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <div data-v-99da65f1="" class="" data-pohon="banner-actions">Actions slot</div>
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with as correctly 1`] = `
+"<section data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</section>"
+`;
+
+exports[`banner > renders with class correctly 1`] = `
+"<div data-v-99da65f1="" class="z-10" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with close correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right"><button type="button" aria-label="Close" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with close slot correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">Close slot</div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with closeIcon correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with icon correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center"><span data-v-99da65f1="" class="iconify i-lucide:rocket" aria-hidden="true" data-pohon="banner-icon"></span>
+      <div data-v-99da65f1="" class="" data-pohon="banner-title">Title</div>
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with id correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with leading slot correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">Leading slot
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with neutral color correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center"><span data-v-99da65f1="" class="iconify i-lucide:rocket" aria-hidden="true" data-pohon="banner-icon"></span>
+      <div data-v-99da65f1="" class="" data-pohon="banner-title">Title</div>
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with target correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root"><a href="https://nuxt.com" tabindex="-1" rel="noopener noreferrer" target="_blank" class="focus:outline-none"><span data-v-99da65f1="" class="inset-0 absolute" aria-hidden="true"></span></a>
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with title correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <div data-v-99da65f1="" class="" data-pohon="banner-title">Title</div>
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with title slot correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <div data-v-99da65f1="" class="" data-pohon="banner-title">Title slot</div>
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with to correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root"><a href="/getting-started" tabindex="-1" class="focus:outline-none"><span data-v-99da65f1="" class="inset-0 absolute" aria-hidden="true"></span></a>
+  <div data-v-99da65f1="" class="" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`banner > renders with ui correctly 1`] = `
+"<div data-v-99da65f1="" class="" data-pohon="banner-root">
+  <!--v-if-->
+  <div data-v-99da65f1="" class="gap-6" data-pohon="banner-container">
+    <div data-v-99da65f1="" class="" data-pohon="banner-left"></div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-center">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-99da65f1="" class="" data-pohon="banner-right">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
