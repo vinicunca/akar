@@ -27,7 +27,7 @@ defineShortcuts({
 <template>
   <PDashboardSidebar v-model:open="open">
     <template #header="{ collapsed }">
-      <Logo
+      <BaseLogo
         v-if="!collapsed"
         class="h-5 w-auto"
       />

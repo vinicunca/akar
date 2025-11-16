@@ -2,7 +2,7 @@
 import type { PNavigationMenuItem } from 'pohon-ui';
 
 defineProps<{
-  mode: 'drawer' | 'slideover' | 'modal';
+  mode: 'drawer' | 'slideover' | 'dialog';
 }>();
 
 const items: Array<PNavigationMenuItem> = [{
@@ -22,7 +22,7 @@ const items: Array<PNavigationMenuItem> = [{
   <PDashboardGroup>
     <PDashboardSidebar :mode="mode">
       <template #header="{ collapsed }">
-        <Logo
+        <BaseLogo
           v-if="!collapsed"
           class="h-5 w-auto"
         />

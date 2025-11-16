@@ -9,14 +9,9 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-search.vue
-navigation.badge: Soon
 ---
 
-## Work in Progress
-
-This component is currently being developed and is not yet ready for production use.
-
-<!-- ## Usage
+## Usage
 
 The DashboardSearch component extends the [CommandPalette](/docs/pohon/components/command-palette) component, so you can pass any property such as `icon`, `placeholder`, etc.
 
@@ -26,10 +21,10 @@ Use it inside the default slot of the [DashboardGroup](/docs/pohon/components/da
 <template>
   <PDashboardGroup>
     <PDashboardSidebar>
-      <UDashboardSearchButton />
+      <PDashboardSearchButton />
     </PDashboardSidebar>
 
-    <UDashboardSearch />
+    <PDashboardSearch />
 
     <slot />
   </PDashboardGroup>
@@ -46,7 +41,7 @@ Use the `shortcut` prop to change the shortcut used in [defineShortcuts](/docs/c
 
 ```vue [app.vue]{4}
 <template>
-  <UDashboardSearch
+  <PDashboardSearch
     v-model:search-term="searchTerm"
     shortcut="meta_k"
     :groups="groups"
@@ -63,7 +58,7 @@ By default, a group of commands will be added to the command palette so you can 
 <script setup lang="ts">
 definePageMeta({
   colorMode: 'dark'
-})
+});
 </script>
 ```
 
@@ -71,7 +66,7 @@ You can disable this behavior by setting the `color-mode` prop to `false`:
 
 ```vue [app.vue]{4}
 <template>
-  <UDashboardSearch
+  <PDashboardSearch
     v-model:search-term="searchTerm"
     :color-mode="false"
     :groups="groups"
@@ -102,11 +97,10 @@ When accessing the component via a template ref, you can use the following:
 | ---- | ---- |
 | `commandPaletteRef` | `Ref<InstanceType<typeof PCommandPalette> \| null>` |
 
-
 ## Theme
 
 :docs-pohon-theme
 
 ## Changelog
 
-:docs-component-changelog -->
+:docs-component-changelog

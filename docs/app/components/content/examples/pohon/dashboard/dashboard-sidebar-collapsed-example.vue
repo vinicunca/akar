@@ -30,7 +30,7 @@ defineShortcuts({
     collapsible
   >
     <template #header>
-      <Logo
+      <BaseLogo
         v-if="!collapsed"
         class="h-5 w-auto"
       />

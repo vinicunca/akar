@@ -43,7 +43,7 @@ const items: Array<Array<PNavigationMenuItem>> = [[{
     :pohon="{ footer: 'border-t border-border' }"
   >
     <template #header="{ collapsed }">
-      <Logo
+      <BaseLogo
         v-if="!collapsed"
         class="shrink-0 h-5 w-auto"
       />

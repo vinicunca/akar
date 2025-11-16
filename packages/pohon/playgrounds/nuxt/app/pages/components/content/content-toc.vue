@@ -8,19 +8,19 @@ const links = [
       {
         id: 'title',
         depth: 3,
-        text: 'Title'
+        text: 'Title',
       },
       {
         id: 'color',
         depth: 3,
-        text: 'Color'
+        text: 'Color',
       },
       {
         id: 'highlight',
         depth: 3,
-        text: 'Highlight'
-      }
-    ]
+        text: 'Highlight',
+      },
+    ],
   },
   {
     id: 'api',
@@ -30,31 +30,34 @@ const links = [
       {
         id: 'props',
         depth: 3,
-        text: 'Props'
+        text: 'Props',
       },
       {
         id: 'slots',
         depth: 3,
-        text: 'Slots'
-      }
-    ]
+        text: 'Slots',
+      },
+    ],
   },
   {
     id: 'theme',
     depth: 2,
-    text: 'Theme'
-  }
-]
+    text: 'Theme',
+  },
+];
 </script>
 
 <template>
   <Navbar />
 
-  <UContentToc :links="links" class="w-full lg:w-64">
+  <PContentToc
+    :links="links"
+    class="w-full lg:w-64"
+  >
     <template #bottom>
-      <USeparator type="dashed" />
+      <PSeparator type="dashed" />
 
-      <Placeholder class="h-32" />
+      <CorePlaceholder class="h-32" />
     </template>
-  </UContentToc>
+  </PContentToc>
 </template>

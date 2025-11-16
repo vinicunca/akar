@@ -9,11 +9,7 @@ links:
 navigation.badge: Soon
 ---
 
-## Work in Progress
-
-This component is currently being developed and is not yet ready for production use.
-
-<!-- ## Usage
+## Usage
 
 The DashboardToolbar component is used to display a toolbar under the [DashboardNavbar](/docs/pohon/components/dashboard-navbar) component.
 
@@ -23,7 +19,7 @@ Use it inside the `header` slot of the [DashboardPanel](/docs/pohon/components/d
 <script setup lang="ts">
 definePageMeta({
   layout: 'dashboard'
-})
+});
 </script>
 
 <template>
@@ -69,4 +65,4 @@ In this example, we use the [NavigationMenu](/docs/pohon/components/navigation-m
 
 ## Changelog
 
-:docs-component-changelog -->
+:docs-component-changelog

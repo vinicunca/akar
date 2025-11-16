@@ -25,7 +25,7 @@ const items: Array<PNavigationMenuItem> = [{
       }"
     >
       <template #header>
-        <Logo class="h-5 w-auto" />
+        <BaseLogo class="h-5 w-auto" />
       </template>
 
       <PNavigationMenu

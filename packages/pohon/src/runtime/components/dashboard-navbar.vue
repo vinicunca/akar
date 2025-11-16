@@ -38,12 +38,12 @@ type DashboardNavbarSlotsProps = Omit<DashboardContext, 'storage' | 'storageKey'
 
 export interface PDashboardNavbarSlots {
   title: (props?: object) => any;
-  leading: (props: DashboardNavbarSlotsProps) => any;
-  trailing: (props: DashboardNavbarSlotsProps) => any;
+  leading: (props: DashboardNavbarSlotsProps & { pohon: DashboardNavbar['pohon'] }) => any;
+  trailing: (props: DashboardNavbarSlotsProps & { pohon: DashboardNavbar['pohon'] }) => any;
   left: (props: DashboardNavbarSlotsProps) => any;
   default: (props: DashboardNavbarSlotsProps) => any;
   right: (props: DashboardNavbarSlotsProps) => any;
-  toggle: (props: DashboardNavbarSlotsProps) => any;
+  toggle: (props: DashboardNavbarSlotsProps & { pohon: DashboardNavbar['pohon'] }) => any;
 }
 </script>
 
@@ -85,7 +85,7 @@ const pohon = computed(() =>
   <DefineToggleTemplate>
     <slot
       name="toggle"
-      v-bind="dashboardContext"
+      v-bind="{ ...dashboardContext, pohon }"
     >
       <PDashboardSidebarToggle
         v-if="toggle"
@@ -110,7 +110,7 @@ const pohon = computed(() =>
       >
         <slot
           name="leading"
-          v-bind="dashboardContext"
+          v-bind="{ ...dashboardContext, pohon }"
         >
           <PIcon
             v-if="icon"
@@ -127,7 +127,7 @@ const pohon = computed(() =>
 
         <slot
           name="trailing"
-          v-bind="dashboardContext"
+          v-bind="{ ...dashboardContext, pohon }"
         />
       </slot>
     </div>

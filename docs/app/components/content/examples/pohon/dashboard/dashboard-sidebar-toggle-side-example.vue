@@ -21,7 +21,7 @@ const items: Array<PNavigationMenuItem> = [{
       toggle-side="right"
     >
       <template #header>
-        <Logo class="h-5 w-auto" />
+        <BaseLogo class="h-5 w-auto" />
       </template>
 
       <PNavigationMenu

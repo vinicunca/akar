@@ -6,14 +6,9 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-group.vue
-navigation.badge: Soon
 ---
 
-## Work in Progress
-
-This component is currently being developed and is not yet ready for production use.
-
-<!-- ## Usage
+## Usage
 
 The DashboardGroup component is the main layout that wraps the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) and [DashboardPanel](/docs/pohon/components/dashboard-panel) components to create a responsive dashboard interface.
 
@@ -45,4 +40,4 @@ Use it in a layout or in your `app.vue`:
 
 ## Changelog
 
-:docs-component-changelog -->
+:docs-component-changelog

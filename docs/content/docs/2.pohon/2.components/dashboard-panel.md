@@ -6,14 +6,9 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-panel.vue
-navigation.badge: Soon
 ---
 
-## Work in Progress
-
-This component is currently being developed and is not yet ready for production use.
-
-<!-- ## Usage
+## Usage
 
 The DashboardPanel component is used to display a panel. Its state (size, collapsed, etc.) will be saved based on the `storage` and `storage-key` props you provide to the [DashboardGroup](/docs/pohon/components/dashboard-group#props) component.
 
@@ -23,13 +18,19 @@ Use it inside the default slot of the [DashboardGroup](/docs/pohon/components/da
 <script setup lang="ts">
 definePageMeta({
   layout: 'dashboard'
-})
+});
 </script>
 
 <template>
-  <PDashboardPanel id="inbox-1" resizable />
+  <PDashboardPanel
+    id="inbox-1"
+    resizable
+  />
 
-  <PDashboardPanel id="inbox-2" class="hidden lg:flex" />
+  <PDashboardPanel
+    id="inbox-2"
+    class="hidden lg:flex"
+  />
 </template>
 ```
 
@@ -137,4 +138,4 @@ Sizes are calculated as percentages by default. You can change this using the `u
 
 ## Changelog
 
-:docs-component-changelog -->
+:docs-component-changelog

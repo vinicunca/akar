@@ -6,14 +6,9 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-sidebar.vue
-navigation.badge: Soon
 ---
 
-## Work in Progress
-
-This component is currently being developed and is not yet ready for production use.
-
-<!-- ## Usage
+## Usage
 
 The DashboardSidebar component is used to display a sidebar. Its state (size, collapsed, etc.) will be saved based on the `storage` and `storage-key` props you provide to the [DashboardGroup](/docs/pohon/components/dashboard-group#props) component.
 
@@ -213,7 +208,7 @@ options:
     label: 'mode'
     default: 'drawer'
     items:
-      - modal
+      - dialog
       - slideover
       - drawer
 props:
@@ -279,7 +274,7 @@ class: 'akar:p-0 akar:justify-start'
 ::
 
 ::note
-In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the open state of the DashboardSidebar by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/docs/pohon/composables/define-shortcuts), you can toggle the open state of the DashboardSidebar by pressing :kbd{value="O"}.
 ::
 
 ### Control collapsed state
@@ -299,7 +294,7 @@ props:
 ::
 
 ::note
-In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the collapsed state of the DashboardSidebar by pressing :kbd{value="C"}.
+In this example, leveraging [`defineShortcuts`](/docs/pohon/composables/define-shortcuts), you can toggle the collapsed state of the DashboardSidebar by pressing :kbd{value="C"}.
 ::
 
 ## API
@@ -318,4 +313,4 @@ In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcu
 
 ## Changelog
 
-:docs-component-changelog -->
+:docs-component-changelog

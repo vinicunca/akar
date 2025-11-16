@@ -6,14 +6,9 @@ links:
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/dashboard-resize-handle.vue
-navigation.badge: Soon
 ---
 
-## Work in Progress
-
-This component is currently being developed and is not yet ready for production use.
-
-<!-- ## Usage
+## Usage
 
 The DashboardResizeHandle component is used by the [DashboardSidebar](/docs/pohon/components/dashboard-sidebar) and [DashboardPanel](/docs/pohon/components/dashboard-panel) components.
 
@@ -32,8 +27,8 @@ Even though this component is automatically displayed when the `resizable` prop 
   <PDashboardGroup>
     <PDashboardSidebar resizable>
       <template #resize-handle="{ onMouseDown, onTouchStart, onDoubleClick }">
-        <UDashboardResizeHandle
-          class="after:absolute after:inset-y-0 after:right-0 after:w-px hover:after:bg-(--ui-border-accented) after:transition"
+        <PDashboardResizeHandle
+          class="hover:after:bg---ui-border-accented after:w-px after:transition after:inset-y-0 after:right-0 after:absolute"
           @mousedown="onMouseDown"
           @touchstart="onTouchStart"
           @dblclick="onDoubleClick"
@@ -50,14 +45,14 @@ Even though this component is automatically displayed when the `resizable` prop 
 <script setup lang="ts">
 definePageMeta({
   layout: 'dashboard'
-})
+});
 </script>
 
 <template>
   <PDashboardPanel resizable>
     <template #resize-handle="{ onMouseDown, onTouchStart, onDoubleClick }">
-      <UDashboardResizeHandle
-        class="after:absolute after:inset-y-0 after:right-0 after:w-px hover:after:bg-(--ui-border-accented) after:transition"
+      <PDashboardResizeHandle
+        class="hover:after:bg---ui-border-accented after:w-px after:transition after:inset-y-0 after:right-0 after:absolute"
         @mousedown="onMouseDown"
         @touchstart="onTouchStart"
         @dblclick="onDoubleClick"
@@ -89,4 +84,4 @@ In this example, we add an `after` pseudo-element to display a vertical line on 
 
 ## Changelog
 
-:docs-component-changelog -->
+:docs-component-changelog
