@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Ref } from '#imports';
 import type { ContentNavigationItem } from '@nuxt/content';
 import { useLazyAsyncData } from '#app';
 import { inject, queryCollectionSearchSections, ref } from '#imports';
@@ -14,7 +15,7 @@ const searchTerm = ref('');
 
 <template>
   <ClientOnly>
-    <LazyUContentSearch
+    <LazyPContentSearch
       v-model:search-term="searchTerm"
       open
       :autofocus="false"

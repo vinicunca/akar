@@ -231,21 +231,24 @@ Use the ContentNavigation component inside a [PageAside](/docs/pohon/components/
 
 ```vue [layouts/docs.vue]{11}
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content';
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 </script>
 
 <template>
-  <UPage>
+  <ExampleLayout>
     <template #left>
-      <UPageAside>
-        <PContentNavigation :navigation="navigation" highlight />
-      </UPageAside>
+      <div>
+        <PContentNavigation
+          :navigation="navigation"
+          highlight
+        />
+      </div>
     </template>
 
     <slot />
-  </UPage>
+  </ExampleLayout>
 </template>
 ```
 
@@ -255,15 +258,18 @@ Use the ContentNavigation component inside the `content` slot of a [Header](/doc
 
 ```vue [components/Header.vue]{9-11}
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content';
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 </script>
 
 <template>
   <PHeader>
     <template #body>
-      <PContentNavigation :navigation="navigation" highlight />
+      <PContentNavigation
+        :navigation="navigation"
+        highlight
+      />
     </template>
   </PHeader>
 </template>

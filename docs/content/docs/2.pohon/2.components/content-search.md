@@ -65,7 +65,7 @@ By default, a group of commands will be added to the command palette so you can 
 <script setup lang="ts">
 definePageMeta({
   colorMode: 'dark'
-})
+});
 </script>
 ```
 
@@ -95,10 +95,10 @@ Use the ContentSearch component in your `app.vue` or in a layout:
 
 ```vue [app.vue]
 <script setup lang="ts">
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'));
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
   server: false
-})
+});
 
 const links = [{
   label: 'Docs',
@@ -112,9 +112,9 @@ const links = [{
   label: 'Showcase',
   icon: 'i-lucide:presentation',
   to: '/showcase'
-}]
+}];
 
-const searchTerm = ref('')
+const searchTerm = ref('');
 </script>
 
 <template>
@@ -158,7 +158,6 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `commandPaletteRef` | `Ref<InstanceType<typeof PCommandPalette> \| null>` |
-
 
 ## Theme
 
