@@ -88,7 +88,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
-          # cache: pnpm
+          cache: pnpm
 
       # - name: Install latest pohon-ui
       #   run: pnpm install https://pkg.pr.new/pohon-ui@31d2fec --lockfile-only
