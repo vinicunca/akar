@@ -94,4 +94,4 @@ jobs:
         run: pnpm install https://pkg.pr.new/pohon-ui@${{ env.COMMIT_SHA }} --lockfile-only
 
       - name: Build
-        run: pnpm run build
+        run: pnpm run docs:build
