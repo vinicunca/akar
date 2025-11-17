@@ -137,6 +137,10 @@ export function useNavigation(
     return parent.children?.map((item) => processNavigationItem(item)) as Array<ContentNavigationItem>;
   });
 
+  const navigationByFramework = computed(() =>
+    rootNavigation.value?.map((item) => filterChildrenByFramework(item, framework.value)),
+  );
+
   function findBreadcrumb(path: string) {
     const breadcrumb = findPageBreadcrumb(navigation?.value, path, { indexAsChild: true });
 
@@ -178,6 +182,7 @@ export function useNavigation(
     findBreadcrumb,
     findSurround,
     navigationByCategory,
+    navigationByFramework,
   };
 }
 

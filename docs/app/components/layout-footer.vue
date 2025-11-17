@@ -1,24 +1,8 @@
 <script setup lang="ts">
 import { useRoute } from '#app';
-import { PButton, PFooter, PNavigationMenu, PSeparator } from '#components';
+import { PButton, PFooter, PSeparator } from '#components';
 
 const route = useRoute();
-const links = [{
-  label: 'Figma',
-  to: '/figma',
-}, {
-  label: 'Templates',
-  to: '/templates',
-}, {
-  label: 'Showcase',
-  to: '/showcase',
-}, {
-  label: 'Community',
-  to: '/community',
-}, {
-  label: 'Team',
-  to: '/team',
-}];
 </script>
 
 <template>
@@ -37,12 +21,6 @@ const links = [{
         Published under <span class="color-text-highlighted">MIT License</span>
       </NuxtLink>
     </template>
-
-    <PNavigationMenu
-      :items="links"
-      variant="link"
-      color="neutral"
-    />
 
     <template #right>
       <PButton

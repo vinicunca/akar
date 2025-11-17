@@ -121,7 +121,7 @@ const colorMode = useColorMode();
 const appConfig = useAppConfig() as DashboardSearch['AppConfig'];
 
 const commandPaletteProps = useForwardProps(reactivePick(props, 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'));
-const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'));
+const dialogProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'));
 
 const getProxySlots = () => omit(slots, ['content']);
 
@@ -183,7 +183,7 @@ function onSelect(item: PCommandPaletteItem) {
     return;
   }
 
-  // Close modal on select
+  // Close dialog on select
   open.value = false;
   // Reset search term on select
   searchTerm.value = '';
@@ -210,8 +210,8 @@ defineExpose({
     v-model:open="open"
     :title="title || t('dashboardSearch.title')"
     :description="description || t('dashboardSearch.description')"
-    v-bind="(modalProps as any)"
-    :class="pohon.modal({ class: [props.pohon?.modal, props.class] })"
+    v-bind="(dialogProps as any)"
+    :class="pohon.dialog({ class: [props.pohon?.dialog, props.class] })"
   >
     <template #content="contentData">
       <slot
@@ -224,7 +224,7 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :pohon="transformPohon(omit(pohon, ['modal']), props.pohon)"
+          :pohon="transformPohon(omit(pohon, ['dialog']), props.pohon)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

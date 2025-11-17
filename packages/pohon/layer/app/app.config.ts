@@ -16,6 +16,7 @@ import { chipTheme } from './themes/chip.theme';
 import { colorPickerTheme } from './themes/color-picker.theme';
 import { commandPaletteTheme } from './themes/command-palette.theme';
 import { contentNavigationTheme } from './themes/content-navigation.theme';
+import { contentSearchTheme } from './themes/content-search.theme';
 import { contentSurroundTheme } from './themes/content-surround.theme';
 import { contentTocTheme } from './themes/content-toc.theme';
 import { contextMenuTheme } from './themes/context-menu.theme';
@@ -93,6 +94,12 @@ export default defineAppConfig({
     contentSurround: contentSurroundTheme,
     contentToc: contentTocTheme,
     contextMenu: contextMenuTheme,
+    contentSearch: contentSearchTheme,
+    contentSearchButton: {
+      slots: {
+        trailing: 'hidden lg:flex items-center gap-0.5 ms-auto',
+      },
+    },
     ...dashboardThemes,
     dialog: dialogTheme,
     drawer: drawerTheme,

@@ -43,7 +43,7 @@ provide('components', components);
           </div>
         </template>
 
-        <!-- <UDashboardSearchButton /> -->
+        <!-- <PDashboardSearchButton /> -->
 
         <PNavigationMenu
           :items="items"

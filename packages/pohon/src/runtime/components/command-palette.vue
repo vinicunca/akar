@@ -563,7 +563,7 @@ function onSelect(event: Event, item: T) {
             >
               <span
                 :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, item.pohon?.itemLabel], active: active || item.active })"
-                data-pohon="command-palette-label"
+                data-pohon="command-palette-item-label"
               >
                 <slot
                   :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<G, T>)"
@@ -576,15 +576,6 @@ function onSelect(event: Event, item: T) {
                     :class="pohon.itemLabelPrefix({ class: [props.pohon?.itemLabelPrefix, item.pohon?.itemLabelPrefix] })"
                     data-pohon="command-palette-item-label-prefix"
                   >{{ item.prefix }}</span>
-
-                  <span
-                    :class="pohon.itemLabelBase({
-                      class: [props.pohon?.itemLabelBase, item.pohon?.itemLabelBase],
-                      active: active || item.active,
-                    })"
-                    data-pohon="command-palette-item-label-base"
-                    v-html="item.labelHtml || getProp({ object: item, path: props.labelKey as string })"
-                  />
 
                   <span
                     v-if="item.labelHtml"

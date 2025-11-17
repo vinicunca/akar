@@ -4,15 +4,18 @@ import {
   computed,
   provide,
   queryCollectionNavigation,
+  queryCollectionSearchSections,
   useAppConfig,
   useAsyncData,
   useColorMode,
   useFaviconFromTheme,
   useHead,
+  useLazyAsyncData,
   useNavigation,
   useRoute,
   useServerSeoMeta,
 } from '#imports';
+import LayoutHeaderSearch from './components/header/layout-header-search.vue';
 import LayoutHeader from './components/header/layout-header.vue';
 import LayoutFooter from './components/layout-footer.vue';
 
@@ -27,6 +30,16 @@ const { data: navigation } = useAsyncData(
     'category',
     'description',
   ]),
+);
+
+const { data: files } = useLazyAsyncData(
+  'search',
+  () => queryCollectionSearchSections('docs', {
+    ignoredTags: ['style'],
+  }),
+  {
+    server: false,
+  },
 );
 
 const color = computed(() => colorMode.value === 'dark' ? 'black' : 'white');
@@ -54,7 +67,7 @@ useServerSeoMeta({
 
 useFaviconFromTheme();
 
-const { rootNavigation } = useNavigation(navigation);
+const { rootNavigation, navigationByFramework } = useNavigation(navigation);
 
 provide('navigation', rootNavigation);
 </script>
@@ -71,14 +84,23 @@ provide('navigation', rootNavigation);
       :height="2"
     />
 
-    <div :class="[route.path.startsWith('/docs/') && 'root']">
+    <div :class="{ root: route.path.startsWith('/docs/') }">
       <LayoutHeader v-if="!route.path.startsWith('/examples')" />
 
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
 
-      <LayoutFooter v-if="!route.path.startsWith('/examples')" />
+      <template v-if="!route.path.startsWith('/examples')">
+        <LayoutFooter />
+
+        <ClientOnly>
+          <LayoutHeaderSearch
+            :files="files"
+            :navigation="navigationByFramework"
+          />
+        </ClientOnly>
+      </template>
     </div>
   </PApp>
 </template>

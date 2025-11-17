@@ -77,7 +77,7 @@ export const dashboardThemes = {
     variants: {
       fullscreen: {
         false: {
-          modal: 'sm:max-w-3xl sm:h-[28rem]',
+          dialog: 'sm:max-w-3xl sm:h-[28rem]',
         },
       },
     },
