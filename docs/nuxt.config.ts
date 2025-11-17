@@ -1,4 +1,5 @@
 import { createResolver } from '@nuxt/kit';
+import pkg from '../package.json';
 
 const { resolve } = createResolver(import.meta.url);
 
@@ -21,6 +22,7 @@ export default defineNuxtConfig({
       'data-akar-drawer-wrapper': '',
     },
   },
+
   compatibilityDate: '2024-07-09',
 
   componentMeta: {
@@ -65,6 +67,14 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        externalRelAttribute: 'noopener',
+      },
+    },
+  },
+
   extends: [
     'pohon-ui/layer',
   ],
@@ -89,9 +99,9 @@ export default defineNuxtConfig({
     provider: 'iconify',
   },
 
-  imports: {
-    autoImport: false,
-  },
+  // imports: {
+  //   autoImport: false,
+  // },
 
   llms: {
     description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
@@ -158,11 +168,11 @@ export default defineNuxtConfig({
 
   modules: [
     'pohon-ui',
-    '@unocss/nuxt',
     '@nuxt/content',
     '@nuxt/fonts',
     'nuxt-component-meta',
     'nuxt-og-image',
+    '@unocss/nuxt',
     (_, nuxt) => {
       nuxt.hook('components:dirs', (dirs) => {
         dirs.unshift({
@@ -175,6 +185,18 @@ export default defineNuxtConfig({
     },
     'nuxt-llms',
   ],
+
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: [
+        '/docs/pohon/getting-started',
+        '/api/countries.json',
+        '/api/locales.json',
+        '/api/module.json',
+      ],
+    },
+  },
 
   routeRules: {
     '/docs/akar/components': {
@@ -194,6 +216,12 @@ export default defineNuxtConfig({
       redirect: { statusCode: 301, to: '/docs/akar/utilities/config-provider' },
     },
     '/docs/pohon/composables': { prerender: false, redirect: { statusCode: 301, to: '/docs/pohon/composables/define-shortcuts' } },
+  },
+
+  runtimeConfig: {
+    public: {
+      version: pkg.version,
+    },
   },
 
   vite: {
