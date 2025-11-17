@@ -90,8 +90,11 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: pnpm
 
-      - name: Install latest pohon/ui
+      - name: Install latest pohon-ui
         run: pnpm install https://pkg.pr.new/pohon-ui@${{ env.COMMIT_SHA }} --lockfile-only
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Build
         run: pnpm run docs:build
