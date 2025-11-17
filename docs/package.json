@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt dev",
-    "build": "nuxt build",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' nuxt build",
     "generate": "nuxt generate",
     "typecheck": "nuxt typecheck",
     "docs:gen:dev": "tsx watch scripts/autogen.ts",

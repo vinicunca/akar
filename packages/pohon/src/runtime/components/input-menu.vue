@@ -507,6 +507,13 @@ function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true>) {
   }
 }
 
+function onCreate(event: Event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  emits('create', searchTerm.value);
+}
+
 function onSelect(event: Event, item: PInputMenuItem) {
   if (!isInputItem(item)) {
     return;
@@ -536,7 +543,7 @@ defineExpose({
       :class="pohon.item({ class: props.pohon?.item })"
       :value="searchTerm"
       data-pohon="input-menu-item"
-      @select.prevent="emits('create', searchTerm)"
+      @select="onCreate"
     >
       <span
         :class="pohon.itemLabel({ class: props.pohon?.itemLabel })"
@@ -683,7 +690,6 @@ defineExpose({
     ignore-filter
     @update:model-value="onUpdate"
     @update:open="onUpdateOpen"
-    @keydown.enter="$event.preventDefault()"
   >
     <AComboboxAnchor
       :as-child="!multiple"
@@ -759,7 +765,7 @@ defineExpose({
             :placeholder="placeholder"
             :class="pohon.tagsInput({ class: props.pohon?.tagsInput })"
             data-pohon="input-menu-tags-input"
-            @keydown.enter.prevent
+            @change.stop
           />
         </AComboboxInput>
       </ATagsInputRoot>
@@ -775,6 +781,7 @@ defineExpose({
         :required="required"
         @blur="onBlur"
         @focus="onFocus"
+        @change.stop
         @update:model-value="searchTerm = $event"
       />
 

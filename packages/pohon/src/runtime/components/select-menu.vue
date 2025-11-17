@@ -497,6 +497,13 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
+function onCreate(event: Event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  emits('create', searchTerm.value);
+}
+
 function onSelect(event: Event, item: PSelectMenuItem) {
   if (!isSelectItem(item)) {
     return;
@@ -526,7 +533,7 @@ defineExpose({
       :class="pohon.item({ class: props.pohon?.item })"
       :value="searchTerm"
       data-pohon="select-menu-item"
-      @select.prevent="emits('create', searchTerm)"
+      @select="onCreate"
     >
       <span
         :class="pohon.itemLabel({ class: props.pohon?.itemLabel })"
@@ -787,6 +794,7 @@ defineExpose({
               v-bind="searchInputProps"
               :class="pohon.input({ class: props.pohon?.input })"
               data-pohon="select-menu-input"
+              @change.stop
             />
           </AComboboxInput>
 

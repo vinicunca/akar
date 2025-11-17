@@ -192,8 +192,6 @@ export default defineNuxtConfig({
       routes: [
         '/docs/pohon/getting-started',
         '/api/countries.json',
-        '/api/locales.json',
-        '/api/module.json',
       ],
     },
   },
