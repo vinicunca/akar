@@ -3,7 +3,7 @@ export interface ATreeVirtualizerProps {
   /** Number of items rendered outside the visible area */
   overscan?: number;
   /** Estimated size (in px) of each item */
-  estimateSize?: number;
+  estimateSize?: number | ((index: number) => number);
   /** Text content for each item to achieve type-ahead feature */
   textContent?: (item: Record<string, any>) => string;
 }
@@ -14,7 +14,7 @@ import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual';
 import type { Ref } from 'vue';
 import type { FlattenedItem } from './tree-root.vue';
 import { useVirtualizer } from '@tanstack/vue-virtual';
-import { KEY_CODES } from '@vinicunca/perkakas';
+import { isFunction, KEY_CODES } from '@vinicunca/perkakas';
 import { refAutoReset, useParentElement } from '@vueuse/core';
 import { cloneVNode, computed, nextTick, useSlots } from 'vue';
 import { useCollection } from '../collection';
@@ -88,7 +88,11 @@ const virtualizer = useVirtualizer(
     getItemKey(index) {
       return index + rootContext.getKey(rootContext.expandedItems.value[index].value);
     },
-    estimateSize() {
+    estimateSize(index) {
+      if (isFunction(props.estimateSize)) {
+        return props.estimateSize(index);
+      }
+
       return props.estimateSize ?? 28;
     },
     getScrollElement() {

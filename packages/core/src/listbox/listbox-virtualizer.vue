@@ -5,7 +5,7 @@ export interface AListboxVirtualizerProps<T extends AcceptableValue = Acceptable
   /** Number of items rendered outside the visible area */
   overscan?: number;
   /** Estimated size (in px) of each item */
-  estimateSize?: number;
+  estimateSize?: number | ((index: number) => number);
   /** Text content for each item to achieve type-ahead feature */
   textContent?: (option: T) => string;
 }
@@ -16,7 +16,7 @@ import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual';
 import type { Ref, VNode } from 'vue';
 import type { AcceptableValue } from '../shared/types';
 import { useVirtualizer } from '@tanstack/vue-virtual';
-import { KEY_CODES } from '@vinicunca/perkakas';
+import { isFunction, KEY_CODES } from '@vinicunca/perkakas';
 import { useParentElement } from '@vueuse/core';
 import { refAutoReset } from '@vueuse/shared';
 import { cloneVNode, computed, Fragment, useSlots } from 'vue';
@@ -72,7 +72,11 @@ const virtualizer = useVirtualizer(
     get horizontal() {
       return rootContext.orientation.value === 'horizontal';
     },
-    estimateSize() {
+    estimateSize(index) {
+      if (isFunction(props.estimateSize)) {
+        return props.estimateSize(index);
+      }
+
       return props.estimateSize ?? 28;
     },
     getScrollElement() {
