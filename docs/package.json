@@ -6,7 +6,6 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "prepare": "nuxt prepare",
     "typecheck": "nuxt typecheck",
     "docs:gen:dev": "tsx watch scripts/autogen.ts",
     "docs:gen": "tsx scripts/autogen.ts"
