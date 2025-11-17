@@ -57,7 +57,7 @@ jobs:
       - name: Publish
         # Only publish preview package on ubuntu during PRs
         if: matrix.os == 'ubuntu-latest'
-        run: pnpx pkg-pr-new publish --compact --no-template --pnpm
+        run: pnpx pkg-pr-new publish './packages/pohon' --compact --no-template --pnpm
 
   docs:
     needs: build
