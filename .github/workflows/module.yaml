@@ -97,4 +97,4 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm run docs:build
+        run: cd docs && pnpm run build
