@@ -99,9 +99,9 @@ export default defineNuxtConfig({
     provider: 'iconify',
   },
 
-  // imports: {
-  //   autoImport: false,
-  // },
+  imports: {
+    autoImport: false,
+  },
 
   llms: {
     description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',

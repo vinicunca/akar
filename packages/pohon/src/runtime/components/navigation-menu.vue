@@ -5,7 +5,6 @@ import type {
   AAccordionRootProps,
   ANavigationMenuContentEmits,
   ANavigationMenuContentProps,
-  ANavigationMenuRootEmits,
   ANavigationMenuRootProps,
 } from 'akar';
 import type { PAvatarProps, PBadgeProps, PIconProps, PLinkProps, PPopoverProps, PTooltipProps } from '../types';
@@ -69,12 +68,49 @@ export interface PNavigationMenuItem extends Omit<PLinkProps, 'type' | 'raw' | '
   [key: string]: any;
 }
 
-export interface PNavigationMenuProps<T extends ArrayOrNested<PNavigationMenuItem> = ArrayOrNested<PNavigationMenuItem>> extends Pick<ANavigationMenuRootProps, 'modelValue' | 'defaultValue' | 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'>, Pick<AAccordionRootProps, 'disabled' | 'type' | 'collapsible'> {
+type SingleOrMultipleType = 'single' | 'multiple';
+type Orientation = ANavigationMenuRootProps['orientation'];
+
+type NavigationMenuModelValue<
+  K extends SingleOrMultipleType = SingleOrMultipleType,
+  O extends Orientation = Orientation,
+> = O extends 'horizontal' ? string : K extends 'single' ? string : K extends 'multiple' ? Array<string> : string | Array<string>;
+
+export interface PNavigationMenuProps<
+  T extends ArrayOrNested<PNavigationMenuItem> = ArrayOrNested<PNavigationMenuItem>,
+  K extends SingleOrMultipleType = SingleOrMultipleType,
+  O extends Orientation = Orientation,
+> extends Pick<ANavigationMenuRootProps, 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'>, Pick<AAccordionRootProps, 'disabled' | 'collapsible'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any;
+  /**
+   * Determines whether a "single" or "multiple" items can be selected at a time.
+   *
+   * Only works when `orientation` is `vertical`.
+   * @defaultValue 'multiple'
+   */
+  type?: K;
+  /**
+   * The controlled value of the active item(s).
+   * - In horizontal orientation: always `string`
+   * - In vertical orientation with `type="single"`: `string`
+   * - In vertical orientation with `type="multiple"`: `string[]`
+   *
+   * Use this when you need to control the state of the items. Can be binded with `v-model`
+   */
+  modelValue?: NavigationMenuModelValue<K, O>;
+  /**
+   * The default active value of the item(s).
+   * - In horizontal orientation: always `string`
+   * - In vertical orientation with `type="single"`: `string`
+   * - In vertical orientation with `type="multiple"`: `string[]`
+   *
+   * Use when you do not need to control the state of the item(s).
+   */
+  defaultValue?: NavigationMenuModelValue<K, O>;
   /**
    * The icon displayed to open the menu.
    * @defaultValue appConfig.pohon.icons.chevronDown
@@ -101,7 +137,7 @@ export interface PNavigationMenuProps<T extends ArrayOrNested<PNavigationMenuIte
    * The orientation of the menu.
    * @defaultValue 'horizontal'
    */
-  orientation?: ANavigationMenuRootProps['orientation'];
+  orientation?: O;
   /**
    * Collapse the navigation menu to only show icons.
    * Only works when `orientation` is `vertical`.
@@ -149,7 +185,18 @@ export interface PNavigationMenuProps<T extends ArrayOrNested<PNavigationMenuIte
   pohon?: NavigationMenu['slots'];
 }
 
-export interface PNavigationMenuEmits extends ANavigationMenuRootEmits {}
+export type PNavigationMenuEmits<
+  K extends SingleOrMultipleType = SingleOrMultipleType,
+  O extends Orientation = Orientation,
+> = {
+  /**
+   * Event handler called when the value changes.
+   * - In horizontal orientation: emits `string`
+   * - In vertical orientation with `type="single"`: emits `string | undefined`
+   * - In vertical orientation with `type="multiple"`: emits `string[] | undefined`
+   */
+  'update:modelValue': [value: NavigationMenuModelValue<K, O> | undefined];
+};
 
 type SlotProps<T extends PNavigationMenuItem> = (props: { item: T; index: number; active?: boolean; pohon: NavigationMenu['pohon'] }) => any;
 
@@ -170,7 +217,7 @@ export type PNavigationMenuSlots<
 
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<PNavigationMenuItem>">
+<script setup lang="ts" generic="T extends ArrayOrNested<PNavigationMenuItem>, K extends SingleOrMultipleType = SingleOrMultipleType, O extends Orientation = Orientation">
 import { useAppConfig } from '#imports';
 import { isBoolean, isNumber, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
@@ -205,19 +252,19 @@ import PTooltip from './tooltip.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<PNavigationMenuProps<T>>(),
+  defineProps<PNavigationMenuProps<T, K, O>>(),
   {
-    orientation: 'horizontal',
+    orientation: 'horizontal' as never,
     contentOrientation: 'horizontal',
     externalIcon: true,
     delayDuration: 0,
-    type: 'multiple',
+    type: 'multiple' as never,
     collapsible: true,
     unmountOnHide: true,
     labelKey: 'label',
   },
 );
-const emits = defineEmits<PNavigationMenuEmits>();
+const emits = defineEmits<PNavigationMenuEmits<K, O>>();
 const slots = defineSlots<PNavigationMenuSlots<T>>();
 
 const appConfig = useAppConfig() as NavigationMenu['AppConfig'];
@@ -225,8 +272,6 @@ const appConfig = useAppConfig() as NavigationMenu['AppConfig'];
 const rootProps = useForwardPropsEmits(
   computed(() => ({
     as: props.as,
-    modelValue: props.modelValue,
-    defaultValue: props.defaultValue,
     delayDuration: props.delayDuration,
     skipDelayDuration: props.skipDelayDuration,
     orientation: props.orientation,
@@ -714,7 +759,14 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
   </DefineItemTemplate>
 
   <ANavigationMenuRoot
-    v-bind="{ ...rootProps, ...$attrs }"
+    v-bind="{
+      ...rootProps,
+      ...(orientation === 'horizontal' ? {
+        modelValue: modelValue as string,
+        defaultValue: defaultValue as string,
+      } : {}),
+      ...$attrs,
+    }"
     :data-collapsed="collapsed"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     data-pohon="navigation-menu-root"
@@ -728,7 +780,8 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
       <component
         v-bind="orientation === 'vertical' && !collapsed ? {
           ...accordionProps,
-          defaultValue: getAccordionDefaultValue(list),
+          modelValue,
+          defaultValue: defaultValue ?? getAccordionDefaultValue(list),
         } : {}"
         :is="orientation === 'vertical' && !collapsed ? AAccordionRoot : ANavigationMenuList"
         as="ul"
