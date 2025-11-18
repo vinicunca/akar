@@ -85,6 +85,7 @@ catalogs:
     unbuild: ^3.6.1
     unplugin-vue-components: ^29.1.0
   pohon:
+    '@clack/prompts': ^0.8.2
     '@nuxt/content': 3.8.0
     '@nuxt/fonts': ^0.12.1
     '@nuxt/icon': ^2.0.0
@@ -95,7 +96,9 @@ catalogs:
     '@tanstack/vue-table': ^8.21.3
     '@unocss/nuxt': 66.5.4
     '@vinicunca/unocss-preset': 1.35.0
+    citty: ^0.1.6
     colortranslator: ^5.0.0
+    consola: ^3.4.2
     embla-carousel-auto-height: ^8.6.0
     embla-carousel-auto-scroll: ^8.6.0
     embla-carousel-autoplay: ^8.6.0

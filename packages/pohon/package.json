@@ -103,6 +103,9 @@
       ]
     }
   },
+  "bin": {
+    "pohon-ui": "./cli/index.mjs"
+  },
   "files": [
     ".nuxt/pohon",
     "cli",
@@ -153,6 +156,7 @@
     }
   },
   "dependencies": {
+    "@clack/prompts": "catalog:pohon",
     "@nuxt/fonts": "catalog:pohon",
     "@nuxt/icon": "catalog:pohon",
     "@nuxt/kit": "catalog:plugins",
@@ -166,7 +170,9 @@
     "@vueuse/core": "catalog:core",
     "@vueuse/integrations": "catalog:core",
     "akar": "workspace:*",
+    "citty": "catalog:pohon",
     "colortranslator": "catalog:pohon",
+    "consola": "catalog:pohon",
     "defu": "catalog:core",
     "embla-carousel-auto-height": "catalog:pohon",
     "embla-carousel-auto-scroll": "catalog:pohon",

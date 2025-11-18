@@ -211,6 +211,9 @@ catalogs:
       specifier: ^29.1.0
       version: 29.2.0
   pohon:
+    '@clack/prompts':
+      specifier: ^0.8.2
+      version: 0.8.2
     '@nuxt/content':
       specifier: 3.8.0
       version: 3.8.0
@@ -241,9 +244,15 @@ catalogs:
     '@vinicunca/unocss-preset':
       specifier: 1.35.0
       version: 1.35.0
+    citty:
+      specifier: ^0.1.6
+      version: 0.1.6
     colortranslator:
       specifier: ^5.0.0
       version: 5.0.0
+    consola:
+      specifier: ^3.4.2
+      version: 3.4.2
     embla-carousel-auto-height:
       specifier: ^8.6.0
       version: 8.6.0
@@ -583,6 +592,9 @@ importers:
 
   packages/pohon:
     dependencies:
+      '@clack/prompts':
+        specifier: catalog:pohon
+        version: 0.8.2
       '@inertiajs/vue3':
         specifier: ^2.0.7
         version: 2.2.17(vue@3.5.24(typescript@5.8.3))
@@ -625,9 +637,15 @@ importers:
       akar:
         specifier: workspace:*
         version: link:../core
+      citty:
+        specifier: catalog:pohon
+        version: 0.1.6
       colortranslator:
         specifier: catalog:pohon
         version: 5.0.0
+      consola:
+        specifier: catalog:pohon
+        version: 3.4.2
       defu:
         specifier: catalog:core
         version: 6.1.4
@@ -1015,11 +1033,17 @@ packages:
   '@changesets/write@0.4.0':
     resolution: {integrity: sha512-CdTLvIOPiCNuH71pyDu3rA+Q0n65cmAbXnwWH84rKGiFumFzkmHNT8KHTMEchcxN+Kl8I54xGUhJ7l3E7X396Q==}
 
+  '@clack/core@0.3.5':
+    resolution: {integrity: sha512-5cfhQNH+1VQ2xLQlmzXMqUoiaH0lRBq9/CLW9lTyMbuKLC3+xEK01tHVvyut++mLOn5urSHmkm6I0Lg9MaJSTQ==}
+
   '@clack/core@0.5.0':
     resolution: {integrity: sha512-p3y0FIOwaYRUPRcMO7+dlmLh8PSRcrjuTndsiA0WAFbWES0mLZlrjVoBRZ9DzkPFJZG6KGkJmoEAY0ZcVWTkow==}
 
   '@clack/prompts@0.11.0':
     resolution: {integrity: sha512-pMN5FcrEw9hUkZA4f+zLlzivQSeQf5dRGJjSUbvVYDLvpKCdQx5OaknvKzgbtXOizhP+SJJJjqEbOe55uKKfAw==}
+
+  '@clack/prompts@0.8.2':
+    resolution: {integrity: sha512-6b9Ab2UiZwJYA9iMyboYyW9yJvAO9V753ZhS+DHKEjZRKAxPPOb7MXXu84lsPFG+vZt6FRFniZ8rXi+zCIw4yQ==}
 
   '@cloudflare/kv-asset-handler@0.4.0':
     resolution: {integrity: sha512-+tv3z+SPp+gqTIcImN9o0hqE9xyfQjI1XD9pL6NuKjua9B1y7mNYv0S9cP+QEbA4ppVgGZEmKOvHX5G5Ei1CVA==}
@@ -8637,6 +8661,11 @@ snapshots:
       human-id: 4.1.2
       prettier: 2.8.8
 
+  '@clack/core@0.3.5':
+    dependencies:
+      picocolors: 1.1.1
+      sisteransi: 1.0.5
+
   '@clack/core@0.5.0':
     dependencies:
       picocolors: 1.1.1
@@ -8645,6 +8674,12 @@ snapshots:
   '@clack/prompts@0.11.0':
     dependencies:
       '@clack/core': 0.5.0
+      picocolors: 1.1.1
+      sisteransi: 1.0.5
+
+  '@clack/prompts@0.8.2':
+    dependencies:
+      '@clack/core': 0.3.5
       picocolors: 1.1.1
       sisteransi: 1.0.5
 
