@@ -1,5 +1,11 @@
 # akar
 
+## 1.12.1
+
+### Patch Changes
+
+- [`147cf74`](https://github.com/vinicunca/akar/commit/147cf745d5a6e367ee4fe763dd0f3e47e4e64bca) Thanks [@praburangki](https://github.com/praburangki)! - release
+
 ## 1.12.0
 
 ### Minor Changes
