@@ -79,9 +79,10 @@ export const switchTheme = {
     },
     disabled: {
       true: {
-        base: 'opacity-75 cursor-not-allowed',
-        label: 'opacity-75 cursor-not-allowed',
-        description: 'opacity-75 cursor-not-allowed',
+        root: 'opacity-75',
+        base: 'cursor-not-allowed',
+        label: 'cursor-not-allowed',
+        description: 'cursor-not-allowed',
       },
     },
   },

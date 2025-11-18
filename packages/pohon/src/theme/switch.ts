@@ -81,6 +81,7 @@ export default (options: Required<PohonModuleOptions>) => {
       },
       disabled: {
         true: {
+          root: '',
           base: '',
           label: '',
           description: '',

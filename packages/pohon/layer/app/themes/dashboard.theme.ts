@@ -86,6 +86,14 @@ export const dashboardThemes = {
     slots: {
       trailing: 'hidden lg:flex items-center gap-0.5 ms-auto',
     },
+    variants: {
+      collapsed: {
+        true: {
+          label: 'hidden',
+          trailing: 'lg:hidden',
+        },
+      },
+    },
   } satisfies PThemeDashboardSearchButton,
   dashboardResizeHandle: {
     base: 'hidden lg:block touch-none select-none cursor-ew-resize relative before:(content-empty absolute inset-y-0 -left-1.5 -right-1.5)',

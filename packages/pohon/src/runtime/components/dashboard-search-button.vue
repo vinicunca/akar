@@ -104,7 +104,9 @@ const pohon = computed(() =>
   uv({
     extend: uv(theme),
     ...(appConfig.pohon?.dashboardSearchButton || {}),
-  })(),
+  })({
+    collapsed: props.collapsed,
+  }),
 );
 </script>
 
@@ -118,7 +120,6 @@ const pohon = computed(() =>
         ...buttonProps,
         ...(collapsed ? {
           'square': true,
-          'label': undefined,
           'aria-label': label || t('dashboardSearchButton.label'),
         } : {}),
         ...$attrs,
@@ -138,7 +139,6 @@ const pohon = computed(() =>
       </template>
 
       <template
-        v-if="!collapsed"
         #trailing="{ pohon: pohonProxy }"
       >
         <div :class="pohon.trailing({ class: props.pohon?.trailing })">

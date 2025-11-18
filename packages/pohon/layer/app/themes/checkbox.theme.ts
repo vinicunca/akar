@@ -81,9 +81,10 @@ export const checkboxTheme = {
     },
     disabled: {
       true: {
-        base: 'cursor-not-allowed opacity-75',
-        label: 'cursor-not-allowed opacity-75',
-        description: 'cursor-not-allowed opacity-75',
+        root: 'opacity-75',
+        base: 'cursor-not-allowed',
+        label: 'cursor-not-allowed',
+        description: 'cursor-not-allowed',
       },
     },
   },
@@ -111,7 +112,7 @@ export const checkboxTheme = {
       variant: 'card',
       disabled: true,
       class: {
-        root: 'cursor-not-allowed opacity-75',
+        root: 'cursor-not-allowed',
       },
     },
   ],
@@ -203,10 +204,9 @@ export const checkboxGroupTheme = {
     },
     {
       variant: 'table',
-      // @ts-expect-error this is valid
       disabled: true,
       class: {
-        item: 'cursor-not-allowed opacity-75',
+        item: 'cursor-not-allowed',
       },
     },
   ],

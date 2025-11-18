@@ -56,6 +56,9 @@ export default (options: Required<PohonModuleOptions>) => {
           legend: '',
         },
       },
+      disabled: {
+        true: {},
+      },
     },
 
     compoundVariants: [],

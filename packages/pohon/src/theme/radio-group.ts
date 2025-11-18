@@ -103,8 +103,10 @@ export default (options: Required<PohonModuleOptions>) => {
       },
       disabled: {
         true: {
+          item: '',
           base: '',
           label: '',
+          description: '',
         },
       },
       required: {
