@@ -386,7 +386,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
       </slot>
 
       <span
-        v-if="(!collapsed || orientation !== 'vertical') && (getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PNavigationMenuSlots<T>])"
+        v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PNavigationMenuSlots<T>]"
         :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
         data-pohon="navigation-menu-link-label"
       >
@@ -412,17 +412,14 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
 
       <component
         :is="orientation === 'vertical' && item.children?.length && !collapsed ? AAccordionTrigger : 'span'"
-        v-if="(!collapsed || orientation !== 'vertical')
-          && (
-            (item.badge || item.badge === 0)
-            || (
-              orientation === 'horizontal'
-              && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])
-            )
-            || (orientation === 'vertical' && item.children?.length)
-            || item.trailingIcon
-            || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PNavigationMenuSlots<T>]
-          )"
+        v-if="(item.badge || item.badge === 0)
+          || (
+            orientation === 'horizontal'
+            && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])
+          )
+          || (orientation === 'vertical' && item.children?.length)
+          || item.trailingIcon
+          || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PNavigationMenuSlots<T>]"
         as="span"
         :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
         data-pohon="navigation-menu-link-trailing"
@@ -783,7 +780,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
           modelValue,
           defaultValue: defaultValue ?? getAccordionDefaultValue(list),
         } : {}"
-        :is="orientation === 'vertical' && !collapsed ? AAccordionRoot : ANavigationMenuList"
+        :is="orientation === 'vertical' ? AAccordionRoot : ANavigationMenuList"
         as="ul"
         :class="pohon.list({ class: props.pohon?.list })"
         data-pohon="navigation-menu-list"

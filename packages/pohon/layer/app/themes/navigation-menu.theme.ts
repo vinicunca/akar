@@ -127,6 +127,8 @@ export const navigationMenuTheme = {
       collapsed: true,
       class: {
         link: 'akar:(px-1.5 grid-cols-[min-content])',
+        linkLabel: 'hidden',
+        linkTrailing: 'hidden',
         content: 'shadow-sm rounded-sm min-h-6 p-1',
       },
     },
