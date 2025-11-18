@@ -187,12 +187,12 @@ props:
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.loading` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.loading` key.
 :::
 ::
@@ -274,7 +274,7 @@ name: 'input-kbd-example'
 ---
 ::
 
-::note{to="/composables/define-shortcuts"}
+::note{to="/docs/pohon/composables/define-shortcuts"}
 This example uses the `defineShortcuts` composable to focus the Input when the :kbd{value="/"} key is pressed.
 ::
 
@@ -304,7 +304,7 @@ It also provides validation and error handling when used within a **Form** compo
 
 ### Within a FieldGroup
 
-You can use the Input within a [FieldGroup](/docs/components/pohon/field-group) component to group multiple elements together.
+You can use the Input within a [FieldGroup](/docs/pohon/components/field-group) component to group multiple elements together.
 
 ::docs-component-example
 ---

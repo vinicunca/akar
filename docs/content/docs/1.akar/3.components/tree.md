@@ -56,13 +56,13 @@ import { ATreeItem, ATreeRoot, ATreeVirtualizer } from 'akar';
 
 Contains all the parts of a tree.
 
-:docs-component-example{name="a-tree-root"}
+:docs-component-meta{name="a-tree-root"}
 
 ### Item
 
 The item component.
 
-:docs-component-example{name="a-tree-item"}
+:docs-component-meta{name="a-tree-item"}
 
 ::docs-data-attributes-table
 ---
@@ -80,7 +80,7 @@ data:
 
 Virtual container to achieve list virtualization.
 
-:docs-component-example{name="a-tree-virtualizer"}
+:docs-component-meta{name="a-tree-virtualizer"}
 
 ## Examples
 

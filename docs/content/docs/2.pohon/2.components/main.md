@@ -12,10 +12,6 @@ links:
 
 The Main component renders a `<main>` element that works together with the [Header](/docs/pohon/components/header) component to create a full-height layout that extends to the viewport's available height.
 
-::tip{to="/docs/getting-started/theme/css-variables#header"}
-The Main component uses the `--pohon-header-height` CSS variable to position itself correctly below the [Header](/docs/pohon/components/header). Make sure to set this variable according to your header's height.
-::
-
 ## Examples
 
 ### Within `app.vue`

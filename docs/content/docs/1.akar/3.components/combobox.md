@@ -83,7 +83,7 @@ import {
 
 ## Pohon
 
-:docs-akar-to-pohon{to="/docs/pohon/components/combobox"}
+:docs-akar-to-pohon{to="/docs/pohon/components/input-menu"}
 
 ## API Reference
 

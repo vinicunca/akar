@@ -12,10 +12,6 @@ links:
 
 The Header component renders a `<header>` element.
 
-::tip{to="/docs/pohon/getting-started/theme/css-variables#header"}
-Its height is defined through a `--pohon-header-height` CSS variable. Make sure to set this variable according to your header's height.
-::
-
 Use the `left`, `default` and `right` slots to customize the header and the `body` or `content` slots to customize the header menu.
 
 ::docs-component-example
@@ -84,7 +80,7 @@ hide:
   - class
 class: 'akar:px-0 akar:pt-0'
 props:
-  to: '/docs'
+  to: '/docs/pohon'
   class: 'w-full'
 ---
 ::
@@ -103,13 +99,13 @@ props:
 slots:
   left: |
 
-    <NuxtLink to="/docs">
+    <NuxtLink to="/docs/pohon">
       <BaseLogo class="h-6 w-auto" />
     </NuxtLink>
 ---
 
 #left
-::nuxt-link{to="/docs"}
+::nuxt-link{to="/docs/pohon"}
 :base-logo{class="h-6 w-auto"}
 ::
 
@@ -190,14 +186,14 @@ Use the Header component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{28-51}
 <script setup lang="ts">
-import type { PNavigationMenuItem } from 'pohon-ui'
+import type { PNavigationMenuItem } from 'pohon-ui';
 
-const route = useRoute()
+const route = useRoute();
 
-const items = computed<PNavigationMenuItem[]>(() => [{
+const items = computed<Array<PNavigationMenuItem>>(() => [{
   label: 'Docs',
-  to: '/docs/getting-started',
-  active: route.path.startsWith('/docs/getting-started')
+  to: '/docs/pohon/getting-started',
+  active: route.path.startsWith('/docs/pohon/getting-started')
 }, {
   label: 'Components',
   to: '/docs/pohon/components',
@@ -210,7 +206,7 @@ const items = computed<PNavigationMenuItem[]>(() => [{
   label: 'Releases',
   to: 'https://github.com/nuxt/ui/releases',
   target: '_blank'
-}])
+}]);
 </script>
 
 <template>
@@ -236,7 +232,11 @@ const items = computed<PNavigationMenuItem[]>(() => [{
       </template>
 
       <template #body>
-        <PNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+        <PNavigationMenu
+          :items="items"
+          orientation="vertical"
+          class="-mx-2.5"
+        />
       </template>
     </PHeader>
 

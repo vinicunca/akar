@@ -294,7 +294,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ::
 
-::note{to="/docs/typography/code#code-blocks"}
+::note{to="/docs/pohon/typography/code#code-blocks"}
 Like the `ProsePre` component, the `CodeTree` handles filenames, icons and copy button.
 ::
 

@@ -9,7 +9,7 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/content/ContentNavigation.vue
 ---
 
-::warning{to="/docs/getting-started/integrations/content"}
+::warning{to="/docs/pohon/getting-started/integrations/content"}
 This component is only available when the `@nuxt/content` module is installed.
 ::
 
@@ -226,8 +226,6 @@ props:
 ## Examples
 
 ### Within a layout
-
-Use the ContentNavigation component inside a [PageAside](/docs/pohon/components/page-aside) component within a layout to display the navigation of the page:
 
 ```vue [layouts/docs.vue]{11}
 <script setup lang="ts">

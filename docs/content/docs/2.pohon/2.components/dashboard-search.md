@@ -37,7 +37,7 @@ You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K"}, 
 
 ### Shortcut
 
-Use the `shortcut` prop to change the shortcut used in [defineShortcuts](/docs/composables/define-shortcuts) to open the ContentSearch component. Defaults to `meta_k` (:kbd{value="meta"} :kbd{value="K"}).
+Use the `shortcut` prop to change the shortcut used in [defineShortcuts](/docs/pohon/composables/define-shortcuts) to open the ContentSearch component. Defaults to `meta_k` (:kbd{value="meta"} :kbd{value="K"}).
 
 ```vue [app.vue]{4}
 <template>

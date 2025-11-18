@@ -11,7 +11,7 @@ links:
 
 ## Usage
 
-Use the [useToast](/docs/composables/use-toast) composable to display a toast in your application.
+Use the [useToast](/docs/pohon/composables/use-toast) composable to display a toast in your application.
 
 ::docs-component-example
 ---
@@ -138,12 +138,12 @@ name: 'toast-close-icon-example'
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.close` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.close` key.
 :::
 ::
@@ -195,7 +195,7 @@ name: 'toast-orientation-example'
 
 ## Examples
 
-::note{to="/components/app"}
+::note{to="/docs/pohon/components/app"}
 Pohon UI provides an **App** component that wraps your app to provide global configurations.
 ::
 

@@ -46,7 +46,7 @@ const columns = [
       target: '_blank',
     }, {
       label: 'Pohon UI',
-      to: 'https://ui.nuxt.com/',
+      to: 'https://akar.vinicunca.dev/',
       target: '_blank',
     }],
   },
@@ -56,7 +56,7 @@ const columns = [
 <template>
   <BaseNavbar />
 
-  <PFooter class="border-border divide-divide border-t min-h-0 w-full divide-y">
+  <PFooter class="border-t border-border min-h-0 w-full divide-divide divide-y">
     <template #top>
       <PContainer>
         <PFooterColumns :columns="columns">

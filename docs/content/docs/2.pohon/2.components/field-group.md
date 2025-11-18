@@ -10,7 +10,7 @@ links:
 
 ## Usage
 
-Wrap multiple [Button](/docs/components/pohon/button) within a FieldGroup to group them together.
+Wrap multiple [Button](/docs/pohon/components/button) within a FieldGroup to group them together.
 
 ::docs-pohon-preview
 ---
@@ -67,7 +67,7 @@ slots:
 
 ### With input
 
-You can use components like [Input](/docs/components/pohon/input), [InputMenu](/docs/components/pohon/input-menu), [Select](/docs/components/pohon/select) [SelectMenu](/docs/components/pohon/select-menu), etc. within a field group.
+You can use components like [Input](/docs/pohon/components/input), [InputMenu](/docs/pohon/components/input-menu), [Select](/docs/pohon/components/select) [SelectMenu](/docs/pohon/components/select-menu), etc. within a field group.
 
 ::docs-pohon-preview
 ---
@@ -85,19 +85,19 @@ slots:
 
 ### With tooltip
 
-You can use a [Tooltip](/docs/components/pohon/tooltip) within a field group.
+You can use a [Tooltip](/docs/pohon/components/tooltip) within a field group.
 
 :docs-component-example{name="field-group-tooltip-example"}
 
 ### With dropdown
 
-You can use a [DropdownMenu](/docs/components/pohon/dropdown-menu) within a field group.
+You can use a [DropdownMenu](/docs/pohon/components/dropdown-menu) within a field group.
 
 :docs-component-example{name="field-group-dropdown-example"}
 
 ### With badge
 
-You can use a [Badge](/docs/components/pohon/badge) within a field group.
+You can use a [Badge](/docs/pohon/components/badge) within a field group.
 
 :docs-component-example{name="field-group-badge-example"}
 

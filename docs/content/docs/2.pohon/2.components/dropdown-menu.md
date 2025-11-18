@@ -412,7 +412,7 @@ name: 'dropdown-menu-open-example'
 ::
 
 ::note
-In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the DropdownMenu by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/docs/pohon/composables/define-shortcuts), you can toggle the DropdownMenu by pressing :kbd{value="O"}.
 ::
 
 ### With custom slot
@@ -465,7 +465,7 @@ export default defineAppConfig({
 
 ### Extract shortcuts
 
-When you have some items with `kbds` property (displaying some [Kbd](/docs/pohon/components/kbd)), you can easily make them work with the [defineShortcuts](/docs/composables/define-shortcuts) composable.
+When you have some items with `kbds` property (displaying some [Kbd](/docs/pohon/components/kbd)), you can easily make them work with the [defineShortcuts](/docs/pohon/composables/define-shortcuts) composable.
 
 Inside the `defineShortcuts` composable, there is an `extractShortcuts` utility that will extract the shortcuts recursively from the items and return an object that you can pass to `defineShortcuts`. It will automatically call the `select` function of the item when the shortcut is pressed.
 

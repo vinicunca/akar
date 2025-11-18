@@ -21,7 +21,7 @@ prettier: true
 props:
   icon: i-lucide:square-play
   color: neutral
-  to: '/docs/pohon/getting-started/installation/nuxt'
+  to: '/docs/pohon/getting-started/installation'
   class: 'w-full akar:my-0'
 hide:
   - class

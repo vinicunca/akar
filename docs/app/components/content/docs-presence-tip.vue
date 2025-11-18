@@ -4,9 +4,9 @@ import { ProseTip } from '#components';
 
 <template>
   <ProseTip>
-    Built with <ProseA href="/docs/utilities/presence">
+    Built with <ProseA href="/docs/akar/utilities/presence">
       Presence
-    </ProseA> component - supports any <ProseA href="/docs/guides/animation">
+    </ProseA> component - supports any <ProseA href="/docs/akar/guides/animation">
       animation techniques
     </ProseA> while maintaining access to presence emitted events.
   </ProseTip>

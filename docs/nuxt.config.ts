@@ -213,7 +213,42 @@ export default defineNuxtConfig({
       prerender: false,
       redirect: { statusCode: 301, to: '/docs/akar/utilities/config-provider' },
     },
-    '/docs/pohon/composables': { prerender: false, redirect: { statusCode: 301, to: '/docs/pohon/composables/define-shortcuts' } },
+    '/docs/pohon': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/docs/pohon/getting-started' },
+    },
+    '/docs/pohon/composables': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/docs/pohon/composables/define-shortcuts' },
+    },
+    '/docs/pohon/getting-started/ai': {
+      prerender: false,
+      redirect: '/docs/pohon/getting-started/ai/mcp',
+    },
+    '/docs/pohon/getting-started/installation': {
+      prerender: false,
+      redirect: '/docs/pohon/getting-started/installation/nuxt',
+    },
+    '/docs/pohon/getting-started/integrations': {
+      prerender: false,
+      redirect: '/docs/pohon/getting-started/integrations/icons',
+    },
+    '/docs/pohon/getting-started/integrations/color-mode': {
+      prerender: false,
+      redirect: '/docs/pohon/getting-started/integrations/color-mode/nuxt',
+    },
+    '/docs/pohon/getting-started/integrations/i18n': {
+      prerender: false,
+      redirect: '/docs/pohon/getting-started/integrations/i18n/nuxt',
+    },
+    '/docs/pohon/getting-started/integrations/icons': {
+      prerender: false,
+      redirect: '/docs/pohon/getting-started/integrations/icons/nuxt',
+    },
+    '/docs/pohon/getting-started/theme': {
+      prerender: false,
+      redirect: '/docs/pohon/getting-started/theme/components',
+    },
   },
 
   runtimeConfig: {

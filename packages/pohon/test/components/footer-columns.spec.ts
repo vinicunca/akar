@@ -48,8 +48,8 @@ describe('footerColumns', () => {
       to: 'https://image.nuxt.com/',
       target: '_blank',
     }, {
-      label: 'Nuxt UI',
-      to: 'https://ui.nuxt.com/',
+      label: 'Pohon UI',
+      to: 'https://akar.vinicunca.dev/',
       target: '_blank',
     }],
   }];

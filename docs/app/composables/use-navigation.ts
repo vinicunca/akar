@@ -272,7 +272,7 @@ function resolveNavigationIcon(item: ContentNavigationItem) {
   if (item.path.startsWith('/docs/components')) {
     icon = 'i-lucide:square-code';
   }
-  if (item.path.startsWith('/docs/composables')) {
+  if (item.path.startsWith('/docs/pohon/composables')) {
     icon = 'i-lucide:square-function';
   }
   if (item.path.startsWith('/docs/typography')) {

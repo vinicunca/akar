@@ -125,7 +125,7 @@ options:
 ::
 
 ::tip
-You can use the [`useFormField`](/docs/composables/use-form-field) composable to implement this inside your own components.
+You can use the [`useFormField`](/docs/pohon/composables/use-form-field) composable to implement this inside your own components.
 ::
 
 ### Error event

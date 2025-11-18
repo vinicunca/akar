@@ -59,7 +59,7 @@ defineShortcuts({
       <slot name="trailing">
         <PButton
           icon="i-lucide:external-link"
-          :to="to || `https://ui.nuxt.com/docs/components/${name}`"
+          :to="to || `https://akar.vinicunca.dev/docs/pohon/components/${name}`"
           color="neutral"
           variant="ghost"
           size="xs"

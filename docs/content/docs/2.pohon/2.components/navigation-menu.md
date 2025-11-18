@@ -27,7 +27,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide:book-open
-      to: /docs/getting-started
+      to: /docs/pohon/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -46,20 +46,20 @@ props:
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
-      to: /docs/composables
+      to: /docs/pohon/composables
       children:
         - label: defineShortcuts
           icon: i-lucide:file-text
           description: Define shortcuts for your application.
-          to: /docs/composables/define-shortcuts
+          to: /docs/pohon/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
-          to: /docs/composables/use-overlay
+          to: /docs/pohon/composables/use-overlay
         - label: useToast
           icon: i-lucide:file-text
           description: Display a toast within your application.
-          to: /docs/composables/use-toast
+          to: /docs/pohon/composables/use-toast
     - label: Components
       icon: i-lucide:box
       to: /docs/pohon/components
@@ -138,7 +138,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide:book-open
-      to: /docs/getting-started
+      to: /docs/pohon/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -157,20 +157,20 @@ props:
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
-      to: /docs/composables
+      to: /docs/pohon/composables
       children:
         - label: defineShortcuts
           icon: i-lucide:file-text
           description: Define shortcuts for your application.
-          to: /docs/composables/define-shortcuts
+          to: /docs/pohon/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
-          to: /docs/composables/use-overlay
+          to: /docs/pohon/composables/use-overlay
         - label: useToast
           icon: i-lucide:file-text
           description: Display a toast within your application.
-          to: /docs/composables/use-toast
+          to: /docs/pohon/composables/use-toast
     - label: Components
       icon: i-lucide:box
       to: /docs/pohon/components
@@ -274,15 +274,15 @@ props:
           - label: defineShortcuts
             icon: i-lucide:file-text
             description: Define shortcuts for your application.
-            to: /docs/composables/define-shortcuts
+            to: /docs/pohon/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
-            to: /docs/composables/use-overlay
+            to: /docs/pohon/composables/use-overlay
           - label: useToast
             icon: i-lucide:file-text
             description: Display a toast within your application.
-            to: /docs/composables/use-toast
+            to: /docs/pohon/composables/use-toast
       - label: Components
         icon: i-lucide:box
         to: /docs/pohon/components
@@ -387,15 +387,15 @@ props:
           - label: defineShortcuts
             icon: i-lucide:file-text
             description: Define shortcuts for your application.
-            to: /docs/composables/define-shortcuts
+            to: /docs/pohon/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
-            to: /docs/composables/use-overlay
+            to: /docs/pohon/composables/use-overlay
           - label: useToast
             icon: i-lucide:file-text
             description: Display a toast within your application.
-            to: /docs/composables/use-toast
+            to: /docs/pohon/composables/use-toast
       - label: Components
         icon: i-lucide:box
         to: /docs/pohon/components
@@ -482,15 +482,15 @@ props:
           - label: defineShortcuts
             icon: i-lucide:file-text
             description: Define shortcuts for your application.
-            to: /docs/composables/define-shortcuts
+            to: /docs/pohon/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
-            to: /docs/composables/use-overlay
+            to: /docs/pohon/composables/use-overlay
           - label: useToast
             icon: i-lucide:file-text
             description: Display a toast within your application.
-            to: /docs/composables/use-toast
+            to: /docs/pohon/composables/use-toast
       - label: Components
         icon: i-lucide:box
         to: /docs/pohon/components
@@ -559,10 +559,10 @@ props:
   items:
     - - label: Guide
         icon: i-lucide:book-open
-        to: /docs/getting-started
+        to: /docs/pohon/getting-started
       - label: Composables
         icon: i-lucide:database
-        to: /docs/composables
+        to: /docs/pohon/composables
       - label: Components
         icon: i-lucide:box
         to: /docs/pohon/components
@@ -596,10 +596,10 @@ props:
   items:
     - - label: Guide
         icon: i-lucide:book-open
-        to: /docs/getting-started
+        to: /docs/pohon/getting-started
       - label: Composables
         icon: i-lucide:database
-        to: /docs/composables
+        to: /docs/pohon/composables
       - label: Components
         icon: i-lucide:box
         to: /docs/pohon/components
@@ -640,7 +640,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide:book-open
-      to: /docs/getting-started
+      to: /docs/pohon/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -659,20 +659,20 @@ props:
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
-      to: /docs/composables
+      to: /docs/pohon/composables
       children:
         - label: defineShortcuts
           icon: i-lucide:file-text
           description: Define shortcuts for your application.
-          to: /docs/composables/define-shortcuts
+          to: /docs/pohon/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
-          to: /docs/composables/use-overlay
+          to: /docs/pohon/composables/use-overlay
         - label: useToast
           icon: i-lucide:file-text
           description: Display a toast within your application.
-          to: /docs/composables/use-toast
+          to: /docs/pohon/composables/use-toast
     - label: Components
       icon: i-lucide:box
       to: /docs/pohon/components
@@ -708,12 +708,12 @@ props:
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.chevronDown` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.chevronDown` key.
 :::
 ::
@@ -738,7 +738,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide:book-open
-      to: /docs/getting-started
+      to: /docs/pohon/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -757,20 +757,20 @@ props:
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
-      to: /docs/composables
+      to: /docs/pohon/composables
       children:
         - label: defineShortcuts
           icon: i-lucide:file-text
           description: Define shortcuts for your application.
-          to: /docs/composables/define-shortcuts
+          to: /docs/pohon/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
-          to: /docs/composables/use-overlay
+          to: /docs/pohon/composables/use-overlay
         - label: useToast
           icon: i-lucide:file-text
           description: Display a toast within your application.
-          to: /docs/composables/use-toast
+          to: /docs/pohon/composables/use-toast
     - label: Components
       icon: i-lucide:box
       to: /docs/pohon/components
@@ -833,7 +833,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide:book-open
-      to: /docs/getting-started
+      to: /docs/pohon/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -846,20 +846,20 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: Composables
       icon: i-lucide:database
-      to: /docs/composables
+      to: /docs/pohon/composables
       children:
         - label: defineShortcuts
           icon: i-lucide:file-text
           description: Define shortcuts for your application.
-          to: /docs/composables/define-shortcuts
+          to: /docs/pohon/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
-          to: /docs/composables/use-overlay
+          to: /docs/pohon/composables/use-overlay
         - label: useToast
           icon: i-lucide:file-text
           description: Display a toast within your application.
-          to: /docs/composables/use-toast
+          to: /docs/pohon/composables/use-toast
     - label: Components
       icon: i-lucide:box
       to: /docs/pohon/components
@@ -905,7 +905,7 @@ props:
   items:
     - label: Guide
       icon: i-lucide:book-open
-      to: /docs/getting-started
+      to: /docs/pohon/getting-started
       children:
         - label: Introduction
           description: Fully styled and customizable components for Nuxt.
@@ -924,20 +924,20 @@ props:
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide:database
-      to: /docs/composables
+      to: /docs/pohon/composables
       children:
         - label: defineShortcuts
           icon: i-lucide:file-text
           description: Define shortcuts for your application.
-          to: /docs/composables/define-shortcuts
+          to: /docs/pohon/composables/define-shortcuts
         - label: useOverlay
           icon: i-lucide:file-text
           description: Display a modal/slideover within your application.
-          to: /docs/composables/use-overlay
+          to: /docs/pohon/composables/use-overlay
         - label: useToast
           icon: i-lucide:file-text
           description: Display a toast within your application.
-          to: /docs/composables/use-toast
+          to: /docs/pohon/composables/use-toast
     - label: Components
       icon: i-lucide:box
       to: /docs/pohon/components
@@ -1029,15 +1029,15 @@ props:
           - label: defineShortcuts
             icon: i-lucide:file-text
             description: Define shortcuts for your application.
-            to: /docs/composables/define-shortcuts
+            to: /docs/pohon/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
-            to: /docs/composables/use-overlay
+            to: /docs/pohon/composables/use-overlay
           - label: useToast
             icon: i-lucide:file-text
             description: Display a toast within your application.
-            to: /docs/composables/use-toast
+            to: /docs/pohon/composables/use-toast
       - label: Components
         icon: i-lucide:box
         to: /docs/pohon/components
@@ -1136,15 +1136,15 @@ props:
           - label: defineShortcuts
             icon: i-lucide:file-text
             description: Define shortcuts for your application.
-            to: /docs/composables/define-shortcuts
+            to: /docs/pohon/composables/define-shortcuts
           - label: useOverlay
             icon: i-lucide:file-text
             description: Display a modal/slideover within your application.
-            to: /docs/composables/use-overlay
+            to: /docs/pohon/composables/use-overlay
           - label: useToast
             icon: i-lucide:file-text
             description: Display a toast within your application.
-            to: /docs/composables/use-toast
+            to: /docs/pohon/composables/use-toast
       - label: Components
         icon: i-lucide:box
         to: /docs/pohon/components

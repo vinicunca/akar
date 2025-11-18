@@ -30,7 +30,7 @@ slots:
 ::
 
 ::warning
-Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`ATooltipProvider`](docs/akar/components/tooltip#provider) component from Akar.
+Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`ATooltipProvider`](/docs/akar/components/tooltip#provider) component from Akar.
 ::
 
 ::tip{to="/docs/pohon/components/app#props"}
@@ -198,7 +198,7 @@ name: 'tooltip-open-example'
 ::
 
 ::note
-In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the Tooltip by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/docs/pohon/composables/define-shortcuts), you can toggle the Tooltip by pressing :kbd{value="O"}.
 ::
 
 ### With following cursor

@@ -22,7 +22,7 @@ props:
   items:
     - label: 'Docs'
       icon: 'i-lucide:book-open'
-      to: '/docs'
+      to: '/docs/pohon'
     - label: 'Components'
       icon: 'i-lucide:box'
       to: '/docs/pohon/components'
@@ -57,7 +57,7 @@ props:
   items:
     - label: 'Docs'
       icon: 'i-lucide:book-open'
-      to: '/docs'
+      to: '/docs/pohon'
     - label: 'Components'
       icon: 'i-lucide:box'
       to: '/docs/pohon/components'
@@ -88,7 +88,7 @@ props:
   items:
     - label: 'Docs'
       icon: 'i-lucide:book-open'
-      to: '/docs'
+      to: '/docs/pohon'
     - label: 'Components'
       icon: 'i-lucide:box'
       to: '/docs/pohon/components'
@@ -100,12 +100,12 @@ props:
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.chevronRight` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.chevronRight` key.
 :::
 ::

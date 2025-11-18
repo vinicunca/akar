@@ -427,12 +427,12 @@ props:
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.chevronDown` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.chevronDown` key.
 :::
 ::
@@ -466,12 +466,12 @@ props:
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.check` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.check` key.
 :::
 ::
@@ -560,12 +560,12 @@ props:
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.loading` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.loading` key.
 :::
 ::
@@ -699,7 +699,7 @@ name: 'select-open-example'
 ::
 
 ::note
-In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the Select by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/docs/pohon/composables/define-shortcuts), you can toggle the Select by pressing :kbd{value="O"}.
 ::
 
 ### With rotating icon

@@ -215,7 +215,7 @@ import {
 ### Flexible layouts
 
 Use the `Viewport` part when you need extra control over where `Content` is rendered. This can be helpful when your design
-requires an adjusted DOM structure or if you need flexibility to achieve [advanced animation](/docs/components/navigation-menu#advanced-animation).
+requires an adjusted DOM structure or if you need flexibility to achieve [advanced animation](/docs/akar/components/navigation-menu#advanced-animation).
 Tab focus will be maintained automatically.
 
 ```vue {26}
@@ -308,7 +308,7 @@ import {
 ### With submenus
 
 Create a submenu by nesting your `ANavigationMenu` and using the `Sub` part in place of its `Root`.
-Submenus work differently to `Root` navigation menus and are similar to [`Tabs`](/docs/components/tabs) in that one item should always be active, so be
+Submenus work differently to `Root` navigation menus and are similar to [`Tabs`](/docs/akar/components/tabs) in that one item should always be active, so be
 sure to assign and set a `defaultValue`.
 
 ```vue {7,23-34}

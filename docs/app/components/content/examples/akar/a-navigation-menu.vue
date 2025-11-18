@@ -17,7 +17,7 @@ const items = ref<Array<any>>([
   {
     label: 'Guide',
     icon: 'i-lucide:book-open',
-    to: '/docs/getting-started',
+    to: '/docs/akar/overview/getting-started',
     children: [
       {
         label: 'Introduction',

@@ -9,7 +9,7 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/content/ContentToc.vue
 ---
 
-::warning{to="/docs/getting-started/integrations/content"}
+::warning{to="/docs/pohon/getting-started/integrations/content"}
 This component is only available when the `@nuxt/content` module is installed.
 ::
 

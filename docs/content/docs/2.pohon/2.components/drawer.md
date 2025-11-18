@@ -334,7 +334,7 @@ name: 'drawer-open-example'
 ::
 
 ::note
-In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the Drawer by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/docs/pohon/composables/define-shortcuts), you can toggle the Drawer by pressing :kbd{value="O"}.
 ::
 
 ::tip

@@ -112,12 +112,12 @@ options:
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize these icons globally in your `app.config.ts` under `pohon.icons.arrowLeft` / `pohon.icons.arrowRight` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize these icons globally in your `vite.config.ts` under `pohon.icons.arrowLeft` / `pohon.icons.arrowRight` key.
 :::
 ::

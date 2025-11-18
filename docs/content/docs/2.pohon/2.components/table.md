@@ -669,7 +669,7 @@ You can access the typed component instance using [`useTemplateRef`](https://vue
 
 ```vue
 <script setup lang="ts">
-const table = useTemplateRef('table')
+const table = useTemplateRef('table');
 </script>
 
 <template>
@@ -683,7 +683,6 @@ This will give you access to the following:
 | ---- | ---- |
 | `tableRef` | `Ref<HTMLTableElement \| null>` |
 | `tableApi` | [`Table`](https://tanstack.com/table/latest/docs/api/core/table#table-api) |
-
 
 ## Theme
 

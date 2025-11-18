@@ -139,10 +139,6 @@ slots:
 :p-input{placeholder="Enter your email" class="w-full"}
 ::
 
-::tip{to="/docs/getting-started/theme/design-system#colors"}
-This sets the `color` to `error` on the form control. You can change it globally in your `app.config.ts`.
-::
-
 ### Size
 
 Use the `size` prop to change the size of the FormField, the `size` is proxied to the form control.

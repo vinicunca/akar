@@ -2,8 +2,6 @@
 category: overlay
 description: A modal dialog that interrupts the user with important content and expects a response.
 links:
-  - label: Pohon
-    to: /docs/pohon/components/alert-dialog
   - label: GitHub
     icon: i-simple-icons:github
     to: https://github.com/vinicunca/akar/blob/main/packages/core/src/alert-dialog/index.ts

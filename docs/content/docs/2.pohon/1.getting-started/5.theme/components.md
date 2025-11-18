@@ -5,7 +5,7 @@ navigation.title: Components
 navigation.icon: 'i-lucide:layout-grid'
 ---
 
-## Tailwind Variants
+## UnoCSS Variants
 
 Pohon UI components are styled using the [UnoCSS Variants](https://vinicunca.dev/unocss-variants) API, which provides a powerful way to create variants and manage component styles.
 
@@ -69,7 +69,7 @@ export default {
 ::
 
 ::warning
-Components without slots don't have a [`pohon` prop](#ui-prop), only the [`class` prop](#class-prop) is available to override styles.
+Components without slots don't have a [`pohon` prop](#pohon-prop), only the [`class` prop](#class-prop) is available to override styles.
 ::
 
 ### Variants
@@ -148,12 +148,12 @@ export default {
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/installation/nuxt#themedefaultvariants"}
+:::tip{to="/docs/pohon/getting-started/installation/nuxt#themedefaultvariants"}
 You can use the `theme.defaultVariants` option in your `nuxt.config.ts` to override the default values for `size` and `color` for all components at once.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/installation/vue#themedefaultvariants"}
+:::tip{to="/docs/pohon/getting-started/installation/vue#themedefaultvariants"}
 You can use the `theme.defaultVariants` option in your `vite.config.ts` to override the default values for `size` and `color` for all components at once.
 :::
 ::

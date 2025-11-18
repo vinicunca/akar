@@ -12,7 +12,7 @@ links:
     to: https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/content/ContentSearch.vue
 ---
 
-::warning{to="/docs/getting-started/integrations/content"}
+::warning{to="/docs/pohon/getting-started/integrations/content"}
 This component is only available when the `@nuxt/content` module is installed.
 ::
 
@@ -39,7 +39,7 @@ You can open the CommandPalette by pressing :kbd{value="meta"} :kbd{value="K"}, 
 
 ### Shortcut
 
-Use the `shortcut` prop to change the shortcut used in [defineShortcuts](/docs/composables/define-shortcuts) to open the ContentSearch component. Defaults to `meta_k` (:kbd{value="meta"} :kbd{value="K"}).
+Use the `shortcut` prop to change the shortcut used in [defineShortcuts](/docs/pohon/composables/define-shortcuts) to open the ContentSearch component. Defaults to `meta_k` (:kbd{value="meta"} :kbd{value="K"}).
 
 ```vue [app.vue]{6}
 <template>
@@ -103,7 +103,7 @@ const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSe
 const links = [{
   label: 'Docs',
   icon: 'i-lucide:book',
-  to: '/docs/getting-started'
+  to: '/docs/pohon/getting-started'
 }, {
   label: 'Components',
   icon: 'i-lucide:box',

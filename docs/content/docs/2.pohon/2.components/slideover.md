@@ -158,12 +158,12 @@ slots:
 
 ::docs-framework-only
 #nuxt
-:::tip{to="/docs/getting-started/integrations/icons/nuxt#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.close` key.
 :::
 
 #vue
-:::tip{to="/docs/getting-started/integrations/icons/vue#theme"}
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.close` key.
 :::
 ::
@@ -306,7 +306,7 @@ name: 'slideover-open-example'
 ::
 
 ::note
-In this example, leveraging [`defineShortcuts`](/docs/composables/define-shortcuts), you can toggle the Slideover by pressing :kbd{value="O"}.
+In this example, leveraging [`defineShortcuts`](/docs/pohon/composables/define-shortcuts), you can toggle the Slideover by pressing :kbd{value="O"}.
 ::
 
 ::tip
@@ -315,7 +315,7 @@ This allows you to move the trigger outside of the Slideover or remove it entire
 
 ### Programmatic usage
 
-You can use the [`useOverlay`](/docs/composables/use-overlay) composable to open a Slideover programmatically.
+You can use the [`useOverlay`](/docs/pohon/composables/use-overlay) composable to open a Slideover programmatically.
 
 ::warning
 Make sure to wrap your app with the [`App`](/docs/pohon/components/app) component which uses the [`OverlayProvider`](https://github.com/vinicunca/akar/blob/main/packages/pohon/src/runtime/components/overlay-provider.vue) component.

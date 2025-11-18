@@ -26,7 +26,7 @@ Yes! Pohon UI is completely free and open source under the MIT license. All 100+
 ::
 
 ::accordion-item{label="Can I use Pohon UI with Vue without Nuxt?" icon="i-lucide:circle-help"}
-Yes! While optimized for Nuxt, Pohon UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
+Yes! While optimized for Nuxt, Pohon UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/pohon/getting-started/installation/vue) to get started.
 ::
 
 ::accordion-item{label="Is Pohon UI production-ready?" icon="i-lucide:circle-help"}
@@ -49,7 +49,7 @@ Yes! Pohon UI is completely free and open source under the MIT license. All 100+
 ::
 
 ::accordion-item{label="Can I use Pohon UI with Vue without Nuxt?" icon="i-lucide:circle-help"}
-Yes! While optimized for Nuxt, Pohon UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
+Yes! While optimized for Nuxt, Pohon UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/pohon/getting-started/installation/vue) to get started.
 ::
 
 ::accordion-item{label="Is Pohon UI production-ready?" icon="i-lucide:circle-help"}

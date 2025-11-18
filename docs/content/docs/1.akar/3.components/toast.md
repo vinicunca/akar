@@ -132,7 +132,7 @@ The toast message.
 
 An action that is safe to ignore to ensure users are not expected to complete tasks with unexpected side effects as a result of a [time limit](https://www.w3.org/TR/UNDERSTANDING-WCAG20/time-limits-required-behaviors.html).
 
-When obtaining a user response is necessary, portal an ["AlertDialog"](/docs/components/alert-dialog) styled as a toast into the viewport instead.
+When obtaining a user response is necessary, portal an ["AlertDialog"](/docs/akar/components/alert-dialog) styled as a toast into the viewport instead.
 
 :docs-component-meta{name="a-toast-action"}
 
@@ -171,7 +171,7 @@ Customise the duration of a toast to override the provider value.
 
 ### Duplicate toasts
 
-When a toast must appear every time a user clicks a button, use state to render multiple instances of the same toast (see below). Alternatively, you can abstract the parts to create your own [imperative API](/docs/components/toast#imperative-api).
+When a toast must appear every time a user clicks a button, use state to render multiple instances of the same toast (see below). Alternatively, you can abstract the parts to create your own [imperative API](/docs/akar/components/toast#imperative-api).
 
 ```vue {3,8}
 <template>
@@ -388,7 +388,7 @@ defineProps<{
 
 ### Imperative API
 
-Create your own imperative API to allow [toast duplication](/docs/components/toast#duplicate-toasts) if preferred.
+Create your own imperative API to allow [toast duplication](/docs/akar/components/toast#duplicate-toasts) if preferred.
 
 #### Usage
 

@@ -16,7 +16,7 @@ const items = [
     level: 3,
   },
   {
-    id: '/docs/getting-started#unocss-variants',
+    id: '/docs/pohon/getting-started#unocss-variants',
     label: 'UnoCSS Variants',
     level: 3,
   },

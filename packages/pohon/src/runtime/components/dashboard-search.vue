@@ -56,13 +56,13 @@ export interface PDashboardSearchProps<T extends PCommandPaletteItem = PCommandP
    */
   closeIcon?: PIconProps['name'];
   /**
-   * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://ui.nuxt.com/docs/composables/define-shortcuts))
+   * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://akar.vinicunca.dev/docs/pohon/composables/define-shortcuts))
    * @defaultValue 'meta_k'
    */
   shortcut?: string;
   groups?: Array<PCommandPaletteGroup<T>>;
   /**
-   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://ui.nuxt.com/docs/components/command-palette).
+   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://akar.vinicunca.dev/docs/pohon/components/command-palette).
    * @defaultValue {}
    */
   fuse?: UseFuseOptions<T>;
