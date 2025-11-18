@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "akar": "link:../core",
+    "akar": "workspace:*",
     "vue": "catalog:core"
   },
   "devDependencies": {
