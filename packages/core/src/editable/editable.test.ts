@@ -8,7 +8,11 @@ import Editable from './story/_editable.vue';
 
 const kbd = useTestKeyboard();
 
-function setup(props: { editableProps?: AEditableRootProps; emits?: { 'onUpdate:modelValue'?: (data: string) => void } } = {}) {
+function setup(props: {
+  editableProps?: AEditableRootProps;
+  onSubmit?: (data: string) => void;
+  emits?: { 'onUpdate:modelValue'?: (data: string) => void };
+} = {}) {
   const user = userEvent.setup();
   const returned = render(Editable, { props });
   const editable = returned.getByTestId('root');
@@ -83,12 +87,21 @@ describe('editable', () => {
   });
 
   it('submits the value when pressing enter', async () => {
-    const { input, preview, rerender } = setup({ editableProps: { modelValue: '', submitMode: 'enter' }, emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data }) } });
+    let submittedValue = '';
+    const { input, preview, rerender } = setup({
+      editableProps: { modelValue: '', submitMode: 'enter' },
+      onSubmit: (data) => {
+        submittedValue = data;
+      },
+      emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data }) },
+
+    });
 
     await userEvent.type(input, 'New Value');
     await userEvent.keyboard(kbd.ENTER);
     expect(preview).toBeVisible();
     expect(preview).toHaveTextContent('New Value');
+    expect(submittedValue).toBe('New Value');
   });
 
   it('submits the value on blur', async () => {

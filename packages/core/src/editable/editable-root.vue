@@ -174,7 +174,7 @@ function submit() {
   isEditing.value = false;
 
   emits('update:state', 'submit');
-  emits('submit', modelValue.value);
+  emits('submit', inputValue.value);
 }
 
 function handleDismiss() {
