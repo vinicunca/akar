@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from '../../types/html';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/link';
+import { mergeClasses } from '../../utils';
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>;
 
@@ -34,6 +35,10 @@ export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onCl
    * A rel attribute value to apply on the link. Defaults to "noopener noreferrer" for external links.
    */
   rel?: 'noopener' | 'noreferrer' | 'nofollow' | 'sponsored' | 'ugc' | (string & {}) | null;
+  /**
+   * If set to true, no rel attribute will be added to the link
+   */
+  noRel?: boolean;
   /**
    * Value passed to the attribute `aria-current` when the link is exact active.
    *
@@ -79,9 +84,8 @@ defineOptions({ inheritAttrs: false });
 const props = withDefaults(defineProps<LinkProps>(), {
   as: 'button',
   type: 'button',
+  ariaCurrentValue: 'page',
   active: undefined,
-  activeClass: '',
-  inactiveClass: '',
 });
 defineSlots<LinkSlots>();
 
@@ -89,7 +93,24 @@ const page = usePage();
 
 const appConfig = useAppConfig() as Link['AppConfig'];
 
-const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class'));
+const routerLinkProps = useForwardProps(
+  reactiveOmit(
+    props,
+    'as',
+    'type',
+    'disabled',
+    'active',
+    'exact',
+    'activeClass',
+    'inactiveClass',
+    'to',
+    'href',
+    'raw',
+    'custom',
+    'class',
+    'noRel',
+  ),
+);
 
 const pohon = computed(() =>
   uv({
@@ -97,8 +118,8 @@ const pohon = computed(() =>
     ...defu({
       variants: {
         active: {
-          true: props.activeClass,
-          false: props.inactiveClass,
+          true: mergeClasses(appConfig.pohon?.link?.variants?.active?.true, props.activeClass),
+          false: mergeClasses(appConfig.pohon?.link?.variants?.active?.false, props.inactiveClass),
         },
       },
     }, appConfig.pohon?.link || {}),
@@ -121,6 +142,27 @@ const isExternal = computed(() => {
   }
 
   return typeof href.value === 'string' && hasProtocol(href.value, { acceptRelative: true });
+});
+
+const hasTarget = computed(() => !!props.target && props.target !== '_self');
+
+const rel = computed(() => {
+  // If noRel is explicitly set, return null
+  if (props.noRel) {
+    return null;
+  }
+
+  // If rel is explicitly set, use it
+  if (props.rel !== undefined) {
+    return props.rel || null;
+  }
+
+  // Default to "noopener noreferrer" for external links or links with target
+  if (isExternal.value || hasTarget.value) {
+    return 'noopener noreferrer';
+  }
+
+  return null;
 });
 
 const isLinkActive = computed(() => {
@@ -164,6 +206,8 @@ const linkClass = computed(() => {
         type,
         disabled,
         href,
+        rel,
+        target,
         active: isLinkActive,
         isExternal,
       }"
@@ -178,6 +222,8 @@ const linkClass = computed(() => {
       type,
       disabled,
       href,
+      rel,
+      target,
       isExternal,
     }"
     :class="linkClass"

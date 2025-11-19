@@ -8,6 +8,7 @@ export interface LinkBaseProps {
   onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>;
   href?: string;
   target?: PLinkProps['target'];
+  rel?: PLinkProps['rel'];
   active?: boolean;
   isExternal?: boolean;
 }
@@ -44,7 +45,8 @@ function onClickWrapper(e: MouseEvent) {
     v-if="!!href && !isExternal && !disabled"
     :href="href"
     v-bind="{
-      target: target || (isExternal ? '_blank' : undefined),
+      rel,
+      target,
       ...$attrs,
     }"
     @click="onClickWrapper"
@@ -59,7 +61,8 @@ function onClickWrapper(e: MouseEvent) {
       'aria-disabled': disabled ? 'true' : undefined,
       'role': disabled ? 'link' : undefined,
       'tabindex': disabled ? -1 : undefined,
-      'target': target || (isExternal ? '_blank' : undefined),
+      'rel': rel,
+      'target': target,
       ...$attrs,
     } : as === 'button' ? {
       as,

@@ -4,6 +4,7 @@ import type { RouterLinkProps } from 'vue-router';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from '../../types/html';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/link';
+import { mergeClasses } from '../../utils';
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>;
 
@@ -29,6 +30,10 @@ export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /**
    * A rel attribute value to apply on the link. Defaults to "noopener noreferrer" for external links.
    */
   rel?: 'noopener' | 'noreferrer' | 'nofollow' | 'sponsored' | 'ugc' | (string & {}) | null;
+  /**
+   * If set to true, no rel attribute will be added to the link
+   */
+  noRel?: boolean;
   /**
    * The type of the button when not a link.
    * @defaultValue 'button'
@@ -78,8 +83,6 @@ const props = withDefaults(
     type: 'button',
     ariaCurrentValue: 'page',
     active: undefined,
-    activeClass: '',
-    inactiveClass: '',
   },
 );
 defineSlots<LinkSlots>();
@@ -105,6 +108,7 @@ const routerLinkProps = useForwardProps(
     'raw',
     'custom',
     'class',
+    'noRel',
   ),
 );
 
@@ -114,8 +118,8 @@ const pohon = computed(() =>
     ...defu({
       variants: {
         active: {
-          true: props.activeClass,
-          false: props.inactiveClass,
+          true: mergeClasses(appConfig.pohon?.link?.variants?.active?.true, props.activeClass),
+          false: mergeClasses(appConfig.pohon?.link?.variants?.active?.false, props.inactiveClass),
         },
       },
     }, appConfig.pohon?.link || {}),
@@ -134,6 +138,27 @@ const isExternal = computed(() => {
   }
 
   return typeof to.value === 'string' && hasProtocol(to.value, { acceptRelative: true });
+});
+
+const hasTarget = computed(() => !!props.target && props.target !== '_self');
+
+const rel = computed(() => {
+  // If noRel is explicitly set, return null
+  if (props.noRel) {
+    return null;
+  }
+
+  // If rel is explicitly set, use it
+  if (props.rel !== undefined) {
+    return props.rel || null;
+  }
+
+  // Default to "noopener noreferrer" for external links or links with target
+  if (isExternal.value || hasTarget.value) {
+    return 'noopener noreferrer';
+  }
+
+  return null;
 });
 
 function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
@@ -200,6 +225,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
             disabled,
             href,
             navigate,
+            rel,
+            target,
+            isExternal,
             active: isLinkActive({ route: linkRoute, isActive, isExactActive }),
           }"
         />
@@ -214,6 +242,9 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           disabled,
           href,
           navigate,
+          rel,
+          target,
+          isExternal,
         }"
         :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
       >
@@ -231,7 +262,8 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           type,
           disabled,
           href: to,
-          target: isExternal ? '_blank' : undefined,
+          rel,
+          target,
           active,
           isExternal,
         }"
@@ -245,7 +277,8 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         type,
         disabled,
         href: (to as string),
-        target: isExternal ? '_blank' : undefined,
+        rel,
+        target,
         isExternal,
       }"
       :class="resolveLinkClass()"

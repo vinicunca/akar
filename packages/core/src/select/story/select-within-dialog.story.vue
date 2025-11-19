@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import {
-  ADialogClose,
-  ADialogContent,
-  ADialogRoot,
-  ADialogTrigger,
-} from '../dialog';
-import {
   ASelectContent,
   ASelectGroup,
   ASelectItem,
@@ -21,6 +15,12 @@ import {
   ASelectValue,
   ASelectViewport,
 } from '..';
+import {
+  ADialogClose,
+  ADialogContent,
+  ADialogRoot,
+  ADialogTrigger,
+} from '../../dialog';
 
 const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
 </script>
