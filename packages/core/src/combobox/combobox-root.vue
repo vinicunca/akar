@@ -158,16 +158,15 @@ async function onOpenChange(val: boolean) {
 
     primitiveElement.value?.highlightSelected();
     isUserInputted.value = true;
+    inputElement.value?.focus();
   } else {
     isUserInputted.value = false;
+    setTimeout(() => {
+      if (props.resetSearchTermOnBlur) {
+        resetSearchTerm.trigger();
+      }
+    }, 1);
   }
-
-  inputElement.value?.focus();
-  setTimeout(() => {
-    if (!val && props.resetSearchTermOnBlur) {
-      resetSearchTerm.trigger();
-    }
-  }, 1);
 }
 
 const resetSearchTerm = createEventHook();
