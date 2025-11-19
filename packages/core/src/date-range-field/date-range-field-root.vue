@@ -447,6 +447,7 @@ defineExpose({
     <slot
       :model-value="modelValue"
       :segments="segmentContents"
+      :is-invalid="isInvalid"
     />
 
     <AVisuallyHidden
