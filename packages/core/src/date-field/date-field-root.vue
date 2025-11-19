@@ -323,12 +323,15 @@ defineExpose({
     <AVisuallyHidden
       :id="id"
       as="input"
+      type="date"
       feature="focusable"
       tabindex="-1"
       :value="modelValue ? modelValue.toString() : ''"
       :name="name"
       :disabled="disabled"
       :required="required"
+      :min="minValue"
+      :max="maxValue"
       @focus="Array.from(segmentElements)?.[0]?.focus()"
     />
   </APrimitive>
