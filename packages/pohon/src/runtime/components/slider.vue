@@ -176,12 +176,14 @@ function onChange(value: any) {
         <ASliderThumb
           :class="pohon.thumb({ class: props.pohon?.thumb })"
           data-pohon="slider-thumb"
+          :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`"
         />
       </PTooltip>
       <ASliderThumb
         v-else
         :class="pohon.thumb({ class: props.pohon?.thumb })"
         data-pohon="slider-thumb"
+        :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`"
       />
     </template>
   </ASliderRoot>

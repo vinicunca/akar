@@ -48,8 +48,8 @@ exports[`footerColumns > renders with as correctly 1`] = `
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Nuxt Image<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">
-            <!--v-if--><span class="">Nuxt UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
       </ul>
     </div>
@@ -106,8 +106,8 @@ exports[`footerColumns > renders with class correctly 1`] = `
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Nuxt Image<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">
-            <!--v-if--><span class="">Nuxt UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
       </ul>
     </div>
@@ -164,8 +164,8 @@ exports[`footerColumns > renders with column-label slot correctly 1`] = `
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Nuxt Image<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">
-            <!--v-if--><span class="">Nuxt UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
       </ul>
     </div>
@@ -222,8 +222,8 @@ exports[`footerColumns > renders with columns correctly 1`] = `
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Nuxt Image<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">
-            <!--v-if--><span class="">Nuxt UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
       </ul>
     </div>
@@ -288,8 +288,8 @@ exports[`footerColumns > renders with left slot correctly 1`] = `
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Nuxt Image<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">
-            <!--v-if--><span class="">Nuxt UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
       </ul>
     </div>
@@ -326,7 +326,7 @@ exports[`footerColumns > renders with link slot correctly 1`] = `
         <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">Link slot</a></li>
         <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">Link slot</a></li>
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">Link slot</a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">Link slot</a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">Link slot</a></li>
       </ul>
     </div>
   </div>
@@ -382,7 +382,7 @@ exports[`footerColumns > renders with link-label slot correctly 1`] = `
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Link label slot<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Link label slot<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
       </ul>
@@ -420,7 +420,7 @@ exports[`footerColumns > renders with link-leading slot correctly 1`] = `
         <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Nuxt Content<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span></a></li>
         <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Nuxt DevTools<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span></a></li>
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Nuxt Image<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span></a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Nuxt UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span></a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Pohon UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span></a></li>
       </ul>
     </div>
   </div>
@@ -476,8 +476,8 @@ exports[`footerColumns > renders with link-trailing slot correctly 1`] = `
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Nuxt Image<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>Link trailing slot
           </a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">
-            <!--v-if--><span class="">Nuxt UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>Link trailing slot
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>Link trailing slot
           </a></li>
       </ul>
     </div>
@@ -534,8 +534,8 @@ exports[`footerColumns > renders with right slot correctly 1`] = `
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Nuxt Image<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">
-            <!--v-if--><span class="">Nuxt UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
       </ul>
     </div>
@@ -592,8 +592,8 @@ exports[`footerColumns > renders with ui correctly 1`] = `
         <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
             <!--v-if--><span class="">Nuxt Image<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
-        <li class=""><a href="https://ui.nuxt.com/" rel="noopener noreferrer" target="_blank">
-            <!--v-if--><span class="">Nuxt UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<span class="iconify i-lucide:arrow-up-right" aria-hidden="true"></span></span>
           </a></li>
       </ul>
     </div>

@@ -7,9 +7,8 @@ exports[`dashboardSearchButton > renders with class correctly 1`] = `
 `;
 
 exports[`dashboardSearchButton > renders with collapsed correctly 1`] = `
-"<button type="button" aria-label="Search..." class="" data-pohon="button-base"><span class="iconify i-lucide:search" aria-hidden="true" data-pohon="button-leading-icon"></span>
-  <!--v-if-->
-  <!--v-if-->
+"<button type="button" aria-label="Search..." class="" data-pohon="button-base"><span class="iconify i-lucide:search" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Search...</span>
+  <div class=""><kbd class="">Ctrl</kbd><kbd class="">k</kbd></div>
 </button>"
 `;
 

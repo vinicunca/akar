@@ -54,7 +54,7 @@ exports[`tooltip > renders with default slot correctly 1`] = `
 <div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
   <div data-state="instant-open" data-pohon="tooltip-content" style="--akar-tooltip-content-transform-origin: var(--akar-popper-transform-origin); --akar-tooltip-content-available-width: var(--akar-popper-available-width); --akar-tooltip-content-available-height: var(--akar-popper-available-height); --akar-tooltip-trigger-width: var(--akar-popper-anchor-width); --akar-tooltip-trigger-height: var(--akar-popper-anchor-height); animation: none;" data-dismissable-layer="" data-side="bottom" data-align="center"><span class="" data-pohon="tooltip-text">Tooltip</span>
     <!--v-if-->
-    <!--v-if--><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" id="akar-tooltip-content-v-0-0" role="tooltip">Tooltip</span>
+    <!--v-if--><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" id="akar-tooltip-content-v-0-0-0" role="tooltip">Tooltip</span>
   </div>
 </div>
 

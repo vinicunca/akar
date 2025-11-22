@@ -909,44 +909,34 @@ exports[`navigationMenu > renders with neutral variant pill highlight neutral co
 
 exports[`navigationMenu > renders with orientation vertical and collapsed correctly 1`] = `
 "<nav aria-label="Main" data-orientation="vertical" dir="ltr" data-akar-navigation-menu="" data-collapsed="true" data-pohon="navigation-menu-root">
-  <div style="position: relative;">
-    <ul data-pohon="navigation-menu-list" data-orientation="vertical">
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-lucide:book-open" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span>
-          <!--v-if-->
-          <!--v-if-->
-        </button>
-        <!--v-if-->
-        <!--v-if-->
-      </li>
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" data-active="" aria-current="page" data-akar-collection-item=""><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span>
-          <!--v-if-->
-          <!--v-if-->
-        </button>
-        <!--v-if-->
-        <!--v-if-->
-      </li>
-    </ul>
-  </div>
+  <ul data-pohon="navigation-menu-list">
+    <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
+    <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-lucide:book-open" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Documentation<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><span class="" data-pohon="navigation-menu-link-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">10</span>
+        <!--v-if--></span><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span>
+      </button>
+      <!--v-if-->
+      <!--v-if-->
+    </li>
+    <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" data-active="" aria-current="page" data-akar-collection-item=""><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Components<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><!--v-if--><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span></button>
+      <!--v-if-->
+      <!--v-if-->
+    </li>
+  </ul>
   <div class="" data-pohon="navigation-menu-separator"></div>
-  <div style="position: relative;">
-    <ul data-pohon="navigation-menu-list" data-orientation="vertical">
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span>
-          <!--v-if-->
-          <!--v-if-->
-        </a>
+  <ul data-pohon="navigation-menu-list">
+    <li data-menu-item="" class="" data-pohon="navigation-menu-item"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="navigation-menu-link-label-external-icon"></span></span>
         <!--v-if-->
+      </a>
+      <!--v-if-->
+      <!--v-if-->
+    </li>
+    <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" disabled="" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Help<!--v-if--></span>
         <!--v-if-->
-      </li>
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" disabled="" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span>
-          <!--v-if-->
-          <!--v-if-->
-        </button>
-        <!--v-if-->
-        <!--v-if-->
-      </li>
-    </ul>
-  </div>
+      </button>
+      <!--v-if-->
+      <!--v-if-->
+    </li>
+  </ul>
   <!--v-if-->
   <!--v-if-->
 </nav>"
