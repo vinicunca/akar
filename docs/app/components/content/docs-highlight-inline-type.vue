@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { MDCRenderer } from '#components';
 import { parseMarkdown } from '#imports';
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const props = defineProps<{
   type: string;

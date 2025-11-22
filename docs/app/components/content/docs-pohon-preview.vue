@@ -54,9 +54,15 @@ const props = defineProps<{
   overflowHidden?: boolean;
 }>();
 
+interface CastImport {
+  name: string;
+  from: string;
+}
+
 interface Cast {
   get: (args: any) => any;
   template: (args: any) => string;
+  imports: Array<CastImport>;
 }
 
 type CastDateValue = [number, number, number];
@@ -68,6 +74,7 @@ const castMap: Record<string, Cast> = {
     template: (value: CalendarDate) => {
       return value ? `new CalendarDate(${value.year}, ${value.month}, ${value.day})` : 'null';
     },
+    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }],
   },
   'DateValue[]': {
     get: (args: Array<CastDateValue>) => args.map((date) => new CalendarDate(...date)),
@@ -77,6 +84,7 @@ const castMap: Record<string, Cast> = {
         ? `[${value.map((date) => `new CalendarDate(${date.year}, ${date.month}, ${date.day})`).join(', ')}]`
         : '[]';
     },
+    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }],
   },
   'DateRange': {
     get: (args: { start: CastDateValue; end: CastDateValue }) => ({ start: new CalendarDate(...args.start), end: new CalendarDate(...args.end) }),
@@ -87,12 +95,14 @@ const castMap: Record<string, Cast> = {
 
       return `{ start: new CalendarDate(${value.start.year}, ${value.start.month}, ${value.start.day}), end: new CalendarDate(${value.end.year}, ${value.end.month}, ${value.end.day}) }`;
     },
+    imports: [{ name: 'CalendarDate', from: '@internationalized/date' }],
   },
   'TimeValue': {
     get: (args: CastTimeValue) => new Time(...args),
     template: (value: Time) => {
       return value ? `new Time(${value.hour}, ${value.minute}, ${value.second})` : 'null';
     },
+    imports: [{ name: 'Time', from: '@internationalized/date' }],
   },
 };
 
@@ -227,6 +237,27 @@ ${props.slots?.default}
     code += `
 <script setup lang="ts">
 `;
+
+    // Collect imports from cast types
+    const importsBySource = new Map<string, Set<string>>();
+    for (const key of props.external) {
+      const cast = props.cast?.[key];
+      if (cast && castMap[cast]) {
+        for (const imp of castMap[cast].imports) {
+          if (!importsBySource.has(imp.from)) {
+            importsBySource.set(imp.from, new Set());
+          }
+          importsBySource.get(imp.from)!.add(imp.name);
+        }
+      }
+    }
+
+    // Generate import statements
+    for (const [source, names] of importsBySource) {
+      code += `import { ${Array.from(names).join(', ')} } from '${source}'
+`;
+    }
+
     if (props.externalTypes?.length) {
       const removeArrayBrackets = (type: string): string => type.endsWith('[]') ? removeArrayBrackets(type.slice(0, -2)) : type;
 
@@ -236,12 +267,18 @@ ${props.slots?.default}
 `;
     }
 
+    if (importsBySource.size > 0 || props.externalTypes?.length) {
+      code += `
+`;
+    }
+
     for (const [i, key] of props.external.entries()) {
       const cast = props.cast?.[key];
       const value = cast ? castMap[cast]!.template(componentProps[key]) : json5.stringify(componentProps[key], null, 2)?.replace(/,([ |\t\n]+[}|\]])/g, '$1');
       const type = props.externalTypes?.[i] ? `<${props.externalTypes[i]}>` : '';
+      const refType = cast ? 'shallowRef' : 'ref';
 
-      code += `const ${key === 'modelValue' ? 'value' : key} = ref${type}(${value})
+      code += `const ${key === 'modelValue' ? 'value' : key} = ${refType}${type}(${value})
 `;
     }
     code += `<\/script>
@@ -320,8 +357,10 @@ ${props.slots?.default}
   return code;
 });
 
+const codeKey = computed(() => `component-code-${name}-${hash(props)}`);
+
 const { data: ast } = await useAsyncData(
-  `component-code-${name}-${hash({ props: componentProps, slots: props.slots, external: props.external, externalTypes: props.externalTypes })}`,
+  codeKey,
   async () => {
     if (!props.prettier) {
       return parseMarkdown(code.value);

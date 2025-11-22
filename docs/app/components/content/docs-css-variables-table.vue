@@ -11,7 +11,7 @@ const props = defineProps<CssVariablesTableProps>();
 </script>
 
 <template>
-  <ProseH4>CSS Variables</ProseH4>
+  <ProseH3>CSS Variables</ProseH3>
 
   <ProseTable>
     <ProseThead>
