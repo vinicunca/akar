@@ -1,0 +1,25 @@
+/**
+ * Normalizes component names by removing Nuxt UI prefixes
+ *
+ * @param componentName - The component name to normalize
+ * @returns The normalized component name without P/p- prefixes
+ *
+ * @example
+ * normalizeComponentName('PButton') // 'Button'
+ * normalizeComponentName('p-button') // 'button'
+ * normalizeComponentName('Button') // 'Button'
+ */
+export function normalizeComponentName(componentName: string): string {
+  let normalizedName = componentName;
+
+  // Check if starts with 'P' followed by an uppercase letter (indicating PascalCase)
+  if (normalizedName.startsWith('P') && normalizedName.length > 1 && normalizedName[1] === normalizedName[1]?.toUpperCase()) {
+    normalizedName = normalizedName.slice(1);
+
+    // Handle p-button -> button (kebab-case with p- prefix)
+  } else if (normalizedName.toLowerCase().startsWith('p-')) {
+    normalizedName = normalizedName.slice(2);
+  }
+
+  return normalizedName;
+}

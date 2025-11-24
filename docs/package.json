@@ -11,6 +11,7 @@
     "docs:gen": "tsx scripts/autogen.ts"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "catalog:docs",
     "@nuxt/content": "catalog:pohon",
     "@nuxt/fonts": "catalog:pohon",
     "@nuxt/image": "catalog:docs",

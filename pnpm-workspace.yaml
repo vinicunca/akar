@@ -63,6 +63,7 @@ catalogs:
     vue-tsc: 3.1.2
   docs:
     '@babel/traverse': ^7.28.4
+    '@modelcontextprotocol/sdk': ^1.22.0
     '@nuxt/image': ^1.11.0
     '@octokit/rest': ^22.0.0
     '@types/babel__traverse': ^7.28.0
