@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+    outputs:
+      akar: ${{ steps.filter.outputs.akar }}
+      pohon: ${{ steps.filter.outputs.pohon }}
+      docs: ${{ steps.filter.outputs.docs }}
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            akar:
+              - 'packages/core/**'
+            pohon:
+              - 'packages/pohon/**'
+            docs:
+              - 'docs/**'
+
+  akar:
+    needs: filter
+    if: needs.filter.outputs.akar == 'true' && !startsWith(github.head_ref, 'changeset-release/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+      - run: pnpm --filter akar typecheck
+      - run: pnpm --filter akar test
+      - run: pnpm --filter akar build
+
+  pohon:
+    needs: filter
+    if: needs.filter.outputs.pohon == 'true' && !startsWith(github.head_ref, 'changeset-release/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+      - run: pnpm --filter pohon-ui test
+      - run: pnpm --filter pohon-ui build
+
+  docs:
+    needs: filter
+    if: needs.filter.outputs.docs == 'true' && !startsWith(github.head_ref, 'changeset-release/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+      - run: pnpm --filter docs build

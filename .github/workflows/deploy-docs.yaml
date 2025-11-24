@@ -1,0 +1,52 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'packages/**'
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - Dockerfile
+      - .github/workflows/deploy-docs.yaml
+
+env:
+  SERVICE_NAME: akar-docs
+  REGION: us-central1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Authenticate with Google Cloud
+      # You need to add GCP_SA_KEY and GCP_PROJECT_ID to your GitHub Repository Secrets
+      - name: Google Auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker
+
+      - name: Build and Push Container
+        run: |
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          region: ${{ env.REGION }}
+          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          flags: --allow-unauthenticated --memory=512Mi --cpu=1 --min-instances=0 --max-instances=5 --concurrency=80
