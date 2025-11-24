@@ -14,7 +14,7 @@ const route = useRoute();
   <PFooter>
     <template #left>
       <NuxtLink
-        to="https://github.com/nuxt/ui"
+        to="https://github.com/vinicunca/akar"
         target="_blank"
         class="text-sm color-text-muted"
       >
@@ -62,7 +62,7 @@ const route = useRoute();
       <PButton
         aria-label="Pohon UI on GitHub"
         icon="i-simple-icons:github"
-        to="https://github.com/nuxt/ui"
+        to="https://github.com/vinicunca/akar"
         target="_blank"
         color="neutral"
         variant="ghost"
