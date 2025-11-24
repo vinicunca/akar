@@ -25,6 +25,7 @@
     "maska": "catalog:docs",
     "nuxt": "catalog:pohon",
     "nuxt-component-meta": "catalog:docs",
+    "nuxt-gtag": "4.1.0",
     "nuxt-og-image": "catalog:docs",
     "pohon-ui": "workspace:*",
     "prettier": "catalog:docs",

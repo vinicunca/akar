@@ -87,6 +87,10 @@ export default defineNuxtConfig({
     ],
   },
 
+  gtag: {
+    id: 'G-EQTF5FRYFF',
+  },
+
   icon: {
     clientBundle: {
       includeCustomCollections: true,
@@ -184,6 +188,7 @@ export default defineNuxtConfig({
       });
     },
     'nuxt-llms',
+    'nuxt-gtag',
   ],
 
   nitro: {
