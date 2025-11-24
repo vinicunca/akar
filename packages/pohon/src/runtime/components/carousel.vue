@@ -194,6 +194,22 @@ const nextIcon = computed(() =>
     : appConfig.pohon.icons.arrowRight),
 );
 
+const stopAutoplayOnInteraction = computed(() => {
+  if (isBoolean(props.autoplay)) {
+    return true;
+  }
+
+  return props.autoplay.stopOnInteraction ?? true;
+});
+
+const stopAutoScrollOnInteraction = computed(() => {
+  if (isBoolean(props.autoScroll)) {
+    return true;
+  }
+
+  return props.autoScroll.stopOnInteraction ?? true;
+});
+
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.carousel || {}) })({
   orientation: props.orientation,
 }));
@@ -269,12 +285,26 @@ watch(
   { flush: 'post' },
 );
 
+function stopOnInteraction() {
+  if (stopAutoplayOnInteraction.value) {
+    emblaApi.value?.plugins().autoplay?.stop();
+  }
+
+  if (stopAutoScrollOnInteraction.value) {
+    emblaApi.value?.plugins().autoScroll?.stop();
+  }
+}
+
 function scrollPrev() {
   emblaApi.value?.scrollPrev();
+  stopOnInteraction();
 }
+
 function scrollNext() {
   emblaApi.value?.scrollNext();
+  stopOnInteraction();
 }
+
 function scrollTo(index: number) {
   emblaApi.value?.scrollTo(index);
 }
