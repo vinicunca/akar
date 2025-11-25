@@ -59,9 +59,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          echo "${{ secrets.NUXT_GITHUB_TOKEN }}" > secret_token.txt
-          docker build -f Dockerfile --secret id=nuxt_github_token,src=secret_token.txt -t ${{ needs.prepare.outputs.WEB_IMAGE_NAME }} .
-          rm secret_token.txt
+          docker build -f Dockerfile --build-arg NUXT_GITHUB_TOKEN=${{ secrets.NUXT_GITHUB_TOKEN }} -t ${{ needs.prepare.outputs.WEB_IMAGE_NAME }} .
 
       - name: Push Docker image to Artifact Registry
         run: |
