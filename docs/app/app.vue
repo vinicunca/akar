@@ -13,7 +13,7 @@ import {
   useLazyAsyncData,
   useNavigation,
   useRoute,
-  useServerSeoMeta,
+  useSeoMeta,
 } from '#imports';
 import LayoutHeaderSearch from './components/header/layout-header-search.vue';
 import LayoutHeader from './components/header/layout-header.vue';
@@ -60,9 +60,14 @@ useHead({
   },
 });
 
-useServerSeoMeta({
-  ogSiteName: 'Akar',
+useSeoMeta({
+  author: 'praburangki',
+  title: 'Akar',
+  ogTitle: 'Akar & Pohon UI',
+  description: 'Create beautiful, responsive & accessible web apps quickly with Vue or Nuxt.',
+  ogDescription: 'Create beautiful, responsive & accessible web apps quickly with Vue or Nuxt.',
   twitterCard: 'summary_large_image',
+  twitterCreator: '@praburangki',
 });
 
 useFaviconFromTheme();
