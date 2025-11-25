@@ -193,7 +193,8 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      crawlLinks: true,
+      concurrency: 250,
+      interval: 100,
       routes: [
         '/docs/pohon/getting-started',
         '/api/countries.json',
