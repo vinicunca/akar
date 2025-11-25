@@ -37,7 +37,12 @@ jobs:
   deploy:
     name: Deploy Docs to Google Cloud Run
     runs-on: ubuntu-latest
+
     needs: prepare
+
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Checkout
@@ -54,7 +59,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -f apps/web/Dockerfile -t ${{ needs.prepare.outputs.WEB_IMAGE_NAME }} .
+          docker build -f Dockerfile -t ${{ needs.prepare.outputs.WEB_IMAGE_NAME }} .
 
       - name: Push Docker image to Artifact Registry
         run: |
