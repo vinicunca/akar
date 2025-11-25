@@ -27,7 +27,7 @@ RUN pnpm run dev:prepare
 # This uses the root build script which builds workspace packages and then the docs
 ARG NUXT_GITHUB_TOKEN
 ENV NUXT_GITHUB_TOKEN=$NUXT_GITHUB_TOKEN
-RUN pnpm run build:docs
+RUN pnpm run build && pnpm run build:docs
 
 # Expose the port
 EXPOSE 3000
