@@ -20,7 +20,7 @@ RUN pnpm install --frozen-lockfile
 
 # Build the project
 # This uses the root build script which builds workspace packages and then the docs
-RUN pnpm run build
+RUN pnpm run build:docs
 
 # Expose the port
 EXPOSE 3000
