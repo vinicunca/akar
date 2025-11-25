@@ -1,4 +1,5 @@
-FROM node:22
+# Stage 1: Build
+FROM node:22 AS build
 
 # Enable corepack to use the pnpm version specified in package.json
 ENV PNPM_HOME="/pnpm"
@@ -12,8 +13,6 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Copy source code
-# COPY packages ./packages
-# COPY docs ./docs
 COPY . .
 
 # Install dependencies
@@ -29,13 +28,21 @@ ARG NUXT_GITHUB_TOKEN
 ENV NUXT_GITHUB_TOKEN=$NUXT_GITHUB_TOKEN
 RUN pnpm run build && pnpm run build:docs
 
-# Expose the port
-EXPOSE 3000
+# Stage 2: Production
+FROM node:22-slim AS production
+
+WORKDIR /app
 
 # Set environment variables
 ENV HOST=0.0.0.0
 ENV PORT=3000
 ENV NODE_ENV=production
+
+# Copy the built application from the build stage
+COPY --from=build /app/docs/.output /app/docs/.output
+
+# Expose the port
+EXPOSE 3000
 
 # Start the application
 CMD ["node", "docs/.output/server/index.mjs"]
