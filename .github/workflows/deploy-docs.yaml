@@ -59,7 +59,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -f Dockerfile -t ${{ needs.prepare.outputs.WEB_IMAGE_NAME }} .
+          docker build -f Dockerfile --build-arg NUXT_GITHUB_TOKEN=${{ secrets.NUXT_GITHUB_TOKEN }} -t ${{ needs.prepare.outputs.WEB_IMAGE_NAME }} .
 
       - name: Push Docker image to Artifact Registry
         run: |

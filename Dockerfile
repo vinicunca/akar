@@ -25,6 +25,8 @@ RUN pnpm run dev:prepare
 
 # Build the project
 # This uses the root build script which builds workspace packages and then the docs
+ARG NUXT_GITHUB_TOKEN
+ENV NUXT_GITHUB_TOKEN=$NUXT_GITHUB_TOKEN
 RUN pnpm run build:docs
 
 # Expose the port
