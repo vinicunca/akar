@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DateValue } from '@internationalized/date';
 import { CalendarDate, isWeekend } from '@internationalized/date';
-import RangeCalendar from './_DummyRangeCalendar.vue';
+import RangeCalendar from './_dummy-range-calendar.vue';
 
 function isDateUnavailable(date: DateValue) {
   return isWeekend(date, 'en');
@@ -53,6 +53,13 @@ const maxValue = new CalendarDate(2024, 2, 20);
         :default-value="defaultValue"
         :min-value="minValue"
         :max-value="maxValue"
+      />
+    </Variant>
+
+    <Variant title="Maximum Days">
+      <RangeCalendar
+        :default-value="defaultValue"
+        :maximum-days="5"
       />
     </Variant>
   </Story>
