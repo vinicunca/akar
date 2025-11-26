@@ -8,3 +8,4 @@
 - fix(ScrollArea): update thumb position when content size changes
 - fix(RangeCalendar): maximum days highlight out of range
 - fix(Combobox):  highlight element for async options
+- fix(DateField): prevent day value from being incorrectly constrained during input
