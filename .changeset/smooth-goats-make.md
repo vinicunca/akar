@@ -4,3 +4,4 @@
 ---
 
 - fix(ScrollArea): correct scrollbar padding calculation
+- chore(deps): update build
