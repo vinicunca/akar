@@ -1,5 +1,20 @@
 # akar
 
+## 1.13.0
+
+### Minor Changes
+
+- [#755](https://github.com/vinicunca/akar/pull/755) [`c5ae2f6`](https://github.com/vinicunca/akar/commit/c5ae2f626433742a509212890465c8086f3a7917) Thanks [@praburangki](https://github.com/praburangki)! - - fix(ScrollArea): correct scrollbar padding calculation
+  - chore(deps): update build
+  - fix(ScrollArea): update thumb position when content size changes
+  - fix(RangeCalendar): maximum days highlight out of range
+  - fix(Combobox): highlight element for async options
+  - fix(DateField): prevent day value from being incorrectly constrained during input
+  - docs: fix broken wai-aria docs links in dropdown dropdown-menu docs
+  - fix(Tree): don't mutate the expanded state
+  - fix(ContentSearch/DasboardSearch): set full height on mobile to prevent jump
+  - fix(Table): only forward necessary props
+
 ## 1.12.1
 
 ### Patch Changes
