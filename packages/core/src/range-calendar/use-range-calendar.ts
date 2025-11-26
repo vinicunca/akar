@@ -156,7 +156,7 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
     ) {
       // Determine the direction of selection and limit to maximum days
       const cappedEnd = isStartBeforeFocused
-        ? start.add({ days: props.maximumDays.value })
+        ? start.add({ days: props.maximumDays.value - 1 })
         : start.subtract({ days: props.maximumDays.value });
 
       return {

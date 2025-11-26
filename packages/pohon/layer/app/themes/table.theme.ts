@@ -9,7 +9,7 @@ export const tableTheme = {
     base: 'min-w-full',
     caption: 'sr-only',
     thead: 'relative',
-    tbody: '[&>tr]:data-[selectable=true]:focus-visible:outline-primary [&>tr]:data-[selectable=true]:hover:bg-background-elevated/50',
+    tbody: 'isolate [&>tr]:data-[selectable=true]:focus-visible:outline-primary [&>tr]:data-[selectable=true]:hover:bg-background-elevated/50',
     tfoot: 'relative',
     tr: 'data-[selected=true]:bg-background-elevated/50',
     th: 'text-sm color-text-highlighted font-semibold px-4 py-3.5 text-left [&:has([role=checkbox])]:pe-0 rtl:text-right',

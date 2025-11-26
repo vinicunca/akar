@@ -80,6 +80,28 @@ exports[`tree > renders with defaultExpanded correctly 1`] = `
 </ul>"
 `;
 
+exports[`tree > renders with defaultExpanded item correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="true" aria-level="1" data-indent="1" data-expanded="" data-orientation="vertical" data-akar-collection-item=""><span class="iconify i-lucide:folder-open" aria-hidden="true" data-pohon="tree-link-leading-icon"></span><span class="" data-pohon="tree-link-label">Default Expanded</span><span class="" data-pohon="tree-link-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="tree-link-trailing-icon"></span></span></button>
+    <ul role="group" class="" data-pohon="tree-list-with-children">
+      <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="2" data-indent="2" data-orientation="vertical" data-akar-collection-item=""><span class="iconify i-lucide:folder" aria-hidden="true" data-pohon="tree-link-leading-icon"></span><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="tree-link-trailing-icon"></span></span></button>
+        <!--v-if-->
+      </li>
+      <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="2" data-indent="2" data-orientation="vertical" data-akar-collection-item=""><span class="iconify i-vscode-icons:file-type-vue" aria-hidden="true" data-pohon="tree-link-leading-icon"></span><span class="" data-pohon="tree-link-label">app.vue</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+      <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="2" data-indent="2" data-orientation="vertical" data-akar-collection-item=""><span class="iconify i-vscode-icons:file-type-nuxt" aria-hidden="true" data-pohon="tree-link-leading-icon"></span><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </li>
+</ul>"
+`;
+
 exports[`tree > renders with defaultValue correctly 1`] = `
 "<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
   <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="true" aria-expanded="false" aria-level="1" data-indent="1" data-selected="" data-orientation="vertical" data-akar-collection-item=""><span class="iconify i-lucide:folder" aria-hidden="true" data-pohon="tree-link-leading-icon"></span><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="tree-link-trailing-icon"></span></span></button>

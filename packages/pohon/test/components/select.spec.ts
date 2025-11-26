@@ -117,7 +117,7 @@ describe('select', () => {
         //   Element does not have an explicit <label>
         //   Element's default semantics were not overridden with role="none" or role="presentation"
 
-        // We should add aria-labeledby to the PSelectTrigger and the id to the value/placeholder element.
+        // We should add aria-labelledby to the PSelectTrigger and the id to the value/placeholder element.
         'button-name': { enabled: false },
       },
     })).toHaveNoViolations();

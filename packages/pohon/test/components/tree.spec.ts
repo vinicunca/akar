@@ -52,7 +52,7 @@ describe('tree', () => {
     // Virtualize
     ['with virtualize', { props: { ...props, virtualize: true } }],
     // Item properties
-    ['with defautExpanded item', { props: { items: [{ label: 'Default Expanded', defaultExpanded: true, children: items }] } }],
+    ['with defaultExpanded item', { props: { items: [{ label: 'Default Expanded', defaultExpanded: true, children: items }] } }],
     ['with disabled item', { props: { items: [{ label: 'Disabled item', disabled: true, children: items }] } }],
     // Icons
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-arrow-down' } }],
