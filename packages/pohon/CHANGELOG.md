@@ -1,5 +1,11 @@
 # pohon-ui
 
+## 1.1.0
+
+### Minor Changes
+
+- [`a6f16d7`](https://github.com/vinicunca/akar/commit/a6f16d7a6ef3f18d81250c7b7269a4b8b40dfd49) Thanks [@praburangki](https://github.com/praburangki)! - update unocss-variants
+
 ## 1.0.16
 
 ### Patch Changes
