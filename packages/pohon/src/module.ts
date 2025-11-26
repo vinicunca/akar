@@ -114,25 +114,27 @@ export default defineNuxtModule<PohonModuleOptions>({
       getDefaultPohonConfig(options.theme.colors),
     );
 
-    nuxt.hook('vite:extendConfig', (config: any) => {
-      config.vue = config.vue || {};
-      config.vue.template = config.vue.template || {};
-      config.vue.template.compilerOptions = config.vue.template.compilerOptions || {};
-      config.vue.template.compilerOptions.nodeTransforms = config.vue.template.compilerOptions.nodeTransforms || [];
+    if (!nuxt.options.build && !nuxt.options.test) {
+      nuxt.hook('vite:extendConfig', (config: any) => {
+        config.vue = config.vue || {};
+        config.vue.template = config.vue.template || {};
+        config.vue.template.compilerOptions = config.vue.template.compilerOptions || {};
+        config.vue.template.compilerOptions.nodeTransforms = config.vue.template.compilerOptions.nodeTransforms || [];
 
-      config.vue.template.compilerOptions.nodeTransforms.push((node: any) => {
-        if (node.type === 1) {
-          if (node.props) {
-            for (let i = node.props.length - 1; i >= 0; i--) {
-              const prop = node.props[i];
-              if (prop.type === 6 && prop.name === 'data-pohon') {
-                node.props.splice(i, 1);
+        config.vue.template.compilerOptions.nodeTransforms.push((node: any) => {
+          if (node.type === 1) {
+            if (node.props) {
+              for (let i = node.props.length - 1; i >= 0; i--) {
+                const prop = node.props[i];
+                if (prop.type === 6 && prop.name === 'data-pohon') {
+                  node.props.splice(i, 1);
+                }
               }
             }
           }
-        }
+        });
       });
-    });
+    }
 
     // Isolate root node from portaled components
     nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {};
