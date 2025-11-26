@@ -308,8 +308,8 @@ catalogs:
       specifier: ^0.2.15
       version: 0.2.15
     unocss-variants:
-      specifier: ^1.0.0
-      version: 1.0.0
+      specifier: 1.2.0
+      version: 1.2.0
     unplugin-auto-import:
       specifier: ^20.1.0
       version: 20.2.0
@@ -718,7 +718,7 @@ importers:
         version: 5.8.3
       unocss-variants:
         specifier: catalog:pohon
-        version: 1.0.0
+        version: 1.2.0
       unplugin:
         specifier: ^2.3.10
         version: 2.3.10
@@ -7876,8 +7876,8 @@ packages:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
     engines: {node: '>= 4.0.0'}
 
-  unocss-variants@1.0.0:
-    resolution: {integrity: sha512-VzbS9l1hOWGsTjinalNFsNONzxKsQ6PzDOhuEdu9VOS0KRcGQv04KemwIE2PWweTvOi2Minmm1EXaUva1WuUDg==}
+  unocss-variants@1.2.0:
+    resolution: {integrity: sha512-7vMeR6qyhJ3MMbYX8iYh2sQnuovl7qqD+gb9VTxKaQUlo0xQ/e64/jRne52fqL9C28w+B1rdPaWOllv1VLK/Fw==}
 
   unocss@66.5.9:
     resolution: {integrity: sha512-uMW5ZKayDQ1ZiqdrO7WiGOJ3H5PE3D4eN1xn0EZXU1Tiu37e5DtuNLa7AzT0z4Dx0AX8GK1xQrNC0US971mfFA==}
@@ -17272,7 +17272,7 @@ snapshots:
 
   universalify@0.1.2: {}
 
-  unocss-variants@1.0.0:
+  unocss-variants@1.2.0:
     dependencies:
       '@vinicunca/perkakas': 1.9.0
 

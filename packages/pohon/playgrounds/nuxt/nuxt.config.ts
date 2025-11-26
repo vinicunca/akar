@@ -12,6 +12,8 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
   ],
 
+  ssr: false,
+
   devtools: {
     enabled: true,
   },
