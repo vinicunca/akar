@@ -5,6 +5,7 @@ import type {
   PButtonProps,
   PDialogProps,
   PDrawerProps,
+  PLinkPropsKeys,
   PSlideoverProps,
 } from '../types';
 import type { ComponentConfig } from '../types/uv';
@@ -30,7 +31,7 @@ export interface PDashboardSidebarProps<T extends DashboardSidebarMode = Dashboa
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  toggle?: boolean | Partial<PButtonProps>;
+  toggle?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The side to render the toggle button on.
    * @defaultValue 'left'
@@ -198,7 +199,7 @@ function toggleOpen() {
     >
       <PDashboardSidebarToggle
         v-if="toggle"
-        v-bind="(typeof toggle === 'object' ? toggle as Partial<PButtonProps> : {})"
+        v-bind="(typeof toggle === 'object' ? toggle : {})"
         :side="toggleSide"
         :class="pohon.toggle({ class: props.pohon?.toggle, toggleSide })"
       />

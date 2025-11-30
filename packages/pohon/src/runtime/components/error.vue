@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { NuxtError } from '#app';
 import type { AppConfig } from '@nuxt/schema';
-import type { PButtonProps } from '../types';
+import type { PButtonProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/error';
 
@@ -24,7 +24,7 @@ export interface PErrorProps {
    * `{ size: 'lg', color: 'primary', variant: 'solid', label: 'Back to home' }`{lang="ts-type"}
    * @defaultValue true
    */
-  clear?: boolean | Partial<PButtonProps>;
+  clear?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   class?: any;
   pohon?: Error['slots'];
 }
@@ -113,7 +113,7 @@ function handleError() {
           color="primary"
           variant="solid"
           :label="t('error.clear')"
-          v-bind="(typeof clear === 'object' ? clear as Partial<PButtonProps> : {})"
+          v-bind="(typeof clear === 'object' ? clear : {})"
           @click="handleError"
         />
       </slot>

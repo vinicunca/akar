@@ -86,6 +86,12 @@ export interface PLinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Butto
   class?: any;
 }
 
+/**
+ * Link-related props that can be omitted from ButtonProps when link functionality is not needed.
+ * Use this with `Omit<ButtonProps, LinkPropsKeys>` in components where buttons should not act as links.
+ */
+export type PLinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media';
+
 export interface PLinkSlots {
   default: (props: { active: boolean }) => any;
 }

@@ -10,6 +10,7 @@
     "zhuangtongfa.material-theme",
     "nuxt.mdc",
     "yoavbls.pretty-ts-errors",
-    "praburangki.nuxt-snippets"
+    "praburangki.nuxt-snippets",
+    "cpylua.language-postcss"
   ]
 }

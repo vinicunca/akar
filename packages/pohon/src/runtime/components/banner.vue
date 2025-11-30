@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { PButtonProps, PIconProps, PLinkProps } from '../types';
+import type { PButtonProps, PIconProps, PLinkProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/banner';
 
@@ -41,7 +41,7 @@ export interface PBannerProps {
    * @emits `close`
    * @defaultValue false
    */
-  close?: boolean | Partial<PButtonProps>;
+  close?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
@@ -211,7 +211,7 @@ function onClose() {
             color="neutral"
             variant="ghost"
             :aria-label="t('banner.close')"
-            v-bind="(typeof close === 'object' ? close as Partial<PButtonProps> : {})"
+            v-bind="(typeof close === 'object' ? close : {})"
             :class="pohon.close({ class: props.pohon?.close })"
             data-pohon="banner-close"
             @click="onClose"

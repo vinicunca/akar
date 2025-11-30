@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { PButtonProps } from '../types';
+import type { PButtonProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-sidebar-toggle';
 
 type DashboardSidebarToggle = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarToggle'>;
 
-export interface PDashboardSidebarToggleProps extends Omit<PButtonProps, 'color' | 'variant'> {
+export interface PDashboardSidebarToggleProps extends Omit<PButtonProps, PLinkPropsKeys | 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */

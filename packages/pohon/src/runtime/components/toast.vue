@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { AToastRootEmits, AToastRootProps } from 'akar';
-import type { PAvatarProps, PButtonProps, PIconProps, PProgressProps } from '../types';
+import type { PAvatarProps, PButtonProps, PIconProps, PLinkPropsKeys, PProgressProps } from '../types';
 import type { StringOrVNode } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/toast';
@@ -35,7 +35,7 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: boolean | Partial<PButtonProps>;
+  close?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
@@ -258,7 +258,7 @@ defineExpose({
             color="neutral"
             variant="link"
             :aria-label="t('toast.close')"
-            v-bind="(typeof close === 'object' ? close as Partial<PButtonProps> : {})"
+            v-bind="(typeof close === 'object' ? close : {})"
             :class="pohon.close({ class: props.pohon?.close })"
             @click.stop
           />

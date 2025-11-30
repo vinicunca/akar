@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { UseFileDialogReturn } from '@vueuse/core';
-import type { PButtonProps, PIconProps } from '../types';
+import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/file-upload';
@@ -86,7 +86,7 @@ export interface PFileUploadProps<M extends boolean = false> extends /** @vue-ig
    * When `layout` is `grid`, the default is `{ color: 'neutral', variant: 'solid', size: 'xs' }`{lang="ts-type"}
    * When `layout` is `list`, the default is `{ color: 'neutral', variant: 'link' }`{lang="ts-type"}
    */
-  fileDelete?: boolean | Partial<PButtonProps>;
+  fileDelete?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed to delete a file.
    * @defaultValue appConfig.pohon.icons.close

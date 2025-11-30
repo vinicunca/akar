@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 
-import type { PAvatarProps, PButtonProps, PIconProps } from '../types';
+import type { PAvatarProps, PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/alert';
 
@@ -46,7 +46,7 @@ export interface PAlertProps {
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: boolean | Partial<PButtonProps>;
+  close?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
@@ -196,7 +196,7 @@ const pohon = computed(() =>
           color="neutral"
           variant="link"
           :aria-label="t('alert.close')"
-          v-bind="typeof close === 'object' ? close as Partial<PButtonProps> : {}"
+          v-bind="typeof close === 'object' ? close : {}"
           :class="pohon.close({ class: props.pohon?.close })"
           data-pohon="alert-close"
           @click="emits('update:open', false)"

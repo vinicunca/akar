@@ -9,7 +9,7 @@ import type {
   ARangeCalendarRootProps,
   DateRange,
 } from 'akar';
-import type { PButtonProps, PIconProps } from '../types';
+import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/calendar';
 
@@ -45,7 +45,7 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    * Configure the next year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  nextYear?: PButtonProps;
+  nextYear?: Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon to use for the next month control.
    * @defaultValue appConfig.pohon.icons.chevronRight
@@ -56,7 +56,7 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    * Configure the next month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  nextMonth?: PButtonProps;
+  nextMonth?: Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon to use for the previous year control.
    * @defaultValue appConfig.pohon.icons.chevronDoubleLeft
@@ -67,7 +67,7 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    * Configure the prev year button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  prevYear?: PButtonProps;
+  prevYear?: Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon to use for the previous month control.
    * @defaultValue appConfig.pohon.icons.chevronLeft
@@ -78,7 +78,7 @@ export interface PCalendarProps<R extends boolean = false, M extends boolean = f
    * Configure the prev month button.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  prevMonth?: PButtonProps;
+  prevMonth?: Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * @defaultValue 'primary'
    */

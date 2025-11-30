@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ANumberFieldRootProps } from 'akar';
-import type { PButtonProps, PIconProps } from '../types';
+import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
 import type { ModelModifiers } from '../types/input';
 import type { ComponentConfig } from '../types/uv';
@@ -32,7 +32,7 @@ export interface PInputNumberProps<T extends InputNumberValue = InputNumberValue
    * Configure the increment button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  increment?: boolean | PButtonProps;
+  increment?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed to increment the value.
    * @defaultValue appConfig.pohon.icons.plus
@@ -45,7 +45,7 @@ export interface PInputNumberProps<T extends InputNumberValue = InputNumberValue
    * Configure the decrement button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
    */
-  decrement?: boolean | PButtonProps;
+  decrement?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed to decrement the value.
    * @defaultValue appConfig.pohon.icons.minus

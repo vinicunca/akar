@@ -11,6 +11,7 @@ import type {
   PDialogProps,
   PIconProps,
   PInputProps,
+  PLinkPropsKeys,
 } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-search';
@@ -48,7 +49,7 @@ export interface PDashboardSearchProps<T extends PCommandPaletteItem = PCommandP
    * @emits 'update:open'
    * @defaultValue true
    */
-  close?: boolean | Partial<PButtonProps>;
+  close?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
