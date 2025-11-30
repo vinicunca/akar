@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { PButtonProps, PIconProps } from '../types';
+import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import type { DashboardContext } from '../utils/dashboard';
 import theme from '#build/pohon/dashboard-navbar';
@@ -24,7 +24,7 @@ export interface PDashboardNavbarProps {
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  toggle?: boolean | Partial<PButtonProps>;
+  toggle?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The side to render the toggle button on.
    * @defaultValue 'left'
@@ -89,7 +89,7 @@ const pohon = computed(() =>
     >
       <PDashboardSidebarToggle
         v-if="toggle"
-        v-bind="(typeof toggle === 'object' ? toggle as Partial<PButtonProps> : {})"
+        v-bind="(typeof toggle === 'object' ? toggle : {})"
         :side="toggleSide"
         :class="pohon.toggle({ class: props.pohon?.toggle, toggleSide })"
       />

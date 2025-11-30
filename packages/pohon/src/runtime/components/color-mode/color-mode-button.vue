@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { PButtonProps } from '../../types';
+import type { PButtonProps, PLinkPropsKeys } from '../../types';
 
-export interface PColorModeButtonProps extends Omit<PButtonProps, 'color' | 'variant'> {
+export interface PColorModeButtonProps extends Omit<PButtonProps, PLinkPropsKeys | 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */

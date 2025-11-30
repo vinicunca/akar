@@ -9,7 +9,7 @@ export const navigationMenuTheme = {
     list: 'isolate min-w-0',
     label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 color-text-highlighted px-2.5 py-1.5',
     item: 'min-w-0',
-    link: 'group relative w-full grid grid-cols-[min-content_1fr_min-content] items-center gap-1.5 font-medium text-sm before:(absolute content-empty -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:(absolute content-empty -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -126,7 +126,7 @@ export const navigationMenuTheme = {
       orientation: 'vertical',
       collapsed: true,
       class: {
-        link: 'akar:(px-1.5 grid-cols-[min-content])',
+        link: 'akar:(px-1.5)',
         linkLabel: 'hidden',
         linkTrailing: 'hidden',
         content: 'shadow-sm rounded-sm min-h-6 p-1',

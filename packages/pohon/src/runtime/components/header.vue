@@ -4,6 +4,7 @@ import type {
   PButtonProps,
   PDialogProps,
   PDrawerProps,
+  PLinkPropsKeys,
   PSlideoverProps,
 } from '../types';
 import type { ComponentConfig } from '../types/uv';
@@ -35,7 +36,7 @@ export interface PHeaderProps<T extends HeaderMode = HeaderMode> {
    * Customize the toggle button to open the header menu displayed when the `content` slot is used.
    * `{ color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  toggle?: boolean | Partial<PButtonProps>;
+  toggle?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The side to render the toggle button on.
    * @defaultValue 'right'
@@ -149,7 +150,7 @@ function toggleOpen() {
         variant="ghost"
         :aria-label="open ? t('header.close') : t('header.open')"
         :icon="open ? appConfig.pohon.icons.close : appConfig.pohon.icons.menu"
-        v-bind="(typeof toggle === 'object' ? toggle as Partial<PButtonProps> : {})"
+        v-bind="(typeof toggle === 'object' ? toggle : {})"
         :class="pohon.toggle({ class: props.pohon?.toggle, toggleSide })"
         data-pohon="header-toggle"
         @click="toggleOpen"

@@ -5,7 +5,7 @@ import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import type { AListboxRootEmits, AListboxRootProps } from 'akar';
 import type { FuseResult } from 'fuse.js';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { PAvatarProps, PButtonProps, PChipProps, PIconProps, PInputProps, PKbdProps, PLinkProps } from '../types';
+import type { PAvatarProps, PButtonProps, PChipProps, PIconProps, PInputProps, PKbdProps, PLinkProps, PLinkPropsKeys } from '../types';
 import type { GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/command-palette';
@@ -105,7 +105,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * @emits 'update:open'
    * @defaultValue false
    */
-  close?: boolean | Partial<PButtonProps>;
+  close?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
@@ -117,7 +117,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * `{ size: 'md', color: 'neutral', variant: 'link' }`{lang="ts-type"}
    * @defaultValue true
    */
-  back?: boolean | PButtonProps;
+  back?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed in the back button.
    * @defaultValue appConfig.pohon.icons.arrowLeft
@@ -720,7 +720,7 @@ function onSelect(event: Event, item: T) {
               color="neutral"
               variant="link"
               :aria-label="t('commandPalette.back')"
-              v-bind="(typeof back === 'object' ? back as Partial<PButtonProps> : {})"
+              v-bind="(typeof back === 'object' ? back : {})"
               :class="pohon.back({ class: props.pohon?.back })"
               data-pohon="command-palette-back"
               @click="navigateBack"
@@ -742,7 +742,7 @@ function onSelect(event: Event, item: T) {
               color="neutral"
               variant="ghost"
               :aria-label="t('commandPalette.close')"
-              v-bind="(typeof close === 'object' ? close as Partial<PButtonProps> : {})"
+              v-bind="(typeof close === 'object' ? close : {})"
               :class="pohon.close({ class: props.pohon?.close })"
               data-pohon="command-palette-close"
               @click="emits('update:open', false)"

@@ -6,7 +6,7 @@ import type {
   ADialogRootEmits,
   ADialogRootProps,
 } from 'akar';
-import type { PButtonProps, PIconProps } from '../types';
+import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dialog';
@@ -43,7 +43,7 @@ export interface PDialogProps extends ADialogRootProps {
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
-  close?: boolean | Partial<PButtonProps>;
+  close?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close
@@ -249,7 +249,7 @@ const pohon = computed(() =>
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('dialog.close')"
-                    v-bind="(typeof props.close === 'object' ? props.close as Partial<PButtonProps> : {})"
+                    v-bind="(typeof props.close === 'object' ? props.close : {})"
                     :class="pohon.close({ class: props.pohon?.close })"
                     data-pohon="dialog-close"
                   />

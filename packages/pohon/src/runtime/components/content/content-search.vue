@@ -13,6 +13,7 @@ import type {
   PIconProps,
   PInputProps,
   PLinkProps,
+  PLinkPropsKeys,
 } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-search';
@@ -77,7 +78,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
    * @emits 'update:open'
    * @defaultValue true
    */
-  close?: boolean | Partial<PButtonProps>;
+  close?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
    * The icon displayed in the close button.
    * @defaultValue appConfig.pohon.icons.close

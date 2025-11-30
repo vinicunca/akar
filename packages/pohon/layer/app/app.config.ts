@@ -129,7 +129,7 @@ export default defineAppConfig({
     kbd: kbdTheme,
     link: linkTheme,
     main: {
-      base: 'min-h-[calc(100vh-var(--pohon-header-height))]',
+      base: 'min-h-[calc(100dvh-var(--pohon-header-height))]',
     },
     marquee: marqueeTheme,
     navigationMenu: navigationMenuTheme,

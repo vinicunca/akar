@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { PButtonProps } from '../types';
+import type { PButtonProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-sidebar-collapse';
 
 type DashboardSidebarCollapse = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarCollapse'>;
 
-export interface PDashboardSidebarCollapseProps extends Omit<PButtonProps, 'color' | 'variant'> {
+export interface PDashboardSidebarCollapseProps extends Omit<PButtonProps, PLinkPropsKeys | 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */

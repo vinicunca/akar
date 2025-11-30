@@ -5,6 +5,7 @@ import type {
   PButtonSlots,
   PIconProps,
   PKbdProps,
+  PLinkPropsKeys,
   PTooltipProps,
 } from '../types';
 import type { ComponentConfig } from '../types/uv';
@@ -12,7 +13,7 @@ import theme from '#build/pohon/dashboard-search-button';
 
 type DashboardSearchButton = ComponentConfig<typeof theme, AppConfig, 'dashboardSearchButton'>;
 
-export interface PDashboardSearchButtonProps extends Omit<PButtonProps, 'icon' | 'label' | 'color' | 'variant'> {
+export interface PDashboardSearchButtonProps extends Omit<PButtonProps, PLinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
   /**
    * The icon displayed in the button.
    * @defaultValue appConfig.pohon.icons.search
