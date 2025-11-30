@@ -1,5 +1,11 @@
 # pohon-ui
 
+## 1.3.0
+
+### Minor Changes
+
+- [#757](https://github.com/vinicunca/akar/pull/757) [`7c2ee29`](https://github.com/vinicunca/akar/commit/7c2ee295fa048531b026896922f2b1a7636b05e8) Thanks [@praburangki](https://github.com/praburangki)! - chore(components): reduce type verbosity by omitting link props from action buttons
+
 ## 1.2.0
 
 ### Minor Changes
