@@ -45,7 +45,12 @@ export const [
 import { computed } from 'vue';
 import { ACollapsibleRoot } from '../collapsible';
 
-const props = defineProps<AAccordionItemProps>();
+const props = withDefaults(
+  defineProps<AAccordionItemProps>(),
+  {
+    unmountOnHide: undefined,
+  },
+);
 
 defineSlots<{
   default?: (props: {
@@ -119,7 +124,7 @@ function handleArrowKey(event: KeyboardEvent) {
     :open="open"
     :as="props.as"
     :as-child="props.asChild"
-    :unmount-on-hide="rootContext.unmountOnHide.value"
+    :unmount-on-hide="props.unmountOnHide ?? rootContext.unmountOnHide.value"
     @keydown.up.down.left.right.home.end="handleArrowKey"
   >
     <slot :open="open" />
