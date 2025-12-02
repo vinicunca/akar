@@ -1,5 +1,11 @@
 # akar
 
+## 2.0.0
+
+### Major Changes
+
+- [#759](https://github.com/vinicunca/akar/pull/759) [`c7c6366`](https://github.com/vinicunca/akar/commit/c7c6366ff23dd5e8ed531fdf5867ea487e66e987) Thanks [@praburangki](https://github.com/praburangki)! - update deps
+
 ## 1.13.0
 
 ### Minor Changes
