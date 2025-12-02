@@ -319,7 +319,7 @@ Adheres to the [ATree WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/p
 ---
 name: keyboard-a-tree
 data:
-  - keys: ['Enter']
+  - keys: ['Enter', 'Space']
     description: 'When highlight on <code>ATreeItem</code>, selects the focused item.'
   - keys: ['ArrowDown']
     description: 'When focus is on <code>ATreeItem</code>, moves focus to the next item.'
