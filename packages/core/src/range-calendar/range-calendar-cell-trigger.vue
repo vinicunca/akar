@@ -269,7 +269,7 @@ function handleArrowKey(event: KeyboardEvent) {
     role="button"
     :aria-label="labelText"
     data-akar-calendar-cell-trigger
-    :aria-selected="isSelectedDate && (allowNonContiguousRanges || !isUnavailable) ? true : undefined"
+    :aria-pressed="isSelectedDate && (allowNonContiguousRanges || !isUnavailable) ? true : undefined"
     :aria-disabled="isDisabled || isUnavailable ? true : undefined"
     :data-highlighted="isHighlighted && (allowNonContiguousRanges || !isUnavailable) ? '' : undefined"
     :data-selection-start="isSelectionStart ? true : undefined"
