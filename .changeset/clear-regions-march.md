@@ -6,3 +6,4 @@
 - feat(Select): add disableOutsidePointerEvents prop to Content
 - fix(Tooltip): empty ariaLabel for nested components in Content
 - fix(RangeCalendar): a11y aria attribute in CellTrigger
+- fix(InputDate/InputTime): add missing field group variant
