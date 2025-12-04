@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PTableColumn } from 'pohon-ui';
-import { useSortable } from '@vueuse/integrations/useSortable.mjs';
+import { useSortable } from '@vueuse/integrations/useSortable';
 import { h, ref } from 'vue';
 
 type Payment = {

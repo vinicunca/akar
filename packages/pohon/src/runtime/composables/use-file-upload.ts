@@ -1,5 +1,4 @@
-import type { MaybeRef } from '@vueuse/core';
-import type { ComponentPublicInstance } from 'vue';
+import type { ComponentPublicInstance, MaybeRef } from 'vue';
 import { useDropZone, useFileDialog } from '@vueuse/core';
 import { computed, onMounted, reactive, ref, unref, watch } from 'vue';
 

@@ -838,4 +838,27 @@ describe('handles maximumDays', () => {
     expect(maximumDay).toHaveAttribute('data-highlighted');
     expect(beyondMaximumDay).not.toHaveAttribute('data-highlighted');
   });
+
+  describe('a11y', async () => {
+    it('should pass axe accessibility tests when closed', async () => {
+      const { calendar } = setup({
+        calendarProps: {
+          modelValue: calendarDateRange,
+        },
+      });
+
+      expect(await axe(calendar)).toHaveNoViolations();
+    });
+
+    it('should pass axe accessibility tests when open', async () => {
+      const { calendar } = setup({
+        calendarProps: {
+        },
+      });
+
+      calendar.click();
+
+      expect(await axe(calendar)).toHaveNoViolations();
+    });
+  });
 });
