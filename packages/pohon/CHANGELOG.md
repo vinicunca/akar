@@ -1,5 +1,20 @@
 # pohon-ui
 
+## 1.4.0
+
+### Minor Changes
+
+- [#761](https://github.com/vinicunca/akar/pull/761) [`23be298`](https://github.com/vinicunca/akar/commit/23be298e47f25b8c2a60356ddb51e5c8b534702f) Thanks [@praburangki](https://github.com/praburangki)! - \n
+  - feat(Select): add disableOutsidePointerEvents prop to Content
+  - fix(Tooltip): empty ariaLabel for nested components in Content
+  - fix(RangeCalendar): a11y aria attribute in CellTrigger
+  - fix(InputDate/InputTime): add missing field group variant
+
+### Patch Changes
+
+- Updated dependencies [[`23be298`](https://github.com/vinicunca/akar/commit/23be298e47f25b8c2a60356ddb51e5c8b534702f)]:
+  - akar@1.14.0
+
 ## 2.0.0
 
 ### Major Changes
