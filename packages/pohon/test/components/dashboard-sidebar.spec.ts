@@ -1,10 +1,10 @@
-import type { PDashboardSidebarProps, PDashboardSidebarSlots } from '../../src/runtime/components/dashboard-sidebar.vue';
+import type { PDashboardSidebarProps, PDashboardSidebarSlots } from '../../src/runtime/components/dashboard-sidebarx.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
 import DashboardGroup from '../../src/runtime/components/dashboard-group.vue';
-import DashboardSidebar from '../../src/runtime/components/dashboard-sidebar.vue';
+import DashboardSidebar from '../../src/runtime/components/dashboard-sidebarx.vue';
 
 const DashboardWrapper = defineComponent({
   components: {

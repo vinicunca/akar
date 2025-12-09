@@ -1,3 +1,7 @@
+catalogMode: prefer
+shellEmulator: true
+trustPolicy: no-downgrade
+
 packages:
   - packages/*
   - docs
@@ -19,7 +23,7 @@ catalogs:
     '@commitlint/cli': ^20.1.0
     '@commitlint/config-conventional': ^20.0.0
     '@iconify/json': ^2.2.389
-    '@vinicunca/eslint-config': 3.30.0
+    '@vinicunca/eslint-config': 4.0.0
     eslint: ^9.39.1
     eslint-plugin-format: ^1.0.2
     lint-staged: ^16.2.7

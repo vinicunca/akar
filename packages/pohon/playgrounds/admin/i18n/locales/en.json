@@ -1,0 +1,12 @@
+{
+  "pages": {
+    "dashboard": {
+      "index": "Dashboard",
+      "analytics": "Analytics"
+    },
+    "systems": {
+      "users": "Users",
+      "roles": "Roles"
+    }
+  }
+}

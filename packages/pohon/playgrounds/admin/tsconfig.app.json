@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": false
+  },
+  "include": [
+    "uno.config.ts",
+    "./app/themes/*.ts"
+  ]
+}

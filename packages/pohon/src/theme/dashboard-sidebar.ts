@@ -1,5 +1,6 @@
 export default {
   slots: {
+    hiddenSide: '',
     root: '',
     header: '',
     body: '',
@@ -10,6 +11,15 @@ export default {
     overlay: '',
   },
   variants: {
+    sidebarMixed: {
+      true: {
+        root: '',
+      },
+      false: {
+        root: '',
+      },
+    },
+
     menu: {
       true: {
         header: '',
