@@ -130,7 +130,7 @@ const isExpandOnHovering = defineModel<boolean>('isExpandOnHovering');
 const isExpandOnHover = defineModel<boolean>('isExpandOnHover');
 const isExtraVisible = defineModel<boolean>('isExtraVisible');
 
-const isLocked = useScrollLock(document.body);
+const isLocked = useScrollLock(document?.body);
 
 const hiddenSideStyle = computed<CSSProperties>(() => calcMenuWidthStyle(true));
 

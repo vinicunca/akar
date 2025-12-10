@@ -10,3 +10,5 @@ export type PDashboardLayoutType
 export type PDashboardContentCompactType = 'compact' | 'wide';
 
 export type PDashboardLayoutHeaderModeType = 'auto' | 'auto-scroll' | 'fixed' | 'static';
+
+export type PDashboardThemeModeType = 'auto' | 'dark' | 'light';

@@ -2,10 +2,8 @@
 import { definePageMeta } from '#imports';
 
 definePageMeta({
-  redirect: '/systems/users',
   icon: 'i-lucide:layout-dashboard',
-  title: 'pages.systems.users',
-  order: 2000,
+  title: 'pages.dashboard.index',
 });
 </script>
 

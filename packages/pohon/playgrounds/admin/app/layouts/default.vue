@@ -13,10 +13,14 @@ const isSidebarOpen = ref(false);
 </script>
 
 <template>
-  <PDashboardLayout
+  <!-- <PDashboardLayout
     :sidebar-width="224"
     :header-height="50"
   >
-    <!--  -->
-  </PDashboardLayout>
+    <template #logo>
+      <CoreLogo />
+    </template>
+
+  </PDashboardLayout> -->
+  <slot />
 </template>

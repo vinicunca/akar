@@ -23,18 +23,19 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const navigationStore = useAccessStore();
 
-  navigationStore.setCoreRoutes(coreRoutes);
-  navigationStore.setAccessRoutes(accessRoutes);
-  navigationStore.setAccessRouteNames(accessRouteNames);
-  navigationStore.setAccessMenus(
-    generateMenus({ routes: accessRoutes, i18n: nuxtApp.$i18n as Composer }),
-  );
+  // navigationStore.setCoreRoutes(coreRoutes);
+  // navigationStore.setAccessRoutes(accessRoutes);
+  // navigationStore.setAccessRouteNames(accessRouteNames);
+  // navigationStore.setAccessMenus(
+  //   generateMenus({ routes: accessRoutes, i18n: nuxtApp.$i18n as Composer }),
+  // );
 });
 
 function getBaseRoutes(roles: Array<string>) {
   const router = useRouter();
 
   const routesTree = router.options.routes as Array<RouteRecordRaw>;
+  console.log('🚀 ~ getBaseRoutes ~ routesTree:', routesTree);
 
   const [coreRoutes, appRoutes] = pipe(
     routesTree,

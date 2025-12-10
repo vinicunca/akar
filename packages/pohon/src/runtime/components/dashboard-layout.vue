@@ -802,12 +802,12 @@ const pohon = computed(() =>
           </template>
 
           <template #toggle-button>
-            <PButtonIcon
+            <!-- <PButtonIcon
               v-if="showHeaderToggleButton"
               class="my-0 mr-1"
               icon="i-lucide:menu"
               @click="handleHeaderToggle"
-            />
+            /> -->
           </template>
 
           <slot name="header" />
