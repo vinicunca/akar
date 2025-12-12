@@ -14,7 +14,8 @@ export default defineNuxtConfig({
   },
 
   extends: [
-    'pohon-ui/layer',
+    'pohon-ui/layer-theme',
+    'pohon-ui/layer-dashboard',
   ],
 
   i18n: {

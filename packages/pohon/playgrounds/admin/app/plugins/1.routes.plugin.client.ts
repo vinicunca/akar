@@ -1,81 +1,44 @@
-import type { Composer } from 'vue-i18n';
-import type { RouteRecordRaw } from 'vue-router';
-import type { AdminRoute } from '~/domains/core/navigation.typings';
-import {
-  defineNuxtPlugin,
-  useRouter,
-} from '#imports';
-import { partition, pipe } from '@vinicunca/perkakas';
-import {
-  ROUTE_AUTH_NAME,
-  ROUTE_NOT_FOUND_NAME,
-  ROUTE_ROOT_NAME,
-} from '~/domains/core/core.constants';
+import type { ExtendedRouteRecordRaw, PDashboardMenuRaw } from 'pohon-ui';
+import type { Router, RouteRecordRaw } from 'vue-router';
+import { defineNuxtPlugin, filterTree, mapTree } from '#imports';
+import { partition } from '@vinicunca/perkakas';
 import { useAccessStore } from '~/domains/core/stores/access.store';
-import { filterTree, mapTree } from '~/domains/core/utils/tree.utils';
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const {
-    coreRoutes,
-    accessRoutes,
-    accessRouteNames,
-  } = getBaseRoutes([]);
+  const router = nuxtApp.$router as Router;
+
+  const menus = generateAccessible(router);
 
   const navigationStore = useAccessStore();
 
-  // navigationStore.setCoreRoutes(coreRoutes);
-  // navigationStore.setAccessRoutes(accessRoutes);
-  // navigationStore.setAccessRouteNames(accessRouteNames);
-  // navigationStore.setAccessMenus(
-  //   generateMenus({ routes: accessRoutes, i18n: nuxtApp.$i18n as Composer }),
-  // );
+  navigationStore.setAccessMenus(menus);
 });
 
-function getBaseRoutes(roles: Array<string>) {
-  const router = useRouter();
+function generateAccessible(router: Router) {
+  const accessibleRoutes = generateRoutes(router);
+  const menus = generateMenus(accessibleRoutes);
 
+  return menus;
+}
+
+function generateRoutes(router: Router) {
+  // TODO: fetch roles from auth
+  const roles: Array<string> = [];
   const routesTree = router.options.routes as Array<RouteRecordRaw>;
-  console.log('🚀 ~ getBaseRoutes ~ routesTree:', routesTree);
 
-  const [coreRoutes, appRoutes] = pipe(
+  const [adminRoutes, coreRoutes] = partition(
     routesTree,
-    (routes) => {
-      return mapTree({
-        tree: routes,
-        mapper: (route) => {
-          return {
-            name: route.name as string,
-            path: route.path,
-            meta: route.meta ?? {},
-            children: (route.children as AdminRoute['children']) ?? [],
-          };
-        },
-      });
-    },
-    partition(
-      (route) =>
-        [
-          ROUTE_ROOT_NAME,
-          ROUTE_AUTH_NAME,
-          ROUTE_NOT_FOUND_NAME,
-        ].includes(route.name as string),
-    ),
+    (route) => route.path === '/admin',
   );
 
   const accessRoutes = filterTree({
-    tree: appRoutes,
+    tree: adminRoutes[0]!.children ?? [],
     filter: (route) => {
       return hasAuthority({ route, roles });
     },
   });
 
-  const accessRouteNames = accessRoutes.map((route) => route.name as string);
-
-  return {
-    coreRoutes,
-    accessRoutes,
-    accessRouteNames,
-  };
+  return accessRoutes;
 }
 
 // Determine if the route has access permissions
@@ -84,7 +47,7 @@ function hasAuthority({
   roles,
 }: {
   roles: Array<string>;
-  route: AdminRoute;
+  route: RouteRecordRaw;
 }) {
   const authority = route.meta?.authority;
 
@@ -97,31 +60,71 @@ function hasAuthority({
   return canAccess;
 }
 
-function generateMenus(
-  { routes, i18n }: { routes: Array<AdminRoute>; i18n: Composer },
-) {
-  const { t } = i18n;
-
-  let menus = mapTree({
+function generateMenus(routes: Array<RouteRecordRaw>) {
+  let menus = mapTree<ExtendedRouteRecordRaw, PDashboardMenuRaw>({
     tree: routes,
     mapper: (route) => {
       const {
         meta = {},
-        children,
+        name: routeName,
+        children = [],
         path,
+        redirect,
       } = route;
 
+      const {
+        activeIcon,
+        badge,
+        badgeType,
+        badgeVariants,
+        hideChildrenInMenu = false,
+        icon,
+        link,
+        order,
+        title = '',
+      } = meta;
+
+      // Ensure the menu name is not empty.
+      const name = (title || routeName || '') as string;
+
+      const resultChildren = hideChildrenInMenu
+        ? []
+        : ((children as Array<PDashboardMenuRaw>) ?? []);
+
+      // Set the parent-child relationship of submenus
+      if (resultChildren.length > 0) {
+        resultChildren.forEach((child) => {
+          child.parents = [...(route.parents ?? []), path];
+          child.parent = path;
+        });
+      }
+
+      const resultPath = hideChildrenInMenu ? redirect || path : link || path;
+
       return {
-        label: meta.title ? t(meta.title) : '',
-        icon: meta.icon as string,
-        order: meta.order,
-        to: children?.length ? undefined : path,
-        children,
+        activeIcon,
+        badge,
+        badgeType,
+        badgeVariants,
+        icon,
+        name,
+        order,
+        parent: route.parent,
+        parents: route.parents,
+        path: resultPath,
+        show: !meta.hideInMenu,
+        children: resultChildren,
       };
     },
   });
 
+  // Sort the menu items to avoid the issue of order=0 being replaced with 999.
   menus = menus.toSorted((a, b) => (a?.order ?? 999) - (b?.order ?? 999));
 
-  return menus;
+  return filterTree({
+    tree: menus,
+    filter: (menu) => {
+      return !!menu.show;
+    },
+  });
 }

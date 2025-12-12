@@ -8,10 +8,10 @@ const routes: Array<RouteRecordRaw> = [
       title: 'system.title',
     },
     name: 'System',
-    path: '/system',
+    path: '/admin/system',
     children: [
       {
-        path: '/system/role',
+        path: '/admin/system/role',
         name: 'SystemRole',
         meta: {
           icon: 'mdi:account-group',
@@ -20,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('~/domains/admin/pages/systems/roles.vue'),
       },
       {
-        path: '/system/menu',
+        path: '/admin/system/menu',
         name: 'SystemMenu',
         meta: {
           icon: 'mdi:menu',
@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('~/domains/admin/pages/systems/menus.vue'),
       },
       {
-        path: '/system/dept',
+        path: '/admin/system/dept',
         name: 'SystemDept',
         meta: {
           icon: 'charm:organisation',

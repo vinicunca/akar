@@ -8,11 +8,11 @@ const routes: Array<RouteRecordRaw> = [
       title: 'page.dashboard.title',
     },
     name: 'Dashboard',
-    path: '/dashboard',
+    path: '/admin/dashboard',
     children: [
       {
         name: 'Analytics',
-        path: '/analytics',
+        path: '/admin/dashboard/analytics',
         component: () => import('~/domains/admin/pages/dashboard/analytics.vue'),
         meta: {
           affixTab: true,
@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         name: 'Workspace',
-        path: '/workspace',
+        path: '/admin/dashboard/workspace',
         component: () => import('~/domains/admin/pages/dashboard/workspace.vue'),
         meta: {
           icon: 'carbon:workspace',

@@ -1,5 +1,6 @@
 import type { Component, Ref } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
+import type { PIconProps } from './';
 import type { PDashboardThemeModeType } from './dashboard';
 
 /**
@@ -139,7 +140,7 @@ export interface PDashboardSubMenuProps extends PDashboardMenuBadgeRaw {
   path: string;
 }
 
-export interface PDashboardMenuItemProps extends PDashboardMenuBadgeRaw {
+export interface PDashboardMenuItemBaseProps extends PDashboardMenuBadgeRaw {
   /**
    * Active icon
    */
@@ -149,9 +150,9 @@ export interface PDashboardMenuItemProps extends PDashboardMenuBadgeRaw {
    */
   disabled?: boolean;
   /**
-   * Icon
+   * @IconifyIcon
    */
-  icon?: Component | string;
+  icon?: PIconProps['name'];
   /**
    * Menu item name
    */
