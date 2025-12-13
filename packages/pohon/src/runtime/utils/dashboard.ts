@@ -36,7 +36,7 @@ type FlattenVNodes = Array<RawSlots | VNodeChildAtom>;
 /**
  * Find the parent component upward
  */
-function findComponentUpward(
+export function findComponentUpward(
   { instance, parentNames }:
   { instance: ComponentInternalInstance; parentNames: Array<string> },
 ) {
@@ -49,7 +49,7 @@ function findComponentUpward(
   return parent;
 }
 
-function flattedChildren(
+export function flattedChildren(
   children: FlattenVNodes | VNode | VNodeNormalizedChildren,
 ): FlattenVNodes {
   const vNodes = Array.isArray(children) ? children : [children];
@@ -70,8 +70,3 @@ function flattedChildren(
 
   return result;
 }
-
-export {
-  findComponentUpward,
-  flattedChildren,
-};

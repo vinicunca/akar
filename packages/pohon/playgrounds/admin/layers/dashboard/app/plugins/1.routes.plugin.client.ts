@@ -2,7 +2,7 @@ import type { ExtendedRouteRecordRaw, PDashboardMenuRaw } from 'pohon-ui';
 import type { Router, RouteRecordRaw } from 'vue-router';
 import { defineNuxtPlugin, filterTree, mapTree } from '#imports';
 import { partition } from '@vinicunca/perkakas';
-import { useAccessStore } from '~/domains/core/stores/access.store';
+import { useAccessStore } from '../stores/access.store';
 
 export default defineNuxtPlugin((nuxtApp) => {
   const router = nuxtApp.$router as Router;

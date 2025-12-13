@@ -3,7 +3,12 @@ import type { CSSProperties } from 'vue';
 import type { VisibleDomRect } from '../utils/dom';
 import { useCssVar, useDebounceFn } from '@vueuse/core';
 import { computed, onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
-import { CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT, CSS_VARIABLE_LAYOUT_CONTENT_WIDTH, CSS_VARIABLE_LAYOUT_FOOTER_HEIGHT, CSS_VARIABLE_LAYOUT_HEADER_HEIGHT } from '../utils/dashboard';
+import {
+  CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT,
+  CSS_VARIABLE_LAYOUT_CONTENT_WIDTH,
+  CSS_VARIABLE_LAYOUT_FOOTER_HEIGHT,
+  CSS_VARIABLE_LAYOUT_HEADER_HEIGHT,
+} from '../constants';
 import { getElementVisibleRect } from '../utils/dom';
 
 export function useLayoutContentStyle() {

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
-import { useAccessStore } from '~/domains/core/stores/access.store';
+import { useAccessStore } from '~~/layers/dashboard/app/stores/access.store';
 
 const props = defineProps<{
   collapsed?: boolean;

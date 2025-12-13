@@ -15,7 +15,6 @@ export default defineNuxtConfig({
 
   extends: [
     'pohon-ui/layer-theme',
-    'pohon-ui/layer-dashboard',
   ],
 
   i18n: {
@@ -45,4 +44,22 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@pinia/nuxt',
   ],
+
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+        '@vinicunca/perkakas',
+        '@vueuse/core',
+        '@internationalized/date',
+        '@vueuse/shared',
+        'aria-hidden',
+        '@floating-ui/vue',
+        '@tanstack/vue-virtual',
+        '@internationalized/number',
+        'unocss-variants',
+      ],
+    },
+  },
 });

@@ -1,6 +1,7 @@
 import type { PDashboardMenuProvider, PDashboardSubMenuProvider } from '../types/dashboard-menu';
 import { getCurrentInstance, inject, provide } from 'vue';
-import { findComponentUpward, P_DASHBOARD_MENU_ROOT, P_DASHBOARD_MENU_SUBMENU } from '../utils/dashboard';
+import { P_DASHBOARD_MENU_ROOT, P_DASHBOARD_MENU_SUBMENU } from '../constants';
+import { findComponentUpward } from '../utils/dashboard';
 
 const menuContextKey = Symbol('PDashboardMenuContext');
 

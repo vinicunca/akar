@@ -1,4 +1,4 @@
-import { useAccessStore } from '../stores/access.store';
+import { useAccessStore } from '../../../../layers/dashboard/app/stores/access.store';
 
 export function useNavigation() {
   const store = useAccessStore();

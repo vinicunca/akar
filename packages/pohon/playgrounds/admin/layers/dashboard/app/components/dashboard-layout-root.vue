@@ -1,16 +1,9 @@
 <script lang="ts" setup>
 import {
-  PDashboardGroup,
+  DashboardLayoutContent,
   PDashboardLayout,
-  PDashboardPanel,
-  PDashboardSidebar,
 } from '#components';
-import { ref } from 'vue';
-import AdminLayoutContent from '~/domains/admin/components/admin-layout-content.vue';
 import CoreLogo from '~/domains/core/components/core-logo.vue';
-// import CoreNavigationMenu from '~/domains/core/components/core-navigation-menu.vue';
-
-const isSidebarOpen = ref(false);
 </script>
 
 <template>
@@ -23,11 +16,11 @@ const isSidebarOpen = ref(false);
     </template>
 
     <template #menu>
-      <LayoutMenu />
+      <!-- <LayoutMenu /> -->
     </template>
 
     <template #content>
-      <AdminLayoutContent />
+      <DashboardLayoutContent />
     </template>
   </PDashboardLayout>
 </template>

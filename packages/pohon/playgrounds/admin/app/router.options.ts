@@ -1,13 +1,13 @@
 import type { RouterConfig } from '@nuxt/schema';
 import type { RouteRecordRaw } from 'vue-router';
+import { mapTree } from '#imports';
 import { partition } from '@vinicunca/perkakas';
-import { mapTree } from '~/domains/core/utils/tree.utils';
 
 interface RouteModuleType {
   default: Array<RouteRecordRaw>;
 }
 
-const adminRouteFiles = import.meta.glob('./domains/admin/route-modules/**/*.ts', {
+const adminRouteFiles = import.meta.glob('./dashboard-routes/**/*.ts', {
   eager: true,
 });
 

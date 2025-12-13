@@ -3,7 +3,6 @@ import type { AppConfig } from '@nuxt/schema';
 import type { PDashboardContentCompactType, PDashboardLayoutHeaderModeType, PDashboardLayoutType } from '../types/dashboard';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-layout';
-import { SCROLL_FIXED_CLASS } from '../composables/use-scroll-lock';
 
 type DashboardLayout = ComponentConfig<typeof theme, AppConfig, 'dashboardLayout'>;
 
@@ -205,7 +204,8 @@ import { useMouse, useScroll, useThrottleFn } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, ref, useTemplateRef, watch } from 'vue';
 import { useLayoutFooterStyle, useLayoutHeaderStyle } from '../composables/use-dashboard-styles';
-import { ELEMENT_ID_MAIN_CONTENT, provideDashboardContext } from '../utils/dashboard';
+import { SCROLL_FIXED_CLASS } from '../composables/use-scroll-lock';
+import { ELEMENT_ID_MAIN_CONTENT, P_DASHBOARD_LAYOUT } from '../constants';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -227,7 +227,7 @@ const props = withDefaults(
     showHeaderToggleSidebarButton: true,
     isHeaderVisible: true,
     isMobile: false,
-    layout: 'sidebar-nav',
+    layout: P_DASHBOARD_LAYOUT.SIDEBAR_NAV,
     showSidebarCollapsedButton: true,
     showSidebarCollapseTitle: false,
     sidebarExtraCollapsedWidth: 60,
@@ -279,43 +279,43 @@ const { y: mouseY } = useMouse({
 });
 
 const currentLayout = computed(() =>
-  props.isMobile ? 'sidebar-nav' : props.layout,
+  props.isMobile ? P_DASHBOARD_LAYOUT.SIDEBAR_NAV : props.layout,
 );
 
 /**
  * Whether to display content in full screen, without sidebar, footer, header, and tab areas
  */
 const isFullContent = computed(() =>
-  currentLayout.value === 'full-content',
+  currentLayout.value === P_DASHBOARD_LAYOUT.FULL_CONTENT,
 );
 
 /**
  * Whether it is sidebar mixed mode
  */
 const isSidebarMixedNav = computed(() =>
-  currentLayout.value === 'sidebar-mixed-nav',
+  currentLayout.value === P_DASHBOARD_LAYOUT.SIDEBAR_MIXED_NAV,
 );
 
 /**
  * Whether it is header navigation mode
  */
 const isHeaderNav = computed(() =>
-  currentLayout.value === 'header-nav',
+  currentLayout.value === P_DASHBOARD_LAYOUT.HEADER_NAV,
 );
 
 /**
  * Whether it is mixed navigation mode
  */
 const isMixedNav = computed(() =>
-  currentLayout.value === 'mixed-nav'
-  || currentLayout.value === 'header-sidebar-nav',
+  currentLayout.value === P_DASHBOARD_LAYOUT.MIXED_NAV
+  || currentLayout.value === P_DASHBOARD_LAYOUT.HEADER_SIDEBAR_NAV,
 );
 
 /**
  * Whether it is header mixed mode
  */
 const isHeaderMixedNav = computed(() =>
-  currentLayout.value === 'header-mixed-nav',
+  currentLayout.value === P_DASHBOARD_LAYOUT.HEADER_MIXED_NAV,
 );
 
 /**
@@ -409,11 +409,11 @@ const sidebarExtraWidth = computed(() => {
  */
 const isSideMode = computed(
   () =>
-    currentLayout.value === 'mixed-nav'
-    || currentLayout.value === 'sidebar-mixed-nav'
-    || currentLayout.value === 'sidebar-nav'
-    || currentLayout.value === 'header-mixed-nav'
-    || currentLayout.value === 'header-sidebar-nav',
+    currentLayout.value === P_DASHBOARD_LAYOUT.MIXED_NAV
+    || currentLayout.value === P_DASHBOARD_LAYOUT.SIDEBAR_MIXED_NAV
+    || currentLayout.value === P_DASHBOARD_LAYOUT.SIDEBAR_NAV
+    || currentLayout.value === P_DASHBOARD_LAYOUT.HEADER_MIXED_NAV
+    || currentLayout.value === P_DASHBOARD_LAYOUT.HEADER_SIDEBAR_NAV,
 );
 
 /**
@@ -443,9 +443,9 @@ const mainStyle = computed(() => {
   let sidebarAndExtraWidth = 'unset';
   if (
     headerFixed.value
-    && currentLayout.value !== 'header-nav'
-    && currentLayout.value !== 'mixed-nav'
-    && currentLayout.value !== 'header-sidebar-nav'
+    && currentLayout.value !== P_DASHBOARD_LAYOUT.HEADER_NAV
+    && currentLayout.value !== P_DASHBOARD_LAYOUT.MIXED_NAV
+    && currentLayout.value !== P_DASHBOARD_LAYOUT.HEADER_SIDEBAR_NAV
     && showSidebar.value
     && !props.isMobile
   ) {
