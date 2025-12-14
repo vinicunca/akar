@@ -45,6 +45,16 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
 
+  routeRules: {
+    '/admin/**': { ssr: false },
+  },
+
+  runtimeConfig: {
+    public: {
+      namespace: 'vinicunca',
+    },
+  },
+
   vite: {
     optimizeDeps: {
       include: [
@@ -59,6 +69,7 @@ export default defineNuxtConfig({
         '@tanstack/vue-virtual',
         '@internationalized/number',
         'unocss-variants',
+        'pinia-plugin-persistedstate',
       ],
     },
   },

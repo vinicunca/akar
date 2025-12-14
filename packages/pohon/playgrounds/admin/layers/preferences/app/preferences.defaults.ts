@@ -1,5 +1,5 @@
 import type { Preferences } from './preferences.entity';
-import { P_DASHBOARD_LAYOUT } from 'pohon-ui';
+import { P_DASHBOARD_LAYOUT } from '#imports';
 
 export const defaultPreferences: Preferences = {
   app: {

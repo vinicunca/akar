@@ -60,7 +60,7 @@ export interface AppPreferences {
   /** Layout type */
   layout: LayoutType;
   /** Supported languages */
-  // locale: SupportedLanguagesType;
+  locale: string;
   /** Login expired mode */
   loginExpiredMode: LoginExpiredModeType;
   /** Application name */

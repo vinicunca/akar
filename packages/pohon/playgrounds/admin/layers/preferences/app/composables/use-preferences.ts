@@ -1,6 +1,4 @@
-import { getDiff } from '#imports';
-
-import { P_DASHBOARD_LAYOUT } from 'pohon-ui';
+import { getDiff, P_DASHBOARD_LAYOUT } from '#imports';
 
 import { computed } from 'vue';
 import { preferencesManager } from '../preferences.manager';
@@ -23,8 +21,7 @@ export function usePreferences() {
   });
 
   const locale = computed(() => {
-    // return preferences.app.locale;
-    return '';
+    return preferences.app.locale;
   });
 
   const isMobile = computed(() => {

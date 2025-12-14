@@ -12,7 +12,6 @@ import { name, version } from '../package.json';
 import { DEFAULT_OPTIONS, getDefaultPohonConfig, resolveColors } from './defaults';
 import { addPohonTemplates } from './templates';
 
-export * from './runtime/constants';
 export type * from './runtime/types';
 
 type Color = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | (string & {});

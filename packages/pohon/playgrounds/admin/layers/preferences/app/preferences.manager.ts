@@ -9,6 +9,7 @@ import {
 import { defu } from 'defu';
 import { markRaw, reactive, readonly, watch } from 'vue';
 import { defaultPreferences } from './preferences.defaults';
+import { updateCssVariables } from './preferences.styling';
 
 const STORAGE_KEY = 'preferences';
 const STORAGE_KEY_LOCALE = `${STORAGE_KEY}-locale`;
@@ -124,7 +125,7 @@ export class PreferenceManager {
    */
   private _savePreferences(preference: Preferences) {
     this.cache?.setItem(STORAGE_KEY, preference);
-    // this.cache?.setItem(STORAGE_KEY_LOCALE, preference.app.locale);
+    this.cache?.setItem(STORAGE_KEY_LOCALE, preference.app.locale);
     this.cache?.setItem(STORAGE_KEY_THEME, preference.theme.mode);
   }
 
@@ -138,7 +139,7 @@ export class PreferenceManager {
     const appUpdates = updates.app || {};
 
     if (themeUpdates && Object.keys(themeUpdates).length > 0) {
-      // updateCssVariables(this.state);
+      updateCssVariables(this.state);
     }
 
     if (

@@ -2,6 +2,10 @@
 import {
   DashboardLayoutRoot,
 } from '#components';
+import { usePreferences } from '#imports';
+
+const itu = usePreferences();
+console.log('🚀 ~ itu:', itu);
 </script>
 
 <template>
