@@ -112,7 +112,7 @@ interface AdminRouteMeta {
   /**
    * Parameters carried by the menu
    */
-  query?: Record<string, unknown>;
+  query?: Record<string, any>;
   /**
    * Title name
    */

@@ -79,33 +79,33 @@ export function usePreferences() {
   });
 
   const sidebarCollapsed = computed(() => {
-    return preferences.sidebar.collapsed;
+    return preferences.sidebar.isCollapsed;
   });
 
   const keepAlive = computed(
-    () => preferences.tabbar.enable && preferences.tabbar.keepAlive,
+    () => preferences.tabbar.enable && preferences.tabbar.enableKeepAlive,
   );
 
   const authPageLayout = computed(() => appPreferences.value.authPageLayout);
 
   const contentIsMaximize = computed(() => {
-    const headerIsHidden = preferences.header.hidden;
-    const sidebarIsHidden = preferences.sidebar.hidden;
+    const headerIsHidden = preferences.header.isHidden;
+    const sidebarIsHidden = preferences.sidebar.isHidden;
     return headerIsHidden && sidebarIsHidden && !isFullContent.value;
   });
 
   const globalSearchShortcutKey = computed(() => {
-    const { enable, globalSearch } = shortcutKeysPreferences.value;
+    const { enable, enableGlobalSearch: globalSearch } = shortcutKeysPreferences.value;
     return enable && globalSearch;
   });
 
   const globalLogoutShortcutKey = computed(() => {
-    const { enable, globalLogout } = shortcutKeysPreferences.value;
+    const { enable, enableGlobalLogout: globalLogout } = shortcutKeysPreferences.value;
     return enable && globalLogout;
   });
 
   const globalLockScreenShortcutKey = computed(() => {
-    const { enable, globalLockScreen } = shortcutKeysPreferences.value;
+    const { enable, enableGlobalLockScreen: globalLockScreen } = shortcutKeysPreferences.value;
     return enable && globalLockScreen;
   });
 
@@ -120,8 +120,8 @@ export function usePreferences() {
     }
 
     const { header, sidebar } = preferences;
-    const headerHidden = header.hidden;
-    const sidebarHidden = sidebar.hidden;
+    const headerHidden = header.isHidden;
+    const sidebarHidden = sidebar.isHidden;
 
     const contentIsMaximize = headerHidden && sidebarHidden;
 

@@ -24,11 +24,11 @@ export interface AppPreferences {
   /** Check updates polling interval */
   checkUpdatesInterval: number;
   /** Enable gray mode */
-  colorGrayMode: boolean;
+  enableColorGrayMode: boolean;
   /** Enable color weak mode */
-  colorWeakMode: boolean;
+  enableColorWeakMode: boolean;
   /** Enable compact mode */
-  compact: boolean;
+  enableCompact: boolean;
   /** Enable content compact mode */
   contentCompact: ContentCompactType;
   /** Content compact width */
@@ -48,7 +48,7 @@ export interface AppPreferences {
   /** Default homepage address */
   defaultHomePath: string;
   /** Enable dynamic title */
-  dynamicTitle: boolean;
+  enableDynamicTitle: boolean;
   /** Enable check updates */
   enableCheckUpdates: boolean;
   /** Show preferences */
@@ -68,7 +68,7 @@ export interface AppPreferences {
   /** Preferences button position */
   preferencesButtonPosition: PreferencesButtonPositionType;
   /** Enable watermark */
-  watermark: boolean;
+  enableWatermark: boolean;
   /** z-index */
   zIndex: number;
 }
@@ -100,14 +100,14 @@ export interface CopyrightPreferences {
   /** ICP link */
   icpLink: string;
   /** Set whether the panel is displayed */
-  settingShow?: boolean;
+  showSetting?: boolean;
 }
 
 export interface FooterPreferences {
   /** Enable footer */
   enable: boolean;
   /** Fix footer */
-  fixed: boolean;
+  isFixed: boolean;
   /** Footer height */
   height: number;
 }
@@ -118,7 +118,7 @@ export interface HeaderPreferences {
   /** Header height */
   height: number;
   /** Hide header (CSS hidden) */
-  hidden: boolean;
+  isHidden: boolean;
   /** Top bar menu position */
   menuAlign: LayoutHeaderMenuAlignType;
   /** Header display mode */
@@ -136,9 +136,9 @@ export interface LogoPreferences {
 
 export interface NavigationPreferences {
   /** Accordion mode for navigation menu */
-  accordion: boolean;
+  isAccordion: boolean;
   /** Split navigation menu, only effective when layout=mixed-nav */
-  split: boolean;
+  isSplit: boolean;
   /** Navigation menu style */
   styleType: NavigationStyleType;
 }
@@ -147,11 +147,11 @@ export interface SidebarPreferences {
   /** Automatically activate the submenu when clicking on a directory */
   autoActivateChild: boolean;
   /** Collapse sidebar */
-  collapsed: boolean;
+  isCollapsed: boolean;
   /** Is the sidebar collapse button visible */
-  collapsedButton: boolean;
+  showCollapsedButton: boolean;
   /** Show title when sidebar is collapsed */
-  collapsedShowTitle: boolean;
+  showCollapsedTitle: boolean;
   /** Sidebar collapse width */
   collapseWidth: number;
   /** Enable sidebar */
@@ -159,13 +159,13 @@ export interface SidebarPreferences {
   /** Expand menu on hover */
   expandOnHover: boolean;
   /** Collapse extra area of sidebar */
-  extraCollapse: boolean;
+  isExtraCollapse: boolean;
   /** Sidebar expansion area collapsed width */
   extraCollapsedWidth: number;
   /** Is the sidebar fixed button visible */
-  fixedButton: boolean;
+  showFixedButton: boolean;
   /** Hide sidebar (CSS hidden) */
-  hidden: boolean;
+  isHidden: boolean;
   /** Mixed sidebar widths */
   mixedWidth: number;
   /** Sidebar width */
@@ -176,30 +176,30 @@ export interface ShortcutKeyPreferences {
   /** Enable global shortcut keys */
   enable: boolean;
   /** Enable global lock screen shortcut key */
-  globalLockScreen: boolean;
+  enableGlobalLockScreen: boolean;
   /** Enable global logout shortcut key */
-  globalLogout: boolean;
+  enableGlobalLogout: boolean;
   /** Enable global preferences shortcut key */
-  globalPreferences: boolean;
+  enableGlobalPreferences: boolean;
   /** Enable global search shortcut key */
-  globalSearch: boolean;
+  enableGlobalSearch: boolean;
 }
 
 export interface TabbarPreferences {
   /** Enable draggable multi-tabs */
-  draggable: boolean;
+  isDraggable: boolean;
   /** Enable multi-tabs */
   enable: boolean;
   /** Tab height */
   height: number;
   /** Enable tab caching */
-  keepAlive: boolean;
+  enableKeepAlive: boolean;
   /** Limit the maximum number */
   maxCount: number;
   /** Whether to close the tab when clicking the middle button */
-  middleClickToClose: boolean;
+  isMiddleClickToClose: boolean;
   /** Persist tabs */
-  persist: boolean;
+  enablePersist: boolean;
   /** Show tab icons */
   showIcon: boolean;
   /** Show maximize button */
@@ -211,7 +211,7 @@ export interface TabbarPreferences {
   /** Tab style */
   styleType: TabsStyleType;
   /** Whether to enable mouse wheel response */
-  wheelable: boolean;
+  enableWheelable: boolean;
 }
 
 export interface ThemePreferences {
@@ -230,39 +230,39 @@ export interface ThemePreferences {
   /** Border radius */
   radius: string;
   /** Enable semi-dark header (only effective when theme='light') */
-  semiDarkHeader: boolean;
+  enableSemiDarkHeader: boolean;
   /** Enable semi-dark sidebar (only effective when theme='light') */
-  semiDarkSidebar: boolean;
+  enableSemiDarkSidebar: boolean;
 }
 
 export interface TransitionPreferences {
   /** Enable page transition animation */
   enable: boolean;
   // /** Enable page loading */
-  loading: boolean;
+  enableLoading: boolean;
   /** Page transition animation */
   name: PageTransitionType | string;
   /** Enable page loading progress animation */
-  progress: boolean;
+  enableProgress: boolean;
 }
 
 export interface WidgetPreferences {
   /** Enable fullscreen widget */
-  fullscreen: boolean;
+  enableFullscreen: boolean;
   /** Enable global search widget */
-  globalSearch: boolean;
+  enableGlobalSearch: boolean;
   /** Enable language toggle widget */
-  languageToggle: boolean;
+  enableLanguageToggle: boolean;
   /** Enable lock screen */
-  lockScreen: boolean;
+  enableLockScreen: boolean;
   /** Show notification widget */
-  notification: boolean;
+  enableNotification: boolean;
   /** Show Refresh Button */
-  refresh: boolean;
+  showRefresh: boolean;
   /** Show sidebar toggle widget */
-  sidebarToggle: boolean;
+  showSidebarToggle: boolean;
   /** Show theme toggle widget */
-  themeToggle: boolean;
+  showThemeToggle: boolean;
 }
 
 export interface Preferences {

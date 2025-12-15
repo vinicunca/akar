@@ -16,13 +16,14 @@ export interface PScrollbarAreaProps extends AScrollAreaRootProps {
 
 <script setup lang="ts">
 import { computed, useAppConfig } from '#imports';
+import { reactiveOmit } from '@vueuse/core';
 import {
   AScrollAreaCorner,
   AScrollAreaRoot,
   AScrollAreaViewport,
+  useForwardProps,
 } from 'akar';
 import { uv } from '../utils/uv';
-
 import PScrollbarBar from './scrollbar-bar.vue';
 
 const props = withDefaults(
@@ -30,6 +31,10 @@ const props = withDefaults(
   {
     onScroll: () => {},
   },
+);
+
+const rootProps = useForwardProps(
+  reactiveOmit(props, 'class'),
 );
 
 const appConfig = useAppConfig() as ScrollbarArea['AppConfig'];
@@ -44,12 +49,14 @@ const pohon = computed(() =>
 
 <template>
   <AScrollAreaRoot
-    v-bind="props"
-    :class="pohon.root({ class: [props.class, props.pohon?.root] })"
+    v-bind="rootProps"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="scrollbar-area-root"
   >
     <AScrollAreaViewport
       as-child
       :class="pohon.viewport({ class: props.pohon?.viewport })"
+      data-pohon="scrollbar-area-viewport"
       @scroll="onScroll"
     >
       <slot />

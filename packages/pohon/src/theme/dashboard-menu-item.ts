@@ -1,3 +1,9 @@
 export default {
-  base: '',
+  slots: {
+    root: '',
+    tooltipTrigger: '',
+    icon: '',
+    title: '',
+    content: '',
+  },
 };

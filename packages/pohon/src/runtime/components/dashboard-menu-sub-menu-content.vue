@@ -1,8 +1,8 @@
 <script lang="ts">
-import type theme from '#build/pohon/dashboard-menu-sub-menu-content';
 import type { AppConfig } from '@nuxt/schema';
 import type { PDashboardMenuItemBaseProps } from '../types/dashboard-menu';
 import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/dashboard-menu-sub-menu-content';
 
 type DashboardMenuSubMenuContent = ComponentConfig<typeof theme, AppConfig, 'dashboardMenuSubMenuContent'>;
 
@@ -18,6 +18,7 @@ export interface PDashboardMenuSubMenuContent extends PDashboardMenuItemBaseProp
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
 import { useMenuContext } from '../composables/use-dashboard-menu-context';
+import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
 
 const props = withDefaults(
@@ -65,8 +66,6 @@ const hiddenTitle = computed(() => {
   );
 });
 
-const appConfig = useAppConfig() as DashboardMenuSubMenuContent['AppConfig'];
-
 const iconComp = computed(() => {
   return (mode.value === 'horizontal' && !isFirstLevel.value)
     || (mode.value === 'vertical' && collapse.value)
@@ -77,22 +76,36 @@ const iconComp = computed(() => {
 const iconArrowStyle = computed(() => {
   return opened.value ? { transform: 'rotate(180deg)' } : {};
 });
+
+const appConfig = useAppConfig() as DashboardMenuSubMenuContent['AppConfig'];
+
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.dashboardMenuSubMenuContent || {}),
+  })(),
+);
 </script>
 
 <template>
   <div
     :class="[
+      pohon.root({ class: props.pohon?.root }),
     ]"
+    :data-is-collapse-show-title="getCollapseShowTitle"
+    :data-is-more="isMenuMore"
   >
     <slot />
 
     <PIcon
       v-if="!isMenuMore"
       :name="icon"
+      :class="pohon.icon({ class: props.pohon?.icon })"
     />
 
     <div
       v-if="!hiddenTitle"
+      :class="pohon.title({ class: props.pohon?.title })"
     >
       <slot name="title" />
     </div>
@@ -101,6 +114,7 @@ const iconArrowStyle = computed(() => {
       :is="iconComp"
       v-if="!isMenuMore"
       v-show="showArrowIcon"
+      :class="pohon.iconArrow({ class: props.pohon?.iconArrow })"
       :style="iconArrowStyle"
     />
   </div>

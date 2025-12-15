@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       icon: 'ion:settings-outline',
       order: 9997,
-      title: 'system.title',
+      title: 'pages.system.title',
     },
     name: 'System',
     path: '/admin/system',
@@ -15,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'SystemRole',
         meta: {
           icon: 'mdi:account-group',
-          title: 'system.role.title',
+          title: 'pages.system.role.title',
         },
         component: () => import('~/domains/admin/pages/systems/roles.vue'),
       },
@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'SystemMenu',
         meta: {
           icon: 'mdi:menu',
-          title: 'system.menu.title',
+          title: 'pages.system.menu.title',
         },
         component: () => import('~/domains/admin/pages/systems/menus.vue'),
       },
@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'SystemDept',
         meta: {
           icon: 'charm:organisation',
-          title: 'system.dept.title',
+          title: 'pages.system.dept.title',
         },
         component: () => import('~/domains/admin/pages/systems/depts.vue'),
       },

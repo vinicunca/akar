@@ -1,3 +1,8 @@
 export default {
-  base: '',
+  slots: {
+    root: '',
+    popupContainer: '',
+    popup: '',
+    subMenu: '',
+  },
 };

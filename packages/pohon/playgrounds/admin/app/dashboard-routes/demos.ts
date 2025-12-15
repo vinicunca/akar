@@ -6,7 +6,7 @@ const routes: Array<RouteRecordRaw> = [
       icon: 'ic:baseline-view-in-ar',
       keepAlive: true,
       order: 1000,
-      title: 'demos.title',
+      title: 'pages.demos.title',
     },
     name: 'Demos',
     path: '/admin/demos',
@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         meta: {
           icon: 'mdi:shield-key-outline',
-          title: 'demos.access.frontendPermissions',
+          title: 'pages.demos.access.frontendPermissions',
         },
         name: 'AccessDemos',
         path: '/admin/demos/access',
@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('~/domains/admin/pages/demos/access.vue'),
             meta: {
               icon: 'mdi:page-previous-outline',
-              title: 'demos.access.pageAccess',
+              title: 'pages.demos.access.pageAccess',
             },
           },
           {
@@ -34,7 +34,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('~/domains/admin/pages/demos/access/button-control.vue'),
             meta: {
               icon: 'mdi:button-cursor',
-              title: 'demos.access.buttonControl',
+              title: 'pages.demos.access.buttonControl',
             },
           },
           {
@@ -46,7 +46,7 @@ const routes: Array<RouteRecordRaw> = [
               authority: ['no-body'],
               icon: 'mdi:button-cursor',
               menuVisibleWithForbidden: true,
-              title: 'demos.access.menuVisible403',
+              title: 'pages.demos.access.menuVisible403',
             },
           },
           {
@@ -56,7 +56,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               authority: ['super'],
               icon: 'mdi:button-cursor',
-              title: 'demos.access.superVisible',
+              title: 'pages.demos.access.superVisible',
             },
           },
           {
@@ -66,7 +66,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               authority: ['admin'],
               icon: 'mdi:button-cursor',
-              title: 'demos.access.adminVisible',
+              title: 'pages.demos.access.adminVisible',
             },
           },
           {
@@ -76,7 +76,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               authority: ['user'],
               icon: 'mdi:button-cursor',
-              title: 'demos.access.userVisible',
+              title: 'pages.demos.access.userVisible',
             },
           },
         ],
@@ -85,7 +85,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         meta: {
           icon: 'mdi:feature-highlight',
-          title: 'demos.features.title',
+          title: 'pages.demos.features.title',
         },
         name: 'FeaturesDemos',
         path: '/admin/demos/features',
@@ -97,7 +97,7 @@ const routes: Array<RouteRecordRaw> = [
               import('~/domains/admin/pages/demos/features/login-expired.vue'),
             meta: {
               icon: 'mdi:encryption-expiration',
-              title: 'demos.features.loginExpired',
+              title: 'pages.demos.features.loginExpired',
             },
           },
           {
@@ -106,7 +106,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('~/domains/admin/pages/demos/features/icons.vue'),
             meta: {
               icon: 'lucide:annoyed',
-              title: 'demos.features.icons',
+              title: 'pages.demos.features.icons',
             },
           },
           {
@@ -116,7 +116,7 @@ const routes: Array<RouteRecordRaw> = [
               import('~/domains/admin/pages/demos/features/watermark.vue'),
             meta: {
               icon: 'lucide:tags',
-              title: 'demos.features.watermark',
+              title: 'pages.demos.features.watermark',
             },
           },
           {
@@ -125,7 +125,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('~/domains/admin/pages/demos/features/tabs.vue'),
             meta: {
               icon: 'lucide:app-window',
-              title: 'demos.features.tabs',
+              title: 'pages.demos.features.tabs',
             },
           },
           {
@@ -137,7 +137,7 @@ const routes: Array<RouteRecordRaw> = [
               activePath: '/admin/demos/features/tabs',
               hideInMenu: true,
               maxNumOfOpenTab: 3,
-              title: 'demos.features.tabDetail',
+              title: 'pages.demos.features.tabDetail',
             },
           },
           {
@@ -146,7 +146,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               hideChildrenInMenu: true,
               icon: 'ic:round-menu',
-              title: 'demos.features.hideChildrenInMenu',
+              title: 'pages.demos.features.hideChildrenInMenu',
             },
             children: [
               {
@@ -158,7 +158,7 @@ const routes: Array<RouteRecordRaw> = [
                   ),
                 meta: {
                   // hideInMenu: true,
-                  title: 'demos.features.hideChildrenInMenu',
+                  title: 'pages.demos.features.hideChildrenInMenu',
                 },
               },
               {
@@ -170,7 +170,7 @@ const routes: Array<RouteRecordRaw> = [
                   ),
                 meta: {
                   activePath: '/admin/demos/features/hide-menu-children',
-                  title: 'demos.features.hideChildrenInMenu',
+                  title: 'pages.demos.features.hideChildrenInMenu',
                 },
               },
             ],
@@ -182,7 +182,7 @@ const routes: Array<RouteRecordRaw> = [
               import('~/domains/admin/pages/demos/features/full-screen.vue'),
             meta: {
               icon: 'lucide:fullscreen',
-              title: 'demos.features.fullScreen',
+              title: 'pages.demos.features.fullScreen',
             },
           },
           {
@@ -192,7 +192,7 @@ const routes: Array<RouteRecordRaw> = [
               import('~/domains/admin/pages/demos/features/file-download.vue'),
             meta: {
               icon: 'lucide:hard-drive-download',
-              title: 'demos.features.fileDownload',
+              title: 'pages.demos.features.fileDownload',
             },
           },
           {
@@ -202,7 +202,7 @@ const routes: Array<RouteRecordRaw> = [
               import('~/domains/admin/pages/demos/features/clipboard.vue'),
             meta: {
               icon: 'lucide:copy',
-              title: 'demos.features.clipboard',
+              title: 'pages.demos.features.clipboard',
             },
           },
           {
@@ -215,7 +215,7 @@ const routes: Array<RouteRecordRaw> = [
               query: {
                 id: 1,
               },
-              title: 'demos.features.menuWithQuery',
+              title: 'pages.demos.features.menuWithQuery',
             },
           },
           {
@@ -226,7 +226,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               icon: 'lucide:app-window',
               openInNewWindow: true,
-              title: 'demos.features.openInNewWindow',
+              title: 'pages.demos.features.openInNewWindow',
             },
           },
           {
@@ -248,7 +248,7 @@ const routes: Array<RouteRecordRaw> = [
               ),
             meta: {
               icon: 'lucide:git-pull-request-arrow',
-              title: 'demos.features.requestParamsSerializer',
+              title: 'pages.demos.features.requestParamsSerializer',
             },
           },
           {
@@ -268,7 +268,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/admin/demos/breadcrumb',
         meta: {
           icon: 'lucide:navigation',
-          title: 'demos.breadcrumb.navigation',
+          title: 'pages.demos.breadcrumb.navigation',
         },
         children: [
           {
@@ -277,7 +277,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('~/domains/admin/pages/demos/breadcrumb/lateral.vue'),
             meta: {
               icon: 'lucide:navigation',
-              title: 'demos.breadcrumb.lateral',
+              title: 'pages.demos.breadcrumb.lateral',
             },
           },
           {
@@ -288,7 +288,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               activePath: '/admin/demos/breadcrumb/lateral',
               hideInMenu: true,
-              title: 'demos.breadcrumb.lateralDetail',
+              title: 'pages.demos.breadcrumb.lateralDetail',
             },
           },
           {
@@ -296,7 +296,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/demos/breadcrumb/level',
             meta: {
               icon: 'lucide:navigation',
-              title: 'demos.breadcrumb.level',
+              title: 'pages.demos.breadcrumb.level',
             },
             children: [
               {
@@ -305,7 +305,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () =>
                   import('~/domains/admin/pages/demos/breadcrumb/level/detail.vue'),
                 meta: {
-                  title: 'demos.breadcrumb.levelDetail',
+                  title: 'pages.demos.breadcrumb.levelDetail',
                 },
               },
             ],
@@ -315,7 +315,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         meta: {
           icon: 'mdi:lightbulb-error-outline',
-          title: 'demos.fallback.title',
+          title: 'pages.demos.fallback.title',
         },
         name: 'FallbackDemos',
         path: '/admin/demos/fallback',
@@ -354,7 +354,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('~/domains/admin/pages/demos/fallback/offline.vue'),
             meta: {
               icon: 'mdi:offline',
-              title: 'ui.fallback.offline',
+              title: 'pages.ui.fallback.offline',
             },
           },
         ],
@@ -365,7 +365,7 @@ const routes: Array<RouteRecordRaw> = [
           badgeType: 'dot',
           badgeVariants: 'destructive',
           icon: 'lucide:circle-dot',
-          title: 'demos.badge.title',
+          title: 'pages.demos.badge.title',
         },
         name: 'BadgeDemos',
         path: '/admin/demos/badge',
@@ -377,7 +377,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               badgeType: 'dot',
               icon: 'lucide:square-dot',
-              title: 'demos.badge.dot',
+              title: 'pages.demos.badge.dot',
             },
           },
           {
@@ -387,7 +387,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               badge: '10',
               icon: 'lucide:square-dot',
-              title: 'demos.badge.text',
+              title: 'pages.demos.badge.text',
             },
           },
           {
@@ -398,7 +398,7 @@ const routes: Array<RouteRecordRaw> = [
               badge: 'Hot',
               badgeVariants: 'destructive',
               icon: 'lucide:square-dot',
-              title: 'demos.badge.color',
+              title: 'pages.demos.badge.color',
             },
           },
         ],
@@ -408,7 +408,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           activeIcon: 'fluent-emoji:radioactive',
           icon: 'bi:radioactive',
-          title: 'demos.activeIcon.title',
+          title: 'pages.demos.activeIcon.title',
         },
         name: 'ActiveIconDemos',
         path: '/admin/demos/active-icon',
@@ -420,7 +420,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               activeIcon: 'fluent-emoji:radioactive',
               icon: 'bi:radioactive',
-              title: 'demos.activeIcon.children',
+              title: 'pages.demos.activeIcon.children',
             },
           },
         ],
@@ -429,7 +429,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         meta: {
           icon: 'ic:round-settings-input-composite',
-          title: 'demos.outside.title',
+          title: 'pages.demos.outside.title',
         },
         name: 'OutsideDemos',
         path: '/admin/demos/outside',
@@ -439,7 +439,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/demos/outside/iframe',
             meta: {
               icon: 'mdi:newspaper-variant-outline',
-              title: 'demos.outside.embedded',
+              title: 'pages.demos.outside.embedded',
             },
             children: [
               {
@@ -471,7 +471,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/demos/outside/external-link',
             meta: {
               icon: 'mdi:newspaper-variant-multiple-outline',
-              title: 'demos.outside.externalLink',
+              title: 'pages.demos.outside.externalLink',
             },
             children: [
               {
@@ -502,7 +502,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         meta: {
           icon: 'ic:round-menu',
-          title: 'demos.nested.title',
+          title: 'pages.demos.nested.title',
         },
         name: 'NestedDemos',
         path: '/admin/demos/nested',
@@ -514,7 +514,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               icon: 'ic:round-menu',
               keepAlive: true,
-              title: 'demos.nested.menu1',
+              title: 'pages.demos.nested.menu1',
             },
           },
           {
@@ -523,7 +523,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               icon: 'ic:round-menu',
               keepAlive: true,
-              title: 'demos.nested.menu2',
+              title: 'pages.demos.nested.menu2',
             },
             children: [
               {
@@ -533,7 +533,7 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {
                   icon: 'ic:round-menu',
                   keepAlive: true,
-                  title: 'demos.nested.menu2_1',
+                  title: 'pages.demos.nested.menu2_1',
                 },
               },
             ],
@@ -543,7 +543,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/demos/nested/menu3',
             meta: {
               icon: 'ic:round-menu',
-              title: 'demos.nested.menu3',
+              title: 'pages.demos.nested.menu3',
             },
             children: [
               {
@@ -553,7 +553,7 @@ const routes: Array<RouteRecordRaw> = [
                 meta: {
                   icon: 'ic:round-menu',
                   keepAlive: true,
-                  title: 'demos.nested.menu3_1',
+                  title: 'pages.demos.nested.menu3_1',
                 },
               },
               {
@@ -561,7 +561,7 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/admin/demos/nested/menu3/menu3-2',
                 meta: {
                   icon: 'ic:round-menu',
-                  title: 'demos.nested.menu3_2',
+                  title: 'pages.demos.nested.menu3_2',
                 },
                 children: [
                   {
@@ -572,7 +572,7 @@ const routes: Array<RouteRecordRaw> = [
                     meta: {
                       icon: 'ic:round-menu',
                       keepAlive: true,
-                      title: 'demos.nested.menu3_2_1',
+                      title: 'pages.demos.nested.menu3_2_1',
                     },
                   },
                 ],

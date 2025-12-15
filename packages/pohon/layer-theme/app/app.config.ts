@@ -48,6 +48,7 @@ import { popoverTheme } from './themes/popover.theme';
 import { progressTheme } from './themes/progress.theme';
 import { proseTheme } from './themes/prose.theme';
 import { radioGroupTheme } from './themes/radio-group.theme';
+import { scrollbarThemes } from './themes/scrollbar.theme';
 import { selectMenuTheme } from './themes/select-menu.theme';
 import { selectTheme } from './themes/select.theme';
 import { separatorTheme } from './themes/separator.theme';
@@ -138,6 +139,7 @@ export default defineAppConfig({
     popover: popoverTheme,
     progress: progressTheme,
     radioGroup: radioGroupTheme,
+    ...scrollbarThemes,
     selectMenu: selectMenuTheme,
     select: selectTheme,
     separator: separatorTheme,

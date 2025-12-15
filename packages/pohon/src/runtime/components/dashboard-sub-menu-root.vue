@@ -2,6 +2,7 @@
 import type { PDashboardMenuRaw } from '../types';
 
 import { computed } from 'vue';
+import PDashboardMenuItem from './dashboard-menu-item.vue';
 import PDashboardMenuSubMenu from './dashboard-menu-sub-menu.vue';
 import PDashboardSubMenuRoot from './dashboard-sub-menu-root.vue';
 
@@ -26,7 +27,7 @@ const hasChildren = computed(() => {
 </script>
 
 <template>
-  <MenuItem
+  <PDashboardMenuItem
     v-if="!hasChildren"
     :key="menu.path"
     :active-icon="menu.activeIcon"
@@ -39,7 +40,7 @@ const hasChildren = computed(() => {
     <template #title>
       <span>{{ menu.name }}</span>
     </template>
-  </MenuItem>
+  </PDashboardMenuItem>
 
   <PDashboardMenuSubMenu
     v-else

@@ -209,7 +209,7 @@ export class PreferenceManager {
    */
   private updateColorMode(preference: Preferences) {
     if (preference.app) {
-      const { colorGrayMode, colorWeakMode } = preference.app;
+      const { enableColorGrayMode: colorGrayMode, enableColorWeakMode: colorWeakMode } = preference.app;
       const dom = document.documentElement;
       const COLOR_WEAK = 'invert-mode';
       const COLOR_GRAY = 'grayscale-mode';

@@ -3,6 +3,8 @@
 import type {
   PThemeDashboardContent,
   PThemeDashboardLayout,
+  PThemeDashboardMenuItem,
+  PThemeDashboardMenuRoot,
   PThemeDashboardSidebar,
 } from 'pohon-ui';
 
@@ -32,4 +34,14 @@ export const dashboardThemes = {
   dashboardContent: {
     base: 'bg-background-elevated',
   } satisfies PThemeDashboardContent,
+  dashboardMenuRoot: {
+    slots: {
+      root: 'relative pl-0 m-0 list-none bg-background box-border',
+    },
+  } satisfies PThemeDashboardMenuRoot,
+  dashboardMenuItem: {
+    slots: {
+      root: 'pohon-menu-item',
+    },
+  } satisfies PThemeDashboardMenuItem,
 };

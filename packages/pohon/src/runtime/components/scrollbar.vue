@@ -60,12 +60,12 @@ const props = withDefaults(
   defineProps<PScrollbarProps>(),
   {
     horizontal: false,
-    shadow: false,
-    shadowBorder: false,
-    shadowBottom: true,
-    shadowLeft: false,
-    shadowRight: false,
-    shadowTop: true,
+    hasShadow: false,
+    hasShadowBorder: false,
+    hasShadowBottom: true,
+    hasShadowLeft: false,
+    hasShadowRight: false,
+    hasShadowTop: true,
   },
 );
 

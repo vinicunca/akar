@@ -6,7 +6,7 @@ const routes: Array<RouteRecordRaw> = [
       icon: 'ion:layers-outline',
       keepAlive: true,
       order: 1000,
-      title: 'examples.title',
+      title: 'pages.examples.title',
     },
     name: 'Examples',
     path: '/admin/examples',
@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/admin/examples/form',
         meta: {
           icon: 'mdi:form-select',
-          title: 'examples.form.title',
+          title: 'pages.examples.form.title',
         },
         children: [
           {
@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/form/basic',
             component: () => import('~/domains/admin/pages/examples/form/basic.vue'),
             meta: {
-              title: 'examples.form.basic',
+              title: 'pages.examples.form.basic',
             },
           },
           {
@@ -32,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/form/query',
             component: () => import('~/domains/admin/pages/examples/form/query.vue'),
             meta: {
-              title: 'examples.form.query',
+              title: 'pages.examples.form.query',
             },
           },
           {
@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/form/rules',
             component: () => import('~/domains/admin/pages/examples/form/rules.vue'),
             meta: {
-              title: 'examples.form.rules',
+              title: 'pages.examples.form.rules',
             },
           },
           {
@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/form/dynamic',
             component: () => import('~/domains/admin/pages/examples/form/dynamic.vue'),
             meta: {
-              title: 'examples.form.dynamic',
+              title: 'pages.examples.form.dynamic',
             },
           },
           {
@@ -56,7 +56,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/form/custom-layout',
             component: () => import('~/domains/admin/pages/examples/form/custom-layout.vue'),
             meta: {
-              title: 'examples.form.layout',
+              title: 'pages.examples.form.layout',
             },
           },
           {
@@ -64,7 +64,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/form/custom',
             component: () => import('~/domains/admin/pages/examples/form/custom.vue'),
             meta: {
-              title: 'examples.form.custom',
+              title: 'pages.examples.form.custom',
             },
           },
           {
@@ -72,7 +72,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/form/api',
             component: () => import('~/domains/admin/pages/examples/form/api.vue'),
             meta: {
-              title: 'examples.form.api',
+              title: 'pages.examples.form.api',
             },
           },
           {
@@ -80,7 +80,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/form/merge',
             component: () => import('~/domains/admin/pages/examples/form/merge.vue'),
             meta: {
-              title: 'examples.form.merge',
+              title: 'pages.examples.form.merge',
             },
           },
           {
@@ -89,7 +89,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import('~/domains/admin/pages/examples/form/scroll-to-error-test.vue'),
             meta: {
-              title: 'examples.form.scrollToError',
+              title: 'pages.examples.form.scrollToError',
             },
           },
         ],
@@ -99,7 +99,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/admin/examples/vxe-table',
         meta: {
           icon: 'lucide:table',
-          title: 'examples.vxeTable.title',
+          title: 'pages.examples.vxeTable.title',
         },
         children: [
           {
@@ -107,7 +107,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/vxe-table/basic',
             component: () => import('~/domains/admin/pages/examples/vxe-table/basic.vue'),
             meta: {
-              title: 'examples.vxeTable.basic',
+              title: 'pages.examples.vxeTable.basic',
             },
           },
           {
@@ -115,7 +115,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/vxe-table/remote',
             component: () => import('~/domains/admin/pages/examples/vxe-table/remote.vue'),
             meta: {
-              title: 'examples.vxeTable.remote',
+              title: 'pages.examples.vxeTable.remote',
             },
           },
           {
@@ -123,7 +123,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/vxe-table/tree',
             component: () => import('~/domains/admin/pages/examples/vxe-table/tree.vue'),
             meta: {
-              title: 'examples.vxeTable.tree',
+              title: 'pages.examples.vxeTable.tree',
             },
           },
           {
@@ -131,7 +131,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/vxe-table/fixed',
             component: () => import('~/domains/admin/pages/examples/vxe-table/fixed.vue'),
             meta: {
-              title: 'examples.vxeTable.fixed',
+              title: 'pages.examples.vxeTable.fixed',
             },
           },
           {
@@ -140,7 +140,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import('~/domains/admin/pages/examples/vxe-table/custom-cell.vue'),
             meta: {
-              title: 'examples.vxeTable.custom-cell',
+              title: 'pages.examples.vxeTable.custom-cell',
             },
           },
           {
@@ -148,7 +148,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/vxe-table/form',
             component: () => import('~/domains/admin/pages/examples/vxe-table/form.vue'),
             meta: {
-              title: 'examples.vxeTable.form',
+              title: 'pages.examples.vxeTable.form',
             },
           },
           {
@@ -156,7 +156,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/vxe-table/edit-cell',
             component: () => import('~/domains/admin/pages/examples/vxe-table/edit-cell.vue'),
             meta: {
-              title: 'examples.vxeTable.editCell',
+              title: 'pages.examples.vxeTable.editCell',
             },
           },
           {
@@ -164,7 +164,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/vxe-table/edit-row',
             component: () => import('~/domains/admin/pages/examples/vxe-table/edit-row.vue'),
             meta: {
-              title: 'examples.vxeTable.editRow',
+              title: 'pages.examples.vxeTable.editRow',
             },
           },
           {
@@ -172,7 +172,7 @@ const routes: Array<RouteRecordRaw> = [
             path: '/admin/examples/vxe-table/virtual',
             component: () => import('~/domains/admin/pages/examples/vxe-table/virtual.vue'),
             meta: {
-              title: 'examples.vxeTable.virtual',
+              title: 'pages.examples.vxeTable.virtual',
             },
           },
         ],
@@ -182,7 +182,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/admin/examples/captcha',
         meta: {
           icon: 'logos:recaptcha',
-          title: 'examples.captcha.title',
+          title: 'pages.examples.captcha.title',
         },
         children: [
           {
@@ -191,7 +191,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import('~/domains/admin/pages/examples/captcha/slider.vue'),
             meta: {
-              title: 'examples.captcha.sliderCaptcha',
+              title: 'pages.examples.captcha.sliderCaptcha',
             },
           },
           {
@@ -200,7 +200,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import('~/domains/admin/pages/examples/captcha/slider-rotate.vue'),
             meta: {
-              title: 'examples.captcha.sliderRotateCaptcha',
+              title: 'pages.examples.captcha.sliderRotateCaptcha',
             },
           },
           {
@@ -209,7 +209,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import('~/domains/admin/pages/examples/captcha/slider-translate.vue'),
             meta: {
-              title: 'examples.captcha.sliderTranslateCaptcha',
+              title: 'pages.examples.captcha.sliderTranslateCaptcha',
             },
           },
           {
@@ -218,7 +218,7 @@ const routes: Array<RouteRecordRaw> = [
             component: () =>
               import('~/domains/admin/pages/examples/captcha/point-selection.vue'),
             meta: {
-              title: 'examples.captcha.pointSelection',
+              title: 'pages.examples.captcha.pointSelection',
             },
           },
         ],
@@ -230,7 +230,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           icon: 'system-uicons:window-content',
           keepAlive: true,
-          title: 'examples.modal.title',
+          title: 'pages.examples.modal.title',
         },
       },
       {
@@ -240,7 +240,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           icon: 'iconoir:drawer',
           keepAlive: true,
-          title: 'examples.drawer.title',
+          title: 'pages.examples.drawer.title',
         },
       },
       {
@@ -249,7 +249,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('~/domains/admin/pages/examples/ellipsis.vue'),
         meta: {
           icon: 'ion:ellipsis-horizontal',
-          title: 'examples.ellipsis.title',
+          title: 'pages.examples.ellipsis.title',
         },
       },
       {
@@ -258,7 +258,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('~/domains/admin/pages/examples/resize.vue'),
         meta: {
           icon: 'material-symbols:resize',
-          title: 'examples.resize.title',
+          title: 'pages.examples.resize.title',
         },
       },
       {
@@ -269,7 +269,7 @@ const routes: Array<RouteRecordRaw> = [
           badge: 'Alpha',
           badgeVariants: 'destructive',
           icon: 'material-symbols:horizontal-distribute',
-          title: 'examples.layout.col-page',
+          title: 'pages.examples.layout.col-page',
         },
       },
       {
@@ -323,7 +323,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('~/domains/admin/pages/examples/button-group.vue'),
         meta: {
           icon: 'mdi:check-circle',
-          title: 'examples.button-group.title',
+          title: 'pages.examples.button-group.title',
         },
       },
     ],

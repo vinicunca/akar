@@ -1,6 +1,7 @@
 import type { PDashboardSubMenuProvider } from '../types/dashboard-menu';
 import { computed, getCurrentInstance } from 'vue';
-import { findComponentUpward, P_DASHBOARD_MENU_ROOT, P_DASHBOARD_MENU_SUBMENU } from '../utils/dashboard';
+import { P_DASHBOARD_MENU_ROOT, P_DASHBOARD_MENU_SUBMENU } from '../constants';
+import { findComponentUpward } from '../utils/dashboard';
 
 export function useMenu() {
   const instance = getCurrentInstance();

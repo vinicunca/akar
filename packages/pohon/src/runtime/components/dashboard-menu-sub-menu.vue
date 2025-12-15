@@ -33,9 +33,14 @@ export interface PDashboardMenuSubMenuProps extends PDashboardMenuBadgeRaw {
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import { useMenu, useMenuStyle } from '../composables/use-dashboard-menu';
 import { createSubMenuContext, useMenuContext, useSubMenuContext } from '../composables/use-dashboard-menu-context';
+import { P_DASHBOARD_MENU_ROOT, P_DASHBOARD_MENU_SUBMENU } from '../constants';
 import PDashboardCollapseTransition from './dashboard-menu-collapse-transition.vue';
 import PDashboardMenuSubMenuContent from './dashboard-menu-sub-menu-content.vue';
 import PPopover from './popover.vue';
+
+defineOptions({
+  name: P_DASHBOARD_MENU_SUBMENU,
+});
 
 const props = withDefaults(
   defineProps<PDashboardMenuSubMenuProps>(),
@@ -68,7 +73,7 @@ const opened = computed(() => {
   return rootMenu?.openedMenus.includes(props.path);
 });
 const isTopLevelMenuSubmenu = computed(
-  () => parentMenu.value?.type.name === 'Menu',
+  () => parentMenu.value?.type.name === P_DASHBOARD_MENU_ROOT,
 );
 const mode = computed(() => rootMenu?.props.mode ?? 'vertical');
 const rounded = computed(() => rootMenu?.props.rounded);

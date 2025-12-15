@@ -1,8 +1,8 @@
 <script lang="ts">
-import type theme from '#build/pohon/dashboard-menu-root';
 import type { AppConfig } from '@nuxt/schema';
 import type { PDashboardMenuItemPayload, PDashboardMenuItemRegistered, PDashboardMenuProps, PDashboardMenuProvider } from '../types/dashboard-menu';
 import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/dashboard-menu-root';
 
 type DashboardMenuRoot = ComponentConfig<typeof theme, AppConfig, 'dashboardMenuRoot'>;
 
@@ -14,17 +14,24 @@ export interface PDashboardMenuRoot extends PDashboardMenuProps {
 <script lang="ts" setup>
 import type { UseResizeObserverReturn } from '@vueuse/core';
 import type { VNodeArrayChildren } from 'vue';
+import { useAppConfig } from '#app';
 import { funnel } from '@vinicunca/perkakas';
 import { useResizeObserver } from '@vueuse/core';
 import { computed, nextTick, reactive, ref, toRef, useSlots, watch, watchEffect } from 'vue';
 import { useMenuStyle } from '../composables/use-dashboard-menu';
 import { createMenuContext, createSubMenuContext } from '../composables/use-dashboard-menu-context';
 import { useMenuScroll } from '../composables/use-dashboard-menu-scroll';
+import { P_DASHBOARD_MENU_ROOT } from '../constants';
 import { flattedChildren } from '../utils/dashboard';
+import { uv } from '../utils/uv';
 import PDashboardMenuSubMenu from './dashboard-menu-sub-menu.vue';
 
+defineOptions({
+  name: P_DASHBOARD_MENU_ROOT,
+});
+
 const props = withDefaults(
-  defineProps<PDashboardMenuProps>(),
+  defineProps<PDashboardMenuRoot>(),
   {
     accordion: true,
     collapse: false,
@@ -318,14 +325,29 @@ function getActivePaths() {
 
   return activeItem.parentPaths;
 }
+
+const appConfig = useAppConfig() as DashboardMenuRoot['AppConfig'];
+
+const pohon = computed(() =>
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.dashboardMenuRoot || {}),
+  })(),
+);
 </script>
 
 <template>
   <ul
     ref="menu"
     :class="[
-      theme,
+      props.theme,
+      pohon.root({ class: props.pohon?.root }),
     ]"
+    :data-is-mode="mode"
+    :data-is-theme="theme"
+    :data-is-rounded="rounded"
+    :data-is-collapse="collapse"
+    :data-is-menu-align="mode === 'horizontal'"
     :style="menuStyle"
     role="menu"
   >
@@ -352,6 +374,7 @@ function getActivePaths() {
         </template>
       </PDashboardMenuSubMenu>
     </template>
+
     <template v-else>
       <slot />
     </template>

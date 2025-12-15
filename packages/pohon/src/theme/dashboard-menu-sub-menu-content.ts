@@ -1,3 +1,8 @@
 export default {
-  base: '',
+  slots: {
+    root: '',
+    icon: '',
+    title: '',
+    iconArrow: '',
+  },
 };

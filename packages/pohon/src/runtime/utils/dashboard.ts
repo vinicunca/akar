@@ -14,21 +14,6 @@ export interface DashboardContext extends Pick<UseResizableProps, 'storage' | 's
 
 export const [useDashboard, provideDashboardContext] = createContext<DashboardContext>('DashboardGroup');
 
-/** Height of the layout content component */
-export const CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT = '--pohon-content-height';
-/** Width of the layout content component */
-export const CSS_VARIABLE_LAYOUT_CONTENT_WIDTH = '--pohon-content-width';
-/** Height of the layout header component */
-export const CSS_VARIABLE_LAYOUT_HEADER_HEIGHT = '--pohon-header-height';
-/** Height of the layout footer component */
-export const CSS_VARIABLE_LAYOUT_FOOTER_HEIGHT = '--pohon-footer-height';
-
-/** Component ID of the content area */
-export const ELEMENT_ID_MAIN_CONTENT = '__pohon_main_content';
-
-export const P_DASHBOARD_MENU_ROOT = 'PDashboardMenuRoot';
-export const P_DASHBOARD_MENU_SUBMENU = 'PDashboardMenuSubMenu';
-
 type VNodeChildAtom = Exclude<VNodeChild, Array<any>>;
 type RawSlots = Exclude<VNodeNormalizedChildren, Array<any> | null | string>;
 

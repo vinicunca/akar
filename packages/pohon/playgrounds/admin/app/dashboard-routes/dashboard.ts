@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       icon: 'lucide:layout-dashboard',
       order: -1,
-      title: 'page.dashboard.title',
+      title: 'pages.dashboard.title',
     },
     name: 'Dashboard',
     path: '/admin/dashboard',
@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           affixTab: true,
           icon: 'lucide:area-chart',
-          title: 'page.dashboard.analytics',
+          title: 'pages.dashboard.analytics',
         },
       },
       {
@@ -26,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('~/domains/admin/pages/dashboard/workspace.vue'),
         meta: {
           icon: 'carbon:workspace',
-          title: 'page.dashboard.workspace',
+          title: 'pages.dashboard.workspace',
         },
       },
     ],

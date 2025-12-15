@@ -138,8 +138,6 @@ const rootStyle = computed<CSSProperties>(() => {
   const { isSidebarMixed, marginTop, zIndex } = props;
 
   return {
-    // FIXME: scroll shadow
-    // '--scroll-shadow': 'var(--sidebar)',
     ...calcMenuWidthStyle(false),
     height: `calc(100% - ${marginTop}px)`,
     marginTop: `${marginTop}px`,
@@ -304,13 +302,13 @@ const pohon = computed(() =>
       <slot name="logo" />
     </div>
 
-    <PScrollbar
+    <!-- <PScrollbar
       :style="contentStyle"
-      shadow
-      shadow-border
+      has-shadow
+      has-shadow-border
     >
-      <slot />
-    </PScrollbar>
+  </PScrollbar> -->
+    <slot />
 
     <div :style="collapseStyle" />
 
