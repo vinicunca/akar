@@ -39,6 +39,16 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    component: () => import('~/domains/admin/pages/systems/about.vue'),
+    meta: {
+      icon: 'lucide:copyright',
+      order: 9999,
+      title: 'pages.system.about',
+    },
+    name: 'SystemAbout',
+    path: '/admin/system/about',
+  },
 ];
 
 export default routes;

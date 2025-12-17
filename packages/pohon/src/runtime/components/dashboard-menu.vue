@@ -217,6 +217,8 @@ const props = withDefaults(
     collapsible: true,
     unmountOnHide: true,
     labelKey: 'label',
+    tooltip: true,
+    popover: true,
   },
 );
 
@@ -452,7 +454,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
         <component
           :is="((item.children?.length && !collapsed && !(slotProps as any).href) ? AAccordionTrigger : ANavigationMenuLink)"
           as-child
-          :active="active || item.active || isRouteInTree(item, route.path)"
+          :active="active || item.active"
           :disabled="item.disabled"
           @select="item.onSelect"
         >
@@ -465,7 +467,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
               v-bind="slotProps"
               :class="pohon.link({
                 class: [props.pohon?.link, item.pohon?.link, item.class],
-                active: active || item.active || isRouteInTree(item, route.path),
+                active: active || item.active,
                 disabled: !!item.disabled,
                 level: level > 0,
               })"
@@ -473,7 +475,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
             >
               <ReuseLinkTemplate
                 :item="item"
-                :active="active || item.active || isRouteInTree(item, route.path)"
+                :active="active || item.active"
                 :index="index"
               />
             </PLinkBase>
@@ -482,7 +484,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
               <slot
                 :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof PDashboardMenuSlots<T>)"
                 :item="item"
-                :active="active || item.active || isRouteInTree(item, route.path)"
+                :active="active || item.active"
                 :index="index"
                 :pohon="pohon"
                 :close="close"
@@ -568,7 +570,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
               v-bind="slotProps"
               :class="pohon.link({
                 class: [props.pohon?.link, item.pohon?.link, item.class],
-                active: active || item.active || isRouteInTree(item, route.path),
+                active: active || item.active,
                 disabled: !!item.disabled,
                 level: level > 0,
               })"
@@ -576,7 +578,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
             >
               <ReuseLinkTemplate
                 :item="item"
-                :active="active || item.active || isRouteInTree(item, route.path)"
+                :active="active || item.active"
                 :index="index"
               />
             </PLinkBase>
@@ -587,7 +589,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
             v-bind="slotProps"
             :class="pohon.link({
               class: [props.pohon?.link, item.pohon?.link, item.class],
-              active: active || item.active || isRouteInTree(item, route.path),
+              active: active || item.active,
               disabled: !!item.disabled,
               level: level > 0,
             })"
@@ -595,7 +597,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
           >
             <ReuseLinkTemplate
               :item="item"
-              :active="active || item.active || isRouteInTree(item, route.path)"
+              :active="active || item.active"
               :index="index"
             />
           </PLinkBase>

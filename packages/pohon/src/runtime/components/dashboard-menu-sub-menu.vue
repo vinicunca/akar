@@ -230,6 +230,7 @@ onBeforeUnmount(() => {
         mode="hover"
       >
         <PDashboardMenuSubMenuContent
+          :active="active"
           :icon="menuIcon"
           :is-menu-more="isSubMenuMore"
           :is-top-level-menu-submenu="isTopLevelMenuSubmenu"
@@ -260,6 +261,7 @@ onBeforeUnmount(() => {
 
     <template v-else>
       <PDashboardMenuSubMenuContent
+        :active="active"
         :icon="menuIcon"
         :is-menu-more="isSubMenuMore"
         :is-top-level-menu-submenu="isTopLevelMenuSubmenu"

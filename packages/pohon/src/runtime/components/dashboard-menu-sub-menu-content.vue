@@ -7,6 +7,7 @@ import theme from '#build/pohon/dashboard-menu-sub-menu-content';
 type DashboardMenuSubMenuContent = ComponentConfig<typeof theme, AppConfig, 'dashboardMenuSubMenuContent'>;
 
 export interface PDashboardMenuSubMenuContent extends PDashboardMenuItemBaseProps {
+  active?: boolean;
   isMenuMore?: boolean;
   isTopLevelMenuSubmenu: boolean;
   level?: number;
@@ -24,6 +25,7 @@ import PIcon from './icon.vue';
 const props = withDefaults(
   defineProps<PDashboardMenuSubMenuContent>(),
   {
+    active: false,
     isMenuMore: false,
     level: 0,
   },
@@ -91,7 +93,9 @@ const pohon = computed(() =>
   <div
     :class="[
       pohon.root({ class: props.pohon?.root }),
+      { 'color-primary': active },
     ]"
+    :data-active="active"
     :data-is-collapse-show-title="getCollapseShowTitle"
     :data-is-more="isMenuMore"
   >

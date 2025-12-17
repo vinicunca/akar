@@ -9,6 +9,7 @@
       "title": "System Management",
       "users": "Users",
       "roles": "Roles",
+      "about": "About",
       "dept": {
         "name": "Department",
         "title": "Department Management",
