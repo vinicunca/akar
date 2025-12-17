@@ -102,11 +102,6 @@ export interface PDashboardLayoutProps {
    */
   layout?: PDashboardLayoutType;
   /**
-   * Sidebar collapse state
-   * @default false
-   */
-  isSidebarCollapse?: boolean;
-  /**
    * Whether to show the button to collapse the sidebar
    * @default true
    */
@@ -247,7 +242,7 @@ const props = withDefaults(
 const emits = defineEmits<PDashboardLayoutEmits>();
 defineSlots<PDashboardLayoutSlots>();
 
-const isSidebarCollapse = defineModel<boolean>('isSidebarCollapse', {
+const isSidebarCollapsed = defineModel<boolean>('isSidebarCollapsed', {
   default: false,
 });
 const isSidebarExtraVisible = defineModel<boolean>('isSidebarExtraVisible');
@@ -387,7 +382,7 @@ const getSidebarWidth = computed(() => {
 
   if ((isHeaderMixedNav.value || isSidebarMixedNav.value) && !isMobile) {
     width = sidebarMixedWidth;
-  } else if (isSidebarCollapse.value) {
+  } else if (isSidebarCollapsed.value) {
     width = isMobile ? 0 : getSideCollapseWidth.value;
   } else {
     width = sidebarWidth;
@@ -437,7 +432,7 @@ const showSidebar = computed(() => {
 /**
  * Mask visibility
  */
-const maskVisible = computed(() => !isSidebarCollapse.value && props.isMobile);
+const maskVisible = computed(() => !isSidebarCollapsed.value && props.isMobile);
 
 const mainStyle = computed(() => {
   let width = '100%';
@@ -457,7 +452,7 @@ const mainStyle = computed(() => {
         && isSidebarExtraVisible.value;
 
     if (isSideNavEffective) {
-      const sideCollapseWidth = isSidebarCollapse.value
+      const sideCollapseWidth = isSidebarCollapsed.value
         ? getSideCollapseWidth.value
         : props.sidebarMixedWidth;
       const sideWidth = isSidebarExtraCollapse.value
@@ -496,12 +491,12 @@ const tabbarStyle = computed<CSSProperties>(() => {
       : getSideCollapseWidth.value;
 
     // Set marginLeft, depending on whether the sidebar is collapsed
-    marginLeft = isSidebarCollapse.value
+    marginLeft = isSidebarCollapsed.value
       ? getSideCollapseWidth.value
       : onHoveringWidth;
 
     // Set the width of the tabbar, calculated as 100% minus the width of the sidebar
-    width = `calc(100% - ${isSidebarCollapse.value ? getSidebarWidth.value : onHoveringWidth}px)`;
+    width = `calc(100% - ${isSidebarCollapsed.value ? getSidebarWidth.value : onHoveringWidth}px)`;
   } else {
     // By default, the width of the tabbar is 100%
     width = '100%';
@@ -596,7 +591,7 @@ watch(
   () => props.isMobile,
   (val) => {
     if (val) {
-      isSidebarCollapse.value = true;
+      isSidebarCollapsed.value = true;
     }
   },
   {
@@ -696,27 +691,27 @@ watch(
 
 function handleHeaderToggle() {
   if (props.isMobile) {
-    isSidebarCollapse.value = false;
+    isSidebarCollapsed.value = false;
   } else {
     emits('toggleSidebar');
   }
 }
 
 function handleClickMask() {
-  isSidebarCollapse.value = true;
+  isSidebarCollapsed.value = true;
 }
 
 const nuxtApp = useNuxtApp();
 
 provideDashboardContext({
   collapseSidebar: (collapsed: boolean) => {
-    nuxtApp.hooks.callHook('dashboard:sidebar:collapse', collapsed);
+    nuxtApp.hooks.callHook('dashboard:sidebar:collapsed', collapsed);
   },
-  sidebarCollapsed: isSidebarCollapse,
+  sidebarCollapsed: isSidebarCollapsed,
 });
 
-useRuntimeHook('dashboard:sidebar:collapse', (value: boolean) => {
-  isSidebarCollapse.value = value;
+useRuntimeHook('dashboard:sidebar:collapsed', (value: boolean) => {
+  isSidebarCollapsed.value = value;
 });
 
 const appConfig = useAppConfig() as DashboardLayout['AppConfig'];
@@ -737,7 +732,7 @@ const pohon = computed(() =>
     <slot name="sidebar">
       <PDashboardSidebar
         v-if="sidebarEnableState"
-        v-model:is-collapse="isSidebarCollapse"
+        v-model:is-collapsed="isSidebarCollapsed"
         v-model:is-expand-on-hover="isSidebarExpandOnHover"
         v-model:is-expand-on-hovering="isSidebarExpandOnHovering"
         v-model:is-extra-collapse="isSidebarExtraCollapse"

@@ -36,7 +36,7 @@ const opened = computed(() => {
 });
 
 const collapse = computed(() => {
-  return rootMenu.props.collapse;
+  return rootMenu.props.collapsed;
 });
 
 const isFirstLevel = computed(() => {

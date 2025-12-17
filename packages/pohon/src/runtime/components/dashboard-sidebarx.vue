@@ -125,7 +125,7 @@ useRuntimeHook('dashboard:sidebar:toggle', () => {
   open.value = !open.value;
 });
 
-useRuntimeHook('dashboard:sidebar:collapse', (value: boolean) => {
+useRuntimeHook('dashboard:sidebar:collapsed', (value: boolean) => {
   isCollapsed.value = value;
 });
 

@@ -101,7 +101,6 @@ import { useAppConfig, useRoute } from '#imports';
 import { computed, useTemplateRef, watchEffect } from 'vue';
 import { uv } from '../utils/uv';
 
-import PButton from './button.vue';
 import PDashboardSidebarCollapse from './dashboard-sidebar-collapse.vue';
 import PScrollbar from './scrollbar.vue';
 
@@ -126,7 +125,7 @@ const slots = defineSlots<PDashboardSidebarSlots>();
 
 const asideRef = useTemplateRef('asideRef');
 
-const isCollapse = defineModel<boolean>('isCollapse');
+const isCollapsed = defineModel<boolean>('isCollapsed');
 const isExtraCollapse = defineModel<boolean>('isExtraCollapse');
 const isExpandOnHovering = defineModel<boolean>('isExpandOnHovering');
 const isExpandOnHover = defineModel<boolean>('isExpandOnHover');
@@ -169,7 +168,7 @@ const extraTitleStyle = computed<CSSProperties>(() => {
 const contentWidthStyle = computed<CSSProperties>(() => {
   const { collapseWidth, isFixedExtra, isSidebarMixed, mixedWidth } = props;
   if (isSidebarMixed && isFixedExtra) {
-    return { width: `${isCollapse.value ? collapseWidth : mixedWidth}px` };
+    return { width: `${isCollapsed.value ? collapseWidth : mixedWidth}px` };
   }
 
   return {};
@@ -247,7 +246,7 @@ function handleMouseenter(event: MouseEvent) {
   }
 
   if (!isExpandOnHovering.value) {
-    isCollapse.value = false;
+    isCollapsed.value = false;
   }
 
   if (props.isSidebarMixed) {
@@ -269,7 +268,7 @@ function handleMouseleave() {
   }
 
   isExpandOnHovering.value = false;
-  isCollapse.value = true;
+  isCollapsed.value = true;
   isExtraVisible.value = false;
 }
 
@@ -309,7 +308,7 @@ const pohon = computed(() =>
       has-shadow
       has-shadow-border
     >
-      <slot />
+      <slot :is-collapsed="isCollapsed" />
     </PScrollbar>
 
     <div

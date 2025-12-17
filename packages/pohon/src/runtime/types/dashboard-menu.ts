@@ -85,7 +85,7 @@ export interface PDashboardMenuProps {
    * Whether the menu is collapsed
    * @default false
    */
-  collapse?: boolean;
+  collapsed?: boolean;
   /**
    * Whether to show menu names when the menu is collapsed
    * @default false

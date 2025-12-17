@@ -51,14 +51,14 @@ const collapseShowTitle = computed(
   () =>
     rootMenu.props?.collapseShowTitle
     && isTopLevelMenuItem.value
-    && rootMenu.props.collapse,
+    && rootMenu.props.collapsed,
 );
 
 const showTooltip = computed(
   () =>
     rootMenu.props.mode === 'vertical'
     && isTopLevelMenuItem.value
-    && rootMenu.props?.collapse
+    && rootMenu.props?.collapsed
     && slots.title,
 );
 

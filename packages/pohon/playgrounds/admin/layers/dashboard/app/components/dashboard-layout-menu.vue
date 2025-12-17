@@ -35,12 +35,7 @@ function handleMenuOpen(item: PDashboardMenuItemPayload) {
 
 <template>
   <PDashboardMenu
-    :accordion="accordion"
-    :collapse="collapse"
-    :collapse-show-title="collapseShowTitle"
-    :default-active="defaultActive"
+    :collapsed="collapsed"
     :items="menus"
-    @open="handleMenuOpen"
-    @select="handleMenuSelect"
   />
 </template>

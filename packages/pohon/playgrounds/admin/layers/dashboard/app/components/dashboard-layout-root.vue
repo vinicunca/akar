@@ -162,7 +162,7 @@ function wrapperMenus(
 <template>
   <PDashboardLayout
     v-model:is-sidebar-extra-visible="isSidebarExtraVisible"
-    v-model:sidebar-collapsed="modelSidebarCollapse"
+    v-model:is-sidebar-collapsed="modelSidebarCollapse"
     v-model:is-sidebar-enable="modelSidebarEnable"
     v-model:is-sidebar-expand-on-hover="modelSidebarExpandOnHover"
     v-model:is-sidebar-extra-collapse="modelSidebarExtraCollapse"
@@ -206,7 +206,7 @@ function wrapperMenus(
     <template #menu>
       <DashboardLayoutMenu
         :accordion="preferences.navigation.isAccordion"
-        :collapse="preferences.sidebar.isCollapsed"
+        :collapsed="preferences.sidebar.isCollapsed"
         :collapse-show-title="preferences.sidebar.showCollapsedTitle"
         :default-active="sidebarActive"
         :menus="wrapperMenus({ menus: sidebarMenus })"

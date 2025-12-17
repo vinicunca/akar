@@ -59,7 +59,7 @@ provideDashboardContext({
   },
   sidebarCollapsed,
   collapseSidebar: (collapsed: boolean) => {
-    nuxtApp.hooks.callHook('dashboard:sidebar:collapse', collapsed);
+    nuxtApp.hooks.callHook('dashboard:sidebar:collapsed', collapsed);
   },
   toggleSearch: () => {
     nuxtApp.hooks.callHook('dashboard:search:toggle');

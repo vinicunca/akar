@@ -125,7 +125,7 @@ function handleClick() {
   if (
     // When the current menu is disabled, do not expand
     props.disabled
-    || (rootMenu?.props.collapse && mode === 'vertical')
+    || (rootMenu?.props.collapsed && mode === 'vertical')
     // Do not expand in horizontal mode
     || mode === 'horizontal'
   ) {
@@ -145,7 +145,7 @@ function handleMouseenter(event: FocusEvent | MouseEvent, showTimeout = 300) {
   }
 
   if (
-    (!rootMenu?.props.collapse && rootMenu?.props.mode === 'vertical')
+    (!rootMenu?.props.collapsed && rootMenu?.props.mode === 'vertical')
     || props.disabled
   ) {
     if (subMenu) {
@@ -166,7 +166,7 @@ function handleMouseenter(event: FocusEvent | MouseEvent, showTimeout = 300) {
 
 function handleMouseleave(deepDispatch = false) {
   if (
-    !rootMenu?.props.collapse
+    !rootMenu?.props.collapsed
     && rootMenu?.props.mode === 'vertical'
     && subMenu
   ) {
