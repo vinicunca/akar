@@ -20,7 +20,6 @@ export const dashboardMenuTheme = {
     linkLabel: 'truncate',
     linkLabelExternalIcon: 'inline-block size-3 align-top color-text-dimmed',
     childList: 'isolate',
-    childLabel: 'text-xs color-text-highlighted px-1.5 py-0.5',
     childLink: 'group relative size-full flex items-start text-start text-sm before:(content-empty absolute -z-1 rounded-md inset-y-px inset-x-0) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2 p-1.5 gap-1.5',
     childLinkWrapper: 'min-w-0',
     childLinkIcon: 'size-5 shrink-0',

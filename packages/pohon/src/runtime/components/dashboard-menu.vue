@@ -1,7 +1,15 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { AAccordionRootProps, ANavigationMenuRootProps } from 'akar';
-import type { PAvatarProps, PBadgeProps, PIconProps, PLinkProps, PPopoverProps, PTooltipProps } from '../types';
+import type {
+  PAvatarProps,
+  PBadgeProps,
+  PDropdownMenuItem,
+  PDropdownMenuProps,
+  PIconProps,
+  PLinkProps,
+  PTooltipProps,
+} from '../types';
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-menu';
@@ -29,10 +37,11 @@ export interface PDashboardMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'c
    */
   tooltip?: boolean | PTooltipProps;
   /**
-   * Display a popover on the item when the menu is collapsed with the children list.
-   * This has priority over the global `popover` prop.
+   * Display a dropdown on the item when the menu is collapsed with the children list.
+   * This has priority over the global `dropdown` prop.
    */
-  popover?: boolean | PPopoverProps;
+  dropdown?: boolean | PDropdownMenuProps;
+  color?: PDropdownMenuItem['color'];
   /**
    * @IconifyIcon
    */
@@ -131,11 +140,11 @@ export interface PDashboardMenuProps<
    */
   tooltip?: boolean | PTooltipProps;
   /**
-   * Display a popover on the items when the menu is collapsed with the children list.
-   * `{ mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }`{lang="ts-type"}
+   * Display a dropdown on the items when the menu is collapsed with the children list.
+   * `{ content: { side: 'right', align: 'start', alignOffset: 2 } }`{lang="ts-type"}
    * @defaultValue false
    */
-  popover?: boolean | PPopoverProps;
+  dropdown?: boolean | PDropdownMenuProps;
   /** Display a line next to the active item. */
   highlight?: boolean;
   /**
@@ -201,10 +210,10 @@ import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PBadge from './badge.vue';
+import PDropdownMenu from './dropdown-menu.vue';
 import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
-import PPopover from './popover.vue';
 import PTooltip from './tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
@@ -218,7 +227,7 @@ const props = withDefaults(
     unmountOnHide: true,
     labelKey: 'label',
     tooltip: true,
-    popover: true,
+    dropdown: true,
   },
 );
 
@@ -246,12 +255,12 @@ const tooltipProps = toRef(() => defu(
   { delayDuration: 0, content: { side: 'right' } },
 ) as PTooltipProps);
 
-const popoverProps = toRef(() => defu(
-  isBoolean(props.popover)
+const dropdownProps = toRef(() => defu(
+  isBoolean(props.dropdown)
     ? {}
-    : props.popover,
-  { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } },
-) as PPopoverProps);
+    : props.dropdown,
+  { content: { side: 'right', align: 'start', alignOffset: 2 } },
+) as PDropdownMenuProps);
 
 const pohon = computed(() =>
   uv({
@@ -458,13 +467,21 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
           :disabled="item.disabled"
           @select="item.onSelect"
         >
-          <PPopover
-            v-if="collapsed && item.children?.length && (!!props.popover || !!item.popover)"
-            v-bind="{ ...popoverProps, ...(isBoolean(item.popover) ? {} : item.popover || {}) }"
-            :pohon="{ content: pohon.content({ class: [props.pohon?.content, item.pohon?.content] }) }"
+          <PDropdownMenu
+            v-if="collapsed && item.children?.length"
+            :items="[
+              [
+                {
+                  label: getProp({ object: item, path: props.labelKey as string }),
+                  type: 'label',
+                },
+              ],
+              item.children,
+            ]"
+            :modal="false"
+            v-bind="{ ...dropdownProps }"
           >
-            <PLinkBase
-              v-bind="slotProps"
+            <button
               :class="pohon.link({
                 class: [props.pohon?.link, item.pohon?.link, item.class],
                 active: active || item.active,
@@ -478,88 +495,8 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
                 :active="active || item.active"
                 :index="index"
               />
-            </PLinkBase>
-
-            <template #content="{ close }">
-              <slot
-                :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof PDashboardMenuSlots<T>)"
-                :item="item"
-                :active="active || item.active"
-                :index="index"
-                :pohon="pohon"
-                :close="close"
-              >
-                <ul
-                  :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })"
-                  data-pohon="dashboard-menu-child-list"
-                >
-                  <li
-                    :class="pohon.childLabel({ class: [props.pohon?.childLabel, item.pohon?.childLabel] })"
-                    data-pohon="dashboard-menu-child-label"
-                  >
-                    {{ getProp({ object: item, path: props.labelKey as string }) }}
-                  </li>
-                  <li
-                    v-for="(childItem, childIndex) in item.children"
-                    :key="childIndex"
-                    :class="pohon.childItem({ class: [props.pohon?.childItem, item.pohon?.childItem] })"
-                    data-pohon="dashboard-menu-child-item"
-                  >
-                    <PLink
-                      v-slot="{ active: childActive, ...childSlotProps }"
-                      v-bind="pickLinkProps(childItem)"
-                      custom
-                    >
-                      <ANavigationMenuLink
-                        as-child
-                        :active="childActive"
-                        @select="childItem.onSelect"
-                      >
-                        <PLinkBase
-                          v-bind="childSlotProps"
-                          :class="pohon.childLink({
-                            class: [props.pohon?.childLink, item.pohon?.childLink, childItem.class],
-                            active: childActive,
-                          })"
-                          data-pohon="dashboard-menu-child-link"
-                        >
-                          <PIcon
-                            v-if="childItem.icon"
-                            :name="childItem.icon"
-                            :class="pohon.childLinkIcon({
-                              class: [props.pohon?.childLinkIcon, item.pohon?.childLinkIcon],
-                              active: childActive,
-                            })"
-                            data-pohon="dashboard-menu-child-link-icon"
-                          />
-
-                          <span
-                            :class="pohon.childLinkLabel({
-                              class: [props.pohon?.childLinkLabel, item.pohon?.childLinkLabel],
-                              active: childActive,
-                            })"
-                            data-pohon="dashboard-menu-child-link-label"
-                          >
-                            {{ getProp({ object: childItem, path: props.labelKey as string }) }}
-
-                            <PIcon
-                              v-if="childItem.target === '_blank' && externalIcon !== false"
-                              :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
-                              :class="pohon.childLinkLabelExternalIcon({
-                                class: [props.pohon?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon],
-                                active: childActive,
-                              })"
-                              data-pohon="dashboard-menu-child-link-label-external-icon"
-                            />
-                          </span>
-                        </PLinkBase>
-                      </ANavigationMenuLink>
-                    </PLink>
-                  </li>
-                </ul>
-              </slot>
-            </template>
-          </PPopover>
+            </button>
+          </PDropdownMenu>
 
           <PTooltip
             v-else-if="collapsed && (!!props.tooltip || !!item.tooltip)"

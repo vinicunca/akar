@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { PDashboardMenuRaw } from 'pohon-ui';
+import type { PDashboardMenuItem, PDashboardMenuRaw } from 'pohon-ui';
 import {
   DashboardLayoutContent,
   DashboardLayoutMenu,
   PDashboardLayout,
 } from '#components';
-import { computed, mapTree, useDashboardExtraMenu, useDashboardMixedMenu, useI18n, usePreferences } from '#imports';
+import { computed, mapTree, useDashboardExtraMenu, useDashboardMixedMenu, useI18n, usePreferences, useRoute } from '#imports';
 
 import { clone } from '@vinicunca/perkakas';
 import { preferences, updatePreferences } from '~~/layers/preferences/app/preferences.init';
@@ -132,6 +132,7 @@ function toggleSidebar() {
 }
 
 const { t } = useI18n();
+const route = useRoute();
 
 /**
  * Wrap menu, translate menu label
@@ -150,12 +151,27 @@ function wrapperMenus(
     ? mapTree({
         tree: menus,
         mapper: (item) => {
-          return { ...clone(item), label: t(item.label) };
+          return {
+            ...clone(item),
+            color: isRouteInTree(item, route.path) ? 'primary' : undefined,
+            label: t(item.label),
+          };
         },
       })
     : menus.map((item) => {
-        return { ...clone(item), label: t(item.label) };
+        return {
+          ...clone(item),
+          color: isRouteInTree(item, route.path) ? 'primary' : undefined,
+          label: t(item.label),
+        };
       });
+}
+
+function isRouteInTree(item: PDashboardMenuItem, routePath: string): boolean {
+  if (item.children?.length) {
+    return item.children.some((child) => isRouteInTree(child, routePath));
+  }
+  return routePath === item.to;
 }
 </script>
 
