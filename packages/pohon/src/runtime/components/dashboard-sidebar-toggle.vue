@@ -50,7 +50,10 @@ const buttonProps = useForwardProps(
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as DashboardSidebarToggle['AppConfig'];
-const { sidebarOpen, toggleSidebar } = useDashboard({ sidebarOpen: ref(false), toggleSidebar: () => {} });
+const { sidebarOpen, toggleSidebar } = useDashboard({
+  sidebarOpen: ref(false),
+  toggleSidebar: () => {},
+});
 
 const pohon = computed(() =>
   uv({

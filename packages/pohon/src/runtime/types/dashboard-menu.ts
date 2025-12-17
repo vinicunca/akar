@@ -49,9 +49,9 @@ export interface PDashboardMenuRaw extends PDashboardMenuBadgeRaw {
    */
   icon?: Component | string;
   /**
-   * Menu name
+   * Menu label
    */
-  name: string;
+  label: string;
   /**
    * Order number
    */

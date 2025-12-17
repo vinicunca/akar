@@ -21,8 +21,6 @@ const emits = defineEmits<{
   }];
 }>();
 
-console.log('🚀 ~ props:', props.menus);
-
 function handleMenuSelect(item: PDashboardMenuItemPayload) {
   emits('select', {
     key: item.path,
@@ -41,11 +39,7 @@ function handleMenuOpen(item: PDashboardMenuItemPayload) {
     :collapse="collapse"
     :collapse-show-title="collapseShowTitle"
     :default-active="defaultActive"
-    :menus="menus"
-    :mode="mode"
-    :rounded="rounded"
-    scroll-to-active
-    :theme="theme"
+    :items="menus"
     @open="handleMenuOpen"
     @select="handleMenuSelect"
   />

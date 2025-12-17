@@ -31,8 +31,8 @@ export const scrollbarThemes = {
   scrollbar: {
     slots: {
       root: 'relative pohon-scrollbar',
-      shadowTop: 'scrollbar-top-shadow will-change-opacity opacity-0 h-12 w-full pointer-events-none transition-opacity-300 ease-in-out top-0 absolute z-10',
-      shadowBottom: 'scrollbar-bottom-shadow will-change-opacity opacity-0 h-12 w-full pointer-events-none transition-opacity-300 ease-in-out bottom-0 absolute z-10',
+      shadowTop: 'will-change-opacity opacity-0 h-12 w-full pointer-events-none transition-opacity-300 ease-in-out top-0 absolute z-10 bg-gradient-to-b from-background',
+      shadowBottom: 'will-change-opacity opacity-0 h-12 w-full pointer-events-none transition-opacity-300 ease-in-out bottom-0 absolute z-10 bg-gradient-to-t from-background',
     },
     variants: {
       shadowTopBorder: {

@@ -97,16 +97,18 @@ export interface PDashboardSidebarSlots {
 
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue';
-import { useAppConfig } from '#app';
+import { useAppConfig, useRoute } from '#imports';
 import { computed, useTemplateRef, watchEffect } from 'vue';
 import { uv } from '../utils/uv';
 
+import PButton from './button.vue';
+import PDashboardSidebarCollapse from './dashboard-sidebar-collapse.vue';
 import PScrollbar from './scrollbar.vue';
 
 const props = withDefaults(
   defineProps<PDashboardSidebarProps>(),
   {
-    collapseHeight: 42,
+    collapseHeight: 48,
     collapseWidth: 48,
     isHiddenSideVisible: true,
     isFixedExtra: false,
@@ -302,15 +304,20 @@ const pohon = computed(() =>
       <slot name="logo" />
     </div>
 
-    <!-- <PScrollbar
+    <PScrollbar
       :style="contentStyle"
       has-shadow
       has-shadow-border
     >
-  </PScrollbar> -->
-    <slot />
+      <slot />
+    </PScrollbar>
 
-    <div :style="collapseStyle" />
+    <div
+      :style="collapseStyle"
+      class="px-3 inline-flex items-center justify-between"
+    >
+      <PDashboardSidebarCollapse />
+    </div>
 
     <!-- <div
       v-if="isSidebarMixed"

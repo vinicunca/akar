@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
           {
             name: 'AccessPageControlDemo',
             path: '/admin/demos/access/page-control',
-            component: () => import('~/domains/admin/pages/demos/access.vue'),
+            component: () => import('~/domains/admin/pages/demos/access/page-control.vue'),
             meta: {
               icon: 'mdi:page-previous-outline',
               title: 'pages.demos.access.pageAccess',

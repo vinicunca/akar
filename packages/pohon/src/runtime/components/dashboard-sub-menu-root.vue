@@ -38,7 +38,7 @@ const hasChildren = computed(() => {
     :path="menu.path"
   >
     <template #title>
-      <span>{{ menu.name }}</span>
+      <span>{{ menu.label }}</span>
     </template>
   </PDashboardMenuItem>
 
@@ -59,7 +59,7 @@ const hasChildren = computed(() => {
     </template>
 
     <template #title>
-      <span>{{ menu.name }}</span>
+      <span>{{ menu.label }}</span>
     </template>
 
     <template

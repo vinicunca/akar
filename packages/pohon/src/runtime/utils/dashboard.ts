@@ -12,7 +12,7 @@ export interface DashboardContext extends Pick<UseResizableProps, 'storage' | 's
   collapseSidebar?: (collapsed: boolean) => void;
 }
 
-export const [useDashboard, provideDashboardContext] = createContext<DashboardContext>('DashboardGroup');
+export const [useDashboard, provideDashboardContext] = createContext<DashboardContext>('DashboardLayout');
 
 type VNodeChildAtom = Exclude<VNodeChild, Array<any>>;
 type RawSlots = Exclude<VNodeNormalizedChildren, Array<any> | null | string>;

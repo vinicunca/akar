@@ -89,7 +89,7 @@ export const defaultPreferences: Preferences = {
     showFixedButton: true,
     isHidden: false,
     mixedWidth: 80,
-    width: 224,
+    width: 300,
   },
   tabbar: {
     isDraggable: true,

@@ -134,7 +134,7 @@ function toggleSidebar() {
 const { t } = useI18n();
 
 /**
- * Wrap menu, translate menu name
+ * Wrap menu, translate menu label
  * @param options
  * @param options.menus original menu data
  * @param options.deep whether to wrap deeply. For a two-column layout, only the first layer needs to be wrapped, because deeper data will be re-wrapped in the expanded menu
@@ -150,11 +150,11 @@ function wrapperMenus(
     ? mapTree({
         tree: menus,
         mapper: (item) => {
-          return { ...clone(item), name: t(item.name) };
+          return { ...clone(item), label: t(item.label) };
         },
       })
     : menus.map((item) => {
-        return { ...clone(item), name: t(item.name) };
+        return { ...clone(item), label: t(item.label) };
       });
 }
 </script>

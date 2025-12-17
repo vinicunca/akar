@@ -23,6 +23,7 @@ export type PThemeColorPicker = UvConfig<typeof pohon>['colorPicker'];
 export type PThemeCommandPalette = UvConfig<typeof pohon>['commandPalette'];
 export type PThemeContainer = UvConfig<typeof pohon>['container'];
 export type PThemeContextMenu = UvConfig<typeof pohon>['contextMenu'];
+export type PThemeDashboardMenu = UvConfig<typeof pohon>['dashboardMenu'];
 export type PThemeDashboardGroup = UvConfig<typeof pohon>['dashboardGroup'];
 export type PThemeDashboardNavbar = UvConfig<typeof pohon>['dashboardNavbar'];
 export type PThemeDashboardPanel = UvConfig<typeof pohon>['dashboardPanel'];

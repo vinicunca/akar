@@ -2,14 +2,9 @@ export default {
   slots: {
     hiddenSide: '',
     root: '',
-    header: '',
-    body: '',
-    footer: '',
-    toggle: '',
-    handle: '',
-    content: '',
-    overlay: '',
+    collapseBox: '',
   },
+
   variants: {
     sidebarMixed: {
       true: {
@@ -17,30 +12,6 @@ export default {
       },
       false: {
         root: '',
-      },
-    },
-
-    menu: {
-      true: {
-        header: '',
-        body: '',
-        footer: '',
-      },
-    },
-    side: {
-      left: {
-        root: '',
-      },
-      right: {
-        root: '',
-      },
-    },
-    toggleSide: {
-      left: {
-        toggle: '',
-      },
-      right: {
-        toggle: '',
       },
     },
   },

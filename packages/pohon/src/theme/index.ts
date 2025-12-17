@@ -23,6 +23,7 @@ export { default as dashboardFooter } from './dashboard-footer';
 export { default as dashboardGroup } from './dashboard-group';
 export { default as dashboardHeader } from './dashboard-header';
 export { default as dashboardLayout } from './dashboard-layout';
+export { default as dashboardMenu } from './dashboard-menu';
 export { default as dashboardMenuItem } from './dashboard-menu-item';
 export { default as dashboardMenuNormal } from './dashboard-menu-normal';
 export { default as dashboardMenuRoot } from './dashboard-menu-root';

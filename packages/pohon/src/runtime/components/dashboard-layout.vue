@@ -199,13 +199,14 @@ export interface PDashboardLayoutSlots {
 
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue';
-import { useAppConfig } from '#imports';
+import { useAppConfig, useNuxtApp, useRuntimeHook } from '#imports';
 import { useMouse, useScroll, useThrottleFn } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, ref, useTemplateRef, watch } from 'vue';
 import { useLayoutFooterStyle, useLayoutHeaderStyle } from '../composables/use-dashboard-styles';
 import { SCROLL_FIXED_CLASS } from '../composables/use-scroll-lock';
 import { ELEMENT_ID_MAIN_CONTENT, P_DASHBOARD_LAYOUT } from '../constants';
+import { provideDashboardContext, useDashboard } from '../utils/dashboard';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -704,6 +705,19 @@ function handleHeaderToggle() {
 function handleClickMask() {
   isSidebarCollapse.value = true;
 }
+
+const nuxtApp = useNuxtApp();
+
+provideDashboardContext({
+  collapseSidebar: (collapsed: boolean) => {
+    nuxtApp.hooks.callHook('dashboard:sidebar:collapse', collapsed);
+  },
+  sidebarCollapsed: isSidebarCollapse,
+});
+
+useRuntimeHook('dashboard:sidebar:collapse', (value: boolean) => {
+  isSidebarCollapse.value = value;
+});
 
 const appConfig = useAppConfig() as DashboardLayout['AppConfig'];
 
