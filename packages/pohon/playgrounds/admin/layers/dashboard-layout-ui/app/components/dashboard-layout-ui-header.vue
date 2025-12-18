@@ -1,11 +1,8 @@
-<script lang="ts">
-import type { AppConfig } from '@nuxt/schema';
-import type { ComponentConfig } from '../types/uv';
-import theme from '#build/pohon/dashboard-header';
+<script setup lang="ts">
+import type { CSSProperties } from 'vue';
+import { computed, useSlots } from 'vue';
 
-type DashboardHeader = ComponentConfig<typeof theme, AppConfig, 'dashboardHeader'>;
-
-export interface PDashboardHeaderProps {
+interface Props {
   /**
    * Full width
    */
@@ -38,18 +35,10 @@ export interface PDashboardHeaderProps {
    * zIndex
    */
   zIndex: number;
-  class?: any;
 }
-</script>
-
-<script setup lang="ts">
-import type { CSSProperties } from 'vue';
-import { useAppConfig } from '#app';
-import { computed, useSlots } from 'vue';
-import { uv } from '../utils/uv';
 
 const props = withDefaults(
-  defineProps<PDashboardHeaderProps>(),
+  defineProps<Props>(),
   {},
 );
 
@@ -71,24 +60,13 @@ const logoStyle = computed<CSSProperties>(() => {
     minWidth: `${props.isMobile ? 40 : props.sidebarWidth}px`,
   };
 });
-
-const appConfig = useAppConfig() as DashboardHeader['AppConfig'];
-
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.dashboardHeader || {}),
-  }),
-);
 </script>
 
 <template>
   <header
+    :class="theme"
     :style="style"
-    :class="[
-      theme,
-      pohon({ class: props.class }),
-    ]"
+    class="bg-header pl-2 border-b flex flex-[0_0_auto] w-full transition-margin-200 items-center top-0"
   >
     <div
       v-if="slots.logo"

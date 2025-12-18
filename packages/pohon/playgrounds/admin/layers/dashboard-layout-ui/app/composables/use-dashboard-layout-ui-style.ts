@@ -1,19 +1,13 @@
+import type { VisibleDomRect } from '#imports';
 import type { CSSProperties } from 'vue';
-
-import type { VisibleDomRect } from '../utils/dom';
+import { getElementVisibleRect } from '#imports';
 import { useCssVar, useDebounceFn } from '@vueuse/core';
-import { computed, onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
-import {
-  CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT,
-  CSS_VARIABLE_LAYOUT_CONTENT_WIDTH,
-  CSS_VARIABLE_LAYOUT_FOOTER_HEIGHT,
-  CSS_VARIABLE_LAYOUT_HEADER_HEIGHT,
-} from '../constants';
-import { getElementVisibleRect } from '../utils/dom';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT, CSS_VARIABLE_LAYOUT_CONTENT_WIDTH, CSS_VARIABLE_LAYOUT_FOOTER_HEIGHT, CSS_VARIABLE_LAYOUT_HEADER_HEIGHT } from '../constants';
 
 export function useLayoutContentStyle() {
   let resizeObserver: null | ResizeObserver = null;
-  const contentElement = useTemplateRef<HTMLElement>('contentElement');
+  const contentElement = ref<HTMLDivElement>();
   const visibleDomRect = ref<null | VisibleDomRect>(null);
   const contentHeight = useCssVar(CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT);
   const contentWidth = useCssVar(CSS_VARIABLE_LAYOUT_CONTENT_WIDTH);

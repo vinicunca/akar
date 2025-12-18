@@ -1,3 +1,11 @@
+export function triggerWindowResize(): void {
+  // Create a new resize event
+  const resizeEvent = new Event('resize');
+
+  // Trigger the window's resize event
+  window.dispatchEvent(resizeEvent);
+}
+
 export interface VisibleDomRect {
   bottom: number;
   height: number;
