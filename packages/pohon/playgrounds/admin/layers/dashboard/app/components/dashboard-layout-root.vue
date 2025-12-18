@@ -221,12 +221,12 @@ function isRouteInTree(item: PDashboardMenuItem, routePath: string): boolean {
 
     <template #menu>
       <DashboardLayoutMenu
-        :accordion="preferences.navigation.isAccordion"
-        :collapsed="preferences.sidebar.isCollapsed"
-        :collapse-show-title="preferences.sidebar.showCollapsedTitle"
+        :is-accordion="preferences.navigation.isAccordion"
+        :is-collapsed="preferences.sidebar.isCollapsed"
+        :show-title-when-collapsed="preferences.sidebar.showCollapsedTitle"
         :default-active="sidebarActive"
         :menus="wrapperMenus({ menus: sidebarMenus })"
-        :rounded="isMenuRounded"
+        :is-rounded="isMenuRounded"
         :theme="sidebarTheme"
         mode="vertical"
         @open="handleMenuOpen"

@@ -80,17 +80,17 @@ export interface PDashboardMenuProps {
    * Whether to enable accordion mode
    * @default true
    */
-  accordion?: boolean;
+  isAccordion?: boolean;
   /**
    * Whether the menu is collapsed
    * @default false
    */
-  collapsed?: boolean;
+  isCollapsed?: boolean;
   /**
    * Whether to show menu names when the menu is collapsed
    * @default false
    */
-  collapseShowTitle?: boolean;
+  showTitleWhenCollapsed?: boolean;
   /**
    * Default active menu
    */
@@ -108,7 +108,7 @@ export interface PDashboardMenuProps {
    * Whether to use rounded style
    * @default true
    */
-  rounded?: boolean;
+  isRounded?: boolean;
   /**
    * Whether to automatically scroll to the active menu item
    * @default false

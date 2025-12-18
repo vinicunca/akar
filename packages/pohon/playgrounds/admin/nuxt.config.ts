@@ -7,7 +7,10 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-07-09',
 
-  css: ['~/assets/css/main.css'],
+  css: [
+    '~/assets/css/main.css',
+    '~/assets/css/dashboard-menu.css',
+  ],
 
   devtools: {
     enabled: true,

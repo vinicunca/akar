@@ -105,6 +105,7 @@ const pohon = computed(() =>
       rootMenu.theme,
       pohon.root({ class: props.pohon?.root }),
     ]"
+    class="dashboard-menu-item"
     :data-is-active="active"
     :data-is-disabled="disabled"
     :data-collapse-show-title="collapseShowTitle"

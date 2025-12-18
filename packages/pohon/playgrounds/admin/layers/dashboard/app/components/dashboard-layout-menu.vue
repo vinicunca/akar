@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import type { PDashboardMenuItemPayload, PDashboardMenuProps, PDashboardMenuRaw } from 'pohon-ui';
+import type { PDashboardMenuItemPayload, PDashboardMenuRaw, PDashboardMenuRootProps } from 'pohon-ui';
 import { PDashboardMenu } from '#components';
 
-interface Props extends PDashboardMenuProps {
+interface Props extends PDashboardMenuRootProps {
   menus?: Array<PDashboardMenuRaw>;
 }
 
 const props = withDefaults(
   defineProps<Props>(),
   {
-    accordion: true,
+    isAccordion: false,
     menus: () => [],
   },
 );
@@ -17,7 +17,7 @@ const emits = defineEmits<{
   open: [PDashboardMenuItemPayload];
   select: [{
     key: string;
-    mode: PDashboardMenuProps['mode'];
+    mode: PDashboardMenuRootProps['mode'];
   }];
 }>();
 
@@ -35,8 +35,13 @@ function handleMenuOpen(item: PDashboardMenuItemPayload) {
 
 <template>
   <PDashboardMenu
-    :collapsed="collapsed"
-    :items="menus"
-    :unmount-on-hide="false"
+    :is-accordion="isAccordion"
+    :is-collapsed="isCollapsed"
+    :show-title-when-collapsed="showTitleWhenCollapsed"
+    :default-active="defaultActive"
+    :is-rounded="isRounded"
+    :menus="menus"
+    @open="handleMenuOpen"
+    @select="handleMenuSelect"
   />
 </template>

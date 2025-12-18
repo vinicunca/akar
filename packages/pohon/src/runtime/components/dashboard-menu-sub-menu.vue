@@ -69,14 +69,15 @@ createSubMenuContext({
   removeSubMenu,
 });
 
-const opened = computed(() => {
+const isOpened = computed(() => {
   return rootMenu?.openedMenus.includes(props.path);
 });
+
 const isTopLevelMenuSubmenu = computed(
   () => parentMenu.value?.type.name === P_DASHBOARD_MENU_ROOT,
 );
 const mode = computed(() => rootMenu?.props.mode ?? 'vertical');
-const rounded = computed(() => rootMenu?.props.rounded);
+const isRounded = computed(() => rootMenu?.props.isRounded);
 const currentLevel = computed(() => subMenu?.level ?? 0);
 const isFirstLevel = computed(() => {
   return currentLevel.value === 1;
@@ -92,7 +93,7 @@ const contentProps = computed<AHoverCardContentProps>(() => {
   };
 });
 
-const active = computed(() => {
+const isActive = computed(() => {
   let isActive = false;
 
   Object.values(items.value).forEach((item) => {
@@ -125,7 +126,7 @@ function handleClick() {
   if (
     // When the current menu is disabled, do not expand
     props.disabled
-    || (rootMenu?.props.collapsed && mode === 'vertical')
+    || (rootMenu?.props.isCollapsed && mode === 'vertical')
     // Do not expand in horizontal mode
     || mode === 'horizontal'
   ) {
@@ -133,7 +134,7 @@ function handleClick() {
   }
 
   rootMenu?.handleSubMenuClick({
-    active: active.value,
+    active: isActive.value,
     parentPaths: parentPaths.value,
     path: props.path,
   });
@@ -145,7 +146,7 @@ function handleMouseenter(event: FocusEvent | MouseEvent, showTimeout = 300) {
   }
 
   if (
-    (!rootMenu?.props.collapsed && rootMenu?.props.mode === 'vertical')
+    (!rootMenu?.props.isCollapsed && rootMenu?.props.mode === 'vertical')
     || props.disabled
   ) {
     if (subMenu) {
@@ -166,7 +167,7 @@ function handleMouseenter(event: FocusEvent | MouseEvent, showTimeout = 300) {
 
 function handleMouseleave(deepDispatch = false) {
   if (
-    !rootMenu?.props.collapsed
+    !rootMenu?.props.isCollapsed
     && rootMenu?.props.mode === 'vertical'
     && subMenu
   ) {
@@ -191,11 +192,11 @@ function handleMouseleave(deepDispatch = false) {
 }
 
 const menuIcon = computed(() =>
-  active.value ? props.activeIcon || props.icon : props.icon,
+  isActive.value ? props.activeIcon || props.icon : props.icon,
 );
 
 const item = reactive({
-  active,
+  active: isActive,
   parentPaths,
   path: props.path,
 });
@@ -213,14 +214,17 @@ onBeforeUnmount(() => {
 
 <template>
   <li
-    :class="[
-    ]"
+    class="dashboard-menu-sub-menu"
+    :data-is-opened="isOpened"
+    :data-is-active="isActive"
+    :data-disabled="disabled"
     @focus="handleMouseenter"
     @mouseenter="handleMouseenter"
     @mouseleave="() => handleMouseleave()"
   >
     <template v-if="rootMenu.isMenuPopup">
       <PPopover
+        class="dashboard-menu-popup-container"
         :content-class="[
           rootMenu.theme,
         ]"
@@ -230,7 +234,7 @@ onBeforeUnmount(() => {
         mode="hover"
       >
         <PDashboardMenuSubMenuContent
-          :active="active"
+          :data-is-active="isActive"
           :icon="menuIcon"
           :is-menu-more="isSubMenuMore"
           :is-top-level-menu-submenu="isTopLevelMenuSubmenu"
@@ -261,7 +265,7 @@ onBeforeUnmount(() => {
 
     <template v-else>
       <PDashboardMenuSubMenuContent
-        :active="active"
+        :data-is-active="isActive"
         :icon="menuIcon"
         :is-menu-more="isSubMenuMore"
         :is-top-level-menu-submenu="isTopLevelMenuSubmenu"
@@ -278,7 +282,9 @@ onBeforeUnmount(() => {
 
       <PDashboardCollapseTransition>
         <ul
-          v-show="opened"
+          v-show="isOpened"
+          class="dashboard-menu"
+          :data-is-rounded="isRounded"
           :style="subMenuStyle"
         >
           <slot />

@@ -36,7 +36,7 @@ export const dashboardThemes = {
   } satisfies PThemeDashboardContent,
   dashboardMenuRoot: {
     slots: {
-      root: 'relative pl-0 m-0 list-none bg-background box-border',
+      // root: 'relative pl-0 m-0 list-none bg-background box-border',
     },
   } satisfies PThemeDashboardMenuRoot,
   dashboardMenuItem: {

@@ -6,8 +6,14 @@ import theme from '#build/pohon/dashboard-menu-root';
 
 type DashboardMenuRoot = ComponentConfig<typeof theme, AppConfig, 'dashboardMenuRoot'>;
 
-export interface PDashboardMenuRoot extends PDashboardMenuProps {
+export interface PDashboardMenuRootProps extends PDashboardMenuProps {
   pohon?: DashboardMenuRoot['slots'];
+}
+
+export interface PDashboardMenuRootEmits {
+  close: [PDashboardMenuItemPayload];
+  open: [PDashboardMenuItemPayload];
+  select: [PDashboardMenuItemPayload];
 }
 </script>
 
@@ -31,29 +37,24 @@ defineOptions({
 });
 
 const props = withDefaults(
-  defineProps<PDashboardMenuRoot>(),
+  defineProps<PDashboardMenuRootProps>(),
   {
-    accordion: true,
-    collapse: false,
+    isAccordion: false,
+    isCollapsed: false,
     mode: 'vertical',
-    rounded: true,
     scrollToActive: false,
-    theme: 'dark',
+    theme: 'light',
   },
 );
 
-const emits = defineEmits<{
-  close: [PDashboardMenuItemPayload];
-  open: [PDashboardMenuItemPayload];
-  select: [PDashboardMenuItemPayload];
-}>();
+const emits = defineEmits<PDashboardMenuRootEmits>();
 
 const menuStyle = useMenuStyle();
 const slots = useSlots();
 const menu = ref<HTMLUListElement>();
 const sliceIndex = ref(-1);
 const openedMenus = ref<PDashboardMenuProvider['openedMenus']>(
-  props.defaultOpeneds && !props.collapse ? [...props.defaultOpeneds] : [],
+  props.defaultOpeneds && !props.isCollapsed ? [...props.defaultOpeneds] : [],
 );
 const activePath = ref<PDashboardMenuProvider['activePath']>(props.defaultActive);
 const items = ref<PDashboardMenuProvider['items']>({});
@@ -62,7 +63,7 @@ const mouseInChild = ref(false);
 
 const isMenuPopup = computed<PDashboardMenuProvider['isMenuPopup']>(() => {
   return (
-    props.mode === 'horizontal' || (props.mode === 'vertical' && props.collapse)
+    props.mode === 'horizontal' || (props.mode === 'vertical' && props.isCollapsed)
   );
 });
 
@@ -82,7 +83,7 @@ const getSlot = computed(() => {
 });
 
 watch(
-  () => props.collapse,
+  () => props.isCollapsed,
   (value) => {
     if (value) {
       openedMenus.value = [];
@@ -204,7 +205,7 @@ function handleResize() {
 }
 
 const enableScroll = computed(
-  () => props.scrollToActive && props.mode === 'vertical' && !props.collapse,
+  () => props.scrollToActive && props.mode === 'vertical' && !props.isCollapsed,
 );
 
 const { scrollToActiveItem } = useMenuScroll(activePath, {
@@ -241,8 +242,8 @@ function updateActiveName(val: string) {
 }
 
 function handleMenuItemClick(data: PDashboardMenuItemPayload) {
-  const { collapse, mode } = props;
-  if (mode === 'horizontal' || collapse) {
+  const { isCollapsed, mode } = props;
+  if (mode === 'horizontal' || isCollapsed) {
     openedMenus.value = [];
   }
   const { parentPaths, path } = data;
@@ -272,7 +273,7 @@ function close(path: string) {
 }
 
 function closeMenu({ path, parentPaths }: PDashboardMenuItemPayload) {
-  if (props.accordion) {
+  if (props.isAccordion) {
     openedMenus.value = subMenus.value[path]?.parentPaths ?? [];
   }
 
@@ -286,7 +287,7 @@ function openMenu({ path, parentPaths }: PDashboardMenuItemPayload) {
     return;
   }
 
-  if (props.accordion) {
+  if (props.isAccordion) {
     const activeParentPaths = getActivePaths();
     if (activeParentPaths.includes(path)) {
       parentPaths = activeParentPaths;
@@ -319,7 +320,7 @@ function removeMenuItem(item: PDashboardMenuItemRegistered) {
 function getActivePaths() {
   const activeItem = activePath.value && items.value[activePath.value];
 
-  if (!activeItem || props.mode === 'horizontal' || props.collapse) {
+  if (!activeItem || props.mode === 'horizontal' || props.isCollapsed) {
     return [];
   }
 
@@ -339,14 +340,15 @@ const pohon = computed(() =>
 <template>
   <ul
     ref="menu"
+    class="dashboard-menu"
     :class="[
       props.theme,
       pohon.root({ class: props.pohon?.root }),
     ]"
-    :data-is-mode="mode"
-    :data-is-theme="theme"
-    :data-is-rounded="rounded"
-    :data-is-collapse="collapse"
+    :data-mode="mode"
+    :data-theme="props.theme"
+    :data-is-collapsed="props.isCollapsed"
+    :data-is-rounded="props.isRounded"
     :data-is-menu-align="mode === 'horizontal'"
     :style="menuStyle"
     role="menu"
@@ -354,7 +356,7 @@ const pohon = computed(() =>
     <template v-if="mode === 'horizontal' && getSlot.showSlotMore">
       <template
         v-for="item in getSlot.slotDefault"
-        :key="item.key"
+        :key="(item as any).key"
       >
         <component :is="item" />
       </template>
@@ -364,11 +366,12 @@ const pohon = computed(() =>
         path="sub-menu-more"
       >
         <template #title>
-          <!-- <Ellipsis class="size-4" /> -->
+          <i class="i-lucide-ellipsis size-4" />
         </template>
+
         <template
           v-for="item in getSlot.slotMore"
-          :key="item.key"
+          :key="(item as any).key"
         >
           <component :is="item" />
         </template>

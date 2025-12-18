@@ -3,8 +3,8 @@ import type { PDashboardMenuRaw } from '../types';
 
 import { computed } from 'vue';
 import PDashboardMenuItem from './dashboard-menu-item.vue';
+import PDashboardMenuSubMenuRoot from './dashboard-menu-sub-menu-root.vue';
 import PDashboardMenuSubMenu from './dashboard-menu-sub-menu.vue';
-import PDashboardSubMenuRoot from './dashboard-sub-menu-root.vue';
 
 interface Props {
   menu: PDashboardMenuRaw;
@@ -66,7 +66,7 @@ const hasChildren = computed(() => {
       v-for="childItem in menu.children || []"
       :key="childItem.path"
     >
-      <PDashboardSubMenuRoot :menu="childItem" />
+      <PDashboardMenuSubMenuRoot :menu="childItem" />
     </template>
   </PDashboardMenuSubMenu>
 </template>

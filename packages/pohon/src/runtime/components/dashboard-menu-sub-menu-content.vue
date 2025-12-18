@@ -7,7 +7,6 @@ import theme from '#build/pohon/dashboard-menu-sub-menu-content';
 type DashboardMenuSubMenuContent = ComponentConfig<typeof theme, AppConfig, 'dashboardMenuSubMenuContent'>;
 
 export interface PDashboardMenuSubMenuContent extends PDashboardMenuItemBaseProps {
-  active?: boolean;
   isMenuMore?: boolean;
   isTopLevelMenuSubmenu: boolean;
   level?: number;
@@ -38,7 +37,7 @@ const opened = computed(() => {
 });
 
 const collapse = computed(() => {
-  return rootMenu.props.collapsed;
+  return rootMenu.props.isCollapsed;
 });
 
 const isFirstLevel = computed(() => {
@@ -47,7 +46,7 @@ const isFirstLevel = computed(() => {
 
 const getCollapseShowTitle = computed(() => {
   return (
-    rootMenu.props.collapseShowTitle && isFirstLevel.value && collapse.value
+    rootMenu.props.showTitleWhenCollapsed && isFirstLevel.value && collapse.value
   );
 });
 
@@ -91,11 +90,10 @@ const pohon = computed(() =>
 
 <template>
   <div
+    class="dashboard-menu-sub-menu-content"
     :class="[
       pohon.root({ class: props.pohon?.root }),
-      { 'color-primary': active },
     ]"
-    :data-active="active"
     :data-is-collapse-show-title="getCollapseShowTitle"
     :data-is-more="isMenuMore"
   >
