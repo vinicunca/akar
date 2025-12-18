@@ -95,8 +95,18 @@ export const dashboardMenuTheme = {
       active: false,
       variant: 'pill',
       class: {
+        // link: 'group-has-[[data-active]]/menu-item:color-primary hover:color-text-highlighted hover:before:bg-background-elevated/50 transition-colors-280 before:transition-colors-280',
         link: 'data-[state=open]:group-has-[[data-active]]/menu-item:color-primary hover:color-text-highlighted hover:before:bg-background-elevated/50 transition-colors-280 before:transition-colors-280',
         linkLeadingIcon: 'group-data-[state=open]:group-has-[[data-active]]/menu-item:color-primary group-hover:color-text transition-colors-280',
+      },
+    },
+    {
+      disabled: false,
+      active: false,
+      variant: 'pill',
+      oke: true,
+      class: {
+        link: 'group-has-[[data-active]]/menu-item:color-primary',
       },
     },
     ...BRANDS.map((color) => ({

@@ -440,6 +440,7 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
   <DefineItemTemplate v-slot="{ item, index, level = 0 }">
     <component
       :is="!collapsed ? AAccordionItem : ANavigationMenuItem"
+      v-slot="{ open }"
       as="li"
       :value="item.value || (level > 0 ? `item-${level}-${index}` : `item-${index}`)"
     >

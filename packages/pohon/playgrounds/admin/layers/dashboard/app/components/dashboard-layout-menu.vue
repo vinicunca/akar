@@ -37,5 +37,6 @@ function handleMenuOpen(item: PDashboardMenuItemPayload) {
   <PDashboardMenu
     :collapsed="collapsed"
     :items="menus"
+    :unmount-on-hide="false"
   />
 </template>
