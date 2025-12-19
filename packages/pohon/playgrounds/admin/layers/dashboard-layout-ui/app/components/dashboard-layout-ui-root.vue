@@ -6,7 +6,7 @@ import { PButton } from '#components';
 import { useDashboardLayoutUi, useLayoutFooterStyle, useLayoutHeaderStyle } from '#imports';
 import { useMouse, useScroll, useThrottleFn } from '@vueuse/core';
 import { computed, ref, useTemplateRef, watch } from 'vue';
-import { ELEMENT_ID_MAIN_CONTENT } from '../constants';
+import { ELEMENT_ID_MAIN_CONTENT } from '../dashboard-layout-ui.constants';
 import DashboardLayoutUiContent from './dashboard-layout-ui-content.vue';
 import DashboardLayoutUiFooter from './dashboard-layout-ui-footer.vue';
 import DashboardLayoutUiHeader from './dashboard-layout-ui-header.vue';
