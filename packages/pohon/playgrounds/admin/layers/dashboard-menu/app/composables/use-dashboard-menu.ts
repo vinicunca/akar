@@ -1,11 +1,11 @@
-import type { DashboardMenuUiSubMenuProvider } from '../dashboard-menu-ui.types';
+import type { DashboardMenuSubMenuProvider } from '../dashboard-menu.types';
 
 import { computed, getCurrentInstance } from 'vue';
 
-import { DASHBOARD_MENU_UI_ROOT, DASHBOARD_MENU_UI_SUB_MENU } from '../dashboard-menu-ui.constants';
-import { findComponentUpward } from '../utils/dashboard-menu-ui.utils';
+import { DASHBOARD_MENU_ROOT, DASHBOARD_MENU_SUB_MENU } from '../dashboard-menu.constants';
+import { findComponentUpward } from '../utils/dashboard-menu.utils';
 
-export function useDashboardMenuUi() {
+export function useDashboardMenu() {
   const instance = getCurrentInstance();
   if (!instance) {
     throw new Error('instance is required');
@@ -19,7 +19,7 @@ export function useDashboardMenuUi() {
 
     const paths: Array<string> = [instance.props.path as string];
 
-    while (parent?.type.name !== DASHBOARD_MENU_UI_ROOT) {
+    while (parent?.type.name !== DASHBOARD_MENU_ROOT) {
       if (parent?.props.path) {
         paths.unshift(parent.props.path as string);
       }
@@ -32,7 +32,7 @@ export function useDashboardMenuUi() {
   const parentMenu = computed(() => {
     return findComponentUpward({
       instance,
-      parentNames: [DASHBOARD_MENU_UI_ROOT, DASHBOARD_MENU_UI_SUB_MENU],
+      parentNames: [DASHBOARD_MENU_ROOT, DASHBOARD_MENU_SUB_MENU],
     });
   });
 
@@ -42,7 +42,7 @@ export function useDashboardMenuUi() {
   };
 }
 
-export function useDashboardMenuUiStyle(menu?: DashboardMenuUiSubMenuProvider) {
+export function useDashboardMenuStyle(menu?: DashboardMenuSubMenuProvider) {
   const subMenuStyle = computed(() => {
     return {
       '--menu-level': menu ? (menu?.level ?? 0 + 1) : 0,

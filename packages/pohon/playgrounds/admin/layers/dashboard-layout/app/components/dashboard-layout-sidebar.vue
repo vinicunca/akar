@@ -4,8 +4,8 @@ import { PScrollbar } from '#components';
 import { useScrollLock } from '@vueuse/core';
 
 import { computed, shallowRef, useSlots, watchEffect } from 'vue';
-import DashboardLayoutUiSidebarCollapseButton from './dashboard-layout-ui-sidebar-collapse-button.vue';
-import DashboardLayoutUiSidebarFixedButton from './dashboard-layout-ui-sidebar-fixed-button.vue';
+import DashboardLayoutSidebarCollapseButton from './dashboard-layout-sidebar-collapse-button.vue';
+import DashboardLayoutSidebarFixedButton from './dashboard-layout-sidebar-fixed-button.vue';
 
 interface Props {
   /**
@@ -278,7 +278,7 @@ function handleMouseleave() {
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave"
   >
-    <DashboardLayoutUiSidebarFixedButton
+    <DashboardLayoutSidebarFixedButton
       v-if="!collapse && !isSidebarMixed"
       v-model:expand-on-hover="expandOnHover"
     />
@@ -301,7 +301,7 @@ function handleMouseleave() {
 
     <div :style="collapseStyle" />
 
-    <DashboardLayoutUiSidebarCollapseButton
+    <DashboardLayoutSidebarCollapseButton
       v-if="showCollapseButton && !isSidebarMixed"
       v-model:collapsed="collapse"
     />
@@ -315,12 +315,12 @@ function handleMouseleave() {
       :style="extraStyle"
       class="bg-sidebar border-r border-border h-full transition-all-200 top-0 fixed overflow-hidden"
     >
-      <DashboardLayoutUiSidebarCollapseButton
+      <DashboardLayoutSidebarCollapseButton
         v-if="isSidebarMixed && expandOnHover"
         v-model:collapsed="extraCollapse"
       />
 
-      <DashboardLayoutUiSidebarFixedButton
+      <DashboardLayoutSidebarFixedButton
         v-if="!extraCollapse"
         v-model:expand-on-hover="expandOnHover"
       />

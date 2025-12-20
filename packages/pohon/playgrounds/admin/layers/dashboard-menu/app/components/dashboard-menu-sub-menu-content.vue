@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { DashboardMenuUiMenuItemProps } from '../dashboard-menu-ui.types';
+import type { DashboardMenuMenuItemProps } from '../dashboard-menu.types';
 
 import { PIcon } from '#components';
 import { computed } from 'vue';
 
-import { useDashboardMenuUiContext } from '../composables/use-dashboard-menu-ui-context';
+import { useDashboardMenuContext } from '../composables/use-dashboard-menu-context';
 
-interface Props extends DashboardMenuUiMenuItemProps {
+interface Props extends DashboardMenuMenuItemProps {
   isMenuMore?: boolean;
   isTopLevelMenuSubmenu: boolean;
   level?: number;
@@ -20,7 +20,7 @@ const props = withDefaults(
   },
 );
 
-const rootMenu = useDashboardMenuUiContext();
+const rootMenu = useDashboardMenuContext();
 
 const opened = computed(() => {
   return rootMenu?.openedMenus.includes(props.path);

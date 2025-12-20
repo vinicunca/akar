@@ -13,7 +13,7 @@ export type PDashboardLayoutHeaderModeType = 'auto' | 'auto-scroll' | 'fixed' | 
 
 export type PDashboardThemeModeType = 'auto' | 'dark' | 'light';
 
-export interface DashboardLayoutUiProps {
+export interface DashboardLayoutProps {
   /**
    * Fixed width for the content area
    * @default 'wide'

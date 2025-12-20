@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DashboardMenuUiRecord } from '../dashboard-menu-ui.types';
+import type { DashboardMenuRecord } from '../dashboard-menu.types';
 import { PIcon } from '#components';
 
 interface NormalMenuProps {
@@ -14,7 +14,7 @@ interface NormalMenuProps {
   /**
    * Menu items
    */
-  menus?: Array<DashboardMenuUiRecord>;
+  menus?: Array<DashboardMenuRecord>;
   /**
    * Whether to use rounded style
    * @default true
@@ -37,11 +37,11 @@ const props = withDefaults(
 );
 
 const emits = defineEmits<{
-  enter: [DashboardMenuUiRecord];
-  select: [DashboardMenuUiRecord];
+  enter: [DashboardMenuRecord];
+  select: [DashboardMenuRecord];
 }>();
 
-function menuIcon(menu: DashboardMenuUiRecord) {
+function menuIcon(menu: DashboardMenuRecord) {
   return props.activePath === menu.path
     ? menu.activeIcon || menu.icon
     : menu.icon;

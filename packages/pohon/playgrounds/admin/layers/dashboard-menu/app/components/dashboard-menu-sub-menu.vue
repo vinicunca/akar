@@ -1,21 +1,21 @@
 <script lang="ts" setup>
 import type { AHoverCardContentProps } from 'akar';
 
-import type { DashboardMenuUiMenuItemRegistered, DashboardMenuUiMenuProvider, DashboardMenuUiSubMenuProps } from '../dashboard-menu-ui.types';
+import type { DashboardMenuMenuItemRegistered, DashboardMenuMenuProvider, DashboardMenuSubMenuProps } from '../dashboard-menu.types';
 import { PPopover } from '#components';
 
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
-import { useDashboardMenuUi, useDashboardMenuUiStyle } from '~~/layers/dashboard-menu-ui/app/composables/use-dashboard-menu-ui';
+import { useDashboardMenu, useDashboardMenuStyle } from '../composables/use-dashboard-menu';
 import {
-  createDashboardMenuUiSubMenuContext,
-  useDashboardMenuUiContext,
-  useDashboardMenuUiSubMenuContext,
-} from '~~/layers/dashboard-menu-ui/app/composables/use-dashboard-menu-ui-context';
-import { DASHBOARD_MENU_UI_SUB_MENU } from '../dashboard-menu-ui.constants';
-import DashboardMenuUiCollapseTransition from './dashboard-menu-ui-collapse-transition.vue';
-import DashboardMenuUiSubMenuContent from './dashboard-menu-ui-sub-menu-content.vue';
+  createDashboardMenuSubMenuContext,
+  useDashboardMenuContext,
+  useDashboardMenuSubMenuContext,
+} from '../composables/use-dashboard-menu-context';
+import { DASHBOARD_MENU_ROOT, DASHBOARD_MENU_SUB_MENU } from '../dashboard-menu.constants';
+import DashboardMenuCollapseTransition from './dashboard-menu-collapse-transition.vue';
+import DashboardMenuSubMenuContent from './dashboard-menu-sub-menu-content.vue';
 
-defineOptions({ name: DASHBOARD_MENU_UI_SUB_MENU });
+defineOptions({ name: DASHBOARD_MENU_SUB_MENU });
 
 const props = withDefaults(
   defineProps<Props>(),
@@ -25,22 +25,22 @@ const props = withDefaults(
   },
 );
 
-interface Props extends DashboardMenuUiSubMenuProps {
+interface Props extends DashboardMenuSubMenuProps {
   isSubMenuMore?: boolean;
 }
 
-const { parentMenu, parentPaths } = useDashboardMenuUi();
-const rootMenu = useDashboardMenuUiContext();
-const subMenu = useDashboardMenuUiSubMenuContext();
-const subMenuStyle = useDashboardMenuUiStyle(subMenu);
+const { parentMenu, parentPaths } = useDashboardMenu();
+const rootMenu = useDashboardMenuContext();
+const subMenu = useDashboardMenuSubMenuContext();
+const subMenuStyle = useDashboardMenuStyle(subMenu);
 
 const mouseInChild = ref(false);
 
-const items = ref<DashboardMenuUiMenuProvider['items']>({});
-const subMenus = ref<DashboardMenuUiMenuProvider['subMenus']>({});
+const items = ref<DashboardMenuMenuProvider['items']>({});
+const subMenus = ref<DashboardMenuMenuProvider['subMenus']>({});
 const timer = ref<null | ReturnType<typeof setTimeout>>(null);
 
-createDashboardMenuUiSubMenuContext({
+createDashboardMenuSubMenuContext({
   addSubMenu,
   handleMouseleave,
   level: (subMenu?.level ?? 0) + 1,
@@ -52,7 +52,7 @@ const opened = computed(() => {
   return rootMenu?.openedMenus.includes(props.path);
 });
 const isTopLevelMenuSubmenu = computed(
-  () => parentMenu.value?.type.name === 'NgiburMenuRoot',
+  () => parentMenu.value?.type.name === DASHBOARD_MENU_ROOT,
 );
 const mode = computed(() => rootMenu?.props.mode ?? 'vertical');
 const rounded = computed(() => rootMenu?.props.rounded);
@@ -90,11 +90,11 @@ const active = computed(() => {
   return isActive;
 });
 
-function addSubMenu(subMenu: DashboardMenuUiMenuItemRegistered) {
+function addSubMenu(subMenu: DashboardMenuMenuItemRegistered) {
   subMenus.value[subMenu.path] = subMenu;
 }
 
-function removeSubMenu(subMenu: DashboardMenuUiMenuItemRegistered) {
+function removeSubMenu(subMenu: DashboardMenuMenuItemRegistered) {
   Reflect.deleteProperty(subMenus.value, subMenu.path);
 }
 
@@ -215,6 +215,7 @@ onBeforeUnmount(() => {
         :content="contentProps"
         :open="true"
         :open-delay="0"
+        mode="hover"
         :pohon="{
           content: [
             rootMenu.theme,
@@ -226,7 +227,7 @@ onBeforeUnmount(() => {
           ],
         }"
       >
-        <DashboardMenuUiSubMenuContent
+        <DashboardMenuSubMenuContent
           :class="{
             'is-active': active,
           }"
@@ -240,7 +241,7 @@ onBeforeUnmount(() => {
           <template #title>
             <slot name="title" />
           </template>
-        </DashboardMenuUiSubMenuContent>
+        </DashboardMenuSubMenuContent>
 
         <template #content>
           <div
@@ -265,7 +266,7 @@ onBeforeUnmount(() => {
     </template>
 
     <template v-else>
-      <DashboardMenuUiSubMenuContent
+      <DashboardMenuSubMenuContent
         :class="{
           'is-active': active,
         }"
@@ -281,9 +282,9 @@ onBeforeUnmount(() => {
         <template #title>
           <slot name="title" />
         </template>
-      </DashboardMenuUiSubMenuContent>
+      </DashboardMenuSubMenuContent>
 
-      <DashboardMenuUiCollapseTransition>
+      <DashboardMenuCollapseTransition>
         <ul
           v-show="opened"
           class="pohon-menu"
@@ -294,7 +295,7 @@ onBeforeUnmount(() => {
         >
           <slot />
         </ul>
-      </DashboardMenuUiCollapseTransition>
+      </DashboardMenuCollapseTransition>
     </template>
   </li>
 </template>

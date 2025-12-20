@@ -2,11 +2,11 @@
 import type { UseResizeObserverReturn } from '@vueuse/core';
 import type { SetupContext, VNodeArrayChildren } from 'vue';
 import type {
-  DashboardMenuUiMenuItemPayload,
-  DashboardMenuUiMenuItemRegistered,
-  DashboardMenuUiMenuProvider,
-  DashboardMenuUiProps,
-} from '../dashboard-menu-ui.types';
+  DashboardMenuMenuItemPayload,
+  DashboardMenuMenuItemRegistered,
+  DashboardMenuMenuProvider,
+  DashboardMenuProps,
+} from '../dashboard-menu.types';
 import { funnel } from '@vinicunca/perkakas';
 
 import { useResizeObserver } from '@vueuse/core';
@@ -20,20 +20,20 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-import { useDashboardMenuUiStyle } from '../composables/use-dashboard-menu-ui';
+import { useDashboardMenuStyle } from '../composables/use-dashboard-menu';
 import {
-  createDashboardMenuUiContext,
-  createDashboardMenuUiSubMenuContext,
-} from '../composables/use-dashboard-menu-ui-context';
-import { useDashboardMenuUiScroll } from '../composables/use-dashboard-menu-ui-scroll';
-import { DASHBOARD_MENU_UI_ROOT } from '../dashboard-menu-ui.constants';
-import { flattedChildren } from '../utils/dashboard-menu-ui.utils';
-import DashboardMenuUiSubMenu from './dashboard-menu-ui-sub-menu.vue';
+  createDashboardMenuContext,
+  createDashboardMenuSubMenuContext,
+} from '../composables/use-dashboard-menu-context';
+import { useDashboardMenuScroll } from '../composables/use-dashboard-menu-scroll';
+import { DASHBOARD_MENU_ROOT } from '../dashboard-menu.constants';
+import { flattedChildren } from '../utils/dashboard-menu.utils';
+import DashboardMenuSubMenu from './dashboard-menu-sub-menu.vue';
 
-defineOptions({ name: DASHBOARD_MENU_UI_ROOT });
+defineOptions({ name: DASHBOARD_MENU_ROOT });
 
 const props = withDefaults(
-  defineProps<DashboardMenuUiProps>(),
+  defineProps<DashboardMenuProps>(),
   {
     accordion: true,
     collapse: false,
@@ -45,24 +45,24 @@ const props = withDefaults(
 );
 
 const emits = defineEmits<{
-  close: [DashboardMenuUiMenuItemPayload];
-  open: [DashboardMenuUiMenuItemPayload];
-  select: [DashboardMenuUiMenuItemPayload];
+  close: [DashboardMenuMenuItemPayload];
+  open: [DashboardMenuMenuItemPayload];
+  select: [DashboardMenuMenuItemPayload];
 }>();
 
-const menuStyle = useDashboardMenuUiStyle();
+const menuStyle = useDashboardMenuStyle();
 const slots: SetupContext['slots'] = useSlots();
 const menu = ref<HTMLUListElement>();
 const sliceIndex = ref(-1);
-const openedMenus = ref<DashboardMenuUiMenuProvider['openedMenus']>(
+const openedMenus = ref<DashboardMenuMenuProvider['openedMenus']>(
   props.defaultOpeneds && !props.collapse ? [...props.defaultOpeneds] : [],
 );
-const activePath = ref<DashboardMenuUiMenuProvider['activePath']>(props.defaultActive);
-const items = ref<DashboardMenuUiMenuProvider['items']>({});
-const subMenus = ref<DashboardMenuUiMenuProvider['subMenus']>({});
+const activePath = ref<DashboardMenuMenuProvider['activePath']>(props.defaultActive);
+const items = ref<DashboardMenuMenuProvider['items']>({});
+const subMenus = ref<DashboardMenuMenuProvider['subMenus']>({});
 const mouseInChild = ref(false);
 
-const isMenuPopup = computed<DashboardMenuUiMenuProvider['isMenuPopup']>(() => {
+const isMenuPopup = computed<DashboardMenuMenuProvider['isMenuPopup']>(() => {
   return (
     props.mode === 'horizontal' || (props.mode === 'vertical' && props.collapse)
   );
@@ -113,7 +113,7 @@ watchEffect(() => {
   }
 });
 
-createDashboardMenuUiContext(
+createDashboardMenuContext(
   reactive({
     activePath,
     addMenuItem,
@@ -133,7 +133,7 @@ createDashboardMenuUiContext(
   }),
 );
 
-createDashboardMenuUiSubMenuContext({
+createDashboardMenuSubMenuContext({
   addSubMenu,
   level: 1,
   mouseInChild,
@@ -209,7 +209,7 @@ const enableScroll = computed(
   () => props.scrollToActive && props.mode === 'vertical' && !props.collapse,
 );
 
-const { scrollToActiveItem } = useDashboardMenuUiScroll(activePath, {
+const { scrollToActiveItem } = useDashboardMenuScroll(activePath, {
   enable: enableScroll,
   delay: 320,
 });
@@ -242,7 +242,7 @@ function updateActiveName(val: string) {
   activePath.value = item ? item.path : val;
 }
 
-function handleMenuItemClick(data: DashboardMenuUiMenuItemPayload) {
+function handleMenuItemClick(data: DashboardMenuMenuItemPayload) {
   const { collapse, mode } = props;
   if (mode === 'horizontal' || collapse) {
     openedMenus.value = [];
@@ -255,7 +255,7 @@ function handleMenuItemClick(data: DashboardMenuUiMenuItemPayload) {
   emits('select', { path, parentPaths });
 }
 
-function handleSubMenuClick({ parentPaths, path }: DashboardMenuUiMenuItemRegistered) {
+function handleSubMenuClick({ parentPaths, path }: DashboardMenuMenuItemRegistered) {
   const isOpened = openedMenus.value.includes(path);
 
   if (isOpened) {
@@ -273,7 +273,7 @@ function close(path: string) {
   }
 }
 
-function closeMenu({ path, parentPaths }: DashboardMenuUiMenuItemPayload) {
+function closeMenu({ path, parentPaths }: DashboardMenuMenuItemPayload) {
   if (props.accordion) {
     openedMenus.value = subMenus.value[path]?.parentPaths ?? [];
   }
@@ -283,7 +283,7 @@ function closeMenu({ path, parentPaths }: DashboardMenuUiMenuItemPayload) {
   emits('close', { path, parentPaths });
 }
 
-function openMenu({ path, parentPaths }: DashboardMenuUiMenuItemPayload) {
+function openMenu({ path, parentPaths }: DashboardMenuMenuItemPayload) {
   if (openedMenus.value.includes(path)) {
     return;
   }
@@ -302,19 +302,19 @@ function openMenu({ path, parentPaths }: DashboardMenuUiMenuItemPayload) {
   emits('open', { path, parentPaths });
 }
 
-function addMenuItem(item: DashboardMenuUiMenuItemRegistered) {
+function addMenuItem(item: DashboardMenuMenuItemRegistered) {
   items.value[item.path] = item;
 }
 
-function addSubMenu(subMenu: DashboardMenuUiMenuItemRegistered) {
+function addSubMenu(subMenu: DashboardMenuMenuItemRegistered) {
   subMenus.value[subMenu.path] = subMenu;
 }
 
-function removeSubMenu(subMenu: DashboardMenuUiMenuItemRegistered) {
+function removeSubMenu(subMenu: DashboardMenuMenuItemRegistered) {
   Reflect.deleteProperty(subMenus.value, subMenu.path);
 }
 
-function removeMenuItem(item: DashboardMenuUiMenuItemRegistered) {
+function removeMenuItem(item: DashboardMenuMenuItemRegistered) {
   Reflect.deleteProperty(items.value, item.path);
 }
 
@@ -332,7 +332,7 @@ function getActivePaths() {
 <template>
   <ul
     ref="menu"
-    class="ngibur-menu"
+    class="pohon-menu"
     :class="[
       theme,
       `is-${mode}`,
@@ -354,7 +354,7 @@ function getActivePaths() {
         <component :is="item" />
       </template>
 
-      <DashboardMenuUiSubMenu
+      <DashboardMenuSubMenu
         is-sub-menu-more
         path="sub-menu-more"
       >
@@ -368,7 +368,7 @@ function getActivePaths() {
         >
           <component :is="item" />
         </template>
-      </DashboardMenuUiSubMenu>
+      </DashboardMenuSubMenu>
     </template>
 
     <template v-else>

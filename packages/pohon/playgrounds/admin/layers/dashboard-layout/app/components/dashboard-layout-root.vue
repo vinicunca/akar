@@ -1,24 +1,24 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue';
 
-import type { DashboardLayoutUiProps } from '../dashboard-layout-ui.types';
+import type { DashboardLayoutProps } from '../dashboard-layout.types';
 import { PButton } from '#components';
-import { useDashboardLayoutUi, useLayoutFooterStyle, useLayoutHeaderStyle } from '#imports';
+import { useDashboardLayout, useLayoutFooterStyle, useLayoutHeaderStyle } from '#imports';
 import { useMouse, useScroll, useThrottleFn } from '@vueuse/core';
 import { computed, ref, useTemplateRef, watch } from 'vue';
-import { ELEMENT_ID_MAIN_CONTENT } from '../dashboard-layout-ui.constants';
-import DashboardLayoutUiContent from './dashboard-layout-ui-content.vue';
-import DashboardLayoutUiFooter from './dashboard-layout-ui-footer.vue';
-import DashboardLayoutUiHeader from './dashboard-layout-ui-header.vue';
-import DashboardLayoutUiSidebar from './dashboard-layout-ui-sidebar.vue';
-import DashboardLayoutUiTabbar from './dashboard-layout-ui-tabbar.vue';
+import { ELEMENT_ID_MAIN_CONTENT } from '../dashboard-layout.constants';
+import DashboardLayoutContent from './dashboard-layout-content.vue';
+import DashboardLayoutFooter from './dashboard-layout-footer.vue';
+import DashboardLayoutHeader from './dashboard-layout-header.vue';
+import DashboardLayoutSidebar from './dashboard-layout-sidebar.vue';
+import DashboardLayoutTabbar from './dashboard-layout-tabbar.vue';
 
 defineOptions({
-  name: 'DashboardLayoutUiRoot',
+  name: 'DashboardLayoutRoot',
 });
 
 const props = withDefaults(
-  defineProps<DashboardLayoutUiProps>(),
+  defineProps<DashboardLayoutProps>(),
   {
     contentCompact: 'wide',
     contentCompactWidth: 1200,
@@ -96,7 +96,7 @@ const {
   isHeaderNav,
   isMixedNav,
   isSidebarMixedNav,
-} = useDashboardLayoutUi(props);
+} = useDashboardLayout(props);
 
 /**
  * Whether the top bar is automatically hidden
@@ -481,7 +481,7 @@ function handleClickMask() {
 
 <template>
   <div class="flex min-h-full w-full relative">
-    <DashboardLayoutUiSidebar
+    <DashboardLayoutSidebar
       v-if="sidebarEnableState"
       v-model:collapse="sidebarCollapse"
       v-model:expand-on-hover="sidebarExpandOnHover"
@@ -526,7 +526,7 @@ function handleClickMask() {
       <template #extra-title>
         <slot name="side-extra-title" />
       </template>
-    </DashboardLayoutUiSidebar>
+    </DashboardLayoutSidebar>
 
     <div
       ref="contentRef"
@@ -541,7 +541,7 @@ function handleClickMask() {
         :style="headerWrapperStyle"
         class="transition-all-200 overflow-hidden"
       >
-        <DashboardLayoutUiHeader
+        <DashboardLayoutHeader
           v-if="headerVisible"
           :full-width="!isSideMode"
           :height="headerHeight"
@@ -569,19 +569,19 @@ function handleClickMask() {
           </template>
 
           <slot name="header" />
-        </DashboardLayoutUiHeader>
+        </DashboardLayoutHeader>
 
-        <DashboardLayoutUiTabbar
+        <DashboardLayoutTabbar
           v-if="tabbarEnable"
           :height="tabbarHeight"
           :style="tabbarStyle"
         >
           <slot name="tabbar" />
-        </DashboardLayoutUiTabbar>
+        </DashboardLayoutTabbar>
       </div>
 
       <!-- </div> -->
-      <DashboardLayoutUiContent
+      <DashboardLayoutContent
         :id="ELEMENT_ID_MAIN_CONTENT"
         :content-compact="contentCompact"
         :content-compact-width="contentCompactWidth"
@@ -598,9 +598,9 @@ function handleClickMask() {
         <template #overlay>
           <slot name="content-overlay" />
         </template>
-      </DashboardLayoutUiContent>
+      </DashboardLayoutContent>
 
-      <DashboardLayoutUiFooter
+      <DashboardLayoutFooter
         v-if="footerEnable"
         :fixed="footerFixed"
         :height="footerHeight"
@@ -609,7 +609,7 @@ function handleClickMask() {
         :z-index="zIndex"
       >
         <slot name="footer" />
-      </DashboardLayoutUiFooter>
+      </DashboardLayoutFooter>
     </div>
 
     <slot name="extra" />

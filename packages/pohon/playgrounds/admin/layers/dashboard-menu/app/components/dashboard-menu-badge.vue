@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { DashboardMenuUiBadge } from '../dashboard-menu-ui.types';
+import type { DashboardMenuBadge } from '../dashboard-menu.types';
 import { computed } from 'vue';
-import DashboardMenuUiBadgeDot from './dashboard-menu-ui-badge-dot.vue';
+import DashboardMenuBadgeDot from './dashboard-menu-badge-dot.vue';
 
-interface Props extends DashboardMenuUiBadge {
+interface Props extends DashboardMenuBadge {
   hasChildren?: boolean;
 }
 
@@ -45,7 +45,7 @@ const badgeStyle = computed(() => {
     :class="$attrs.class"
     class="absolute"
   >
-    <DashboardMenuUiBadgeDot
+    <DashboardMenuBadgeDot
       v-if="isDot"
       :dot-class="badgeClass"
       :dot-style="badgeStyle"

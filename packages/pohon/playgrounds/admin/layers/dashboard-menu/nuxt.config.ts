@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
   $meta: {
-    name: 'dashboard-menu-ui',
+    name: 'dashboard-menu',
   },
 });

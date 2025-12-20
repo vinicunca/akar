@@ -1,7 +1,7 @@
-import type { DashboardLayoutUiProps, PDashboardLayoutType } from '../dashboard-layout-ui.types';
+import type { DashboardLayoutProps, PDashboardLayoutType } from '../dashboard-layout.types';
 import { computed } from 'vue';
 
-export function useDashboardLayoutUi(props: DashboardLayoutUiProps) {
+export function useDashboardLayout(props: DashboardLayoutProps) {
   const currentLayout = computed(() =>
     props.isMobile ? 'sidebar-nav' : (props.layout as PDashboardLayoutType),
   );

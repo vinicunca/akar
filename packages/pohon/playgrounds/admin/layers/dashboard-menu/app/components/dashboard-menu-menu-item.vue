@@ -1,25 +1,26 @@
 <script lang="ts" setup>
-import type { DashboardMenuUiMenuItemProps, DashboardMenuUiMenuItemRegistered } from '../dashboard-menu-ui.types';
+import type { DashboardMenuMenuItemProps, DashboardMenuMenuItemRegistered } from '../dashboard-menu.types';
 import { PIcon, PTooltip } from '#components';
 
 import { computed, onBeforeUnmount, onMounted, reactive, useSlots } from 'vue';
-import { useDashboardMenuUi } from '../composables/use-dashboard-menu-ui';
-import { useDashboardMenuUiContext, useDashboardMenuUiSubMenuContext } from '../composables/use-dashboard-menu-ui-context';
-import DashboardMenuUiBadge from './dashboard-menu-ui-badge.vue';
+import { useDashboardMenu } from '../composables/use-dashboard-menu';
+import { useDashboardMenuContext, useDashboardMenuSubMenuContext } from '../composables/use-dashboard-menu-context';
+import { DASHBOARD_MENU_ROOT } from '../dashboard-menu.constants';
+import DashboardMenuBadge from './dashboard-menu-badge.vue';
 
 const props = withDefaults(
-  defineProps<DashboardMenuUiMenuItemProps>(),
+  defineProps<DashboardMenuMenuItemProps>(),
   {
     disabled: false,
   },
 );
 
-const emits = defineEmits<{ click: [DashboardMenuUiMenuItemRegistered] }>();
+const emits = defineEmits<{ click: [DashboardMenuMenuItemRegistered] }>();
 
 const slots = useSlots();
-const rootMenu = useDashboardMenuUiContext();
-const subMenu = useDashboardMenuUiSubMenuContext();
-const { parentMenu, parentPaths } = useDashboardMenuUi();
+const rootMenu = useDashboardMenuContext();
+const subMenu = useDashboardMenuSubMenuContext();
+const { parentMenu, parentPaths } = useDashboardMenu();
 
 const active = computed(() => props.path === rootMenu?.activePath);
 const menuIcon = computed(() =>
@@ -27,7 +28,7 @@ const menuIcon = computed(() =>
 );
 
 const isTopLevelMenuItem = computed(
-  () => parentMenu.value?.type.name === 'NgiburMenuRoot',
+  () => parentMenu.value?.type.name === DASHBOARD_MENU_ROOT,
 );
 
 const collapseShowTitle = computed(
@@ -45,7 +46,7 @@ const showTooltip = computed(
     && slots.title,
 );
 
-const item: DashboardMenuUiMenuItemRegistered = reactive({
+const item: DashboardMenuMenuItemRegistered = reactive({
   active,
   parentPaths: parentPaths.value,
   path: props.path || '',
@@ -75,7 +76,7 @@ onBeforeUnmount(() => {
 
 <template>
   <li
-    class="ngibur-menu-item"
+    class="pohon-menu-item"
     :class="[
       rootMenu.theme,
       {
@@ -122,7 +123,7 @@ onBeforeUnmount(() => {
       v-show="!showTooltip"
       class="pohon-menu-item__content"
     >
-      <DashboardMenuUiBadge
+      <DashboardMenuBadge
         v-if="rootMenu.props.mode !== 'horizontal'"
         class="right-2"
         v-bind="props"

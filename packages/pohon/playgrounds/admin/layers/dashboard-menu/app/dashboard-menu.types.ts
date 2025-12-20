@@ -1,7 +1,7 @@
 import type { Component, Ref } from 'vue';
-import type { PDashboardThemeModeType } from '~~/layers/dashboard-layout-ui/app/dashboard-layout-ui.types';
+import type { PDashboardThemeModeType } from '~~/layers/dashboard-layout/app/dashboard-layout.types';
 
-export interface DashboardMenuUiBadge {
+export interface DashboardMenuBadge {
   /**
    * Badge
    */
@@ -19,7 +19,7 @@ export interface DashboardMenuUiBadge {
 /**
  * Menu record object
  */
-export interface DashboardMenuUiRecord extends DashboardMenuUiBadge {
+export interface DashboardMenuRecord extends DashboardMenuBadge {
   /**
    * Icon name when active
    */
@@ -27,7 +27,7 @@ export interface DashboardMenuUiRecord extends DashboardMenuUiBadge {
   /**
    * Submenus
    */
-  children?: Array<DashboardMenuUiRecord>;
+  children?: Array<DashboardMenuRecord>;
   /**
    * Whether the menu is disabled
    * @default false
@@ -64,7 +64,7 @@ export interface DashboardMenuUiRecord extends DashboardMenuUiBadge {
   show?: boolean;
 }
 
-export interface DashboardMenuUiProps {
+export interface DashboardMenuProps {
   /**
    * Whether to enable accordion mode
    * @default true
@@ -110,7 +110,7 @@ export interface DashboardMenuUiProps {
   theme?: PDashboardThemeModeType;
 }
 
-export interface DashboardMenuUiSubMenuProps extends DashboardMenuUiBadge {
+export interface DashboardMenuSubMenuProps extends DashboardMenuBadge {
   /**
    * Active icon
    */
@@ -129,7 +129,7 @@ export interface DashboardMenuUiSubMenuProps extends DashboardMenuUiBadge {
   path: string;
 }
 
-export interface DashboardMenuUiMenuItemProps extends DashboardMenuUiBadge {
+export interface DashboardMenuMenuItemProps extends DashboardMenuBadge {
   /**
    * Active icon
    */
@@ -148,39 +148,39 @@ export interface DashboardMenuUiMenuItemProps extends DashboardMenuUiBadge {
   path: string;
 }
 
-export interface DashboardMenuUiMenuItemRegistered {
+export interface DashboardMenuMenuItemRegistered {
   active: boolean;
   parentPaths: Array<string>;
   path: string;
 }
 
-export interface DashboardMenuUiMenuItemPayload {
+export interface DashboardMenuMenuItemPayload {
   parentPaths: Array<string>;
   path: string;
 }
 
-export interface DashboardMenuUiMenuProvider {
+export interface DashboardMenuMenuProvider {
   activePath?: string;
-  addMenuItem: (item: DashboardMenuUiMenuItemRegistered) => void;
-  addSubMenu: (item: DashboardMenuUiMenuItemRegistered) => void;
-  closeMenu: (item: DashboardMenuUiMenuItemPayload) => void;
-  handleMenuItemClick: (item: DashboardMenuUiMenuItemPayload) => void;
-  handleSubMenuClick: (subMenu: DashboardMenuUiMenuItemRegistered) => void;
+  addMenuItem: (item: DashboardMenuMenuItemRegistered) => void;
+  addSubMenu: (item: DashboardMenuMenuItemRegistered) => void;
+  closeMenu: (item: DashboardMenuMenuItemPayload) => void;
+  handleMenuItemClick: (item: DashboardMenuMenuItemPayload) => void;
+  handleSubMenuClick: (subMenu: DashboardMenuMenuItemRegistered) => void;
   isMenuPopup: boolean;
-  items: Record<string, DashboardMenuUiMenuItemRegistered>;
+  items: Record<string, DashboardMenuMenuItemRegistered>;
   openedMenus: Array<string>;
-  openMenu: (params: DashboardMenuUiMenuItemPayload) => void;
-  props: DashboardMenuUiProps;
-  removeMenuItem: (item: DashboardMenuUiMenuItemRegistered) => void;
-  removeSubMenu: (item: DashboardMenuUiMenuItemRegistered) => void;
-  subMenus: Record<string, DashboardMenuUiMenuItemRegistered>;
+  openMenu: (params: DashboardMenuMenuItemPayload) => void;
+  props: DashboardMenuProps;
+  removeMenuItem: (item: DashboardMenuMenuItemRegistered) => void;
+  removeSubMenu: (item: DashboardMenuMenuItemRegistered) => void;
+  subMenus: Record<string, DashboardMenuMenuItemRegistered>;
   theme: string;
 }
 
-export interface DashboardMenuUiSubMenuProvider {
-  addSubMenu: (item: DashboardMenuUiMenuItemRegistered) => void;
+export interface DashboardMenuSubMenuProvider {
+  addSubMenu: (item: DashboardMenuMenuItemRegistered) => void;
   handleMouseleave?: (deepDispatch: boolean) => void;
   level: number;
   mouseInChild: Ref<boolean>;
-  removeSubMenu: (item: DashboardMenuUiMenuItemRegistered) => void;
+  removeSubMenu: (item: DashboardMenuMenuItemRegistered) => void;
 }

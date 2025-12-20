@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { DashboardMenuUiRecord } from '../dashboard-menu-ui.types';
+import type { DashboardMenuRecord } from '../dashboard-menu.types';
 
 import { computed } from 'vue';
-import DashboardMenuUiBadge from './dashboard-menu-ui-badge.vue';
-import DashboardMenuUiMenuItem from './dashboard-menu-ui-menu-item.vue';
-import DashboardMenuUiRootSubMenu from './dashboard-menu-ui-root-sub-menu.vue';
-import DashboardMenuUiSubMenu from './dashboard-menu-ui-sub-menu.vue';
+import DashboardMenuBadge from './dashboard-menu-badge.vue';
+import DashboardMenuMenuItem from './dashboard-menu-menu-item.vue';
+import DashboardMenuRootSubMenu from './dashboard-menu-root-sub-menu.vue';
+import DashboardMenuSubMenu from './dashboard-menu-sub-menu.vue';
 
 interface Props {
-  menu: DashboardMenuUiRecord;
+  menu: DashboardMenuRecord;
 }
 
 const props = withDefaults(defineProps<Props>(), {});
@@ -25,7 +25,7 @@ const hasChildren = computed(() => {
 </script>
 
 <template>
-  <DashboardMenuUiMenuItem
+  <DashboardMenuMenuItem
     v-if="!hasChildren"
     :key="menu.path"
     :active-icon="menu.activeIcon"
@@ -38,9 +38,9 @@ const hasChildren = computed(() => {
     <template #title>
       <span>{{ menu.name }}</span>
     </template>
-  </DashboardMenuUiMenuItem>
+  </DashboardMenuMenuItem>
 
-  <DashboardMenuUiSubMenu
+  <DashboardMenuSubMenu
     v-else
     :key="`${menu.path}_sub`"
     :active-icon="menu.activeIcon"
@@ -48,7 +48,7 @@ const hasChildren = computed(() => {
     :path="menu.path"
   >
     <template #content>
-      <DashboardMenuUiBadge
+      <DashboardMenuBadge
         :badge="menu.badge"
         :badge-type="menu.badgeType"
         :badge-variants="menu.badgeVariants"
@@ -64,7 +64,7 @@ const hasChildren = computed(() => {
       v-for="childItem in menu.children || []"
       :key="childItem.path"
     >
-      <DashboardMenuUiRootSubMenu :menu="childItem" />
+      <DashboardMenuRootSubMenu :menu="childItem" />
     </template>
-  </DashboardMenuUiSubMenu>
+  </DashboardMenuSubMenu>
 </template>

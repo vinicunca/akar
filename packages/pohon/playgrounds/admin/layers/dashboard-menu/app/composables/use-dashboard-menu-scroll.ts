@@ -9,7 +9,7 @@ interface UseMenuScrollOptions {
   enable?: boolean | Ref<boolean>;
 }
 
-export function useDashboardMenuUiScroll(
+export function useDashboardMenuScroll(
   activePath: Ref<string | undefined>,
   options: UseMenuScrollOptions = {},
 ) {
