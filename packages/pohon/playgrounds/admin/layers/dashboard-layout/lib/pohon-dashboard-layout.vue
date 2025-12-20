@@ -1,20 +1,23 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue';
 
-import type { DashboardLayoutProps } from '../dashboard-layout.types';
+import type { DashboardLayoutProps } from './dashboard-layout.types';
 import { PButton } from '#components';
-import { useDashboardLayout, useLayoutFooterStyle, useLayoutHeaderStyle } from '#imports';
 import { useMouse, useScroll, useThrottleFn } from '@vueuse/core';
 import { computed, ref, useTemplateRef, watch } from 'vue';
-import { ELEMENT_ID_MAIN_CONTENT } from '../dashboard-layout.constants';
-import DashboardLayoutContent from './dashboard-layout-content.vue';
-import DashboardLayoutFooter from './dashboard-layout-footer.vue';
-import DashboardLayoutHeader from './dashboard-layout-header.vue';
-import DashboardLayoutSidebar from './dashboard-layout-sidebar.vue';
-import DashboardLayoutTabbar from './dashboard-layout-tabbar.vue';
+import {
+  DashboardLayoutContent,
+  DashboardLayoutFooter,
+  DashboardLayoutHeader,
+  DashboardLayoutSidebar,
+  DashboardLayoutTabbar,
+} from './components';
+import { ELEMENT_ID_MAIN_CONTENT } from './dashboard-layout.constants';
+import { useDashboardLayout } from './use-dashboard-layout';
+import { useLayoutFooterStyle, useLayoutHeaderStyle } from './use-dashboard-layout-style';
 
 defineOptions({
-  name: 'DashboardLayoutRoot',
+  name: 'PohonDashboardLayout',
 });
 
 const props = withDefaults(

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue';
 import type { PDashboardContentCompactType } from '../dashboard-layout.types';
-import { useLayoutContentStyle } from '#imports';
 import { APrimitiveSlot } from 'akar';
 import { computed } from 'vue';
+import { useLayoutContentStyle } from '../use-dashboard-layout-style';
 
 interface Props {
   /**

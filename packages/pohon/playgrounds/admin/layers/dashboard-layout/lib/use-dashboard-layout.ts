@@ -1,4 +1,4 @@
-import type { DashboardLayoutProps, PDashboardLayoutType } from '../dashboard-layout.types';
+import type { DashboardLayoutProps, PDashboardLayoutType } from './dashboard-layout.types';
 import { computed } from 'vue';
 
 export function useDashboardLayout(props: DashboardLayoutProps) {

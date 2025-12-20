@@ -1,5 +1,5 @@
 import type { Component, Ref } from 'vue';
-import type { PDashboardThemeModeType } from '~~/layers/dashboard-layout/app/dashboard-layout.types';
+import type { PDashboardThemeModeType } from '~~/layers/dashboard-layout/lib/dashboard-layout.types';
 
 export interface DashboardMenuBadge {
   /**
