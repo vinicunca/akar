@@ -2,7 +2,7 @@ import type { PDashboardMenuItemPayload, PDashboardMenuProps, PDashboardMenuRaw 
 import { findRootMenuByPath, usePreferences } from '#imports';
 import { computed, onBeforeMount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { useAccessStore } from '~~/layers/dashboard/app/stores/access.store';
+import { useAccessStore } from '~~/layers/admin/app/stores/access.store';
 import { preferences } from '~~/layers/preferences/app/preferences.init';
 import { useDashboardNavigation } from './use-dashboard-navigation';
 

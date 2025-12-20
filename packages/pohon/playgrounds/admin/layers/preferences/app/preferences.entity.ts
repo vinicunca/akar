@@ -13,7 +13,7 @@ import type {
   PreferencesButtonPositionType,
   TabsStyleType,
   ThemeModeType,
-} from '#layers/dashboard/app/dashboard.entity';
+} from '~~/layers/admin/app/dashboard.entity';
 import type { DeepPartial } from '@vinicunca/perkakas';
 
 export interface AppPreferences {

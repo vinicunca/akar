@@ -1,6 +1,6 @@
 import type { AdminMenu } from '~/domains/core/navigation.typings';
 import { computed, useI18n } from '#imports';
-import { useAccessStore } from '~~/layers/dashboard/app/stores/access.store';
+import { useAccessStore } from '~~/layers/admin/app/stores/access.store';
 
 export function useNavigationMenu() {
   const { t } = useI18n();
