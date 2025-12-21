@@ -5,13 +5,13 @@ import type { DashboardMenuMenuItemRegistered, DashboardMenuMenuProvider, Dashbo
 import { PPopover } from '#components';
 
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
-import { useDashboardMenu, useDashboardMenuStyle } from '../composables/use-dashboard-menu';
+import { DASHBOARD_MENU_ROOT, DASHBOARD_MENU_SUB_MENU } from '../dashboard-menu.constants';
+import { useDashboardMenu, useDashboardMenuStyle } from '../use-dashboard-menu';
 import {
   createDashboardMenuSubMenuContext,
   useDashboardMenuContext,
   useDashboardMenuSubMenuContext,
-} from '../composables/use-dashboard-menu-context';
-import { DASHBOARD_MENU_ROOT, DASHBOARD_MENU_SUB_MENU } from '../dashboard-menu.constants';
+} from '../use-dashboard-menu-context';
 import DashboardMenuCollapseTransition from './dashboard-menu-collapse-transition.vue';
 import DashboardMenuSubMenuContent from './dashboard-menu-sub-menu-content.vue';
 

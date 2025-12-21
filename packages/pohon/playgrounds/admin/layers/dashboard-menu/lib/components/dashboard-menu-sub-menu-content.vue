@@ -4,7 +4,7 @@ import type { DashboardMenuMenuItemProps } from '../dashboard-menu.types';
 import { PIcon } from '#components';
 import { computed } from 'vue';
 
-import { useDashboardMenuContext } from '../composables/use-dashboard-menu-context';
+import { useDashboardMenuContext } from '../use-dashboard-menu-context';
 
 interface Props extends DashboardMenuMenuItemProps {
   isMenuMore?: boolean;

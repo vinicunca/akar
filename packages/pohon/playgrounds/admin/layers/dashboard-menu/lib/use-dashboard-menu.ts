@@ -1,9 +1,9 @@
-import type { DashboardMenuSubMenuProvider } from '../dashboard-menu.types';
+import type { DashboardMenuSubMenuProvider } from './dashboard-menu.types';
 
 import { computed, getCurrentInstance } from 'vue';
 
-import { DASHBOARD_MENU_ROOT, DASHBOARD_MENU_SUB_MENU } from '../dashboard-menu.constants';
-import { findComponentUpward } from '../utils/dashboard-menu.utils';
+import { DASHBOARD_MENU_ROOT, DASHBOARD_MENU_SUB_MENU } from './dashboard-menu.constants';
+import { findComponentUpward } from './dashboard-menu.utils';
 
 export function useDashboardMenu() {
   const instance = getCurrentInstance();

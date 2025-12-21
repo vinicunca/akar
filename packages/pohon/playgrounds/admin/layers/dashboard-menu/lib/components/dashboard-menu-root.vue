@@ -20,15 +20,15 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-import { useDashboardMenuStyle } from '../composables/use-dashboard-menu';
+import { DASHBOARD_MENU_ROOT } from '../dashboard-menu.constants';
+import { flattedChildren } from '../dashboard-menu.utils';
+import { useDashboardMenuStyle } from '../use-dashboard-menu';
 import {
   createDashboardMenuContext,
   createDashboardMenuSubMenuContext,
-} from '../composables/use-dashboard-menu-context';
-import { useDashboardMenuScroll } from '../composables/use-dashboard-menu-scroll';
-import { DASHBOARD_MENU_ROOT } from '../dashboard-menu.constants';
-import { flattedChildren } from '../utils/dashboard-menu.utils';
-import DashboardMenuSubMenu from './dashboard-menu-sub-menu.vue';
+} from '../use-dashboard-menu-context';
+import { useDashboardMenuScroll } from '../use-dashboard-menu-scroll';
+import DashboardMenuSubMenu from './dashboard-menu-sub-menu-root.vue';
 
 defineOptions({ name: DASHBOARD_MENU_ROOT });
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { DashboardMenuProps, DashboardMenuRecord } from '../dashboard-menu.types';
+import type { DashboardMenuProps, DashboardMenuRecord } from './dashboard-menu.types';
 import { useForwardProps } from 'akar';
-import DashboardMenuRootSubMenu from './dashboard-menu-root-sub-menu.vue';
-import DashboardMenuRoot from './dashboard-menu-root.vue';
+import { DashboardMenuRoot } from './components';
+import DashboardMenuRootSubMenu from './dashboard-menu-sub-menu.vue';
 
 defineOptions({ name: 'DashboardMenu' });
 

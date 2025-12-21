@@ -3,9 +3,9 @@ import type { DashboardMenuMenuItemProps, DashboardMenuMenuItemRegistered } from
 import { PIcon, PTooltip } from '#components';
 
 import { computed, onBeforeUnmount, onMounted, reactive, useSlots } from 'vue';
-import { useDashboardMenu } from '../composables/use-dashboard-menu';
-import { useDashboardMenuContext, useDashboardMenuSubMenuContext } from '../composables/use-dashboard-menu-context';
 import { DASHBOARD_MENU_ROOT } from '../dashboard-menu.constants';
+import { useDashboardMenu } from '../use-dashboard-menu';
+import { useDashboardMenuContext, useDashboardMenuSubMenuContext } from '../use-dashboard-menu-context';
 import DashboardMenuBadge from './dashboard-menu-badge.vue';
 
 const props = withDefaults(

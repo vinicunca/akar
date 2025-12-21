@@ -1,7 +1,7 @@
-import type { DashboardMenuMenuProvider, DashboardMenuSubMenuProvider } from '../dashboard-menu.types';
+import type { DashboardMenuMenuProvider, DashboardMenuSubMenuProvider } from './dashboard-menu.types';
 import { getCurrentInstance, inject, provide } from 'vue';
-import { DASHBOARD_MENU_ROOT, DASHBOARD_MENU_SUB_MENU } from '../dashboard-menu.constants';
-import { findComponentUpward } from '../utils/dashboard-menu.utils';
+import { DASHBOARD_MENU_ROOT, DASHBOARD_MENU_SUB_MENU } from './dashboard-menu.constants';
+import { findComponentUpward } from './dashboard-menu.utils';
 
 const menuContextKey = Symbol('dashboardMenuContext');
 

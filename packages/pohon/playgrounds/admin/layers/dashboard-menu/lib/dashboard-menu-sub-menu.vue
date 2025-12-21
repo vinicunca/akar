@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import type { DashboardMenuRecord } from '../dashboard-menu.types';
+import type { DashboardMenuRecord } from './dashboard-menu.types';
 
 import { computed } from 'vue';
-import DashboardMenuBadge from './dashboard-menu-badge.vue';
-import DashboardMenuMenuItem from './dashboard-menu-menu-item.vue';
-import DashboardMenuRootSubMenu from './dashboard-menu-root-sub-menu.vue';
+import {
+  DashboardMenuBadge,
+  DashboardMenuMenuItem,
+  DashboardMenuSubMenuRoot,
+} from './components';
 import DashboardMenuSubMenu from './dashboard-menu-sub-menu.vue';
 
 interface Props {
@@ -40,7 +42,7 @@ const hasChildren = computed(() => {
     </template>
   </DashboardMenuMenuItem>
 
-  <DashboardMenuSubMenu
+  <DashboardMenuSubMenuRoot
     v-else
     :key="`${menu.path}_sub`"
     :active-icon="menu.activeIcon"
@@ -64,7 +66,7 @@ const hasChildren = computed(() => {
       v-for="childItem in menu.children || []"
       :key="childItem.path"
     >
-      <DashboardMenuRootSubMenu :menu="childItem" />
+      <DashboardMenuSubMenu :menu="childItem" />
     </template>
-  </DashboardMenuSubMenu>
+  </DashboardMenuSubMenuRoot>
 </template>
