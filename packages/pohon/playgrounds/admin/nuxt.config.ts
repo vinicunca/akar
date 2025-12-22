@@ -16,10 +16,6 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
-  extends: [
-    'pohon-ui/layer-theme',
-  ],
-
   i18n: {
     defaultLocale: 'en',
     langDir: 'locales',

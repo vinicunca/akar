@@ -1,5 +1,5 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports';
-import { initPreferences } from '~~/layers/preferences/app/preferences.init';
+import { initPreferences } from '~~/layers/dashboard-preferences/lib/preferences.init';
 
 export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig();

@@ -1,8 +1,5 @@
-<script setup lang="ts">
-import type { DashboardMenuRecord } from '../dashboard-menu.types';
-import { PIcon } from '#components';
-
-interface NormalMenuProps {
+<script lang="ts">
+export interface DashboardMenuNormalMenuProps {
   /**
    * Menu active path
    */
@@ -25,9 +22,14 @@ interface NormalMenuProps {
    */
   theme?: 'dark' | 'light';
 }
+</script>
+
+<script setup lang="ts">
+import type { DashboardMenuRecord } from '../dashboard-menu.types';
+import { PIcon } from '#components';
 
 const props = withDefaults(
-  defineProps<NormalMenuProps>(),
+  defineProps<DashboardMenuNormalMenuProps>(),
   {
     activePath: '',
     collapse: false,

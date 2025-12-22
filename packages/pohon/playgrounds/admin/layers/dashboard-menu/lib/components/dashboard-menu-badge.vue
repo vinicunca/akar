@@ -54,7 +54,7 @@ const badgeStyle = computed(() => {
       v-else
       :class="badgeClass"
       :style="badgeStyle"
-      class="flex-center text-primary-foreground text-[10px] px-1.5 py-0.5 rounded-xl"
+      class="text-primary-foreground text-[10px] px-1.5 py-0.5 rounded-xl flex items-center justify-center"
     >
       {{ badge }}
     </div>
