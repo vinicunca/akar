@@ -13,3 +13,4 @@
 - fix(Combobox): don't focus the trigger element after closing
 - fix(Tabs): update indicator style when element size changes
 - fix(DateRangePicker/DatePicker): root has invalid as,asChild props
+- fix(Select): always show select arrow and leave display to the select content
