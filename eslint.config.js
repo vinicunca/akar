@@ -74,6 +74,7 @@ export default vinicuncaESLint(
     files: ['docs/nuxt.config.ts'],
     rules: {
       'perfectionist/sort-objects': 'error',
+      'perfectionist/sort-interfaces': 'error',
     },
   },
 

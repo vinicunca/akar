@@ -1,0 +1,8 @@
+{
+  "pages": {
+    "dashboard": {
+      "index": "Dashboard ID",
+      "analytics": "Analitik"
+    }
+  }
+}

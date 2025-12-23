@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   extends: [
-    'pohon-ui/layer',
+    'pohon-ui/layer/theme',
   ],
   imports: {
     autoImport: false,

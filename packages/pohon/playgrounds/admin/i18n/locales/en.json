@@ -1,0 +1,230 @@
+{
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "analytics": "Analytics",
+      "workspace": "Workspace"
+    },
+    "system": {
+      "title": "System Management",
+      "users": "Users",
+      "roles": "Roles",
+      "about": "About",
+      "dept": {
+        "name": "Department",
+        "title": "Department Management",
+        "deptName": "Department Name",
+        "status": "Status",
+        "createTime": "Create Time",
+        "remark": "Remark",
+        "operation": "Operation",
+        "parentDept": "Parent Department"
+      },
+      "menu": {
+        "title": "Menu Management",
+        "parent": "Parent Menu",
+        "menuTitle": "Title",
+        "menuName": "Menu Name",
+        "name": "Menu",
+        "type": "Type",
+        "typeCatalog": "Catalog",
+        "typeMenu": "Menu",
+        "typeButton": "Button",
+        "typeLink": "Link",
+        "typeEmbedded": "Embedded",
+        "icon": "Icon",
+        "activeIcon": "Active Icon",
+        "activePath": "Active Path",
+        "path": "Route Path",
+        "component": "Component",
+        "status": "Status",
+        "authCode": "Auth Code",
+        "badge": "Badge",
+        "operation": "Operation",
+        "linkSrc": "Link Address",
+        "affixTab": "Affix In Tabs",
+        "keepAlive": "Keep Alive",
+        "hideInMenu": "Hide In Menu",
+        "hideInTab": "Hide In Tabbar",
+        "hideChildrenInMenu": "Hide Children In Menu",
+        "hideInBreadcrumb": "Hide In Breadcrumb",
+        "advancedSettings": "Other Settings",
+        "activePathMustExist": "The path could not find a valid menu",
+        "activePathHelp": "When jumping to the current route, \nthe menu path that needs to be activated must be specified when it does not display in the navigation menu.",
+        "badgeType": {
+          "title": "Badge Type",
+          "dot": "Dot",
+          "normal": "Text",
+          "none": "None"
+        },
+        "badgeVariants": "Badge Style"
+      },
+      "role": {
+        "title": "Role Management",
+        "list": "Role List",
+        "name": "Role",
+        "roleName": "Role Name",
+        "id": "Role ID",
+        "status": "Status",
+        "remark": "Remark",
+        "createTime": "Creation Time",
+        "operation": "Operation",
+        "permissions": "Permissions",
+        "setPermissions": "Permissions"
+      }
+    },
+    "examples": {
+      "title": "Examples",
+      "modal": {
+        "title": "Modal"
+      },
+      "drawer": {
+        "title": "Drawer"
+      },
+      "ellipsis": {
+        "title": "EllipsisText"
+      },
+      "form": {
+        "title": "Form",
+        "basic": "Basic Form",
+        "layout": "Custom Layout",
+        "query": "Query Form",
+        "rules": "Form Rules",
+        "dynamic": "Dynamic Form",
+        "custom": "Custom Component",
+        "api": "Api",
+        "merge": "Merge Form",
+        "scrollToError": "Scroll to Error Field",
+        "upload-error": "Partial file upload failed",
+        "upload-urls": "Urls after file upload",
+        "file": "file",
+        "upload-image": "Click to upload image"
+      },
+      "vxeTable": {
+        "title": "Vxe Table",
+        "basic": "Basic Table",
+        "remote": "Remote Load",
+        "tree": "Tree Table",
+        "fixed": "Fixed Header/Column",
+        "virtual": "Virtual Scroll",
+        "editCell": "Edit Cell",
+        "editRow": "Edit Row",
+        "custom-cell": "Custom Cell",
+        "form": "Form Table"
+      },
+      "captcha": {
+        "title": "Captcha",
+        "pointSelection": "Point Selection Captcha",
+        "sliderCaptcha": "Slider Captcha",
+        "sliderRotateCaptcha": "Rotate Captcha",
+        "sliderTranslateCaptcha": "Translate Captcha",
+        "captchaCardTitle": "Please complete the security verification",
+        "pageDescription": "Verify user identity by clicking on specific locations in the image.",
+        "pageTitle": "Captcha Component Example",
+        "basic": "Basic Usage",
+        "titlePlaceholder": "Captcha Title Text",
+        "captchaImageUrlPlaceholder": "Captcha Image (supports img tag src attribute value)",
+        "hintImage": "Hint Image",
+        "hintText": "Hint Text",
+        "hintImagePlaceholder": "Hint Image (supports img tag src attribute value)",
+        "hintTextPlaceholder": "Hint Text",
+        "showConfirm": "Show Confirm",
+        "hideConfirm": "Hide Confirm",
+        "widthPlaceholder": "Captcha Image Width Default 300px",
+        "heightPlaceholder": "Captcha Image Height Default 220px",
+        "paddingXPlaceholder": "Horizontal Padding Default 12px",
+        "paddingYPlaceholder": "Vertical Padding Default 16px",
+        "index": "Index:",
+        "timestamp": "Timestamp:",
+        "x": "x:",
+        "y": "y:"
+      },
+      "resize": {
+        "title": "Resize"
+      },
+      "layout": {
+        "col-page": "ColPage Layout"
+      },
+      "button-group": {
+        "title": "Button Group"
+      }
+    },
+    "demos": {
+      "title": "Demos",
+      "access": {
+        "frontendPermissions": "Frontend Permissions",
+        "backendPermissions": "Backend Permissions",
+        "pageAccess": "Page Access",
+        "buttonControl": "Button Control",
+        "menuVisible403": "Menu Visible(403)",
+        "superVisible": "Visible to Super",
+        "adminVisible": "Visible to Admin",
+        "userVisible": "Visible to User"
+      },
+      "nested": {
+        "title": "Nested Menu",
+        "menu1": "Menu 1",
+        "menu2": "Menu 2",
+        "menu2_1": "Menu 2-1",
+        "menu3": "Menu 3",
+        "menu3_1": "Menu 3-1",
+        "menu3_2": "Menu 3-2",
+        "menu3_2_1": "Menu 3-2-1"
+      },
+      "outside": {
+        "title": "External Pages",
+        "embedded": "Embedded",
+        "externalLink": "External Link"
+      },
+      "badge": {
+        "title": "Menu Badge",
+        "dot": "Dot Badge",
+        "text": "Text Badge",
+        "color": "Badge Color"
+      },
+      "activeIcon": {
+        "title": "Active Menu Icon",
+        "children": "Children Active Icon"
+      },
+      "fallback": {
+        "title": "Fallback Page"
+      },
+      "features": {
+        "title": "Features",
+        "hideChildrenInMenu": "Hide Menu Children",
+        "loginExpired": "Login Expired",
+        "icons": "Icons",
+        "watermark": "Watermark",
+        "tabs": "Tabs",
+        "tabDetail": "Tab Detail Page",
+        "fullScreen": "FullScreen",
+        "clipboard": "Clipboard",
+        "menuWithQuery": "Menu With Query",
+        "openInNewWindow": "Open in New Window",
+        "fileDownload": "File Download",
+        "requestParamsSerializer": "Request Params Serializer"
+      },
+      "breadcrumb": {
+        "navigation": "Breadcrumb Navigation",
+        "lateral": "Lateral Mode",
+        "lateralDetail": "Lateral Mode Detail",
+        "level": "Level Mode",
+        "levelDetail": "Level Mode Detail"
+      },
+      "vben": {
+        "title": "Project",
+        "about": "About",
+        "document": "Document",
+        "antdv": "Ant Design Vue Version",
+        "naive-ui": "Naive UI Version",
+        "element-plus": "Element Plus Version",
+        "tdesign": "TDesign Vue Version"
+      }
+    },
+    "ui": {
+      "fallback": {
+        "offline": "Offline"
+      }
+    }
+  }
+}

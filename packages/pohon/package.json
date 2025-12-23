@@ -66,7 +66,8 @@
       "types": "./dist/runtime/locale/index.d.ts",
       "import": "./dist/runtime/locale/index.js"
     },
-    "./layer": "./layer/nuxt.config.ts"
+    "./layer-theme": "./layer-theme/nuxt.config.ts",
+    "./layer-dashboard": "./layer-dashboard/nuxt.config.ts"
   },
   "main": "./dist/module.mjs",
   "typesVersions": {
@@ -110,7 +111,8 @@
     ".nuxt/pohon",
     "cli",
     "dist",
-    "layer",
+    "layer-dashboard",
+    "layer-theme",
     "vue-plugin.d.ts"
   ],
   "scripts": {
@@ -139,10 +141,10 @@
     "joi": {
       "optional": true
     },
-    "valibot": {
+    "superstruct": {
       "optional": true
     },
-    "superstruct": {
+    "valibot": {
       "optional": true
     },
     "vue-router": {

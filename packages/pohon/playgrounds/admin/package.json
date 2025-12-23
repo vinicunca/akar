@@ -1,0 +1,30 @@
+{
+  "name": "admin-playground",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev --pohonDev",
+    "build": "nuxt build",
+    "prepare": "nuxt prepare"
+  },
+  "dependencies": {
+    "@internationalized/date": "catalog:core",
+    "@nuxtjs/i18n": "catalog:pohon",
+    "@pinia/nuxt": "catalog:pohon",
+    "@vinicunca/perkakas": "catalog:core",
+    "@vueuse/core": "catalog:core",
+    "akar": "workspace:*",
+    "nuxt": "catalog:pohon",
+    "pinia": "catalog:pohon",
+    "pohon-ui": "workspace:*",
+    "zod": "catalog:pohon"
+  },
+  "devDependencies": {
+    "@iconify/json": "catalog:base",
+    "@unocss/nuxt": "catalog:pohon",
+    "@vinicunca/unocss-preset": "catalog:pohon",
+    "pinia-plugin-persistedstate": "catalog:pohon",
+    "postcss-preset-env": "catalog:",
+    "unocss": "catalog:base"
+  }
+}
