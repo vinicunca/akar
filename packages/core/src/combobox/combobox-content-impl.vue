@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { DismissableLayerEmits, DismissableLayerProps } from '../dismissable-layer';
 import type { APopperContentProps } from '../popper';
 
-import { createContext, useForwardExpose, useForwardProps, useHideOthers } from '../shared';
+import { createContext, getActiveElement, useForwardExpose, useForwardProps, useHideOthers } from '../shared';
 import { useBodyScrollLock } from '../shared/use-body-scroll-lock';
 
 export type ComboboxContentImplEmits = DismissableLayerEmits;
@@ -84,7 +84,8 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  if (isInputWithinContent.value) {
+  const activeElement = getActiveElement();
+  if (isInputWithinContent.value && (!activeElement || activeElement === document.body)) {
     rootContext.triggerElement.value?.focus();
   }
 });
