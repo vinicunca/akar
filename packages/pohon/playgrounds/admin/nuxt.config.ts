@@ -9,11 +9,16 @@ export default defineNuxtConfig({
 
   css: [
     '~/assets/css/main.css',
-    '~/assets/css/dashboard-menu.css',
   ],
 
   devtools: {
     enabled: true,
+  },
+
+  fonts: {
+    families: [
+      { name: 'Inter', provider: 'fontsource', weights: ['100 900'] },
+    ],
   },
 
   i18n: {
@@ -43,6 +48,17 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@pinia/nuxt',
   ],
+
+  postcss: {
+    plugins: {
+      'postcss-preset-env': {
+        stage: 3,
+        features: {
+          'nesting-rules': true,
+        },
+      },
+    },
+  },
 
   routeRules: {
     '/admin/**': { ssr: false },

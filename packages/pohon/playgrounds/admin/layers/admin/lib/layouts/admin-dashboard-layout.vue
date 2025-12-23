@@ -2,6 +2,7 @@
 import type { DashboardMenuRecord } from '#layers/dashboard-menu/lib';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { PBackToTop, PLogo } from '#components';
+import { useI18n } from '#imports';
 import { P_DASHBOARD_LAYOUT, PohonDashboardLayout } from '#layers/dashboard-layout/lib';
 import { preferences, updatePreferences, usePreferences } from '#layers/dashboard-storage/lib';
 import { clone, isIncludedIn } from '@vinicunca/perkakas';
@@ -52,10 +53,10 @@ const headerTheme = computed(() => {
 });
 
 const logoClass = computed(() => {
-  const { showCollapsedTitle } = preferences.sidebar;
+  const { collapsedShowTitle } = preferences.sidebar;
   const classes: Array<string> = [];
 
-  if (showCollapsedTitle && sidebarCollapsed.value && !isMixedNav.value) {
+  if (collapsedShowTitle && sidebarCollapsed.value && !isMixedNav.value) {
     classes.push('mx-auto');
   }
 
@@ -110,6 +111,8 @@ const {
   isSidebarExtraVisible,
 } = useDashboardExtraMenu(mixHeaderMenus);
 
+const { t } = useI18n();
+
 /**
  * Wrap menu, translate menu name
  * @param options
@@ -127,18 +130,18 @@ function wrapperMenus(
     ? mapTree({
         tree: menus,
         mapper: (item) => {
-          return { ...clone(item), name: $t(item.name) };
+          return { ...clone(item), name: t(item.name) };
         },
       })
     : menus.map((item) => {
-        return { ...clone(item), name: $t(item.name) };
+        return { ...clone(item), name: t(item.name) };
       });
 }
 
 function toggleSidebar() {
   updatePreferences({
     sidebar: {
-      hidden: !preferences.sidebar.isHidden,
+      hidden: !preferences.sidebar.hidden,
     },
   });
 }
@@ -174,7 +177,7 @@ onMounted(() => {
 watch(
   () => preferences.app.layout,
   async (val) => {
-    if (val === P_DASHBOARD_LAYOUT.SIDEBAR_MIXED_NAV && preferences.sidebar.isHidden) {
+    if (val === P_DASHBOARD_LAYOUT.SIDEBAR_MIXED_NAV && preferences.sidebar.hidden) {
       updatePreferences({
         sidebar: {
           hidden: false,
@@ -188,11 +191,59 @@ const slots = useSlots();
 const headerSlots = computed(() => {
   return Object.keys(slots).filter((key) => key.startsWith('header-'));
 });
+
+const sidebarCollapsedModel = computed({
+  get: () => preferences.sidebar.collapsed,
+  set: (value: boolean) => {
+    updatePreferences({
+      sidebar: {
+        collapsed: value,
+      },
+    });
+  },
+});
+
+const sidebarEnableModel = computed({
+  get: () => sidebarVisible.value,
+  set: (value: boolean) => {
+    updatePreferences({
+      sidebar: {
+        enable: value,
+      },
+    });
+  },
+});
+
+const sidebarExpandOnHover = computed({
+  get: () => preferences.sidebar.expandOnHover,
+  set: (value: boolean) => {
+    updatePreferences({
+      sidebar: {
+        expandOnHover: value,
+      },
+    });
+  },
+});
+
+const sidebarExtraCollapsed = computed({
+  get: () => preferences.sidebar.extraCollapsed,
+  set: (value: boolean) => {
+    updatePreferences({
+      sidebar: {
+        extraCollapsed: value,
+      },
+    });
+  },
+});
 </script>
 
 <template>
   <PohonDashboardLayout
-    v-model:sidebar-extra-visible="isSidebarExtraVisible"
+    v-model:is-sidebar-extra-visible="isSidebarExtraVisible"
+    v-model:sidebar-collapsed="sidebarCollapsedModel"
+    v-model:sidebar-enabled="sidebarEnableModel"
+    v-model:sidebar-expand-on-hover="sidebarExpandOnHover"
+    v-model:sidebar-extra-collapsed="sidebarExtraCollapsed"
     :content-compact="preferences.app.contentCompact"
     :content-compact-width="preferences.app.contentCompactWidth"
     :content-padding="preferences.app.contentPadding"
@@ -204,45 +255,27 @@ const headerSlots = computed(() => {
     :footer-fixed="preferences.footer.isFixed"
     :footer-height="preferences.footer.height"
     :header-height="preferences.header.height"
-    :header-hidden="preferences.header.isHidden"
+    :header-hidden="preferences.header.hidden"
     :header-mode="preferences.header.mode"
     :header-theme="headerTheme"
-    :header-toggle-sidebar-button="preferences.widget.showSidebarToggle"
-    :header-visible="preferences.header.enable"
+    :show-header-toggle-sidebar-button="preferences.widget.showSidebarToggle"
+    :show-header="preferences.header.enable"
     :is-mobile="preferences.app.isMobile"
     :layout="layout"
-    :sidebar-collapse="preferences.sidebar.isCollapsed"
-    :sidebar-collapse-show-title="preferences.sidebar.showCollapsedTitle"
-    :sidebar-enable="sidebarVisible"
-    :sidebar-collapsed-button="preferences.sidebar.showCollapsedButton"
-    :sidebar-fixed-button="preferences.sidebar.showFixedButton"
-    :sidebar-expand-on-hover="preferences.sidebar.expandOnHover"
-    :sidebar-extra-collapse="preferences.sidebar.isExtraCollapse"
+    :sidebar-collapsed-show-title="preferences.sidebar.collapsedShowTitle"
+    :sidebar-show-collapsed-button="preferences.sidebar.showCollapsedButton"
+    :sidebar-show-fixed-button="preferences.sidebar.showFixedButton"
     :sidebar-extra-collapsed-width="preferences.sidebar.extraCollapsedWidth"
-    :sidebar-hidden="preferences.sidebar.isHidden"
+    :sidebar-hidden="preferences.sidebar.hidden"
     :sidebar-mixed-width="preferences.sidebar.mixedWidth"
     :sidebar-theme="sidebarTheme"
     :sidebar-width="preferences.sidebar.width"
-    :side-collapse-width="preferences.sidebar.collapseWidth"
+    :sidebar-collapsed-width="preferences.sidebar.collapsedWidth"
     :tabbar-enable="preferences.tabbar.enable"
     :tabbar-height="preferences.tabbar.height"
     :z-index="preferences.app.zIndex"
     @side-mouse-leave="handleSideMouseLeave"
     @toggle-sidebar="toggleSidebar"
-    @update:sidebar-collapse="
-      (value: boolean) => updatePreferences({ sidebar: { collapsed: value } })
-    "
-    @update:sidebar-enable="
-      (value: boolean) => updatePreferences({ sidebar: { enable: value } })
-    "
-    @update:sidebar-expand-on-hover="
-      (value: boolean) =>
-        updatePreferences({ sidebar: { expandOnHover: value } })
-    "
-    @update:sidebar-extra-collapse="
-      (value: boolean) =>
-        updatePreferences({ sidebar: { extraCollapse: value } })
-    "
   >
     <!-- logo -->
     <template #logo>
@@ -324,8 +357,8 @@ const headerSlots = computed(() => {
     <template #menu>
       <LayoutMenu
         :accordion="preferences.navigation.isAccordion"
-        :collapse="preferences.sidebar.isCollapsed"
-        :collapse-show-title="preferences.sidebar.showCollapsedTitle"
+        :collapse="preferences.sidebar.collapsed"
+        :collapse-show-title="preferences.sidebar.collapsedShowTitle"
         :default-active="sidebarActive"
         :menus="wrapperMenus({ menus: sidebarMenus })"
         :rounded="isMenuRounded"
@@ -352,7 +385,7 @@ const headerSlots = computed(() => {
     <template #side-extra>
       <LayoutExtraMenu
         :accordion="preferences.navigation.isAccordion"
-        :collapse="preferences.sidebar.isExtraCollapse"
+        :collapse="preferences.sidebar.extraCollapsed"
         :menus="wrapperMenus({ menus: extraMenus })"
         :rounded="isMenuRounded"
         :theme="sidebarTheme"

@@ -36,19 +36,19 @@ const props = withDefaults(
     headerHeight: 50,
     headerHidden: false,
     headerMode: 'fixed',
-    headerToggleSidebarButton: true,
-    headerVisible: true,
+    showHeaderToggleSidebarButton: true,
+    showHeader: true,
     isMobile: false,
     layout: 'sidebar-nav',
-    sidebarCollapsedButton: true,
-    sidebarCollapseShowTitle: false,
+    sidebarShowCollapsedButton: true,
+    sidebarCollapsedShowTitle: false,
     sidebarExtraCollapsedWidth: 60,
-    sidebarFixedButton: true,
+    sidebarShowFixedButton: true,
     sidebarHidden: false,
     sidebarMixedWidth: 80,
     sidebarTheme: 'dark',
     sidebarWidth: 180,
-    sideCollapseWidth: 60,
+    sidebarCollapsedWidth: 60,
     tabbarEnable: true,
     tabbarHeight: 40,
     zIndex: 200,
@@ -60,17 +60,17 @@ const emits = defineEmits<{
   toggleSidebar: [];
 }>();
 
-const sidebarCollapse = defineModel<boolean>('sidebarCollapse', {
+const sidebarCollapsed = defineModel<boolean>('sidebarCollapsed', {
   default: false,
 });
-const sidebarExtraVisible = defineModel<boolean>('sidebarExtraVisible');
-const sidebarExtraCollapse = defineModel<boolean>('sidebarExtraCollapse', {
+const isSidebarExtraVisible = defineModel<boolean>('isSidebarExtraVisible');
+const sidebarExtraCollapsed = defineModel<boolean>('sidebarExtraCollapsed', {
   default: false,
 });
 const sidebarExpandOnHover = defineModel<boolean>('sidebarExpandOnHover', {
   default: false,
 });
-const sidebarEnable = defineModel<boolean>('sidebarEnable', { default: true });
+const sidebarEnabled = defineModel<boolean>('sidebarEnabled', { default: true });
 
 // Whether side is in hover state to expand the menu
 const sidebarExpandOnHovering = ref(false);
@@ -108,7 +108,7 @@ const isHeaderAutoMode = computed(() => props.headerMode === 'auto');
 
 const headerWrapperHeight = computed(() => {
   let height = 0;
-  if (props.headerVisible && !props.headerHidden) {
+  if (props.showHeader && !props.headerHidden) {
     height += props.headerHeight;
   }
   if (props.tabbarEnable) {
@@ -118,21 +118,21 @@ const headerWrapperHeight = computed(() => {
 });
 
 const getSideCollapseWidth = computed(() => {
-  const { sidebarCollapseShowTitle, sidebarMixedWidth, sideCollapseWidth }
+  const { sidebarCollapsedShowTitle, sidebarMixedWidth, sidebarCollapsedWidth }
     = props;
 
-  return sidebarCollapseShowTitle
+  return sidebarCollapsedShowTitle
     || isSidebarMixedNav.value
     || isHeaderMixedNav.value
     ? sidebarMixedWidth
-    : sideCollapseWidth;
+    : sidebarCollapsedWidth;
 });
 
 /**
  * Dynamically get whether the sidebar area is visible
  */
 const sidebarEnableState = computed(() => {
-  return !isHeaderNav.value && sidebarEnable.value;
+  return !isHeaderNav.value && sidebarEnabled.value;
 });
 
 /**
@@ -166,7 +166,7 @@ const getSidebarWidth = computed(() => {
 
   if ((isHeaderMixedNav.value || isSidebarMixedNav.value) && !isMobile) {
     width = sidebarMixedWidth;
-  } else if (sidebarCollapse.value) {
+  } else if (sidebarCollapsed.value) {
     width = isMobile ? 0 : getSideCollapseWidth.value;
   } else {
     width = sidebarWidth;
@@ -180,7 +180,7 @@ const getSidebarWidth = computed(() => {
 const sidebarExtraWidth = computed(() => {
   const { sidebarExtraCollapsedWidth, sidebarWidth } = props;
 
-  return sidebarExtraCollapse.value ? sidebarExtraCollapsedWidth : sidebarWidth;
+  return sidebarExtraCollapsed.value ? sidebarExtraCollapsedWidth : sidebarWidth;
 });
 
 /**
@@ -209,13 +209,13 @@ const headerFixed = computed(() => {
 });
 
 const showSidebar = computed(() => {
-  return isSideMode.value && sidebarEnable.value && !props.sidebarHidden;
+  return isSideMode.value && sidebarEnabled.value && !props.sidebarHidden;
 });
 
 /**
  * Mask visibility
  */
-const maskVisible = computed(() => !sidebarCollapse.value && props.isMobile);
+const maskVisible = computed(() => !sidebarCollapsed.value && props.isMobile);
 
 const mainStyle = computed(() => {
   let width = '100%';
@@ -232,18 +232,18 @@ const mainStyle = computed(() => {
     const isSideNavEffective
       = (isSidebarMixedNav.value || isHeaderMixedNav.value)
         && sidebarExpandOnHover.value
-        && sidebarExtraVisible.value;
+        && isSidebarExtraVisible.value;
 
     if (isSideNavEffective) {
-      const sideCollapseWidth = sidebarCollapse.value
+      const sidebarCollapsedWidth = sidebarCollapsed.value
         ? getSideCollapseWidth.value
         : props.sidebarMixedWidth;
-      const sideWidth = sidebarExtraCollapse.value
+      const sideWidth = sidebarExtraCollapsed.value
         ? props.sidebarExtraCollapsedWidth
         : props.sidebarWidth;
 
       // 100% - Sidebar mixed width - Menu width
-      sidebarAndExtraWidth = `${sideCollapseWidth + sideWidth}px`;
+      sidebarAndExtraWidth = `${sidebarCollapsedWidth + sideWidth}px`;
       width = `calc(100% - ${sidebarAndExtraWidth})`;
     } else {
       sidebarAndExtraWidth
@@ -267,19 +267,19 @@ const tabbarStyle = computed<CSSProperties>(() => {
   // If it is not mixed navigation, the width of the tabbar is 100%
   if (!isMixedNav.value || props.sidebarHidden) {
     width = '100%';
-  } else if (sidebarEnable.value) {
+  } else if (sidebarEnabled.value) {
     // The width when the mouse is on the sidebar and the sidebar is expanded
     const onHoveringWidth = sidebarExpandOnHover.value
       ? props.sidebarWidth
       : getSideCollapseWidth.value;
 
     // Set marginLeft, depending on whether the sidebar is collapsed
-    marginLeft = sidebarCollapse.value
+    marginLeft = sidebarCollapsed.value
       ? getSideCollapseWidth.value
       : onHoveringWidth;
 
     // Set the width of the tabbar, calculated as 100% minus the width of the sidebar
-    width = `calc(100% - ${sidebarCollapse.value ? getSidebarWidth.value : onHoveringWidth}px)`;
+    width = `calc(100% - ${sidebarCollapsed.value ? getSidebarWidth.value : onHoveringWidth}px)`;
   } else {
     // By default, the width of the tabbar is 100%
     width = '100%';
@@ -358,7 +358,7 @@ const maskStyle = computed<CSSProperties>(() => {
 const showHeaderToggleButton = computed(() => {
   return (
     props.isMobile
-    || (props.headerToggleSidebarButton
+    || (props.showHeaderToggleSidebarButton
       && isSideMode.value
       && !isSidebarMixedNav.value
       && !isMixedNav.value
@@ -374,7 +374,7 @@ watch(
   () => props.isMobile,
   (val) => {
     if (val) {
-      sidebarCollapse.value = true;
+      sidebarCollapsed.value = true;
     }
   },
   {
@@ -471,14 +471,14 @@ watch(
 
 function handleHeaderToggle() {
   if (props.isMobile) {
-    sidebarCollapse.value = false;
+    sidebarCollapsed.value = false;
   } else {
     emits('toggleSidebar');
   }
 }
 
 function handleClickMask() {
-  sidebarCollapse.value = true;
+  sidebarCollapsed.value = true;
 }
 </script>
 
@@ -486,14 +486,14 @@ function handleClickMask() {
   <div class="flex min-h-full w-full relative">
     <DashboardLayoutSidebar
       v-if="sidebarEnableState"
-      v-model:collapse="sidebarCollapse"
+      v-model:collapsed="sidebarCollapsed"
       v-model:expand-on-hover="sidebarExpandOnHover"
       v-model:expand-on-hovering="sidebarExpandOnHovering"
-      v-model:extra-collapse="sidebarExtraCollapse"
-      v-model:extra-visible="sidebarExtraVisible"
-      :show-collapse-button="sidebarCollapsedButton"
-      :show-fixed-button="sidebarFixedButton"
-      :collapse-width="getSideCollapseWidth"
+      v-model:extra-collapse="sidebarExtraCollapsed"
+      v-model:extra-visible="isSidebarExtraVisible"
+      :show-collapse-button="sidebarShowCollapsedButton"
+      :show-fixed-button="sidebarShowFixedButton"
+      :collapsed-width="getSideCollapseWidth"
       :dom-visible="!isMobile"
       :extra-width="sidebarExtraWidth"
       :fixed-extra="sidebarExpandOnHover"
@@ -545,7 +545,7 @@ function handleClickMask() {
         class="transition-all-200 overflow-hidden"
       >
         <DashboardLayoutHeader
-          v-if="headerVisible"
+          v-if="props.showHeader"
           :full-width="!isSideMode"
           :height="headerHeight"
           :is-mobile="isMobile"
@@ -565,8 +565,10 @@ function handleClickMask() {
           <template #toggle-button>
             <PButton
               v-if="showHeaderToggleButton"
-              class="my-0 mr-1"
+              class="mr-2"
               icon="i-lucide:menu"
+              color="neutral"
+              variant="ghost"
               @click="handleHeaderToggle"
             />
           </template>

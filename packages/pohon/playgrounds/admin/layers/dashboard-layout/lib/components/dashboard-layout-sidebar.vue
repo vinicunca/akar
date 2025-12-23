@@ -17,7 +17,7 @@ interface Props {
    * Collapse width
    * @default 48
    */
-  collapseWidth?: number;
+  collapsedWidth?: number;
   /**
    * Whether the hidden DOM is visible
    * @default true
@@ -91,7 +91,7 @@ const props = withDefaults(
   defineProps<Props>(),
   {
     collapseHeight: 42,
-    collapseWidth: 48,
+    collapsedWidth: 48,
     domVisible: true,
     fixedExtra: false,
     isSidebarMixed: false,
@@ -105,7 +105,7 @@ const props = withDefaults(
 );
 
 const emits = defineEmits<{ leave: [] }>();
-const collapse = defineModel<boolean>('collapse');
+const collapsed = defineModel<boolean>('collapsed');
 const extraCollapse = defineModel<boolean>('extraCollapse');
 const expandOnHovering = defineModel<boolean>('expandOnHovering');
 const expandOnHover = defineModel<boolean>('expandOnHover');
@@ -151,9 +151,9 @@ const extraTitleStyle = computed<CSSProperties>(() => {
 });
 
 const contentWidthStyle = computed<CSSProperties>(() => {
-  const { collapseWidth, fixedExtra, isSidebarMixed, mixedWidth } = props;
+  const { collapsedWidth, fixedExtra, isSidebarMixed, mixedWidth } = props;
   if (isSidebarMixed && fixedExtra) {
-    return { width: `${collapse.value ? collapseWidth : mixedWidth}px` };
+    return { width: `${collapsed.value ? collapsedWidth : mixedWidth}px` };
   }
   return {};
 });
@@ -204,10 +204,8 @@ function calcMenuWidthStyle(isHiddenDom: boolean): CSSProperties {
       ? '0px'
       : `${width + extraWidth_}px`;
 
-  const { collapseWidth } = props;
-
   if (isHiddenDom && expandOnHovering.value && !expandOnHover.value) {
-    widthValue = `${collapseWidth}px`;
+    widthValue = `${props.collapsedWidth}px`;
   }
 
   return {
@@ -231,7 +229,7 @@ function handleMouseenter(event: MouseEvent) {
   }
 
   if (!expandOnHovering.value) {
-    collapse.value = false;
+    collapsed.value = false;
   }
 
   if (props.isSidebarMixed) {
@@ -253,7 +251,7 @@ function handleMouseleave() {
   }
 
   expandOnHovering.value = false;
-  collapse.value = true;
+  collapsed.value = true;
   extraVisible.value = false;
 }
 </script>
@@ -278,11 +276,6 @@ function handleMouseleave() {
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave"
   >
-    <DashboardLayoutSidebarFixedButton
-      v-if="!collapse && !isSidebarMixed"
-      v-model:expand-on-hover="expandOnHover"
-    />
-
     <div
       v-if="slots.logo"
       :style="headerStyle"
@@ -291,20 +284,28 @@ function handleMouseleave() {
     </div>
 
     <PScrollbar
-      class="pt-2 overflow-y-auto"
+      class="pt-2"
       :style="contentStyle"
-      shadow
-      shadow-border
+      has-shadow
+      has-shadow-border
     >
       <slot />
     </PScrollbar>
 
-    <div :style="collapseStyle" />
+    <div
+      :style="collapseStyle"
+      class="px-3 inline-flex w-full items-center justify-between"
+    >
+      <DashboardLayoutSidebarCollapseButton
+        v-if="showCollapseButton && !isSidebarMixed"
+        v-model:collapsed="collapsed"
+      />
 
-    <DashboardLayoutSidebarCollapseButton
-      v-if="showCollapseButton && !isSidebarMixed"
-      v-model:collapsed="collapse"
-    />
+      <DashboardLayoutSidebarFixedButton
+        v-if="!collapsed && !isSidebarMixed"
+        v-model:expand-on-hover="expandOnHover"
+      />
+    </div>
 
     <div
       v-if="isSidebarMixed"

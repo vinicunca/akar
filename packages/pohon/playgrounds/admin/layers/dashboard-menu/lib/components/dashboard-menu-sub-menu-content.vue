@@ -57,7 +57,7 @@ const hiddenTitle = computed(() => {
   );
 });
 
-const iconComp = computed(() => {
+const iconName = computed(() => {
   return (mode.value === 'horizontal' && !isFirstLevel.value)
     || (mode.value === 'vertical' && collapse.value)
     ? 'i-lucide:chevron-right'
@@ -94,11 +94,11 @@ const iconArrowStyle = computed(() => {
       <slot name="title" />
     </div>
 
-    <component
-      :is="iconComp"
+    <i
       v-if="!isMenuMore"
       v-show="showArrowIcon"
       class="pohon-sub-menu-content__icon-arrow size-4"
+      :class="[iconName]"
       :style="iconArrowStyle"
     />
   </div>

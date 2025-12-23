@@ -1,22 +1,12 @@
 <script setup lang="ts">
 const expandOnHover = defineModel<boolean>('expandOnHover');
-
-function toggleFixed() {
-  expandOnHover.value = !expandOnHover.value;
-}
 </script>
 
 <template>
-  <div
-    class="bg-accent color-foreground/60 hover:bg-accent-hover hover:color-foreground p-[5px] rounded-sm flex cursor-pointer transition-all-300 items-center bottom-2 right-3 justify-center absolute z-10"
-    @click="toggleFixed"
-  >
-    <i
-      :class="{
-        'i-lucide:pin': expandOnHover,
-        'i-lucide:pin-off': !expandOnHover,
-      }"
-      class="size-3.5"
-    />
-  </div>
+  <PButton
+    color="neutral"
+    variant="outline"
+    :icon="expandOnHover ? 'i-lucide:pin' : 'i-lucide:pin-off'"
+    @click="expandOnHover = !expandOnHover"
+  />
 </template>

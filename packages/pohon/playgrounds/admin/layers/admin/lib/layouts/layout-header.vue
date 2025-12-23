@@ -127,8 +127,10 @@ function clearPreferencesAndLogout() {
     <slot :name="slot.name">
       <template v-if="slot.name === 'refresh'">
         <PButton
-          class="my-0 mr-1 rounded-md"
+          class="mr-2"
           icon="i-lucide:rotate-cw"
+          color="neutral"
+          variant="ghost"
           @click="refresh"
         />
       </template>

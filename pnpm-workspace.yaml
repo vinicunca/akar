@@ -1,3 +1,7 @@
+# eslint-disable pnpm/yaml-enforce-settings
+catalogMode: prefer
+
+shellEmulator: true
 packages:
   - packages/*
   - docs
@@ -5,10 +9,16 @@ packages:
   - packages/pohon/playgrounds/vue
   - packages/pohon/playgrounds/admin
 
+overrides:
+  akar: workspace:*
+  pohon-ui: workspace:*
+  rolldown: 1.0.0-beta.26
+  typescript: 5.8.3
+  unplugin: ^2.3.10
+  vite: ^7.2.4
+
 catalog:
   postcss-preset-env: ^10.5.0
-
-catalogMode: prefer
 
 catalogs:
   base:
@@ -17,7 +27,7 @@ catalogs:
     '@commitlint/cli': ^20.1.0
     '@commitlint/config-conventional': ^20.0.0
     '@iconify/json': ^2.2.389
-    '@vinicunca/eslint-config': 4.0.0
+    '@vinicunca/eslint-config': 4.1.0
     eslint: ^9.39.1
     eslint-plugin-format: ^1.1.0
     lint-staged: ^16.2.7
@@ -41,7 +51,7 @@ catalogs:
     '@tsconfig/node18': ^18.2.4
     '@types/jsdom': ^27.0.0
     '@types/node': ^24.3.3
-    '@vinicunca/perkakas': 1.9.0
+    '@vinicunca/perkakas': 1.12.0
     '@vitejs/plugin-vue': ^6.0.2
     '@vitest/coverage-istanbul': ^3.2.4
     '@vue/test-utils': ^2.4.6
@@ -137,13 +147,3 @@ onlyBuiltDependencies:
   - puppeteer
   - sharp
   - simple-git-hooks
-
-overrides:
-  akar: workspace:*
-  pohon-ui: workspace:*
-  rolldown: 1.0.0-beta.26
-  typescript: 5.8.3
-  unplugin: ^2.3.10
-  vite: ^7.2.4
-
-shellEmulator: true

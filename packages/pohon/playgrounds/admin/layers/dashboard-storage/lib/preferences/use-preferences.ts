@@ -79,7 +79,7 @@ export function usePreferences() {
   });
 
   const sidebarCollapsed = computed(() => {
-    return preferences.sidebar.isCollapsed;
+    return preferences.sidebar.collapsed;
   });
 
   const keepAlive = computed(
@@ -89,8 +89,8 @@ export function usePreferences() {
   const authPageLayout = computed(() => appPreferences.value.authPageLayout);
 
   const contentIsMaximize = computed(() => {
-    const headerIsHidden = preferences.header.isHidden;
-    const sidebarIsHidden = preferences.sidebar.isHidden;
+    const headerIsHidden = preferences.header.hidden;
+    const sidebarIsHidden = preferences.sidebar.hidden;
     return headerIsHidden && sidebarIsHidden && !isFullContent.value;
   });
 
@@ -120,8 +120,8 @@ export function usePreferences() {
     }
 
     const { header, sidebar } = preferences;
-    const headerHidden = header.isHidden;
-    const sidebarHidden = sidebar.isHidden;
+    const headerHidden = header.hidden;
+    const sidebarHidden = sidebar.hidden;
 
     const contentIsMaximize = headerHidden && sidebarHidden;
 

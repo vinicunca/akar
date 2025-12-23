@@ -94,6 +94,10 @@ export default defineConfig({
     container: {
       '8xl': '90rem',
     },
+
+    font: {
+      sans: 'Inter',
+    },
   },
 
   outputToCssLayers: true,

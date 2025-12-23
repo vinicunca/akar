@@ -118,7 +118,7 @@ export interface HeaderPreferences {
   /** Header height */
   height: number;
   /** Hide header (CSS hidden) */
-  isHidden: boolean;
+  hidden: boolean;
   /** Top bar menu position */
   menuAlign: LayoutHeaderMenuAlignType;
   /** Header display mode */
@@ -149,25 +149,25 @@ export interface SidebarPreferences {
   /** Automatically activate the submenu when clicking on a directory */
   autoActivateChild: boolean;
   /** Collapse sidebar */
-  isCollapsed: boolean;
+  collapsed: boolean;
   /** Is the sidebar collapse button visible */
   showCollapsedButton: boolean;
   /** Show title when sidebar is collapsed */
-  showCollapsedTitle: boolean;
+  collapsedShowTitle: boolean;
   /** Sidebar collapse width */
-  collapseWidth: number;
+  collapsedWidth: number;
   /** Enable sidebar */
   enable: boolean;
   /** Expand menu on hover */
   expandOnHover: boolean;
   /** Collapse extra area of sidebar */
-  isExtraCollapse: boolean;
+  extraCollapsed: boolean;
   /** Sidebar expansion area collapsed width */
   extraCollapsedWidth: number;
   /** Is the sidebar fixed button visible */
   showFixedButton: boolean;
   /** Hide sidebar (CSS hidden) */
-  isHidden: boolean;
+  hidden: boolean;
   /** Mixed sidebar widths */
   mixedWidth: number;
   /** Sidebar width */

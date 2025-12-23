@@ -11,7 +11,7 @@ export default defineAppConfig({
 
   pohon: {
     colors: {
-      primary: 'cyan',
+      primary: 'blue',
       secondary: 'violet',
       success: 'emerald',
       warning: 'yellow',

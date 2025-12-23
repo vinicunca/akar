@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { PohonDashboardLayout } from '#layers/dashboard-layout/lib';
+import { AdminDashboardLayout } from '#layers/admin/lib';
 </script>
 
 <template>
-  <PohonDashboardLayout>
+  <AdminDashboardLayout>
     <!--  -->
-  </PohonDashboardLayout>
+  </AdminDashboardLayout>
 </template>

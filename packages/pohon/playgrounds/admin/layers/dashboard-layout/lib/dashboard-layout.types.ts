@@ -87,12 +87,12 @@ export interface DashboardLayoutProps {
    * Whether to show the button to toggle the sidebar in the header
    * @default
    */
-  headerToggleSidebarButton?: boolean;
+  showHeaderToggleSidebarButton?: boolean;
   /**
    * Whether the header is visible
    * @default true
    */
-  headerVisible?: boolean;
+  showHeader?: boolean;
   /**
    * Whether to display on mobile
    * @default false
@@ -112,22 +112,22 @@ export interface DashboardLayoutProps {
    * Sidebar collapse state
    * @default false
    */
-  sidebarCollapse?: boolean;
+  sidebarCollapsed?: boolean;
   /**
    * Whether to show the button to collapse the sidebar
    * @default true
    */
-  sidebarCollapsedButton?: boolean;
+  sidebarShowCollapsedButton?: boolean;
   /**
    * Whether to show the title when the sidebar is collapsed
    * @default true
    */
-  sidebarCollapseShowTitle?: boolean;
+  sidebarCollapsedShowTitle?: boolean;
   /**
    * Whether the sidebar is enabled
    * @default true
    */
-  sidebarEnable?: boolean;
+  sidebarEnabled?: boolean;
   /**
    * Extra width when the sidebar is collapsed
    * @default 48
@@ -137,7 +137,7 @@ export interface DashboardLayoutProps {
    * Wether the side menu collapse button is fixed
    * @default true
    */
-  sidebarFixedButton?: boolean;
+  sidebarShowFixedButton?: boolean;
   /**
    * Whether the sidebar is hidden
    * @default false
@@ -162,7 +162,7 @@ export interface DashboardLayoutProps {
    * Sidebar collapse width
    * @default 48
    */
-  sideCollapseWidth?: number;
+  sidebarCollapsedWidth?: number;
   /**
    * Whether the tab bar is enabled
    * @default true
