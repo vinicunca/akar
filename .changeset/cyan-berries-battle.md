@@ -12,3 +12,4 @@
 - fix(RangeCalendar): ensure update:validModelValue always emits latest value
 - fix(Combobox): don't focus the trigger element after closing
 - fix(Tabs): update indicator style when element size changes
+- fix(DateRangePicker/DatePicker): root has invalid as,asChild props
