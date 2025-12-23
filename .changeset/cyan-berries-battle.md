@@ -8,3 +8,4 @@
 - chore(deps): update build
 - fix(useForwardExpose): expose specified ref properties to parent ref
 - fix(Combobox): restore body pointer-event style
+- fix(Tooltip): reset isPointerInTransit to ensure trigger always works
