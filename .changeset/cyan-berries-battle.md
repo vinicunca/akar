@@ -9,3 +9,4 @@
 - fix(useForwardExpose): expose specified ref properties to parent ref
 - fix(Combobox): restore body pointer-event style
 - fix(Tooltip): reset isPointerInTransit to ensure trigger always works
+- fix(RangeCalendar): ensure update:validModelValue always emits latest value
