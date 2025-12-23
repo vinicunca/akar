@@ -1,6 +1,6 @@
 import type { RouterConfig } from '@nuxt/schema';
 import type { RouteRecordRaw } from 'vue-router';
-import { mapTree } from '#imports';
+import { mapTree } from '#layers/admin/lib';
 import { partition } from '@vinicunca/perkakas';
 
 interface RouteModuleType {

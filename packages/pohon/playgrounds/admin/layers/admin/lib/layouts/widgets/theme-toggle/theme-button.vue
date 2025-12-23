@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PButton } from '#components';
-import { updatePreferences, usePreferences } from '#layers/dashboard-preferences/lib';
+import { updatePreferences, usePreferences } from '#layers/dashboard-storage/lib';
 import { nextTick, ref } from 'vue';
 
 const { isDark } = usePreferences();

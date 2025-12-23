@@ -16,9 +16,9 @@ interface TreeConfigOptions {
 export function filterTree<T extends Record<string, any>>(
   { tree, filter, options }:
   {
+    tree: Array<T>;
     filter: (node: T) => boolean;
     options?: TreeConfigOptions;
-    tree: Array<T>;
   },
 ): Array<T> {
   const { childProps } = options || {
@@ -53,9 +53,9 @@ export function filterTree<T extends Record<string, any>>(
 export function mapTree<T, V extends Record<string, any>>(
   { tree, mapper, options }:
   {
+    tree: Array<T>;
     mapper: (node: T) => V;
     options?: TreeConfigOptions;
-    tree: Array<T>;
   },
 ): Array<V> {
   const { childProps } = options || {
@@ -72,4 +72,38 @@ export function mapTree<T, V extends Record<string, any>>(
     }
     return mapperNode as V;
   });
+}
+
+/**
+ * Recursively sort tree-structured data
+ * @param params
+ * @param params.tree - Array of tree data
+ * @param params.sortFunction - Sort function, used to define the sorting rules
+ * @param params.options - Configuration options, including child node attribute names
+ * @returns Sorted tree data
+ */
+export function sortTree<T extends Record<string, any>>(
+  { tree, sortFunction, options }:
+  {
+    tree: Array<T>;
+    sortFunction: (a: T, b: T) => number;
+    options?: TreeConfigOptions;
+  },
+): Array<T> {
+  const { childProps } = options || {
+    childProps: 'children',
+  };
+
+  return tree
+    .toSorted(sortFunction)
+    .map((item) => {
+      const children = item[childProps];
+      if (children && Array.isArray(children) && children.length > 0) {
+        return {
+          ...item,
+          [childProps]: sortTree({ tree: children, sortFunction, options }),
+        };
+      }
+      return item;
+    });
 }

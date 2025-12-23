@@ -1,6 +1,6 @@
 import type { DeepPartial } from '@vinicunca/perkakas';
 import type { InitialOptions, Preferences } from './preferences.entity';
-import { DashboardStorageManager, isMacOs } from '#layers/admin/lib';
+import { isMacOs } from '#layers/admin/lib';
 import {
   breakpointsTailwind,
   useBreakpoints,
@@ -8,6 +8,7 @@ import {
 } from '@vueuse/core';
 import { defu } from 'defu';
 import { markRaw, reactive, readonly, watch } from 'vue';
+import { DashboardStorageManager } from '../storage-manager';
 import { defaultPreferences } from './preferences.defaults';
 import { updateCssVariables } from './preferences.styling';
 

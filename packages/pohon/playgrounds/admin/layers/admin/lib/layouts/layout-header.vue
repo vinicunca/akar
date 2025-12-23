@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PButton, PFullscreen } from '#components';
-import { preferences, usePreferences } from '#layers/dashboard-preferences/lib';
+import { preferences, usePreferences } from '#layers/dashboard-storage/lib';
 import { computed, useSlots } from 'vue';
 import { useRefresh } from '../composables/use-refresh';
 import { useAccessStore } from '../stores/stores.access';

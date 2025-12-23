@@ -1,8 +1,8 @@
 import type { DashboardMenuRecord } from '#layers/dashboard-menu/lib';
 import type { ComputedRef } from 'vue';
+import { preferences } from '#layers/dashboard-storage/lib';
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { preferences } from '~~/layers/dashboard-preferences/lib';
 import { useAccessStore } from '../../stores/stores.access';
 import { findRootMenuByPath } from '../../utils/utils.find-menu-by-path';
 import { useDashboardNavigation } from './use-dashboard-navigation';

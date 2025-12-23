@@ -1,6 +1,7 @@
-import type { ExtendedRouteRecordRaw, PDashboardMenuRaw } from 'pohon-ui';
+import type { DashboardMenuRecord, ExtendedRouteRecordRaw } from '#layers/dashboard-menu/lib';
 import type { Router, RouteRecordRaw } from 'vue-router';
-import { defineNuxtPlugin, filterTree, mapTree } from '#imports';
+import { defineNuxtPlugin } from '#imports';
+import { filterTree, mapTree, sortTree } from '#layers/admin/lib';
 import { partition } from '@vinicunca/perkakas';
 import { useAccessStore } from '../../layers/admin/lib/stores/stores.access';
 
@@ -26,7 +27,7 @@ function generateRoutes(router: Router) {
   const roles: Array<string> = [];
   const routesTree = router.options.routes as Array<RouteRecordRaw>;
 
-  const [adminRoutes, coreRoutes] = partition(
+  const [adminRoutes] = partition(
     routesTree,
     (route) => route.path === '/admin',
   );
@@ -61,7 +62,7 @@ function hasAuthority({
 }
 
 function generateMenus(routes: Array<RouteRecordRaw>) {
-  let menus = mapTree<ExtendedRouteRecordRaw, PDashboardMenuRaw>({
+  let menus = mapTree<ExtendedRouteRecordRaw, DashboardMenuRecord>({
     tree: routes,
     mapper: (route) => {
       const {
@@ -89,7 +90,7 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
 
       const resultChildren = hideChildrenInMenu
         ? []
-        : ((children as Array<PDashboardMenuRaw>) ?? []);
+        : ((children as Array<DashboardMenuRecord>) ?? []);
 
       // Set the parent-child relationship of submenus
       if (resultChildren.length > 0) {
@@ -107,13 +108,11 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
         badgeType,
         badgeVariants,
         icon,
-        label: name,
+        name,
         order,
         parent: route.parent,
         parents: route.parents,
         path: resultPath,
-        to: resultPath,
-        type: children.length > 0 ? 'trigger' : undefined,
         show: !meta.hideInMenu,
         children: resultChildren,
       };
@@ -121,7 +120,10 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
   });
 
   // Sort the menu items to avoid the issue of order=0 being replaced with 999.
-  menus = menus.toSorted((a, b) => (a?.order ?? 999) - (b?.order ?? 999));
+  menus = sortTree({
+    tree: menus,
+    sortFunction: (a, b) => (a?.order ?? 999) - (b?.order ?? 999),
+  });
 
   return filterTree({
     tree: menus,

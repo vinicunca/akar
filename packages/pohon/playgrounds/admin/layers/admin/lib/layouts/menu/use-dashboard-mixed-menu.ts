@@ -3,7 +3,7 @@ import type {
   DashboardMenuProps,
   DashboardMenuRecord,
 } from '#layers/dashboard-menu/lib';
-import { preferences, usePreferences } from '#layers/dashboard-preferences/lib';
+import { preferences, usePreferences } from '#layers/dashboard-storage/lib';
 import { computed, onBeforeMount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useAccessStore } from '../../stores/stores.access';

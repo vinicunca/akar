@@ -1,5 +1,12 @@
+import type { PDashboardThemeModeType } from '#layers/dashboard-layout/lib/dashboard-layout.types';
 import type { Component, Ref } from 'vue';
-import type { PDashboardThemeModeType } from '~~/layers/dashboard-layout/lib/dashboard-layout.types';
+import type { RouteRecordRaw } from 'vue-router';
+
+export type ExtendedRouteRecordRaw = RouteRecordRaw & {
+  parent?: string;
+  parents?: Array<string>;
+  path?: any;
+};
 
 export interface DashboardMenuBadge {
   /**
