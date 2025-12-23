@@ -15,7 +15,7 @@ overrides:
   rolldown: 1.0.0-beta.26
   typescript: 5.8.3
   unplugin: ^2.3.10
-  vite: ^7.2.4
+  vite: ^7.2.7
 
 catalog:
   postcss-preset-env: ^10.5.0
@@ -64,7 +64,7 @@ catalogs:
     happy-dom: ^20.0.11
     jsdom: ^27.0.0
     tsdown: ^0.12.9
-    vite: ^7.2.4
+    vite: ^7.2.7
     vitest: ^3.2.4
     vitest-axe: 0.1.0
     vitest-canvas-mock: ^0.3.3
