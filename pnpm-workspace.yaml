@@ -135,7 +135,6 @@ catalogs:
     unplugin: ^2.3.10
     unplugin-auto-import: ^20.3.0
     zod: ^4.1.11
-
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
