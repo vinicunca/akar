@@ -5,6 +5,7 @@ import type {
   FocusOutsideEvent,
   PointerDownOutsideEvent,
 } from './utils';
+import { isNullish } from '@vinicunca/perkakas';
 import {
   computed,
   nextTick,
@@ -56,6 +57,7 @@ export type DismissableLayerPrivateEmits = DismissableLayerEmits & {
 export const context = reactive({
   layersRoot: new Set<HTMLElement>(),
   layersWithOutsidePointerEventsDisabled: new Set<HTMLElement>(),
+  originalBodyPointerEvents: undefined as string | undefined,
   branches: new Set<HTMLElement>(),
 });
 </script>
@@ -149,14 +151,13 @@ onKeyStroke('Escape', (event) => {
   }
 });
 
-let originalBodyPointerEvents: string;
 watchEffect((cleanupFn) => {
   if (!layerElement.value) {
     return;
   }
   if (props.disableOutsidePointerEvents) {
     if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
-      originalBodyPointerEvents = ownerDocument.value.body.style.pointerEvents;
+      context.originalBodyPointerEvents = ownerDocument.value.body.style.pointerEvents;
       ownerDocument.value.body.style.pointerEvents = 'none';
     }
     context.layersWithOutsidePointerEventsDisabled.add(layerElement.value);
@@ -167,8 +168,9 @@ watchEffect((cleanupFn) => {
     if (
       props.disableOutsidePointerEvents
       && context.layersWithOutsidePointerEventsDisabled.size === 1
+      && !isNullish(context.originalBodyPointerEvents)
     ) {
-      ownerDocument.value.body.style.pointerEvents = originalBodyPointerEvents;
+      ownerDocument.value.body.style.pointerEvents = context.originalBodyPointerEvents;
     }
   });
 });

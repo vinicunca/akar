@@ -41,7 +41,7 @@ type DatePickerRootContext = {
   closeOnSelect: Ref<boolean>;
 };
 
-export type ADatePickerRootProps = ADateFieldRootProps & APopoverRootProps & Pick<ACalendarRootProps, 'fixedWeeks' | 'isDateDisabled' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn'> & {
+export type ADatePickerRootProps = Omit<ADateFieldRootProps, 'as' | 'asChild'> & APopoverRootProps & Pick<ACalendarRootProps, 'fixedWeeks' | 'isDateDisabled' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn'> & {
   /** Whether or not to close the popover on date select */
   closeOnSelect?: boolean;
 };

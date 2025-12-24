@@ -2,14 +2,14 @@
 import type { DateValue } from '@internationalized/date';
 
 import type { Ref } from 'vue';
+import type { ADateRangeFieldRoot, ADateRangeFieldRootProps, APopoverRootEmits, APopoverRootProps, ARangeCalendarRootProps } from '..';
 import type { DateMatcher, WeekDayFormat } from '../date';
 import type { DateRange, DateStep, Granularity, HourCycle } from '../shared/date';
-import type { Direction } from '../shared/types';
 
-import type { ADateRangeFieldRoot, ADateRangeFieldRootProps, APopoverRootEmits, APopoverRootProps, ARangeCalendarRootProps } from '..';
+import type { Direction } from '../shared/types';
+import { APopoverRoot } from '..';
 import { createContext, useDirection } from '../shared';
 import { getDefaultDate } from '../shared/date';
-import { APopoverRoot } from '..';
 
 type DateRangePickerRootContext = {
   id: Ref<string | undefined>;
@@ -49,7 +49,7 @@ type DateRangePickerRootContext = {
   closeOnSelect?: Ref<boolean>;
 };
 
-export type ADateRangePickerRootProps = ADateRangeFieldRootProps & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable' | 'fixedDate' | 'maximumDays'> & {
+export type ADateRangePickerRootProps = Omit<ADateRangeFieldRootProps, 'as' | 'asChild'> & APopoverRootProps & Pick<ARangeCalendarRootProps, 'allowNonContiguousRanges' | 'fixedWeeks' | 'isDateDisabled' | 'isDateUnavailable' | 'numberOfMonths' | 'pagedNavigation' | 'preventDeselect' | 'weekdayFormat' | 'weekStartsOn' | 'isDateHighlightable' | 'fixedDate' | 'maximumDays'> & {
   /** Whether or not to close the popover on range select */
   closeOnSelect?: boolean;
 };

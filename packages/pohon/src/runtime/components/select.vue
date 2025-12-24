@@ -10,6 +10,7 @@ import type {
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
 import type { ButtonHTMLAttributes } from '../types/html';
+import type { ModelModifiers } from '../types/input';
 import type {
   AcceptableValue,
   ArrayOrNested,
@@ -111,6 +112,7 @@ export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNest
   defaultValue?: GetModelValue<T, VK, M>;
   /** The controlled value of the Select. Can be bind as `v-model`. */
   modelValue?: GetModelValue<T, VK, M>;
+  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>;
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean;
   /** Highlight the ring color like a focus state. */
@@ -172,7 +174,7 @@ import { useComponentIcons } from '../composables/use-component-icons';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { usePortal } from '../composables/use-portal';
-import { getDisplayValue, getProp, isArrayOfArray } from '../utils';
+import { getDisplayValue, getProp, isArrayOfArray, looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PChip from './chip.vue';
@@ -316,6 +318,22 @@ onMounted(() => {
 });
 
 function onUpdate(value: any) {
+  if (props.modelModifiers?.trim) {
+    value = value?.trim() ?? null;
+  }
+
+  if (props.modelModifiers?.number) {
+    value = looseToNumber(value);
+  }
+
+  if (props.modelModifiers?.nullable) {
+    value ??= null;
+  }
+
+  if (props.modelModifiers?.optional) {
+    value ??= undefined;
+  }
+
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } });
   emits('change', event);

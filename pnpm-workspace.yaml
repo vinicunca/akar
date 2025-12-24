@@ -15,7 +15,7 @@ overrides:
   rolldown: 1.0.0-beta.26
   typescript: 5.8.3
   unplugin: ^2.3.10
-  vite: ^7.2.4
+  vite: ^7.3.0
 
 catalog:
   postcss-preset-env: ^10.5.0
@@ -52,7 +52,7 @@ catalogs:
     '@types/jsdom': ^27.0.0
     '@types/node': ^24.3.3
     '@vinicunca/perkakas': 1.12.0
-    '@vitejs/plugin-vue': ^6.0.2
+    '@vitejs/plugin-vue': ^6.0.3
     '@vitest/coverage-istanbul': ^3.2.4
     '@vue/test-utils': ^2.4.6
     '@vue/tsconfig': ^0.8.1
@@ -64,7 +64,7 @@ catalogs:
     happy-dom: ^20.0.11
     jsdom: ^27.0.0
     tsdown: ^0.12.9
-    vite: ^7.2.4
+    vite: ^7.3.0
     vitest: ^3.2.4
     vitest-axe: 0.1.0
     vitest-canvas-mock: ^0.3.3
@@ -108,6 +108,14 @@ catalogs:
     '@pinia/nuxt': 0.11.3
     '@standard-schema/spec': ^1.0.0
     '@tanstack/vue-table': ^8.21.3
+    '@tiptap/extension-drag-handle-vue-3': 3.13.0
+    '@tiptap/extension-image': 3.13.0
+    '@tiptap/extension-mention': 3.13.0
+    '@tiptap/extension-placeholder': 3.13.0
+    '@tiptap/markdown': 3.13.0
+    '@tiptap/starter-kit': 3.13.0
+    '@tiptap/suggestion': 3.13.0
+    '@tiptap/vue-3': 3.13.0
     '@unocss/nuxt': 66.5.10
     '@vinicunca/unocss-preset': 1.38.0
     citty: ^0.1.6
