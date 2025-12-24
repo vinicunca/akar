@@ -53,7 +53,7 @@ const columns: Array<PTableColumn<Payment>> = [{
     'icon': 'i-lucide:chevron-down',
     'square': true,
     'aria-label': 'Expand',
-    'ui': {
+    'pohon': {
       leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-280 rotate-180' : ''],
     },
     'onClick': () => row.toggleExpanded(),
