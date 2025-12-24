@@ -15,3 +15,4 @@
 - fix(DateRangePicker/DatePicker): root has invalid as,asChild props
 - fix(Select): always show select arrow and leave display to the select content
 - feat(Editor): new component
+- feat(InputMenu/Select/SelectMenu): add modelModifiers prop
