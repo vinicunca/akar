@@ -4,6 +4,7 @@ import type {
   DashboardMenuProps,
   DashboardMenuRecord,
 } from '#layers/dashboard-menu/lib';
+import { PDashboardMenu } from '#components';
 import { DashboardMenu } from '#layers/dashboard-menu/lib';
 
 interface Props extends DashboardMenuProps {
@@ -39,12 +40,13 @@ function handleMenuOpen(item: DashboardMenuMenuItemPayload) {
 </script>
 
 <template>
-  <DashboardMenu
+  <PDashboardMenu
     :accordion="accordion"
     :collapse="collapse"
     :collapse-show-title="collapseShowTitle"
     :default-active="defaultActive"
-    :menus="menus"
+    default-open
+    :navigation="menus"
     :mode="mode"
     :rounded="rounded"
     scroll-to-active

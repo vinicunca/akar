@@ -109,6 +109,7 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
         badgeVariants,
         icon,
         name,
+        title: name,
         order,
         parent: route.parent,
         parents: route.parents,

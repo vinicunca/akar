@@ -1,262 +1,152 @@
 <script lang="ts">
+import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
-import type { AAccordionRootProps, ANavigationMenuRootProps } from 'akar';
-import type { PAvatarProps, PBadgeProps, PIconProps, PLinkProps, PPopoverProps, PTooltipProps } from '../types';
-import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
+import type { AAccordionRootEmits, AAccordionRootProps } from 'akar';
+import type { PBadgeProps, PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-menu';
+import { isNumber, isString } from '@vinicunca/perkakas';
 
-type DashboardMenu = ComponentConfig<typeof theme, AppConfig, 'dashboardMenu'>;
+type ContentNavigation = ComponentConfig<typeof theme, AppConfig, 'dashboardMenu'>;
 
-export interface PDashboardMenuChildItem extends Omit<PDashboardMenuItem, 'type'> {
-}
-
-export interface PDashboardMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'custom'> {
-  label?: string;
+export interface PContentNavigationLink extends ContentNavigationItem {
   /**
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
-  avatar?: PAvatarProps;
   /**
-   * Display a badge on the item.
-   * `{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
+   * Display a badge on the link.
+   * `{ color: 'neutral', variant: 'outline', size: 'sm' }`{lang="ts-type"}
    */
   badge?: string | number | PBadgeProps;
-  /**
-   * Display a tooltip on the item when the menu is collapsed with the label of the item.
-   * This has priority over the global `tooltip` prop.
-   */
-  tooltip?: boolean | PTooltipProps;
-  /**
-   * Display a popover on the item when the menu is collapsed with the children list.
-   * This has priority over the global `popover` prop.
-   */
-  popover?: boolean | PPopoverProps;
+  target?: PLinkProps['target'];
   /**
    * @IconifyIcon
    */
   trailingIcon?: PIconProps['name'];
-  /**
-   * The type of the item.
-   * The `label` type is only displayed in `vertical` orientation.
-   * The `trigger` type is used to force the item to be collapsible when its a link in `vertical` orientation.
-   * @defaultValue 'link'
-   */
-  type?: 'label' | 'trigger' | 'link';
-  slot?: string;
-  /**
-   * The value of the item. Avoid using `index` as the value to prevent conflicts in horizontal orientation with akar.
-   * @defaultValue `item-${index}`
-   */
-  value?: string;
-  children?: Array<PDashboardMenuChildItem>;
+  disabled?: boolean;
+  children?: Array<PContentNavigationLink>;
   defaultOpen?: boolean;
-  open?: boolean;
-  onSelect?: (event: Event) => void;
+  active?: boolean;
   class?: any;
-  pohon?: Pick<DashboardMenu['slots'], 'item' | 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childLabel' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>;
-  [key: string]: any;
+  pohon?: Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>;
 }
 
-type SingleOrMultipleType = 'single' | 'multiple';
-
-type DashboardMenuModelValue<
-  K extends SingleOrMultipleType = SingleOrMultipleType,
-> = K extends 'single' ? string : K extends 'multiple' ? Array<string> : string | Array<string>;
-
-export interface PDashboardMenuProps<
-  T extends ArrayOrNested<PDashboardMenuItem> = ArrayOrNested<PDashboardMenuItem>,
-  K extends SingleOrMultipleType = SingleOrMultipleType,
-> extends Pick<ANavigationMenuRootProps, 'unmountOnHide'>, Pick<AAccordionRootProps, 'disabled' | 'collapsible'> {
+export interface PContentNavigationProps<T extends PContentNavigationLink = PContentNavigationLink> extends Pick<AAccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
-   * @defaultValue 'div'
+   * @defaultValue 'nav'
    */
   as?: any;
   /**
-   * Determines whether a "single" or "multiple" items can be selected at a time.
-   * @defaultValue 'multiple'
+   * When `true`, the tree will be opened based on the current route.
+   * When `false`, the tree will be closed.
+   * When `undefined` (default), the first item will be opened with `type="single"` and the first level will be opened with `type="multiple"`.
    */
-  type?: K;
+  defaultOpen?: boolean;
   /**
-   * The controlled value of the active item(s).
-   * - In horizontal orientation: always `string`
-   * - In vertical orientation with `type="single"`: `string`
-   * - In vertical orientation with `type="multiple"`: `string[]`
-   *
-   * Use this when you need to control the state of the items. Can be binded with `v-model`
-   */
-  modelValue?: DashboardMenuModelValue<K>;
-  /**
-   * The default active value of the item(s).
-   * - In horizontal orientation: always `string`
-   * - In vertical orientation with `type="single"`: `string`
-   * - In vertical orientation with `type="multiple"`: `string[]`
-   *
-   * Use when you do not need to control the state of the item(s).
-   */
-  defaultValue?: DashboardMenuModelValue<K>;
-  /**
-   * The icon displayed to open the menu.
+   * The icon displayed to toggle the accordion.
    * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
   trailingIcon?: PIconProps['name'];
   /**
-   * The icon displayed when the item is an external link.
-   * Set to `false` to hide the external icon.
-   * @defaultValue appConfig.pohon.icons.external
-   * @IconifyIcon
-   */
-  externalIcon?: boolean | PIconProps['name'];
-  items?: T;
-  /**
    * @defaultValue 'primary'
    */
-  color?: DashboardMenu['variants']['color'];
+  color?: ContentNavigation['variants']['color'];
   /**
    * @defaultValue 'pill'
    */
-  variant?: DashboardMenu['variants']['variant'];
+  variant?: ContentNavigation['variants']['variant'];
   /**
-   * Collapse the navigation menu to only show icons.
+   * Display a line next to the active link.
    * @defaultValue false
    */
-  collapsed?: boolean;
-  /**
-   * Display a tooltip on the items when the menu is collapsed with the label of the item.
-   * `{ delayDuration: 0, content: { side: 'right' } }`{lang="ts-type"}
-   * @defaultValue false
-   */
-  tooltip?: boolean | PTooltipProps;
-  /**
-   * Display a popover on the items when the menu is collapsed with the children list.
-   * `{ mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }`{lang="ts-type"}
-   * @defaultValue false
-   */
-  popover?: boolean | PPopoverProps;
-  /** Display a line next to the active item. */
   highlight?: boolean;
   /**
    * @defaultValue 'primary'
    */
-  highlightColor?: DashboardMenu['variants']['highlightColor'];
+  highlightColor?: ContentNavigation['variants']['highlightColor'];
   /**
-   * The key used to get the label from the item.
-   * @defaultValue 'label'
+   * When type is "single", prevents closing the open item when clicking its trigger.
+   * When type is "multiple", disables the collapsible behavior.
+   * @defaultValue true
    */
-  labelKey?: GetItemKeys<T>;
+  collapsible?: boolean;
+  level?: number;
+  navigation?: Array<T>;
   class?: any;
-  pohon?: DashboardMenu['slots'];
+  pohon?: ContentNavigation['slots'];
 }
 
-export type PDashboardMenuEmits<
-  K extends SingleOrMultipleType = SingleOrMultipleType,
-> = {
-  /**
-   * Event handler called when the value changes.
-   * - With `type="single"`: emits `string | undefined`
-   * - With `type="multiple"`: emits `string[] | undefined`
-   */
-  'update:modelValue': [value: DashboardMenuModelValue<K> | undefined];
-};
+export interface PContentNavigationEmits extends AAccordionRootEmits {}
 
-type SlotProps<T extends PDashboardMenuItem> = (props: { item: T; index: number; active?: boolean; pohon: DashboardMenu['pohon'] }) => any;
+type SlotProps<T> = (props: { link: T; active?: boolean; pohon: ContentNavigation['pohon'] }) => any;
 
-export type PDashboardMenuSlots<
-  A extends ArrayOrNested<PDashboardMenuItem> = ArrayOrNested<PDashboardMenuItem>,
-  T extends NestedItem<A> = NestedItem<A>,
-> = {
-  'item': SlotProps<T>;
-  'item-leading': SlotProps<T>;
-  'item-label': (props: { item: T; index: number; active?: boolean }) => any;
-  'item-trailing': SlotProps<T>;
-  'item-content': SlotProps<T> & { close?: () => void };
-  'list-leading': (props?: object) => any;
-  'list-trailing': (props?: object) => any;
+export interface PContentNavigationSlots<T extends PContentNavigationLink = PContentNavigationLink> {
+  'link': SlotProps<T>;
+  'link-leading': SlotProps<T>;
+  'link-title': SlotProps<T>;
+  'link-trailing': SlotProps<T>;
 }
-& DynamicSlots<MergeTypes<T>, 'label', { index: number; active?: boolean; pohon: DashboardMenu['pohon'] }>
-& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing' | 'content', { index: number; active?: boolean; pohon: DashboardMenu['pohon'] }>;
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<PDashboardMenuItem>, K extends SingleOrMultipleType = SingleOrMultipleType">
+<script setup lang="ts" generic="T extends PContentNavigationLink">
 import { useAppConfig, useRoute } from '#imports';
-import { isBoolean, isNumber, isString, reduce } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AAccordionContent,
   AAccordionItem,
   AAccordionRoot,
   AAccordionTrigger,
-  ANavigationMenuItem,
-  ANavigationMenuLink,
-  ANavigationMenuRoot,
+  APrimitive,
   useForwardPropsEmits,
 } from 'akar';
-import { defu } from 'defu';
-import { computed, toRef } from 'vue';
-import { getProp, isArrayOfArray } from '../utils';
+import { computed } from 'vue';
+import { mapContentNavigationItem } from '../utils/content';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
-import PAvatar from './avatar.vue';
 import PBadge from './badge.vue';
+import PDashboardMenu from './dashboard-menu.vue';
 import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
-import PPopover from './popover.vue';
-import PTooltip from './tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<PDashboardMenuProps<T, K>>(),
+  defineProps<PContentNavigationProps<T>>(),
   {
-    externalIcon: true,
-    type: 'multiple' as never,
+    as: 'nav',
+    defaultOpen: undefined,
+    level: 0,
+    type: 'multiple',
     collapsible: true,
+    highlight: false,
     unmountOnHide: true,
-    labelKey: 'label',
   },
 );
-
-const emits = defineEmits<PDashboardMenuEmits<K>>();
-const slots = defineSlots<PDashboardMenuSlots<T>>();
-
-const appConfig = useAppConfig() as DashboardMenu['AppConfig'];
+const emits = defineEmits<PContentNavigationEmits>();
+const slots = defineSlots<PContentNavigationSlots<T>>();
 
 const rootProps = useForwardPropsEmits(
-  computed(() => ({
-    as: props.as,
-    unmountOnHide: props.unmountOnHide,
-  })),
-  emits,
-);
-const accordionProps = useForwardPropsEmits(
-  reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'),
+  reactivePick(props, 'collapsible', 'type', 'unmountOnHide'),
   emits,
 );
 
-const tooltipProps = toRef(() => defu(
-  isBoolean(props.tooltip)
-    ? {}
-    : props.tooltip,
-  { delayDuration: 0, content: { side: 'right' } },
-) as PTooltipProps);
+const route = useRoute();
+const appConfig = useAppConfig() as ContentNavigation['AppConfig'];
 
-const popoverProps = toRef(() => defu(
-  isBoolean(props.popover)
-    ? {}
-    : props.popover,
-  { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } },
-) as PPopoverProps);
+const [
+  DefineLinkTemplate,
+  ReuseLinkTemplate,
+] = createReusableTemplate<{ link: PContentNavigationLink; active?: boolean }>();
 
 const pohon = computed(() =>
   uv({
     extend: uv(theme),
     ...(appConfig.pohon?.dashboardMenu || {}),
   })({
-    collapsed: props.collapsed,
     color: props.color,
     variant: props.variant,
     highlight: props.highlight,
@@ -264,414 +154,229 @@ const pohon = computed(() =>
   }),
 );
 
-const lists = computed<Array<Array<PDashboardMenuItem>>>(() => {
-  if (props.items?.length) {
-    return isArrayOfArray(props.items)
-      ? props.items
-      : [props.items];
+const disabled = computed(() =>
+  props.disabled || (props.type === 'multiple' && props.collapsible === false),
+);
+
+function isRouteInTree(link: PContentNavigationLink, routePath: string): boolean {
+  if (link.children?.length) {
+    return link.children.some((child) => isRouteInTree(child, routePath));
   }
-
-  return [];
-});
-
-const route = useRoute();
-
-function getAccordionDefaultValue(list: Array<PDashboardMenuItem>, level = 0) {
-  const indexes = reduce<PDashboardMenuItem, Array<string>>(
-    list,
-    (acc, item, index) => {
-      if (isRouteInTree(item, route.path)) {
-        acc.push(item.value || (level > 0 ? `item-${level}-${index}` : `item-${index}`));
-      }
-
-      return acc;
-    },
-    [],
-  );
-
-  return props.type === 'single' ? indexes[0] : indexes;
+  return routePath === link.path;
 }
 
-function isRouteInTree(item: PDashboardMenuItem, routePath: string): boolean {
-  if (item.children?.length) {
-    return item.children.some((child) => isRouteInTree(child, routePath));
+const defaultValue = computed(() => {
+  // When `defaultOpen` is `false`, return `undefined` to close all items
+  if (props.defaultOpen === false) {
+    return undefined;
   }
-  return routePath === item.to;
-}
+  // When `defaultOpen` is `undefined`, open the first item or the first level
+  if (props.defaultOpen === undefined) {
+    return props.type === 'single'
+      ? '0'
+      : props.navigation
+        ?.map((link, index) => link.defaultOpen !== false && String(index))
+        .filter(Boolean) as Array<string>;
+  }
+  // When `defaultOpen` is `true`, open items based on the current route
+  const indices = props.navigation?.reduce((acc, link, index) => {
+    if (isRouteInTree(link, route.path)) {
+      acc.push(String(index));
+    }
+    return acc;
+  }, [] as Array<string>) || [];
 
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{
-  item: PDashboardMenuItem;
-  index: number;
-  active?: boolean;
-}>();
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
-  item: PDashboardMenuItem;
-  index: number;
-  level?: number;
-}>({
-  props: {
-    item: Object,
-    index: Number,
-    level: Number,
-  },
+  return props.type === 'multiple' ? indices : indices[0];
 });
 </script>
 
 <template>
-  <DefineLinkTemplate v-slot="{ item, active, index }">
+  <DefineLinkTemplate v-slot="{ link, active }">
     <slot
-      :name="((item.slot || 'item') as keyof PDashboardMenuSlots<T>)"
-      :item="item"
-      :index="index"
+      name="link"
+      :link="(link as T)"
       :active="active"
       :pohon="pohon"
     >
       <slot
-        :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PDashboardMenuSlots<T>)"
-        :item="item"
+        name="link-leading"
+        :link="(link as T)"
         :active="active"
-        :index="index"
         :pohon="pohon"
       >
-        <PAvatar
-          v-if="item.avatar"
-          :size="((item.pohon?.linkLeadingAvatarSize || props.pohon?.linkLeadingAvatarSize || pohon.linkLeadingAvatarSize()) as PAvatarProps['size'])"
-          v-bind="item.avatar"
-          :class="pohon.linkLeadingAvatar({
-            class: [props.pohon?.linkLeadingAvatar, item.pohon?.linkLeadingAvatar],
-            active,
-            disabled: !!item.disabled,
-          })"
-          data-pohon="dashboard-menu-link-leading-avatar"
-        />
         <PIcon
-          v-else-if="item.icon"
-          :name="item.icon"
+          v-if="link.icon"
+          :name="link.icon"
           :class="pohon.linkLeadingIcon({
-            class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
+            class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon],
             active,
-            disabled: !!item.disabled,
           })"
-          data-pohon="dashboard-menu-link-leading-icon"
         />
       </slot>
 
       <span
-        v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PDashboardMenuSlots<T>]"
-        :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
-        data-pohon="dashboard-menu-link-label"
+        v-if="link.title || !!slots['link-title']"
+        :class="pohon.linkTitle({
+          class: [props.pohon?.linkTitle, link.pohon?.linkTitle],
+          active,
+        })"
       >
         <slot
-          :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PDashboardMenuSlots<T>)"
-          :item="item"
+          name="link-title"
+          :link="(link as T)"
           :active="active"
-          :index="index"
+          :pohon="pohon"
         >
-          {{ getProp({ object: item, path: props.labelKey as string }) }}
+          {{ link.title }}
         </slot>
 
         <PIcon
-          v-if="item.target === '_blank' && externalIcon !== false"
-          :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
-          :class="pohon.linkLabelExternalIcon({
-            class: [props.pohon?.linkLabelExternalIcon, item.pohon?.linkLabelExternalIcon],
+          v-if="link.target === '_blank'"
+          :name="appConfig.pohon.icons.external"
+          :class="pohon.linkTitleExternalIcon({
+            class: [props.pohon?.linkTitleExternalIcon, link.pohon?.linkTitleExternalIcon],
             active,
           })"
-          data-pohon="dashboard-menu-link-label-external-icon"
         />
       </span>
 
-      <component
-        :is="item.children?.length && !collapsed ? AAccordionTrigger : 'span'"
-        v-if="(item.badge || item.badge === 0)
-          || item.children?.length
-          || item.trailingIcon
-          || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PDashboardMenuSlots<T>]"
-        as="span"
-        :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
-        data-pohon="dashboard-menu-link-trailing"
-        @click.stop.prevent
+      <span
+        v-if="(link.badge || link.badge === 0) || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']"
+        :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, link.pohon?.linkTrailing] })"
       >
         <slot
-          :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PDashboardMenuSlots<T>)"
-          :item="item"
+          name="link-trailing"
+          :link="(link as T)"
           :active="active"
-          :index="index"
           :pohon="pohon"
         >
           <PBadge
-            v-if="item.badge || item.badge === 0"
+            v-if="(link.badge || link.badge === 0)"
             color="neutral"
             variant="outline"
-            :size="((item.pohon?.linkTrailingBadgeSize || props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
-            v-bind="(isString(item.badge) || isNumber(item.badge)) ? { label: item.badge } : item.badge"
-            :class="pohon.linkTrailingBadge({ class: [props.pohon?.linkTrailingBadge, item.pohon?.linkTrailingBadge] })"
-            data-pohon="dashboard-menu-link-trailing-badge"
-          />
-
-          <PIcon
-            v-if="item.children?.length"
-            :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
-            :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
-            data-pohon="dashboard-menu-link-trailing-icon"
+            :size="((props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
+            v-bind="(isString(link.badge) || isNumber(link.badge)) ? { label: link.badge } : link.badge"
+            :class="pohon.linkTrailingBadge({ class: props.pohon?.linkTrailingBadge })"
           />
           <PIcon
-            v-else-if="item.trailingIcon"
-            :name="item.trailingIcon"
-            :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
-            data-pohon="dashboard-menu-link-trailing-icon"
+            v-if="link.children?.length && !disabled"
+            :name="link.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
+            :class="pohon.linkTrailingIcon({
+              class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
+            })"
+          />
+          <PIcon
+            v-else-if="link.trailingIcon"
+            :name="link.trailingIcon"
+            :class="pohon.linkTrailingIcon({
+              class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
+            })"
           />
         </slot>
-      </component>
+      </span>
     </slot>
   </DefineLinkTemplate>
 
-  <DefineItemTemplate v-slot="{ item, index, level = 0 }">
-    <component
-      :is="!collapsed ? AAccordionItem : ANavigationMenuItem"
-      as="li"
-      :value="item.value || (level > 0 ? `item-${level}-${index}` : `item-${index}`)"
+  <APrimitive
+    :as="as"
+    v-bind="$attrs"
+    :as-child="level > 0"
+    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+  >
+    <AAccordionRoot
+      as="ul"
+      :disabled="disabled"
+      v-bind="rootProps"
+      :default-value="defaultValue"
+      :class="level > 0 ? pohon.listWithChildren({ class: props.pohon?.listWithChildren }) : pohon.list({ class: props.pohon?.list })"
     >
-      <div
-        v-if="item.type === 'label' && !collapsed"
-        :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
-        data-pohon="dashboard-menu-label"
+      <template
+        v-for="(link, index) in navigation"
+        :key="index"
       >
-        <ReuseLinkTemplate
-          :item="item"
-          :index="index"
-        />
-      </div>
-
-      <PLink
-        v-else-if="item.type !== 'label'"
-        v-slot="{ active, ...slotProps }"
-        v-bind="(item.children?.length && !collapsed && item.type === 'trigger') ? {} : pickLinkProps(item as Omit<PDashboardMenuItem, 'type'>)"
-        custom
-      >
-        <component
-          :is="((item.children?.length && !collapsed && !(slotProps as any).href) ? AAccordionTrigger : ANavigationMenuLink)"
-          as-child
-          :active="active || item.active"
-          :disabled="item.disabled"
-          @select="item.onSelect"
+        <AAccordionItem
+          v-if="link.children?.length"
+          as="li"
+          :class="pohon.itemWithChildren({
+            class: [props.pohon?.itemWithChildren, link.pohon?.itemWithChildren],
+            level: level > 0,
+          })"
+          :value="String(index)"
         >
-          <PPopover
-            v-if="collapsed && item.children?.length && (!!props.popover || !!item.popover)"
-            v-bind="{ ...popoverProps, ...(isBoolean(item.popover) ? {} : item.popover || {}) }"
-            :pohon="{ content: pohon.content({ class: [props.pohon?.content, item.pohon?.content] }) }"
-          >
-            <PLinkBase
-              v-bind="slotProps"
-              :class="pohon.link({
-                class: [props.pohon?.link, item.pohon?.link, item.class],
-                active: active || item.active,
-                disabled: !!item.disabled,
-                level: level > 0,
-              })"
-              data-pohon="dashboard-menu-link"
-            >
-              <ReuseLinkTemplate
-                :item="item"
-                :active="active || item.active"
-                :index="index"
-              />
-            </PLinkBase>
-
-            <template #content="{ close }">
-              <slot
-                :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof PDashboardMenuSlots<T>)"
-                :item="item"
-                :active="active || item.active"
-                :index="index"
-                :pohon="pohon"
-                :close="close"
-              >
-                <ul
-                  :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })"
-                  data-pohon="dashboard-menu-child-list"
-                >
-                  <li
-                    :class="pohon.childLabel({ class: [props.pohon?.childLabel, item.pohon?.childLabel] })"
-                    data-pohon="dashboard-menu-child-label"
-                  >
-                    {{ getProp({ object: item, path: props.labelKey as string }) }}
-                  </li>
-                  <li
-                    v-for="(childItem, childIndex) in item.children"
-                    :key="childIndex"
-                    :class="pohon.childItem({ class: [props.pohon?.childItem, item.pohon?.childItem] })"
-                    data-pohon="dashboard-menu-child-item"
-                  >
-                    <PLink
-                      v-slot="{ active: childActive, ...childSlotProps }"
-                      v-bind="pickLinkProps(childItem)"
-                      custom
-                    >
-                      <ANavigationMenuLink
-                        as-child
-                        :active="childActive"
-                        @select="childItem.onSelect"
-                      >
-                        <PLinkBase
-                          v-bind="childSlotProps"
-                          :class="pohon.childLink({
-                            class: [props.pohon?.childLink, item.pohon?.childLink, childItem.class],
-                            active: childActive,
-                          })"
-                          data-pohon="dashboard-menu-child-link"
-                        >
-                          <PIcon
-                            v-if="childItem.icon"
-                            :name="childItem.icon"
-                            :class="pohon.childLinkIcon({
-                              class: [props.pohon?.childLinkIcon, item.pohon?.childLinkIcon],
-                              active: childActive,
-                            })"
-                            data-pohon="dashboard-menu-child-link-icon"
-                          />
-
-                          <span
-                            :class="pohon.childLinkLabel({
-                              class: [props.pohon?.childLinkLabel, item.pohon?.childLinkLabel],
-                              active: childActive,
-                            })"
-                            data-pohon="dashboard-menu-child-link-label"
-                          >
-                            {{ getProp({ object: childItem, path: props.labelKey as string }) }}
-
-                            <PIcon
-                              v-if="childItem.target === '_blank' && externalIcon !== false"
-                              :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
-                              :class="pohon.childLinkLabelExternalIcon({
-                                class: [props.pohon?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon],
-                                active: childActive,
-                              })"
-                              data-pohon="dashboard-menu-child-link-label-external-icon"
-                            />
-                          </span>
-                        </PLinkBase>
-                      </ANavigationMenuLink>
-                    </PLink>
-                  </li>
-                </ul>
-              </slot>
-            </template>
-          </PPopover>
-
-          <PTooltip
-            v-else-if="collapsed && (!!props.tooltip || !!item.tooltip)"
-            :text="getProp({ object: item, path: props.labelKey as string })"
-            v-bind="{ ...tooltipProps, ...(isBoolean(item.tooltip) ? {} : item.tooltip || {}) }"
-          >
-            <PLinkBase
-              v-bind="slotProps"
-              :class="pohon.link({
-                class: [props.pohon?.link, item.pohon?.link, item.class],
-                active: active || item.active,
-                disabled: !!item.disabled,
-                level: level > 0,
-              })"
-              data-pohon="dashboard-menu-link"
-            >
-              <ReuseLinkTemplate
-                :item="item"
-                :active="active || item.active"
-                :index="index"
-              />
-            </PLinkBase>
-          </PTooltip>
-
-          <PLinkBase
-            v-else
-            v-bind="slotProps"
-            :class="pohon.link({
-              class: [props.pohon?.link, item.pohon?.link, item.class],
-              active: active || item.active,
-              disabled: !!item.disabled,
-              level: level > 0,
-            })"
-            data-pohon="dashboard-menu-link"
+          <AAccordionTrigger
+            as="button"
+            :class="[
+              pohon.link({
+                class: [props.pohon?.link, link.pohon?.link, link.class],
+                active: link.active,
+                disabled: !!link.disabled || disabled,
+              }),
+              pohon.trigger({
+                class: [props.pohon?.trigger, link.pohon?.trigger],
+                disabled,
+              }),
+            ]"
           >
             <ReuseLinkTemplate
-              :item="item"
-              :active="active || item.active"
-              :index="index"
+              :link="link"
+              :active="link.active"
             />
-          </PLinkBase>
-        </component>
-      </PLink>
+          </AAccordionTrigger>
 
-      <AAccordionContent
-        v-if="item.children?.length && !collapsed"
-        :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content] })"
-        data-pohon="dashboard-menu-accordion-content"
-      >
-        <AAccordionRoot
-          v-bind="({
-            ...accordionProps,
-            defaultValue: getAccordionDefaultValue(item.children, level + 1),
-          } as AAccordionRootProps)"
-          as="ul"
-          :class="pohon.childList({ class: props.pohon?.childList })"
-          data-pohon="dashboard-menu-child-list"
+          <AAccordionContent
+            :class="pohon.content({ class: [props.pohon?.content, link.pohon?.content] })"
+          >
+            <PDashboardMenu
+              v-bind="rootProps"
+              :navigation="link.children"
+              :default-open="defaultOpen"
+              :level="level + 1"
+              :trailing-icon="trailingIcon"
+              :color="color"
+              :variant="variant"
+              :highlight="highlight"
+              :highlight-color="highlightColor"
+              :pohon="props.pohon"
+            >
+              <template
+                v-for="(_, name) in slots"
+                #[name]="slotData"
+              >
+                <slot
+                  :name="name"
+                  v-bind="{ ...slotData, link: link as T }"
+                />
+              </template>
+            </PDashboardMenu>
+          </AAccordionContent>
+        </AAccordionItem>
+
+        <li
+          v-else
+          :class="pohon.item({ class: [props.pohon?.item, link.pohon?.item], level: level > 0 })"
         >
-          <ReuseItemTemplate
-            v-for="(childItem, childIndex) in item.children"
-            :key="childIndex"
-            :item="childItem"
-            :index="childIndex"
-            :level="level + 1"
-            :class="pohon.childItem({ class: [props.pohon?.childItem, childItem.pohon?.childItem] })"
-            data-pohon="dashboard-menu-child-item"
-          />
-        </AAccordionRoot>
-      </AAccordionContent>
-    </component>
-  </DefineItemTemplate>
-
-  <ANavigationMenuRoot
-    v-bind="{
-      ...rootProps,
-      ...$attrs,
-    }"
-    :data-collapsed="collapsed"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
-    data-pohon="dashboard-menu-root"
-  >
-    <slot name="list-leading" />
-
-    <template
-      v-for="(list, listIndex) in lists"
-      :key="`list-${listIndex}`"
-    >
-      <AAccordionRoot
-        v-bind="!collapsed ? {
-          ...accordionProps,
-          modelValue,
-          defaultValue: defaultValue ?? getAccordionDefaultValue(list),
-        } : {}"
-        as="ul"
-        :class="pohon.list({ class: props.pohon?.list })"
-        data-pohon="dashboard-menu-list"
-      >
-        <ReuseItemTemplate
-          v-for="(item, index) in list"
-          :key="`list-${listIndex}-${index}`"
-          :item="item"
-          :index="index"
-          :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item] })"
-          data-pohon="dashboard-menu-item"
-        />
-      </AAccordionRoot>
-
-      <div
-        v-if="listIndex < lists.length - 1"
-        :class="pohon.separator({ class: props.pohon?.separator })"
-        data-pohon="dashboard-menu-separator"
-      />
-    </template>
-
-    <slot name="list-trailing" />
-  </ANavigationMenuRoot>
+          <PLink
+            v-slot="{ active, ...slotProps }"
+            v-bind="pickLinkProps(mapContentNavigationItem(link))"
+            custom
+          >
+            <PLinkBase
+              v-bind="slotProps"
+              :class="pohon.link({
+                class: [props.pohon?.link, link.pohon?.link, link.class],
+                active,
+                disabled: !!link.disabled,
+                level: level > 0,
+              })"
+            >
+              <ReuseLinkTemplate
+                :link="link"
+                :active="active"
+              />
+            </PLinkBase>
+          </PLink>
+        </li>
+      </template>
+    </AAccordionRoot>
+  </APrimitive>
 </template>

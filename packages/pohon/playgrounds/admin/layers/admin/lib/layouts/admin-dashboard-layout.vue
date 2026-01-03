@@ -130,11 +130,11 @@ function wrapperMenus(
     ? mapTree({
         tree: menus,
         mapper: (item) => {
-          return { ...clone(item), name: t(item.name) };
+          return { ...clone(item), title: t(item.name) };
         },
       })
     : menus.map((item) => {
-        return { ...clone(item), name: t(item.name) };
+        return { ...clone(item), title: t(item.name) };
       });
 }
 

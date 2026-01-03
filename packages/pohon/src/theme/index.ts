@@ -18,6 +18,7 @@ export { default as colorPicker } from './color-picker';
 export { default as commandPalette } from './command-palette';
 export { default as container } from './container';
 export { default as contextMenu } from './context-menu';
+export { default as dashboardMenu } from './dashboard-menu';
 export { default as dialog } from './dialog';
 export { default as drawer } from './drawer';
 export { default as dropdownMenu } from './dropdown-menu';
