@@ -1,5 +1,4 @@
 <script lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
 import type { AAccordionRootEmits, AAccordionRootProps } from 'akar';
 import type { PBadgeProps, PIconProps, PLinkProps } from '../types';
@@ -7,9 +6,9 @@ import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-menu';
 import { isNumber, isString } from '@vinicunca/perkakas';
 
-type ContentNavigation = ComponentConfig<typeof theme, AppConfig, 'dashboardMenu'>;
+type DashboardMenu = ComponentConfig<typeof theme, AppConfig, 'dashboardMenu'>;
 
-export interface PContentNavigationLink extends ContentNavigationItem {
+export interface PDashboardMenuItem {
   /**
    * @IconifyIcon
    */
@@ -24,15 +23,18 @@ export interface PContentNavigationLink extends ContentNavigationItem {
    * @IconifyIcon
    */
   trailingIcon?: PIconProps['name'];
+  title: string;
+  path: string;
   disabled?: boolean;
-  children?: Array<PContentNavigationLink>;
+  children?: Array<PDashboardMenuItem>;
   defaultOpen?: boolean;
   active?: boolean;
   class?: any;
-  pohon?: Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>;
+  pohon?: Pick<DashboardMenu['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>;
+  [key: string]: unknown;
 }
 
-export interface PContentNavigationProps<T extends PContentNavigationLink = PContentNavigationLink> extends Pick<AAccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'> {
+export interface PContentNavigationProps<T extends PDashboardMenuItem = PDashboardMenuItem> extends Pick<AAccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'
@@ -53,11 +55,11 @@ export interface PContentNavigationProps<T extends PContentNavigationLink = PCon
   /**
    * @defaultValue 'primary'
    */
-  color?: ContentNavigation['variants']['color'];
+  color?: DashboardMenu['variants']['color'];
   /**
    * @defaultValue 'pill'
    */
-  variant?: ContentNavigation['variants']['variant'];
+  variant?: DashboardMenu['variants']['variant'];
   /**
    * Display a line next to the active link.
    * @defaultValue false
@@ -66,7 +68,7 @@ export interface PContentNavigationProps<T extends PContentNavigationLink = PCon
   /**
    * @defaultValue 'primary'
    */
-  highlightColor?: ContentNavigation['variants']['highlightColor'];
+  highlightColor?: DashboardMenu['variants']['highlightColor'];
   /**
    * When type is "single", prevents closing the open item when clicking its trigger.
    * When type is "multiple", disables the collapsible behavior.
@@ -76,14 +78,14 @@ export interface PContentNavigationProps<T extends PContentNavigationLink = PCon
   level?: number;
   navigation?: Array<T>;
   class?: any;
-  pohon?: ContentNavigation['slots'];
+  pohon?: DashboardMenu['slots'];
 }
 
 export interface PContentNavigationEmits extends AAccordionRootEmits {}
 
-type SlotProps<T> = (props: { link: T; active?: boolean; pohon: ContentNavigation['pohon'] }) => any;
+type SlotProps<T> = (props: { link: T; active?: boolean; pohon: DashboardMenu['pohon'] }) => any;
 
-export interface PContentNavigationSlots<T extends PContentNavigationLink = PContentNavigationLink> {
+export interface PContentNavigationSlots<T extends PDashboardMenuItem = PDashboardMenuItem> {
   'link': SlotProps<T>;
   'link-leading': SlotProps<T>;
   'link-title': SlotProps<T>;
@@ -91,7 +93,7 @@ export interface PContentNavigationSlots<T extends PContentNavigationLink = PCon
 }
 </script>
 
-<script setup lang="ts" generic="T extends PContentNavigationLink">
+<script setup lang="ts" generic="T extends PDashboardMenuItem">
 import { useAppConfig, useRoute } from '#imports';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
@@ -135,12 +137,16 @@ const rootProps = useForwardPropsEmits(
 );
 
 const route = useRoute();
-const appConfig = useAppConfig() as ContentNavigation['AppConfig'];
+const appConfig = useAppConfig() as DashboardMenu['AppConfig'];
 
 const [
   DefineLinkTemplate,
   ReuseLinkTemplate,
-] = createReusableTemplate<{ link: PContentNavigationLink; active?: boolean }>();
+] = createReusableTemplate<{
+  link: PDashboardMenuItem;
+  active?: boolean;
+  childActive?: boolean;
+}>();
 
 const pohon = computed(() =>
   uv({
@@ -158,7 +164,7 @@ const disabled = computed(() =>
   props.disabled || (props.type === 'multiple' && props.collapsible === false),
 );
 
-function isRouteInTree(link: PContentNavigationLink, routePath: string): boolean {
+function isRouteInTree(link: PDashboardMenuItem, routePath: string): boolean {
   if (link.children?.length) {
     return link.children.some((child) => isRouteInTree(child, routePath));
   }
@@ -191,7 +197,7 @@ const defaultValue = computed(() => {
 </script>
 
 <template>
-  <DefineLinkTemplate v-slot="{ link, active }">
+  <DefineLinkTemplate v-slot="{ link, active, childActive }">
     <slot
       name="link"
       :link="(link as T)"
@@ -210,7 +216,9 @@ const defaultValue = computed(() => {
           :class="pohon.linkLeadingIcon({
             class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon],
             active,
+            childActive,
           })"
+          data-pohon="dashboard-menu-link-leading-icon"
         />
       </slot>
 
@@ -220,6 +228,7 @@ const defaultValue = computed(() => {
           class: [props.pohon?.linkTitle, link.pohon?.linkTitle],
           active,
         })"
+        data-pohon="dashboard-menu-link-title"
       >
         <slot
           name="link-title"
@@ -237,12 +246,14 @@ const defaultValue = computed(() => {
             class: [props.pohon?.linkTitleExternalIcon, link.pohon?.linkTitleExternalIcon],
             active,
           })"
+          data-pohon="dashboard-menu-link-title-external-icon"
         />
       </span>
 
       <span
         v-if="(link.badge || link.badge === 0) || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']"
         :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, link.pohon?.linkTrailing] })"
+        data-pohon="dashboard-menu-link-trailing"
       >
         <slot
           name="link-trailing"
@@ -253,10 +264,11 @@ const defaultValue = computed(() => {
           <PBadge
             v-if="(link.badge || link.badge === 0)"
             color="neutral"
-            variant="outline"
+            variant="solid"
             :size="((props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(link.badge) || isNumber(link.badge)) ? { label: link.badge } : link.badge"
             :class="pohon.linkTrailingBadge({ class: props.pohon?.linkTrailingBadge })"
+            data-pohon="dashboard-menu-link-trailing-badge"
           />
           <PIcon
             v-if="link.children?.length && !disabled"
@@ -264,6 +276,7 @@ const defaultValue = computed(() => {
             :class="pohon.linkTrailingIcon({
               class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
             })"
+            data-pohon="dashboard-menu-link-trailing-icon"
           />
           <PIcon
             v-else-if="link.trailingIcon"
@@ -271,6 +284,7 @@ const defaultValue = computed(() => {
             :class="pohon.linkTrailingIcon({
               class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
             })"
+            data-pohon="dashboard-menu-link-trailing-icon"
           />
         </slot>
       </span>
@@ -282,6 +296,7 @@ const defaultValue = computed(() => {
     v-bind="$attrs"
     :as-child="level > 0"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    data-pohon="dashboard-menu-root"
   >
     <AAccordionRoot
       as="ul"
@@ -289,6 +304,7 @@ const defaultValue = computed(() => {
       v-bind="rootProps"
       :default-value="defaultValue"
       :class="level > 0 ? pohon.listWithChildren({ class: props.pohon?.listWithChildren }) : pohon.list({ class: props.pohon?.list })"
+      data-pohon="dashboard-menu-list-with-children"
     >
       <template
         v-for="(link, index) in navigation"
@@ -302,6 +318,7 @@ const defaultValue = computed(() => {
             level: level > 0,
           })"
           :value="String(index)"
+          data-pohon="dashboard-menu-item-with-children"
         >
           <AAccordionTrigger
             as="button"
@@ -309,7 +326,9 @@ const defaultValue = computed(() => {
               pohon.link({
                 class: [props.pohon?.link, link.pohon?.link, link.class],
                 active: link.active,
+                childActive: isRouteInTree(link, route.path),
                 disabled: !!link.disabled || disabled,
+                level: level > 0,
               }),
               pohon.trigger({
                 class: [props.pohon?.trigger, link.pohon?.trigger],
@@ -320,11 +339,13 @@ const defaultValue = computed(() => {
             <ReuseLinkTemplate
               :link="link"
               :active="link.active"
+              :child-active="isRouteInTree(link, route.path)"
             />
           </AAccordionTrigger>
 
           <AAccordionContent
             :class="pohon.content({ class: [props.pohon?.content, link.pohon?.content] })"
+            data-pohon="dashboard-menu-content"
           >
             <PDashboardMenu
               v-bind="rootProps"
@@ -354,6 +375,7 @@ const defaultValue = computed(() => {
         <li
           v-else
           :class="pohon.item({ class: [props.pohon?.item, link.pohon?.item], level: level > 0 })"
+          data-pohon="dashboard-menu-item"
         >
           <PLink
             v-slot="{ active, ...slotProps }"

@@ -22,7 +22,7 @@ import {
   useDashboardMixedMenu,
 } from './menu';
 import { LayoutTabbar } from './tabbar';
-import { Breadcrumb, PreferencesPanel } from './widgets';
+import { Breadcrumb, PreferencesButton } from './widgets';
 
 const emit = defineEmits<{ clearPreferencesAndLogout: []; clickLogo: [] }>();
 
@@ -457,7 +457,7 @@ const sidebarExtraCollapsed = computed({
       </Transition>
 
       <template v-if="preferencesButtonPosition.fixed">
-        <PreferencesPanel
+        <PreferencesButton
           class="bottom-20 right-0 fixed z-100"
           @clear-preferences-and-logout="clearPreferencesAndLogout"
         />

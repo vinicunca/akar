@@ -6,14 +6,13 @@ import { BRANDS } from './constant';
 export const dashboardMenuTheme = {
   slots: {
     content: 'data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden focus:outline-none',
-    list: 'isolate -mx-2.5 -mt-1.5',
+    list: 'isolate',
     listWithChildren: 'ms-5 border-s border-border',
     itemWithChildren: 'flex flex-col data-[state=open]:mb-1.5',
-    trigger: 'font-semibold',
-    link: 'group text-sm px-2.5 py-1.5 flex gap-1.5 w-full items-center relative focus-visible:outline-none focus:outline-none before:(content-empty rounded-md inset-x-0 inset-y-px absolute -z-1) focus-visible:before:ring-2 focus-visible:before:ring-inset',
+    link: 'group text-sm font-500 px-2.5 py-1.5 flex gap-1.5 w-full h-38px items-center relative focus-visible:outline-none focus:outline-none before:(content-empty rounded-md inset-x-0 inset-y-px absolute -z-1) focus-visible:before:ring-2 focus-visible:before:ring-inset',
     linkLeadingIcon: 'shrink-0 size-5',
     linkTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-    linkTrailingBadge: 'shrink-0',
+    linkTrailingBadge: 'shrink-0 akar:rounded-full',
     linkTrailingBadgeSize: 'sm',
     linkTrailingIcon: 'size-5 transform transition-transform-200 shrink-0 group-data-[state=open]:rotate-180',
     linkTitle: 'truncate',
@@ -35,11 +34,16 @@ export const dashboardMenuTheme = {
     },
     active: {
       true: {
-        link: 'font-medium',
+        link: 'font-600',
       },
       false: {
         link: 'color-text-muted',
         linkLeadingIcon: 'color-text-dimmed',
+      },
+    },
+    childActive: {
+      true: {
+        link: 'font-600',
       },
     },
     disabled: {
@@ -80,10 +84,29 @@ export const dashboardMenuTheme = {
         linkLeadingIcon: `color-${color} group-data-[state=open]:color-${color}`,
       },
     })),
+    ...BRANDS.map((color) => ({
+      color,
+      variant: 'pill',
+      childActive: true,
+      active: false,
+      class: {
+        link: `akar:color-${color}`,
+        linkLeadingIcon: `akar:color-${color} akar:group-data-[state=open]:color-${color}`,
+      },
+    })),
     {
       color: 'neutral',
       variant: 'pill',
       active: true,
+      class: {
+        link: 'color-text-highlighted',
+        linkLeadingIcon: 'color-text-highlighted group-data-[state=open]:color-text-highlighted',
+      },
+    },
+    {
+      color: 'neutral',
+      variant: 'pill',
+      childActive: true,
       class: {
         link: 'color-text-highlighted',
         linkLeadingIcon: 'color-text-highlighted group-data-[state=open]:color-text-highlighted',
@@ -124,10 +147,28 @@ export const dashboardMenuTheme = {
         linkLeadingIcon: `color-${color} group-data-[state=open]:color-${color}`,
       },
     })),
+    ...BRANDS.map((color) => ({
+      color,
+      variant: 'link',
+      childActive: true,
+      class: {
+        link: `color-${color}`,
+        linkLeadingIcon: `color-${color} group-data-[state=open]:color-${color}`,
+      },
+    })),
     {
       color: 'neutral',
       variant: 'link',
       active: true,
+      class: {
+        link: 'color-text-highlighted',
+        linkLeadingIcon: 'color-text-highlighted group-data-[state=open]:color-text-highlighted',
+      },
+    },
+    {
+      color: 'neutral',
+      variant: 'link',
+      childActive: true,
       class: {
         link: 'color-text-highlighted',
         linkLeadingIcon: 'color-text-highlighted group-data-[state=open]:color-text-highlighted',

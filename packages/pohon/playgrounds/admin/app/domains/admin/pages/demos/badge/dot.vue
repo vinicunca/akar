@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import { definePageMeta } from '#imports';
 
-definePageMeta({
-  badgeType: 'dot',
-  icon: 'i-lucide:square-dot',
-  title: 'pages.demos.badge.dot',
-});
 </script>
 
 <template>

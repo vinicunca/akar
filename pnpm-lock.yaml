@@ -89,8 +89,8 @@ catalogs:
       specifier: ^24.3.3
       version: 24.10.1
     '@vinicunca/perkakas':
-      specifier: 1.12.0
-      version: 1.12.0
+      specifier: 1.13.0
+      version: 1.13.0
     '@vitejs/plugin-vue':
       specifier: ^6.0.3
       version: 6.0.3
@@ -425,7 +425,7 @@ importers:
         version: 22.0.1
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.12.0
+        version: 1.13.0
       '@vueuse/core':
         specifier: catalog:core
         version: 14.1.0(vue@3.5.25(typescript@5.8.3))
@@ -492,7 +492,7 @@ importers:
         version: 66.5.10(magicast@0.5.1)(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(webpack@5.102.1)
       '@vinicunca/unocss-preset':
         specifier: catalog:pohon
-        version: 1.38.0(@vinicunca/perkakas@1.12.0)(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(magicast@0.5.1)(synckit@0.11.11)(terser@5.44.1)(tsx@4.20.6)(unocss@66.5.10(@unocss/webpack@66.5.10(webpack@5.102.1))(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.2)
+        version: 1.38.0(@vinicunca/perkakas@1.13.0)(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(magicast@0.5.1)(synckit@0.11.11)(terser@5.44.1)(tsx@4.20.6)(unocss@66.5.10(@unocss/webpack@66.5.10(webpack@5.102.1))(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.2)
       fast-glob:
         specifier: catalog:docs
         version: 3.3.3
@@ -544,7 +544,7 @@ importers:
         version: 3.13.12(vue@3.5.24(typescript@5.8.3))
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.12.0
+        version: 1.13.0
       '@vueuse/core':
         specifier: catalog:core
         version: 14.1.0(vue@3.5.24(typescript@5.8.3))
@@ -704,7 +704,7 @@ importers:
         version: 66.5.10(magicast@0.5.1)(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(webpack@5.102.1(esbuild@0.27.1))
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.12.0
+        version: 1.13.0
       '@vueuse/core':
         specifier: catalog:core
         version: 14.1.0(vue@3.5.25(typescript@5.8.3))
@@ -834,7 +834,7 @@ importers:
         version: 0.11.3(magicast@0.5.1)(pinia@3.0.4(typescript@5.8.3)(vue@3.5.25(typescript@5.8.3)))
       '@vinicunca/perkakas':
         specifier: catalog:core
-        version: 1.12.0
+        version: 1.13.0
       '@vueuse/core':
         specifier: catalog:core
         version: 14.1.0(vue@3.5.25(typescript@5.8.3))
@@ -862,7 +862,7 @@ importers:
         version: 66.5.10(magicast@0.5.1)(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(webpack@5.102.1)
       '@vinicunca/unocss-preset':
         specifier: catalog:pohon
-        version: 1.38.0(@vinicunca/perkakas@1.12.0)(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(magicast@0.5.1)(synckit@0.11.11)(terser@5.44.1)(tsx@4.20.6)(unocss@66.5.10(@unocss/webpack@66.5.10(webpack@5.102.1))(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.2)
+        version: 1.38.0(@vinicunca/perkakas@1.13.0)(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(magicast@0.5.1)(synckit@0.11.11)(terser@5.44.1)(tsx@4.20.6)(unocss@66.5.10(@unocss/webpack@66.5.10(webpack@5.102.1))(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.2)
       pinia-plugin-persistedstate:
         specifier: catalog:pohon
         version: 4.7.1(@nuxt/kit@4.2.2(magicast@0.5.1))(@pinia/nuxt@0.11.3(magicast@0.5.1)(pinia@3.0.4(typescript@5.8.3)(vue@3.5.25(typescript@5.8.3))))(pinia@3.0.4(typescript@5.8.3)(vue@3.5.25(typescript@5.8.3)))
@@ -899,7 +899,7 @@ importers:
         version: 66.5.10(magicast@0.5.1)(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))(webpack@5.102.1)
       '@vinicunca/unocss-preset':
         specifier: catalog:pohon
-        version: 1.38.0(@vinicunca/perkakas@1.12.0)(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(magicast@0.5.1)(synckit@0.11.11)(terser@5.44.1)(tsx@4.20.6)(unocss@66.5.10(@unocss/webpack@66.5.10(webpack@5.102.1))(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.2)
+        version: 1.38.0(@vinicunca/perkakas@1.13.0)(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(magicast@0.5.1)(synckit@0.11.11)(terser@5.44.1)(tsx@4.20.6)(unocss@66.5.10(@unocss/webpack@66.5.10(webpack@5.102.1))(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.2)
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -4187,8 +4187,8 @@ packages:
       svelte-eslint-parser:
         optional: true
 
-  '@vinicunca/perkakas@1.12.0':
-    resolution: {integrity: sha512-hE1aQ9/l8VwZqJl8Elchnrv2OM1J/eCNcEgOU6RLwotcltiWZKuqAnJQhOThSmWc3Ca1ayiD1YpM/zuMAbp5Qw==}
+  '@vinicunca/perkakas@1.13.0':
+    resolution: {integrity: sha512-nDCsAHdnGcutWCeJjashCLS3HCVGCjYRZEzswsJQwEZ1gnm+w/ihAIJR4zQKV1c8pL69ZJiA6tz+rgLM77G6gQ==}
     engines: {node: '>=20.0.0'}
 
   '@vinicunca/unocss-preset@1.38.0':
@@ -9446,10 +9446,6 @@ packages:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
 
-  type-fest@4.41.0:
-    resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
-    engines: {node: '>=16'}
-
   type-fest@5.2.0:
     resolution: {integrity: sha512-xxCJm+Bckc6kQBknN7i9fnP/xobQRsRQxR01CztFkp/h++yfVxUUcmMgfR2HttJx/dpWjS9ubVuyspJv24Q9DA==}
     engines: {node: '>=20'}
@@ -14308,11 +14304,9 @@ snapshots:
       - typescript
       - vitest
 
-  '@vinicunca/perkakas@1.12.0':
-    dependencies:
-      type-fest: 4.41.0
+  '@vinicunca/perkakas@1.13.0': {}
 
-  '@vinicunca/unocss-preset@1.38.0(@vinicunca/perkakas@1.12.0)(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(magicast@0.5.1)(synckit@0.11.11)(terser@5.44.1)(tsx@4.20.6)(unocss@66.5.10(@unocss/webpack@66.5.10(webpack@5.102.1))(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.2)':
+  '@vinicunca/unocss-preset@1.38.0(@vinicunca/perkakas@1.13.0)(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(magicast@0.5.1)(synckit@0.11.11)(terser@5.44.1)(tsx@4.20.6)(unocss@66.5.10(@unocss/webpack@66.5.10(webpack@5.102.1))(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)))(vue-tsc@3.1.2(typescript@5.8.3))(yaml@2.8.2)':
     dependencies:
       '@types/node': 24.10.1
       '@unocss/core': 66.5.10
@@ -14324,7 +14318,7 @@ snapshots:
       '@unocss/transformer-directives': 66.5.10
       '@unocss/transformer-variant-group': 66.5.10
       '@vinicunca/eslint-config': 3.30.0(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(eslint@9.39.1(jiti@2.6.1))(typescript@5.8.3)(vitest@4.0.15(@types/node@24.10.1)(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2))
-      '@vinicunca/perkakas': 1.12.0
+      '@vinicunca/perkakas': 1.13.0
       bumpp: 10.3.2(magicast@0.5.1)
       defu: 6.1.4
       eslint: 9.39.1(jiti@2.6.1)
@@ -20831,8 +20825,6 @@ snapshots:
 
   type-fest@2.19.0: {}
 
-  type-fest@4.41.0: {}
-
   type-fest@5.2.0:
     dependencies:
       tagged-tag: 1.0.0
@@ -21008,7 +21000,7 @@ snapshots:
 
   unocss-variants@1.2.0:
     dependencies:
-      '@vinicunca/perkakas': 1.12.0
+      '@vinicunca/perkakas': 1.13.0
 
   unocss@66.5.10(@unocss/webpack@66.5.10(webpack@5.102.1(esbuild@0.27.1)))(postcss@8.5.6)(vite@7.3.0(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6)(yaml@2.8.2)):
     dependencies:

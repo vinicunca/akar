@@ -54,8 +54,11 @@ export default (options: Required<NuxtOptions['pohon']>) => ({
         trigger: '',
       },
     },
+    childActive: {
+      true: '',
+    },
     highlight: {
-      true: {},
+      true: '',
     },
     level: {
       true: {

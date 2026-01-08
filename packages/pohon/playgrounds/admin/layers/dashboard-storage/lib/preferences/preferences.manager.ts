@@ -12,49 +12,52 @@ import { DashboardStorageManager } from '../storage-manager';
 import { defaultPreferences } from './preferences.defaults';
 import { updateCssVariables } from './preferences.styling';
 
-const STORAGE_KEY = 'preferences';
-const STORAGE_KEY_LOCALE = `${STORAGE_KEY}-locale`;
-const STORAGE_KEY_THEME = `${STORAGE_KEY}-theme`;
+const STORAGE_KEYS = {
+  MAIN: 'preferences',
+  LOCALE: 'preferences-locale',
+  THEME: 'preferences-theme',
+} as const;
 
 export class PreferenceManager {
-  private cache: null | DashboardStorageManager = null;
+  private cache: DashboardStorageManager;
+  private debouncedSave: (preference: Preferences) => void;
   private initialPreferences: Preferences = defaultPreferences;
   private isInitialized = false;
-  private savePreferences: (preference: Preferences) => void;
-  private state: Preferences = reactive<Preferences>({
-    ...this.loadPreferences(),
-  });
+  private state: Preferences;
 
   constructor() {
     this.cache = new DashboardStorageManager();
 
+    this.state = reactive<Preferences>(
+      this.loadFromCache() || { ...defaultPreferences },
+    );
     // Avoid frequent cache operations
-    this.savePreferences = useDebounceFn(
-      (preference: Preferences) => this._savePreferences(preference),
+    this.debouncedSave = useDebounceFn(
+      (preference) => this.saveToCache(preference),
       150,
     );
   }
 
-  clearCache() {
-    [STORAGE_KEY, STORAGE_KEY_LOCALE, STORAGE_KEY_THEME].forEach((key) => {
-      this.cache?.removeItem(key);
+  clearCache = () => {
+    Object.values(STORAGE_KEYS).forEach((key) => {
+      this.cache.removeItem(key);
     });
-  }
+  };
 
-  public getInitialPreferences() {
+  getInitialPreferences = () => {
     return this.initialPreferences;
-  }
+  };
 
-  public getPreferences() {
+  getPreferences = () => {
     return readonly(this.state);
-  }
+  };
 
   /**
    * Override preferences
    * overrides  Preferences to be overridden
    * namespace  Namespace
    */
-  public async initPreferences({ namespace, overrides }: InitialOptions) {
+  initPreferences = async ({ namespace, overrides }: InitialOptions) => {
     // Whether it has been initialized
     if (this.isInitialized) {
       return;
@@ -64,7 +67,7 @@ export class PreferenceManager {
     // Merge initial preferences
     this.initialPreferences = defu({}, overrides, defaultPreferences);
 
-    const cachedPreferences = this.loadCachedPreferences() || {};
+    const cachedPreferences = this.loadFromCache() || {};
 
     // Load and merge currently stored preferences
     const mergedPreference = defu(
@@ -81,54 +84,35 @@ export class PreferenceManager {
     this.initPlatform();
     // Mark as initialized
     this.isInitialized = true;
-  }
+  };
 
   /**
    * Reset preferences
    * Preferences will be reset to initial values and removed from localStorage.
-   *
-   * @example
-   * Suppose initialPreferences are { theme: 'light', language: 'en' }
-   * Current state is { theme: 'dark', language: 'fr' }
-   * this.resetPreferences();
-   * After calling, state will be reset to { theme: 'light', language: 'en' }
-   * and the corresponding items in localStorage will be removed
    */
-  resetPreferences() {
+  resetPreferences = () => {
     // Reset state to initial preferences
     Object.assign(this.state, this.initialPreferences);
     // Save the reset preferences
-    this.savePreferences(this.state);
-    // Remove preference items from storage
-    [STORAGE_KEY, STORAGE_KEY_THEME, STORAGE_KEY_LOCALE].forEach((key) => {
-      this.cache?.removeItem(key);
-    });
-    this.updatePreferences(this.state);
-  }
+    this.saveToCache(this.state);
+
+    // Directly trigger UI update
+    this.handleUpdates(this.state);
+  };
 
   /**
    * Update preferences
    * @param updates - Preferences to be updated
    */
-  public updatePreferences(updates: DeepPartial<Preferences>) {
+  updatePreferences = (updates: DeepPartial<Preferences>) => {
     const mergedState = defu({}, updates, markRaw(this.state));
 
     Object.assign(this.state, mergedState);
 
     // Perform corresponding operations based on the updated keys
     this.handleUpdates(updates);
-    this.savePreferences(this.state);
-  }
-
-  /**
-   * Save preferences
-   * @param preference - Preferences to be saved
-   */
-  private _savePreferences(preference: Preferences) {
-    this.cache?.setItem(STORAGE_KEY, preference);
-    this.cache?.setItem(STORAGE_KEY_LOCALE, preference.app.locale);
-    this.cache?.setItem(STORAGE_KEY_THEME, preference.theme.mode);
-  }
+    this.debouncedSave(this.state);
+  };
 
   /**
    * Handle updated keys
@@ -152,24 +136,25 @@ export class PreferenceManager {
   }
 
   private initPlatform() {
-    const dom = document.documentElement;
-    dom.dataset.platform = isMacOs() ? 'macOs' : 'window';
+    document.documentElement.dataset.platform = isMacOs() ? 'macOs' : 'window';
   }
 
   /**
    * Load preferences from cache.
-   * If no corresponding preferences are found in the cache, return the default preferences.
+   * @returns The cached preference setting; returns null if it does not exist.
    */
-  private loadCachedPreferences() {
-    return this.cache?.getItem<Preferences>(STORAGE_KEY);
+  private loadFromCache(): null | Preferences {
+    return this.cache.getItem<Preferences>(STORAGE_KEYS.MAIN);
   }
 
   /**
-   * Load preferences
-   * @returns Loaded preferences
+   * Save preferences to cache.
+   * @param preference - Preferences to be saved
    */
-  private loadPreferences(): Preferences {
-    return this.loadCachedPreferences() || { ...defaultPreferences };
+  private saveToCache(preference: Preferences) {
+    this.cache.setItem(STORAGE_KEYS.MAIN, preference);
+    this.cache.setItem(STORAGE_KEYS.LOCALE, preference.app.locale);
+    this.cache.setItem(STORAGE_KEYS.THEME, preference.theme.mode);
   }
 
   /**

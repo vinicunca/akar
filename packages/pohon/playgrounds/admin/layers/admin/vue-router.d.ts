@@ -1,3 +1,4 @@
+import type { PBadgeProps } from 'pohon-ui';
 import type { Component } from 'vue';
 
 interface AdminRouteMeta {
@@ -27,21 +28,7 @@ interface AdminRouteMeta {
   /**
    * Badge
    */
-  badge?: string;
-  /**
-   * Badge type
-   */
-  badgeType?: 'dot' | 'normal';
-  /**
-   * Badge color
-   */
-  badgeVariants?:
-    | 'default'
-    | 'destructive'
-    | 'primary'
-    | 'success'
-    | 'warning'
-    | string;
+  badge?: string | number | PBadgeProps;
   /**
    * The full path of the route is used as the key
    * @default true

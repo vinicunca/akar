@@ -76,8 +76,6 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
       const {
         activeIcon,
         badge,
-        badgeType,
-        badgeVariants,
         hideChildrenInMenu = false,
         icon,
         link,
@@ -105,8 +103,6 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
       return {
         activeIcon,
         badge,
-        badgeType,
-        badgeVariants,
         icon,
         name,
         title: name,

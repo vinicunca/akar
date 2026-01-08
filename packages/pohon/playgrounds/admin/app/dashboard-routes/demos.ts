@@ -81,7 +81,7 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
-      // 功能
+      // Features
       {
         meta: {
           icon: 'mdi:feature-highlight',
@@ -359,13 +359,14 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
-      // 菜单徽标
+      // Badges
       {
         meta: {
-          badgeType: 'dot',
-          badgeVariants: 'destructive',
           icon: 'lucide:circle-dot',
           title: 'pages.demos.badge.title',
+          badge: {
+            color: 'error',
+          },
         },
         name: 'BadgeDemos',
         path: '/admin/demos/badge',
@@ -375,7 +376,9 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('~/domains/admin/pages/demos/badge/dot.vue'),
             path: '/admin/demos/badge/dot',
             meta: {
-              badgeType: 'dot',
+              badge: {
+                color: 'success',
+              },
               icon: 'lucide:square-dot',
               title: 'pages.demos.badge.dot',
             },
@@ -385,7 +388,10 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('~/domains/admin/pages/demos/badge/text.vue'),
             path: '/admin/demos/badge/text',
             meta: {
-              badge: '10',
+              badge: {
+                label: '10',
+                color: 'success',
+              },
               icon: 'lucide:square-dot',
               title: 'pages.demos.badge.text',
             },
@@ -395,15 +401,17 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('~/domains/admin/pages/demos/badge/color.vue'),
             path: '/admin/demos/badge/color',
             meta: {
-              badge: 'Hot',
-              badgeVariants: 'destructive',
+              badge: {
+                label: 'Hot',
+                color: 'error',
+              },
               icon: 'lucide:square-dot',
               title: 'pages.demos.badge.color',
             },
           },
         ],
       },
-      // 菜单激活图标
+      // Active Icons
       {
         meta: {
           activeIcon: 'fluent-emoji:radioactive',
