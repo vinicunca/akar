@@ -27,4 +27,11 @@ const sidebarShowFixedButton = defineModel<boolean>('sidebarShowFixedButton');
   >
     {{ t('preferences.sidebar.visible') }}
   </PreferencesBlocksSwitch>
+
+  <PreferencesBlocksSwitch
+    v-model="sidebarCollapsed"
+    :disabled="!sidebarEnable || props.disabled"
+  >
+    {{ t('preferences.sidebar.collapsed') }}
+  </PreferencesBlocksSwitch>
 </template>

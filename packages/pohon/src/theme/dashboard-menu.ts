@@ -57,6 +57,12 @@ export default (options: Required<NuxtOptions['pohon']>) => ({
     childActive: {
       true: '',
     },
+    collapsed: {
+      true: {
+        item: '',
+        link: '',
+      },
+    },
     highlight: {
       true: '',
     },

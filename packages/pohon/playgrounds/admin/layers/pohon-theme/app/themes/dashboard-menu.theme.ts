@@ -57,8 +57,21 @@ export const dashboardMenuTheme = {
         itemWithChildren: 'ps-1.5 -ms-px',
       },
     },
+    collapsed: {
+      true: {
+        item: 'py-1',
+        link: 'justify-center items-center',
+      },
+    },
   },
   compoundVariants: [
+    {
+      collapsed: true,
+      childActive: true,
+      class: {
+        link: 'before:bg-primary/20',
+      },
+    },
     {
       highlight: true,
       level: true,
@@ -71,7 +84,7 @@ export const dashboardMenuTheme = {
       active: false,
       variant: 'pill',
       class: {
-        link: 'hover:color-text-highlighted hover:before:bg-background-elevated/50 data-[state=open]:color-text-highlighted transition-colors-280 before:transition-colors-280',
+        link: 'hover:color-text-highlighted hover:before:bg-background-elevated/70 data-[state=open]:color-text-highlighted transition-colors-280 before:transition-colors-280',
         linkLeadingIcon: 'group-hover:color-text group-data-[state=open]:color-text transition-colors-280',
       },
     },
@@ -116,8 +129,18 @@ export const dashboardMenuTheme = {
       variant: 'pill',
       active: true,
       highlight: false,
+      collapsed: false,
       class: {
         link: 'before:bg-background-elevated',
+      },
+    },
+    {
+      variant: 'pill',
+      active: true,
+      highlight: false,
+      collapsed: true,
+      class: {
+        link: 'before:bg-primary/20',
       },
     },
     {

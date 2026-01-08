@@ -42,7 +42,7 @@ function handleMenuOpen(item: DashboardMenuMenuItemPayload) {
 <template>
   <PDashboardMenu
     :accordion="accordion"
-    :collapse="collapse"
+    :collapsed="collapsed"
     :collapse-show-title="collapseShowTitle"
     :default-active="defaultActive"
     default-open

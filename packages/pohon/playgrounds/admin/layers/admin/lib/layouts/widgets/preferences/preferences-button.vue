@@ -60,7 +60,7 @@ const listeners = computed(() => {
 
     <template #description>
       <AVisuallyHidden>
-        heeh
+        Setup your preferences
       </AVisuallyHidden>
     </template>
 

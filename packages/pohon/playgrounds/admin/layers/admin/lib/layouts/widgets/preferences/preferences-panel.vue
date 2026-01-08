@@ -66,7 +66,7 @@ const {
         v-model:sidebar-expand-on-hover="sidebarExpandOnHover"
         v-model:sidebar-width="sidebarWidth"
         v-model:sidebar-show-collapsed-button="sidebarShowCollapsedButton"
-        v-model:sidebar-fixed-button="sidebarShowFixedButton"
+        v-model:sidebar-show-fixed-button="sidebarShowFixedButton"
         :current-layout="appLayout"
         :disabled="!isSideMode"
       />

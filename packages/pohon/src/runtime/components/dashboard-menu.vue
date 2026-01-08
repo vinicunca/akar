@@ -4,6 +4,7 @@ import type { AAccordionRootEmits, AAccordionRootProps } from 'akar';
 import type { PBadgeProps, PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-menu';
+import { PDropdownMenu } from '#components';
 import { isNumber, isString } from '@vinicunca/perkakas';
 
 type DashboardMenu = ComponentConfig<typeof theme, AppConfig, 'dashboardMenu'>;
@@ -13,6 +14,10 @@ export interface PDashboardMenuItem {
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
+  /**
+   * @IconifyIcon
+   */
+  activeIcon?: PIconProps['name'];
   /**
    * Display a badge on the link.
    * `{ color: 'neutral', variant: 'outline', size: 'sm' }`{lang="ts-type"}
@@ -75,6 +80,7 @@ export interface PContentNavigationProps<T extends PDashboardMenuItem = PDashboa
    * @defaultValue true
    */
   collapsible?: boolean;
+  collapsed?: boolean;
   level?: number;
   navigation?: Array<T>;
   class?: any;
@@ -101,7 +107,9 @@ import {
   AAccordionItem,
   AAccordionRoot,
   AAccordionTrigger,
-  APrimitive,
+  ANavigationMenuItem,
+  ANavigationMenuLink,
+  ANavigationMenuRoot,
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
@@ -212,7 +220,7 @@ const defaultValue = computed(() => {
       >
         <PIcon
           v-if="link.icon"
-          :name="link.icon"
+          :name="active || childActive ? link.activeIcon ?? link.icon : link.icon"
           :class="pohon.linkLeadingIcon({
             class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon],
             active,
@@ -223,7 +231,7 @@ const defaultValue = computed(() => {
       </slot>
 
       <span
-        v-if="link.title || !!slots['link-title']"
+        v-if="(link.title || !!slots['link-title']) && !props.collapsed"
         :class="pohon.linkTitle({
           class: [props.pohon?.linkTitle, link.pohon?.linkTitle],
           active,
@@ -251,7 +259,7 @@ const defaultValue = computed(() => {
       </span>
 
       <span
-        v-if="(link.badge || link.badge === 0) || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']"
+        v-if="((link.badge || link.badge === 0) || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']) && !props.collapsed"
         :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, link.pohon?.linkTrailing] })"
         data-pohon="dashboard-menu-link-trailing"
       >
@@ -291,12 +299,12 @@ const defaultValue = computed(() => {
     </slot>
   </DefineLinkTemplate>
 
-  <APrimitive
+  <ANavigationMenuRoot
     :as="as"
-    v-bind="$attrs"
     :as-child="level > 0"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     data-pohon="dashboard-menu-root"
+    orientation="vertical"
   >
     <AAccordionRoot
       as="ul"
@@ -310,10 +318,14 @@ const defaultValue = computed(() => {
         v-for="(link, index) in navigation"
         :key="index"
       >
-        <AAccordionItem
+        <component
+          :is="props.collapsed ? ANavigationMenuItem : AAccordionItem"
           v-if="link.children?.length"
           as="li"
-          :class="pohon.itemWithChildren({
+          :class="props.collapsed ? pohon.item({
+            class: [props.pohon?.item, link.pohon?.item],
+            collapsed: true,
+          }) : pohon.itemWithChildren({
             class: [props.pohon?.itemWithChildren, link.pohon?.itemWithChildren],
             level: level > 0,
           })"
@@ -321,6 +333,7 @@ const defaultValue = computed(() => {
           data-pohon="dashboard-menu-item-with-children"
         >
           <AAccordionTrigger
+            v-if="!props.collapsed"
             as="button"
             :class="[
               pohon.link({
@@ -329,6 +342,7 @@ const defaultValue = computed(() => {
                 childActive: isRouteInTree(link, route.path),
                 disabled: !!link.disabled || disabled,
                 level: level > 0,
+                collapsed: props.collapsed,
               }),
               pohon.trigger({
                 class: [props.pohon?.trigger, link.pohon?.trigger],
@@ -343,7 +357,43 @@ const defaultValue = computed(() => {
             />
           </AAccordionTrigger>
 
+          <PDropdownMenu
+            v-else
+            v-slot="{ open }"
+            :content="{
+              side: 'right',
+              align: 'start',
+              sideOffset: 12,
+            }"
+            :items="link.children.map(item => mapContentNavigationItem(item))"
+          >
+            <ANavigationMenuLink
+              as="button"
+              :class="[
+                pohon.link({
+                  class: [props.pohon?.link, link.pohon?.link, link.class],
+                  active: link.active || open,
+                  childActive: isRouteInTree(link, route.path),
+                  disabled: !!link.disabled || disabled,
+                  level: level > 0,
+                  collapsed: props.collapsed,
+                }),
+                pohon.trigger({
+                  class: [props.pohon?.trigger, link.pohon?.trigger],
+                  disabled,
+                }),
+              ]"
+            >
+              <ReuseLinkTemplate
+                :link="link"
+                :active="link.active"
+                :child-active="isRouteInTree(link, route.path)"
+              />
+            </ANavigationMenuLink>
+          </PDropdownMenu>
+
           <AAccordionContent
+            v-if="link.children?.length && !props.collapsed"
             :class="pohon.content({ class: [props.pohon?.content, link.pohon?.content] })"
             data-pohon="dashboard-menu-content"
           >
@@ -370,11 +420,15 @@ const defaultValue = computed(() => {
               </template>
             </PDashboardMenu>
           </AAccordionContent>
-        </AAccordionItem>
+        </component>
 
-        <li
+        <ANavigationMenuItem
           v-else
-          :class="pohon.item({ class: [props.pohon?.item, link.pohon?.item], level: level > 0 })"
+          :class="pohon.item({
+            class: [props.pohon?.item, link.pohon?.item],
+            level: level > 0,
+            collapsed: props.collapsed,
+          })"
           data-pohon="dashboard-menu-item"
         >
           <PLink
@@ -389,6 +443,7 @@ const defaultValue = computed(() => {
                 active,
                 disabled: !!link.disabled,
                 level: level > 0,
+                collapsed: props.collapsed,
               })"
             >
               <ReuseLinkTemplate
@@ -397,8 +452,8 @@ const defaultValue = computed(() => {
               />
             </PLinkBase>
           </PLink>
-        </li>
+        </ANavigationMenuItem>
       </template>
     </AAccordionRoot>
-  </APrimitive>
+  </ANavigationMenuRoot>
 </template>

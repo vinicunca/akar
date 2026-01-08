@@ -1,4 +1,5 @@
-import type { DashboardMenuRecord, ExtendedRouteRecordRaw } from '#layers/dashboard-menu/lib';
+import type { DashboardMenuRecord } from '#layers/dashboard-layout/lib';
+import type { ExtendedRouteRecordRaw } from '#layers/dashboard-menu/lib';
 import type { Router, RouteRecordRaw } from 'vue-router';
 import { defineNuxtPlugin } from '#imports';
 import { filterTree, mapTree, sortTree } from '#layers/admin/lib';

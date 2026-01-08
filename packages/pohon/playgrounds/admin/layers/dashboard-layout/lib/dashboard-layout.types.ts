@@ -1,3 +1,5 @@
+import type { PDashboardMenuItem } from 'pohon-ui';
+
 export type PDashboardLayoutType
   = | 'full-content'
     | 'header-mixed-nav'
@@ -178,4 +180,25 @@ export interface DashboardLayoutProps {
    * @default 200
    */
   zIndex?: number;
+}
+
+export interface DashboardMenuRecord extends Pick<PDashboardMenuItem, 'icon' | 'activeIcon' | 'title' | 'path'> {
+  children?: Array<DashboardMenuRecord>;
+  /**
+   * Order number
+   */
+  order?: number;
+  /**
+   * Parent path
+   */
+  parent?: string;
+  /**
+   * All parent paths
+   */
+  parents?: Array<string>;
+  /**
+   * Whether to show the menu
+   * @default true
+   */
+  show?: boolean;
 }
