@@ -8,7 +8,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
 import NavigationMenuItem from './navigation-menu-item.vue';
-
 import NavigationMenu from './story/_navigation-menu.vue';
 
 vi.mock('@vueuse/core', async () => {
@@ -158,6 +157,29 @@ describe('given default NavigationMenu', () => {
       const content = findLinkContent();
 
       expect(content.exists()).toBeFalsy();
+    });
+
+    it('should close menu when clicking top-level link with hover disabled', async () => {
+      await wrapper.setProps({
+        disableHoverTrigger: true,
+        disablePointerLeaveClose: true,
+      });
+
+      const button = findTriggerButton().element;
+      button.click();
+      await wrapper.vm.$nextTick();
+
+      // Menu should be open
+      expect(findLinkContent().exists()).toBeTruthy();
+
+      // Click the top-level Github link
+      const topLevelLink = wrapper.find('a[href="https://github.com/vinicunca"]').element as HTMLElement;
+      topLevelLink.click();
+      await sleep(0);
+      await wrapper.vm.$nextTick();
+
+      // Menu should be closed
+      expect(findLinkContent().exists()).toBeFalsy();
     });
   });
 });

@@ -250,7 +250,6 @@ function createContentArr(props: CreateContentArrProps) {
 
       // In some locales (e.g., zh-TW), the time zone is represented with square brackets.
       // We also filter out these literals that are just brackets.
-      // @see https://github.com/unovue/reka-ui/issues/1670
       if (
         (!isZonedDateTime(props.dateRef) || hideTimeZone)
         && segment.part === 'literal' && ['[', ']'].includes(segment.value.trim())

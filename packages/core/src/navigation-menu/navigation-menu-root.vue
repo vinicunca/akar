@@ -94,7 +94,7 @@ export const [
 
 <script setup lang="ts">
 import { isString } from '@vinicunca/perkakas';
-import { refAutoReset, useDebounceFn, useVModel } from '@vueuse/core';
+import { refAutoReset, useDebounceFn, useEventListener, useVModel } from '@vueuse/core';
 import {
   computed,
   ref,
@@ -106,6 +106,7 @@ import {
   APrimitive,
 } from '../primitive';
 import { useDirection, useForwardExpose, useId } from '../shared';
+import { EVENT_ROOT_CONTENT_DISMISS } from './utils';
 
 const props = withDefaults(
   defineProps<ANavigationMenuRootProps>(),
@@ -185,6 +186,17 @@ watchEffect(() => {
   );
 });
 
+function onItemDismiss() {
+  previousValue.value = modelValue.value;
+  modelValue.value = '';
+}
+
+useEventListener(
+  rootNavigationMenu,
+  EVENT_ROOT_CONTENT_DISMISS,
+  onItemDismiss,
+);
+
 provideNavigationMenuContext({
   isRootMenu: true,
   modelValue,
@@ -225,10 +237,7 @@ provideNavigationMenuContext({
     previousValue.value = modelValue.value;
     modelValue.value = val;
   },
-  onItemDismiss: () => {
-    previousValue.value = modelValue.value;
-    modelValue.value = '';
-  },
+  onItemDismiss,
 });
 </script>
 
