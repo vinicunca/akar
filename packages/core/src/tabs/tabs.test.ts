@@ -1,8 +1,9 @@
 import type { VueWrapper } from '@vue/test-utils';
 import { KEY_CODES } from '@vinicunca/perkakas';
-import { mount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import { ATabsContent, ATabsList, ATabsRoot, ATabsTrigger } from '.';
 import Tabs from './story/_tabs.vue';
 
 describe('given default Tabs', () => {
@@ -38,5 +39,46 @@ describe('given default Tabs', () => {
       expect(wrapper.find('[role=tabpanel]').exists()).toBeTruthy();
       expect(wrapper.html()).toContain('Change your password');
     });
+  });
+});
+
+describe('given Tabs without TabsContent', () => {
+  it('should not render aria-controls on TabsTrigger', async () => {
+    const wrapper = mount({
+      components: { ATabsRoot, ATabsList, ATabsTrigger },
+      template: `
+        <ATabsRoot default-value="tab1">
+          <ATabsList>
+            <ATabsTrigger value="tab1">Tab 1</ATabsTrigger>
+            <ATabsTrigger value="tab2">Tab 2</ATabsTrigger>
+          </ATabsList>
+        </ATabsRoot>
+      `,
+    });
+    await flushPromises();
+
+    const triggers = wrapper.findAll('[role="tab"]');
+    expect(triggers[0].attributes('aria-controls')).toBeUndefined();
+    expect(triggers[1].attributes('aria-controls')).toBeUndefined();
+  });
+
+  it('should render aria-controls only for TabsTrigger with matching TabsContent', async () => {
+    const wrapper = mount({
+      components: { ATabsRoot, ATabsList, ATabsTrigger, ATabsContent },
+      template: `
+        <ATabsRoot default-value="tab1">
+          <ATabsList>
+            <ATabsTrigger value="tab1">Tab 1</ATabsTrigger>
+            <ATabsTrigger value="tab2">Tab 2</ATabsTrigger>
+          </ATabsList>
+          <ATabsContent value="tab1">Content 1</ATabsContent>
+        </ATabsRoot>
+      `,
+    });
+    await flushPromises();
+
+    const triggers = wrapper.findAll('[role="tab"]');
+    expect(triggers[0].attributes('aria-controls')).toBeDefined();
+    expect(triggers[1].attributes('aria-controls')).toBeUndefined();
   });
 });

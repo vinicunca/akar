@@ -17,3 +17,4 @@
 - fix(NavigationMenu): allow aria-label override by fixing CollectionSlot attrs forwarding
 - fix(Avatar): Properly set referrerpolicy and crossorigin
 - fix(NavigationMenu): close menu when clicking top-level link
+- fix(Tabs): only render aria-controls when TabsContent exists
