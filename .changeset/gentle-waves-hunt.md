@@ -15,3 +15,4 @@
 - fix: dayPeriod returning incorrect value due to missmatched format
 - fix(Editable): prevent submission during IME composition
 - fix(NavigationMenu): allow aria-label override by fixing CollectionSlot attrs forwarding
+- fix(Avatar): Properly set referrerpolicy and crossorigin

@@ -48,7 +48,7 @@ catalogs:
     '@testing-library/jest-dom': ^6.8.0
     '@testing-library/user-event': ^14.6.1
     '@testing-library/vue': ^8.1.0
-    '@tsconfig/node22': ^22.0.0
+    '@tsconfig/node24': ^24.0.0
     '@types/jsdom': ^27.0.0
     '@types/node': ^24.3.3
     '@vinicunca/perkakas': 1.13.0
@@ -64,7 +64,7 @@ catalogs:
     happy-dom: ^20.0.11
     jsdom: ^27.0.0
     tsdown: ^0.12.9
-    vite: ^7.3.0
+    vite: ^7.3.1
     vitest: ^3.2.4
     vitest-axe: 0.1.0
     vitest-canvas-mock: ^0.3.3
@@ -117,7 +117,7 @@ catalogs:
     '@tiptap/suggestion': 3.13.0
     '@tiptap/vue-3': 3.13.0
     '@unocss/nuxt': 66.5.10
-    '@vinicunca/unocss-preset': 1.38.0
+    '@vinicunca/unocss-preset': 1.40.0
     citty: ^0.1.6
     colortranslator: ^5.0.0
     consola: ^3.4.2
