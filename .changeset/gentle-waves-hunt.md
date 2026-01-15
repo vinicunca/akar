@@ -13,3 +13,4 @@
 - fix(DateRangePicker): add exports for missing component types and include TimeValue type in exports
 - fix(PinInput): handle more edge cases for the placeholder
 - fix: dayPeriod returning incorrect value due to missmatched format
+- fix(Editable): prevent submission during IME composition

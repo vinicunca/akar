@@ -37,7 +37,7 @@ export interface APopperContentProps extends APrimitiveProps {
    * Will be reversed when collisions occur and avoidCollisions
    * is enabled.
    *
-   * @defaultValue "top"
+   * @defaultValue "bottom"
    */
   side?: Side;
 
