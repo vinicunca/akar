@@ -8,3 +8,4 @@
 - feat(PinInput): enforce sequential inputs in OTP
 - feat(Menu): allow more value types
 - feat(NumberField): add focusOnChange prop
+- fix(TimeField/DateField/DateRangeField): filter redundant brackets with hideTimeZone
