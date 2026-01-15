@@ -19,3 +19,4 @@
 - fix(NavigationMenu): close menu when clicking top-level link
 - fix(Tabs): only render aria-controls when TabsContent exists
 - fix(Combobox): allow input focus when used inside Dialog
+- fix(FormField): hide error if error prop is false

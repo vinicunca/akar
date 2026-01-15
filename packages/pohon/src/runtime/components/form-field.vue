@@ -56,7 +56,12 @@ import { computed, inject, provide, ref, useId, watch } from 'vue';
 import { formErrorsInjectionKey, formFieldInjectionKey, formInputsInjectionKey, inputIdInjectionKey } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 
-const props = defineProps<PFormFieldProps>();
+const props = withDefaults(
+  defineProps<PFormFieldProps>(),
+  {
+    error: undefined,
+  },
+);
 const slots = defineSlots<PFormFieldSlots>();
 
 const appConfig = useAppConfig() as FormField['AppConfig'];
@@ -179,7 +184,7 @@ provide(
       <slot :error="error" />
 
       <div
-        v-if="(isString(error) && error) || !!slots.error"
+        v-if="props.error !== false && ((isString(error) && error) || !!slots.error)"
         :id="`${ariaId}-error`"
         :class="pohon.error({ class: props.pohon?.error })"
         data-pohon="form-field-error"

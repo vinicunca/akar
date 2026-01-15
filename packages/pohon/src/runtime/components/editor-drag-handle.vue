@@ -47,7 +47,6 @@ export interface PEditorDragHandleEmits {
 </script>
 
 <script setup lang="ts">
-import { PButton } from '#components';
 import { useAppConfig } from '#imports';
 import DragHandle from '@tiptap/extension-drag-handle-vue-3';
 import { reactiveOmit, reactivePick } from '@vueuse/core';
@@ -57,6 +56,7 @@ import { computed, ref } from 'vue';
 import { transformPohon } from '../utils';
 import { buildFloatingUIMiddleware } from '../utils/editor';
 import { uv } from '../utils/uv';
+import PButton from './button.vue';
 
 defineOptions({ inheritAttrs: false });
 
