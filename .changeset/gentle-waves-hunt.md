@@ -11,3 +11,4 @@
 - fix(TimeField/DateField/DateRangeField): filter redundant brackets with hideTimeZone
 - feat(PopperContent): add hideShiftedArrow prop to control arrow visibility
 - fix(DateRangePicker): add exports for missing component types and include TimeValue type in exports
+- fix(PinInput): handle more edge cases for the placeholder

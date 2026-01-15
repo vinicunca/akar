@@ -61,10 +61,16 @@ function handleInput(event: InputEvent) {
   }
 }
 
-function resetPlaceholder() {
-  const target = currentElement.value as HTMLInputElement;
+function updatePlaceholder() {
   nextTick(() => {
-    if (target && !target.value) {
+    const target = currentElement.value as HTMLInputElement;
+    if (!target) {
+      return;
+    }
+
+    if (!target.value && target === getActiveElement()) {
+      target.placeholder = '';
+    } else {
       target.placeholder = context.placeholder.value;
     }
   });
@@ -134,20 +140,11 @@ function handleFocus(event: FocusEvent) {
   const target = event.target as HTMLInputElement;
   target.setSelectionRange(1, 1);
 
-  if (!target.value) {
-    target.placeholder = '';
-  }
-
-  // check again after DOM flushes
-  setTimeout(() => {
-    if (!target.value) {
-      target.placeholder = '';
-    }
-  });
+  updatePlaceholder();
 }
 
 function handleBlur() {
-  resetPlaceholder();
+  updatePlaceholder();
 }
 
 function handlePaste(event: ClipboardEvent) {
@@ -214,11 +211,7 @@ function updateModelValueAt(
 
 watch(
   currentValue,
-  () => {
-    if (!currentValue.value) {
-      resetPlaceholder();
-    }
-  },
+  updatePlaceholder,
 );
 
 onMounted(() => {
