@@ -3,7 +3,14 @@ import type { Ref } from 'vue';
 import type { DismissableLayerEmits, DismissableLayerProps } from '../dismissable-layer';
 import type { APopperContentProps } from '../popper';
 
-import { createContext, getActiveElement, useForwardExpose, useForwardProps, useHideOthers } from '../shared';
+import {
+  createContext,
+  getActiveElement,
+  useFocusGuards,
+  useForwardExpose,
+  useForwardProps,
+  useHideOthers,
+} from '../shared';
 import { useBodyScrollLock } from '../shared/use-body-scroll-lock';
 
 export type ComboboxContentImplEmits = DismissableLayerEmits;
@@ -30,6 +37,7 @@ export const [
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, toRefs } from 'vue';
 import { DismissableLayer } from '../dismissable-layer';
+import { AFocusScope } from '../focus-scope';
 import { AListboxContent } from '../listbox';
 import { APopperContent } from '../popper';
 import { APrimitive } from '../primitive';
@@ -45,6 +53,7 @@ const rootContext = injectAComboboxRootContext();
 
 const { forwardRef, currentElement } = useForwardExpose();
 useBodyScrollLock(props.bodyLock);
+useFocusGuards();
 useHideOthers(rootContext.parentElement);
 
 const pickedProps = computed(() => {
@@ -93,40 +102,45 @@ onUnmounted(() => {
 
 <template>
   <AListboxContent as-child>
-    <DismissableLayer
+    <AFocusScope
       as-child
-      :disable-outside-pointer-events="disableOutsidePointerEvents"
-      @dismiss="rootContext.onOpenChange(false)"
-      @focus-outside="(event) => {
-        // if clicking inside the combobox, prevent dismiss
-        if (rootContext.parentElement.value?.contains(event.target as Node)) event.preventDefault()
-        emits('focusOutside', event)
-      }"
-      @interact-outside="emits('interactOutside', $event)"
-      @escape-key-down="emits('escapeKeyDown', $event)"
-      @pointer-down-outside="(event) => {
-        // if clicking inside the combobox, prevent dismiss
-        if (rootContext.parentElement.value?.contains(event.target as Node)) event.preventDefault()
-        emits('pointerDownOutside', event)
-      }"
+      @mount-auto-focus.prevent
     >
-      <component
-        :is="position === 'popper' ? APopperContent : APrimitive"
-        v-bind="{ ...$attrs, ...forwardedProps }"
-        :id="rootContext.contentId"
-        :ref="forwardRef"
-        :data-state="rootContext.open.value ? 'open' : 'closed'"
-        :style="{
-          // flex layout so we can place the scroll buttons properly
-          display: 'flex',
-          flexDirection: 'column',
-          // reset the outline by default as the content MAY get focused
-          outline: 'none',
-          ...(position === 'popper' ? popperStyle : {}),
+      <DismissableLayer
+        as-child
+        :disable-outside-pointer-events="disableOutsidePointerEvents"
+        @dismiss="rootContext.onOpenChange(false)"
+        @focus-outside="(event) => {
+          // if clicking inside the combobox, prevent dismiss
+          if (rootContext.parentElement.value?.contains(event.target as Node)) event.preventDefault()
+          emits('focusOutside', event)
+        }"
+        @interact-outside="emits('interactOutside', $event)"
+        @escape-key-down="emits('escapeKeyDown', $event)"
+        @pointer-down-outside="(event) => {
+          // if clicking inside the combobox, prevent dismiss
+          if (rootContext.parentElement.value?.contains(event.target as Node)) event.preventDefault()
+          emits('pointerDownOutside', event)
         }"
       >
-        <slot />
-      </component>
-    </DismissableLayer>
+        <component
+          :is="position === 'popper' ? APopperContent : APrimitive"
+          v-bind="{ ...$attrs, ...forwardedProps }"
+          :id="rootContext.contentId"
+          :ref="forwardRef"
+          :data-state="rootContext.open.value ? 'open' : 'closed'"
+          :style="{
+            // flex layout so we can place the scroll buttons properly
+            display: 'flex',
+            flexDirection: 'column',
+            // reset the outline by default as the content MAY get focused
+            outline: 'none',
+            ...(position === 'popper' ? popperStyle : {}),
+          }"
+        >
+          <slot />
+        </component>
+      </DismissableLayer>
+    </AFocusScope>
   </AListboxContent>
 </template>

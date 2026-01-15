@@ -18,3 +18,4 @@
 - fix(Avatar): Properly set referrerpolicy and crossorigin
 - fix(NavigationMenu): close menu when clicking top-level link
 - fix(Tabs): only render aria-controls when TabsContent exists
+- fix(Combobox): allow input focus when used inside Dialog
