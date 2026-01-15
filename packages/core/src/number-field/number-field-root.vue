@@ -17,6 +17,8 @@ export interface ANumberFieldRootProps extends APrimitiveProps, FormFieldProps {
   step?: number;
   /** When `false`, prevents the value from snapping to the nearest increment of the step value */
   stepSnapping?: boolean;
+  /** When `true`, the input will be focused when the value changes. */
+  focusOnChange?: boolean;
   /** Formatting options for the value displayed in the number field. This also affects what characters are allowed to be typed by the user. */
   formatOptions?: Intl.NumberFormatOptions;
   /** The locale to use for formatting dates */
@@ -75,12 +77,16 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<ANumberFieldRootProps>(), {
-  as: 'div',
-  defaultValue: undefined,
-  step: 1,
-  stepSnapping: true,
-});
+const props = withDefaults(
+  defineProps<ANumberFieldRootProps>(),
+  {
+    as: 'div',
+    defaultValue: undefined,
+    step: 1,
+    stepSnapping: true,
+    focusOnChange: true,
+  },
+);
 const emits = defineEmits<ANumberFieldRootEmits>();
 const {
   disabled,
@@ -143,7 +149,9 @@ const isIncreaseDisabled = computed(() => {
 );
 
 function handleChangingValue(type: 'decrease' | 'increase', multiplier = 1) {
-  inputEl.value?.focus();
+  if (props.focusOnChange) {
+    inputEl.value?.focus();
+  }
 
   if (props.disabled || props.readonly) {
     return;

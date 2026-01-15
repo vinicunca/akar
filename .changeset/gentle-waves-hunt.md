@@ -7,3 +7,4 @@
 - feat(ScrollArea): add glimpse scrollbar mode
 - feat(PinInput): enforce sequential inputs in OTP
 - feat(Menu): allow more value types
+- feat(NumberField): add focusOnChange prop
