@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { AcceptableValue } from '../shared/types';
 import type {
   AMenuItemEmits,
   AMenuItemProps,
@@ -8,7 +9,7 @@ export type AMenuRadioItemEmits = AMenuItemEmits;
 
 export interface AMenuRadioItemProps extends AMenuItemProps {
   /** The unique value of the item. */
-  value: string;
+  value: AcceptableValue;
 }
 </script>
 
