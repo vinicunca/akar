@@ -1,9 +1,11 @@
 export {
   default as ADateRangePickerAnchor,
+  type ADateRangePickerAnchorProps,
 } from './date-range-picker-anchor.vue';
 
 export {
   default as ADateRangePickerArrow,
+  type ADateRangePickerArrowProps,
 } from './date-range-picker-arrow.vue';
 export {
   default as ADateRangePickerCalendar,
@@ -20,10 +22,12 @@ export {
 } from './date-range-picker-cell.vue';
 export {
   default as ADateRangePickerClose,
+  type ADateRangePickerCloseProps,
 } from './date-range-picker-close.vue';
 
 export {
   default as ADateRangePickerContent,
+  type ADateRangePickerContentEmits,
   type ADateRangePickerContentProps,
 } from './date-range-picker-content.vue';
 export {

@@ -1,6 +1,6 @@
 export * from './arrays';
 export { createContext } from './create-context';
-export { type DateRange, type DateStep, type DateValue, type SegmentPart } from './date';
+export { type DateRange, type DateStep, type DateValue, type SegmentPart, type TimeValue } from './date';
 export { getActiveElement } from './get-active-element';
 export { handleAndDispatchCustomEvent } from './handle-and-dispatch-custom-event';
 export { isValueEqualOrExist } from './is-value-equal-or-exist';
