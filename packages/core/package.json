@@ -98,7 +98,7 @@
     "@testing-library/jest-dom": "catalog:core",
     "@testing-library/user-event": "catalog:core",
     "@testing-library/vue": "catalog:core",
-    "@tsconfig/node20": "catalog:core",
+    "@tsconfig/node22": "catalog:core",
     "@types/jsdom": "catalog:core",
     "@types/node": "catalog:core",
     "@vitejs/plugin-vue": "catalog:core",

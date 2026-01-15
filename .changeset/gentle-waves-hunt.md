@@ -9,3 +9,4 @@
 - feat(Menu): allow more value types
 - feat(NumberField): add focusOnChange prop
 - fix(TimeField/DateField/DateRangeField): filter redundant brackets with hideTimeZone
+- feat(PopperContent): add hideShiftedArrow prop to control arrow visibility
