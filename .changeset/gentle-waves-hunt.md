@@ -14,3 +14,4 @@
 - fix(PinInput): handle more edge cases for the placeholder
 - fix: dayPeriod returning incorrect value due to missmatched format
 - fix(Editable): prevent submission during IME composition
+- fix(NavigationMenu): allow aria-label override by fixing CollectionSlot attrs forwarding

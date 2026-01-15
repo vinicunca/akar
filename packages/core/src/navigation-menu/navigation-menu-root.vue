@@ -236,7 +236,6 @@ provideNavigationMenuContext({
   <ACollectionSlot>
     <APrimitive
       :ref="forwardRef"
-      aria-label="Main"
       :as="as"
       :as-child="asChild"
       :data-orientation="orientation"
