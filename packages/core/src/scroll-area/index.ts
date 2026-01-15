@@ -8,6 +8,10 @@ export {
   injectAScrollAreaRootContext,
 } from './scroll-area-root.vue';
 export {
+  default as AScrollAreaScrollbarGlimpse,
+  type AScrollAreaScrollbarGlimpseProps,
+} from './scroll-area-scrollbar-glimpse.vue';
+export {
   default as AScrollAreaScrollbar,
   type AScrollAreaScrollbarProps,
   injectAScrollAreaScrollbarContext,
