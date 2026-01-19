@@ -310,17 +310,17 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
                 :index="index"
               />
             </ADropdownMenu.CheckboxItem>
-            <ADropdownMenu.Item
+            <PLink
               v-else
-              as-child
-              :disabled="item.disabled"
-              :text-value="getProp({ object: item, path: props.labelKey as string })"
-              @select="item.onSelect"
+              v-slot="{ active, ...slotProps }"
+              v-bind="pickLinkProps(item as Omit<PDropdownMenuItem, 'type'>)"
+              custom
             >
-              <PLink
-                v-slot="{ active, ...slotProps }"
-                v-bind="pickLinkProps(item as Omit<PDropdownMenuItem, 'type'>)"
-                custom
+              <ADropdownMenu.Item
+                as-child
+                :disabled="item.disabled"
+                :text-value="getProp({ object: item, path: props.labelKey as string })"
+                @select="item.onSelect"
               >
                 <PLinkBase
                   v-bind="slotProps"
@@ -332,8 +332,8 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
                     :index="index"
                   />
                 </PLinkBase>
-              </PLink>
-            </ADropdownMenu.Item>
+              </ADropdownMenu.Item>
+            </PLink>
           </template>
         </ADropdownMenu.Group>
       </div>

@@ -482,16 +482,16 @@ function onSelect(event: Event, item: T) {
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <DefineItemTemplate v-slot="{ item, index, group }">
-    <AListboxItem
-      :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
-      :disabled="item.disabled"
-      as-child
-      @select="onSelect($event, item as T)"
+    <PLink
+      v-slot="{ active, ...slotProps }"
+      v-bind="pickLinkProps(item)"
+      custom
     >
-      <PLink
-        v-slot="{ active, ...slotProps }"
-        v-bind="pickLinkProps(item)"
-        custom
+      <AListboxItem
+        :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+        :disabled="item.disabled"
+        as-child
+        @select="onSelect($event, item as T)"
       >
         <PLinkBase
           v-bind="slotProps"
@@ -680,8 +680,8 @@ function onSelect(event: Event, item: T) {
             </span>
           </slot>
         </PLinkBase>
-      </PLink>
-    </AListboxItem>
+      </AListboxItem>
+    </PLink>
   </DefineItemTemplate>
 
   <AListboxRoot

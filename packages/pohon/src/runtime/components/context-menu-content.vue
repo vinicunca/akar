@@ -343,17 +343,18 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
                 :index="index"
               />
             </AContextMenu.CheckboxItem>
-            <AContextMenu.Item
+
+            <PLink
               v-else
-              as-child
-              :disabled="item.disabled"
-              :text-value="getProp({ object: item, path: props.labelKey as string })"
-              @select="item.onSelect"
+              v-slot="{ active, ...slotProps }"
+              v-bind="pickLinkProps(item as Omit<PContextMenuItem, 'type'>)"
+              custom
             >
-              <PLink
-                v-slot="{ active, ...slotProps }"
-                v-bind="pickLinkProps(item as Omit<PContextMenuItem, 'type'>)"
-                custom
+              <AContextMenu.Item
+                as-child
+                :disabled="item.disabled"
+                :text-value="getProp({ object: item, path: props.labelKey as string })"
+                @select="item.onSelect"
               >
                 <PLinkBase
                   v-bind="slotProps"
@@ -366,8 +367,8 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
                     :index="index"
                   />
                 </PLinkBase>
-              </PLink>
-            </AContextMenu.Item>
+              </AContextMenu.Item>
+            </PLink>
           </template>
         </AContextMenu.Group>
       </div>

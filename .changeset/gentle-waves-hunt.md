@@ -32,3 +32,4 @@
 - feat(Slideover): add inset prop
 - feat(FormField): add orientation prop
 - feat(docs): add component theme visualizer
+- fix(CommandPalette/ContextMenu/DropdownMenu): keyboard selection on link items
