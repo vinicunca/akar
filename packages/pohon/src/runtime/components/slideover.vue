@@ -34,6 +34,11 @@ export interface PSlideoverProps extends ADialogRootProps {
    */
   side?: Slideover['variants']['side'];
   /**
+   * Whether to inset the slideover from the edges.
+   * @defaultValue false
+   */
+  inset?: boolean;
+  /**
    * Render the slideover in a portal.
    * @defaultValue true
    */
@@ -140,9 +145,13 @@ const contentEvents = computed(() => {
 });
 
 const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.slideover || {}) })({
+  uv({
+    extend: uv(theme),
+    ...(appConfig.pohon?.slideover || {}),
+  })({
     transition: props.transition,
     side: props.side,
+    inset: props.inset,
   }),
 );
 </script>

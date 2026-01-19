@@ -196,6 +196,35 @@ slots:
 :core-placeholder{class="h-full min-h-48"}
 ::
 
+### Inset
+
+Use the `inset` prop to inset the Slideover from the edges.
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - title
+props:
+  side: 'right'
+  inset: true
+  title: 'Slideover with inset'
+slots:
+  default: |
+
+    <PButton label="Open" color="neutral" variant="subtle" />
+
+  body: |
+
+    <CorePlaceholder class="min-w-96 min-h-96 size-full" />
+---
+
+:p-button{label="Open" color="neutral" variant="subtle"}
+
+#body
+:core-placeholder{class="min-w-96 min-h-96 size-full"}
+::
+
 ### Overlay
 
 Use the `overlay` prop to control whether the Slideover has an overlay or not. Defaults to `true`.

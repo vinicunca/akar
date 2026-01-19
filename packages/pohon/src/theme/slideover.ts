@@ -26,9 +26,9 @@ export default {
         content: '',
       },
     },
-    transition: {
+    inset: {
       true: {
-        overlay: '',
+        content: '',
       },
     },
   },

@@ -29,3 +29,4 @@
 - feat(extractShortcuts): add separator option
 - docs(app): add component theme visualizer
 - feat(ProseCodeTree): add items prop
+- feat(Slideover): add inset prop
