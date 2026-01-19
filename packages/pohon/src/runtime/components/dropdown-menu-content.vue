@@ -219,7 +219,10 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
       :class="pohon.content({ class: [pohonOverride?.content, props.class] })"
       v-bind="contentProps"
     >
-      <slot name="content-top" />
+      <slot
+        name="content-top"
+        :sub="sub ?? false"
+      />
 
       <div
         role="presentation"
@@ -337,7 +340,10 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
 
       <slot />
 
-      <slot name="content-bottom" />
+      <slot
+        name="content-bottom"
+        :sub="sub ?? false"
+      />
     </component>
   </ADropdownMenu.Portal>
 </template>

@@ -248,7 +248,10 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
       data-pohon="context-menu-content"
       v-bind="contentProps"
     >
-      <slot name="content-top" />
+      <slot
+        name="content-top"
+        :sub="sub ?? false"
+      />
 
       <div
         role="presentation"
@@ -371,7 +374,10 @@ const groups = computed<Array<Array<PContextMenuItem>>>(() => {
 
       <slot />
 
-      <slot name="content-bottom" />
+      <slot
+        name="content-bottom"
+        :sub="sub ?? false"
+      />
     </component>
   </AContextMenu.Portal>
 </template>

@@ -72,8 +72,8 @@ const props = withDefaults(
 );
 
 const slots = defineSlots<{
-  options: (props?: object) => any;
-  code: (props?: object) => any;
+  options: (props?: {}) => any;
+  code: (props?: {}) => any;
 }>();
 
 const camelName = toCamelCase(props.name);

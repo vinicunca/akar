@@ -16,7 +16,6 @@
     "zod": "catalog:pohon"
   },
   "devDependencies": {
-    "@iconify/json": "catalog:base",
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/unocss-preset": "catalog:pohon",
     "typescript": "catalog:base",

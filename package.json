@@ -25,8 +25,7 @@
     "lint:fix": "eslint . --fix",
     "bump": "changeset",
     "ci:version": "changeset version",
-    "ci:publish": "pnpm dev:prepare && pnpm build && changeset publish",
-    "taze": "taze patch -wIrl"
+    "ci:publish": "pnpm dev:prepare && pnpm build && changeset publish"
   },
   "devDependencies": {
     "@changesets/changelog-github": "catalog:base",
@@ -35,10 +34,8 @@
     "@commitlint/config-conventional": "catalog:base",
     "@vinicunca/eslint-config": "catalog:base",
     "eslint": "catalog:base",
-    "eslint-plugin-format": "catalog:base",
     "lint-staged": "catalog:base",
     "simple-git-hooks": "catalog:base",
-    "taze": "catalog:base",
     "tsx": "catalog:base",
     "typescript": "catalog:base"
   },

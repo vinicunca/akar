@@ -19,6 +19,10 @@ export default vinicuncaESLint(
       'sonar/no-invariant-returns': 'off',
       'sonar/use-type-alias': 'off',
       'sonar/no-hardcoded-passwords': 'off',
+      'ts/no-empty-object-type': ['error', {
+        allowObjectTypes: 'always',
+        allowInterfaces: 'always',
+      }],
     },
   },
 

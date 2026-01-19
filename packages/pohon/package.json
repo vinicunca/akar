@@ -115,9 +115,10 @@
   ],
   "scripts": {
     "dev": "nuxt dev playgrounds/nuxt --uiDev",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare playgrounds/admin",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare ../../docs && pnpm dev:vue:build",
     "dev:vue:build": "pnpm --filter './playgrounds/vue' build",
     "build": "nuxt-module-build build",
+    "typecheck": "vue-tsc --noEmit",
     "prepack": "pnpm build",
     "test": "vitest",
     "test:vue": "vitest -c vitest.vue.config.ts"
