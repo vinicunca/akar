@@ -23,3 +23,4 @@
 - feat(ContextMenu/DropdownMenu): expose sub prop on content slots
 - feat(defineShortcuts): add layoutIndependent option
 - fix(ProseA/ProseCallout/ProseCard): improve focus styles
+- docs(toast): add callback example

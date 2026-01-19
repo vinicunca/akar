@@ -11,7 +11,7 @@ export const carouselTheme = {
     prev: 'absolute akar:rounded-full',
     next: 'absolute akar:rounded-full',
     dots: 'flex flex-wrap gap-3 items-center inset-x-0 justify-center absolute -bottom-7',
-    dot: 'rounded-full bg-background-accented size-3 cursor-pointer transition',
+    dot: 'rounded-full bg-background-accented size-3 cursor-pointer transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary',
   },
   variants: {
     orientation: {
