@@ -21,3 +21,4 @@
 - fix(Combobox): allow input focus when used inside Dialog
 - fix(FormField): hide error if error prop is false
 - feat(ContextMenu/DropdownMenu): expose sub prop on content slots
+- feat(defineShortcuts): add layoutIndependent option
