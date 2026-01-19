@@ -26,3 +26,4 @@
 - docs(toast): add callback example
 - docs(extract-shortcuts): add own page
 - docs(composables): add defineLocale and extendLocale
+- feat(extractShortcuts): add separator option

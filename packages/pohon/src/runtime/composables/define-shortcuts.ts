@@ -260,13 +260,16 @@ export function defineShortcuts(config: MaybeRef<PShortcutsConfig>, options: PSh
   return useEventListener('keydown', onKeyDown);
 }
 
-export function extractShortcuts(items: Array<any> | Array<Array<any>>) {
+export function extractShortcuts(
+  items: Array<any> | Array<Array<any>>,
+  separator: '_' | '-' = '_',
+) {
   const shortcuts: Record<string, Handler> = {};
 
   function traverse(items: Array<any>) {
     items.forEach((item) => {
       if (item.kbds?.length && (item.onSelect || item.onClick)) {
-        const shortcutKey = item.kbds.join('_');
+        const shortcutKey = item.kbds.join(separator);
         shortcuts[shortcutKey] = item.onSelect || item.onClick;
       }
       if (item.children) {
