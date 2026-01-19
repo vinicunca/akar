@@ -22,3 +22,4 @@
 - fix(FormField): hide error if error prop is false
 - feat(ContextMenu/DropdownMenu): expose sub prop on content slots
 - feat(defineShortcuts): add layoutIndependent option
+- fix(ProseA/ProseCallout/ProseCard): improve focus styles

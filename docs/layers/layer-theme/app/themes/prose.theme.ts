@@ -4,7 +4,7 @@ import { BRANDS } from './constant';
 
 export const proseTheme = {
   a: {
-    base: 'text-primary font-medium border-b border-transparent transition-colors focus-visible:outline-primary hover:border-primary [&>code]:border-dashed [&>code]:transition-colors hover:[&>code]:text-primary hover:[&>code]:border-primary',
+    base: 'color-primary font-medium border-b border-transparent hover:border-primary transition-colors focus-visible:outline-primary focus-visible:has-[>code]:outline-0 [&>code]:border-dashed hover:[&>code]:border-primary hover:[&>code]:color-primary focus-visible:[&>code]:border-primary focus-visible:[&>code]:color-primary',
   },
   accordion: {
     slots: {
@@ -32,7 +32,7 @@ export const proseTheme = {
         ...Object.fromEntries(BRANDS.map((color) => [
           color,
           {
-            base: `border border-${color}/25 bg-${color}/10 color-${color}-600 dark:color-${color}-300 [&_a]:color-${color} [&_a]:hover:border-${color} [&_code]:color-${color}-600 dark:[&_code]:color-${color}-300 [&_code]:border-${color}/25 [&_a]:hover:[&>code]:border-${color} [&_a]:hover:[&>code]:color-${color} [&>ul]:marker:color-${color}/50`,
+            base: `border border-${color}/25 bg-${color}/10 color-${color}-600 dark:color-${color}-300 [&_a]:color-${color} [&_a]:hover:border-${color} [&_a]:focus-visible:outline-${color} [&_code]:color-${color}-600 dark:[&_code]:color-${color}-300 [&_code]:border-${color}/25 [&_a]:hover:[&>code]:border-${color} [&_a]:hover:[&>code]:color-${color} [&_a]:focus-visible:[&>code]:border-${color} [&_a]:focus-visible:[&>code]:color-${color} [&>ul]:marker:color-${color}/50`,
             icon: `color-${color}`,
             externalIcon: `color-${color}-600 dark:color-${color}-300`,
           },
@@ -52,7 +52,7 @@ export const proseTheme = {
         color,
         to: true,
         class: {
-          base: `hover:border-${color}`,
+          base: `hover:border-${color} has-focus-visible:border-${color}`,
           externalIcon: `group-hover:text-${color}`,
         },
       })),
@@ -60,7 +60,7 @@ export const proseTheme = {
         color: 'neutral',
         to: true,
         class: {
-          base: 'hover:border-border-inverted',
+          base: 'hover:border-border-inverted has-focus-visible:border-inverted',
           externalIcon: 'group-hover:color-text-highlighted',
         },
       },
@@ -100,7 +100,7 @@ export const proseTheme = {
         color,
         to: true,
         class: {
-          base: `hover:bg-${color}/10 hover:border-${color}`,
+          base: `hover:bg-${color}/10 hover:border-${color} has-focus-visible:border-${color}`,
           externalIcon: `group-hover:color-${color}`,
         },
       })),
@@ -108,7 +108,7 @@ export const proseTheme = {
         color: 'neutral',
         to: true,
         class: {
-          base: 'hover:bg-background-elevated/50 hover:border-border-inverted',
+          base: 'hover:bg-background-elevated/50 hover:border-border-inverted has-focus-visible:border-inverted',
           externalIcon: 'group-hover:color-text-highlighted',
         },
       },
