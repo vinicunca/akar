@@ -31,3 +31,4 @@
 - feat(ProseCodeTree): add items prop
 - feat(Slideover): add inset prop
 - feat(FormField): add orientation prop
+- feat(docs): add component theme visualizer
