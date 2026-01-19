@@ -78,6 +78,8 @@ const slots = defineSlots<{
 
 const camelName = toCamelCase(props.name);
 const el = ref<HTMLElement>();
+const wrapperContainer = ref<HTMLElement | null>(null);
+const componentContainer = ref<HTMLElement | null>(null);
 const { $prettier } = useNuxtApp();
 const { width } = useElementSize(el);
 
@@ -179,89 +181,101 @@ const urlSearchParams = computed(() => {
   >
     <template v-if="preview">
       <div
-        class="border border-border-muted relative z-1"
-        :class="[{
-          'border-b-0 rounded-t-md': props.source,
-          'rounded-md': !props.source,
-          'overflow-hidden': props.overflowHidden,
-        }]"
+        ref="wrapperContainer"
+        class="group/component relative"
       >
         <div
-          v-if="props.options?.length || !!slots.options"
-          class="p-4 border-b border-border-muted flex gap-4"
+          class="border border-border-muted relative z-1"
+          :class="[{
+            'border-b-0 rounded-t-md': props.source,
+            'rounded-md': !props.source,
+            'overflow-hidden': props.overflowHidden,
+          }]"
         >
-          <slot name="options" />
-
-          <PFormField
-            v-for="option in props.options"
-            :key="option.name"
-            :label="option.label"
-            :name="option.name"
-            size="sm"
-            class="rounded-sm inline-flex ring ring-ring-accented"
-            :pohon="{
-              wrapper: 'bg-background-elevated/50 rounded-l-sm flex border-r border-border-accented',
-              label: 'color-text-muted px-2 py-1.5',
-              container: 'akar:mt-0',
-            }"
+          <div
+            v-if="props.options?.length || !!slots.options"
+            class="p-4 border-b border-border-muted flex gap-4"
           >
-            <PSelectMenu
-              v-if="option.items?.length"
-              :model-value="getProp({ object: optionsValues, path: option.name })"
-              :items="option.items"
-              :search-input="false"
-              :value-key="option.name.toLowerCase().endsWith('color') ? 'value' : undefined"
-              color="neutral"
-              variant="soft"
-              class="rounded-sm rounded-l-none min-w-12"
-              :multiple="option.multiple"
-              :class="[option.name.toLowerCase().endsWith('color') && 'akar:pl-6']"
-              :background="{ itemLeadingChip: 'size-2' }"
-              @update:model-value="setProp({ object: optionsValues, path: option.name, value: $event })"
+            <slot name="options" />
+
+            <PFormField
+              v-for="option in props.options"
+              :key="option.name"
+              :label="option.label"
+              :name="option.name"
+              size="sm"
+              class="rounded-sm inline-flex ring ring-ring-accented"
+              :pohon="{
+                wrapper: 'bg-background-elevated/50 rounded-l-sm flex border-r border-border-accented',
+                label: 'color-text-muted px-2 py-1.5',
+                container: 'akar:mt-0',
+              }"
             >
-              <template
-                v-if="option.name.toLowerCase().endsWith('color')"
-                #leading="{ modelValue, pohon }"
+              <PSelectMenu
+                v-if="option.items?.length"
+                :model-value="getProp({ object: optionsValues, path: option.name })"
+                :items="option.items"
+                :search-input="false"
+                :value-key="option.name.toLowerCase().endsWith('color') ? 'value' : undefined"
+                color="neutral"
+                variant="soft"
+                class="rounded-sm rounded-l-none min-w-12"
+                :multiple="option.multiple"
+                :class="[option.name.toLowerCase().endsWith('color') && 'akar:pl-6']"
+                :background="{ itemLeadingChip: 'size-2' }"
+                @update:model-value="setProp({ object: optionsValues, path: option.name, value: $event })"
               >
-                <PChip
-                  inset
-                  standalone
-                  :color="(modelValue as any)"
-                  :size="(pohon.itemLeadingChipSize() as PChipProps['size'])"
-                  class="size-2"
-                />
-              </template>
-            </PSelectMenu>
+                <template
+                  v-if="option.name.toLowerCase().endsWith('color')"
+                  #leading="{ modelValue, pohon }"
+                >
+                  <PChip
+                    inset
+                    standalone
+                    :color="(modelValue as any)"
+                    :size="(pohon.itemLeadingChipSize() as PChipProps['size'])"
+                    class="size-2"
+                  />
+                </template>
+              </PSelectMenu>
 
-            <PInput
-              v-else
-              :model-value="getProp({ object: optionsValues, path: option.name })"
-              color="neutral"
-              variant="soft"
-              :background="{ base: 'rounded-sm rounded-l-none min-w-12' }"
-              @update:model-value="setProp({ object: optionsValues, path: option.name, value: $event })"
-            />
-          </PFormField>
-        </div>
+              <PInput
+                v-else
+                :model-value="getProp({ object: optionsValues, path: option.name })"
+                color="neutral"
+                variant="soft"
+                :background="{ base: 'rounded-sm rounded-l-none min-w-12' }"
+                @update:model-value="setProp({ object: optionsValues, path: option.name, value: $event })"
+              />
+            </PFormField>
+          </div>
 
-        <iframe
-          v-if="iframe"
-          v-bind="typeof iframe === 'object' ? iframe : {}"
-          :src="`/examples/${name}?${urlSearchParams}`"
-          class="w-full relative"
-          :class="[props.class, !iframeMobile && 'lg:(left-1/2 -translate-x-1/2 w-[1024px])']"
-        />
-        <div
-          v-else
-          class="p-4 flex justify-center"
-          :class="props.class"
-        >
-          <component
-            :is="camelName"
-            v-bind="{ ...componentProps, ...optionsValues }"
+          <iframe
+            v-if="iframe"
+            v-bind="typeof iframe === 'object' ? iframe : {}"
+            :src="`/examples/${name}?${urlSearchParams}`"
+            class="w-full relative"
+            :class="[props.class, !iframeMobile && 'lg:(left-1/2 -translate-x-1/2 w-[1024px])']"
           />
+          <div
+            v-else
+            class="p-4 flex justify-center"
+            :class="props.class"
+          >
+            <component
+              :is="camelName"
+              v-bind="{ ...componentProps, ...optionsValues }"
+            />
+          </div>
         </div>
       </div>
+
+      <ClientOnly>
+        <LazyComponentThemeVisualizer
+          :container="componentContainer"
+          :position-container="wrapperContainer"
+        />
+      </ClientOnly>
     </template>
 
     <template v-if="props.source">
