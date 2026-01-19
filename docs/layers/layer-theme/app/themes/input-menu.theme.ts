@@ -13,6 +13,7 @@ export const inputMenuTheme = {
     {
       base: 'rounded-md transition-colors-280',
       trailing: 'group flex items-center end-0 inset-y-0 absolute disabled:(opacity-75 cursor-not-allowed)',
+      trailingClear: 'p-0',
       arrow: 'fill-fill',
       content: 'rounded-md bg-background flex flex-col max-h-60 w-$akar-combobox-trigger-width pointer-events-auto ring ring-ring shadow-lg origin-$akar-combobox-content-transform-origin overflow-hidden data-[state=closed]:(animate-out fade-out-0 zoom-out-95) data-[state=open]:(animate-in fade-in-0 zoom-in-95)',
       viewport: 'flex-1 relative overflow-y-auto scroll-py-1',

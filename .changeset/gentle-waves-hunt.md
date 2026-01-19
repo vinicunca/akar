@@ -33,3 +33,4 @@
 - feat(FormField): add orientation prop
 - feat(docs): add component theme visualizer
 - fix(CommandPalette/ContextMenu/DropdownMenu): keyboard selection on link items
+- feat(InputMenu/SelectMenu): add clear prop

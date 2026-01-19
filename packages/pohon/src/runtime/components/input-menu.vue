@@ -8,7 +8,7 @@ import type {
   AComboboxRootProps,
 } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
+import type { PAvatarProps, PButtonProps, PChipProps, PIconProps, PInputProps, PLinkPropsKeys } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
 import type { ModelModifiers } from '../types/input';
 import type {
@@ -48,7 +48,7 @@ export type PInputMenuItem = PInputMenuValue | {
   [key: string]: any;
 };
 
-export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
+export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -92,6 +92,18 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
    * @IconifyIcon
    */
   deleteIcon?: PIconProps['name'];
+  /**
+   * Display a clear button to reset the model value.
+   * Can be an object to pass additional props to the Button.
+   * @defaultValue false
+   */
+  clear?: boolean | Partial<Omit<PButtonProps, PLinkPropsKeys>>;
+  /**
+   * The icon displayed in the clear button.
+   * @defaultValue appConfig.pohon.icons.close
+   * @IconifyIcon
+   */
+  clearIcon?: PIconProps['name'];
   /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
@@ -172,6 +184,7 @@ export type PInputMenuEmits<A extends ArrayOrNested<PInputMenuItem>, VK extends 
   blur: [event: FocusEvent];
   focus: [event: FocusEvent];
   create: [item: string];
+  clear: [];
   /** Event handler when highlighted element changes. */
   highlight: [payload: {
     ref: HTMLElement;
@@ -211,6 +224,7 @@ import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AComboboxAnchor,
   AComboboxArrow,
+  AComboboxCancel,
   AComboboxContent,
   AComboboxEmpty,
   AComboboxGroup,
@@ -242,6 +256,7 @@ import { usePortal } from '../composables/use-portal';
 import { compare, getDisplayValue, getProp, isArrayOfArray, looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
+import PButton from './button.vue';
 import PChip from './chip.vue';
 import PIcon from './icon.vue';
 
@@ -257,6 +272,7 @@ const props = withDefaults(
     descriptionKey: 'description',
     resetSearchTermOnBlur: true,
     resetSearchTermOnSelect: true,
+    resetModelValueOnClear: true,
     virtualize: false,
   },
 );
@@ -281,6 +297,7 @@ const rootProps = useForwardPropsEmits(
     'multiple',
     'resetSearchTermOnBlur',
     'resetSearchTermOnSelect',
+    'resetModelValueOnClear',
     'highlightOnHover',
     'openOnClick',
     'openOnFocus',
@@ -290,6 +307,11 @@ const rootProps = useForwardPropsEmits(
 const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as AComboboxContentProps);
 const arrowProps = toRef(() => props.arrow as AComboboxArrowProps);
+const clearProps = computed(() =>
+  typeof props.clear === 'object'
+    ? props.clear
+    : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>,
+);
 const virtualizerProps = toRef(() =>
   !!props.virtualize && defu(
     isBoolean(props.virtualize) ? {} : props.virtualize,
@@ -548,6 +570,17 @@ function onSelect(event: Event, item: PInputMenuItem) {
 
 function isInputItem(item: PInputMenuItem): item is Exclude<PInputMenuItem, PInputMenuValue> {
   return typeof item === 'object' && item !== null;
+}
+
+function isModelValueEmpty(modelValue: GetModelValue<T, VK, M>): boolean {
+  if (props.multiple && Array.isArray(modelValue)) {
+    return modelValue.length === 0;
+  }
+  return modelValue === undefined || modelValue === null || modelValue === '';
+}
+
+function onClear() {
+  emits('clear');
 }
 
 defineExpose({
@@ -832,7 +865,7 @@ defineExpose({
       </span>
 
       <AComboboxTrigger
-        v-if="isTrailing || !!slots.trailing"
+        v-if="isTrailing || !!slots.trailing || !!clear"
         :class="pohon.trailing({ class: props.pohon?.trailing })"
         data-pohon="input-menu-trailing"
       >
@@ -842,11 +875,28 @@ defineExpose({
           :open="open"
           :pohon="pohon"
         >
+          <AComboboxCancel
+            v-if="!!clear && !isModelValueEmpty(modelValue as GetModelValue<T, VK, M>)"
+            as-child
+          >
+            <PButton
+              as="span"
+              :icon="clearIcon || appConfig.pohon.icons.close"
+              variant="link"
+              color="neutral"
+              tabindex="-1"
+              v-bind="clearProps"
+              data-pohon="input-menu-trailing-clear"
+              :class="pohon.trailingClear({ class: props.pohon?.trailingClear })"
+              @click.stop="onClear"
+            />
+          </AComboboxCancel>
+
           <PIcon
-            v-if="trailingIconName"
+            v-else-if="trailingIconName"
             :name="trailingIconName"
-            :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
             data-pohon="input-menu-trailing-icon"
+            :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
           />
         </slot>
       </AComboboxTrigger>

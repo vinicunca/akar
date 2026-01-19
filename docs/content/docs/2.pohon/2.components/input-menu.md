@@ -487,6 +487,43 @@ You can customize this icon globally in your `vite.config.ts` under `pohon.icons
 :::
 ::
 
+### Clear
+
+Use the `clear-icon` prop to customize the clear button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+props:
+  modelValue: 'Backlog'
+  clear: true
+  clearIcon: 'i-lucide-trash'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+::docs-framework-only
+#nuxt
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.close` key.
+:::
+
+#vue
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.close` key.
+:::
+::
+
 ### Avatar
 
 Use the `avatar` prop to show an [Avatar](/docs/pohon/components/avatar) inside the InputMenu.

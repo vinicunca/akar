@@ -9,6 +9,7 @@ export default (options: Required<PohonModuleOptions>) => {
         input: '',
         focusScope: '',
         content: '',
+        trailingClear: '',
       },
 
       variants: {
