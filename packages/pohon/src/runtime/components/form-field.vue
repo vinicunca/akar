@@ -32,6 +32,11 @@ export interface PFormFieldProps {
    * @defaultValue `300`
    */
   validateOnInputDelay?: number;
+  /**
+   * The orientation of the form field.
+   * @defaultValue 'vertical'
+   */
+  orientation?: FormField['variants']['orientation'];
   class?: any;
   pohon?: FormField['slots'];
 }
@@ -73,6 +78,7 @@ const pohon = computed(() =>
   })({
     size: props.size,
     required: props.required,
+    orientation: props.orientation,
   }),
 );
 
@@ -124,6 +130,7 @@ provide(
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     data-pohon="form-field-root"
+    :data-orientation="orientation"
   >
     <div
       :class="pohon.wrapper({ class: props.pohon?.wrapper })"

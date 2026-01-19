@@ -24,11 +24,20 @@ export default {
         label: '',
       },
     },
+    orientation: {
+      vertical: {
+        container: '',
+      },
+      horizontal: {
+        root: '',
+      },
+    },
   },
 
   compoundVariants: [],
 
   defaultVariants: {
     size: 'md',
+    orientation: 'vertical',
   },
 };
