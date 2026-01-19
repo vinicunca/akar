@@ -265,8 +265,8 @@ export default defineAppConfig({
 #vue
 :::div
 ```ts [vite.config.ts]
-import pohon from '@nuxt/ui/vite';
 import vue from '@vitejs/plugin-vue';
+import pohon from 'pohon-ui/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({

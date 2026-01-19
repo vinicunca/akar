@@ -88,7 +88,7 @@ The utility recursively traverses `children` and `items` properties to extract s
 
 ```vue
 <script setup lang="ts">
-import type { DropdownMenuItem } from '@nuxt/ui';
+import type { DropdownMenuItem } from 'pohon-ui';
 
 const items: Array<Array<DropdownMenuItem>> = [[{
   label: 'Edit',
