@@ -24,3 +24,4 @@
 - feat(defineShortcuts): add layoutIndependent option
 - fix(ProseA/ProseCallout/ProseCard): improve focus styles
 - docs(toast): add callback example
+- docs(extract-shortcuts): add own page

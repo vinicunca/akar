@@ -5,18 +5,18 @@ description: 'A composable to programmatically control overlays.'
 
 ## Usage
 
-Use the auto-imported `useOverlay` composable to programmatically control [Modal](/docs/pohon/components/dialog) and [Slideover](/docs/pohon/components/slideover) components.
+Use the auto-imported `useOverlay` composable to programmatically control [Dialog](/docs/pohon/components/dialog) and [Slideover](/docs/pohon/components/slideover) components.
 
 ```vue
 <script setup lang="ts">
-import { LazyModalExample } from '#components'
+import { LazyModalExample } from '#components';
 
-const overlay = useOverlay()
+const overlay = useOverlay();
 
-const modal = overlay.create(LazyModalExample)
+const modal = overlay.create(LazyModalExample);
 
 async function openModal() {
-  modal.open()
+  modal.open();
 }
 </script>
 ```
@@ -26,7 +26,6 @@ async function openModal() {
 ::note
 In order to return a value from the overlay, the `overlay.open()` can be awaited. In order for this to work, however, the **overlay component must emit a `close` event**. See example below for details.
 ::
-
 
 ## API
 
@@ -174,16 +173,16 @@ Open the overlay.
 
 ```vue
 <script setup lang="ts">
-import { LazyModalExample } from '#components'
+import { LazyModalExample } from '#components';
 
-const overlay = useOverlay()
+const overlay = useOverlay();
 
-const modal = overlay.create(LazyModalExample)
+const modal = overlay.create(LazyModalExample);
 
 function openModal() {
   modal.open({
     title: 'Welcome'
-  })
+  });
 }
 </script>
 ```
@@ -218,20 +217,20 @@ Update the props of the overlay.
 
 ```vue
 <script setup lang="ts">
-import { LazyModalExample } from '#components'
+import { LazyModalExample } from '#components';
 
-const overlay = useOverlay()
+const overlay = useOverlay();
 
 const modal = overlay.create(LazyModalExample, {
   title: 'Welcome'
-})
+});
 
 function openModal() {
-  modal.open()
+  modal.open();
 }
 
 function updateModalTitle() {
-  modal.patch({ title: 'Updated Title' })
+  modal.patch({ title: 'Updated Title' });
 }
 </script>
 ```
@@ -242,34 +241,36 @@ Here's a complete example of how to use the `useOverlay` composable:
 
 ```vue
 <script setup lang="ts">
-import { ModalA, ModalB, SlideoverA } from '#components'
+import { ModalA, ModalB, SlideoverA } from '#components';
 
-const overlay = useOverlay()
+const overlay = useOverlay();
 
 // Create with default props
-const modalA = overlay.create(ModalA, { title: 'Welcome' })
-const modalB = overlay.create(ModalB)
+const modalA = overlay.create(ModalA, { title: 'Welcome' });
+const modalB = overlay.create(ModalB);
 
-const slideoverA = overlay.create(SlideoverA)
+const slideoverA = overlay.create(SlideoverA);
 
-const openModalA = () => {
+function openModalA() {
   // Open modalA, but override the title prop
-  modalA.open({ title: 'Hello' })
+  modalA.open({ title: 'Hello' });
 }
 
-const openModalB = async () => {
+async function openModalB() {
   // Open modalB, and wait for its result
-  const modalBInstance = modalB.open()
+  const modalBInstance = modalB.open();
 
-  const input = await modalBInstance
+  const input = await modalBInstance;
 
   // Pass the result from modalB to the slideover, and open it
-  slideoverA.open({ input })
+  slideoverA.open({ input });
 }
 </script>
 
 <template>
-  <button @click="openModalA">Open Modal</button>
+  <button @click="openModalA">
+    Open Modal
+  </button>
 </template>
 ```
 
@@ -285,15 +286,15 @@ As such, using `provide()` in pages or parent components isn't supported directl
 
 ```vue
 <script setup lang="ts">
-import { LazyModalExample } from '#components'
+import { LazyModalExample } from '#components';
 
-const providedValue = inject('valueProvidedInPage')
+const providedValue = inject('valueProvidedInPage');
 
 const modal = overlay.create(LazyModalExample, {
   props: {
     providedValue,
     otherData: someValue
   }
-})
+});
 </script>
 ```
