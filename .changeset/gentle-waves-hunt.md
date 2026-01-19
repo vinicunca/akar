@@ -28,3 +28,4 @@
 - docs(composables): add defineLocale and extendLocale
 - feat(extractShortcuts): add separator option
 - docs(app): add component theme visualizer
+- feat(ProseCodeTree): add items prop
