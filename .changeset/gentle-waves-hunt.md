@@ -37,3 +37,4 @@
 - feat(CommandPalette): add input prop
 - feat(CommandPalette/InputMenu/SelectMenu/Tree): handle virtualizer estimateSize as function
 - fix(Editor): set contentType when updating value
+- fix(EditorToolbar): prevent disabled dropdown when items have no kind
