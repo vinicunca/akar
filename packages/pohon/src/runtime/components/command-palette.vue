@@ -124,6 +124,11 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * @IconifyIcon
    */
   backIcon?: PIconProps['name'];
+  /**
+   * Configure the input or hide it with `false`.
+   * @defaultValue true
+   */
+  input?: boolean | Omit<PInputProps, 'modelValue' | 'defaultValue'>;
   groups?: Array<G>;
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
@@ -208,7 +213,6 @@ import {
   AListboxItemIndicator,
   AListboxRoot,
   AListboxVirtualizer,
-  useForwardProps,
   useForwardPropsEmits,
 } from 'akar';
 import { defu } from 'defu';
@@ -236,6 +240,7 @@ const props = withDefaults(
     labelKey: 'label',
     descriptionKey: 'description',
     autofocus: true,
+    input: true,
     back: true,
     virtualize: false,
     preserveGroupOrder: false,
@@ -254,7 +259,6 @@ const rootProps = useForwardPropsEmits(
   reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'),
   emits,
 );
-const inputProps = useForwardProps(reactivePick(props, 'loading'));
 const virtualizerProps = toRef(() =>
   !!props.virtualize && defu(
     isBoolean(props.virtualize) ? {} : props.virtualize,
@@ -692,6 +696,7 @@ function onSelect(event: Event, item: T) {
     data-pohon="command-palette-root"
   >
     <AListboxFilter
+      v-if="input"
       v-model="searchTerm"
       as-child
     >
@@ -699,7 +704,7 @@ function onSelect(event: Event, item: T) {
         :placeholder="placeholder"
         variant="none"
         :autofocus="autofocus"
-        v-bind="inputProps"
+        :loading="loading"
         :loading-icon="loadingIcon"
         :trailing-icon="trailingIcon"
         :icon="icon || appConfig.pohon.icons.search"
