@@ -269,7 +269,20 @@ function getActiveChildItem(item: EditorToolbarDropdownItem): PEditorToolbarItem
 }
 
 function getButtonProps(item: PEditorToolbarItem) {
-  const baseProps = omit(item as EditorToolbarButtonItem & EditorToolbarDropdownItem, ['kind', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip']);
+  const baseProps = omit(item as EditorToolbarButtonItem & EditorToolbarDropdownItem, [
+    'kind',
+    'items',
+    'slot',
+    'checkedIcon',
+    'loadingIcon',
+    'externalIcon',
+    'content',
+    'arrow',
+    'portal',
+    'modal',
+    'tooltip',
+    'onClick',
+  ]);
 
   // For dropdown items, use the active child's icon if available
   if ('items' in item && item.items?.length) {
@@ -382,6 +395,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
                     :active="isActive(item)"
                     :disabled="isDisabled(item)"
                     v-bind="getButtonProps(item)"
+                    @click="onClick($event, item)"
                   />
                 </PTooltip>
               </PDropdownMenu>
