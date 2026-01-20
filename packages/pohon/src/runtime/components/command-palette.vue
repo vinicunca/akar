@@ -154,10 +154,10 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
      */
     overscan?: number;
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number;
+    estimateSize?: number | ((index: number) => number);
   };
   /**
    * The key used to get the label from the item.
@@ -222,6 +222,7 @@ import { getProp } from '../utils';
 import { highlight } from '../utils/fuse';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
+import getEstimateSize from '../utils/virtualizer';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PChip from './chip.vue';
@@ -259,12 +260,23 @@ const rootProps = useForwardPropsEmits(
   reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'),
   emits,
 );
-const virtualizerProps = toRef(() =>
-  !!props.virtualize && defu(
+const virtualizerProps = toRef(() => {
+  if (!props.virtualize) {
+    return false;
+  }
+
+  return defu(
     isBoolean(props.virtualize) ? {} : props.virtualize,
-    { estimateSize: 32 },
-  ),
-);
+    {
+      estimateSize: getEstimateSize({
+        items: filteredItems.value,
+        size: 'md',
+        descriptionKey: props.descriptionKey as string,
+        hasDescriptionSlot: !!slots['item-description'],
+      }),
+    },
+  );
+});
 
 const [
   DefineItemTemplate,
@@ -618,7 +630,7 @@ function onSelect(event: Event, item: T) {
               </span>
 
               <span
-                v-if="getProp({ object: item, path: props.descriptionKey as string })"
+                v-if="getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : 'item-description') as keyof PCommandPaletteSlots<G, T>]"
                 :class="pohon.itemDescription({ class: [props.pohon?.itemDescription, item.pohon?.itemDescription] })"
                 data-pohon="command-palette-item-description"
               >

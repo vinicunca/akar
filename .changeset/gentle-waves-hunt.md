@@ -35,3 +35,4 @@
 - fix(CommandPalette/ContextMenu/DropdownMenu): keyboard selection on link items
 - feat(InputMenu/SelectMenu): add clear prop
 - feat(CommandPalette): add input prop
+- feat(CommandPalette/InputMenu/SelectMenu/Tree): handle virtualizer estimateSize as function

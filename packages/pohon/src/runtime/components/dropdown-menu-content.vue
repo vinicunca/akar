@@ -163,7 +163,7 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
         </span>
 
         <span
-          v-if="getProp({ object: item, path: props.descriptionKey as string })"
+          v-if="getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : 'item-description') as keyof PDropdownMenuSlots<T>]"
           :class="pohon.itemDescription({ class: [pohonOverride?.itemDescription, item.pohon?.itemDescription] })"
         >
           <slot

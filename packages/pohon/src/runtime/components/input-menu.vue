@@ -130,10 +130,10 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
      */
     overscan?: number;
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number;
+    estimateSize?: number | ((index: number) => number);
   };
   /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
@@ -255,6 +255,7 @@ import { useLocale } from '../composables/use-locale';
 import { usePortal } from '../composables/use-portal';
 import { compare, getDisplayValue, getProp, isArrayOfArray, looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
+import getEstimateSize from '../utils/virtualizer';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PChip from './chip.vue';
@@ -312,19 +313,21 @@ const clearProps = computed(() =>
     ? props.clear
     : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>,
 );
-const virtualizerProps = toRef(() =>
-  !!props.virtualize && defu(
-    isBoolean(props.virtualize) ? {} : props.virtualize,
-    {
-      estimateSize: ({
-        xs: 24,
-        sm: 28,
-        md: 32,
-        lg: 36,
-        xl: 40,
-      })[props.size || 'md'],
-    },
-  ));
+
+const virtualizerProps = toRef(() => {
+  if (!props.virtualize) {
+    return false;
+  }
+
+  return defu(isBoolean(props.virtualize) ? {} : props.virtualize, {
+    estimateSize: getEstimateSize({
+      items: items.value,
+      size: inputSize.value || 'md',
+      descriptionKey: props.descriptionKey as string,
+      hasDescriptionSlot: !!slots['item-description'],
+    }),
+  });
+});
 
 const {
   emitFormBlur,
