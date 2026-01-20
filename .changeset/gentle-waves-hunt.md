@@ -39,3 +39,4 @@
 - fix(Editor): set contentType when updating value
 - fix(EditorToolbar): prevent disabled dropdown when items have no kind
 - fix(EditorToolbar): prevent onClick from being called twice on items
+- fix(Banner): prevent XSS via id prop injection
