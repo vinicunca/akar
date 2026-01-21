@@ -19,9 +19,14 @@ export class DashboardStorageManager {
     storageType = 'localStorage',
   }: StorageManagerOptions = {}) {
     this.prefix = prefix;
-    this.storage = storageType === 'localStorage'
-      ? window.localStorage
-      : window.sessionStorage;
+
+    if (import.meta.server) {
+      this.storage = {} as Storage;
+    } else {
+      this.storage = storageType === 'localStorage'
+        ? window.localStorage
+        : window.sessionStorage;
+    }
   }
 
   /**

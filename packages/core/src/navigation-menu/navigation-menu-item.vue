@@ -8,7 +8,7 @@ export interface ANavigationMenuItemProps extends APrimitiveProps {
   /**
    * A unique value that associates the item with an active value when the navigation menu is controlled.
    *
-   *  This prop is managed automatically when uncontrolled.
+   * This prop is managed automatically when uncontrolled.
    */
   value?: string;
 }

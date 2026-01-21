@@ -8,6 +8,7 @@ export default (options: Required<PohonModuleOptions>) => {
       slots: {
         base: '',
         trailing: '',
+        trailingClear: '',
         arrow: '',
         content: '',
         viewport: '',

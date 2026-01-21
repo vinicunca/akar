@@ -51,10 +51,11 @@ type SlotProps<T extends PTimelineItem> = (props: { item: T }) => any;
 
 export type PTimelineSlots<T extends PTimelineItem = PTimelineItem> = {
   indicator: SlotProps<T>;
+  wrapper: SlotProps<T>;
   date: SlotProps<T>;
   title: SlotProps<T>;
   description: SlotProps<T>;
-} & DynamicSlots<T, 'indicator' | 'date' | 'title' | 'description', { item: T }>;
+} & DynamicSlots<T, 'indicator' | 'wrapper' | 'date' | 'title' | 'description', { item: T }>;
 
 </script>
 
@@ -161,45 +162,50 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
       </div>
 
       <div
-        :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })"
         data-pohon="timeline-wrapper"
+        :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })"
       >
-        <div
-          v-if="item.date"
-          :class="pohon.date({ class: [props.pohon?.date, item.pohon?.date] })"
-          data-pohon="timeline-date"
+        <slot
+          :name="((item.slot ? `${item.slot}-wrapper` : 'wrapper') as keyof PTimelineSlots<T>)"
+          :item="(item as Extract<T, { slot: string; }>)"
         >
-          <slot
-            :name="((item.slot ? `${item.slot}-date` : 'date') as keyof PTimelineSlots<T>)"
-            :item="(item as Extract<T, { slot: string; }>)"
+          <div
+            v-if="item.date || !!slots[(item.slot ? `${item.slot}-date` : 'date') as keyof PTimelineSlots<T>]"
+            data-pohon="timeline-date"
+            :class="pohon.date({ class: [props.pohon?.date, item.pohon?.date] })"
           >
-            {{ item.date }}
-          </slot>
-        </div>
-        <div
-          v-if="item.title || !!slots.title"
-          :class="pohon.title({ class: [props.pohon?.title, item.pohon?.title] })"
-          data-pohon="timeline-title"
-        >
-          <slot
-            :name="((item.slot ? `${item.slot}-title` : 'title') as keyof PTimelineSlots<T>)"
-            :item="(item as Extract<T, { slot: string; }>)"
+            <slot
+              :name="((item.slot ? `${item.slot}-date` : 'date') as keyof PTimelineSlots<T>)"
+              :item="(item as Extract<T, { slot: string; }>)"
+            >
+              {{ item.date }}
+            </slot>
+          </div>
+          <div
+            v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof PTimelineSlots<T>]"
+            data-pohon="timeline-title"
+            :class="pohon.title({ class: [props.pohon?.title, item.pohon?.title] })"
           >
-            {{ item.title }}
-          </slot>
-        </div>
-        <div
-          v-if="item.description || !!slots.description"
-          :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
-          data-pohon="timeline-description"
-        >
-          <slot
-            :name="((item.slot ? `${item.slot}-description` : 'description') as keyof PTimelineSlots<T>)"
-            :item="(item as Extract<T, { slot: string; }>)"
+            <slot
+              :name="((item.slot ? `${item.slot}-title` : 'title') as keyof PTimelineSlots<T>)"
+              :item="(item as Extract<T, { slot: string; }>)"
+            >
+              {{ item.title }}
+            </slot>
+          </div>
+          <div
+            v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof PTimelineSlots<T>]"
+            data-pohon="timeline-description"
+            :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
           >
-            {{ item.description }}
-          </slot>
-        </div>
+            <slot
+              :name="((item.slot ? `${item.slot}-description` : 'description') as keyof PTimelineSlots<T>)"
+              :item="(item as Extract<T, { slot: string; }>)"
+            >
+              {{ item.description }}
+            </slot>
+          </div>
+        </slot>
       </div>
     </div>
   </APrimitive>

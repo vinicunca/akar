@@ -2,11 +2,11 @@
 import type { APopoverAnchorProps } from '..';
 import { APopoverAnchor } from '..';
 
-export interface DateRangePickerAnchorProps extends APopoverAnchorProps {}
+export interface ADateRangePickerAnchorProps extends APopoverAnchorProps {}
 </script>
 
 <script setup lang="ts">
-const props = defineProps<DateRangePickerAnchorProps>();
+const props = defineProps<ADateRangePickerAnchorProps>();
 </script>
 
 <template>

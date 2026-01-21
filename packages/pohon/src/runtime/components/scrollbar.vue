@@ -27,7 +27,7 @@ export interface PScrollbarProps {
    */
   hasShadowTop?: boolean;
   /**
-   * Wheter to show shador right
+   * Whether to show shadow right
    * @default false
    */
   hasShadowRight?: boolean;

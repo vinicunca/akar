@@ -284,7 +284,7 @@ function handleMouseleave() {
     </div>
 
     <PScrollbar
-      class="pt-2"
+      class="px-2 pt-2"
       :style="contentStyle"
       has-shadow
       has-shadow-border

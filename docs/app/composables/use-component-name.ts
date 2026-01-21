@@ -1,5 +1,5 @@
 import { useRoute } from '#app';
-import { toPascalCase } from '@vinicunca/perkakas';
+import { capitalize, toCamelCase } from '@vinicunca/perkakas';
 
 export function useComponentName(props: {
   prose?: boolean;
@@ -8,7 +8,7 @@ export function useComponentName(props: {
   const route = useRoute();
   const slug = props.slug ?? route.params.slug?.at(-1) as string;
   const parentSlug = route.params.slug?.[0] as string;
-  const pascalName = toPascalCase(slug);
+  const pascalName = capitalize(toCamelCase(slug));
   const componentName = props.prose ? `Prose${pascalName}` : `P${pascalName}`;
 
   return { componentName, slug, parentSlug };

@@ -6,12 +6,14 @@
     "dev": "nuxt dev",
     "build": "NODE_OPTIONS='--max-old-space-size=8192' nuxt build",
     "generate": "nuxt generate",
+    "prepare": "nuxt prepare",
     "typecheck": "nuxt typecheck",
     "docs:gen:dev": "tsx watch scripts/autogen.ts",
     "docs:gen": "tsx scripts/autogen.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "catalog:docs",
+    "@nuxt/a11y": "catalog:docs",
     "@nuxt/content": "catalog:pohon",
     "@nuxt/fonts": "catalog:pohon",
     "@nuxt/image": "catalog:docs",
@@ -37,7 +39,10 @@
   },
   "devDependencies": {
     "@babel/traverse": "catalog:docs",
-    "@iconify/json": "catalog:base",
+    "@iconify-json/logos": "catalog:base",
+    "@iconify-json/lucide": "catalog:base",
+    "@iconify-json/simple-icons": "catalog:base",
+    "@iconify-json/vscode-icons": "catalog:base",
     "@types/babel__traverse": "catalog:docs",
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/unocss-preset": "catalog:pohon",

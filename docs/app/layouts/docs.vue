@@ -6,20 +6,19 @@ import { computed, defineShortcuts, inject, onMounted, ref, useNavigation, useRo
 import { useDebounceFn } from '@vueuse/core';
 import { useFilter } from 'akar';
 
-const route = useRoute();
-
 const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 
+const route = useRoute();
+const { contains } = useFilter({ sensitivity: 'base' });
 const { navigationByCategory } = useNavigation(navigation!);
 
-const { contains } = useFilter({ sensitivity: 'base' });
-
-const isActiveSearch = computed(() =>
+const isSearchActive = computed(() =>
   route.path.startsWith('/docs/pohon/components')
   || route.path.startsWith('/docs/akar/components'),
 );
 const searchTerm = ref('');
 const input = useTemplateRef('input');
+const navigationKey = computed(() => `${route.path}-${searchTerm.value ? 'filtered' : 'unfiltered'}`);
 
 const filteredNavigation = computed(() => {
   if (!searchTerm.value) {
@@ -28,7 +27,15 @@ const filteredNavigation = computed(() => {
 
   return navigationByCategory.value.map((item) => ({
     ...item,
-    children: item.children?.filter((child) => contains({ string: child.title as string, substring: searchTerm.value }) || contains({ string: child.description as string, substring: searchTerm.value })),
+    children: item.children?.filter(
+      (child) => contains({
+        string: child.title as string,
+        substring: searchTerm.value,
+      }) || contains({
+        string: child.description as string,
+        substring: searchTerm.value,
+      }),
+    ),
   })).filter((item) => item.children && item.children.length > 0);
 });
 
@@ -62,7 +69,7 @@ watch(
   () => {
     debouncedScroll();
 
-    if (!isActiveSearch.value) {
+    if (!isSearchActive.value) {
       searchTerm.value = '';
     }
   },
@@ -94,7 +101,7 @@ onMounted(() => {
         >
           <div class="relative">
             <div
-              v-if="isActiveSearch"
+              v-if="isSearchActive"
               class="pointer-events-none sticky z-1 -mt-8 -top-8"
             >
               <div class="px-4 bg-background h-8 -mx-4" />
@@ -121,7 +128,7 @@ onMounted(() => {
             </div>
 
             <PContentNavigation
-              :key="route.path"
+              :key="navigationKey"
               data-akar="content-nav"
               :navigation="filteredNavigation"
               :pohon="{

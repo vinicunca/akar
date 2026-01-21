@@ -1,4 +1,5 @@
-import type { DashboardMenuRecord, ExtendedRouteRecordRaw } from '#layers/dashboard-menu/lib';
+import type { DashboardMenuRecord } from '#layers/dashboard-layout/lib';
+import type { ExtendedRouteRecordRaw } from '#layers/dashboard-menu/lib';
 import type { Router, RouteRecordRaw } from 'vue-router';
 import { defineNuxtPlugin } from '#imports';
 import { filterTree, mapTree, sortTree } from '#layers/admin/lib';
@@ -76,8 +77,6 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
       const {
         activeIcon,
         badge,
-        badgeType,
-        badgeVariants,
         hideChildrenInMenu = false,
         icon,
         link,
@@ -105,10 +104,9 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
       return {
         activeIcon,
         badge,
-        badgeType,
-        badgeVariants,
         icon,
         name,
+        title: name,
         order,
         parent: route.parent,
         parents: route.parents,

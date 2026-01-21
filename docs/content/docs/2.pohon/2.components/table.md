@@ -33,6 +33,7 @@ Use the `data` prop as an array of objects, the columns will be generated based 
 
 ::docs-pohon-preview
 ---
+prettier: true
 collapse: true
 class: 'akar:p-0'
 ignore:
@@ -101,7 +102,7 @@ class: 'akar:p-0'
 name: 'table-columns-example'
 highlights:
   - 53
-  - 105
+  - 108
 ---
 ::
 
@@ -122,8 +123,11 @@ Use the `meta` prop as an object ([TableMeta](https://tanstack.com/table/latest/
 ---
 prettier: true
 collapse: true
-name: 'table-custom-meta-example'
+name: 'table-meta-example'
 class: 'akar:p-0'
+highlights:
+  - 128
+  - 140
 ---
 ::
 
@@ -133,6 +137,7 @@ Use the `loading` prop to display a loading state, the `loading-color` prop to c
 
 ::docs-pohon-preview
 ---
+prettier: true
 collapse: true
 class: 'akar:p-0'
 ignore:
@@ -180,6 +185,7 @@ Use the `sticky` prop to make the header or footer sticky.
 
 ::docs-pohon-preview
 ---
+prettier: true
 collapse: true
 class: 'akar:p-0'
 ignore:
@@ -245,8 +251,8 @@ prettier: true
 collapse: true
 name: 'table-row-actions-example'
 highlights:
-  - 110
-  - 134
+  - 115
+  - 141
 class: 'akar:p-0'
 ---
 ::
@@ -266,7 +272,7 @@ collapse: true
 name: 'table-row-expandable-example'
 highlights:
   - 55
-  - 71
+  - 72
 class: 'akar:p-0'
 ---
 ::
@@ -297,8 +303,8 @@ prettier: true
 collapse: true
 name: 'table-grouped-rows-example'
 highlights:
-  - 159
-  - 169
+  - 157
+  - 160
 class: 'akar:p-0'
 ---
 ::
@@ -337,8 +343,8 @@ prettier: true
 collapse: true
 name: 'table-row-select-event-example'
 highlights:
-  - 123
-  - 130
+  - 124
+  - 131
 class: 'akar:p-0'
 ---
 ::
@@ -361,8 +367,8 @@ prettier: true
 collapse: true
 name: 'table-row-context-menu-event-example'
 highlights:
-  - 130
-  - 170
+  - 133
+  - 173
 class: 'akar:p-0'
 ---
 ::
@@ -381,8 +387,8 @@ prettier: true
 collapse: true
 name: 'table-row-hover-event-example'
 highlights:
-  - 126
-  - 149
+  - 129
+  - 152
 class: 'akar:p-0'
 ---
 ::
@@ -401,8 +407,8 @@ prettier: true
 collapse: true
 name: 'table-column-footer-example'
 highlights:
-  - 94
-  - 108
+  - 100
+  - 112
 class: 'akar:p-0'
 ---
 ::

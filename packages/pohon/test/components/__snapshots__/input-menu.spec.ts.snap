@@ -167,6 +167,84 @@ exports[`inputMenu > renders with class correctly 1`] = `
 </div>"
 `;
 
+exports[`inputMenu > renders with clear and clearIcon correctly 1`] = `
+"<div dir="ltr" style="pointer-events: auto;"><input aria-disabled="false" type="text" aria-expanded="true" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" class="" data-pohon="input-menu-base" value="Backlog" aria-activedescendant="akar-combobox-item-v-0-0-3">
+  <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="" data-pohon="input-menu-trailing"><span tabindex="-1" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if--></span>
+  </button>
+  <!--teleport start-->
+  <div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+    <div data-pohon="input-menu-content" position="popper" id="akar-combobox-content-v-0-0-0" data-state="open" style="display: flex; flex-direction: column; box-sizing: border-box; --akar-combobox-content-transform-origin: var(--akar-popper-transform-origin); --akar-combobox-content-available-width: var(--akar-popper-available-width); --akar-combobox-content-available-height: var(--akar-popper-available-height); --akar-combobox-trigger-width: var(--akar-popper-anchor-width); --akar-combobox-trigger-height: var(--akar-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" data-dismissable-layer="" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-side="bottom" data-align="center">
+      <!--v-if-->
+      <div role="presentation" class="" data-pohon="input-menu-viewport">
+        <!--v-if-->
+        <div role="group" aria-labelledby="" id="akar-combobox-group-v-0-0-1" class="" data-pohon="input-menu-group">
+          <div id="akar-combobox-item-v-0-0-3" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="true" data-state="checked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">Backlog</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="input-menu-item-trailing-icon"></span></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-5" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-plus" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">Todo</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-7" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-arrow-up" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">In Progress</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-9" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-check" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">Done</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-11" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-x" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">Canceled</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><!--v-if--></span>
+          </div>
+        </div>
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--teleport end-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`inputMenu > renders with clear correctly 1`] = `
+"<div dir="ltr" style="pointer-events: auto;"><input aria-disabled="false" type="text" aria-expanded="true" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" class="" data-pohon="input-menu-base" value="Backlog" aria-activedescendant="akar-combobox-item-v-0-0-3">
+  <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="" data-pohon="input-menu-trailing"><span tabindex="-1" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <!--v-if-->
+    <!--v-if--></span>
+  </button>
+  <!--teleport start-->
+  <div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+    <div data-pohon="input-menu-content" position="popper" id="akar-combobox-content-v-0-0-0" data-state="open" style="display: flex; flex-direction: column; box-sizing: border-box; --akar-combobox-content-transform-origin: var(--akar-popper-transform-origin); --akar-combobox-content-available-width: var(--akar-popper-available-width); --akar-combobox-content-available-height: var(--akar-popper-available-height); --akar-combobox-trigger-width: var(--akar-popper-anchor-width); --akar-combobox-trigger-height: var(--akar-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" data-dismissable-layer="" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-side="bottom" data-align="center">
+      <!--v-if-->
+      <div role="presentation" class="" data-pohon="input-menu-viewport">
+        <!--v-if-->
+        <div role="group" aria-labelledby="" id="akar-combobox-group-v-0-0-1" class="" data-pohon="input-menu-group">
+          <div id="akar-combobox-item-v-0-0-3" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="true" data-state="checked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">Backlog</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="input-menu-item-trailing-icon"></span></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-5" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-plus" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">Todo</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-7" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-arrow-up" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">In Progress</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-9" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-check" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">Done</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-11" class="" data-pohon="input-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-x" aria-hidden="true" data-pohon="input-menu-item-leading-icon"></span><span class="" data-pohon="input-menu-item-wrapper"><span class="" data-pohon="input-menu-item-label">Canceled</span>
+            <!--v-if--></span><span class="" data-pohon="input-menu-item-trailing"><!--v-if--></span>
+          </div>
+        </div>
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+    </div>
+  </div>
+  <!--teleport end-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`inputMenu > renders with create-item-label slot correctly 1`] = `
 "<div dir="ltr" style="pointer-events: auto;"><input aria-disabled="false" type="text" aria-expanded="true" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" class="" data-pohon="input-menu-base" value="" aria-activedescendant="akar-combobox-item-v-0-0-3">
   <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="" data-pohon="input-menu-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="input-menu-trailing-icon"></span></button>
@@ -214,7 +292,7 @@ exports[`inputMenu > renders with default slot correctly 1`] = `
 
 exports[`inputMenu > renders with defaultValue correctly 1`] = `
 "<div dir="ltr" style="pointer-events: auto;"><input aria-disabled="false" type="text" aria-expanded="true" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" class="" data-pohon="input-menu-base" value="Backlog" aria-activedescendant="akar-combobox-item-v-0-0-3">
-  <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="akar-combobox-content-v-0-0-0" data-state="open" aria-disabled="false" class="" data-pohon="input-menu-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="input-menu-trailing-icon"></span></button>
+  <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="" data-pohon="input-menu-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="input-menu-trailing-icon"></span></button>
   <!--teleport start-->
   <div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
     <div data-pohon="input-menu-content" position="popper" id="akar-combobox-content-v-0-0-0" data-state="open" style="display: flex; flex-direction: column; box-sizing: border-box; --akar-combobox-content-transform-origin: var(--akar-popper-transform-origin); --akar-combobox-content-available-width: var(--akar-popper-available-width); --akar-combobox-content-available-height: var(--akar-popper-available-height); --akar-combobox-trigger-width: var(--akar-popper-anchor-width); --akar-combobox-trigger-height: var(--akar-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" data-dismissable-layer="" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-side="bottom" data-align="center">
@@ -689,7 +767,7 @@ exports[`inputMenu > renders with loadingIcon correctly 1`] = `
 
 exports[`inputMenu > renders with modelValue correctly 1`] = `
 "<div dir="ltr" style="pointer-events: auto;"><input aria-disabled="false" type="text" aria-expanded="true" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" class="" data-pohon="input-menu-base" value="Backlog" aria-activedescendant="akar-combobox-item-v-0-0-3">
-  <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="akar-combobox-content-v-0-0-0" data-state="open" aria-disabled="false" class="" data-pohon="input-menu-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="input-menu-trailing-icon"></span></button>
+  <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="" data-pohon="input-menu-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="input-menu-trailing-icon"></span></button>
   <!--teleport start-->
   <div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
     <div data-pohon="input-menu-content" position="popper" id="akar-combobox-content-v-0-0-0" data-state="open" style="display: flex; flex-direction: column; box-sizing: border-box; --akar-combobox-content-transform-origin: var(--akar-popper-transform-origin); --akar-combobox-content-available-width: var(--akar-popper-available-width); --akar-combobox-content-available-height: var(--akar-popper-available-height); --akar-combobox-trigger-width: var(--akar-popper-anchor-width); --akar-combobox-trigger-height: var(--akar-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" data-dismissable-layer="" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-side="bottom" data-align="center">

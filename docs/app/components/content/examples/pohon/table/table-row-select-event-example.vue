@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { PTableColumn, PPTableRow } from 'pohon-ui';
-import { h, ref, resolveComponent, useTemplateRef } from 'vue';
+import type { PTableColumn, PTableRow } from 'pohon-ui';
+import { h, resolveComponent } from 'vue';
 
 const PBadge = resolveComponent('PBadge');
 const PCheckbox = resolveComponent('PCheckbox');
@@ -86,16 +86,19 @@ const columns: Array<PTableColumn<Payment>> = [{
   header: 'Email',
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium',
+    },
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'));
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
     }).format(amount);
-
-    return h('div', { class: 'text-right font-medium' }, formatted);
   },
 }];
 
@@ -103,7 +106,7 @@ const table = useTemplateRef('table');
 
 const rowSelection = ref<Record<string, boolean>>({ });
 
-function onSelect(e: Event, row: PPTableRow<Payment>) {
+function onSelect(e: Event, row: PTableRow<Payment>) {
   /* If you decide to also select the column you can do this  */
   row.toggleSelected(!row.getIsSelected());
 }
@@ -120,7 +123,7 @@ function onSelect(e: Event, row: PPTableRow<Payment>) {
         @select="onSelect"
       />
 
-      <div class="border-border-accented text-sm color-text-muted px-4 py-3.5 border-t">
+      <div class="text-sm color-text-muted px-4 py-3.5 border-t border-border-accented">
         {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
         {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
       </div>

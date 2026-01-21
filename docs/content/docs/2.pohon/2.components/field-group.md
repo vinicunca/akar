@@ -89,7 +89,7 @@ You can use a [Tooltip](/docs/pohon/components/tooltip) within a field group.
 
 :docs-component-example{name="field-group-tooltip-example"}
 
-### With dropdown
+### With dropdown menu
 
 You can use a [DropdownMenu](/docs/pohon/components/dropdown-menu) within a field group.
 

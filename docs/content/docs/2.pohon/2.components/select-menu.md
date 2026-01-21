@@ -526,6 +526,79 @@ You can customize this icon globally in your `vite.config.ts` under `pohon.icons
 :::
 ::
 
+### Clear
+
+Use the `clear` prop to display a clear button when a value is selected.
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+items:
+  clear:
+    - true
+    - false
+props:
+  modelValue: 'Backlog'
+  clear: true
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+### Clear Icon
+
+Use the `clear-icon` prop to customize the clear button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+  - class
+external:
+  - items
+  - modelValue
+items:
+  clear:
+    - true
+    - false
+props:
+  modelValue: 'Backlog'
+  clear: true
+  clearIcon: 'i-lucide-trash'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+  class: 'w-48'
+---
+::
+
+::docs-framework-only
+#nuxt
+:::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
+You can customize this icon globally in your `app.config.ts` under `pohon.icons.close` key.
+:::
+
+#vue
+:::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
+You can customize this icon globally in your `vite.config.ts` under `pohon.icons.close` key.
+:::
+::
+
 ### Avatar
 
 Use the `avatar` prop to display an [Avatar](/docs/pohon/components/avatar) inside the SelectMenu.
@@ -832,6 +905,22 @@ name: 'select-menu-virtualize-example'
 ---
 ::
 
+### With infinite scroll
+
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
+
+::docs-component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'select-menu-infinite-scroll-example'
+---
+::
+
 ### With full content width
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `pohon.content` slot.
@@ -895,6 +984,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `triggerRef` | `Ref<HTMLButtonElement \| null>` |
+| `viewportRef` | `Ref<HTMLDivElement \| null>` |
 
 ## Theme
 

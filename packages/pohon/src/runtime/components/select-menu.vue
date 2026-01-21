@@ -8,7 +8,7 @@ import type {
   AComboboxRootProps,
 } from 'akar';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
-import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
+import type { PAvatarProps, PButtonProps, PChipProps, PIconProps, PInputProps, PLinkPropsKeys } from '../types';
 import type { ButtonHTMLAttributes } from '../types/html';
 import type { ModelModifiers } from '../types/input';
 import type {
@@ -48,7 +48,7 @@ export type PSelectMenuItem = PSelectMenuValue | {
   [key: string]: any;
 };
 
-export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetModelValueOnClear' | 'resetSearchTermOnSelect' | 'highlightOnHover'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string;
   /** The placeholder text when the select is empty. */
   placeholder?: string;
@@ -85,6 +85,18 @@ export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = Arr
    */
   selectedIcon?: PIconProps['name'];
   /**
+   * Display a clear button to reset the model value.
+   * Can be an object to pass additional props to the Button.
+   * @defaultValue false
+   */
+  clear?: boolean | Partial<Omit<PButtonProps, PLinkPropsKeys>>;
+  /**
+   * The icon displayed in the clear button.
+   * @defaultValue appConfig.pohon.icons.close
+   * @IconifyIcon
+   */
+  clearIcon?: PIconProps['name'];
+  /**
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
@@ -111,10 +123,10 @@ export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = Arr
      */
     overscan?: number;
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number;
+    estimateSize?: number | ((index: number) => number);
   };
   /**
    * When `items` is an array of objects, select the field to use as the value instead of the object itself.
@@ -167,6 +179,7 @@ export type PSelectMenuEmits<A extends ArrayOrNested<PSelectMenuItem>, VK extend
   blur: [event: FocusEvent];
   focus: [event: FocusEvent];
   create: [item: string];
+  clear: [];
   /** Event handler when highlighted element changes. */
   highlight: [payload: {
     ref: HTMLElement;
@@ -204,6 +217,7 @@ import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AComboboxAnchor,
   AComboboxArrow,
+  AComboboxCancel,
   AComboboxContent,
   AComboboxEmpty,
   AComboboxGroup,
@@ -229,7 +243,9 @@ import { useLocale } from '../composables/use-locale';
 import { usePortal } from '../composables/use-portal';
 import { compare, getDisplayValue, getProp, isArrayOfArray, looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
+import getEstimateSize from '../utils/virtualizer';
 import PAvatar from './avatar.vue';
+import PButton from './button.vue';
 import PChip from './chip.vue';
 import PIcon from './icon.vue';
 import PInput from './input.vue';
@@ -245,6 +261,7 @@ const props = withDefaults(
     descriptionKey: 'description',
     resetSearchTermOnBlur: true,
     resetSearchTermOnSelect: true,
+    resetModelValueOnClear: true,
     autofocusDelay: 0,
     virtualize: false,
   },
@@ -269,6 +286,7 @@ const rootProps = useForwardPropsEmits(
     'multiple',
     'resetSearchTermOnBlur',
     'resetSearchTermOnSelect',
+    'resetModelValueOnClear',
     'highlightOnHover',
   ),
   emits,
@@ -281,20 +299,27 @@ const contentProps = toRef(() =>
   ) as AComboboxContentProps,
 );
 const arrowProps = toRef(() => props.arrow as AComboboxArrowProps);
-const virtualizerProps = toRef(() =>
-  !!props.virtualize && defu(
-    isBoolean(props.virtualize) ? {} : props.virtualize,
-    {
-      estimateSize: ({
-        xs: 24,
-        sm: 28,
-        md: 32,
-        lg: 36,
-        xl: 40,
-      })[props.size || 'md'],
-    },
-  ),
+const clearProps = computed(() =>
+  typeof props.clear === 'object'
+    ? props.clear
+    : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>,
 );
+
+const virtualizerProps = toRef(() => {
+  if (!props.virtualize) {
+    return false;
+  }
+
+  return defu(isBoolean(props.virtualize) ? {} : props.virtualize, {
+    estimateSize: getEstimateSize({
+      items: filteredItems.value,
+      size: selectSize.value || 'md',
+      descriptionKey: props.descriptionKey as string,
+      hasDescriptionSlot: !!slots['item-description'],
+    }),
+  });
+});
+
 const searchInputProps = toRef(() =>
   defu(
     props.searchInput,
@@ -540,8 +565,22 @@ function isSelectItem(item: PSelectMenuItem): item is Exclude<PSelectMenuItem, P
   return typeof item === 'object' && item !== null;
 }
 
+function isModelValueEmpty(modelValue: GetModelValue<T, VK, M>): boolean {
+  if (props.multiple && Array.isArray(modelValue)) {
+    return modelValue.length === 0;
+  }
+  return modelValue === undefined || modelValue === null || modelValue === '';
+}
+
+function onClear() {
+  emits('clear');
+}
+
+const viewportRef = useTemplateRef('viewportRef');
+
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
+  viewportRef: toRef(() => viewportRef.value),
 });
 </script>
 
@@ -766,7 +805,7 @@ defineExpose({
         </slot>
 
         <span
-          v-if="isTrailing || !!slots.trailing"
+          v-if="isTrailing || !!slots.trailing || !!clear"
           :class="pohon.trailing({ class: props.pohon?.trailing })"
           data-pohon="select-menu-trailing"
         >
@@ -776,11 +815,29 @@ defineExpose({
             :open="open"
             :pohon="pohon"
           >
+
+            <AComboboxCancel
+              v-if="!!clear && !isModelValueEmpty(modelValue as GetModelValue<T, VK, M>)"
+              as-child
+            >
+              <PButton
+                as="span"
+                :icon="clearIcon || appConfig.pohon.icons.close"
+                variant="link"
+                color="neutral"
+                tabindex="-1"
+                v-bind="clearProps"
+                data-pohon="select-menu-trailing-clear"
+                :class="pohon.trailingClear({ class: props.pohon?.trailingClear })"
+                @click.stop="onClear"
+              />
+            </AComboboxCancel>
+
             <PIcon
-              v-if="trailingIconName"
+              v-else-if="trailingIconName"
               :name="trailingIconName"
-              :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
               data-pohon="select-menu-trailing-icon"
+              :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
             />
           </slot>
         </span>
@@ -830,6 +887,7 @@ defineExpose({
           </AComboboxEmpty>
 
           <div
+            ref="viewportRef"
             role="presentation"
             :class="pohon.viewport({ class: props.pohon?.viewport })"
             data-pohon="select-menu-viewport"

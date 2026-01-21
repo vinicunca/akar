@@ -36,6 +36,7 @@ export interface AScrollAreaRootProps extends APrimitiveProps {
    * `always` - means that scrollbars are always visible regardless of whether the content is overflowing.<br>
    * `scroll` - means that scrollbars are visible when the user is scrolling along its corresponding orientation.<br>
    * `hover` - when the user is scrolling along its corresponding orientation and when the user is hovering over the scroll area.
+   * `glimpse` - a hybrid approach that briefly shows scrollbars when the user enters the scroll area, then hides them until further interaction.
    */
   type?: ScrollType;
   /** The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `AConfigProvider` or assumes LTR (left-to-right) reading mode. */

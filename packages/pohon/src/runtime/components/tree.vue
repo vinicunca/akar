@@ -94,10 +94,10 @@ export interface PTreeProps<T extends Array<PTreeItem> = Array<PTreeItem>, M ext
      */
     overscan?: number;
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number;
+    estimateSize?: number | ((index: number) => number);
   };
   onSelect?: (e: ATreeItemSelectEvent<T[number]>, item: T[number]) => void;
   onToggle?: (e: ATreeItemToggleEvent<T[number]>, item: T[number]) => void;
@@ -141,13 +141,14 @@ export type PTreeSlots<
 <script setup lang="ts" generic="T extends PTreeItem[], M extends boolean = false">
 import type { ComponentPublicInstance } from 'vue';
 import { useAppConfig } from '#imports';
-import { isBoolean, isFunction, isString } from '@vinicunca/perkakas';
+import { isBoolean } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import { ATreeItem, ATreeRoot, ATreeVirtualizer, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef, useTemplateRef } from 'vue';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
+import getEstimateSize from '../utils/virtualizer';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
@@ -179,7 +180,7 @@ const rootProps = useForwardPropsEmits(
 );
 
 const as = computed(() => {
-  if (isString(props.as) || isFunction(props.as?.render)) {
+  if (typeof props.as === 'string' || typeof props.as?.render === 'function') {
     return { root: props.as, link: 'button' };
   }
 
@@ -200,19 +201,18 @@ const flattenedPaddingFormula = computed(() => {
   return (level: number) => `calc(var(--spacing) * ${(level - 1) * config.perLevel + config.base})`;
 });
 
-const virtualizerProps = toRef(() =>
-  !!props.virtualize && defu(
-    isBoolean(props.virtualize) ? {} : props.virtualize,
-    {
-      estimateSize: ({
-        xs: 24,
-        sm: 28,
-        md: 32,
-        lg: 36,
-        xl: 40,
-      })[props.size || 'md'],
-    },
-  ));
+const virtualizerProps = toRef(() => {
+  if (!props.virtualize) {
+    return false;
+  }
+
+  return defu(isBoolean(props.virtualize) ? {} : props.virtualize, {
+    estimateSize: getEstimateSize({
+      items: props.items || [],
+      size: props.size || 'md',
+    }),
+  });
+});
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: Array<PTreeItem>; level: number }, PTreeSlots<T>>();
 const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{

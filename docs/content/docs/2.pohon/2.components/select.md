@@ -723,6 +723,22 @@ collapse: true
 ---
 ::
 
+### With infinite scroll
+
+You can use the [`useInfiniteScroll`](https://vueuse.org/core/useInfiniteScroll/) composable to load more data as the user scrolls.
+
+::docs-component-example
+---
+prettier: true
+collapse: true
+highlights:
+  - 41
+  - 51
+overflowHidden: true
+name: 'select-infinite-scroll-example'
+---
+::
+
 ### With full content width
 
 You can expand the content to the full width of its items by adding the `min-w-fit` class on the `pohon.content` slot.
@@ -775,6 +791,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `triggerRef` | `Ref<HTMLButtonElement \| null>` |
+| `viewportRef` | `Ref<HTMLDivElement \| null>` |
 
 ## Theme
 

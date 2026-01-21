@@ -7,6 +7,7 @@ type ProseTd = ComponentConfig<typeof theme, AppConfig, 'td', 'pohon.prose'>;
 
 export interface ProseTdProps {
   class?: any;
+  align?: 'left' | 'center' | 'right';
 }
 
 export interface ProseTdSlots {
@@ -28,7 +29,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 </script>
 
 <template>
-  <td :class="pohon({ class: props.class })">
+  <td :class="pohon({ class: props.class, align: props.align })">
     <slot />
   </td>
 </template>

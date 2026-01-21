@@ -124,6 +124,11 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * @IconifyIcon
    */
   backIcon?: PIconProps['name'];
+  /**
+   * Configure the input or hide it with `false`.
+   * @defaultValue true
+   */
+  input?: boolean | Omit<PInputProps, 'modelValue' | 'defaultValue'>;
   groups?: Array<G>;
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse).
@@ -149,10 +154,10 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
      */
     overscan?: number;
     /**
-     * Estimated size (in px) of each item
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
      * @defaultValue 32
      */
-    estimateSize?: number;
+    estimateSize?: number | ((index: number) => number);
   };
   /**
    * The key used to get the label from the item.
@@ -208,7 +213,6 @@ import {
   AListboxItemIndicator,
   AListboxRoot,
   AListboxVirtualizer,
-  useForwardProps,
   useForwardPropsEmits,
 } from 'akar';
 import { defu } from 'defu';
@@ -218,6 +222,7 @@ import { getProp } from '../utils';
 import { highlight } from '../utils/fuse';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
+import getEstimateSize from '../utils/virtualizer';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PChip from './chip.vue';
@@ -236,6 +241,7 @@ const props = withDefaults(
     labelKey: 'label',
     descriptionKey: 'description',
     autofocus: true,
+    input: true,
     back: true,
     virtualize: false,
     preserveGroupOrder: false,
@@ -254,13 +260,23 @@ const rootProps = useForwardPropsEmits(
   reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'),
   emits,
 );
-const inputProps = useForwardProps(reactivePick(props, 'loading'));
-const virtualizerProps = toRef(() =>
-  !!props.virtualize && defu(
+const virtualizerProps = toRef(() => {
+  if (!props.virtualize) {
+    return false;
+  }
+
+  return defu(
     isBoolean(props.virtualize) ? {} : props.virtualize,
-    { estimateSize: 32 },
-  ),
-);
+    {
+      estimateSize: getEstimateSize({
+        items: filteredItems.value,
+        size: 'md',
+        descriptionKey: props.descriptionKey as string,
+        hasDescriptionSlot: !!slots['item-description'],
+      }),
+    },
+  );
+});
 
 const [
   DefineItemTemplate,
@@ -482,16 +498,16 @@ function onSelect(event: Event, item: T) {
 <!-- eslint-disable vue/no-v-html -->
 <template>
   <DefineItemTemplate v-slot="{ item, index, group }">
-    <AListboxItem
-      :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
-      :disabled="item.disabled"
-      as-child
-      @select="onSelect($event, item as T)"
+    <PLink
+      v-slot="{ active, ...slotProps }"
+      v-bind="pickLinkProps(item)"
+      custom
     >
-      <PLink
-        v-slot="{ active, ...slotProps }"
-        v-bind="pickLinkProps(item)"
-        custom
+      <AListboxItem
+        :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+        :disabled="item.disabled"
+        as-child
+        @select="onSelect($event, item as T)"
       >
         <PLinkBase
           v-bind="slotProps"
@@ -614,7 +630,7 @@ function onSelect(event: Event, item: T) {
               </span>
 
               <span
-                v-if="getProp({ object: item, path: props.descriptionKey as string })"
+                v-if="getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : 'item-description') as keyof PCommandPaletteSlots<G, T>]"
                 :class="pohon.itemDescription({ class: [props.pohon?.itemDescription, item.pohon?.itemDescription] })"
                 data-pohon="command-palette-item-description"
               >
@@ -680,8 +696,8 @@ function onSelect(event: Event, item: T) {
             </span>
           </slot>
         </PLinkBase>
-      </PLink>
-    </AListboxItem>
+      </AListboxItem>
+    </PLink>
   </DefineItemTemplate>
 
   <AListboxRoot
@@ -692,6 +708,7 @@ function onSelect(event: Event, item: T) {
     data-pohon="command-palette-root"
   >
     <AListboxFilter
+      v-if="input"
       v-model="searchTerm"
       as-child
     >
@@ -699,7 +716,7 @@ function onSelect(event: Event, item: T) {
         :placeholder="placeholder"
         variant="none"
         :autofocus="autofocus"
-        v-bind="inputProps"
+        :loading="loading"
         :loading-icon="loadingIcon"
         :trailing-icon="trailingIcon"
         :icon="icon || appConfig.pohon.icons.search"

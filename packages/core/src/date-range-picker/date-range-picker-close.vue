@@ -2,11 +2,11 @@
 import type { APopoverCloseProps } from '..';
 import { APopoverClose } from '..';
 
-export interface DateRangePickerCloseProps extends APopoverCloseProps {}
+export interface ADateRangePickerCloseProps extends APopoverCloseProps {}
 </script>
 
 <script setup lang="ts">
-const props = defineProps<DateRangePickerCloseProps>();
+const props = defineProps<ADateRangePickerCloseProps>();
 </script>
 
 <template>

@@ -32,6 +32,11 @@ export interface PFormFieldProps {
    * @defaultValue `300`
    */
   validateOnInputDelay?: number;
+  /**
+   * The orientation of the form field.
+   * @defaultValue 'vertical'
+   */
+  orientation?: FormField['variants']['orientation'];
   class?: any;
   pohon?: FormField['slots'];
 }
@@ -56,7 +61,12 @@ import { computed, inject, provide, ref, useId, watch } from 'vue';
 import { formErrorsInjectionKey, formFieldInjectionKey, formInputsInjectionKey, inputIdInjectionKey } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 
-const props = defineProps<PFormFieldProps>();
+const props = withDefaults(
+  defineProps<PFormFieldProps>(),
+  {
+    error: undefined,
+  },
+);
 const slots = defineSlots<PFormFieldSlots>();
 
 const appConfig = useAppConfig() as FormField['AppConfig'];
@@ -68,6 +78,7 @@ const pohon = computed(() =>
   })({
     size: props.size,
     required: props.required,
+    orientation: props.orientation,
   }),
 );
 
@@ -119,6 +130,7 @@ provide(
     :as="as"
     :class="pohon.root({ class: [props.pohon?.root, props.class] })"
     data-pohon="form-field-root"
+    :data-orientation="orientation"
   >
     <div
       :class="pohon.wrapper({ class: props.pohon?.wrapper })"
@@ -179,7 +191,7 @@ provide(
       <slot :error="error" />
 
       <div
-        v-if="(isString(error) && error) || !!slots.error"
+        v-if="props.error !== false && ((isString(error) && error) || !!slots.error)"
         :id="`${ariaId}-error`"
         :class="pohon.error({ class: props.pohon?.error })"
         data-pohon="form-field-error"

@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { PTableColumn } from 'pohon-ui';
-import { useToast } from '#imports';
 import { useClipboard } from '@vueuse/core';
 import { upperFirst } from 'scule';
-import { h, ref, resolveComponent, useTemplateRef } from 'vue';
+import { h, resolveComponent } from 'vue';
 
 const PButton = resolveComponent('PButton');
 const PCheckbox = resolveComponent('PCheckbox');
@@ -199,23 +198,35 @@ const columns: Array<PTableColumn<Payment>> = [{
       onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
     });
   },
-  cell: ({ row }) => h('div', { class: 'lowercase' }, row.getValue('email')),
+  meta: {
+    class: {
+      td: 'lowercase',
+    },
+  },
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium',
+    },
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'));
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
     }).format(amount);
-
-    return h('div', { class: 'text-right font-medium' }, formatted);
   },
 }, {
   id: 'actions',
   enableHiding: false,
+  meta: {
+    class: {
+      td: 'text-right',
+    },
+  },
   cell: ({ row }) => {
     const items = [{
       type: 'label',
@@ -244,7 +255,7 @@ const columns: Array<PTableColumn<Payment>> = [{
       label: 'View payment details',
     }];
 
-    return h('div', { class: 'text-right' }, h(PDropdownMenu, {
+    return h(PDropdownMenu, {
       'content': {
         align: 'end',
       },
@@ -254,9 +265,8 @@ const columns: Array<PTableColumn<Payment>> = [{
       'icon': 'i-lucide:ellipsis-vertical',
       'color': 'neutral',
       'variant': 'ghost',
-      'class': 'ml-auto',
       'aria-label': 'Actions dropdown',
-    })));
+    }));
   },
 }];
 
@@ -268,7 +278,7 @@ function randomize() {
 </script>
 
 <template>
-  <div class="flex-1 w-full divide-divide-accented divide-y">
+  <div class="divide-accented flex-1 w-full divide-y">
     <div class="px-4 py-3.5 flex gap-2 items-center overflow-x-auto">
       <PInput
         :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
@@ -320,7 +330,7 @@ function randomize() {
       </template>
     </PTable>
 
-    <div class="text-sm color-text-muted px-4 py-3.5">
+    <div class="color-text-muted text-sm px-4 py-3.5">
       {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
       {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
     </div>

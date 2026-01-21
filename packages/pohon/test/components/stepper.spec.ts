@@ -6,7 +6,7 @@ import { axe } from 'vitest-axe';
 import PStepper from '../../src/runtime/components/stepper.vue';
 import ComponentRender from '../component-render';
 
-describe('PStepper', () => {
+describe('pStepper', () => {
   const sizes = Object.keys(theme.variants.size) as any;
 
   const items = [
@@ -44,10 +44,12 @@ describe('PStepper', () => {
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }],
+    ['with wrapper slot', { props, slots: { wrapper: () => 'Wrapper slot' } }],
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with custom-wrapper slot', { props, slots: { 'custom-wrapper': () => 'Custom wrapper slot' } }],
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PStepperProps; slots?: Partial<PStepperSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, PStepper);
     expect(html).toMatchSnapshot();

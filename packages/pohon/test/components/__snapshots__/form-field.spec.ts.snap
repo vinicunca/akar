@@ -148,6 +148,34 @@ exports[`formField > renders with label slot correctly 1`] = `
 </div>"
 `;
 
+exports[`formField > renders with orientation horizontal correctly 1`] = `
+"<div class="" data-pohon="form-field-root" data-orientation="horizontal">
+  <div class="" data-pohon="form-field-wrapper">
+    <div class="" data-pohon="form-field-label-wrapper"><label for="v-0-0" class="" data-pohon="form-field-label">Username</label>
+      <!--v-if-->
+    </div>
+    <p id="v-0-0-description" class="" data-pohon="form-field-description">Enter your username</p>
+  </div>
+  <div class="" data-pohon="form-field-container">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`formField > renders with orientation vertical correctly 1`] = `
+"<div class="" data-pohon="form-field-root" data-orientation="vertical">
+  <div class="" data-pohon="form-field-wrapper">
+    <div class="" data-pohon="form-field-label-wrapper"><label for="v-0-0" class="" data-pohon="form-field-label">Username</label>
+      <!--v-if-->
+    </div>
+    <p id="v-0-0-description" class="" data-pohon="form-field-description">Enter your username</p>
+  </div>
+  <div class="" data-pohon="form-field-container">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
 exports[`formField > renders with required correctly 1`] = `
 "<div class="" data-pohon="form-field-root">
   <div class="" data-pohon="form-field-wrapper">

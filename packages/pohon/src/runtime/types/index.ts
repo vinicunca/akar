@@ -24,6 +24,7 @@ export * from '../components/color-picker.vue';
 export * from '../components/command-palette.vue';
 export * from '../components/container.vue';
 export * from '../components/context-menu.vue';
+export * from '../components/dashboard-menu.vue';
 export * from '../components/dialog.vue';
 export * from '../components/drawer.vue';
 export * from '../components/dropdown-menu.vue';

@@ -266,8 +266,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '/admin/examples/layout/col-page',
         component: () => import('~/domains/admin/pages/examples/layout/col-page.vue'),
         meta: {
-          badge: 'Alpha',
-          badgeVariants: 'destructive',
+          badge: {
+            label: 'Alpha',
+            color: 'error',
+          },
           icon: 'material-symbols:horizontal-distribute',
           title: 'pages.examples.layout.col-page',
         },

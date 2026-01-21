@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { PTableColumn } from 'pohon-ui';
-import { useFetch } from '#app';
-import { h, resolveComponent } from 'vue';
 
 const PAvatar = resolveComponent('PAvatar');
 

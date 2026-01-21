@@ -66,10 +66,11 @@ type SlotProps<T extends PStepperItem> = (props: { item: T }) => any;
 
 export type PStepperSlots<T extends PStepperItem = PStepperItem> = {
   indicator: (props: { item: T; pohon: Stepper['pohon'] }) => any;
+  wrapper: SlotProps<T>;
   title: SlotProps<T>;
   description: SlotProps<T>;
   content: SlotProps<T>;
-} & DynamicSlots<T>;
+} & DynamicSlots<T, 'wrapper' | 'title' | 'description', { item: T }>;
 
 </script>
 
@@ -213,30 +214,38 @@ defineExpose({
           :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })"
           data-pohon="stepper-wrapper"
         >
-          <AStepperTitle
-            as="div"
-            :class="pohon.title({ class: [props.pohon?.title, item.pohon?.title] })"
-            data-pohon="stepper-title"
+          <slot
+            :name="((item.slot ? `${item.slot}-wrapper` : 'wrapper') as keyof PStepperSlots<T>)"
+            :item="(item as Extract<T, { slot: string; }>)"
           >
-            <slot
-              name="title"
-              :item="item"
+            <AStepperTitle
+              v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof PStepperSlots<T>]"
+              as="div"
+              data-pohon="stepper-title"
+              :class="pohon.title({ class: [props.pohon?.title, item.pohon?.title] })"
             >
-              {{ item.title }}
-            </slot>
-          </AStepperTitle>
-          <AStepperDescription
-            as="div"
-            :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
-            data-pohon="stepper-description"
-          >
-            <slot
-              name="description"
-              :item="item"
+              <slot
+                :name="((item.slot ? `${item.slot}-title` : 'title') as keyof PStepperSlots<T>)"
+                :item="(item as Extract<T, { slot: string; }>)"
+              >
+                {{ item.title }}
+              </slot>
+            </AStepperTitle>
+
+            <AStepperDescription
+              v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof PStepperSlots<T>]"
+              as="div"
+              data-pohon="stepper-description"
+              :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
             >
-              {{ item.description }}
-            </slot>
-          </AStepperDescription>
+              <slot
+                :name="((item.slot ? `${item.slot}-description` : 'description') as keyof PStepperSlots<T>)"
+                :item="(item as Extract<T, { slot: string; }>)"
+              >
+                {{ item.description }}
+              </slot>
+            </AStepperDescription>
+          </slot>
         </div>
       </AStepperItem>
     </div>

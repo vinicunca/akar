@@ -58,6 +58,7 @@ watch(
     :as="as"
     :src="src"
     :referrer-policy="referrerPolicy"
+    :cross-origin="crossOrigin"
   >
     <slot />
   </APrimitive>

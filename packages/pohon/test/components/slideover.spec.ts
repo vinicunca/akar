@@ -1,11 +1,14 @@
 import type { PSlideoverProps, PSlideoverSlots } from '../../src/runtime/components/slideover.vue';
+import theme from '#build/pohon/slideover';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import PSlideover from '../../src/runtime/components/slideover.vue';
 import ComponentRender from '../component-render';
 
-describe('PSlideover', () => {
+describe('pSlideover', () => {
+  const sides = Object.keys(theme.variants.side) as any;
+
   const props = { open: true, portal: false };
 
   it.each([
@@ -13,9 +16,8 @@ describe('PSlideover', () => {
     ['with open', { props }],
     ['with title', { props: { ...props, title: 'Title' } }],
     ['with description', { props: { ...props, title: 'Title', description: 'Description' } }],
-    ['with left side', { props: { ...props, side: 'left' as const, title: 'Title', description: 'Description' } }],
-    ['with top side', { props: { ...props, side: 'top' as const, title: 'Title', description: 'Description' } }],
-    ['with bottom side', { props: { ...props, side: 'bottom' as const, title: 'Title', description: 'Description' } }],
+    ...sides.map((side: string) => [`with ${side} side`, { props: { ...props, side, title: 'Title', description: 'Description' } }]),
+    ...sides.map((side: string) => [`with ${side} side inset`, { props: { ...props, side, inset: true, title: 'Title', description: 'Description' } }]),
     ['without overlay', { props: { ...props, overlay: false, title: 'Title', description: 'Description' } }],
     ['without transition', { props: { ...props, transition: false, title: 'Title', description: 'Description' } }],
     ['without close', { props: { ...props, close: false, title: 'Title', description: 'Description' } }],

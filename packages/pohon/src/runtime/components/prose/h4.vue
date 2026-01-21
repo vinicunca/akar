@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ComponentConfig } from '../../types/uv';
-import theme from '#build/pohon/prose/h4';
+import theme from '#build/pohon/prose/h-4';
 
 type ProseH4 = ComponentConfig<typeof theme, AppConfig, 'h4', 'pohon.prose'>;
 

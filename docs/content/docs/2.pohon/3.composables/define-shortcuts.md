@@ -9,13 +9,13 @@ Use the auto-imported `defineShortcuts` composable to define keyboard shortcuts.
 
 ```vue
 <script setup lang="ts">
-const open = ref(false)
+const open = ref(false);
 
 defineShortcuts({
   meta_k: () => {
-    open.value = !open.value
+    open.value = !open.value;
   }
-})
+});
 </script>
 ```
 
@@ -24,13 +24,14 @@ Or you don't want to use the auto import functionality.
 ```vue
 <script setup lang="ts">
 import { defineShortcuts } from '#imports';
+
 const open = ref(false);
 
 defineShortcuts({
   meta_k: () => {
-    open.value = !open.value
+    open.value = !open.value;
   }
-})
+});
 </script>
 ```
 
@@ -60,7 +61,12 @@ Define keyboard shortcuts for your application.
 
   ::collapsible
     ::field{name="chainDelay" type="number"}
-    The delay between key presses to consider the shortcut as chained. Default is `250`.
+    The delay between key presses to consider the shortcut as chained. Default is `800`.
+    ::
+    ::field{name="layoutIndependent" type="boolean"}
+    When enabled, shortcuts work consistently across different keyboard layouts (Arabic, Hebrew) by matching physical key positions rather than character values.
+    - `false` (default): Uses `e.key` for character-based matching (Layout specific)
+    - `true`: Uses `e.code` for physical key matching (Layout agnostic)
     ::
   ::
   ::
@@ -117,7 +123,7 @@ defineShortcuts({
   '?': () => openHelpModal(),
   'meta_k': () => openCommandPalette(),
   'g-d': () => navigateToDashboard()
-})
+});
 </script>
 ```
 
@@ -126,12 +132,8 @@ defineShortcuts({
 The `usingInput` option allows you to specify that a shortcut should only trigger when a specific input is focused.
 
 ```vue
-<template>
-  <PInput v-model="query" name="queryInput" />
-</template>
-
 <script setup lang="ts">
-const query = ref('')
+const query = ref('');
 
 defineShortcuts({
   enter: {
@@ -142,32 +144,21 @@ defineShortcuts({
     usingInput: true,
     handler: () => clearSearch()
   }
-})
+});
 </script>
+
+<template>
+  <PInput
+    v-model="query"
+    name="queryInput"
+  />
+</template>
 ```
 
 ### Extracting shortcuts from menu items
 
-The `extractShortcuts` utility can be used to automatically define shortcuts from menu items:
+Use the `extractShortcuts` utility to automatically define shortcuts from menu items.
 
-```vue
-<script setup lang="ts">
-const items = [{
-  label: 'Save',
-  icon: 'i-lucide:file-down',
-  kbds: ['meta', 'S'],
-  onSelect() {
-    save()
-  }
-}, {
-  label: 'Copy',
-  icon: 'i-lucide:copy',
-  kbds: ['meta', 'C'],
-  onSelect() {
-    copy()
-  }
-}]
-
-defineShortcuts(extractShortcuts(items))
-</script>
-```
+::tip{to="/docs/pohon/composables/extract-shortcuts"}
+Learn more about the **extractShortcuts** utility.
+::

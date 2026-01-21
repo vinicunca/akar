@@ -19,7 +19,6 @@
     "zod": "catalog:pohon"
   },
   "devDependencies": {
-    "@iconify/json": "catalog:base",
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/unocss-preset": "catalog:pohon",
     "pinia-plugin-persistedstate": "catalog:pohon",

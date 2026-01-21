@@ -163,7 +163,7 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
         </span>
 
         <span
-          v-if="getProp({ object: item, path: props.descriptionKey as string })"
+          v-if="getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : 'item-description') as keyof PDropdownMenuSlots<T>]"
           :class="pohon.itemDescription({ class: [pohonOverride?.itemDescription, item.pohon?.itemDescription] })"
         >
           <slot
@@ -219,7 +219,10 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
       :class="pohon.content({ class: [pohonOverride?.content, props.class] })"
       v-bind="contentProps"
     >
-      <slot name="content-top" />
+      <slot
+        name="content-top"
+        :sub="sub ?? false"
+      />
 
       <div
         role="presentation"
@@ -307,17 +310,17 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
                 :index="index"
               />
             </ADropdownMenu.CheckboxItem>
-            <ADropdownMenu.Item
+            <PLink
               v-else
-              as-child
-              :disabled="item.disabled"
-              :text-value="getProp({ object: item, path: props.labelKey as string })"
-              @select="item.onSelect"
+              v-slot="{ active, ...slotProps }"
+              v-bind="pickLinkProps(item as Omit<PDropdownMenuItem, 'type'>)"
+              custom
             >
-              <PLink
-                v-slot="{ active, ...slotProps }"
-                v-bind="pickLinkProps(item as Omit<PDropdownMenuItem, 'type'>)"
-                custom
+              <ADropdownMenu.Item
+                as-child
+                :disabled="item.disabled"
+                :text-value="getProp({ object: item, path: props.labelKey as string })"
+                @select="item.onSelect"
               >
                 <PLinkBase
                   v-bind="slotProps"
@@ -329,15 +332,18 @@ const groups = computed<Array<Array<PDropdownMenuItem>>>(() => {
                     :index="index"
                   />
                 </PLinkBase>
-              </PLink>
-            </ADropdownMenu.Item>
+              </ADropdownMenu.Item>
+            </PLink>
           </template>
         </ADropdownMenu.Group>
       </div>
 
       <slot />
 
-      <slot name="content-bottom" />
+      <slot
+        name="content-bottom"
+        :sub="sub ?? false"
+      />
     </component>
   </ADropdownMenu.Portal>
 </template>

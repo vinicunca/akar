@@ -4,7 +4,7 @@ import type { ContentNavigationItem } from '@nuxt/content';
 import { useLazyAsyncData } from '#app';
 import { inject, queryCollectionSearchSections, ref } from '#imports';
 
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), {
+const { data: files } = useLazyAsyncData('content-search-example', () => queryCollectionSearchSections('docs'), {
   server: false,
 });
 

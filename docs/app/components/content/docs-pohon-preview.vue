@@ -1,16 +1,12 @@
 <!-- eslint-disable sonar/no-nested-template-literals -->
 <script lang="ts" setup>
 import type { PChipProps } from 'pohon-ui';
-import { useAsyncData, useNuxtApp, useRoute } from '#app';
 import * as theme from '#build/pohon';
-import { MDCRenderer, PChip, PFormField, PSelect } from '#components';
-import { fetchComponentMeta, parseMarkdown } from '#imports';
 import { getProp, setProp } from '#pohon/utils';
 import { CalendarDate, Time } from '@internationalized/date';
-import { isBoolean, toCamelCase, toKebabCase, toPascalCase } from '@vinicunca/perkakas';
+import { capitalize, isBoolean, toCamelCase, toKebabCase } from '@vinicunca/perkakas';
 import json5 from 'json5';
 import { hash } from 'ohash';
-import { computed, defineAsyncComponent, reactive } from 'vue';
 
 const props = defineProps<{
   prose?: boolean;
@@ -110,7 +106,7 @@ const route = useRoute();
 const { $prettier } = useNuxtApp();
 
 const camelName = toCamelCase(props.slug ?? route.path.split('/').pop() ?? '');
-const name = `${props.prose ? 'Prose' : 'P'}${toPascalCase(camelName)}`;
+const name = `${props.prose ? 'Prose' : 'P'}${capitalize(toCamelCase(camelName))}`;
 
 const component = defineAsyncComponent(() => {
   if (props.prefix) {
@@ -359,6 +355,9 @@ ${props.slots?.default}
 
 const codeKey = computed(() => `component-code-${name}-${hash(props)}`);
 
+const wrapperContainer = ref<HTMLElement | null>(null);
+const componentContainer = ref<HTMLElement | null>(null);
+
 const { data: ast } = await useAsyncData(
   codeKey,
   async () => {
@@ -389,7 +388,10 @@ const { data: ast } = await useAsyncData(
     class="my-5"
     :style="{ '--pohon-header-height': '4rem' }"
   >
-    <div class="relative">
+    <div
+      ref="wrapperContainer"
+      class="group/component relative"
+    >
       <div
         v-if="options.length"
         class="px-4 py-2.5 border border-b-0 border-border-muted rounded-t-md flex flex-wrap gap-2.5 items-center relative overflow-x-auto"
@@ -451,6 +453,7 @@ const { data: ast } = await useAsyncData(
 
     <div
       v-if="component"
+      ref="componentContainer"
       class="p-4 border border-b-0 border-border-muted flex justify-center relative z-1"
       :class="[!options.length && 'rounded-t-md', props.class, { 'overflow-hidden': props.overflowHidden }]"
     >
@@ -471,6 +474,15 @@ const { data: ast } = await useAsyncData(
           </slot>
         </template>
       </component>
+
+      <ClientOnly>
+        <LazyComponentThemeVisualizer
+          :container="componentContainer"
+          :position-container="wrapperContainer"
+          :slug="props.slug"
+          :prose="props.prose"
+        />
+      </ClientOnly>
     </div>
 
     <MDCRenderer

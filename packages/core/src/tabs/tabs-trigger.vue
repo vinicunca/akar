@@ -27,8 +27,11 @@ const { forwardRef } = useForwardExpose();
 const rootContext = injectATabsRootContext();
 
 const triggerId = computed(() => makeTriggerId(rootContext.baseId, props.value));
-const contentId = computed(() => makeContentId(rootContext.baseId, props.value));
-
+const contentId = computed(() =>
+  rootContext.contentIds.value.has(props.value)
+    ? makeContentId(rootContext.baseId, props.value)
+    : undefined,
+);
 const isSelected = computed(() => props.value === rootContext.modelValue.value);
 
 function handleMouseDown(event: MouseEvent) {

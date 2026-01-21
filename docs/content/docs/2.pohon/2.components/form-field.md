@@ -166,6 +166,30 @@ slots:
 :p-input{placeholder="Enter your email" class="w-full"}
 ::
 
+### Orientation
+
+Use the `orientation` prop to change the layout of the FormField. Defaults to `vertical`.
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - label
+  - class
+props:
+  orientation: horizontal
+  label: Email
+  help: Please enter a valid email address.
+  class: w-72
+slots:
+  default: |
+
+    <PInput placeholder="Enter your email" class="w-full" />
+---
+
+:p-input{placeholder="Enter your email" class="w-full"}
+::
+
 ## API
 
 ### Props

@@ -16,6 +16,10 @@ export default defineNuxtConfig({
     },
   },
 
+  a11y: {
+    logIssues: false,
+  },
+
   app: {
     rootAttrs: {
       'class': 'bg-background',
@@ -23,7 +27,7 @@ export default defineNuxtConfig({
     },
   },
 
-  compatibilityDate: '2024-07-09',
+  compatibilityDate: '2026-01-14',
 
   componentMeta: {
     exclude: [
@@ -31,7 +35,6 @@ export default defineNuxtConfig({
       '@nuxt/icon',
       '@nuxtjs/color-mode',
       '@nuxtjs/mdc',
-      '@nuxtjs/plausible',
       'nuxt/dist',
       'nuxt-og-image',
       resolve('./app/components'),
@@ -42,6 +45,49 @@ export default defineNuxtConfig({
       props: true,
       slots: 'no-schema',
       type: false,
+    },
+    overrides: {
+      PCalendar: {
+        props: {
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
+          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange | DateValue[]' },
+          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+        },
+      },
+      PEditor: {
+        props: {
+          modelValue: { name: 'modelValue', type: 'null | string | JSONContent | JSONContent[]' },
+          parseOptions: { name: 'parseOptions', type: 'ParseOptions' },
+        },
+      },
+      PEditorDragHandle: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      PEditorEmojiMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      PEditorMentionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      PEditorSuggestionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      PEditorToolbar: { props: { editor: { name: 'editor', type: 'Editor' } } },
+      PInputDate: {
+        props: {
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          defaultValue: { name: 'defaultValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
+          maxValue: { name: 'maxValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+          modelValue: { name: 'modelValue', type: 'null | CalendarDate | CalendarDateTime | ZonedDateTime | DateRange' },
+          placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
+        },
+      },
+      PInputTime: {
+        props: {
+          defaultPlaceholder: { name: 'defaultPlaceholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          defaultValue: { name: 'defaultValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          maxValue: { name: 'maxValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          minValue: { name: 'minValue', type: 'Time | CalendarDateTime | ZonedDateTime' },
+          modelValue: { name: 'modelValue', type: 'null | Time | CalendarDateTime | ZonedDateTime' },
+          placeholder: { name: 'placeholder', type: 'Time | CalendarDateTime | ZonedDateTime' },
+        },
+      },
     },
     transformers: [(component, code) => {
       // Simplify pohon in slot prop types: `leading(props: { pohon: Button['pohon'] })` -> `leading(props: { pohon: object })`
@@ -68,16 +114,13 @@ export default defineNuxtConfig({
   },
 
   experimental: {
+    asyncContext: true,
     defaults: {
       nuxtLink: {
         externalRelAttribute: 'noopener',
       },
     },
   },
-
-  extends: [
-    'pohon-ui/layer',
-  ],
 
   fonts: {
     families: [
@@ -101,10 +144,6 @@ export default defineNuxtConfig({
       prefix: 'custom',
     }],
     provider: 'iconify',
-  },
-
-  imports: {
-    autoImport: false,
   },
 
   llms: {
@@ -171,12 +210,15 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    'pohon-ui',
+    '../packages/pohon/src/module',
     '@nuxt/content',
     '@nuxt/fonts',
     'nuxt-component-meta',
     'nuxt-og-image',
     '@unocss/nuxt',
+    '@nuxt/a11y',
+    'nuxt-llms',
+    'nuxt-gtag',
     (_, nuxt) => {
       nuxt.hook('components:dirs', (dirs) => {
         dirs.unshift({
@@ -187,8 +229,6 @@ export default defineNuxtConfig({
         });
       });
     },
-    'nuxt-llms',
-    'nuxt-gtag',
   ],
 
   nitro: {

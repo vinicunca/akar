@@ -98,11 +98,20 @@ describe('timeField', async () => {
     });
     expect(queryByTestId('dayPeriod')).not.toBeInTheDocument();
   });
+
   it('does show the day period for locales that do use them', async () => {
     const { queryByTestId } = setup({
       timeFieldProps: { modelValue: calendarDateTime },
     });
     expect(queryByTestId('dayPeriod')).toBeInTheDocument();
+  });
+
+  it('filter time zone brackets for specific locales', async () => {
+    const { queryByTestId } = setup({
+      timeFieldProps: { modelValue: calendarDateTime, locale: 'zh-TW', hideTimeZone: true },
+    });
+    expect(queryByTestId('input')).not.toHaveTextContent('[');
+    expect(queryByTestId('input')).not.toHaveTextContent(']');
   });
 
   it('focuses first segment on label click', async () => {

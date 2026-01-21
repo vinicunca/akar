@@ -205,13 +205,14 @@ function isDisabled(item: PEditorToolbarItem): boolean {
 
   if ('items' in item && item.items?.length) {
     const items = isArrayOfArray(item.items) ? item.items.flat() : item.items;
-    const itemItems = items.filter((item): item is PEditorToolbarItem => 'kind' in item);
+    // Filter out structural elements (separators, labels)
+    const actionableItems = items.filter((item: any) => item.type !== 'separator' && item.type !== 'label');
 
-    if (itemItems.length === 0) {
+    if (actionableItems.length === 0) {
       return true;
     }
 
-    return itemItems.every((item) => isDisabled(item));
+    return actionableItems.every((item) => isDisabled(item));
   }
 
   if (!('kind' in item)) {
@@ -268,7 +269,20 @@ function getActiveChildItem(item: EditorToolbarDropdownItem): PEditorToolbarItem
 }
 
 function getButtonProps(item: PEditorToolbarItem) {
-  const baseProps = omit(item as EditorToolbarButtonItem & EditorToolbarDropdownItem, ['kind', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip']);
+  const baseProps = omit(item as EditorToolbarButtonItem & EditorToolbarDropdownItem, [
+    'kind',
+    'items',
+    'slot',
+    'checkedIcon',
+    'loadingIcon',
+    'externalIcon',
+    'content',
+    'arrow',
+    'portal',
+    'modal',
+    'tooltip',
+    'onClick',
+  ]);
 
   // For dropdown items, use the active child's icon if available
   if ('items' in item && item.items?.length) {
@@ -298,18 +312,24 @@ function getDropdownProps(item: EditorToolbarDropdownItem) {
   });
 }
 
-function mapDropdownItem(item: EditorToolbarDropdownChildItem) {
-  // If it's a separator or label (no 'kind' property), return as is
+function mapDropdownItem(item: EditorToolbarDropdownChildItem): any {
+  // Recursively map children if present
+  const children = 'children' in item && Array.isArray(item.children)
+    ? item.children.map(mapDropdownItem)
+    : undefined;
+
+  // If it's a separator or label (no 'kind' property), return with mapped children
   if (!('kind' in item)) {
-    return item;
+    return children ? { ...item, children } : item;
   }
 
   const editorToolbarItem = item as EditorToolbarDropdownChildItem;
   return {
     ...editorToolbarItem,
+    ...(children && { children }),
     active: isActive(editorToolbarItem),
     disabled: isDisabled(editorToolbarItem),
-    onClick: (e: MouseEvent) => onClick(e, editorToolbarItem),
+    onSelect: (e: Event) => onClick(e as MouseEvent, editorToolbarItem),
   };
 }
 
@@ -375,6 +395,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
                     :active="isActive(item)"
                     :disabled="isDisabled(item)"
                     v-bind="getButtonProps(item)"
+                    @click="onClick($event, item)"
                   />
                 </PTooltip>
               </PDropdownMenu>

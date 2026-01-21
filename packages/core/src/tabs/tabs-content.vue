@@ -15,7 +15,7 @@ export interface ATabsContentProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { APresence } from '../presence';
 import { APrimitive } from '../primitive';
 import { injectATabsRootContext } from './tabs-root.vue';
@@ -33,9 +33,15 @@ const isSelected = computed(() => props.value === rootContext.modelValue.value);
 const isMountAnimationPreventedRef = ref(isSelected.value);
 
 onMounted(() => {
+  rootContext.registerContent(props.value);
+
   requestAnimationFrame(() => {
     isMountAnimationPreventedRef.value = false;
   });
+});
+
+onBeforeUnmount(() => {
+  rootContext.unregisterContent(props.value);
 });
 </script>
 

@@ -52,6 +52,9 @@ export const buttonTheme = {
         trailingIcon: 'ms-auto',
       },
     },
+    square: {
+      true: 'akar:rounded-full',
+    },
   },
   compoundVariants: [
     ...BRANDS.map((color) => ({

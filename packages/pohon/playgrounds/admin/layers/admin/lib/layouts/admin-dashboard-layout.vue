@@ -22,7 +22,7 @@ import {
   useDashboardMixedMenu,
 } from './menu';
 import { LayoutTabbar } from './tabbar';
-import { Breadcrumb, PreferencesPanel } from './widgets';
+import { Breadcrumb, PreferencesButton } from './widgets';
 
 const emit = defineEmits<{ clearPreferencesAndLogout: []; clickLogo: [] }>();
 
@@ -130,11 +130,11 @@ function wrapperMenus(
     ? mapTree({
         tree: menus,
         mapper: (item) => {
-          return { ...clone(item), name: t(item.name) };
+          return { ...clone(item), title: t(item.name) };
         },
       })
     : menus.map((item) => {
-        return { ...clone(item), name: t(item.name) };
+        return { ...clone(item), title: t(item.name) };
       });
 }
 
@@ -321,7 +321,7 @@ const sidebarExtraCollapsed = computed({
           v-if="showHeaderNav"
           #menu
         >
-          <LayoutMenu
+          <!-- <LayoutMenu
             :default-active="headerActive"
             :menus="wrapperMenus({ menus: headerMenus })"
             :rounded="isMenuRounded"
@@ -329,7 +329,7 @@ const sidebarExtraCollapsed = computed({
             class="w-full"
             mode="horizontal"
             @select="handleMenuSelect"
-          />
+          /> -->
         </template>
 
         <template #user-dropdown>
@@ -357,7 +357,7 @@ const sidebarExtraCollapsed = computed({
     <template #menu>
       <LayoutMenu
         :accordion="preferences.navigation.isAccordion"
-        :collapse="preferences.sidebar.collapsed"
+        :collapsed="preferences.sidebar.collapsed"
         :collapse-show-title="preferences.sidebar.collapsedShowTitle"
         :default-active="sidebarActive"
         :menus="wrapperMenus({ menus: sidebarMenus })"
@@ -370,7 +370,7 @@ const sidebarExtraCollapsed = computed({
     </template>
 
     <template #mixed-menu>
-      <LayoutMixedMenu
+      <!-- <LayoutMixedMenu
         :active-path="extraActiveMenu"
         :menus="wrapperMenus({ menus: mixHeaderMenus, deep: false })"
         :rounded="isMenuRounded"
@@ -378,7 +378,7 @@ const sidebarExtraCollapsed = computed({
         @default-select="handleDefaultSelect"
         @enter="handleMenuMouseEnter"
         @select="handleMixedMenuSelect"
-      />
+      /> -->
     </template>
 
     <!-- Side extra area -->
@@ -457,7 +457,7 @@ const sidebarExtraCollapsed = computed({
       </Transition>
 
       <template v-if="preferencesButtonPosition.fixed">
-        <PreferencesPanel
+        <PreferencesButton
           class="bottom-20 right-0 fixed z-100"
           @clear-preferences-and-logout="clearPreferencesAndLogout"
         />

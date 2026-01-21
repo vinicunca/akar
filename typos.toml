@@ -2,6 +2,10 @@
 extend-exclude = [
   # Add directories to ignore here
   "**/locale/*.ts",
+  # Countries data with country codes
+  "docs/server/api/countries.json.get.ts",
+  # Translation example documentation
+  "docs/content/docs/2.pohon/3.composables/define-locale.md",
 ]
 
 [default]

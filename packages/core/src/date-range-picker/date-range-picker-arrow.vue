@@ -2,11 +2,11 @@
 import type { APopoverArrowProps } from '..';
 import { APopoverArrow } from '..';
 
-export interface DateRangePickerArrowProps extends APopoverArrowProps {}
+export interface ADateRangePickerArrowProps extends APopoverArrowProps {}
 </script>
 
 <script setup lang="ts">
-const props = defineProps<DateRangePickerArrowProps>();
+const props = defineProps<ADateRangePickerArrowProps>();
 </script>
 
 <template>

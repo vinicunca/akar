@@ -248,6 +248,15 @@ function createContentArr(props: CreateContentArrProps) {
         return false;
       }
 
+      // In some locales (e.g., zh-TW), the time zone is represented with square brackets.
+      // We also filter out these literals that are just brackets.
+      if (
+        (!isZonedDateTime(props.dateRef) || hideTimeZone)
+        && segment.part === 'literal' && ['[', ']'].includes(segment.value.trim())
+      ) {
+        return false;
+      }
+
       return true;
     });
 

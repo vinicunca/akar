@@ -2,9 +2,6 @@
 import { definePageMeta } from '#imports';
 
 definePageMeta({
-  badge: 'Hot',
-  badgeVariants: 'destructive',
-  icon: 'i-lucide:square-dot',
   title: 'pages.demos.badge.color',
 });
 </script>

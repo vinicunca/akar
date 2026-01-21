@@ -65,7 +65,7 @@ export default defineAppConfig({
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.18",
-    "@nuxt/ui": "^4.0.0",
+    "pohon-ui": "^4.0.0",
     "nuxt": "^4.0.0"
   },
   "devDependencies": {
@@ -205,7 +205,7 @@ export default defineAppConfig({
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.18",
-    "@nuxt/ui": "^4.0.0",
+    "pohon-ui": "^4.0.0",
     "nuxt": "^4.0.0"
   },
   "devDependencies": {

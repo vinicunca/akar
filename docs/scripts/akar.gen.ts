@@ -4,7 +4,7 @@ import { mkdirSync, readdirSync, readFileSync } from 'node:fs';
 import { join, parse, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import _traverse from '@babel/traverse';
-import { toPascalCase } from '@vinicunca/perkakas';
+import { capitalize, toCamelCase } from '@vinicunca/perkakas';
 import { components } from 'akar/constant';
 import fg from 'fast-glob';
 import { createChecker } from 'vue-component-meta';
@@ -41,7 +41,7 @@ const allComponents = fg.sync([
 const listOfComponents = Object.values(components).flatMap((i) => i);
 
 const primitiveComponents = allComponents.filter((i) => {
-  const fileName = toPascalCase(`a-${parse(i).name}`);
+  const fileName = capitalize(toCamelCase(`a-${parse(i).name}`));
   // @ts-expect-error: complains because name is a string; completely fine and *actually* intended.
   return listOfComponents.includes(fileName);
 });

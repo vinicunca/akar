@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { PTableColumn } from 'pohon-ui';
-import { useFetch } from '#app';
 import { useInfiniteScroll } from '@vueuse/core';
-import { h, onMounted, ref, resolveComponent, useTemplateRef, watch } from 'vue';
 
 const PAvatar = resolveComponent('PAvatar');
 
