@@ -123,7 +123,7 @@ function handleDelete(event: KeyboardEvent) {
 }
 
 function handleFocus(event: FocusEvent) {
-  // In OTP mode, inputs should be filled one by one wihtout skipping middle inputs
+  // In OTP mode, inputs should be filled one by one without skipping middle inputs
 
   if (context.otp.value) {
     const firstEmptyIndex = inputElements.value.findIndex((_, idx) => {

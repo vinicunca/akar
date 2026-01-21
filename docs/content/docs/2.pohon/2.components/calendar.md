@@ -232,7 +232,7 @@ name: 'calendar-min-max-dates-example'
 
 ### With other calendar systems
 
-You can use other calenders from `@internationalized/date` to implement a different calendar system.
+You can use other calendars from `@internationalized/date` to implement a different calendar system.
 
 ::docs-component-example
 ---

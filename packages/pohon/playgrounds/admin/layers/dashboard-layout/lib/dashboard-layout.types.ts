@@ -136,7 +136,7 @@ export interface DashboardLayoutProps {
    */
   sidebarExtraCollapsedWidth?: number;
   /**
-   * Wether the side menu collapse button is fixed
+   * Whether the side menu collapse button is fixed
    * @default true
    */
   sidebarShowFixedButton?: boolean;

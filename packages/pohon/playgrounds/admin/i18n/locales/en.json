@@ -271,7 +271,7 @@
     "watermarkContent": "Please input Watermark content",
     "checkUpdates": "Periodic update check",
     "position": {
-      "title": "Preferences Postion",
+      "title": "Preferences Position",
       "header": "Header",
       "auto": "Auto",
       "fixed": "Fixed"
@@ -283,7 +283,7 @@
       "title": "Sidebar",
       "width": "Width",
       "visible": "Show Sidebar",
-      "collapsed": "Collpase Menu",
+      "collapsed": "Collapse Menu",
       "collapsedShowTitle": "Show Menu Title",
       "autoActivateChild": "Auto Activate SubMenu",
       "autoActivateChildTip": "`Enabled` to automatically activate the submenu while click menu.",

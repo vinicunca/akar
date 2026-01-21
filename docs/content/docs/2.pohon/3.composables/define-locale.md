@@ -22,9 +22,9 @@ const locale = defineLocale<Messages>({
 </script>
 
 <template>
-  <UApp :locale="locale">
+  <PApp :locale="locale">
     <NuxtPage />
-  </UApp>
+  </PApp>
 </template>
 ```
 
@@ -103,9 +103,9 @@ const locale = defineLocale<Messages>({
 </script>
 
 <template>
-  <UApp :locale="locale">
+  <PApp :locale="locale">
     <NuxtPage />
-  </UApp>
+  </PApp>
 </template>
 ```
 
