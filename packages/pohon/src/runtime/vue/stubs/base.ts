@@ -5,13 +5,11 @@ import { useColorMode as useColorModeVueUse } from '@vueuse/core';
 import { createHooks } from 'hookable';
 import { onScopeDispose, ref } from 'vue';
 
-export { defineLocale } from '../composables/define-locale';
-export { defineShortcuts } from '../composables/define-shortcuts';
-
-export { useLocale } from '../composables/use-locale';
-export { useAppConfig } from './composables/use-app-config';
+export { defineLocale } from '../../composables/define-locale';
+export { defineShortcuts } from '../../composables/define-shortcuts';
+export { useLocale } from '../../composables/use-locale';
+export { useAppConfig } from '../composables/use-app-config';
 export { useHead } from '@unhead/vue';
-export { useRoute, useRouter } from 'vue-router';
 
 export function clearError() {
 
