@@ -42,3 +42,4 @@
 - fix(Banner): prevent XSS via id prop injection
 - docs(components): properly escape markdown in prop type rendering
 - feat(pohon): add unplugin for vue
+- feat(Editor): handle boolean in image and mention props

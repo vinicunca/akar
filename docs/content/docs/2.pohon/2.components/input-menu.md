@@ -500,6 +500,39 @@ ignore:
 external:
   - items
   - modelValue
+items:
+  clear:
+    - true
+    - false
+props:
+  modelValue: 'Backlog'
+  clear: true
+  clearIcon: 'i-lucide-trash'
+  items:
+    - Backlog
+    - Todo
+    - In Progress
+    - Done
+---
+::
+
+### Clear Icon
+
+Use the `clear-icon` prop to customize the clear button [Icon](/docs/pohon/components/icon). Defaults to `i-lucide-x`.
+
+::docs-pohon-preview
+---
+prettier: true
+ignore:
+  - items
+  - modelValue
+external:
+  - items
+  - modelValue
+items:
+  clear:
+    - true
+    - false
 props:
   modelValue: 'Backlog'
   clear: true

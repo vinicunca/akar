@@ -29,32 +29,34 @@ export interface PEditorProps<T extends Content = Content, H extends EditorCusto
   contentType?: EditorContentType;
   /**
    * The starter kit options to configure the editor.
-   * @defaultValue { headings: { levels: [1, 2, 3, 4] }, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
+   * @defaultValue { horizontalRule: false, headings: { levels: [1, 2, 3, 4] }, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/starterkit
    */
   starterKit?: Partial<StarterKitOptions>;
   /**
-   * The placeholder text to show in empty paragraphs.
-   * `{ showOnlyWhenEditable: false, showOnlyCurrent: true }`{lang="ts-type"}
-   * Can be a string or PlaceholderOptions from `@tiptap/extension-placeholder`.
+   * The placeholder text to show in empty paragraphs. Can be a string or PlaceholderOptions from `@tiptap/extension-placeholder`.
+   * @defaultValue { showOnlyWhenEditable: false, showOnlyCurrent: true }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/placeholder
    */
   placeholder?: string | Partial<PlaceholderOptions>;
   /**
    * The markdown extension options to configure markdown parsing and serialization.
+   * @defaultValue { markedOptions: { gfm: true } }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/markdown
    */
   markdown?: Partial<MarkdownExtensionOptions>;
   /**
-   * The image extension options to configure image handling.
+   * The image extension options to configure image handling. Set to `false` to disable the extension.
+   * @defaultValue {}
    * @see https://tiptap.dev/docs/editor/extensions/nodes/image
    */
-  image?: Partial<ImageOptions>;
+  image?: boolean | Partial<ImageOptions>;
   /**
-   * The mention extension options to configure mention handling.
+   * The mention extension options to configure mention handling. Set to `false` to disable the extension.
+   * @defaultValue { HTMLAttributes: { class: 'mention' } }
    * @see https://tiptap.dev/docs/editor/extensions/nodes/mention
    */
-  mention?: Partial<MentionOptions>;
+  mention?: boolean | Partial<MentionOptions>;
   /**
    * Custom item handlers to override or extend the default handlers.
    * These handlers are provided to all child components (toolbar, suggestion menu, etc.).
@@ -83,6 +85,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { Markdown } from '@tiptap/markdown';
 import StarterKit from '@tiptap/starter-kit';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
+import { isBoolean } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -95,7 +98,8 @@ defineOptions({ inheritAttrs: false });
 const props = withDefaults(
   defineProps<PEditorProps<T, H>>(),
   {
-    contentType: 'json',
+    image: true,
+    mention: true,
   },
 );
 const emits = defineEmits<PEditorEmits<T>>();
@@ -146,8 +150,8 @@ const markdown = computed(() => defu(props.markdown, {
     gfm: true,
   },
 } as Partial<MarkdownExtensionOptions>));
-const image = computed(() => defu(props.image, {} as Partial<ImageOptions>));
-const mention = computed(() => defu(props.mention, {
+const image = computed(() => isBoolean(props.image) ? {} : props.image);
+const mention = computed(() => defu(isBoolean(props.mention) ? {} : props.mention, {
   HTMLAttributes: {
     class: 'mention',
   },
@@ -165,9 +169,9 @@ const extensions = computed(() => [
       ];
     },
   }),
-  Image.configure(image.value),
+  props.image !== false && Image.configure(image.value),
+  props.mention !== false && Mention.configure(mention.value),
   props.placeholder && Placeholder.configure(placeholder.value),
-  Mention.configure(mention.value),
   ...(props.extensions || []),
 ].filter((extension) => !!extension));
 
