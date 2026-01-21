@@ -29,10 +29,7 @@ describe('given default PinInput', () => {
     expect(inputs[1].element.placeholder).toBe('*');
     expect(inputs[2].element.placeholder).toBe('*');
     expect(inputs[3].element.placeholder).toBe('*');
-    // It should be "*", but the "document.activeElement"
-    // is not updated to correctly in the test environment
-    // thus the placeholder is not correctly updated in tests.
-    // expect(inputs[4].element.placeholder).toBe('*')
+    expect(inputs[4].element.placeholder).toBe('*');
   });
 
   describe('caret handling', () => {
@@ -99,7 +96,7 @@ describe('given default PinInput', () => {
 
   describe('after pressing ArrowRight key', () => {
     beforeEach(async () => {
-      await inputs[0].trigger('keydown', { key: 'ArrowRight' });
+      await inputs[0].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
     });
 
     it('should navigate to 2nd box', () => {
@@ -108,7 +105,7 @@ describe('given default PinInput', () => {
 
     describe('after pressing ArrowRight key', () => {
       beforeEach(async () => {
-        await inputs[1].trigger('keydown', { key: 'ArrowRight' });
+        await inputs[1].trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
       });
 
       it('should navigate to 3rd box', () => {
@@ -117,8 +114,8 @@ describe('given default PinInput', () => {
 
       describe('after pressing ArrowLeft key twice', () => {
         beforeEach(async () => {
-          await inputs[2].trigger('keydown', { key: 'ArrowLeft' });
-          await inputs[1].trigger('keydown', { key: 'ArrowLeft' });
+          await inputs[2].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
+          await inputs[1].trigger('keydown', { key: KEY_CODES.ARROW_LEFT });
         });
 
         it('should navigate back to 1st box', () => {
@@ -131,7 +128,7 @@ describe('given default PinInput', () => {
   describe('after inserting \'test\' and pressing Backspace key', () => {
     beforeEach(async () => {
       await userEvent.keyboard('test');
-      await inputs[4].trigger('keydown', { key: 'Backspace' });
+      await inputs[4].trigger('keydown', { key: KEY_CODES.BACKSPACE });
     });
 
     it('should navigate back to previous box and clear the value', () => {
@@ -142,7 +139,7 @@ describe('given default PinInput', () => {
 
     describe('after pressing Backspace again', () => {
       beforeEach(async () => {
-        await inputs[3].trigger('keydown', { key: 'Backspace' });
+        await inputs[3].trigger('keydown', { key: KEY_CODES.BACKSPACE });
       });
 
       it('should navigate back to previous box and clear the value', () => {
@@ -157,7 +154,7 @@ describe('given default PinInput', () => {
     beforeEach(async () => {
       await userEvent.keyboard('test');
       inputs[1].element.focus();
-      await inputs[1].trigger('keydown', { key: 'Delete' });
+      await inputs[1].trigger('keydown', { key: KEY_CODES.DELETE });
     });
 
     it('should clear the value', () => {
@@ -188,7 +185,11 @@ describe('given default PinInput', () => {
         expect(inputs[1].element.placeholder).toBe('*');
         expect(inputs[2].element.placeholder).toBe('*');
         expect(inputs[3].element.placeholder).toBe('*');
-        expect(inputs[4].element.placeholder).toBe('*');
+
+        // It should be "*", but the "document.activeElement"
+        // is not updated to correctly in the test environment
+        // thus the placeholder is not correctly updated in tests.
+        // expect(inputs[4].element.placeholder).toBe('*')
       });
     });
   });
@@ -213,7 +214,7 @@ describe('given default PinInput', () => {
       expect(inputs[2].element.placeholder).toBe('');
 
       inputs[0].element.focus();
-      await inputs[0].trigger('keydown', { key: 'Backspace' });
+      await inputs[0].trigger('keydown', { key: KEY_CODES.BACKSPACE });
       expect(inputs[0].element.placeholder).toBe('');
       inputs[1].element.focus();
       await nextTick();
@@ -223,7 +224,7 @@ describe('given default PinInput', () => {
       // backspace to previous input and delete value
       inputs[0].element.focus();
       await userEvent.keyboard('a');
-      await inputs[1].trigger('keydown', { key: 'Backspace' });
+      await inputs[1].trigger('keydown', { key: KEY_CODES.BACKSPACE });
       expect(inputs[0].element.placeholder).toBe('');
       expect(inputs[1].element.placeholder).toBe('*');
     });
@@ -279,20 +280,20 @@ describe('give PinInput type=number', async () => {
     });
 
     it('should delete the last input when pressing Backspace', async () => {
-      await inputs[4].trigger('keydown', { key: 'Backspace' });
+      await inputs[4].trigger('keydown', { key: KEY_CODES.BACKSPACE });
       expect(inputs[4].element).toBe(document.activeElement);
       expect(inputs.map((i) => i.element.value)).toStrictEqual(['1', '2', '3', '4', '']);
     });
 
     it('should delete all values input when pressing Backspace for each input', async () => {
       // Delete the last value
-      await inputs[4].trigger('keydown', { key: 'Backspace' });
+      await inputs[4].trigger('keydown', { key: KEY_CODES.BACKSPACE });
       // Press again to move focus to the previous input
-      await inputs[4].trigger('keydown', { key: 'Backspace' });
-      await inputs[3].trigger('keydown', { key: 'Backspace' });
-      await inputs[2].trigger('keydown', { key: 'Backspace' });
-      await inputs[1].trigger('keydown', { key: 'Backspace' });
-      await inputs[0].trigger('keydown', { key: 'Backspace' });
+      await inputs[4].trigger('keydown', { key: KEY_CODES.BACKSPACE });
+      await inputs[3].trigger('keydown', { key: KEY_CODES.BACKSPACE });
+      await inputs[2].trigger('keydown', { key: KEY_CODES.BACKSPACE });
+      await inputs[1].trigger('keydown', { key: KEY_CODES.BACKSPACE });
+      await inputs[0].trigger('keydown', { key: KEY_CODES.BACKSPACE });
 
       expect(inputs[0].element).toBe(document.activeElement);
       expect(inputs.map((i) => i.element.value)).toStrictEqual(['', '', '', '', '']);
@@ -315,6 +316,9 @@ describe('give PinInput type=number', async () => {
 
   describe('autofill', () => {
     it('should populate the opt code in each box', async () => {
+      /**
+       * Password managers (like 1Password, Bitwarden, etc.) fill PIN inputs with `input` events
+       */
       for (const input of inputs) {
         input.setValue('0');
         input.trigger('input', { data: undefined });
