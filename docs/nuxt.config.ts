@@ -210,7 +210,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    'pohon-ui',
+    '../packages/pohon/src/module',
     '@nuxt/content',
     '@nuxt/fonts',
     'nuxt-component-meta',
