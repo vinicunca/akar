@@ -48,3 +48,4 @@
 - fix(useOverlay): refine close event argument extraction
 - feat(ProseTd/ProseTh): handle align prop
 - feat(InputMenu/Select/SelectMenu): expose viewportRef for infinite scroll
+- feat(Timeline/Stepper): add wrapper slot and fix dynamic slot conditions

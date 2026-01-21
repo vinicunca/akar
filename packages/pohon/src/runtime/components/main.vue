@@ -25,7 +25,13 @@ import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { uv } from '../utils/uv';
 
-const props = defineProps<PMainProps>();
+const props = withDefaults(
+  defineProps<PMainProps>(),
+  {
+    as: 'main',
+  },
+);
+
 defineSlots<PMainSlots>();
 
 const appConfig = useAppConfig() as Main['AppConfig'];
