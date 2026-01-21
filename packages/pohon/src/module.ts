@@ -9,8 +9,8 @@ import {
 } from '@nuxt/kit';
 import { defu } from 'defu';
 import { name, version } from '../package.json';
-import { DEFAULT_OPTIONS, getDefaultPohonConfig, resolveColors } from './defaults';
 import { addPohonTemplates } from './templates';
+import { DEFAULT_OPTIONS, getDefaultPohonConfig, resolveColors } from './utils/defaults';
 
 export type * from './runtime/types';
 
@@ -76,6 +76,21 @@ export interface PohonModuleOptions {
    * @defaultValue false
    */
   content?: boolean;
+  /**
+   * Experimental features
+   */
+  experimental?: {
+    /**
+     * Enable automatic component detection for tree-shaking
+     * Only generates theme files for components actually used in your app
+     * - `true`: Enable automatic detection
+     * - `string[]`: Enable detection and include additional components (useful for dynamic components)
+     * @defaultValue false
+     * @example true
+     * @example ['Modal', 'Dropdown']
+     */
+    componentDetection?: boolean | Array<string>;
+  };
 }
 
 declare module '#app' {
@@ -111,9 +126,13 @@ export default defineNuxtModule<PohonModuleOptions>({
 
     nuxt.options.appConfig.pohon = defu(
       nuxt.options.appConfig.pohon ?? {},
-      getDefaultPohonConfig(options.theme.colors),
+      getDefaultPohonConfig(options.theme),
     );
 
+    /**
+     * This is to remove the data-pohon data attributes from all components
+     * so that we can reduce the amount of dom that is being generated in production build.
+     */
     if (!nuxt.options.build && !nuxt.options.test) {
       nuxt.hook('vite:extendConfig', (config: any) => {
         config.vue = config.vue || {};
@@ -141,9 +160,7 @@ export default defineNuxtModule<PohonModuleOptions>({
     nuxt.options.app.rootAttrs.class = [
       nuxt.options.app.rootAttrs.class,
       'isolate',
-    ]
-      .filter(Boolean)
-      .join(' ');
+    ].filter(Boolean).join(' ');
 
     async function registerModule(
       { name, key, options = {} }:

@@ -4,11 +4,12 @@ import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema';
 import type { PohonModuleOptions } from './module';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
-import { addTemplate, addTypeTemplate, hasNuxtModule } from '@nuxt/kit';
+import { addTemplate, addTypeTemplate, hasNuxtModule, updateTemplates } from '@nuxt/kit';
 import { isFunction, toKebabCase } from '@vinicunca/perkakas';
 import * as theme from './theme';
 import * as themeContent from './theme/content';
 import * as themeProse from './theme/prose';
+import { applyDefaultVariants } from './utils/theme';
 
 export function addPohonTemplates(
   { options, nuxt, resolve }:
@@ -37,10 +38,18 @@ export function addPohonTemplates(
       path: resolve('./runtime/types/app.config.d.ts'),
     });
   });
+
+  if (options.experimental?.componentDetection && nuxt.options.dev) {
+    nuxt.hook('builder:watch', async (_, path) => {
+      if (/\.(?:vue|ts|js|tsx|jsx)$/.test(path)) {
+        await updateTemplates({ filter: (template) => template.filename === 'ui.css' });
+      }
+    });
+  }
 }
 
 export function getPohonTemplates(
-  { options, pohon, nuxt }:
+  { options, pohon, nuxt}:
   {
     options: PohonModuleOptions;
     pohon: Nuxt['options']['appConfig']['pohon'];
@@ -62,15 +71,10 @@ export function getPohonTemplates(
         write: true,
         getContents: async () => {
           const template = theme[component];
-          const result = isFunction(template) ? template(options) : template;
+          let result = isFunction(template) ? template(options) : template;
 
           // Override default variants from nuxt.config.ts
-          if (result?.defaultVariants?.color && options.theme?.defaultVariants?.color) {
-            result.defaultVariants.color = options.theme.defaultVariants.color;
-          }
-          if (result?.defaultVariants?.size && options.theme?.defaultVariants?.size) {
-            result.defaultVariants.size = options.theme.defaultVariants.size;
-          }
+          result = applyDefaultVariants(result, options.theme?.defaultVariants);
 
           const variants = Object.entries(result.variants || {})
             .filter(([_, values]) => {
@@ -101,18 +105,21 @@ export function getPohonTemplates(
           if (isDev) {
             // eslint-disable-next-line sonar/no-nested-template-literals
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${toKebabCase(component)}`, import.meta.url));
+            const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url));
+
             return [
               `import template from ${JSON.stringify(templatePath)}`,
+              `import { applyDefaultVariants } from ${JSON.stringify(themeUtilsPath)}`,
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
-              'const result = typeof template === \'function\' ? (template as Function)(options) : template',
-              'if (result?.defaultVariants?.color && options.theme?.defaultVariants?.color) result.defaultVariants.color = options.theme.defaultVariants.color',
-              'if (result?.defaultVariants?.size && options.theme?.defaultVariants?.size) result.defaultVariants.size = options.theme.defaultVariants.size',
+              'let result = typeof template === \'function\' ? (template as Function)(options) : template',
+              'result = applyDefaultVariants(result, options.theme?.defaultVariants)',
               `const theme = ${json}`,
               'export default result as typeof theme',
             ].join('\n\n');
           }
 
+          // For production build
           return [
             ...generateVariantDeclarations(variants),
             `export default ${json}`,
@@ -151,24 +158,11 @@ export function getPohonTemplates(
   templates.push({
     filename: 'pohon/index.ts',
     write: true,
-    getContents: () => {
-      let contents = Object.keys(theme)
-        .map((component) =>
-          `export { default as ${component} } from './${toKebabCase(component)}'`,
-        )
-        .join('\n');
-
-      if (hasContent) {
-        contents += '\n';
-        contents += Object.keys(themeContent).map((component) => `export { default as ${component} } from './content/${toKebabCase(component)}'`).join('\n');
-      }
-
-      if (hasProse) {
-        contents += '\nexport * as prose from \'./prose\'\n';
-      }
-
-      return contents;
-    },
+    getContents: () => [
+      ...Object.keys(theme).map((component) => `export { default as ${component} } from './${toKebabCase(component)}'`),
+      ...(hasContent ? Object.keys(themeContent).map((component) => `export { default as ${component} } from './content/${toKebabCase(component)}'`) : []),
+      ...(hasProse ? ['export * as prose from \'./prose\''] : []),
+    ].join('\n'),
   });
 
   templates.push({
