@@ -46,3 +46,5 @@
 - docs(table): improve examples to use meta
 - feat(Editor): add placeholder.mode prop
 - fix(useOverlay): refine close event argument extraction
+- feat(ProseTd/ProseTh): handle align prop
+

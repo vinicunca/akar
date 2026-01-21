@@ -324,9 +324,23 @@ export const proseTheme = {
   },
   td: {
     base: 'text-sm px-4 py-3 text-left align-top border-b border-e border-border-muted [&_code]:text-xs/5 [&_li]:leading-6 [&_p]:leading-6 [&_li]:my-0.5 [&_ol]:my-0 [&_p]:my-0 [&_ul]:my-0 [&_ol]:ps-4.5 [&_ul]:ps-4.5 first:border-s',
+    variants: {
+      align: {
+        left: 'text-left',
+        center: 'text-center',
+        right: 'text-right',
+      },
+    },
   },
   th: {
     base: 'text-sm font-semibold px-4 py-3 text-left border-b border-e border-t border-border-muted first:border-s',
+    variants: {
+      align: {
+        left: 'text-left',
+        center: 'text-center',
+        right: 'text-right',
+      },
+    },
   },
   thead: {
     base: 'bg-background-muted',

@@ -5,6 +5,7 @@ import { computed, parseMarkdown, useAsyncData, useComponentName, useFrameworks 
 import { toCamelCase } from '@vinicunca/perkakas';
 import json5 from 'json5';
 import { hash } from 'ohash';
+import { markRaw } from 'vue';
 
 const props = defineProps<{
   prose?: boolean;
@@ -66,7 +67,7 @@ export default defineAppConfig(${json5.stringify(component.value, null, 2).repla
 ::
     `;
 
-    return parseMarkdown(md);
+    return markRaw(await parseMarkdown(md));
   },
   { watch: [framework] },
 );
