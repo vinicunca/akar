@@ -35,10 +35,18 @@ export interface PEditorProps<T extends Content = Content, H extends EditorCusto
   starterKit?: Partial<StarterKitOptions>;
   /**
    * The placeholder text to show in empty paragraphs. Can be a string or PlaceholderOptions from `@tiptap/extension-placeholder`.
-   * @defaultValue { showOnlyWhenEditable: false, showOnlyCurrent: true }
+   * @defaultValue { showOnlyWhenEditable: false, showOnlyCurrent: true, mode: 'everyLine' }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/placeholder
    */
-  placeholder?: string | Partial<PlaceholderOptions>;
+  placeholder?: string | (Partial<PlaceholderOptions> & {
+    /**
+     * Control how placeholders are displayed in the editor.
+     * - `firstLine`: Display placeholder only on the first line when the editor is empty.
+     * - `everyLine`: Display placeholder on every empty line when focused.
+     * @defaultValue 'everyLine'
+     */
+    mode?: 'firstLine' | 'everyLine';
+  });
   /**
    * The markdown extension options to configure markdown parsing and serialization.
    * @defaultValue { markedOptions: { gfm: true } }
@@ -85,7 +93,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { Markdown } from '@tiptap/markdown';
 import StarterKit from '@tiptap/starter-kit';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
-import { isBoolean } from '@vinicunca/perkakas';
+import { isBoolean, isString } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -113,7 +121,9 @@ const pohon = computed(() =>
   uv({
     extend: uv(theme),
     ...(appConfig.pohon?.editor || {}),
-  })(),
+  })({
+    placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined,
+  }),
 );
 
 const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'));
@@ -141,10 +151,17 @@ const starterKit = computed(() => defu(props.starterKit, {
     openOnClick: false,
   },
 } as Partial<StarterKitOptions>));
-const placeholder = computed(() => defu(typeof props.placeholder === 'string' ? { placeholder: props.placeholder } : props.placeholder, {
-  showOnlyWhenEditable: false,
-  showOnlyCurrent: true,
-} as Partial<PlaceholderOptions>));
+
+const placeholder = computed(() => {
+  const options = isString(props.placeholder) ? { placeholder: props.placeholder } : props.placeholder;
+  const { mode, ...rest } = options || {};
+
+  return defu(rest, {
+    showOnlyWhenEditable: false,
+    showOnlyCurrent: true,
+  } as Partial<PlaceholderOptions>);
+});
+
 const markdown = computed(() => defu(props.markdown, {
   markedOptions: {
     gfm: true,
@@ -181,6 +198,12 @@ const editor = useEditor({
   contentType: contentType.value,
   extensions: extensions.value,
   editorProps: editorProps.value,
+  onCreate: ({ editor }) => {
+    // Force placeholder decorations to render immediately without needing focus
+    if (props.placeholder) {
+      editor.view.dispatch(editor.state.tr);
+    }
+  },
   onUpdate: ({ editor }) => {
     let value;
     try {

@@ -44,3 +44,4 @@
 - feat(pohon): add unplugin for vue
 - feat(Editor): handle boolean in image and mention props
 - docs(table): improve examples to use meta
+- feat(Editor): add placeholder.mode prop
