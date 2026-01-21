@@ -192,6 +192,7 @@
     "embla-carousel-wheel-gestures": "catalog:pohon",
     "fuse.js": "catalog:pohon",
     "hookable": "catalog:pohon",
+    "knitwork": "catalog:pohon",
     "magic-string": "catalog:pohon",
     "mlly": "catalog:pohon",
     "motion-v": "catalog:pohon",
@@ -202,7 +203,8 @@
     "unplugin": "catalog:pohon",
     "unplugin-auto-import": "catalog:pohon",
     "unplugin-vue-components": "catalog:plugins",
-    "vue-component-type-helpers": "catalog:core"
+    "vue-component-type-helpers": "catalog:core",
+    "vue-tsc": "catalog:pohon"
   },
   "devDependencies": {
     "@nuxt/content": "catalog:pohon",
