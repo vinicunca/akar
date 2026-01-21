@@ -1,0 +1,52 @@
+---
+"pohon-ui": minor
+"akar": minor
+---
+
+- chore(deps): replace dependency @tsconfig/node18 with @tsconfig/node20
+- feat(ScrollArea): add glimpse scrollbar mode
+- feat(PinInput): enforce sequential inputs in OTP
+- feat(Menu): allow more value types
+- feat(NumberField): add focusOnChange prop
+- fix(TimeField/DateField/DateRangeField): filter redundant brackets with hideTimeZone
+- feat(PopperContent): add hideShiftedArrow prop to control arrow visibility
+- fix(DateRangePicker): add exports for missing component types and include TimeValue type in exports
+- fix(PinInput): handle more edge cases for the placeholder
+- fix: dayPeriod returning incorrect value due to missmatched format
+- fix(Editable): prevent submission during IME composition
+- fix(NavigationMenu): allow aria-label override by fixing CollectionSlot attrs forwarding
+- fix(Avatar): Properly set referrerpolicy and crossorigin
+- fix(NavigationMenu): close menu when clicking top-level link
+- fix(Tabs): only render aria-controls when TabsContent exists
+- fix(Combobox): allow input focus when used inside Dialog
+- fix(FormField): hide error if error prop is false
+- feat(ContextMenu/DropdownMenu): expose sub prop on content slots
+- feat(defineShortcuts): add layoutIndependent option
+- fix(ProseA/ProseCallout/ProseCard): improve focus styles
+- docs(toast): add callback example
+- docs(extract-shortcuts): add own page
+- docs(composables): add defineLocale and extendLocale
+- feat(extractShortcuts): add separator option
+- docs(app): add component theme visualizer
+- feat(ProseCodeTree): add items prop
+- feat(Slideover): add inset prop
+- feat(FormField): add orientation prop
+- feat(docs): add component theme visualizer
+- fix(CommandPalette/ContextMenu/DropdownMenu): keyboard selection on link items
+- feat(InputMenu/SelectMenu): add clear prop
+- feat(CommandPalette): add input prop
+- feat(CommandPalette/InputMenu/SelectMenu/Tree): handle virtualizer estimateSize as function
+- fix(Editor): set contentType when updating value
+- fix(EditorToolbar): prevent disabled dropdown when items have no kind
+- fix(EditorToolbar): prevent onClick from being called twice on items
+- fix(Banner): prevent XSS via id prop injection
+- docs(components): properly escape markdown in prop type rendering
+- feat(pohon): add unplugin for vue
+- feat(Editor): handle boolean in image and mention props
+- docs(table): improve examples to use meta
+- feat(Editor): add placeholder.mode prop
+- fix(useOverlay): refine close event argument extraction
+- feat(ProseTd/ProseTh): handle align prop
+- feat(InputMenu/Select/SelectMenu): expose viewportRef for infinite scroll
+- feat(Timeline/Stepper): add wrapper slot and fix dynamic slot conditions
+- docs: send back markdown if accept header is text/markdown
