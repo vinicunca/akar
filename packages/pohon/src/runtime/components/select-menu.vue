@@ -576,8 +576,11 @@ function onClear() {
   emits('clear');
 }
 
+const viewportRef = useTemplateRef('viewportRef');
+
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
+  viewportRef: toRef(() => viewportRef.value),
 });
 </script>
 
@@ -884,6 +887,7 @@ defineExpose({
           </AComboboxEmpty>
 
           <div
+            ref="viewportRef"
             role="presentation"
             :class="pohon.viewport({ class: props.pohon?.viewport })"
             data-pohon="select-menu-viewport"

@@ -47,4 +47,4 @@
 - feat(Editor): add placeholder.mode prop
 - fix(useOverlay): refine close event argument extraction
 - feat(ProseTd/ProseTh): handle align prop
-
+- feat(InputMenu/Select/SelectMenu): expose viewportRef for infinite scroll

@@ -357,8 +357,11 @@ function isSelectItem(item: PSelectItem): item is Exclude<PSelectItem, PSelectVa
   return typeof item === 'object' && item !== null;
 }
 
+const viewportRef = useTemplateRef('viewportRef');
+
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
+  viewportRef: toRef(() => viewportRef.value),
 });
 </script>
 
@@ -465,6 +468,7 @@ defineExpose({
         <slot name="content-top" />
 
         <div
+          ref="viewportRef"
           role="presentation"
           :class="pohon.viewport({ class: props.pohon?.viewport })"
           data-pohon="select-viewport"
