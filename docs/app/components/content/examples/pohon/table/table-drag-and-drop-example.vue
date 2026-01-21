@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { PTableColumn } from 'pohon-ui';
 import { useSortable } from '@vueuse/integrations/useSortable';
-import { h, ref } from 'vue';
 
 type Payment = {
   id: string;
@@ -53,14 +52,19 @@ const columns: Array<PTableColumn<Payment>> = [{
   header: 'Email',
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium',
+    },
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'));
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
     }).format(amount);
-    return h('div', { class: 'text-right font-medium' }, formatted);
   },
 }];
 
@@ -71,7 +75,6 @@ useSortable('.my-table-tbody', data, {
 
 <template>
   <PTable
-    ref="table"
     :data="data"
     :columns="columns"
     :pohon="{

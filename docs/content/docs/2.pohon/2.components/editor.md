@@ -278,7 +278,7 @@ Here's how to use default handlers in toolbar or suggestion menu items:
 
 ```vue
 <script setup lang="ts">
-import type { EditorToolbarItem } from '@nuxt/ui';
+import type { EditorToolbarItem } from 'pohon-ui';
 
 const value = ref('<h1>Hello World</h1>\n');
 
@@ -332,7 +332,7 @@ Here's an example of creating custom handlers:
 
 ```vue
 <script setup lang="ts">
-import type { EditorCustomHandlers, EditorToolbarItem } from '@nuxt/ui';
+import type { EditorCustomHandlers, EditorToolbarItem } from 'pohon-ui';
 import type { Editor } from '@tiptap/vue-3';
 
 const value = ref('<h1>Hello World</h1>\n');

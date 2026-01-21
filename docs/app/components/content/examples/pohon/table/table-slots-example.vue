@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { PDropdownMenuItem, PTableColumn } from 'pohon-ui';
-import { useToast } from '#imports';
 import { useClipboard } from '@vueuse/core';
-import { ref } from 'vue';
 
 interface User {
   id: number;

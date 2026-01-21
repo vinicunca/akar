@@ -1,8 +1,6 @@
 <script setup lang="ts">
+import type { Row, TableMeta } from '@tanstack/vue-table';
 import type { PTableColumn } from 'pohon-ui';
-import { h, resolveComponent } from 'vue';
-
-const PBadge = resolveComponent('PBadge');
 
 type Payment = {
   id: string;
@@ -46,8 +44,13 @@ const data = ref<Array<Payment>>([{
 
 const columns: Array<PTableColumn<Payment>> = [{
   accessorKey: 'id',
-  header: '#',
-  cell: ({ row }) => `#${row.getValue('id')}`,
+  header: 'ID',
+  meta: {
+    class: {
+      th: 'text-center font-semibold',
+      td: 'text-center font-mono',
+    },
+  },
 }, {
   accessorKey: 'date',
   header: 'Date',
@@ -63,60 +66,69 @@ const columns: Array<PTableColumn<Payment>> = [{
 }, {
   accessorKey: 'status',
   header: 'Status',
+  meta: {
+    class: {
+      th: 'text-center',
+      td: 'text-center',
+    },
+  },
   cell: ({ row }) => {
-    const color = ({
-      paid: 'success' as const,
-      failed: 'error' as const,
-      refunded: 'neutral' as const,
-    })[row.getValue('status') as string];
-
-    return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'));
+    const status = row.getValue('status') as string;
+    const colorMap = {
+      paid: 'text-success',
+      failed: 'text-error',
+      refunded: 'text-warning',
+    };
+    return h('span', { class: `font-semibold capitalize ${colorMap[status as keyof typeof colorMap]}` }, status);
   },
 }, {
   accessorKey: 'email',
   header: 'Email',
+  meta: {
+    class: {
+      th: 'text-left',
+      td: 'text-left',
+    },
+  },
 }, {
   accessorKey: 'amount',
   header: 'Amount',
   meta: {
     class: {
-      th: 'text-right',
-      td: 'text-right font-medium',
+      th: 'text-right font-bold text-primary',
+      td: 'text-right font-mono',
     },
   },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'));
-    return new Intl.NumberFormat('en-US', {
+    const formatted = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'EUR',
+      currency: 'USD',
     }).format(amount);
+    return h('span', { class: 'font-semibold text-success' }, formatted);
   },
 }];
 
-const table = useTemplateRef('table');
-
-const columnFilters = ref([{
-  id: 'email',
-  value: 'james',
-}]);
+const meta: TableMeta<Payment> = {
+  class: {
+    tr: (row: Row<Payment>) => {
+      if (row.original.status === 'failed') {
+        return 'bg-error/10';
+      }
+      if (row.original.status === 'refunded') {
+        return 'bg-warning/10';
+      }
+      return '';
+    },
+  },
+};
 </script>
 
 <template>
-  <div class="flex flex-1 flex-col w-full">
-    <div class="px-4 py-3.5 border-b border-border-accented flex">
-      <PInput
-        :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
-        class="max-w-sm"
-        placeholder="Filter emails..."
-        @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
-      />
-    </div>
-
-    <PTable
-      ref="table"
-      v-model:column-filters="columnFilters"
-      :data="data"
-      :columns="columns"
-    />
-  </div>
+  <PTable
+    :data="data"
+    :columns="columns"
+    :meta="meta"
+    class="flex-1"
+  />
 </template>

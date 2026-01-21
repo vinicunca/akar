@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PTableColumn } from 'pohon-ui';
-import { h, ref, resolveComponent } from 'vue';
+import { h, resolveComponent } from 'vue';
 
 const PBadge = resolveComponent('PBadge');
 
@@ -77,16 +77,19 @@ const columns: Array<PTableColumn<Payment>> = [{
   header: 'Email',
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium',
+    },
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'));
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
     }).format(amount);
-
-    return h('div', { class: 'text-right font-medium' }, formatted);
   },
 }];
 
@@ -95,7 +98,7 @@ const globalFilter = ref('45');
 
 <template>
   <div class="flex flex-1 flex-col w-full">
-    <div class="border-border-accented px-4 py-3.5 border-b flex">
+    <div class="px-4 py-3.5 border-b border-border-accented flex">
       <PInput
         v-model="globalFilter"
         class="max-w-sm"
@@ -104,7 +107,6 @@ const globalFilter = ref('45');
     </div>
 
     <PTable
-      ref="table"
       v-model:global-filter="globalFilter"
       :data="data"
       :columns="columns"

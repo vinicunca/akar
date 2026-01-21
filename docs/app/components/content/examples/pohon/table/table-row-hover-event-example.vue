@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PTableColumn, PTableRow } from 'pohon-ui';
 import { refDebounced } from '@vueuse/core';
-import { computed, h, ref, resolveComponent } from 'vue';
+import { h, resolveComponent } from 'vue';
 
 const PBadge = resolveComponent('PBadge');
 const PCheckbox = resolveComponent('PCheckbox');
@@ -91,16 +91,19 @@ const columns: Array<PTableColumn<Payment>> = [{
   header: 'Email',
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium',
+    },
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'));
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
     }).format(amount);
-
-    return h('div', { class: 'text-right font-medium' }, formatted);
   },
 }];
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PTableColumn } from 'pohon-ui';
 import { upperFirst } from 'scule';
-import { h, ref, resolveComponent, useTemplateRef } from 'vue';
+import { h, resolveComponent } from 'vue';
 
 const PBadge = resolveComponent('PBadge');
 
@@ -78,16 +78,19 @@ const columns: Array<PTableColumn<Payment>> = [{
   header: 'Email',
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium',
+    },
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'));
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
     }).format(amount);
-
-    return h('div', { class: 'text-right font-medium' }, formatted);
   },
 }];
 
@@ -100,7 +103,7 @@ const columnVisibility = ref({
 
 <template>
   <div class="flex flex-1 flex-col w-full">
-    <div class="border-border-accented px-4 py-3.5 border-b flex justify-end">
+    <div class="px-4 py-3.5 border-b border-border-accented flex justify-end">
       <PDropdownMenu
         :items="table?.tableApi?.getAllColumns().filter(column => column.getCanHide()).map(column => ({
           label: upperFirst(column.id),

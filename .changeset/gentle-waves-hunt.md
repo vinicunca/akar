@@ -43,3 +43,4 @@
 - docs(components): properly escape markdown in prop type rendering
 - feat(pohon): add unplugin for vue
 - feat(Editor): handle boolean in image and mention props
+- docs(table): improve examples to use meta

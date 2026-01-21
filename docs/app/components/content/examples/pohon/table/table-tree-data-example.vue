@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PTableColumn } from 'pohon-ui';
-import { h, ref, resolveComponent } from 'vue';
+import { h, resolveComponent } from 'vue';
 
 const PCheckbox = resolveComponent('PCheckbox');
 const PButton = resolveComponent('PButton');
@@ -110,7 +110,7 @@ const columns: Array<PTableColumn<Payment>> = [{
           size: 'xs',
           icon: row.getIsExpanded() ? 'i-lucide:minus' : 'i-lucide:plus',
           class: !row.getCanExpand() && 'invisible',
-          pohon: {
+          ui: {
             base: 'p-0 rounded-sm',
             leadingIcon: 'size-4',
           },
@@ -137,16 +137,19 @@ const columns: Array<PTableColumn<Payment>> = [{
   header: 'Email',
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium',
+    },
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'));
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
     }).format(amount);
-
-    return h('div', { class: 'text-right font-medium' }, formatted);
   },
 }];
 

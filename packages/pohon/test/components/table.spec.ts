@@ -9,7 +9,7 @@ import { computed, h, ref } from 'vue';
 import Table from '../../src/runtime/components/table.vue';
 import ComponentRender from '../component-render';
 
-describe('Table', () => {
+describe('table', () => {
   const loadingColors = Object.keys(theme.variants.loadingColor) as any;
   const loadingAnimations = Object.keys(theme.variants.loadingAnimation) as any;
 
@@ -40,119 +40,147 @@ describe('Table', () => {
     email: 'carmella@hotmail.com',
   }];
 
-  const columns: Array<PTableColumn<typeof data[number]>> = [{
-    id: 'select',
-    header: ({ table }) => h(PCheckbox, {
-      'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
-      'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => table.toggleAllPageRowsSelected(!!value),
-      'label': 'Select all',
-    }),
-    cell: ({ row }) => h(PCheckbox, {
-      'modelValue': row.getIsSelected(),
-      'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => row.toggleSelected(!!value),
-      'aria-label': 'Select row',
-    }),
-    enableSorting: false,
-    enableHiding: false,
-  }, {
-    accessorKey: 'id',
-    header: '#',
-    cell: ({ row }) => `#${row.getValue('id')}`,
-  }, {
-    accessorKey: 'date',
-    header: 'Date',
-    cell: ({ row }) => {
-      return new Date(row.getValue('date')).toLocaleString('en-US', {
-        day: 'numeric',
-        month: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      });
+  const columns: Array<PTableColumn<typeof data[number]>> = [
+    {
+      id: 'select',
+      header: ({ table }) => h(PCheckbox, {
+        'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+        'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => table.toggleAllPageRowsSelected(!!value),
+        'label': 'Select all',
+      }),
+      cell: ({ row }) => h(PCheckbox, {
+        'modelValue': row.getIsSelected(),
+        'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => row.toggleSelected(!!value),
+        'aria-label': 'Select row',
+      }),
+      enableSorting: false,
+      enableHiding: false,
     },
-  }, {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => {
-      const color = ({
-        paid: 'success' as const,
-        failed: 'error' as const,
-        refunded: 'neutral' as const,
-      })[row.getValue('status') as string];
-
-      return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'));
+    {
+      accessorKey: 'id',
+      header: '#',
+      cell: ({ row }) => `#${row.getValue('id')}`,
     },
-  }, {
-    accessorKey: 'email',
-    header: ({ column }) => {
-      const isSorted = column.getIsSorted();
-
-      return h(PButton, {
-        color: 'neutral',
-        variant: 'ghost',
-        label: 'Email',
-        icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
-        class: '-mx-2.5',
-        onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
-      });
+    {
+      accessorKey: 'date',
+      header: 'Date',
+      cell: ({ row }) => {
+        return new Date(row.getValue('date')).toLocaleString('en-US', {
+          day: 'numeric',
+          month: 'short',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        });
+      },
     },
-    cell: ({ row }) => h('div', { class: 'lowercase' }, row.getValue('email')),
-  }, {
-    accessorKey: 'amount',
-    header: () => h('div', { class: 'text-right' }, 'Amount'),
-    footer: ({ column }) => {
-      const total = column.getFacetedRowModel().rows.reduce((acc: number, row: PTableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0);
+    {
+      accessorKey: 'status',
+      header: 'Status',
+      cell: ({ row }) => {
+        const color = ({
+          paid: 'success' as const,
+          failed: 'error' as const,
+          refunded: 'neutral' as const,
+        })[row.getValue('status') as string];
 
-      const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'EUR',
-      }).format(total);
-
-      return h('div', { class: 'text-right font-medium' }, `Total: ${formatted}`);
+        return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'));
+      },
     },
-    cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue('amount'));
+    {
+      accessorKey: 'email',
+      header: ({ column }) => {
+        const isSorted = column.getIsSorted();
 
-      const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'EUR',
-      }).format(amount);
-
-      return h('div', { class: 'text-right font-medium' }, formatted);
-    },
-  }, {
-    id: 'actions',
-    enableHiding: false,
-    cell: ({ row }) => {
-      const items = [{
-        type: 'label',
-        label: 'Actions',
-      }, {
-        label: 'Copy payment ID',
-      }, {
-        label: row.getIsExpanded() ? 'Collapse' : 'Expand',
-      }, {
-        type: 'separator',
-      }, {
-        label: 'View customer',
-      }, {
-        label: 'View payment details',
-      }];
-
-      return h('div', { class: 'text-right' }, h<any>(PDropdownMenu, {
-        content: {
-          align: 'end',
+        return h(PButton, {
+          color: 'neutral',
+          variant: 'ghost',
+          label: 'Email',
+          icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
+          class: '-mx-2.5',
+          onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
+        });
+      },
+      meta: {
+        class: {
+          td: 'lowercase',
         },
-        items,
-      }, () => h(PButton, {
-        'icon': 'i-lucide-ellipsis-vertical',
-        'color': 'neutral',
-        'variant': 'ghost',
-        'class': 'ml-auto',
-        'aria-label': 'Actions',
-      })));
+      },
     },
-  }];
+    {
+      accessorKey: 'amount',
+      header: 'Amount',
+      meta: {
+        class: {
+          th: 'text-right',
+          td: 'text-right font-medium',
+        },
+      },
+      footer: ({ column }) => {
+        const total = column.getFacetedRowModel().rows.reduce((acc: number, row: PTableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0);
+
+        const formatted = new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'EUR',
+        }).format(total);
+
+        return `Total: ${formatted}`;
+      },
+      cell: ({ row }) => {
+        const amount = Number.parseFloat(row.getValue('amount'));
+
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'EUR',
+        }).format(amount);
+      },
+    },
+    {
+      id: 'actions',
+      enableHiding: false,
+      meta: {
+        class: {
+          td: 'text-right',
+        },
+      },
+      cell: ({ row }) => {
+        const items = [
+          {
+            type: 'label',
+            label: 'Actions',
+          },
+          {
+            label: 'Copy payment ID',
+          },
+          {
+            label: row.getIsExpanded() ? 'Collapse' : 'Expand',
+          },
+          {
+            type: 'separator',
+          },
+          {
+            label: 'View customer',
+          },
+          {
+            label: 'View payment details',
+          },
+        ];
+
+        return h<any>(PDropdownMenu, {
+          content: {
+            align: 'end',
+          },
+          items,
+        }, () => h(PButton, {
+          'icon': 'i-lucide-ellipsis-vertical',
+          'color': 'neutral',
+          'variant': 'ghost',
+          'class': 'ml-auto',
+          'aria-label': 'Actions',
+        }));
+      },
+    },
+  ];
 
   const props = { data };
 

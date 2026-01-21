@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { Row } from '@tanstack/vue-table';
 import type { PTableColumn } from 'pohon-ui';
-import { useToast } from '#imports';
 import { useClipboard } from '@vueuse/core';
-import { h, ref, resolveComponent } from 'vue';
+import { h, resolveComponent } from 'vue';
 
 const PButton = resolveComponent('PButton');
 const PBadge = resolveComponent('PBadge');
@@ -85,21 +84,29 @@ const columns: Array<PTableColumn<Payment>> = [{
   header: 'Email',
 }, {
   accessorKey: 'amount',
-  header: () => h('div', { class: 'text-right' }, 'Amount'),
+  header: 'Amount',
+  meta: {
+    class: {
+      th: 'text-right',
+      td: 'text-right font-medium',
+    },
+  },
   cell: ({ row }) => {
     const amount = Number.parseFloat(row.getValue('amount'));
-
-    const formatted = new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'EUR',
     }).format(amount);
-
-    return h('div', { class: 'text-right font-medium' }, formatted);
   },
 }, {
   id: 'actions',
+  meta: {
+    class: {
+      td: 'text-right',
+    },
+  },
   cell: ({ row }) => {
-    return h('div', { class: 'text-right' }, h(PDropdownMenu, {
+    return h(PDropdownMenu, {
       'content': {
         align: 'end',
       },
@@ -109,9 +116,8 @@ const columns: Array<PTableColumn<Payment>> = [{
       'icon': 'i-lucide:ellipsis-vertical',
       'color': 'neutral',
       'variant': 'ghost',
-      'class': 'ml-auto',
       'aria-label': 'Actions dropdown',
-    })));
+    }));
   },
 }];
 
