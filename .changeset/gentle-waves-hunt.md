@@ -49,3 +49,4 @@
 - feat(ProseTd/ProseTh): handle align prop
 - feat(InputMenu/Select/SelectMenu): expose viewportRef for infinite scroll
 - feat(Timeline/Stepper): add wrapper slot and fix dynamic slot conditions
+- docs: send back markdown if accept header is text/markdown

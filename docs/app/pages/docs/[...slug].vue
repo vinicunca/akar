@@ -30,6 +30,7 @@ import {
 } from '#imports';
 import { toKebabCase } from '@vinicunca/perkakas';
 import { pickLinkProps } from 'pohon-ui/utils/link';
+import { joinURL } from 'ufo';
 
 const route = useRoute();
 const { framework } = useFrameworks();
@@ -103,6 +104,20 @@ useSeoMeta({
   ogTitle: `${prefix}${title} ${suffix}- Akar ${page.value?.framework === 'vue' ? ' for Vue' : ''}`,
   description,
   ogDescription: description,
+});
+
+// Pre-render the markdown path + add it to alternate links
+const site = useSiteConfig();
+const path = computed(() => route.path.replace(/\/$/, ''));
+prerenderRoutes([joinURL('/raw', `${path.value}.md`)]);
+useHead({
+  link: [
+    {
+      rel: 'alternate',
+      href: joinURL(site.url, 'raw', `${path.value}.md`),
+      type: 'text/markdown',
+    },
+  ],
 });
 
 const communityLinks = computed(() => [

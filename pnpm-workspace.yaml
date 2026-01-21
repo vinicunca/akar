@@ -11,6 +11,7 @@ packages:
 
 overrides:
   akar: workspace:*
+  nitropack: ^2.13.0
   pohon-ui: workspace:*
   rolldown: 1.0.0-beta.26
   typescript: 5.8.3
