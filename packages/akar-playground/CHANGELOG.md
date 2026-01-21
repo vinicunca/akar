@@ -1,5 +1,12 @@
 # playground-vue
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`0931489`](https://github.com/vinicunca/akar/commit/09314898b3f4e5968e9d647f8df2ef677b6ecd9d)]:
+  - akar@1.17.0
+
 ## 0.0.6
 
 ### Patch Changes
