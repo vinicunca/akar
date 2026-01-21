@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PButton, PDashboardNavbar, PFieldGroup } from '#components';
 import { computed, defineShortcuts, inject, useRoute, useRouter } from '#imports';
-import { toSentenceCase } from '@vinicunca/perkakas';
+import { capitalize } from '@vinicunca/perkakas';
 
 defineProps<{
   to?: string;
@@ -11,7 +11,7 @@ const route = useRoute();
 const router = useRouter();
 
 const name = computed(() => route.path.split('/').pop() as string);
-const title = computed(() => toSentenceCase(name.value));
+const title = computed(() => capitalize(name.value));
 
 const components = inject<Array<{ to: string; label: string }>>('components');
 

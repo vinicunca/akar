@@ -1,6 +1,6 @@
 import { createError, defineCachedEventHandler, getValidatedQuery } from '#imports';
 import { queryCollection } from '@nuxt/content/server';
-import { toCamelCase, toKebabCase, toSentenceCase } from '@vinicunca/perkakas';
+import { capitalize, toCamelCase, toKebabCase } from '@vinicunca/perkakas';
 import { z } from 'zod';
 import { normalizeComponentName } from '~~/server/utils/normalize-component-name';
 
@@ -33,7 +33,7 @@ export default defineCachedEventHandler(async (event) => {
 
   // Use the same approach as the docs components for metadata
   const camelName = toCamelCase(normalizedName);
-  const componentMetaName = `P${toSentenceCase(camelName)}`;
+  const componentMetaName = `P${capitalize(camelName)}`;
 
   const metadata = await $fetch(`/api/component-meta/${componentMetaName}.json`);
 

@@ -229,7 +229,7 @@ import {
   useVueTable,
 } from '@tanstack/vue-table';
 import { useVirtualizer } from '@tanstack/vue-virtual';
-import { isBoolean, isFunction, toSentenceCase } from '@vinicunca/perkakas';
+import { capitalize, isBoolean, isFunction } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -260,7 +260,7 @@ const columns = computed<Array<PTableColumn<T>>>(() =>
   processColumns(props.columns ?? Object.keys(data.value[0] ?? {})
     .map((accessorKey: string) => ({
       accessorKey,
-      header: toSentenceCase(accessorKey),
+      header: capitalize(accessorKey),
     }))),
 );
 
