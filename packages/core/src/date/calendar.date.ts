@@ -104,6 +104,7 @@ export function createMonth(props: CreateMonthProps): DateGrid<DateValue> {
 
   const allDays = lastMonthDays.concat(datesArray, nextMonthDays);
 
+  // @ts-expect-error FIXME: we need to investigate further for this type.
   const weeks = chunk(allDays, 7);
 
   return {

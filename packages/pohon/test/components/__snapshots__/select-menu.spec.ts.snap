@@ -158,6 +158,102 @@ exports[`selectMenu > renders with class correctly 1`] = `
 <!--v-if-->"
 `;
 
+exports[`selectMenu > renders with clear and clearIcon correctly 1`] = `
+"<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="" data-pohon="select-menu-base" dir="ltr" style="pointer-events: auto;">
+  <!--v-if--><span class="" data-pohon="select-menu-value">Backlog</span><span class="" data-pohon="select-menu-trailing"><span tabindex="-1" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+  <!--v-if-->
+  <!--v-if--></span></span>
+</button>
+<!--teleport start-->
+
+
+<div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-pohon="select-menu-content" position="popper" id="akar-combobox-content-v-0-0-0" data-state="open" style="display: flex; flex-direction: column; box-sizing: border-box; --akar-combobox-content-transform-origin: var(--akar-popper-transform-origin); --akar-combobox-content-available-width: var(--akar-popper-available-width); --akar-combobox-content-available-height: var(--akar-popper-available-height); --akar-combobox-trigger-width: var(--akar-popper-anchor-width); --akar-combobox-trigger-height: var(--akar-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" data-dismissable-layer="" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-side="bottom" data-align="center">
+    <div tabindex="-1" class="" data-pohon="select-menu-focus-scope">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input type="text" placeholder="Search..." autocomplete="off" data-pohon="input-base" aria-disabled="false" aria-expanded="true" aria-controls="akar-combobox-content-v-0-0-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="akar-combobox-item-v-0-0-3">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+      <div role="presentation" class="" data-pohon="select-menu-viewport">
+        <!--v-if-->
+        <div role="group" aria-labelledby="" id="akar-combobox-group-v-0-0-1" class="" data-pohon="select-menu-group">
+          <div id="akar-combobox-item-v-0-0-3" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="true" data-state="checked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">Backlog</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="select-menu-item-trailing-icon"></span></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-5" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-plus" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">Todo</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-7" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-arrow-up" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">In Progress</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-9" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-check" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">Done</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-11" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-x" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">Canceled</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><!--v-if--></span>
+          </div>
+        </div>
+        <!--v-if-->
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->
+<!--v-if-->"
+`;
+
+exports[`selectMenu > renders with clear correctly 1`] = `
+"<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="" data-pohon="select-menu-base" dir="ltr" style="pointer-events: auto;">
+  <!--v-if--><span class="" data-pohon="select-menu-value">Backlog</span><span class="" data-pohon="select-menu-trailing"><span tabindex="-1" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+  <!--v-if-->
+  <!--v-if--></span></span>
+</button>
+<!--teleport start-->
+
+
+<div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-pohon="select-menu-content" position="popper" id="akar-combobox-content-v-0-0-0" data-state="open" style="display: flex; flex-direction: column; box-sizing: border-box; --akar-combobox-content-transform-origin: var(--akar-popper-transform-origin); --akar-combobox-content-available-width: var(--akar-popper-available-width); --akar-combobox-content-available-height: var(--akar-popper-available-height); --akar-combobox-trigger-width: var(--akar-popper-anchor-width); --akar-combobox-trigger-height: var(--akar-popper-anchor-height); animation: none; outline-color: none; outline-style: none; outline-width: initial;" data-dismissable-layer="" role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-side="bottom" data-align="center">
+    <div tabindex="-1" class="" data-pohon="select-menu-focus-scope">
+      <div class="" data-pohon="input-root">
+        <!--v-if--><input type="text" placeholder="Search..." autocomplete="off" data-pohon="input-base" aria-disabled="false" aria-expanded="true" aria-controls="akar-combobox-content-v-0-0-0" aria-autocomplete="list" role="combobox" value="" aria-activedescendant="akar-combobox-item-v-0-0-3">
+        <!--v-if-->
+      </div>
+      <!--v-if-->
+      <div role="presentation" class="" data-pohon="select-menu-viewport">
+        <!--v-if-->
+        <div role="group" aria-labelledby="" id="akar-combobox-group-v-0-0-1" class="" data-pohon="select-menu-group">
+          <div id="akar-combobox-item-v-0-0-3" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="true" data-state="checked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">Backlog</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="select-menu-item-trailing-icon"></span></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-5" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-plus" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">Todo</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-7" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-arrow-up" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">In Progress</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-9" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-check" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">Done</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><!--v-if--></span>
+          </div>
+          <div id="akar-combobox-item-v-0-0-11" class="" data-pohon="select-menu-item" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:circle-x" aria-hidden="true" data-pohon="select-menu-item-leading-icon"></span><span class="" data-pohon="select-menu-item-wrapper"><span class="" data-pohon="select-menu-item-label">Canceled</span>
+            <!--v-if--></span><span class="" data-pohon="select-menu-item-trailing"><!--v-if--></span>
+          </div>
+        </div>
+        <!--v-if-->
+      </div>
+    </div>
+    <!--v-if-->
+  </div>
+</div>
+
+
+<!--teleport end-->
+<!--v-if-->"
+`;
+
 exports[`selectMenu > renders with create-item-label slot correctly 1`] = `
 "<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" class="" data-pohon="select-menu-base" dir="ltr" style="pointer-events: auto;">
   <!--v-if--><span class="" data-pohon="select-menu-placeholder">&nbsp;</span><span class="" data-pohon="select-menu-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-menu-trailing-icon"></span></span>

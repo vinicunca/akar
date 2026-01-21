@@ -19,25 +19,25 @@ exports[`contextMenu > renders with class correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -51,7 +51,7 @@ exports[`contextMenu > renders with class correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -82,25 +82,25 @@ exports[`contextMenu > renders with custom slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -114,7 +114,7 @@ exports[`contextMenu > renders with custom slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -145,25 +145,25 @@ exports[`contextMenu > renders with default slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -177,7 +177,7 @@ exports[`contextMenu > renders with default slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -206,10 +206,10 @@ exports[`contextMenu > renders with descriptionKey correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Dashboard<!--v-if--></span><span class="" data-pohon="context-menu-item-description">Dashboard</span></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Analytics<!--v-if--></span><span class="" data-pohon="context-menu-item-description">Analytics</span></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">A</kbd></span>
           <!----></span>
         </button></div>
@@ -254,25 +254,25 @@ exports[`contextMenu > renders with externalIcon correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -286,7 +286,7 @@ exports[`contextMenu > renders with externalIcon correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:external-link" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:external-link" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -313,15 +313,15 @@ exports[`contextMenu > renders with item slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item slot</button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item slot</button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">Item slot</button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item slot</button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item slot</button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item slot</button>
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item slot</button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item slot</button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">Item slot</button></div>
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item slot</button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item slot</button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item slot</button>
         <div role="separator" aria-orientation="horizontal" class="" data-pohon="context-menu-separator"></div><button role="menuitem" tabindex="-1" id="akar-menu-sub-trigger-v-0-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="" data-pohon="context-menu-item" data-akar-collection-item="">Item slot</button>
         <!---->
         <!--teleport start-->
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item">Item slot</a></div>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item="">Item slot</a></div>
     </div>
   </div>
 </div>
@@ -348,10 +348,10 @@ exports[`contextMenu > renders with item-description slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Dashboard<!--v-if--></span><span class="" data-pohon="context-menu-item-description">Item description slot</span></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Analytics<!--v-if--></span><span class="" data-pohon="context-menu-item-description">Item description slot</span></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">A</kbd></span>
           <!----></span>
         </button></div>
@@ -383,25 +383,25 @@ exports[`contextMenu > renders with item-label slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Item label slot<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Item label slot<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Item label slot<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Item label slot<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Item label slot<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Item label slot<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -415,7 +415,7 @@ exports[`contextMenu > renders with item-label slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Item label slot<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Item label slot<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -445,20 +445,20 @@ exports[`contextMenu > renders with item-leading slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
         <div role="separator" aria-orientation="horizontal" class="" data-pohon="context-menu-separator"></div><button role="menuitem" tabindex="-1" id="akar-menu-sub-trigger-v-0-0-1" aria-haspopup="menu" aria-expanded="false" aria-controls="" data-state="closed" type="button" class="" data-pohon="context-menu-item" data-akar-collection-item="">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Developer<!--v-if--></span>
@@ -470,7 +470,7 @@ exports[`contextMenu > renders with item-leading slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item="">Item leading slot<span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -500,23 +500,23 @@ exports[`contextMenu > renders with item-trailing slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing">Item trailing slot<!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing">Item trailing slot<!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing">Item trailing slot<!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing">Item trailing slot<!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing">Item trailing slot<!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing">Item trailing slot<!----></span>
         </button>
@@ -529,7 +529,7 @@ exports[`contextMenu > renders with item-trailing slot correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing">Item trailing slot<!----></span>
         </a></div>
     </div>
@@ -560,25 +560,25 @@ exports[`contextMenu > renders with items correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -592,7 +592,7 @@ exports[`contextMenu > renders with items correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -621,10 +621,10 @@ exports[`contextMenu > renders with items with description correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Dashboard<!--v-if--></span><span class="" data-pohon="context-menu-item-description">Main overview page</span></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Analytics<!--v-if--></span><span class="" data-pohon="context-menu-item-description">View detailed statistics</span></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">A</kbd></span>
           <!----></span>
         </button></div>
@@ -656,25 +656,25 @@ exports[`contextMenu > renders with labelKey correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if-->
           <!--v-if--><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if-->
           <!--v-if--><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if-->
           <!--v-if--><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if-->
           <!--v-if--><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if-->
           <!--v-if--><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if-->
           <!--v-if--><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -688,7 +688,7 @@ exports[`contextMenu > renders with labelKey correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">i-simple-icons-github<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">i-simple-icons-github<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -719,25 +719,25 @@ exports[`contextMenu > renders with size lg correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -751,7 +751,7 @@ exports[`contextMenu > renders with size lg correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -782,25 +782,25 @@ exports[`contextMenu > renders with size md correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -814,7 +814,7 @@ exports[`contextMenu > renders with size md correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -845,25 +845,25 @@ exports[`contextMenu > renders with size sm correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -877,7 +877,7 @@ exports[`contextMenu > renders with size sm correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -908,25 +908,25 @@ exports[`contextMenu > renders with size xl correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -940,7 +940,7 @@ exports[`contextMenu > renders with size xl correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -971,25 +971,25 @@ exports[`contextMenu > renders with size xs correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -1003,7 +1003,7 @@ exports[`contextMenu > renders with size xs correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -1034,25 +1034,25 @@ exports[`contextMenu > renders with ui correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -1066,7 +1066,7 @@ exports[`contextMenu > renders with ui correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github size-4" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github size-4" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="context-menu-item-label-external-icon"></span></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
@@ -1097,25 +1097,25 @@ exports[`contextMenu > renders without externalIcon correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Sidebar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">Ctrl</kbd><kbd class="">S</kbd></span>
           <!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Show Toolbar<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><span class="" data-pohon="context-menu-item-trailing-kbds"><kbd class="">⇧</kbd><kbd class="">Ctrl</kbd><kbd class="">D</kbd></span>
           <!----></span>
-        </button><button type="button" disabled="" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="" data-pohon="context-menu-item">
+        </button><button type="button" disabled="" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="" aria-disabled="true" data-disabled="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Collapse Pinned Tabs<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button></div>
-      <div role="group" class="" data-pohon="context-menu-group"><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+      <div role="group" class="" data-pohon="context-menu-group"><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Refresh the Page<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cookies and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
-        </button><button type="button" role="menuitem" tabindex="-1" data-akar-collection-item="" data-pohon="context-menu-item">
+        </button><button type="button" data-pohon="context-menu-item" role="menuitem" tabindex="-1" data-akar-collection-item="">
           <!--v-if--><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">Clear Cache and Refresh<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </button>
@@ -1129,7 +1129,7 @@ exports[`contextMenu > renders without externalIcon correctly 1`] = `
         <!---->
         <!--teleport end-->
       </div>
-      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-akar-collection-item="" data-pohon="context-menu-item"><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<!--v-if--></span>
+      <div role="group" class="" data-pohon="context-menu-group"><a href="https://github.com/nuxt/ui" role="menuitem" tabindex="-1" rel="noopener noreferrer" target="_blank" data-pohon="context-menu-item" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="context-menu-item-leading-icon"></span><span class="" data-pohon="context-menu-item-wrapper"><span class="" data-pohon="context-menu-item-label">GitHub<!--v-if--></span>
           <!--v-if--></span><span class="" data-pohon="context-menu-item-trailing"><!--v-if--><!----></span>
         </a></div>
     </div>
