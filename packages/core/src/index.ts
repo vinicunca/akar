@@ -13,6 +13,7 @@ export * from './date-picker';
 export * from './date-range-field';
 export * from './date-range-picker';
 export * from './dialog';
+export { type FocusOutsideEvent, type PointerDownOutsideEvent } from './dismissable-layer';
 export * from './drawer';
 export * from './dropdown-menu';
 export * from './editable';

@@ -73,6 +73,7 @@ import { AHoverCard, APopover } from 'akar/namespaced';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
 import { usePortal } from '../composables/use-portal';
+import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -114,7 +115,9 @@ const contentEvents = computed(() => {
     }, {} as Record<typeof events[number], (e: Event) => void>);
   }
 
-  return {};
+  return {
+    pointerDownOutside,
+  };
 });
 const arrowProps = toRef(() => props.arrow as APopoverArrowProps);
 

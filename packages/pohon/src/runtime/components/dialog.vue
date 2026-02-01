@@ -5,6 +5,7 @@ import type {
   ADialogContentProps,
   ADialogRootEmits,
   ADialogRootProps,
+  PointerDownOutsideEvent,
 } from 'akar';
 import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { EmitsToProps } from '../types/utils';
@@ -23,6 +24,11 @@ export interface PDialogProps extends ADialogRootProps {
    * @defaultValue true
    */
   overlay?: boolean;
+  /**
+   * When `true`, enables scrollable overlay mode where content scrolls within the overlay.
+   * @defaultValue false
+   */
+  scrollable?: boolean;
   /**
    * Animate the dialog when opening or closing.
    * @defaultValue true
@@ -96,6 +102,7 @@ import {
 import { computed, toRef } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { usePortal } from '../composables/use-portal';
+import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
@@ -138,7 +145,9 @@ const contentEvents = computed(() => {
     );
   }
 
-  return {};
+  return {
+    pointerDownOutside: (event: PointerDownOutsideEvent) => pointerDownOutside(event, { scrollable: props.scrollable }),
+  };
 });
 
 const pohon = computed(() =>

@@ -84,6 +84,7 @@ import {
 } from 'akar';
 import { computed, toRef } from 'vue';
 import { usePortal } from '../composables/use-portal';
+import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -143,7 +144,9 @@ const contentEvents = computed(() => {
     );
   }
 
-  return {};
+  return {
+    pointerDownOutside,
+  };
 });
 
 const pohon = computed(() =>
