@@ -3,13 +3,13 @@ import type { Direction } from '../shared/types';
 import { createContext, getActiveElement, useDirection, useSelectionBehavior, useTypeahead } from '../shared';
 
 export interface ATreeRootProps<T = Record<string, any>, U extends Record<string, any> = Record<string, any>, M extends boolean = false> extends APrimitiveProps {
-  /** The controlled value of the tree. Can be binded with with `v-model`. */
+  /** The controlled value of the tree. Can be binded with `v-model`. */
   modelValue?: M extends true ? Array<U> : U;
   /** The value of the tree when initially rendered. Use when you do not need to control the state of the tree */
   defaultValue?: M extends true ? Array<U> : U;
   /** List of items */
   items?: Array<T>;
-  /** The controlled value of the expanded item. Can be binded with with `v-model`. */
+  /** The controlled value of the expanded item. Can be binded with `v-model`. */
   expanded?: Array<string>;
   /** The value of the expanded tree when initially rendered. Use when you do not need to control the state of the expanded tree */
   defaultExpanded?: Array<string>;

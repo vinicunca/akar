@@ -3,7 +3,7 @@ import type { APrimitiveProps } from '../primitive';
 import { injectAListboxRootContext } from './listbox-root.vue';
 
 export interface AListboxFilterProps extends APrimitiveProps {
-  /** The controlled value of the filter. Can be binded with with v-model. */
+  /** The controlled value of the filter. Can be binded with v-model. */
   modelValue?: string;
   /** Focus on element when mounted. */
   autoFocus?: boolean;

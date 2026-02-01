@@ -146,7 +146,7 @@ export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = Arr
   items?: T;
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
   defaultValue?: GetModelValue<T, VK, M>;
-  /** The controlled value of the SelectMenu. Can be binded-with with `v-model`. */
+  /** The controlled value of the SelectMenu. Can be binded-with `v-model`. */
   modelValue?: GetModelValue<T, VK, M>;
   modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>;
   /** Whether multiple options can be selected or not. */

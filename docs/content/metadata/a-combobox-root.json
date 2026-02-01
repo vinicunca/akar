@@ -57,7 +57,7 @@
   },
   {
     "name": "modelValue",
-    "description": "The controlled value of the listbox. Can be binded with with `v-model`.",
+    "description": "The controlled value of the listbox. Can be binded with `v-model`.",
     "type": "AcceptableValue | AcceptableValue[]",
     "required": false
   },
@@ -75,7 +75,7 @@
   },
   {
     "name": "open",
-    "description": "The controlled open state of the Combobox. Can be binded with with `v-model:open`.",
+    "description": "The controlled open state of the Combobox. Can be binded with `v-model:open`.",
     "type": "boolean",
     "required": false
   },
