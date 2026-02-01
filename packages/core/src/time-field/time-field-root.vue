@@ -241,7 +241,31 @@ const allSegmentContent = computed(() => createContent({
   isTimeValue: true,
 }));
 
-const segmentContents = computed(() => allSegmentContent.value.arr);
+const segmentContents = computed(() => {
+  const contents = allSegmentContent.value.arr;
+
+  // Convert hour values for 12-hour display
+  if (props.hourCycle === 12) {
+    return contents.map((segment) => {
+      if (segment.part === 'hour' && 'hour' in segmentValues.value) {
+        const hour = segmentValues.value.hour;
+        if (hour !== null) {
+          let displayHour = hour;
+          if (hour === 0) {
+            displayHour = 12;
+          } else if (hour > 12) {
+            displayHour = hour - 12;
+          }
+
+          return { ...segment, value: displayHour.toString() };
+        }
+      }
+      return segment;
+    });
+  }
+
+  return contents;
+});
 
 const editableSegmentContents = computed(() => segmentContents.value.filter(({ part }) => part !== 'literal'));
 

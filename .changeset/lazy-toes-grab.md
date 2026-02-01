@@ -9,3 +9,4 @@
 - feat(TimeField): support stepSnapping
 - refactor: ensure FocusScope adheres to the Dialog WAI-ARIA design pattern
 - fix(HoverCard): reduce padding GraceArea
+- fix(TimeField): correct hour display in 12-hour format
