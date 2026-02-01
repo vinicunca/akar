@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-
 import type { Ref } from 'vue';
 import type { ACalendarRootProps, ADateFieldRoot, ADateFieldRootProps, APopoverRootEmits, APopoverRootProps } from '..';
 import type { DateMatcher, WeekDayFormat } from '../date';
@@ -46,7 +45,7 @@ export type ADatePickerRootProps = Omit<ADateFieldRootProps, 'as' | 'asChild'> &
   closeOnSelect?: boolean;
 };
 
-export type ADatePickerRootEmits = {
+export type ADatePickerRootEmits = APopoverRootEmits & {
   /** Event handler called whenever the model value changes */
   'update:modelValue': [date: DateValue | undefined];
   /** Event handler called whenever the placeholder value changes */
@@ -93,7 +92,7 @@ const props = withDefaults(
   },
 );
 
-const emits = defineEmits<ADatePickerRootEmits & APopoverRootEmits>();
+const emits = defineEmits<ADatePickerRootEmits>();
 
 const {
   locale,

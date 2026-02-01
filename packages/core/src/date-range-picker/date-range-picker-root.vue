@@ -1,11 +1,9 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-
 import type { Ref } from 'vue';
 import type { ADateRangeFieldRoot, ADateRangeFieldRootProps, APopoverRootEmits, APopoverRootProps, ARangeCalendarRootProps } from '..';
 import type { DateMatcher, WeekDayFormat } from '../date';
 import type { DateRange, DateStep, Granularity, HourCycle } from '../shared/date';
-
 import type { Direction } from '../shared/types';
 import { APopoverRoot } from '..';
 import { createContext, useDirection } from '../shared';
@@ -54,7 +52,7 @@ export type ADateRangePickerRootProps = Omit<ADateRangeFieldRootProps, 'as' | 'a
   closeOnSelect?: boolean;
 };
 
-export type ADateRangePickerRootEmits = {
+export type ADateRangePickerRootEmits = APopoverRootEmits & {
   /** Event handler called whenever the model value changes */
   'update:modelValue': [date: DateRange];
   /** Event handler called whenever the placeholder value changes */
@@ -103,7 +101,7 @@ const props = withDefaults(
   },
 );
 
-const emits = defineEmits<ADateRangePickerRootEmits & APopoverRootEmits>();
+const emits = defineEmits<ADateRangePickerRootEmits>();
 
 const {
   locale,
