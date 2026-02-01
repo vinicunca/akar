@@ -13,3 +13,4 @@
 - fix(TimeField): call to updateHour to handle 12 hour time
 - fix(DatePicker, DateRangePicker): integrate locale handling with useLocale hook
 - fix(CheckboxGroup): update update:modelValue emit type
+- fix(InputMenu/InputNumber/SelectMenu): proxy size to buttons

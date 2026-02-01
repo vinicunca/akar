@@ -823,6 +823,7 @@ defineExpose({
               <PButton
                 as="span"
                 :icon="clearIcon || appConfig.pohon.icons.close"
+                :size="inputSize"
                 variant="link"
                 color="neutral"
                 tabindex="-1"
@@ -866,7 +867,7 @@ defineExpose({
             <PInput
               autofocus
               autocomplete="off"
-              :size="size"
+              :size="inputSize"
               v-bind="searchInputProps"
               :class="pohon.input({ class: props.pohon?.input })"
               data-pohon="select-menu-input"

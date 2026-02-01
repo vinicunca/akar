@@ -888,6 +888,7 @@ defineExpose({
             <PButton
               as="span"
               :icon="clearIcon || appConfig.pohon.icons.close"
+              :size="inputSize"
               variant="link"
               color="neutral"
               tabindex="-1"
