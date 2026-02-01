@@ -38,7 +38,7 @@ import { isClient } from '@vueuse/shared';
 import { nextTick, reactive, ref, watchEffect } from 'vue';
 import { APrimitive } from '../primitive';
 import { getActiveElement, useForwardExpose } from '../shared';
-import { createFocusScopesStack, removeLinks } from './stack';
+import { createFocusScopesStack } from './stack';
 import {
   AUTOFOCUS_ON_MOUNT,
   AUTOFOCUS_ON_UNMOUNT,
@@ -162,7 +162,7 @@ watchEffect(async (cleanupFn) => {
     container.dispatchEvent(mountEvent);
 
     if (!mountEvent.defaultPrevented) {
-      focusFirst(removeLinks(getTabbableCandidates(container)), {
+      focusFirst(getTabbableCandidates(container), {
         select: true,
       });
       if (getActiveElement() === previouslyFocusedElement) {

@@ -7,3 +7,4 @@
 - fix(DatePicker): add exports for DatePicker
 - fix(DatePicker/DateRangePicker): replaced type extendance from emits to type
 - feat(TimeField): support stepSnapping
+- refactor: ensure FocusScope adheres to the Dialog WAI-ARIA design pattern
