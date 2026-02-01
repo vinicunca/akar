@@ -5,6 +5,7 @@ import type { AnyExceptLiteral, DateStep, HourCycle, SegmentPart, SegmentValueOb
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import { getDaysInMonth, toDate } from '../../date';
+import { snapValueToStep } from '../../shared';
 import { isAcceptableSegmentKey, isNumberString, isSegmentNavigationKey } from './segment';
 
 interface MinuteSecondIncrementProps {
@@ -299,6 +300,7 @@ export interface UseDateFieldProps {
   placeholder: Ref<DateValue>;
   hourCycle: HourCycle;
   step: Ref<DateStep>;
+  stepSnapping?: Ref<boolean>;
   formatter: UseDateFormatter;
   segmentValues: Ref<SegmentValueObj>;
   disabled: Ref<boolean>;
@@ -935,9 +937,68 @@ export function useDateField(props: UseDateFieldProps) {
     }
   }
 
+  function handleSegmentFocusOut() {
+    if (!props.stepSnapping?.value) {
+      return;
+    }
+
+    if (
+      props.part === 'hour'
+      && 'hour' in props.segmentValues.value
+      && props.segmentValues.value.hour !== null
+      && props.step.value.hour
+      && props.step.value.hour > 1
+    ) {
+      props.segmentValues.value.hour = snapValueToStep({
+        value: props.segmentValues.value.hour,
+        min: 0,
+        max: 23,
+        step: props.step.value.hour,
+      });
+
+      if ('dayPeriod' in props.segmentValues.value) {
+        if (props.segmentValues.value.hour < 12) {
+          props.segmentValues.value.dayPeriod = 'AM';
+        } else if (props.segmentValues.value.hour) {
+          props.segmentValues.value.dayPeriod = 'PM';
+        }
+      }
+    } else if (
+      props.part === 'minute'
+      && 'minute' in props.segmentValues.value
+      && props.segmentValues.value.minute !== null
+      && props.step.value.minute
+      && props.step.value.minute > 1) {
+      props.segmentValues.value.minute = snapValueToStep({
+        value: props.segmentValues.value.minute,
+        min: 0,
+        max: 59,
+        step: props.step.value.minute,
+      });
+    } else if (
+      props.part === 'second'
+      && 'second' in props.segmentValues.value
+      && props.segmentValues.value.second !== null
+      && props.step.value.second
+      && props.step.value.second > 1) {
+      props.segmentValues.value.second = snapValueToStep({
+        value: props.segmentValues.value.second,
+        min: 0,
+        max: 59,
+        step: props.step.value.second,
+      });
+    }
+
+    if (Object.values(props.segmentValues.value).every((item) => item !== null)) {
+      const dateRef = props.placeholder.value.set({ ...props.segmentValues.value as Record<AnyExceptLiteral, number> });
+      props.modelValue.value = dateRef.copy();
+    }
+  }
+
   return {
     handleSegmentClick,
     handleSegmentKeydown,
+    handleSegmentFocusOut,
     attributes,
   };
 }
