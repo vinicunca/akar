@@ -6,7 +6,7 @@ import type { DateMatcher, WeekDayFormat } from '../date';
 import type { DateRange, DateStep, Granularity, HourCycle } from '../shared/date';
 import type { Direction } from '../shared/types';
 import { APopoverRoot } from '..';
-import { createContext, useDirection } from '../shared';
+import { createContext, useDirection, useLocale } from '../shared';
 import { getDefaultDate } from '../shared/date';
 
 type DateRangePickerRootContext = {
@@ -91,7 +91,6 @@ const props = withDefaults(
     disabled: false,
     readonly: false,
     placeholder: undefined,
-    locale: 'en',
     isDateDisabled: undefined,
     isDateUnavailable: undefined,
     isDateHighlightable: undefined,
@@ -104,7 +103,7 @@ const props = withDefaults(
 const emits = defineEmits<ADateRangePickerRootEmits>();
 
 const {
-  locale,
+  locale: propLocale,
   disabled,
   readonly,
   pagedNavigation,
@@ -135,6 +134,7 @@ const {
 } = toRefs(props);
 
 const dir = useDirection(propsDir);
+const locale = useLocale(propLocale);
 
 const modelValue = useVModel(props, 'modelValue', emits, {
   defaultValue: props.defaultValue ?? { start: undefined, end: undefined },
@@ -145,7 +145,7 @@ const defaultDate = getDefaultDate({
   defaultPlaceholder: props.placeholder,
   granularity: props.granularity,
   defaultValue: modelValue.value?.start,
-  locale: props.locale,
+  locale: locale.value,
 });
 
 const placeholder = useVModel(props, 'placeholder', emits, {

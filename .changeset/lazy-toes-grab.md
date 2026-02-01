@@ -11,3 +11,4 @@
 - fix(HoverCard): reduce padding GraceArea
 - fix(TimeField): correct hour display in 12-hour format
 - fix(TimeField): call to updateHour to handle 12 hour time
+- fix(DatePicker, DateRangePicker): integrate locale handling with useLocale hook
