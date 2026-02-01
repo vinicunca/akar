@@ -1,7 +1,10 @@
-import type { CalendarDateTime, CycleTimeOptions, DateFields, DateValue, TimeFields } from '@internationalized/date';
+import type { CalendarDateTime, DateFields, DateValue, TimeFields } from '@internationalized/date';
 import type { Ref } from 'vue';
 import type { UseDateFormatter } from '../../shared';
 import type { AnyExceptLiteral, DateStep, HourCycle, SegmentPart, SegmentValueObj } from './types';
+import {
+  DateFormatter,
+} from '@internationalized/date';
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import { getDaysInMonth, toDate } from '../../date';
@@ -20,7 +23,6 @@ interface DateTimeValueIncrementation {
   part: keyof Omit<DateFields, 'era'> | keyof TimeFields;
   dateRef: DateValue;
   prevValue: null | number;
-  hourCycle?: HourCycle;
 }
 
 interface SegmentAttrProps {
@@ -341,7 +343,7 @@ export function useDateField(props: UseDateFieldProps) {
     return Number.parseInt(str.slice(0, -1));
   }
 
-  function dateTimeValueIncrementation({ event, part, dateRef, prevValue, hourCycle }: DateTimeValueIncrementation): number {
+  function dateTimeValueIncrementation({ event, part, dateRef, prevValue }: DateTimeValueIncrementation): number {
     const step = props.step.value[part] ?? 1;
     const sign = event.key === KEY_CODES.ARROW_UP ? step : -step;
 
@@ -350,7 +352,9 @@ export function useDateField(props: UseDateFieldProps) {
     }
 
     if (part === 'hour' && 'hour' in dateRef) {
-      const cycleArgs: [keyof DateFields | keyof TimeFields, number, CycleTimeOptions?] = [part, sign, { hourCycle }];
+      // Don't pass hourCycle to cycle - internal representation is always 24-hour
+      // The hourCycle prop only affects display, not internal cycling
+      const cycleArgs: [keyof DateFields | keyof TimeFields, number] = [part, sign];
       return dateRef.set({ [part as keyof DateValue]: prevValue }).cycle(...cycleArgs)[part];
     }
 
@@ -530,8 +534,7 @@ export function useDateField(props: UseDateFieldProps) {
     return { value: total, moveToNext };
   }
 
-  function updateHour(num: number, prev: null | number) {
-    const max = 24;
+  function updateHour(max: number, num: number, prev: null | number) {
     let moveToNext = false;
     const maxStart = Math.floor(max / 10);
 
@@ -746,6 +749,11 @@ export function useDateField(props: UseDateFieldProps) {
     }
   }
 
+  function uses12HourFormat(locale: string): boolean {
+    const hourCycle = new DateFormatter(locale, { hour: 'numeric' }).resolvedOptions().hourCycle;
+    return hourCycle === 'h11' || hourCycle === 'h12';
+  }
+
   function handleHourSegmentKeydown(event: KeyboardEvent) {
     const dateRef = props.placeholder.value;
     if (!isAcceptableSegmentKey(event.key) || isSegmentNavigationKey(event.key) || !('hour' in dateRef) || !('hour' in props.segmentValues.value)) {
@@ -754,17 +762,14 @@ export function useDateField(props: UseDateFieldProps) {
 
     const prevValue = props.segmentValues.value.hour;
 
-    const hourCycle = props.hourCycle;
-
     if (event.key === KEY_CODES.ARROW_UP || event.key === KEY_CODES.ARROW_DOWN) {
-      props.segmentValues.value.hour = dateTimeValueIncrementation({ event, part: 'hour', dateRef: props.placeholder.value, prevValue, hourCycle });
+      const newHour = dateTimeValueIncrementation({ event, part: 'hour', dateRef: props.placeholder.value, prevValue });
+      props.segmentValues.value.hour = newHour;
 
-      if ('dayPeriod' in props.segmentValues.value) {
-        if (props.segmentValues.value.hour < 12) {
-          props.segmentValues.value.dayPeriod = 'AM';
-        } else if (props.segmentValues.value.hour) {
-          props.segmentValues.value.dayPeriod = 'PM';
-        }
+      if ('dayPeriod' in props.segmentValues.value && newHour !== null) {
+        // Determine AM/PM based on internal 24-hour value
+        // Hour 0-11 = AM, Hour 12-23 = PM
+        props.segmentValues.value.dayPeriod = newHour >= 12 ? 'PM' : 'AM';
       }
 
       return;
@@ -772,15 +777,32 @@ export function useDateField(props: UseDateFieldProps) {
 
     if (isNumberString(event.key)) {
       const num = Number.parseInt(event.key);
-      const { value, moveToNext } = updateHour(num, prevValue);
+      const is12Hour = uses12HourFormat(props.formatter.getLocale());
+      const max = is12Hour ? 12 : 24;
 
-      if ('dayPeriod' in props.segmentValues.value && value && value > 12) {
-        props.segmentValues.value.dayPeriod = 'PM';
-      } else if ('dayPeriod' in props.segmentValues.value && value) {
-        props.segmentValues.value.dayPeriod = 'AM';
+      let displayPrev = prevValue;
+      if (is12Hour && prevValue !== null) {
+        if (prevValue === 0) {
+          displayPrev = 12;
+        } else if (prevValue > 12) {
+          displayPrev = prevValue - 12;
+        }
       }
 
-      props.segmentValues.value.hour = value;
+      const { value, moveToNext } = updateHour(max, num, displayPrev);
+
+      // Convert display hour back to internal 24-hour format
+      let internalValue = value;
+      if (is12Hour && value !== null) {
+        const period = props.segmentValues.value.dayPeriod || 'AM';
+        if (value === 12) {
+          internalValue = period === 'AM' ? 0 : 12;
+        } else {
+          internalValue = period === 'PM' ? value + 12 : value;
+        }
+      }
+
+      props.segmentValues.value.hour = internalValue;
 
       if (moveToNext) {
         props.focusNext();

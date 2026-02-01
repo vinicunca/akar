@@ -555,6 +555,232 @@ describe('timeField', async () => {
     });
   });
 
+  describe('12-hour arrow key cycling', () => {
+    it('transitions from PM to AM when cycling from 11 PM to 12 AM', async () => {
+      const { hour, user, getByTestId } = setup({
+        timeFieldProps: {
+          modelValue: new Time(23, 30, 0), // 11 PM
+          hourCycle: 12,
+        },
+      });
+
+      await user.click(hour);
+      await user.keyboard(kbd.ARROW_UP);
+
+      expect(hour).toHaveTextContent('12');
+      expect(getByTestId('dayPeriod')).toHaveTextContent('AM');
+    });
+
+    it('transitions from AM to PM when cycling from 11 AM to 12 PM', async () => {
+      const { hour, user, getByTestId } = setup({
+        timeFieldProps: {
+          modelValue: new Time(11, 30, 0), // 11 AM
+          hourCycle: 12,
+        },
+      });
+
+      await user.click(hour);
+      await user.keyboard(kbd.ARROW_UP);
+
+      expect(hour).toHaveTextContent('12');
+      expect(getByTestId('dayPeriod')).toHaveTextContent('PM');
+    });
+
+    it('cycles correctly through all PM hours without changing to AM', async () => {
+      const { hour, user, getByTestId, rerender } = setup({
+        timeFieldProps: {
+          modelValue: new Time(13, 30, 0), // 1 PM
+          hourCycle: 12,
+        },
+        emits: {
+          'onUpdate:modelValue': (data: TimeValue) => {
+            return rerender({
+              timeFieldProps: {
+                modelValue: data,
+                hourCycle: 12,
+              },
+            });
+          },
+        },
+      });
+
+      await user.click(hour);
+
+      // Cycle from 1 PM through 11 PM
+      for (let i = 1; i < 11; i++) {
+        await user.keyboard(kbd.ARROW_UP);
+        expect(getByTestId('dayPeriod')).toHaveTextContent('PM');
+      }
+
+      // At 11 PM, next should be 12 AM
+      await user.keyboard(kbd.ARROW_UP);
+      expect(hour).toHaveTextContent('12');
+      expect(getByTestId('dayPeriod')).toHaveTextContent('AM');
+    });
+  });
+
+  describe('12-hour input handling', () => {
+    it('allows typing 10 with AM period', async () => {
+      const { hour, user, value, rerender } = setup({
+        timeFieldProps: {
+          modelValue: new Time(0, 30, 0),
+          hourCycle: 12,
+        },
+        emits: {
+          'onUpdate:modelValue': (data: TimeValue) => {
+            return rerender({
+              timeFieldProps: {
+                modelValue: data,
+                hourCycle: 12,
+              },
+            });
+          },
+        },
+      });
+
+      await user.click(hour);
+      await user.keyboard('{1}{0}');
+
+      expect(hour).toHaveTextContent('10');
+      // Internal value should be 10 for 10 AM
+      expect(value.textContent).toContain('10:30:00');
+    });
+
+    it('allows typing 11 with AM period', async () => {
+      const { hour, user, value, rerender } = setup({
+        timeFieldProps: {
+          modelValue: new Time(0, 30, 0),
+          hourCycle: 12,
+        },
+        emits: {
+          'onUpdate:modelValue': (data: TimeValue) => {
+            return rerender({
+              timeFieldProps: {
+                modelValue: data,
+                hourCycle: 12,
+              },
+            });
+          },
+        },
+      });
+
+      await user.click(hour);
+      await user.keyboard('{1}{1}');
+
+      expect(hour).toHaveTextContent('11');
+      // Internal value should be 11 for 11 AM
+      expect(value.textContent).toContain('11:30:00');
+    });
+
+    it('allows typing 12 with PM period', async () => {
+      const { hour, user, value, getByTestId, rerender } = setup({
+        timeFieldProps: {
+          modelValue: new Time(13, 30, 0),
+          hourCycle: 12,
+        },
+        emits: {
+          'onUpdate:modelValue': (data: TimeValue) => {
+            return rerender({
+              timeFieldProps: {
+                modelValue: data,
+                hourCycle: 12,
+              },
+            });
+          },
+        },
+      });
+
+      await user.click(hour);
+      await user.keyboard('{1}{2}');
+
+      expect(hour).toHaveTextContent('12');
+      expect(getByTestId('dayPeriod')).toHaveTextContent('PM');
+      // Internal value should be 12 for 12 PM
+      expect(value.textContent).toContain('12:30:00');
+    });
+
+    it('allows typing 10 with PM period - converts to 22:00', async () => {
+      const { hour, user, value, getByTestId, rerender } = setup({
+        timeFieldProps: {
+          modelValue: new Time(13, 30, 0),
+          hourCycle: 12,
+        },
+        emits: {
+          'onUpdate:modelValue': (data: TimeValue) => {
+            return rerender({
+              timeFieldProps: {
+                modelValue: data,
+                hourCycle: 12,
+              },
+            });
+          },
+        },
+      });
+
+      await user.click(hour);
+      await user.keyboard('{1}{0}');
+
+      expect(hour).toHaveTextContent('10');
+      expect(getByTestId('dayPeriod')).toHaveTextContent('PM');
+      // Internal value should be 22 for 10 PM
+      expect(value.textContent).toContain('22:30:00');
+    });
+
+    it('allows typing 11 with PM period - converts to 23:00', async () => {
+      const { hour, user, value, getByTestId, rerender } = setup({
+        timeFieldProps: {
+          modelValue: new Time(13, 30, 0),
+          hourCycle: 12,
+        },
+        emits: {
+          'onUpdate:modelValue': (data: TimeValue) => {
+            return rerender({
+              timeFieldProps: {
+                modelValue: data,
+                hourCycle: 12,
+              },
+            });
+          },
+        },
+      });
+
+      await user.click(hour);
+      await user.keyboard('{1}{1}');
+
+      expect(hour).toHaveTextContent('11');
+      expect(getByTestId('dayPeriod')).toHaveTextContent('PM');
+      // Internal value should be 23 for 11 PM
+      expect(value.textContent).toContain('23:30:00');
+    });
+
+    it('allows typing 12 with AM period - converts to 00:00', async () => {
+      const { hour, user, value, getByTestId, rerender } = setup({
+        timeFieldProps: {
+          modelValue: new Time(1, 30, 0),
+          hourCycle: 12,
+        },
+        emits: {
+          'onUpdate:modelValue': (data: TimeValue) => {
+            return rerender({
+              timeFieldProps: {
+                modelValue: data,
+                hourCycle: 12,
+              },
+            });
+          },
+        },
+      });
+
+      await user.click(hour);
+      await user.keyboard('{1}{2}');
+
+      expect(hour).toHaveTextContent('12');
+      expect(getByTestId('dayPeriod')).toHaveTextContent('AM');
+      // Internal value should be 0 for 12 AM (midnight)
+      expect(value.textContent).toContain('00:30:00');
+    });
+  });
+
   describe('stepSnapping', () => {
     it('snaps typed minute value to nearest step', async () => {
       const { user, getByTestId, rerender } = setup({
