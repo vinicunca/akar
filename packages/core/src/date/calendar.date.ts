@@ -7,6 +7,7 @@ import {
   endOfYear,
   getDayOfWeek,
   startOfMonth,
+  startOfWeek,
   startOfYear,
 } from '@internationalized/date';
 import { chunk } from '@vinicunca/perkakas';
@@ -272,20 +273,27 @@ export function getWeekStartsOn(locale: string): WeekStartsOn {
  * Returns the locale-specific week number
  */
 export function getWeekNumber(date: DateValue, locale: string = 'en-US', firstDayOfWeek?: DayOfWeek): number {
-  const firstDayOfYear = new CalendarDate(date.year, 1, 1);
+  const jan1 = new CalendarDate(date.year, 1, 1);
 
-  const firstDayOfYearWeekday = getDayOfWeek(firstDayOfYear, locale, firstDayOfWeek);
+  // Detect ISO locale by comparing JS day of week with locale day of week
+  const usesISOWeek = jan1.toDate('UTC').getUTCDay() !== getDayOfWeek(jan1, locale);
+  const weekStartsOn = firstDayOfWeek ?? (usesISOWeek ? 'mon' : 'sun');
+  const firstWeekContainsDate = usesISOWeek ? 4 : 1;
 
-  const firstWeekStart = firstDayOfYear.subtract({ days: firstDayOfYearWeekday });
+  // Find the "deciding day" - its year determines which year's week numbering to use
+  const dayOfWeek = getDayOfWeek(date, locale, weekStartsOn);
+  const decidingDay = date.add({ days: 7 - firstWeekContainsDate - dayOfWeek });
+  const weekYear = decidingDay.year;
 
-  // If date is before the first week start It belongs to the last week of the previous year
-  if (date.compare(firstWeekStart) < 0) {
-    const prevYearDate = new CalendarDate(date.year - 1, 12, 31);
-    return getWeekNumber(prevYearDate, locale, firstDayOfWeek);
-  }
+  // Calculate week number from week 1 start
+  const week1Ref = new CalendarDate(weekYear, 1, firstWeekContainsDate);
+  const week1Start = startOfWeek(week1Ref, locale, weekStartsOn);
+  const currentWeekStart = startOfWeek(date, locale, weekStartsOn);
 
-  const days = getDaysBetween(firstWeekStart, date);
-
-  // Week number is days divided by 7 plus 1
-  return Math.floor(days.length / 7) + 1;
+  const MS_PER_WEEK = 7 * 24 * 60 * 60 * 1000;
+  const daysDiff = Math.round(
+    (currentWeekStart.toDate('UTC').getTime() - week1Start.toDate('UTC').getTime())
+    / MS_PER_WEEK,
+  );
+  return daysDiff + 1;
 }
