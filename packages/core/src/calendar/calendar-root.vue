@@ -1,14 +1,12 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { DateGrid, DateMatcher, WeekDayFormat } from '../date';
+import type { DateGrid, DateMatcher, WeekDayFormat, WeekStartsOn } from '../date';
 import type { APrimitiveProps } from '../primitive';
 import type { UseDateFormatter } from '../shared';
 import type { Direction } from '../shared/types';
-import { isEqualDay, isSameDay } from '@internationalized/date';
-import { createContext, useDirection, useLocale } from '../shared';
-import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
-import { useCalendar, useCalendarState } from './use-calendar';
+import { getWeekStartsOn } from '../date';
+import { createContext } from '../shared';
 
 type CalendarRootContext = {
   locale: Ref<string>;
@@ -18,7 +16,7 @@ type CalendarRootContext = {
   preventDeselect: Ref<boolean>;
   grid: Ref<Array<DateGrid<DateValue>>>;
   weekDays: Ref<Array<string>>;
-  weekStartsOn: Ref<0 | 1 | 2 | 3 | 4 | 5 | 6>;
+  weekStartsOn: Ref<WeekStartsOn>;
   weekdayFormat: Ref<WeekDayFormat>;
   fixedWeeks: Ref<boolean>;
   multiple: Ref<boolean>;
@@ -59,7 +57,7 @@ export interface ACalendarRootProps extends APrimitiveProps {
   /** Whether or not to prevent the user from deselecting a date without selecting another date first */
   preventDeselect?: boolean;
   /** The day of the week to start the calendar on */
-  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  weekStartsOn?: WeekStartsOn;
   /** The format to use for the weekday strings provided via the weekdays slot prop */
   weekdayFormat?: WeekDayFormat;
   /** The accessible label for the calendar */
@@ -112,9 +110,13 @@ export const [
 </script>
 
 <script setup lang="ts">
+import { isEqualDay, isSameDay } from '@internationalized/date';
 import { useVModel } from '@vueuse/core';
-import { onMounted, toRefs, watch } from 'vue';
+import { computed, onMounted, toRefs, watch } from 'vue';
 import { APrimitive, usePrimitiveElement } from '../primitive';
+import { useDirection, useLocale } from '../shared';
+import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
+import { useCalendar, useCalendarState } from './use-calendar';
 
 const props = withDefaults(
   defineProps<ACalendarRootProps>(),
@@ -123,7 +125,6 @@ const props = withDefaults(
     as: 'div',
     pagedNavigation: false,
     preventDeselect: false,
-    weekStartsOn: 0,
     weekdayFormat: 'narrow',
     fixedWeeks: false,
     multiple: false,
@@ -149,7 +150,7 @@ defineSlots<{
     /** The days of the week */
     weekDays: Array<string>;
     /** The start of the week */
-    weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    weekStartsOn: WeekStartsOn;
     /** The calendar locale */
     locale: string;
     /** Whether or not to always display 6 weeks in the calendar */
@@ -164,7 +165,6 @@ const {
   readonly,
   initialFocus,
   pagedNavigation,
-  weekStartsOn,
   weekdayFormat,
   fixedWeeks,
   multiple,
@@ -189,6 +189,7 @@ const {
 } = usePrimitiveElement();
 const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
+const weekStartsOn = computed(() => props.weekStartsOn ?? getWeekStartsOn(locale.value));
 
 const modelValue = useVModel(props, 'modelValue', emits, {
   defaultValue: defaultValue.value,

@@ -1,18 +1,12 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { DateGrid, DateMatcher, WeekDayFormat } from '../date';
+import type { DateGrid, DateMatcher, WeekDayFormat, WeekStartsOn } from '../date';
 import type { APrimitiveProps } from '../primitive';
 import type { UseDateFormatter } from '../shared';
 import type { DateRange } from '../shared/date';
 import type { Direction } from '../shared/types';
-import { isEqualDay } from '@internationalized/date';
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { useCalendar } from '../calendar/use-calendar';
-import { isDateBefore } from '../date';
-import { createContext, useDirection, useLocale } from '../shared';
-import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
-import { useRangeCalendarState } from './use-range-calendar';
+import { createContext } from '../shared';
 
 type RangeCalendarRootContext = {
   modelValue: Ref<DateRange>;
@@ -24,7 +18,7 @@ type RangeCalendarRootContext = {
   preventDeselect: Ref<boolean>;
   grid: Ref<Array<DateGrid<DateValue>>>;
   weekDays: Ref<Array<string>>;
-  weekStartsOn: Ref<0 | 1 | 2 | 3 | 4 | 5 | 6>;
+  weekStartsOn: Ref<WeekStartsOn>;
   weekdayFormat: Ref<WeekDayFormat>;
   fixedWeeks: Ref<boolean>;
   numberOfMonths: Ref<number>;
@@ -84,7 +78,7 @@ export interface ARangeCalendarRootProps extends APrimitiveProps {
   /** The maximum number of days that can be selected in a range */
   maximumDays?: number;
   /** The day of the week to start the calendar on */
-  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  weekStartsOn?: WeekStartsOn;
   /** The format to use for the weekday strings provided via the weekdays slot prop */
   weekdayFormat?: WeekDayFormat;
   /** The accessible label for the calendar */
@@ -141,9 +135,16 @@ export const [
 </script>
 
 <script setup lang="ts">
+import { isEqualDay } from '@internationalized/date';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { useEventListener, useVModel } from '@vueuse/core';
-import { onMounted, ref, toRefs, watch } from 'vue';
+import { computed, onMounted, ref, toRefs, watch } from 'vue';
+import { useCalendar } from '../calendar/use-calendar';
+import { getWeekStartsOn, isDateBefore } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
+import { useDirection, useLocale } from '../shared';
+import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
+import { useRangeCalendarState } from './use-range-calendar';
 
 const props = withDefaults(
   defineProps<ARangeCalendarRootProps>(),
@@ -152,7 +153,6 @@ const props = withDefaults(
     as: 'div',
     pagedNavigation: false,
     preventDeselect: false,
-    weekStartsOn: 0,
     weekdayFormat: 'narrow',
     fixedWeeks: false,
     numberOfMonths: 1,
@@ -179,7 +179,7 @@ defineSlots<{
     /** The days of the week */
     weekDays: Array<string>;
     /** The start of the week */
-    weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    weekStartsOn: WeekStartsOn;
     /** The calendar locale */
     locale: string;
     /** Whether or not to always display 6 weeks in the calendar */
@@ -194,7 +194,6 @@ const {
   readonly,
   initialFocus,
   pagedNavigation,
-  weekStartsOn,
   weekdayFormat,
   fixedWeeks,
   numberOfMonths,
@@ -221,6 +220,7 @@ const {
 } = usePrimitiveElement();
 const dir = useDirection(propDir);
 const locale = useLocale(propLocale);
+const weekStartsOn = computed(() => props.weekStartsOn ?? getWeekStartsOn(locale.value));
 
 const lastPressedDateValue = ref() as Ref<DateValue | undefined>;
 const focusedValue = ref() as Ref<DateValue | undefined>;
