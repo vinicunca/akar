@@ -1,4 +1,4 @@
-import type { DashboardMenuRecord } from '#layers/dashboard-menu/lib';
+import type { PDashboardMenuItem } from 'pohon-ui';
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
 interface StateAccess {
@@ -6,7 +6,7 @@ interface StateAccess {
   /**
    * Accessible menu list
    */
-  accessMenus: Array<DashboardMenuRecord>;
+  accessMenus: Array<PDashboardMenuItem>;
   /**
    * Is the screen locked?
    */
@@ -26,8 +26,8 @@ export const useAccessStore = defineStore(
       setAccessRouteNames(names: Array<string>) {
         this.accessRouteNames = names;
       },
-      setAccessMenus(menus: Array<DashboardMenuRecord>) {
-        this.accessMenus = menus;
+      setAccessMenus(menus: Array<PDashboardMenuItem>) {
+        this.accessMenus = menus as any;
       },
     },
   },

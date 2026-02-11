@@ -9,7 +9,7 @@ import { clone, isIncludedIn } from '@vinicunca/perkakas';
 import { computed, onMounted, useSlots, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useAccessStore } from '../stores/stores.access';
-import { mapTree } from '../utils/utils.tree';
+import { mapTree } from '../utils/util.tree';
 import { LayoutContent, LayoutContentSpinner } from './content';
 import LayoutCopyright from './layout-copyright.vue';
 import LayoutFooter from './layout-footer.vue';

@@ -1,4 +1,5 @@
 import type { DashboardMenuRecord } from '#layers/dashboard-menu/lib';
+import type { PDashboardMenuItem } from 'pohon-ui';
 import type { ComputedRef } from 'vue';
 import { preferences } from '#layers/dashboard-storage/lib';
 import { computed, ref, watch } from 'vue';
@@ -7,9 +8,11 @@ import { useAccessStore } from '../../stores/stores.access';
 import { findRootMenuByPath } from '../../utils/utils.find-menu-by-path';
 import { useDashboardNavigation } from './use-dashboard-navigation';
 
-export function useDashboardExtraMenu(useRootMenus?: ComputedRef<Array<DashboardMenuRecord>>) {
+export function useDashboardExtraMenu(useRootMenus?: ComputedRef<Array<PDashboardMenuItem>>) {
   const accessStore = useAccessStore();
   const { navigation, willOpenedByWindow } = useDashboardNavigation();
+
+  // const menus = computed(() => useRootMenus?.value ?? (accessStore.accessMenus as any));
 
   const menus = computed(() => useRootMenus?.value ?? accessStore.accessMenus);
 

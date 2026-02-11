@@ -16,6 +16,7 @@
     "nuxt": "catalog:pohon",
     "pinia": "catalog:pohon",
     "pohon-ui": "workspace:*",
+    "unstorage": "catalog:",
     "zod": "catalog:pohon"
   },
   "devDependencies": {

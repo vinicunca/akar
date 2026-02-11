@@ -48,7 +48,7 @@ export class PreferenceManager {
     return this.initialPreferences;
   };
 
-  getPreferences = () => {
+  getPreferences = (): Readonly<Preferences> => {
     return readonly(this.state);
   };
 
