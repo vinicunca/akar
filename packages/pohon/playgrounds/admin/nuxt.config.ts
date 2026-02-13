@@ -37,10 +37,6 @@ export default defineNuxtConfig({
     strategy: 'no_prefix',
   },
 
-  imports: {
-    autoImport: false,
-  },
-
   modules: [
     'pohon-ui',
     '@nuxt/fonts',

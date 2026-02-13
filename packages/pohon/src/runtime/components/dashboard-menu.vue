@@ -4,8 +4,6 @@ import type { AAccordionRootEmits, AAccordionRootProps } from 'akar';
 import type { PBadgeProps, PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-menu';
-import { PDropdownMenu } from '#components';
-import { isNumber, isString } from '@vinicunca/perkakas';
 
 type DashboardMenu = ComponentConfig<typeof theme, AppConfig, 'dashboardMenu'>;
 
@@ -101,6 +99,7 @@ export interface PContentNavigationSlots<T extends PDashboardMenuItem = PDashboa
 
 <script setup lang="ts" generic="T extends PDashboardMenuItem">
 import { useAppConfig, useRoute } from '#imports';
+import { isNumber, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AAccordionContent,
@@ -118,6 +117,7 @@ import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
 import PBadge from './badge.vue';
 import PDashboardMenu from './dashboard-menu.vue';
+import PDropdownMenu from './dropdown-menu.vue';
 import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';

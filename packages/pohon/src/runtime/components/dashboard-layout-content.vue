@@ -1,39 +1,34 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { PDashboardContentCompactType } from '../types/dashboard';
 import type { ComponentConfig } from '../types/uv';
-import theme from '#build/pohon/dashboard-layout-header';
+import theme from '#build/pohon/dashboard-layout-content';
+import { APrimitiveSlot } from 'akar';
+import { useDashboardLayoutContentStyle } from '../composables/use-dashboard-layout-style';
 
-type DashboardLayoutHeader = ComponentConfig<typeof theme, AppConfig, 'dashboardLayoutHeader'>;
+type DashboardLayoutContent = ComponentConfig<typeof theme, AppConfig, 'dashboardLayoutContent'>;
 
-export interface PDashboardLayoutHeaderProps {
+export interface PDashboardLayoutContentProps {
   /**
-   * Full width
+   * Fixed width of content area
    */
-  fullWidth: boolean;
+  contentCompact: PDashboardContentCompactType;
   /**
-   * Header height
+   * Fixed width layout width
    */
-  height: number;
-  /**
-   * Show header
-   */
-  show: boolean;
-  /**
-   * Sidebar width
-   */
-  sidebarWidth: number;
-  /**
-   * Mobile
-   */
-  isMobile: boolean;
+  contentCompactWidth: number;
+  padding: number;
+  paddingBottom: number;
+  paddingLeft: number;
+  paddingRight: number;
+  paddingTop: number;
 
   class?: any;
 }
 
-export interface PDashboardLayoutHeaderSlots {
-  'logo': (props?: object) => any;
-  'toggle-button': (props?: object) => any;
-  'default': (props?: object) => any;
+export interface PDashboardLayoutContentSlots {
+  overlay: (props?: object) => any;
+  default: (props?: object) => any;
 }
 </script>
 
@@ -44,54 +39,61 @@ import { computed } from 'vue';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
-  defineProps<PDashboardLayoutHeaderProps>(),
+  defineProps<PDashboardLayoutContentProps>(),
   {
   },
 );
 
-const slots = defineSlots<PDashboardLayoutHeaderSlots>();
+defineSlots<PDashboardLayoutContentSlots>();
+
+const { contentElement, overlayStyle } = useDashboardLayoutContentStyle();
 
 const rootStyle = computed<CSSProperties>(() => {
-  const { fullWidth, height, show } = props;
-  const right = !show || !fullWidth ? undefined : 0;
+  const {
+    contentCompact,
+    padding,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    paddingTop,
+  } = props;
+
+  const compactStyle: CSSProperties
+    = contentCompact === 'compact'
+      ? { margin: '0 auto', width: `${props.contentCompactWidth}px` }
+      : {};
 
   return {
-    height: `${height}px`,
-    marginTop: show ? 0 : `-${height}px`,
-    right,
+    ...compactStyle,
+    flex: 1,
+    padding: `${padding}px`,
+    paddingBottom: `${paddingBottom}px`,
+    paddingLeft: `${paddingLeft}px`,
+    paddingRight: `${paddingRight}px`,
+    paddingTop: `${paddingTop}px`,
   };
 });
 
-const logoStyle = computed<CSSProperties>(() => {
-  return {
-    minWidth: `${props.isMobile ? 40 : props.sidebarWidth}px`,
-  };
-});
-
-const appConfig = useAppConfig() as DashboardLayoutHeader['AppConfig'];
+const appConfig = useAppConfig() as DashboardLayoutContent['AppConfig'];
 
 const pohon = computed(() =>
   uv({
     extend: uv(theme),
-    ...(appConfig.pohon?.dashboardLayoutHeader || {}),
+    ...(appConfig.pohon?.dashboardLayoutContent || {}),
   }),
 );
 </script>
 
 <template>
-  <header
-    :class="pohon({ class: props.class })"
+  <main
+    ref="contentElement"
     :style="rootStyle"
+    :class="pohon({ class: props.class })"
   >
-    <div
-      v-if="slots.logo"
-      :style="logoStyle"
-    >
-      <slot name="logo" />
-    </div>
-
-    <slot name="toggle-button" />
+    <APrimitiveSlot :style="overlayStyle">
+      <slot name="overlay" />
+    </APrimitiveSlot>
 
     <slot />
-  </header>
+  </main>
 </template>

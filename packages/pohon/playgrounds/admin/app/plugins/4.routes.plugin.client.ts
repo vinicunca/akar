@@ -1,10 +1,7 @@
-import type { DashboardMenuRecord } from '#layers/dashboard-layout/lib';
 import type { ExtendedRouteRecordRaw } from '#layers/dashboard-menu/lib';
 import type { Router, RouteRecordRaw } from 'vue-router';
 import { defineNuxtPlugin } from '#imports';
-import { filterTree, mapTree, sortTree } from '#layers/admin/lib';
 import { partition } from '@vinicunca/perkakas';
-import { useAccessStore } from '../../layers/admin/lib/stores/stores.access';
 
 export default defineNuxtPlugin((nuxtApp) => {
   const router = nuxtApp.$router as Router;

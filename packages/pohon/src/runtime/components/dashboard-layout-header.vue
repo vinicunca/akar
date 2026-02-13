@@ -6,26 +6,12 @@ import theme from '#build/pohon/dashboard-layout-header';
 type DashboardLayoutHeader = ComponentConfig<typeof theme, AppConfig, 'dashboardLayoutHeader'>;
 
 export interface PDashboardLayoutHeaderProps {
-  /**
-   * Full width
-   */
   fullWidth: boolean;
-  /**
-   * Header height
-   */
   height: number;
-  /**
-   * Show header
-   */
   show: boolean;
-  /**
-   * Sidebar width
-   */
   sidebarWidth: number;
-  /**
-   * Mobile
-   */
   isMobile: boolean;
+  theme?: string;
 
   class?: any;
 }
@@ -70,17 +56,21 @@ const logoStyle = computed<CSSProperties>(() => {
 
 const appConfig = useAppConfig() as DashboardLayoutHeader['AppConfig'];
 
-const pohon = computed(() =>
-  uv({
+const pohon = computed(() => {
+  return uv({
     extend: uv(theme),
     ...(appConfig.pohon?.dashboardLayoutHeader || {}),
-  }),
+  });
+},
 );
 </script>
 
 <template>
   <header
-    :class="pohon({ class: props.class })"
+    :class="[
+      props.theme,
+      pohon({ class: props.class }),
+    ]"
     :style="rootStyle"
   >
     <div

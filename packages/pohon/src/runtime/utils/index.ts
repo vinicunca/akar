@@ -70,7 +70,7 @@ export function transformPohon(pohon: any, pohonProp?: any) {
   return Object.entries(pohon)
     .reduce(
       (acc, [key, value]) => {
-        acc[key] = isFunction(value) ? value({ class: pohonProp?.[key] }) : value;
+        acc[key] = typeof value === 'function' ? value({ class: pohonProp?.[key] }) : value;
         return acc;
       },
       pohonProp || {},
