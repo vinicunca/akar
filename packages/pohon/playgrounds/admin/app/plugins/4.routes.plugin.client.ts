@@ -1,7 +1,12 @@
-import type { ExtendedRouteRecordRaw } from '#layers/dashboard-menu/lib';
+import type { PBadgeProps, PDashboardMenuItem } from 'pohon-ui';
 import type { Router, RouteRecordRaw } from 'vue-router';
-import { defineNuxtPlugin } from '#imports';
 import { partition } from '@vinicunca/perkakas';
+
+type ExtendedRouteRecordRaw = RouteRecordRaw & {
+  parent?: string;
+  parents?: Array<string>;
+  path?: any;
+};
 
 export default defineNuxtPlugin((nuxtApp) => {
   const router = nuxtApp.$router as Router;
@@ -60,7 +65,7 @@ function hasAuthority({
 }
 
 function generateMenus(routes: Array<RouteRecordRaw>) {
-  let menus = mapTree<ExtendedRouteRecordRaw, DashboardMenuRecord>({
+  let menus = mapTree<ExtendedRouteRecordRaw, PDashboardMenuItem>({
     tree: routes,
     mapper: (route) => {
       const {
@@ -86,7 +91,7 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
 
       const resultChildren = hideChildrenInMenu
         ? []
-        : ((children as Array<DashboardMenuRecord>) ?? []);
+        : ((children as Array<PDashboardMenuItem>) ?? []);
 
       // Set the parent-child relationship of submenus
       if (resultChildren.length > 0) {
@@ -98,11 +103,13 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
 
       const resultPath = hideChildrenInMenu ? redirect || path : link || path;
 
+      // Explicitly type badge to avoid deep type instantiation issue.
+      const badgeProps: PBadgeProps | undefined = badge as any;
+
       return {
-        activeIcon,
-        badge,
         icon,
-        name,
+        activeIcon,
+        badge: badgeProps,
         title: name,
         order,
         parent: route.parent,

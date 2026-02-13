@@ -96,12 +96,21 @@ const rootProps = useForwardPropsEmits(
   emits,
 );
 const portalProps = usePortal(toRef(() => props.portal));
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as ATooltipContentProps);
+const contentProps = toRef(() => defu(
+  props.content,
+  { side: 'bottom', sideOffset: 8, collisionPadding: 8 },
+) as ATooltipContentProps);
 const arrowProps = toRef(() => props.arrow as ATooltipArrowProps);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.tooltip || {}) })({
-  side: contentProps.value.side,
-}));
+const pohon = computed(
+  () =>
+    uv({
+      extend: uv(theme),
+      ...(appConfig.pohon?.tooltip || {}),
+    })({
+      side: contentProps.value.side,
+    }),
+);
 </script>
 
 <template>

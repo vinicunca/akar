@@ -27,8 +27,27 @@ export interface PDashboardMenuItem {
    */
   trailingIcon?: PIconProps['name'];
   title: string;
+  /**
+   * Menu path, unique, can be used as a key
+   */
   path: string;
+  /**
+   * Parent path
+   */
+  parent?: string;
+  /**
+   * All parent paths
+   */
+  parents?: Array<string>;
+  /**
+   * Used for route -> menu sorting
+   */
+  order?: number;
   disabled?: boolean;
+  /**
+   * Whether to show the menu
+   */
+  show?: boolean;
   children?: Array<PDashboardMenuItem>;
   defaultOpen?: boolean;
   active?: boolean;

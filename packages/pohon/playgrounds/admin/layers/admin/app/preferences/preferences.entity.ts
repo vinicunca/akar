@@ -13,7 +13,7 @@ import type {
   PreferencesButtonPositionType,
   TabsStyleType,
   ThemeModeType,
-} from '../types/type.dashboard';
+} from '../types/type.admin-layout';
 
 export interface PreferencesApp {
   /** Access mode */

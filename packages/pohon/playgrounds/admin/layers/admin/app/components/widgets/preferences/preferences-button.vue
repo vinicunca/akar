@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { capitalize } from '@vinicunca/perkakas';
-import { AVisuallyHidden } from 'akar';
 import { preferencesManager } from '~~/layers/admin/app/preferences';
 import PreferencesPanel from './preferences-panel.vue';
 
@@ -9,6 +8,10 @@ defineOptions({
 });
 
 const preferences = preferencesManager.getPreferences();
+
+const {
+  diffPreference,
+} = useAdminPreferences();
 
 const attrs = computed(() => {
   const attributes: Record<string, any> = {};
@@ -44,9 +47,10 @@ const listeners = computed(() => {
 
 <template>
   <PSlideover
-    title="Preferences"
+    :title="$t('preferences.title')"
+    :description="$t('preferences.subtitle')"
     :close="{
-      color: 'primary',
+      color: 'error',
       variant: 'outline',
     }"
   >
@@ -57,10 +61,24 @@ const listeners = computed(() => {
       variant="ghost"
     />
 
-    <template #description>
-      <AVisuallyHidden>
-        Setup your preferences
-      </AVisuallyHidden>
+    <template #actions>
+      <PChip
+        color="success"
+        inset
+        class="end-16 top-4 akar:absolute"
+        :show="Boolean(diffPreference)"
+      >
+        <PButtonIcon
+          color="neutral"
+          :disabled="!Boolean(diffPreference)"
+          variant="ghost"
+          :tooltip="{
+            text: $t('preferences.resetTip'),
+          }"
+          icon="i-lucide:rotate-cw"
+          @click="preferencesManager.resetPreferences()"
+        />
+      </PChip>
     </template>
 
     <template #body>
