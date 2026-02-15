@@ -1,14 +1,14 @@
-import type { PDashboardMenuRecord } from '#layers/dashboard-layout/app/types/type.dashboard-layout';
+import type { PDashboardMenuItem } from 'pohon-ui';
 import { preferencesManager } from '#layers/admin/app/preferences';
 
 export function useAdminMixedMenu() {
   const { navigation, willOpenedByWindow } = useAdminNavigation();
   const accessStore = useAccessStore();
   const route = useRoute();
-  const splitSideMenus = ref<Array<PDashboardMenuRecord>>([]);
+  const splitSideMenus = ref<Array<PDashboardMenuItem>>([]);
   const rootMenuPath = ref<string>('');
   const mixedRootMenuPath = ref<string>('');
-  const mixExtraMenus = ref<Array<PDashboardMenuRecord>>([]);
+  const mixExtraMenus = ref<Array<PDashboardMenuItem>>([]);
   /** Record which submenu under the current top-level menu was last activated */
   const defaultSubMap = new Map<string, string>();
   const preferences = preferencesManager.getPreferences();
@@ -35,7 +35,8 @@ export function useAdminMixedMenu() {
     if (!needSplit.value) {
       return menus.value;
     }
-    return menus.value.map((item) => {
+
+    return menus.value.map((item: any) => {
       return {
         ...item,
         children: [],

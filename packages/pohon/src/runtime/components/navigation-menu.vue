@@ -448,6 +448,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
             :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
             data-pohon="navigation-menu-link-trailing-icon"
           />
+
           <PIcon
             v-else-if="item.trailingIcon"
             :name="item.trailingIcon"
@@ -483,7 +484,23 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
         custom
       >
         <component
-          :is="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])) ? ANavigationMenuTrigger : ((orientation === 'vertical' && item.children?.length && !collapsed && !(slotProps as any).href) ? AAccordionTrigger : ANavigationMenuLink)"
+          :is="(
+            orientation === 'horizontal'
+            && (
+              item.children?.length
+              || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>]
+            )
+          )
+            ? ANavigationMenuTrigger
+            : (
+              (orientation === 'vertical'
+                && item.children?.length
+                && !collapsed
+                && !(slotProps as any).href
+              )
+                ? AAccordionTrigger
+                : ANavigationMenuLink
+            )"
           as-child
           :active="active || item.active"
           :disabled="item.disabled"
@@ -614,6 +631,7 @@ function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0) {
               />
             </PLinkBase>
           </PTooltip>
+
           <PLinkBase
             v-else
             v-bind="slotProps"

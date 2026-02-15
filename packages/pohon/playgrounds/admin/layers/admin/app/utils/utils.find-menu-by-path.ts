@@ -1,9 +1,9 @@
-import type { DashboardMenuRecord } from '#layers/dashboard-menu/lib';
+import type { PDashboardMenuItem } from 'pohon-ui';
 
 export function findMenuByPath(
   { list, path }:
-  { list: Array<DashboardMenuRecord>; path?: string },
-): DashboardMenuRecord | null {
+  { list: Array<PDashboardMenuItem>; path?: string },
+): PDashboardMenuItem | null {
   for (const menu of list) {
     if (menu.path === path) {
       return menu;
@@ -21,7 +21,7 @@ export function findMenuByPath(
 
 export function findRootMenuByPath(
   { menus, path, level = 0 }:
-  { menus: Array<DashboardMenuRecord>; path?: string; level?: number },
+  { menus: Array<PDashboardMenuItem>; path?: string; level?: number },
 ) {
   const findMenu = findMenuByPath({ list: menus, path });
   const rootMenuPath = findMenu?.parents?.[level];

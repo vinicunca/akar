@@ -8,7 +8,6 @@ import type {
   LayoutHeaderModeType,
   LayoutType,
   LoginExpiredModeType,
-  NavigationStyleType,
   PageTransitionType,
   PreferencesButtonPositionType,
   TabsStyleType,
@@ -138,8 +137,6 @@ export interface PreferencesNavigation {
   isAccordion: boolean;
   /** Split navigation menu, only effective when layout=mixed-nav */
   isSplit: boolean;
-  /** Navigation menu style */
-  styleType: NavigationStyleType;
 }
 
 export interface PreferencesSidebar {

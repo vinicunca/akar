@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { PDashboardMenuItem } from 'pohon-ui';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { preferencesManager } from '#layers/admin/app/preferences';
 import { clone, isIncludedIn } from '@vinicunca/perkakas';
 import { P_DASHBOARD_LAYOUT } from 'pohon-ui/utils/dashboard';
-import { useRoute } from 'vue-router';
 import { LayoutContent, LayoutContentSpinner } from './content';
 import {
   LayoutExtraMenu,
@@ -60,10 +60,6 @@ const logoClass = computed(() => {
   return classes.join(' ');
 });
 
-const isMenuRounded = computed(() => {
-  return preferences.navigation.styleType === 'rounded';
-});
-
 const logoCollapsed = computed(() => {
   if (isMobile.value && sidebarCollapsed.value) {
     return true;
@@ -115,7 +111,7 @@ const { t } = useI18n();
 function wrapperMenus(
   { menus, deep = true }:
   {
-    menus: Array<PDashboardMenuRecord>;
+    menus: Array<PDashboardMenuItem>;
     deep?: boolean;
   },
 ) {
@@ -317,7 +313,6 @@ const sidebarExtraCollapsed = computed({
           <!-- <LayoutMenu
             :default-active="headerActive"
             :menus="wrapperMenus({ menus: headerMenus })"
-            :rounded="isMenuRounded"
             :theme="headerTheme"
             class="w-full"
             mode="horizontal"
@@ -354,7 +349,6 @@ const sidebarExtraCollapsed = computed({
         :collapse-show-title="preferences.sidebar.collapsedShowTitle"
         :default-active="sidebarActive"
         :menus="wrapperMenus({ menus: sidebarMenus })"
-        :rounded="isMenuRounded"
         :theme="sidebarTheme"
         mode="vertical"
         @open="handleMenuOpen"
@@ -363,15 +357,14 @@ const sidebarExtraCollapsed = computed({
     </template>
 
     <template #mixed-menu>
-      <!-- <LayoutMixedMenu
+      <LayoutMixedMenu
         :active-path="extraActiveMenu"
         :menus="wrapperMenus({ menus: mixHeaderMenus, deep: false })"
-        :rounded="isMenuRounded"
         :theme="sidebarTheme"
         @default-select="handleDefaultSelect"
         @enter="handleMenuMouseEnter"
         @select="handleMixedMenuSelect"
-      /> -->
+      />
     </template>
 
     <!-- Side extra area -->
@@ -380,7 +373,6 @@ const sidebarExtraCollapsed = computed({
         :accordion="preferences.navigation.isAccordion"
         :collapse="preferences.sidebar.extraCollapsed"
         :menus="wrapperMenus({ menus: extraMenus })"
-        :rounded="isMenuRounded"
         :theme="sidebarTheme"
       />
     </template>

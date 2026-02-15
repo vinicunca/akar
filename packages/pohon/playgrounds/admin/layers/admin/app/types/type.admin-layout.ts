@@ -64,13 +64,6 @@ export type BreadcrumbStyleType = 'background' | 'normal';
 export type AccessModeType = 'backend' | 'frontend' | 'mixed';
 
 /**
- * Navigation style
- * plain: Plain
- * rounded: Rounded
- */
-export type NavigationStyleType = 'plain' | 'rounded';
-
-/**
  * Tabs style
  * brisk: Brisk
  * card: Card

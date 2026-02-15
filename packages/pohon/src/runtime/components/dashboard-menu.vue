@@ -326,11 +326,19 @@ const defaultValue = computed(() => {
     orientation="vertical"
   >
     <AAccordionRoot
+      v-bind="props.collapsed
+        ? {}
+        : {
+          ...rootProps,
+          defaultValue,
+        }"
       as="ul"
       :disabled="disabled"
-      v-bind="rootProps"
-      :default-value="defaultValue"
-      :class="level > 0 ? pohon.listWithChildren({ class: props.pohon?.listWithChildren }) : pohon.list({ class: props.pohon?.list })"
+      :class="
+        level > 0
+          ? pohon.listWithChildren({ class: props.pohon?.listWithChildren })
+          : pohon.list({ class: props.pohon?.list })
+      "
       data-pohon="dashboard-menu-list-with-children"
     >
       <template
