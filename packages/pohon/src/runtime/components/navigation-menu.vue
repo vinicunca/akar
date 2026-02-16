@@ -839,6 +839,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
         data-pohon="navigation-menu-accordion-content"
       >
         <AAccordionRoot
+          :key="props.type"
           v-bind="({
             ...accordionProps,
             defaultValue: getAccordionDefaultValue(item.children, level + 1),
@@ -878,7 +879,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
 
     <template
       v-for="(list, listIndex) in lists"
-      :key="`list-${listIndex}`"
+      :key="`list-${listIndex}-${props.type}`"
     >
       <component
         v-bind="orientation === 'vertical' && !collapsed ? {
@@ -887,6 +888,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
           defaultValue: props.defaultValue ?? getAccordionDefaultValue(list),
         } : {}"
         :is="orientation === 'vertical' ? AAccordionRoot : ANavigationMenuList"
+
         as="ul"
         :class="pohon.list({ class: props.pohon?.list })"
         data-pohon="navigation-menu-list"

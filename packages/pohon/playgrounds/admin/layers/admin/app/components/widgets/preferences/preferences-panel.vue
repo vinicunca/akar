@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import type { ContentCompactType, LayoutType, PreferencesButtonPositionType } from '~~/layers/admin/app/types/type.dashboard';
+import type { ContentCompactType, LayoutType, PreferencesButtonPositionType } from '~~/layers/admin/app/types/type.admin-layout';
 import {
   PreferencesBlocksLayoutsContent,
   PreferencesBlocksLayoutsCore,
+  PreferencesBlocksLayoutsNavigation,
   PreferencesBlocksLayoutsSidebar,
 } from './blocks';
 import PreferenceBlock from './preference-block.vue';
@@ -31,6 +32,10 @@ const sidebarExpandChildrenOnHover = defineModel<boolean>('sidebarExpandChildren
 const sidebarWidth = defineModel<number>('sidebarWidth');
 const sidebarShowCollapsedButton = defineModel<boolean>('sidebarShowCollapsedButton');
 const sidebarShowFixedButton = defineModel<boolean>('sidebarShowFixedButton');
+
+// Navigation
+const navigationIsSplit = defineModel<boolean>('navigationIsSplit');
+const navigationIsAccordion = defineModel<boolean>('navigationIsAccordion');
 
 const {
   diffPreference,
@@ -70,6 +75,15 @@ const {
         :current-layout="appLayout"
         :disabled="!isSideMode"
       />
+
+      <PreferenceBlock :title="$t('preferences.navigationMenu.title')">
+        <PreferencesBlocksLayoutsNavigation
+          v-model:navigation-is-accordion="navigationIsAccordion"
+          v-model:navigation-is-split="navigationIsSplit"
+          :disabled="isFullContent"
+          :disabled-navigation-split="!isMixedNav"
+        />
+      </PreferenceBlock>
     </PreferenceBlock>
   </div>
 </template>

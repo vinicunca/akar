@@ -64,9 +64,8 @@ export const defaultPreferences: PreferencesCore = {
     source: 'https://raw.githubusercontent.com/vinicunca/static-resources/refs/heads/main/logo-3d.webp',
   },
   navigation: {
-    isAccordion: false,
+    isAccordion: true,
     isSplit: true,
-    styleType: 'rounded',
   },
   shortcutKeys: {
     enable: true,

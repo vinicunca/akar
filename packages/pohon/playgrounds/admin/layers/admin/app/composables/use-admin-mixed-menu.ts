@@ -52,6 +52,7 @@ export function useAdminMixedMenu() {
     return isHeaderMixedNav.value ? sidebarMenus.value : headerMenus.value;
   });
 
+  // FIXME: Potential to be removed
   const sidebarActive = computed(() => {
     return (route?.meta?.activePath as string) ?? route.path;
   });

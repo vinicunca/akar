@@ -1,21 +1,14 @@
 <script lang="ts" setup>
-interface Props {
-  menus?: Array<{}>;
-}
+import type { PNavigationMenuProps } from 'pohon-ui';
 
-const props = withDefaults(
-  defineProps<Props>(),
-  {
-    accordion: true,
-    menus: () => [],
-  },
-);
+const props = defineProps<PNavigationMenuProps>();
 </script>
 
 <template>
   <PNavigationMenu
     orientation="vertical"
-    :items="props.menus"
+    :items="props.items"
+    :type="props.type"
     expand-based-on-route
   />
 </template>

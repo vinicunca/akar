@@ -84,7 +84,6 @@ const {
   handleMenuOpen,
   headerActive,
   headerMenus,
-  sidebarActive,
   sidebarMenus,
   mixHeaderMenus,
   sidebarVisible,
@@ -344,15 +343,8 @@ const sidebarExtraCollapsed = computed({
     <!-- Side menu area -->
     <template #menu>
       <LayoutMenu
-        :accordion="preferences.navigation.isAccordion"
-        :collapsed="preferences.sidebar.collapsed"
-        :collapse-show-title="preferences.sidebar.collapsedShowTitle"
-        :default-active="sidebarActive"
-        :menus="wrapperMenus({ menus: sidebarMenus })"
-        :theme="sidebarTheme"
-        mode="vertical"
-        @open="handleMenuOpen"
-        @select="handleMenuSelect"
+        :type="preferences.navigation.isAccordion ? 'multiple' : 'single'"
+        :items="wrapperMenus({ menus: sidebarMenus })"
       />
     </template>
 
