@@ -88,6 +88,7 @@ export const dashboardMenuTheme = {
         linkLeadingIcon: 'group-hover:color-text group-data-[state=open]:color-text transition-colors-280',
       },
     },
+
     ...BRANDS.map((color) => ({
       color,
       variant: 'pill',
@@ -97,6 +98,7 @@ export const dashboardMenuTheme = {
         linkLeadingIcon: `color-${color} group-data-[state=open]:color-${color}`,
       },
     })),
+
     ...BRANDS.map((color) => ({
       color,
       variant: 'pill',

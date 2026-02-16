@@ -9,7 +9,7 @@ export const navigationMenuTheme = {
     list: 'isolate min-w-0',
     label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 color-text-highlighted px-2.5 py-1.5',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:(absolute content-empty -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'group relative w-full flex items-center gap-1.5 font-500 text-sm before:(absolute content-empty -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
@@ -63,7 +63,7 @@ export const navigationMenuTheme = {
       },
       vertical: {
         root: 'flex-col',
-        link: 'flex-row px-2.5 py-1.5 before:(inset-y-px inset-x-0)',
+        link: 'flex-row px-2.5 py-1.5 h-38px before:(inset-y-px inset-x-0)',
         childLabel: 'px-1.5 py-0.5',
         childLink: 'p-1.5 gap-1.5 before:(inset-y-px inset-x-0)',
       },
@@ -79,6 +79,7 @@ export const navigationMenuTheme = {
     },
     active: {
       true: {
+        link: 'font-600',
         childLink: 'before:bg-background-elevated color-text-highlighted',
         childLinkIcon: 'color-text',
       },
@@ -92,6 +93,11 @@ export const navigationMenuTheme = {
     disabled: {
       true: {
         link: 'cursor-not-allowed opacity-75',
+      },
+    },
+    childActive: {
+      true: {
+        link: 'font-600',
       },
     },
   },
@@ -192,6 +198,16 @@ export const navigationMenuTheme = {
       class: {
         link: `color-${color}`,
         linkLeadingIcon: `color-${color} group-data-[state=open]:color-${color}`,
+      },
+    })),
+    ...BRANDS.map((color) => ({
+      color,
+      variant: 'pill',
+      childActive: true,
+      active: false,
+      class: {
+        link: `akar:color-${color}`,
+        linkLeadingIcon: `akar:color-${color} akar:group-data-[state=open]:color-${color}`,
       },
     })),
     {

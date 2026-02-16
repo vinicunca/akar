@@ -103,18 +103,17 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
 
       const resultPath = hideChildrenInMenu ? redirect || path : link || path;
 
-      // Explicitly type badge to avoid deep type instantiation issue.
-      const badgeProps: PBadgeProps | undefined = badge as any;
-
       return {
         icon,
         activeIcon,
-        badge: badgeProps,
-        title: name,
+        // Explicitly type badge to avoid deep type instantiation issue.
+        badge: badge as any,
+        label: name,
         order,
         parent: route.parent,
         parents: route.parents,
-        path: resultPath,
+        // If the menu has children, it should not have a link
+        to: resultChildren.length ? undefined : resultPath,
         show: !meta.hideInMenu,
         children: resultChildren,
       };

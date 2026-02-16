@@ -42,7 +42,7 @@ const anu = ref();
               class="size-5"
             />
 
-            <span class="text-12px text-center w-full truncate">{{ menu.title }}</span>
+            <span class="text-12px text-center w-full truncate">{{ menu.label }}</span>
           </PLinkBase>
         </PLink>
       </ANavigationMenuItem>

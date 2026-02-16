@@ -3,20 +3,23 @@ import type { NuxtOptions } from '@nuxt/schema';
 export default (options: Required<NuxtOptions['pohon']>) => ({
   slots: {
     root: '',
-    content: '',
     list: '',
+    label: '',
     item: '',
-    listWithChildren: '',
-    itemWithChildren: '',
-    trigger: '',
     link: '',
     linkLeadingIcon: '',
+    linkLeadingAvatar: '',
+    linkLeadingAvatarSize: '',
     linkTrailing: '',
     linkTrailingBadge: '',
     linkTrailingBadgeSize: '',
     linkTrailingIcon: '',
     linkTitle: '',
     linkTitleExternalIcon: '',
+    content: '',
+    listWithChildren: '',
+    itemWithChildren: '',
+    trigger: '',
   },
   variants: {
     color: {

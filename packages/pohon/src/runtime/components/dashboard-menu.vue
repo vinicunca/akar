@@ -26,7 +26,7 @@ export interface PDashboardMenuItem {
    * @IconifyIcon
    */
   trailingIcon?: PIconProps['name'];
-  title: string;
+  label: string;
   /**
    * Menu path, unique, can be used as a key
    */
@@ -195,7 +195,7 @@ function isRouteInTree(link: PDashboardMenuItem, routePath: string): boolean {
   if (link.children?.length) {
     return link.children.some((child) => isRouteInTree(child, routePath));
   }
-  return routePath === link.path;
+  return routePath === link.to;
 }
 
 const defaultValue = computed(() => {
@@ -250,7 +250,7 @@ const defaultValue = computed(() => {
       </slot>
 
       <span
-        v-if="(link.title || !!slots['link-title']) && !props.collapsed"
+        v-if="(link.label || !!slots['link-title']) && !props.collapsed"
         :class="pohon.linkTitle({
           class: [props.pohon?.linkTitle, link.pohon?.linkTitle],
           active,
@@ -263,7 +263,7 @@ const defaultValue = computed(() => {
           :active="active"
           :pohon="pohon"
         >
-          {{ link.title }}
+          {{ link.label }}
         </slot>
 
         <PIcon
