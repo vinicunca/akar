@@ -352,11 +352,8 @@ const sidebarExtraCollapsed = computed({
     <template #mixed-menu>
       <LayoutMixedMenu
         :active-path="extraActiveMenu"
-        :menus="wrapperMenus({ menus: mixHeaderMenus, deep: false })"
+        :items="wrapperMenus({ menus: mixHeaderMenus, deep: false })"
         :theme="sidebarTheme"
-        @default-select="handleDefaultSelect"
-        @enter="handleMenuMouseEnter"
-        @select="handleMixedMenuSelect"
       />
     </template>
 

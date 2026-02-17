@@ -1,4 +1,4 @@
-import type { PDashboardMenuItem } from 'pohon-ui';
+import type { PNavigationMenuItem } from 'pohon-ui';
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
 interface StateAccess {
@@ -6,7 +6,7 @@ interface StateAccess {
   /**
    * Accessible menu list
    */
-  accessMenus: Array<PDashboardMenuItem>;
+  accessMenus: Array<PNavigationMenuItem>;
   /**
    * Is the screen locked?
    */
@@ -26,9 +26,8 @@ export const useAccessStore = defineStore(
       setAccessRouteNames(names: Array<string>) {
         this.accessRouteNames = names;
       },
-      setAccessMenus(menus: Array<PDashboardMenuItem>) {
-        // Explicitly type menus to avoid deep type instantiation issue.
-        this.accessMenus = menus as any;
+      setAccessMenus(menus: Array<PNavigationMenuItem>) {
+        this.accessMenus = menus;
       },
     },
   },

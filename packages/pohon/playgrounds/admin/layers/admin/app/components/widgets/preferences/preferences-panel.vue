@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import type { ContentCompactType, LayoutType, PreferencesButtonPositionType } from '~~/layers/admin/app/types/type.admin-layout';
+import type { PDashboardLayoutType } from 'pohon-ui/utils/dashboard';
+import type { ContentCompactType, PreferencesButtonPositionType } from '~~/layers/admin/app/types/type.admin-layout';
 import {
   PreferencesBlocksLayoutsContent,
   PreferencesBlocksLayoutsCore,
@@ -11,7 +12,7 @@ import PreferenceBlock from './preference-block.vue';
 const { t } = useI18n();
 
 // App
-const appLayout = defineModel<LayoutType>('appLayout');
+const appLayout = defineModel<PDashboardLayoutType>('appLayout');
 const appContentCompact = defineModel<ContentCompactType>('appContentCompact');
 // const appLocale = defineModel<SupportedLanguagesType>('appLocale');
 const appDynamicTitle = defineModel<boolean>('appDynamicTitle');

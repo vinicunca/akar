@@ -1,6 +1,6 @@
 <script lang="ts" setup>
+import type { PDashboardLayoutType } from 'pohon-ui/utils/dashboard';
 import type { Component } from 'vue';
-import type { LayoutType } from '~~/layers/admin/app/types/type.dashboard';
 import { P_DASHBOARD_LAYOUT } from 'pohon-ui/utils/dashboard';
 import {
   FullContent,
@@ -12,18 +12,18 @@ import {
   SidebarNav,
 } from '../../icons';
 
-const modelValue = defineModel<LayoutType>({
+const modelValue = defineModel<PDashboardLayoutType>({
   default: P_DASHBOARD_LAYOUT.SIDEBAR_NAV,
 });
 
-const components: Record<LayoutType, Component> = {
-  'full-content': FullContent,
-  'header-nav': HeaderNav,
-  'mixed-nav': MixedNav,
-  'sidebar-mixed-nav': SidebarMixedNav,
-  'sidebar-nav': SidebarNav,
-  'header-mixed-nav': HeaderMixedNav,
-  'header-sidebar-nav': HeaderSidebarNav,
+const components: Record<PDashboardLayoutType, Component> = {
+  [P_DASHBOARD_LAYOUT.FULL_CONTENT]: FullContent,
+  [P_DASHBOARD_LAYOUT.HEADER_NAV]: HeaderNav,
+  [P_DASHBOARD_LAYOUT.MIXED_NAV]: MixedNav,
+  [P_DASHBOARD_LAYOUT.SIDEBAR_MIXED_NAV]: SidebarMixedNav,
+  [P_DASHBOARD_LAYOUT.SIDEBAR_NAV]: SidebarNav,
+  [P_DASHBOARD_LAYOUT.HEADER_MIXED_NAV]: HeaderMixedNav,
+  [P_DASHBOARD_LAYOUT.HEADER_SIDEBAR_NAV]: HeaderSidebarNav,
 };
 
 const { t } = useI18n();
@@ -31,42 +31,42 @@ const { t } = useI18n();
 const PRESET = computed<Array<{
   name: string;
   tip: string;
-  type: LayoutType;
+  type: PDashboardLayoutType;
 }>>(() => [
   {
     name: t('preferences.vertical'),
     tip: t('preferences.verticalTip'),
-    type: 'sidebar-nav',
+    type: P_DASHBOARD_LAYOUT.SIDEBAR_NAV,
   },
   {
     name: t('preferences.twoColumn'),
     tip: t('preferences.twoColumnTip'),
-    type: 'sidebar-mixed-nav',
+    type: P_DASHBOARD_LAYOUT.SIDEBAR_MIXED_NAV,
   },
   {
     name: t('preferences.horizontal'),
     tip: t('preferences.horizontalTip'),
-    type: 'header-nav',
+    type: P_DASHBOARD_LAYOUT.HEADER_NAV,
   },
   {
     name: t('preferences.headerSidebarNav'),
     tip: t('preferences.headerSidebarNavTip'),
-    type: 'header-sidebar-nav',
+    type: P_DASHBOARD_LAYOUT.HEADER_SIDEBAR_NAV,
   },
   {
     name: t('preferences.mixedMenu'),
     tip: t('preferences.mixedMenuTip'),
-    type: 'mixed-nav',
+    type: P_DASHBOARD_LAYOUT.MIXED_NAV,
   },
   {
     name: t('preferences.headerTwoColumn'),
     tip: t('preferences.headerTwoColumnTip'),
-    type: 'header-mixed-nav',
+    type: P_DASHBOARD_LAYOUT.HEADER_MIXED_NAV,
   },
   {
     name: t('preferences.fullContent'),
     tip: t('preferences.fullContentTip'),
-    type: 'full-content',
+    type: P_DASHBOARD_LAYOUT.FULL_CONTENT,
   },
 ]);
 

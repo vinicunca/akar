@@ -1,4 +1,5 @@
 import type { DeepPartial } from '@vinicunca/perkakas';
+import type { PDashboardLayoutType } from 'pohon-ui/utils/dashboard';
 import type {
   AccessModeType,
   BreadcrumbStyleType,
@@ -6,7 +7,6 @@ import type {
   ContentCompactType,
   LayoutHeaderMenuAlignType,
   LayoutHeaderModeType,
-  LayoutType,
   LoginExpiredModeType,
   PageTransitionType,
   PreferencesButtonPositionType,
@@ -54,7 +54,7 @@ export interface PreferencesApp {
   /** Is mobile */
   isMobile: boolean;
   /** Layout type */
-  layout: LayoutType;
+  layout: PDashboardLayoutType;
   /** Supported languages */
   locale: string;
   /** Login expired mode */

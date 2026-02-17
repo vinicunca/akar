@@ -1,4 +1,4 @@
-import type { PBadgeProps, PDashboardMenuItem } from 'pohon-ui';
+import type { PNavigationMenuItem } from 'pohon-ui';
 import type { Router, RouteRecordRaw } from 'vue-router';
 import { partition } from '@vinicunca/perkakas';
 
@@ -65,7 +65,7 @@ function hasAuthority({
 }
 
 function generateMenus(routes: Array<RouteRecordRaw>) {
-  let menus = mapTree<ExtendedRouteRecordRaw, PDashboardMenuItem>({
+  let menus = mapTree<ExtendedRouteRecordRaw, PNavigationMenuItem>({
     tree: routes,
     mapper: (route) => {
       const {
@@ -91,7 +91,7 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
 
       const resultChildren = hideChildrenInMenu
         ? []
-        : ((children as Array<PDashboardMenuItem>) ?? []);
+        : ((children as Array<PNavigationMenuItem>) ?? []);
 
       // Set the parent-child relationship of submenus
       if (resultChildren.length > 0) {
@@ -112,8 +112,7 @@ function generateMenus(routes: Array<RouteRecordRaw>) {
         order,
         parent: route.parent,
         parents: route.parents,
-        // If the menu has children, it should not have a link
-        to: resultChildren.length ? undefined : resultPath,
+        to: resultPath,
         show: !meta.hideInMenu,
         children: resultChildren,
       };

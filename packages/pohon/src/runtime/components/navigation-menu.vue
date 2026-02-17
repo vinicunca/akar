@@ -496,7 +496,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
           <PBadge
             v-if="item.badge || item.badge === 0"
             color="neutral"
-            variant="outline"
+            variant="solid"
             :size="((item.pohon?.linkTrailingBadgeSize || props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(item.badge) || isNumber(item.badge)) ? { label: item.badge } : item.badge"
             :class="pohon.linkTrailingBadge({ class: [props.pohon?.linkTrailingBadge, item.pohon?.linkTrailingBadge] })"

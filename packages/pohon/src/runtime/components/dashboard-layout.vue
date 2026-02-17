@@ -234,7 +234,7 @@ const props = withDefaults(
     showHeaderToggleSidebarButton: true,
     showHeader: true,
     isMobile: false,
-    layout: 'sidebar-nav',
+    layout: P_DASHBOARD_LAYOUT.SIDEBAR_NAV,
     sidebarShowCollapsedButton: true,
     sidebarCollapsedShowTitle: false,
     sidebarExtraCollapsedWidth: 60,

@@ -45,7 +45,29 @@ export function useAdminMixedMenu() {
   });
 
   const sidebarMenus = computed(() => {
-    return needSplit.value ? splitSideMenus.value : menus.value;
+    if (needSplit.value) {
+      return splitSideMenus.value;
+    }
+
+    /**
+     * In SIDEBAR_NAV mode, we need to remove the `to` property from an item that
+     * has children so it can expand using the accordion.
+     */
+    return mapTree({
+      tree: menus.value,
+      mapper: (menu) => {
+        if (menu.children?.length) {
+          return {
+            ...menu,
+            to: undefined,
+          };
+        }
+
+        return {
+          ...menu,
+        };
+      },
+    });
   });
 
   const mixHeaderMenus = computed(() => {

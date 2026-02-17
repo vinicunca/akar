@@ -4,13 +4,15 @@ import { P_DASHBOARD_LAYOUT } from '../utils/dashboard';
 
 export function useDashboardLayout(props: PDashboardLayoutProps) {
   const currentLayout = computed(() =>
-    props.isMobile ? 'sidebar-nav' : (props.layout as PDashboardLayoutType),
+    props.isMobile
+      ? P_DASHBOARD_LAYOUT.SIDEBAR_NAV
+      : (props.layout as PDashboardLayoutType),
   );
 
   /**
    * Whether to display content in full screen, without sidebar, footer, header, and tab areas
    */
-  const isFullContent = computed(() => currentLayout.value === 'full-content');
+  const isFullContent = computed(() => currentLayout.value === P_DASHBOARD_LAYOUT.FULL_CONTENT);
 
   /**
    * Whether it is sidebar mixed mode
@@ -22,22 +24,22 @@ export function useDashboardLayout(props: PDashboardLayoutProps) {
   /**
    * Whether it is header navigation mode
    */
-  const isHeaderNav = computed(() => currentLayout.value === 'header-nav');
+  const isHeaderNav = computed(() => currentLayout.value === P_DASHBOARD_LAYOUT.HEADER_NAV);
 
   /**
    * Whether it is mixed navigation mode
    */
   const isMixedNav = computed(
     () =>
-      currentLayout.value === 'mixed-nav'
-      || currentLayout.value === 'header-sidebar-nav',
+      currentLayout.value === P_DASHBOARD_LAYOUT.MIXED_NAV
+      || currentLayout.value === P_DASHBOARD_LAYOUT.HEADER_SIDEBAR_NAV,
   );
 
   /**
    * Whether it is header mixed mode
    */
   const isHeaderMixedNav = computed(
-    () => currentLayout.value === 'header-mixed-nav',
+    () => currentLayout.value === P_DASHBOARD_LAYOUT.HEADER_MIXED_NAV,
   );
 
   return {

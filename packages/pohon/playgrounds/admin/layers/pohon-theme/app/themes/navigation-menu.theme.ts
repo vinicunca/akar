@@ -14,7 +14,7 @@ export const navigationMenuTheme = {
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
     linkTrailing: 'group ms-auto inline-flex gap-1.5 items-center',
-    linkTrailingBadge: 'shrink-0',
+    linkTrailingBadge: 'shrink-0 akar:rounded-full',
     linkTrailingBadgeSize: 'sm',
     linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform-280',
     linkLabel: 'truncate',
@@ -225,8 +225,8 @@ export const navigationMenuTheme = {
       disabled: false,
       active: false,
       class: {
-        link: 'hover:color-text-highlighted hover:before:bg-background-elevated transition-colors-280 before:transition-colors-280',
-        linkLeadingIcon: 'group-hover:color-text transition-colors-280',
+        link: 'hover:color-text-highlighted hover:before:bg-background-elevated transition-colors-280 before:transition-colors-280 data-[state=open]:color-text-highlighted',
+        linkLeadingIcon: 'group-hover:color-text transition-colors-280 group-data-[state=open]:color-text-highlighted',
       },
     },
 

@@ -25,12 +25,12 @@ export const dropdownMenuTheme = {
   variants: {
     active: {
       true: {
-        item: 'color-text-highlighted before:bg-background-elevated',
-        itemLeadingIcon: 'color-text',
+        item: 'color-text-highlighted before:bg-primary/40 font-600',
+        itemLeadingIcon: 'color-text-highlighted',
       },
       false: {
-        item: 'color-text data-[highlighted]:color-text-highlighted data-[state=open]:color-text-highlighted data-[highlighted]:before:bg-background-elevated/50 data-[state=open]:before:bg-background-elevated/50 transition-colors-280 before:transition-colors-280',
-        itemLeadingIcon: 'color-text-dimmed group-data-[highlighted]:color-text group-data-[state=open]:color-text transition-colors-280',
+        item: 'color-text data-[highlighted]:color-text-highlighted data-[state=open]:color-text-highlighted data-[highlighted]:before:bg-primary/10 data-[state=open]:before:bg-background-elevated/50 transition-colors-280 before:transition-colors-280',
+        itemLeadingIcon: 'color-text group-data-[highlighted]:color-text group-data-[state=open]:color-text transition-colors-280',
       },
     },
     loading: {
