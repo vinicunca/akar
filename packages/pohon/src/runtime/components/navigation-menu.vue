@@ -7,7 +7,7 @@ import type {
   ANavigationMenuContentProps,
   ANavigationMenuRootProps,
 } from 'akar';
-import type { PAvatarProps, PBadgeProps, PIconProps, PLinkProps, PPopoverProps, PTooltipProps } from '../types';
+import type { PAvatarProps, PBadgeProps, PDropdownMenuProps, PIconProps, PLinkProps, PTooltipProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/navigation-menu';
@@ -42,10 +42,11 @@ export interface PNavigationMenuItem extends Omit<PLinkProps, 'type' | 'raw' | '
    */
   tooltip?: boolean | PTooltipProps;
   /**
-   * Display a popover on the item when the menu is collapsed with the children list.
-   * This has priority over the global `popover` prop.
+   * Display a dropdown on the items when the menu is collapsed with the children list.
+   * `{ content: { side: 'right', align: 'start', sideOffset: 12 } }`{lang="ts-type"}
+   * @defaultValue true
    */
-  popover?: boolean | PPopoverProps;
+  dropdown?: boolean | PDropdownMenuProps;
   /**
    * @IconifyIcon
    */
@@ -160,11 +161,11 @@ export interface PNavigationMenuProps<
    */
   tooltip?: boolean | PTooltipProps;
   /**
-   * Display a popover on the items when the menu is collapsed with the children list.
-   * `{ mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }`{lang="ts-type"}
-   * @defaultValue false
+   * Display a dropdown on the items when the menu is collapsed with the children list.
+   * `{ content: { side: 'right', align: 'start', sideOffset: 12 } }`{lang="ts-type"}
+   * @defaultValue true
    */
-  popover?: boolean | PPopoverProps;
+  dropdown?: boolean | PDropdownMenuProps;
   /** Display a line next to the active item. */
   highlight?: boolean;
   /**
@@ -252,10 +253,10 @@ import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PBadge from './badge.vue';
+import PDropdownMenu from './dropdown-menu.vue';
 import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
-import PPopover from './popover.vue';
 import PTooltip from './tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
@@ -271,6 +272,8 @@ const props = withDefaults(
     collapsible: true,
     unmountOnHide: true,
     labelKey: 'label',
+    tooltip: true,
+    dropdown: true,
   },
 );
 const emits = defineEmits<PNavigationMenuEmits<K, O>>();
@@ -303,12 +306,13 @@ const tooltipProps = toRef(() => defu(
     : props.tooltip,
   { delayDuration: 0, content: { side: 'right' } },
 ) as PTooltipProps);
-const popoverProps = toRef(() => defu(
-  isBoolean(props.popover)
+
+const dropdownProps = toRef(() => defu(
+  isBoolean(props.dropdown)
     ? {}
-    : props.popover,
-  { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } },
-) as PPopoverProps);
+    : props.dropdown,
+  { content: { side: 'right', align: 'start', sideOffset: 12 } },
+) as PDropdownMenuProps);
 
 const [
   DefineLinkTemplate,
@@ -587,15 +591,18 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
           :disabled="item.disabled"
           @select="item.onSelect"
         >
-          <PPopover
+          <PDropdownMenu
             v-if="
               props.orientation === 'vertical'
                 && props.collapsed
                 && item.children?.length
-                && (!!props.popover || !!item.popover)
+                && (!!props.dropdown || !!item.dropdown)
             "
-            v-bind="{ ...popoverProps, ...(isBoolean(item.popover) ? {} : item.popover || {}) }"
-            :pohon="{ content: pohon.content({ class: [props.pohon?.content, item.pohon?.content] }) }"
+            v-bind="{
+              ...dropdownProps,
+              ...(isBoolean(item.dropdown) ? {} : item.dropdown || {}),
+            }"
+            :items="item.children"
           >
             <PLinkBase
               v-bind="slotProps"
@@ -603,6 +610,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
                 class: [props.pohon?.link, item.pohon?.link, item.class],
                 active: active || item.active,
                 disabled: !!item.disabled,
+                childActive: isRouteInTree(item, route.path),
                 level: level > 0,
               })"
               data-pohon="navigation-menu-link"
@@ -611,89 +619,10 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
                 :item="item"
                 :active="active || item.active"
                 :index="index"
+                :child-active="isRouteInTree(item, route.path)"
               />
             </PLinkBase>
-
-            <template #content="{ close }">
-              <slot
-                :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>)"
-                :item="item"
-                :active="active || item.active"
-                :index="index"
-                :pohon="pohon"
-                :close="close"
-              >
-                <ul
-                  :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })"
-                  data-pohon="navigation-menu-child-list"
-                >
-                  <li
-                    :class="pohon.childLabel({ class: [props.pohon?.childLabel, item.pohon?.childLabel] })"
-                    data-pohon="navigation-menu-child-label"
-                  >
-                    {{ getProp({ object: item, path: props.labelKey as string }) }}
-                  </li>
-                  <li
-                    v-for="(childItem, childIndex) in item.children"
-                    :key="childIndex"
-                    :class="pohon.childItem({ class: [props.pohon?.childItem, item.pohon?.childItem] })"
-                    data-pohon="navigation-menu-child-item"
-                  >
-                    <PLink
-                      v-slot="{ active: childActive, ...childSlotProps }"
-                      v-bind="pickLinkProps(childItem)"
-                      custom
-                    >
-                      <ANavigationMenuLink
-                        as-child
-                        :active="childActive"
-                        @select="childItem.onSelect"
-                      >
-                        <PLinkBase
-                          v-bind="childSlotProps"
-                          :class="pohon.childLink({
-                            class: [props.pohon?.childLink, item.pohon?.childLink, childItem.class],
-                            active: childActive,
-                          })"
-                          data-pohon="navigation-menu-child-link"
-                        >
-                          <PIcon
-                            v-if="childItem.icon"
-                            :name="childItem.icon"
-                            :class="pohon.childLinkIcon({
-                              class: [props.pohon?.childLinkIcon, item.pohon?.childLinkIcon],
-                              active: childActive,
-                            })"
-                            data-pohon="navigation-menu-child-link-icon"
-                          />
-
-                          <span
-                            :class="pohon.childLinkLabel({
-                              class: [props.pohon?.childLinkLabel, item.pohon?.childLinkLabel],
-                              active: childActive,
-                            })"
-                            data-pohon="navigation-menu-child-link-label"
-                          >
-                            {{ getProp({ object: childItem, path: props.labelKey as string }) }}
-
-                            <PIcon
-                              v-if="childItem.target === '_blank' && externalIcon !== false"
-                              :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
-                              :class="pohon.childLinkLabelExternalIcon({
-                                class: [props.pohon?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon],
-                                active: childActive,
-                              })"
-                              data-pohon="navigation-menu-child-link-label-external-icon"
-                            />
-                          </span>
-                        </PLinkBase>
-                      </ANavigationMenuLink>
-                    </PLink>
-                  </li>
-                </ul>
-              </slot>
-            </template>
-          </PPopover>
+          </PDropdownMenu>
 
           <PTooltip
             v-else-if="orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)"
@@ -706,6 +635,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
                 class: [props.pohon?.link, item.pohon?.link, item.class],
                 active: active || item.active,
                 disabled: !!item.disabled,
+                childActive: isRouteInTree(item, route.path),
                 level: level > 0,
               })"
               data-pohon="navigation-menu-link"
@@ -714,6 +644,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
                 :item="item"
                 :active="active || item.active"
                 :index="index"
+                :child-active="isRouteInTree(item, route.path)"
               />
             </PLinkBase>
           </PTooltip>

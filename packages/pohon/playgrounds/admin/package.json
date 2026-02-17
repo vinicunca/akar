@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt dev --pohonDev",
-    "build": "nuxt build"
+    "build": "nuxt build",
+    "prepare": "nuxt prepare"
   },
   "dependencies": {
     "@internationalized/date": "catalog:core",

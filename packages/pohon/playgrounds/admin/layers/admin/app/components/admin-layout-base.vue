@@ -344,6 +344,7 @@ const sidebarExtraCollapsed = computed({
     <template #menu>
       <LayoutMenu
         :type="preferences.navigation.isAccordion ? 'multiple' : 'single'"
+        :collapsed="preferences.sidebar.collapsed"
         :items="wrapperMenus({ menus: sidebarMenus })"
       />
     </template>

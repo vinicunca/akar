@@ -120,8 +120,6 @@ export default (options: Required<PohonModuleOptions>) => {
       },
     },
 
-    compoundVariants: [],
-
     defaultVariants: {
       color: 'primary',
       highlightColor: 'primary',

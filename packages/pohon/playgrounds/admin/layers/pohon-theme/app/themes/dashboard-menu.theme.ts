@@ -105,7 +105,7 @@ export const dashboardMenuTheme = {
       childActive: true,
       active: false,
       class: {
-        link: `akar:color-${color}`,
+        link: `akar:color-${color} akar:hover:before:bg-red`,
         linkLeadingIcon: `akar:color-${color} akar:group-data-[state=open]:color-${color}`,
       },
     })),
