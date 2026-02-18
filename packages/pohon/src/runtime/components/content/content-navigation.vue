@@ -346,7 +346,7 @@ const defaultValue = computed(() => {
               >
                 <slot
                   :name="name"
-                  v-bind="{ ...slotData, link: link as T }"
+                  v-bind="{ ...slotData, link: slotData.link as T }"
                 />
               </template>
             </PContentNavigation>
