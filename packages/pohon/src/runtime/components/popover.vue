@@ -72,6 +72,7 @@ import { useForwardPropsEmits } from 'akar';
 import { AHoverCard, APopover } from 'akar/namespaced';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { usePortal } from '../composables/use-portal';
 import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
@@ -90,6 +91,7 @@ const emits = defineEmits<PPopoverEmits>();
 const slots = defineSlots<PPopoverSlots<M>>();
 
 const appConfig = useAppConfig() as Popover['AppConfig'];
+const pohonProp = useComponentPohon('popover', props);
 
 const pick = props.mode === 'hover'
   ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay')
@@ -160,7 +162,7 @@ const Component = computed(() => props.mode === 'hover' ? AHoverCard : APopover)
     <Component.Portal v-bind="portalProps">
       <Component.Content
         v-bind="contentProps"
-        :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
+        :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
         v-on="contentEvents"
       >
         <slot
@@ -171,7 +173,7 @@ const Component = computed(() => props.mode === 'hover' ? AHoverCard : APopover)
         <Component.Arrow
           v-if="!!arrow"
           v-bind="arrowProps"
-          :class="pohon.arrow({ class: props.pohon?.arrow })"
+          :class="pohon.arrow({ class: pohonProp?.arrow })"
         />
       </Component.Content>
     </Component.Portal>

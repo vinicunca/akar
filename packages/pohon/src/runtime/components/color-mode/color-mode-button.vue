@@ -18,8 +18,10 @@ import { useAppConfig, useColorMode } from '#imports';
 import { reactiveOmit } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import PButton from '../button.vue';
+import PIcon from '../icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -31,13 +33,10 @@ const props = withDefaults(
   },
 );
 
-defineSlots<{
-  fallback: (props?: object) => any;
-}>();
-
 const { t } = useLocale();
 const colorMode = useColorMode();
 const appConfig = useAppConfig();
+const pohonProp = useComponentPohon('colorModeButton', props);
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon'));
 
@@ -52,20 +51,24 @@ const isDark = computed({
 </script>
 
 <template>
-  <ClientOnly v-if="!colorMode?.forced">
-    <PButton
-      v-bind="{
-        ...buttonProps,
-        'icon': props.icon || (isDark ? appConfig.pohon.icons.dark : appConfig.pohon.icons.light),
-        'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
-      }"
-      @click="isDark = !isDark"
-    />
+  <PButton
+    v-bind="{
+      ...buttonProps,
+      'aria-label': isDark ? t('colorMode.switchToLight') : t('colorMode.switchToDark'),
+      ...$attrs,
+    }"
+    @click="isDark = !isDark"
+  >
+    <template #leading="{ pohon }">
+      <PIcon
+        :class="pohon.leadingIcon({ class: [pohonProp?.leadingIcon, 'hidden dark:inline-block'] })"
+        :name="appConfig.pohon.icons.dark"
+      />
 
-    <template #fallback>
-      <slot name="fallback">
-        <div class="size-8" />
-      </slot>
+      <PIcon
+        :class="pohon.leadingIcon({ class: [pohonProp?.leadingIcon, 'dark:hidden'] })"
+        :name="appConfig.pohon.icons.light"
+      />
     </template>
-  </ClientOnly>
+  </PButton>
 </template>

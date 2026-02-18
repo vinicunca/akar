@@ -45,6 +45,7 @@ import { isNonNullish } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
@@ -59,6 +60,8 @@ const props = withDefaults(
 const slots = defineSlots<PBadgeSlots>();
 
 const appConfig = useAppConfig() as Badge['AppConfig'];
+const pohonProp = useComponentPohon('badge', props);
+
 const { orientation, size: fieldGroupSize } = useFieldGroup<PBadgeProps>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 
@@ -79,7 +82,7 @@ const pohon = computed(() =>
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+    :class="pohon.base({ class: [pohonProp?.base, props.class] })"
     data-pohon="badge-base"
   >
     <slot
@@ -89,14 +92,14 @@ const pohon = computed(() =>
       <PIcon
         v-if="isLeading && leadingIconName"
         :name="leadingIconName"
-        :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+        :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
         data-pohon="badge-leading-icon"
       />
       <PAvatar
         v-else-if="!!avatar"
-        :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
+        :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
-        :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+        :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
         data-pohon="badge-leading-avatar"
       />
     </slot>
@@ -104,7 +107,7 @@ const pohon = computed(() =>
     <slot :pohon="pohon">
       <span
         v-if="isNonNullish(label)"
-        :class="pohon.label({ class: props.pohon?.label })"
+        :class="pohon.label({ class: pohonProp?.label })"
         data-pohon="badge-label"
       >
         {{ label }}
@@ -118,7 +121,7 @@ const pohon = computed(() =>
       <PIcon
         v-if="isTrailing && trailingIconName"
         :name="trailingIconName"
-        :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+        :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         data-pohon="badge-trailing-icon"
       />
     </slot>

@@ -241,7 +241,7 @@ const defaultValue = computed(() => {
           v-if="link.icon"
           :name="active || childActive ? link.activeIcon ?? link.icon : link.icon"
           :class="pohon.linkLeadingIcon({
-            class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon],
+            class: [pohonProp?.linkLeadingIcon, link.pohon?.linkLeadingIcon],
             active,
             childActive,
           })"
@@ -252,7 +252,7 @@ const defaultValue = computed(() => {
       <span
         v-if="(link.label || !!slots['link-title']) && !props.collapsed"
         :class="pohon.linkTitle({
-          class: [props.pohon?.linkTitle, link.pohon?.linkTitle],
+          class: [pohonProp?.linkTitle, link.pohon?.linkTitle],
           active,
         })"
         data-pohon="dashboard-menu-link-title"
@@ -270,7 +270,7 @@ const defaultValue = computed(() => {
           v-if="link.target === '_blank'"
           :name="appConfig.pohon.icons.external"
           :class="pohon.linkTitleExternalIcon({
-            class: [props.pohon?.linkTitleExternalIcon, link.pohon?.linkTitleExternalIcon],
+            class: [pohonProp?.linkTitleExternalIcon, link.pohon?.linkTitleExternalIcon],
             active,
           })"
           data-pohon="dashboard-menu-link-title-external-icon"
@@ -279,7 +279,7 @@ const defaultValue = computed(() => {
 
       <span
         v-if="((link.badge || link.badge === 0) || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']) && !props.collapsed"
-        :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, link.pohon?.linkTrailing] })"
+        :class="pohon.linkTrailing({ class: [pohonProp?.linkTrailing, link.pohon?.linkTrailing] })"
         data-pohon="dashboard-menu-link-trailing"
       >
         <slot
@@ -292,16 +292,16 @@ const defaultValue = computed(() => {
             v-if="(link.badge || link.badge === 0)"
             color="neutral"
             variant="solid"
-            :size="((props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
+            :size="((pohonProp?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(link.badge) || isNumber(link.badge)) ? { label: link.badge } : link.badge"
-            :class="pohon.linkTrailingBadge({ class: props.pohon?.linkTrailingBadge })"
+            :class="pohon.linkTrailingBadge({ class: pohonProp?.linkTrailingBadge })"
             data-pohon="dashboard-menu-link-trailing-badge"
           />
           <PIcon
             v-if="link.children?.length && !disabled"
             :name="link.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
             :class="pohon.linkTrailingIcon({
-              class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
+              class: [pohonProp?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
             })"
             data-pohon="dashboard-menu-link-trailing-icon"
           />
@@ -309,7 +309,7 @@ const defaultValue = computed(() => {
             v-else-if="link.trailingIcon"
             :name="link.trailingIcon"
             :class="pohon.linkTrailingIcon({
-              class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
+              class: [pohonProp?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
             })"
             data-pohon="dashboard-menu-link-trailing-icon"
           />
@@ -321,7 +321,7 @@ const defaultValue = computed(() => {
   <ANavigationMenuRoot
     :as="as"
     :as-child="level > 0"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="dashboard-menu-root"
     orientation="vertical"
   >
@@ -336,8 +336,8 @@ const defaultValue = computed(() => {
       :disabled="disabled"
       :class="
         level > 0
-          ? pohon.listWithChildren({ class: props.pohon?.listWithChildren })
-          : pohon.list({ class: props.pohon?.list })
+          ? pohon.listWithChildren({ class: pohonProp?.listWithChildren })
+          : pohon.list({ class: pohonProp?.list })
       "
       data-pohon="dashboard-menu-list-with-children"
     >
@@ -350,10 +350,10 @@ const defaultValue = computed(() => {
           v-if="link.children?.length"
           as="li"
           :class="props.collapsed ? pohon.item({
-            class: [props.pohon?.item, link.pohon?.item],
+            class: [pohonProp?.item, link.pohon?.item],
             collapsed: true,
           }) : pohon.itemWithChildren({
-            class: [props.pohon?.itemWithChildren, link.pohon?.itemWithChildren],
+            class: [pohonProp?.itemWithChildren, link.pohon?.itemWithChildren],
             level: level > 0,
           })"
           :value="String(index)"
@@ -364,7 +364,7 @@ const defaultValue = computed(() => {
             as="button"
             :class="[
               pohon.link({
-                class: [props.pohon?.link, link.pohon?.link, link.class],
+                class: [pohonProp?.link, link.pohon?.link, link.class],
                 active: link.active,
                 childActive: isRouteInTree(link, route.path),
                 disabled: !!link.disabled || disabled,
@@ -372,7 +372,7 @@ const defaultValue = computed(() => {
                 collapsed: props.collapsed,
               }),
               pohon.trigger({
-                class: [props.pohon?.trigger, link.pohon?.trigger],
+                class: [pohonProp?.trigger, link.pohon?.trigger],
                 disabled,
               }),
             ]"
@@ -398,7 +398,7 @@ const defaultValue = computed(() => {
               as="button"
               :class="[
                 pohon.link({
-                  class: [props.pohon?.link, link.pohon?.link, link.class],
+                  class: [pohonProp?.link, link.pohon?.link, link.class],
                   active: link.active || open,
                   childActive: isRouteInTree(link, route.path),
                   disabled: !!link.disabled || disabled,
@@ -406,7 +406,7 @@ const defaultValue = computed(() => {
                   collapsed: props.collapsed,
                 }),
                 pohon.trigger({
-                  class: [props.pohon?.trigger, link.pohon?.trigger],
+                  class: [pohonProp?.trigger, link.pohon?.trigger],
                   disabled,
                 }),
               ]"
@@ -421,7 +421,7 @@ const defaultValue = computed(() => {
 
           <AAccordionContent
             v-if="link.children?.length && !props.collapsed"
-            :class="pohon.content({ class: [props.pohon?.content, link.pohon?.content] })"
+            :class="pohon.content({ class: [pohonProp?.content, link.pohon?.content] })"
             data-pohon="dashboard-menu-content"
           >
             <PDashboardMenu
@@ -452,7 +452,7 @@ const defaultValue = computed(() => {
         <ANavigationMenuItem
           v-else
           :class="pohon.item({
-            class: [props.pohon?.item, link.pohon?.item],
+            class: [pohonProp?.item, link.pohon?.item],
             level: level > 0,
             collapsed: props.collapsed,
           })"
@@ -466,7 +466,7 @@ const defaultValue = computed(() => {
             <PLinkBase
               v-bind="slotProps"
               :class="pohon.link({
-                class: [props.pohon?.link, link.pohon?.link, link.class],
+                class: [pohonProp?.link, link.pohon?.link, link.class],
                 active,
                 disabled: !!link.disabled,
                 level: level > 0,

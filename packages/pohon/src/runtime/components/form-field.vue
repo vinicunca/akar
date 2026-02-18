@@ -58,6 +58,7 @@ import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { ALabel, APrimitive } from 'akar';
 import { computed, inject, provide, ref, useId, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { formErrorsInjectionKey, formFieldInjectionKey, formInputsInjectionKey, inputIdInjectionKey } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 
@@ -70,6 +71,7 @@ const props = withDefaults(
 const slots = defineSlots<PFormFieldSlots>();
 
 const appConfig = useAppConfig() as FormField['AppConfig'];
+const pohonProp = useComponentPohon('formField', props);
 
 const pohon = computed(() =>
   uv({
@@ -128,22 +130,22 @@ provide(
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="form-field-root"
     :data-orientation="orientation"
   >
     <div
-      :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+      :class="pohon.wrapper({ class: pohonProp?.wrapper })"
       data-pohon="form-field-wrapper"
     >
       <div
         v-if="label || !!slots.label"
-        :class="pohon.labelWrapper({ class: props.pohon?.labelWrapper })"
+        :class="pohon.labelWrapper({ class: pohonProp?.labelWrapper })"
         data-pohon="form-field-label-wrapper"
       >
         <ALabel
           :for="id"
-          :class="pohon.label({ class: props.pohon?.label })"
+          :class="pohon.label({ class: pohonProp?.label })"
           data-pohon="form-field-label"
         >
           <slot
@@ -157,7 +159,7 @@ provide(
         <span
           v-if="hint || !!slots.hint"
           :id="`${ariaId}-hint`"
-          :class="pohon.hint({ class: props.pohon?.hint })"
+          :class="pohon.hint({ class: pohonProp?.hint })"
           data-pohon="form-field-hint"
         >
           <slot
@@ -172,7 +174,7 @@ provide(
       <p
         v-if="description || !!slots.description"
         :id="`${ariaId}-description`"
-        :class="pohon.description({ class: props.pohon?.description })"
+        :class="pohon.description({ class: pohonProp?.description })"
         data-pohon="form-field-description"
       >
         <slot
@@ -185,7 +187,7 @@ provide(
     </div>
 
     <div
-      :class="[(label || !!slots.label || description || !!slots.description) && pohon.container({ class: props.pohon?.container })]"
+      :class="[(label || !!slots.label || description || !!slots.description) && pohon.container({ class: pohonProp?.container })]"
       data-pohon="form-field-container"
     >
       <slot :error="error" />
@@ -193,7 +195,7 @@ provide(
       <div
         v-if="props.error !== false && ((isString(error) && error) || !!slots.error)"
         :id="`${ariaId}-error`"
-        :class="pohon.error({ class: props.pohon?.error })"
+        :class="pohon.error({ class: pohonProp?.error })"
         data-pohon="form-field-error"
       >
         <slot
@@ -206,7 +208,7 @@ provide(
       <div
         v-else-if="help || !!slots.help"
         :id="`${ariaId}-help`"
-        :class="pohon.help({ class: props.pohon?.help })"
+        :class="pohon.help({ class: pohonProp?.help })"
         data-pohon="form-field-help"
       >
         <slot

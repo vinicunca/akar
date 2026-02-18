@@ -40,12 +40,14 @@ export interface ProseFieldSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseFieldProps>();
 const slots = defineSlots<ProseFieldSlots>();
 
 const appConfig = useAppConfig() as ProseField['AppConfig'];
+const pohonProp = useComponentPohon('prose.field', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.field || {}) })());
 </script>
@@ -53,30 +55,30 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <div :class="pohon.container({ class: props.pohon?.container })">
+    <div :class="pohon.container({ class: pohonProp?.container })">
       <span
         v-if="name"
-        :class="pohon.name({ class: props.pohon?.name })"
+        :class="pohon.name({ class: pohonProp?.name })"
       >
         {{ name }}
       </span>
 
       <div
         v-if="type || required"
-        :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+        :class="pohon.wrapper({ class: pohonProp?.wrapper })"
       >
         <span
           v-if="type"
-          :class="pohon.type({ class: props.pohon?.type })"
+          :class="pohon.type({ class: pohonProp?.type })"
         >
           {{ type }}
         </span>
 
         <span
           v-if="required"
-          :class="pohon.required({ class: props.pohon?.required })"
+          :class="pohon.required({ class: pohonProp?.required })"
         >
           required
         </span>
@@ -85,7 +87,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 
     <div
       v-if="!!slots.default || description"
-      :class="pohon.description({ class: props.pohon?.description })"
+      :class="pohon.description({ class: pohonProp?.description })"
     >
       <slot mdc-unwrap="p">
         {{ description }}

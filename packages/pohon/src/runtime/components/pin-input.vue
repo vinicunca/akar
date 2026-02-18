@@ -60,6 +60,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, onMounted, ref } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
@@ -75,6 +76,7 @@ const props = withDefaults(
 const emits = defineEmits<PPinInputEmits<T>>();
 
 const appConfig = useAppConfig() as PinInput['AppConfig'];
+const pohonProp = useComponentPohon('pinInput', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -118,6 +120,11 @@ const pohon = computed(() =>
 
 const inputsRef = ref<Array<ComponentPublicInstance>>([]);
 
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el;
+}
+
 const completed = ref(false);
 function onComplete(value: Array<string> | Array<number>) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -157,17 +164,17 @@ defineExpose({
     :name="name"
     :placeholder="placeholder"
     :model-value="(modelValue as PinInputValue<T>)"
-    :default-value="defaultValue"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :default-value="(defaultValue as PinInputValue<T>)"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
   >
     <APinInputInput
       v-for="(ids, index) in looseToNumber(props.length)"
       :key="ids"
-      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
-      :index="index"
-      :class="pohon.base({ class: props.pohon?.base })"
+      :ref="el => setInputRef(index as number, el)"
+      :index="(index as number)"
+      :class="pohon.base({ class: pohonProp?.base })"
       :disabled="disabled"
       @blur="onBlur"
       @focus="emitFormFocus"

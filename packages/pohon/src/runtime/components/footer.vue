@@ -28,6 +28,7 @@ export interface PFooterSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PContainer from './container.vue';
 
@@ -40,6 +41,7 @@ const props = withDefaults(
 const slots = defineSlots<PFooterSlots>();
 
 const appConfig = useAppConfig() as Footer['AppConfig'];
+const pohonProp = useComponentPohon('footer', props);
 
 const pohon = computed(() =>
   uv({ extend: uv(theme), ...(appConfig.pohon?.footer || {}) })(),
@@ -49,37 +51,37 @@ const pohon = computed(() =>
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="footer-root"
   >
     <div
       v-if="!!slots.top"
-      :class="pohon.top({ class: props.pohon?.top })"
+      :class="pohon.top({ class: pohonProp?.top })"
       data-pohon="footer-top"
     >
       <slot name="top" />
     </div>
 
     <PContainer
-      :class="pohon.container({ class: props.pohon?.container })"
+      :class="pohon.container({ class: pohonProp?.container })"
       data-pohon="footer-container"
     >
       <div
-        :class="pohon.right({ class: props.pohon?.right })"
+        :class="pohon.right({ class: pohonProp?.right })"
         data-pohon="footer-right"
       >
         <slot name="right" />
       </div>
 
       <div
-        :class="pohon.center({ class: props.pohon?.center })"
+        :class="pohon.center({ class: pohonProp?.center })"
         data-pohon="footer-center"
       >
         <slot />
       </div>
 
       <div
-        :class="pohon.left({ class: props.pohon?.left })"
+        :class="pohon.left({ class: pohonProp?.left })"
         data-pohon="footer-left"
       >
         <slot name="left" />
@@ -88,7 +90,7 @@ const pohon = computed(() =>
 
     <div
       v-if="!!slots.bottom"
-      :class="pohon.bottom({ class: props.pohon?.bottom })"
+      :class="pohon.bottom({ class: pohonProp?.bottom })"
       data-pohon="footer-bottom"
     >
       <slot name="bottom" />

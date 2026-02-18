@@ -12,6 +12,7 @@ export interface ProseStepsProps {
    */
   level?: ProseSteps['variants']['level'];
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface ProseStepsSlots {
@@ -22,18 +23,20 @@ export interface ProseStepsSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseStepsProps>();
 defineSlots<ProseStepsSlots>();
 
 const appConfig = useAppConfig() as ProseSteps['AppConfig'];
+const pohonProp = useComponentPohon('prose.steps', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.steps || {}) }));
 </script>
 
 <template>
-  <div :class="pohon({ class: props.class, level: props.level })">
+  <div :class="pohon({ class: [pohonProp?.base, props.class], level: props.level })">
     <slot />
   </div>
 </template>

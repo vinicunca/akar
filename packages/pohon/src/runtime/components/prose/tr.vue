@@ -7,6 +7,7 @@ type ProseTr = ComponentConfig<typeof theme, AppConfig, 'tr', 'pohon.prose'>;
 
 export interface ProseTrProps {
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface ProseTrSlots {
@@ -17,12 +18,14 @@ export interface ProseTrSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseTrProps>();
 defineSlots<ProseTrSlots>();
 
 const appConfig = useAppConfig() as ProseTr['AppConfig'];
+const pohonProp = useComponentPohon('prose.tr', props);
 
 const pohon = computed(() =>
   uv({
@@ -33,7 +36,7 @@ const pohon = computed(() =>
 </script>
 
 <template>
-  <tr :class="pohon({ class: props.class })">
+  <tr :class="pohon({ class: [pohonProp?.base, props.class] })">
     <slot />
   </tr>
 </template>

@@ -7,6 +7,7 @@ type ProseCardGroup = ComponentConfig<typeof theme, AppConfig, 'cardGroup', 'poh
 
 export interface ProseCardGroupProps {
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface ProseCardGroupSlots {
@@ -17,12 +18,14 @@ export interface ProseCardGroupSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseCardGroupProps>();
 defineSlots<ProseCardGroupSlots>();
 
 const appConfig = useAppConfig() as ProseCardGroup['AppConfig'];
+const pohonProp = useComponentPohon('prose.card-group', props);
 
 const pohon = computed(() =>
   uv({
@@ -33,7 +36,7 @@ const pohon = computed(() =>
 </script>
 
 <template>
-  <div :class="pohon({ class: props.class })">
+  <div :class="pohon({ class: [pohonProp?.base, props.class] })">
     <slot />
   </div>
 </template>

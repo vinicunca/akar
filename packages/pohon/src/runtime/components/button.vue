@@ -50,6 +50,7 @@ import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, inject, ref } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { formLoadingInjectionKey } from '../composables/use-form-field';
 import { mergeClasses } from '../utils';
@@ -64,6 +65,7 @@ const props = defineProps<PButtonProps>();
 const slots = defineSlots<PButtonSlots>();
 
 const appConfig = useAppConfig() as Button['AppConfig'];
+const pohonProp = useComponentPohon('button', props);
 const { orientation, size: buttonSize } = useFieldGroup<PButtonProps>(props);
 
 const linkProps = useForwardProps(pickLinkProps(props));
@@ -138,7 +140,7 @@ const pohon = computed(() =>
     <PLinkBase
       v-bind="slotProps"
       :class="pohon.base({
-        class: [props.pohon?.base, props.class],
+        class: [pohonProp?.base, props.class],
         active,
         ...(active && activeVariant ? { variant: activeVariant } : {}),
         ...(active && activeColor ? { color: activeColor } : {}),
@@ -153,14 +155,14 @@ const pohon = computed(() =>
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
-          :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon, active })"
+          :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon, active })"
           data-pohon="button-leading-icon"
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
+          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
-          :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar, active })"
+          :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar, active })"
           data-pohon="button-leading-avatar"
         />
       </slot>
@@ -168,7 +170,7 @@ const pohon = computed(() =>
       <slot :pohon="pohon">
         <span
           v-if="isNonNullish(label)"
-          :class="pohon.label({ class: props.pohon?.label, active })"
+          :class="pohon.label({ class: pohonProp?.label, active })"
           data-pohon="button-label"
         >
           {{ label }}
@@ -182,7 +184,7 @@ const pohon = computed(() =>
         <PIcon
           v-if="isTrailing && trailingIconName"
           :name="trailingIconName"
-          :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon, active })"
+          :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon, active })"
           data-pohon="button-trailing-icon"
         />
       </slot>

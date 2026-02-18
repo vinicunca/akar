@@ -171,6 +171,7 @@ import {
 import { defu } from 'defu';
 import { computed, onMounted, toRef, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { usePortal } from '../composables/use-portal';
@@ -195,6 +196,7 @@ const props = withDefaults(
 const emits = defineEmits<PSelectEmits<T, VK, M>>();
 const slots = defineSlots<PSelectSlots<T, VK, M>>();
 const appConfig = useAppConfig() as Select['AppConfig'];
+const pohonProp = useComponentPohon('select', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -381,13 +383,13 @@ defineExpose({
     <ASelectTrigger
       :id="id"
       ref="triggerRef"
-      :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+      :class="pohon.base({ class: [pohonProp?.base, props.class] })"
       data-pohon="select-base"
       v-bind="{ ...$attrs, ...ariaAttrs }"
     >
       <span
         v-if="isLeading || !!avatar || !!slots.leading"
-        :class="pohon.leading({ class: props.pohon?.leading })"
+        :class="pohon.leading({ class: pohonProp?.leading })"
         data-pohon="select-leading"
       >
         <slot
@@ -399,14 +401,14 @@ defineExpose({
           <PIcon
             v-if="isLeading && leadingIconName"
             :name="leadingIconName"
-            :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+            :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
             data-pohon="select-leading-icon"
           />
           <PAvatar
             v-else-if="!!avatar"
-            :size="((props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
+            :size="((pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
-            :class="pohon.itemLeadingAvatar({ class: props.pohon?.itemLeadingAvatar })"
+            :class="pohon.itemLeadingAvatar({ class: pohonProp?.itemLeadingAvatar })"
             data-pohon="select-leading-avatar"
           />
         </slot>
@@ -423,14 +425,14 @@ defineExpose({
         >
           <span
             v-if="isNonNullish(displayedModelValue)"
-            :class="pohon.value({ class: props.pohon?.value })"
+            :class="pohon.value({ class: pohonProp?.value })"
             data-pohon="select-value"
           >
             {{ displayedModelValue }}
           </span>
           <span
             v-else
-            :class="pohon.placeholder({ class: props.pohon?.placeholder })"
+            :class="pohon.placeholder({ class: pohonProp?.placeholder })"
             data-pohon="select-placeholder"
           >
             {{ placeholder ?? '&nbsp;' }}
@@ -440,7 +442,7 @@ defineExpose({
 
       <span
         v-if="isTrailing || !!slots.trailing"
-        :class="pohon.trailing({ class: props.pohon?.trailing })"
+        :class="pohon.trailing({ class: pohonProp?.trailing })"
         data-pohon="select-trailing"
       >
         <slot
@@ -452,7 +454,7 @@ defineExpose({
           <PIcon
             v-if="trailingIconName"
             :name="trailingIconName"
-            :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+            :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
             data-pohon="select-trailing-icon"
           />
         </slot>
@@ -461,7 +463,7 @@ defineExpose({
 
     <ASelectPortal v-bind="portalProps">
       <ASelectContent
-        :class="pohon.content({ class: props.pohon?.content })"
+        :class="pohon.content({ class: pohonProp?.content })"
         v-bind="contentProps"
         data-pohon="select-content"
       >
@@ -470,13 +472,13 @@ defineExpose({
         <div
           ref="viewportRef"
           role="presentation"
-          :class="pohon.viewport({ class: props.pohon?.viewport })"
+          :class="pohon.viewport({ class: pohonProp?.viewport })"
           data-pohon="select-viewport"
         >
           <ASelectGroup
             v-for="(group, groupIndex) in groups"
             :key="`group-${groupIndex}`"
-            :class="pohon.group({ class: props.pohon?.group })"
+            :class="pohon.group({ class: pohonProp?.group })"
             data-pohon="select-group"
           >
             <template
@@ -485,7 +487,7 @@ defineExpose({
             >
               <ASelectLabel
                 v-if="isSelectItem(item) && item.type === 'label'"
-                :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
+                :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label, item.class] })"
                 data-pohon="select-label"
               >
                 {{ getProp({ object: item, path: props.labelKey as string }) }}
@@ -493,13 +495,13 @@ defineExpose({
 
               <ASelectSeparator
                 v-else-if="isSelectItem(item) && item.type === 'separator'"
-                :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator, item.class] })"
+                :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator, item.class] })"
                 data-pohon="select-separator"
               />
 
               <ASelectItem
                 v-else
-                :class="pohon.item({ class: [props.pohon?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
+                :class="pohon.item({ class: [pohonProp?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
                 :value="isSelectItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
                 data-pohon="select-item"
@@ -520,23 +522,23 @@ defineExpose({
                     <PIcon
                       v-if="isSelectItem(item) && item.icon"
                       :name="item.icon"
-                      :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
+                      :class="pohon.itemLeadingIcon({ class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
                       data-pohon="select-item-leading-icon"
                     />
                     <PAvatar
                       v-else-if="isSelectItem(item) && item.avatar"
-                      :size="((item.pohon?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
+                      :size="((item.pohon?.itemLeadingAvatarSize || pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
                       v-bind="item.avatar"
-                      :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
+                      :class="pohon.itemLeadingAvatar({ class: [pohonProp?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
                       data-pohon="select-item-leading-avatar"
                     />
                     <PChip
                       v-else-if="isSelectItem(item) && item.chip"
-                      :size="((item.pohon?.itemLeadingChipSize || props.pohon?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
+                      :size="((item.pohon?.itemLeadingChipSize || pohonProp?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
-                      :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
+                      :class="pohon.itemLeadingChip({ class: [pohonProp?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
                       data-pohon="select-item-leading-chip"
                     />
                   </slot>
@@ -544,7 +546,7 @@ defineExpose({
                   <span
                     :class="pohon.itemWrapper({
                       class: [
-                        props.pohon?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
+                        pohonProp?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
                       ],
                     })"
                     data-pohon="select-item-wrapper"
@@ -552,7 +554,7 @@ defineExpose({
                     <ASelectItemText
                       :class="pohon.itemLabel({
                         class: [
-                          props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
+                          pohonProp?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
                         ],
                       })"
                       data-pohon="select-item-label"
@@ -570,7 +572,7 @@ defineExpose({
                       v-if="isSelectItem(item) && (getProp({ object: item, path: props.descriptionKey as string }) || !!slots['item-description'])"
                       :class="pohon.itemDescription({
                         class: [
-                          props.pohon?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
+                          pohonProp?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
                         ],
                       })"
                       data-pohon="select-item-description"
@@ -587,7 +589,7 @@ defineExpose({
 
                   <span
                     :class="pohon.itemTrailing({
-                      class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing],
+                      class: [pohonProp?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing],
                     })"
                     data-pohon="select-item-trailing"
                   >
@@ -602,7 +604,7 @@ defineExpose({
                       <PIcon
                         :name="selectedIcon || appConfig.pohon.icons.check"
                         :class="pohon.itemTrailingIcon({
-                          class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon],
+                          class: [pohonProp?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon],
                         })"
                         data-pohon="select-item-trailing-icon"
                       />
@@ -619,7 +621,7 @@ defineExpose({
         <ASelectArrow
           v-if="!!arrow"
           v-bind="arrowProps"
-          :class="pohon.arrow({ class: props.pohon?.arrow })"
+          :class="pohon.arrow({ class: pohonProp?.arrow })"
           data-pohon="select-arrow"
         />
       </ASelectContent>

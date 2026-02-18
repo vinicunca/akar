@@ -67,6 +67,7 @@ import { useVModel } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, onMounted, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { looseToNumber } from '../utils';
@@ -76,7 +77,7 @@ import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(
+const props: PInputProps<T> = withDefaults(
   defineProps<PInputProps<T>>(),
   {
     type: 'text',
@@ -99,6 +100,7 @@ const modelValue = useVModel<
 );
 
 const appConfig = useAppConfig() as Input['AppConfig'];
+const pohonProp = useComponentPohon('input', props);
 
 const {
   emitFormBlur,
@@ -206,12 +208,12 @@ defineExpose({
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="input-root"
   >
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
-      :class="pohon.leading({ class: props.pohon?.leading })"
+      :class="pohon.leading({ class: pohonProp?.leading })"
       data-pohon="input-leading"
     >
       <slot
@@ -221,14 +223,14 @@ defineExpose({
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
-          :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+          :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
           data-pohon="input-leading-icon"
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
+          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
-          :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+          :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
           data-pohon="input-leading-avatar"
         />
       </slot>
@@ -241,7 +243,7 @@ defineExpose({
       :value="modelValue"
       :name="name"
       :placeholder="placeholder"
-      :class="pohon.base({ class: props.pohon?.base })"
+      :class="pohon.base({ class: pohonProp?.base })"
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
@@ -257,7 +259,7 @@ defineExpose({
 
     <span
       v-if="isTrailing || !!slots.trailing"
-      :class="pohon.trailing({ class: props.pohon?.trailing })"
+      :class="pohon.trailing({ class: pohonProp?.trailing })"
       data-pohon="input-trailing"
     >
       <slot
@@ -267,7 +269,7 @@ defineExpose({
         <PIcon
           v-if="trailingIconName"
           :name="trailingIconName"
-          :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+          :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
           data-pohon="input-trailing-icon"
         />
       </slot>

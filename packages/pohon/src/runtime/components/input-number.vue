@@ -84,6 +84,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, onMounted, toRef, useTemplateRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { useLocale } from '../composables/use-locale';
@@ -114,6 +115,7 @@ const modelValue = useVModel<PInputNumberProps<T>, 'modelValue', 'update:modelVa
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as InputNumber['AppConfig'];
+const pohonProp = useComponentPohon('inputNumber', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -220,7 +222,7 @@ defineExpose({
     v-bind="rootProps"
     :id="id"
     :model-value="modelValue"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     :name="name"
     :disabled="disabled"
     data-pohon="input-number-root"
@@ -228,7 +230,7 @@ defineExpose({
   >
     <div
       v-if="Boolean(decrement)"
-      :class="pohon.decrement({ class: props.pohon?.decrement })"
+      :class="pohon.decrement({ class: pohonProp?.decrement })"
       data-pohon="input-number-decrement"
     >
       <ANumberFieldDecrement
@@ -253,7 +255,7 @@ defineExpose({
       ref="inputRef"
       :placeholder="placeholder"
       :required="required"
-      :class="pohon.base({ class: props.pohon?.base })"
+      :class="pohon.base({ class: pohonProp?.base })"
       data-pohon="input-number-base"
       @blur="onBlur"
       @focus="emitFormFocus"
@@ -261,7 +263,7 @@ defineExpose({
 
     <div
       v-if="Boolean(increment)"
-      :class="pohon.increment({ class: props.pohon?.increment })"
+      :class="pohon.increment({ class: pohonProp?.increment })"
       data-pohon="input-number-increment"
     >
       <ANumberFieldIncrement

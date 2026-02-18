@@ -68,6 +68,7 @@ export interface PBannerEmits {
 import { useAppConfig, useHead } from '#imports';
 import { APrimitive } from 'akar';
 import { computed, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
@@ -82,6 +83,7 @@ const emits = defineEmits<PBannerEmits>();
 const slots = defineSlots<PBannerSlots>();
 const { t } = useLocale();
 const appConfig = useAppConfig() as Banner['AppConfig'];
+const pohonProp = useComponentPohon('banner', props);
 
 const pohon = computed(() =>
   uv({
@@ -127,7 +129,7 @@ function onClose() {
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="banner-root"
   >
     <PLink
@@ -145,16 +147,16 @@ function onClose() {
     </PLink>
 
     <PContainer
-      :class="pohon.container({ class: props.pohon?.container })"
+      :class="pohon.container({ class: pohonProp?.container })"
       data-pohon="banner-container"
     >
       <div
-        :class="pohon.left({ class: props.pohon?.left })"
+        :class="pohon.left({ class: pohonProp?.left })"
         data-pohon="banner-left"
       />
 
       <div
-        :class="pohon.center({ class: props.pohon?.center })"
+        :class="pohon.center({ class: pohonProp?.center })"
         data-pohon="banner-center"
       >
         <slot
@@ -164,14 +166,14 @@ function onClose() {
           <PIcon
             v-if="icon"
             :name="icon"
-            :class="pohon.icon({ class: props.pohon?.icon })"
+            :class="pohon.icon({ class: pohonProp?.icon })"
             data-pohon="banner-icon"
           />
         </slot>
 
         <div
           v-if="title || !!slots.title"
-          :class="pohon.title({ class: props.pohon?.title })"
+          :class="pohon.title({ class: pohonProp?.title })"
           data-pohon="banner-title"
         >
           <slot name="title">
@@ -181,7 +183,7 @@ function onClose() {
 
         <div
           v-if="actions?.length || !!slots.actions"
-          :class="pohon.actions({ class: props.pohon?.actions })"
+          :class="pohon.actions({ class: pohonProp?.actions })"
           data-pohon="banner-actions"
         >
           <slot name="actions">
@@ -197,7 +199,7 @@ function onClose() {
       </div>
 
       <div
-        :class="pohon.right({ class: props.pohon?.right })"
+        :class="pohon.right({ class: pohonProp?.right })"
         data-pohon="banner-right"
       >
         <slot
@@ -212,7 +214,7 @@ function onClose() {
             variant="ghost"
             :aria-label="t('banner.close')"
             v-bind="(typeof close === 'object' ? close : {})"
-            :class="pohon.close({ class: props.pohon?.close })"
+            :class="pohon.close({ class: pohonProp?.close })"
             data-pohon="banner-close"
             @click="onClose"
           />

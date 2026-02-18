@@ -217,6 +217,7 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { computed, ref, toRef, useTemplateRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { getProp } from '../utils';
 import { highlight } from '../utils/fuse';
@@ -255,6 +256,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' });
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as CommandPalette['AppConfig'];
+const pohonProp = useComponentPohon('commandPalette', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'),
@@ -512,7 +514,7 @@ function onSelect(event: Event, item: T) {
         <PLinkBase
           v-bind="slotProps"
           :class="pohon.item({
-            class: [props.pohon?.item, item.pohon?.item, item.class],
+            class: [pohonProp?.item, item.pohon?.item, item.class],
             active: active || item.active,
           })"
           data-pohon="command-palette-item"
@@ -533,7 +535,7 @@ function onSelect(event: Event, item: T) {
                 v-if="item.loading"
                 :name="loadingIcon || appConfig.pohon.icons.loading"
                 :class="pohon.itemLeadingIcon({
-                  class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon],
+                  class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon],
                   loading: true,
                 })"
                 data-pohon="command-palette-item-leading-icon"
@@ -543,29 +545,29 @@ function onSelect(event: Event, item: T) {
                 v-else-if="item.icon"
                 :name="item.icon"
                 :class="pohon.itemLeadingIcon({
-                  class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon],
+                  class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon],
                   active: active || item.active,
                 })"
                 data-pohon="command-palette-item-leading-icon"
               />
               <PAvatar
                 v-else-if="item.avatar"
-                :size="((item.pohon?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
+                :size="((item.pohon?.itemLeadingAvatarSize || pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
                 v-bind="item.avatar"
                 :class="pohon.itemLeadingAvatar({
-                  class: [props.pohon?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar],
+                  class: [pohonProp?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar],
                   active: active || item.active,
                 })"
                 data-pohon="command-palette-item-leading-avatar"
               />
               <PChip
                 v-else-if="item.chip"
-                :size="((item.pohon?.itemLeadingChipSize || props.pohon?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
+                :size="((item.pohon?.itemLeadingChipSize || pohonProp?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
                 inset
                 standalone
                 v-bind="item.chip"
                 :class="pohon.itemLeadingChip({
-                  class: [props.pohon?.itemLeadingChip, item.pohon?.itemLeadingChip],
+                  class: [pohonProp?.itemLeadingChip, item.pohon?.itemLeadingChip],
                   active: active || item.active,
                 })"
                 data-pohon="command-palette-item-leading-chip"
@@ -574,11 +576,11 @@ function onSelect(event: Event, item: T) {
 
             <span
               v-if="(item.prefix || (item.labelHtml || getProp({ object: item, path: props.labelKey as string })) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<G, T>]) || (getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof PCommandPaletteSlots<G, T>])"
-              :class="pohon.itemWrapper({ class: [props.pohon?.itemWrapper, item.pohon?.itemWrapper] })"
+              :class="pohon.itemWrapper({ class: [pohonProp?.itemWrapper, item.pohon?.itemWrapper] })"
               data-pohon="command-palette-item-wrapper"
             >
               <span
-                :class="pohon.itemLabel({ class: [props.pohon?.itemLabel, item.pohon?.itemLabel], active: active || item.active })"
+                :class="pohon.itemLabel({ class: [pohonProp?.itemLabel, item.pohon?.itemLabel], active: active || item.active })"
                 data-pohon="command-palette-item-label"
               >
                 <slot
@@ -589,7 +591,7 @@ function onSelect(event: Event, item: T) {
                 >
                   <span
                     v-if="item.prefix"
-                    :class="pohon.itemLabelPrefix({ class: [props.pohon?.itemLabelPrefix, item.pohon?.itemLabelPrefix] })"
+                    :class="pohon.itemLabelPrefix({ class: [pohonProp?.itemLabelPrefix, item.pohon?.itemLabelPrefix] })"
                     data-pohon="command-palette-item-label-prefix"
                   >{{ item.prefix }}</span>
 
@@ -597,7 +599,7 @@ function onSelect(event: Event, item: T) {
                     v-if="item.labelHtml"
                     data-pohon="command-palette-item-label-base"
                     :class="pohon.itemLabelBase({
-                      class: [props.pohon?.itemLabelBase, item.pohon?.itemLabelBase],
+                      class: [pohonProp?.itemLabelBase, item.pohon?.itemLabelBase],
                       active: active || item.active,
                     })"
                     v-html="item.labelHtml"
@@ -606,7 +608,7 @@ function onSelect(event: Event, item: T) {
                     v-else
                     data-pohon="command-palette-item-label-base"
                     :class="pohon.itemLabelBase({
-                      class: [props.pohon?.itemLabelBase, item.pohon?.itemLabelBase],
+                      class: [pohonProp?.itemLabelBase, item.pohon?.itemLabelBase],
                       active: active || item.active,
                     })"
                   >{{ getProp({ object: item, path: props.labelKey as string }) }}</span>
@@ -614,7 +616,7 @@ function onSelect(event: Event, item: T) {
                   <span
                     v-if="item.suffixHtml"
                     :class="pohon.itemLabelSuffix({
-                      class: [props.pohon?.itemLabelSuffix, item.pohon?.itemLabelSuffix],
+                      class: [pohonProp?.itemLabelSuffix, item.pohon?.itemLabelSuffix],
                       active: active || item.active,
                     })"
                     v-html="item.suffixHtml"
@@ -622,7 +624,7 @@ function onSelect(event: Event, item: T) {
                   <span
                     v-else-if="item.suffix"
                     :class="pohon.itemLabelSuffix({
-                      class: [props.pohon?.itemLabelSuffix, item.pohon?.itemLabelSuffix],
+                      class: [pohonProp?.itemLabelSuffix, item.pohon?.itemLabelSuffix],
                       active: active || item.active,
                     })"
                   >{{ item.suffix }}</span>
@@ -631,7 +633,7 @@ function onSelect(event: Event, item: T) {
 
               <span
                 v-if="getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : 'item-description') as keyof PCommandPaletteSlots<G, T>]"
-                :class="pohon.itemDescription({ class: [props.pohon?.itemDescription, item.pohon?.itemDescription] })"
+                :class="pohon.itemDescription({ class: [pohonProp?.itemDescription, item.pohon?.itemDescription] })"
                 data-pohon="command-palette-item-description"
               >
                 <slot
@@ -646,7 +648,7 @@ function onSelect(event: Event, item: T) {
             </span>
 
             <span
-              :class="pohon.itemTrailing({ class: [props.pohon?.itemTrailing, item.pohon?.itemTrailing] })"
+              :class="pohon.itemTrailing({ class: [pohonProp?.itemTrailing, item.pohon?.itemTrailing] })"
               data-pohon="command-palette-item-trailing"
             >
               <slot
@@ -658,19 +660,19 @@ function onSelect(event: Event, item: T) {
                 <PIcon
                   v-if="item.children && item.children.length > 0"
                   :name="childrenIcon || appConfig.pohon.icons.chevronRight"
-                  :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, item.pohon?.itemTrailingIcon] })"
+                  :class="pohon.itemTrailingIcon({ class: [pohonProp?.itemTrailingIcon, item.pohon?.itemTrailingIcon] })"
                   data-pohon="command-palette-item-trailing-icon"
                 />
 
                 <span
                   v-else-if="item.kbds?.length"
-                  :class="pohon.itemTrailingKbds({ class: [props.pohon?.itemTrailingKbds, item.pohon?.itemTrailingKbds] })"
+                  :class="pohon.itemTrailingKbds({ class: [pohonProp?.itemTrailingKbds, item.pohon?.itemTrailingKbds] })"
                   data-pohon="command-palette-item-trailing-kbds"
                 >
                   <PKbd
                     v-for="(kbd, kbdIndex) in item.kbds"
                     :key="kbdIndex"
-                    :size="((item.pohon?.itemTrailingKbdsSize || props.pohon?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as PKbdProps['size'])"
+                    :size="((item.pohon?.itemTrailingKbdsSize || pohonProp?.itemTrailingKbdsSize || pohon.itemTrailingKbdsSize()) as PKbdProps['size'])"
                     v-bind="isString(kbd) ? { value: kbd } : kbd"
                   />
                 </span>
@@ -678,7 +680,7 @@ function onSelect(event: Event, item: T) {
                 <PIcon
                   v-else-if="group?.highlightedIcon"
                   :name="group.highlightedIcon"
-                  :class="pohon.itemTrailingHighlightedIcon({ class: [props.pohon?.itemTrailingHighlightedIcon, item.pohon?.itemTrailingHighlightedIcon] })"
+                  :class="pohon.itemTrailingHighlightedIcon({ class: [pohonProp?.itemTrailingHighlightedIcon, item.pohon?.itemTrailingHighlightedIcon] })"
                   data-pohon="command-palette-item-trailing-highlighted-icon"
                 />
               </slot>
@@ -689,7 +691,7 @@ function onSelect(event: Event, item: T) {
               >
                 <PIcon
                   :name="selectedIcon || appConfig.pohon.icons.check"
-                  :class="pohon.itemTrailingIcon({ class: [props.pohon?.itemTrailingIcon, item.pohon?.itemTrailingIcon] })"
+                  :class="pohon.itemTrailingIcon({ class: [pohonProp?.itemTrailingIcon, item.pohon?.itemTrailingIcon] })"
                   data-pohon="command-palette-item-trailing-icon"
                 />
               </AListboxItemIndicator>
@@ -704,7 +706,7 @@ function onSelect(event: Event, item: T) {
     v-bind="{ ...rootProps, ...$attrs }"
     ref="rootRef"
     :selection-behavior="selectionBehavior"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="command-palette-root"
   >
     <AListboxFilter
@@ -720,7 +722,7 @@ function onSelect(event: Event, item: T) {
         :loading-icon="loadingIcon"
         :trailing-icon="trailingIcon"
         :icon="icon || appConfig.pohon.icons.search"
-        :class="pohon.input({ class: props.pohon?.input })"
+        :class="pohon.input({ class: pohonProp?.input })"
         data-pohon="command-palette-input"
         @keydown.backspace="onBackspace"
       >
@@ -738,7 +740,7 @@ function onSelect(event: Event, item: T) {
               variant="link"
               :aria-label="t('commandPalette.back')"
               v-bind="(typeof back === 'object' ? back : {})"
-              :class="pohon.back({ class: props.pohon?.back })"
+              :class="pohon.back({ class: pohonProp?.back })"
               data-pohon="command-palette-back"
               @click="navigateBack"
             />
@@ -760,7 +762,7 @@ function onSelect(event: Event, item: T) {
               variant="ghost"
               :aria-label="t('commandPalette.close')"
               v-bind="(typeof close === 'object' ? close : {})"
-              :class="pohon.close({ class: props.pohon?.close })"
+              :class="pohon.close({ class: pohonProp?.close })"
               data-pohon="command-palette-close"
               @click="emits('update:open', false)"
             />
@@ -770,13 +772,13 @@ function onSelect(event: Event, item: T) {
     </AListboxFilter>
 
     <AListboxContent
-      :class="pohon.content({ class: props.pohon?.content })"
+      :class="pohon.content({ class: pohonProp?.content })"
       data-pohon="command-palette-content"
     >
       <div
         v-if="filteredGroups?.length"
         role="presentation"
-        :class="pohon.viewport({ class: props.pohon?.viewport })"
+        :class="pohon.viewport({ class: pohonProp?.viewport })"
         data-pohon="command-palette-viewport"
       >
         <AListboxVirtualizer
@@ -796,12 +798,12 @@ function onSelect(event: Event, item: T) {
           <AListboxGroup
             v-for="group in filteredGroups"
             :key="`group-${group.id}`"
-            :class="pohon.group({ class: props.pohon?.group })"
+            :class="pohon.group({ class: pohonProp?.group })"
             data-pohon="command-palette-group"
           >
             <AListboxGroupLabel
               v-if="getProp({ object: group, path: props.labelKey as string })"
-              :class="pohon.label({ class: props.pohon?.label })"
+              :class="pohon.label({ class: pohonProp?.label })"
               data-pohon="command-palette-label"
             >
               {{ getProp({ object: group, path: props.labelKey as string }) }}
@@ -820,7 +822,7 @@ function onSelect(event: Event, item: T) {
 
       <div
         v-else
-        :class="pohon.empty({ class: props.pohon?.empty })"
+        :class="pohon.empty({ class: pohonProp?.empty })"
         data-pohon="command-palette-empty"
       >
         <slot
@@ -834,7 +836,7 @@ function onSelect(event: Event, item: T) {
 
     <div
       v-if="!!slots.footer"
-      :class="pohon.footer({ class: props.pohon?.footer })"
+      :class="pohon.footer({ class: pohonProp?.footer })"
       data-pohon="command-palette-footer"
     >
       <slot

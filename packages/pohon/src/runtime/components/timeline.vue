@@ -64,6 +64,7 @@ import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { APrimitive, ASeparator } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 
@@ -78,6 +79,7 @@ const slots = defineSlots<PTimelineSlots<T>>();
 const modelValue = defineModel<string | number>();
 
 const appConfig = useAppConfig() as Timeline['AppConfig'];
+const pohonProp = useComponentPohon('timeline', props);
 
 const pohon = computed(() =>
   uv({
@@ -125,25 +127,25 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
   <APrimitive
     :as="as"
     :data-orientation="orientation"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="timeline-root"
   >
     <div
       v-for="(item, index) in items"
       :key="item.value ?? index"
-      :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
+      :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class] })"
       :data-state="getItemState(index)"
       data-pohon="timeline-item"
     >
       <div
-        :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })"
+        :class="pohon.container({ class: [pohonProp?.container, item.pohon?.container] })"
         data-pohon="timeline-container"
       >
         <PAvatar
           :size="size"
           :icon="item.icon"
           v-bind="typeof item.avatar === 'object' ? item.avatar : {}"
-          :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })"
+          :class="pohon.indicator({ class: [pohonProp?.indicator, item.pohon?.indicator] })"
           :pohon="{ icon: 'akar:color-inherit', fallback: 'color-inherit' }"
           data-pohon="timeline-indicator"
         >
@@ -155,7 +157,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
 
         <ASeparator
           v-if="index < items.length - 1"
-          :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator] })"
+          :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator] })"
           :orientation="props.orientation"
           data-pohon="timeline-separator"
         />
@@ -163,7 +165,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
 
       <div
         data-pohon="timeline-wrapper"
-        :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })"
+        :class="pohon.wrapper({ class: [pohonProp?.wrapper, item.pohon?.wrapper] })"
       >
         <slot
           :name="((item.slot ? `${item.slot}-wrapper` : 'wrapper') as keyof PTimelineSlots<T>)"
@@ -172,7 +174,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
           <div
             v-if="item.date || !!slots[(item.slot ? `${item.slot}-date` : 'date') as keyof PTimelineSlots<T>]"
             data-pohon="timeline-date"
-            :class="pohon.date({ class: [props.pohon?.date, item.pohon?.date] })"
+            :class="pohon.date({ class: [pohonProp?.date, item.pohon?.date] })"
           >
             <slot
               :name="((item.slot ? `${item.slot}-date` : 'date') as keyof PTimelineSlots<T>)"
@@ -184,7 +186,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
           <div
             v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof PTimelineSlots<T>]"
             data-pohon="timeline-title"
-            :class="pohon.title({ class: [props.pohon?.title, item.pohon?.title] })"
+            :class="pohon.title({ class: [pohonProp?.title, item.pohon?.title] })"
           >
             <slot
               :name="((item.slot ? `${item.slot}-title` : 'title') as keyof PTimelineSlots<T>)"
@@ -196,7 +198,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
           <div
             v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof PTimelineSlots<T>]"
             data-pohon="timeline-description"
-            :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
+            :class="pohon.description({ class: [pohonProp?.description, item.pohon?.description] })"
           >
             <slot
               :name="((item.slot ? `${item.slot}-description` : 'description') as keyof PTimelineSlots<T>)"

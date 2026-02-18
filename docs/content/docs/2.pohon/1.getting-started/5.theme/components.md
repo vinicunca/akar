@@ -30,16 +30,16 @@ export default {
 
 ```vue [src/runtime/components/card.vue]
 <template>
-  <div :class="pohon.root({ class: [props.pohon?.root, props.class] })">
-    <div :class="pohon.header({ class: props.pohon?.header })">
+  <div :class="pohon.root({ class: [pohonProp?.root, props.class] })">
+    <div :class="pohon.header({ class: pohonProp?.header })">
       <slot name="header" />
     </div>
 
-    <div :class="pohon.body({ class: props.pohon?.body })">
+    <div :class="pohon.body({ class: pohonProp?.body })">
       <slot />
     </div>
 
-    <div :class="pohon.footer({ class: props.pohon?.footer })">
+    <div :class="pohon.footer({ class: pohonProp?.footer })">
       <slot name="footer" />
     </div>
   </div>

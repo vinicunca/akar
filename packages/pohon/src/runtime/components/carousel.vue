@@ -120,6 +120,7 @@ import { reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import useEmblaCarousel from 'embla-carousel-vue';
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
@@ -160,6 +161,7 @@ const emits = defineEmits<PCarouselEmits>();
 defineSlots<PCarouselSlots<T>>();
 const { dir, t } = useLocale();
 const appConfig = useAppConfig() as Carousel['AppConfig'];
+const pohonProp = useComponentPohon('carousel', props);
 
 const rootProps = useForwardProps(
   reactivePick(
@@ -391,24 +393,24 @@ defineExpose({
     aria-roledescription="carousel"
     :data-orientation="orientation"
     tabindex="0"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="carousel-root"
     @keydown="onKeyDown"
   >
     <div
       ref="emblaRef"
-      :class="pohon.viewport({ class: props.pohon?.viewport })"
+      :class="pohon.viewport({ class: pohonProp?.viewport })"
       data-pohon="carousel-viewport"
     >
       <div
-        :class="pohon.container({ class: props.pohon?.container })"
+        :class="pohon.container({ class: pohonProp?.container })"
         data-pohon="carousel-container"
       >
         <div
           v-for="(item, index) in items"
           :key="index"
           v-bind="dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
-          :class="pohon.item({ class: [props.pohon?.item, isCarouselItem(item) && item.pohon?.item, isCarouselItem(item) && item.class] })"
+          :class="pohon.item({ class: [pohonProp?.item, isCarouselItem(item) && item.pohon?.item, isCarouselItem(item) && item.class] })"
           data-pohon="carousel-item"
         >
           <slot
@@ -421,12 +423,12 @@ defineExpose({
 
     <div
       v-if="arrows || dots"
-      :class="pohon.controls({ class: props.pohon?.controls })"
+      :class="pohon.controls({ class: pohonProp?.controls })"
       data-pohon="carousel-controls"
     >
       <div
         v-if="arrows"
-        :class="pohon.arrows({ class: props.pohon?.arrows })"
+        :class="pohon.arrows({ class: pohonProp?.arrows })"
         data-pohon="carousel-arrows"
       >
         <PButton
@@ -436,7 +438,7 @@ defineExpose({
           variant="outline"
           :aria-label="t('carousel.prev')"
           v-bind="typeof prev === 'object' ? prev : undefined"
-          :class="pohon.prev({ class: props.pohon?.prev })"
+          :class="pohon.prev({ class: pohonProp?.prev })"
           data-pohon="carousel-prev"
           @click="scrollPrev"
         />
@@ -447,7 +449,7 @@ defineExpose({
           variant="outline"
           :aria-label="t('carousel.next')"
           v-bind="typeof next === 'object' ? next : undefined"
-          :class="pohon.next({ class: props.pohon?.next })"
+          :class="pohon.next({ class: pohonProp?.next })"
           data-pohon="carousel-next"
           @click="scrollNext"
         />
@@ -457,7 +459,7 @@ defineExpose({
         v-if="dots"
         role="tablist"
         :aria-label="t('carousel.dots')"
-        :class="pohon.dots({ class: props.pohon?.dots })"
+        :class="pohon.dots({ class: pohonProp?.dots })"
         data-pohon="carousel-dots"
       >
         <template
@@ -469,7 +471,7 @@ defineExpose({
             role="tab"
             :aria-label="t('carousel.goto', { slide: index + 1 })"
             :aria-selected="selectedIndex === index"
-            :class="pohon.dot({ class: props.pohon?.dot, active: selectedIndex === index })"
+            :class="pohon.dot({ class: pohonProp?.dot, active: selectedIndex === index })"
             data-pohon="carousel-dot"
             :data-state="selectedIndex === index ? 'active' : undefined"
             @click="scrollTo(index)"

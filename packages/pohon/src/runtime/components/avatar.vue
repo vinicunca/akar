@@ -40,6 +40,7 @@ import { useAppConfig } from '#imports';
 import { APrimitive, APrimitiveSlot } from 'akar';
 import { computed, ref, watch } from 'vue';
 import { useAvatarGroup } from '../composables/use-avatar-group';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PChip from './chip.vue';
 import PIcon from './icon.vue';
@@ -60,6 +61,8 @@ const fallback = computed(() =>
 );
 
 const appConfig = useAppConfig() as Avatar['AppConfig'];
+const pohonProp = useComponentPohon('avatar', props);
+
 const { size } = useAvatarGroup(props);
 
 const pohon = computed(() =>
@@ -101,7 +104,7 @@ function onError() {
     :is="props.chip ? PChip : APrimitive"
     :as="as"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     :style="props.style"
     data-pohon="avatar-root"
   >
@@ -112,7 +115,7 @@ function onError() {
       :width="sizePx"
       :height="sizePx"
       v-bind="$attrs"
-      :class="pohon.image({ class: props.pohon?.image })"
+      :class="pohon.image({ class: pohonProp?.image })"
       data-pohon="avatar-image"
       @error="onError"
     >
@@ -125,12 +128,12 @@ function onError() {
         <PIcon
           v-if="icon"
           :name="icon"
-          :class="pohon.icon({ class: props.pohon?.icon })"
+          :class="pohon.icon({ class: pohonProp?.icon })"
           data-pohon="avatar-icon"
         />
         <span
           v-else
-          :class="pohon.fallback({ class: props.pohon?.fallback })"
+          :class="pohon.fallback({ class: pohonProp?.fallback })"
           data-pohon="avatar-fallback"
         >
           {{ fallback || '&nbsp;' }}

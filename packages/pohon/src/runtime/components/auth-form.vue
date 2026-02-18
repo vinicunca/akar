@@ -92,6 +92,7 @@ import { useAppConfig } from '#imports';
 import { omit } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed, reactive, ref, useTemplateRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
@@ -134,6 +135,7 @@ const state = reactive<FormStateType>(
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as AuthForm['AppConfig'];
+const pohonProp = useComponentPohon('auth-form', props);
 
 const formRef = useTemplateRef('formRef');
 const passwordVisibility = ref(false);
@@ -149,29 +151,29 @@ defineExpose({
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <div
       v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header"
-      :class="pohon.header({ class: props.pohon?.header })"
+      :class="pohon.header({ class: pohonProp?.header })"
     >
       <slot name="header">
         <div
           v-if="icon || !!slots.leading"
-          :class="pohon.leading({ class: props.pohon?.leading })"
+          :class="pohon.leading({ class: pohonProp?.leading })"
         >
           <slot name="leading">
             <PIcon
               v-if="icon"
               :name="icon"
-              :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+              :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
             />
           </slot>
         </div>
 
         <div
           v-if="title || !!slots.title"
-          :class="pohon.title({ class: props.pohon?.title })"
+          :class="pohon.title({ class: pohonProp?.title })"
         >
           <slot name="title">
             {{ title }}
@@ -180,7 +182,7 @@ defineExpose({
 
         <div
           v-if="description || !!slots.description"
-          :class="pohon.description({ class: props.pohon?.description })"
+          :class="pohon.description({ class: pohonProp?.description })"
         >
           <slot name="description">
             {{ description }}
@@ -189,10 +191,10 @@ defineExpose({
       </slot>
     </div>
 
-    <div :class="pohon.body({ class: props.pohon?.body })">
+    <div :class="pohon.body({ class: pohonProp?.body })">
       <div
         v-if="providers?.length || !!slots.providers"
-        :class="pohon.providers({ class: props.pohon?.providers })"
+        :class="pohon.providers({ class: pohonProp?.providers })"
       >
         <slot name="providers">
           <PButton
@@ -209,7 +211,7 @@ defineExpose({
       <PSeparator
         v-if="providers?.length && fields?.length"
         v-bind="typeof separator === 'object' ? separator : { label: separator }"
-        :class="pohon.separator({ class: props.pohon?.separator })"
+        :class="pohon.separator({ class: pohonProp?.separator })"
       />
 
       <PForm
@@ -219,7 +221,7 @@ defineExpose({
         :schema="schema"
         :validate="validate"
         :validate-on="validateOn"
-        :class="pohon.form({ class: props.pohon?.form })"
+        :class="pohon.form({ class: pohonProp?.form })"
         :disabled="disabled"
         :loading-auto="loadingAuto"
         @submit="onSubmit"
@@ -243,19 +245,21 @@ defineExpose({
             <PCheckbox
               v-if="field.type === 'checkbox'"
               v-model="state[field.name]"
-              :class="pohon.checkbox({ class: props.pohon?.checkbox })"
+              :class="pohon.checkbox({ class: pohonProp?.checkbox })"
               v-bind="omit(field, ['description', 'help', 'hint', 'size'])"
             />
+
             <PSelectMenu
               v-else-if="field.type === 'select'"
               v-model="state[field.name]"
-              :class="pohon.select({ class: props.pohon?.select })"
+              :class="pohon.select({ class: pohonProp?.select })"
               v-bind="omit(field, ['description', 'help', 'hint', 'size'])"
             />
+
             <PInput
               v-else-if="field.type === 'password'"
               v-model="state[field.name]"
-              :class="pohon.password({ class: props.pohon?.password })"
+              :class="pohon.password({ class: pohonProp?.password })"
               :type="passwordVisibility ? 'text' : 'password'"
               v-bind="omit(field, ['label', 'description', 'help', 'hint', 'size', 'type', 'required', 'defaultValue'])"
               :pohon="{ root: 'w-full' }"
@@ -277,14 +281,14 @@ defineExpose({
               v-else-if="field.type === 'otp'"
               :id="field.name"
               v-model="state[field.name]"
-              :class="pohon.otp({ class: props.pohon?.otp })"
+              :class="pohon.otp({ class: pohonProp?.otp })"
               otp
               v-bind="field.otp"
             />
             <PInput
               v-else
               v-model="state[field.name]"
-              :class="pohon.input({ class: props.pohon?.input })"
+              :class="pohon.input({ class: pohonProp?.input })"
               v-bind="omit(field, ['label', 'description', 'help', 'hint', 'size', 'required', 'defaultValue'])"
             />
           </slot>
@@ -344,7 +348,7 @@ defineExpose({
 
     <div
       v-if="!!slots.footer"
-      :class="pohon.footer({ class: props.pohon?.footer })"
+      :class="pohon.footer({ class: pohonProp?.footer })"
     >
       <slot name="footer" />
     </div>

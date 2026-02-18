@@ -1,3 +1,9 @@
+# eslint-disable pnpm/yaml-no-duplicate-catalog-item, pnpm/yaml-enforce-settings
+
+catalogMode: prefer
+
+shellEmulator: true
+
 packages:
   - packages/*
   - docs
@@ -5,11 +11,18 @@ packages:
   - packages/pohon/playgrounds/vue
   - packages/pohon/playgrounds/admin
 
+overrides:
+  akar: workspace:*
+  nitropack: ^2.13.0
+  pohon-ui: workspace:*
+  rolldown: 1.0.0-beta.26
+  typescript: 5.8.3
+  unplugin: ^2.3.10
+  vite: ^7.3.0
+
 catalog:
   postcss-preset-env: ^11.1.1
   unstorage: ^1.17.4
-
-catalogMode: prefer
 
 catalogs:
   base:
@@ -60,7 +73,7 @@ catalogs:
     vitest: ^3.2.4
     vitest-axe: 0.1.0
     vitest-canvas-mock: ^0.3.3
-    vue: 3.5.27
+    vue: 3.5.28
     vue-component-type-helpers: 3.2.2
     vue-tsc: 2.2.12
   docs:
@@ -85,8 +98,8 @@ catalogs:
     vue-component-meta: ^3.2.2
     yup: ^1.7.1
   plugins:
-    '@nuxt/kit': 4.2.2
-    '@nuxt/schema': 4.2.2
+    '@nuxt/kit': 4.3.1
+    '@nuxt/schema': 4.3.1
     unbuild: ^3.6.1
     unplugin-vue-components: ^31.0.0
   pohon:
@@ -127,7 +140,7 @@ catalogs:
     magic-string: ^0.30.21
     mlly: ^1.8.0
     motion-v: ^1.9.0
-    nuxt: 4.2.2
+    nuxt: 4.3.1
     ohash: ^2.0.11
     pathe: ^2.0.3
     pinia: ^3.0.4
@@ -150,14 +163,3 @@ onlyBuiltDependencies:
   - puppeteer
   - sharp
   - simple-git-hooks
-
-overrides:
-  akar: workspace:*
-  nitropack: ^2.13.0
-  pohon-ui: workspace:*
-  rolldown: 1.0.0-beta.26
-  typescript: 5.8.3
-  unplugin: ^2.3.10
-  vite: ^7.3.0
-
-shellEmulator: true

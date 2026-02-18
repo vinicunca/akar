@@ -73,6 +73,7 @@ export type PFormProps<S extends FormSchema, T extends boolean = true, N extends
    */
   loadingAuto?: boolean;
   class?: any;
+  pohon?: { base?: any };
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>);
 } & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>;
 
@@ -101,6 +102,7 @@ import {
   ref,
   useId,
 } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import {
   formBusInjectionKey,
   formErrorsInjectionKey,
@@ -132,6 +134,7 @@ const emits = defineEmits<PFormEmits<S, T>>();
 defineSlots<PFormSlots>();
 
 const appConfig = useAppConfig() as FormConfig['AppConfig'];
+const pohonProp = useComponentPohon('form', props);
 
 const pohon = computed(() =>
   uv({ extend: uv(theme), ...(appConfig.pohon?.form || {}) }),
@@ -205,8 +208,7 @@ onMounted(async () => {
     }
 
     if (event.type === 'change'
-      || event.type === 'input'
-    ) {
+      || event.type === 'input') {
       dirtyFields.add(event.name);
     }
   });
@@ -524,7 +526,7 @@ defineExpose(api);
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="pohon({ class: props.class })"
+    :class="pohon({ class: [pohonProp.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot

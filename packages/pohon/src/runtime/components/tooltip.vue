@@ -67,6 +67,7 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { usePortal } from '../composables/use-portal';
 import { uv } from '../utils/uv';
 import PKbd from './kbd.vue';
@@ -82,6 +83,7 @@ const emits = defineEmits<PTooltipEmits>();
 const slots = defineSlots<PTooltipSlots>();
 
 const appConfig = useAppConfig() as Tooltip['AppConfig'];
+const pohonProp = useComponentPohon('tooltip', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -132,7 +134,7 @@ const pohon = computed(
     <ATooltipPortal v-bind="portalProps">
       <ATooltipContent
         v-bind="contentProps"
-        :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
+        :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
         data-pohon="tooltip-content"
       >
         <slot
@@ -141,19 +143,19 @@ const pohon = computed(
         >
           <span
             v-if="text"
-            :class="pohon.text({ class: props.pohon?.text })"
+            :class="pohon.text({ class: pohonProp?.text })"
             data-pohon="tooltip-text"
           >{{ text }}</span>
 
           <span
             v-if="kbds?.length"
-            :class="pohon.kbds({ class: props.pohon?.kbds })"
+            :class="pohon.kbds({ class: pohonProp?.kbds })"
             data-pohon="tooltip-kbds"
           >
             <PKbd
               v-for="(kbd, index) in kbds"
               :key="index"
-              :size="((props.pohon?.kbdsSize || pohon.kbdsSize()) as PKbdProps['size'])"
+              :size="((pohonProp?.kbdsSize || pohon.kbdsSize()) as PKbdProps['size'])"
               v-bind="isString(kbd) ? { value: kbd } : kbd"
             />
           </span>
@@ -162,7 +164,7 @@ const pohon = computed(
         <ATooltipArrow
           v-if="!!arrow"
           v-bind="arrowProps"
-          :class="pohon.arrow({ class: props.pohon?.arrow })"
+          :class="pohon.arrow({ class: pohonProp?.arrow })"
           data-pohon="tooltip-arrow"
         />
       </ATooltipContent>

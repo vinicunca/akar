@@ -7,6 +7,7 @@ type ProseBlockquote = ComponentConfig<typeof theme, AppConfig, 'blockquote', 'p
 
 export interface ProseBlockquoteProps {
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface ProseBlockquoteSlots {
@@ -17,18 +18,20 @@ export interface ProseBlockquoteSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseBlockquoteProps>();
 defineSlots<ProseBlockquoteSlots>();
 
 const appConfig = useAppConfig() as ProseBlockquote['AppConfig'];
+const pohonProp = useComponentPohon('prose.blockquote', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.blockquote || {}) }));
 </script>
 
 <template>
-  <blockquote :class="pohon({ class: props.class })">
+  <blockquote :class="pohon({ class: [pohonProp?.base, props.class] })">
     <slot />
   </blockquote>
 </template>

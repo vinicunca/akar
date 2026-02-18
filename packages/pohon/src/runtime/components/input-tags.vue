@@ -77,6 +77,7 @@ import {
 } from 'akar';
 import { computed, onMounted, toRaw, toRef, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
@@ -96,6 +97,7 @@ const emits = defineEmits<PInputTagsEmits<T>>();
 const slots = defineSlots<PInputTagsSlots<T>>();
 
 const appConfig = useAppConfig() as InputTags['AppConfig'];
+const pohonProp = useComponentPohon('inputTags', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -195,7 +197,7 @@ defineExpose({
     v-slot="{ modelValue: tags }"
     :model-value="modelValue"
     :default-value="defaultValue"
-    :class="pohon.root({ class: [pohon.base({ class: props.pohon?.base }), props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohon.base({ class: pohonProp?.base }), pohonProp?.root, props.class] })"
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
@@ -206,11 +208,11 @@ defineExpose({
       v-for="(item, index) in tags"
       :key="index"
       :value="item"
-      :class="pohon.item({ class: [props.pohon?.item] })"
+      :class="pohon.item({ class: [pohonProp?.item] })"
       data-pohon="input-tags-item"
     >
       <ATagsInputItemText
-        :class="pohon.itemText({ class: [props.pohon?.itemText] })"
+        :class="pohon.itemText({ class: [pohonProp?.itemText] })"
         data-pohon="input-tags-item-text"
       >
         <slot
@@ -223,7 +225,7 @@ defineExpose({
       </ATagsInputItemText>
 
       <ATagsInputItemDelete
-        :class="pohon.itemDelete({ class: [props.pohon?.itemDelete] })"
+        :class="pohon.itemDelete({ class: [pohonProp?.itemDelete] })"
         :disabled="disabled"
         data-pohon="input-tags-item-delete"
       >
@@ -235,7 +237,7 @@ defineExpose({
         >
           <PIcon
             :name="deleteIcon || appConfig.pohon.icons.close"
-            :class="pohon.itemDeleteIcon({ class: [props.pohon?.itemDeleteIcon] })"
+            :class="pohon.itemDeleteIcon({ class: [pohonProp?.itemDeleteIcon] })"
             data-pohon="input-tags-item-delete-icon"
           />
         </slot>
@@ -247,7 +249,7 @@ defineExpose({
       v-bind="{ ...$attrs, ...ariaAttrs }"
       :placeholder="placeholder"
       :max-length="maxLength"
-      :class="pohon.input({ class: props.pohon?.input })"
+      :class="pohon.input({ class: pohonProp?.input })"
       data-pohon="input-tags-input"
       @blur="onBlur"
       @focus="onFocus"
@@ -257,7 +259,7 @@ defineExpose({
 
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
-      :class="pohon.leading({ class: props.pohon?.leading })"
+      :class="pohon.leading({ class: pohonProp?.leading })"
       data-pohon="input-tags-leading"
     >
       <slot
@@ -267,14 +269,14 @@ defineExpose({
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
-          :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+          :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
           data-pohon="input-tags-leading-icon"
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
+          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
-          :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+          :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
           data-pohon="input-tags-leading-avatar"
         />
       </slot>
@@ -282,7 +284,7 @@ defineExpose({
 
     <span
       v-if="isTrailing || !!slots.trailing"
-      :class="pohon.trailing({ class: props.pohon?.trailing })"
+      :class="pohon.trailing({ class: pohonProp?.trailing })"
       data-pohon="input-tags-trailing"
     >
       <slot
@@ -292,7 +294,7 @@ defineExpose({
         <PIcon
           v-if="trailingIconName"
           :name="trailingIconName"
-          :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+          :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
           data-pohon="input-tags-trailing-icon"
         />
       </slot>

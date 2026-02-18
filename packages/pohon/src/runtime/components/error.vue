@@ -42,6 +42,7 @@ export interface PErrorSlots {
 import { clearError, useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
@@ -58,6 +59,7 @@ const slots = defineSlots<PErrorSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Error['AppConfig'];
+const pohonProp = useComponentPohon('error', props);
 
 const pohon = computed(() =>
   uv({ extend: uv(theme), ...(appConfig.pohon?.error || {}) })(),
@@ -71,12 +73,12 @@ function handleError() {
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="error-root"
   >
     <p
       v-if="!!props.error?.statusCode || !!slots.statusCode"
-      :class="pohon.statusCode({ class: props.pohon?.statusCode })"
+      :class="pohon.statusCode({ class: pohonProp?.statusCode })"
       data-pohon="error-status-code"
     >
       <slot name="statusCode">
@@ -85,7 +87,7 @@ function handleError() {
     </p>
     <h1
       v-if="!!props.error?.statusMessage || !!slots.statusMessage"
-      :class="pohon.statusMessage({ class: props.pohon?.statusMessage })"
+      :class="pohon.statusMessage({ class: pohonProp?.statusMessage })"
       data-pohon="error-status-message"
     >
       <slot name="statusMessage">
@@ -94,7 +96,7 @@ function handleError() {
     </h1>
     <p
       v-if="(props.error?.message && props.error.message !== props.error.statusMessage) || !!slots.message"
-      :class="pohon.message({ class: props.pohon?.message })"
+      :class="pohon.message({ class: pohonProp?.message })"
       data-pohon="error-message"
     >
       <slot name="message">
@@ -103,7 +105,7 @@ function handleError() {
     </p>
     <div
       v-if="!!clear || !!slots.links"
-      :class="pohon.links({ class: props.pohon?.links })"
+      :class="pohon.links({ class: pohonProp?.links })"
       data-pohon="error-links"
     >
       <slot name="links">

@@ -56,6 +56,7 @@ import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
 import PLink from '../link.vue';
@@ -66,6 +67,7 @@ const props = defineProps<PContentSurroundProps<T>>();
 defineSlots<PContentSurroundSlots<T>>();
 
 const appConfig = useAppConfig() as ContentSurround['AppConfig'];
+const pohonProp = useComponentPohon('contentSurround', props);
 
 const [
   DefineLinkTemplate,
@@ -92,7 +94,7 @@ const pohon = computed(() =>
       v-if="link"
       :to="link.path"
       raw
-      :class="pohon.link({ class: [props.pohon?.link, link.pohon?.link, link.class], direction })"
+      :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], direction })"
       data-pohon="content-surround-link"
     >
       <slot
@@ -101,7 +103,7 @@ const pohon = computed(() =>
         :pohon="pohon"
       >
         <div
-          :class="pohon.linkLeading({ class: [props.pohon?.linkLeading, link.pohon?.linkLeading] })"
+          :class="pohon.linkLeading({ class: [pohonProp?.linkLeading, link.pohon?.linkLeading] })"
           data-pohon="content-surround-link-leading"
         >
           <slot
@@ -111,14 +113,14 @@ const pohon = computed(() =>
           >
             <PIcon
               :name="link.icon || icon"
-              :class="pohon.linkLeadingIcon({ class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon], direction })"
+              :class="pohon.linkLeadingIcon({ class: [pohonProp?.linkLeadingIcon, link.pohon?.linkLeadingIcon], direction })"
               data-pohon="content-surround-link-leading-icon"
             />
           </slot>
         </div>
 
         <p
-          :class="pohon.linkTitle({ class: [props.pohon?.linkTitle, link.pohon?.linkTitle] })"
+          :class="pohon.linkTitle({ class: [pohonProp?.linkTitle, link.pohon?.linkTitle] })"
           data-pohon="content-surround-link-title"
         >
           <slot
@@ -131,7 +133,7 @@ const pohon = computed(() =>
         </p>
 
         <p
-          :class="pohon.linkDescription({ class: [props.pohon?.linkDescription, link.pohon?.linkDescription] })"
+          :class="pohon.linkDescription({ class: [pohonProp?.linkDescription, link.pohon?.linkDescription] })"
           data-pohon="content-surround-link-description"
         >
           <slot
@@ -154,7 +156,7 @@ const pohon = computed(() =>
     v-if="surround"
     :as="as"
     v-bind="$attrs"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="content-surround-root"
   >
     <ReuseLinkTemplate

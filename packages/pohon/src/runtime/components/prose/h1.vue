@@ -19,12 +19,15 @@ export interface ProseH1Slots {
 <script setup lang="ts">
 import { useAppConfig, useRuntimeConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseH1Props>();
 defineSlots<ProseH1Slots>();
 
 const appConfig = useAppConfig() as ProseH1['AppConfig'];
+const pohonProp = useComponentPohon('prose.h1', props);
+
 const { headings } = useRuntimeConfig().public?.mdc || {};
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.h1 || {}) })());
@@ -40,7 +43,7 @@ const generate = computed(() => props.id && typeof headings?.anchorLinks === 'ob
     <a
       v-if="id && generate"
       :href="`#${id}`"
-      :class="pohon.link({ class: props.pohon?.link })"
+      :class="pohon.link({ class: pohonProp?.link })"
     >
       <slot />
     </a>

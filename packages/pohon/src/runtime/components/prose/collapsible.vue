@@ -39,6 +39,7 @@ export interface ProseCollapsibleSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
@@ -50,6 +51,7 @@ defineSlots<ProseCollapsibleSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as ProseCollapsible['AppConfig'];
+const pohonProp = useComponentPohon('prose.collapsible', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.collapsible || {}) })());
 </script>
@@ -61,13 +63,13 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
     :pohon="transformPohon(pohon)"
   >
     <template #default="{ open }">
-      <button :class="pohon.trigger({ class: props.pohon?.trigger })">
+      <button :class="pohon.trigger({ class: pohonProp?.trigger })">
         <PIcon
           :name="icon || appConfig.pohon.icons.chevronDown"
-          :class="pohon.triggerIcon({ class: props.pohon?.triggerIcon })"
+          :class="pohon.triggerIcon({ class: pohonProp?.triggerIcon })"
         />
 
-        <span :class="pohon.triggerLabel({ class: props.pohon?.triggerLabel })">
+        <span :class="pohon.triggerLabel({ class: pohonProp?.triggerLabel })">
           {{ open ? (props.closeText || t('prose.collapsible.closeText')) : (props.openText || t('prose.collapsible.openText')) }} {{ props.name || t('prose.collapsible.name') }}
         </span>
       </button>

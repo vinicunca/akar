@@ -76,6 +76,7 @@ import { isClient } from '@vueuse/shared';
 import { APrimitive } from 'akar';
 import { ColorTranslator } from 'colortranslator';
 import { computed, nextTick, ref, toValue } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -90,6 +91,7 @@ const props = withDefaults(
 const modelValue = defineModel<string>(undefined);
 
 const appConfig = useAppConfig() as ColorPicker['AppConfig'];
+const pohonProp = useComponentPohon('colorPicker', props);
 
 const pohon = computed(() =>
   uv({
@@ -299,28 +301,28 @@ const trackThumbStyle = computed(() => ({
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     :data-disabled="disabled ? true : undefined"
     data-pohon="color-picker-root"
   >
     <div
-      :class="pohon.picker({ class: props.pohon?.picker })"
+      :class="pohon.picker({ class: pohonProp?.picker })"
       data-pohon="color-picker-picker"
     >
       <div
         ref="selectorRef"
-        :class="pohon.selector({ class: props.pohon?.selector })"
+        :class="pohon.selector({ class: pohonProp?.selector })"
         data-pohon="color-picker-selector"
         :style="selectorStyle"
       >
         <div
-          :class="pohon.selectorBackground({ class: props.pohon?.selectorBackground })"
+          :class="pohon.selectorBackground({ class: pohonProp?.selectorBackground })"
           data-pohon="color-picker-selector-background"
           data-color-picker-background
         >
           <div
             ref="selectorThumbRef"
-            :class="pohon.selectorThumb({ class: props.pohon?.selectorThumb })"
+            :class="pohon.selectorThumb({ class: pohonProp?.selectorThumb })"
             data-pohon="color-picker-selector-thumb"
             :style="selectorThumbStyle"
             :data-disabled="disabled ? true : undefined"
@@ -329,13 +331,13 @@ const trackThumbStyle = computed(() => ({
       </div>
       <div
         ref="trackRef"
-        :class="pohon.track({ class: props.pohon?.track })"
+        :class="pohon.track({ class: pohonProp?.track })"
         data-pohon="color-picker-track"
         data-color-picker-track
       >
         <div
           ref="trackThumbRef"
-          :class="pohon.trackThumb({ class: props.pohon?.trackThumb })"
+          :class="pohon.trackThumb({ class: pohonProp?.trackThumb })"
           data-pohon="color-picker-track-thumb"
           :style="trackThumbStyle"
           :data-disabled="disabled ? true : undefined"

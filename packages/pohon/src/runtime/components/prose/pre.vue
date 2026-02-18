@@ -27,6 +27,7 @@ export interface ProsePreSlots {
 import { useAppConfig } from '#imports';
 import { useClipboard } from '@vueuse/core';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { uv } from '../../utils/uv';
 import PButton from '../button.vue';
@@ -38,23 +39,24 @@ defineSlots<ProsePreSlots>();
 const { t } = useLocale();
 const { copy, copied } = useClipboard();
 const appConfig = useAppConfig() as ProsePre['AppConfig'];
+const pohonProp = useComponentPohon('prose.pre', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.pre || {}) })());
 </script>
 
 <template>
-  <div :class="pohon.root({ class: [props.pohon?.root], filename: !!filename })">
+  <div :class="pohon.root({ class: [pohonProp?.root], filename: !!filename })">
     <div
       v-if="filename && !hideHeader"
-      :class="pohon.header({ class: props.pohon?.header })"
+      :class="pohon.header({ class: pohonProp?.header })"
     >
       <PCodeIcon
         :icon="icon"
         :filename="filename"
-        :class="pohon.icon({ class: props.pohon?.icon })"
+        :class="pohon.icon({ class: pohonProp?.icon })"
       />
 
-      <span :class="pohon.filename({ class: props.pohon?.filename })">{{ filename }}</span>
+      <span :class="pohon.filename({ class: pohonProp?.filename })">{{ filename }}</span>
     </div>
 
     <PButton
@@ -63,13 +65,13 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
       variant="outline"
       size="sm"
       :aria-label="t('prose.pre.copy')"
-      :class="pohon.copy({ class: props.pohon?.copy })"
+      :class="pohon.copy({ class: pohonProp?.copy })"
       tabindex="-1"
       @click="copy(props.code || '')"
     />
 
     <pre
-      :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+      :class="pohon.base({ class: [pohonProp?.base, props.class] })"
       v-bind="$attrs"
     ><slot /></pre>
   </div>

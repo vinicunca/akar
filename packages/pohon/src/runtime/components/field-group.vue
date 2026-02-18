@@ -21,7 +21,7 @@ export interface PFieldGroupProps {
    */
   orientation?: FieldGroup['variants']['orientation'];
   class?: any;
-  pohon?: FieldGroup['slots'];
+  pohon?: { base?: any };
 }
 
 export interface PFieldGroupSlots {
@@ -33,6 +33,7 @@ export interface PFieldGroupSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed, provide } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { fieldGroupInjectionKey } from '../composables/use-field-group';
 import { uv } from '../utils/uv';
 
@@ -45,6 +46,7 @@ const props = withDefaults(
 defineSlots<PFieldGroupSlots>();
 
 const appConfig = useAppConfig() as FieldGroup['AppConfig'];
+const pohonProp = useComponentPohon('fieldGroup', props);
 
 const pohon = computed(() =>
   uv({
@@ -63,7 +65,7 @@ provide(fieldGroupInjectionKey, computed(() => ({
   <APrimitive
     :as="as"
     :data-orientation="orientation"
-    :class="pohon({ orientation, class: props.class })"
+    :class="pohon({ orientation, class: [pohonProp.base, props.class] })"
   >
     <slot />
   </APrimitive>

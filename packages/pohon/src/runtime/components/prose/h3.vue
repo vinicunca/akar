@@ -19,6 +19,7 @@ export interface ProseH3Slots {
 <script setup lang="ts">
 import { useAppConfig, useRuntimeConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
 
@@ -26,6 +27,8 @@ const props = defineProps<ProseH3Props>();
 defineSlots<ProseH3Slots>();
 
 const appConfig = useAppConfig() as ProseH3['AppConfig'];
+const pohonProp = useComponentPohon('prose.h3', props);
+
 const { headings } = useRuntimeConfig().public?.mdc || {};
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.h3 || {}) })());
@@ -41,12 +44,12 @@ const generate = computed(() => props.id && typeof headings?.anchorLinks === 'ob
     <a
       v-if="id && generate"
       :href="`#${id}`"
-      :class="pohon.link({ class: props.pohon?.link })"
+      :class="pohon.link({ class: pohonProp?.link })"
     >
-      <span :class="pohon.leading({ class: props.pohon?.leading })">
+      <span :class="pohon.leading({ class: pohonProp?.leading })">
         <PIcon
           :name="appConfig.pohon.icons.hash"
-          :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+          :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
         />
       </span>
 

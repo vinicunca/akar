@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { PTabsProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/tabs';
 
@@ -20,6 +21,7 @@ export interface ProseTabsProps {
    */
   hash?: string;
   class?: any;
+  pohon?: ProseTabs['slots'] & PTabsProps['pohon'];
 }
 
 export interface ProseTabsSlots {
@@ -30,6 +32,7 @@ export interface ProseTabsSlots {
 <script setup lang="ts">
 import { useAppConfig, useState } from '#imports';
 import { computed, onBeforeUpdate, onMounted, ref, watch } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
 import PTabs from '../tabs.vue';
@@ -45,6 +48,7 @@ const slots = defineSlots<ProseTabsSlots>();
 const model = defineModel<string>();
 
 const appConfig = useAppConfig() as ProseTabs['AppConfig'];
+const pohonProp = useComponentPohon('prose.tabs', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.tabs || {}) }));
 
@@ -119,7 +123,7 @@ onBeforeUpdate(() => rerenderCount.value++);
     :items="items"
     :class="props.class"
     :unmount-on-hide="false"
-    :pohon="transformPohon(pohon())"
+    :pohon="transformPohon(pohon(), pohonProp)"
     @update:model-value="onUpdateModelValue"
   >
     <template #content="{ item }">

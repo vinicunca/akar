@@ -123,6 +123,7 @@ import { reactivePick } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, useTemplateRef } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useContentSearch } from '../../composables/use-content-search';
 import { useLocale } from '../../composables/use-locale';
 import { transformPohon } from '../../utils';
@@ -148,6 +149,7 @@ const { open, mapNavigationItems, postFilter } = useContentSearch();
 
 const colorMode = useColorMode();
 const appConfig = useAppConfig() as ContentSearch['AppConfig'];
+const pohonProp = useComponentPohon('contentSearch', props);
 
 const commandPaletteProps = useForwardProps(
   reactivePick(
@@ -322,7 +324,7 @@ defineExpose({
     :title="title || t('contentSearch.title')"
     :description="description || t('contentSearch.description')"
     v-bind="dialogProps"
-    :class="pohon.dialog({ class: [props.pohon?.dialog, props.class] })"
+    :class="pohon.dialog({ class: [pohonProp?.dialog, props.class] })"
   >
     <template #content="contentData">
       <slot

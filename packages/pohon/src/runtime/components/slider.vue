@@ -55,6 +55,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 import PTooltip from './tooltip.vue';
@@ -73,6 +74,7 @@ const emits = defineEmits<PSliderEmits>();
 const modelValue = defineModel<T>();
 
 const appConfig = useAppConfig() as Slider['AppConfig'];
+const pohonProp = useComponentPohon('slider', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -147,18 +149,18 @@ function onChange(value: any) {
     v-model="sliderValue"
     :name="name"
     :disabled="disabled"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     :default-value="defaultSliderValue"
     data-pohon="slider-root"
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
     <ASliderTrack
-      :class="pohon.track({ class: props.pohon?.track })"
+      :class="pohon.track({ class: pohonProp?.track })"
       data-pohon="slider-track"
     >
       <ASliderRange
-        :class="pohon.range({ class: props.pohon?.range })"
+        :class="pohon.range({ class: pohonProp?.range })"
         data-pohon="slider-range"
       />
     </ASliderTrack>
@@ -174,14 +176,14 @@ function onChange(value: any) {
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
         <ASliderThumb
-          :class="pohon.thumb({ class: props.pohon?.thumb })"
+          :class="pohon.thumb({ class: pohonProp?.thumb })"
           data-pohon="slider-thumb"
           :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`"
         />
       </PTooltip>
       <ASliderThumb
         v-else
-        :class="pohon.thumb({ class: props.pohon?.thumb })"
+        :class="pohon.thumb({ class: pohonProp?.thumb })"
         data-pohon="slider-thumb"
         :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`"
       />

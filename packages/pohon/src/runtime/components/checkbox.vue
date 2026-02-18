@@ -70,6 +70,7 @@ import {
   useForwardProps,
 } from 'akar';
 import { computed, useId } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
@@ -82,6 +83,7 @@ const slots = defineSlots<PCheckboxSlots>();
 const modelValue = defineModel<boolean | 'indeterminate'>({ default: undefined });
 
 const appConfig = useAppConfig() as Checkbox['AppConfig'];
+const pohonProp = useComponentPohon('checkbox', props);
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'));
 
@@ -124,11 +126,11 @@ function onUpdate(value: any) {
 <template>
   <APrimitive
     :as="(!variant || variant === 'list') ? as : ALabel"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="checkbox-root"
   >
     <div
-      :class="pohon.container({ class: props.pohon?.container })"
+      :class="pohon.container({ class: pohonProp?.container })"
       data-pohon="checkbox-container"
     >
       <ACheckboxRoot
@@ -137,26 +139,26 @@ function onUpdate(value: any) {
         v-model="modelValue"
         :name="name"
         :disabled="disabled"
-        :class="pohon.base({ class: props.pohon?.base })"
+        :class="pohon.base({ class: pohonProp?.base })"
         data-pohon="checkbox-base"
         @update:model-value="onUpdate"
       >
         <template #default="{ modelValue }">
           <ACheckboxIndicator
-            :class="pohon.indicator({ class: props.pohon?.indicator })"
+            :class="pohon.indicator({ class: pohonProp?.indicator })"
             data-pohon="checkbox-indicator"
           >
             <PIcon
               v-if="modelValue === 'indeterminate'"
               :name="indeterminateIcon || appConfig.pohon.icons.minus"
-              :class="pohon.icon({ class: props.pohon?.icon })"
+              :class="pohon.icon({ class: pohonProp?.icon })"
               data-pohon="checkbox-icon"
             />
 
             <PIcon
               v-else
               :name="icon || appConfig.pohon.icons.check"
-              :class="pohon.icon({ class: props.pohon?.icon })"
+              :class="pohon.icon({ class: pohonProp?.icon })"
               data-pohon="checkbox-icon"
             />
           </ACheckboxIndicator>
@@ -166,14 +168,14 @@ function onUpdate(value: any) {
 
     <div
       v-if="(label || !!slots.label) || (description || !!slots.description)"
-      :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+      :class="pohon.wrapper({ class: pohonProp?.wrapper })"
       data-pohon="checkbox-wrapper"
     >
       <component
         :is="(!variant || variant === 'list') ? ALabel : 'p'"
         v-if="label || !!slots.label"
         :for="id"
-        :class="pohon.label({ class: props.pohon?.label })"
+        :class="pohon.label({ class: pohonProp?.label })"
         data-pohon="checkbox-label"
       >
         <slot
@@ -185,7 +187,7 @@ function onUpdate(value: any) {
       </component>
       <p
         v-if="description || !!slots.description"
-        :class="pohon.description({ class: props.pohon?.description })"
+        :class="pohon.description({ class: pohonProp?.description })"
         data-pohon="checkbox-description"
       >
         <slot

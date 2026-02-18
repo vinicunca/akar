@@ -103,6 +103,7 @@ import { reactiveOmit } from '@vueuse/core';
 import { APrimitive, ASeparator, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, inject } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { isArrayOfArray } from '../utils';
 import { createHandlers } from '../utils/editor';
 import { uv } from '../utils/uv';
@@ -126,6 +127,7 @@ const props = withDefaults(
 defineSlots<PEditorToolbarSlots<T>>();
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig'];
+const pohonProp = useComponentPohon('editorToolbar', props);
 
 const handlers = inject('editorHandlers', computed(() => createHandlers()));
 
@@ -350,7 +352,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
     v-bind="Component !== 'template' ? {
       editor,
       tabindex: -1,
-      class: pohon.root({ class: props.pohon?.root }),
+      class: pohon.root({ class: pohonProp?.root }),
       ...rootProps,
       options,
       ...$attrs,
@@ -362,7 +364,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
       :as="as"
       role="toolbar"
       data-slot="base"
-      :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+      :class="pohon.base({ class: [pohonProp?.base, props.class] })"
     >
       <template
         v-for="(group, groupIndex) in groups"
@@ -371,7 +373,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
         <div
           role="group"
           data-slot="group"
-          :class="pohon.group({ class: props.pohon?.group })"
+          :class="pohon.group({ class: pohonProp?.group })"
         >
           <template
             v-for="(item, index) in group"
@@ -419,7 +421,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
         <ASeparator
           v-if="groupIndex < groups.length - 1"
           data-slot="separator"
-          :class="pohon.separator({ class: props.pohon?.separator })"
+          :class="pohon.separator({ class: pohonProp?.separator })"
           orientation="vertical"
         />
       </template>

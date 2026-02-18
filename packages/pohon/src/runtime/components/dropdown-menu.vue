@@ -139,6 +139,7 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PDropdownMenuContent from './dropdown-menu-content.vue';
 
@@ -156,6 +157,7 @@ const emits = defineEmits<PDropdownMenuEmits>();
 const slots = defineSlots<PDropdownMenuSlots<T>>();
 
 const appConfig = useAppConfig() as DropdownMenu['AppConfig'];
+const pohonProp = useComponentPohon('dropdownMenu', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits);
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as ADropdownMenuContentProps);
@@ -187,7 +189,7 @@ const pohon = computed(() =>
     </ADropdownMenuTrigger>
 
     <PDropdownMenuContent
-      :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
+      :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
       :pohon="pohon"
       :pohon-override="props.pohon"
       v-bind="contentProps"
@@ -212,7 +214,7 @@ const pohon = computed(() =>
       <ADropdownMenuArrow
         v-if="!!arrow"
         v-bind="arrowProps"
-        :class="pohon.arrow({ class: props.pohon?.arrow })"
+        :class="pohon.arrow({ class: pohonProp?.arrow })"
       />
     </PDropdownMenuContent>
   </ADropdownMenuRoot>

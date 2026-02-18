@@ -116,6 +116,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
@@ -139,6 +140,7 @@ const slots = defineSlots<PPaginationSlots>();
 
 const { dir } = useLocale();
 const appConfig = useAppConfig() as Pagination['AppConfig'];
+const pohonProp = useComponentPohon('pagination', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -189,18 +191,18 @@ const pohon = computed(() =>
   <APaginationRoot
     v-slot="{ page, pageCount }"
     v-bind="rootProps"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="pagination-root"
   >
     <APaginationList
       v-slot="{ items }"
-      :class="pohon.list({ class: props.pohon?.list })"
+      :class="pohon.list({ class: pohonProp?.list })"
       data-pohon="pagination-list"
     >
       <APaginationFirst
         v-if="showControls || !!slots.first"
         as-child
-        :class="pohon.first({ class: props.pohon?.first })"
+        :class="pohon.first({ class: pohonProp?.first })"
         data-pohon="pagination-first"
       >
         <slot name="first">
@@ -216,7 +218,7 @@ const pohon = computed(() =>
       <APaginationPrev
         v-if="showControls || !!slots.prev"
         as-child
-        :class="pohon.prev({ class: props.pohon?.prev })"
+        :class="pohon.prev({ class: pohonProp?.prev })"
         data-pohon="pagination-prev"
       >
         <slot name="prev">
@@ -238,7 +240,7 @@ const pohon = computed(() =>
           v-if="item.type === 'page'"
           as-child
           :value="item.value"
-          :class="pohon.item({ class: props.pohon?.item })"
+          :class="pohon.item({ class: pohonProp?.item })"
           data-pohon="pagination-item"
         >
           <slot
@@ -260,7 +262,7 @@ const pohon = computed(() =>
         <APaginationEllipsis
           v-else
           as-child
-          :class="pohon.ellipsis({ class: props.pohon?.ellipsis })"
+          :class="pohon.ellipsis({ class: pohonProp?.ellipsis })"
           data-pohon="pagination-ellipsis"
         >
           <slot
@@ -281,7 +283,7 @@ const pohon = computed(() =>
       <APaginationNext
         v-if="showControls || !!slots.next"
         as-child
-        :class="pohon.next({ class: props.pohon?.next })"
+        :class="pohon.next({ class: pohonProp?.next })"
         data-pohon="pagination-next"
       >
         <slot name="next">
@@ -297,7 +299,7 @@ const pohon = computed(() =>
       <APaginationLast
         v-if="showControls || !!slots.last"
         as-child
-        :class="pohon.last({ class: props.pohon?.last })"
+        :class="pohon.last({ class: pohonProp?.last })"
         data-pohon="pagination-last"
       >
         <slot name="last">

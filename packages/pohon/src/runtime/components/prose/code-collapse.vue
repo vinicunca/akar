@@ -39,6 +39,7 @@ export interface ProseCodeCollapseSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { uv } from '../../utils/uv';
 import PButton from '../button.vue';
@@ -50,6 +51,7 @@ const open = defineModel<boolean>('open', { default: false });
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig'];
+const pohonProp = useComponentPohon('prose.code-collapse', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.codeCollapse || {}) })({
   open: open.value,
@@ -57,18 +59,18 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 </script>
 
 <template>
-  <div :class="pohon.root({ class: [props.pohon?.root, props.class] })">
+  <div :class="pohon.root({ class: [pohonProp?.root, props.class] })">
     <slot />
 
-    <div :class="pohon.footer({ class: props.pohon?.footer })">
+    <div :class="pohon.footer({ class: pohonProp?.footer })">
       <PButton
         :icon="icon || appConfig.pohon.icons.chevronDown"
         color="neutral"
         variant="outline"
         :data-state="open ? 'open' : 'closed'"
         :label="`${open ? (props.closeText || t('prose.codeCollapse.closeText')) : (props.openText || t('prose.codeCollapse.openText'))} ${props.name || t('prose.codeCollapse.name')}`"
-        :class="pohon.trigger({ class: props.pohon?.trigger })"
-        :pohon="{ leadingIcon: pohon.triggerIcon({ class: props.pohon?.triggerIcon }) }"
+        :class="pohon.trigger({ class: pohonProp?.trigger })"
+        :pohon="{ leadingIcon: pohon.triggerIcon({ class: pohonProp?.triggerIcon }) }"
         @click="open = !open"
       />
     </div>

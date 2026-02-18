@@ -248,6 +248,7 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp, isArrayOfArray } from '../utils';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
@@ -281,6 +282,7 @@ const slots = defineSlots<PNavigationMenuSlots<T>>();
 
 const route = useRoute();
 const appConfig = useAppConfig() as NavigationMenu['AppConfig'];
+const pohonProp = useComponentPohon('navigationMenu', props);
 
 const rootProps = useForwardPropsEmits(
   computed(() => ({
@@ -406,13 +408,13 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
           v-if="item.avatar"
           :size="(
             (item.pohon?.linkLeadingAvatarSize
-              || props.pohon?.linkLeadingAvatarSize
+              || pohonProp?.linkLeadingAvatarSize
               || pohon.linkLeadingAvatarSize()
             ) as PAvatarProps['size']
           )"
           v-bind="item.avatar"
           :class="pohon.linkLeadingAvatar({
-            class: [props.pohon?.linkLeadingAvatar, item.pohon?.linkLeadingAvatar],
+            class: [pohonProp?.linkLeadingAvatar, item.pohon?.linkLeadingAvatar],
             active,
             disabled: !!item.disabled,
           })"
@@ -423,7 +425,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
           v-else-if="item.icon"
           :name="active || childActive ? item.activeIcon ?? item.icon : item.icon"
           :class="pohon.linkLeadingIcon({
-            class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
+            class: [pohonProp?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
             active,
             disabled: !!item.disabled,
             childActive,
@@ -438,7 +440,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
           path: props.labelKey as string,
         })
           || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PNavigationMenuSlots<T>]"
-        :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
+        :class="pohon.linkLabel({ class: [pohonProp?.linkLabel, item.pohon?.linkLabel] })"
         data-pohon="navigation-menu-link-label"
       >
         <slot
@@ -454,7 +456,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
           v-if="item.target === '_blank' && props.externalIcon !== false"
           :name="isString(props.externalIcon) ? props.externalIcon : appConfig.pohon.icons.external"
           :class="pohon.linkLabelExternalIcon({
-            class: [props.pohon?.linkLabelExternalIcon, item.pohon?.linkLabelExternalIcon],
+            class: [pohonProp?.linkLabelExternalIcon, item.pohon?.linkLabelExternalIcon],
             active,
           })"
           data-pohon="navigation-menu-link-label-external-icon"
@@ -482,7 +484,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
             || item.trailingIcon
             || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PNavigationMenuSlots<T>]"
         as="span"
-        :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
+        :class="pohon.linkTrailing({ class: [pohonProp?.linkTrailing, item.pohon?.linkTrailing] })"
         data-pohon="navigation-menu-link-trailing"
         @click.stop.prevent
       >
@@ -497,9 +499,9 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
             v-if="item.badge || item.badge === 0"
             color="neutral"
             variant="solid"
-            :size="((item.pohon?.linkTrailingBadgeSize || props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
+            :size="((item.pohon?.linkTrailingBadgeSize || pohonProp?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(item.badge) || isNumber(item.badge)) ? { label: item.badge } : item.badge"
-            :class="pohon.linkTrailingBadge({ class: [props.pohon?.linkTrailingBadge, item.pohon?.linkTrailingBadge] })"
+            :class="pohon.linkTrailingBadge({ class: [pohonProp?.linkTrailingBadge, item.pohon?.linkTrailingBadge] })"
             data-pohon="navigation-menu-link-trailing-badge"
           />
 
@@ -516,14 +518,14 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
                 )
             "
             :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
-            :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
+            :class="pohon.linkTrailingIcon({ class: [pohonProp?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
             data-pohon="navigation-menu-link-trailing-icon"
           />
 
           <PIcon
             v-else-if="item.trailingIcon"
             :name="item.trailingIcon"
-            :class="pohon.linkTrailingIcon({ class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
+            :class="pohon.linkTrailingIcon({ class: [pohonProp?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
             data-pohon="navigation-menu-link-trailing-icon"
           />
         </slot>
@@ -546,7 +548,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
         v-if="props.orientation === 'vertical'
           && item.type === 'label'
           && !props.collapsed"
-        :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
+        :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label, item.class] })"
         data-pohon="navigation-menu-label"
       >
         <ReuseLinkTemplate
@@ -607,7 +609,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
             <PLinkBase
               v-bind="slotProps"
               :class="pohon.link({
-                class: [props.pohon?.link, item.pohon?.link, item.class],
+                class: [pohonProp?.link, item.pohon?.link, item.class],
                 active: active || item.active,
                 disabled: !!item.disabled,
                 childActive: isRouteInTree(item, route.path),
@@ -632,7 +634,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
             <PLinkBase
               v-bind="slotProps"
               :class="pohon.link({
-                class: [props.pohon?.link, item.pohon?.link, item.class],
+                class: [pohonProp?.link, item.pohon?.link, item.class],
                 active: active || item.active,
                 disabled: !!item.disabled,
                 childActive: isRouteInTree(item, route.path),
@@ -653,7 +655,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
             v-else
             v-bind="slotProps"
             :class="pohon.link({
-              class: [props.pohon?.link, item.pohon?.link, item.class],
+              class: [pohonProp?.link, item.pohon?.link, item.class],
               active: active || item.active,
               disabled: !!item.disabled,
               childActive: isRouteInTree(item, route.path),
@@ -673,7 +675,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
         <ANavigationMenuContent
           v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])"
           v-bind="contentProps"
-          :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content] })"
+          :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content] })"
           data-pohon="navigation-menu-accordion-content"
         >
           <slot
@@ -684,13 +686,13 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
             :pohon="pohon"
           >
             <ul
-              :class="pohon.childList({ class: [props.pohon?.childList, item.pohon?.childList] })"
+              :class="pohon.childList({ class: [pohonProp?.childList, item.pohon?.childList] })"
               data-pohon="navigation-menu-child-list"
             >
               <li
                 v-for="(childItem, childIndex) in item.children"
                 :key="childIndex"
-                :class="pohon.childItem({ class: [props.pohon?.childItem, item.pohon?.childItem] })"
+                :class="pohon.childItem({ class: [pohonProp?.childItem, item.pohon?.childItem] })"
                 data-pohon="navigation-menu-child-item"
               >
                 <PLink
@@ -706,7 +708,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
                     <PLinkBase
                       v-bind="childSlotProps"
                       :class="pohon.childLink({
-                        class: [props.pohon?.childLink, item.pohon?.childLink, childItem.class],
+                        class: [pohonProp?.childLink, item.pohon?.childLink, childItem.class],
                         active: childActive,
                       })"
                       data-pohon="navigation-menu-child-link"
@@ -715,19 +717,19 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
                         v-if="childItem.icon"
                         :name="childItem.icon"
                         :class="pohon.childLinkIcon({
-                          class: [props.pohon?.childLinkIcon, item.pohon?.childLinkIcon],
+                          class: [pohonProp?.childLinkIcon, item.pohon?.childLinkIcon],
                           active: childActive,
                         })"
                         data-pohon="navigation-menu-child-link-icon"
                       />
 
                       <div
-                        :class="pohon.childLinkWrapper({ class: [props.pohon?.childLinkWrapper, item.pohon?.childLinkWrapper] })"
+                        :class="pohon.childLinkWrapper({ class: [pohonProp?.childLinkWrapper, item.pohon?.childLinkWrapper] })"
                         data-pohon="navigation-menu-child-link-wrapper"
                       >
                         <p
                           :class="pohon.childLinkLabel({
-                            class: [props.pohon?.childLinkLabel, item.pohon?.childLinkLabel],
+                            class: [pohonProp?.childLinkLabel, item.pohon?.childLinkLabel],
                             active: childActive,
                           })"
                           data-pohon="navigation-menu-child-link-label"
@@ -738,7 +740,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
                             v-if="childItem.target === '_blank' && externalIcon !== false"
                             :name="isString(externalIcon) ? externalIcon : appConfig.pohon.icons.external"
                             :class="pohon.childLinkLabelExternalIcon({
-                              class: [props.pohon?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon],
+                              class: [pohonProp?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon],
                               active: childActive,
                             })"
                             data-pohon="navigation-menu-child-link-label-external-icon"
@@ -747,7 +749,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
                         <p
                           v-if="childItem.description"
                           :class="pohon.childLinkDescription({
-                            class: [props.pohon?.childLinkDescription, item.pohon?.childLinkDescription],
+                            class: [pohonProp?.childLinkDescription, item.pohon?.childLinkDescription],
                             active: childActive,
                           })"
                           data-pohon="navigation-menu-child-link-description"
@@ -766,7 +768,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
 
       <AAccordionContent
         v-if="orientation === 'vertical' && item.children?.length && !collapsed"
-        :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content] })"
+        :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content] })"
         data-pohon="navigation-menu-accordion-content"
       >
         <AAccordionRoot
@@ -776,7 +778,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
             defaultValue: getAccordionDefaultValue(item.children, level + 1),
           } as AAccordionRootProps)"
           as="ul"
-          :class="pohon.childList({ class: props.pohon?.childList })"
+          :class="pohon.childList({ class: pohonProp?.childList })"
           data-pohon="navigation-menu-child-list"
         >
           <ReuseItemTemplate
@@ -785,7 +787,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
             :item="childItem"
             :index="childIndex"
             :level="level + 1"
-            :class="pohon.childItem({ class: [props.pohon?.childItem, childItem.pohon?.childItem] })"
+            :class="pohon.childItem({ class: [pohonProp?.childItem, childItem.pohon?.childItem] })"
             data-pohon="navigation-menu-child-item"
           />
         </AAccordionRoot>
@@ -803,7 +805,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
       ...$attrs,
     }"
     :data-collapsed="collapsed"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="navigation-menu-root"
   >
     <slot name="list-leading" />
@@ -821,7 +823,7 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
         :is="orientation === 'vertical' ? AAccordionRoot : ANavigationMenuList"
 
         as="ul"
-        :class="pohon.list({ class: props.pohon?.list })"
+        :class="pohon.list({ class: pohonProp?.list })"
         data-pohon="navigation-menu-list"
       >
         <ReuseItemTemplate
@@ -829,14 +831,14 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
           :key="`list-${listIndex}-${index}`"
           :item="item"
           :index="index"
-          :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item] })"
+          :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item] })"
           data-pohon="navigation-menu-item"
         />
       </component>
 
       <div
         v-if="orientation === 'vertical' && listIndex < lists.length - 1"
-        :class="pohon.separator({ class: props.pohon?.separator })"
+        :class="pohon.separator({ class: pohonProp?.separator })"
         data-pohon="navigation-menu-separator"
       />
     </template>
@@ -845,22 +847,22 @@ function isRouteInTree(item: PNavigationMenuItem, routePath: string): boolean {
 
     <div
       v-if="orientation === 'horizontal'"
-      :class="pohon.viewportWrapper({ class: props.pohon?.viewportWrapper })"
+      :class="pohon.viewportWrapper({ class: pohonProp?.viewportWrapper })"
       data-pohon="navigation-menu-viewport-wrapper"
     >
       <ANavigationMenuIndicator
         v-if="arrow"
-        :class="pohon.indicator({ class: props.pohon?.indicator })"
+        :class="pohon.indicator({ class: pohonProp?.indicator })"
         data-pohon="navigation-menu-indicator"
       >
         <div
-          :class="pohon.arrow({ class: props.pohon?.arrow })"
+          :class="pohon.arrow({ class: pohonProp?.arrow })"
           data-pohon="navigation-menu-arrow"
         />
       </ANavigationMenuIndicator>
 
       <ANavigationMenuViewport
-        :class="pohon.viewport({ class: props.pohon?.viewport })"
+        :class="pohon.viewport({ class: pohonProp?.viewport })"
         data-pohon="navigation-menu-viewport"
       />
     </div>

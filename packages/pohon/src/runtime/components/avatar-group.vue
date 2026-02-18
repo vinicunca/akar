@@ -34,6 +34,7 @@ import { isString, isSymbol } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed, provide } from 'vue';
 import { avatarGroupInjectionKey } from '../composables/use-avatar-group';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 
@@ -41,6 +42,7 @@ const props = defineProps<PAvatarGroupProps>();
 const slots = defineSlots<PAvatarGroupSlots>();
 
 const appConfig = useAppConfig() as AvatarGroup['AppConfig'];
+const pohonProp = useComponentPohon('avatar-group', props);
 
 const pohon = computed(() =>
   uv({
@@ -104,13 +106,13 @@ provide(
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="avatar-group-root"
   >
     <PAvatar
       v-if="hiddenCount > 0"
       :text="`+${hiddenCount}`"
-      :class="pohon.base({ class: props.pohon?.base })"
+      :class="pohon.base({ class: pohonProp?.base })"
       data-pohon="avatar-group-base"
     />
 
@@ -118,7 +120,7 @@ provide(
       :is="avatar"
       v-for="(avatar, count) in visibleAvatars"
       :key="count"
-      :class="pohon.base({ class: props.pohon?.base })"
+      :class="pohon.base({ class: pohonProp?.base })"
       data-pohon="avatar-group-base"
     />
   </APrimitive>

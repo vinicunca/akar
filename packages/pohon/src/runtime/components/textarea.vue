@@ -69,6 +69,7 @@ import { useVModel } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, nextTick, onMounted, useTemplateRef, watch } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
@@ -88,7 +89,6 @@ const props = withDefaults(
 );
 const emits = defineEmits<PTextareaEmits<T>>();
 const slots = defineSlots<PTextareaSlots>();
-
 const modelValue = useVModel<
   PTextareaProps<T>,
   'modelValue',
@@ -101,6 +101,7 @@ const modelValue = useVModel<
 );
 
 const appConfig = useAppConfig() as Textarea['AppConfig'];
+const pohonProp = useComponentPohon('textarea', props);
 
 const {
   emitFormFocus,
@@ -241,7 +242,7 @@ defineExpose({
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <textarea
       :id="id"
@@ -250,7 +251,7 @@ defineExpose({
       :name="name"
       :rows="rows"
       :placeholder="placeholder"
-      :class="pohon.base({ class: props.pohon?.base })"
+      :class="pohon.base({ class: pohonProp?.base })"
       :disabled="disabled"
       :required="required"
       v-bind="{ ...$attrs, ...ariaAttrs }"
@@ -264,7 +265,7 @@ defineExpose({
 
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
-      :class="pohon.leading({ class: props.pohon?.leading })"
+      :class="pohon.leading({ class: pohonProp?.leading })"
     >
       <slot
         name="leading"
@@ -273,20 +274,20 @@ defineExpose({
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
-          :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+          :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
+          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
-          :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+          :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
         />
       </slot>
     </span>
 
     <span
       v-if="isTrailing || !!slots.trailing"
-      :class="pohon.trailing({ class: props.pohon?.trailing })"
+      :class="pohon.trailing({ class: pohonProp?.trailing })"
     >
       <slot
         name="trailing"
@@ -295,7 +296,7 @@ defineExpose({
         <PIcon
           v-if="trailingIconName"
           :name="trailingIconName"
-          :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+          :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         />
       </slot>
     </span>

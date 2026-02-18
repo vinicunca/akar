@@ -53,6 +53,7 @@ import { reactiveOmit, reactivePick } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, ref } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { transformPohon } from '../utils';
 import { buildFloatingUIMiddleware } from '../utils/editor';
 import { uv } from '../utils/uv';
@@ -98,6 +99,7 @@ const buttonProps = useForwardProps(
 );
 
 const appConfig = useAppConfig() as EditorDragHandle['AppConfig'];
+const pohonProp = useComponentPohon('editorDragHandle', props);
 
 const pohon = computed(() =>
   uv({
@@ -184,7 +186,7 @@ function onClick() {
     :editor="editor"
     :on-node-change="onNodeChange"
     data-slot="root"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     @click="onClick"
   >
     <slot
@@ -198,7 +200,7 @@ function onClick() {
           ...$attrs,
         }"
         data-slot="handle"
-        :class="pohon.handle({ class: [props.pohon?.handle, props.class] })"
+        :class="pohon.handle({ class: [pohonProp?.handle, props.class] })"
         :pohon="transformPohon(pohon, props.pohon)"
       />
     </slot>

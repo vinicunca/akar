@@ -15,6 +15,7 @@ export interface PScrollbarBarProps extends AScrollAreaScrollbarProps {
 <script setup lang="ts">
 import { computed, useAppConfig } from '#imports';
 import { AScrollAreaScrollbar, AScrollAreaThumb } from 'akar';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -25,6 +26,7 @@ const props = withDefaults(
 );
 
 const appConfig = useAppConfig() as ScrollbarBar['AppConfig'];
+const pohonProp = useComponentPohon('scrollbarBar', props);
 
 const pohon = computed(() =>
   uv({
@@ -39,8 +41,8 @@ const pohon = computed(() =>
 <template>
   <AScrollAreaScrollbar
     v-bind="props"
-    :class="pohon.root({ class: [props.class, props.pohon?.root] })"
+    :class="pohon.root({ class: [props.class, pohonProp?.root] })"
   >
-    <AScrollAreaThumb :class="pohon.thumb({ class: props.pohon?.thumb })" />
+    <AScrollAreaThumb :class="pohon.thumb({ class: pohonProp?.thumb })" />
   </AScrollAreaScrollbar>
 </template>

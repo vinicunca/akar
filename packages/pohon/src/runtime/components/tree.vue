@@ -146,6 +146,7 @@ import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import { ATreeItem, ATreeRoot, ATreeVirtualizer, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef, useTemplateRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import getEstimateSize from '../utils/virtualizer';
@@ -165,6 +166,7 @@ const emits = defineEmits<PTreeEmits<T, M>>();
 const slots = defineSlots<PTreeSlots<T>>();
 
 const appConfig = useAppConfig() as Tree['AppConfig'];
+const pohonProp = useComponentPohon('tree', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -283,8 +285,8 @@ defineExpose({
     <li
       role="presentation"
       :class="!!nested && level > 1
-        ? pohon.itemWithChildren({ class: [props.pohon?.itemWithChildren, item.pohon?.itemWithChildren] })
-        : pohon.item({ class: [props.pohon?.item, item.pohon?.item] })"
+        ? pohon.itemWithChildren({ class: [pohonProp?.itemWithChildren, item.pohon?.itemWithChildren] })
+        : pohon.item({ class: [pohonProp?.item, item.pohon?.item] })"
       data-pohon="tree-item"
     >
       <ATreeItem
@@ -305,7 +307,7 @@ defineExpose({
             :type="as.link === 'button' ? 'button' : undefined"
             :disabled="item.disabled || disabled"
             :class="pohon.link({
-              class: [props.pohon?.link, item.pohon?.link, item.class],
+              class: [pohonProp?.link, item.pohon?.link, item.class],
               selected: isSelected,
               disabled: item.disabled || disabled,
             })"
@@ -329,7 +331,7 @@ defineExpose({
                   v-if="item.icon"
                   :name="item.icon"
                   :class="pohon.linkLeadingIcon({
-                    class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
+                    class: [pohonProp?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
                   })"
                   data-pohon="tree-link-leading-icon"
                 />
@@ -338,7 +340,7 @@ defineExpose({
                   v-else-if="item.children?.length"
                   :name="isExpanded ? (expandedIcon ?? appConfig.pohon.icons.folderOpen) : (collapsedIcon ?? appConfig.pohon.icons.folder)"
                   :class="pohon.linkLeadingIcon({
-                    class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
+                    class: [pohonProp?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
                   })"
                   data-pohon="tree-link-leading-icon"
                 />
@@ -346,7 +348,7 @@ defineExpose({
 
               <span
                 v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>]"
-                :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
+                :class="pohon.linkLabel({ class: [pohonProp?.linkLabel, item.pohon?.linkLabel] })"
                 data-pohon="tree-link-label"
               >
                 <slot
@@ -360,7 +362,7 @@ defineExpose({
 
               <span
                 v-if="item.trailingIcon || item.children?.length || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>]"
-                :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, item.pohon?.linkTrailing] })"
+                :class="pohon.linkTrailing({ class: [pohonProp?.linkTrailing, item.pohon?.linkTrailing] })"
                 data-pohon="tree-link-trailing"
               >
                 <slot
@@ -372,7 +374,7 @@ defineExpose({
                     v-if="item.trailingIcon"
                     :name="item.trailingIcon"
                     :class="pohon.linkTrailingIcon({
-                      class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
+                      class: [pohonProp?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
                     })"
                     data-pohon="tree-link-trailing-icon"
                   />
@@ -380,7 +382,7 @@ defineExpose({
                     v-else-if="item.children?.length"
                     :name="trailingIcon ?? appConfig.pohon.icons.chevronDown"
                     :class="pohon.linkTrailingIcon({
-                      class: [props.pohon?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
+                      class: [pohonProp?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
                     })"
                     data-pohon="tree-link-trailing-icon"
                   />
@@ -394,7 +396,7 @@ defineExpose({
           v-if="nested && item.children?.length && isExpanded"
           role="group"
           :class="pohon.listWithChildren({
-            class: [props.pohon?.listWithChildren, item.pohon?.listWithChildren],
+            class: [pohonProp?.listWithChildren, item.pohon?.listWithChildren],
           })"
           data-pohon="tree-list-with-children"
         >
@@ -424,7 +426,7 @@ defineExpose({
     :as="as.root"
     :model-value="modelValue"
     :default-value="defaultValue"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="tree-root"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"

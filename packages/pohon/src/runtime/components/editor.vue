@@ -98,6 +98,7 @@ import { reactiveOmit } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, provide, useAttrs, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { createHandlers } from '../utils/editor';
 import { uv } from '../utils/uv';
 
@@ -116,6 +117,7 @@ defineSlots<PEditorSlots<H>>();
 const attrs = useAttrs();
 
 const appConfig = useAppConfig() as Editor['AppConfig'];
+const pohonProp = useComponentPohon('editor', props);
 
 const pohon = computed(() =>
   uv({
@@ -134,7 +136,7 @@ const editorProps = computed(() => defu(props.editorProps, {
     autocorrect: 'off',
     autocapitalize: 'off',
     ...attrs,
-    class: pohon.value.base({ class: props.pohon?.base }),
+    class: pohon.value.base({ class: pohonProp?.base }),
   },
 } as EditorOptions['editorProps']));
 const contentType = computed(() => props.contentType || (typeof props.modelValue === 'string' ? 'html' : 'json'));
@@ -271,7 +273,7 @@ defineExpose({
   <APrimitive
     :as="as"
     data-slot="root"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <template v-if="editor">
       <slot
@@ -283,7 +285,7 @@ defineExpose({
         role="presentation"
         :editor="editor"
         data-slot="content"
-        :class="pohon.content({ class: props.pohon?.content })"
+        :class="pohon.content({ class: pohonProp?.content })"
       />
     </template>
   </APrimitive>

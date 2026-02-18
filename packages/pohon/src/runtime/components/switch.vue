@@ -67,6 +67,7 @@ import {
   useForwardProps,
 } from 'akar';
 import { computed, useId } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
@@ -79,6 +80,7 @@ const slots = defineSlots<PSwitchSlots>();
 const modelValue = defineModel<boolean>({ default: undefined });
 
 const appConfig = useAppConfig() as Switch['AppConfig'];
+const pohonProp = useComponentPohon('switch', props);
 
 const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'));
 
@@ -119,11 +121,11 @@ function onUpdate(value: any) {
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="switch-root"
   >
     <div
-      :class="pohon.container({ class: props.pohon?.container })"
+      :class="pohon.container({ class: pohonProp?.container })"
       data-pohon="switch-container"
     >
       <ASwitchRoot
@@ -132,31 +134,31 @@ function onUpdate(value: any) {
         v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"
-        :class="pohon.base({ class: props.pohon?.base })"
+        :class="pohon.base({ class: pohonProp?.base })"
         data-pohon="switch-base"
         @update:model-value="onUpdate"
       >
         <ASwitchThumb
-          :class="pohon.thumb({ class: props.pohon?.thumb })"
+          :class="pohon.thumb({ class: pohonProp?.thumb })"
           data-pohon="switch-thumb"
         >
           <PIcon
             v-if="loading"
             :name="loadingIcon || appConfig.pohon.icons.loading"
-            :class="pohon.icon({ class: props.pohon?.icon, checked: true, unchecked: true })"
+            :class="pohon.icon({ class: pohonProp?.icon, checked: true, unchecked: true })"
             data-pohon="switch-icon"
           />
           <template v-else>
             <PIcon
               v-if="checkedIcon"
               :name="checkedIcon"
-              :class="pohon.icon({ class: props.pohon?.icon, checked: true })"
+              :class="pohon.icon({ class: pohonProp?.icon, checked: true })"
               data-pohon="switch-icon"
             />
             <PIcon
               v-if="uncheckedIcon"
               :name="uncheckedIcon"
-              :class="pohon.icon({ class: props.pohon?.icon, unchecked: true })"
+              :class="pohon.icon({ class: pohonProp?.icon, unchecked: true })"
               data-pohon="switch-icon"
             />
           </template>
@@ -165,13 +167,13 @@ function onUpdate(value: any) {
     </div>
     <div
       v-if="(label || !!slots.label) || (description || !!slots.description)"
-      :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+      :class="pohon.wrapper({ class: pohonProp?.wrapper })"
       data-pohon="switch-wrapper"
     >
       <ALabel
         v-if="label || !!slots.label"
         :for="id"
-        :class="pohon.label({ class: props.pohon?.label })"
+        :class="pohon.label({ class: pohonProp?.label })"
         data-pohon="switch-label"
       >
         <slot
@@ -183,7 +185,7 @@ function onUpdate(value: any) {
       </ALabel>
       <p
         v-if="description || !!slots.description"
-        :class="pohon.description({ class: props.pohon?.description })"
+        :class="pohon.description({ class: pohonProp?.description })"
         data-pohon="switch-description"
       >
         <slot

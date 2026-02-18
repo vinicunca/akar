@@ -98,6 +98,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, useId } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
@@ -115,6 +116,7 @@ const emits = defineEmits<PRadioGroupEmits<T, VK>>();
 const slots = defineSlots<PRadioGroupSlots<T>>();
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig'];
+const pohonProp = useComponentPohon('radioGroup', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'loop', 'required'), emits);
 
@@ -164,7 +166,7 @@ function normalizeItem(item: any) {
   const description = getProp({ object: item, path: props.descriptionKey as string });
 
   return {
-    ...(item),
+    ...(item as any),
     value,
     label,
     description,
@@ -198,18 +200,18 @@ function onUpdate(value: any) {
     :orientation="orientation"
     :name="name"
     :disabled="disabled"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="radio-group-root"
     @update:model-value="onUpdate"
   >
     <fieldset
-      :class="pohon.fieldset({ class: props.pohon?.fieldset })"
+      :class="pohon.fieldset({ class: pohonProp?.fieldset })"
       data-pohon="radio-group-fieldset"
       v-bind="ariaAttrs"
     >
       <legend
         v-if="legend || !!slots.legend"
-        :class="pohon.legend({ class: props.pohon?.legend })"
+        :class="pohon.legend({ class: pohonProp?.legend })"
         data-pohon="radio-group-legend"
       >
         <slot name="legend">
@@ -221,22 +223,22 @@ function onUpdate(value: any) {
         :is="(!variant || variant === 'list') ? 'div' : ALabel"
         v-for="item in normalizedItems"
         :key="item.value"
-        :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
+        :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class] })"
         data-pohon="radio-group-item"
       >
         <div
-          :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })"
+          :class="pohon.container({ class: [pohonProp?.container, item.pohon?.container] })"
           data-pohon="radio-group-container"
         >
           <ARadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled"
-            :class="pohon.base({ class: [props.pohon?.base, item.pohon?.base], disabled: item.disabled })"
+            :class="pohon.base({ class: [pohonProp?.base, item.pohon?.base], disabled: item.disabled })"
             data-pohon="radio-group-base"
           >
             <ARadioGroupIndicator
-              :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })"
+              :class="pohon.indicator({ class: [pohonProp?.indicator, item.pohon?.indicator] })"
               data-pohon="radio-group-indicator"
             />
           </ARadioGroupItem>
@@ -244,14 +246,14 @@ function onUpdate(value: any) {
 
         <div
           v-if="(item.label || !!slots.label) || (item.description || !!slots.description)"
-          :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })"
+          :class="pohon.wrapper({ class: [pohonProp?.wrapper, item.pohon?.wrapper] })"
           data-pohon="radio-group-wrapper"
         >
           <component
             :is="(!variant || variant === 'list') ? ALabel : 'p'"
             v-if="item.label || !!slots.label"
             :for="item.id"
-            :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
+            :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label] })"
             data-pohon="radio-group-label"
           >
             <slot
@@ -264,7 +266,7 @@ function onUpdate(value: any) {
           </component>
           <p
             v-if="item.description || !!slots.description"
-            :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
+            :class="pohon.description({ class: [pohonProp?.description, item.pohon?.description] })"
             data-pohon="radio-group-description"
           >
             <slot

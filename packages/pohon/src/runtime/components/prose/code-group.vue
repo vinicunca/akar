@@ -34,6 +34,7 @@ import {
   ATabsTrigger,
 } from 'akar';
 import { computed, onBeforeUpdate, onMounted, ref, watch } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PCodeIcon from './code-icon.vue';
 
@@ -45,6 +46,7 @@ const slots = defineSlots<ProseCodeGroupSlots>();
 const model = defineModel<string>();
 
 const appConfig = useAppConfig() as ProseCodeGroup['AppConfig'];
+const pohonProp = useComponentPohon('prose.code-group', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.codeGroup || {}) })());
 
@@ -105,24 +107,24 @@ onBeforeUpdate(() => rerenderCount.value++);
     v-model="model"
     :default-value="defaultValue"
     :unmount-on-hide="false"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <ATabsList :class="pohon.list({ class: props.pohon?.list })">
-      <ATabsIndicator :class="pohon.indicator({ class: props.pohon?.indicator })" />
+    <ATabsList :class="pohon.list({ class: pohonProp?.list })">
+      <ATabsIndicator :class="pohon.indicator({ class: pohonProp?.indicator })" />
 
       <ATabsTrigger
         v-for="(item, index) of items"
         :key="index"
         :value="String(index)"
-        :class="pohon.trigger({ class: props.pohon?.trigger })"
+        :class="pohon.trigger({ class: pohonProp?.trigger })"
       >
         <PCodeIcon
           :icon="item.icon"
           :filename="item.label"
-          :class="pohon.triggerIcon({ class: props.pohon?.triggerIcon })"
+          :class="pohon.triggerIcon({ class: pohonProp?.triggerIcon })"
         />
 
-        <span :class="pohon.triggerLabel({ class: props.pohon?.triggerLabel })">{{ item.label }}</span>
+        <span :class="pohon.triggerLabel({ class: pohonProp?.triggerLabel })">{{ item.label }}</span>
       </ATabsTrigger>
     </ATabsList>
 

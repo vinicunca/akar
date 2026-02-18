@@ -109,6 +109,7 @@ export default vinicuncaESLint(
     ],
     rules: {
       'sonar/assertions-in-tests': 'off',
+      'test/prefer-lowercase-title': 'off',
     },
   },
 );
