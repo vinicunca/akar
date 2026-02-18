@@ -153,7 +153,7 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
   items?: T;
   /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
   defaultValue?: GetModelValue<T, VK, M>;
-  /** The controlled value of the InputMenu. Can be binded-with with `v-model`. */
+  /** The controlled value of the InputMenu. Can be binded-with `v-model`. */
   modelValue?: GetModelValue<T, VK, M>;
   modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>;
   /** Whether multiple options can be selected or not. */
@@ -888,6 +888,7 @@ defineExpose({
             <PButton
               as="span"
               :icon="clearIcon || appConfig.pohon.icons.close"
+              :size="inputSize"
               variant="link"
               color="neutral"
               tabindex="-1"

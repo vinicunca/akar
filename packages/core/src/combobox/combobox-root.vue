@@ -47,7 +47,7 @@ export type AComboboxRootEmits<T = AcceptableValue> = {
 };
 
 export interface AComboboxRootProps<T = AcceptableValue> extends Omit<AListboxRootProps<T>, 'orientation' | 'selectionBehavior'> {
-  /** The controlled open state of the Combobox. Can be binded with with `v-model:open`. */
+  /** The controlled open state of the Combobox. Can be binded with `v-model:open`. */
   open?: boolean;
   /** The open state of the combobox when it is initially rendered. <br> Use when you do not need to control its open state. */
   defaultOpen?: boolean;

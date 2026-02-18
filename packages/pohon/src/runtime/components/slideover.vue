@@ -101,6 +101,7 @@ import {
 import { computed, toRef } from 'vue';
 import { useLocale } from '../composables/use-locale';
 import { usePortal } from '../composables/use-portal';
+import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
@@ -141,7 +142,9 @@ const contentEvents = computed(() => {
     }, {} as Record<typeof events[number], (event: Event) => void>);
   }
 
-  return {};
+  return {
+    pointerDownOutside,
+  };
 });
 
 const pohon = computed(() =>
@@ -149,7 +152,6 @@ const pohon = computed(() =>
     extend: uv(theme),
     ...(appConfig.pohon?.slideover || {}),
   })({
-    transition: props.transition,
     side: props.side,
     inset: props.inset,
   }),

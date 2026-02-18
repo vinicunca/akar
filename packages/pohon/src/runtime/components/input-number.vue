@@ -239,7 +239,7 @@ defineExpose({
           <PButton
             :icon="decrementIcon"
             :color="color"
-            :size="size"
+            :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
             v-bind="typeof decrement === 'object' ? decrement : undefined"
@@ -272,7 +272,7 @@ defineExpose({
           <PButton
             :icon="incrementIcon"
             :color="color"
-            :size="size"
+            :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.increment')"
             v-bind="typeof increment === 'object' ? increment : undefined"

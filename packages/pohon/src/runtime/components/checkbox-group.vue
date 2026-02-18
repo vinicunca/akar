@@ -2,7 +2,7 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { ACheckboxGroupRootEmits, ACheckboxGroupRootProps } from 'akar';
 import type { PCheckboxProps } from '../types';
-import type { AcceptableValue, GetItemKeys, GetModelValue } from '../types/utils';
+import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/checkbox-group';
 
@@ -68,9 +68,9 @@ export interface PCheckboxGroupProps<
   pohon?: CheckboxGroup['slots'] & PCheckboxProps['pohon'];
 }
 
-export type PCheckboxGroupEmits<T extends Array<PCheckboxGroupItem> = Array<PCheckboxGroupItem>> = ACheckboxGroupRootEmits<T[number]> & {
+export type PCheckboxGroupEmits<T extends Array<PCheckboxGroupItem> = Array<PCheckboxGroupItem>, VK extends GetItemKeys<T> = 'value'> = Omit<ACheckboxGroupRootEmits, 'update:modelValue'> & {
   change: [event: Event];
-};
+} & GetModelValueEmits<T, VK, true>;
 
 type SlotProps<T extends PCheckboxGroupItem> = (props: { item: T & { id: string } }) => any;
 
@@ -101,7 +101,7 @@ const props = withDefaults(
     orientation: 'vertical',
   },
 );
-const emits = defineEmits<PCheckboxGroupEmits<T>>();
+const emits = defineEmits<PCheckboxGroupEmits<T, VK>>();
 const slots = defineSlots<PCheckboxGroupSlots<T>>();
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig'];

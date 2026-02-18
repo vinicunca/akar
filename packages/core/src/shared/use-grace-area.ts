@@ -38,7 +38,7 @@ export function useGraceArea(
       point: exitPoint,
       rect: currentTarget.getBoundingClientRect(),
     });
-    const paddedExitPoints = getPaddedExitPoints(exitPoint, exitSide);
+    const paddedExitPoints = getPaddedExitPoints(exitPoint, exitSide, 1);
     const hoverTargetPoints = getPointsFromRect(hoverTarget.getBoundingClientRect());
     const graceArea = getHull([...paddedExitPoints, ...hoverTargetPoints]);
     pointerGraceArea.value = graceArea;

@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import { AConfigProvider } from '../config-provider';
 import { useTestKeyboard } from '../shared';
 import DateRangePicker from './story/_date-range-picker.vue';
 
@@ -209,5 +210,76 @@ describe('dateRangePicker', async () => {
         expect(seg).not.toHaveAttribute('tabindex');
       }
     }
+  });
+
+  describe('locale integration with AConfigProvider', () => {
+    it('uses locale from AConfigProvider when no locale prop is provided', async () => {
+      const user = userEvent.setup();
+      const { getByTestId } = render({
+        components: { AConfigProvider, DateRangePicker },
+        template: `
+          <AConfigProvider locale="de">
+            <DateRangePicker :dateFieldProps="{
+              modelValue: {
+                start: new CalendarDate(2024, 1, 15),
+                end: new CalendarDate(2024, 1, 20)
+              }
+            }" />
+          </AConfigProvider>
+        `,
+        setup() {
+          return { CalendarDate };
+        },
+      });
+
+      const trigger = getByTestId('trigger');
+      await user.click(trigger);
+
+      const heading = getByTestId('heading');
+      // German locale should display month name in German (e.g., "Januar" not "January")
+      expect(heading).toHaveTextContent('Januar');
+    });
+
+    it('locale prop overrides ConfigProvider locale', async () => {
+      const user = userEvent.setup();
+      const { getByTestId } = render({
+        components: { AConfigProvider, DateRangePicker },
+        template: `
+          <AConfigProvider locale="de">
+            <DateRangePicker :dateFieldProps="{
+              modelValue: {
+                start: new CalendarDate(2024, 1, 15),
+                end: new CalendarDate(2024, 1, 20)
+              },
+              locale: 'en-US'
+            }" />
+          </AConfigProvider>
+        `,
+        setup() {
+          return { CalendarDate };
+        },
+      });
+
+      const trigger = getByTestId('trigger');
+      await user.click(trigger);
+
+      const heading = getByTestId('heading');
+      // Even though AConfigProvider sets 'de', explicit prop should use 'en-US'
+      expect(heading).toHaveTextContent('January');
+    });
+
+    it('uses default locale when no AConfigProvider and no locale prop', async () => {
+      const { user, trigger, getByTestId } = setup({
+        dateFieldProps: { modelValue: calendarDate },
+      });
+
+      await user.click(trigger);
+
+      const heading = getByTestId('heading');
+      // Should use browser default locale (typically 'en' in test environment)
+      // January 2022 should be displayed
+      expect(heading).toHaveTextContent('January');
+      expect(heading).toHaveTextContent('2022');
+    });
   });
 });

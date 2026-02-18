@@ -43,7 +43,7 @@ export const [
 ] = createContext<ListboxRootContext<AcceptableValue>>('AListboxRoot');
 
 export interface AListboxRootProps<T = AcceptableValue> extends APrimitiveProps, FormFieldProps {
-  /** The controlled value of the listbox. Can be binded with with `v-model`. */
+  /** The controlled value of the listbox. Can be binded with `v-model`. */
   modelValue?: T | Array<T>;
   /** The value of the listbox when initially rendered. Use when you do not need to control the state of the Listbox */
   defaultValue?: T | Array<T>;

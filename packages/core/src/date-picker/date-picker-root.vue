@@ -1,12 +1,11 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-
 import type { Ref } from 'vue';
 import type { ACalendarRootProps, ADateFieldRoot, ADateFieldRootProps, APopoverRootEmits, APopoverRootProps } from '..';
 import type { DateMatcher, WeekDayFormat } from '../date';
 import type { DateStep, Granularity, HourCycle } from '../shared/date';
 import type { Direction } from '../shared/types';
-import { createContext, useDirection } from '../shared';
+import { createContext, useDirection, useLocale } from '../shared';
 
 type DatePickerRootContext = {
   id: Ref<string | undefined>;
@@ -46,7 +45,7 @@ export type ADatePickerRootProps = Omit<ADateFieldRootProps, 'as' | 'asChild'> &
   closeOnSelect?: boolean;
 };
 
-export type ADatePickerRootEmits = {
+export type ADatePickerRootEmits = APopoverRootEmits & {
   /** Event handler called whenever the model value changes */
   'update:modelValue': [date: DateValue | undefined];
   /** Event handler called whenever the placeholder value changes */
@@ -86,17 +85,16 @@ const props = withDefaults(
     disabled: false,
     readonly: false,
     placeholder: undefined,
-    locale: 'en',
     isDateDisabled: undefined,
     isDateUnavailable: undefined,
     closeOnSelect: false,
   },
 );
 
-const emits = defineEmits<ADatePickerRootEmits & APopoverRootEmits>();
+const emits = defineEmits<ADatePickerRootEmits>();
 
 const {
-  locale,
+  locale: propLocale,
   disabled,
   readonly,
   pagedNavigation,
@@ -124,6 +122,7 @@ const {
 } = toRefs(props);
 
 const dir = useDirection(propDir);
+const locale = useLocale(propLocale);
 
 const modelValue = useVModel(props, 'modelValue', emits, {
   defaultValue: defaultValue.value,
@@ -134,7 +133,7 @@ const defaultDate = computed(() => getDefaultDate({
   defaultPlaceholder: props.placeholder,
   granularity: props.granularity,
   defaultValue: modelValue.value,
-  locale: props.locale,
+  locale: locale.value,
 }));
 
 const placeholder = useVModel(props, 'placeholder', emits, {

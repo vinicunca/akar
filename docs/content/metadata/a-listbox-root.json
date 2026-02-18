@@ -45,7 +45,7 @@
   },
   {
     "name": "modelValue",
-    "description": "The controlled value of the listbox. Can be binded with with `v-model`.",
+    "description": "The controlled value of the listbox. Can be binded with `v-model`.",
     "type": "AcceptableValue | AcceptableValue[]",
     "required": false
   },

@@ -45,7 +45,7 @@
   },
   {
     "name": "expanded",
-    "description": "The controlled value of the expanded item. Can be binded with with `v-model`.",
+    "description": "The controlled value of the expanded item. Can be binded with `v-model`.",
     "type": "string[]",
     "required": false
   },
@@ -70,7 +70,7 @@
   },
   {
     "name": "modelValue",
-    "description": "The controlled value of the tree. Can be binded with with `v-model`.",
+    "description": "The controlled value of the tree. Can be binded with `v-model`.",
     "type": "Record<string, any> | Record<string, any>[]",
     "required": false
   },
