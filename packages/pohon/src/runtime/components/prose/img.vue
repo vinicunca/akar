@@ -25,9 +25,9 @@ import { useAppConfig, useRuntimeConfig } from '#imports';
 import { createReusableTemplate, useEventListener } from '@vueuse/core';
 import { ADialogPortal, ADialogRoot, ADialogTrigger } from 'akar';
 import { AnimatePresence, Motion } from 'motion-v';
-import { joinURL, withLeadingSlash, withTrailingSlash } from 'ufo';
 import { computed, ref, useId } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
+import { resolveBaseURL } from '../../utils';
 import { uv } from '../../utils/uv';
 
 defineOptions({ inheritAttrs: false });
@@ -49,15 +49,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
   open: open.value,
 }));
 
-const refinedSrc = computed(() => {
-  if (props.src?.startsWith('/') && !props.src.startsWith('//')) {
-    const _base = withLeadingSlash(withTrailingSlash(useRuntimeConfig().app.baseURL));
-    if (_base !== '/' && !props.src.startsWith(_base)) {
-      return joinURL(_base, props.src);
-    }
-  }
-  return props.src;
-});
+const refinedSrc = computed(() => resolveBaseURL(props.src, useRuntimeConfig().app.baseURL));
 
 const layoutId = computed(() => `${refinedSrc.value}::${useId()}`);
 
