@@ -1,33 +1,6 @@
 <script lang="ts" setup>
 import type { Ref } from '#imports';
 import type { ContentNavigationItem } from '@nuxt/content';
-import {
-  ContentRenderer,
-  MDC,
-  PAvatar,
-  PBreadcrumb,
-  PButton,
-  PContentSurround,
-  PContentToc,
-  PIcon,
-  PLink,
-  PLinkBase,
-  PSeparator,
-} from '#components';
-import {
-  computed,
-  createError,
-  definePageMeta,
-  inject,
-  navigateTo,
-  queryCollection,
-  useAsyncData,
-  useFrameworks,
-  useNavigation,
-  useRoute,
-  useSeoMeta,
-  watch,
-} from '#imports';
 import { toKebabCase } from '@vinicunca/perkakas';
 import { pickLinkProps } from 'pohon-ui/utils/link';
 import { joinURL } from 'ufo';
@@ -87,7 +60,7 @@ if (!import.meta.prerender) {
   });
 }
 
-const title = page.value?.seo?.title ?? page.value?.navigation.title ?? page.value?.title;
+const title = page.value?.seo?.title ?? page.value?.navigation?.title ?? page.value?.title;
 const prefix = page.value?.path.includes('components/') || page.value?.path.includes('composables/') ? 'Vue ' : '';
 let suffix = '';
 if (page.value?.path.includes('components/')) {
