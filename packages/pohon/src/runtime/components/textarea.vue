@@ -155,7 +155,7 @@ function updateInput(value: string | null | undefined) {
     value ||= null;
   }
 
-  if (props.modelModifiers?.optional) {
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
     value ||= undefined;
   }
 

@@ -62,30 +62,39 @@ type DotPathValue<T, P extends DotPathKeys<T> | (string & {})>
 
 export type GetItemKeys<I> = keyof Extract<NestedItem<I>, object> | DotPathKeys<Extract<NestedItem<I>, object>>;
 
-export type GetItemValue<I, VK extends GetItemKeys<I> | undefined, T extends NestedItem<I> = NestedItem<I>>
+export type GetItemValue<
+  I,
+  VK extends GetItemKeys<I> | undefined,
+  O extends object | undefined = undefined,
+  T extends NestedItem<I> = NestedItem<I>,
+>
   = T extends object
     ? VK extends undefined
-      ? T
+      ? T extends O
+        ? never
+        : T
       : VK extends DotPathKeys<T>
         ? DotPathValue<T, VK>
         : never
     : T;
 
 export type GetModelValue<
-  T,
-  VK extends GetItemKeys<T> | undefined,
+  I,
+  VK extends GetItemKeys<I> | undefined,
   M extends boolean,
+  O extends object | undefined = undefined,
 > = M extends true
-  ? Array<GetItemValue<T, VK>>
-  : GetItemValue<T, VK>;
+  ? Array<GetItemValue<I, VK, O>>
+  : GetItemValue<I, VK, O>;
 
 export interface GetModelValueEmits<
-  T,
-  VK extends GetItemKeys<T> | undefined,
+  I,
+  VK extends GetItemKeys<I> | undefined,
   M extends boolean,
+  O extends object | undefined = undefined,
 > {
   /** Event handler called when the value changes. */
-  'update:modelValue': [value: GetModelValue<T, VK, M>];
+  'update:modelValue': [value: GetModelValue<I, VK, M, O>];
 }
 
 export type StringOrVNode

@@ -26,6 +26,8 @@ import theme from '#build/pohon/select-menu';
 
 type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>;
 
+type ExcludeItem = { type: 'label' | 'separator' };
+
 export type PSelectMenuValue = AcceptableValue;
 export type PSelectMenuItem = PSelectMenuValue | {
   label?: string;
@@ -145,10 +147,10 @@ export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = Arr
   descriptionKey?: GetItemKeys<T>;
   items?: T;
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
-  defaultValue?: GetModelValue<T, VK, M>;
+  defaultValue?: GetModelValue<T, VK, M, ExcludeItem>;
   /** The controlled value of the SelectMenu. Can be binded-with `v-model`. */
-  modelValue?: GetModelValue<T, VK, M>;
-  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>;
+  modelValue?: GetModelValue<T, VK, M, ExcludeItem>;
+  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M, ExcludeItem>>, 'lazy'>;
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean;
   /** Highlight the ring color like a focus state. */
@@ -183,9 +185,9 @@ export type PSelectMenuEmits<A extends ArrayOrNested<PSelectMenuItem>, VK extend
   /** Event handler when highlighted element changes. */
   highlight: [payload: {
     ref: HTMLElement;
-    value: GetModelValue<A, VK, M>;
+    value: GetModelValue<A, VK, M, ExcludeItem>;
   } | undefined];
-} & GetModelValueEmits<A, VK, M>;
+} & GetModelValueEmits<A, VK, M, ExcludeItem>;
 
 type SlotProps<T extends PSelectMenuItem> = (props: { item: T; index: number; pohon: SelectMenu['pohon'] }) => any;
 
@@ -195,9 +197,9 @@ export interface PSelectMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: SelectMenu['pohon'] }) => any;
-  'default': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: SelectMenu['pohon'] }) => any;
-  'trailing': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: SelectMenu['pohon'] }) => any;
+  'leading': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: SelectMenu['pohon'] }) => any;
+  'default': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: SelectMenu['pohon'] }) => any;
+  'trailing': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: SelectMenu['pohon'] }) => any;
   'empty': (props: { searchTerm?: string }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
@@ -382,10 +384,10 @@ const pohon = computed(() =>
   }),
 );
 
-function displayValue(value: GetItemValue<T, VK> | Array<GetItemValue<T, VK>>): string | undefined {
+function displayValue(value: GetItemValue<T, VK, ExcludeItem> | Array<GetItemValue<T, VK, ExcludeItem>>): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK>>({
+      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>({
         items: items.value,
         value: item,
         options: {
@@ -398,9 +400,9 @@ function displayValue(value: GetItemValue<T, VK> | Array<GetItemValue<T, VK>>): 
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined;
   }
 
-  return getDisplayValue<Array<T>, GetItemValue<T, VK>>({
+  return getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>({
     items: items.value,
-    value: value as GetItemValue<T, VK>,
+    value: value as GetItemValue<T, VK, ExcludeItem>,
     options: {
       labelKey: props.labelKey,
       valueKey: props.valueKey,
@@ -568,7 +570,7 @@ function isSelectItem(item: PSelectMenuItem): item is Exclude<PSelectMenuItem, P
   return typeof item === 'object' && item !== null;
 }
 
-function isModelValueEmpty(modelValue: GetModelValue<T, VK, M>): boolean {
+function isModelValueEmpty(modelValue: GetModelValue<T, VK, M, ExcludeItem>): boolean {
   if (props.multiple && Array.isArray(modelValue)) {
     return modelValue.length === 0;
   }
@@ -761,7 +763,7 @@ defineExpose({
         >
           <slot
             name="leading"
-            :model-value="(modelValue as GetModelValue<T, VK, M>)"
+            :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
             :open="open"
             :pohon="pohon"
           >
@@ -782,12 +784,12 @@ defineExpose({
         </span>
 
         <slot
-          :model-value="(modelValue as GetModelValue<T, VK, M>)"
+          :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
           :open="open"
           :pohon="pohon"
         >
           <template
-            v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]"
+            v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M, ExcludeItem>)]"
             :key="displayedModelValue"
           >
             <span
@@ -814,13 +816,13 @@ defineExpose({
         >
           <slot
             name="trailing"
-            :model-value="(modelValue as GetModelValue<T, VK, M>)"
+            :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
             :open="open"
             :pohon="pohon"
           >
 
             <AComboboxCancel
-              v-if="!!clear && !isModelValueEmpty(modelValue as GetModelValue<T, VK, M>)"
+              v-if="!!clear && !isModelValueEmpty(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
               as-child
             >
               <PButton

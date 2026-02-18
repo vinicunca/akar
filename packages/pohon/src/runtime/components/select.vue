@@ -26,6 +26,8 @@ import theme from '#build/pohon/select';
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>;
 
+type ExcludeItem = { type: 'label' | 'separator' };
+
 export type PSelectValue = AcceptableValue;
 export type PSelectItem = PSelectValue | {
   label?: string;
@@ -109,10 +111,10 @@ export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNest
   descriptionKey?: GetItemKeys<T>;
   items?: T;
   /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
-  defaultValue?: GetModelValue<T, VK, M>;
+  defaultValue?: GetModelValue<T, VK, M, ExcludeItem>;
   /** The controlled value of the Select. Can be bind as `v-model`. */
-  modelValue?: GetModelValue<T, VK, M>;
-  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>;
+  modelValue?: GetModelValue<T, VK, M, ExcludeItem>;
+  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M, ExcludeItem>>, 'lazy'>;
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean;
   /** Highlight the ring color like a focus state. */
@@ -127,7 +129,7 @@ export type PSelectEmits<A extends ArrayOrNested<PSelectItem>, VK extends GetIte
   change: [event: Event];
   blur: [event: FocusEvent];
   focus: [event: FocusEvent];
-} & GetModelValueEmits<A, VK, M>;
+} & GetModelValueEmits<A, VK, M, ExcludeItem>;
 
 type SlotProps<T extends PSelectItem> = (props: { item: T; index: number; pohon: Select['pohon'] }) => any;
 
@@ -137,9 +139,9 @@ export interface PSelectSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: Select['pohon'] }) => any;
-  'default': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: Select['pohon'] }) => any;
-  'trailing': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: Select['pohon'] }) => any;
+  'leading': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: Select['pohon'] }) => any;
+  'default': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: Select['pohon'] }) => any;
+  'trailing': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: Select['pohon'] }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': (props: { item: T; index: number }) => any;
@@ -277,10 +279,10 @@ const groups = computed<Array<Array<PSelectItem>>>(() => {
 
 const items = computed(() => groups.value.flatMap((group) => group) as Array<T>);
 
-function displayValue(value: GetItemValue<T, VK> | Array<GetItemValue<T, VK>>): string | undefined {
+function displayValue(value: GetItemValue<T, VK, ExcludeItem> | Array<GetItemValue<T, VK, ExcludeItem>>): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK>>({
+      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>({
         items: items.value,
         value: item,
         options: {
@@ -293,9 +295,9 @@ function displayValue(value: GetItemValue<T, VK> | Array<GetItemValue<T, VK>>): 
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined;
   }
 
-  return getDisplayValue<Array<T>, GetItemValue<T, VK>>({
+  return getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>({
     items: items.value,
-    value: value as GetItemValue<T, VK>,
+    value: value as GetItemValue<T, VK, ExcludeItem>,
     options: {
       labelKey: props.labelKey,
       valueKey: props.valueKey,
@@ -394,7 +396,7 @@ defineExpose({
       >
         <slot
           name="leading"
-          :model-value="(modelValue as GetModelValue<T, VK, M>)"
+          :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
           :open="open"
           :pohon="pohon"
         >
@@ -415,12 +417,12 @@ defineExpose({
       </span>
 
       <slot
-        :model-value="(modelValue as GetModelValue<T, VK, M>)"
+        :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
         :open="open"
         :pohon="pohon"
       >
         <template
-          v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]"
+          v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M, ExcludeItem>)]"
           :key="displayedModelValue"
         >
           <span
@@ -447,7 +449,7 @@ defineExpose({
       >
         <slot
           name="trailing"
-          :model-value="(modelValue as GetModelValue<T, VK, M>)"
+          :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
           :open="open"
           :pohon="pohon"
         >

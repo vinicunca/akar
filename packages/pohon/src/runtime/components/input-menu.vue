@@ -48,6 +48,8 @@ export type PInputMenuItem = PInputMenuValue | {
   [key: string]: any;
 };
 
+type ExcludeItem = { type: 'label' | 'separator' };
+
 export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
   /**
    * The element or component this component should render as.
@@ -152,10 +154,10 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
   descriptionKey?: GetItemKeys<T>;
   items?: T;
   /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
-  defaultValue?: GetModelValue<T, VK, M>;
+  defaultValue?: GetModelValue<T, VK, M, ExcludeItem>;
   /** The controlled value of the InputMenu. Can be binded-with `v-model`. */
-  modelValue?: GetModelValue<T, VK, M>;
-  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>;
+  modelValue?: GetModelValue<T, VK, M, ExcludeItem>;
+  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M, ExcludeItem>>, 'lazy'>;
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean;
   /** Highlight the ring color like a focus state. */
@@ -188,10 +190,10 @@ export type PInputMenuEmits<A extends ArrayOrNested<PInputMenuItem>, VK extends 
   /** Event handler when highlighted element changes. */
   highlight: [payload: {
     ref: HTMLElement;
-    value: GetModelValue<A, VK, M>;
+    value: GetModelValue<A, VK, M, ExcludeItem>;
   } | undefined];
-  removeTag: [item: GetModelValue<A, VK, M>];
-} & GetModelValueEmits<A, VK, M>;
+  removeTag: [item: GetModelValue<A, VK, M, ExcludeItem>];
+} & GetModelValueEmits<A, VK, M, ExcludeItem>;
 
 type SlotProps<T extends PInputMenuItem> = (props: { item: T; index: number; pohon: InputMenu['pohon'] }) => any;
 
@@ -201,8 +203,8 @@ export interface PInputMenuSlots<
   M extends boolean = false,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: InputMenu['pohon'] }) => any;
-  'trailing': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: InputMenu['pohon'] }) => any;
+  'leading': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: InputMenu['pohon'] }) => any;
+  'trailing': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: InputMenu['pohon'] }) => any;
   'empty': (props: { searchTerm?: string }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
@@ -387,8 +389,8 @@ const pohon = computed(() =>
 
 const items = computed(() => groups.value.flatMap((group) => group) as Array<T>);
 
-function displayValue(value: GetItemValue<T, VK>): string {
-  return getDisplayValue<Array<T>, GetItemValue<T, VK>>({
+function displayValue(value: GetItemValue<T, VK, ExcludeItem>): string {
+  return getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>({
     items: items.value,
     value,
     options: {
@@ -544,11 +546,10 @@ function onUpdateOpen(value: boolean) {
   }
 }
 
-function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true>) {
+function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true, ExcludeItem>) {
   if (props.multiple) {
-    const modelValue = props.modelValue as GetModelValue<T, VK, true>;
     const filteredValue = modelValue.filter((value) => !isEqual(value, event));
-    emits('update:modelValue', filteredValue as GetModelValue<T, VK, M>);
+    emits('update:modelValue', filteredValue as GetModelValue<T, VK, M, ExcludeItem>);
     emits('removeTag', event);
     onUpdate(filteredValue);
   }
@@ -578,7 +579,7 @@ function isInputItem(item: PInputMenuItem): item is Exclude<PInputMenuItem, PInp
   return typeof item === 'object' && item !== null;
 }
 
-function isModelValueEmpty(modelValue: GetModelValue<T, VK, M>): boolean {
+function isModelValueEmpty(modelValue: GetModelValue<T, VK, M, ExcludeItem>): boolean {
   if (props.multiple && Array.isArray(modelValue)) {
     return modelValue.length === 0;
   }
@@ -767,7 +768,7 @@ defineExpose({
         as-child
         @blur="onBlur"
         @focus="onFocus"
-        @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true>)"
+        @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true, ExcludeItem>)"
       >
         <ATagsInputItem
           v-for="(item, index) in tags"
@@ -787,7 +788,7 @@ defineExpose({
               :item="(item as NestedItem<T>)"
               :index="index"
             >
-              {{ displayValue(item as GetItemValue<T, VK>) }}
+              {{ displayValue(item as GetItemValue<T, VK, ExcludeItem>) }}
             </slot>
           </ATagsInputItemText>
 
@@ -853,7 +854,7 @@ defineExpose({
       >
         <slot
           name="leading"
-          :model-value="(modelValue as GetModelValue<T, VK, M>)"
+          :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
           :open="open"
           :pohon="pohon"
         >
@@ -880,12 +881,12 @@ defineExpose({
       >
         <slot
           name="trailing"
-          :model-value="(modelValue as GetModelValue<T, VK, M>)"
+          :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
           :open="open"
           :pohon="pohon"
         >
           <AComboboxCancel
-            v-if="!!clear && !isModelValueEmpty(modelValue as GetModelValue<T, VK, M>)"
+            v-if="!!clear && !isModelValueEmpty(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
             as-child
           >
             <PButton

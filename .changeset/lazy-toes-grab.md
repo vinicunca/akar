@@ -22,3 +22,4 @@
 - feat(Toaster): prevent duplicate toasts and add pulse animation
 - feat(Form): add HTML5 validation to programmatic submit
 - fix(ContentNavigation): pass nested child data to slots
+- fix(InputMenu/Select/SelectMenu): exclude cosmetic items from model value type
