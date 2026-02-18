@@ -221,7 +221,7 @@ export interface PInputMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { useAppConfig } from '#imports';
-import { isBoolean, isNonNullish, isNullish } from '@vinicunca/perkakas';
+import { isBoolean } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AComboboxAnchor,
@@ -244,12 +244,12 @@ import {
   ATagsInputItemDelete,
   ATagsInputItemText,
   ATagsInputRoot,
-  useFilter,
   useForwardPropsEmits,
 } from 'akar';
 import { defu } from 'defu';
 import { isEqual } from 'ohash/utils';
 import { computed, nextTick, onMounted, toRaw, toRef, useTemplateRef } from 'vue';
+import { useFilter } from '../composables/internal/use-filter';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
@@ -289,7 +289,7 @@ const { t } = useLocale();
 const appConfig = useAppConfig() as InputMenu['AppConfig'];
 const pohonProp = useComponentPohon('inputMenu', props);
 
-const { contains } = useFilter({ sensitivity: 'base' });
+const { filterGroups } = useFilter();
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -421,26 +421,10 @@ const filteredGroups = computed(() => {
 
   const fields = Array.isArray(props.filterFields) ? props.filterFields : [props.labelKey] as Array<string>;
 
-  return groups.value.map((items) => items.filter((item) => {
-    if (isNullish(item)) {
-      return false;
-    }
-
-    if (typeof item !== 'object') {
-      return contains({ string: String(item), substring: searchTerm.value });
-    }
-
-    if (item.type && ['label', 'separator'].includes(item.type)) {
-      return true;
-    }
-
-    return fields.some((field) => {
-      const value = getProp({ object: item, path: field });
-      return isNonNullish(value) && contains({ string: String(value), substring: searchTerm.value });
-    });
-  })).filter((group) => group.filter((item) =>
-    !isInputItem(item) || (!item.type || !['label', 'separator'].includes(item.type)),
-  ).length > 0);
+  return filterGroups(groups.value, searchTerm.value, {
+    fields,
+    isStructural: (item: PInputMenuItem) => isInputItem(item) && !!item.type && ['label', 'separator'].includes(item.type),
+  });
 });
 const filteredItems = computed(() => filteredGroups.value.flatMap((group) => group));
 

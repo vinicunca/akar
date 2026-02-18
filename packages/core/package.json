@@ -65,7 +65,7 @@
     "src"
   ],
   "scripts": {
-    "build": "pnpm type-check && pnpm build-only",
+    "build": "pnpm typecheck && pnpm build-only",
     "build-only": "tsdown && tsx scripts/postbuild.ts",
     "watch": "tsdown --watch",
     "typecheck": "vue-tsc -p tsconfig.check.json --noEmit",
