@@ -20,3 +20,4 @@
 - fix(Table): improve perfs with shallowRef when watch deep is disabled
 - fix(Checkbox/Switch): prevent data-state conflict when used inside Tooltip
 - feat(Toaster): prevent duplicate toasts and add pulse animation
+- feat(Form): add HTML5 validation to programmatic submit

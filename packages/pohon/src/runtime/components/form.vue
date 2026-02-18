@@ -101,6 +101,7 @@ import {
   readonly,
   ref,
   useId,
+  useTemplateRef,
 } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import {
@@ -141,6 +142,7 @@ const pohon = computed(() =>
 );
 
 const formId = props.id ?? useId() as string;
+const formRef = useTemplateRef('formRef');
 
 const bus = useEventBus<FormEvent<I>>(`form-${formId}`);
 
@@ -473,6 +475,10 @@ const api = {
   },
 
   async submit() {
+    if (formRef.value instanceof HTMLFormElement && formRef.value.reportValidity() === false) {
+      return;
+    }
+
     await onSubmitWrapper(new Event('submit'));
   },
 
@@ -526,6 +532,7 @@ defineExpose(api);
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
+    ref="formRef"
     :class="pohon({ class: [pohonProp.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
