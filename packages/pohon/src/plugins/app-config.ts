@@ -2,7 +2,7 @@ import type { UnpluginOptions } from 'unplugin';
 import type { PohonOptions } from '../unplugin';
 
 /**
- * This plugin injects Nuxt UI configuration into the runtime build so Nuxt UI components can
+ * This plugin injects Pohon UI configuration into the runtime build so Pohon UI components can
  * access it.
  */
 export default function AppConfigPlugin(_options: PohonOptions & { theme: NonNullable<PohonOptions['theme']> }, appConfig: Record<string, any>) {

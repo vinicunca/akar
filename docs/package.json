@@ -17,6 +17,7 @@
     "@nuxt/content": "catalog:pohon",
     "@nuxt/fonts": "catalog:pohon",
     "@nuxt/image": "catalog:docs",
+    "@nuxtjs/mcp-toolkit": "catalog:docs",
     "@octokit/rest": "catalog:docs",
     "@vinicunca/perkakas": "catalog:core",
     "@vueuse/core": "catalog:core",

@@ -112,4 +112,14 @@ export default vinicuncaESLint(
       'test/prefer-lowercase-title': 'off',
     },
   },
+
+  {
+    files: [
+      'pnpm-workspace.yaml',
+    ],
+    rules: {
+      'pnpm/yaml-enforce-settings': 'off',
+      'pnpm/yaml-no-duplicate-catalog-item': 'off',
+    },
+  },
 );

@@ -1332,7 +1332,7 @@ exports[`navigationMenu > renders with unmountOnHide correctly 1`] = `
                 <p class="" data-pohon="navigation-menu-child-link-label">Installation
                   <!--v-if-->
                 </p>
-                <p class="" data-pohon="navigation-menu-child-link-description">Learn how to install and configure Nuxt UI in your application.</p>
+                <p class="" data-pohon="navigation-menu-child-link-description">Learn how to install and configure Pohon UI in your application.</p>
               </div>
             </button></li>
           <li class="" data-pohon="navigation-menu-child-item"><button type="button" data-pohon="navigation-menu-child-link" data-akar-collection-item=""><span class="iconify i-lucide:swatch-book" aria-hidden="true" data-pohon="navigation-menu-child-link-icon"></span>

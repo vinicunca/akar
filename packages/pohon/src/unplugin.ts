@@ -58,7 +58,7 @@ export interface PohonOptions extends Omit<PohonModuleOptions, 'fonts' | 'colorM
    */
   inertia?: boolean;
   /**
-   * Additional packages to scan for components using Nuxt UI
+   * Additional packages to scan for components using Pohon UI
    */
   scanPackages?: Array<string>;
 }
