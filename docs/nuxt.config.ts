@@ -57,17 +57,6 @@ export default defineNuxtConfig({
           placeholder: { name: 'placeholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },
         },
       },
-      PEditor: {
-        props: {
-          modelValue: { name: 'modelValue', type: 'null | string | JSONContent | JSONContent[]' },
-          parseOptions: { name: 'parseOptions', type: 'ParseOptions' },
-        },
-      },
-      PEditorDragHandle: { props: { editor: { name: 'editor', type: 'Editor' } } },
-      PEditorEmojiMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
-      PEditorMentionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
-      PEditorSuggestionMenu: { props: { editor: { name: 'editor', type: 'Editor' } } },
-      PEditorToolbar: { props: { editor: { name: 'editor', type: 'Editor' } } },
       PInputDate: {
         props: {
           defaultPlaceholder: { name: 'defaultPlaceholder', type: 'CalendarDate | CalendarDateTime | ZonedDateTime' },

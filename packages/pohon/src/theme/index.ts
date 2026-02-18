@@ -24,7 +24,6 @@ export { default as dashboardLayoutFooter } from './dashboard-layout-footer';
 export { default as dashboardLayoutHeader } from './dashboard-layout-header';
 export { default as dashboardLayoutSidebar } from './dashboard-layout-sidebar';
 export { default as dashboardLayoutTabbar } from './dashboard-layout-tabbar';
-export { default as dashboardMenu } from './dashboard-menu';
 export { default as dialog } from './dialog';
 export { default as drawer } from './drawer';
 export { default as dropdownMenu } from './dropdown-menu';

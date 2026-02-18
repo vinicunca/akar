@@ -139,6 +139,11 @@ const pohon = computed(() =>
 
 const triggersRef = ref<Array<ComponentPublicInstance>>([]);
 
+function setTriggerRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  triggersRef.value[index] = el;
+}
+
 defineExpose({
   triggersRef,
 });
@@ -168,7 +173,7 @@ defineExpose({
       <ATabsTrigger
         v-for="(item, index) of items"
         :key="index"
-        :ref="el => (triggersRef[index] = el as ComponentPublicInstance)"
+        :ref="el => setTriggerRef(index, el)"
         :value="item.value ?? String(index)"
         :disabled="item.disabled"
         :class="pohon.trigger({ class: [pohonProp?.trigger, item.pohon?.trigger] })"

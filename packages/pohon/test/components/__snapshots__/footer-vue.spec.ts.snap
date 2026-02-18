@@ -1,0 +1,97 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`pFooter > renders with as correctly 1`] = `
+"<section class="" data-pohon="footer-root">
+  <!--v-if-->
+  <div class="" data-pohon="footer-container">
+    <div class="" data-pohon="footer-right"></div>
+    <div class="" data-pohon="footer-center"></div>
+    <div class="" data-pohon="footer-left"></div>
+  </div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`pFooter > renders with bottom slot correctly 1`] = `
+"<footer class="" data-pohon="footer-root">
+  <!--v-if-->
+  <div class="" data-pohon="footer-container">
+    <div class="" data-pohon="footer-right"></div>
+    <div class="" data-pohon="footer-center"></div>
+    <div class="" data-pohon="footer-left"></div>
+  </div>
+  <div class="" data-pohon="footer-bottom">Bottom slot</div>
+</footer>"
+`;
+
+exports[`pFooter > renders with class correctly 1`] = `
+"<footer class="relative" data-pohon="footer-root">
+  <!--v-if-->
+  <div class="" data-pohon="footer-container">
+    <div class="" data-pohon="footer-right"></div>
+    <div class="" data-pohon="footer-center"></div>
+    <div class="" data-pohon="footer-left"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`pFooter > renders with default slot correctly 1`] = `
+"<footer class="" data-pohon="footer-root">
+  <!--v-if-->
+  <div class="" data-pohon="footer-container">
+    <div class="" data-pohon="footer-right"></div>
+    <div class="" data-pohon="footer-center">Default slot</div>
+    <div class="" data-pohon="footer-left"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`pFooter > renders with left slot correctly 1`] = `
+"<footer class="" data-pohon="footer-root">
+  <!--v-if-->
+  <div class="" data-pohon="footer-container">
+    <div class="" data-pohon="footer-right"></div>
+    <div class="" data-pohon="footer-center"></div>
+    <div class="" data-pohon="footer-left">Left slot</div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`pFooter > renders with right slot correctly 1`] = `
+"<footer class="" data-pohon="footer-root">
+  <!--v-if-->
+  <div class="" data-pohon="footer-container">
+    <div class="" data-pohon="footer-right">Right slot</div>
+    <div class="" data-pohon="footer-center"></div>
+    <div class="" data-pohon="footer-left"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`pFooter > renders with top slot correctly 1`] = `
+"<footer class="" data-pohon="footer-root">
+  <div class="" data-pohon="footer-top">Top slot</div>
+  <div class="" data-pohon="footer-container">
+    <div class="" data-pohon="footer-right"></div>
+    <div class="" data-pohon="footer-center"></div>
+    <div class="" data-pohon="footer-left"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;
+
+exports[`pFooter > renders with ui correctly 1`] = `
+"<footer class="" data-pohon="footer-root">
+  <!--v-if-->
+  <div class="lg:gap-x-1.5" data-pohon="footer-container">
+    <div class="" data-pohon="footer-right"></div>
+    <div class="" data-pohon="footer-center"></div>
+    <div class="" data-pohon="footer-left"></div>
+  </div>
+  <!--v-if-->
+</footer>"
+`;

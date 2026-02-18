@@ -11,6 +11,8 @@ const props = defineProps<PNavigationMenuProps>();
     :type="props.type"
     :collapsed="props.collapsed"
     expand-based-on-route
+    tooltip
+    dropdown
   />
 
   <!-- <PDashboardMenu

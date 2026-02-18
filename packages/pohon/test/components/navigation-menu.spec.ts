@@ -11,7 +11,7 @@ import { expectSlotProps } from '../utils/types';
 
 type TypeNavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>;
 
-describe('navigationMenu', () => {
+describe('NavigationMenu', () => {
   const variants = Object.keys(theme.variants.variant) as any;
 
   const items = [
@@ -93,6 +93,8 @@ describe('navigationMenu', () => {
     // Props
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: 'item-0' } }],
+    ['with defaultValue', { props: { ...props, defaultValue: 'item-0' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Documentation' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with arrow', { props: { ...props, arrow: true, modelValue: 'item-0' } }],
     ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const, modelValue: 'item-0' } }],
@@ -109,7 +111,7 @@ describe('navigationMenu', () => {
     ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-48' } }],
-    ['with ui', { props: { ...props, pohon: { itemLeadingIcon: 'size-4' } } }],
+    ['with pohon', { props: { ...props, pohon: { itemLeadingIcon: 'size-4' } } }],
     // Slots
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],

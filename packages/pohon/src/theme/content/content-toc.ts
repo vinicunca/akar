@@ -1,6 +1,6 @@
-import type { NuxtOptions } from '@nuxt/schema';
+import type { PohonModuleOptions } from '../../module';
 
-export default (options: Required<NuxtOptions['pohon']>) => ({
+export default (options: Required<PohonModuleOptions>) => ({
   slots: {
     root: '',
     container: '',

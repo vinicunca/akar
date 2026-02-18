@@ -1,0 +1,77 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`avatarGroup > renders with as correctly 1`] = `"<span class="" data-pohon="avatar-group-root"><!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span></span>"`;
+
+exports[`avatarGroup > renders with class correctly 1`] = `
+"<div class="justify-start" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with default slot correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with max correctly 1`] = `"<div class="" data-pohon="avatar-group-root"><span data-pohon="avatar-root"><span class="" data-pohon="avatar-fallback">+1</span></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span></div>"`;
+
+exports[`avatarGroup > renders with size 2xl correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with size 2xs correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with size 3xl correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with size 3xs correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with size lg correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with size md correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with size sm correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with size xl correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with size xs correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;
+
+exports[`avatarGroup > renders with ui correctly 1`] = `
+"<div class="" data-pohon="avatar-group-root">
+  <!--v-if--><span class="rounded-lg" data-pohon="avatar-root"><img src="https://github.com/noook.png" alt="Neil Richter" width="32" height="32" data-pohon="avatar-image"></span><span class="rounded-lg" data-pohon="avatar-root"><img src="https://github.com/romhml.png" alt="Romain Hamel" width="32" height="32" data-pohon="avatar-image"></span><span class="rounded-lg" data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" width="32" height="32" data-pohon="avatar-image"></span>
+</div>"
+`;

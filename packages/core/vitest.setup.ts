@@ -1,5 +1,4 @@
 import { beforeAll, expect, vi } from 'vitest';
-
 import { configureAxe } from 'vitest-axe';
 import * as matchers from 'vitest-axe/matchers';
 import '@testing-library/jest-dom/vitest';

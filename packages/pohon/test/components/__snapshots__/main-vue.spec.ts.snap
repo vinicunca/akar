@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PMain > renders with as correctly 1`] = `"<main class=""></main>"`;
+
+exports[`PMain > renders with class correctly 1`] = `"<main class="min-h-full"></main>"`;
+
+exports[`PMain > renders with default slot correctly 1`] = `"<main class="">Default slot</main>"`;

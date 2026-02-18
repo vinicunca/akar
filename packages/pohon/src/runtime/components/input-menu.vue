@@ -348,7 +348,11 @@ const {
   ariaAttrs,
 } = useFormField<PInputProps>(props);
 const { orientation, size: fieldGroupSize } = useFieldGroup<PInputProps>(props);
-const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown })));
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
+  toRef(
+    () => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown }),
+  ),
+);
 
 const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);
 

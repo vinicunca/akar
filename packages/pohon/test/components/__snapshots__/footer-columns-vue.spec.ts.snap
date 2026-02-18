@@ -1,0 +1,603 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`footerColumns > renders with as correctly 1`] = `
+"<section class="">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg><span class="">Nuxters<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt on GitHub<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Documentation<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Design Kit<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="">
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Support<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Agencies<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Jobs<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Sponsors<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Content<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt DevTools<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Image<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`footerColumns > renders with class correctly 1`] = `
+"<nav class="px-10">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg><span class="">Nuxters<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt on GitHub<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Documentation<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Design Kit<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="">
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Support<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Agencies<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Jobs<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Sponsors<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Content<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt DevTools<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Image<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</nav>"
+`;
+
+exports[`footerColumns > renders with column-label slot correctly 1`] = `
+"<nav class="">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Column label slot</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg><span class="">Nuxters<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt on GitHub<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Documentation<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Design Kit<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Column label slot</h3>
+      <ul class="">
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Support<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Agencies<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Jobs<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Sponsors<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Column label slot</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Content<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt DevTools<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Image<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</nav>"
+`;
+
+exports[`footerColumns > renders with columns correctly 1`] = `
+"<nav class="">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg><span class="">Nuxters<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt on GitHub<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Documentation<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Design Kit<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="">
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Support<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Agencies<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Jobs<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Sponsors<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Content<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt DevTools<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Image<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</nav>"
+`;
+
+exports[`footerColumns > renders with default slot correctly 1`] = `
+"<nav class="">
+  <!--v-if-->
+  <div class="">Default slot</div>
+  <!--v-if-->
+</nav>"
+`;
+
+exports[`footerColumns > renders with left slot correctly 1`] = `
+"<nav class="">
+  <div class="">Left slot</div>
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg><span class="">Nuxters<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt on GitHub<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Documentation<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Design Kit<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="">
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Support<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Agencies<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Jobs<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Sponsors<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Content<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt DevTools<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Image<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</nav>"
+`;
+
+exports[`footerColumns > renders with link slot correctly 1`] = `
+"<nav class="">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank">Link slot</a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">Link slot</a></li>
+        <li class=""><button type="button">Link slot</button></li>
+        <li class=""><button type="button">Link slot</button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="">
+        <li class=""><button type="button">Link slot</button></li>
+        <li class=""><button type="button">Link slot</button></li>
+        <li class=""><button type="button">Link slot</button></li>
+        <li class=""><button type="button">Link slot</button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">Link slot</a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">Link slot</a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">Link slot</a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">Link slot</a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</nav>"
+`;
+
+exports[`footerColumns > renders with link-label slot correctly 1`] = `
+"<nav class="">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg><span class="">Link label slot<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Link label slot<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Link label slot<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Link label slot<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="">
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Link label slot<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Link label slot<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Link label slot<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Link label slot<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Link label slot<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Link label slot<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Link label slot<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Link label slot<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</nav>"
+`;
+
+exports[`footerColumns > renders with link-leading slot correctly 1`] = `
+"<nav class="">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Nuxters<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Nuxt on GitHub<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><button type="button">Link leading slot<span class="">Documentation<!--v-if--></span></button></li>
+        <li class=""><button type="button">Link leading slot<span class="">Design Kit<!--v-if--></span></button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="">
+        <li class=""><button type="button">Link leading slot<span class="">Support<!--v-if--></span></button></li>
+        <li class=""><button type="button">Link leading slot<span class="">Agencies<!--v-if--></span></button></li>
+        <li class=""><button type="button">Link leading slot<span class="">Jobs<!--v-if--></span></button></li>
+        <li class=""><button type="button">Link leading slot<span class="">Sponsors<!--v-if--></span></button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Nuxt Content<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Nuxt DevTools<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Nuxt Image<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">Link leading slot<span class="">Pohon UI<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</nav>"
+`;
+
+exports[`footerColumns > renders with link-trailing slot correctly 1`] = `
+"<nav class="">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg><span class="">Nuxters<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>Link trailing slot</a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt on GitHub<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>Link trailing slot
+          </a></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Documentation<!--v-if--></span>Link trailing slot
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Design Kit<!--v-if--></span>Link trailing slot
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="">
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Support<!--v-if--></span>Link trailing slot
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Agencies<!--v-if--></span>Link trailing slot
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Jobs<!--v-if--></span>Link trailing slot
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Sponsors<!--v-if--></span>Link trailing slot
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Content<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>Link trailing slot
+          </a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt DevTools<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>Link trailing slot
+          </a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Image<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>Link trailing slot
+          </a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>Link trailing slot
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</nav>"
+`;
+
+exports[`footerColumns > renders with right slot correctly 1`] = `
+"<nav class="">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg><span class="">Nuxters<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt on GitHub<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Documentation<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Design Kit<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="">
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Support<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Agencies<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Jobs<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Sponsors<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Content<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt DevTools<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Image<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="">Right slot</div>
+</nav>"
+`;
+
+exports[`footerColumns > renders with ui correctly 1`] = `
+"<nav class="">
+  <!--v-if-->
+  <div class="">
+    <div>
+      <h3 class="">Community</h3>
+      <ul class="lg:gap-1.5">
+        <li class=""><a href="https://nuxters.nuxt.com" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg><span class="">Nuxters<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span></a></li>
+        <li class=""><a href="https://github.com/nuxt" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt on GitHub<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Documentation<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Design Kit<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Enterprise</h3>
+      <ul class="lg:gap-1.5">
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Support<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Agencies<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Jobs<!--v-if--></span>
+          </button></li>
+        <li class=""><button type="button">
+            <!--v-if--><span class="">Sponsors<!--v-if--></span>
+          </button></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="">Solutions</h3>
+      <ul class="lg:gap-1.5">
+        <li class=""><a href="https://content.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Content<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://devtools.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt DevTools<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://image.nuxt.com/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Nuxt Image<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+        <li class=""><a href="https://akar.vinicunca.dev/" rel="noopener noreferrer" target="_blank">
+            <!--v-if--><span class="">Pohon UI<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class=""></svg></span>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  <!--v-if-->
+</nav>"
+`;

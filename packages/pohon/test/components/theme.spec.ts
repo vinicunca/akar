@@ -15,7 +15,7 @@ describe('Theme', () => {
   it.each([
     // Props
     [
-      'with empty ui',
+      'with empty pohon',
       {
         props: { pohon: {} },
         slots: { default: () => h(Button, { label: 'Button' }) },
@@ -31,7 +31,7 @@ describe('Theme', () => {
       ['px-[1.234rem]', 'text-[#ff0]'],
     ],
     [
-      'with ui prop taking priority over theme',
+      'with pohon prop taking priority over theme',
       {
         props: { pohon: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
         slots: { default: () => h(Button, { label: 'Button', pohon: { base: 'px-[2.234rem]' } }) },
@@ -95,7 +95,7 @@ describe('Theme', () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
-        <Theme :ui="{ button: { base: 'test-theme-class' } }">
+        <Theme :pohon="{ button: { base: 'test-theme-class' } }">
           <Button label="Themed" />
         </Theme>
       `,
@@ -104,17 +104,17 @@ describe('Theme', () => {
     expect(wrapper.find('button').classes()).toContain('test-theme-class');
   });
 
-  it('child ui prop takes priority over theme', async () => {
+  it('child pohon prop takes priority over theme', async () => {
     const wrapper = await mountSuspended({
       components: { Theme, Button },
       template: `
         <Theme :pohon="{ button: { base: 'theme-class' } }">
-          <Button label="Themed" :pohon="{ base: 'ui-prop-class' }" />
+          <Button label="Themed" :pohon="{ base: 'pohon-prop-class' }" />
         </Theme>
       `,
     });
 
-    expect(wrapper.find('button').classes()).toContain('ui-prop-class');
+    expect(wrapper.find('button').classes()).toContain('pohon-prop-class');
     expect(wrapper.find('button').classes()).not.toContain('theme-class');
   });
 
@@ -204,13 +204,13 @@ describe('Theme', () => {
   });
 
   it('reacts to theme prop changes', async () => {
-    const ui = ref<any>({ button: { base: 'initial-class' } });
+    const pohon = ref<any>({ button: { base: 'initial-class' } });
 
     const wrapper = await mountSuspended({
       components: { Theme, Button },
-      setup: () => ({ ui }),
+      setup: () => ({ pohon }),
       template: `
-        <Theme :pohon="ui">
+        <Theme :pohon="pohon">
           <Button label="Themed" />
         </Theme>
       `,
@@ -218,7 +218,7 @@ describe('Theme', () => {
 
     expect(wrapper.find('button').classes()).toContain('initial-class');
 
-    ui.value = { button: { base: 'updated-class' } };
+    pohon.value = { button: { base: 'updated-class' } };
     await nextTick();
 
     expect(wrapper.find('button').classes()).toContain('updated-class');
@@ -235,6 +235,6 @@ describe('Theme', () => {
       `,
     });
 
-    expect(wrapper.find('[data-slot="root"]').classes()).toContain('input-theme-class');
+    expect(wrapper.find('[data-pohon="input-root"]').classes()).toContain('input-theme-class');
   });
 });

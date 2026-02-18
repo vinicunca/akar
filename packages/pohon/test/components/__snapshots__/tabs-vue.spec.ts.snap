@@ -1,0 +1,490 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tabs > renders with as correctly 1`] = `
+"<section dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</section>"
+`;
+
+exports[`Tabs > renders with class correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" class="w-96" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with content slot correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">Content slot</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with custom slot correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with default slot correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Default slot</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Default slot</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Default slot</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with defaultValue correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">And, this is the content for Tab2</div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with items correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with labelKey correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span>
+      <!--v-if-->
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">i-lucide-user</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">i-lucide-bell</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with leading slot correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0">Leading slot<span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1">Leading slot<span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2">Leading slot<span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with modelValue correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">And, this is the content for Tab2</div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with neutral variant link correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with neutral variant pill correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with orientation vertical correctly 1`] = `
+"<div dir="ltr" data-orientation="vertical" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="vertical" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="vertical" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="vertical" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="vertical" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="vertical" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="vertical" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="vertical" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with primary variant link correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with primary variant pill correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with size lg correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with size md correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with size sm correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with size xl correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with size xs correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with trailing slot correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>Trailing slot</button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>Trailing slot</button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span>Trailing slot</button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with ui correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="w-full ring ring-default" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="w-full ring ring-default" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="w-full ring ring-default" data-pohon="tabs-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Tabs > renders with unmountOnHide correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-0"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item="" aria-controls="akar-tabs-v-0-content-2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <div id="akar-tabs-v-0-content-0" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-0" tabindex="0" style="animation-duration: 0s;" class="" data-pohon="tabs-content">This is the content shown for Tab1</div>
+  <div id="akar-tabs-v-0-content-1" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-1" hidden="" tabindex="0" class="" data-pohon="tabs-content">And, this is the content for Tab2</div>
+  <div id="akar-tabs-v-0-content-2" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-2" hidden="" tabindex="0" class="" data-pohon="tabs-content">Finally, this is the content for Tab3</div>
+</div>"
+`;
+
+exports[`Tabs > renders without content correctly 1`] = `
+"<div dir="ltr" data-orientation="horizontal" data-pohon="tabs-root">
+  <div role="tablist" aria-orientation="horizontal" tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="" data-pohon="tabs-list">
+    <!--v-if--><button id="akar-tabs-v-0-trigger-0" role="tab" type="button" aria-selected="true" data-state="active" data-orientation="horizontal" tabindex="-1" data-active="" class="" data-pohon="tabs-trigger" data-akar-collection-item=""><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" alt="Benjamín Canac" width="32" height="32" data-pohon="avatar-image"></span><span class="" data-pohon="tabs-label">Tab1</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-1" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab2</span>
+      <!--v-if-->
+    </button><button id="akar-tabs-v-0-trigger-2" role="tab" type="button" aria-selected="false" data-state="inactive" data-orientation="horizontal" tabindex="-1" class="" data-pohon="tabs-trigger" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tabs-leading-icon"></svg><span class="" data-pohon="tabs-label">Tab3</span><span class="" data-pohon="tabs-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">badge</span>
+      <!--v-if--></span>
+    </button>
+  </div>
+  <!--v-if-->
+</div>"
+`;

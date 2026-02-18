@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`avatar > renders with alt correctly 1`] = `"<span data-pohon="avatar-root"><span class="" data-pohon="avatar-fallback">BC</span></span>"`;
+
+exports[`avatar > renders with as (object) correctly 1`] = `""`;
+
+exports[`avatar > renders with as (partial object) correctly 1`] = `""`;
+
+exports[`avatar > renders with as correctly 1`] = `"<section data-pohon="avatar-root"><span class="" data-pohon="avatar-fallback">&nbsp;</span></section>"`;
+
+exports[`avatar > renders with chip correctly 1`] = `"<span class="" data-pohon="chip-root"><span class="" data-pohon="avatar-fallback">&nbsp;</span><span class="" data-pohon="chip-base">1</span></span>"`;
+
+exports[`avatar > renders with class correctly 1`] = `"<span class="bg-default" data-pohon="avatar-root"><span class="" data-pohon="avatar-fallback">&nbsp;</span></span>"`;
+
+exports[`avatar > renders with default slot correctly 1`] = `"<span data-pohon="avatar-root">🇫🇷</span>"`;
+
+exports[`avatar > renders with icon correctly 1`] = `"<span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="avatar-icon"></svg></span>"`;
+
+exports[`avatar > renders with size 2xl correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="44" height="44" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with size 2xs correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="20" height="20" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with size 3xl correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="48" height="48" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with size 3xs correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="16" height="16" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with size lg correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="36" height="36" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with size md correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with size sm correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="28" height="28" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with size xl correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="40" height="40" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with size xs correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="24" height="24" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with src correctly 1`] = `"<span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span>"`;
+
+exports[`avatar > renders with text correctly 1`] = `"<span data-pohon="avatar-root"><span class="" data-pohon="avatar-fallback">+1</span></span>"`;
+
+exports[`avatar > renders with ui correctly 1`] = `"<span data-pohon="avatar-root"><span class="font-bold" data-pohon="avatar-fallback">&nbsp;</span></span>"`;

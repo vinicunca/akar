@@ -121,7 +121,8 @@
     "typecheck": "vue-tsc --noEmit",
     "prepack": "pnpm build",
     "test": "vitest",
-    "test:vue": "vitest -c vitest.vue.config.ts"
+    "test:vue": "vitest --project vue",
+    "test:nuxt": "vitest --project nuxt"
   },
   "peerDependencies": {
     "@inertiajs/vue3": "^2.0.7",
@@ -203,14 +204,20 @@
     "unplugin": "catalog:pohon",
     "unplugin-auto-import": "catalog:pohon",
     "unplugin-vue-components": "catalog:plugins",
-    "vue-component-type-helpers": "catalog:core",
-    "vue-tsc": "catalog:pohon"
+    "vue-component-type-helpers": "catalog:core"
   },
   "devDependencies": {
     "@nuxt/content": "catalog:pohon",
     "@nuxt/module-builder": "catalog:pohon",
     "@nuxt/test-utils": "catalog:pohon",
+    "@vitejs/plugin-vue": "catalog:core",
+    "@vue/test-utils": "catalog:core",
     "defu": "catalog:core",
-    "nuxt": "catalog:pohon"
+    "happy-dom": "catalog:core",
+    "nuxt": "catalog:pohon",
+    "vitest": "catalog:core",
+    "vitest-axe": "catalog:core",
+    "vue": "catalog:core",
+    "vue-tsc": "catalog:pohon"
   }
 }

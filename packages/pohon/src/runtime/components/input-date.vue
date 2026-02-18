@@ -167,6 +167,11 @@ const pohon = computed(() =>
 
 const inputsRef = ref<Array<ComponentPublicInstance>>([]);
 
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el;
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } });
@@ -210,7 +215,7 @@ defineExpose({
     <ADateField.Input
       v-for="(segment, index) in segments"
       :key="`${segment.part}-${index}`"
-      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
+      :ref="el => setInputRef(index, el)"
       :type="type"
       :part="segment.part"
       data-pohon="input-date-segment"

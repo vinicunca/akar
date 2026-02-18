@@ -6,6 +6,7 @@ import { createHooks } from 'hookable';
 import { onScopeDispose, ref } from 'vue';
 
 export { defineLocale } from '../../composables/define-locale';
+
 export { defineShortcuts } from '../../composables/define-shortcuts';
 export { useLocale } from '../../composables/use-locale';
 export { useAppConfig } from '../composables/use-app-config';

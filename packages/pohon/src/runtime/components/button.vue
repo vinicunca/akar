@@ -132,9 +132,9 @@ const pohon = computed(() =>
 <template>
   <PLink
     v-slot="{ active, ...slotProps }"
-    :type="type"
-    :disabled="disabled || isLoading"
     v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
+    :type="props.type"
+    :disabled="props.disabled || isLoading"
     custom
   >
     <PLinkBase

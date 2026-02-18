@@ -1,5 +1,389 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`table > renders with as correctly 1`] = `
+"<section data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</section>"
+`;
+
+exports[`table > renders with body-bottom slot correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->Body bottom slot
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with body-top slot correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">Body top slot<tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with caption correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <caption class="" data-pohon="table-caption">Table caption</caption>
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with caption slot correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <caption class="" data-pohon="table-caption">Caption slot</caption>
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with cell slot correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">ID Cell slot</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">ID Cell slot</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">ID Cell slot</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">ID Cell slot</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">ID Cell slot</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with class correctly 1`] = `
+"<div class="absolute" data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
 exports[`table > renders with columns correctly 1`] = `
 "<div data-pohon="table-root">
   <table class="" data-pohon="table-base">
@@ -185,6 +569,61 @@ exports[`table > renders with columns correctly 1`] = `
 </div>"
 `;
 
+exports[`table > renders with data correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
 exports[`table > renders with empty correctly 1`] = `
 "<div data-pohon="table-root">
   <table class="" data-pohon="table-base">
@@ -262,6 +701,776 @@ exports[`table > renders with empty slot correctly 1`] = `
         </th>
       </tr>
     </tfoot>
+  </table>
+</div>"
+`;
+
+exports[`table > renders with expanded slot correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with header slot correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">ID Header slot</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading animation carousel correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading animation carousel-inverse correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading animation elastic correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading animation swing correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading color error correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading color info correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading color neutral correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading color primary correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading color secondary correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading color success correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading color warning correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with loading correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
   </table>
 </div>"
 `;
@@ -511,6 +1720,192 @@ exports[`table > renders with meta field on columns correctly 1`] = `
       </tr>
     </tfoot>
   </table>
+</div>"
+`;
+
+exports[`table > renders with meta prop correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="custom-row-class" data-pohon="table-tr" style="background-color: lightgray;">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="custom-row-class" data-pohon="table-tr" style="background-color: lightgray;">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="custom-row-class" data-pohon="table-tr" style="background-color: lightgray;">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="custom-row-class" data-pohon="table-tr" style="background-color: lightgray;">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="custom-row-class" data-pohon="table-tr" style="background-color: lightgray;">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with sticky correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with ui correctly 1`] = `
+"<div data-pohon="table-root">
+  <table class="table-auto" data-pohon="table-base">
+    <!--v-if-->
+    <thead class="" data-pohon="table-thead">
+      <tr class="" data-pohon="table-tr">
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+        <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+      </tr>
+      <tr class="" data-pohon="table-separator"></tr>
+    </thead>
+    <tbody class="" data-pohon="table-tbody">
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">m5gr84i9</td>
+        <td data-pinned="false" class="" data-pohon="table-td">316</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">ken99@yahoo.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">3u1reuv4</td>
+        <td data-pinned="false" class="" data-pohon="table-td">242</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Abe45@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">derv1ws0</td>
+        <td data-pinned="false" class="" data-pohon="table-td">837</td>
+        <td data-pinned="false" class="" data-pohon="table-td">processing</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Monserrat44@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">5kma53ae</td>
+        <td data-pinned="false" class="" data-pohon="table-td">874</td>
+        <td data-pinned="false" class="" data-pohon="table-td">success</td>
+        <td data-pinned="false" class="" data-pohon="table-td">Silas22@gmail.com</td>
+      </tr>
+      <!--v-if-->
+      <tr data-selected="false" data-selectable="false" data-expanded="false" class="" data-pohon="table-tr">
+        <td data-pinned="false" class="" data-pohon="table-td">bhqecj4p</td>
+        <td data-pinned="false" class="" data-pohon="table-td">721</td>
+        <td data-pinned="false" class="" data-pohon="table-td">failed</td>
+        <td data-pinned="false" class="" data-pohon="table-td">carmella@hotmail.com</td>
+      </tr>
+      <!--v-if-->
+    </tbody>
+    <!--v-if-->
+  </table>
+</div>"
+`;
+
+exports[`table > renders with virtualize correctly 1`] = `
+"<div data-pohon="table-root">
+  <div style="height: 325px;">
+    <table class="" data-pohon="table-base">
+      <!--v-if-->
+      <thead class="" data-pohon="table-thead">
+        <tr class="" data-pohon="table-tr">
+          <th data-pinned="false" scope="col" class="" data-pohon="table-th">Id</th>
+          <th data-pinned="false" scope="col" class="" data-pohon="table-th">Amount</th>
+          <th data-pinned="false" scope="col" class="" data-pohon="table-th">Status</th>
+          <th data-pinned="false" scope="col" class="" data-pohon="table-th">Email</th>
+        </tr>
+        <tr class="" data-pohon="table-separator"></tr>
+      </thead>
+      <tbody class="" data-pohon="table-tbody"></tbody>
+      <!--v-if-->
+    </table>
+  </div>
 </div>"
 `;
 

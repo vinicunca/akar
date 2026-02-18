@@ -273,8 +273,6 @@ const props = withDefaults(
     collapsible: true,
     unmountOnHide: true,
     labelKey: 'label',
-    tooltip: true,
-    dropdown: true,
   },
 );
 const emits = defineEmits<PNavigationMenuEmits<K, O>>();

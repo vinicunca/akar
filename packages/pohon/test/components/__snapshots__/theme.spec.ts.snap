@@ -1,0 +1,62 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Theme > renders with empty pohon correctly 1`] = `
+"<button type="button" class="" data-pohon="button-base">
+  <!--v-if--><span class="" data-pohon="button-label">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
+exports[`Theme > renders with nested theme overriding outer theme correctly 1`] = `
+"<button type="button" class="px-[2.234rem]" data-pohon="button-base">
+  <!--v-if--><span class="text-[#000]" data-pohon="button-label">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
+exports[`Theme > renders with pohon prop taking priority over theme correctly 1`] = `
+"<button type="button" class="px-[2.234rem]" data-pohon="button-base">
+  <!--v-if--><span class="text-[#ff0]" data-pohon="button-label">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
+exports[`Theme > renders with theme applied to alert correctly 1`] = `
+"<div data-orientation="vertical" class="border-[3px]" data-pohon="alert-root">
+  <!--v-if-->
+  <div class="" data-pohon="alert-wrapper">
+    <div class="" data-pohon="alert-title">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Theme > renders with theme applied to badge correctly 1`] = `
+"<span class="rounded-[1.234rem]" data-pohon="badge-base"><!--v-if--><span class="" data-pohon="badge-label">Badge</span>
+<!--v-if--></span>"
+`;
+
+exports[`Theme > renders with theme applied to button base slot correctly 1`] = `
+"<button type="button" class="px-[1.234rem]" data-pohon="button-base">
+  <!--v-if--><span class="text-[#ff0]" data-pohon="button-label">Button</span>
+  <!--v-if-->
+</button>"
+`;
+
+exports[`Theme > renders with theme applied to multiple component types correctly 1`] = `
+"<button type="button" class="px-[1.234rem]" data-pohon="button-base">
+  <!--v-if--><span class="" data-pohon="button-label">Button</span>
+  <!--v-if-->
+</button>
+<span class="rounded-[1.234rem]" data-pohon="badge-base"><!--v-if--><span class="" data-pohon="badge-label">Badge</span>
+<!--v-if--></span>"
+`;
+
+exports[`Theme > renders with theme not affecting unrelated component correctly 1`] = `
+"<button type="button" class="" data-pohon="button-base">
+  <!--v-if--><span class="" data-pohon="button-label">Button</span>
+  <!--v-if-->
+</button>"
+`;

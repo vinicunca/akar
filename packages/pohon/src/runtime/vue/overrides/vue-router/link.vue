@@ -1,10 +1,9 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { RouterLinkProps } from 'vue-router';
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from '../../types/html';
-import type { ComponentConfig } from '../../types/uv';
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from '../../../types/html';
+import type { ComponentConfig } from '../../../types/uv';
 import theme from '#build/pohon/link';
-import { mergeClasses } from '../../utils';
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>;
 
@@ -70,61 +69,38 @@ import { isEqual } from 'ohash/utils';
 import { hasProtocol } from 'ufo';
 import { computed } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
-import PLinkBase from '../../components/link-base.vue';
-import { isPartiallyEqual } from '../../utils/link';
-import { uv } from '../../utils/uv';
+import PLinkBase from '../../../components/link-base.vue';
+import { mergeClasses } from '../../../utils';
+import { isPartiallyEqual } from '../../../utils/link';
+import { uv } from '../../../utils/uv';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<LinkProps>(),
-  {
-    as: 'button',
-    type: 'button',
-    ariaCurrentValue: 'page',
-    active: undefined,
-  },
-);
+const props = withDefaults(defineProps<LinkProps>(), {
+  as: 'button',
+  type: 'button',
+  ariaCurrentValue: 'page',
+  active: undefined,
+});
 defineSlots<LinkSlots>();
 
 const route = useRoute();
 
 const appConfig = useAppConfig() as Link['AppConfig'];
 
-const routerLinkProps = useForwardProps(
-  reactiveOmit(
-    props,
-    'as',
-    'type',
-    'disabled',
-    'active',
-    'exact',
-    'exactQuery',
-    'exactHash',
-    'activeClass',
-    'inactiveClass',
-    'to',
-    'href',
-    'raw',
-    'custom',
-    'class',
-    'noRel',
-  ),
-);
+const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'noRel'));
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...defu({
-      variants: {
-        active: {
-          true: mergeClasses(appConfig.pohon?.link?.variants?.active?.true, props.activeClass),
-          false: mergeClasses(appConfig.pohon?.link?.variants?.active?.false, props.inactiveClass),
-        },
+const ui = computed(() => uv({
+  extend: uv(theme),
+  ...defu({
+    variants: {
+      active: {
+        true: mergeClasses(appConfig.pohon?.link?.variants?.active?.true, props.activeClass),
+        false: mergeClasses(appConfig.pohon?.link?.variants?.active?.false, props.inactiveClass),
       },
-    }, appConfig.pohon?.link || {}),
-  }),
-);
+    },
+  }, appConfig.pohon?.link || {}),
+}));
 
 const to = computed(() => props.to ?? props.href);
 
@@ -202,7 +178,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
     return [props.class, active ? props.activeClass : props.inactiveClass];
   }
 
-  return pohon.value({ class: props.class, active, disabled: props.disabled });
+  return ui.value({ class: props.class, active, disabled: props.disabled });
 }
 </script>
 
@@ -264,7 +240,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           href: to,
           rel,
           target,
-          active,
+          active: active ?? false,
           isExternal,
         }"
       />
@@ -283,7 +259,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
       }"
       :class="resolveLinkClass()"
     >
-      <slot :active="active" />
+      <slot :active="active ?? false" />
     </PLinkBase>
   </template>
 </template>

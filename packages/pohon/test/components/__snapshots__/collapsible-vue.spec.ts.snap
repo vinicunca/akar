@@ -1,0 +1,55 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Collapsible > renders with as correctly 1`] = `
+"<section data-state="open" data-pohon="collapsible-root">
+  <!--v-if-->
+  <div class="" data-pohon="collapsible-content" id="akar-collapsible-content-v-0" style="--akar-collapsible-content-height: 0px; --akar-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</section>"
+`;
+
+exports[`Collapsible > renders with class correctly 1`] = `
+"<div data-state="open" class="flex flex-col gap-2 w-48" data-pohon="collapsible-root">
+  <!--v-if-->
+  <div class="" data-pohon="collapsible-content" id="akar-collapsible-content-v-0" style="--akar-collapsible-content-height: 0px; --akar-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
+exports[`Collapsible > renders with content slot correctly 1`] = `
+"<div data-state="open" data-pohon="collapsible-root">
+  <!--v-if-->
+  <div class="" data-pohon="collapsible-content" id="akar-collapsible-content-v-0" style="--akar-collapsible-content-height: 0px; --akar-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;">Content slot</div>
+</div>"
+`;
+
+exports[`Collapsible > renders with default slot correctly 1`] = `
+"<div data-state="open" data-pohon="collapsible-root">Default slot<div class="" data-pohon="collapsible-content" id="akar-collapsible-content-v-0" style="--akar-collapsible-content-height: 0px; --akar-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
+exports[`Collapsible > renders with disabled correctly 1`] = `
+"<div data-state="open" data-disabled="" data-pohon="collapsible-root">
+  <!--v-if-->
+  <div class="" data-pohon="collapsible-content" id="akar-collapsible-content-v-0" data-disabled="" style="--akar-collapsible-content-height: 0px; --akar-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
+exports[`Collapsible > renders with open correctly 1`] = `
+"<div data-state="open" data-pohon="collapsible-root">
+  <!--v-if-->
+  <div class="" data-pohon="collapsible-content" id="akar-collapsible-content-v-0" style="--akar-collapsible-content-height: 0px; --akar-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
+exports[`Collapsible > renders with ui correctly 1`] = `
+"<div data-state="open" data-pohon="collapsible-root">
+  <!--v-if-->
+  <div class="bg-elevated" data-pohon="collapsible-content" id="akar-collapsible-content-v-0" style="--akar-collapsible-content-height: 0px; --akar-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;
+
+exports[`Collapsible > renders with unmountOnHide correctly 1`] = `
+"<div data-state="open" data-pohon="collapsible-root">
+  <!--v-if-->
+  <div class="" data-pohon="collapsible-content" id="akar-collapsible-content-v-0" style="--akar-collapsible-content-height: 0px; --akar-collapsible-content-width: 0px; transition-duration: 0s; animation-name: none;"></div>
+</div>"
+`;

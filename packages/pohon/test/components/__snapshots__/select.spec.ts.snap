@@ -1145,7 +1145,7 @@ exports[`pSelect > renders with trailing and icon correctly 1`] = `
 `;
 
 exports[`select > renders with ariaLabel correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base" aria-label="Aria label">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base" aria-label="Aria label">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1182,7 +1182,7 @@ exports[`select > renders with ariaLabel correctly 1`] = `
 `;
 
 exports[`select > renders with arrow correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1218,21 +1218,21 @@ exports[`select > renders with arrow correctly 1`] = `
 `;
 
 exports[`select > renders with avatar and leadingIcon correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
 `;
 
 exports[`select > renders with avatar and trailingIcon correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
 `;
 
 exports[`select > renders with avatar correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
@@ -1276,7 +1276,7 @@ exports[`select > renders with class correctly 1`] = `
 `;
 
 exports[`select > renders with defaultValue correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-value">Backlog</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1313,7 +1313,7 @@ exports[`select > renders with defaultValue correctly 1`] = `
 `;
 
 exports[`select > renders with descriptionKey correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1350,7 +1350,7 @@ exports[`select > renders with descriptionKey correctly 1`] = `
 `;
 
 exports[`select > renders with disabled correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" disabled="" dir="ltr" data-state="open" data-disabled="" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" disabled="" dir="ltr" data-state="open" data-disabled="" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1387,14 +1387,14 @@ exports[`select > renders with disabled correctly 1`] = `
 `;
 
 exports[`select > renders with icon correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:search" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:search" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
 `;
 
 exports[`select > renders with id correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" id="id" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" id="id" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1431,7 +1431,7 @@ exports[`select > renders with id correctly 1`] = `
 `;
 
 exports[`select > renders with item slot correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1458,7 +1458,7 @@ exports[`select > renders with item slot correctly 1`] = `
 `;
 
 exports[`select > renders with item-description slot correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1485,7 +1485,7 @@ exports[`select > renders with item-description slot correctly 1`] = `
 `;
 
 exports[`select > renders with item-label slot correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1522,7 +1522,7 @@ exports[`select > renders with item-label slot correctly 1`] = `
 `;
 
 exports[`select > renders with item-leading slot correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1559,7 +1559,7 @@ exports[`select > renders with item-leading slot correctly 1`] = `
 `;
 
 exports[`select > renders with item-trailing slot correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1596,7 +1596,7 @@ exports[`select > renders with item-trailing slot correctly 1`] = `
 `;
 
 exports[`select > renders with items correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1633,7 +1633,7 @@ exports[`select > renders with items correctly 1`] = `
 `;
 
 exports[`select > renders with items with description correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1660,7 +1660,7 @@ exports[`select > renders with items with description correctly 1`] = `
 `;
 
 exports[`select > renders with labelKey correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1697,14 +1697,14 @@ exports[`select > renders with labelKey correctly 1`] = `
 `;
 
 exports[`select > renders with leading and icon correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
 `;
 
 exports[`select > renders with leading slot correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading">Leading slot</span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading">Leading slot</span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 
 
@@ -1739,35 +1739,35 @@ exports[`select > renders with leading slot correctly 1`] = `
 `;
 
 exports[`select > renders with leadingIcon correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:arrow-left" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
 `;
 
 exports[`select > renders with loading and avatar correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
 `;
 
 exports[`select > renders with loading correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
 `;
 
 exports[`select > renders with loading trailing and avatar correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
 `;
 
 exports[`select > renders with loading trailing correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1776,14 +1776,14 @@ exports[`select > renders with loading trailing correctly 1`] = `
 `;
 
 exports[`select > renders with loadingIcon correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:loader" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base"><span class="" data-pohon="select-leading"><span class="iconify i-lucide:loader" aria-hidden="true" data-pohon="select-leading-icon"></span></span><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"
 `;
 
 exports[`select > renders with modelValue correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-value">Backlog</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1820,7 +1820,7 @@ exports[`select > renders with modelValue correctly 1`] = `
 `;
 
 exports[`select > renders with multiple and modelValue correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-value">Backlog, Todo</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1857,7 +1857,7 @@ exports[`select > renders with multiple and modelValue correctly 1`] = `
 `;
 
 exports[`select > renders with multiple correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -1894,7 +1894,7 @@ exports[`select > renders with multiple correctly 1`] = `
 `;
 
 exports[`select > renders with name correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2005,7 +2005,7 @@ exports[`select > renders with neutral variant none correctly 1`] = `
 `;
 
 exports[`select > renders with neutral variant outline correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2079,7 +2079,7 @@ exports[`select > renders with neutral variant soft correctly 1`] = `
 `;
 
 exports[`select > renders with neutral variant subtle correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2116,7 +2116,7 @@ exports[`select > renders with neutral variant subtle correctly 1`] = `
 `;
 
 exports[`select > renders with placeholder correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">Search...</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2227,7 +2227,7 @@ exports[`select > renders with primary variant none correctly 1`] = `
 `;
 
 exports[`select > renders with primary variant outline correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2301,7 +2301,7 @@ exports[`select > renders with primary variant soft correctly 1`] = `
 `;
 
 exports[`select > renders with primary variant subtle correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2338,7 +2338,7 @@ exports[`select > renders with primary variant subtle correctly 1`] = `
 `;
 
 exports[`select > renders with required correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="true" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="true" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2375,7 +2375,7 @@ exports[`select > renders with required correctly 1`] = `
 `;
 
 exports[`select > renders with selectedIcon correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2412,7 +2412,7 @@ exports[`select > renders with selectedIcon correctly 1`] = `
 `;
 
 exports[`select > renders with size lg correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2449,7 +2449,7 @@ exports[`select > renders with size lg correctly 1`] = `
 `;
 
 exports[`select > renders with size md correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2486,7 +2486,7 @@ exports[`select > renders with size md correctly 1`] = `
 `;
 
 exports[`select > renders with size sm correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2523,7 +2523,7 @@ exports[`select > renders with size sm correctly 1`] = `
 `;
 
 exports[`select > renders with size xl correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2560,7 +2560,7 @@ exports[`select > renders with size xl correctly 1`] = `
 `;
 
 exports[`select > renders with size xs correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2597,7 +2597,7 @@ exports[`select > renders with size xs correctly 1`] = `
 `;
 
 exports[`select > renders with trailing and icon correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2606,7 +2606,7 @@ exports[`select > renders with trailing and icon correctly 1`] = `
 `;
 
 exports[`select > renders with trailing slot correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing">Trailing slot</span>
 </button>
 <!--teleport start-->
@@ -2643,7 +2643,7 @@ exports[`select > renders with trailing slot correctly 1`] = `
 `;
 
 exports[`select > renders with trailingIcon correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="false" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2652,7 +2652,7 @@ exports[`select > renders with trailingIcon correctly 1`] = `
 `;
 
 exports[`select > renders with trailingIcon correctly 2`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2689,7 +2689,7 @@ exports[`select > renders with trailingIcon correctly 2`] = `
 `;
 
 exports[`select > renders with ui correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
@@ -2726,7 +2726,7 @@ exports[`select > renders with ui correctly 1`] = `
 `;
 
 exports[`select > renders with valueKey correctly 1`] = `
-"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" data-pohon="select-base">
+"<button role="combobox" type="button" aria-controls="akar-select-content-v-0-0-0" aria-expanded="true" aria-required="false" aria-autocomplete="none" dir="ltr" data-state="open" data-placeholder="" class="" data-pohon="select-base">
   <!--v-if--><span class="" data-pohon="select-placeholder">&nbsp;</span><span class="" data-pohon="select-trailing"><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="select-trailing-icon"></span></span>
 </button>
 <!--teleport start-->
