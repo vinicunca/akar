@@ -83,7 +83,7 @@ import {
   AToastTitle,
   useForwardPropsEmits,
 } from 'akar';
-import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
+import { computed, onMounted, ref, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
@@ -125,13 +125,11 @@ const rootRef = useTemplateRef('rootRef');
 const height = ref(0);
 
 onMounted(() => {
-  if (!rootRef.value) {
+  if (!rootRef.value?.$el?.getBoundingClientRect) {
     return;
   }
 
-  nextTick(() => {
-    height.value = rootRef.value?.$el?.getBoundingClientRect()?.height;
-  });
+  height.value = rootRef.value.$el.getBoundingClientRect().height;
 });
 
 defineExpose({
