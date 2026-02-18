@@ -69,7 +69,7 @@ import {
   APrimitive,
   useForwardProps,
 } from 'akar';
-import { computed, useId } from 'vue';
+import { computed, useAttrs, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
@@ -98,6 +98,13 @@ const {
   ariaAttrs,
 } = useFormField<PCheckboxProps>(props);
 const id = _id.value ?? useId();
+
+const attrs = useAttrs();
+// Omit `data-state` to prevent conflicts with parent components (e.g. TooltipTrigger)
+const forwardedAttrs = computed(() => {
+  const { 'data-state': _, ...rest } = attrs;
+  return rest;
+});
 
 const pohon = computed(() =>
   uv({
@@ -135,7 +142,7 @@ function onUpdate(value: any) {
     >
       <ACheckboxRoot
         :id="id"
-        v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
+        v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
         v-model="modelValue"
         :name="name"
         :disabled="disabled"
