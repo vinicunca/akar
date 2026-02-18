@@ -230,10 +230,10 @@ import {
 } from '@tanstack/vue-table';
 import { useVirtualizer } from '@tanstack/vue-virtual';
 import { capitalize, isBoolean, isFunction } from '@vinicunca/perkakas';
-import { createReusableTemplate, reactivePick } from '@vueuse/core';
+import { createRef, createReusableTemplate, reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
-import { computed, ref, toRef, useTemplateRef, watch } from 'vue';
+import { computed, toRef, useTemplateRef, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
@@ -255,7 +255,7 @@ const { t } = useLocale();
 const appConfig = useAppConfig() as Table['AppConfig'];
 const pohonProp = useComponentPohon('table', props);
 
-const data = ref(props.data ?? []) as Ref<Array<T>>;
+const data = createRef(props.data ?? [], props.watchOptions?.deep !== false);
 const meta = computed(() => props.meta ?? {});
 
 const columns = computed<Array<PTableColumn<T>>>(() =>
@@ -491,7 +491,7 @@ const renderedSize = computed(() => {
 });
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
-  ref.value = isFunction(updaterOrValue) ? updaterOrValue(ref.value) : updaterOrValue;
+  ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue;
 }
 
 function onRowSelect(event: Event, row: PTableRow<T>) {

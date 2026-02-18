@@ -17,3 +17,4 @@
 - fix(Drawer/Modal/Popover/Slideover): prevent unexpected close on touch when interacting with other overlays
 - feat(Theme): new component
 - fix(ColorModeImage): add baseURL support for public paths
+- fix(Table): improve perfs with shallowRef when watch deep is disabled
