@@ -13,8 +13,8 @@ const props = defineProps<PNavigationMenuProps>();
     expand-based-on-route
   />
 
-  <PDashboardMenu
+  <!-- <PDashboardMenu
     :navigation="props.items"
     :collapsed="props.collapsed"
-  />
+  /> -->
 </template>

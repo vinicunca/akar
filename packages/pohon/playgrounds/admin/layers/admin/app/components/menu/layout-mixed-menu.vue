@@ -4,34 +4,28 @@ import { ANavigationMenuItem, ANavigationMenuList, ANavigationMenuRoot } from 'a
 import { pickLinkProps } from 'pohon-ui/utils/link';
 
 const props = defineProps<{
-  menus: Array<PDashboardMenuItem>;
+  items: Array<PDashboardMenuItem>;
 }>();
-
-const anu = ref();
 </script>
 
 <template>
-  {{ anu }}
-
   <ANavigationMenuRoot
-    v-model="anu"
     :disable-hover-trigger="true"
   >
     <ANavigationMenuList class="flex flex-col gap-1">
       <ANavigationMenuItem
-        v-for="menu in props.menus"
+        v-for="menu in props.items"
         :key="menu.path"
         :value="menu.path"
       >
         <PLink
           v-slot="{ active, ...slotProps }"
           v-bind="pickLinkProps(menu)"
-          :to="menu.path"
           custom
         >
           <PLinkBase
             v-bind="slotProps"
-            class="font-600 px-1 py-2 rounded-2 flex flex-col gap-2 w-full items-center justify-center"
+            class="px-1 py-2 rounded-2 flex flex-col gap-2 w-full items-center justify-center"
             :class="{
               'bg-primary color-text-inverted': active,
             }"

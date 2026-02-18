@@ -5,7 +5,7 @@ export function findMenuByPath(
   { list: Array<PDashboardMenuItem>; path?: string },
 ): PDashboardMenuItem | null {
   for (const menu of list) {
-    if (menu.path === path) {
+    if (menu.to === path) {
       return menu;
     }
 
@@ -27,7 +27,7 @@ export function findRootMenuByPath(
   const rootMenuPath = findMenu?.parents?.[level];
 
   const rootMenu = rootMenuPath
-    ? menus.find((item) => item.path === rootMenuPath)
+    ? menus.find((item) => item.to === rootMenuPath)
     : undefined;
 
   return {

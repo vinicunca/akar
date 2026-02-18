@@ -353,17 +353,15 @@ const sidebarExtraCollapsed = computed({
       <LayoutMixedMenu
         :active-path="extraActiveMenu"
         :items="wrapperMenus({ menus: mixHeaderMenus, deep: false })"
-        :theme="sidebarTheme"
       />
     </template>
 
     <!-- Side extra area -->
     <template #side-extra>
       <LayoutExtraMenu
-        :accordion="preferences.navigation.isAccordion"
-        :collapse="preferences.sidebar.extraCollapsed"
-        :menus="wrapperMenus({ menus: extraMenus })"
-        :theme="sidebarTheme"
+        :type="preferences.navigation.isAccordion ? 'multiple' : 'single'"
+        :collapsed="preferences.sidebar.extraCollapsed"
+        :items="wrapperMenus({ menus: extraMenus })"
       />
     </template>
 

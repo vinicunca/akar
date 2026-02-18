@@ -3,5 +3,7 @@
 </script>
 
 <template>
-  <div>layout content spinner</div>
+  <div class="hidden">
+    layout content spinner
+  </div>
 </template>

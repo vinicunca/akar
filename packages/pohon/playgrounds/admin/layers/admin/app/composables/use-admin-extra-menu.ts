@@ -99,13 +99,14 @@ export function useAdminExtraMenu(useRootMenus?: ComputedRef<Array<PDashboardMen
     }
   }
 
-  watch(
-    () => [route.path, preferences.app.layout],
-    ([path]) => {
-      calcExtraMenus(path || '');
-    },
-    { immediate: true },
-  );
+  // TODO: temporary disable this until we have a better way to handle all layout types
+  // watch(
+  //   () => [route.path, preferences.app.layout],
+  //   ([path]) => {
+  //     calcExtraMenus(path || '');
+  //   },
+  //   { immediate: true },
+  // );
 
   return {
     extraActiveMenu,
