@@ -33,6 +33,13 @@ export default (options: Required<PohonModuleOptions>) => {
 
       variants: {
         ...fieldGroupVariant,
+
+        variant: (prev: Record<string, string>) => ({
+          ...prev,
+          outline: [prev.outline, ''].join(' '),
+          subtle: [prev.subtle, ''].join(' '),
+        }),
+
         size: {
           xs: {
             label: '',
