@@ -1,7 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import { defineVitestProject } from '@nuxt/test-utils/config';
 import vue from '@vitejs/plugin-vue';
-import { resolve } from 'pathe';
 import { glob } from 'tinyglobby';
 import { defineConfig } from 'vitest/config';
 import pohon from './src/vite';
@@ -27,7 +26,8 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'nuxt',
-          include: ['./test/components/**/**.spec.ts', './test/composables/**.spec.ts', './test/utils/**/**.spec.ts'],
+          dir: './test',
+          include: ['components/**/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
           environment: 'nuxt',
           environmentOptions: {
             nuxt: {
@@ -42,7 +42,8 @@ export default defineConfig({
         test: {
           name: 'vue',
           environment: 'happy-dom',
-          include: ['./test/components/**.spec.ts', './test/composables/**.spec.ts', './test/utils/**/**.spec.ts'],
+          dir: './test',
+          include: ['components/**.spec.ts', 'composables/**.spec.ts', 'utils/**/**.spec.ts'],
           setupFiles: ['./test/utils/setup.ts'],
         },
         plugins: [
@@ -53,7 +54,7 @@ export default defineConfig({
             enforce: 'pre',
             resolveId(id) {
               if (id === '@nuxt/test-utils/runtime') {
-                return resolve('./test/utils/mount');
+                return fileURLToPath(new URL('test/utils/mount.ts', import.meta.url));
               }
             },
           },
@@ -66,7 +67,7 @@ export default defineConfig({
               }
             },
             load(id) {
-              if (id === '#components' || id === '?#components') {
+              if (id === '#components' || id === '?import#components') {
                 const resolvedComponents = [...vueRouterOverrides, ...vueComponents, ...components];
                 const renderedComponents = new Set<string>();
                 return resolvedComponents.map((file) => {

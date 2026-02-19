@@ -26,3 +26,4 @@
 - fix(Toast): improve animation smoothness
 - fix(InputMenu/SelectMenu): sort filtered items by match relevance
 - fix(components): nullable and optional type support
+- chore(deps): update @nuxt/test-utils + vitest to v4

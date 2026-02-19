@@ -215,7 +215,7 @@
     "defu": "catalog:core",
     "happy-dom": "catalog:core",
     "nuxt": "catalog:pohon",
-    "vitest": "catalog:core",
+    "vitest": "catalog:pohon",
     "vitest-axe": "catalog:core",
     "vue": "catalog:core",
     "vue-tsc": "catalog:pohon"
