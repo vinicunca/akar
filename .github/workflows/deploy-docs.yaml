@@ -71,4 +71,4 @@ jobs:
           service: ${{ env.WEB_SERVICE_NAME }}
           region: ${{ env.GOOGLE_CLOUD_REGION }}
           image: ${{ needs.prepare.outputs.WEB_IMAGE_NAME }}
-          flags: --allow-unauthenticated --memory=512Mi --cpu=1 --min-instances=0 --max-instances=5 --concurrency=80
+          flags: --allow-unauthenticated --memory=512Mi --cpu=1 --min-instances=1 --max-instances=5 --concurrency=80
