@@ -10,15 +10,13 @@ import type {
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
 import type { ButtonHTMLAttributes } from '../types/html';
-import type { ModelModifiers } from '../types/input';
+import type { ApplyModifiers, ModelModifiers } from '../types/input';
 import type {
   AcceptableValue,
   ArrayOrNested,
   EmitsToProps,
   GetItemKeys,
-  GetItemValue,
   GetModelValue,
-  GetModelValueEmits,
   NestedItem,
 } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -51,7 +49,12 @@ export type PSelectItem = PSelectValue | {
   [key: string]: any;
 };
 
-export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<ASelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface PSelectProps<
+  T extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>,
+  VK extends GetItemKeys<T> = 'value',
+  M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+> extends Omit<ASelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string;
   /** The placeholder text when the select is empty. */
   placeholder?: string;
@@ -111,10 +114,10 @@ export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNest
   descriptionKey?: GetItemKeys<T>;
   items?: T;
   /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
-  defaultValue?: GetModelValue<T, VK, M, ExcludeItem>;
+  defaultValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>;
   /** The controlled value of the Select. Can be bind as `v-model`. */
-  modelValue?: GetModelValue<T, VK, M, ExcludeItem>;
-  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M, ExcludeItem>>, 'lazy'>;
+  modelValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>;
+  modelModifiers?: Mod;
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean;
   /** Highlight the ring color like a focus state. */
@@ -125,11 +128,17 @@ export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNest
   pohon?: Select['slots'];
 }
 
-export type PSelectEmits<A extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<ASelectRootEmits, 'update:modelValue'> & {
-  change: [event: Event];
-  blur: [event: FocusEvent];
-  focus: [event: FocusEvent];
-} & GetModelValueEmits<A, VK, M, ExcludeItem>;
+export interface PSelectEmits<
+  A extends ArrayOrNested<PSelectItem>,
+  VK extends GetItemKeys<A> | undefined,
+  M extends boolean,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+> extends Omit<ASelectRootEmits, 'update:modelValue'> {
+  'change': [event: Event];
+  'blur': [event: FocusEvent];
+  'focus': [event: FocusEvent];
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>];
+}
 
 type SlotProps<T extends PSelectItem> = (props: { item: T; index: number; pohon: Select['pohon'] }) => any;
 
@@ -137,11 +146,24 @@ export interface PSelectSlots<
   A extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>,
   VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: Select['pohon'] }) => any;
-  'default': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: Select['pohon'] }) => any;
-  'trailing': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: Select['pohon'] }) => any;
+  'leading': (props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>;
+    open: boolean;
+    pohon: Select['pohon'];
+  }) => any;
+  'default': (props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>;
+    open: boolean;
+    pohon: Select['pohon'];
+  }) => any;
+  'trailing': (props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>;
+    open: boolean;
+    pohon: Select['pohon'];
+  }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': (props: { item: T; index: number }) => any;
@@ -152,9 +174,9 @@ export interface PSelectSlots<
 }
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
+<script setup lang="ts" generic="T extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
 import { useAppConfig } from '#imports';
-import { isNonNullish } from '@vinicunca/perkakas';
+import { isNonNullish, isNullish, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   ASelectArrow,
@@ -186,7 +208,7 @@ import PIcon from './icon.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<PSelectProps<T, VK, M>>(),
+  defineProps<PSelectProps<T, VK, M, Mod>>(),
   {
     valueKey: 'value' as never,
     labelKey: 'label',
@@ -195,8 +217,8 @@ const props = withDefaults(
     autofocusDelay: 0,
   },
 );
-const emits = defineEmits<PSelectEmits<T, VK, M>>();
-const slots = defineSlots<PSelectSlots<T, VK, M>>();
+const emits = defineEmits<PSelectEmits<T, VK, M, Mod>>();
+const slots = defineSlots<PSelectSlots<T, VK, M, Mod>>();
 const appConfig = useAppConfig() as Select['AppConfig'];
 const pohonProp = useComponentPohon('select', props);
 
@@ -279,10 +301,12 @@ const groups = computed<Array<Array<PSelectItem>>>(() => {
 
 const items = computed(() => groups.value.flatMap((group) => group) as Array<T>);
 
-function displayValue(value: GetItemValue<T, VK, ExcludeItem> | Array<GetItemValue<T, VK, ExcludeItem>>): string | undefined {
+function displayValue(
+  value: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | Array<ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>,
+): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>({
+      .map((item) => getDisplayValue<Array<T>, ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>({
         items: items.value,
         value: item,
         options: {
@@ -295,9 +319,9 @@ function displayValue(value: GetItemValue<T, VK, ExcludeItem> | Array<GetItemVal
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined;
   }
 
-  return getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>({
+  return getDisplayValue<Array<T>, ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>({
     items: items.value,
-    value: value as GetItemValue<T, VK, ExcludeItem>,
+    value: value as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>,
     options: {
       labelKey: props.labelKey,
       valueKey: props.valueKey,
@@ -322,7 +346,7 @@ onMounted(() => {
 });
 
 function onUpdate(value: any) {
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (isString(value) || isNullish(value))) {
     value = value?.trim() ?? null;
   }
 
@@ -334,7 +358,7 @@ function onUpdate(value: any) {
     value ??= null;
   }
 
-  if (props.modelModifiers?.optional) {
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
     value ??= undefined;
   }
 
@@ -396,7 +420,7 @@ defineExpose({
       >
         <slot
           name="leading"
-          :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
+          :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
           :open="open"
           :pohon="pohon"
         >
@@ -417,12 +441,12 @@ defineExpose({
       </span>
 
       <slot
-        :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
+        :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
         :open="open"
         :pohon="pohon"
       >
         <template
-          v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M, ExcludeItem>)]"
+          v-for="displayedModelValue in [displayValue(modelValue as any)]"
           :key="displayedModelValue"
         >
           <span
@@ -449,7 +473,7 @@ defineExpose({
       >
         <slot
           name="trailing"
-          :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
+          :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
           :open="open"
           :pohon="pohon"
         >

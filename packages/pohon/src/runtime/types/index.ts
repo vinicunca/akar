@@ -77,6 +77,7 @@ export * from '../components/tree.vue';
 export * from '../components/user.vue';
 export * from './dashboard';
 export * from './form';
+export * from './input';
 export * from './locale';
 export * from './theme';
 export * from './utils';

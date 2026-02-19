@@ -10,7 +10,7 @@ import type {
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PButtonProps, PChipProps, PIconProps, PInputProps, PLinkPropsKeys } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
-import type { ModelModifiers } from '../types/input';
+import type { ApplyModifiers, ModelModifiers } from '../types/input';
 import type {
   AcceptableValue,
   ArrayOrNested,
@@ -18,7 +18,6 @@ import type {
   GetItemKeys,
   GetItemValue,
   GetModelValue,
-  GetModelValueEmits,
   NestedItem,
 } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -49,8 +48,17 @@ export type PInputMenuItem = PInputMenuValue | {
 };
 
 type ExcludeItem = { type: 'label' | 'separator' };
+type IsClearUsed<M extends boolean, C extends boolean | object> = M extends false
+  ? (C extends true ? null : C extends object ? null : never)
+  : never;
 
-export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
+export interface PInputMenuProps<
+  T extends ArrayOrNested<PInputMenuItem> = ArrayOrNested<PInputMenuItem>,
+  VK extends GetItemKeys<T> | undefined = undefined,
+  M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+  C extends boolean | object = false,
+> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -99,7 +107,7 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
    * Can be an object to pass additional props to the Button.
    * @defaultValue false
    */
-  clear?: boolean | Partial<Omit<PButtonProps, PLinkPropsKeys>>;
+  clear?: (C & boolean) | (C & Partial<Omit<PButtonProps, PLinkPropsKeys>>);
   /**
    * The icon displayed in the clear button.
    * @defaultValue appConfig.pohon.icons.close
@@ -154,10 +162,10 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
   descriptionKey?: GetItemKeys<T>;
   items?: T;
   /** The value of the InputMenu when initially rendered. Use when you do not need to control the state of the InputMenu. */
-  defaultValue?: GetModelValue<T, VK, M, ExcludeItem>;
-  /** The controlled value of the InputMenu. Can be binded-with `v-model`. */
-  modelValue?: GetModelValue<T, VK, M, ExcludeItem>;
-  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M, ExcludeItem>>, 'lazy'>;
+  defaultValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
+  /** The controlled value of the InputMenu. Can be binded-with with `v-model`. */
+  modelValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
+  modelModifiers?: Mod;
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean;
   /** Highlight the ring color like a focus state. */
@@ -181,19 +189,27 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
   pohon?: InputMenu['slots'];
 }
 
-export type PInputMenuEmits<A extends ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Pick<AComboboxRootEmits, 'update:open'> & {
-  change: [event: Event];
-  blur: [event: FocusEvent];
-  focus: [event: FocusEvent];
-  create: [item: string];
-  clear: [];
+export interface PInputMenuEmits<
+  A extends ArrayOrNested<PInputMenuItem>,
+  VK extends GetItemKeys<A> | undefined = undefined,
+  M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+  C extends boolean | object = false,
+> extends Pick<AComboboxRootEmits, 'update:open'> {
+  'change': [event: Event];
+  'blur': [event: FocusEvent];
+  'focus': [event: FocusEvent];
+  'create': [item: string];
+  'clear': [];
   /** Event handler when highlighted element changes. */
-  highlight: [payload: {
+  'highlight': [payload: {
     ref: HTMLElement;
-    value: GetModelValue<A, VK, M, ExcludeItem>;
+    value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
   } | undefined];
-  removeTag: [item: GetModelValue<A, VK, M, ExcludeItem>];
-} & GetModelValueEmits<A, VK, M, ExcludeItem>;
+  'removeTag': [item: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>];
+  /** Event handler called when the value changes. */
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>];
+}
 
 type SlotProps<T extends PInputMenuItem> = (props: { item: T; index: number; pohon: InputMenu['pohon'] }) => any;
 
@@ -201,10 +217,20 @@ export interface PInputMenuSlots<
   A extends ArrayOrNested<PInputMenuItem> = ArrayOrNested<PInputMenuItem>,
   VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+  C extends boolean | object = false,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: InputMenu['pohon'] }) => any;
-  'trailing': (props: { modelValue?: GetModelValue<A, VK, M, ExcludeItem>; open: boolean; pohon: InputMenu['pohon'] }) => any;
+  'leading': (props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
+    open: boolean;
+    pohon: InputMenu['pohon'];
+  }) => any;
+  'trailing': (props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
+    open: boolean;
+    pohon: InputMenu['pohon'];
+  }) => any;
   'empty': (props: { searchTerm?: string }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
@@ -219,9 +245,9 @@ export interface PInputMenuSlots<
 }
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
+<script setup lang="ts" generic="T extends ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { useAppConfig } from '#imports';
-import { isBoolean } from '@vinicunca/perkakas';
+import { isBoolean, isNullish, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AComboboxAnchor,
@@ -267,7 +293,7 @@ import PIcon from './icon.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<PInputMenuProps<T, VK, M>>(),
+  defineProps<PInputMenuProps<T, VK, M, Mod, C>>(),
   {
     type: 'text',
     autofocusDelay: 0,
@@ -280,8 +306,8 @@ const props = withDefaults(
     virtualize: false,
   },
 );
-const emits = defineEmits<PInputMenuEmits<T, VK, M>>();
-const slots = defineSlots<PInputMenuSlots<T, VK, M>>();
+const emits = defineEmits<PInputMenuEmits<T, VK, M, Mod, C>>();
+const slots = defineSlots<PInputMenuSlots<T, VK, M, Mod, C>>();
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' });
 
@@ -307,6 +333,7 @@ const rootProps = useForwardPropsEmits(
     'highlightOnHover',
     'openOnClick',
     'openOnFocus',
+    'by',
   ),
   emits,
 );
@@ -470,7 +497,7 @@ function onUpdate(value: any) {
     return;
   }
 
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (isString(value) || isNullish(value))) {
     value = value?.trim() ?? null;
   }
 
@@ -482,7 +509,7 @@ function onUpdate(value: any) {
     value ??= null;
   }
 
-  if (props.modelModifiers?.optional) {
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
     value ??= undefined;
   }
 
@@ -537,7 +564,7 @@ function onUpdateOpen(value: boolean) {
 function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true, ExcludeItem>) {
   if (props.multiple) {
     const filteredValue = modelValue.filter((value) => !isEqual(value, event));
-    emits('update:modelValue', filteredValue as GetModelValue<T, VK, M, ExcludeItem>);
+    emits('update:modelValue', filteredValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>);
     emits('removeTag', event);
     onUpdate(filteredValue);
   }
@@ -567,7 +594,7 @@ function isInputItem(item: PInputMenuItem): item is Exclude<PInputMenuItem, PInp
   return typeof item === 'object' && item !== null;
 }
 
-function isModelValueEmpty(modelValue: GetModelValue<T, VK, M, ExcludeItem>): boolean {
+function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>): boolean {
   if (props.multiple && Array.isArray(modelValue)) {
     return modelValue.length === 0;
   }
@@ -842,7 +869,7 @@ defineExpose({
       >
         <slot
           name="leading"
-          :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
+          :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
           :open="open"
           :pohon="pohon"
         >
@@ -869,12 +896,12 @@ defineExpose({
       >
         <slot
           name="trailing"
-          :model-value="(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
+          :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
           :open="open"
           :pohon="pohon"
         >
           <AComboboxCancel
-            v-if="!!clear && !isModelValueEmpty(modelValue as GetModelValue<T, VK, M, ExcludeItem>)"
+            v-if="!!clear && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
             as-child
           >
             <PButton

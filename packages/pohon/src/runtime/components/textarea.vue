@@ -3,7 +3,7 @@ import type { AppConfig } from '@nuxt/schema';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps } from '../types';
 import type { TextareaHTMLAttributes } from '../types/html';
-import type { ModelModifiers } from '../types/input';
+import type { ApplyModifiers, ModelModifiers } from '../types/input';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/textarea';
 
@@ -11,7 +11,10 @@ type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>;
 
 type TextareaValue = string | number | null;
 
-export interface PTextareaProps<T extends TextareaValue = TextareaValue> extends UseComponentIconsProps, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'name' | 'placeholder' | 'required' | 'autofocus' | 'disabled' | 'rows'> {
+export interface PTextareaProps<
+  T extends TextareaValue = TextareaValue,
+  Mod extends ModelModifiers = ModelModifiers,
+> extends UseComponentIconsProps, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'name' | 'placeholder' | 'required' | 'autofocus' | 'disabled' | 'rows'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -43,15 +46,15 @@ export interface PTextareaProps<T extends TextareaValue = TextareaValue> extends
   maxrows?: number;
   /** Highlight the ring color like a focus state. */
   highlight?: boolean;
-  modelValue?: T;
-  defaultValue?: T;
-  modelModifiers?: ModelModifiers<T>;
+  defaultValue?: ApplyModifiers<T, Mod>;
+  modelValue?: ApplyModifiers<T, Mod>;
+  modelModifiers?: Mod;
   class?: any;
   pohon?: Textarea['slots'];
 }
 
-export interface PTextareaEmits<T extends TextareaValue = TextareaValue> {
-  'update:modelValue': [value: T];
+export interface PTextareaEmits<T extends TextareaValue = TextareaValue, Mod extends ModelModifiers = ModelModifiers> {
+  'update:modelValue': [value: ApplyModifiers<T, Mod>];
   'blur': [event: FocusEvent];
   'change': [event: Event];
 }
@@ -63,8 +66,9 @@ export interface PTextareaSlots {
 }
 </script>
 
-<script setup lang="ts" generic="T extends TextareaValue">
+<script setup lang="ts" generic="T extends TextareaValue, Mod extends ModelModifiers = ModelModifiers">
 import { useAppConfig } from '#imports';
+import { isNullish, isString } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, nextTick, onMounted, useTemplateRef, watch } from 'vue';
@@ -79,7 +83,7 @@ import PIcon from './icon.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<PTextareaProps<T>>(),
+  defineProps<PTextareaProps<T, Mod>>(),
   {
     rows: 3,
     maxrows: 0,
@@ -87,10 +91,10 @@ const props = withDefaults(
     autoresizeDelay: 0,
   },
 );
-const emits = defineEmits<PTextareaEmits<T>>();
+const emits = defineEmits<PTextareaEmits<T, Mod>>();
 const slots = defineSlots<PTextareaSlots>();
 const modelValue = useVModel<
-  PTextareaProps<T>,
+  PTextareaProps<T, Mod>,
   'modelValue',
   'update:modelValue'
 >(
@@ -143,7 +147,7 @@ const textareaRef = useTemplateRef('textareaRef');
 
 // Custom function to handle the v-model properties
 function updateInput(value: string | null | undefined) {
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (isString(value) || isNullish(value))) {
     value = value?.trim() ?? null;
   }
 
@@ -159,7 +163,7 @@ function updateInput(value: string | null | undefined) {
     value ||= undefined;
   }
 
-  modelValue.value = value as T;
+  modelValue.value = value as ApplyModifiers<T, Mod>;
   emitFormInput();
 }
 

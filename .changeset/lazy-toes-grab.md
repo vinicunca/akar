@@ -25,3 +25,4 @@
 - fix(InputMenu/Select/SelectMenu): exclude cosmetic items from model value type
 - fix(Toast): improve animation smoothness
 - fix(InputMenu/SelectMenu): sort filtered items by match relevance
+- fix(components): nullable and optional type support
