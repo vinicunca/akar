@@ -75,6 +75,7 @@ export * from '../components/toaster.vue';
 export * from '../components/tooltip.vue';
 export * from '../components/tree.vue';
 export * from '../components/user.vue';
+export * from './content';
 export * from './dashboard';
 export * from './form';
 export * from './input';

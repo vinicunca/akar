@@ -83,6 +83,7 @@ catalogs:
     fast-glob: ^3.3.3
     joi: ^18.0.1
     maska: ^3.2.0
+    minimark: ^0.2.0
     nuxt-component-meta: ^0.17.1
     nuxt-gtag: 4.1.0
     nuxt-llms: ^0.2.0
@@ -90,6 +91,7 @@ catalogs:
     prettier: ^3.8.0
     shiki-transformer-color-highlight: ^1.0.0
     sortablejs: ^1.15.6
+    ufo: ^1.6.3
     valibot: ^1.2.0
     vue-component-meta: ^3.2.2
     yup: ^1.7.1

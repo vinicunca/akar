@@ -185,6 +185,9 @@ catalogs:
     maska:
       specifier: ^3.2.0
       version: 3.2.0
+    minimark:
+      specifier: ^0.2.0
+      version: 0.2.0
     nuxt-component-meta:
       specifier: ^0.17.1
       version: 0.17.1
@@ -206,6 +209,9 @@ catalogs:
     sortablejs:
       specifier: ^1.15.6
       version: 1.15.6
+    ufo:
+      specifier: ^1.6.3
+      version: 1.6.3
     valibot:
       specifier: ^1.2.0
       version: 1.2.0
@@ -420,6 +426,21 @@ importers:
 
   docs:
     dependencies:
+      '@babel/traverse':
+        specifier: catalog:docs
+        version: 7.28.6
+      '@iconify-json/logos':
+        specifier: catalog:base
+        version: 1.2.10
+      '@iconify-json/lucide':
+        specifier: catalog:base
+        version: 1.2.86
+      '@iconify-json/simple-icons':
+        specifier: catalog:base
+        version: 1.2.67
+      '@iconify-json/vscode-icons':
+        specifier: catalog:base
+        version: 1.2.40
       '@modelcontextprotocol/sdk':
         specifier: catalog:docs
         version: 1.25.3(hono@4.11.4)(zod@4.3.5)
@@ -441,9 +462,18 @@ importers:
       '@octokit/rest':
         specifier: catalog:docs
         version: 22.0.1
+      '@types/babel__traverse':
+        specifier: catalog:docs
+        version: 7.28.0
+      '@unocss/nuxt':
+        specifier: catalog:pohon
+        version: 66.6.0(magicast@0.5.1)(postcss@8.5.6)(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(webpack@5.104.1)
       '@vinicunca/perkakas':
         specifier: catalog:core
         version: 1.13.2
+      '@vinicunca/unocss-preset':
+        specifier: catalog:pohon
+        version: 1.40.0(@types/debug@4.1.12)(@unocss/eslint-plugin@66.6.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(@vinicunca/perkakas@1.13.2)(@vue/compiler-sfc@3.5.28)(eslint-plugin-format@1.4.0(eslint@9.39.2(jiti@2.6.1)))(happy-dom@20.6.2)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(magicast@0.5.1)(synckit@0.11.12)(terser@5.46.0)(tsx@4.21.0)(unocss@66.6.0(@unocss/webpack@66.6.0(webpack@5.104.1))(postcss@8.5.6)(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)))(vue-tsc@3.2.2(typescript@5.9.3))(yaml@2.8.2)
       '@vueuse/core':
         specifier: catalog:core
         version: 14.1.0(vue@3.5.28(typescript@5.9.3))
@@ -456,12 +486,18 @@ importers:
       better-sqlite3:
         specifier: catalog:docs
         version: 12.6.2
+      fast-glob:
+        specifier: catalog:docs
+        version: 3.3.3
       joi:
         specifier: catalog:docs
         version: 18.0.2
       maska:
         specifier: catalog:docs
         version: 3.2.0
+      minimark:
+        specifier: catalog:docs
+        version: 0.2.0
       nuxt:
         specifier: catalog:pohon
         version: 4.3.1(@parcel/watcher@2.5.4)(@types/node@24.10.9)(@vue/compiler-sfc@3.5.28)(better-sqlite3@12.6.2)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.6.2))(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.2)(lightningcss@1.31.1)(magicast@0.5.1)(meow@13.2.0)(optionator@0.9.4)(rolldown@1.0.0-beta.26)(rollup@4.55.3)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue-tsc@3.2.2(typescript@5.9.3))(yaml@2.8.2)
@@ -471,6 +507,9 @@ importers:
       nuxt-gtag:
         specifier: catalog:docs
         version: 4.1.0(magicast@0.5.1)
+      nuxt-llms:
+        specifier: catalog:docs
+        version: 0.2.0(magicast@0.5.1)
       nuxt-og-image:
         specifier: catalog:docs
         version: 5.1.13(@unhead/vue@2.1.4(vue@3.5.28(typescript@5.9.3)))(magicast@0.5.1)(unstorage@1.17.4(db0@0.3.4(better-sqlite3@12.6.2))(ioredis@5.9.2))(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.28(typescript@5.9.3))
@@ -486,52 +525,24 @@ importers:
       sortablejs:
         specifier: catalog:docs
         version: 1.15.6
+      ufo:
+        specifier: catalog:docs
+        version: 1.6.3
+      unocss:
+        specifier: catalog:base
+        version: 66.6.0(@unocss/webpack@66.6.0(webpack@5.104.1))(postcss@8.5.6)(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       valibot:
         specifier: catalog:docs
         version: 1.2.0(typescript@5.9.3)
+      vue-component-meta:
+        specifier: catalog:docs
+        version: 3.2.2(typescript@5.9.3)
       yup:
         specifier: catalog:docs
         version: 1.7.1
       zod:
         specifier: catalog:pohon
         version: 4.3.5
-    devDependencies:
-      '@babel/traverse':
-        specifier: catalog:docs
-        version: 7.28.6
-      '@iconify-json/logos':
-        specifier: catalog:base
-        version: 1.2.10
-      '@iconify-json/lucide':
-        specifier: catalog:base
-        version: 1.2.86
-      '@iconify-json/simple-icons':
-        specifier: catalog:base
-        version: 1.2.67
-      '@iconify-json/vscode-icons':
-        specifier: catalog:base
-        version: 1.2.40
-      '@types/babel__traverse':
-        specifier: catalog:docs
-        version: 7.28.0
-      '@unocss/nuxt':
-        specifier: catalog:pohon
-        version: 66.6.0(magicast@0.5.1)(postcss@8.5.6)(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(webpack@5.104.1)
-      '@vinicunca/unocss-preset':
-        specifier: catalog:pohon
-        version: 1.40.0(@types/debug@4.1.12)(@unocss/eslint-plugin@66.6.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(@vinicunca/perkakas@1.13.2)(@vue/compiler-sfc@3.5.28)(eslint-plugin-format@1.4.0(eslint@9.39.2(jiti@2.6.1)))(happy-dom@20.6.2)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(magicast@0.5.1)(synckit@0.11.12)(terser@5.46.0)(tsx@4.21.0)(unocss@66.6.0(@unocss/webpack@66.6.0(webpack@5.104.1))(postcss@8.5.6)(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)))(vue-tsc@3.2.2(typescript@5.9.3))(yaml@2.8.2)
-      fast-glob:
-        specifier: catalog:docs
-        version: 3.3.3
-      nuxt-llms:
-        specifier: catalog:docs
-        version: 0.2.0(magicast@0.5.1)
-      unocss:
-        specifier: catalog:base
-        version: 66.6.0(@unocss/webpack@66.6.0(webpack@5.104.1))(postcss@8.5.6)(vite@7.3.1(@types/node@24.10.9)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      vue-component-meta:
-        specifier: catalog:docs
-        version: 3.2.2(typescript@5.9.3)
 
   packages/akar-playground:
     dependencies:
