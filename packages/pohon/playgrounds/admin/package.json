@@ -22,7 +22,7 @@
     "@unocss/nuxt": "catalog:pohon",
     "@vinicunca/unocss-preset": "catalog:pohon",
     "pinia-plugin-persistedstate": "catalog:pohon",
-    "postcss-preset-env": "catalog:",
+    "postcss-preset-env": "catalog:pohon",
     "unocss": "catalog:base"
   }
 }

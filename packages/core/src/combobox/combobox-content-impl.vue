@@ -105,6 +105,7 @@ onUnmounted(() => {
     <AFocusScope
       as-child
       @mount-auto-focus.prevent
+      @unmount-auto-focus.prevent
     >
       <DismissableLayer
         as-child

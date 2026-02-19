@@ -1,0 +1,177 @@
+import type { PDashboardMenuItem } from 'pohon-ui';
+import { preferencesManager } from '#layers/admin/app/preferences';
+
+export function useAdminMixedMenu() {
+  const { navigation, willOpenedByWindow } = useAdminNavigation();
+  const accessStore = useAccessStore();
+  const route = useRoute();
+  const splitSideMenus = ref<Array<PDashboardMenuItem>>([]);
+  const rootMenuPath = ref<string>('');
+  const mixedRootMenuPath = ref<string>('');
+  const mixExtraMenus = ref<Array<PDashboardMenuItem>>([]);
+  /** Record which submenu under the current top-level menu was last activated */
+  const defaultSubMap = new Map<string, string>();
+  const preferences = preferencesManager.getPreferences();
+  const { isMixedNav, isHeaderMixedNav } = useAdminPreferences();
+
+  const needSplit = computed(
+    () =>
+      (preferences.navigation.isSplit && isMixedNav.value)
+      || isHeaderMixedNav.value,
+  );
+
+  const sidebarVisible = computed(() => {
+    const enableSidebar = preferences.sidebar.enable;
+    if (needSplit.value) {
+      return enableSidebar && splitSideMenus.value.length > 0;
+    }
+
+    return enableSidebar;
+  });
+
+  const menus = computed(() => accessStore.accessMenus);
+
+  const headerMenus = computed(() => {
+    if (!needSplit.value) {
+      return menus.value;
+    }
+
+    return menus.value.map((item: any) => {
+      return {
+        ...item,
+        children: [],
+      };
+    });
+  });
+
+  const sidebarMenus = computed(() => {
+    if (needSplit.value) {
+      return splitSideMenus.value;
+    }
+
+    /**
+     * In SIDEBAR_NAV mode, we need to remove the `to` property from an item that
+     * has children so it can expand using the accordion.
+     */
+    return mapTree({
+      tree: menus.value,
+      mapper: (menu) => {
+        if (menu.children?.length) {
+          return {
+            ...menu,
+            to: undefined,
+          };
+        }
+
+        return {
+          ...menu,
+        };
+      },
+    });
+  });
+
+  const mixHeaderMenus = computed(() => {
+    return isHeaderMixedNav.value ? sidebarMenus.value : headerMenus.value;
+  });
+
+  // FIXME: Potential to be removed
+  const sidebarActive = computed(() => {
+    return (route?.meta?.activePath as string) ?? route.path;
+  });
+
+  const headerActive = computed(() => {
+    if (!needSplit.value) {
+      return route.meta?.activePath ?? route.path;
+    }
+    return rootMenuPath.value;
+  });
+
+  function handleMenuSelect({ key, mode }: {
+    key: string;
+    mode: DashboardMenuProps['mode'];
+  }) {
+    if (!needSplit.value || mode === 'vertical') {
+      navigation(key);
+      return;
+    }
+    const rootMenu = menus.value.find((item) => item.path === key);
+    const _splitSideMenus = rootMenu?.children ?? [];
+
+    if (!willOpenedByWindow(key)) {
+      rootMenuPath.value = rootMenu?.path ?? '';
+      splitSideMenus.value = _splitSideMenus;
+    }
+
+    if (_splitSideMenus.length === 0) {
+      navigation(key);
+    } else if (rootMenu && preferences.sidebar.autoActivateChild) {
+      navigation(
+        defaultSubMap.has(rootMenu.path)
+          ? (defaultSubMap.get(rootMenu.path) as string)
+          : rootMenu.path,
+      );
+    }
+  }
+
+  function handleMenuOpen({ path, parentPaths }: DashboardMenuMenuItemPayload) {
+    if (parentPaths.length <= 1 && preferences.sidebar.autoActivateChild) {
+      navigation(
+        defaultSubMap.has(path)
+          ? (defaultSubMap.get(path) as string)
+          : path,
+      );
+    }
+  }
+
+  function calcSideMenus(path: string = route.path) {
+    let { rootMenu } = findRootMenuByPath({
+      menus: menus.value,
+      path,
+    });
+
+    if (!rootMenu) {
+      rootMenu = menus.value.find((item) => item.path === path);
+    }
+
+    const result = findRootMenuByPath({
+      menus: rootMenu?.children || [],
+      path,
+      level: 1,
+    });
+    mixedRootMenuPath.value = result.rootMenuPath ?? '';
+    mixExtraMenus.value = result.rootMenu?.children ?? [];
+    rootMenuPath.value = rootMenu?.path ?? '';
+    splitSideMenus.value = rootMenu?.children ?? [];
+  }
+
+  watch(
+    () => route.path,
+    (path) => {
+      const currentPath = route?.meta?.activePath ?? route?.meta?.link ?? path;
+      if (willOpenedByWindow(currentPath)) {
+        return;
+      }
+      calcSideMenus(currentPath);
+      if (rootMenuPath.value) {
+        defaultSubMap.set(rootMenuPath.value, currentPath);
+      }
+    },
+    { immediate: true },
+  );
+
+  onBeforeMount(() => {
+    calcSideMenus(route.meta?.activePath || route.path);
+  });
+
+  return {
+    handleMenuSelect,
+    handleMenuOpen,
+    headerActive,
+    headerMenus,
+    sidebarActive,
+    sidebarMenus,
+    mixHeaderMenus,
+    mixExtraMenus,
+    sidebarVisible,
+  };
+}

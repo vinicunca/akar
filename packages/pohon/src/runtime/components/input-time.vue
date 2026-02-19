@@ -54,6 +54,7 @@ import { reactiveOmit } from '@vueuse/core';
 import { ATimeFieldInput, ATimeFieldRoot, useForwardPropsEmits } from 'akar';
 import { computed, onMounted, ref } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
@@ -70,6 +71,7 @@ const emits = defineEmits<PInputTimeEmits>();
 const slots = defineSlots<PInputTimeSlots>();
 
 const appConfig = useAppConfig() as InputTime['AppConfig'];
+const pohonProp = useComponentPohon('inputTime', props);
 
 const rootProps = useForwardPropsEmits(
   reactiveOmit(
@@ -133,6 +135,11 @@ const pohon = computed(() =>
 
 const inputsRef = ref<Array<ComponentPublicInstance>>([]);
 
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el;
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } });
@@ -176,7 +183,7 @@ defineExpose({
     v-slot="{ segments }"
     :name="name"
     :disabled="disabled"
-    :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+    :class="pohon.base({ class: [pohonProp?.base, props.class] })"
     data-pohon="input-time-root"
     @update:model-value="onUpdate"
     @blur="onBlur"
@@ -185,10 +192,10 @@ defineExpose({
     <ATimeFieldInput
       v-for="(segment, index) in segments"
       :key="`${segment.part}-${index}`"
-      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
+      :ref="el => setInputRef(index, el)"
       :part="segment.part"
       data-pohon="input-time-segment"
-      :class="pohon.segment({ class: props.pohon?.segment })"
+      :class="pohon.segment({ class: pohonProp?.segment })"
     >
       {{ segment.value.trim() }}
     </ATimeFieldInput>
@@ -198,7 +205,7 @@ defineExpose({
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
       data-pohon="input-time-leading"
-      :class="pohon.leading({ class: props.pohon?.leading })"
+      :class="pohon.leading({ class: pohonProp?.leading })"
     >
       <slot
         name="leading"
@@ -208,14 +215,14 @@ defineExpose({
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
           data-pohon="input-time-leading-icon"
-          :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+          :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
+          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           data-pohon="input-time-leading-avatar"
-          :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+          :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
         />
       </slot>
     </span>
@@ -223,7 +230,7 @@ defineExpose({
     <span
       v-if="isTrailing || !!slots.trailing"
       data-pohon="input-time-trailing"
-      :class="pohon.trailing({ class: props.pohon?.trailing })"
+      :class="pohon.trailing({ class: pohonProp?.trailing })"
     >
       <slot
         name="trailing"
@@ -233,7 +240,7 @@ defineExpose({
           v-if="trailingIconName"
           :name="trailingIconName"
           data-pohon="input-time-trailing-icon"
-          :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+          :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         />
       </slot>
     </span>

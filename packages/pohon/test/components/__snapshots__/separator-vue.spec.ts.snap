@@ -1,0 +1,118 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PSeparator > renders with as correctly 1`] = `"<span data-orientation="horizontal" role="separator" data-pohon="separator-root"><div class="" data-pohon="separator-border"></div><!--v-if--></span>"`;
+
+exports[`PSeparator > renders with avatar correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <div class="" data-pohon="separator-container"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span></div>
+  <div class="" data-pohon="separator-border"></div>
+</div>"
+`;
+
+exports[`PSeparator > renders with class correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" class="flex-row-reverse" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with color primary correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with decorative correctly 1`] = `
+"<div data-orientation="horizontal" role="none" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with icon correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <div class="" data-pohon="separator-container"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="separator-icon"></svg></div>
+  <div class="" data-pohon="separator-border"></div>
+</div>"
+`;
+
+exports[`PSeparator > renders with label correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <div class="" data-pohon="separator-container"><span class="" data-pohon="separator-label">+1</span></div>
+  <div class="" data-pohon="separator-border"></div>
+</div>"
+`;
+
+exports[`PSeparator > renders with orientation vertical correctly 1`] = `
+"<div data-orientation="vertical" aria-orientation="vertical" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with size lg correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with size md correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with size sm correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with size xl correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with size xs correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with type dashed correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with type dotted correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with type solid correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`PSeparator > renders with ui correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-pohon="separator-root">
+  <div class="" data-pohon="separator-border"></div>
+  <!--v-if-->
+</div>"
+`;

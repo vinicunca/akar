@@ -7,6 +7,7 @@ type ProseTbody = ComponentConfig<typeof theme, AppConfig, 'tbody', 'pohon.prose
 
 export interface ProseTbodyProps {
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface ProseTbodySlots {
@@ -17,18 +18,20 @@ export interface ProseTbodySlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseTbodyProps>();
 defineSlots<ProseTbodySlots>();
 
 const appConfig = useAppConfig() as ProseTbody['AppConfig'];
+const pohonProp = useComponentPohon('prose.tbody', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.tbody || {}) }));
 </script>
 
 <template>
-  <tbody :class="pohon({ class: props.class })">
+  <tbody :class="pohon({ class: [pohonProp?.base, props.class] })">
     <slot />
   </tbody>
 </template>

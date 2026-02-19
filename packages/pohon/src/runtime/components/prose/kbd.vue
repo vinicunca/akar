@@ -8,18 +8,21 @@ type ProseKbd = ComponentConfig<typeof theme, AppConfig, 'kbd', 'pohon.prose'>;
 export interface ProseKbdProps {
   value: string;
   class?: any;
+  pohon?: { base?: any };
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PKbd from '../kbd.vue';
 
 const props = defineProps<ProseKbdProps>();
 
 const appConfig = useAppConfig() as ProseKbd['AppConfig'];
+const pohonProp = useComponentPohon('prose.kbd', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.kbd || {}) }));
 </script>
@@ -27,6 +30,6 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 <template>
   <PKbd
     :value="value"
-    :class="pohon({ class: props.class })"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
   />
 </template>

@@ -1,5 +1,5 @@
 /**
- * Normalizes component names by removing Nuxt UI prefixes
+ * Normalizes component names by removing Pohon UI prefixes
  *
  * @param componentName - The component name to normalize
  * @returns The normalized component name without P/p- prefixes

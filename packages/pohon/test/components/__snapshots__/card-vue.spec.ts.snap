@@ -1,0 +1,81 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card > renders with as correctly 1`] = `
+"<section class="" data-pohon="card-root">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</section>"
+`;
+
+exports[`Card > renders with class correctly 1`] = `
+"<div class="rounded-xl" data-pohon="card-root">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with default slot correctly 1`] = `
+"<div class="" data-pohon="card-root">
+  <!--v-if-->
+  <div class="" data-pohon="card-body">Default slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with footer slot correctly 1`] = `
+"<div class="" data-pohon="card-root">
+  <!--v-if-->
+  <!--v-if-->
+  <div class="" data-pohon="card-footer">Footer slot</div>
+</div>"
+`;
+
+exports[`Card > renders with header slot correctly 1`] = `
+"<div class="" data-pohon="card-root">
+  <div class="" data-pohon="card-header">Header slot</div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with ui correctly 1`] = `
+"<div class="" data-pohon="card-root">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with variant outline correctly 1`] = `
+"<div class="" data-pohon="card-root">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with variant soft correctly 1`] = `
+"<div class="" data-pohon="card-root">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with variant solid correctly 1`] = `
+"<div class="" data-pohon="card-root">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Card > renders with variant subtle correctly 1`] = `
+"<div class="" data-pohon="card-root">
+  <!--v-if-->
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;

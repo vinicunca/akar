@@ -73,6 +73,7 @@ import { useForwardPropsEmits } from 'akar';
 import { ADateRangeField as ARangeDateField, ADateField as ASingleDateField } from 'akar/namespaced';
 import { computed, onMounted, ref } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
@@ -91,6 +92,7 @@ const emits = defineEmits<PInputDateEmits<R>>();
 const slots = defineSlots<PInputDateSlots>();
 
 const appConfig = useAppConfig() as InputDate['AppConfig'];
+const pohonProp = useComponentPohon('inputDate', props);
 
 const rootProps = useForwardPropsEmits(
   reactiveOmit(
@@ -165,6 +167,11 @@ const pohon = computed(() =>
 
 const inputsRef = ref<Array<ComponentPublicInstance>>([]);
 
+function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  inputsRef.value[index] = el;
+}
+
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
   const event = new Event('change', { target: { value } });
@@ -208,11 +215,11 @@ defineExpose({
     <ADateField.Input
       v-for="(segment, index) in segments"
       :key="`${segment.part}-${index}`"
-      :ref="el => (inputsRef[index] = el as ComponentPublicInstance)"
+      :ref="el => setInputRef(index, el)"
       :type="type"
       :part="segment.part"
       data-pohon="input-date-segment"
-      :class="pohon.segment({ class: props.pohon?.segment })"
+      :class="pohon.segment({ class: pohonProp?.segment })"
       :data-segment="segment.part"
     >
       {{ segment.value.trim() }}
@@ -228,7 +235,7 @@ defineExpose({
     :name="name"
     :disabled="disabled"
     data-pohon="input-date-base"
-    :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+    :class="pohon.base({ class: [pohonProp?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"
     @focus="onFocus"
@@ -248,7 +255,7 @@ defineExpose({
         <PIcon
           :name="separatorIcon || appConfig.pohon.icons.minus"
           data-pohon="input-date-separator-icon"
-          :class="pohon.separatorIcon({ class: props.pohon?.separatorIcon })"
+          :class="pohon.separatorIcon({ class: pohonProp?.separatorIcon })"
         />
       </slot>
       <ReuseSegmentsTemplate
@@ -262,7 +269,7 @@ defineExpose({
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
       data-pohon="input-date-leading"
-      :class="pohon.leading({ class: props.pohon?.leading })"
+      :class="pohon.leading({ class: pohonProp?.leading })"
     >
       <slot
         name="leading"
@@ -272,14 +279,14 @@ defineExpose({
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
           data-pohon="input-date-leading-icon"
-          :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+          :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
+          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           data-pohon="input-date-leading-avatar"
-          :class="pohon.leadingAvatar({ class: props.pohon?.leadingAvatar })"
+          :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
         />
       </slot>
     </span>
@@ -287,7 +294,7 @@ defineExpose({
     <span
       v-if="isTrailing || !!slots.trailing"
       data-pohon="input-date-trailing"
-      :class="pohon.trailing({ class: props.pohon?.trailing })"
+      :class="pohon.trailing({ class: pohonProp?.trailing })"
     >
       <slot
         name="trailing"
@@ -297,7 +304,7 @@ defineExpose({
           v-if="trailingIconName"
           :name="trailingIconName"
           data-pohon="input-date-trailing-icon"
-          :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+          :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         />
       </slot>
     </span>

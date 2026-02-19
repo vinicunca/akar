@@ -2,10 +2,11 @@
 import type { DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
 import type { ACalendarRootProps, ADateFieldRoot, ADateFieldRootProps, APopoverRootEmits, APopoverRootProps } from '..';
-import type { DateMatcher, WeekDayFormat } from '../date';
+import type { DateMatcher, WeekDayFormat, WeekStartsOn } from '../date';
 import type { DateStep, Granularity, HourCycle } from '../shared/date';
 import type { Direction } from '../shared/types';
-import { createContext, useDirection, useLocale } from '../shared';
+import { getWeekStartsOn } from '../date';
+import { createContext } from '../shared';
 
 type DatePickerRootContext = {
   id: Ref<string | undefined>;
@@ -22,7 +23,7 @@ type DatePickerRootContext = {
   placeholder: Ref<DateValue>;
   pagedNavigation: Ref<boolean>;
   preventDeselect: Ref<boolean>;
-  weekStartsOn: Ref<0 | 1 | 2 | 3 | 4 | 5 | 6>;
+  weekStartsOn: Ref<WeekStartsOn>;
   weekdayFormat: Ref<WeekDayFormat>;
   fixedWeeks: Ref<boolean>;
   numberOfMonths: Ref<number>;
@@ -63,6 +64,7 @@ import { isSameDay } from '@internationalized/date';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs, watch } from 'vue';
 import { APopoverRoot } from '..';
+import { useDirection, useLocale } from '../shared';
 import { getDefaultDate } from '../shared/date';
 
 defineOptions({
@@ -78,7 +80,6 @@ const props = withDefaults(
     modal: false,
     pagedNavigation: false,
     preventDeselect: false,
-    weekStartsOn: 0,
     weekdayFormat: 'narrow',
     fixedWeeks: false,
     numberOfMonths: 1,
@@ -98,7 +99,6 @@ const {
   disabled,
   readonly,
   pagedNavigation,
-  weekStartsOn,
   weekdayFormat,
   fixedWeeks,
   numberOfMonths,
@@ -123,6 +123,7 @@ const {
 
 const dir = useDirection(propDir);
 const locale = useLocale(propLocale);
+const weekStartsOn = computed(() => props.weekStartsOn ?? getWeekStartsOn(locale.value));
 
 const modelValue = useVModel(props, 'modelValue', emits, {
   defaultValue: defaultValue.value,

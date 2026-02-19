@@ -134,6 +134,7 @@ import { useAppConfig, useLocale } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, toRef, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFileUpload } from '../composables/use-file-upload';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
@@ -163,6 +164,7 @@ const slots = defineSlots<PFileUploadSlots<M>>();
 const modelValue = defineModel<(M extends true ? Array<File> : File) | null>();
 
 const appConfig = useAppConfig() as FileUpload['AppConfig'];
+const pohonProp = useComponentPohon('fileUpload', props);
 
 const { t } = useLocale();
 
@@ -294,7 +296,7 @@ defineExpose({
       />
 
       <div
-        :class="pohon.files({ class: props.pohon?.files })"
+        :class="pohon.files({ class: pohonProp?.files })"
         data-pohon="file-upload-files"
       >
         <slot
@@ -304,7 +306,7 @@ defineExpose({
           <div
             v-for="(file, index) in Array.isArray(modelValue) ? modelValue : [modelValue]"
             :key="(file as File).name"
-            :class="pohon.file({ class: props.pohon?.file })"
+            :class="pohon.file({ class: pohonProp?.file })"
             data-pohon="file-upload-file"
           >
             <slot
@@ -322,17 +324,17 @@ defineExpose({
                   :src="createObjectUrl(file)"
                   :icon="fileIcon || appConfig.pohon.icons.file"
                   :size="props.size"
-                  :class="pohon.fileLeadingAvatar({ class: props.pohon?.fileLeadingAvatar })"
+                  :class="pohon.fileLeadingAvatar({ class: pohonProp?.fileLeadingAvatar })"
                   data-pohon="file-upload-file-leading-avatar"
                 />
               </slot>
 
               <div
-                :class="pohon.fileWrapper({ class: props.pohon?.fileWrapper })"
+                :class="pohon.fileWrapper({ class: pohonProp?.fileWrapper })"
                 data-pohon="file-upload-file-wrapper"
               >
                 <span
-                  :class="pohon.fileName({ class: props.pohon?.fileName })"
+                  :class="pohon.fileName({ class: pohonProp?.fileName })"
                   data-pohon="file-upload-file-name"
                 >
                   <slot
@@ -345,7 +347,7 @@ defineExpose({
                 </span>
 
                 <span
-                  :class="pohon.fileSize({ class: props.pohon?.fileSize })"
+                  :class="pohon.fileSize({ class: pohonProp?.fileSize })"
                   data-pohon="file-upload-file-size"
                 >
                   <slot
@@ -379,7 +381,7 @@ defineExpose({
                   }"
                   :aria-label="t('fileUpload.removeFile', { filename: (file as File).name })"
                   :trailing-icon="fileDeleteIcon || appConfig.pohon.icons.close"
-                  :class="pohon.fileTrailingButton({ class: props.pohon?.fileTrailingButton })"
+                  :class="pohon.fileTrailingButton({ class: pohonProp?.fileTrailingButton })"
                   data-pohon="file-upload-file-trailing-button"
                   @click.stop.prevent="removeFile(index)"
                 />
@@ -400,7 +402,7 @@ defineExpose({
 
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="file-upload-root"
   >
     <slot
@@ -414,7 +416,7 @@ defineExpose({
         :type="variant === 'button' ? 'button' : undefined"
         :role="variant === 'button' ? undefined : 'button'"
         :data-dragging="isDragging"
-        :class="pohon.base({ class: props.pohon?.base })"
+        :class="pohon.base({ class: pohonProp?.base })"
         :tabindex="interactive && !disabled ? 0 : -1"
         @click="interactive && !disabled && open()"
         @keydown.prevent
@@ -424,7 +426,7 @@ defineExpose({
 
         <div
           v-if="position === 'inside' ? (multiple ? !(modelValue as File[])?.length : !modelValue) : true"
-          :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+          :class="pohon.wrapper({ class: pohonProp?.wrapper })"
           data-pohon="file-upload-wrapper"
         >
           <slot
@@ -434,14 +436,14 @@ defineExpose({
             <PIcon
               v-if="variant === 'button'"
               :name="icon || appConfig.pohon.icons.upload"
-              :class="pohon.icon({ class: props.pohon?.icon })"
+              :class="pohon.icon({ class: pohonProp?.icon })"
               data-pohon="file-upload-icon"
             />
             <PAvatar
               v-else
               :icon="icon || appConfig.pohon.icons.upload"
               :size="props.size"
-              :class="pohon.avatar({ class: props.pohon?.avatar })"
+              :class="pohon.avatar({ class: pohonProp?.avatar })"
               data-pohon="file-upload-avatar"
             />
           </slot>
@@ -449,7 +451,7 @@ defineExpose({
           <template v-if="variant !== 'button'">
             <div
               v-if="label || !!slots.label"
-              :class="pohon.label({ class: props.pohon?.label })"
+              :class="pohon.label({ class: pohonProp?.label })"
               data-pohon="file-upload-label"
             >
               <slot name="label">
@@ -458,7 +460,7 @@ defineExpose({
             </div>
             <div
               v-if="description || !!slots.description"
-              :class="pohon.description({ class: props.pohon?.description })"
+              :class="pohon.description({ class: pohonProp?.description })"
               data-pohon="file-upload-description"
             >
               <slot name="description">
@@ -468,7 +470,7 @@ defineExpose({
 
             <div
               v-if="!!slots.actions"
-              :class="pohon.actions({ class: props.pohon?.actions })"
+              :class="pohon.actions({ class: pohonProp?.actions })"
               data-pohon="file-upload-actions"
             >
               <slot

@@ -1,0 +1,84 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PMarquee > renders with as correctly 1`] = `
+"<section data-orientation="horizontal" class="" data-pohon="marquee-root">
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+</section>"
+`;
+
+exports[`PMarquee > renders with class correctly 1`] = `
+"<div data-orientation="horizontal" class="text-xl" data-pohon="marquee-root">
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+</div>"
+`;
+
+exports[`PMarquee > renders with default slot correctly 1`] = `
+"<div data-orientation="horizontal" class="" data-pohon="marquee-root">
+  <div class="" data-pohon="marquee-content">Default slot</div>
+  <div class="" data-pohon="marquee-content">Default slot</div>
+  <div class="" data-pohon="marquee-content">Default slot</div>
+  <div class="" data-pohon="marquee-content">Default slot</div>
+</div>"
+`;
+
+exports[`PMarquee > renders with orientation correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="marquee-root">
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+</div>"
+`;
+
+exports[`PMarquee > renders with overlay off correctly 1`] = `
+"<div data-orientation="horizontal" class="" data-pohon="marquee-root">
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+</div>"
+`;
+
+exports[`PMarquee > renders with pauseOnHover correctly 1`] = `
+"<div data-orientation="horizontal" class="" data-pohon="marquee-root">
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+</div>"
+`;
+
+exports[`PMarquee > renders with repeat correctly 1`] = `
+"<div data-orientation="horizontal" class="" data-pohon="marquee-root">
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+</div>"
+`;
+
+exports[`PMarquee > renders with reverse correctly 1`] = `
+"<div data-orientation="horizontal" class="" data-pohon="marquee-root">
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+  <div class="" data-pohon="marquee-content"></div>
+</div>"
+`;
+
+exports[`PMarquee > renders with ui correctly 1`] = `
+"<div data-orientation="horizontal" class="" data-pohon="marquee-root">
+  <div class="gap-4" data-pohon="marquee-content"></div>
+  <div class="gap-4" data-pohon="marquee-content"></div>
+  <div class="gap-4" data-pohon="marquee-content"></div>
+  <div class="gap-4" data-pohon="marquee-content"></div>
+</div>"
+`;

@@ -97,6 +97,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, ref } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
@@ -117,6 +118,7 @@ const emits = defineEmits<PTabsEmits>();
 const slots = defineSlots<PTabsSlots<T>>();
 
 const appConfig = useAppConfig() as Tabs['AppConfig'];
+const pohonProp = useComponentPohon('tabs', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(props, 'as', 'unmountOnHide'),
@@ -137,6 +139,11 @@ const pohon = computed(() =>
 
 const triggersRef = ref<Array<ComponentPublicInstance>>([]);
 
+function setTriggerRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  triggersRef.value[index] = el;
+}
+
 defineExpose({
   triggersRef,
 });
@@ -149,15 +156,15 @@ defineExpose({
     :default-value="defaultValue"
     :orientation="orientation"
     :activation-mode="activationMode"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="tabs-root"
   >
     <ATabsList
-      :class="pohon.list({ class: props.pohon?.list })"
+      :class="pohon.list({ class: pohonProp?.list })"
       data-pohon="tabs-list"
     >
       <ATabsIndicator
-        :class="pohon.indicator({ class: props.pohon?.indicator })"
+        :class="pohon.indicator({ class: pohonProp?.indicator })"
         data-pohon="tabs-indicator"
       />
 
@@ -166,10 +173,10 @@ defineExpose({
       <ATabsTrigger
         v-for="(item, index) of items"
         :key="index"
-        :ref="el => (triggersRef[index] = el as ComponentPublicInstance)"
+        :ref="el => setTriggerRef(index, el)"
         :value="item.value ?? String(index)"
         :disabled="item.disabled"
-        :class="pohon.trigger({ class: [props.pohon?.trigger, item.pohon?.trigger] })"
+        :class="pohon.trigger({ class: [pohonProp?.trigger, item.pohon?.trigger] })"
         data-pohon="tabs-trigger"
       >
         <slot
@@ -181,21 +188,21 @@ defineExpose({
           <PIcon
             v-if="item.icon"
             :name="item.icon"
-            :class="pohon.leadingIcon({ class: [props.pohon?.leadingIcon, item.pohon?.leadingIcon] })"
+            :class="pohon.leadingIcon({ class: [pohonProp?.leadingIcon, item.pohon?.leadingIcon] })"
             data-pohon="tabs-leading-icon"
           />
           <PAvatar
             v-else-if="item.avatar"
-            :size="((item.pohon?.leadingAvatarSize || props.pohon?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
+            :size="((item.pohon?.leadingAvatarSize || pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="item.avatar"
-            :class="pohon.leadingAvatar({ class: [props.pohon?.leadingAvatar, item.pohon?.leadingAvatar] })"
+            :class="pohon.leadingAvatar({ class: [pohonProp?.leadingAvatar, item.pohon?.leadingAvatar] })"
             data-pohon="tabs-leading-avatar"
           />
         </slot>
 
         <span
           v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots.default"
-          :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
+          :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label] })"
           data-pohon="tabs-label"
         >
           <slot
@@ -214,9 +221,9 @@ defineExpose({
             v-if="item.badge || item.badge === 0"
             color="neutral"
             variant="outline"
-            :size="((item.pohon?.trailingBadgeSize || props.pohon?.trailingBadgeSize || pohon.trailingBadgeSize()) as PBadgeProps['size'])"
+            :size="((item.pohon?.trailingBadgeSize || pohonProp?.trailingBadgeSize || pohon.trailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(item.badge) || isNumber(item.badge)) ? { label: item.badge } : item.badge"
-            :class="pohon.trailingBadge({ class: [props.pohon?.trailingBadge, item.pohon?.trailingBadge] })"
+            :class="pohon.trailingBadge({ class: [pohonProp?.trailingBadge, item.pohon?.trailingBadge] })"
             data-pohon="tabs-trailing-badge"
           />
         </slot>
@@ -230,7 +237,7 @@ defineExpose({
         v-for="(item, index) of items"
         :key="index"
         :value="item.value ?? String(index)"
-        :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content, item.class] })"
+        :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content, item.class] })"
         data-pohon="tabs-content"
       >
         <slot

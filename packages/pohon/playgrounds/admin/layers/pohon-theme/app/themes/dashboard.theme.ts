@@ -15,6 +15,11 @@ export const dashboardThemes = {
       content: 'flex flex-1 flex-col overflow-hidden transition-all-300 ease-in',
     },
   } satisfies PThemeDashboardLayout,
+
+  dashboardLayoutHeader: {
+    base: 'bg-header pl-2 border-b flex flex-[0_0_auto] w-full transition-margin-200 items-center top-0',
+  },
+
   dashboardSidebar: {
     slots: {
       hiddenSide: 'h-full transition-all-150',

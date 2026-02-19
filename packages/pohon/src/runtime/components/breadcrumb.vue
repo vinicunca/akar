@@ -64,6 +64,7 @@ export type PBreadcrumbSlots<T extends PBreadcrumbItem = PBreadcrumbItem> = {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { getProp } from '../utils';
 import { pickLinkProps } from '../utils/link';
@@ -84,6 +85,7 @@ const slots = defineSlots<PBreadcrumbSlots<T>>();
 
 const { dir } = useLocale();
 const appConfig = useAppConfig() as Breadcrumb['AppConfig'];
+const pohonProp = useComponentPohon('breadcrumb', props);
 
 const separatorIcon = computed(() =>
   props.separatorIcon
@@ -97,11 +99,11 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
   <APrimitive
     :as="as"
     aria-label="breadcrumb"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="breadcrumb-root"
   >
     <ol
-      :class="pohon.list({ class: props.pohon?.list })"
+      :class="pohon.list({ class: pohonProp?.list })"
       data-pohon="breadcrumb-list"
     >
       <template
@@ -109,7 +111,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
         :key="index"
       >
         <li
-          :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item] })"
+          :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item] })"
           data-pohon="breadcrumb-item"
         >
           <PLink
@@ -122,7 +124,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
               as="span"
               :aria-current="(item.active ?? active) && (index === items!.length - 1) ? 'page' : undefined"
               :class="pohon.link({
-                class: [props.pohon?.link, item.pohon?.link, item.class],
+                class: [pohonProp?.link, item.pohon?.link, item.class],
                 active: item.active ?? (index === items!.length - 1),
                 disabled: !!item.disabled,
                 to: !!item.to,
@@ -147,17 +149,17 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
                     v-if="item.icon"
                     :name="item.icon"
                     :class="pohon.linkLeadingIcon({
-                      class: [props.pohon?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
+                      class: [pohonProp?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
                       active: item.active ?? (index === items!.length - 1),
                     })"
                     data-pohon="breadcrumb-link-leading-icon"
                   />
                   <PAvatar
                     v-else-if="item.avatar"
-                    :size="((props.pohon?.linkLeadingAvatarSize || pohon.linkLeadingAvatarSize()) as PAvatarProps['size'])"
+                    :size="((pohonProp?.linkLeadingAvatarSize || pohon.linkLeadingAvatarSize()) as PAvatarProps['size'])"
                     v-bind="item.avatar"
                     :class="pohon.linkLeadingAvatar({
-                      class: [props.pohon?.linkLeadingAvatar, item.pohon?.linkLeadingAvatar],
+                      class: [pohonProp?.linkLeadingAvatar, item.pohon?.linkLeadingAvatar],
                       active: item.active ?? (index === items!.length - 1),
                     })"
                     data-pohon="breadcrumb-link-leading-avatar"
@@ -166,7 +168,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
 
                 <span
                   v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PBreadcrumbSlots<T>]"
-                  :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, item.pohon?.linkLabel] })"
+                  :class="pohon.linkLabel({ class: [pohonProp?.linkLabel, item.pohon?.linkLabel] })"
                   data-pohon="breadcrumb-link-label"
                 >
                   <slot
@@ -194,7 +196,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
           v-if="index < items!.length - 1"
           role="presentation"
           aria-hidden="true"
-          :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator] })"
+          :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator] })"
           data-pohon="breadcrumb-separator"
         >
           <slot
@@ -203,7 +205,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.breadc
           >
             <PIcon
               :name="separatorIcon"
-              :class="pohon.separatorIcon({ class: [props.pohon?.separatorIcon, item.pohon?.separatorIcon] })"
+              :class="pohon.separatorIcon({ class: [pohonProp?.separatorIcon, item.pohon?.separatorIcon] })"
               data-pohon="breadcrumb-separator-icon"
             />
           </slot>

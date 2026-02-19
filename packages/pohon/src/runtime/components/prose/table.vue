@@ -18,19 +18,21 @@ export interface ProseTableSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseTableProps>();
 defineSlots<ProseTableSlots>();
 
 const appConfig = useAppConfig() as ProseTable['AppConfig'];
+const pohonProp = useComponentPohon('prose.table', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.table || {}) })());
 </script>
 
 <template>
-  <div :class="pohon.root({ class: [props.pohon?.root, props.class] })">
-    <table :class="pohon.base({ class: props.pohon?.base })">
+  <div :class="pohon.root({ class: [pohonProp?.root, props.class] })">
+    <table :class="pohon.base({ class: pohonProp?.base })">
       <slot />
     </table>
   </div>

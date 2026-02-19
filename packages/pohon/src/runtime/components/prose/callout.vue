@@ -27,6 +27,7 @@ export interface ProseCalloutSlots {
 import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
 import PLink from '../link.vue';
@@ -37,6 +38,7 @@ const props = defineProps<ProseCalloutProps>();
 defineSlots<ProseCalloutSlots>();
 
 const appConfig = useAppConfig() as ProseCallout['AppConfig'];
+const pohonProp = useComponentPohon('prose.callout', props);
 
 const pohon = computed(() => uv({
   extend: uv(theme),
@@ -66,12 +68,12 @@ const target = computed(() => props.target || (!!props.to && isString(props.to) 
     <PIcon
       v-if="icon"
       :name="icon"
-      :class="pohon.icon({ class: props.pohon?.icon })"
+      :class="pohon.icon({ class: pohonProp?.icon })"
     />
     <PIcon
       v-if="!!to && target === '_blank'"
       :name="appConfig.pohon.icons.external"
-      :class="pohon.externalIcon({ class: props.pohon?.externalIcon })"
+      :class="pohon.externalIcon({ class: pohonProp?.externalIcon })"
     />
 
     <slot mdc-unwrap="p" />

@@ -63,6 +63,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 
@@ -79,6 +80,7 @@ const slots = defineSlots<PProgressSlots>();
 
 const { dir } = useLocale();
 const appConfig = useAppConfig() as Progress['AppConfig'];
+const pohonProp = useComponentPohon('progress', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(props, 'getValueLabel', 'getValueText', 'modelValue'),
@@ -187,12 +189,12 @@ const pohon = computed(() =>
   <APrimitive
     :as="as"
     :data-orientation="orientation"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="progress-root"
   >
     <div
       v-if="!isIndeterminate && (status || !!slots.status)"
-      :class="pohon.status({ class: props.pohon?.status })"
+      :class="pohon.status({ class: pohonProp?.status })"
       data-pohon="progress-status"
       :style="statusStyle"
     >
@@ -207,12 +209,12 @@ const pohon = computed(() =>
     <AProgressRoot
       v-bind="rootProps"
       :max="realMax"
-      :class="pohon.base({ class: props.pohon?.base })"
+      :class="pohon.base({ class: pohonProp?.base })"
       data-pohon="progress-base"
       style="transform: translateZ(0)"
     >
       <AProgressIndicator
-        :class="pohon.indicator({ class: props.pohon?.indicator })"
+        :class="pohon.indicator({ class: pohonProp?.indicator })"
         data-pohon="progress-indicator"
         :style="indicatorStyle"
       />
@@ -220,13 +222,13 @@ const pohon = computed(() =>
 
     <div
       v-if="hasSteps"
-      :class="pohon.steps({ class: props.pohon?.steps })"
+      :class="pohon.steps({ class: pohonProp?.steps })"
       data-pohon="progress-steps"
     >
       <div
         v-for="(step, index) in max"
         :key="index"
-        :class="pohon.step({ class: props.pohon?.step, step: stepVariant(index) })"
+        :class="pohon.step({ class: pohonProp?.step, step: stepVariant(index) })"
         data-pohon="progress-step"
       >
         <slot

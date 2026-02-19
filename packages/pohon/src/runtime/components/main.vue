@@ -12,6 +12,7 @@ export interface PMainProps {
    */
   as?: any;
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface PMainSlots {
@@ -23,6 +24,7 @@ export interface PMainSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -35,6 +37,7 @@ const props = withDefaults(
 defineSlots<PMainSlots>();
 
 const appConfig = useAppConfig() as Main['AppConfig'];
+const pohonProp = useComponentPohon('main', props);
 
 const pohon = computed(() =>
   uv({
@@ -47,7 +50,7 @@ const pohon = computed(() =>
 <template>
   <APrimitive
     :as="as"
-    :class="pohon({ class: props.class })"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
   </APrimitive>

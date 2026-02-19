@@ -235,9 +235,15 @@ export function defineShortcuts(config: MaybeRef<PShortcutsConfig>, options: PSh
       if (event.metaKey !== shortcut.metaKey) {
         continue;
       }
+
       if (event.ctrlKey !== shortcut.ctrlKey) {
         continue;
       }
+
+      if (event.altKey !== shortcut.altKey) {
+        continue;
+      }
+
       // shift modifier is only checked in combination with alphabet keys and some extra keys
       // (shift with special characters would change the key)
       if ((alphabetKey || shiftableKey) && event.shiftKey !== shortcut.shiftKey) {

@@ -30,6 +30,7 @@ export interface ProseCardSlots {
 import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
 import PLink from '../link.vue';
@@ -40,6 +41,7 @@ const props = defineProps<ProseCardProps>();
 const slots = defineSlots<ProseCardSlots>();
 
 const appConfig = useAppConfig() as ProseCard['AppConfig'];
+const pohonProp = useComponentPohon('prose.card', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.card || {}) })({
   color: props.color,
@@ -70,17 +72,17 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim());
     <PIcon
       v-if="icon"
       :name="icon"
-      :class="pohon.icon({ class: props.pohon?.icon })"
+      :class="pohon.icon({ class: pohonProp?.icon })"
     />
     <PIcon
       v-if="!!to && target === '_blank'"
       :name="appConfig.pohon.icons.external"
-      :class="pohon.externalIcon({ class: props.pohon?.externalIcon })"
+      :class="pohon.externalIcon({ class: pohonProp?.externalIcon })"
     />
 
     <p
       v-if="title || !!slots.title"
-      :class="pohon.title({ class: props.pohon?.title })"
+      :class="pohon.title({ class: pohonProp?.title })"
     >
       <slot
         name="title"
@@ -92,7 +94,7 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim());
 
     <div
       v-if="!!slots.default"
-      :class="pohon.description({ class: props.pohon?.description })"
+      :class="pohon.description({ class: pohonProp?.description })"
     >
       <slot>
         {{ description }}

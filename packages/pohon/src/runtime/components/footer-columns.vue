@@ -50,6 +50,7 @@ export interface PFooterColumnsSlots<T extends PFooterColumnLink = PFooterColumn
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
@@ -65,6 +66,7 @@ const props = withDefaults(
 const slots = defineSlots<PFooterColumnsSlots<T>>();
 
 const appConfig = useAppConfig() as FooterColumns['AppConfig'];
+const pohonProp = useComponentPohon('footerColumns', props);
 
 const pohon = computed(() =>
   uv({ extend: uv(theme), ...(appConfig.pohon?.footerColumns || {}) })(),
@@ -74,25 +76,25 @@ const pohon = computed(() =>
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <div
       v-if="!!slots.left"
-      :class="pohon.left({ class: props.pohon?.left })"
+      :class="pohon.left({ class: pohonProp?.left })"
     >
       <slot name="left" />
     </div>
 
     <div
       v-if="!!slots.default || columns?.length"
-      :class="pohon.center({ class: props.pohon?.center })"
+      :class="pohon.center({ class: pohonProp?.center })"
     >
       <slot>
         <div
           v-for="(column, index) in columns"
           :key="index"
         >
-          <h3 :class="pohon.label({ class: props.pohon?.label })">
+          <h3 :class="pohon.label({ class: pohonProp?.label })">
             <slot
               name="column-label"
               :column="column"
@@ -101,11 +103,11 @@ const pohon = computed(() =>
             </slot>
           </h3>
 
-          <ul :class="pohon.list({ class: props.pohon?.list })">
+          <ul :class="pohon.list({ class: pohonProp?.list })">
             <li
               v-for="(link, linkIndex) in column.children"
               :key="linkIndex"
-              :class="pohon.item({ class: [props.pohon?.item, link.pohon?.item] })"
+              :class="pohon.item({ class: [pohonProp?.item, link.pohon?.item] })"
             >
               <PLink
                 v-slot="{ active, ...slotProps }"
@@ -114,7 +116,7 @@ const pohon = computed(() =>
               >
                 <PLinkBase
                   v-bind="slotProps"
-                  :class="pohon.link({ class: [props.pohon?.link, link.pohon?.link, link.class], active })"
+                  :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active })"
                 >
                   <slot
                     name="link"
@@ -131,13 +133,13 @@ const pohon = computed(() =>
                       <PIcon
                         v-if="link.icon"
                         :name="link.icon"
-                        :class="pohon.linkLeadingIcon({ class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon], active })"
+                        :class="pohon.linkLeadingIcon({ class: [pohonProp?.linkLeadingIcon, link.pohon?.linkLeadingIcon], active })"
                       />
                     </slot>
 
                     <span
                       v-if="link.label || !!slots['link-label']"
-                      :class="pohon.linkLabel({ class: [props.pohon?.linkLabel, link.pohon?.linkLabel], active })"
+                      :class="pohon.linkLabel({ class: [pohonProp?.linkLabel, link.pohon?.linkLabel], active })"
                     >
                       <slot
                         name="link-label"
@@ -150,7 +152,7 @@ const pohon = computed(() =>
                       <PIcon
                         v-if="link.target === '_blank'"
                         :name="appConfig.pohon.icons.external"
-                        :class="pohon.linkLabelExternalIcon({ class: [props.pohon?.linkLabelExternalIcon, link.pohon?.linkLabelExternalIcon], active })"
+                        :class="pohon.linkLabelExternalIcon({ class: [pohonProp?.linkLabelExternalIcon, link.pohon?.linkLabelExternalIcon], active })"
                       />
                     </span>
 
@@ -170,7 +172,7 @@ const pohon = computed(() =>
 
     <div
       v-if="!!slots.right"
-      :class="pohon.right({ class: props.pohon?.right })"
+      :class="pohon.right({ class: pohonProp?.right })"
     >
       <slot name="right" />
     </div>

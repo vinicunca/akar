@@ -30,12 +30,14 @@ export interface PCardSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
 const props = defineProps<PCardProps>();
 const slots = defineSlots<PCardSlots>();
 
 const appConfig = useAppConfig() as Card['AppConfig'];
+const pohonProp = useComponentPohon('card', props);
 
 const pohon = computed(() =>
   uv({
@@ -50,12 +52,12 @@ const pohon = computed(() =>
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="card-root"
   >
     <div
       v-if="!!slots.header"
-      :class="pohon.header({ class: props.pohon?.header })"
+      :class="pohon.header({ class: pohonProp?.header })"
       data-pohon="card-header"
     >
       <slot name="header" />
@@ -63,7 +65,7 @@ const pohon = computed(() =>
 
     <div
       v-if="!!slots.default"
-      :class="pohon.body({ class: props.pohon?.body })"
+      :class="pohon.body({ class: pohonProp?.body })"
       data-pohon="card-body"
     >
       <slot />
@@ -71,7 +73,7 @@ const pohon = computed(() =>
 
     <div
       v-if="!!slots.footer"
-      :class="pohon.footer({ class: props.pohon?.footer })"
+      :class="pohon.footer({ class: pohonProp?.footer })"
       data-pohon="card-footer"
     >
       <slot name="footer" />

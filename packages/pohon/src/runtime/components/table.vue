@@ -230,10 +230,11 @@ import {
 } from '@tanstack/vue-table';
 import { useVirtualizer } from '@tanstack/vue-virtual';
 import { capitalize, isBoolean, isFunction } from '@vinicunca/perkakas';
-import { createReusableTemplate, reactivePick } from '@vueuse/core';
+import { createRef, createReusableTemplate, reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
-import { computed, ref, toRef, useTemplateRef, watch } from 'vue';
+import { computed, toRef, useTemplateRef, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 
@@ -252,8 +253,9 @@ const slots = defineSlots<PTableSlots<T>>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Table['AppConfig'];
+const pohonProp = useComponentPohon('table', props);
 
-const data = ref(props.data ?? []) as Ref<Array<T>>;
+const data = createRef(props.data ?? [], props.watchOptions?.deep !== false);
 const meta = computed(() => props.meta ?? {});
 
 const columns = computed<Array<PTableColumn<T>>>(() =>
@@ -489,7 +491,7 @@ const renderedSize = computed(() => {
 });
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
-  ref.value = isFunction(updaterOrValue) ? updaterOrValue(ref.value) : updaterOrValue;
+  ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue;
 }
 
 function onRowSelect(event: Event, row: PTableRow<T>) {
@@ -565,7 +567,7 @@ defineExpose({
       :tabindex="props.onSelect ? 0 : undefined"
       :class="pohon.tr({
         class: [
-          props.pohon?.tr,
+          pohonProp?.tr,
           resolveValue(tableApi.options.meta?.class?.tr, row),
         ],
       })"
@@ -584,7 +586,7 @@ defineExpose({
         :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
         :class="pohon.td({
           class: [
-            props.pohon?.td,
+            pohonProp?.td,
             resolveValue(cell.column.columnDef.meta?.class?.td, cell),
           ],
           pinned: !!cell.column.getIsPinned(),
@@ -606,12 +608,12 @@ defineExpose({
 
     <tr
       v-if="row.getIsExpanded()"
-      :class="pohon.tr({ class: [props.pohon?.tr] })"
+      :class="pohon.tr({ class: [pohonProp?.tr] })"
       data-pohon="table-tr"
     >
       <td
         :colspan="row.getAllCells().length"
-        :class="pohon.td({ class: [props.pohon?.td] })"
+        :class="pohon.td({ class: [pohonProp?.td] })"
         data-pohon="table-td"
       >
         <slot
@@ -625,12 +627,12 @@ defineExpose({
   <DefineTableTemplate>
     <table
       ref="tableRef"
-      :class="pohon.base({ class: [props.pohon?.base] })"
+      :class="pohon.base({ class: [pohonProp?.base] })"
       data-pohon="table-base"
     >
       <caption
         v-if="caption || !!slots.caption"
-        :class="pohon.caption({ class: [props.pohon?.caption] })"
+        :class="pohon.caption({ class: [pohonProp?.caption] })"
         data-pohon="table-caption"
       >
         <slot name="caption">
@@ -639,13 +641,13 @@ defineExpose({
       </caption>
 
       <thead
-        :class="pohon.thead({ class: [props.pohon?.thead] })"
+        :class="pohon.thead({ class: [pohonProp?.thead] })"
         data-pohon="table-thead"
       >
         <tr
           v-for="headerGroup in tableApi.getHeaderGroups()"
           :key="headerGroup.id"
-          :class="pohon.tr({ class: [props.pohon?.tr] })"
+          :class="pohon.tr({ class: [pohonProp?.tr] })"
           data-pohon="table-tr"
         >
           <th
@@ -657,7 +659,7 @@ defineExpose({
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
             :class="pohon.th({
               class: [
-                props.pohon?.th,
+                pohonProp?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header),
               ],
               pinned: !!header.column.getIsPinned(),
@@ -679,13 +681,13 @@ defineExpose({
         </tr>
 
         <tr
-          :class="pohon.separator({ class: [props.pohon?.separator] })"
+          :class="pohon.separator({ class: [pohonProp?.separator] })"
           data-pohon="table-separator"
         />
       </thead>
 
       <tbody
-        :class="pohon.tbody({ class: [props.pohon?.tbody] })"
+        :class="pohon.tbody({ class: [pohonProp?.tbody] })"
         data-pohon="table-tbody"
       >
         <slot name="body-top" />
@@ -718,7 +720,7 @@ defineExpose({
         <tr v-else-if="loading && !!slots.loading">
           <td
             :colspan="tableApi.getAllLeafColumns().length"
-            :class="pohon.loading({ class: props.pohon?.loading })"
+            :class="pohon.loading({ class: pohonProp?.loading })"
             data-pohon="table-loading"
           >
             <slot name="loading" />
@@ -728,7 +730,7 @@ defineExpose({
         <tr v-else>
           <td
             :colspan="tableApi.getAllLeafColumns().length"
-            :class="pohon.empty({ class: props.pohon?.empty })"
+            :class="pohon.empty({ class: pohonProp?.empty })"
             data-pohon="table-empty"
           >
             <slot name="empty">
@@ -742,18 +744,18 @@ defineExpose({
 
       <tfoot
         v-if="hasFooter"
-        :class="pohon.tfoot({ class: [props.pohon?.tfoot] })"
+        :class="pohon.tfoot({ class: [pohonProp?.tfoot] })"
         :style="virtualizer ? {
           transform: `translateY(${virtualizer.getTotalSize() - renderedSize}px)`,
         } : undefined"
         data-pohon="table-tfoot"
       >
-        <tr :class="pohon.separator({ class: [props.pohon?.separator] })" />
+        <tr :class="pohon.separator({ class: [pohonProp?.separator] })" />
 
         <tr
           v-for="footerGroup in tableApi.getFooterGroups()"
           :key="footerGroup.id"
-          :class="pohon.tr({ class: [props.pohon?.tr] })"
+          :class="pohon.tr({ class: [pohonProp?.tr] })"
           data-pohon="table-tr"
         >
           <th
@@ -764,7 +766,7 @@ defineExpose({
             :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
             :class="pohon.th({
               class: [
-                props.pohon?.th,
+                pohonProp?.th,
                 resolveValue(header.column.columnDef.meta?.class?.th, header),
               ],
               pinned: !!header.column.getIsPinned(),
@@ -792,7 +794,7 @@ defineExpose({
     ref="rootRef"
     :as="as"
     v-bind="$attrs"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="table-root"
   >
     <div

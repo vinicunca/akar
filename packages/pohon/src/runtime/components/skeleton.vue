@@ -12,6 +12,7 @@ export interface PSkeletonProps {
    */
   as?: any;
   class?: any;
+  pohon?: { base?: any };
 }
 </script>
 
@@ -19,11 +20,13 @@ export interface PSkeletonProps {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
 const props = defineProps<PSkeletonProps>();
 
 const appConfig = useAppConfig() as Skeleton['AppConfig'];
+const pohonProp = useComponentPohon('skeleton', props);
 
 const pohon = computed(() =>
   uv({ extend: uv(theme), ...(appConfig.pohon?.skeleton || {}) }),
@@ -37,7 +40,7 @@ const pohon = computed(() =>
     aria-label="loading"
     aria-live="polite"
     role="alert"
-    :class="pohon({ class: props.class })"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
   </APrimitive>

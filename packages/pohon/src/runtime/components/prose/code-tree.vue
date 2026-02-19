@@ -52,6 +52,7 @@ import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
 import { ATreeItem, ATreeRoot } from 'akar';
 import { computed, onBeforeUpdate, ref, watch } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
 import PCodeIcon from './code-icon.vue';
@@ -63,6 +64,7 @@ const emits = defineEmits<ProseCodeTreeEmits>();
 const slots = defineSlots<ProseCodeTreeSlots>();
 
 const appConfig = useAppConfig() as ProseCodeTree['AppConfig'];
+const pohonProp = useComponentPohon('prose.code-tree', props);
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items: Array<TreeNode>; level: number }>();
 
@@ -194,7 +196,7 @@ onBeforeUpdate(() => rerenderCount.value++);
       v-for="(item, index) in items"
       :key="`${level}-${index}`"
       role="presentation"
-      :class="level > 1 ? pohon.itemWithChildren({ class: props.pohon?.itemWithChildren }) : pohon.item({ class: props.pohon?.item })"
+      :class="level > 1 ? pohon.itemWithChildren({ class: pohonProp?.itemWithChildren }) : pohon.item({ class: pohonProp?.item })"
     >
       <ATreeItem
         v-slot="{ isExpanded, isSelected }"
@@ -204,30 +206,30 @@ onBeforeUpdate(() => rerenderCount.value++);
       >
         <button
           type="button"
-          :class="pohon.link({ class: props.pohon?.link, active: isSelected })"
+          :class="pohon.link({ class: pohonProp?.link, active: isSelected })"
         >
           <PIcon
             v-if="item.children?.length"
             :name="isExpanded ? appConfig.pohon.icons.folderOpen : appConfig.pohon.icons.folder"
-            :class="pohon.linkLeadingIcon({ class: props.pohon?.linkLeadingIcon })"
+            :class="pohon.linkLeadingIcon({ class: pohonProp?.linkLeadingIcon })"
           />
           <PCodeIcon
             v-else
             :filename="item.label"
-            :class="pohon.linkLeadingIcon({ class: props.pohon?.linkLeadingIcon })"
+            :class="pohon.linkLeadingIcon({ class: pohonProp?.linkLeadingIcon })"
           />
 
-          <span :class="pohon.linkLabel({ class: props.pohon?.linkLabel })">
+          <span :class="pohon.linkLabel({ class: pohonProp?.linkLabel })">
             {{ item.label }}
           </span>
 
           <span
             v-if="item.children?.length"
-            :class="pohon.linkTrailing({ class: props.pohon?.linkTrailing })"
+            :class="pohon.linkTrailing({ class: pohonProp?.linkTrailing })"
           >
             <PIcon
               :name="appConfig.pohon.icons.chevronDown"
-              :class="pohon.linkTrailingIcon({ class: props.pohon?.linkTrailingIcon })"
+              :class="pohon.linkTrailingIcon({ class: pohonProp?.linkTrailingIcon })"
             />
           </span>
         </button>
@@ -235,7 +237,7 @@ onBeforeUpdate(() => rerenderCount.value++);
         <ul
           v-if="item.children?.length && isExpanded"
           role="group"
-          :class="pohon.listWithChildren({ class: props.pohon?.listWithChildren })"
+          :class="pohon.listWithChildren({ class: pohonProp?.listWithChildren })"
         >
           <ReuseTreeTemplate
             :items="item.children"
@@ -248,11 +250,11 @@ onBeforeUpdate(() => rerenderCount.value++);
 
   <div
     v-bind="$attrs"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <ATreeRoot
       v-model:expanded="expanded"
-      :class="pohon.list({ class: props.pohon?.list })"
+      :class="pohon.list({ class: pohonProp?.list })"
       :items="items"
       :get-key="(item) => item.path"
     >
@@ -262,7 +264,7 @@ onBeforeUpdate(() => rerenderCount.value++);
       />
     </ATreeRoot>
 
-    <div :class="pohon.content({ class: props.pohon?.content })">
+    <div :class="pohon.content({ class: pohonProp?.content })">
       <component :is="lastSelectedItem?.component" />
     </div>
   </div>

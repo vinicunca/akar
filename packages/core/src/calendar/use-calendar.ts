@@ -4,7 +4,7 @@
 
 import type { DateFields, DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { DateGrid, DateMatcher, WeekDayFormat } from '../date';
+import type { DateGrid, DateMatcher, WeekDayFormat, WeekStartsOn } from '../date';
 import type { DateFormatterOptions } from '../shared/use-date-formatter';
 import { isEqualMonth, isSameDay } from '@internationalized/date';
 import { computed, ref, watch } from 'vue';
@@ -22,7 +22,7 @@ import { useDateFormatter } from '../shared';
 export interface UseCalendarProps {
   locale: Ref<string>;
   placeholder: Ref<DateValue>;
-  weekStartsOn: Ref<0 | 1 | 2 | 3 | 4 | 5 | 6>;
+  weekStartsOn: Ref<WeekStartsOn>;
   fixedWeeks: Ref<boolean>;
   numberOfMonths: Ref<number>;
   minValue: Ref<DateValue | undefined>;

@@ -1,6 +1,7 @@
 import type { GetItemKeys } from '../types/utils';
 import { isEmptyish, isFunction, isNullish, isString } from '@vinicunca/perkakas';
 import { isEqual } from 'ohash/utils';
+import { joinURL, withLeadingSlash, withTrailingSlash } from 'ufo';
 
 export function getProp(
   { object, path, defaultValue }:
@@ -70,7 +71,7 @@ export function transformPohon(pohon: any, pohonProp?: any) {
   return Object.entries(pohon)
     .reduce(
       (acc, [key, value]) => {
-        acc[key] = isFunction(value) ? value({ class: pohonProp?.[key] }) : value;
+        acc[key] = typeof value === 'function' ? value({ class: pohonProp?.[key] }) : value;
         return acc;
       },
       pohonProp || {},
@@ -161,4 +162,14 @@ export function getSlotChildrenText(children: any) {
 
     return undefined;
   }).join('');
+}
+
+export function resolveBaseURL(path?: string, baseURL?: string): string | undefined {
+  if (path?.startsWith('/') && !path.startsWith('//')) {
+    const _base = withLeadingSlash(withTrailingSlash(baseURL || '/'));
+    if (_base !== '/' && !path.startsWith(_base)) {
+      return joinURL(_base, path);
+    }
+  }
+  return path;
 }

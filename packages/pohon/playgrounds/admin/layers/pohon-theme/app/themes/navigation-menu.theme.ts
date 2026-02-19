@@ -9,12 +9,12 @@ export const navigationMenuTheme = {
     list: 'isolate min-w-0',
     label: 'w-full flex items-center gap-1.5 font-semibold text-xs/5 color-text-highlighted px-2.5 py-1.5',
     item: 'min-w-0',
-    link: 'group relative w-full flex items-center gap-1.5 font-medium text-sm before:(absolute content-empty -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
+    link: 'group relative w-full flex items-center gap-1.5 font-500 text-sm before:(absolute content-empty -z-1 rounded-md) focus:outline-none focus-visible:outline-none dark:focus-visible:outline-none focus-visible:before:ring-inset focus-visible:before:ring-2',
     linkLeadingIcon: 'shrink-0 size-5',
     linkLeadingAvatar: 'shrink-0',
     linkLeadingAvatarSize: '2xs',
     linkTrailing: 'group ms-auto inline-flex gap-1.5 items-center',
-    linkTrailingBadge: 'shrink-0',
+    linkTrailingBadge: 'shrink-0 akar:rounded-full',
     linkTrailingBadgeSize: 'sm',
     linkTrailingIcon: 'size-5 transform shrink-0 group-data-[state=open]:rotate-180 transition-transform-280',
     linkLabel: 'truncate',
@@ -63,7 +63,7 @@ export const navigationMenuTheme = {
       },
       vertical: {
         root: 'flex-col',
-        link: 'flex-row px-2.5 py-1.5 before:(inset-y-px inset-x-0)',
+        link: 'flex-row px-2.5 py-1.5 h-38px before:(inset-y-px inset-x-0)',
         childLabel: 'px-1.5 py-0.5',
         childLink: 'p-1.5 gap-1.5 before:(inset-y-px inset-x-0)',
       },
@@ -79,6 +79,7 @@ export const navigationMenuTheme = {
     },
     active: {
       true: {
+        link: 'font-600',
         childLink: 'before:bg-background-elevated color-text-highlighted',
         childLinkIcon: 'color-text',
       },
@@ -94,9 +95,21 @@ export const navigationMenuTheme = {
         link: 'cursor-not-allowed opacity-75',
       },
     },
+    childActive: {
+      true: {
+        link: 'font-600',
+      },
+    },
+    collapsed: {
+      true: {
+        item: 'py-1',
+        link: 'justify-center',
+      },
+    },
   },
 
   compoundVariants: [
+    // Orientation horizontal
     {
       orientation: 'horizontal',
       contentOrientation: 'horizontal',
@@ -104,6 +117,7 @@ export const navigationMenuTheme = {
         childList: 'grid-cols-2 gap-2',
       },
     },
+
     {
       orientation: 'horizontal',
       contentOrientation: 'vertical',
@@ -112,6 +126,59 @@ export const navigationMenuTheme = {
         content: 'akar:w-60',
       },
     },
+
+    {
+      orientation: 'horizontal',
+      highlight: true,
+      class: {
+        link: 'after:(content-empty absolute -bottom-2 inset-x-2.5 block h-px rounded-full transition-colors-280)',
+      },
+    },
+
+    {
+      orientation: 'horizontal',
+      disabled: false,
+      variant: 'pill',
+      highlight: false,
+      active: false,
+      class: {
+        link: 'data-[state=open]:before:bg-background-elevated/50',
+      },
+    },
+
+    {
+      orientation: 'horizontal',
+      disabled: false,
+      active: false,
+      variant: 'link',
+      class: {
+        link: 'data-[state=open]:color-text-highlighted',
+        linkLeadingIcon: 'group-data-[state=open]:color-text',
+      },
+    },
+
+    {
+      orientation: 'horizontal',
+      disabled: false,
+      active: false,
+      variant: 'pill',
+      class: {
+        link: 'data-[state=open]:color-text-highlighted',
+        linkLeadingIcon: 'group-data-[state=open]:color-text',
+      },
+    },
+
+    {
+      orientation: 'horizontal',
+      disabled: false,
+      variant: 'pill',
+      highlight: true,
+      class: {
+        link: 'data-[state=open]:before:bg-background-elevated/50',
+      },
+    },
+
+    // Orientation vertical
     {
       orientation: 'vertical',
       collapsed: false,
@@ -122,6 +189,7 @@ export const navigationMenuTheme = {
         link: 'text-left',
       },
     },
+
     {
       orientation: 'vertical',
       collapsed: true,
@@ -132,13 +200,16 @@ export const navigationMenuTheme = {
         content: 'shadow-sm rounded-sm min-h-6 p-1',
       },
     },
+
     {
-      orientation: 'horizontal',
-      highlight: true,
+      orientation: 'vertical',
+      collapsed: true,
+      childActive: true,
       class: {
-        link: 'after:(content-empty absolute -bottom-2 inset-x-2.5 block h-px rounded-full transition-colors-280)',
+        link: 'before:bg-primary/20',
       },
     },
+
     {
       orientation: 'vertical',
       highlight: true,
@@ -147,62 +218,59 @@ export const navigationMenuTheme = {
         link: 'after:(content-empty absolute -start-1.5 inset-y-0.5 block w-px rounded-full transition-colors-280) text-left',
       },
     },
+
+    // Variant pill
     {
+      variant: 'pill',
       disabled: false,
       active: false,
-      variant: 'pill',
       class: {
-        link: 'hover:color-text-highlighted hover:before:bg-background-elevated/50 transition-colors-280 before:transition-colors-280',
-        linkLeadingIcon: 'group-hover:color-text transition-colors-280',
+        link: 'hover:color-text-highlighted hover:before:bg-background-elevated transition-colors-280 before:transition-colors-280 data-[state=open]:color-text-highlighted',
+        linkLeadingIcon: 'group-hover:color-text transition-colors-280 group-data-[state=open]:color-text-highlighted',
       },
     },
+
     {
+      variant: 'pill',
       disabled: false,
       active: false,
-      variant: 'pill',
-      orientation: 'horizontal',
+      childActive: true,
       class: {
-        link: 'data-[state=open]:color-text-highlighted',
-        linkLeadingIcon: 'group-data-[state=open]:color-text',
+        link: 'hover:before:bg-primary/40',
       },
     },
-    {
-      disabled: false,
-      variant: 'pill',
-      highlight: true,
-      orientation: 'horizontal',
-      class: {
-        link: 'data-[state=open]:before:bg-background-elevated/50',
-      },
-    },
-    {
-      disabled: false,
-      variant: 'pill',
-      highlight: false,
-      active: false,
-      orientation: 'horizontal',
-      class: {
-        link: 'data-[state=open]:before:bg-background-elevated/50',
-      },
-    },
+
     ...BRANDS.map((color) => ({
-      color,
       variant: 'pill',
+      color,
       active: true,
       class: {
         link: `color-${color}`,
         linkLeadingIcon: `color-${color} group-data-[state=open]:color-${color}`,
       },
     })),
-    {
-      color: 'neutral',
+
+    ...BRANDS.map((color) => ({
       variant: 'pill',
+      color,
+      childActive: true,
+      active: false,
+      class: {
+        link: `akar:color-${color}`,
+        linkLeadingIcon: `akar:color-${color} akar:group-data-[state=open]:color-${color}`,
+      },
+    })),
+
+    {
+      variant: 'pill',
+      color: 'neutral',
       active: true,
       class: {
         link: 'color-text-highlighted',
         linkLeadingIcon: 'color-text-highlighted group-data-[state=open]:color-text-highlighted',
       },
     },
+
     {
       variant: 'pill',
       active: true,
@@ -211,6 +279,7 @@ export const navigationMenuTheme = {
         link: 'before:bg-background-elevated',
       },
     },
+
     {
       variant: 'pill',
       active: true,
@@ -220,43 +289,38 @@ export const navigationMenuTheme = {
         link: 'hover:before:bg-background-elevated/50 before:transition-colors-280',
       },
     },
+
+    // Variant link
     {
+      variant: 'link',
       disabled: false,
       active: false,
-      variant: 'link',
       class: {
         link: 'hover:color-text-highlighted transition-colors-280',
         linkLeadingIcon: 'group-hover:color-text transition-colors-280',
       },
     },
-    {
-      disabled: false,
-      active: false,
-      variant: 'link',
-      orientation: 'horizontal',
-      class: {
-        link: 'data-[state=open]:color-text-highlighted',
-        linkLeadingIcon: 'group-data-[state=open]:color-text',
-      },
-    },
+
     ...BRANDS.map((color) => ({
-      color,
       variant: 'link',
+      color,
       active: true,
       class: {
         link: `color-${color}`,
         linkLeadingIcon: `color-${color} group-data-[state=open]:color-${color}`,
       },
     })),
+
     {
-      color: 'neutral',
       variant: 'link',
+      color: 'neutral',
       active: true,
       class: {
         link: 'color-text-highlighted',
         linkLeadingIcon: 'color-text-highlighted group-data-[state=open]:color-text-highlighted',
       },
     },
+
     ...BRANDS.map((color) => ({
       highlightColor: color,
       highlight: true,
@@ -266,6 +330,7 @@ export const navigationMenuTheme = {
         link: `after:bg-${color}`,
       },
     })),
+
     {
       highlightColor: 'neutral',
       highlight: true,

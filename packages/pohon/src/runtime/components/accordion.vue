@@ -75,6 +75,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
@@ -92,6 +93,7 @@ const emits = defineEmits<PAccordionEmits>();
 const slots = defineSlots<PAccordionSlots<T>>();
 
 const appConfig = useAppConfig() as Accordion['AppConfig'];
+const pohonProp = useComponentPohon('accordion', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -121,7 +123,7 @@ const pohon = computed(() =>
     v-bind="rootProps"
     :type="type"
     :class="pohon.root({
-      class: [props.pohon?.root, props.class],
+      class: [pohonProp?.root, props.class],
     })"
     data-pohon="accordion-root"
   >
@@ -132,18 +134,18 @@ const pohon = computed(() =>
       :value="item.value || String(index)"
       :disabled="item.disabled"
       :class="pohon.item({
-        class: [props.pohon?.item, item.pohon?.item, item.class],
+        class: [pohonProp?.item, item.pohon?.item, item.class],
       })"
       data-pohon="accordion-item"
     >
       <AAccordionHeader
         as="div"
-        :class="pohon.header({ class: [props.pohon?.header, item.pohon?.header] })"
+        :class="pohon.header({ class: [pohonProp?.header, item.pohon?.header] })"
         data-pohon="accordion-header"
       >
         <AAccordionTrigger
           :class="pohon.trigger({
-            class: [props.pohon?.trigger, item.pohon?.trigger], disabled: item.disabled,
+            class: [pohonProp?.trigger, item.pohon?.trigger], disabled: item.disabled,
           })"
           data-pohon="accordion-trigger"
         >
@@ -157,14 +159,14 @@ const pohon = computed(() =>
             <PIcon
               v-if="item.icon"
               :name="item.icon"
-              :class="pohon.leadingIcon({ class: [props.pohon?.leadingIcon, item?.pohon?.leadingIcon] })"
+              :class="pohon.leadingIcon({ class: [pohonProp?.leadingIcon, item?.pohon?.leadingIcon] })"
               data-pohon="accordion-leading-icon"
             />
           </slot>
 
           <span
             v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots.default"
-            :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label] })"
+            :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label] })"
             data-pohon="accordion-label"
           >
             <slot
@@ -183,7 +185,7 @@ const pohon = computed(() =>
           >
             <PIcon
               :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
-              :class="pohon.trailingIcon({ class: [props.pohon?.trailingIcon, item.pohon?.trailingIcon] })"
+              :class="pohon.trailingIcon({ class: [pohonProp?.trailingIcon, item.pohon?.trailingIcon] })"
               data-pohon="accordion-trailing-icon"
             />
           </slot>
@@ -192,18 +194,18 @@ const pohon = computed(() =>
 
       <AAccordionContent
         v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof PAccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof PAccordionSlots<T>])"
-        :class="pohon.content({ class: [props.pohon?.content, item.pohon?.content] })"
+        :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content] })"
         data-pohon="accordion-content"
       >
         <slot
           :name="((item.slot || 'content') as keyof PAccordionSlots<T>)"
-          :item="item as Extract<T, { slot: string; }>"
+          :item="(item as Extract<T, { slot: string; }>)"
           :index="index"
           :open="open"
           :pohon="pohon"
         >
           <div
-            :class="pohon.body({ class: [props.pohon?.body, item.pohon?.body] })"
+            :class="pohon.body({ class: [pohonProp?.body, item.pohon?.body] })"
             data-pohon="accordion-body"
           >
             <slot

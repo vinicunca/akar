@@ -1,9 +1,9 @@
-import type { CardProps, CardSlots } from '../../src/runtime/components/Card.vue';
+import type { PCardProps, PCardSlots } from '../../src/runtime/components/card.vue';
 import theme from '#build/pohon/card';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Card from '../../src/runtime/components/Card.vue';
+import Card from '../../src/runtime/components/card.vue';
 import ComponentRender from '../component-render';
 
 describe('Card', () => {
@@ -19,7 +19,7 @@ describe('Card', () => {
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with header slot', { slots: { header: () => 'Header slot' } }],
     ['with footer slot', { slots: { footer: () => 'Footer slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CardProps; slots?: Partial<CardSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PCardProps; slots?: Partial<PCardSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Card);
     expect(html).toMatchSnapshot();
   });

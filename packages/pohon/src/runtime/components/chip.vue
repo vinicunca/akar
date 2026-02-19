@@ -49,6 +49,7 @@ import { useAppConfig } from '#imports';
 import { APrimitive, APrimitiveSlot } from 'akar';
 import { computed } from 'vue';
 import { useAvatarGroup } from '../composables/use-avatar-group';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
 defineOptions({ inheritAttrs: false });
@@ -67,6 +68,7 @@ const show = defineModel<boolean>('show', { default: true });
 
 const { size } = useAvatarGroup(props);
 const appConfig = useAppConfig() as Chip['AppConfig'];
+const pohonProp = useComponentPohon('chip', props);
 
 const pohon = computed(() =>
   uv({
@@ -85,7 +87,7 @@ const pohon = computed(() =>
 <template>
   <APrimitive
     :as="as"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="chip-root"
   >
     <APrimitiveSlot v-bind="$attrs">
@@ -94,7 +96,7 @@ const pohon = computed(() =>
 
     <span
       v-if="show"
-      :class="pohon.base({ class: props.pohon?.base })"
+      :class="pohon.base({ class: pohonProp?.base })"
       data-pohon="chip-base"
     >
       <slot name="content">

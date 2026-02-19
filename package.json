@@ -2,7 +2,7 @@
   "name": "akar-ui-monorepo",
   "type": "module",
   "version": "1.11.0",
-  "packageManager": "pnpm@10.28.0",
+  "packageManager": "pnpm@10.29.2",
   "license": "MIT",
   "repository": "vinicunca/akar",
   "workspaces": [

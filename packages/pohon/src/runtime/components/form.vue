@@ -73,6 +73,7 @@ export type PFormProps<S extends FormSchema, T extends boolean = true, N extends
    */
   loadingAuto?: boolean;
   class?: any;
+  pohon?: { base?: any };
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>);
 } & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>;
 
@@ -100,7 +101,9 @@ import {
   readonly,
   ref,
   useId,
+  useTemplateRef,
 } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import {
   formBusInjectionKey,
   formErrorsInjectionKey,
@@ -132,12 +135,14 @@ const emits = defineEmits<PFormEmits<S, T>>();
 defineSlots<PFormSlots>();
 
 const appConfig = useAppConfig() as FormConfig['AppConfig'];
+const pohonProp = useComponentPohon('form', props);
 
 const pohon = computed(() =>
   uv({ extend: uv(theme), ...(appConfig.pohon?.form || {}) }),
 );
 
 const formId = props.id ?? useId() as string;
+const formRef = useTemplateRef('formRef');
 
 const bus = useEventBus<FormEvent<I>>(`form-${formId}`);
 
@@ -205,8 +210,7 @@ onMounted(async () => {
     }
 
     if (event.type === 'change'
-      || event.type === 'input'
-    ) {
+      || event.type === 'input') {
       dirtyFields.add(event.name);
     }
   });
@@ -471,6 +475,10 @@ const api = {
   },
 
   async submit() {
+    if (formRef.value instanceof HTMLFormElement && formRef.value.reportValidity() === false) {
+      return;
+    }
+
     await onSubmitWrapper(new Event('submit'));
   },
 
@@ -524,7 +532,8 @@ defineExpose(api);
   <component
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
-    :class="pohon({ class: props.class })"
+    ref="formRef"
+    :class="pohon({ class: [pohonProp.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot

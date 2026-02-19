@@ -56,6 +56,7 @@ import {
   useForwardProps,
 } from 'akar';
 import { computed, provide, ref, toRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { usePortal } from '../composables/use-portal';
 import { toastMaxInjectionKey, useToast } from '../composables/use-toast';
 import { uv } from '../utils/uv';
@@ -76,6 +77,8 @@ defineSlots<PToasterSlots>();
 
 const { toasts, remove } = useToast();
 const appConfig = useAppConfig() as Toaster['AppConfig'];
+const pohonProp = useComponentPohon('toaster', props);
+
 provide(toastMaxInjectionKey, toRef(() => props.max));
 
 const providerProps = useForwardProps(
@@ -142,10 +145,11 @@ function getOffset(index: number) {
       :key="toast.id"
       ref="refs"
       :progress="progress"
-      v-bind="omit(toast, ['id', 'close'])"
+      v-bind="omit(toast, ['id', 'close', '_duplicate', '_updated'])"
       :close="(toast.close as boolean)"
       :data-expanded="expanded"
       :data-front="!expanded && index === toasts.length - 1"
+      :data-pulsing="toast._duplicate ? (toast._duplicate % 2 === 0 ? 'even' : 'odd') : undefined"
       :style="{
         '--index': (index - toasts.length) + toasts.length,
         '--before': toasts.length - 1 - index,
@@ -154,7 +158,7 @@ function getOffset(index: number) {
         '--translate': expanded ? 'calc(var(--offset) * var(--translate-factor))' : 'calc(var(--before) * var(--gap))',
         '--transform': 'translateY(var(--translate)) scale(var(--scale))',
       }"
-      :class="pohon.base({ class: [props.pohon?.base, toast.onClick ? 'cursor-pointer' : undefined] })"
+      :class="pohon.base({ class: [pohonProp?.base, toast.onClick ? 'cursor-pointer' : undefined] })"
       data-pohon="toaster-base"
       @update:open="onUpdateOpen($event, toast.id)"
       @click="toast.onClick && toast.onClick(toast)"
@@ -163,7 +167,7 @@ function getOffset(index: number) {
     <AToastPortal v-bind="portalProps">
       <AToastViewport
         :data-expanded="expanded"
-        :class="pohon.viewport({ class: [props.pohon?.viewport, props.class] })"
+        :class="pohon.viewport({ class: [pohonProp?.viewport, props.class] })"
         data-pohon="toaster-viewport"
         :style="{
           '--scale-factor': '0.05',

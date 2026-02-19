@@ -44,6 +44,7 @@ export interface PUserSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PChip from './chip.vue';
@@ -60,6 +61,7 @@ const props = withDefaults(
 const slots = defineSlots<PUserSlots>();
 
 const appConfig = useAppConfig() as User['AppConfig'];
+const pohonProp = useComponentPohon('user', props);
 
 const pohon = computed(() =>
   uv({
@@ -77,7 +79,7 @@ const pohon = computed(() =>
   <APrimitive
     :as="as"
     :data-orientation="orientation"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="user-root"
     @click="onClick"
   >
@@ -95,7 +97,7 @@ const pohon = computed(() =>
           :alt="name"
           v-bind="avatar"
           :size="size"
-          :class="pohon.avatar({ class: props.pohon?.avatar })"
+          :class="pohon.avatar({ class: pohonProp?.avatar })"
           data-pohon="user-avatar"
         />
       </PChip>
@@ -104,13 +106,13 @@ const pohon = computed(() =>
         :alt="name"
         v-bind="avatar"
         :size="size"
-        :class="pohon.avatar({ class: props.pohon?.avatar })"
+        :class="pohon.avatar({ class: pohonProp?.avatar })"
         data-pohon="user-avatar"
       />
     </slot>
 
     <div
-      :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+      :class="pohon.wrapper({ class: pohonProp?.wrapper })"
       data-pohon="user-wrapper"
     >
       <PLink
@@ -130,7 +132,7 @@ const pohon = computed(() =>
       <slot>
         <p
           v-if="name || !!slots.name"
-          :class="pohon.name({ class: props.pohon?.name })"
+          :class="pohon.name({ class: pohonProp?.name })"
           data-pohon="user-name"
         >
           <slot name="name">
@@ -139,7 +141,7 @@ const pohon = computed(() =>
         </p>
         <p
           v-if="description || !!slots.description"
-          :class="pohon.description({ class: props.pohon?.description })"
+          :class="pohon.description({ class: pohonProp?.description })"
           data-pohon="user-description"
         >
           <slot name="description">

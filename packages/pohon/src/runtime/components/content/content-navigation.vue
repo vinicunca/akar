@@ -103,6 +103,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { mapContentNavigationItem } from '../../utils/content';
 import { pickLinkProps } from '../../utils/link';
 import { uv } from '../../utils/uv';
@@ -136,6 +137,7 @@ const rootProps = useForwardPropsEmits(
 
 const route = useRoute();
 const appConfig = useAppConfig() as ContentNavigation['AppConfig'];
+const pohonProp = useComponentPohon('contentNavigation', props);
 
 const [
   DefineLinkTemplate,
@@ -208,7 +210,7 @@ const defaultValue = computed(() => {
           v-if="link.icon"
           :name="link.icon"
           :class="pohon.linkLeadingIcon({
-            class: [props.pohon?.linkLeadingIcon, link.pohon?.linkLeadingIcon],
+            class: [pohonProp?.linkLeadingIcon, link.pohon?.linkLeadingIcon],
             active,
           })"
         />
@@ -217,7 +219,7 @@ const defaultValue = computed(() => {
       <span
         v-if="link.title || !!slots['link-title']"
         :class="pohon.linkTitle({
-          class: [props.pohon?.linkTitle, link.pohon?.linkTitle],
+          class: [pohonProp?.linkTitle, link.pohon?.linkTitle],
           active,
         })"
       >
@@ -234,7 +236,7 @@ const defaultValue = computed(() => {
           v-if="link.target === '_blank'"
           :name="appConfig.pohon.icons.external"
           :class="pohon.linkTitleExternalIcon({
-            class: [props.pohon?.linkTitleExternalIcon, link.pohon?.linkTitleExternalIcon],
+            class: [pohonProp?.linkTitleExternalIcon, link.pohon?.linkTitleExternalIcon],
             active,
           })"
         />
@@ -242,7 +244,7 @@ const defaultValue = computed(() => {
 
       <span
         v-if="(link.badge || link.badge === 0) || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']"
-        :class="pohon.linkTrailing({ class: [props.pohon?.linkTrailing, link.pohon?.linkTrailing] })"
+        :class="pohon.linkTrailing({ class: [pohonProp?.linkTrailing, link.pohon?.linkTrailing] })"
       >
         <slot
           name="link-trailing"
@@ -254,22 +256,22 @@ const defaultValue = computed(() => {
             v-if="(link.badge || link.badge === 0)"
             color="neutral"
             variant="outline"
-            :size="((props.pohon?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
+            :size="((pohonProp?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(link.badge) || isNumber(link.badge)) ? { label: link.badge } : link.badge"
-            :class="pohon.linkTrailingBadge({ class: props.pohon?.linkTrailingBadge })"
+            :class="pohon.linkTrailingBadge({ class: pohonProp?.linkTrailingBadge })"
           />
           <PIcon
             v-if="link.children?.length && !disabled"
             :name="link.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
             :class="pohon.linkTrailingIcon({
-              class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
+              class: [pohonProp?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
             })"
           />
           <PIcon
             v-else-if="link.trailingIcon"
             :name="link.trailingIcon"
             :class="pohon.linkTrailingIcon({
-              class: [props.pohon?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
+              class: [pohonProp?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
             })"
           />
         </slot>
@@ -281,14 +283,14 @@ const defaultValue = computed(() => {
     :as="as"
     v-bind="$attrs"
     :as-child="level > 0"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <AAccordionRoot
       as="ul"
       :disabled="disabled"
       v-bind="rootProps"
       :default-value="defaultValue"
-      :class="level > 0 ? pohon.listWithChildren({ class: props.pohon?.listWithChildren }) : pohon.list({ class: props.pohon?.list })"
+      :class="level > 0 ? pohon.listWithChildren({ class: pohonProp?.listWithChildren }) : pohon.list({ class: pohonProp?.list })"
     >
       <template
         v-for="(link, index) in navigation"
@@ -298,7 +300,7 @@ const defaultValue = computed(() => {
           v-if="link.children?.length"
           as="li"
           :class="pohon.itemWithChildren({
-            class: [props.pohon?.itemWithChildren, link.pohon?.itemWithChildren],
+            class: [pohonProp?.itemWithChildren, link.pohon?.itemWithChildren],
             level: level > 0,
           })"
           :value="String(index)"
@@ -307,12 +309,12 @@ const defaultValue = computed(() => {
             as="button"
             :class="[
               pohon.link({
-                class: [props.pohon?.link, link.pohon?.link, link.class],
+                class: [pohonProp?.link, link.pohon?.link, link.class],
                 active: link.active,
                 disabled: !!link.disabled || disabled,
               }),
               pohon.trigger({
-                class: [props.pohon?.trigger, link.pohon?.trigger],
+                class: [pohonProp?.trigger, link.pohon?.trigger],
                 disabled,
               }),
             ]"
@@ -324,7 +326,7 @@ const defaultValue = computed(() => {
           </AAccordionTrigger>
 
           <AAccordionContent
-            :class="pohon.content({ class: [props.pohon?.content, link.pohon?.content] })"
+            :class="pohon.content({ class: [pohonProp?.content, link.pohon?.content] })"
           >
             <PContentNavigation
               v-bind="rootProps"
@@ -344,7 +346,7 @@ const defaultValue = computed(() => {
               >
                 <slot
                   :name="name"
-                  v-bind="{ ...slotData, link: link as T }"
+                  v-bind="{ ...slotData, link: slotData.link as T }"
                 />
               </template>
             </PContentNavigation>
@@ -353,7 +355,7 @@ const defaultValue = computed(() => {
 
         <li
           v-else
-          :class="pohon.item({ class: [props.pohon?.item, link.pohon?.item], level: level > 0 })"
+          :class="pohon.item({ class: [pohonProp?.item, link.pohon?.item], level: level > 0 })"
         >
           <PLink
             v-slot="{ active, ...slotProps }"
@@ -363,7 +365,7 @@ const defaultValue = computed(() => {
             <PLinkBase
               v-bind="slotProps"
               :class="pohon.link({
-                class: [props.pohon?.link, link.pohon?.link, link.class],
+                class: [pohonProp?.link, link.pohon?.link, link.class],
                 active,
                 disabled: !!link.disabled,
                 level: level > 0,

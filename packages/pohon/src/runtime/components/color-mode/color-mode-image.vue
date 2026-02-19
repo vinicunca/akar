@@ -8,19 +8,26 @@ export interface PColorModeImageProps extends /** @vue-ignore */ Omit<ImgHTMLAtt
 </script>
 
 <script setup lang="ts">
+import { useRuntimeConfig } from '#imports';
+import { computed } from 'vue';
+import { resolveBaseURL } from '../../utils';
+
 defineOptions({ inheritAttrs: false });
 
-defineProps<PColorModeImageProps>();
+const props = defineProps<PColorModeImageProps>();
+
+const refinedLight = computed(() => resolveBaseURL(props.light, useRuntimeConfig().app.baseURL));
+const refinedDark = computed(() => resolveBaseURL(props.dark, useRuntimeConfig().app.baseURL));
 </script>
 
 <template>
   <img
-    :src="light"
+    :src="refinedLight"
     class="dark:hidden"
     v-bind="$attrs"
   >
   <img
-    :src="dark"
+    :src="refinedDark"
     class="hidden dark:block"
     v-bind="$attrs"
   >

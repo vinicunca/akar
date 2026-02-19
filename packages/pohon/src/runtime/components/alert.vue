@@ -74,6 +74,7 @@ export interface PAlertSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
@@ -91,6 +92,7 @@ const slots = defineSlots<PAlertSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Alert['AppConfig'];
+const pohonProp = useComponentPohon('alert', props);
 
 const pohon = computed(() =>
   uv({
@@ -109,7 +111,7 @@ const pohon = computed(() =>
   <APrimitive
     :as="as"
     :data-orientation="orientation"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="alert-root"
   >
     <slot
@@ -118,26 +120,26 @@ const pohon = computed(() =>
     >
       <PAvatar
         v-if="avatar"
-        :size="((props.pohon?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
+        :size="((pohonProp?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
-        :class="pohon.avatar({ class: props.pohon?.avatar })"
+        :class="pohon.avatar({ class: pohonProp?.avatar })"
         data-pohon="alert-avatar"
       />
       <PIcon
         v-else-if="icon"
         :name="icon"
-        :class="pohon.icon({ class: props.pohon?.icon })"
+        :class="pohon.icon({ class: pohonProp?.icon })"
         data-pohon="alert-icon"
       />
     </slot>
 
     <div
-      :class="pohon.wrapper({ class: props.pohon?.wrapper })"
+      :class="pohon.wrapper({ class: pohonProp?.wrapper })"
       data-pohon="alert-wrapper"
     >
       <div
         v-if="title || !!slots.title"
-        :class="pohon.title({ class: props.pohon?.title })"
+        :class="pohon.title({ class: pohonProp?.title })"
         data-pohon="alert-title"
       >
         <slot name="title">
@@ -146,7 +148,7 @@ const pohon = computed(() =>
       </div>
       <div
         v-if="description || !!slots.description"
-        :class="pohon.description({ class: props.pohon?.description })"
+        :class="pohon.description({ class: pohonProp?.description })"
         data-pohon="alert-description"
       >
         <slot name="description">
@@ -156,7 +158,7 @@ const pohon = computed(() =>
 
       <div
         v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)"
-        :class="pohon.actions({ class: props.pohon?.actions })"
+        :class="pohon.actions({ class: pohonProp?.actions })"
         data-pohon="alert-actions"
       >
         <slot name="actions">
@@ -172,7 +174,7 @@ const pohon = computed(() =>
 
     <div
       v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close"
-      :class="pohon.actions({ class: props.pohon?.actions, orientation: 'horizontal' })"
+      :class="pohon.actions({ class: pohonProp?.actions, orientation: 'horizontal' })"
       data-pohon="alert-actions-actions"
     >
       <template v-if="orientation === 'horizontal' && (actions?.length || !!slots.actions)">
@@ -197,7 +199,7 @@ const pohon = computed(() =>
           variant="link"
           :aria-label="t('alert.close')"
           v-bind="typeof close === 'object' ? close : {}"
-          :class="pohon.close({ class: props.pohon?.close })"
+          :class="pohon.close({ class: pohonProp?.close })"
           data-pohon="alert-close"
           @click="emits('update:open', false)"
         />

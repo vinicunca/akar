@@ -83,6 +83,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, toRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { usePortal } from '../composables/use-portal';
 import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
@@ -102,6 +103,7 @@ const emits = defineEmits<PDrawerEmits>();
 const slots = defineSlots<PDrawerSlots>();
 
 const appConfig = useAppConfig() as Drawer['AppConfig'];
+const pohonProp = useComponentPohon('drawer', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -177,19 +179,19 @@ const pohon = computed(() =>
     <ADrawerPortal v-bind="portalProps">
       <ADrawerOverlay
         v-if="overlay"
-        :class="pohon.overlay({ class: props.pohon?.overlay })"
+        :class="pohon.overlay({ class: pohonProp?.overlay })"
         data-pohon="drawer-overlay"
       />
 
       <ADrawerContent
-        :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
+        :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
         v-bind="contentProps"
         data-pohon="drawer-content"
         v-on="contentEvents"
       >
         <ADrawerHandle
           v-if="handle"
-          :class="pohon.handle({ class: props.pohon?.handle })"
+          :class="pohon.handle({ class: pohonProp?.handle })"
           data-pohon="drawer-handle"
         />
 
@@ -209,18 +211,18 @@ const pohon = computed(() =>
 
         <slot name="content">
           <div
-            :class="pohon.container({ class: props.pohon?.container })"
+            :class="pohon.container({ class: pohonProp?.container })"
             data-pohon="drawer-container"
           >
             <div
               v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)"
-              :class="pohon.header({ class: props.pohon?.header })"
+              :class="pohon.header({ class: pohonProp?.header })"
               data-pohon="drawer-header"
             >
               <slot name="header">
                 <ADrawerTitle
                   v-if="title || !!slots.title"
-                  :class="pohon.title({ class: props.pohon?.title })"
+                  :class="pohon.title({ class: pohonProp?.title })"
                   data-pohon="drawer-title"
                 >
                   <slot name="title">
@@ -230,7 +232,7 @@ const pohon = computed(() =>
 
                 <ADrawerDescription
                   v-if="description || !!slots.description"
-                  :class="pohon.description({ class: props.pohon?.description })"
+                  :class="pohon.description({ class: pohonProp?.description })"
                   data-pohon="drawer-description"
                 >
                   <slot name="description">
@@ -242,7 +244,7 @@ const pohon = computed(() =>
 
             <div
               v-if="!!slots.body"
-              :class="pohon.body({ class: props.pohon?.body })"
+              :class="pohon.body({ class: pohonProp?.body })"
               data-pohon="drawer-body"
             >
               <slot name="body" />
@@ -250,7 +252,7 @@ const pohon = computed(() =>
 
             <div
               v-if="!!slots.footer"
-              :class="pohon.footer({ class: props.pohon?.footer })"
+              :class="pohon.footer({ class: pohonProp?.footer })"
               data-pohon="drawer-footer"
             >
               <slot name="footer" />

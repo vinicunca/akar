@@ -99,6 +99,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, toRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { usePortal } from '../composables/use-portal';
 import { pointerDownOutside } from '../utils/overlay';
@@ -122,6 +123,7 @@ const slots = defineSlots<PSlideoverSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Slideover['AppConfig'];
+const pohonProp = useComponentPohon('slideover', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(props, 'open', 'defaultOpen', 'modal'),
@@ -175,13 +177,13 @@ const pohon = computed(() =>
     <ADialogPortal v-bind="portalProps">
       <ADialogOverlay
         v-if="overlay"
-        :class="pohon.overlay({ class: props.pohon?.overlay })"
+        :class="pohon.overlay({ class: pohonProp?.overlay })"
         data-pohon="slideover-overlay"
       />
 
       <ADialogContent
         :data-side="side"
-        :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
+        :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
         v-bind="contentProps"
         data-pohon="slideover-content"
         @after-enter="emits('after:enter')"
@@ -208,17 +210,17 @@ const pohon = computed(() =>
         >
           <div
             v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)"
-            :class="pohon.header({ class: props.pohon?.header })"
+            :class="pohon.header({ class: pohonProp?.header })"
             data-pohon="slideover-header"
           >
             <slot
               name="header"
               :close="close"
             >
-              <div :class="pohon.wrapper({ class: props.pohon?.wrapper })">
+              <div :class="pohon.wrapper({ class: pohonProp?.wrapper })">
                 <ADialogTitle
                   v-if="title || !!slots.title"
-                  :class="pohon.title({ class: props.pohon?.title })"
+                  :class="pohon.title({ class: pohonProp?.title })"
                   data-pohon="slideover-title"
                 >
                   <slot name="title">
@@ -228,7 +230,7 @@ const pohon = computed(() =>
 
                 <ADialogDescription
                   v-if="description || !!slots.description"
-                  :class="pohon.description({ class: props.pohon?.description })"
+                  :class="pohon.description({ class: pohonProp?.description })"
                   data-pohon="slideover-description"
                 >
                   <slot name="description">
@@ -254,7 +256,7 @@ const pohon = computed(() =>
                     variant="ghost"
                     :aria-label="t('slideover.close')"
                     v-bind="(typeof props.close === 'object' ? props.close : {})"
-                    :class="pohon.close({ class: props.pohon?.close })"
+                    :class="pohon.close({ class: pohonProp?.close })"
                     data-pohon="slideover-close"
                   />
                 </slot>
@@ -263,7 +265,7 @@ const pohon = computed(() =>
           </div>
 
           <div
-            :class="pohon.body({ class: props.pohon?.body })"
+            :class="pohon.body({ class: pohonProp?.body })"
             data-pohon="slideover-body"
           >
             <slot
@@ -274,7 +276,7 @@ const pohon = computed(() =>
 
           <div
             v-if="!!slots.footer"
-            :class="pohon.footer({ class: props.pohon?.footer })"
+            :class="pohon.footer({ class: pohonProp?.footer })"
             data-pohon="slideover-footer"
           >
             <slot

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`navigationMenu > renders with arrow correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with arrow correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -53,8 +53,8 @@ exports[`navigationMenu > renders with arrow correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with as correctly 1`] = `
-"<section aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with as correctly 1`] = `
+"<section data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -101,8 +101,8 @@ exports[`navigationMenu > renders with as correctly 1`] = `
 </section>"
 `;
 
-exports[`navigationMenu > renders with class correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" class="w-48" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with class correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" class="w-48" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -149,8 +149,8 @@ exports[`navigationMenu > renders with class correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with content orientation vertical correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with content orientation vertical correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -198,8 +198,8 @@ exports[`navigationMenu > renders with content orientation vertical correctly 1`
 </nav>"
 `;
 
-exports[`navigationMenu > renders with custom slot correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with custom slot correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -246,8 +246,57 @@ exports[`navigationMenu > renders with custom slot correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with externalIcon correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with defaultValue correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+  <div style="position: relative;">
+    <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" id="akar-navigation-menu-v-0-0-0-trigger-item-1" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="akar-navigation-menu-v-0-0-0-content-item-1" data-akar-collection-item=""><span class="iconify i-lucide:book-open" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Documentation<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><span class="" data-pohon="navigation-menu-link-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">10</span>
+          <!--v-if--></span><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span>
+        </button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" id="akar-navigation-menu-v-0-0-0-trigger-item-2" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="akar-navigation-menu-v-0-0-0-content-item-2" data-akar-collection-item=""><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Components<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><!--v-if--><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span></button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="navigation-menu-link-label-external-icon"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" disabled="" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="" data-pohon="navigation-menu-viewport-wrapper">
+    <!--v-if-->
+    <div class="" data-pohon="navigation-menu-viewport" data-state="open" data-orientation="horizontal">
+      <!---->
+      <!---->
+    </div>
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders with externalIcon correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -294,8 +343,8 @@ exports[`navigationMenu > renders with externalIcon correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with item slot correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with item slot correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -336,8 +385,8 @@ exports[`navigationMenu > renders with item slot correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with item-label slot correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with item-label slot correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -384,8 +433,8 @@ exports[`navigationMenu > renders with item-label slot correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with item-leading slot correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with item-leading slot correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -432,8 +481,8 @@ exports[`navigationMenu > renders with item-leading slot correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with item-trailing slot correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with item-trailing slot correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -474,8 +523,8 @@ exports[`navigationMenu > renders with item-trailing slot correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with items correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with items correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -522,8 +571,8 @@ exports[`navigationMenu > renders with items correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with labelKey correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with labelKey correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -570,8 +619,8 @@ exports[`navigationMenu > renders with labelKey correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with modelValue correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with modelValue correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -619,8 +668,8 @@ exports[`navigationMenu > renders with modelValue correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with neutral variant link correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with neutral variant link correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -667,8 +716,8 @@ exports[`navigationMenu > renders with neutral variant link correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with neutral variant link highlight correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with neutral variant link highlight correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -715,8 +764,8 @@ exports[`navigationMenu > renders with neutral variant link highlight correctly 
 </nav>"
 `;
 
-exports[`navigationMenu > renders with neutral variant link highlight neutral correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with neutral variant link highlight neutral correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -763,8 +812,8 @@ exports[`navigationMenu > renders with neutral variant link highlight neutral co
 </nav>"
 `;
 
-exports[`navigationMenu > renders with neutral variant pill correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with neutral variant pill correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -811,8 +860,8 @@ exports[`navigationMenu > renders with neutral variant pill correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with neutral variant pill highlight correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with neutral variant pill highlight correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -859,8 +908,8 @@ exports[`navigationMenu > renders with neutral variant pill highlight correctly 
 </nav>"
 `;
 
-exports[`navigationMenu > renders with neutral variant pill highlight neutral correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with neutral variant pill highlight neutral correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -907,8 +956,8 @@ exports[`navigationMenu > renders with neutral variant pill highlight neutral co
 </nav>"
 `;
 
-exports[`navigationMenu > renders with orientation vertical and collapsed correctly 1`] = `
-"<nav aria-label="Main" data-orientation="vertical" dir="ltr" data-akar-navigation-menu="" data-collapsed="true" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with orientation vertical and collapsed correctly 1`] = `
+"<nav data-orientation="vertical" dir="ltr" data-akar-navigation-menu="" data-collapsed="true" data-pohon="navigation-menu-root">
   <ul data-pohon="navigation-menu-list">
     <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
     <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-lucide:book-open" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Documentation<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><span class="" data-pohon="navigation-menu-link-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">10</span>
@@ -942,8 +991,8 @@ exports[`navigationMenu > renders with orientation vertical and collapsed correc
 </nav>"
 `;
 
-exports[`navigationMenu > renders with orientation vertical correctly 1`] = `
-"<nav aria-label="Main" data-orientation="vertical" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with orientation vertical correctly 1`] = `
+"<nav data-orientation="vertical" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <ul data-pohon="navigation-menu-list">
     <li data-state="closed" data-orientation="vertical" class="" data-pohon="navigation-menu-item">
       <div class="" data-pohon="navigation-menu-label">
@@ -987,8 +1036,8 @@ exports[`navigationMenu > renders with orientation vertical correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with primary variant link correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with pohon correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -1035,8 +1084,8 @@ exports[`navigationMenu > renders with primary variant link correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with primary variant link highlight correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with primary variant link correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -1083,8 +1132,8 @@ exports[`navigationMenu > renders with primary variant link highlight correctly 
 </nav>"
 `;
 
-exports[`navigationMenu > renders with primary variant pill correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with primary variant link highlight correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -1131,8 +1180,8 @@ exports[`navigationMenu > renders with primary variant pill correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with primary variant pill highlight correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with primary variant pill correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -1179,8 +1228,56 @@ exports[`navigationMenu > renders with primary variant pill highlight correctly 
 </nav>"
 `;
 
-exports[`navigationMenu > renders with trailingIcon correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with primary variant pill highlight correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+  <div style="position: relative;">
+    <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" id="akar-navigation-menu-v-0-0-0-trigger-item-1" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="akar-navigation-menu-v-0-0-0-content-item-1" data-akar-collection-item=""><span class="iconify i-lucide:book-open" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Documentation<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><span class="" data-pohon="navigation-menu-link-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">10</span>
+          <!--v-if--></span><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span>
+        </button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" id="akar-navigation-menu-v-0-0-0-trigger-item-2" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="akar-navigation-menu-v-0-0-0-content-item-2" data-akar-collection-item=""><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Components<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><!--v-if--><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span></button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!---->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="navigation-menu-link-label-external-icon"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" disabled="" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="" data-pohon="navigation-menu-viewport-wrapper">
+    <!--v-if-->
+    <!---->
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders with trailingIcon correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -1227,56 +1324,8 @@ exports[`navigationMenu > renders with trailingIcon correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders with ui correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
-  <div style="position: relative;">
-    <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" id="akar-navigation-menu-v-0-0-0-trigger-item-1" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="akar-navigation-menu-v-0-0-0-content-item-1" data-akar-collection-item=""><span class="iconify i-lucide:book-open" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Documentation<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><span class="" data-pohon="navigation-menu-link-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">10</span>
-          <!--v-if--></span><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span>
-        </button>
-        <!--v-if-->
-        <!--teleport start-->
-        <!---->
-        <!--teleport end-->
-        <!--v-if-->
-      </li>
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" id="akar-navigation-menu-v-0-0-0-trigger-item-2" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="akar-navigation-menu-v-0-0-0-content-item-2" data-akar-collection-item=""><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Components<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><!--v-if--><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span></button>
-        <!--v-if-->
-        <!--teleport start-->
-        <!---->
-        <!--teleport end-->
-        <!--v-if-->
-      </li>
-    </ul>
-  </div>
-  <!--v-if-->
-  <div style="position: relative;">
-    <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="navigation-menu-link-label-external-icon"></span></span>
-          <!--v-if-->
-        </a>
-        <!--v-if-->
-        <!--v-if-->
-      </li>
-      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" disabled="" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Help<!--v-if--></span>
-          <!--v-if-->
-        </button>
-        <!--v-if-->
-        <!--v-if-->
-      </li>
-    </ul>
-  </div>
-  <!--v-if-->
-  <div class="" data-pohon="navigation-menu-viewport-wrapper">
-    <!--v-if-->
-    <!---->
-  </div>
-</nav>"
-`;
-
-exports[`navigationMenu > renders with unmountOnHide correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with unmountOnHide correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
@@ -1332,7 +1381,7 @@ exports[`navigationMenu > renders with unmountOnHide correctly 1`] = `
                 <p class="" data-pohon="navigation-menu-child-link-label">Installation
                   <!--v-if-->
                 </p>
-                <p class="" data-pohon="navigation-menu-child-link-description">Learn how to install and configure Nuxt UI in your application.</p>
+                <p class="" data-pohon="navigation-menu-child-link-description">Learn how to install and configure Pohon UI in your application.</p>
               </div>
             </button></li>
           <li class="" data-pohon="navigation-menu-child-item"><button type="button" data-pohon="navigation-menu-child-link" data-akar-collection-item=""><span class="iconify i-lucide:swatch-book" aria-hidden="true" data-pohon="navigation-menu-child-link-icon"></span>
@@ -1410,8 +1459,57 @@ exports[`navigationMenu > renders with unmountOnHide correctly 1`] = `
 </nav>"
 `;
 
-exports[`navigationMenu > renders without externalIcon correctly 1`] = `
-"<nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
+exports[`NavigationMenu > renders with valueKey correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" valuekey="label" data-collapsed="false" data-pohon="navigation-menu-root">
+  <div style="position: relative;">
+    <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" id="akar-navigation-menu-v-0-0-0-trigger-item-1" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="akar-navigation-menu-v-0-0-0-content-item-1" data-akar-collection-item=""><span class="iconify i-lucide:book-open" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Documentation<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><span class="" data-pohon="navigation-menu-link-trailing-badge"><!--v-if--><span class="" data-pohon="badge-label">10</span>
+          <!--v-if--></span><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span>
+        </button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" data-pohon="navigation-menu-link" id="akar-navigation-menu-v-0-0-0-trigger-item-2" data-state="closed" data-navigation-menu-trigger="" aria-expanded="false" aria-controls="akar-navigation-menu-v-0-0-0-content-item-2" data-akar-collection-item=""><span class="iconify i-lucide:box" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Components<!--v-if--></span><span as="span" class="" data-pohon="navigation-menu-link-trailing"><!--v-if--><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-pohon="navigation-menu-link-trailing-icon"></span></span></button>
+        <!--v-if-->
+        <!--teleport start-->
+        <!--teleport end-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div style="position: relative;">
+    <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><a href="https://github.com/nuxt/ui" rel="noopener noreferrer" target="_blank" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-simple-icons:github" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">GitHub<span class="iconify i-lucide:arrow-up-right" aria-hidden="true" data-pohon="navigation-menu-link-label-external-icon"></span></span>
+          <!--v-if-->
+        </a>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+      <li data-menu-item="" class="" data-pohon="navigation-menu-item"><button type="button" disabled="" data-pohon="navigation-menu-link" data-akar-collection-item=""><span class="iconify i-lucide:circle-help" aria-hidden="true" data-pohon="navigation-menu-link-leading-icon"></span><span class="" data-pohon="navigation-menu-link-label">Help<!--v-if--></span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+        <!--v-if-->
+      </li>
+    </ul>
+  </div>
+  <!--v-if-->
+  <div class="" data-pohon="navigation-menu-viewport-wrapper">
+    <!--v-if-->
+    <div class="" data-pohon="navigation-menu-viewport" data-state="open" data-orientation="horizontal">
+      <!---->
+      <!---->
+    </div>
+  </div>
+</nav>"
+`;
+
+exports[`NavigationMenu > renders without externalIcon correctly 1`] = `
+"<nav data-orientation="horizontal" dir="ltr" data-akar-navigation-menu="" data-collapsed="false" data-pohon="navigation-menu-root">
   <div style="position: relative;">
     <ul data-pohon="navigation-menu-list" data-orientation="horizontal">
       <li data-menu-item="" class="" data-pohon="navigation-menu-item"></li>

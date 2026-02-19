@@ -123,6 +123,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, toRef } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PContextMenuContent from './context-menu-content.vue';
 
@@ -140,6 +141,7 @@ const emits = defineEmits<PContextMenuEmits>();
 const slots = defineSlots<PContextMenuSlots<T>>();
 
 const appConfig = useAppConfig() as ContextMenu['AppConfig'];
+const pohonProp = useComponentPohon('contextMenu', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits);
 const contentProps = toRef(() => props.content);
@@ -167,7 +169,7 @@ const pohon = computed(() =>
     </AContextMenuTrigger>
 
     <PContextMenuContent
-      :class="pohon.content({ class: [!slots.default && props.class, props.pohon?.content] })"
+      :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
       :pohon="pohon"
       :pohon-override="props.pohon"
       v-bind="contentProps"

@@ -56,6 +56,7 @@ import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useContentSearch } from '../../composables/use-content-search';
 import { useLocale } from '../../composables/use-locale';
 import { transformPohon } from '../../utils';
@@ -92,6 +93,7 @@ const tooltipProps = toRef(() => defu(
 const { t } = useLocale();
 const { open } = useContentSearch();
 const appConfig = useAppConfig() as ContentSearchButton['AppConfig'];
+const pohonProp = useComponentPohon('contentSearchButton', props);
 
 const pohon = computed(() =>
   uv({
@@ -118,7 +120,7 @@ const pohon = computed(() =>
         } : {}),
         ...$attrs,
       }"
-      :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+      :class="pohon.base({ class: [pohonProp?.base, props.class] })"
       :pohon="transformPohon(pohon, props.pohon)"
       @click="open = true"
     >
@@ -135,7 +137,7 @@ const pohon = computed(() =>
       <template
         #trailing="{ pohon: pohonProxy }"
       >
-        <div :class="pohon.trailing({ class: props.pohon?.trailing })">
+        <div :class="pohon.trailing({ class: pohonProp?.trailing })">
           <slot
             name="trailing"
             :pohon="pohonProxy"

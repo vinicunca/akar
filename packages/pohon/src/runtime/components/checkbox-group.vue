@@ -87,6 +87,7 @@ import { isNumber, isString, omit } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { ACheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'akar';
 import { computed, useId } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
@@ -105,6 +106,7 @@ const emits = defineEmits<PCheckboxGroupEmits<T, VK>>();
 const slots = defineSlots<PCheckboxGroupSlots<T>>();
 
 const appConfig = useAppConfig() as CheckboxGroup['AppConfig'];
+const pohonProp = useComponentPohon('checkboxGroup', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(props, 'as', 'modelValue', 'defaultValue', 'orientation', 'loop', 'required'),
@@ -188,18 +190,18 @@ function onUpdate(value: any) {
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="checkbox-group-root"
     @update:model-value="onUpdate"
   >
     <fieldset
-      :class="pohon.fieldset({ class: props.pohon?.fieldset })"
+      :class="pohon.fieldset({ class: pohonProp?.fieldset })"
       data-pohon="checkbox-group-fieldset"
       v-bind="ariaAttrs"
     >
       <legend
         v-if="legend || !!slots.legend"
-        :class="pohon.legend({ class: props.pohon?.legend })"
+        :class="pohon.legend({ class: pohonProp?.legend })"
         data-pohon="checkbox-group-legend"
       >
         <slot name="legend">
@@ -216,7 +218,7 @@ function onUpdate(value: any) {
         :name="name"
         :disabled="item.disabled || disabled"
         :pohon="{ ...(props.pohon ? omit(props.pohon, ['root']) : undefined), ...(item.pohon || {}) }"
-        :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
+        :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class] })"
         data-pohon="checkbox-group-item"
       >
         <template

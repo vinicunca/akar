@@ -12,6 +12,7 @@ export interface ProseFieldGroupProps {
    */
   as?: any;
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface ProseFieldGroupSlots {
@@ -23,12 +24,14 @@ export interface ProseFieldGroupSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseFieldGroupProps>();
 defineSlots<ProseFieldGroupSlots>();
 
 const appConfig = useAppConfig() as ProseFieldGroup['AppConfig'];
+const pohonProp = useComponentPohon('prose.field-group', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.fieldGroup || {}) }));
 </script>
@@ -36,7 +39,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 <template>
   <APrimitive
     :as="as"
-    :class="pohon({ class: props.class })"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
   </APrimitive>

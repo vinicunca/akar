@@ -28,21 +28,9 @@ const appConfig = useAppConfig();
 const selectMenuProps = useForwardProps(props);
 
 const items = computed(() => [
-  {
-    label: t('colorMode.system'),
-    value: 'system',
-    icon: appConfig.pohon.icons.system,
-  },
-  {
-    label: t('colorMode.light'),
-    value: 'light',
-    icon: appConfig.pohon.icons.light,
-  },
-  {
-    label: t('colorMode.dark'),
-    value: 'dark',
-    icon: appConfig.pohon.icons.dark,
-  },
+  { label: t('colorMode.system'), value: 'system', icon: appConfig.pohon.icons.system },
+  { label: t('colorMode.light'), value: 'light', icon: appConfig.pohon.icons.light },
+  { label: t('colorMode.dark'), value: 'dark', icon: appConfig.pohon.icons.dark },
 ]);
 
 const preference = computed({

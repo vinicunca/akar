@@ -10,21 +10,21 @@ import type {
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
 import type { ButtonHTMLAttributes } from '../types/html';
-import type { ModelModifiers } from '../types/input';
+import type { ApplyModifiers, ModelModifiers } from '../types/input';
 import type {
   AcceptableValue,
   ArrayOrNested,
   EmitsToProps,
   GetItemKeys,
-  GetItemValue,
   GetModelValue,
-  GetModelValueEmits,
   NestedItem,
 } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/select';
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>;
+
+type ExcludeItem = { type: 'label' | 'separator' };
 
 export type PSelectValue = AcceptableValue;
 export type PSelectItem = PSelectValue | {
@@ -49,7 +49,12 @@ export type PSelectItem = PSelectValue | {
   [key: string]: any;
 };
 
-export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false> extends Omit<ASelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface PSelectProps<
+  T extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>,
+  VK extends GetItemKeys<T> = 'value',
+  M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+> extends Omit<ASelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string;
   /** The placeholder text when the select is empty. */
   placeholder?: string;
@@ -109,10 +114,10 @@ export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNest
   descriptionKey?: GetItemKeys<T>;
   items?: T;
   /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
-  defaultValue?: GetModelValue<T, VK, M>;
+  defaultValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>;
   /** The controlled value of the Select. Can be bind as `v-model`. */
-  modelValue?: GetModelValue<T, VK, M>;
-  modelModifiers?: Omit<ModelModifiers<GetModelValue<T, VK, M>>, 'lazy'>;
+  modelValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>;
+  modelModifiers?: Mod;
   /** Whether multiple options can be selected or not. */
   multiple?: M & boolean;
   /** Highlight the ring color like a focus state. */
@@ -123,11 +128,17 @@ export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNest
   pohon?: Select['slots'];
 }
 
-export type PSelectEmits<A extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<A> | undefined, M extends boolean> = Omit<ASelectRootEmits, 'update:modelValue'> & {
-  change: [event: Event];
-  blur: [event: FocusEvent];
-  focus: [event: FocusEvent];
-} & GetModelValueEmits<A, VK, M>;
+export interface PSelectEmits<
+  A extends ArrayOrNested<PSelectItem>,
+  VK extends GetItemKeys<A> | undefined,
+  M extends boolean,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
+> extends Omit<ASelectRootEmits, 'update:modelValue'> {
+  'change': [event: Event];
+  'blur': [event: FocusEvent];
+  'focus': [event: FocusEvent];
+  'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>];
+}
 
 type SlotProps<T extends PSelectItem> = (props: { item: T; index: number; pohon: Select['pohon'] }) => any;
 
@@ -135,11 +146,24 @@ export interface PSelectSlots<
   A extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>,
   VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
+  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: Select['pohon'] }) => any;
-  'default': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: Select['pohon'] }) => any;
-  'trailing': (props: { modelValue?: GetModelValue<A, VK, M>; open: boolean; pohon: Select['pohon'] }) => any;
+  'leading': (props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>;
+    open: boolean;
+    pohon: Select['pohon'];
+  }) => any;
+  'default': (props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>;
+    open: boolean;
+    pohon: Select['pohon'];
+  }) => any;
+  'trailing': (props: {
+    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>;
+    open: boolean;
+    pohon: Select['pohon'];
+  }) => any;
   'item': SlotProps<T>;
   'item-leading': SlotProps<T>;
   'item-label': (props: { item: T; index: number }) => any;
@@ -150,9 +174,9 @@ export interface PSelectSlots<
 }
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false">
+<script setup lang="ts" generic="T extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
 import { useAppConfig } from '#imports';
-import { isNonNullish } from '@vinicunca/perkakas';
+import { isNonNullish, isNullish, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   ASelectArrow,
@@ -171,6 +195,7 @@ import {
 import { defu } from 'defu';
 import { computed, onMounted, toRef, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { usePortal } from '../composables/use-portal';
@@ -183,7 +208,7 @@ import PIcon from './icon.vue';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<PSelectProps<T, VK, M>>(),
+  defineProps<PSelectProps<T, VK, M, Mod>>(),
   {
     valueKey: 'value' as never,
     labelKey: 'label',
@@ -192,9 +217,10 @@ const props = withDefaults(
     autofocusDelay: 0,
   },
 );
-const emits = defineEmits<PSelectEmits<T, VK, M>>();
-const slots = defineSlots<PSelectSlots<T, VK, M>>();
+const emits = defineEmits<PSelectEmits<T, VK, M, Mod>>();
+const slots = defineSlots<PSelectSlots<T, VK, M, Mod>>();
 const appConfig = useAppConfig() as Select['AppConfig'];
+const pohonProp = useComponentPohon('select', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -275,10 +301,12 @@ const groups = computed<Array<Array<PSelectItem>>>(() => {
 
 const items = computed(() => groups.value.flatMap((group) => group) as Array<T>);
 
-function displayValue(value: GetItemValue<T, VK> | Array<GetItemValue<T, VK>>): string | undefined {
+function displayValue(
+  value: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | Array<ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>,
+): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK>>({
+      .map((item) => getDisplayValue<Array<T>, ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>({
         items: items.value,
         value: item,
         options: {
@@ -291,9 +319,9 @@ function displayValue(value: GetItemValue<T, VK> | Array<GetItemValue<T, VK>>): 
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined;
   }
 
-  return getDisplayValue<Array<T>, GetItemValue<T, VK>>({
+  return getDisplayValue<Array<T>, ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>({
     items: items.value,
-    value: value as GetItemValue<T, VK>,
+    value: value as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>,
     options: {
       labelKey: props.labelKey,
       valueKey: props.valueKey,
@@ -318,7 +346,7 @@ onMounted(() => {
 });
 
 function onUpdate(value: any) {
-  if (props.modelModifiers?.trim) {
+  if (props.modelModifiers?.trim && (isString(value) || isNullish(value))) {
     value = value?.trim() ?? null;
   }
 
@@ -330,7 +358,7 @@ function onUpdate(value: any) {
     value ??= null;
   }
 
-  if (props.modelModifiers?.optional) {
+  if (props.modelModifiers?.optional && !props.modelModifiers?.nullable && value !== null) {
     value ??= undefined;
   }
 
@@ -381,56 +409,56 @@ defineExpose({
     <ASelectTrigger
       :id="id"
       ref="triggerRef"
-      :class="pohon.base({ class: [props.pohon?.base, props.class] })"
+      :class="pohon.base({ class: [pohonProp?.base, props.class] })"
       data-pohon="select-base"
       v-bind="{ ...$attrs, ...ariaAttrs }"
     >
       <span
         v-if="isLeading || !!avatar || !!slots.leading"
-        :class="pohon.leading({ class: props.pohon?.leading })"
+        :class="pohon.leading({ class: pohonProp?.leading })"
         data-pohon="select-leading"
       >
         <slot
           name="leading"
-          :model-value="(modelValue as GetModelValue<T, VK, M>)"
+          :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
           :open="open"
           :pohon="pohon"
         >
           <PIcon
             v-if="isLeading && leadingIconName"
             :name="leadingIconName"
-            :class="pohon.leadingIcon({ class: props.pohon?.leadingIcon })"
+            :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
             data-pohon="select-leading-icon"
           />
           <PAvatar
             v-else-if="!!avatar"
-            :size="((props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
+            :size="((pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
-            :class="pohon.itemLeadingAvatar({ class: props.pohon?.itemLeadingAvatar })"
+            :class="pohon.itemLeadingAvatar({ class: pohonProp?.itemLeadingAvatar })"
             data-pohon="select-leading-avatar"
           />
         </slot>
       </span>
 
       <slot
-        :model-value="(modelValue as GetModelValue<T, VK, M>)"
+        :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
         :open="open"
         :pohon="pohon"
       >
         <template
-          v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M>)]"
+          v-for="displayedModelValue in [displayValue(modelValue as any)]"
           :key="displayedModelValue"
         >
           <span
             v-if="isNonNullish(displayedModelValue)"
-            :class="pohon.value({ class: props.pohon?.value })"
+            :class="pohon.value({ class: pohonProp?.value })"
             data-pohon="select-value"
           >
             {{ displayedModelValue }}
           </span>
           <span
             v-else
-            :class="pohon.placeholder({ class: props.pohon?.placeholder })"
+            :class="pohon.placeholder({ class: pohonProp?.placeholder })"
             data-pohon="select-placeholder"
           >
             {{ placeholder ?? '&nbsp;' }}
@@ -440,19 +468,19 @@ defineExpose({
 
       <span
         v-if="isTrailing || !!slots.trailing"
-        :class="pohon.trailing({ class: props.pohon?.trailing })"
+        :class="pohon.trailing({ class: pohonProp?.trailing })"
         data-pohon="select-trailing"
       >
         <slot
           name="trailing"
-          :model-value="(modelValue as GetModelValue<T, VK, M>)"
+          :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
           :open="open"
           :pohon="pohon"
         >
           <PIcon
             v-if="trailingIconName"
             :name="trailingIconName"
-            :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+            :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
             data-pohon="select-trailing-icon"
           />
         </slot>
@@ -461,7 +489,7 @@ defineExpose({
 
     <ASelectPortal v-bind="portalProps">
       <ASelectContent
-        :class="pohon.content({ class: props.pohon?.content })"
+        :class="pohon.content({ class: pohonProp?.content })"
         v-bind="contentProps"
         data-pohon="select-content"
       >
@@ -470,13 +498,13 @@ defineExpose({
         <div
           ref="viewportRef"
           role="presentation"
-          :class="pohon.viewport({ class: props.pohon?.viewport })"
+          :class="pohon.viewport({ class: pohonProp?.viewport })"
           data-pohon="select-viewport"
         >
           <ASelectGroup
             v-for="(group, groupIndex) in groups"
             :key="`group-${groupIndex}`"
-            :class="pohon.group({ class: props.pohon?.group })"
+            :class="pohon.group({ class: pohonProp?.group })"
             data-pohon="select-group"
           >
             <template
@@ -485,7 +513,7 @@ defineExpose({
             >
               <ASelectLabel
                 v-if="isSelectItem(item) && item.type === 'label'"
-                :class="pohon.label({ class: [props.pohon?.label, item.pohon?.label, item.class] })"
+                :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label, item.class] })"
                 data-pohon="select-label"
               >
                 {{ getProp({ object: item, path: props.labelKey as string }) }}
@@ -493,13 +521,13 @@ defineExpose({
 
               <ASelectSeparator
                 v-else-if="isSelectItem(item) && item.type === 'separator'"
-                :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator, item.class] })"
+                :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator, item.class] })"
                 data-pohon="select-separator"
               />
 
               <ASelectItem
                 v-else
-                :class="pohon.item({ class: [props.pohon?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
+                :class="pohon.item({ class: [pohonProp?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
                 :disabled="isSelectItem(item) && item.disabled"
                 :value="isSelectItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
                 data-pohon="select-item"
@@ -520,23 +548,23 @@ defineExpose({
                     <PIcon
                       v-if="isSelectItem(item) && item.icon"
                       :name="item.icon"
-                      :class="pohon.itemLeadingIcon({ class: [props.pohon?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
+                      :class="pohon.itemLeadingIcon({ class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
                       data-pohon="select-item-leading-icon"
                     />
                     <PAvatar
                       v-else-if="isSelectItem(item) && item.avatar"
-                      :size="((item.pohon?.itemLeadingAvatarSize || props.pohon?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
+                      :size="((item.pohon?.itemLeadingAvatarSize || pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
                       v-bind="item.avatar"
-                      :class="pohon.itemLeadingAvatar({ class: [props.pohon?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
+                      :class="pohon.itemLeadingAvatar({ class: [pohonProp?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
                       data-pohon="select-item-leading-avatar"
                     />
                     <PChip
                       v-else-if="isSelectItem(item) && item.chip"
-                      :size="((item.pohon?.itemLeadingChipSize || props.pohon?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
+                      :size="((item.pohon?.itemLeadingChipSize || pohonProp?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
                       inset
                       standalone
                       v-bind="item.chip"
-                      :class="pohon.itemLeadingChip({ class: [props.pohon?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
+                      :class="pohon.itemLeadingChip({ class: [pohonProp?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
                       data-pohon="select-item-leading-chip"
                     />
                   </slot>
@@ -544,7 +572,7 @@ defineExpose({
                   <span
                     :class="pohon.itemWrapper({
                       class: [
-                        props.pohon?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
+                        pohonProp?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
                       ],
                     })"
                     data-pohon="select-item-wrapper"
@@ -552,7 +580,7 @@ defineExpose({
                     <ASelectItemText
                       :class="pohon.itemLabel({
                         class: [
-                          props.pohon?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
+                          pohonProp?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
                         ],
                       })"
                       data-pohon="select-item-label"
@@ -570,7 +598,7 @@ defineExpose({
                       v-if="isSelectItem(item) && (getProp({ object: item, path: props.descriptionKey as string }) || !!slots['item-description'])"
                       :class="pohon.itemDescription({
                         class: [
-                          props.pohon?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
+                          pohonProp?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
                         ],
                       })"
                       data-pohon="select-item-description"
@@ -587,7 +615,7 @@ defineExpose({
 
                   <span
                     :class="pohon.itemTrailing({
-                      class: [props.pohon?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing],
+                      class: [pohonProp?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing],
                     })"
                     data-pohon="select-item-trailing"
                   >
@@ -602,7 +630,7 @@ defineExpose({
                       <PIcon
                         :name="selectedIcon || appConfig.pohon.icons.check"
                         :class="pohon.itemTrailingIcon({
-                          class: [props.pohon?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon],
+                          class: [pohonProp?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon],
                         })"
                         data-pohon="select-item-trailing-icon"
                       />
@@ -619,7 +647,7 @@ defineExpose({
         <ASelectArrow
           v-if="!!arrow"
           v-bind="arrowProps"
-          :class="pohon.arrow({ class: props.pohon?.arrow })"
+          :class="pohon.arrow({ class: pohonProp?.arrow })"
           data-pohon="select-arrow"
         />
       </ASelectContent>

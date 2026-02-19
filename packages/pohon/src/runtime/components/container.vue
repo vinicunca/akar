@@ -12,9 +12,10 @@ export interface PContainerProps {
    */
   as?: any;
   class?: any;
+  pohon?: { base?: any };
 }
 
-export interface ContainerSlots {
+export interface PContainerSlots {
   default: (props?: object) => any;
 }
 </script>
@@ -23,12 +24,14 @@ export interface ContainerSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
 const props = defineProps<PContainerProps>();
-defineSlots<ContainerSlots>();
+defineSlots<PContainerSlots>();
 
 const appConfig = useAppConfig() as Container['AppConfig'];
+const pohonProp = useComponentPohon('container', props);
 
 const pohon = computed(() =>
   uv({
@@ -41,7 +44,7 @@ const pohon = computed(() =>
 <template>
   <APrimitive
     :as="as"
-    :class="pohon({ class: props.class })"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
   </APrimitive>

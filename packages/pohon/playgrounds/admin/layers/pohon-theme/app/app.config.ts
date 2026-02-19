@@ -20,7 +20,6 @@ import { contentSearchTheme } from './themes/content-search.theme';
 import { contentSurroundTheme } from './themes/content-surround.theme';
 import { contentTocTheme } from './themes/content-toc.theme';
 import { contextMenuTheme } from './themes/context-menu.theme';
-import { dashboardMenuTheme } from './themes/dashboard-menu.theme';
 import { dashboardThemes } from './themes/dashboard.theme';
 import { dialogTheme } from './themes/dialog.theme';
 import { drawerTheme } from './themes/drawer.theme';
@@ -111,7 +110,6 @@ export default defineAppConfig({
       },
     },
     ...dashboardThemes,
-    dashboardMenu: dashboardMenuTheme,
     dialog: dialogTheme,
     drawer: drawerTheme,
     dropdownMenu: dropdownMenuTheme,

@@ -65,6 +65,7 @@ import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { getSlotChildrenText } from '../utils';
 import { uv } from '../utils/uv';
@@ -95,6 +96,7 @@ const open = defineModel<boolean>('open', { default: false });
 const route = useRoute();
 const { t } = useLocale();
 const appConfig = useAppConfig() as Header['AppConfig'];
+const pohonProp = useComponentPohon('header', props);
 
 const [DefineLeftTemplate, ReuseLeftTemplate] = createReusableTemplate();
 const [DefineRightTemplate, ReuseRightTemplate] = createReusableTemplate();
@@ -151,7 +153,7 @@ function toggleOpen() {
         :aria-label="open ? t('header.close') : t('header.open')"
         :icon="open ? appConfig.pohon.icons.close : appConfig.pohon.icons.menu"
         v-bind="(typeof toggle === 'object' ? toggle : {})"
-        :class="pohon.toggle({ class: props.pohon?.toggle, toggleSide })"
+        :class="pohon.toggle({ class: pohonProp?.toggle, toggleSide })"
         data-pohon="header-toggle"
         @click="toggleOpen"
       />
@@ -160,7 +162,7 @@ function toggleOpen() {
 
   <DefineLeftTemplate>
     <div
-      :class="pohon.left({ class: props.pohon?.left })"
+      :class="pohon.left({ class: pohonProp?.left })"
       data-pohon="header-left"
     >
       <ReuseToggleTemplate v-if="toggleSide === 'left'" />
@@ -169,7 +171,7 @@ function toggleOpen() {
         <PLink
           :to="to"
           :aria-label="ariaLabel"
-          :class="pohon.title({ class: props.pohon?.title })"
+          :class="pohon.title({ class: pohonProp?.title })"
           data-pohon="header-title"
         >
           <slot name="title">
@@ -182,7 +184,7 @@ function toggleOpen() {
 
   <DefineRightTemplate>
     <div
-      :class="pohon.right({ class: props.pohon?.right })"
+      :class="pohon.right({ class: pohonProp?.right })"
       data-pohon="header-right"
     >
       <slot name="right" />
@@ -194,19 +196,19 @@ function toggleOpen() {
   <APrimitive
     :as="as"
     v-bind="$attrs"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="header-root"
   >
     <slot name="top" />
 
     <PContainer
-      :class="pohon.container({ class: props.pohon?.container })"
+      :class="pohon.container({ class: pohonProp?.container })"
       data-pohon="header-container"
     >
       <ReuseLeftTemplate />
 
       <div
-        :class="pohon.center({ class: props.pohon?.center })"
+        :class="pohon.center({ class: pohonProp?.center })"
         data-pohon="header-center"
       >
         <slot />
@@ -224,8 +226,8 @@ function toggleOpen() {
     :description="t('header.description')"
     v-bind="menuProps"
     :pohon="{
-      overlay: pohon.overlay({ class: props.pohon?.overlay }),
-      content: pohon.content({ class: props.pohon?.content }),
+      overlay: pohon.overlay({ class: pohonProp?.overlay }),
+      content: pohon.content({ class: pohonProp?.content }),
     }"
   >
     <template #content="contentData">
@@ -235,7 +237,7 @@ function toggleOpen() {
       >
         <div
           v-if="mode !== 'drawer'"
-          :class="pohon.header({ class: props.pohon?.header })"
+          :class="pohon.header({ class: pohonProp?.header })"
           data-pohon="header-header"
         >
           <ReuseLeftTemplate />
@@ -244,7 +246,7 @@ function toggleOpen() {
         </div>
 
         <div
-          :class="pohon.body({ class: props.pohon?.body })"
+          :class="pohon.body({ class: pohonProp?.body })"
           data-pohon="header-body"
         >
           <slot name="body" />

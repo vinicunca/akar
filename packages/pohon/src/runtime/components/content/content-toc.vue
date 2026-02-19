@@ -75,6 +75,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { useScrollspy } from '../../composables/use-scrollspy';
 import { uv } from '../../utils/uv';
@@ -96,6 +97,8 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'open', 'defaul
 const { t } = useLocale();
 const router = useRouter();
 const appConfig = useAppConfig() as ContentToc['AppConfig'];
+const pohonProp = useComponentPohon('contentToc', props);
+
 const { activeHeadings, updateHeadings } = useScrollspy();
 
 const [DefineListTemplate, ReuseListTemplate] = createReusableTemplate<{ links: Array<T>; level: number }>({
@@ -158,24 +161,24 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
 <template>
   <!-- eslint-disable-next-line vue/no-template-shadow -->
   <DefineListTemplate v-slot="{ links, level }">
-    <ul :class="level > 0 ? pohon.listWithChildren({ class: props.pohon?.listWithChildren }) : pohon.list({ class: props.pohon?.list })">
+    <ul :class="level > 0 ? pohon.listWithChildren({ class: pohonProp?.listWithChildren }) : pohon.list({ class: pohonProp?.list })">
       <li
         v-for="(link, index) in links"
         :key="index"
         :class="link.children && link.children.length > 0
-          ? pohon.itemWithChildren({ class: [props.pohon?.itemWithChildren, link.pohon?.itemWithChildren] })
-          : pohon.item({ class: [props.pohon?.item, link.pohon?.item] })"
+          ? pohon.itemWithChildren({ class: [pohonProp?.itemWithChildren, link.pohon?.itemWithChildren] })
+          : pohon.item({ class: [pohonProp?.item, link.pohon?.item] })"
       >
         <a
           :href="`#${link.id}`"
-          :class="pohon.link({ class: [props.pohon?.link, link.pohon?.link, link.class], active: activeHeadings.includes(link.id) })"
+          :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active: activeHeadings.includes(link.id) })"
           @click.prevent="scrollToHeading(link.id)"
         >
           <slot
             name="link"
             :link="link"
           >
-            <span :class="pohon.linkText({ class: [props.pohon?.linkText, link.pohon?.linkText] })">
+            <span :class="pohon.linkText({ class: [pohonProp?.linkText, link.pohon?.linkText] })">
               {{ link.text }}
             </span>
           </slot>
@@ -197,11 +200,11 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
       :pohon="pohon"
     />
 
-    <span :class="pohon.title({ class: props.pohon?.title })">
+    <span :class="pohon.title({ class: pohonProp?.title })">
       <slot :open="open">{{ title || t('contentToc.title') }}</slot>
     </span>
 
-    <span :class="pohon.trailing({ class: props.pohon?.trailing })">
+    <span :class="pohon.trailing({ class: pohonProp?.trailing })">
       <slot
         name="trailing"
         :open="open"
@@ -209,7 +212,7 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
       >
         <PIcon
           :name="trailingIcon || appConfig.pohon.icons.chevronDown"
-          :class="pohon.trailingIcon({ class: props.pohon?.trailingIcon })"
+          :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         />
       </slot>
     </span>
@@ -219,12 +222,12 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
     v-slot="{ open }"
     v-bind="{ ...rootProps, ...$attrs }"
     :default-open="defaultOpen"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <div :class="pohon.container({ class: props.pohon?.container })">
+    <div :class="pohon.container({ class: pohonProp?.container })">
       <div
         v-if="!!slots.top"
-        :class="pohon.top({ class: props.pohon?.top })"
+        :class="pohon.top({ class: pohonProp?.top })"
       >
         <slot
           name="top"
@@ -237,10 +240,10 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
           <ReuseTriggerTemplate :open="open" />
         </ACollapsibleTrigger>
 
-        <ACollapsibleContent :class="pohon.content({ class: [props.pohon?.content, 'lg:hidden'] })">
+        <ACollapsibleContent :class="pohon.content({ class: [pohonProp?.content, 'lg:hidden'] })">
           <div
             v-if="highlight"
-            :class="pohon.indicator({ class: props.pohon?.indicator })"
+            :class="pohon.indicator({ class: pohonProp?.indicator })"
             :style="indicatorStyle"
           />
 
@@ -259,10 +262,10 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
           <ReuseTriggerTemplate :open="open" />
         </p>
 
-        <div :class="pohon.content({ class: [props.pohon?.content, 'hidden lg:flex'] })">
+        <div :class="pohon.content({ class: [pohonProp?.content, 'hidden lg:flex'] })">
           <div
             v-if="highlight"
-            :class="pohon.indicator({ class: props.pohon?.indicator })"
+            :class="pohon.indicator({ class: pohonProp?.indicator })"
             :style="indicatorStyle"
           />
 
@@ -280,7 +283,7 @@ nuxtApp.hooks.hook('page:transition:finish', () => {
 
       <div
         v-if="!!slots.bottom"
-        :class="pohon.bottom({ class: props.pohon?.bottom, body: !!slots.top || !!links?.length })"
+        :class="pohon.bottom({ class: pohonProp?.bottom, body: !!slots.top || !!links?.length })"
       >
         <slot
           name="bottom"

@@ -28,7 +28,7 @@ export const collections = {
       include: 'docs/**/*',
     }],
     schema: z.object({
-      category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'editor', 'color-mode', 'i18n']).optional(),
+      category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay', 'dashboard', 'page', 'color-mode', 'i18n']).optional(),
       framework: z.enum(['nuxt', 'vue']).optional(),
       navigation: z.object({
         title: z.string().optional(),

@@ -6,6 +6,7 @@ import { createHooks } from 'hookable';
 import { onScopeDispose, ref } from 'vue';
 
 export { defineLocale } from '../../composables/define-locale';
+
 export { defineShortcuts } from '../../composables/define-shortcuts';
 export { useLocale } from '../../composables/use-locale';
 export { useAppConfig } from '../composables/use-app-config';
@@ -79,6 +80,15 @@ export function useRuntimeHook(name: string, fn: (...args: Array<any>) => void):
   const unregister = nuxtApp.hook(name, fn);
 
   onScopeDispose(unregister);
+}
+
+export function useRuntimeConfig() {
+  return {
+    app: {
+      baseURL: '/',
+    },
+    public: {},
+  };
 }
 
 export function defineNuxtPlugin(plugin: (nuxtApp: NuxtApp) => void) {

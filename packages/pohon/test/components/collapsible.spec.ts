@@ -1,8 +1,8 @@
-import type { CollapsibleProps, CollapsibleSlots } from '../../src/runtime/components/Collapsible.vue';
+import type { PCollapsibleProps, PCollapsibleSlots } from '../../src/runtime/components/collapsible.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Collapsible from '../../src/runtime/components/Collapsible.vue';
+import Collapsible from '../../src/runtime/components/collapsible.vue';
 import ComponentRender from '../component-render';
 
 describe('Collapsible', () => {
@@ -19,7 +19,7 @@ describe('Collapsible', () => {
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CollapsibleProps; slots?: Partial<CollapsibleSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PCollapsibleProps; slots?: Partial<PCollapsibleSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Collapsible);
     expect(html).toMatchSnapshot();
   });

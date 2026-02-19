@@ -23,6 +23,7 @@ import {
   AScrollAreaViewport,
   useForwardProps,
 } from 'akar';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PScrollbarBar from './scrollbar-bar.vue';
 
@@ -38,6 +39,7 @@ const rootProps = useForwardProps(
 );
 
 const appConfig = useAppConfig() as ScrollbarArea['AppConfig'];
+const pohonProp = useComponentPohon('scrollbarArea', props);
 
 const pohon = computed(() =>
   uv({
@@ -50,12 +52,12 @@ const pohon = computed(() =>
 <template>
   <AScrollAreaRoot
     v-bind="rootProps"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="scrollbar-area-root"
   >
     <AScrollAreaViewport
       as-child
-      :class="pohon.viewport({ class: props.pohon?.viewport })"
+      :class="pohon.viewport({ class: pohonProp?.viewport })"
       data-pohon="scrollbar-area-viewport"
       @scroll="onScroll"
     >

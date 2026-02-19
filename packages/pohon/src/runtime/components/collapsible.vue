@@ -34,6 +34,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -46,6 +47,7 @@ const emits = defineEmits<PCollapsibleEmits>();
 const slots = defineSlots<PCollapsibleSlots>();
 
 const appConfig = useAppConfig() as Collapsible['AppConfig'];
+const pohonProp = useComponentPohon('collapsible', props);
 
 const rootProps = useForwardPropsEmits(
   reactivePick(props, 'as', 'defaultOpen', 'open', 'disabled', 'unmountOnHide'),
@@ -64,7 +66,7 @@ const pohon = computed(() =>
   <ACollapsibleRoot
     v-slot="{ open }"
     v-bind="rootProps"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="collapsible-root"
   >
     <ACollapsibleTrigger
@@ -75,7 +77,7 @@ const pohon = computed(() =>
     </ACollapsibleTrigger>
 
     <ACollapsibleContent
-      :class="pohon.content({ class: props.pohon?.content })"
+      :class="pohon.content({ class: pohonProp?.content })"
       data-pohon="collapsible-content"
     >
       <slot name="content" />

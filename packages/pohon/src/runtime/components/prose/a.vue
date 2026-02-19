@@ -9,6 +9,7 @@ export interface ProseAProps {
   href?: string;
   target?: '_blank' | '_parent' | '_self' | '_top' | (string & object) | null | undefined;
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface ProseASlots {
@@ -19,6 +20,7 @@ export interface ProseASlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PLink from '../link.vue';
 
@@ -27,6 +29,7 @@ const props = defineProps<ProseAProps>();
 defineSlots<ProseASlots>();
 
 const appConfig = useAppConfig() as ProseA['AppConfig'];
+const pohonProp = useComponentPohon('prose.a', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.a || {}) }));
 </script>
@@ -35,7 +38,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
   <PLink
     :href="href"
     :target="target"
-    :class="pohon({ class: props.class })"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
     raw
   >
     <slot />

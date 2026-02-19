@@ -1,9 +1,9 @@
-import type { ChipProps, ChipSlots } from '../../src/runtime/components/Chip.vue';
+import type { PChipProps, PChipSlots } from '../../src/runtime/components/chip.vue';
 import theme from '#build/pohon/chip';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Chip from '../../src/runtime/components/Chip.vue';
+import Chip from '../../src/runtime/components/chip.vue';
 import ComponentRender from '../component-render';
 
 describe('Chip', () => {
@@ -24,7 +24,7 @@ describe('Chip', () => {
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: ChipProps; slots?: Partial<ChipSlots> }) => {
+  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PChipProps; slots?: Partial<PChipSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, Chip);
     expect(html).toMatchSnapshot();
   });

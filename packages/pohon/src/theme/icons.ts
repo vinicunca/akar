@@ -32,6 +32,8 @@ export default {
   minus: 'i-lucide:minus',
   panelClose: 'i-lucide:panel-left-close',
   panelOpen: 'i-lucide:panel-left-open',
+  pin: 'i-lucide:pin',
+  pinOff: 'i-lucide:pin-off',
   plus: 'i-lucide:plus',
   reload: 'i-lucide:rotate-ccw',
   search: 'i-lucide:search',

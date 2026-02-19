@@ -89,6 +89,7 @@ import {
   useForwardProps,
 } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
 
@@ -105,6 +106,7 @@ const slots = defineSlots<PStepperSlots<T>>();
 const modelValue = defineModel<string | number>();
 
 const appConfig = useAppConfig() as Stepper['AppConfig'];
+const pohonProp = useComponentPohon('stepper', props);
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'orientation', 'linear'));
 
@@ -158,11 +160,11 @@ defineExpose({
   <AStepperRoot
     v-bind="rootProps"
     v-model="currentStepIndex"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="stepper-root"
   >
     <div
-      :class="pohon.header({ class: props.pohon?.header })"
+      :class="pohon.header({ class: pohonProp?.header })"
       data-pohon="stepper-header"
     >
       <AStepperItem
@@ -170,19 +172,19 @@ defineExpose({
         :key="item.value ?? count"
         :step="count"
         :disabled="item.disabled || props.disabled"
-        :class="pohon.item({ class: [props.pohon?.item, item.pohon?.item, item.class] })"
+        :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class] })"
         data-pohon="stepper-item"
       >
         <div
-          :class="pohon.container({ class: [props.pohon?.container, item.pohon?.container] })"
+          :class="pohon.container({ class: [pohonProp?.container, item.pohon?.container] })"
           data-pohon="stepper-container"
         >
           <AStepperTrigger
-            :class="pohon.trigger({ class: [props.pohon?.trigger, item.pohon?.trigger] })"
+            :class="pohon.trigger({ class: [pohonProp?.trigger, item.pohon?.trigger] })"
             data-pohon="stepper-trigger"
           >
             <AStepperIndicator
-              :class="pohon.indicator({ class: [props.pohon?.indicator, item.pohon?.indicator] })"
+              :class="pohon.indicator({ class: [pohonProp?.indicator, item.pohon?.indicator] })"
               data-pohon="stepper-indicator"
             >
               <slot
@@ -193,7 +195,7 @@ defineExpose({
                 <PIcon
                   v-if="item.icon"
                   :name="item.icon"
-                  :class="pohon.icon({ class: [props.pohon?.icon, item.pohon?.icon] })"
+                  :class="pohon.icon({ class: [pohonProp?.icon, item.pohon?.icon] })"
                   data-pohon="stepper-icon"
                 />
                 <template v-else>
@@ -205,13 +207,13 @@ defineExpose({
 
           <AStepperSeparator
             v-if="count < items.length - 1"
-            :class="pohon.separator({ class: [props.pohon?.separator, item.pohon?.separator] })"
+            :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator] })"
             data-pohon="stepper-separator"
           />
         </div>
 
         <div
-          :class="pohon.wrapper({ class: [props.pohon?.wrapper, item.pohon?.wrapper] })"
+          :class="pohon.wrapper({ class: [pohonProp?.wrapper, item.pohon?.wrapper] })"
           data-pohon="stepper-wrapper"
         >
           <slot
@@ -222,7 +224,7 @@ defineExpose({
               v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof PStepperSlots<T>]"
               as="div"
               data-pohon="stepper-title"
-              :class="pohon.title({ class: [props.pohon?.title, item.pohon?.title] })"
+              :class="pohon.title({ class: [pohonProp?.title, item.pohon?.title] })"
             >
               <slot
                 :name="((item.slot ? `${item.slot}-title` : 'title') as keyof PStepperSlots<T>)"
@@ -236,7 +238,7 @@ defineExpose({
               v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof PStepperSlots<T>]"
               as="div"
               data-pohon="stepper-description"
-              :class="pohon.description({ class: [props.pohon?.description, item.pohon?.description] })"
+              :class="pohon.description({ class: [pohonProp?.description, item.pohon?.description] })"
             >
               <slot
                 :name="((item.slot ? `${item.slot}-description` : 'description') as keyof PStepperSlots<T>)"
@@ -252,7 +254,7 @@ defineExpose({
 
     <div
       v-if="currentStep?.content || !!slots.content || currentStep?.slot"
-      :class="pohon.content({ class: props.pohon?.content })"
+      :class="pohon.content({ class: pohonProp?.content })"
       data-pohon="stepper-content"
     >
       <slot

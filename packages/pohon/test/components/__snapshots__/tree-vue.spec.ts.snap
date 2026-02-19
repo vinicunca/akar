@@ -1,0 +1,559 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`tree > renders with as correctly 1`] = `
+"<div role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</div>"
+`;
+
+exports[`tree > renders with class correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" class="absolute" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with collapsedIcon correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">Default Collapsed</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with default slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with defaultExpanded correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with defaultExpanded item correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="true" aria-level="1" data-indent="1" data-expanded="" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">Default Expanded</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <ul role="group" class="" data-pohon="tree-list-with-children">
+      <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="2" data-indent="2" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+        <!--v-if-->
+      </li>
+      <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="2" data-indent="2" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+      <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="2" data-indent="2" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with defaultValue correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="true" aria-expanded="false" aria-level="1" data-indent="1" data-selected="" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with disabled correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" disabled="" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" disabled="" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" disabled="" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with disabled item correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" disabled="" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">Disabled item</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with dynamic slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item="">dynamic slot</button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with expanded correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with expandedIcon correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="true" aria-level="1" data-indent="1" data-expanded="" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">Default Expanded</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <ul role="group" class="" data-pohon="tree-list-with-children">
+      <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="2" data-indent="2" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+        <!--v-if-->
+      </li>
+      <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="2" data-indent="2" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+      <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="2" data-indent="2" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+          <!--v-if-->
+        </button>
+        <!--v-if-->
+      </li>
+    </ul>
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with getKey correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with item slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item="">item slot</button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item="">item slot</button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with item-leading slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item="">leading slot<span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item="">leading slot<span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with item-trailing slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span><span class="" data-pohon="tree-link-trailing">trailing slot</span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span><span class="" data-pohon="tree-link-trailing">trailing slot</span></button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with item-wrapper slot correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item">wrapper slot
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item">wrapper slot
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with items correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with labelKey correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">root</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app-vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt-config-ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with modelValue correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="true" aria-expanded="false" aria-level="1" data-indent="1" data-selected="" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with multiple and defaultValue correctly 1`] = `
+"<ul role="tree" aria-multiselectable="true" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="true" aria-expanded="false" aria-level="1" data-indent="1" data-selected="" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="true" aria-level="1" data-indent="1" data-selected="" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with multiple and modelValue correctly 1`] = `
+"<ul role="tree" aria-multiselectable="true" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="true" aria-expanded="false" aria-level="1" data-indent="1" data-selected="" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="true" aria-level="1" data-indent="1" data-selected="" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with multiple correctly 1`] = `
+"<ul role="tree" aria-multiselectable="true" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with neutral color correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with size lg correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with size md correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with size sm correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with size xl correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with size xs correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with trailingIcon correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with ui correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="font-bold" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="font-bold" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="font-bold" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;
+
+exports[`tree > renders with virtualize correctly 1`] = `
+"<ul role="tree" tabindex="-1" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <div data-akar-virtualizer="" style="position: relative; width: 100%; height: 96px;"></div>
+</ul>"
+`;
+
+exports[`tree > renders without nested correctly 1`] = `
+"<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-pohon="tree-root">
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-expanded="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app</span><span class="" data-pohon="tree-link-trailing"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-trailing-icon"></svg></span></button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">app.vue</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+  <li role="presentation" class="" data-pohon="tree-item"><button type="button" class="" tabindex="0" data-pohon="tree-link" role="treeitem" aria-selected="false" aria-level="1" data-indent="1" data-orientation="vertical" data-akar-collection-item=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="" data-pohon="tree-link-leading-icon"></svg><span class="" data-pohon="tree-link-label">nuxt.config.ts</span>
+      <!--v-if-->
+    </button>
+    <!--v-if-->
+  </li>
+</ul>"
+`;

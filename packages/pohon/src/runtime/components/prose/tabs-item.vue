@@ -9,6 +9,7 @@ export interface ProseTabsItemProps {
   label: string;
   description?: string;
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface ProseTabsItemSlots {
@@ -19,18 +20,20 @@ export interface ProseTabsItemSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
 const props = defineProps<ProseTabsItemProps>();
 defineSlots<ProseTabsItemSlots>();
 
 const appConfig = useAppConfig() as ProseTabsItem['AppConfig'];
+const pohonProp = useComponentPohon('prose.tabs-item', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.tabsItem || {}) }));
 </script>
 
 <template>
-  <div :class="pohon({ class: props.class })">
+  <div :class="pohon({ class: [pohonProp?.base, props.class] })">
     <slot>
       {{ description }}
     </slot>

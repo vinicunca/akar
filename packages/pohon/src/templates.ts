@@ -5,7 +5,7 @@ import type { PohonModuleOptions } from './module';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { addTemplate, addTypeTemplate, hasNuxtModule, updateTemplates } from '@nuxt/kit';
-import { isFunction, toKebabCase } from '@vinicunca/perkakas';
+import { toKebabCase } from '@vinicunca/perkakas';
 import * as theme from './theme';
 import * as themeContent from './theme/content';
 import * as themeProse from './theme/prose';
@@ -71,7 +71,7 @@ export function getPohonTemplates(
         write: true,
         getContents: async () => {
           const template = theme[component];
-          let result = isFunction(template) ? template(options) : template;
+          let result = typeof template === 'function' ? template(options) : template;
 
           // Override default variants from nuxt.config.ts
           result = applyDefaultVariants(result, options.theme?.defaultVariants);

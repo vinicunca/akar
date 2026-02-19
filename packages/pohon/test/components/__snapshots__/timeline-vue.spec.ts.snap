@@ -1,0 +1,1515 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`timeline > renders with as correctly 1`] = `
+"<section data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</section>"
+`;
+
+exports[`timeline > renders with class correctly 1`] = `
+"<div data-orientation="vertical" class="gap-8" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with custom-wrapper slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">Custom wrapper slot</div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with date slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Date slot</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Date slot</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Date slot</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with defaultValue correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-state="completed" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-state="active" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with description slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Description slot</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">Description slot</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">Description slot</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with indicator slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root">Indicator slot</span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root">Indicator slot</span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root">Indicator slot</span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with items correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with modelValue correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-state="completed" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-state="active" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with neutral color correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with reverse and defaultValue correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-state="active" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-state="completed" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-state="completed" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with reverse and modelValue correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-state="active" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-state="completed" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-state="completed" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with reverse correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size 2xl horizontal correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size 2xl vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size 2xs horizontal correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size 2xs vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size 3xl horizontal correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size 3xl vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size 3xs horizontal correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size 3xs vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size lg horizontal correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size lg vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size md horizontal correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size md vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size sm horizontal correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size sm vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size xl horizontal correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size xl vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size xs horizontal correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with size xs vertical correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with title slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="">Title slot</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="">Title slot</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="">Title slot</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with ui correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 15, 2025</div>
+      <div data-pohon="timeline-title" class="font-bold">Project Kickoff</div>
+      <div data-pohon="timeline-description" class="">Kicked off the project with team alignment. Set up project milestones and allocated resources.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 22, 2025</div>
+      <div data-pohon="timeline-title" class="font-bold">Design Phase</div>
+      <div data-pohon="timeline-description" class="">User research and design workshops. Created wireframes and prototypes for user testing</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="font-bold">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Apr 5, 2025</div>
+      <div data-pohon="timeline-title" class="font-bold">Testing &amp; Deployment</div>
+      <div data-pohon="timeline-description" class="">QA testing and performance optimization. Deployed the application to production.</div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`timeline > renders with wrapper slot correctly 1`] = `
+"<div data-orientation="vertical" class="" data-pohon="timeline-root">
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">Wrapper slot</div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">Wrapper slot</div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <div data-orientation="vertical" aria-orientation="vertical" role="separator" class="" data-pohon="timeline-separator"></div>
+    </div>
+    <div data-pohon="timeline-wrapper" class="">
+      <div data-pohon="timeline-date" class="">Mar 29, 2025</div>
+      <div data-pohon="timeline-title" class="">Development Sprint</div>
+      <div data-pohon="timeline-description" class="">Frontend and backend development. Implemented core features and integrated with APIs.</div>
+    </div>
+  </div>
+  <div class="" data-pohon="timeline-item">
+    <div class="" data-pohon="timeline-container"><span data-pohon="avatar-root"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" class="akar:color-inherit" data-pohon="avatar-icon"></svg></span>
+      <!--v-if-->
+    </div>
+    <div data-pohon="timeline-wrapper" class="">Wrapper slot</div>
+  </div>
+</div>"
+`;

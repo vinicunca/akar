@@ -26,6 +26,7 @@ export interface PKbdProps {
    */
   size?: Kbd['variants']['size'];
   class?: any;
+  pohon?: { base?: any };
 }
 
 export interface PKbdSlots {
@@ -37,6 +38,7 @@ export interface PKbdSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useKbd } from '../composables/use-kbd';
 import { uv } from '../utils/uv';
 
@@ -50,6 +52,7 @@ defineSlots<PKbdSlots>();
 
 const { getKbdKey } = useKbd();
 const appConfig = useAppConfig() as Kbd['AppConfig'];
+const pohonProp = useComponentPohon('kbd', props);
 
 const pohon = computed(() =>
   uv({ extend: uv(theme), ...(appConfig.pohon?.kbd || {}) }),
@@ -60,7 +63,7 @@ const pohon = computed(() =>
   <APrimitive
     :as="as"
     :class="pohon({
-      class: props.class,
+      class: [pohonProp?.base, props.class],
       color: props.color,
       variant: props.variant,
       size: props.size,

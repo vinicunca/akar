@@ -1,0 +1,110 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`tooltip > renders with arrow correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-state="instant-open" data-pohon="tooltip-content" style="--akar-tooltip-content-transform-origin: var(--akar-popper-transform-origin); --akar-tooltip-content-available-width: var(--akar-popper-available-width); --akar-tooltip-content-available-height: var(--akar-popper-available-height); --akar-tooltip-trigger-width: var(--akar-popper-anchor-width); --akar-tooltip-trigger-height: var(--akar-popper-anchor-height); animation: none;" data-dismissable-layer="" data-side="bottom" data-align="center"><span class="" data-pohon="tooltip-text">Tooltip</span>
+    <!--v-if--><span style="position: absolute; top: 0px; transform-origin: center 0; transform: rotate(180deg); visibility: hidden;"><svg width="10" height="5" rounded="false" viewBox="0 0 12 6" preserveAspectRatio="none" data-pohon="tooltip-arrow" style="display: block;"><path d="M0 0L6 6L12 0"></path></svg></span><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" id="" role="tooltip">Tooltip</span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`tooltip > renders with class correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-state="instant-open" data-pohon="tooltip-content" style="--akar-tooltip-content-transform-origin: var(--akar-popper-transform-origin); --akar-tooltip-content-available-width: var(--akar-popper-available-width); --akar-tooltip-content-available-height: var(--akar-popper-available-height); --akar-tooltip-trigger-width: var(--akar-popper-anchor-width); --akar-tooltip-trigger-height: var(--akar-popper-anchor-height); animation: none;" data-dismissable-layer="" class="text-sm" data-side="bottom" data-align="center"><span class="" data-pohon="tooltip-text">Tooltip</span>
+    <!--v-if-->
+    <!--v-if--><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" id="" role="tooltip">Tooltip</span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`tooltip > renders with content slot correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-state="instant-open" data-pohon="tooltip-content" style="--akar-tooltip-content-transform-origin: var(--akar-popper-transform-origin); --akar-tooltip-content-available-width: var(--akar-popper-available-width); --akar-tooltip-content-available-height: var(--akar-popper-available-height); --akar-tooltip-trigger-width: var(--akar-popper-anchor-width); --akar-tooltip-trigger-height: var(--akar-popper-anchor-height); animation: none;" data-dismissable-layer="" data-side="bottom" data-align="center">Content slot
+    <!--v-if--><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" id="" role="tooltip">Content slot</span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`tooltip > renders with default slot correctly 1`] = `
+"Default slot
+<!--teleport start-->
+
+
+<div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-state="instant-open" data-pohon="tooltip-content" style="--akar-tooltip-content-transform-origin: var(--akar-popper-transform-origin); --akar-tooltip-content-available-width: var(--akar-popper-available-width); --akar-tooltip-content-available-height: var(--akar-popper-available-height); --akar-tooltip-trigger-width: var(--akar-popper-anchor-width); --akar-tooltip-trigger-height: var(--akar-popper-anchor-height); animation: none;" data-dismissable-layer="" data-side="bottom" data-align="center"><span class="" data-pohon="tooltip-text">Tooltip</span>
+    <!--v-if-->
+    <!--v-if--><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" id="akar-tooltip-content-v-0" role="tooltip">Tooltip</span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`tooltip > renders with kbds correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-state="instant-open" data-pohon="tooltip-content" style="--akar-tooltip-content-transform-origin: var(--akar-popper-transform-origin); --akar-tooltip-content-available-width: var(--akar-popper-available-width); --akar-tooltip-content-available-height: var(--akar-popper-available-height); --akar-tooltip-trigger-width: var(--akar-popper-anchor-width); --akar-tooltip-trigger-height: var(--akar-popper-anchor-height); animation: none;" data-dismissable-layer="" data-side="bottom" data-align="center"><span class="" data-pohon="tooltip-text">Tooltip</span><span class="" data-pohon="tooltip-kbds"><kbd class="">Ctrl</kbd><kbd class="">K</kbd></span>
+    <!--v-if--><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" id="" role="tooltip">Tooltip K</span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`tooltip > renders with text correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-state="instant-open" data-pohon="tooltip-content" style="--akar-tooltip-content-transform-origin: var(--akar-popper-transform-origin); --akar-tooltip-content-available-width: var(--akar-popper-available-width); --akar-tooltip-content-available-height: var(--akar-popper-available-height); --akar-tooltip-trigger-width: var(--akar-popper-anchor-width); --akar-tooltip-trigger-height: var(--akar-popper-anchor-height); animation: none;" data-dismissable-layer="" data-side="bottom" data-align="center"><span class="" data-pohon="tooltip-text">Tooltip</span>
+    <!--v-if-->
+    <!--v-if--><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" id="" role="tooltip">Tooltip</span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;
+
+exports[`tooltip > renders with ui correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+<div data-akar-popper-content-wrapper="" style="position: fixed; left: 0px; top: 0px; transform: translate(0, -200%); min-width: max-content;">
+  <div data-state="instant-open" data-pohon="tooltip-content" style="--akar-tooltip-content-transform-origin: var(--akar-popper-transform-origin); --akar-tooltip-content-available-width: var(--akar-popper-available-width); --akar-tooltip-content-available-height: var(--akar-popper-available-height); --akar-tooltip-trigger-width: var(--akar-popper-anchor-width); --akar-tooltip-trigger-height: var(--akar-popper-anchor-height); animation: none;" data-dismissable-layer="" class="text-sm" data-side="bottom" data-align="center"><span class="" data-pohon="tooltip-text">Tooltip</span>
+    <!--v-if-->
+    <!--v-if--><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;" id="" role="tooltip">Tooltip</span>
+  </div>
+</div>
+
+
+<!--teleport end-->"
+`;

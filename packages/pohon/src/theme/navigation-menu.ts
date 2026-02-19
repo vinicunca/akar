@@ -104,14 +104,21 @@ export default (options: Required<PohonModuleOptions>) => {
         true: '',
       },
       level: {
+        true: {
+          item: '',
+          itemWithChildren: '',
+        },
+      },
+      childActive: {
         true: '',
       },
       collapsed: {
-        true: '',
+        true: {
+          item: '',
+          link: '',
+        },
       },
     },
-
-    compoundVariants: [],
 
     defaultVariants: {
       color: 'primary',

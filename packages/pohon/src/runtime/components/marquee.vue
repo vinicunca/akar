@@ -29,6 +29,7 @@ export interface PMarqueeSlots {
 import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -42,6 +43,7 @@ const props = withDefaults(
 defineSlots<PMarqueeSlots>();
 
 const appConfig = useAppConfig() as Marquee['AppConfig'];
+const pohonProp = useComponentPohon('marquee', props);
 
 const pohon = computed(() =>
   uv({ extend: uv(theme), ...(appConfig.pohon?.marquee || {}) })({
@@ -57,13 +59,13 @@ const pohon = computed(() =>
   <APrimitive
     :as="as"
     :data-orientation="orientation"
-    :class="pohon.root({ class: [props.pohon?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     data-pohon="marquee-root"
   >
     <div
       v-for="i in repeat"
       :key="i"
-      :class="pohon.content({ class: [props.pohon?.content] })"
+      :class="pohon.content({ class: [pohonProp?.content] })"
       data-pohon="marquee-content"
     >
       <slot />

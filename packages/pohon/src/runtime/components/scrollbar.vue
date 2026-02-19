@@ -52,6 +52,7 @@ export interface PScrollbarEmits {
 
 <script lang="ts" setup>
 import { computed, ref, useAppConfig } from '#imports';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PScrollbarArea from './scrollbar-area.vue';
 import PScrollbarBar from './scrollbar-bar.vue';
@@ -125,6 +126,7 @@ function handleScroll(event: Event) {
 }
 
 const appConfig = useAppConfig() as Scrollbar['AppConfig'];
+const pohonProp = useComponentPohon('scrollbar', props);
 
 const pohon = computed(() =>
   uv({
@@ -143,20 +145,20 @@ const pohon = computed(() =>
   <PScrollbarArea
     :on-scroll="handleScroll"
     :class="[
-      pohon.root({ class: [props.class, props.pohon?.root] }),
+      pohon.root({ class: [props.class, pohonProp?.root] }),
       computedShadowClasses,
     ]"
   >
     <div
       v-if="showShadowTop"
-      :class="pohon.shadowTop({ class: props.pohon?.shadowTop })"
+      :class="pohon.shadowTop({ class: pohonProp?.shadowTop })"
     />
 
     <slot />
 
     <div
       v-if="showShadowBottom"
-      :class="pohon.shadowBottom({ class: props.pohon?.shadowBottom })"
+      :class="pohon.shadowBottom({ class: pohonProp?.shadowBottom })"
     />
 
     <PScrollbarBar
