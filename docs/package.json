@@ -48,6 +48,7 @@
     "ufo": "catalog:docs",
     "unocss": "catalog:base",
     "valibot": "catalog:docs",
+    "vue": "catalog:core",
     "vue-component-meta": "catalog:docs",
     "yup": "catalog:docs",
     "zod": "catalog:pohon"
