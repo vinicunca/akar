@@ -65,8 +65,7 @@
     "./locale": {
       "types": "./dist/runtime/locale/index.d.ts",
       "import": "./dist/runtime/locale/index.js"
-    },
-    "./layer-theme": "./layer-theme/nuxt.config.ts"
+    }
   },
   "main": "./dist/module.mjs",
   "typesVersions": {
