@@ -1,5 +1,12 @@
 # akar
 
+## 1.19.0
+
+### Minor Changes
+
+- [#772](https://github.com/vinicunca/akar/pull/772) [`e531179`](https://github.com/vinicunca/akar/commit/e531179e11063b5f4ad7fc595d2d42c305aed00f) Thanks [@praburangki](https://github.com/praburangki)! - - fix(RangeCalendar): range sync + highlight fixes
+  - fix(TimeField): prioritize hour-cycle prop over internal locale
+
 ## 1.18.0
 
 ### Minor Changes
