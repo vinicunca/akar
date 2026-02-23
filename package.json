@@ -25,7 +25,7 @@
     "lint:fix": "eslint . --fix",
     "bump": "changeset",
     "ci:version": "changeset version",
-    "ci:publish": "pnpm dev:prepare && pnpm build && changeset publish"
+    "ci:publish": "changeset publish"
   },
   "devDependencies": {
     "@changesets/changelog-github": "catalog:base",

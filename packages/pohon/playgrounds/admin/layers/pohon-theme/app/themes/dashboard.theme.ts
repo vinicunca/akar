@@ -1,24 +1,34 @@
 // @unocss-include
 
 import type {
-  PThemeDashboardContent,
   PThemeDashboardLayout,
-  PThemeDashboardMenuItem,
-  PThemeDashboardMenuRoot,
-  PThemeDashboardSidebar,
+  PThemeDashboardLayoutContent,
+  PThemeDashboardLayoutHeader,
+  PThemeDashboardLayoutSidebar,
 } from 'pohon-ui';
 
 export const dashboardThemes = {
   dashboardLayout: {
     slots: {
       root: 'relative flex min-h-full w-full',
-      content: 'flex flex-1 flex-col overflow-hidden transition-all-300 ease-in',
+      contentRoot: 'flex flex-1 flex-col overflow-hidden transition-all-300 ease-in',
+      headerWrapper: 'transition-all-200 overflow-hidden',
+      toggleSidebar: 'mr-2',
+      contentWrapper: 'transition-margin-200',
+    },
+
+    variants: {
+      shadowHeader: {
+        true: {
+          headerWrapper: 'shadow-[0_16px_24px_hsl(var(--pohon-color-background))]',
+        },
+      },
     },
   } satisfies PThemeDashboardLayout,
 
   dashboardLayoutHeader: {
     base: 'bg-header pl-2 border-b flex flex-[0_0_auto] w-full transition-margin-200 items-center top-0',
-  },
+  } satisfies PThemeDashboardLayoutHeader,
 
   dashboardSidebar: {
     slots: {
@@ -35,18 +45,9 @@ export const dashboardThemes = {
         },
       },
     },
-  } satisfies PThemeDashboardSidebar,
-  dashboardContent: {
-    base: 'bg-background-elevated',
-  } satisfies PThemeDashboardContent,
-  dashboardMenuRoot: {
-    slots: {
-      // root: 'relative pl-0 m-0 list-none bg-background box-border',
-    },
-  } satisfies PThemeDashboardMenuRoot,
-  dashboardMenuItem: {
-    slots: {
-      root: 'pohon-menu-item',
-    },
-  } satisfies PThemeDashboardMenuItem,
+  } satisfies PThemeDashboardLayoutSidebar,
+
+  dashboardLayoutContent: {
+    base: 'bg-background-elevated relative',
+  } satisfies PThemeDashboardLayoutContent,
 };

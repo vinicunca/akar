@@ -66,14 +66,6 @@ export default defineNuxtConfig({
     },
   },
 
-  typescript: {
-    tsConfig: {
-      include: [
-        '../layers/*/lib/**/*',
-      ],
-    },
-  },
-
   vite: {
     optimizeDeps: {
       include: [

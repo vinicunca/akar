@@ -10,10 +10,6 @@
     "type": "git",
     "url": "git+https://github.com/vinicunca/akar.git"
   },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
   "bugs": {
     "url": "https://github.com/vinicunca/akar/issues"
   },

@@ -40,7 +40,7 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
   const isInvalid = computed(
     () => {
       if (isStartInvalid.value || isEndInvalid.value) {
-        return false;
+        return true;
       }
 
       return Boolean(
@@ -83,7 +83,6 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
     return false;
   };
 
-  // Check if a date exceeds maximum days limit from the start dateAdd commentMore actions
   const rangeIsDateDisabled = (date: DateValue) => {
     if (props.isDateDisabled(date)) {
       return true;
@@ -148,20 +147,19 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
       };
     }
 
-    // If maximum days is set and the range exceeds it, limit the highlightAdd commentMore actions
-    // We only apply this when we're in the middle of a selection (no end date yet)
     if (
       props.maximumDays?.value
       && !props.end.value
     ) {
-      // Determine the direction of selection and limit to maximum days
-      const cappedEnd = isStartBeforeFocused
-        ? start.add({ days: props.maximumDays.value - 1 })
-        : start.subtract({ days: props.maximumDays.value });
+      const maximumDays = props.maximumDays.value;
+      const anchor = props.start.value;
 
-      return {
-        start,
-        end: cappedEnd,
+      if (isStartBeforeFocused) {
+        const maxEnd = anchor.add({ days: maximumDays - 1 });
+        return { start: anchor, end: maxEnd };
+      } else {
+        const minStart = anchor.subtract({ days: maximumDays - 1 });
+        return { start: minStart, end: anchor };
       };
     }
 

@@ -121,7 +121,7 @@ catalogs:
     '@tiptap/suggestion': 3.16.0
     '@tiptap/vue-3': 3.16.0
     '@unocss/nuxt': 66.6.0
-    '@vinicunca/unocss-preset': 1.40.0
+    '@vinicunca/unocss-preset': 1.41.0
     citty: ^0.2.0
     colortranslator: ^5.0.0
     consola: ^3.4.2

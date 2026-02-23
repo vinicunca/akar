@@ -118,21 +118,23 @@ function changeDate(event: KeyboardEvent | MouseEvent, date: DateValue) {
     return;
   }
 
-  rootContext.lastPressedDateValue.value = date.copy();
-
   if (rootContext.startValue.value && rootContext.highlightedRange.value === null) {
     if (isSameDay(date, rootContext.startValue.value) && !rootContext.preventDeselect.value && !rootContext.endValue.value) {
       rootContext.startValue.value = undefined;
       rootContext.onPlaceholderChange(date);
+      rootContext.lastPressedDateValue.value = date.copy();
       return;
     } else if (!rootContext.endValue.value) {
       event.preventDefault();
       if (rootContext.lastPressedDateValue.value && isSameDay(rootContext.lastPressedDateValue.value, date)) {
         rootContext.startValue.value = date.copy();
       }
+      rootContext.lastPressedDateValue.value = date.copy();
       return;
     }
   }
+
+  rootContext.lastPressedDateValue.value = date.copy();
 
   if (
     rootContext.startValue.value

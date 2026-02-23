@@ -777,7 +777,9 @@ export function useDateField(props: UseDateFieldProps) {
 
     if (isNumberString(event.key)) {
       const num = Number.parseInt(event.key);
-      const is12Hour = uses12HourFormat(props.formatter.getLocale());
+      const is12Hour = props.hourCycle !== undefined
+        ? props.hourCycle === 12
+        : uses12HourFormat(props.formatter.getLocale());
       const max = is12Hour ? 12 : 24;
 
       let displayPrev = prevValue;
@@ -990,7 +992,8 @@ export function useDateField(props: UseDateFieldProps) {
       && 'minute' in props.segmentValues.value
       && props.segmentValues.value.minute !== null
       && props.step.value.minute
-      && props.step.value.minute > 1) {
+      && props.step.value.minute > 1
+    ) {
       props.segmentValues.value.minute = snapValueToStep({
         value: props.segmentValues.value.minute,
         min: 0,
@@ -1002,7 +1005,8 @@ export function useDateField(props: UseDateFieldProps) {
       && 'second' in props.segmentValues.value
       && props.segmentValues.value.second !== null
       && props.step.value.second
-      && props.step.value.second > 1) {
+      && props.step.value.second > 1
+    ) {
       props.segmentValues.value.second = snapValueToStep({
         value: props.segmentValues.value.second,
         min: 0,
