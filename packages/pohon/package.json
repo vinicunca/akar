@@ -114,7 +114,7 @@
   ],
   "scripts": {
     "dev": "nuxt dev playgrounds/nuxt --uiDev",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare ../../docs && pnpm dev:vue:build",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/admin && nuxt prepare ../../docs",
     "dev:vue:build": "pnpm --filter './playgrounds/vue' build",
     "build": "nuxt-module-build build",
     "typecheck": "vue-tsc --noEmit",

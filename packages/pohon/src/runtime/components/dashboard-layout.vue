@@ -178,6 +178,8 @@ export interface PDashboardLayoutProps {
   zIndex?: number;
 
   class?: any;
+
+  pohon?: DashboardLayout['slots'];
 }
 
 export interface PDashboardLayoutSlots {
@@ -200,6 +202,7 @@ import type { CSSProperties } from 'vue';
 import { useAppConfig } from '#imports';
 import { useMouse, useScroll, useThrottleFn } from '@vueuse/core';
 import { computed, ref, useTemplateRef, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
 import { useDashboardLayout } from '../composables/use-dashboard-layout';
 import {
   useDashboardLayoutFooterStyle,
@@ -678,13 +681,20 @@ function handleClickMask() {
   sidebarCollapsed.value = true;
 }
 
+const hasScrolled = computed(() =>
+  scrollY.value > 20,
+);
+
 const appConfig = useAppConfig() as DashboardLayout['AppConfig'];
+const pohonProp = useComponentPohon('dashboardLayout', props);
 
 const pohon = computed(() =>
   uv({
     extend: uv(theme),
     ...(appConfig.pohon?.dashboardLayout || {}),
-  })(),
+  })({
+    shadowHeader: hasScrolled.value,
+  }),
 );
 </script>
 
@@ -739,16 +749,11 @@ const pohon = computed(() =>
 
     <div
       ref="contentRef"
-      class="flex flex-1 flex-col transition-all-300 ease-in overflow-hidden"
+      :class="pohon.contentRoot({ class: pohonProp.contentRoot })"
     >
       <div
-        :class="[
-          {
-            'shadow-[0_16px_24px_hsl(var(--pohon-color-background))]': scrollY > 20,
-          },
-        ]"
         :style="headerWrapperStyle"
-        class="transition-all-200 overflow-hidden"
+        :class="pohon.headerWrapper({ class: pohonProp.headerWrapper })"
       >
         <PDashboardLayoutHeader
           v-if="props.showHeader"
@@ -771,8 +776,8 @@ const pohon = computed(() =>
           <template #toggle-button>
             <PButton
               v-if="showHeaderToggleButton"
-              class="mr-2"
-              icon="i-lucide:menu"
+              :class="pohon.toggleSidebar({ class: pohonProp.toggleSidebar })"
+              :icon="appConfig.pohon.icons.menu"
               color="neutral"
               variant="ghost"
               @click="handleHeaderToggle"
@@ -801,7 +806,7 @@ const pohon = computed(() =>
         :padding-right="props.contentPaddingRight"
         :padding-top="props.contentPaddingTop"
         :style="contentStyle"
-        class="transition-margin-200"
+        :class="pohon.contentWrapper({ class: pohonProp.contentWrapper })"
       >
         <slot name="content" />
 

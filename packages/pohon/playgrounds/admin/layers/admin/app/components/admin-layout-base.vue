@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import type { PDashboardMenuItem } from 'pohon-ui';
+import type { PNavigationMenuItem } from 'pohon-ui';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { preferencesManager } from '#layers/admin/app/preferences';
 import { clone, isIncludedIn } from '@vinicunca/perkakas';
 import { P_DASHBOARD_LAYOUT } from 'pohon-ui/utils/dashboard';
 import { LayoutContent, LayoutContentSpinner } from './content';
 import {
-  LayoutExtraMenu,
   LayoutMenu,
-  LayoutMixedMenu,
 } from './menu';
 import { LayoutTabbar } from './tabbar';
 import { Breadcrumb, PreferencesButton } from './widgets';
@@ -80,10 +78,6 @@ const showHeaderNav = computed(() => {
 });
 
 const {
-  handleMenuSelect,
-  handleMenuOpen,
-  headerActive,
-  headerMenus,
   sidebarMenus,
   mixHeaderMenus,
   sidebarVisible,
@@ -92,9 +86,6 @@ const {
 const {
   extraActiveMenu,
   extraMenus,
-  handleDefaultSelect,
-  handleMenuMouseEnter,
-  handleMixedMenuSelect,
   handleSideMouseLeave,
   isSidebarExtraVisible,
 } = useAdminExtraMenu(mixHeaderMenus);
@@ -110,7 +101,7 @@ const { t } = useI18n();
 function wrapperMenus(
   { menus, deep = true }:
   {
-    menus: Array<PDashboardMenuItem>;
+    menus: Array<PNavigationMenuItem>;
     deep?: boolean;
   },
 ) {
@@ -293,32 +284,6 @@ const sidebarExtraCollapsed = computed({
         :theme="theme"
         @clear-preferences-and-logout="clearPreferencesAndLogout"
       >
-        <template
-          v-if="!showHeaderNav && preferences.breadcrumb.enable"
-          #breadcrumb
-        >
-          <Breadcrumb
-            :hide-when-only-one="preferences.breadcrumb.hideOnlyOne"
-            :show-home="preferences.breadcrumb.showHome"
-            :show-icon="preferences.breadcrumb.showIcon"
-            :type="preferences.breadcrumb.styleType"
-          />
-        </template>
-
-        <template
-          v-if="showHeaderNav"
-          #menu
-        >
-          <!-- <LayoutMenu
-            :default-active="headerActive"
-            :menus="wrapperMenus({ menus: headerMenus })"
-            :theme="headerTheme"
-            class="w-full"
-            mode="horizontal"
-            @select="handleMenuSelect"
-          /> -->
-        </template>
-
         <template #user-dropdown>
           <slot name="user-dropdown" />
         </template>
@@ -347,40 +312,6 @@ const sidebarExtraCollapsed = computed({
         :collapsed="preferences.sidebar.collapsed"
         :items="wrapperMenus({ menus: sidebarMenus })"
       />
-    </template>
-
-    <template #mixed-menu>
-      <LayoutMixedMenu
-        :active-path="extraActiveMenu"
-        :items="wrapperMenus({ menus: mixHeaderMenus, deep: false })"
-      />
-    </template>
-
-    <!-- Side extra area -->
-    <template #side-extra>
-      <LayoutExtraMenu
-        :type="preferences.navigation.isAccordion ? 'multiple' : 'single'"
-        :collapsed="preferences.sidebar.extraCollapsed"
-        :items="wrapperMenus({ menus: extraMenus })"
-      />
-    </template>
-
-    <template #side-extra-title>
-      <PLogo
-        v-if="preferences.logo.enable"
-        :fit="preferences.logo.fit"
-        :src="preferences.logo.source"
-        :src-dark="preferences.logo.sourceDark"
-        :text="preferences.app.name"
-        :theme="theme"
-      >
-        <template
-          v-if="$slots['logo-text']"
-          #text
-        >
-          <slot name="logo-text" />
-        </template>
-      </PLogo>
     </template>
 
     <template #tabbar>

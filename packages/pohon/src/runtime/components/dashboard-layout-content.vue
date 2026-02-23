@@ -3,8 +3,6 @@ import type { AppConfig } from '@nuxt/schema';
 import type { PDashboardContentCompactType } from '../types/dashboard';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-layout-content';
-import { APrimitiveSlot } from 'akar';
-import { useDashboardLayoutContentStyle } from '../composables/use-dashboard-layout-style';
 
 type DashboardLayoutContent = ComponentConfig<typeof theme, AppConfig, 'dashboardLayoutContent'>;
 
@@ -24,6 +22,8 @@ export interface PDashboardLayoutContentProps {
   paddingTop: number;
 
   class?: any;
+
+  pohon?: { base?: any };
 }
 
 export interface PDashboardLayoutContentSlots {
@@ -35,7 +35,10 @@ export interface PDashboardLayoutContentSlots {
 <script setup lang="ts">
 import type { CSSProperties } from 'vue';
 import { useAppConfig } from '#imports';
+import { APrimitiveSlot } from 'akar';
 import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { useDashboardLayoutContentStyle } from '../composables/use-dashboard-layout-style';
 import { uv } from '../utils/uv';
 
 const props = withDefaults(
@@ -75,6 +78,7 @@ const rootStyle = computed<CSSProperties>(() => {
 });
 
 const appConfig = useAppConfig() as DashboardLayoutContent['AppConfig'];
+const pohonProp = useComponentPohon('dashboardLayoutHeader', props);
 
 const pohon = computed(() =>
   uv({
@@ -88,7 +92,7 @@ const pohon = computed(() =>
   <main
     ref="contentElement"
     :style="rootStyle"
-    :class="pohon({ class: props.class })"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <APrimitiveSlot :style="overlayStyle">
       <slot name="overlay" />
