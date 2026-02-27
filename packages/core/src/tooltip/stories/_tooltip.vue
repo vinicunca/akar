@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import type { ATooltipProviderProps } from '..';
 import { ref } from 'vue';
 import { ATooltipArrow, ATooltipContent, ATooltipPortal, ATooltipProvider, ATooltipRoot, ATooltipTrigger } from '..';
+
+const props = defineProps<{
+  tooltipProvider?: ATooltipProviderProps;
+}>();
 
 const toggleState = ref(false);
 </script>
 
 <template>
-  <ATooltipProvider>
+  <ATooltipProvider v-bind="props.tooltipProvider">
     <ATooltipRoot v-model:open="toggleState">
       <ATooltipTrigger
         class="text-violet11 shadow-blackA7 hover:bg-violet3 outline-none rounded-full bg-white inline-flex h-[35px] w-[35px] shadow-[0_2px_10px] items-center justify-center focus:shadow-[0_0_0_2px] focus:shadow-black"

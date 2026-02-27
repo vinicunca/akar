@@ -24,6 +24,11 @@ export interface ComboboxContentImplProps extends APopperContentProps, Dismissab
   position?: 'inline' | 'popper';
   /** The document.body will be lock, and scrolling will be disabled. */
   bodyLock?: boolean;
+  /**
+   * When `true`, hides the content when there are no items matching the filter.
+   * @defaultValue false
+   */
+  hideWhenEmpty?: boolean;
 }
 
 export const [
@@ -50,6 +55,11 @@ const emits = defineEmits<ComboboxContentImplEmits>();
 
 const { position } = toRefs(props);
 const rootContext = injectAComboboxRootContext();
+
+const isEmpty = computed(() => rootContext.ignoreFilter.value
+  ? rootContext.allItems.value.size === 0
+  : rootContext.filterState.value.count === 0,
+);
 
 const { forwardRef, currentElement } = useForwardExpose();
 useBodyScrollLock(props.bodyLock);
@@ -130,9 +140,11 @@ onUnmounted(() => {
           :id="rootContext.contentId"
           :ref="forwardRef"
           :data-state="rootContext.open.value ? 'open' : 'closed'"
+          :data-empty="isEmpty ? '' : undefined"
           :style="{
             // flex layout so we can place the scroll buttons properly
-            display: 'flex',
+            // When hideWhenEmpty is true, hide the content when no items match
+            display: (props.hideWhenEmpty && isEmpty) ? 'none' : 'flex',
             flexDirection: 'column',
             // reset the outline by default as the content MAY get focused
             outline: 'none',

@@ -19,9 +19,7 @@ import TooltipContentHoverable from './tooltip-content-hoverable.vue';
 import TooltipContentImpl from './tooltip-content-impl.vue';
 import { injectATooltipRootContext } from './tooltip-root.vue';
 
-const props = withDefaults(defineProps<ATooltipContentProps>(), {
-  side: 'top',
-});
+const props = defineProps<ATooltipContentProps>();
 const emits = defineEmits<ATooltipContentEmits>();
 
 const rootContext = injectATooltipRootContext();

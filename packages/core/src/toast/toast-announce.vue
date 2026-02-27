@@ -16,7 +16,10 @@ useRafFn(() => {
 </script>
 
 <template>
-  <AVisuallyHidden v-if="isAnnounced || renderAnnounceText">
+  <AVisuallyHidden
+    v-if="isAnnounced || renderAnnounceText"
+    feature="fully-hidden"
+  >
     {{ providerContext.label.value }}
     <slot />
   </AVisuallyHidden>

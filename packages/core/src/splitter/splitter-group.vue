@@ -12,18 +12,18 @@ import {
 
 export interface ASplitterGroupProps extends APrimitiveProps {
   /** Group id; falls back to `useId` when not provided. */
-  id?: null | string;
+  id?: string | null;
   /** Unique id used to auto-save group arrangement via `localStorage`. */
-  autoSaveId?: null | string;
+  autoSaveId?: string | null;
   /** The group orientation of splitter. */
   direction: Direction;
   /** Step size when arrow key was pressed. */
-  keyboardResizeBy?: null | number;
+  keyboardResizeBy?: number | null;
   /** Custom storage API; defaults to localStorage */
   storage?: PanelGroupStorage;
 }
 
-export type ASplitterGroupEmits = {
+export type SplitterGroupEmits = {
   /** Event handler called when group layout changes */
   layout: [val: Array<number>];
 };
@@ -31,7 +31,7 @@ export type ASplitterGroupEmits = {
 const LOCAL_STORAGE_DEBOUNCE_INTERVAL = 100;
 
 export type PanelGroupStorage = {
-  getItem: (name: string) => null | string;
+  getItem: (name: string) => string | null;
   setItem: (name: string, value: string) => void;
 };
 
@@ -57,7 +57,7 @@ export type PanelGroupContext = {
   startDragging: (dragHandleId: string, event: ResizeEvent) => void;
   stopDragging: () => void;
   unregisterPanel: (panelData: PanelData) => void;
-  panelGroupElement: Ref<null | ParentNode>;
+  panelGroupElement: Ref<ParentNode | null>;
 
   // Exposed function for child component
   collapsePanel: (panelData: PanelData) => void;
@@ -73,12 +73,12 @@ export const [injectPanelGroupContext, providePanelGroupContext] = createContext
 
 <script setup lang="ts">
 import type { PanelConstraints, PanelData } from './splitter-panel.vue';
-
 import type { Direction, DragState, ResizeEvent, ResizeHandler } from './utils/types';
 import { APrimitive } from '../primitive';
 import { assert } from './utils/assert';
 import { calculateDeltaPercentage, calculateUnsafeDefaultLayout } from './utils/calculate';
 import { callPanelCallbacks } from './utils/call-panel-callbacks';
+import { fuzzyCompareNumbers } from './utils/compare';
 import debounce from './utils/debounce';
 import { getResizeHandleElement } from './utils/dom';
 import { getResizeEventCursorPosition, isKeyDown, isMouseEvent, isTouchEvent } from './utils/events';
@@ -92,6 +92,7 @@ import {
   reportConstraintsViolation,
 } from './utils/registry';
 import { computePanelFlexBoxStyle } from './utils/style';
+import { convertPanelConstraintsToPercent, hasPixelSizedPanel, recalculateLayoutForPixelPanels } from './utils/units';
 import { validatePanelGroupLayout } from './utils/validation';
 
 const props = withDefaults(defineProps<ASplitterGroupProps>(), {
@@ -99,7 +100,7 @@ const props = withDefaults(defineProps<ASplitterGroupProps>(), {
   keyboardResizeBy: 10,
   storage: () => defaultStorage,
 });
-const emits = defineEmits<ASplitterGroupEmits>();
+const emits = defineEmits<SplitterGroupEmits>();
 
 defineSlots<{
   default?: (props: {
@@ -113,11 +114,12 @@ const debounceMap: {
 } = {};
 
 const { direction } = toRefs(props);
-const groupId = useId(props.id, 'akar-splitter-group');
+const groupId = useId(props.id, 'reka-splitter-group');
 const dir = useDirection();
 const { forwardRef, currentElement: panelGroupElementRef } = useForwardExpose();
 
 const dragState = ref<DragState | null>(null);
+const groupSizeInPixels = ref<number | null>(null);
 const layout = ref<Array<number>>([]);
 const panelIdToLastNotifiedSizeMapRef = ref<Record<string, number>>({});
 const panelSizeBeforeCollapseRef = ref<Map<string, number>>(new Map());
@@ -131,11 +133,11 @@ const committedValuesRef = computed(() => ({
   keyboardResizeBy: props.keyboardResizeBy,
   storage: props.storage,
 }) satisfies {
-  autoSaveId: null | string;
+  autoSaveId: string | null;
   direction: Direction;
   dragState: DragState | null;
   id: string;
-  keyboardResizeBy: null | number;
+  keyboardResizeBy: number | null;
   storage: PanelGroupStorage;
 });
 
@@ -149,6 +151,47 @@ const eagerValuesRef = ref<{
   panelDataArrayChanged: false,
 });
 
+function getGroupSizeInPixels(): number | null {
+  if (groupSizeInPixels.value != null) {
+    return groupSizeInPixels.value;
+  }
+
+  const element = panelGroupElementRef.value;
+  if (element && element instanceof HTMLElement) {
+    const rect = element.getBoundingClientRect();
+    const size = direction.value === 'horizontal' ? rect.width : rect.height;
+
+    if (!Number.isNaN(size)) {
+      groupSizeInPixels.value = size;
+      return size;
+    }
+  }
+
+  return null;
+}
+
+function getPanelConstraintsInPercent(groupSizeOverride?: number | null) {
+  const groupSize = groupSizeOverride ?? getGroupSizeInPixels();
+
+  return convertPanelConstraintsToPercent({
+    panelDataArray: eagerValuesRef.value.panelDataArray,
+    groupSizeInPixels: groupSize,
+  });
+}
+
+function getPanelDataWithPercentConstraints(groupSizeOverride?: number | null) {
+  const percentConstraints = getPanelConstraintsInPercent(groupSizeOverride);
+
+  if (!percentConstraints) {
+    return null;
+  }
+
+  return eagerValuesRef.value.panelDataArray.map((panelData, index) => ({
+    ...panelData,
+    constraints: percentConstraints[index],
+  }));
+}
+
 function setLayout(val: Array<number>) {
   layout.value = val;
 }
@@ -160,6 +203,38 @@ useWindowSplitterPanelGroupBehavior({
   panelDataArray: eagerValuesRef.value.panelDataArray,
   setLayout,
   panelGroupElement: panelGroupElementRef,
+  getPanelDataWithPercentConstraints,
+});
+
+watchEffect((onCleanup) => {
+  const element = panelGroupElementRef.value;
+  if (!element) {
+    return;
+  }
+
+  if (typeof ResizeObserver !== 'function') {
+    return;
+  }
+
+  const resizeObserver = new ResizeObserver((entries) => {
+    const entry = entries[0];
+    if (!entry) {
+      return;
+    }
+
+    const { height, width } = entry.contentRect;
+    const nextSize = direction.value === 'horizontal' ? width : height;
+
+    if (!Number.isNaN(nextSize)) {
+      groupSizeInPixels.value = nextSize;
+    }
+  });
+
+  if (element instanceof HTMLElement) {
+    resizeObserver.observe(element);
+  }
+
+  onCleanup(() => resizeObserver.disconnect());
 });
 
 watchEffect(() => {
@@ -258,18 +333,26 @@ watch(() => eagerValuesRef.value.panelDataArrayChanged, () => {
     }
 
     if (unsafeLayout === null) {
+      const panelDataArrayWithPercentConstraints = getPanelDataWithPercentConstraints();
+      if (!panelDataArrayWithPercentConstraints) {
+        return;
+      }
+
       unsafeLayout = calculateUnsafeDefaultLayout({
-        panelDataArray,
+        panelDataArray: panelDataArrayWithPercentConstraints,
       });
+    }
+
+    const panelConstraints = getPanelConstraintsInPercent();
+    if (!panelConstraints) {
+      return;
     }
 
     // Validate even saved layouts in case something has changed since last render
     // e.g. for pixel groups, this could be the size of the window
     const nextLayout = validatePanelGroupLayout({
       layout: unsafeLayout,
-      panelConstraints: panelDataArray.map(
-        (panelData) => panelData.constraints,
-      ),
+      panelConstraints,
     });
 
     if (!areArrayEqual(prevLayout, nextLayout)) {
@@ -284,6 +367,54 @@ watch(() => eagerValuesRef.value.panelDataArrayChanged, () => {
         panelIdToLastNotifiedSizeMapRef.value,
       );
     }
+  }
+});
+
+watch(groupSizeInPixels, (nextSize, prevSize) => {
+  if (prevSize == null || nextSize == null) {
+    return;
+  }
+
+  const { layout: prevLayout, panelDataArray } = eagerValuesRef.value;
+  if (prevLayout.length === 0) {
+    return;
+  }
+  if (!hasPixelSizedPanel(panelDataArray)) {
+    return;
+  }
+
+  const recalculatedLayout = recalculateLayoutForPixelPanels({
+    layout: prevLayout,
+    panelDataArray,
+    prevGroupSize: prevSize,
+    nextGroupSize: nextSize,
+  });
+
+  if (!recalculatedLayout) {
+    return;
+  }
+
+  const panelConstraints = getPanelConstraintsInPercent(nextSize);
+  if (!panelConstraints) {
+    return;
+  }
+
+  const nextLayout = validatePanelGroupLayout({
+    layout: recalculatedLayout,
+    panelConstraints,
+  });
+
+  if (!compareLayouts(prevLayout, nextLayout)) {
+    setLayout(nextLayout);
+
+    eagerValuesRef.value.layout = nextLayout;
+    emits('layout', nextLayout);
+
+    callPanelCallbacks(
+      panelDataArray,
+      nextLayout,
+      panelIdToLastNotifiedSizeMapRef.value,
+    );
   }
 });
 
@@ -324,7 +455,10 @@ function registerResizeHandle(dragHandleId: string) {
       delta = -delta;
     }
 
-    const panelConstraints = panelDataArray.map((panelData) => panelData.constraints);
+    const panelConstraints = getPanelConstraintsInPercent();
+    if (!panelConstraints) {
+      return;
+    }
 
     const nextLayout = adjustLayoutByDelta({
       delta,
@@ -383,20 +517,36 @@ function registerResizeHandle(dragHandleId: string) {
 function resizePanel(panelData: PanelData, unsafePanelSize: number) {
   const { layout: prevLayout, panelDataArray } = eagerValuesRef.value;
 
-  const panelConstraintsArray = panelDataArray.map((panelData) => panelData.constraints);
+  const panelConstraintsArray = getPanelConstraintsInPercent();
+  if (!panelConstraintsArray) {
+    return;
+  }
+
+  const panelIndex = findPanelDataIndex(panelDataArray, panelData);
+  const panelUnit = panelData.constraints.sizeUnit ?? '%';
+
+  // Convert px to percent if needed for internal calculation
+  let sizeInPercent = unsafePanelSize;
+  if (panelUnit === 'px') {
+    const groupSize = getGroupSizeInPixels();
+    if (groupSize != null) {
+      sizeInPercent = (unsafePanelSize / groupSize) * 100;
+    }
+  }
 
   const { panelSize, pivotIndices } = panelDataHelper(
     panelDataArray,
     panelData,
     prevLayout,
+    panelConstraintsArray,
   );
 
   assert(panelSize != null);
 
-  const isLastPanel = findPanelDataIndex(panelDataArray, panelData) === panelDataArray.length - 1;
+  const isLastPanel = panelIndex === panelDataArray.length - 1;
   const delta = isLastPanel
-    ? panelSize - unsafePanelSize
-    : unsafePanelSize - panelSize;
+    ? panelSize - sizeInPercent
+    : sizeInPercent - panelSize;
 
   const nextLayout = adjustLayoutByDelta({
     delta,
@@ -425,37 +575,31 @@ function reevaluatePanelConstraints(panelData: PanelData, prevConstraints: Panel
   const index = findPanelDataIndex(panelDataArray, panelData);
   panelDataArray[index] = panelData;
   eagerValuesRef.value.panelDataArrayChanged = true;
-  const {
-    collapsedSize: prevCollapsedSize = 0,
-    collapsible: prevCollapsible,
-  } = prevConstraints;
 
-  const {
-    collapsedSize: nextCollapsedSize = 0,
-    collapsible: nextCollapsible,
-    maxSize: nextMaxSize = 100,
-    minSize: nextMinSize = 0,
-  } = panelData.constraints;
+  const panelConstraintsArray = getPanelConstraintsInPercent();
+  if (!panelConstraintsArray) {
+    return;
+  }
 
+  const nextConstraints = panelConstraintsArray[index];
   const { panelSize: prevPanelSize } = panelDataHelper(
     panelDataArray,
     panelData,
     layout,
+    panelConstraintsArray,
   );
+
   if (prevPanelSize === null) {
-    // It's possible that the panels in this group have changed since the last render
     return;
   }
 
-  if (
-    prevCollapsible
-    && nextCollapsible
-    && prevPanelSize === prevCollapsedSize
-  ) {
-    if (prevCollapsedSize !== nextCollapsedSize) {
+  const nextCollapsedSize = nextConstraints?.collapsedSize ?? 0;
+  const nextMaxSize = nextConstraints?.maxSize ?? 100;
+  const nextMinSize = nextConstraints?.minSize ?? 0;
+
+  if (nextConstraints?.collapsible && isPanelCollapsed(panelData)) {
+    if (prevPanelSize !== nextCollapsedSize) {
       resizePanel(panelData, nextCollapsedSize);
-    } else {
-      // Stay collapsed
     }
   } else if (prevPanelSize < nextMinSize) {
     resizePanel(panelData, nextMinSize);
@@ -515,15 +659,16 @@ function collapsePanel(panelData: PanelData) {
   const { layout: prevLayout, panelDataArray } = eagerValuesRef.value;
 
   if (panelData.constraints.collapsible) {
-    const panelConstraintsArray = panelDataArray.map(
-      (panelData) => panelData.constraints,
-    );
+    const panelConstraintsArray = getPanelConstraintsInPercent();
+    if (!panelConstraintsArray) {
+      return;
+    }
 
     const {
       collapsedSize = 0,
       panelSize,
       pivotIndices,
-    } = panelDataHelper(panelDataArray, panelData, prevLayout);
+    } = panelDataHelper(panelDataArray, panelData, prevLayout, panelConstraintsArray);
 
     assert(
       panelSize != null,
@@ -533,7 +678,13 @@ function collapsePanel(panelData: PanelData) {
     if (panelSize !== collapsedSize) {
       // Store size before collapse;
       // This is the size that gets restored if the expand() API is used.
-      panelSizeBeforeCollapseRef.value.set(panelData.id, panelSize);
+      const sizeUnit = panelData.constraints.sizeUnit ?? '%';
+      const groupSize = groupSizeInPixels.value ?? getGroupSizeInPixels();
+      const sizeBeforeCollapse = sizeUnit === 'px' && groupSize
+        ? (panelSize / 100) * groupSize
+        : panelSize;
+
+      panelSizeBeforeCollapseRef.value.set(panelData.id, sizeBeforeCollapse);
 
       const isLastPanel
         = findPanelDataIndex(panelDataArray, panelData)
@@ -571,26 +722,41 @@ function expandPanel(panelData: PanelData) {
   const { layout: prevLayout, panelDataArray } = eagerValuesRef.value;
 
   if (panelData.constraints.collapsible) {
-    const panelConstraintsArray = panelDataArray.map(
-      (panelData) => panelData.constraints,
-    );
+    const panelConstraintsArray = getPanelConstraintsInPercent();
+    if (!panelConstraintsArray) {
+      return;
+    }
 
     const {
       collapsedSize = 0,
-      panelSize,
+      panelSize = 0,
       minSize = 0,
       pivotIndices,
-    } = panelDataHelper(panelDataArray, panelData, prevLayout);
+    } = panelDataHelper(panelDataArray, panelData, prevLayout, panelConstraintsArray);
 
-    if (panelSize === collapsedSize) {
+    if (fuzzyCompareNumbers(panelSize, collapsedSize) <= 0) {
       // Restore this panel to the size it was before it was collapsed, if possible.
       const prevPanelSize = panelSizeBeforeCollapseRef.value.get(
         panelData.id,
       );
+      const sizeUnit = panelData.constraints.sizeUnit ?? '%';
+      const groupSize = groupSizeInPixels.value ?? getGroupSizeInPixels();
+
+      let restoredSize: number | null | undefined;
+
+      if (sizeUnit === 'px' && groupSize) {
+        if (prevPanelSize != null) {
+          restoredSize = (prevPanelSize / groupSize) * 100;
+        } else {
+          restoredSize = null;
+        }
+      } else {
+        restoredSize = prevPanelSize;
+      }
 
       const baseSize
-        = prevPanelSize != null && prevPanelSize >= minSize
-          ? prevPanelSize
+        = restoredSize != null && restoredSize >= minSize
+          ? restoredSize
           : minSize;
 
       const isLastPanel
@@ -633,17 +799,33 @@ function getPanelSize(panelData: PanelData) {
     `Panel size not found for panel "${panelData.id}"`,
   );
 
+  // If the panel uses px units, convert from percent back to px
+  const panelUnit = panelData.constraints.sizeUnit ?? '%';
+  if (panelUnit === 'px') {
+    const groupSize = getGroupSizeInPixels();
+    if (groupSize != null) {
+      return (panelSize / 100) * groupSize;
+    }
+  }
+
   return panelSize;
 }
 
 function isPanelCollapsed(panelData: PanelData) {
   const { layout, panelDataArray } = eagerValuesRef.value;
 
+  const panelConstraintsArray = getPanelConstraintsInPercent();
+
   const {
     collapsedSize = 0,
     collapsible,
     panelSize,
-  } = panelDataHelper(panelDataArray, panelData, layout);
+  } = panelDataHelper(
+    panelDataArray,
+    panelData,
+    layout,
+    panelConstraintsArray ?? undefined,
+  );
 
   if (!collapsible) {
     return false;
@@ -651,7 +833,9 @@ function isPanelCollapsed(panelData: PanelData) {
 
   // panelSize is undefined during ssr due to vue ssr reactivity limitation.
   if (panelSize === undefined) {
-    return panelData.constraints.defaultSize === panelData.constraints.collapsedSize;
+    const panelIndex = findPanelDataIndex(panelDataArray, panelData);
+    const constraints = panelConstraintsArray?.[panelIndex] ?? panelData.constraints;
+    return constraints.defaultSize === constraints.collapsedSize;
   } else {
     return panelSize === collapsedSize;
   }
@@ -660,11 +844,18 @@ function isPanelCollapsed(panelData: PanelData) {
 function isPanelExpanded(panelData: PanelData) {
   const { layout, panelDataArray } = eagerValuesRef.value;
 
+  const panelConstraintsArray = getPanelConstraintsInPercent();
+
   const {
     collapsedSize = 0,
     collapsible,
     panelSize,
-  } = panelDataHelper(panelDataArray, panelData, layout);
+  } = panelDataHelper(
+    panelDataArray,
+    panelData,
+    layout,
+    panelConstraintsArray ?? undefined,
+  );
 
   assert(
     panelSize != null,
@@ -706,6 +897,7 @@ function panelDataHelper(
   panelDataArray: Array<PanelData>,
   panelData: PanelData,
   layout: Array<number>,
+  panelConstraints?: Array<PanelConstraints> | null,
 ) {
   const panelIndex = findPanelDataIndex(panelDataArray, panelData);
 
@@ -714,10 +906,13 @@ function panelDataHelper(
     ? [panelIndex - 1, panelIndex]
     : [panelIndex, panelIndex + 1];
 
+  const constraints = panelConstraints ?? getPanelConstraintsInPercent();
+  const panelConstraintsFromGroup = constraints?.[panelIndex];
+
   const panelSize = layout[panelIndex];
 
   return {
-    ...panelData.constraints,
+    ...(panelConstraintsFromGroup ?? panelData.constraints),
     panelSize,
     pivotIndices,
   };
