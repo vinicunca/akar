@@ -52,10 +52,10 @@ function findSlotElement(slotName: string): { element: Element; inPortal: boolea
     return { element: containerSlot, inPortal: false };
   }
 
-  // Then check in Reka UI portals (excluding our own popover's portal)
+  // Then check in akar portals (excluding our own popover's portal)
   for (const child of document.body.children) {
-    const hasRekaAttr = Array.from(child.attributes).some((attr) => attr.name.startsWith('data-reka-'));
-    if (hasRekaAttr) {
+    const hasAkarAttr = Array.from(child.attributes).some((attr) => attr.name.startsWith('data-akar-'));
+    if (hasAkarAttr) {
       // Skip the portal that contains our popover content
       if (popoverContentRef.value && child.contains(popoverContentRef.value)) {
         continue;
