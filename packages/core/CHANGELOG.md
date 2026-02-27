@@ -1,5 +1,15 @@
 # akar
 
+## 1.20.0
+
+### Minor Changes
+
+- [#774](https://github.com/vinicunca/akar/pull/774) [`6b44cc7`](https://github.com/vinicunca/akar/commit/6b44cc7ef1d33271d7d8f2c121c0fbda4cd73adc) Thanks [@praburangki](https://github.com/praburangki)! - - feat(Tooltip): global tooltip content configuration
+  - fix: useId with no prefix
+  - fix(Toast): talkback announcement
+  - feat(Autocomplete): new component
+  - feat(Splitter): add support for pixel sizing and constraints
+
 ## 1.19.0
 
 ### Minor Changes
