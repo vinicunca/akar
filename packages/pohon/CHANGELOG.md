@@ -1,5 +1,16 @@
 # pohon-ui
 
+## 1.11.0
+
+### Minor Changes
+
+- 40831ae: - feat(Rating): new component
+
+### Patch Changes
+
+- Updated dependencies [40831ae]
+  - akar@1.21.0
+
 ## 1.10.0
 
 ### Minor Changes

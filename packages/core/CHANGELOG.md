@@ -1,5 +1,11 @@
 # akar
 
+## 1.21.0
+
+### Minor Changes
+
+- 40831ae: - feat(Rating): new component
+
 ## 1.20.0
 
 ### Minor Changes
