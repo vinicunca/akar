@@ -19,6 +19,25 @@ export const components = {
     'AAlertDialogAction',
   ] as const,
 
+  autocomplete: [
+    'AAutocompleteRoot',
+    'AAutocompleteInput',
+    'AAutocompleteAnchor',
+    'AAutocompleteEmpty',
+    'AAutocompleteTrigger',
+    'AAutocompleteCancel',
+    'AAutocompleteGroup',
+    'AAutocompleteLabel',
+    'AAutocompleteContent',
+    'AAutocompleteViewport',
+    'AAutocompleteVirtualizer',
+    'AAutocompleteItem',
+    'AAutocompleteItemIndicator',
+    'AAutocompleteSeparator',
+    'AAutocompleteArrow',
+    'AAutocompletePortal',
+  ] as const,
+
   avatar: [
     'AAvatarFallback',
     'AAvatarImage',

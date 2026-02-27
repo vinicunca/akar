@@ -1,5 +1,6 @@
 /* eslint-disable perfectionist/sort-exports */
 export * from './accordion';
+export * from './autocomplete';
 export * from './avatar';
 export * from './alert-dialog';
 export * from './calendar';
