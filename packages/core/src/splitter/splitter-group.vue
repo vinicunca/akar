@@ -23,7 +23,7 @@ export interface ASplitterGroupProps extends APrimitiveProps {
   storage?: PanelGroupStorage;
 }
 
-export type SplitterGroupEmits = {
+export type ASplitterGroupEmits = {
   /** Event handler called when group layout changes */
   layout: [val: Array<number>];
 };
@@ -100,7 +100,7 @@ const props = withDefaults(defineProps<ASplitterGroupProps>(), {
   keyboardResizeBy: 10,
   storage: () => defaultStorage,
 });
-const emits = defineEmits<SplitterGroupEmits>();
+const emits = defineEmits<ASplitterGroupEmits>();
 
 defineSlots<{
   default?: (props: {
