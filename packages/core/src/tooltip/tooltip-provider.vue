@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
+import type { ATooltipContentProps } from './tooltip-content.vue';
 import { createContext, useForwardExpose } from '../shared';
 
 interface TooltipProviderContext {
@@ -12,10 +13,13 @@ interface TooltipProviderContext {
   disableClosingTrigger: Ref<boolean>;
   disabled: Ref<boolean>;
   ignoreNonKeyboardFocus: Ref<boolean>;
+  content: Ref<ATooltipContentProps | undefined>;
 }
 
-export const [injectATooltipProviderContext, provideTooltipProviderContext]
-  = createContext<TooltipProviderContext>('ATooltipProvider');
+export const [
+  injectATooltipProviderContext,
+  provideTooltipProviderContext,
+] = createContext<TooltipProviderContext>('ATooltipProvider');
 
 export interface ATooltipProviderProps {
   /**
@@ -51,6 +55,10 @@ export interface ATooltipProviderProps {
    * @defaultValue false
    */
   ignoreNonKeyboardFocus?: boolean;
+  /**
+   * Default settings that will be used by all tooltip components.
+   */
+  content?: ATooltipContentProps;
 }
 </script>
 
@@ -68,7 +76,15 @@ const props = withDefaults(defineProps<ATooltipProviderProps>(), {
   disableHoverableContent: false,
   ignoreNonKeyboardFocus: false,
 });
-const { delayDuration, skipDelayDuration, disableHoverableContent, disableClosingTrigger, ignoreNonKeyboardFocus, disabled } = toRefs(props);
+const {
+  delayDuration,
+  skipDelayDuration,
+  disableHoverableContent,
+  disableClosingTrigger,
+  ignoreNonKeyboardFocus,
+  disabled,
+  content,
+} = toRefs(props);
 useForwardExpose();
 
 const isOpenDelayed = ref(true);
@@ -94,6 +110,7 @@ provideTooltipProviderContext({
   disableClosingTrigger,
   disabled,
   ignoreNonKeyboardFocus,
+  content,
 });
 </script>
 
