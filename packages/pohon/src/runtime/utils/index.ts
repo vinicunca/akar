@@ -74,7 +74,7 @@ export function transformPohon(pohon: any, pohonProp?: any) {
         acc[key] = typeof value === 'function' ? value({ class: pohonProp?.[key] }) : value;
         return acc;
       },
-      pohonProp || {},
+      { ...(pohonProp || {}) },
     );
 }
 
