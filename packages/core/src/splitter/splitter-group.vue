@@ -114,7 +114,7 @@ const debounceMap: {
 } = {};
 
 const { direction } = toRefs(props);
-const groupId = useId(props.id, 'reka-splitter-group');
+const groupId = useId(props.id, 'akar-splitter-group');
 const dir = useDirection();
 const { forwardRef, currentElement: panelGroupElementRef } = useForwardExpose();
 

@@ -13,12 +13,10 @@ export interface MenuItemImplProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import { useCollection } from '../collection';
-import {
-  APrimitive,
-} from '../primitive';
-import { useForwardExpose } from '../shared';
+import { APrimitive } from '../primitive';
+import { getActiveElement, useForwardExpose } from '../shared';
 import { injectMenuContentContext } from './menu-content-impl.vue';
 import { isMouseEvent } from './utils';
 
@@ -29,10 +27,13 @@ defineOptions({
 const props = defineProps<MenuItemImplProps>();
 
 const contentContext = injectMenuContentContext();
-const { forwardRef } = useForwardExpose();
+const { forwardRef, currentElement } = useForwardExpose();
 const { ACollectionItem } = useCollection();
 
 const isFocused = ref(false);
+const isHighlighted = computed(() =>
+  isFocused.value || (contentContext.highlightedElement.value === currentElement.value),
+);
 
 async function handlePointerMove(event: PointerEvent) {
   if (event.defaultPrevented) {
@@ -47,8 +48,13 @@ async function handlePointerMove(event: PointerEvent) {
   } else {
     const defaultPrevented = contentContext.onItemEnter(event);
     if (!defaultPrevented) {
-      const item = event.currentTarget;
-      (item as HTMLElement)?.focus({ preventScroll: true });
+      const item = event.currentTarget as HTMLElement;
+      contentContext.highlightedElement.value = item;
+      const isInputFocused = ['INPUT', 'TEXTAREA'].includes(getActiveElement()?.tagName || '');
+
+      if (!isInputFocused) {
+        item.focus({ preventScroll: true });
+      }
     }
   }
 }
@@ -71,6 +77,7 @@ async function handleFocus(event: FocusEvent) {
     return;
   }
   isFocused.value = true;
+  contentContext.highlightedElement.value = event.currentTarget as HTMLElement;
 }
 
 async function handleBlur(event: FocusEvent) {
@@ -94,7 +101,7 @@ async function handleBlur(event: FocusEvent) {
       data-akar-collection-item
       :aria-disabled="disabled || undefined"
       :data-disabled="disabled ? '' : undefined"
-      :data-highlighted="isFocused ? '' : undefined"
+      :data-highlighted="isHighlighted ? '' : undefined"
       @pointermove="handlePointerMove"
       @pointerleave="handlePointerLeave"
       @focus="handleFocus"

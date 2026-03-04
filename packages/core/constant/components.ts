@@ -210,6 +210,7 @@ export const components = {
     'ADropdownMenuSubTrigger',
     'ADropdownMenuSub',
     'ADropdownMenuTrigger',
+    'ADropdownMenuFilter',
   ] as const,
 
   editable: [

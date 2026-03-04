@@ -23,7 +23,7 @@ const props = defineProps<ARatingRootProps>();
         v-for="step in steps"
         :key="step"
         :step="step"
-        class="text-gray-400 opacity-[var(--akar-rating-item-step-opacity)] w-[var(--akar-rating-item-step-width)] absolute z-[var(--reka-rating-item-step-z-index)] overflow-hidden data-[state=active]:text-yellow-500"
+        class="text-gray-400 opacity-[var(--akar-rating-item-step-opacity)] w-[var(--akar-rating-item-step-width)] absolute z-[var(--akar-rating-item-step-z-index)] overflow-hidden data-[state=active]:text-yellow-500"
         :aria-label="`Rating ${step} of ${items.length}`"
       >
         <Icon
