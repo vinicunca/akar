@@ -198,6 +198,7 @@ export const components = {
     'ADropdownMenuCheckboxItem',
     'ADropdownMenuContent',
     'ADropdownMenuGroup',
+    'ADropdownMenuFilter',
     'ADropdownMenuItemIndicator',
     'ADropdownMenuItem',
     'ADropdownMenuLabel',

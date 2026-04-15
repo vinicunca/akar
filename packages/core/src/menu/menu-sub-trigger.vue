@@ -6,7 +6,7 @@ export interface AMenuSubTriggerProps extends MenuItemImplProps {}
 </script>
 
 <script setup lang="ts">
-import { nextTick, onUnmounted, ref } from 'vue';
+import { nextTick, onUnmounted, ref, watch } from 'vue';
 import { useId } from '../shared';
 import AMenuAnchor from './menu-anchor.vue';
 import { injectMenuContentContext } from './menu-content-impl.vue';
@@ -21,6 +21,20 @@ const menuContext = injectAMenuContext();
 const rootContext = injectAMenuRootContext();
 const subContext = injectMenuSubContext();
 const contentContext = injectMenuContentContext();
+
+watch(
+  menuContext.open,
+  (open) => {
+    if (open) {
+      contentContext.activeSubmenuContext.value = {
+        onOpenChange: menuContext.onOpenChange,
+        trigger: subContext.trigger,
+      };
+    } else if (contentContext.activeSubmenuContext.value?.trigger.value === subContext.trigger.value) {
+      contentContext.activeSubmenuContext.value = undefined;
+    }
+  },
+);
 
 const openTimerRef = ref<null | number>(null);
 

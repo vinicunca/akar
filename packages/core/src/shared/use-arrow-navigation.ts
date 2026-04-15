@@ -191,7 +191,12 @@ interface FindNextFocusableElementOptions {
  * @returns next focusable element
  */
 function findNextFocusableElement(
-  { elements, currentElement, options, iterations = elements.length }:
+  {
+    elements,
+    currentElement,
+    options,
+    iterations = !elements.includes(currentElement) ? elements.length + 1 : elements.length,
+  }:
   {
     currentElement: HTMLElement;
     elements: Array<HTMLElement>;
@@ -204,7 +209,13 @@ function findNextFocusableElement(
   }
 
   const index = elements.indexOf(currentElement);
-  const newIndex = options.goForward ? index + 1 : index - 1;
+  let newIndex: number;
+
+  if (index === -1) {
+    newIndex = options.goForward ? 0 : elements.length - 1;
+  } else {
+    newIndex = options.goForward ? index + 1 : index - 1;
+  }
 
   if (!options.loop && (newIndex < 0 || newIndex >= elements.length)) {
     return null;

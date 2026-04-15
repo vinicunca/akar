@@ -28,12 +28,23 @@ export interface MenuContentContext {
   onItemLeave: (event: PointerEvent) => void;
   onTriggerLeave: (event: PointerEvent) => boolean;
   searchRef: Ref<string>;
+  highlightedElement: Ref<HTMLElement | undefined>;
+  onKeydownNavigation: (event: KeyboardEvent) => void;
+  onKeydownEnter: (event: KeyboardEvent) => void;
+  filterElement: Ref<HTMLElement | undefined>;
+  onFilterElementChange: (element: HTMLElement | undefined) => void;
+  activeSubmenuContext: Ref<{
+    onOpenChange: (open: boolean) => void;
+    trigger: Ref<HTMLElement | undefined>;
+  } | undefined>;
   pointerGraceTimerRef: Ref<number>;
   onPointerGraceIntentChange: (intent: GraceIntent | null) => void;
 }
 
-export const [injectMenuContentContext, provideMenuContentContext]
-  = createContext<MenuContentContext>('AMenuContent');
+export const [
+  injectMenuContentContext,
+  provideMenuContentContext,
+] = createContext<MenuContentContext>('AMenuContent');
 
 export interface MenuContentImplPrivateProps {
   /**
@@ -132,6 +143,52 @@ const currentItemId = ref<null | string>(null);
 const rovingFocusGroupRef = ref<InstanceType<typeof ARovingFocusGroup>>();
 const { forwardRef, currentElement: contentElement } = useForwardExpose();
 const { handleTypeaheadSearch } = useTypeahead();
+
+const highlightedElement = ref<HTMLElement>();
+
+function onKeydownNavigation(event: KeyboardEvent) {
+  const el = useArrowNavigation({
+    event,
+    currentElement: (highlightedElement.value || getActiveElement()) as HTMLElement,
+    parentElement: contentElement.value,
+    options: {
+      loop: loop.value,
+      arrowKeyOptions: 'vertical',
+      dir: rootContext?.dir.value,
+      focus: false,
+      attributeName: '[data-akar-collection-item]:not([data-disabled])',
+    },
+  });
+
+  if (el) {
+    highlightedElement.value = el;
+    el.scrollIntoView({ block: 'nearest' });
+  }
+}
+
+function onKeydownEnter(event: KeyboardEvent) {
+  if (highlightedElement.value) {
+    highlightedElement.value.click();
+  }
+}
+
+const filterElement = ref<HTMLElement>();
+const activeSubmenuContext = ref<{
+  onOpenChange: (open: boolean) => void;
+  trigger: Ref<HTMLElement | undefined>;
+} | undefined>();
+
+watch(
+  highlightedElement,
+  (el) => {
+    if (
+      activeSubmenuContext.value && (el === undefined || el !== activeSubmenuContext.value.trigger.value)
+    ) {
+      activeSubmenuContext.value.onOpenChange(false);
+      activeSubmenuContext.value = undefined;
+    }
+  },
+);
 
 watch(contentElement, (el) => {
   menuContext!.onContentChange(el);
@@ -258,6 +315,17 @@ function handlePointerMove(event: PointerEvent) {
   }
 }
 
+function handlePointerEnter(event: PointerEvent) {
+  if (!isMouseEvent(event)) {
+    return;
+  }
+
+  // When hovering over a menu content (main or sub), focus its filter element if it exists
+  if (filterElement.value) {
+    filterElement.value.focus();
+  }
+}
+
 provideMenuContentContext({
   onItemEnter: (event) => {
     // event.preventDefault() we can't prevent pointerMove event
@@ -267,7 +335,12 @@ provideMenuContentContext({
     if (isPointerMovingToSubmenu(event)) {
       return;
     }
-    contentElement.value?.focus();
+
+    const isInputFocused = ['INPUT', 'TEXTAREA'].includes(getActiveElement()?.tagName || '');
+    if (!isInputFocused) {
+      contentElement.value?.focus();
+    }
+
     currentItemId.value = null;
   },
   onTriggerLeave: (event) => {
@@ -275,6 +348,14 @@ provideMenuContentContext({
     return isPointerMovingToSubmenu(event);
   },
   searchRef,
+  highlightedElement,
+  onKeydownNavigation,
+  onKeydownEnter,
+  filterElement,
+  onFilterElementChange: (el) => {
+    filterElement.value = el;
+  },
+  activeSubmenuContext,
   pointerGraceTimerRef,
   onPointerGraceIntentChange: (intent) => {
     pointerGraceIntentRef.value = intent;
@@ -337,6 +418,7 @@ provideMenuContentContext({
           @keydown="handleKeyDown"
           @blur="handleBlur"
           @pointermove="handlePointerMove"
+          @pointerenter="handlePointerEnter"
         >
           <slot />
         </APopperContent>
