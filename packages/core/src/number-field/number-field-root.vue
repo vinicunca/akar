@@ -297,6 +297,7 @@ provideNumberFieldRootContext({
     <slot
       :model-value="modelValue"
       :text-value="textValue"
+      :readonly="readonly"
     />
 
     <AVisuallyHiddenInput

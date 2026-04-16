@@ -71,6 +71,34 @@ export const components = {
     'ACollapsibleTrigger',
   ] as const,
 
+  colorArea: [
+    'AColorAreaRoot',
+    'AColorAreaArea',
+    'AColorAreaThumb',
+  ] as const,
+
+  colorField: [
+    'AColorFieldRoot',
+    'AColorFieldInput',
+  ] as const,
+
+  colorSlider: [
+    'AColorSliderRoot',
+    'AColorSliderTrack',
+    'AColorSliderThumb',
+  ] as const,
+
+  colorSwatch: [
+    'AColorSwatch',
+  ] as const,
+
+  colorSwatchPicker: [
+    'AColorSwatchPickerRoot',
+    'AColorSwatchPickerItem',
+    'AColorSwatchPickerItemSwatch',
+    'AColorSwatchPickerItemIndicator',
+  ] as const,
+
   combobox: [
     'AComboboxAnchor',
     'AComboboxArrow',

@@ -923,9 +923,6 @@ export function useDateField(props: UseDateFieldProps) {
   function handleSegmentKeydown(event: KeyboardEvent) {
     const disabled = props.disabled.value;
     const readonly = props.readonly.value;
-    if (event.key !== KEY_CODES.TAB) {
-      event.preventDefault();
-    }
 
     if (disabled || readonly) {
       return;

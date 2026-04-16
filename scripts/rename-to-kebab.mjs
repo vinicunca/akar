@@ -6,7 +6,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SOURCE_DIR = path.resolve(__dirname, '../packages/core/src');
-const TARGET_FOLDERS = ['MonthPicker', 'MonthRangePicker', 'YearPicker', 'YearRangePicker'];
+const TARGET_FOLDERS = [
+  'MonthPicker',
+  'MonthRangePicker',
+  'YearPicker',
+  'YearRangePicker',
+  'ColorArea',
+  'ColorField',
+  'ColorSlider',
+  'ColorSwatch',
+  'ColorSwatchPicker',
+];
 
 function toKebabCase(value) {
   return value

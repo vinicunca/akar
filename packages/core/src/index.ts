@@ -6,6 +6,11 @@ export * from './alert-dialog';
 export * from './calendar';
 export * from './checkbox';
 export * from './collapsible';
+export * from './color-area';
+export * from './color-field';
+export * from './color-slider';
+export * from './color-swatch';
+export * from './color-swatch-picker';
 export * from './combobox';
 export * from './context-menu';
 export * from './config-provider';
@@ -76,6 +81,37 @@ export {
   useLocale,
   useStateMachine,
 } from './shared';
+
+// Color utilities
+export {
+  type Color,
+  type ColorChannel,
+  type ColorFormat,
+  type ColorSpace,
+  colorToHex,
+  colorToHsb,
+  colorToHsl,
+  colorToRgb,
+  colorToString,
+  convertToHsb,
+  convertToHsl,
+  convertToRgb,
+  getAreaBackgroundStyle,
+  getAreaGradient,
+  getChannelName,
+  getChannelRange,
+  getChannelValue,
+  getSliderBackgroundStyle,
+  getSliderGradient,
+  type HsbColor,
+  type HslColor,
+  isValidColor,
+  normalizeColor,
+  parseColor,
+  type RgbColor,
+  setChannelValue,
+  setChannelValues,
+} from './shared/color';
 
 export {
   type AcceptableValue,
