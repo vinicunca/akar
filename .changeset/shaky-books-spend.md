@@ -9,3 +9,4 @@
 - fix(Calendar): parity + docs regen
 - feat: color components
 - feat: new TimeRangeField Component
+- fix(Toast): resolve accessibility issues flagged by axe-core

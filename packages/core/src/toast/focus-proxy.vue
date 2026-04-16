@@ -11,7 +11,6 @@ const providerContext = injectAToastProviderContext();
 
 <template>
   <AVisuallyHidden
-    aria-hidden="true"
     tabindex="0"
     style="position: fixed"
     @focus="(event: FocusEvent) => {

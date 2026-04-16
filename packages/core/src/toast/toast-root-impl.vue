@@ -189,7 +189,6 @@ provideToastRootContext({ onClose: handleClose });
     v-if="announceTextContent"
     role="alert"
     :aria-live="type === 'foreground' ? 'assertive' : 'polite'"
-    aria-atomic="true"
   >
     {{ announceTextContent }}
   </ToastAnnounce>
@@ -201,9 +200,6 @@ provideToastRootContext({ onClose: handleClose });
     <ACollectionItem>
       <APrimitive
         :ref="forwardRef"
-        role="alert"
-        aria-live="off"
-        aria-atomic="true"
         tabindex="0"
         v-bind="$attrs"
         :as="as"
