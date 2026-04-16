@@ -115,6 +115,6 @@
     "vitest-canvas-mock": "catalog:core",
     "vue": "catalog:core",
     "vue-component-type-helpers": "catalog:core",
-    "vue-tsc": "catalog:core"
+    "vue-tsc": "catalog:base"
   }
 }

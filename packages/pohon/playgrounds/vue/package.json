@@ -17,6 +17,6 @@
     "@vitejs/plugin-vue": "catalog:core",
     "typescript": "catalog:base",
     "vite": "catalog:core",
-    "vue-tsc": "catalog:core"
+    "vue-tsc": "catalog:base"
   }
 }

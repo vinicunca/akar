@@ -217,6 +217,6 @@
     "vitest": "catalog:pohon",
     "vitest-axe": "catalog:core",
     "vue": "catalog:core",
-    "vue-tsc": "catalog:pohon"
+    "vue-tsc": "catalog:base"
   }
 }

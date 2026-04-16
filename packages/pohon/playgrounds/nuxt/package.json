@@ -20,6 +20,6 @@
     "@vinicunca/unocss-preset": "catalog:pohon",
     "typescript": "catalog:base",
     "unocss": "catalog:base",
-    "vue-tsc": "catalog:core"
+    "vue-tsc": "catalog:base"
   }
 }

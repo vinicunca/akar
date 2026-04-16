@@ -15,6 +15,6 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:core",
     "vite": "catalog:core",
-    "vue-tsc": "catalog:core"
+    "vue-tsc": "catalog:base"
   }
 }
