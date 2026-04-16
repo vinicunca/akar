@@ -88,7 +88,7 @@ export interface ACalendarRootProps extends APrimitiveProps {
   nextPage?: (placeholder: DateValue) => DateValue;
   /** A function that returns the previous page of the calendar. It receives the current placeholder as an argument inside the component. */
   prevPage?: (placeholder: DateValue) => DateValue;
-  /** The controlled checked state of the calendar */
+  /** The controlled selected date value of the calendar. Can be bound as `v-model`. */
   modelValue?: DateValue | Array<DateValue> | undefined;
   /** Whether multiple dates can be selected */
   multiple?: boolean;

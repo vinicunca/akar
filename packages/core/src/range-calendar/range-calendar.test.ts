@@ -6,6 +6,13 @@ import { fireEvent, render, waitFor } from '@testing-library/vue';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import {
+  ARangeCalendarHeader,
+  ARangeCalendarHeading,
+  ARangeCalendarNext,
+  ARangeCalendarPrev,
+  ARangeCalendarRoot,
+} from '..';
 import { useTestKeyboard } from '../shared';
 import RangeCalendar from './story/_range-calendar.vue';
 
@@ -312,6 +319,42 @@ describe('rangeCalendar', () => {
       await user.click(prevBtn);
     }
     expect(heading).toHaveTextContent('January 1979');
+  });
+
+  it('does not navigate when prev is disabled and rendered as div', async () => {
+    const user = userEvent.setup();
+
+    const Test = {
+      components: {
+        ARangeCalendarRoot,
+        ARangeCalendarHeader,
+        ARangeCalendarPrev,
+        ARangeCalendarHeading,
+        ARangeCalendarNext,
+      },
+      setup() {
+        const placeholder = new CalendarDate(1980, 1, 15);
+        const minValue = new CalendarDate(1980, 1, 1);
+        return { placeholder, minValue };
+      },
+      template: `
+        <ARangeCalendarRoot
+          :placeholder="placeholder"
+          :min-value="minValue"
+        >
+          <ARangeCalendarHeader>
+            <ARangeCalendarPrev as="div" data-testid="prev-button" />
+            <ARangeCalendarHeading data-testid="heading" />
+            <ARangeCalendarNext as="div" data-testid="next-button" />
+          </ARangeCalendarHeader>
+        </ARangeCalendarRoot>
+      `,
+    };
+
+    const { getByTestId } = render(Test);
+    expect(getByTestId('heading')).toHaveTextContent('January 1980');
+    await user.click(getByTestId('prev-button'));
+    expect(getByTestId('heading')).toHaveTextContent('January 1980');
   });
 
   it('should navigate one year in the past (prev year button)', async () => {
