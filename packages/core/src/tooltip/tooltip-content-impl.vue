@@ -81,12 +81,17 @@ const popperContentProps = computed(() => {
 
 onMounted(() => {
   // Close the tooltip if the trigger is scrolled
-  useEventListener(window, 'scroll', (event) => {
-    const target = event.target as HTMLElement;
-    if (target?.contains(rootContext.trigger.value!)) {
-      rootContext.onClose();
-    }
-  });
+  useEventListener(
+    window,
+    'scroll',
+    (event) => {
+      const target = event.target as HTMLElement;
+      if (target?.contains(rootContext.trigger.value!)) {
+        rootContext.onClose();
+      }
+    },
+    { capture: true },
+  );
   // Close this tooltip if another one opens
   useEventListener(window, TOOLTIP_OPEN, rootContext.onClose);
 });
