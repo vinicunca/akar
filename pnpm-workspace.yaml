@@ -99,7 +99,7 @@ catalogs:
     '@nuxt/kit': 4.3.1
     '@nuxt/schema': 4.3.1
     unbuild: ^3.6.1
-    unplugin-vue-components: ^31.0.0
+    unplugin-vue-components: ^32.0.0
   pohon:
     '@clack/prompts': ^0.11.0
     '@nuxt/content': 3.10.0
