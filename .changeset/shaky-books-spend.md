@@ -20,3 +20,4 @@
 - fix(Splitter): nested px group ignores defaultSize & percentage drift
 - fix(useHideOthers): handle browsers without :popover-open support (Safari 18)
 - fix(PinInput): paste only numeric text in numeric mode
+- fix(Combobox): prevent addOnBlur from adding raw input when selecting item

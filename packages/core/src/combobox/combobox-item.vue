@@ -70,6 +70,8 @@ function handleSelect(event: SelectEvent<T>) {
     event.preventDefault();
     rootContext.onOpenChange(false);
     rootContext.modelValue.value = props.value;
+  } else if (rootContext.multiple.value) {
+    rootContext.inputElement.value?.focus();
   }
 }
 

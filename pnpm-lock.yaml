@@ -37,7 +37,7 @@ catalogs:
       specifier: ^10.2.0
       version: 10.2.0
     lint-staged:
-      specifier: ^16.3.2
+      specifier: ^16.4.0
       version: 16.4.0
     simple-git-hooks:
       specifier: ^2.13.1
