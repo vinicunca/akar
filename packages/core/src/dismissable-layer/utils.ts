@@ -15,13 +15,17 @@ export const FOCUS_OUTSIDE = 'dismissableLayer.focusOutside';
 
 const DATA_DISMISSABLE_LAYER = '[data-dismissable-layer]';
 
-function isLayerExist(
+export function isLayerExist(
   { layerElement, targetElement }:
   {
     layerElement: HTMLElement;
     targetElement: HTMLElement;
   },
 ) {
+  if (!(targetElement instanceof Element)) {
+    return false;
+  }
+
   const targetLayer = targetElement.closest(
     DATA_DISMISSABLE_LAYER,
   );
