@@ -25,3 +25,4 @@
 - fix(Autocomplete): add IME composition input handling
 - fix(FocusScope): don't move focus if DOM mutation occurred before any nodes had focus
 - fix(tooltip,hovercard): close when scrollable ancestor is scrolled
+- fix(Listbox): restore highlightOnHover behavior
