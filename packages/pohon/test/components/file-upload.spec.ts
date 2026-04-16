@@ -1,4 +1,4 @@
-/* eslint-disable sonar/no-nested-conditional, sonar/no-nested-functions, no-nested-ternary, no-console */
+/* eslint-disable sonar/no-nested-conditional, no-nested-ternary, no-console */
 import type { FormInputEvents } from '../../src/module';
 import type { PFileUploadProps, PFileUploadSlots } from '../../src/runtime/components/file-upload.vue';
 import theme from '#build/pohon/file-upload';

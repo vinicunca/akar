@@ -11,8 +11,8 @@ export interface ADropdownMenuSubContentProps extends AMenuSubContentProps {}
 </script>
 
 <script setup lang="ts">
-import { AMenuSubContent } from '../menu';
 import { useForwardPropsEmits } from '..';
+import { AMenuSubContent } from '../menu';
 
 const props = defineProps<ADropdownMenuSubContentProps>();
 const emits = defineEmits<ADropdownMenuSubContentEmits>();

@@ -146,7 +146,6 @@ async function onOpenChange(val: boolean) {
     isUserInputted.value = false;
     filterSearch.value = '';
     setTimeout(() => {
-      // eslint-disable-next-line sonar/no-gratuitous-expressions
       if (!val && props.resetSearchTermOnBlur) {
         resetSearchTerm.trigger();
       }

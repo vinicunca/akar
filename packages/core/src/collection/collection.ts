@@ -1,4 +1,3 @@
-/* eslint-disable ts/no-empty-object-type */
 import type { Ref } from 'vue';
 import {
   computed,

@@ -5,8 +5,8 @@ hero:
   description: 'Explore ready-made templates powered by our Vue components. These templates are fully responsive, accessible, and easy to customize, so you can launch your project quickly and effortlessly.'
 navigation: false
 items:
-  - title: 'Changelog'
-    description: "A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC."
+  - title: Changelog
+    description: A changelog template to display your repository releases notes from GitHub powered by Nuxt MDC.
     icon: i-lucide:newspaper
     framework: nuxt
     features:
@@ -34,8 +34,8 @@ items:
         to: https://github.com/nuxt-ui-templates/changelog
         target: _blank
         icon: i-simple-icons:github
-  - title: 'Portfolio'
-    description: "A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content."
+  - title: Portfolio
+    description: 'A sleek portfolio template to showcase your work, skills and blog powered by Nuxt Content.'
     icon: i-lucide:user
     framework: nuxt
     features:
@@ -63,8 +63,8 @@ items:
         to: https://github.com/nuxt-ui-templates/portfolio
         target: _blank
         icon: i-simple-icons:github
-  - title: 'Chat'
-    description: "An AI chatbot template to build your own chatbot powered by Nuxt MDC and Vercel AI SDK."
+  - title: Chat
+    description: An AI chatbot template to build your own chatbot powered by Nuxt MDC and Vercel AI SDK.
     icon: i-lucide:message-circle
     framework: nuxt
     features:
@@ -92,8 +92,8 @@ items:
         to: https://github.com/nuxt-ui-templates/chat
         target: _blank
         icon: i-simple-icons:github
-  - title: 'Dashboard'
-    description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
+  - title: Dashboard
+    description: A dashboard template with multi-column layout for building sophisticated admin interfaces.
     icon: i-lucide:bar-chart-big
     framework: nuxt
     features:
@@ -121,8 +121,8 @@ items:
         to: https://github.com/nuxt-ui-templates/dashboard
         target: _blank
         icon: i-simple-icons:github
-  - title: 'Dashboard'
-    description: "A dashboard template with multi-column layout for building sophisticated admin interfaces."
+  - title: Dashboard
+    description: A dashboard template with multi-column layout for building sophisticated admin interfaces.
     icon: i-lucide:bar-chart-big
     framework: vue
     features:
@@ -148,8 +148,8 @@ items:
         to: https://github.com/nuxt-ui-templates/dashboard-vue
         target: _blank
         icon: i-simple-icons:github
-  - title: 'SaaS'
-    description: "A SaaS template with landing, pricing, docs and blog powered by Nuxt Content."
+  - title: SaaS
+    description: 'A SaaS template with landing, pricing, docs and blog powered by Nuxt Content.'
     icon: i-lucide:cloud
     framework: nuxt
     features:
@@ -177,8 +177,8 @@ items:
         to: https://github.com/nuxt-ui-templates/saas
         target: _blank
         icon: i-simple-icons:github
-  - title: 'Landing'
-    description: "A modern landing page template powered by Nuxt Content."
+  - title: Landing
+    description: A modern landing page template powered by Nuxt Content.
     icon: i-lucide:layout
     framework: nuxt
     features:
@@ -206,8 +206,8 @@ items:
         to: https://github.com/nuxt-ui-templates/landing
         target: _blank
         icon: i-simple-icons:github
-  - title: 'Docs'
-    description: "A documentation template powered by Nuxt Content."
+  - title: Docs
+    description: A documentation template powered by Nuxt Content.
     icon: i-lucide:book
     framework: nuxt
     features:
@@ -235,8 +235,8 @@ items:
         to: https://github.com/nuxt-ui-templates/docs
         target: _blank
         icon: i-simple-icons:github
-  - title: 'Starter'
-    description: "A minimal template to get started with Pohon UI."
+  - title: Starter
+    description: A minimal template to get started with Pohon UI.
     icon: i-lucide:flower
     framework: nuxt
     features:
@@ -262,8 +262,8 @@ items:
         to: https://github.com/nuxt-ui-templates/starter
         target: _blank
         icon: i-simple-icons:github
-  - title: 'Starter'
-    description: "A minimal template to get started with Pohon UI."
+  - title: Starter
+    description: A minimal template to get started with Pohon UI.
     icon: i-lucide:flower
     framework: vue
     features:

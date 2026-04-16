@@ -3,7 +3,7 @@ import type { PInputProps, PInputSlots } from '../../src/runtime/components/inpu
 import theme from '#build/pohon/input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
-import { describe, expect, it, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import Input from '../../src/runtime/components/input.vue';
 import ComponentRender from '../component-render';
@@ -78,7 +78,7 @@ describe('Input', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations();
   });
 
-  test('with .lazy modifier updates on change only', async () => {
+  it('with .lazy modifier updates on change only', async () => {
     const wrapper = mount(Input, {
       props: {
         modelModifiers: { lazy: true },
@@ -94,21 +94,21 @@ describe('Input', () => {
   });
 
   describe('emits', () => {
-    test('update:modelValue event', async () => {
+    it('update:modelValue event', async () => {
       const wrapper = mount(Input);
       const input = wrapper.find('input');
       await input.setValue('bob@dylan.com');
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['bob@dylan.com']] });
     });
 
-    test('change event', async () => {
+    it('change event', async () => {
       const wrapper = mount(Input);
       const input = wrapper.find('input');
       await input.setValue('bob@dylan.com');
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
-    test('blur event', async () => {
+    it('blur event', async () => {
       const wrapper = mount(Input);
       const input = wrapper.find('input');
       await input.trigger('blur');
@@ -145,7 +145,7 @@ describe('Input', () => {
       };
     }
 
-    test('validate on blur works', async () => {
+    it('validate on blur works', async () => {
       const { input, wrapper } = await createForm(['blur']);
       await input.trigger('blur');
       await flushPromises();
@@ -157,7 +157,7 @@ describe('Input', () => {
       expect(wrapper.text()).not.toContain('Error message');
     });
 
-    test('validate on change works', async () => {
+    it('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change']);
       await input.trigger('change');
       await flushPromises();
@@ -169,7 +169,7 @@ describe('Input', () => {
       expect(wrapper.text()).not.toContain('Error message');
     });
 
-    test('validate on input works', async () => {
+    it('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'], true);
       await input.setValue('value');
       await flushPromises();
@@ -180,7 +180,7 @@ describe('Input', () => {
       expect(wrapper.text()).not.toContain('Error message');
     });
 
-    test('validate on input without eager validation works', async () => {
+    it('validate on input without eager validation works', async () => {
       const { input, wrapper } = await createForm(['input']);
 
       await input.setValue('value');

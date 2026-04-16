@@ -22,7 +22,7 @@ The ColorModeSelect component extends the [SelectMenu](/docs/pohon/components/se
 ### With custom icons
 
 ::docs-framework-only
-#nuxt
+# nuxt
 ::div
 
 Use the `app.config.ts` to customize the icon with the `pohon.icons` property:
@@ -36,19 +36,19 @@ export default defineAppConfig({
       dark: 'i-ph:moon'
     }
   }
-})
+});
 ```
 
 ::
 
-#vue
+# vue
 ::div
 Use the `vite.config.ts` to customize the icon with the `pohon.icons` property:
 
 ```ts [vite.config.ts]
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import pohon from 'pohon-ui/vite'
+import vue from '@vitejs/plugin-vue';
+import pohon from 'pohon-ui/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
@@ -62,7 +62,7 @@ export default defineConfig({
       }
     })
   ]
-})
+});
 ```
 
 ::

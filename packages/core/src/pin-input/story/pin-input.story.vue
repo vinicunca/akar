@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ALabel } from '../label';
 import { APinInputInput, APinInputRoot } from '..';
+import { ALabel } from '../label';
 
 const value = ref<Array<string>>([]);
 </script>

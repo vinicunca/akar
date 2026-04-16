@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ACollapsibleRootEmits, ACollapsibleRootProps } from '..';
-import { useForwardPropsEmits } from '../../shared';
 import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from '..';
+import { useForwardPropsEmits } from '../../shared';
 
 const props = defineProps<ACollapsibleRootProps>();
 const emits = defineEmits<ACollapsibleRootEmits>();

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { ADateRangePickerRootEmits, ADateRangePickerRootProps } from '..';
 import { Icon } from '@iconify/vue';
-import { useForwardPropsEmits } from '../../shared';
 import {
   ADateRangePickerArrow,
   ADateRangePickerCalendar,
@@ -23,6 +22,7 @@ import {
 
   ADateRangePickerTrigger,
 } from '..';
+import { useForwardPropsEmits } from '../../shared';
 
 const props = defineProps<ADateRangePickerRootProps>();
 const emits = defineEmits<ADateRangePickerRootEmits>();

@@ -254,7 +254,7 @@ describe('month range picker', () => {
   });
 
   it('handles fixedDate with start correctly', async () => {
-    const { getByTestId, picker, user } = setup({
+    const { getByTestId, user } = setup({
       pickerProps: {
         defaultValue: calendarDateRange,
         fixedDate: 'start',
@@ -273,7 +273,7 @@ describe('month range picker', () => {
   });
 
   it('handles fixedDate with end correctly', async () => {
-    const { getByTestId, picker, user } = setup({
+    const { getByTestId, user } = setup({
       pickerProps: {
         defaultValue: calendarDateRange,
         fixedDate: 'end',

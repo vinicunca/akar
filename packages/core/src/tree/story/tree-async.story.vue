@@ -45,7 +45,8 @@ function addChildrenToNode(tree: Array<TreeNode>, targetId: string, newChildren:
 function fetchData(value: TreeNode) {
   return new Promise<void>((resolve) => {
     if ((value.children?.length ?? 0) > 0) {
-      return resolve();
+      resolve();
+      return;
     }
 
     setTimeout(() => {

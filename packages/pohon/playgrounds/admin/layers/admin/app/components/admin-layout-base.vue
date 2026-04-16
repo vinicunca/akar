@@ -9,7 +9,7 @@ import {
   LayoutMenu,
 } from './menu';
 import { LayoutTabbar } from './tabbar';
-import { Breadcrumb, PreferencesButton } from './widgets';
+import { PreferencesButton } from './widgets';
 
 const emit = defineEmits<{
   clearPreferencesAndLogout: [];

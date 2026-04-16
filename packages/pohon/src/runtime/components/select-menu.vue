@@ -473,7 +473,7 @@ const createItem = computed(() => {
   const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value;
 
   if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
-    return !filteredItems.value.find((item) => compare({
+    return !filteredItems.value.some((item) => compare({
       value: item,
       currentValue: newItem,
       comparator: props.valueKey as string,

@@ -195,7 +195,7 @@ You can access the typed component instance using [`useTemplateRef`](https://vue
 
 ```vue
 <script setup lang="ts">
-const form = useTemplateRef('form')
+const form = useTemplateRef('form');
 </script>
 
 <template>

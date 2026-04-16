@@ -16,7 +16,6 @@ import {
   ASelectValue,
   ASelectViewport,
 } from 'akar';
-
 import { reactive, ref } from 'vue';
 
 const colors = Object.keys(theme.variants.color);

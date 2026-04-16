@@ -16,12 +16,12 @@ links:
 The LocaleSelect component extends the [SelectMenu](/docs/pohon/components/select-menu) component, so you can pass any property such as `color`, `variant`, `size`, etc.
 
 ::docs-framework-only
-#nuxt
+# nuxt
 ::note{to="/docs/pohon/getting-started/integrations/i18n/nuxt"}
 This component is meant to be used with the **i18n** system. Learn more about it in the guide.
 ::
 
-#vue
+# vue
 ::note{to="/docs/pohon/getting-started/integrations/i18n/vue"}
 This component is meant to be used with the **i18n** system. Learn more about it in the guide.
 ::
@@ -62,7 +62,7 @@ const locale = ref('en');
 ### Dynamic locale
 
 ::docs-framework-only
-#nuxt
+# nuxt
 ::div
 You can use it with Nuxt i18n:
 
@@ -84,7 +84,7 @@ const { locale, setLocale } = useI18n();
 
 ::
 
-#vue
+# vue
 ::div
 You can use it with Vue i18n:
 

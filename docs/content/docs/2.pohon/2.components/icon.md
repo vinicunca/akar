@@ -21,7 +21,7 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::caution{to="/docs/pohon/getting-started/integrations/icons/nuxt#collections"}
 It's highly recommended to install the icons collections you need, read more about this.
 :::
@@ -43,11 +43,14 @@ You can define your icon components yourself, or use [`unplugin-icons`](https://
 
 ```vue
 <script setup lang="ts">
-import IconLightbulb from '~icons/lucide/lightbulb'
+import IconLightbulb from '~icons/lucide/lightbulb';
 </script>
 
 <template>
-  <PIcon :name="IconLightbulb" class="size-5" />
+  <PIcon
+    :name="IconLightbulb"
+    class="size-5"
+  />
 </template>
 ```
 

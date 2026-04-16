@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { AToggleGroupRootEmits, AToggleGroupRootProps } from '..';
 import { Icon } from '@iconify/vue';
-import { useForwardPropsEmits } from '../../shared';
 import { AToggleGroupItem, AToggleGroupRoot } from '..';
+import { useForwardPropsEmits } from '../../shared';
 
 const props = defineProps<AToggleGroupRootProps>();
 const emits = defineEmits<AToggleGroupRootEmits>();

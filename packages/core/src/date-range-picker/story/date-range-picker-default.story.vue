@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import { ALabel } from '../label';
 import {
   ADateRangePickerArrow,
   ADateRangePickerCalendar,
@@ -21,6 +20,7 @@ import {
   ADateRangePickerRoot,
   ADateRangePickerTrigger,
 } from '..';
+import { ALabel } from '../label';
 </script>
 
 <template>

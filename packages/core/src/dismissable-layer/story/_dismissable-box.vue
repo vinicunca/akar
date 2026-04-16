@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { DismissableLayer } from '..';
-
 import DismissableBox from './_dismissable-box.vue';
 
 const open = ref(false);

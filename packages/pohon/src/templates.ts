@@ -49,7 +49,7 @@ export function addPohonTemplates(
 }
 
 export function getPohonTemplates(
-  { options, pohon, nuxt}:
+  { options, pohon, nuxt }:
   {
     options: PohonModuleOptions;
     pohon: Nuxt['options']['appConfig']['pohon'];

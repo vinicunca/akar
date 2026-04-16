@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { DismissableLayer } from '..';
 import { AFocusScope } from '../focus-scope';
 import { FocusGuards } from '../FocusGuards';
-import { DismissableLayer } from '..';
 
 defineProps<{
   openLabel?: string;

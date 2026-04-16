@@ -58,7 +58,7 @@ This action cannot be undone.
 
 :::
 
-#code
+# code
 
 ```mdc
 ::note

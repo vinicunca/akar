@@ -1,5 +1,5 @@
 /* eslint-disable sonar/no-identical-functions */
-/* eslint-disable sonar/no-nested-functions */
+
 import type { PButtonProps, PButtonSlots } from '../../src/runtime/components/button.vue';
 import theme from '#build/pohon/button';
 import { PForm } from '#components';

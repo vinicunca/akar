@@ -3,7 +3,7 @@
     <PLink
       to="https://github.com/praburangki"
       target="_blank"
-      class="hover:ring-primary transition"
+      class="transition hover:ring-primary"
       raw
     >
       <PAvatar
@@ -15,7 +15,7 @@
     <PLink
       to="https://github.com/wahyu-ivan"
       target="_blank"
-      class="hover:ring-primary transition"
+      class="transition hover:ring-primary"
       raw
     >
       <PAvatar
@@ -27,7 +27,7 @@
     <PLink
       to="https://github.com/GunawanAhmad"
       target="_blank"
-      class="hover:ring-primary transition"
+      class="transition hover:ring-primary"
       raw
     >
       <PAvatar

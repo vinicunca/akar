@@ -7,7 +7,7 @@ export interface PIconProps {
     content: string,
     name?: string,
     prefix?: string,
-    provider?: string
+    provider?: string,
   ) => string;
 }
 </script>

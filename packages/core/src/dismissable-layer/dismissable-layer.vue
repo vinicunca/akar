@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { APrimitiveProps } from '../primitive';
-
 import type {
   FocusOutsideEvent,
   PointerDownOutsideEvent,

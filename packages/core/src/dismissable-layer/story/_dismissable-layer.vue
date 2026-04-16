@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { DismissableLayerEmits } from '..';
 import { ref } from 'vue';
-import { useEmitAsProps } from '../../shared';
 import { DismissableLayer } from '..';
+import { useEmitAsProps } from '../../shared';
 
 defineProps<{
   openLabel?: string;
