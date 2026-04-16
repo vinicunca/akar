@@ -81,7 +81,7 @@ import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
 import { hasTime, isDateBefore } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 import { useDateFormatter, useDirection, useLocale } from '../shared';
-import { getDefaultDate, normalizeDateStep, normalizeHourCycle } from '../shared/date';
+import { getDefaultDate, getInputType, normalizeDateStep, normalizeHourCycle, normalizeInputValue } from '../shared/date';
 import {
   createContent,
   getSegmentElements,
@@ -268,6 +268,11 @@ const prevFocusableSegment = computed(() => {
   return segmentToFocus;
 });
 
+const inputType = computed(() => getInputType(inferredGranularity.value));
+const inputValue = computed(() => normalizeInputValue(modelValue.value, inferredGranularity.value));
+const inputMaxValue = computed(() => props.maxValue ? normalizeInputValue(props.maxValue, inferredGranularity.value) : undefined);
+const inputMinValue = computed(() => props.minValue ? normalizeInputValue(props.minValue, inferredGranularity.value) : undefined);
+
 function handleKeydown(event: KeyboardEvent) {
   if (!isSegmentNavigationKey(event.key)) {
     return;
@@ -331,15 +336,15 @@ defineExpose({
     <AVisuallyHidden
       :id="id"
       as="input"
-      type="date"
+      :type="inputType"
       feature="focusable"
       tabindex="-1"
-      :value="modelValue ? modelValue.toString() : ''"
+      :value="inputValue"
       :name="name"
       :disabled="disabled"
       :required="required"
-      :min="minValue"
-      :max="maxValue"
+      :min="inputMinValue"
+      :max="inputMaxValue"
       @focus="Array.from(segmentElements)?.[0]?.focus()"
     />
   </APrimitive>

@@ -28,3 +28,4 @@
 - fix(Listbox): restore highlightOnHover behavior
 - fix(useForwardProps): return Partial<T> to correctly type optional boolean props
 - fix(Select): normalize hidden control
+- fix(DateField): fixed direct incorrect passing of date values to input element

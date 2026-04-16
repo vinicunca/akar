@@ -1,5 +1,5 @@
 import type { Granularity } from './comparators';
-import type { DateStep, DateValue, HourCycle } from './types';
+import type { DateInputType, DateStep, DateValue, HourCycle } from './types';
 import defu from 'defu';
 
 export function getOptsByGranularity(granularity: Granularity, hourCycle: HourCycle, isTimeValue: boolean = false) {
