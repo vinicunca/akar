@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { toKebabCase } from '@vinicunca/perkakas';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,16 +17,17 @@ const TARGET_FOLDERS = [
   'ColorSlider',
   'ColorSwatch',
   'ColorSwatchPicker',
+  'TimeRangeField',
 ];
 
-function toKebabCase(value) {
-  return value
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
-    .replace(/-+/g, '-')
-    .toLowerCase();
-}
+// function toKebabCase(value) {
+//   return value
+//     .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+//     .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
+//     .replace(/[\s_]+/g, '-')
+//     .replace(/-+/g, '-')
+//     .toLowerCase();
+// }
 
 function renameEntry(oldPath) {
   const parentPath = path.dirname(oldPath);

@@ -8,3 +8,4 @@
 - fix(useForwardExpose): sync currentElement on DOM update
 - fix(Calendar): parity + docs regen
 - feat: color components
+- feat: new TimeRangeField Component

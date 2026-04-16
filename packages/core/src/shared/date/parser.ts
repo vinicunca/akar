@@ -9,6 +9,7 @@ import {
   getPlaceholder,
   isDateSegmentPart,
   isSegmentPart,
+  normalizeHourCycle,
   TIME_SEGMENT_PARTS,
 } from '.';
 import { isZonedDateTime, toDate } from '../../date';
@@ -142,7 +143,7 @@ function createContentObj(props: CreateContentObjProps) {
               month: segmentValues.month ?? 1,
             }),
             type: part,
-            options: { hourCycle: props.hourCycle === 24 ? 'h23' : undefined },
+            options: { hourCycle: normalizeHourCycle(props.hourCycle) },
           });
         }
 
@@ -150,7 +151,7 @@ function createContentObj(props: CreateContentObjProps) {
           dateObj: props.dateRef.set({ [part]: value }),
           type: part,
           options: {
-            hourCycle: props.hourCycle === 24 ? 'h23' : undefined,
+            hourCycle: normalizeHourCycle(props.hourCycle),
           },
         });
       } else {
@@ -160,13 +161,6 @@ function createContentObj(props: CreateContentObjProps) {
       if (isDateSegmentPart(part)) {
         const value = segmentValues[part];
         if (value !== null) {
-          if (part === 'day' && segmentValues.month !== null) {
-            return formatter.part({
-              dateObj: props.dateRef.set({ [part]: value, month: segmentValues.month }),
-              type: part,
-            });
-          }
-
           if (part === 'day') {
             return formatter.part({
               dateObj: props.dateRef.set({

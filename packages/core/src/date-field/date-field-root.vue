@@ -6,11 +6,7 @@ import type { APrimitiveProps } from '../primitive';
 import type { UseDateFormatter } from '../shared';
 import type { DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '../shared/date';
 import type { Direction, FormFieldProps } from '../shared/types';
-import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
-import { hasTime, isDateBefore } from '../date';
-import { createContext, useDateFormatter, useDirection, useLocale } from '../shared';
-import { getDefaultDate, normalizeDateStep } from '../shared/date';
-import { createContent, getSegmentElements, initializeSegmentValues, isSegmentNavigationKey, syncSegmentValues } from '../shared/date';
+import { createContext } from '../shared';
 
 type DateFieldRootContext = {
   locale: Ref<string>;
@@ -79,9 +75,20 @@ export const [
 </script>
 
 <script setup lang="ts">
+import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
+import { hasTime, isDateBefore } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
+import { useDateFormatter, useDirection, useLocale } from '../shared';
+import { getDefaultDate, normalizeDateStep, normalizeHourCycle } from '../shared/date';
+import {
+  createContent,
+  getSegmentElements,
+  initializeSegmentValues,
+  isSegmentNavigationKey,
+  syncSegmentValues,
+} from '../shared/date';
 import { AVisuallyHidden } from '../visually-hidden';
 
 defineOptions({
@@ -116,7 +123,9 @@ const { disabled, readonly, isDateUnavailable: propsIsDateUnavailable, granulari
 const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
 
-const formatter = useDateFormatter(locale.value);
+const formatter = useDateFormatter(locale.value, {
+  hourCycle: normalizeHourCycle(props.hourCycle),
+});
 const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
 const segmentElements = ref<Set<HTMLElement>>(new Set());
 

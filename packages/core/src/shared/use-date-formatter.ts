@@ -39,7 +39,7 @@ export interface UseDateFormatter {
  *
  * @see [DateFormatter](https://react-spectrum.adobe.com/internationalized/date/DateFormatter.html)
  */
-export function useDateFormatter(initialLocale: string): UseDateFormatter {
+export function useDateFormatter(initialLocale: string, opts: DateFormatterOptions = {}): UseDateFormatter {
   const locale = ref(initialLocale);
 
   function getLocale() {
@@ -51,7 +51,13 @@ export function useDateFormatter(initialLocale: string): UseDateFormatter {
   }
 
   function custom({ date, options }: { date: Date; options: DateFormatterOptions }) {
-    return new DateFormatter(locale.value, options).format(date);
+    return new DateFormatter(
+      locale.value,
+      {
+        ...opts,
+        ...options,
+      },
+    ).format(date);
   }
 
   function selectedDate({ date, includeTime = true }: { date: DateValue; includeTime?: boolean }) {
@@ -76,14 +82,23 @@ export function useDateFormatter(initialLocale: string): UseDateFormatter {
   function fullMonthAndYear({ date, options = {} }: { date: Date; options?: DateFormatterOptions }) {
     return new DateFormatter(
       locale.value,
-      { month: 'long', year: 'numeric', ...options },
+      {
+        ...opts,
+        month: 'long',
+        year: 'numeric',
+        ...options,
+      },
     ).format(date);
   }
 
   function fullMonth({ date, options = {} }: { date: Date; options?: DateFormatterOptions }) {
     return new DateFormatter(
       locale.value,
-      { month: 'long', ...options },
+      {
+        ...opts,
+        month: 'long',
+        ...options,
+      },
     ).format(date);
   }
 
@@ -101,18 +116,26 @@ export function useDateFormatter(initialLocale: string): UseDateFormatter {
   function fullYear({ date, options = {} }: { date: Date; options?: DateFormatterOptions }) {
     return new DateFormatter(
       locale.value,
-      { year: 'numeric', ...options },
+      {
+        ...opts,
+        year: 'numeric',
+        ...options,
+      },
     ).format(date);
   }
 
   function toParts({ date, options }: { date: DateValue; options?: DateFormatterOptions }) {
     if (isZonedDateTime(date)) {
       return new DateFormatter(locale.value, {
+        ...opts,
         ...options,
         timeZone: (date as ZonedDateTime).timeZone,
       }).formatToParts(toDate(date));
     } else {
-      return new DateFormatter(locale.value, options)
+      return new DateFormatter(locale.value, {
+        ...opts,
+        ...options,
+      })
         .formatToParts(toDate(date));
     }
   }
@@ -120,12 +143,16 @@ export function useDateFormatter(initialLocale: string): UseDateFormatter {
   function dayOfWeek({ date, length = 'narrow' }: { date: Date; length?: DateFormatterOptions['weekday'] }) {
     return new DateFormatter(
       locale.value,
-      { weekday: length },
+      {
+        ...opts,
+        weekday: length,
+      },
     ).format(date);
   }
 
   function dayPeriod(date: Date) {
     const parts = new DateFormatter(locale.value, {
+      ...opts,
       hour: 'numeric',
       minute: 'numeric',
     }).formatToParts(date);

@@ -5,24 +5,7 @@ import type { APrimitiveProps } from '../primitive';
 import type { UseDateFormatter } from '../shared';
 import type { DateStep, HourCycle, SegmentPart, SegmentValueObj, TimeValue } from '../shared/date';
 import type { Direction, FormFieldProps } from '../shared/types';
-import { getLocalTimeZone, isEqualDay, Time, toCalendarDateTime, today } from '@internationalized/date';
-import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
-import { isDateBefore } from '../date';
-import {
-  createContext,
-  useDateFormatter,
-  useDirection,
-  useLocale,
-} from '../shared';
-import {
-  createContent,
-  getDefaultTime,
-  getTimeFieldSegmentElements,
-  initializeTimeSegmentValues,
-  isSegmentNavigationKey,
-  normalizeDateStep,
-  syncTimeSegmentValues,
-} from '../shared/date';
+import { createContext } from '../shared';
 
 type TimeFieldRootContext = {
   locale: Ref<string>;
@@ -84,22 +67,34 @@ export type ATimeFieldRootEmits = {
   'update:placeholder': [date: TimeValue];
 };
 
-export const [injectATimeFieldRootContext, provideTimeFieldRootContext]
-  = createContext<TimeFieldRootContext>('ATimeFieldRoot');
-
-function convertValue(value: TimeValue, date: DateValue = today(getLocalTimeZone())) {
-  if (value && 'day' in value) {
-    return value;
-  }
-
-  return toCalendarDateTime(date, value);
-}
+export const [
+  injectATimeFieldRootContext,
+  provideTimeFieldRootContext,
+] = createContext<TimeFieldRootContext>('ATimeFieldRoot');
 </script>
 
 <script setup lang="ts">
+import { getLocalTimeZone, isEqualDay, Time, toCalendarDateTime, today } from '@internationalized/date';
+import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
+import { isDateBefore } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
+import {
+  useDateFormatter,
+  useDirection,
+  useLocale,
+} from '../shared';
+import {
+  createContent,
+  getDefaultTime,
+  getTimeFieldSegmentElements,
+  initializeTimeSegmentValues,
+  isSegmentNavigationKey,
+  normalizeDateStep,
+  normalizeHourCycle,
+  syncTimeSegmentValues,
+} from '../shared/date';
 import { AVisuallyHidden } from '../visually-hidden';
 
 defineOptions({
@@ -127,6 +122,14 @@ defineSlots<{
   }) => any;
 }>();
 
+function convertValue(value: TimeValue, date: DateValue = today(getLocalTimeZone())) {
+  if (value && 'day' in value) {
+    return value;
+  }
+
+  return toCalendarDateTime(date, value);
+}
+
 const {
   disabled,
   readonly,
@@ -141,7 +144,9 @@ const {
 const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
 
-const formatter = useDateFormatter(locale.value);
+const formatter = useDateFormatter(locale.value, {
+  hourCycle: normalizeHourCycle(props.hourCycle),
+});
 const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
 const segmentElements = ref<Set<HTMLElement>>(new Set());
 
