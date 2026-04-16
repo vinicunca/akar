@@ -790,10 +790,12 @@ export function useDateField(props: UseDateFieldProps) {
       if (is12Hour && prevValue !== null) {
         // 12 AM/PM should be treated as 0 internally even if it doesn't match the display
         // otherwise repeatedly typing 0 will not advance to the next segment
-        if (prevValue === 0) {
-          displayPrev = 12;
+        if (prevValue % 12 === 0) {
+          displayPrev = 0;
         } else if (prevValue > 12) {
           displayPrev = prevValue - 12;
+        } else {
+          displayPrev = prevValue;
         }
       }
 

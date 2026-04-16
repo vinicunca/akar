@@ -38,6 +38,7 @@ export type {
   SegmentContentObj,
   SegmentPart,
   SegmentValueObj,
+  TimeRange,
   TimeSegmentObj,
   TimeSegmentPart,
 } from './types';

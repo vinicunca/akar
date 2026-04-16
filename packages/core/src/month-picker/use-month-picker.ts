@@ -146,13 +146,19 @@ export function useMonthPicker(props: UseMonthPickerProps) {
     if (nextPageFunc || props.nextPage.value) {
       const newDate = (nextPageFunc || props.nextPage.value)!(currentDate);
       grid.value = createMonthGrid({ dateObj: newDate });
-      props.placeholder.value = newDate.set({ month: props.placeholder.value.month, day: props.placeholder.value.day });
+      props.placeholder.value = newDate.set({
+        month: props.placeholder.value.month,
+        day: props.placeholder.value.day,
+      });
       return;
     }
 
     const newDate = currentDate.add({ years: 1 });
     grid.value = createMonthGrid({ dateObj: newDate });
-    props.placeholder.value = newDate.set({ month: props.placeholder.value.month, day: props.placeholder.value.day });
+    props.placeholder.value = newDate.set({
+      month: props.placeholder.value.month,
+      day: props.placeholder.value.day,
+    });
   };
 
   function prevPage(prevPageFunc?: (date: DateValue) => DateValue) {
@@ -161,13 +167,19 @@ export function useMonthPicker(props: UseMonthPickerProps) {
     if (prevPageFunc || props.prevPage.value) {
       const newDate = (prevPageFunc || props.prevPage.value)!(currentDate);
       grid.value = createMonthGrid({ dateObj: newDate });
-      props.placeholder.value = newDate.set({ month: props.placeholder.value.month, day: props.placeholder.value.day });
+      props.placeholder.value = newDate.set({
+        month: props.placeholder.value.month,
+        day: props.placeholder.value.day,
+      });
       return;
     }
 
     const newDate = currentDate.subtract({ years: 1 });
     grid.value = createMonthGrid({ dateObj: newDate });
-    props.placeholder.value = newDate.set({ month: props.placeholder.value.month, day: props.placeholder.value.day });
+    props.placeholder.value = newDate.set({
+      month: props.placeholder.value.month,
+      day: props.placeholder.value.day,
+    });
   };
 
   watch(props.placeholder, (value) => {

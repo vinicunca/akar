@@ -15,7 +15,6 @@ overrides:
   pohon-ui: workspace:*
   rolldown: 1.0.0-beta.26
   unplugin: ^3.0.0
-  vite: ^7.3.0
   vitest: ^3.2.4
 
 catalogs:
@@ -65,7 +64,7 @@ catalogs:
     jsdom: ^27.0.0
     tsdown: 0.12.9
     type-fest: ^5.4.4
-    vite: ^8.0.3
+    vite: ^8.0.8
     vitest: ^3.2.4
     vitest-axe: 0.1.0
     vitest-canvas-mock: ^0.3.3

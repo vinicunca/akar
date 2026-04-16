@@ -32,3 +32,5 @@
 - chore(deps): update vue (major)
 - fix(TimeField,DateField): avoid changing focus prematurely with previous segment value of 0
 - fix(ListboxVirtualizer): ignore non-element VNodes in slot children
+- fix(TimeField): change focus after pressing 0 more than once on hour segment with 12 hour locales
+- fix(MonthPicker, YearPicker): preserve day/month when selecting
