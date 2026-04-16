@@ -186,7 +186,8 @@ function handleArrowKey(event: KeyboardEvent) {
 <template>
   <APrimitive
     ref="primitiveElement"
-    v-bind="props"
+    :as="props.as"
+    :as-child="props.asChild"
     role="button"
     :aria-label="labelText"
     data-akar-calendar-cell-trigger

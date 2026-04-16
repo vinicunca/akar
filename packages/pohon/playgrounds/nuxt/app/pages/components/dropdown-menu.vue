@@ -18,8 +18,8 @@ const items = computed(() => [
     description: 'View your profile',
     icon: 'i-lucide:user',
     slot: 'custom' as const,
-    onSelect(e: Event) {
-      e.preventDefault();
+    onSelect(event: Event) {
+      event.preventDefault();
       console.log('Profile clicked');
     },
   }, {
@@ -51,8 +51,8 @@ const items = computed(() => [
       label: 'Invite by link',
       icon: 'i-lucide:link',
       kbds: ['meta', 'i'],
-      onSelect(e: Event) {
-        e.preventDefault();
+      onSelect(event: Event) {
+        event.preventDefault();
         console.log('Invite by link clicked');
       },
     }], [{
@@ -64,22 +64,22 @@ const items = computed(() => [
         icon: 'i-simple-icons:slack',
         to: 'https://slack.com',
         target: '_blank',
-        onSelect(e: Event) {
-          e.preventDefault();
+        onSelect(event: Event) {
+          event.preventDefault();
           console.log('Import from Slack clicked');
         },
       }, {
         label: 'Import from Trello',
         icon: 'i-simple-icons:trello',
-        onSelect(e: Event) {
-          e.preventDefault();
+        onSelect(event: Event) {
+          event.preventDefault();
           console.log('Import from Trello clicked');
         },
       }, {
         label: 'Import from Asana',
         icon: 'i-simple-icons:asana',
-        onSelect(e: Event) {
-          e.preventDefault();
+        onSelect(event: Event) {
+          event.preventDefault();
           console.log('Import from Asana clicked');
         },
       }],
@@ -89,8 +89,8 @@ const items = computed(() => [
     icon: 'i-lucide:plus',
     kbds: ['meta', 'n'],
     loading: loading.value,
-    onSelect(e: Event) {
-      e.preventDefault();
+    onSelect(event: Event) {
+      event.preventDefault();
 
       loading.value = true;
       setTimeout(() => {
@@ -103,8 +103,8 @@ const items = computed(() => [
     icon: 'i-simple-icons:github',
     to: 'https://github.com/nuxt/ui',
     target: '_blank',
-    onSelect(e: Event) {
-      e.preventDefault();
+    onSelect(event: Event) {
+      event.preventDefault();
     },
   }, {
     label: 'Support',

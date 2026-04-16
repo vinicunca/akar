@@ -109,7 +109,7 @@ Each group contains an `items` array of objects that define the commands. Each i
 - [`slot?: string`](#with-custom-slot)
 - `placeholder?: string`
 - `children?: PCommandPaletteItem[]`
-- `onSelect?: (e: Event) => void`
+- `onSelect?: (event: Event) => void`
 - `class?: any`
 - `pohon?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`
 

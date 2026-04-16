@@ -78,7 +78,7 @@ You can also pass an array of objects with the following properties:
 - [`avatar?: AvatarProps`](#with-avatar-in-items)
 - [`chip?: ChipProps`](#with-chip-in-items)
 - `disabled?: boolean`
-- `onSelect?: (e: Event) => void`
+- `onSelect?: (event: Event) => void`
 - `class?: any`
 - `pohon?: { label?: ClassNameValue, separator?: ClassNameValue, item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`
 

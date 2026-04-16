@@ -65,8 +65,8 @@ const items = computed(() => [
     {
       label: 'Refresh the Page',
       loading: loading.value,
-      onSelect(e: Event) {
-        e.preventDefault();
+      onSelect(event: Event) {
+        event.preventDefault();
 
         loading.value = true;
         setTimeout(() => {

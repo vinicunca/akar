@@ -22,6 +22,8 @@ export * from './focus-scope';
 export * from './hover-card';
 export * from './label';
 export * from './listbox';
+export * from './month-picker';
+export * from './month-range-picker';
 export * from './navigation-menu';
 export * from './number-field';
 export * from './pagination';
@@ -52,6 +54,8 @@ export * from './tooltip';
 export * from './tree';
 export * from './viewport';
 export { AVisuallyHidden, type AVisuallyHiddenProps } from './visually-hidden';
+export * from './year-picker';
+export * from './year-range-picker';
 
 export {
   createContext,

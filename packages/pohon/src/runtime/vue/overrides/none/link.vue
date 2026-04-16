@@ -158,8 +158,8 @@ const linkRel = computed(() => {
 const handleNavigation = inject<((event: MouseEvent, context: { href: string; external: boolean; target?: string | null }) => void) | undefined>('nuxtui:router', undefined);
 
 const navigate = handleNavigation
-  ? (e: MouseEvent) => {
-      handleNavigation(e, {
+  ? (event: MouseEvent) => {
+      handleNavigation(event, {
         href: href.value || '',
         external: isExternal.value,
         target: props.target || (isExternal.value ? '_blank' : undefined),

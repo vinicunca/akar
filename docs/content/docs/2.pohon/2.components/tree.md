@@ -59,8 +59,8 @@ Use the `items` prop as an array of objects with the following properties:
 - `disabled?: boolean`
 - `slot?: string`
 - `children?: TreeItem[]`
-- `onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void`
-- `onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void`
+- `onToggle?: (event: TreeItemToggleEvent<TreeItem>) => void`
+- `onSelect?: (event: TreeItemSelectEvent<TreeItem>) => void`
 - `class?: any`
 - `pohon?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`
 

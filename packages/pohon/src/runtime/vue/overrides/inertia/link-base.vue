@@ -5,7 +5,7 @@ export interface LinkBaseProps {
   as?: string;
   type?: string;
   disabled?: boolean;
-  onClick?: ((e: MouseEvent) => void | Promise<void>) | Array<((e: MouseEvent) => void | Promise<void>)>;
+  onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>;
   href?: string;
   target?: PLinkProps['target'];
   rel?: PLinkProps['rel'];
@@ -25,16 +25,16 @@ const props = withDefaults(defineProps<LinkBaseProps>(), {
   type: 'button',
 });
 
-function onClickWrapper(e: MouseEvent) {
+function onClickWrapper(event: MouseEvent) {
   if (props.disabled) {
-    e.stopPropagation();
-    e.preventDefault();
+    event.stopPropagation();
+    event.preventDefault();
     return;
   }
 
   if (props.onClick) {
     for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
-      onClick(e);
+      onClick(event);
     }
   }
 }

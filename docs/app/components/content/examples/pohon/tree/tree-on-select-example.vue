@@ -6,8 +6,8 @@ const items: Array<PTreeItem> = [
   {
     label: 'app/',
     defaultExpanded: true,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
     },
     children: [
       {
@@ -31,9 +31,9 @@ const items: Array<PTreeItem> = [
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons:file-type-nuxt' },
 ];
 
-function onSelect(e: ATreeItemSelectEvent<PTreeItem>) {
-  if (e.detail.originalEvent.type === 'click') {
-    e.preventDefault();
+function onSelect(event: ATreeItemSelectEvent<PTreeItem>) {
+  if (event.detail.originalEvent.type === 'click') {
+    event.preventDefault();
   }
 }
 </script>

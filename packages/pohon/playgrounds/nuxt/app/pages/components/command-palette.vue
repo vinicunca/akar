@@ -35,8 +35,8 @@ const groups = computed(() => [
       suffix: 'Create a new file in the current directory or workspace.',
       icon: 'i-lucide:file-plus',
       loading: loading.value,
-      onSelect(e: Event) {
-        e.preventDefault();
+      onSelect(event: Event) {
+        event.preventDefault();
 
         toast.add({ title: 'New file added!' });
 
@@ -51,8 +51,8 @@ const groups = computed(() => [
       label: 'Add new folder',
       suffix: 'Create a new folder in the current directory or workspace.',
       icon: 'i-lucide:folder-plus',
-      onSelect(e: Event) {
-        e.preventDefault();
+      onSelect(event: Event) {
+        event.preventDefault();
 
         toast.add({ title: 'New folder added!' });
       },
@@ -61,8 +61,8 @@ const groups = computed(() => [
       label: 'Add hashtag',
       suffix: 'Add a hashtag to the current item.',
       icon: 'i-lucide:hash',
-      onSelect(e: Event) {
-        e.preventDefault();
+      onSelect(event: Event) {
+        event.preventDefault();
 
         toast.add({ title: 'Hashtag added!' });
       },
@@ -71,8 +71,8 @@ const groups = computed(() => [
       label: 'Add label',
       suffix: 'Add a label to the current item.',
       icon: 'i-lucide:tag',
-      onSelect(e: Event) {
-        e.preventDefault();
+      onSelect(event: Event) {
+        event.preventDefault();
 
         toast.add({ title: 'Label added!' });
       },
@@ -86,8 +86,8 @@ const groups = computed(() => [
         label: 'Create new file',
         suffix: 'Create a new file in the current directory or workspace.',
         icon: 'i-lucide:file-plus',
-        onSelect(e: Event) {
-          e.preventDefault();
+        onSelect(event: Event) {
+          event.preventDefault();
 
           toast.add({ title: 'New file added!' });
         },
@@ -95,8 +95,8 @@ const groups = computed(() => [
         label: 'Create new folder',
         suffix: 'Create a new folder in the current directory or workspace.',
         icon: 'i-lucide:folder-plus',
-        onSelect(e: Event) {
-          e.preventDefault();
+        onSelect(event: Event) {
+          event.preventDefault();
 
           toast.add({ title: 'New folder added!' });
         },
@@ -108,8 +108,8 @@ const groups = computed(() => [
           label: 'Share with everyone',
           suffix: 'Share with everyone in the current directory or workspace.',
           icon: 'i-lucide:share',
-          onSelect(e: Event) {
-            e.preventDefault();
+          onSelect(event: Event) {
+            event.preventDefault();
 
             toast.add({ title: 'Shared with everyone!' });
           },
@@ -117,8 +117,8 @@ const groups = computed(() => [
           label: 'Share with team',
           suffix: 'Share with the team in the current directory or workspace.',
           icon: 'i-lucide:users',
-          onSelect(e: Event) {
-            e.preventDefault();
+          onSelect(event: Event) {
+            event.preventDefault();
 
             toast.add({ title: 'Shared with team!' });
           },
@@ -192,7 +192,7 @@ defineShortcuts({
       />
 
       <template #content>
-        <ReuseTemplate class="border-border mt-4 border-t" />
+        <ReuseTemplate class="mt-4 border-t border-border" />
       </template>
     </PDrawer>
 

@@ -250,6 +250,32 @@ export const components = {
     'AListboxVirtualizer',
   ] as const,
 
+  monthPicker: [
+    'AMonthPickerRoot',
+    'AMonthPickerHeader',
+    'AMonthPickerHeading',
+    'AMonthPickerGrid',
+    'AMonthPickerCell',
+    'AMonthPickerNext',
+    'AMonthPickerPrev',
+    'AMonthPickerGridBody',
+    'AMonthPickerGridRow',
+    'AMonthPickerCellTrigger',
+  ] as const,
+
+  monthRangePicker: [
+    'AMonthRangePickerRoot',
+    'AMonthRangePickerHeader',
+    'AMonthRangePickerHeading',
+    'AMonthRangePickerGrid',
+    'AMonthRangePickerCell',
+    'AMonthRangePickerNext',
+    'AMonthRangePickerPrev',
+    'AMonthRangePickerGridBody',
+    'AMonthRangePickerGridRow',
+    'AMonthRangePickerCellTrigger',
+  ] as const,
+
   navigationMenu: [
     'ANavigationMenuContent',
     'ANavigationMenuIndicator',
@@ -466,6 +492,32 @@ export const components = {
 
   visuallyHidden: [
     'AVisuallyHidden',
+  ] as const,
+
+  yearPicker: [
+    'AYearPickerRoot',
+    'AYearPickerHeader',
+    'AYearPickerHeading',
+    'AYearPickerGrid',
+    'AYearPickerCell',
+    'AYearPickerNext',
+    'AYearPickerPrev',
+    'AYearPickerGridBody',
+    'AYearPickerGridRow',
+    'AYearPickerCellTrigger',
+  ] as const,
+
+  yearRangePicker: [
+    'AYearRangePickerRoot',
+    'AYearRangePickerHeader',
+    'AYearRangePickerHeading',
+    'AYearRangePickerGrid',
+    'AYearRangePickerCell',
+    'AYearRangePickerNext',
+    'AYearRangePickerPrev',
+    'AYearRangePickerGridBody',
+    'AYearRangePickerGridRow',
+    'AYearRangePickerCellTrigger',
   ] as const,
 };
 

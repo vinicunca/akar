@@ -114,7 +114,7 @@ const contentEvents = computed(() => {
         emits('close:prevent');
       };
       return acc;
-    }, {} as Record<typeof events[number], (e: Event) => void>);
+    }, {} as Record<typeof events[number], (event: Event) => void>);
   }
 
   return {

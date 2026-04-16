@@ -106,7 +106,7 @@ const table = useTemplateRef('table');
 
 const rowSelection = ref<Record<string, boolean>>({ });
 
-function onSelect(e: Event, row: PTableRow<Payment>) {
+function onSelect(event: Event, row: PTableRow<Payment>) {
   /* If you decide to also select the column you can do this  */
   row.toggleSelected(!row.getIsSelected());
 }

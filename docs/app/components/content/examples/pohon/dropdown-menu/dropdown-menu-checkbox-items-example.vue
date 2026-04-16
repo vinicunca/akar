@@ -20,8 +20,8 @@ const items = computed(() => [{
   onUpdateChecked(checked: boolean) {
     showBookmarks.value = checked;
   },
-  onSelect(e: Event) {
-    e.preventDefault();
+  onSelect(event: Event) {
+    event.preventDefault();
   },
 }, {
   label: 'Show History',

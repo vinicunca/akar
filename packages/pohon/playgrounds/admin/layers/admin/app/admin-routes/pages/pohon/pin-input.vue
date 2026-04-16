@@ -13,8 +13,8 @@ const attrs = reactive({
   variant: [theme.defaultVariants.variant],
 });
 
-function onComplete(e: Array<string>) {
-  console.log(e);
+function onComplete(event: Array<string>) {
+  console.log(event);
 }
 
 const value = ref<Array<string>>([]);

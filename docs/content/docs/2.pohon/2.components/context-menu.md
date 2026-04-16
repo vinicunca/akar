@@ -94,7 +94,7 @@ Use the `items` prop as an array of objects with the following properties:
 - [`checked?: boolean`](#with-checkbox-items)
 - `disabled?: boolean`
 - [`slot?: string`](#with-custom-slot)
-- `onSelect?: (e: Event) => void`
+- `onSelect?: (event: Event) => void`
 - [`onUpdateChecked?: (checked: boolean) => void`](#with-checkbox-items)
 - `children?: PContextMenuItem[] | PContextMenuItem[][]`
 - `class?: any`

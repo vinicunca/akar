@@ -418,8 +418,8 @@ onMounted(() => {
         onUpdateChecked(checked: boolean) {
           table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
         },
-        onSelect(e: Event) {
-          e.preventDefault()
+        onSelect(event: Event) {
+          event.preventDefault()
         },
       }))"
       :content="{ align: 'end' }"

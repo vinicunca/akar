@@ -6,8 +6,8 @@ const items: Array<PTreeItem> = [
   {
     label: 'app/',
     defaultExpanded: true,
-    onToggle: (e: Event) => {
-      e.preventDefault();
+    onToggle: (event: Event) => {
+      event.preventDefault();
     },
     children: [
       {
@@ -31,9 +31,9 @@ const items: Array<PTreeItem> = [
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons:file-type-nuxt' },
 ];
 
-function onToggle(e: ATreeItemToggleEvent<PTreeItem>) {
-  if (e.detail.originalEvent.type === 'keydown') {
-    e.preventDefault();
+function onToggle(event: ATreeItemToggleEvent<PTreeItem>) {
+  if (event.detail.originalEvent.type === 'keydown') {
+    event.preventDefault();
   }
 }
 </script>

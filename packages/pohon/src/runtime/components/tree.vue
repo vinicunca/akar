@@ -99,8 +99,8 @@ export interface PTreeProps<T extends Array<PTreeItem> = Array<PTreeItem>, M ext
      */
     estimateSize?: number | ((index: number) => number);
   };
-  onSelect?: (e: ATreeItemSelectEvent<T[number]>, item: T[number]) => void;
-  onToggle?: (e: ATreeItemToggleEvent<T[number]>, item: T[number]) => void;
+  onSelect?: (event: ATreeItemSelectEvent<T[number]>, item: T[number]) => void;
+  onToggle?: (event: ATreeItemToggleEvent<T[number]>, item: T[number]) => void;
   class?: any;
   pohon?: Tree['slots'];
 }

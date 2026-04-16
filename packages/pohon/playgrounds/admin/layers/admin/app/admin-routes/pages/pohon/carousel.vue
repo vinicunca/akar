@@ -34,8 +34,8 @@ const options = computed(() => [
     label: 'Loop',
     type: 'checkbox' as const,
     checked: loop.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       loop.value = !loop.value;
     },
   },
@@ -43,8 +43,8 @@ const options = computed(() => [
     label: 'Skip Snaps',
     type: 'checkbox' as const,
     checked: skipSnaps.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       skipSnaps.value = !skipSnaps.value;
     },
   },
@@ -52,8 +52,8 @@ const options = computed(() => [
     label: 'Arrows',
     type: 'checkbox' as const,
     checked: arrows.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       arrows.value = !arrows.value;
     },
   },
@@ -61,8 +61,8 @@ const options = computed(() => [
     label: 'Dots',
     type: 'checkbox' as const,
     checked: dots.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       dots.value = !dots.value;
     },
   },
@@ -73,8 +73,8 @@ const plugins = computed(() => [
     label: 'Autoplay',
     type: 'checkbox' as const,
     checked: autoplay.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       autoplay.value = !autoplay.value;
     },
   },
@@ -82,8 +82,8 @@ const plugins = computed(() => [
     label: 'Auto Scroll',
     type: 'checkbox' as const,
     checked: autoScroll.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       autoScroll.value = !autoScroll.value;
     },
   },
@@ -91,8 +91,8 @@ const plugins = computed(() => [
     label: 'Auto Height',
     type: 'checkbox' as const,
     checked: autoHeight.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       autoHeight.value = !autoHeight.value;
     },
   },
@@ -100,8 +100,8 @@ const plugins = computed(() => [
     label: 'Fade',
     type: 'checkbox' as const,
     checked: fade.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       fade.value = !fade.value;
     },
   },
@@ -109,8 +109,8 @@ const plugins = computed(() => [
     label: 'Class Names',
     type: 'checkbox' as const,
     checked: classNames.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       classNames.value = !classNames.value;
     },
   },
@@ -118,8 +118,8 @@ const plugins = computed(() => [
     label: 'Wheel Gestures',
     type: 'checkbox' as const,
     checked: wheelGestures.value,
-    onSelect: (e: Event) => {
-      e.preventDefault();
+    onSelect: (event: Event) => {
+      event.preventDefault();
       wheelGestures.value = !wheelGestures.value;
     },
   },
