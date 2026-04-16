@@ -14,3 +14,4 @@
 - fix(useBodyScrollLock): prevent permanent scroll lock on rapid toggle
 - fix(useHideOthers): edge case with useHideOthers when nested in a native popover
 - fix(Splitter): emit correct units for pixel-sized panels in events
+- chore(Menu): add aria-labelledby to MenuGroup

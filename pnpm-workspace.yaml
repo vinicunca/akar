@@ -28,9 +28,9 @@ catalogs:
     '@iconify-json/lucide': ^1.2.84
     '@iconify-json/simple-icons': ^1.2.66
     '@iconify-json/vscode-icons': ^1.2.38
-    '@vinicunca/eslint-config': 4.6.0
-    eslint: ^9.39.2
-    lint-staged: ^16.2.7
+    '@vinicunca/eslint-config': 5.0.0
+    eslint: ^10.2.0
+    lint-staged: ^16.3.2
     simple-git-hooks: ^2.13.1
     tsx: ^4.20.5
     typescript: 5.9.3
