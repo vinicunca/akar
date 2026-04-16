@@ -16,3 +16,5 @@
 - fix(Splitter): emit correct units for pixel-sized panels in events
 - chore(Menu): add aria-labelledby to MenuGroup
 - fix(Combobox): close content when focus moves outside with openOnFocus
+- fix(Calendar): add role="application" to fix NVDA keyboard navigation
+- fix(Splitter): nested px group ignores defaultSize & percentage drift
