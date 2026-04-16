@@ -18,6 +18,7 @@ links:
 features:
   - Full keyboard navigation.
   - Can be controlled or uncontrolled.
+  - Supports custom true/false values.
 ---
 ::
 
@@ -78,6 +79,47 @@ data:
     values: 'Present when disabled'
 ---
 ::
+
+## Examples
+
+### Custom Values
+
+Use the `trueValue` and `falseValue` props to specify custom values for the on and off states instead of the default `true`/`false`.
+
+```vue line=4-5,9-10
+<script setup>
+import { ASwitchRoot, ASwitchThumb } from 'akar';
+import { ref } from 'vue';
+
+// With string values
+const status = ref('inactive');
+
+// With number values
+const enabled = ref(0);
+</script>
+
+<template>
+  <!-- String values -->
+  <ASwitchRoot
+    v-model="status"
+    true-value="active"
+    false-value="inactive"
+  >
+    <ASwitchThumb />
+  </ASwitchRoot>
+  <span>Status: {{ status }}</span> <!-- "active" or "inactive" -->
+
+  <!-- Number values -->
+  <ASwitchRoot
+    v-model="enabled"
+    :true-value="1"
+    :false-value="0"
+  >
+    <ASwitchThumb />
+  </ASwitchRoot>
+  <span>Enabled: {{ enabled }}</span> <!-- 1 or 0 -->
+</template>
+```
 
 ## Accessibility
 

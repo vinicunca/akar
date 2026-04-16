@@ -4,3 +4,4 @@
 ---
 
 - feat(DropdownMenu): add filter component
+- feat(Checkbox/Switch): add support for custom true/false values
