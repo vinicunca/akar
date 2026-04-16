@@ -30,3 +30,5 @@
 - fix(Select): normalize hidden control
 - fix(DateField): fixed direct incorrect passing of date values to input element
 - chore(deps): update vue (major)
+- fix(TimeField,DateField): avoid changing focus prematurely with previous segment value of 0
+- fix(ListboxVirtualizer): ignore non-element VNodes in slot children
