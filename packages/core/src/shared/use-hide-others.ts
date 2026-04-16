@@ -21,7 +21,7 @@ export function useHideOthers(target: MaybeElementRef) {
         return;
       }
 
-      if (el) {
+      if (el && !el.closest('[popover]:not(:popover-open)')) {
         undo = hideOthers(el);
       } else if (undo) {
         undo();

@@ -12,3 +12,4 @@
 - fix(Toast): resolve accessibility issues flagged by axe-core
 - fix(DismissableLayer): guard against non-Element targets in isLayerExist
 - fix(useBodyScrollLock): prevent permanent scroll lock on rapid toggle
+- fix(useHideOthers): edge case with useHideOthers when nested in a native popover
