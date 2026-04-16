@@ -23,3 +23,4 @@
 - fix(Combobox): prevent addOnBlur from adding raw input when selecting item
 - fix(useGraceArea): add nil guard for hover target in grace area creation
 - fix(Autocomplete): add IME composition input handling
+- fix(FocusScope): don't move focus if DOM mutation occurred before any nodes had focus

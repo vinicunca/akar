@@ -1,9 +1,11 @@
 import type { RenderResult } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-import { render, waitFor } from '@testing-library/vue';
+import { render } from '@testing-library/vue';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { defineComponent } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 import { AFocusScope } from '.';
+import { ADialogContent, ADialogRoot, ADialogTitle, ADialogTrigger } from '../dialog';
+import { ASelectContent, ASelectItem, ASelectRoot, ASelectTrigger, ASelectValue } from '../select';
 
 const INNER_NAME_INPUT_LABEL = 'Name';
 const INNER_EMAIL_INPUT_LABEL = 'Email';
@@ -24,25 +26,27 @@ const TestField = ({
 describe('focusScope', () => {
   describe('given a default FocusScope', () => {
     let rendered: RenderResult;
+    let focusContainer: HTMLElement;
     let tabbableFirst: HTMLInputElement;
     let tabbableSecond: HTMLInputElement;
     let tabbableLast: HTMLButtonElement;
 
     beforeEach(() => {
       rendered = render(defineComponent({
-        components: { TestField, FocusScope: AFocusScope },
+        components: { TestField, AFocusScope },
         template: `<div>
-        <FocusScope asChild loop trapped>
-          <form>
+        <AFocusScope asChild loop trapped>
+          <form data-testid="focus-scope">
             <TestField label=${INNER_NAME_INPUT_LABEL} />
             <TestField label=${INNER_EMAIL_INPUT_LABEL} />
             <button>${INNER_SUBMIT_LABEL}</button>
           </form>
-        </FocusScope>
+        </AFocusScope>
         <TestField label="other" />
         <button>some outer button</button>
       </div>`,
       }));
+      focusContainer = rendered.getByTestId('focus-scope') as HTMLElement;
       tabbableFirst = rendered.getByLabelText(INNER_NAME_INPUT_LABEL) as HTMLInputElement;
       tabbableSecond = rendered.getByLabelText(INNER_EMAIL_INPUT_LABEL) as HTMLInputElement;
       tabbableLast = rendered.getByText(INNER_SUBMIT_LABEL) as HTMLButtonElement;
@@ -57,13 +61,20 @@ describe('focusScope', () => {
     it('should focus the last element in the scope on shift+tab from the first element in scope', async () => {
       tabbableFirst.focus();
       await userEvent.tab({ shift: true });
-      waitFor(() => expect(tabbableLast).toBe(document.activeElement));
+      expect(tabbableLast).toHaveFocus();
     });
 
     it('should focus the first element in scope on tab from the last element in scope', async () => {
       tabbableLast.focus();
       await userEvent.tab();
-      expect(tabbableFirst).toBe(document.activeElement);
+      expect(tabbableFirst).toHaveFocus();
+    });
+
+    it('should focus container when focused element is removed from the DOM', async () => {
+      tabbableFirst.focus();
+      tabbableFirst.remove();
+      await nextTick();
+      expect(focusContainer).toHaveFocus();
     });
   });
 
@@ -74,15 +85,15 @@ describe('focusScope', () => {
 
     beforeEach(() => {
       rendered = render(defineComponent({
-        components: { TestField, FocusScope: AFocusScope },
+        components: { TestField, AFocusScope },
         template: `   <div>
-        <FocusScope asChild loop trapped>
+        <AFocusScope asChild loop trapped>
           <form>
             <TestField label=${INNER_NAME_INPUT_LABEL} tabIndex="-1" />
             <TestField label=${INNER_EMAIL_INPUT_LABEL} />
             <button>${INNER_SUBMIT_LABEL}</button>
           </form>
-        </FocusScope>
+        </AFocusScope>
         <TestField label="other" />
         <button>some outer button</button>
       </div>`,
@@ -94,13 +105,13 @@ describe('focusScope', () => {
     it('should skip the element with a negative tabindex on tab', async () => {
       tabbableLast.focus();
       await userEvent.tab();
-      expect(tabbableSecond).toBe(document.activeElement);
+      expect(tabbableSecond).toHaveFocus();
     });
 
     it('should skip the element with a negative tabindex on shift+tab', async () => {
       tabbableSecond.focus();
       await userEvent.tab({ shift: true });
-      waitFor(() => expect(tabbableLast).toBe(document.activeElement));
+      expect(tabbableLast).toHaveFocus();
     });
   });
 
@@ -110,15 +121,17 @@ describe('focusScope', () => {
     let tabbableFirst: HTMLInputElement;
     beforeEach(() => {
       rendered = render(defineComponent({
-        components: { TestField, FocusScope: AFocusScope },
-        props: { handleLastFocusableElementBlur },
+        components: { TestField, AFocusScope },
+        setup() {
+          return { handleLastFocusableElementBlur };
+        },
         template: `<div>
-        <FocusScope asChild loop trapped>
+        <AFocusScope asChild loop trapped>
           <form>
             <TestField label=${INNER_NAME_INPUT_LABEL} />
             <button @blur="handleLastFocusableElementBlur" >${INNER_SUBMIT_LABEL}</button>
           </form>
-        </FocusScope>
+        </AFocusScope>
       </div>`,
       }));
 
@@ -130,7 +143,47 @@ describe('focusScope', () => {
       tabbableFirst.focus();
       await userEvent.tab({ shift: true });
       await userEvent.tab();
-      waitFor(() => expect(handleLastFocusableElementBlur).toHaveBeenCalledTimes(1));
+      expect(handleLastFocusableElementBlur).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('given a FocusScope with SelectTrigger inside Dialog', () => {
+    const DialogWithSelect = defineComponent({
+      components: { ADialogRoot, ADialogTrigger, ADialogContent, ADialogTitle, ASelectRoot, ASelectTrigger, ASelectValue, ASelectContent, ASelectItem },
+      template: `
+        <ADialogRoot>
+          <ADialogTrigger>Open</ADialogTrigger>
+          <ADialogContent>
+            <ADialogTitle>Test Dialog</ADialogTitle>
+            <input data-testid="email-input" type="text" placeholder="you@example.com" />
+            <ASelectRoot>
+              <ASelectTrigger>
+                <ASelectValue placeholder="Select" />
+              </ASelectTrigger>
+              <ASelectContent>
+                <ASelectItem value="a">Option A</ASelectItem>
+                <ASelectItem value="b">Option B</ASelectItem>
+              </ASelectContent>
+            </ASelectRoot>
+          </ADialogContent>
+        </ADialogRoot>
+      `,
+    });
+
+    it('should auto-focus the first tabbable element when SelectTrigger is present', async () => {
+      const rendered = render(DialogWithSelect);
+
+      const trigger = rendered.getByRole('button', { name: 'Open' });
+      await userEvent.click(trigger);
+
+      const input1 = rendered.getByTestId('email-input');
+      expect(input1).toHaveFocus();
+
+      // close and reopen, and ensure the input is focused again, not the SelectTrigger
+      await userEvent.keyboard('{Escape}');
+      await userEvent.click(trigger);
+      const inputReopen = rendered.getByTestId('email-input');
+      expect(inputReopen).toHaveFocus();
     });
   });
 });
