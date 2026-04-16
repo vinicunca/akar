@@ -62,6 +62,26 @@ function handleFocus() {
   }
 }
 
+function handleBlur(ev: FocusEvent) {
+  if (!rootContext.open.value) {
+    return;
+  }
+
+  const nextFocus = ev.relatedTarget as Element | null;
+
+  // If focus moves to nothing (e.g. click on non-focusable area), let DismissableLayer handle it
+  if (!nextFocus) {
+    return;
+  }
+
+  const isInsideRoot = rootContext.parentElement.value?.contains(nextFocus);
+  const isInsideContent = document.getElementById(rootContext.contentId)?.contains(nextFocus);
+
+  if (!isInsideRoot && !isInsideContent) {
+    rootContext.onOpenChange(false);
+  }
+}
+
 function handleClick() {
   if (rootContext.openOnClick.value && !rootContext.open.value) {
     rootContext.onOpenChange(true);
@@ -132,6 +152,7 @@ watch(
     @input="handleInput"
     @keydown.down.up.prevent="handleKeyDown"
     @focus="handleFocus"
+    @blur="handleBlur"
   >
     <slot />
   </AListboxFilter>

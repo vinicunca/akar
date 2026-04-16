@@ -15,3 +15,4 @@
 - fix(useHideOthers): edge case with useHideOthers when nested in a native popover
 - fix(Splitter): emit correct units for pixel-sized panels in events
 - chore(Menu): add aria-labelledby to MenuGroup
+- fix(Combobox): close content when focus moves outside with openOnFocus
