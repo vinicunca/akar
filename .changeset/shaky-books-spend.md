@@ -18,3 +18,4 @@
 - fix(Combobox): close content when focus moves outside with openOnFocus
 - fix(Calendar): add role="application" to fix NVDA keyboard navigation
 - fix(Splitter): nested px group ignores defaultSize & percentage drift
+- fix(useHideOthers): handle browsers without :popover-open support (Safari 18)
