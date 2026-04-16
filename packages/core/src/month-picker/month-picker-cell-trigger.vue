@@ -46,16 +46,19 @@ const shortMonthValue = computed(() => {
   // eslint-disable-next-line ts/no-unused-expressions
   rootContext.locale.value;
 
-  return rootContext.formatter.custom(toDate(props.month), { month: 'short' });
+  return rootContext.formatter.custom({
+    date: toDate(props.month),
+    options: { month: 'short' },
+  });
 });
 
 const labelText = computed(() => {
   // eslint-disable-next-line ts/no-unused-expressions
   rootContext.locale.value;
 
-  return rootContext.formatter.custom(toDate(props.month), {
-    month: 'long',
-    year: 'numeric',
+  return rootContext.formatter.custom({
+    date: toDate(props.month),
+    options: { month: 'long', year: 'numeric' },
   });
 });
 

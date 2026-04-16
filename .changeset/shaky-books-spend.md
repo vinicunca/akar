@@ -27,3 +27,4 @@
 - fix(tooltip,hovercard): close when scrollable ancestor is scrolled
 - fix(Listbox): restore highlightOnHover behavior
 - fix(useForwardProps): return Partial<T> to correctly type optional boolean props
+- fix(Select): normalize hidden control

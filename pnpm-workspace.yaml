@@ -59,7 +59,7 @@ catalogs:
     '@vueuse/integrations': 14.1.0
     '@vueuse/shared': 14.1.0
     aria-hidden: ^1.2.6
-    defu: ^6.1.4
+    defu: ^6.1.5
     happy-dom: ^20.6.1
     jsdom: ^27.0.0
     tsdown: 0.12.9
