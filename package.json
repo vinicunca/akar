@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "story:dev": "pnpm --filter histoire story:dev --open",
+    "build:plugins": "pnpm run --filter plugins build",
     "build": "pnpm run --filter akar build && pnpm run --filter plugins build && pnpm run --filter pohon-ui build",
     "build:docs": "pnpm run --filter docs build",
     "start": "node docs/.output/server/index.mjs",

@@ -27,5 +27,8 @@
     "akar": "workspace:*",
     "unbuild": "catalog:plugins",
     "unplugin-vue-components": "catalog:plugins"
+  },
+  "devDependencies": {
+    "tsx": "catalog:base"
   }
 }

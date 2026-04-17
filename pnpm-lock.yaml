@@ -636,6 +636,10 @@ importers:
       unplugin-vue-components:
         specifier: catalog:plugins
         version: 32.0.0(@nuxt/kit@4.4.2(magicast@0.5.2))(vue@3.5.32(typescript@5.9.3))
+    devDependencies:
+      tsx:
+        specifier: catalog:base
+        version: 4.21.0
 
   packages/pohon:
     dependencies:
