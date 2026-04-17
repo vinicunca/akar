@@ -54,12 +54,15 @@ function handleKeyDown(event: KeyboardEvent) {
     return;
   }
 
-  if ((event.key === KEY_CODES.ENTER || event.key === KEY_CODES.SPACE) && !event.ctrlKey && !event.shiftKey) {
+  if ((event.key === KEY_CODES.ENTER || event.code === KEY_CODES.SPACE || event.key === KEY_CODES.SPACE) && !event.ctrlKey && !event.shiftKey) {
     rootContext.changeModelValue(itemContext.step.value);
   }
 
   if (
-    isIncludedIn(event.key, [KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_RIGHT, KEY_CODES.ARROW_UP])
+    isIncludedIn(
+      event.key,
+      [KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_RIGHT, KEY_CODES.ARROW_UP],
+    )
   ) {
     useArrowNavigation({
       event,

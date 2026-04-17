@@ -64,11 +64,11 @@ describe('month picker', async () => {
           :placeholder="placeholder"
           :min-value="minValue"
         >
-          <MonthPickerHeader>
-            <MonthPickerPrev as="div" data-testid="prev-button" />
-            <MonthPickerHeading data-testid="heading" />
-            <MonthPickerNext as="div" data-testid="next-button" />
-          </MonthPickerHeader>
+          <AMonthPickerHeader>
+            <AMonthPickerPrev as="div" data-testid="prev-button" />
+            <AMonthPickerHeading data-testid="heading" />
+            <AMonthPickerNext as="div" data-testid="next-button" />
+          </AMonthPickerHeader>
         </AMonthPickerRoot>
       `,
     };

@@ -14,7 +14,10 @@ import {
   AYearPickerRoot,
 } from '..';
 
-const props = defineProps<{ pickerProps?: AYearPickerRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>();
+const props = defineProps<{
+  pickerProps?: AYearPickerRootProps;
+  emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void };
+}>();
 </script>
 
 <template>
