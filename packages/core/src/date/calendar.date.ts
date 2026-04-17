@@ -1,4 +1,4 @@
-import type { DateValue, DayOfWeek } from '@internationalized/date';
+import type { DateValue } from '@internationalized/date';
 import type { DateRange } from '../shared';
 import type { DateGrid } from './types.date';
 import {
@@ -12,6 +12,14 @@ import {
 } from '@internationalized/date';
 import { chunk } from '@vinicunca/perkakas';
 import { getDaysInMonth, getLastFirstDayOfWeek, getNextLastDayOfWeek } from './comparators.date';
+
+/**
+ * TODO: Remove this once `@internationalized/date` exports the `DayOfWeek` type.
+ * It appears that `@internationalized/date` does not export the `DayOfWeek` type in their latest release.
+ * This is a temporary workaround to allow us to use the `DayOfWeek` type in our code.
+ * We should remove this once `@internationalized/date` exports the `DayOfWeek` type.
+ */
+type DayOfWeek = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 
 export type WeekDayFormat = 'long' | 'narrow' | 'short';
 

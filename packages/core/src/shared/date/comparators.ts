@@ -12,7 +12,7 @@ import {
   toCalendar,
 } from '@internationalized/date';
 
-export type TimeValue = CalendarDateTime | Time | ZonedDateTime;
+export type TimeValue = Time | CalendarDateTime | ZonedDateTime;
 
 export type Granularity = 'day' | 'hour' | 'minute' | 'second';
 export type TimeGranularity = 'hour' | 'minute' | 'second';
