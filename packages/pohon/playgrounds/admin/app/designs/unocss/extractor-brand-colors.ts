@@ -4,7 +4,7 @@ import { BRANDS } from '../design.constants';
 const COLOR_PATTERN = /([^\s`]*\$\{color\}[^\s`]*)/g;
 
 /**
- * Within pohon-ui's theme files, there's a lot of defition using `${color}`.
+ * Within pohon-ui's theme files, there's a lot of definition using `${color}`.
  * Since unocss doesn't support dynamic values, we need to extract all the colors from the theme files
  * This extractor will extract all the colors based on the BRANDS.
  */
