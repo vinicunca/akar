@@ -13,13 +13,8 @@ overrides:
   akar: workspace:*
   nitropack: ^2.13.0
   pohon-ui: workspace:*
-  # @vinicunca/unocss-preset uses a different tsdown version, and since it's not included in it's runtime workspace, we need to override it here.
-  # TODO: Remove this once akar is updated to use the same tsdown version as the core workspace.
-  tsdown: 0.12.9
-  # 1. Provide the specific version for tsdown's chain
-  tsdown>rolldown: 1.0.0-beta.26
-
   unplugin: ^3.0.0
+  vitest: ^3.2.4
 catalogs:
   base:
     '@changesets/changelog-github': ^0.6.0
