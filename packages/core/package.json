@@ -107,14 +107,14 @@
     "@vue/tsconfig": "catalog:core",
     "happy-dom": "catalog:core",
     "jsdom": "catalog:core",
-    "tsdown": "catalog:core",
+    "tsdown": "0.12.9",
     "type-fest": "catalog:core",
     "vite": "catalog:core",
-    "vitest": "catalog:core",
+    "vitest": "3.2.4",
     "vitest-axe": "catalog:core",
-    "vitest-canvas-mock": "catalog:core",
+    "vitest-canvas-mock": "^0.3.3",
     "vue": "catalog:core",
     "vue-component-type-helpers": "catalog:core",
-    "vue-tsc": "catalog:base"
+    "vue-tsc": "3.1.8"
   }
 }

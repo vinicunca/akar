@@ -13,10 +13,13 @@ overrides:
   akar: workspace:*
   nitropack: ^2.13.0
   pohon-ui: workspace:*
-  # rolldown: 1.0.0-beta.26
-  unplugin: ^3.0.0
-  vitest: ^3.2.4
+  # @vinicunca/unocss-preset uses a different tsdown version, and since it's not included in it's runtime workspace, we need to override it here.
+  # TODO: Remove this once akar is updated to use the same tsdown version as the core workspace.
+  tsdown: 0.12.9
+  # 1. Provide the specific version for tsdown's chain
+  tsdown>rolldown: 1.0.0-beta.26
 
+  unplugin: ^3.0.0
 catalogs:
   base:
     '@changesets/changelog-github': ^0.6.0
@@ -35,6 +38,8 @@ catalogs:
     typescript: 5.9.3
     unocss: 66.6.8
     vue-router: ^4.5.1
+    # There's a weird issue with this version that akar cannot resolve the build, so we have to hardcode it in it's package.json.
+    # TODO: Make akar use this when it's fixed.
     vue-tsc: 3.2.6
   core:
     '@floating-ui/dom': ^1.7.6
@@ -62,12 +67,9 @@ catalogs:
     defu: ^6.1.7
     happy-dom: ^20.9.0
     jsdom: ^26.1.0
-    tsdown: 0.12.9
     type-fest: ^5.4.4
     vite: ^8.0.8
-    vitest: ^3.2.4
     vitest-axe: 0.1.0
-    vitest-canvas-mock: ^0.3.3
     vue: 3.5.28
     vue-component-type-helpers: 3.2.6
   docs:

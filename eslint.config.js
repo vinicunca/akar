@@ -23,6 +23,8 @@ export default vinicuncaESLint(
         allowObjectTypes: 'always',
         allowInterfaces: 'always',
       }],
+      // TODO: Remove this once tsdown is upstream with rolldown
+      'pnpm/json-enforce-catalog': 'off',
     },
   },
 
