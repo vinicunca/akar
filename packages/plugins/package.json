@@ -22,13 +22,13 @@
     "stub": "unbuild --stub"
   },
   "dependencies": {
-    "@nuxt/kit": "catalog:plugins",
-    "@nuxt/schema": "catalog:plugins",
+    "@nuxt/kit": "^4.4.2",
+    "@nuxt/schema": "4.4.2",
     "akar": "workspace:*",
-    "unbuild": "catalog:plugins",
-    "unplugin-vue-components": "catalog:plugins"
+    "unbuild": "^3.6.1",
+    "unplugin-vue-components": "^32.0.0"
   },
   "devDependencies": {
-    "tsx": "catalog:base"
+    "tsx": "^4.21.0"
   }
 }

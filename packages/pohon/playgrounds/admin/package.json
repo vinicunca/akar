@@ -7,22 +7,22 @@
     "build": "nuxt build"
   },
   "dependencies": {
-    "@internationalized/date": "catalog:core",
-    "@nuxtjs/i18n": "catalog:pohon",
-    "@pinia/nuxt": "catalog:pohon",
-    "@vinicunca/perkakas": "catalog:core",
-    "@vueuse/core": "catalog:core",
+    "@internationalized/date": "3.12.1",
+    "@nuxtjs/i18n": "10.2.1",
+    "@pinia/nuxt": "0.11.3",
+    "@vinicunca/perkakas": "1.13.2",
+    "@vueuse/core": "^14.2.1",
     "akar": "workspace:*",
-    "nuxt": "catalog:pohon",
-    "pinia": "catalog:pohon",
+    "nuxt": "4.4.2",
+    "pinia": "3.0.4",
     "pohon-ui": "workspace:*",
-    "zod": "catalog:pohon"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@unocss/nuxt": "catalog:pohon",
-    "@vinicunca/unocss-preset": "catalog:pohon",
-    "pinia-plugin-persistedstate": "catalog:pohon",
-    "postcss-preset-env": "catalog:pohon",
-    "unocss": "catalog:base"
+    "@unocss/nuxt": "66.6.8",
+    "@vinicunca/unocss-preset": "1.43.0",
+    "pinia-plugin-persistedstate": "4.7.1",
+    "postcss-preset-env": "11.1.1",
+    "unocss": "66.6.8"
   }
 }

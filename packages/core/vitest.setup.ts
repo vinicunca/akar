@@ -1,10 +1,11 @@
+import * as domMatchers from '@testing-library/jest-dom/matchers';
 import { beforeAll, expect, vi } from 'vitest';
 import { configureAxe } from 'vitest-axe';
 import * as matchers from 'vitest-axe/matchers';
-import '@testing-library/jest-dom/vitest';
 import 'vitest-canvas-mock';
 
 expect.extend(matchers);
+expect.extend(domMatchers);
 
 configureAxe({
   globalOptions: {

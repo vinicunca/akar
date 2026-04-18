@@ -9,14 +9,17 @@
     "typecheck": "vue-tsc -p ./tsconfig.app.json"
   },
   "dependencies": {
+    "@tiptap/extension-emoji": "^3.22.3",
+    "@tiptap/extension-text-align": "^3.22.3",
     "pohon-ui": "workspace:*",
-    "vue": "catalog:core",
-    "vue-router": "catalog:base"
+    "vue": "^3.5.30",
+    "vue-router": "^5.0.4",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "catalog:core",
-    "typescript": "catalog:base",
-    "vite": "catalog:core",
-    "vue-tsc": "catalog:base"
+    "@vitejs/plugin-vue": "^6.0.6",
+    "typescript": "^6.0.2",
+    "vite": "^7.3.1",
+    "vue-tsc": "^3.2.6"
   }
 }

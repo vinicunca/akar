@@ -29,16 +29,16 @@
     "ci:publish": "changeset publish"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "catalog:base",
-    "@changesets/cli": "catalog:base",
-    "@commitlint/cli": "catalog:base",
-    "@commitlint/config-conventional": "catalog:base",
-    "@vinicunca/eslint-config": "catalog:base",
-    "eslint": "catalog:base",
-    "lint-staged": "catalog:base",
-    "simple-git-hooks": "catalog:base",
-    "tsx": "catalog:base",
-    "typescript": "catalog:base"
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.30.0",
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@vinicunca/eslint-config": "5.0.0",
+    "eslint": "^10.2.0",
+    "lint-staged": "^16.4.0",
+    "simple-git-hooks": "^2.13.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   },
   "commitlint": {
     "extends": [
