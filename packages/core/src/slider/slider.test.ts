@@ -287,8 +287,6 @@ describe('given default Slider', () => {
     });
   });
 
-  // @vitest-environment happy-dom
-
   describe('after pointerdown event on slider-impl', () => {
     let sliderImpl: VueWrapper<InstanceType<typeof SliderImpl>>;
     beforeEach(async () => {
