@@ -97,7 +97,7 @@ declare module '#app' {
   interface RuntimeNuxtHooks {
     'dashboard:search:toggle': () => HookResult;
     'dashboard:sidebar:toggle': () => HookResult;
-    'dashboard:sidebar:collapsed': (value: boolean) => HookResult;
+    'dashboard:sidebar:collapse': (value: boolean) => HookResult;
   }
 }
 
@@ -108,7 +108,7 @@ export default defineNuxtModule<PohonModuleOptions>({
     docs: 'https://akar.vinicunca.dev/pohon/overview/getting-started',
     configKey: 'pohon',
     compatibility: {
-      nuxt: '>=4.0.0',
+      nuxt: '>=4.1.0',
     },
   },
 
@@ -123,6 +123,9 @@ export default defineNuxtModule<PohonModuleOptions>({
     nuxt.options.pohon = options;
 
     nuxt.options.alias['#pohon'] = resolve('./runtime');
+
+    nuxt.options.build.transpile ||= [];
+    nuxt.options.build.transpile.push('reka-ui');
 
     nuxt.options.appConfig.pohon = defu(
       nuxt.options.appConfig.pohon ?? {},
@@ -216,8 +219,9 @@ export default defineNuxtModule<PohonModuleOptions>({
         {
           highlight: {
             theme: {
-              default: 'one-dark-pro',
-              dark: 'one-dark-pro',
+              light: 'material-theme-lighter',
+              default: 'material-theme',
+              dark: 'material-theme-palenight',
             },
           },
           components: {
@@ -240,6 +244,7 @@ export default defineNuxtModule<PohonModuleOptions>({
               'icon': 'ProseIcon',
               'kbd': 'ProseKbd',
               'note': 'ProseNote',
+              'prompt': 'ProsePrompt',
               'steps': 'ProseSteps',
               'tabs': 'ProseTabs',
               'tabs-item': 'ProseTabsItem',
@@ -272,6 +277,8 @@ export default defineNuxtModule<PohonModuleOptions>({
         pathPrefix: false,
         prefix: options.prefix,
       });
+    } else {
+      addImportsDir(resolve('./runtime/composables/color-mode'));
     }
 
     addComponentsDir({

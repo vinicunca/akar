@@ -86,7 +86,7 @@
     "@internationalized/date": "3.12.1",
     "@internationalized/number": "3.6.5",
     "@tanstack/vue-virtual": "^3.13.23",
-    "@vinicunca/perkakas": "1.13.2",
+    "@vinicunca/perkakas": "1.14.0",
     "@vueuse/core": "^14.2.1",
     "@vueuse/shared": "^14.1.0",
     "aria-hidden": "^1.2.4",

@@ -5,6 +5,7 @@ import type { PohonModuleOptions } from './module';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { addTemplate, addTypeTemplate, hasNuxtModule, updateTemplates } from '@nuxt/kit';
+import { genExport } from 'knitwork';
 import { toKebabCase } from '@vinicunca/perkakas';
 import * as theme from './theme';
 import * as themeContent from './theme/content';
@@ -202,6 +203,20 @@ export {};
 `;
     },
   });
+
+  if (nuxt) {
+    templates.push({
+      filename: 'pohon-image-component.ts',
+      write: true,
+      getContents: ({ app }) => {
+        const image = app?.components?.find(
+          (c) => c.pascalName === 'NuxtImg' && !/nuxt(?:-nightly)?\/dist\/app/.test(c.filePath),
+        );
+
+        return image ? genExport(image.filePath, [{ name: image.export, as: 'default' }]) : 'export default "img"';
+      },
+    });
+  }
 
   return templates;
 }

@@ -123,7 +123,7 @@ import { useForwardPropsEmits } from 'akar';
 import {
   ACalendar,
   ARangeCalendar,
-} from 'akar/namespaced';
+} from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';

@@ -34,7 +34,7 @@
     "@unocss/nuxt": "66.6.8",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
-    "@vinicunca/perkakas": "1.13.2",
+    "@vinicunca/perkakas": "1.14.0",
     "@vinicunca/unocss-preset": "1.43.0",
     "@vueuse/integrations": "^14.2.1",
     "@vueuse/nuxt": "^14.2.1",
