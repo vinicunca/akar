@@ -1,5 +1,5 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'کوردی',
@@ -7,126 +7,143 @@ export default defineLocale<PMessages>({
   dir: 'rtl',
   messages: {
     alert: {
-      close: 'داخستن',
+      close: 'داخستن'
     },
     authForm: {
-      hidePassword: 'شاردنەوەی وشەی نهێنی',
-      showPassword: 'پیشاندانی وشەی نهێنی',
-      submit: 'بەردەوام بە',
+      hidePassword: 'شاردنەوەی تێپەڕەوشە',
+      showPassword: 'پیشاندانی تێپەڕەوشە',
+      submit: 'بەردەوام بە'
     },
     banner: {
-      close: 'داخستن',
+      close: 'داخستن'
     },
     calendar: {
       nextMonth: 'مانگی داهاتوو',
       nextYear: 'ساڵی داهاتوو',
       prevMonth: 'مانگی پێشوو',
-      prevYear: 'ساڵی پێشوو',
+      prevYear: 'ساڵی پێشوو'
     },
     carousel: {
       dots: 'سلایدێک هەڵبژێرە بۆ پیشاندان',
       goto: 'بڕۆ بۆ سلایدی {slide}',
-      next: 'داهاتوو',
-      prev: 'پێشووی',
+      next: 'دواتر',
+      prev: 'پێشتر'
     },
     chatPrompt: {
-      placeholder: 'هەڵەیەک لەسەر چاپەکەت بنووسە...',
+      placeholder: 'نامەکەت لێرە بنوسە...'
     },
     chatPromptSubmit: {
-      label: 'پێچەوە',
+      label: 'ناردن'
+    },
+    chatReasoning: {
+      thinking: 'بیرکردنەوە…',
+      thought: 'بیری کردەوە',
+      thoughtFor: 'بە ماوەی {duration} بیری کردەوە'
     },
     colorMode: {
       dark: 'تاریک',
       light: 'ڕووناک',
       switchToDark: 'گۆڕین بۆ دۆخی تاریک',
       switchToLight: 'گۆڕین بۆ دۆخی ڕووناک',
-      system: 'سیستەم',
+      system: 'سیستەم'
     },
     commandPalette: {
       back: 'گەڕانەوە',
       close: 'داخستن',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      placeholder: 'فەرمانێک بنووسە یان بگەڕێ...',
+      placeholder: 'فەرمانێک بنووسە یان بگەڕێ…'
     },
     contentSearch: {
       links: 'بەستەرەکان',
-      theme: 'ڕووکار',
+      theme: 'ڕووکار'
     },
     contentSearchButton: {
-      label: 'گەڕان...',
+      label: 'گەڕان…'
     },
     contentToc: {
-      title: 'لەم پەڕەیەدا',
+      title: 'لەم پەڕەیەدا'
+    },
+    dropdownMenu: {
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      search: 'گەڕان…'
     },
     dashboardSearch: {
-      theme: 'ڕووکار',
+      theme: 'ڕووکار'
     },
     dashboardSearchButton: {
-      label: 'گەڕان...',
+      label: 'گەڕان…'
     },
     dashboardSidebarCollapse: {
       collapse: 'داخستنی لای تەنیشت',
-      expand: 'فراوانکردنی لای تەنیشت',
+      expand: 'فراوانکردنی لای تەنیشت'
     },
     dashboardSidebarToggle: {
-      close: 'داخستنی لای تەنیشت',
-      open: 'کردنەوەی لای تەنیشت',
+      close: 'داخستنی لاتەنیشت',
+      open: 'کردنەوەی لاتەنیشت'
     },
     error: {
-      clear: 'گەڕانەوە بۆ سەرەتا',
+      clear: 'گەڕانەوە بۆ سەرەتا'
     },
     fileUpload: {
-      removeFile: '{filename} بسڕەوە',
+      removeFile: '{filename} بسڕەوە'
     },
     header: {
       close: 'داخستنی پێڕست',
-      open: 'کردنەوەی پێڕست',
+      open: 'کردنەوەی پێڕست'
     },
     inputMenu: {
-      create: '"{label}" دروستکردنی',
+      create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',
-      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە'
     },
     inputNumber: {
       decrement: 'کەمکردنەوە',
-      increment: 'زیادکردن',
+      increment: 'زیادکردن'
     },
     modal: {
-      close: 'داخستن',
+      close: 'داخستن'
     },
     pricingTable: {
-      caption: 'ڕێچووی پەیکەردان',
+      caption: 'بەراورکردنی پلانی نرخدانان'
     },
     prose: {
       codeCollapse: {
         closeText: 'داخستن',
         name: 'کۆد',
-        openText: 'فراوانکردن',
+        openText: 'فراوانکردن'
       },
       collapsible: {
         closeText: 'شاردنەوە',
         name: 'تایبەتمەندییەکان',
-        openText: 'پیشاندان',
+        openText: 'پیشاندان'
       },
       pre: {
-        copy: 'لەبەرگرتنەوەی کۆد',
+        copy: 'لەبەرگرتنەوەی کۆد'
       },
+      prompt: {
+        copy: 'لەبەرگرتنەوەی فەرمان',
+        openIn: 'کردنەوە لە {name}'
+      }
+    },
+    sidebar: {
+      close: 'داخستن',
+      toggle: 'گۆڕین'
     },
     selectMenu: {
-      create: '"{label}" دروستکردنی',
+      create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان...',
+      search: 'گەڕان…'
     },
     slideover: {
-      close: 'داخستن',
+      close: 'داخستن'
     },
     table: {
-      noData: 'هیچ داتایەک نییە',
+      noData: 'هیچ داتایەک نییە'
     },
     toast: {
-      close: 'داخستن',
-    },
-  },
-});
+      close: 'داخستن'
+    }
+  }
+})

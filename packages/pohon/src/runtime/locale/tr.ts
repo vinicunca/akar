@@ -1,131 +1,148 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'Türkçe',
   code: 'tr',
   messages: {
     alert: {
-      close: 'Kapat',
+      close: 'Kapat'
     },
     authForm: {
       hidePassword: 'Şifreyi gizle',
       showPassword: 'Şifreyi göster',
-      submit: 'Devam et',
+      submit: 'Devam et'
     },
     banner: {
-      close: 'Kapat',
+      close: 'Kapat'
     },
     calendar: {
       nextMonth: 'Sonraki ay',
       nextYear: 'Sonraki yıl',
       prevMonth: 'Önceki ay',
-      prevYear: 'Önceki yıl',
+      prevYear: 'Önceki yıl'
     },
     carousel: {
       dots: 'Görüntülenecek slaydı seçin',
       goto: '{slide}. slayda git',
       next: 'Sonraki',
-      prev: 'Önceki',
+      prev: 'Önceki'
     },
     chatPrompt: {
-      placeholder: 'Buraya mesajınızı yazın...',
+      placeholder: 'Buraya mesajınızı yazın…'
     },
     chatPromptSubmit: {
-      label: 'Gönder',
+      label: 'Gönder'
+    },
+    chatReasoning: {
+      thinking: 'Düşünüyor…',
+      thought: 'Düşündü',
+      thoughtFor: '{duration} düşündü'
     },
     colorMode: {
       dark: 'Koyu',
       light: 'Açık',
       switchToDark: 'Koyu moda geç',
       switchToLight: 'Açık moda geç',
-      system: 'Sistem',
+      system: 'Sistem'
     },
     commandPalette: {
       back: 'Geri',
       close: 'Kapat',
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      placeholder: 'Bir komut yazın veya arama yapın...',
+      placeholder: 'Bir komut yazın veya arama yapın…'
     },
     contentSearch: {
       links: 'Bağlantılar',
-      theme: 'Tema',
+      theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Ara...',
+      label: 'Ara…'
     },
     contentToc: {
-      title: 'Bu sayfada',
+      title: 'Bu sayfada'
+    },
+    dropdownMenu: {
+      noMatch: 'Eşleşen veri yok',
+      search: 'Ara…'
     },
     dashboardSearch: {
-      theme: 'Tema',
+      theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Ara...',
+      label: 'Ara…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Kenar çubuğunu daralt',
-      expand: 'Kenar çubuğunu genişlet',
+      expand: 'Kenar çubuğunu genişlet'
     },
     dashboardSidebarToggle: {
       close: 'Kenar çubuğunu kapat',
-      open: 'Kenar çubuğunu aç',
+      open: 'Kenar çubuğunu aç'
     },
     error: {
-      clear: 'Ana sayfaya dön',
+      clear: 'Ana sayfaya dön'
     },
     fileUpload: {
-      removeFile: '{filename} kaldır',
+      removeFile: '{filename} kaldır'
     },
     header: {
       close: 'Menüyü kapat',
-      open: 'Menüyü aç',
+      open: 'Menüyü aç'
     },
     inputMenu: {
       create: '"{label}" oluştur',
       noData: 'Veri yok',
-      noMatch: 'Eşleşen veri yok',
+      noMatch: 'Eşleşen veri yok'
     },
     inputNumber: {
       decrement: 'Azalt',
-      increment: 'Arttır',
+      increment: 'Arttır'
     },
     modal: {
-      close: 'Kapat',
+      close: 'Kapat'
     },
     pricingTable: {
-      caption: 'Fiyat planlarını karşılaştır',
+      caption: 'Fiyat planlarını karşılaştır'
     },
     prose: {
       codeCollapse: {
         closeText: 'Daralt',
         name: 'kod',
-        openText: 'Genişlet',
+        openText: 'Genişlet'
       },
       collapsible: {
         closeText: 'Gizle',
         name: 'özellikler',
-        openText: 'Göster',
+        openText: 'Göster'
       },
       pre: {
-        copy: 'Kodu panoya kopyala',
+        copy: 'Kodu panoya kopyala'
       },
+      prompt: {
+        copy: 'İstemi kopyala',
+        openIn: '{name} içinde aç'
+      }
+    },
+    sidebar: {
+      close: 'Kapat',
+      toggle: 'Değiştir'
     },
     selectMenu: {
       create: '"{label}" oluştur',
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      search: 'Ara...',
+      search: 'Ara…'
     },
     slideover: {
-      close: 'Kapat',
+      close: 'Kapat'
     },
     table: {
-      noData: 'Veri yok',
+      noData: 'Veri yok'
     },
     toast: {
-      close: 'Kapat',
-    },
-  },
-});
+      close: 'Kapat'
+    }
+  }
+})

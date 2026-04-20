@@ -1,131 +1,148 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'Danish',
   code: 'da',
   messages: {
     alert: {
-      close: 'Luk',
+      close: 'Luk'
     },
     authForm: {
       hidePassword: 'Skjul adgangskode',
       showPassword: 'Vis adgangskode',
-      submit: 'Fortsæt',
+      submit: 'Fortsæt'
     },
     banner: {
-      close: 'Luk',
+      close: 'Luk'
     },
     calendar: {
       nextMonth: 'Næste måned',
       nextYear: 'Næste år',
       prevMonth: 'Forrige måned',
-      prevYear: 'Forrige år',
+      prevYear: 'Forrige år'
     },
     carousel: {
       dots: 'Vælg dias til visning',
       goto: 'Gå til slide {slide}',
       next: 'Næste',
-      prev: 'Forrige',
+      prev: 'Forrige'
     },
     chatPrompt: {
-      placeholder: 'Skriv din besked her...',
+      placeholder: 'Skriv din besked her…'
     },
     chatPromptSubmit: {
-      label: 'Send',
+      label: 'Send'
+    },
+    chatReasoning: {
+      thinking: 'Tænker…',
+      thought: 'Tænkte',
+      thoughtFor: 'Tænkte i {duration}'
     },
     colorMode: {
       dark: 'Mørk',
       light: 'Lys',
       switchToDark: 'Skift til mørk tilstand',
       switchToLight: 'Skift til lys tilstand',
-      system: 'System',
+      system: 'System'
     },
     commandPalette: {
       back: 'Tilbage',
       close: 'Luk',
       noData: 'Ingen data',
       noMatch: 'Ingen matchende data',
-      placeholder: 'Skriv en kommando eller søg...',
+      placeholder: 'Skriv en kommando eller søg…'
     },
     contentSearch: {
       links: 'Links',
-      theme: 'Tema',
+      theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Søg...',
+      label: 'Søg…'
     },
     contentToc: {
-      title: 'På denne side',
+      title: 'På denne side'
+    },
+    dropdownMenu: {
+      noMatch: 'Ingen matchende data',
+      search: 'Søg…'
     },
     dashboardSearch: {
-      theme: 'Tema',
+      theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Søg...',
+      label: 'Søg…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Sammenfold sidemenu',
-      expand: 'Udvid sidemenu',
+      expand: 'Udvid sidemenu'
     },
     dashboardSidebarToggle: {
       close: 'Luk sidemenu',
-      open: 'Åbn sidemenu',
+      open: 'Åbn sidemenu'
     },
     error: {
-      clear: 'Tilbage til forsiden',
+      clear: 'Tilbage til forsiden'
     },
     fileUpload: {
-      removeFile: 'Fjern {filename}',
+      removeFile: 'Fjern {filename}'
     },
     header: {
       close: 'Luk menu',
-      open: 'Åbn menu',
+      open: 'Åbn menu'
     },
     inputMenu: {
       create: 'Opret "{label}"',
       noData: 'Ingen data',
-      noMatch: 'Ingen matchende data',
+      noMatch: 'Ingen matchende data'
     },
     inputNumber: {
       decrement: 'Reducer',
-      increment: 'Øg',
+      increment: 'Øg'
     },
     modal: {
-      close: 'Luk',
+      close: 'Luk'
     },
     pricingTable: {
-      caption: 'Prisplaneringssammenligning',
+      caption: 'Prisplaneringssammenligning'
     },
     prose: {
       codeCollapse: {
         closeText: 'Sammenfold',
         name: 'kode',
-        openText: 'Udvid',
+        openText: 'Udvid'
       },
       collapsible: {
         closeText: 'Skjul',
         name: 'egenskaber',
-        openText: 'Vis',
+        openText: 'Vis'
       },
       pre: {
-        copy: 'Kopiér kode til udklipsholder',
+        copy: 'Kopiér kode til udklipsholder'
       },
+      prompt: {
+        copy: 'Kopiér prompt',
+        openIn: 'Åbn i {name}'
+      }
+    },
+    sidebar: {
+      close: 'Luk',
+      toggle: 'Skift'
     },
     selectMenu: {
       create: 'Opret "{label}"',
       noData: 'Ingen data',
       noMatch: 'Ingen matchende data',
-      search: 'Søg...',
+      search: 'Søg…'
     },
     slideover: {
-      close: 'Luk',
+      close: 'Luk'
     },
     table: {
-      noData: 'Ingen data',
+      noData: 'Ingen data'
     },
     toast: {
-      close: 'Luk',
-    },
-  },
-});
+      close: 'Luk'
+    }
+  }
+})

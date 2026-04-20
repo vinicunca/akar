@@ -1,5 +1,5 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'Hebrew',
@@ -7,126 +7,143 @@ export default defineLocale<PMessages>({
   dir: 'rtl',
   messages: {
     alert: {
-      close: 'סגור',
+      close: 'סגור'
     },
     authForm: {
       hidePassword: 'הסתר סיסמה',
       showPassword: 'הצג סיסמה',
-      submit: 'המשך',
+      submit: 'המשך'
     },
     banner: {
-      close: 'סגור',
+      close: 'סגור'
     },
     calendar: {
       nextMonth: 'חודש הבא',
       nextYear: 'שנה הבאה',
       prevMonth: 'חודש קודם',
-      prevYear: 'שנה קודמת',
+      prevYear: 'שנה קודמת'
     },
     carousel: {
       dots: 'בחר שקופית להצגה',
       goto: 'מעבר ל {slide}',
       next: 'הבא',
-      prev: 'הקודם',
+      prev: 'הקודם'
     },
     chatPrompt: {
-      placeholder: 'כתוב את ההודעה שלך כאן...',
+      placeholder: 'כתוב את ההודעה שלך כאן…'
     },
     chatPromptSubmit: {
-      label: 'שלח',
+      label: 'שלח'
+    },
+    chatReasoning: {
+      thinking: 'חושב…',
+      thought: 'חשב',
+      thoughtFor: 'חשב במשך {duration}'
     },
     colorMode: {
       dark: 'כהה',
       light: 'בהיר',
       switchToDark: 'עבור למצב כהה',
       switchToLight: 'עבור למצב בהיר',
-      system: 'מערכת',
+      system: 'מערכת'
     },
     commandPalette: {
       back: 'חזור',
       close: 'סגור',
       noData: 'אין נתונים זמינים',
       noMatch: 'לא נמצאה התאמה',
-      placeholder: 'הקלד פקודה...',
+      placeholder: 'הקלד פקודה…'
     },
     contentSearch: {
       links: 'קישורים',
-      theme: 'ערכת נושא',
+      theme: 'ערכת נושא'
     },
     contentSearchButton: {
-      label: 'חיפוש...',
+      label: 'חיפוש…'
     },
     contentToc: {
-      title: 'בדף זה',
+      title: 'בדף זה'
+    },
+    dropdownMenu: {
+      noMatch: 'לא נמצאה התאמה',
+      search: 'חפש…'
     },
     dashboardSearch: {
-      theme: 'ערכת נושא',
+      theme: 'ערכת נושא'
     },
     dashboardSearchButton: {
-      label: 'חיפוש...',
+      label: 'חיפוש…'
     },
     dashboardSidebarCollapse: {
       collapse: 'כווץ סרגל צד',
-      expand: 'הרחב סרגל צד',
+      expand: 'הרחב סרגל צד'
     },
     dashboardSidebarToggle: {
       close: 'סגור סרגל צד',
-      open: 'פתח סרגל צד',
+      open: 'פתח סרגל צד'
     },
     error: {
-      clear: 'חזרה לדף הבית',
+      clear: 'חזרה לדף הבית'
     },
     fileUpload: {
-      removeFile: 'הסר {filename}',
+      removeFile: 'הסר {filename}'
     },
     header: {
       close: 'סגור תפריט',
-      open: 'פתח תפריט',
+      open: 'פתח תפריט'
     },
     inputMenu: {
       create: 'צור "{label}"',
       noData: 'אין נתונים',
-      noMatch: 'אין התאמה',
+      noMatch: 'אין התאמה'
     },
     inputNumber: {
       decrement: 'הפחת',
-      increment: 'הוסף',
+      increment: 'הוסף'
     },
     modal: {
-      close: 'סגור',
+      close: 'סגור'
     },
     pricingTable: {
-      caption: 'שיפור מחירון',
+      caption: 'שיפור מחירון'
     },
     prose: {
       codeCollapse: {
         closeText: 'כווץ',
         name: 'קוד',
-        openText: 'הרחב',
+        openText: 'הרחב'
       },
       collapsible: {
         closeText: 'הסתר',
         name: 'מאפיינים',
-        openText: 'הצג',
+        openText: 'הצג'
       },
       pre: {
-        copy: 'העתק קוד ללוח',
+        copy: 'העתק קוד ללוח'
       },
+      prompt: {
+        copy: 'העתק הנחיה',
+        openIn: 'פתח ב-{name}'
+      }
+    },
+    sidebar: {
+      close: 'סגור',
+      toggle: 'החלף'
     },
     selectMenu: {
       create: 'צור "{label}"',
       noData: 'אין נתונים',
       noMatch: 'לא נמצאה התאמה',
-      search: 'חפש...',
+      search: 'חפש…'
     },
     slideover: {
-      close: 'סגור',
+      close: 'סגור'
     },
     table: {
-      noData: 'אין נתונים להצגה',
+      noData: 'אין נתונים להצגה'
     },
     toast: {
-      close: 'סגור',
-    },
-  },
-});
+      close: 'סגור'
+    }
+  }
+})

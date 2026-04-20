@@ -30,10 +30,15 @@ export default defineLocale<PMessages>({
       prev: 'السابق',
     },
     chatPrompt: {
-      placeholder: 'اكتب رسالتك هنا...',
+      placeholder: 'اكتب رسالتك هنا…',
     },
     chatPromptSubmit: {
       label: 'إرسال',
+    },
+    chatReasoning: {
+      thinking: 'يفكّر…',
+      thought: 'فكّر',
+      thoughtFor: 'فكّر لمدة {duration}',
     },
     colorMode: {
       dark: 'داكن',
@@ -47,23 +52,27 @@ export default defineLocale<PMessages>({
       close: 'إغلاق',
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      placeholder: 'اكتب أمرًا أو ابحث...',
+      placeholder: 'اكتب أمرًا أو ابحث…',
     },
     contentSearch: {
       links: 'الروابط',
       theme: 'السمة',
     },
     contentSearchButton: {
-      label: 'بحث...',
+      label: 'بحث…',
     },
     contentToc: {
       title: 'في هذه الصفحة',
+    },
+    dropdownMenu: {
+      noMatch: 'لا توجد نتائج مطابقة',
+      search: 'بحث…',
     },
     dashboardSearch: {
       theme: 'السمة',
     },
     dashboardSearchButton: {
-      label: 'بحث...',
+      label: 'بحث…',
     },
     dashboardSidebarCollapse: {
       collapse: 'طي الشريط الجانبي',
@@ -112,12 +121,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'نسخ الكود إلى الحافظة',
       },
+      prompt: {
+        copy: 'نسخ التعليمات',
+        openIn: 'فتح في {name}',
+      },
+    },
+    sidebar: {
+      close: 'إغلاق',
+      toggle: 'تبديل',
     },
     selectMenu: {
       create: 'إنشاء "{label}"',
       noData: 'لا توجد بيانات',
       noMatch: 'لا توجد نتائج مطابقة',
-      search: 'بحث...',
+      search: 'بحث…',
     },
     slideover: {
       close: 'إغلاق',

@@ -1,5 +1,5 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'ئۇيغۇرچە',
@@ -7,126 +7,143 @@ export default defineLocale<PMessages>({
   dir: 'rtl',
   messages: {
     alert: {
-      close: 'تاقاش',
+      close: 'تاقاش'
     },
     authForm: {
       hidePassword: 'پارولنى يوشۇرۇش',
       showPassword: 'پارولنى كۆرسىتىش',
-      submit: 'دەۋام قىلىش',
+      submit: 'دەۋام قىلىش'
     },
     banner: {
-      close: 'تاقاش',
+      close: 'تاقاش'
     },
     calendar: {
       nextMonth: 'كېلەر ئاي',
       nextYear: 'كېلەر يىل',
       prevMonth: 'ئالدىنقى ئاي',
-      prevYear: 'ئالدىنقى يىل',
+      prevYear: 'ئالدىنقى يىل'
     },
     carousel: {
       dots: 'كۆرسىتىدىغان سلايدنى تاللاڭ',
       goto: '{slide}-بەتكە ئاتلاش',
       next: 'كېيىنكى بەت',
-      prev: 'ئالدىنقى بەت',
+      prev: 'ئالدىنقى بەت'
     },
     chatPrompt: {
-      placeholder: 'خەت كىرگۈزۈڭ...',
+      placeholder: 'خەت كىرگۈزۈڭ…'
     },
     chatPromptSubmit: {
-      label: 'يوللاش',
+      label: 'يوللاش'
+    },
+    chatReasoning: {
+      thinking: 'ئويلاۋاتىدۇ…',
+      thought: 'ئويلاندى',
+      thoughtFor: '{duration} ئويلاندى'
     },
     colorMode: {
       dark: 'قاراڭغۇ',
       light: 'يورۇق',
       switchToDark: 'قاراڭغۇ ھالەتكە ئالماشتۇرۇش',
       switchToLight: 'يورۇق ھالەتكە ئالماشتۇرۇش',
-      system: 'سىستېما',
+      system: 'سىستېما'
     },
     commandPalette: {
       back: 'قايتىش',
       close: 'تاقاش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ...',
+      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…'
     },
     contentSearch: {
       links: 'ئۇلانمىلار',
-      theme: 'تېما',
+      theme: 'تېما'
     },
     contentSearchButton: {
-      label: 'ئىزدەش',
+      label: 'ئىزدەش'
     },
     contentToc: {
-      title: 'مەزمۇن',
+      title: 'مەزمۇن'
+    },
+    dropdownMenu: {
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…'
     },
     dashboardSearch: {
-      theme: 'تېما',
+      theme: 'تېما'
     },
     dashboardSearchButton: {
-      label: 'ئىزدەش',
+      label: 'ئىزدەش'
     },
     dashboardSidebarCollapse: {
       collapse: 'تارايتىش',
-      expand: 'كېڭەيتىش',
+      expand: 'كېڭەيتىش'
     },
     dashboardSidebarToggle: {
       close: 'تاقاش',
-      open: 'ئېچىش',
+      open: 'ئېچىش'
     },
     error: {
-      clear: 'تازىلاش',
+      clear: 'تازىلاش'
     },
     fileUpload: {
-      removeFile: '{filename} ئۆچۈرۈش',
+      removeFile: '{filename} ئۆچۈرۈش'
     },
     header: {
       close: 'تاقاش',
-      open: 'ئېچىش',
+      open: 'ئېچىش'
     },
     inputMenu: {
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',
-      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق'
     },
     inputNumber: {
       decrement: 'ئازايتىش',
-      increment: 'كۆپەيتىش',
+      increment: 'كۆپەيتىش'
     },
     modal: {
-      close: 'تاقاش',
+      close: 'تاقاش'
     },
     pricingTable: {
-      caption: 'باھا جەدۋىلى',
+      caption: 'باھا جەدۋىلى'
     },
     prose: {
       codeCollapse: {
         closeText: 'تارايتىش',
         name: 'كود',
-        openText: 'كېڭەيتىش',
+        openText: 'كېڭەيتىش'
       },
       collapsible: {
         closeText: 'يوشۇرۇش',
         name: 'خاسلىقلار',
-        openText: 'كۆرسىتىش',
+        openText: 'كۆرسىتىش'
       },
       pre: {
-        copy: 'كۆچۈرۈش',
+        copy: 'كۆچۈرۈش'
       },
+      prompt: {
+        copy: 'كۆچۈرۈش',
+        openIn: '{name} دا ئېچىش'
+      }
+    },
+    sidebar: {
+      close: 'تاقاش',
+      toggle: 'ئالماشتۇرۇش'
     },
     selectMenu: {
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      search: 'ئىزدەش...',
+      search: 'ئىزدەش…'
     },
     slideover: {
-      close: 'تاقاش',
+      close: 'تاقاش'
     },
     table: {
-      noData: 'سانلىق مەلۇمات يوق',
+      noData: 'سانلىق مەلۇمات يوق'
     },
     toast: {
-      close: 'تاقاش',
-    },
-  },
-});
+      close: 'تاقاش'
+    }
+  }
+})

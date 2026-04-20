@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Eel',
     },
     chatPrompt: {
-      placeholder: 'Siia kirjutage oma sõnum...',
+      placeholder: 'Siia kirjutage oma sõnum…',
     },
     chatPromptSubmit: {
       label: 'Saada',
+    },
+    chatReasoning: {
+      thinking: 'Mõtleb…',
+      thought: 'Mõtles',
+      thoughtFor: 'Mõtles {duration}',
     },
     colorMode: {
       dark: 'Tume',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Sulge',
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      placeholder: 'Sisesta käsk või otsi...',
+      placeholder: 'Sisesta käsk või otsi…',
     },
     contentSearch: {
       links: 'Lingid',
       theme: 'Teema',
     },
     contentSearchButton: {
-      label: 'Otsi...',
+      label: 'Otsi…',
     },
     contentToc: {
       title: 'Sellel lehel',
+    },
+    dropdownMenu: {
+      noMatch: 'Pole vastavaid andmeid',
+      search: 'Otsi…',
     },
     dashboardSearch: {
       theme: 'Teema',
     },
     dashboardSearchButton: {
-      label: 'Otsi...',
+      label: 'Otsi…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Ahenda külgriba',
@@ -111,12 +120,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kopeeri kood lõikelauale',
       },
+      prompt: {
+        copy: 'Kopeeri viip',
+        openIn: 'Ava rakenduses {name}',
+      },
+    },
+    sidebar: {
+      close: 'Sulge',
+      toggle: 'Lülita',
     },
     selectMenu: {
       create: 'Loo "{label}"',
       noData: 'Pole andmeid',
       noMatch: 'Pole vastavaid andmeid',
-      search: 'Otsi...',
+      search: 'Otsi…',
     },
     slideover: {
       close: 'Sulge',

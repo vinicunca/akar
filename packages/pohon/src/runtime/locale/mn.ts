@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Өмнөх',
     },
     chatPrompt: {
-      placeholder: 'Энд мессежээ бичнэ үү...',
+      placeholder: 'Энд мессежээ бичнэ үү…',
     },
     chatPromptSubmit: {
       label: 'Мессеж илгээх',
+    },
+    chatReasoning: {
+      thinking: 'Бодож байна…',
+      thought: 'Бодсон',
+      thoughtFor: '{duration} бодсон',
     },
     colorMode: {
       dark: 'Хар',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Хаах',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      placeholder: 'Комманд бичих эсвэл хайлт хийх...',
+      placeholder: 'Комманд бичих эсвэл хайлт хийх…',
     },
     contentSearch: {
       links: 'Холбоосууд',
       theme: 'Загвар',
     },
     contentSearchButton: {
-      label: 'Хайх...',
+      label: 'Хайх…',
     },
     contentToc: {
       title: 'Энэ хуудсанд',
+    },
+    dropdownMenu: {
+      noMatch: 'Тохирох мэдээлэл олдсонгүй',
+      search: 'Хайх…',
     },
     dashboardSearch: {
       theme: 'Загвар',
     },
     dashboardSearchButton: {
-      label: 'Хайх...',
+      label: 'Хайх…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Хажуугийн самбарыг хураах',
@@ -111,12 +120,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Кодыг санах ойд хуулах',
       },
+      prompt: {
+        copy: 'Хүсэлтийг хуулах',
+        openIn: '{name} дотор нээх',
+      },
+    },
+    sidebar: {
+      close: 'Хаах',
+      toggle: 'Сэлгэх',
     },
     selectMenu: {
       create: '"{label}" үүсгэх',
       noData: 'Мэдээлэл байхгүй',
       noMatch: 'Тохирох мэдээлэл олдсонгүй',
-      search: 'Хайх...',
+      search: 'Хайх…',
     },
     slideover: {
       close: 'Хаах',

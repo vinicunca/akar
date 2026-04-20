@@ -1,131 +1,148 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'Bahasa Indonesia',
   code: 'id',
   messages: {
     alert: {
-      close: 'Tutup',
+      close: 'Tutup'
     },
     authForm: {
       hidePassword: 'Sembunyikan kata sandi',
       showPassword: 'Tampilkan kata sandi',
-      submit: 'Lanjutkan',
+      submit: 'Lanjutkan'
     },
     banner: {
-      close: 'Tutup',
+      close: 'Tutup'
     },
     calendar: {
       nextMonth: 'Bulan berikutnya',
       nextYear: 'Tahun berikutnya',
       prevMonth: 'Bulan sebelumnya',
-      prevYear: 'Tahun sebelumnya',
+      prevYear: 'Tahun sebelumnya'
     },
     carousel: {
       dots: 'Pilih slide untuk ditampilkan',
       goto: 'Pergi ke slide {slide}',
       next: 'Berikutnya',
-      prev: 'Sebelumnya',
+      prev: 'Sebelumnya'
     },
     chatPrompt: {
-      placeholder: 'Tulis pesan Anda di sini...',
+      placeholder: 'Tulis pesan Anda di sini…'
     },
     chatPromptSubmit: {
-      label: 'Kirim',
+      label: 'Kirim'
+    },
+    chatReasoning: {
+      thinking: 'Berpikir…',
+      thought: 'Telah berpikir',
+      thoughtFor: 'Berpikir selama {duration}'
     },
     colorMode: {
       dark: 'Gelap',
       light: 'Terang',
       switchToDark: 'Beralih ke mode gelap',
       switchToLight: 'Beralih ke mode terang',
-      system: 'Sistem',
+      system: 'Sistem'
     },
     commandPalette: {
       back: 'Kembali',
       close: 'Tutup',
       noData: 'Tidak ada data',
       noMatch: 'Tidak ada data yang cocok',
-      placeholder: 'Ketik perintah atau cari...',
+      placeholder: 'Ketik perintah atau cari…'
     },
     contentSearch: {
       links: 'Tautan',
-      theme: 'Tema',
+      theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Cari...',
+      label: 'Cari…'
     },
     contentToc: {
-      title: 'Pada halaman ini',
+      title: 'Pada halaman ini'
+    },
+    dropdownMenu: {
+      noMatch: 'Tidak ada data yang cocok',
+      search: 'Cari…'
     },
     dashboardSearch: {
-      theme: 'Tema',
+      theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Cari...',
+      label: 'Cari…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Ciutkan sidebar',
-      expand: 'Perluas sidebar',
+      expand: 'Perluas sidebar'
     },
     dashboardSidebarToggle: {
       close: 'Tutup sidebar',
-      open: 'Buka sidebar',
+      open: 'Buka sidebar'
     },
     error: {
-      clear: 'Kembali ke beranda',
+      clear: 'Kembali ke beranda'
     },
     fileUpload: {
-      removeFile: 'Hapus {filename}',
+      removeFile: 'Hapus {filename}'
     },
     header: {
       close: 'Tutup menu',
-      open: 'Buka menu',
+      open: 'Buka menu'
     },
     inputMenu: {
       create: 'Buat "{label}"',
       noData: 'Tidak ada data',
-      noMatch: 'Tidak ada data yang cocok',
+      noMatch: 'Tidak ada data yang cocok'
     },
     inputNumber: {
       decrement: 'Kurangi',
-      increment: 'Tambah',
+      increment: 'Tambah'
     },
     modal: {
-      close: 'Tutup',
+      close: 'Tutup'
     },
     pricingTable: {
-      caption: 'Perbandingan Harga',
+      caption: 'Perbandingan Harga'
     },
     prose: {
       codeCollapse: {
         closeText: 'Ciutkan',
         name: 'kode',
-        openText: 'Perluas',
+        openText: 'Perluas'
       },
       collapsible: {
         closeText: 'Sembunyikan',
         name: 'properti',
-        openText: 'Tampilkan',
+        openText: 'Tampilkan'
       },
       pre: {
-        copy: 'Salin kode ke clipboard',
+        copy: 'Salin kode ke clipboard'
       },
+      prompt: {
+        copy: 'Salin prompt',
+        openIn: 'Buka di {name}'
+      }
+    },
+    sidebar: {
+      close: 'Tutup',
+      toggle: 'Alihkan'
     },
     selectMenu: {
       create: 'Buat "{label}"',
       noData: 'Tidak ada data',
       noMatch: 'Tidak ada data yang cocok',
-      search: 'Cari...',
+      search: 'Cari…'
     },
     slideover: {
-      close: 'Tutup',
+      close: 'Tutup'
     },
     table: {
-      noData: 'Tidak ada data',
+      noData: 'Tidak ada data'
     },
     toast: {
-      close: 'Tutup',
-    },
-  },
-});
+      close: 'Tutup'
+    }
+  }
+})

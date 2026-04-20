@@ -1,131 +1,148 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'Hindi',
   code: 'hi',
   messages: {
     alert: {
-      close: 'बंद करें',
+      close: 'बंद करें'
     },
     authForm: {
       hidePassword: 'पासवर्ड छिपाएं',
       showPassword: 'पासवर्ड दिखाएं',
-      submit: 'जारी रखें',
+      submit: 'जारी रखें'
     },
     banner: {
-      close: 'बंद करें',
+      close: 'बंद करें'
     },
     calendar: {
       nextMonth: 'अगला महीना',
       nextYear: 'अगला वर्ष',
       prevMonth: 'पिछला महीना',
-      prevYear: 'पिछला वर्ष',
+      prevYear: 'पिछला वर्ष'
     },
     carousel: {
       dots: 'प्रदर्शित करने के लिए स्लाइड चुनें',
       goto: 'स्लाइड {slide} पर जाएं',
       next: 'अगला',
-      prev: 'पिछला',
+      prev: 'पिछला'
     },
     chatPrompt: {
-      placeholder: 'यहाँ आपका संदेश लिखें...',
+      placeholder: 'यहाँ आपका संदेश लिखें…'
     },
     chatPromptSubmit: {
-      label: 'भेजें',
+      label: 'भेजें'
+    },
+    chatReasoning: {
+      thinking: 'सोच रहा है…',
+      thought: 'सोचा',
+      thoughtFor: '{duration} सोचा'
     },
     colorMode: {
       dark: 'गहरा',
       light: 'हल्का',
       switchToDark: 'गहरे मोड में बदलें',
       switchToLight: 'हल्के मोड में बदलें',
-      system: 'सिस्टम',
+      system: 'सिस्टम'
     },
     commandPalette: {
       back: 'वापस',
       close: 'बंद करें',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      placeholder: 'एक आदेश या खोज टाइप करें...',
+      placeholder: 'एक आदेश या खोज टाइप करें…'
     },
     contentSearch: {
       links: 'लिंक्स',
-      theme: 'थीम',
+      theme: 'थीम'
     },
     contentSearchButton: {
-      label: 'खोजें...',
+      label: 'खोजें…'
     },
     contentToc: {
-      title: 'इस पृष्ठ पर',
+      title: 'इस पृष्ठ पर'
+    },
+    dropdownMenu: {
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…'
     },
     dashboardSearch: {
-      theme: 'थीम',
+      theme: 'थीम'
     },
     dashboardSearchButton: {
-      label: 'खोजें...',
+      label: 'खोजें…'
     },
     dashboardSidebarCollapse: {
       collapse: 'साइडबार संकुचित करें',
-      expand: 'साइडबार विस्तारित करें',
+      expand: 'साइडबार विस्तारित करें'
     },
     dashboardSidebarToggle: {
       close: 'साइडबार बंद करें',
-      open: 'साइडबार खोलें',
+      open: 'साइडबार खोलें'
     },
     error: {
-      clear: 'होम पेज पर वापस जाएं',
+      clear: 'होम पेज पर वापस जाएं'
     },
     fileUpload: {
-      removeFile: '{filename} हटाएं',
+      removeFile: '{filename} हटाएं'
     },
     header: {
       close: 'मेनू बंद करें',
-      open: 'मेनू खोलें',
+      open: 'मेनू खोलें'
     },
     inputMenu: {
       create: '"{label}" बनाएँ',
       noData: 'कोई डेटा नहीं',
-      noMatch: 'कोई मेल खाता डेटा नहीं',
+      noMatch: 'कोई मेल खाता डेटा नहीं'
     },
     inputNumber: {
       decrement: 'घटाना',
-      increment: 'बढ़ाना',
+      increment: 'बढ़ाना'
     },
     modal: {
-      close: 'बंद करें',
+      close: 'बंद करें'
     },
     pricingTable: {
-      caption: 'कीमत योजनाओं की तुलना',
+      caption: 'कीमत योजनाओं की तुलना'
     },
     prose: {
       codeCollapse: {
         closeText: 'संकुचित करें',
         name: 'कोड',
-        openText: 'विस्तार करें',
+        openText: 'विस्तार करें'
       },
       collapsible: {
         closeText: 'छिपाएँ',
         name: 'गुण',
-        openText: 'दिखाएँ',
+        openText: 'दिखाएँ'
       },
       pre: {
-        copy: 'कोड को क्लिपबोर्ड पर कॉपी करें',
+        copy: 'कोड को क्लिपबोर्ड पर कॉपी करें'
       },
+      prompt: {
+        copy: 'प्रॉम्प्ट कॉपी करें',
+        openIn: '{name} में खोलें'
+      }
+    },
+    sidebar: {
+      close: 'बंद करें',
+      toggle: 'टॉगल करें'
     },
     selectMenu: {
       create: '"{label}" बनाएँ',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'खोजें...',
+      search: 'खोजें…'
     },
     slideover: {
-      close: 'बंद करें',
+      close: 'बंद करें'
     },
     table: {
-      noData: 'कोई डेटा नहीं',
+      noData: 'कोई डेटा नहीं'
     },
     toast: {
-      close: 'बंद करें',
-    },
-  },
-});
+      close: 'बंद करें'
+    }
+  }
+})

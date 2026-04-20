@@ -11,11 +11,11 @@ export type DynamicSlotsKeys<Name extends string | undefined, Suffix extends str
 export type DynamicSlots<
   T extends { slot?: string },
   Suffix extends string | undefined = undefined,
-  ExtraProps extends object = object,
+  ExtraProps extends object = {},
 > = {
-  [K in DynamicSlotsKeys<T['slot'], Suffix>]: (
+  [K in DynamicSlotsKeys<T['slot'], Suffix>]?: (
     props: { item: Extract<T, { slot: K extends `${infer Base}-${Suffix}` ? Base : K }> } & ExtraProps,
-  ) => any
+  ) => Array<VNode>
 };
 
 export type GetObjectField<MaybeObject, Key extends string> = MaybeObject extends Record<string, any>
@@ -123,3 +123,12 @@ export type EmitsToProps<T> = {
     ? (...args: Args) => void
     : never
 };
+
+export type NonUnion<T> = [T] extends [infer U]
+  ? _NonUnion<U, U>
+  : never;
+type _NonUnion<T, U> = U extends any
+  ? [T] extends [U]
+      ? unknown
+      : never
+  : never;

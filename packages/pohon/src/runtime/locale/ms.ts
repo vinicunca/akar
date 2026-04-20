@@ -1,131 +1,148 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'Melayu',
   code: 'ms',
   messages: {
     alert: {
-      close: 'Tutup',
+      close: 'Tutup'
     },
     authForm: {
       hidePassword: 'Sembunyikan kata laluan',
       showPassword: 'Tunjukkan kata laluan',
-      submit: 'Teruskan',
+      submit: 'Teruskan'
     },
     banner: {
-      close: 'Tutup',
+      close: 'Tutup'
     },
     calendar: {
       nextMonth: 'Bulan seterusnya',
       nextYear: 'Tahun seterusnya',
       prevMonth: 'Bulan sebelum',
-      prevYear: 'Tahun sebelum',
+      prevYear: 'Tahun sebelum'
     },
     carousel: {
       dots: 'Pilih slaid untuk dipaparkan',
       goto: 'Pergi ke slaid {slide}',
       next: 'Seterusnya',
-      prev: 'Sebelum',
+      prev: 'Sebelum'
     },
     chatPrompt: {
-      placeholder: 'Taip mesej anda di sini...',
+      placeholder: 'Taip mesej anda di sini…'
     },
     chatPromptSubmit: {
-      label: 'Hantar mesej',
+      label: 'Hantar mesej'
+    },
+    chatReasoning: {
+      thinking: 'Berfikir…',
+      thought: 'Telah berfikir',
+      thoughtFor: 'Berfikir selama {duration}'
     },
     colorMode: {
       dark: 'Gelap',
       light: 'Cerah',
       switchToDark: 'Tukar ke mod gelap',
       switchToLight: 'Tukar ke mod cerah',
-      system: 'Sistem',
+      system: 'Sistem'
     },
     commandPalette: {
       back: 'Kembali',
       close: 'Tutup',
       noData: 'Tiada data',
       noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Taip arahan atau carian...',
+      placeholder: 'Taip arahan atau carian…'
     },
     contentSearch: {
       links: 'Pautan',
-      theme: 'Tema',
+      theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Cari...',
+      label: 'Cari…'
     },
     contentToc: {
-      title: 'Di halaman ini',
+      title: 'Di halaman ini'
+    },
+    dropdownMenu: {
+      noMatch: 'Tiada data yang sepadan',
+      search: 'Cari…'
     },
     dashboardSearch: {
-      theme: 'Tema',
+      theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Cari...',
+      label: 'Cari…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Runtuhkan bar sisi',
-      expand: 'Kembangkan bar sisi',
+      expand: 'Kembangkan bar sisi'
     },
     dashboardSidebarToggle: {
       close: 'Tutup bar sisi',
-      open: 'Buka bar sisi',
+      open: 'Buka bar sisi'
     },
     error: {
-      clear: 'Kembali ke laman utama',
+      clear: 'Kembali ke laman utama'
     },
     fileUpload: {
-      removeFile: 'Buang {filename}',
+      removeFile: 'Buang {filename}'
     },
     header: {
       close: 'Tutup menu',
-      open: 'Buka menu',
+      open: 'Buka menu'
     },
     inputMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',
-      noMatch: 'Tiada data yang sepadan',
+      noMatch: 'Tiada data yang sepadan'
     },
     inputNumber: {
       decrement: 'Kurangkan',
-      increment: 'Naikkan',
+      increment: 'Naikkan'
     },
     modal: {
-      close: 'Tutup',
+      close: 'Tutup'
     },
     pricingTable: {
-      caption: 'Perbandingan pelan harga',
+      caption: 'Perbandingan pelan harga'
     },
     prose: {
       codeCollapse: {
         closeText: 'Runtuhkan',
         name: 'kod',
-        openText: 'Kembangkan',
+        openText: 'Kembangkan'
       },
       collapsible: {
         closeText: 'Sembunyikan',
         name: 'ciri',
-        openText: 'Tunjukkan',
+        openText: 'Tunjukkan'
       },
       pre: {
-        copy: 'Salin kod ke papan klip',
+        copy: 'Salin kod ke papan klip'
       },
+      prompt: {
+        copy: 'Salin gesaan',
+        openIn: 'Buka dalam {name}'
+      }
+    },
+    sidebar: {
+      close: 'Tutup',
+      toggle: 'Togol'
     },
     selectMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',
       noMatch: 'Tiada data yang sepadan',
-      search: 'Cari...',
+      search: 'Cari…'
     },
     slideover: {
-      close: 'Tutup',
+      close: 'Tutup'
     },
     table: {
-      noData: 'Tiada data',
+      noData: 'Tiada data'
     },
     toast: {
-      close: 'Tutup',
-    },
-  },
-});
+      close: 'Tutup'
+    }
+  }
+})

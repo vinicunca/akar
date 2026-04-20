@@ -1,131 +1,148 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'Lietuvių',
   code: 'lt',
   messages: {
     alert: {
-      close: 'Uždaryti',
+      close: 'Uždaryti'
     },
     authForm: {
       hidePassword: 'Slėpti slaptažodį',
       showPassword: 'Rodyti slaptažodį',
-      submit: 'Tęsti',
+      submit: 'Tęsti'
     },
     banner: {
-      close: 'Uždaryti',
+      close: 'Uždaryti'
     },
     calendar: {
       nextMonth: 'Kitas mėnuo',
       nextYear: 'Kiti metai',
       prevMonth: 'Ankstesnis mėnuo',
-      prevYear: 'Ankstesni metai',
+      prevYear: 'Ankstesni metai'
     },
     carousel: {
       dots: 'Pasirinkite skaidrę rodymui',
       goto: 'Eiti į skaidrę {slide}',
       next: 'Pirmyn',
-      prev: 'Atgal',
+      prev: 'Atgal'
     },
     chatPrompt: {
-      placeholder: 'Įveskite savo žinutę čia...',
+      placeholder: 'Įveskite savo žinutę čia…'
     },
     chatPromptSubmit: {
-      label: 'Siųsti žinutę',
+      label: 'Siųsti žinutę'
+    },
+    chatReasoning: {
+      thinking: 'Mąsto…',
+      thought: 'Pamąstė',
+      thoughtFor: 'Mąstė {duration}'
     },
     colorMode: {
       dark: 'Tamsus',
       light: 'Šviesus',
       switchToDark: 'Perjungti į tamsų režimą',
       switchToLight: 'Perjungti į šviesų režimą',
-      system: 'Sistema',
+      system: 'Sistema'
     },
     commandPalette: {
       back: 'Atgal',
       close: 'Uždaryti',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Įveskite komandą arba ieškokite...',
+      placeholder: 'Įveskite komandą arba ieškokite…'
     },
     contentSearch: {
       links: 'Nuorodos',
-      theme: 'Tema',
+      theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Ieškoti...',
+      label: 'Ieškoti…'
     },
     contentToc: {
-      title: 'Šiame puslapyje',
+      title: 'Šiame puslapyje'
+    },
+    dropdownMenu: {
+      noMatch: 'Nėra atitinkančių duomenų',
+      search: 'Ieškoti…'
     },
     dashboardSearch: {
-      theme: 'Tema',
+      theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Ieškoti...',
+      label: 'Ieškoti…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Suskleisti šoninę juostą',
-      expand: 'Išplėsti šoninę juostą',
+      expand: 'Išplėsti šoninę juostą'
     },
     dashboardSidebarToggle: {
       close: 'Uždaryti šoninę juostą',
-      open: 'Atidaryti šoninę juostą',
+      open: 'Atidaryti šoninę juostą'
     },
     error: {
-      clear: 'Grįžti į pradžią',
+      clear: 'Grįžti į pradžią'
     },
     fileUpload: {
-      removeFile: 'Pašalinti {filename}',
+      removeFile: 'Pašalinti {filename}'
     },
     header: {
       close: 'Uždaryti meniu',
-      open: 'Atidaryti meniu',
+      open: 'Atidaryti meniu'
     },
     inputMenu: {
       create: 'Sukurti „{label}"',
       noData: 'Nėra duomenų',
-      noMatch: 'Nėra atitinkančių duomenų',
+      noMatch: 'Nėra atitinkančių duomenų'
     },
     inputNumber: {
       decrement: 'Sumažinti',
-      increment: 'Padidinti',
+      increment: 'Padidinti'
     },
     modal: {
-      close: 'Uždaryti',
+      close: 'Uždaryti'
     },
     pricingTable: {
-      caption: 'Kainų planų palyginimas',
+      caption: 'Kainų planų palyginimas'
     },
     prose: {
       codeCollapse: {
         closeText: 'Suskleisti',
         name: 'kodas',
-        openText: 'Išplėsti',
+        openText: 'Išplėsti'
       },
       collapsible: {
         closeText: 'Slėpti',
         name: 'savybės',
-        openText: 'Rodyti',
+        openText: 'Rodyti'
       },
       pre: {
-        copy: 'Kopijuoti kodą į iškarpinę',
+        copy: 'Kopijuoti kodą į iškarpinę'
       },
+      prompt: {
+        copy: 'Kopijuoti užklausą',
+        openIn: 'Atidaryti {name}'
+      }
+    },
+    sidebar: {
+      close: 'Uždaryti',
+      toggle: 'Perjungti'
     },
     selectMenu: {
       create: 'Sukurti „{label}"',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Ieškoti...',
+      search: 'Ieškoti…'
     },
     slideover: {
-      close: 'Uždaryti',
+      close: 'Uždaryti'
     },
     table: {
-      noData: 'Nėra duomenų',
+      noData: 'Nėra duomenų'
     },
     toast: {
-      close: 'Uždaryti',
-    },
-  },
-});
+      close: 'Uždaryti'
+    }
+  }
+})

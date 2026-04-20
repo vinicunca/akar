@@ -1,131 +1,148 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'Български',
   code: 'bg',
   messages: {
     alert: {
-      close: 'Затворете',
+      close: 'Затворете'
     },
     authForm: {
       hidePassword: 'Скрий паролата',
       showPassword: 'Покажи паролата',
-      submit: 'Продължи',
+      submit: 'Продължи'
     },
     banner: {
-      close: 'Затвори',
+      close: 'Затвори'
     },
     calendar: {
       nextMonth: 'Следващ месец',
       nextYear: 'Следваща година',
       prevMonth: 'Предишен месец',
-      prevYear: 'Предишна година',
+      prevYear: 'Предишна година'
     },
     carousel: {
       dots: 'Изберете слайд за показване',
       goto: 'Отидете на слайд {slide}',
       next: 'Напред',
-      prev: 'Назад',
+      prev: 'Назад'
     },
     chatPrompt: {
-      placeholder: 'Въведете съобщение...',
+      placeholder: 'Въведете съобщение…'
     },
     chatPromptSubmit: {
-      label: 'Изпрати',
+      label: 'Изпрати'
+    },
+    chatReasoning: {
+      thinking: 'Мисли…',
+      thought: 'Помисли',
+      thoughtFor: 'Мислил {duration}'
     },
     colorMode: {
       dark: 'Тъмно',
       light: 'Светло',
       switchToDark: 'Превключи към тъмен режим',
       switchToLight: 'Превключи към светъл режим',
-      system: 'Система',
+      system: 'Система'
     },
     commandPalette: {
       back: 'Назад',
       close: 'Затворете',
       noData: 'Няма данни',
       noMatch: 'Няма съвпадение на данни',
-      placeholder: 'Въведете команда или потърсете...',
+      placeholder: 'Въведете команда или потърсете…'
     },
     contentSearch: {
       links: 'Връзки',
-      theme: 'Тема',
+      theme: 'Тема'
     },
     contentSearchButton: {
-      label: 'Търсене',
+      label: 'Търсене'
     },
     contentToc: {
-      title: 'Съдържание',
+      title: 'Съдържание'
+    },
+    dropdownMenu: {
+      noMatch: 'Няма съвпадение на данни',
+      search: 'Потърсете…'
     },
     dashboardSearch: {
-      theme: 'Тема',
+      theme: 'Тема'
     },
     dashboardSearchButton: {
-      label: 'Търсене',
+      label: 'Търсене'
     },
     dashboardSidebarCollapse: {
       collapse: 'Свий',
-      expand: 'Разшири',
+      expand: 'Разшири'
     },
     dashboardSidebarToggle: {
       close: 'Затвори',
-      open: 'Отвори',
+      open: 'Отвори'
     },
     error: {
-      clear: 'Изчисти',
+      clear: 'Изчисти'
     },
     fileUpload: {
-      removeFile: 'Премахни {filename}',
+      removeFile: 'Премахни {filename}'
     },
     header: {
       close: 'Затвори',
-      open: 'Отвори',
+      open: 'Отвори'
     },
     inputMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
-      noMatch: 'Няма съвпадение на данни',
+      noMatch: 'Няма съвпадение на данни'
     },
     inputNumber: {
       decrement: 'Намаляване',
-      increment: 'Увеличаване',
+      increment: 'Увеличаване'
     },
     modal: {
-      close: 'Затворете',
+      close: 'Затворете'
     },
     pricingTable: {
-      caption: 'Ценова таблица',
+      caption: 'Ценова таблица'
     },
     prose: {
       codeCollapse: {
         closeText: 'Сгъни',
         name: 'код',
-        openText: 'Разгъни',
+        openText: 'Разгъни'
       },
       collapsible: {
         closeText: 'Скрий',
         name: 'свойства',
-        openText: 'Покажи',
+        openText: 'Покажи'
       },
       pre: {
-        copy: 'Копирай кода в клипборда',
+        copy: 'Копирай кода в клипборда'
       },
+      prompt: {
+        copy: 'Копирай подсказката',
+        openIn: 'Отвори в {name}'
+      }
+    },
+    sidebar: {
+      close: 'Затворете',
+      toggle: 'Превключване'
     },
     selectMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
       noMatch: 'Няма съвпадение на данни',
-      search: 'Потърсете...',
+      search: 'Потърсете…'
     },
     slideover: {
-      close: 'Затворете',
+      close: 'Затворете'
     },
     table: {
-      noData: 'Няма данни',
+      noData: 'Няма данни'
     },
     toast: {
-      close: 'Затворете',
-    },
-  },
-});
+      close: 'Затворете'
+    }
+  }
+})

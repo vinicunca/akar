@@ -55,6 +55,10 @@ export type PMessages = {
   contentToc: {
     title: string;
   };
+  dropdownMenu: {
+    noMatch: string;
+    search: string;
+  };
   dashboardSearch: {
     description?: string;
     theme: string;
@@ -116,6 +120,19 @@ export type PMessages = {
     pre: {
       copy: string;
     };
+    prompt: {
+      copy: string;
+      openIn: string;
+    };
+  };
+  chatReasoning: {
+    thinking: string;
+    thought: string;
+    thoughtFor: string;
+  };
+  sidebar: {
+    close: string;
+    toggle: string;
   };
   selectMenu: {
     create: string;

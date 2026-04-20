@@ -28,6 +28,7 @@ export * from '../components/prose/li.vue';
 export * from '../components/prose/ol.vue';
 export * from '../components/prose/p.vue';
 export * from '../components/prose/pre.vue';
+export * from '../components/prose/prompt.vue';
 export * from '../components/prose/script.vue';
 export * from '../components/prose/steps.vue';
 export * from '../components/prose/strong.vue';

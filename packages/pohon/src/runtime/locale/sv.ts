@@ -1,131 +1,148 @@
-import type { PMessages } from '../types';
-import { defineLocale } from '../composables/define-locale';
+import type { PMessages } from '../types'
+import { defineLocale } from '../composables/define-locale'
 
 export default defineLocale<PMessages>({
   name: 'Svenska',
   code: 'sv',
   messages: {
     alert: {
-      close: 'Stäng',
+      close: 'Stäng'
     },
     authForm: {
       hidePassword: 'Dölj lösenord',
       showPassword: 'Visa lösenord',
-      submit: 'Fortsätt',
+      submit: 'Fortsätt'
     },
     banner: {
-      close: 'Stäng',
+      close: 'Stäng'
     },
     calendar: {
       nextMonth: 'Nästa månad',
       nextYear: 'Nästa år',
       prevMonth: 'Föregående månad',
-      prevYear: 'Föregående år',
+      prevYear: 'Föregående år'
     },
     carousel: {
       dots: 'Välj bild att visa',
       goto: 'Gå till {slide}',
       next: 'Nästa',
-      prev: 'Föregående',
+      prev: 'Föregående'
     },
     chatPrompt: {
-      placeholder: 'Skriv ditt meddelande här...',
+      placeholder: 'Skriv ditt meddelande här…'
     },
     chatPromptSubmit: {
-      label: 'Skicka',
+      label: 'Skicka'
+    },
+    chatReasoning: {
+      thinking: 'Tänker…',
+      thought: 'Tänkte',
+      thoughtFor: 'Tänkte i {duration}'
     },
     colorMode: {
       dark: 'Mörkt',
       light: 'Ljust',
       switchToDark: 'Byt till mörkt läge',
       switchToLight: 'Byt till ljust läge',
-      system: 'System',
+      system: 'System'
     },
     commandPalette: {
       back: 'Tillbaka',
       close: 'Stäng',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      placeholder: 'Skriv ett kommando eller sök...',
+      placeholder: 'Skriv ett kommando eller sök…'
     },
     contentSearch: {
       links: 'Länkar',
-      theme: 'Tema',
+      theme: 'Tema'
     },
     contentSearchButton: {
-      label: 'Sök...',
+      label: 'Sök…'
     },
     contentToc: {
-      title: 'På denna sida',
+      title: 'På denna sida'
+    },
+    dropdownMenu: {
+      noMatch: 'Inga matchande data',
+      search: 'Sök…'
     },
     dashboardSearch: {
-      theme: 'Tema',
+      theme: 'Tema'
     },
     dashboardSearchButton: {
-      label: 'Sök...',
+      label: 'Sök…'
     },
     dashboardSidebarCollapse: {
       collapse: 'Minimera sidofältet',
-      expand: 'Expandera sidofältet',
+      expand: 'Expandera sidofältet'
     },
     dashboardSidebarToggle: {
       close: 'Stäng sidofältet',
-      open: 'Öppna sidofältet',
+      open: 'Öppna sidofältet'
     },
     error: {
-      clear: 'Tillbaka till startsidan',
+      clear: 'Tillbaka till startsidan'
     },
     fileUpload: {
-      removeFile: 'Ta bort {filename}',
+      removeFile: 'Ta bort {filename}'
     },
     header: {
       close: 'Stäng menyn',
-      open: 'Öppna menyn',
+      open: 'Öppna menyn'
     },
     inputMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',
-      noMatch: 'Inga matchande data',
+      noMatch: 'Inga matchande data'
     },
     inputNumber: {
       decrement: 'Minska',
-      increment: 'Öka',
+      increment: 'Öka'
     },
     modal: {
-      close: 'Stäng',
+      close: 'Stäng'
     },
     pricingTable: {
-      caption: 'Prisplanering',
+      caption: 'Prisplanering'
     },
     prose: {
       codeCollapse: {
         closeText: 'Minimera',
         name: 'kod',
-        openText: 'Expandera',
+        openText: 'Expandera'
       },
       collapsible: {
         closeText: 'Dölj',
         name: 'egenskaper',
-        openText: 'Visa',
+        openText: 'Visa'
       },
       pre: {
-        copy: 'Kopiera kod till urklipp',
+        copy: 'Kopiera kod till urklipp'
       },
+      prompt: {
+        copy: 'Kopiera prompt',
+        openIn: 'Öppna i {name}'
+      }
+    },
+    sidebar: {
+      close: 'Stäng',
+      toggle: 'Växla'
     },
     selectMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      search: 'Sök...',
+      search: 'Sök…'
     },
     slideover: {
-      close: 'Stäng',
+      close: 'Stäng'
     },
     table: {
-      noData: 'Inga data',
+      noData: 'Inga data'
     },
     toast: {
-      close: 'Stäng',
-    },
-  },
-});
+      close: 'Stäng'
+    }
+  }
+})
