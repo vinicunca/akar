@@ -56,7 +56,7 @@ export interface ChatToolProps extends Pick<CollapsibleRootProps, 'defaultOpen' 
    */
   chevronIcon?: PIconProps['name']
   /**
-   * Customize the [`ChatShimmer`](https://ui.nuxt.com/docs/components/chat-shimmer) component when streaming.
+   * Customize the [`ChatShimmer`](https://akar.vinicunca.dev/docs/components/chat-shimmer) component when streaming.
    */
   shimmer?: Partial<Omit<ChatShimmerProps, 'text'>>
   class?: any

@@ -71,7 +71,7 @@ export default (options: Required<PohonModuleOptions>) => {
       },
 
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [
           color,
           {
             trigger: '',

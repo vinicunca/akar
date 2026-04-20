@@ -12,5 +12,10 @@ export default {
     open: {
       true: '',
     },
+    width: {
+      false: '',
+    },
   },
+
+  compoundVariants: [],
 };

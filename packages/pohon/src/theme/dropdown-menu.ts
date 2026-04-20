@@ -4,6 +4,8 @@ export default (options: Required<PohonModuleOptions>) => {
   return {
     slots: {
       content: '',
+      input: '',
+      empty: '',
       viewport: '',
       arrow: '',
       group: '',
@@ -22,10 +24,9 @@ export default (options: Required<PohonModuleOptions>) => {
       itemDescription: '',
       itemLabelExternalIcon: '',
     },
-
     variants: {
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
         neutral: '',
       },
       active: {
@@ -47,6 +48,7 @@ export default (options: Required<PohonModuleOptions>) => {
         xs: {
           label: '',
           item: '',
+          empty: '',
           itemLeadingIcon: '',
           itemLeadingAvatarSize: '',
           itemTrailingIcon: '',
@@ -56,6 +58,7 @@ export default (options: Required<PohonModuleOptions>) => {
         sm: {
           label: '',
           item: '',
+          empty: '',
           itemLeadingIcon: '',
           itemLeadingAvatarSize: '',
           itemTrailingIcon: '',
@@ -65,6 +68,7 @@ export default (options: Required<PohonModuleOptions>) => {
         md: {
           label: '',
           item: '',
+          empty: '',
           itemLeadingIcon: '',
           itemLeadingAvatarSize: '',
           itemTrailingIcon: '',
@@ -74,6 +78,7 @@ export default (options: Required<PohonModuleOptions>) => {
         lg: {
           label: '',
           item: '',
+          empty: '',
           itemLeadingIcon: '',
           itemLeadingAvatarSize: '',
           itemTrailingIcon: '',
@@ -83,6 +88,7 @@ export default (options: Required<PohonModuleOptions>) => {
         xl: {
           label: '',
           item: '',
+          empty: '',
           itemLeadingIcon: '',
           itemLeadingAvatarSize: '',
           itemTrailingIcon: '',

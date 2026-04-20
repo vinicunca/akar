@@ -1,12 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/pricing-table'
-import type { PricingPlanProps } from './pricing-plan.vue'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { ComponentConfig } from '../types/tv';
+import type { PricingPlanProps } from './pricing-plan.vue';
+import theme from '#build/pohon/pricing-table';
 
-type PricingTable = ComponentConfig<typeof theme, AppConfig, 'pricingTable'>
+type PricingTable = ComponentConfig<typeof theme, AppConfig, 'pricingTable'>;
 
 type DynamicSlots<T extends { id: string }, S extends string | undefined = undefined> = {
   [K in T['id'] as K extends string
@@ -14,8 +14,8 @@ type DynamicSlots<T extends { id: string }, S extends string | undefined = undef
       ? (K | `${K}-${S}`)
       : K
     : never
-  ]?: (props: { tier: Extract<T, { id: K extends `${infer Base}-${S}` ? Base : K }> }) => VNode[]
-}
+  ]?: (props: { tier: Extract<T, { id: K extends `${infer Base}-${S}` ? Base : K }> }) => Array<VNode>
+};
 
 type FeatureDynamicSlots<T extends PricingTableSectionFeature, S extends string | undefined = undefined> = {
   [K in (T['id'] extends string ? T['id'] : string) as K extends string
@@ -23,8 +23,8 @@ type FeatureDynamicSlots<T extends PricingTableSectionFeature, S extends string 
       ? (`feature-${K}` | `feature-${K}-${S}`)
       : `feature-${K}`
     : never
-  ]?: (props: { feature: T, tier: PricingTableTier, section: PricingTableSection }) => VNode[]
-}
+  ]?: (props: { feature: T; tier: PricingTableTier; section: PricingTableSection }) => Array<VNode>
+};
 
 type SectionDynamicSlots<T extends PricingTableSection, S extends string | undefined = undefined> = {
   [K in (T['id'] extends string ? T['id'] : string) as K extends string
@@ -32,26 +32,26 @@ type SectionDynamicSlots<T extends PricingTableSection, S extends string | undef
       ? (`section-${K}` | `section-${K}-${S}`)
       : `section-${K}`
     : never
-  ]?: (props: { section: T }) => VNode[]
-}
+  ]?: (props: { section: T }) => Array<VNode>
+};
 
 export type PricingTableTier = Pick<PricingPlanProps, 'title' | 'description' | 'badge' | 'billingCycle' | 'billingPeriod' | 'price' | 'discount' | 'button' | 'highlight'> & {
-  id: string
-  [key: string]: any
-}
+  id: string;
+  [key: string]: any;
+};
 
 export type PricingTableSectionFeature<T extends PricingTableTier = PricingTableTier> = {
-  id?: string
-  title: string
+  id?: string;
+  title: string;
   tiers?: {
     [K in Extract<T['id'], string>]: boolean | number | string
-  } & Record<string, boolean | number | string>
-}
+  } & Record<string, boolean | number | string>;
+};
 
 export interface PricingTableSection<T extends PricingTableTier = PricingTableTier> {
-  id?: string
-  title: string
-  features: PricingTableSectionFeature<T>[]
+  id?: string;
+  title: string;
+  features: Array<PricingTableSectionFeature<T>>;
 }
 
 export interface PricingTableProps<T extends PricingTableTier = PricingTableTier> {
@@ -59,110 +59,135 @@ export interface PricingTableProps<T extends PricingTableTier = PricingTableTier
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any;
   /**
    * The caption to display above the table.
-   * @defeaultValue t('pricingTable.caption')
+   * @defaultValue t('pricingTable.caption')
    */
-  caption?: string
+  caption?: string;
   /**
    * The pricing tiers to display in the table.
    * Each tier represents a pricing plan with its own title, description, price, and features.
    */
-  tiers: T[]
+  tiers: Array<T>;
   /**
    * The sections of features to display in the table.
    * Each section contains a title and a list of features with their availability in each tier.
    */
-  sections: PricingTableSection<T>[]
-  class?: any
-  pohon?: PricingTable['slots']
+  sections: Array<PricingTableSection<T>>;
+  class?: any;
+  pohon?: PricingTable['slots'];
 }
 
-type SlotProps<T extends PricingTableTier> = (props: { tier: T }) => VNode[]
+type SlotProps<T extends PricingTableTier> = (props: { tier: T }) => Array<VNode>;
 
 export type PricingTableSlots<T extends PricingTableTier = PricingTableTier> = {
-  'caption'?: (props?: {}) => VNode[]
-  'tier'?: SlotProps<T>
-  'tier-title'?: SlotProps<T>
-  'tier-description'?: SlotProps<T>
-  'tier-badge'?: SlotProps<T>
-  'tier-button'?: SlotProps<T>
-  'tier-billing'?: SlotProps<T>
-  'tier-discount'?: SlotProps<T>
-  'tier-price'?: SlotProps<T>
-  'section-title'?: (props: { section: PricingTableSection<T> }) => VNode[]
-  'feature-title'?: (props: { feature: PricingTableSectionFeature<T>, section: PricingTableSection<T> }) => VNode[]
-  'feature-value'?: (props: { feature: PricingTableSectionFeature<T>, tier: T, section: PricingTableSection<T> }) => VNode[]
+  'caption'?: (props?: {}) => Array<VNode>;
+  'tier'?: SlotProps<T>;
+  'tier-title'?: SlotProps<T>;
+  'tier-description'?: SlotProps<T>;
+  'tier-badge'?: SlotProps<T>;
+  'tier-button'?: SlotProps<T>;
+  'tier-billing'?: SlotProps<T>;
+  'tier-discount'?: SlotProps<T>;
+  'tier-price'?: SlotProps<T>;
+  'section-title'?: (props: { section: PricingTableSection<T> }) => Array<VNode>;
+  'feature-title'?: (props: { feature: PricingTableSectionFeature<T>; section: PricingTableSection<T> }) => Array<VNode>;
+  'feature-value'?: (props: { feature: PricingTableSectionFeature<T>; tier: T; section: PricingTableSection<T> }) => Array<VNode>;
 } & DynamicSlots<T, 'title' | 'description' | 'badge' | 'button' | 'billing' | 'discount' | 'price'>
 & FeatureDynamicSlots<PricingTableSectionFeature<T>, 'title' | 'value'>
-& SectionDynamicSlots<PricingTableSection<T>, 'title'>
+& SectionDynamicSlots<PricingTableSection<T>, 'title'>;
 
 </script>
 
 <script setup lang="ts" generic="T extends PricingTableTier">
-import { computed } from 'vue'
-import { Primitive } from 'reka-ui'
-import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentPohon } from '../composables/use-component-pohon'
-import { useLocale } from '../composables/use-locale'
-import { tv } from '../utils/tv'
-import PBadge from './badge.vue'
-import PButton from './button.vue'
-import PIcon from './icon.vue'
+import { useAppConfig } from '#imports';
+import { createReusableTemplate } from '@vueuse/core';
+import { Primitive } from 'reka-ui';
+import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { useLocale } from '../composables/use-locale';
+import { tv } from '../utils/tv';
+import PBadge from './badge.vue';
+import PButton from './button.vue';
+import PIcon from './icon.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = defineProps<PricingTableProps<T>>()
-const slots = defineSlots<PricingTableSlots<T>>()
+const props = defineProps<PricingTableProps<T>>();
+const slots = defineSlots<PricingTableSlots<T>>();
 
-const { t } = useLocale()
-const appConfig = useAppConfig() as PricingTable['AppConfig']
-const pohonProp = useComponentPohon('pricingTable', props)
+const { t } = useLocale();
+const appConfig = useAppConfig() as PricingTable['AppConfig'];
+const pohonProp = useComponentPohon('pricingTable', props);
 
-const formatSlotName = (item: { id?: string, title: string }): string => {
-  if (item.id) return item.id
+function formatSlotName(item: { id?: string; title: string }): string {
+  if (item.id) {
+    return item.id;
+  }
 
   return item.title
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
+    .replace(/^-|-$/g, '');
 }
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pricingTable || {}) })())
+const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pricingTable || {}) })());
 
 const [DefineTierTemplate, ReuseTierTemplate] = createReusableTemplate<{ tier: PricingTableTier }>({
   props: {
-    tier: Object
-  }
-})
-const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ tier: PricingTableTier, feature: PricingTableSectionFeature<T> }>({
+    tier: Object,
+  },
+});
+const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ tier: PricingTableTier; feature: PricingTableSectionFeature<T> }>({
   props: {
     tier: Object,
-    feature: Object
-  }
-})
+    feature: Object,
+  },
+});
 </script>
 
 <template>
   <DefineTierTemplate v-slot="{ tier }">
-    <slot :name="(tier.id as keyof PricingTableSlots<T>)" :tier="(tier as T)">
-      <slot name="tier" :tier="(tier as T)">
-        <div data-slot="tierTitleWrapper" :class="ui.tierTitleWrapper({ class: pohonProp?.tierTitleWrapper })">
-          <div data-slot="tierTitle" :class="ui.tierTitle({ class: pohonProp?.tierTitle })">
-            <slot :name="(`${tier.id}-title` as keyof PricingTableSlots<T>)" :tier="tier">
-              <slot name="tier-title" :tier="(tier as T)">
+    <slot
+      :name="(tier.id as keyof PricingTableSlots<T>)"
+      :tier="(tier as T)"
+    >
+      <slot
+        name="tier"
+        :tier="(tier as T)"
+      >
+        <div
+          data-slot="tierTitleWrapper"
+          :class="ui.tierTitleWrapper({ class: pohonProp?.tierTitleWrapper })"
+        >
+          <div
+            data-slot="tierTitle"
+            :class="ui.tierTitle({ class: pohonProp?.tierTitle })"
+          >
+            <slot
+              :name="(`${tier.id}-title` as keyof PricingTableSlots<T>)"
+              :tier="tier"
+            >
+              <slot
+                name="tier-title"
+                :tier="(tier as T)"
+              >
                 {{ tier.title }}
               </slot>
             </slot>
           </div>
 
-          <slot :name="(`${tier.id}-badge` as keyof PricingTableSlots<T>)" :tier="tier">
-            <slot name="tier-badge" :tier="(tier as T)">
+          <slot
+            :name="(`${tier.id}-badge` as keyof PricingTableSlots<T>)"
+            :tier="tier"
+          >
+            <slot
+              name="tier-badge"
+              :tier="(tier as T)"
+            >
               <PBadge
                 v-if="tier.badge"
                 color="primary"
@@ -175,39 +200,90 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
           </slot>
         </div>
 
-        <div v-if="tier.description || !!slots['tier-description'] || !!slots[(`${tier.id}-description` as keyof PricingTableSlots<T>)]" data-slot="tierDescription" :class="ui.tierDescription({ class: pohonProp?.tierDescription })">
-          <slot :name="(`${tier.id}-description` as keyof PricingTableSlots<T>)" :tier="tier">
-            <slot name="tier-description" :tier="(tier as T)">
+        <div
+          v-if="tier.description || !!slots['tier-description'] || !!slots[(`${tier.id}-description` as keyof PricingTableSlots<T>)]"
+          data-slot="tierDescription"
+          :class="ui.tierDescription({ class: pohonProp?.tierDescription })"
+        >
+          <slot
+            :name="(`${tier.id}-description` as keyof PricingTableSlots<T>)"
+            :tier="tier"
+          >
+            <slot
+              name="tier-description"
+              :tier="(tier as T)"
+            >
               {{ tier.description }}
             </slot>
           </slot>
         </div>
 
-        <div v-if="tier.discount || tier.price || !!slots['tier-discount'] || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-price'] || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || tier.billingCycle || tier.billingPeriod || !!slots['tier-billing'] || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)]" data-slot="tierPriceWrapper" :class="ui.tierPriceWrapper({ class: pohonProp?.tierPriceWrapper })">
-          <div v-if="(tier.discount && tier.price) || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-discount']" data-slot="tierDiscount" :class="ui.tierDiscount({ class: pohonProp?.tierDiscount })">
-            <slot :name="(`${tier.id}-discount` as keyof PricingTableSlots<T>)" :tier="tier">
-              <slot name="tier-discount" :tier="(tier as T)">
+        <div
+          v-if="tier.discount || tier.price || !!slots['tier-discount'] || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-price'] || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || tier.billingCycle || tier.billingPeriod || !!slots['tier-billing'] || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)]"
+          data-slot="tierPriceWrapper"
+          :class="ui.tierPriceWrapper({ class: pohonProp?.tierPriceWrapper })"
+        >
+          <div
+            v-if="(tier.discount && tier.price) || !!slots[(`${tier.id}-discount` as keyof PricingTableSlots<T>)] || !!slots['tier-discount']"
+            data-slot="tierDiscount"
+            :class="ui.tierDiscount({ class: pohonProp?.tierDiscount })"
+          >
+            <slot
+              :name="(`${tier.id}-discount` as keyof PricingTableSlots<T>)"
+              :tier="tier"
+            >
+              <slot
+                name="tier-discount"
+                :tier="(tier as T)"
+              >
                 {{ tier.price }}
               </slot>
             </slot>
           </div>
 
-          <div v-if="(tier.discount || tier.price) || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || !!slots['tier-price']" data-slot="tierPrice" :class="ui.tierPrice({ class: pohonProp?.tierPrice })">
-            <slot :name="(`${tier.id}-price` as keyof PricingTableSlots<T>)" :tier="tier">
-              <slot name="tier-price" :tier="(tier as T)">
+          <div
+            v-if="(tier.discount || tier.price) || !!slots[(`${tier.id}-price` as keyof PricingTableSlots<T>)] || !!slots['tier-price']"
+            data-slot="tierPrice"
+            :class="ui.tierPrice({ class: pohonProp?.tierPrice })"
+          >
+            <slot
+              :name="(`${tier.id}-price` as keyof PricingTableSlots<T>)"
+              :tier="tier"
+            >
+              <slot
+                name="tier-price"
+                :tier="(tier as T)"
+              >
                 {{ tier.discount || tier.price }}
               </slot>
             </slot>
           </div>
 
-          <div v-if="tier.billingCycle || tier.billingPeriod || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)] || !!slots['tier-billing']" data-slot="tierBilling" :class="ui.tierBilling({ class: pohonProp?.tierBilling })">
-            <slot :name="(`${tier.id}-billing` as keyof PricingTableSlots<T>)" :tier="tier">
-              <slot name="tier-billing" :tier="(tier as T)">
-                <span data-slot="tierBillingPeriod" :class="ui.tierBillingPeriod({ class: pohonProp?.tierBillingPeriod })">
+          <div
+            v-if="tier.billingCycle || tier.billingPeriod || !!slots[(`${tier.id}-billing` as keyof PricingTableSlots<T>)] || !!slots['tier-billing']"
+            data-slot="tierBilling"
+            :class="ui.tierBilling({ class: pohonProp?.tierBilling })"
+          >
+            <slot
+              :name="(`${tier.id}-billing` as keyof PricingTableSlots<T>)"
+              :tier="tier"
+            >
+              <slot
+                name="tier-billing"
+                :tier="(tier as T)"
+              >
+                <span
+                  data-slot="tierBillingPeriod"
+                  :class="ui.tierBillingPeriod({ class: pohonProp?.tierBillingPeriod })"
+                >
                   {{ tier.billingPeriod || '&nbsp;' }}
                 </span>
 
-                <span v-if="tier.billingCycle" data-slot="tierBillingCycle" :class="ui.tierBillingCycle({ class: pohonProp?.tierBillingCycle })">
+                <span
+                  v-if="tier.billingCycle"
+                  data-slot="tierBillingCycle"
+                  :class="ui.tierBillingCycle({ class: pohonProp?.tierBillingCycle })"
+                >
                   {{ tier.billingCycle }}
                 </span>
               </slot>
@@ -215,10 +291,25 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
           </div>
         </div>
 
-        <div v-if="!!slots[(`${tier.id}-button` as keyof PricingTableSlots<T>)] || !!slots['tier-button'] || tier.button" data-slot="tierButton" :class="ui.tierButton({ class: pohonProp?.tierButton })">
-          <slot :name="(`${tier.id}-button` as keyof PricingTableSlots<T>)" :tier="tier">
-            <slot name="tier-button" :tier="(tier as T)">
-              <PButton v-if="tier.button" block size="lg" v-bind="tier.button" />
+        <div
+          v-if="!!slots[(`${tier.id}-button` as keyof PricingTableSlots<T>)] || !!slots['tier-button'] || tier.button"
+          data-slot="tierButton"
+          :class="ui.tierButton({ class: pohonProp?.tierButton })"
+        >
+          <slot
+            :name="(`${tier.id}-button` as keyof PricingTableSlots<T>)"
+            :tier="tier"
+          >
+            <slot
+              name="tier-button"
+              :tier="(tier as T)"
+            >
+              <PButton
+                v-if="tier.button"
+                block
+                size="lg"
+                v-bind="tier.button"
+              />
             </slot>
           </slot>
         </div>
@@ -228,25 +319,53 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
 
   <DefineFeatureTemplate v-slot="{ feature, tier }">
     <template v-if="feature.tiers?.[tier.id]">
-      <PIcon v-if="typeof feature.tiers[tier.id] === 'boolean'" :name="appConfig.pohon.icons.success" data-slot="tierFeatureIcon" :class="ui.tierFeatureIcon({ class: pohonProp?.tierFeatureIcon, active: true })" />
+      <PIcon
+        v-if="typeof feature.tiers[tier.id] === 'boolean'"
+        :name="appConfig.pohon.icons.success"
+        data-slot="tierFeatureIcon"
+        :class="ui.tierFeatureIcon({ class: pohonProp?.tierFeatureIcon, active: true })"
+      />
       <template v-else>
         {{ feature.tiers[tier.id] }}
       </template>
     </template>
 
-    <PIcon v-else :name="appConfig.pohon.icons.minus" data-slot="tierFeatureIcon" :class="ui.tierFeatureIcon({ class: pohonProp?.tierFeatureIcon })" />
+    <PIcon
+      v-else
+      :name="appConfig.pohon.icons.minus"
+      data-slot="tierFeatureIcon"
+      :class="ui.tierFeatureIcon({ class: pohonProp?.tierFeatureIcon })"
+    />
   </DefineFeatureTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" data-slot="root" :class="ui.root({ class: [pohonProp?.root, props.class] })">
-    <table data-slot="table" :class="ui.table({ class: pohonProp?.table })">
-      <caption v-if="caption || !!slots.caption" data-slot="caption" :class="ui.caption({ class: [pohonProp?.caption] })">
+  <Primitive
+    :as="as"
+    v-bind="$attrs"
+    data-slot="root"
+    :class="ui.root({ class: [pohonProp?.root, props.class] })"
+  >
+    <table
+      data-slot="table"
+      :class="ui.table({ class: pohonProp?.table })"
+    >
+      <caption
+        v-if="caption || !!slots.caption"
+        data-slot="caption"
+        :class="ui.caption({ class: [pohonProp?.caption] })"
+      >
         <slot name="caption">
           {{ caption || t('pricingTable.caption') }}
         </slot>
       </caption>
 
-      <thead data-slot="thead" :class="ui.thead({ class: pohonProp?.thead })">
-        <tr data-slot="tr" :class="ui.tr({ class: pohonProp?.tr })">
+      <thead
+        data-slot="thead"
+        :class="ui.thead({ class: pohonProp?.thead })"
+      >
+        <tr
+          data-slot="tr"
+          :class="ui.tr({ class: pohonProp?.tr })"
+        >
           <td />
 
           <th
@@ -261,13 +380,36 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
         </tr>
       </thead>
 
-      <tbody data-slot="tbody" :class="ui.tbody({ class: pohonProp?.tbody })">
-        <template v-for="(section, sectionIndex) in sections" :key="sectionIndex">
-          <tr data-slot="tr" :class="ui.tr({ class: pohonProp?.tr, section: sectionIndex > 0 })">
-            <th scope="row" data-slot="th" :class="ui.th({ class: pohonProp?.th })">
-              <div v-if="section.title || !!slots['section-title'] || !!slots[(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)]" data-slot="sectionTitle" :class="ui.sectionTitle({ class: pohonProp?.sectionTitle })">
-                <slot :name="(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)" :section="section">
-                  <slot name="section-title" :section="section">
+      <tbody
+        data-slot="tbody"
+        :class="ui.tbody({ class: pohonProp?.tbody })"
+      >
+        <template
+          v-for="(section, sectionIndex) in sections"
+          :key="sectionIndex"
+        >
+          <tr
+            data-slot="tr"
+            :class="ui.tr({ class: pohonProp?.tr, section: sectionIndex > 0 })"
+          >
+            <th
+              scope="row"
+              data-slot="th"
+              :class="ui.th({ class: pohonProp?.th })"
+            >
+              <div
+                v-if="section.title || !!slots['section-title'] || !!slots[(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)]"
+                data-slot="sectionTitle"
+                :class="ui.sectionTitle({ class: pohonProp?.sectionTitle })"
+              >
+                <slot
+                  :name="(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)"
+                  :section="section"
+                >
+                  <slot
+                    name="section-title"
+                    :section="section"
+                  >
                     {{ section.title }}
                   </slot>
                 </slot>
@@ -282,11 +424,29 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
             />
           </tr>
 
-          <tr v-for="(feature, featureIndex) in section.features" :key="`${sectionIndex}-feature-${featureIndex}`">
-            <th scope="row" data-slot="th" :class="ui.th({ class: pohonProp?.th })">
-              <div data-slot="featureTitle" :class="ui.featureTitle({ class: pohonProp?.featureTitle })">
-                <slot :name="(`feature-${formatSlotName(feature)}-title` as keyof PricingTableSlots<T>)" :feature="feature" :section="section">
-                  <slot name="feature-title" :feature="feature" :section="section">
+          <tr
+            v-for="(feature, featureIndex) in section.features"
+            :key="`${sectionIndex}-feature-${featureIndex}`"
+          >
+            <th
+              scope="row"
+              data-slot="th"
+              :class="ui.th({ class: pohonProp?.th })"
+            >
+              <div
+                data-slot="featureTitle"
+                :class="ui.featureTitle({ class: pohonProp?.featureTitle })"
+              >
+                <slot
+                  :name="(`feature-${formatSlotName(feature)}-title` as keyof PricingTableSlots<T>)"
+                  :feature="feature"
+                  :section="section"
+                >
+                  <slot
+                    name="feature-title"
+                    :feature="feature"
+                    :section="section"
+                  >
                     {{ feature.title }}
                   </slot>
                 </slot>
@@ -299,10 +459,26 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
               data-slot="td"
               :class="ui.td({ class: pohonProp?.td, highlight: tier.highlight })"
             >
-              <div data-slot="featureValue" :class="ui.featureValue({ class: pohonProp?.featureValue })">
-                <slot :name="(`feature-${formatSlotName(feature)}-value` as keyof PricingTableSlots<T>)" :feature="feature" :tier="(tier as T)" :section="section">
-                  <slot name="feature-value" :feature="feature" :tier="(tier as T)" :section="section">
-                    <ReuseFeatureTemplate :tier="tier" :feature="feature" />
+              <div
+                data-slot="featureValue"
+                :class="ui.featureValue({ class: pohonProp?.featureValue })"
+              >
+                <slot
+                  :name="(`feature-${formatSlotName(feature)}-value` as keyof PricingTableSlots<T>)"
+                  :feature="feature"
+                  :tier="(tier as T)"
+                  :section="section"
+                >
+                  <slot
+                    name="feature-value"
+                    :feature="feature"
+                    :tier="(tier as T)"
+                    :section="section"
+                  >
+                    <ReuseFeatureTemplate
+                      :tier="tier"
+                      :feature="feature"
+                    />
                   </slot>
                 </slot>
               </div>
@@ -312,32 +488,87 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
       </tbody>
     </table>
 
-    <ul data-slot="list" :class="ui.list({ class: pohonProp?.list })">
-      <li v-for="(tier, index) in tiers" :key="index" data-slot="item" :class="ui.item({ class: pohonProp?.item, highlight: tier.highlight })">
+    <ul
+      data-slot="list"
+      :class="ui.list({ class: pohonProp?.list })"
+    >
+      <li
+        v-for="(tier, index) in tiers"
+        :key="index"
+        data-slot="item"
+        :class="ui.item({ class: pohonProp?.item, highlight: tier.highlight })"
+      >
         <ReuseTierTemplate :tier="tier" />
 
-        <div v-for="(section, sectionIndex) in sections" :key="`section-${sectionIndex}`" data-slot="section" :class="ui.section({ class: pohonProp?.section })">
-          <div v-if="section.title" data-slot="sectionTitle" :class="ui.sectionTitle({ class: pohonProp?.sectionTitle })">
-            <slot :name="(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)" :section="section">
-              <slot name="section-title" :section="section">
+        <div
+          v-for="(section, sectionIndex) in sections"
+          :key="`section-${sectionIndex}`"
+          data-slot="section"
+          :class="ui.section({ class: pohonProp?.section })"
+        >
+          <div
+            v-if="section.title"
+            data-slot="sectionTitle"
+            :class="ui.sectionTitle({ class: pohonProp?.sectionTitle })"
+          >
+            <slot
+              :name="(`section-${formatSlotName(section)}-title` as keyof PricingTableSlots<T>)"
+              :section="section"
+            >
+              <slot
+                name="section-title"
+                :section="section"
+              >
                 {{ section.title }}
               </slot>
             </slot>
           </div>
 
-          <div v-for="(feature, featureIndex) in section.features" :key="`section-${sectionIndex}-feature-${featureIndex}`" data-slot="feature" :class="ui.feature({ class: pohonProp?.feature })">
-            <div data-slot="featureTitle" :class="ui.featureTitle({ class: pohonProp?.featureTitle })">
-              <slot :name="(`feature-${formatSlotName(feature)}-title` as keyof PricingTableSlots<T>)" :feature="feature" :section="section">
-                <slot name="feature-title" :feature="feature" :section="section">
+          <div
+            v-for="(feature, featureIndex) in section.features"
+            :key="`section-${sectionIndex}-feature-${featureIndex}`"
+            data-slot="feature"
+            :class="ui.feature({ class: pohonProp?.feature })"
+          >
+            <div
+              data-slot="featureTitle"
+              :class="ui.featureTitle({ class: pohonProp?.featureTitle })"
+            >
+              <slot
+                :name="(`feature-${formatSlotName(feature)}-title` as keyof PricingTableSlots<T>)"
+                :feature="feature"
+                :section="section"
+              >
+                <slot
+                  name="feature-title"
+                  :feature="feature"
+                  :section="section"
+                >
                   {{ feature.title }}
                 </slot>
               </slot>
             </div>
 
-            <div data-slot="featureValue" :class="ui.featureValue({ class: pohonProp?.featureValue })">
-              <slot :name="(`feature-${formatSlotName(feature)}-value` as keyof PricingTableSlots<T>)" :feature="feature" :tier="(tier as T)" :section="section">
-                <slot name="feature-value" :feature="feature" :tier="(tier as T)" :section="section">
-                  <ReuseFeatureTemplate :tier="tier" :feature="feature" />
+            <div
+              data-slot="featureValue"
+              :class="ui.featureValue({ class: pohonProp?.featureValue })"
+            >
+              <slot
+                :name="(`feature-${formatSlotName(feature)}-value` as keyof PricingTableSlots<T>)"
+                :feature="feature"
+                :tier="(tier as T)"
+                :section="section"
+              >
+                <slot
+                  name="feature-value"
+                  :feature="feature"
+                  :tier="(tier as T)"
+                  :section="section"
+                >
+                  <ReuseFeatureTemplate
+                    :tier="tier"
+                    :feature="feature"
+                  />
                 </slot>
               </slot>
             </div>

@@ -1,20 +1,17 @@
 export default {
-  base: 'flex flex-col gap-y-8',
+  base: '',
   variants: {
     orientation: {
-      horizontal: 'lg:grid lg:grid-cols-[repeat(var(--count),minmax(0,1fr))]',
-      vertical: ''
+      horizontal: '',
+      vertical: '',
     },
     compact: {
-      false: 'gap-x-8'
+      false: '',
     },
     scale: {
-      true: ''
-    }
+      true: '',
+    },
   },
-  compoundVariants: [{
-    compact: false,
-    scale: true,
-    class: 'lg:gap-x-13'
-  }]
-}
+
+  compoundVariants: [],
+};

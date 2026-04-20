@@ -11,7 +11,7 @@ const vueRouterOverrides = await glob('./src/runtime/vue/overrides/vue-router/*.
 
 export default defineConfig({
   test: {
-    testTimeout: 20000,
+    testTimeout: 5000,
     globals: true,
     silent: true,
     resolveSnapshotPath(path, extension, { config }) {

@@ -15,6 +15,38 @@ export default {
     itemLabelExternalIcon: '',
   },
   variants: {
+    size: {
+      xs: {
+        label: '',
+        item: '',
+        itemLeadingIcon: '',
+        itemLeadingAvatarSize: '',
+      },
+      sm: {
+        label: '',
+        item: '',
+        itemLeadingIcon: '',
+        itemLeadingAvatarSize: '',
+      },
+      md: {
+        label: '',
+        item: '',
+        itemLeadingIcon: '',
+        itemLeadingAvatarSize: '',
+      },
+      lg: {
+        label: '',
+        item: '',
+        itemLeadingIcon: '',
+        itemLeadingAvatarSize: '',
+      },
+      xl: {
+        label: '',
+        item: '',
+        itemLeadingIcon: '',
+        itemLeadingAvatarSize: '',
+      },
+    },
     active: {
       true: {
         item: '',
@@ -25,5 +57,9 @@ export default {
         itemLeadingIcon: '',
       },
     },
+  },
+
+  defaultVariants: {
+    size: 'md',
   },
 };

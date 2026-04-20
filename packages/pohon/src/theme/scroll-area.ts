@@ -1,21 +1,21 @@
 export default {
   slots: {
-    root: 'relative',
-    viewport: 'relative flex',
-    item: ''
+    root: '',
+    viewport: '',
+    item: '',
   },
   variants: {
     orientation: {
       vertical: {
-        root: 'overflow-y-auto overflow-x-hidden',
-        viewport: 'flex-col',
-        item: ''
+        root: '',
+        viewport: '',
+        item: '',
       },
       horizontal: {
-        root: 'overflow-x-auto overflow-y-hidden',
-        viewport: 'flex-row',
-        item: ''
-      }
-    }
-  }
-}
+        root: '',
+        viewport: '',
+        item: '',
+      },
+    },
+  },
+};

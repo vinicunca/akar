@@ -2,14 +2,14 @@ export default {
   slots: {
     base: '',
     label: '',
-    trailing: 'hidden lg:flex items-center gap-0.5 ms-auto'
+    trailing: '',
   },
   variants: {
     collapsed: {
       true: {
-        label: 'hidden',
-        trailing: 'lg:hidden'
-      }
-    }
-  }
-}
+        label: '',
+        trailing: '',
+      },
+    },
+  },
+};

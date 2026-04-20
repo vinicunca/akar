@@ -1,9 +1,9 @@
 export default {
-  base: 'lg:hidden',
+  base: '',
   variants: {
     side: {
       left: '',
-      right: ''
-    }
-  }
-}
+      right: '',
+    },
+  },
+};

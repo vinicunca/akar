@@ -11,10 +11,13 @@ export default (options: Required<PohonModuleOptions>) => {
 
     variants: {
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [color, {
-          range: '',
-          thumb: '',
-        }])),
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [
+          color,
+          {
+            range: '',
+            thumb: '',
+          },
+        ])),
         neutral: {
           range: '',
           thumb: '',

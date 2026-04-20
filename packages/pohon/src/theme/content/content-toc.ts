@@ -18,6 +18,8 @@ export default (options: Required<PohonModuleOptions>) => ({
     link: '',
     linkText: '',
     indicator: '',
+    indicatorLine: '',
+    indicatorActive: '',
   },
   variants: {
     color: {
@@ -28,11 +30,11 @@ export default (options: Required<PohonModuleOptions>) => ({
       ...Object.fromEntries((options.theme.colors || []).map((color: string) => [
         color,
         {
-          indicator: '',
+          indicatorActive: '',
         },
       ])),
       neutral: {
-        indicator: '',
+        indicatorActive: '',
       },
     },
     active: {
@@ -41,10 +43,11 @@ export default (options: Required<PohonModuleOptions>) => ({
       },
     },
     highlight: {
-      true: {
-        list: '',
-        item: '',
-      },
+      true: '',
+    },
+    highlightVariant: {
+      straight: '',
+      circuit: '',
     },
     body: {
       true: {
@@ -52,8 +55,12 @@ export default (options: Required<PohonModuleOptions>) => ({
       },
     },
   },
+
+  compoundVariants: [],
+
   defaultVariants: {
     color: 'primary',
     highlightColor: 'primary',
+    highlightVariant: 'straight',
   },
 });

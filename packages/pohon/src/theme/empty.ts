@@ -60,8 +60,9 @@ export default {
       },
     },
   },
+
   defaultVariants: {
-    variant: 'outline',
-    size: 'md',
+    variant: '',
+    size: '',
   },
 };

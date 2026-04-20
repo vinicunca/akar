@@ -66,7 +66,7 @@ export default (options: Required<PohonModuleOptions>) => {
         none: '',
       },
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
         neutral: '',
       },
       leading: {
@@ -80,6 +80,9 @@ export default (options: Required<PohonModuleOptions>) => {
       },
       highlight: {
         true: '',
+      },
+      fixed: {
+        false: '',
       },
       type: {
         file: '',

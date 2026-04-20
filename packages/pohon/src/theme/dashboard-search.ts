@@ -1,23 +1,23 @@
 export default {
   slots: {
     modal: '',
-    input: ''
+    input: '',
   },
   variants: {
     fullscreen: {
       false: {
-        modal: 'sm:max-w-3xl h-full sm:h-[28rem]'
-      }
+        modal: '',
+      },
     },
     size: {
       xs: {},
       sm: {},
       md: {},
       lg: {},
-      xl: {}
-    }
+      xl: {},
+    },
   },
   defaultVariants: {
-    size: 'md'
-  }
-}
+    size: '',
+  },
+};

@@ -4,4 +4,18 @@ export default {
     content: '',
     base: '',
   },
+
+  variants: {
+    placeholderMode: {
+      firstLine: {
+        base: '',
+      },
+      everyLine: {
+        base: '',
+      },
+    },
+  },
+  defaultVariants: {
+    placeholderMode: '',
+  },
 };

@@ -7,6 +7,7 @@ export default {
       right: '',
     },
   },
+
   defaultVariants: {
     align: 'left',
   },

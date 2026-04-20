@@ -15,7 +15,7 @@ export default (options: Required<PohonModuleOptions>) => {
 
     variants: {
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [
           color,
           {
             base: '',

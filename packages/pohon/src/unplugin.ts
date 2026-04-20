@@ -1,11 +1,14 @@
 import type * as pohon from '#build/pohon';
+import type { RuntimeOptions } from '@nuxt/icon';
 import type { colors } from 'unocss/preset-mini';
 import type { UnpluginOptions } from 'unplugin';
 import type { Options as AutoImportOptions } from 'unplugin-auto-import/types';
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types';
-import type { PohonModuleOptions, UvConfig } from './module';
+import type { PohonModuleOptions } from './module';
+import type { UvConfig } from './runtime/types/uv';
 import type icons from './theme/icons';
 import { fileURLToPath } from 'node:url';
+
 import { defu } from 'defu';
 import { normalize } from 'pathe';
 import { createUnplugin } from 'unplugin';
@@ -17,7 +20,7 @@ import PluginsPlugin from './plugins/plugins';
 import TemplatePlugin from './plugins/templates';
 import { DEFAULT_OPTIONS, getDefaultPohonConfig, resolveColors } from './utils/defaults';
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone';
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive';
 type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {});
 
 type AppConfigPohon = {
@@ -27,29 +30,37 @@ type AppConfigPohon = {
   prefix?: string;
 } & UvConfig<typeof pohon>;
 
-export interface PohonOptions extends Omit<PohonModuleOptions, 'fonts' | 'colorMode'> {
+export interface PohonOptions extends Omit<PohonModuleOptions, 'fonts' | 'colorMode' | 'content' | 'experimental'> {
   /** Whether to generate declaration files for auto-imported components. */
   dts?: boolean;
   pohon?: AppConfigPohon;
   /**
+   * Default props for the `Icon` component
+   */
+  icon?: Pick<RuntimeOptions, 'customize' | 'size' | 'mode'>;
+  /**
    * Enable or disable `@vueuse/core` color-mode integration
    * @defaultValue `true`
+   * @see https://akar.vinicunca.dev/docs/getting-started/installation/vue#colormode
    */
   colorMode?: boolean;
   /**
-   * Override options for `unplugin-auto-import`
+   * Override options for `unplugin-auto-import`, or `false` to disable composable auto-imports
+   * @see https://akar.vinicunca.dev/docs/getting-started/installation/vue#autoimport
    */
-  autoImport?: Partial<AutoImportOptions>;
+  autoImport?: false | Partial<AutoImportOptions>;
   /**
-   * Override options for `unplugin-vue-components`
+   * Override options for `unplugin-vue-components`, or `false` to disable component auto-imports
+   * @see https://akar.vinicunca.dev/docs/getting-started/installation/vue#components
    */
-  components?: Partial<ComponentsOptions>;
+  components?: false | Partial<ComponentsOptions>;
   /**
    * Router integration mode
    * - `true` (default): Use vue-router integration
    * - `false`: Disable routing, use anchor tags
    * - `'inertia'`: Use Inertia.js compatibility layer
    * @defaultValue `true`
+   * @see https://akar.vinicunca.dev/docs/getting-started/installation/vue#router
    */
   router?: boolean | 'inertia';
   /**
@@ -58,7 +69,8 @@ export interface PohonOptions extends Omit<PohonModuleOptions, 'fonts' | 'colorM
    */
   inertia?: boolean;
   /**
-   * Additional packages to scan for components using Pohon UI
+   * Additional packages to scan for components using Nuxt UI
+   * @see https://akar.vinicunca.dev/docs/getting-started/installation/vue#scanpackages
    */
   scanPackages?: Array<string>;
 }
@@ -81,6 +93,7 @@ export const PohonPlugin = createUnplugin<PohonOptions | undefined>((_options = 
     {
       pohon: options.pohon,
       colorMode: options.colorMode,
+      icon: options.icon,
     },
     {
       pohon: getDefaultPohonConfig(options.theme),
@@ -95,15 +108,15 @@ export const PohonPlugin = createUnplugin<PohonOptions | undefined>((_options = 
     TemplatePlugin(options, appConfig),
     AppConfigPlugin(options, appConfig),
     <UnpluginOptions>{
-      name: 'nuxt:ui:plugins-duplication-detection',
+      name: 'nuxt:pohon:plugins-duplication-detection',
       vite: {
         configResolved(config) {
           const plugins = config.plugins || [];
 
-          if (plugins.filter((i) => i.name === 'unplugin-auto-import').length > 1) {
+          if (options.autoImport !== false && plugins.filter((i) => i.name === 'unplugin-auto-import').length > 1) {
             throw new Error('[Pohon] Multiple instances of `unplugin-auto-import` detected. Pohon includes `unplugin-auto-import` already, and you can configure it using `autoImport` option in Pohon module options.');
           }
-          if (plugins.filter((i) => i.name === 'unplugin-vue-components').length > 1) {
+          if (options.components !== false && plugins.filter((i) => i.name === 'unplugin-vue-components').length > 1) {
             throw new Error('[Pohon] Multiple instances of `unplugin-vue-components` detected. Pohon includes `unplugin-vue-components` already, and you can configure it using `components` option in Pohon module options.');
           }
         },

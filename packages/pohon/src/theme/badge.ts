@@ -15,7 +15,7 @@ export default (options: Required<PohonModuleOptions>) => {
     variants: {
       ...fieldGroupVariant,
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
         neutral: '',
       },
       variant: {

@@ -1,33 +1,31 @@
-import type { ModuleOptions } from '../module'
-
-export default (options: Required<ModuleOptions>) => ({
+export default {
   slots: {
-    root: 'relative rounded-sm',
+    root: '',
     wrapper: '',
-    leading: 'inline-flex items-center justify-center',
-    leadingIcon: 'size-5 shrink-0 text-primary',
-    title: 'text-base text-pretty font-semibold text-highlighted',
-    description: 'text-[15px] text-pretty text-muted'
+    leading: '',
+    leadingIcon: '',
+    title: '',
+    description: '',
   },
   variants: {
     orientation: {
       horizontal: {
-        root: 'flex items-start gap-2.5',
-        leading: 'p-0.5'
+        root: '',
+        leading: '',
       },
       vertical: {
-        leading: 'mb-2.5'
-      }
+        leading: '',
+      },
     },
     to: {
       true: {
-        root: ['has-focus-visible:ring-2 has-focus-visible:ring-primary', options.theme.transitions && 'transition']
-      }
+        root: '',
+      },
     },
     title: {
       true: {
-        description: 'mt-1'
-      }
-    }
-  }
-})
+        description: '',
+      },
+    },
+  },
+};

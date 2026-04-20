@@ -1,9 +1,9 @@
 export default {
-  base: 'hidden lg:flex',
+  base: '',
   variants: {
     side: {
       left: '',
-      right: ''
-    }
-  }
-}
+      right: '',
+    },
+  },
+};
