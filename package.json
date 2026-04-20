@@ -45,6 +45,13 @@
       "@commitlint/config-conventional"
     ]
   },
+  "resolutions": {
+    "@nuxt/kit": "^4.4.2",
+    "c12": "^3.3.2",
+    "nitropack": "^2.13.0",
+    "pohon-ui": "workspace:*",
+    "unplugin": "^3.0.0"
+  },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
     "commit-msg": "pnpm commitlint --edit ${1}"
