@@ -1,4 +1,3 @@
-import { isNonNullish } from '@vinicunca/perkakas';
 import { getProp } from './';
 
 function itemHasDescription(item: any, descriptionKey: string): boolean {
@@ -6,7 +5,8 @@ function itemHasDescription(item: any, descriptionKey: string): boolean {
     return false;
   }
   const value = getProp({ object: item, path: descriptionKey });
-  return isNonNullish(value) && value !== '';
+
+  return value !== undefined && value !== null && value !== '';
 }
 
 function getSize(size: 'xs' | 'sm' | 'md' | 'lg' | 'xl', hasDescription: boolean): number {

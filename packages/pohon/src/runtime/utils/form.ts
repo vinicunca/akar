@@ -86,8 +86,9 @@ export function getAtPath<T extends object>(
 }
 
 export function setAtPath<T extends object>(
-  { data, path, value }:
-  { data: T; path: string; value: any },
+  data: T,
+  path: string,
+  value: any,
 ): T {
   if (!path) {
     return Object.assign(data, value);

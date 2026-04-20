@@ -31,32 +31,6 @@ export function getProp(
   return result !== undefined ? result : defaultValue;
 }
 
-/** Nuxt UI–compatible accessor (ported composables use `get` naming). */
-export function get(object: Record<string, any> | undefined, path: Array<string | number> | string, defaultValue?: any): any {
-  return getProp({ object, path, defaultValue });
-}
-
-export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Pick<Data, Keys> {
-  const result = {} as Pick<Data, Keys>;
-
-  for (const key of keys) {
-    result[key] = data[key];
-  }
-
-  return result;
-}
-
-export function omit<Data extends object, Keys extends keyof Data>(data: Data, keys: Keys[]): Omit<Data, Keys> {
-  const result = { ...data };
-
-  for (const key of keys) {
-    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-    delete result[key];
-  }
-
-  return result as Omit<Data, Keys>;
-}
-
 export function setProp(
   { object, path, value }:
   { object: Record<string, any>; path: Array<string | number> | string; value: any },
@@ -82,30 +56,9 @@ export function setProp(
   );
 }
 
-export function mergeClasses(appConfigClass?: string | Array<string>, propClass?: string) {
-  if (!appConfigClass && !propClass) {
-    return '';
-  }
-
-  return [
-    ...(Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass]),
-    propClass,
-  ].filter(Boolean);
-}
-
-export function transformPohon(pohon: any, pohonProp?: any) {
-  return Object.entries(pohon)
-    .reduce(
-      (acc, [key, value]) => {
-        acc[key] = typeof value === 'function' ? value({ class: pohonProp?.[key] }) : value;
-        return acc;
-      },
-      { ...(pohonProp || {}) },
-    );
-}
-
-export function isArrayOfArray<A>(item: Array<A> | Array<Array<A>>): item is Array<Array<A>> {
-  return Array.isArray(item[0]);
+export function looseToNumber(val: any): any {
+  const n = Number.parseFloat(val);
+  return Number.isNaN(n) ? val : n;
 }
 
 export function compare<T>(
@@ -138,16 +91,17 @@ export function getDisplayValue<T extends Array<any>, V>(
     options?: {
       valueKey?: GetItemKeys<T>;
       labelKey?: GetItemKeys<T>;
+      by?: string | ((a: any, b: any) => boolean);
     };
   },
 ): string | undefined {
-  const { valueKey, labelKey } = options;
+  const { valueKey, labelKey, by } = options;
 
   const foundItem = items.find((item) => {
     const itemValue = (typeof item === 'object' && item !== null && valueKey)
       ? getProp({ object: item, path: valueKey as string })
       : item;
-    return compare({ value: itemValue, currentValue: value });
+    return compare({ value: itemValue, currentValue: value, comparator: by });
   });
 
   if (isEmptyish(value) && foundItem) {
@@ -171,9 +125,25 @@ export function getDisplayValue<T extends Array<any>, V>(
   return String(source);
 }
 
-export function looseToNumber(val: any): any {
-  const n = Number.parseFloat(val);
-  return Number.isNaN(n) ? val : n;
+export function isArrayOfArray<
+  A extends Array<any> | Array<Array<any>>,
+>(item: A): item is A extends Array<infer T>
+  ? T extends Array<any>
+    ? Array<T>
+    : never
+  : never {
+  return Array.isArray(item[0]);
+}
+
+export function mergeClasses(appConfigClass?: string | Array<string>, propClass?: string) {
+  if (!appConfigClass && !propClass) {
+    return '';
+  }
+
+  return [
+    ...(Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass]),
+    propClass,
+  ].filter(Boolean);
 }
 
 export function getSlotChildrenText(children: any) {
@@ -188,6 +158,17 @@ export function getSlotChildrenText(children: any) {
 
     return undefined;
   }).join('');
+}
+
+export function transformPohon(pohon: any, pohonProp?: any) {
+  return Object.entries(pohon)
+    .reduce(
+      (acc, [key, value]) => {
+        acc[key] = typeof value === 'function' ? value({ class: pohonProp?.[key] }) : value;
+        return acc;
+      },
+      { ...(pohonProp || {}) },
+    );
 }
 
 export function resolveBaseURL(path?: string, baseURL?: string): string | undefined {

@@ -1,4 +1,4 @@
-import type { UIMessage } from 'ai'
+import type { UIMessage } from 'ai';
 
 /**
  * Extracts and concatenates all text parts from a UIMessage.
@@ -9,16 +9,16 @@ import type { UIMessage } from 'ai'
  */
 export function getTextFromMessage(message: UIMessage) {
   return message.parts
-    .filter(part => part.type === 'text')
-    .map(part => part.text)
-    .join('')
+    .filter((part) => part.type === 'text')
+    .map((part) => part.text)
+    .join('');
 }
 
 /**
  * Checks if a text or reasoning part is currently being streamed.
  */
 export function isPartStreaming(part: { state?: string }): boolean {
-  return part.state === 'streaming'
+  return part.state === 'streaming';
 }
 
 /**
@@ -27,7 +27,7 @@ export function isPartStreaming(part: { state?: string }): boolean {
  * Terminal states are `output-available`, `output-error`, and `output-denied`.
  */
 export function isToolStreaming(part: { state: string }): boolean {
-  return !['output-available', 'output-error', 'output-denied'].includes(part.state)
+  return !['output-available', 'output-error', 'output-denied'].includes(part.state);
 }
 
 /**
@@ -38,15 +38,23 @@ export function isToolStreaming(part: { state: string }): boolean {
 export function isReasoningStreaming(
   message: UIMessage,
   partIndex: number,
-  chat: { status: string, messages: UIMessage[] }
+  chat: { status: string; messages: Array<UIMessage> },
 ): boolean {
-  if (chat.status !== 'streaming') return false
-  if (message.id !== chat.messages.at(-1)?.id) return false
-  if (partIndex < 0 || partIndex >= message.parts.length) return false
-
-  const partType = message.parts[partIndex]!.type
-  for (let i = partIndex + 1; i < message.parts.length; i++) {
-    if (message.parts[i]!.type !== partType) return false
+  if (chat.status !== 'streaming') {
+    return false;
   }
-  return true
+  if (message.id !== chat.messages.at(-1)?.id) {
+    return false;
+  }
+  if (partIndex < 0 || partIndex >= message.parts.length) {
+    return false;
+  }
+
+  const partType = message.parts[partIndex]!.type;
+  for (let i = partIndex + 1; i < message.parts.length; i++) {
+    if (message.parts[i]!.type !== partType) {
+      return false;
+    }
+  }
+  return true;
 }

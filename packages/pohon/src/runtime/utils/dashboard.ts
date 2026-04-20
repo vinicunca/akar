@@ -1,4 +1,8 @@
 /** Height of the layout content component */
+import type { Ref } from 'vue';
+import type { UseResizableProps } from '../composables/use-resizable';
+import { createContext } from 'reka-ui';
+
 export const CSS_VARIABLE_LAYOUT_CONTENT_HEIGHT = '--pohon-content-height';
 /** Width of the layout content component */
 export const CSS_VARIABLE_LAYOUT_CONTENT_WIDTH = '--pohon-content-width';
@@ -21,3 +25,13 @@ export const P_DASHBOARD_LAYOUT = {
 } as const;
 
 export type PDashboardLayoutType = (typeof P_DASHBOARD_LAYOUT)[keyof typeof P_DASHBOARD_LAYOUT];
+
+export interface DashboardContext extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
+  sidebarOpen?: Ref<boolean>;
+  sidebarCollapsed?: Ref<boolean>;
+  toggleSearch?: () => void;
+  toggleSidebar?: () => void;
+  collapseSidebar?: (collapsed: boolean) => void;
+}
+
+export const [useDashboard, provideDashboardContext] = createContext<DashboardContext>('DashboardGroup');
