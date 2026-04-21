@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/field';
 
@@ -16,7 +17,7 @@ export interface ProseFieldProps {
    */
   name?: string;
   /**
-   * Expected type of the field’s value
+   * Expected type of the field's value
    */
   type?: string;
   /**
@@ -32,7 +33,7 @@ export interface ProseFieldProps {
 }
 
 export interface ProseFieldSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/code-preview';
 
@@ -11,8 +12,8 @@ export interface ProseCodePreviewProps {
 }
 
 export interface ProseCodePreviewSlots {
-  default: (props?: object) => any;
-  code: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
+  code: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -26,7 +27,7 @@ const props = defineProps<ProseCodePreviewProps>();
 const slots = defineSlots<ProseCodePreviewSlots>();
 
 const appConfig = useAppConfig() as ProseCodePreview['AppConfig'];
-const pohonProp = useComponentPohon('prose.code-preview', props);
+const pohonProp = useComponentPohon('prose.codePreview', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.codePreview || {}) })({ code: !!slots.code }));
 </script>

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PTabsProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/tabs';
@@ -25,7 +26,7 @@ export interface ProseTabsProps {
 }
 
 export interface ProseTabsSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -37,12 +38,9 @@ import { transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
 import PTabs from '../tabs.vue';
 
-const props = withDefaults(
-  defineProps<ProseTabsProps>(),
-  {
-    defaultValue: '0',
-  },
-);
+const props = withDefaults(defineProps<ProseTabsProps>(), {
+  defaultValue: '0',
+});
 const slots = defineSlots<ProseTabsSlots>();
 
 const model = defineModel<string>();

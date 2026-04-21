@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/field-group';
 
@@ -16,7 +17,7 @@ export interface ProseFieldGroupProps {
 }
 
 export interface ProseFieldGroupSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -31,7 +32,7 @@ const props = defineProps<ProseFieldGroupProps>();
 defineSlots<ProseFieldGroupSlots>();
 
 const appConfig = useAppConfig() as ProseFieldGroup['AppConfig'];
-const pohonProp = useComponentPohon('prose.field-group', props);
+const pohonProp = useComponentPohon('prose.fieldGroup', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.fieldGroup || {}) }));
 </script>

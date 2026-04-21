@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/tr';
 
@@ -11,7 +12,7 @@ export interface ProseTrProps {
 }
 
 export interface ProseTrSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -27,12 +28,7 @@ defineSlots<ProseTrSlots>();
 const appConfig = useAppConfig() as ProseTr['AppConfig'];
 const pohonProp = useComponentPohon('prose.tr', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.prose?.tr || {}),
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.tr || {}) }));
 </script>
 
 <template>

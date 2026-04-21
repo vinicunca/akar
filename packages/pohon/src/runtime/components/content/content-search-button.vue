@@ -51,7 +51,7 @@ export interface PContentSearchButtonProps extends Omit<PButtonProps, PLinkProps
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { isBoolean, isString, omit } from '@vinicunca/perkakas';
+import { isBoolean, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -59,7 +59,7 @@ import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useContentSearch } from '../../composables/use-content-search';
 import { useLocale } from '../../composables/use-locale';
-import { transformPohon } from '../../utils';
+import { omit, transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
 import PButton from '../button.vue';
 import PKbd from '../kbd.vue';
@@ -115,13 +115,12 @@ const pohon = computed(() =>
         ...buttonProps,
         ...(collapsed ? {
           'square': true,
-          'label': undefined,
           'aria-label': label || t('contentSearchButton.label'),
         } : {}),
         ...$attrs,
       }"
       :class="pohon.base({ class: [pohonProp?.base, props.class] })"
-      :pohon="transformPohon(pohon, props.pohon)"
+      :pohon="transformPohon(pohon, pohonProp)"
       @click="open = true"
     >
       <template
@@ -134,10 +133,11 @@ const pohon = computed(() =>
         />
       </template>
 
-      <template
-        #trailing="{ pohon: pohonProxy }"
-      >
-        <div :class="pohon.trailing({ class: pohonProp?.trailing })">
+      <template #trailing="{ pohon: pohonProxy }">
+        <div
+          data-slot="trailing"
+          :class="pohon.trailing({ class: pohonProp?.trailing })"
+        >
           <slot
             name="trailing"
             :pohon="pohonProxy"

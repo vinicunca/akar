@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/code-tree';
 
@@ -43,7 +44,7 @@ export interface ProseCodeTreeEmits {
 }
 
 export interface ProseCodeTreeSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -64,7 +65,7 @@ const emits = defineEmits<ProseCodeTreeEmits>();
 const slots = defineSlots<ProseCodeTreeSlots>();
 
 const appConfig = useAppConfig() as ProseCodeTree['AppConfig'];
-const pohonProp = useComponentPohon('prose.code-tree', props);
+const pohonProp = useComponentPohon('prose.codeTree', props);
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items: Array<TreeNode>; level: number }>();
 
@@ -79,7 +80,6 @@ watch(model, (value) => {
     emits('update:modelValue', value?.path);
   }
 });
-
 watch(() => props.modelValue, (value) => {
   if (value === model.value?.path) {
     return;
@@ -94,7 +94,6 @@ watch(() => props.modelValue, (value) => {
     }
   }
 });
-
 const rerenderCount = ref(1);
 
 const flatItems = computed<Array<TreeItem>>(() => {
@@ -131,7 +130,7 @@ function buildTree(items: Array<{ label: string }>): Array<TreeNode> {
 
   const sort = (nodes: Array<TreeNode>): Array<TreeNode> =>
     nodes.sort((a, b) =>
-      // eslint-disable-next-line no-nested-ternary, sonar/no-nested-conditional
+      // eslint-disable-next-line no-nested-ternary
       !!a.children === !!b.children ? a.label.localeCompare(b.label) : b.children ? 1 : -1,
     ).map((n) => ({ ...n, children: n.children && sort(n.children) }));
 
@@ -172,12 +171,20 @@ function getExpandedPaths(path?: string) {
 
 const expanded = ref(getExpandedPaths(model.value?.path));
 
-// Re-expand all when flatItems change and expandAll is true
-watch(flatItems, () => {
-  if (props.expandAll) {
+// Re-expand all when flatItems actually change and expandAll is true
+watch(flatItems, (newItems, oldItems) => {
+  if (!props.expandAll) {
+    return;
+  }
+
+  // Compare labels to detect actual changes (not just re-renders from rerenderCount)
+  const newLabels = newItems.map((i) => i.label).join('\n');
+  const oldLabels = oldItems?.map((i) => i.label).join('\n') ?? '';
+
+  if (newLabels !== oldLabels) {
     expanded.value = getExpandedPaths();
   }
-}, { immediate: true });
+});
 
 watch(model, (value) => {
   const item = flatItems.value.find((item) => value?.path === item.label);
@@ -253,6 +260,7 @@ onBeforeUpdate(() => rerenderCount.value++);
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <ATreeRoot
+      v-model="model"
       v-model:expanded="expanded"
       :class="pohon.list({ class: pohonProp?.list })"
       :items="items"

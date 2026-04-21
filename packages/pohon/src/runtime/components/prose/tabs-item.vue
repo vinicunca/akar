@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/tabs-item';
 
@@ -13,7 +14,7 @@ export interface ProseTabsItemProps {
 }
 
 export interface ProseTabsItemSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -27,7 +28,7 @@ const props = defineProps<ProseTabsItemProps>();
 defineSlots<ProseTabsItemSlots>();
 
 const appConfig = useAppConfig() as ProseTabsItem['AppConfig'];
-const pohonProp = useComponentPohon('prose.tabs-item', props);
+const pohonProp = useComponentPohon('prose.tabsItem', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.tabsItem || {}) }));
 </script>

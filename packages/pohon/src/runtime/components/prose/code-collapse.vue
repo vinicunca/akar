@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PIconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/code-collapse';
@@ -32,7 +33,7 @@ export interface ProseCodeCollapseProps {
 }
 
 export interface ProseCodeCollapseSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -51,7 +52,7 @@ const open = defineModel<boolean>('open', { default: false });
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as ProseCodeCollapse['AppConfig'];
-const pohonProp = useComponentPohon('prose.code-collapse', props);
+const pohonProp = useComponentPohon('prose.codeCollapse', props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.codeCollapse || {}) })({
   open: open.value,

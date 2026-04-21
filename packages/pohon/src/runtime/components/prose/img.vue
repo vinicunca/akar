@@ -21,6 +21,7 @@ export interface ProseImgProps {
 </script>
 
 <script setup lang="ts">
+import ImageComponent from '#build/pohon-image-component';
 import { useAppConfig, useRuntimeConfig } from '#imports';
 import { createReusableTemplate, useEventListener } from '@vueuse/core';
 import { ADialogPortal, ADialogRoot, ADialogTrigger } from 'akar';
@@ -47,6 +48,7 @@ const open = ref(false);
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.img || {}) })({
   zoom: props.zoom,
   open: open.value,
+  width: !!props.width,
 }));
 
 const refinedSrc = computed(() => resolveBaseURL(props.src, useRuntimeConfig().app.baseURL));
@@ -62,23 +64,25 @@ if (props.zoom) {
 
 <template>
   <DefineImageTemplate>
-    <img
+    <component
+      :is="ImageComponent"
       :src="refinedSrc"
       :alt="alt"
       :width="width"
       :height="height"
       v-bind="$attrs"
       :class="pohon.base({ class: [pohonProp?.base, props.class] })"
-    >
+    />
   </DefineImageTemplate>
 
   <DefineZoomedImageTemplate>
-    <img
+    <component
+      :is="ImageComponent"
       :src="refinedSrc"
       :alt="alt"
       v-bind="$attrs"
       :class="pohon.zoomedImage({ class: [pohonProp?.zoomedImage] })"
-    >
+    />
   </DefineZoomedImageTemplate>
 
   <ADialogRoot

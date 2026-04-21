@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/accordion-item';
 
@@ -13,7 +14,7 @@ export interface ProseAccordionItemProps {
 }
 
 export interface ProseAccordionItemSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -27,14 +28,9 @@ const props = defineProps<ProseAccordionItemProps>();
 defineSlots<ProseAccordionItemSlots>();
 
 const appConfig = useAppConfig() as ProseAccordionItem['AppConfig'];
-const pohonProp = useComponentPohon('prose.accordion-item', props);
+const pohonProp = useComponentPohon('prose.accordionItem', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.prose?.accordionItem || {}),
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.accordionItem || {}) }));
 </script>
 
 <template>

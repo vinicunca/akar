@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PIconProps, PLinkProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/card';
@@ -21,14 +22,13 @@ export interface ProseCardProps {
 }
 
 export interface ProseCardSlots {
-  default: (props?: object) => any;
-  title: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
+  title: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
@@ -49,13 +49,13 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
   title: !!props.title,
 }));
 
-const target = computed(() => props.target || (!!props.to && isString(props.to) && props.to.startsWith('http') ? '_blank' : undefined));
+const target = computed(() => props.target || (!!props.to && typeof props.to === 'string' && props.to.startsWith('http') ? '_blank' : undefined));
 
 const ariaLabel = computed(() => (props.title || 'Card link').trim());
 </script>
 
 <template>
-  <div :class="pohon.base({ class: props.class })">
+  <div :class="pohon.base({ class: [pohonProp?.base, props.class] })">
     <PLink
       v-if="to"
       :aria-label="ariaLabel"

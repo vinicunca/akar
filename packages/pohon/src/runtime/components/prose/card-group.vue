@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/card-group';
 
@@ -11,7 +12,7 @@ export interface ProseCardGroupProps {
 }
 
 export interface ProseCardGroupSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -25,14 +26,9 @@ const props = defineProps<ProseCardGroupProps>();
 defineSlots<ProseCardGroupSlots>();
 
 const appConfig = useAppConfig() as ProseCardGroup['AppConfig'];
-const pohonProp = useComponentPohon('prose.card-group', props);
+const pohonProp = useComponentPohon('prose.cardGroup', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.prose?.cardGroup || {}),
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.cardGroup || {}) }));
 </script>
 
 <template>

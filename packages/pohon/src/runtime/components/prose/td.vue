@@ -1,18 +1,19 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/td';
 
 type ProseTd = ComponentConfig<typeof theme, AppConfig, 'td', 'pohon.prose'>;
 
 export interface ProseTdProps {
-  class?: any;
   align?: 'left' | 'center' | 'right';
+  class?: any;
   pohon?: { base?: any };
 }
 
 export interface ProseTdSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -32,7 +33,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 </script>
 
 <template>
-  <td :class="pohon({ class: [pohonProp?.base, props.class], align: props.align })">
+  <td :class="pohon({ align: props.align, class: [pohonProp?.base, props.class] })">
     <slot />
   </td>
 </template>

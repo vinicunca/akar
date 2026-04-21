@@ -3,6 +3,7 @@
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
+import type { VNode } from 'vue';
 import type {
   PButtonProps,
   PCommandPaletteGroup,
@@ -17,7 +18,6 @@ import type {
 } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-search';
-import { defineShortcuts } from '../../composables/define-shortcuts';
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>;
 
@@ -49,6 +49,10 @@ export interface PContentSearchItem extends Omit<PLinkProps, 'custom'>, PCommand
 
 export interface PContentSearchProps<T extends PContentSearchLink = PContentSearchLink> extends Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
   /**
+   * @defaultValue 'md'
+   */
+  size?: ContentSearch['variants']['size'];
+  /**
    * The icon displayed in the input.
    * @defaultValue appConfig.pohon.icons.search
    * @IconifyIcon
@@ -73,7 +77,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
    */
   loadingIcon?: PIconProps['name'];
   /**
-   * Display a close button in the input (useful when inside a Dialog for example).
+   * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue true
@@ -86,7 +90,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
    */
   closeIcon?: PIconProps['name'];
   /**
-   * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://akara.vinicunca.dev/pohon/composables/define-shortcuts))
+   * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://pohon.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
    */
   shortcut?: string;
@@ -97,7 +101,7 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
   groups?: Array<PCommandPaletteGroup<PContentSearchItem>>;
   files?: Array<PContentSearchFile>;
   /**
-   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://akara.vinicunca.dev/pohon/components/command-palette).
+   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://pohon.nuxt.com/docs/components/command-palette).
    * @defaultValue { fuseOptions: { includeMatches: true } }
    */
   fuse?: UseFuseOptions<T>;
@@ -110,15 +114,14 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
   pohon?: ContentSearch['slots'] & PCommandPaletteProps<PCommandPaletteGroup<PContentSearchItem>, PContentSearchItem>['pohon'];
 }
 
-export type PContentSearchSlots = PCommandPaletteSlots<PCommandPaletteGroup<PContentSearchItem>, PContentSearchItem> & {
-  content: (props: { close: () => void }) => any;
+export type PContentSearchSlots = PCommandPaletteSlots<PContentSearchItem> & {
+  content?: (props: { close: () => void }) => Array<VNode>;
 };
 
 </script>
 
 <script setup lang="ts" generic="T extends PContentSearchLink">
-import { useAppConfig, useColorMode } from '#imports';
-import { omit } from '@vinicunca/perkakas';
+import { defineShortcuts, useAppConfig, useColorMode } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -126,7 +129,7 @@ import { computed, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useContentSearch } from '../../composables/use-content-search';
 import { useLocale } from '../../composables/use-locale';
-import { transformPohon } from '../../utils';
+import { omit, transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
 import PCommandPalette from '../command-palette.vue';
 import PDialog from '../dialog.vue';
@@ -154,6 +157,7 @@ const pohonProp = useComponentPohon('contentSearch', props);
 const commandPaletteProps = useForwardProps(
   reactivePick(
     props,
+    'size',
     'icon',
     'placeholder',
     'autofocus',
@@ -192,10 +196,14 @@ const pohon = computed(() =>
   uv({
     extend: uv(theme),
     ...(appConfig.pohon?.contentSearch || {}),
-  })({
+  },
+  )({
+    size: props.size,
     fullscreen: props.fullscreen,
   }),
 );
+
+const commandPaletteRef = useTemplateRef('commandPaletteRef');
 
 const mappedLinksItems = computed(() => {
   if (!props.links?.length) {
@@ -207,16 +215,14 @@ const mappedLinksItems = computed(() => {
     suffix: link.description,
     description: undefined,
     icon: link.icon || appConfig.pohon.icons.file,
-  }, ...(
-    link.children?.map((child) => ({
-      ...child,
-      prefix: `${link.label} >`,
-      suffix: child.description,
-      description: undefined,
-      icon: link.icon || appConfig.pohon.icons.file,
-      children: undefined,
-    })) || []
-  )]);
+    children: undefined,
+  }, ...(link.children?.map((child) => ({
+    ...child,
+    prefix: `${link.label} >`,
+    suffix: child.description,
+    description: undefined,
+    icon: child.icon || link.icon || appConfig.pohon.icons.file,
+  })) || [])]);
 });
 
 const mappedNavigationGroups = computed(() => {
@@ -311,8 +317,6 @@ defineShortcuts({
   },
 });
 
-const commandPaletteRef = useTemplateRef('commandPaletteRef');
-
 defineExpose({
   commandPaletteRef,
 });
@@ -324,7 +328,8 @@ defineExpose({
     :title="title || t('contentSearch.title')"
     :description="description || t('contentSearch.description')"
     v-bind="dialogProps"
-    :class="pohon.dialog({ class: [pohonProp?.dialog, props.class] })"
+    data-slot="modal"
+    :class="pohon.modal({ class: [pohonProp?.modal, props.class] })"
   >
     <template #content="contentData">
       <slot
@@ -337,7 +342,8 @@ defineExpose({
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
-          :pohon="transformPohon(omit(pohon, ['dialog']), props.pohon)"
+          :input="{ fixed: true }"
+          :pohon="transformPohon(omit(pohon, ['modal']), pohonProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >

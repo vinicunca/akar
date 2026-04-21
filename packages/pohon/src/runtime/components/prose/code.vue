@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/code';
 
@@ -16,7 +17,7 @@ export interface ProseCodeProps {
 }
 
 export interface ProseCodeSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -36,7 +37,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 </script>
 
 <template>
-  <code :class="pohon({ class: [pohonProp?.base, props.class] })">
+  <code :class="pohon({ class: [pohonProp?.base, (props.class || '').split(',').join(' ')], color: props.color })">
     <slot />
   </code>
 </template>

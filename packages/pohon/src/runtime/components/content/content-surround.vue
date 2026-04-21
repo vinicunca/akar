@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
-import type { PropType } from 'vue';
+import type { PropType, VNode } from 'vue';
 import type { PIconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-surround';
@@ -41,13 +41,13 @@ export interface PContentSurroundProps<T extends PContentSurroundLink = PContent
   pohon?: ContentSurround['slots'];
 }
 
-type SlotProps<T> = (props: { link: T; pohon: ContentSurround['pohon'] }) => any;
+type SlotProps<T> = (props: { link: T; pohon: ContentSurround['pohon'] }) => Array<VNode>;
 
 export interface PContentSurroundSlots<T extends PContentSurroundLink = PContentSurroundLink> {
-  'link': SlotProps<T>;
-  'link-leading': SlotProps<T>;
-  'link-title': SlotProps<T>;
-  'link-description': SlotProps<T>;
+  'link'?: SlotProps<T>;
+  'link-leading'?: SlotProps<T>;
+  'link-title'?: SlotProps<T>;
+  'link-description'?: SlotProps<T>;
 }
 </script>
 
@@ -57,6 +57,7 @@ import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
+import { useLocale } from '../../composables/use-locale';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
 import PLink from '../link.vue';
@@ -66,6 +67,7 @@ defineOptions({ inheritAttrs: false });
 const props = defineProps<PContentSurroundProps<T>>();
 defineSlots<PContentSurroundSlots<T>>();
 
+const { dir } = useLocale();
 const appConfig = useAppConfig() as ContentSurround['AppConfig'];
 const pohonProp = useComponentPohon('contentSurround', props);
 
@@ -86,6 +88,9 @@ const pohon = computed(() =>
     ...(appConfig.pohon?.contentSurround || {}),
   })(),
 );
+
+const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.arrowRight : appConfig.pohon.icons.arrowLeft));
+const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.arrowLeft : appConfig.pohon.icons.arrowRight));
 </script>
 
 <template>
@@ -94,8 +99,8 @@ const pohon = computed(() =>
       v-if="link"
       :to="link.path"
       raw
+      data-slot="link"
       :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], direction })"
-      data-pohon="content-surround-link"
     >
       <slot
         name="link"
@@ -103,8 +108,8 @@ const pohon = computed(() =>
         :pohon="pohon"
       >
         <div
+          data-slot="linkLeading"
           :class="pohon.linkLeading({ class: [pohonProp?.linkLeading, link.pohon?.linkLeading] })"
-          data-pohon="content-surround-link-leading"
         >
           <slot
             name="link-leading"
@@ -113,15 +118,15 @@ const pohon = computed(() =>
           >
             <PIcon
               :name="link.icon || icon"
+              data-slot="linkLeadingIcon"
               :class="pohon.linkLeadingIcon({ class: [pohonProp?.linkLeadingIcon, link.pohon?.linkLeadingIcon], direction })"
-              data-pohon="content-surround-link-leading-icon"
             />
           </slot>
         </div>
 
         <p
+          data-slot="linkTitle"
           :class="pohon.linkTitle({ class: [pohonProp?.linkTitle, link.pohon?.linkTitle] })"
-          data-pohon="content-surround-link-title"
         >
           <slot
             name="link-title"
@@ -133,8 +138,8 @@ const pohon = computed(() =>
         </p>
 
         <p
+          data-slot="linkDescription"
           :class="pohon.linkDescription({ class: [pohonProp?.linkDescription, link.pohon?.linkDescription] })"
-          data-pohon="content-surround-link-description"
         >
           <slot
             name="link-description"
@@ -148,7 +153,7 @@ const pohon = computed(() =>
     </PLink>
     <span
       v-else
-      class="hidden lg:block"
+      class="hidden sm:block"
     >&nbsp;</span>
   </DefineLinkTemplate>
 
@@ -156,17 +161,17 @@ const pohon = computed(() =>
     v-if="surround"
     :as="as"
     v-bind="$attrs"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="content-surround-root"
   >
     <ReuseLinkTemplate
       :link="surround[0]"
-      :icon="prevIcon || appConfig.pohon.icons.arrowLeft"
+      :icon="prevIcon"
       direction="left"
     />
     <ReuseLinkTemplate
       :link="surround[1]"
-      :icon="nextIcon || appConfig.pohon.icons.arrowRight"
+      :icon="nextIcon"
       direction="right"
     />
   </APrimitive>

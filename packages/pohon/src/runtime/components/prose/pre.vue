@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PIconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/pre';
@@ -19,14 +20,14 @@ export interface ProsePreProps {
 }
 
 export interface ProsePreSlots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { useClipboard } from '@vueuse/core';
-import { computed } from 'vue';
+import { computed, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { uv } from '../../utils/uv';
@@ -41,7 +42,15 @@ const { copy, copied } = useClipboard();
 const appConfig = useAppConfig() as ProsePre['AppConfig'];
 const pohonProp = useComponentPohon('prose.pre', props);
 
+const baseRef = useTemplateRef('baseRef');
+
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.pre || {}) })());
+
+function copyCode() {
+  const code = props.code ?? baseRef.value?.textContent ?? '';
+
+  copy(code);
+}
 </script>
 
 <template>
@@ -67,25 +76,13 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
       :aria-label="t('prose.pre.copy')"
       :class="pohon.copy({ class: pohonProp?.copy })"
       tabindex="-1"
-      @click="copy(props.code || '')"
+      @click="copyCode"
     />
 
     <pre
+      ref="baseRef"
       :class="pohon.base({ class: [pohonProp?.base, props.class] })"
       v-bind="$attrs"
     ><slot /></pre>
   </div>
 </template>
-
-<style lang="postcss">
-.shiki span.line {
-  display: block;
-}
-
-.shiki span.line.highlight {
-  margin: 0 -16px;
-  padding: 0 16px;
-
-  @apply bg-slate-700/50;
-}
-</style>

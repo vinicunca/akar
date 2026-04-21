@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/h-2';
 
@@ -12,7 +13,7 @@ export interface ProseH2Props {
 }
 
 export interface ProseH2Slots {
-  default: (props?: object) => any;
+  default: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -28,7 +29,6 @@ defineSlots<ProseH2Slots>();
 
 const appConfig = useAppConfig() as ProseH2['AppConfig'];
 const pohonProp = useComponentPohon('prose.h2', props);
-
 const { headings } = useRuntimeConfig().public?.mdc || {};
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.h2 || {}) })());
@@ -39,7 +39,7 @@ const generate = computed(() => props.id && typeof headings?.anchorLinks === 'ob
 <template>
   <h2
     :id="id"
-    :class="pohon.base({ class: props.class })"
+    :class="pohon.base({ class: [pohonProp?.base, props.class] })"
   >
     <a
       v-if="id && generate"

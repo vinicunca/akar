@@ -2,10 +2,10 @@
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
 import type { AAccordionRootEmits, AAccordionRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { PBadgeProps, PIconProps, PLinkProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-navigation';
-import { isNumber, isString } from '@vinicunca/perkakas';
 
 type ContentNavigation = ComponentConfig<typeof theme, AppConfig, 'contentNavigation'>;
 
@@ -29,7 +29,7 @@ export interface PContentNavigationLink extends ContentNavigationItem {
   defaultOpen?: boolean;
   active?: boolean;
   class?: any;
-  pohon?: Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>;
+  pohon?: Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingIcon' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>;
 }
 
 export interface PContentNavigationProps<T extends PContentNavigationLink = PContentNavigationLink> extends Pick<AAccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'> {
@@ -81,18 +81,19 @@ export interface PContentNavigationProps<T extends PContentNavigationLink = PCon
 
 export interface PContentNavigationEmits extends AAccordionRootEmits {}
 
-type SlotProps<T> = (props: { link: T; active?: boolean; pohon: ContentNavigation['pohon'] }) => any;
+type SlotProps<T> = (props: { link: T; active: boolean; pohon: ContentNavigation['pohon'] }) => Array<VNode>;
 
 export interface PContentNavigationSlots<T extends PContentNavigationLink = PContentNavigationLink> {
-  'link': SlotProps<T>;
-  'link-leading': SlotProps<T>;
-  'link-title': SlotProps<T>;
-  'link-trailing': SlotProps<T>;
+  'link'?: SlotProps<T>;
+  'link-leading'?: SlotProps<T>;
+  'link-title'?: SlotProps<T>;
+  'link-trailing'?: SlotProps<T>;
 }
 </script>
 
 <script setup lang="ts" generic="T extends PContentNavigationLink">
 import { useAppConfig, useRoute } from '#imports';
+import { isNumber, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AAccordionContent,
@@ -142,7 +143,7 @@ const pohonProp = useComponentPohon('contentNavigation', props);
 const [
   DefineLinkTemplate,
   ReuseLinkTemplate,
-] = createReusableTemplate<{ link: PContentNavigationLink; active?: boolean }>();
+] = createReusableTemplate<{ link: PContentNavigationLink; active: boolean }>();
 
 const pohon = computed(() =>
   uv({
@@ -209,6 +210,7 @@ const defaultValue = computed(() => {
         <PIcon
           v-if="link.icon"
           :name="link.icon"
+          data-slot="linkLeadingIcon"
           :class="pohon.linkLeadingIcon({
             class: [pohonProp?.linkLeadingIcon, link.pohon?.linkLeadingIcon],
             active,
@@ -218,6 +220,7 @@ const defaultValue = computed(() => {
 
       <span
         v-if="link.title || !!slots['link-title']"
+        data-slot="linkTitle"
         :class="pohon.linkTitle({
           class: [pohonProp?.linkTitle, link.pohon?.linkTitle],
           active,
@@ -235,6 +238,7 @@ const defaultValue = computed(() => {
         <PIcon
           v-if="link.target === '_blank'"
           :name="appConfig.pohon.icons.external"
+          data-slot="linkTitleExternalIcon"
           :class="pohon.linkTitleExternalIcon({
             class: [pohonProp?.linkTitleExternalIcon, link.pohon?.linkTitleExternalIcon],
             active,
@@ -244,6 +248,7 @@ const defaultValue = computed(() => {
 
       <span
         v-if="(link.badge || link.badge === 0) || (link.children?.length && !disabled) || link.trailingIcon || !!slots['link-trailing']"
+        data-slot="linkTrailing"
         :class="pohon.linkTrailing({ class: [pohonProp?.linkTrailing, link.pohon?.linkTrailing] })"
       >
         <slot
@@ -253,16 +258,18 @@ const defaultValue = computed(() => {
           :pohon="pohon"
         >
           <PBadge
-            v-if="(link.badge || link.badge === 0)"
+            v-if="link.badge || link.badge === 0"
             color="neutral"
             variant="outline"
             :size="((pohonProp?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(isString(link.badge) || isNumber(link.badge)) ? { label: link.badge } : link.badge"
+            data-slot="linkTrailingBadge"
             :class="pohon.linkTrailingBadge({ class: pohonProp?.linkTrailingBadge })"
           />
           <PIcon
             v-if="link.children?.length && !disabled"
             :name="link.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
+            data-slot="linkTrailingIcon"
             :class="pohon.linkTrailingIcon({
               class: [pohonProp?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
             })"
@@ -270,6 +277,7 @@ const defaultValue = computed(() => {
           <PIcon
             v-else-if="link.trailingIcon"
             :name="link.trailingIcon"
+            data-slot="linkTrailingIcon"
             :class="pohon.linkTrailingIcon({
               class: [pohonProp?.linkTrailingIcon, link.pohon?.linkTrailingIcon],
             })"
@@ -283,6 +291,7 @@ const defaultValue = computed(() => {
     :as="as"
     v-bind="$attrs"
     :as-child="level > 0"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <AAccordionRoot
@@ -299,33 +308,26 @@ const defaultValue = computed(() => {
         <AAccordionItem
           v-if="link.children?.length"
           as="li"
-          :class="pohon.itemWithChildren({
-            class: [pohonProp?.itemWithChildren, link.pohon?.itemWithChildren],
-            level: level > 0,
-          })"
+          :disabled="!!link.disabled"
+          data-slot="itemWithChildren"
+          :class="pohon.itemWithChildren({ class: [pohonProp?.itemWithChildren, link.pohon?.itemWithChildren], level: level > 0 })"
           :value="String(index)"
         >
           <AAccordionTrigger
             as="button"
             :class="[
-              pohon.link({
-                class: [pohonProp?.link, link.pohon?.link, link.class],
-                active: link.active,
-                disabled: !!link.disabled || disabled,
-              }),
-              pohon.trigger({
-                class: [pohonProp?.trigger, link.pohon?.trigger],
-                disabled,
-              }),
+              pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active: link.active, disabled: !!link.disabled || disabled }),
+              pohon.trigger({ class: [pohonProp?.trigger, link.pohon?.trigger], disabled: !!link.disabled || disabled }),
             ]"
           >
             <ReuseLinkTemplate
               :link="link"
-              :active="link.active"
+              :active="link.active || false"
             />
           </AAccordionTrigger>
 
           <AAccordionContent
+            data-slot="content"
             :class="pohon.content({ class: [pohonProp?.content, link.pohon?.content] })"
           >
             <PContentNavigation
@@ -338,7 +340,7 @@ const defaultValue = computed(() => {
               :variant="variant"
               :highlight="highlight"
               :highlight-color="highlightColor"
-              :pohon="props.pohon"
+              :pohon="pohonProp"
             >
               <template
                 v-for="(_, name) in slots"
@@ -355,6 +357,7 @@ const defaultValue = computed(() => {
 
         <li
           v-else
+          data-slot="item"
           :class="pohon.item({ class: [pohonProp?.item, link.pohon?.item], level: level > 0 })"
         >
           <PLink
@@ -364,12 +367,8 @@ const defaultValue = computed(() => {
           >
             <PLinkBase
               v-bind="slotProps"
-              :class="pohon.link({
-                class: [pohonProp?.link, link.pohon?.link, link.class],
-                active,
-                disabled: !!link.disabled,
-                level: level > 0,
-              })"
+              data-slot="link"
+              :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active, disabled: !!link.disabled, level: level > 0 })"
             >
               <ReuseLinkTemplate
                 :link="link"
