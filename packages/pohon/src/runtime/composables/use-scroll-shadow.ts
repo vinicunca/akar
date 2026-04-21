@@ -1,21 +1,24 @@
 import type { CSSProperties, MaybeRef, MaybeRefOrGetter } from 'vue';
-import { computed, toValue } from 'vue';
 import { useScroll } from '@vueuse/core';
+import { computed, toValue } from 'vue';
 
 export interface UseScrollShadowOptions {
   /**
    * The shadow size in pixels.
    * @defaultValue 24
    */
-  size?: MaybeRefOrGetter<number>
+  size?: MaybeRefOrGetter<number>;
   /**
    * The scroll direction to apply shadows.
    * @defaultValue 'vertical'
    */
-  orientation?: MaybeRefOrGetter<'vertical' | 'horizontal'>
+  orientation?: MaybeRefOrGetter<'vertical' | 'horizontal'>;
 }
 
-export function useScrollShadow(element: MaybeRef<HTMLElement | null | undefined>, options: UseScrollShadowOptions = {}) {
+export function useScrollShadow(
+  element: MaybeRef<HTMLElement | null | undefined>,
+  options: UseScrollShadowOptions = {},
+) {
   const { arrivedState } = useScroll(element);
 
   const style = computed<CSSProperties | undefined>(() => {
@@ -26,12 +29,25 @@ export function useScrollShadow(element: MaybeRef<HTMLElement | null | undefined
     const showStart = !arrivedState[startKey];
     const showEnd = !arrivedState[endKey];
 
-    if (!showStart && !showEnd) return undefined;
+    if (!showStart && !showEnd) {
+      return undefined;
+    }
 
-    const overflows = el
-      ? orientation === 'horizontal' ? el.scrollWidth > el.clientWidth : el.scrollHeight > el.clientHeight
-      : false;
-    if (!overflows) return undefined;
+    let overflows;
+
+    if (el) {
+      if (orientation === 'horizontal') {
+        overflows = el.scrollWidth > el.clientWidth;
+      } else {
+        overflows = el.scrollHeight > el.clientHeight;
+      }
+    } else {
+      overflows = false;
+    }
+
+    if (!overflows) {
+      return undefined;
+    }
 
     const size = `${toValue(options.size) ?? 24}px`;
 
@@ -47,10 +63,14 @@ export function useScrollShadow(element: MaybeRef<HTMLElement | null | undefined
   });
 
   const isOverflowing = computed(() => {
+    // Read arrivedState to establish reactive dependency on scroll events
+    // eslint-disable-next-line sonar/void-use
     void (arrivedState.top, arrivedState.bottom, arrivedState.left, arrivedState.right);
 
     const el = toValue(element);
-    if (!el) return false;
+    if (!el) {
+      return false;
+    }
 
     const orientation = toValue(options.orientation) ?? 'vertical';
     return orientation === 'horizontal'

@@ -4,7 +4,7 @@ function itemHasDescription(item: any, descriptionKey: string): boolean {
   if (typeof item !== 'object' || item === null) {
     return false;
   }
-  const value = getProp({ object: item, path: descriptionKey });
+  const value = getProp(item, descriptionKey);
 
   return value !== undefined && value !== null && value !== '';
 }

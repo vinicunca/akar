@@ -4,7 +4,7 @@ import type { EmitsToProps } from '../types/utils';
 import { useState } from '#imports';
 import { inject, nextTick, ref } from 'vue';
 
-export const toastMaxInjectionKey: InjectionKey<Ref<number | undefined>> = Symbol('nuxt-ui.toast-max');
+export const toastMaxInjectionKey: InjectionKey<Ref<number | undefined>> = Symbol('pohon.toast-max');
 
 export interface Toast extends Omit<PToastProps, 'defaultOpen'>, EmitsToProps<PToastEmits> {
   id: string | number;
@@ -18,6 +18,7 @@ export interface Toast extends Omit<PToastProps, 'defaultOpen'>, EmitsToProps<PT
 export function useToast() {
   const toasts = useState<Array<Toast>>('toasts', () => []);
   const max = inject(toastMaxInjectionKey, undefined);
+
   const running = ref(false);
   const queue: Array<Toast> = [];
 
@@ -73,6 +74,7 @@ export function useToast() {
       toasts.value[index] = {
         ...toasts.value[index] as Toast,
         ...toast,
+        duration: toast.duration,
         open: true,
         _updated: true,
       };

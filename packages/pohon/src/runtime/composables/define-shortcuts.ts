@@ -72,22 +72,45 @@ function convertKeyToCode(key: string): string {
   return specialKeys[key.toLowerCase()] || key;
 }
 
-export function defineShortcuts(config: MaybeRef<PShortcutsConfig>, options: PShortcutsOptions = {}) {
+export function extractShortcuts(
+  items: Array<any> | Array<Array<any>>,
+  separator: '_' | '-' = '_',
+) {
+  const shortcuts: Record<string, Handler> = {};
+
+  function traverse(items: Array<any>) {
+    items.forEach((item) => {
+      if (item.kbds?.length && (item.onSelect || item.onClick)) {
+        const shortcutKey = item.kbds.join(separator);
+        shortcuts[shortcutKey] = item.onSelect || item.onClick;
+      }
+      if (item.children) {
+        traverse(item.children.flat());
+      }
+      if (item.items) {
+        traverse(item.items.flat());
+      }
+    });
+  }
+
+  traverse(items.flat());
+
+  return shortcuts;
+}
+
+export function defineShortcuts(
+  config: MaybeRef<PShortcutsConfig>,
+  options: PShortcutsOptions = {},
+) {
   const chainedInputs = ref<Array<string>>([]);
   const clearChainedInput = () => {
     chainedInputs.value.splice(0, chainedInputs.value.length);
   };
-  const debouncedClearChainedInput = useDebounceFn(
-    clearChainedInput,
-    options.chainDelay ?? 800,
-  );
+  const debouncedClearChainedInput = useDebounceFn(clearChainedInput, options.chainDelay ?? 800);
 
   const { macOS } = useKbd();
   const activeElement = useActiveElement();
   const layoutIndependent = options.layoutIndependent ?? false;
-
-  // precompute shiftable codes if layoutIndependent
-  const shiftableCodes = shiftableKeys.map(convertKeyToCode);
 
   const usingInput = computed(() => {
     const tagName = activeElement.value?.tagName;
@@ -102,7 +125,7 @@ export function defineShortcuts(config: MaybeRef<PShortcutsConfig>, options: PSh
     return false;
   });
 
-  // Map config to full detailed shortcuts
+  // Map config to full detailled shortcuts
   const shortcuts = computed<Array<Shortcut>>(() => {
     return Object.entries(toValue(config)).map(([key, shortcutConfig]) => {
       if (!shortcutConfig) {
@@ -187,6 +210,9 @@ export function defineShortcuts(config: MaybeRef<PShortcutsConfig>, options: PSh
     }).filter(Boolean) as Array<Shortcut>;
   });
 
+  // precompute shiftable codes if layoutIndependent
+  const shiftableCodes = shiftableKeys.map((k) => convertKeyToCode(k));
+
   function onKeyDown(event: KeyboardEvent) {
     // Input autocomplete triggers a keydown event
     if (!event.key) {
@@ -198,9 +224,7 @@ export function defineShortcuts(config: MaybeRef<PShortcutsConfig>, options: PSh
 
     let chainedKey;
     // push either code or key depending on layoutIndependent flag
-    chainedInputs.value.push(
-      layoutIndependent ? event.code : event.key,
-    );
+    chainedInputs.value.push(layoutIndependent ? event.code : event.key);
     // try matching a chained shortcut
     if (chainedInputs.value.length >= 2) {
       chainedKey = chainedInputs.value.slice(-2).join('-');
@@ -243,10 +267,10 @@ export function defineShortcuts(config: MaybeRef<PShortcutsConfig>, options: PSh
       if (event.altKey !== shortcut.altKey) {
         continue;
       }
-
-      // shift modifier is only checked in combination with alphabet keys and some extra keys
-      // (shift with special characters would change the key)
-      if ((alphabetKey || shiftableKey) && event.shiftKey !== shortcut.shiftKey) {
+      // Shift modifier is checked for alphabet keys, shiftable keys, explicit shift shortcuts,
+      // or when shift is pressed alongside meta/ctrl (where shift doesn't transform the key value).
+      // Without meta/ctrl, shift changes the key itself (e.g. / -> ?) so the check is skipped.
+      if ((alphabetKey || shiftableKey || shortcut.shiftKey || (event.shiftKey && (event.metaKey || event.ctrlKey))) && event.shiftKey !== shortcut.shiftKey) {
         continue;
       }
 
@@ -264,30 +288,4 @@ export function defineShortcuts(config: MaybeRef<PShortcutsConfig>, options: PSh
   }
 
   return useEventListener('keydown', onKeyDown);
-}
-
-export function extractShortcuts(
-  items: Array<any> | Array<Array<any>>,
-  separator: '_' | '-' = '_',
-) {
-  const shortcuts: Record<string, Handler> = {};
-
-  function traverse(items: Array<any>) {
-    items.forEach((item) => {
-      if (item.kbds?.length && (item.onSelect || item.onClick)) {
-        const shortcutKey = item.kbds.join(separator);
-        shortcuts[shortcutKey] = item.onSelect || item.onClick;
-      }
-      if (item.children) {
-        traverse(item.children.flat());
-      }
-      if (item.items) {
-        traverse(item.items.flat());
-      }
-    });
-  }
-
-  traverse(items.flat());
-
-  return shortcuts;
 }

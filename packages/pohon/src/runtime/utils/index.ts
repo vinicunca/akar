@@ -4,12 +4,9 @@ import { isEqual } from 'ohash/utils';
 import { joinURL, withLeadingSlash, withTrailingSlash } from 'ufo';
 
 export function getProp(
-  { object, path, defaultValue }:
-  {
-    object: Record<string, any> | undefined;
-    path: Array<string | number> | string;
-    defaultValue?: any;
-  },
+  object: Record<string, any> | undefined,
+  path: Array<string | number> | string,
+  defaultValue?: any,
 ): any {
   if (isString(path)) {
     path = path.split('.').map((key) => {
@@ -32,8 +29,9 @@ export function getProp(
 }
 
 export function setProp(
-  { object, path, value }:
-  { object: Record<string, any>; path: Array<string | number> | string; value: any },
+  object: Record<string, any>,
+  path: Array<string | number> | string,
+  value: any,
 ): void {
   if (isString(path)) {
     path = path.split('.').map((key) => {
@@ -78,7 +76,7 @@ export function compare<T>(
   }
 
   if (isString(comparator)) {
-    return getProp({ object: value!, path: comparator }) === getProp({ object: currentValue!, path: comparator });
+    return getProp(value!, comparator) === getProp(currentValue!, comparator);
   }
 
   return isEqual(value, currentValue);
@@ -99,13 +97,13 @@ export function getDisplayValue<T extends Array<any>, V>(
 
   const foundItem = items.find((item) => {
     const itemValue = (typeof item === 'object' && item !== null && valueKey)
-      ? getProp({ object: item, path: valueKey as string })
+      ? getProp(item, valueKey as string)
       : item;
     return compare({ value: itemValue, currentValue: value, comparator: by });
   });
 
   if (isEmptyish(value) && foundItem) {
-    return labelKey ? getProp({ object: foundItem as Record<string, any>, path: labelKey as string }) : undefined;
+    return labelKey ? getProp(foundItem as Record<string, any>, labelKey as string) : undefined;
   }
 
   if (isEmptyish(value)) {
@@ -119,7 +117,7 @@ export function getDisplayValue<T extends Array<any>, V>(
   }
 
   if (typeof source === 'object') {
-    return labelKey ? getProp({ object: source as Record<string, any>, path: labelKey as string }) : undefined;
+    return labelKey ? getProp(source as Record<string, any>, labelKey as string) : undefined;
   }
 
   return String(source);

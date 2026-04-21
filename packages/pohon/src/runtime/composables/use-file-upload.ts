@@ -9,8 +9,8 @@ export interface UseFileUploadOptions {
    * @defaultValue '*'
    */
   accept?: MaybeRef<string>;
-  reset?: boolean;
-  multiple?: boolean;
+  reset?: MaybeRef<boolean>;
+  multiple?: MaybeRef<boolean>;
   dropzone?: boolean;
   onUpdate: (files: Array<File>) => void;
 }
@@ -59,7 +59,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
       files = Array.from(files);
     }
 
-    if (files.length > 1 && !multiple) {
+    if (files.length > 1 && !unref(multiple)) {
       files = [files[0]!];
     }
 
@@ -77,7 +77,7 @@ export function useFileUpload(options: UseFileUploadOptions) {
     }
 
     onUpdate(files);
-  };
+  }
 
   const isDragging = ref(false);
   const fileDialog = reactive({
@@ -99,9 +99,9 @@ export function useFileUpload(options: UseFileUploadOptions) {
     });
 
     const { onChange, open } = useFileDialog({
-      accept: unref(accept),
+      accept,
       multiple,
-      input: unref(inputRef)?.$el,
+      input: computed(() => unref(inputRef)?.$el),
       reset,
     });
 

@@ -34,7 +34,7 @@
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "@vinicunca/eslint-config": "5.0.0",
-    "eslint": "^10.2.0",
+    "eslint": "^10.2.1",
     "lint-staged": "^16.4.0",
     "simple-git-hooks": "^2.13.1",
     "tsx": "^4.21.0",

@@ -43,7 +43,7 @@ export function useComponentPohon(name: string, props: { pohon?: any }): Compute
   const { pohon } = injectThemeContext({ pohon: computed(() => ({})) });
 
   return computed(() => {
-    const themeOverrides = (getProp({ object: pohon.value, path: name as string }) || {});
+    const themeOverrides = (getProp(pohon.value, name as string) || {});
 
     return defu(props.pohon ?? {}, themeOverrides);
   });

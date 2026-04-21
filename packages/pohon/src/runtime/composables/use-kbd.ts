@@ -35,13 +35,8 @@ export const kbdKeysMap = {
 export type KbdKey = keyof typeof kbdKeysMap;
 export type KbdKeySpecific = keyof KbdKeysSpecificMap;
 
-function useKbd_() {
-  const macOS = computed(() =>
-    import.meta.client
-      && navigator
-      && navigator.userAgent
-      && navigator.userAgent.match(/Macintosh;/),
-  );
+function _useKbd() {
+  const macOS = computed(() => import.meta.client && navigator && navigator.userAgent && navigator.userAgent.match(/Macintosh;/));
 
   const kbdKeysSpecificMap = reactive({
     meta: ' ',
@@ -73,4 +68,4 @@ function useKbd_() {
   };
 }
 
-export const useKbd = /* @__PURE__ */ createSharedComposable(useKbd_);
+export const useKbd = /* @__PURE__ */ createSharedComposable(_useKbd);

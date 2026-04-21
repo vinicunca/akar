@@ -1,5 +1,5 @@
 import { useFilter as useAkarFilter } from 'akar';
-import { getProp } from '../../utils';
+import { getProp } from '../utils';
 
 export function useFilter() {
   const { contains, startsWith } = useAkarFilter({ sensitivity: 'base' });
@@ -34,7 +34,7 @@ export function useFilter() {
 
     let bestScore: number | null = null;
     for (const field of fields) {
-      const value = getProp({ object: item, path: field });
+      const value = getProp(item as Record<string, any>, field);
       if (value == null) {
         continue;
       }
