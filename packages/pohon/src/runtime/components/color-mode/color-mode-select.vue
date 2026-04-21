@@ -1,10 +1,7 @@
 <script lang="ts">
 import type { PSelectMenuItem, PSelectMenuProps } from '../../types';
 
-export interface PColorModeSelectProps extends Omit<
-  PSelectMenuProps<Array<PSelectMenuItem>>,
-'icon' | 'items' | 'modelValue'
-> {
+export interface PColorModeSelectProps extends Omit<PSelectMenuProps<Array<PSelectMenuItem>>, 'icon' | 'items' | 'modelValue'> {
 }
 </script>
 
@@ -58,8 +55,8 @@ const preference = computed({
     <template #fallback>
       <PSelectMenu
         :icon="items[0]?.icon"
-        v-bind="{ ...(selectMenuProps as any), ...$attrs }"
         :model-value="items[0]"
+        v-bind="{ ...(selectMenuProps as any), ...$attrs }"
         :items="items"
         disabled
       />

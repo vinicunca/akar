@@ -65,8 +65,8 @@ const isInvalid = computed(() => rootContext.isInvalid.value);
       mousedown: handleSegmentClick,
       keydown: handleSegmentKeydown,
       focusout: () => { hasLeftFocus = true },
-      focusin: (e: FocusEvent) => {
-        rootContext.setFocusedElement(e.target as HTMLElement)
+      focusin: (event: FocusEvent) => {
+        rootContext.setFocusedElement(event.target as HTMLElement)
       },
     } : {}"
   >

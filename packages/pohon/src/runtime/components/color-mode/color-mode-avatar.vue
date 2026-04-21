@@ -17,19 +17,19 @@ defineOptions({ inheritAttrs: false });
 const props = defineProps<PColorModeAvatarProps>();
 
 const avatarProps = useForwardProps(
-  reactiveOmit(props, ['light', 'dark']),
+  reactiveOmit(props, 'light', 'dark'),
 );
 </script>
 
 <template>
   <PAvatar
+    v-bind="{ ...avatarProps, ...$attrs }"
     :src="light"
     class="dark:hidden"
-    v-bind="{ ...avatarProps, ...$attrs }"
   />
   <PAvatar
+    v-bind="{ ...avatarProps, ...$attrs }"
     :src="dark"
     class="hidden dark:block"
-    v-bind="{ ...avatarProps, ...$attrs }"
   />
 </template>

@@ -8,6 +8,7 @@ export interface PColorModeImageProps extends /** @vue-ignore */ Omit<ImgHTMLAtt
 </script>
 
 <script setup lang="ts">
+import ImageComponent from '#build/pohon-image-component';
 import { useRuntimeConfig } from '#imports';
 import { computed } from 'vue';
 import { resolveBaseURL } from '../../utils';
@@ -21,14 +22,16 @@ const refinedDark = computed(() => resolveBaseURL(props.dark, useRuntimeConfig()
 </script>
 
 <template>
-  <img
+  <component
+    :is="ImageComponent"
     :src="refinedLight"
     class="dark:hidden"
     v-bind="$attrs"
-  >
-  <img
+  />
+  <component
+    :is="ImageComponent"
     :src="refinedDark"
     class="hidden dark:block"
     v-bind="$attrs"
-  >
+  />
 </template>

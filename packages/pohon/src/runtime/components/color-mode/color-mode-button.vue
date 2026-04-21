@@ -36,7 +36,7 @@ const props = withDefaults(
 const { t } = useLocale();
 const colorMode = useColorMode();
 const appConfig = useAppConfig();
-const pohonProp = useComponentPohon('colorModeButton', props);
+const pohonProp = useComponentPohon('button', props);
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon'));
 
