@@ -1,0 +1,242 @@
+<!-- eslint-disable vue/block-tag-newline -->
+<script lang="ts">
+import type { AppConfig } from '@nuxt/schema';
+import type { TabsRootEmits, TabsRootProps } from 'akar';
+import type { ComponentPublicInstance, VNode } from 'vue';
+import type { AvatarProps, BadgeProps, PIconProps } from '../types';
+import type { DynamicSlots, GetItemKeys } from '../types/utils';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/tabs';
+
+type Tabs = ComponentConfig<typeof theme, AppConfig, 'tabs'>;
+
+export interface TabsItem {
+  label?: string;
+  /**
+   * @IconifyIcon
+   */
+  icon?: PIconProps['name'];
+  avatar?: AvatarProps;
+  /**
+   * Display a badge on the item.
+   * `{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
+   */
+  badge?: string | number | BadgeProps;
+  slot?: string;
+  content?: string;
+  /** A unique value for the tab item. Defaults to the index. */
+  value?: string | number;
+  disabled?: boolean;
+  class?: any;
+  pohon?: Pick<Tabs['slots'], 'trigger' | 'leadingIcon' | 'leadingAvatar' | 'leadingAvatarSize' | 'label' | 'trailingBadge' | 'trailingBadgeSize' | 'content'>;
+  [key: string]: any;
+}
+
+export interface TabsProps<T extends TabsItem = TabsItem> extends Pick<TabsRootProps<string | number>, 'defaultValue' | 'modelValue' | 'activationMode' | 'unmountOnHide'> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any;
+  items?: Array<T>;
+  /**
+   * @defaultValue 'primary'
+   */
+  color?: Tabs['variants']['color'];
+  /**
+   * @defaultValue 'pill'
+   */
+  variant?: Tabs['variants']['variant'];
+  /**
+   * @defaultValue 'md'
+   */
+  size?: Tabs['variants']['size'];
+  /**
+   * The orientation of the tabs.
+   * @defaultValue 'horizontal'
+   */
+  orientation?: Tabs['variants']['orientation'];
+  /**
+   * The content of the tabs, can be disabled to prevent rendering the content.
+   * @defaultValue true
+   */
+  content?: boolean;
+  /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>;
+  /**
+   * The key used to get the label from the item.
+   * @defaultValue 'label'
+   */
+  labelKey?: GetItemKeys<T>;
+  class?: any;
+  pohon?: Tabs['slots'];
+}
+
+export interface TabsEmits extends TabsRootEmits<string | number> {}
+
+type SlotProps<T extends TabsItem> = (props: { item: T; index: number; pohon: Tabs['pohon'] }) => Array<VNode>;
+
+export type TabsSlots<T extends TabsItem = TabsItem> = {
+  'leading'?: SlotProps<T>;
+  'default'?: (props: { item: T; index: number }) => Array<VNode>;
+  'trailing'?: SlotProps<T>;
+  'content'?: SlotProps<T>;
+  'list-leading'?: (props?: {}) => Array<VNode>;
+  'list-trailing'?: (props?: {}) => Array<VNode>;
+} & DynamicSlots<T, undefined, { index: number; pohon: Tabs['pohon'] }>;
+
+</script>
+
+<script setup lang="ts" generic="T extends TabsItem">
+import { useAppConfig } from '#imports';
+import { reactivePick } from '@vueuse/core';
+import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger, useForwardPropsEmits } from 'akar';
+import { computed, ref } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { get } from '../utils';
+import { uv } from '../utils/uv';
+import PAvatar from './avatar.vue';
+import UBadge from './Badge.vue';
+import PIcon from './icon.vue';
+
+const props = withDefaults(defineProps<TabsProps<T>>(), {
+  content: true,
+  defaultValue: '0',
+  orientation: 'horizontal',
+  unmountOnHide: true,
+  valueKey: 'value',
+  labelKey: 'label',
+});
+const emits = defineEmits<TabsEmits>();
+const slots = defineSlots<TabsSlots<T>>();
+
+const appConfig = useAppConfig() as Tabs['AppConfig'];
+const pohonProp = useComponentPohon('tabs', props);
+
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'unmountOnHide'), emits);
+
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.tabs || {}) })({
+  color: props.color,
+  variant: props.variant,
+  size: props.size,
+  orientation: props.orientation,
+}));
+
+const triggersRef = ref<Array<ComponentPublicInstance>>([]);
+
+function setTriggerRef(index: number, el: Element | ComponentPublicInstance | null) {
+  // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
+  triggersRef.value[index] = el;
+}
+
+defineExpose({
+  triggersRef,
+});
+</script>
+
+<template>
+  <TabsRoot
+    v-bind="rootProps"
+    :model-value="modelValue"
+    :default-value="defaultValue"
+    :orientation="orientation"
+    :activation-mode="activationMode"
+    data-slot="root"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
+  >
+    <TabsList
+      data-slot="list"
+      :class="pohon.list({ class: pohonProp?.list })"
+    >
+      <TabsIndicator
+        data-slot="indicator"
+        :class="pohon.indicator({ class: pohonProp?.indicator })"
+      />
+
+      <slot name="list-leading" />
+
+      <TabsTrigger
+        v-for="(item, index) of items"
+        :key="index"
+        :ref="el => setTriggerRef(index, el)"
+        :value="get(item, props.valueKey as string) ?? String(index)"
+        :disabled="item.disabled"
+        data-slot="trigger"
+        :class="pohon.trigger({ class: [pohonProp?.trigger, item.pohon?.trigger] })"
+      >
+        <slot
+          name="leading"
+          :item="item"
+          :index="index"
+          :pohon="pohon"
+        >
+          <PIcon
+            v-if="item.icon"
+            :name="item.icon"
+            data-slot="leadingIcon"
+            :class="pohon.leadingIcon({ class: [pohonProp?.leadingIcon, item.pohon?.leadingIcon] })"
+          />
+          <PAvatar
+            v-else-if="item.avatar"
+            :size="((item.pohon?.leadingAvatarSize || pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as AvatarProps['size'])"
+            v-bind="item.avatar"
+            data-slot="leadingAvatar"
+            :class="pohon.leadingAvatar({ class: [pohonProp?.leadingAvatar, item.pohon?.leadingAvatar] })"
+          />
+        </slot>
+
+        <span
+          v-if="get(item, props.labelKey as string) || !!slots.default"
+          data-slot="label"
+          :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label] })"
+        >
+          <slot
+            :item="item"
+            :index="index"
+          >{{ get(item, props.labelKey as string) }}</slot>
+        </span>
+
+        <slot
+          name="trailing"
+          :item="item"
+          :index="index"
+          :pohon="pohon"
+        >
+          <UBadge
+            v-if="item.badge || item.badge === 0"
+            color="neutral"
+            variant="outline"
+            :size="((item.pohon?.trailingBadgeSize || pohonProp?.trailingBadgeSize || pohon.trailingBadgeSize()) as BadgeProps['size'])"
+            v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+            data-slot="trailingBadge"
+            :class="pohon.trailingBadge({ class: [pohonProp?.trailingBadge, item.pohon?.trailingBadge] })"
+          />
+        </slot>
+      </TabsTrigger>
+
+      <slot name="list-trailing" />
+    </TabsList>
+
+    <template v-if="!!content">
+      <TabsContent
+        v-for="(item, index) of items"
+        :key="index"
+        :value="get(item, props.valueKey as string) ?? String(index)"
+        data-slot="content"
+        :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content, item.class] })"
+      >
+        <slot
+          :name="((item.slot || 'content') as keyof TabsSlots<T>)"
+          :item="(item as Extract<T, { slot: string; }>)"
+          :index="index"
+          :pohon="pohon"
+        >
+          {{ item.content }}
+        </slot>
+      </TabsContent>
+    </template>
+  </TabsRoot>
+</template>

@@ -6,28 +6,20 @@ import { toKebabCase } from '@vinicunca/perkakas';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SOURCE_DIR = path.resolve(__dirname, '../packages/core/src');
+const SOURCE_DIR = path.resolve(__dirname, '../packages/pohon/src');
 const TARGET_FOLDERS = [
-  'MonthPicker',
-  'MonthRangePicker',
-  'YearPicker',
-  'YearRangePicker',
-  'ColorArea',
-  'ColorField',
-  'ColorSlider',
-  'ColorSwatch',
-  'ColorSwatchPicker',
-  'TimeRangeField',
+  'nuxtui',
 ];
 
-// function toKebabCase(value) {
-//   return value
-//     .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-//     .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
-//     .replace(/[\s_]+/g, '-')
-//     .replace(/-+/g, '-')
-//     .toLowerCase();
-// }
+function isSameInode(a, b) {
+  try {
+    const sa = fs.statSync(a);
+    const sb = fs.statSync(b);
+    return sa.ino === sb.ino && sa.dev === sb.dev;
+  } catch {
+    return false;
+  }
+}
 
 function renameEntry(oldPath) {
   const parentPath = path.dirname(oldPath);
@@ -40,7 +32,15 @@ function renameEntry(oldPath) {
 
   const newPath = path.join(parentPath, newName);
   if (fs.existsSync(newPath)) {
-    throw new Error(`Cannot rename "${oldPath}" because "${newPath}" already exists.`);
+    if (!isSameInode(oldPath, newPath)) {
+      throw new Error(`Cannot rename "${oldPath}" because "${newPath}" already exists.`);
+    }
+    // Case-only rename on a case-insensitive volume: rename via a temp path first.
+    const tempPath = path.join(parentPath, `.__kebab_rename_${process.pid}_${Date.now()}_${oldName}`);
+    fs.renameSync(oldPath, tempPath);
+    fs.renameSync(tempPath, newPath);
+    console.log(`Renamed: ${oldPath} -> ${newPath}`);
+    return newPath;
   }
 
   fs.renameSync(oldPath, newPath);
