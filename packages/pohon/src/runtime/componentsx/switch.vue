@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { SwitchRootEmits, SwitchRootProps } from 'akar';
+import type { ASwitchRootEmits, ASwitchRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { PIconProps } from '../types';
 import type { ButtonHTMLAttributes } from '../types/html';
@@ -9,7 +9,7 @@ import theme from '#build/pohon/switch';
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>;
 
-export interface PSwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue' | 'modelValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface PSwitchProps<T = boolean> extends Pick<ASwitchRootProps<T>, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue' | 'modelValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -47,11 +47,11 @@ export interface PSwitchProps<T = boolean> extends Pick<SwitchRootProps<T>, 'dis
   pohon?: Switch['slots'];
 }
 
-export interface SwitchEmits<T = boolean> extends SwitchRootEmits<T> {
+export interface PSwitchEmits<T = boolean> extends ASwitchRootEmits<T> {
   change: [event: Event];
 }
 
-export interface SwitchSlots {
+export interface PSwitchSlots {
   label?: (props: { label: string | undefined }) => Array<VNode>;
   description?: (props: { description: string | undefined }) => Array<VNode>;
 }
@@ -60,18 +60,18 @@ export interface SwitchSlots {
 <script setup lang="ts" generic="T = boolean">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { Label, Primitive, SwitchRoot, SwitchThumb, useForwardPropsEmits } from 'akar';
+import { ALabel, APrimitive, ASwitchRoot, ASwitchThumb, useForwardPropsEmits } from 'akar';
 import { computed, useAttrs, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useFormField } from '../composables/useFormField';
+import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
 const props = defineProps<PSwitchProps<T>>();
-const emits = defineEmits<SwitchEmits<T>>();
-const slots = defineSlots<SwitchSlots>();
+const emits = defineEmits<PSwitchEmits<T>>();
+const slots = defineSlots<PSwitchSlots>();
 const appConfig = useAppConfig() as Switch['AppConfig'];
 const pohonProp = useComponentPohon('switch', props);
 
@@ -105,7 +105,7 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -114,7 +114,7 @@ function onUpdate(value: any) {
       data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
     >
-      <SwitchRoot
+      <ASwitchRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
         :name="name"
@@ -123,7 +123,7 @@ function onUpdate(value: any) {
         :class="pohon.base({ class: pohonProp?.base })"
         @update:model-value="onUpdate"
       >
-        <SwitchThumb
+        <ASwitchThumb
           data-slot="thumb"
           :class="pohon.thumb({ class: pohonProp?.thumb })"
         >
@@ -147,15 +147,15 @@ function onUpdate(value: any) {
               :class="pohon.icon({ class: pohonProp?.icon, unchecked: true })"
             />
           </template>
-        </SwitchThumb>
-      </SwitchRoot>
+        </ASwitchThumb>
+      </ASwitchRoot>
     </div>
     <div
       v-if="(label || !!slots.label) || (description || !!slots.description)"
       data-slot="wrapper"
       :class="pohon.wrapper({ class: pohonProp?.wrapper })"
     >
-      <Label
+      <ALabel
         v-if="label || !!slots.label"
         :for="id"
         data-slot="label"
@@ -167,7 +167,7 @@ function onUpdate(value: any) {
         >
           {{ label }}
         </slot>
-      </Label>
+      </ALabel>
       <p
         v-if="description || !!slots.description"
         data-slot="description"
@@ -181,5 +181,5 @@ function onUpdate(value: any) {
         </slot>
       </p>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

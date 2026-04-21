@@ -8,7 +8,7 @@ import theme from '#build/pohon/content/content-surround';
 
 type ContentSurround = ComponentConfig<typeof theme, AppConfig, 'contentSurround'>;
 
-export interface ContentSurroundLink extends ContentNavigationItem {
+export interface PContentSurroundLink extends ContentNavigationItem {
   description?: string;
   /**
    * @IconifyIcon
@@ -18,7 +18,7 @@ export interface ContentSurroundLink extends ContentNavigationItem {
   pohon?: Pick<ContentSurround['slots'], 'link' | 'linkLeading' | 'linkLeadingIcon' | 'linkTitle' | 'linkDescription'>;
 }
 
-export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSurroundLink> {
+export interface PContentSurroundProps<T extends PContentSurroundLink = PContentSurroundLink> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -43,7 +43,7 @@ export interface ContentSurroundProps<T extends ContentSurroundLink = ContentSur
 
 type SlotProps<T> = (props: { link: T; pohon: ContentSurround['pohon'] }) => Array<VNode>;
 
-export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSurroundLink> {
+export interface PContentSurroundSlots<T extends PContentSurroundLink = PContentSurroundLink> {
   'link'?: SlotProps<T>;
   'link-leading'?: SlotProps<T>;
   'link-title'?: SlotProps<T>;
@@ -51,27 +51,27 @@ export interface ContentSurroundSlots<T extends ContentSurroundLink = ContentSur
 }
 </script>
 
-<script setup lang="ts" generic="T extends ContentSurroundLink">
+<script setup lang="ts" generic="T extends PContentSurroundLink">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
-import ULink from '../Link.vue';
+import PLink from '../link.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = defineProps<ContentSurroundProps<T>>();
-defineSlots<ContentSurroundSlots<T>>();
+const props = defineProps<PContentSurroundProps<T>>();
+defineSlots<PContentSurroundSlots<T>>();
 
 const { dir } = useLocale();
 const appConfig = useAppConfig() as ContentSurround['AppConfig'];
 const pohonProp = useComponentPohon('contentSurround', props);
 
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: ContentSurroundLink; icon: PIconProps['name']; direction: 'left' | 'right' }>({
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link?: PContentSurroundLink; icon: PIconProps['name']; direction: 'left' | 'right' }>({
   props: {
     link: Object,
     icon: String,
@@ -87,7 +87,7 @@ const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConf
 
 <template>
   <DefineLinkTemplate v-slot="{ link, icon, direction }">
-    <ULink
+    <PLink
       v-if="link"
       :to="link.path"
       raw
@@ -142,14 +142,14 @@ const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConf
           </slot>
         </p>
       </slot>
-    </ULink>
+    </PLink>
     <span
       v-else
       class="hidden sm:block"
     >&nbsp;</span>
   </DefineLinkTemplate>
 
-  <Primitive
+  <APrimitive
     v-if="surround"
     :as="as"
     v-bind="$attrs"
@@ -166,5 +166,5 @@ const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConf
       :icon="nextIcon"
       direction="right"
     />
-  </Primitive>
+  </APrimitive>
 </template>

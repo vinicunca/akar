@@ -18,6 +18,6 @@ export default {
     },
   },
   defaultVariants: {
-    size: '',
+    size: 'md',
   },
 };

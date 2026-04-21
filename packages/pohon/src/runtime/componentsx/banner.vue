@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { LinkProps, PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
+import type { PButtonProps, PIconProps, PLinkProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/banner';
 
 type Banner = ComponentConfig<typeof theme, AppConfig, 'banner'>;
 
-export interface BannerProps {
+export interface PBannerProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -29,8 +29,8 @@ export interface BannerProps {
    * `{ color: 'neutral', size: 'xs' }`{lang="ts-type"}
    */
   actions?: Array<PButtonProps>;
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   /**
    * @defaultValue 'primary'
    */
@@ -52,35 +52,35 @@ export interface BannerProps {
   pohon?: Banner['slots'];
 }
 
-export interface BannerSlots {
+export interface PBannerSlots {
   leading?: (props: { pohon: Banner['pohon'] }) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
   actions?: (props?: {}) => Array<VNode>;
   close?: (props: { pohon: Banner['pohon'] }) => Array<VNode>;
 }
 
-export interface BannerEmits {
+export interface PBannerEmits {
   close: [];
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig, useHead } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed, onMounted, ref, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UContainer from './Container.vue';
+import PContainer from './container.vue';
 import PIcon from './icon.vue';
-import ULink from './Link.vue';
+import PLink from './link.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = defineProps<BannerProps>();
-const emits = defineEmits<BannerEmits>();
-const slots = defineSlots<BannerSlots>();
+const props = defineProps<PBannerProps>();
+const emits = defineEmits<PBannerEmits>();
+const slots = defineSlots<PBannerSlots>();
 const { t } = useLocale();
 const appConfig = useAppConfig() as Banner['AppConfig'];
 const pohonProp = useComponentPohon('banner', props);
@@ -145,7 +145,7 @@ function onClose() {
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     v-show="isVisible"
     :as="as"
     class="banner"
@@ -153,7 +153,7 @@ function onClose() {
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <ULink
+    <PLink
       v-if="to"
       :aria-label="title"
       v-bind="{ to, target, ...$attrs }"
@@ -165,9 +165,9 @@ function onClose() {
         class="inset-0 absolute"
         aria-hidden="true"
       />
-    </ULink>
+    </PLink>
 
-    <UContainer
+    <PContainer
       data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
     >
@@ -241,6 +241,6 @@ function onClose() {
           />
         </slot>
       </div>
-    </UContainer>
-  </Primitive>
+    </PContainer>
+  </APrimitive>
 </template>

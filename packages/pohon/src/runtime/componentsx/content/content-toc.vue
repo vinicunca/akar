@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { TocLink } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
-import type { CollapsibleRootEmits, CollapsibleRootProps } from 'akar';
+import type { ACollapsibleRootEmits, ACollapsibleRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { PIconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
@@ -9,12 +9,12 @@ import theme from '#build/pohon/content/content-toc';
 
 type ContentToc = ComponentConfig<typeof theme, AppConfig, 'contentToc'>;
 
-export type ContentTocLink = TocLink & {
+export type PContentTocLink = TocLink & {
   class?: any;
   pohon?: Pick<ContentToc['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkText'>;
 };
 
-export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open'> {
+export interface PContentTocProps<T extends PContentTocLink = PContentTocLink> extends Pick<ACollapsibleRootProps, 'defaultOpen' | 'open'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'
@@ -54,13 +54,13 @@ export interface ContentTocProps<T extends ContentTocLink = ContentTocLink> exte
   pohon?: ContentToc['slots'];
 }
 
-export type ContentTocEmits = CollapsibleRootEmits & {
+export type PContentTocEmits = ACollapsibleRootEmits & {
   move: [id: string];
 };
 
 type SlotProps<T> = (props: { link: T }) => Array<VNode>;
 
-export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
+export interface PContentTocSlots<T extends PContentTocLink = PContentTocLink> {
   leading?: (props: { open: boolean; pohon: ContentToc['pohon'] }) => Array<VNode>;
   default?: (props: { open: boolean }) => Array<VNode>;
   trailing?: (props: { open: boolean; pohon: ContentToc['pohon'] }) => Array<VNode>;
@@ -71,25 +71,30 @@ export interface ContentTocSlots<T extends ContentTocLink = ContentTocLink> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends ContentTocLink">
+<script setup lang="ts" generic="T extends PContentTocLink">
 import { useAppConfig, useNuxtApp, useRouter } from '#imports';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
-import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger, useForwardPropsEmits } from 'akar';
+import {
+  ACollapsibleContent,
+  ACollapsibleRoot,
+  ACollapsibleTrigger,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed, onUnmounted } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
-import { useResolvedVariants } from '../../composables/useResolvedVariants';
-import { useScrollspy } from '../../composables/useScrollspy';
+import { useResolvedVariants } from '../../composables/use-resolved-variants';
+import { useScrollspy } from '../../composables/use-scrollspy';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<ContentTocProps<T>>(), {
+const props = withDefaults(defineProps<PContentTocProps<T>>(), {
   as: 'nav',
 });
-const emits = defineEmits<ContentTocEmits>();
-const slots = defineSlots<ContentTocSlots<T>>();
+const emits = defineEmits<PContentTocEmits>();
+const slots = defineSlots<PContentTocSlots<T>>();
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'open', 'defaultOpen'), emits);
 
@@ -313,7 +318,7 @@ onUnmounted(() => {
     </slot>
   </DefineContentTemplate>
 
-  <CollapsibleRoot
+  <ACollapsibleRoot
     v-slot="{ open }"
     v-bind="{ ...rootProps, ...$attrs }"
     :default-open="defaultOpen"
@@ -336,19 +341,19 @@ onUnmounted(() => {
       </div>
 
       <template v-if="links?.length">
-        <CollapsibleTrigger
+        <ACollapsibleTrigger
           data-slot="trigger"
           :class="pohon.trigger({ class: 'lg:hidden' })"
         >
           <ReuseTriggerTemplate :open="open" />
-        </CollapsibleTrigger>
+        </ACollapsibleTrigger>
 
-        <CollapsibleContent
+        <ACollapsibleContent
           data-slot="content"
           :class="pohon.content({ class: [pohonProp?.content, 'lg:hidden'] })"
         >
           <ReuseContentTemplate />
-        </CollapsibleContent>
+        </ACollapsibleContent>
 
         <p
           data-slot="trigger"
@@ -376,5 +381,5 @@ onUnmounted(() => {
         />
       </div>
     </div>
-  </CollapsibleRoot>
+  </ACollapsibleRoot>
 </template>

@@ -8,7 +8,7 @@ import theme from '#build/pohon/dashboard-navbar';
 
 type DashboardNavbar = ComponentConfig<typeof theme, AppConfig, 'dashboardNavbar'>;
 
-export interface DashboardNavbarProps {
+export interface PDashboardNavbarProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -37,7 +37,7 @@ export interface DashboardNavbarProps {
 
 type DashboardNavbarSlotsProps = Omit<DashboardContext, 'storage' | 'storageKey' | 'persistent' | 'unit'>;
 
-export interface DashboardNavbarSlots {
+export interface PDashboardNavbarSlots {
   title?: (props?: {}) => Array<VNode>;
   leading?: (props: DashboardNavbarSlotsProps & { pohon: DashboardNavbar['pohon'] }) => Array<VNode>;
   trailing?: (props: DashboardNavbarSlotsProps & { pohon: DashboardNavbar['pohon'] }) => Array<VNode>;
@@ -51,21 +51,21 @@ export interface DashboardNavbarSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useDashboard } from '../utils/dashboard';
 import { uv } from '../utils/uv';
-import UDashboardSidebarToggle from './DashboardSidebarToggle.vue';
+import PDashboardSidebarToggle from './dashboard-sidebar-toggle.vue';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<DashboardNavbarProps>(), {
+const props = withDefaults(defineProps<PDashboardNavbarProps>(), {
   toggle: true,
   toggleSide: 'left',
 });
-const slots = defineSlots<DashboardNavbarSlots>();
+const slots = defineSlots<PDashboardNavbarSlots>();
 
 const appConfig = useAppConfig() as DashboardNavbar['AppConfig'];
 const pohonProp = useComponentPohon('dashboardNavbar', props);
@@ -80,9 +80,9 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
   <DefineToggleTemplate>
     <slot
       name="toggle"
-      v-bind="{ ...dashboardContext, ui }"
+      v-bind="{ ...dashboardContext, pohon }"
     >
-      <UDashboardSidebarToggle
+      <PDashboardSidebarToggle
         v-if="toggle"
         v-bind="(typeof toggle === 'object' ? toggle : {})"
         :side="toggleSide"
@@ -92,7 +92,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
     </slot>
   </DefineToggleTemplate>
 
-  <Primitive
+  <APrimitive
     :as="as"
     v-bind="$attrs"
     data-slot="root"
@@ -110,7 +110,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
       >
         <slot
           name="leading"
-          v-bind="{ ...dashboardContext, ui }"
+          v-bind="{ ...dashboardContext, pohon }"
         >
           <PIcon
             v-if="icon"
@@ -131,7 +131,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
 
         <slot
           name="trailing"
-          v-bind="{ ...dashboardContext, ui }"
+          v-bind="{ ...dashboardContext, pohon }"
         />
       </slot>
     </div>
@@ -155,5 +155,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
 
       <ReuseToggleTemplate v-if="toggleSide === 'right'" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

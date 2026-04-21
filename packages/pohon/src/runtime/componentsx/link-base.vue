@@ -1,49 +1,49 @@
 <script lang="ts">
-import type { LinkProps } from '../types';
+import type { PLinkProps } from '../types';
 
-export interface LinkBaseProps {
+export interface PLinkBaseProps {
   as?: string;
   type?: string;
   disabled?: boolean;
-  onClick?: ((e: MouseEvent) => void | Promise<void>) | Array<((e: MouseEvent) => void | Promise<void>)>;
+  onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>;
   href?: string;
-  navigate?: (e: MouseEvent) => void;
-  target?: LinkProps['target'];
-  rel?: LinkProps['rel'];
+  navigate?: (event: MouseEvent) => void;
+  target?: PLinkProps['target'];
+  rel?: PLinkProps['rel'];
   active?: boolean;
   isExternal?: boolean;
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 
-const props = withDefaults(defineProps<LinkBaseProps>(), {
+const props = withDefaults(defineProps<PLinkBaseProps>(), {
   as: 'button',
   type: 'button',
 });
 
-function onClickWrapper(e: MouseEvent) {
+function onClickWrapper(event: MouseEvent) {
   if (props.disabled) {
-    e.stopPropagation();
-    e.preventDefault();
+    event.stopPropagation();
+    event.preventDefault();
     return;
   }
 
   if (props.onClick) {
     for (const onClick of Array.isArray(props.onClick) ? props.onClick : [props.onClick]) {
-      onClick(e);
+      onClick(event);
     }
   }
 
   if (props.href && props.navigate && !props.isExternal) {
-    props.navigate(e);
+    props.navigate(event);
   }
 }
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     v-bind="href ? {
       'as': 'a',
       'href': disabled ? undefined : href,
@@ -62,5 +62,5 @@ function onClickWrapper(e: MouseEvent) {
     @click="onClickWrapper"
   >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

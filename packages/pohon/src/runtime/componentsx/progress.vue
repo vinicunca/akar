@@ -1,14 +1,14 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ProgressRootEmits, ProgressRootProps } from 'akar';
+import type { AProgressRootEmits, AProgressRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/progress';
 
 type Progress = ComponentConfig<typeof theme, AppConfig, 'progress'>;
 
-export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' | 'getValueText' | 'modelValue'> {
+export interface PProgressProps extends Pick<AProgressRootProps, 'getValueLabel' | 'getValueText' | 'modelValue'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -42,9 +42,9 @@ export interface ProgressProps extends Pick<ProgressRootProps, 'getValueLabel' |
   pohon?: Progress['slots'];
 }
 
-export interface ProgressEmits extends ProgressRootEmits {}
+export interface PProgressEmits extends AProgressRootEmits {}
 
-export type ProgressSlots = {
+export type PProgressSlots = {
   status?: (props: { percent?: number }) => Array<VNode>;
 } & {
   [key: string]: (props: { step: number }) => Array<VNode>;
@@ -55,19 +55,19 @@ export type ProgressSlots = {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { Primitive, ProgressIndicator, ProgressRoot, useForwardPropsEmits } from 'akar';
+import { APrimitive, AProgressIndicator, AProgressRoot, useForwardPropsEmits } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<ProgressProps>(), {
+const props = withDefaults(defineProps<PProgressProps>(), {
   inverted: false,
   modelValue: null,
   orientation: 'horizontal',
 });
-const emits = defineEmits<ProgressEmits>();
-const slots = defineSlots<ProgressSlots>();
+const emits = defineEmits<PProgressEmits>();
+const slots = defineSlots<PProgressSlots>();
 
 const { dir } = useLocale();
 const appConfig = useAppConfig() as Progress['AppConfig'];
@@ -169,7 +169,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.progre
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -189,19 +189,19 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.progre
       </slot>
     </div>
 
-    <ProgressRoot
+    <AProgressRoot
       v-bind="rootProps"
       :max="realMax"
       data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
       style="transform: translateZ(0)"
     >
-      <ProgressIndicator
+      <AProgressIndicator
         data-slot="indicator"
         :class="pohon.indicator({ class: pohonProp?.indicator })"
         :style="indicatorStyle"
       />
-    </ProgressRoot>
+    </AProgressRoot>
 
     <div
       v-if="hasSteps"
@@ -222,5 +222,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.progre
         </slot>
       </div>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

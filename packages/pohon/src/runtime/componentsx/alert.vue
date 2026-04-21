@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { AvatarProps, PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
+import type { PAvatarProps, PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/alert';
 
 type Alert = ComponentConfig<typeof theme, AppConfig, 'alert'>;
 
-export interface AlertProps {
+export interface PAlertProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -19,7 +19,7 @@ export interface AlertProps {
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
-  avatar?: AvatarProps;
+  avatar?: PAvatarProps;
   /**
    * @defaultValue 'primary'
    */
@@ -57,11 +57,11 @@ export interface AlertProps {
   pohon?: Alert['slots'];
 }
 
-export interface AlertEmits {
+export interface PAlertEmits {
   'update:open': [value: boolean];
 }
 
-export interface AlertSlots {
+export interface PAlertSlots {
   leading?: (props: { pohon: Alert['pohon'] }) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
   description?: (props?: {}) => Array<VNode>;
@@ -72,7 +72,7 @@ export interface AlertSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
@@ -81,11 +81,14 @@ import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PIcon from './icon.vue';
 
-const props = withDefaults(defineProps<AlertProps>(), {
-  orientation: 'vertical',
-});
-const emits = defineEmits<AlertEmits>();
-const slots = defineSlots<AlertSlots>();
+const props = withDefaults(
+  defineProps<PAlertProps>(),
+  {
+    orientation: 'vertical',
+  },
+);
+const emits = defineEmits<PAlertEmits>();
+const slots = defineSlots<PAlertSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Alert['AppConfig'];
@@ -100,7 +103,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.alert 
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -112,7 +115,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.alert 
     >
       <PAvatar
         v-if="avatar"
-        :size="((pohonProp?.avatarSize || pohon.avatarSize()) as AvatarProps['size'])"
+        :size="((pohonProp?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
         data-slot="avatar"
         :class="pohon.avatar({ class: pohonProp?.avatar })"
@@ -197,5 +200,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.alert 
         />
       </slot>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

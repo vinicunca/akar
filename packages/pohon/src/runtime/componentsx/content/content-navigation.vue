@@ -3,13 +3,13 @@ import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
 import type { AAccordionRootEmits, AAccordionRootProps } from 'akar';
 import type { VNode } from 'vue';
-import type { BadgeProps, PIconProps, LinkProps } from '../../types';
+import type { PBadgeProps, PIconProps, PLinkProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-navigation';
 
 type ContentNavigation = ComponentConfig<typeof theme, AppConfig, 'contentNavigation'>;
 
-export interface ContentNavigationLink extends ContentNavigationItem {
+export interface PContentNavigationLink extends ContentNavigationItem {
   /**
    * @IconifyIcon
    */
@@ -18,21 +18,21 @@ export interface ContentNavigationLink extends ContentNavigationItem {
    * Display a badge on the link.
    * `{ color: 'neutral', variant: 'outline', size: 'sm' }`{lang="ts-type"}
    */
-  badge?: string | number | BadgeProps;
-  target?: LinkProps['target'];
+  badge?: string | number | PBadgeProps;
+  target?: PLinkProps['target'];
   /**
    * @IconifyIcon
    */
   trailingIcon?: PIconProps['name'];
   disabled?: boolean;
-  children?: Array<ContentNavigationLink>;
+  children?: Array<PContentNavigationLink>;
   defaultOpen?: boolean;
   active?: boolean;
   class?: any;
   pohon?: Pick<ContentNavigation['slots'], 'link' | 'linkLeadingIcon' | 'linkTitle' | 'linkTrailing' | 'linkTrailingIcon' | 'linkTrailingBadge' | 'linkTrailingBadgeSize' | 'linkTrailingIcon' | 'linkTitleExternalIcon' | 'trigger' | 'content' | 'item' | 'itemWithChildren'>;
 }
 
-export interface ContentNavigationProps<T extends ContentNavigationLink = ContentNavigationLink> extends Pick<AAccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'> {
+export interface PContentNavigationProps<T extends PContentNavigationLink = PContentNavigationLink> extends Pick<AAccordionRootProps, 'disabled' | 'type' | 'unmountOnHide'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'
@@ -79,11 +79,11 @@ export interface ContentNavigationProps<T extends ContentNavigationLink = Conten
   pohon?: ContentNavigation['slots'];
 }
 
-export interface ContentNavigationEmits extends AAccordionRootEmits {}
+export interface PContentNavigationEmits extends AAccordionRootEmits {}
 
 type SlotProps<T> = (props: { link: T; active: boolean; pohon: ContentNavigation['pohon'] }) => Array<VNode>;
 
-export interface ContentNavigationSlots<T extends ContentNavigationLink = ContentNavigationLink> {
+export interface PContentNavigationSlots<T extends PContentNavigationLink = PContentNavigationLink> {
   'link'?: SlotProps<T>;
   'link-leading'?: SlotProps<T>;
   'link-title'?: SlotProps<T>;
@@ -91,24 +91,31 @@ export interface ContentNavigationSlots<T extends ContentNavigationLink = Conten
 }
 </script>
 
-<script setup lang="ts" generic="T extends ContentNavigationLink">
+<script setup lang="ts" generic="T extends PContentNavigationLink">
 import { useAppConfig, useRoute } from '#imports';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
-import { AccordionContent, PAccordionItem, AccordionRoot, AccordionTrigger, Primitive, useForwardPropsEmits } from 'akar';
+import {
+  AAccordionContent,
+  AAccordionItem,
+  AAccordionRoot,
+  AAccordionTrigger,
+  APrimitive,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { mapContentNavigationItem } from '../../utils/content';
 import { pickLinkProps } from '../../utils/link';
 import { uv } from '../../utils/uv';
-import UBadge from '../Badge.vue';
+import PBadge from '../badge.vue';
 import PIcon from '../icon.vue';
-import ULink from '../Link.vue';
-import ULinkBase from '../LinkBase.vue';
-import UContentNavigation from './ContentNavigation.vue';
+import PLinkBase from '../link-base.vue';
+import PLink from '../link.vue';
+import PContentNavigation from './content-navigation.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<ContentNavigationProps<T>>(), {
+const props = withDefaults(defineProps<PContentNavigationProps<T>>(), {
   as: 'nav',
   defaultOpen: undefined,
   level: 0,
@@ -117,8 +124,8 @@ const props = withDefaults(defineProps<ContentNavigationProps<T>>(), {
   highlight: false,
   unmountOnHide: true,
 });
-const emits = defineEmits<ContentNavigationEmits>();
-const slots = defineSlots<ContentNavigationSlots<T>>();
+const emits = defineEmits<PContentNavigationEmits>();
+const slots = defineSlots<PContentNavigationSlots<T>>();
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'collapsible', 'type', 'unmountOnHide'), emits);
 
@@ -126,7 +133,7 @@ const route = useRoute();
 const appConfig = useAppConfig() as ContentNavigation['AppConfig'];
 const pohonProp = useComponentPohon('contentNavigation', props);
 
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link: ContentNavigationLink; active: boolean }>();
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ link: PContentNavigationLink; active: boolean }>();
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.contentNavigation || {}) })({
   color: props.color,
@@ -137,7 +144,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.conten
 
 const disabled = computed(() => props.disabled || (props.type === 'multiple' && props.collapsible === false));
 
-function isRouteInTree(link: ContentNavigationLink, routePath: string): boolean {
+function isRouteInTree(link: PContentNavigationLink, routePath: string): boolean {
   if (link.children?.length) {
     return link.children.some((child) => isRouteInTree(child, routePath));
   }
@@ -220,11 +227,11 @@ const defaultValue = computed(() => {
           :active="active"
           :pohon="pohon"
         >
-          <UBadge
+          <PBadge
             v-if="link.badge || link.badge === 0"
             color="neutral"
             variant="outline"
-            :size="((pohonProp?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as BadgeProps['size'])"
+            :size="((pohonProp?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(typeof link.badge === 'string' || typeof link.badge === 'number') ? { label: link.badge } : link.badge"
             data-slot="linkTrailingBadge"
             :class="pohon.linkTrailingBadge({ class: pohonProp?.linkTrailingBadge })"
@@ -246,14 +253,14 @@ const defaultValue = computed(() => {
     </slot>
   </DefineLinkTemplate>
 
-  <Primitive
+  <APrimitive
     :as="as"
     v-bind="$attrs"
     :as-child="level > 0"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <AccordionRoot
+    <AAccordionRoot
       as="ul"
       :disabled="disabled"
       v-bind="rootProps"
@@ -264,7 +271,7 @@ const defaultValue = computed(() => {
         v-for="(link, index) in navigation"
         :key="index"
       >
-        <PAccordionItem
+        <AAccordionItem
           v-if="link.children?.length"
           as="li"
           :disabled="!!link.disabled"
@@ -272,7 +279,7 @@ const defaultValue = computed(() => {
           :class="pohon.itemWithChildren({ class: [pohonProp?.itemWithChildren, link.pohon?.itemWithChildren], level: level > 0 })"
           :value="String(index)"
         >
-          <AccordionTrigger
+          <AAccordionTrigger
             as="button"
             :class="[
               pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active: link.active, disabled: !!link.disabled || disabled }),
@@ -283,13 +290,13 @@ const defaultValue = computed(() => {
               :link="link"
               :active="link.active || false"
             />
-          </AccordionTrigger>
+          </AAccordionTrigger>
 
-          <AccordionContent
+          <AAccordionContent
             data-slot="content"
             :class="pohon.content({ class: [pohonProp?.content, link.pohon?.content] })"
           >
-            <UContentNavigation
+            <PContentNavigation
               v-bind="rootProps"
               :navigation="link.children"
               :default-open="defaultOpen"
@@ -310,21 +317,21 @@ const defaultValue = computed(() => {
                   v-bind="{ ...slotData, link: slotData.link as T }"
                 />
               </template>
-            </UContentNavigation>
-          </AccordionContent>
-        </PAccordionItem>
+            </PContentNavigation>
+          </AAccordionContent>
+        </AAccordionItem>
 
         <li
           v-else
           data-slot="item"
           :class="pohon.item({ class: [pohonProp?.item, link.pohon?.item], level: level > 0 })"
         >
-          <ULink
+          <PLink
             v-slot="{ active, ...slotProps }"
             v-bind="pickLinkProps(mapContentNavigationItem(link))"
             custom
           >
-            <ULinkBase
+            <PLinkBase
               v-bind="slotProps"
               data-slot="link"
               :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active, disabled: !!link.disabled, level: level > 0 })"
@@ -333,10 +340,10 @@ const defaultValue = computed(() => {
                 :link="link"
                 :active="active"
               />
-            </ULinkBase>
-          </ULink>
+            </PLinkBase>
+          </PLink>
         </li>
       </template>
-    </AccordionRoot>
-  </Primitive>
+    </AAccordionRoot>
+  </APrimitive>
 </template>

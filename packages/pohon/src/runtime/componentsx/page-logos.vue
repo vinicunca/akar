@@ -33,13 +33,13 @@ export interface PageLogosSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PIcon from './icon.vue';
-import UMarquee from './Marquee.vue';
+import PMarquee from './marquee.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -82,7 +82,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageLo
     </template>
   </DefineCreateItemTemplate>
 
-  <Primitive
+  <APrimitive
     :as="as"
     v-bind="$attrs"
     data-slot="root"
@@ -96,14 +96,14 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageLo
       {{ title }}
     </h2>
 
-    <UMarquee
+    <PMarquee
       v-if="marquee"
       v-bind="typeof marquee === 'object' ? marquee : {}"
       data-slot="logos"
       :class="pohon.logos({ class: pohonProp?.logos, marquee: true })"
     >
       <ReuseCreateItemTemplate :items="items" />
-    </UMarquee>
+    </PMarquee>
     <div
       v-else
       data-slot="logos"
@@ -111,5 +111,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageLo
     >
       <ReuseCreateItemTemplate :items="items" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

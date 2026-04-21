@@ -3,13 +3,13 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { ChatStatus, UIMessage } from 'ai';
 import type { ComponentPublicInstance, VNode } from 'vue';
-import type { ChatMessageProps, ChatMessageSlots, PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
+import type { PButtonProps, PChatMessageProps, PChatMessageSlots, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/chat-messages';
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>;
 
-export interface ChatMessagesProps {
+export interface PChatMessagesProps {
   messages?: Array<UIMessage>;
   status?: ChatStatus;
   /**
@@ -38,12 +38,12 @@ export interface ChatMessagesProps {
    * The `user` messages props.
    * `{ side: 'right', variant: 'soft' }`{lang="ts-type"}
    */
-  user?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'pohon'>;
+  user?: Pick<PChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'pohon'>;
   /**
    * The `assistant` messages props.
    * `{ side: 'left', variant: 'naked' }`{lang="ts-type"}
    */
-  assistant?: Pick<ChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'pohon'>;
+  assistant?: Pick<PChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'pohon'>;
   /**
    * Render the messages in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
@@ -59,13 +59,13 @@ export interface ChatMessagesProps {
   pohon?: ChatMessages['slots'];
 }
 
-type ExtendSlotWithVersion<K extends keyof ChatMessageSlots>
-  = Required<ChatMessageSlots>[K] extends (props: infer P) => Array<VNode>
+type ExtendSlotWithVersion<K extends keyof PChatMessageSlots>
+  = Required<PChatMessageSlots>[K] extends (props: infer P) => Array<VNode>
     ? (props: P & { message: UIMessage }) => Array<VNode>
-    : Required<ChatMessageSlots>[K];
+    : Required<PChatMessageSlots>[K];
 
 export type ChatMessagesSlots = {
-  [K in keyof ChatMessageSlots]?: ExtendSlotWithVersion<K>
+  [K in keyof PChatMessageSlots]?: ExtendSlotWithVersion<K>
 } & {
   default?: (props?: {}) => Array<VNode>;
   indicator?: (props: { pohon: ChatMessages['pohon'] }) => Array<VNode>;
@@ -77,16 +77,16 @@ export type ChatMessagesSlots = {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { useElementBounding, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core';
-import { Presence } from 'akar';
+import { APresence } from 'akar';
 import { defu } from 'defu';
 import { computed, nextTick, onMounted, ref, toRef, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UChatMessage from './ChatMessage.vue';
+import PChatMessage from './chat-message.vue';
 
-const props = withDefaults(defineProps<ChatMessagesProps>(), {
+const props = withDefaults(defineProps<PChatMessagesProps>(), {
   autoScroll: true,
   shouldAutoScroll: false,
   shouldScrollToBottom: true,
@@ -318,7 +318,7 @@ onMounted(() => {
         v-for="message in messages"
         :key="message.id"
       >
-        <UChatMessage
+        <PChatMessage
           v-if="message.parts?.length"
           v-bind="{ ...(message.role === 'user' ? userProps : assistantProps), ...message }"
           :ref="el => registerMessageRef(message.id, el as ComponentPublicInstance)"
@@ -334,11 +334,11 @@ onMounted(() => {
               :message="message"
             />
           </template>
-        </UChatMessage>
+        </PChatMessage>
       </template>
     </slot>
 
-    <UChatMessage
+    <PChatMessage
       v-if="showIndicator"
       id="indicator"
       role="assistant"
@@ -360,9 +360,9 @@ onMounted(() => {
           </div>
         </slot>
       </template>
-    </UChatMessage>
+    </PChatMessage>
 
-    <Presence :present="showAutoScroll">
+    <APresence :present="showAutoScroll">
       <div
         :data-state="showAutoScroll ? 'open' : 'closed'"
         data-slot="viewport"
@@ -385,6 +385,6 @@ onMounted(() => {
           />
         </slot>
       </div>
-    </Presence>
+    </APresence>
   </div>
 </template>

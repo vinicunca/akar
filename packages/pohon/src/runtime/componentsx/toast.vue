@@ -1,15 +1,15 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ToastRootEmits, ToastRootProps } from 'akar';
+import type { AToastRootEmits, AToastRootProps } from 'akar';
 import type { VNode } from 'vue';
-import type { AvatarProps, PButtonProps, PIconProps, PLinkPropsKeys, ProgressProps } from '../types';
+import type { PAvatarProps, PButtonProps, PIconProps, PLinkPropsKeys, PProgressProps } from '../types';
 import type { StringOrVNode } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/toast';
 
 type Toast = ComponentConfig<typeof theme, AppConfig, 'toast'>;
 
-export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' | 'type' | 'duration'> {
+export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open' | 'type' | 'duration'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'li'
@@ -21,7 +21,7 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
-  avatar?: AvatarProps;
+  avatar?: PAvatarProps;
   /**
    * @defaultValue 'primary'
    */
@@ -55,14 +55,14 @@ export interface ToastProps extends Pick<ToastRootProps, 'defaultOpen' | 'open' 
    * `{ size: 'sm' }`{lang="ts-type"}
    * @defaultValue true
    */
-  progress?: boolean | Pick<ProgressProps, 'color' | 'pohon'>;
+  progress?: boolean | Pick<PProgressProps, 'color' | 'pohon'>;
   class?: any;
   pohon?: Toast['slots'];
 }
 
-export interface ToastEmits extends ToastRootEmits {}
+export interface PToastEmits extends AToastRootEmits {}
 
-export interface ToastSlots {
+export interface PToastSlots {
   leading?: (props: { pohon: Toast['pohon'] }) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
   description?: (props?: {}) => Array<VNode>;
@@ -74,7 +74,7 @@ export interface ToastSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle, useForwardPropsEmits } from 'akar';
+import { AToastAction, AToastClose, AToastDescription, AToastRoot, AToastTitle, useForwardPropsEmits } from 'akar';
 import { computed, onMounted, ref, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
@@ -82,15 +82,15 @@ import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PIcon from './icon.vue';
-import UProgress from './Progress.vue';
+import PProgress from './progress.vue';
 
-const props = withDefaults(defineProps<ToastProps>(), {
+const props = withDefaults(defineProps<PToastProps>(), {
   orientation: 'vertical',
   close: true,
   progress: true,
 });
-const emits = defineEmits<ToastEmits>();
-const slots = defineSlots<ToastSlots>();
+const emits = defineEmits<PToastEmits>();
+const slots = defineSlots<PToastSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Toast['AppConfig'];
@@ -121,7 +121,7 @@ defineExpose({
 </script>
 
 <template>
-  <ToastRoot
+  <AToastRoot
     ref="rootRef"
     v-slot="{ remaining, duration, open }"
     v-bind="rootProps"
@@ -136,7 +136,7 @@ defineExpose({
     >
       <PAvatar
         v-if="avatar"
-        :size="((pohonProp?.avatarSize || pohon.avatarSize()) as AvatarProps['size'])"
+        :size="((pohonProp?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
         data-slot="avatar"
         :class="pohon.avatar({ class: pohonProp?.avatar })"
@@ -153,7 +153,7 @@ defineExpose({
       data-slot="wrapper"
       :class="pohon.wrapper({ class: pohonProp?.wrapper })"
     >
-      <ToastTitle
+      <AToastTitle
         v-if="title || !!slots.title"
         data-slot="title"
         :class="pohon.title({ class: pohonProp?.title })"
@@ -171,8 +171,8 @@ defineExpose({
             {{ title }}
           </template>
         </slot>
-      </ToastTitle>
-      <ToastDescription
+      </AToastTitle>
+      <AToastDescription
         v-if="description || !!slots.description"
         data-slot="description"
         :class="pohon.description({ class: pohonProp?.description })"
@@ -190,7 +190,7 @@ defineExpose({
             {{ description }}
           </template>
         </slot>
-      </ToastDescription>
+      </AToastDescription>
 
       <div
         v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)"
@@ -198,7 +198,7 @@ defineExpose({
         :class="pohon.actions({ class: pohonProp?.actions })"
       >
         <slot name="actions">
-          <ToastAction
+          <AToastAction
             v-for="(action, index) in actions"
             :key="index"
             :alt-text="action.label || 'Action'"
@@ -210,7 +210,7 @@ defineExpose({
               :color="color"
               v-bind="action"
             />
-          </ToastAction>
+          </AToastAction>
         </slot>
       </div>
     </div>
@@ -222,7 +222,7 @@ defineExpose({
     >
       <template v-if="orientation === 'horizontal' && (actions?.length || !!slots.actions)">
         <slot name="actions">
-          <ToastAction
+          <AToastAction
             v-for="(action, index) in actions"
             :key="index"
             :alt-text="action.label || 'Action'"
@@ -234,11 +234,11 @@ defineExpose({
               :color="color"
               v-bind="action"
             />
-          </ToastAction>
+          </AToastAction>
         </slot>
       </template>
 
-      <ToastClose
+      <AToastClose
         v-if="close || !!slots.close"
         as-child
       >
@@ -258,17 +258,17 @@ defineExpose({
             @click.stop
           />
         </slot>
-      </ToastClose>
+      </AToastClose>
     </div>
 
-    <UProgress
+    <PProgress
       v-if="progress && open && remaining > 0 && duration"
       :model-value="remaining / duration * 100"
       :color="color"
-      v-bind="(typeof progress === 'object' ? progress as Partial<ProgressProps> : {})"
+      v-bind="(typeof progress === 'object' ? progress as Partial<PProgressProps> : {})"
       size="sm"
       data-slot="progress"
       :class="pohon.progress({ class: pohonProp?.progress })"
     />
-  </ToastRoot>
+  </AToastRoot>
 </template>

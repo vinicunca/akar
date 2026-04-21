@@ -6,7 +6,7 @@ import theme from '#build/pohon/page';
 
 type Page = ComponentConfig<typeof theme, AppConfig, 'page'>;
 
-export interface PageProps {
+export interface PPageProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -16,7 +16,7 @@ export interface PageProps {
   pohon?: Page['slots'];
 }
 
-export interface PageSlots {
+export interface PPageSlots {
   left?: (props?: {}) => Array<VNode>;
   default?: (props?: {}) => Array<VNode>;
   right?: (props?: {}) => Array<VNode>;
@@ -25,13 +25,13 @@ export interface PageSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive, Slot } from 'akar';
+import { APrimitive, APrimitiveSlot } from 'akar';
 import { computed, onBeforeUpdate, shallowRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = defineProps<PageProps>();
-const slots = defineSlots<PageSlots>();
+const props = defineProps<PPageProps>();
+const slots = defineSlots<PPageSlots>();
 
 const appConfig = useAppConfig() as Page['AppConfig'];
 const pohonProp = useComponentPohon('page', props);
@@ -51,18 +51,18 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.page |
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <Slot
+    <APrimitiveSlot
       v-if="!!slots.left"
       data-slot="left"
       :class="pohon.left({ class: pohonProp?.left })"
     >
       <slot name="left" />
-    </Slot>
+    </APrimitiveSlot>
 
     <div
       data-slot="center"
@@ -71,12 +71,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.page |
       <slot />
     </div>
 
-    <Slot
+    <APrimitiveSlot
       v-if="!!slots.right"
       data-slot="right"
       :class="pohon.right({ class: pohonProp?.right })"
     >
       <slot name="right" />
-    </Slot>
-  </Primitive>
+    </APrimitiveSlot>
+  </APrimitive>
 </template>

@@ -1,16 +1,22 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { DropdownMenuArrowProps, DropdownMenuContentEmits, DropdownMenuContentProps, DropdownMenuRootEmits, DropdownMenuRootProps } from 'akar';
+import type {
+  ADropdownMenuArrowProps,
+  ADropdownMenuContentEmits,
+  ADropdownMenuContentProps,
+  ADropdownMenuRootEmits,
+  ADropdownMenuRootProps,
+} from 'akar';
 import type { VNode } from 'vue';
-import type { AAvatarProps, InputProps, KbdProps, LinkProps, PIconProps } from '../types';
+import type { PAvatarProps, PIconProps, PInputProps, PKbdProps, PLinkProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dropdown-menu';
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>;
 
-export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
+export interface PDropdownMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'custom'> {
   label?: string;
   description?: string;
   /**
@@ -18,9 +24,9 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
    */
   icon?: PIconProps['name'];
   color?: DropdownMenu['variants']['color'];
-  avatar?: AAvatarProps;
-  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & { class?: any } & Partial<EmitsToProps<DropdownMenuContentEmits>>;
-  kbds?: Array<KbdProps['value']> | Array<KbdProps>;
+  avatar?: PAvatarProps;
+  content?: Omit<ADropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & { class?: any } & Partial<EmitsToProps<ADropdownMenuContentEmits>>;
+  kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   /**
    * The item type.
    * @defaultValue 'link'
@@ -32,18 +38,18 @@ export interface DropdownMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cust
   checked?: boolean;
   open?: boolean;
   defaultOpen?: boolean;
-  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>;
+  filter?: boolean | Omit<PInputProps, 'modelValue' | 'defaultValue'>;
   filterFields?: Array<string>;
   ignoreFilter?: boolean;
-  children?: ArrayOrNested<DropdownMenuItem>;
-  onSelect?: (e: Event) => void;
+  children?: ArrayOrNested<PDropdownMenuItem>;
+  onSelect?: (event: Event) => void;
   onUpdateChecked?: (checked: boolean) => void;
   class?: any;
   pohon?: Pick<DropdownMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>;
   [key: string]: any;
 }
 
-export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>> extends Omit<DropdownMenuRootProps, 'dir'> {
+export interface PDropdownMenuProps<T extends ArrayOrNested<PDropdownMenuItem> = ArrayOrNested<PDropdownMenuItem>> extends Omit<ADropdownMenuRootProps, 'dir'> {
   /**
    * @defaultValue 'md'
    */
@@ -72,13 +78,13 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
-  content?: Omit<DropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DropdownMenuContentEmits>>;
+  content?: Omit<ADropdownMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ADropdownMenuContentEmits>>;
   /**
    * Display an arrow alongside the menu.
    * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
-  arrow?: boolean | Omit<DropdownMenuArrowProps, 'as' | 'asChild'>;
+  arrow?: boolean | Omit<ADropdownMenuArrowProps, 'as' | 'asChild'>;
   /**
    * Render the menu in a portal.
    * @defaultValue true
@@ -100,7 +106,7 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
    * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
    * @defaultValue false
    */
-  filter?: boolean | Omit<InputProps, 'modelValue' | 'defaultValue'>;
+  filter?: boolean | Omit<PInputProps, 'modelValue' | 'defaultValue'>;
   /**
    * The fields to filter by.
    * @defaultValue [labelKey]
@@ -116,12 +122,12 @@ export interface DropdownMenuProps<T extends ArrayOrNested<DropdownMenuItem> = A
   pohon?: DropdownMenu['slots'];
 }
 
-export interface DropdownMenuEmits extends DropdownMenuRootEmits {}
+export interface PDropdownMenuEmits extends ADropdownMenuRootEmits {}
 
-type SlotProps<T extends DropdownMenuItem> = (props: { item: T; active: boolean; index: number; pohon: DropdownMenu['pohon'] }) => Array<VNode>;
+type SlotProps<T extends PDropdownMenuItem> = (props: { item: T; active: boolean; index: number; pohon: DropdownMenu['pohon'] }) => Array<VNode>;
 
-export type DropdownMenuSlots<
-  A extends ArrayOrNested<DropdownMenuItem> = ArrayOrNested<DropdownMenuItem>,
+export type PDropdownMenuSlots<
+  A extends ArrayOrNested<PDropdownMenuItem> = ArrayOrNested<PDropdownMenuItem>,
   T extends NestedItem<A> = NestedItem<A>,
 > = {
   'default'?: (props: { open: boolean }) => Array<VNode>;
@@ -139,18 +145,23 @@ export type DropdownMenuSlots<
 
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<DropdownMenuItem>">
+<script setup lang="ts" generic="T extends ArrayOrNested<PDropdownMenuItem>">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { DropdownMenuArrow, DropdownMenuRoot, DropdownMenuTrigger, useForwardPropsEmits } from 'akar';
+import {
+  ADropdownMenuArrow,
+  ADropdownMenuRoot,
+  ADropdownMenuTrigger,
+  useForwardPropsEmits,
+} from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';
-import UDropdownMenuContent from './DropdownMenuContent.vue';
+import PDropdownMenuContent from './dropdown-menu-content.vue';
 
-const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
+const props = withDefaults(defineProps<PDropdownMenuProps<T>>(), {
   portal: true,
   modal: true,
   externalIcon: true,
@@ -159,8 +170,8 @@ const props = withDefaults(defineProps<DropdownMenuProps<T>>(), {
   filter: false,
   ignoreFilter: false,
 });
-const emits = defineEmits<DropdownMenuEmits>();
-const slots = defineSlots<DropdownMenuSlots<T>>();
+const emits = defineEmits<PDropdownMenuEmits>();
+const slots = defineSlots<PDropdownMenuSlots<T>>();
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' });
 
@@ -168,8 +179,8 @@ const appConfig = useAppConfig() as DropdownMenu['AppConfig'];
 const pohonProp = useComponentPohon('dropdownMenu', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'defaultOpen', 'open', 'modal'), emits);
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as DropdownMenuContentProps);
-const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as DropdownMenuArrowProps);
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as ADropdownMenuContentProps);
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ADropdownMenuArrowProps);
 const getProxySlots = () => omit(slots, ['default']);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dropdownMenu || {}) })({
@@ -178,20 +189,20 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dropdo
 </script>
 
 <template>
-  <DropdownMenuRoot
+  <ADropdownMenuRoot
     v-slot="{ open }"
     v-bind="rootProps"
   >
-    <DropdownMenuTrigger
+    <ADropdownMenuTrigger
       v-if="!!slots.default"
       as-child
       :class="props.class"
       :disabled="disabled"
     >
       <slot :open="open" />
-    </DropdownMenuTrigger>
+    </ADropdownMenuTrigger>
 
-    <UDropdownMenuContent
+    <PDropdownMenuContent
       v-model:search-term="searchTerm"
       :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
       :pohon="pohon"
@@ -214,17 +225,17 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dropdo
         #[name]="slotData"
       >
         <slot
-          :name="(name as keyof DropdownMenuSlots<T>)"
+          :name="(name as keyof PDropdownMenuSlots<T>)"
           v-bind="slotData"
         />
       </template>
 
-      <DropdownMenuArrow
+      <ADropdownMenuArrow
         v-if="!!arrow"
         v-bind="arrowProps"
         data-slot="arrow"
         :class="pohon.arrow({ class: pohonProp?.arrow })"
       />
-    </UDropdownMenuContent>
-  </DropdownMenuRoot>
+    </PDropdownMenuContent>
+  </ADropdownMenuRoot>
 </template>

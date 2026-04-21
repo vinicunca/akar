@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { LinkProps, PIconProps } from '../types';
+import type { PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/footer-columns';
 
 type FooterColumns = ComponentConfig<typeof theme, AppConfig, 'footerColumns'>;
 
-export interface FooterColumnLink extends Omit<LinkProps, 'custom'> {
+export interface PFooterColumnLink extends Omit<PLinkProps, 'custom'> {
   label: string;
   /**
    * @IconifyIcon
@@ -17,29 +17,29 @@ export interface FooterColumnLink extends Omit<LinkProps, 'custom'> {
   pohon?: Pick<FooterColumns['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>;
 }
 
-export interface FooterColumn<T extends FooterColumnLink = FooterColumnLink> {
+export interface PFooterColumn<T extends PFooterColumnLink = PFooterColumnLink> {
   label: string;
   children?: Array<T>;
 }
 
-export interface FooterColumnsProps<T extends FooterColumnLink = FooterColumnLink> {
+export interface PFooterColumnsProps<T extends PFooterColumnLink = PFooterColumnLink> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any;
   class?: any;
-  columns?: Array<FooterColumn<T>>;
+  columns?: Array<PFooterColumn<T>>;
   pohon?: FooterColumns['slots'];
 }
 
 type SlotProps<T> = (props: { link: T; active: boolean; pohon: FooterColumns['pohon'] }) => Array<VNode>;
 
-export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLink> {
+export interface PFooterColumnsSlots<T extends PFooterColumnLink = PFooterColumnLink> {
   'left'?: (props?: {}) => Array<VNode>;
   'default'?: (props?: {}) => Array<VNode>;
   'right'?: (props?: {}) => Array<VNode>;
-  'column-label'?: (props: { column: FooterColumn<T> }) => Array<VNode>;
+  'column-label'?: (props: { column: PFooterColumn<T> }) => Array<VNode>;
   'link'?: SlotProps<T>;
   'link-leading'?: SlotProps<T>;
   'link-label'?: (props: { link: T; active: boolean }) => Array<VNode>;
@@ -47,21 +47,21 @@ export interface FooterColumnsSlots<T extends FooterColumnLink = FooterColumnLin
 }
 </script>
 
-<script setup lang="ts" generic="T extends FooterColumnLink">
+<script setup lang="ts" generic="T extends PFooterColumnLink">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
-import ULink from './Link.vue';
-import ULinkBase from './LinkBase.vue';
+import PLinkBase from './link-base.vue';
+import PLink from './link.vue';
 
-const props = withDefaults(defineProps<FooterColumnsProps<T>>(), {
+const props = withDefaults(defineProps<PFooterColumnsProps<T>>(), {
   as: 'nav',
 });
-const slots = defineSlots<FooterColumnsSlots<T>>();
+const slots = defineSlots<PFooterColumnsSlots<T>>();
 
 const appConfig = useAppConfig() as FooterColumns['AppConfig'];
 const pohonProp = useComponentPohon('footerColumns', props);
@@ -70,7 +70,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -115,12 +115,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer
               data-slot="item"
               :class="pohon.item({ class: [pohonProp?.item, link.pohon?.item] })"
             >
-              <ULink
+              <PLink
                 v-slot="{ active, ...slotProps }"
                 v-bind="pickLinkProps(link)"
                 custom
               >
-                <ULinkBase
+                <PLinkBase
                   v-bind="slotProps"
                   data-slot="link"
                   :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active })"
@@ -172,8 +172,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer
                       :active="active"
                     />
                   </slot>
-                </ULinkBase>
-              </ULink>
+                </PLinkBase>
+              </PLink>
             </li>
           </ul>
         </div>
@@ -187,5 +187,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer
     >
       <slot name="right" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

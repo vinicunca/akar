@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { LinkProps, PIconProps } from '../types';
+import type { PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/page-anchors';
 
 type PageAnchors = ComponentConfig<typeof theme, AppConfig, 'pageAnchors'>;
 
-export interface PageAnchor extends Omit<LinkProps, 'custom'> {
+export interface PPageAnchor extends Omit<PLinkProps, 'custom'> {
   label: string;
   /**
    * @IconifyIcon
@@ -17,7 +17,7 @@ export interface PageAnchor extends Omit<LinkProps, 'custom'> {
   pohon?: Pick<PageAnchors['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeading' | 'linkLeadingIcon'>;
 }
 
-export interface PageAnchorsProps<T extends PageAnchor = PageAnchor> {
+export interface PPageAnchorsProps<T extends PPageAnchor = PPageAnchor> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'
@@ -30,7 +30,7 @@ export interface PageAnchorsProps<T extends PageAnchor = PageAnchor> {
 
 type SlotProps<T> = (props: { link: T; active: boolean; pohon: PageAnchors['pohon'] }) => Array<VNode>;
 
-export interface PageAnchorsSlots<T extends PageAnchor = PageAnchor> {
+export interface PPageAnchorsSlots<T extends PPageAnchor = PPageAnchor> {
   'link'?: SlotProps<T>;
   'link-leading'?: SlotProps<T>;
   'link-label'?: (props: { link: T; active: boolean }) => Array<VNode>;
@@ -38,21 +38,21 @@ export interface PageAnchorsSlots<T extends PageAnchor = PageAnchor> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends PageAnchor">
+<script setup lang="ts" generic="T extends PPageAnchor">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
-import ULink from './Link.vue';
-import ULinkBase from './LinkBase.vue';
+import PLinkBase from './link-base.vue';
+import PLink from './link.vue';
 
-const props = withDefaults(defineProps<PageAnchorsProps<T>>(), {
+const props = withDefaults(defineProps<PPageAnchorsProps<T>>(), {
   as: 'nav',
 });
-const slots = defineSlots<PageAnchorsSlots<T>>();
+const slots = defineSlots<PPageAnchorsSlots<T>>();
 
 const appConfig = useAppConfig() as PageAnchors['AppConfig'];
 const pohonProp = useComponentPohon('pageAnchors', props);
@@ -61,7 +61,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageAn
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -76,12 +76,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageAn
         data-slot="item"
         :class="pohon.item({ class: [pohonProp?.item, link.pohon?.item] })"
       >
-        <ULink
+        <PLink
           v-slot="{ active, ...slotProps }"
           v-bind="pickLinkProps(link)"
           custom
         >
-          <ULinkBase
+          <PLinkBase
             v-bind="slotProps"
             data-slot="link"
             :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active })"
@@ -139,9 +139,9 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageAn
                 :active="active"
               />
             </slot>
-          </ULinkBase>
-        </ULink>
+          </PLinkBase>
+        </PLink>
       </li>
     </ul>
-  </Primitive>
+  </APrimitive>
 </template>

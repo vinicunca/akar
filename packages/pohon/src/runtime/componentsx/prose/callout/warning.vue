@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import Callout from '../Callout.vue';
+import Callout from '../callout.vue';
 
 const appConfig = useAppConfig();
 </script>

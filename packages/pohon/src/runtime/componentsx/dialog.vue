@@ -1,21 +1,27 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { DialogContentEmits, DialogContentProps, DialogRootEmits, DialogRootProps, PointerDownOutsideEvent } from 'akar';
+import type {
+  ADialogContentEmits,
+  ADialogContentProps,
+  ADialogRootEmits,
+  ADialogRootProps,
+  PointerDownOutsideEvent,
+} from 'akar';
 import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
-import theme from '#build/pohon/modal';
+import theme from '#build/pohon/dialog';
 
-type Modal = ComponentConfig<typeof theme, AppConfig, 'modal'>;
+type Dialog = ComponentConfig<typeof theme, AppConfig, 'dialog'>;
 
-export interface ModalProps extends DialogRootProps {
+export interface PDialogProps extends ADialogRootProps {
   title?: string;
   description?: string;
-  /** The content of the modal. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>;
+  /** The content of the dialog. */
+  content?: Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ADialogContentEmits>>;
   /**
-   * Render an overlay behind the modal.
+   * Render an overlay behind the dialog.
    * @defaultValue true
    */
   overlay?: boolean;
@@ -25,22 +31,22 @@ export interface ModalProps extends DialogRootProps {
    */
   scrollable?: boolean;
   /**
-   * Animate the modal when opening or closing.
+   * Animate the dialog when opening or closing.
    * @defaultValue true
    */
   transition?: boolean;
   /**
-   * When `true`, the modal will take up the full screen.
+   * When `true`, the dialog will take up the full screen.
    * @defaultValue false
    */
   fullscreen?: boolean;
   /**
-   * Render the modal in a portal.
+   * Render the dialog in a portal.
    * @defaultValue true
    */
   portal?: boolean | string | HTMLElement;
   /**
-   * Display a close button to dismiss the modal.
+   * Display a close button to dismiss the dialog.
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @defaultValue true
    */
@@ -52,28 +58,28 @@ export interface ModalProps extends DialogRootProps {
    */
   closeIcon?: PIconProps['name'];
   /**
-   * When `false`, the modal will not close when clicking outside or pressing escape.
+   * When `false`, the dialog will not close when clicking outside or pressing escape.
    * @defaultValue true
    */
   dismissible?: boolean;
   class?: any;
-  pohon?: Modal['slots'];
+  pohon?: Dialog['slots'];
 }
 
-export interface ModalEmits extends DialogRootEmits {
+export interface PDialogEmits extends ADialogRootEmits {
   'after:leave': [];
   'after:enter': [];
   'close:prevent': [];
 }
 
-export interface ModalSlots {
+export interface PDialogSlots {
   default?: (props: { open: boolean }) => Array<VNode>;
   content?: (props: { close: () => void }) => Array<VNode>;
   header?: (props: { close: () => void }) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
   description?: (props?: {}) => Array<VNode>;
   actions?: (props?: {}) => Array<VNode>;
-  close?: (props: { pohon: Modal['pohon'] }) => Array<VNode>;
+  close?: (props: { pohon: Dialog['pohon'] }) => Array<VNode>;
   body?: (props: { close: () => void }) => Array<VNode>;
   footer?: (props: { close: () => void }) => Array<VNode>;
 }
@@ -82,17 +88,28 @@ export interface ModalSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
-import { DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger, useForwardPropsEmits, VisuallyHidden } from 'akar';
+import {
+  ADialogClose,
+  ADialogContent,
+  ADialogDescription,
+  ADialogOverlay,
+  ADialogPortal,
+  ADialogRoot,
+  ADialogTitle,
+  ADialogTrigger,
+  AVisuallyHidden,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { FieldGroupReset } from '../composables/use-field-group';
 import { useLocale } from '../composables/use-locale';
-import { FieldGroupReset } from '../composables/useFieldGroup';
-import { usePortal } from '../composables/usePortal';
+import { usePortal } from '../composables/use-portal';
 import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<ModalProps>(), {
+const props = withDefaults(defineProps<PDialogProps>(), {
   close: true,
   portal: true,
   overlay: true,
@@ -100,12 +117,12 @@ const props = withDefaults(defineProps<ModalProps>(), {
   modal: true,
   dismissible: true,
 });
-const emits = defineEmits<ModalEmits>();
-const slots = defineSlots<ModalSlots>();
+const emits = defineEmits<PDialogEmits>();
+const slots = defineSlots<PDialogSlots>();
 
 const { t } = useLocale();
-const appConfig = useAppConfig() as Modal['AppConfig'];
-const pohonProp = useComponentPohon('modal', props);
+const appConfig = useAppConfig() as Dialog['AppConfig'];
+const pohonProp = useComponentPohon('dialog', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'open', 'defaultOpen', 'modal'), emits);
 const portalProps = usePortal(toRef(() => props.portal));
@@ -115,22 +132,22 @@ const contentEvents = computed(() => {
     const events = ['interactOutside', 'escapeKeyDown'];
 
     return events.reduce((acc, curr) => {
-      acc[curr] = (e: Event) => {
-        e.preventDefault();
+      acc[curr] = (event: Event) => {
+        event.preventDefault();
         emits('close:prevent');
       };
       return acc;
-    }, {} as Record<typeof events[number], (e: Event) => void>);
+    }, {} as Record<typeof events[number], (event: Event) => void>);
   }
 
   return {
-    pointerDownOutside: (e: PointerDownOutsideEvent) => pointerDownOutside(e, { scrollable: props.scrollable }),
+    pointerDownOutside: (event: PointerDownOutsideEvent) => pointerDownOutside(event, { scrollable: props.scrollable }),
   };
 });
 
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate();
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal || {}) })({
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dialog || {}) })({
   transition: props.transition,
   fullscreen: props.fullscreen,
   overlay: props.overlay,
@@ -140,12 +157,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal 
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <DialogRoot
+  <ADialogRoot
     v-slot="{ open, close }"
     v-bind="rootProps"
   >
     <DefineContentTemplate>
-      <DialogContent
+      <ADialogContent
         data-slot="content"
         :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
         v-bind="contentProps"
@@ -153,21 +170,21 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal 
         @after-leave="emits('after:leave')"
         v-on="contentEvents"
       >
-        <VisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
-          <DialogTitle v-if="!title && !slots.title" />
-          <DialogTitle v-else-if="!!slots.content">
+        <AVisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
+          <ADialogTitle v-if="!title && !slots.title" />
+          <ADialogTitle v-else-if="!!slots.content">
             <slot name="title">
               {{ title }}
             </slot>
-          </DialogTitle>
+          </ADialogTitle>
 
-          <DialogDescription v-if="!description && !slots.description" />
-          <DialogDescription v-else-if="!!slots.content">
+          <ADialogDescription v-if="!description && !slots.description" />
+          <ADialogDescription v-else-if="!!slots.content">
             <slot name="description">
               {{ description }}
             </slot>
-          </DialogDescription>
-        </VisuallyHidden>
+          </ADialogDescription>
+        </AVisuallyHidden>
 
         <slot
           name="content"
@@ -186,7 +203,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal 
                 data-slot="wrapper"
                 :class="pohon.wrapper({ class: pohonProp?.wrapper })"
               >
-                <DialogTitle
+                <ADialogTitle
                   v-if="title || !!slots.title"
                   data-slot="title"
                   :class="pohon.title({ class: pohonProp?.title })"
@@ -194,9 +211,9 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal 
                   <slot name="title">
                     {{ title }}
                   </slot>
-                </DialogTitle>
+                </ADialogTitle>
 
-                <DialogDescription
+                <ADialogDescription
                   v-if="description || !!slots.description"
                   data-slot="description"
                   :class="pohon.description({ class: pohonProp?.description })"
@@ -204,12 +221,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal 
                   <slot name="description">
                     {{ description }}
                   </slot>
-                </DialogDescription>
+                </ADialogDescription>
               </div>
 
               <slot name="actions" />
 
-              <DialogClose
+              <ADialogClose
                 v-if="props.close || !!slots.close"
                 as-child
               >
@@ -228,7 +245,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal 
                     :class="pohon.close({ class: pohonProp?.close })"
                   />
                 </slot>
-              </DialogClose>
+              </ADialogClose>
             </slot>
           </div>
 
@@ -254,30 +271,30 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal 
             />
           </div>
         </slot>
-      </DialogContent>
+      </ADialogContent>
     </DefineContentTemplate>
 
-    <DialogTrigger
+    <ADialogTrigger
       v-if="!!slots.default"
       as-child
       :class="props.class"
     >
       <slot :open="open" />
-    </DialogTrigger>
+    </ADialogTrigger>
 
-    <DialogPortal v-bind="portalProps">
+    <ADialogPortal v-bind="portalProps">
       <FieldGroupReset>
         <template v-if="scrollable">
-          <DialogOverlay
+          <ADialogOverlay
             data-slot="overlay"
             :class="pohon.overlay({ class: pohonProp?.overlay })"
           >
             <ReuseContentTemplate />
-          </DialogOverlay>
+          </ADialogOverlay>
         </template>
 
         <template v-else>
-          <DialogOverlay
+          <ADialogOverlay
             v-if="overlay"
             data-slot="overlay"
             :class="pohon.overlay({ class: pohonProp?.overlay })"
@@ -286,6 +303,6 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.modal 
           <ReuseContentTemplate />
         </template>
       </FieldGroupReset>
-    </DialogPortal>
-  </DialogRoot>
+    </ADialogPortal>
+  </ADialogRoot>
 </template>

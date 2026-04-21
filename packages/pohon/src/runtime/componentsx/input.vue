@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { UseComponentIconsProps } from '../composables/useComponentIcons';
-import type { AvatarProps } from '../types';
+import type { UseComponentIconsProps } from '../composables/use-component-icons';
+import type { PAvatarProps } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
 import type { ApplyModifiers, ModelModifiers } from '../types/input';
 import type { AcceptableValue } from '../types/utils';
@@ -13,7 +13,7 @@ type Input = ComponentConfig<typeof theme, AppConfig, 'input'>;
 
 export type InputValue = AcceptableValue;
 
-export interface InputProps<T extends InputValue = InputValue, Mod extends ModelModifiers = ModelModifiers> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
+export interface PInputProps<T extends InputValue = InputValue, Mod extends ModelModifiers = ModelModifiers> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -52,13 +52,13 @@ export interface InputProps<T extends InputValue = InputValue, Mod extends Model
   pohon?: Input['slots'];
 }
 
-export interface InputEmits<T extends InputValue = InputValue, Mod extends ModelModifiers = ModelModifiers> {
+export interface PInputEmits<T extends InputValue = InputValue, Mod extends ModelModifiers = ModelModifiers> {
   'update:modelValue': [value: ApplyModifiers<T, Mod>];
   'blur': [event: FocusEvent];
   'change': [event: Event];
 }
 
-export interface InputSlots {
+export interface PInputSlots {
   leading?: (props: { pohon: Input['pohon'] }) => Array<VNode>;
   default?: (props: { pohon: Input['pohon'] }) => Array<VNode>;
   trailing?: (props: { pohon: Input['pohon'] }) => Array<VNode>;
@@ -68,12 +68,12 @@ export interface InputSlots {
 <script setup lang="ts" generic="T extends InputValue, Mod extends ModelModifiers">
 import { useAppConfig } from '#imports';
 import { useVModel } from '@vueuse/core';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed, onMounted, useTemplateRef } from 'vue';
+import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useComponentIcons } from '../composables/useComponentIcons';
-import { useFieldGroup } from '../composables/useFieldGroup';
-import { useFormField } from '../composables/useFormField';
+import { useFieldGroup } from '../composables/use-field-group';
+import { useFormField } from '../composables/use-form-field';
 import { looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
@@ -81,21 +81,21 @@ import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<InputProps<T, Mod>>(), {
+const props = withDefaults(defineProps<PInputProps<T, Mod>>(), {
   type: 'text',
   autocomplete: 'off',
   autofocusDelay: 0,
 });
-const emits = defineEmits<InputEmits<T, Mod>>();
-const slots = defineSlots<InputSlots>();
+const emits = defineEmits<PInputEmits<T, Mod>>();
+const slots = defineSlots<PInputSlots>();
 
-const modelValue = useVModel<InputProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue });
+const modelValue = useVModel<PInputProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue });
 
 const appConfig = useAppConfig() as Input['AppConfig'];
 const pohonProp = useComponentPohon('input', props);
 
-const { emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<InputProps<T>>(props, { deferInputValidation: true });
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps<T>>(props);
+const { emitFormBlur, emitFormInput, emitFormChange, size: formFieldSize, color, id, name, highlight, disabled, emitFormFocus, ariaAttrs } = useFormField<PInputProps<T>>(props, { deferInputValidation: true });
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputProps<T>>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value);
@@ -182,7 +182,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -225,7 +225,7 @@ defineExpose({
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as AvatarProps['size'])"
+          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           data-slot="leadingAvatar"
           :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
@@ -250,5 +250,5 @@ defineExpose({
         />
       </slot>
     </span>
-  </Primitive>
+  </APrimitive>
 </template>

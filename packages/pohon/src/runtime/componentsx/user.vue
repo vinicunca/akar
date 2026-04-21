@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { AvatarProps, ChipProps, LinkProps } from '../types';
+import type { PAvatarProps, PChipProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/user';
 
 type User = ComponentConfig<typeof theme, AppConfig, 'user'>;
 
-export interface UserProps {
+export interface PUserProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -15,8 +15,8 @@ export interface UserProps {
   as?: any;
   name?: string;
   description?: string;
-  avatar?: Omit<AvatarProps, 'size'> & { [key: string]: any };
-  chip?: boolean | Omit<ChipProps, 'size' | 'inset'>;
+  avatar?: Omit<PAvatarProps, 'size'> & { [key: string]: any };
+  chip?: boolean | Omit<PChipProps, 'size' | 'inset'>;
   /**
    * @defaultValue 'md'
    */
@@ -26,14 +26,14 @@ export interface UserProps {
    * @defaultValue 'horizontal'
    */
   orientation?: User['variants']['orientation'];
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   onClick?: (event: MouseEvent) => void | Promise<void>;
   class?: any;
   pohon?: User['slots'];
 }
 
-export interface UserSlots {
+export interface PUserSlots {
   avatar?: (props: { pohon: User['pohon'] }) => Array<VNode>;
   name?: (props?: {}) => Array<VNode>;
   description?: (props?: {}) => Array<VNode>;
@@ -43,20 +43,20 @@ export interface UserSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
-import UChip from './Chip.vue';
-import ULink from './Link.vue';
+import PChip from './chip.vue';
+import PLink from './link.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<UserProps>(), {
+const props = withDefaults(defineProps<PUserProps>(), {
   orientation: 'horizontal',
 });
-const slots = defineSlots<UserSlots>();
+const slots = defineSlots<PUserSlots>();
 
 const appConfig = useAppConfig() as User['AppConfig'];
 const pohonProp = useComponentPohon('user', props);
@@ -69,7 +69,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.user |
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -80,7 +80,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.user |
       name="avatar"
       :pohon="pohon"
     >
-      <UChip
+      <PChip
         v-if="chip && avatar"
         inset
         v-bind="typeof chip === 'object' ? chip : {}"
@@ -93,7 +93,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.user |
           data-slot="avatar"
           :class="pohon.avatar({ class: pohonProp?.avatar })"
         />
-      </UChip>
+      </PChip>
       <PAvatar
         v-else-if="avatar"
         :alt="name"
@@ -108,7 +108,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.user |
       data-slot="wrapper"
       :class="pohon.wrapper({ class: pohonProp?.wrapper })"
     >
-      <ULink
+      <PLink
         v-if="to"
         :aria-label="name"
         v-bind="{ to, target, ...$attrs }"
@@ -119,7 +119,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.user |
           class="inset-0 absolute"
           aria-hidden="true"
         />
-      </ULink>
+      </PLink>
 
       <slot>
         <p
@@ -142,5 +142,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.user |
         </p>
       </slot>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ChatStatus } from 'ai';
-import type { ButtonSlots, PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
+import type { PButtonProps, PButtonSlots, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/chat-prompt-submit';
 
 type ChatPromptSubmit = ComponentConfig<typeof theme, AppConfig, 'chatPromptSubmit'>;
 
-export interface ChatPromptSubmitProps extends Omit<PButtonProps, PLinkPropsKeys | 'icon' | 'color' | 'variant'> {
+export interface PChatPromptSubmitProps extends Omit<PButtonProps, PLinkPropsKeys | 'icon' | 'color' | 'variant'> {
   status?: ChatStatus;
   /**
    * The icon displayed in the button when the status is `ready`.
@@ -77,7 +77,7 @@ export interface ChatPromptSubmitProps extends Omit<PButtonProps, PLinkPropsKeys
   class?: any;
 }
 
-export interface ChatPromptSubmitEmits {
+export interface PChatPromptSubmitEmits {
   stop: [event: MouseEvent];
   reload: [event: MouseEvent];
 }
@@ -96,7 +96,7 @@ import PButton from './button.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<ChatPromptSubmitProps>(), {
+const props = withDefaults(defineProps<PChatPromptSubmitProps>(), {
   status: 'ready',
   streamingColor: 'neutral',
   streamingVariant: 'subtle',
@@ -105,8 +105,8 @@ const props = withDefaults(defineProps<ChatPromptSubmitProps>(), {
   errorColor: 'error',
   errorVariant: 'soft',
 });
-const emits = defineEmits<ChatPromptSubmitEmits>();
-const slots = defineSlots<ButtonSlots>();
+const emits = defineEmits<PChatPromptSubmitEmits>();
+const slots = defineSlots<PButtonSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as ChatPromptSubmit['AppConfig'];
@@ -162,7 +162,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatPr
       ...$attrs,
     }"
     :class="pohon.base({ class: [pohonProp?.base, props.class] })"
-    :pohon="transformPohon(ui, pohonProp)"
+    :pohon="transformPohon(pohon, pohonProp)"
   >
     <template
       v-for="(_, name) in slots"

@@ -24,8 +24,8 @@ export interface ProseImgProps {
 import ImageComponent from '#build/pohon-image-component';
 import { useAppConfig, useRuntimeConfig } from '#imports';
 import { createReusableTemplate, useEventListener } from '@vueuse/core';
+import { ADialogPortal, ADialogRoot, ADialogTrigger } from 'akar';
 import { AnimatePresence, Motion } from 'motion-v';
-import { DialogPortal, DialogRoot, DialogTrigger } from 'akar';
 import { computed, ref, useId } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { resolveBaseURL } from '../../utils';
@@ -85,13 +85,13 @@ if (props.zoom) {
     />
   </DefineZoomedImageTemplate>
 
-  <DialogRoot
+  <ADialogRoot
     v-if="zoom"
     v-slot="{ close }"
     v-model:open="open"
     :modal="false"
   >
-    <DialogTrigger as-child>
+    <ADialogTrigger as-child>
       <Motion
         :layout-id="layoutId"
         as-child
@@ -99,9 +99,9 @@ if (props.zoom) {
       >
         <ReuseImageTemplate />
       </Motion>
-    </DialogTrigger>
+    </ADialogTrigger>
 
-    <DialogPortal>
+    <ADialogPortal>
       <AnimatePresence>
         <Motion
           v-if="open"
@@ -125,8 +125,8 @@ if (props.zoom) {
           </Motion>
         </div>
       </AnimatePresence>
-    </DialogPortal>
-  </DialogRoot>
+    </ADialogPortal>
+  </ADialogRoot>
 
   <ReuseImageTemplate v-else />
 </template>

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { EditorMenuOptions } from '../composables/useEditorMenu';
+import type { EditorMenuOptions } from '../composables/use-editor-menu';
 import type { PIconProps } from '../types';
 import type { EditorCustomHandlers, EditorItem } from '../types/editor';
 import type { ComponentConfig } from '../types/uv';
@@ -34,12 +34,12 @@ type EditorSuggestionMenuActionItem<H extends EditorCustomHandlers = EditorCusto
   [key: string]: any;
 } & EditorItem<H>;
 
-export type EditorSuggestionMenuItem<H extends EditorCustomHandlers = EditorCustomHandlers>
+export type PEditorSuggestionMenuItem<H extends EditorCustomHandlers = EditorCustomHandlers>
   = | EditorSuggestionMenuLabelItem
     | EditorSuggestionMenuSeparatorItem
     | EditorSuggestionMenuActionItem<H>;
 
-export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
+export interface PEditorSuggestionMenuProps<T extends PEditorSuggestionMenuItem = PEditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
   /**
    * @defaultValue 'md'
    */
@@ -50,17 +50,17 @@ export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = 
 }
 </script>
 
-<script setup lang="ts" generic="T extends EditorSuggestionMenuItem">
+<script setup lang="ts" generic="T extends PEditorSuggestionMenuItem">
 import { useAppConfig } from '#imports';
 import { computed, h, inject, nextTick, onBeforeUnmount, onMounted, toRef } from 'vue';
-import { useEditorMenu } from '../composables/useEditorMenu';
+import { useEditorMenu } from '../composables/use-editor-menu';
 import { createHandlers } from '../utils/editor';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
+const props = withDefaults(defineProps<PEditorSuggestionMenuProps<T>>(), {
   pluginKey: 'suggestionMenu',
   char: '/',
 });
@@ -92,7 +92,7 @@ onMounted(async () => {
     options: props.options,
     suggestion: props.suggestion,
     appendTo: props.appendTo,
-    ui,
+    pohon,
     onSelect: (editor, range, item) => {
       // Skip if it's a label (non-interactive)
       if (item.type === 'label' || item.type === 'separator') {

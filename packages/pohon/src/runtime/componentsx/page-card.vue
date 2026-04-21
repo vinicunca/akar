@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { LinkProps, PIconProps } from '../types';
+import type { PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/page-card';
 
 type PageCard = ComponentConfig<typeof theme, AppConfig, 'pageCard'>;
 
-export interface PageCardProps {
+export interface PPageCardProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -50,14 +50,14 @@ export interface PageCardProps {
    * @defaultValue 'outline'
    */
   variant?: PageCard['variants']['variant'];
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   onClick?: (event: MouseEvent) => void | Promise<void>;
   class?: any;
   pohon?: PageCard['slots'];
 }
 
-export interface PageCardSlots {
+export interface PPageCardSlots {
   header?: (props?: {}) => Array<VNode>;
   body?: (props?: {}) => Array<VNode>;
   leading?: (props: { pohon: PageCard['pohon'] }) => Array<VNode>;
@@ -71,20 +71,20 @@ export interface PageCardSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { pausableFilter, useMouseInElement } from '@vueuse/core';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed, ref, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getSlotChildrenText } from '../utils';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
-import ULink from './Link.vue';
+import PLink from './link.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<PageCardProps>(), {
+const props = withDefaults(defineProps<PPageCardProps>(), {
   orientation: 'vertical',
 });
-const slots = defineSlots<PageCardSlots>();
+const slots = defineSlots<PPageCardSlots>();
 
 const cardRef = ref<HTMLElement>();
 const motionControl = pausableFilter();
@@ -124,7 +124,7 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     ref="cardRef"
     :as="as"
     :data-orientation="orientation"
@@ -214,7 +214,7 @@ const ariaLabel = computed(() => {
       <slot />
     </div>
 
-    <ULink
+    <PLink
       v-if="to"
       :aria-label="ariaLabel"
       v-bind="{ to, target, ...$attrs }"
@@ -225,6 +225,6 @@ const ariaLabel = computed(() => {
         class="inset-0 absolute"
         aria-hidden="true"
       />
-    </ULink>
-  </Primitive>
+    </PLink>
+  </APrimitive>
 </template>

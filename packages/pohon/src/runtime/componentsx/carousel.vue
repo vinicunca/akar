@@ -16,14 +16,14 @@ import theme from '#build/pohon/carousel';
 
 type Carousel = ComponentConfig<typeof theme, AppConfig, 'carousel'>;
 
-export type CarouselValue = AcceptableValue;
-export type CarouselItem = CarouselValue | {
+export type PCarouselValue = AcceptableValue;
+export type PCarouselItem = PCarouselValue | {
   class?: any;
   pohon?: Pick<Carousel['slots'], 'item'>;
   [key: string]: any;
 };
 
-export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
+export interface PCarouselProps<T extends PCarouselItem = PCarouselItem> extends Omit<EmblaOptionsType, 'axis' | 'container' | 'slides' | 'direction'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -101,11 +101,11 @@ export interface CarouselProps<T extends CarouselItem = CarouselItem> extends Om
   pohon?: Carousel['slots'];
 }
 
-export type CarouselSlots<T extends CarouselItem = CarouselItem> = {
+export type PCarouselSlots<T extends PCarouselItem = PCarouselItem> = {
   default?: (props: { item: T; index: number }) => Array<VNode>;
 };
 
-export interface CarouselEmits {
+export interface PCarouselEmits {
   /**
    * Emitted when the selected slide changes
    * @param selectedIndex The index of the selected slide
@@ -114,10 +114,10 @@ export interface CarouselEmits {
 }
 </script>
 
-<script setup lang="ts" generic="T extends CarouselItem">
+<script setup lang="ts" generic="T extends PCarouselItem">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { Primitive, useForwardProps } from 'akar';
+import { APrimitive, useForwardProps } from 'akar';
 import useEmblaCarousel from 'embla-carousel-vue';
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -125,7 +125,7 @@ import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<CarouselProps<T>>(), {
+const props = withDefaults(defineProps<PCarouselProps<T>>(), {
   orientation: 'horizontal',
   arrows: false,
   dots: false,
@@ -154,8 +154,8 @@ const props = withDefaults(defineProps<CarouselProps<T>>(), {
   fade: false,
   wheelGestures: false,
 });
-const emits = defineEmits<CarouselEmits>();
-defineSlots<CarouselSlots<T>>();
+const emits = defineEmits<PCarouselEmits>();
+defineSlots<PCarouselSlots<T>>();
 const { dir, t } = useLocale();
 const appConfig = useAppConfig() as Carousel['AppConfig'];
 const pohonProp = useComponentPohon('carousel', props);
@@ -306,7 +306,7 @@ function onSelect(api: EmblaCarouselType) {
   emits('select', selectedIndex.value);
 }
 
-function isCarouselItem(item: CarouselItem): item is Exclude<CarouselItem, CarouselValue> {
+function isCarouselItem(item: PCarouselItem): item is Exclude<PCarouselItem, PCarouselValue> {
   return typeof item === 'object' && item !== null;
 }
 
@@ -341,7 +341,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     role="region"
     aria-roledescription="carousel"
@@ -433,5 +433,5 @@ defineExpose({
         </template>
       </div>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

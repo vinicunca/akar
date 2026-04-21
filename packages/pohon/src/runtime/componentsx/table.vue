@@ -77,24 +77,24 @@ declare module '@tanstack/table-core' {
 
 type Table = ComponentConfig<typeof theme, AppConfig, 'table'>;
 
-export type TableRow<T> = Row<T>;
-export type TableData = RowData;
-export type TableColumn<T extends TableData, D = unknown> = ColumnDef<T, D>;
+export type PTableRow<T> = Row<T>;
+export type PTableData = RowData;
+export type PTableColumn<T extends PTableData, D = unknown> = ColumnDef<T, D>;
 
-export interface TableOptions<T extends TableData = TableData> extends Omit<CoreOptions<T>, 'data' | 'columns' | 'getCoreRowModel' | 'state' | 'onStateChange' | 'renderFallbackValue'> {
+export interface PTableOptions<T extends PTableData = PTableData> extends Omit<CoreOptions<T>, 'data' | 'columns' | 'getCoreRowModel' | 'state' | 'onStateChange' | 'renderFallbackValue'> {
   state?: CoreOptions<T>['state'];
   onStateChange?: CoreOptions<T>['onStateChange'];
   renderFallbackValue?: CoreOptions<T>['renderFallbackValue'];
 }
 
-export interface TableProps<T extends TableData = TableData> extends TableOptions<T>, /** @vue-ignore */ TableHTMLAttributes {
+export interface PTableProps<T extends PTableData = PTableData> extends PTableOptions<T>, /** @vue-ignore */ TableHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any;
   data?: Array<T>;
-  columns?: Array<TableColumn<T>>;
+  columns?: Array<PTableColumn<T>>;
   caption?: string;
   meta?: TableMeta<T>;
   /**
@@ -203,9 +203,9 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
    * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
    */
   facetedOptions?: FacetedOptions<T>;
-  onSelect?: (e: Event, row: TableRow<T>) => void;
-  onHover?: (e: Event, row: TableRow<T> | null) => void;
-  onContextmenu?: ((e: Event, row: TableRow<T>) => void) | Array<((e: Event, row: TableRow<T>) => void)>;
+  onSelect?: (event: Event, row: PTableRow<T>) => void;
+  onHover?: (event: Event, row: PTableRow<T> | null) => void;
+  onContextmenu?: ((event: Event, row: PTableRow<T>) => void) | Array<((event: Event, row: PTableRow<T>) => void)>;
   class?: any;
   pohon?: Table['slots'];
 }
@@ -213,7 +213,7 @@ export interface TableProps<T extends TableData = TableData> extends TableOption
 type DynamicHeaderFooterSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-header` | `${K extends string ? K : never}-footer` | (string & {}), (props: HeaderContext<T, unknown>) => Array<VNode>>;
 type DynamicCellSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-cell` | (string & {}), (props: CellContext<T, unknown>) => Array<VNode>>;
 
-export type TableSlots<T extends TableData = TableData> = {
+export type PTableSlots<T extends PTableData = PTableData> = {
   'expanded'?: (props: { row: Row<T> }) => Array<VNode>;
   'empty'?: (props?: {}) => Array<VNode>;
   'loading'?: (props?: {}) => Array<VNode>;
@@ -224,12 +224,12 @@ export type TableSlots<T extends TableData = TableData> = {
 
 </script>
 
-<script setup lang="ts" generic="T extends TableData">
+<script setup lang="ts" generic="T extends PTableData">
 import { useAppConfig } from '#imports';
 import { FlexRender, getCoreRowModel, getExpandedRowModel, getFilteredRowModel, getSortedRowModel, useVueTable } from '@tanstack/vue-table';
 import { useVirtualizer } from '@tanstack/vue-virtual';
 import { createRef, createReusableTemplate, reactivePick } from '@vueuse/core';
-import { Primitive, useForwardProps } from 'akar';
+import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { upperFirst } from 'scule';
 import { computed, toRef, useTemplateRef, watch } from 'vue';
@@ -239,13 +239,13 @@ import { uv } from '../utils/uv';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<TableProps<T>>(), {
+const props = withDefaults(defineProps<PTableProps<T>>(), {
   watchOptions: () => ({
     deep: true,
   }),
   virtualize: false,
 });
-const slots = defineSlots<TableSlots<T>>();
+const slots = defineSlots<PTableSlots<T>>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Table['AppConfig'];
@@ -253,14 +253,14 @@ const pohonProp = useComponentPohon('table', props);
 
 const data = createRef(props.data ?? [], props.watchOptions?.deep !== false);
 const meta = computed(() => props.meta ?? {});
-const columns = computed<Array<TableColumn<T>>>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) }))));
+const columns = computed<Array<PTableColumn<T>>>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: upperFirst(accessorKey) }))));
 
-function processColumns(columns: Array<TableColumn<T>>): Array<TableColumn<T>> {
+function processColumns(columns: Array<PTableColumn<T>>): Array<PTableColumn<T>> {
   return columns.map((column) => {
-    const col = { ...column } as TableColumn<T>;
+    const col = { ...column } as PTableColumn<T>;
 
     if ('columns' in col && col.columns) {
-      col.columns = processColumns(col.columns as Array<TableColumn<T>>);
+      col.columns = processColumns(col.columns as Array<PTableColumn<T>>);
     }
 
     if (!col.cell) {
@@ -286,7 +286,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.table 
 }));
 
 const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate();
-const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: TableRow<T>; style?: Record<string, string> }>({
+const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: PTableRow<T>; style?: Record<string, string> }>({
   props: {
     row: {
       type: Object,
@@ -300,12 +300,12 @@ const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: Tabl
 });
 
 const hasFooter = computed(() => {
-  function hasFooterRecursive(columns: Array<TableColumn<T>>): boolean {
+  function hasFooterRecursive(columns: Array<PTableColumn<T>>): boolean {
     for (const column of columns) {
       if ('footer' in column) {
         return true;
       }
-      if ('columns' in column && hasFooterRecursive(column.columns as Array<TableColumn<T>>)) {
+      if ('columns' in column && hasFooterRecursive(column.columns as Array<PTableColumn<T>>)) {
         return true;
       }
     }
@@ -455,39 +455,41 @@ function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
   ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue;
 }
 
-function onRowSelect(e: Event, row: TableRow<T>) {
+function onRowSelect(event: Event, row: PTableRow<T>) {
   if (!props.onSelect) {
     return;
   }
-  const target = e.target as HTMLElement;
+  const target = event.target as HTMLElement;
   const isInteractive = target.closest('button') || target.closest('a');
   if (isInteractive) {
     return;
   }
 
-  e.preventDefault();
-  e.stopPropagation();
+  event.preventDefault();
+  event.stopPropagation();
 
-  props.onSelect(e, row);
+  props.onSelect(event, row);
 }
 
-function onRowHover(e: Event, row: TableRow<T> | null) {
+function onRowHover(event: Event, row: PTableRow<T> | null) {
   if (!props.onHover) {
     return;
   }
 
-  props.onHover(e, row);
+  props.onHover(event, row);
 }
 
-function onRowContextmenu(e: Event, row: TableRow<T>) {
+function onRowContextmenu(event: Event, row: PTableRow<T>) {
   if (!props.onContextmenu) {
     return;
   }
 
   if (Array.isArray(props.onContextmenu)) {
-    props.onContextmenu.forEach((fn) => fn(e, row));
+    props.onContextmenu.forEach((fn) => {
+      fn(event, row);
+    });
   } else {
-    props.onContextmenu(e, row);
+    props.onContextmenu(event, row);
   }
 }
 
@@ -783,7 +785,7 @@ defineExpose({
     </table>
   </DefineTableTemplate>
 
-  <Primitive
+  <APrimitive
     ref="rootRef"
     :as="as"
     v-bind="$attrs"
@@ -799,5 +801,5 @@ defineExpose({
       <ReuseTableTemplate />
     </div>
     <ReuseTableTemplate v-else />
-  </Primitive>
+  </APrimitive>
 </template>

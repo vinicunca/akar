@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { SeparatorProps as _SeparatorProps } from 'akar';
+import type { ASeparatorProps } from 'akar';
 import type { VNode } from 'vue';
-import type { AvatarProps, PIconProps } from '../types';
+import type { PAvatarProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/separator';
 
 type Separator = ComponentConfig<typeof theme, AppConfig, 'separator'>;
 
-export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
+export interface PSeparatorProps extends Pick<ASeparatorProps, 'decorative'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -22,7 +22,7 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
    */
   icon?: PIconProps['name'];
   /** Display an avatar in the middle. */
-  avatar?: AvatarProps;
+  avatar?: PAvatarProps;
   /**
    * @defaultValue 'neutral'
    */
@@ -44,7 +44,7 @@ export interface SeparatorProps extends Pick<_SeparatorProps, 'decorative'> {
   pohon?: Separator['slots'];
 }
 
-export interface SeparatorSlots {
+export interface PSeparatorSlots {
   default?: (props: { pohon: Separator['pohon'] }) => Array<VNode>;
 }
 </script>
@@ -52,17 +52,17 @@ export interface SeparatorSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { Separator, useForwardProps } from 'akar';
+import { ASeparator, useForwardProps } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PIcon from './icon.vue';
 
-const props = withDefaults(defineProps<SeparatorProps>(), {
+const props = withDefaults(defineProps<PSeparatorProps>(), {
   orientation: 'horizontal',
 });
-const slots = defineSlots<SeparatorSlots>();
+const slots = defineSlots<PSeparatorSlots>();
 
 const appConfig = useAppConfig() as Separator['AppConfig'];
 const pohonProp = useComponentPohon('separator', props);
@@ -78,7 +78,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.separa
 </script>
 
 <template>
-  <Separator
+  <ASeparator
     v-bind="rootProps"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -107,7 +107,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.separa
           />
           <PAvatar
             v-else-if="avatar"
-            :size="((pohonProp?.avatarSize || pohon.avatarSize()) as AvatarProps['size'])"
+            :size="((pohonProp?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
             data-slot="avatar"
             :class="pohon.avatar({ class: pohonProp?.avatar })"
@@ -120,5 +120,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.separa
         :class="pohon.border({ class: pohonProp?.border })"
       />
     </template>
-  </Separator>
+  </ASeparator>
 </template>

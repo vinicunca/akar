@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { PinInputRootEmits, PinInputRootProps } from 'akar';
+import type { APinInputRootEmits, APinInputRootProps } from 'akar';
 import type { ComponentPublicInstance } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/pin-input';
@@ -11,7 +11,7 @@ type PinInput = ComponentConfig<typeof theme, AppConfig, 'pinInput'>;
 type PinInputType = 'text' | 'number';
 type PinInputValue<Type extends PinInputType> = [Type] extends ['number'] ? Array<number> : Array<string>;
 
-export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<PinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
+export interface PPinInputProps<T extends PinInputType = 'text'> extends Pick<APinInputRootProps<T>, 'defaultValue' | 'disabled' | 'id' | 'mask' | 'modelValue' | 'name' | 'otp' | 'placeholder' | 'required' | 'type'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -43,7 +43,7 @@ export interface PinInputProps<T extends PinInputType = 'text'> extends Pick<Pin
   pohon?: PinInput['slots'];
 }
 
-export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T> & {
+export type PPinInputEmits<T extends PinInputType = 'text'> = APinInputRootEmits<T> & {
   change: [event: Event];
   blur: [event: Event];
 };
@@ -53,26 +53,26 @@ export type PinInputEmits<T extends PinInputType = 'text'> = PinInputRootEmits<T
 <script setup lang="ts" generic="T extends PinInputType">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { PinInputInput, PinInputRoot, useForwardPropsEmits } from 'akar';
+import { APinInputInput, APinInputRoot, useForwardPropsEmits } from 'akar';
 import { computed, onMounted, ref } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useFormField } from '../composables/useFormField';
+import { useFormField } from '../composables/use-form-field';
 import { looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<PinInputProps<T>>(), {
+const props = withDefaults(defineProps<PPinInputProps<T>>(), {
   type: 'text' as never,
   length: 5,
   autofocusDelay: 0,
 });
-const emits = defineEmits<PinInputEmits<T>>();
+const emits = defineEmits<PPinInputEmits<T>>();
 
 const appConfig = useAppConfig() as PinInput['AppConfig'];
 const pohonProp = useComponentPohon('pinInput', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'disabled', 'id', 'mask', 'name', 'otp', 'required', 'type'), emits);
 
-const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PinInputProps>(props);
+const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PPinInputProps>(props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pinInput || {}) })({
   color: color.value,
@@ -122,7 +122,7 @@ defineExpose({
 </script>
 
 <template>
-  <PinInputRoot
+  <APinInputRoot
     v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     :name="name"
@@ -134,7 +134,7 @@ defineExpose({
     @update:model-value="emitFormInput()"
     @complete="onComplete"
   >
-    <PinInputInput
+    <APinInputInput
       v-for="(ids, index) in looseToNumber(props.length)"
       :key="ids"
       :ref="el => setInputRef(index as number, el)"
@@ -145,5 +145,5 @@ defineExpose({
       @blur="onBlur"
       @focus="emitFormFocus"
     />
-  </PinInputRoot>
+  </APinInputRoot>
 </template>

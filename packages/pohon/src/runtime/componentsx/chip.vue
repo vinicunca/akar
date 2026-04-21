@@ -6,7 +6,7 @@ import theme from '#build/pohon/chip';
 
 type Chip = ComponentConfig<typeof theme, AppConfig, 'chip'>;
 
-export interface ChipProps {
+export interface PChipProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -35,11 +35,11 @@ export interface ChipProps {
   pohon?: Chip['slots'];
 }
 
-export interface ChipEmits {
+export interface PChipEmits {
   'update:show': [value: boolean];
 }
 
-export interface ChipSlots {
+export interface PChipSlots {
   default?: (props?: {}) => Array<VNode>;
   content?: (props?: {}) => Array<VNode>;
 }
@@ -47,19 +47,19 @@ export interface ChipSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive, Slot } from 'akar';
+import { APrimitive, APrimitiveSlot } from 'akar';
 import { computed } from 'vue';
+import { useAvatarGroup } from '../composables/use-avatar-group';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useAvatarGroup } from '../composables/useAvatarGroup';
 import { uv } from '../utils/uv';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<ChipProps>(), {
+const props = withDefaults(defineProps<PChipProps>(), {
   inset: false,
   standalone: false,
 });
-defineSlots<ChipSlots>();
+defineSlots<PChipSlots>();
 
 const show = defineModel<boolean>('show', { default: true });
 
@@ -77,14 +77,14 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chip |
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <Slot v-bind="$attrs">
+    <APrimitiveSlot v-bind="$attrs">
       <slot />
-    </Slot>
+    </APrimitiveSlot>
 
     <span
       v-if="show"
@@ -95,5 +95,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chip |
         {{ text }}
       </slot>
     </span>
-  </Primitive>
+  </APrimitive>
 </template>

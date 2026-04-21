@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { PaginationRootEmits, PaginationRootProps } from 'akar';
+import type { APaginationRootEmits, APaginationRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
@@ -8,7 +8,7 @@ import theme from '#build/pohon/pagination';
 
 type Pagination = ComponentConfig<typeof theme, AppConfig, 'pagination'>;
 
-export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
+export interface PPaginationProps extends Partial<Pick<APaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -79,9 +79,9 @@ export interface PaginationProps extends Partial<Pick<PaginationRootProps, 'defa
   pohon?: Pagination['slots'];
 }
 
-export interface PaginationEmits extends PaginationRootEmits {}
+export interface PPaginationEmits extends APaginationRootEmits {}
 
-export interface PaginationSlots {
+export interface PPaginationSlots {
   first?: (props?: {}) => Array<VNode>;
   prev?: (props?: {}) => Array<VNode>;
   next?: (props?: {}) => Array<VNode>;
@@ -104,14 +104,24 @@ export interface PaginationSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { PaginationEllipsis, PaginationFirst, PaginationLast, PaginationList, PaginationListItem, PaginationNext, PaginationPrev, PaginationRoot, useForwardPropsEmits } from 'akar';
+import {
+  APaginationEllipsis,
+  APaginationFirst,
+  APaginationLast,
+  APaginationList,
+  APaginationListItem,
+  APaginationNext,
+  APaginationPrev,
+  APaginationRoot,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<PaginationProps>(), {
+const props = withDefaults(defineProps<PPaginationProps>(), {
   color: 'neutral',
   variant: 'outline',
   activeColor: 'primary',
@@ -122,8 +132,8 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   siblingCount: 2,
   total: 0,
 });
-const emits = defineEmits<PaginationEmits>();
-const slots = defineSlots<PaginationSlots>();
+const emits = defineEmits<PPaginationEmits>();
+const slots = defineSlots<PPaginationSlots>();
 
 const { dir } = useLocale();
 const appConfig = useAppConfig() as Pagination['AppConfig'];
@@ -140,18 +150,18 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
 </script>
 
 <template>
-  <PaginationRoot
+  <APaginationRoot
     v-slot="{ page, pageCount }"
     v-bind="rootProps"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <PaginationList
+    <APaginationList
       v-slot="{ items }"
       data-slot="list"
       :class="pohon.list({ class: pohonProp?.list })"
     >
-      <PaginationFirst
+      <APaginationFirst
         v-if="showControls || !!slots.first"
         as-child
         data-slot="first"
@@ -166,8 +176,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
             :to="to?.(1)"
           />
         </slot>
-      </PaginationFirst>
-      <PaginationPrev
+      </APaginationFirst>
+      <APaginationPrev
         v-if="showControls || !!slots.prev"
         as-child
         data-slot="prev"
@@ -182,13 +192,13 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
             :to="page > 1 ? to?.(page - 1) : undefined"
           />
         </slot>
-      </PaginationPrev>
+      </APaginationPrev>
 
       <template
         v-for="(item, index) in items"
         :key="index"
       >
-        <PaginationListItem
+        <APaginationListItem
           v-if="item.type === 'page'"
           as-child
           :value="item.value"
@@ -209,9 +219,9 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
               square
             />
           </slot>
-        </PaginationListItem>
+        </APaginationListItem>
 
-        <PaginationEllipsis
+        <APaginationEllipsis
           v-else
           as-child
           data-slot="ellipsis"
@@ -229,10 +239,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
               :icon="ellipsisIcon || appConfig.pohon.icons.ellipsis"
             />
           </slot>
-        </PaginationEllipsis>
+        </APaginationEllipsis>
       </template>
 
-      <PaginationNext
+      <APaginationNext
         v-if="showControls || !!slots.next"
         as-child
         data-slot="next"
@@ -247,8 +257,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
             :to="page < pageCount ? to?.(page + 1) : undefined"
           />
         </slot>
-      </PaginationNext>
-      <PaginationLast
+      </APaginationNext>
+      <APaginationLast
         v-if="showControls || !!slots.last"
         as-child
         data-slot="last"
@@ -263,7 +273,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagina
             :to="to?.(pageCount)"
           />
         </slot>
-      </PaginationLast>
-    </PaginationList>
-  </PaginationRoot>
+      </APaginationLast>
+    </APaginationList>
+  </APaginationRoot>
 </template>

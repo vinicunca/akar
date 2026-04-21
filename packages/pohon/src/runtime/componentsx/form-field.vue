@@ -6,7 +6,7 @@ import theme from '#build/pohon/form-field';
 
 type FormField = ComponentConfig<typeof theme, AppConfig, 'formField'>;
 
-export interface FormFieldProps {
+export interface PFormFieldProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -42,7 +42,7 @@ export interface FormFieldProps {
   pohon?: FormField['slots'];
 }
 
-export interface FormFieldSlots {
+export interface PFormFieldSlots {
   label?: (props: { label: string | undefined }) => Array<VNode>;
   hint?: (props: { hint: string | undefined }) => Array<VNode>;
   description?: (props: { description: string | undefined }) => Array<VNode>;
@@ -55,16 +55,16 @@ export interface FormFieldSlots {
 <script setup lang="ts">
 import type { FormError, FormFieldInjectedOptions } from '../types/form';
 import { useAppConfig } from '#imports';
-import { Label, Primitive } from 'akar';
+import { ALabel, APrimitive } from 'akar';
 import { computed, inject, provide, ref, useId, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { formErrorsInjectionKey, formFieldInjectionKey, formInputsInjectionKey, inputIdInjectionKey } from '../composables/useFormField';
+import { formErrorsInjectionKey, formFieldInjectionKey, formInputsInjectionKey, inputIdInjectionKey } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<FormFieldProps>(), {
+const props = withDefaults(defineProps<PFormFieldProps>(), {
   error: undefined,
 });
-const slots = defineSlots<FormFieldSlots>();
+const slots = defineSlots<PFormFieldSlots>();
 
 const appConfig = useAppConfig() as FormField['AppConfig'];
 const pohonProp = useComponentPohon('formField', props);
@@ -104,11 +104,11 @@ provide(formFieldInjectionKey, computed(() => ({
   description: props.description,
   help: props.help,
   ariaId,
-}) as FormFieldInjectedOptions<FormFieldProps>));
+}) as FormFieldInjectedOptions<PFormFieldProps>));
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -123,7 +123,7 @@ provide(formFieldInjectionKey, computed(() => ({
         data-slot="labelWrapper"
         :class="pohon.labelWrapper({ class: pohonProp?.labelWrapper })"
       >
-        <Label
+        <ALabel
           :for="id"
           data-slot="label"
           :class="pohon.label({ class: pohonProp?.label })"
@@ -134,7 +134,7 @@ provide(formFieldInjectionKey, computed(() => ({
           >
             {{ label }}
           </slot>
-        </Label>
+        </ALabel>
         <span
           v-if="hint || !!slots.hint"
           :id="`${ariaId}-hint`"
@@ -194,5 +194,5 @@ provide(formFieldInjectionKey, computed(() => ({
         </slot>
       </div>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

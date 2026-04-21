@@ -7,7 +7,7 @@ import theme from '#build/pohon/page-cta';
 
 type PageCTA = ComponentConfig<typeof theme, AppConfig, 'pageCTA'>;
 
-export interface PageCTAProps {
+export interface PPageCTAProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -38,7 +38,7 @@ export interface PageCTAProps {
   pohon?: PageCTA['slots'];
 }
 
-export interface PageCTASlots {
+export interface PPageCTASlots {
   top?: (props?: {}) => Array<VNode>;
   header?: (props?: {}) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
@@ -53,18 +53,18 @@ export interface PageCTASlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UContainer from './Container.vue';
+import PContainer from './container.vue';
 
-const props = withDefaults(defineProps<PageCTAProps>(), {
+const props = withDefaults(defineProps<PPageCTAProps>(), {
   orientation: 'vertical',
   reverse: false,
 });
-const slots = defineSlots<PageCTASlots>();
+const slots = defineSlots<PPageCTASlots>();
 
 const appConfig = useAppConfig() as PageCTA['AppConfig'];
 const pohonProp = useComponentPohon('pageCTA', props);
@@ -78,7 +78,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageCT
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -86,7 +86,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageCT
   >
     <slot name="top" />
 
-    <UContainer
+    <PContainer
       data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
     >
@@ -160,8 +160,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageCT
         v-else-if="orientation === 'horizontal'"
         class="hidden lg:block"
       />
-    </UContainer>
+    </PContainer>
 
     <slot name="bottom" />
-  </Primitive>
+  </APrimitive>
 </template>

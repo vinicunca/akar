@@ -6,7 +6,7 @@ import theme from '#build/pohon/page-body';
 
 type PageBody = ComponentConfig<typeof theme, AppConfig, 'pageBody'>;
 
-export interface PageBodyProps {
+export interface PPageBodyProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -16,20 +16,20 @@ export interface PageBodyProps {
   pohon?: { base?: any };
 }
 
-export interface PageBodySlots {
+export interface PPageBodySlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = defineProps<PageBodyProps>();
-defineSlots<PageBodySlots>();
+const props = defineProps<PPageBodyProps>();
+defineSlots<PPageBodySlots>();
 
 const appConfig = useAppConfig() as PageBody['AppConfig'];
 const pohonProp = useComponentPohon('pageBody', props);
@@ -38,10 +38,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageBo
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

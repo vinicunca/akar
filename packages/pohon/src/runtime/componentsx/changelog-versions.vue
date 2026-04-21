@@ -3,13 +3,13 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { SpringOptions, UseScrollOptions } from 'motion-v';
 import type { VNode } from 'vue';
-import type { ChangelogVersionProps, ChangelogVersionSlots } from '../types';
+import type { PChangelogVersionProps, PChangelogVersionSlots } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/changelog-versions';
 
 type ChangelogVersions = ComponentConfig<typeof theme, AppConfig, 'changelogVersions'>;
 
-export interface ChangelogVersionsProps<T extends ChangelogVersionProps = ChangelogVersionProps> {
+export interface PChangelogVersionsProps<T extends PChangelogVersionProps = PChangelogVersionProps> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -34,13 +34,13 @@ export interface ChangelogVersionsProps<T extends ChangelogVersionProps = Change
   pohon?: ChangelogVersions['slots'];
 }
 
-type ExtendSlotWithVersion<T extends ChangelogVersionProps, K extends keyof ChangelogVersionSlots>
-  = Required<ChangelogVersionSlots>[K] extends (props: infer P) => Array<VNode>
+type ExtendSlotWithVersion<T extends PChangelogVersionProps, K extends keyof PChangelogVersionSlots>
+  = Required<PChangelogVersionSlots>[K] extends (props: infer P) => Array<VNode>
     ? (props: P & { version: T }) => Array<VNode>
-    : Required<ChangelogVersionSlots>[K];
+    : Required<PChangelogVersionSlots>[K];
 
-export type ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVersionProps> = {
-  [K in keyof ChangelogVersionSlots]?: ExtendSlotWithVersion<T, K>
+export type PChangelogVersionsSlots<T extends PChangelogVersionProps = PChangelogVersionProps> = {
+  [K in keyof PChangelogVersionSlots]?: ExtendSlotWithVersion<T, K>
 } & {
   default?: (props?: {}) => Array<VNode>;
   indicator?: (props?: {}) => Array<VNode>;
@@ -48,22 +48,22 @@ export type ChangelogVersionsSlots<T extends ChangelogVersionProps = ChangelogVe
 
 </script>
 
-<script setup lang="ts" generic="T extends ChangelogVersionProps">
+<script setup lang="ts" generic="T extends PChangelogVersionProps">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { Motion, useScroll, useSpring, useTransform } from 'motion-v';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';
-import UChangelogVersion from './ChangelogVersion.vue';
+import PChangelogVersion from './changelog-version.vue';
 
-const props = withDefaults(defineProps<ChangelogVersionsProps<T>>(), {
+const props = withDefaults(defineProps<PChangelogVersionsProps<T>>(), {
   indicator: true,
   indicatorMotion: true,
 });
-const slots = defineSlots<ChangelogVersionsSlots<T>>();
+const slots = defineSlots<PChangelogVersionsSlots<T>>();
 
 const getProxySlots = () => omit(slots, ['default', 'indicator']);
 
@@ -81,7 +81,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.change
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -107,11 +107,11 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.change
       :class="pohon.container({ class: pohonProp?.container })"
     >
       <slot>
-        <UChangelogVersion
+        <PChangelogVersion
           v-for="(version, index) in versions"
           :key="index"
           :indicator="!!props.indicator"
-          v-bind="(version as ChangelogVersionProps)"
+          v-bind="(version as PChangelogVersionProps)"
         >
           <template
             v-for="(_, name) in getProxySlots()"
@@ -123,8 +123,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.change
               :version="version"
             />
           </template>
-        </UChangelogVersion>
+        </PChangelogVersion>
       </slot>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

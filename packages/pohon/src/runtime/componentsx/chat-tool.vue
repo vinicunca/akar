@@ -1,15 +1,15 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { CollapsibleRootProps } from 'akar';
+import type { ACollapsibleRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
-import type { ChatShimmerProps } from './ChatShimmer.vue';
+import type { PChatShimmerProps } from './chat-shimmer.vue';
 import theme from '#build/pohon/chat-tool';
 
 type ChatTool = ComponentConfig<typeof theme, AppConfig, 'chatTool'>;
 
-export interface ChatToolProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
+export interface PChatToolProps extends Pick<ACollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
   /**
    * The text content to display.
    */
@@ -58,30 +58,30 @@ export interface ChatToolProps extends Pick<CollapsibleRootProps, 'defaultOpen' 
   /**
    * Customize the [`ChatShimmer`](https://pohon.nuxt.com/docs/components/chat-shimmer) component when streaming.
    */
-  shimmer?: Partial<Omit<ChatShimmerProps, 'text'>>;
+  shimmer?: Partial<Omit<PChatShimmerProps, 'text'>>;
   class?: any;
   pohon?: ChatTool['slots'];
 }
 
-export interface ChatToolEmits {
+export interface PChatToolEmits {
   'update:open': [value: boolean];
 }
 
-export interface ChatToolSlots {
+export interface PChatToolSlots {
   default?: (props: { open: boolean }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from 'akar';
+import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar';
 import { computed, ref } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
-import UChatShimmer from './ChatShimmer.vue';
+import PChatShimmer from './chat-shimmer.vue';
 import PIcon from './icon.vue';
 
-const props = withDefaults(defineProps<ChatToolProps>(), {
+const props = withDefaults(defineProps<PChatToolProps>(), {
   open: undefined,
   loading: false,
   streaming: false,
@@ -89,8 +89,8 @@ const props = withDefaults(defineProps<ChatToolProps>(), {
   chevron: 'trailing',
   unmountOnHide: false,
 });
-const emits = defineEmits<ChatToolEmits>();
-const slots = defineSlots<ChatToolSlots>();
+const emits = defineEmits<PChatToolEmits>();
+const slots = defineSlots<PChatToolSlots>();
 
 const appConfig = useAppConfig() as ChatTool['AppConfig'];
 const pohonProp = useComponentPohon('chatTool', props);
@@ -118,7 +118,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.pohon.icon
 </script>
 
 <template>
-  <CollapsibleRoot
+  <ACollapsibleRoot
     v-slot="{ open: isOpen }"
     :open="resolvedOpen"
     :disabled="disabled"
@@ -127,7 +127,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.pohon.icon
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     @update:open="setOpen"
   >
-    <CollapsibleTrigger
+    <ACollapsibleTrigger
       as-child
       :disabled="!hasContent"
     >
@@ -159,7 +159,7 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.pohon.icon
           data-slot="label"
           :class="pohon.label({ class: pohonProp?.label })"
         >
-          <UChatShimmer
+          <PChatShimmer
             v-if="streaming && text"
             :text="text"
             v-bind="props.shimmer"
@@ -179,9 +179,9 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.pohon.icon
           :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         />
       </button>
-    </CollapsibleTrigger>
+    </ACollapsibleTrigger>
 
-    <CollapsibleContent
+    <ACollapsibleContent
       data-slot="content"
       :class="pohon.content({ class: pohonProp?.content })"
     >
@@ -191,6 +191,6 @@ const chevronIconName = computed(() => props.chevronIcon || appConfig.pohon.icon
       >
         <slot :open="isOpen" />
       </div>
-    </CollapsibleContent>
-  </CollapsibleRoot>
+    </ACollapsibleContent>
+  </ACollapsibleRoot>
 </template>

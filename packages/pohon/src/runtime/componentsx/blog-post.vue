@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { BadgeProps, LinkProps, UserProps } from '../types';
+import type { PBadgeProps, PLinkProps, PUserProps } from '../types';
 import type { ImgHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/blog-post';
 
 type BlogPost = ComponentConfig<typeof theme, AppConfig, 'blogPost'>;
 
-export interface BlogPostProps {
+export interface PBlogPostProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
@@ -23,9 +23,9 @@ export interface BlogPostProps {
    * Can be a string or an object.
    * `{ color: 'neutral', variant: 'subtle' }`{lang="ts-type"}
    */
-  badge?: string | BadgeProps;
+  badge?: string | PBadgeProps;
   /** The authors of the blog post. */
-  authors?: Array<UserProps>;
+  authors?: Array<PUserProps>;
   /** The image of the blog post. Can be a string or an object. */
   image?: string | (Partial<ImgHTMLAttributes> & { [key: string]: any });
   /**
@@ -37,14 +37,14 @@ export interface BlogPostProps {
    * @defaultValue 'outline'
    */
   variant?: BlogPost['variants']['variant'];
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   onClick?: (event: MouseEvent) => void | Promise<void>;
   class?: any;
   pohon?: BlogPost['slots'];
 }
 
-export interface BlogPostSlots {
+export interface PBlogPostSlots {
   date?: (props?: {}) => Array<VNode>;
   badge?: (props?: {}) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
@@ -59,25 +59,25 @@ export interface BlogPostSlots {
 <script setup lang="ts">
 import ImageComponent from '#build/pohon-image-component';
 import { useAppConfig } from '#imports';
-import { Primitive, useDateFormatter } from 'akar';
+import { APrimitive, useDateFormatter } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { getSlotChildrenText } from '../utils';
 import { uv } from '../utils/uv';
+import PAvatarGroup from './avatar-group.vue';
 import PAvatar from './avatar.vue';
-import UAvatarGroup from './AvatarGroup.vue';
-import UBadge from './Badge.vue';
-import ULink from './Link.vue';
-import UUser from './User.vue';
+import PBadge from './badge.vue';
+import PLink from './link.vue';
+import PUser from './user.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<BlogPostProps>(), {
+const props = withDefaults(defineProps<PBlogPostProps>(), {
   as: 'article',
   orientation: 'vertical',
 });
-const slots = defineSlots<BlogPostSlots>();
+const slots = defineSlots<PBlogPostSlots>();
 
 const { locale } = useLocale();
 const appConfig = useAppConfig() as BlogPost['AppConfig'];
@@ -97,7 +97,10 @@ const date = computed(() => {
   }
 
   try {
-    return formatter.custom(new Date(props.date), { dateStyle: 'medium' });
+    return formatter.custom({
+      date: new Date(props.date),
+      options: { dateStyle: 'medium' },
+    });
   } catch {
     return props.date;
   }
@@ -120,7 +123,7 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -149,7 +152,7 @@ const ariaLabel = computed(() => {
       data-slot="body"
       :class="pohon.body({ class: pohonProp?.body })"
     >
-      <ULink
+      <PLink
         v-if="to"
         :aria-label="ariaLabel"
         v-bind="{ to, target, ...$attrs }"
@@ -160,7 +163,7 @@ const ariaLabel = computed(() => {
           class="inset-0 absolute"
           aria-hidden="true"
         />
-      </ULink>
+      </PLink>
 
       <slot name="body">
         <div
@@ -169,7 +172,7 @@ const ariaLabel = computed(() => {
           :class="pohon.meta({ class: pohonProp?.meta })"
         >
           <slot name="badge">
-            <UBadge
+            <PBadge
               v-if="badge"
               color="neutral"
               variant="subtle"
@@ -221,8 +224,8 @@ const ariaLabel = computed(() => {
             :pohon="pohon"
           >
             <template v-if="authors?.length">
-              <UAvatarGroup v-if="authors.length > 1">
-                <ULink
+              <PAvatarGroup v-if="authors.length > 1">
+                <PLink
                   v-for="(author, index) in authors"
                   :key="index"
                   :to="author.to"
@@ -232,9 +235,9 @@ const ariaLabel = computed(() => {
                   raw
                 >
                   <PAvatar v-bind="author.avatar" />
-                </ULink>
-              </UAvatarGroup>
-              <UUser
+                </PLink>
+              </PAvatarGroup>
+              <PUser
                 v-else
                 v-bind="authors[0]"
               />
@@ -251,5 +254,5 @@ const ariaLabel = computed(() => {
     >
       <slot name="footer" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

@@ -2,13 +2,13 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { FileUIPart, UIMessage } from 'ai';
 import type { VNode } from 'vue';
-import type { AAvatarProps, PButtonProps, PIconProps } from '../types';
+import type { PAvatarProps, PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/chat-message';
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>;
 
-export interface ChatMessageProps extends UIMessage {
+export interface PChatMessageProps extends UIMessage {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
@@ -18,7 +18,7 @@ export interface ChatMessageProps extends UIMessage {
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
-  avatar?: AAvatarProps & { [key: string]: any };
+  avatar?: PAvatarProps & { [key: string]: any };
   /**
    * @defaultValue 'naked'
    */
@@ -32,7 +32,7 @@ export interface ChatMessageProps extends UIMessage {
    * The `label` will be used in a tooltip.
    * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  actions?: Array<Omit<PButtonProps, 'onClick'> & { onClick?: (e: MouseEvent, message: UIMessage) => void }>;
+  actions?: Array<Omit<PButtonProps, 'onClick'> & { onClick?: (event: MouseEvent, message: UIMessage) => void }>;
   /**
    * Render the message in a compact style.
    * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
@@ -48,17 +48,17 @@ export interface ChatMessageProps extends UIMessage {
   pohon?: ChatMessage['slots'];
 }
 
-export interface ChatMessageSlots {
-  leading?: (props: { avatar: ChatMessageProps['avatar']; pohon: ChatMessage['pohon'] }) => Array<VNode>;
+export interface PChatMessageSlots {
+  leading?: (props: { avatar: PChatMessageProps['avatar']; pohon: ChatMessage['pohon'] }) => Array<VNode>;
   files?: (props: { parts: Array<FileUIPart> }) => Array<VNode>;
-  content?: (props: ChatMessageProps) => Array<VNode>;
-  actions?: (props: { actions: ChatMessageProps['actions'] }) => Array<VNode>;
+  content?: (props: PChatMessageProps) => Array<VNode>;
+  actions?: (props: { actions: PChatMessageProps['actions'] }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
@@ -66,12 +66,12 @@ import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PIcon from './icon.vue';
-import UTooltip from './Tooltip.vue';
+import PTooltip from './tooltip.vue';
 
-const props = withDefaults(defineProps<ChatMessageProps>(), {
+const props = withDefaults(defineProps<PChatMessageProps>(), {
   as: 'article',
 });
-const slots = defineSlots<ChatMessageSlots>();
+const slots = defineSlots<PChatMessageSlots>();
 
 const appConfig = useAppConfig() as ChatMessage['AppConfig'];
 const pohonProp = useComponentPohon('chatMessage', props);
@@ -88,7 +88,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-role="role"
     data-slot="root"
@@ -127,7 +127,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
           />
           <PAvatar
             v-else-if="avatar"
-            :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as AAvatarProps['size'])"
+            :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
             data-slot="leadingAvatar"
             :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
@@ -172,7 +172,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
           name="actions"
           :actions="actions"
         >
-          <UTooltip
+          <PTooltip
             v-for="(action, index) in actions"
             :key="index"
             :text="action.label"
@@ -185,9 +185,9 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
               :label="undefined"
               @click="typeof action.onClick === 'function' ? action.onClick($event, props) : undefined"
             />
-          </UTooltip>
+          </PTooltip>
         </slot>
       </div>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

@@ -16,6 +16,6 @@ export default {
     },
   },
   defaultVariants: {
-    placeholderMode: '',
+    placeholderMode: 'everyLine',
   },
 };

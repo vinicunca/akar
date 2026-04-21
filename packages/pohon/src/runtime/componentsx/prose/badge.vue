@@ -21,7 +21,7 @@ import { useAppConfig } from '#imports';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
-import UBadge from '../Badge.vue';
+import PBadge from '../badge.vue';
 
 const props = defineProps<ProseBadgeProps>();
 defineSlots<ProseBadgeSlots>();
@@ -33,11 +33,11 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 </script>
 
 <template>
-  <UBadge
+  <PBadge
     color="primary"
     variant="subtle"
     :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot mdc-unwrap="p" />
-  </UBadge>
+  </PBadge>
 </template>

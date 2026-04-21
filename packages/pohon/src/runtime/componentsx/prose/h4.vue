@@ -2,17 +2,17 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
 import type { ComponentConfig } from '../../types/uv';
-import theme from '#build/pohon/prose/h1';
+import theme from '#build/pohon/prose/h-4';
 
-type ProseH1 = ComponentConfig<typeof theme, AppConfig, 'h1', 'pohon.prose'>;
+type ProseH4 = ComponentConfig<typeof theme, AppConfig, 'h4', 'pohon.prose'>;
 
-export interface ProseH1Props {
+export interface ProseH4Props {
   id?: string;
   class?: any;
-  pohon?: ProseH1['slots'];
+  pohon?: ProseH4['slots'];
 }
 
-export interface ProseH1Slots {
+export interface ProseH4Slots {
   default: (props?: {}) => Array<VNode>;
 }
 </script>
@@ -23,20 +23,20 @@ import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 
-const props = defineProps<ProseH1Props>();
-defineSlots<ProseH1Slots>();
+const props = defineProps<ProseH4Props>();
+defineSlots<ProseH4Slots>();
 
-const appConfig = useAppConfig() as ProseH1['AppConfig'];
-const pohonProp = useComponentPohon('prose.h1', props);
+const appConfig = useAppConfig() as ProseH4['AppConfig'];
+const pohonProp = useComponentPohon('prose.h4', props);
 const { headings } = useRuntimeConfig().public?.mdc || {};
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.h1 || {}) })());
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.h4 || {}) })());
 
-const generate = computed(() => props.id && typeof headings?.anchorLinks === 'object' && headings.anchorLinks.h1);
+const generate = computed(() => props.id && typeof headings?.anchorLinks === 'object' && headings.anchorLinks.h4);
 </script>
 
 <template>
-  <h1
+  <h4
     :id="id"
     :class="pohon.base({ class: [pohonProp?.base, props.class] })"
   >
@@ -48,5 +48,5 @@ const generate = computed(() => props.id && typeof headings?.anchorLinks === 'ob
       <slot />
     </a>
     <slot v-else />
-  </h1>
+  </h4>
 </template>

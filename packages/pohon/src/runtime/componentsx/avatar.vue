@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { ChipProps, PIconProps } from '../types';
+import type { PChipProps, PIconProps } from '../types';
 import type { ImgHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/avatar';
 
 type Avatar = ComponentConfig<typeof theme, AppConfig, 'avatar'>;
 
-export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 'src' | 'alt'> {
+export interface PAvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 'src' | 'alt'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
@@ -25,13 +25,13 @@ export interface AvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes, 
    * @defaultValue 'md'
    */
   size?: Avatar['variants']['size'];
-  chip?: boolean | ChipProps;
+  chip?: boolean | PChipProps;
   class?: any;
   style?: any;
   pohon?: Avatar['slots'];
 }
 
-export interface AvatarSlots {
+export interface PAvatarSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
@@ -39,18 +39,18 @@ export interface AvatarSlots {
 <script setup lang="ts">
 import ImageComponent from '#build/pohon-image-component';
 import { useAppConfig } from '#imports';
-import { Primitive, Slot } from 'akar';
+import { APrimitive, APrimitiveSlot } from 'akar';
 import { defu } from 'defu';
 import { computed, ref, watch } from 'vue';
+import { useAvatarGroup } from '../composables/use-avatar-group';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useAvatarGroup } from '../composables/useAvatarGroup';
 import { uv } from '../utils/uv';
-import UChip from './Chip.vue';
+import PChip from './chip.vue';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = defineProps<AvatarProps>();
+const props = defineProps<PAvatarProps>();
 
 const as = computed(() => {
   if (typeof props.as === 'string' || typeof props.as?.render === 'function') {
@@ -99,7 +99,7 @@ function onError() {
 
 <template>
   <component
-    :is="props.chip ? UChip : Primitive"
+    :is="props.chip ? PChip : APrimitive"
     :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
     data-slot="root"
@@ -119,7 +119,7 @@ function onError() {
       @error="onError"
     />
 
-    <Slot
+    <APrimitiveSlot
       v-else
       v-bind="$attrs"
     >
@@ -136,6 +136,6 @@ function onError() {
           :class="pohon.fallback({ class: pohonProp?.fallback })"
         >{{ fallback || '&nbsp;' }}</span>
       </slot>
-    </Slot>
+    </APrimitiveSlot>
   </component>
 </template>

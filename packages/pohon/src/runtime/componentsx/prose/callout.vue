@@ -1,15 +1,15 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { PIconProps, LinkProps } from '../../types';
+import type { PIconProps, PLinkProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/callout';
 
 type ProseCallout = ComponentConfig<typeof theme, AppConfig, 'callout', 'pohon.prose'>;
 
 export interface ProseCalloutProps {
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   icon?: PIconProps['name'];
   /**
    * @defaultValue 'neutral'
@@ -30,7 +30,7 @@ import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
-import ULink from '../Link.vue';
+import PLink from '../link.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -50,7 +50,7 @@ const target = computed(() => props.target || (!!props.to && typeof props.to ===
 
 <template>
   <div :class="pohon.base({ class: [pohonProp?.base, props.class] })">
-    <ULink
+    <PLink
       v-if="to"
       v-bind="{ to, target, ...$attrs }"
       class="focus:outline-none"
@@ -60,7 +60,7 @@ const target = computed(() => props.target || (!!props.to && typeof props.to ===
         class="inset-0 absolute"
         aria-hidden="true"
       />
-    </ULink>
+    </PLink>
 
     <PIcon
       v-if="icon"

@@ -1,49 +1,49 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { AAccordionRootProps, NavigationMenuContentEmits, NavigationMenuContentProps, NavigationMenuRootProps } from 'akar';
+import type { AAccordionRootProps, ANavigationMenuContentEmits, ANavigationMenuContentProps, ANavigationMenuRootProps } from 'akar';
 import type { VNode } from 'vue';
-import type { AAvatarProps, BadgeProps, ChipProps, LinkProps, PIconProps, PopoverProps, TooltipProps } from '../types';
+import type { PAvatarProps, PBadgeProps, PChipProps, PIconProps, PLinkProps, PPopoverProps, PTooltipProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/navigation-menu';
 
 type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>;
 
-export interface NavigationMenuChildItem extends Omit<NavigationMenuItem, 'type' | 'pohon'> {
+export interface PNavigationMenuChildItem extends Omit<PNavigationMenuItem, 'type' | 'pohon'> {
   /** Description is only used when `orientation` is `horizontal`. */
   description?: string;
   [key: string]: any;
 }
 
-export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
+export interface PNavigationMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'custom'> {
   label?: string;
   /**
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
-  avatar?: AAvatarProps;
+  avatar?: PAvatarProps;
   /**
    * Display a badge on the item.
    * `{ size: 'sm', color: 'neutral', variant: 'outline' }`{lang="ts-type"}
    */
-  badge?: string | number | BadgeProps;
+  badge?: string | number | PBadgeProps;
   /**
    * Display a chip around the icon of the item.
    * `{ inset: true }`{lang="ts-type"}
    */
-  chip?: boolean | ChipProps;
+  chip?: boolean | PChipProps;
   /**
    * Display a tooltip on the item with the label of the item.
    * In `vertical` orientation, only works when the menu is `collapsed`.
    * In `horizontal` orientation, works on any item.
    */
-  tooltip?: boolean | TooltipProps;
+  tooltip?: boolean | PTooltipProps;
   /**
    * Display a popover on the item when the menu is collapsed with the children list.
    * This has priority over the global `popover` prop.
    */
-  popover?: boolean | PopoverProps;
+  popover?: boolean | PPopoverProps;
   /**
    * @IconifyIcon
    */
@@ -61,10 +61,10 @@ export interface NavigationMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'cu
    * @defaultValue `item-${index}`, `item-${level}-${index}` for nested children, or `group-${listIndex}-item-${index}` when using grouped items
    */
   value?: string;
-  children?: Array<NavigationMenuChildItem>;
+  children?: Array<PNavigationMenuChildItem>;
   defaultOpen?: boolean;
   open?: boolean;
-  onSelect?: (e: Event) => void;
+  onSelect?: (event: Event) => void;
   class?: any;
   pohon?: Pick<NavigationMenu['slots'], 'item' | 'linkLeadingAvatarSize' | 'linkLeadingAvatar' | 'linkLeadingIcon' | 'linkLeadingChipSize' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkTrailing' | 'linkTrailingBadgeSize' | 'linkTrailingBadge' | 'linkTrailingIcon' | 'label' | 'link' | 'content' | 'childList' | 'childLabel' | 'childItem' | 'childLink' | 'childLinkIcon' | 'childLinkWrapper' | 'childLinkLabel' | 'childLinkLabelExternalIcon' | 'childLinkDescription'>;
   [key: string]: any;
@@ -78,11 +78,11 @@ type NavigationMenuModelValue<
   O extends Orientation = Orientation,
 > = O extends 'horizontal' ? string : K extends 'single' ? string : K extends 'multiple' ? Array<string> : string | Array<string>;
 
-export interface NavigationMenuProps<
-  T extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>,
+export interface PNavigationMenuProps<
+  T extends ArrayOrNested<PNavigationMenuItem> = ArrayOrNested<PNavigationMenuItem>,
   K extends SingleOrMultipleType = SingleOrMultipleType,
   O extends Orientation = Orientation,
-> extends Pick<NavigationMenuRootProps, 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'>, Pick<AAccordionRootProps, 'disabled' | 'collapsible'> {
+> extends Pick<ANavigationMenuRootProps, 'delayDuration' | 'disableClickTrigger' | 'disableHoverTrigger' | 'skipDelayDuration' | 'disablePointerLeaveClose' | 'unmountOnHide'>, Pick<AAccordionRootProps, 'disabled' | 'collapsible'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -152,13 +152,13 @@ export interface NavigationMenuProps<
    * `{ delayDuration: 0, content: { side: 'right' } }`{lang="ts-type"}
    * @defaultValue false
    */
-  tooltip?: boolean | TooltipProps;
+  tooltip?: boolean | PTooltipProps;
   /**
    * Display a popover on the items when the menu is collapsed with the children list.
    * `{ mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }`{lang="ts-type"}
    * @defaultValue false
    */
-  popover?: boolean | PopoverProps;
+  popover?: boolean | PPopoverProps;
   /** Display a line next to the active item. */
   highlight?: boolean;
   /**
@@ -166,7 +166,7 @@ export interface NavigationMenuProps<
    */
   highlightColor?: NavigationMenu['variants']['highlightColor'];
   /** The content of the menu. */
-  content?: Omit<NavigationMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<NavigationMenuContentEmits>>;
+  content?: Omit<ANavigationMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ANavigationMenuContentEmits>>;
   /**
    * The orientation of the content.
    * Only works when `orientation` is `horizontal`.
@@ -192,7 +192,7 @@ export interface NavigationMenuProps<
   pohon?: NavigationMenu['slots'];
 }
 
-export type NavigationMenuEmits<
+export type PNavigationMenuEmits<
   K extends SingleOrMultipleType = SingleOrMultipleType,
   O extends Orientation = Orientation,
 > = {
@@ -205,10 +205,10 @@ export type NavigationMenuEmits<
   'update:modelValue': [value: NavigationMenuModelValue<K, O> | undefined];
 };
 
-type SlotProps<T extends NavigationMenuItem> = (props: { item: T; index: number; active: boolean; pohon: NavigationMenu['pohon'] }) => Array<VNode>;
+type SlotProps<T extends PNavigationMenuItem> = (props: { item: T; index: number; active: boolean; pohon: NavigationMenu['pohon'] }) => Array<VNode>;
 
-export type NavigationMenuSlots<
-  A extends ArrayOrNested<NavigationMenuItem> = ArrayOrNested<NavigationMenuItem>,
+export type PNavigationMenuSlots<
+  A extends ArrayOrNested<PNavigationMenuItem> = ArrayOrNested<PNavigationMenuItem>,
   T extends NestedItem<A> = NestedItem<A>,
 > = {
   'item'?: SlotProps<T>;
@@ -224,28 +224,42 @@ export type NavigationMenuSlots<
 
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<NavigationMenuItem>, K extends SingleOrMultipleType = SingleOrMultipleType, O extends Orientation = Orientation">
+<script setup lang="ts" generic="T extends ArrayOrNested<PNavigationMenuItem>, K extends SingleOrMultipleType = SingleOrMultipleType, O extends Orientation = Orientation">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
-import { AccordionContent, AccordionRoot, AccordionTrigger, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuRoot, NavigationMenuTrigger, NavigationMenuViewport, PAccordionItem, useForwardPropsEmits } from 'akar';
+import {
+  AAccordionContent,
+  AAccordionItem,
+  AAccordionRoot,
+  AAccordionTrigger,
+  ANavigationMenuContent,
+  ANavigationMenuIndicator,
+  ANavigationMenuItem,
+  ANavigationMenuLink,
+  ANavigationMenuList,
+  ANavigationMenuRoot,
+  ANavigationMenuTrigger,
+  ANavigationMenuViewport,
+  useForwardPropsEmits,
+} from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { get, isArrayOfArray } from '../utils';
+import { getProp, isArrayOfArray } from '../utils';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
-import UBadge from './Badge.vue';
-import UChip from './Chip.vue';
+import PBadge from './badge.vue';
+import PChip from './chip.vue';
 import PIcon from './icon.vue';
-import ULink from './Link.vue';
-import ULinkBase from './LinkBase.vue';
-import UPopover from './Popover.vue';
-import UTooltip from './Tooltip.vue';
+import PLinkBase from './link-base.vue';
+import PLink from './link.vue';
+import PPopover from './popover.vue';
+import PTooltip from './tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<NavigationMenuProps<T, K, O>>(), {
+const props = withDefaults(defineProps<PNavigationMenuProps<T, K, O>>(), {
   orientation: 'horizontal' as never,
   contentOrientation: 'horizontal',
   externalIcon: true,
@@ -256,8 +270,8 @@ const props = withDefaults(defineProps<NavigationMenuProps<T, K, O>>(), {
   valueKey: 'value',
   labelKey: 'label',
 });
-const emits = defineEmits<NavigationMenuEmits<K, O>>();
-const slots = defineSlots<NavigationMenuSlots<T>>();
+const emits = defineEmits<PNavigationMenuEmits<K, O>>();
+const slots = defineSlots<PNavigationMenuSlots<T>>();
 
 const appConfig = useAppConfig() as NavigationMenu['AppConfig'];
 const pohonProp = useComponentPohon('navigationMenu', props);
@@ -274,11 +288,11 @@ const rootProps = useForwardPropsEmits(computed(() => ({
 })), emits);
 const accordionProps = useForwardPropsEmits(reactivePick(props, 'collapsible', 'disabled', 'type', 'unmountOnHide'), emits);
 const contentProps = toRef(() => props.content);
-const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { ...(props.orientation === 'vertical' && { delayDuration: 0, content: { side: 'right' } }) }) as TooltipProps);
-const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PopoverProps);
+const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { ...(props.orientation === 'vertical' && { delayDuration: 0, content: { side: 'right' } }) }) as PTooltipProps);
+const popoverProps = toRef(() => defu(typeof props.popover === 'boolean' ? {} : props.popover, { mode: 'hover', content: { side: 'right', align: 'start', alignOffset: 2 } }) as PPopoverProps);
 
-const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: NavigationMenuItem; index: number; active?: boolean }>();
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: NavigationMenuItem; index: number; level?: number; listIndex?: number }>({
+const [DefineLinkTemplate, ReuseLinkTemplate] = createReusableTemplate<{ item: PNavigationMenuItem; index: number; active?: boolean }>();
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: PNavigationMenuItem; index: number; level?: number; listIndex?: number }>({
   props: {
     item: Object,
     index: Number,
@@ -297,7 +311,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.naviga
   highlightColor: props.highlightColor || props.color,
 }));
 
-const lists = computed<Array<Array<NavigationMenuItem>>>(() =>
+const lists = computed<Array<Array<PNavigationMenuItem>>>(() =>
+  // eslint-disable-next-line no-nested-ternary
   props.items?.length
     ? isArrayOfArray(props.items)
       ? props.items
@@ -305,12 +320,12 @@ const lists = computed<Array<Array<NavigationMenuItem>>>(() =>
     : [],
 );
 
-function getItemValue(item: NavigationMenuItem, index: number, level: number, listIndex: number) {
+function getItemValue(item: PNavigationMenuItem, index: number, level: number, listIndex: number) {
   const prefix = lists.value.length > 1 ? `group-${listIndex}-` : '';
-  return get(item, props.valueKey as string) ?? (level > 0 ? `${prefix}item-${level}-${index}` : `${prefix}item-${index}`);
+  return getProp(item, props.valueKey as string) ?? (level > 0 ? `${prefix}item-${level}-${index}` : `${prefix}item-${index}`);
 }
 
-function getAccordionDefaultValue(list: Array<NavigationMenuItem>, level = 0, listIndex = 0) {
+function getAccordionDefaultValue(list: Array<PNavigationMenuItem>, level = 0, listIndex = 0) {
   const indexes = list.reduce((acc: Array<string>, item, index) => {
     if (item.defaultOpen || item.open) {
       acc.push(getItemValue(item, index, level, listIndex));
@@ -321,16 +336,16 @@ function getAccordionDefaultValue(list: Array<NavigationMenuItem>, level = 0, li
   return props.type === 'single' ? indexes[0] : indexes;
 }
 
-function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
+function onLinkTrailingClick(event: Event, item: PNavigationMenuItem) {
   if (!item.children?.length) {
     return;
   }
 
   if (props.orientation === 'horizontal') {
-    e.preventDefault();
+    event.preventDefault();
   } else if (props.orientation === 'vertical' && !props.collapsed) {
-    e.preventDefault();
-    e.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
   }
 }
 </script>
@@ -338,14 +353,14 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
 <template>
   <DefineLinkTemplate v-slot="{ item, active, index }">
     <slot
-      :name="((item.slot || 'item') as keyof NavigationMenuSlots<T>)"
+      :name="((item.slot || 'item') as keyof PNavigationMenuSlots<T>)"
       :item="item"
       :index="index"
       :active="active"
       :pohon="pohon"
     >
       <slot
-        :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof NavigationMenuSlots<T>)"
+        :name="((item.slot ? `${item.slot}-leading` : 'item-leading') as keyof PNavigationMenuSlots<T>)"
         :item="item"
         :active="active"
         :index="index"
@@ -353,14 +368,14 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
       >
         <PAvatar
           v-if="item.avatar"
-          :size="((item.pohon?.linkLeadingAvatarSize || pohonProp?.linkLeadingAvatarSize || pohon.linkLeadingAvatarSize()) as AAvatarProps['size'])"
+          :size="((item.pohon?.linkLeadingAvatarSize || pohonProp?.linkLeadingAvatarSize || pohon.linkLeadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="item.avatar"
           data-slot="linkLeadingAvatar"
           :class="pohon.linkLeadingAvatar({ class: [pohonProp?.linkLeadingAvatar, item.pohon?.linkLeadingAvatar], active, disabled: !!item.disabled })"
         />
-        <UChip
+        <PChip
           v-else-if="item.icon && item.chip"
-          :size="((item.pohon?.linkLeadingChipSize || pohonProp?.linkLeadingChipSize || pohon.linkLeadingChipSize()) as ChipProps['size'])"
+          :size="((item.pohon?.linkLeadingChipSize || pohonProp?.linkLeadingChipSize || pohon.linkLeadingChipSize()) as PChipProps['size'])"
           inset
           v-bind="typeof item.chip === 'object' ? item.chip : {}"
           data-slot="linkLeadingChip"
@@ -370,7 +385,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
             data-slot="linkLeadingIcon"
             :class="pohon.linkLeadingIcon({ class: [pohonProp?.linkLeadingIcon, item.pohon?.linkLeadingIcon], active, disabled: !!item.disabled })"
           />
-        </UChip>
+        </PChip>
         <PIcon
           v-else-if="item.icon"
           :name="item.icon"
@@ -380,17 +395,17 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
       </slot>
 
       <span
-        v-if="get(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>]"
+        v-if="getProp(item, props.labelKey as string) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PNavigationMenuSlots<T>]"
         data-slot="linkLabel"
         :class="pohon.linkLabel({ class: [pohonProp?.linkLabel, item.pohon?.linkLabel] })"
       >
         <slot
-          :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof NavigationMenuSlots<T>)"
+          :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PNavigationMenuSlots<T>)"
           :item="item"
           :active="active"
           :index="index"
         >
-          {{ get(item, props.labelKey as string) }}
+          {{ getProp(item, props.labelKey as string) }}
         </slot>
 
         <PIcon
@@ -402,32 +417,32 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
       </span>
 
       <component
-        :is="orientation === 'vertical' && item.children?.length && !collapsed ? AccordionTrigger : 'span'"
-        v-if="(item.badge || item.badge === 0) || (orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>]"
+        :is="orientation === 'vertical' && item.children?.length && !collapsed ? AAccordionTrigger : 'span'"
+        v-if="(item.badge || item.badge === 0) || (orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length) || item.trailingIcon || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PNavigationMenuSlots<T>]"
         :as="orientation === 'vertical' && item.children?.length && !collapsed ? 'span' : undefined"
         data-slot="linkTrailing"
         :class="pohon.linkTrailing({ class: [pohonProp?.linkTrailing, item.pohon?.linkTrailing] })"
-        @click="(e: Event) => onLinkTrailingClick(e, item)"
+        @click="(event: Event) => onLinkTrailingClick(event, item)"
       >
         <slot
-          :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof NavigationMenuSlots<T>)"
+          :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PNavigationMenuSlots<T>)"
           :item="item"
           :active="active"
           :index="index"
           :pohon="pohon"
         >
-          <UBadge
+          <PBadge
             v-if="item.badge || item.badge === 0"
             color="neutral"
             variant="outline"
-            :size="((item.pohon?.linkTrailingBadgeSize || pohonProp?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as BadgeProps['size'])"
+            :size="((item.pohon?.linkTrailingBadgeSize || pohonProp?.linkTrailingBadgeSize || pohon.linkTrailingBadgeSize()) as PBadgeProps['size'])"
             v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
             data-slot="linkTrailingBadge"
             :class="pohon.linkTrailingBadge({ class: [pohonProp?.linkTrailingBadge, item.pohon?.linkTrailingBadge] })"
           />
 
           <PIcon
-            v-if="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length)"
+            v-if="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])) || (orientation === 'vertical' && item.children?.length)"
             :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
             data-slot="linkTrailingIcon"
             :class="pohon.linkTrailingIcon({ class: [pohonProp?.linkTrailingIcon, item.pohon?.linkTrailingIcon], active })"
@@ -445,7 +460,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
 
   <DefineItemTemplate v-slot="{ item, index, level = 0, listIndex = 0 }">
     <component
-      :is="(orientation === 'vertical' && !collapsed) ? PAccordionItem : NavigationMenuItem"
+      :is="(orientation === 'vertical' && !collapsed) ? AAccordionItem : ANavigationMenuItem"
       as="li"
       v-bind="(orientation === 'vertical' && !collapsed) ? { disabled: !!item.disabled } : {}"
       :value="getItemValue(item, index, level, listIndex)"
@@ -460,25 +475,25 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
           :index="index"
         />
       </div>
-      <ULink
+      <PLink
         v-else-if="item.type !== 'label'"
         v-slot="{ active, ...slotProps }"
-        v-bind="(orientation === 'vertical' && item.children?.length && !collapsed && item.type === 'trigger') ? {} : pickLinkProps(item as Omit<NavigationMenuItem, 'type'>)"
+        v-bind="(orientation === 'vertical' && item.children?.length && !collapsed && item.type === 'trigger') ? {} : pickLinkProps(item as Omit<PNavigationMenuItem, 'type'>)"
         custom
       >
         <component
-          :is="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])) ? NavigationMenuTrigger : ((orientation === 'vertical' && item.children?.length && !collapsed && !(slotProps as any).href) ? AccordionTrigger : NavigationMenuLink)"
+          :is="(orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])) ? ANavigationMenuTrigger : ((orientation === 'vertical' && item.children?.length && !collapsed && !(slotProps as any).href) ? AAccordionTrigger : ANavigationMenuLink)"
           as-child
           :active="active || item.active"
           :disabled="item.disabled"
           @select="item.onSelect"
         >
-          <UPopover
+          <PPopover
             v-if="orientation === 'vertical' && collapsed && item.children?.length && (!!props.popover || !!item.popover)"
             v-bind="{ ...popoverProps, ...(typeof item.popover === 'boolean' ? {} : item.popover || {}) }"
             :pohon="{ content: pohon.content({ class: [pohonProp?.content, item.pohon?.content] }) }"
           >
-            <ULinkBase
+            <PLinkBase
               v-bind="slotProps"
               data-slot="link"
               :class="pohon.link({ class: [pohonProp?.link, item.pohon?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })"
@@ -488,11 +503,11 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                 :active="active || item.active"
                 :index="index"
               />
-            </ULinkBase>
+            </PLinkBase>
 
             <template #content="{ close }">
               <slot
-                :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)"
+                :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>)"
                 :item="item"
                 :active="active || item.active"
                 :index="index"
@@ -507,7 +522,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                     data-slot="childLabel"
                     :class="pohon.childLabel({ class: [pohonProp?.childLabel, item.pohon?.childLabel] })"
                   >
-                    {{ get(item, props.labelKey as string) }}
+                    {{ getProp(item, props.labelKey as string) }}
                   </li>
                   <li
                     v-for="(childItem, childIndex) in item.children"
@@ -515,17 +530,17 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                     data-slot="childItem"
                     :class="pohon.childItem({ class: [pohonProp?.childItem, item.pohon?.childItem] })"
                   >
-                    <ULink
+                    <PLink
                       v-slot="{ active: childActive, ...childSlotProps }"
                       v-bind="pickLinkProps(childItem)"
                       custom
                     >
-                      <NavigationMenuLink
+                      <ANavigationMenuLink
                         as-child
                         :active="childActive"
                         @select="childItem.onSelect"
                       >
-                        <ULinkBase
+                        <PLinkBase
                           v-bind="childSlotProps"
                           data-slot="childLink"
                           :class="pohon.childLink({ class: [pohonProp?.childLink, item.pohon?.childLink, childItem.class], active: childActive })"
@@ -541,7 +556,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                             data-slot="childLinkLabel"
                             :class="pohon.childLinkLabel({ class: [pohonProp?.childLinkLabel, item.pohon?.childLinkLabel], active: childActive })"
                           >
-                            {{ get(childItem, props.labelKey as string) }}
+                            {{ getProp(childItem, props.labelKey as string) }}
 
                             <PIcon
                               v-if="childItem.target === '_blank' && externalIcon !== false"
@@ -550,20 +565,20 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                               :class="pohon.childLinkLabelExternalIcon({ class: [pohonProp?.childLinkLabelExternalIcon, item.pohon?.childLinkLabelExternalIcon], active: childActive })"
                             />
                           </span>
-                        </ULinkBase>
-                      </NavigationMenuLink>
-                    </ULink>
+                        </PLinkBase>
+                      </ANavigationMenuLink>
+                    </PLink>
                   </li>
                 </ul>
               </slot>
             </template>
-          </UPopover>
-          <UTooltip
+          </PPopover>
+          <PTooltip
             v-else-if="(orientation === 'vertical' && collapsed && (!!props.tooltip || !!item.tooltip)) || (orientation === 'horizontal' && !!item.tooltip)"
-            :text="get(item, props.labelKey as string)"
+            :text="getProp(item, props.labelKey as string)"
             v-bind="{ ...tooltipProps, ...(typeof item.tooltip === 'boolean' ? {} : item.tooltip || {}) }"
           >
-            <ULinkBase
+            <PLinkBase
               v-bind="slotProps"
               data-slot="link"
               :class="pohon.link({ class: [pohonProp?.link, item.pohon?.link, item.class], active: active || item.active, disabled: !!item.disabled, level: level > 0 })"
@@ -573,9 +588,9 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                 :active="active || item.active"
                 :index="index"
               />
-            </ULinkBase>
-          </UTooltip>
-          <ULinkBase
+            </PLinkBase>
+          </PTooltip>
+          <PLinkBase
             v-else
             v-bind="slotProps"
             data-slot="link"
@@ -586,17 +601,17 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
               :active="active || item.active"
               :index="index"
             />
-          </ULinkBase>
+          </PLinkBase>
         </component>
 
-        <NavigationMenuContent
-          v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>])"
+        <ANavigationMenuContent
+          v-if="orientation === 'horizontal' && (item.children?.length || !!slots[(item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>])"
           v-bind="contentProps"
           data-slot="content"
           :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content] })"
         >
           <slot
-            :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof NavigationMenuSlots<T>)"
+            :name="((item.slot ? `${item.slot}-content` : 'item-content') as keyof PNavigationMenuSlots<T>)"
             :item="item"
             :active="active || item.active"
             :index="index"
@@ -612,17 +627,17 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                 data-slot="childItem"
                 :class="pohon.childItem({ class: [pohonProp?.childItem, item.pohon?.childItem] })"
               >
-                <ULink
+                <PLink
                   v-slot="{ active: childActive, ...childSlotProps }"
                   v-bind="pickLinkProps(childItem)"
                   custom
                 >
-                  <NavigationMenuLink
+                  <ANavigationMenuLink
                     as-child
                     :active="childActive"
                     @select="childItem.onSelect"
                   >
-                    <ULinkBase
+                    <PLinkBase
                       v-bind="childSlotProps"
                       data-slot="childLink"
                       :class="pohon.childLink({ class: [pohonProp?.childLink, item.pohon?.childLink, childItem.class], active: childActive })"
@@ -642,7 +657,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                           data-slot="childLinkLabel"
                           :class="pohon.childLinkLabel({ class: [pohonProp?.childLinkLabel, item.pohon?.childLinkLabel], active: childActive })"
                         >
-                          {{ get(childItem, props.labelKey as string) }}
+                          {{ getProp(childItem, props.labelKey as string) }}
 
                           <PIcon
                             v-if="childItem.target === '_blank' && externalIcon !== false"
@@ -659,21 +674,21 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
                           {{ childItem.description }}
                         </p>
                       </div>
-                    </ULinkBase>
-                  </NavigationMenuLink>
-                </ULink>
+                    </PLinkBase>
+                  </ANavigationMenuLink>
+                </PLink>
               </li>
             </ul>
           </slot>
-        </NavigationMenuContent>
-      </ULink>
+        </ANavigationMenuContent>
+      </PLink>
 
-      <AccordionContent
+      <AAccordionContent
         v-if="orientation === 'vertical' && item.children?.length && !collapsed"
         data-slot="content"
         :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content] })"
       >
-        <AccordionRoot
+        <AAccordionRoot
           v-bind="({
             ...accordionProps,
             defaultValue: getAccordionDefaultValue(item.children, level + 1, listIndex),
@@ -692,12 +707,12 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
             data-slot="childItem"
             :class="pohon.childItem({ class: [pohonProp?.childItem, childItem.pohon?.childItem] })"
           />
-        </AccordionRoot>
-      </AccordionContent>
+        </AAccordionRoot>
+      </AAccordionContent>
     </component>
   </DefineItemTemplate>
 
-  <NavigationMenuRoot
+  <ANavigationMenuRoot
     v-bind="{
       ...rootProps,
       ...(orientation === 'horizontal' ? {
@@ -722,7 +737,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
           modelValue,
           defaultValue: defaultValue ?? getAccordionDefaultValue(list, 0, listIndex),
         } : {}"
-        :is="orientation === 'vertical' ? AccordionRoot : NavigationMenuList"
+        :is="orientation === 'vertical' ? AAccordionRoot : ANavigationMenuList"
         as="ul"
         data-slot="list"
         :class="pohon.list({ class: pohonProp?.list })"
@@ -752,7 +767,7 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
       data-slot="viewportWrapper"
       :class="pohon.viewportWrapper({ class: pohonProp?.viewportWrapper })"
     >
-      <NavigationMenuIndicator
+      <ANavigationMenuIndicator
         v-if="arrow"
         data-slot="indicator"
         :class="pohon.indicator({ class: pohonProp?.indicator })"
@@ -761,12 +776,12 @@ function onLinkTrailingClick(e: Event, item: NavigationMenuItem) {
           data-slot="arrow"
           :class="pohon.arrow({ class: pohonProp?.arrow })"
         />
-      </NavigationMenuIndicator>
+      </ANavigationMenuIndicator>
 
-      <NavigationMenuViewport
+      <ANavigationMenuViewport
         data-slot="viewport"
         :class="pohon.viewport({ class: pohonProp?.viewport })"
       />
     </div>
-  </NavigationMenuRoot>
+  </ANavigationMenuRoot>
 </template>

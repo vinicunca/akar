@@ -1,16 +1,21 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ContextMenuContentEmits, ContextMenuContentProps, ContextMenuRootEmits, ContextMenuRootProps } from 'akar';
+import type {
+  AContextMenuContentEmits,
+  AContextMenuContentProps,
+  AContextMenuRootEmits,
+  AContextMenuRootProps,
+} from 'akar';
 import type { VNode } from 'vue';
-import type { AAvatarProps, KbdProps, LinkProps, PIconProps } from '../types';
+import type { PAvatarProps, PIconProps, PKbdProps, PLinkProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/context-menu';
 
 type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>;
 
-export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custom'> {
+export interface PContextMenuItem extends Omit<PLinkProps, 'type' | 'raw' | 'custom'> {
   label?: string;
   description?: string;
   /**
@@ -18,9 +23,9 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
    */
   icon?: PIconProps['name'];
   color?: ContextMenu['variants']['color'];
-  avatar?: AAvatarProps;
-  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & { class?: any } & Partial<EmitsToProps<ContextMenuContentEmits>>;
-  kbds?: Array<KbdProps['value']> | Array<KbdProps>;
+  avatar?: PAvatarProps;
+  content?: Omit<AContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & { class?: any } & Partial<EmitsToProps<AContextMenuContentEmits>>;
+  kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   /**
    * The item type.
    * @defaultValue 'link'
@@ -32,15 +37,15 @@ export interface ContextMenuItem extends Omit<LinkProps, 'type' | 'raw' | 'custo
   checked?: boolean;
   open?: boolean;
   defaultOpen?: boolean;
-  children?: ArrayOrNested<ContextMenuItem>;
-  onSelect?: (e: Event) => void;
+  children?: ArrayOrNested<PContextMenuItem>;
+  onSelect?: (event: Event) => void;
   onUpdateChecked?: (checked: boolean) => void;
   class?: any;
   pohon?: Pick<ContextMenu['slots'], 'content' | 'item' | 'label' | 'separator' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemLabelExternalIcon' | 'itemTrailing' | 'itemTrailingIcon' | 'itemTrailingKbds' | 'itemTrailingKbdsSize'>;
   [key: string]: any;
 }
 
-export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>> extends Omit<ContextMenuRootProps, 'dir'> {
+export interface PContextMenuProps<T extends ArrayOrNested<PContextMenuItem> = ArrayOrNested<PContextMenuItem>> extends Omit<AContextMenuRootProps, 'dir'> {
   /**
    * @defaultValue 'md'
    */
@@ -66,7 +71,7 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
    */
   externalIcon?: boolean | PIconProps['name'];
   /** The content of the menu. */
-  content?: Omit<ContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ContextMenuContentEmits>>;
+  content?: Omit<AContextMenuContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<AContextMenuContentEmits>>;
   /**
    * Render the menu in a portal.
    * @defaultValue true
@@ -87,12 +92,12 @@ export interface ContextMenuProps<T extends ArrayOrNested<ContextMenuItem> = Arr
   pohon?: ContextMenu['slots'];
 }
 
-export interface ContextMenuEmits extends ContextMenuRootEmits {}
+export interface PContextMenuEmits extends AContextMenuRootEmits {}
 
-type SlotProps<T extends ContextMenuItem> = (props: { item: T; active: boolean; index: number; pohon: ContextMenu['pohon'] }) => Array<VNode>;
+type SlotProps<T extends PContextMenuItem> = (props: { item: T; active: boolean; index: number; pohon: ContextMenu['pohon'] }) => Array<VNode>;
 
-export type ContextMenuSlots<
-  A extends ArrayOrNested<ContextMenuItem> = ArrayOrNested<ContextMenuItem>,
+export type PContextMenuSlots<
+  A extends ArrayOrNested<PContextMenuItem> = ArrayOrNested<PContextMenuItem>,
   T extends NestedItem<A> = NestedItem<A>,
 > = {
   'default'?: (props?: {}) => Array<VNode>;
@@ -109,25 +114,25 @@ export type ContextMenuSlots<
 
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<ContextMenuItem>">
+<script setup lang="ts" generic="T extends ArrayOrNested<PContextMenuItem>">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { ContextMenuRoot, ContextMenuTrigger, useForwardPropsEmits } from 'akar';
+import { AContextMenuRoot, AContextMenuTrigger, useForwardPropsEmits } from 'akar';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';
-import UContextMenuContent from './ContextMenuContent.vue';
+import PContextMenuContent from './context-menu-content.vue';
 
-const props = withDefaults(defineProps<ContextMenuProps<T>>(), {
+const props = withDefaults(defineProps<PContextMenuProps<T>>(), {
   portal: true,
   modal: true,
   externalIcon: true,
   labelKey: 'label',
   descriptionKey: 'description',
 });
-const emits = defineEmits<ContextMenuEmits>();
-const slots = defineSlots<ContextMenuSlots<T>>();
+const emits = defineEmits<PContextMenuEmits>();
+const slots = defineSlots<PContextMenuSlots<T>>();
 
 const appConfig = useAppConfig() as ContextMenu['AppConfig'];
 const pohonProp = useComponentPohon('contextMenu', props);
@@ -142,17 +147,17 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.contex
 </script>
 
 <template>
-  <ContextMenuRoot v-bind="rootProps">
-    <ContextMenuTrigger
+  <AContextMenuRoot v-bind="rootProps">
+    <AContextMenuTrigger
       v-if="!!slots.default"
       as-child
       :disabled="disabled"
       :class="props.class"
     >
       <slot />
-    </ContextMenuTrigger>
+    </AContextMenuTrigger>
 
-    <UContextMenuContent
+    <PContextMenuContent
       :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
       :pohon="pohon"
       :pohon-override="pohonProp"
@@ -170,10 +175,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.contex
         #[name]="slotData"
       >
         <slot
-          :name="(name as keyof ContextMenuSlots<T>)"
+          :name="(name as keyof PContextMenuSlots<T>)"
           v-bind="slotData"
         />
       </template>
-    </UContextMenuContent>
-  </ContextMenuRoot>
+    </PContextMenuContent>
+  </AContextMenuRoot>
 </template>

@@ -5,7 +5,7 @@ import type { BubbleMenuPluginProps } from '@tiptap/extension-bubble-menu';
 import type { FloatingMenuPluginProps } from '@tiptap/extension-floating-menu';
 import type { Editor } from '@tiptap/vue-3';
 import type { VNode } from 'vue';
-import type { DropdownMenuItem, DropdownMenuProps, PButtonProps, PLinkPropsKeys, TooltipProps } from '../types';
+import type { DropdownMenuItem, DropdownMenuProps, PButtonProps, PLinkPropsKeys, PTooltipProps } from '../types';
 import type { EditorCustomHandlers, EditorItem } from '../types/editor';
 import type { ArrayOrNested, DynamicSlots, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -15,7 +15,7 @@ type EditorToolbar = ComponentConfig<typeof theme, AppConfig, 'editorToolbar'>;
 
 type ButtonItem = Omit<PButtonProps, 'type'> & {
   'slot'?: string;
-  'tooltip'?: TooltipProps;
+  'tooltip'?: PTooltipProps;
   'aria-label'?: string;
 };
 
@@ -27,12 +27,12 @@ type EditorToolbarDropdownChildItem<H extends EditorCustomHandlers = EditorCusto
 
 type EditorToolbarDropdownItem<H extends EditorCustomHandlers = EditorCustomHandlers> = ButtonItem & DropdownMenuProps<ArrayOrNested<EditorToolbarDropdownChildItem<H>>>;
 
-export type EditorToolbarItem<H extends EditorCustomHandlers = EditorCustomHandlers>
+export type PEditorToolbarItem<H extends EditorCustomHandlers = EditorCustomHandlers>
   = | ButtonItem
     | EditorToolbarButtonItem<H>
     | EditorToolbarDropdownItem<H>;
 
-type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>> = {
+type EditorToolbarBaseProps<T extends ArrayOrNested<PEditorToolbarItem> = ArrayOrNested<PEditorToolbarItem>> = {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -69,7 +69,7 @@ type EditorToolbarBaseProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOr
   pohon?: EditorToolbar['slots'];
 };
 
-export type EditorToolbarProps<T extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>>
+export type PEditorToolbarProps<T extends ArrayOrNested<PEditorToolbarItem> = ArrayOrNested<PEditorToolbarItem>>
   = | (EditorToolbarBaseProps<T> & { layout?: 'fixed' })
     | (EditorToolbarBaseProps<T> & Partial<Omit<BubbleMenuPluginProps, 'editor' | 'element'>> & {
       layout?: 'bubble';
@@ -80,14 +80,14 @@ export type EditorToolbarProps<T extends ArrayOrNested<EditorToolbarItem> = Arra
 
 type SlotPropsProps = {
   index: number;
-  isActive: (item: EditorToolbarItem) => boolean;
-  isDisabled: (item: EditorToolbarItem) => boolean;
-  onClick: (e: MouseEvent, item: EditorToolbarItem) => void;
+  isActive: (item: PEditorToolbarItem) => boolean;
+  isDisabled: (item: PEditorToolbarItem) => boolean;
+  onClick: (event: MouseEvent, item: PEditorToolbarItem) => void;
 };
-type SlotProps<T extends EditorToolbarItem> = (props: { item: T } & SlotPropsProps) => Array<VNode>;
+type SlotProps<T extends PEditorToolbarItem> = (props: { item: T } & SlotPropsProps) => Array<VNode>;
 
-export type EditorToolbarSlots<
-  A extends ArrayOrNested<EditorToolbarItem> = ArrayOrNested<EditorToolbarItem>,
+export type PEditorToolbarSlots<
+  A extends ArrayOrNested<PEditorToolbarItem> = ArrayOrNested<PEditorToolbarItem>,
   T extends NestedItem<A> = NestedItem<A>,
 > = {
   item?: SlotProps<T>;
@@ -95,11 +95,11 @@ export type EditorToolbarSlots<
 
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<EditorToolbarItem>">
+<script setup lang="ts" generic="T extends ArrayOrNested<PEditorToolbarItem>">
 import { useAppConfig } from '#imports';
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus';
 import { reactiveOmit } from '@vueuse/core';
-import { Primitive, Separator, useForwardProps } from 'akar';
+import { APrimitive, ASeparator, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, inject } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -107,12 +107,12 @@ import { isArrayOfArray, omit, pick } from '../utils';
 import { createHandlers } from '../utils/editor';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UDropdownMenu from './DropdownMenu.vue';
-import UTooltip from './Tooltip.vue';
+import PDropdownMenu from './dropdown-menu.vue';
+import PTooltip from './tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<EditorToolbarProps<T>>(), {
+const props = withDefaults(defineProps<PEditorToolbarProps<T>>(), {
   layout: 'fixed',
   color: 'neutral',
   variant: 'ghost',
@@ -120,7 +120,7 @@ const props = withDefaults(defineProps<EditorToolbarProps<T>>(), {
   activeVariant: 'soft',
   size: 'sm',
 });
-defineSlots<EditorToolbarSlots<T>>();
+defineSlots<PEditorToolbarSlots<T>>();
 
 const appConfig = useAppConfig() as EditorToolbar['AppConfig'];
 const pohonProp = useComponentPohon('editorToolbar', props);
@@ -147,6 +147,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.editor
 }));
 
 const groups = computed(() =>
+  // eslint-disable-next-line no-nested-ternary
   props.items?.length
     ? isArrayOfArray(props.items)
       ? props.items
@@ -154,14 +155,14 @@ const groups = computed(() =>
     : [],
 );
 
-function isActive(item: EditorToolbarItem): boolean {
+function isActive(item: PEditorToolbarItem): boolean {
   if (!props.editor?.isEditable) {
     return false;
   }
 
   // Check for dropdown (has items property)
   if (('items' in item) && item.items?.length) {
-    return item.items?.some((item): boolean => isActive(item as EditorToolbarItem)) || false;
+    return item.items?.some((item): boolean => isActive(item as PEditorToolbarItem)) || false;
   }
 
   // Check for plain button (no kind property)
@@ -174,7 +175,7 @@ function isActive(item: EditorToolbarItem): boolean {
   return handler?.isActive(props.editor, item as any) || false;
 }
 
-function isDisabled(item: EditorToolbarItem): boolean {
+function isDisabled(item: PEditorToolbarItem): boolean {
   if (!props.editor?.isEditable) {
     return true;
   }
@@ -209,7 +210,7 @@ function isDisabled(item: EditorToolbarItem): boolean {
   return !handler.canExecute(props.editor, item);
 }
 
-function onClick(e: MouseEvent, item: EditorToolbarItem) {
+function onClick(event: MouseEvent, item: PEditorToolbarItem) {
   if (!props.editor?.isEditable || isDisabled(item)) {
     return;
   }
@@ -217,7 +218,7 @@ function onClick(e: MouseEvent, item: EditorToolbarItem) {
   if (('items' in item) || !('kind' in item)) {
     if ('onClick' in item) {
       for (const onClick of Array.isArray(item.onClick) ? item.onClick : [item.onClick]) {
-        onClick?.(e);
+        onClick?.(event);
       }
     }
     return;
@@ -229,22 +230,22 @@ function onClick(e: MouseEvent, item: EditorToolbarItem) {
   }
 }
 
-function getActiveChildItem(item: EditorToolbarDropdownItem): EditorToolbarItem | undefined {
+function getActiveChildItem(item: EditorToolbarDropdownItem): PEditorToolbarItem | undefined {
   if (!item.items) {
     return undefined;
   }
 
   const items = isArrayOfArray(item.items) ? item.items.flat() : item.items;
 
-  return items.find((childItem: any): childItem is EditorToolbarItem => {
+  return items.find((childItem: any): childItem is PEditorToolbarItem => {
     if (!('kind' in childItem)) {
       return false;
     }
-    return isActive(childItem as EditorToolbarItem);
-  }) as EditorToolbarItem | undefined;
+    return isActive(childItem as PEditorToolbarItem);
+  }) as PEditorToolbarItem | undefined;
 }
 
-function getButtonProps(item: EditorToolbarItem) {
+function getButtonProps(item: PEditorToolbarItem) {
   const baseProps = omit(item as any, ['kind', 'mark', 'align', 'level', 'href', 'src', 'pos', 'items', 'slot', 'checkedIcon', 'loadingIcon', 'externalIcon', 'content', 'arrow', 'portal', 'modal', 'tooltip', 'onClick']);
 
   // For dropdown items, use the active child's icon if available
@@ -293,7 +294,7 @@ function mapDropdownItem(item: EditorToolbarDropdownChildItem): DropdownMenuItem
     ...(children && { children }),
     active: isActive(editorToolbarItem),
     disabled: isDisabled(editorToolbarItem),
-    onSelect: (e: Event) => onClick(e as MouseEvent, editorToolbarItem),
+    onSelect: (event: Event) => onClick(event as MouseEvent, editorToolbarItem),
   };
 }
 
@@ -309,7 +310,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="Component"
     v-bind="Component !== 'template' ? {
       editor,
@@ -322,7 +323,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
       ...$attrs,
     }"
   >
-    <Primitive
+    <APrimitive
       :as="as"
       role="toolbar"
       data-slot="base"
@@ -342,19 +343,19 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
             :key="`group-${groupIndex}-${index}`"
           >
             <slot
-              :name="((item.slot || 'item') as keyof EditorToolbarSlots<T>)"
+              :name="((item.slot || 'item') as keyof PEditorToolbarSlots<T>)"
               :item="(item as any)"
               :index="index"
               :is-active="isActive"
               :is-disabled="isDisabled"
               :on-click="onClick"
             >
-              <UDropdownMenu
+              <PDropdownMenu
                 v-if="('items' in item && item.items?.length)"
                 v-bind="getDropdownProps(item as EditorToolbarDropdownItem)"
                 :items="getDropdownItems(item as EditorToolbarDropdownItem)"
               >
-                <UTooltip
+                <PTooltip
                   v-if="item.tooltip"
                   :disabled="isDisabled(item)"
                   v-bind="{ ...(item.tooltip || {}) }"
@@ -365,7 +366,7 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
                     v-bind="getButtonProps(item)"
                     @click="onClick($event, item)"
                   />
-                </UTooltip>
+                </PTooltip>
 
                 <PButton
                   v-else
@@ -374,9 +375,9 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
                   v-bind="getButtonProps(item)"
                   @click="onClick($event, item)"
                 />
-              </UDropdownMenu>
+              </PDropdownMenu>
 
-              <UTooltip
+              <PTooltip
                 v-else-if="item.tooltip"
                 :disabled="isDisabled(item)"
                 v-bind="{ ...(item.tooltip || {}) }"
@@ -385,30 +386,30 @@ function getDropdownItems(item: EditorToolbarDropdownItem) {
                   :active="isActive(item)"
                   :disabled="isDisabled(item)"
                   v-bind="getButtonProps(item)"
-                  :pohon="item.ui"
+                  :pohon="item.pohon"
                   @click="onClick($event, item)"
                 />
-              </UTooltip>
+              </PTooltip>
 
               <PButton
                 v-else
                 :active="isActive(item)"
                 :disabled="isDisabled(item)"
                 v-bind="getButtonProps(item)"
-                :pohon="item.ui"
+                :pohon="item.pohon"
                 @click="onClick($event, item)"
               />
             </slot>
           </template>
         </div>
 
-        <Separator
+        <ASeparator
           v-if="groupIndex < groups.length - 1"
           data-slot="separator"
           :class="pohon.separator({ class: pohonProp?.separator })"
           orientation="vertical"
         />
       </template>
-    </Primitive>
-  </Primitive>
+    </APrimitive>
+  </APrimitive>
 </template>

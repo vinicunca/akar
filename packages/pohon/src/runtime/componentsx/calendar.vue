@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
 import type { AppConfig } from '@nuxt/schema';
-import type { CalendarCellTriggerProps, CalendarRootEmits, CalendarRootProps, DateRange, RangeCalendarRootEmits, RangeCalendarRootProps } from 'akar';
+import type { ACalendarCellTriggerProps, ACalendarRootEmits, ACalendarRootProps, ARangeCalendarRootEmits, ARangeCalendarRootProps, DateRange } from 'akar';
 import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
@@ -21,10 +21,10 @@ type CalendarModelValue<R extends boolean = false, M extends boolean = false> = 
     ? (Array<DateValue> | undefined)
     : (DateValue | undefined);
 
-type _CalendarRootProps = Omit<CalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>;
-type _RangeCalendarRootProps = Omit<RangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>;
+type _CalendarRootProps = Omit<ACalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>;
+type _RangeCalendarRootProps = Omit<ARangeCalendarRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale' | 'calendarLabel' | 'multiple'>;
 
-export interface CalendarProps<R extends boolean = false, M extends boolean = false> extends _RangeCalendarRootProps, _CalendarRootProps {
+export interface PCalendarProps<R extends boolean = false, M extends boolean = false> extends _RangeCalendarRootProps, _CalendarRootProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -101,13 +101,13 @@ export interface CalendarProps<R extends boolean = false, M extends boolean = fa
   pohon?: Calendar['slots'];
 }
 
-export interface CalendarEmits<R extends boolean = false, M extends boolean = false> extends Omit<CalendarRootEmits & RangeCalendarRootEmits, 'update:modelValue'> {
+export interface PCalendarEmits<R extends boolean = false, M extends boolean = false> extends Omit<ACalendarRootEmits & ARangeCalendarRootEmits, 'update:modelValue'> {
   'update:modelValue': [value: CalendarModelValue<R, M>];
 }
 
-export interface CalendarSlots {
+export interface PCalendarSlots {
   'heading'?: (props: { value: string }) => Array<VNode>;
-  'day'?: (props: Pick<CalendarCellTriggerProps, 'day'>) => Array<VNode>;
+  'day'?: (props: Pick<ACalendarCellTriggerProps, 'day'>) => Array<VNode>;
   'week-day'?: (props: { day: string }) => Array<VNode>;
 }
 </script>
@@ -116,20 +116,20 @@ export interface CalendarSlots {
 import { useAppConfig } from '#imports';
 import { reactiveOmit } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
-import { RangeCalendar, Calendar as SingleCalendar } from 'akar/namespaced';
+import { ACalendar, ARangeCalendar } from 'akar/namespaced';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<CalendarProps<R, M>>(), {
+const props = withDefaults(defineProps<PCalendarProps<R, M>>(), {
   fixedWeeks: true,
   monthControls: true,
   yearControls: true,
 });
-const emits = defineEmits<CalendarEmits<R, M>>();
-defineSlots<CalendarSlots>();
+const emits = defineEmits<PCalendarEmits<R, M>>();
+defineSlots<PCalendarSlots>();
 
 const { dir, t, locale } = useLocale();
 const appConfig = useAppConfig() as Calendar['AppConfig'];
@@ -157,11 +157,11 @@ function paginateYear(date: DateValue, sign: -1 | 1) {
   return date.add({ years: 1 });
 }
 
-const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
+const CalendarComponent = computed(() => props.range ? ARangeCalendar : ACalendar);
 </script>
 
 <template>
-  <Calendar.Root
+  <CalendarComponent.Root
     v-slot="{ weekDays, grid }"
     v-bind="rootProps"
     :model-value="(modelValue as DateValue | DateValue[])"
@@ -169,11 +169,11 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <Calendar.Header
+    <CalendarComponent.Header
       data-slot="header"
       :class="pohon.header({ class: pohonProp?.header })"
     >
-      <Calendar.Prev
+      <CalendarComponent.Prev
         v-if="props.yearControls"
         :prev-page="(date: DateValue) => paginateYear(date, -1)"
         :aria-label="t('calendar.prevYear')"
@@ -186,8 +186,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
           variant="ghost"
           v-bind="props.prevYear"
         />
-      </Calendar.Prev>
-      <Calendar.Prev
+      </CalendarComponent.Prev>
+      <CalendarComponent.Prev
         v-if="props.monthControls"
         :aria-label="t('calendar.prevMonth')"
         as-child
@@ -199,8 +199,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
           variant="ghost"
           v-bind="props.prevMonth"
         />
-      </Calendar.Prev>
-      <Calendar.Heading
+      </CalendarComponent.Prev>
+      <CalendarComponent.Heading
         v-slot="{ headingValue }"
         data-slot="heading"
         :class="pohon.heading({ class: pohonProp?.heading })"
@@ -211,8 +211,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
         >
           {{ headingValue }}
         </slot>
-      </Calendar.Heading>
-      <Calendar.Next
+      </CalendarComponent.Heading>
+      <CalendarComponent.Next
         v-if="props.monthControls"
         :aria-label="t('calendar.nextMonth')"
         as-child
@@ -224,8 +224,8 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
           variant="ghost"
           v-bind="props.nextMonth"
         />
-      </Calendar.Next>
-      <Calendar.Next
+      </CalendarComponent.Next>
+      <CalendarComponent.Next
         v-if="props.yearControls"
         :next-page="(date: DateValue) => paginateYear(date, 1)"
         :aria-label="t('calendar.nextYear')"
@@ -238,24 +238,24 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
           variant="ghost"
           v-bind="props.nextYear"
         />
-      </Calendar.Next>
-    </Calendar.Header>
+      </CalendarComponent.Next>
+    </CalendarComponent.Header>
     <div
       data-slot="body"
       :class="pohon.body({ class: pohonProp?.body })"
     >
-      <Calendar.Grid
+      <CalendarComponent.Grid
         v-for="month in grid"
         :key="month.value.toString()"
         data-slot="grid"
         :class="pohon.grid({ class: pohonProp?.grid })"
       >
-        <Calendar.GridHead>
-          <Calendar.GridRow
+        <CalendarComponent.GridHead>
+          <CalendarComponent.GridRow
             data-slot="gridWeekDaysRow"
             :class="pohon.gridWeekDaysRow({ class: pohonProp?.gridWeekDaysRow })"
           >
-            <Calendar.HeadCell
+            <CalendarComponent.HeadCell
               v-for="day in weekDays"
               :key="day"
               data-slot="headCell"
@@ -267,14 +267,14 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
               >
                 {{ day }}
               </slot>
-            </Calendar.HeadCell>
-          </Calendar.GridRow>
-        </Calendar.GridHead>
-        <Calendar.GridBody
+            </CalendarComponent.HeadCell>
+          </CalendarComponent.GridRow>
+        </CalendarComponent.GridHead>
+        <CalendarComponent.GridBody
           data-slot="gridBody"
           :class="pohon.gridBody({ class: pohonProp?.gridBody })"
         >
-          <Calendar.GridRow
+          <CalendarComponent.GridRow
             v-for="(weekDates, index) in month.rows"
             :key="`weekDate-${index}`"
             data-slot="gridRow"
@@ -288,14 +288,14 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
             >
               {{ getWeekNumber(weekDates[0], locale.code) }}
             </td>
-            <Calendar.Cell
+            <CalendarComponent.Cell
               v-for="weekDate in weekDates"
               :key="weekDate.toString()"
               :date="weekDate"
               data-slot="cell"
               :class="pohon.cell({ class: pohonProp?.cell })"
             >
-              <Calendar.CellTrigger
+              <CalendarComponent.CellTrigger
                 :day="weekDate"
                 :month="month.value"
                 data-slot="cellTrigger"
@@ -307,11 +307,11 @@ const Calendar = computed(() => props.range ? RangeCalendar : SingleCalendar);
                 >
                   {{ weekDate.day }}
                 </slot>
-              </Calendar.CellTrigger>
-            </Calendar.Cell>
-          </Calendar.GridRow>
-        </Calendar.GridBody>
-      </Calendar.Grid>
+              </CalendarComponent.CellTrigger>
+            </CalendarComponent.Cell>
+          </CalendarComponent.GridRow>
+        </CalendarComponent.GridBody>
+      </CalendarComponent.Grid>
     </div>
-  </Calendar.Root>
+  </CalendarComponent.Root>
 </template>

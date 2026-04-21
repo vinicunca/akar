@@ -1,15 +1,15 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { CollapsibleRootProps } from 'akar';
+import type { ACollapsibleRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
-import type { ChatShimmerProps } from './ChatShimmer.vue';
+import type { PChatShimmerProps } from './chat-shimmer.vue';
 import theme from '#build/pohon/chat-reasoning';
 
 type ChatReasoning = ComponentConfig<typeof theme, AppConfig, 'chatReasoning'>;
 
-export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
+export interface PChatReasoningProps extends Pick<ACollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
   /**
    * The reasoning text content to display.
    */
@@ -49,40 +49,40 @@ export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultO
   /**
    * Customize the [`ChatShimmer`](https://pohon.nuxt.com/docs/components/chat-shimmer) component when streaming.
    */
-  shimmer?: Partial<Omit<ChatShimmerProps, 'text'>>;
+  shimmer?: Partial<Omit<PChatShimmerProps, 'text'>>;
   class?: any;
   pohon?: ChatReasoning['slots'];
 }
 
-export interface ChatReasoningEmits {
+export interface PChatReasoningEmits {
   'update:open': [value: boolean];
 }
 
-export interface ChatReasoningSlots {
+export interface PChatReasoningSlots {
   default?: (props: { open: boolean }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from 'akar';
+import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar';
 import { computed, nextTick, onUnmounted, ref, useTemplateRef, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
-import { useScrollShadow } from '../composables/useScrollShadow';
+import { useScrollShadow } from '../composables/use-scroll-shadow';
 import { uv } from '../utils/uv';
-import UChatShimmer from './ChatShimmer.vue';
+import PChatShimmer from './chat-shimmer.vue';
 import PIcon from './icon.vue';
 
-const props = withDefaults(defineProps<ChatReasoningProps>(), {
+const props = withDefaults(defineProps<PChatReasoningProps>(), {
   open: undefined,
   streaming: false,
   chevron: 'trailing',
   unmountOnHide: false,
   autoCloseDelay: 500,
 });
-const emits = defineEmits<ChatReasoningEmits>();
-defineSlots<ChatReasoningSlots>();
+const emits = defineEmits<PChatReasoningEmits>();
+defineSlots<PChatReasoningSlots>();
 
 const { t, code } = useLocale();
 const appConfig = useAppConfig() as ChatReasoning['AppConfig'];
@@ -180,7 +180,7 @@ watch(() => props.text, () => {
 </script>
 
 <template>
-  <CollapsibleRoot
+  <ACollapsibleRoot
     v-if="hasContent"
     v-slot="{ open: isOpen }"
     :open="resolvedOpen"
@@ -190,7 +190,7 @@ watch(() => props.text, () => {
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     @update:open="setOpen"
   >
-    <CollapsibleTrigger
+    <ACollapsibleTrigger
       as-child
       :disabled="!hasContent"
     >
@@ -218,7 +218,7 @@ watch(() => props.text, () => {
           />
         </span>
 
-        <UChatShimmer
+        <PChatShimmer
           v-if="streaming"
           :text="thinkingText"
           v-bind="props.shimmer"
@@ -238,9 +238,9 @@ watch(() => props.text, () => {
           :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         />
       </button>
-    </CollapsibleTrigger>
+    </ACollapsibleTrigger>
 
-    <CollapsibleContent
+    <ACollapsibleContent
       data-slot="content"
       :class="pohon.content({ class: pohonProp?.content })"
     >
@@ -254,6 +254,6 @@ watch(() => props.text, () => {
           {{ text }}
         </slot>
       </div>
-    </CollapsibleContent>
-  </CollapsibleRoot>
+    </ACollapsibleContent>
+  </ACollapsibleRoot>
 </template>

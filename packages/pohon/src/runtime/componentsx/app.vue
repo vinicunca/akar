@@ -1,39 +1,42 @@
 <script lang="ts">
-import type { ConfigProviderProps, TooltipProviderProps } from 'akar';
+import type { AConfigProviderProps, ATooltipProviderProps } from 'akar';
 import type { VNode } from 'vue';
-import type { ToasterProps } from '../types';
-import type { Locale, Messages } from '../types/locale';
+import type { PToasterProps } from '../types';
+import type { PLocale, PMessages } from '../types/locale';
 
-export interface AppProps<T extends Messages = Messages> extends Omit<ConfigProviderProps, 'useId' | 'locale'> {
-  tooltip?: TooltipProviderProps;
-  toaster?: ToasterProps | null;
-  locale?: Locale<T>;
+export interface PAppProps<T extends PMessages = PMessages> extends Omit<AConfigProviderProps, 'useId' | 'locale'> {
+  tooltip?: ATooltipProviderProps;
+  toaster?: PToasterProps | null;
+  locale?: PLocale<T>;
   portal?: boolean | string | HTMLElement;
 }
 
-export interface AppSlots {
+export interface PAppSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 
 export default {
-  name: 'App',
+  name: 'PApp',
 };
 </script>
 
-<script setup lang="ts" generic="T extends Messages">
+<script setup lang="ts" generic="T extends PMessages">
 import { reactivePick } from '@vueuse/core';
-import { ConfigProvider, TooltipProvider, useForwardProps } from 'akar';
+import { AConfigProvider, ATooltipProvider, useForwardProps } from 'akar';
 import { provide, toRef, useId } from 'vue';
 import { localeContextInjectionKey } from '../composables/use-locale';
-import { portalTargetInjectionKey } from '../composables/usePortal';
-import UOverlayProvider from './OverlayProvider.vue';
-import UToaster from './Toaster.vue';
+import { portalTargetInjectionKey } from '../composables/use-portal';
+import POverlayProvider from './overlay-provider.vue';
+import PToaster from './toaster.vue';
 
-const props = withDefaults(defineProps<AppProps<T>>(), {
-  portal: 'body',
-});
+const props = withDefaults(
+  defineProps<PAppProps<T>>(),
+  {
+    portal: 'body',
+  },
+);
 
-defineSlots<AppSlots>();
+defineSlots<PAppSlots>();
 
 const configProviderProps = useForwardProps(reactivePick(props, 'scrollBody'));
 const tooltipProps = toRef(() => props.tooltip);
@@ -47,22 +50,22 @@ provide(portalTargetInjectionKey, portal);
 </script>
 
 <template>
-  <ConfigProvider
+  <AConfigProvider
     :use-id="() => (useId() as string)"
     :dir="props.dir || locale?.dir"
     :locale="locale?.code"
     v-bind="configProviderProps"
   >
-    <TooltipProvider v-bind="tooltipProps">
-      <UToaster
+    <ATooltipProvider v-bind="tooltipProps">
+      <PToaster
         v-if="toaster !== null"
         v-bind="toasterProps"
       >
         <slot />
-      </UToaster>
+      </PToaster>
       <slot v-else />
 
-      <UOverlayProvider />
-    </TooltipProvider>
-  </ConfigProvider>
+      <POverlayProvider />
+    </ATooltipProvider>
+  </AConfigProvider>
 </template>

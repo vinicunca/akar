@@ -32,9 +32,11 @@ function getSize(size: 'xs' | 'sm' | 'md' | 'lg' | 'xl', hasDescription: boolean
 /**
  * Get estimate size for virtualizers that checks each item individually
  */
-export default function getEstimateSize(
-  { items, size, descriptionKey, hasDescriptionSlot }:
-  { items: Array<any>; size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; descriptionKey?: string; hasDescriptionSlot?: boolean },
+export function getEstimateSize(
+  items: Array<any>,
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+  descriptionKey?: string,
+  hasDescriptionSlot?: boolean,
 ): (index: number) => number {
   const sizeWithDescription = getSize(size, true);
   const sizeWithoutDescription = getSize(size, false);

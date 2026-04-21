@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { TabsProps } from '../../types';
+import type { PTabsProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/tabs';
 
@@ -22,7 +22,7 @@ export interface ProseTabsProps {
    */
   hash?: string;
   class?: any;
-  pohon?: ProseTabs['slots'] & TabsProps['pohon'];
+  pohon?: ProseTabs['slots'] & PTabsProps['pohon'];
 }
 
 export interface ProseTabsSlots {
@@ -36,7 +36,7 @@ import { computed, onBeforeUpdate, onMounted, ref, watch } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
-import UTabs from '../Tabs.vue';
+import PTabs from '../tabs.vue';
 
 const props = withDefaults(defineProps<ProseTabsProps>(), {
   defaultValue: '0',
@@ -58,7 +58,7 @@ const items = computed<Array<{
   icon: string;
   component: any;
 }>>(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  // eslint-disable-next-line ts/no-unused-expressions
   rerenderCount.value;
   return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || [];
 });
@@ -114,7 +114,7 @@ onBeforeUpdate(() => rerenderCount.value++);
 </script>
 
 <template>
-  <UTabs
+  <PTabs
     v-model="model"
     color="primary"
     variant="link"
@@ -127,5 +127,5 @@ onBeforeUpdate(() => rerenderCount.value++);
     <template #content="{ item }">
       <component :is="item.component" />
     </template>
-  </UTabs>
+  </PTabs>
 </template>

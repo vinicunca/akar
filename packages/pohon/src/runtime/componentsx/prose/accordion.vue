@@ -24,7 +24,7 @@ import { computed, onBeforeUpdate, ref } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
-import UAccordion from '../Accordion.vue';
+import PAccordion from '../accordion.vue';
 
 const props = withDefaults(defineProps<ProseAccordionProps>(), {
   type: 'multiple',
@@ -44,7 +44,7 @@ const items = computed<Array<{
   icon: string;
   component: any;
 }>>(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  // eslint-disable-next-line ts/no-unused-expressions
   rerenderCount.value;
   return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || [];
 });
@@ -67,7 +67,7 @@ onBeforeUpdate(() => rerenderCount.value++);
 </script>
 
 <template>
-  <UAccordion
+  <PAccordion
     :type="type"
     :items="items"
     :unmount-on-hide="false"
@@ -77,5 +77,5 @@ onBeforeUpdate(() => rerenderCount.value++);
     <template #content="{ item }">
       <component :is="item.component" />
     </template>
-  </UAccordion>
+  </PAccordion>
 </template>

@@ -1,15 +1,15 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { PIconProps, LinkProps } from '../../types';
+import type { PIconProps, PLinkProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/card';
 
 type ProseCard = ComponentConfig<typeof theme, AppConfig, 'card', 'pohon.prose'>;
 
 export interface ProseCardProps {
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   icon?: PIconProps['name'];
   title?: string;
   description?: string;
@@ -33,7 +33,7 @@ import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
-import ULink from '../Link.vue';
+import PLink from '../link.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -56,7 +56,7 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim());
 
 <template>
   <div :class="pohon.base({ class: [pohonProp?.base, props.class] })">
-    <ULink
+    <PLink
       v-if="to"
       :aria-label="ariaLabel"
       v-bind="{ to, target, ...$attrs }"
@@ -67,7 +67,7 @@ const ariaLabel = computed(() => (props.title || 'Card link').trim());
         class="inset-0 absolute"
         aria-hidden="true"
       />
-    </ULink>
+    </PLink>
 
     <PIcon
       v-if="icon"

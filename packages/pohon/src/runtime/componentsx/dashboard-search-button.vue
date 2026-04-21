@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ButtonSlots, KbdProps, PButtonProps, PIconProps, PLinkPropsKeys, TooltipProps } from '../types';
+import type { PButtonProps, PButtonSlots, PIconProps, PKbdProps, PLinkPropsKeys, PTooltipProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-search-button';
 
 type DashboardSearchButton = ComponentConfig<typeof theme, AppConfig, 'dashboardSearchButton'>;
 
-export interface DashboardSearchButtonProps extends Omit<PButtonProps, PLinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
+export interface PDashboardSearchButtonProps extends Omit<PButtonProps, PLinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
   /**
    * The icon displayed in the button.
    * @defaultValue appConfig.pohon.icons.search
@@ -37,13 +37,13 @@ export interface DashboardSearchButtonProps extends Omit<PButtonProps, PLinkProp
    * Display a tooltip on the button when is collapsed with the button label.
    * This has priority over the global `tooltip` prop.
    */
-  tooltip?: boolean | TooltipProps;
+  tooltip?: boolean | PTooltipProps;
   /**
    * The keyboard keys to display in the button.
    * `{ variant: 'subtle' }`{lang="ts-type"}
    * @defaultValue ['meta', 'k']
    */
-  kbds?: Array<KbdProps['value']> | Array<KbdProps>;
+  kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   pohon?: DashboardSearchButton['slots'] & PButtonProps['pohon'];
   class?: any;
 }
@@ -61,25 +61,25 @@ import { omit, transformPohon } from '../utils';
 import { useDashboard } from '../utils/dashboard';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UKbd from './Kbd.vue';
-import UTooltip from './Tooltip.vue';
+import PKbd from './kbd.vue';
+import PTooltip from './tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<DashboardSearchButtonProps>(), {
+const props = withDefaults(defineProps<PDashboardSearchButtonProps>(), {
   color: 'neutral',
   collapsed: false,
   tooltip: false,
   kbds: () => ['meta', 'k'],
 });
-const slots = defineSlots<ButtonSlots>();
+const slots = defineSlots<PButtonSlots>();
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate();
 
 const getProxySlots = () => omit(slots, ['trailing']);
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'label', 'variant', 'collapsed', 'tooltip', 'kbds', 'class', 'pohon'));
-const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps);
+const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as PTooltipProps);
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as DashboardSearchButton['AppConfig'];
@@ -106,7 +106,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
         ...$attrs,
       }"
       :class="pohon.base({ class: [pohonProp?.base, props.class] })"
-      :pohon="transformPohon(ui, pohonProp)"
+      :pohon="transformPohon(pohon, pohonProp)"
       @click="toggleSearch"
     >
       <template
@@ -129,7 +129,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
             :pohon="uiProxy"
           >
             <template v-if="kbds?.length">
-              <UKbd
+              <PKbd
                 v-for="(kbd, index) in kbds"
                 :key="index"
                 variant="subtle"
@@ -142,12 +142,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
     </PButton>
   </DefineButtonTemplate>
 
-  <UTooltip
+  <PTooltip
     v-if="collapsed && tooltip"
     :text="label || t('dashboardSearchButton.label')"
     v-bind="tooltipProps"
   >
     <ReuseButtonTemplate />
-  </UTooltip>
+  </PTooltip>
   <ReuseButtonTemplate v-else />
 </template>

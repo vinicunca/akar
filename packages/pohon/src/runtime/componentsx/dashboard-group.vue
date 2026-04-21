@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { UseResizableProps } from '../composables/useResizable';
+import type { UseResizableProps } from '../composables/use-resizable';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-group';
 
 type DashboardGroup = ComponentConfig<typeof theme, AppConfig, 'dashboardGroup'>;
 
-export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
+export interface PDashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -17,26 +17,26 @@ export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' |
   pohon?: { base?: any };
 }
 
-export interface DashboardGroupSlots {
+export interface PDashboardGroupSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig, useNuxtApp } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed, ref } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { provideDashboardContext } from '../utils/dashboard';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<DashboardGroupProps>(), {
+const props = withDefaults(defineProps<PDashboardGroupProps>(), {
   storage: 'cookie',
   storageKey: 'dashboard',
   persistent: true,
   unit: '%',
 });
-defineSlots<DashboardGroupSlots>();
+defineSlots<PDashboardGroupSlots>();
 
 const nuxtApp = useNuxtApp();
 const appConfig = useAppConfig() as DashboardGroup['AppConfig'];
@@ -67,10 +67,10 @@ provideDashboardContext({
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

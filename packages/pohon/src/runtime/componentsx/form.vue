@@ -8,7 +8,7 @@ import theme from '#build/pohon/form';
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>;
 
-export type FormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
+export type PFormProps<S extends FormSchema, T extends boolean = true, N extends boolean = false> = {
   id?: string | number;
   /** Schema to validate the form state. Supports Standard Schema objects, Yup, Joi, and Superstructs. */
   schema?: S;
@@ -65,12 +65,12 @@ export type FormProps<S extends FormSchema, T extends boolean = true, N extends 
   onSubmit?: ((event: FormSubmitEvent<FormData<S, T>>) => void | Promise<void>) | (() => void | Promise<void>);
 } & /** @vue-ignore */ Omit<FormHTMLAttributes, 'name'>;
 
-export interface FormEmits<S extends FormSchema, T extends boolean = true> {
+export interface PFormEmits<S extends FormSchema, T extends boolean = true> {
   submit: [event: FormSubmitEvent<FormData<S, T>>];
   error: [event: FormErrorEvent];
 }
 
-export interface FormSlots {
+export interface PFormSlots {
   default?: (props: { errors: Array<FormError>; loading: boolean }) => Array<VNode>;
 }
 </script>
@@ -80,7 +80,7 @@ import { useAppConfig } from '#imports';
 import { useEventBus } from '@vueuse/core';
 import { computed, inject, nextTick, onMounted, onUnmounted, provide, reactive, readonly, ref, useId, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { formBusInjectionKey, formErrorsInjectionKey, formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey, formStateInjectionKey } from '../composables/useFormField';
+import { formBusInjectionKey, formErrorsInjectionKey, formInputsInjectionKey, formLoadingInjectionKey, formOptionsInjectionKey, formStateInjectionKey } from '../composables/use-form-field';
 import { FormValidationException } from '../types/form';
 import { getAtPath, setAtPath, validateSchema } from '../utils/form';
 import { uv } from '../utils/uv';
@@ -88,7 +88,7 @@ import { uv } from '../utils/uv';
 type I = InferInput<S>;
 type O = InferOutput<S>;
 
-const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
+const props = withDefaults(defineProps<PFormProps<S, T, N>>(), {
   validateOn() {
     return ['input', 'blur', 'change'] as Array<FormInputEvents>;
   },
@@ -97,8 +97,8 @@ const props = withDefaults(defineProps<FormProps<S, T, N>>(), {
   loadingAuto: true,
 });
 
-const emits = defineEmits<FormEmits<S, T>>();
-defineSlots<FormSlots>();
+const emits = defineEmits<PFormEmits<S, T>>();
+defineSlots<PFormSlots>();
 
 const appConfig = useAppConfig() as FormConfig['AppConfig'];
 const pohonProp = useComponentPohon('form', props);

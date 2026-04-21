@@ -6,7 +6,7 @@ import theme from '#build/pohon/page-columns';
 
 type PageColumns = ComponentConfig<typeof theme, AppConfig, 'pageColumns'>;
 
-export interface PageColumnsProps {
+export interface PPageColumnsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -16,20 +16,20 @@ export interface PageColumnsProps {
   pohon?: { base?: any };
 }
 
-export interface PageColumnsSlots {
+export interface PPageColumnsSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = defineProps<PageColumnsProps>();
-defineSlots<PageColumnsSlots>();
+const props = defineProps<PPageColumnsProps>();
+defineSlots<PPageColumnsSlots>();
 
 const appConfig = useAppConfig() as PageColumns['AppConfig'];
 const pohonProp = useComponentPohon('pageColumns', props);
@@ -38,10 +38,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageCo
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

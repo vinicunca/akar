@@ -6,7 +6,7 @@ import theme from '#build/pohon/avatar-group';
 
 type AvatarGroup = ComponentConfig<typeof theme, AppConfig, 'avatarGroup'>;
 
-export interface AvatarGroupProps {
+export interface PAvatarGroupProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -24,22 +24,22 @@ export interface AvatarGroupProps {
   pohon?: AvatarGroup['slots'];
 }
 
-export interface AvatarGroupSlots {
+export interface PAvatarGroupSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed, provide } from 'vue';
+import { avatarGroupInjectionKey } from '../composables/use-avatar-group';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { avatarGroupInjectionKey } from '../composables/useAvatarGroup';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 
-const props = defineProps<AvatarGroupProps>();
-const slots = defineSlots<AvatarGroupSlots>();
+const props = defineProps<PAvatarGroupProps>();
+const slots = defineSlots<PAvatarGroupSlots>();
 
 const appConfig = useAppConfig() as AvatarGroup['AppConfig'];
 const pohonProp = useComponentPohon('avatarGroup', props);
@@ -57,7 +57,7 @@ const children = computed(() => {
       if (typeof child.type === 'symbol') {
         // `v-if="false"` or commented node
         if (typeof child.children === 'string') {
-          return;
+          return undefined;
         }
 
         return child.children;
@@ -96,7 +96,7 @@ provide(avatarGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -114,5 +114,5 @@ provide(avatarGroupInjectionKey, computed(() => ({
       data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
     />
-  </Primitive>
+  </APrimitive>
 </template>

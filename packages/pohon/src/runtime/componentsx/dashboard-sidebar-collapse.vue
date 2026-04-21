@@ -6,7 +6,7 @@ import theme from '#build/pohon/dashboard-sidebar-collapse';
 
 type DashboardSidebarCollapse = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarCollapse'>;
 
-export interface DashboardSidebarCollapseProps extends Omit<PButtonProps, PLinkPropsKeys | 'color' | 'variant'> {
+export interface PDashboardSidebarCollapseProps extends Omit<PButtonProps, PLinkPropsKeys | 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
@@ -35,7 +35,7 @@ import { useDashboard } from '../utils/dashboard';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<DashboardSidebarCollapseProps>(), {
+const props = withDefaults(defineProps<PDashboardSidebarCollapseProps>(), {
   color: 'neutral',
   variant: 'ghost',
   side: 'left',

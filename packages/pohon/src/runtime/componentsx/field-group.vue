@@ -6,7 +6,7 @@ import theme from '#build/pohon/field-group';
 
 type FieldGroup = ComponentConfig<typeof theme, AppConfig, 'fieldGroup'>;
 
-export interface FieldGroupProps {
+export interface PFieldGroupProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -25,23 +25,23 @@ export interface FieldGroupProps {
   pohon?: { base?: any };
 }
 
-export interface FieldGroupSlots {
+export interface PFieldGroupSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed, provide } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { fieldGroupInjectionKey } from '../composables/useFieldGroup';
+import { fieldGroupInjectionKey } from '../composables/use-field-group';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<FieldGroupProps>(), {
+const props = withDefaults(defineProps<PFieldGroupProps>(), {
   orientation: 'horizontal',
 });
-defineSlots<FieldGroupSlots>();
+defineSlots<PFieldGroupSlots>();
 
 const appConfig = useAppConfig() as FieldGroup['AppConfig'];
 const pohonProp = useComponentPohon('fieldGroup', props);
@@ -55,11 +55,11 @@ provide(fieldGroupInjectionKey, computed(() => ({
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     :class="pohon({ orientation, class: [pohonProp?.base, props.class] })"
   >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

@@ -1,26 +1,26 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { EditorMenuOptions } from '../composables/useEditorMenu';
-import type { AAvatarProps, PIconProps } from '../types';
+import type { EditorMenuOptions } from '../composables/use-editor-menu';
+import type { PAvatarProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/editor-mention-menu';
 
 type EditorMentionMenu = ComponentConfig<typeof theme, AppConfig, 'editorMentionMenu'>;
 
-export interface EditorMentionMenuItem {
+export interface PEditorMentionMenuItem {
   label: string;
   description?: string;
   /**
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
-  avatar?: AAvatarProps;
+  avatar?: PAvatarProps;
   disabled?: boolean;
   class?: any;
   [key: string]: any;
 }
 
-export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo' | 'ignoreFilter'>> {
+export interface PEditorMentionMenuProps<T extends PEditorMentionMenuItem = PEditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo' | 'ignoreFilter'>> {
   /**
    * @defaultValue 'md'
    */
@@ -31,17 +31,17 @@ export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = Editor
 }
 </script>
 
-<script setup lang="ts" generic="T extends EditorMentionMenuItem">
+<script setup lang="ts" generic="T extends PEditorMentionMenuItem">
 import { useAppConfig } from '#imports';
 import { computed, h, nextTick, onBeforeUnmount, onMounted, toRef } from 'vue';
-import { useEditorMenu } from '../composables/useEditorMenu';
+import { useEditorMenu } from '../composables/use-editor-menu';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
+const props = withDefaults(defineProps<PEditorMentionMenuProps<T>>(), {
   pluginKey: 'mentionMenu',
   char: '@',
 });
@@ -75,7 +75,7 @@ onMounted(async () => {
     suggestion: props.suggestion,
     appendTo: props.appendTo,
     searchTerm,
-    ui,
+    pohon,
     onSelect: (editor, range, item) => {
       // Delete the trigger character and query text, then insert the mention
       editor
@@ -92,6 +92,7 @@ onMounted(async () => {
         .run();
     },
     renderItem: (item, styles) => [
+      // eslint-disable-next-line no-nested-ternary
       item.avatar
         ? h(PAvatar, { ...item.avatar, size: styles.value.itemLeadingAvatarSize(), class: styles.value.itemLeadingAvatar() })
         : item.icon

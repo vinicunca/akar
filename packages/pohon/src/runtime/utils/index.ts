@@ -3,6 +3,27 @@ import { isEmptyish, isFunction, isNullish, isString } from '@vinicunca/perkakas
 import { isEqual } from 'ohash/utils';
 import { joinURL, withLeadingSlash, withTrailingSlash } from 'ufo';
 
+export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Array<Keys>): Pick<Data, Keys> {
+  const result = {} as Pick<Data, Keys>;
+
+  for (const key of keys) {
+    result[key] = data[key];
+  }
+
+  return result;
+}
+
+export function omit<Data extends object, Keys extends keyof Data>(data: Data, keys: Array<Keys>): Omit<Data, Keys> {
+  const result = { ...data };
+
+  for (const key of keys) {
+    // eslint-disable-next-line ts/no-dynamic-delete
+    delete result[key];
+  }
+
+  return result as Omit<Data, Keys>;
+}
+
 export function getProp(
   object: Record<string, any> | undefined,
   path: Array<string | number> | string,
@@ -59,10 +80,7 @@ export function looseToNumber(val: any): any {
   return Number.isNaN(n) ? val : n;
 }
 
-export function compare<T>(
-  { value, currentValue, comparator }:
-  { value?: T; currentValue?: T; comparator?: string | ((a: T, b: T) => boolean) } = {},
-) {
+export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((a: T, b: T) => boolean)) {
   if (value === undefined || currentValue === undefined) {
     return false;
   }
@@ -83,15 +101,13 @@ export function compare<T>(
 }
 
 export function getDisplayValue<T extends Array<any>, V>(
-  { items, value, options = {} }: {
-    items: T;
-    value: V | undefined | null;
-    options?: {
-      valueKey?: GetItemKeys<T>;
-      labelKey?: GetItemKeys<T>;
-      by?: string | ((a: any, b: any) => boolean);
-    };
-  },
+  items: T,
+  value: V | undefined | null,
+  options: {
+    valueKey?: GetItemKeys<T>;
+    labelKey?: GetItemKeys<T>;
+    by?: string | ((a: any, b: any) => boolean);
+  } = {},
 ): string | undefined {
   const { valueKey, labelKey, by } = options;
 
@@ -99,7 +115,7 @@ export function getDisplayValue<T extends Array<any>, V>(
     const itemValue = (typeof item === 'object' && item !== null && valueKey)
       ? getProp(item, valueKey as string)
       : item;
-    return compare({ value: itemValue, currentValue: value, comparator: by });
+    return compare(itemValue, value, by);
   });
 
   if (isEmptyish(value) && foundItem) {

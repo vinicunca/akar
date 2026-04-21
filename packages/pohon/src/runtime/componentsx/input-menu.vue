@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ComboboxArrowProps, ComboboxContentEmits, ComboboxContentProps, ComboboxRootEmits, ComboboxRootProps } from 'akar';
+import type { AComboboxArrowProps, AComboboxContentEmits, AComboboxContentProps, AComboboxRootEmits, AComboboxRootProps } from 'akar';
 import type { VNode } from 'vue';
-import type { UseComponentIconsProps } from '../composables/useComponentIcons';
-import type { AAvatarProps, ChipProps, InputProps, PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
+import type { UseComponentIconsProps } from '../composables/use-component-icons';
+import type { PAvatarProps, PButtonProps, PChipProps, PIconProps, PInputProps, PLinkPropsKeys } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
 import type { ApplyModifiers, ModelModifiers } from '../types/input';
 import type { AcceptableValue, ArrayOrNested, EmitsToProps, GetItemKeys, GetItemValue, GetModelValue, NestedItem } from '../types/utils';
@@ -12,24 +12,24 @@ import theme from '#build/pohon/input-menu';
 
 type InputMenu = ComponentConfig<typeof theme, AppConfig, 'inputMenu'>;
 
-export type InputMenuValue = AcceptableValue;
+export type PInputMenuValue = AcceptableValue;
 
-export type InputMenuItem = InputMenuValue | {
+export type PInputMenuItem = PInputMenuValue | {
   label?: string;
   description?: string;
   /**
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
-  avatar?: AAvatarProps;
-  chip?: ChipProps;
+  avatar?: PAvatarProps;
+  chip?: PChipProps;
   /**
    * The item type.
    * @defaultValue 'item'
    */
   type?: 'label' | 'separator' | 'item';
   disabled?: boolean;
-  onSelect?: (e: Event) => void;
+  onSelect?: (event: Event) => void;
   class?: any;
   pohon?: Pick<InputMenu['slots'], 'tagsItem' | 'tagsItemText' | 'tagsItemDelete' | 'tagsItemDeleteIcon' | 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChip' | 'itemLeadingChipSize' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>;
   [key: string]: any;
@@ -40,7 +40,7 @@ type IsClearUsed<M extends boolean, C extends boolean | object> = M extends fals
   ? (C extends true ? null : C extends object ? null : never)
   : never;
 
-export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<ComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'autocomplete' | 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
+export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'openOnClick' | 'openOnFocus' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'autocomplete' | 'disabled' | 'name' | 'type' | 'placeholder' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size' | 'min' | 'max' | 'step'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -100,13 +100,13 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
    * The content of the menu.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }
    */
-  content?: Omit<ComboboxContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ComboboxContentEmits>>;
+  content?: Omit<AComboboxContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<AComboboxContentEmits>>;
   /**
    * Display an arrow alongside the menu.
    * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
-  arrow?: boolean | Omit<ComboboxArrowProps, 'as' | 'asChild'>;
+  arrow?: boolean | Omit<AComboboxArrowProps, 'as' | 'asChild'>;
   /**
    * Render the menu in a portal.
    * @defaultValue true
@@ -182,12 +182,12 @@ export interface InputMenuProps<T extends ArrayOrNested<InputMenuItem> = ArrayOr
 }
 
 export interface InputMenuEmits<
-  A extends ArrayOrNested<InputMenuItem>,
+  A extends ArrayOrNested<PInputMenuItem>,
   VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
   Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
   C extends boolean | object = false,
-> extends Pick<ComboboxRootEmits, 'update:open'> {
+> extends Pick<AComboboxRootEmits, 'update:open'> {
   'change': [event: Event];
   'blur': [event: FocusEvent];
   'focus': [event: FocusEvent];
@@ -198,15 +198,15 @@ export interface InputMenuEmits<
     ref: HTMLElement;
     value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
   } | undefined];
-  'remove-tag': [item: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>];
+  'removeTag': [item: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>];
   /** Event handler called when the value changes. */
   'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>];
 }
 
-type SlotProps<T extends InputMenuItem> = (props: { item: T; index: number; pohon: InputMenu['pohon'] }) => Array<VNode>;
+type SlotProps<T extends PInputMenuItem> = (props: { item: T; index: number; pohon: InputMenu['pohon'] }) => Array<VNode>;
 
-export interface InputMenuSlots<
-  A extends ArrayOrNested<InputMenuItem> = ArrayOrNested<InputMenuItem>,
+export interface PInputMenuSlots<
+  A extends ArrayOrNested<PInputMenuItem> = ArrayOrNested<PInputMenuItem>,
   VK extends GetItemKeys<A> | undefined = undefined,
   M extends boolean = false,
   Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
@@ -229,32 +229,39 @@ export interface InputMenuSlots<
 }
 </script>
 
-<script setup lang="ts" generic="T extends ArrayOrNested<InputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
+<script setup lang="ts" generic="T extends ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate, reactiveOmit, reactivePick } from '@vueuse/core';
-import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot, useForwardPropsEmits } from 'akar';
-import { Autocomplete, Combobox } from 'akar/namespaced';
+import {
+  ATagsInputInput,
+  ATagsInputItem,
+  ATagsInputItemDelete,
+  ATagsInputItemText,
+  ATagsInputRoot,
+  useForwardPropsEmits,
+} from 'akar';
+import { AAutocomplete, ACombobox } from 'akar/namespaced';
 import { defu } from 'defu';
 import { isEqual } from 'ohash/utils';
 import { computed, nextTick, onMounted, toRaw, toRef, useTemplateRef, watch } from 'vue';
+import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { FieldGroupReset, useFieldGroup } from '../composables/use-field-group';
+import { useFilter } from '../composables/use-filter';
+import { useFormField } from '../composables/use-form-field';
 import { useLocale } from '../composables/use-locale';
-import { useComponentIcons } from '../composables/useComponentIcons';
-import { FieldGroupReset, useFieldGroup } from '../composables/useFieldGroup';
-import { useFilter } from '../composables/useFilter';
-import { useFormField } from '../composables/useFormField';
-import { usePortal } from '../composables/usePortal';
-import { compare, get, getDisplayValue, isArrayOfArray, looseToNumber } from '../utils';
+import { usePortal } from '../composables/use-portal';
+import { compare, getDisplayValue, getProp, isArrayOfArray, looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
 import { getEstimateSize } from '../utils/virtualizer';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
-import UChip from './Chip.vue';
+import PChip from './chip.vue';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<InputMenuProps<T, VK, M, Mod, C>>(), {
+const props = withDefaults(defineProps<PInputMenuProps<T, VK, M, Mod, C>>(), {
   type: 'text',
   autofocusDelay: 0,
   portal: true,
@@ -266,7 +273,7 @@ const props = withDefaults(defineProps<InputMenuProps<T, VK, M, Mod, C>>(), {
   virtualize: false,
 });
 const emits = defineEmits<InputMenuEmits<T, VK, M, Mod, C>>();
-const slots = defineSlots<InputMenuSlots<T, VK, M, Mod, C>>();
+const slots = defineSlots<PInputMenuSlots<T, VK, M, Mod, C>>();
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' });
 
@@ -277,10 +284,10 @@ const { filterGroups } = useFilter();
 
 const rootPropsPick = reactivePick(props, 'as', 'modelValue', 'defaultValue', 'open', 'defaultOpen', 'required', 'multiple', 'resetSearchTermOnBlur', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'highlightOnHover', 'openOnClick', 'openOnFocus', 'by');
 const rootProps = useForwardPropsEmits(props.autocomplete ? reactiveOmit(rootPropsPick, 'multiple', 'resetSearchTermOnSelect', 'resetModelValueOnClear', 'by') : rootPropsPick, emits);
-const Component = computed(() => props.autocomplete ? Autocomplete : Combobox);
+const Component = computed(() => props.autocomplete ? AAutocomplete : ACombobox);
 const portalProps = usePortal(toRef(() => props.portal));
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as ComboboxContentProps);
-const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ComboboxArrowProps);
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as AComboboxContentProps);
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as AComboboxArrowProps);
 const clearProps = computed(() => typeof props.clear === 'object' ? props.clear : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>);
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) {
@@ -292,14 +299,14 @@ const virtualizerProps = toRef(() => {
   });
 });
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputProps>(props);
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputProps>(props);
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PInputProps>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputProps>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown })));
 
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate();
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: InputMenuItem; index: number }>({
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: PInputMenuItem; index: number }>({
   props: {
     item: {
       type: [Object, String, Number, Boolean],
@@ -336,7 +343,8 @@ function displayValue(value: GetItemValue<T, VK, ExcludeItem>): string {
   }) ?? '';
 }
 
-const groups = computed<Array<Array<InputMenuItem>>>(() =>
+const groups = computed<Array<Array<PInputMenuItem>>>(() =>
+  // eslint-disable-next-line no-nested-ternary
   props.items?.length
     ? isArrayOfArray(props.items)
       ? props.items
@@ -353,7 +361,7 @@ const filteredGroups = computed(() => {
 
   return filterGroups(groups.value, searchTerm.value, {
     fields,
-    isStructural: (item: InputMenuItem) => isInputItem(item) && !!item.type && ['label', 'separator'].includes(item.type),
+    isStructural: (item: PInputMenuItem) => isInputItem(item) && !!item.type && ['label', 'separator'].includes(item.type),
   });
 });
 const filteredItems = computed(() => filteredGroups.value.flatMap((group) => group));
@@ -481,32 +489,32 @@ function onRemoveTag(event: any, modelValue: GetModelValue<T, VK, true, ExcludeI
   if (props.multiple) {
     const filteredValue = modelValue.filter((value) => !isEqual(value, event));
     emits('update:modelValue', filteredValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>);
-    emits('remove-tag', event);
+    emits('removeTag', event);
     onUpdate(filteredValue);
   }
 }
 
-function onCreate(e: Event) {
-  e.preventDefault();
-  e.stopPropagation();
+function onCreate(event: Event) {
+  event.preventDefault();
+  event.stopPropagation();
 
   emits('create', searchTerm.value);
 }
 
-function onSelect(e: Event, item: InputMenuItem) {
+function onSelect(event: Event, item: PInputMenuItem) {
   if (!isInputItem(item)) {
     return;
   }
 
   if (item.disabled) {
-    e.preventDefault();
+    event.preventDefault();
     return;
   }
 
-  item.onSelect?.(e);
+  item.onSelect?.(event);
 }
 
-function isInputItem(item: InputMenuItem): item is Exclude<InputMenuItem, InputMenuValue> {
+function isInputItem(item: PInputMenuItem): item is Exclude<PInputMenuItem, PInputMenuValue> {
   return typeof item === 'object' && item !== null;
 }
 
@@ -558,7 +566,7 @@ defineExpose({
       data-slot="label"
       :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label, item.class] })"
     >
-      {{ get(item, props.labelKey as string) }}
+      {{ getProp(item, props.labelKey as string) }}
     </Component.Label>
 
     <Component.Separator
@@ -572,7 +580,7 @@ defineExpose({
       data-slot="item"
       :class="pohon.item({ class: [pohonProp?.item, isInputItem(item) && item.pohon?.item, isInputItem(item) && item.class] })"
       :disabled="isInputItem(item) && item.disabled"
-      :value="props.valueKey && isInputItem(item) ? get(item, props.valueKey as string) : item"
+      :value="props.valueKey && isInputItem(item) ? getProp(item, props.valueKey as string) : item"
       @select="onSelect($event, item)"
     >
       <slot
@@ -595,14 +603,14 @@ defineExpose({
           />
           <PAvatar
             v-else-if="isInputItem(item) && item.avatar"
-            :size="((item.pohon?.itemLeadingAvatarSize || pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as AAvatarProps['size'])"
+            :size="((item.pohon?.itemLeadingAvatarSize || pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="item.avatar"
             data-slot="itemLeadingAvatar"
             :class="pohon.itemLeadingAvatar({ class: [pohonProp?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
           />
-          <UChip
+          <PChip
             v-else-if="isInputItem(item) && item.chip"
-            :size="((item.pohon?.itemLeadingChipSize || pohonProp?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as ChipProps['size'])"
+            :size="((item.pohon?.itemLeadingChipSize || pohonProp?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
             inset
             standalone
             v-bind="item.chip"
@@ -624,12 +632,12 @@ defineExpose({
               :item="(item as NestedItem<T>)"
               :index="index"
             >
-              {{ isInputItem(item) ? get(item, props.labelKey as string) : item }}
+              {{ isInputItem(item) ? getProp(item, props.labelKey as string) : item }}
             </slot>
           </span>
 
           <span
-            v-if="isInputItem(item) && (get(item, props.descriptionKey as string) || !!slots['item-description'])"
+            v-if="isInputItem(item) && (getProp(item, props.descriptionKey as string) || !!slots['item-description'])"
             data-slot="itemDescription"
             :class="pohon.itemDescription({ class: [pohonProp?.itemDescription, isInputItem(item) && item.pohon?.itemDescription] })"
           >
@@ -638,7 +646,7 @@ defineExpose({
               :item="(item as NestedItem<T>)"
               :index="index"
             >
-              {{ get(item, props.descriptionKey as string) }}
+              {{ getProp(item, props.descriptionKey as string) }}
             </slot>
           </span>
         </span>
@@ -686,7 +694,7 @@ defineExpose({
       data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
     >
-      <TagsInputRoot
+      <ATagsInputRoot
         v-if="multiple && !autocomplete"
         v-slot="{ modelValue: tags }"
         :model-value="(modelValue as string[])"
@@ -698,14 +706,14 @@ defineExpose({
         @focus="onFocus"
         @remove-tag="onRemoveTag($event, modelValue as GetModelValue<T, VK, true, ExcludeItem>)"
       >
-        <TagsInputItem
+        <ATagsInputItem
           v-for="(item, index) in tags"
           :key="index"
           :value="item"
           data-slot="tagsItem"
           :class="pohon.tagsItem({ class: [pohonProp?.tagsItem, isInputItem(item) && item.pohon?.tagsItem] })"
         >
-          <TagsInputItemText
+          <ATagsInputItemText
             data-slot="tagsItemText"
             :class="pohon.tagsItemText({ class: [pohonProp?.tagsItemText, isInputItem(item) && item.pohon?.tagsItemText] })"
           >
@@ -716,9 +724,9 @@ defineExpose({
             >
               {{ displayValue(item as GetItemValue<T, VK, ExcludeItem>) }}
             </slot>
-          </TagsInputItemText>
+          </ATagsInputItemText>
 
-          <TagsInputItemDelete
+          <ATagsInputItemDelete
             data-slot="tagsItemDelete"
             :class="pohon.tagsItemDelete({ class: [pohonProp?.tagsItemDelete, isInputItem(item) && item.pohon?.tagsItemDelete] })"
             :disabled="disabled"
@@ -735,14 +743,14 @@ defineExpose({
                 :class="pohon.tagsItemDeleteIcon({ class: [pohonProp?.tagsItemDeleteIcon, isInputItem(item) && item.pohon?.tagsItemDeleteIcon] })"
               />
             </slot>
-          </TagsInputItemDelete>
-        </TagsInputItem>
+          </ATagsInputItemDelete>
+        </ATagsInputItem>
 
         <Component.Input
           v-model="searchTerm"
           as-child
         >
-          <TagsInputInput
+          <ATagsInputInput
             :id="id"
             ref="inputRef"
             v-bind="{ ...$attrs, ...ariaAttrs }"
@@ -752,7 +760,7 @@ defineExpose({
             @change.stop
           />
         </Component.Input>
-      </TagsInputRoot>
+      </ATagsInputRoot>
 
       <Component.Input
         v-else
@@ -787,7 +795,7 @@ defineExpose({
           />
           <PAvatar
             v-else-if="!!avatar"
-            :size="((pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as AAvatarProps['size'])"
+            :size="((pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
             data-slot="itemLeadingAvatar"
             :class="pohon.itemLeadingAvatar({ class: pohonProp?.itemLeadingAvatar })"
@@ -868,7 +876,7 @@ defineExpose({
               <Component.Virtualizer
                 v-slot="{ option: item, virtualItem }"
                 :options="(filteredItems as any[])"
-                :text-content="item => isInputItem(item) ? get(item, props.labelKey as string) : String(item)"
+                :text-content="item => isInputItem(item) ? getProp(item, props.labelKey as string) : String(item)"
                 v-bind="virtualizerProps"
               >
                 <ReuseItemTemplate

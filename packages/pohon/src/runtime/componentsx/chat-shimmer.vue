@@ -5,7 +5,7 @@ import theme from '#build/pohon/chat-shimmer';
 
 type ChatShimmer = ComponentConfig<typeof theme, AppConfig, 'chatShimmer'>;
 
-export interface ChatShimmerProps {
+export interface PChatShimmerProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
@@ -32,12 +32,12 @@ export interface ChatShimmerProps {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<ChatShimmerProps>(), {
+const props = withDefaults(defineProps<PChatShimmerProps>(), {
   as: 'span',
   duration: 2,
   spread: 2,
@@ -52,7 +52,7 @@ const spread = computed(() => props.text.length * props.spread);
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :style="{
       '--spread': `${spread}px`,
@@ -62,5 +62,5 @@ const spread = computed(() => props.text.length * props.spread);
     :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     {{ text }}
-  </Primitive>
+  </APrimitive>
 </template>

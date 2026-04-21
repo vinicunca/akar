@@ -23,7 +23,7 @@ import { useAppConfig } from '#imports';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
-import ULink from '../Link.vue';
+import PLink from '../link.vue';
 
 const props = defineProps<ProseAProps>();
 defineSlots<ProseASlots>();
@@ -35,12 +35,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 </script>
 
 <template>
-  <ULink
+  <PLink
     :href="href"
     :target="target"
     :class="pohon({ class: [pohonProp?.base, props.class] })"
     raw
   >
     <slot />
-  </ULink>
+  </PLink>
 </template>

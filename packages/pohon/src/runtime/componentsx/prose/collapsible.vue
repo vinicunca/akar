@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { CollapsibleProps, PIconProps } from '../../types';
+import type { PCollapsibleProps, PIconProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/prose/collapsible';
 
@@ -29,7 +29,7 @@ export interface ProseCollapsibleProps {
    */
   closeText?: string;
   class?: any;
-  pohon?: ProseCollapsible['slots'] & CollapsibleProps['pohon'];
+  pohon?: ProseCollapsible['slots'] & PCollapsibleProps['pohon'];
 }
 
 export interface ProseCollapsibleSlots {
@@ -44,7 +44,7 @@ import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
-import UCollapsible from '../Collapsible.vue';
+import PCollapsible from '../collapsible.vue';
 import PIcon from '../icon.vue';
 
 const props = defineProps<ProseCollapsibleProps>();
@@ -58,10 +58,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 </script>
 
 <template>
-  <UCollapsible
+  <PCollapsible
     :unmount-on-hide="false"
     :class="props.class"
-    :pohon="transformPohon(ui, pohonProp)"
+    :pohon="transformPohon(pohon, pohonProp)"
   >
     <template #default="{ open }">
       <button :class="pohon.trigger({ class: pohonProp?.trigger })">
@@ -79,5 +79,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
     <template #content>
       <slot />
     </template>
-  </UCollapsible>
+  </PCollapsible>
 </template>

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { DrawerProps, ModalProps, PButtonProps, PIconProps, PLinkPropsKeys, SlideoverProps } from '../types';
+import type { DrawerProps, PDialogProps, PButtonProps, PIconProps, PLinkPropsKeys, PSlideoverProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/sidebar';
 
@@ -9,9 +9,9 @@ type Sidebar = ComponentConfig<typeof theme, AppConfig, 'sidebar'>;
 
 type SidebarState = 'expanded' | 'collapsed';
 type SidebarMode = 'modal' | 'slideover' | 'drawer';
-type SidebarMenu<T> = T extends 'modal' ? ModalProps : T extends 'slideover' ? SlideoverProps : T extends 'drawer' ? DrawerProps : never;
+type SidebarMenu<T> = T extends 'modal' ? PDialogProps : T extends 'slideover' ? PSlideoverProps : T extends 'drawer' ? DrawerProps : never;
 
-export interface SidebarProps<T extends SidebarMode = SidebarMode> {
+export interface PSidebarProps<T extends SidebarMode = SidebarMode> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'aside'
@@ -75,7 +75,7 @@ export interface SidebarProps<T extends SidebarMode = SidebarMode> {
   pohon?: Sidebar['slots'];
 }
 
-export interface SidebarSlots {
+export interface PSidebarSlots {
   header?: (props: { state: SidebarState; open: boolean; close: () => void }) => Array<VNode>;
   title?: (props: { state: SidebarState }) => Array<VNode>;
   description?: (props: { state: SidebarState }) => Array<VNode>;
@@ -91,20 +91,20 @@ export interface SidebarSlots {
 <script setup lang="ts" generic="T extends SidebarMode">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, ref, toRef, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UDrawer from './Drawer.vue';
-import UModal from './Modal.vue';
-import USlideover from './Slideover.vue';
+import PDrawer from './drawer.vue';
+import PDialog from './dialog.vue';
+import PSlideover from './slideover.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<SidebarProps<T>>(), {
+const props = withDefaults(defineProps<PSidebarProps<T>>(), {
   as: 'aside',
   variant: 'sidebar',
   collapsible: 'offcanvas',
@@ -113,7 +113,7 @@ const props = withDefaults(defineProps<SidebarProps<T>>(), {
   rail: false,
   mode: 'slideover' as never,
 });
-const slots = defineSlots<SidebarSlots>();
+const slots = defineSlots<PSidebarSlots>();
 
 const [DefineInnerTemplate, ReuseInnerTemplate] = createReusableTemplate();
 const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate();
@@ -191,17 +191,23 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.sideba
 }));
 
 const Menu = computed(() => ({
-  slideover: USlideover,
-  modal: UModal,
-  drawer: UDrawer,
+  slideover: PSlideover,
+  modal: PDialog,
+  drawer: PDrawer,
 })[props.mode as SidebarMode]);
 
-const menuProps = toRef(() => defu(props.menu, {
-  title: props.title,
-  description: props.description,
-  close: props.close,
-  closeIcon: props.closeIcon,
-}, props.mode === 'modal' ? { } : props.mode === 'slideover' ? { side: props.side, inset: props.variant === 'inset' } : {}) as SidebarMenu<T>);
+const menuProps = toRef(() =>
+  defu(
+    props.menu,
+    {
+      title: props.title,
+      description: props.description,
+      close: props.close,
+      closeIcon: props.closeIcon,
+    },
+    // eslint-disable-next-line no-nested-ternary
+    props.mode === 'modal' ? { } : props.mode === 'slideover' ? { side: props.side, inset: props.variant === 'inset' } : {},
+  ) as SidebarMenu<T>);
 </script>
 
 <template>
@@ -315,7 +321,7 @@ const menuProps = toRef(() => defu(props.menu, {
   </DefineInnerTemplate>
 
   <!-- Non-collapsible: simple inline sidebar -->
-  <Primitive
+  <APrimitive
     v-if="collapsible === 'none'"
     :as="as"
     v-bind="$attrs"
@@ -324,11 +330,11 @@ const menuProps = toRef(() => defu(props.menu, {
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <ReuseInnerTemplate />
-  </Primitive>
+  </APrimitive>
 
   <!-- Collapsible: fixed sidebar with gap spacer + mobile menu -->
   <template v-else>
-    <Primitive
+    <APrimitive
       :as="as"
       v-bind="$attrs"
       data-slot="root"
@@ -369,7 +375,7 @@ const menuProps = toRef(() => defu(props.menu, {
           />
         </slot>
       </div>
-    </Primitive>
+    </APrimitive>
 
     <!-- Mobile menu -->
     <Menu

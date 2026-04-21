@@ -27,11 +27,11 @@ export interface ProseCodeGroupSlots {
 
 <script setup lang="ts">
 import { useAppConfig, useState } from '#imports';
-import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger } from 'akar';
+import { ATabsContent, ATabsIndicator, ATabsList, ATabsRoot, ATabsTrigger } from 'akar';
 import { computed, onBeforeUpdate, onMounted, ref, watch } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
-import UCodeIcon from './CodeIcon.vue';
+import PCodeIcon from './code-icon.vue';
 
 const props = withDefaults(defineProps<ProseCodeGroupProps>(), {
   defaultValue: '0',
@@ -53,7 +53,7 @@ const items = computed<Array<{
   icon: string;
   component: any;
 }>>(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  // eslint-disable-next-line ts/no-unused-expressions
   rerenderCount.value;
   return slots.default?.()?.flatMap(transformSlot).filter(Boolean) || [];
 });
@@ -98,32 +98,32 @@ onBeforeUpdate(() => rerenderCount.value++);
 </script>
 
 <template>
-  <TabsRoot
+  <ATabsRoot
     v-model="model"
     :default-value="defaultValue"
     :unmount-on-hide="false"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <TabsList :class="pohon.list({ class: pohonProp?.list })">
-      <TabsIndicator :class="pohon.indicator({ class: pohonProp?.indicator })" />
+    <ATabsList :class="pohon.list({ class: pohonProp?.list })">
+      <ATabsIndicator :class="pohon.indicator({ class: pohonProp?.indicator })" />
 
-      <TabsTrigger
+      <ATabsTrigger
         v-for="(item, index) of items"
         :key="index"
         :value="String(index)"
         :class="pohon.trigger({ class: pohonProp?.trigger })"
       >
-        <UCodeIcon
+        <PCodeIcon
           :icon="item.icon"
           :filename="item.label"
           :class="pohon.triggerIcon({ class: pohonProp?.triggerIcon })"
         />
 
         <span :class="pohon.triggerLabel({ class: pohonProp?.triggerLabel })">{{ item.label }}</span>
-      </TabsTrigger>
-    </TabsList>
+      </ATabsTrigger>
+    </ATabsList>
 
-    <TabsContent
+    <ATabsContent
       v-for="(item, index) of items"
       :key="index"
       :value="String(index)"
@@ -134,6 +134,6 @@ onBeforeUpdate(() => rerenderCount.value++);
         hide-header
         tabindex="-1"
       />
-    </TabsContent>
-  </TabsRoot>
+    </ATabsContent>
+  </ATabsRoot>
 </template>

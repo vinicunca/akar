@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { SliderRootProps } from 'akar';
-import type { TooltipProps } from '../types';
+import type { ASliderRootProps } from 'akar';
+import type { PTooltipProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/slider';
 
 type Slider = ComponentConfig<typeof theme, AppConfig, 'slider'>;
 
-export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' | 'inverted' | 'min' | 'max' | 'step' | 'minStepsBetweenThumbs'> {
+export interface PSliderProps extends Pick<ASliderRootProps, 'name' | 'disabled' | 'inverted' | 'min' | 'max' | 'step' | 'minStepsBetweenThumbs'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -31,14 +31,14 @@ export interface SliderProps extends Pick<SliderRootProps, 'name' | 'disabled' |
    * `{ disableClosingTrigger: true }`{lang="ts-type"}
    * @defaultValue false
    */
-  tooltip?: boolean | TooltipProps;
+  tooltip?: boolean | PTooltipProps;
   /** The value of the slider when initially rendered. Use when you do not need to control the state of the slider. */
   defaultValue?: number | Array<number>;
   class?: any;
   pohon?: Slider['slots'];
 }
 
-export interface SliderEmits {
+export interface PSliderEmits {
   change: [event: Event];
 }
 </script>
@@ -46,20 +46,20 @@ export interface SliderEmits {
 <script setup lang="ts" generic="T extends number | number[]">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { SliderRange, SliderRoot, SliderThumb, SliderTrack, useForwardPropsEmits } from 'akar';
+import { ASliderRange, ASliderRoot, ASliderThumb, ASliderTrack, useForwardPropsEmits } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useFormField } from '../composables/useFormField';
+import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
-import UTooltip from './Tooltip.vue';
+import PTooltip from './tooltip.vue';
 
-const props = withDefaults(defineProps<SliderProps>(), {
+const props = withDefaults(defineProps<PSliderProps>(), {
   min: 0,
   max: 100,
   step: 1,
   orientation: 'horizontal',
 });
-const emits = defineEmits<SliderEmits>();
+const emits = defineEmits<PSliderEmits>();
 
 const modelValue = defineModel<T>();
 
@@ -68,7 +68,7 @@ const pohonProp = useComponentPohon('slider', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'orientation', 'min', 'max', 'step', 'minStepsBetweenThumbs', 'inverted'), emits);
 
-const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<SliderProps>(props);
+const { id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<PSliderProps>(props);
 
 const defaultSliderValue = computed(() => {
   if (typeof props.defaultValue === 'number') {
@@ -107,7 +107,7 @@ function onChange(value: any) {
 </script>
 
 <template>
-  <SliderRoot
+  <ASliderRoot
     v-bind="{ ...rootProps, ...ariaAttrs }"
     :id="id"
     v-model="sliderValue"
@@ -119,38 +119,38 @@ function onChange(value: any) {
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
-    <SliderTrack
+    <ASliderTrack
       data-slot="track"
       :class="pohon.track({ class: pohonProp?.track })"
     >
-      <SliderRange
+      <ASliderRange
         data-slot="range"
         :class="pohon.range({ class: pohonProp?.range })"
       />
-    </SliderTrack>
+    </ASliderTrack>
 
     <template
       v-for="thumb in thumbs"
       :key="thumb"
     >
-      <UTooltip
+      <PTooltip
         v-if="!!tooltip"
         :text="thumbs > 1 ? String(sliderValue?.[thumb - 1]) : String(sliderValue)"
         disable-closing-trigger
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
-        <SliderThumb
+        <ASliderThumb
           data-slot="thumb"
           :class="pohon.thumb({ class: pohonProp?.thumb })"
           :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`"
         />
-      </UTooltip>
-      <SliderThumb
+      </PTooltip>
+      <ASliderThumb
         v-else
         data-slot="thumb"
         :class="pohon.thumb({ class: pohonProp?.thumb })"
         :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`"
       />
     </template>
-  </SliderRoot>
+  </ASliderRoot>
 </template>

@@ -6,7 +6,7 @@ import theme from '#build/pohon/page-aside';
 
 type PageAside = ComponentConfig<typeof theme, AppConfig, 'pageAside'>;
 
-export interface PageAsideProps {
+export interface PPageAsideProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'aside'
@@ -16,7 +16,7 @@ export interface PageAsideProps {
   pohon?: PageAside['slots'];
 }
 
-export interface PageAsideSlots {
+export interface PPageAsideSlots {
   top?: (props?: {}) => Array<VNode>;
   default?: (props?: {}) => Array<VNode>;
   bottom?: (props?: {}) => Array<VNode>;
@@ -25,15 +25,15 @@ export interface PageAsideSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<PageAsideProps>(), {
+const props = withDefaults(defineProps<PPageAsideProps>(), {
   as: 'aside',
 });
-const slots = defineSlots<PageAsideSlots>();
+const slots = defineSlots<PPageAsideSlots>();
 
 const appConfig = useAppConfig() as PageAside['AppConfig'];
 const pohonProp = useComponentPohon('pageAside', props);
@@ -42,7 +42,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageAs
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -76,5 +76,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageAs
 
       <slot name="bottom" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

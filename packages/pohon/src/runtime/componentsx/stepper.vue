@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { StepperRootEmits, StepperRootProps } from 'akar';
+import type { AStepperRootEmits, AStepperRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { PIconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
@@ -10,7 +10,7 @@ import theme from '#build/pohon/stepper';
 
 type Stepper = ComponentConfig<typeof theme, AppConfig, 'stepper'>;
 
-export interface StepperItem {
+export interface PStepperItem {
   slot?: string;
   value?: string | number;
   title?: string;
@@ -26,7 +26,7 @@ export interface StepperItem {
   [key: string]: any;
 }
 
-export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<StepperRootProps, 'linear'> {
+export interface PStepperProps<T extends PStepperItem = PStepperItem> extends Pick<AStepperRootProps, 'linear'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -60,14 +60,14 @@ export interface StepperProps<T extends StepperItem = StepperItem> extends Pick<
   pohon?: Stepper['slots'];
 }
 
-export type StepperEmits<T extends StepperItem = StepperItem> = Omit<StepperRootEmits, 'update:modelValue'> & {
+export type PStepperEmits<T extends PStepperItem = PStepperItem> = Omit<AStepperRootEmits, 'update:modelValue'> & {
   next: [value: T];
   prev: [value: T];
 };
 
-type SlotProps<T extends StepperItem> = (props: { item: T }) => Array<VNode>;
+type SlotProps<T extends PStepperItem> = (props: { item: T }) => Array<VNode>;
 
-export type StepperSlots<T extends StepperItem = StepperItem> = {
+export type PStepperSlots<T extends PStepperItem = PStepperItem> = {
   indicator?: (props: { item: T; pohon: Stepper['pohon'] }) => Array<VNode>;
   wrapper?: SlotProps<T>;
   title?: SlotProps<T>;
@@ -77,23 +77,23 @@ export type StepperSlots<T extends StepperItem = StepperItem> = {
 
 </script>
 
-<script setup lang="ts" generic="T extends StepperItem">
+<script setup lang="ts" generic="T extends PStepperItem">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { StepperDescription, StepperIndicator, StepperItem, StepperRoot, StepperSeparator, StepperTitle, StepperTrigger, useForwardProps } from 'akar';
+import { AStepperDescription, AStepperIndicator, AStepperItem, AStepperRoot, AStepperSeparator, AStepperTitle, AStepperTrigger, useForwardProps } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { get } from '../utils';
+import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
 
-const props = withDefaults(defineProps<StepperProps<T>>(), {
+const props = withDefaults(defineProps<PStepperProps<T>>(), {
   orientation: 'horizontal',
   linear: true,
   valueKey: 'value',
 });
-const emits = defineEmits<StepperEmits<T>>();
-const slots = defineSlots<StepperSlots<T>>();
+const emits = defineEmits<PStepperEmits<T>>();
+const slots = defineSlots<PStepperSlots<T>>();
 
 const modelValue = defineModel<string | number>();
 
@@ -113,11 +113,11 @@ const currentStepIndex = computed({
     const value = modelValue.value ?? props.defaultValue;
 
     return ((typeof value === 'string')
-      ? props.items.findIndex((item) => get(item, props.valueKey as string) === value)
+      ? props.items.findIndex((item) => getProp(item, props.valueKey as string) === value)
       : value) ?? 0;
   },
   set(value: number) {
-    modelValue.value = get(props.items?.[value], props.valueKey as string) ?? value;
+    modelValue.value = getProp(props.items?.[value], props.valueKey as string) ?? value;
   },
 });
 
@@ -144,7 +144,7 @@ defineExpose({
 </script>
 
 <template>
-  <StepperRoot
+  <AStepperRoot
     v-bind="rootProps"
     v-model="currentStepIndex"
     :orientation="orientation"
@@ -155,7 +155,7 @@ defineExpose({
       data-slot="header"
       :class="pohon.header({ class: pohonProp?.header })"
     >
-      <StepperItem
+      <AStepperItem
         v-for="(item, count) in items"
         :key="count"
         :step="count"
@@ -167,11 +167,11 @@ defineExpose({
           data-slot="container"
           :class="pohon.container({ class: [pohonProp?.container, item.pohon?.container] })"
         >
-          <StepperTrigger
+          <AStepperTrigger
             data-slot="trigger"
             :class="pohon.trigger({ class: [pohonProp?.trigger, item.pohon?.trigger] })"
           >
-            <StepperIndicator
+            <AStepperIndicator
               data-slot="indicator"
               :class="pohon.indicator({ class: [pohonProp?.indicator, item.pohon?.indicator] })"
             >
@@ -190,10 +190,10 @@ defineExpose({
                   {{ count + 1 }}
                 </template>
               </slot>
-            </StepperIndicator>
-          </StepperTrigger>
+            </AStepperIndicator>
+          </AStepperTrigger>
 
-          <StepperSeparator
+          <AStepperSeparator
             v-if="count < items.length - 1"
             data-slot="separator"
             :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator] })"
@@ -205,51 +205,51 @@ defineExpose({
           :class="pohon.wrapper({ class: [pohonProp?.wrapper, item.pohon?.wrapper] })"
         >
           <slot
-            :name="((item.slot ? `${item.slot}-wrapper` : 'wrapper') as keyof StepperSlots<T>)"
+            :name="((item.slot ? `${item.slot}-wrapper` : 'wrapper') as keyof PStepperSlots<T>)"
             :item="(item as Extract<T, { slot: string; }>)"
           >
-            <StepperTitle
-              v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof StepperSlots<T>]"
+            <AStepperTitle
+              v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof PStepperSlots<T>]"
               as="div"
               data-slot="title"
               :class="pohon.title({ class: [pohonProp?.title, item.pohon?.title] })"
             >
               <slot
-                :name="((item.slot ? `${item.slot}-title` : 'title') as keyof StepperSlots<T>)"
+                :name="((item.slot ? `${item.slot}-title` : 'title') as keyof PStepperSlots<T>)"
                 :item="(item as Extract<T, { slot: string; }>)"
               >
                 {{ item.title }}
               </slot>
-            </StepperTitle>
-            <StepperDescription
-              v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof StepperSlots<T>]"
+            </AStepperTitle>
+            <AStepperDescription
+              v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof PStepperSlots<T>]"
               as="div"
               data-slot="description"
               :class="pohon.description({ class: [pohonProp?.description, item.pohon?.description] })"
             >
               <slot
-                :name="((item.slot ? `${item.slot}-description` : 'description') as keyof StepperSlots<T>)"
+                :name="((item.slot ? `${item.slot}-description` : 'description') as keyof PStepperSlots<T>)"
                 :item="(item as Extract<T, { slot: string; }>)"
               >
                 {{ item.description }}
               </slot>
-            </StepperDescription>
+            </AStepperDescription>
           </slot>
         </div>
-      </StepperItem>
+      </AStepperItem>
     </div>
 
     <div
-      v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot as keyof StepperSlots<T>])"
+      v-if="currentStep?.content || !!slots.content || (currentStep?.slot && !!slots[currentStep.slot as keyof PStepperSlots<T>])"
       data-slot="content"
       :class="pohon.content({ class: pohonProp?.content })"
     >
       <slot
-        :name="((currentStep?.slot || 'content') as keyof StepperSlots<T>)"
+        :name="((currentStep?.slot || 'content') as keyof PStepperSlots<T>)"
         :item="(currentStep as Extract<T, { slot: string }>)"
       >
         {{ currentStep?.content }}
       </slot>
     </div>
-  </StepperRoot>
+  </AStepperRoot>
 </template>

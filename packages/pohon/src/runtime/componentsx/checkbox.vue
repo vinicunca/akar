@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { CheckboxRootEmits, CheckboxRootProps } from 'akar';
+import type { ACheckboxRootEmits, ACheckboxRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { PIconProps } from '../types';
 import type { ButtonHTMLAttributes } from '../types/html';
@@ -9,7 +9,7 @@ import theme from '#build/pohon/checkbox';
 
 type Checkbox = ComponentConfig<typeof theme, AppConfig, 'checkbox'>;
 
-export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue' | 'modelValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface PCheckboxProps<T = boolean> extends Pick<ACheckboxRootProps<T>, 'disabled' | 'required' | 'name' | 'value' | 'id' | 'defaultValue' | 'modelValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -50,11 +50,11 @@ export interface CheckboxProps<T = boolean> extends Pick<CheckboxRootProps<T>, '
   pohon?: Checkbox['slots'];
 }
 
-export interface CheckboxEmits<T = boolean> extends CheckboxRootEmits<T> {
+export interface PCheckboxEmits<T = boolean> extends ACheckboxRootEmits<T> {
   change: [event: Event];
 }
 
-export interface CheckboxSlots {
+export interface PCheckboxSlots {
   label?: (props: { label: string | undefined }) => Array<VNode>;
   description?: (props: { description: string | undefined }) => Array<VNode>;
 }
@@ -63,25 +63,25 @@ export interface CheckboxSlots {
 <script setup lang="ts" generic="T = boolean">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { CheckboxIndicator, CheckboxRoot, Label, Primitive, useForwardPropsEmits } from 'akar';
+import { ACheckboxIndicator, ACheckboxRoot, ALabel, APrimitive, useForwardPropsEmits } from 'akar';
 import { computed, useAttrs, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useFormField } from '../composables/useFormField';
-import { useResolvedVariants } from '../composables/useResolvedVariants';
+import { useFormField } from '../composables/use-form-field';
+import { useResolvedVariants } from '../composables/use-resolved-variants';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = defineProps<CheckboxProps<T>>();
-const emits = defineEmits<CheckboxEmits<T>>();
-const slots = defineSlots<CheckboxSlots>();
+const props = defineProps<PCheckboxProps<T>>();
+const emits = defineEmits<PCheckboxEmits<T>>();
+const slots = defineSlots<PCheckboxSlots>();
 const appConfig = useAppConfig() as Checkbox['AppConfig'];
 const pohonProp = useComponentPohon('checkbox', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits);
 
-const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<CheckboxProps<T>>(props);
+const { id: _id, emitFormChange, emitFormInput, size, color, name, disabled, ariaAttrs } = useFormField<PCheckboxProps<T>>(props);
 const id = _id.value ?? useId();
 
 const { variant } = useResolvedVariants('checkbox', props, theme, ['variant']);
@@ -113,8 +113,8 @@ function onUpdate(value: any) {
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <Primitive
-    :as="variant === 'list' ? as : Label"
+  <APrimitive
+    :as="variant === 'list' ? as : ALabel"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
@@ -122,7 +122,7 @@ function onUpdate(value: any) {
       data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
     >
-      <CheckboxRoot
+      <ACheckboxRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
         :name="name"
@@ -132,7 +132,7 @@ function onUpdate(value: any) {
         @update:model-value="onUpdate"
       >
         <template #default="{ state }">
-          <CheckboxIndicator
+          <ACheckboxIndicator
             data-slot="indicator"
             :class="pohon.indicator({ class: pohonProp?.indicator })"
           >
@@ -148,9 +148,9 @@ function onUpdate(value: any) {
               data-slot="icon"
               :class="pohon.icon({ class: pohonProp?.icon })"
             />
-          </CheckboxIndicator>
+          </ACheckboxIndicator>
         </template>
-      </CheckboxRoot>
+      </ACheckboxRoot>
     </div>
 
     <div
@@ -159,7 +159,7 @@ function onUpdate(value: any) {
       :class="pohon.wrapper({ class: pohonProp?.wrapper })"
     >
       <component
-        :is="variant === 'list' ? Label : 'p'"
+        :is="variant === 'list' ? ALabel : 'p'"
         v-if="label || !!slots.label"
         :for="id"
         data-slot="label"
@@ -185,5 +185,5 @@ function onUpdate(value: any) {
         </slot>
       </p>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

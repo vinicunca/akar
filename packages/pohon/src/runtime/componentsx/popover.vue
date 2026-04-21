@@ -1,6 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { HoverCardRootProps, HoverCardTriggerProps, PopoverArrowProps, PopoverContentEmits, PopoverContentProps, PopoverRootEmits, PopoverRootProps } from 'akar';
+import type {
+  AHoverCardRootProps,
+  AHoverCardTriggerProps,
+  APopoverArrowProps,
+  APopoverContentEmits,
+  APopoverContentProps,
+  APopoverRootEmits,
+  APopoverRootProps,
+} from 'akar';
 import type { VNode } from 'vue';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -9,7 +17,7 @@ import theme from '#build/pohon/popover';
 type Popover = ComponentConfig<typeof theme, AppConfig, 'popover'>;
 type PopoverMode = 'click' | 'hover';
 
-export interface PopoverProps<M extends PopoverMode = PopoverMode> extends PopoverRootProps, Pick<HoverCardRootProps, 'openDelay' | 'closeDelay'> {
+export interface PPopoverProps<M extends PopoverMode = PopoverMode> extends APopoverRootProps, Pick<AHoverCardRootProps, 'openDelay' | 'closeDelay'> {
   /**
    * The display mode of the popover.
    * @defaultValue 'click'
@@ -19,13 +27,13 @@ export interface PopoverProps<M extends PopoverMode = PopoverMode> extends Popov
    * The content of the popover.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
-  content?: Omit<PopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<PopoverContentEmits>>;
+  content?: Omit<APopoverContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<APopoverContentEmits>>;
   /**
    * Display an arrow alongside the popover.
    * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
-  arrow?: boolean | Omit<PopoverArrowProps, 'as' | 'asChild'>;
+  arrow?: boolean | Omit<APopoverArrowProps, 'as' | 'asChild'>;
   /**
    * Render the popover in a portal.
    * @defaultValue true
@@ -36,7 +44,7 @@ export interface PopoverProps<M extends PopoverMode = PopoverMode> extends Popov
    *
    * If not provided will use the current component as anchor.
    */
-  reference?: HoverCardTriggerProps['reference'];
+  reference?: AHoverCardTriggerProps['reference'];
   /**
    * When `false`, the popover will not close when clicking outside or pressing escape.
    * @defaultValue true
@@ -46,13 +54,13 @@ export interface PopoverProps<M extends PopoverMode = PopoverMode> extends Popov
   pohon?: Popover['slots'];
 }
 
-export interface PopoverEmits extends PopoverRootEmits {
+export interface PPopoverEmits extends APopoverRootEmits {
   'close:prevent': [];
 }
 
 type SlotProps<M extends PopoverMode = PopoverMode> = [M] extends ['hover'] ? { close: undefined } : { close: () => void };
 
-export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
+export interface PPopoverSlots<M extends PopoverMode = PopoverMode> {
   default?: (props: { open: boolean }) => Array<VNode>;
   content?: (props: SlotProps<M>) => Array<VNode>;
   anchor?: (props: SlotProps<M>) => Array<VNode>;
@@ -63,24 +71,24 @@ export interface PopoverSlots<M extends PopoverMode = PopoverMode> {
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
-import { HoverCard, Popover } from 'akar/namespaced';
+import { AHoverCard, APopover } from 'akar/namespaced';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { FieldGroupReset } from '../composables/useFieldGroup';
-import { usePortal } from '../composables/usePortal';
+import { FieldGroupReset } from '../composables/use-field-group';
+import { usePortal } from '../composables/use-portal';
 import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<PopoverProps<M>>(), {
+const props = withDefaults(defineProps<PPopoverProps<M>>(), {
   portal: true,
   mode: 'click' as never,
   openDelay: 0,
   closeDelay: 0,
   dismissible: true,
 });
-const emits = defineEmits<PopoverEmits>();
-const slots = defineSlots<PopoverSlots<M>>();
+const emits = defineEmits<PPopoverEmits>();
+const slots = defineSlots<PPopoverSlots<M>>();
 
 const appConfig = useAppConfig() as Popover['AppConfig'];
 const pohonProp = useComponentPohon('popover', props);
@@ -88,31 +96,31 @@ const pohonProp = useComponentPohon('popover', props);
 const pick = props.mode === 'hover' ? reactivePick(props, 'defaultOpen', 'open', 'openDelay', 'closeDelay') : reactivePick(props, 'defaultOpen', 'open', 'modal');
 const rootProps = useForwardPropsEmits(pick, emits);
 const portalProps = usePortal(toRef(() => props.portal));
-const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as PopoverContentProps);
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as APopoverContentProps);
 const contentEvents = computed(() => {
   if (!props.dismissible) {
     const events = ['interactOutside', 'escapeKeyDown'];
 
     return events.reduce((acc, curr) => {
-      acc[curr] = (e: Event) => {
-        e.preventDefault();
+      acc[curr] = (event: Event) => {
+        event.preventDefault();
         emits('close:prevent');
       };
       return acc;
-    }, {} as Record<typeof events[number], (e: Event) => void>);
+    }, {} as Record<typeof events[number], (event: Event) => void>);
   }
 
   return {
     pointerDownOutside,
   };
 });
-const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as PopoverArrowProps);
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as APopoverArrowProps);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.popover || {}) })({
   side: contentProps.value.side,
 }));
 
-const Component = computed(() => props.mode === 'hover' ? HoverCard : Popover);
+const Component = computed(() => props.mode === 'hover' ? AHoverCard : APopover);
 </script>
 
 <template>

@@ -6,7 +6,7 @@ import theme from '#build/pohon/footer';
 
 type Footer = ComponentConfig<typeof theme, AppConfig, 'footer'>;
 
-export interface FooterProps {
+export interface PFooterProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'footer'
@@ -16,7 +16,7 @@ export interface FooterProps {
   pohon?: Footer['slots'];
 }
 
-export interface FooterSlots {
+export interface PFooterSlots {
   left?: (props?: {}) => Array<VNode>;
   default?: (props?: {}) => Array<VNode>;
   right?: (props?: {}) => Array<VNode>;
@@ -27,16 +27,16 @@ export interface FooterSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
-import UContainer from './Container.vue';
+import PContainer from './container.vue';
 
-const props = withDefaults(defineProps<FooterProps>(), {
+const props = withDefaults(defineProps<PFooterProps>(), {
   as: 'footer',
 });
-const slots = defineSlots<FooterSlots>();
+const slots = defineSlots<PFooterSlots>();
 
 const appConfig = useAppConfig() as Footer['AppConfig'];
 const pohonProp = useComponentPohon('footer', props);
@@ -45,7 +45,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -58,7 +58,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer
       <slot name="top" />
     </div>
 
-    <UContainer
+    <PContainer
       data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
     >
@@ -82,7 +82,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer
       >
         <slot name="left" />
       </div>
-    </UContainer>
+    </PContainer>
 
     <div
       v-if="!!slots.bottom"
@@ -91,5 +91,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer
     >
       <slot name="bottom" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

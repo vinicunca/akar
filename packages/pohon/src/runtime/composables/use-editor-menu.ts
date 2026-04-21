@@ -59,7 +59,7 @@ export interface EditorMenuOptions<T = any> {
   /**
    * Function to render each menu item
    */
-  renderItem: (item: T, ui: ComputedRef<any>) => any;
+  renderItem: (item: T, pohon: ComputedRef<any>) => any;
   /**
    * The options for positioning the menu. Those are passed to Floating UI and include options for the placement, offset, flip, shift, size, autoPlacement, hide, and inline middleware.
    * @defaultValue { strategy: 'absolute', placement: 'bottom-start', offset: 8, shift: { padding: 8 } }
@@ -80,9 +80,9 @@ export interface EditorMenuOptions<T = any> {
    */
   appendTo?: HTMLElement | (() => HTMLElement);
   /**
-   * UI styles computed ref
+   * Pohon styles computed ref
    */
-  ui: ComputedRef<any>;
+  pohon: ComputedRef<any>;
 }
 
 export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
@@ -292,17 +292,17 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
         }
 
         return h('div', {
-          'class': options.ui.value.content(),
+          'class': options.pohon.value.content(),
           'role': 'listbox',
           'data-state': menuProps.state,
         }, [
           h('div', {
-            class: options.ui.value.viewport(),
+            class: options.pohon.value.viewport(),
             role: 'presentation',
           }, groupsData.map((group, groupIndex) =>
             h('div', {
               key: `group-${groupIndex}`,
-              class: options.ui.value.group(),
+              class: options.pohon.value.group(),
               role: 'group',
             }, group.map((item, itemInGroupIndex) => {
               const itemData = item as any;
@@ -311,15 +311,15 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
               if (itemData.type === 'label') {
                 return h('div', {
                   key: `label-${groupIndex}-${itemInGroupIndex}`,
-                  class: options.ui.value.label({ class: itemData.class }),
-                }, options.renderItem(item, options.ui));
+                  class: options.pohon.value.label({ class: itemData.class }),
+                }, options.renderItem(item, options.pohon));
               }
 
               // Render separator
               if (itemData.type === 'separator') {
                 return h('div', {
                   key: `separator-${groupIndex}-${itemInGroupIndex}`,
-                  class: options.ui.value.separator({ class: itemData.class }),
+                  class: options.pohon.value.separator({ class: itemData.class }),
                   role: 'separator',
                 });
               }
@@ -330,7 +330,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
               return h('div', {
                 'key': `item-${selectableIndex}`,
-                'class': options.ui.value.item({ class: itemData.class, active: false }),
+                'class': options.pohon.value.item({ class: itemData.class, active: false }),
                 'role': 'option',
                 'aria-selected': isHighlighted,
                 'data-highlighted': isHighlighted ? '' : undefined,
@@ -342,7 +342,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
                     el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
                   }
                 },
-              }, options.renderItem(item, options.ui));
+              }, options.renderItem(item, options.pohon));
             })),
           )),
         ]);

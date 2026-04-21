@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { BadgeProps, PButtonProps, PIconProps } from '../types';
+import type { PBadgeProps, PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/pricing-plan';
 
@@ -16,7 +16,7 @@ type PricingPlanFeature = {
   icon?: PIconProps['name'];
 };
 
-export interface PricingPlanProps {
+export interface PPricingPlanProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -29,7 +29,7 @@ export interface PricingPlanProps {
    * Can be a string or an object.
    * `{ color: 'primary', variant: 'subtle' }`{lang="ts-type"}
    */
-  badge?: string | BadgeProps;
+  badge?: string | PBadgeProps;
   /**
    * The unit price period that appears next to the price.
    * Typically used to show the recurring interval.
@@ -92,7 +92,7 @@ export interface PricingPlanProps {
   pohon?: PricingPlan['slots'];
 }
 
-export interface PricingPlanSlots {
+export interface PPricingPlanSlots {
   badge?: (props: { pohon: PricingPlan['pohon'] }) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
   description?: (props?: {}) => Array<VNode>;
@@ -112,20 +112,20 @@ export interface PricingPlanSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
-import UBadge from './Badge.vue';
+import PBadge from './badge.vue';
 import PButton from './button.vue';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<PricingPlanProps>(), {
+const props = withDefaults(defineProps<PPricingPlanProps>(), {
   orientation: 'vertical',
 });
-const slots = defineSlots<PricingPlanSlots>();
+const slots = defineSlots<PPricingPlanSlots>();
 
 const appConfig = useAppConfig() as PricingPlan['AppConfig'];
 const pohonProp = useComponentPohon('pricingPlan', props);
@@ -197,7 +197,7 @@ const features = computed(() => props.features?.map((feature) => typeof feature 
     </div>
   </DefinePriceTemplate>
 
-  <Primitive
+  <APrimitive
     :as="as"
     v-bind="$attrs"
     :data-orientation="orientation"
@@ -235,7 +235,7 @@ const features = computed(() => props.features?.map((feature) => typeof feature 
             name="badge"
             :pohon="pohon"
           >
-            <UBadge
+            <PBadge
               v-if="badge"
               color="primary"
               variant="subtle"
@@ -328,5 +328,5 @@ const features = computed(() => props.features?.map((feature) => typeof feature 
         </div>
       </slot>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

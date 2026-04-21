@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { DialogContentEmits, DialogContentProps } from 'akar';
-import type { DrawerRootEmits, DrawerRootProps } from 'vaul-vue';
+import type { ADialogContentEmits, ADialogContentProps, ADrawerRootEmits, ADrawerRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -9,7 +8,7 @@ import theme from '#build/pohon/drawer';
 
 type Drawer = ComponentConfig<typeof theme, AppConfig, 'drawer'>;
 
-export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'shouldScaleBackground' | 'setBackgroundColorOnScale' | 'scrollLockTimeout' | 'fixed' | 'dismissible' | 'modal' | 'open' | 'defaultOpen' | 'nested' | 'direction' | 'noBodyStyles' | 'handleOnly' | 'preventScrollRestoration' | 'snapPoints'> {
+export interface PDrawerProps extends Pick<ADrawerRootProps, 'activeSnapPoint' | 'closeThreshold' | 'shouldScaleBackground' | 'setBackgroundColorOnScale' | 'scrollLockTimeout' | 'fixed' | 'dismissible' | 'modal' | 'open' | 'defaultOpen' | 'nested' | 'direction' | 'noBodyStyles' | 'handleOnly' | 'preventScrollRestoration' | 'snapPoints'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -23,7 +22,7 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
    */
   inset?: boolean;
   /** The content of the drawer. */
-  content?: Omit<DialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<DialogContentEmits>>;
+  content?: Omit<ADialogContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ADialogContentEmits>>;
   /**
    * Render an overlay behind the drawer.
    * @defaultValue true
@@ -48,11 +47,11 @@ export interface DrawerProps extends Pick<DrawerRootProps, 'activeSnapPoint' | '
   pohon?: Drawer['slots'];
 }
 
-export interface DrawerEmits extends DrawerRootEmits {
-  (e: 'close:prevent'): void;
+export interface PDrawerEmits extends ADrawerRootEmits {
+  (event: 'close:prevent'): void;
 }
 
-export interface DrawerSlots {
+export interface PDrawerSlots {
   default?: (props?: {}) => Array<VNode>;
   content?: (props?: {}) => Array<VNode>;
   header?: (props?: {}) => Array<VNode>;
@@ -66,16 +65,27 @@ export interface DrawerSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { useForwardPropsEmits, VisuallyHidden } from 'akar';
-import { DrawerContent, DrawerDescription, DrawerHandle, DrawerOverlay, DrawerPortal, DrawerRoot, DrawerRootNested, DrawerTitle, DrawerTrigger } from 'vaul-vue';
+import {
+  ADrawerContent,
+  ADrawerDescription,
+  ADrawerHandle,
+  ADrawerOverlay,
+  ADrawerPortal,
+  ADrawerRoot,
+  ADrawerRootNested,
+  ADrawerTitle,
+  ADrawerTrigger,
+  AVisuallyHidden,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { FieldGroupReset } from '../composables/useFieldGroup';
-import { usePortal } from '../composables/usePortal';
+import { FieldGroupReset } from '../composables/use-field-group';
+import { usePortal } from '../composables/use-portal';
 import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<DrawerProps>(), {
+const props = withDefaults(defineProps<PDrawerProps>(), {
   direction: 'bottom',
   portal: true,
   overlay: true,
@@ -83,8 +93,8 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   modal: true,
   dismissible: true,
 });
-const emits = defineEmits<DrawerEmits>();
-const slots = defineSlots<DrawerSlots>();
+const emits = defineEmits<PDrawerEmits>();
+const slots = defineSlots<PDrawerSlots>();
 
 const appConfig = useAppConfig() as Drawer['AppConfig'];
 const pohonProp = useComponentPohon('drawer', props);
@@ -97,12 +107,12 @@ const contentEvents = computed(() => {
     const events = ['interactOutside', 'escapeKeyDown'];
 
     return events.reduce((acc, curr) => {
-      acc[curr] = (e: Event) => {
-        e.preventDefault();
+      acc[curr] = (event: Event) => {
+        event.preventDefault();
         emits('close:prevent');
       };
       return acc;
-    }, {} as Record<typeof events[number], (e: Event) => void>);
+    }, {} as Record<typeof events[number], (event: Event) => void>);
   }
 
   return {
@@ -119,52 +129,52 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.drawer
 
 <template>
   <component
-    :is="nested ? DrawerRootNested : DrawerRoot"
+    :is="nested ? ADrawerRootNested : ADrawerRoot"
     v-bind="rootProps"
   >
-    <DrawerTrigger
+    <ADrawerTrigger
       v-if="!!slots.default"
       as-child
       :class="props.class"
     >
       <slot />
-    </DrawerTrigger>
+    </ADrawerTrigger>
 
-    <DrawerPortal v-bind="portalProps">
+    <ADrawerPortal v-bind="portalProps">
       <FieldGroupReset>
-        <DrawerOverlay
+        <ADrawerOverlay
           v-if="overlay"
           data-slot="overlay"
           :class="pohon.overlay({ class: pohonProp?.overlay })"
         />
 
-        <DrawerContent
+        <ADrawerContent
           data-slot="content"
           :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
           v-bind="contentProps"
           v-on="contentEvents"
         >
-          <DrawerHandle
+          <ADrawerHandle
             v-if="handle"
             data-slot="handle"
             :class="pohon.handle({ class: pohonProp?.handle })"
           />
 
-          <VisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
-            <DrawerTitle v-if="!title && !slots.title" />
-            <DrawerTitle v-else-if="!!slots.content">
+          <AVisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
+            <ADrawerTitle v-if="!title && !slots.title" />
+            <ADrawerTitle v-else-if="!!slots.content">
               <slot name="title">
                 {{ title }}
               </slot>
-            </DrawerTitle>
+            </ADrawerTitle>
 
-            <DrawerDescription v-if="!description && !slots.description" />
-            <DrawerDescription v-else-if="!!slots.content">
+            <ADrawerDescription v-if="!description && !slots.description" />
+            <ADrawerDescription v-else-if="!!slots.content">
               <slot name="description">
                 {{ description }}
               </slot>
-            </DrawerDescription>
-          </VisuallyHidden>
+            </ADrawerDescription>
+          </AVisuallyHidden>
 
           <slot name="content">
             <div
@@ -177,7 +187,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.drawer
                 :class="pohon.header({ class: pohonProp?.header })"
               >
                 <slot name="header">
-                  <DrawerTitle
+                  <ADrawerTitle
                     v-if="title || !!slots.title"
                     data-slot="title"
                     :class="pohon.title({ class: pohonProp?.title })"
@@ -185,9 +195,9 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.drawer
                     <slot name="title">
                       {{ title }}
                     </slot>
-                  </DrawerTitle>
+                  </ADrawerTitle>
 
-                  <DrawerDescription
+                  <ADrawerDescription
                     v-if="description || !!slots.description"
                     data-slot="description"
                     :class="pohon.description({ class: pohonProp?.description })"
@@ -195,7 +205,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.drawer
                     <slot name="description">
                       {{ description }}
                     </slot>
-                  </DrawerDescription>
+                  </ADrawerDescription>
                 </slot>
               </div>
 
@@ -216,8 +226,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.drawer
               </div>
             </div>
           </slot>
-        </DrawerContent>
+        </ADrawerContent>
       </FieldGroupReset>
-    </DrawerPortal>
+    </ADrawerPortal>
   </component>
 </template>

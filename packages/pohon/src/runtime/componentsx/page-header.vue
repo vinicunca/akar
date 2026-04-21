@@ -7,7 +7,7 @@ import theme from '#build/pohon/page-header';
 
 type PageHeader = ComponentConfig<typeof theme, AppConfig, 'pageHeader'>;
 
-export interface PageHeaderProps {
+export interface PPageHeaderProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -25,7 +25,7 @@ export interface PageHeaderProps {
   pohon?: PageHeader['slots'];
 }
 
-export interface PageHeaderSlots {
+export interface PPageHeaderSlots {
   headline?: (props?: {}) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
   description?: (props?: {}) => Array<VNode>;
@@ -36,14 +36,14 @@ export interface PageHeaderSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = defineProps<PageHeaderProps>();
-const slots = defineSlots<PageHeaderSlots>();
+const props = defineProps<PPageHeaderProps>();
+const slots = defineSlots<PPageHeaderSlots>();
 
 const appConfig = useAppConfig() as PageHeader['AppConfig'];
 const pohonProp = useComponentPohon('pageHeader', props);
@@ -54,7 +54,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageHe
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -116,5 +116,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageHe
 
       <slot />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

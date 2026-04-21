@@ -1,21 +1,28 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { DateFieldRootEmits, DateFieldRootProps, DateRangeFieldRootEmits, DateRangeFieldRootProps, DateValue, SegmentPart } from 'akar';
+import type {
+  ADateFieldRootEmits,
+  ADateFieldRootProps,
+  ADateRangeFieldRootEmits,
+  ADateRangeFieldRootProps,
+  DateValue,
+  SegmentPart,
+} from 'akar';
 import type { ComponentPublicInstance, VNode } from 'vue';
-import type { UseComponentIconsProps } from '../composables/useComponentIcons';
-import type { AAvatarProps, PIconProps } from '../types';
+import type { UseComponentIconsProps } from '../composables/use-component-icons';
+import type { PAvatarProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/input-date';
 
 type InputDate = ComponentConfig<typeof theme, AppConfig, 'inputDate'>;
 
-type _DateFieldRootProps = Omit<DateFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
-type _RangeDateFieldRootProps = Omit<DateRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
+type _DateFieldRootProps = Omit<ADateFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
+type _RangeDateFieldRootProps = Omit<ADateRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
 
-type InputDateDefaultValue<R extends boolean = false> = R extends true ? DateRangeFieldRootProps['defaultValue'] : DateFieldRootProps['defaultValue'];
-type InputDateModelValue<R extends boolean = false> = (R extends true ? DateRangeFieldRootProps['modelValue'] : DateFieldRootProps['modelValue']) | undefined;
+type InputDateDefaultValue<R extends boolean = false> = R extends true ? ADateRangeFieldRootProps['defaultValue'] : ADateFieldRootProps['defaultValue'];
+type InputDateModelValue<R extends boolean = false> = (R extends true ? ADateRangeFieldRootProps['modelValue'] : ADateFieldRootProps['modelValue']) | undefined;
 
-export interface InputDateProps<R extends boolean = false> extends UseComponentIconsProps, _DateFieldRootProps, _RangeDateFieldRootProps {
+export interface PInputDateProps<R extends boolean = false> extends UseComponentIconsProps, _DateFieldRootProps, _RangeDateFieldRootProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -53,14 +60,14 @@ export interface InputDateProps<R extends boolean = false> extends UseComponentI
   pohon?: InputDate['slots'];
 }
 
-export interface InputDateEmits<R extends boolean = false> extends Omit<DateFieldRootEmits & DateRangeFieldRootEmits, 'update:modelValue'> {
+export interface PInputDateEmits<R extends boolean = false> extends Omit<ADateFieldRootEmits & ADateRangeFieldRootEmits, 'update:modelValue'> {
   'update:modelValue': [value: InputDateModelValue<R>];
   'change': [event: Event];
   'blur': [event: FocusEvent];
   'focus': [event: FocusEvent];
 }
 
-export interface InputDateSlots {
+export interface PInputDateSlots {
   leading?: (props: { pohon: InputDate['pohon'] }) => Array<VNode>;
   default?: (props: { pohon: InputDate['pohon'] }) => Array<VNode>;
   trailing?: (props: { pohon: InputDate['pohon'] }) => Array<VNode>;
@@ -72,30 +79,33 @@ export interface InputDateSlots {
 import { useAppConfig } from '#imports';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
-import { DateRangeField as RangeDateField, DateField as SingleDateField } from 'akar/namespaced';
+import {
+  ADateField,
+  ADateRangeField,
+} from 'akar/namespaced';
 import { computed, onMounted, ref } from 'vue';
+import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useComponentIcons } from '../composables/useComponentIcons';
-import { useFieldGroup } from '../composables/useFieldGroup';
-import { useFormField } from '../composables/useFormField';
+import { useFieldGroup } from '../composables/use-field-group';
+import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<InputDateProps<R>>(), {
+const props = withDefaults(defineProps<PInputDateProps<R>>(), {
   autofocusDelay: 0,
 });
-const emits = defineEmits<InputDateEmits<R>>();
-const slots = defineSlots<InputDateSlots>();
+const emits = defineEmits<PInputDateEmits<R>>();
+const slots = defineSlots<PInputDateSlots>();
 
 const appConfig = useAppConfig() as InputDate['AppConfig'];
 const pohonProp = useComponentPohon('inputDate', props);
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'pohon'), emits);
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<InputDateProps<R>>(props);
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputDateProps<R>>(props);
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color, id, name, highlight, disabled, ariaAttrs } = useFormField<PInputDateProps<R>>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputDateProps<R>>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 
 const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
@@ -155,7 +165,7 @@ onMounted(() => {
   }, props.autofocusDelay);
 });
 
-const DateField = computed(() => props.range ? RangeDateField : SingleDateField);
+const DateField = computed(() => props.range ? ADateRangeField : ADateField);
 
 defineExpose({
   inputsRef,
@@ -235,7 +245,7 @@ defineExpose({
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as AAvatarProps['size'])"
+          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           data-slot="leadingAvatar"
           :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"

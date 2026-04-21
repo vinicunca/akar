@@ -9,7 +9,7 @@ import theme from '#build/pohon/file-upload';
 
 type FileUpload = ComponentConfig<typeof theme, AppConfig, 'fileUpload'>;
 
-export interface FileUploadProps<M extends boolean = false> extends /** @vue-ignore */ Pick<InputHTMLAttributes, 'form' | 'formaction' | 'formenctype' | 'formmethod' | 'formnovalidate' | 'formtarget'> {
+export interface PFileUploadProps<M extends boolean = false> extends /** @vue-ignore */ Pick<InputHTMLAttributes, 'form' | 'formaction' | 'formenctype' | 'formmethod' | 'formnovalidate' | 'formtarget'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -109,13 +109,13 @@ export interface FileUploadProps<M extends boolean = false> extends /** @vue-ign
   pohon?: FileUpload['slots'];
 }
 
-export interface FileUploadEmits {
+export interface PFileUploadEmits {
   change: [event: Event];
 }
 
 type FileUploadFiles<M> = (M extends true ? Array<File> : File) | null;
 
-export interface FileUploadSlots<M extends boolean = false> {
+export interface PFileUploadSlots<M extends boolean = false> {
   'default'?: (props: {
     open: UseFileDialogReturn['open'];
     removeFile: (index?: number) => void;
@@ -139,13 +139,13 @@ export interface FileUploadSlots<M extends boolean = false> {
 <script setup lang="ts" generic="M extends boolean = false">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
-import { Primitive, VisuallyHidden } from 'akar';
+import { APrimitive, AVisuallyHidden } from 'akar';
 import { computed, toRef, toRefs, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { useFileUpload } from '../composables/use-file-upload';
+import { useFormField } from '../composables/use-form-field';
 import { useLocale } from '../composables/use-locale';
-import { useFileUpload } from '../composables/useFileUpload';
-import { useFormField } from '../composables/useFormField';
-import { useResolvedVariants } from '../composables/useResolvedVariants';
+import { useResolvedVariants } from '../composables/use-resolved-variants';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
@@ -153,7 +153,7 @@ import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<FileUploadProps<M>>(), {
+const props = withDefaults(defineProps<PFileUploadProps<M>>(), {
   accept: '*',
   multiple: false as never,
   reset: false,
@@ -165,8 +165,8 @@ const props = withDefaults(defineProps<FileUploadProps<M>>(), {
   preview: true,
   fileImage: true,
 });
-const emits = defineEmits<FileUploadEmits>();
-const slots = defineSlots<FileUploadSlots<M>>();
+const emits = defineEmits<PFileUploadEmits>();
+const slots = defineSlots<PFileUploadSlots<M>>();
 
 const modelValue = defineModel<(M extends true ? Array<File> : File) | null>();
 
@@ -186,7 +186,7 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   dropzone: props.dropzone,
   onUpdate,
 });
-const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<FileUploadProps>(props);
+const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<PFileUploadProps>(props);
 
 const { variant: resolvedVariant } = useResolvedVariants('fileUpload', props, theme, ['variant']);
 const variant = computed(() => props.multiple ? 'area' : resolvedVariant.value);
@@ -406,7 +406,7 @@ defineExpose({
     </template>
   </DefineFilesTemplate>
 
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -494,7 +494,7 @@ defineExpose({
       <ReuseFilesTemplate v-if="position === 'outside'" />
     </slot>
 
-    <VisuallyHidden
+    <AVisuallyHidden
       :id="id"
       ref="inputRef"
       as="input"
@@ -507,5 +507,5 @@ defineExpose({
       :disabled="disabled"
       v-bind="{ ...$attrs, ...ariaAttrs }"
     />
-  </Primitive>
+  </APrimitive>
 </template>

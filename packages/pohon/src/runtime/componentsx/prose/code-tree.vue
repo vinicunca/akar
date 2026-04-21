@@ -51,12 +51,12 @@ export interface ProseCodeTreeSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
-import { TreeItem, TreeRoot } from 'akar';
+import { ATreeItem, ATreeRoot } from 'akar';
 import { computed, onBeforeUpdate, ref, watch } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';
-import UCodeIcon from './CodeIcon.vue';
+import PCodeIcon from './code-icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
@@ -97,7 +97,7 @@ watch(() => props.modelValue, (value) => {
 const rerenderCount = ref(1);
 
 const flatItems = computed<Array<TreeItem>>(() => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  // eslint-disable-next-line ts/no-unused-expressions
   rerenderCount.value;
   return props.items || slots.default?.()?.flatMap(transformSlot).filter(Boolean) || [];
 });
@@ -130,6 +130,7 @@ function buildTree(items: Array<{ label: string }>): Array<TreeNode> {
 
   const sort = (nodes: Array<TreeNode>): Array<TreeNode> =>
     nodes.sort((a, b) =>
+      // eslint-disable-next-line no-nested-ternary
       !!a.children === !!b.children ? a.label.localeCompare(b.label) : b.children ? 1 : -1,
     ).map((n) => ({ ...n, children: n.children && sort(n.children) }));
 
@@ -204,7 +205,7 @@ onBeforeUpdate(() => rerenderCount.value++);
       role="presentation"
       :class="level > 1 ? pohon.itemWithChildren({ class: pohonProp?.itemWithChildren }) : pohon.item({ class: pohonProp?.item })"
     >
-      <TreeItem
+      <ATreeItem
         v-slot="{ isExpanded, isSelected }"
         :level="level"
         :value="item"
@@ -219,7 +220,7 @@ onBeforeUpdate(() => rerenderCount.value++);
             :name="isExpanded ? appConfig.pohon.icons.folderOpen : appConfig.pohon.icons.folder"
             :class="pohon.linkLeadingIcon({ class: pohonProp?.linkLeadingIcon })"
           />
-          <UCodeIcon
+          <PCodeIcon
             v-else
             :filename="item.label"
             :class="pohon.linkLeadingIcon({ class: pohonProp?.linkLeadingIcon })"
@@ -250,7 +251,7 @@ onBeforeUpdate(() => rerenderCount.value++);
             :level="level + 1"
           />
         </ul>
-      </TreeItem>
+      </ATreeItem>
     </li>
   </DefineTreeTemplate>
 
@@ -258,7 +259,7 @@ onBeforeUpdate(() => rerenderCount.value++);
     v-bind="$attrs"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <TreeRoot
+    <ATreeRoot
       v-model="model"
       v-model:expanded="expanded"
       :class="pohon.list({ class: pohonProp?.list })"
@@ -269,7 +270,7 @@ onBeforeUpdate(() => rerenderCount.value++);
         :items="items"
         :level="1"
       />
-    </TreeRoot>
+    </ATreeRoot>
 
     <div :class="pohon.content({ class: pohonProp?.content })">
       <component :is="lastSelectedItem?.component" />

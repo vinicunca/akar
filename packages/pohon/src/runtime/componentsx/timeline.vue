@@ -2,19 +2,19 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { AAvatarProps, PIconProps } from '../types';
+import type { PAvatarProps, PIconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/timeline';
 
 type Timeline = ComponentConfig<typeof theme, AppConfig, 'timeline'>;
 
-export interface TimelineItem {
+export interface PTimelineItem {
   date?: string;
   title?: string;
   description?: string;
   icon?: PIconProps['name'];
-  avatar?: AAvatarProps;
+  avatar?: PAvatarProps;
   value?: string | number;
   slot?: string;
   class?: any;
@@ -22,7 +22,7 @@ export interface TimelineItem {
   [key: string]: any;
 }
 
-export interface TimelineProps<T extends TimelineItem = TimelineItem> {
+export interface PTimelineProps<T extends PTimelineItem = PTimelineItem> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -53,13 +53,13 @@ export interface TimelineProps<T extends TimelineItem = TimelineItem> {
   pohon?: Timeline['slots'];
 }
 
-type SlotProps<T extends TimelineItem> = (props: { item: T }) => Array<VNode>;
+type SlotProps<T extends PTimelineItem> = (props: { item: T }) => Array<VNode>;
 
-export interface TimelineEmits<T extends TimelineItem = TimelineItem> {
+export interface PTimelineEmits<T extends PTimelineItem = PTimelineItem> {
   select: [event: Event, item: T];
 }
 
-export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
+export type PTimelineSlots<T extends PTimelineItem = PTimelineItem> = {
   indicator?: SlotProps<T>;
   wrapper?: SlotProps<T>;
   date?: SlotProps<T>;
@@ -69,21 +69,21 @@ export type TimelineSlots<T extends TimelineItem = TimelineItem> = {
 
 </script>
 
-<script setup lang="ts" generic="T extends TimelineItem">
+<script setup lang="ts" generic="T extends PTimelineItem">
 import { useAppConfig } from '#imports';
-import { Primitive, Separator } from 'akar';
+import { APrimitive, ASeparator } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { get } from '../utils';
+import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 
-const props = withDefaults(defineProps<TimelineProps<T>>(), {
+const props = withDefaults(defineProps<PTimelineProps<T>>(), {
   orientation: 'vertical',
   valueKey: 'value',
 });
-const emits = defineEmits<TimelineEmits<T>>();
-const slots = defineSlots<TimelineSlots<T>>();
+const emits = defineEmits<PTimelineEmits<T>>();
+const slots = defineSlots<PTimelineSlots<T>>();
 
 const modelValue = defineModel<string | number>();
 
@@ -101,7 +101,7 @@ const currentStepIndex = computed(() => {
   const value = modelValue.value ?? props.defaultValue;
 
   if (typeof value === 'string') {
-    return props.items.findIndex((item) => get(item, props.valueKey as string) === value) ?? -1;
+    return props.items.findIndex((item) => getProp(item, props.valueKey as string) === value) ?? -1;
   }
 
   if (props.reverse) {
@@ -132,7 +132,7 @@ function onSelect(event: Event, item: T) {
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -159,12 +159,12 @@ function onSelect(event: Event, item: T) {
           :pohon="{ icon: 'text-inherit', fallback: 'text-inherit' }"
         >
           <slot
-            :name="((item.slot ? `${item.slot}-indicator` : 'indicator') as keyof TimelineSlots<T>)"
+            :name="((item.slot ? `${item.slot}-indicator` : 'indicator') as keyof PTimelineSlots<T>)"
             :item="(item as Extract<T, { slot: string; }>)"
           />
         </PAvatar>
 
-        <Separator
+        <ASeparator
           v-if="index < items.length - 1"
           data-slot="separator"
           :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator] })"
@@ -177,40 +177,40 @@ function onSelect(event: Event, item: T) {
         :class="pohon.wrapper({ class: [pohonProp?.wrapper, item.pohon?.wrapper] })"
       >
         <slot
-          :name="((item.slot ? `${item.slot}-wrapper` : 'wrapper') as keyof TimelineSlots<T>)"
+          :name="((item.slot ? `${item.slot}-wrapper` : 'wrapper') as keyof PTimelineSlots<T>)"
           :item="(item as Extract<T, { slot: string; }>)"
         >
           <div
-            v-if="item.date || !!slots[(item.slot ? `${item.slot}-date` : 'date') as keyof TimelineSlots<T>]"
+            v-if="item.date || !!slots[(item.slot ? `${item.slot}-date` : 'date') as keyof PTimelineSlots<T>]"
             data-slot="date"
             :class="pohon.date({ class: [pohonProp?.date, item.pohon?.date] })"
           >
             <slot
-              :name="((item.slot ? `${item.slot}-date` : 'date') as keyof TimelineSlots<T>)"
+              :name="((item.slot ? `${item.slot}-date` : 'date') as keyof PTimelineSlots<T>)"
               :item="(item as Extract<T, { slot: string; }>)"
             >
               {{ item.date }}
             </slot>
           </div>
           <div
-            v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof TimelineSlots<T>]"
+            v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof PTimelineSlots<T>]"
             data-slot="title"
             :class="pohon.title({ class: [pohonProp?.title, item.pohon?.title] })"
           >
             <slot
-              :name="((item.slot ? `${item.slot}-title` : 'title') as keyof TimelineSlots<T>)"
+              :name="((item.slot ? `${item.slot}-title` : 'title') as keyof PTimelineSlots<T>)"
               :item="(item as Extract<T, { slot: string; }>)"
             >
               {{ item.title }}
             </slot>
           </div>
           <div
-            v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof TimelineSlots<T>]"
+            v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof PTimelineSlots<T>]"
             data-slot="description"
             :class="pohon.description({ class: [pohonProp?.description, item.pohon?.description] })"
           >
             <slot
-              :name="((item.slot ? `${item.slot}-description` : 'description') as keyof TimelineSlots<T>)"
+              :name="((item.slot ? `${item.slot}-description` : 'description') as keyof PTimelineSlots<T>)"
               :item="(item as Extract<T, { slot: string; }>)"
             >
               {{ item.description }}
@@ -219,5 +219,5 @@ function onSelect(event: Event, item: T) {
         </slot>
       </div>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

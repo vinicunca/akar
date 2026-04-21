@@ -4,23 +4,23 @@ import type { ContentNavigationItem } from '@nuxt/content';
 import type { AppConfig } from '@nuxt/schema';
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import type { VNode } from 'vue';
-import type { PButtonProps, CommandPaletteGroup, CommandPaletteItem, CommandPaletteProps, CommandPaletteSlots, PIconProps, InputProps, LinkProps, PLinkPropsKeys, ModalProps } from '../../types';
+import type { PButtonProps, PCommandPaletteGroup, PCommandPaletteItem, PCommandPaletteProps, PCommandPaletteSlots, PDialogProps, PIconProps, PInputProps, PLinkProps, PLinkPropsKeys } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-search';
 
 type ContentSearch = ComponentConfig<typeof theme, AppConfig, 'contentSearch'>;
 
-export interface ContentSearchLink extends Omit<LinkProps, 'custom'> {
+export interface PContentSearchLink extends Omit<PLinkProps, 'custom'> {
   label?: string;
   description?: string;
   /**
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
-  children?: Array<ContentSearchLink>;
+  children?: Array<PContentSearchLink>;
 }
 
-export interface ContentSearchFile {
+export interface PContentSearchFile {
   id: string;
   title: string;
   titles: Array<string>;
@@ -28,7 +28,7 @@ export interface ContentSearchFile {
   content: string;
 }
 
-export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPaletteItem {
+export interface PContentSearchItem extends Omit<PLinkProps, 'custom'>, PCommandPaletteItem {
   level?: number;
   /**
    * @IconifyIcon
@@ -36,7 +36,7 @@ export interface ContentSearchItem extends Omit<LinkProps, 'custom'>, CommandPal
   icon?: PIconProps['name'];
 }
 
-export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchLink> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface PContentSearchProps<T extends PContentSearchLink = PContentSearchLink> extends Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
   /**
    * @defaultValue 'md'
    */
@@ -51,7 +51,7 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
    */
-  placeholder?: InputProps['placeholder'];
+  placeholder?: PInputProps['placeholder'];
   /**
    * Automatically focus the input when component is mounted.
    * @defaultValue true
@@ -87,8 +87,8 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
   links?: Array<T>;
   navigation?: Array<ContentNavigationItem>;
   /** Custom groups displayed between navigation and color mode group. */
-  groups?: Array<CommandPaletteGroup<ContentSearchItem>>;
-  files?: Array<ContentSearchFile>;
+  groups?: Array<PCommandPaletteGroup<PContentSearchItem>>;
+  files?: Array<PContentSearchFile>;
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://pohon.nuxt.com/docs/components/command-palette).
    * @defaultValue { fuseOptions: { includeMatches: true } }
@@ -100,36 +100,36 @@ export interface ContentSearchProps<T extends ContentSearchLink = ContentSearchL
    */
   colorMode?: boolean;
   class?: any;
-  pohon?: ContentSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<ContentSearchItem>, ContentSearchItem>['pohon'];
+  pohon?: ContentSearch['slots'] & PCommandPaletteProps<PCommandPaletteGroup<PContentSearchItem>, PContentSearchItem>['pohon'];
 }
 
-export type ContentSearchSlots = CommandPaletteSlots<ContentSearchItem> & {
+export type PContentSearchSlots = PCommandPaletteSlots<PContentSearchItem> & {
   content?: (props: { close: () => void }) => Array<VNode>;
 };
 
 </script>
 
-<script setup lang="ts" generic="T extends ContentSearchLink">
+<script setup lang="ts" generic="T extends PContentSearchLink">
 import { defineShortcuts, useAppConfig, useColorMode } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { defu } from 'defu';
 import { useForwardProps } from 'akar';
+import { defu } from 'defu';
 import { computed, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
-import { useContentSearch } from '../../composables/useContentSearch';
+import { useContentSearch } from '../../composables/use-content-search';
 import { useLocale } from '../../composables/use-locale';
 import { omit, transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
-import UCommandPalette from '../CommandPalette.vue';
-import UModal from '../Modal.vue';
+import PCommandPalette from '../command-palette.vue';
+import PDialog from '../dialog.vue';
 
-const props = withDefaults(defineProps<ContentSearchProps<T>>(), {
+const props = withDefaults(defineProps<PContentSearchProps<T>>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
   fullscreen: false,
 });
-const slots = defineSlots<ContentSearchSlots>();
+const slots = defineSlots<PContentSearchSlots>();
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' });
 
@@ -246,7 +246,7 @@ const groups = computed(() => {
   return groups;
 });
 
-function onSelect(item: ContentSearchItem) {
+function onSelect(item: PContentSearchItem) {
   if (item.disabled) {
     return;
   }
@@ -260,7 +260,9 @@ function onSelect(item: ContentSearchItem) {
 defineShortcuts({
   [props.shortcut]: {
     usingInput: true,
-    handler: () => open.value = !open.value,
+    handler: () => {
+      open.value = !open.value;
+    },
   },
 });
 
@@ -270,7 +272,7 @@ defineExpose({
 </script>
 
 <template>
-  <UModal
+  <PDialog
     v-model:open="open"
     :title="title || t('contentSearch.title')"
     :description="description || t('contentSearch.description')"
@@ -283,14 +285,14 @@ defineExpose({
         name="content"
         v-bind="contentData"
       >
-        <UCommandPalette
+        <PCommandPalette
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
           :input="{ fixed: true }"
-          :pohon="transformPohon(omit(ui, ['modal']), pohonProp)"
+          :pohon="transformPohon(omit(pohon, ['modal']), pohonProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >
@@ -303,8 +305,8 @@ defineExpose({
               v-bind="slotData"
             />
           </template>
-        </UCommandPalette>
+        </PCommandPalette>
       </slot>
     </template>
-  </UModal>
+  </PDialog>
 </template>

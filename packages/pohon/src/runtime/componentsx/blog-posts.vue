@@ -2,13 +2,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { BlogPostProps, BlogPostSlots } from '../types';
+import type { PBlogPostProps, PBlogPostSlots } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/blog-posts';
 
 type BlogPosts = ComponentConfig<typeof theme, AppConfig, 'blogPosts'>;
 
-export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
+export interface PBlogPostsProps<T extends PBlogPostProps = PBlogPostProps> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -24,32 +24,32 @@ export interface BlogPostsProps<T extends BlogPostProps = BlogPostProps> {
   pohon?: { base?: any };
 }
 
-type ExtendSlotWithPost<T extends BlogPostProps, K extends keyof BlogPostSlots>
-  = Required<BlogPostSlots>[K] extends (props: infer P) => Array<VNode>
+type ExtendSlotWithPost<T extends PBlogPostProps, K extends keyof PBlogPostSlots>
+  = Required<PBlogPostSlots>[K] extends (props: infer P) => Array<VNode>
     ? (props: P & { post: T }) => Array<VNode>
-    : Required<BlogPostSlots>[K];
+    : Required<PBlogPostSlots>[K];
 
-export type BlogPostsSlots<T extends BlogPostProps = BlogPostProps> = {
-  [K in keyof BlogPostSlots]?: ExtendSlotWithPost<T, K>
+export type PBlogPostsSlots<T extends PBlogPostProps = PBlogPostProps> = {
+  [K in keyof PBlogPostSlots]?: ExtendSlotWithPost<T, K>
 } & {
   default?: (props?: {}) => Array<VNode>;
 };
 
 </script>
 
-<script setup lang="ts" generic="T extends BlogPostProps">
+<script setup lang="ts" generic="T extends PBlogPostProps">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';
-import UBlogPost from './BlogPost.vue';
+import PBlogPost from './blog-post.vue';
 
-const props = withDefaults(defineProps<BlogPostsProps>(), {
+const props = withDefaults(defineProps<PBlogPostsProps>(), {
   orientation: 'horizontal',
 });
-const slots = defineSlots<BlogPostsSlots<T>>();
+const slots = defineSlots<PBlogPostsSlots<T>>();
 
 const getProxySlots = () => omit(slots, ['default']);
 
@@ -60,13 +60,13 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.blogPo
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     :class="pohon({ orientation, class: [pohonProp?.base, props.class] })"
   >
     <slot>
-      <UBlogPost
+      <PBlogPost
         v-for="(post, index) in posts"
         :key="index"
         :orientation="orientation === 'vertical' ? 'horizontal' : 'vertical'"
@@ -82,7 +82,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.blogPo
             :post="post"
           />
         </template>
-      </UBlogPost>
+      </PBlogPost>
     </slot>
-  </Primitive>
+  </APrimitive>
 </template>

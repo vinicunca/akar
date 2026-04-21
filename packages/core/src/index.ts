@@ -51,6 +51,7 @@ export * from './switch';
 export * from './tabs';
 export * from './tags-input';
 export * from './time-field';
+export * from './time-range-field';
 export * from './toast';
 export * from './toggle';
 export * from './toggle-group';

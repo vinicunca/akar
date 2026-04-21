@@ -32,7 +32,7 @@ import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { uv } from '../../utils/uv';
 import PButton from '../button.vue';
-import UCodeIcon from './CodeIcon.vue';
+import PCodeIcon from './code-icon.vue';
 
 const props = defineProps<ProsePreProps>();
 defineSlots<ProsePreSlots>();
@@ -59,7 +59,7 @@ function copyCode() {
       v-if="filename && !hideHeader"
       :class="pohon.header({ class: pohonProp?.header })"
     >
-      <UCodeIcon
+      <PCodeIcon
         :icon="icon"
         :filename="filename"
         :class="pohon.icon({ class: pohonProp?.icon })"

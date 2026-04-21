@@ -8,7 +8,7 @@ import theme from '#build/pohon/pricing-plans';
 
 type PricingPlans = ComponentConfig<typeof theme, AppConfig, 'pricingPlans'>;
 
-export interface PricingPlansProps {
+export interface PPricingPlansProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -40,7 +40,7 @@ type ExtendSlotWithPlan<T extends PricingPlanProps, K extends keyof PricingPlanS
     ? (props: P & { plan: T }) => Array<VNode>
     : PricingPlanSlots[K];
 
-export type PricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
+export type PPricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
   [K in keyof PricingPlanSlots]?: ExtendSlotWithPlan<T, K>
 } & {
   default?: (props?: {}) => Array<VNode>;
@@ -50,19 +50,19 @@ export type PricingPlansSlots<T extends PricingPlanProps = PricingPlanProps> = {
 
 <script setup lang="ts" generic="T extends PricingPlanProps">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';
-import UPricingPlan from './PricingPlan.vue';
+import PPricingPlan from './pricing-plan.vue';
 
-const props = withDefaults(defineProps<PricingPlansProps>(), {
+const props = withDefaults(defineProps<PPricingPlansProps>(), {
   orientation: 'horizontal',
   compact: false,
   scale: false,
 });
-const slots = defineSlots<PricingPlansSlots<T>>();
+const slots = defineSlots<PPricingPlansSlots<T>>();
 
 const getProxySlots = () => omit(slots, ['default']);
 
@@ -87,14 +87,14 @@ function mapSlot(slot: any) {
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     :class="pohon({ class: [pohonProp?.base, props.class], compact, scale, orientation })"
     :style="{ '--count': count }"
   >
     <slot>
-      <UPricingPlan
+      <PPricingPlan
         v-for="(plan, index) in plans"
         :key="index"
         :orientation="orientation === 'vertical' ? 'horizontal' : 'vertical'"
@@ -110,7 +110,7 @@ function mapSlot(slot: any) {
             :plan="plan"
           />
         </template>
-      </UPricingPlan>
+      </PPricingPlan>
     </slot>
-  </Primitive>
+  </APrimitive>
 </template>

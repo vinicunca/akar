@@ -6,7 +6,7 @@ import theme from '#build/pohon/dashboard-sidebar-toggle';
 
 type DashboardSidebarToggle = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebarToggle'>;
 
-export interface DashboardSidebarToggleProps extends Omit<PButtonProps, PLinkPropsKeys | 'color' | 'variant'> {
+export interface PDashboardSidebarToggleProps extends Omit<PButtonProps, PLinkPropsKeys | 'color' | 'variant'> {
   /**
    * @defaultValue 'neutral'
    */
@@ -37,7 +37,7 @@ import PButton from './button.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<DashboardSidebarToggleProps>(), {
+const props = withDefaults(defineProps<PDashboardSidebarToggleProps>(), {
   color: 'neutral',
   variant: 'ghost',
   side: 'left',

@@ -7,7 +7,7 @@ import theme from '#build/pohon/scroll-area';
 
 type ScrollArea = ComponentConfig<typeof theme, AppConfig, 'scrollArea'>;
 
-export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
+export interface PScrollAreaVirtualizeOptions extends Partial<Omit<
   VirtualizerOptions<Element, Element>,
   'count' | 'getScrollElement' | 'horizontal' | 'isRtl' | 'estimateSize' | 'lanes' | 'enabled'
 >> {
@@ -38,7 +38,7 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
 
 export type ScrollAreaItem = any;
 
-export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
+export interface PScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -58,12 +58,12 @@ export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
    */
-  virtualize?: boolean | ScrollAreaVirtualizeOptions;
+  virtualize?: boolean | PScrollAreaVirtualizeOptions;
   class?: any;
   pohon?: ScrollArea['slots'];
 }
 
-export interface ScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
+export interface PScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
   default?: (
     props:
       | { item: T; index: number; virtualItem?: VirtualItem }
@@ -71,7 +71,7 @@ export interface ScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
   ) => Array<VNode>;
 }
 
-export interface ScrollAreaEmits {
+export interface PScrollAreaEmits {
   /**
    * Emitted when scroll state changes
    * @param isScrolling - Whether the list is currently being scrolled
@@ -83,19 +83,19 @@ export interface ScrollAreaEmits {
 <script setup lang="ts" generic="T extends ScrollAreaItem">
 import { useAppConfig } from '#imports';
 import { useVirtualizer } from '@tanstack/vue-virtual';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
+const props = withDefaults(defineProps<PScrollAreaProps<T>>(), {
   orientation: 'vertical',
   virtualize: false,
 });
-const emits = defineEmits<ScrollAreaEmits>();
-defineSlots<ScrollAreaSlots<T>>();
+const emits = defineEmits<PScrollAreaEmits>();
+defineSlots<PScrollAreaSlots<T>>();
 const { dir } = useLocale();
 const appConfig = useAppConfig() as ScrollArea['AppConfig'];
 const pohonProp = useComponentPohon('scrollArea', props);
@@ -196,7 +196,9 @@ function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
     position: 'absolute',
     insetBlockStart: isHorizontal.value && hasLanes ? lanePosition : 0,
     insetInlineStart: isVertical.value && hasLanes ? lanePosition : 0,
+    // eslint-disable-next-line no-nested-ternary
     blockSize: isHorizontal.value ? (hasLanes ? laneSize : '100%') : undefined,
+    // eslint-disable-next-line no-nested-ternary
     inlineSize: isVertical.value ? (hasLanes ? laneSize : '100%') : undefined,
     transform: isHorizontal.value
       ? `translateX(${isRtl.value ? -virtualItem.start : virtualItem.start}px)`
@@ -266,7 +268,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     ref="rootRef"
     :as="as"
     data-slot="root"
@@ -324,5 +326,5 @@ defineExpose({
         </template>
       </div>
     </template>
-  </Primitive>
+  </APrimitive>
 </template>

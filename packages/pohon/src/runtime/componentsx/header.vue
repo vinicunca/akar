@@ -1,16 +1,22 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { DrawerProps, ModalProps, PButtonProps, PLinkPropsKeys, SlideoverProps } from '../types';
+import type {
+  PButtonProps,
+  PDialogProps,
+  PDrawerProps,
+  PLinkPropsKeys,
+  PSlideoverProps,
+} from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/header';
 
 type Header = ComponentConfig<typeof theme, AppConfig, 'header'>;
 
 type HeaderMode = 'modal' | 'slideover' | 'drawer';
-type HeaderMenu<T> = T extends 'modal' ? ModalProps : T extends 'slideover' ? SlideoverProps : T extends 'drawer' ? DrawerProps : never;
+type HeaderMenu<T> = T extends 'modal' ? PDialogProps : T extends 'slideover' ? PSlideoverProps : T extends 'drawer' ? PDrawerProps : never;
 
-export interface HeaderProps<T extends HeaderMode = HeaderMode> {
+export interface PHeaderProps<T extends HeaderMode = HeaderMode> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'header'
@@ -46,7 +52,7 @@ export interface HeaderProps<T extends HeaderMode = HeaderMode> {
   pohon?: Header['slots'];
 }
 
-export interface HeaderSlots {
+export interface PHeaderSlots {
   title?: (props?: {}) => Array<VNode>;
   left?: (props?: {}) => Array<VNode>;
   default?: (props?: {}) => Array<VNode>;
@@ -62,7 +68,7 @@ export interface HeaderSlots {
 <script setup lang="ts" generic="T extends HeaderMode">
 import { useAppConfig, useRoute } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -70,15 +76,15 @@ import { useLocale } from '../composables/use-locale';
 import { getSlotChildrenText } from '../utils';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UContainer from './Container.vue';
-import UDrawer from './Drawer.vue';
-import ULink from './Link.vue';
-import UModal from './Modal.vue';
-import USlideover from './Slideover.vue';
+import PContainer from './container.vue';
+import PDialog from './dialog.vue';
+import PDrawer from './drawer.vue';
+import PLink from './link.vue';
+import PSlideover from './slideover.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<HeaderProps<T>>(), {
+const props = withDefaults(defineProps<PHeaderProps<T>>(), {
   as: 'header',
   mode: 'modal' as never,
   autoClose: true,
@@ -87,7 +93,7 @@ const props = withDefaults(defineProps<HeaderProps<T>>(), {
   to: '/',
   title: 'Nuxt UI',
 });
-const slots = defineSlots<HeaderSlots>();
+const slots = defineSlots<PHeaderSlots>();
 
 const open = defineModel<boolean>('open', { default: false });
 
@@ -116,9 +122,9 @@ watch(() => route.fullPath, () => {
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.header || {}) })());
 
 const Menu = computed(() => ({
-  slideover: USlideover,
-  modal: UModal,
-  drawer: UDrawer,
+  slideover: PSlideover,
+  modal: PDialog,
+  drawer: PDrawer,
 })[props.mode as HeaderMode]);
 
 const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : {}) as HeaderMenu<T>);
@@ -158,7 +164,7 @@ function toggleOpen() {
       <ReuseToggleTemplate v-if="toggleSide === 'left'" />
 
       <slot name="left">
-        <ULink
+        <PLink
           :to="to"
           :aria-label="ariaLabel"
           data-slot="title"
@@ -167,7 +173,7 @@ function toggleOpen() {
           <slot name="title">
             {{ title }}
           </slot>
-        </ULink>
+        </PLink>
       </slot>
     </div>
   </DefineLeftTemplate>
@@ -183,7 +189,7 @@ function toggleOpen() {
     </div>
   </DefineRightTemplate>
 
-  <Primitive
+  <APrimitive
     :as="as"
     v-bind="$attrs"
     data-slot="root"
@@ -191,7 +197,7 @@ function toggleOpen() {
   >
     <slot name="top" />
 
-    <UContainer
+    <PContainer
       data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
     >
@@ -205,10 +211,10 @@ function toggleOpen() {
       </div>
 
       <ReuseRightTemplate />
-    </UContainer>
+    </PContainer>
 
     <slot name="bottom" />
-  </Primitive>
+  </APrimitive>
 
   <Menu
     v-model:open="open"

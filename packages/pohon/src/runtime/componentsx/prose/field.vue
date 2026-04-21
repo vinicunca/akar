@@ -39,7 +39,7 @@ export interface ProseFieldSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
@@ -54,7 +54,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
@@ -94,5 +94,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
         {{ description }}
       </slot>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

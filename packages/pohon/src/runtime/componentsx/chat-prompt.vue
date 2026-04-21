@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { TextareaProps, TextareaSlots } from '../types';
+import type { PTextareaProps, PTextareaSlots } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/chat-prompt';
 
 type ChatPrompt = ComponentConfig<typeof theme, AppConfig, 'chatPrompt'>;
 
-export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus' | 'autofocusDelay' | 'autoresize' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon' | 'disabled'> {
+export interface PChatPromptProps extends Pick<PTextareaProps, 'rows' | 'autofocus' | 'autofocusDelay' | 'autoresize' | 'autoresizeDelay' | 'maxrows' | 'icon' | 'avatar' | 'loading' | 'loadingIcon' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'form'
@@ -24,15 +24,15 @@ export interface ChatPromptProps extends Pick<TextareaProps, 'rows' | 'autofocus
   variant?: ChatPrompt['variants']['variant'];
   error?: Error;
   class?: any;
-  pohon?: ChatPrompt['slots'] & TextareaProps['pohon'];
+  pohon?: ChatPrompt['slots'] & PTextareaProps['pohon'];
 }
 
-export interface ChatPromptEmits {
+export interface PChatPromptEmits {
   submit: [event: Event];
   close: [event: Event];
 }
 
-export interface ChatPromptSlots extends TextareaSlots {
+export interface PChatPromptSlots extends PTextareaSlots {
   header?: (props?: {}) => Array<VNode>;
   footer?: (props?: {}) => Array<VNode>;
 }
@@ -41,25 +41,25 @@ export interface ChatPromptSlots extends TextareaSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { Primitive, useForwardProps } from 'akar';
+import { APrimitive, useForwardProps } from 'akar';
 import { computed, toRef, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { useIMEGuard } from '../composables/use-ime-guard';
 import { useLocale } from '../composables/use-locale';
-import { useIMEGuard } from '../composables/useIMEGuard';
 import { omit, transformPohon } from '../utils';
 import { uv } from '../utils/uv';
-import UTextarea from './Textarea.vue';
+import PTextarea from './textarea.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<ChatPromptProps>(), {
+const props = withDefaults(defineProps<PChatPromptProps>(), {
   as: 'form',
   autofocus: true,
   autoresize: true,
   rows: 1,
 });
-const emits = defineEmits<ChatPromptEmits>();
-const slots = defineSlots<ChatPromptSlots>();
+const emits = defineEmits<PChatPromptEmits>();
+const slots = defineSlots<PChatPromptSlots>();
 
 const model = defineModel<string>({ default: '' });
 
@@ -77,18 +77,18 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatPr
 
 const textareaRef = useTemplateRef('textareaRef');
 
-function submit(e: Event) {
+function submit(event: Event) {
   if (model.value.trim() === '') {
     return;
   }
 
-  emits('submit', e);
+  emits('submit', event);
 }
 
-function blur(e: Event) {
+function blur(event: Event) {
   textareaRef.value?.textareaRef?.blur();
 
-  emits('close', e);
+  emits('close', event);
 }
 
 const { onKeydown: onEnter, onCompositionEnd } = useIMEGuard((event) => {
@@ -101,7 +101,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -115,7 +115,7 @@ defineExpose({
       <slot name="header" />
     </div>
 
-    <UTextarea
+    <PTextarea
       ref="textareaRef"
       v-model="model"
       :placeholder="placeholder || t('chatPrompt.placeholder')"
@@ -123,7 +123,7 @@ defineExpose({
       variant="none"
       fixed
       v-bind="{ ...textareaProps, ...$attrs }"
-      :pohon="transformPohon(omit(ui, ['root', 'body', 'header', 'footer']), pohonProp)"
+      :pohon="transformPohon(omit(pohon, ['root', 'body', 'header', 'footer']), pohonProp)"
       data-slot="body"
       :class="pohon.body({ class: pohonProp?.body })"
       @keydown.enter.exact="onEnter"
@@ -139,7 +139,7 @@ defineExpose({
           v-bind="slotData"
         />
       </template>
-    </UTextarea>
+    </PTextarea>
 
     <div
       v-if="!!slots.footer"
@@ -148,5 +148,5 @@ defineExpose({
     >
       <slot name="footer" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

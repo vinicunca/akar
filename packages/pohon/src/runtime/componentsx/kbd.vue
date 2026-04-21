@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { KbdKey } from '../composables/useKbd';
+import type { KbdKey } from '../composables/use-kbd';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/kbd';
 
 type Kbd = ComponentConfig<typeof theme, AppConfig, 'kbd'>;
 
-export interface KbdProps {
+export interface PKbdProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'kbd'
@@ -30,23 +30,23 @@ export interface KbdProps {
   pohon?: { base?: any };
 }
 
-export interface KbdSlots {
+export interface PKbdSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useKbd } from '../composables/useKbd';
+import { useKbd } from '../composables/use-kbd';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<KbdProps>(), {
+const props = withDefaults(defineProps<PKbdProps>(), {
   as: 'kbd',
 });
-defineSlots<KbdSlots>();
+defineSlots<PKbdSlots>();
 
 const { getKbdKey } = useKbd();
 const appConfig = useAppConfig() as Kbd['AppConfig'];
@@ -56,12 +56,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.kbd ||
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :class="pohon({ class: [pohonProp?.base, props.class], color: props.color, variant: props.variant, size: props.size })"
   >
     <slot>
       {{ getKbdKey(value) }}
     </slot>
-  </Primitive>
+  </APrimitive>
 </template>

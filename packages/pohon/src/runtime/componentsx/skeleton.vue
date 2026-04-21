@@ -5,7 +5,7 @@ import theme from '#build/pohon/skeleton';
 
 type Skeleton = ComponentConfig<typeof theme, AppConfig, 'skeleton'>;
 
-export interface SkeletonProps {
+export interface PSkeletonProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -18,12 +18,12 @@ export interface SkeletonProps {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = defineProps<SkeletonProps>();
+const props = defineProps<PSkeletonProps>();
 
 const appConfig = useAppConfig() as Skeleton['AppConfig'];
 const pohonProp = useComponentPohon('skeleton', props);
@@ -32,7 +32,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.skelet
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     aria-busy="true"
     aria-label="loading"
@@ -41,5 +41,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.skelet
     :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

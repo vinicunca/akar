@@ -6,7 +6,7 @@ import theme from '#build/pohon/card';
 
 type Card = ComponentConfig<typeof theme, AppConfig, 'card'>;
 
-export interface CardProps {
+export interface PCardProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -20,7 +20,7 @@ export interface CardProps {
   pohon?: Card['slots'];
 }
 
-export interface CardSlots {
+export interface PCardSlots {
   header?: (props?: {}) => Array<VNode>;
   default?: (props?: {}) => Array<VNode>;
   footer?: (props?: {}) => Array<VNode>;
@@ -29,13 +29,13 @@ export interface CardSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = defineProps<CardProps>();
-const slots = defineSlots<CardSlots>();
+const props = defineProps<PCardProps>();
+const slots = defineSlots<PCardSlots>();
 
 const appConfig = useAppConfig() as Card['AppConfig'];
 const pohonProp = useComponentPohon('card', props);
@@ -46,7 +46,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.card |
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -74,5 +74,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.card |
     >
       <slot name="footer" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

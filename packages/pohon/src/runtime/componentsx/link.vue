@@ -59,7 +59,7 @@ interface NuxtLinkProps extends Omit<RouterLinkProps, 'to'> {
   trailingSlash?: 'append' | 'remove';
 }
 
-export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
+export interface PLinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
@@ -93,7 +93,7 @@ export interface LinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Button
  */
 export type PLinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media';
 
-export interface LinkSlots {
+export interface PLinkSlots {
   default?: (props: { active: boolean }) => Array<VNode>;
 }
 
@@ -108,7 +108,7 @@ interface NuxtLinkDefaultSlotProps {
 <script setup lang="ts">
 import { useAppConfig, useNuxtApp, useRoute } from '#imports';
 import { reactiveOmit } from '@vueuse/core';
-import { Slot, useForwardProps } from 'akar';
+import { APrimitiveSlot, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { isEqual } from 'ohash/utils';
 import { hasProtocol } from 'ufo';
@@ -116,17 +116,17 @@ import { computed } from 'vue';
 import { mergeClasses } from '../utils';
 import { isPartiallyEqual } from '../utils/link';
 import { uv } from '../utils/uv';
-import ULinkBase from './LinkBase.vue';
+import PLinkBase from './link-base.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<LinkProps>(), {
+const props = withDefaults(defineProps<PLinkProps>(), {
   as: 'button',
   type: 'button',
   ariaCurrentValue: 'page',
   active: undefined,
 });
-defineSlots<LinkSlots>();
+defineSlots<PLinkSlots>();
 
 const route = useRoute();
 const appConfig = useAppConfig() as Link['AppConfig'];
@@ -253,7 +253,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
     :to="to"
     custom
   >
-    <Slot v-if="custom">
+    <APrimitiveSlot v-if="custom">
       <slot
         v-bind="{
           ...$attrs,
@@ -269,8 +269,8 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           active: isLinkActive({ route: linkRoute, isActive, isExactActive }),
         }"
       />
-    </Slot>
-    <ULinkBase
+    </APrimitiveSlot>
+    <PLinkBase
       v-else
       v-bind="{
         ...$attrs,
@@ -287,10 +287,10 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
       :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
     >
       <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
-    </ULinkBase>
+    </PLinkBase>
   </NuxtLink>
 
-  <Slot v-else-if="custom">
+  <APrimitiveSlot v-else-if="custom">
     <slot
       v-bind="{
         ...$attrs,
@@ -301,8 +301,8 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
         active: active ?? false,
       }"
     />
-  </Slot>
-  <ULinkBase
+  </APrimitiveSlot>
+  <PLinkBase
     v-else
     v-bind="{
       ...$attrs,
@@ -314,5 +314,5 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
     :class="resolveLinkClass()"
   >
     <slot :active="active ?? false" />
-  </ULinkBase>
+  </PLinkBase>
 </template>

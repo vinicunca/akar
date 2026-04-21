@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { AvatarProps, PButtonProps, PIconProps } from '../types';
+import type { PAvatarProps, PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/empty';
 
 type Empty = ComponentConfig<typeof theme, AppConfig, 'empty'>;
 
-export interface EmptyProps {
+export interface PEmptyProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -18,7 +18,7 @@ export interface EmptyProps {
    * @IconifyIcon
    */
   icon?: PIconProps['name'];
-  avatar?: AvatarProps;
+  avatar?: PAvatarProps;
   title?: string;
   description?: string;
   /**
@@ -37,7 +37,7 @@ export interface EmptyProps {
   pohon?: Empty['slots'];
 }
 
-export interface EmptySlots {
+export interface PEmptySlots {
   header?: (props?: {}) => Array<VNode>;
   leading?: (props: { pohon: Empty['pohon'] }) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
@@ -50,27 +50,30 @@ export interface EmptySlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 
-const props = defineProps<EmptyProps>();
-const slots = defineSlots<EmptySlots>();
+const props = defineProps<PEmptyProps>();
+const slots = defineSlots<PEmptySlots>();
 
 const appConfig = useAppConfig() as Empty['AppConfig'];
 const pohonProp = useComponentPohon('empty', props);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.empty || {}) })({
+const pohon = computed(() => uv({
+  extend: uv(theme),
+  ...(appConfig.pohon?.empty || {}),
+})({
   variant: props.variant,
   size: props.size,
 }));
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -146,5 +149,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.empty 
     >
       <slot name="footer" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

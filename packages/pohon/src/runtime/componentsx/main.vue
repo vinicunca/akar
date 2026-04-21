@@ -6,7 +6,7 @@ import theme from '#build/pohon/main';
 
 type Main = ComponentConfig<typeof theme, AppConfig, 'main'>;
 
-export interface MainProps {
+export interface PMainProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'main'
@@ -16,22 +16,22 @@ export interface MainProps {
   pohon?: { base?: any };
 }
 
-export interface MainSlots {
+export interface PMainSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<MainProps>(), {
+const props = withDefaults(defineProps<PMainProps>(), {
   as: 'main',
 });
-defineSlots<MainSlots>();
+defineSlots<PMainSlots>();
 
 const appConfig = useAppConfig() as Main['AppConfig'];
 const pohonProp = useComponentPohon('main', props);
@@ -40,10 +40,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.main |
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

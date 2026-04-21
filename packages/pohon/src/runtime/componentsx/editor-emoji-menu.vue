@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { EditorMenuOptions } from '../composables/useEditorMenu';
+import type { EditorMenuOptions } from '../composables/use-editor-menu';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/editor-emoji-menu';
 
 type EditorEmojiMenu = ComponentConfig<typeof theme, AppConfig, 'editorEmojiMenu'>;
 
-export interface EditorEmojiMenuItem {
+export interface PEditorEmojiMenuItem {
   name: string;
   emoji?: string;
   shortcodes: Array<string>;
@@ -16,7 +16,7 @@ export interface EditorEmojiMenuItem {
   [key: string]: any;
 }
 
-export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
+export interface PEditorEmojiMenuProps<T extends PEditorEmojiMenuItem = PEditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
   /**
    * @defaultValue 'md'
    */
@@ -27,15 +27,15 @@ export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmoj
 }
 </script>
 
-<script setup lang="ts" generic="T extends EditorEmojiMenuItem">
+<script setup lang="ts" generic="T extends PEditorEmojiMenuItem">
 import { useAppConfig } from '#imports';
 import { computed, h, nextTick, onBeforeUnmount, onMounted, toRef } from 'vue';
-import { useEditorMenu } from '../composables/useEditorMenu';
+import { useEditorMenu } from '../composables/use-editor-menu';
 import { uv } from '../utils/uv';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
+const props = withDefaults(defineProps<PEditorEmojiMenuProps<T>>(), {
   pluginKey: 'emojiMenu',
   char: ':',
   filterFields: () => ['name', 'shortcodes', 'tags'],
@@ -66,7 +66,7 @@ onMounted(async () => {
     options: props.options,
     suggestion: props.suggestion,
     appendTo: props.appendTo,
-    ui,
+    pohon,
     onSelect: (editor, range, item) => {
       if (!item.emoji) {
         return;

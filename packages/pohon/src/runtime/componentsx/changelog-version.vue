@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { BadgeProps, LinkProps, UserProps } from '../types';
+import type { PBadgeProps, PLinkProps, PUserProps } from '../types';
 import type { ImgHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/changelog-version';
 
 type ChangelogVersion = ComponentConfig<typeof theme, AppConfig, 'changelogVersion'>;
 
-export interface ChangelogVersionProps {
+export interface PChangelogVersionProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
@@ -23,9 +23,9 @@ export interface ChangelogVersionProps {
    * Can be a string or an object.
    * `{ color: 'neutral', variant: 'solid' }`{lang="ts-type"}
    */
-  badge?: string | BadgeProps;
+  badge?: string | PBadgeProps;
   /** The authors of the changelog version. */
-  authors?: Array<UserProps>;
+  authors?: Array<PUserProps>;
   /** The image of the changelog version. Can be a string or an object. */
   image?: string | (Partial<ImgHTMLAttributes> & { [key: string]: any });
   /**
@@ -33,14 +33,14 @@ export interface ChangelogVersionProps {
    * @defaultValue true
    */
   indicator?: boolean;
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   onClick?: (event: MouseEvent) => void | Promise<void>;
   class?: any;
   pohon?: ChangelogVersion['slots'];
 }
 
-export interface ChangelogVersionSlots {
+export interface PChangelogVersionSlots {
   header?: (props?: {}) => Array<VNode>;
   badge?: (props: { pohon: ChangelogVersion['pohon'] }) => Array<VNode>;
   date?: (props?: {}) => Array<VNode>;
@@ -59,23 +59,23 @@ export interface ChangelogVersionSlots {
 import ImageComponent from '#build/pohon-image-component';
 import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
-import { Primitive, useDateFormatter } from 'akar';
+import { APrimitive, useDateFormatter } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { getSlotChildrenText } from '../utils';
 import { uv } from '../utils/uv';
-import UBadge from './Badge.vue';
-import ULink from './Link.vue';
-import UUser from './User.vue';
+import PBadge from './badge.vue';
+import PLink from './link.vue';
+import PUser from './user.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<ChangelogVersionProps>(), {
+const props = withDefaults(defineProps<PChangelogVersionProps>(), {
   as: 'article',
   indicator: true,
 });
-const slots = defineSlots<ChangelogVersionSlots>();
+const slots = defineSlots<PChangelogVersionSlots>();
 
 const { locale } = useLocale();
 const appConfig = useAppConfig() as ChangelogVersion['AppConfig'];
@@ -102,7 +102,10 @@ const date = computed(() => {
   }
 
   try {
-    return formatter.custom(new Date(props.date), { dateStyle: 'medium' });
+    return formatter.custom({
+      date: new Date(props.date),
+      options: { dateStyle: 'medium' },
+    });
   } catch {
     return props.date;
   }
@@ -126,7 +129,7 @@ const ariaLabel = computed(() => {
 
 <template>
   <DefineLinkTemplate>
-    <ULink
+    <PLink
       v-if="to"
       :aria-label="ariaLabel"
       v-bind="{ to, target, ...$attrs }"
@@ -137,7 +140,7 @@ const ariaLabel = computed(() => {
         class="inset-0 absolute"
         aria-hidden="true"
       />
-    </ULink>
+    </PLink>
   </DefineLinkTemplate>
 
   <DefineDateTemplate v-slot="{ hidden }">
@@ -153,7 +156,7 @@ const ariaLabel = computed(() => {
     </time>
   </DefineDateTemplate>
 
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -201,7 +204,7 @@ const ariaLabel = computed(() => {
               name="badge"
               :pohon="pohon"
             >
-              <UBadge
+              <PBadge
                 v-if="badge"
                 color="neutral"
                 variant="solid"
@@ -273,7 +276,7 @@ const ariaLabel = computed(() => {
             :class="pohon.authors({ class: pohonProp?.authors })"
           >
             <slot name="authors">
-              <UUser
+              <PUser
                 v-for="(author, index) in authors"
                 :key="index"
                 v-bind="author"
@@ -285,5 +288,5 @@ const ariaLabel = computed(() => {
         </slot>
       </div>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

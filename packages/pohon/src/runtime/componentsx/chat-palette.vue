@@ -6,7 +6,7 @@ import theme from '#build/pohon/chat-palette';
 
 type ChatPalette = ComponentConfig<typeof theme, AppConfig, 'chatPalette'>;
 
-export interface ChatPaletteProps {
+export interface PChatPaletteProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -16,7 +16,7 @@ export interface ChatPaletteProps {
   pohon?: ChatPalette['slots'];
 }
 
-export interface ChatPaletteSlots {
+export interface PChatPaletteSlots {
   default?: (props?: {}) => Array<VNode>;
   prompt?: (props?: {}) => Array<VNode>;
 }
@@ -24,13 +24,13 @@ export interface ChatPaletteSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive, Slot } from 'akar';
+import { APrimitive, APrimitiveSlot } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = defineProps<ChatPaletteProps>();
-const slots = defineSlots<ChatPaletteSlots>();
+const props = defineProps<PChatPaletteProps>();
+const slots = defineSlots<PChatPaletteSlots>();
 
 const appConfig = useAppConfig() as ChatPalette['AppConfig'];
 const pohonProp = useComponentPohon('chatPalette', props);
@@ -39,7 +39,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatPa
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -48,17 +48,17 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatPa
       data-slot="content"
       :class="pohon.content({ class: pohonProp?.content })"
     >
-      <Slot compact>
+      <APrimitiveSlot compact>
         <slot />
-      </Slot>
+      </APrimitiveSlot>
     </div>
 
-    <Slot
+    <APrimitiveSlot
       v-if="!!slots.prompt"
       data-slot="prompt"
       :class="pohon.prompt({ class: pohonProp?.prompt })"
     >
       <slot name="prompt" />
-    </Slot>
-  </Primitive>
+    </APrimitiveSlot>
+  </APrimitive>
 </template>

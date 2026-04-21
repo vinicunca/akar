@@ -1,4 +1,5 @@
 <script lang="ts">
+/* eslint-disable no-nested-ternary */
 import type { AppConfig } from '@nuxt/schema';
 import type { ImageOptions } from '@tiptap/extension-image';
 import type { MentionOptions } from '@tiptap/extension-mention';
@@ -15,7 +16,7 @@ type Editor = ComponentConfig<typeof theme, AppConfig, 'editor'>;
 
 export type EditorContentType = 'json' | 'html' | 'markdown';
 
-export interface EditorProps<T extends Content = Content, H extends EditorCustomHandlers = EditorCustomHandlers> extends Omit<Partial<EditorOptions>, 'content' | 'element'> {
+export interface PEditorProps<T extends Content = Content, H extends EditorCustomHandlers = EditorCustomHandlers> extends Omit<Partial<EditorOptions>, 'content' | 'element'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -29,7 +30,7 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
   contentType?: EditorContentType;
   /**
    * The starter kit options to configure the editor.
-   * @defaultValue { horizontalRule: false, link: { openOnClick: false }, dropcursor: { color: 'var(--ui-primary)', width: 2 } }
+   * @defaultValue { horizontalRule: false, link: { openOnClick: false }, dropcursor: { color: 'var(--pohon-primary)', width: 2 } }
    * @see https://tiptap.dev/docs/editor/extensions/functionality/starterkit
    */
   starterKit?: Partial<StarterKitOptions>;
@@ -75,11 +76,11 @@ export interface EditorProps<T extends Content = Content, H extends EditorCustom
   pohon?: Editor['slots'];
 }
 
-export interface EditorEmits<T extends Content = Content> {
+export interface PEditorEmits<T extends Content = Content> {
   'update:modelValue': [value: T];
 }
 
-export interface EditorSlots<H extends EditorCustomHandlers = EditorCustomHandlers> {
+export interface PEditorSlots<H extends EditorCustomHandlers = EditorCustomHandlers> {
   default?: (props: { editor: TiptapEditor; handlers: EditorHandlers<H> }) => Array<VNode>;
 }
 </script>
@@ -96,7 +97,7 @@ import { Markdown } from '@tiptap/markdown';
 import StarterKit from '@tiptap/starter-kit';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import { reactiveOmit } from '@vueuse/core';
-import { Primitive, useForwardProps } from 'akar';
+import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, provide, useAttrs, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -105,19 +106,22 @@ import { uv } from '../utils/uv';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<EditorProps<T, H>>(), {
+const props = withDefaults(defineProps<PEditorProps<T, H>>(), {
   image: true,
   mention: true,
 });
-const emits = defineEmits<EditorEmits<T>>();
-defineSlots<EditorSlots<H>>();
+const emits = defineEmits<PEditorEmits<T>>();
+defineSlots<PEditorSlots<H>>();
 
 const attrs = useAttrs();
 
 const appConfig = useAppConfig() as Editor['AppConfig'];
 const pohonProp = useComponentPohon('editor', props);
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.editor || {}) })({
+const pohon = computed(() => uv({
+  extend: uv(theme),
+  ...(appConfig.pohon?.editor || {}),
+})({
   placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined,
 }));
 
@@ -137,7 +141,7 @@ const starterKit = computed(() => defu(props.starterKit, {
   code: false,
   horizontalRule: false,
   dropcursor: {
-    color: 'var(--ui-primary)',
+    color: 'var(--pohon-primary)',
     width: 2,
   },
   link: {
@@ -272,7 +276,7 @@ defineExpose({
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -290,5 +294,5 @@ defineExpose({
         :class="pohon.content({ class: pohonProp?.content })"
       />
     </template>
-  </Primitive>
+  </APrimitive>
 </template>

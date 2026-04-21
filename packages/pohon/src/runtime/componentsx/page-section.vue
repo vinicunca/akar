@@ -7,7 +7,7 @@ import theme from '#build/pohon/page-section';
 
 type PageSection = ComponentConfig<typeof theme, AppConfig, 'pageSection'>;
 
-export interface PageSectionProps {
+export interface PPageSectionProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'section'
@@ -65,16 +65,16 @@ export interface PageSectionSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UContainer from './Container.vue';
+import PContainer from './container.vue';
 import PIcon from './icon.vue';
-import UPageFeature from './PageFeature.vue';
+import PPageFeature from './page-feature.vue';
 
-const props = withDefaults(defineProps<PageSectionProps>(), {
+const props = withDefaults(defineProps<PPageSectionProps>(), {
   as: 'section',
   orientation: 'vertical',
 });
@@ -93,7 +93,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageSe
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -101,7 +101,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageSe
   >
     <slot name="top" />
 
-    <UContainer
+    <PContainer
       data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
     >
@@ -178,7 +178,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageSe
               :class="pohon.features({ class: pohonProp?.features })"
             >
               <slot name="features">
-                <UPageFeature
+                <PPageFeature
                   v-for="(feature, index) in features"
                   :key="index"
                   as="li"
@@ -218,8 +218,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageSe
         v-else-if="orientation === 'horizontal'"
         class="hidden lg:block"
       />
-    </UContainer>
+    </PContainer>
 
     <slot name="bottom" />
-  </Primitive>
+  </APrimitive>
 </template>

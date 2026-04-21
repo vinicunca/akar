@@ -35,7 +35,7 @@ function HSVtoHSL(hsv: HSVColor): HSLObject {
   };
 }
 
-export type ColorPickerProps = {
+export type PColorPickerProps = {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -72,13 +72,13 @@ export type ColorPickerProps = {
 import { useAppConfig } from '#imports';
 import { useElementBounding, useEventListener, watchPausable, watchThrottled } from '@vueuse/core';
 import { isClient } from '@vueuse/shared';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { ColorTranslator } from 'colortranslator';
 import { computed, nextTick, ref, toValue } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<ColorPickerProps>(), {
+const props = withDefaults(defineProps<PColorPickerProps>(), {
   format: 'hex',
   throttle: 50,
   defaultValue: '#FFFFFF',
@@ -265,7 +265,7 @@ const trackThumbStyle = computed(() => ({
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -310,7 +310,7 @@ const trackThumbStyle = computed(() => ({
         />
       </div>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>
 
 <style scoped>

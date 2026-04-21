@@ -6,7 +6,7 @@ import theme from '#build/pohon/page-grid';
 
 type PageGrid = ComponentConfig<typeof theme, AppConfig, 'pageGrid'>;
 
-export interface PageGridProps {
+export interface PPageGridProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -16,20 +16,20 @@ export interface PageGridProps {
   pohon?: { base?: any };
 }
 
-export interface PageGridSlots {
+export interface PPageGridSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = defineProps<PageGridProps>();
-defineSlots<PageGridSlots>();
+const props = defineProps<PPageGridProps>();
+defineSlots<PPageGridSlots>();
 
 const appConfig = useAppConfig() as PageGrid['AppConfig'];
 const pohonProp = useComponentPohon('pageGrid', props);
@@ -38,10 +38,10 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageGr
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :class="pohon({ class: [pohonProp?.base, props.class] })"
   >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

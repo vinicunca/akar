@@ -6,7 +6,7 @@ import theme from '#build/pohon/page-list';
 
 type PageList = ComponentConfig<typeof theme, AppConfig, 'pageList'>;
 
-export interface PageListProps {
+export interface PPageListProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -17,22 +17,22 @@ export interface PageListProps {
   pohon?: { base?: any };
 }
 
-export interface PageListSlots {
+export interface PPageListSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<PageListProps>(), {
+const props = withDefaults(defineProps<PPageListProps>(), {
   divide: false,
 });
-defineSlots<PageListSlots>();
+defineSlots<PPageListSlots>();
 
 const appConfig = useAppConfig() as PageList['AppConfig'];
 const pohonProp = useComponentPohon('pageList', props);
@@ -41,11 +41,11 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageLi
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     role="list"
     :class="pohon({ class: [pohonProp?.base, props.class], divide: props.divide })"
   >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

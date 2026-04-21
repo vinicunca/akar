@@ -1,23 +1,23 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { UseResizableProps } from '../composables/useResizable';
+import type { UseResizableProps } from '../composables/use-resizable';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-panel';
 
 type DashboardPanel = ComponentConfig<typeof theme, AppConfig, 'dashboardPanel'>;
 
-export interface DashboardPanelProps extends Pick<UseResizableProps, 'id' | 'minSize' | 'maxSize' | 'defaultSize' | 'resizable'> {
+export interface PDashboardPanelProps extends Pick<UseResizableProps, 'id' | 'minSize' | 'maxSize' | 'defaultSize' | 'resizable'> {
   class?: any;
   pohon?: DashboardPanel['slots'];
 }
 
-export interface DashboardPanelSlots {
+export interface PDashboardPanelSlots {
   'default'?: (props?: {}) => Array<VNode>;
   'header'?: (props?: {}) => Array<VNode>;
   'body'?: (props?: {}) => Array<VNode>;
   'footer'?: (props?: {}) => Array<VNode>;
-  'resize-handle'?: (props: { onMouseDown: (e: MouseEvent) => void; onTouchStart: (e: TouchEvent) => void; onDoubleClick: (e: MouseEvent) => void }) => Array<VNode>;
+  'resize-handle'?: (props: { onMouseDown: (event: MouseEvent) => void; onTouchStart: (event: TouchEvent) => void; onDoubleClick: (event: MouseEvent) => void }) => Array<VNode>;
 }
 </script>
 
@@ -25,18 +25,18 @@ export interface DashboardPanelSlots {
 import { useAppConfig } from '#imports';
 import { computed, toRef, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useResizable } from '../composables/useResizable';
+import { useResizable } from '../composables/use-resizable';
 import { useDashboard } from '../utils/dashboard';
 import { uv } from '../utils/uv';
-import UDashboardResizeHandle from './DashboardResizeHandle.vue';
+import PDashboardResizeHandle from './dashboard-resize-handle.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<DashboardPanelProps>(), {
+const props = withDefaults(defineProps<PDashboardPanelProps>(), {
   minSize: 15,
   resizable: false,
 });
-defineSlots<DashboardPanelSlots>();
+defineSlots<PDashboardPanelSlots>();
 
 const appConfig = useAppConfig() as DashboardPanel['AppConfig'];
 const pohonProp = useComponentPohon('dashboardPanel', props);
@@ -81,7 +81,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
     :on-touch-start="onTouchStart"
     :on-double-click="onDoubleClick"
   >
-    <UDashboardResizeHandle
+    <PDashboardResizeHandle
       v-if="resizable"
       :aria-controls="id"
       data-slot="handle"

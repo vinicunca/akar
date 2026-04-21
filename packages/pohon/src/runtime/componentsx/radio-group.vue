@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { RadioGroupRootEmits, RadioGroupRootProps } from 'akar';
+import type { ARadioGroupRootEmits, ARadioGroupRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -8,19 +8,19 @@ import theme from '#build/pohon/radio-group';
 
 type RadioGroup = ComponentConfig<typeof theme, AppConfig, 'radioGroup'>;
 
-export type RadioGroupValue = AcceptableValue;
+export type PRadioGroupValue = AcceptableValue;
 
-export type RadioGroupItem = RadioGroupValue | {
+export type PRadioGroupItem = PRadioGroupValue | {
   label?: string;
   description?: string;
   disabled?: boolean;
-  value?: RadioGroupValue;
+  value?: PRadioGroupValue;
   class?: any;
   pohon?: Pick<RadioGroup['slots'], 'item' | 'container' | 'base' | 'indicator' | 'wrapper' | 'label' | 'description'>;
   [key: string]: any;
 };
 
-export interface RadioGroupProps<T extends Array<RadioGroupItem> = Array<RadioGroupItem>, VK extends GetItemKeys<T> = 'value'> extends Pick<RadioGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'> {
+export interface PRadioGroupProps<T extends Array<PRadioGroupItem> = Array<PRadioGroupItem>, VK extends GetItemKeys<T> = 'value'> extends Pick<ARadioGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -73,47 +73,47 @@ export interface RadioGroupProps<T extends Array<RadioGroupItem> = Array<RadioGr
   pohon?: RadioGroup['slots'];
 }
 
-export type RadioGroupEmits<T extends Array<RadioGroupItem> = Array<RadioGroupItem>, VK extends GetItemKeys<T> = 'value'> = Omit<RadioGroupRootEmits, 'update:modelValue'> & {
+export type PRadioGroupEmits<T extends Array<PRadioGroupItem> = Array<PRadioGroupItem>, VK extends GetItemKeys<T> = 'value'> = Omit<ARadioGroupRootEmits, 'update:modelValue'> & {
   change: [event: Event];
 } & GetModelValueEmits<T, VK, false>;
 
-type NormalizeItem<T extends RadioGroupItem> = Exclude<T & { id: string }, RadioGroupValue>;
+type NormalizeItem<T extends PRadioGroupItem> = Exclude<T & { id: string }, PRadioGroupValue>;
 
-type SlotProps<T extends RadioGroupItem> = (props: { item: NormalizeItem<T>; modelValue: RadioGroupValue }) => Array<VNode>;
+type SlotProps<T extends PRadioGroupItem> = (props: { item: NormalizeItem<T>; modelValue: PRadioGroupValue }) => Array<VNode>;
 
-export interface RadioGroupSlots<T extends Array<RadioGroupItem> = Array<RadioGroupItem>> {
+export interface PRadioGroupSlots<T extends Array<PRadioGroupItem> = Array<PRadioGroupItem>> {
   legend?: (props?: {}) => Array<VNode>;
   label?: SlotProps<T[number]>;
   description?: SlotProps<T[number]>;
 }
 </script>
 
-<script setup lang="ts" generic="T extends RadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
+<script setup lang="ts" generic="T extends PRadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { Label, RadioGroupIndicator, RadioGroupRoot, RadioGroupItem as RRadioGroupItem, useForwardPropsEmits } from 'akar';
+import { ALabel, ARadioGroupIndicator, ARadioGroupItem, ARadioGroupRoot, useForwardPropsEmits } from 'akar';
 import { computed, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useFormField } from '../composables/useFormField';
-import { useResolvedVariants } from '../composables/useResolvedVariants';
-import { get } from '../utils';
+import { useFormField } from '../composables/use-form-field';
+import { useResolvedVariants } from '../composables/use-resolved-variants';
+import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<RadioGroupProps<T, VK>>(), {
+const props = withDefaults(defineProps<PRadioGroupProps<T, VK>>(), {
   valueKey: 'value' as never,
   labelKey: 'label',
   descriptionKey: 'description',
   orientation: 'vertical',
 });
-const emits = defineEmits<RadioGroupEmits<T, VK>>();
-const slots = defineSlots<RadioGroupSlots<T>>();
+const emits = defineEmits<PRadioGroupEmits<T, VK>>();
+const slots = defineSlots<PRadioGroupSlots<T>>();
 
 const appConfig = useAppConfig() as RadioGroup['AppConfig'];
 const pohonProp = useComponentPohon('radioGroup', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'loop', 'required'), emits);
 
-const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<RadioGroupProps<T>>(props, { bind: false });
+const { emitFormChange, emitFormInput, color, name, size, id: _id, disabled, ariaAttrs } = useFormField<PRadioGroupProps<T>>(props, { bind: false });
 const id = _id.value ?? useId();
 
 const { variant } = useResolvedVariants('radioGroup', props, theme, ['variant']);
@@ -145,9 +145,9 @@ function normalizeItem(item: any) {
     };
   }
 
-  const value = get(item, props.valueKey as string);
-  const label = get(item, props.labelKey as string);
-  const description = get(item, props.descriptionKey as string);
+  const value = getProp(item, props.valueKey as string);
+  const label = getProp(item, props.labelKey as string);
+  const description = getProp(item, props.descriptionKey as string);
 
   return {
     ...(item),
@@ -176,11 +176,11 @@ function onUpdate(value: any) {
 </script>
 
 <template>
-  <RadioGroupRoot
+  <ARadioGroupRoot
     :id="id"
     v-bind="rootProps"
-    :model-value="(modelValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
-    :default-value="(defaultValue as Exclude<RadioGroupItem, boolean> | Exclude<RadioGroupItem, boolean>[])"
+    :model-value="(modelValue as Exclude<PRadioGroupItem, boolean> | Exclude<PRadioGroupItem, boolean>[])"
+    :default-value="(defaultValue as Exclude<PRadioGroupItem, boolean> | Exclude<PRadioGroupItem, boolean>[])"
     :orientation="orientation"
     :name="name"
     :disabled="disabled"
@@ -204,7 +204,7 @@ function onUpdate(value: any) {
       </legend>
 
       <component
-        :is="variant === 'list' ? 'div' : Label"
+        :is="variant === 'list' ? 'div' : ALabel"
         v-for="item in normalizedItems"
         :key="item.value"
         data-slot="item"
@@ -214,18 +214,18 @@ function onUpdate(value: any) {
           data-slot="container"
           :class="pohon.container({ class: [pohonProp?.container, item.pohon?.container] })"
         >
-          <RRadioGroupItem
+          <ARadioGroupItem
             :id="item.id"
             :value="item.value"
             :disabled="item.disabled || disabled"
             data-slot="base"
             :class="pohon.base({ class: [pohonProp?.base, item.pohon?.base], disabled: item.disabled || disabled })"
           >
-            <RadioGroupIndicator
+            <ARadioGroupIndicator
               data-slot="indicator"
               :class="pohon.indicator({ class: [pohonProp?.indicator, item.pohon?.indicator] })"
             />
-          </RRadioGroupItem>
+          </ARadioGroupItem>
         </div>
 
         <div
@@ -234,7 +234,7 @@ function onUpdate(value: any) {
           :class="pohon.wrapper({ class: [pohonProp?.wrapper, item.pohon?.wrapper] })"
         >
           <component
-            :is="variant === 'list' ? Label : 'p'"
+            :is="variant === 'list' ? ALabel : 'p'"
             v-if="item.label || !!slots.label"
             :for="item.id"
             data-slot="label"
@@ -243,7 +243,7 @@ function onUpdate(value: any) {
             <slot
               name="label"
               :item="item"
-              :model-value="(modelValue as RadioGroupValue)"
+              :model-value="(modelValue as PRadioGroupValue)"
             >
               {{ item.label }}
             </slot>
@@ -256,7 +256,7 @@ function onUpdate(value: any) {
             <slot
               name="description"
               :item="item"
-              :model-value="(modelValue as RadioGroupValue)"
+              :model-value="(modelValue as PRadioGroupValue)"
             >
               {{ item.description }}
             </slot>
@@ -264,5 +264,5 @@ function onUpdate(value: any) {
         </div>
       </component>
     </fieldset>
-  </RadioGroupRoot>
+  </ARadioGroupRoot>
 </template>

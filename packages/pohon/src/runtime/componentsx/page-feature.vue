@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { LinkProps, PIconProps } from '../types';
+import type { PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/page-feature';
 
 type PageFeature = ComponentConfig<typeof theme, AppConfig, 'pageFeature'>;
 
-export interface PageFeatureProps {
+export interface PPageFeatureProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -25,14 +25,14 @@ export interface PageFeatureProps {
    * @defaultValue 'horizontal'
    */
   orientation?: PageFeature['variants']['orientation'];
-  to?: LinkProps['to'];
-  target?: LinkProps['target'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
   onClick?: (event: MouseEvent) => void | Promise<void>;
   class?: any;
   pohon?: PageFeature['slots'];
 }
 
-export interface PageFeatureSlots {
+export interface PPageFeatureSlots {
   leading?: (props: { pohon: PageFeature['pohon'] }) => Array<VNode>;
   title?: (props?: {}) => Array<VNode>;
   description?: (props?: {}) => Array<VNode>;
@@ -42,20 +42,20 @@ export interface PageFeatureSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getSlotChildrenText } from '../utils';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
-import ULink from './Link.vue';
+import PLink from './link.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<PageFeatureProps>(), {
+const props = withDefaults(defineProps<PPageFeatureProps>(), {
   orientation: 'horizontal',
 });
-const slots = defineSlots<PageFeatureSlots>();
+const slots = defineSlots<PPageFeatureSlots>();
 
 const appConfig = useAppConfig() as PageFeature['AppConfig'];
 const pohonProp = useComponentPohon('pageFeature', props);
@@ -73,7 +73,7 @@ const ariaLabel = computed(() => {
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -102,7 +102,7 @@ const ariaLabel = computed(() => {
       data-slot="wrapper"
       :class="pohon.wrapper({ class: pohonProp?.wrapper })"
     >
-      <ULink
+      <PLink
         v-if="to"
         :aria-label="ariaLabel"
         v-bind="{ to, target, ...$attrs }"
@@ -113,7 +113,7 @@ const ariaLabel = computed(() => {
           class="inset-0 absolute"
           aria-hidden="true"
         />
-      </ULink>
+      </PLink>
 
       <slot>
         <div
@@ -137,5 +137,5 @@ const ariaLabel = computed(() => {
         </div>
       </slot>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

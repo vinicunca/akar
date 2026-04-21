@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ToastProviderProps } from 'akar';
+import type { AToastProviderProps } from 'akar';
 import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/toaster';
 
 type Toaster = ComponentConfig<typeof theme, AppConfig, 'toaster'>;
 
-export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'> {
+export interface PToasterProps extends Omit<AToastProviderProps, 'swipeDirection'> {
   /**
    * The position on the screen to display the toasts.
    * @defaultValue 'bottom-right'
@@ -37,35 +37,35 @@ export interface ToasterProps extends Omit<ToastProviderProps, 'swipeDirection'>
   pohon?: Toaster['slots'];
 }
 
-export interface ToasterSlots {
+export interface PToasterSlots {
   default?: (props?: {}) => Array<VNode>;
 }
 
 export default {
-  name: 'Toaster',
+  name: 'PToaster',
 };
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import { ToastPortal, ToastProvider, ToastViewport, useForwardProps } from 'akar';
+import { AToastPortal, AToastProvider, AToastViewport, useForwardProps } from 'akar';
 import { computed, provide, ref, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { usePortal } from '../composables/usePortal';
-import { toastMaxInjectionKey, useToast } from '../composables/useToast';
+import { usePortal } from '../composables/use-portal';
+import { toastMaxInjectionKey, useToast } from '../composables/use-toast';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';
-import UToast from './Toast.vue';
+import PToast from './toast.vue';
 
-const props = withDefaults(defineProps<ToasterProps>(), {
+const props = withDefaults(defineProps<PToasterProps>(), {
   expand: true,
   portal: true,
   duration: 5000,
   progress: true,
   max: 5,
 });
-defineSlots<ToasterSlots>();
+defineSlots<PToasterSlots>();
 
 const { toasts, remove } = useToast();
 const appConfig = useAppConfig() as Toaster['AppConfig'];
@@ -119,13 +119,13 @@ function getOffset(index: number) {
 </script>
 
 <template>
-  <ToastProvider
+  <AToastProvider
     :swipe-direction="swipeDirection"
     v-bind="providerProps"
   >
     <slot />
 
-    <UToast
+    <PToast
       v-for="(toast, index) of toasts"
       :key="toast.id"
       ref="refs"
@@ -149,8 +149,8 @@ function getOffset(index: number) {
       @click="toast.onClick && toast.onClick(toast)"
     />
 
-    <ToastPortal v-bind="portalProps">
-      <ToastViewport
+    <AToastPortal v-bind="portalProps">
+      <AToastViewport
         :data-expanded="expanded"
         data-slot="viewport"
         :class="pohon.viewport({ class: [pohonProp?.viewport, props.class] })"
@@ -164,6 +164,6 @@ function getOffset(index: number) {
         @mouseenter="hovered = true"
         @mouseleave="hovered = false"
       />
-    </ToastPortal>
-  </ToastProvider>
+    </AToastPortal>
+  </AToastProvider>
 </template>

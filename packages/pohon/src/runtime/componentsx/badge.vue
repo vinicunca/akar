@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { UseComponentIconsProps } from '../composables/useComponentIcons';
-import type { AvatarProps } from '../types';
+import type { UseComponentIconsProps } from '../composables/use-component-icons';
+import type { PAvatarProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/badge';
 
 type Badge = ComponentConfig<typeof theme, AppConfig, 'badge'>;
 
-export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface PBadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'span'
@@ -33,7 +33,7 @@ export interface BadgeProps extends Omit<UseComponentIconsProps, 'loading' | 'lo
   pohon?: Badge['slots'];
 }
 
-export interface BadgeSlots {
+export interface PBadgeSlots {
   leading?: (props: { pohon: Badge['pohon'] }) => Array<VNode>;
   default?: (props: { pohon: Badge['pohon'] }) => Array<VNode>;
   trailing?: (props: { pohon: Badge['pohon'] }) => Array<VNode>;
@@ -42,23 +42,23 @@ export interface BadgeSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useComponentIcons } from '../composables/useComponentIcons';
-import { useFieldGroup } from '../composables/useFieldGroup';
+import { useFieldGroup } from '../composables/use-field-group';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PIcon from './icon.vue';
 
-const props = withDefaults(defineProps<BadgeProps>(), {
+const props = withDefaults(defineProps<PBadgeProps>(), {
   as: 'span',
 });
-const slots = defineSlots<BadgeSlots>();
+const slots = defineSlots<PBadgeSlots>();
 
 const appConfig = useAppConfig() as Badge['AppConfig'];
 const pohonProp = useComponentPohon('badge', props);
-const { orientation, size: fieldGroupSize } = useFieldGroup<BadgeProps>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<PBadgeProps>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.badge || {}) })({
@@ -71,7 +71,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.badge 
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="base"
     :class="pohon.base({ class: [pohonProp?.base, props.class] })"
@@ -88,7 +88,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.badge 
       />
       <PAvatar
         v-else-if="!!avatar"
-        :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as AvatarProps['size'])"
+        :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
         data-slot="leadingAvatar"
         :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
@@ -116,5 +116,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.badge 
         :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
       />
     </slot>
-  </Primitive>
+  </APrimitive>
 </template>

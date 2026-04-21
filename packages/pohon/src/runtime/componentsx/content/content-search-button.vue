@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { PButtonProps, ButtonSlots, PIconProps, KbdProps, PLinkPropsKeys, TooltipProps } from '../../types';
+import type { PButtonProps, PButtonSlots, PIconProps, PKbdProps, PLinkPropsKeys, PTooltipProps } from '../../types';
 import type { ComponentConfig } from '../../types/uv';
 import theme from '#build/pohon/content/content-search-button';
 
 type ContentSearchButton = ComponentConfig<typeof theme, AppConfig, 'contentSearchButton'>;
 
-export interface ContentSearchButtonProps extends Omit<PButtonProps, PLinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
+export interface PContentSearchButtonProps extends Omit<PButtonProps, PLinkPropsKeys | 'icon' | 'label' | 'color' | 'variant'> {
   /**
    * The icon displayed in the button.
    * @defaultValue appConfig.pohon.icons.search
@@ -37,13 +37,13 @@ export interface ContentSearchButtonProps extends Omit<PButtonProps, PLinkPropsK
    * Display a tooltip on the button when is collapsed with the button label.
    * This has priority over the global `tooltip` prop.
    */
-  tooltip?: boolean | TooltipProps;
+  tooltip?: boolean | PTooltipProps;
   /**
    * The keyboard keys to display in the button.
    * `{ variant: 'subtle' }`{lang="ts-type"}
    * @defaultValue ['meta', 'k']
    */
-  kbds?: Array<KbdProps['value']> | Array<KbdProps>;
+  kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   pohon?: ContentSearchButton['slots'] & PButtonProps['pohon'];
   class?: any;
 }
@@ -52,34 +52,34 @@ export interface ContentSearchButtonProps extends Omit<PButtonProps, PLinkPropsK
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
-import { defu } from 'defu';
 import { useForwardProps } from 'akar';
+import { defu } from 'defu';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
-import { useContentSearch } from '../../composables/useContentSearch';
+import { useContentSearch } from '../../composables/use-content-search';
 import { useLocale } from '../../composables/use-locale';
 import { omit, transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';
 import PButton from '../button.vue';
-import UKbd from '../Kbd.vue';
-import UTooltip from '../Tooltip.vue';
+import PKbd from '../kbd.vue';
+import PTooltip from '../tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<ContentSearchButtonProps>(), {
+const props = withDefaults(defineProps<PContentSearchButtonProps>(), {
   color: 'neutral',
   collapsed: true,
   tooltip: false,
   kbds: () => ['meta', 'k'],
 });
-const slots = defineSlots<ButtonSlots>();
+const slots = defineSlots<PButtonSlots>();
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate();
 
 const getProxySlots = () => omit(slots, ['trailing']);
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'label', 'variant', 'collapsed', 'tooltip', 'kbds', 'class', 'pohon'));
-const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as TooltipProps);
+const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as PTooltipProps);
 
 const { t } = useLocale();
 const { open } = useContentSearch();
@@ -106,7 +106,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.conten
         ...$attrs,
       }"
       :class="pohon.base({ class: [pohonProp?.base, props.class] })"
-      :pohon="transformPohon(ui, pohonProp)"
+      :pohon="transformPohon(pohon, pohonProp)"
       @click="open = true"
     >
       <template
@@ -129,7 +129,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.conten
             :pohon="uiProxy"
           >
             <template v-if="kbds?.length">
-              <UKbd
+              <PKbd
                 v-for="(kbd, index) in kbds"
                 :key="index"
                 variant="subtle"
@@ -142,12 +142,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.conten
     </PButton>
   </DefineButtonTemplate>
 
-  <UTooltip
+  <PTooltip
     v-if="collapsed && tooltip"
     :text="label || t('contentSearchButton.label')"
     v-bind="tooltipProps"
   >
     <ReuseButtonTemplate />
-  </UTooltip>
+  </PTooltip>
   <ReuseButtonTemplate v-else />
 </template>

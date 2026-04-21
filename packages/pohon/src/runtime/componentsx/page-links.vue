@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { LinkProps, PIconProps } from '../types';
+import type { PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/page-links';
 
 type PageLinks = ComponentConfig<typeof theme, AppConfig, 'pageLinks'>;
 
-export interface PageLink extends Omit<LinkProps, 'custom'> {
+export interface PPageLink extends Omit<PLinkProps, 'custom'> {
   label: string;
   /**
    * @IconifyIcon
@@ -17,7 +17,7 @@ export interface PageLink extends Omit<LinkProps, 'custom'> {
   pohon?: Pick<PageLinks['slots'], 'item' | 'link' | 'linkLabel' | 'linkLabelExternalIcon' | 'linkLeadingIcon'>;
 }
 
-export interface PageLinksProps<T extends PageLink = PageLink> {
+export interface PPageLinksProps<T extends PPageLink = PPageLink> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'nav'
@@ -31,7 +31,7 @@ export interface PageLinksProps<T extends PageLink = PageLink> {
 
 type SlotProps<T> = (props: { link: T; active: boolean; pohon: PageLinks['pohon'] }) => Array<VNode>;
 
-export interface PageLinksSlots<T extends PageLink = PageLink> {
+export interface PPageLinksSlots<T extends PPageLink = PPageLink> {
   'title'?: (props?: {}) => Array<VNode>;
   'link'?: SlotProps<T>;
   'link-leading'?: SlotProps<T>;
@@ -40,21 +40,21 @@ export interface PageLinksSlots<T extends PageLink = PageLink> {
 }
 </script>
 
-<script setup lang="ts" generic="T extends PageLink">
+<script setup lang="ts" generic="T extends PPageLink">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
 import PIcon from './icon.vue';
-import ULink from './Link.vue';
-import ULinkBase from './LinkBase.vue';
+import PLinkBase from './link-base.vue';
+import PLink from './link.vue';
 
-const props = withDefaults(defineProps<PageLinksProps<T>>(), {
+const props = withDefaults(defineProps<PPageLinksProps<T>>(), {
   as: 'nav',
 });
-const slots = defineSlots<PageLinksSlots<T>>();
+const slots = defineSlots<PPageLinksSlots<T>>();
 
 const appConfig = useAppConfig() as PageLinks['AppConfig'];
 const pohonProp = useComponentPohon('pageLinks', props);
@@ -63,7 +63,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageLi
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -88,12 +88,12 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageLi
         data-slot="item"
         :class="pohon.item({ class: [pohonProp?.item, link.pohon?.item] })"
       >
-        <ULink
+        <PLink
           v-slot="{ active, ...slotProps }"
           v-bind="pickLinkProps(link)"
           custom
         >
-          <ULinkBase
+          <PLinkBase
             v-bind="slotProps"
             data-slot="link"
             :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active })"
@@ -145,9 +145,9 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageLi
                 :active="active"
               />
             </slot>
-          </ULinkBase>
-        </ULink>
+          </PLinkBase>
+        </PLink>
       </li>
     </ul>
-  </Primitive>
+  </APrimitive>
 </template>

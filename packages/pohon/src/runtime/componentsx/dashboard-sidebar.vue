@@ -1,17 +1,17 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
-import type { UseResizableProps } from '../composables/useResizable';
-import type { DrawerProps, ModalProps, PButtonProps, PLinkPropsKeys, SlideoverProps } from '../types';
+import type { UseResizableProps } from '../composables/use-resizable';
+import type { PButtonProps, PDialogProps, PDrawerProps, PLinkPropsKeys, PSlideoverProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-sidebar';
 
 type DashboardSidebar = ComponentConfig<typeof theme, AppConfig, 'dashboardSidebar'>;
 
 type DashboardSidebarMode = 'modal' | 'slideover' | 'drawer';
-type DashboardSidebarMenu<T> = T extends 'modal' ? ModalProps : T extends 'slideover' ? SlideoverProps : T extends 'drawer' ? DrawerProps : never;
+type DashboardSidebarMenu<T> = T extends 'modal' ? PDialogProps : T extends 'slideover' ? PSlideoverProps : T extends 'drawer' ? PDrawerProps : never;
 
-export interface DashboardSidebarProps<T extends DashboardSidebarMode = DashboardSidebarMode> extends Pick<UseResizableProps, 'id' | 'side' | 'minSize' | 'maxSize' | 'defaultSize' | 'resizable' | 'collapsible' | 'collapsedSize'> {
+export interface PDashboardSidebarProps<T extends DashboardSidebarMode = DashboardSidebarMode> extends Pick<UseResizableProps, 'id' | 'side' | 'minSize' | 'maxSize' | 'defaultSize' | 'resizable' | 'collapsible' | 'collapsedSize'> {
   /**
    * The mode of the sidebar menu.
    * @defaultValue 'modal'
@@ -41,13 +41,13 @@ export interface DashboardSidebarProps<T extends DashboardSidebarMode = Dashboar
   pohon?: DashboardSidebar['slots'];
 }
 
-export interface DashboardSidebarSlots {
+export interface PDashboardSidebarSlots {
   'header'?: (props: { collapsed: boolean; collapse: (value: boolean) => void }) => Array<VNode>;
   'default'?: (props: { collapsed: boolean; collapse: (value: boolean) => void }) => Array<VNode>;
   'footer'?: (props: { collapsed: boolean; collapse: (value: boolean) => void }) => Array<VNode>;
   'toggle'?: (props: { open: boolean; toggle: () => void; pohon: DashboardSidebar['pohon'] }) => Array<VNode>;
   'content'?: (props: { close?: () => void }) => Array<VNode>;
-  'resize-handle'?: (props: { onMouseDown: (e: MouseEvent) => void; onTouchStart: (e: TouchEvent) => void; onDoubleClick: (e: MouseEvent) => void; pohon: DashboardSidebar['pohon'] }) => Array<VNode>;
+  'resize-handle'?: (props: { onMouseDown: (event: MouseEvent) => void; onTouchStart: (event: TouchEvent) => void; onDoubleClick: (event: MouseEvent) => void; pohon: DashboardSidebar['pohon'] }) => Array<VNode>;
 }
 </script>
 
@@ -58,18 +58,18 @@ import { defu } from 'defu';
 import { computed, ref, toRef, useId, watch } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
-import { useResizable } from '../composables/useResizable';
+import { useResizable } from '../composables/use-resizable';
 import { useDashboard } from '../utils/dashboard';
 import { uv } from '../utils/uv';
-import UDashboardResizeHandle from './DashboardResizeHandle.vue';
-import UDashboardSidebarToggle from './DashboardSidebarToggle.vue';
-import UDrawer from './Drawer.vue';
-import UModal from './Modal.vue';
-import USlideover from './Slideover.vue';
+import PDashboardResizeHandle from './dashboard-resize-handle.vue';
+import PDashboardSidebarToggle from './dashboard-sidebar-toggle.vue';
+import PDialog from './dialog.vue';
+import PDrawer from './drawer.vue';
+import PSlideover from './slideover.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<DashboardSidebarProps<T>>(), {
+const props = withDefaults(defineProps<PDashboardSidebarProps<T>>(), {
   side: 'left',
   mode: 'slideover' as never,
   autoClose: true,
@@ -82,7 +82,7 @@ const props = withDefaults(defineProps<DashboardSidebarProps<T>>(), {
   collapsible: false,
   collapsedSize: 0,
 });
-const slots = defineSlots<DashboardSidebarSlots>();
+const slots = defineSlots<PDashboardSidebarSlots>();
 
 const open = defineModel<boolean>('open', { default: false });
 const collapsed = defineModel<boolean>('collapsed', { default: false });
@@ -114,8 +114,20 @@ useRuntimeHook('dashboard:sidebar:collapse', (value: boolean) => {
   isCollapsed.value = value;
 });
 
-watch(open, () => dashboardContext.sidebarOpen!.value = open.value, { immediate: true });
-watch(isCollapsed, () => dashboardContext.sidebarCollapsed!.value = isCollapsed.value, { immediate: true });
+watch(
+  open,
+  () => {
+    dashboardContext.sidebarOpen!.value = open.value;
+  },
+  { immediate: true },
+);
+watch(
+  isCollapsed,
+  () => {
+    dashboardContext.sidebarCollapsed!.value = isCollapsed.value;
+  },
+  { immediate: true },
+);
 
 watch(() => route.fullPath, () => {
   if (!props.autoClose) {
@@ -130,12 +142,17 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
 }));
 
 const Menu = computed(() => ({
-  slideover: USlideover,
-  modal: UModal,
-  drawer: UDrawer,
+  slideover: PSlideover,
+  modal: PDialog,
+  drawer: PDrawer,
 })[props.mode as DashboardSidebarMode]);
 
-const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: 'left' } : {}) as DashboardSidebarMenu<T>);
+const menuProps = toRef(() => defu(
+  props.menu,
+  {},
+  // eslint-disable-next-line no-nested-ternary
+  props.mode === 'modal' ? { fullscreen: true, transition: false } : props.mode === 'slideover' ? { side: 'left' } : {},
+) as DashboardSidebarMenu<T>);
 
 function toggleOpen() {
   open.value = !open.value;
@@ -150,7 +167,7 @@ function toggleOpen() {
       :toggle="toggleOpen"
       :pohon="pohon"
     >
-      <UDashboardSidebarToggle
+      <PDashboardSidebarToggle
         v-if="toggle"
         v-bind="(typeof toggle === 'object' ? toggle : {})"
         :side="toggleSide"
@@ -168,7 +185,7 @@ function toggleOpen() {
       :on-double-click="onDoubleClick"
       :pohon="pohon"
     >
-      <UDashboardResizeHandle
+      <PDashboardResizeHandle
         v-if="resizable"
         :aria-controls="id"
         data-slot="handle"

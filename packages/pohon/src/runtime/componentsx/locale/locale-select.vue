@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { PSelectMenuProps } from '../../types';
-import type { Locale } from '../../types/locale';
+import type { PLocale } from '../../types/locale';
 
-export interface LocaleSelectProps extends Omit<PSelectMenuProps<Array<Locale<any>>, 'code', false>, 'items' | 'modelValue'> {
-  locales?: Array<Locale<any>>;
+export interface PLocaleSelectProps extends Omit<PSelectMenuProps<Array<PLocale<any>>, 'code', false>, 'items' | 'modelValue'> {
+  locales?: Array<PLocale<any>>;
 }
 </script>
 
@@ -14,7 +14,7 @@ import PSelectMenu from '../select-menu.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<LocaleSelectProps>(), {
+const props = withDefaults(defineProps<PLocaleSelectProps>(), {
   searchInput: false,
   valueKey: 'code',
   labelKey: 'name',

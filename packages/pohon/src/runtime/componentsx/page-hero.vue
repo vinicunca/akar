@@ -7,7 +7,7 @@ import theme from '#build/pohon/page-hero';
 
 type PageHero = ComponentConfig<typeof theme, AppConfig, 'pageHero'>;
 
-export interface PageHeroProps {
+export interface PPageHeroProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -35,7 +35,7 @@ export interface PageHeroProps {
   pohon?: PageHero['slots'];
 }
 
-export interface PageHeroSlots {
+export interface PPageHeroSlots {
   top?: (props?: {}) => Array<VNode>;
   header?: (props?: {}) => Array<VNode>;
   headline?: (props?: {}) => Array<VNode>;
@@ -51,17 +51,17 @@ export interface PageHeroSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
-import UContainer from './Container.vue';
+import PContainer from './container.vue';
 
-const props = withDefaults(defineProps<PageHeroProps>(), {
+const props = withDefaults(defineProps<PPageHeroProps>(), {
   orientation: 'vertical',
 });
-const slots = defineSlots<PageHeroSlots>();
+const slots = defineSlots<PPageHeroSlots>();
 
 const appConfig = useAppConfig() as PageHero['AppConfig'];
 const pohonProp = useComponentPohon('pageHero', props);
@@ -74,7 +74,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageHe
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     :data-orientation="orientation"
     data-slot="root"
@@ -82,7 +82,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageHe
   >
     <slot name="top" />
 
-    <UContainer
+    <PContainer
       data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
     >
@@ -166,8 +166,8 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageHe
         v-else-if="orientation === 'horizontal'"
         class="hidden lg:block"
       />
-    </UContainer>
+    </PContainer>
 
     <slot name="bottom" />
-  </Primitive>
+  </APrimitive>
 </template>

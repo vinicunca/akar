@@ -3,13 +3,13 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import type { VNode } from 'vue';
-import type { CommandPaletteGroup, CommandPaletteItem, CommandPaletteProps, CommandPaletteSlots, InputProps, ModalProps, PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
+import type { PButtonProps, PCommandPaletteGroup, PCommandPaletteItem, PCommandPaletteProps, PCommandPaletteSlots, PDialogProps, PIconProps, PInputProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-search';
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>;
 
-export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPaletteItem> extends Pick<ModalProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface PDashboardSearchProps<T extends PCommandPaletteItem = PCommandPaletteItem> extends Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
   /**
    * @defaultValue 'md'
    */
@@ -24,7 +24,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    * The placeholder text for the input.
    * @defaultValue t('commandPalette.placeholder')
    */
-  placeholder?: InputProps['placeholder'];
+  placeholder?: PInputProps['placeholder'];
   /**
    * Automatically focus the input when component is mounted.
    * @defaultValue true
@@ -56,7 +56,7 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    * @defaultValue 'meta_k'
    */
   shortcut?: string;
-  groups?: Array<CommandPaletteGroup<T>>;
+  groups?: Array<PCommandPaletteGroup<T>>;
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://pohon.nuxt.com/docs/components/command-palette).
    * @defaultValue {}
@@ -68,10 +68,10 @@ export interface DashboardSearchProps<T extends CommandPaletteItem = CommandPale
    */
   colorMode?: boolean;
   class?: any;
-  pohon?: DashboardSearch['slots'] & CommandPaletteProps<CommandPaletteGroup<CommandPaletteItem>, CommandPaletteItem>['pohon'];
+  pohon?: DashboardSearch['slots'] & PCommandPaletteProps<PCommandPaletteGroup<PCommandPaletteItem>, PCommandPaletteItem>['pohon'];
 }
 
-export type DashboardSearchSlots = CommandPaletteSlots<CommandPaletteItem> & {
+export type PDashboardSearchSlots = PCommandPaletteSlots<PCommandPaletteItem> & {
   content?: (props: { close: () => void }) => Array<VNode>;
 };
 
@@ -87,16 +87,16 @@ import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { omit, transformPohon } from '../utils';
 import { uv } from '../utils/uv';
-import UCommandPalette from './CommandPalette.vue';
-import UModal from './Modal.vue';
+import PCommandPalette from './command-palette.vue';
+import PDialog from './dialog.vue';
 
-const props = withDefaults(defineProps<DashboardSearchProps>(), {
+const props = withDefaults(defineProps<PDashboardSearchProps>(), {
   shortcut: 'meta_k',
   colorMode: true,
   close: true,
   fullscreen: false,
 });
-const slots = defineSlots<DashboardSearchSlots>();
+const slots = defineSlots<PDashboardSearchSlots>();
 
 const open = defineModel<boolean>('open', { default: false });
 const searchTerm = defineModel<string>('searchTerm', { default: '' });
@@ -165,7 +165,7 @@ const groups = computed(() => {
 
 const commandPaletteRef = useTemplateRef('commandPaletteRef');
 
-function onSelect(item: CommandPaletteItem) {
+function onSelect(item: PCommandPaletteItem) {
   if (item.disabled) {
     return;
   }
@@ -179,7 +179,9 @@ function onSelect(item: CommandPaletteItem) {
 defineShortcuts({
   [props.shortcut]: {
     usingInput: true,
-    handler: () => open.value = !open.value,
+    handler: () => {
+      open.value = !open.value;
+    },
   },
 });
 
@@ -189,7 +191,7 @@ defineExpose({
 </script>
 
 <template>
-  <UModal
+  <PDialog
     v-model:open="open"
     :title="title || t('dashboardSearch.title')"
     :description="description || t('dashboardSearch.description')"
@@ -202,14 +204,14 @@ defineExpose({
         name="content"
         v-bind="contentData"
       >
-        <UCommandPalette
+        <PCommandPalette
           ref="commandPaletteRef"
           v-model:search-term="searchTerm"
           v-bind="commandPaletteProps"
           :groups="groups"
           :fuse="fuse"
           :input="{ fixed: true }"
-          :pohon="transformPohon(omit(ui, ['modal']), pohonProp)"
+          :pohon="transformPohon(omit(pohon, ['modal']), pohonProp)"
           @update:model-value="onSelect"
           @update:open="open = $event"
         >
@@ -222,8 +224,8 @@ defineExpose({
               v-bind="slotData"
             />
           </template>
-        </UCommandPalette>
+        </PCommandPalette>
       </slot>
     </template>
-  </UModal>
+  </PDialog>
 </template>

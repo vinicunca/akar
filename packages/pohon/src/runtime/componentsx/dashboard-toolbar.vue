@@ -6,7 +6,7 @@ import theme from '#build/pohon/dashboard-toolbar';
 
 type DashboardToolbar = ComponentConfig<typeof theme, AppConfig, 'dashboardToolbar'>;
 
-export interface DashboardToolbarProps {
+export interface PDashboardToolbarProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -16,7 +16,7 @@ export interface DashboardToolbarProps {
   pohon?: DashboardToolbar['slots'];
 }
 
-export interface DashboardToolbarSlots {
+export interface PDashboardToolbarSlots {
   default?: (props?: {}) => Array<VNode>;
   left?: (props?: {}) => Array<VNode>;
   right?: (props?: {}) => Array<VNode>;
@@ -25,13 +25,13 @@ export interface DashboardToolbarSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
-const props = defineProps<DashboardToolbarProps>();
-defineSlots<DashboardToolbarSlots>();
+const props = defineProps<PDashboardToolbarProps>();
+defineSlots<PDashboardToolbarSlots>();
 
 const appConfig = useAppConfig() as DashboardToolbar['AppConfig'];
 const pohonProp = useComponentPohon('dashboardToolbar', props);
@@ -40,7 +40,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -60,5 +60,5 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
         <slot name="right" />
       </div>
     </slot>
-  </Primitive>
+  </APrimitive>
 </template>

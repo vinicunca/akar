@@ -1,26 +1,33 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { SegmentPart, TimeFieldRootEmits, TimeFieldRootProps, TimeRangeFieldRootEmits, TimeRangeFieldRootProps, TimeValue } from 'akar';
+import type {
+  ATimeFieldRootEmits,
+  ATimeFieldRootProps,
+  ATimeRangeFieldRootEmits,
+  ATimeRangeFieldRootProps,
+  SegmentPart,
+  TimeValue,
+} from 'akar';
 import type { ComponentPublicInstance, VNode } from 'vue';
-import type { UseComponentIconsProps } from '../composables/useComponentIcons';
-import type { AAvatarProps, PIconProps } from '../types';
+import type { UseComponentIconsProps } from '../composables/use-component-icons';
+import type { PAvatarProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/input-time';
 
 type InputTime = ComponentConfig<typeof theme, AppConfig, 'inputTime'>;
 
 type InputTimeDefaultValue<R extends boolean = false> = R extends true
-  ? TimeRangeFieldRootProps['defaultValue']
-  : TimeFieldRootProps['defaultValue'];
+  ? ATimeRangeFieldRootProps['defaultValue']
+  : ATimeFieldRootProps['defaultValue'];
 
 type InputTimeModelValue<R extends boolean = false> = (R extends true
-  ? TimeRangeFieldRootProps['modelValue']
-  : TimeFieldRootProps['modelValue']) | undefined;
+  ? ATimeRangeFieldRootProps['modelValue']
+  : ATimeFieldRootProps['modelValue']) | undefined;
 
-type _TimeFieldRootProps = Omit<TimeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
-type _TimeRangeFieldRootProps = Omit<TimeRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
+type _TimeFieldRootProps = Omit<ATimeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
+type _TimeRangeFieldRootProps = Omit<ATimeRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
 
-export interface InputTimeProps<R extends boolean = false> extends UseComponentIconsProps, _TimeFieldRootProps, _TimeRangeFieldRootProps {
+export interface PInputTimeProps<R extends boolean = false> extends UseComponentIconsProps, _TimeFieldRootProps, _TimeRangeFieldRootProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -63,14 +70,14 @@ export interface InputTimeProps<R extends boolean = false> extends UseComponentI
   pohon?: InputTime['slots'];
 }
 
-export interface InputTimeEmits<R extends boolean = false> extends Omit<TimeFieldRootEmits & TimeRangeFieldRootEmits, 'update:modelValue'> {
+export interface PInputTimeEmits<R extends boolean = false> extends Omit<ATimeFieldRootEmits & ATimeRangeFieldRootEmits, 'update:modelValue'> {
   'update:modelValue': [value: InputTimeModelValue<R>];
   'change': [event: Event];
   'blur': [event: FocusEvent];
   'focus': [event: FocusEvent];
 }
 
-export interface InputTimeSlots {
+export interface PInputTimeSlots {
   leading?: (props: { pohon: InputTime['pohon'] }) => Array<VNode>;
   default?: (props: { pohon: InputTime['pohon'] }) => Array<VNode>;
   trailing?: (props: { pohon: InputTime['pohon'] }) => Array<VNode>;
@@ -81,32 +88,32 @@ export interface InputTimeSlots {
 <script setup lang="ts" generic="R extends boolean">
 import { useAppConfig } from '#imports';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
-import { TimeRangeFieldInput, TimeRangeFieldRoot, useForwardPropsEmits } from 'akar';
-import { TimeField as SingleTimeField } from 'akar/namespaced';
+import { ATimeRangeFieldInput, ATimeRangeFieldRoot, useForwardPropsEmits } from 'akar';
+import { ATimeField } from 'akar/namespaced';
 import { computed, onMounted, ref } from 'vue';
+import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useComponentIcons } from '../composables/useComponentIcons';
-import { useFieldGroup } from '../composables/useFieldGroup';
-import { useFormField } from '../composables/useFormField';
+import { useFieldGroup } from '../composables/use-field-group';
+import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<InputTimeProps<R>>(), {
+const props = withDefaults(defineProps<PInputTimeProps<R>>(), {
   autofocusDelay: 0,
 });
-const emits = defineEmits<InputTimeEmits<R>>();
-const slots = defineSlots<InputTimeSlots>();
+const emits = defineEmits<PInputTimeEmits<R>>();
+const slots = defineSlots<PInputTimeSlots>();
 
 const appConfig = useAppConfig() as InputTime['AppConfig'];
 const pohonProp = useComponentPohon('inputTime', props);
 
 const rootProps = useForwardPropsEmits(reactiveOmit(props, 'id', 'name', 'range', 'modelValue', 'defaultValue', 'color', 'variant', 'size', 'highlight', 'fixed', 'disabled', 'autofocus', 'autofocusDelay', 'icon', 'avatar', 'leading', 'leadingIcon', 'trailing', 'trailingIcon', 'loading', 'loadingIcon', 'separatorIcon', 'class', 'pohon'), emits);
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formFieldSize, name, highlight, disabled, ariaAttrs } = useFormField<InputTimeProps<R>>(props);
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputTimeProps<R>>(props);
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formFieldSize, name, highlight, disabled, ariaAttrs } = useFormField<PInputTimeProps<R>>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputTimeProps<R>>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value);
@@ -131,9 +138,9 @@ const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
 const inputsRef = ref<Array<ComponentPublicInstance>>([]);
 
 // FIXME: Move to namespaced when exported in `akar`
-const RangeTimeField = { Root: TimeRangeFieldRoot, Input: TimeRangeFieldInput };
+const RangeTimeField = { Root: ATimeRangeFieldRoot, Input: ATimeRangeFieldInput };
 
-const TimeField = computed(() => props.range ? RangeTimeField : SingleTimeField);
+const TimeField = computed(() => props.range ? RangeTimeField : ATimeField);
 
 function setInputRef(index: number, el: Element | ComponentPublicInstance | null) {
   // @ts-expect-error - ComponentPublicInstance type mismatch in Nuxt module augmentation
@@ -249,7 +256,7 @@ defineExpose({
         />
         <PAvatar
           v-else-if="!!avatar"
-          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as AAvatarProps['size'])"
+          :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
           data-slot="leadingAvatar"
           :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"

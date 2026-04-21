@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { NumberFieldRootProps } from 'akar';
+import type { ANumberFieldRootProps } from 'akar';
 import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
@@ -16,7 +16,7 @@ type ApplyModifiers<T extends InputNumberValue, Mod extends Pick<ModelModifiers,
   = | T
     | (Mod extends { optional: true } ? undefined : never);
 
-export interface InputNumberProps<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> extends Pick<NumberFieldRootProps, | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly' | 'focusOnChange'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
+export interface PInputNumberProps<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> extends Pick<ANumberFieldRootProps, | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly' | 'focusOnChange'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -71,13 +71,13 @@ export interface InputNumberProps<T extends InputNumberValue = InputNumberValue,
   pohon?: InputNumber['slots'];
 }
 
-export interface InputNumberEmits<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> {
+export interface PInputNumberEmits<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> {
   'update:modelValue': [value: ApplyModifiers<T, Mod>];
   'blur': [event: FocusEvent];
   'change': [event: Event];
 }
 
-export interface InputNumberSlots {
+export interface PInputNumberSlots {
   increment?: (props?: {}) => Array<VNode>;
   decrement?: (props?: {}) => Array<VNode>;
 }
@@ -86,26 +86,32 @@ export interface InputNumberSlots {
 <script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>">
 import { useAppConfig } from '#imports';
 import { reactivePick, useVModel } from '@vueuse/core';
-import { NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput, NumberFieldRoot, useForwardPropsEmits } from 'akar';
+import {
+  ANumberFieldDecrement,
+  ANumberFieldIncrement,
+  ANumberFieldInput,
+  ANumberFieldRoot,
+  useForwardPropsEmits,
+} from 'akar';
 import { computed, onMounted, toRef, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { useFieldGroup } from '../composables/use-field-group';
+import { useFormField } from '../composables/use-form-field';
 import { useLocale } from '../composables/use-locale';
-import { useFieldGroup } from '../composables/useFieldGroup';
-import { useFormField } from '../composables/useFormField';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<InputNumberProps<T, Mod>>(), {
+const props = withDefaults(defineProps<PInputNumberProps<T, Mod>>(), {
   orientation: 'horizontal',
   increment: true,
   decrement: true,
 });
-const emits = defineEmits<InputNumberEmits<T, Mod>>();
-defineSlots<InputNumberSlots>();
+const emits = defineEmits<PInputNumberEmits<T, Mod>>();
+defineSlots<PInputNumberSlots>();
 
-const modelValue = useVModel<InputNumberProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue });
+const modelValue = useVModel<PInputNumberProps<T, Mod>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, { defaultValue: props.defaultValue });
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as InputNumber['AppConfig'];
@@ -113,8 +119,8 @@ const pohonProp = useComponentPohon('inputNumber', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'stepSnapping', 'formatOptions', 'disableWheelChange', 'invertWheelChange', 'required', 'readonly', 'focusOnChange'), emits);
 
-const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formFieldSize, name, highlight, disabled, ariaAttrs } = useFormField<InputNumberProps<T, Mod>>(props);
-const { orientation, size: fieldGroupSize } = useFieldGroup<InputNumberProps<T, Mod>>(props);
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, id, color, size: formFieldSize, name, highlight, disabled, ariaAttrs } = useFormField<PInputNumberProps<T, Mod>>(props);
+const { orientation, size: fieldGroupSize } = useFieldGroup<PInputNumberProps<T, Mod>>(props);
 
 const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 
@@ -171,7 +177,7 @@ defineExpose({
 </script>
 
 <template>
-  <NumberFieldRoot
+  <ANumberFieldRoot
     v-bind="rootProps"
     :id="id"
     :default-value="defaultValue"
@@ -185,7 +191,7 @@ defineExpose({
     :disabled="disabled"
     @update:model-value="(val) => onUpdate(val as ApplyModifiers<T, Mod>)"
   >
-    <NumberFieldInput
+    <ANumberFieldInput
       v-bind="{ ...$attrs, ...ariaAttrs }"
       ref="inputRef"
       :placeholder="placeholder"
@@ -201,7 +207,7 @@ defineExpose({
       data-slot="increment"
       :class="pohon.increment({ class: pohonProp?.increment })"
     >
-      <NumberFieldIncrement
+      <ANumberFieldIncrement
         as-child
         :disabled="disabled || incrementDisabled"
       >
@@ -215,7 +221,7 @@ defineExpose({
             v-bind="typeof increment === 'object' ? increment : undefined"
           />
         </slot>
-      </NumberFieldIncrement>
+      </ANumberFieldIncrement>
     </div>
 
     <div
@@ -223,7 +229,7 @@ defineExpose({
       data-slot="decrement"
       :class="pohon.decrement({ class: pohonProp?.decrement })"
     >
-      <NumberFieldDecrement
+      <ANumberFieldDecrement
         as-child
         :disabled="disabled || decrementDisabled"
       >
@@ -237,7 +243,7 @@ defineExpose({
             v-bind="typeof decrement === 'object' ? decrement : undefined"
           />
         </slot>
-      </NumberFieldDecrement>
+      </ANumberFieldDecrement>
     </div>
-  </NumberFieldRoot>
+  </ANumberFieldRoot>
 </template>

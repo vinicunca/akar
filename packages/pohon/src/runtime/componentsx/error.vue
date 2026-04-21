@@ -8,7 +8,7 @@ import theme from '#build/pohon/error';
 
 type Error = ComponentConfig<typeof theme, AppConfig, 'error'>;
 
-export interface ErrorProps {
+export interface PErrorProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'main'
@@ -30,7 +30,7 @@ export interface ErrorProps {
   pohon?: Error['slots'];
 }
 
-export interface ErrorSlots {
+export interface PErrorSlots {
   default?: (props?: {}) => Array<VNode>;
   statusCode?: (props?: {}) => Array<VNode>;
   statusMessage?: (props?: {}) => Array<VNode>;
@@ -41,19 +41,19 @@ export interface ErrorSlots {
 
 <script setup lang="ts">
 import { clearError, useAppConfig } from '#imports';
-import { Primitive } from 'akar';
+import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(defineProps<ErrorProps>(), {
+const props = withDefaults(defineProps<PErrorProps>(), {
   as: 'main',
   redirect: '/',
   clear: true,
 });
-const slots = defineSlots<ErrorSlots>();
+const slots = defineSlots<PErrorSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Error['AppConfig'];
@@ -67,7 +67,7 @@ function handleError() {
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     :as="as"
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
@@ -116,5 +116,5 @@ function handleError() {
         />
       </slot>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

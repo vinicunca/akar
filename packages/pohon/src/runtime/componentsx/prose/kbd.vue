@@ -17,7 +17,7 @@ import { useAppConfig } from '#imports';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
-import UKbd from '../Kbd.vue';
+import PKbd from '../kbd.vue';
 
 const props = defineProps<ProseKbdProps>();
 
@@ -28,7 +28,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
 </script>
 
 <template>
-  <UKbd
+  <PKbd
     :value="value"
     :class="pohon({ class: [pohonProp?.base, props.class] })"
   />

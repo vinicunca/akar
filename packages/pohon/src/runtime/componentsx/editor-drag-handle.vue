@@ -11,7 +11,7 @@ import theme from '#build/pohon/editor-drag-handle';
 
 type EditorDragHandle = ComponentConfig<typeof theme, AppConfig, 'editorDragHandle'>;
 
-export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 'element' | 'onNodeChange' | 'computePositionConfig' | 'class'>, Omit<PButtonProps, PLinkPropsKeys | 'icon' | 'color' | 'variant'> {
+export interface PEditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 'element' | 'onNodeChange' | 'computePositionConfig' | 'class'>, Omit<PButtonProps, PLinkPropsKeys | 'icon' | 'color' | 'variant'> {
   /**
    * @defaultValue appConfig.pohon.icons.drag
    * @IconifyIcon
@@ -35,11 +35,11 @@ export interface EditorDragHandleProps extends Omit<DragHandleProps, 'editor' | 
   pohon?: EditorDragHandle['slots'] & PButtonProps['pohon'];
 }
 
-export interface EditorDragHandleSlots {
+export interface PEditorDragHandleSlots {
   default?: (props: { pohon: EditorDragHandle['pohon']; onClick: () => { node: JSONContent; pos: number } | undefined }) => Array<VNode>;
 }
 
-export interface EditorDragHandleEmits {
+export interface PEditorDragHandleEmits {
   nodeChange: [{ node: JSONContent; pos: number }];
   hover: [{ node: JSONContent; pos: number }];
 }
@@ -60,13 +60,13 @@ import PButton from './button.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<EditorDragHandleProps>(), {
+const props = withDefaults(defineProps<PEditorDragHandleProps>(), {
   color: 'neutral',
   variant: 'ghost',
   size: 'sm',
 });
-const emit = defineEmits<EditorDragHandleEmits>();
-defineSlots<EditorDragHandleSlots>();
+const emit = defineEmits<PEditorDragHandleEmits>();
+defineSlots<PEditorDragHandleSlots>();
 const dragHandleProps = useForwardProps(reactivePick(props, 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement'));
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'options', 'editor', 'pluginKey', 'nested', 'nestedOptions', 'onElementDragEnd', 'onElementDragStart', 'getReferencedVirtualElement', 'class', 'pohon'));
 
@@ -171,7 +171,7 @@ function onClick() {
         }"
         data-slot="handle"
         :class="pohon.handle({ class: [pohonProp?.handle, props.class] })"
-        :pohon="transformPohon(ui, pohonProp)"
+        :pohon="transformPohon(pohon, pohonProp)"
       />
     </slot>
   </DragHandle>
