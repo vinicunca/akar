@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { RouterLinkProps } from 'vue-router';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from '../../../types/html';
 import type { ComponentConfig } from '../../../types/uv';
@@ -7,7 +8,7 @@ import theme from '#build/pohon/link';
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>;
 
-export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
+export interface PLinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
@@ -16,7 +17,7 @@ export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /**
   /**
    * An alias for `to`. If used with `to`, `href` will be ignored
    */
-  href?: LinkProps['to'];
+  href?: PLinkProps['to'];
   /**
    * Forces the link to be considered as external (true) or internal (false). This is helpful to handle edge-cases
    */
@@ -55,15 +56,15 @@ export interface LinkProps extends Partial<Omit<RouterLinkProps, 'custom'>>, /**
   class?: any;
 }
 
-export interface LinkSlots {
-  default: (props: { active: boolean }) => any;
+export interface PLinkSlots {
+  default?: (props: { active: boolean }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactiveOmit } from '@vueuse/core';
-import { useForwardProps } from 'akar';
+import { APrimitiveSlot, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { isEqual } from 'ohash/utils';
 import { hasProtocol } from 'ufo';
@@ -76,13 +77,13 @@ import { uv } from '../../../utils/uv';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<LinkProps>(), {
+const props = withDefaults(defineProps<PLinkProps>(), {
   as: 'button',
   type: 'button',
   ariaCurrentValue: 'page',
   active: undefined,
 });
-defineSlots<LinkSlots>();
+defineSlots<PLinkSlots>();
 
 const route = useRoute();
 
@@ -90,7 +91,7 @@ const appConfig = useAppConfig() as Link['AppConfig'];
 
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'exactQuery', 'exactHash', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'noRel'));
 
-const ui = computed(() => uv({
+const pohon = computed(() => uv({
   extend: uv(theme),
   ...defu({
     variants: {
@@ -178,38 +179,21 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
     return [props.class, active ? props.activeClass : props.inactiveClass];
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled });
+  return pohon.value({ class: props.class, active, disabled: props.disabled });
 }
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
 <template>
-  <template v-if="!isExternal && !!to">
-    <RouterLink
-      v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }"
-      v-bind="routerLinkProps"
-      :to="to"
-      custom
-    >
-      <template v-if="custom">
-        <slot
-          v-bind="{
-            ...$attrs,
-            ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
-            as,
-            type,
-            disabled,
-            href,
-            navigate,
-            rel,
-            target,
-            isExternal,
-            active: isLinkActive({ route: linkRoute, isActive, isExactActive }),
-          }"
-        />
-      </template>
-      <PLinkBase
-        v-else
+  <RouterLink
+    v-if="!isExternal && !!to"
+    v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive }"
+    v-bind="routerLinkProps"
+    :to="to"
+    custom
+  >
+    <APrimitiveSlot v-if="custom">
+      <slot
         v-bind="{
           ...$attrs,
           ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
@@ -221,45 +205,59 @@ function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
           rel,
           target,
           isExternal,
-        }"
-        :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
-      >
-        <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
-      </PLinkBase>
-    </RouterLink>
-  </template>
-
-  <template v-else>
-    <template v-if="custom">
-      <slot
-        v-bind="{
-          ...$attrs,
-          as,
-          type,
-          disabled,
-          href: to,
-          rel,
-          target,
-          active: active ?? false,
-          isExternal,
+          active: isLinkActive({ route: linkRoute, isActive, isExactActive }),
         }"
       />
-    </template>
+    </APrimitiveSlot>
     <PLinkBase
       v-else
+      v-bind="{
+        ...$attrs,
+        ...(exact && isExactActive ? { 'aria-current': props.ariaCurrentValue } : {}),
+        as,
+        type,
+        disabled,
+        href,
+        navigate,
+        rel,
+        target,
+        isExternal,
+      }"
+      :class="resolveLinkClass({ route: linkRoute, isActive, isExactActive })"
+    >
+      <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
+    </PLinkBase>
+  </RouterLink>
+
+  <APrimitiveSlot v-else-if="custom">
+    <slot
       v-bind="{
         ...$attrs,
         as,
         type,
         disabled,
-        href: (to as string),
+        href: to,
         rel,
         target,
+        active: active ?? false,
         isExternal,
       }"
-      :class="resolveLinkClass()"
-    >
-      <slot :active="active ?? false" />
-    </PLinkBase>
-  </template>
+    />
+  </APrimitiveSlot>
+  <PLinkBase
+    v-else
+    v-bind="{
+      ...$attrs,
+      as,
+      type,
+      disabled,
+      href: (to as string),
+      rel,
+      target,
+      isExternal,
+    }"
+    :class="resolveLinkClass()"
+  >
+    <slot :active="active ?? false" />
+  </PLinkBase>
 </template>

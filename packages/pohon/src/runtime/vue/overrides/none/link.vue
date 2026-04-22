@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ButtonHTMLAttributes } from 'vue';
+import type { ButtonHTMLAttributes, VNode } from 'vue';
 import type { ComponentConfig } from '../../../types/uv';
 import theme from '#build/pohon/link';
 
@@ -33,7 +33,7 @@ interface BaseLinkProps {
   noRel?: boolean;
 }
 
-export interface LinkProps extends BaseLinkProps {
+export interface PLinkProps extends BaseLinkProps {
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
@@ -65,13 +65,14 @@ export interface LinkProps extends BaseLinkProps {
   class?: any;
 }
 
-export interface LinkSlots {
-  default: (props: { active: boolean }) => any;
+export interface PLinkSlots {
+  default?: (props: { active: boolean }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { APrimitiveSlot } from 'akar';
 import { defu } from 'defu';
 import { hasProtocol } from 'ufo';
 import { computed, inject } from 'vue';
@@ -81,17 +82,17 @@ import { uv } from '../../../utils/uv';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<LinkProps>(), {
+const props = withDefaults(defineProps<PLinkProps>(), {
   as: 'button',
   type: 'button',
   ariaCurrentValue: 'page',
   active: undefined,
 });
-defineSlots<LinkSlots>();
+defineSlots<PLinkSlots>();
 
 const appConfig = useAppConfig() as Link['AppConfig'];
 
-const ui = computed(() => uv({
+const pohon = computed(() => uv({
   extend: uv(theme),
   ...defu({
     variants: {
@@ -136,7 +137,7 @@ const linkClass = computed(() => {
     return [props.class, active ? props.activeClass : props.inactiveClass];
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled });
+  return pohon.value({ class: props.class, active, disabled: props.disabled });
 });
 
 const linkRel = computed(() => {
@@ -158,8 +159,8 @@ const linkRel = computed(() => {
 const handleNavigation = inject<((event: MouseEvent, context: { href: string; external: boolean; target?: string | null }) => void) | undefined>('nuxtui:router', undefined);
 
 const navigate = handleNavigation
-  ? (event: MouseEvent) => {
-      handleNavigation(event, {
+  ? (e: MouseEvent) => {
+      handleNavigation(e, {
         href: href.value || '',
         external: isExternal.value,
         target: props.target || (isExternal.value ? '_blank' : undefined),
@@ -169,7 +170,7 @@ const navigate = handleNavigation
 </script>
 
 <template>
-  <template v-if="custom">
+  <APrimitiveSlot v-if="custom">
     <slot
       v-bind="{
         ...$attrs,
@@ -184,7 +185,7 @@ const navigate = handleNavigation
         active: isLinkActive,
       }"
     />
-  </template>
+  </APrimitiveSlot>
   <PLinkBase
     v-else
     v-bind="{

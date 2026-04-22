@@ -1,13 +1,14 @@
 <script lang="ts">
 import type { InertiaLinkProps } from '@inertiajs/vue3';
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from '../../../types/html';
 import type { ComponentConfig } from '../../../types/uv';
 import theme from '#build/pohon/link';
 
 type Link = ComponentConfig<typeof theme, AppConfig, 'link'>;
 
-export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onClick'>>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
+export interface PLinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onClick'>>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled'>, /** @vue-ignore */ Omit<AnchorHTMLAttributes, 'href' | 'target' | 'rel' | 'type'> {
   /**
    * The element or component this component should render as when not a link.
    * @defaultValue 'button'
@@ -21,7 +22,7 @@ export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onCl
   /**
    * An alias for `to`. If used with `to`, `href` will be ignored
    */
-  href?: LinkProps['to'];
+  href?: PLinkProps['to'];
   /**
    * Forces the link to be considered as external (true) or internal (false). This is helpful to handle edge-cases
    */
@@ -62,8 +63,8 @@ export interface LinkProps extends Partial<Omit<InertiaLinkProps, 'href' | 'onCl
   class?: any;
 }
 
-export interface LinkSlots {
-  default: (props: { active: boolean }) => any;
+export interface PLinkSlots {
+  default?: (props: { active: boolean }) => Array<VNode>;
 }
 </script>
 
@@ -71,7 +72,7 @@ export interface LinkSlots {
 import { useAppConfig } from '#imports';
 import { usePage } from '@inertiajs/vue3';
 import { reactiveOmit } from '@vueuse/core';
-import { useForwardProps } from 'akar';
+import { APrimitiveSlot, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { hasProtocol } from 'ufo';
 import { computed } from 'vue';
@@ -81,13 +82,13 @@ import PLinkBase from './link-base.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<LinkProps>(), {
+const props = withDefaults(defineProps<PLinkProps>(), {
   as: 'button',
   type: 'button',
   ariaCurrentValue: 'page',
   active: undefined,
 });
-defineSlots<LinkSlots>();
+defineSlots<PLinkSlots>();
 
 const page = usePage();
 
@@ -95,7 +96,7 @@ const appConfig = useAppConfig() as Link['AppConfig'];
 
 const routerLinkProps = useForwardProps(reactiveOmit(props, 'as', 'type', 'disabled', 'active', 'exact', 'activeClass', 'inactiveClass', 'to', 'href', 'raw', 'custom', 'class', 'noRel'));
 
-const ui = computed(() => uv({
+const pohon = computed(() => uv({
   extend: uv(theme),
   ...defu({
     variants: {
@@ -173,12 +174,12 @@ const linkClass = computed(() => {
     return [props.class, active ? props.activeClass : props.inactiveClass];
   }
 
-  return ui.value({ class: props.class, active, disabled: props.disabled });
+  return pohon.value({ class: props.class, active, disabled: props.disabled });
 });
 </script>
 
 <template>
-  <template v-if="custom">
+  <APrimitiveSlot v-if="custom">
     <slot
       v-bind="{
         ...$attrs,
@@ -193,7 +194,7 @@ const linkClass = computed(() => {
         isExternal,
       }"
     />
-  </template>
+  </APrimitiveSlot>
   <PLinkBase
     v-else
     v-bind="{

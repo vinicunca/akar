@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PSelectMenuItem, PSelectMenuProps } from '../../../types';
 
-export interface ColorModeSelectProps extends Omit<PSelectMenuProps<Array<PSelectMenuItem>>, 'icon' | 'items' | 'modelValue'> {
+export interface PColorModeSelectProps extends Omit<PSelectMenuProps<Array<PSelectMenuItem>>, 'icon' | 'items' | 'modelValue'> {
 }
 </script>
 
@@ -15,7 +15,7 @@ import { useLocale } from '../../../composables/use-locale';
 defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
-  defineProps<ColorModeSelectProps>(),
+  defineProps<PColorModeSelectProps>(),
   {
     searchInput: false,
   },
