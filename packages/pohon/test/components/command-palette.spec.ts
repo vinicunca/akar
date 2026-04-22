@@ -1,11 +1,13 @@
-import type { PCommandPaletteProps, PCommandPaletteSlots } from '../../src/runtime/components/command-palette.vue';
+import theme from '#build/pohon/command-palette';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import CommandPalette from '../../src/runtime/components/command-palette.vue';
-import ComponentRender from '../component-render';
+import { renderEach } from '../component-render';
 
-describe('commandPalette', () => {
+describe('CommandPalette', () => {
+  const sizes = Object.keys(theme.variants.size) as any;
+
   const groups = [{
     id: 'actions',
     items: [{
@@ -97,17 +99,22 @@ describe('commandPalette', () => {
     }],
   }];
 
+  const groupsWithSlot = groups.map((g) => g.id === 'users' ? { ...g, slot: 'users' } : g);
+
   const props = { groups };
 
-  it.each([
+  renderEach(CommandPalette, [
     // Props
     ['with groups', { props }],
     ['with groups with description', { props: { groups: groupsWithDescription } }],
     ['without groups', {}],
+    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with modelValue', { props: { ...props, modelValue: groups[2]?.items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: groups[2]?.items[0] } }],
     ['with searchTerm', { props: { ...props, searchTerm: 'f' } }],
     ['with searchTerm and preserveGroupOrder', { props: { ...props, searchTerm: 'f', preserveGroupOrder: true } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Add new file' } }],
+    ['with by', { props: { ...props, by: 'label', defaultValue: groups[0]?.items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with descriptionKey', { props: { groups: groupsWithDescription, descriptionKey: 'label' } }],
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
@@ -124,7 +131,7 @@ describe('commandPalette', () => {
     ['without input', { props: { ...props, input: false } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'divide-accented' } }],
-    ['with ui', { props: { ...props, pohon: { input: '[&>input]:h-10' } } }],
+    ['with pohon', { props: { ...props, pohon: { input: '[&>input]:h-10' } } }],
     // Slots
     ['with empty slot', { props, slots: { empty: () => 'Empty slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
@@ -133,12 +140,11 @@ describe('commandPalette', () => {
     ['with item-description slot', { props: { groups: groupsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with group-label slot', { props, slots: { 'group-label': () => 'Group label slot' } }],
+    ['with users-group-label slot', { props: { groups: groupsWithSlot }, slots: { 'users-group-label': () => 'Users group label slot' } }],
     ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PCommandPaletteProps; slots?: Partial<PCommandPaletteSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, CommandPalette);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CommandPalette, {

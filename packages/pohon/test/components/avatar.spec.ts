@@ -1,15 +1,14 @@
-import type { PAvatarProps, PAvatarSlots } from '../../src/runtime/components/avatar.vue';
 import theme from '#build/pohon/avatar';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import Avatar from '../../src/runtime/components/avatar.vue';
-import ComponentRender from '../component-render';
+import { renderEach } from '../component-render';
 
-describe('avatar', () => {
+describe('Avatar', () => {
   const sizes = Object.keys(theme.variants.size) as any;
 
-  it.each([
+  renderEach(Avatar, [
     // Props
     ['with src', { props: { src: 'https://github.com/benjamincanac.png' } }],
     ['with alt', { props: { alt: 'Benjamin Canac' } }],
@@ -21,13 +20,11 @@ describe('avatar', () => {
     ['with as (object)', { props: { src: 'https://github.com/benjamincanac.png', as: { root: 'section', img: 'p' } } }],
     ['with as (partial object)', { props: { src: 'https://github.com/benjamincanac.png', as: { img: 'p' } } }],
     ['with class', { props: { class: 'bg-default' } }],
-    ['with ui', { props: { pohon: { fallback: 'font-bold' } } }],
+    ['with pohon', { props: { pohon: { fallback: 'font-bold' } } }],
+    ['with custom size', { props: { class: 'size-100', src: 'https://github.com/benjamincanac.png' } }],
     // Slots
     ['with default slot', { slots: { default: '🇫🇷' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PAvatarProps; slots?: PAvatarSlots }) => {
-    const html = await ComponentRender(nameOrHtml, options, Avatar);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Avatar, {

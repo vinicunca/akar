@@ -1,0 +1,51 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageLogos > renders with as correctly 1`] = `
+"<section data-slot="root">
+  <!--v-if-->
+  <div data-slot="logos" class="">
+    <!--v-if-->
+  </div>
+</section>"
+`;
+
+exports[`PageLogos > renders with class correctly 1`] = `
+"<div data-slot="root" class="text-xl">
+  <!--v-if-->
+  <div data-slot="logos" class="">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageLogos > renders with default slot correctly 1`] = `
+"<div data-slot="root">
+  <!--v-if-->
+  <div data-slot="logos" class="">Default slot</div>
+</div>"
+`;
+
+exports[`PageLogos > renders with default slot correctly 2`] = `
+"<div data-slot="root">
+  <!--v-if-->
+  <div data-slot="logos" class="">Default slot</div>
+</div>"
+`;
+
+exports[`PageLogos > renders with pohon correctly 1`] = `
+"<div data-slot="root">
+  <!--v-if-->
+  <div data-slot="logos" class="">
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`PageLogos > renders with title correctly 1`] = `
+"<div data-slot="root">
+  <h2 data-slot="title" class="">Title</h2>
+  <div data-slot="logos" class="">
+    <!--v-if-->
+  </div>
+</div>"
+`;

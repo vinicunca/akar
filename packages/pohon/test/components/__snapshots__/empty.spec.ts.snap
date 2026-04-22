@@ -1,13 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`empty > renders with actions correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with actions correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -15,30 +15,109 @@ exports[`empty > renders with actions correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with actions slot correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with actions slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions">Actions slot</div>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class="">Actions slot</div>
   </div>
   <!--v-if-->
 </div>"
 `;
 
-exports[`empty > renders with as correctly 1`] = `
-"<section class="" data-pohon="empty-root">
+exports[`Empty > renders with as correctly 1`] = `
+"<section data-slot="root" class="">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
 </section>"
 `;
 
-exports[`empty > renders with avatar correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><img src="https://github.com/benjamincanac.png" width="32" height="32" data-pohon="avatar-image"></span>
+exports[`Empty > renders with body slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
+  </div>
+  <div data-slot="body" class="">Body slot</div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Empty > renders with class correctly 1`] = `
+"<div data-slot="root" class="gap-6">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
+  </div>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
+        <!--v-if-->
+      </button></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Empty > renders with description correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Empty > renders with description slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description slot</div>
+  </div>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
+        <!--v-if-->
+      </button></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Empty > renders with footer slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
+  </div>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
+        <!--v-if-->
+      </button></div>
+  </div>
+  <div data-slot="footer" class="">Footer slot</div>
+</div>"
+`;
+
+exports[`Empty > renders with header slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class="">Header slot</div>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
+        <!--v-if-->
+      </button></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Empty > renders with icon correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
     <!--v-if-->
     <!--v-if-->
   </div>
@@ -47,25 +126,13 @@ exports[`empty > renders with avatar correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with body slot correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with leading slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class="">Leading slot<h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">Body slot</div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`empty > renders with class correctly 1`] = `
-"<div class="gap-6" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
-  </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -73,25 +140,14 @@ exports[`empty > renders with class correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with description correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with pohon correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`empty > renders with description slot correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description slot</div>
-  </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -99,26 +155,14 @@ exports[`empty > renders with description slot correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with footer slot correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with primary variant naked correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
-        <!--v-if-->
-      </button></div>
-  </div>
-  <div class="" data-pohon="empty-footer">Footer slot</div>
-</div>"
-`;
-
-exports[`empty > renders with header slot correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header">Header slot</div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -126,24 +170,14 @@ exports[`empty > renders with header slot correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with icon correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <!--v-if-->
-    <!--v-if-->
+exports[`Empty > renders with primary variant outline correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <!--v-if-->
-  <!--v-if-->
-</div>"
-`;
-
-exports[`empty > renders with leading slot correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header">Leading slot<h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
-  </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -151,14 +185,14 @@ exports[`empty > renders with leading slot correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with primary variant naked correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with primary variant soft correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -166,14 +200,14 @@ exports[`empty > renders with primary variant naked correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with primary variant outline correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with primary variant solid correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -181,14 +215,14 @@ exports[`empty > renders with primary variant outline correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with primary variant soft correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with primary variant subtle correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -196,14 +230,14 @@ exports[`empty > renders with primary variant soft correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with primary variant solid correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with size lg correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -211,14 +245,14 @@ exports[`empty > renders with primary variant solid correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with primary variant subtle correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with size md correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -226,14 +260,14 @@ exports[`empty > renders with primary variant subtle correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with size lg correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with size sm correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -241,14 +275,14 @@ exports[`empty > renders with size lg correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with size md correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with size xl correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -256,14 +290,14 @@ exports[`empty > renders with size md correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with size sm correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with size xs correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>
@@ -271,40 +305,10 @@ exports[`empty > renders with size sm correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with size xl correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
-  </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
-        <!--v-if-->
-      </button></div>
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`empty > renders with size xs correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
-  </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
-        <!--v-if-->
-      </button></div>
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`empty > renders with title correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
+exports[`Empty > renders with title correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title</h2>
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -312,29 +316,14 @@ exports[`empty > renders with title correctly 1`] = `
 </div>"
 `;
 
-exports[`empty > renders with title slot correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title slot</h2>
-    <div class="">Description</div>
+exports[`Empty > renders with title slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>
+    <h2 data-slot="title" class="">Title slot</h2>
+    <div data-slot="description" class="">Description</div>
   </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
-        <!--v-if-->
-      </button></div>
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`empty > renders with ui correctly 1`] = `
-"<div class="" data-pohon="empty-root">
-  <div class="" data-pohon="empty-header"><span data-pohon="avatar-root"><span class="iconify i-lucide:file" aria-hidden="true" data-pohon="avatar-icon"></span></span>
-    <h2 class="" data-pohon="empty-title">Title</h2>
-    <div class="">Description</div>
-  </div>
-  <div class="" data-pohon="empty-body">
-    <div class="" data-pohon="empty-actions"><button type="button" class="" data-pohon="button-base"><span class="iconify i-lucide:plus" aria-hidden="true" data-pohon="button-leading-icon"></span><span class="" data-pohon="button-label">Add</span>
+  <div data-slot="body" class="">
+    <div data-slot="actions" class=""><button type="button" data-slot="base" class=""><span class="iconify i-lucide:plus" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Add</span>
         <!--v-if-->
       </button></div>
   </div>

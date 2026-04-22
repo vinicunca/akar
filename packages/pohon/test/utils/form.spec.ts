@@ -34,7 +34,7 @@ describe('form utils', () => {
   describe('setAtPath', () => {
     it('works with basic properties', () => {
       const obj: any = { foo: 'bar' };
-      const result = setAtPath({ data: obj, path: 'foo', value: 'baz' });
+      const result = setAtPath(obj, 'foo', 'baz');
       expect(obj.foo).toBe('baz');
       expect(result).toBe(obj);
     });
@@ -42,27 +42,27 @@ describe('form utils', () => {
     it('works with empty path using Object.assign', () => {
       const obj: any = { foo: 'bar' };
       const newValue = { baz: 'buzz' };
-      const result = setAtPath({ data: obj, path: '', value: newValue });
+      const result = setAtPath(obj, '', newValue);
       expect(result).toEqual({ foo: 'bar', baz: 'buzz' });
     });
 
     it('creates and sets nested objects', () => {
       const obj: any = {};
-      setAtPath({ data: obj, path: 'foo.bar', value: 'baz' });
+      setAtPath(obj, 'foo.bar', 'baz');
       expect(obj.foo).toBeInstanceOf(Object);
       expect(obj.foo.bar).toBe('baz');
     });
 
     it('creates and sets nested arrays when next key is numeric', () => {
       const obj: any = {};
-      setAtPath({ data: obj, path: 'foo.0', value: 'first' });
+      setAtPath(obj, 'foo.0', 'first');
       expect(obj.foo).toBeInstanceOf(Array);
       expect(obj.foo[0]).toBe('first');
     });
 
     it('works with deeply nested structures', () => {
       const obj: any = {};
-      setAtPath({ data: obj, path: 'foo.0.bar.1', value: 'deeply nested' });
+      setAtPath(obj, 'foo.0.bar.1', 'deeply nested');
       expect(obj.foo).toBeInstanceOf(Array);
       expect(obj.foo[0]).toBeInstanceOf(Object);
       expect(obj.foo[0].bar).toBeInstanceOf(Array);
@@ -71,13 +71,13 @@ describe('form utils', () => {
 
     it('overwrites existing values', () => {
       const obj: any = { foo: { bar: 'old' } };
-      setAtPath({ data: obj, path: 'foo.bar', value: 'new' });
+      setAtPath(obj, 'foo.bar', 'new');
       expect(obj.foo.bar).toBe('new');
     });
 
     it('handles mixed object and array paths', () => {
       const obj: any = {};
-      setAtPath({ data: obj, path: 'users.0.profile.tags.1', value: 'admin' });
+      setAtPath(obj, 'users.0.profile.tags.1', 'admin');
       expect(obj.users).toBeInstanceOf(Array);
       expect(obj.users[0]).toBeInstanceOf(Object);
       expect(obj.users[0].profile).toBeInstanceOf(Object);
@@ -87,14 +87,14 @@ describe('form utils', () => {
 
     it('handles null/undefined intermediate values', () => {
       const obj: any = { foo: null };
-      setAtPath({ data: obj, path: 'foo.bar', value: 'baz' });
+      setAtPath(obj, 'foo.bar', 'baz');
       expect(obj.foo).toBeInstanceOf(Object);
       expect(obj.foo.bar).toBe('baz');
     });
 
     it('returns the original object', () => {
       const obj: any = {};
-      const result = setAtPath({ data: obj, path: 'foo.bar', value: 'baz' });
+      const result = setAtPath(obj, 'foo.bar', 'baz');
       expect(result).toBe(obj);
     });
   });

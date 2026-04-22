@@ -1,21 +1,20 @@
-import type { PHeaderProps, PHeaderSlots } from '../../src/runtime/components/header.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PHeader from '../../src/runtime/components/header.vue';
-import ComponentRender from '../component-render';
+import Header from '../../src/runtime/components/header.vue';
+import { renderEach } from '../component-render';
 
-describe('PHeader', () => {
-  it.each([
+describe('Header', () => {
+  renderEach(Header, [
     // Props
     ['with title', { props: { title: 'Documentation' } }],
     ['with to', { props: { to: '/docs' } }],
-    ['with mode dialog', { props: { open: true, mode: 'dialog' as const, menu: { portal: false } } }],
-    ['with mode slideover', { props: { open: true, mode: 'slideover' as const, menu: { portal: false } } }],
-    ['with mode drawer', { props: { open: true, mode: 'drawer' as const, menu: { portal: false } } }],
+    ['with mode modal', { props: { open: true, mode: 'modal', menu: { portal: false } } }],
+    ['with mode slideover', { props: { open: true, mode: 'slideover', menu: { portal: false } } }],
+    ['with mode drawer', { props: { open: true, mode: 'drawer', menu: { portal: false } } }],
     ['without toggle', { props: { toggle: false } }],
-    ['with toggle', { props: { toggle: { color: 'primary' as const, variant: 'solid' as const } } }],
-    ['with toggleSide', { props: { toggleSide: 'left' as const } }],
+    ['with toggle', { props: { toggle: { color: 'primary', variant: 'solid' } } }],
+    ['with toggleSide', { props: { toggleSide: 'left' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'border-b-0' } }],
     ['with pohon', { props: { pohon: { container: 'gap-1.5' } } }],
@@ -29,13 +28,10 @@ describe('PHeader', () => {
     ['with bottom slot', { slots: { bottom: () => 'Bottom slot' } }],
     ['with body slot', { slots: { body: () => 'Body slot' } }],
     ['with content slot', { slots: { content: () => 'Content slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PHeaderProps; slots?: Partial<PHeaderSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PHeader);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PHeader, {
+    const wrapper = await mountSuspended(Header, {
       props: {
         title: 'Documentation',
         to: '/docs',

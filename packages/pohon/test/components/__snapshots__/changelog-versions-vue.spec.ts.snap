@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChangelogVersions > renders with default slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="indicator" class="">
+    <div data-slot="beam" class="" style="height: 0%;"></div>
+  </div>
+  <div data-slot="container" class="">Default slot</div>
+</div>"
+`;

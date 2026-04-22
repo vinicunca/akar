@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { useOverlay } from '../../src/runtime/composables/use-overlay';
-import MockModal from '../mocks/mock-modal.vue';
+import MockDialog from '../mocks/mock-dialog.vue';
 
 function getModalById(overlays: ReturnType<typeof useOverlay>['overlays'], id: symbol) {
   return overlays.find((o) => o.id === id)!;
@@ -14,7 +14,7 @@ describe('useOverlay', () => {
   });
 
   it('should create an overlay instance', () => {
-    const modal = overlay.create(MockModal);
+    const modal = overlay.create(MockDialog);
 
     expect(modal).toBeDefined();
     expect(modal.id).toBeDefined();
@@ -25,7 +25,7 @@ describe('useOverlay', () => {
   });
 
   it('should create an overlay with defaultOpen', () => {
-    const modal = overlay.create(MockModal, {
+    const modal = overlay.create(MockDialog, {
       defaultOpen: true,
     });
 
@@ -34,7 +34,7 @@ describe('useOverlay', () => {
   });
 
   it('should create an overlay with destroyOnClose', () => {
-    const modal = overlay.create(MockModal, {
+    const modal = overlay.create(MockDialog, {
       destroyOnClose: true,
     });
 
@@ -43,8 +43,8 @@ describe('useOverlay', () => {
   });
 
   it('should close all overlays', () => {
-    const modal1 = overlay.create(MockModal, { defaultOpen: true });
-    const modal2 = overlay.create(MockModal, { defaultOpen: true });
+    const modal1 = overlay.create(MockDialog, { defaultOpen: true });
+    const modal2 = overlay.create(MockDialog, { defaultOpen: true });
 
     const modal1Instance = modal1.open();
     const modal2Instance = modal2.open();
@@ -64,7 +64,7 @@ describe('useOverlay', () => {
   });
 
   it('should patch overlay props', () => {
-    const modalWithProps = overlay.create(MockModal, {
+    const modalWithProps = overlay.create(MockDialog, {
       props: {
         title: 'Original Title',
       },
@@ -83,7 +83,7 @@ describe('useOverlay', () => {
   });
 
   it('should merge props correctly', () => {
-    const modalWithProps = overlay.create(MockModal, {
+    const modalWithProps = overlay.create(MockDialog, {
       props: {
         title: 'Original Title',
         description: 'Original Description',
@@ -102,7 +102,7 @@ describe('useOverlay', () => {
   });
 
   it('should open an overlay with default props', async () => {
-    const modal = overlay.create(MockModal, { props: { title: 'Default' } });
+    const modal = overlay.create(MockDialog, { props: { title: 'Default' } });
     const instance = modal.open();
 
     const createdModal = getModalById(overlay.overlays, instance.id);
@@ -111,7 +111,7 @@ describe('useOverlay', () => {
   });
 
   it('should open an overlay and override default props', async () => {
-    const modal = overlay.create(MockModal, { props: { title: 'default' } });
+    const modal = overlay.create(MockDialog, { props: { title: 'default' } });
     const instance = modal.open({ title: 'custom', description: 'custom description' });
 
     const createdModal = getModalById(overlay.overlays, instance.id);
@@ -131,7 +131,7 @@ describe('useOverlay', () => {
   });
 
   it('should return a promise that resolves when closed', async () => {
-    const modal = overlay.create(MockModal);
+    const modal = overlay.create(MockDialog);
     const instance = modal.open();
 
     // Simulate closing the modal
@@ -144,7 +144,7 @@ describe('useOverlay', () => {
   });
 
   it('should directly return promise that resolves when closed', async () => {
-    const modal = overlay.create(MockModal);
+    const modal = overlay.create(MockDialog);
     const instance = modal.open();
 
     // Simulate closing the modal
@@ -157,7 +157,7 @@ describe('useOverlay', () => {
   });
 
   it('should close an overlay', () => {
-    const modal = overlay.create(MockModal);
+    const modal = overlay.create(MockDialog);
 
     modal.open();
 

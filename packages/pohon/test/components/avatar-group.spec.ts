@@ -1,4 +1,3 @@
-import type { PAvatarGroupProps, PAvatarGroupSlots } from '../../src/runtime/components/avatar-group.vue';
 import theme from '#build/pohon/avatar-group';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
@@ -6,7 +5,7 @@ import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
 import AvatarGroup from '../../src/runtime/components/avatar-group.vue';
 import Avatar from '../../src/runtime/components/avatar.vue';
-import ComponentRender from '../component-render';
+import { renderEach } from '../component-render';
 
 const AvatarGroupWrapper = defineComponent({
   components: {
@@ -20,22 +19,19 @@ const AvatarGroupWrapper = defineComponent({
 </PAvatarGroup>`,
 });
 
-describe('avatarGroup', () => {
+describe('AvatarGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any;
 
-  it.each([
+  renderEach(AvatarGroupWrapper, [
     // Props
     ['with max', { props: { max: 2 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with as', { props: { as: 'span' } }],
     ['with class', { props: { class: 'justify-start' } }],
-    ['with ui', { props: { pohon: { base: 'rounded-lg' } } }],
+    ['with pohon', { props: { pohon: { base: 'rounded-lg' } } }],
     // Slots
     ['with default slot', {}],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PAvatarGroupProps; slots?: Partial<PAvatarGroupSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, AvatarGroupWrapper);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(AvatarGroupWrapper, {

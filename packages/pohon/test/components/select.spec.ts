@@ -1,16 +1,15 @@
 import type { FormInputEvents } from '../../src/module';
-import type { PSelectProps, PSelectSlots } from '../../src/runtime/components/select.vue';
 import theme from '#build/pohon/input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PSelect from '../../src/runtime/components/select.vue';
-import ComponentRender from '../component-render';
+import Select from '../../src/runtime/components/select.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 import { expectEmitPayloadType } from '../utils/types';
 
-describe('select', () => {
+describe('Select', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
 
@@ -40,13 +39,13 @@ describe('select', () => {
 
   const props = { open: true, portal: false, items };
 
-  it.each([
+  renderEach(Select, [
     // Props
     ['with items', { props }],
     ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with modelValue', { props: { ...props, modelValue: items[0]?.value } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0]?.value } }],
-    ['with valueKey', { props: { ...props, valueKey: 'label' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Backlog' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with descriptionKey', { props: { ...props, descriptionKey: 'description' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
@@ -77,7 +76,7 @@ describe('select', () => {
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with class', { props: { ...props, class: 'rounded-full' } }],
-    ['with ui', { props: { ...props, pohon: { group: 'p-2' } } }],
+    ['with pohon', { props: { ...props, pohon: { group: 'p-2' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
@@ -86,13 +85,31 @@ describe('select', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PSelectProps; slots?: Partial<PSelectSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PSelect);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
+
+  renderEach(
+    Select,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }],
+    ],
+    '%s works',
+    async (_, options, spec) => {
+      const wrapper = mount(Select, {
+        ...options,
+      });
+
+      const select = wrapper.findComponent({ name: 'SelectRoot' });
+      await select.setValue(spec.input);
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] });
+    },
+  );
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PSelect, {
+    const wrapper = await mountSuspended(Select, {
       props: {
         ...props,
         modelValue: items[0]?.value,
@@ -112,19 +129,19 @@ describe('select', () => {
 
   describe('it should display correct label', () => {
     it.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
-      const wrapper = mount(PSelect, {
+      const wrapper = mount(Select, {
         props: {
           items,
           modelValue,
-          placeholder: 'PSelect an item',
+          placeholder: 'Select an item',
         },
       });
 
-      expect(wrapper.text()).toBe('PSelect an item');
+      expect(wrapper.text()).toBe('Select an item');
     });
 
     it('with string array and string value', () => {
-      const wrapper = mount(PSelect, {
+      const wrapper = mount(Select, {
         props: {
           items: ['Apple', 'Banana', 'Cherry'],
           modelValue: 'Banana',
@@ -135,19 +152,19 @@ describe('select', () => {
     });
 
     it('with multiple and empty array value should display placeholder', () => {
-      const wrapper = mount(PSelect, {
+      const wrapper = mount(Select, {
         props: {
           items,
           multiple: true,
           modelValue: [],
-          placeholder: 'PSelect items',
+          placeholder: 'Select items',
         },
       });
-      expect(wrapper.text()).toBe('PSelect items');
+      expect(wrapper.text()).toBe('Select items');
     });
 
     it('with falsy modelValue and options items contain falsy', () => {
-      const wrapper = mount(PSelect, {
+      const wrapper = mount(Select, {
         props: {
           items: [
             {
@@ -169,28 +186,28 @@ describe('select', () => {
 
   describe('emits', () => {
     it('update:modelValue event', async () => {
-      const wrapper = mount(PSelect, { props: { items: ['Option 1', 'Option 2'] } });
+      const wrapper = mount(Select, { props: { items: ['Option 1', 'Option 2'] } });
       const input = wrapper.findComponent({ name: 'SelectRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] });
     });
 
     it('change event', async () => {
-      const wrapper = mount(PSelect, { props: { items: ['Option 1', 'Option 2'] } });
+      const wrapper = mount(Select, { props: { items: ['Option 1', 'Option 2'] } });
       const input = wrapper.findComponent({ name: 'SelectRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
     it('blur event', async () => {
-      const wrapper = mount(PSelect, { props: { items: ['Option 1', 'Option 2'] } });
+      const wrapper = mount(Select, { props: { items: ['Option 1', 'Option 2'] } });
       const input = wrapper.findComponent({ name: 'SelectRoot' });
       await input.vm.$emit('update:open', false);
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] });
     });
   });
 
-  describe.skip('form integration', async () => {
+  describe('form integration', async () => {
     async function createForm(validateOn?: Array<FormInputEvents>) {
       const wrapper = await renderForm({
         props: {
@@ -258,27 +275,27 @@ describe('select', () => {
 
     it('should have the correct types', () => {
       // with object item
-      expectEmitPayloadType('update:modelValue', () => PSelect({
+      expectEmitPayloadType('update:modelValue', () => Select({
         items: [{ label: 'foo', value: 'bar' }],
       })).toEqualTypeOf<[string]>();
 
       // with string item
-      expectEmitPayloadType('update:modelValue', () => PSelect({
+      expectEmitPayloadType('update:modelValue', () => Select({
         items: ['foo'],
       })).toEqualTypeOf<[string]>();
 
       // with groups
-      expectEmitPayloadType('update:modelValue', () => PSelect({
+      expectEmitPayloadType('update:modelValue', () => Select({
         items: [['foo']],
       })).toEqualTypeOf<[string]>();
 
       // with groups and mixed types
-      expectEmitPayloadType('update:modelValue', () => PSelect({
+      expectEmitPayloadType('update:modelValue', () => Select({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
       })).toEqualTypeOf<[string | number]>();
 
       // with groups, multiple, mixed types and valueKey
-      expectEmitPayloadType('update:modelValue', () => PSelect({
+      expectEmitPayloadType('update:modelValue', () => Select({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
         valueKey: 'value', // TODO: value is already the default valueKey
       })).toEqualTypeOf<[string | number]>();

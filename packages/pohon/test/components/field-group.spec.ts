@@ -1,16 +1,15 @@
-import type { PFieldGroupProps, PFieldGroupSlots } from '../../src/runtime/components/field-group.vue';
 import buttonTheme from '#build/pohon/button';
 import { PButton, PInput } from '#components';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PFieldGroup from '../../src/runtime/components/field-group.vue';
-import ComponentRender from '../component-render';
+import FieldGroup from '../../src/runtime/components/field-group.vue';
+import { renderEach } from '../component-render';
 
-describe('fieldGroup', () => {
+describe('FieldGroup', () => {
   const sizes = Object.keys(buttonTheme.variants.size) as any;
 
-  it.each([
+  renderEach(FieldGroup, [
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'absolute' } }],
@@ -43,13 +42,10 @@ describe('fieldGroup', () => {
         },
       }],
     ),
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PFieldGroupProps; slots?: Partial<PFieldGroupSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PFieldGroup);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PFieldGroup, {
+    const wrapper = await mountSuspended(FieldGroup, {
       slots: {
         default: {
           template: '<PInput /> <PButton> Click me! </PButton>',

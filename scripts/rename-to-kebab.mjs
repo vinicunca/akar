@@ -6,9 +6,9 @@ import { toKebabCase } from '@vinicunca/perkakas';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SOURCE_DIR = path.resolve(__dirname, '../packages/pohon/src');
+const SOURCE_DIR = path.resolve(__dirname, '../packages/pohon');
 const TARGET_FOLDERS = [
-  'nuxtui',
+  'test',
 ];
 
 function isSameInode(a, b) {

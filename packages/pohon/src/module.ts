@@ -211,32 +211,6 @@ export default defineNuxtModule<PohonModuleOptions>({
       'isolate',
     ].filter(Boolean).join(' ');
 
-    /**
-     * This is to remove the data-pohon data attributes from all components
-     * so that we can reduce the amount of dom that is being generated in production build.
-     */
-    if (!nuxt.options.build && !nuxt.options.test) {
-      nuxt.hook('vite:extendConfig', (config: any) => {
-        config.vue = config.vue || {};
-        config.vue.template = config.vue.template || {};
-        config.vue.template.compilerOptions = config.vue.template.compilerOptions || {};
-        config.vue.template.compilerOptions.nodeTransforms = config.vue.template.compilerOptions.nodeTransforms || [];
-
-        config.vue.template.compilerOptions.nodeTransforms.push((node: any) => {
-          if (node.type === 1) {
-            if (node.props) {
-              for (let i = node.props.length - 1; i >= 0; i--) {
-                const prop = node.props[i];
-                if (prop.type === 6 && prop.name === 'data-pohon') {
-                  node.props.splice(i, 1);
-                }
-              }
-            }
-          }
-        });
-      });
-    }
-
     if (options.prose || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),

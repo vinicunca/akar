@@ -1,0 +1,142 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BlogPost > renders with authors slot correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <div data-slot="header" class=""><img src="https://picsum.photos/640/360" alt="Title" data-slot="image"></div>
+  <div data-slot="body" class=""><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="peer focus:outline-none"><span class="inset-0 absolute" aria-hidden="true"></span></a>
+    <div data-slot="meta" class=""><span data-slot="badge" class=""><!--v-if--><span data-slot="label" class="">Badge</span>
+      <!--v-if--></span><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="">Jan 1, 2024</time>
+    </div>
+    <h2 data-slot="title" class="">Title</h2>
+    <div data-slot="description" class="">Description</div>
+    <div data-slot="authors" class="">Authors slot</div>
+  </div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`BlogPost > renders with badge correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <!--v-if-->
+  <div data-slot="body" class="">
+    <!--v-if-->
+    <div data-slot="meta" class=""><span data-slot="badge" class=""><!--v-if--><span data-slot="label" class="">Badge</span>
+      <!--v-if--></span>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`BlogPost > renders with badge object correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <!--v-if-->
+  <div data-slot="body" class="">
+    <!--v-if-->
+    <div data-slot="meta" class=""><span data-slot="badge" class=""><!--v-if--><span data-slot="label" class="">Badge</span>
+      <!--v-if--></span>
+      <!--v-if-->
+    </div>
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`BlogPost > renders with body slot correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <div data-slot="header" class=""><img src="https://picsum.photos/640/360" alt="Title" data-slot="image"></div>
+  <div data-slot="body" class=""><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Title" class="peer focus:outline-none"><span class="inset-0 absolute" aria-hidden="true"></span></a>Body slot</div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`BlogPost > renders with date correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <!--v-if-->
+  <div data-slot="body" class="">
+    <!--v-if-->
+    <div data-slot="meta" class="">
+      <!--v-if--><time datetime="2024-01-01T00:00:00.000Z" data-slot="date" class="">Jan 1, 2024</time>
+    </div>
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`BlogPost > renders with description correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <!--v-if-->
+  <div data-slot="body" class="">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+    <div data-slot="description" class="">Description</div>
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`BlogPost > renders with image correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <div data-slot="header" class=""><img src="https://picsum.photos/640/360" data-slot="image"></div>
+  <div data-slot="body" class="">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`BlogPost > renders with title correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <!--v-if-->
+  <div data-slot="body" class="">
+    <!--v-if-->
+    <!--v-if-->
+    <h2 data-slot="title" class="">Title</h2>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`BlogPost > renders with to & image correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <div data-slot="header" class=""><img src="https://picsum.photos/640/360" data-slot="image"></div>
+  <div data-slot="body" class=""><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Post link" class="peer focus:outline-none"><span class="inset-0 absolute" aria-hidden="true"></span></a>
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</article>"
+`;
+
+exports[`BlogPost > renders with to correctly 1`] = `
+"<article data-orientation="vertical" data-slot="root" class="">
+  <!--v-if-->
+  <div data-slot="body" class=""><a href="https://github.com/benjamincanac" rel="noopener noreferrer" aria-label="Post link" class="peer focus:outline-none"><span class="inset-0 absolute" aria-hidden="true"></span></a>
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</article>"
+`;

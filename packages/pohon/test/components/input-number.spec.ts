@@ -1,20 +1,19 @@
 import type { FormInputEvents } from '../../src/module';
-import type { PInputNumberProps, PInputNumberSlots } from '../../src/runtime/components/input-number.vue';
 import theme from '#build/pohon/input-number';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { reactive } from 'vue';
-import PInputNumber from '../../src/runtime/components/input-number.vue';
-import ComponentRender from '../component-render';
+import InputNumber from '../../src/runtime/components/input-number.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 
-describe('inputNumber', () => {
+describe('InputNumber', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
 
-  it.each([
+  renderEach(InputNumber, [
     // Props
     ['with name', { props: { name: 'name' } }],
     ['with placeholder', { props: { placeholder: 'Number...' } }],
@@ -36,17 +35,14 @@ describe('inputNumber', () => {
     ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'absolute' } }],
-    ['with ui', { props: { pohon: { base: 'rounded-full' } } }],
+    ['with pohon', { props: { pohon: { base: 'rounded-full' } } }],
     // Slots
     ['with increment slot', { slots: { increment: () => '+' } }],
     ['with decrement slot', { slots: { decrement: () => '-' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PInputNumberProps; slots?: Partial<PInputNumberSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PInputNumber);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PInputNumber, {
+    const wrapper = await mountSuspended(InputNumber, {
       props: {
         placeholder: 'Enter a number',
         required: true,
@@ -60,7 +56,7 @@ describe('inputNumber', () => {
 
   describe('emits', () => {
     it('update:modelValue event', async () => {
-      const wrapper = await mountSuspended(PInputNumber);
+      const wrapper = await mountSuspended(InputNumber);
       const input = wrapper.findComponent({ name: 'NumberFieldRoot' });
       await input.setValue(1);
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] });
@@ -68,14 +64,14 @@ describe('inputNumber', () => {
     });
 
     it('change event', async () => {
-      const wrapper = await mountSuspended(PInputNumber);
+      const wrapper = await mountSuspended(InputNumber);
       const input = wrapper.findComponent({ name: 'NumberFieldRoot' });
       await input.setValue(1);
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
     it('blur event', async () => {
-      const wrapper = await mountSuspended(PInputNumber);
+      const wrapper = await mountSuspended(InputNumber);
       const input = wrapper.findComponent({ name: 'NumberFieldInput' });
       await input.trigger('blur');
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] });

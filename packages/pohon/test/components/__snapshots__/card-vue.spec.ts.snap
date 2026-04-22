@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Card > renders with as correctly 1`] = `
-"<section class="" data-pohon="card-root">
+"<section data-slot="root" class="">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -9,7 +9,7 @@ exports[`Card > renders with as correctly 1`] = `
 `;
 
 exports[`Card > renders with class correctly 1`] = `
-"<div class="rounded-xl" data-pohon="card-root">
+"<div data-slot="root" class="rounded-xl">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -17,31 +17,31 @@ exports[`Card > renders with class correctly 1`] = `
 `;
 
 exports[`Card > renders with default slot correctly 1`] = `
-"<div class="" data-pohon="card-root">
+"<div data-slot="root" class="">
   <!--v-if-->
-  <div class="" data-pohon="card-body">Default slot</div>
+  <div data-slot="body" class="">Default slot</div>
   <!--v-if-->
 </div>"
 `;
 
 exports[`Card > renders with footer slot correctly 1`] = `
-"<div class="" data-pohon="card-root">
+"<div data-slot="root" class="">
   <!--v-if-->
   <!--v-if-->
-  <div class="" data-pohon="card-footer">Footer slot</div>
+  <div data-slot="footer" class="">Footer slot</div>
 </div>"
 `;
 
 exports[`Card > renders with header slot correctly 1`] = `
-"<div class="" data-pohon="card-root">
-  <div class="" data-pohon="card-header">Header slot</div>
+"<div data-slot="root" class="">
+  <div data-slot="header" class="">Header slot</div>
   <!--v-if-->
   <!--v-if-->
 </div>"
 `;
 
-exports[`Card > renders with ui correctly 1`] = `
-"<div class="" data-pohon="card-root">
+exports[`Card > renders with pohon correctly 1`] = `
+"<div data-slot="root" class="">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -49,7 +49,7 @@ exports[`Card > renders with ui correctly 1`] = `
 `;
 
 exports[`Card > renders with variant outline correctly 1`] = `
-"<div class="" data-pohon="card-root">
+"<div data-slot="root" class="">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -57,7 +57,7 @@ exports[`Card > renders with variant outline correctly 1`] = `
 `;
 
 exports[`Card > renders with variant soft correctly 1`] = `
-"<div class="" data-pohon="card-root">
+"<div data-slot="root" class="">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -65,7 +65,7 @@ exports[`Card > renders with variant soft correctly 1`] = `
 `;
 
 exports[`Card > renders with variant solid correctly 1`] = `
-"<div class="" data-pohon="card-root">
+"<div data-slot="root" class="">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->
@@ -73,7 +73,7 @@ exports[`Card > renders with variant solid correctly 1`] = `
 `;
 
 exports[`Card > renders with variant subtle correctly 1`] = `
-"<div class="" data-pohon="card-root">
+"<div data-slot="root" class="">
   <!--v-if-->
   <!--v-if-->
   <!--v-if-->

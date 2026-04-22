@@ -1,6 +1,3 @@
-/* eslint-disable sonar/no-identical-functions */
-
-import type { PButtonProps, PButtonSlots } from '../../src/runtime/components/button.vue';
 import theme from '#build/pohon/button';
 import { PForm } from '#components';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
@@ -8,14 +5,14 @@ import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { ref } from 'vue';
-import PButton from '../../src/runtime/components/button.vue';
-import ComponentRender from '../component-render';
+import Button from '../../src/runtime/components/button.vue';
+import { renderEach } from '../component-render';
 
-describe('button', () => {
+describe('Button', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
 
-  it.each([
+  renderEach(Button, [
     // Props
     ['with label', { props: { label: 'Button' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Button', size } }]),
@@ -43,20 +40,17 @@ describe('button', () => {
     ['with class', { props: { label: 'Button', class: 'rounded-full font-bold' } }],
     ['with activeClass', { props: { label: 'Button', active: true, activeClass: 'font-bold' } }],
     ['with inactiveClass', { props: { label: 'Button', active: false, inactiveClass: 'font-light' } }],
-    ['with ui', { props: { label: 'Button', pohon: { label: 'font-bold' } } }],
+    ['with pohon', { props: { label: 'Button', pohon: { label: 'font-bold' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PButtonProps; slots?: Partial<PButtonSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PButton);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('with loading-auto works', async () => {
     let resolve: any | null = null;
     const wrapper = await mountSuspended({
-      components: { PButton },
+      components: { Button },
       setup() {
         function onClick() {
           return new Promise((res) => {
@@ -67,7 +61,7 @@ describe('button', () => {
         return { onClick };
       },
       template: `
-        <PButton loading-auto @click="onClick"> Click </PButton>
+        <Button loading-auto @click="onClick"> Click </Button>
       `,
     });
 
@@ -75,9 +69,10 @@ describe('button', () => {
     button.trigger('click');
     await flushPromises();
 
-    const icon = wrapper.findComponent({ name: 'PIcon' });
+    const icon = wrapper.findComponent({ name: 'Icon' });
 
-    expect(icon?.vm?.name).toBe('i-lucide:loader-circle');
+    expect(icon.classes()).toContain('animate-spin');
+    expect(icon?.vm?.name).toBe('i-lucide-loader-circle');
 
     resolve?.(null);
   });
@@ -85,8 +80,9 @@ describe('button', () => {
   it('with loading-auto works with forms', async () => {
     let resolve: any | null = null;
     const wrapper = await mountSuspended({
-      components: { PButton, PForm },
+      components: { Button, PForm },
       setup() {
+        // eslint-disable-next-line sonar/no-identical-functions
         function onSubmit() {
           return new Promise((res) => {
             resolve = res;
@@ -98,7 +94,7 @@ describe('button', () => {
       },
       template: `
         <PForm :state="{}" ref="form" @submit="onSubmit">
-          <PButton type="submit" loading-auto> Click </PButton>
+          <Button type="submit" loading-auto> Click </Button>
         </PForm>
       `,
     });
@@ -107,15 +103,16 @@ describe('button', () => {
     form.value.submit();
     await flushPromises();
 
-    const icon = wrapper.findComponent({ name: 'PIcon' });
+    const icon = wrapper.findComponent({ name: 'Icon' });
 
-    expect(icon?.vm?.name).toBe('i-lucide:loader-circle');
+    expect(icon.classes()).toContain('animate-spin');
+    expect(icon?.vm?.name).toBe('i-lucide-loader-circle');
 
     resolve?.(null);
   });
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PButton, {
+    const wrapper = await mountSuspended(Button, {
       props: {
         label: 'Button',
         avatar: {

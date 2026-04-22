@@ -1,12 +1,11 @@
-import type { PStepperProps, PStepperSlots } from '../../src/runtime/components/stepper.vue';
 import theme from '#build/pohon/stepper';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PStepper from '../../src/runtime/components/stepper.vue';
-import ComponentRender from '../component-render';
+import Stepper from '../../src/runtime/components/stepper.vue';
+import { renderEach } from '../component-render';
 
-describe('pStepper', () => {
+describe('Stepper', () => {
   const sizes = Object.keys(theme.variants.size) as any;
 
   const items = [
@@ -29,18 +28,19 @@ describe('pStepper', () => {
 
   const props = { items };
 
-  it.each([
+  renderEach(Stepper, [
     // Props
     ['with items', { props }],
     ['with defaultValue', { props: { ...props, defaultValue: 1 } }],
     ['with modelValue', { props: { ...props, modelValue: 1 } }],
+    ['with valueKey', { props: { ...props, valueKey: 'title', defaultValue: 'Address' } }],
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
     ...sizes.map((size: string) => [`with size ${size} horizontal`, { props: { ...props, size } }]),
     ...sizes.map((size: string) => [`with size ${size} vertical`, { props: { ...props, size, orientation: 'vertical' } }]),
     ['without linear', { props: { ...props, linear: false } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'gap-8' } }],
-    ['with ui', { props: { ...props, pohon: { title: 'font-bold' } } }],
+    ['with pohon', { props: { ...props, pohon: { title: 'font-bold' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with indicator slot', { props, slots: { indicator: () => 'Indicator slot' } }],
@@ -48,15 +48,12 @@ describe('pStepper', () => {
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with custom slot', { props: { ...props, defaultValue: 2 }, slots: { custom: () => 'Custom slot' } }],
     ['with custom-wrapper slot', { props, slots: { 'custom-wrapper': () => 'Custom wrapper slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PStepperProps; slots?: Partial<PStepperSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PStepper);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PStepper, {
+    const wrapper = await mountSuspended(Stepper, {
       props: {
         items,
         modelValue: 1,
