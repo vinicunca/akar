@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps } from '../types';
 import type { TextareaHTMLAttributes } from '../types/html';
@@ -11,10 +12,7 @@ type Textarea = ComponentConfig<typeof theme, AppConfig, 'textarea'>;
 
 type TextareaValue = string | number | null;
 
-export interface PTextareaProps<
-  T extends TextareaValue = TextareaValue,
-  Mod extends ModelModifiers = ModelModifiers,
-> extends UseComponentIconsProps, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'name' | 'placeholder' | 'required' | 'autofocus' | 'disabled' | 'rows'> {
+export interface PTextareaProps<T extends TextareaValue = TextareaValue, Mod extends ModelModifiers = ModelModifiers> extends UseComponentIconsProps, /** @vue-ignore */ Omit<TextareaHTMLAttributes, 'name' | 'placeholder' | 'required' | 'autofocus' | 'disabled' | 'rows'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -46,6 +44,8 @@ export interface PTextareaProps<
   maxrows?: number;
   /** Highlight the ring color like a focus state. */
   highlight?: boolean;
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean;
   defaultValue?: ApplyModifiers<T, Mod>;
   modelValue?: ApplyModifiers<T, Mod>;
   modelModifiers?: Mod;
@@ -60,9 +60,9 @@ export interface PTextareaEmits<T extends TextareaValue = TextareaValue, Mod ext
 }
 
 export interface PTextareaSlots {
-  leading: (props: { pohon: Textarea['pohon'] }) => any;
-  default: (props: { pohon: Textarea['pohon'] }) => any;
-  trailing: (props: { pohon: Textarea['pohon'] }) => any;
+  leading?: (props: { pohon: Textarea['pohon'] }) => Array<VNode>;
+  default?: (props: { pohon: Textarea['pohon'] }) => Array<VNode>;
+  trailing?: (props: { pohon: Textarea['pohon'] }) => Array<VNode>;
 }
 </script>
 
@@ -93,11 +93,8 @@ const props = withDefaults(
 );
 const emits = defineEmits<PTextareaEmits<T, Mod>>();
 const slots = defineSlots<PTextareaSlots>();
-const modelValue = useVModel<
-  PTextareaProps<T, Mod>,
-  'modelValue',
-  'update:modelValue'
->(
+
+const modelValue = useVModel<PTextareaProps<T, Mod>, 'modelValue', 'update:modelValue'>(
   props,
   'modelValue',
   emits,
@@ -127,21 +124,17 @@ const {
   trailingIconName,
 } = useComponentIcons(props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.textarea || {}),
-  })({
-    color: color.value,
-    variant: props.variant,
-    size: size?.value,
-    loading: props.loading,
-    highlight: highlight.value,
-    autoresize: props.autoresize,
-    leading: isLeading.value || !!props.avatar || !!slots.leading,
-    trailing: isTrailing.value || !!slots.trailing,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.textarea || {}) })({
+  color: color.value,
+  variant: props.variant,
+  size: size?.value,
+  loading: props.loading,
+  highlight: highlight.value,
+  fixed: props.fixed,
+  autoresize: props.autoresize,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing,
+}));
 
 const textareaRef = useTemplateRef('textareaRef');
 
@@ -240,12 +233,14 @@ onMounted(() => {
 
 defineExpose({
   textareaRef,
+  autoResize,
 });
 </script>
 
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <textarea
@@ -255,6 +250,7 @@ defineExpose({
       :name="name"
       :rows="rows"
       :placeholder="placeholder"
+      data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
       :disabled="disabled"
       :required="required"
@@ -269,6 +265,7 @@ defineExpose({
 
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
+      data-slot="leading"
       :class="pohon.leading({ class: pohonProp?.leading })"
     >
       <slot
@@ -278,12 +275,14 @@ defineExpose({
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
+          data-slot="leadingIcon"
           :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
         />
         <PAvatar
           v-else-if="!!avatar"
           :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
+          data-slot="leadingAvatar"
           :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
         />
       </slot>
@@ -291,6 +290,7 @@ defineExpose({
 
     <span
       v-if="isTrailing || !!slots.trailing"
+      data-slot="trailing"
       :class="pohon.trailing({ class: pohonProp?.trailing })"
     >
       <slot
@@ -300,6 +300,7 @@ defineExpose({
         <PIcon
           v-if="trailingIconName"
           :name="trailingIconName"
+          data-slot="trailingIcon"
           :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         />
       </slot>

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/field-group';
 
@@ -25,7 +26,7 @@ export interface PFieldGroupProps {
 }
 
 export interface PFieldGroupSlots {
-  default: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -48,12 +49,7 @@ defineSlots<PFieldGroupSlots>();
 const appConfig = useAppConfig() as FieldGroup['AppConfig'];
 const pohonProp = useComponentPohon('fieldGroup', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.fieldGroup || {}),
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.fieldGroup || {}) }));
 
 provide(fieldGroupInjectionKey, computed(() => ({
   orientation: props.orientation,
@@ -65,7 +61,7 @@ provide(fieldGroupInjectionKey, computed(() => ({
   <APrimitive
     :as="as"
     :data-orientation="orientation"
-    :class="pohon({ orientation, class: [pohonProp.base, props.class] })"
+    :class="pohon({ orientation, class: [pohonProp?.base, props.class] })"
   >
     <slot />
   </APrimitive>

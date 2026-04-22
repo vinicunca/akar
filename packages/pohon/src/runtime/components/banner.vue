@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps, PLinkProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/banner';
@@ -14,8 +15,7 @@ export interface PBannerProps {
   as?: any;
   /**
    * A unique id saved to local storage to remember if the banner has been dismissed.
-   * Change this value to show the banner again.
-   * @defaultValue '1'
+   * Without an explicit id, the banner will not be persisted and will reappear on page reload.
    */
   id?: string;
   /**
@@ -53,10 +53,10 @@ export interface PBannerProps {
 }
 
 export interface PBannerSlots {
-  leading: (props: { pohon: Banner['pohon'] }) => any;
-  title: (props?: object) => any;
-  actions: (props?: object) => any;
-  close: (props: { pohon: Banner['pohon'] }) => any;
+  leading?: (props: { pohon: Banner['pohon'] }) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  actions?: (props?: {}) => Array<VNode>;
+  close?: (props: { pohon: Banner['pohon'] }) => Array<VNode>;
 }
 
 export interface PBannerEmits {
@@ -67,7 +67,7 @@ export interface PBannerEmits {
 <script setup lang="ts">
 import { useAppConfig, useHead } from '#imports';
 import { APrimitive } from 'akar';
-import { computed, watch } from 'vue';
+import { computed, onMounted, ref, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
@@ -85,52 +85,73 @@ const { t } = useLocale();
 const appConfig = useAppConfig() as Banner['AppConfig'];
 const pohonProp = useComponentPohon('banner', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.banner || {}),
-  })({
-    color: props.color,
-    to: !!props.to,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.banner || {}) })({
+  color: props.color,
+  to: !!props.to,
+}));
 
-const id = computed(() => `banner-${props.id || '1'}`);
+const instanceId = useId();
+const id = computed(() => {
+  const rawId = props.id || instanceId;
+  // Sanitize to only allow safe characters for CSS custom properties and selectors
+  return `banner-${rawId.replace(/[^\w-]/g, '-')}`;
+});
+const isVisible = ref(true);
+const hasPersistence = computed(() => !!props.id);
 
-watch(id, (newId) => {
-  if (typeof document === 'undefined' || typeof localStorage === 'undefined') {
-    return;
+onMounted(() => {
+  if (hasPersistence.value && typeof localStorage !== 'undefined') {
+    const isClosed = localStorage.getItem(id.value) === 'true';
+    isVisible.value = !isClosed;
   }
-
-  const isClosed = localStorage.getItem(newId) === 'true';
-  const htmlElement = document.querySelector('html');
-
-  htmlElement?.classList.toggle('hide-banner', isClosed);
 });
 
-useHead({
-  script: [{
-    key: 'prehydrate-template-banner',
-    innerHTML: `
+useHead(() => {
+  if (!hasPersistence.value) {
+    return {};
+  }
+
+  return {
+    script: [{
+      key: `prehydrate-banner-${id.value}`,
+      innerHTML: `
+        (function() {
+          try {
             if (localStorage.getItem(${JSON.stringify(id.value)}) === 'true') {
-              document.querySelector('html').classList.add('hide-banner')
-            }`.replace(/\s+/g, ' '),
-    type: 'text/javascript',
-  }],
+              document.documentElement.style.setProperty('--${id.value}-display', 'none');
+            }
+          } catch (e) {}
+        })();
+      `.replace(/\s+/g, ' '),
+      type: 'text/javascript',
+      tagPosition: 'head',
+    }],
+    style: [{
+      key: `banner-style-${id.value}`,
+      innerHTML: `.banner[data-banner-id="${id.value}"] { display: var(--${id.value}-display, block); }`,
+      tagPosition: 'head',
+    }],
+  };
 });
 
 function onClose() {
-  localStorage.setItem(id.value, 'true');
-  document.querySelector('html')?.classList.add('hide-banner');
+  if (hasPersistence.value) {
+    localStorage.setItem(id.value, 'true');
+    document.documentElement.style.setProperty(`--${id.value}-display`, 'none');
+  }
+  isVisible.value = false;
   emits('close');
 }
 </script>
 
 <template>
   <APrimitive
+    v-show="isVisible"
     :as="as"
+    class="banner"
+    :data-banner-id="id"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="banner-root"
   >
     <PLink
       v-if="to"
@@ -147,17 +168,17 @@ function onClose() {
     </PLink>
 
     <PContainer
+      data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
-      data-pohon="banner-container"
     >
       <div
+        data-slot="left"
         :class="pohon.left({ class: pohonProp?.left })"
-        data-pohon="banner-left"
       />
 
       <div
+        data-slot="center"
         :class="pohon.center({ class: pohonProp?.center })"
-        data-pohon="banner-center"
       >
         <slot
           name="leading"
@@ -166,15 +187,15 @@ function onClose() {
           <PIcon
             v-if="icon"
             :name="icon"
+            data-slot="icon"
             :class="pohon.icon({ class: pohonProp?.icon })"
-            data-pohon="banner-icon"
           />
         </slot>
 
         <div
           v-if="title || !!slots.title"
+          data-slot="title"
           :class="pohon.title({ class: pohonProp?.title })"
-          data-pohon="banner-title"
         >
           <slot name="title">
             {{ title }}
@@ -183,8 +204,8 @@ function onClose() {
 
         <div
           v-if="actions?.length || !!slots.actions"
+          data-slot="actions"
           :class="pohon.actions({ class: pohonProp?.actions })"
-          data-pohon="banner-actions"
         >
           <slot name="actions">
             <PButton
@@ -199,8 +220,8 @@ function onClose() {
       </div>
 
       <div
+        data-slot="right"
         :class="pohon.right({ class: pohonProp?.right })"
-        data-pohon="banner-right"
       >
         <slot
           name="close"
@@ -214,8 +235,8 @@ function onClose() {
             variant="ghost"
             :aria-label="t('banner.close')"
             v-bind="(typeof close === 'object' ? close : {})"
+            data-slot="close"
             :class="pohon.close({ class: pohonProp?.close })"
-            data-pohon="banner-close"
             @click="onClose"
           />
         </slot>
@@ -223,9 +244,3 @@ function onClose() {
     </PContainer>
   </APrimitive>
 </template>
-
-<style scoped>
-.hide-banner [data-pohon='banner-root'] {
-  display: none;
-}
-</style>

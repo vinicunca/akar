@@ -1,45 +1,47 @@
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/page-body'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/page-body';
 
-type PageBody = ComponentConfig<typeof theme, AppConfig, 'pageBody'>
+type PageBody = ComponentConfig<typeof theme, AppConfig, 'pageBody'>;
 
-export interface PageBodyProps {
+export interface PPageBodyProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
-  class?: any
-  pohon?: { base?: any }
+  as?: any;
+  class?: any;
+  pohon?: { base?: any };
 }
 
-export interface PageBodySlots {
-  default?(props?: {}): VNode[]
+export interface PPageBodySlots {
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { tv } from '../utils/tv'
-import { useComponentPohon } from '../composables/use-component-pohon'
+import { useAppConfig } from '#imports';
+import { APrimitive } from 'akar';
+import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { uv } from '../utils/uv';
 
-const props = defineProps<PageBodyProps>()
-defineSlots<PageBodySlots>()
+const props = defineProps<PPageBodyProps>();
+defineSlots<PPageBodySlots>();
 
-const appConfig = useAppConfig() as PageBody['AppConfig']
-const pohonProp = useComponentPohon('pageBody', props)
+const appConfig = useAppConfig() as PageBody['AppConfig'];
+const pohonProp = useComponentPohon('pageBody', props);
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pageBody || {}) }))
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageBody || {}) }));
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: [pohonProp?.base, props.class] })">
+  <APrimitive
+    :as="as"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
+  >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

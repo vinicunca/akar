@@ -4,6 +4,7 @@ import type { AppConfig } from '@nuxt/schema';
 import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import type { AListboxRootEmits, AListboxRootProps } from 'akar';
 import type { FuseResult } from 'fuse.js';
+import type { VNode } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PButtonProps, PChipProps, PIconProps, PInputProps, PKbdProps, PLinkProps, PLinkPropsKeys } from '../types';
 import type { GetItemKeys } from '../types/utils';
@@ -59,12 +60,16 @@ export interface PCommandPaletteGroup<T extends PCommandPaletteItem = PCommandPa
   highlightedIcon?: PIconProps['name'];
 }
 
-export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PCommandPaletteGroup<any>, T extends PCommandPaletteItem = PCommandPaletteItem> extends Pick<AListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
+export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PCommandPaletteGroup<any>, T extends PCommandPaletteItem = PCommandPaletteItem> extends Pick<AListboxRootProps, 'multiple' | 'disabled' | 'modelValue' | 'defaultValue' | 'highlightOnHover' | 'selectionBehavior' | 'by'>, Pick<UseComponentIconsProps, 'loading' | 'loadingIcon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
   as?: any;
+  /**
+   * @defaultValue 'md'
+   */
+  size?: CommandPalette['variants']['size'];
   /**
    * The icon displayed in the input.
    * @defaultValue appConfig.pohon.icons.search
@@ -100,7 +105,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    */
   autofocus?: boolean;
   /**
-   * Display a close button in the input (useful when inside a Dialog for example).
+   * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    * @emits 'update:open'
    * @defaultValue false
@@ -145,6 +150,7 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
   fuse?: UseFuseOptions<T>;
   /**
    * Enable virtualization for large lists.
+   * Note: when enabled, all groups are flattened into a single list due to a limitation of Reka UI (https://github.com/unovue/akar/issues/1885).
    * @defaultValue false
    */
   virtualize?: boolean | {
@@ -159,6 +165,11 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
      */
     estimateSize?: number | ((index: number) => number);
   };
+  /**
+   * When `items` is an array of objects, select the field to use as the value instead of the object itself.
+   * @defaultValue undefined
+   */
+  valueKey?: GetItemKeys<T>;
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -183,25 +194,30 @@ export type PCommandPaletteEmits<T extends PCommandPaletteItem = PCommandPalette
   'update:open': [value: boolean];
 };
 
-type SlotProps<T> = (props: { item: T; index: number; pohon: CommandPalette['pohon'] }) => any;
+type SlotProps<T> = (props: { item: T; index: number; pohon: CommandPalette['pohon'] }) => Array<VNode>;
+type GroupSlotProps<T extends PCommandPaletteItem = PCommandPaletteItem, G extends PCommandPaletteGroup<T> = PCommandPaletteGroup<T>> = (props: { group: G; label: string; pohon: CommandPalette['pohon'] }) => Array<VNode>;
 
-export type PCommandPaletteSlots<G extends PCommandPaletteGroup<T> = PCommandPaletteGroup<any>, T extends PCommandPaletteItem = PCommandPaletteItem> = {
-  'empty': (props: { searchTerm?: string }) => any;
-  'footer': (props: { pohon: CommandPalette['pohon'] }) => any;
-  'back': (props: { pohon: CommandPalette['pohon'] }) => any;
-  'close': (props: { pohon: CommandPalette['pohon'] }) => any;
-  'item': SlotProps<T>;
-  'item-leading': SlotProps<T>;
-  'item-label': SlotProps<T>;
-  'item-description': SlotProps<T>;
-  'item-trailing': SlotProps<T>;
-} & Record<string, SlotProps<G>> & Record<string, SlotProps<T>>;
+type GroupSlots<T extends PCommandPaletteItem = PCommandPaletteItem, G extends PCommandPaletteGroup<T> = PCommandPaletteGroup<T>> = {
+  'group-label'?: GroupSlotProps<T, G>;
+} & Record<`${string}-group-label`, GroupSlotProps<T, G>>;
+
+export type PCommandPaletteSlots<T extends PCommandPaletteItem = PCommandPaletteItem, G extends PCommandPaletteGroup<T> = PCommandPaletteGroup<T>> = {
+  'empty'?: (props: { searchTerm: string }) => Array<VNode>;
+  'footer'?: (props: { pohon: CommandPalette['pohon'] }) => Array<VNode>;
+  'back'?: (props: { pohon: CommandPalette['pohon'] }) => Array<VNode>;
+  'close'?: (props: { pohon: CommandPalette['pohon'] }) => Array<VNode>;
+  'item'?: SlotProps<T>;
+  'item-leading'?: SlotProps<T>;
+  'item-label'?: SlotProps<T>;
+  'item-description'?: SlotProps<T>;
+  'item-trailing'?: SlotProps<T>;
+} & Record<string, SlotProps<T>> & GroupSlots<T, G>;
 
 </script>
 
 <script setup lang="ts" generic="G extends PCommandPaletteGroup<T>, T extends PCommandPaletteItem">
 import { useAppConfig } from '#imports';
-import { isBoolean, isFunction, isString, omit } from '@vinicunca/perkakas';
+import { isBoolean, isFunction, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick, refThrottled } from '@vueuse/core';
 import { useFuse } from '@vueuse/integrations/useFuse';
 import {
@@ -219,11 +235,11 @@ import { defu } from 'defu';
 import { computed, ref, toRef, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
-import { getProp } from '../utils';
+import { getProp, omit } from '../utils';
 import { highlight } from '../utils/fuse';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
-import getEstimateSize from '../utils/virtualizer';
+import { getEstimateSize } from '../utils/virtualizer';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PChip from './chip.vue';
@@ -238,19 +254,18 @@ defineOptions({ inheritAttrs: false });
 const props = withDefaults(
   defineProps<PCommandPaletteProps<G, T>>(),
   {
-    modelValue: '',
     labelKey: 'label',
     descriptionKey: 'description',
-    autofocus: true,
     input: true,
+    autofocus: true,
     back: true,
-    virtualize: false,
     preserveGroupOrder: false,
+    virtualize: false,
     highlightOnHover: true,
   },
 );
 const emits = defineEmits<PCommandPaletteEmits<T>>();
-const slots = defineSlots<PCommandPaletteSlots<G, T>>();
+const slots = defineSlots<PCommandPaletteSlots<T, G>>();
 
 const searchTerm = defineModel<string>('searchTerm', { default: '' });
 
@@ -259,7 +274,7 @@ const appConfig = useAppConfig() as CommandPalette['AppConfig'];
 const pohonProp = useComponentPohon('commandPalette', props);
 
 const rootProps = useForwardPropsEmits(
-  reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover'),
+  reactivePick(props, 'as', 'disabled', 'multiple', 'modelValue', 'defaultValue', 'highlightOnHover', 'by'),
   emits,
 );
 const virtualizerProps = toRef(() => {
@@ -270,12 +285,12 @@ const virtualizerProps = toRef(() => {
   return defu(
     isBoolean(props.virtualize) ? {} : props.virtualize,
     {
-      estimateSize: getEstimateSize({
-        items: filteredItems.value,
-        size: 'md',
-        descriptionKey: props.descriptionKey as string,
-        hasDescriptionSlot: !!slots['item-description'],
-      }),
+      estimateSize: getEstimateSize(
+        filteredItems.value,
+        'md',
+        props.descriptionKey as string,
+        !!slots['item-description'],
+      ),
     },
   );
 });
@@ -304,14 +319,10 @@ const [
   },
 });
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.commandPalette || {}),
-  })({
-    virtualize: !!props.virtualize,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.commandPalette || {}) })({
+  size: props.size,
+  virtualize: !!props.virtualize,
+}));
 
 const fuse = computed(() =>
   defu(
@@ -331,37 +342,28 @@ const fuse = computed(() =>
 
 const history = ref<Array<PCommandPaletteGroup & { placeholder?: string }>>([]);
 
-const placeholder = computed(() =>
-  history.value[history.value.length - 1]?.placeholder
-  || props.placeholder
-  || t('commandPalette.placeholder'),
-);
+const placeholder = computed(() => history.value[history.value.length - 1]?.placeholder || props.placeholder || t('commandPalette.placeholder'));
 
-const groups = computed(() =>
-  history.value?.length
-    ? [history.value[history.value.length - 1] as G]
-    : props.groups,
-);
+const groups = computed(() => history.value?.length ? [history.value[history.value.length - 1] as G] : props.groups);
 
-const items = computed(() =>
-  groups.value?.filter((group) => {
-    if (!group.id) {
-      console.warn('[pohon] CommandPalette group is missing an `id` property');
-      return false;
-    }
-
-    return !group.ignoreFilter;
-  })?.flatMap((group) => group.items?.map((item) => ({
-    ...item,
-    group: group.id,
-  })) || []) || [],
-);
+const items = computed(() => groups.value?.filter((group) => {
+  if (!group.id) {
+    console.warn('[@nuxt/pohon] CommandPalette group is missing an `id` property');
+    return false;
+  }
+  if (group.ignoreFilter) {
+    return false;
+  }
+  return true;
+})?.flatMap((group) => group.items?.map((item) => ({ ...item, group: group.id })) || []) || []);
 
 const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse);
+
 const throttledFuseResults = refThrottled(fuseResults, 16, true);
 
 function processGroupItems(group: G, items: Array<T & { matches?: FuseResult<T>['matches'] }>) {
   let processedItems = items;
+
   if (group?.postFilter && isFunction(group.postFilter)) {
     processedItems = group.postFilter(searchTerm.value, processedItems);
   }
@@ -371,8 +373,8 @@ function processGroupItems(group: G, items: Array<T & { matches?: FuseResult<T>[
     items: processedItems.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
-        labelHtml: highlight<T>({ item, searchTerm: searchTerm.value, forceKey: props.labelKey }),
-        suffixHtml: highlight<T>({ item, searchTerm: searchTerm.value, forceKey: undefined, omitKeys: [props.labelKey] }),
+        labelHtml: highlight<T>(item, searchTerm.value, props.labelKey),
+        suffixHtml: highlight<T>(item, searchTerm.value, undefined, [props.labelKey]),
       };
     }),
   };
@@ -444,9 +446,7 @@ const filteredGroups = computed(() => {
   }, [...fuseGroups]);
 });
 
-const filteredItems = computed(() =>
-  filteredGroups.value?.flatMap((group) => group.items || []),
-);
+const filteredItems = computed(() => filteredGroups.value.flatMap((group) => group.items || []));
 
 const rootRef = useTemplateRef('rootRef');
 
@@ -506,27 +506,24 @@ function onSelect(event: Event, item: T) {
       custom
     >
       <AListboxItem
-        :value="omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
+        :value="props.valueKey ? getProp(item, props.valueKey as string) : omit(item, ['matches' as any, 'group' as any, 'onSelect', 'labelHtml', 'suffixHtml', 'children'])"
         :disabled="item.disabled"
         as-child
         @select="onSelect($event, item as T)"
       >
         <PLinkBase
           v-bind="slotProps"
-          :class="pohon.item({
-            class: [pohonProp?.item, item.pohon?.item, item.class],
-            active: active || item.active,
-          })"
-          data-pohon="command-palette-item"
+          data-slot="item"
+          :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class], active: active || item.active })"
         >
           <slot
-            :name="((item.slot || group?.slot || 'item') as keyof PCommandPaletteSlots<G, T>)"
+            :name="((item.slot || group?.slot || 'item') as keyof PCommandPaletteSlots<T>)"
             :item="(item as any)"
             :index="index"
             :pohon="pohon"
           >
             <slot
-              :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof PCommandPaletteSlots<G, T>)"
+              :name="((item.slot ? `${item.slot}-leading` : group?.slot ? `${group.slot}-leading` : `item-leading`) as keyof PCommandPaletteSlots<T>)"
               :item="(item as any)"
               :index="index"
               :pohon="pohon"
@@ -534,31 +531,21 @@ function onSelect(event: Event, item: T) {
               <PIcon
                 v-if="item.loading"
                 :name="loadingIcon || appConfig.pohon.icons.loading"
-                :class="pohon.itemLeadingIcon({
-                  class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon],
-                  loading: true,
-                })"
-                data-pohon="command-palette-item-leading-icon"
+                data-slot="itemLeadingIcon"
+                :class="pohon.itemLeadingIcon({ class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon], loading: true })"
               />
-
               <PIcon
                 v-else-if="item.icon"
                 :name="item.icon"
-                :class="pohon.itemLeadingIcon({
-                  class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon],
-                  active: active || item.active,
-                })"
-                data-pohon="command-palette-item-leading-icon"
+                data-slot="itemLeadingIcon"
+                :class="pohon.itemLeadingIcon({ class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon], active: active || item.active })"
               />
               <PAvatar
                 v-else-if="item.avatar"
                 :size="((item.pohon?.itemLeadingAvatarSize || pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
                 v-bind="item.avatar"
-                :class="pohon.itemLeadingAvatar({
-                  class: [pohonProp?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar],
-                  active: active || item.active,
-                })"
-                data-pohon="command-palette-item-leading-avatar"
+                data-slot="itemLeadingAvatar"
+                :class="pohon.itemLeadingAvatar({ class: [pohonProp?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar], active: active || item.active })"
               />
               <PChip
                 v-else-if="item.chip"
@@ -566,93 +553,80 @@ function onSelect(event: Event, item: T) {
                 inset
                 standalone
                 v-bind="item.chip"
-                :class="pohon.itemLeadingChip({
-                  class: [pohonProp?.itemLeadingChip, item.pohon?.itemLeadingChip],
-                  active: active || item.active,
-                })"
-                data-pohon="command-palette-item-leading-chip"
+                data-slot="itemLeadingChip"
+                :class="pohon.itemLeadingChip({ class: [pohonProp?.itemLeadingChip, item.pohon?.itemLeadingChip], active: active || item.active })"
               />
             </slot>
 
             <span
-              v-if="(item.prefix || (item.labelHtml || getProp({ object: item, path: props.labelKey as string })) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<G, T>]) || (getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof PCommandPaletteSlots<G, T>])"
+              v-if="(item.prefix || (item.labelHtml || getProp(item, props.labelKey as string)) || (item.suffixHtml || item.suffix) || !!slots[(item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<T>]) || (getProp(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof PCommandPaletteSlots<T>])"
+              data-slot="itemWrapper"
               :class="pohon.itemWrapper({ class: [pohonProp?.itemWrapper, item.pohon?.itemWrapper] })"
-              data-pohon="command-palette-item-wrapper"
             >
               <span
+                data-slot="itemLabel"
                 :class="pohon.itemLabel({ class: [pohonProp?.itemLabel, item.pohon?.itemLabel], active: active || item.active })"
-                data-pohon="command-palette-item-label"
               >
                 <slot
-                  :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<G, T>)"
+                  :name="((item.slot ? `${item.slot}-label` : group?.slot ? `${group.slot}-label` : `item-label`) as keyof PCommandPaletteSlots<T>)"
                   :item="(item as any)"
                   :index="index"
                   :pohon="pohon"
                 >
                   <span
                     v-if="item.prefix"
+                    data-slot="itemLabelPrefix"
                     :class="pohon.itemLabelPrefix({ class: [pohonProp?.itemLabelPrefix, item.pohon?.itemLabelPrefix] })"
-                    data-pohon="command-palette-item-label-prefix"
                   >{{ item.prefix }}</span>
 
                   <span
                     v-if="item.labelHtml"
-                    data-pohon="command-palette-item-label-base"
-                    :class="pohon.itemLabelBase({
-                      class: [pohonProp?.itemLabelBase, item.pohon?.itemLabelBase],
-                      active: active || item.active,
-                    })"
+                    data-slot="itemLabelBase"
+                    :class="pohon.itemLabelBase({ class: [pohonProp?.itemLabelBase, item.pohon?.itemLabelBase], active: active || item.active })"
                     v-html="item.labelHtml"
                   />
                   <span
                     v-else
-                    data-pohon="command-palette-item-label-base"
-                    :class="pohon.itemLabelBase({
-                      class: [pohonProp?.itemLabelBase, item.pohon?.itemLabelBase],
-                      active: active || item.active,
-                    })"
-                  >{{ getProp({ object: item, path: props.labelKey as string }) }}</span>
+                    data-slot="itemLabelBase"
+                    :class="pohon.itemLabelBase({ class: [pohonProp?.itemLabelBase, item.pohon?.itemLabelBase], active: active || item.active })"
+                  >{{ getProp(item, props.labelKey as string) }}</span>
 
                   <span
                     v-if="item.suffixHtml"
-                    :class="pohon.itemLabelSuffix({
-                      class: [pohonProp?.itemLabelSuffix, item.pohon?.itemLabelSuffix],
-                      active: active || item.active,
-                    })"
+                    data-slot="itemLabelSuffix"
+                    :class="pohon.itemLabelSuffix({ class: [pohonProp?.itemLabelSuffix, item.pohon?.itemLabelSuffix], active: active || item.active })"
                     v-html="item.suffixHtml"
                   />
                   <span
                     v-else-if="item.suffix"
-                    :class="pohon.itemLabelSuffix({
-                      class: [pohonProp?.itemLabelSuffix, item.pohon?.itemLabelSuffix],
-                      active: active || item.active,
-                    })"
+                    data-slot="itemLabelSuffix"
+                    :class="pohon.itemLabelSuffix({ class: [pohonProp?.itemLabelSuffix, item.pohon?.itemLabelSuffix], active: active || item.active })"
                   >{{ item.suffix }}</span>
                 </slot>
               </span>
 
               <span
-                v-if="getProp({ object: item, path: props.descriptionKey as string }) || !!slots[(item.slot ? `${item.slot}-description` : 'item-description') as keyof PCommandPaletteSlots<G, T>]"
+                v-if="getProp(item, props.descriptionKey as string) || !!slots[(item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof PCommandPaletteSlots<T>]"
+                data-slot="itemDescription"
                 :class="pohon.itemDescription({ class: [pohonProp?.itemDescription, item.pohon?.itemDescription] })"
-                data-pohon="command-palette-item-description"
               >
                 <slot
-                  :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof PCommandPaletteSlots<G, T>)"
+                  :name="((item.slot ? `${item.slot}-description` : group?.slot ? `${group.slot}-description` : `item-description`) as keyof PCommandPaletteSlots<T>)"
                   :item="(item as any)"
                   :index="index"
                   :pohon="pohon"
                 >
-                  {{ getProp({ object: item, path: props.descriptionKey as string }) }}
+                  {{ getProp(item, props.descriptionKey as string) }}
                 </slot>
               </span>
             </span>
 
             <span
+              data-slot="itemTrailing"
               :class="pohon.itemTrailing({ class: [pohonProp?.itemTrailing, item.pohon?.itemTrailing] })"
-              data-pohon="command-palette-item-trailing"
             >
               <slot
-                :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof PCommandPaletteSlots<G, T>)"
+                :name="((item.slot ? `${item.slot}-trailing` : group?.slot ? `${group.slot}-trailing` : `item-trailing`) as keyof PCommandPaletteSlots<T>)"
                 :item="(item as any)"
                 :index="index"
                 :pohon="pohon"
@@ -660,14 +634,14 @@ function onSelect(event: Event, item: T) {
                 <PIcon
                   v-if="item.children && item.children.length > 0"
                   :name="childrenIcon || appConfig.pohon.icons.chevronRight"
+                  data-slot="itemTrailingIcon"
                   :class="pohon.itemTrailingIcon({ class: [pohonProp?.itemTrailingIcon, item.pohon?.itemTrailingIcon] })"
-                  data-pohon="command-palette-item-trailing-icon"
                 />
 
                 <span
                   v-else-if="item.kbds?.length"
+                  data-slot="itemTrailingKbds"
                   :class="pohon.itemTrailingKbds({ class: [pohonProp?.itemTrailingKbds, item.pohon?.itemTrailingKbds] })"
-                  data-pohon="command-palette-item-trailing-kbds"
                 >
                   <PKbd
                     v-for="(kbd, kbdIndex) in item.kbds"
@@ -680,8 +654,8 @@ function onSelect(event: Event, item: T) {
                 <PIcon
                   v-else-if="group?.highlightedIcon"
                   :name="group.highlightedIcon"
+                  data-slot="itemTrailingHighlightedIcon"
                   :class="pohon.itemTrailingHighlightedIcon({ class: [pohonProp?.itemTrailingHighlightedIcon, item.pohon?.itemTrailingHighlightedIcon] })"
-                  data-pohon="command-palette-item-trailing-highlighted-icon"
                 />
               </slot>
 
@@ -691,8 +665,8 @@ function onSelect(event: Event, item: T) {
               >
                 <PIcon
                   :name="selectedIcon || appConfig.pohon.icons.check"
+                  data-slot="itemTrailingIcon"
                   :class="pohon.itemTrailingIcon({ class: [pohonProp?.itemTrailingIcon, item.pohon?.itemTrailingIcon] })"
-                  data-pohon="command-palette-item-trailing-icon"
                 />
               </AListboxItemIndicator>
             </span>
@@ -706,8 +680,8 @@ function onSelect(event: Event, item: T) {
     v-bind="{ ...rootProps, ...$attrs }"
     ref="rootRef"
     :selection-behavior="selectionBehavior"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="command-palette-root"
   >
     <AListboxFilter
       v-if="input"
@@ -715,15 +689,17 @@ function onSelect(event: Event, item: T) {
       as-child
     >
       <PInput
-        :placeholder="placeholder"
         variant="none"
+        :size="size"
+        v-bind="typeof props.input === 'object' ? props.input : {}"
+        :placeholder="placeholder"
         :autofocus="autofocus"
         :loading="loading"
         :loading-icon="loadingIcon"
         :trailing-icon="trailingIcon"
         :icon="icon || appConfig.pohon.icons.search"
+        data-slot="input"
         :class="pohon.input({ class: pohonProp?.input })"
-        data-pohon="command-palette-input"
         @keydown.backspace="onBackspace"
       >
         <template
@@ -735,13 +711,14 @@ function onSelect(event: Event, item: T) {
             :pohon="pohon"
           >
             <PButton
+              :size="size"
               :icon="backIcon || appConfig.pohon.icons.arrowLeft"
               color="neutral"
               variant="link"
               :aria-label="t('commandPalette.back')"
               v-bind="(typeof back === 'object' ? back : {})"
+              data-slot="back"
               :class="pohon.back({ class: pohonProp?.back })"
-              data-pohon="command-palette-back"
               @click="navigateBack"
             />
           </slot>
@@ -757,13 +734,14 @@ function onSelect(event: Event, item: T) {
           >
             <PButton
               v-if="close"
+              :size="size"
               :icon="closeIcon || appConfig.pohon.icons.close"
               color="neutral"
               variant="ghost"
               :aria-label="t('commandPalette.close')"
               v-bind="(typeof close === 'object' ? close : {})"
+              data-slot="close"
               :class="pohon.close({ class: pohonProp?.close })"
-              data-pohon="command-palette-close"
               @click="emits('update:open', false)"
             />
           </slot>
@@ -772,20 +750,20 @@ function onSelect(event: Event, item: T) {
     </AListboxFilter>
 
     <AListboxContent
+      data-slot="content"
       :class="pohon.content({ class: pohonProp?.content })"
-      data-pohon="command-palette-content"
     >
       <div
         v-if="filteredGroups?.length"
         role="presentation"
+        data-slot="viewport"
         :class="pohon.viewport({ class: pohonProp?.viewport })"
-        data-pohon="command-palette-viewport"
       >
         <AListboxVirtualizer
           v-if="!!virtualize"
           v-slot="{ option: item, virtualItem }"
           :options="(filteredItems as any[])"
-          :text-content="item => getProp({ object: item, path: props.labelKey as string })"
+          :text-content="item => getProp(item, props.labelKey as string)"
           v-bind="virtualizerProps"
         >
           <ReuseItemTemplate
@@ -798,15 +776,22 @@ function onSelect(event: Event, item: T) {
           <AListboxGroup
             v-for="group in filteredGroups"
             :key="`group-${group.id}`"
+            data-slot="group"
             :class="pohon.group({ class: pohonProp?.group })"
-            data-pohon="command-palette-group"
           >
             <AListboxGroupLabel
-              v-if="getProp({ object: group, path: props.labelKey as string })"
+              v-if="getProp(group, props.labelKey as string) || !!slots[(group.slot ? `${group.slot}-group-label` : 'group-label') as keyof PCommandPaletteSlots<T, G>]"
+              data-slot="label"
               :class="pohon.label({ class: pohonProp?.label })"
-              data-pohon="command-palette-label"
             >
-              {{ getProp({ object: group, path: props.labelKey as string }) }}
+              <slot
+                :name="((group.slot ? `${group.slot}-group-label` : 'group-label') as keyof GroupSlots<T, G>)"
+                :group="group"
+                :label="getProp(group, props.labelKey as string)"
+                :pohon="pohon"
+              >
+                {{ getProp(group, props.labelKey as string) }}
+              </slot>
             </AListboxGroupLabel>
 
             <ReuseItemTemplate
@@ -822,8 +807,8 @@ function onSelect(event: Event, item: T) {
 
       <div
         v-else
+        data-slot="empty"
         :class="pohon.empty({ class: pohonProp?.empty })"
-        data-pohon="command-palette-empty"
       >
         <slot
           name="empty"
@@ -836,8 +821,8 @@ function onSelect(event: Event, item: T) {
 
     <div
       v-if="!!slots.footer"
+      data-slot="footer"
       :class="pohon.footer({ class: pohonProp?.footer })"
-      data-pohon="command-palette-footer"
     >
       <slot
         name="footer"

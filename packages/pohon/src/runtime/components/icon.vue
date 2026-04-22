@@ -1,19 +1,15 @@
 <script lang="ts">
+import type { RuntimeOptions } from '@nuxt/icon';
+
 export interface PIconProps {
-  name: string | object;
+  name: string | any;
   mode?: 'svg' | 'css';
   size?: string | number;
-  customize?: (
-    content: string,
-    name?: string,
-    prefix?: string,
-    provider?: string,
-  ) => string;
+  customize?: RuntimeOptions['customize'] | boolean | null;
 }
 </script>
 
 <script setup lang="ts">
-import { Icon } from '#components';
 import { isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { useForwardProps } from 'akar';
@@ -21,17 +17,15 @@ import { useForwardProps } from 'akar';
 const props = defineProps<PIconProps>();
 
 const iconProps = useForwardProps(
-  reactivePick(props, 'name', 'mode', 'size', 'customize'),
+  reactivePick(props, 'mode', 'size', 'customize'),
 );
 </script>
 
 <template>
   <Icon
-    v-if="isString(iconProps.name)"
-    :name="iconProps.name"
-    :mode="iconProps.mode"
-    :size="iconProps.size"
-    :customize="iconProps.customize"
+    v-if="isString(name)"
+    :name="name"
+    v-bind="iconProps"
   />
   <component
     :is="name"

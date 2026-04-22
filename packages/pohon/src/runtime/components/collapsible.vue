@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ACollapsibleRootEmits, ACollapsibleRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/collapsible';
 
@@ -19,8 +20,8 @@ export interface PCollapsibleProps extends Pick<ACollapsibleRootProps, 'defaultO
 export interface PCollapsibleEmits extends ACollapsibleRootEmits {}
 
 export interface PCollapsibleSlots {
-  default: (props: { open: boolean }) => any;
-  content: (props?: object) => any;
+  default?: (props: { open: boolean }) => Array<VNode>;
+  content?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -54,20 +55,15 @@ const rootProps = useForwardPropsEmits(
   emits,
 );
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.collapsible || {}),
-  })(),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.collapsible || {}) })());
 </script>
 
 <template>
   <ACollapsibleRoot
     v-slot="{ open }"
     v-bind="rootProps"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="collapsible-root"
   >
     <ACollapsibleTrigger
       v-if="!!slots.default"
@@ -77,8 +73,8 @@ const pohon = computed(() =>
     </ACollapsibleTrigger>
 
     <ACollapsibleContent
+      data-slot="content"
       :class="pohon.content({ class: pohonProp?.content })"
-      data-pohon="collapsible-content"
     >
       <slot name="content" />
     </ACollapsibleContent>

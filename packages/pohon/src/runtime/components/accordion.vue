@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { AAccordionRootEmits, AAccordionRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { PIconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -42,6 +43,11 @@ export interface PAccordionProps<T extends PAccordionItem = PAccordionItem> exte
    */
   trailingIcon?: PIconProps['name'];
   /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>;
+  /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
    */
@@ -52,14 +58,14 @@ export interface PAccordionProps<T extends PAccordionItem = PAccordionItem> exte
 
 export interface PAccordionEmits extends AAccordionRootEmits {}
 
-type SlotProps<T extends PAccordionItem> = (props: { item: T; index: number; open: boolean; pohon: Accordion['pohon'] }) => any;
+type SlotProps<T extends PAccordionItem> = (props: { item: T; index: number; open: boolean; pohon: Accordion['pohon'] }) => Array<VNode>;
 
 export type PAccordionSlots<T extends PAccordionItem = PAccordionItem> = {
-  leading: SlotProps<T>;
-  default: (props: { item: T; index: number; open: boolean }) => any;
-  trailing: SlotProps<T>;
-  content: SlotProps<T>;
-  body: SlotProps<T>;
+  default?: (props: { item: T; index: number; open: boolean }) => Array<VNode>;
+  leading?: SlotProps<T>;
+  trailing?: SlotProps<T>;
+  content?: SlotProps<T>;
+  body?: SlotProps<T>;
 } & DynamicSlots<T, 'body', { index: number; open: boolean; pohon: Accordion['pohon'] }>;
 </script>
 
@@ -86,6 +92,7 @@ const props = withDefaults(
     type: 'single',
     collapsible: true,
     unmountOnHide: true,
+    valueKey: 'value',
     labelKey: 'label',
   },
 );
@@ -96,58 +103,39 @@ const appConfig = useAppConfig() as Accordion['AppConfig'];
 const pohonProp = useComponentPohon('accordion', props);
 
 const rootProps = useForwardPropsEmits(
-  reactivePick(
-    props,
-    'as',
-    'collapsible',
-    'defaultValue',
-    'disabled',
-    'modelValue',
-    'unmountOnHide',
-  ),
+  reactivePick(props, 'as', 'collapsible', 'defaultValue', 'disabled', 'modelValue', 'unmountOnHide'),
   emits,
 );
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig?.pohon.accordion || {}),
-  })({
-    disabled: props.disabled,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.accordion || {}) })({
+  disabled: props.disabled,
+}));
 </script>
 
 <template>
   <AAccordionRoot
     v-bind="rootProps"
     :type="type"
-    :class="pohon.root({
-      class: [pohonProp?.root, props.class],
-    })"
-    data-pohon="accordion-root"
+    data-slot="root"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <AAccordionItem
       v-for="(item, index) in props.items"
       v-slot="{ open }"
       :key="index"
-      :value="item.value || String(index)"
+      :value="getProp(item, props.valueKey as string) ?? String(index)"
       :disabled="item.disabled"
-      :class="pohon.item({
-        class: [pohonProp?.item, item.pohon?.item, item.class],
-      })"
-      data-pohon="accordion-item"
+      data-slot="item"
+      :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class] })"
     >
       <AAccordionHeader
         as="div"
+        data-slot="header"
         :class="pohon.header({ class: [pohonProp?.header, item.pohon?.header] })"
-        data-pohon="accordion-header"
       >
         <AAccordionTrigger
-          :class="pohon.trigger({
-            class: [pohonProp?.trigger, item.pohon?.trigger], disabled: item.disabled,
-          })"
-          data-pohon="accordion-trigger"
+          data-slot="trigger"
+          :class="pohon.trigger({ class: [pohonProp?.trigger, item.pohon?.trigger], disabled: item.disabled })"
         >
           <slot
             name="leading"
@@ -159,21 +147,21 @@ const pohon = computed(() =>
             <PIcon
               v-if="item.icon"
               :name="item.icon"
+              data-slot="leadingIcon"
               :class="pohon.leadingIcon({ class: [pohonProp?.leadingIcon, item?.pohon?.leadingIcon] })"
-              data-pohon="accordion-leading-icon"
             />
           </slot>
 
           <span
-            v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots.default"
+            v-if="getProp(item, props.labelKey as string) || !!slots.default"
+            data-slot="label"
             :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label] })"
-            data-pohon="accordion-label"
           >
             <slot
               :item="item"
               :index="index"
               :open="open"
-            >{{ getProp({ object: item, path: props.labelKey as string }) }}</slot>
+            >{{ getProp(item, props.labelKey as string) }}</slot>
           </span>
 
           <slot
@@ -185,8 +173,8 @@ const pohon = computed(() =>
           >
             <PIcon
               :name="item.trailingIcon || trailingIcon || appConfig.pohon.icons.chevronDown"
+              data-slot="trailingIcon"
               :class="pohon.trailingIcon({ class: [pohonProp?.trailingIcon, item.pohon?.trailingIcon] })"
-              data-pohon="accordion-trailing-icon"
             />
           </slot>
         </AAccordionTrigger>
@@ -194,8 +182,8 @@ const pohon = computed(() =>
 
       <AAccordionContent
         v-if="item.content || !!slots.content || (item.slot && !!slots[item.slot as keyof PAccordionSlots<T>]) || !!slots.body || (item.slot && !!slots[`${item.slot}-body` as keyof PAccordionSlots<T>])"
+        data-slot="content"
         :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content] })"
-        data-pohon="accordion-content"
       >
         <slot
           :name="((item.slot || 'content') as keyof PAccordionSlots<T>)"
@@ -205,8 +193,8 @@ const pohon = computed(() =>
           :pohon="pohon"
         >
           <div
+            data-slot="body"
             :class="pohon.body({ class: [pohonProp?.body, item.pohon?.body] })"
-            data-pohon="accordion-body"
           >
             <slot
               :name="((item.slot ? `${item.slot}-body` : 'body') as keyof PAccordionSlots<T>)"

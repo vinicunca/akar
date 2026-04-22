@@ -1,32 +1,58 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type {
   PButtonProps,
+  PCheckboxProps,
   PFormFieldProps,
   PFormProps,
   PIconProps,
+  PInputProps,
+  PLinkPropsKeys,
   PPinInputProps,
+  PSelectMenuProps,
   PSeparatorProps,
 } from '../types';
 import type { FormSchema, FormSubmitEvent, InferInput } from '../types/form';
+import type { FormHTMLAttributes } from '../types/html';
+import type { NonUnion } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/auth-form';
 
 type AuthForm = ComponentConfig<typeof theme, AppConfig, 'authForm'>;
 
-type AuthFormField = PFormFieldProps & {
+export type PAuthFormCheckboxField = Omit<PFormFieldProps, 'name'> & PCheckboxProps & {
   name: string;
-  type?: 'checkbox' | 'select' | 'password' | 'text' | 'otp' | 'email';
-  defaultValue?: any;
-  /*
+  type: 'checkbox';
+};
+
+export type PAuthFormSelectField = Omit<PFormFieldProps, 'name'> & PSelectMenuProps & {
+  name: string;
+  type: 'select';
+};
+
+export type PAuthFormOtpField = Omit<PFormFieldProps, 'name'> & Omit<PPinInputProps, 'type' | 'otp'> & {
+  name: string;
+  type: 'otp';
+  /**
+   * @deprecated Bind props directly in the field object.
    * The optional props for the `otp` type.
    * `{ otp: true }`{lang="ts-type"}
    */
-  otp?: PPinInputProps;
+  otp?: boolean | PPinInputProps;
 };
 
-export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F extends AuthFormField = AuthFormField> {
+export type PAuthFormInputFieldType = Required<PInputProps>['type'];
+
+export type PAuthFormInputField<T extends PAuthFormInputFieldType & NonUnion<T> = 'text'> = Omit<PFormFieldProps, 'name'> & Omit<PInputProps, 'type'> & {
+  name: string;
+  type: T;
+};
+
+export type PAuthFormField = PAuthFormCheckboxField | PAuthFormSelectField | PAuthFormOtpField | PAuthFormInputField<PAuthFormInputFieldType>;
+
+export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F extends PAuthFormField = PAuthFormField> extends /** @vue-ignore */ FormHTMLAttributes {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -54,7 +80,7 @@ export interface PAuthFormProps<T extends FormSchema = FormSchema<object>, F ext
    * Display a submit button at the bottom of the form.
    * `{ label: 'Continue', block: true }`{lang="ts-type"}
    */
-  submit?: PButtonProps;
+  submit?: Omit<PButtonProps, PLinkPropsKeys>;
   schema?: T;
   validate?: PFormProps<T>['validate'];
   validateOn?: PFormProps<T>['validateOn'];
@@ -71,29 +97,31 @@ export type PAuthFormEmits<T extends object> = {
   submit: [payload: FormSubmitEvent<T>];
 };
 
-type DynamicFieldSlots<T, F, SlotProps = { field: F; state: T }> = Record<string, (props: SlotProps) => any> & Record<`${keyof T extends string ? keyof T : never}-field`, (props: SlotProps) => any>;
+type DynamicFieldSlots<T, F, SlotProps = { field: F; state: T }> = Record<`${keyof T extends string ? keyof T : never}-field` | (string & {}), (props: SlotProps) => Array<VNode>>;
 
-type DynamicFormFieldSlots<T> = Record<string, (props?: object) => any> & Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}`, (props?: object) => any>;
+type DynamicFormFieldSlots<T> = Record<`${keyof T extends string ? keyof T : never}-${'label' | 'description' | 'hint' | 'help' | 'error'}` | (string & {}), (props?: {}) => Array<VNode>>;
 
-export type PAuthFormSlots<T extends object = object, F extends AuthFormField = AuthFormField> = {
-  header: (props?: object) => any;
-  leading: (props?: object) => any;
-  title: (props?: object) => any;
-  description: (props?: object) => any;
-  providers: (props?: object) => any;
-  validation: (props?: object) => any;
-  submit: (props: { loading: boolean }) => any;
-  footer: (props?: object) => any;
+export type PAuthFormSlots<T extends object = object, F extends PAuthFormField = PAuthFormField> = {
+  header?: (props?: {}) => Array<VNode>;
+  leading?: (props: { pohon: AuthForm['pohon'] }) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  providers?: (props?: {}) => Array<VNode>;
+  separator?: (props?: {}) => Array<VNode>;
+  validation?: (props?: {}) => Array<VNode>;
+  submit?: (props: { loading: boolean }) => Array<VNode>;
+  footer?: (props?: {}) => Array<VNode>;
 } & DynamicFieldSlots<T, F> & DynamicFormFieldSlots<T>;
+
 </script>
 
-<script setup lang="ts" generic="T extends FormSchema, F extends AuthFormField">
+<script setup lang="ts" generic="T extends FormSchema, F extends PAuthFormField">
 import { useAppConfig } from '#imports';
-import { omit } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed, reactive, ref, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
+import { omit, pick } from '../utils';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 import PCheckbox from './checkbox.vue';
@@ -101,9 +129,11 @@ import PFormField from './form-field.vue';
 import PForm from './form.vue';
 import PIcon from './icon.vue';
 import PInput from './input.vue';
-import PPinInput from './pin-input.vue';
+import PPInput from './pin-input.vue';
 import PSelectMenu from './select-menu.vue';
 import PSeparator from './separator.vue';
+
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(
   defineProps<PAuthFormProps<T, F>>(),
@@ -118,29 +148,54 @@ const slots = defineSlots<PAuthFormSlots<typeof state, F>>();
 
 type FormStateType = InferInput<T>;
 
-type TypedAuthFormField = AuthFormField & {
+type TypedAuthFormField = PAuthFormField & {
   name: keyof FormStateType;
   defaultValue?: FormStateType[keyof FormStateType];
 };
 
-const state = reactive<FormStateType>(
-  (props.fields as Array<TypedAuthFormField> || [])
-    .reduce<FormStateType>((acc, field) => {
-      if (field.name) {
-        acc[field.name] = field.defaultValue;
-      }
-      return acc;
-    }, {} as FormStateType),
-);
+const state = reactive<FormStateType>((props.fields as Array<TypedAuthFormField> || []).reduce<FormStateType>((acc, field) => {
+  if (field.name) {
+    acc[field.name] = field.defaultValue;
+  }
+  return acc;
+}, {} as FormStateType));
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as AuthForm['AppConfig'];
-const pohonProp = useComponentPohon('auth-form', props);
+const pohonProp = useComponentPohon('authForm', props);
+
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.authForm || {}) })());
 
 const formRef = useTemplateRef('formRef');
 const passwordVisibility = ref(false);
+const passwordRef = useTemplateRef('passwordRef');
 
-const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.authForm || {}) })());
+function pickFieldProps(field: F) {
+  const fields = ['name', 'errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as Array<keyof F>;
+
+  // Prevent binding `label` and `description` on Checkbox's FormField
+  if (field.type === 'checkbox') {
+    return pick(field, fields);
+  }
+
+  return pick(field, [...fields, 'label', 'description']);
+}
+
+function omitFieldProps(field: F) {
+  const fields = ['errorPattern', 'help', 'error', 'hint', 'size', 'required', 'eagerValidation', 'validateOnInputDelay'] as Array<keyof F>;
+
+  // Prevent binding `type` on other fields than Input
+  if (field.type === 'checkbox' || field.type === 'select' || field.type === 'otp') {
+    // Prevent binding `label` and `description` on Checkbox's FormField
+    if (field.type === 'checkbox') {
+      return omit(field, [...fields, 'type']);
+    }
+
+    return omit(field, [...fields, 'type', 'label', 'description']);
+  }
+
+  return omit(field, [...fields, 'label', 'description']);
+}
 
 defineExpose({
   formRef,
@@ -151,21 +206,28 @@ defineExpose({
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <div
-      v-if="(icon || !!slots.icon) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header"
+      v-if="(icon || !!slots.leading) || (title || !!slots.title) || (description || !!slots.description) || !!slots.header"
+      data-slot="header"
       :class="pohon.header({ class: pohonProp?.header })"
     >
       <slot name="header">
         <div
           v-if="icon || !!slots.leading"
+          data-slot="leading"
           :class="pohon.leading({ class: pohonProp?.leading })"
         >
-          <slot name="leading">
+          <slot
+            name="leading"
+            :pohon="pohon"
+          >
             <PIcon
               v-if="icon"
               :name="icon"
+              data-slot="leadingIcon"
               :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
             />
           </slot>
@@ -173,6 +235,7 @@ defineExpose({
 
         <div
           v-if="title || !!slots.title"
+          data-slot="title"
           :class="pohon.title({ class: pohonProp?.title })"
         >
           <slot name="title">
@@ -182,6 +245,7 @@ defineExpose({
 
         <div
           v-if="description || !!slots.description"
+          data-slot="description"
           :class="pohon.description({ class: pohonProp?.description })"
         >
           <slot name="description">
@@ -191,9 +255,13 @@ defineExpose({
       </slot>
     </div>
 
-    <div :class="pohon.body({ class: pohonProp?.body })">
+    <div
+      data-slot="body"
+      :class="pohon.body({ class: pohonProp?.body })"
+    >
       <div
         v-if="providers?.length || !!slots.providers"
+        data-slot="providers"
         :class="pohon.providers({ class: pohonProp?.providers })"
       >
         <slot name="providers">
@@ -208,11 +276,14 @@ defineExpose({
         </slot>
       </div>
 
-      <PSeparator
-        v-if="providers?.length && fields?.length"
-        v-bind="typeof separator === 'object' ? separator : { label: separator }"
-        :class="pohon.separator({ class: pohonProp?.separator })"
-      />
+      <slot name="separator">
+        <PSeparator
+          v-if="providers?.length && fields?.length"
+          v-bind="typeof separator === 'object' ? separator : { label: separator }"
+          data-slot="separator"
+          :class="pohon.separator({ class: pohonProp?.separator })"
+        />
+      </slot>
 
       <PForm
         v-if="fields?.length"
@@ -221,22 +292,17 @@ defineExpose({
         :schema="schema"
         :validate="validate"
         :validate-on="validateOn"
-        :class="pohon.form({ class: pohonProp?.form })"
         :disabled="disabled"
         :loading-auto="loadingAuto"
+        data-slot="form"
+        :class="pohon.form({ class: pohonProp?.form })"
+        v-bind="$attrs"
         @submit="onSubmit"
       >
         <PFormField
           v-for="field in fields"
           :key="field.name"
-          :label="field.type === 'checkbox' ? '' : field.label ?? ''"
-          :description="field.description"
-          :help="field.help"
-          :hint="field.hint"
-          :name="field.name"
-          :size="field.size"
-          :required="field.required"
-          :error="field.error"
+          v-bind="pickFieldProps(field)"
         >
           <slot
             :name="`${field.name}-field`"
@@ -245,24 +311,34 @@ defineExpose({
             <PCheckbox
               v-if="field.type === 'checkbox'"
               v-model="state[field.name]"
+              data-slot="checkbox"
               :class="pohon.checkbox({ class: pohonProp?.checkbox })"
-              v-bind="omit(field, ['description', 'help', 'hint', 'size'])"
+              v-bind="(omitFieldProps(field))"
             />
-
             <PSelectMenu
               v-else-if="field.type === 'select'"
               v-model="state[field.name]"
+              data-slot="select"
               :class="pohon.select({ class: pohonProp?.select })"
-              v-bind="omit(field, ['description', 'help', 'hint', 'size'])"
+              v-bind="(omitFieldProps(field) as PAuthFormSelectField)"
             />
-
+            <PPInput
+              v-else-if="field.type === 'otp'"
+              :id="field.name"
+              v-model="state[field.name]"
+              data-slot="otp"
+              :class="pohon.otp({ class: pohonProp?.otp })"
+              v-bind="(Object.assign({}, omitFieldProps(field), typeof (field as PAuthFormOtpField).otp === 'object' ? (field as PAuthFormOtpField).otp : {}) as any)"
+              otp
+            />
             <PInput
               v-else-if="field.type === 'password'"
+              ref="passwordRef"
               v-model="state[field.name]"
+              data-slot="password"
               :class="pohon.password({ class: pohonProp?.password })"
+              v-bind="(omitFieldProps(field) as PAuthFormInputField<'password'>)"
               :type="passwordVisibility ? 'text' : 'password'"
-              v-bind="omit(field, ['label', 'description', 'help', 'hint', 'size', 'type', 'required', 'defaultValue'])"
-              :pohon="{ root: 'w-full' }"
             >
               <template #trailing>
                 <PButton
@@ -272,24 +348,17 @@ defineExpose({
                   :icon="passwordVisibility ? appConfig.pohon.icons.eyeOff : appConfig.pohon.icons.eye"
                   :aria-label="passwordVisibility ? t('authForm.hidePassword') : t('authForm.showPassword')"
                   :aria-pressed="passwordVisibility"
-                  aria-controls="password"
+                  :aria-controls="passwordRef?.[0]?.inputRef?.id"
                   @click="passwordVisibility = !passwordVisibility"
                 />
               </template>
             </PInput>
-            <PPinInput
-              v-else-if="field.type === 'otp'"
-              :id="field.name"
-              v-model="state[field.name]"
-              :class="pohon.otp({ class: pohonProp?.otp })"
-              otp
-              v-bind="field.otp"
-            />
             <PInput
               v-else
               v-model="state[field.name]"
+              data-slot="input"
               :class="pohon.input({ class: pohonProp?.input })"
-              v-bind="omit(field, ['label', 'description', 'help', 'hint', 'size', 'required', 'defaultValue'])"
+              v-bind="(omitFieldProps(field) as PAuthFormInputField)"
             />
           </slot>
 
@@ -348,6 +417,7 @@ defineExpose({
 
     <div
       v-if="!!slots.footer"
+      data-slot="footer"
       :class="pohon.footer({ class: pohonProp?.footer })"
     >
       <slot name="footer" />

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/avatar-group';
 
@@ -24,7 +25,7 @@ export interface PAvatarGroupProps {
 }
 
 export interface PAvatarGroupSlots {
-  default: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -42,16 +43,11 @@ const props = defineProps<PAvatarGroupProps>();
 const slots = defineSlots<PAvatarGroupSlots>();
 
 const appConfig = useAppConfig() as AvatarGroup['AppConfig'];
-const pohonProp = useComponentPohon('avatar-group', props);
+const pohonProp = useComponentPohon('avatarGroup', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.avatarGroup || {}),
-  })({
-    size: props.size,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.avatarGroup || {}) })({
+  size: props.size,
+}));
 
 const max = computed(() => isString(props.max) ? Number.parseInt(props.max, 10) : props.max);
 
@@ -106,22 +102,21 @@ provide(
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="avatar-group-root"
   >
     <PAvatar
       v-if="hiddenCount > 0"
       :text="`+${hiddenCount}`"
+      data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
-      data-pohon="avatar-group-base"
     />
-
     <component
       :is="avatar"
       v-for="(avatar, count) in visibleAvatars"
       :key="count"
+      data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
-      data-pohon="avatar-group-base"
     />
   </APrimitive>
 </template>

@@ -1,61 +1,80 @@
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/page-aside'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/page-aside';
 
-type PageAside = ComponentConfig<typeof theme, AppConfig, 'pageAside'>
+type PageAside = ComponentConfig<typeof theme, AppConfig, 'pageAside'>;
 
-export interface PageAsideProps {
+export interface PPageAsideProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'aside'
    */
-  as?: any
-  class?: any
-  pohon?: PageAside['slots']
+  as?: any;
+  class?: any;
+  pohon?: PageAside['slots'];
 }
 
-export interface PageAsideSlots {
-  top?(props?: {}): VNode[]
-  default?(props?: {}): VNode[]
-  bottom?(props?: {}): VNode[]
+export interface PPageAsideSlots {
+  top?: (props?: {}) => Array<VNode>;
+  default?: (props?: {}) => Array<VNode>;
+  bottom?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentPohon } from '../composables/use-component-pohon'
-import { tv } from '../utils/tv'
+import { useAppConfig } from '#imports';
+import { APrimitive } from 'akar';
+import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<PageAsideProps>(), {
-  as: 'aside'
-})
-const slots = defineSlots<PageAsideSlots>()
+const props = withDefaults(defineProps<PPageAsideProps>(), {
+  as: 'aside',
+});
+const slots = defineSlots<PPageAsideSlots>();
 
-const appConfig = useAppConfig() as PageAside['AppConfig']
-const pohonProp = useComponentPohon('pageAside', props)
+const appConfig = useAppConfig() as PageAside['AppConfig'];
+const pohonProp = useComponentPohon('pageAside', props);
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pageAside || {}) })())
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageAside || {}) })());
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [pohonProp?.root, props.class] })">
-    <div data-slot="container" :class="ui.container({ class: pohonProp?.container })">
-      <div v-if="!!slots.top" data-slot="top" :class="ui.top({ class: pohonProp?.top })">
-        <div data-slot="topHeader" :class="ui.topHeader({ class: pohonProp?.topHeader })" />
-        <div data-slot="topBody" :class="ui.topBody({ class: pohonProp?.topBody })">
+  <APrimitive
+    :as="as"
+    data-slot="root"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
+  >
+    <div
+      data-slot="container"
+      :class="pohon.container({ class: pohonProp?.container })"
+    >
+      <div
+        v-if="!!slots.top"
+        data-slot="top"
+        :class="pohon.top({ class: pohonProp?.top })"
+      >
+        <div
+          data-slot="topHeader"
+          :class="pohon.topHeader({ class: pohonProp?.topHeader })"
+        />
+        <div
+          data-slot="topBody"
+          :class="pohon.topBody({ class: pohonProp?.topBody })"
+        >
           <slot name="top" />
         </div>
-        <div data-slot="topFooter" :class="ui.topFooter({ class: pohonProp?.topFooter })" />
+        <div
+          data-slot="topFooter"
+          :class="pohon.topFooter({ class: pohonProp?.topFooter })"
+        />
       </div>
 
       <slot />
 
       <slot name="bottom" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

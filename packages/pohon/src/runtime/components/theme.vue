@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { VNode } from 'vue';
 import type { ThemePohon } from '../composables/use-component-pohon';
 import { computed } from 'vue';
 import { provideThemeContext } from '../composables/use-component-pohon';
@@ -8,7 +9,7 @@ export interface PThemeProps {
 }
 
 export interface PThemeSlots {
-  default: (props?: {}) => any;
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 

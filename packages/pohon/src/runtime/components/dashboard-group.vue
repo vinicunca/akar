@@ -1,52 +1,51 @@
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/dashboard-group'
-import type { UseResizableProps } from '../composables/use-resizable'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { UseResizableProps } from '../composables/use-resizable';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/dashboard-group';
 
-type DashboardGroup = ComponentConfig<typeof theme, AppConfig, 'dashboardGroup'>
+type DashboardGroup = ComponentConfig<typeof theme, AppConfig, 'dashboardGroup'>;
 
-export interface DashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
+export interface PDashboardGroupProps extends Pick<UseResizableProps, 'storage' | 'storageKey' | 'persistent' | 'unit'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
-  class?: any
-  pohon?: { base?: any }
+  as?: any;
+  class?: any;
+  pohon?: { base?: any };
 }
 
-export interface DashboardGroupSlots {
-  default?(props?: {}): VNode[]
+export interface PDashboardGroupSlots {
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { Primitive } from 'reka-ui'
-import { useNuxtApp, useAppConfig } from '#imports'
-import { provideDashboardContext } from '../utils/dashboard'
-import { tv } from '../utils/tv'
-import { useComponentPohon } from '../composables/use-component-pohon'
+import { useAppConfig, useNuxtApp } from '#imports';
+import { APrimitive } from 'akar';
+import { computed, ref } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { provideDashboardContext } from '../utils/dashboard';
+import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<DashboardGroupProps>(), {
+const props = withDefaults(defineProps<PDashboardGroupProps>(), {
   storage: 'cookie',
   storageKey: 'dashboard',
   persistent: true,
-  unit: '%'
-})
-defineSlots<DashboardGroupSlots>()
+  unit: '%',
+});
+defineSlots<PDashboardGroupSlots>();
 
-const nuxtApp = useNuxtApp()
-const appConfig = useAppConfig() as DashboardGroup['AppConfig']
-const pohonProp = useComponentPohon('dashboardGroup', props)
+const nuxtApp = useNuxtApp();
+const appConfig = useAppConfig() as DashboardGroup['AppConfig'];
+const pohonProp = useComponentPohon('dashboardGroup', props);
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.dashboardGroup || {}) }))
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashboardGroup || {}) }));
 
-const sidebarOpen = ref(false)
-const sidebarCollapsed = ref(false)
+const sidebarOpen = ref(false);
+const sidebarCollapsed = ref(false);
 
 provideDashboardContext({
   storage: props.storage,
@@ -55,20 +54,23 @@ provideDashboardContext({
   unit: props.unit,
   sidebarOpen,
   toggleSidebar: () => {
-    nuxtApp.hooks.callHook('dashboard:sidebar:toggle')
+    nuxtApp.hooks.callHook('dashboard:sidebar:toggle');
   },
   sidebarCollapsed,
   collapseSidebar: (collapsed: boolean) => {
-    nuxtApp.hooks.callHook('dashboard:sidebar:collapse', collapsed)
+    nuxtApp.hooks.callHook('dashboard:sidebar:collapse', collapsed);
   },
   toggleSearch: () => {
-    nuxtApp.hooks.callHook('dashboard:search:toggle')
-  }
-})
+    nuxtApp.hooks.callHook('dashboard:search:toggle');
+  },
+});
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: [pohonProp?.base, props.class] })">
+  <APrimitive
+    :as="as"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
+  >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

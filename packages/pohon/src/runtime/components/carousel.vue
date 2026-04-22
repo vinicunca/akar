@@ -8,6 +8,7 @@ import type { AutoplayOptionsType } from 'embla-carousel-autoplay';
 import type { ClassNamesOptionsType } from 'embla-carousel-class-names';
 import type { FadeOptionsType } from 'embla-carousel-fade';
 import type { WheelGesturesPluginOptions } from 'embla-carousel-wheel-gestures';
+import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { AcceptableValue } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -101,7 +102,7 @@ export interface PCarouselProps<T extends PCarouselItem = PCarouselItem> extends
 }
 
 export type PCarouselSlots<T extends PCarouselItem = PCarouselItem> = {
-  default: (props: { item: T; index: number }) => any;
+  default?: (props: { item: T; index: number }) => Array<VNode>;
 };
 
 export interface PCarouselEmits {
@@ -318,8 +319,8 @@ function onKeyDown(event: KeyboardEvent) {
     prevKey = dir.value === 'ltr' ? KEY_CODES.ARROW_LEFT : KEY_CODES.ARROW_RIGHT;
     nextKey = dir.value === 'ltr' ? KEY_CODES.ARROW_RIGHT : KEY_CODES.ARROW_LEFT;
   } else {
-    prevKey = 'ArrowUp';
-    nextKey = 'ArrowDown';
+    prevKey = KEY_CODES.ARROW_UP;
+    nextKey = KEY_CODES.ARROW_DOWN;
   }
 
   if (event.key === prevKey) {
@@ -393,25 +394,25 @@ defineExpose({
     aria-roledescription="carousel"
     :data-orientation="orientation"
     tabindex="0"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="carousel-root"
     @keydown="onKeyDown"
   >
     <div
       ref="emblaRef"
+      data-slot="viewport"
       :class="pohon.viewport({ class: pohonProp?.viewport })"
-      data-pohon="carousel-viewport"
     >
       <div
+        data-slot="container"
         :class="pohon.container({ class: pohonProp?.container })"
-        data-pohon="carousel-container"
       >
         <div
           v-for="(item, index) in items"
           :key="index"
           v-bind="dots ? { role: 'tabpanel' } : { 'role': 'group', 'aria-roledescription': 'slide' }"
+          data-slot="item"
           :class="pohon.item({ class: [pohonProp?.item, isCarouselItem(item) && item.pohon?.item, isCarouselItem(item) && item.class] })"
-          data-pohon="carousel-item"
         >
           <slot
             :item="item"
@@ -423,13 +424,13 @@ defineExpose({
 
     <div
       v-if="arrows || dots"
+      data-slot="controls"
       :class="pohon.controls({ class: pohonProp?.controls })"
-      data-pohon="carousel-controls"
     >
       <div
         v-if="arrows"
+        data-slot="arrows"
         :class="pohon.arrows({ class: pohonProp?.arrows })"
-        data-pohon="carousel-arrows"
       >
         <PButton
           :disabled="!canScrollPrev"
@@ -438,8 +439,8 @@ defineExpose({
           variant="outline"
           :aria-label="t('carousel.prev')"
           v-bind="typeof prev === 'object' ? prev : undefined"
+          data-slot="prev"
           :class="pohon.prev({ class: pohonProp?.prev })"
-          data-pohon="carousel-prev"
           @click="scrollPrev"
         />
         <PButton
@@ -449,8 +450,8 @@ defineExpose({
           variant="outline"
           :aria-label="t('carousel.next')"
           v-bind="typeof next === 'object' ? next : undefined"
+          data-slot="next"
           :class="pohon.next({ class: pohonProp?.next })"
-          data-pohon="carousel-next"
           @click="scrollNext"
         />
       </div>
@@ -459,8 +460,8 @@ defineExpose({
         v-if="dots"
         role="tablist"
         :aria-label="t('carousel.dots')"
+        data-slot="dots"
         :class="pohon.dots({ class: pohonProp?.dots })"
-        data-pohon="carousel-dots"
       >
         <template
           v-for="(_, index) in scrollSnaps"
@@ -471,8 +472,8 @@ defineExpose({
             role="tab"
             :aria-label="t('carousel.goto', { slide: index + 1 })"
             :aria-selected="selectedIndex === index"
+            data-slot="dot"
             :class="pohon.dot({ class: pohonProp?.dot, active: selectedIndex === index })"
-            data-pohon="carousel-dot"
             :data-state="selectedIndex === index ? 'active' : undefined"
             @click="scrollTo(index)"
           />

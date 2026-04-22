@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PAvatarProps, PChipProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/user';
@@ -33,10 +34,10 @@ export interface PUserProps {
 }
 
 export interface PUserSlots {
-  avatar: (props: { pohon: User['pohon'] }) => any;
-  name: (props?: object) => any;
-  description: (props?: object) => any;
-  default: (props?: object) => any;
+  avatar?: (props: { pohon: User['pohon'] }) => Array<VNode>;
+  name?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -52,35 +53,27 @@ import PLink from './link.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<PUserProps>(),
-  {
-    orientation: 'horizontal',
-  },
-);
+const props = withDefaults(defineProps<PUserProps>(), {
+  orientation: 'horizontal',
+});
 const slots = defineSlots<PUserSlots>();
 
 const appConfig = useAppConfig() as User['AppConfig'];
 const pohonProp = useComponentPohon('user', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.user || {}),
-  })({
-    size: props.size,
-    orientation: props.orientation,
-    to: !!props.to || !!props.onClick,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.user || {}) })({
+  size: props.size,
+  orientation: props.orientation,
+  to: !!props.to || !!props.onClick,
+}));
 </script>
 
 <template>
   <APrimitive
     :as="as"
     :data-orientation="orientation"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="user-root"
     @click="onClick"
   >
     <slot
@@ -97,8 +90,8 @@ const pohon = computed(() =>
           :alt="name"
           v-bind="avatar"
           :size="size"
+          data-slot="avatar"
           :class="pohon.avatar({ class: pohonProp?.avatar })"
-          data-pohon="user-avatar"
         />
       </PChip>
       <PAvatar
@@ -106,21 +99,20 @@ const pohon = computed(() =>
         :alt="name"
         v-bind="avatar"
         :size="size"
+        data-slot="avatar"
         :class="pohon.avatar({ class: pohonProp?.avatar })"
-        data-pohon="user-avatar"
       />
     </slot>
 
     <div
+      data-slot="wrapper"
       :class="pohon.wrapper({ class: pohonProp?.wrapper })"
-      data-pohon="user-wrapper"
     >
       <PLink
         v-if="to"
         :aria-label="name"
         v-bind="{ to, target, ...$attrs }"
         class="peer focus:outline-none"
-        tabindex="-1"
         raw
       >
         <span
@@ -132,8 +124,8 @@ const pohon = computed(() =>
       <slot>
         <p
           v-if="name || !!slots.name"
+          data-slot="name"
           :class="pohon.name({ class: pohonProp?.name })"
-          data-pohon="user-name"
         >
           <slot name="name">
             {{ name }}
@@ -141,8 +133,8 @@ const pohon = computed(() =>
         </p>
         <p
           v-if="description || !!slots.description"
+          data-slot="description"
           :class="pohon.description({ class: pohonProp?.description })"
-          data-pohon="user-description"
         >
           <slot name="description">
             {{ description }}

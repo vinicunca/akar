@@ -2,7 +2,7 @@
 import type { PLinkProps } from '../types';
 
 export interface PLinkBaseProps {
-  as?: any;
+  as?: string;
   type?: string;
   disabled?: boolean;
   onClick?: ((event: MouseEvent) => void | Promise<void>) | Array<((event: MouseEvent) => void | Promise<void>)>;

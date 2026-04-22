@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ASeparatorProps } from 'akar';
+import type { VNode } from 'vue';
 import type { PAvatarProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/separator';
@@ -38,13 +39,13 @@ export interface PSeparatorProps extends Pick<ASeparatorProps, 'decorative'> {
    * The orientation of the separator.
    * @defaultValue 'horizontal'
    */
-  orientation?: ASeparatorProps['orientation'];
+  orientation?: Separator['variants']['orientation'];
   class?: any;
   pohon?: Separator['slots'];
 }
 
 export interface PSeparatorSlots {
-  default: (props: { pohon: Separator['pohon'] }) => any;
+  default?: (props: { pohon: Separator['pohon'] }) => Array<VNode>;
 }
 </script>
 
@@ -71,60 +72,55 @@ const pohonProp = useComponentPohon('separator', props);
 
 const rootProps = useForwardProps(reactivePick(props, 'as', 'decorative', 'orientation'));
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.separator || {}),
-  })({
-    color: props.color,
-    orientation: props.orientation,
-    size: props.size,
-    type: props.type,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.separator || {}) })({
+  color: props.color,
+  orientation: props.orientation,
+  size: props.size,
+  type: props.type,
+}));
 </script>
 
 <template>
   <ASeparator
     v-bind="rootProps"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="separator-root"
   >
     <div
+      data-slot="border"
       :class="pohon.border({ class: pohonProp?.border })"
-      data-pohon="separator-border"
     />
 
     <template v-if="label || icon || avatar || !!slots.default">
       <div
+        data-slot="container"
         :class="pohon.container({ class: pohonProp?.container })"
-        data-pohon="separator-container"
       >
         <slot :pohon="pohon">
           <span
             v-if="label"
+            data-slot="label"
             :class="pohon.label({ class: pohonProp?.label })"
-            data-pohon="separator-label"
           >{{ label }}</span>
           <PIcon
             v-else-if="icon"
             :name="icon"
+            data-slot="icon"
             :class="pohon.icon({ class: pohonProp?.icon })"
-            data-pohon="separator-icon"
           />
           <PAvatar
             v-else-if="avatar"
             :size="((pohonProp?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
+            data-slot="avatar"
             :class="pohon.avatar({ class: pohonProp?.avatar })"
-            data-pohon="separator-avatar"
           />
         </slot>
       </div>
 
       <div
+        data-slot="border"
         :class="pohon.border({ class: pohonProp?.border })"
-        data-pohon="separator-border"
       />
     </template>
   </ASeparator>

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-
+import type { VNode } from 'vue';
 import type { PAvatarProps, PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/alert';
@@ -62,11 +62,11 @@ export interface PAlertEmits {
 }
 
 export interface PAlertSlots {
-  leading: (props: { pohon: Alert['pohon'] }) => any;
-  title: (props?: object) => any;
-  description: (props?: object) => any;
-  actions: (props?: object) => any;
-  close: (props: { pohon: Alert['pohon'] }) => any;
+  leading?: (props: { pohon: Alert['pohon'] }) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  actions?: (props?: {}) => Array<VNode>;
+  close?: (props: { pohon: Alert['pohon'] }) => Array<VNode>;
 }
 </script>
 
@@ -94,25 +94,20 @@ const { t } = useLocale();
 const appConfig = useAppConfig() as Alert['AppConfig'];
 const pohonProp = useComponentPohon('alert', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.alert || {}),
-  })({
-    color: props.color,
-    variant: props.variant,
-    orientation: props.orientation,
-    title: !!props.title || !!slots.title,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.alert || {}) })({
+  color: props.color,
+  variant: props.variant,
+  orientation: props.orientation,
+  title: !!props.title || !!slots.title,
+}));
 </script>
 
 <template>
   <APrimitive
     :as="as"
     :data-orientation="orientation"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="alert-root"
   >
     <slot
       name="leading"
@@ -122,25 +117,25 @@ const pohon = computed(() =>
         v-if="avatar"
         :size="((pohonProp?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
+        data-slot="avatar"
         :class="pohon.avatar({ class: pohonProp?.avatar })"
-        data-pohon="alert-avatar"
       />
       <PIcon
         v-else-if="icon"
         :name="icon"
+        data-slot="icon"
         :class="pohon.icon({ class: pohonProp?.icon })"
-        data-pohon="alert-icon"
       />
     </slot>
 
     <div
+      data-slot="wrapper"
       :class="pohon.wrapper({ class: pohonProp?.wrapper })"
-      data-pohon="alert-wrapper"
     >
       <div
         v-if="title || !!slots.title"
+        data-slot="title"
         :class="pohon.title({ class: pohonProp?.title })"
-        data-pohon="alert-title"
       >
         <slot name="title">
           {{ title }}
@@ -148,8 +143,8 @@ const pohon = computed(() =>
       </div>
       <div
         v-if="description || !!slots.description"
+        data-slot="description"
         :class="pohon.description({ class: pohonProp?.description })"
-        data-pohon="alert-description"
       >
         <slot name="description">
           {{ description }}
@@ -158,8 +153,8 @@ const pohon = computed(() =>
 
       <div
         v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)"
+        data-slot="actions"
         :class="pohon.actions({ class: pohonProp?.actions })"
-        data-pohon="alert-actions"
       >
         <slot name="actions">
           <PButton
@@ -174,8 +169,8 @@ const pohon = computed(() =>
 
     <div
       v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close"
+      data-slot="actions"
       :class="pohon.actions({ class: pohonProp?.actions, orientation: 'horizontal' })"
-      data-pohon="alert-actions-actions"
     >
       <template v-if="orientation === 'horizontal' && (actions?.length || !!slots.actions)">
         <slot name="actions">
@@ -198,9 +193,9 @@ const pohon = computed(() =>
           color="neutral"
           variant="link"
           :aria-label="t('alert.close')"
-          v-bind="typeof close === 'object' ? close : {}"
+          v-bind="(typeof close === 'object' ? close : {})"
+          data-slot="close"
           :class="pohon.close({ class: pohonProp?.close })"
-          data-pohon="alert-close"
           @click="emits('update:open', false)"
         />
       </slot>

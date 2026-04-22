@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type {
   Form,
   FormData,
@@ -16,7 +17,6 @@ import type {
 import type { FormHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/form';
-import { isString } from '@vinicunca/perkakas';
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>;
 
@@ -83,12 +83,13 @@ export interface PFormEmits<S extends FormSchema, T extends boolean = true> {
 }
 
 export interface PFormSlots {
-  default: (props: { errors: Array<FormError>; loading: boolean }) => any;
+  default?: (props: { errors: Array<FormError>; loading: boolean }) => Array<VNode>;
 }
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
 import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { useEventBus } from '@vueuse/core';
 import {
   computed,
@@ -137,9 +138,7 @@ defineSlots<PFormSlots>();
 const appConfig = useAppConfig() as FormConfig['AppConfig'];
 const pohonProp = useComponentPohon('form', props);
 
-const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.form || {}) }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.form || {}) }));
 
 const formId = props.id ?? useId() as string;
 const formRef = useTemplateRef('formRef');
@@ -191,7 +190,9 @@ onMounted(async () => {
     } else if (event.type === 'detach') {
       nestedForms.value.delete(event.formId);
     } else if (props.validateOn?.includes(event.type) && !loading.value) {
-      if (event.type !== 'input' || event.eager || blurredFields.has(event.name)) {
+      if (event.type !== 'input') {
+        await _validate({ name: event.name, silent: true, nested: false });
+      } else if (event.eager || blurredFields.has(event.name)) {
         await _validate({ name: event.name, silent: true, nested: false });
       }
     }
@@ -200,17 +201,11 @@ onMounted(async () => {
       blurredFields.add(event.name);
     }
 
-    if (
-      event.type === 'change'
-      || event.type === 'input'
-      || event.type === 'blur'
-      || event.type === 'focus'
-    ) {
+    if (event.type === 'change' || event.type === 'input' || event.type === 'blur' || event.type === 'focus') {
       touchedFields.add(event.name);
     }
 
-    if (event.type === 'change'
-      || event.type === 'input') {
+    if (event.type === 'change' || event.type === 'input') {
       dirtyFields.add(event.name);
     }
   });
@@ -254,9 +249,7 @@ async function getErrors(): Promise<Array<FormErrorWithId>> {
 type ValidateOpts<Silent extends boolean, Transform extends boolean> = { name?: keyof I | Array<keyof I>; silent?: Silent; nested?: boolean; transform?: Transform };
 async function _validate<T extends boolean>(opts: ValidateOpts<false, T>): Promise<FormData<S, T>>;
 async function _validate<T extends boolean>(opts: ValidateOpts<true, T>): Promise<FormData<S, T> | false>;
-async function _validate<T extends boolean>(
-  opts: ValidateOpts<boolean, boolean> = { silent: false, nested: false, transform: false },
-): Promise<FormData<S, T> | false> {
+async function _validate<T extends boolean>(opts: ValidateOpts<boolean, boolean> = { silent: false, nested: false, transform: false }): Promise<FormData<S, T> | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as Array<keyof O>;
 
   // Validate nested forms if needed
@@ -271,7 +264,7 @@ async function _validate<T extends boolean>(
 
     nestedErrors = results
       .filter((r) => r.error)
-      .flatMap((r) => r.error!.errors.map((err) => addFormPath(err, r.name)));
+      .flatMap((r) => r.error!.errors.map((e) => addFormPath(e, r.name)));
 
     nestedResults = results.filter((r) => r.output !== undefined);
   }
@@ -299,7 +292,7 @@ async function _validate<T extends boolean>(
   if (opts.transform) {
     nestedResults.forEach((result) => {
       if (result.name) {
-        setAtPath({ data: transformedState.value, path: result.name, value: result.output });
+        setAtPath(transformedState.value, result.name, result.output);
       } else {
         Object.assign(transformedState.value, result.output);
       }
@@ -314,7 +307,7 @@ const loading = ref(false);
 provide(formLoadingInjectionKey, readonly(loading));
 
 async function onSubmitWrapper(payload: Event) {
-  loading.value = props.loadingAuto;
+  loading.value = props.loadingAuto && true;
 
   const event = payload as FormSubmitEvent<FormData<S, T>>;
 
@@ -345,10 +338,7 @@ provide(formOptionsInjectionKey, computed(() => ({
 })));
 
 // Simple helper functions for nested forms
-async function validateNestedForm(
-  form: { validate: typeof _validate; name?: string },
-  opts: ValidateOpts<boolean, boolean>,
-) {
+async function validateNestedForm(form: { validate: typeof _validate; name?: string }, opts: ValidateOpts<boolean, boolean>) {
   try {
     const result = await form.validate({ ...opts, silent: false });
     return { name: form.name, output: result };
@@ -381,13 +371,13 @@ function filterFormErrors(errors: Array<FormError>, formPath?: string): Array<Fo
   }
 
   return errors
-    .filter((err) => err?.name?.startsWith(`${formPath}.`))
-    .map((err) => stripFormPath(err, formPath));
+    .filter((e) => e?.name?.startsWith(`${formPath}.`))
+    .map((e) => stripFormPath(e, formPath));
 }
 
 function getFormErrors(form: { name?: string; api: Form<any> }): Array<FormErrorWithId> {
-  return form.api.getErrors().map((err) =>
-    form.name ? { ...err, name: `${form.name}.${err.name}` } : err,
+  return form.api.getErrors().map((e) =>
+    form.name ? { ...e, name: `${form.name}.${e.name}` } : e,
   );
 }
 
@@ -533,7 +523,7 @@ defineExpose(api);
     :is="parentBus ? 'div' : 'form'"
     :id="formId"
     ref="formRef"
-    :class="pohon({ class: [pohonProp.base, props.class] })"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
     @submit.prevent="onSubmitWrapper"
   >
     <slot

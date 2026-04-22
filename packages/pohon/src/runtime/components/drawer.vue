@@ -6,6 +6,7 @@ import type {
   ADrawerRootEmits,
   ADrawerRootProps,
 } from 'akar';
+import type { VNode } from 'vue';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/drawer';
@@ -56,13 +57,13 @@ export interface PDrawerEmits extends ADrawerRootEmits {
 }
 
 export interface PDrawerSlots {
-  default: (props?: object) => any;
-  content: (props?: object) => any;
-  header: (props?: object) => any;
-  title: (props?: object) => any;
-  description: (props?: object) => any;
-  body: (props?: object) => any;
-  footer: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
+  content?: (props?: {}) => Array<VNode>;
+  header?: (props?: {}) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  body?: (props?: {}) => Array<VNode>;
+  footer?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -84,6 +85,7 @@ import {
 } from 'akar';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { FieldGroupReset } from '../composables/use-field-group';
 import { usePortal } from '../composables/use-portal';
 import { pointerDownOutside } from '../utils/overlay';
 import { uv } from '../utils/uv';
@@ -131,19 +133,15 @@ const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => props.content);
 const contentEvents = computed(() => {
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'];
+    const events = ['interactOutside', 'escapeKeyDown'];
 
-    return events.reduce(
-      (acc, curr) => {
-        acc[curr] = (event: Event) => {
-          event.preventDefault();
-          emits('close:prevent');
-        };
-
-        return acc;
-      },
-      {} as Record<typeof events[number], (event: Event) => void>,
-    );
+    return events.reduce((acc, curr) => {
+      acc[curr] = (event: Event) => {
+        event.preventDefault();
+        emits('close:prevent');
+      };
+      return acc;
+    }, {} as Record<typeof events[number], (event: Event) => void>);
   }
 
   return {
@@ -151,16 +149,11 @@ const contentEvents = computed(() => {
   };
 });
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.drawer || {}),
-  })({
-    direction: props.direction,
-    inset: props.inset,
-    snapPoints: props.snapPoints && props.snapPoints.length > 0,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.drawer || {}) })({
+  direction: props.direction,
+  inset: props.inset,
+  snapPoints: props.snapPoints && props.snapPoints.length > 0,
+}));
 </script>
 
 <template>
@@ -177,89 +170,93 @@ const pohon = computed(() =>
     </ADrawerTrigger>
 
     <ADrawerPortal v-bind="portalProps">
-      <ADrawerOverlay
-        v-if="overlay"
-        :class="pohon.overlay({ class: pohonProp?.overlay })"
-        data-pohon="drawer-overlay"
-      />
-
-      <ADrawerContent
-        :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
-        v-bind="contentProps"
-        data-pohon="drawer-content"
-        v-on="contentEvents"
-      >
-        <ADrawerHandle
-          v-if="handle"
-          :class="pohon.handle({ class: pohonProp?.handle })"
-          data-pohon="drawer-handle"
+      <FieldGroupReset>
+        <ADrawerOverlay
+          v-if="overlay"
+          data-slot="overlay"
+          :class="pohon.overlay({ class: pohonProp?.overlay })"
         />
 
-        <AVisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
-          <ADrawerTitle v-if="title || !!slots.title">
-            <slot name="title">
-              {{ title }}
-            </slot>
-          </ADrawerTitle>
+        <ADrawerContent
+          data-slot="content"
+          :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
+          v-bind="contentProps"
+          v-on="contentEvents"
+        >
+          <ADrawerHandle
+            v-if="handle"
+            data-slot="handle"
+            :class="pohon.handle({ class: pohonProp?.handle })"
+          />
 
-          <ADrawerDescription v-if="description || !!slots.description">
-            <slot name="description">
-              {{ description }}
-            </slot>
-          </ADrawerDescription>
-        </AVisuallyHidden>
-
-        <slot name="content">
-          <div
-            :class="pohon.container({ class: pohonProp?.container })"
-            data-pohon="drawer-container"
-          >
-            <div
-              v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)"
-              :class="pohon.header({ class: pohonProp?.header })"
-              data-pohon="drawer-header"
-            >
-              <slot name="header">
-                <ADrawerTitle
-                  v-if="title || !!slots.title"
-                  :class="pohon.title({ class: pohonProp?.title })"
-                  data-pohon="drawer-title"
-                >
-                  <slot name="title">
-                    {{ title }}
-                  </slot>
-                </ADrawerTitle>
-
-                <ADrawerDescription
-                  v-if="description || !!slots.description"
-                  :class="pohon.description({ class: pohonProp?.description })"
-                  data-pohon="drawer-description"
-                >
-                  <slot name="description">
-                    {{ description }}
-                  </slot>
-                </ADrawerDescription>
+          <AVisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
+            <ADrawerTitle v-if="!title && !slots.title" />
+            <ADrawerTitle v-else-if="!!slots.content">
+              <slot name="title">
+                {{ title }}
               </slot>
-            </div>
+            </ADrawerTitle>
 
-            <div
-              v-if="!!slots.body"
-              :class="pohon.body({ class: pohonProp?.body })"
-              data-pohon="drawer-body"
-            >
-              <slot name="body" />
-            </div>
+            <ADrawerDescription v-if="!description && !slots.description" />
+            <ADrawerDescription v-else-if="!!slots.content">
+              <slot name="description">
+                {{ description }}
+              </slot>
+            </ADrawerDescription>
+          </AVisuallyHidden>
 
+          <slot name="content">
             <div
-              v-if="!!slots.footer"
-              :class="pohon.footer({ class: pohonProp?.footer })"
-              data-pohon="drawer-footer"
+              data-slot="container"
+              :class="pohon.container({ class: pohonProp?.container })"
             >
-              <slot name="footer" />
+              <div
+                v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)"
+                data-slot="header"
+                :class="pohon.header({ class: pohonProp?.header })"
+              >
+                <slot name="header">
+                  <ADrawerTitle
+                    v-if="title || !!slots.title"
+                    data-slot="title"
+                    :class="pohon.title({ class: pohonProp?.title })"
+                  >
+                    <slot name="title">
+                      {{ title }}
+                    </slot>
+                  </ADrawerTitle>
+
+                  <ADrawerDescription
+                    v-if="description || !!slots.description"
+                    data-slot="description"
+                    :class="pohon.description({ class: pohonProp?.description })"
+                  >
+                    <slot name="description">
+                      {{ description }}
+                    </slot>
+                  </ADrawerDescription>
+                </slot>
+              </div>
+
+              <div
+                v-if="!!slots.body"
+                data-slot="body"
+                :class="pohon.body({ class: pohonProp?.body })"
+              >
+                <slot name="body" />
+              </div>
+
+              <div
+                v-if="!!slots.footer"
+                data-slot="footer"
+                :class="pohon.footer({ class: pohonProp?.footer })"
+              >
+                <slot name="footer" />
+              </div>
             </div>
-          </div>
-        </slot>
-      </ADrawerContent>
+          </slot>
+        </ADrawerContent>
+      </FieldGroupReset>
     </ADrawerPortal>
   </component>
 </template>

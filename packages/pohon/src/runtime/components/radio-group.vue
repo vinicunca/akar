@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ARadioGroupRootEmits, ARadioGroupRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/radio-group';
@@ -8,6 +9,7 @@ import theme from '#build/pohon/radio-group';
 type RadioGroup = ComponentConfig<typeof theme, AppConfig, 'radioGroup'>;
 
 export type PRadioGroupValue = AcceptableValue;
+
 export type PRadioGroupItem = PRadioGroupValue | {
   label?: string;
   description?: string;
@@ -61,7 +63,7 @@ export interface PRadioGroupProps<T extends Array<PRadioGroupItem> = Array<PRadi
    * The orientation the radio buttons are laid out.
    * @defaultValue 'vertical'
    */
-  orientation?: ARadioGroupRootProps['orientation'];
+  orientation?: RadioGroup['variants']['orientation'];
   /**
    * Position of the indicator.
    * @defaultValue 'start'
@@ -77,12 +79,12 @@ export type PRadioGroupEmits<T extends Array<PRadioGroupItem> = Array<PRadioGrou
 
 type NormalizeItem<T extends PRadioGroupItem> = Exclude<T & { id: string }, PRadioGroupValue>;
 
-type SlotProps<T extends PRadioGroupItem> = (props: { item: NormalizeItem<T>; modelValue?: PRadioGroupValue }) => any;
+type SlotProps<T extends PRadioGroupItem> = (props: { item: NormalizeItem<T>; modelValue: PRadioGroupValue }) => Array<VNode>;
 
 export interface PRadioGroupSlots<T extends Array<PRadioGroupItem> = Array<PRadioGroupItem>> {
-  legend: (props?: object) => any;
-  label: SlotProps<T[number]>;
-  description: SlotProps<T[number]>;
+  legend?: (props?: {}) => Array<VNode>;
+  label?: SlotProps<T[number]>;
+  description?: SlotProps<T[number]>;
 }
 </script>
 
@@ -100,6 +102,7 @@ import {
 import { computed, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
+import { useResolvedVariants } from '../composables/use-resolved-variants';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 
@@ -132,17 +135,17 @@ const {
 } = useFormField<PRadioGroupProps<T>>(props, { bind: false });
 const id = _id.value ?? useId();
 
-const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.radioGroup || {}) })({
-    size: size.value,
-    color: color.value,
-    disabled: disabled.value,
-    required: props.required,
-    orientation: props.orientation,
-    variant: props.variant,
-    indicator: props.indicator,
-  }),
-);
+const { variant } = useResolvedVariants('radioGroup', props, theme, ['variant']);
+
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.radioGroup || {}) })({
+  size: size.value,
+  color: color.value,
+  disabled: disabled.value,
+  required: props.required,
+  orientation: props.orientation,
+  variant: variant.value,
+  indicator: props.indicator,
+}));
 
 function normalizeItem(item: any) {
   if (item === null) {
@@ -161,12 +164,12 @@ function normalizeItem(item: any) {
     };
   }
 
-  const value = getProp({ object: item, path: props.valueKey as string });
-  const label = getProp({ object: item, path: props.labelKey as string });
-  const description = getProp({ object: item, path: props.descriptionKey as string });
+  const value = getProp(item, props.valueKey as string);
+  const label = getProp(item, props.labelKey as string);
+  const description = getProp(item, props.descriptionKey as string);
 
   return {
-    ...(item as any),
+    ...(item),
     value,
     label,
     description,
@@ -200,19 +203,19 @@ function onUpdate(value: any) {
     :orientation="orientation"
     :name="name"
     :disabled="disabled"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="radio-group-root"
     @update:model-value="onUpdate"
   >
     <fieldset
+      data-slot="fieldset"
       :class="pohon.fieldset({ class: pohonProp?.fieldset })"
-      data-pohon="radio-group-fieldset"
       v-bind="ariaAttrs"
     >
       <legend
         v-if="legend || !!slots.legend"
+        data-slot="legend"
         :class="pohon.legend({ class: pohonProp?.legend })"
-        data-pohon="radio-group-legend"
       >
         <slot name="legend">
           {{ legend }}
@@ -220,41 +223,41 @@ function onUpdate(value: any) {
       </legend>
 
       <component
-        :is="(!variant || variant === 'list') ? 'div' : ALabel"
+        :is="variant === 'list' ? 'div' : ALabel"
         v-for="item in normalizedItems"
         :key="item.value"
-        :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class] })"
-        data-pohon="radio-group-item"
+        data-slot="item"
+        :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class], disabled: item.disabled || disabled })"
       >
         <div
+          data-slot="container"
           :class="pohon.container({ class: [pohonProp?.container, item.pohon?.container] })"
-          data-pohon="radio-group-container"
         >
           <ARadioGroupItem
             :id="item.id"
             :value="item.value"
-            :disabled="item.disabled"
-            :class="pohon.base({ class: [pohonProp?.base, item.pohon?.base], disabled: item.disabled })"
-            data-pohon="radio-group-base"
+            :disabled="item.disabled || disabled"
+            data-slot="base"
+            :class="pohon.base({ class: [pohonProp?.base, item.pohon?.base], disabled: item.disabled || disabled })"
           >
             <ARadioGroupIndicator
+              data-slot="indicator"
               :class="pohon.indicator({ class: [pohonProp?.indicator, item.pohon?.indicator] })"
-              data-pohon="radio-group-indicator"
             />
           </ARadioGroupItem>
         </div>
 
         <div
           v-if="(item.label || !!slots.label) || (item.description || !!slots.description)"
+          data-slot="wrapper"
           :class="pohon.wrapper({ class: [pohonProp?.wrapper, item.pohon?.wrapper] })"
-          data-pohon="radio-group-wrapper"
         >
           <component
-            :is="(!variant || variant === 'list') ? ALabel : 'p'"
+            :is="variant === 'list' ? ALabel : 'p'"
             v-if="item.label || !!slots.label"
             :for="item.id"
-            :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label] })"
-            data-pohon="radio-group-label"
+            data-slot="label"
+            :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label], disabled: item.disabled || disabled })"
           >
             <slot
               name="label"
@@ -266,8 +269,8 @@ function onUpdate(value: any) {
           </component>
           <p
             v-if="item.description || !!slots.description"
-            :class="pohon.description({ class: [pohonProp?.description, item.pohon?.description] })"
-            data-pohon="radio-group-description"
+            data-slot="description"
+            :class="pohon.description({ class: [pohonProp?.description, item.pohon?.description], disabled: item.disabled || disabled })"
           >
             <slot
               name="description"

@@ -7,6 +7,7 @@ import type {
   AContextMenuRootEmits,
   AContextMenuRootProps,
 } from 'akar';
+import type { VNode } from 'vue';
 import type { PAvatarProps, PIconProps, PKbdProps, PLinkProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, EmitsToProps, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -93,37 +94,33 @@ export interface PContextMenuProps<T extends ArrayOrNested<PContextMenuItem> = A
 
 export interface PContextMenuEmits extends AContextMenuRootEmits {}
 
-type SlotProps<T extends PContextMenuItem> = (props: { item: T; active?: boolean; index: number; pohon: ContextMenu['pohon'] }) => any;
+type SlotProps<T extends PContextMenuItem> = (props: { item: T; active: boolean; index: number; pohon: ContextMenu['pohon'] }) => Array<VNode>;
 
 export type PContextMenuSlots<
   A extends ArrayOrNested<PContextMenuItem> = ArrayOrNested<PContextMenuItem>,
   T extends NestedItem<A> = NestedItem<A>,
 > = {
-  'default': (props?: object) => any;
-  'item': SlotProps<T>;
-  'item-leading': SlotProps<T>;
-  'item-label': (props: { item: T; active?: boolean; index: number }) => any;
-  'item-description': (props: { item: T; active?: boolean; index: number }) => any;
-  'item-trailing': SlotProps<T>;
-  'content-top': (props: { sub: boolean }) => any;
-  'content-bottom': (props: { sub: boolean }) => any;
+  'default'?: (props?: {}) => Array<VNode>;
+  'item'?: SlotProps<T>;
+  'item-leading'?: SlotProps<T>;
+  'item-label'?: (props: { item: T; active: boolean; index: number }) => Array<VNode>;
+  'item-description'?: (props: { item: T; active: boolean; index: number }) => Array<VNode>;
+  'item-trailing'?: SlotProps<T>;
+  'content-top'?: (props: { sub: boolean }) => Array<VNode>;
+  'content-bottom'?: (props: { sub: boolean }) => Array<VNode>;
 }
-& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active?: boolean; index: number }>
-& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active?: boolean; index: number; pohon: ContextMenu['pohon'] }>;
+& DynamicSlots<MergeTypes<T>, 'label' | 'description', { active: boolean; index: number }>
+& DynamicSlots<MergeTypes<T>, 'leading' | 'trailing', { active: boolean; index: number; pohon: ContextMenu['pohon'] }>;
 
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PContextMenuItem>">
 import { useAppConfig } from '#imports';
-import { omit } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
-import {
-  AContextMenuRoot,
-  AContextMenuTrigger,
-  useForwardPropsEmits,
-} from 'akar';
+import { AContextMenuRoot, AContextMenuTrigger, useForwardPropsEmits } from 'akar';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { omit } from '../utils';
 import { uv } from '../utils/uv';
 import PContextMenuContent from './context-menu-content.vue';
 
@@ -147,14 +144,9 @@ const rootProps = useForwardPropsEmits(reactivePick(props, 'modal'), emits);
 const contentProps = toRef(() => props.content);
 const getProxySlots = () => omit(slots, ['default']);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.contextMenu || {}),
-  })({
-    size: props.size,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.contextMenu || {}) })({
+  size: props.size,
+}));
 </script>
 
 <template>
@@ -171,7 +163,7 @@ const pohon = computed(() =>
     <PContextMenuContent
       :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
       :pohon="pohon"
-      :pohon-override="props.pohon"
+      :pohon-override="pohonProp"
       v-bind="contentProps"
       :items="items"
       :portal="portal"

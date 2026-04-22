@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { AcceptableInputValue, ATagsInputRootEmits, ATagsInputRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PIconProps } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
@@ -43,6 +44,8 @@ export interface PInputTagsProps<T extends PInputTagItem = PInputTagItem> extend
   deleteIcon?: PIconProps['name'];
   /** Highlight the ring color like a focus state. */
   highlight?: boolean;
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean;
   class?: any;
   pohon?: InputTags['slots'];
 }
@@ -53,14 +56,14 @@ export interface PInputTagsEmits<T extends PInputTagItem> extends ATagsInputRoot
   focus: [event: FocusEvent];
 }
 
-type SlotProps<T extends PInputTagItem> = (props: { item: T; index: number; pohon: InputTags['pohon'] }) => any;
+type SlotProps<T extends PInputTagItem> = (props: { item: T; index: number; pohon: InputTags['pohon'] }) => Array<VNode>;
 
 export interface PInputTagsSlots<T extends PInputTagItem = PInputTagItem> {
-  'leading': (props: { pohon: InputTags['pohon'] }) => any;
-  'default': (props: { pohon: InputTags['pohon'] }) => any;
-  'trailing': (props: { pohon: InputTags['pohon'] }) => any;
-  'item-text': SlotProps<T>;
-  'item-delete': SlotProps<T>;
+  'leading'?: (props: { pohon: InputTags['pohon'] }) => Array<VNode>;
+  'default'?: (props: { pohon: InputTags['pohon'] }) => Array<VNode>;
+  'trailing'?: (props: { pohon: InputTags['pohon'] }) => Array<VNode>;
+  'item-text'?: SlotProps<T>;
+  'item-delete'?: SlotProps<T>;
 }
 </script>
 
@@ -121,7 +124,7 @@ const {
   emitFormFocus,
   emitFormChange,
   emitFormInput,
-  size: formGroupSize,
+  size: formFieldSize,
   color,
   id,
   name,
@@ -132,37 +135,33 @@ const {
 const { orientation, size: fieldGroupSize } = useFieldGroup<PInputTagsProps>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.inputTags || {}),
-  })({
-    color: color.value,
-    variant: props.variant,
-    size: inputSize?.value,
-    loading: props.loading,
-    highlight: highlight.value,
-    leading: isLeading.value || !!props.avatar || !!slots.leading,
-    trailing: isTrailing.value || !!slots.trailing,
-    fieldGroup: orientation.value,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.inputTags || {}) })({
+  color: color.value,
+  variant: props.variant,
+  size: inputSize?.value,
+  loading: props.loading,
+  highlight: highlight.value,
+  fixed: props.fixed,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing,
+  fieldGroup: orientation.value,
+}));
 
 const inputRef = useTemplateRef('inputRef');
-
-onMounted(() => {
-  setTimeout(() => {
-    autoFocus();
-  }, props.autofocusDelay);
-});
 
 function autoFocus() {
   if (props.autofocus) {
     inputRef.value?.$el?.focus();
   }
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    autoFocus();
+  }, props.autofocusDelay);
+});
 
 function onUpdate(value: Array<T>) {
   if (toRaw(props.modelValue) === value) {
@@ -197,23 +196,23 @@ defineExpose({
     v-slot="{ modelValue: tags }"
     :model-value="modelValue"
     :default-value="defaultValue"
+    data-slot="root"
     :class="pohon.root({ class: [pohon.base({ class: pohonProp?.base }), pohonProp?.root, props.class] })"
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
-    data-pohon="input-tags-root"
     @update:model-value="onUpdate"
   >
     <ATagsInputItem
       v-for="(item, index) in tags"
       :key="index"
       :value="item"
+      data-slot="item"
       :class="pohon.item({ class: [pohonProp?.item] })"
-      data-pohon="input-tags-item"
     >
       <ATagsInputItemText
+        data-slot="itemText"
         :class="pohon.itemText({ class: [pohonProp?.itemText] })"
-        data-pohon="input-tags-item-text"
       >
         <slot
           v-if="!!slots['item-text']"
@@ -225,9 +224,9 @@ defineExpose({
       </ATagsInputItemText>
 
       <ATagsInputItemDelete
+        data-slot="itemDelete"
         :class="pohon.itemDelete({ class: [pohonProp?.itemDelete] })"
         :disabled="disabled"
-        data-pohon="input-tags-item-delete"
       >
         <slot
           name="item-delete"
@@ -237,8 +236,8 @@ defineExpose({
         >
           <PIcon
             :name="deleteIcon || appConfig.pohon.icons.close"
+            data-slot="itemDeleteIcon"
             :class="pohon.itemDeleteIcon({ class: [pohonProp?.itemDeleteIcon] })"
-            data-pohon="input-tags-item-delete-icon"
           />
         </slot>
       </ATagsInputItemDelete>
@@ -249,8 +248,8 @@ defineExpose({
       v-bind="{ ...$attrs, ...ariaAttrs }"
       :placeholder="placeholder"
       :max-length="maxLength"
+      data-slot="input"
       :class="pohon.input({ class: pohonProp?.input })"
-      data-pohon="input-tags-input"
       @blur="onBlur"
       @focus="onFocus"
     />
@@ -259,8 +258,8 @@ defineExpose({
 
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
+      data-slot="leading"
       :class="pohon.leading({ class: pohonProp?.leading })"
-      data-pohon="input-tags-leading"
     >
       <slot
         name="leading"
@@ -269,23 +268,23 @@ defineExpose({
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
+          data-slot="leadingIcon"
           :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
-          data-pohon="input-tags-leading-icon"
         />
         <PAvatar
           v-else-if="!!avatar"
           :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
+          data-slot="leadingAvatar"
           :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
-          data-pohon="input-tags-leading-avatar"
         />
       </slot>
     </span>
 
     <span
       v-if="isTrailing || !!slots.trailing"
+      data-slot="trailing"
       :class="pohon.trailing({ class: pohonProp?.trailing })"
-      data-pohon="input-tags-trailing"
     >
       <slot
         name="trailing"
@@ -294,8 +293,8 @@ defineExpose({
         <PIcon
           v-if="trailingIconName"
           :name="trailingIconName"
+          data-slot="trailingIcon"
           :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
-          data-pohon="input-tags-trailing-icon"
         />
       </slot>
     </span>

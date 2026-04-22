@@ -1,66 +1,66 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/editor-mention-menu'
-import type { EditorMenuOptions } from '../composables/use-editor-menu'
-import type { PAvatarProps, PIconProps } from '../types'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { EditorMenuOptions } from '../composables/use-editor-menu';
+import type { PAvatarProps, PIconProps } from '../types';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/editor-mention-menu';
 
-type EditorMentionMenu = ComponentConfig<typeof theme, AppConfig, 'editorMentionMenu'>
+type EditorMentionMenu = ComponentConfig<typeof theme, AppConfig, 'editorMentionMenu'>;
 
-export interface EditorMentionMenuItem {
-  label: string
-  description?: string
+export interface PEditorMentionMenuItem {
+  label: string;
+  description?: string;
   /**
    * @IconifyIcon
    */
-  icon?: PIconProps['name']
-  avatar?: PAvatarProps
-  disabled?: boolean
-  class?: any
-  [key: string]: any
+  icon?: PIconProps['name'];
+  avatar?: PAvatarProps;
+  disabled?: boolean;
+  class?: any;
+  [key: string]: any;
 }
 
-export interface EditorMentionMenuProps<T extends EditorMentionMenuItem = EditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo' | 'ignoreFilter'>> {
+export interface PEditorMentionMenuProps<T extends PEditorMentionMenuItem = PEditorMentionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo' | 'ignoreFilter'>> {
   /**
    * @defaultValue 'md'
    */
-  size?: EditorMentionMenu['variants']['size']
-  items?: T[] | T[][]
-  class?: any
-  pohon?: EditorMentionMenu['slots']
+  size?: EditorMentionMenu['variants']['size'];
+  items?: Array<T> | Array<Array<T>>;
+  class?: any;
+  pohon?: EditorMentionMenu['slots'];
 }
 </script>
 
-<script setup lang="ts" generic="T extends EditorMentionMenuItem">
-import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
-import { useAppConfig } from '#imports'
-import { useEditorMenu } from '../composables/use-editor-menu'
-import { tv } from '../utils/tv'
-import PIcon from './icon.vue'
-import PAvatar from './avatar.vue'
+<script setup lang="ts" generic="T extends PEditorMentionMenuItem">
+import { useAppConfig } from '#imports';
+import { computed, h, nextTick, onBeforeUnmount, onMounted, toRef } from 'vue';
+import { useEditorMenu } from '../composables/use-editor-menu';
+import { uv } from '../utils/uv';
+import PAvatar from './avatar.vue';
+import PIcon from './icon.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<EditorMentionMenuProps<T>>(), {
+const props = withDefaults(defineProps<PEditorMentionMenuProps<T>>(), {
   pluginKey: 'mentionMenu',
-  char: '@'
-})
+  char: '@',
+});
 
-const searchTerm = defineModel<string>('searchTerm', { default: '' })
+const searchTerm = defineModel<string>('searchTerm', { default: '' });
 
-const appConfig = useAppConfig() as EditorMentionMenu['AppConfig']
+const appConfig = useAppConfig() as EditorMentionMenu['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.editorMentionMenu || {}) })({
-  size: props.size
-}))
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.editorMentionMenu || {}) })({
+  size: props.size,
+}));
 
-let menu: ReturnType<typeof useEditorMenu> | null = null
+let menu: ReturnType<typeof useEditorMenu> | null = null;
 
 onMounted(async () => {
-  await nextTick()
+  await nextTick();
 
   if (!props.editor || props.editor.isDestroyed) {
-    return
+    return;
   }
 
   menu = useEditorMenu({
@@ -75,7 +75,7 @@ onMounted(async () => {
     suggestion: props.suggestion,
     appendTo: props.appendTo,
     searchTerm,
-    ui,
+    pohon,
     onSelect: (editor, range, item) => {
       // Delete the trigger character and query text, then insert the mention
       editor
@@ -86,39 +86,40 @@ onMounted(async () => {
           type: 'mention',
           attrs: {
             ...item,
-            mentionSuggestionChar: props.char
-          }
+            mentionSuggestionChar: props.char,
+          },
         })
-        .run()
+        .run();
     },
     renderItem: (item, styles) => [
+      // eslint-disable-next-line no-nested-ternary
       item.avatar
-        ? h(UAvatar, { ...item.avatar, size: styles.value.itemLeadingAvatarSize(), class: styles.value.itemLeadingAvatar() })
+        ? h(PAvatar, { ...item.avatar, size: styles.value.itemLeadingAvatarSize(), class: styles.value.itemLeadingAvatar() })
         : item.icon
-          ? h(UIcon, { name: item.icon, class: styles.value.itemLeadingIcon() })
+          ? h(PIcon, { name: item.icon, class: styles.value.itemLeadingIcon() })
           : null,
       h('span', { class: styles.value.itemWrapper() }, [
         h('span', { class: styles.value.itemLabel() }, item.label),
         item.description
           ? h('span', { class: styles.value.itemDescription() }, item.description)
-          : null
-      ])
-    ]
-  })
+          : null,
+      ]),
+    ],
+  });
 
-  props.editor.registerPlugin(menu.plugin)
-})
+  props.editor.registerPlugin(menu.plugin);
+});
 
 onBeforeUnmount(() => {
   if (menu) {
-    menu.destroy()
-    menu = null
+    menu.destroy();
+    menu = null;
   }
 
   if (props.editor && !props.editor.isDestroyed) {
-    props.editor.unregisterPlugin(props.pluginKey)
+    props.editor.unregisterPlugin(props.pluginKey);
   }
-})
+});
 </script>
 
 <template>

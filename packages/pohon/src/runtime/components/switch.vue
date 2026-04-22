@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ASwitchRootProps } from 'akar';
+import type { ASwitchRootEmits, ASwitchRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { PIconProps } from '../types';
 import type { ButtonHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
@@ -8,7 +9,7 @@ import theme from '#build/pohon/switch';
 
 type Switch = ComponentConfig<typeof theme, AppConfig, 'switch'>;
 
-export interface PSwitchProps extends Pick<ASwitchRootProps, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+export interface PSwitchProps<T = boolean> extends Pick<ASwitchRootProps<T>, 'disabled' | 'id' | 'name' | 'required' | 'value' | 'defaultValue' | 'modelValue' | 'trueValue' | 'falseValue'>, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -46,17 +47,17 @@ export interface PSwitchProps extends Pick<ASwitchRootProps, 'disabled' | 'id' |
   pohon?: Switch['slots'];
 }
 
-export type PSwitchEmits = {
+export interface PSwitchEmits<T = boolean> extends ASwitchRootEmits<T> {
   change: [event: Event];
-};
+}
 
 export interface PSwitchSlots {
-  label: (props: { label?: string }) => any;
-  description: (props: { description?: string }) => any;
+  label?: (props: { label: string | undefined }) => Array<VNode>;
+  description?: (props: { description: string | undefined }) => Array<VNode>;
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T = boolean">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import {
@@ -64,7 +65,7 @@ import {
   APrimitive,
   ASwitchRoot,
   ASwitchThumb,
-  useForwardProps,
+  useForwardPropsEmits,
 } from 'akar';
 import { computed, useAttrs, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -74,15 +75,13 @@ import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = defineProps<PSwitchProps>();
-const emits = defineEmits<PSwitchEmits>();
+const props = defineProps<PSwitchProps<T>>();
+const emits = defineEmits<PSwitchEmits<T>>();
 const slots = defineSlots<PSwitchSlots>();
-const modelValue = defineModel<boolean>({ default: undefined });
-
 const appConfig = useAppConfig() as Switch['AppConfig'];
 const pohonProp = useComponentPohon('switch', props);
 
-const rootProps = useForwardProps(reactivePick(props, 'required', 'value', 'defaultValue'));
+const rootProps = useForwardPropsEmits(reactivePick(props, 'required', 'value', 'defaultValue', 'modelValue', 'trueValue', 'falseValue'), emits);
 
 const {
   id: _id,
@@ -93,7 +92,7 @@ const {
   name,
   disabled,
   ariaAttrs,
-} = useFormField<PSwitchProps>(props);
+} = useFormField<PSwitchProps<T>>(props);
 const id = _id.value ?? useId();
 
 const attrs = useAttrs();
@@ -103,18 +102,13 @@ const forwardedAttrs = computed(() => {
   return rest;
 });
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.switch || {}),
-  })({
-    size: size.value,
-    color: color.value,
-    required: props.required,
-    loading: props.loading,
-    disabled: disabled.value || props.loading,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.switch || {}) })({
+  size: size.value,
+  color: color.value,
+  required: props.required,
+  loading: props.loading,
+  disabled: disabled.value || props.loading,
+}));
 
 function onUpdate(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -128,45 +122,44 @@ function onUpdate(value: any) {
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="switch-root"
   >
     <div
+      data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
-      data-pohon="switch-container"
     >
       <ASwitchRoot
         :id="id"
         v-bind="{ ...rootProps, ...forwardedAttrs, ...ariaAttrs }"
-        v-model="modelValue"
         :name="name"
         :disabled="disabled || loading"
+        data-slot="base"
         :class="pohon.base({ class: pohonProp?.base })"
-        data-pohon="switch-base"
         @update:model-value="onUpdate"
       >
         <ASwitchThumb
+          data-slot="thumb"
           :class="pohon.thumb({ class: pohonProp?.thumb })"
-          data-pohon="switch-thumb"
         >
           <PIcon
             v-if="loading"
             :name="loadingIcon || appConfig.pohon.icons.loading"
+            data-slot="icon"
             :class="pohon.icon({ class: pohonProp?.icon, checked: true, unchecked: true })"
-            data-pohon="switch-icon"
           />
           <template v-else>
             <PIcon
               v-if="checkedIcon"
               :name="checkedIcon"
+              data-slot="icon"
               :class="pohon.icon({ class: pohonProp?.icon, checked: true })"
-              data-pohon="switch-icon"
             />
             <PIcon
               v-if="uncheckedIcon"
               :name="uncheckedIcon"
+              data-slot="icon"
               :class="pohon.icon({ class: pohonProp?.icon, unchecked: true })"
-              data-pohon="switch-icon"
             />
           </template>
         </ASwitchThumb>
@@ -174,14 +167,14 @@ function onUpdate(value: any) {
     </div>
     <div
       v-if="(label || !!slots.label) || (description || !!slots.description)"
+      data-slot="wrapper"
       :class="pohon.wrapper({ class: pohonProp?.wrapper })"
-      data-pohon="switch-wrapper"
     >
       <ALabel
         v-if="label || !!slots.label"
         :for="id"
+        data-slot="label"
         :class="pohon.label({ class: pohonProp?.label })"
-        data-pohon="switch-label"
       >
         <slot
           name="label"
@@ -192,8 +185,8 @@ function onUpdate(value: any) {
       </ALabel>
       <p
         v-if="description || !!slots.description"
+        data-slot="description"
         :class="pohon.description({ class: pohonProp?.description })"
-        data-pohon="switch-description"
       >
         <slot
           name="description"

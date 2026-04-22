@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
@@ -11,10 +12,8 @@ import theme from '#build/pohon/input';
 type Input = ComponentConfig<typeof theme, AppConfig, 'input'>;
 
 export type PInputValue = AcceptableValue;
-export interface PInputProps<
-  T extends PInputValue = PInputValue,
-  Mod extends ModelModifiers = ModelModifiers,
-> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
+
+export interface PInputProps<T extends PInputValue = PInputValue, Mod extends ModelModifiers = ModelModifiers> extends UseComponentIconsProps, /** @vue-ignore */ Omit<InputHTMLAttributes, 'name' | 'type' | 'placeholder' | 'required' | 'autocomplete' | 'autofocus' | 'disabled'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -44,6 +43,8 @@ export interface PInputProps<
   disabled?: boolean;
   /** Highlight the ring color like a focus state. */
   highlight?: boolean;
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean;
   modelValue?: ApplyModifiers<T, Mod>;
   defaultValue?: ApplyModifiers<T, Mod>;
   modelModifiers?: Mod;
@@ -58,9 +59,9 @@ export interface PInputEmits<T extends PInputValue = PInputValue, Mod extends Mo
 }
 
 export interface PInputSlots {
-  leading: (props: { pohon: Input['pohon'] }) => any;
-  default: (props: { pohon: Input['pohon'] }) => any;
-  trailing: (props: { pohon: Input['pohon'] }) => any;
+  leading?: (props: { pohon: Input['pohon'] }) => Array<VNode>;
+  default?: (props: { pohon: Input['pohon'] }) => Array<VNode>;
+  trailing?: (props: { pohon: Input['pohon'] }) => Array<VNode>;
 }
 </script>
 
@@ -92,11 +93,7 @@ const props = withDefaults(
 const emits = defineEmits<PInputEmits<T, Mod>>();
 const slots = defineSlots<PInputSlots>();
 
-const modelValue = useVModel<
-  PInputProps<T, Mod>,
-  'modelValue',
-  'update:modelValue'
->(
+const modelValue = useVModel<PInputProps<T, Mod>, 'modelValue', 'update:modelValue'>(
   props,
   'modelValue',
   emits,
@@ -110,7 +107,7 @@ const {
   emitFormBlur,
   emitFormInput,
   emitFormChange,
-  size: formGroupSize,
+  size: formFieldSize,
   color,
   id,
   name,
@@ -122,24 +119,20 @@ const {
 const { orientation, size: fieldGroupSize } = useFieldGroup<PInputProps<T>>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.input || {}),
-  })({
-    type: props.type as Input['variants']['type'],
-    color: color.value,
-    variant: props.variant,
-    size: inputSize?.value,
-    loading: props.loading,
-    highlight: highlight.value,
-    leading: isLeading.value || !!props.avatar || !!slots.leading,
-    trailing: isTrailing.value || !!slots.trailing,
-    fieldGroup: orientation.value,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.input || {}) })({
+  type: props.type as Input['variants']['type'],
+  color: color.value,
+  variant: props.variant,
+  size: inputSize?.value,
+  loading: props.loading,
+  highlight: highlight.value,
+  fixed: props.fixed,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing,
+  fieldGroup: orientation.value,
+}));
 
 const inputRef = useTemplateRef('inputRef');
 
@@ -212,13 +205,13 @@ defineExpose({
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="input-root"
   >
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
+      data-slot="leading"
       :class="pohon.leading({ class: pohonProp?.leading })"
-      data-pohon="input-leading"
     >
       <slot
         name="leading"
@@ -227,19 +220,18 @@ defineExpose({
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
+          data-slot="leadingIcon"
           :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
-          data-pohon="input-leading-icon"
         />
         <PAvatar
           v-else-if="!!avatar"
           :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
+          data-slot="leadingAvatar"
           :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
-          data-pohon="input-leading-avatar"
         />
       </slot>
     </span>
-
     <input
       :id="id"
       ref="inputRef"
@@ -247,12 +239,12 @@ defineExpose({
       :value="modelValue"
       :name="name"
       :placeholder="placeholder"
+      data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
       v-bind="{ ...$attrs, ...ariaAttrs }"
-      data-pohon="input-base"
       @input="onInput"
       @blur="onBlur"
       @change="onChange"
@@ -263,8 +255,8 @@ defineExpose({
 
     <span
       v-if="isTrailing || !!slots.trailing"
+      data-slot="trailing"
       :class="pohon.trailing({ class: pohonProp?.trailing })"
-      data-pohon="input-trailing"
     >
       <slot
         name="trailing"
@@ -273,8 +265,8 @@ defineExpose({
         <PIcon
           v-if="trailingIconName"
           :name="trailingIconName"
+          data-slot="trailingIcon"
           :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
-          data-pohon="input-trailing-icon"
         />
       </slot>
     </span>

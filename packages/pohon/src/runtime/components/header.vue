@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type {
   PButtonProps,
   PDialogProps,
@@ -12,8 +13,8 @@ import theme from '#build/pohon/header';
 
 type Header = ComponentConfig<typeof theme, AppConfig, 'header'>;
 
-type HeaderMode = 'dialog' | 'slideover' | 'drawer';
-type HeaderMenu<T> = T extends 'dialog' ? PDialogProps : T extends 'slideover' ? PSlideoverProps : T extends 'drawer' ? PDrawerProps : never;
+type HeaderMode = 'modal' | 'slideover' | 'drawer';
+type HeaderMenu<T> = T extends 'modal' ? PDialogProps : T extends 'slideover' ? PSlideoverProps : T extends 'drawer' ? PDrawerProps : never;
 
 export interface PHeaderProps<T extends HeaderMode = HeaderMode> {
   /**
@@ -25,7 +26,7 @@ export interface PHeaderProps<T extends HeaderMode = HeaderMode> {
   to?: string;
   /**
    * The mode of the header menu.
-   * @defaultValue 'dialog'
+   * @defaultValue 'modal'
    */
   mode?: T;
   /**
@@ -42,20 +43,25 @@ export interface PHeaderProps<T extends HeaderMode = HeaderMode> {
    * @defaultValue 'right'
    */
   toggleSide?: 'left' | 'right';
+  /**
+   * Automatically close when route changes.
+   * @defaultValue true
+   */
+  autoClose?: boolean;
   class?: any;
   pohon?: Header['slots'];
 }
 
 export interface PHeaderSlots {
-  title: (props?: object) => any;
-  left: (props?: object) => any;
-  default: (props?: object) => any;
-  right: (props?: object) => any;
-  toggle: (props: { open: boolean; toggle: () => void; pohon: Header['pohon'] }) => any;
-  top: (props?: object) => any;
-  bottom: (props?: object) => any;
-  body: (props?: object) => any;
-  content: (props: { close?: () => void }) => any;
+  title?: (props?: {}) => Array<VNode>;
+  left?: (props?: {}) => Array<VNode>;
+  default?: (props?: {}) => Array<VNode>;
+  right?: (props?: {}) => Array<VNode>;
+  toggle?: (props: { open: boolean; toggle: () => void; pohon: Header['pohon'] }) => Array<VNode>;
+  top?: (props?: {}) => Array<VNode>;
+  bottom?: (props?: {}) => Array<VNode>;
+  body?: (props?: {}) => Array<VNode>;
+  content?: (props: { close?: () => void }) => Array<VNode>;
 }
 </script>
 
@@ -82,11 +88,12 @@ const props = withDefaults(
   defineProps<PHeaderProps<T>>(),
   {
     as: 'header',
-    mode: 'dialog' as never,
+    mode: 'modal' as never,
+    autoClose: true,
     toggle: true,
     toggleSide: 'right',
     to: '/',
-    title: 'Pohon',
+    title: 'Nuxt UI',
   },
 );
 const slots = defineSlots<PHeaderSlots>();
@@ -104,34 +111,26 @@ const [DefineToggleTemplate, ReuseToggleTemplate] = createReusableTemplate();
 
 const ariaLabel = computed(() => {
   const slotText = slots.title && getSlotChildrenText(slots.title());
-  return (slotText || props.title || 'Pohon').trim();
+  return (slotText || props.title || 'Nuxt UI').trim();
 });
 
 watch(() => route.fullPath, () => {
+  if (!props.autoClose) {
+    return;
+  }
+
   open.value = false;
 });
 
-const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.header || {}) })(),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.header || {}) })());
 
-const MenuComponent = computed(() => ({
+const Menu = computed(() => ({
   slideover: PSlideover,
-  dialog: PDialog,
+  modal: PDialog,
   drawer: PDrawer,
 })[props.mode as HeaderMode]);
 
-const menuProps = toRef(() =>
-  defu(
-    props.menu,
-    {
-      content: {
-        onOpenAutoFocus: (event: Event) => event.preventDefault(),
-      },
-    },
-    props.mode === 'dialog' ? { fullscreen: true } : {},
-  ) as HeaderMenu<T>,
-);
+const menuProps = toRef(() => defu(props.menu, {}, props.mode === 'modal' ? { fullscreen: true, transition: false } : {}) as HeaderMenu<T>);
 
 function toggleOpen() {
   open.value = !open.value;
@@ -153,8 +152,8 @@ function toggleOpen() {
         :aria-label="open ? t('header.close') : t('header.open')"
         :icon="open ? appConfig.pohon.icons.close : appConfig.pohon.icons.menu"
         v-bind="(typeof toggle === 'object' ? toggle : {})"
+        data-slot="toggle"
         :class="pohon.toggle({ class: pohonProp?.toggle, toggleSide })"
-        data-pohon="header-toggle"
         @click="toggleOpen"
       />
     </slot>
@@ -162,8 +161,8 @@ function toggleOpen() {
 
   <DefineLeftTemplate>
     <div
+      data-slot="left"
       :class="pohon.left({ class: pohonProp?.left })"
-      data-pohon="header-left"
     >
       <ReuseToggleTemplate v-if="toggleSide === 'left'" />
 
@@ -171,8 +170,8 @@ function toggleOpen() {
         <PLink
           :to="to"
           :aria-label="ariaLabel"
+          data-slot="title"
           :class="pohon.title({ class: pohonProp?.title })"
-          data-pohon="header-title"
         >
           <slot name="title">
             {{ title }}
@@ -184,8 +183,8 @@ function toggleOpen() {
 
   <DefineRightTemplate>
     <div
+      data-slot="right"
       :class="pohon.right({ class: pohonProp?.right })"
-      data-pohon="header-right"
     >
       <slot name="right" />
 
@@ -196,20 +195,20 @@ function toggleOpen() {
   <APrimitive
     :as="as"
     v-bind="$attrs"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="header-root"
   >
     <slot name="top" />
 
     <PContainer
+      data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
-      data-pohon="header-container"
     >
       <ReuseLeftTemplate />
 
       <div
+        data-slot="center"
         :class="pohon.center({ class: pohonProp?.center })"
-        data-pohon="header-center"
       >
         <slot />
       </div>
@@ -220,7 +219,7 @@ function toggleOpen() {
     <slot name="bottom" />
   </APrimitive>
 
-  <MenuComponent
+  <Menu
     v-model:open="open"
     :title="t('header.title')"
     :description="t('header.description')"
@@ -237,8 +236,8 @@ function toggleOpen() {
       >
         <div
           v-if="mode !== 'drawer'"
+          data-slot="header"
           :class="pohon.header({ class: pohonProp?.header })"
-          data-pohon="header-header"
         >
           <ReuseLeftTemplate />
 
@@ -246,12 +245,12 @@ function toggleOpen() {
         </div>
 
         <div
+          data-slot="body"
           :class="pohon.body({ class: pohonProp?.body })"
-          data-pohon="header-body"
         >
           <slot name="body" />
         </div>
       </slot>
     </template>
-  </MenuComponent>
+  </Menu>
 </template>

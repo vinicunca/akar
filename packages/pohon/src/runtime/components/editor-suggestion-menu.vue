@@ -1,85 +1,85 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/editor-suggestion-menu'
-import type { EditorMenuOptions } from '../composables/use-editor-menu'
-import type { PIconProps } from '../types'
-import type { EditorItem, EditorCustomHandlers } from '../types/editor'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { EditorMenuOptions } from '../composables/use-editor-menu';
+import type { PIconProps } from '../types';
+import type { EditorCustomHandlers, EditorItem } from '../types/editor';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/editor-suggestion-menu';
 
-type EditorSuggestionMenu = ComponentConfig<typeof theme, AppConfig, 'editorSuggestionMenu'>
+type EditorSuggestionMenu = ComponentConfig<typeof theme, AppConfig, 'editorSuggestionMenu'>;
 
 type EditorSuggestionMenuLabelItem = {
-  type: 'label'
-  label: string
-  class?: any
-  [key: string]: any
-}
+  type: 'label';
+  label: string;
+  class?: any;
+  [key: string]: any;
+};
 
 type EditorSuggestionMenuSeparatorItem = {
-  type: 'separator'
-  class?: any
-  [key: string]: any
-}
+  type: 'separator';
+  class?: any;
+  [key: string]: any;
+};
 
 type EditorSuggestionMenuActionItem<H extends EditorCustomHandlers = EditorCustomHandlers> = {
-  type?: never
-  label: string
-  description?: string
+  type?: never;
+  label: string;
+  description?: string;
   /**
    * @IconifyIcon
    */
-  icon?: PIconProps['name']
-  disabled?: boolean
-  class?: any
-  [key: string]: any
-} & EditorItem<H>
+  icon?: PIconProps['name'];
+  disabled?: boolean;
+  class?: any;
+  [key: string]: any;
+} & EditorItem<H>;
 
-export type EditorSuggestionMenuItem<H extends EditorCustomHandlers = EditorCustomHandlers>
+export type PEditorSuggestionMenuItem<H extends EditorCustomHandlers = EditorCustomHandlers>
   = | EditorSuggestionMenuLabelItem
     | EditorSuggestionMenuSeparatorItem
-    | EditorSuggestionMenuActionItem<H>
+    | EditorSuggestionMenuActionItem<H>;
 
-export interface EditorSuggestionMenuProps<T extends EditorSuggestionMenuItem = EditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
+export interface PEditorSuggestionMenuProps<T extends PEditorSuggestionMenuItem = PEditorSuggestionMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
   /**
    * @defaultValue 'md'
    */
-  size?: EditorSuggestionMenu['variants']['size']
-  items?: T[] | T[][]
-  class?: any
-  pohon?: EditorSuggestionMenu['slots']
+  size?: EditorSuggestionMenu['variants']['size'];
+  items?: Array<T> | Array<Array<T>>;
+  class?: any;
+  pohon?: EditorSuggestionMenu['slots'];
 }
 </script>
 
-<script setup lang="ts" generic="T extends EditorSuggestionMenuItem">
-import { computed, h, inject, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
-import { useAppConfig } from '#imports'
-import { useEditorMenu } from '../composables/use-editor-menu'
-import { createHandlers } from '../utils/editor'
-import { tv } from '../utils/tv'
-import PIcon from './icon.vue'
+<script setup lang="ts" generic="T extends PEditorSuggestionMenuItem">
+import { useAppConfig } from '#imports';
+import { computed, h, inject, nextTick, onBeforeUnmount, onMounted, toRef } from 'vue';
+import { useEditorMenu } from '../composables/use-editor-menu';
+import { createHandlers } from '../utils/editor';
+import { uv } from '../utils/uv';
+import PIcon from './icon.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<EditorSuggestionMenuProps<T>>(), {
+const props = withDefaults(defineProps<PEditorSuggestionMenuProps<T>>(), {
   pluginKey: 'suggestionMenu',
-  char: '/'
-})
+  char: '/',
+});
 
-const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig']
+const appConfig = useAppConfig() as EditorSuggestionMenu['AppConfig'];
 
-const handlers = inject('editorHandlers', computed(() => createHandlers()))
+const handlers = inject('editorHandlers', computed(() => createHandlers()));
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.editorSuggestionMenu || {}) })({
-  size: props.size
-}))
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.editorSuggestionMenu || {}) })({
+  size: props.size,
+}));
 
-let menu: ReturnType<typeof useEditorMenu> | null = null
+let menu: ReturnType<typeof useEditorMenu> | null = null;
 
 onMounted(async () => {
-  await nextTick()
+  await nextTick();
 
   if (!props.editor || props.editor.isDestroyed) {
-    return
+    return;
   }
 
   menu = useEditorMenu({
@@ -92,54 +92,56 @@ onMounted(async () => {
     options: props.options,
     suggestion: props.suggestion,
     appendTo: props.appendTo,
-    ui,
+    pohon,
     onSelect: (editor, range, item) => {
       // Skip if it's a label (non-interactive)
-      if (item.type === 'label' || item.type === 'separator') return
+      if (item.type === 'label' || item.type === 'separator') {
+        return;
+      }
 
       // Delete the trigger character and query text
-      editor.chain().focus().deleteRange(range).run()
+      editor.chain().focus().deleteRange(range).run();
 
       // Execute the actual command using handlers
-      const handler = handlers?.value?.[item.kind]
+      const handler = handlers?.value?.[item.kind];
       if (handler) {
-        handler.execute(editor, item).run()
+        handler.execute(editor, item).run();
       }
     },
     renderItem: (item, styles) => {
       // Render label (just text)
       if (item.type === 'label') {
-        return [h('span', {}, item.label)]
+        return [h('span', {}, item.label)];
       }
 
       // Render regular item
       return [
         item.icon
-          ? h(UIcon, { name: item.icon, class: styles.value.itemLeadingIcon() })
+          ? h(PIcon, { name: item.icon, class: styles.value.itemLeadingIcon() })
           : null,
         h('span', { class: styles.value.itemWrapper() }, [
           h('span', { class: styles.value.itemLabel() }, item.label),
           item.description
             ? h('span', { class: styles.value.itemDescription() }, item.description)
-            : null
-        ])
-      ]
-    }
-  })
+            : null,
+        ]),
+      ];
+    },
+  });
 
-  props.editor.registerPlugin(menu.plugin)
-})
+  props.editor.registerPlugin(menu.plugin);
+});
 
 onBeforeUnmount(() => {
   if (menu) {
-    menu.destroy()
-    menu = null
+    menu.destroy();
+    menu = null;
   }
 
   if (props.editor && !props.editor.isDestroyed) {
-    props.editor.unregisterPlugin(props.pluginKey)
+    props.editor.unregisterPlugin(props.pluginKey);
   }
-})
+});
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/card';
 
@@ -20,9 +21,9 @@ export interface PCardProps {
 }
 
 export interface PCardSlots {
-  header: (props?: object) => any;
-  default: (props?: object) => any;
-  footer: (props?: object) => any;
+  header?: (props?: {}) => Array<VNode>;
+  default?: (props?: {}) => Array<VNode>;
+  footer?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -39,42 +40,37 @@ const slots = defineSlots<PCardSlots>();
 const appConfig = useAppConfig() as Card['AppConfig'];
 const pohonProp = useComponentPohon('card', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.card || {}),
-  })({
-    variant: props.variant,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.card || {}) })({
+  variant: props.variant,
+}));
 </script>
 
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="card-root"
   >
     <div
       v-if="!!slots.header"
+      data-slot="header"
       :class="pohon.header({ class: pohonProp?.header })"
-      data-pohon="card-header"
     >
       <slot name="header" />
     </div>
 
     <div
       v-if="!!slots.default"
+      data-slot="body"
       :class="pohon.body({ class: pohonProp?.body })"
-      data-pohon="card-body"
     >
       <slot />
     </div>
 
     <div
       v-if="!!slots.footer"
+      data-slot="footer"
       :class="pohon.footer({ class: pohonProp?.footer })"
-      data-pohon="card-footer"
     >
       <slot name="footer" />
     </div>

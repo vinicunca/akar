@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PAvatarProps, PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/empty';
@@ -37,13 +38,13 @@ export interface PEmptyProps {
 }
 
 export interface PEmptySlots {
-  header: (props?: object) => any;
-  leading: (props: { pohon: Empty['pohon'] }) => any;
-  title: (props?: object) => any;
-  description: (props?: object) => any;
-  body: (props?: object) => any;
-  actions: (props?: object) => any;
-  footer: (props?: object) => any;
+  header?: (props?: {}) => Array<VNode>;
+  leading?: (props: { pohon: Empty['pohon'] }) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  body?: (props?: {}) => Array<VNode>;
+  actions?: (props?: {}) => Array<VNode>;
+  footer?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -62,27 +63,25 @@ const slots = defineSlots<PEmptySlots>();
 const appConfig = useAppConfig() as Empty['AppConfig'];
 const pohonProp = useComponentPohon('empty', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.empty || {}),
-  })({
-    variant: props.variant,
-    size: props.size,
-  }),
-);
+const pohon = computed(() => uv({
+  extend: uv(theme),
+  ...(appConfig.pohon?.empty || {}),
+})({
+  variant: props.variant,
+  size: props.size,
+}));
 </script>
 
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="empty-root"
   >
     <div
       v-if="!!slots.header || (icon || avatar || !!slots.leading) || (title || !!slots.title) || (description || !!slots.description)"
+      data-slot="header"
       :class="pohon.header({ class: pohonProp?.header })"
-      data-pohon="empty-header"
     >
       <slot name="header">
         <slot
@@ -93,15 +92,15 @@ const pohon = computed(() =>
             v-if="icon || avatar"
             :icon="icon"
             v-bind="typeof avatar === 'object' ? avatar : {}"
+            data-slot="avatar"
             :class="pohon.avatar({ class: pohonProp?.avatar })"
-            data-pohon="empty-avatar"
           />
         </slot>
 
         <h2
           v-if="title || !!slots.title"
+          data-slot="title"
           :class="pohon.title({ class: pohonProp?.title })"
-          data-pohon="empty-title"
         >
           <slot name="title">
             {{ title }}
@@ -110,6 +109,7 @@ const pohon = computed(() =>
 
         <div
           v-if="description || !!slots.description"
+          data-slot="description"
           :class="pohon.description({ class: pohonProp?.description })"
         >
           <slot name="description">
@@ -121,14 +121,14 @@ const pohon = computed(() =>
 
     <div
       v-if="!!slots.body || (actions?.length || !!slots.actions)"
+      data-slot="body"
       :class="pohon.body({ class: pohonProp?.body })"
-      data-pohon="empty-body"
     >
       <slot name="body">
         <div
           v-if="actions?.length || !!slots.actions"
+          data-slot="actions"
           :class="pohon.actions({ class: pohonProp?.actions })"
-          data-pohon="empty-actions"
         >
           <slot name="actions">
             <PButton
@@ -144,8 +144,8 @@ const pohon = computed(() =>
 
     <div
       v-if="!!slots.footer"
+      data-slot="footer"
       :class="pohon.footer({ class: pohonProp?.footer })"
-      data-pohon="empty-footer"
     >
       <slot name="footer" />
     </div>

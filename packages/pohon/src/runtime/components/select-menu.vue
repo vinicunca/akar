@@ -7,6 +7,7 @@ import type {
   AComboboxRootEmits,
   AComboboxRootProps,
 } from 'akar';
+import type { VNode } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PButtonProps, PChipProps, PIconProps, PInputProps, PLinkPropsKeys } from '../types';
 import type { ButtonHTMLAttributes } from '../types/html';
@@ -25,11 +26,6 @@ import theme from '#build/pohon/select-menu';
 
 type SelectMenu = ComponentConfig<typeof theme, AppConfig, 'selectMenu'>;
 
-type ExcludeItem = { type: 'label' | 'separator' };
-type IsClearUsed<M extends boolean, C extends boolean | object> = M extends false
-  ? (C extends true ? null : C extends object ? null : never)
-  : never;
-
 export type PSelectMenuValue = AcceptableValue;
 export type PSelectMenuItem = PSelectMenuValue | {
   label?: string;
@@ -46,19 +42,18 @@ export type PSelectMenuItem = PSelectMenuValue | {
    */
   type?: 'label' | 'separator' | 'item';
   disabled?: boolean;
-  onSelect?: (event?: Event) => void;
+  onSelect?: (event: Event) => void;
   class?: any;
   pohon?: Pick<SelectMenu['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>;
   [key: string]: any;
 };
 
-export interface PSelectMenuProps<
-  T extends ArrayOrNested<PSelectMenuItem> = ArrayOrNested<PSelectMenuItem>,
-  VK extends GetItemKeys<T> | undefined = undefined,
-  M extends boolean = false,
-  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
-  C extends boolean | object = false,
-> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+type ExcludeItem = { type: 'label' | 'separator' };
+type IsClearUsed<M extends boolean, C extends boolean | object> = M extends false
+  ? (C extends true ? null : C extends object ? null : never)
+  : never;
+
+export interface PSelectMenuProps<T extends ArrayOrNested<PSelectMenuItem> = ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false> extends Pick<AComboboxRootProps<T>, 'open' | 'defaultOpen' | 'disabled' | 'name' | 'resetSearchTermOnBlur' | 'resetSearchTermOnSelect' | 'resetModelValueOnClear' | 'highlightOnHover' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string;
   /** The placeholder text when the select is empty. */
   placeholder?: string;
@@ -68,7 +63,7 @@ export interface PSelectMenuProps<
    * `{ placeholder: 'Search...', variant: 'none' }`{lang="ts-type"}
    * @defaultValue true
    */
-  searchInput?: boolean | PInputProps;
+  searchInput?: boolean | Omit<PInputProps, 'modelValue' | 'defaultValue'>;
   /**
    * @defaultValue 'primary'
    */
@@ -113,8 +108,8 @@ export interface PSelectMenuProps<
   content?: Omit<AComboboxContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<AComboboxContentEmits>>;
   /**
    * Display an arrow alongside the menu.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
-   * @IconifyIcon
    */
   arrow?: boolean | Omit<AComboboxArrowProps, 'as' | 'asChild'>;
   /**
@@ -124,6 +119,7 @@ export interface PSelectMenuProps<
   portal?: boolean | string | HTMLElement;
   /**
    * Enable virtualization for large lists.
+   * Note: when enabled, all groups are flattened into a single list due to a limitation of Reka UI (https://github.com/unovue/akar/issues/1885).
    * @defaultValue false
    */
   virtualize?: boolean | {
@@ -156,7 +152,7 @@ export interface PSelectMenuProps<
   items?: T;
   /** The value of the SelectMenu when initially rendered. Use when you do not need to control the state of the SelectMenu. */
   defaultValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
-  /** The controlled value of the SelectMenu. Can be binded-with `v-model`. */
+  /** The controlled value of the SelectMenu. Can be binded-with with `v-model`. */
   modelValue?: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
   modelModifiers?: Mod;
   /** Whether multiple options can be selected or not. */
@@ -204,7 +200,7 @@ export interface PSelectMenuEmits<
   'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>];
 }
 
-type SlotProps<T extends PSelectMenuItem> = (props: { item: T; index: number; pohon: SelectMenu['pohon'] }) => any;
+type SlotProps<T extends PSelectMenuItem> = (props: { item: T; index: number; pohon: SelectMenu['pohon'] }) => Array<VNode>;
 
 export interface PSelectMenuSlots<
   A extends ArrayOrNested<PSelectMenuItem> = ArrayOrNested<PSelectMenuItem>,
@@ -214,36 +210,35 @@ export interface PSelectMenuSlots<
   C extends boolean | object = false,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: {
-    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
+  'leading'?: (props: {
+    modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
     open: boolean;
     pohon: SelectMenu['pohon'];
-  }) => any;
-  'default': (props: {
-    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
+  }) => Array<VNode>;
+  'default'?: (props: {
+    modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
     open: boolean;
     pohon: SelectMenu['pohon'];
-  }) => any;
-  'trailing': (props: {
-    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
+  }) => Array<VNode>;
+  'trailing'?: (props: {
+    modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod> | IsClearUsed<M, C>;
     open: boolean;
     pohon: SelectMenu['pohon'];
-  }) => any;
-  'empty': (props: { searchTerm?: string }) => any;
-  'item': SlotProps<T>;
-  'item-leading': SlotProps<T>;
-  'item-label': (props: { item: T; index: number }) => any;
-  'item-description': (props: { item: T; index: number }) => any;
-  'item-trailing': SlotProps<T>;
-  'content-top': (props?: object) => any;
-  'content-bottom': (props?: object) => any;
-  'create-item-label': (props: { item: string }) => any;
+  }) => Array<VNode>;
+  'empty'?: (props: { searchTerm: string }) => Array<VNode>;
+  'item'?: SlotProps<T>;
+  'item-leading'?: SlotProps<T>;
+  'item-label'?: (props: { item: T; index: number }) => Array<VNode>;
+  'item-description'?: (props: { item: T; index: number }) => Array<VNode>;
+  'item-trailing'?: SlotProps<T>;
+  'content-top'?: (props?: {}) => Array<VNode>;
+  'content-bottom'?: (props?: {}) => Array<VNode>;
+  'create-item-label'?: (props: { item: string }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { useAppConfig } from '#imports';
-import { isBoolean, isNonNullish, isNullish, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AComboboxAnchor,
@@ -266,16 +261,16 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, toRaw, toRef, useTemplateRef } from 'vue';
-import { useFilter } from '../composables/internal/use-filter';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useFieldGroup } from '../composables/use-field-group';
+import { FieldGroupReset, useFieldGroup } from '../composables/use-field-group';
+import { useFilter } from '../composables/use-filter';
 import { useFormField } from '../composables/use-form-field';
 import { useLocale } from '../composables/use-locale';
 import { usePortal } from '../composables/use-portal';
 import { compare, getDisplayValue, getProp, isArrayOfArray, looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
-import getEstimateSize from '../utils/virtualizer';
+import { getEstimateSize } from '../utils/virtualizer';
 import PAvatar from './avatar.vue';
 import PButton from './button.vue';
 import PChip from './chip.vue';
@@ -306,9 +301,7 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' });
 const { t } = useLocale();
 const appConfig = useAppConfig() as SelectMenu['AppConfig'];
 const pohonProp = useComponentPohon('selectMenu', props);
-
 const { filterGroups } = useFilter();
-
 const rootProps = useForwardPropsEmits(
   reactivePick(
     props,
@@ -322,51 +315,32 @@ const rootProps = useForwardPropsEmits(
     'resetSearchTermOnSelect',
     'resetModelValueOnClear',
     'highlightOnHover',
+    'by',
   ),
   emits,
 );
 const portalProps = usePortal(toRef(() => props.portal));
-const contentProps = toRef(() =>
-  defu(
-    props.content,
-    { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' },
-  ) as AComboboxContentProps,
-);
-const arrowProps = toRef(() => props.arrow as AComboboxArrowProps);
-const clearProps = computed(() =>
-  typeof props.clear === 'object'
-    ? props.clear
-    : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>,
-);
+const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as AComboboxContentProps);
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as AComboboxArrowProps);
+const clearProps = computed(() => typeof props.clear === 'object' ? props.clear : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>);
 
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) {
     return false;
   }
 
-  return defu(isBoolean(props.virtualize) ? {} : props.virtualize, {
-    estimateSize: getEstimateSize({
-      items: filteredItems.value,
-      size: selectSize.value || 'md',
-      descriptionKey: props.descriptionKey as string,
-      hasDescriptionSlot: !!slots['item-description'],
-    }),
+  return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+    estimateSize: getEstimateSize(filteredItems.value, selectSize.value || 'md', props.descriptionKey as string, !!slots['item-description']),
   });
 });
-
-const searchInputProps = toRef(() =>
-  defu(
-    props.searchInput,
-    { placeholder: t('selectMenu.search'), variant: 'none' },
-  ) as PInputProps<string>,
-);
+const searchInputProps = toRef(() => defu(props.searchInput, { placeholder: t('selectMenu.search'), variant: 'none' }) as Omit<PInputProps, 'modelValue' | 'defaultValue'>);
 
 const {
   emitFormBlur,
   emitFormFocus,
   emitFormInput,
   emitFormChange,
-  size: formGroupSize,
+  size: formFieldSize,
   color,
   id,
   name,
@@ -377,13 +351,10 @@ const {
 const { orientation, size: fieldGroupSize } = useFieldGroup<PInputProps>(props);
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown })));
 
-const selectSize = computed(() => fieldGroupSize.value || formGroupSize.value);
+const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 
 const [DefineCreateItemTemplate, ReuseCreateItemTemplate] = createReusableTemplate();
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
-  item: PSelectMenuItem;
-  index: number;
-}>({
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: PSelectMenuItem; index: number }>({
   props: {
     item: {
       type: [Object, String, Number, Boolean],
@@ -396,58 +367,46 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
   },
 });
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.selectMenu || {}),
-  })({
-    color: color.value,
-    variant: props.variant,
-    size: selectSize?.value,
-    loading: props.loading,
-    highlight: highlight.value,
-    leading: isLeading.value || !!props.avatar || !!slots.leading,
-    trailing: isTrailing.value || !!slots.trailing,
-    fieldGroup: orientation.value,
-    virtualize: !!props.virtualize,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.selectMenu || {}) })({
+  color: color.value,
+  variant: props.variant,
+  size: selectSize?.value,
+  loading: props.loading,
+  highlight: highlight.value,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing,
+  fieldGroup: orientation.value,
+  virtualize: !!props.virtualize,
+}));
 
 function displayValue(value: GetItemValue<T, VK, ExcludeItem> | Array<GetItemValue<T, VK, ExcludeItem>>): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>({
-        items: items.value,
-        value: item,
-        options: {
-          labelKey: props.labelKey,
-          valueKey: props.valueKey,
-        },
+      .map((item) => getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>(items.value, item, {
+        labelKey: props.labelKey,
+        valueKey: props.valueKey,
+        by: props.by,
       }))
       .filter((v): v is string => v != null && v !== '');
 
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined;
   }
 
-  return getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>({
-    items: items.value,
-    value: value as GetItemValue<T, VK, ExcludeItem>,
-    options: {
-      labelKey: props.labelKey,
-      valueKey: props.valueKey,
-    },
+  return getDisplayValue<Array<T>, GetItemValue<T, VK, ExcludeItem>>(items.value, value as GetItemValue<T, VK, ExcludeItem>, {
+    labelKey: props.labelKey,
+    valueKey: props.valueKey,
+    by: props.by,
   });
 }
 
-const groups = computed<Array<Array<PSelectMenuItem>>>(() => {
-  if (props.items?.length) {
-    return isArrayOfArray(props.items)
+const groups = computed<Array<Array<PSelectMenuItem>>>(() =>
+  // eslint-disable-next-line no-nested-ternary
+  props.items?.length
+    ? isArrayOfArray(props.items)
       ? props.items
-      : [props.items];
-  }
-
-  return [];
-});
+      : [props.items]
+    : [],
+);
 
 const items = computed(() => groups.value.flatMap((group) => group) as Array<T>);
 
@@ -473,11 +432,7 @@ const createItem = computed(() => {
   const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value;
 
   if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
-    return !filteredItems.value.some((item) => compare({
-      value: item,
-      currentValue: newItem,
-      comparator: props.valueKey as string,
-    }));
+    return !filteredItems.value.some((item) => compare(item, newItem, (props.by ?? props.valueKey) as string | undefined));
   }
 
   return !filteredItems.value.length;
@@ -505,7 +460,7 @@ function onUpdate(value: any) {
     return;
   }
 
-  if (props.modelModifiers?.trim && (isString(value) || isNullish(value))) {
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null;
   }
 
@@ -542,11 +497,10 @@ function onUpdateOpen(value: boolean) {
     emitFormBlur();
 
     // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
-    // https://akar.vinicunca.dev/docs/akar/components/combobox#api-reference
+    // https://akar.com/docs/components/combobox#api-reference
     if (props.resetSearchTermOnBlur) {
       const STATE_ANIMATION_DELAY_MS = 100;
 
-      // eslint-disable-next-line sonar/no-dead-store
       timeoutId = setTimeout(() => {
         searchTerm.value = '';
       }, STATE_ANIMATION_DELAY_MS);
@@ -606,14 +560,14 @@ defineExpose({
 <template>
   <DefineCreateItemTemplate>
     <AComboboxItem
+      data-slot="item"
       :class="pohon.item({ class: pohonProp?.item })"
       :value="searchTerm"
-      data-pohon="select-menu-item"
       @select="onCreate"
     >
       <span
+        data-slot="itemLabel"
         :class="pohon.itemLabel({ class: pohonProp?.itemLabel })"
-        data-pohon="select-menu-item-label"
       >
         <slot
           name="create-item-label"
@@ -628,23 +582,24 @@ defineExpose({
   <DefineItemTemplate v-slot="{ item, index }">
     <AComboboxLabel
       v-if="isSelectItem(item) && item.type === 'label'"
-      data-pohon="select-menu-label"
+      data-slot="label"
       :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label, item.class] })"
     >
-      {{ getProp({ object: item, path: props.labelKey as string }) }}
+      {{ getProp(item, props.labelKey as string) }}
     </AComboboxLabel>
 
     <AComboboxSeparator
       v-else-if="isSelectItem(item) && item.type === 'separator'"
+      data-slot="separator"
       :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator, item.class] })"
     />
 
     <AComboboxItem
       v-else
+      data-slot="item"
       :class="pohon.item({ class: [pohonProp?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
-      data-pohon="select-menu-item"
       :disabled="isSelectItem(item) && item.disabled"
-      :value="props.valueKey && isSelectItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
+      :value="props.valueKey && isSelectItem(item) ? getProp(item, props.valueKey as string) : item"
       @select="onSelect($event, item)"
     >
       <slot
@@ -662,75 +617,62 @@ defineExpose({
           <PIcon
             v-if="isSelectItem(item) && item.icon"
             :name="item.icon"
+            data-slot="itemLeadingIcon"
             :class="pohon.itemLeadingIcon({ class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
-            data-pohon="select-menu-item-leading-icon"
           />
           <PAvatar
             v-else-if="isSelectItem(item) && item.avatar"
             :size="((item.pohon?.itemLeadingAvatarSize || pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="item.avatar"
+            data-slot="itemLeadingAvatar"
             :class="pohon.itemLeadingAvatar({ class: [pohonProp?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
-            data-pohon="select-menu-item-leading-avatar"
           />
-
           <PChip
             v-else-if="isSelectItem(item) && item.chip"
-            :size="((pohonProp?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
+            :size="((item.pohon?.itemLeadingChipSize || pohonProp?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
             inset
             standalone
             v-bind="item.chip"
+            data-slot="itemLeadingChip"
             :class="pohon.itemLeadingChip({ class: [pohonProp?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
-            data-pohon="select-menu-item-leading-chip"
           />
         </slot>
 
         <span
-          :class="pohon.itemWrapper({
-            class: [
-              pohonProp?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
-            ],
-          })"
-          data-pohon="select-menu-item-wrapper"
+          data-slot="itemWrapper"
+          :class="pohon.itemWrapper({ class: [pohonProp?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper] })"
         >
           <span
-            :class="pohon.itemLabel({
-              class: [
-                pohonProp?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
-              ],
-            })"
-            data-pohon="select-menu-item-label"
+            data-slot="itemLabel"
+            :class="pohon.itemLabel({ class: [pohonProp?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel] })"
           >
             <slot
               name="item-label"
               :item="(item as NestedItem<T>)"
               :index="index"
             >
-              {{ isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
+              {{ isSelectItem(item) ? getProp(item, props.labelKey as string) : item }}
             </slot>
           </span>
 
           <span
-            v-if="isSelectItem(item) && (getProp({ object: item, path: props.descriptionKey as string }) || !!slots['item-description'])"
-            :class="pohon.itemDescription({
-              class: [
-                pohonProp?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
-              ],
-            })"
-            data-pohon="select-menu-item-description"
+            v-if="isSelectItem(item) && (getProp(item, props.descriptionKey as string) || !!slots['item-description'])"
+            data-slot="itemDescription"
+            :class="pohon.itemDescription({ class: [pohonProp?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription] })"
           >
             <slot
               name="item-description"
               :item="(item as NestedItem<T>)"
               :index="index"
             >
-              {{ getProp({ object: item, path: props.descriptionKey as string }) }}
+              {{ getProp(item, props.descriptionKey as string) }}
             </slot>
           </span>
         </span>
 
         <span
+          data-slot="itemTrailing"
           :class="pohon.itemTrailing({ class: [pohonProp?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })"
-          data-pohon="select-menu-item-trailing"
         >
           <slot
             name="item-trailing"
@@ -742,8 +684,8 @@ defineExpose({
           <AComboboxItemIndicator as-child>
             <PIcon
               :name="selectedIcon || appConfig.pohon.icons.check"
+              data-slot="itemTrailingIcon"
               :class="pohon.itemTrailingIcon({ class: [pohonProp?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
-              data-pohon="select-menu-item-trailing-icon"
             />
           </AComboboxItemIndicator>
         </span>
@@ -765,14 +707,14 @@ defineExpose({
     <AComboboxAnchor as-child>
       <AComboboxTrigger
         ref="triggerRef"
+        data-slot="base"
         :class="pohon.base({ class: [pohonProp?.base, props.class] })"
-        data-pohon="select-menu-base"
         tabindex="0"
       >
         <span
           v-if="isLeading || !!avatar || !!slots.leading"
+          data-slot="leading"
           :class="pohon.leading({ class: pohonProp?.leading })"
-          data-pohon="select-menu-leading"
         >
           <slot
             name="leading"
@@ -783,15 +725,15 @@ defineExpose({
             <PIcon
               v-if="isLeading && leadingIconName"
               :name="leadingIconName"
+              data-slot="leadingIcon"
               :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
-              data-pohon="select-menu-leading-icon"
             />
             <PAvatar
               v-else-if="!!avatar"
               :size="((pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
               v-bind="avatar"
+              data-slot="itemLeadingAvatar"
               :class="pohon.itemLeadingAvatar({ class: pohonProp?.itemLeadingAvatar })"
-              data-pohon="select-menu-leading-avatar"
             />
           </slot>
         </span>
@@ -802,20 +744,20 @@ defineExpose({
           :pohon="pohon"
         >
           <template
-            v-for="displayedModelValue in [displayValue(modelValue as GetModelValue<T, VK, M, ExcludeItem>)]"
+            v-for="displayedModelValue in [displayValue(modelValue as any)]"
             :key="displayedModelValue"
           >
             <span
-              v-if="isNonNullish(displayedModelValue)"
+              v-if="displayedModelValue !== undefined && displayedModelValue !== null"
+              data-slot="value"
               :class="pohon.value({ class: pohonProp?.value })"
-              data-pohon="select-menu-value"
             >
               {{ displayedModelValue }}
             </span>
             <span
               v-else
+              data-slot="placeholder"
               :class="pohon.placeholder({ class: pohonProp?.placeholder })"
-              data-pohon="select-menu-placeholder"
             >
               {{ placeholder ?? '&nbsp;' }}
             </span>
@@ -824,8 +766,8 @@ defineExpose({
 
         <span
           v-if="isTrailing || !!slots.trailing || !!clear"
+          data-slot="trailing"
           :class="pohon.trailing({ class: pohonProp?.trailing })"
-          data-pohon="select-menu-trailing"
         >
           <slot
             name="trailing"
@@ -833,7 +775,6 @@ defineExpose({
             :open="open"
             :pohon="pohon"
           >
-
             <AComboboxCancel
               v-if="!!clear && !isModelValueEmpty(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
               as-child
@@ -846,7 +787,7 @@ defineExpose({
                 color="neutral"
                 tabindex="-1"
                 v-bind="clearProps"
-                data-pohon="select-menu-trailing-clear"
+                data-slot="trailingClear"
                 :class="pohon.trailingClear({ class: pohonProp?.trailingClear })"
                 @click.stop="onClear"
               />
@@ -855,7 +796,7 @@ defineExpose({
             <PIcon
               v-else-if="trailingIconName"
               :name="trailingIconName"
-              data-pohon="select-menu-trailing-icon"
+              data-slot="trailingIcon"
               :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
             />
           </slot>
@@ -864,117 +805,119 @@ defineExpose({
     </AComboboxAnchor>
 
     <AComboboxPortal v-bind="portalProps">
-      <AComboboxContent
-        :class="pohon.content({ class: pohonProp?.content })"
-        v-bind="contentProps"
-        data-pohon="select-menu-content"
-      >
-        <AFocusScope
-          trapped
-          :class="pohon.focusScope({ class: pohonProp?.focusScope })"
-          data-pohon="select-menu-focus-scope"
+      <FieldGroupReset>
+        <AComboboxContent
+          data-slot="content"
+          :class="pohon.content({ class: pohonProp?.content })"
+          v-bind="contentProps"
         >
-          <slot name="content-top" />
-
-          <AComboboxInput
-            v-if="!!searchInput"
-            v-model="searchTerm"
-            :display-value="() => searchTerm"
-            as-child
+          <AFocusScope
+            trapped
+            data-slot="focusScope"
+            :class="pohon.focusScope({ class: pohonProp?.focusScope })"
           >
-            <PInput
-              autofocus
-              autocomplete="off"
-              :size="selectSize"
-              v-bind="searchInputProps"
-              :model-modifiers="{
-                trim: modelModifiers?.trim,
-              }"
-              :class="pohon.input({ class: pohonProp?.input })"
-              data-pohon="select-menu-input"
-              @change.stop
-            />
-          </AComboboxInput>
+            <slot name="content-top" />
 
-          <AComboboxEmpty
-            :class="pohon.empty({ class: pohonProp?.empty })"
-            data-pohon="select-menu-empty"
-          >
-            <slot
-              name="empty"
-              :search-term="searchTerm"
+            <AComboboxInput
+              v-if="!!searchInput"
+              v-model="searchTerm"
+              :display-value="() => searchTerm"
+              as-child
             >
-              {{ searchTerm ? t('selectMenu.noMatch', { searchTerm }) : t('selectMenu.noData') }}
-            </slot>
-          </AComboboxEmpty>
+              <PInput
+                autofocus
+                autocomplete="off"
+                :size="selectSize"
+                v-bind="searchInputProps"
+                :model-modifiers="{
+                  trim: modelModifiers?.trim,
+                }"
+                data-slot="input"
+                :class="pohon.input({ class: pohonProp?.input })"
+                @change.stop
+              />
+            </AComboboxInput>
 
-          <div
-            ref="viewportRef"
-            role="presentation"
-            :class="pohon.viewport({ class: pohonProp?.viewport })"
-            data-pohon="select-menu-viewport"
-          >
-            <template v-if="!!virtualize">
-              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
-
-              <AComboboxVirtualizer
-                v-slot="{ option: item, virtualItem }"
-                :options="(filteredItems as any[])"
-                :text-content="item => isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : String(item)"
-                v-bind="virtualizerProps"
+            <AComboboxEmpty
+              data-slot="empty"
+              :class="pohon.empty({ class: pohonProp?.empty })"
+            >
+              <slot
+                name="empty"
+                :search-term="searchTerm"
               >
-                <ReuseItemTemplate
-                  :item="item"
-                  :index="virtualItem.index"
-                />
-              </AComboboxVirtualizer>
+                {{ searchTerm ? t('selectMenu.noMatch', { searchTerm }) : t('selectMenu.noData') }}
+              </slot>
+            </AComboboxEmpty>
 
-              <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
-            </template>
+            <div
+              ref="viewportRef"
+              role="presentation"
+              data-slot="viewport"
+              :class="pohon.viewport({ class: pohonProp?.viewport })"
+            >
+              <template v-if="!!virtualize">
+                <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
-            <template v-else>
-              <AComboboxGroup
-                v-if="createItem && createItemPosition === 'top'"
-                :class="pohon.group({ class: pohonProp?.group })"
-                data-pohon="select-menu-group"
-              >
-                <ReuseCreateItemTemplate />
-              </AComboboxGroup>
+                <AComboboxVirtualizer
+                  v-slot="{ option: item, virtualItem }"
+                  :options="(filteredItems as any[])"
+                  :text-content="item => isSelectItem(item) ? getProp(item, props.labelKey as string) : String(item)"
+                  v-bind="virtualizerProps"
+                >
+                  <ReuseItemTemplate
+                    :item="item"
+                    :index="virtualItem.index"
+                  />
+                </AComboboxVirtualizer>
 
-              <AComboboxGroup
-                v-for="(group, groupIndex) in filteredGroups"
-                :key="`group-${groupIndex}`"
-                :class="pohon.group({ class: pohonProp?.group })"
-                data-pohon="select-menu-group"
-              >
-                <ReuseItemTemplate
-                  v-for="(item, index) in group"
-                  :key="`group-${groupIndex}-${index}`"
-                  :item="item"
-                  :index="index"
-                />
-              </AComboboxGroup>
+                <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
+              </template>
 
-              <AComboboxGroup
-                v-if="createItem && createItemPosition === 'bottom'"
-                :class="pohon.group({ class: pohonProp?.group })"
-                data-pohon="select-menu-group"
-              >
-                <ReuseCreateItemTemplate />
-              </AComboboxGroup>
-            </template>
-          </div>
+              <template v-else>
+                <AComboboxGroup
+                  v-if="createItem && createItemPosition === 'top'"
+                  data-slot="group"
+                  :class="pohon.group({ class: pohonProp?.group })"
+                >
+                  <ReuseCreateItemTemplate />
+                </AComboboxGroup>
 
-          <slot name="content-bottom" />
-        </AFocusScope>
+                <AComboboxGroup
+                  v-for="(group, groupIndex) in filteredGroups"
+                  :key="`group-${groupIndex}`"
+                  data-slot="group"
+                  :class="pohon.group({ class: pohonProp?.group })"
+                >
+                  <ReuseItemTemplate
+                    v-for="(item, index) in group"
+                    :key="`group-${groupIndex}-${index}`"
+                    :item="item"
+                    :index="index"
+                  />
+                </AComboboxGroup>
 
-        <AComboboxArrow
-          v-if="!!arrow"
-          v-bind="arrowProps"
-          :class="pohon.arrow({ class: pohonProp?.arrow })"
-          data-pohon="select-menu-arrow"
-        />
-      </AComboboxContent>
+                <AComboboxGroup
+                  v-if="createItem && createItemPosition === 'bottom'"
+                  data-slot="group"
+                  :class="pohon.group({ class: pohonProp?.group })"
+                >
+                  <ReuseCreateItemTemplate />
+                </AComboboxGroup>
+              </template>
+            </div>
+
+            <slot name="content-bottom" />
+          </AFocusScope>
+
+          <AComboboxArrow
+            v-if="!!arrow"
+            v-bind="arrowProps"
+            data-slot="arrow"
+            :class="pohon.arrow({ class: pohonProp?.arrow })"
+          />
+        </AComboboxContent>
+      </FieldGroupReset>
     </AComboboxPortal>
   </AComboboxRoot>
 </template>

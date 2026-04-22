@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ANumberFieldRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { InputHTMLAttributes } from '../types/html';
 import type { ModelModifiers } from '../types/input';
@@ -14,10 +15,7 @@ type ApplyModifiers<T extends InputNumberValue, Mod extends Pick<ModelModifiers,
   = | T
     | (Mod extends { optional: true } ? undefined : never);
 
-export interface PInputNumberProps<
-  T extends InputNumberValue = InputNumberValue,
-  Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>,
-> extends Pick<ANumberFieldRootProps, | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly' | 'focusOnChange'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
+export interface PInputNumberProps<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> extends Pick<ANumberFieldRootProps, | 'min' | 'max' | 'step' | 'stepSnapping' | 'disabled' | 'required' | 'id' | 'name' | 'formatOptions' | 'disableWheelChange' | 'invertWheelChange' | 'readonly' | 'focusOnChange'>, /** @vue-ignore */ Omit<InputHTMLAttributes, 'disabled' | 'min' | 'max' | 'readonly' | 'required' | 'step' | 'name' | 'placeholder' | 'type' | 'autofocus' | 'maxlength' | 'minlength' | 'pattern' | 'size'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -30,11 +28,13 @@ export interface PInputNumberProps<
   size?: InputNumber['variants']['size'];
   /** Highlight the ring color like a focus state. */
   highlight?: boolean;
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean;
   /**
-   * The orientation of the input menu.
+   * The orientation of the input number.
    * @defaultValue 'horizontal'
    */
-  orientation?: 'vertical' | 'horizontal';
+  orientation?: InputNumber['variants']['orientation'];
   /**
    * Configure the increment button. The `color` and `size` are inherited.
    * @defaultValue { variant: 'link' }
@@ -70,18 +70,15 @@ export interface PInputNumberProps<
   pohon?: InputNumber['slots'];
 }
 
-export interface PInputNumberEmits<
-  T extends InputNumberValue = InputNumberValue,
-  Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>,
-> {
+export interface PInputNumberEmits<T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>> {
   'update:modelValue': [value: ApplyModifiers<T, Mod>];
   'blur': [event: FocusEvent];
   'change': [event: Event];
 }
 
 export interface PInputNumberSlots {
-  increment: (props?: object) => any;
-  decrement: (props?: object) => any;
+  increment?: (props?: {}) => Array<VNode>;
+  decrement?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -113,9 +110,7 @@ const props = withDefaults(
     decrement: true,
   },
 );
-
 const emits = defineEmits<PInputNumberEmits<T, Mod>>();
-
 defineSlots<PInputNumberSlots>();
 
 const modelValue = useVModel<PInputNumberProps<T, Mod>, 'modelValue', 'update:modelValue'>(
@@ -151,7 +146,7 @@ const {
   emitFormInput,
   id,
   color,
-  size: formGroupSize,
+  size: formFieldSize,
   name,
   highlight,
   disabled,
@@ -159,36 +154,22 @@ const {
 } = useFormField<PInputNumberProps<T, Mod>>(props);
 const { orientation, size: fieldGroupSize } = useFieldGroup<PInputNumberProps<T, Mod>>(props);
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.inputNumber || {}),
-  })({
-    color: color.value,
-    variant: props.variant,
-    size: inputSize.value,
-    highlight: highlight.value,
-    orientation: props.orientation,
-    fieldGroup: orientation.value,
-    increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,
-    decrement: props.orientation === 'vertical' ? false : !!props.decrement,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.inputNumber || {}) })({
+  color: color.value,
+  variant: props.variant,
+  size: inputSize.value,
+  highlight: highlight.value,
+  fixed: props.fixed,
+  orientation: props.orientation,
+  fieldGroup: orientation.value,
+  increment: props.orientation === 'vertical' ? (!!props.increment || !!props.decrement) : !!props.increment,
+  decrement: props.orientation === 'vertical' ? false : !!props.decrement,
+}));
 
-const incrementIcon = computed(() =>
-  props.incrementIcon
-  || (props.orientation === 'horizontal'
-    ? appConfig.pohon.icons.plus
-    : appConfig.pohon.icons.chevronUp),
-);
-const decrementIcon = computed(() =>
-  props.decrementIcon
-  || (props.orientation === 'horizontal'
-    ? appConfig.pohon.icons.minus
-    : appConfig.pohon.icons.chevronDown),
-);
+const incrementIcon = computed(() => props.incrementIcon || (props.orientation === 'horizontal' ? appConfig.pohon.icons.plus : appConfig.pohon.icons.chevronUp));
+const decrementIcon = computed(() => props.decrementIcon || (props.orientation === 'horizontal' ? appConfig.pohon.icons.minus : appConfig.pohon.icons.chevronDown));
 
 const inputRef = useTemplateRef('inputRef');
 
@@ -236,16 +217,16 @@ defineExpose({
     :min="min"
     :max="max"
     :step="step"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     :name="name"
     :disabled="disabled"
-    data-pohon="input-number-root"
     @update:model-value="(val) => onUpdate(val as ApplyModifiers<T, Mod>)"
   >
     <div
       v-if="Boolean(decrement)"
+      data-slot="decrement"
       :class="pohon.decrement({ class: pohonProp?.decrement })"
-      data-pohon="input-number-decrement"
     >
       <ANumberFieldDecrement
         as-child
@@ -269,16 +250,16 @@ defineExpose({
       ref="inputRef"
       :placeholder="placeholder"
       :required="required"
+      data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
-      data-pohon="input-number-base"
       @blur="onBlur"
       @focus="emitFormFocus"
     />
 
     <div
       v-if="Boolean(increment)"
+      data-slot="increment"
       :class="pohon.increment({ class: pohonProp?.increment })"
-      data-pohon="input-number-increment"
     >
       <ANumberFieldIncrement
         as-child

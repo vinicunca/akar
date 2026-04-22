@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PIconProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/footer-columns';
@@ -32,17 +33,17 @@ export interface PFooterColumnsProps<T extends PFooterColumnLink = PFooterColumn
   pohon?: FooterColumns['slots'];
 }
 
-type SlotProps<T> = (props: { link: T; active: boolean; pohon: FooterColumns['pohon'] }) => any;
+type SlotProps<T> = (props: { link: T; active: boolean; pohon: FooterColumns['pohon'] }) => Array<VNode>;
 
 export interface PFooterColumnsSlots<T extends PFooterColumnLink = PFooterColumnLink> {
-  'left': (props?: object) => any;
-  'default': (props?: object) => any;
-  'right': (props?: object) => any;
-  'column-label'?: (props: { column: PFooterColumn<T> }) => any;
-  'link': SlotProps<T>;
-  'link-leading': SlotProps<T>;
-  'link-label': (props: { link: T; active: boolean }) => any;
-  'link-trailing': (props: { link: T; active: boolean }) => any;
+  'left'?: (props?: {}) => Array<VNode>;
+  'default'?: (props?: {}) => Array<VNode>;
+  'right'?: (props?: {}) => Array<VNode>;
+  'column-label'?: (props: { column: PFooterColumn<T> }) => Array<VNode>;
+  'link'?: SlotProps<T>;
+  'link-leading'?: SlotProps<T>;
+  'link-label'?: (props: { link: T; active: boolean }) => Array<VNode>;
+  'link-trailing'?: (props: { link: T; active: boolean }) => Array<VNode>;
 }
 </script>
 
@@ -57,29 +58,26 @@ import PIcon from './icon.vue';
 import PLinkBase from './link-base.vue';
 import PLink from './link.vue';
 
-const props = withDefaults(
-  defineProps<PFooterColumnsProps<T>>(),
-  {
-    as: 'nav',
-  },
-);
+const props = withDefaults(defineProps<PFooterColumnsProps<T>>(), {
+  as: 'nav',
+});
 const slots = defineSlots<PFooterColumnsSlots<T>>();
 
 const appConfig = useAppConfig() as FooterColumns['AppConfig'];
 const pohonProp = useComponentPohon('footerColumns', props);
 
-const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.footerColumns || {}) })(),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footerColumns || {}) })());
 </script>
 
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <div
       v-if="!!slots.left"
+      data-slot="left"
       :class="pohon.left({ class: pohonProp?.left })"
     >
       <slot name="left" />
@@ -87,6 +85,7 @@ const pohon = computed(() =>
 
     <div
       v-if="!!slots.default || columns?.length"
+      data-slot="center"
       :class="pohon.center({ class: pohonProp?.center })"
     >
       <slot>
@@ -94,7 +93,10 @@ const pohon = computed(() =>
           v-for="(column, index) in columns"
           :key="index"
         >
-          <h3 :class="pohon.label({ class: pohonProp?.label })">
+          <h3
+            data-slot="label"
+            :class="pohon.label({ class: pohonProp?.label })"
+          >
             <slot
               name="column-label"
               :column="column"
@@ -103,10 +105,14 @@ const pohon = computed(() =>
             </slot>
           </h3>
 
-          <ul :class="pohon.list({ class: pohonProp?.list })">
+          <ul
+            data-slot="list"
+            :class="pohon.list({ class: pohonProp?.list })"
+          >
             <li
               v-for="(link, linkIndex) in column.children"
               :key="linkIndex"
+              data-slot="item"
               :class="pohon.item({ class: [pohonProp?.item, link.pohon?.item] })"
             >
               <PLink
@@ -116,6 +122,7 @@ const pohon = computed(() =>
               >
                 <PLinkBase
                   v-bind="slotProps"
+                  data-slot="link"
                   :class="pohon.link({ class: [pohonProp?.link, link.pohon?.link, link.class], active })"
                 >
                   <slot
@@ -133,12 +140,14 @@ const pohon = computed(() =>
                       <PIcon
                         v-if="link.icon"
                         :name="link.icon"
+                        data-slot="linkLeadingIcon"
                         :class="pohon.linkLeadingIcon({ class: [pohonProp?.linkLeadingIcon, link.pohon?.linkLeadingIcon], active })"
                       />
                     </slot>
 
                     <span
                       v-if="link.label || !!slots['link-label']"
+                      data-slot="linkLabel"
                       :class="pohon.linkLabel({ class: [pohonProp?.linkLabel, link.pohon?.linkLabel], active })"
                     >
                       <slot
@@ -152,6 +161,7 @@ const pohon = computed(() =>
                       <PIcon
                         v-if="link.target === '_blank'"
                         :name="appConfig.pohon.icons.external"
+                        data-slot="linkLabelExternalIcon"
                         :class="pohon.linkLabelExternalIcon({ class: [pohonProp?.linkLabelExternalIcon, link.pohon?.linkLabelExternalIcon], active })"
                       />
                     </span>
@@ -172,6 +182,7 @@ const pohon = computed(() =>
 
     <div
       v-if="!!slots.right"
+      data-slot="right"
       :class="pohon.right({ class: pohonProp?.right })"
     >
       <slot name="right" />

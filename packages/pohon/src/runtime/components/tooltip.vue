@@ -1,13 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type {
-  ATooltipArrowProps,
-  ATooltipContentEmits,
-  ATooltipContentProps,
-  ATooltipRootEmits,
-  ATooltipRootProps,
-  ATooltipTriggerProps,
-} from 'akar';
+import type { ATooltipArrowProps, ATooltipContentEmits, ATooltipContentProps, ATooltipRootEmits, ATooltipRootProps, ATooltipTriggerProps } from 'akar';
+import type { VNode } from 'vue';
 import type { PKbdProps } from '../types';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -22,11 +16,14 @@ export interface PTooltipProps extends ATooltipRootProps {
   kbds?: Array<PKbdProps['value']> | Array<PKbdProps>;
   /**
    * The content of the tooltip.
+   *
+   * Inherits from the `tooltip.content` of the {@link PAppProps} component when not provided.
    * @defaultValue { side: 'bottom', sideOffset: 8, collisionPadding: 8 }
    */
   content?: Omit<ATooltipContentProps, 'as' | 'asChild'> & Partial<EmitsToProps<ATooltipContentEmits>>;
   /**
    * Display an arrow alongside the tooltip.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<ATooltipArrowProps, 'as' | 'asChild'>;
@@ -48,26 +45,19 @@ export interface PTooltipProps extends ATooltipRootProps {
 export interface PTooltipEmits extends ATooltipRootEmits {}
 
 export interface PTooltipSlots {
-  default: (props: { open: boolean }) => any;
-  content: (props: { pohon: Tooltip['pohon'] }) => any;
+  default?: (props: { open: boolean }) => Array<VNode>;
+  content?: (props: { pohon: Tooltip['pohon'] }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
-import {
-  ATooltipArrow,
-  ATooltipContent,
-  ATooltipPortal,
-  ATooltipRoot,
-  ATooltipTrigger,
-  useForwardPropsEmits,
-} from 'akar';
+import { ATooltipArrow, ATooltipContent, ATooltipPortal, ATooltipRoot, ATooltipTrigger, injectATooltipProviderContext, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { FieldGroupReset } from '../composables/use-field-group';
 import { usePortal } from '../composables/use-portal';
 import { uv } from '../utils/uv';
 import PKbd from './kbd.vue';
@@ -76,7 +66,6 @@ const props = withDefaults(
   defineProps<PTooltipProps>(),
   {
     portal: true,
-    delayDuration: 300,
   },
 );
 const emits = defineEmits<PTooltipEmits>();
@@ -84,6 +73,8 @@ const slots = defineSlots<PTooltipSlots>();
 
 const appConfig = useAppConfig() as Tooltip['AppConfig'];
 const pohonProp = useComponentPohon('tooltip', props);
+
+const providerContext = injectATooltipProviderContext();
 
 const rootProps = useForwardPropsEmits(
   reactivePick(
@@ -98,21 +89,12 @@ const rootProps = useForwardPropsEmits(
   emits,
 );
 const portalProps = usePortal(toRef(() => props.portal));
-const contentProps = toRef(() => defu(
-  props.content,
-  { side: 'bottom', sideOffset: 8, collisionPadding: 8 },
-) as ATooltipContentProps);
-const arrowProps = toRef(() => props.arrow as ATooltipArrowProps);
+const contentProps = toRef(() => defu(props.content, providerContext.content.value, { side: 'bottom', sideOffset: 8, collisionPadding: 8 }) as ATooltipContentProps);
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ATooltipArrowProps);
 
-const pohon = computed(
-  () =>
-    uv({
-      extend: uv(theme),
-      ...(appConfig.pohon?.tooltip || {}),
-    })({
-      side: contentProps.value.side,
-    }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.tooltip || {}) })({
+  side: contentProps.value.side,
+}));
 </script>
 
 <template>
@@ -132,42 +114,44 @@ const pohon = computed(
     </ATooltipTrigger>
 
     <ATooltipPortal v-bind="portalProps">
-      <ATooltipContent
-        v-bind="contentProps"
-        :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
-        data-pohon="tooltip-content"
-      >
-        <slot
-          name="content"
-          :pohon="pohon"
+      <FieldGroupReset>
+        <ATooltipContent
+          v-bind="contentProps"
+          data-slot="content"
+          :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
         >
-          <span
-            v-if="text"
-            :class="pohon.text({ class: pohonProp?.text })"
-            data-pohon="tooltip-text"
-          >{{ text }}</span>
-
-          <span
-            v-if="kbds?.length"
-            :class="pohon.kbds({ class: pohonProp?.kbds })"
-            data-pohon="tooltip-kbds"
+          <slot
+            name="content"
+            :pohon="pohon"
           >
-            <PKbd
-              v-for="(kbd, index) in kbds"
-              :key="index"
-              :size="((pohonProp?.kbdsSize || pohon.kbdsSize()) as PKbdProps['size'])"
-              v-bind="isString(kbd) ? { value: kbd } : kbd"
-            />
-          </span>
-        </slot>
+            <span
+              v-if="text"
+              data-slot="text"
+              :class="pohon.text({ class: pohonProp?.text })"
+            >{{ text }}</span>
 
-        <ATooltipArrow
-          v-if="!!arrow"
-          v-bind="arrowProps"
-          :class="pohon.arrow({ class: pohonProp?.arrow })"
-          data-pohon="tooltip-arrow"
-        />
-      </ATooltipContent>
+            <span
+              v-if="kbds?.length"
+              data-slot="kbds"
+              :class="pohon.kbds({ class: pohonProp?.kbds })"
+            >
+              <PKbd
+                v-for="(kbd, index) in kbds"
+                :key="index"
+                :size="((pohonProp?.kbdsSize || pohon.kbdsSize()) as PKbdProps['size'])"
+                v-bind="typeof kbd === 'string' ? { value: kbd } : kbd"
+              />
+            </span>
+          </slot>
+
+          <ATooltipArrow
+            v-if="!!arrow"
+            v-bind="arrowProps"
+            data-slot="arrow"
+            :class="pohon.arrow({ class: pohonProp?.arrow })"
+          />
+        </ATooltipContent>
+      </FieldGroupReset>
     </ATooltipPortal>
   </ATooltipRoot>
 </template>

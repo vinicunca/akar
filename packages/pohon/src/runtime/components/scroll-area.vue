@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { ComponentPublicInstance, CSSProperties, VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual'
-import theme from '#build/pohon/scroll-area'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VirtualItem, VirtualizerOptions } from '@tanstack/vue-virtual';
+import type { ComponentPublicInstance, CSSProperties, VNode } from 'vue';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/scroll-area';
 
-type ScrollArea = ComponentConfig<typeof theme, AppConfig, 'scrollArea'>
+type ScrollArea = ComponentConfig<typeof theme, AppConfig, 'scrollArea'>;
 
-export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
+export interface PScrollAreaVirtualizeOptions extends Partial<Omit<
   VirtualizerOptions<Element, Element>,
   'count' | 'getScrollElement' | 'horizontal' | 'isRtl' | 'estimateSize' | 'lanes' | 'enabled'
 >> {
@@ -15,7 +15,7 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
    * Estimated size (in px) of each item along the scroll axis. Can be a number or a function.
    * @defaultValue 100
    */
-  estimateSize?: number | ((index: number) => number)
+  estimateSize?: number | ((index: number) => number);
   /**
    * Number of lanes for multi-column/row layouts.
    * For responsive lane counts, use a computed property with viewport/container size:
@@ -26,93 +26,95 @@ export interface ScrollAreaVirtualizeOptions extends Partial<Omit<
    * ```
    * @defaultValue undefined
    */
-  lanes?: number
+  lanes?: number;
   /**
    * Skip per-item DOM measurement for uniform-height items.
    * When `true`, uses `estimateSize` only — significantly improving performance for uniform items.
    * When `false` (default), measures each item for variable-height layouts (e.g., masonry).
    * @defaultValue false
    */
-  skipMeasurement?: boolean
+  skipMeasurement?: boolean;
 }
 
-export type ScrollAreaItem = any
+export type ScrollAreaItem = any;
 
-export interface ScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
+export interface PScrollAreaProps<T extends ScrollAreaItem = ScrollAreaItem> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
+  as?: any;
   /**
    * The scroll direction.
    * @defaultValue 'vertical'
    */
-  orientation?: ScrollArea['variants']['orientation']
+  orientation?: ScrollArea['variants']['orientation'];
   /**
    * Array of items to render.
    */
-  items?: T[]
+  items?: Array<T>;
   /**
    * Enable virtualization for large lists.
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
    */
-  virtualize?: boolean | ScrollAreaVirtualizeOptions
-  class?: any
-  pohon?: ScrollArea['slots']
+  virtualize?: boolean | PScrollAreaVirtualizeOptions;
+  class?: any;
+  pohon?: ScrollArea['slots'];
 }
 
-export interface ScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
-  default?(
+export interface PScrollAreaSlots<T extends ScrollAreaItem = ScrollAreaItem> {
+  default?: (
     props:
-      | { item: T, index: number, virtualItem?: VirtualItem }
-      | { item: T, index: 0 },
-  ): VNode[]
+      | { item: T; index: number; virtualItem?: VirtualItem }
+      | { item: T; index: 0 },
+  ) => Array<VNode>;
 }
 
-export interface ScrollAreaEmits {
+export interface PScrollAreaEmits {
   /**
    * Emitted when scroll state changes
    * @param isScrolling - Whether the list is currently being scrolled
    */
-  scroll: [isScrolling: boolean]
+  scroll: [isScrolling: boolean];
 }
 </script>
 
 <script setup lang="ts" generic="T extends ScrollAreaItem">
-import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue'
-import { Primitive } from 'reka-ui'
-import { defu } from 'defu'
-import { useVirtualizer } from '@tanstack/vue-virtual'
-import { useAppConfig } from '#imports'
-import { useComponentPohon } from '../composables/use-component-pohon'
-import { tv } from '../utils/tv'
-import { useLocale } from '../composables/use-locale'
+import { useAppConfig } from '#imports';
+import { useVirtualizer } from '@tanstack/vue-virtual';
+import { APrimitive } from 'akar';
+import { defu } from 'defu';
+import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { useLocale } from '../composables/use-locale';
+import { uv } from '../utils/uv';
 
-const props = withDefaults(defineProps<ScrollAreaProps<T>>(), {
-  orientation: 'vertical',
-  virtualize: false
-})
-defineSlots<ScrollAreaSlots<T>>()
-const emits = defineEmits<ScrollAreaEmits>()
+const props = withDefaults(
+  defineProps<PScrollAreaProps<T>>(),
+  {
+    orientation: 'vertical',
+    virtualize: false,
+  },
+);
+const emits = defineEmits<PScrollAreaEmits>();
+defineSlots<PScrollAreaSlots<T>>();
+const { dir } = useLocale();
+const appConfig = useAppConfig() as ScrollArea['AppConfig'];
+const pohonProp = useComponentPohon('scrollArea', props);
 
-const { dir } = useLocale()
-const appConfig = useAppConfig() as ScrollArea['AppConfig']
-const pohonProp = useComponentPohon('scrollArea', props)
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.scrollArea || {}) })({
+  orientation: props.orientation,
+}));
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.scrollArea || {}) })({
-  orientation: props.orientation
-}))
+const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef');
 
-const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef')
-
-const isRtl = computed(() => dir.value === 'rtl')
-const isHorizontal = computed(() => props.orientation === 'horizontal')
-const isVertical = computed(() => !isHorizontal.value)
+const isRtl = computed(() => dir.value === 'rtl');
+const isHorizontal = computed(() => props.orientation === 'horizontal');
+const isVertical = computed(() => !isHorizontal.value);
 
 const virtualizerProps = toRef(() => {
-  const options = typeof props.virtualize === 'boolean' ? {} : props.virtualize
+  const options = typeof props.virtualize === 'boolean' ? {} : props.virtualize;
 
   return defu(options, {
     estimateSize: 100,
@@ -120,162 +122,166 @@ const virtualizerProps = toRef(() => {
     gap: 0,
     paddingStart: 0,
     paddingEnd: 0,
-    scrollMargin: 0
-  })
-})
+    scrollMargin: 0,
+  });
+});
 
 const lanes = computed(() => {
-  const value = virtualizerProps.value.lanes
-  return typeof value === 'number' ? value : undefined
-})
+  const value = virtualizerProps.value.lanes;
+  return typeof value === 'number' ? value : undefined;
+});
 
 const skipMeasurement = computed(() => {
-  return typeof props.virtualize === 'object' && props.virtualize.skipMeasurement === true
-})
+  return typeof props.virtualize === 'object' && props.virtualize.skipMeasurement === true;
+});
 
 const virtualizer = !!props.virtualize && useVirtualizer({
   ...virtualizerProps.value,
   get overscan() {
-    return virtualizerProps.value.overscan
+    return virtualizerProps.value.overscan;
   },
   get gap() {
-    return virtualizerProps.value.gap
+    return virtualizerProps.value.gap;
   },
   get paddingStart() {
-    return virtualizerProps.value.paddingStart
+    return virtualizerProps.value.paddingStart;
   },
   get paddingEnd() {
-    return virtualizerProps.value.paddingEnd
+    return virtualizerProps.value.paddingEnd;
   },
   get scrollMargin() {
-    return virtualizerProps.value.scrollMargin
+    return virtualizerProps.value.scrollMargin;
   },
   get lanes() {
-    return lanes.value
+    return lanes.value;
   },
   get isRtl() {
-    return isRtl.value
+    return isRtl.value;
   },
   get count() {
-    return props.items?.length || 0
+    return props.items?.length || 0;
   },
   getScrollElement: () => rootRef.value?.$el,
   get horizontal() {
-    return isHorizontal.value
+    return isHorizontal.value;
   },
   estimateSize: (index: number) => {
-    const estimate = virtualizerProps.value.estimateSize
-    return typeof estimate === 'function' ? estimate(index) : estimate
-  }
-})
+    const estimate = virtualizerProps.value.estimateSize;
+    return typeof estimate === 'function' ? estimate(index) : estimate;
+  },
+});
 
-const virtualItems = computed<VirtualItem[]>(() => virtualizer ? virtualizer.value.getVirtualItems() : [])
-const totalSize = computed(() => virtualizer ? virtualizer.value.getTotalSize() : 0)
+const virtualItems = computed<Array<VirtualItem>>(() => virtualizer ? virtualizer.value.getVirtualItems() : []);
+const totalSize = computed(() => virtualizer ? virtualizer.value.getTotalSize() : 0);
 
 const virtualViewportStyle = computed<CSSProperties>(() => ({
   position: 'relative',
   inlineSize: isHorizontal.value ? `${totalSize.value}px` : '100%',
-  blockSize: isVertical.value ? `${totalSize.value}px` : '100%'
-}))
+  blockSize: isVertical.value ? `${totalSize.value}px` : '100%',
+}));
 
 function getVirtualItemStyle(virtualItem: VirtualItem): CSSProperties {
-  const hasLanes = lanes.value !== undefined && lanes.value > 1
-  const lane = virtualItem.lane
-  const gap = virtualizerProps.value.gap ?? 0
+  const hasLanes = lanes.value !== undefined && lanes.value > 1;
+  const lane = virtualItem.lane;
+  const gap = virtualizerProps.value.gap ?? 0;
 
   // For cross-axis gaps: calculate size and position accounting for gaps between lanes
   // laneSize = (100% - (lanes - 1) * gap) / lanes
   // lanePosition = lane * (laneSize + gap)
   const laneSize = hasLanes
     ? `calc((100% - ${(lanes.value! - 1) * gap}px) / ${lanes.value})`
-    : '100%'
+    : '100%';
   const lanePosition = hasLanes && lane !== undefined
     ? `calc(${lane} * ((100% - ${(lanes.value! - 1) * gap}px) / ${lanes.value} + ${gap}px))`
-    : 0
+    : 0;
 
   return {
     position: 'absolute',
     insetBlockStart: isHorizontal.value && hasLanes ? lanePosition : 0,
     insetInlineStart: isVertical.value && hasLanes ? lanePosition : 0,
+    // eslint-disable-next-line no-nested-ternary
     blockSize: isHorizontal.value ? (hasLanes ? laneSize : '100%') : undefined,
+    // eslint-disable-next-line no-nested-ternary
     inlineSize: isVertical.value ? (hasLanes ? laneSize : '100%') : undefined,
     transform: isHorizontal.value
       ? `translateX(${isRtl.value ? -virtualItem.start : virtualItem.start}px)`
-      : `translateY(${virtualItem.start}px)`
-  }
+      : `translateY(${virtualItem.start}px)`,
+  };
 }
 
 // Recalculate layout on container resize (e.g. estimateSize depends on lane width)
-let resizeObserver: ResizeObserver | null = null
-let rafId: number | null = null
+let resizeObserver: ResizeObserver | null = null;
+let rafId: number | null = null;
 
 onMounted(() => {
   if (virtualizer) {
-    const el = rootRef.value?.$el
+    const el = rootRef.value?.$el;
     if (el) {
       resizeObserver = new ResizeObserver(() => {
-        if (rafId !== null) return
+        if (rafId !== null) {
+          return;
+        }
         rafId = requestAnimationFrame(() => {
-          rafId = null
-          virtualizer.value.measure()
-        })
-      })
-      resizeObserver.observe(el)
+          rafId = null;
+          virtualizer.value.measure();
+        });
+      });
+      resizeObserver.observe(el);
     }
   }
-})
+});
 
 onUnmounted(() => {
   if (rafId !== null) {
-    cancelAnimationFrame(rafId)
-    rafId = null
+    cancelAnimationFrame(rafId);
+    rafId = null;
   }
-  resizeObserver?.disconnect()
-})
+  resizeObserver?.disconnect();
+});
 
 function measureElement(el: Element | ComponentPublicInstance | null) {
   if (el && virtualizer && !skipMeasurement.value) {
-    const element = el instanceof Element ? el : (el as ComponentPublicInstance).$el as Element
-    virtualizer.value.measureElement(element)
+    const element = el instanceof Element ? el : (el as ComponentPublicInstance).$el as Element;
+    virtualizer.value.measureElement(element);
   }
 }
 
 // Emit scroll state changes
 watch(
   () => (virtualizer ? virtualizer.value.isScrolling : false),
-  isScrolling => emits('scroll', isScrolling)
-)
+  (isScrolling) => emits('scroll', isScrolling),
+);
 
 function getItemKey(item: T, index: number) {
   if (virtualizerProps.value.getItemKey) {
-    return virtualizerProps.value.getItemKey(index)
+    return virtualizerProps.value.getItemKey(index);
   }
   if (item && typeof item === 'object' && 'id' in item) {
-    return (item as any).id
+    return (item as any).id;
   }
-  return index
+  return index;
 }
 
 defineExpose({
   get $el() {
-    return rootRef.value?.$el as HTMLElement
+    return rootRef.value?.$el as HTMLElement;
   },
-  virtualizer: virtualizer || undefined
-})
+  virtualizer: virtualizer || undefined,
+});
 </script>
 
 <template>
-  <Primitive
+  <APrimitive
     ref="rootRef"
     :as="as"
     data-slot="root"
     :data-orientation="orientation"
-    :class="ui.root({ class: [pohonProp?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <template v-if="virtualizer">
       <div
         data-slot="viewport"
-        :class="ui.viewport({ class: pohonProp?.viewport })"
+        :class="pohon.viewport({ class: pohonProp?.viewport })"
         :style="virtualViewportStyle"
       >
         <div
@@ -284,7 +290,7 @@ defineExpose({
           :ref="measureElement"
           :data-index="virtualItem.index"
           data-slot="item"
-          :class="ui.item({ class: pohonProp?.item })"
+          :class="pohon.item({ class: pohonProp?.item })"
           :style="getVirtualItemStyle(virtualItem)"
         >
           <slot
@@ -297,22 +303,31 @@ defineExpose({
     </template>
 
     <template v-else>
-      <div data-slot="viewport" :class="ui.viewport({ class: pohonProp?.viewport })">
+      <div
+        data-slot="viewport"
+        :class="pohon.viewport({ class: pohonProp?.viewport })"
+      >
         <template v-if="items">
           <div
             v-for="(item, index) in items"
             :key="getItemKey(item, index)"
             data-slot="item"
-            :class="ui.item({ class: pohonProp?.item })"
+            :class="pohon.item({ class: pohonProp?.item })"
           >
-            <slot :item="item" :index="index" />
+            <slot
+              :item="item"
+              :index="index"
+            />
           </div>
         </template>
 
         <template v-else>
-          <slot :item="({} as T)" :index="0" />
+          <slot
+            :item="({} as T)"
+            :index="0"
+          />
         </template>
       </div>
     </template>
-  </Primitive>
+  </APrimitive>
 </template>

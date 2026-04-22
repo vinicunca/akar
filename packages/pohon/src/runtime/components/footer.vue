@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/footer';
 
@@ -16,11 +17,11 @@ export interface PFooterProps {
 }
 
 export interface PFooterSlots {
-  left: (props?: object) => any;
-  default: (props?: object) => any;
-  right: (props?: object) => any;
-  top: (props?: object) => any;
-  bottom: (props?: object) => any;
+  left?: (props?: {}) => Array<VNode>;
+  default?: (props?: {}) => Array<VNode>;
+  right?: (props?: {}) => Array<VNode>;
+  top?: (props?: {}) => Array<VNode>;
+  bottom?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -43,46 +44,44 @@ const slots = defineSlots<PFooterSlots>();
 const appConfig = useAppConfig() as Footer['AppConfig'];
 const pohonProp = useComponentPohon('footer', props);
 
-const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.footer || {}) })(),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.footer || {}) })());
 </script>
 
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="footer-root"
   >
     <div
       v-if="!!slots.top"
+      data-slot="top"
       :class="pohon.top({ class: pohonProp?.top })"
-      data-pohon="footer-top"
     >
       <slot name="top" />
     </div>
 
     <PContainer
+      data-slot="container"
       :class="pohon.container({ class: pohonProp?.container })"
-      data-pohon="footer-container"
     >
       <div
+        data-slot="right"
         :class="pohon.right({ class: pohonProp?.right })"
-        data-pohon="footer-right"
       >
         <slot name="right" />
       </div>
 
       <div
+        data-slot="center"
         :class="pohon.center({ class: pohonProp?.center })"
-        data-pohon="footer-center"
       >
         <slot />
       </div>
 
       <div
+        data-slot="left"
         :class="pohon.left({ class: pohonProp?.left })"
-        data-pohon="footer-left"
       >
         <slot name="left" />
       </div>
@@ -90,8 +89,8 @@ const pohon = computed(() =>
 
     <div
       v-if="!!slots.bottom"
+      data-slot="bottom"
       :class="pohon.bottom({ class: pohonProp?.bottom })"
-      data-pohon="footer-bottom"
     >
       <slot name="bottom" />
     </div>

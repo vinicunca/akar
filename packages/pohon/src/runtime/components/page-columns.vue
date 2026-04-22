@@ -1,45 +1,47 @@
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/page-columns'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/page-columns';
 
-type PageColumns = ComponentConfig<typeof theme, AppConfig, 'pageColumns'>
+type PageColumns = ComponentConfig<typeof theme, AppConfig, 'pageColumns'>;
 
-export interface PageColumnsProps {
+export interface PPageColumnsProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
-  class?: any
-  pohon?: { base?: any }
+  as?: any;
+  class?: any;
+  pohon?: { base?: any };
 }
 
-export interface PageColumnsSlots {
-  default?(props?: {}): VNode[]
+export interface PPageColumnsSlots {
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { tv } from '../utils/tv'
-import { useComponentPohon } from '../composables/use-component-pohon'
+import { useAppConfig } from '#imports';
+import { APrimitive } from 'akar';
+import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { uv } from '../utils/uv';
 
-const props = defineProps<PageColumnsProps>()
-defineSlots<PageColumnsSlots>()
+const props = defineProps<PPageColumnsProps>();
+defineSlots<PPageColumnsSlots>();
 
-const appConfig = useAppConfig() as PageColumns['AppConfig']
-const pohonProp = useComponentPohon('pageColumns', props)
+const appConfig = useAppConfig() as PageColumns['AppConfig'];
+const pohonProp = useComponentPohon('pageColumns', props);
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pageColumns || {}) }))
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageColumns || {}) }));
 </script>
 
 <template>
-  <Primitive :as="as" :class="ui({ class: [pohonProp?.base, props.class] })">
+  <APrimitive
+    :as="as"
+    :class="pohon({ class: [pohonProp?.base, props.class] })"
+  >
     <slot />
-  </Primitive>
+  </APrimitive>
 </template>

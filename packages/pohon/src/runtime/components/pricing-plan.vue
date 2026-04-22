@@ -1,169 +1,195 @@
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/pricing-plan'
-import type { PBadgeProps, PButtonProps, PIconProps } from '../types'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { PBadgeProps, PButtonProps, PIconProps } from '../types';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/pricing-plan';
 
-type PricingPlan = ComponentConfig<typeof theme, AppConfig, 'pricingPlan'>
+type PricingPlan = ComponentConfig<typeof theme, AppConfig, 'pricingPlan'>;
 
 type PricingPlanFeature = {
-  title: string
+  title: string;
   /**
    * @defaultValue appConfig.pohon.icons.success
    * @IconifyIcon
    */
-  icon?: PIconProps['name']
-}
+  icon?: PIconProps['name'];
+};
 
-export interface PricingPlanProps {
+export interface PPricingPlanProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
-  title?: string
-  description?: string
+  as?: any;
+  title?: string;
+  description?: string;
   /**
    * Display a badge next to the title.
    * Can be a string or an object.
    * `{ color: 'primary', variant: 'subtle' }`{lang="ts-type"}
    */
-  badge?: string | PBadgeProps
+  badge?: string | PBadgeProps;
   /**
    * The unit price period that appears next to the price.
    * Typically used to show the recurring interval.
    * @example "/month", "/year", "/seat/month"
    */
-  billingCycle?: string
+  billingCycle?: string;
   /**
    * Additional billing context that appears above the billing cycle.
    * Typically used to show the actual billing frequency.
    * @example "billed annually", "billed monthly", "per user, billed annually"
    */
-  billingPeriod?: string
+  billingPeriod?: string;
   /**
    * The current price of the plan.
    * When used with `discount`, this becomes the original price.
    * @example "$99", "€99", "Free"
    */
-  price?: string
+  price?: string;
   /**
    * The discounted price of the plan.
    * When provided, the `price` prop will be displayed as strikethrough.
    * @example "$79", "€79"
    */
-  discount?: string
+  discount?: string;
   /**
    * Display a list of features under the price.
    * Can be an array of strings or an array of objects.
    */
-  features?: string[] | PricingPlanFeature[]
+  features?: Array<string> | Array<PricingPlanFeature>;
   /**
    * Display a buy button at the bottom.
    * `{ size: 'lg', block: true }`{lang="ts-type"}
    * Use the `onClick` field to add a click handler.
    */
-  button?: PButtonProps
+  button?: PButtonProps;
   /**
    * Display a tagline highlighting the pricing value proposition.
    * @example 'Pay once, own it forever'
    */
-  tagline?: string
+  tagline?: string;
   /**
    * Display terms at the bottom.
    * @example '14-day free trial'
    */
-  terms?: string
+  terms?: string;
   /**
    * The orientation of the pricing plan.
    * @defaultValue 'vertical'
    */
-  orientation?: PricingPlan['variants']['orientation']
+  orientation?: PricingPlan['variants']['orientation'];
   /**
    * @defaultValue 'outline'
    */
-  variant?: PricingPlan['variants']['variant']
+  variant?: PricingPlan['variants']['variant'];
   /** Display a ring around the pricing plan to highlight it. */
-  highlight?: boolean
+  highlight?: boolean;
   /** Enlarge the plan to make it more prominent. */
-  scale?: boolean
-  class?: any
-  pohon?: PricingPlan['slots']
+  scale?: boolean;
+  class?: any;
+  pohon?: PricingPlan['slots'];
 }
 
-export interface PricingPlanSlots {
-  badge?(props: { pohon: PricingPlan['pohon'] }): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  price?(props?: {}): VNode[]
-  discount?(props?: {}): VNode[]
-  billing?(props: { pohon: PricingPlan['pohon'] }): VNode[]
-  features?(props?: {}): VNode[]
-  button?(props: { pohon: PricingPlan['pohon'] }): VNode[]
-  header?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
-  tagline?(props?: {}): VNode[]
-  terms?(props?: {}): VNode[]
+export interface PPricingPlanSlots {
+  badge?: (props: { pohon: PricingPlan['pohon'] }) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  price?: (props?: {}) => Array<VNode>;
+  discount?: (props?: {}) => Array<VNode>;
+  billing?: (props: { pohon: PricingPlan['pohon'] }) => Array<VNode>;
+  features?: (props?: {}) => Array<VNode>;
+  button?: (props: { pohon: PricingPlan['pohon'] }) => Array<VNode>;
+  header?: (props?: {}) => Array<VNode>;
+  body?: (props?: {}) => Array<VNode>;
+  footer?: (props?: {}) => Array<VNode>;
+  tagline?: (props?: {}) => Array<VNode>;
+  terms?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Primitive } from 'reka-ui'
-import { createReusableTemplate } from '@vueuse/core'
-import { useAppConfig } from '#imports'
-import { useComponentPohon } from '../composables/use-component-pohon'
-import { tv } from '../utils/tv'
-import PBadge from './badge.vue'
-import PButton from './button.vue'
-import PIcon from './icon.vue'
+import { useAppConfig } from '#imports';
+import { createReusableTemplate } from '@vueuse/core';
+import { APrimitive } from 'akar';
+import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { uv } from '../utils/uv';
+import PBadge from './badge.vue';
+import PButton from './button.vue';
+import PIcon from './icon.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<PricingPlanProps>(), {
-  orientation: 'vertical'
-})
-const slots = defineSlots<PricingPlanSlots>()
+const props = withDefaults(defineProps<PPricingPlanProps>(), {
+  orientation: 'vertical',
+});
+const slots = defineSlots<PPricingPlanSlots>();
 
-const appConfig = useAppConfig() as PricingPlan['AppConfig']
-const pohonProp = useComponentPohon('pricingPlan', props)
+const appConfig = useAppConfig() as PricingPlan['AppConfig'];
+const pohonProp = useComponentPohon('pricingPlan', props);
 
-const [DefinePriceTemplate, ReusePriceTemplate] = createReusableTemplate()
+const [DefinePriceTemplate, ReusePriceTemplate] = createReusableTemplate();
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pricingPlan || {}) })({
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pricingPlan || {}) })({
   orientation: props.orientation,
   variant: props.variant,
   highlight: props.highlight,
-  scale: props.scale
-}))
+  scale: props.scale,
+}));
 
-const features = computed(() => props.features?.map(feature => typeof feature === 'string' ? { title: feature } : feature))
+const features = computed(() => props.features?.map((feature) => typeof feature === 'string' ? { title: feature } : feature));
 </script>
 
 <template>
   <DefinePriceTemplate>
-    <div v-if="discount || price || !!slots.discount || !!slots.price || billingCycle || billingPeriod || !!slots.billing" data-slot="priceWrapper" :class="ui.priceWrapper({ class: pohonProp?.priceWrapper })">
-      <div v-if="(discount && price) || !!slots.discount" data-slot="discount" :class="ui.discount({ class: pohonProp?.discount })">
+    <div
+      v-if="discount || price || !!slots.discount || !!slots.price || billingCycle || billingPeriod || !!slots.billing"
+      data-slot="priceWrapper"
+      :class="pohon.priceWrapper({ class: pohonProp?.priceWrapper })"
+    >
+      <div
+        v-if="(discount && price) || !!slots.discount"
+        data-slot="discount"
+        :class="pohon.discount({ class: pohonProp?.discount })"
+      >
         <slot name="discount">
           {{ price }}
         </slot>
       </div>
 
-      <div v-if="(discount || price) || !!slots.price" data-slot="price" :class="ui.price({ class: pohonProp?.price })">
+      <div
+        v-if="(discount || price) || !!slots.price"
+        data-slot="price"
+        :class="pohon.price({ class: pohonProp?.price })"
+      >
         <slot name="price">
           {{ discount || price }}
         </slot>
       </div>
 
-      <div v-if="billingCycle || billingPeriod || !!slots.billing" data-slot="billing" :class="ui.billing({ class: pohonProp?.billing })">
-        <slot name="billing" : pohon="ui">
-          <span data-slot="billingPeriod" :class="ui.billingPeriod({ class: pohonProp?.billingPeriod })">
+      <div
+        v-if="billingCycle || billingPeriod || !!slots.billing"
+        data-slot="billing"
+        :class="pohon.billing({ class: pohonProp?.billing })"
+      >
+        <slot
+          name="billing"
+          :pohon="pohon"
+        >
+          <span
+            data-slot="billingPeriod"
+            :class="pohon.billingPeriod({ class: pohonProp?.billingPeriod })"
+          >
             {{ billingPeriod || '&nbsp;' }}
           </span>
 
-          <span v-if="billingCycle" data-slot="billingCycle" :class="ui.billingCycle({ class: pohonProp?.billingCycle })">
+          <span
+            v-if="billingCycle"
+            data-slot="billingCycle"
+            :class="pohon.billingCycle({ class: pohonProp?.billingCycle })"
+          >
             {{ billingCycle }}
           </span>
         </slot>
@@ -171,33 +197,60 @@ const features = computed(() => props.features?.map(feature => typeof feature ==
     </div>
   </DefinePriceTemplate>
 
-  <Primitive :as="as" v-bind="$attrs" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [pohonProp?.root, props.class] })">
-    <div v-if="!!slots.header && orientation === 'vertical'" data-slot="header" :class="ui.header({ class: pohonProp?.header })">
+  <APrimitive
+    :as="as"
+    v-bind="$attrs"
+    :data-orientation="orientation"
+    data-slot="root"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
+  >
+    <div
+      v-if="!!slots.header && orientation === 'vertical'"
+      data-slot="header"
+      :class="pohon.header({ class: pohonProp?.header })"
+    >
       <slot name="header" />
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: pohonProp?.body })">
+    <div
+      data-slot="body"
+      :class="pohon.body({ class: pohonProp?.body })"
+    >
       <slot name="body">
-        <div data-slot="titleWrapper" :class="ui.titleWrapper({ class: pohonProp?.titleWrapper })">
-          <div v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: pohonProp?.title })">
+        <div
+          data-slot="titleWrapper"
+          :class="pohon.titleWrapper({ class: pohonProp?.titleWrapper })"
+        >
+          <div
+            v-if="title || !!slots.title"
+            data-slot="title"
+            :class="pohon.title({ class: pohonProp?.title })"
+          >
             <slot name="title">
               {{ title }}
             </slot>
           </div>
 
-          <slot name="badge" : pohon="ui">
+          <slot
+            name="badge"
+            :pohon="pohon"
+          >
             <PBadge
               v-if="badge"
               color="primary"
               variant="subtle"
               v-bind="typeof badge === 'string' ? { label: badge } : badge"
               data-slot="badge"
-              :class="ui.badge({ class: pohonProp?.badge })"
+              :class="pohon.badge({ class: pohonProp?.badge })"
             />
           </slot>
         </div>
 
-        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: pohonProp?.description })">
+        <div
+          v-if="description || !!slots.description"
+          data-slot="description"
+          :class="pohon.description({ class: pohonProp?.description })"
+        >
           <slot name="description">
             {{ description }}
           </slot>
@@ -205,21 +258,45 @@ const features = computed(() => props.features?.map(feature => typeof feature ==
 
         <ReusePriceTemplate v-if="orientation === 'vertical'" />
 
-        <ul v-if="features?.length || !!slots.features" data-slot="features" :class="ui.features({ class: pohonProp?.features })">
+        <ul
+          v-if="features?.length || !!slots.features"
+          data-slot="features"
+          :class="pohon.features({ class: pohonProp?.features })"
+        >
           <slot name="features">
-            <li v-for="(feature, index) in features" :key="index" data-slot="feature" :class="ui.feature({ class: pohonProp?.feature })">
-              <PIcon :name="feature.icon || appConfig.pohon.icons.success" data-slot="featureIcon" :class="ui.featureIcon({ class: pohonProp?.featureIcon })" />
+            <li
+              v-for="(feature, index) in features"
+              :key="index"
+              data-slot="feature"
+              :class="pohon.feature({ class: pohonProp?.feature })"
+            >
+              <PIcon
+                :name="feature.icon || appConfig.pohon.icons.success"
+                data-slot="featureIcon"
+                :class="pohon.featureIcon({ class: pohonProp?.featureIcon })"
+              />
 
-              <span data-slot="featureTitle" :class="ui.featureTitle({ class: pohonProp?.featureTitle })">{{ feature.title }}</span>
+              <span
+                data-slot="featureTitle"
+                :class="pohon.featureTitle({ class: pohonProp?.featureTitle })"
+              >{{ feature.title }}</span>
             </li>
           </slot>
         </ul>
       </slot>
     </div>
 
-    <div v-if="(terms || !!slots.terms) || (button || !!slots.button) || orientation === 'horizontal' || (tagline || !!slots.tagline) || !!slots.footer" data-slot="footer" :class="ui.footer({ class: pohonProp?.footer })">
+    <div
+      v-if="(terms || !!slots.terms) || (button || !!slots.button) || orientation === 'horizontal' || (tagline || !!slots.tagline) || !!slots.footer"
+      data-slot="footer"
+      :class="pohon.footer({ class: pohonProp?.footer })"
+    >
       <slot name="footer">
-        <div v-if="tagline || !!slots.tagline" data-slot="tagline" :class="ui.tagline({ class: pohonProp?.tagline })">
+        <div
+          v-if="tagline || !!slots.tagline"
+          data-slot="tagline"
+          :class="pohon.tagline({ class: pohonProp?.tagline })"
+        >
           <slot name="tagline">
             {{ tagline }}
           </slot>
@@ -227,16 +304,29 @@ const features = computed(() => props.features?.map(feature => typeof feature ==
 
         <ReusePriceTemplate v-if="orientation === 'horizontal'" />
 
-        <slot name="button" : pohon="ui">
-          <PButton v-if="button" v-bind="{ block: true, size: 'lg', ...button }" data-slot="button" :class="ui.button({ class: pohonProp?.button })" @click="button?.onClick" />
+        <slot
+          name="button"
+          :pohon="pohon"
+        >
+          <PButton
+            v-if="button"
+            v-bind="{ block: true, size: 'lg', ...button }"
+            data-slot="button"
+            :class="pohon.button({ class: pohonProp?.button })"
+            @click="button?.onClick"
+          />
         </slot>
 
-        <div v-if="terms || !!slots.terms" data-slot="terms" :class="ui.terms({ class: pohonProp?.terms })">
+        <div
+          v-if="terms || !!slots.terms"
+          data-slot="terms"
+          :class="pohon.terms({ class: pohonProp?.terms })"
+        >
           <slot name="terms">
             {{ terms }}
           </slot>
         </div>
       </slot>
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

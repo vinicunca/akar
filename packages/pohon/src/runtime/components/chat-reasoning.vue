@@ -1,232 +1,259 @@
 <script lang="ts">
-import type { CollapsibleRootProps } from 'reka-ui'
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/chat-reasoning'
-import type { PIconProps } from '../types'
-import type { ChatShimmerProps } from './chat-shimmer.vue'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { ACollapsibleRootProps } from 'akar';
+import type { VNode } from 'vue';
+import type { PIconProps } from '../types';
+import type { ComponentConfig } from '../types/uv';
+import type { PChatShimmerProps } from './chat-shimmer.vue';
+import theme from '#build/pohon/chat-reasoning';
 
-type ChatReasoning = ComponentConfig<typeof theme, AppConfig, 'chatReasoning'>
+type ChatReasoning = ComponentConfig<typeof theme, AppConfig, 'chatReasoning'>;
 
-export interface ChatReasoningProps extends Pick<CollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
+export interface PChatReasoningProps extends Pick<ACollapsibleRootProps, 'defaultOpen' | 'open' | 'disabled' | 'unmountOnHide'> {
   /**
    * The reasoning text content to display.
    */
-  text?: string
+  text?: string;
   /**
    * Whether the reasoning content is currently streaming.
    * @defaultValue false
    */
-  streaming?: boolean
+  streaming?: boolean;
   /**
    * The duration in seconds that the AI spent reasoning.
    * If not provided, it will be calculated automatically based on streaming time.
    */
-  duration?: number
+  duration?: number;
   /**
    * The icon displayed next to the trigger.
    * @IconifyIcon
    */
-  icon?: PIconProps['name']
+  icon?: PIconProps['name'];
   /**
    * The position of the chevron icon.
    * @defaultValue 'trailing'
    */
-  chevron?: 'leading' | 'trailing'
+  chevron?: 'leading' | 'trailing';
   /**
    * The icon displayed as the chevron.
    * @defaultValue appConfig.pohon.icons.chevronDown
    * @IconifyIcon
    */
-  chevronIcon?: PIconProps['name']
+  chevronIcon?: PIconProps['name'];
   /**
    * The delay in milliseconds before auto-closing when streaming ends.
    * Set to `0` to disable auto-close.
    * @defaultValue 500
    */
-  autoCloseDelay?: number
+  autoCloseDelay?: number;
   /**
-   * Customize the [`ChatShimmer`](https://akar.vinicunca.dev/docs/components/chat-shimmer) component when streaming.
+   * Customize the [`ChatShimmer`](https://pohon.nuxt.com/docs/components/chat-shimmer) component when streaming.
    */
-  shimmer?: Partial<Omit<ChatShimmerProps, 'text'>>
-  class?: any
-  pohon?: ChatReasoning['slots']
+  shimmer?: Partial<Omit<PChatShimmerProps, 'text'>>;
+  class?: any;
+  pohon?: ChatReasoning['slots'];
 }
 
-export interface ChatReasoningEmits {
-  'update:open': [value: boolean]
+export interface PChatReasoningEmits {
+  'update:open': [value: boolean];
 }
 
-export interface ChatReasoningSlots {
-  default?(props: { open: boolean }): VNode[]
+export interface PChatReasoningSlots {
+  default?: (props: { open: boolean }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, onUnmounted, nextTick, useTemplateRef } from 'vue'
-import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentPohon } from '../composables/use-component-pohon'
-import { useLocale } from '../composables/use-locale'
-import { useScrollShadow } from '../composables/use-scroll-shadow'
-import { tv } from '../utils/tv'
-import PIcon from './icon.vue'
-import PChatShimmer from './chat-shimmer.vue'
+import { useAppConfig } from '#imports';
+import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar';
+import { computed, nextTick, onUnmounted, ref, useTemplateRef, watch } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { useLocale } from '../composables/use-locale';
+import { useScrollShadow } from '../composables/use-scroll-shadow';
+import { uv } from '../utils/uv';
+import PChatShimmer from './chat-shimmer.vue';
+import PIcon from './icon.vue';
 
-const props = withDefaults(defineProps<ChatReasoningProps>(), {
+const props = withDefaults(defineProps<PChatReasoningProps>(), {
   open: undefined,
   streaming: false,
   chevron: 'trailing',
   unmountOnHide: false,
-  autoCloseDelay: 500
-})
-const emits = defineEmits<ChatReasoningEmits>()
-defineSlots<ChatReasoningSlots>()
+  autoCloseDelay: 500,
+});
+const emits = defineEmits<PChatReasoningEmits>();
+defineSlots<PChatReasoningSlots>();
 
-const { t, code } = useLocale()
-const appConfig = useAppConfig() as ChatReasoning['AppConfig']
-const pohonProp = useComponentPohon('chatReasoning', props)
+const { t, code } = useLocale();
+const appConfig = useAppConfig() as ChatReasoning['AppConfig'];
+const pohonProp = useComponentPohon('chatReasoning', props);
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.chatReasoning || {}) })({
-  chevron: props.chevron
-}))
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatReasoning || {}) })({
+  chevron: props.chevron,
+}));
 
-const isControlled = computed(() => props.open !== undefined)
-const internalOpen = ref(props.defaultOpen ?? props.streaming)
-const startTime = ref<number | null>(props.streaming ? Date.now() : null)
-const internalDuration = ref<number | undefined>(undefined)
-const autoCloseTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
+const isControlled = computed(() => props.open !== undefined);
+const internalOpen = ref(props.defaultOpen ?? props.streaming);
+const startTime = ref<number | null>(props.streaming ? Date.now() : null);
+const internalDuration = ref<number | undefined>(undefined);
+const autoCloseTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
 
 watch(() => props.streaming, (streaming, wasStreaming) => {
   if (streaming) {
     if (autoCloseTimeout.value) {
-      clearTimeout(autoCloseTimeout.value)
-      autoCloseTimeout.value = null
+      clearTimeout(autoCloseTimeout.value);
+      autoCloseTimeout.value = null;
     }
     if (!wasStreaming) {
-      setOpen(true)
-      startTime.value = Date.now()
+      setOpen(true);
+      startTime.value = Date.now();
     }
   } else if (wasStreaming) {
     if (startTime.value !== null) {
-      internalDuration.value = Math.ceil((Date.now() - startTime.value) / 1000)
-      startTime.value = null
+      internalDuration.value = Math.ceil((Date.now() - startTime.value) / 1000);
+      startTime.value = null;
     }
     if (props.autoCloseDelay > 0) {
       autoCloseTimeout.value = setTimeout(() => {
-        setOpen(false)
-      }, props.autoCloseDelay)
+        setOpen(false);
+      }, props.autoCloseDelay);
     }
   }
-}, { immediate: true })
+}, { immediate: true });
 
-const actualDuration = computed(() => props.duration ?? internalDuration.value)
+const actualDuration = computed(() => props.duration ?? internalDuration.value);
 
 const thinkingText = computed(() => {
   if (props.streaming || actualDuration.value === 0) {
-    return t('chatReasoning.thinking')
+    return t('chatReasoning.thinking');
   }
   if (actualDuration.value === undefined) {
-    return t('chatReasoning.thought')
+    return t('chatReasoning.thought');
   }
 
-  const d = actualDuration.value
-  const unit = d < 60 ? 'second' : 'minute'
-  const value = d < 60 ? d : Math.floor(d / 60)
-  const duration = new Intl.NumberFormat(code.value, { style: 'unit', unit, unitDisplay: 'long' }).format(value)
+  const d = actualDuration.value;
+  const unit = d < 60 ? 'second' : 'minute';
+  const value = d < 60 ? d : Math.floor(d / 60);
+  const duration = new Intl.NumberFormat(code.value, { style: 'unit', unit, unitDisplay: 'long' }).format(value);
 
-  return t('chatReasoning.thoughtFor', { duration })
-})
+  return t('chatReasoning.thoughtFor', { duration });
+});
 
-const resolvedOpen = computed(() => isControlled.value ? props.open : internalOpen.value)
+const resolvedOpen = computed(() => isControlled.value ? props.open : internalOpen.value);
 
 function setOpen(value: boolean) {
   if (autoCloseTimeout.value) {
-    clearTimeout(autoCloseTimeout.value)
-    autoCloseTimeout.value = null
+    clearTimeout(autoCloseTimeout.value);
+    autoCloseTimeout.value = null;
   }
-  internalOpen.value = value
-  emits('update:open', value)
+  internalOpen.value = value;
+  emits('update:open', value);
 }
 
 onUnmounted(() => {
   if (autoCloseTimeout.value) {
-    clearTimeout(autoCloseTimeout.value)
+    clearTimeout(autoCloseTimeout.value);
   }
-})
+});
 
-const hasContent = computed(() => !!props.text || props.streaming)
+const hasContent = computed(() => !!props.text || props.streaming);
 
-const chevronIconName = computed(() => props.chevronIcon || appConfig.pohon.icons?.chevronDown)
+const chevronIconName = computed(() => props.chevronIcon || appConfig.pohon.icons?.chevronDown);
 
-const bodyRef = useTemplateRef('bodyRef')
-const { style: scrollShadowStyle } = useScrollShadow(bodyRef)
+const bodyRef = useTemplateRef('bodyRef');
+const { style: scrollShadowStyle } = useScrollShadow(bodyRef);
 
 watch(() => props.text, () => {
-  if (!props.streaming || !bodyRef.value) return
+  if (!props.streaming || !bodyRef.value) {
+    return;
+  }
 
-  const el = bodyRef.value
-  const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight
+  const el = bodyRef.value;
+  const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
 
   if (distanceFromBottom < 50) {
     nextTick(() => {
-      el.scrollTop = el.scrollHeight
-    })
+      el.scrollTop = el.scrollHeight;
+    });
   }
-})
+});
 </script>
 
 <template>
-  <CollapsibleRoot
+  <ACollapsibleRoot
     v-if="hasContent"
     v-slot="{ open: isOpen }"
     :open="resolvedOpen"
     :disabled="disabled"
     :unmount-on-hide="unmountOnHide"
     data-slot="root"
-    :class="ui.root({ class: [pohonProp?.root, props.class] })"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     @update:open="setOpen"
   >
-    <CollapsibleTrigger as-child :disabled="!hasContent">
+    <ACollapsibleTrigger
+      as-child
+      :disabled="!hasContent"
+    >
       <button
         type="button"
         data-slot="trigger"
-        :class="ui.trigger({ class: pohonProp?.trigger })"
+        :class="pohon.trigger({ class: pohonProp?.trigger })"
       >
-        <span v-if="icon || (hasContent && chevron === 'leading')" data-slot="leading" :class="ui.leading({ class: pohonProp?.leading })">
+        <span
+          v-if="icon || (hasContent && chevron === 'leading')"
+          data-slot="leading"
+          :class="pohon.leading({ class: pohonProp?.leading })"
+        >
           <PIcon
             v-if="icon"
             :name="icon"
             data-slot="leadingIcon"
-            :class="ui.leadingIcon({ class: pohonProp?.leadingIcon, alone: !(hasContent && chevron === 'leading') })"
+            :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon, alone: !(hasContent && chevron === 'leading') })"
           />
           <PIcon
             v-if="hasContent && chevron === 'leading'"
             :name="chevronIconName"
             data-slot="chevronIcon"
-            :class="ui.chevronIcon({ class: pohonProp?.chevronIcon, alone: !icon })"
+            :class="pohon.chevronIcon({ class: pohonProp?.chevronIcon, alone: !icon })"
           />
         </span>
 
-        <PChatShimmer v-if="streaming" :text="thinkingText" v-bind="props.shimmer" data-slot="label" :class="ui.label({ class: pohonProp?.label })" />
-        <span v-else data-slot="label" :class="ui.label({ class: pohonProp?.label })">{{ thinkingText }}</span>
+        <PChatShimmer
+          v-if="streaming"
+          :text="thinkingText"
+          v-bind="props.shimmer"
+          data-slot="label"
+          :class="pohon.label({ class: pohonProp?.label })"
+        />
+        <span
+          v-else
+          data-slot="label"
+          :class="pohon.label({ class: pohonProp?.label })"
+        >{{ thinkingText }}</span>
 
         <PIcon
           v-if="hasContent && chevron === 'trailing'"
           :name="chevronIconName"
           data-slot="trailingIcon"
-          :class="ui.trailingIcon({ class: pohonProp?.trailingIcon })"
+          :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         />
       </button>
-    </CollapsibleTrigger>
+    </ACollapsibleTrigger>
 
-    <CollapsibleContent data-slot="content" :class="ui.content({ class: pohonProp?.content })">
-      <div ref="bodyRef" data-slot="body" :class="ui.body({ class: pohonProp?.body })" :style="scrollShadowStyle">
+    <ACollapsibleContent
+      data-slot="content"
+      :class="pohon.content({ class: pohonProp?.content })"
+    >
+      <div
+        ref="bodyRef"
+        data-slot="body"
+        :class="pohon.body({ class: pohonProp?.body })"
+        :style="scrollShadowStyle"
+      >
         <slot :open="isOpen">
           {{ text }}
         </slot>
       </div>
-    </CollapsibleContent>
-  </CollapsibleRoot>
+    </ACollapsibleContent>
+  </ACollapsibleRoot>
 </template>

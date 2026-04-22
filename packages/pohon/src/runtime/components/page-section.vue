@@ -1,125 +1,164 @@
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/page-section'
-import type { PButtonProps, PIconProps } from '../types'
-import type { PageFeatureProps } from './page-feature.vue'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { PButtonProps, PIconProps, PPageFeatureProps } from '../types';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/page-section';
 
-type PageSection = ComponentConfig<typeof theme, AppConfig, 'pageSection'>
+type PageSection = ComponentConfig<typeof theme, AppConfig, 'pageSection'>;
 
-export interface PageSectionProps {
+export interface PPageSectionProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'section'
    */
-  as?: any
+  as?: any;
   /**
    * The headline displayed above the title.
    */
-  headline?: string
+  headline?: string;
   /**
    * The icon displayed above the title.
    * @IconifyIcon
    */
-  icon?: PIconProps['name']
-  title?: string
-  description?: string
+  icon?: PIconProps['name'];
+  title?: string;
+  description?: string;
   /**
    * Display a list of Button under the description.
    * `{ size: 'lg' }`{lang="ts-type"}
    */
-  links?: PButtonProps[]
+  links?: Array<PButtonProps>;
   /**
    * Display a list of PageFeature under the description.
    */
-  features?: PageFeatureProps[]
+  features?: Array<PPageFeatureProps>;
   /**
    * The orientation of the section.
    * @defaultValue 'vertical'
    */
-  orientation?: PageSection['variants']['orientation']
+  orientation?: PageSection['variants']['orientation'];
   /**
    * Reverse the order of the default slot.
    * @defaultValue false
    */
-  reverse?: boolean
-  class?: any
-  pohon?: PageSection['slots']
+  reverse?: boolean;
+  class?: any;
+  pohon?: PageSection['slots'];
 }
 
 export interface PageSectionSlots {
-  top?(props?: {}): VNode[]
-  header?(props?: {}): VNode[]
-  leading?(props: { pohon: PageSection['pohon'] }): VNode[]
-  headline?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  body?(props?: {}): VNode[]
-  features?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
-  links?(props?: {}): VNode[]
-  default?(props?: {}): VNode[]
-  bottom?(props?: {}): VNode[]
+  top?: (props?: {}) => Array<VNode>;
+  header?: (props?: {}) => Array<VNode>;
+  leading?: (props: { pohon: PageSection['pohon'] }) => Array<VNode>;
+  headline?: (props?: {}) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  body?: (props?: {}) => Array<VNode>;
+  features?: (props?: {}) => Array<VNode>;
+  footer?: (props?: {}) => Array<VNode>;
+  links?: (props?: {}) => Array<VNode>;
+  default?: (props?: {}) => Array<VNode>;
+  bottom?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Primitive } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentPohon } from '../composables/use-component-pohon'
-import { tv } from '../utils/tv'
-import PPageFeature from './page-feature.vue'
-import PContainer from './container.vue'
-import PIcon from './icon.vue'
-import PButton from './button.vue'
+import { useAppConfig } from '#imports';
+import { APrimitive } from 'akar';
+import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { uv } from '../utils/uv';
+import PButton from './button.vue';
+import PContainer from './container.vue';
+import PIcon from './icon.vue';
+import PPageFeature from './page-feature.vue';
 
-const props = withDefaults(defineProps<PageSectionProps>(), {
+const props = withDefaults(defineProps<PPageSectionProps>(), {
   as: 'section',
-  orientation: 'vertical'
-})
-const slots = defineSlots<PageSectionSlots>()
+  orientation: 'vertical',
+});
+const slots = defineSlots<PageSectionSlots>();
 
-const appConfig = useAppConfig() as PageSection['AppConfig']
-const pohonProp = useComponentPohon('pageSection', props)
+const appConfig = useAppConfig() as PageSection['AppConfig'];
+const pohonProp = useComponentPohon('pageSection', props);
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pageSection || {}) })({
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageSection || {}) })({
   orientation: props.orientation,
   reverse: props.reverse,
   title: !!props.title || !!slots.title,
   description: !!props.description || !!slots.description,
-  body: !!slots.body || (!!props.features?.length || !!slots.features)
-}))
+  body: !!slots.body || (!!props.features?.length || !!slots.features),
+}));
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [pohonProp?.root, props.class] })">
+  <APrimitive
+    :as="as"
+    :data-orientation="orientation"
+    data-slot="root"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
+  >
     <slot name="top" />
 
-    <PContainer data-slot="container" :class="ui.container({ class: pohonProp?.container })">
-      <div v-if="!!slots.header || (icon || !!slots.leading) || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description) || !!slots.body || (features?.length || !!slots.features) || !!slots.footer || (links?.length || !!slots.links)" data-slot="wrapper" :class="ui.wrapper({ class: pohonProp?.wrapper })">
-        <div v-if="!!slots.header || (icon || !!slots.leading) || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description)" data-slot="header" :class="ui.header({ class: pohonProp?.header })">
+    <PContainer
+      data-slot="container"
+      :class="pohon.container({ class: pohonProp?.container })"
+    >
+      <div
+        v-if="!!slots.header || (icon || !!slots.leading) || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description) || !!slots.body || (features?.length || !!slots.features) || !!slots.footer || (links?.length || !!slots.links)"
+        data-slot="wrapper"
+        :class="pohon.wrapper({ class: pohonProp?.wrapper })"
+      >
+        <div
+          v-if="!!slots.header || (icon || !!slots.leading) || (headline || !!slots.headline) || (title || !!slots.title) || (description || !!slots.description)"
+          data-slot="header"
+          :class="pohon.header({ class: pohonProp?.header })"
+        >
           <slot name="header">
-            <div v-if="icon || !!slots.leading" data-slot="leading" :class="ui.leading({ class: pohonProp?.leading })">
-              <slot name="leading" : pohon="ui">
-                <PIcon v-if="icon" :name="icon" data-slot="leadingIcon" :class="ui.leadingIcon({ class: pohonProp?.leadingIcon })" />
+            <div
+              v-if="icon || !!slots.leading"
+              data-slot="leading"
+              :class="pohon.leading({ class: pohonProp?.leading })"
+            >
+              <slot
+                name="leading"
+                :pohon="pohon"
+              >
+                <PIcon
+                  v-if="icon"
+                  :name="icon"
+                  data-slot="leadingIcon"
+                  :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
+                />
               </slot>
             </div>
 
-            <div v-if="headline || !!slots.headline" data-slot="headline" :class="ui.headline({ class: pohonProp?.headline, headline: !slots.headline })">
+            <div
+              v-if="headline || !!slots.headline"
+              data-slot="headline"
+              :class="pohon.headline({ class: pohonProp?.headline, headline: !slots.headline })"
+            >
               <slot name="headline">
                 {{ headline }}
               </slot>
             </div>
 
-            <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: pohonProp?.title })">
+            <h2
+              v-if="title || !!slots.title"
+              data-slot="title"
+              :class="pohon.title({ class: pohonProp?.title })"
+            >
               <slot name="title">
                 {{ title }}
               </slot>
             </h2>
 
-            <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: pohonProp?.description })">
+            <div
+              v-if="description || !!slots.description"
+              data-slot="description"
+              :class="pohon.description({ class: pohonProp?.description })"
+            >
               <slot name="description">
                 {{ description }}
               </slot>
@@ -127,9 +166,17 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pageSecti
           </slot>
         </div>
 
-        <div v-if="!!slots.body || (features?.length || !!slots.features)" data-slot="body" :class="ui.body({ class: pohonProp?.body })">
+        <div
+          v-if="!!slots.body || (features?.length || !!slots.features)"
+          data-slot="body"
+          :class="pohon.body({ class: pohonProp?.body })"
+        >
           <slot name="body">
-            <ul v-if="features?.length || !!slots.features" data-slot="features" :class="ui.features({ class: pohonProp?.features })">
+            <ul
+              v-if="features?.length || !!slots.features"
+              data-slot="features"
+              :class="pohon.features({ class: pohonProp?.features })"
+            >
               <slot name="features">
                 <PPageFeature
                   v-for="(feature, index) in features"
@@ -142,11 +189,24 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pageSecti
           </slot>
         </div>
 
-        <div v-if="!!slots.footer || (links?.length || !!slots.links)" data-slot="footer" :class="ui.footer({ class: pohonProp?.footer })">
+        <div
+          v-if="!!slots.footer || (links?.length || !!slots.links)"
+          data-slot="footer"
+          :class="pohon.footer({ class: pohonProp?.footer })"
+        >
           <slot name="footer">
-            <div v-if="links?.length || !!slots.links" data-slot="links" :class="ui.links({ class: pohonProp?.links })">
+            <div
+              v-if="links?.length || !!slots.links"
+              data-slot="links"
+              :class="pohon.links({ class: pohonProp?.links })"
+            >
               <slot name="links">
-                <PButton v-for="(link, index) in links" :key="index" size="lg" v-bind="link" />
+                <PButton
+                  v-for="(link, index) in links"
+                  :key="index"
+                  size="lg"
+                  v-bind="link"
+                />
               </slot>
             </div>
           </slot>
@@ -154,9 +214,12 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.pageSecti
       </div>
 
       <slot v-if="!!slots.default" />
-      <div v-else-if="orientation === 'horizontal'" class="hidden lg:block" />
+      <div
+        v-else-if="orientation === 'horizontal'"
+        class="hidden lg:block"
+      />
     </PContainer>
 
     <slot name="bottom" />
-  </Primitive>
+  </APrimitive>
 </template>

@@ -1,10 +1,8 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type {
-  AProgressRootEmits,
-  AProgressRootProps,
-} from 'akar';
+import type { AProgressRootEmits, AProgressRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/progress';
 
@@ -47,21 +45,17 @@ export interface PProgressProps extends Pick<AProgressRootProps, 'getValueLabel'
 export interface PProgressEmits extends AProgressRootEmits {}
 
 export type PProgressSlots = {
-  status: (props: { percent?: number }) => any;
+  status?: (props: { percent?: number }) => Array<VNode>;
 } & {
-  [key: string]: (props: { step: number }) => any;
+  [key: string]: (props: { step: number }) => Array<VNode>;
 };
+
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import {
-  APrimitive,
-  AProgressIndicator,
-  AProgressRoot,
-  useForwardPropsEmits,
-} from 'akar';
+import { APrimitive, AProgressIndicator, AProgressRoot, useForwardPropsEmits } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
@@ -171,31 +165,26 @@ function stepVariant(index: number | string) {
   return 'other';
 }
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.progress || {}),
-  })({
-    animation: props.animation,
-    size: props.size,
-    color: props.color,
-    orientation: props.orientation,
-    inverted: props.inverted,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.progress || {}) })({
+  animation: props.animation,
+  size: props.size,
+  color: props.color,
+  orientation: props.orientation,
+  inverted: props.inverted,
+}));
 </script>
 
 <template>
   <APrimitive
     :as="as"
     :data-orientation="orientation"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="progress-root"
   >
     <div
       v-if="!isIndeterminate && (status || !!slots.status)"
+      data-slot="status"
       :class="pohon.status({ class: pohonProp?.status })"
-      data-pohon="progress-status"
       :style="statusStyle"
     >
       <slot
@@ -209,27 +198,27 @@ const pohon = computed(() =>
     <AProgressRoot
       v-bind="rootProps"
       :max="realMax"
+      data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
-      data-pohon="progress-base"
       style="transform: translateZ(0)"
     >
       <AProgressIndicator
+        data-slot="indicator"
         :class="pohon.indicator({ class: pohonProp?.indicator })"
-        data-pohon="progress-indicator"
         :style="indicatorStyle"
       />
     </AProgressRoot>
 
     <div
       v-if="hasSteps"
+      data-slot="steps"
       :class="pohon.steps({ class: pohonProp?.steps })"
-      data-pohon="progress-steps"
     >
       <div
         v-for="(step, index) in max"
         :key="index"
+        data-slot="step"
         :class="pohon.step({ class: pohonProp?.step, step: stepVariant(index) })"
-        data-pohon="progress-step"
       >
         <slot
           :name="`step-${index}`"

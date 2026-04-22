@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ACheckboxGroupRootEmits, ACheckboxGroupRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { PCheckboxProps } from '../types';
 import type { AcceptableValue, GetItemKeys, GetModelValue, GetModelValueEmits } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -9,6 +10,7 @@ import theme from '#build/pohon/checkbox-group';
 type CheckboxGroup = ComponentConfig<typeof theme, AppConfig, 'checkboxGroup'>;
 
 export type CheckboxGroupValue = AcceptableValue;
+
 export type PCheckboxGroupItem = CheckboxGroupValue | {
   label?: string;
   description?: string;
@@ -19,12 +21,7 @@ export type PCheckboxGroupItem = CheckboxGroupValue | {
   [key: string]: any;
 };
 
-export interface PCheckboxGroupProps<
-  T extends Array<PCheckboxGroupItem> = Array<PCheckboxGroupItem>,
-  VK extends GetItemKeys<T> = 'value',
-> extends
-  Pick<ACheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>,
-  Pick<PCheckboxProps, 'color' | 'indicator' | 'icon'> {
+export interface PCheckboxGroupProps<T extends Array<PCheckboxGroupItem> = Array<PCheckboxGroupItem>, VK extends GetItemKeys<T> = 'value'> extends Pick<ACheckboxGroupRootProps, 'disabled' | 'loop' | 'name' | 'required'>, Pick<PCheckboxProps, 'color' | 'indicator' | 'icon'> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -63,7 +60,7 @@ export interface PCheckboxGroupProps<
    * The orientation the checkbox buttons are laid out.
    * @defaultValue 'vertical'
    */
-  orientation?: ACheckboxGroupRootProps['orientation'];
+  orientation?: CheckboxGroup['variants']['orientation'];
   class?: any;
   pohon?: CheckboxGroup['slots'] & PCheckboxProps['pohon'];
 }
@@ -72,24 +69,24 @@ export type PCheckboxGroupEmits<T extends Array<PCheckboxGroupItem> = Array<PChe
   change: [event: Event];
 } & GetModelValueEmits<T, VK, true>;
 
-type SlotProps<T extends PCheckboxGroupItem> = (props: { item: T & { id: string } }) => any;
+type SlotProps<T extends PCheckboxGroupItem> = (props: { item: T & { id: string } }) => Array<VNode>;
 
 export interface PCheckboxGroupSlots<T extends Array<PCheckboxGroupItem> = Array<PCheckboxGroupItem>> {
-  legend: (props?: object) => any;
-  label: SlotProps<T[number]>;
-  description: SlotProps<T[number]>;
+  legend?: (props?: {}) => Array<VNode>;
+  label?: SlotProps<T[number]>;
+  description?: SlotProps<T[number]>;
 }
 </script>
 
 <script setup lang="ts" generic="T extends PCheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'">
 import { useAppConfig } from '#imports';
-import { isNumber, isString, omit } from '@vinicunca/perkakas';
+import { isNumber, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { ACheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'akar';
 import { computed, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
-import { getProp } from '../utils';
+import { getProp, omit } from '../utils';
 import { uv } from '../utils/uv';
 import PCheckbox from './checkbox.vue';
 
@@ -135,6 +132,7 @@ const pohon = computed(() => uv({ extend: theme, ...(appConfig.pohon?.checkboxGr
   orientation: props.orientation,
   color: props.color,
   variant: props.variant,
+  disabled: disabled.value,
 }));
 
 function normalizeItem(item: any) {
@@ -154,9 +152,9 @@ function normalizeItem(item: any) {
     };
   }
 
-  const value = getProp({ object: item, path: props.valueKey as string });
-  const label = getProp({ object: item, path: props.labelKey as string });
-  const description = getProp({ object: item, path: props.descriptionKey as string });
+  const value = getProp(item, props.valueKey as string);
+  const label = getProp(item, props.labelKey as string);
+  const description = getProp(item, props.descriptionKey as string);
 
   return {
     ...item,
@@ -190,19 +188,19 @@ function onUpdate(value: any) {
     v-bind="rootProps"
     :name="name"
     :disabled="disabled"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="checkbox-group-root"
     @update:model-value="onUpdate"
   >
     <fieldset
+      data-slot="fieldset"
       :class="pohon.fieldset({ class: pohonProp?.fieldset })"
-      data-pohon="checkbox-group-fieldset"
       v-bind="ariaAttrs"
     >
       <legend
         v-if="legend || !!slots.legend"
+        data-slot="legend"
         :class="pohon.legend({ class: pohonProp?.legend })"
-        data-pohon="checkbox-group-legend"
       >
         <slot name="legend">
           {{ legend }}
@@ -217,9 +215,9 @@ function onUpdate(value: any) {
         :size="size"
         :name="name"
         :disabled="item.disabled || disabled"
-        :pohon="{ ...(props.pohon ? omit(props.pohon, ['root']) : undefined), ...(item.pohon || {}) }"
-        :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class] })"
-        data-pohon="checkbox-group-item"
+        :pohon="{ ...(pohonProp ? omit(pohonProp, ['root']) : undefined), ...(item.pohon || {}) }"
+        data-slot="item"
+        :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class], disabled: item.disabled || disabled })"
       >
         <template
           v-for="(_, name) in getProxySlots()"

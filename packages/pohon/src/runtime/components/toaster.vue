@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { AToastProviderProps } from 'akar';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/toaster';
 
@@ -37,7 +38,7 @@ export interface PToasterProps extends Omit<AToastProviderProps, 'swipeDirection
 }
 
 export interface PToasterSlots {
-  default: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
 }
 
 export default {
@@ -47,7 +48,6 @@ export default {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { omit } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   AToastPortal,
@@ -59,6 +59,7 @@ import { computed, provide, ref, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { usePortal } from '../composables/use-portal';
 import { toastMaxInjectionKey, useToast } from '../composables/use-toast';
+import { omit } from '../utils';
 import { uv } from '../utils/uv';
 import PToast from './toast.vue';
 
@@ -72,7 +73,6 @@ const props = withDefaults(
     max: 5,
   },
 );
-
 defineSlots<PToasterSlots>();
 
 const { toasts, remove } = useToast();
@@ -102,15 +102,10 @@ const swipeDirection = computed(() => {
   return 'right';
 });
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.toaster || {}),
-  })({
-    position: props.position,
-    swipeDirection: swipeDirection.value,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.toaster || {}) })({
+  position: props.position,
+  swipeDirection: swipeDirection.value,
+}));
 
 function onUpdateOpen(value: boolean, id: string | number) {
   if (value) {
@@ -158,8 +153,8 @@ function getOffset(index: number) {
         '--translate': expanded ? 'calc(var(--offset) * var(--translate-factor))' : 'calc(var(--before) * var(--gap))',
         '--transform': 'translateY(var(--translate)) scale(var(--scale))',
       }"
+      data-slot="base"
       :class="pohon.base({ class: [pohonProp?.base, toast.onClick ? 'cursor-pointer' : undefined] })"
-      data-pohon="toaster-base"
       @update:open="onUpdateOpen($event, toast.id)"
       @click="toast.onClick && toast.onClick(toast)"
     />
@@ -167,8 +162,8 @@ function getOffset(index: number) {
     <AToastPortal v-bind="portalProps">
       <AToastViewport
         :data-expanded="expanded"
+        data-slot="viewport"
         :class="pohon.viewport({ class: [pohonProp?.viewport, props.class] })"
-        data-pohon="toaster-viewport"
         :style="{
           '--scale-factor': '0.05',
           '--translate-factor': position?.startsWith('top') ? '1px' : '-1px',
@@ -182,4 +177,3 @@ function getOffset(index: number) {
     </AToastPortal>
   </AToastProvider>
 </template>
-40

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PChipProps, PIconProps } from '../types';
 import type { ImgHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
@@ -12,7 +13,7 @@ export interface PAvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes,
    * The element or component this component should render as.
    * @defaultValue 'span'
    */
-  as?: any;
+  as?: any | { root?: any; img?: any };
   src?: string;
   alt?: string;
   /**
@@ -31,13 +32,16 @@ export interface PAvatarProps extends /** @vue-ignore */ Omit<ImgHTMLAttributes,
 }
 
 export interface PAvatarSlots {
-  default: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
+import ImageComponent from '#build/pohon-image-component';
 import { useAppConfig } from '#imports';
+import { isFunction, isString } from '@vinicunca/perkakas';
 import { APrimitive, APrimitiveSlot } from 'akar';
+import { defu } from 'defu';
 import { computed, ref, watch } from 'vue';
 import { useAvatarGroup } from '../composables/use-avatar-group';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -47,44 +51,39 @@ import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(
-  defineProps<PAvatarProps>(),
-  { as: 'span' },
-);
+const props = defineProps<PAvatarProps>();
 
-const fallback = computed(() =>
-  props.text || (props.alt || '')
-    .split(' ')
-    .map((word) => word.charAt(0))
-    .join('')
-    .substring(0, 2),
-);
+const as = computed(() => {
+  if (isString(props.as) || isFunction(props.as?.render)) {
+    return { root: props.as };
+  }
+
+  return defu(props.as, { root: 'span' });
+});
+
+const fallback = computed(() => props.text || (props.alt || '').split(' ').map((word) => word.charAt(0)).join('').substring(0, 2));
 
 const appConfig = useAppConfig() as Avatar['AppConfig'];
 const pohonProp = useComponentPohon('avatar', props);
-
 const { size } = useAvatarGroup(props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.avatar || {}),
-  })({
-    size: size.value,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.avatar || {}) })({
+  size: size.value,
+}));
 
-const sizePx = computed(() => ({
-  '3xs': 16,
-  '2xs': 20,
-  'xs': 24,
-  'sm': 28,
-  'md': 32,
-  'lg': 36,
-  'xl': 40,
-  '2xl': 44,
-  '3xl': 48,
-})[props.size || 'md']);
+const rootClass = computed(() => pohon.value.root({ class: [pohonProp.value?.root, props.class] }));
+
+const sizePx = computed(() => {
+  const sizeClass = rootClass.value.split(' ').find((c) => /^size-\d+$/.test(c));
+  if (sizeClass) {
+    const num = Number.parseFloat(sizeClass.split('-')[1] ?? '');
+    if (!Number.isNaN(num)) {
+      return num * 4;
+    }
+  }
+
+  return null;
+});
 
 const error = ref(false);
 
@@ -102,23 +101,24 @@ function onError() {
 <template>
   <component
     :is="props.chip ? PChip : APrimitive"
-    :as="as"
+    :as="as.root"
     v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
-    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
+    data-slot="root"
+    :class="rootClass"
     :style="props.style"
-    data-pohon="avatar-root"
   >
-    <img
+    <component
+      :is="as.img || ImageComponent"
       v-if="src && !error"
       :src="src"
       :alt="alt"
       :width="sizePx"
       :height="sizePx"
       v-bind="$attrs"
+      data-slot="image"
       :class="pohon.image({ class: pohonProp?.image })"
-      data-pohon="avatar-image"
       @error="onError"
-    >
+    />
 
     <APrimitiveSlot
       v-else
@@ -128,16 +128,14 @@ function onError() {
         <PIcon
           v-if="icon"
           :name="icon"
+          data-slot="icon"
           :class="pohon.icon({ class: pohonProp?.icon })"
-          data-pohon="avatar-icon"
         />
         <span
           v-else
+          data-slot="fallback"
           :class="pohon.fallback({ class: pohonProp?.fallback })"
-          data-pohon="avatar-fallback"
-        >
-          {{ fallback || '&nbsp;' }}
-        </span>
+        >{{ fallback || '&nbsp;' }}</span>
       </slot>
     </APrimitiveSlot>
   </component>

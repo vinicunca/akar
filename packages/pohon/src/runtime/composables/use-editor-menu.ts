@@ -92,10 +92,10 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const searchTerm = options.searchTerm ?? ref('');
   let renderer: VueRenderer | null = null;
   let element: HTMLElement | null = null;
-  let handleMouseDown: ((e: MouseEvent) => void) | null = null;
+  let handleMouseDown: ((event: MouseEvent) => void) | null = null;
   let commandFn: ((item: T) => void) | null = null;
   let keyDownHandler: ((props: { event: KeyboardEvent }) => boolean) | null = null;
-  let globalKeyHandler: ((e: KeyboardEvent) => void) | null = null;
+  let globalKeyHandler: ((event: KeyboardEvent) => void) | null = null;
   let blurHandler: (() => void) | null = null;
   let triggerClientRect: (() => DOMRect | null) | null = null;
   let handleHover: ((index: number) => void) | null = null;
@@ -267,8 +267,8 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
       state: { type: String, required: true },
     },
     setup(menuProps: any) {
-      function handleClick(e: MouseEvent, item: T, selectableIndex: number) {
-        e.preventDefault();
+      function handleClick(event: MouseEvent, item: T, selectableIndex: number) {
+        event.preventDefault();
         menuProps.onSelect(item, selectableIndex);
       }
 
@@ -335,7 +335,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
                 'aria-selected': isHighlighted,
                 'data-highlighted': isHighlighted ? '' : undefined,
                 'data-disabled': itemData.disabled ? '' : undefined,
-                'onMousedown': (e: MouseEvent) => handleClick(e, item, selectableIndex),
+                'onMousedown': (event: MouseEvent) => handleClick(event, item, selectableIndex),
                 'onMouseenter': () => handleMouseEnter(selectableIndex),
                 'ref': (el: any) => {
                   if (el && isHighlighted) {

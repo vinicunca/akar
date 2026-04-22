@@ -1,9 +1,9 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { Ref, VNode } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PLinkProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
-
 import theme from '#build/pohon/button';
 
 type Button = ComponentConfig<typeof theme, AppConfig, 'button'>;
@@ -36,16 +36,14 @@ export interface PButtonProps extends UseComponentIconsProps, Omit<PLinkProps, '
 }
 
 export interface PButtonSlots {
-  leading: (props: { pohon: Button['pohon'] }) => any;
-  default: (props: { pohon: Button['pohon'] }) => any;
-  trailing: (props: { pohon: Button['pohon'] }) => any;
+  leading?: (props: { pohon: Button['pohon'] }) => Array<VNode>;
+  default?: (props: { pohon: Button['pohon'] }) => Array<VNode>;
+  trailing?: (props: { pohon: Button['pohon'] }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import type { Ref } from 'vue';
 import { useAppConfig } from '#imports';
-import { isNonNullish, omit } from '@vinicunca/perkakas';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, inject, ref } from 'vue';
@@ -53,7 +51,7 @@ import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { formLoadingInjectionKey } from '../composables/use-form-field';
-import { mergeClasses } from '../utils';
+import { mergeClasses, omit } from '../utils';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
@@ -84,16 +82,10 @@ async function onClickWrapper(event: MouseEvent) {
 }
 
 const isLoading = computed(() => {
-  return props.loading
-    || (props.loadingAuto && (loadingAutoState.value || (formLoading?.value && props.type === 'submit')));
+  return props.loading || (props.loadingAuto && (loadingAutoState.value || (formLoading?.value && props.type === 'submit')));
 });
 
-const {
-  isLeading,
-  isTrailing,
-  leadingIconName,
-  trailingIconName,
-} = useComponentIcons(
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(
   computed(() => ({ ...props, loading: isLoading.value })),
 );
 
@@ -132,20 +124,20 @@ const pohon = computed(() =>
 <template>
   <PLink
     v-slot="{ active, ...slotProps }"
+    :type="type"
+    :disabled="disabled || isLoading"
     v-bind="omit(linkProps, ['type', 'disabled', 'onClick'])"
-    :type="props.type"
-    :disabled="props.disabled || isLoading"
     custom
   >
     <PLinkBase
       v-bind="slotProps"
+      data-slot="base"
       :class="pohon.base({
         class: [pohonProp?.base, props.class],
         active,
         ...(active && activeVariant ? { variant: activeVariant } : {}),
         ...(active && activeColor ? { color: activeColor } : {}),
       })"
-      data-pohon="button-base"
       @click="onClickWrapper"
     >
       <slot
@@ -155,23 +147,23 @@ const pohon = computed(() =>
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
+          data-slot="leadingIcon"
           :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon, active })"
-          data-pohon="button-leading-icon"
         />
         <PAvatar
           v-else-if="!!avatar"
           :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
+          data-slot="leadingAvatar"
           :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar, active })"
-          data-pohon="button-leading-avatar"
         />
       </slot>
 
       <slot :pohon="pohon">
         <span
-          v-if="isNonNullish(label)"
+          v-if="label !== undefined && label !== null"
+          data-slot="label"
           :class="pohon.label({ class: pohonProp?.label, active })"
-          data-pohon="button-label"
         >
           {{ label }}
         </span>
@@ -184,8 +176,8 @@ const pohon = computed(() =>
         <PIcon
           v-if="isTrailing && trailingIconName"
           :name="trailingIconName"
+          data-slot="trailingIcon"
           :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon, active })"
-          data-pohon="button-trailing-icon"
         />
       </slot>
     </PLinkBase>

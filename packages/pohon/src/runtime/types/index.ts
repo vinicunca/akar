@@ -91,7 +91,6 @@ export * from '../components/page-links.vue';
 export * from '../components/page-list.vue';
 export * from '../components/page-logos.vue';
 export * from '../components/page-section.vue';
-export * from '../components/page.vue';
 export * from '../components/pagination.vue';
 export * from '../components/pin-input.vue';
 export * from '../components/popover.vue';

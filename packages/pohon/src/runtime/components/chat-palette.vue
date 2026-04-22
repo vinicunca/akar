@@ -1,54 +1,64 @@
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/chat-palette'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/chat-palette';
 
-type ChatPalette = ComponentConfig<typeof theme, AppConfig, 'chatPalette'>
+type ChatPalette = ComponentConfig<typeof theme, AppConfig, 'chatPalette'>;
 
-export interface ChatPaletteProps {
+export interface PChatPaletteProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
    */
-  as?: any
-  class?: any
-  pohon?: ChatPalette['slots']
+  as?: any;
+  class?: any;
+  pohon?: ChatPalette['slots'];
 }
 
-export interface ChatPaletteSlots {
-  default?(props?: {}): VNode[]
-  prompt?(props?: {}): VNode[]
+export interface PChatPaletteSlots {
+  default?: (props?: {}) => Array<VNode>;
+  prompt?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Primitive, Slot } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useComponentPohon } from '../composables/use-component-pohon'
-import { tv } from '../utils/tv'
+import { useAppConfig } from '#imports';
+import { APrimitive, APrimitiveSlot } from 'akar';
+import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { uv } from '../utils/uv';
 
-const props = defineProps<ChatPaletteProps>()
-const slots = defineSlots<ChatPaletteSlots>()
+const props = defineProps<PChatPaletteProps>();
+const slots = defineSlots<PChatPaletteSlots>();
 
-const appConfig = useAppConfig() as ChatPalette['AppConfig']
-const pohonProp = useComponentPohon('chatPalette', props)
+const appConfig = useAppConfig() as ChatPalette['AppConfig'];
+const pohonProp = useComponentPohon('chatPalette', props);
 
-// eslint-disable-next-line vue/no-dupe-keys
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.chatPalette || {}) })())
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatPalette || {}) })());
 </script>
 
 <template>
-  <Primitive :as="as" data-slot="root" :class="ui.root({ class: [pohonProp?.root, props.class] })">
-    <div data-slot="content" :class="ui.content({ class: pohonProp?.content })">
-      <Slot compact>
+  <APrimitive
+    :as="as"
+    data-slot="root"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
+  >
+    <div
+      data-slot="content"
+      :class="pohon.content({ class: pohonProp?.content })"
+    >
+      <APrimitiveSlot compact>
         <slot />
-      </Slot>
+      </APrimitiveSlot>
     </div>
 
-    <Slot v-if="!!slots.prompt" data-slot="prompt" :class="ui.prompt({ class: pohonProp?.prompt })">
+    <APrimitiveSlot
+      v-if="!!slots.prompt"
+      data-slot="prompt"
+      :class="pohon.prompt({ class: pohonProp?.prompt })"
+    >
       <slot name="prompt" />
-    </Slot>
-  </Primitive>
+    </APrimitiveSlot>
+  </APrimitive>
 </template>

@@ -1,8 +1,9 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { PAvatarProps, PIconProps } from '../types';
-import type { DynamicSlots } from '../types/utils';
+import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/timeline';
 
@@ -41,30 +42,39 @@ export interface PTimelineProps<T extends PTimelineItem = PTimelineItem> {
    * @defaultValue 'vertical'
    */
   orientation?: Timeline['variants']['orientation'];
+  /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>;
   defaultValue?: string | number;
   reverse?: boolean;
   class?: any;
   pohon?: Timeline['slots'];
 }
 
-type SlotProps<T extends PTimelineItem> = (props: { item: T }) => any;
+type SlotProps<T extends PTimelineItem> = (props: { item: T }) => Array<VNode>;
+
+export interface PTimelineEmits<T extends PTimelineItem = PTimelineItem> {
+  select: [event: Event, item: T];
+}
 
 export type PTimelineSlots<T extends PTimelineItem = PTimelineItem> = {
-  indicator: SlotProps<T>;
-  wrapper: SlotProps<T>;
-  date: SlotProps<T>;
-  title: SlotProps<T>;
-  description: SlotProps<T>;
+  indicator?: SlotProps<T>;
+  wrapper?: SlotProps<T>;
+  date?: SlotProps<T>;
+  title?: SlotProps<T>;
+  description?: SlotProps<T>;
 } & DynamicSlots<T, 'indicator' | 'wrapper' | 'date' | 'title' | 'description', { item: T }>;
 
 </script>
 
 <script setup lang="ts" generic="T extends PTimelineItem">
 import { useAppConfig } from '#imports';
-import { isString } from '@vinicunca/perkakas';
 import { APrimitive, ASeparator } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { getProp } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
 
@@ -72,8 +82,10 @@ const props = withDefaults(
   defineProps<PTimelineProps<T>>(),
   {
     orientation: 'vertical',
+    valueKey: 'value',
   },
 );
+const emits = defineEmits<PTimelineEmits<T>>();
 const slots = defineSlots<PTimelineSlots<T>>();
 
 const modelValue = defineModel<string | number>();
@@ -81,23 +93,18 @@ const modelValue = defineModel<string | number>();
 const appConfig = useAppConfig() as Timeline['AppConfig'];
 const pohonProp = useComponentPohon('timeline', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.timeline || {}),
-  })({
-    orientation: props.orientation,
-    size: props.size,
-    color: props.color,
-    reverse: props.reverse,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.timeline || {}) })({
+  orientation: props.orientation,
+  size: props.size,
+  color: props.color,
+  reverse: props.reverse,
+}));
 
 const currentStepIndex = computed(() => {
   const value = modelValue.value ?? props.defaultValue;
 
-  if (isString(value)) {
-    return props.items.findIndex((item) => item.value === value) ?? -1;
+  if (typeof value === 'string') {
+    return props.items.findIndex((item) => getProp(item, props.valueKey as string) === value) ?? -1;
   }
 
   if (props.reverse) {
@@ -121,33 +128,38 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
     return index < currentStepIndex.value ? 'completed' : undefined;
   }
 }
+
+function onSelect(event: Event, item: T) {
+  emits('select', event, item);
+}
 </script>
 
 <template>
   <APrimitive
     :as="as"
     :data-orientation="orientation"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="timeline-root"
   >
     <div
       v-for="(item, index) in items"
-      :key="item.value ?? index"
+      :key="index"
+      data-slot="item"
       :class="pohon.item({ class: [pohonProp?.item, item.pohon?.item, item.class] })"
       :data-state="getItemState(index)"
-      data-pohon="timeline-item"
+      @click="onSelect($event, item)"
     >
       <div
+        data-slot="container"
         :class="pohon.container({ class: [pohonProp?.container, item.pohon?.container] })"
-        data-pohon="timeline-container"
       >
         <PAvatar
           :size="size"
           :icon="item.icon"
           v-bind="typeof item.avatar === 'object' ? item.avatar : {}"
+          data-slot="indicator"
           :class="pohon.indicator({ class: [pohonProp?.indicator, item.pohon?.indicator] })"
-          :pohon="{ icon: 'akar:color-inherit', fallback: 'color-inherit' }"
-          data-pohon="timeline-indicator"
+          :pohon="{ icon: 'text-inherit', fallback: 'text-inherit' }"
         >
           <slot
             :name="((item.slot ? `${item.slot}-indicator` : 'indicator') as keyof PTimelineSlots<T>)"
@@ -157,14 +169,14 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
 
         <ASeparator
           v-if="index < items.length - 1"
+          data-slot="separator"
           :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator] })"
           :orientation="props.orientation"
-          data-pohon="timeline-separator"
         />
       </div>
 
       <div
-        data-pohon="timeline-wrapper"
+        data-slot="wrapper"
         :class="pohon.wrapper({ class: [pohonProp?.wrapper, item.pohon?.wrapper] })"
       >
         <slot
@@ -173,7 +185,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
         >
           <div
             v-if="item.date || !!slots[(item.slot ? `${item.slot}-date` : 'date') as keyof PTimelineSlots<T>]"
-            data-pohon="timeline-date"
+            data-slot="date"
             :class="pohon.date({ class: [pohonProp?.date, item.pohon?.date] })"
           >
             <slot
@@ -185,7 +197,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
           </div>
           <div
             v-if="item.title || !!slots[(item.slot ? `${item.slot}-title` : 'title') as keyof PTimelineSlots<T>]"
-            data-pohon="timeline-title"
+            data-slot="title"
             :class="pohon.title({ class: [pohonProp?.title, item.pohon?.title] })"
           >
             <slot
@@ -197,7 +209,7 @@ function getItemState(index: number): 'active' | 'completed' | undefined {
           </div>
           <div
             v-if="item.description || !!slots[(item.slot ? `${item.slot}-description` : 'description') as keyof PTimelineSlots<T>]"
-            data-pohon="timeline-description"
+            data-slot="description"
             :class="pohon.description({ class: [pohonProp?.description, item.pohon?.description] })"
           >
             <slot

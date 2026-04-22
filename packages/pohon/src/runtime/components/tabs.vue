@@ -2,6 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ATabsRootEmits, ATabsRootProps } from 'akar';
+import type { ComponentPublicInstance, VNode } from 'vue';
 import type { PAvatarProps, PBadgeProps, PIconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -54,12 +55,17 @@ export interface PTabsProps<T extends PTabsItem = PTabsItem> extends Pick<ATabsR
    * The orientation of the tabs.
    * @defaultValue 'horizontal'
    */
-  orientation?: ATabsRootProps['orientation'];
+  orientation?: Tabs['variants']['orientation'];
   /**
    * The content of the tabs, can be disabled to prevent rendering the content.
    * @defaultValue true
    */
   content?: boolean;
+  /**
+   * The key used to get the value from the item.
+   * @defaultValue 'value'
+   */
+  valueKey?: GetItemKeys<T>;
   /**
    * The key used to get the label from the item.
    * @defaultValue 'label'
@@ -71,22 +77,21 @@ export interface PTabsProps<T extends PTabsItem = PTabsItem> extends Pick<ATabsR
 
 export interface PTabsEmits extends ATabsRootEmits<string | number> {}
 
-type SlotProps<T extends PTabsItem> = (props: { item: T; index: number; pohon: Tabs['pohon'] }) => any;
+type SlotProps<T extends PTabsItem> = (props: { item: T; index: number; pohon: Tabs['pohon'] }) => Array<VNode>;
 
 export type PTabsSlots<T extends PTabsItem = PTabsItem> = {
-  'leading': SlotProps<T>;
-  'default': (props: { item: T; index: number }) => any;
-  'trailing': SlotProps<T>;
-  'content': SlotProps<T>;
-  'list-leading': (props?: object) => any;
-  'list-trailing': (props?: object) => any;
+  'leading'?: SlotProps<T>;
+  'default'?: (props: { item: T; index: number }) => Array<VNode>;
+  'trailing'?: SlotProps<T>;
+  'content'?: SlotProps<T>;
+  'list-leading'?: (props?: {}) => Array<VNode>;
+  'list-trailing'?: (props?: {}) => Array<VNode>;
 } & DynamicSlots<T, undefined, { index: number; pohon: Tabs['pohon'] }>;
+
 </script>
 
 <script setup lang="ts" generic="T extends PTabsItem">
-import type { ComponentPublicInstance } from 'vue';
 import { useAppConfig } from '#imports';
-import { isNumber, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   ATabsContent,
@@ -111,6 +116,7 @@ const props = withDefaults(
     defaultValue: '0',
     orientation: 'horizontal',
     unmountOnHide: true,
+    valueKey: 'value',
     labelKey: 'label',
   },
 );
@@ -120,22 +126,14 @@ const slots = defineSlots<PTabsSlots<T>>();
 const appConfig = useAppConfig() as Tabs['AppConfig'];
 const pohonProp = useComponentPohon('tabs', props);
 
-const rootProps = useForwardPropsEmits(
-  reactivePick(props, 'as', 'unmountOnHide'),
-  emits,
-);
+const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'unmountOnHide'), emits);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.tabs || {}),
-  })({
-    color: props.color,
-    variant: props.variant,
-    size: props.size,
-    orientation: props.orientation,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.tabs || {}) })({
+  color: props.color,
+  variant: props.variant,
+  size: props.size,
+  orientation: props.orientation,
+}));
 
 const triggersRef = ref<Array<ComponentPublicInstance>>([]);
 
@@ -156,16 +154,16 @@ defineExpose({
     :default-value="defaultValue"
     :orientation="orientation"
     :activation-mode="activationMode"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="tabs-root"
   >
     <ATabsList
+      data-slot="list"
       :class="pohon.list({ class: pohonProp?.list })"
-      data-pohon="tabs-list"
     >
       <ATabsIndicator
+        data-slot="indicator"
         :class="pohon.indicator({ class: pohonProp?.indicator })"
-        data-pohon="tabs-indicator"
       />
 
       <slot name="list-leading" />
@@ -174,10 +172,10 @@ defineExpose({
         v-for="(item, index) of items"
         :key="index"
         :ref="el => setTriggerRef(index, el)"
-        :value="item.value ?? String(index)"
+        :value="getProp(item, props.valueKey as string) ?? String(index)"
         :disabled="item.disabled"
+        data-slot="trigger"
         :class="pohon.trigger({ class: [pohonProp?.trigger, item.pohon?.trigger] })"
-        data-pohon="tabs-trigger"
       >
         <slot
           name="leading"
@@ -188,27 +186,27 @@ defineExpose({
           <PIcon
             v-if="item.icon"
             :name="item.icon"
+            data-slot="leadingIcon"
             :class="pohon.leadingIcon({ class: [pohonProp?.leadingIcon, item.pohon?.leadingIcon] })"
-            data-pohon="tabs-leading-icon"
           />
           <PAvatar
             v-else-if="item.avatar"
             :size="((item.pohon?.leadingAvatarSize || pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="item.avatar"
+            data-slot="leadingAvatar"
             :class="pohon.leadingAvatar({ class: [pohonProp?.leadingAvatar, item.pohon?.leadingAvatar] })"
-            data-pohon="tabs-leading-avatar"
           />
         </slot>
 
         <span
-          v-if="getProp({ object: item, path: props.labelKey as string }) || !!slots.default"
+          v-if="getProp(item, props.labelKey as string) || !!slots.default"
+          data-slot="label"
           :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label] })"
-          data-pohon="tabs-label"
         >
           <slot
             :item="item"
             :index="index"
-          >{{ getProp({ object: item, path: props.labelKey as string }) }}</slot>
+          >{{ getProp(item, props.labelKey as string) }}</slot>
         </span>
 
         <slot
@@ -222,9 +220,9 @@ defineExpose({
             color="neutral"
             variant="outline"
             :size="((item.pohon?.trailingBadgeSize || pohonProp?.trailingBadgeSize || pohon.trailingBadgeSize()) as PBadgeProps['size'])"
-            v-bind="(isString(item.badge) || isNumber(item.badge)) ? { label: item.badge } : item.badge"
+            v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+            data-slot="trailingBadge"
             :class="pohon.trailingBadge({ class: [pohonProp?.trailingBadge, item.pohon?.trailingBadge] })"
-            data-pohon="tabs-trailing-badge"
           />
         </slot>
       </ATabsTrigger>
@@ -236,9 +234,9 @@ defineExpose({
       <ATabsContent
         v-for="(item, index) of items"
         :key="index"
-        :value="item.value ?? String(index)"
+        :value="getProp(item, props.valueKey as string) ?? String(index)"
+        data-slot="content"
         :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content, item.class] })"
-        data-pohon="tabs-content"
       >
         <slot
           :name="((item.slot || 'content') as keyof PTabsSlots<T>)"

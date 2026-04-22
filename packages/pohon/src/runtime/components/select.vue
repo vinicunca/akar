@@ -7,6 +7,7 @@ import type {
   ASelectRootEmits,
   ASelectRootProps,
 } from 'akar';
+import type { VNode } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PChipProps, PIconProps, PInputProps } from '../types';
 import type { ButtonHTMLAttributes } from '../types/html';
@@ -23,8 +24,6 @@ import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/select';
 
 type Select = ComponentConfig<typeof theme, AppConfig, 'select'>;
-
-type ExcludeItem = { type: 'label' | 'separator' };
 
 export type PSelectValue = AcceptableValue;
 export type PSelectItem = PSelectValue | {
@@ -43,18 +42,15 @@ export type PSelectItem = PSelectValue | {
   type?: 'label' | 'separator' | 'item';
   value?: PSelectValue;
   disabled?: boolean;
-  onSelect?: (event?: Event) => void;
+  onSelect?: (event: Event) => void;
   class?: any;
   pohon?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemWrapper' | 'itemLabel' | 'itemDescription' | 'itemTrailing' | 'itemTrailingIcon'>;
   [key: string]: any;
 };
 
-export interface PSelectProps<
-  T extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>,
-  VK extends GetItemKeys<T> = 'value',
-  M extends boolean = false,
-  Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
-> extends Omit<ASelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
+type ExcludeItem = { type: 'label' | 'separator' };
+
+export interface PSelectProps<T extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>> extends Omit<ASelectRootProps<T>, 'dir' | 'multiple' | 'modelValue' | 'defaultValue' | 'by'>, UseComponentIconsProps, /** @vue-ignore */ Omit<ButtonHTMLAttributes, 'type' | 'disabled' | 'name'> {
   id?: string;
   /** The placeholder text when the select is empty. */
   placeholder?: string;
@@ -89,6 +85,7 @@ export interface PSelectProps<
   content?: Omit<ASelectContentProps, 'as' | 'asChild' | 'forceMount'> & Partial<EmitsToProps<ASelectContentEmits>>;
   /**
    * Display an arrow alongside the menu.
+   * `{ rounded: true }`{lang="ts-type"}
    * @defaultValue false
    */
   arrow?: boolean | Omit<ASelectArrowProps, 'as' | 'asChild'>;
@@ -140,7 +137,7 @@ export interface PSelectEmits<
   'update:modelValue': [value: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>];
 }
 
-type SlotProps<T extends PSelectItem> = (props: { item: T; index: number; pohon: Select['pohon'] }) => any;
+type SlotProps<T extends PSelectItem> = (props: { item: T; index: number; pohon: Select['pohon'] }) => Array<VNode>;
 
 export interface PSelectSlots<
   A extends ArrayOrNested<PSelectItem> = ArrayOrNested<PSelectItem>,
@@ -149,34 +146,21 @@ export interface PSelectSlots<
   Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>,
   T extends NestedItem<A> = NestedItem<A>,
 > {
-  'leading': (props: {
-    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>;
-    open: boolean;
-    pohon: Select['pohon'];
-  }) => any;
-  'default': (props: {
-    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>;
-    open: boolean;
-    pohon: Select['pohon'];
-  }) => any;
-  'trailing': (props: {
-    modelValue?: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>;
-    open: boolean;
-    pohon: Select['pohon'];
-  }) => any;
-  'item': SlotProps<T>;
-  'item-leading': SlotProps<T>;
-  'item-label': (props: { item: T; index: number }) => any;
-  'item-description': (props: { item: T; index: number }) => any;
-  'item-trailing': SlotProps<T>;
-  'content-top': (props?: object) => any;
-  'content-bottom': (props?: object) => any;
+  'leading'?: (props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>; open: boolean; pohon: Select['pohon'] }) => Array<VNode>;
+  'default'?: (props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>; open: boolean; pohon: Select['pohon'] }) => Array<VNode>;
+  'trailing'?: (props: { modelValue: ApplyModifiers<GetModelValue<A, VK, M, ExcludeItem>, Mod>; open: boolean; pohon: Select['pohon'] }) => Array<VNode>;
+  'item'?: SlotProps<T>;
+  'item-leading'?: SlotProps<T>;
+  'item-label'?: (props: { item: T; index: number }) => Array<VNode>;
+  'item-description'?: (props: { item: T; index: number }) => Array<VNode>;
+  'item-trailing'?: SlotProps<T>;
+  'content-top'?: (props?: {}) => Array<VNode>;
+  'content-bottom'?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
 import { useAppConfig } from '#imports';
-import { isNonNullish, isNullish, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   ASelectArrow,
@@ -190,15 +174,18 @@ import {
   ASelectRoot,
   ASelectSeparator,
   ASelectTrigger,
+  ASelectValue,
+  ASelectViewport,
   useForwardPropsEmits,
 } from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, toRef, useTemplateRef } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
-import { useFieldGroup } from '../composables/use-field-group';
+import { FieldGroupReset, useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';
 import { usePortal } from '../composables/use-portal';
+import { useResolvedVariants } from '../composables/use-resolved-variants';
 import { getDisplayValue, getProp, isArrayOfArray, looseToNumber } from '../utils';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';
@@ -235,6 +222,9 @@ const rootProps = useForwardPropsEmits(
   emits,
 );
 const portalProps = usePortal(toRef(() => props.portal));
+const { position } = useResolvedVariants('select', props, theme, ['position'], {
+  position: () => props.content?.position,
+});
 const contentProps = toRef(() =>
   defu(
     props.content,
@@ -242,18 +232,18 @@ const contentProps = toRef(() =>
       side: 'bottom',
       sideOffset: 8,
       collisionPadding: 8,
-      position: 'popper',
+      position: position.value,
     },
   ) as ASelectContentProps,
 );
-const arrowProps = toRef(() => props.arrow as ASelectArrowProps);
+const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as ASelectArrowProps);
 
 const {
   emitFormChange,
   emitFormInput,
   emitFormBlur,
   emitFormFocus,
-  size: formGroupSize,
+  size: formFieldSize,
   color,
   id,
   name,
@@ -262,70 +252,50 @@ const {
   ariaAttrs,
 } = useFormField<PInputProps>(props);
 const { orientation, size: fieldGroupSize } = useFieldGroup<PInputProps>(props);
-const {
-  isLeading,
-  isTrailing,
-  leadingIconName,
-  trailingIconName,
-} = useComponentIcons(
-  toRef(() => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown })),
-);
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(toRef(() => defu(props, { trailingIcon: appConfig.pohon.icons.chevronDown })));
 
-const selectSize = computed(() => fieldGroupSize.value || formGroupSize.value);
+const selectSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.select || {}),
-  })({
-    color: color.value,
-    variant: props.variant,
-    size: selectSize?.value,
-    loading: props.loading,
-    highlight: highlight.value,
-    leading: isLeading.value || !!props.avatar || !!slots.leading,
-    trailing: isTrailing.value || !!slots.trailing,
-    fieldGroup: orientation.value,
-  }),
-);
+const isItemAligned = computed(() => position.value === 'item-aligned');
 
-const groups = computed<Array<Array<PSelectItem>>>(() => {
-  if (props.items?.length) {
-    return isArrayOfArray(props.items)
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.select || {}) })({
+  color: color.value,
+  variant: props.variant,
+  size: selectSize?.value,
+  loading: props.loading,
+  highlight: highlight.value,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing,
+  fieldGroup: orientation.value,
+  position: position.value,
+}));
+
+const groups = computed<Array<Array<PSelectItem>>>(() =>
+  // eslint-disable-next-line no-nested-ternary
+  props.items?.length
+    ? isArrayOfArray(props.items)
       ? props.items
-      : [props.items];
-  }
-
-  return [];
-});
+      : [props.items]
+    : [],
+);
 
 const items = computed(() => groups.value.flatMap((group) => group) as Array<T>);
 
-function displayValue(
-  value: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | Array<ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>,
-): string | undefined {
+function displayValue(value: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod> | Array<ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>): string | undefined {
   if (props.multiple && Array.isArray(value)) {
     const displayedValues = value
-      .map((item) => getDisplayValue<Array<T>, ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>({
-        items: items.value,
-        value: item,
-        options: {
-          labelKey: props.labelKey,
-          valueKey: props.valueKey,
-        },
+      .map((item) => getDisplayValue<Array<T>, ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>(items.value, item, {
+        labelKey: props.labelKey,
+        valueKey: props.valueKey,
       }))
       .filter((v): v is string => v != null && v !== '');
 
     return displayedValues.length > 0 ? displayedValues.join(', ') : undefined;
   }
 
-  return getDisplayValue<Array<T>, ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>({
-    items: items.value,
-    value: value as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>,
-    options: {
-      labelKey: props.labelKey,
-      valueKey: props.valueKey,
-    },
+  return getDisplayValue<Array<T>, ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>>(items.value, value as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>, {
+    labelKey: props.labelKey,
+    valueKey: props.valueKey,
   });
 }
 
@@ -346,7 +316,7 @@ onMounted(() => {
 });
 
 function onUpdate(value: any) {
-  if (props.modelModifiers?.trim && (isString(value) || isNullish(value))) {
+  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
     value = value?.trim() ?? null;
   }
 
@@ -389,7 +359,10 @@ const viewportRef = useTemplateRef('viewportRef');
 
 defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
-  viewportRef: toRef(() => viewportRef.value),
+  viewportRef: toRef(() => {
+    const instance = viewportRef.value;
+    return (instance && typeof instance === 'object' && '$el' in instance ? instance.$el : instance) as HTMLElement | null;
+  }),
 });
 </script>
 
@@ -409,14 +382,14 @@ defineExpose({
     <ASelectTrigger
       :id="id"
       ref="triggerRef"
+      data-slot="base"
       :class="pohon.base({ class: [pohonProp?.base, props.class] })"
-      data-pohon="select-base"
       v-bind="{ ...$attrs, ...ariaAttrs }"
     >
       <span
         v-if="isLeading || !!avatar || !!slots.leading"
+        data-slot="leading"
         :class="pohon.leading({ class: pohonProp?.leading })"
-        data-pohon="select-leading"
       >
         <slot
           name="leading"
@@ -427,49 +400,41 @@ defineExpose({
           <PIcon
             v-if="isLeading && leadingIconName"
             :name="leadingIconName"
+            data-slot="leadingIcon"
             :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
-            data-pohon="select-leading-icon"
           />
           <PAvatar
             v-else-if="!!avatar"
             :size="((pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
             v-bind="avatar"
+            data-slot="itemLeadingAvatar"
             :class="pohon.itemLeadingAvatar({ class: pohonProp?.itemLeadingAvatar })"
-            data-pohon="select-leading-avatar"
           />
         </slot>
       </span>
 
-      <slot
-        :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
-        :open="open"
-        :pohon="pohon"
+      <template
+        v-for="displayedModelValue in [displayValue(modelValue as any)]"
+        :key="displayedModelValue"
       >
-        <template
-          v-for="displayedModelValue in [displayValue(modelValue as any)]"
-          :key="displayedModelValue"
+        <ASelectValue
+          :data-slot="displayedModelValue != null ? 'value' : 'placeholder'"
+          :class="displayedModelValue != null ? pohon.value({ class: pohonProp?.value }) : pohon.placeholder({ class: pohonProp?.placeholder })"
         >
-          <span
-            v-if="isNonNullish(displayedModelValue)"
-            :class="pohon.value({ class: pohonProp?.value })"
-            data-pohon="select-value"
+          <slot
+            :model-value="(modelValue as ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>)"
+            :open="open"
+            :pohon="pohon"
           >
-            {{ displayedModelValue }}
-          </span>
-          <span
-            v-else
-            :class="pohon.placeholder({ class: pohonProp?.placeholder })"
-            data-pohon="select-placeholder"
-          >
-            {{ placeholder ?? '&nbsp;' }}
-          </span>
-        </template>
-      </slot>
+            {{ displayedModelValue ?? (placeholder ?? '&nbsp;') }}
+          </slot>
+        </ASelectValue>
+      </template>
 
       <span
         v-if="isTrailing || !!slots.trailing"
+        data-slot="trailing"
         :class="pohon.trailing({ class: pohonProp?.trailing })"
-        data-pohon="select-trailing"
       >
         <slot
           name="trailing"
@@ -480,177 +445,164 @@ defineExpose({
           <PIcon
             v-if="trailingIconName"
             :name="trailingIconName"
+            data-slot="trailingIcon"
             :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
-            data-pohon="select-trailing-icon"
           />
         </slot>
       </span>
     </ASelectTrigger>
 
     <ASelectPortal v-bind="portalProps">
-      <ASelectContent
-        :class="pohon.content({ class: pohonProp?.content })"
-        v-bind="contentProps"
-        data-pohon="select-content"
-      >
-        <slot name="content-top" />
-
-        <div
-          ref="viewportRef"
-          role="presentation"
-          :class="pohon.viewport({ class: pohonProp?.viewport })"
-          data-pohon="select-viewport"
+      <FieldGroupReset>
+        <ASelectContent
+          data-slot="content"
+          :class="pohon.content({ class: pohonProp?.content })"
+          v-bind="contentProps"
         >
-          <ASelectGroup
-            v-for="(group, groupIndex) in groups"
-            :key="`group-${groupIndex}`"
-            :class="pohon.group({ class: pohonProp?.group })"
-            data-pohon="select-group"
+          <slot name="content-top" />
+
+          <component
+            :is="isItemAligned ? ASelectViewport : 'div'"
+            ref="viewportRef"
+            role="presentation"
+            data-slot="viewport"
+            :class="pohon.viewport({ class: pohonProp?.viewport })"
           >
-            <template
-              v-for="(item, index) in group"
-              :key="`group-${groupIndex}-${index}`"
+            <ASelectGroup
+              v-for="(group, groupIndex) in groups"
+              :key="`group-${groupIndex}`"
+              data-slot="group"
+              :class="pohon.group({ class: pohonProp?.group })"
             >
-              <ASelectLabel
-                v-if="isSelectItem(item) && item.type === 'label'"
-                :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label, item.class] })"
-                data-pohon="select-label"
+              <template
+                v-for="(item, index) in group"
+                :key="`group-${groupIndex}-${index}`"
               >
-                {{ getProp({ object: item, path: props.labelKey as string }) }}
-              </ASelectLabel>
+                <ASelectLabel
+                  v-if="isSelectItem(item) && item.type === 'label'"
+                  data-slot="label"
+                  :class="pohon.label({ class: [pohonProp?.label, item.pohon?.label, item.class] })"
+                >
+                  {{ getProp(item, props.labelKey as string) }}
+                </ASelectLabel>
 
-              <ASelectSeparator
-                v-else-if="isSelectItem(item) && item.type === 'separator'"
-                :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator, item.class] })"
-                data-pohon="select-separator"
-              />
+                <ASelectSeparator
+                  v-else-if="isSelectItem(item) && item.type === 'separator'"
+                  data-slot="separator"
+                  :class="pohon.separator({ class: [pohonProp?.separator, item.pohon?.separator, item.class] })"
+                />
 
-              <ASelectItem
-                v-else
-                :class="pohon.item({ class: [pohonProp?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
-                :disabled="isSelectItem(item) && item.disabled"
-                :value="isSelectItem(item) ? getProp({ object: item, path: props.valueKey as string }) : item"
-                data-pohon="select-item"
-                @select="isSelectItem(item) && item.onSelect?.($event)"
-              >
-                <slot
-                  name="item"
-                  :item="(item as NestedItem<T>)"
-                  :index="index"
-                  :pohon="pohon"
+                <ASelectItem
+                  v-else
+                  data-slot="item"
+                  :class="pohon.item({ class: [pohonProp?.item, isSelectItem(item) && item.pohon?.item, isSelectItem(item) && item.class] })"
+                  :disabled="isSelectItem(item) && item.disabled"
+                  :value="isSelectItem(item) ? getProp(item, props.valueKey as string) : item"
+                  @select="isSelectItem(item) && item.onSelect?.($event)"
                 >
                   <slot
-                    name="item-leading"
+                    name="item"
                     :item="(item as NestedItem<T>)"
                     :index="index"
                     :pohon="pohon"
                   >
-                    <PIcon
-                      v-if="isSelectItem(item) && item.icon"
-                      :name="item.icon"
-                      :class="pohon.itemLeadingIcon({ class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
-                      data-pohon="select-item-leading-icon"
-                    />
-                    <PAvatar
-                      v-else-if="isSelectItem(item) && item.avatar"
-                      :size="((item.pohon?.itemLeadingAvatarSize || pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
-                      v-bind="item.avatar"
-                      :class="pohon.itemLeadingAvatar({ class: [pohonProp?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
-                      data-pohon="select-item-leading-avatar"
-                    />
-                    <PChip
-                      v-else-if="isSelectItem(item) && item.chip"
-                      :size="((item.pohon?.itemLeadingChipSize || pohonProp?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
-                      inset
-                      standalone
-                      v-bind="item.chip"
-                      :class="pohon.itemLeadingChip({ class: [pohonProp?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
-                      data-pohon="select-item-leading-chip"
-                    />
-                  </slot>
-
-                  <span
-                    :class="pohon.itemWrapper({
-                      class: [
-                        pohonProp?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper,
-                      ],
-                    })"
-                    data-pohon="select-item-wrapper"
-                  >
-                    <ASelectItemText
-                      :class="pohon.itemLabel({
-                        class: [
-                          pohonProp?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel,
-                        ],
-                      })"
-                      data-pohon="select-item-label"
-                    >
-                      <slot
-                        name="item-label"
-                        :item="(item as NestedItem<T>)"
-                        :index="index"
-                      >
-                        {{ isSelectItem(item) ? getProp({ object: item, path: props.labelKey as string }) : item }}
-                      </slot>
-                    </ASelectItemText>
-
-                    <span
-                      v-if="isSelectItem(item) && (getProp({ object: item, path: props.descriptionKey as string }) || !!slots['item-description'])"
-                      :class="pohon.itemDescription({
-                        class: [
-                          pohonProp?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription,
-                        ],
-                      })"
-                      data-pohon="select-item-description"
-                    >
-                      <slot
-                        name="item-description"
-                        :item="(item as NestedItem<T>)"
-                        :index="index"
-                      >
-                        {{ getProp({ object: item, path: props.descriptionKey as string }) }}
-                      </slot>
-                    </span>
-                  </span>
-
-                  <span
-                    :class="pohon.itemTrailing({
-                      class: [pohonProp?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing],
-                    })"
-                    data-pohon="select-item-trailing"
-                  >
                     <slot
-                      name="item-trailing"
+                      name="item-leading"
                       :item="(item as NestedItem<T>)"
                       :index="index"
                       :pohon="pohon"
-                    />
-
-                    <ASelectItemIndicator as-child>
+                    >
                       <PIcon
-                        :name="selectedIcon || appConfig.pohon.icons.check"
-                        :class="pohon.itemTrailingIcon({
-                          class: [pohonProp?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon],
-                        })"
-                        data-pohon="select-item-trailing-icon"
+                        v-if="isSelectItem(item) && item.icon"
+                        :name="item.icon"
+                        data-slot="itemLeadingIcon"
+                        :class="pohon.itemLeadingIcon({ class: [pohonProp?.itemLeadingIcon, item.pohon?.itemLeadingIcon] })"
                       />
-                    </ASelectItemIndicator>
-                  </span>
-                </slot>
-              </ASelectItem>
-            </template>
-          </ASelectGroup>
-        </div>
+                      <PAvatar
+                        v-else-if="isSelectItem(item) && item.avatar"
+                        :size="((item.pohon?.itemLeadingAvatarSize || pohonProp?.itemLeadingAvatarSize || pohon.itemLeadingAvatarSize()) as PAvatarProps['size'])"
+                        v-bind="item.avatar"
+                        data-slot="itemLeadingAvatar"
+                        :class="pohon.itemLeadingAvatar({ class: [pohonProp?.itemLeadingAvatar, item.pohon?.itemLeadingAvatar] })"
+                      />
+                      <PChip
+                        v-else-if="isSelectItem(item) && item.chip"
+                        :size="((item.pohon?.itemLeadingChipSize || pohonProp?.itemLeadingChipSize || pohon.itemLeadingChipSize()) as PChipProps['size'])"
+                        inset
+                        standalone
+                        v-bind="item.chip"
+                        data-slot="itemLeadingChip"
+                        :class="pohon.itemLeadingChip({ class: [pohonProp?.itemLeadingChip, item.pohon?.itemLeadingChip] })"
+                      />
+                    </slot>
 
-        <slot name="content-bottom" />
+                    <span
+                      data-slot="itemWrapper"
+                      :class="pohon.itemWrapper({ class: [pohonProp?.itemWrapper, isSelectItem(item) && item.pohon?.itemWrapper] })"
+                    >
+                      <ASelectItemText
+                        data-slot="itemLabel"
+                        :class="pohon.itemLabel({ class: [pohonProp?.itemLabel, isSelectItem(item) && item.pohon?.itemLabel] })"
+                      >
+                        <slot
+                          name="item-label"
+                          :item="(item as NestedItem<T>)"
+                          :index="index"
+                        >
+                          {{ isSelectItem(item) ? getProp(item, props.labelKey as string) : item }}
+                        </slot>
+                      </ASelectItemText>
 
-        <ASelectArrow
-          v-if="!!arrow"
-          v-bind="arrowProps"
-          :class="pohon.arrow({ class: pohonProp?.arrow })"
-          data-pohon="select-arrow"
-        />
-      </ASelectContent>
+                      <span
+                        v-if="isSelectItem(item) && (getProp(item, props.descriptionKey as string) || !!slots['item-description'])"
+                        data-slot="itemDescription"
+                        :class="pohon.itemDescription({ class: [pohonProp?.itemDescription, isSelectItem(item) && item.pohon?.itemDescription] })"
+                      >
+                        <slot
+                          name="item-description"
+                          :item="(item as NestedItem<T>)"
+                          :index="index"
+                        >
+                          {{ getProp(item, props.descriptionKey as string) }}
+                        </slot>
+                      </span>
+                    </span>
+
+                    <span
+                      data-slot="itemTrailing"
+                      :class="pohon.itemTrailing({ class: [pohonProp?.itemTrailing, isSelectItem(item) && item.pohon?.itemTrailing] })"
+                    >
+                      <slot
+                        name="item-trailing"
+                        :item="(item as NestedItem<T>)"
+                        :index="index"
+                        :pohon="pohon"
+                      />
+
+                      <ASelectItemIndicator as-child>
+                        <PIcon
+                          :name="selectedIcon || appConfig.pohon.icons.check"
+                          data-slot="itemTrailingIcon"
+                          :class="pohon.itemTrailingIcon({ class: [pohonProp?.itemTrailingIcon, isSelectItem(item) && item.pohon?.itemTrailingIcon] })"
+                        />
+                      </ASelectItemIndicator>
+                    </span>
+                  </slot>
+                </ASelectItem>
+              </template>
+            </ASelectGroup>
+          </component>
+
+          <slot name="content-bottom" />
+
+          <ASelectArrow
+            v-if="!!arrow"
+            v-bind="arrowProps"
+            data-slot="arrow"
+            :class="pohon.arrow({ class: pohonProp?.arrow })"
+          />
+        </ASelectContent>
+      </FieldGroupReset>
     </ASelectPortal>
   </ASelectRoot>
 </template>

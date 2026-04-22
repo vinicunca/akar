@@ -28,9 +28,7 @@ const props = defineProps<PSkeletonProps>();
 const appConfig = useAppConfig() as Skeleton['AppConfig'];
 const pohonProp = useComponentPohon('skeleton', props);
 
-const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.skeleton || {}) }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.skeleton || {}) }));
 </script>
 
 <template>

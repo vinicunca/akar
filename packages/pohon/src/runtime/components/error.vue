@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { NuxtError } from '#app';
 import type { AppConfig } from '@nuxt/schema';
-import type { PButtonProps, PLinkPropsKeys } from '../types';
+import type { VNode } from 'vue';
+import type { PButtonProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/error';
 
@@ -10,7 +11,7 @@ type Error = ComponentConfig<typeof theme, AppConfig, 'error'>;
 export interface PErrorProps {
   /**
    * The element or component this component should render as.
-   * @defaultValue 'div'
+   * @defaultValue 'main'
    */
   as?: any;
   error?: Partial<NuxtError & { message: string }>;
@@ -24,17 +25,17 @@ export interface PErrorProps {
    * `{ size: 'lg', color: 'primary', variant: 'solid', label: 'Back to home' }`{lang="ts-type"}
    * @defaultValue true
    */
-  clear?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
+  clear?: boolean | PButtonProps;
   class?: any;
   pohon?: Error['slots'];
 }
 
 export interface PErrorSlots {
-  default: (props?: object) => any;
-  statusCode: (props?: object) => any;
-  statusMessage: (props?: object) => any;
-  message: (props?: object) => any;
-  links: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
+  statusCode?: (props?: {}) => Array<VNode>;
+  statusMessage?: (props?: {}) => Array<VNode>;
+  message?: (props?: {}) => Array<VNode>;
+  links?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -47,23 +48,18 @@ import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
 import PButton from './button.vue';
 
-const props = withDefaults(
-  defineProps<PErrorProps>(),
-  {
-    as: 'main',
-    redirect: '/',
-    clear: true,
-  },
-);
+const props = withDefaults(defineProps<PErrorProps>(), {
+  as: 'main',
+  redirect: '/',
+  clear: true,
+});
 const slots = defineSlots<PErrorSlots>();
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as Error['AppConfig'];
 const pohonProp = useComponentPohon('error', props);
 
-const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.error || {}) })(),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.error || {}) })());
 
 function handleError() {
   clearError({ redirect: props.redirect });
@@ -73,31 +69,31 @@ function handleError() {
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="error-root"
   >
     <p
-      v-if="!!props.error?.statusCode || !!slots.statusCode"
+      v-if="!!props.error?.statusCode || !!props.error?.status || !!slots.statusCode"
+      data-slot="statusCode"
       :class="pohon.statusCode({ class: pohonProp?.statusCode })"
-      data-pohon="error-status-code"
     >
       <slot name="statusCode">
-        {{ props.error?.statusCode }}
+        {{ props.error?.statusCode || props.error?.status }}
       </slot>
     </p>
     <h1
-      v-if="!!props.error?.statusMessage || !!slots.statusMessage"
+      v-if="!!props.error?.statusMessage || !!props.error?.statusText || !!slots.statusMessage"
+      data-slot="statusMessage"
       :class="pohon.statusMessage({ class: pohonProp?.statusMessage })"
-      data-pohon="error-status-message"
     >
       <slot name="statusMessage">
-        {{ props.error?.statusMessage }}
+        {{ props.error?.statusMessage || props.error?.statusText }}
       </slot>
     </h1>
     <p
-      v-if="(props.error?.message && props.error.message !== props.error.statusMessage) || !!slots.message"
+      v-if="(props.error?.message && props.error.message !== (props.error.statusMessage || props.error.statusText)) || !!slots.message"
+      data-slot="message"
       :class="pohon.message({ class: pohonProp?.message })"
-      data-pohon="error-message"
     >
       <slot name="message">
         {{ props.error?.message }}
@@ -105,8 +101,8 @@ function handleError() {
     </p>
     <div
       v-if="!!clear || !!slots.links"
+      data-slot="links"
       :class="pohon.links({ class: pohonProp?.links })"
-      data-pohon="error-links"
     >
       <slot name="links">
         <PButton

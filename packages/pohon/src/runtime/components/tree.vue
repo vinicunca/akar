@@ -2,6 +2,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { ATreeItemSelectEvent, ATreeItemToggleEvent, ATreeRootEmits, ATreeRootProps } from 'akar';
+import type { ComponentPublicInstance, VNode } from 'vue';
 import type { PIconProps } from '../types';
 import type { DynamicSlots, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -24,7 +25,7 @@ export type PTreeItem = {
   slot?: string;
   children?: Array<PTreeItem>;
   onToggle?: (event: ATreeItemToggleEvent<PTreeItem>) => void;
-  onSelect?: (event?: ATreeItemSelectEvent<PTreeItem>) => void;
+  onSelect?: (event: ATreeItemSelectEvent<PTreeItem>) => void;
   class?: any;
   pohon?: Pick<Tree['slots'], 'item' | 'itemWithChildren' | 'link' | 'linkLeadingIcon' | 'linkLabel' | 'linkTrailing' | 'linkTrailingIcon' | 'listWithChildren'>;
   [key: string]: any;
@@ -116,16 +117,17 @@ type SlotProps<T extends PTreeItem> = (props: {
   indeterminate: boolean | undefined;
   handleSelect: () => void;
   handleToggle: () => void;
-}) => any;
+  pohon: Tree['pohon'];
+}) => Array<VNode>;
 
 export type PTreeSlots<
   T extends Array<PTreeItem> = Array<PTreeItem>,
 > = {
-  'item-wrapper': SlotProps<T[number]>;
-  'item': SlotProps<T[number]>;
-  'item-leading': SlotProps<T[number]>;
-  'item-label': SlotProps<T[number]>;
-  'item-trailing': SlotProps<T[number]>;
+  'item-wrapper'?: SlotProps<T[number]>;
+  'item'?: SlotProps<T[number]>;
+  'item-leading'?: SlotProps<T[number]>;
+  'item-label'?: SlotProps<T[number]>;
+  'item-trailing'?: SlotProps<T[number]>;
 } & DynamicSlots<T[number], undefined, {
   index: number;
   level: number;
@@ -136,12 +138,11 @@ export type PTreeSlots<
   handleSelect: () => void;
   handleToggle: () => void;
 }>;
+
 </script>
 
 <script setup lang="ts" generic="T extends PTreeItem[], M extends boolean = false">
-import type { ComponentPublicInstance } from 'vue';
 import { useAppConfig } from '#imports';
-import { isBoolean } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import { ATreeItem, ATreeRoot, ATreeVirtualizer, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
@@ -149,7 +150,7 @@ import { computed, toRef, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
-import getEstimateSize from '../utils/virtualizer';
+import { getEstimateSize } from '../utils/virtualizer';
 import PIcon from './icon.vue';
 
 defineOptions({ inheritAttrs: false });
@@ -208,20 +209,13 @@ const virtualizerProps = toRef(() => {
     return false;
   }
 
-  return defu(isBoolean(props.virtualize) ? {} : props.virtualize, {
-    estimateSize: getEstimateSize({
-      items: props.items || [],
-      size: props.size || 'md',
-    }),
+  return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+    estimateSize: getEstimateSize(props.items || [], props.size || 'md'),
   });
 });
 
 const [DefineTreeTemplate, ReuseTreeTemplate] = createReusableTemplate<{ items?: Array<PTreeItem>; level: number }, PTreeSlots<T>>();
-const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
-  item: PTreeItem;
-  index: number;
-  level: number;
-}, PTreeSlots<T>>({
+const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{ item: PTreeItem; index: number; level: number }, PTreeSlots<T>>({
   props: {
     item: {
       type: Object,
@@ -238,21 +232,16 @@ const [DefineItemTemplate, ReuseItemTemplate] = createReusableTemplate<{
   },
 });
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.tree || {}),
-  })({
-    color: props.color,
-    size: props.size,
-    virtualize: !!props.virtualize,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.tree || {}) })({
+  color: props.color,
+  size: props.size,
+  virtualize: !!props.virtualize,
+}));
 
 const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef');
 
 function getItemLabel<Item extends T[number]>(item: Item): string {
-  return getProp({ object: item, path: props.labelKey as string });
+  return getProp(item, props.labelKey as string);
 }
 
 function getItemKey<Item extends T[number]>(item: Item): string {
@@ -268,9 +257,7 @@ function getDefaultOpenedItems(item: T[number]): Array<string> {
   return [currentItem, ...childItems].filter(Boolean) as Array<string>;
 }
 
-const defaultExpanded = computed(() =>
-  props.defaultExpanded ?? props.items?.flatMap((item) => getDefaultOpenedItems(item)),
-);
+const defaultExpanded = computed(() => props.defaultExpanded ?? props.items?.flatMap((item) => getDefaultOpenedItems(item)));
 
 defineExpose({
   get $el() {
@@ -284,10 +271,7 @@ defineExpose({
   <DefineItemTemplate v-slot="{ item, index, level }">
     <li
       role="presentation"
-      :class="!!nested && level > 1
-        ? pohon.itemWithChildren({ class: [pohonProp?.itemWithChildren, item.pohon?.itemWithChildren] })
-        : pohon.item({ class: [pohonProp?.item, item.pohon?.item] })"
-      data-pohon="tree-item"
+      :class="!!nested && level > 1 ? pohon.itemWithChildren({ class: [pohonProp?.itemWithChildren, item.pohon?.itemWithChildren] }) : pohon.item({ class: [pohonProp?.item, item.pohon?.item] })"
     >
       <ATreeItem
         v-slot="{ isExpanded, isSelected, isIndeterminate, handleSelect, handleToggle }"
@@ -306,16 +290,9 @@ defineExpose({
             :is="as.link"
             :type="as.link === 'button' ? 'button' : undefined"
             :disabled="item.disabled || disabled"
-            :class="pohon.link({
-              class: [pohonProp?.link, item.pohon?.link, item.class],
-              selected: isSelected,
-              disabled: item.disabled || disabled,
-            })"
-            :style="!nested && level > 1
-              ? { paddingLeft: flattenedPaddingFormula(level) }
-              : undefined"
-            tabindex="0"
-            data-pohon="tree-link"
+            data-slot="link"
+            :class="pohon.link({ class: [pohonProp?.link, item.pohon?.link, item.class], selected: isSelected, disabled: item.disabled || disabled })"
+            :style="!nested && level > 1 ? { paddingLeft: flattenedPaddingFormula(level) } : undefined"
           >
             <slot
               :name="((item.slot || 'item') as keyof PTreeSlots<T>)"
@@ -330,26 +307,21 @@ defineExpose({
                 <PIcon
                   v-if="item.icon"
                   :name="item.icon"
-                  :class="pohon.linkLeadingIcon({
-                    class: [pohonProp?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
-                  })"
-                  data-pohon="tree-link-leading-icon"
+                  data-slot="linkLeadingIcon"
+                  :class="pohon.linkLeadingIcon({ class: [pohonProp?.linkLeadingIcon, item.pohon?.linkLeadingIcon] })"
                 />
-
                 <PIcon
                   v-else-if="item.children?.length"
                   :name="isExpanded ? (expandedIcon ?? appConfig.pohon.icons.folderOpen) : (collapsedIcon ?? appConfig.pohon.icons.folder)"
-                  :class="pohon.linkLeadingIcon({
-                    class: [pohonProp?.linkLeadingIcon, item.pohon?.linkLeadingIcon],
-                  })"
-                  data-pohon="tree-link-leading-icon"
+                  data-slot="linkLeadingIcon"
+                  :class="pohon.linkLeadingIcon({ class: [pohonProp?.linkLeadingIcon, item.pohon?.linkLeadingIcon] })"
                 />
               </slot>
 
               <span
                 v-if="getItemLabel(item) || !!slots[(item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>]"
+                data-slot="linkLabel"
                 :class="pohon.linkLabel({ class: [pohonProp?.linkLabel, item.pohon?.linkLabel] })"
-                data-pohon="tree-link-label"
               >
                 <slot
                   :name="((item.slot ? `${item.slot}-label` : 'item-label') as keyof PTreeSlots<T>)"
@@ -362,8 +334,8 @@ defineExpose({
 
               <span
                 v-if="item.trailingIcon || item.children?.length || !!slots[(item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>]"
+                data-slot="linkTrailing"
                 :class="pohon.linkTrailing({ class: [pohonProp?.linkTrailing, item.pohon?.linkTrailing] })"
-                data-pohon="tree-link-trailing"
               >
                 <slot
                   :name="((item.slot ? `${item.slot}-trailing` : 'item-trailing') as keyof PTreeSlots<T>)"
@@ -373,18 +345,14 @@ defineExpose({
                   <PIcon
                     v-if="item.trailingIcon"
                     :name="item.trailingIcon"
-                    :class="pohon.linkTrailingIcon({
-                      class: [pohonProp?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
-                    })"
-                    data-pohon="tree-link-trailing-icon"
+                    data-slot="linkTrailingIcon"
+                    :class="pohon.linkTrailingIcon({ class: [pohonProp?.linkTrailingIcon, item.pohon?.linkTrailingIcon] })"
                   />
                   <PIcon
                     v-else-if="item.children?.length"
                     :name="trailingIcon ?? appConfig.pohon.icons.chevronDown"
-                    :class="pohon.linkTrailingIcon({
-                      class: [pohonProp?.linkTrailingIcon, item.pohon?.linkTrailingIcon],
-                    })"
-                    data-pohon="tree-link-trailing-icon"
+                    data-slot="linkTrailingIcon"
+                    :class="pohon.linkTrailingIcon({ class: [pohonProp?.linkTrailingIcon, item.pohon?.linkTrailingIcon] })"
                   />
                 </slot>
               </span>
@@ -395,10 +363,8 @@ defineExpose({
         <ul
           v-if="nested && item.children?.length && isExpanded"
           role="group"
-          :class="pohon.listWithChildren({
-            class: [pohonProp?.listWithChildren, item.pohon?.listWithChildren],
-          })"
-          data-pohon="tree-list-with-children"
+          data-slot="listWithChildren"
+          :class="pohon.listWithChildren({ class: [pohonProp?.listWithChildren, item.pohon?.listWithChildren] })"
         >
           <ReuseTreeTemplate
             :items="item.children"
@@ -426,8 +392,8 @@ defineExpose({
     :as="as.root"
     :model-value="modelValue"
     :default-value="defaultValue"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="tree-root"
     :get-key="getItemKey"
     :default-expanded="defaultExpanded"
     :selection-behavior="selectionBehavior"

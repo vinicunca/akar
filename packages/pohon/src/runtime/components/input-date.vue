@@ -1,7 +1,14 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ADateFieldRootEmits, ADateFieldRootProps, ADateRangeFieldRootEmits, ADateRangeFieldRootProps, DateValue, SegmentPart } from 'akar';
-import type { ComponentPublicInstance } from 'vue';
+import type {
+  ADateFieldRootEmits,
+  ADateFieldRootProps,
+  ADateRangeFieldRootEmits,
+  ADateRangeFieldRootProps,
+  DateValue,
+  SegmentPart,
+} from 'akar';
+import type { ComponentPublicInstance, VNode } from 'vue';
 import type { UseComponentIconsProps } from '../composables/use-component-icons';
 import type { PAvatarProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
@@ -9,13 +16,13 @@ import theme from '#build/pohon/input-date';
 
 type InputDate = ComponentConfig<typeof theme, AppConfig, 'inputDate'>;
 
-type _ADateFieldRootProps = Omit<ADateFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
-type A_RangeDateFieldRootProps = Omit<ADateRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
+type _DateFieldRootProps = Omit<ADateFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
+type _RangeDateFieldRootProps = Omit<ADateRangeFieldRootProps, 'as' | 'asChild' | 'modelValue' | 'defaultValue' | 'dir' | 'locale'>;
 
 type InputDateDefaultValue<R extends boolean = false> = R extends true ? ADateRangeFieldRootProps['defaultValue'] : ADateFieldRootProps['defaultValue'];
 type InputDateModelValue<R extends boolean = false> = (R extends true ? ADateRangeFieldRootProps['modelValue'] : ADateFieldRootProps['modelValue']) | undefined;
 
-export interface PInputDateProps<R extends boolean = false> extends UseComponentIconsProps, _ADateFieldRootProps, A_RangeDateFieldRootProps {
+export interface PInputDateProps<R extends boolean = false> extends UseComponentIconsProps, _DateFieldRootProps, _RangeDateFieldRootProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'div'
@@ -35,6 +42,8 @@ export interface PInputDateProps<R extends boolean = false> extends UseComponent
   size?: InputDate['variants']['size'];
   /** Highlight the ring color like a focus state. */
   highlight?: boolean;
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean;
   autofocus?: boolean;
   autofocusDelay?: number;
   /**
@@ -43,7 +52,7 @@ export interface PInputDateProps<R extends boolean = false> extends UseComponent
    * @IconifyIcon
    */
   separatorIcon?: PIconProps['name'];
-  /** Whether or not a range of dates can be selecteu */
+  /** Whether or not a range of dates can be selected */
   range?: R & boolean;
   defaultValue?: InputDateDefaultValue<R>;
   modelValue?: InputDateModelValue<R>;
@@ -51,18 +60,18 @@ export interface PInputDateProps<R extends boolean = false> extends UseComponent
   pohon?: InputDate['slots'];
 }
 
-export interface PInputDateEmits<R extends boolean> extends Omit<ADateFieldRootEmits & ADateRangeFieldRootEmits, 'update:modelValue'> {
-  'update:modelValue': [date: InputDateModelValue<R>];
+export interface PInputDateEmits<R extends boolean = false> extends Omit<ADateFieldRootEmits & ADateRangeFieldRootEmits, 'update:modelValue'> {
+  'update:modelValue': [value: InputDateModelValue<R>];
   'change': [event: Event];
   'blur': [event: FocusEvent];
   'focus': [event: FocusEvent];
 }
 
 export interface PInputDateSlots {
-  leading: (props: { pohon: InputDate['pohon'] }) => any;
-  default: (props: { pohon: InputDate['pohon'] }) => any;
-  trailing: (props: { pohon: InputDate['pohon'] }) => any;
-  separator: (props: { pohon: InputDate['pohon'] }) => any;
+  leading?: (props: { pohon: InputDate['pohon'] }) => Array<VNode>;
+  default?: (props: { pohon: InputDate['pohon'] }) => Array<VNode>;
+  trailing?: (props: { pohon: InputDate['pohon'] }) => Array<VNode>;
+  separator?: (props: { pohon: InputDate['pohon'] }) => Array<VNode>;
 }
 </script>
 
@@ -70,7 +79,10 @@ export interface PInputDateSlots {
 import { useAppConfig } from '#imports';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
-import { ADateRangeField as ARangeDateField, ADateField as ASingleDateField } from 'akar/namespaced';
+import {
+  ADateField,
+  ADateRangeField,
+} from 'akar/namespaced';
 import { computed, onMounted, ref } from 'vue';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -106,6 +118,7 @@ const rootProps = useForwardPropsEmits(
     'variant',
     'size',
     'highlight',
+    'fixed',
     'disabled',
     'autofocus',
     'autofocusDelay',
@@ -128,7 +141,7 @@ const {
   emitFormFocus,
   emitFormChange,
   emitFormInput,
-  size: formGroupSize,
+  size: formFieldSize,
   color,
   id,
   name,
@@ -140,30 +153,23 @@ const { orientation, size: fieldGroupSize } = useFieldGroup<PInputDateProps<R>>(
 const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
 
 const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate<{
-  segments?: Array<{
-    part: SegmentPart;
-    value: string;
-  }>;
+  segments?: Array<{ part: SegmentPart; value: string }>;
   type?: 'start' | 'end';
 }>();
 
-const inputSize = computed(() => fieldGroupSize.value || formGroupSize.value);
+const inputSize = computed(() => fieldGroupSize.value || formFieldSize.value);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.inputDate || {}),
-  })({
-    color: color.value,
-    variant: props.variant,
-    size: inputSize.value,
-    highlight: highlight.value,
-    loading: props.loading,
-    leading: isLeading.value || !!props.avatar || !!slots.leading,
-    trailing: isTrailing.value || !!slots.trailing,
-    fieldGroup: orientation.value,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.inputDate || {}) })({
+  color: color.value,
+  variant: props.variant,
+  size: inputSize.value,
+  highlight: highlight.value,
+  fixed: props.fixed,
+  loading: props.loading,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing,
+  fieldGroup: orientation.value,
+}));
 
 const inputsRef = ref<Array<ComponentPublicInstance>>([]);
 
@@ -203,7 +209,7 @@ onMounted(() => {
   }, props.autofocusDelay);
 });
 
-const ADateField = computed(() => props.range ? ARangeDateField : ASingleDateField);
+const DateField = computed(() => props.range ? ADateRangeField : ADateField);
 
 defineExpose({
   inputsRef,
@@ -212,21 +218,21 @@ defineExpose({
 
 <template>
   <DefineSegmentsTemplate v-slot="{ segments, type }">
-    <ADateField.Input
+    <DateField.Input
       v-for="(segment, index) in segments"
       :key="`${segment.part}-${index}`"
       :ref="el => setInputRef(index, el)"
       :type="type"
       :part="segment.part"
-      data-pohon="input-date-segment"
+      data-slot="segment"
       :class="pohon.segment({ class: pohonProp?.segment })"
       :data-segment="segment.part"
     >
       {{ segment.value.trim() }}
-    </ADateField.Input>
+    </DateField.Input>
   </DefineSegmentsTemplate>
 
-  <ADateField.Root
+  <DateField.Root
     v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
     :id="id"
     v-slot="{ segments }"
@@ -234,7 +240,7 @@ defineExpose({
     :default-value="(defaultValue as DateValue)"
     :name="name"
     :disabled="disabled"
-    data-pohon="input-date-base"
+    data-slot="base"
     :class="pohon.base({ class: [pohonProp?.base, props.class] })"
     @update:model-value="onUpdate"
     @blur="onBlur"
@@ -254,7 +260,7 @@ defineExpose({
       >
         <PIcon
           :name="separatorIcon || appConfig.pohon.icons.minus"
-          data-pohon="input-date-separator-icon"
+          data-slot="separatorIcon"
           :class="pohon.separatorIcon({ class: pohonProp?.separatorIcon })"
         />
       </slot>
@@ -268,7 +274,7 @@ defineExpose({
 
     <span
       v-if="isLeading || !!avatar || !!slots.leading"
-      data-pohon="input-date-leading"
+      data-slot="leading"
       :class="pohon.leading({ class: pohonProp?.leading })"
     >
       <slot
@@ -278,14 +284,14 @@ defineExpose({
         <PIcon
           v-if="isLeading && leadingIconName"
           :name="leadingIconName"
-          data-pohon="input-date-leading-icon"
+          data-slot="leadingIcon"
           :class="pohon.leadingIcon({ class: pohonProp?.leadingIcon })"
         />
         <PAvatar
           v-else-if="!!avatar"
           :size="((pohonProp?.leadingAvatarSize || pohon.leadingAvatarSize()) as PAvatarProps['size'])"
           v-bind="avatar"
-          data-pohon="input-date-leading-avatar"
+          data-slot="leadingAvatar"
           :class="pohon.leadingAvatar({ class: pohonProp?.leadingAvatar })"
         />
       </slot>
@@ -293,7 +299,7 @@ defineExpose({
 
     <span
       v-if="isTrailing || !!slots.trailing"
-      data-pohon="input-date-trailing"
+      data-slot="trailing"
       :class="pohon.trailing({ class: pohonProp?.trailing })"
     >
       <slot
@@ -303,10 +309,10 @@ defineExpose({
         <PIcon
           v-if="trailingIconName"
           :name="trailingIconName"
-          data-pohon="input-date-trailing-icon"
+          data-slot="trailingIcon"
           :class="pohon.trailingIcon({ class: pohonProp?.trailingIcon })"
         />
       </slot>
     </span>
-  </ADateField.Root>
+  </DateField.Root>
 </template>

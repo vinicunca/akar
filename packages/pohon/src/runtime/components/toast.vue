@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
 import type { AToastRootEmits, AToastRootProps } from 'akar';
+import type { VNode } from 'vue';
 import type { PAvatarProps, PButtonProps, PIconProps, PLinkPropsKeys, PProgressProps } from '../types';
 import type { StringOrVNode } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -62,18 +63,16 @@ export interface PToastProps extends Pick<AToastRootProps, 'defaultOpen' | 'open
 export interface PToastEmits extends AToastRootEmits {}
 
 export interface PToastSlots {
-  leading: (props: { pohon: Toast['pohon'] }) => any;
-  title: (props?: object) => any;
-  description: (props?: object) => any;
-  actions: (props?: object) => any;
-  close: (props: { pohon: Toast['pohon'] }) => any;
-
+  leading?: (props: { pohon: Toast['pohon'] }) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  actions?: (props?: {}) => Array<VNode>;
+  close?: (props: { pohon: Toast['pohon'] }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { isFunction } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   AToastAction,
@@ -100,7 +99,6 @@ const props = withDefaults(
     progress: true,
   },
 );
-
 const emits = defineEmits<PToastEmits>();
 const slots = defineSlots<PToastSlots>();
 
@@ -110,16 +108,11 @@ const pohonProp = useComponentPohon('toast', props);
 
 const rootProps = useForwardPropsEmits(reactivePick(props, 'as', 'defaultOpen', 'open', 'duration', 'type'), emits);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.toast || {}),
-  })({
-    color: props.color,
-    orientation: props.orientation,
-    title: !!props.title || !!slots.title,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.toast || {}) })({
+  color: props.color,
+  orientation: props.orientation,
+  title: !!props.title || !!slots.title,
+}));
 
 const rootRef = useTemplateRef('rootRef');
 const height = ref(0);
@@ -143,6 +136,7 @@ defineExpose({
     v-slot="{ remaining, duration, open }"
     v-bind="rootProps"
     :data-orientation="orientation"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     :style="{ '--height': height }"
   >
@@ -154,24 +148,30 @@ defineExpose({
         v-if="avatar"
         :size="((pohonProp?.avatarSize || pohon.avatarSize()) as PAvatarProps['size'])"
         v-bind="avatar"
+        data-slot="avatar"
         :class="pohon.avatar({ class: pohonProp?.avatar })"
       />
       <PIcon
         v-else-if="icon"
         :name="icon"
+        data-slot="icon"
         :class="pohon.icon({ class: pohonProp?.icon })"
       />
     </slot>
 
-    <div :class="pohon.wrapper({ class: pohonProp?.wrapper })">
+    <div
+      data-slot="wrapper"
+      :class="pohon.wrapper({ class: pohonProp?.wrapper })"
+    >
       <AToastTitle
         v-if="title || !!slots.title"
+        data-slot="title"
         :class="pohon.title({ class: pohonProp?.title })"
       >
         <slot name="title">
           <component
             :is="title()"
-            v-if="isFunction(title)"
+            v-if="typeof title === 'function'"
           />
           <component
             :is="title"
@@ -184,12 +184,13 @@ defineExpose({
       </AToastTitle>
       <AToastDescription
         v-if="description || !!slots.description"
+        data-slot="description"
         :class="pohon.description({ class: pohonProp?.description })"
       >
         <slot name="description">
           <component
             :is="description()"
-            v-if="isFunction(description)"
+            v-if="typeof description === 'function'"
           />
           <component
             :is="description"
@@ -203,6 +204,7 @@ defineExpose({
 
       <div
         v-if="orientation === 'vertical' && (actions?.length || !!slots.actions)"
+        data-slot="actions"
         :class="pohon.actions({ class: pohonProp?.actions })"
       >
         <slot name="actions">
@@ -225,6 +227,7 @@ defineExpose({
 
     <div
       v-if="(orientation === 'horizontal' && (actions?.length || !!slots.actions)) || close"
+      data-slot="actions"
       :class="pohon.actions({ class: pohonProp?.actions, orientation: 'horizontal' })"
     >
       <template v-if="orientation === 'horizontal' && (actions?.length || !!slots.actions)">
@@ -260,6 +263,7 @@ defineExpose({
             variant="link"
             :aria-label="t('toast.close')"
             v-bind="(typeof close === 'object' ? close : {})"
+            data-slot="close"
             :class="pohon.close({ class: pohonProp?.close })"
             @click.stop
           />
@@ -273,6 +277,7 @@ defineExpose({
       :color="color"
       v-bind="(typeof progress === 'object' ? progress as Partial<PProgressProps> : {})"
       size="sm"
+      data-slot="progress"
       :class="pohon.progress({ class: pohonProp?.progress })"
     />
   </AToastRoot>

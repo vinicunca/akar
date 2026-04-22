@@ -1,59 +1,59 @@
 <script lang="ts">
-import type { AppConfig } from '@nuxt/schema'
-import type { EditorMenuOptions } from '../composables/use-editor-menu'
-import type { ComponentConfig } from '../types/tv'
-import theme from '#build/pohon/editor-emoji-menu'
+import type { AppConfig } from '@nuxt/schema';
+import type { EditorMenuOptions } from '../composables/use-editor-menu';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/editor-emoji-menu';
 
-type EditorEmojiMenu = ComponentConfig<typeof theme, AppConfig, 'editorEmojiMenu'>
+type EditorEmojiMenu = ComponentConfig<typeof theme, AppConfig, 'editorEmojiMenu'>;
 
-export interface EditorEmojiMenuItem {
-  name: string
-  emoji?: string
-  shortcodes: string[]
-  tags: string[]
-  group?: string
-  fallbackImage?: string
-  [key: string]: any
+export interface PEditorEmojiMenuItem {
+  name: string;
+  emoji?: string;
+  shortcodes: Array<string>;
+  tags: Array<string>;
+  group?: string;
+  fallbackImage?: string;
+  [key: string]: any;
 }
 
-export interface EditorEmojiMenuProps<T extends EditorEmojiMenuItem = EditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
+export interface PEditorEmojiMenuProps<T extends PEditorEmojiMenuItem = PEditorEmojiMenuItem> extends Partial<Pick<EditorMenuOptions<T>, 'editor' | 'char' | 'pluginKey' | 'filterFields' | 'limit' | 'options' | 'suggestion' | 'appendTo'>> {
   /**
    * @defaultValue 'md'
    */
-  size?: EditorEmojiMenu['variants']['size']
-  items?: T[] | T[][]
-  class?: any
-  pohon?: EditorEmojiMenu['slots']
+  size?: EditorEmojiMenu['variants']['size'];
+  items?: Array<T> | Array<Array<T>>;
+  class?: any;
+  pohon?: EditorEmojiMenu['slots'];
 }
 </script>
 
-<script setup lang="ts" generic="T extends EditorEmojiMenuItem">
-import { computed, h, onMounted, onBeforeUnmount, nextTick, toRef } from 'vue'
-import { useAppConfig } from '#imports'
-import { useEditorMenu } from '../composables/use-editor-menu'
-import { tv } from '../utils/tv'
+<script setup lang="ts" generic="T extends PEditorEmojiMenuItem">
+import { useAppConfig } from '#imports';
+import { computed, h, nextTick, onBeforeUnmount, onMounted, toRef } from 'vue';
+import { useEditorMenu } from '../composables/use-editor-menu';
+import { uv } from '../utils/uv';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<EditorEmojiMenuProps<T>>(), {
+const props = withDefaults(defineProps<PEditorEmojiMenuProps<T>>(), {
   pluginKey: 'emojiMenu',
   char: ':',
-  filterFields: () => ['name', 'shortcodes', 'tags']
-})
+  filterFields: () => ['name', 'shortcodes', 'tags'],
+});
 
-const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig']
+const appConfig = useAppConfig() as EditorEmojiMenu['AppConfig'];
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.editorEmojiMenu || {}) })({
-  size: props.size
-}))
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.editorEmojiMenu || {}) })({
+  size: props.size,
+}));
 
-let menu: ReturnType<typeof useEditorMenu> | null = null
+let menu: ReturnType<typeof useEditorMenu> | null = null;
 
 onMounted(async () => {
-  await nextTick()
+  await nextTick();
 
   if (!props.editor || props.editor.isDestroyed) {
-    return
+    return;
   }
 
   menu = useEditorMenu({
@@ -66,9 +66,11 @@ onMounted(async () => {
     options: props.options,
     suggestion: props.suggestion,
     appendTo: props.appendTo,
-    ui,
+    pohon,
     onSelect: (editor, range, item) => {
-      if (!item.emoji) return
+      if (!item.emoji) {
+        return;
+      }
 
       // Delete the trigger character and query text, then insert the emoji
       editor
@@ -76,32 +78,32 @@ onMounted(async () => {
         .focus()
         .deleteRange(range)
         .insertContent(item.emoji)
-        .run()
+        .run();
     },
     renderItem: (item, styles) => {
-      const content = item.emoji || item.shortcodes[0] || item.name
+      const content = item.emoji || item.shortcodes[0] || item.name;
       return [
         h('span', { class: styles.value.itemLeadingIcon() }, content),
         h('span', { class: styles.value.itemWrapper() }, [
-          h('span', { class: styles.value.itemLabel() }, item.name)
-        ])
-      ]
-    }
-  })
+          h('span', { class: styles.value.itemLabel() }, item.name),
+        ]),
+      ];
+    },
+  });
 
-  props.editor.registerPlugin(menu.plugin)
-})
+  props.editor.registerPlugin(menu.plugin);
+});
 
 onBeforeUnmount(() => {
   if (menu) {
-    menu.destroy()
-    menu = null
+    menu.destroy();
+    menu = null;
   }
 
   if (props.editor && !props.editor.isDestroyed) {
-    props.editor.unregisterPlugin(props.pluginKey)
+    props.editor.unregisterPlugin(props.pluginKey);
   }
-})
+});
 </script>
 
 <template>

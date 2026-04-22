@@ -25,7 +25,7 @@ export interface PSliderProps extends Pick<ASliderRootProps, 'name' | 'disabled'
    * The orientation of the slider.
    * @defaultValue 'horizontal'
    */
-  orientation?: ASliderRootProps['orientation'];
+  orientation?: Slider['variants']['orientation'];
   /**
    * Display a tooltip around the slider thumbs with the current value.
    * `{ disableClosingTrigger: true }`{lang="ts-type"}
@@ -45,7 +45,6 @@ export interface PSliderEmits {
 
 <script setup lang="ts" generic="T extends number | number[]">
 import { useAppConfig } from '#imports';
-import { isNumber } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   ASliderRange,
@@ -102,7 +101,7 @@ const {
 } = useFormField<PSliderProps>(props);
 
 const defaultSliderValue = computed(() => {
-  if (isNumber(props.defaultValue)) {
+  if (typeof props.defaultValue === 'number') {
     return [props.defaultValue];
   }
   return props.defaultValue;
@@ -110,7 +109,7 @@ const defaultSliderValue = computed(() => {
 
 const sliderValue = computed({
   get() {
-    if (isNumber(modelValue.value)) {
+    if (typeof modelValue.value === 'number') {
       return [modelValue.value];
     }
     return (modelValue.value as Array<number>) ?? defaultSliderValue.value;
@@ -122,17 +121,12 @@ const sliderValue = computed({
 
 const thumbs = computed(() => sliderValue.value?.length ?? 1);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.slider || {}),
-  })({
-    disabled: disabled.value,
-    size: size.value,
-    color: color.value,
-    orientation: props.orientation,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slider || {}) })({
+  disabled: disabled.value,
+  size: size.value,
+  color: color.value,
+  orientation: props.orientation,
+}));
 
 function onChange(value: any) {
   // @ts-expect-error - 'target' does not exist in type 'EventInit'
@@ -149,19 +143,19 @@ function onChange(value: any) {
     v-model="sliderValue"
     :name="name"
     :disabled="disabled"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     :default-value="defaultSliderValue"
-    data-pohon="slider-root"
     @update:model-value="emitFormInput()"
     @value-commit="onChange"
   >
     <ASliderTrack
+      data-slot="track"
       :class="pohon.track({ class: pohonProp?.track })"
-      data-pohon="slider-track"
     >
       <ASliderRange
+        data-slot="range"
         :class="pohon.range({ class: pohonProp?.range })"
-        data-pohon="slider-range"
       />
     </ASliderTrack>
 
@@ -176,15 +170,15 @@ function onChange(value: any) {
         v-bind="(typeof tooltip === 'object' ? tooltip : {})"
       >
         <ASliderThumb
+          data-slot="thumb"
           :class="pohon.thumb({ class: pohonProp?.thumb })"
-          data-pohon="slider-thumb"
           :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`"
         />
       </PTooltip>
       <ASliderThumb
         v-else
+        data-slot="thumb"
         :class="pohon.thumb({ class: pohonProp?.thumb })"
-        data-pohon="slider-thumb"
         :aria-label="thumbs === 1 ? 'Thumb' : `Thumb ${thumb} of ${thumbs}`"
       />
     </template>

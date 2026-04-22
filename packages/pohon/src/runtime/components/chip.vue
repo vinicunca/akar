@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/chip';
 
@@ -39,8 +40,8 @@ export interface PChipEmits {
 }
 
 export interface PChipSlots {
-  default: (props?: object) => any;
-  content: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
+  content?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -70,25 +71,20 @@ const { size } = useAvatarGroup(props);
 const appConfig = useAppConfig() as Chip['AppConfig'];
 const pohonProp = useComponentPohon('chip', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.chip || {}),
-  })({
-    color: props.color,
-    size: size.value,
-    position: props.position,
-    inset: props.inset,
-    standalone: props.standalone,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chip || {}) })({
+  color: props.color,
+  size: size.value,
+  position: props.position,
+  inset: props.inset,
+  standalone: props.standalone,
+}));
 </script>
 
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
-    data-pohon="chip-root"
   >
     <APrimitiveSlot v-bind="$attrs">
       <slot />
@@ -96,8 +92,8 @@ const pohon = computed(() =>
 
     <span
       v-if="show"
+      data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
-      data-pohon="chip-base"
     >
       <slot name="content">
         {{ text }}

@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { RouteLocationRaw, RouterLinkProps } from 'vue-router';
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from '../types/html';
 import type { ComponentConfig } from '../types/uv';
@@ -87,13 +88,13 @@ export interface PLinkProps extends NuxtLinkProps, /** @vue-ignore */ Omit<Butto
 }
 
 /**
- * Link-related props that can be omitted from ButtonProps when link functionality is not needed.
- * Use this with `Omit<ButtonProps, LinkPropsKeys>` in components where buttons should not act as links.
+ * Link-related props that can be omitted from PButtonProps when link functionality is not needed.
+ * Use this with `Omit<PButtonProps, PLinkPropsKeys>` in components where buttons should not act as links.
  */
 export type PLinkPropsKeys = 'to' | 'href' | 'target' | 'rel' | 'noRel' | 'external' | 'prefetch' | 'prefetchOn' | 'prefetchedClass' | 'noPrefetch' | 'trailingSlash' | 'replace' | 'ariaCurrentValue' | 'active' | 'activeClass' | 'exact' | 'exactQuery' | 'exactHash' | 'inactiveClass' | 'download' | 'ping' | 'referrerpolicy' | 'hreflang' | 'media';
 
 export interface PLinkSlots {
-  default: (props: { active: boolean }) => any;
+  default?: (props: { active: boolean }) => Array<VNode>;
 }
 
 // from upstream NuxtLink
@@ -105,11 +106,12 @@ interface NuxtLinkDefaultSlotProps {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig, useRoute } from '#imports';
+import { useAppConfig, useNuxtApp, useRoute } from '#imports';
 import { reactiveOmit } from '@vueuse/core';
-import { useForwardProps } from 'akar';
+import { APrimitiveSlot, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { isEqual } from 'ohash/utils';
+import { hasProtocol } from 'ufo';
 import { computed } from 'vue';
 import { mergeClasses } from '../utils';
 import { isPartiallyEqual } from '../utils/link';
@@ -131,6 +133,7 @@ defineSlots<PLinkSlots>();
 
 const route = useRoute();
 const appConfig = useAppConfig() as Link['AppConfig'];
+const nuxtApp = useNuxtApp();
 
 const nuxtLinkProps = useForwardProps(
   reactiveOmit(
@@ -152,28 +155,79 @@ const nuxtLinkProps = useForwardProps(
   ),
 );
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...defu(
-      {
-        variants: {
-          active: {
-            true: mergeClasses(appConfig.pohon?.link?.variants?.active?.true, props.activeClass),
-            false: mergeClasses(appConfig.pohon?.link?.variants?.active?.false, props.inactiveClass),
-          },
-        },
+const pohon = computed(() => uv({
+  extend: uv(theme),
+  ...defu({
+    variants: {
+      active: {
+        true: mergeClasses(appConfig.pohon?.link?.variants?.active?.true, props.activeClass),
+        false: mergeClasses(appConfig.pohon?.link?.variants?.active?.false, props.inactiveClass),
       },
-      appConfig.pohon?.link || {},
-    ),
-  }),
-);
+    },
+  }, appConfig.pohon?.link || {}),
+}));
 
-const to = computed(() => props.to ?? props.href);
+const to = computed(() => {
+  const path = props.to ?? props.href;
+  if (!path) {
+    return path;
+  }
 
-function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
+  // Only localize string paths, leave route objects untouched to preserve state/params
+  if (typeof path !== 'string') {
+    return path;
+  }
+
+  // Skip external links and absolute URLs
+  if (props.external || hasProtocol(path, { acceptRelative: true })) {
+    return path;
+  }
+
+  // Use `$localePath` from `@nuxtjs/i18n` if available
+  const localePath = nuxtApp.$localePath as ((route: RouteLocationRaw, locale?: string) => string) | undefined;
+  if (localePath) {
+    return localePath(path);
+  }
+
+  return path;
+});
+
+const isInternalLink = computed(() => {
+  if (!to.value) {
+    return false;
+  }
+  if (props.external) {
+    return false;
+  }
+  if (typeof to.value !== 'string') {
+    return true;
+  }
+  if (hasProtocol(to.value, { acceptRelative: true })) {
+    return false;
+  }
+  if (props.target && props.target !== '_self') {
+    return false;
+  }
+  return true;
+});
+
+const externalRel = computed(() => {
+  if (props.noRel) {
+    return null;
+  }
+  if (props.rel) {
+    return props.rel;
+  }
+  return 'noopener noreferrer';
+});
+
+function isLinkActive({ route: linkRoute, isActive, isExactActive }: any = {}) {
   if (props.active !== undefined) {
     return props.active;
+  }
+
+  if (!to.value) {
+    return false;
   }
 
   if (props.exactQuery === 'partial') {
@@ -201,29 +255,26 @@ function isLinkActive({ route: linkRoute, isActive, isExactActive }: any) {
   return false;
 }
 
-function resolveLinkClass({ route, isActive, isExactActive }: any) {
+function resolveLinkClass({ route, isActive, isExactActive }: any = {}) {
   const active = isLinkActive({ route, isActive, isExactActive });
 
   if (props.raw) {
     return [props.class, active ? props.activeClass : props.inactiveClass];
   }
 
-  return pohon.value({
-    class: props.class,
-    active,
-    disabled: props.disabled,
-  });
+  return pohon.value({ class: props.class, active, disabled: props.disabled });
 }
 </script>
 
 <template>
   <NuxtLink
+    v-if="isInternalLink"
     v-slot="{ href, navigate, route: linkRoute, isActive, isExactActive, ...rest }"
     v-bind="nuxtLinkProps"
     :to="to"
     custom
   >
-    <template v-if="custom">
+    <APrimitiveSlot v-if="custom">
       <slot
         v-bind="{
           ...$attrs,
@@ -239,7 +290,7 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
           active: isLinkActive({ route: linkRoute, isActive, isExactActive }),
         }"
       />
-    </template>
+    </APrimitiveSlot>
     <PLinkBase
       v-else
       v-bind="{
@@ -259,4 +310,30 @@ function resolveLinkClass({ route, isActive, isExactActive }: any) {
       <slot :active="isLinkActive({ route: linkRoute, isActive, isExactActive })" />
     </PLinkBase>
   </NuxtLink>
+
+  <APrimitiveSlot v-else-if="custom">
+    <slot
+      v-bind="{
+        ...$attrs,
+        as,
+        type,
+        disabled,
+        ...(to ? { href: String(to), target: props.target, rel: externalRel, isExternal: true } : {}),
+        active: active ?? false,
+      }"
+    />
+  </APrimitiveSlot>
+  <PLinkBase
+    v-else
+    v-bind="{
+      ...$attrs,
+      as,
+      type,
+      disabled,
+      ...(to ? { href: String(to), target: props.target, rel: externalRel, isExternal: true } : {}),
+    }"
+    :class="resolveLinkClass()"
+  >
+    <slot :active="active ?? false" />
+  </PLinkBase>
 </template>

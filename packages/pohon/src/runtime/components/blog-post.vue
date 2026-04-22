@@ -1,182 +1,229 @@
 <script lang="ts">
-import type { VNode } from 'vue'
-import type { AppConfig } from '@nuxt/schema'
-import theme from '#build/pohon/blog-post'
-import type { PBadgeProps, PLinkProps, PUserProps } from '../types'
-import type { ImgHTMLAttributes } from '../types/html'
-import type { ComponentConfig } from '../types/tv'
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { PBadgeProps, PLinkProps, PUserProps } from '../types';
+import type { ImgHTMLAttributes } from '../types/html';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/blog-post';
 
-type BlogPost = ComponentConfig<typeof theme, AppConfig, 'blogPost'>
+type BlogPost = ComponentConfig<typeof theme, AppConfig, 'blogPost'>;
 
-export interface BlogPostProps {
+export interface PBlogPostProps {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
    */
-  as?: any
-  title?: string
-  description?: string
+  as?: any;
+  title?: string;
+  description?: string;
   /** The date of the blog post. Can be a string or a Date object. */
-  date?: string | Date
+  date?: string | Date;
   /**
    * Display a badge on the blog post.
    * Can be a string or an object.
    * `{ color: 'neutral', variant: 'subtle' }`{lang="ts-type"}
    */
-  badge?: string | PBadgeProps
+  badge?: string | PBadgeProps;
   /** The authors of the blog post. */
-  authors?: PUserProps[]
+  authors?: Array<PUserProps>;
   /** The image of the blog post. Can be a string or an object. */
-  image?: string | (Partial<ImgHTMLAttributes> & { [key: string]: any })
+  image?: string | (Partial<ImgHTMLAttributes> & { [key: string]: any });
   /**
    * The orientation of the blog post.
    * @defaultValue 'vertical'
    */
-  orientation?: BlogPost['variants']['orientation']
+  orientation?: BlogPost['variants']['orientation'];
   /**
    * @defaultValue 'outline'
    */
-  variant?: BlogPost['variants']['variant']
-  to?: PLinkProps['to']
-  target?: PLinkProps['target']
-  onClick?: (event: MouseEvent) => void | Promise<void>
-  class?: any
-  pohon?: BlogPost['slots']
+  variant?: BlogPost['variants']['variant'];
+  to?: PLinkProps['to'];
+  target?: PLinkProps['target'];
+  onClick?: (event: MouseEvent) => void | Promise<void>;
+  class?: any;
+  pohon?: BlogPost['slots'];
 }
 
-export interface BlogPostSlots {
-  date?(props?: {}): VNode[]
-  badge?(props?: {}): VNode[]
-  title?(props?: {}): VNode[]
-  description?(props?: {}): VNode[]
-  authors?(props: { pohon: BlogPost['pohon'] }): VNode[]
-  header?(props: { pohon: BlogPost['pohon'] }): VNode[]
-  body?(props?: {}): VNode[]
-  footer?(props?: {}): VNode[]
+export interface PBlogPostSlots {
+  date?: (props?: {}) => Array<VNode>;
+  badge?: (props?: {}) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  authors?: (props: { pohon: BlogPost['pohon'] }) => Array<VNode>;
+  header?: (props: { pohon: BlogPost['pohon'] }) => Array<VNode>;
+  body?: (props?: {}) => Array<VNode>;
+  footer?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Primitive, useDateFormatter } from 'reka-ui'
-import { useAppConfig } from '#imports'
-import { useLocale } from '../composables/use-locale'
-import { useComponentPohon } from '../composables/use-component-pohon'
-import ImageComponent from '#build/pohon-image-component'
-import { getSlotChildrenText } from '../utils'
-import { tv } from '../utils/tv'
-import PLink from './link.vue'
-import PBadge from './badge.vue'
-import PAvatar from './avatar.vue'
-import PAvatarGroup from './avatar-group.vue'
-import PUser from './user.vue'
+import ImageComponent from '#build/pohon-image-component';
+import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
+import { APrimitive, useDateFormatter } from 'akar';
+import { computed } from 'vue';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { useLocale } from '../composables/use-locale';
+import { getSlotChildrenText } from '../utils';
+import { uv } from '../utils/uv';
+import PAvatarGroup from './avatar-group.vue';
+import PAvatar from './avatar.vue';
+import PBadge from './badge.vue';
+import PLink from './link.vue';
+import PUser from './user.vue';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<BlogPostProps>(), {
+const props = withDefaults(defineProps<PBlogPostProps>(), {
   as: 'article',
-  orientation: 'vertical'
-})
-const slots = defineSlots<BlogPostSlots>()
+  orientation: 'vertical',
+});
+const slots = defineSlots<PBlogPostSlots>();
 
-const { locale } = useLocale()
-const appConfig = useAppConfig() as BlogPost['AppConfig']
-const pohonProp = useComponentPohon('blogPost', props)
-const formatter = useDateFormatter(locale.value.code)
+const { locale } = useLocale();
+const appConfig = useAppConfig() as BlogPost['AppConfig'];
+const pohonProp = useComponentPohon('blogPost', props);
+const formatter = useDateFormatter(locale.value.code);
 
-const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.pohon?.blogPost || {}) })({
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.blogPost || {}) })({
   orientation: props.orientation,
   variant: props.variant,
   image: !!props.image,
-  to: !!props.to || !!props.onClick
-}))
+  to: !!props.to || !!props.onClick,
+}));
 
 const date = computed(() => {
   if (!props.date) {
-    return
+    return;
   }
 
   try {
-    return formatter.custom(new Date(props.date), { dateStyle: 'medium' })
+    return formatter.custom({
+      date: new Date(props.date),
+      options: { dateStyle: 'medium' },
+    });
   } catch {
-    return props.date
+    return props.date;
   }
-})
+});
 const datetime = computed(() => {
   if (!props.date) {
-    return
+    return;
   }
 
   try {
-    return new Date(props.date)?.toISOString()
+    return new Date(props.date)?.toISOString();
   } catch {
-    return undefined
+    return undefined;
   }
-})
+});
 const ariaLabel = computed(() => {
-  const slotText = slots.title && getSlotChildrenText(slots.title())
-  return (slotText || props.title || 'Post link').trim()
-})
+  const slotText = slots.title && getSlotChildrenText(slots.title());
+  return (slotText || props.title || 'Post link').trim();
+});
 </script>
 
 <template>
-  <Primitive :as="as" :data-orientation="orientation" data-slot="root" :class="ui.root({ class: [pohonProp?.root, props.class] })" @click="onClick">
-    <div v-if="image || !!slots.header" data-slot="header" :class="ui.header({ class: pohonProp?.header })">
-      <slot name="header" : pohon="ui">
+  <APrimitive
+    :as="as"
+    :data-orientation="orientation"
+    data-slot="root"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
+    @click="onClick"
+  >
+    <div
+      v-if="image || !!slots.header"
+      data-slot="header"
+      :class="pohon.header({ class: pohonProp?.header })"
+    >
+      <slot
+        name="header"
+        :pohon="pohon"
+      >
         <component
           :is="ImageComponent"
-          v-bind="typeof image === 'string' ? { src: image, alt: title } : { alt: title, ...image }"
+          v-bind="isString(image) ? { src: image, alt: title } : { alt: title, ...image }"
           data-slot="image"
-          :class="ui.image({ class: pohonProp?.image, to: !!to })"
+          :class="pohon.image({ class: pohonProp?.image, to: !!to })"
         />
       </slot>
     </div>
 
-    <div data-slot="body" :class="ui.body({ class: pohonProp?.body })">
+    <div
+      data-slot="body"
+      :class="pohon.body({ class: pohonProp?.body })"
+    >
       <PLink
         v-if="to"
         :aria-label="ariaLabel"
         v-bind="{ to, target, ...$attrs }"
-        class="focus:outline-none peer"
+        class="peer focus:outline-none"
         raw
       >
-        <span class="absolute inset-0" aria-hidden="true" />
+        <span
+          class="inset-0 absolute"
+          aria-hidden="true"
+        />
       </PLink>
 
       <slot name="body">
-        <div v-if="(date || !!slots.date) || (badge || !!slots.badge)" data-slot="meta" :class="ui.meta({ class: pohonProp?.meta })">
+        <div
+          v-if="(date || !!slots.date) || (badge || !!slots.badge)"
+          data-slot="meta"
+          :class="pohon.meta({ class: pohonProp?.meta })"
+        >
           <slot name="badge">
             <PBadge
               v-if="badge"
               color="neutral"
               variant="subtle"
-              v-bind="typeof badge === 'string' ? { label: badge } : badge"
+              v-bind="isString(badge) ? { label: badge } : badge"
               data-slot="badge"
-              :class="ui.badge({ class: pohonProp?.badge })"
+              :class="pohon.badge({ class: pohonProp?.badge })"
             />
           </slot>
 
-          <time v-if="date || !!slots.date" :datetime="datetime" data-slot="date" :class="ui.date({ class: pohonProp?.date })">
+          <time
+            v-if="date || !!slots.date"
+            :datetime="datetime"
+            data-slot="date"
+            :class="pohon.date({ class: pohonProp?.date })"
+          >
             <slot name="date">
               {{ date }}
             </slot>
           </time>
         </div>
 
-        <h2 v-if="title || !!slots.title" data-slot="title" :class="ui.title({ class: pohonProp?.title })">
+        <h2
+          v-if="title || !!slots.title"
+          data-slot="title"
+          :class="pohon.title({ class: pohonProp?.title })"
+        >
           <slot name="title">
             {{ title }}
           </slot>
         </h2>
 
-        <div v-if="description || !!slots.description" data-slot="description" :class="ui.description({ class: pohonProp?.description })">
+        <div
+          v-if="description || !!slots.description"
+          data-slot="description"
+          :class="pohon.description({ class: pohonProp?.description })"
+        >
           <slot name="description">
             {{ description }}
           </slot>
         </div>
 
-        <div v-if="authors?.length || !!slots.authors" data-slot="authors" :class="ui.authors({ class: pohonProp?.authors })">
-          <slot name="authors" : pohon="ui">
+        <div
+          v-if="authors?.length || !!slots.authors"
+          data-slot="authors"
+          :class="pohon.authors({ class: pohonProp?.authors })"
+        >
+          <slot
+            name="authors"
+            :pohon="pohon"
+          >
             <template v-if="authors?.length">
               <PAvatarGroup v-if="authors.length > 1">
                 <PLink
@@ -185,21 +232,28 @@ const ariaLabel = computed(() => {
                   :to="author.to"
                   :target="author.target"
                   data-slot="avatar"
-                  :class="ui.avatar({ class: pohonProp?.avatar, to: !!author.to })"
+                  :class="pohon.avatar({ class: pohonProp?.avatar, to: !!author.to })"
                   raw
                 >
                   <PAvatar v-bind="author.avatar" />
                 </PLink>
               </PAvatarGroup>
-              <PUser v-else v-bind="authors[0]" />
+              <PUser
+                v-else
+                v-bind="authors[0]"
+              />
             </template>
           </slot>
         </div>
       </slot>
     </div>
 
-    <div v-if="!!slots.footer" data-slot="footer" :class="ui.footer({ class: pohonProp?.footer })">
+    <div
+      v-if="!!slots.footer"
+      data-slot="footer"
+      :class="pohon.footer({ class: pohonProp?.footer })"
+    >
       <slot name="footer" />
     </div>
-  </Primitive>
+  </APrimitive>
 </template>

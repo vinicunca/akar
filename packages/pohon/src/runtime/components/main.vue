@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/main';
 
@@ -16,7 +17,7 @@ export interface PMainProps {
 }
 
 export interface PMainSlots {
-  default: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -33,18 +34,12 @@ const props = withDefaults(
     as: 'main',
   },
 );
-
 defineSlots<PMainSlots>();
 
 const appConfig = useAppConfig() as Main['AppConfig'];
 const pohonProp = useComponentPohon('main', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.main || {}),
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.main || {}) }));
 </script>
 
 <template>

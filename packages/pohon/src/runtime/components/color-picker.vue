@@ -30,7 +30,6 @@ function HSVtoHSL(hsv: HSVColor): HSLObject {
 
   return {
     H: hsv.h,
-    // eslint-disable-next-line sonar/no-nested-conditional
     S: x === 0 || x === 200 ? 0 : Math.round(hsv.s * hsv.v / (x <= 100 ? x : 200 - x)),
     L: x / 2,
   };
@@ -93,14 +92,9 @@ const modelValue = defineModel<string>(undefined);
 const appConfig = useAppConfig() as ColorPicker['AppConfig'];
 const pohonProp = useComponentPohon('colorPicker', props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.colorPicker || {}),
-  })({
-    size: props.size,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.colorPicker || {}) })({
+  size: props.size,
+}));
 
 const pickedColor = computed<HSVColor>({
   get() {
@@ -140,19 +134,11 @@ const pickedColor = computed<HSVColor>({
 });
 
 function useColorDraggable(
-  {
-    targetElement,
-    containerElement,
-    axis = 'both',
-    initialPosition = { x: 0, y: 0 },
-    disabled,
-  }: {
-    targetElement: MaybeRefOrGetter<HTMLElement | null>;
-    containerElement: MaybeRefOrGetter<HTMLElement | null>;
-    axis?: 'x' | 'y' | 'both';
-    initialPosition?: { x: number; y: number };
-    disabled?: MaybeRefOrGetter<boolean | undefined>;
-  },
+  targetElement: MaybeRefOrGetter<HTMLElement | null>,
+  containerElement: MaybeRefOrGetter<HTMLElement | null>,
+  axis: 'x' | 'y' | 'both' = 'both',
+  initialPosition = { x: 0, y: 0 },
+  disabled?: MaybeRefOrGetter<boolean | undefined>,
 ) {
   const position = ref<{ x: number; y: number }>(initialPosition);
   const pressedDelta = ref<{ x: number; y: number }>();
@@ -231,27 +217,15 @@ const trackThumbRef = ref<HTMLDivElement | null>(null);
 
 const disabled = computed(() => props.disabled);
 
-const { position: selectorThumbPosition } = useColorDraggable({
-  targetElement: selectorThumbRef,
-  containerElement: selectorRef,
-  axis: 'both',
-  initialPosition: {
-    x: pickedColor.value.s,
-    y: normalizeBrightness(pickedColor.value.v),
-  },
-  disabled,
-});
+const { position: selectorThumbPosition } = useColorDraggable(selectorThumbRef, selectorRef, 'both', {
+  x: pickedColor.value.s,
+  y: normalizeBrightness(pickedColor.value.v),
+}, disabled);
 
-const { position: trackThumbPosition } = useColorDraggable({
-  targetElement: trackThumbRef,
-  containerElement: trackRef,
-  axis: 'y',
-  initialPosition: {
-    x: 0,
-    y: normalizeHue(pickedColor.value.h, 'right'),
-  },
-  disabled,
-});
+const { position: trackThumbPosition } = useColorDraggable(trackThumbRef, trackRef, 'y', {
+  x: 0,
+  y: normalizeHue(pickedColor.value.h, 'right'),
+}, disabled);
 
 const { pause: pauseWatchColor, resume: resumeWatchColor } = watchPausable(pickedColor, (hsb) => {
   selectorThumbPosition.value = {
@@ -301,29 +275,29 @@ const trackThumbStyle = computed(() => ({
 <template>
   <APrimitive
     :as="as"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     :data-disabled="disabled ? true : undefined"
-    data-pohon="color-picker-root"
   >
     <div
+      data-slot="picker"
       :class="pohon.picker({ class: pohonProp?.picker })"
-      data-pohon="color-picker-picker"
     >
       <div
         ref="selectorRef"
+        data-slot="selector"
         :class="pohon.selector({ class: pohonProp?.selector })"
-        data-pohon="color-picker-selector"
         :style="selectorStyle"
       >
         <div
+          data-slot="selectorBackground"
           :class="pohon.selectorBackground({ class: pohonProp?.selectorBackground })"
-          data-pohon="color-picker-selector-background"
           data-color-picker-background
         >
           <div
             ref="selectorThumbRef"
+            data-slot="selectorThumb"
             :class="pohon.selectorThumb({ class: pohonProp?.selectorThumb })"
-            data-pohon="color-picker-selector-thumb"
             :style="selectorThumbStyle"
             :data-disabled="disabled ? true : undefined"
           />
@@ -331,14 +305,14 @@ const trackThumbStyle = computed(() => ({
       </div>
       <div
         ref="trackRef"
+        data-slot="track"
         :class="pohon.track({ class: pohonProp?.track })"
-        data-pohon="color-picker-track"
         data-color-picker-track
       >
         <div
           ref="trackThumbRef"
+          data-slot="trackThumb"
           :class="pohon.trackThumb({ class: pohonProp?.trackThumb })"
-          data-pohon="color-picker-track-thumb"
           :style="trackThumbStyle"
           :data-disabled="disabled ? true : undefined"
         />

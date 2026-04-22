@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AConfigProviderProps, ATooltipProviderProps } from 'akar';
+import type { VNode } from 'vue';
 import type { PToasterProps } from '../types';
 import type { PLocale, PMessages } from '../types/locale';
 
@@ -11,7 +12,7 @@ export interface PAppProps<T extends PMessages = PMessages> extends Omit<AConfig
 }
 
 export interface PAppSlots {
-  default: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
 }
 
 export default {
@@ -50,7 +51,7 @@ provide(portalTargetInjectionKey, portal);
 
 <template>
   <AConfigProvider
-    :use-id="() => useId()"
+    :use-id="() => (useId())"
     :dir="props.dir || locale?.dir"
     :locale="locale?.code"
     v-bind="configProviderProps"

@@ -6,6 +6,7 @@ import type {
   ADialogRootEmits,
   ADialogRootProps,
 } from 'akar';
+import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -71,15 +72,15 @@ export interface PSlideoverEmits extends ADialogRootEmits {
 }
 
 export interface PSlideoverSlots {
-  default: (props: { open: boolean }) => any;
-  content: (props: { close: () => void }) => any;
-  header: (props: { close: () => void }) => any;
-  title: (props?: object) => any;
-  description: (props?: object) => any;
-  actions: (props?: object) => any;
-  close: (props: { pohon: Slideover['pohon'] }) => any;
-  body: (props: { close: () => void }) => any;
-  footer: (props: { close: () => void }) => any;
+  default?: (props: { open: boolean }) => Array<VNode>;
+  content?: (props: { close: () => void }) => Array<VNode>;
+  header?: (props: { close: () => void }) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  actions?: (props?: {}) => Array<VNode>;
+  close?: (props: { pohon: Slideover['pohon'] }) => Array<VNode>;
+  body?: (props: { close: () => void }) => Array<VNode>;
+  footer?: (props: { close: () => void }) => Array<VNode>;
 }
 </script>
 
@@ -100,6 +101,7 @@ import {
 } from 'akar';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { FieldGroupReset } from '../composables/use-field-group';
 import { useLocale } from '../composables/use-locale';
 import { usePortal } from '../composables/use-portal';
 import { pointerDownOutside } from '../utils/overlay';
@@ -133,7 +135,7 @@ const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => props.content);
 const contentEvents = computed(() => {
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'];
+    const events = ['interactOutside', 'escapeKeyDown'];
 
     return events.reduce((acc, curr) => {
       acc[curr] = (event: Event) => {
@@ -149,15 +151,10 @@ const contentEvents = computed(() => {
   };
 });
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.slideover || {}),
-  })({
-    side: props.side,
-    inset: props.inset,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.slideover || {}) })({
+  side: props.side,
+  inset: props.inset,
+}));
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -175,117 +172,124 @@ const pohon = computed(() =>
     </ADialogTrigger>
 
     <ADialogPortal v-bind="portalProps">
-      <ADialogOverlay
-        v-if="overlay"
-        :class="pohon.overlay({ class: pohonProp?.overlay })"
-        data-pohon="slideover-overlay"
-      />
+      <FieldGroupReset>
+        <ADialogOverlay
+          v-if="overlay"
+          data-slot="overlay"
+          :class="pohon.overlay({ class: pohonProp?.overlay })"
+        />
 
-      <ADialogContent
-        :data-side="side"
-        :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
-        v-bind="contentProps"
-        data-pohon="slideover-content"
-        @after-enter="emits('after:enter')"
-        @after-leave="emits('after:leave')"
-        v-on="contentEvents"
-      >
-        <AVisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
-          <ADialogTitle v-if="title || !!slots.title">
-            <slot name="title">
-              {{ title }}
-            </slot>
-          </ADialogTitle>
-
-          <ADialogDescription v-if="description || !!slots.description">
-            <slot name="description">
-              {{ description }}
-            </slot>
-          </ADialogDescription>
-        </AVisuallyHidden>
-
-        <slot
-          name="content"
-          :close="close"
+        <ADialogContent
+          :data-side="side"
+          data-slot="content"
+          :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
+          v-bind="contentProps"
+          @after-enter="emits('after:enter')"
+          @after-leave="emits('after:leave')"
+          v-on="contentEvents"
         >
-          <div
-            v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)"
-            :class="pohon.header({ class: pohonProp?.header })"
-            data-pohon="slideover-header"
+          <AVisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
+            <ADialogTitle v-if="!title && !slots.title" />
+            <ADialogTitle v-else-if="!!slots.content">
+              <slot name="title">
+                {{ title }}
+              </slot>
+            </ADialogTitle>
+
+            <ADialogDescription v-if="!description && !slots.description" />
+            <ADialogDescription v-else-if="!!slots.content">
+              <slot name="description">
+                {{ description }}
+              </slot>
+            </ADialogDescription>
+          </AVisuallyHidden>
+
+          <slot
+            name="content"
+            :close="close"
           >
-            <slot
-              name="header"
-              :close="close"
+            <div
+              v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)"
+              data-slot="header"
+              :class="pohon.header({ class: pohonProp?.header })"
             >
-              <div :class="pohon.wrapper({ class: pohonProp?.wrapper })">
-                <ADialogTitle
-                  v-if="title || !!slots.title"
-                  :class="pohon.title({ class: pohonProp?.title })"
-                  data-pohon="slideover-title"
-                >
-                  <slot name="title">
-                    {{ title }}
-                  </slot>
-                </ADialogTitle>
-
-                <ADialogDescription
-                  v-if="description || !!slots.description"
-                  :class="pohon.description({ class: pohonProp?.description })"
-                  data-pohon="slideover-description"
-                >
-                  <slot name="description">
-                    {{ description }}
-                  </slot>
-                </ADialogDescription>
-              </div>
-
-              <slot name="actions" />
-
-              <ADialogClose
-                v-if="props.close || !!slots.close"
-                as-child
+              <slot
+                name="header"
+                :close="close"
               >
-                <slot
-                  name="close"
-                  :pohon="pohon"
+                <div
+                  data-slot="wrapper"
+                  :class="pohon.wrapper({ class: pohonProp?.wrapper })"
                 >
-                  <PButton
-                    v-if="props.close"
-                    :icon="closeIcon || appConfig.pohon.icons.close"
-                    color="neutral"
-                    variant="ghost"
-                    :aria-label="t('slideover.close')"
-                    v-bind="(typeof props.close === 'object' ? props.close : {})"
-                    :class="pohon.close({ class: pohonProp?.close })"
-                    data-pohon="slideover-close"
-                  />
-                </slot>
-              </ADialogClose>
-            </slot>
-          </div>
+                  <ADialogTitle
+                    v-if="title || !!slots.title"
+                    data-slot="title"
+                    :class="pohon.title({ class: pohonProp?.title })"
+                  >
+                    <slot name="title">
+                      {{ title }}
+                    </slot>
+                  </ADialogTitle>
 
-          <div
-            :class="pohon.body({ class: pohonProp?.body })"
-            data-pohon="slideover-body"
-          >
-            <slot
-              name="body"
-              :close="close"
-            />
-          </div>
+                  <ADialogDescription
+                    v-if="description || !!slots.description"
+                    data-slot="description"
+                    :class="pohon.description({ class: pohonProp?.description })"
+                  >
+                    <slot name="description">
+                      {{ description }}
+                    </slot>
+                  </ADialogDescription>
+                </div>
 
-          <div
-            v-if="!!slots.footer"
-            :class="pohon.footer({ class: pohonProp?.footer })"
-            data-pohon="slideover-footer"
-          >
-            <slot
-              name="footer"
-              :close="close"
-            />
-          </div>
-        </slot>
-      </ADialogContent>
+                <slot name="actions" />
+
+                <ADialogClose
+                  v-if="props.close || !!slots.close"
+                  as-child
+                >
+                  <slot
+                    name="close"
+                    :pohon="pohon"
+                  >
+                    <PButton
+                      v-if="props.close"
+                      :icon="closeIcon || appConfig.pohon.icons.close"
+                      color="neutral"
+                      variant="ghost"
+                      :aria-label="t('slideover.close')"
+                      v-bind="(typeof props.close === 'object' ? props.close : {})"
+                      data-slot="close"
+                      :class="pohon.close({ class: pohonProp?.close })"
+                    />
+                  </slot>
+                </ADialogClose>
+              </slot>
+            </div>
+
+            <div
+              data-slot="body"
+              :class="pohon.body({ class: pohonProp?.body })"
+            >
+              <slot
+                name="body"
+                :close="close"
+              />
+            </div>
+
+            <div
+              v-if="!!slots.footer"
+              data-slot="footer"
+              :class="pohon.footer({ class: pohonProp?.footer })"
+            >
+              <slot
+                name="footer"
+                :close="close"
+              />
+            </div>
+          </slot>
+        </ADialogContent>
+      </FieldGroupReset>
     </ADialogPortal>
   </ADialogRoot>
 </template>

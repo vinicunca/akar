@@ -7,6 +7,7 @@ import type {
   ADialogRootProps,
   PointerDownOutsideEvent,
 } from 'akar';
+import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { EmitsToProps } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -72,21 +73,21 @@ export interface PDialogEmits extends ADialogRootEmits {
 }
 
 export interface PDialogSlots {
-  default: (props: { open: boolean }) => any;
-  content: (props: { close: () => void }) => any;
-  header: (props: { close: () => void }) => any;
-  title: (props?: object) => any;
-  description: (props?: object) => any;
-  actions: (props?: object) => any;
-  close: (props: { pohon: Dialog['pohon'] }) => any;
-  body: (props: { close: () => void }) => any;
-  footer: (props: { close: () => void }) => any;
+  default?: (props: { open: boolean }) => Array<VNode>;
+  content?: (props: { close: () => void }) => Array<VNode>;
+  header?: (props: { close: () => void }) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
+  actions?: (props?: {}) => Array<VNode>;
+  close?: (props: { pohon: Dialog['pohon'] }) => Array<VNode>;
+  body?: (props: { close: () => void }) => Array<VNode>;
+  footer?: (props: { close: () => void }) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { reactivePick } from '@vueuse/core';
+import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   ADialogClose,
   ADialogContent,
@@ -101,6 +102,7 @@ import {
 } from 'akar';
 import { computed, toRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
+import { FieldGroupReset } from '../composables/use-field-group';
 import { useLocale } from '../composables/use-locale';
 import { usePortal } from '../composables/use-portal';
 import { pointerDownOutside } from '../utils/overlay';
@@ -133,18 +135,15 @@ const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => props.content);
 const contentEvents = computed(() => {
   if (!props.dismissible) {
-    const events = ['pointerDownOutside', 'interactOutside', 'escapeKeyDown'];
+    const events = ['interactOutside', 'escapeKeyDown'];
 
-    return events.reduce(
-      (acc, curr) => {
-        acc[curr] = (event: Event) => {
-          event.preventDefault();
-          emits('close:prevent');
-        };
-        return acc;
-      },
-      {} as Record<typeof events[number], (event: Event) => void>,
-    );
+    return events.reduce((acc, curr) => {
+      acc[curr] = (event: Event) => {
+        event.preventDefault();
+        emits('close:prevent');
+      };
+      return acc;
+    }, {} as Record<typeof events[number], (event: Event) => void>);
   }
 
   return {
@@ -152,15 +151,14 @@ const contentEvents = computed(() => {
   };
 });
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.dialog || {}),
-  })({
-    transition: props.transition,
-    fullscreen: props.fullscreen,
-  }),
-);
+const [DefineContentTemplate, ReuseContentTemplate] = createReusableTemplate();
+
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dialog || {}) })({
+  transition: props.transition,
+  fullscreen: props.fullscreen,
+  overlay: props.overlay,
+  scrollable: props.scrollable,
+} as any));
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -169,37 +167,25 @@ const pohon = computed(() =>
     v-slot="{ open, close }"
     v-bind="rootProps"
   >
-    <ADialogTrigger
-      v-if="!!slots.default"
-      as-child
-      :class="props.class"
-    >
-      <slot :open="open" />
-    </ADialogTrigger>
-
-    <ADialogPortal v-bind="portalProps">
-      <ADialogOverlay
-        v-if="overlay"
-        :class="pohon.overlay({ class: pohonProp?.overlay })"
-        data-pohon="dialog-overlay"
-      />
-
+    <DefineContentTemplate>
       <ADialogContent
+        data-slot="content"
         :class="pohon.content({ class: [!slots.default && props.class, pohonProp?.content] })"
-        data-pohon="dialog-content"
         v-bind="contentProps"
         @after-enter="emits('after:enter')"
         @after-leave="emits('after:leave')"
         v-on="contentEvents"
       >
-        <AVisuallyHidden v-if="!!slots.content && ((title || !!slots.title) || (description || !!slots.description))">
-          <ADialogTitle v-if="title || !!slots.title">
+        <AVisuallyHidden v-if="(!title && !slots.title) || (!description && !slots.description) || !!slots.content">
+          <ADialogTitle v-if="!title && !slots.title" />
+          <ADialogTitle v-else-if="!!slots.content">
             <slot name="title">
               {{ title }}
             </slot>
           </ADialogTitle>
 
-          <ADialogDescription v-if="description || !!slots.description">
+          <ADialogDescription v-if="!description && !slots.description" />
+          <ADialogDescription v-else-if="!!slots.content">
             <slot name="description">
               {{ description }}
             </slot>
@@ -212,21 +198,21 @@ const pohon = computed(() =>
         >
           <div
             v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description) || (props.close || !!slots.close)"
+            data-slot="header"
             :class="pohon.header({ class: pohonProp?.header })"
-            data-pohon="dialog-header"
           >
             <slot
               name="header"
               :close="close"
             >
               <div
+                data-slot="wrapper"
                 :class="pohon.wrapper({ class: pohonProp?.wrapper })"
-                data-pohon="dialog-wrapper"
               >
                 <ADialogTitle
                   v-if="title || !!slots.title"
+                  data-slot="title"
                   :class="pohon.title({ class: pohonProp?.title })"
-                  data-pohon="dialog-title"
                 >
                   <slot name="title">
                     {{ title }}
@@ -235,8 +221,8 @@ const pohon = computed(() =>
 
                 <ADialogDescription
                   v-if="description || !!slots.description"
+                  data-slot="description"
                   :class="pohon.description({ class: pohonProp?.description })"
-                  data-pohon="dialog-description"
                 >
                   <slot name="description">
                     {{ description }}
@@ -259,10 +245,10 @@ const pohon = computed(() =>
                     :icon="closeIcon || appConfig.pohon.icons.close"
                     color="neutral"
                     variant="ghost"
-                    :aria-label="t('dialog.close')"
+                    :aria-label="t('modal.close')"
                     v-bind="(typeof props.close === 'object' ? props.close : {})"
+                    data-slot="close"
                     :class="pohon.close({ class: pohonProp?.close })"
-                    data-pohon="dialog-close"
                   />
                 </slot>
               </ADialogClose>
@@ -271,8 +257,8 @@ const pohon = computed(() =>
 
           <div
             v-if="!!slots.body"
+            data-slot="body"
             :class="pohon.body({ class: pohonProp?.body })"
-            data-pohon="dialog-body"
           >
             <slot
               name="body"
@@ -282,8 +268,8 @@ const pohon = computed(() =>
 
           <div
             v-if="!!slots.footer"
+            data-slot="footer"
             :class="pohon.footer({ class: pohonProp?.footer })"
-            data-pohon="dialog-footer"
           >
             <slot
               name="footer"
@@ -292,6 +278,37 @@ const pohon = computed(() =>
           </div>
         </slot>
       </ADialogContent>
+    </DefineContentTemplate>
+
+    <ADialogTrigger
+      v-if="!!slots.default"
+      as-child
+      :class="props.class"
+    >
+      <slot :open="open" />
+    </ADialogTrigger>
+
+    <ADialogPortal v-bind="portalProps">
+      <FieldGroupReset>
+        <template v-if="scrollable">
+          <ADialogOverlay
+            data-slot="overlay"
+            :class="pohon.overlay({ class: pohonProp?.overlay })"
+          >
+            <ReuseContentTemplate />
+          </ADialogOverlay>
+        </template>
+
+        <template v-else>
+          <ADialogOverlay
+            v-if="overlay"
+            data-slot="overlay"
+            :class="pohon.overlay({ class: pohonProp?.overlay })"
+          />
+
+          <ReuseContentTemplate />
+        </template>
+      </FieldGroupReset>
     </ADialogPortal>
   </ADialogRoot>
 </template>

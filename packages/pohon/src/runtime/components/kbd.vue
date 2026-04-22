@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
 import type { KbdKey } from '../composables/use-kbd';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/kbd';
@@ -30,7 +31,7 @@ export interface PKbdProps {
 }
 
 export interface PKbdSlots {
-  default: (props?: object) => any;
+  default?: (props?: {}) => Array<VNode>;
 }
 </script>
 
@@ -54,20 +55,13 @@ const { getKbdKey } = useKbd();
 const appConfig = useAppConfig() as Kbd['AppConfig'];
 const pohonProp = useComponentPohon('kbd', props);
 
-const pohon = computed(() =>
-  uv({ extend: uv(theme), ...(appConfig.pohon?.kbd || {}) }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.kbd || {}) }));
 </script>
 
 <template>
   <APrimitive
     :as="as"
-    :class="pohon({
-      class: [pohonProp?.base, props.class],
-      color: props.color,
-      variant: props.variant,
-      size: props.size,
-    })"
+    :class="pohon({ class: [pohonProp?.base, props.class], color: props.color, variant: props.variant, size: props.size })"
   >
     <slot>
       {{ getKbdKey(value) }}

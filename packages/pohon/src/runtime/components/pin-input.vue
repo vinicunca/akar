@@ -1,10 +1,8 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type {
-  APinInputRootEmits,
-  APinInputRootProps,
-} from 'akar';
+import type { APinInputRootEmits, APinInputRootProps } from 'akar';
+import type { ComponentPublicInstance } from 'vue';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/pin-input';
 
@@ -39,6 +37,8 @@ export interface PPinInputProps<T extends PinInputType = 'text'> extends Pick<AP
   autofocus?: boolean;
   autofocusDelay?: number;
   highlight?: boolean;
+  /** Keep the mobile text size on all breakpoints. */
+  fixed?: boolean;
   class?: any;
   pohon?: PinInput['slots'];
 }
@@ -51,14 +51,9 @@ export type PPinInputEmits<T extends PinInputType = 'text'> = APinInputRootEmits
 </script>
 
 <script setup lang="ts" generic="T extends PinInputType">
-import type { ComponentPublicInstance } from 'vue';
 import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
-import {
-  APinInputInput,
-  APinInputRoot,
-  useForwardPropsEmits,
-} from 'akar';
+import { APinInputInput, APinInputRoot, useForwardPropsEmits } from 'akar';
 import { computed, onMounted, ref } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
@@ -106,17 +101,13 @@ const {
   ariaAttrs,
 } = useFormField<PPinInputProps>(props);
 
-const pohon = computed(() =>
-  uv({
-    extend: uv(theme),
-    ...(appConfig.pohon?.pinInput || {}),
-  })({
-    color: color.value,
-    variant: props.variant,
-    size: size.value,
-    highlight: highlight.value,
-  }),
-);
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pinInput || {}) })({
+  color: color.value,
+  variant: props.variant,
+  size: size.value,
+  highlight: highlight.value,
+  fixed: props.fixed,
+}));
 
 const inputsRef = ref<Array<ComponentPublicInstance>>([]);
 
@@ -165,6 +156,7 @@ defineExpose({
     :placeholder="placeholder"
     :model-value="(modelValue as PinInputValue<T>)"
     :default-value="(defaultValue as PinInputValue<T>)"
+    data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
     @update:model-value="emitFormInput()"
     @complete="onComplete"
@@ -174,6 +166,7 @@ defineExpose({
       :key="ids"
       :ref="el => setInputRef(index as number, el)"
       :index="(index as number)"
+      data-slot="base"
       :class="pohon.base({ class: pohonProp?.base })"
       :disabled="disabled"
       @blur="onBlur"
