@@ -102,7 +102,7 @@ Each group contains an `items` array of objects that define the commands. Each i
 - `icon?: string`
 - `avatar?: AvatarProps`
 - `chip?: ChipProps`
-- `kbds?: string[] | KbdProps[]`
+- `kbds?: string[] | PKbdProps[]`
 - `active?: boolean`
 - `loading?: boolean`
 - `disabled?: boolean`

@@ -102,6 +102,7 @@ export type PPricingTableSlots<T extends PPricingTableTier = PPricingTableTier> 
 
 <script setup lang="ts" generic="T extends PPricingTableTier">
 import { useAppConfig } from '#imports';
+import { isBoolean, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
@@ -192,7 +193,7 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
                 v-if="tier.badge"
                 color="primary"
                 variant="subtle"
-                v-bind="typeof tier.badge === 'string' ? { label: tier.badge } : tier.badge"
+                v-bind="isString(tier.badge) ? { label: tier.badge } : tier.badge"
                 data-slot="tierBadge"
                 :class="pohon.tierBadge({ class: pohonProp?.tierBadge })"
               />
@@ -320,7 +321,7 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
   <DefineFeatureTemplate v-slot="{ feature, tier }">
     <template v-if="feature.tiers?.[tier.id]">
       <PIcon
-        v-if="typeof feature.tiers[tier.id] === 'boolean'"
+        v-if="isBoolean(feature.tiers[tier.id])"
         :name="appConfig.pohon.icons.success"
         data-slot="tierFeatureIcon"
         :class="pohon.tierFeatureIcon({ class: pohonProp?.tierFeatureIcon, active: true })"

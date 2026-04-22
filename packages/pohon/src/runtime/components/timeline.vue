@@ -71,6 +71,7 @@ export type PTimelineSlots<T extends PTimelineItem = PTimelineItem> = {
 
 <script setup lang="ts" generic="T extends PTimelineItem">
 import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { APrimitive, ASeparator } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -103,7 +104,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.timeli
 const currentStepIndex = computed(() => {
   const value = modelValue.value ?? props.defaultValue;
 
-  if (typeof value === 'string') {
+  if (isString(value)) {
     return props.items.findIndex((item) => getProp(item, props.valueKey as string) === value) ?? -1;
   }
 

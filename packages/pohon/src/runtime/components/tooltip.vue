@@ -52,6 +52,7 @@ export interface PTooltipSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { ATooltipArrow, ATooltipContent, ATooltipPortal, ATooltipRoot, ATooltipTrigger, injectATooltipProviderContext, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
@@ -139,7 +140,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.toolti
                 v-for="(kbd, index) in kbds"
                 :key="index"
                 :size="((pohonProp?.kbdsSize || pohon.kbdsSize()) as PKbdProps['size'])"
-                v-bind="typeof kbd === 'string' ? { value: kbd } : kbd"
+                v-bind="isString(kbd) ? { value: kbd } : kbd"
               />
             </span>
           </slot>

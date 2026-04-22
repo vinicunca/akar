@@ -71,6 +71,7 @@ export interface PLinkSlots {
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { usePage } from '@inertiajs/vue3';
+import { isString } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitiveSlot, useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -123,7 +124,7 @@ const isExternal = computed(() => {
     return false;
   }
 
-  return typeof href.value === 'string' && hasProtocol(href.value, { acceptRelative: true });
+  return isString(href.value) && hasProtocol(href.value, { acceptRelative: true });
 });
 
 const hasTarget = computed(() => !!props.target && props.target !== '_self');

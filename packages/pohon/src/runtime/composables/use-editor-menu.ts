@@ -8,6 +8,7 @@ import { computePosition } from '@floating-ui/dom';
 import { PluginKey } from '@tiptap/pm/state';
 import Suggestion from '@tiptap/suggestion';
 import { VueRenderer } from '@tiptap/vue-3';
+import { isString } from '@vinicunca/perkakas';
 import { defu } from 'defu';
 import { computed, h, ref, unref, watch } from 'vue';
 import { getProp, isArrayOfArray } from '../utils';
@@ -189,7 +190,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
   const limit = options.limit ?? 42;
 
   // Create the plugin key instance early (needed by showMenu helper)
-  const pluginKeyInstance = typeof options.pluginKey === 'string' ? new PluginKey(options.pluginKey) : options.pluginKey;
+  const pluginKeyInstance = isString(options.pluginKey) ? new PluginKey(options.pluginKey) : options.pluginKey;
 
   // Normalize items into groups first
   const groups = computed<Array<Array<T>>>(() => {

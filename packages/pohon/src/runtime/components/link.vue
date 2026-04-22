@@ -107,6 +107,7 @@ interface NuxtLinkDefaultSlotProps {
 
 <script setup lang="ts">
 import { useAppConfig, useNuxtApp, useRoute } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitiveSlot, useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -174,7 +175,7 @@ const to = computed(() => {
   }
 
   // Only localize string paths, leave route objects untouched to preserve state/params
-  if (typeof path !== 'string') {
+  if (!isString(path)) {
     return path;
   }
 
@@ -199,7 +200,7 @@ const isInternalLink = computed(() => {
   if (props.external) {
     return false;
   }
-  if (typeof to.value !== 'string') {
+  if (!isString(to.value)) {
     return true;
   }
   if (hasProtocol(to.value, { acceptRelative: true })) {

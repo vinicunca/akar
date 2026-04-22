@@ -92,6 +92,7 @@ export type PTabsSlots<T extends PTabsItem = PTabsItem> = {
 
 <script setup lang="ts" generic="T extends PTabsItem">
 import { useAppConfig } from '#imports';
+import { isNumber, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   ATabsContent,
@@ -220,7 +221,7 @@ defineExpose({
             color="neutral"
             variant="outline"
             :size="((item.pohon?.trailingBadgeSize || pohonProp?.trailingBadgeSize || pohon.trailingBadgeSize()) as PBadgeProps['size'])"
-            v-bind="(typeof item.badge === 'string' || typeof item.badge === 'number') ? { label: item.badge } : item.badge"
+            v-bind="(isString(item.badge) || isNumber(item.badge)) ? { label: item.badge } : item.badge"
             data-slot="trailingBadge"
             :class="pohon.trailingBadge({ class: [pohonProp?.trailingBadge, item.pohon?.trailingBadge] })"
           />

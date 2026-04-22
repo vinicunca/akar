@@ -92,7 +92,7 @@ external:
   - items
   - modelValue
 externalTypes:
-  - SelectMenuItem[]
+  - PSelectMenuItem[]
 props:
   modelValue:
     label: 'Todo'
@@ -154,7 +154,7 @@ external:
   - items
   - modelValue
 externalTypes:
-  - SelectMenuItem[]
+  - PSelectMenuItem[]
 props:
   modelValue: 'todo'
   valueKey: 'id'
@@ -245,7 +245,7 @@ external:
   - items
   - modelValue
 externalTypes:
-  - SelectMenuItem[]
+  - PSelectMenuItem[]
 props:
   modelValue:
     label: 'Backlog'
@@ -735,7 +735,7 @@ external:
   - items
   - modelValue
 externalTypes:
-  - SelectMenuItem[]
+  - PSelectMenuItem[]
 props:
   modelValue: 'Apple'
   items:

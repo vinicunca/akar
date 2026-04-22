@@ -63,6 +63,7 @@ export interface PLinkSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitiveSlot, useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -114,7 +115,7 @@ const isExternal = computed(() => {
     return false;
   }
 
-  return typeof to.value === 'string' && hasProtocol(to.value, { acceptRelative: true });
+  return isString(to.value) && hasProtocol(to.value, { acceptRelative: true });
 });
 
 const hasTarget = computed(() => !!props.target && props.target !== '_self');

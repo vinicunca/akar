@@ -161,6 +161,7 @@ export interface PSelectSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
 import { useAppConfig } from '#imports';
+import { isNullish, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   ASelectArrow,
@@ -316,7 +317,7 @@ onMounted(() => {
 });
 
 function onUpdate(value: any) {
-  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
+  if (props.modelModifiers?.trim && (isString(value) || isNullish(value))) {
     value = value?.trim() ?? null;
   }
 

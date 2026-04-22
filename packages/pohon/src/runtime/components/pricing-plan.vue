@@ -111,6 +111,7 @@ export interface PPricingPlanSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
@@ -139,7 +140,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pricin
   scale: props.scale,
 }));
 
-const features = computed(() => props.features?.map((feature) => typeof feature === 'string' ? { title: feature } : feature));
+const features = computed(() => props.features?.map((feature) => isString(feature) ? { title: feature } : feature));
 </script>
 
 <template>
@@ -239,7 +240,7 @@ const features = computed(() => props.features?.map((feature) => typeof feature 
               v-if="badge"
               color="primary"
               variant="subtle"
-              v-bind="typeof badge === 'string' ? { label: badge } : badge"
+              v-bind="isString(badge) ? { label: badge } : badge"
               data-slot="badge"
               :class="pohon.badge({ class: pohonProp?.badge })"
             />

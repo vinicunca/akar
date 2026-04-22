@@ -79,6 +79,7 @@ export type PStepperSlots<T extends PStepperItem = PStepperItem> = {
 
 <script setup lang="ts" generic="T extends PStepperItem">
 import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   AStepperDescription,
@@ -124,7 +125,7 @@ const currentStepIndex = computed({
   get() {
     const value = modelValue.value ?? props.defaultValue;
 
-    return ((typeof value === 'string')
+    return ((isString(value))
       ? props.items.findIndex((item) => getProp(item, props.valueKey as string) === value)
       : value) ?? 0;
   },

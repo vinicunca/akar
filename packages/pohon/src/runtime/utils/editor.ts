@@ -2,6 +2,7 @@ import type { Middleware } from '@floating-ui/dom';
 import type { Editor, Mark } from '@tiptap/vue-3';
 import type { EditorCustomHandlers, EditorHandlers, EditorItem, FloatingUIOptions } from '../types/editor';
 import { autoPlacement, flip, hide, inline, offset, shift, size } from '@floating-ui/dom';
+import { isString } from '@vinicunca/perkakas';
 import { isArrayOfArray } from './index';
 
 export function isMarkInSchema(mark: string | Mark, editor: Editor | null): boolean {
@@ -9,7 +10,7 @@ export function isMarkInSchema(mark: string | Mark, editor: Editor | null): bool
     return false;
   }
 
-  const markName = typeof mark === 'string' ? mark : mark.name;
+  const markName = isString(mark) ? mark : mark.name;
   return editor.schema.spec.marks.get(markName) !== undefined;
 }
 

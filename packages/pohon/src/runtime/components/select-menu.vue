@@ -239,6 +239,7 @@ export interface PSelectMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AComboboxAnchor,
@@ -460,7 +461,7 @@ function onUpdate(value: any) {
     return;
   }
 
-  if (props.modelModifiers?.trim && (typeof value === 'string' || value === null || value === undefined)) {
+  if (props.modelModifiers?.trim && (isString(value) || value === null || value === undefined)) {
     value = value?.trim() ?? null;
   }
 

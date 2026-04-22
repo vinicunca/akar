@@ -26,6 +26,7 @@ export interface ProseCalloutSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
@@ -45,7 +46,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?
   to: !!props.to,
 }));
 
-const target = computed(() => props.target || (!!props.to && typeof props.to === 'string' && props.to.startsWith('http') ? '_blank' : undefined));
+const target = computed(() => props.target || (!!props.to && isString(props.to) && props.to.startsWith('http') ? '_blank' : undefined));
 </script>
 
 <template>

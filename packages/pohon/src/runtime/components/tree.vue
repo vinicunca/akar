@@ -143,6 +143,7 @@ export type PTreeSlots<
 
 <script setup lang="ts" generic="T extends PTreeItem[], M extends boolean = false">
 import { useAppConfig } from '#imports';
+import { isBoolean, isFunction, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import { ATreeItem, ATreeRoot, ATreeVirtualizer, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
@@ -183,7 +184,7 @@ const rootProps = useForwardPropsEmits(
 );
 
 const as = computed(() => {
-  if (typeof props.as === 'string' || typeof props.as?.render === 'function') {
+  if (isString(props.as) || isFunction(props.as?.render)) {
     return { root: props.as, link: 'button' };
   }
 
@@ -209,7 +210,7 @@ const virtualizerProps = toRef(() => {
     return false;
   }
 
-  return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+  return defu(isBoolean(props.virtualize) ? {} : props.virtualize, {
     estimateSize: getEstimateSize(props.items || [], props.size || 'md'),
   });
 });

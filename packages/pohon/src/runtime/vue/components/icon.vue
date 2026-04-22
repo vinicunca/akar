@@ -8,6 +8,7 @@ type CustomizeFn = Exclude<PIconProps['customize'], boolean | null | undefined>;
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
 import { Icon as IconifyIcon } from '@iconify/vue';
+import { isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 
 const props = defineProps<PIconProps>();
@@ -42,7 +43,7 @@ const customize = computed(() => resolveCustomizeFn(props.customize, appConfig.i
 
 <template>
   <IconifyIcon
-    v-if="typeof name === 'string'"
+    v-if="isString(name)"
     :icon="name.replace(/^i-/, '')"
     :mode="mode"
     :width="size"
