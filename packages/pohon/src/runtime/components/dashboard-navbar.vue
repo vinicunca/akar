@@ -50,6 +50,7 @@ export interface PDashboardNavbarSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
@@ -84,7 +85,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dashbo
     >
       <PDashboardSidebarToggle
         v-if="toggle"
-        v-bind="(typeof toggle === 'object' ? toggle : {})"
+        v-bind="(isObjectType(toggle) ? toggle : {})"
         :side="toggleSide"
         data-slot="toggle"
         :class="pohon.toggle({ class: pohonProp?.toggle, toggleSide })"

@@ -161,7 +161,7 @@ export interface PSelectSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
 import { useAppConfig } from '#imports';
-import { isNullish, isString } from '@vinicunca/perkakas';
+import { isNullish, isObjectType, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   ASelectArrow,
@@ -353,7 +353,7 @@ function onUpdateOpen(value: boolean) {
 }
 
 function isSelectItem(item: PSelectItem): item is Exclude<PSelectItem, PSelectValue> {
-  return typeof item === 'object' && item !== null;
+  return isObjectType(item) && item !== null;
 }
 
 const viewportRef = useTemplateRef('viewportRef');
@@ -362,7 +362,7 @@ defineExpose({
   triggerRef: toRef(() => triggerRef.value?.$el as HTMLButtonElement),
   viewportRef: toRef(() => {
     const instance = viewportRef.value;
-    return (instance && typeof instance === 'object' && '$el' in instance ? instance.$el : instance) as HTMLElement | null;
+    return (instance && isObjectType(instance) && '$el' in instance ? instance.$el : instance) as HTMLElement | null;
   }),
 });
 </script>

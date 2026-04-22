@@ -83,6 +83,7 @@ export interface PScrollAreaEmits {
 <script setup lang="ts" generic="T extends ScrollAreaItem">
 import { useAppConfig } from '#imports';
 import { useVirtualizer } from '@tanstack/vue-virtual';
+import { isBoolean, isFunction, isNumber, isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue';
@@ -114,7 +115,7 @@ const isHorizontal = computed(() => props.orientation === 'horizontal');
 const isVertical = computed(() => !isHorizontal.value);
 
 const virtualizerProps = toRef(() => {
-  const options = typeof props.virtualize === 'boolean' ? {} : props.virtualize;
+  const options = isBoolean(props.virtualize) ? {} : props.virtualize;
 
   return defu(options, {
     estimateSize: 100,
@@ -128,11 +129,11 @@ const virtualizerProps = toRef(() => {
 
 const lanes = computed(() => {
   const value = virtualizerProps.value.lanes;
-  return typeof value === 'number' ? value : undefined;
+  return isNumber(value) ? value : undefined;
 });
 
 const skipMeasurement = computed(() => {
-  return typeof props.virtualize === 'object' && props.virtualize.skipMeasurement === true;
+  return isObjectType(props.virtualize) && props.virtualize.skipMeasurement === true;
 });
 
 const virtualizer = !!props.virtualize && useVirtualizer({
@@ -167,7 +168,7 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   },
   estimateSize: (index: number) => {
     const estimate = virtualizerProps.value.estimateSize;
-    return typeof estimate === 'function' ? estimate(index) : estimate;
+    return isFunction(estimate) ? estimate(index) : estimate;
   },
 });
 

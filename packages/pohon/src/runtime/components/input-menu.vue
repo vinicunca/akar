@@ -245,7 +245,7 @@ export interface PInputMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { useAppConfig } from '#imports';
-import { isBoolean, isNullish, isString } from '@vinicunca/perkakas';
+import { isBoolean, isNullish, isObjectType, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactiveOmit, reactivePick } from '@vueuse/core';
 import {
   ATagsInputInput,
@@ -323,7 +323,7 @@ const Component = computed(() => props.autocomplete ? AAutocomplete : ACombobox)
 const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as AComboboxContentProps);
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as AComboboxArrowProps);
-const clearProps = computed(() => typeof props.clear === 'object' ? props.clear : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>);
+const clearProps = computed(() => isObjectType(props.clear) ? props.clear : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>);
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) {
     return false;
@@ -428,13 +428,13 @@ const createItem = computed(() => {
 
   const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value;
 
-  if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
+  if ((isObjectType(props.createItem) && props.createItem.when === 'always') || props.createItem === 'always') {
     return !filteredItems.value.some((item) => compare(item, newItem, (props.by ?? props.valueKey) as string | undefined));
   }
 
   return !filteredItems.value.length;
 });
-const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom');
+const createItemPosition = computed(() => isObjectType(props.createItem) ? props.createItem.position : 'bottom');
 
 const inputRef = useTemplateRef('inputRef');
 
@@ -570,7 +570,7 @@ function onSelect(event: Event, item: PInputMenuItem) {
 }
 
 function isInputItem(item: PInputMenuItem): item is Exclude<PInputMenuItem, PInputMenuValue> {
-  return typeof item === 'object' && item !== null;
+  return isObjectType(item) && item !== null;
 }
 
 function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>): boolean {

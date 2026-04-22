@@ -84,6 +84,7 @@ export interface PInputNumberSlots {
 
 <script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { reactivePick, useVModel } from '@vueuse/core';
 import {
   ANumberFieldDecrement,
@@ -239,7 +240,7 @@ defineExpose({
             :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.decrement')"
-            v-bind="typeof decrement === 'object' ? decrement : undefined"
+            v-bind="isObjectType(decrement) ? decrement : undefined"
           />
         </slot>
       </ANumberFieldDecrement>
@@ -272,7 +273,7 @@ defineExpose({
             :size="inputSize"
             variant="link"
             :aria-label="t('inputNumber.increment')"
-            v-bind="typeof increment === 'object' ? increment : undefined"
+            v-bind="isObjectType(increment) ? increment : undefined"
           />
         </slot>
       </ANumberFieldIncrement>

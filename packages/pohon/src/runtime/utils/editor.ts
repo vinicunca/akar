@@ -2,7 +2,7 @@ import type { Middleware } from '@floating-ui/dom';
 import type { Editor, Mark } from '@tiptap/vue-3';
 import type { EditorCustomHandlers, EditorHandlers, EditorItem, FloatingUIOptions } from '../types/editor';
 import { autoPlacement, flip, hide, inline, offset, shift, size } from '@floating-ui/dom';
-import { isString } from '@vinicunca/perkakas';
+import { isBoolean, isString } from '@vinicunca/perkakas';
 import { isArrayOfArray } from './index';
 
 export function isMarkInSchema(mark: string | Mark, editor: Editor | null): boolean {
@@ -490,31 +490,31 @@ export function buildFloatingUIMiddleware(options: FloatingUIOptions): Array<Mid
   const middleware: Array<Middleware> = [];
 
   if (options.offset) {
-    middleware.push(offset(typeof options.offset !== 'boolean' ? options.offset : undefined));
+    middleware.push(offset(!isBoolean(options.offset) ? options.offset : undefined));
   }
 
   if (options.flip) {
-    middleware.push(flip(typeof options.flip !== 'boolean' ? options.flip : undefined));
+    middleware.push(flip(!isBoolean(options.flip) ? options.flip : undefined));
   }
 
   if (options.shift) {
-    middleware.push(shift(typeof options.shift !== 'boolean' ? options.shift : undefined));
+    middleware.push(shift(!isBoolean(options.shift) ? options.shift : undefined));
   }
 
   if (options.size) {
-    middleware.push(size(typeof options.size !== 'boolean' ? options.size : undefined));
+    middleware.push(size(!isBoolean(options.size) ? options.size : undefined));
   }
 
   if (options.autoPlacement) {
-    middleware.push(autoPlacement(typeof options.autoPlacement !== 'boolean' ? options.autoPlacement : undefined));
+    middleware.push(autoPlacement(!isBoolean(options.autoPlacement) ? options.autoPlacement : undefined));
   }
 
   if (options.hide) {
-    middleware.push(hide(typeof options.hide !== 'boolean' ? options.hide : undefined));
+    middleware.push(hide(!isBoolean(options.hide) ? options.hide : undefined));
   }
 
   if (options.inline) {
-    middleware.push(inline(typeof options.inline !== 'boolean' ? options.inline : undefined));
+    middleware.push(inline(!isBoolean(options.inline) ? options.inline : undefined));
   }
 
   return middleware;

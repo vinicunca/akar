@@ -45,6 +45,7 @@ export interface PSliderEmits {
 
 <script setup lang="ts" generic="T extends number | number[]">
 import { useAppConfig } from '#imports';
+import { isNumber, isObjectType } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   ASliderRange,
@@ -101,7 +102,7 @@ const {
 } = useFormField<PSliderProps>(props);
 
 const defaultSliderValue = computed(() => {
-  if (typeof props.defaultValue === 'number') {
+  if (isNumber(props.defaultValue)) {
     return [props.defaultValue];
   }
   return props.defaultValue;
@@ -109,7 +110,7 @@ const defaultSliderValue = computed(() => {
 
 const sliderValue = computed({
   get() {
-    if (typeof modelValue.value === 'number') {
+    if (isNumber(modelValue.value)) {
       return [modelValue.value];
     }
     return (modelValue.value as Array<number>) ?? defaultSliderValue.value;
@@ -167,7 +168,7 @@ function onChange(value: any) {
         v-if="!!tooltip"
         :text="thumbs > 1 ? String(sliderValue?.[thumb - 1]) : String(sliderValue)"
         disable-closing-trigger
-        v-bind="(typeof tooltip === 'object' ? tooltip : {})"
+        v-bind="(isObjectType(tooltip) ? tooltip : {})"
       >
         <ASliderThumb
           data-slot="thumb"

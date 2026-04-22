@@ -73,6 +73,7 @@ export interface PToastSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isFunction, isObjectType } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
   AToastAction,
@@ -171,11 +172,11 @@ defineExpose({
         <slot name="title">
           <component
             :is="title()"
-            v-if="typeof title === 'function'"
+            v-if="isFunction(title)"
           />
           <component
             :is="title"
-            v-else-if="typeof title === 'object'"
+            v-else-if="isObjectType(title)"
           />
           <template v-else>
             {{ title }}
@@ -190,11 +191,11 @@ defineExpose({
         <slot name="description">
           <component
             :is="description()"
-            v-if="typeof description === 'function'"
+            v-if="isFunction(description)"
           />
           <component
             :is="description"
-            v-else-if="typeof description === 'object'"
+            v-else-if="isObjectType(description)"
           />
           <template v-else>
             {{ description }}
@@ -262,7 +263,7 @@ defineExpose({
             color="neutral"
             variant="link"
             :aria-label="t('toast.close')"
-            v-bind="(typeof close === 'object' ? close : {})"
+            v-bind="(isObjectType(close) ? close : {})"
             data-slot="close"
             :class="pohon.close({ class: pohonProp?.close })"
             @click.stop
@@ -275,7 +276,7 @@ defineExpose({
       v-if="progress && open && remaining > 0 && duration"
       :model-value="remaining / duration * 100"
       :color="color"
-      v-bind="(typeof progress === 'object' ? progress as Partial<PProgressProps> : {})"
+      v-bind="(isObjectType(progress) ? progress as Partial<PProgressProps> : {})"
       size="sm"
       data-slot="progress"
       :class="pohon.progress({ class: pohonProp?.progress })"

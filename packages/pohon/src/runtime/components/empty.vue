@@ -50,6 +50,7 @@ export interface PEmptySlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -91,7 +92,7 @@ const pohon = computed(() => uv({
           <PAvatar
             v-if="icon || avatar"
             :icon="icon"
-            v-bind="typeof avatar === 'object' ? avatar : {}"
+            v-bind="isObjectType(avatar) ? avatar : {}"
             data-slot="avatar"
             :class="pohon.avatar({ class: pohonProp?.avatar })"
           />

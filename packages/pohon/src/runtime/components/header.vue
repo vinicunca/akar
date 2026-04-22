@@ -67,6 +67,7 @@ export interface PHeaderSlots {
 
 <script setup lang="ts" generic="T extends HeaderMode">
 import { useAppConfig, useRoute } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
@@ -151,7 +152,7 @@ function toggleOpen() {
         variant="ghost"
         :aria-label="open ? t('header.close') : t('header.open')"
         :icon="open ? appConfig.pohon.icons.close : appConfig.pohon.icons.menu"
-        v-bind="(typeof toggle === 'object' ? toggle : {})"
+        v-bind="(isObjectType(toggle) ? toggle : {})"
         data-slot="toggle"
         :class="pohon.toggle({ class: pohonProp?.toggle, toggleSide })"
         @click="toggleOpen"

@@ -41,6 +41,7 @@ export interface PErrorSlots {
 
 <script setup lang="ts">
 import { clearError, useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -111,7 +112,7 @@ function handleError() {
           color="primary"
           variant="solid"
           :label="t('error.clear')"
-          v-bind="(typeof clear === 'object' ? clear : {})"
+          v-bind="(isObjectType(clear) ? clear : {})"
           @click="handleError"
         />
       </slot>

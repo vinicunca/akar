@@ -116,7 +116,7 @@ export interface PCarouselEmits {
 
 <script setup lang="ts" generic="T extends PCarouselItem">
 import { useAppConfig } from '#imports';
-import { isBoolean, KEY_CODES } from '@vinicunca/perkakas';
+import { isBoolean, isObjectType, KEY_CODES } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import useEmblaCarousel from 'embla-carousel-vue';
@@ -354,7 +354,7 @@ function onSelect(api: EmblaCarouselType) {
 }
 
 function isCarouselItem(item: PCarouselItem): item is Exclude<PCarouselItem, PCarouselValue> {
-  return typeof item === 'object' && item !== null;
+  return isObjectType(item) && item !== null;
 }
 
 onMounted(() => {
@@ -438,7 +438,7 @@ defineExpose({
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.prev')"
-          v-bind="typeof prev === 'object' ? prev : undefined"
+          v-bind="isObjectType(prev) ? prev : undefined"
           data-slot="prev"
           :class="pohon.prev({ class: pohonProp?.prev })"
           @click="scrollPrev"
@@ -449,7 +449,7 @@ defineExpose({
           color="neutral"
           variant="outline"
           :aria-label="t('carousel.next')"
-          v-bind="typeof next === 'object' ? next : undefined"
+          v-bind="isObjectType(next) ? next : undefined"
           data-slot="next"
           :class="pohon.next({ class: pohonProp?.next })"
           @click="scrollNext"

@@ -50,6 +50,7 @@ export type PChangelogVersionsSlots<T extends PChangelogVersionProps = PChangelo
 
 <script setup lang="ts" generic="T extends PChangelogVersionProps">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { Motion, useScroll, useSpring, useTransform } from 'motion-v';
@@ -70,8 +71,8 @@ const getProxySlots = () => omit(slots, ['default', 'indicator']);
 const appConfig = useAppConfig() as ChangelogVersions['AppConfig'];
 const pohonProp = useComponentPohon('changelogVersions', props);
 
-const springOptions = computed(() => defu(typeof props.indicatorMotion === 'object' ? props.indicatorMotion : {}, { damping: 30, restDelta: 0.001 }));
-const scrollOptions = computed(() => typeof props.indicator === 'object' ? props.indicator : {});
+const springOptions = computed(() => defu(isObjectType(props.indicatorMotion) ? props.indicatorMotion : {}, { damping: 30, restDelta: 0.001 }));
+const scrollOptions = computed(() => isObjectType(props.indicator) ? props.indicator : {});
 
 const { scrollYProgress } = useScroll(scrollOptions.value);
 const y = useSpring(scrollYProgress, springOptions);

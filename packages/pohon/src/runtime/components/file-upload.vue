@@ -138,6 +138,7 @@ export interface PFileUploadSlots<M extends boolean = false> {
 
 <script setup lang="ts" generic="M extends boolean = false">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive, AVisuallyHidden } from 'akar';
 import { computed, toRef, toRefs, watch } from 'vue';
@@ -389,7 +390,7 @@ defineExpose({
                       variant: 'link',
                       size,
                     }),
-                    ...typeof fileDelete === 'object' ? fileDelete : undefined,
+                    ...isObjectType(fileDelete) ? fileDelete : undefined,
                   }"
                   :aria-label="t('fileUpload.removeFile', { filename: (file as File).name })"
                   :trailing-icon="fileDeleteIcon || appConfig.pohon.icons.close"

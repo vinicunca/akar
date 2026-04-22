@@ -2,7 +2,7 @@
 /* eslint-disable regexp/no-super-linear-backtracking */
 
 import type { MaybeRef } from 'vue';
-import { isFunction, isString } from '@vinicunca/perkakas';
+import { isFunction, isObjectType, isString } from '@vinicunca/perkakas';
 import { useActiveElement, useDebounceFn, useEventListener } from '@vueuse/core';
 import { computed, ref, toValue } from 'vue';
 import { useKbd } from './use-kbd';
@@ -189,7 +189,7 @@ export function defineShortcuts(
       // Retrieve handler function
       if (isFunction(shortcutConfig)) {
         shortcut.handler = shortcutConfig;
-      } else if (typeof shortcutConfig === 'object') {
+      } else if (isObjectType(shortcutConfig)) {
         shortcut = { ...shortcut, handler: shortcutConfig.handler };
       }
 

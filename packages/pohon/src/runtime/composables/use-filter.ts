@@ -1,3 +1,4 @@
+import { isObjectType } from '@vinicunca/perkakas';
 import { useFilter as useAkarFilter } from 'akar';
 import { getProp } from '../utils';
 
@@ -28,7 +29,7 @@ export function useFilter() {
    * @returns 0 = exact, 1 = starts with, 2 = contains, null = no match
    */
   function scoreItem(item: any, searchTerm: string, fields: Array<string>): number | null {
-    if (typeof item !== 'object' || item === null) {
+    if (!isObjectType(item) || item === null) {
       return score(String(item), searchTerm);
     }
 

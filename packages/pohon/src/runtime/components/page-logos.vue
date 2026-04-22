@@ -32,6 +32,7 @@ export interface PageLogosSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
@@ -66,7 +67,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageLo
         :key="index"
       >
         <PAvatar
-          v-if="typeof item === 'object'"
+          v-if="isObjectType(item)"
           :src="item.src"
           :alt="item.alt"
           data-slot="logo"
@@ -98,7 +99,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pageLo
 
     <PMarquee
       v-if="marquee"
-      v-bind="typeof marquee === 'object' ? marquee : {}"
+      v-bind="isObjectType(marquee) ? marquee : {}"
       data-slot="logos"
       :class="pohon.logos({ class: pohonProp?.logos, marquee: true })"
     >

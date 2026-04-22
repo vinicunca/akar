@@ -117,6 +117,7 @@ export type PAuthFormSlots<T extends object = object, F extends PAuthFormField =
 
 <script setup lang="ts" generic="T extends FormSchema, F extends PAuthFormField">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed, reactive, ref, useTemplateRef } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -279,7 +280,7 @@ defineExpose({
       <slot name="separator">
         <PSeparator
           v-if="providers?.length && fields?.length"
-          v-bind="typeof separator === 'object' ? separator : { label: separator }"
+          v-bind="isObjectType(separator) ? separator : { label: separator }"
           data-slot="separator"
           :class="pohon.separator({ class: pohonProp?.separator })"
         />
@@ -328,7 +329,7 @@ defineExpose({
               v-model="state[field.name]"
               data-slot="otp"
               :class="pohon.otp({ class: pohonProp?.otp })"
-              v-bind="(Object.assign({}, omitFieldProps(field), typeof (field as PAuthFormOtpField).otp === 'object' ? (field as PAuthFormOtpField).otp : {}) as any)"
+              v-bind="(Object.assign({}, omitFieldProps(field), isObjectType((field as PAuthFormOtpField).otp) ? (field as PAuthFormOtpField).otp : {}) as any)"
               otp
             />
             <PInput

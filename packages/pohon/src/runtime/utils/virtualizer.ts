@@ -1,7 +1,8 @@
+import { isObjectType } from '@vinicunca/perkakas';
 import { getProp } from './';
 
 function itemHasDescription(item: any, descriptionKey: string): boolean {
-  if (typeof item !== 'object' || item === null) {
+  if (!isObjectType(item) || item === null) {
     return false;
   }
   const value = getProp(item, descriptionKey);

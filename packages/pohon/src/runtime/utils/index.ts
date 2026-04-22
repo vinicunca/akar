@@ -1,5 +1,5 @@
 import type { GetItemKeys } from '../types/utils';
-import { isEmptyish, isFunction, isNullish, isString } from '@vinicunca/perkakas';
+import { isEmptyish, isFunction, isNullish, isObjectType, isString } from '@vinicunca/perkakas';
 import { isEqual } from 'ohash/utils';
 import { joinURL, withLeadingSlash, withTrailingSlash } from 'ufo';
 
@@ -112,7 +112,7 @@ export function getDisplayValue<T extends Array<any>, V>(
   const { valueKey, labelKey, by } = options;
 
   const foundItem = items.find((item) => {
-    const itemValue = (typeof item === 'object' && item !== null && valueKey)
+    const itemValue = (isObjectType(item) && item !== null && valueKey)
       ? getProp(item, valueKey as string)
       : item;
     return compare(itemValue, value, by);
@@ -132,7 +132,7 @@ export function getDisplayValue<T extends Array<any>, V>(
     return undefined;
   }
 
-  if (typeof source === 'object') {
+  if (isObjectType(source)) {
     return labelKey ? getProp(source as Record<string, any>, labelKey as string) : undefined;
   }
 

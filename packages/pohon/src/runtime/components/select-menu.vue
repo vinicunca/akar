@@ -239,7 +239,7 @@ export interface PSelectMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
 import { useAppConfig } from '#imports';
-import { isString } from '@vinicunca/perkakas';
+import { isBoolean, isNullish, isObjectType, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AComboboxAnchor,
@@ -323,14 +323,14 @@ const rootProps = useForwardPropsEmits(
 const portalProps = usePortal(toRef(() => props.portal));
 const contentProps = toRef(() => defu(props.content, { side: 'bottom', sideOffset: 8, collisionPadding: 8, position: 'popper' }) as AComboboxContentProps);
 const arrowProps = toRef(() => defu(props.arrow, { rounded: true }) as AComboboxArrowProps);
-const clearProps = computed(() => typeof props.clear === 'object' ? props.clear : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>);
+const clearProps = computed(() => isObjectType(props.clear) ? props.clear : {} as Partial<Omit<PButtonProps, PLinkPropsKeys>>);
 
 const virtualizerProps = toRef(() => {
   if (!props.virtualize) {
     return false;
   }
 
-  return defu(typeof props.virtualize === 'boolean' ? {} : props.virtualize, {
+  return defu(isBoolean(props.virtualize) ? {} : props.virtualize, {
     estimateSize: getEstimateSize(filteredItems.value, selectSize.value || 'md', props.descriptionKey as string, !!slots['item-description']),
   });
 });
@@ -432,13 +432,13 @@ const createItem = computed(() => {
 
   const newItem = props.valueKey ? { [props.valueKey]: searchTerm.value } as NestedItem<T> : searchTerm.value;
 
-  if ((typeof props.createItem === 'object' && props.createItem.when === 'always') || props.createItem === 'always') {
+  if ((isObjectType(props.createItem) && props.createItem.when === 'always') || props.createItem === 'always') {
     return !filteredItems.value.some((item) => compare(item, newItem, (props.by ?? props.valueKey) as string | undefined));
   }
 
   return !filteredItems.value.length;
 });
-const createItemPosition = computed(() => typeof props.createItem === 'object' ? props.createItem.position : 'bottom');
+const createItemPosition = computed(() => isObjectType(props.createItem) ? props.createItem.position : 'bottom');
 
 const triggerRef = useTemplateRef('triggerRef');
 
@@ -461,7 +461,7 @@ function onUpdate(value: any) {
     return;
   }
 
-  if (props.modelModifiers?.trim && (isString(value) || value === null || value === undefined)) {
+  if (props.modelModifiers?.trim && (isString(value) || isNullish(value))) {
     value = value?.trim() ?? null;
   }
 
@@ -498,7 +498,7 @@ function onUpdateOpen(value: boolean) {
     emitFormBlur();
 
     // Since we use `displayValue` prop inside ComboboxInput we should reset searchTerm manually
-    // https://akar.com/docs/components/combobox#api-reference
+    // https://akar.vinicunca.dev/docs/akar/components/combobox#api-reference
     if (props.resetSearchTermOnBlur) {
       const STATE_ANIMATION_DELAY_MS = 100;
 
@@ -535,7 +535,7 @@ function onSelect(event: Event, item: PSelectMenuItem) {
 }
 
 function isSelectItem(item: PSelectMenuItem): item is Exclude<PSelectMenuItem, PSelectMenuValue> {
-  return typeof item === 'object' && item !== null;
+  return isObjectType(item) && item !== null;
 }
 
 function isModelValueEmpty(modelValue: ApplyModifiers<GetModelValue<T, VK, M, ExcludeItem>, Mod>): boolean {

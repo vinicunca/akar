@@ -217,7 +217,7 @@ export type PCommandPaletteSlots<T extends PCommandPaletteItem = PCommandPalette
 
 <script setup lang="ts" generic="G extends PCommandPaletteGroup<T>, T extends PCommandPaletteItem">
 import { useAppConfig } from '#imports';
-import { isBoolean, isFunction, isString } from '@vinicunca/perkakas';
+import { isBoolean, isFunction, isObjectType, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick, refThrottled } from '@vueuse/core';
 import { useFuse } from '@vueuse/integrations/useFuse';
 import {
@@ -691,7 +691,7 @@ function onSelect(event: Event, item: T) {
       <PInput
         variant="none"
         :size="size"
-        v-bind="typeof props.input === 'object' ? props.input : {}"
+        v-bind="isObjectType(props.input) ? props.input : {}"
         :placeholder="placeholder"
         :autofocus="autofocus"
         :loading="loading"
@@ -716,7 +716,7 @@ function onSelect(event: Event, item: T) {
               color="neutral"
               variant="link"
               :aria-label="t('commandPalette.back')"
-              v-bind="(typeof back === 'object' ? back : {})"
+              v-bind="(isObjectType(back) ? back : {})"
               data-slot="back"
               :class="pohon.back({ class: pohonProp?.back })"
               @click="navigateBack"
@@ -739,7 +739,7 @@ function onSelect(event: Event, item: T) {
               color="neutral"
               variant="ghost"
               :aria-label="t('commandPalette.close')"
-              v-bind="(typeof close === 'object' ? close : {})"
+              v-bind="(isObjectType(close) ? close : {})"
               data-slot="close"
               :class="pohon.close({ class: pohonProp?.close })"
               @click="emits('update:open', false)"

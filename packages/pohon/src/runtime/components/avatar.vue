@@ -39,7 +39,7 @@ export interface PAvatarSlots {
 <script setup lang="ts">
 import ImageComponent from '#build/pohon-image-component';
 import { useAppConfig } from '#imports';
-import { isFunction, isString } from '@vinicunca/perkakas';
+import { isFunction, isObjectType, isString } from '@vinicunca/perkakas';
 import { APrimitive, APrimitiveSlot } from 'akar';
 import { defu } from 'defu';
 import { computed, ref, watch } from 'vue';
@@ -102,7 +102,7 @@ function onError() {
   <component
     :is="props.chip ? PChip : APrimitive"
     :as="as.root"
-    v-bind="props.chip ? (typeof props.chip === 'object' ? { inset: true, ...props.chip } : { inset: true }) : {}"
+    v-bind="props.chip ? (isObjectType(props.chip) ? { inset: true, ...props.chip } : { inset: true }) : {}"
     data-slot="root"
     :class="rootClass"
     :style="props.style"

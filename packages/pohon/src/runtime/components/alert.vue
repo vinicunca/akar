@@ -72,6 +72,7 @@ export interface PAlertSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -193,7 +194,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.alert 
           color="neutral"
           variant="link"
           :aria-label="t('alert.close')"
-          v-bind="(typeof close === 'object' ? close : {})"
+          v-bind="(isObjectType(close) ? close : {})"
           data-slot="close"
           :class="pohon.close({ class: pohonProp?.close })"
           @click="emits('update:open', false)"

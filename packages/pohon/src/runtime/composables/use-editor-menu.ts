@@ -8,7 +8,7 @@ import { computePosition } from '@floating-ui/dom';
 import { PluginKey } from '@tiptap/pm/state';
 import Suggestion from '@tiptap/suggestion';
 import { VueRenderer } from '@tiptap/vue-3';
-import { isString } from '@vinicunca/perkakas';
+import { isFunction, isString } from '@vinicunca/perkakas';
 import { defu } from 'defu';
 import { computed, h, ref, unref, watch } from 'vue';
 import { getProp, isArrayOfArray } from '../utils';
@@ -456,7 +456,7 @@ export function useEditorMenu<T = any>(options: EditorMenuOptions<T>) {
 
     element.addEventListener('mousedown', handleMouseDown);
 
-    const appendToElement = typeof options.appendTo === 'function' ? options.appendTo() : options.appendTo;
+    const appendToElement = isFunction(options.appendTo) ? options.appendTo() : options.appendTo;
     const container = appendToElement ?? options.editor.view.dom.parentElement;
     container?.appendChild(element);
     if (renderer.element) {

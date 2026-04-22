@@ -58,6 +58,7 @@ export interface PChatMessageSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isFunction } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -183,7 +184,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
               variant="ghost"
               v-bind="omit(action, ['onClick'])"
               :label="undefined"
-              @click="typeof action.onClick === 'function' ? action.onClick($event, props) : undefined"
+              @click="isFunction(action.onClick) ? action.onClick($event, props) : undefined"
             />
           </PTooltip>
         </slot>

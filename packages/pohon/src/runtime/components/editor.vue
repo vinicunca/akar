@@ -96,7 +96,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { Markdown } from '@tiptap/markdown';
 import StarterKit from '@tiptap/starter-kit';
 import { EditorContent, useEditor } from '@tiptap/vue-3';
-import { isBoolean, isString } from '@vinicunca/perkakas';
+import { isBoolean, isObjectType, isString } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -123,7 +123,7 @@ const pohon = computed(() => uv({
   extend: uv(theme),
   ...(appConfig.pohon?.editor || {}),
 })({
-  placeholderMode: typeof props.placeholder === 'object' ? props.placeholder.mode : undefined,
+  placeholderMode: isObjectType(props.placeholder) ? props.placeholder.mode : undefined,
 }));
 
 const rootProps = useForwardProps(reactiveOmit(props, 'starterKit', 'extensions', 'editorProps', 'contentType', 'class', 'placeholder', 'markdown', 'image', 'mention', 'handlers'));
@@ -247,7 +247,7 @@ watch(() => props.modelValue, (newVal) => {
         ? editor.value.getMarkdown()
         : editor.value.getText();
 
-  const newContent = contentType.value === 'json' && typeof newVal === 'object'
+  const newContent = contentType.value === 'json' && isObjectType(newVal)
     ? JSON.stringify(newVal)
     : String(newVal);
 

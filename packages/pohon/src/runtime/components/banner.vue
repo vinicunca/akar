@@ -66,6 +66,7 @@ export interface PBannerEmits {
 
 <script setup lang="ts">
 import { useAppConfig, useHead } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed, onMounted, ref, useId } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -234,7 +235,7 @@ function onClose() {
             color="neutral"
             variant="ghost"
             :aria-label="t('banner.close')"
-            v-bind="(typeof close === 'object' ? close : {})"
+            v-bind="(isObjectType(close) ? close : {})"
             data-slot="close"
             :class="pohon.close({ class: pohonProp?.close })"
             @click="onClose"

@@ -239,7 +239,7 @@ export type PNavigationMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PNavigationMenuItem>, K extends SingleOrMultipleType = SingleOrMultipleType, O extends Orientation = Orientation">
 import { useAppConfig } from '#imports';
-import { isBoolean, isNumber, isString } from '@vinicunca/perkakas';
+import { isBoolean, isNumber, isObjectType, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   AAccordionContent,
@@ -400,7 +400,7 @@ function onLinkTrailingClick(event: Event, item: PNavigationMenuItem) {
           v-else-if="item.icon && item.chip"
           :size="((item.pohon?.linkLeadingChipSize || pohonProp?.linkLeadingChipSize || pohon.linkLeadingChipSize()) as PChipProps['size'])"
           inset
-          v-bind="typeof item.chip === 'object' ? item.chip : {}"
+          v-bind="isObjectType(item.chip) ? item.chip : {}"
           data-slot="linkLeadingChip"
         >
           <PIcon

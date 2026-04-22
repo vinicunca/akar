@@ -19,6 +19,7 @@ export interface ProseH2Slots {
 
 <script setup lang="ts">
 import { useAppConfig, useRuntimeConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
@@ -33,7 +34,7 @@ const { headings } = useRuntimeConfig().public?.mdc || {};
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.h2 || {}) })());
 
-const generate = computed(() => props.id && typeof headings?.anchorLinks === 'object' && headings.anchorLinks.h2);
+const generate = computed(() => props.id && isObjectType(headings?.anchorLinks) && headings.anchorLinks.h2);
 </script>
 
 <template>

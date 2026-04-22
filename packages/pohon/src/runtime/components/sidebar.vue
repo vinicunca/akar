@@ -97,6 +97,7 @@ export interface PSidebarSlots {
 
 <script setup lang="ts" generic="T extends SidebarMode">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
@@ -286,7 +287,7 @@ const menuProps = toRef(() =>
               color="neutral"
               variant="ghost"
               :aria-label="t('sidebar.close')"
-              v-bind="(typeof props.close === 'object' ? props.close : {})"
+              v-bind="(isObjectType(props.close) ? props.close : {})"
               data-slot="close"
               :class="pohon.close({ class: pohonProp?.close })"
               @click="closeSidebar"

@@ -234,7 +234,7 @@ import {
   useVueTable,
 } from '@tanstack/vue-table';
 import { useVirtualizer } from '@tanstack/vue-virtual';
-import { capitalize, isBoolean, isFunction } from '@vinicunca/perkakas';
+import { capitalize, isBoolean, isFunction, isNullish } from '@vinicunca/perkakas';
 import { createRef, createReusableTemplate, reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -275,7 +275,7 @@ function processColumns(columns: Array<PTableColumn<T>>): Array<PTableColumn<T>>
     if (!col.cell) {
       col.cell = ({ getValue }) => {
         const value = getValue();
-        if (value === '' || value === null || value === undefined) {
+        if (value === '' || isNullish(value)) {
           return '\u00A0';
         }
         return String(value);

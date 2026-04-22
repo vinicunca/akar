@@ -87,6 +87,7 @@ export interface PDialogSlots {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   ADialogClose,
@@ -246,7 +247,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dialog
                     color="neutral"
                     variant="ghost"
                     :aria-label="t('modal.close')"
-                    v-bind="(typeof props.close === 'object' ? props.close : {})"
+                    v-bind="(isObjectType(props.close) ? props.close : {})"
                     data-slot="close"
                     :class="pohon.close({ class: pohonProp?.close })"
                   />

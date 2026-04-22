@@ -51,7 +51,7 @@ export interface PDashboardSearchButtonProps extends Omit<PButtonProps, PLinkPro
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
-import { isString } from '@vinicunca/perkakas';
+import { isBoolean, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
@@ -67,12 +67,15 @@ import PTooltip from './tooltip.vue';
 
 defineOptions({ inheritAttrs: false });
 
-const props = withDefaults(defineProps<PDashboardSearchButtonProps>(), {
-  color: 'neutral',
-  collapsed: false,
-  tooltip: false,
-  kbds: () => ['meta', 'k'],
-});
+const props = withDefaults(
+  defineProps<PDashboardSearchButtonProps>(),
+  {
+    color: 'neutral',
+    collapsed: false,
+    tooltip: false,
+    kbds: () => ['meta', 'k'],
+  },
+);
 const slots = defineSlots<PButtonSlots>();
 
 const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate();
@@ -80,7 +83,7 @@ const [DefineButtonTemplate, ReuseButtonTemplate] = createReusableTemplate();
 const getProxySlots = () => omit(slots, ['trailing']);
 
 const buttonProps = useForwardProps(reactiveOmit(props, 'icon', 'label', 'variant', 'collapsed', 'tooltip', 'kbds', 'class', 'pohon'));
-const tooltipProps = toRef(() => defu(typeof props.tooltip === 'boolean' ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as PTooltipProps);
+const tooltipProps = toRef(() => defu(isBoolean(props.tooltip) ? {} : props.tooltip, { delayDuration: 0, content: { side: 'right' } }) as PTooltipProps);
 
 const { t } = useLocale();
 const appConfig = useAppConfig() as DashboardSearchButton['AppConfig'];

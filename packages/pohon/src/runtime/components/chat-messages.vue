@@ -76,6 +76,7 @@ export type ChatMessagesSlots = {
 
 <script setup lang="ts">
 import { useAppConfig } from '#imports';
+import { isObjectType } from '@vinicunca/perkakas';
 import { useElementBounding, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core';
 import { APresence } from 'akar';
 import { defu } from 'defu';
@@ -378,7 +379,7 @@ onMounted(() => {
             :icon="autoScrollIcon || appConfig.pohon.icons.arrowDown"
             color="neutral"
             variant="outline"
-            v-bind="(typeof autoScroll === 'object' ? autoScroll : {})"
+            v-bind="(isObjectType(autoScroll) ? autoScroll : {})"
             data-slot="autoScroll"
             :class="pohon.autoScroll({ class: pohonProp?.autoScroll })"
             @click="onAutoScrollClick"

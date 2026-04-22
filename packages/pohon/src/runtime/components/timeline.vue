@@ -71,7 +71,7 @@ export type PTimelineSlots<T extends PTimelineItem = PTimelineItem> = {
 
 <script setup lang="ts" generic="T extends PTimelineItem">
 import { useAppConfig } from '#imports';
-import { isString } from '@vinicunca/perkakas';
+import { isObjectType, isString } from '@vinicunca/perkakas';
 import { APrimitive, ASeparator } from 'akar';
 import { computed } from 'vue';
 import { useComponentPohon } from '../composables/use-component-pohon';
@@ -157,7 +157,7 @@ function onSelect(event: Event, item: T) {
         <PAvatar
           :size="size"
           :icon="item.icon"
-          v-bind="typeof item.avatar === 'object' ? item.avatar : {}"
+          v-bind="isObjectType(item.avatar) ? item.avatar : {}"
           data-slot="indicator"
           :class="pohon.indicator({ class: [pohonProp?.indicator, item.pohon?.indicator] })"
           :pohon="{ icon: 'text-inherit', fallback: 'text-inherit' }"
