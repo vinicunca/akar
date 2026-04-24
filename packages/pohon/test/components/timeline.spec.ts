@@ -1,7 +1,7 @@
-import theme from '#build/pohon/timeline';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/timeline';
 import Timeline from '../../src/runtime/components/timeline.vue';
 import { renderEach } from '../component-render';
 

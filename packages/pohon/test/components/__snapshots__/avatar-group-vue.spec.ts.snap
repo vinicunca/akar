@@ -1,7 +1,77 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`AvatarGroup > renders with as correctly 1`] = `"<span data-slot="root" class=""><!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span></span>"`;
+
+exports[`AvatarGroup > renders with class correctly 1`] = `
+"<div data-slot="root" class="justify-start">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with default slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with max correctly 1`] = `"<div data-slot="root" class=""><span data-slot="root"><span data-slot="fallback" class="">+1</span></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span></div>"`;
+
 exports[`AvatarGroup > renders with pohon correctly 1`] = `
 "<div data-slot="root" class="">
   <!--v-if--><span data-slot="root" class="rounded-lg"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root" class="rounded-lg"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root" class="rounded-lg"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with size 2xl correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with size 2xs correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with size 3xl correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with size 3xs correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with size lg correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with size md correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with size sm correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with size xl correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
+</div>"
+`;
+
+exports[`AvatarGroup > renders with size xs correctly 1`] = `
+"<div data-slot="root" class="">
+  <!--v-if--><span data-slot="root"><img src="https://github.com/noook.png" alt="Neil Richter" data-slot="image"></span><span data-slot="root"><img src="https://github.com/romhml.png" alt="Romain Hamel" data-slot="image"></span><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="Benjamin Canac" data-slot="image"></span>
 </div>"
 `;

@@ -1,11 +1,11 @@
 import type { PTableColumn, PTableRow } from '../../src/runtime/components/table.vue';
-import theme from '#build/pohon/table';
-import { PBadge, PButton, PCheckbox, PDropdownMenu } from '#components';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { computed, h, ref } from 'vue';
+import theme from '#build/pohon/table';
+import { PBadge, PButton, PCheckbox, PDropdownMenu } from '#components';
 import Table from '../../src/runtime/components/table.vue';
 import { renderEach } from '../component-render';
 
@@ -180,6 +180,7 @@ describe('Table', () => {
     ['with meta prop', { props: { ...props, meta: { class: { tr: 'custom-row-class' }, style: { tr: { backgroundColor: 'lightgray' } } } } }],
     ['with meta field on columns', { props: { ...props, columns: columns.map((c) => ({ ...c, meta: { class: { th: 'custom-heading-class', td: 'custom-cell-class' }, style: { th: { backgroundColor: 'black' }, td: { backgroundColor: 'lightgray' } } } })) } }],
     ['with virtualize', { props: { ...props, virtualize: true } }],
+    ['with virtualize and sticky', { props: { ...props, columns, virtualize: true, sticky: true } }],
     ['with row pinning', { props: { ...props, rowPinning: { top: ['2'], bottom: ['3'] } } }],
     ['with row pinning and virtualization', { props: { ...props, virtualize: true, rowPinning: { top: ['2'], bottom: ['3'] } } }],
     ['with as', { props: { ...props, as: 'section' } }],

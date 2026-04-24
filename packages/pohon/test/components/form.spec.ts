@@ -101,7 +101,7 @@ describe('Form', () => {
       await form.trigger('submit.prevent');
       await flushPromises();
 
-      const formComponent = wrapper.findComponent({ name: 'Form' });
+      const formComponent = wrapper.findComponent({ name: 'PForm' });
       // @ts-expect-error object is possibly undefined
       expect(formComponent.emitted('error')[0][0].errors).toMatchObject([
         {

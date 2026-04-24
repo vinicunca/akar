@@ -1,7 +1,8 @@
 import type { Ref } from 'vue';
 import { useStorage } from '@vueuse/core';
 import { computed, isRef, ref, unref, watch } from 'vue';
-import { useCookie, useLocale } from '#imports';
+import { useCookie } from '#imports';
+import { useLocale } from './use-locale';
 
 export interface UseResizableProps {
   /**

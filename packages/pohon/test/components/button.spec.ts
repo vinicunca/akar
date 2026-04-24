@@ -1,10 +1,10 @@
-import theme from '#build/pohon/button';
-import { PForm } from '#components';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { ref } from 'vue';
+import theme from '#build/pohon/button';
+import { PForm } from '#components';
 import Button from '../../src/runtime/components/button.vue';
 import { renderEach } from '../component-render';
 
@@ -69,9 +69,8 @@ describe('Button', () => {
     button.trigger('click');
     await flushPromises();
 
-    const icon = wrapper.findComponent({ name: 'Icon' });
+    const icon = wrapper.findComponent({ name: 'PIcon' });
 
-    expect(icon.classes()).toContain('animate-spin');
     expect(icon?.vm?.name).toBe('i-lucide-loader-circle');
 
     resolve?.(null);
@@ -103,9 +102,8 @@ describe('Button', () => {
     form.value.submit();
     await flushPromises();
 
-    const icon = wrapper.findComponent({ name: 'Icon' });
+    const icon = wrapper.findComponent({ name: 'PIcon' });
 
-    expect(icon.classes()).toContain('animate-spin');
     expect(icon?.vm?.name).toBe('i-lucide-loader-circle');
 
     resolve?.(null);

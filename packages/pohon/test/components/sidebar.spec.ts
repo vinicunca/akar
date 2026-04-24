@@ -1,7 +1,7 @@
-import theme from '#build/pohon/sidebar';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/sidebar';
 import Sidebar from '../../src/runtime/components/sidebar.vue';
 import { renderEach } from '../component-render';
 

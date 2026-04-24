@@ -1,10 +1,10 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { ComponentConfig } from '../../src/runtime/types/uv';
-import theme from '#build/pohon/context-menu';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent, h } from 'vue';
+import theme from '#build/pohon/context-menu';
 import PContextMenu from '../../src/runtime/components/context-menu.vue';
 import { renderEach } from '../component-render';
 import { expectSlotProps } from '../utils/types';

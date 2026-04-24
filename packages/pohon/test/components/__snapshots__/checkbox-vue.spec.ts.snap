@@ -1,0 +1,161 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Checkbox > renders with ariaLabel correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button aria-label="Aria label" data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with as correctly 1`] = `
+"<section data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</section>"
+`;
+
+exports[`Checkbox > renders with class correctly 1`] = `
+"<div data-slot="root" class="inline-flex">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with description correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <div data-slot="wrapper" class=""><label for="v-0" data-slot="label" class="">Label</label>
+    <p data-slot="description" class="">Description</p>
+  </div>
+</div>"
+`;
+
+exports[`Checkbox > renders with description slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <div data-slot="wrapper" class=""><label for="v-0" data-slot="label" class="">Description slot</label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Checkbox > renders with disabled correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-disabled="" disabled="">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with icon correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with id correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="id" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with label correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <div data-slot="wrapper" class=""><label for="v-0" data-slot="label" class="">Label</label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Checkbox > renders with label slot correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <div data-slot="wrapper" class=""><label for="v-0" data-slot="label" class="">Label slot</label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Checkbox > renders with name correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with pohon correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with required correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="true" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <div data-slot="wrapper" class=""><label for="v-0" data-slot="label" class="">Label</label>
+    <!--v-if-->
+  </div>
+</div>"
+`;
+
+exports[`Checkbox > renders with trueValue/falseValue unchecked correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Checkbox > renders with value correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="container" class=""><button data-slot="base" id="v-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+      <!---->
+      <!--v-if-->
+    </button></div>
+  <!--v-if-->
+</div>"
+`;

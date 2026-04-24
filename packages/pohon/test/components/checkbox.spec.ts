@@ -1,9 +1,9 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/checkbox';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/checkbox';
 import Checkbox from '../../src/runtime/components/checkbox.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -56,14 +56,14 @@ describe('Checkbox', () => {
   describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(Checkbox);
-      const input = wrapper.findComponent({ name: 'CheckboxRoot' });
+      const input = wrapper.findComponent({ name: 'ACheckboxRoot' });
       await input.vm.$emit('update:modelValue', true);
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[true]] });
     });
 
     it('change event', async () => {
       const wrapper = mount(Checkbox);
-      const input = wrapper.findComponent({ name: 'CheckboxRoot' });
+      const input = wrapper.findComponent({ name: 'ACheckboxRoot' });
       await input.vm.$emit('update:modelValue', false);
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
@@ -105,7 +105,7 @@ describe('Checkbox', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'CheckboxRoot' });
+      const input = wrapper.findComponent({ name: 'ACheckboxRoot' });
       return {
         wrapper,
         input,

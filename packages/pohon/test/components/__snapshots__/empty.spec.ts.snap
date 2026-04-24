@@ -36,6 +36,17 @@ exports[`Empty > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`Empty > renders with avatar correctly 1`] = `
+"<div data-slot="root" class="">
+  <div data-slot="header" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Empty > renders with body slot correctly 1`] = `
 "<div data-slot="root" class="">
   <div data-slot="header" class=""><span data-slot="root"><span class="iconify i-lucide:file" aria-hidden="true" data-slot="icon"></span></span>

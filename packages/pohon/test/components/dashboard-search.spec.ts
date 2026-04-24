@@ -1,8 +1,8 @@
-import theme from '#build/pohon/dashboard-search';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
+import theme from '#build/pohon/dashboard-search';
 import DashboardGroup from '../../src/runtime/components/dashboard-group.vue';
 import DashboardSearch from '../../src/runtime/components/dashboard-search.vue';
 import { renderEach } from '../component-render';

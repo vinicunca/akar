@@ -1,9 +1,9 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/input';
 import Select from '../../src/runtime/components/select.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -101,7 +101,7 @@ describe('Select', () => {
         ...options,
       });
 
-      const select = wrapper.findComponent({ name: 'SelectRoot' });
+      const select = wrapper.findComponent({ name: 'ASelectRoot' });
       await select.setValue(spec.input);
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] });
@@ -187,21 +187,21 @@ describe('Select', () => {
   describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(Select, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'SelectRoot' });
+      const input = wrapper.findComponent({ name: 'ASelectRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] });
     });
 
     it('change event', async () => {
       const wrapper = mount(Select, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'SelectRoot' });
+      const input = wrapper.findComponent({ name: 'ASelectRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
     it('blur event', async () => {
       const wrapper = mount(Select, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'SelectRoot' });
+      const input = wrapper.findComponent({ name: 'ASelectRoot' });
       await input.vm.$emit('update:open', false);
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] });
     });
@@ -229,7 +229,7 @@ describe('Select', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'SelectRoot' });
+      const input = wrapper.findComponent({ name: 'ASelectRoot' });
       return {
         wrapper,
         input,

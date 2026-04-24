@@ -1,7 +1,7 @@
-import theme from '#build/pohon/input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/input';
 import InputTags from '../../src/runtime/components/input-tags.vue';
 import { renderEach } from '../component-render';
 

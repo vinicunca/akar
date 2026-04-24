@@ -2,6 +2,14 @@
 
 exports[`Separator > renders with as correctly 1`] = `"<span data-orientation="horizontal" role="separator" data-slot="root"><div data-slot="border" class=""></div><!--v-if--></span>"`;
 
+exports[`Separator > renders with avatar correctly 1`] = `
+"<div data-orientation="horizontal" role="separator" data-slot="root">
+  <div data-slot="border" class=""></div>
+  <div data-slot="container" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></div>
+  <div data-slot="border" class=""></div>
+</div>"
+`;
+
 exports[`Separator > renders with class correctly 1`] = `
 "<div data-orientation="horizontal" role="separator" data-slot="root" class="flex-row-reverse">
   <div data-slot="border" class=""></div>

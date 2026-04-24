@@ -1,8 +1,8 @@
-import theme from '#build/pohon/calendar';
 import { CalendarDate } from '@internationalized/date';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { afterAll, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/calendar';
 import Calendar from '../../src/runtime/components/calendar.vue';
 import { renderEach } from '../component-render';
 

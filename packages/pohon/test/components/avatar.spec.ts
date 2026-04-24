@@ -1,7 +1,7 @@
-import theme from '#build/pohon/avatar';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/avatar';
 import Avatar from '../../src/runtime/components/avatar.vue';
 import { renderEach } from '../component-render';
 

@@ -1,10 +1,10 @@
 import type { AppConfig } from '@nuxt/schema';
 import type { PDropdownMenuItem } from '../../src/runtime/components/dropdown-menu.vue';
 import type { ComponentConfig } from '../../src/runtime/types/uv';
-import theme from '#build/pohon/dropdown-menu';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/dropdown-menu';
 import PDropdownMenu from '../../src/runtime/components/dropdown-menu.vue';
 import { renderEach } from '../component-render';
 import { expectSlotProps } from '../utils/types';

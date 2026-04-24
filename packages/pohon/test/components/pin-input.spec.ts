@@ -1,9 +1,9 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/pin-input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/pin-input';
 import PinInput from '../../src/runtime/components/pin-input.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -39,14 +39,14 @@ describe('PinInput', () => {
   describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(PinInput);
-      const input = wrapper.findComponent({ name: 'PinInputRoot' });
+      const input = wrapper.findComponent({ name: 'APinInputRoot' });
       await input.vm.$emit('update:modelValue', ['1', '2', '3']);
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[['1', '2', '3']]] });
     });
 
     it('change event', async () => {
       const wrapper = mount(PinInput);
-      const input = wrapper.findComponent({ name: 'PinInputRoot' });
+      const input = wrapper.findComponent({ name: 'APinInputRoot' });
       await input.vm.$emit('complete', ['1', '2', '3', '4', '5']);
       await flushPromises();
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
@@ -81,7 +81,7 @@ describe('PinInput', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'PinInputRoot' });
+      const input = wrapper.findComponent({ name: 'APinInputRoot' });
       return {
         wrapper,
         input,

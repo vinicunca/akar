@@ -1,7 +1,7 @@
-import theme from '#build/pohon/chat-prompt';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/chat-prompt';
 import ChatPrompt from '../../src/runtime/components/chat-prompt.vue';
 import { renderEach } from '../component-render';
 

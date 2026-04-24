@@ -1,9 +1,9 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/input';
 import InputMenu from '../../src/runtime/components/input-menu.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -114,7 +114,7 @@ describe('InputMenu', () => {
         ...options,
       });
 
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       await input.setValue(spec.input);
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] });
@@ -139,42 +139,42 @@ describe('InputMenu', () => {
   describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] });
     });
 
     it('change event', async () => {
       const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
     it('blur event', async () => {
       const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       await input.vm.$emit('update:open', false);
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] });
     });
 
     it('remove-tag event', async () => {
       const wrapper = mount(InputMenu, { props: { modelValue: ['Option 1'], items: ['Option 1', 'Option 2'], multiple: true } });
-      const input = wrapper.findComponent({ name: 'TagsInputRoot' });
+      const input = wrapper.findComponent({ name: 'ATagsInputRoot' });
       await input.vm.$emit('remove-tag', 'Option 1');
-      expect(wrapper.emitted()).toMatchObject({ 'remove-tag': [['Option 1']] });
+      expect(wrapper.emitted()).toMatchObject({ removeTag: [['Option 1']] });
     });
 
     it('update:modelValue event with autocomplete', async () => {
       const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], autocomplete: true } });
-      const input = wrapper.findComponent({ name: 'AutocompleteRoot' });
+      const input = wrapper.findComponent({ name: 'AAutocompleteRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] });
     });
 
     it('change event with autocomplete', async () => {
       const wrapper = mount(InputMenu, { props: { items: ['Option 1', 'Option 2'], autocomplete: true } });
-      const input = wrapper.findComponent({ name: 'AutocompleteRoot' });
+      const input = wrapper.findComponent({ name: 'AAutocompleteRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
@@ -269,7 +269,7 @@ describe('InputMenu', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       return {
         wrapper,
         input,

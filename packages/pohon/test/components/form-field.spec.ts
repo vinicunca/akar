@@ -1,4 +1,8 @@
 import type { PFormFieldProps } from '../../src/runtime/components/form-field.vue';
+import { mountSuspended } from '@nuxt/test-utils/runtime';
+import { describe, expect, it, vi } from 'vitest';
+import { axe } from 'vitest-axe';
+import { defineComponent } from 'vue';
 import theme from '#build/pohon/form-field';
 import {
   PCheckbox,
@@ -15,10 +19,6 @@ import {
   PSwitch,
   PTextarea,
 } from '#components';
-import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { describe, expect, it, vi } from 'vitest';
-import { axe } from 'vitest-axe';
-import { defineComponent } from 'vue';
 import { renderEach } from '../component-render';
 
 const inputComponents = [PInput, PRadioGroup, PTextarea, PCheckbox, PSelect, PSelectMenu, PInputMenu, PInputNumber, PSwitch, PSlider, PPinInput, PFileUpload];
@@ -108,7 +108,7 @@ describe('FormField', () => {
       };
     });
 
-    if (name === 'RadioGroup') {
+    if (inputComponent === PRadioGroup) {
       it('unbinds label for', async () => {
         const wrapper = await renderFormField({
           props: { label: 'Label' },

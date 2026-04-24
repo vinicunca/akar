@@ -27,6 +27,17 @@ exports[`Alert > renders with as correctly 1`] = `
 </article>"
 `;
 
+exports[`Alert > renders with avatar correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
+  <div data-slot="wrapper" class="">
+    <div data-slot="title" class="">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Alert > renders with class correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="w-48">
   <!--v-if-->

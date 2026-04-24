@@ -1,7 +1,7 @@
-import { useAppConfig } from '#imports';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { defineComponent, nextTick, reactive } from 'vue';
+import { useAppConfig } from '#imports';
 import { useResolvedVariants } from '../../src/runtime/composables/use-resolved-variants';
 
 const theme = {

@@ -271,6 +271,22 @@ exports[`InputMenu > renders with avatar and leadingIcon correctly 1`] = `
 </div>"
 `;
 
+exports[`InputMenu > renders with avatar and trailingIcon correctly 1`] = `
+"<div dir="ltr" data-slot="root"><input aria-disabled="false" type="text" aria-expanded="false" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" data-slot="base" class="" value=""><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" data-slot="trailing" class=""><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-slot="trailingIcon"></span></button>
+  <!--teleport start-->
+  <!--teleport end-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`InputMenu > renders with avatar correctly 1`] = `
+"<div dir="ltr" data-slot="root"><input aria-disabled="false" type="text" aria-expanded="false" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" data-slot="base" class="" value=""><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" data-slot="trailing" class=""><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-slot="trailingIcon"></span></button>
+  <!--teleport start-->
+  <!--teleport end-->
+  <!--v-if-->
+</div>"
+`;
+
 exports[`InputMenu > renders with by correctly 1`] = `
 "<div dir="ltr" data-slot="root" style="pointer-events: auto;"><input aria-disabled="false" type="text" aria-expanded="true" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" data-slot="base" class="" value="Backlog" aria-activedescendant="akar-combobox-item-v-0-0-3">
   <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" data-slot="trailing" class=""><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-slot="trailingIcon"></span></button>
@@ -910,6 +926,14 @@ exports[`InputMenu > renders with loading and avatar correctly 1`] = `
 
 exports[`InputMenu > renders with loading correctly 1`] = `
 "<div dir="ltr" data-slot="root"><input aria-disabled="false" type="text" aria-expanded="false" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" data-slot="base" class="" value=""><span data-slot="leading" class=""><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-slot="leadingIcon"></span></span><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" data-slot="trailing" class=""><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-slot="trailingIcon"></span></button>
+  <!--teleport start-->
+  <!--teleport end-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`InputMenu > renders with loading trailing and avatar correctly 1`] = `
+"<div dir="ltr" data-slot="root"><input aria-disabled="false" type="text" aria-expanded="false" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" data-slot="base" class="" value=""><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" data-slot="trailing" class=""><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-slot="trailingIcon"></span></button>
   <!--teleport start-->
   <!--teleport end-->
   <!--v-if-->

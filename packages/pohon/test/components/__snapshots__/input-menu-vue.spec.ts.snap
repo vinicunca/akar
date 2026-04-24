@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`InputMenu > renders with trailing slot correctly 1`] = `
+"<div dir="ltr" data-slot="root"><input aria-disabled="false" type="text" aria-expanded="false" aria-controls="" aria-autocomplete="list" role="combobox" autocomplete="off" data-slot="base" class="" value="">
+  <!--v-if--><button type="button" tabindex="-1" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" data-slot="trailing" class="">Trailing slot</button>
+  <!--teleport start-->
+  <!--teleport end-->
+  <!--v-if-->
+</div>"
+`;

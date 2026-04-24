@@ -2,6 +2,14 @@
 
 exports[`Avatar > renders with alt correctly 1`] = `"<span data-slot="root"><span data-slot="fallback" class="">BC</span></span>"`;
 
+exports[`Avatar > renders with as (object) correctly 1`] = `
+"<section data-slot="root">
+  <p src="https://github.com/benjamincanac.png" data-slot="image"></p>
+</section>"
+`;
+
+exports[`Avatar > renders with as (partial object) correctly 1`] = `"<span data-slot="root"><p src="https://github.com/benjamincanac.png" data-slot="image"></p></span>"`;
+
 exports[`Avatar > renders with as correctly 1`] = `"<section data-slot="root"><span data-slot="fallback" class="">&nbsp;</span></section>"`;
 
 exports[`Avatar > renders with chip correctly 1`] = `"<span data-slot="root" class=""><span data-slot="fallback" class="">&nbsp;</span><span data-slot="base" class="">1</span></span>"`;
@@ -15,5 +23,25 @@ exports[`Avatar > renders with default slot correctly 1`] = `"<span data-slot="r
 exports[`Avatar > renders with icon correctly 1`] = `"<span data-slot="root"><span class="iconify i-lucide:image" aria-hidden="true" data-slot="icon"></span></span>"`;
 
 exports[`Avatar > renders with pohon correctly 1`] = `"<span data-slot="root"><span data-slot="fallback" class="font-bold">&nbsp;</span></span>"`;
+
+exports[`Avatar > renders with size 2xl correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
+
+exports[`Avatar > renders with size 2xs correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
+
+exports[`Avatar > renders with size 3xl correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
+
+exports[`Avatar > renders with size 3xs correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
+
+exports[`Avatar > renders with size lg correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
+
+exports[`Avatar > renders with size md correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
+
+exports[`Avatar > renders with size sm correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
+
+exports[`Avatar > renders with size xl correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
+
+exports[`Avatar > renders with size xs correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
+
+exports[`Avatar > renders with src correctly 1`] = `"<span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>"`;
 
 exports[`Avatar > renders with text correctly 1`] = `"<span data-slot="root"><span data-slot="fallback" class="">+1</span></span>"`;

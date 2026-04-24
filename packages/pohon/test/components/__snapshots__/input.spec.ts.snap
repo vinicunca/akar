@@ -20,6 +20,14 @@ exports[`Input > renders with avatar and leadingIcon correctly 1`] = `
 </div>"
 `;
 
+exports[`Input > renders with avatar and trailingIcon correctly 1`] = `"<div data-slot="root" class=""><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><input type="text" data-slot="base" autocomplete="off"><span data-slot="trailing" class=""><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-slot="trailingIcon"></span></span></div>"`;
+
+exports[`Input > renders with avatar correctly 1`] = `
+"<div data-slot="root" class=""><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><input type="text" data-slot="base" autocomplete="off">
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Input > renders with class correctly 1`] = `
 "<div data-slot="root" class="absolute">
   <!--v-if--><input type="text" data-slot="base" autocomplete="off">
@@ -90,6 +98,8 @@ exports[`Input > renders with loading correctly 1`] = `
   <!--v-if-->
 </div>"
 `;
+
+exports[`Input > renders with loading trailing and avatar correctly 1`] = `"<div data-slot="root" class=""><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><input type="text" data-slot="base" autocomplete="off"><span data-slot="trailing" class=""><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-slot="trailingIcon"></span></span></div>"`;
 
 exports[`Input > renders with loading trailing correctly 1`] = `
 "<div data-slot="root" class="">

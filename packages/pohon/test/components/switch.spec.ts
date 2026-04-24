@@ -1,9 +1,9 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/switch';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/switch';
 import Switch from '../../src/runtime/components/switch.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -55,14 +55,14 @@ describe('Switch', () => {
   describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(Switch);
-      const input = wrapper.findComponent({ name: 'SwitchRoot' });
+      const input = wrapper.findComponent({ name: 'ASwitchRoot' });
       await input.vm.$emit('update:modelValue', true);
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[true]] });
     });
 
     it('change event', async () => {
       const wrapper = mount(Switch);
-      const input = wrapper.findComponent({ name: 'SwitchRoot' });
+      const input = wrapper.findComponent({ name: 'ASwitchRoot' });
       await input.vm.$emit('update:modelValue', true);
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
@@ -104,7 +104,7 @@ describe('Switch', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'SwitchRoot' });
+      const input = wrapper.findComponent({ name: 'ASwitchRoot' });
       return {
         wrapper,
         input,

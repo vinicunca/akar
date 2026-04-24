@@ -32,6 +32,31 @@ exports[`ChangelogVersion > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`ChangelogVersion > renders with authors correctly 1`] = `
+"<article data-slot="root" class="">
+  <div data-slot="indicator" class="">
+    <!--v-if-->
+    <div data-slot="dot" class="">
+      <div data-slot="dotInner" class=""></div>
+    </div>
+  </div>
+  <div data-slot="container" class="">
+    <!--v-if-->
+    <div data-slot="footer" class="">
+      <div data-slot="authors" class="">
+        <div data-orientation="horizontal" data-slot="root" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" alt="benjamincanac" data-slot="image"></span>
+          <div data-slot="wrapper" class="">
+            <!--v-if-->
+            <p data-slot="name" class="">Benjamin Canac</p>
+            <p data-slot="description" class="">benjamincanac</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>"
+`;
+
 exports[`ChangelogVersion > renders with authors slot correctly 1`] = `
 "<article data-slot="root" class="">
   <div data-slot="indicator" class="">

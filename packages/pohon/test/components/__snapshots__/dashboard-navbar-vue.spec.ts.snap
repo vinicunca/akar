@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DashboardNavbar > renders with toggle slot correctly 1`] = `
+"<div class="">
+  <!---->
+  <div data-slot="root">
+    <div data-slot="left" class="">Toggle slot
+      <!--v-if-->
+      <h1 data-slot="title" class=""></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`DashboardNavbar > renders without toggle correctly 1`] = `
+"<div class="">
+  <!---->
+  <div data-slot="root">
+    <div data-slot="left" class="">
+      <!--v-if-->
+      <!--v-if-->
+      <h1 data-slot="title" class=""></h1>
+    </div>
+    <!--v-if-->
+    <div data-slot="right" class="">
+      <!--v-if-->
+    </div>
+  </div>
+</div>"
+`;

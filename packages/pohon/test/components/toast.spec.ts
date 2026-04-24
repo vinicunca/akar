@@ -1,8 +1,8 @@
-import { ClientOnly } from '#components';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
+import { ClientOnly } from '#components';
 import Toast from '../../src/runtime/components/toast.vue';
 import Toaster from '../../src/runtime/components/toaster.vue';
 import { renderEach } from '../component-render';

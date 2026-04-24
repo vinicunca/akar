@@ -63,6 +63,19 @@ exports[`Button > renders with avatar and leadingIcon correctly 1`] = `
 </button>"
 `;
 
+exports[`Button > renders with avatar and trailingIcon correctly 1`] = `
+"<button type="button" data-slot="base" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
+  <!--v-if--><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-slot="trailingIcon"></span>
+</button>"
+`;
+
+exports[`Button > renders with avatar correctly 1`] = `
+"<button type="button" data-slot="base" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
+  <!--v-if-->
+  <!--v-if-->
+</button>"
+`;
+
 exports[`Button > renders with block correctly 1`] = `
 "<button type="button" data-slot="base" class="">
   <!--v-if--><span data-slot="label" class="">Button</span>
@@ -151,6 +164,12 @@ exports[`Button > renders with loading correctly 1`] = `
 "<button type="button" disabled="" data-slot="base" class=""><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-slot="leadingIcon"></span>
   <!--v-if-->
   <!--v-if-->
+</button>"
+`;
+
+exports[`Button > renders with loading trailing and avatar correctly 1`] = `
+"<button type="button" disabled="" data-slot="base" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
+  <!--v-if--><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-slot="trailingIcon"></span>
 </button>"
 `;
 

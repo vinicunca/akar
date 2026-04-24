@@ -1,8 +1,8 @@
-import theme from '#build/pohon/input-time';
 import { Time } from '@internationalized/date';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { afterAll, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/input-time';
 import InputTime from '../../src/runtime/components/input-time.vue';
 import { renderEach } from '../component-render';
 

@@ -13,6 +13,17 @@ exports[`Badge > renders with avatar and leadingIcon correctly 1`] = `
 <!--v-if--></span>"
 `;
 
+exports[`Badge > renders with avatar and trailingIcon correctly 1`] = `
+"<span data-slot="base" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
+<!--v-if--><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-slot="trailingIcon"></span></span>"
+`;
+
+exports[`Badge > renders with avatar correctly 1`] = `
+"<span data-slot="base" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
+<!--v-if-->
+<!--v-if--></span>"
+`;
+
 exports[`Badge > renders with class correctly 1`] = `
 "<span data-slot="base" class="rounded-full font-bold"><!--v-if--><span data-slot="label" class="">Badge</span>
 <!--v-if--></span>"

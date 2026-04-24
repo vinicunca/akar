@@ -1,7 +1,7 @@
-import theme from '#build/pohon/alert';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/alert';
 import Alert from '../../src/runtime/components/alert.vue';
 import { renderEach } from '../component-render';
 

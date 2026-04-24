@@ -102,6 +102,20 @@ exports[`SelectMenu > renders with avatar and leadingIcon correctly 1`] = `
 <!--v-if-->"
 `;
 
+exports[`SelectMenu > renders with avatar and trailingIcon correctly 1`] = `
+"<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" data-slot="base" class="" dir="ltr"><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><span data-slot="placeholder" class="">&nbsp;</span><span data-slot="trailing" class=""><span class="iconify i-lucide:arrow-right" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
+<!--teleport start-->
+<!--teleport end-->
+<!--v-if-->"
+`;
+
+exports[`SelectMenu > renders with avatar correctly 1`] = `
+"<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" data-slot="base" class="" dir="ltr"><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><span data-slot="placeholder" class="">&nbsp;</span><span data-slot="trailing" class=""><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
+<!--teleport start-->
+<!--teleport end-->
+<!--v-if-->"
+`;
+
 exports[`SelectMenu > renders with by correctly 1`] = `
 "<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="true" aria-controls="" data-state="open" aria-disabled="false" data-slot="base" class="" dir="ltr" style="pointer-events: auto;">
   <!--v-if--><span data-slot="value" class="">Backlog</span><span data-slot="trailing" class=""><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-slot="trailingIcon"></span></span>
@@ -1001,6 +1015,13 @@ exports[`SelectMenu > renders with loading and avatar correctly 1`] = `
 
 exports[`SelectMenu > renders with loading correctly 1`] = `
 "<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" data-slot="base" class="" dir="ltr"><span data-slot="leading" class=""><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-slot="leadingIcon"></span></span><span data-slot="placeholder" class="">&nbsp;</span><span data-slot="trailing" class=""><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
+<!--teleport start-->
+<!--teleport end-->
+<!--v-if-->"
+`;
+
+exports[`SelectMenu > renders with loading trailing and avatar correctly 1`] = `
+"<button type="button" tabindex="0" aria-label="Show popup" aria-haspopup="listbox" aria-expanded="false" aria-controls="" data-state="closed" aria-disabled="false" data-slot="base" class="" dir="ltr"><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><span data-slot="placeholder" class="">&nbsp;</span><span data-slot="trailing" class=""><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-slot="trailingIcon"></span></span></button>
 <!--teleport start-->
 <!--teleport end-->
 <!--v-if-->"

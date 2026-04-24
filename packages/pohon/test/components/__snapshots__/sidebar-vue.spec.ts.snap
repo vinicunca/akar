@@ -43,34 +43,6 @@ exports[`Sidebar > renders with class correctly 1`] = `
 <!--v-if-->"
 `;
 
-exports[`Sidebar > renders with close correctly 1`] = `
-"<!-- Non-collapsible: simple inline sidebar -->
-<!-- Collapsible: fixed sidebar with gap spacer + mobile menu -->
-<aside data-slot="root" data-state="expanded" data-variant="sidebar" data-side="left">
-  <!-- Gap spacer: reserves layout space for the fixed sidebar -->
-  <div data-slot="gap" data-state="expanded" class=""></div><!-- Fixed container: the actual visible sidebar -->
-  <div data-slot="container" data-state="expanded" class="">
-    <div data-slot="inner" class="">
-      <div data-slot="header" class="">
-        <div data-slot="wrapper" class="">
-          <p data-slot="title" class="">Sidebar Title</p>
-          <!--v-if-->
-        </div>
-        <div data-slot="actions" class=""><button type="button" aria-label="Close" data-slot="base" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg>
-            <!--v-if-->
-            <!--v-if-->
-          </button></div>
-      </div>
-      <div data-slot="body" class=""></div>
-      <!--v-if-->
-    </div>
-    <!--v-if-->
-  </div>
-</aside>
-<!-- Mobile menu -->
-<!--v-if-->"
-`;
-
 exports[`Sidebar > renders with collapsed icon correctly 1`] = `
 "<!-- Non-collapsible: simple inline sidebar -->
 <!-- Collapsible: fixed sidebar with gap spacer + mobile menu -->

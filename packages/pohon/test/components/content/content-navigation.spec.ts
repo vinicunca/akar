@@ -1,5 +1,5 @@
-import theme from '#build/pohon/content/content-navigation';
 import { describe } from 'vitest';
+import theme from '#build/pohon/content/content-navigation';
 import ContentNavigation from '../../../src/runtime/components/content/content-navigation.vue';
 import { renderEach } from '../../component-render';
 

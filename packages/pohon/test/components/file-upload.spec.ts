@@ -1,9 +1,9 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/file-upload';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/file-upload';
 import FileUpload from '../../src/runtime/components/file-upload.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';

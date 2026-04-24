@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`InputNumber > renders without increment and decrement correctly 1`] = `
+"<div data-slot="root" role="group">
+  <!--v-if--><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-slot="base" value="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;
+
+exports[`InputNumber > renders without increment and decrement vertical correctly 1`] = `
+"<div data-slot="root" role="group">
+  <!--v-if--><input role="spinbutton" type="text" tabindex="0" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" aria-roledescription="Number field" data-slot="base" value="">
+  <!--v-if-->
+  <!--v-if-->
+</div>"
+`;

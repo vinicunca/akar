@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Listbox > renders with item slot correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-1" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item slot</div>
+      <div id="akar-listbox-item-v-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item slot</div>
+      <div id="akar-listbox-item-v-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item slot</div>
+      <div id="akar-listbox-item-v-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item slot</div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with item-leading slot correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-1" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item leading slot<span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item leading slot<span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item leading slot<span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item leading slot<span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with virtualize correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div data-akar-virtualizer="" style="position: relative; width: 100%; height: 128px;"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;

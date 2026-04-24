@@ -32,6 +32,25 @@ exports[`PageLogos > renders with default slot correctly 2`] = `
 </div>"
 `;
 
+exports[`PageLogos > renders with items correctly 1`] = `
+"<div data-slot="root">
+  <!--v-if-->
+  <div data-slot="logos" class=""><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" data-slot="image"></span><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" data-slot="image"></span></div>
+</div>"
+`;
+
+exports[`PageLogos > renders with marquee correctly 1`] = `
+"<div data-slot="root">
+  <!--v-if-->
+  <div data-orientation="horizontal" data-slot="logos" class="">
+    <div data-slot="content" class=""><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" data-slot="image"></span><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" data-slot="image"></span></div>
+    <div data-slot="content" class=""><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" data-slot="image"></span><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" data-slot="image"></span></div>
+    <div data-slot="content" class=""><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" data-slot="image"></span><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" data-slot="image"></span></div>
+    <div data-slot="content" class=""><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" data-slot="image"></span><span data-slot="root"><img src="https://avatars.githubusercontent.com/u/71938701?v=4" alt="Hugo Richard" data-slot="image"></span></div>
+  </div>
+</div>"
+`;
+
 exports[`PageLogos > renders with pohon correctly 1`] = `
 "<div data-slot="root">
   <!--v-if-->

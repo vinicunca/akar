@@ -1,10 +1,10 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/input-number';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { reactive } from 'vue';
+import theme from '#build/pohon/input-number';
 import InputNumber from '../../src/runtime/components/input-number.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -57,7 +57,7 @@ describe('InputNumber', () => {
   describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = await mountSuspended(InputNumber);
-      const input = wrapper.findComponent({ name: 'NumberFieldRoot' });
+      const input = wrapper.findComponent({ name: 'ANumberFieldRoot' });
       await input.setValue(1);
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1]] });
       expect(1).toBe(1);
@@ -65,14 +65,14 @@ describe('InputNumber', () => {
 
     it('change event', async () => {
       const wrapper = await mountSuspended(InputNumber);
-      const input = wrapper.findComponent({ name: 'NumberFieldRoot' });
+      const input = wrapper.findComponent({ name: 'ANumberFieldRoot' });
       await input.setValue(1);
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
     it('blur event', async () => {
       const wrapper = await mountSuspended(InputNumber);
-      const input = wrapper.findComponent({ name: 'NumberFieldInput' });
+      const input = wrapper.findComponent({ name: 'ANumberFieldInput' });
       await input.trigger('blur');
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] });
     });
@@ -98,7 +98,7 @@ describe('InputNumber', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'NumberFieldRoot' });
+      const input = wrapper.findComponent({ name: 'ANumberFieldRoot' });
       return {
         wrapper,
         input,

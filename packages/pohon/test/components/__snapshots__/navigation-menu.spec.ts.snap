@@ -1409,7 +1409,7 @@ exports[`NavigationMenu > renders with unmountOnHide correctly 1`] = `
                 <p data-slot="childLinkLabel" class="">Installation
                   <!--v-if-->
                 </p>
-                <p data-slot="childLinkDescription" class="">Learn how to install and configure Nuxt UI in your application.</p>
+                <p data-slot="childLinkDescription" class="">Learn how to install and configure Pohon in your application.</p>
               </div>
             </button></li>
           <li data-slot="childItem" class=""><button type="button" data-slot="childLink" data-akar-collection-item=""><span class="iconify i-lucide:swatch-book" aria-hidden="true" data-slot="childLinkIcon"></span>
@@ -1543,7 +1543,7 @@ exports[`NavigationMenu > renders with valueKey correctly 1`] = `
                 <p data-slot="childLinkLabel" class="">Installation
                   <!--v-if-->
                 </p>
-                <p data-slot="childLinkDescription" class="">Learn how to install and configure Nuxt UI in your application.</p>
+                <p data-slot="childLinkDescription" class="">Learn how to install and configure Pohon in your application.</p>
               </div>
             </button></li>
           <li data-slot="childItem" class=""><button type="button" data-slot="childLink" data-akar-collection-item=""><span class="iconify i-lucide:swatch-book" aria-hidden="true" data-slot="childLinkIcon"></span>

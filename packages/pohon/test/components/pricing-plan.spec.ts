@@ -1,7 +1,7 @@
-import theme from '#build/pohon/pricing-plan';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/pricing-plan';
 import PricingPlan from '../../src/runtime/components/pricing-plan.vue';
 import { renderEach } from '../component-render';
 

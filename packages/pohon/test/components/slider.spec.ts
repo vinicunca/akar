@@ -1,9 +1,9 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/slider';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/slider';
 import Slider from '../../src/runtime/components/slider.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -44,7 +44,7 @@ describe('Slider', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(Slider);
 
-      const input = wrapper.findComponent({ name: 'SliderRoot' });
+      const input = wrapper.findComponent({ name: 'ASliderRoot' });
       input.vm.$emit('update:modelValue', 1);
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1], [1]] });
@@ -53,7 +53,7 @@ describe('Slider', () => {
     it('change event', async () => {
       const wrapper = mount(Slider);
 
-      const input = wrapper.findComponent({ name: 'SliderRoot' });
+      const input = wrapper.findComponent({ name: 'ASliderRoot' });
       input.vm.$emit('valueCommit');
 
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
@@ -79,7 +79,7 @@ describe('Slider', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'SliderRoot' });
+      const input = wrapper.findComponent({ name: 'ASliderRoot' });
       return {
         wrapper,
         input,

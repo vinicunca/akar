@@ -299,6 +299,29 @@ exports[`ChatMessages > renders with status submitted correctly 1`] = `
 </div>"
 `;
 
+exports[`ChatMessages > renders with user correctly 1`] = `
+"<div data-slot="root" class="" style="--last-message-height: 0px;">
+  <article data-role="user" data-slot="root" class="">
+    <!--v-if-->
+    <div data-slot="container" class="">
+      <div data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></div>
+      <div data-slot="content" class="">Hello, how are you?</div>
+      <!--v-if-->
+    </div>
+  </article>
+  <article data-role="assistant" data-slot="root" class="">
+    <!--v-if-->
+    <div data-slot="container" class="">
+      <!--v-if-->
+      <div data-slot="content" class="">I am fine, thank you!</div>
+      <!--v-if-->
+    </div>
+  </article>
+  <!--v-if-->
+  <!---->
+</div>"
+`;
+
 exports[`ChatMessages > renders with viewport slot correctly 1`] = `
 "<div data-slot="root" class="" style="--last-message-height: 0px;">
   <article data-role="user" data-slot="root" class="">

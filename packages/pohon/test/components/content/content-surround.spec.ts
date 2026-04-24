@@ -6,11 +6,11 @@ describe('ContentSurround', () => {
   const surround = [{
     path: '/getting-started',
     title: 'Introduction',
-    description: 'Nuxt UI harnesses the combined strengths of Reka UI, Tailwind CSS, and Tailwind Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.',
+    description: 'Pohon harnesses the combined strengths of Akar, UnoCSS, and UnoCSS Variants to offer developers an unparalleled set of tools for creating sophisticated, accessible, and highly performant user interfaces.',
   }, {
     path: '/getting-started/theme',
     title: 'Theme',
-    description: 'Learn how to customize Nuxt UI components using Tailwind CSS, CSS variables and the Tailwind Variants API for powerful and flexible theming.',
+    description: 'Learn how to customize Pohon components using UnoCSS, CSS variables and the UnoCSS Variants API for powerful and flexible theming.',
   }];
 
   const props = { surround };

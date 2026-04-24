@@ -22,6 +22,17 @@ exports[`ChatMessage > renders with as correctly 1`] = `
 </section>"
 `;
 
+exports[`ChatMessage > renders with avatar correctly 1`] = `
+"<article data-role="user" data-slot="root" class="">
+  <!--v-if-->
+  <div data-slot="container" class="">
+    <div data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></div>
+    <div data-slot="content" class="">Hello, how are you?</div>
+    <!--v-if-->
+  </div>
+</article>"
+`;
+
 exports[`ChatMessage > renders with class correctly 1`] = `
 "<article data-role="user" data-slot="root" class="">
   <!--v-if-->

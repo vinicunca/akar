@@ -91,21 +91,6 @@ exports[`PageHeader > renders with headline slot correctly 1`] = `
 </div>"
 `;
 
-exports[`PageHeader > renders with links correctly 1`] = `
-"<div data-slot="root" class="">
-  <!--v-if-->
-  <div data-slot="container" class="">
-    <div data-slot="wrapper" class="">
-      <!--v-if-->
-      <div data-slot="links" class=""><button type="button" data-slot="base" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg><span data-slot="label" class="">GitHub</span>
-          <!--v-if-->
-        </button></div>
-    </div>
-    <!--v-if-->
-  </div>
-</div>"
-`;
-
 exports[`PageHeader > renders with links slot correctly 1`] = `
 "<div data-slot="root" class="">
   <!--v-if-->

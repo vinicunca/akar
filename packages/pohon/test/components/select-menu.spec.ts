@@ -1,9 +1,9 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/input';
 import SelectMenu from '../../src/runtime/components/select-menu.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -110,7 +110,7 @@ describe('SelectMenu', () => {
         ...options,
       });
 
-      const selectMenu = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const selectMenu = wrapper.findComponent({ name: 'AComboboxRoot' });
       await selectMenu.setValue(spec.input);
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] });
@@ -139,7 +139,7 @@ describe('SelectMenu', () => {
   describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       await input.setValue('Option 1');
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] });
@@ -147,14 +147,14 @@ describe('SelectMenu', () => {
 
     it('change event', async () => {
       const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
     it('blur event', async () => {
       const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       input.vm.$emit('update:open', false);
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] });
     });
@@ -239,7 +239,7 @@ describe('SelectMenu', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       return {
         wrapper,
         input,

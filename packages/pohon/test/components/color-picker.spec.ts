@@ -1,7 +1,7 @@
-import theme from '#build/pohon/color-picker';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/color-picker';
 import ColorPicker from '../../src/runtime/components/color-picker.vue';
 import { renderEach } from '../component-render';
 

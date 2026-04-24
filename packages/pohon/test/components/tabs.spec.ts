@@ -1,7 +1,7 @@
-import theme from '#build/pohon/tabs';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/tabs';
 import Tabs from '../../src/runtime/components/tabs.vue';
 import { renderEach } from '../component-render';
 

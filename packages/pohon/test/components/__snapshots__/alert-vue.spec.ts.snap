@@ -27,6 +27,17 @@ exports[`Alert > renders with as correctly 1`] = `
 </article>"
 `;
 
+exports[`Alert > renders with avatar correctly 1`] = `
+"<div data-orientation="vertical" data-slot="root" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
+  <div data-slot="wrapper" class="">
+    <div data-slot="title" class="">Alert</div>
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Alert > renders with class correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="w-48">
   <!--v-if-->
@@ -39,23 +50,6 @@ exports[`Alert > renders with class correctly 1`] = `
 </div>"
 `;
 
-exports[`Alert > renders with close correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="">
-  <!--v-if-->
-  <div data-slot="wrapper" class="">
-    <div data-slot="title" class="">Alert</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <div data-slot="actions" class="">
-    <!--v-if--><button type="button" aria-label="Close" data-slot="base" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
-  </div>
-</div>"
-`;
-
 exports[`Alert > renders with close slot correctly 1`] = `
 "<div data-orientation="vertical" data-slot="root" class="">
   <!--v-if-->
@@ -65,23 +59,6 @@ exports[`Alert > renders with close slot correctly 1`] = `
     <!--v-if-->
   </div>
   <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with closeIcon correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class="">
-  <!--v-if-->
-  <div data-slot="wrapper" class="">
-    <div data-slot="title" class="">Alert</div>
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-  <div data-slot="actions" class="">
-    <!--v-if--><button type="button" aria-label="Close" data-slot="base" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg>
-      <!--v-if-->
-      <!--v-if-->
-    </button>
-  </div>
 </div>"
 `;
 
@@ -103,17 +80,6 @@ exports[`Alert > renders with description slot correctly 1`] = `
   <div data-slot="wrapper" class="">
     <div data-slot="title" class="">Alert</div>
     <div data-slot="description" class="">Description slot</div>
-    <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with icon correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg>
-  <div data-slot="wrapper" class="">
-    <div data-slot="title" class="">Alert</div>
-    <!--v-if-->
     <!--v-if-->
   </div>
   <!--v-if-->
@@ -175,36 +141,6 @@ exports[`Alert > renders with neutral variant subtle correctly 1`] = `
     <div data-slot="title" class="">Alert</div>
     <!--v-if-->
     <!--v-if-->
-  </div>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`Alert > renders with orientation horizontal correctly 1`] = `
-"<div data-orientation="horizontal" data-slot="root" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg>
-  <div data-slot="wrapper" class="">
-    <div data-slot="title" class="">Alert</div>
-    <div data-slot="description" class="">This is a description</div>
-    <!--v-if-->
-  </div>
-  <div data-slot="actions" class=""><button type="button" data-slot="base" class="">
-      <!--v-if--><span data-slot="label" class="">Action</span>
-      <!--v-if-->
-    </button>
-    <!--v-if-->
-  </div>
-</div>"
-`;
-
-exports[`Alert > renders with orientation vertical correctly 1`] = `
-"<div data-orientation="vertical" data-slot="root" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg>
-  <div data-slot="wrapper" class="">
-    <div data-slot="title" class="">Alert</div>
-    <div data-slot="description" class="">This is a description</div>
-    <div data-slot="actions" class=""><button type="button" data-slot="base" class="">
-        <!--v-if--><span data-slot="label" class="">Action</span>
-        <!--v-if-->
-      </button></div>
   </div>
   <!--v-if-->
 </div>"

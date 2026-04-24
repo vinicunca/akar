@@ -1835,22 +1835,23 @@ exports[`Table > renders with pohon correctly 1`] = `
 
 exports[`Table > renders with row pinning and virtualization correctly 1`] = `
 "<div data-slot="root">
-  <div style="height: 325px;">
-    <table data-slot="base" class="">
+  <table data-slot="base" class="">
+    <!--v-if-->
+    <thead data-slot="thead" class="">
+      <tr data-slot="tr" class="">
+        <th data-pinned="false" scope="col" data-slot="th" class="">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">Email</th>
+      </tr>
+      <tr data-slot="separator" class=""></tr>
+    </thead>
+    <tbody data-slot="tbody" class="">
       <!--v-if-->
-      <thead data-slot="thead" class="">
-        <tr data-slot="tr" class="">
-          <th data-pinned="false" scope="col" data-slot="th" class="">Id</th>
-          <th data-pinned="false" scope="col" data-slot="th" class="">Amount</th>
-          <th data-pinned="false" scope="col" data-slot="th" class="">Status</th>
-          <th data-pinned="false" scope="col" data-slot="th" class="">Email</th>
-        </tr>
-        <tr data-slot="separator" class=""></tr>
-      </thead>
-      <tbody data-slot="tbody" class=""></tbody>
       <!--v-if-->
-    </table>
-  </div>
+    </tbody>
+    <!--v-if-->
+  </table>
 </div>"
 `;
 
@@ -1964,24 +1965,87 @@ exports[`Table > renders with sticky correctly 1`] = `
 </div>"
 `;
 
+exports[`Table > renders with virtualize and sticky correctly 1`] = `
+"<div data-slot="root">
+  <table data-slot="base" class="">
+    <!--v-if-->
+    <thead data-slot="thead" class="">
+      <tr data-slot="tr" class="">
+        <th data-pinned="false" scope="col" data-slot="th" class="">
+          <div data-slot="root" class="">
+            <div data-slot="container" class=""><button data-slot="base" id="v-0-0-0" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked">
+                <!---->
+                <!--v-if-->
+              </button></div>
+            <div data-slot="wrapper" class=""><label for="v-0-0-0" data-slot="label" class="">Select all</label>
+              <!--v-if-->
+            </div>
+          </div>
+        </th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">#</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">Date</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class=""><button type="button" data-slot="base" class="-mx-2.5"><span class="iconify i-lucide:arrow-up-down" aria-hidden="true" data-slot="leadingIcon"></span><span data-slot="label" class="">Email</span>
+            <!--v-if-->
+          </button></th>
+        <th data-pinned="false" scope="col" data-slot="th" class="text-right">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">
+          <!---->
+        </th>
+      </tr>
+      <tr data-slot="separator" class=""></tr>
+    </thead>
+    <tbody data-slot="tbody" class="">
+      <!--v-if-->
+      <!--v-if-->
+    </tbody>
+    <tfoot data-slot="tfoot" class="">
+      <tr data-slot="separator" class=""></tr>
+      <tr data-slot="tr" class="">
+        <th data-pinned="false" data-slot="th" class="">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="">
+          <!---->
+        </th>
+        <th data-pinned="false" data-slot="th" class="text-right">Total: €2,990.00</th>
+        <th data-pinned="false" data-slot="th" class="">
+          <!---->
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>"
+`;
+
 exports[`Table > renders with virtualize correctly 1`] = `
 "<div data-slot="root">
-  <div style="height: 325px;">
-    <table data-slot="base" class="">
+  <table data-slot="base" class="">
+    <!--v-if-->
+    <thead data-slot="thead" class="">
+      <tr data-slot="tr" class="">
+        <th data-pinned="false" scope="col" data-slot="th" class="">Id</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">Amount</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">Status</th>
+        <th data-pinned="false" scope="col" data-slot="th" class="">Email</th>
+      </tr>
+      <tr data-slot="separator" class=""></tr>
+    </thead>
+    <tbody data-slot="tbody" class="">
       <!--v-if-->
-      <thead data-slot="thead" class="">
-        <tr data-slot="tr" class="">
-          <th data-pinned="false" scope="col" data-slot="th" class="">Id</th>
-          <th data-pinned="false" scope="col" data-slot="th" class="">Amount</th>
-          <th data-pinned="false" scope="col" data-slot="th" class="">Status</th>
-          <th data-pinned="false" scope="col" data-slot="th" class="">Email</th>
-        </tr>
-        <tr data-slot="separator" class=""></tr>
-      </thead>
-      <tbody data-slot="tbody" class=""></tbody>
       <!--v-if-->
-    </table>
-  </div>
+    </tbody>
+    <!--v-if-->
+  </table>
 </div>"
 `;
 

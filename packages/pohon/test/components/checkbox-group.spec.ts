@@ -1,10 +1,10 @@
 import type { FormInputEvents } from '../../src/module';
-import themeCheckbox from '#build/pohon/checkbox';
-import theme from '#build/pohon/checkbox-group';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import themeCheckbox from '#build/pohon/checkbox';
+import theme from '#build/pohon/checkbox-group';
 import CheckboxGroup from '../../src/runtime/components/checkbox-group.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -65,14 +65,14 @@ describe('CheckboxGroup', () => {
   describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(CheckboxGroup, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'CheckboxGroupRoot' });
+      const input = wrapper.findComponent({ name: 'ACheckboxGroupRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] });
     });
 
     it('change event', async () => {
       const wrapper = mount(CheckboxGroup, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'CheckboxGroupRoot' });
+      const input = wrapper.findComponent({ name: 'ACheckboxGroupRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
@@ -100,7 +100,7 @@ describe('CheckboxGroup', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'CheckboxGroupRoot' });
+      const input = wrapper.findComponent({ name: 'ACheckboxGroupRoot' });
       return {
         wrapper,
         input,

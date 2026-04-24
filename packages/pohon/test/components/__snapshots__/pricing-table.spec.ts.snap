@@ -8,52 +8,58 @@ exports[`PricingTable > renders with as correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -148,20 +154,22 @@ exports[`PricingTable > renders with as correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -190,20 +198,22 @@ exports[`PricingTable > renders with as correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -232,20 +242,22 @@ exports[`PricingTable > renders with as correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -285,52 +297,58 @@ exports[`PricingTable > renders with caption correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -425,20 +443,22 @@ exports[`PricingTable > renders with caption correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -467,20 +487,22 @@ exports[`PricingTable > renders with caption correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -509,20 +531,22 @@ exports[`PricingTable > renders with caption correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -562,52 +586,58 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -702,20 +732,22 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -744,20 +776,22 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -786,20 +820,22 @@ exports[`PricingTable > renders with caption slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -839,52 +875,58 @@ exports[`PricingTable > renders with class correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -979,20 +1021,22 @@ exports[`PricingTable > renders with class correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -1021,20 +1065,22 @@ exports[`PricingTable > renders with class correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -1063,20 +1109,22 @@ exports[`PricingTable > renders with class correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -1116,52 +1164,58 @@ exports[`PricingTable > renders with pohon correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -1256,20 +1310,22 @@ exports[`PricingTable > renders with pohon correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -1298,20 +1354,22 @@ exports[`PricingTable > renders with pohon correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -1340,20 +1398,22 @@ exports[`PricingTable > renders with pohon correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -1392,9 +1452,15 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
     <thead data-slot="thead" class="">
       <tr data-slot="tr" class="">
         <td></td>
-        <th scope="col" data-slot="tier" class="">Tier slot</th>
-        <th scope="col" data-slot="tier" class="">Tier slot</th>
-        <th scope="col" data-slot="tier" class="">Tier slot</th>
+        <th scope="col" data-slot="tier" class="">
+          <div data-slot="tierWrapper" class="">Tier slot</div>
+        </th>
+        <th scope="col" data-slot="tier" class="">
+          <div data-slot="tierWrapper" class="">Tier slot</div>
+        </th>
+        <th scope="col" data-slot="tier" class="">
+          <div data-slot="tierWrapper" class="">Tier slot</div>
+        </th>
       </tr>
     </thead>
     <tbody data-slot="tbody" class="">
@@ -1487,7 +1553,9 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
     </tbody>
   </table>
   <ul data-slot="list" class="">
-    <li data-slot="item" class="">Tier slot<div data-slot="section" class="">
+    <li data-slot="item" class="">
+      <div data-slot="tierWrapper" class="">Tier slot</div>
+      <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
           <div data-slot="featureTitle" class="">Unlimited projects</div>
@@ -1514,7 +1582,9 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
         </div>
       </div>
     </li>
-    <li data-slot="item" class="">Tier slot<div data-slot="section" class="">
+    <li data-slot="item" class="">
+      <div data-slot="tierWrapper" class="">Tier slot</div>
+      <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
           <div data-slot="featureTitle" class="">Unlimited projects</div>
@@ -1541,7 +1611,9 @@ exports[`PricingTable > renders with tier slot correctly 1`] = `
         </div>
       </div>
     </li>
-    <li data-slot="item" class="">Tier slot<div data-slot="section" class="">
+    <li data-slot="item" class="">
+      <div data-slot="tierWrapper" class="">Tier slot</div>
+      <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
           <div data-slot="featureTitle" class="">Unlimited projects</div>
@@ -1580,49 +1652,55 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>Tier badge slot
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>Tier badge slot
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div>Tier badge slot
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div>Tier badge slot
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>Tier badge slot
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>Tier badge slot
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -1717,19 +1795,21 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>Tier badge slot
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>Tier badge slot
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -1758,19 +1838,21 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div>Tier badge slot
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div>Tier badge slot
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -1799,19 +1881,21 @@ exports[`PricingTable > renders with tier-badge slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>Tier badge slot
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>Tier badge slot
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -1851,52 +1935,58 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <div data-slot="tierBilling" class="">Tier billing slot</div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <div data-slot="tierBilling" class="">Tier billing slot</div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class="">Tier billing slot</div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class="">Tier billing slot</div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <div data-slot="tierBilling" class="">Tier billing slot</div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <div data-slot="tierBilling" class="">Tier billing slot</div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -1991,20 +2081,22 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <div data-slot="tierBilling" class="">Tier billing slot</div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <div data-slot="tierBilling" class="">Tier billing slot</div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2033,20 +2125,22 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class="">Tier billing slot</div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class="">Tier billing slot</div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2075,20 +2169,22 @@ exports[`PricingTable > renders with tier-billing slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <div data-slot="tierBilling" class="">Tier billing slot</div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <div data-slot="tierBilling" class="">Tier billing slot</div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2128,43 +2224,49 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class="">Tier button slot</div>
           </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class="">Tier button slot</div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class="">Tier button slot</div>
           </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class="">Tier button slot</div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class="">Tier button slot</div>
           </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class="">Tier button slot</div>
         </th>
       </tr>
     </thead>
@@ -2259,17 +2361,19 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class="">Tier button slot</div>
       </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class="">Tier button slot</div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2298,17 +2402,19 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class="">Tier button slot</div>
       </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class="">Tier button slot</div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2337,17 +2443,19 @@ exports[`PricingTable > renders with tier-button slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class="">Tier button slot</div>
       </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class="">Tier button slot</div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2387,52 +2495,58 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">Tier description slot</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">Tier description slot</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">Tier description slot</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">Tier description slot</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">Tier description slot</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">Tier description slot</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -2527,20 +2641,22 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">Tier description slot</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">Tier description slot</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2569,20 +2685,22 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">Tier description slot</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">Tier description slot</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2611,20 +2729,22 @@ exports[`PricingTable > renders with tier-description slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">Tier description slot</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">Tier description slot</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2664,52 +2784,58 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <div data-slot="tierDiscount" class="">Tier discount slot</div>
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <div data-slot="tierDiscount" class="">Tier discount slot</div>
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <div data-slot="tierDiscount" class="">Tier discount slot</div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
           </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <div data-slot="tierDiscount" class="">Tier discount slot</div>
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
-              <!--v-if-->
-            </button></div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <div data-slot="tierDiscount" class="">Tier discount slot</div>
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <div data-slot="tierDiscount" class="">Tier discount slot</div>
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -2804,20 +2930,22 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <div data-slot="tierDiscount" class="">Tier discount slot</div>
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <div data-slot="tierDiscount" class="">Tier discount slot</div>
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2846,20 +2974,22 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <div data-slot="tierDiscount" class="">Tier discount slot</div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
       </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <div data-slot="tierDiscount" class="">Tier discount slot</div>
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
-          <!--v-if-->
-        </button></div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2888,20 +3018,22 @@ exports[`PricingTable > renders with tier-discount slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <div data-slot="tierDiscount" class="">Tier discount slot</div>
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <div data-slot="tierDiscount" class="">Tier discount slot</div>
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -2941,52 +3073,58 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Tier price slot</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Tier price slot</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Tier price slot</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">Tier price slot</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Tier price slot</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Tier price slot</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -3081,20 +3219,22 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Tier price slot</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Tier price slot</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -3123,20 +3263,22 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Tier price slot</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">Tier price slot</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -3165,20 +3307,22 @@ exports[`PricingTable > renders with tier-price slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Tier price slot</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Tier price slot</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -3218,52 +3362,58 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Tier title slot</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Tier title slot</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Tier title slot</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Tier title slot</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Tier title slot</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Tier title slot</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -3358,20 +3508,22 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Tier title slot</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Tier title slot</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -3400,20 +3552,22 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Tier title slot</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Tier title slot</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -3442,20 +3596,22 @@ exports[`PricingTable > renders with tier-title slot correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Tier title slot</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Tier title slot</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -3495,52 +3651,58 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
       <tr data-slot="tr" class="">
         <td></td>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Free</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For personal and small teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$0</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Free</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For personal and small teams</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">$0</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-            <!--v-if--></span>
-          </div>
-          <div data-slot="tierDescription" class="">For medium and large teams</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">$9</div>
-            <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Get started</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+              <!--v-if--></span>
+            </div>
+            <div data-slot="tierDescription" class="">For medium and large teams</div>
+            <div data-slot="tierPriceWrapper" class="">
               <!--v-if-->
-            </button></div>
+              <div data-slot="tierPrice" class="">$9</div>
+              <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Get started</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
         <th scope="col" data-slot="tier" class="">
-          <div data-slot="tierTitleWrapper" class="">
-            <div data-slot="tierTitle" class="">Enterprise</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierDescription" class="">For large enterprises</div>
-          <div data-slot="tierPriceWrapper" class="">
-            <!--v-if-->
-            <div data-slot="tierPrice" class="">Custom</div>
-            <!--v-if-->
-          </div>
-          <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-              <!--v-if--><span data-slot="label" class="">Contact us</span>
+          <div data-slot="tierWrapper" class="">
+            <div data-slot="tierTitleWrapper" class="">
+              <div data-slot="tierTitle" class="">Enterprise</div>
               <!--v-if-->
-            </button></div>
+            </div>
+            <div data-slot="tierDescription" class="">For large enterprises</div>
+            <div data-slot="tierPriceWrapper" class="">
+              <!--v-if-->
+              <div data-slot="tierPrice" class="">Custom</div>
+              <!--v-if-->
+            </div>
+            <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+                <!--v-if--><span data-slot="label" class="">Contact us</span>
+                <!--v-if-->
+              </button></div>
+          </div>
         </th>
       </tr>
     </thead>
@@ -3635,20 +3797,22 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
   </table>
   <ul data-slot="list" class="">
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Free</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For personal and small teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$0</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Free</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For personal and small teams</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">$0</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -3677,20 +3841,22 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
-        <!--v-if--></span>
-      </div>
-      <div data-slot="tierDescription" class="">For medium and large teams</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">$9</div>
-        <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Get started</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Pro</div><span data-slot="tierBadge" class=""><!--v-if--><span data-slot="label" class="">Most popular</span>
+          <!--v-if--></span>
+        </div>
+        <div data-slot="tierDescription" class="">For medium and large teams</div>
+        <div data-slot="tierPriceWrapper" class="">
           <!--v-if-->
-        </button></div>
+          <div data-slot="tierPrice" class="">$9</div>
+          <div data-slot="tierBilling" class=""><span data-slot="tierBillingPeriod" class="">billed annually</span><span data-slot="tierBillingCycle" class="">/month</span></div>
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Get started</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">
@@ -3719,20 +3885,22 @@ exports[`PricingTable > renders with tiers and sections correctly 1`] = `
       </div>
     </li>
     <li data-slot="item" class="">
-      <div data-slot="tierTitleWrapper" class="">
-        <div data-slot="tierTitle" class="">Enterprise</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierDescription" class="">For large enterprises</div>
-      <div data-slot="tierPriceWrapper" class="">
-        <!--v-if-->
-        <div data-slot="tierPrice" class="">Custom</div>
-        <!--v-if-->
-      </div>
-      <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
-          <!--v-if--><span data-slot="label" class="">Contact us</span>
+      <div data-slot="tierWrapper" class="">
+        <div data-slot="tierTitleWrapper" class="">
+          <div data-slot="tierTitle" class="">Enterprise</div>
           <!--v-if-->
-        </button></div>
+        </div>
+        <div data-slot="tierDescription" class="">For large enterprises</div>
+        <div data-slot="tierPriceWrapper" class="">
+          <!--v-if-->
+          <div data-slot="tierPrice" class="">Custom</div>
+          <!--v-if-->
+        </div>
+        <div data-slot="tierButton" class=""><button type="button" data-slot="base" class="">
+            <!--v-if--><span data-slot="label" class="">Contact us</span>
+            <!--v-if-->
+          </button></div>
+      </div>
       <div data-slot="section" class="">
         <div data-slot="sectionTitle" class="">Features</div>
         <div data-slot="feature" class="">

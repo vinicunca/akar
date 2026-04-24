@@ -1,9 +1,9 @@
 import type { FormInputEvents } from '../../src/module';
-import theme from '#build/pohon/radio-group';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import theme from '#build/pohon/radio-group';
 import RadioGroup from '../../src/runtime/components/radio-group.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
@@ -56,7 +56,7 @@ describe('RadioGroup', () => {
   describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(RadioGroup, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'RadioGroupRoot' });
+      const input = wrapper.findComponent({ name: 'ARadioGroupRoot' });
       await input.setValue('Option 1');
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] });
@@ -65,7 +65,7 @@ describe('RadioGroup', () => {
     it('change event', async () => {
       const wrapper = mount(RadioGroup, { props: { items: ['Option 1', 'Option 2'] } });
 
-      const input = wrapper.findComponent({ name: 'RadioGroupRoot' });
+      const input = wrapper.findComponent({ name: 'ARadioGroupRoot' });
       await input.setValue('Option 1');
 
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
@@ -94,7 +94,7 @@ describe('RadioGroup', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'RadioGroupRoot' });
+      const input = wrapper.findComponent({ name: 'ARadioGroupRoot' });
       return {
         wrapper,
         input,

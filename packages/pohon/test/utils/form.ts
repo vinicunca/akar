@@ -1,5 +1,7 @@
 import type { Reactive } from 'vue';
 import type { PFormProps } from '../../src/runtime/components/form.vue';
+import { mountSuspended } from '@nuxt/test-utils/runtime';
+import { reactive } from 'vue';
 import {
   PCheckbox,
   PCheckboxGroup,
@@ -9,6 +11,7 @@ import {
   PInput,
   PInputMenu,
   PInputNumber,
+  PListbox,
   PPinInput,
   PRadioGroup,
   PSelect,
@@ -17,8 +20,6 @@ import {
   PSwitch,
   PTextarea,
 } from '#components';
-import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { reactive } from 'vue';
 
 export async function renderForm(options: {
   state?: Reactive<any>;
@@ -64,6 +65,7 @@ export async function renderForm(options: {
           PPinInput,
           PCheckboxGroup,
           PFileUpload,
+          PListbox,
         },
         template: options.slotTemplate,
       },
