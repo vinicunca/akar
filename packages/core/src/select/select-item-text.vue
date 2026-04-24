@@ -13,6 +13,7 @@ import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectASelectItemContext } from './select-item.vue';
 
 defineOptions({
+  name: 'ASelectItemText',
   inheritAttrs: false,
 });
 

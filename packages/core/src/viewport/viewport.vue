@@ -15,6 +15,8 @@ export interface AViewportProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AViewport' });
+
 const props = defineProps<AViewportProps>();
 const { forwardRef } = useForwardExpose();
 

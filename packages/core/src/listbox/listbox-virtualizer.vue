@@ -27,6 +27,8 @@ import { getNextMatch } from '../shared/use-typeahead';
 import { injectAListboxRootContext } from './listbox-root.vue';
 import { compare, queryCheckedElement } from './utils';
 
+defineOptions({ name: 'AListboxVirtualizer' });
+
 const props = defineProps<AListboxVirtualizerProps<T>>();
 
 defineSlots<{

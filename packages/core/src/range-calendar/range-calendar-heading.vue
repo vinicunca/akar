@@ -8,6 +8,8 @@ export interface ARangeCalendarHeadingProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
+defineOptions({ name: 'ARangeCalendarHeading' });
+
 const props = withDefaults(defineProps<ARangeCalendarHeadingProps>(), { as: 'div' });
 defineSlots<{
   default?: (props: {

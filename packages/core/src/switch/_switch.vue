@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import ASwitchRoot from './switch-root.vue';
 import ASwitchThumb from './switch-thumb.vue';
 
+defineOptions({ name: 'ASwitch' });
+
 const checked = ref(false);
 </script>
 

@@ -108,6 +108,8 @@ import {
 import { useDirection, useForwardExpose, useId } from '../shared';
 import { EVENT_ROOT_CONTENT_DISMISS } from './utils';
 
+defineOptions({ name: 'ANavigationMenuRoot' });
+
 const props = withDefaults(
   defineProps<ANavigationMenuRootProps>(),
   {

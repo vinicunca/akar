@@ -28,6 +28,8 @@ import { reactiveOmit, useVModel } from '@vueuse/core';
 import { useForwardProps } from '../shared';
 import AMenuGroup from './menu-group.vue';
 
+defineOptions({ name: 'AMenuRadioGroup' });
+
 const props = withDefaults(defineProps<AMenuRadioGroupProps>(), {
   modelValue: '',
 });

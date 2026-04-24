@@ -14,6 +14,8 @@ import { APrimitive } from '../primitive';
 import { useForwardExpose } from '../shared';
 import { injectAAvatarRootContext } from './avatar-root.vue';
 
+defineOptions({ name: 'AAvatarFallback' });
+
 const props = withDefaults(
   defineProps<AAvatarFallbackProps>(),
   {

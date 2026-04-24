@@ -212,6 +212,7 @@ import {
 } from './utils';
 
 defineOptions({
+  name: 'APopperContent',
   inheritAttrs: false,
 });
 

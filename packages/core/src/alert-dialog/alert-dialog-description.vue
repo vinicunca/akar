@@ -8,6 +8,8 @@ export interface AAlertDialogDescriptionProps extends ADialogDescriptionProps {}
 import { ADialogDescription } from '../dialog';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AAlertDialogDescription' });
+
 const props = withDefaults(
   defineProps<AAlertDialogDescriptionProps>(),
   { as: 'p' },

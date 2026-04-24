@@ -11,6 +11,8 @@ import { APrimitive } from '../primitive';
 import { injectAPaginationRootContext } from './pagination-root.vue';
 import { getRange, transform } from './utils';
 
+defineOptions({ name: 'APaginationList' });
+
 const props = defineProps<APaginationListProps>();
 
 defineSlots<{

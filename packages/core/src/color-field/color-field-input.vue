@@ -12,6 +12,8 @@ import { computed, ref } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectAColorFieldRootContext } from './color-field-root.vue';
 
+defineOptions({ name: 'AColorFieldInput' });
+
 const props = withDefaults(
   defineProps<AColorFieldInputProps>(),
   {

@@ -7,6 +7,8 @@ export interface AMonthRangePickerGridBodyProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AMonthRangePickerGridBody' });
+
 const props = withDefaults(
   defineProps<AMonthRangePickerGridBodyProps>(),
   { as: 'tbody' },

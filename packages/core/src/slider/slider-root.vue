@@ -86,6 +86,7 @@ import {
 } from './utils';
 
 defineOptions({
+  name: 'ASliderRoot',
   inheritAttrs: false,
 });
 

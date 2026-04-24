@@ -7,6 +7,8 @@ export interface ATooltipPortalProps extends ATeleportProps {}
 <script setup lang="ts">
 import { ATeleport } from '../teleport';
 
+defineOptions({ name: 'ATooltipPortal' });
+
 const props = defineProps<ATooltipPortalProps>();
 </script>
 

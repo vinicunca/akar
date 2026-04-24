@@ -11,6 +11,8 @@ import { useForwardExpose } from '../shared';
 import { injectAHoverCardRootContext } from './hover-card-root.vue';
 import { excludeTouch } from './utils';
 
+defineOptions({ name: 'AHoverCardTrigger' });
+
 withDefaults(
   defineProps<AHoverCardTriggerProps>(),
   {

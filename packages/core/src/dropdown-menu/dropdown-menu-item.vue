@@ -10,6 +10,8 @@ export interface ADropdownMenuItemProps extends AMenuItemProps {}
 import { AMenuItem } from '../menu';
 import { useEmitAsProps, useForwardExpose } from '../shared';
 
+defineOptions({ name: 'ADropdownMenuItem' });
+
 const props = defineProps<ADropdownMenuItemProps>();
 const emits = defineEmits<ADropdownMenuItemEmits>();
 

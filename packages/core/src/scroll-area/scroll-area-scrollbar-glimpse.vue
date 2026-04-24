@@ -15,6 +15,7 @@ import ScrollAreaScrollbarAuto from './scroll-area-scrollbar-auto.vue';
 import { injectAScrollAreaScrollbarContext } from './scroll-area-scrollbar.vue';
 
 defineOptions({
+  name: 'AScrollAreaScrollbarGlimpse',
   inheritAttrs: false,
 });
 

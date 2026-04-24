@@ -17,6 +17,8 @@ import { APrimitive } from '../primitive';
 import { useDateField } from '../shared/date/use-date-field';
 import { injectATimeRangeFieldRootContext } from './time-range-field-root.vue';
 
+defineOptions({ name: 'ATimeRangeFieldInput' });
+
 const props = defineProps<ATimeRangeFieldInputProps>();
 
 const rootContext = injectATimeRangeFieldRootContext();

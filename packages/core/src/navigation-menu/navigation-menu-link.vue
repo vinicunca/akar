@@ -21,6 +21,8 @@ export interface ANavigationMenuLinkProps extends APrimitiveProps {
 import { APrimitive } from '../primitive';
 import { EVENT_ROOT_CONTENT_DISMISS, LINK_SELECT } from './utils';
 
+defineOptions({ name: 'ANavigationMenuLink' });
+
 const props = withDefaults(defineProps<ANavigationMenuLinkProps>(), {
   as: 'a',
 });

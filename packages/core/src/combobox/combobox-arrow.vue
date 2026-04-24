@@ -10,6 +10,8 @@ import { useForwardExpose } from '../shared';
 import { injectComboboxContentContext } from './combobox-content-impl.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
+defineOptions({ name: 'AComboboxArrow' });
+
 const props = withDefaults(defineProps<AComboboxArrowProps>(), {
   width: 10,
   height: 5,

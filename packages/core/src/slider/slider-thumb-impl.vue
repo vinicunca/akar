@@ -16,6 +16,7 @@ import { injectASliderRootContext } from './slider-root.vue';
 import { convertValueToPercentage, getLabel, getThumbInBoundsOffset, injectSliderOrientationContext } from './utils';
 
 defineOptions({
+  name: 'ASliderThumbImpl',
   inheritAttrs: false,
 });
 

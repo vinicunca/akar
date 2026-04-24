@@ -35,6 +35,8 @@ import {
   isScrollingWithinScrollbarBounds,
 } from './utils';
 
+defineOptions({ name: 'AScrollAreaScrollbarVisible' });
+
 const rootContext = injectAScrollAreaRootContext();
 const scrollbarContext = injectAScrollAreaScrollbarContext();
 const { forwardRef } = useForwardExpose();

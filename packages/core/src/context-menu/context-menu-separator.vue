@@ -8,6 +8,8 @@ export interface AContextMenuSeparatorProps extends AMenuSeparatorProps {}
 import { AMenuSeparator } from '../menu';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuSeparator' });
+
 const props = defineProps<AContextMenuSeparatorProps>();
 useForwardExpose();
 </script>

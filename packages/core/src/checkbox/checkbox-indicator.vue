@@ -17,6 +17,8 @@ import { APrimitive } from '../primitive';
 import { injectACheckboxRootContext } from './checkbox-root.vue';
 import { getState, isIndeterminate } from './utils';
 
+defineOptions({ name: 'ACheckboxIndicator' });
+
 withDefaults(defineProps<ACheckboxIndicatorProps>(), {
   as: 'span',
 });

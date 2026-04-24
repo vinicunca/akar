@@ -8,6 +8,8 @@ export interface AMonthRangePickerHeadingProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAMonthRangePickerRootContext } from './month-range-picker-root.vue';
 
+defineOptions({ name: 'AMonthRangePickerHeading' });
+
 const props = withDefaults(
   defineProps<AMonthRangePickerHeadingProps>(),
   { as: 'div' },

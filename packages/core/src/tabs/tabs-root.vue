@@ -61,6 +61,8 @@ export const [injectATabsRootContext, provideTabsRootContext]
 import { ref, shallowRef, toRefs } from 'vue';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ATabsRoot' });
+
 const props = withDefaults(defineProps<ATabsRootProps<T>>(), {
   orientation: 'horizontal',
   activationMode: 'automatic',

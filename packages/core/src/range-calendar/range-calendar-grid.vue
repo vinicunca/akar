@@ -9,6 +9,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
+defineOptions({ name: 'ARangeCalendarGrid' });
+
 const props = withDefaults(defineProps<ARangeCalendarGridProps>(), { as: 'table' });
 
 const rootContext = injectARangeCalendarRootContext();

@@ -95,6 +95,8 @@ import { computePanelFlexBoxStyle } from './utils/style';
 import { convertPanelConstraintsToPercent, hasPixelSizedPanel, recalculateLayoutForPixelPanels } from './utils/units';
 import { validatePanelGroupLayout } from './utils/validation';
 
+defineOptions({ name: 'ASplitterGroup' });
+
 const props = withDefaults(defineProps<ASplitterGroupProps>(), {
   autoSaveId: null,
   keyboardResizeBy: 10,

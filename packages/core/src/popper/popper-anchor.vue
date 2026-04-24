@@ -20,6 +20,8 @@ import {
 } from '../primitive';
 import { injectAPopperRootContext } from './popper-root.vue';
 
+defineOptions({ name: 'APopperAnchor' });
+
 const props = defineProps<APopperAnchorProps>();
 
 const { forwardRef, currentElement } = useForwardExpose();

@@ -17,6 +17,8 @@ import { nextTick, onMounted, ref } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectATagsInputRootContext } from './tags-input-root.vue';
 
+defineOptions({ name: 'ATagsInputInput' });
+
 const props = withDefaults(defineProps<ATagsInputInputProps>(), {
   as: 'input',
 });

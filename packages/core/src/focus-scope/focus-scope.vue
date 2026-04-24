@@ -49,6 +49,8 @@ import {
   getTabbableEdges,
 } from './utils';
 
+defineOptions({ name: 'AFocusScope' });
+
 const props = withDefaults(defineProps<AFocusScopeProps>(), {
   loop: false,
   trapped: false,

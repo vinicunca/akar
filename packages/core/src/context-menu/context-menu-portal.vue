@@ -2,10 +2,12 @@
 import type { AMenuPortalProps } from '../menu';
 import {
   AMenuPortal,
-
 } from '../menu';
 
 export interface AContextMenuPortalProps extends AMenuPortalProps {}
+
+defineOptions({ name: 'AContextMenuPortal' });
+
 const props = defineProps<AContextMenuPortalProps>();
 </script>
 

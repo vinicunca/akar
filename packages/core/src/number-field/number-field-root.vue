@@ -74,6 +74,7 @@ import { AVisuallyHiddenInput } from '../visually-hidden';
 import { handleDecimalOperation, useNumberFormatter, useNumberParser } from './utils';
 
 defineOptions({
+  name: 'ANumberFieldRoot',
   inheritAttrs: false,
 });
 

@@ -7,6 +7,8 @@ export interface AAlertDialogPortalProps extends ATeleportProps {}
 <script setup lang="ts">
 import { ATeleport } from '../teleport';
 
+defineOptions({ name: 'AAlertDialogPortal' });
+
 const props = defineProps<AAlertDialogPortalProps>();
 </script>
 

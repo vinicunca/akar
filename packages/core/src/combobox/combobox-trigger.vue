@@ -13,6 +13,8 @@ import { APrimitive } from '../primitive';
 import { useForwardExpose } from '../shared';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
+defineOptions({ name: 'AComboboxTrigger' });
+
 const props = withDefaults(defineProps<AComboboxTriggerProps>(), {
   as: 'button',
 });

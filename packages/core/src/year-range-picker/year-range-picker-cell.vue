@@ -12,6 +12,8 @@ export interface AYearRangePickerCellProps extends APrimitiveProps {
 import { APrimitive } from '../primitive';
 import { injectAYearRangePickerRootContext } from './year-range-picker-root.vue';
 
+defineOptions({ name: 'AYearRangePickerCell' });
+
 withDefaults(
   defineProps<AYearRangePickerCellProps>(),
   { as: 'td' },

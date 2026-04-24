@@ -17,6 +17,8 @@ import { useForwardExpose, useGraceArea } from '../shared';
 import { injectAHoverCardRootContext } from './hover-card-root.vue';
 import { getTabbableNodes } from './utils';
 
+defineOptions({ name: 'AHoverCardContentImpl' });
+
 const props = defineProps<HoverCardContentImplProps>();
 const emits = defineEmits<HoverCardContentImplEmits>();
 const forwarded = useForwardProps(props);

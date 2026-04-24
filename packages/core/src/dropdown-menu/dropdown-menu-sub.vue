@@ -14,6 +14,8 @@ import { useVModel } from '@vueuse/core';
 import { AMenuSub } from '../menu';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'ADropdownMenuSub' });
+
 const props = withDefaults(defineProps<ADropdownMenuSubProps>(), {
   open: undefined,
 });

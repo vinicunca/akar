@@ -7,6 +7,8 @@ export interface ACalendarGridRowProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ACalendarGridRow' });
+
 const props = withDefaults(defineProps<ACalendarGridRowProps>(), { as: 'tr' });
 </script>
 

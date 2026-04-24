@@ -10,6 +10,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectAPaginationRootContext } from './pagination-root.vue';
 
+defineOptions({ name: 'APaginationFirst' });
+
 const props = withDefaults(defineProps<APaginationFirstProps>(), { as: 'button' });
 
 const rootContext = injectAPaginationRootContext();

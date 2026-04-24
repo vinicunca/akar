@@ -16,6 +16,8 @@ export interface ADateRangeFieldInputProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangeFieldInput' });
+
 const props = defineProps<ADateRangeFieldInputProps>();
 
 const rootContext = injectADateRangeFieldRootContext();

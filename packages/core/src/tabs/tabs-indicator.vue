@@ -11,6 +11,8 @@ export interface ATabsIndicatorProps extends APrimitiveProps {}
 import { useResizeObserver } from '@vueuse/core';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ATabsIndicator' });
+
 const props = defineProps<ATabsIndicatorProps>();
 const context = injectATabsRootContext();
 

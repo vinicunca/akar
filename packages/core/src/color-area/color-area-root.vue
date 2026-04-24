@@ -69,6 +69,8 @@ import {
 } from '../shared/color';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 
+defineOptions({ name: 'AColorAreaRoot' });
+
 const props = withDefaults(
   defineProps<AColorAreaRootProps>(),
   {

@@ -24,6 +24,8 @@ import { injectAMenuContext, injectAMenuRootContext } from './menu-root.vue';
 import { injectMenuSubContext } from './menu-sub.vue';
 import { SUB_CLOSE_KEYS } from './utils';
 
+defineOptions({ name: 'AMenuSubContent' });
+
 const props = withDefaults(defineProps<AMenuSubContentProps>(), {
   prioritizePosition: true,
 });

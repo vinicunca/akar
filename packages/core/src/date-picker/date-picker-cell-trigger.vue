@@ -7,6 +7,8 @@ export interface ADatePickerCellTriggerProps extends ACalendarCellTriggerProps {
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADatePickerCellTrigger' });
+
 const props = defineProps<ADatePickerCellTriggerProps>();
 
 defineSlots<CalendarCellTriggerSlot>();

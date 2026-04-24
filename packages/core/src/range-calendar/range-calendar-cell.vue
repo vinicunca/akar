@@ -11,6 +11,8 @@ export interface ARangeCalendarCellProps extends APrimitiveProps {
 import { APrimitive } from '../primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
+defineOptions({ name: 'ARangeCalendarCell' });
+
 withDefaults(defineProps<ARangeCalendarCellProps>(), { as: 'td' });
 const rootContext = injectARangeCalendarRootContext();
 </script>

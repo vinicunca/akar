@@ -20,6 +20,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
+defineOptions({ name: 'ARangeCalendarPrev' });
+
 const props = withDefaults(defineProps<ARangeCalendarPrevProps>(), { as: 'button' });
 
 defineSlots<RangeCalendarPrevSlot>();

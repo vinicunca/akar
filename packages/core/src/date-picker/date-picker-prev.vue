@@ -7,6 +7,8 @@ export interface ADatePickerPrevProps extends ACalendarPrevProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADatePickerPrev' });
+
 const props = defineProps<ADatePickerPrevProps>();
 
 defineSlots<CalendarPrevSlot>();

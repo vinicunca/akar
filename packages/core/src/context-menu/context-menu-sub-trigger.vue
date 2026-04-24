@@ -8,6 +8,8 @@ export interface AContextMenuSubTriggerProps extends AMenuSubTriggerProps {}
 import { AMenuSubTrigger } from '../menu';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuSubTrigger' });
+
 const props = defineProps<AContextMenuSubTriggerProps>();
 useForwardExpose();
 </script>

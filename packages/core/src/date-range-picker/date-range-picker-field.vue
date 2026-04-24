@@ -5,6 +5,8 @@ import { injectADateRangePickerRootContext } from './date-range-picker-root.vue'
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangePickerField' });
+
 const rootContext = injectADateRangePickerRootContext();
 </script>
 

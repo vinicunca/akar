@@ -6,8 +6,9 @@ import { injectAStepperItemContext } from './stepper-item.vue';
 
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
-
 export interface AStepperIndicatorProps extends APrimitiveProps { }
+
+defineOptions({ name: 'AStepperIndicator' });
 
 const props = defineProps<AStepperIndicatorProps>();
 

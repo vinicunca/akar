@@ -24,6 +24,8 @@ import { injectAMenuRootContext } from '../menu/menu-root.vue';
 import { injectMenuSubContext } from '../menu/menu-sub.vue';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 
+defineOptions({ name: 'ADropdownMenuFilter' });
+
 const props = withDefaults(defineProps<ADropdownMenuFilterProps>(), {
   as: 'input',
 });

@@ -23,6 +23,8 @@ import { provideMenuItemIndicatorContext } from './menu-item-indicator.vue';
 import AMenuItem from './menu-item.vue';
 import { getCheckedState, isIndeterminate } from './utils';
 
+defineOptions({ name: 'AMenuCheckboxItem' });
+
 const props = withDefaults(defineProps<AMenuCheckboxItemProps>(), {
   modelValue: false,
 });

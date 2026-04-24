@@ -8,6 +8,8 @@ export interface AEditableCancelTriggerProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAEditableRootContext } from './editable-root.vue';
 
+defineOptions({ name: 'AEditableCancelTrigger' });
+
 const props = withDefaults(defineProps<AEditableCancelTriggerProps>(), { as: 'button' });
 
 const context = injectAEditableRootContext();

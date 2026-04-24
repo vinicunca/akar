@@ -31,6 +31,7 @@ import { injectATreeRootContext } from './tree-root.vue';
 import { flatten } from './utils';
 
 defineOptions({
+  name: 'ATreeItem',
   inheritAttrs: false,
 });
 

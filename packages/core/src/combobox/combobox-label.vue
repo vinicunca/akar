@@ -11,6 +11,8 @@ import { APrimitive } from '../primitive';
 import { useForwardExpose, useId } from '../shared';
 import { injectAComboboxGroupContext } from './combobox-group.vue';
 
+defineOptions({ name: 'AComboboxLabel' });
+
 const props = withDefaults(defineProps<AComboboxLabelProps>(), {
   as: 'div',
 });

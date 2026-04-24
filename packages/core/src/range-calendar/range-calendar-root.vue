@@ -146,6 +146,8 @@ import { useDirection, useLocale } from '../shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
 import { useRangeCalendarState } from './use-range-calendar';
 
+defineOptions({ name: 'ARangeCalendarRoot' });
+
 const props = withDefaults(
   defineProps<ARangeCalendarRootProps>(),
   {

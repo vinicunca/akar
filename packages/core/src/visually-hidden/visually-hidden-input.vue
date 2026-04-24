@@ -5,6 +5,7 @@ import { computed } from 'vue';
 import VisuallyHiddenInputBubble from './visually-hidden-input-bubble.vue';
 
 defineOptions({
+  name: 'AVisuallyHiddenInput',
   inheritAttrs: false,
 });
 

@@ -10,6 +10,8 @@ import { onMounted, onUnmounted } from 'vue';
 import { APrimitive } from '../primitive';
 import { context } from './dismissable-layer.vue';
 
+defineOptions({ name: 'ADismissableLayerBranch' });
+
 const props = defineProps<DismissableLayerBranchProps>();
 
 const { forwardRef, currentElement } = useForwardExpose();

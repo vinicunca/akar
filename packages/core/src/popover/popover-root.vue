@@ -45,6 +45,8 @@ import { useVModel } from '@vueuse/core';
 import { ref, toRefs } from 'vue';
 import { APopperRoot } from '../popper';
 
+defineOptions({ name: 'APopoverRoot' });
+
 const props = withDefaults(defineProps<APopoverRootProps>(), {
   defaultOpen: false,
   open: undefined,

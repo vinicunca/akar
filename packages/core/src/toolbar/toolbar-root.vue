@@ -30,6 +30,8 @@ import { APrimitive } from '../primitive';
 import { ARovingFocusGroup } from '../roving-focus';
 import { useDirection, useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AToolbarRoot' });
+
 const props = withDefaults(
   defineProps<AToolbarRootProps>(),
   {

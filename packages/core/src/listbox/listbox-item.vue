@@ -36,6 +36,8 @@ import { APrimitive } from '../primitive';
 import { injectAListboxRootContext } from './listbox-root.vue';
 import { valueComparator } from './utils';
 
+defineOptions({ name: 'AListboxItem' });
+
 const props = withDefaults(defineProps<AListboxItemProps<T>>(), {
   as: 'div',
 });

@@ -13,6 +13,8 @@ export interface ADropdownMenuCheckboxItemProps extends AMenuCheckboxItemProps {
 import { AMenuCheckboxItem } from '../menu';
 import { useEmitAsProps, useForwardExpose } from '../shared';
 
+defineOptions({ name: 'ADropdownMenuCheckboxItem' });
+
 const props = defineProps<ADropdownMenuCheckboxItemProps>();
 const emits = defineEmits<ADropdownMenuCheckboxItemEmits>();
 

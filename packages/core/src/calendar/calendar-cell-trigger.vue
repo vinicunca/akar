@@ -43,6 +43,8 @@ import { toDate } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
+defineOptions({ name: 'ACalendarCellTrigger' });
+
 const props = withDefaults(defineProps<ACalendarCellTriggerProps>(), {
   as: 'div',
 });

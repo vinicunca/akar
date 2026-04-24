@@ -24,6 +24,7 @@ import SelectProvider from './select-provider.vue';
 import { injectASelectRootContext } from './select-root.vue';
 
 defineOptions({
+  name: 'ASelectContent',
   inheritAttrs: false,
 });
 

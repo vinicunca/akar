@@ -80,6 +80,7 @@ import { APrimitive, usePrimitiveElement } from '../primitive';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 
 defineOptions({
+  name: 'AEditableRoot',
   inheritAttrs: false,
 });
 

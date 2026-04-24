@@ -13,6 +13,8 @@ import { getActiveElement, useArrowNavigation, useForwardExpose } from '../share
 import { injectAStepperItemContext } from './stepper-item.vue';
 import { injectAStepperRootContext } from './stepper-root.vue';
 
+defineOptions({ name: 'AStepperTrigger' });
+
 withDefaults(
   defineProps<AStepperTriggerProps>(),
   {

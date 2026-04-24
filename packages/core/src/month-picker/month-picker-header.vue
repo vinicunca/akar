@@ -7,6 +7,8 @@ export interface AMonthPickerHeaderProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AMonthPickerHeader' });
+
 const props = withDefaults(
   defineProps<AMonthPickerHeaderProps>(),
   { as: 'div' },

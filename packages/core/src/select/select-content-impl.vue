@@ -98,6 +98,8 @@ import SelectItemAlignedPosition from './select-item-aligned-position.vue';
 import SelectPopperPosition from './select-popper-position.vue';
 import { injectASelectRootContext } from './select-root.vue';
 
+defineOptions({ name: 'ASelectContentImpl' });
+
 const props = withDefaults(defineProps<SelectContentImplProps>(), {
   align: 'start',
   position: 'item-aligned',

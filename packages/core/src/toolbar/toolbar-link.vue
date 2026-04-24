@@ -9,6 +9,8 @@ import { APrimitive } from '../primitive';
 import { ARovingFocusItem } from '../roving-focus';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AToolbarLink' });
+
 const props = withDefaults(
   defineProps<AToolbarLinkProps>(),
   { as: 'a' },

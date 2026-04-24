@@ -57,6 +57,7 @@ import { injectAToastProviderContext } from './toast-provider.vue';
 import { getAnnounceTextContent, handleAndDispatchCustomEvent, isDeltaInDirection, TOAST_SWIPE_CANCEL, TOAST_SWIPE_END, TOAST_SWIPE_MOVE, TOAST_SWIPE_START, VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';
 
 defineOptions({
+  name: 'AToastRootImpl',
   inheritAttrs: false,
 });
 

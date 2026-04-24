@@ -1,11 +1,7 @@
 <script lang="ts">
 import type { APrimitiveProps } from '../primitive';
 import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '../shared/types';
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { usePrimitiveElement } from '../primitive';
-import { APrimitive } from '../primitive';
-import { getFocusIntent } from '../roving-focus/utils';
-import { createContext, findValuesBetween, useDirection, useFormControl, useTypeahead } from '../shared';
+import { createContext } from '../shared';
 
 type ListboxRootContext<T> = {
   modelValue: Ref<T | Array<T> | undefined>;
@@ -81,11 +77,18 @@ export type AListboxRootEmits<T = AcceptableValue> = {
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import type { EventHook } from '@vueuse/core';
 import type { Ref } from 'vue';
+import { isBrowser, KEY_CODES } from '@vinicunca/perkakas';
 import { createEventHook, useVModel } from '@vueuse/core';
 import { nextTick, ref, toRefs, watch } from 'vue';
 import { useCollection } from '../collection';
+import { usePrimitiveElement } from '../primitive';
+import { APrimitive } from '../primitive';
+import { getFocusIntent } from '../roving-focus/utils';
+import { findValuesBetween, useDirection, useFormControl, useTypeahead } from '../shared';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 import { compare } from './utils';
+
+defineOptions({ name: 'AListboxRoot' });
 
 const props = withDefaults(defineProps<AListboxRootProps>(), {
   selectionBehavior: 'toggle',
@@ -366,6 +369,14 @@ function handleMultipleReplace(event: KeyboardEvent, targetEl: HTMLElement) {
 }
 
 async function highlightSelected(event?: Event) {
+  // highlightSelected is called inside a watch with immediate set to true.
+  // This results in code execution during SSR.
+  // Ensure this code only runs in a browser environment, since it performs
+  // DOM-only side effects (focus, scrollIntoView, synthetic KeyboardEvent).
+  if (!isBrowser) {
+    return;
+  }
+
   await nextTick();
   if (isVirtual.value) {
     // Trigger on nextTick for Virtualizer to be mounted

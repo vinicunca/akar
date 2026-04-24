@@ -48,6 +48,8 @@ import { APrimitive } from '../primitive';
 import { ARovingFocusGroup } from '../roving-focus';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 
+defineOptions({ name: 'ARadioGroupRoot' });
+
 const props = withDefaults(defineProps<ARadioGroupRootProps>(), {
   disabled: false,
   required: false,

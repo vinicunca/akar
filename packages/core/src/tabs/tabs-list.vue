@@ -14,6 +14,8 @@ import { APrimitive } from '../primitive';
 import { ARovingFocusGroup } from '../roving-focus';
 import { injectATabsRootContext } from './tabs-root.vue';
 
+defineOptions({ name: 'ATabsList' });
+
 const props = withDefaults(defineProps<ATabsListProps>(), {
   loop: true,
 });

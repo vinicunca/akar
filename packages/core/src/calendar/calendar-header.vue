@@ -7,6 +7,8 @@ export interface ACalendarHeaderProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ACalendarHeader' });
+
 const props = withDefaults(defineProps<ACalendarHeaderProps>(), { as: 'div' });
 </script>
 

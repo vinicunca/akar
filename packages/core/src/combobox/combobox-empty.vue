@@ -9,6 +9,8 @@ export interface AComboboxEmptyProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
+defineOptions({ name: 'AComboboxEmpty' });
+
 const props = defineProps<AComboboxEmptyProps>();
 const rootContext = injectAComboboxRootContext();
 

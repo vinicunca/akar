@@ -29,6 +29,7 @@ import { injectARadioGroupRootContext } from './radio-group-root.vue';
 import Radio from './radio.vue';
 
 defineOptions({
+  name: 'ARadioGroupItem',
   inheritAttrs: false,
 });
 

@@ -9,6 +9,8 @@ import type { AcceptableValue } from '../shared/types';
 import AListboxVirtualizer from '../listbox/listbox-virtualizer.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
+defineOptions({ name: 'AComboboxVirtualizer' });
+
 const props = defineProps<AComboboxVirtualizerProps<T>>();
 
 defineSlots<{

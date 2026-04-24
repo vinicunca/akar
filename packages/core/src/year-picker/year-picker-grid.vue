@@ -9,6 +9,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectAYearPickerRootContext } from './year-picker-root.vue';
 
+defineOptions({ name: 'AYearPickerGrid' });
+
 const props = withDefaults(defineProps<AYearPickerGridProps>(), { as: 'table' });
 
 const rootContext = injectAYearPickerRootContext();

@@ -41,6 +41,8 @@ import { isMonthBetweenInclusive, isSameYearMonth, toDate } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectAMonthRangePickerRootContext } from './month-range-picker-root.vue';
 
+defineOptions({ name: 'AMonthRangePickerCellTrigger' });
+
 const props = withDefaults(
   defineProps<AMonthRangePickerCellTriggerProps>(),
   { as: 'div' },

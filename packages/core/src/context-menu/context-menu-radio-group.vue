@@ -13,6 +13,8 @@ export interface AContextMenuRadioGroupProps extends AMenuRadioGroupProps {}
 import { AMenuRadioGroup } from '../menu';
 import { useEmitAsProps, useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuRadioGroup' });
+
 const props = defineProps<AContextMenuRadioGroupProps>();
 const emits = defineEmits<AContextMenuRadioGroupEmits>();
 

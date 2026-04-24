@@ -9,6 +9,8 @@ export interface ATagsInputItemTextProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ATagsInputItemText' });
+
 const props = withDefaults(defineProps<ATagsInputItemTextProps>(), {
   as: 'span',
 });

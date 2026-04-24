@@ -61,6 +61,7 @@ import { ASliderRoot } from '../slider';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 
 defineOptions({
+  name: 'AColorSliderRoot',
   inheritAttrs: false,
 });
 

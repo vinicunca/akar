@@ -8,6 +8,8 @@ export interface APaginationEllipsisProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'APaginationEllipsis' });
+
 const props = defineProps<APaginationEllipsisProps>();
 useForwardExpose();
 </script>

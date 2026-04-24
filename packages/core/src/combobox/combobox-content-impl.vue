@@ -48,6 +48,8 @@ import { APopperContent } from '../popper';
 import { APrimitive } from '../primitive';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
+defineOptions({ name: 'AComboboxContentImpl' });
+
 const props = withDefaults(defineProps<ComboboxContentImplProps>(), {
   position: 'inline',
 });

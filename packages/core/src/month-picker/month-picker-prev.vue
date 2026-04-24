@@ -20,6 +20,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectAMonthPickerRootContext } from './month-picker-root.vue';
 
+defineOptions({ name: 'AMonthPickerPrev' });
+
 const props = withDefaults(
   defineProps<AMonthPickerPrevProps>(),
   { as: 'button' },

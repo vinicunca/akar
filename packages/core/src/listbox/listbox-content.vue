@@ -11,6 +11,8 @@ export interface AListboxContentProps extends APrimitiveProps { }
 <script setup lang="ts">
 import { useCollection } from '../collection';
 
+defineOptions({ name: 'AListboxContent' });
+
 defineProps<AListboxContentProps>();
 
 const { ACollectionSlot } = useCollection();

@@ -101,6 +101,8 @@ import { useDirection, useId, useLocale } from '../shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
 import { useYearPicker, useYearPickerState } from './use-year-picker';
 
+defineOptions({ name: 'AYearPickerRoot' });
+
 const props = withDefaults(
   defineProps<AYearPickerRootProps>(),
   {

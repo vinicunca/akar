@@ -98,6 +98,8 @@ import { useDirection, useId, useLocale } from '../shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
 import { useMonthPicker, useMonthPickerState } from './use-month-picker';
 
+defineOptions({ name: 'AMonthPickerRoot' });
+
 const props = withDefaults(
   defineProps<AMonthPickerRootProps>(),
   {

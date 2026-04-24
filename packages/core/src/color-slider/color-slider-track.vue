@@ -10,6 +10,8 @@ import { getSliderBackgroundStyle } from '../shared/color';
 import { ASliderTrack } from '../slider';
 import { injectAColorSliderRootContext } from './color-slider-root.vue';
 
+defineOptions({ name: 'AColorSliderTrack' });
+
 const props = withDefaults(
   defineProps<AColorSliderTrackProps>(),
   {

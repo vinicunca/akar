@@ -4,6 +4,8 @@ import { computed, ref, watch } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 
+defineOptions({ name: 'AScrollAreaCornerImpl' });
+
 const rootContext = injectAScrollAreaRootContext();
 
 const width = ref(0);

@@ -8,6 +8,8 @@ export interface AYearRangePickerHeadingProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAYearRangePickerRootContext } from './year-range-picker-root.vue';
 
+defineOptions({ name: 'AYearRangePickerHeading' });
+
 const props = withDefaults(
   defineProps<AYearRangePickerHeadingProps>(),
   { as: 'div' },

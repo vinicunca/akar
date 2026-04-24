@@ -2,6 +2,8 @@
 import { ADialogOverlay } from '../dialog';
 import { injectADrawerRootContext } from './drawer.context';
 
+defineOptions({ name: 'ADrawerOverlay' });
+
 const {
   overlayRef,
   hasSnapPoints,

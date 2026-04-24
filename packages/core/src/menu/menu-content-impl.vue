@@ -25,7 +25,7 @@ import { useBodyScrollLock } from '../shared/use-body-scroll-lock';
 
 export interface MenuContentContext {
   onItemEnter: (event: PointerEvent) => boolean;
-  onItemLeave: (event: PointerEvent) => void;
+  onItemLeave: (event: PointerEvent) => boolean;
   onTriggerLeave: (event: PointerEvent) => boolean;
   searchRef: Ref<string>;
   highlightedElement: Ref<HTMLElement | undefined>;
@@ -119,6 +119,8 @@ import {
   isPointerInGraceArea,
   LAST_KEYS,
 } from './utils';
+
+defineOptions({ name: 'AMenuContentImpl' });
 
 const props = withDefaults(defineProps<MenuContentImplProps>(), {
   ...APopperContentPropsDefaultValue,
@@ -333,7 +335,7 @@ provideMenuContentContext({
   },
   onItemLeave: (event) => {
     if (isPointerMovingToSubmenu(event)) {
-      return;
+      return true;
     }
 
     const isInputFocused = ['INPUT', 'TEXTAREA'].includes(getActiveElement()?.tagName || '');
@@ -342,6 +344,8 @@ provideMenuContentContext({
     }
 
     currentItemId.value = null;
+
+    return false;
   },
   onTriggerLeave: (event) => {
     // event.preventDefault() we can't prevent pointerLeave event

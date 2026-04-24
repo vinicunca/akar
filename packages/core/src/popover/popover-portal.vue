@@ -7,6 +7,8 @@ export interface APopoverPortalProps extends ATeleportProps {}
 <script setup lang="ts">
 import { ATeleport } from '../teleport';
 
+defineOptions({ name: 'APopoverPortal' });
+
 const props = defineProps<APopoverPortalProps>();
 </script>
 

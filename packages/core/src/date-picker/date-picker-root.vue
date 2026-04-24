@@ -68,6 +68,7 @@ import { useDirection, useLocale } from '../shared';
 import { getDefaultDate } from '../shared/date';
 
 defineOptions({
+  name: 'ADatePickerRoot',
   inheritAttrs: false,
 });
 

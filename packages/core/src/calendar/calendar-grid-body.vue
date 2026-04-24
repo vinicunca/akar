@@ -7,6 +7,8 @@ export interface ACalendarGridBodyProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ACalendarGridBody' });
+
 const props = withDefaults(defineProps<ACalendarGridBodyProps>(), { as: 'tbody' });
 </script>
 

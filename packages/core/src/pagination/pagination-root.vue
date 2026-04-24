@@ -47,6 +47,8 @@ import { useVModel } from '@vueuse/core';
 import { computed, toRefs } from 'vue';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'APaginationRoot' });
+
 const props = withDefaults(defineProps<APaginationRootProps>(), {
   as: 'nav',
   total: 0,

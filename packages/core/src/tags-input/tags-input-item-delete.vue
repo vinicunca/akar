@@ -12,6 +12,8 @@ export interface ATagsInputItemDeleteProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ATagsInputItemDelete' });
+
 const props = withDefaults(defineProps<ATagsInputItemDeleteProps>(), {
   as: 'button',
 });

@@ -12,6 +12,8 @@ export interface AMonthRangePickerCellProps extends APrimitiveProps {
 import { APrimitive } from '../primitive';
 import { injectAMonthRangePickerRootContext } from './month-range-picker-root.vue';
 
+defineOptions({ name: 'AMonthRangePickerCell' });
+
 withDefaults(
   defineProps<AMonthRangePickerCellProps>(),
   { as: 'td' },

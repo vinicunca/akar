@@ -7,6 +7,8 @@ export interface AYearRangePickerGridBodyProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AYearRangePickerGridBody' });
+
 const props = withDefaults(
   defineProps<AYearRangePickerGridBodyProps>(),
   { as: 'tbody' },

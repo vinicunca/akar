@@ -50,6 +50,8 @@ import { isDateBetweenInclusive, toDate } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectARangeCalendarRootContext } from './range-calendar-root.vue';
 
+defineOptions({ name: 'ARangeCalendarCellTrigger' });
+
 const props = withDefaults(
   defineProps<ARangeCalendarCellTriggerProps>(),
   { as: 'div' },

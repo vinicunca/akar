@@ -20,6 +20,8 @@ export const [
 import { ref } from 'vue';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AAvatarRoot' });
+
 withDefaults(
   defineProps<AAvatarRootProps>(),
   {

@@ -9,6 +9,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
+defineOptions({ name: 'ACalendarGrid' });
+
 const props = withDefaults(defineProps<ACalendarGridProps>(), { as: 'table' });
 
 const rootContext = injectACalendarRootContext();

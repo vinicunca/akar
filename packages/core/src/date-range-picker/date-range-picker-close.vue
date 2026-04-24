@@ -6,6 +6,8 @@ export interface ADateRangePickerCloseProps extends APopoverCloseProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangePickerClose' });
+
 const props = defineProps<ADateRangePickerCloseProps>();
 </script>
 

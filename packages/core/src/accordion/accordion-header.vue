@@ -10,6 +10,8 @@ import { useForwardExpose } from '../shared';
 import { injectAAccordionItemContext } from './accordion-item.vue';
 import { injectAAccordionRootContext } from './accordion-root.vue';
 
+defineOptions({ name: 'AAccordionHeader' });
+
 const props = withDefaults(
   defineProps<AAccordionHeaderProps>(),
   {

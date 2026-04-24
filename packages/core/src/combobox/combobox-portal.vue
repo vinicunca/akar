@@ -7,6 +7,8 @@ export interface AComboboxPortalProps extends ATeleportProps {}
 <script setup lang="ts">
 import { ATeleport } from '../teleport';
 
+defineOptions({ name: 'AComboboxPortal' });
+
 const props = defineProps<AComboboxPortalProps>();
 </script>
 

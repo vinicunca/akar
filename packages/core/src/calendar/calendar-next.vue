@@ -20,6 +20,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
+defineOptions({ name: 'ACalendarNext' });
+
 const props = withDefaults(defineProps<ACalendarNextProps>(), { as: 'button', step: 'month' });
 
 defineSlots<CalendarNextSlot>();

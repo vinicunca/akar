@@ -42,6 +42,8 @@ import { reactiveOmit, useVModel } from '@vueuse/core';
 import { computed, ref, toRefs } from 'vue';
 import { ARadioGroupRoot } from '../radio-group';
 
+defineOptions({ name: 'ARatingRoot' });
+
 const props = withDefaults(
   defineProps<ARatingRootProps>(),
   {

@@ -11,6 +11,8 @@ import { getChannelName } from '../shared/color';
 import { injectAColorAreaRootContext } from './color-area-root.vue';
 import { convertValueToPercentage } from './utils';
 
+defineOptions({ name: 'AColorAreaThumb' });
+
 const props = withDefaults(defineProps<AColorAreaThumbProps>(), {
   as: 'span',
 });

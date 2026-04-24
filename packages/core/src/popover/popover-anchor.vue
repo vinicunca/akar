@@ -10,6 +10,8 @@ import { onBeforeMount, onUnmounted } from 'vue';
 import { APopperAnchor } from '../popper';
 import { injectAPopoverRootContext } from './popover-root.vue';
 
+defineOptions({ name: 'APopoverAnchor' });
+
 const props = defineProps<APopoverAnchorProps>();
 
 useForwardExpose();

@@ -2,6 +2,8 @@
 import { AVisuallyHidden } from '../visually-hidden';
 import { injectAToastProviderContext } from './toast-provider.vue';
 
+defineOptions({ name: 'AFocusProxy' });
+
 const emits = defineEmits<{
   focusFromOutsideViewport: [void];
 }>();

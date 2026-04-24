@@ -8,6 +8,8 @@ export interface ADropdownMenuGroupProps extends AMenuGroupProps {}
 <script setup lang="ts">
 import { AMenuGroup } from '../menu';
 
+defineOptions({ name: 'ADropdownMenuGroup' });
+
 const props = defineProps<ADropdownMenuGroupProps>();
 useForwardExpose();
 </script>

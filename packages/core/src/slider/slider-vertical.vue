@@ -6,6 +6,8 @@ import SliderImpl from './slider-impl.vue';
 import { injectASliderRootContext } from './slider-root.vue';
 import { BACK_KEYS, linearScale, provideSliderOrientationContext } from './utils';
 
+defineOptions({ name: 'ASliderVertical' });
+
 interface SliderVerticalProps extends SliderOrientationPrivateProps {}
 const props = defineProps<SliderVerticalProps>();
 const emits = defineEmits<SliderOrientationPrivateEmits>();

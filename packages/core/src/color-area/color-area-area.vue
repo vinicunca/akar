@@ -10,6 +10,8 @@ import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectAColorAreaRootContext } from './color-area-root.vue';
 import { linearScale } from './utils';
 
+defineOptions({ name: 'AColorAreaArea' });
+
 const props = withDefaults(
   defineProps<AColorAreaAreaProps>(),
   {

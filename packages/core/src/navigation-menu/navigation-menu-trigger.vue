@@ -21,6 +21,7 @@ import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 import { getOpenState, makeContentId, makeTriggerId } from './utils';
 
 defineOptions({
+  name: 'ANavigationMenuTrigger',
   inheritAttrs: false,
 });
 

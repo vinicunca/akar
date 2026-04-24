@@ -54,6 +54,8 @@ import {
 } from 'vue';
 import { APopperRoot } from '../popper';
 
+defineOptions({ name: 'AMenuRoot' });
+
 const props = withDefaults(defineProps<AMenuProps>(), {
   open: false,
   modal: true,

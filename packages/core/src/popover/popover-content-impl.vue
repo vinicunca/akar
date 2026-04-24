@@ -38,6 +38,8 @@ import { APopperContent } from '../popper';
 import { useFocusGuards, useForwardExpose, useForwardProps } from '../shared';
 import { injectAPopoverRootContext } from './popover-root.vue';
 
+defineOptions({ name: 'APopoverContentImpl' });
+
 const props = defineProps<PopoverContentImplProps>();
 const emits = defineEmits<PopoverContentImplEmits>();
 

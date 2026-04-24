@@ -8,6 +8,8 @@ export interface AContextMenuGroupProps extends AMenuGroupProps {}
 import { AMenuGroup } from '../menu';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuGroup' });
+
 const props = defineProps<AContextMenuGroupProps>();
 useForwardExpose();
 </script>

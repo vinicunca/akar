@@ -9,6 +9,8 @@ export interface ASliderTrackProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectASliderRootContext } from './slider-root.vue';
 
+defineOptions({ name: 'ASliderTrack' });
+
 withDefaults(defineProps<ASliderTrackProps>(), { as: 'span' });
 
 const rootContext = injectASliderRootContext();

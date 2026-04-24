@@ -6,8 +6,9 @@ import { injectAStepperItemContext } from './stepper-item.vue';
 import { injectAStepperRootContext } from './stepper-root.vue';
 </script>
 
-<script setup lang="ts">
-export interface AStepperSeparatorProps extends ASeparatorProps { }
+<script setup lang="ts">export interface AStepperSeparatorProps extends ASeparatorProps { }
+
+defineOptions({ name: 'AStepperSeparator' });
 
 const props = withDefaults(defineProps<AStepperSeparatorProps>(), {});
 

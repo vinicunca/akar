@@ -8,6 +8,8 @@ export interface APopoverArrowProps extends APopperArrowProps {}
 <script setup lang="ts">
 import { APopperArrow } from '../popper';
 
+defineOptions({ name: 'APopoverArrow' });
+
 const props = withDefaults(defineProps<APopoverArrowProps>(), {
   width: 10,
   height: 5,

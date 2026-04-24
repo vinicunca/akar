@@ -15,6 +15,8 @@ import { APrimitive } from '../primitive';
 import { useForwardExpose } from '../shared';
 import { injectASelectRootContext } from './select-root.vue';
 
+defineOptions({ name: 'ASelectValue' });
+
 const props = withDefaults(defineProps<ASelectValueProps>(), {
   as: 'span',
   placeholder: '',

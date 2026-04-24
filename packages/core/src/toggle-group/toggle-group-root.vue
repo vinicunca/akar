@@ -44,6 +44,8 @@ import { APrimitive } from '../primitive';
 import { ARovingFocusGroup } from '../roving-focus';
 import { useSingleOrMultipleValue } from '../shared/use-single-or-multiple-value';
 
+defineOptions({ name: 'AToggleGroupRoot' });
+
 const props = withDefaults(defineProps<AToggleGroupRootProps>(), {
   loop: true,
   rovingFocus: true,

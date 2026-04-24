@@ -71,6 +71,8 @@ import { AListboxRoot } from '../listbox';
 import { APopperRoot } from '../popper';
 import { usePrimitiveElement } from '../primitive';
 
+defineOptions({ name: 'AAutocompleteRoot' });
+
 const props = withDefaults(
   defineProps<AAutocompleteRootProps>(),
   {

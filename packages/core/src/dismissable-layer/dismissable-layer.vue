@@ -71,6 +71,8 @@ import {
   usePointerDownOutside,
 } from './utils';
 
+defineOptions({ name: 'ADismissableLayer' });
+
 const props = withDefaults(defineProps<DismissableLayerProps>(), {
   disableOutsidePointerEvents: false,
 });

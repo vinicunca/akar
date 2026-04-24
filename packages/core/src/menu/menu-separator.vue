@@ -7,6 +7,8 @@ export interface AMenuSeparatorProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AMenuSeparator' });
+
 const props = defineProps<AMenuSeparatorProps>();
 </script>
 

@@ -25,6 +25,8 @@ import { useVModel } from '@vueuse/core';
 import { APresence } from '../presence';
 import ToastRootImpl from './toast-root-impl.vue';
 
+defineOptions({ name: 'AToastRoot' });
+
 const props = withDefaults(defineProps<AToastRootProps>(), {
   type: 'foreground',
   open: undefined,

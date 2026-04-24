@@ -8,6 +8,8 @@ export interface AColorSwatchPickerItemSwatchProps extends Omit<AColorSwatchProp
 import { AColorSwatch } from '../color-swatch';
 import { injectAColorSwatchPickerItemContext } from './color-swatch-picker-item.vue';
 
+defineOptions({ name: 'AColorSwatchPickerItemSwatch' });
+
 const props = defineProps<AColorSwatchPickerItemSwatchProps>();
 
 const colorSwatchPickerItemContext = injectAColorSwatchPickerItemContext();

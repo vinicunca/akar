@@ -118,6 +118,8 @@ import { useDirection, useLocale } from '../shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
 import { useCalendar, useCalendarState } from './use-calendar';
 
+defineOptions({ name: 'ACalendarRoot' });
+
 const props = withDefaults(
   defineProps<ACalendarRootProps>(),
   {

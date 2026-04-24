@@ -16,6 +16,8 @@ export interface AComboboxViewportProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AComboboxViewport' });
+
 const props = defineProps<AComboboxViewportProps>();
 const { forwardRef } = useForwardExpose();
 

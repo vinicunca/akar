@@ -41,6 +41,8 @@ import { getActiveElement, useForwardExpose, useId } from '../shared';
 import { injectDialogRootContext } from './dialog-root.vue';
 import { useWarning } from './utils';
 
+defineOptions({ name: 'ADialogContentImpl' });
+
 const props = defineProps<DialogContentImplProps>();
 const emits = defineEmits<DialogContentImplEmits>();
 

@@ -8,6 +8,8 @@ export interface AEditableSubmitTriggerProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAEditableRootContext } from './editable-root.vue';
 
+defineOptions({ name: 'AEditableSubmitTrigger' });
+
 const props = withDefaults(defineProps<AEditableSubmitTriggerProps>(), { as: 'button' });
 
 const context = injectAEditableRootContext();

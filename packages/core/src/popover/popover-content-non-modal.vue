@@ -5,6 +5,8 @@ import { useForwardPropsEmits } from '../shared';
 import PopoverContentImpl from './popover-content-impl.vue';
 import { injectAPopoverRootContext } from './popover-root.vue';
 
+defineOptions({ name: 'APopoverContentNonModal' });
+
 const props = defineProps<PopoverContentImplProps>();
 const emits = defineEmits<PopoverContentImplEmits>();
 const rootContext = injectAPopoverRootContext();

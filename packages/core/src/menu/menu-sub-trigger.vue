@@ -15,6 +15,8 @@ import { injectAMenuContext, injectAMenuRootContext } from './menu-root.vue';
 import { injectMenuSubContext } from './menu-sub.vue';
 import { getOpenState, isMouseEvent, SUB_OPEN_KEYS } from './utils';
 
+defineOptions({ name: 'AMenuSubTrigger' });
+
 const props = defineProps<AMenuSubTriggerProps>();
 
 const menuContext = injectAMenuContext();

@@ -31,6 +31,8 @@ import { isSameYear, toDate } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectAYearPickerRootContext } from './year-picker-root.vue';
 
+defineOptions({ name: 'AYearPickerCellTrigger' });
+
 const props = withDefaults(
   defineProps<AYearPickerCellTriggerProps>(),
   { as: 'div' },

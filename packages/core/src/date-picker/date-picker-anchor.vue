@@ -6,6 +6,8 @@ export interface ADatePickerAnchorProps extends APopoverAnchorProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADatePickerAnchor' });
+
 const props = defineProps<ADatePickerAnchorProps>();
 </script>
 

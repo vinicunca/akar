@@ -8,6 +8,8 @@ export interface AEditableAreaProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AEditableArea' });
+
 const props = withDefaults(defineProps<AEditableAreaProps>(), { as: 'div' });
 
 const context = injectAEditableRootContext();

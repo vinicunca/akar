@@ -14,6 +14,8 @@ import { injectAListboxRootContext } from '../listbox/listbox-root.vue';
 import { usePrimitiveElement } from '../primitive';
 import { injectAAutocompleteRootContext } from './autocomplete-root.vue';
 
+defineOptions({ name: 'AAutocompleteInput' });
+
 const props = withDefaults(
   defineProps<AAutocompleteInputProps>(),
   {

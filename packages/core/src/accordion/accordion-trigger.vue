@@ -10,6 +10,8 @@ import { useId } from '../shared';
 import { injectAAccordionItemContext } from './accordion-item.vue';
 import { injectAAccordionRootContext } from './accordion-root.vue';
 
+defineOptions({ name: 'AAccordionTrigger' });
+
 const props = defineProps<AAccordionTriggerProps>();
 
 const rootContext = injectAAccordionRootContext();

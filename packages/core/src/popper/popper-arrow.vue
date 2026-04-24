@@ -21,6 +21,7 @@ import Arrow from '../shared/component/arrow.vue';
 import { injectPopperContentContext } from './popper-content.vue';
 
 defineOptions({
+  name: 'APopperArrow',
   inheritAttrs: false,
 });
 

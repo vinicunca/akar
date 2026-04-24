@@ -20,6 +20,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectAYearRangePickerRootContext } from './year-range-picker-root.vue';
 
+defineOptions({ name: 'AYearRangePickerPrev' });
+
 const props = withDefaults(
   defineProps<AYearRangePickerPrevProps>(),
   { as: 'button' },

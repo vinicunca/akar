@@ -16,6 +16,8 @@ export interface ADialogOverlayProps extends DialogOverlayImplProps {
 import { APresence } from '../presence';
 import { injectDialogRootContext } from './dialog-root.vue';
 
+defineOptions({ name: 'ADialogOverlay' });
+
 defineProps<ADialogOverlayProps>();
 const rootContext = injectDialogRootContext();
 

@@ -7,6 +7,8 @@ export interface AColorSwatchPickerItemIndicatorProps extends AListboxItemIndica
 <script setup lang="ts">
 import { AListboxItemIndicator } from '../listbox';
 
+defineOptions({ name: 'AColorSwatchPickerItemIndicator' });
+
 const props = defineProps<AColorSwatchPickerItemIndicatorProps>();
 </script>
 

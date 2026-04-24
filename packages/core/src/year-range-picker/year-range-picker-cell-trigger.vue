@@ -41,6 +41,8 @@ import { isSameYear, isYearBetweenInclusive, toDate } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectAYearRangePickerRootContext } from './year-range-picker-root.vue';
 
+defineOptions({ name: 'AYearRangePickerCellTrigger' });
+
 const props = withDefaults(
   defineProps<AYearRangePickerCellTriggerProps>(),
   { as: 'div' },

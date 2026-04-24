@@ -8,6 +8,8 @@ export interface ADropdownMenuArrowProps extends AMenuArrowProps {}
 <script setup lang="ts">
 import { AMenuArrow } from '../menu';
 
+defineOptions({ name: 'ADropdownMenuArrow' });
+
 const props = withDefaults(defineProps<ADropdownMenuArrowProps>(), {
   width: 10,
   height: 5,

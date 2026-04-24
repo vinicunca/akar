@@ -12,6 +12,8 @@ export interface AContextMenuSubContentProps extends AMenuSubContentProps {}
 import { AMenuSubContent } from '../menu';
 import { useForwardExpose, useForwardPropsEmits } from '../shared';
 
+defineOptions({ name: 'AContextMenuSubContent' });
+
 const props = defineProps<AContextMenuSubContentProps>();
 
 const emits = defineEmits<AContextMenuSubContentEmits>();

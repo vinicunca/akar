@@ -8,6 +8,8 @@ export interface AAlertDialogTitleProps extends ADialogTitleProps {}
 import { ADialogTitle } from '../dialog';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AAlertDialogTitle' });
+
 const props = withDefaults(
   defineProps<AAlertDialogTitleProps>(),
   { as: 'h2' },

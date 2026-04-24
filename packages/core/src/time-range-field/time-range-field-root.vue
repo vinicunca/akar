@@ -98,6 +98,7 @@ import {
 import { AVisuallyHidden } from '../visually-hidden';
 
 defineOptions({
+  name: 'ATimeRangeFieldRoot',
   inheritAttrs: false,
 });
 

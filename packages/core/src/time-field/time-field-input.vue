@@ -13,6 +13,8 @@ export interface ATimeFieldInputProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ATimeFieldInput' });
+
 const props = defineProps<ATimeFieldInputProps>();
 
 const rootContext = injectATimeFieldRootContext();

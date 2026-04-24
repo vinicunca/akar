@@ -16,6 +16,8 @@ import { APresence } from '../presence';
 import { APrimitive } from '../primitive';
 import { injectARadioGroupItemContext } from './radio-group-item.vue';
 
+defineOptions({ name: 'ARadioGroupIndicator' });
+
 withDefaults(defineProps<ARadioGroupIndicatorProps>(), {
   as: 'span',
 });

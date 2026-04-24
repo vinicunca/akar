@@ -20,6 +20,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectAYearPickerRootContext } from './year-picker-root.vue';
 
+defineOptions({ name: 'AYearPickerPrev' });
+
 const props = withDefaults(
   defineProps<AYearPickerPrevProps>(),
   { as: 'button' },

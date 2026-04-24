@@ -15,6 +15,8 @@ export const [injectASelectGroupContext, provideSelectGroupContext]
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ASelectGroup' });
+
 const props = defineProps<ASelectGroupProps>();
 
 const id = useId(undefined, 'akar-select-group');

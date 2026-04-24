@@ -21,6 +21,7 @@ import { injectAContextMenuRootContext } from './context-menu-root.vue';
 import { isTouchOrPen } from './utils';
 
 defineOptions({
+  name: 'AContextMenuTrigger',
   inheritAttrs: false,
 });
 

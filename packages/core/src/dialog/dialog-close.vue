@@ -9,6 +9,8 @@ import { APrimitive } from '../primitive';
 import { useForwardExpose } from '../shared';
 import { injectDialogRootContext } from './dialog-root.vue';
 
+defineOptions({ name: 'ADialogClose' });
+
 const props = withDefaults(defineProps<ADialogCloseProps>(), {
   as: 'button',
 });

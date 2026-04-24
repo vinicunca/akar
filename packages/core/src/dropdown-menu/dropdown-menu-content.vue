@@ -15,6 +15,8 @@ import { AMenuContent } from '../menu';
 import { useForwardExpose, useForwardPropsEmits, useId } from '../shared';
 import { injectADropdownMenuRootContext } from './dropdown-menu-root.vue';
 
+defineOptions({ name: 'ADropdownMenuContent' });
+
 const props = defineProps<ADropdownMenuContentProps>();
 const emits = defineEmits<ADropdownMenuContentEmits>();
 const forwarded = useForwardPropsEmits(props, emits);

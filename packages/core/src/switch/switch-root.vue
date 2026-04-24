@@ -47,6 +47,8 @@ import { computed, toRefs } from 'vue';
 import { APrimitive } from '../primitive';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 
+defineOptions({ name: 'ASwitchRoot' });
+
 const props = withDefaults(defineProps<ASwitchRootProps<T>>(), {
   as: 'button',
   modelValue: undefined,

@@ -22,6 +22,8 @@ export interface ATooltipArrowProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APopperArrow } from '../popper';
 
+defineOptions({ name: 'ATooltipArrow' });
+
 const props = withDefaults(defineProps<ATooltipArrowProps>(), {
   width: 10,
   height: 5,

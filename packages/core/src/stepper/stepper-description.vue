@@ -6,8 +6,9 @@ import { injectAStepperItemContext } from './stepper-item.vue';
 
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
-
 export interface AStepperDescriptionProps extends APrimitiveProps { }
+
+defineOptions({ name: 'AStepperDescription' });
 
 const props = withDefaults(defineProps<AStepperDescriptionProps>(), { as: 'p' });
 

@@ -18,6 +18,8 @@ export interface AMenuGroupProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { useId } from '../shared';
 
+defineOptions({ name: 'AMenuGroup' });
+
 const props = defineProps<AMenuGroupProps>();
 
 const id = useId(undefined, 'akar-menu-group');

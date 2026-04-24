@@ -4,6 +4,8 @@ import { ADialogContent } from '../dialog';
 import { injectADrawerRootContext } from './drawer.context';
 import { useScaleBackground } from './use-scale-background';
 
+defineOptions({ name: 'ADrawerContent' });
+
 const {
   isOpen,
   snapPointsOffset,

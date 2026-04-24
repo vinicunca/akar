@@ -76,6 +76,8 @@ import {
 } from '../shared/color';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 
+defineOptions({ name: 'AColorFieldRoot' });
+
 const props = withDefaults(defineProps<AColorFieldRootProps>(), {
   colorSpace: 'hsl',
   disabled: false,

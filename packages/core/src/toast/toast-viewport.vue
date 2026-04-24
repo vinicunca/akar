@@ -32,6 +32,7 @@ import { injectAToastProviderContext } from './toast-provider.vue';
 import { VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';
 
 defineOptions({
+  name: 'AToastViewport',
   inheritAttrs: false,
 });
 

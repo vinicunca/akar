@@ -23,6 +23,8 @@ import { nextTick, ref } from 'vue';
 import { ADialogContent } from '../dialog';
 import { useEmitAsProps, useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AAlertDialogContent' });
+
 const props = defineProps<AAlertDialogContentProps>();
 const emits = defineEmits<AAlertDialogContentEmits>();
 

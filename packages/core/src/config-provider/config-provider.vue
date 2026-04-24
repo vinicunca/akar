@@ -46,6 +46,7 @@ export interface AConfigProviderProps {
 import { toRefs } from 'vue';
 
 defineOptions({
+  name: 'AConfigProvider',
   inheritAttrs: false,
 });
 

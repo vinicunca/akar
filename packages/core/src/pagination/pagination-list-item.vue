@@ -13,6 +13,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectAPaginationRootContext } from './pagination-root.vue';
 
+defineOptions({ name: 'APaginationListItem' });
+
 const props = withDefaults(defineProps<APaginationListItemProps>(), { as: 'button' });
 useForwardExpose();
 

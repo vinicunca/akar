@@ -39,6 +39,8 @@ export const [
 import { ARovingFocusGroup } from '../roving-focus';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 
+defineOptions({ name: 'ACheckboxGroupRoot' });
+
 const props = withDefaults(defineProps<ACheckboxGroupRootProps<T>>(), {
   rovingFocus: true,
 });

@@ -17,6 +17,8 @@ import { APrimitive, usePrimitiveElement } from '../primitive';
 import { getActiveElement, useArrowNavigation } from '../shared';
 import { injectAPinInputRootContext } from './pin-input-root.vue';
 
+defineOptions({ name: 'APinInputInput' });
+
 const props = withDefaults(
   defineProps<APinInputInputProps>(),
   {

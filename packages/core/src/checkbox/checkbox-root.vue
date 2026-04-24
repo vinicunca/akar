@@ -56,6 +56,7 @@ import { AVisuallyHiddenInput } from '../visually-hidden';
 import { getState, isIndeterminate } from './utils';
 
 defineOptions({
+  name: 'ACheckboxRoot',
   inheritAttrs: false,
 });
 

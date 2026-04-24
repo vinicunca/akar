@@ -40,6 +40,8 @@ import { useVModel } from '@vueuse/core';
 import { ref, toRefs } from 'vue';
 import { APopperRoot } from '../popper';
 
+defineOptions({ name: 'AHoverCardRoot' });
+
 const props = withDefaults(
   defineProps<AHoverCardRootProps>(),
   {

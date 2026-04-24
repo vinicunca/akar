@@ -16,6 +16,8 @@ import { AListboxFilter } from '../listbox';
 import { injectAListboxRootContext } from '../listbox/listbox-root.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
+defineOptions({ name: 'AComboboxInput' });
+
 const props = withDefaults(defineProps<AComboboxInputProps>(), {
   as: 'input',
 });

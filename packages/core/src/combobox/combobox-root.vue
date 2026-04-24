@@ -96,6 +96,8 @@ import {
 import { AListboxRoot } from '../listbox';
 import { APopperRoot } from '../popper';
 
+defineOptions({ name: 'AComboboxRoot' });
+
 const props = withDefaults(
   defineProps<AComboboxRootProps<T>>(),
   {

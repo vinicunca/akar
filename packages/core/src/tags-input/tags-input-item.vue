@@ -29,6 +29,8 @@ export const [injectATagsInputItemContext, provideTagsInputItemContext]
 import { useCollection } from '../collection';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ATagsInputItem' });
+
 const props = defineProps<ATagsInputItemProps>();
 const { value } = toRefs(props);
 

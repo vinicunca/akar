@@ -8,6 +8,8 @@ export interface ADropdownMenuItemIndicatorProps extends AMenuItemIndicatorProps
 <script setup lang="ts">
 import { AMenuItemIndicator } from '../menu';
 
+defineOptions({ name: 'ADropdownMenuItemIndicator' });
+
 const props = defineProps<ADropdownMenuItemIndicatorProps>();
 useForwardExpose();
 </script>

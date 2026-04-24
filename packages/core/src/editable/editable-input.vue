@@ -11,6 +11,8 @@ export interface AEditableInputProps extends APrimitiveProps {
 import { computed, nextTick, onMounted, watch } from 'vue';
 import { injectAEditableRootContext } from './editable-root.vue';
 
+defineOptions({ name: 'AEditableInput' });
+
 const props = withDefaults(defineProps<AEditableInputProps>(), {
   as: 'input',
 });

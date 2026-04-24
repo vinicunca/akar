@@ -9,6 +9,8 @@ export interface ASwitchThumbProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectASwitchRootContext } from './switch-root.vue';
 
+defineOptions({ name: 'ASwitchThumb' });
+
 withDefaults(defineProps<ASwitchThumbProps>(), { as: 'span' });
 
 const rootContext = injectASwitchRootContext();

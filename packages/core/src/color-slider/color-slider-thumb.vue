@@ -10,6 +10,8 @@ import { getChannelName } from '../shared/color';
 import { ASliderThumb } from '../slider';
 import { injectAColorSliderRootContext } from './color-slider-root.vue';
 
+defineOptions({ name: 'AColorSliderThumb' });
+
 const props = withDefaults(
   defineProps<AColorSliderThumbProps>(),
   {

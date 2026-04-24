@@ -10,6 +10,8 @@ export interface AListboxGroupLabelProps extends APrimitiveProps {
 import { APrimitive } from '../primitive';
 import { injectAListboxGroupContext } from './listbox-group.vue';
 
+defineOptions({ name: 'AListboxGroupLabel' });
+
 const props = withDefaults(defineProps<AListboxGroupLabelProps>(), {
   as: 'div',
 });

@@ -43,6 +43,8 @@ import {
   removeFromTabOrder,
 } from './utils';
 
+defineOptions({ name: 'ANavigationMenuItem' });
+
 const props = withDefaults(
   defineProps<ANavigationMenuItemProps>(),
   {

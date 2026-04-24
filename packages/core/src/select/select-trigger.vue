@@ -17,6 +17,8 @@ import {
 } from './select-root.vue';
 import { OPEN_KEYS, shouldShowPlaceholder } from './utils';
 
+defineOptions({ name: 'ASelectTrigger' });
+
 const props = withDefaults(defineProps<ASelectTriggerProps>(), {
   as: 'button',
 });

@@ -7,6 +7,8 @@ export interface ARangeCalendarHeaderProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ARangeCalendarHeader' });
+
 const props = withDefaults(defineProps<ARangeCalendarHeaderProps>(), { as: 'div' });
 </script>
 

@@ -67,6 +67,7 @@ import { useTimeoutFn } from '@vueuse/shared';
 import { ref, toRefs } from 'vue';
 
 defineOptions({
+  name: 'ATooltipProvider',
   inheritAttrs: false,
 });
 

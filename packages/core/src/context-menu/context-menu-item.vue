@@ -13,6 +13,8 @@ export interface AContextMenuItemProps extends AMenuItemProps {}
 import { AMenuItem } from '../menu';
 import { useEmitAsProps, useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuItem' });
+
 const props = defineProps<AMenuItemProps>();
 const emits = defineEmits<AMenuItemEmits>();
 

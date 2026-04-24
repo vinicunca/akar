@@ -30,6 +30,8 @@ export interface ATeleportProps {
 <script setup lang="ts">
 import { useMounted } from '@vueuse/core';
 
+defineOptions({ name: 'ATeleport' });
+
 withDefaults(defineProps<ATeleportProps>(), {
   to: 'body',
 });

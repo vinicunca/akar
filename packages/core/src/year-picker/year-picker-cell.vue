@@ -12,6 +12,8 @@ export interface AYearPickerCellProps extends APrimitiveProps {
 import { APrimitive } from '../primitive';
 import { injectAYearPickerRootContext } from './year-picker-root.vue';
 
+defineOptions({ name: 'AYearPickerCell' });
+
 withDefaults(
   defineProps<AYearPickerCellProps>(),
   { as: 'td' },

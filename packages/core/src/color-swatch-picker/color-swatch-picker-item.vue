@@ -27,6 +27,8 @@ import { AListboxItem } from '../listbox';
 import { useForwardPropsEmits } from '../shared';
 import { getColorName } from '../shared/color';
 
+defineOptions({ name: 'AColorSwatchPickerItem' });
+
 const props = defineProps<AColorSwatchPickerItemProps>();
 
 const emits = defineEmits<AColorSwatchPickerItemEmits>();

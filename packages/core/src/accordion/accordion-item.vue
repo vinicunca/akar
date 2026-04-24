@@ -45,6 +45,8 @@ export const [
 import { computed } from 'vue';
 import { ACollapsibleRoot } from '../collapsible';
 
+defineOptions({ name: 'AAccordionItem' });
+
 const props = withDefaults(
   defineProps<AAccordionItemProps>(),
   {

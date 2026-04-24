@@ -37,6 +37,7 @@ import { ref, toRefs, watch } from 'vue';
 import { AMenuRoot } from '../menu';
 
 defineOptions({
+  name: 'AContextMenuRoot',
   inheritAttrs: false,
 });
 

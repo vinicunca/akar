@@ -6,6 +6,8 @@ export interface ADateRangePickerInputProps extends ADateRangeFieldInputProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangePickerInput' });
+
 const props = defineProps<ADateRangePickerInputProps>();
 </script>
 

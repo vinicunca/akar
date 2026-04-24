@@ -92,6 +92,7 @@ import {
 import { AVisuallyHidden } from '../visually-hidden';
 
 defineOptions({
+  name: 'ADateFieldRoot',
   inheritAttrs: false,
 });
 

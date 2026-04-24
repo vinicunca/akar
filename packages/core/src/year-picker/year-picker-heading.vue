@@ -8,6 +8,8 @@ export interface AYearPickerHeadingProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAYearPickerRootContext } from './year-picker-root.vue';
 
+defineOptions({ name: 'AYearPickerHeading' });
+
 const props = withDefaults(
   defineProps<AYearPickerHeadingProps>(),
   { as: 'div' },

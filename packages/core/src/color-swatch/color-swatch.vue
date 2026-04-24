@@ -25,6 +25,8 @@ import {
   normalizeColor,
 } from '../shared/color';
 
+defineOptions({ name: 'AColorSwatch' });
+
 const props = withDefaults(
   defineProps<AColorSwatchProps>(),
   {

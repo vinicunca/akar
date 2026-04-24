@@ -9,6 +9,8 @@ export interface ATagsInputClearProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ATagsInputClear' });
+
 const props = withDefaults(defineProps<ATagsInputClearProps>(), {
   as: 'button',
 });

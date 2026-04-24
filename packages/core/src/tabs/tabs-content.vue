@@ -21,6 +21,8 @@ import { APrimitive } from '../primitive';
 import { injectATabsRootContext } from './tabs-root.vue';
 import { makeContentId, makeTriggerId } from './utils';
 
+defineOptions({ name: 'ATabsContent' });
+
 const props = defineProps<ATabsContentProps>();
 
 const { forwardRef } = useForwardExpose();

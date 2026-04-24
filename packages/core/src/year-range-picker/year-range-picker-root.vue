@@ -120,6 +120,8 @@ import { getDefaultDate, handleCalendarInitialFocus } from '../shared/date';
 import { useYearPicker } from '../year-picker/use-year-picker';
 import { useRangeYearPickerState } from './use-range-year-picker';
 
+defineOptions({ name: 'AYearRangePickerRoot' });
+
 const props = withDefaults(
   defineProps<AYearRangePickerRootProps>(),
   {

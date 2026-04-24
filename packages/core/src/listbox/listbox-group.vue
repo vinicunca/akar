@@ -15,6 +15,8 @@ export const [injectAListboxGroupContext, provideListboxGroupContext]
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AListboxGroup' });
+
 const props = defineProps<AListboxGroupProps>();
 
 const id = useId(undefined, 'akar-listbox-group');

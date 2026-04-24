@@ -21,6 +21,8 @@ import { useVModel } from '@vueuse/core';
 import { computed, onMounted, onUnmounted, ref, watchSyncEffect } from 'vue';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 
+defineOptions({ name: 'AListboxFilter' });
+
 const props = withDefaults(defineProps<AListboxFilterProps>(), {
   as: 'input',
 });

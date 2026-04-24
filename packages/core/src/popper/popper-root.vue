@@ -20,6 +20,7 @@ export const [injectAPopperRootContext, providePopperRootContext]
 import { ref } from 'vue';
 
 defineOptions({
+  name: 'APopperRoot',
   inheritAttrs: false,
 });
 

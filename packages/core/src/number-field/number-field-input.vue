@@ -11,6 +11,8 @@ import { APrimitive, usePrimitiveElement } from '../primitive';
 import { getActiveElement } from '../shared';
 import { injectANumberFieldRootContext } from './number-field-root.vue';
 
+defineOptions({ name: 'ANumberFieldInput' });
+
 const props = withDefaults(defineProps<ANumberFieldInputProps>(), {
   as: 'input',
 });

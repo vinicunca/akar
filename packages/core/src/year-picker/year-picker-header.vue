@@ -7,6 +7,8 @@ export interface AYearPickerHeaderProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AYearPickerHeader' });
+
 const props = withDefaults(
   defineProps<AYearPickerHeaderProps>(),
   { as: 'div' },

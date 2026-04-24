@@ -42,6 +42,7 @@ import ScrollAreaScrollbarScroll from './scroll-area-scrollbar-scroll.vue';
 import ScrollAreaScrollbarVisible from './scroll-area-scrollbar-visible.vue';
 
 defineOptions({
+  name: 'AScrollAreaScrollbar',
   inheritAttrs: false,
 });
 

@@ -38,6 +38,8 @@ import { injectPanelGroupContext } from './splitter-group.vue';
 import { assert } from './utils/assert';
 import { registerResizeHandle } from './utils/registry';
 
+defineOptions({ name: 'ASplitterResizeHandle' });
+
 const props = withDefaults(defineProps<ASplitterResizeHandleProps>(), {
   tabindex: 0,
 });

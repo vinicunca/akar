@@ -24,6 +24,8 @@ export interface AComboboxItemProps<T = AcceptableValue> extends AListboxItemPro
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import { AListboxItem } from '../listbox';
 
+defineOptions({ name: 'AComboboxItem' });
+
 const props = defineProps<AComboboxItemProps<T>>();
 const emits = defineEmits<AComboboxItemEmits<T>>();
 

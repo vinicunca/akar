@@ -6,6 +6,8 @@ export interface ADatePickerGridRowProps extends ACalendarGridRowProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADatePickerGridRow' });
+
 const props = defineProps<ADatePickerGridRowProps>();
 </script>
 

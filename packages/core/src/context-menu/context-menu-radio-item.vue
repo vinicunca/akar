@@ -13,6 +13,8 @@ export interface AContextMenuRadioItemProps extends AMenuRadioItemProps {}
 import { AMenuRadioItem } from '../menu';
 import { useEmitAsProps, useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuRadioItem' });
+
 const props = defineProps<AContextMenuRadioItemProps>();
 const emits = defineEmits<AContextMenuRadioItemEmits>();
 

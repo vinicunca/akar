@@ -7,6 +7,8 @@ export interface ADatePickerNextProps extends ACalendarNextProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADatePickerNext' });
+
 const props = defineProps<ADatePickerNextProps>();
 
 defineSlots<CalendarNextSlot>();

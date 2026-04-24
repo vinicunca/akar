@@ -22,6 +22,8 @@ import MenuRootContentModal from './menu-root-content-modal.vue';
 import MenuRootContentNonModal from './menu-root-content-non-modal.vue';
 import { injectAMenuContext, injectAMenuRootContext } from './menu-root.vue';
 
+defineOptions({ name: 'AMenuContent' });
+
 const props = defineProps<AMenuContentProps>();
 const emits = defineEmits<MenuContentImplEmits>();
 const forwarded = useForwardPropsEmits(props, emits);

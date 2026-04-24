@@ -8,6 +8,8 @@ export interface AContextMenuLabelProps extends AMenuLabelProps {}
 import { AMenuLabel } from '../menu';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuLabel' });
+
 const props = defineProps<AContextMenuLabelProps>();
 useForwardExpose();
 </script>

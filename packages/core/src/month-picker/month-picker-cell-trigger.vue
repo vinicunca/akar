@@ -31,6 +31,8 @@ import { isSameYearMonth, toDate } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectAMonthPickerRootContext } from './month-picker-root.vue';
 
+defineOptions({ name: 'AMonthPickerCellTrigger' });
+
 const props = withDefaults(
   defineProps<AMonthPickerCellTriggerProps>(),
   { as: 'div' },

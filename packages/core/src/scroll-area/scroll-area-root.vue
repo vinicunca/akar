@@ -50,6 +50,8 @@ export interface AScrollAreaRootProps extends APrimitiveProps {
 import { ref, toRefs } from 'vue';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AScrollAreaRoot' });
+
 const props = withDefaults(defineProps<AScrollAreaRootProps>(), {
   type: 'hover',
   scrollHideDelay: 600,

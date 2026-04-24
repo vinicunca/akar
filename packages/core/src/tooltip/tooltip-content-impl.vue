@@ -50,6 +50,8 @@ import { injectATooltipProviderContext } from './tooltip-provider.vue';
 import { injectATooltipRootContext } from './tooltip-root.vue';
 import { TOOLTIP_OPEN } from './utils';
 
+defineOptions({ name: 'ATooltipContentImpl' });
+
 const props = withDefaults(defineProps<TooltipContentImplProps>(), {
   avoidCollisions: undefined,
   asChild: undefined,

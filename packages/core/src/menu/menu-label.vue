@@ -8,6 +8,8 @@ export interface AMenuLabelProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAMenuGroupContext } from './menu-group.vue';
 
+defineOptions({ name: 'AMenuLabel' });
+
 const props = withDefaults(defineProps<AMenuLabelProps>(), {
   as: 'div',
 });

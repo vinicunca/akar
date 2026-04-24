@@ -9,6 +9,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectAMonthRangePickerRootContext } from './month-range-picker-root.vue';
 
+defineOptions({ name: 'AMonthRangePickerGrid' });
+
 const props = withDefaults(defineProps<AMonthRangePickerGridProps>(), { as: 'table' });
 
 const rootContext = injectAMonthRangePickerRootContext();

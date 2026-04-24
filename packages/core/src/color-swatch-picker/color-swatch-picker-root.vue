@@ -14,6 +14,8 @@ export type AColorSwatchPickerRootEmits = AListboxRootEmits;
 <script setup lang="ts">
 import { AListboxContent, AListboxRoot } from '../listbox';
 
+defineOptions({ name: 'AColorSwatchPickerRoot' });
+
 const props = withDefaults(
   defineProps<AColorSwatchPickerRootProps>(),
   {

@@ -25,6 +25,7 @@ import { useForwardExpose, useId } from '../shared';
 import { injectACollapsibleRootContext } from './collapsible-root.vue';
 
 defineOptions({
+  name: 'ACollapsibleContent',
   inheritAttrs: false,
 });
 
