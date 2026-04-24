@@ -1,5 +1,5 @@
-import appConfig from '#build/app.config';
 import { reactive } from 'vue';
+import appConfig from '#build/app.config';
 
 const _appConfig = reactive(appConfig);
 

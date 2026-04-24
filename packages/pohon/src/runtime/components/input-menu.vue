@@ -128,7 +128,7 @@ export interface PInputMenuProps<T extends ArrayOrNested<PInputMenuItem> = Array
   portal?: boolean | string | HTMLElement;
   /**
    * Enable virtualization for large lists.
-   * Note: when enabled, all groups are flattened into a single list due to a limitation of Reka UI (https://github.com/unovue/akar/issues/1885).
+   * Note: when enabled, all groups are flattened into a single list due to a limitation of Akar.
    * @defaultValue false
    */
   virtualize?: boolean | {
@@ -244,7 +244,6 @@ export interface PInputMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PInputMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { useAppConfig } from '#imports';
 import { isBoolean, isNullish, isObjectType, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactiveOmit, reactivePick } from '@vueuse/core';
 import {
@@ -259,6 +258,7 @@ import { AAutocomplete, ACombobox } from 'akar/namespaced';
 import { defu } from 'defu';
 import { isEqual } from 'ohash/utils';
 import { computed, nextTick, onMounted, toRaw, toRef, useTemplateRef, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { FieldGroupReset, useFieldGroup } from '../composables/use-field-group';
@@ -298,7 +298,6 @@ const searchTerm = defineModel<string>('searchTerm', { default: '' });
 const { t } = useLocale();
 const appConfig = useAppConfig() as InputMenu['AppConfig'];
 const pohonProp = useComponentPohon('inputMenu', props);
-
 const { filterGroups } = useFilter();
 
 const rootPropsPick = reactivePick(

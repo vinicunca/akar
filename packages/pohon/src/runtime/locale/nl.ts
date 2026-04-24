@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Nederlands',
   code: 'nl',
   messages: {
     alert: {
-      close: 'Sluiten'
+      close: 'Sluiten',
     },
     authForm: {
       hidePassword: 'Wachtwoord verbergen',
       showPassword: 'Wachtwoord tonen',
-      submit: 'Doorgaan'
+      submit: 'Doorgaan',
     },
     banner: {
-      close: 'Sluiten'
+      close: 'Sluiten',
     },
     calendar: {
       nextMonth: 'Volgende maand',
       nextYear: 'Volgend jaar',
       prevMonth: 'Vorige maand',
-      prevYear: 'Vorig jaar'
+      prevYear: 'Vorig jaar',
     },
     carousel: {
       dots: 'Kies dia om weer te geven',
       goto: 'Ga naar dia {slide}',
       next: 'Volgende',
-      prev: 'Vorige'
+      prev: 'Vorige',
     },
     chatPrompt: {
-      placeholder: 'Schrijf hier je bericht…'
+      placeholder: 'Schrijf hier je bericht…',
     },
     chatPromptSubmit: {
-      label: 'Versturen'
+      label: 'Versturen',
     },
     chatReasoning: {
       thinking: 'Aan het denken…',
       thought: 'Nagedacht',
-      thoughtFor: '{duration} nagedacht'
+      thoughtFor: '{duration} nagedacht',
     },
     colorMode: {
       dark: 'Donker',
       light: 'Licht',
       switchToDark: 'Overschakelen naar donkere modus',
       switchToLight: 'Overschakelen naar lichte modus',
-      system: 'Systeem'
+      system: 'Systeem',
     },
     commandPalette: {
       back: 'Terug',
       close: 'Sluiten',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      placeholder: 'Typ een commando of zoek…'
+      placeholder: 'Typ een commando of zoek…',
     },
     contentSearch: {
       links: 'Links',
-      theme: 'Thema'
+      theme: 'Thema',
     },
     contentSearchButton: {
-      label: 'Zoeken…'
+      label: 'Zoeken…',
     },
     contentToc: {
-      title: 'Op deze pagina'
+      title: 'Op deze pagina',
     },
     dropdownMenu: {
       noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken…'
+      search: 'Zoeken…',
     },
     dashboardSearch: {
-      theme: 'Thema'
+      theme: 'Thema',
     },
     dashboardSearchButton: {
-      label: 'Zoeken…'
+      label: 'Zoeken…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Zijbalk invouwen',
-      expand: 'Zijbalk uitvouwen'
+      expand: 'Zijbalk uitvouwen',
     },
     dashboardSidebarToggle: {
       close: 'Zijbalk sluiten',
-      open: 'Zijbalk openen'
+      open: 'Zijbalk openen',
     },
     error: {
-      clear: 'Terug naar home'
+      clear: 'Terug naar home',
     },
     fileUpload: {
-      removeFile: '{filename} verwijderen'
+      removeFile: '{filename} verwijderen',
     },
     header: {
       close: 'Menu sluiten',
-      open: 'Menu openen'
+      open: 'Menu openen',
     },
     inputMenu: {
       create: '"{label}" creëren',
       noData: 'Geen gegevens',
-      noMatch: 'Geen overeenkomende gegevens'
+      noMatch: 'Geen overeenkomende gegevens',
     },
     inputNumber: {
       decrement: 'Verlagen',
-      increment: 'Verhogen'
+      increment: 'Verhogen',
+    },
+    listbox: {
+      noData: 'Geen gegevens',
+      noMatch: 'Geen overeenkomende gegevens',
+      search: 'Zoeken…',
     },
     modal: {
-      close: 'Sluiten'
+      close: 'Sluiten',
     },
     pricingTable: {
-      caption: 'Prijsplanvergelijking'
+      caption: 'Prijsplanvergelijking',
     },
     prose: {
       codeCollapse: {
         closeText: 'Invouwen',
         name: 'code',
-        openText: 'Uitvouwen'
+        openText: 'Uitvouwen',
       },
       collapsible: {
         closeText: 'Verbergen',
         name: 'eigenschappen',
-        openText: 'Tonen'
+        openText: 'Tonen',
       },
       pre: {
-        copy: 'Code naar klembord kopiëren'
+        copy: 'Code naar klembord kopiëren',
       },
       prompt: {
         copy: 'Prompt kopiëren',
-        openIn: 'Openen in {name}'
-      }
+        openIn: 'Openen in {name}',
+      },
     },
     sidebar: {
       close: 'Sluiten',
-      toggle: 'Schakelen'
+      toggle: 'Schakelen',
     },
     selectMenu: {
       create: '"{label}" creëren',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken…'
+      search: 'Zoeken…',
     },
     slideover: {
-      close: 'Sluiten'
+      close: 'Sluiten',
     },
     table: {
-      noData: 'Geen gegevens'
+      noData: 'Geen gegevens',
     },
     toast: {
-      close: 'Sluiten'
-    }
-  }
-})
+      close: 'Sluiten',
+    },
+  },
+});

@@ -30,10 +30,10 @@ export interface PAvatarGroupSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { isString, isSymbol } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed, provide } from 'vue';
+import { useAppConfig } from '#imports';
 import { avatarGroupInjectionKey } from '../composables/use-avatar-group';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';

@@ -1,5 +1,5 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Urdu',
@@ -7,143 +7,148 @@ export default defineLocale<PMessages>({
   dir: 'rtl',
   messages: {
     alert: {
-      close: 'بند کریں'
+      close: 'بند کریں',
     },
     authForm: {
       hidePassword: 'پاس ورڈ چھپائیں',
       showPassword: 'پاس ورڈ دکھائیں',
-      submit: 'جاری رکھیں'
+      submit: 'جاری رکھیں',
     },
     banner: {
-      close: 'بند کریں'
+      close: 'بند کریں',
     },
     calendar: {
       nextMonth: 'اگلا مہینہ',
       nextYear: 'اگلا سال',
       prevMonth: 'پچھلا مہینہ',
-      prevYear: 'پچھلا سال'
+      prevYear: 'پچھلا سال',
     },
     carousel: {
       dots: 'دکھانے کے لیے سلائیڈ منتخب کریں',
       goto: 'سلائیڈ {slide} پر جائیں',
       next: 'اگلا',
-      prev: 'پچھلا'
+      prev: 'پچھلا',
     },
     chatPrompt: {
-      placeholder: 'یہاں اپنا پیغام لکھیں'
+      placeholder: 'یہاں اپنا پیغام لکھیں',
     },
     chatPromptSubmit: {
-      label: 'پیغام بھیجیں'
+      label: 'پیغام بھیجیں',
     },
     chatReasoning: {
       thinking: 'سوچ رہا ہے…',
       thought: 'سوچا',
-      thoughtFor: '{duration} سوچا'
+      thoughtFor: '{duration} سوچا',
     },
     colorMode: {
       dark: 'تاریک',
       light: 'روشن',
       switchToDark: 'تاریک موڈ میں تبدیل کریں',
       switchToLight: 'روشن موڈ میں تبدیل کریں',
-      system: 'سسٹم'
+      system: 'سسٹم',
     },
     commandPalette: {
       back: 'واپس',
       close: 'بند کریں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…'
+      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…',
     },
     contentSearch: {
       links: 'لنکس',
-      theme: 'تھیم'
+      theme: 'تھیم',
     },
     contentSearchButton: {
-      label: 'تلاش کریں…'
+      label: 'تلاش کریں…',
     },
     contentToc: {
-      title: 'اس صفحے پر'
+      title: 'اس صفحے پر',
     },
     dropdownMenu: {
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں…'
+      search: 'تلاش کریں…',
     },
     dashboardSearch: {
-      theme: 'تھیم'
+      theme: 'تھیم',
     },
     dashboardSearchButton: {
-      label: 'تلاش کریں…'
+      label: 'تلاش کریں…',
     },
     dashboardSidebarCollapse: {
       collapse: 'سائیڈ بار کو سکیڑیں',
-      expand: 'سائیڈ بار کو پھیلائیں'
+      expand: 'سائیڈ بار کو پھیلائیں',
     },
     dashboardSidebarToggle: {
       close: 'سائیڈ بار بند کریں',
-      open: 'سائیڈ بار کھولیں'
+      open: 'سائیڈ بار کھولیں',
     },
     error: {
-      clear: 'ہوم پیج پر واپس جائیں'
+      clear: 'ہوم پیج پر واپس جائیں',
     },
     fileUpload: {
-      removeFile: '{filename} ہٹائیں'
+      removeFile: '{filename} ہٹائیں',
     },
     header: {
       close: 'مینو بند کریں',
-      open: 'مینو کھولیں'
+      open: 'مینو کھولیں',
     },
     inputMenu: {
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',
-      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا'
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
     },
     inputNumber: {
       decrement: 'کمی',
-      increment: 'اضافہ'
+      increment: 'اضافہ',
+    },
+    listbox: {
+      noData: 'کوئی ڈیٹا نہیں',
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      search: 'تلاش کریں…',
     },
     modal: {
-      close: 'بند کریں'
+      close: 'بند کریں',
     },
     pricingTable: {
-      caption: 'قیمت پلنز کی مقایسہ'
+      caption: 'قیمت پلنز کی مقایسہ',
     },
     prose: {
       codeCollapse: {
         closeText: 'سکیڑیں',
         name: 'کوڈ',
-        openText: 'پھیلائیں'
+        openText: 'پھیلائیں',
       },
       collapsible: {
         closeText: 'چھپائیں',
         name: 'خصوصیات',
-        openText: 'دکھائیں'
+        openText: 'دکھائیں',
       },
       pre: {
-        copy: 'کوڈ کاپی کریں'
+        copy: 'کوڈ کاپی کریں',
       },
       prompt: {
         copy: 'پرامپٹ کاپی کریں',
-        openIn: '{name} میں کھولیں'
-      }
+        openIn: '{name} میں کھولیں',
+      },
     },
     sidebar: {
       close: 'بند کریں',
-      toggle: 'ٹوگل کریں'
+      toggle: 'ٹوگل کریں',
     },
     selectMenu: {
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں…'
+      search: 'تلاش کریں…',
     },
     slideover: {
-      close: 'بند کریں'
+      close: 'بند کریں',
     },
     table: {
-      noData: 'کوئی ڈیٹا نہیں'
+      noData: 'کوئی ڈیٹا نہیں',
     },
     toast: {
-      close: 'بند کریں'
-    }
-  }
-})
+      close: 'بند کریں',
+    },
+  },
+});

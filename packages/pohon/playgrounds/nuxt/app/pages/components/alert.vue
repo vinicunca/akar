@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
 import theme from '#build/pohon/alert';
 import { BaseMatrix, BaseNavbar, PAlert, PSelect } from '#components';
-import { reactive } from 'vue';
 
 const colors = Object.keys(theme.variants.color);
 const variants = Object.keys(theme.variants.variant);

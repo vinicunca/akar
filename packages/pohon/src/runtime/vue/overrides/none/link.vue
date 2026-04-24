@@ -71,11 +71,11 @@ export interface PLinkSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { APrimitiveSlot } from 'akar';
 import { defu } from 'defu';
 import { hasProtocol } from 'ufo';
 import { computed, inject } from 'vue';
+import { useAppConfig } from '#imports';
 import PLinkBase from '../../../components/link-base.vue';
 import { mergeClasses } from '../../../utils';
 import { uv } from '../../../utils/uv';

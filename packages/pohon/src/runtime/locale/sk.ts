@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Slovenčina',
   code: 'sk',
   messages: {
     alert: {
-      close: 'Zatvoriť'
+      close: 'Zatvoriť',
     },
     authForm: {
       hidePassword: 'Skryť heslo',
       showPassword: 'Zobraziť heslo',
-      submit: 'Pokračovať'
+      submit: 'Pokračovať',
     },
     banner: {
-      close: 'Zatvoriť'
+      close: 'Zatvoriť',
     },
     calendar: {
       nextMonth: 'Nasledujúci mesiac',
       nextYear: 'Nasledujúci rok',
       prevMonth: 'Predchádzajúci mesiac',
-      prevYear: 'Predchádzajúci rok'
+      prevYear: 'Predchádzajúci rok',
     },
     carousel: {
       dots: 'Vyberte snímku na zobrazenie',
       goto: 'Prejsť na {slide}',
       next: 'Nasledujúci',
-      prev: 'Predchádzajúci'
+      prev: 'Predchádzajúci',
     },
     chatPrompt: {
-      placeholder: 'Tu napíšte svoje správu…'
+      placeholder: 'Tu napíšte svoje správu…',
     },
     chatPromptSubmit: {
-      label: 'Odoslať'
+      label: 'Odoslať',
     },
     chatReasoning: {
       thinking: 'Premýšľa…',
       thought: 'Premýšľal',
-      thoughtFor: 'Premýšľal {duration}'
+      thoughtFor: 'Premýšľal {duration}',
     },
     colorMode: {
       dark: 'Tmavý',
       light: 'Svetlý',
       switchToDark: 'Prepnúť na tmavý režim',
       switchToLight: 'Prepnúť na svetlý režim',
-      system: 'Systém'
+      system: 'Systém',
     },
     commandPalette: {
       back: 'Späť',
       close: 'Zavrieť',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
-      placeholder: 'Zadajte príkaz alebo vyhľadajte…'
+      placeholder: 'Zadajte príkaz alebo vyhľadajte…',
     },
     contentSearch: {
       links: 'Odkazy',
-      theme: 'Farebný režim'
+      theme: 'Farebný režim',
     },
     contentSearchButton: {
-      label: 'Hľadať…'
+      label: 'Hľadať…',
     },
     contentToc: {
-      title: 'Na tejto stránke'
+      title: 'Na tejto stránke',
     },
     dropdownMenu: {
       noMatch: 'Žiadna zhoda',
-      search: 'Hľadať…'
+      search: 'Hľadať…',
     },
     dashboardSearch: {
-      theme: 'Farebný režim'
+      theme: 'Farebný režim',
     },
     dashboardSearchButton: {
-      label: 'Hľadať…'
+      label: 'Hľadať…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Zbaliť bočný panel',
-      expand: 'Rozbaliť bočný panel'
+      expand: 'Rozbaliť bočný panel',
     },
     dashboardSidebarToggle: {
       close: 'Zatvoriť bočný panel',
-      open: 'Otvoriť bočný panel'
+      open: 'Otvoriť bočný panel',
     },
     error: {
-      clear: 'Späť na domovskú stránku'
+      clear: 'Späť na domovskú stránku',
     },
     fileUpload: {
-      removeFile: 'Odobrať {filename}'
+      removeFile: 'Odobrať {filename}',
     },
     header: {
       close: 'Zatvoriť menu',
-      open: 'Otvoriť menu'
+      open: 'Otvoriť menu',
     },
     inputMenu: {
       create: 'Vytvoriť "{label}"',
       noData: 'Žiadne dáta',
-      noMatch: 'Žiadna zhoda'
+      noMatch: 'Žiadna zhoda',
     },
     inputNumber: {
       decrement: 'Znížiť',
-      increment: 'Zvýšiť'
+      increment: 'Zvýšiť',
+    },
+    listbox: {
+      noData: 'Žiadne dáta',
+      noMatch: 'Žiadna zhoda',
+      search: 'Hľadať…',
     },
     modal: {
-      close: 'Zatvoriť'
+      close: 'Zatvoriť',
     },
     pricingTable: {
-      caption: 'Porovnanie cien'
+      caption: 'Porovnanie cien',
     },
     prose: {
       codeCollapse: {
         closeText: 'Zbaliť',
         name: 'kód',
-        openText: 'Rozbaliť'
+        openText: 'Rozbaliť',
       },
       collapsible: {
         closeText: 'Skryť',
         name: 'vlastnosti',
-        openText: 'Zobraziť'
+        openText: 'Zobraziť',
       },
       pre: {
-        copy: 'Kopírovať kód do schránky'
+        copy: 'Kopírovať kód do schránky',
       },
       prompt: {
         copy: 'Kopírovať výzvu',
-        openIn: 'Otvoriť v {name}'
-      }
+        openIn: 'Otvoriť v {name}',
+      },
     },
     sidebar: {
       close: 'Zatvoriť',
-      toggle: 'Prepnúť'
+      toggle: 'Prepnúť',
     },
     selectMenu: {
       create: 'Vytvoriť "{label}"',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
-      search: 'Hľadať…'
+      search: 'Hľadať…',
     },
     slideover: {
-      close: 'Zatvoriť'
+      close: 'Zatvoriť',
     },
     table: {
-      noData: 'Žiadne dáta'
+      noData: 'Žiadne dáta',
     },
     toast: {
-      close: 'Zatvoriť'
-    }
-  }
-})
+      close: 'Zatvoriť',
+    },
+  },
+});

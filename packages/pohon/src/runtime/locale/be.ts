@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Беларуская',
   code: 'be',
   messages: {
     alert: {
-      close: 'Закрыць'
+      close: 'Закрыць',
     },
     authForm: {
       hidePassword: 'Схаваць пароль',
       showPassword: 'Паказаць пароль',
-      submit: 'Працягнуць'
+      submit: 'Працягнуць',
     },
     banner: {
-      close: 'Закрыць'
+      close: 'Закрыць',
     },
     calendar: {
       nextMonth: 'Наступны месяц',
       nextYear: 'Наступны год',
       prevMonth: 'Папярэдні месяц',
-      prevYear: 'Папярэдні год'
+      prevYear: 'Папярэдні год',
     },
     carousel: {
       dots: 'Выберыце слайд для адлюстравання',
       goto: 'Перайсці да {slide}',
       next: 'Далей',
-      prev: 'Назад'
+      prev: 'Назад',
     },
     chatPrompt: {
-      placeholder: 'Увядзіце сваё паведамленне тут…'
+      placeholder: 'Увядзіце сваё паведамленне тут…',
     },
     chatPromptSubmit: {
-      label: 'Адправіць'
+      label: 'Адправіць',
     },
     chatReasoning: {
       thinking: 'Думае…',
       thought: 'Падумаў',
-      thoughtFor: 'Думаў {duration}'
+      thoughtFor: 'Думаў {duration}',
     },
     colorMode: {
       dark: 'Цёмная',
       light: 'Светлая',
       switchToDark: 'Пераключыцца на цёмны рэжым',
       switchToLight: 'Пераключыцца на светлы рэжым',
-      system: 'Сістэмная'
+      system: 'Сістэмная',
     },
     commandPalette: {
       back: 'Назад',
       close: 'Закрыць',
       noData: 'Няма даных',
       noMatch: 'Супадзенняў не знойдзена',
-      placeholder: 'Увядзіце каманду або выканайце пошук…'
+      placeholder: 'Увядзіце каманду або выканайце пошук…',
     },
     contentSearch: {
       links: 'Спасылкі',
-      theme: 'Тэма'
+      theme: 'Тэма',
     },
     contentSearchButton: {
-      label: 'Пошук…'
+      label: 'Пошук…',
     },
     contentToc: {
-      title: 'На гэтай старонцы'
+      title: 'На гэтай старонцы',
     },
     dropdownMenu: {
       noMatch: 'Супадзенняў не знойдзена',
-      search: 'Пошук…'
+      search: 'Пошук…',
     },
     dashboardSearch: {
-      theme: 'Тэма'
+      theme: 'Тэма',
     },
     dashboardSearchButton: {
-      label: 'Пошук…'
+      label: 'Пошук…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Згарнуць бакавую панэль',
-      expand: 'Разгарнуць бакавую панэль'
+      expand: 'Разгарнуць бакавую панэль',
     },
     dashboardSidebarToggle: {
       close: 'Закрыць бакавую панэль',
-      open: 'Адкрыць бакавую панэль'
+      open: 'Адкрыць бакавую панэль',
     },
     error: {
-      clear: 'Вярнуцца на галоўную'
+      clear: 'Вярнуцца на галоўную',
     },
     fileUpload: {
-      removeFile: 'Выдаліць {filename}'
+      removeFile: 'Выдаліць {filename}',
     },
     header: {
       close: 'Закрыць меню',
-      open: 'Адкрыць меню'
+      open: 'Адкрыць меню',
     },
     inputMenu: {
       create: 'Стварыць "{label}"',
       noData: 'Няма даных',
-      noMatch: 'Супадзенняў не знойдзена'
+      noMatch: 'Супадзенняў не знойдзена',
     },
     inputNumber: {
       decrement: 'Паменшыць',
-      increment: 'Павялічыць'
+      increment: 'Павялічыць',
+    },
+    listbox: {
+      noData: 'Няма даных',
+      noMatch: 'Супадзенняў не знойдзена',
+      search: 'Пошук…',
     },
     modal: {
-      close: 'Закрыць'
+      close: 'Закрыць',
     },
     pricingTable: {
-      caption: 'Параўнанне платных планаў'
+      caption: 'Параўнанне платных планаў',
     },
     prose: {
       codeCollapse: {
         closeText: 'Згарнуць',
         name: 'код',
-        openText: 'Разгарнуць'
+        openText: 'Разгарнуць',
       },
       collapsible: {
         closeText: 'Схаваць',
         name: 'уласцівасці',
-        openText: 'Паказаць'
+        openText: 'Паказаць',
       },
       pre: {
-        copy: 'Скапіяваць код у буфер абмену'
+        copy: 'Скапіяваць код у буфер абмену',
       },
       prompt: {
         copy: 'Скапіяваць запыт',
-        openIn: 'Адкрыць у {name}'
-      }
+        openIn: 'Адкрыць у {name}',
+      },
     },
     sidebar: {
       close: 'Закрыць',
-      toggle: 'Пераключыць'
+      toggle: 'Пераключыць',
     },
     selectMenu: {
       create: 'Стварыць "{label}"',
       noData: 'Няма даных',
       noMatch: 'Супадзенняў не знойдзена',
-      search: 'Пошук…'
+      search: 'Пошук…',
     },
     slideover: {
-      close: 'Закрыць'
+      close: 'Закрыць',
     },
     table: {
-      noData: 'Няма даных'
+      noData: 'Няма даных',
     },
     toast: {
-      close: 'Закрыць'
-    }
-  }
-})
+      close: 'Закрыць',
+    },
+  },
+});

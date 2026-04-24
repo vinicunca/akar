@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/card';
 import { reactive } from 'vue';
+import theme from '#build/pohon/card';
 
 const variants = Object.keys(theme.variants.variant);
 

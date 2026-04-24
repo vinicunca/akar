@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import theme from '#build/pohon/context-menu';
-import { defineShortcuts, extractShortcuts } from '#imports';
 import {
   AContextMenuContent,
   AContextMenuGroup,
@@ -14,6 +12,8 @@ import {
   AContextMenuTrigger,
 } from 'akar';
 import { computed, reactive, ref } from 'vue';
+import theme from '#build/pohon/context-menu';
+import { defineShortcuts, extractShortcuts } from '#imports';
 
 const loading = ref(false);
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import theme from '#build/pohon/slider';
 import { ASliderRange, ASliderRoot, ASliderThumb, ASliderTrack } from 'akar';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/slider';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import theme from '#build/pohon/input-tags';
 import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot } from 'akar';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/input-tags';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

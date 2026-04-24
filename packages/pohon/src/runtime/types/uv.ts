@@ -41,7 +41,7 @@ type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
 }>;
 
 type ComponentPohon<T extends { slots?: Record<string, any> }> = Id<{
-  [K in keyof Required<T['slots']>]: (props?: Record<string, any>) => string
+  [K in keyof Required<T['slots']>]: (props?: Record<string, any>) => string | undefined
 }>;
 
 type GetComponentAppConfig<A, U extends string, K extends string>

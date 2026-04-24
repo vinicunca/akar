@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Lëtzebuergesch',
   code: 'lb',
   messages: {
     alert: {
-      close: 'Zoumaachen'
+      close: 'Zoumaachen',
     },
     authForm: {
       hidePassword: 'Passwuert verstoppen',
       showPassword: 'Passwuert uweisen',
-      submit: 'Fortschécken'
+      submit: 'Fortschécken',
     },
     banner: {
-      close: 'Zoumaachen'
+      close: 'Zoumaachen',
     },
     calendar: {
       nextMonth: 'Nächste Mount',
       nextYear: 'Nächst Joer',
       prevMonth: 'Virege Mount',
-      prevYear: 'Viregt Joer'
+      prevYear: 'Viregt Joer',
     },
     carousel: {
       dots: 'Wielt Dia fir ze weisen',
       goto: 'Gitt op d\'Slide {Slide}',
       next: 'Näch.',
-      prev: 'Präz.'
+      prev: 'Präz.',
     },
     chatPrompt: {
-      placeholder: 'Tippt hei Äre Message…'
+      placeholder: 'Tippt hei Äre Message…',
     },
     chatPromptSubmit: {
-      label: 'Prompt schécken'
+      label: 'Prompt schécken',
     },
     chatReasoning: {
       thinking: 'Denkt no…',
       thought: 'Nogeduecht',
-      thoughtFor: '{duration} nogeduecht'
+      thoughtFor: '{duration} nogeduecht',
     },
     colorMode: {
       dark: 'Donkel',
       light: 'Liicht',
       switchToDark: 'Op de Donkelmodus wiesselen',
       switchToLight: 'Op de Liichtmodus wiesselen',
-      system: 'System'
+      system: 'System',
     },
     commandPalette: {
       back: 'Zréck',
       close: 'Zoumaachen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Tippt e Befeel oder sicht…'
+      placeholder: 'Tippt e Befeel oder sicht…',
     },
     contentSearch: {
       links: 'Linken',
-      theme: 'Thema'
+      theme: 'Thema',
     },
     contentSearchButton: {
-      label: 'Sichen…'
+      label: 'Sichen…',
     },
     contentToc: {
-      title: 'Op dëser Säit'
+      title: 'Op dëser Säit',
     },
     dropdownMenu: {
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen..'
+      search: 'Sichen…',
     },
     dashboardSearch: {
-      theme: 'Thema'
+      theme: 'Thema',
     },
     dashboardSearchButton: {
-      label: 'Sichen…'
+      label: 'Sichen…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Sidebar zouklappen',
-      expand: 'Sidebar opklappen'
+      expand: 'Sidebar opklappen',
     },
     dashboardSidebarToggle: {
       close: 'Sidebar zoumaachen',
-      open: 'Sidebar opmaachen'
+      open: 'Sidebar opmaachen',
     },
     error: {
-      clear: 'Zréck op d\'Startsäit'
+      clear: 'Zréck op d\'Startsäit',
     },
     fileUpload: {
-      removeFile: '{filename} ewechhuelen'
+      removeFile: '{filename} ewechhuelen',
     },
     header: {
       close: 'Menü zoumaachen',
-      open: 'Menü opmaachen'
+      open: 'Menü opmaachen',
     },
     inputMenu: {
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',
-      noMatch: 'Keng entspriechend Donnéeën'
+      noMatch: 'Keng entspriechend Donnéeën',
     },
     inputNumber: {
       decrement: 'Dekrementéieren',
-      increment: 'Inkrementéieren'
+      increment: 'Inkrementéieren',
+    },
+    listbox: {
+      noData: 'Keng Donnéeën',
+      noMatch: 'Keng entspriechend Donnéeën',
+      search: 'Sichen…',
     },
     modal: {
-      close: 'Zoumaachen'
+      close: 'Zoumaachen',
     },
     pricingTable: {
-      caption: 'Vergläich vun de Präispläng'
+      caption: 'Vergläich vun de Präispläng',
     },
     prose: {
       codeCollapse: {
         closeText: 'Zouklappen',
         name: 'code',
-        openText: 'Opklappen'
+        openText: 'Opklappen',
       },
       collapsible: {
         closeText: 'Verstoppen',
         name: 'eegenschaften',
-        openText: 'Uweisen'
+        openText: 'Uweisen',
       },
       pre: {
-        copy: 'Code an d\'Zwëschspäicher kopéieren'
+        copy: 'Code an d\'Zwëschspäicher kopéieren',
       },
       prompt: {
         copy: 'Prompt kopéieren',
-        openIn: 'An {name} opmaachen'
-      }
+        openIn: 'An {name} opmaachen',
+      },
     },
     sidebar: {
       close: 'Zoumaachen',
-      toggle: 'Ëmschalten'
+      toggle: 'Ëmschalten',
     },
     selectMenu: {
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen..'
+      search: 'Sichen…',
     },
     slideover: {
-      close: 'Zoumaachen'
+      close: 'Zoumaachen',
     },
     table: {
-      noData: 'Keng Donnéeën'
+      noData: 'Keng Donnéeën',
     },
     toast: {
-      close: 'Zoumaachen'
-    }
-  }
-})
+      close: 'Zoumaachen',
+    },
+  },
+});

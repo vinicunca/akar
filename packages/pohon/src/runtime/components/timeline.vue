@@ -70,10 +70,10 @@ export type PTimelineSlots<T extends PTimelineItem = PTimelineItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends PTimelineItem">
-import { useAppConfig } from '#imports';
 import { isObjectType, isString } from '@vinicunca/perkakas';
 import { APrimitive, ASeparator } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';

@@ -68,7 +68,6 @@ export interface PInputTagsSlots<T extends PInputTagItem = PInputTagItem> {
 </script>
 
 <script setup lang="ts" generic="T extends PInputTagItem">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import {
   ATagsInputInput,
@@ -79,6 +78,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, onMounted, toRaw, toRef, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';

@@ -96,12 +96,12 @@ export interface PSidebarSlots {
 </script>
 
 <script setup lang="ts" generic="T extends SidebarMode">
-import { useAppConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate, useMediaQuery } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, ref, toRef, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';

@@ -62,7 +62,6 @@ export interface PLinkSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitiveSlot, useForwardProps } from 'akar';
@@ -71,6 +70,7 @@ import { isEqual } from 'ohash/utils';
 import { hasProtocol } from 'ufo';
 import { computed } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
+import { useAppConfig } from '#imports';
 import PLinkBase from '../../../components/link-base.vue';
 import { mergeClasses } from '../../../utils';
 import { isPartiallyEqual } from '../../../utils/link';

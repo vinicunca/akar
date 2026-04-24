@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/banner';
 import { reactive } from 'vue';
+import theme from '#build/pohon/banner';
 
 const colors = Object.keys(theme.variants.color);
 

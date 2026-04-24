@@ -69,12 +69,12 @@ export type PColorPickerProps = {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { useElementBounding, useEventListener, watchPausable, watchThrottled } from '@vueuse/core';
 import { isClient } from '@vueuse/shared';
 import { APrimitive } from 'akar';
 import { ColorTranslator } from 'colortranslator';
 import { computed, nextTick, ref, toValue } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 

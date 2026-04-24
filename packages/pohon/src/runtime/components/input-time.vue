@@ -86,11 +86,11 @@ export interface PInputTimeSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean">
-import { useAppConfig } from '#imports';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { ATimeRangeFieldInput, ATimeRangeFieldRoot, useForwardPropsEmits } from 'akar';
 import { ATimeField } from 'akar/namespaced';
 import { computed, onMounted, ref } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';

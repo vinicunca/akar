@@ -1,8 +1,8 @@
 import type { InjectionKey, Ref } from 'vue';
 import type { PToastEmits, PToastProps } from '../types';
 import type { EmitsToProps } from '../types/utils';
-import { useState } from '#imports';
 import { inject, nextTick, ref } from 'vue';
+import { useState } from '#imports';
 
 export const toastMaxInjectionKey: InjectionKey<Ref<number | undefined>> = Symbol('pohon.toast-max');
 

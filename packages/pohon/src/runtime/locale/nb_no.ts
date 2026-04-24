@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Norsk Bokmål',
   code: 'nb-NO',
   messages: {
     alert: {
-      close: 'Lukk'
+      close: 'Lukk',
     },
     authForm: {
       hidePassword: 'Skjul passord',
       showPassword: 'Vis passord',
-      submit: 'Fortsett'
+      submit: 'Fortsett',
     },
     banner: {
-      close: 'Lukk'
+      close: 'Lukk',
     },
     calendar: {
       nextMonth: 'Neste måned',
       nextYear: 'Neste år',
       prevMonth: 'Forrige måned',
-      prevYear: 'Forrige år'
+      prevYear: 'Forrige år',
     },
     carousel: {
       dots: 'Velg lysbilde som skal vises',
       goto: 'Gå til lysbilde {slide}',
       next: 'Neste',
-      prev: 'Forrige'
+      prev: 'Forrige',
     },
     chatPrompt: {
-      placeholder: 'Skriv din melding her…'
+      placeholder: 'Skriv din melding her…',
     },
     chatPromptSubmit: {
-      label: 'Send'
+      label: 'Send',
     },
     chatReasoning: {
       thinking: 'Tenker…',
       thought: 'Tenkte',
-      thoughtFor: 'Tenkte i {duration}'
+      thoughtFor: 'Tenkte i {duration}',
     },
     colorMode: {
       dark: 'Mørk',
       light: 'Lys',
       switchToDark: 'Bytt til mørk modus',
       switchToLight: 'Bytt til lys modus',
-      system: 'System'
+      system: 'System',
     },
     commandPalette: {
       back: 'Tilbake',
       close: 'Lukk',
       noData: 'Ingen data',
       noMatch: 'Ingen samsvarende data',
-      placeholder: 'Skriv inn en kommando eller søk…'
+      placeholder: 'Skriv inn en kommando eller søk…',
     },
     contentSearch: {
       links: 'Lenker',
-      theme: 'Tema'
+      theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Søk…'
+      label: 'Søk…',
     },
     contentToc: {
-      title: 'På denne siden'
+      title: 'På denne siden',
     },
     dropdownMenu: {
       noMatch: 'Ingen samsvarende data',
-      search: 'Søk…'
+      search: 'Søk…',
     },
     dashboardSearch: {
-      theme: 'Tema'
+      theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Søk…'
+      label: 'Søk…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Skjul sidepanel',
-      expand: 'Utvid sidepanel'
+      expand: 'Utvid sidepanel',
     },
     dashboardSidebarToggle: {
       close: 'Lukk sidepanel',
-      open: 'Åpne sidepanel'
+      open: 'Åpne sidepanel',
     },
     error: {
-      clear: 'Tilbake til forsiden'
+      clear: 'Tilbake til forsiden',
     },
     fileUpload: {
-      removeFile: 'Fjern {filename}'
+      removeFile: 'Fjern {filename}',
     },
     header: {
       close: 'Lukk meny',
-      open: 'Åpne meny'
+      open: 'Åpne meny',
     },
     inputMenu: {
       create: 'Opprett "{label}"',
       noData: 'Ingen data',
-      noMatch: 'Ingen samsvarende data'
+      noMatch: 'Ingen samsvarende data',
     },
     inputNumber: {
       decrement: 'Reduser',
-      increment: 'Øk'
+      increment: 'Øk',
+    },
+    listbox: {
+      noData: 'Ingen data',
+      noMatch: 'Ingen samsvarende data',
+      search: 'Søk…',
     },
     modal: {
-      close: 'Lukk'
+      close: 'Lukk',
     },
     pricingTable: {
-      caption: 'Prisplaneringssammenligning'
+      caption: 'Prisplaneringssammenligning',
     },
     prose: {
       codeCollapse: {
         closeText: 'Skjul',
         name: 'kode',
-        openText: 'Utvid'
+        openText: 'Utvid',
       },
       collapsible: {
         closeText: 'Skjul',
         name: 'egenskaper',
-        openText: 'Vis'
+        openText: 'Vis',
       },
       pre: {
-        copy: 'Kopier kode til utklippstavle'
+        copy: 'Kopier kode til utklippstavle',
       },
       prompt: {
         copy: 'Kopier ledetekst',
-        openIn: 'Åpne i {name}'
-      }
+        openIn: 'Åpne i {name}',
+      },
     },
     sidebar: {
       close: 'Lukk',
-      toggle: 'Veksle'
+      toggle: 'Veksle',
     },
     selectMenu: {
       create: 'Opprett "{label}"',
       noData: 'Ingen data',
       noMatch: 'Ingen samsvarende data',
-      search: 'Søk…'
+      search: 'Søk…',
     },
     slideover: {
-      close: 'Lukk'
+      close: 'Lukk',
     },
     table: {
-      noData: 'Ingen data'
+      noData: 'Ingen data',
     },
     toast: {
-      close: 'Lukk'
-    }
-  }
-})
+      close: 'Lukk',
+    },
+  },
+});

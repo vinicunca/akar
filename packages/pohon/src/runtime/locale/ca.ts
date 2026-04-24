@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Català',
   code: 'ca',
   messages: {
     alert: {
-      close: 'Tancar'
+      close: 'Tancar',
     },
     authForm: {
       hidePassword: 'Amagar contrasenya',
       showPassword: 'Mostrar contrasenya',
-      submit: 'Continuar'
+      submit: 'Continuar',
     },
     banner: {
-      close: 'Tancar'
+      close: 'Tancar',
     },
     calendar: {
       nextMonth: 'Mes següent',
       nextYear: 'Any següent',
       prevMonth: 'Mes anterior',
-      prevYear: 'Any anterior'
+      prevYear: 'Any anterior',
     },
     carousel: {
       dots: 'Tria la diapositiva a mostrar',
       goto: 'Anar a la diapositiva {slide}',
       next: 'Següent',
-      prev: 'Anterior'
+      prev: 'Anterior',
     },
     chatPrompt: {
-      placeholder: 'Escriu el teu missatge aquí…'
+      placeholder: 'Escriu el teu missatge aquí…',
     },
     chatPromptSubmit: {
-      label: 'Enviar'
+      label: 'Enviar',
     },
     chatReasoning: {
       thinking: 'Pensant…',
       thought: 'Ha pensat',
-      thoughtFor: 'Ha pensat durant {duration}'
+      thoughtFor: 'Ha pensat durant {duration}',
     },
     colorMode: {
       dark: 'Fosc',
       light: 'Clar',
       switchToDark: 'Canviar a mode fosc',
       switchToLight: 'Canviar a mode clar',
-      system: 'Sistema'
+      system: 'Sistema',
     },
     commandPalette: {
       back: 'Enrere',
       close: 'Tancar',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      placeholder: 'Escriu una ordre o cerca…'
+      placeholder: 'Escriu una ordre o cerca…',
     },
     contentSearch: {
       links: 'Enllaços',
-      theme: 'Tema'
+      theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Cercar…'
+      label: 'Cercar…',
     },
     contentToc: {
-      title: 'En aquesta pàgina'
+      title: 'En aquesta pàgina',
     },
     dropdownMenu: {
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      search: 'Cerca…',
     },
     dashboardSearch: {
-      theme: 'Tema'
+      theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Cercar…'
+      label: 'Cercar…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Contraure barra lateral',
-      expand: 'Expandir barra lateral'
+      expand: 'Expandir barra lateral',
     },
     dashboardSidebarToggle: {
       close: 'Tancar barra lateral',
-      open: 'Obrir barra lateral'
+      open: 'Obrir barra lateral',
     },
     error: {
-      clear: 'Tornar a l\'inici'
+      clear: 'Tornar a l\'inici',
     },
     fileUpload: {
-      removeFile: 'Eliminar {filename}'
+      removeFile: 'Eliminar {filename}',
     },
     header: {
       close: 'Tancar menú',
-      open: 'Obrir menú'
+      open: 'Obrir menú',
     },
     inputMenu: {
       create: 'Crear "{label}"',
       noData: 'Sense dades',
-      noMatch: 'No hi ha dades coincidents'
+      noMatch: 'No hi ha dades coincidents',
     },
     inputNumber: {
       decrement: 'Decrementar',
-      increment: 'Incrementar'
+      increment: 'Incrementar',
+    },
+    listbox: {
+      noData: 'Sense dades',
+      noMatch: 'No hi ha dades coincidents',
+      search: 'Cerca…',
     },
     modal: {
-      close: 'Tancar'
+      close: 'Tancar',
     },
     pricingTable: {
-      caption: 'Comparació de plans de preu'
+      caption: 'Comparació de plans de preu',
     },
     prose: {
       codeCollapse: {
         closeText: 'Replega',
         name: 'codi',
-        openText: 'Desplega'
+        openText: 'Desplega',
       },
       collapsible: {
         closeText: 'Amaga',
         name: 'propietats',
-        openText: 'Mostra'
+        openText: 'Mostra',
       },
       pre: {
-        copy: 'Copiar codi al portapapers'
+        copy: 'Copiar codi al portapapers',
       },
       prompt: {
         copy: 'Copiar instrucció',
-        openIn: 'Obrir a {name}'
-      }
+        openIn: 'Obrir a {name}',
+      },
     },
     sidebar: {
       close: 'Tancar',
-      toggle: 'Canviar'
+      toggle: 'Canviar',
     },
     selectMenu: {
       create: 'Crear "{label}"',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca…'
+      search: 'Cerca…',
     },
     slideover: {
-      close: 'Tancar'
+      close: 'Tancar',
     },
     table: {
-      noData: 'Sense dades'
+      noData: 'Sense dades',
     },
     toast: {
-      close: 'Tancar'
-    }
-  }
-})
+      close: 'Tancar',
+    },
+  },
+});

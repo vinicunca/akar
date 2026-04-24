@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PDropdownMenuItem } from 'pohon-ui';
+import { computed } from 'vue';
 import { useAppConfig } from '#app';
 import { PButton, PDropdownMenu } from '#components';
-import { computed } from 'vue';
 import { NEUTRALS_COLORS, UNO_THEME_COLORS } from '~/themes/constant';
 
 const appConfig = useAppConfig();

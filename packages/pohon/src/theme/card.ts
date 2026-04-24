@@ -2,6 +2,8 @@ export default {
   slots: {
     root: '',
     header: '',
+    title: '',
+    description: '',
     body: '',
     footer: '',
   },
@@ -10,6 +12,8 @@ export default {
     variant: {
       solid: {
         root: '',
+        title: '',
+        description: '',
       },
       outline: {
         root: '',

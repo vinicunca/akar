@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { computed, reactive, ref } from 'vue';
 import theme from '#build/pohon/dropdown-menu';
 import { defineShortcuts, extractShortcuts } from '#imports';
-import { computed, reactive, ref } from 'vue';
 
 const loading = ref(false);
 

@@ -18,12 +18,6 @@ export default (options: Required<PohonModuleOptions>) => {
     },
 
     variants: {
-      virtualize: {
-        false: {
-          base: '',
-          tbody: '',
-        },
-      },
       pinned: {
         true: {
           th: '',

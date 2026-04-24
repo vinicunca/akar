@@ -238,7 +238,6 @@ export interface PSelectMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PSelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>, C extends boolean | object = false">
-import { useAppConfig } from '#imports';
 import { isBoolean, isNullish, isObjectType, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
@@ -262,6 +261,7 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, toRaw, toRef, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { FieldGroupReset, useFieldGroup } from '../composables/use-field-group';

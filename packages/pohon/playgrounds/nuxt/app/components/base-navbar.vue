@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { capitalize } from '@vinicunca/perkakas';
 import { PButton, PDashboardNavbar, PFieldGroup } from '#components';
 import { computed, defineShortcuts, inject, useRoute, useRouter } from '#imports';
-import { capitalize } from '@vinicunca/perkakas';
 
 defineProps<{
   to?: string;

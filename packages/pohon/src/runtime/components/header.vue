@@ -66,12 +66,12 @@ export interface PHeaderSlots {
 </script>
 
 <script setup lang="ts" generic="T extends HeaderMode">
-import { useAppConfig, useRoute } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef, watch } from 'vue';
+import { useAppConfig, useRoute } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { getSlotChildrenText } from '../utils';

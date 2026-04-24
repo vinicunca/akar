@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { reactive, ref } from 'vue';
 import themeCheckbox from '#build/pohon/checkbox';
 import theme from '#build/pohon/checkbox-group';
-import { reactive, ref } from 'vue';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

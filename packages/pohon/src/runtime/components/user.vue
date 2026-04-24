@@ -42,10 +42,10 @@ export interface PUserSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 import PAvatar from './avatar.vue';

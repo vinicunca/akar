@@ -48,9 +48,9 @@ export interface PFooterColumnsSlots<T extends PFooterColumnLink = PFooterColumn
 </script>
 
 <script setup lang="ts" generic="T extends PFooterColumnLink">
-import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';

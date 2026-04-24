@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Icelandic',
   code: 'is',
   messages: {
     alert: {
-      close: 'Loka'
+      close: 'Loka',
     },
     authForm: {
       hidePassword: 'Fela lykilorð',
       showPassword: 'Sýna lykilorð',
-      submit: 'Áfram'
+      submit: 'Áfram',
     },
     banner: {
-      close: 'Loka'
+      close: 'Loka',
     },
     calendar: {
       nextMonth: 'Næsti mánuður',
       nextYear: 'Næsta ár',
       prevMonth: 'Fyrri mánuður',
-      prevYear: 'Fyrra ár'
+      prevYear: 'Fyrra ár',
     },
     carousel: {
       dots: 'Veldu mynd til að sýna',
       goto: 'Fara á mynd {slide}',
       next: 'Næsta',
-      prev: 'Fyrri'
+      prev: 'Fyrri',
     },
     chatPrompt: {
-      placeholder: 'Skrifaðu skilaboðin þín hér…'
+      placeholder: 'Skrifaðu skilaboðin þín hér…',
     },
     chatPromptSubmit: {
-      label: 'Senda fyrirspurn'
+      label: 'Senda fyrirspurn',
     },
     chatReasoning: {
       thinking: 'Hugsar…',
       thought: 'Hugsaði',
-      thoughtFor: 'Hugsaði í {duration}'
+      thoughtFor: 'Hugsaði í {duration}',
     },
     colorMode: {
       dark: 'Dökkt',
       light: 'Ljóst',
       switchToDark: 'Skipta yfir í dökkan ham',
       switchToLight: 'Skipta yfir í ljósan ham',
-      system: 'Kerfi'
+      system: 'Kerfi',
     },
     commandPalette: {
       back: 'Til baka',
       close: 'Loka',
       noData: 'Engin gögn',
       noMatch: 'Engin gögn fundust',
-      placeholder: 'Sláðu inn skipun eða leitaðu…'
+      placeholder: 'Sláðu inn skipun eða leitaðu…',
     },
     contentSearch: {
       links: 'Tenglar',
-      theme: 'Þema'
+      theme: 'Þema',
     },
     contentSearchButton: {
-      label: 'Leita…'
+      label: 'Leita…',
     },
     contentToc: {
-      title: 'Á þessari síðu'
+      title: 'Á þessari síðu',
     },
     dropdownMenu: {
       noMatch: 'Engin gögn fundust',
-      search: 'Leita…'
+      search: 'Leita…',
     },
     dashboardSearch: {
-      theme: 'Þema'
+      theme: 'Þema',
     },
     dashboardSearchButton: {
-      label: 'Leita…'
+      label: 'Leita…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Fella hliðarstiku saman',
-      expand: 'Stækka hliðarstiku'
+      expand: 'Stækka hliðarstiku',
     },
     dashboardSidebarToggle: {
       close: 'Loka hliðarstiku',
-      open: 'Opna hliðarstiku'
+      open: 'Opna hliðarstiku',
     },
     error: {
-      clear: 'Til baka heim'
+      clear: 'Til baka heim',
     },
     fileUpload: {
-      removeFile: 'Fjarlægja {filename}'
+      removeFile: 'Fjarlægja {filename}',
     },
     header: {
       close: 'Loka valmynd',
-      open: 'Opna valmynd'
+      open: 'Opna valmynd',
     },
     inputMenu: {
       create: 'Búa til "{label}"',
       noData: 'Engin gögn',
-      noMatch: 'Engin gögn fundust'
+      noMatch: 'Engin gögn fundust',
     },
     inputNumber: {
       decrement: 'Minnka',
-      increment: 'Auka'
+      increment: 'Auka',
+    },
+    listbox: {
+      noData: 'Engin gögn',
+      noMatch: 'Engin gögn fundust',
+      search: 'Leita…',
     },
     modal: {
-      close: 'Loka'
+      close: 'Loka',
     },
     pricingTable: {
-      caption: 'Samanburður verðflokka'
+      caption: 'Samanburður verðflokka',
     },
     prose: {
       codeCollapse: {
         closeText: 'Fella saman',
         name: 'kóði',
-        openText: 'Stækka'
+        openText: 'Stækka',
       },
       collapsible: {
         closeText: 'Fela',
         name: 'eiginleikar',
-        openText: 'Sýna'
+        openText: 'Sýna',
       },
       pre: {
-        copy: 'Afrita kóða á klippiborð'
+        copy: 'Afrita kóða á klippiborð',
       },
       prompt: {
         copy: 'Afrita fyrirmæli',
-        openIn: 'Opna í {name}'
-      }
+        openIn: 'Opna í {name}',
+      },
     },
     sidebar: {
       close: 'Loka',
-      toggle: 'Skipta'
+      toggle: 'Skipta',
     },
     selectMenu: {
       create: 'Búa til "{label}"',
       noData: 'Engin gögn',
       noMatch: 'Engin gögn fundust',
-      search: 'Leita…'
+      search: 'Leita…',
     },
     slideover: {
-      close: 'Loka'
+      close: 'Loka',
     },
     table: {
-      noData: 'Engin gögn'
+      noData: 'Engin gögn',
     },
     toast: {
-      close: 'Loka'
-    }
-  }
-})
+      close: 'Loka',
+    },
+  },
+});

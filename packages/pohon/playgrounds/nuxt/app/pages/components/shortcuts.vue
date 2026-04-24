@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PShortcutsConfig } from '#imports';
-import { defineShortcuts } from '#imports';
 import { computed, ref } from 'vue';
+import { defineShortcuts } from '#imports';
 
 const logs = ref<Array<string>>([]);
 const shortcutsState = ref({

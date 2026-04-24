@@ -37,12 +37,12 @@ export interface PAvatarSlots {
 </script>
 
 <script setup lang="ts">
-import ImageComponent from '#build/pohon-image-component';
-import { useAppConfig } from '#imports';
 import { isFunction, isObjectType, isString } from '@vinicunca/perkakas';
 import { APrimitive, APrimitiveSlot } from 'akar';
 import { defu } from 'defu';
 import { computed, ref, watch } from 'vue';
+import ImageComponent from '#build/pohon-image-component';
+import { useAppConfig } from '#imports';
 import { useAvatarGroup } from '../composables/use-avatar-group';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
@@ -74,7 +74,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.avatar
 const rootClass = computed(() => pohon.value.root({ class: [pohonProp.value?.root, props.class] }));
 
 const sizePx = computed(() => {
-  const sizeClass = rootClass.value.split(' ').find((c) => /^size-\d+$/.test(c));
+  const sizeClass = rootClass.value?.split(' ').find((c) => /^size-\d+$/.test(c));
   if (sizeClass) {
     const num = Number.parseFloat(sizeClass.split('-')[1] ?? '');
     if (!Number.isNaN(num)) {

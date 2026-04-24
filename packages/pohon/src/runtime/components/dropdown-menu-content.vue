@@ -1,12 +1,12 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
-import type theme from '#build/pohon/dropdown-menu';
 import type { AppConfig } from '@nuxt/schema';
 import type {
   ADropdownMenuContentEmits,
   ADropdownMenuContentProps,
 } from 'akar';
 import type { VNode } from 'vue';
+import type theme from '#build/pohon/dropdown-menu';
 import type { PAvatarProps, PDropdownMenuItem, PDropdownMenuSlots, PIconProps, PInputProps, PKbdProps } from '../types';
 import type { ArrayOrNested, DynamicSlots, GetItemKeys, MergeTypes, NestedItem } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -57,13 +57,13 @@ type PDropdownMenuContentSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PDropdownMenuItem>">
-import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
 import { ADropdownMenu } from 'akar/namespaced';
 import { defu } from 'defu';
 import { computed, ref, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { FieldGroupReset } from '../composables/use-field-group';
 import { useFilter } from '../composables/use-filter';
 import { useLocale } from '../composables/use-locale';

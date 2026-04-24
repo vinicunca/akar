@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
 import theme from '#build/pohon/avatar';
 import { PSelect } from '#components';
-import { reactive } from 'vue';
 
 const sizes = Object.keys(theme.variants.size);
 

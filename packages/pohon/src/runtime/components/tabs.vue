@@ -24,7 +24,11 @@ export interface PTabsItem {
   badge?: string | number | PBadgeProps;
   slot?: string;
   content?: string;
-  /** A unique value for the tab item. Defaults to the index. */
+  /**
+   * A unique value for the tab item. Defaults to the index.
+   * Also used as the Vue `key` for this item, so providing a stable value prevents tab
+   * content (and its local state) from remounting when items are added, removed, or reordered.
+   */
   value?: string | number;
   disabled?: boolean;
   class?: any;
@@ -91,7 +95,6 @@ export type PTabsSlots<T extends PTabsItem = PTabsItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends PTabsItem">
-import { useAppConfig } from '#imports';
 import { isNumber, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
@@ -103,6 +106,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, ref } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
@@ -171,7 +175,7 @@ defineExpose({
 
       <ATabsTrigger
         v-for="(item, index) of items"
-        :key="index"
+        :key="getProp(item, props.valueKey as string) ?? index"
         :ref="el => setTriggerRef(index, el)"
         :value="getProp(item, props.valueKey as string) ?? String(index)"
         :disabled="item.disabled"
@@ -234,7 +238,7 @@ defineExpose({
     <template v-if="!!content">
       <ATabsContent
         v-for="(item, index) of items"
-        :key="index"
+        :key="getProp(item, props.valueKey as string) ?? index"
         :value="getProp(item, props.valueKey as string) ?? String(index)"
         data-slot="content"
         :class="pohon.content({ class: [pohonProp?.content, item.pohon?.content, item.class] })"

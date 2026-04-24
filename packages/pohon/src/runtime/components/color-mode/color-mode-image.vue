@@ -8,9 +8,9 @@ export interface PColorModeImageProps extends /** @vue-ignore */ Omit<ImgHTMLAtt
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import ImageComponent from '#build/pohon-image-component';
 import { useRuntimeConfig } from '#imports';
-import { computed } from 'vue';
 import { resolveBaseURL } from '../../utils';
 
 defineOptions({ inheritAttrs: false });

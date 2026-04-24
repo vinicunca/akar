@@ -12,8 +12,8 @@ import type {
 import type { VNode } from 'vue';
 import type { PButtonProps, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
-import theme from '#build/pohon/calendar';
 import { getWeekNumber } from 'akar/date';
+import theme from '#build/pohon/calendar';
 
 type Calendar = ComponentConfig<typeof theme, AppConfig, 'calendar'>;
 
@@ -120,11 +120,11 @@ export interface PCalendarSlots {
 </script>
 
 <script setup lang="ts" generic="R extends boolean, M extends boolean">
-import { useAppConfig } from '#imports';
 import { reactiveOmit } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
 import { ACalendar, ARangeCalendar } from 'akar/namespaced';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';

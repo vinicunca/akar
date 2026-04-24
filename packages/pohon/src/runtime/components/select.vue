@@ -160,7 +160,6 @@ export interface PSelectSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PSelectItem>, VK extends GetItemKeys<T> = 'value', M extends boolean = false, Mod extends Omit<ModelModifiers, 'lazy'> = Omit<ModelModifiers, 'lazy'>">
-import { useAppConfig } from '#imports';
 import { isNullish, isObjectType, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
@@ -181,6 +180,7 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, toRef, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { FieldGroupReset, useFieldGroup } from '../composables/use-field-group';

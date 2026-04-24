@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Oʻzbek',
   code: 'uz',
   messages: {
     alert: {
-      close: 'Yopish'
+      close: 'Yopish',
     },
     authForm: {
       hidePassword: 'Parolni yashirish',
       showPassword: 'Parolni ko\'rsatish',
-      submit: 'Davom etish'
+      submit: 'Davom etish',
     },
     banner: {
-      close: 'Yopish'
+      close: 'Yopish',
     },
     calendar: {
       nextMonth: 'Keyingi oy',
       nextYear: 'Keyingi yil',
       prevMonth: 'Oldingi oy',
-      prevYear: 'Oldingi yil'
+      prevYear: 'Oldingi yil',
     },
     carousel: {
       dots: 'Koʻrsatish uchun slaydni tanlang',
       goto: '{slide}-slaydga o\'tish',
       next: 'Oldinga',
-      prev: 'Ortga'
+      prev: 'Ortga',
     },
     chatPrompt: {
-      placeholder: 'Bu yerda savolingizni yozing…'
+      placeholder: 'Bu yerda savolingizni yozing…',
     },
     chatPromptSubmit: {
-      label: 'Jo\'natish'
+      label: 'Jo\'natish',
     },
     chatReasoning: {
       thinking: 'O\'ylayapti…',
       thought: 'O\'yladi',
-      thoughtFor: '{duration} o\'yladi'
+      thoughtFor: '{duration} o\'yladi',
     },
     colorMode: {
       dark: 'Qorong\'i',
       light: 'Yorug\'',
       switchToDark: 'Qorong\'i rejimga o\'tish',
       switchToLight: 'Yorug\' rejimga o\'tish',
-      system: 'Tizim'
+      system: 'Tizim',
     },
     commandPalette: {
       back: 'Orqaga',
       close: 'Yopish',
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      placeholder: 'Buyruq kiriting yoki qidiring…'
+      placeholder: 'Buyruq kiriting yoki qidiring…',
     },
     contentSearch: {
       links: 'Havolalar',
-      theme: 'Mavzu'
+      theme: 'Mavzu',
     },
     contentSearchButton: {
-      label: 'Qidirish…'
+      label: 'Qidirish…',
     },
     contentToc: {
-      title: 'Ushbu sahifada'
+      title: 'Ushbu sahifada',
     },
     dropdownMenu: {
       noMatch: 'Mos keluvchi natija topilmadi',
-      search: 'Qidirish…'
+      search: 'Qidirish…',
     },
     dashboardSearch: {
-      theme: 'Mavzu'
+      theme: 'Mavzu',
     },
     dashboardSearchButton: {
-      label: 'Qidirish…'
+      label: 'Qidirish…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Yon panelni yig\'ish',
-      expand: 'Yon panelni kengaytirish'
+      expand: 'Yon panelni kengaytirish',
     },
     dashboardSidebarToggle: {
       close: 'Yon panelni yopish',
-      open: 'Yon panelni ochish'
+      open: 'Yon panelni ochish',
     },
     error: {
-      clear: 'Bosh sahifaga qaytish'
+      clear: 'Bosh sahifaga qaytish',
     },
     fileUpload: {
-      removeFile: '{filename}ni oʻchirish'
+      removeFile: '{filename}ni oʻchirish',
     },
     header: {
       close: 'Menyuni yopish',
-      open: 'Menyuni ochish'
+      open: 'Menyuni ochish',
     },
     inputMenu: {
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',
-      noMatch: 'Mos keluvchi natija topilmadi'
+      noMatch: 'Mos keluvchi natija topilmadi',
     },
     inputNumber: {
       decrement: 'Ayirish',
-      increment: 'Qoʻshish'
+      increment: 'Qoʻshish',
+    },
+    listbox: {
+      noData: 'Maʼlumot yoʻq',
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…',
     },
     modal: {
-      close: 'Yopish'
+      close: 'Yopish',
     },
     pricingTable: {
-      caption: 'Narx planlarini taqqoslash'
+      caption: 'Narx planlarini taqqoslash',
     },
     prose: {
       codeCollapse: {
         closeText: 'Yig\'ish',
         name: 'kod',
-        openText: 'Kengaytirish'
+        openText: 'Kengaytirish',
       },
       collapsible: {
         closeText: 'Yashirish',
         name: 'xususiyatlar',
-        openText: 'Ko\'rsatish'
+        openText: 'Ko\'rsatish',
       },
       pre: {
-        copy: 'Koddan buferga nusxa olish'
+        copy: 'Koddan buferga nusxa olish',
       },
       prompt: {
         copy: 'So\'rovni nusxalash',
-        openIn: '{name}da ochish'
-      }
+        openIn: '{name}da ochish',
+      },
     },
     sidebar: {
       close: 'Yopish',
-      toggle: 'Almashtirish'
+      toggle: 'Almashtirish',
     },
     selectMenu: {
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      search: 'Qidirish…'
+      search: 'Qidirish…',
     },
     slideover: {
-      close: 'Yopish'
+      close: 'Yopish',
     },
     table: {
-      noData: 'Maʼlumot yoʻq'
+      noData: 'Maʼlumot yoʻq',
     },
     toast: {
-      close: 'Yopish'
-    }
-  }
-})
+      close: 'Yopish',
+    },
+  },
+});

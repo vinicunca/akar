@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/textarea';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/textarea';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

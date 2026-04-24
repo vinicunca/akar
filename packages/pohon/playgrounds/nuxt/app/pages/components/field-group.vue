@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/field-group';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/field-group';
 
 const sizes = Object.keys(theme.variants.size);
 const orientations = Object.keys(theme.variants.orientation);

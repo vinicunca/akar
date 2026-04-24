@@ -11,6 +11,7 @@ export default {
     th: '',
     td: '',
     tier: '',
+    tierWrapper: '',
     tierTitleWrapper: '',
     tierTitle: '',
     tierDescription: '',

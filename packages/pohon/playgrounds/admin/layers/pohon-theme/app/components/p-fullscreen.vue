@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { PButton } from '#components';
 import { useFullscreen } from '@vueuse/core';
+import { PButton } from '#components';
 
 const { isFullscreen, toggle } = useFullscreen();
 

@@ -81,12 +81,12 @@ export interface PScrollAreaEmits {
 </script>
 
 <script setup lang="ts" generic="T extends ScrollAreaItem">
-import { useAppConfig } from '#imports';
 import { useVirtualizer } from '@tanstack/vue-virtual';
 import { isBoolean, isFunction, isNumber, isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { computed, onMounted, onUnmounted, toRef, useTemplateRef, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';

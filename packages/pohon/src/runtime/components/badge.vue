@@ -41,10 +41,10 @@ export interface PBadgeSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { isNonNullish } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';

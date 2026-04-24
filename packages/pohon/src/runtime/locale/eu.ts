@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Euskera',
   code: 'eu',
   messages: {
     alert: {
-      close: 'Itxi'
+      close: 'Itxi',
     },
     authForm: {
       hidePassword: 'Pasahitza ezkutatu',
       showPassword: 'Pasahitza erakutsi',
-      submit: 'Jarraitu'
+      submit: 'Jarraitu',
     },
     banner: {
-      close: 'Itxi'
+      close: 'Itxi',
     },
     calendar: {
       nextMonth: 'Hurrengo hilabetea',
       nextYear: 'Hurrengo urtea',
       prevMonth: 'Aurretiko hilabetea',
-      prevYear: 'Aurretiko urtea'
+      prevYear: 'Aurretiko urtea',
     },
     carousel: {
       dots: 'Erakutsi beharreko diapositiba aukeratu',
       goto: 'Joan diapositibara {slide}',
       next: 'Hurrengoa',
-      prev: 'Aurretikoa'
+      prev: 'Aurretikoa',
     },
     chatPrompt: {
-      placeholder: 'Idatzi zure mezua hemen...'
+      placeholder: 'Idatzi zure mezua hemen…',
     },
     chatPromptSubmit: {
-      label: 'Bidali'
+      label: 'Bidali',
     },
     chatReasoning: {
       thinking: 'Pentsatzen…',
       thought: 'Pentsatu du',
-      thoughtFor: '{duration} pentsatzen'
+      thoughtFor: '{duration} pentsatzen',
     },
     colorMode: {
       dark: 'Iluna',
       light: 'Argia',
       switchToDark: 'Aldatu ilunera',
       switchToLight: 'Aldatu argira',
-      system: 'Sistema'
+      system: 'Sistema',
     },
     commandPalette: {
       back: 'Atzera',
       close: 'Itxi',
       noData: 'Daturik gabe',
       noMatch: 'Ez da datu bat ere aurkitu',
-      placeholder: 'Idatzi komando bat edo bilatu...'
+      placeholder: 'Idatzi komando bat edo bilatu…',
     },
     contentSearch: {
       links: 'Estekak',
-      theme: 'Gaia'
+      theme: 'Gaia',
     },
     contentSearchButton: {
-      label: 'Bilatu…'
+      label: 'Bilatu…',
     },
     contentToc: {
-      title: 'Orri honetan'
+      title: 'Orri honetan',
     },
     dropdownMenu: {
       noMatch: 'Ez da datu bat ere aurkitu',
-      search: 'Bilatu…'
+      search: 'Bilatu…',
     },
     dashboardSearch: {
-      theme: 'Gaia'
+      theme: 'Gaia',
     },
     dashboardSearchButton: {
-      label: 'Bilatu…'
+      label: 'Bilatu…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Alboko barra itxi',
-      expand: 'Alboko barra zabaldu'
+      expand: 'Alboko barra zabaldu',
     },
     dashboardSidebarToggle: {
       close: 'Alboko barra itxi',
-      open: 'Alboko barra zabaldu'
+      open: 'Alboko barra zabaldu',
     },
     error: {
-      clear: 'Hasierara itzuli'
+      clear: 'Hasierara itzuli',
     },
     fileUpload: {
-      removeFile: 'Ezabatu {filename}'
+      removeFile: 'Ezabatu {filename}',
     },
     header: {
       close: 'Menua itxi',
-      open: 'Menua zabaldu'
+      open: 'Menua zabaldu',
     },
     inputMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',
-      noMatch: 'Ez da datu bat ere aurkitu'
+      noMatch: 'Ez da datu bat ere aurkitu',
     },
     inputNumber: {
       decrement: 'Murriztu',
-      increment: 'Handitu'
+      increment: 'Handitu',
+    },
+    listbox: {
+      noData: 'Daturik gabe',
+      noMatch: 'Ez da datu bat ere aurkitu',
+      search: 'Bilatu…',
     },
     modal: {
-      close: 'Itxi'
+      close: 'Itxi',
     },
     pricingTable: {
-      caption: 'Prezio-plana alderatzea'
+      caption: 'Prezio-plana alderatzea',
     },
     prose: {
       codeCollapse: {
         closeText: 'Murriztu',
         name: 'kodea',
-        openText: 'Zabaldu'
+        openText: 'Zabaldu',
       },
       collapsible: {
         closeText: 'Ezkutatu',
         name: 'propietateak',
-        openText: 'Erakutsi'
+        openText: 'Erakutsi',
       },
       pre: {
-        copy: 'Kopiatu kodea clipboard-era'
+        copy: 'Kopiatu kodea clipboard-era',
       },
       prompt: {
         copy: 'Kopiatu prompt',
-        openIn: '{name}(e)n ireki'
-      }
+        openIn: '{name}(e)n ireki',
+      },
     },
     sidebar: {
       close: 'Itxi',
-      toggle: 'Txandakatu'
+      toggle: 'Txandakatu',
     },
     selectMenu: {
       create: 'Sortu {label}',
       noData: 'Daturik gabe',
       noMatch: 'Ez da datu bat ere aurkitu',
-      search: 'Bilatu…'
+      search: 'Bilatu…',
     },
     slideover: {
-      close: 'Itxi'
+      close: 'Itxi',
     },
     table: {
-      noData: 'Daturik gabe'
+      noData: 'Daturik gabe',
     },
     toast: {
-      close: 'Itxi'
-    }
-  }
-})
+      close: 'Itxi',
+    },
+  },
+});

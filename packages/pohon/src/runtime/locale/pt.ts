@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Português',
   code: 'pt',
   messages: {
     alert: {
-      close: 'Fechar'
+      close: 'Fechar',
     },
     authForm: {
       hidePassword: 'Ocultar senha',
       showPassword: 'Mostrar senha',
-      submit: 'Continuar'
+      submit: 'Continuar',
     },
     banner: {
-      close: 'Fechar'
+      close: 'Fechar',
     },
     calendar: {
       nextMonth: 'Próximo mês',
       nextYear: 'Próximo ano',
       prevMonth: 'Mês anterior',
-      prevYear: 'Ano anterior'
+      prevYear: 'Ano anterior',
     },
     carousel: {
       dots: 'Escolher slide para exibir',
       goto: 'Ir ao diapositivo {slide}',
       next: 'Próximo',
-      prev: 'Anterior'
+      prev: 'Anterior',
     },
     chatPrompt: {
-      placeholder: 'Escreva a sua mensagem aqui…'
+      placeholder: 'Escreva a sua mensagem aqui…',
     },
     chatPromptSubmit: {
-      label: 'Enviar'
+      label: 'Enviar',
     },
     chatReasoning: {
       thinking: 'A pensar…',
       thought: 'Pensou',
-      thoughtFor: 'Pensou durante {duration}'
+      thoughtFor: 'Pensou durante {duration}',
     },
     colorMode: {
       dark: 'Escuro',
       light: 'Claro',
       switchToDark: 'Mudar para modo escuro',
       switchToLight: 'Mudar para modo claro',
-      system: 'Sistema'
+      system: 'Sistema',
     },
     commandPalette: {
       back: 'Voltar',
       close: 'Fechar',
       noData: 'Sem dados',
       noMatch: 'Nenhum dado correspondente',
-      placeholder: 'Digite um comando ou pesquise…'
+      placeholder: 'Digite um comando ou pesquise…',
     },
     contentSearch: {
       links: 'Links',
-      theme: 'Tema'
+      theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Pesquisar…'
+      label: 'Pesquisar…',
     },
     contentToc: {
-      title: 'Nesta página'
+      title: 'Nesta página',
     },
     dropdownMenu: {
       noMatch: 'Nenhum dado correspondente',
-      search: 'Pesquisar…'
+      search: 'Pesquisar…',
     },
     dashboardSearch: {
-      theme: 'Tema'
+      theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Pesquisar…'
+      label: 'Pesquisar…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Recolher barra lateral',
-      expand: 'Expandir barra lateral'
+      expand: 'Expandir barra lateral',
     },
     dashboardSidebarToggle: {
       close: 'Fechar barra lateral',
-      open: 'Abrir barra lateral'
+      open: 'Abrir barra lateral',
     },
     error: {
-      clear: 'Voltar para a página inicial'
+      clear: 'Voltar para a página inicial',
     },
     fileUpload: {
-      removeFile: 'Remover {filename}'
+      removeFile: 'Remover {filename}',
     },
     header: {
       close: 'Fechar menu',
-      open: 'Abrir menu'
+      open: 'Abrir menu',
     },
     inputMenu: {
       create: 'Criar "{label}"',
       noData: 'Sem dados',
-      noMatch: 'Nenhum dado correspondente'
+      noMatch: 'Nenhum dado correspondente',
     },
     inputNumber: {
       decrement: 'Decrementar',
-      increment: 'Incrementar'
+      increment: 'Incrementar',
+    },
+    listbox: {
+      noData: 'Sem dados',
+      noMatch: 'Nenhum dado correspondente',
+      search: 'Pesquisar…',
     },
     modal: {
-      close: 'Fechar'
+      close: 'Fechar',
     },
     pricingTable: {
-      caption: 'Comparação de planos de preços'
+      caption: 'Comparação de planos de preços',
     },
     prose: {
       codeCollapse: {
         closeText: 'Recolher',
         name: 'código',
-        openText: 'Expandir'
+        openText: 'Expandir',
       },
       collapsible: {
         closeText: 'Ocultar',
         name: 'propriedades',
-        openText: 'Mostrar'
+        openText: 'Mostrar',
       },
       pre: {
-        copy: 'Copiar código para a área de transferência'
+        copy: 'Copiar código para a área de transferência',
       },
       prompt: {
         copy: 'Copiar prompt',
-        openIn: 'Abrir em {name}'
-      }
+        openIn: 'Abrir em {name}',
+      },
     },
     sidebar: {
       close: 'Fechar',
-      toggle: 'Alternar'
+      toggle: 'Alternar',
     },
     selectMenu: {
       create: 'Criar "{label}"',
       noData: 'Sem dados',
       noMatch: 'Nenhum dado correspondente',
-      search: 'Pesquisar…'
+      search: 'Pesquisar…',
     },
     slideover: {
-      close: 'Fechar'
+      close: 'Fechar',
     },
     table: {
-      noData: 'Sem dados'
+      noData: 'Sem dados',
     },
     toast: {
-      close: 'Fechar'
-    }
-  }
-})
+      close: 'Fechar',
+    },
+  },
+});

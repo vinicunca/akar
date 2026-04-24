@@ -21,12 +21,12 @@ export interface ProseImgProps {
 </script>
 
 <script setup lang="ts">
-import ImageComponent from '#build/pohon-image-component';
-import { useAppConfig, useRuntimeConfig } from '#imports';
 import { createReusableTemplate, useEventListener } from '@vueuse/core';
 import { ADialogPortal, ADialogRoot, ADialogTrigger } from 'akar';
 import { AnimatePresence, Motion } from 'motion-v';
 import { computed, ref, useId } from 'vue';
+import ImageComponent from '#build/pohon-image-component';
+import { useAppConfig, useRuntimeConfig } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { resolveBaseURL } from '../../utils';
 import { uv } from '../../utils/uv';

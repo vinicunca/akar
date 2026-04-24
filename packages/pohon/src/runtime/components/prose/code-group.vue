@@ -26,7 +26,6 @@ export interface ProseCodeGroupSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig, useState } from '#imports';
 import {
   ATabsContent,
   ATabsIndicator,
@@ -35,6 +34,7 @@ import {
   ATabsTrigger,
 } from 'akar';
 import { computed, onBeforeUpdate, onMounted, ref, watch } from 'vue';
+import { useAppConfig, useState } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PCodeIcon from './code-icon.vue';

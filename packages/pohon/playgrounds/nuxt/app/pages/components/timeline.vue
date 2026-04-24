@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { PTimelineItem } from 'pohon-ui';
-import theme from '#build/pohon/timeline';
 import { ref } from 'vue';
+import theme from '#build/pohon/timeline';
 
 const sizes = Object.keys(theme.variants.size);
 const colors = Object.keys(theme.variants.color);

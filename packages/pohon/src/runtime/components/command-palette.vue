@@ -186,6 +186,13 @@ export interface PCommandPaletteProps<G extends PCommandPaletteGroup<T> = PComma
    * @defaultValue false
    */
   preserveGroupOrder?: boolean;
+  /**
+   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+   * Useful when indexing large datasets where fuzzy search becomes the bottleneck — the input stays responsive while Fuse and the result pipeline only re-run after typing settles.
+   * Set to `0` (the default) to disable.
+   * @defaultValue 0
+   */
+  searchDelay?: number;
   class?: any;
   pohon?: CommandPalette['slots'];
 }
@@ -216,9 +223,8 @@ export type PCommandPaletteSlots<T extends PCommandPaletteItem = PCommandPalette
 </script>
 
 <script setup lang="ts" generic="G extends PCommandPaletteGroup<T>, T extends PCommandPaletteItem">
-import { useAppConfig } from '#imports';
 import { isBoolean, isFunction, isObjectType, isString } from '@vinicunca/perkakas';
-import { createReusableTemplate, reactivePick, refThrottled } from '@vueuse/core';
+import { createReusableTemplate, reactivePick, refDebounced, refThrottled } from '@vueuse/core';
 import { useFuse } from '@vueuse/integrations/useFuse';
 import {
   AListboxContent,
@@ -233,6 +239,7 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { computed, ref, toRef, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { getProp, omit } from '../utils';
@@ -262,6 +269,7 @@ const props = withDefaults(
     preserveGroupOrder: false,
     virtualize: false,
     highlightOnHover: true,
+    searchDelay: 0,
   },
 );
 const emits = defineEmits<PCommandPaletteEmits<T>>();
@@ -357,7 +365,12 @@ const items = computed(() => groups.value?.filter((group) => {
   return true;
 })?.flatMap((group) => group.items?.map((item) => ({ ...item, group: group.id })) || []) || []);
 
-const { results: fuseResults } = useFuse<typeof items.value[number]>(searchTerm, items, fuse);
+// Opt-in debounce for the value piped into Fuse. Default `0` short-circuits inside `refDebounced`
+// so generic uses (menus, pickers) stay effectively instant, while large consumers (e.g. ContentSearch)
+// can opt in to avoid running fuzzy search on every keystroke.
+const fuseSearchTerm = refDebounced(searchTerm, () => props.searchDelay);
+
+const { results: fuseResults } = useFuse<typeof items.value[number]>(fuseSearchTerm, items, fuse);
 
 const throttledFuseResults = refThrottled(fuseResults, 16, true);
 
@@ -365,7 +378,7 @@ function processGroupItems(group: G, items: Array<T & { matches?: FuseResult<T>[
   let processedItems = items;
 
   if (group?.postFilter && isFunction(group.postFilter)) {
-    processedItems = group.postFilter(searchTerm.value, processedItems);
+    processedItems = group.postFilter(fuseSearchTerm.value, processedItems);
   }
 
   return {
@@ -373,8 +386,8 @@ function processGroupItems(group: G, items: Array<T & { matches?: FuseResult<T>[
     items: processedItems.slice(0, fuse.value.resultLimit).map((item) => {
       return {
         ...item,
-        labelHtml: highlight<T>(item, searchTerm.value, props.labelKey),
-        suffixHtml: highlight<T>(item, searchTerm.value, undefined, [props.labelKey]),
+        labelHtml: highlight<T>(item, fuseSearchTerm.value, props.labelKey),
+        suffixHtml: highlight<T>(item, fuseSearchTerm.value, undefined, [props.labelKey]),
       };
     }),
   };

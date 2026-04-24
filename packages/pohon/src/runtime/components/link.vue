@@ -106,7 +106,6 @@ interface NuxtLinkDefaultSlotProps {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig, useNuxtApp, useRoute } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitiveSlot, useForwardProps } from 'akar';
@@ -114,6 +113,7 @@ import { defu } from 'defu';
 import { isEqual } from 'ohash/utils';
 import { hasProtocol } from 'ufo';
 import { computed } from 'vue';
+import { useAppConfig, useNuxtApp, useRoute } from '#imports';
 import { mergeClasses } from '../utils';
 import { isPartiallyEqual } from '../utils/link';
 import { uv } from '../utils/uv';

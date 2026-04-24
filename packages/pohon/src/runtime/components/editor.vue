@@ -86,7 +86,6 @@ export interface PEditorSlots<H extends EditorCustomHandlers = EditorCustomHandl
 </script>
 
 <script setup lang="ts" generic="T extends Content, H extends EditorCustomHandlers">
-import { useAppConfig } from '#imports';
 import { mergeAttributes } from '@tiptap/core';
 import Code from '@tiptap/extension-code';
 import HorizontalRule from '@tiptap/extension-horizontal-rule';
@@ -101,6 +100,7 @@ import { reactiveOmit } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, provide, useAttrs, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { createHandlers } from '../utils/editor';
 import { uv } from '../utils/uv';

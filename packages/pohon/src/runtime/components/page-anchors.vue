@@ -39,9 +39,9 @@ export interface PPageAnchorsSlots<T extends PPageAnchor = PPageAnchor> {
 </script>
 
 <script setup lang="ts" generic="T extends PPageAnchor">
-import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { pickLinkProps } from '../utils/link';
 import { uv } from '../utils/uv';

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/progress';
 import { onMounted, reactive, ref } from 'vue';
+import theme from '#build/pohon/progress';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

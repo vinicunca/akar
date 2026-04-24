@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Українська',
   code: 'uk',
   messages: {
     alert: {
-      close: 'Закрити'
+      close: 'Закрити',
     },
     authForm: {
       hidePassword: 'Приховати пароль',
       showPassword: 'Показати пароль',
-      submit: 'Продовжити'
+      submit: 'Продовжити',
     },
     banner: {
-      close: 'Закрити'
+      close: 'Закрити',
     },
     calendar: {
       nextMonth: 'Наступний місяць',
       nextYear: 'Наступний рік',
       prevMonth: 'Попередній місяць',
-      prevYear: 'Попередній рік'
+      prevYear: 'Попередній рік',
     },
     carousel: {
       dots: 'Виберіть слайд для відображення',
       goto: 'Перейти до {slide}',
       next: 'Далі',
-      prev: 'Назад'
+      prev: 'Назад',
     },
     chatPrompt: {
-      placeholder: 'Введіть ваше повідомлення тут…'
+      placeholder: 'Введіть ваше повідомлення тут…',
     },
     chatPromptSubmit: {
-      label: 'Відправити'
+      label: 'Відправити',
     },
     chatReasoning: {
       thinking: 'Думає…',
       thought: 'Подумав',
-      thoughtFor: 'Думав {duration}'
+      thoughtFor: 'Думав {duration}',
     },
     colorMode: {
       dark: 'Темна',
       light: 'Світла',
       switchToDark: 'Перейти до темного режиму',
       switchToLight: 'Перейти до світлого режиму',
-      system: 'Системна'
+      system: 'Системна',
     },
     commandPalette: {
       back: 'Назад',
       close: 'Закрити',
       noData: 'Немає даних',
       noMatch: 'Збігів не знайдено',
-      placeholder: 'Введіть команду або шукайте…'
+      placeholder: 'Введіть команду або шукайте…',
     },
     contentSearch: {
       links: 'Посилання',
-      theme: 'Тема'
+      theme: 'Тема',
     },
     contentSearchButton: {
-      label: 'Пошук…'
+      label: 'Пошук…',
     },
     contentToc: {
-      title: 'На цій сторінці'
+      title: 'На цій сторінці',
     },
     dropdownMenu: {
       noMatch: 'Збігів не знайдено',
-      search: 'Пошук…'
+      search: 'Пошук…',
     },
     dashboardSearch: {
-      theme: 'Тема'
+      theme: 'Тема',
     },
     dashboardSearchButton: {
-      label: 'Пошук…'
+      label: 'Пошук…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Згорнути бічну панель',
-      expand: 'Розгорнути бічну панель'
+      expand: 'Розгорнути бічну панель',
     },
     dashboardSidebarToggle: {
       close: 'Закрити бічну панель',
-      open: 'Відкрити бічну панель'
+      open: 'Відкрити бічну панель',
     },
     error: {
-      clear: 'Повернутися на головну'
+      clear: 'Повернутися на головну',
     },
     fileUpload: {
-      removeFile: 'Видалити {filename}'
+      removeFile: 'Видалити {filename}',
     },
     header: {
       close: 'Закрити меню',
-      open: 'Відкрити меню'
+      open: 'Відкрити меню',
     },
     inputMenu: {
       create: 'Створити "{label}"',
       noData: 'Немає даних',
-      noMatch: 'Збігів не знайдено'
+      noMatch: 'Збігів не знайдено',
     },
     inputNumber: {
       decrement: 'Зменшити',
-      increment: 'Збільшити'
+      increment: 'Збільшити',
+    },
+    listbox: {
+      noData: 'Немає даних',
+      noMatch: 'Збігів не знайдено',
+      search: 'Пошук…',
     },
     modal: {
-      close: 'Закрити'
+      close: 'Закрити',
     },
     pricingTable: {
-      caption: 'Порівняння планів цін'
+      caption: 'Порівняння планів цін',
     },
     prose: {
       codeCollapse: {
         closeText: 'Згорнути',
         name: 'код',
-        openText: 'Розгорнути'
+        openText: 'Розгорнути',
       },
       collapsible: {
         closeText: 'Сховати',
         name: 'властивості',
-        openText: 'Показати'
+        openText: 'Показати',
       },
       pre: {
-        copy: 'Копіювати код у буфер обміну'
+        copy: 'Копіювати код у буфер обміну',
       },
       prompt: {
         copy: 'Копіювати запит',
-        openIn: 'Відкрити у {name}'
-      }
+        openIn: 'Відкрити у {name}',
+      },
     },
     sidebar: {
       close: 'Закрити',
-      toggle: 'Перемикнути'
+      toggle: 'Перемикнути',
     },
     selectMenu: {
       create: 'Створити "{label}"',
       noData: 'Немає даних',
       noMatch: 'Збігів не знайдено',
-      search: 'Пошук…'
+      search: 'Пошук…',
     },
     slideover: {
-      close: 'Закрити'
+      close: 'Закрити',
     },
     table: {
-      noData: 'Немає даних'
+      noData: 'Немає даних',
     },
     toast: {
-      close: 'Закрити'
-    }
-  }
-})
+      close: 'Закрити',
+    },
+  },
+});

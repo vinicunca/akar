@@ -68,12 +68,12 @@ export interface PPopoverSlots<M extends PopoverMode = PopoverMode> {
 </script>
 
 <script setup lang="ts" generic="M extends PopoverMode">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
 import { AHoverCard, APopover } from 'akar/namespaced';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { FieldGroupReset } from '../composables/use-field-group';
 import { usePortal } from '../composables/use-portal';

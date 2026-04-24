@@ -13,9 +13,9 @@ export interface ProseCodeIconProps {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { defu } from 'defu';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import PIcon from '../icon.vue';
 
 const props = defineProps<ProseCodeIconProps>();

@@ -1,6 +1,6 @@
 import type { ComputedRef, MaybeRefOrGetter } from 'vue';
-import { useAppConfig } from '#imports';
 import { computed, toValue } from 'vue';
+import { useAppConfig } from '#imports';
 import { getProp } from '../utils';
 
 /**

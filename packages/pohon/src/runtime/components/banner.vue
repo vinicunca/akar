@@ -65,10 +65,10 @@ export interface PBannerEmits {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig, useHead } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed, onMounted, ref, useId } from 'vue';
+import { useAppConfig, useHead } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';

@@ -28,8 +28,8 @@ export interface PEditorEmojiMenuProps<T extends PEditorEmojiMenuItem = PEditorE
 </script>
 
 <script setup lang="ts" generic="T extends PEditorEmojiMenuItem">
-import { useAppConfig } from '#imports';
 import { computed, h, nextTick, onBeforeUnmount, onMounted, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useEditorMenu } from '../composables/use-editor-menu';
 import { uv } from '../utils/uv';
 

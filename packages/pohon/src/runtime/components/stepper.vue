@@ -78,7 +78,6 @@ export type PStepperSlots<T extends PStepperItem = PStepperItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends PStepperItem">
-import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
@@ -92,6 +91,7 @@ import {
   useForwardProps,
 } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';

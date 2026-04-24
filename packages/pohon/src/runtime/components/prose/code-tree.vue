@@ -49,10 +49,10 @@ export interface ProseCodeTreeSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
 import { ATreeItem, ATreeRoot } from 'akar';
 import { computed, onBeforeUpdate, ref, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';

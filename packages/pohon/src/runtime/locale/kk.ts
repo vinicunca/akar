@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Қазақша',
   code: 'kk',
   messages: {
     alert: {
-      close: 'Жабу'
+      close: 'Жабу',
     },
     authForm: {
       hidePassword: 'Құпия сөзді жасыру',
       showPassword: 'Құпия сөзді көрсету',
-      submit: 'Жалғастыру'
+      submit: 'Жалғастыру',
     },
     banner: {
-      close: 'Жабу'
+      close: 'Жабу',
     },
     calendar: {
       nextMonth: 'Келесі ай',
       nextYear: 'Келесі жыл',
       prevMonth: 'Алдыңғы ай',
-      prevYear: 'Алдыңғы жыл'
+      prevYear: 'Алдыңғы жыл',
     },
     carousel: {
       dots: 'Көрсету үшін слайдты таңдаңыз',
       goto: '{slide} слайдқа өту',
       next: 'Келесі',
-      prev: 'Алдыңғы'
+      prev: 'Алдыңғы',
     },
     chatPrompt: {
-      placeholder: 'Хабар енгізіңіз…'
+      placeholder: 'Хабар енгізіңіз…',
     },
     chatPromptSubmit: {
-      label: 'Жіберу'
+      label: 'Жіберу',
     },
     chatReasoning: {
       thinking: 'Ойлануда…',
       thought: 'Ойланды',
-      thoughtFor: '{duration} ойланды'
+      thoughtFor: '{duration} ойланды',
     },
     colorMode: {
       dark: 'Қараңғы',
       light: 'Ашық',
       switchToDark: 'Қараңғы режимге ауысу',
       switchToLight: 'Ашық режимге ауысу',
-      system: 'Жүйе'
+      system: 'Жүйе',
     },
     commandPalette: {
       back: 'Артқа',
       close: 'Жабу',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      placeholder: 'Команда енгізіңіз немесе іздеңіз…'
+      placeholder: 'Команда енгізіңіз немесе іздеңіз…',
     },
     contentSearch: {
       links: 'Сілтемелер',
-      theme: 'Тақырып'
+      theme: 'Тақырып',
     },
     contentSearchButton: {
-      label: 'Іздеу'
+      label: 'Іздеу',
     },
     contentToc: {
-      title: 'Мазмұны'
+      title: 'Мазмұны',
     },
     dropdownMenu: {
       noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Іздеу…'
+      search: 'Іздеу…',
     },
     dashboardSearch: {
-      theme: 'Тақырып'
+      theme: 'Тақырып',
     },
     dashboardSearchButton: {
-      label: 'Іздеу'
+      label: 'Іздеу',
     },
     dashboardSidebarCollapse: {
       collapse: 'Жию',
-      expand: 'Кеңейту'
+      expand: 'Кеңейту',
     },
     dashboardSidebarToggle: {
       close: 'Жабу',
-      open: 'Ашу'
+      open: 'Ашу',
     },
     error: {
-      clear: 'Тазалау'
+      clear: 'Тазалау',
     },
     fileUpload: {
-      removeFile: '{filename} жою'
+      removeFile: '{filename} жою',
     },
     header: {
       close: 'Жабу',
-      open: 'Ашу'
+      open: 'Ашу',
     },
     inputMenu: {
       create: '"{label}" жасау',
       noData: 'Деректер жоқ',
-      noMatch: 'Сәйкес келетін деректер жоқ'
+      noMatch: 'Сәйкес келетін деректер жоқ',
     },
     inputNumber: {
       decrement: 'Азайту',
-      increment: 'Арттыру'
+      increment: 'Арттыру',
+    },
+    listbox: {
+      noData: 'Деректер жоқ',
+      noMatch: 'Сәйкес келетін деректер жоқ',
+      search: 'Іздеу…',
     },
     modal: {
-      close: 'Жабу'
+      close: 'Жабу',
     },
     pricingTable: {
-      caption: 'Баға кестесі'
+      caption: 'Баға кестесі',
     },
     prose: {
       codeCollapse: {
         closeText: 'Жиыру',
         name: 'код',
-        openText: 'Кеңейту'
+        openText: 'Кеңейту',
       },
       collapsible: {
         closeText: 'Жасыру',
         name: 'қасиеттер',
-        openText: 'Көрсету'
+        openText: 'Көрсету',
       },
       pre: {
-        copy: 'Кодты алмасу буферіне көшіру'
+        copy: 'Кодты алмасу буферіне көшіру',
       },
       prompt: {
         copy: 'Сұранысты көшіру',
-        openIn: '{name} ішінде ашу'
-      }
+        openIn: '{name} ішінде ашу',
+      },
     },
     sidebar: {
       close: 'Жабу',
-      toggle: 'Ауыстыру'
+      toggle: 'Ауыстыру',
     },
     selectMenu: {
       create: '"{label}" жасау',
       noData: 'Деректер жоқ',
       noMatch: 'Сәйкес келетін деректер жоқ',
-      search: 'Іздеу…'
+      search: 'Іздеу…',
     },
     slideover: {
-      close: 'Жабу'
+      close: 'Жабу',
     },
     table: {
-      noData: 'Деректер жоқ'
+      noData: 'Деректер жоқ',
     },
     toast: {
-      close: 'Жабу'
-    }
-  }
-})
+      close: 'Жабу',
+    },
+  },
+});

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { AToastAction, AToastDescription, AToastProvider, AToastRoot, AToastTitle, AToastViewport } from 'akar';
 import theme from '#build/pohon/toaster';
 import { computed, ref, useAppConfig, useToast } from '#imports';
-import { AToastAction, AToastDescription, AToastProvider, AToastRoot, AToastTitle, AToastViewport } from 'akar';
 
 const positions = Object.keys(theme.variants.position);
 

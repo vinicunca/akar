@@ -23,9 +23,9 @@ export interface PDashboardGroupSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig, useNuxtApp } from '#imports';
 import { APrimitive } from 'akar';
 import { computed, ref } from 'vue';
+import { useAppConfig, useNuxtApp } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { provideDashboardContext } from '../utils/dashboard';
 import { uv } from '../utils/uv';

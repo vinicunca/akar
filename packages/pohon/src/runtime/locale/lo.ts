@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'ລາວ',
   code: 'lo',
   messages: {
     alert: {
-      close: 'ປິດ'
+      close: 'ປິດ',
     },
     authForm: {
       hidePassword: 'ເຊື່ອງລະຫັດຜ່ານ',
       showPassword: 'ສະແດງລະຫັດຜ່ານ',
-      submit: 'ດຳເນີນການຕໍ່'
+      submit: 'ດຳເນີນການຕໍ່',
     },
     banner: {
-      close: 'ປິດ'
+      close: 'ປິດ',
     },
     calendar: {
       nextMonth: 'ເດືອນໜ້າ',
       nextYear: 'ປີໜ້າ',
       prevMonth: 'ເດືອນກ່ອນ',
-      prevYear: 'ປີກ່ອນ'
+      prevYear: 'ປີກ່ອນ',
     },
     carousel: {
       dots: 'ເລືອກສະໄລ້ທີ່ຈະສະແດງ',
       goto: 'ໄປທີ່ສະໄລ້ {slide}',
       next: 'ຕໍ່ໄປ',
-      prev: 'ກ່ອນໜ້າ'
+      prev: 'ກ່ອນໜ້າ',
     },
     chatPrompt: {
-      placeholder: 'ພິມຂໍ້ຄວາມຂອງທ່ານທີ່ນີ້...'
+      placeholder: 'ພິມຂໍ້ຄວາມຂອງທ່ານທີ່ນີ້…',
     },
     chatPromptSubmit: {
-      label: 'ສົ່ງຄຳສັ່ງ'
+      label: 'ສົ່ງຄຳສັ່ງ',
     },
     chatReasoning: {
       thinking: 'ກຳລັງຄິດ…',
       thought: 'ຄິດແລ້ວ',
-      thoughtFor: 'ຄິດເປັນເວລາ {duration}'
+      thoughtFor: 'ຄິດເປັນເວລາ {duration}',
     },
     colorMode: {
       dark: 'ມືດ',
       light: 'ແຈ້ງ',
       switchToDark: 'ປ່ຽນເປັນໂຫມດມືດ',
       switchToLight: 'ປ່ຽນເປັນໂຫມດແຈ້ງ',
-      system: 'ລະບົບ'
+      system: 'ລະບົບ',
     },
     commandPalette: {
       back: 'ກັບຄືນ',
       close: 'ປິດ',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      placeholder: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ...'
+      placeholder: 'ພິມຄຳສັ່ງ ຫຼື ຄົ້ນຫາ…',
     },
     contentSearch: {
       links: 'ລິ້ງ',
-      theme: 'ທີມ'
+      theme: 'ທີມ',
     },
     contentSearchButton: {
-      label: 'ຄົ້ນຫາ...'
+      label: 'ຄົ້ນຫາ…',
     },
     contentToc: {
-      title: 'ໃນໜ້ານີ້'
+      title: 'ໃນໜ້ານີ້',
     },
     dropdownMenu: {
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ...'
+      search: 'ຄົ້ນຫາ…',
     },
     dashboardSearch: {
-      theme: 'ທີມ'
+      theme: 'ທີມ',
     },
     dashboardSearchButton: {
-      label: 'ຄົ້ນຫາ...'
+      label: 'ຄົ້ນຫາ…',
     },
     dashboardSidebarCollapse: {
       collapse: 'ຫຍໍ້ແຖບດ້ານຂ້າງ',
-      expand: 'ຂະຫຍາຍແຖບດ້ານຂ້າງ'
+      expand: 'ຂະຫຍາຍແຖບດ້ານຂ້າງ',
     },
     dashboardSidebarToggle: {
       close: 'ປິດແຖບດ້ານຂ້າງ',
-      open: 'ເປີດແຖບດ້ານຂ້າງ'
+      open: 'ເປີດແຖບດ້ານຂ້າງ',
     },
     error: {
-      clear: 'ກັບໄປໜ້າຫຼັກ'
+      clear: 'ກັບໄປໜ້າຫຼັກ',
     },
     fileUpload: {
-      removeFile: 'ລົບ {filename}'
+      removeFile: 'ລົບ {filename}',
     },
     header: {
       close: 'ປິດເມນູ',
-      open: 'ເປີດເມນູ'
+      open: 'ເປີດເມນູ',
     },
     inputMenu: {
       create: 'ສ້າງ "{label}"',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
-      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ'
+      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
     },
     inputNumber: {
       decrement: 'ຫຼຸດລົງ',
-      increment: 'ເພີ່ມຂຶ້ນ'
+      increment: 'ເພີ່ມຂຶ້ນ',
+    },
+    listbox: {
+      noData: 'ບໍ່ມີຂໍ້ມູນ',
+      noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
+      search: 'ຄົ້ນຫາ…',
     },
     modal: {
-      close: 'ປິດ'
+      close: 'ປິດ',
     },
     pricingTable: {
-      caption: 'ປຽບທຽບແພັກເກັດລາຄາ'
+      caption: 'ປຽບທຽບແພັກເກັດລາຄາ',
     },
     prose: {
       codeCollapse: {
         closeText: 'ຫຍໍ້',
         name: 'ໂຄ້ດ',
-        openText: 'ຂະຫຍາຍ'
+        openText: 'ຂະຫຍາຍ',
       },
       collapsible: {
         closeText: 'ເຊື່ອງ',
         name: 'ຄຸນສົມບັດ',
-        openText: 'ສະແດງ'
+        openText: 'ສະແດງ',
       },
       pre: {
-        copy: 'ຄັດລອກໂຄ້ດ'
+        copy: 'ຄັດລອກໂຄ້ດ',
       },
       prompt: {
         copy: 'ຄັດລອກຄຳສັ່ງ',
-        openIn: 'ເປີດໃນ {name}'
-      }
+        openIn: 'ເປີດໃນ {name}',
+      },
     },
     sidebar: {
       close: 'ປິດ',
-      toggle: 'ສະລັບ'
+      toggle: 'ສະລັບ',
     },
     selectMenu: {
       create: 'ສ້າງ "{label}"',
       noData: 'ບໍ່ມີຂໍ້ມູນ',
       noMatch: 'ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັນ',
-      search: 'ຄົ້ນຫາ...'
+      search: 'ຄົ້ນຫາ…',
     },
     slideover: {
-      close: 'ປິດ'
+      close: 'ປິດ',
     },
     table: {
-      noData: 'ບໍ່ມີຂໍ້ມູນ'
+      noData: 'ບໍ່ມີຂໍ້ມູນ',
     },
     toast: {
-      close: 'ປິດ'
-    }
-  }
-})
+      close: 'ປິດ',
+    },
+  },
+});

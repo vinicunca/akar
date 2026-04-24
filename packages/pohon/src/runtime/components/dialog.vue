@@ -86,7 +86,6 @@ export interface PDialogSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
@@ -102,6 +101,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { FieldGroupReset } from '../composables/use-field-group';
 import { useLocale } from '../composables/use-locale';
@@ -207,6 +207,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.dialog
               :close="close"
             >
               <div
+                v-if="title || !!slots.title || description || !!slots.description"
                 data-slot="wrapper"
                 :class="pohon.wrapper({ class: pohonProp?.wrapper })"
               >

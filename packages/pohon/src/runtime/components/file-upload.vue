@@ -137,11 +137,11 @@ export interface PFileUploadSlots<M extends boolean = false> {
 </script>
 
 <script setup lang="ts" generic="M extends boolean = false">
-import { useAppConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive, AVisuallyHidden } from 'akar';
 import { computed, toRef, toRefs, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFileUpload } from '../composables/use-file-upload';
 import { useFormField } from '../composables/use-form-field';
@@ -190,7 +190,16 @@ const { isDragging, open, inputRef, dropzoneRef } = useFileUpload({
   dropzone: props.dropzone,
   onUpdate,
 });
-const { emitFormInput, emitFormChange, id, name, disabled, ariaAttrs } = useFormField<PFileUploadProps>(props);
+const {
+  emitFormInput,
+  emitFormChange,
+  id,
+  name,
+  disabled,
+  ariaAttrs,
+  color,
+  highlight,
+} = useFormField<PFileUploadProps>(props);
 
 const { variant: resolvedVariant } = useResolvedVariants('fileUpload', props, theme, ['variant']);
 const variant = computed(() => props.multiple ? 'area' : resolvedVariant.value);
@@ -209,13 +218,13 @@ const position = computed(() => {
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.fileUpload || {}) })({
   dropzone: props.dropzone,
   interactive: props.interactive,
-  color: props.color,
+  color: color.value,
   size: props.size,
   variant: variant.value,
   layout: layout.value,
   position: position.value,
   multiple: props.multiple,
-  highlight: props.highlight,
+  highlight: highlight.value,
   disabled: props.disabled,
 }));
 

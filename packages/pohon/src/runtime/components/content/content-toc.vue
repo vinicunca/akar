@@ -72,7 +72,6 @@ export interface PContentTocSlots<T extends PContentTocLink = PContentTocLink> {
 </script>
 
 <script setup lang="ts" generic="T extends PContentTocLink">
-import { useAppConfig, useNuxtApp, useRouter } from '#imports';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
   ACollapsibleContent,
@@ -81,6 +80,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, onUnmounted } from 'vue';
+import { useAppConfig, useNuxtApp, useRouter } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { useResolvedVariants } from '../../composables/use-resolved-variants';

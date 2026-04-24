@@ -44,7 +44,6 @@ export interface PSliderEmits {
 </script>
 
 <script setup lang="ts" generic="T extends number | number[]">
-import { useAppConfig } from '#imports';
 import { isNumber, isObjectType } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
@@ -55,6 +54,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';

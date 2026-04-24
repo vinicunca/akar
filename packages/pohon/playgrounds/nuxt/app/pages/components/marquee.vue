@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/marquee';
 import { ref } from 'vue';
+import theme from '#build/pohon/marquee';
 
 const orientations = Object.keys(theme.variants.orientation);
 

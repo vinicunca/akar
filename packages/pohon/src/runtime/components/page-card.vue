@@ -69,10 +69,10 @@ export interface PPageCardSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { pausableFilter, useMouseInElement } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, ref, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getSlotChildrenText } from '../utils';
 import { uv } from '../utils/uv';

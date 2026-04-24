@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import theme from '#build/pohon/switch';
 import { ASwitchRoot, ASwitchThumb } from 'akar';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/switch';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

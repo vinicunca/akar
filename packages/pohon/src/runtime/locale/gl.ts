@@ -100,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Diminuír',
       increment: 'Aumentar',
     },
+    listbox: {
+      noData: 'Sen datos',
+      noMatch: 'Non hai datos coincidentes',
+      search: 'Buscar…',
+    },
     modal: {
       close: 'Pechar',
     },

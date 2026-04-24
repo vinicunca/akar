@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/badge';
 import { reactive } from 'vue';
+import theme from '#build/pohon/badge';
 
 const colors = Object.keys(theme.variants.color);
 const variants = Object.keys(theme.variants.variant);

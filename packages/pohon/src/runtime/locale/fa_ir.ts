@@ -1,5 +1,5 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'فارسی',
@@ -7,143 +7,148 @@ export default defineLocale<PMessages>({
   dir: 'rtl',
   messages: {
     alert: {
-      close: 'بستن'
+      close: 'بستن',
     },
     authForm: {
       hidePassword: 'پنهان کردن رمز عبور',
       showPassword: 'نمایش رمز عبور',
-      submit: 'ادامه'
+      submit: 'ادامه',
     },
     banner: {
-      close: 'بستن'
+      close: 'بستن',
     },
     calendar: {
       nextMonth: 'ماه آینده',
       nextYear: 'سال آینده',
       prevMonth: 'ماه گذشته',
-      prevYear: 'سال گذشته'
+      prevYear: 'سال گذشته',
     },
     carousel: {
       dots: 'اسلاید مورد نظر برای نمایش را انتخاب کنید',
       goto: 'رفتن به اسلاید {slide}',
       next: 'بعدی',
-      prev: 'قبلی'
+      prev: 'قبلی',
     },
     chatPrompt: {
-      placeholder: 'اینجا پیام خود را بنویسید…'
+      placeholder: 'اینجا پیام خود را بنویسید…',
     },
     chatPromptSubmit: {
-      label: 'ارسال'
+      label: 'ارسال',
     },
     chatReasoning: {
       thinking: 'در حال فکر کردن…',
       thought: 'فکر کرد',
-      thoughtFor: 'به مدت {duration} فکر کرد'
+      thoughtFor: 'به مدت {duration} فکر کرد',
     },
     colorMode: {
       dark: 'تیره',
       light: 'روشن',
       switchToDark: 'تغییر به حالت تیره',
       switchToLight: 'تغییر به حالت روشن',
-      system: 'سیستم'
+      system: 'سیستم',
     },
     commandPalette: {
       back: 'بازگشت',
       close: 'بستن',
       noData: 'داده‌ای موجود نیست',
       noMatch: 'داده‌ای یافت نشد',
-      placeholder: 'یک دستور وارد کنید یا جستجو کنید…'
+      placeholder: 'یک دستور وارد کنید یا جستجو کنید…',
     },
     contentSearch: {
       links: 'پیوندها',
-      theme: 'تم'
+      theme: 'تم',
     },
     contentSearchButton: {
-      label: 'جستجو…'
+      label: 'جستجو…',
     },
     contentToc: {
-      title: 'در این صفحه'
+      title: 'در این صفحه',
     },
     dropdownMenu: {
       noMatch: 'داده‌ای یافت نشد',
-      search: 'جستجو…'
+      search: 'جستجو…',
     },
     dashboardSearch: {
-      theme: 'تم'
+      theme: 'تم',
     },
     dashboardSearchButton: {
-      label: 'جستجو…'
+      label: 'جستجو…',
     },
     dashboardSidebarCollapse: {
       collapse: 'جمع کردن نوار کناری',
-      expand: 'گسترش نوار کناری'
+      expand: 'گسترش نوار کناری',
     },
     dashboardSidebarToggle: {
       close: 'بستن نوار کناری',
-      open: 'باز کردن نوار کناری'
+      open: 'باز کردن نوار کناری',
     },
     error: {
-      clear: 'بازگشت به صفحه اصلی'
+      clear: 'بازگشت به صفحه اصلی',
     },
     fileUpload: {
-      removeFile: 'حذف {filename}'
+      removeFile: 'حذف {filename}',
     },
     header: {
       close: 'بستن منو',
-      open: 'باز کردن منو'
+      open: 'باز کردن منو',
     },
     inputMenu: {
       create: 'ایجاد "{label}"',
       noData: 'داده‌ای موجود نیست',
-      noMatch: 'داده‌ای یافت نشد'
+      noMatch: 'داده‌ای یافت نشد',
     },
     inputNumber: {
       decrement: 'کاهش',
-      increment: 'افزایش'
+      increment: 'افزایش',
+    },
+    listbox: {
+      noData: 'داده‌ای موجود نیست',
+      noMatch: 'داده‌ای یافت نشد',
+      search: 'جستجو…',
     },
     modal: {
-      close: 'بستن'
+      close: 'بستن',
     },
     pricingTable: {
-      caption: 'مقایسه طرح قیمت'
+      caption: 'مقایسه طرح قیمت',
     },
     prose: {
       codeCollapse: {
         closeText: 'جمع کردن',
         name: 'کد',
-        openText: 'گسترش'
+        openText: 'گسترش',
       },
       collapsible: {
         closeText: 'پنهان',
         name: 'ویژگی‌ها',
-        openText: 'نمایش'
+        openText: 'نمایش',
       },
       pre: {
-        copy: 'کپی کد در کلیپ‌بورد'
+        copy: 'کپی کد در کلیپ‌بورد',
       },
       prompt: {
         copy: 'کپی دستور',
-        openIn: 'باز کردن در {name}'
-      }
+        openIn: 'باز کردن در {name}',
+      },
     },
     sidebar: {
       close: 'بستن',
-      toggle: 'تغییر وضعیت'
+      toggle: 'تغییر وضعیت',
     },
     selectMenu: {
       create: 'ایجاد "{label}"',
       noData: 'داده‌ای موجود نیست',
       noMatch: 'داده‌ای یافت نشد',
-      search: 'جستجو…'
+      search: 'جستجو…',
     },
     slideover: {
-      close: 'بستن'
+      close: 'بستن',
     },
     table: {
-      noData: 'داده‌ای موجود نیست'
+      noData: 'داده‌ای موجود نیست',
     },
     toast: {
-      close: 'بستن'
-    }
-  }
-})
+      close: 'بستن',
+    },
+  },
+});

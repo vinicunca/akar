@@ -1,8 +1,8 @@
 import type { ContentNavigationItem } from '@nuxt/content';
 import type { PContentSearchFile, PContentSearchItem } from '../components/content/content-search.vue';
-import { useAppConfig } from '#imports';
 import { createSharedComposable } from '@vueuse/core';
 import { ref } from 'vue';
+import { useAppConfig } from '#imports';
 
 function _useContentSearch() {
   const open = ref(false);
@@ -36,15 +36,36 @@ function _useContentSearch() {
     files: Array<PContentSearchFile>,
     parent?: ContentNavigationItem,
   ): Array<PContentSearchItem> {
-    return children.flatMap((link) => {
-      if (link.children?.length) {
-        return mapNavigationItems(link.children, files, link);
+    // Build a path -> files index once per call to turn the per-leaf
+    // `files.filter(...)` scan into an O(1) lookup. Without this, a large
+    // navigation tree is O(leaves * files) on every re-map.
+    const filesByPath = new Map<string, Array<PContentSearchFile>>();
+    for (const file of files || []) {
+      const basePath = file.id.split('#')[0] || file.id;
+      let bucket = filesByPath.get(basePath);
+      if (!bucket) {
+        bucket = [];
+        filesByPath.set(basePath, bucket);
       }
+      bucket.push(file);
+    }
 
-      return files
-        ?.filter((file) => file.id === link.path || file.id.startsWith(`${link.path}#`))
-        ?.map((file) => mapFile(file, link, parent)) || [];
-    });
+    function visit(
+      nodes: Array<ContentNavigationItem>,
+      nodeParent?: ContentNavigationItem,
+    ): Array<PContentSearchItem> {
+      return nodes.flatMap((link) => {
+        if (link.children?.length) {
+          return visit(link.children, link);
+        }
+
+        const matched = link.path ? filesByPath.get(link.path) : undefined;
+        // eslint-disable-next-line sonar/no-nested-functions
+        return matched?.map((file) => mapFile(file, link, nodeParent)) || [];
+      });
+    }
+
+    return visit(children, parent);
   }
 
   /**

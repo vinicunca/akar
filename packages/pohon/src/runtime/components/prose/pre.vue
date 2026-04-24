@@ -25,9 +25,9 @@ export interface ProsePreSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { useClipboard } from '@vueuse/core';
 import { computed, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { uv } from '../../utils/uv';

@@ -1,43 +1,18 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { UseFuseOptions } from '@vueuse/integrations/useFuse';
 import type { VNode } from 'vue';
-import type { PButtonProps, PCommandPaletteGroup, PCommandPaletteItem, PCommandPaletteProps, PCommandPaletteSlots, PDialogProps, PIconProps, PInputProps, PLinkPropsKeys } from '../types';
+import type { PButtonProps, PCommandPaletteGroup, PCommandPaletteItem, PCommandPaletteProps, PCommandPaletteSlots, PDialogProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/dashboard-search';
 
 type DashboardSearch = ComponentConfig<typeof theme, AppConfig, 'dashboardSearch'>;
 
-export interface PDashboardSearchProps<T extends PCommandPaletteItem = PCommandPaletteItem> extends Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface PDashboardSearchProps<T extends PCommandPaletteItem = PCommandPaletteItem> extends Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<PCommandPaletteProps<PCommandPaletteGroup<T>, T>, 'icon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'groups' | 'fuse'> {
   /**
    * @defaultValue 'md'
    */
   size?: DashboardSearch['variants']['size'];
-  /**
-   * The icon displayed in the input.
-   * @defaultValue appConfig.pohon.icons.search
-   * @IconifyIcon
-   */
-  icon?: PIconProps['name'];
-  /**
-   * The placeholder text for the input.
-   * @defaultValue t('commandPalette.placeholder')
-   */
-  placeholder?: PInputProps['placeholder'];
-  /**
-   * Automatically focus the input when component is mounted.
-   * @defaultValue true
-   */
-  autofocus?: boolean;
-  /** When `true`, the loading icon will be displayed. */
-  loading?: boolean;
-  /**
-   * The icon when the `loading` prop is `true`.
-   * @defaultValue appConfig.pohon.icons.loading
-   * @IconifyIcon
-   */
-  loadingIcon?: PIconProps['name'];
   /**
    * Display a close button in the input (useful when inside a Modal for example).
    * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
@@ -46,22 +21,17 @@ export interface PDashboardSearchProps<T extends PCommandPaletteItem = PCommandP
    */
   close?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
   /**
-   * The icon displayed in the close button.
-   * @defaultValue appConfig.pohon.icons.close
-   * @IconifyIcon
-   */
-  closeIcon?: PIconProps['name'];
-  /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://pohon.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
    */
   shortcut?: string;
-  groups?: Array<PCommandPaletteGroup<T>>;
   /**
-   * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://pohon.nuxt.com/docs/components/command-palette).
-   * @defaultValue {}
+   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+   * Useful for large datasets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
+   * Set to `0` to disable.
+   * @defaultValue 100
    */
-  fuse?: UseFuseOptions<T>;
+  searchDelay?: number;
   /**
    * When `true`, the theme command will be added to the groups.
    * @defaultValue true
@@ -78,11 +48,11 @@ export type PDashboardSearchSlots = PCommandPaletteSlots<PCommandPaletteItem> & 
 </script>
 
 <script setup lang="ts">
-import { defineShortcuts, useAppConfig, useColorMode, useRuntimeHook } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, useTemplateRef } from 'vue';
+import { defineShortcuts, useAppConfig, useColorMode, useRuntimeHook } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { omit, transformPohon } from '../utils';
@@ -90,12 +60,16 @@ import { uv } from '../utils/uv';
 import PCommandPalette from './command-palette.vue';
 import PDialog from './dialog.vue';
 
-const props = withDefaults(defineProps<PDashboardSearchProps>(), {
-  shortcut: 'meta_k',
-  colorMode: true,
-  close: true,
-  fullscreen: false,
-});
+const props = withDefaults(
+  defineProps<PDashboardSearchProps>(),
+  {
+    shortcut: 'meta_k',
+    colorMode: true,
+    close: true,
+    fullscreen: false,
+    searchDelay: 100,
+  },
+);
 const slots = defineSlots<PDashboardSearchSlots>();
 
 const open = defineModel<boolean>('open', { default: false });
@@ -111,7 +85,7 @@ const colorMode = useColorMode();
 const appConfig = useAppConfig() as DashboardSearch['AppConfig'];
 const pohonProp = useComponentPohon('dashboardSearch', props);
 
-const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon'));
+const commandPaletteProps = useForwardProps(reactivePick(props, 'size', 'icon', 'placeholder', 'autofocus', 'loading', 'loadingIcon', 'close', 'closeIcon', 'searchDelay'));
 const modalProps = useForwardProps(reactivePick(props, 'overlay', 'transition', 'content', 'dismissible', 'fullscreen', 'modal', 'portal'));
 
 const getProxySlots = () => omit(slots, ['content']);

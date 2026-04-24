@@ -52,11 +52,11 @@ export interface PDashboardSidebarSlots {
 </script>
 
 <script setup lang="ts" generic="T extends DashboardSidebarMode">
-import { useAppConfig, useRoute, useRuntimeHook } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { defu } from 'defu';
 import { computed, ref, toRef, useId, watch } from 'vue';
+import { useAppConfig, useRoute, useRuntimeHook } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { useResizable } from '../composables/use-resizable';

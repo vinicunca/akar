@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PTreeItem } from 'pohon-ui';
-import theme from '#build/pohon/tree';
 import { ATreeItem, ATreeRoot } from 'akar';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/tree';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

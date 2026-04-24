@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Тоҷикӣ',
   code: 'tj',
   messages: {
     alert: {
-      close: 'Бастан'
+      close: 'Бастан',
     },
     authForm: {
       hidePassword: 'Пинҳон кардани парол',
       showPassword: 'Намоиши парол',
-      submit: 'Идома додан'
+      submit: 'Идома додан',
     },
     banner: {
-      close: 'Пӯшидан'
+      close: 'Пӯшидан',
     },
     calendar: {
       nextMonth: 'Моҳи оянда',
       nextYear: 'Соли оянда',
       prevMonth: 'Моҳи гузашта',
-      prevYear: 'Соли гузашта'
+      prevYear: 'Соли гузашта',
     },
     carousel: {
       dots: 'Слайдро барои намоиш интихоб кунед',
       goto: 'Ба слайди {slide} гузаред',
       next: 'Баъдӣ',
-      prev: 'Қаблӣ'
+      prev: 'Қаблӣ',
     },
     chatPrompt: {
-      placeholder: 'Пайём ворид кунед…'
+      placeholder: 'Пайём ворид кунед…',
     },
     chatPromptSubmit: {
-      label: 'Фиристодан'
+      label: 'Фиристодан',
     },
     chatReasoning: {
       thinking: 'Фикр мекунад…',
       thought: 'Фикр кард',
-      thoughtFor: '{duration} фикр кард'
+      thoughtFor: '{duration} фикр кард',
     },
     colorMode: {
       dark: 'Торик',
       light: 'Рӯшно',
       switchToDark: 'Гузариш ба ҳолати торик',
       switchToLight: 'Гузариш ба ҳолати рӯшно',
-      system: 'Система'
+      system: 'Система',
     },
     commandPalette: {
       back: 'Бозгашт',
       close: 'Бастан',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…'
+      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…',
     },
     contentSearch: {
       links: 'Пайвандҳо',
-      theme: 'Мавзӯъ'
+      theme: 'Мавзӯъ',
     },
     contentSearchButton: {
-      label: 'Ҷустуҷӯ'
+      label: 'Ҷустуҷӯ',
     },
     contentToc: {
-      title: 'Мундариҷа'
+      title: 'Мундариҷа',
     },
     dropdownMenu: {
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ…'
+      search: 'Ҷустуҷӯ…',
     },
     dashboardSearch: {
-      theme: 'Мавзӯъ'
+      theme: 'Мавзӯъ',
     },
     dashboardSearchButton: {
-      label: 'Ҷустуҷӯ'
+      label: 'Ҷустуҷӯ',
     },
     dashboardSidebarCollapse: {
       collapse: 'Кам кардан',
-      expand: 'Васеъ кардан'
+      expand: 'Васеъ кардан',
     },
     dashboardSidebarToggle: {
       close: 'Пӯшидан',
-      open: 'Кушодан'
+      open: 'Кушодан',
     },
     error: {
-      clear: 'Тоза кардан'
+      clear: 'Тоза кардан',
     },
     fileUpload: {
-      removeFile: '{filename}-ро хориҷ кунед'
+      removeFile: '{filename}-ро хориҷ кунед',
     },
     header: {
       close: 'Пӯшидан',
-      open: 'Кушодан'
+      open: 'Кушодан',
     },
     inputMenu: {
       create: '"{label}" созед',
       noData: 'Маълумот нест',
-      noMatch: 'Маълумоти мувофиқ ёфт нашуд'
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
     },
     inputNumber: {
       decrement: 'Кам кардан',
-      increment: 'Зиёд кардан'
+      increment: 'Зиёд кардан',
+    },
+    listbox: {
+      noData: 'Маълумот нест',
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      search: 'Ҷустуҷӯ…',
     },
     modal: {
-      close: 'Бастан'
+      close: 'Бастан',
     },
     pricingTable: {
-      caption: 'Ҷадвали нархҳо'
+      caption: 'Ҷадвали нархҳо',
     },
     prose: {
       codeCollapse: {
         closeText: 'Кам кардан',
         name: 'код',
-        openText: 'Васеъ кардан'
+        openText: 'Васеъ кардан',
       },
       collapsible: {
         closeText: 'Пинҳон кардан',
         name: 'хусусиятҳо',
-        openText: 'Намоиш додан'
+        openText: 'Намоиш додан',
       },
       pre: {
-        copy: 'Нусха бардоштан'
+        copy: 'Нусха бардоштан',
       },
       prompt: {
         copy: 'Нусхабардории дархост',
-        openIn: 'Кушодан дар {name}'
-      }
+        openIn: 'Кушодан дар {name}',
+      },
     },
     sidebar: {
       close: 'Бастан',
-      toggle: 'Иваз кардан'
+      toggle: 'Иваз кардан',
     },
     selectMenu: {
       create: '"{label}" созед',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ…'
+      search: 'Ҷустуҷӯ…',
     },
     slideover: {
-      close: 'Бастан'
+      close: 'Бастан',
     },
     table: {
-      noData: 'Маълумот нест'
+      noData: 'Маълумот нест',
     },
     toast: {
-      close: 'Бастан'
-    }
-  }
-})
+      close: 'Бастан',
+    },
+  },
+});

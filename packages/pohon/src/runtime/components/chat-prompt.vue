@@ -39,10 +39,10 @@ export interface PChatPromptSlots extends PTextareaSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { computed, toRef, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useIMEGuard } from '../composables/use-ime-guard';
 import { useLocale } from '../composables/use-locale';

@@ -238,7 +238,6 @@ export type PNavigationMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PNavigationMenuItem>, K extends SingleOrMultipleType = SingleOrMultipleType, O extends Orientation = Orientation">
-import { useAppConfig } from '#imports';
 import { isBoolean, isNumber, isObjectType, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
@@ -258,6 +257,7 @@ import {
 } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp, isArrayOfArray } from '../utils';
 import { pickLinkProps } from '../utils/link';

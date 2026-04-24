@@ -1,7 +1,7 @@
 import type { MaybeRefOrGetter } from 'vue';
 import type { PAvatarProps, PIconProps } from '../types';
-import { useAppConfig } from '#imports';
 import { computed, toValue } from 'vue';
+import { useAppConfig } from '#imports';
 
 export interface UseComponentIconsProps {
   /**

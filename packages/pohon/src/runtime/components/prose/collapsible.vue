@@ -38,8 +38,8 @@ export interface ProseCollapsibleSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { transformPohon } from '../../utils';

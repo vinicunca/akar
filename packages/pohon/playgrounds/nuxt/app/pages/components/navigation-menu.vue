@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PNavigationMenuItem } from 'pohon-ui';
-import theme from '#build/pohon/navigation-menu';
 import { reactive } from 'vue';
 import { ref } from 'vue';
+import theme from '#build/pohon/navigation-menu';
 
 const colors = Object.keys(theme.variants.color);
 const variants = Object.keys(theme.variants.variant);

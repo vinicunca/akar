@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Azərbaycanca',
   code: 'az',
   messages: {
     alert: {
-      close: 'Bağla'
+      close: 'Bağla',
     },
     authForm: {
       hidePassword: 'Şifrəni gizlət',
       showPassword: 'Şifrəni göstər',
-      submit: 'Davam et'
+      submit: 'Davam et',
     },
     banner: {
-      close: 'Bağla'
+      close: 'Bağla',
     },
     calendar: {
       nextMonth: 'Növbəti ay',
       nextYear: 'Növbəti il',
       prevMonth: 'Əvvəlki ay',
-      prevYear: 'Əvvəlki il'
+      prevYear: 'Əvvəlki il',
     },
     carousel: {
       dots: 'Göstərmək üçün slayd seçin',
       goto: 'Slayd {slide} keç',
       next: 'Növbəti',
-      prev: 'Əvvəlki'
+      prev: 'Əvvəlki',
     },
     chatPrompt: {
-      placeholder: 'Buraya mesajınızı yazın…'
+      placeholder: 'Buraya mesajınızı yazın…',
     },
     chatPromptSubmit: {
-      label: 'Göndər'
+      label: 'Göndər',
     },
     chatReasoning: {
       thinking: 'Düşünür…',
       thought: 'Düşündü',
-      thoughtFor: '{duration} düşündü'
+      thoughtFor: '{duration} düşündü',
     },
     colorMode: {
       dark: 'Qaranlıq',
       light: 'İşıqlı',
       switchToDark: 'Qaranlıq rejimə keç',
       switchToLight: 'İşıqlı rejimə keç',
-      system: 'Sistem'
+      system: 'Sistem',
     },
     commandPalette: {
       back: 'Geri',
       close: 'Bağla',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      placeholder: 'Əmr daxil edin və ya axtarın…'
+      placeholder: 'Əmr daxil edin və ya axtarın…',
     },
     contentSearch: {
       links: 'Bağlantılar',
-      theme: 'Tema'
+      theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Axtar…'
+      label: 'Axtar…',
     },
     contentToc: {
-      title: 'Bu səhifədə'
+      title: 'Bu səhifədə',
     },
     dropdownMenu: {
       noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar…'
+      search: 'Axtar…',
     },
     dashboardSearch: {
-      theme: 'Tema'
+      theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Axtar…'
+      label: 'Axtar…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Yan paneli daralt',
-      expand: 'Yan paneli genişlət'
+      expand: 'Yan paneli genişlət',
     },
     dashboardSidebarToggle: {
       close: 'Yan paneli bağla',
-      open: 'Yan paneli aç'
+      open: 'Yan paneli aç',
     },
     error: {
-      clear: 'Ana səhifəyə qayıt'
+      clear: 'Ana səhifəyə qayıt',
     },
     fileUpload: {
-      removeFile: '{filename} sil'
+      removeFile: '{filename} sil',
     },
     header: {
       close: 'Menyunu bağla',
-      open: 'Menyunu aç'
+      open: 'Menyunu aç',
     },
     inputMenu: {
       create: '"{label}" yarat',
       noData: 'Məlumat yoxdur',
-      noMatch: 'Uyğun məlumat tapılmadı'
+      noMatch: 'Uyğun məlumat tapılmadı',
     },
     inputNumber: {
       decrement: 'Azalt',
-      increment: 'Artır'
+      increment: 'Artır',
+    },
+    listbox: {
+      noData: 'Məlumat yoxdur',
+      noMatch: 'Uyğun məlumat tapılmadı',
+      search: 'Axtar…',
     },
     modal: {
-      close: 'Bağla'
+      close: 'Bağla',
     },
     pricingTable: {
-      caption: 'Qiymət planlarının müqayisəsi'
+      caption: 'Qiymət planlarının müqayisəsi',
     },
     prose: {
       codeCollapse: {
         closeText: 'Daralt',
         name: 'kod',
-        openText: 'Genişlət'
+        openText: 'Genişlət',
       },
       collapsible: {
         closeText: 'Gizlət',
         name: 'xüsusiyyətlər',
-        openText: 'Göstər'
+        openText: 'Göstər',
       },
       pre: {
-        copy: 'Kodu buferə kopyala'
+        copy: 'Kodu buferə kopyala',
       },
       prompt: {
         copy: 'Təlimatı kopyala',
-        openIn: '{name} ilə aç'
-      }
+        openIn: '{name} ilə aç',
+      },
     },
     sidebar: {
       close: 'Bağla',
-      toggle: 'Dəyişdir'
+      toggle: 'Dəyişdir',
     },
     selectMenu: {
       create: '"{label}" yarat',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar…'
+      search: 'Axtar…',
     },
     slideover: {
-      close: 'Bağla'
+      close: 'Bağla',
     },
     table: {
-      noData: 'Məlumat yoxdur'
+      noData: 'Məlumat yoxdur',
     },
     toast: {
-      close: 'Bağla'
-    }
-  }
-})
+      close: 'Bağla',
+    },
+  },
+});

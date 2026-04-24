@@ -142,12 +142,12 @@ export type PTreeSlots<
 </script>
 
 <script setup lang="ts" generic="T extends PTreeItem[], M extends boolean = false">
-import { useAppConfig } from '#imports';
 import { isBoolean, isFunction, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import { ATreeItem, ATreeRoot, ATreeVirtualizer, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';

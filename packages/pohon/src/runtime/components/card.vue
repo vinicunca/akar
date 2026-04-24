@@ -12,6 +12,8 @@ export interface PCardProps {
    * @defaultValue 'div'
    */
   as?: any;
+  title?: string;
+  description?: string;
   /**
    * @defaultValue 'outline'
    */
@@ -22,15 +24,17 @@ export interface PCardProps {
 
 export interface PCardSlots {
   header?: (props?: {}) => Array<VNode>;
+  title?: (props?: {}) => Array<VNode>;
+  description?: (props?: {}) => Array<VNode>;
   default?: (props?: {}) => Array<VNode>;
   footer?: (props?: {}) => Array<VNode>;
 }
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { uv } from '../utils/uv';
 
@@ -52,11 +56,31 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.card |
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
     <div
-      v-if="!!slots.header"
+      v-if="!!slots.header || (title || !!slots.title) || (description || !!slots.description)"
       data-slot="header"
       :class="pohon.header({ class: pohonProp?.header })"
     >
-      <slot name="header" />
+      <slot name="header">
+        <div
+          v-if="title || !!slots.title"
+          data-slot="title"
+          :class="pohon.title({ class: pohonProp?.title })"
+        >
+          <slot name="title">
+            {{ title }}
+          </slot>
+        </div>
+
+        <div
+          v-if="description || !!slots.description"
+          data-slot="description"
+          :class="pohon.description({ class: pohonProp?.description })"
+        >
+          <slot name="description">
+            {{ description }}
+          </slot>
+        </div>
+      </slot>
     </div>
 
     <div

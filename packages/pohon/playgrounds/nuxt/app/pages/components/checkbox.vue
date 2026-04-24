@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import theme from '#build/pohon/checkbox';
 import { ACheckboxIndicator, ACheckboxRoot } from 'akar';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/checkbox';
 
 const colors = Object.keys(theme.variants.color);
 const variants = Object.keys(theme.variants.variant);

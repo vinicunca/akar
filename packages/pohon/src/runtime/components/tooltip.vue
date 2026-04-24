@@ -51,12 +51,12 @@ export interface PTooltipSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { ATooltipArrow, ATooltipContent, ATooltipPortal, ATooltipRoot, ATooltipTrigger, injectATooltipProviderContext, useForwardPropsEmits } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { FieldGroupReset } from '../composables/use-field-group';
 import { usePortal } from '../composables/use-portal';

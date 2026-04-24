@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
 import theme from '#build/pohon/kbd';
 import { kbdKeysMap } from '#imports';
-import { reactive } from 'vue';
 
 const sizes = Object.keys(theme.variants.size);
 const variants = Object.keys(theme.variants.variant);

@@ -67,11 +67,11 @@ export interface PTextareaSlots {
 </script>
 
 <script setup lang="ts" generic="T extends TextareaValue, Mod extends ModelModifiers = ModelModifiers">
-import { useAppConfig } from '#imports';
 import { isNullish, isString } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed, nextTick, onMounted, useTemplateRef, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';

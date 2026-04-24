@@ -49,9 +49,9 @@ export type PPricingPlansSlots<T extends PPricingPlanProps = PPricingPlanProps> 
 </script>
 
 <script setup lang="ts" generic="T extends PPricingPlanProps">
-import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/form-field';
 import { reactive } from 'vue';
+import theme from '#build/pohon/form-field';
 
 const sizes = Object.keys(theme.variants.size);
 

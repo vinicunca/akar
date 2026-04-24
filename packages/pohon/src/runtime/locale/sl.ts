@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Slovenščina',
   code: 'sl',
   messages: {
     alert: {
-      close: 'Zapri'
+      close: 'Zapri',
     },
     authForm: {
       hidePassword: 'Skrij geslo',
       showPassword: 'Prikaži geslo',
-      submit: 'Nadaljuj'
+      submit: 'Nadaljuj',
     },
     banner: {
-      close: 'Zapri'
+      close: 'Zapri',
     },
     calendar: {
       nextMonth: 'Naslednji mesec',
       nextYear: 'Naslednje leto',
       prevMonth: 'Prejšnji mesec',
-      prevYear: 'Prejšnje leto'
+      prevYear: 'Prejšnje leto',
     },
     carousel: {
       dots: 'Izberite diapozitiv za prikaz',
       goto: 'Pojdi na {slide}',
       next: 'Naprej',
-      prev: 'Nazaj'
+      prev: 'Nazaj',
     },
     chatPrompt: {
-      placeholder: 'Tukaj napišite svoje sporočilo…'
+      placeholder: 'Tukaj napišite svoje sporočilo…',
     },
     chatPromptSubmit: {
-      label: 'Pošlji sporočilo'
+      label: 'Pošlji sporočilo',
     },
     chatReasoning: {
       thinking: 'Razmišlja…',
       thought: 'Razmislil',
-      thoughtFor: 'Razmišljal {duration}'
+      thoughtFor: 'Razmišljal {duration}',
     },
     colorMode: {
       dark: 'Temno',
       light: 'Svetlo',
       switchToDark: 'Preklopi na temni način',
       switchToLight: 'Preklopi na svetli način',
-      system: 'Sistem'
+      system: 'Sistem',
     },
     commandPalette: {
       back: 'Nazaj',
       close: 'Zapri',
       noData: 'Ni podatkov',
       noMatch: 'Ni ujemanj',
-      placeholder: 'Vpiši ukaz ali išči…'
+      placeholder: 'Vpiši ukaz ali išči…',
     },
     contentSearch: {
       links: 'Povezave',
-      theme: 'Tema'
+      theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Išči…'
+      label: 'Išči…',
     },
     contentToc: {
-      title: 'Na tej strani'
+      title: 'Na tej strani',
     },
     dropdownMenu: {
       noMatch: 'Ni ujemanj',
-      search: 'Išči…'
+      search: 'Išči…',
     },
     dashboardSearch: {
-      theme: 'Tema'
+      theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Išči…'
+      label: 'Išči…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Strni stransko vrstico',
-      expand: 'Razširi stransko vrstico'
+      expand: 'Razširi stransko vrstico',
     },
     dashboardSidebarToggle: {
       close: 'Zapri stransko vrstico',
-      open: 'Odpri stransko vrstico'
+      open: 'Odpri stransko vrstico',
     },
     error: {
-      clear: 'Nazaj na domačo stran'
+      clear: 'Nazaj na domačo stran',
     },
     fileUpload: {
-      removeFile: 'Odstrani {filename}'
+      removeFile: 'Odstrani {filename}',
     },
     header: {
       close: 'Zapri meni',
-      open: 'Odpri meni'
+      open: 'Odpri meni',
     },
     inputMenu: {
       create: 'Ustvari "{label}"',
       noData: 'Ni podatkov',
-      noMatch: 'Ni ujemanj'
+      noMatch: 'Ni ujemanj',
     },
     inputNumber: {
       decrement: 'Zmanjšaj',
-      increment: 'Povišaj'
+      increment: 'Povišaj',
+    },
+    listbox: {
+      noData: 'Ni podatkov',
+      noMatch: 'Ni ujemanj',
+      search: 'Išči…',
     },
     modal: {
-      close: 'Zapri'
+      close: 'Zapri',
     },
     pricingTable: {
-      caption: 'Primerjava cenovnih načrtov'
+      caption: 'Primerjava cenovnih načrtov',
     },
     prose: {
       codeCollapse: {
         closeText: 'Strni',
         name: 'koda',
-        openText: 'Razširi'
+        openText: 'Razširi',
       },
       collapsible: {
         closeText: 'Skrij',
         name: 'lastnosti',
-        openText: 'Prikaži'
+        openText: 'Prikaži',
       },
       pre: {
-        copy: 'Kopiraj kodo v odložišče'
+        copy: 'Kopiraj kodo v odložišče',
       },
       prompt: {
         copy: 'Kopiraj poziv',
-        openIn: 'Odpri v {name}'
-      }
+        openIn: 'Odpri v {name}',
+      },
     },
     sidebar: {
       close: 'Zapri',
-      toggle: 'Preklopi'
+      toggle: 'Preklopi',
     },
     selectMenu: {
       create: 'Ustvari "{label}"',
       noData: 'Ni podatkov',
       noMatch: 'Ni ujemanj',
-      search: 'Išči…'
+      search: 'Išči…',
     },
     slideover: {
-      close: 'Zapri'
+      close: 'Zapri',
     },
     table: {
-      noData: 'Ni podatkov'
+      noData: 'Ni podatkov',
     },
     toast: {
-      close: 'Zapri'
-    }
-  }
-})
+      close: 'Zapri',
+    },
+  },
+});

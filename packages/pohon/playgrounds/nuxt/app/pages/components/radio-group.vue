@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import theme from '#build/pohon/radio-group';
 import { ARadioGroupIndicator, ARadioGroupItem, ARadioGroupRoot } from 'akar';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/radio-group';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

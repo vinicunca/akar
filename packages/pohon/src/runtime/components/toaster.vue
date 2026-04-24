@@ -47,7 +47,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import {
   AToastPortal,
@@ -56,6 +55,7 @@ import {
   useForwardProps,
 } from 'akar';
 import { computed, provide, ref, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { usePortal } from '../composables/use-portal';
 import { toastMaxInjectionKey, useToast } from '../composables/use-toast';

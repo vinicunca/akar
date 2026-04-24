@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import theme from '#build/pohon/input-number';
 import { ANumberFieldDecrement, ANumberFieldIncrement, ANumberFieldInput, ANumberFieldRoot } from 'akar';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/input-number';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

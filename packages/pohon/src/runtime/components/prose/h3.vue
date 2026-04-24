@@ -18,9 +18,9 @@ export interface ProseH3Slots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig, useRuntimeConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { computed } from 'vue';
+import { useAppConfig, useRuntimeConfig } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../icon.vue';

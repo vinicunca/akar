@@ -64,9 +64,9 @@ export interface PChatReasoningSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger } from 'akar';
 import { computed, nextTick, onUnmounted, ref, useTemplateRef, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { useScrollShadow } from '../composables/use-scroll-shadow';

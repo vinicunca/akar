@@ -116,10 +116,10 @@ export type PAuthFormSlots<T extends object = object, F extends PAuthFormField =
 </script>
 
 <script setup lang="ts" generic="T extends FormSchema, F extends PAuthFormField">
-import { useAppConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed, reactive, ref, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { omit, pick } from '../utils';

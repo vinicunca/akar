@@ -50,12 +50,12 @@ export interface PContentSearchButtonProps extends Omit<PButtonProps, PLinkProps
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { isBoolean, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useContentSearch } from '../../composables/use-content-search';
 import { useLocale } from '../../composables/use-locale';

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useOverlay } from '#imports';
 import {
   AAlertDialogAction,
   AAlertDialogCancel,
@@ -20,6 +19,7 @@ import {
   ADialogTrigger,
 } from 'akar';
 import { defineAsyncComponent, ref } from 'vue';
+import { useOverlay } from '#imports';
 
 const LazyDialogExample = defineAsyncComponent(() => import('../../components/dialog-example.vue'));
 

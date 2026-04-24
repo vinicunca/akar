@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/content/content-navigation';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/content/content-navigation';
 
 const colors = Object.keys(theme.variants.color);
 const variants = Object.keys(theme.variants.variant);

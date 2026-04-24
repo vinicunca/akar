@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Ελληνικά',
   code: 'el',
   messages: {
     alert: {
-      close: 'Κλείσιμο'
+      close: 'Κλείσιμο',
     },
     authForm: {
       hidePassword: 'Απόκρυψη κωδικού',
       showPassword: 'Εμφάνιση κωδικού',
-      submit: 'Συνέχεια'
+      submit: 'Συνέχεια',
     },
     banner: {
-      close: 'Κλείσιμο'
+      close: 'Κλείσιμο',
     },
     calendar: {
       nextMonth: 'Επόμενος μήνας',
       nextYear: 'Επόμενο έτος',
       prevMonth: 'Προηγούμενος μήνας',
-      prevYear: 'Προηγούμενο έτος'
+      prevYear: 'Προηγούμενο έτος',
     },
     carousel: {
       dots: 'Επιλέξτε διαφάνεια για εμφάνιση',
       goto: 'Μετάβαση στη διαφάνεια {slide}',
       next: 'Επόμενο',
-      prev: 'Προηγούμενο'
+      prev: 'Προηγούμενο',
     },
     chatPrompt: {
-      placeholder: 'Εδώ γράψτε το μήνυμά σας…'
+      placeholder: 'Εδώ γράψτε το μήνυμά σας…',
     },
     chatPromptSubmit: {
-      label: 'Αποστολή'
+      label: 'Αποστολή',
     },
     chatReasoning: {
       thinking: 'Σκέφτεται…',
       thought: 'Σκέφτηκε',
-      thoughtFor: 'Σκέφτηκε για {duration}'
+      thoughtFor: 'Σκέφτηκε για {duration}',
     },
     colorMode: {
       dark: 'Σκοτεινό',
       light: 'Φωτεινό',
       switchToDark: 'Αλλαγή σε σκοτεινή λειτουργία',
       switchToLight: 'Αλλαγή σε φωτεινή λειτουργία',
-      system: 'Σύστημα'
+      system: 'Σύστημα',
     },
     commandPalette: {
       back: 'Πίσω',
       close: 'Κλείσιμο',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…'
+      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…',
     },
     contentSearch: {
       links: 'Σύνδεσμοι',
-      theme: 'Θέμα'
+      theme: 'Θέμα',
     },
     contentSearchButton: {
-      label: 'Αναζήτηση…'
+      label: 'Αναζήτηση…',
     },
     contentToc: {
-      title: 'Σε αυτή τη σελίδα'
+      title: 'Σε αυτή τη σελίδα',
     },
     dropdownMenu: {
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση…'
+      search: 'Αναζήτηση…',
     },
     dashboardSearch: {
-      theme: 'Θέμα'
+      theme: 'Θέμα',
     },
     dashboardSearchButton: {
-      label: 'Αναζήτηση…'
+      label: 'Αναζήτηση…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Σύμπτυξη πλευρικής μπάρας',
-      expand: 'Επέκταση πλευρικής μπάρας'
+      expand: 'Επέκταση πλευρικής μπάρας',
     },
     dashboardSidebarToggle: {
       close: 'Κλείσιμο πλευρικής μπάρας',
-      open: 'Άνοιγμα πλευρικής μπάρας'
+      open: 'Άνοιγμα πλευρικής μπάρας',
     },
     error: {
-      clear: 'Επιστροφή στην αρχική'
+      clear: 'Επιστροφή στην αρχική',
     },
     fileUpload: {
-      removeFile: 'Αφαίρεση {filename}'
+      removeFile: 'Αφαίρεση {filename}',
     },
     header: {
       close: 'Κλείσιμο μενού',
-      open: 'Άνοιγμα μενού'
+      open: 'Άνοιγμα μενού',
     },
     inputMenu: {
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',
-      noMatch: 'Δεν βρέθηκαν δεδομένα'
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
     },
     inputNumber: {
       decrement: 'Μείωση',
-      increment: 'Αύξηση'
+      increment: 'Αύξηση',
+    },
+    listbox: {
+      noData: 'Δεν υπάρχουν δεδομένα',
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…',
     },
     modal: {
-      close: 'Κλείσιμο'
+      close: 'Κλείσιμο',
     },
     pricingTable: {
-      caption: 'Σύγκριση προγραμμάτων τιμολόγησης'
+      caption: 'Σύγκριση προγραμμάτων τιμολόγησης',
     },
     prose: {
       codeCollapse: {
         closeText: 'Σύμπτυξη',
         name: 'κώδικας',
-        openText: 'Επέκταση'
+        openText: 'Επέκταση',
       },
       collapsible: {
         closeText: 'Απόκρυψη',
         name: 'ιδιότητες',
-        openText: 'Εμφάνιση'
+        openText: 'Εμφάνιση',
       },
       pre: {
-        copy: 'Αντιγραφή κώδικα στο πρόχειρο'
+        copy: 'Αντιγραφή κώδικα στο πρόχειρο',
       },
       prompt: {
         copy: 'Αντιγραφή εντολής',
-        openIn: 'Άνοιγμα σε {name}'
-      }
+        openIn: 'Άνοιγμα σε {name}',
+      },
     },
     sidebar: {
       close: 'Κλείσιμο',
-      toggle: 'Εναλλαγή'
+      toggle: 'Εναλλαγή',
     },
     selectMenu: {
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση…'
+      search: 'Αναζήτηση…',
     },
     slideover: {
-      close: 'Κλείσιμο'
+      close: 'Κλείσιμο',
     },
     table: {
-      noData: 'Δεν υπάρχουν δεδομένα'
+      noData: 'Δεν υπάρχουν δεδομένα',
     },
     toast: {
-      close: 'Κλείσιμο'
-    }
-  }
-})
+      close: 'Κλείσιμο',
+    },
+  },
+});

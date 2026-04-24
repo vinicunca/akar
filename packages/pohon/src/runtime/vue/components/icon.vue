@@ -6,10 +6,10 @@ type CustomizeFn = Exclude<PIconProps['customize'], boolean | null | undefined>;
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { Icon as IconifyIcon } from '@iconify/vue';
 import { isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 
 const props = defineProps<PIconProps>();
 

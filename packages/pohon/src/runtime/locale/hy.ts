@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Հայերեն',
   code: 'hy',
   messages: {
     alert: {
-      close: 'Փակել'
+      close: 'Փակել',
     },
     authForm: {
       hidePassword: 'Թաքցնել գաղտնաբառը',
       showPassword: 'Ցույց տալ գաղտնաբառը',
-      submit: 'Շարունակել'
+      submit: 'Շարունակել',
     },
     banner: {
-      close: 'Փակել'
+      close: 'Փակել',
     },
     calendar: {
       nextMonth: 'Հաջորդ ամիս',
       nextYear: 'Հաջորդ տարի',
       prevMonth: 'Նախորդ ամիս',
-      prevYear: 'Նախորդ տարի'
+      prevYear: 'Նախորդ տարի',
     },
     carousel: {
       dots: 'Ընտրեք ցուցադրելու սլայդը',
       goto: 'Անցնել {slide}-ին',
       next: 'Առաջ',
-      prev: 'Հետ'
+      prev: 'Հետ',
     },
     chatPrompt: {
-      placeholder: 'Շարունակել'
+      placeholder: 'Շարունակել',
     },
     chatPromptSubmit: {
-      label: 'Շարունակել'
+      label: 'Շարունակել',
     },
     chatReasoning: {
       thinking: 'Մտածում է…',
       thought: 'Մտածեց',
-      thoughtFor: 'Մտածեց {duration}'
+      thoughtFor: 'Մտածեց {duration}',
     },
     colorMode: {
       dark: 'Մուգ',
       light: 'Լուսավոր',
       switchToDark: 'Անցնել մուգ ռեժիմի',
       switchToLight: 'Անցնել լուսավոր ռեժիմի',
-      system: 'Համակարգային'
+      system: 'Համակարգային',
     },
     commandPalette: {
       back: 'Հետ',
       close: 'Փակել',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      placeholder: 'Մուտքագրեք հրաման կամ որոնեք…'
+      placeholder: 'Մուտքագրեք հրաման կամ որոնեք…',
     },
     contentSearch: {
       links: 'Հղումներ',
-      theme: 'Թեմա'
+      theme: 'Թեմա',
     },
     contentSearchButton: {
-      label: 'Որոնել…'
+      label: 'Որոնել…',
     },
     contentToc: {
-      title: 'Այս էջում'
+      title: 'Այս էջում',
     },
     dropdownMenu: {
       noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում…'
+      search: 'Որոնում…',
     },
     dashboardSearch: {
-      theme: 'Թեմա'
+      theme: 'Թեմա',
     },
     dashboardSearchButton: {
-      label: 'Որոնել…'
+      label: 'Որոնել…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Կոլապսել կողային վահանակը',
-      expand: 'Ընդլայնել կողային վահանակը'
+      expand: 'Ընդլայնել կողային վահանակը',
     },
     dashboardSidebarToggle: {
       close: 'Փակել կողային վահանակը',
-      open: 'Բացել կողային վահանակը'
+      open: 'Բացել կողային վահանակը',
     },
     error: {
-      clear: 'Վերադառնալ գլխավոր էջ'
+      clear: 'Վերադառնալ գլխավոր էջ',
     },
     fileUpload: {
-      removeFile: 'Ջնջել {filename}'
+      removeFile: 'Ջնջել {filename}',
     },
     header: {
       close: 'Փակել ընտրացանկը',
-      open: 'Բացել ընտրացանկը'
+      open: 'Բացել ընտրացանկը',
     },
     inputMenu: {
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',
-      noMatch: 'Համընկնումներ չեն գտնվել'
+      noMatch: 'Համընկնումներ չեն գտնվել',
     },
     inputNumber: {
       decrement: 'Պակասեցնել',
-      increment: 'Ավելացնել'
+      increment: 'Ավելացնել',
+    },
+    listbox: {
+      noData: 'Տվյալներ չկան',
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…',
     },
     modal: {
-      close: 'Փակել'
+      close: 'Փակել',
     },
     pricingTable: {
-      caption: 'Գնումների համեմատություն'
+      caption: 'Գնումների համեմատություն',
     },
     prose: {
       codeCollapse: {
         closeText: 'Կոլապսել',
         name: 'կոդ',
-        openText: 'Ընդլայնել'
+        openText: 'Ընդլայնել',
       },
       collapsible: {
         closeText: 'Թաքցնել',
         name: 'հատկություններ',
-        openText: 'Ցույց տալ'
+        openText: 'Ցույց տալ',
       },
       pre: {
-        copy: 'Պատճենել կոդը սեղմատախտակին'
+        copy: 'Պատճենել կոդը սեղմատախտակին',
       },
       prompt: {
         copy: 'Պատճենել հարցումը',
-        openIn: 'Բացել {name}-ում'
-      }
+        openIn: 'Բացել {name}-ում',
+      },
     },
     sidebar: {
       close: 'Փակել',
-      toggle: 'Փոխարկել'
+      toggle: 'Փոխարկել',
     },
     selectMenu: {
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում…'
+      search: 'Որոնում…',
     },
     slideover: {
-      close: 'Փակել'
+      close: 'Փակել',
     },
     table: {
-      noData: 'Տվյալներ չկան'
+      noData: 'Տվյալներ չկան',
     },
     toast: {
-      close: 'Փակել'
-    }
-  }
-})
+      close: 'Փակել',
+    },
+  },
+});

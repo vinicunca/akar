@@ -1,9 +1,9 @@
-import type * as pohon from '#build/pohon';
 import type { RuntimeOptions } from '@nuxt/icon';
 import type { colors } from 'unocss/preset-mini';
 import type { UnpluginOptions } from 'unplugin';
 import type { Options as AutoImportOptions } from 'unplugin-auto-import/types';
 import type { Options as ComponentsOptions } from 'unplugin-vue-components/types';
+import type * as pohon from '#build/pohon';
 import type { PohonModuleOptions } from './module';
 import type { UvConfig } from './runtime/types/uv';
 import type icons from './theme/icons';

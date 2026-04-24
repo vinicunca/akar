@@ -98,7 +98,7 @@ export interface PTableProps<T extends PTableData = PTableData> extends PTableOp
   meta?: TableMeta<T>;
   /**
    * Enable virtualization for large datasets.
-   * Note: when enabled, the divider between rows, sticky and row pinning properties are not supported.
+   * Note: row pinning is not supported when virtualization is enabled.
    * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
    * @defaultValue false
    */
@@ -121,7 +121,6 @@ export interface PTableProps<T extends PTableData = PTableData> extends PTableOp
   empty?: string;
   /**
    * Whether the table should have a sticky header or footer. True for both, 'header' for header only, 'footer' for footer only.
-   * Note: this prop is not supported when `virtualize` is true.
    * @defaultValue false
    */
   sticky?: boolean | 'header' | 'footer';
@@ -224,7 +223,6 @@ export type PTableSlots<T extends PTableData = PTableData> = {
 </script>
 
 <script setup lang="ts" generic="T extends PTableData">
-import { useAppConfig } from '#imports';
 import {
   FlexRender,
   getCoreRowModel,
@@ -239,6 +237,7 @@ import { createRef, createReusableTemplate, reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, toRef, useTemplateRef, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
@@ -287,11 +286,10 @@ function processColumns(columns: Array<PTableColumn<T>>): Array<PTableColumn<T>>
 }
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.table || {}) })({
-  sticky: props.virtualize ? false : props.sticky,
+  sticky: props.sticky,
   loading: props.loading,
   loadingColor: props.loadingColor,
   loadingAnimation: props.loadingAnimation,
-  virtualize: !!props.virtualize,
 }));
 
 const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate();
@@ -446,18 +444,15 @@ const virtualizer = !!props.virtualize && useVirtualizer({
   },
 });
 
-const renderedSize = computed(() => {
-  if (!virtualizer) {
+const virtualItems = computed(() => virtualizer ? virtualizer.value.getVirtualItems() : []);
+
+const virtualPaddingTop = computed(() => virtualItems.value[0]?.start ?? 0);
+
+const virtualPaddingBottom = computed(() => {
+  if (!virtualizer || !virtualItems.value.length) {
     return 0;
   }
-
-  const virtualItems = virtualizer.value.getVirtualItems();
-  if (!virtualItems?.length) {
-    return 0;
-  }
-
-  // Sum up the actual sizes of virtual items
-  return virtualItems.reduce((sum: number, item: any) => sum + item.size, 0);
+  return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0);
 });
 
 function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
@@ -690,18 +685,30 @@ defineExpose({
           />
 
           <template v-if="virtualizer">
+            <tr
+              v-if="virtualPaddingTop > 0"
+              :style="{ height: `${virtualPaddingTop}px` }"
+              aria-hidden="true"
+            >
+              <td :colspan="tableApi.getAllLeafColumns().length" />
+            </tr>
             <template
-              v-for="(virtualRow, index) in virtualizer.getVirtualItems()"
-              :key="centerRows[virtualRow.index]?.id"
+              v-for="virtualRow in virtualItems"
+              :key="centerRows[virtualRow.index]?.id ?? `virtual-${virtualRow.index}`"
             >
               <ReuseRowTemplate
+                v-if="centerRows[virtualRow.index]"
                 :row="centerRows[virtualRow.index]!"
-                :style="{
-                  height: `${virtualRow.size}px`,
-                  transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`,
-                }"
+                :style="{ height: `${virtualRow.size}px` }"
               />
             </template>
+            <tr
+              v-if="virtualPaddingBottom > 0"
+              :style="{ height: `${virtualPaddingBottom}px` }"
+              aria-hidden="true"
+            >
+              <td :colspan="tableApi.getAllLeafColumns().length" />
+            </tr>
           </template>
 
           <template v-else>
@@ -748,9 +755,6 @@ defineExpose({
         v-if="hasFooter"
         data-slot="tfoot"
         :class="pohon.tfoot({ class: [pohonProp?.tfoot] })"
-        :style="virtualizer ? {
-          transform: `translateY(${virtualizer.getTotalSize() - renderedSize}px)`,
-        } : undefined"
       >
         <tr
           data-slot="separator"
@@ -805,14 +809,6 @@ defineExpose({
     data-slot="root"
     :class="pohon.root({ class: [pohonProp?.root, props.class] })"
   >
-    <div
-      v-if="virtualizer"
-      :style="{
-        height: `${virtualizer.getTotalSize()}px`,
-      }"
-    >
-      <ReuseTableTemplate />
-    </div>
-    <ReuseTableTemplate v-else />
+    <ReuseTableTemplate />
   </APrimitive>
 </template>

@@ -88,7 +88,6 @@ export interface PFormSlots {
 </script>
 
 <script lang="ts" setup generic="S extends FormSchema, T extends boolean = true, N extends boolean = false">
-import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { useEventBus } from '@vueuse/core';
 import {
@@ -104,6 +103,7 @@ import {
   useId,
   useTemplateRef,
 } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import {
   formBusInjectionKey,

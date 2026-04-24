@@ -89,7 +89,6 @@ export interface PRadioGroupSlots<T extends Array<PRadioGroupItem> = Array<PRadi
 </script>
 
 <script setup lang="ts" generic="T extends PRadioGroupItem[], VK extends GetItemKeys<T> = 'value'">
-import { useAppConfig } from '#imports';
 import { isBigInt, isNumber, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
@@ -100,6 +99,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, useId } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { useResolvedVariants } from '../composables/use-resolved-variants';

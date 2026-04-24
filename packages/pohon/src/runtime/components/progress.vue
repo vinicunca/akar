@@ -53,10 +53,10 @@ export type PProgressSlots = {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { APrimitive, AProgressIndicator, AProgressRoot, useForwardPropsEmits } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';

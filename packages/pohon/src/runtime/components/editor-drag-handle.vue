@@ -46,12 +46,12 @@ export interface PEditorDragHandleEmits {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import DragHandle from '@tiptap/extension-drag-handle-vue-3';
 import { reactiveOmit, reactivePick } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, ref } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { transformPohon } from '../utils';
 import { buildFloatingUIMiddleware } from '../utils/editor';

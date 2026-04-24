@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Кыргызча',
   code: 'ky',
   messages: {
     alert: {
-      close: 'Жабуу'
+      close: 'Жабуу',
     },
     authForm: {
       hidePassword: 'Сырсөздү жашыруу',
       showPassword: 'Сырсөздү көрсөтүү',
-      submit: 'Улантуу'
+      submit: 'Улантуу',
     },
     banner: {
-      close: 'Жабуу'
+      close: 'Жабуу',
     },
     calendar: {
       nextMonth: 'Кийинки ай',
       nextYear: 'Кийинки жыл',
       prevMonth: 'Алдыңкы ай',
-      prevYear: 'Алдыңкы жыл'
+      prevYear: 'Алдыңкы жыл',
     },
     carousel: {
       dots: 'Көрсөтүү үчүн слайдды тандаңыз',
       goto: '{slide} слайдга өтүү',
       next: 'Кийинки',
-      prev: 'Алдыңкы'
+      prev: 'Алдыңкы',
     },
     chatPrompt: {
-      placeholder: 'Бул жерге билдирүүңүздү жазыңыз…'
+      placeholder: 'Бул жерге билдирүүңүздү жазыңыз…',
     },
     chatPromptSubmit: {
-      label: 'Билдирүү жөнөтүү'
+      label: 'Билдирүү жөнөтүү',
     },
     chatReasoning: {
       thinking: 'Ойлонуда…',
       thought: 'Ойлонду',
-      thoughtFor: '{duration} ойлонду'
+      thoughtFor: '{duration} ойлонду',
     },
     colorMode: {
       dark: 'Караңгы',
       light: 'Жарык',
       switchToDark: 'Караңгы режимге өтүү',
       switchToLight: 'Жарык режимге өтүү',
-      system: 'Система'
+      system: 'Система',
     },
     commandPalette: {
       back: 'Артка',
       close: 'Жабуу',
       noData: 'Маалымат жок',
       noMatch: 'Эч нерсе табылган жок',
-      placeholder: 'Буйрук киргизиңиз же издөө…'
+      placeholder: 'Буйрук киргизиңиз же издөө…',
     },
     contentSearch: {
       links: 'Шилтемелер',
-      theme: 'Тема'
+      theme: 'Тема',
     },
     contentSearchButton: {
-      label: 'Издөө…'
+      label: 'Издөө…',
     },
     contentToc: {
-      title: 'Бул бетте'
+      title: 'Бул бетте',
     },
     dropdownMenu: {
       noMatch: 'Сүйлөшкөн маалыматтар жок',
-      search: 'Издөө…'
+      search: 'Издөө…',
     },
     dashboardSearch: {
-      theme: 'Тема'
+      theme: 'Тема',
     },
     dashboardSearchButton: {
-      label: 'Издөө…'
+      label: 'Издөө…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Каптал тилкесин жыйноо',
-      expand: 'Каптал тилкесин кеңейтүү'
+      expand: 'Каптал тилкесин кеңейтүү',
     },
     dashboardSidebarToggle: {
       close: 'Каптал тилкесин жабуу',
-      open: 'Каптал тилкесин ачуу'
+      open: 'Каптал тилкесин ачуу',
     },
     error: {
-      clear: 'Башкы бетке кайтуу'
+      clear: 'Башкы бетке кайтуу',
     },
     fileUpload: {
-      removeFile: '{filename} өчүрүү'
+      removeFile: '{filename} өчүрүү',
     },
     header: {
       close: 'Менюну жабуу',
-      open: 'Менюну ачуу'
+      open: 'Менюну ачуу',
     },
     inputMenu: {
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',
-      noMatch: 'Эч нерсе табылган жок'
+      noMatch: 'Эч нерсе табылган жок',
     },
     inputNumber: {
       decrement: 'Азайтуу',
-      increment: 'Кошуу'
+      increment: 'Кошуу',
+    },
+    listbox: {
+      noData: 'Маалымат жок',
+      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      search: 'Издөө…',
     },
     modal: {
-      close: 'Жабуу'
+      close: 'Жабуу',
     },
     pricingTable: {
-      caption: 'Баалардын салыштыруу таблицасы'
+      caption: 'Баалардын салыштыруу таблицасы',
     },
     prose: {
       codeCollapse: {
         closeText: 'Жыйноо',
         name: 'код',
-        openText: 'Кеңейтүү'
+        openText: 'Кеңейтүү',
       },
       collapsible: {
         closeText: 'Жашыруу',
         name: 'касиеттер',
-        openText: 'Көрсөтүү'
+        openText: 'Көрсөтүү',
       },
       pre: {
-        copy: 'Кодду алмашуу буферине көчүрүү'
+        copy: 'Кодду алмашуу буферине көчүрүү',
       },
       prompt: {
         copy: 'Суроону көчүрүү',
-        openIn: '{name} ичинде ачуу'
-      }
+        openIn: '{name} ичинде ачуу',
+      },
     },
     sidebar: {
       close: 'Жабуу',
-      toggle: 'Которуу'
+      toggle: 'Которуу',
     },
     selectMenu: {
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',
       noMatch: 'Сүйлөшкөн маалыматтар жок',
-      search: 'Издөө…'
+      search: 'Издөө…',
     },
     slideover: {
-      close: 'Жабуу'
+      close: 'Жабуу',
     },
     table: {
-      noData: 'Маалымат жок'
+      noData: 'Маалымат жок',
     },
     toast: {
-      close: 'Жабуу'
-    }
-  }
-})
+      close: 'Жабуу',
+    },
+  },
+});

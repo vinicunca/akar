@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PAvatarProps } from 'pohon-ui';
-import { PAvatar } from '#components';
 import { computed } from 'vue';
+import { PAvatar } from '#components';
 
 interface Props {
   /**

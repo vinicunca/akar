@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import theme from '#build/pohon/calendar';
 import { CalendarDate } from '@internationalized/date';
 import { reactive, ref, shallowRef } from 'vue';
+import theme from '#build/pohon/calendar';
 
 const singleValue = shallowRef(new CalendarDate(2022, 1, 10));
 const multipleValue = shallowRef([new CalendarDate(2022, 1, 10), new CalendarDate(2022, 1, 20)]);

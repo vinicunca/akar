@@ -54,10 +54,10 @@ export interface PFormFieldSlots {
 
 <script setup lang="ts">
 import type { FormError, FormFieldInjectedOptions } from '../types/form';
-import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { ALabel, APrimitive } from 'akar';
 import { computed, inject, provide, ref, useId, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { formErrorsInjectionKey, formFieldInjectionKey, formInputsInjectionKey, inputIdInjectionKey } from '../composables/use-form-field';
 import { uv } from '../utils/uv';

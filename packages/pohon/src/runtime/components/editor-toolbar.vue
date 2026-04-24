@@ -96,12 +96,12 @@ export type PEditorToolbarSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PEditorToolbarItem>">
-import { useAppConfig } from '#imports';
 import { BubbleMenu, FloatingMenu } from '@tiptap/vue-3/menus';
 import { reactiveOmit } from '@vueuse/core';
 import { APrimitive, ASeparator, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, inject } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { isArrayOfArray, omit, pick } from '../utils';
 import { createHandlers } from '../utils/editor';

@@ -72,7 +72,6 @@ export interface PToastSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { isFunction, isObjectType } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import {
@@ -84,6 +83,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, onMounted, ref, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';

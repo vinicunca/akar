@@ -83,7 +83,6 @@ export interface PInputNumberSlots {
 </script>
 
 <script setup lang="ts" generic="T extends InputNumberValue = InputNumberValue, Mod extends Pick<ModelModifiers, 'optional'> = Pick<ModelModifiers, 'optional'>">
-import { useAppConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { reactivePick, useVModel } from '@vueuse/core';
 import {
@@ -94,6 +93,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, onMounted, toRef, useTemplateRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';
 import { useFormField } from '../composables/use-form-field';

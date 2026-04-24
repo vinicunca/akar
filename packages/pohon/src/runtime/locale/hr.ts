@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Hrvatski',
   code: 'hr',
   messages: {
     alert: {
-      close: 'Zatvori'
+      close: 'Zatvori',
     },
     authForm: {
       hidePassword: 'Sakrij lozinku',
       showPassword: 'Prikaži lozinku',
-      submit: 'Nastavi'
+      submit: 'Nastavi',
     },
     banner: {
-      close: 'Zatvori'
+      close: 'Zatvori',
     },
     calendar: {
       nextMonth: 'Sljedeći mjesec',
       nextYear: 'Sljedeća godina',
       prevMonth: 'Prethodni mjesec',
-      prevYear: 'Prethodna godina'
+      prevYear: 'Prethodna godina',
     },
     carousel: {
       dots: 'Odaberite slajd za prikaz',
       goto: 'Idi na slajd {slide}',
       next: 'Sljedeći',
-      prev: 'Prethodni'
+      prev: 'Prethodni',
     },
     chatPrompt: {
-      placeholder: 'Upišite svoju poruku ovdje…'
+      placeholder: 'Upišite svoju poruku ovdje…',
     },
     chatPromptSubmit: {
-      label: 'Pošalji upit'
+      label: 'Pošalji upit',
     },
     chatReasoning: {
       thinking: 'Razmišlja…',
       thought: 'Razmislio',
-      thoughtFor: 'Razmišljao {duration}'
+      thoughtFor: 'Razmišljao {duration}',
     },
     colorMode: {
       dark: 'Tamno',
       light: 'Svijetlo',
       switchToDark: 'Prebaci na tamni način rada',
       switchToLight: 'Prebaci na svijetli način rada',
-      system: 'Sustav'
+      system: 'Sustav',
     },
     commandPalette: {
       back: 'Natrag',
       close: 'Zatvori',
       noData: 'Nema podataka',
       noMatch: 'Nema odgovarajućih podataka',
-      placeholder: 'Upišite naredbu ili pretraživanje…'
+      placeholder: 'Upišite naredbu ili pretraživanje…',
     },
     contentSearch: {
       links: 'Poveznice',
-      theme: 'Tema'
+      theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Pretraživanje…'
+      label: 'Pretraživanje…',
     },
     contentToc: {
-      title: 'Na ovoj stranici'
+      title: 'Na ovoj stranici',
     },
     dropdownMenu: {
       noMatch: 'Nema odgovarajućih podataka',
-      search: 'Pretraživanje…'
+      search: 'Pretraživanje…',
     },
     dashboardSearch: {
-      theme: 'Tema'
+      theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Pretraživanje…'
+      label: 'Pretraživanje…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Smanji bočnu traku',
-      expand: 'Proširi bočnu traku'
+      expand: 'Proširi bočnu traku',
     },
     dashboardSidebarToggle: {
       close: 'Zatvori bočnu traku',
-      open: 'Otvori bočnu traku'
+      open: 'Otvori bočnu traku',
     },
     error: {
-      clear: 'Natrag na početnu'
+      clear: 'Natrag na početnu',
     },
     fileUpload: {
-      removeFile: 'Ukloni {filename}'
+      removeFile: 'Ukloni {filename}',
     },
     header: {
       close: 'Zatvori izbornik',
-      open: 'Otvori izbornik'
+      open: 'Otvori izbornik',
     },
     inputMenu: {
       create: 'Stvori "{label}"',
       noData: 'Nema podataka',
-      noMatch: 'Nema odgovarajućih podataka'
+      noMatch: 'Nema odgovarajućih podataka',
     },
     inputNumber: {
       decrement: 'Smanji',
-      increment: 'Povećaj'
+      increment: 'Povećaj',
+    },
+    listbox: {
+      noData: 'Nema podataka',
+      noMatch: 'Nema odgovarajućih podataka',
+      search: 'Pretraživanje…',
     },
     modal: {
-      close: 'Zatvori'
+      close: 'Zatvori',
     },
     pricingTable: {
-      caption: 'Usporedba cjenovnih planova'
+      caption: 'Usporedba cjenovnih planova',
     },
     prose: {
       codeCollapse: {
         closeText: 'Smanji',
         name: 'kod',
-        openText: 'Proširi'
+        openText: 'Proširi',
       },
       collapsible: {
         closeText: 'Sakrij',
         name: 'svojstva',
-        openText: 'Prikaži'
+        openText: 'Prikaži',
       },
       pre: {
-        copy: 'Kopiraj kod u međuspremnik'
+        copy: 'Kopiraj kod u međuspremnik',
       },
       prompt: {
         copy: 'Kopiraj prompt',
-        openIn: 'Otvori u {name}'
-      }
+        openIn: 'Otvori u {name}',
+      },
     },
     sidebar: {
       close: 'Zatvori',
-      toggle: 'Prebaci'
+      toggle: 'Prebaci',
     },
     selectMenu: {
       create: 'Stvori "{label}"',
       noData: 'Nema podataka',
       noMatch: 'Nema odgovarajućih podataka',
-      search: 'Pretraživanje…'
+      search: 'Pretraživanje…',
     },
     slideover: {
-      close: 'Zatvori'
+      close: 'Zatvori',
     },
     table: {
-      noData: 'Nema podataka'
+      noData: 'Nema podataka',
     },
     toast: {
-      close: 'Zatvori'
-    }
-  }
-})
+      close: 'Zatvori',
+    },
+  },
+});

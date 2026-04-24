@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import theme from '#build/pohon/button';
-import { BaseMatrix, BaseNavbar, PButton, PSelect } from '#components';
 import { sleep } from '@vinicunca/perkakas';
 import { reactive } from 'vue';
+import theme from '#build/pohon/button';
+import { BaseMatrix, BaseNavbar, PButton, PSelect } from '#components';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

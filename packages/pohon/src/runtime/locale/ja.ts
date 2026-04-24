@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: '日本語',
   code: 'ja',
   messages: {
     alert: {
-      close: '閉じる'
+      close: '閉じる',
     },
     authForm: {
       hidePassword: 'パスワードを隠す',
       showPassword: 'パスワードを表示',
-      submit: '続ける'
+      submit: '続ける',
     },
     banner: {
-      close: '閉じる'
+      close: '閉じる',
     },
     calendar: {
       nextMonth: '翌月',
       nextYear: '翌年',
       prevMonth: '前月',
-      prevYear: '前年'
+      prevYear: '前年',
     },
     carousel: {
       dots: '表示するスライドを選択',
       goto: 'スライド {slide} に移動',
       next: '次へ',
-      prev: '前へ'
+      prev: '前へ',
     },
     chatPrompt: {
-      placeholder: 'ここにメッセージを入力してください…'
+      placeholder: 'ここにメッセージを入力してください…',
     },
     chatPromptSubmit: {
-      label: '送信'
+      label: '送信',
     },
     chatReasoning: {
       thinking: '考えています…',
       thought: '考えました',
-      thoughtFor: '{duration}考えました'
+      thoughtFor: '{duration}考えました',
     },
     colorMode: {
       dark: 'ダーク',
       light: 'ライト',
       switchToDark: 'ダークモードに切り替え',
       switchToLight: 'ライトモードに切り替え',
-      system: 'システム'
+      system: 'システム',
     },
     commandPalette: {
       back: '戻る',
       close: '閉じる',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      placeholder: 'コマンドを入力するか検索…'
+      placeholder: 'コマンドを入力するか検索…',
     },
     contentSearch: {
       links: 'リンク',
-      theme: 'テーマ'
+      theme: 'テーマ',
     },
     contentSearchButton: {
-      label: '検索…'
+      label: '検索…',
     },
     contentToc: {
-      title: 'このページ内'
+      title: 'このページ内',
     },
     dropdownMenu: {
       noMatch: '一致するデータがありません',
-      search: '検索…'
+      search: '検索…',
     },
     dashboardSearch: {
-      theme: 'テーマ'
+      theme: 'テーマ',
     },
     dashboardSearchButton: {
-      label: '検索…'
+      label: '検索…',
     },
     dashboardSidebarCollapse: {
       collapse: 'サイドバーを折りたたむ',
-      expand: 'サイドバーを展開'
+      expand: 'サイドバーを展開',
     },
     dashboardSidebarToggle: {
       close: 'サイドバーを閉じる',
-      open: 'サイドバーを開く'
+      open: 'サイドバーを開く',
     },
     error: {
-      clear: 'ホームに戻る'
+      clear: 'ホームに戻る',
     },
     fileUpload: {
-      removeFile: '{filename}を削除'
+      removeFile: '{filename}を削除',
     },
     header: {
       close: 'メニューを閉じる',
-      open: 'メニューを開く'
+      open: 'メニューを開く',
     },
     inputMenu: {
       create: '"{label}"を作成',
       noData: 'データがありません',
-      noMatch: '一致するデータがありません'
+      noMatch: '一致するデータがありません',
     },
     inputNumber: {
       decrement: '減らす',
-      increment: '増やす'
+      increment: '増やす',
+    },
+    listbox: {
+      noData: 'データがありません',
+      noMatch: '一致するデータがありません',
+      search: '検索…',
     },
     modal: {
-      close: '閉じる'
+      close: '閉じる',
     },
     pricingTable: {
-      caption: '価格プランの比較'
+      caption: '価格プランの比較',
     },
     prose: {
       codeCollapse: {
         closeText: '折りたたむ',
         name: 'コード',
-        openText: '展開'
+        openText: '展開',
       },
       collapsible: {
         closeText: '非表示',
         name: 'プロパティ',
-        openText: '表示'
+        openText: '表示',
       },
       pre: {
-        copy: 'コードをクリップボードにコピー'
+        copy: 'コードをクリップボードにコピー',
       },
       prompt: {
         copy: 'プロンプトをコピー',
-        openIn: '{name}で開く'
-      }
+        openIn: '{name}で開く',
+      },
     },
     sidebar: {
       close: '閉じる',
-      toggle: '切り替え'
+      toggle: '切り替え',
     },
     selectMenu: {
       create: '"{label}"を作成',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      search: '検索…'
+      search: '検索…',
     },
     slideover: {
-      close: '閉じる'
+      close: '閉じる',
     },
     table: {
-      noData: 'データがありません'
+      noData: 'データがありません',
     },
     toast: {
-      close: '閉じる'
-    }
-  }
-})
+      close: '閉じる',
+    },
+  },
+});

@@ -22,8 +22,8 @@ export interface PDashboardPanelSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { computed, toRef, useId } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useResizable } from '../composables/use-resizable';
 import { useDashboard } from '../utils/dashboard';

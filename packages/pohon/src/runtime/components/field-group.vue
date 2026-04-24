@@ -31,9 +31,9 @@ export interface PFieldGroupSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed, provide } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { fieldGroupInjectionKey } from '../composables/use-field-group';
 import { uv } from '../utils/uv';

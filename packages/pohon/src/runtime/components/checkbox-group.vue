@@ -79,11 +79,11 @@ export interface PCheckboxGroupSlots<T extends Array<PCheckboxGroupItem> = Array
 </script>
 
 <script setup lang="ts" generic="T extends PCheckboxGroupItem[], VK extends GetItemKeys<T> = 'value'">
-import { useAppConfig } from '#imports';
 import { isNumber, isString } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { ACheckboxGroupRoot, useForwardProps, useForwardPropsEmits } from 'akar';
 import { computed, useId } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { getProp, omit } from '../utils';

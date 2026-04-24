@@ -75,12 +75,12 @@ export type ChatMessagesSlots = {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { useElementBounding, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core';
 import { APresence } from 'akar';
 import { defu } from 'defu';
 import { computed, nextTick, onMounted, ref, toRef, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';

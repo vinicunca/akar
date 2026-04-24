@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, defineShortcuts, extractShortcuts, ref, useFetch, useToast } from '#imports';
 import { createReusableTemplate } from '@vueuse/core';
+import { computed, defineShortcuts, extractShortcuts, ref, useFetch, useToast } from '#imports';
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate();
 const toast = useToast();

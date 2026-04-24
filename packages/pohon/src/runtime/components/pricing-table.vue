@@ -101,11 +101,11 @@ export type PPricingTableSlots<T extends PPricingTableTier = PPricingTableTier> 
 </script>
 
 <script setup lang="ts" generic="T extends PPricingTableTier">
-import { useAppConfig } from '#imports';
 import { isBoolean, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate } from '@vueuse/core';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';
@@ -152,170 +152,173 @@ const [DefineFeatureTemplate, ReuseFeatureTemplate] = createReusableTemplate<{ t
 
 <template>
   <DefineTierTemplate v-slot="{ tier }">
-    <slot
-      :name="(tier.id as keyof PPricingTableSlots<T>)"
-      :tier="(tier as T)"
+    <div
+      data-slot="tierWrapper"
+      :class="pohon.tierWrapper({ class: pohonProp?.tierWrapper })"
     >
       <slot
-        name="tier"
+        :name="(tier.id as keyof PPricingTableSlots<T>)"
         :tier="(tier as T)"
       >
-        <div
-          data-slot="tierTitleWrapper"
-          :class="pohon.tierTitleWrapper({ class: pohonProp?.tierTitleWrapper })"
+        <slot
+          name="tier"
+          :tier="(tier as T)"
         >
           <div
-            data-slot="tierTitle"
-            :class="pohon.tierTitle({ class: pohonProp?.tierTitle })"
+            data-slot="tierTitleWrapper"
+            :class="pohon.tierTitleWrapper({ class: pohonProp?.tierTitleWrapper })"
           >
-            <slot
-              :name="(`${tier.id}-title` as keyof PPricingTableSlots<T>)"
-              :tier="tier"
+            <div
+              data-slot="tierTitle"
+              :class="pohon.tierTitle({ class: pohonProp?.tierTitle })"
             >
               <slot
-                name="tier-title"
-                :tier="(tier as T)"
+                :name="(`${tier.id}-title` as keyof PPricingTableSlots<T>)"
+                :tier="tier"
               >
-                {{ tier.title }}
-              </slot>
-            </slot>
-          </div>
-
-          <slot
-            :name="(`${tier.id}-badge` as keyof PPricingTableSlots<T>)"
-            :tier="tier"
-          >
-            <slot
-              name="tier-badge"
-              :tier="(tier as T)"
-            >
-              <PBadge
-                v-if="tier.badge"
-                color="primary"
-                variant="subtle"
-                v-bind="isString(tier.badge) ? { label: tier.badge } : tier.badge"
-                data-slot="tierBadge"
-                :class="pohon.tierBadge({ class: pohonProp?.tierBadge })"
-              />
-            </slot>
-          </slot>
-        </div>
-
-        <div
-          v-if="tier.description || !!slots['tier-description'] || !!slots[(`${tier.id}-description` as keyof PPricingTableSlots<T>)]"
-          data-slot="tierDescription"
-          :class="pohon.tierDescription({ class: pohonProp?.tierDescription })"
-        >
-          <slot
-            :name="(`${tier.id}-description` as keyof PPricingTableSlots<T>)"
-            :tier="tier"
-          >
-            <slot
-              name="tier-description"
-              :tier="(tier as T)"
-            >
-              {{ tier.description }}
-            </slot>
-          </slot>
-        </div>
-
-        <div
-          v-if="tier.discount || tier.price || !!slots['tier-discount'] || !!slots[(`${tier.id}-discount` as keyof PPricingTableSlots<T>)] || !!slots['tier-price'] || !!slots[(`${tier.id}-price` as keyof PPricingTableSlots<T>)] || tier.billingCycle || tier.billingPeriod || !!slots['tier-billing'] || !!slots[(`${tier.id}-billing` as keyof PPricingTableSlots<T>)]"
-          data-slot="tierPriceWrapper"
-          :class="pohon.tierPriceWrapper({ class: pohonProp?.tierPriceWrapper })"
-        >
-          <div
-            v-if="(tier.discount && tier.price) || !!slots[(`${tier.id}-discount` as keyof PPricingTableSlots<T>)] || !!slots['tier-discount']"
-            data-slot="tierDiscount"
-            :class="pohon.tierDiscount({ class: pohonProp?.tierDiscount })"
-          >
-            <slot
-              :name="(`${tier.id}-discount` as keyof PPricingTableSlots<T>)"
-              :tier="tier"
-            >
-              <slot
-                name="tier-discount"
-                :tier="(tier as T)"
-              >
-                {{ tier.price }}
-              </slot>
-            </slot>
-          </div>
-
-          <div
-            v-if="(tier.discount || tier.price) || !!slots[(`${tier.id}-price` as keyof PPricingTableSlots<T>)] || !!slots['tier-price']"
-            data-slot="tierPrice"
-            :class="pohon.tierPrice({ class: pohonProp?.tierPrice })"
-          >
-            <slot
-              :name="(`${tier.id}-price` as keyof PPricingTableSlots<T>)"
-              :tier="tier"
-            >
-              <slot
-                name="tier-price"
-                :tier="(tier as T)"
-              >
-                {{ tier.discount || tier.price }}
-              </slot>
-            </slot>
-          </div>
-
-          <div
-            v-if="tier.billingCycle || tier.billingPeriod || !!slots[(`${tier.id}-billing` as keyof PPricingTableSlots<T>)] || !!slots['tier-billing']"
-            data-slot="tierBilling"
-            :class="pohon.tierBilling({ class: pohonProp?.tierBilling })"
-          >
-            <slot
-              :name="(`${tier.id}-billing` as keyof PPricingTableSlots<T>)"
-              :tier="tier"
-            >
-              <slot
-                name="tier-billing"
-                :tier="(tier as T)"
-              >
-                <span
-                  data-slot="tierBillingPeriod"
-                  :class="pohon.tierBillingPeriod({ class: pohonProp?.tierBillingPeriod })"
+                <slot
+                  name="tier-title"
+                  :tier="(tier as T)"
                 >
-                  {{ tier.billingPeriod || '&nbsp;' }}
-                </span>
+                  {{ tier.title }}
+                </slot>
+              </slot>
+            </div>
 
-                <span
-                  v-if="tier.billingCycle"
-                  data-slot="tierBillingCycle"
-                  :class="pohon.tierBillingCycle({ class: pohonProp?.tierBillingCycle })"
-                >
-                  {{ tier.billingCycle }}
-                </span>
+            <slot
+              :name="(`${tier.id}-badge` as keyof PPricingTableSlots<T>)"
+              :tier="tier"
+            >
+              <slot
+                name="tier-badge"
+                :tier="(tier as T)"
+              >
+                <PBadge
+                  v-if="tier.badge"
+                  color="primary"
+                  variant="subtle"
+                  v-bind="isString(tier.badge) ? { label: tier.badge } : tier.badge"
+                  data-slot="tierBadge"
+                  :class="pohon.tierBadge({ class: pohonProp?.tierBadge })"
+                />
               </slot>
             </slot>
           </div>
-        </div>
 
-        <div
-          v-if="!!slots[(`${tier.id}-button` as keyof PPricingTableSlots<T>)] || !!slots['tier-button'] || tier.button"
-          data-slot="tierButton"
-          :class="pohon.tierButton({ class: pohonProp?.tierButton })"
-        >
-          <slot
-            :name="(`${tier.id}-button` as keyof PPricingTableSlots<T>)"
-            :tier="tier"
+          <div
+            data-slot="tierDescription"
+            :class="pohon.tierDescription({ class: pohonProp?.tierDescription })"
           >
             <slot
-              name="tier-button"
-              :tier="(tier as T)"
+              :name="(`${tier.id}-description` as keyof PPricingTableSlots<T>)"
+              :tier="tier"
             >
-              <PButton
-                v-if="tier.button"
-                block
-                size="lg"
-                v-bind="tier.button"
-              />
+              <slot
+                name="tier-description"
+                :tier="(tier as T)"
+              >
+                {{ tier.description }}
+              </slot>
             </slot>
-          </slot>
-        </div>
+          </div>
+
+          <div
+            data-slot="tierPriceWrapper"
+            :class="pohon.tierPriceWrapper({ class: pohonProp?.tierPriceWrapper })"
+          >
+            <div
+              v-if="(tier.discount && tier.price) || !!slots[(`${tier.id}-discount` as keyof PPricingTableSlots<T>)] || !!slots['tier-discount']"
+              data-slot="tierDiscount"
+              :class="pohon.tierDiscount({ class: pohonProp?.tierDiscount })"
+            >
+              <slot
+                :name="(`${tier.id}-discount` as keyof PPricingTableSlots<T>)"
+                :tier="tier"
+              >
+                <slot
+                  name="tier-discount"
+                  :tier="(tier as T)"
+                >
+                  {{ tier.price }}
+                </slot>
+              </slot>
+            </div>
+
+            <div
+              v-if="(tier.discount || tier.price) || !!slots[(`${tier.id}-price` as keyof PPricingTableSlots<T>)] || !!slots['tier-price']"
+              data-slot="tierPrice"
+              :class="pohon.tierPrice({ class: pohonProp?.tierPrice })"
+            >
+              <slot
+                :name="(`${tier.id}-price` as keyof PPricingTableSlots<T>)"
+                :tier="tier"
+              >
+                <slot
+                  name="tier-price"
+                  :tier="(tier as T)"
+                >
+                  {{ tier.discount || tier.price }}
+                </slot>
+              </slot>
+            </div>
+
+            <div
+              v-if="tier.billingCycle || tier.billingPeriod || !!slots[(`${tier.id}-billing` as keyof PPricingTableSlots<T>)] || !!slots['tier-billing']"
+              data-slot="tierBilling"
+              :class="pohon.tierBilling({ class: pohonProp?.tierBilling })"
+            >
+              <slot
+                :name="(`${tier.id}-billing` as keyof PPricingTableSlots<T>)"
+                :tier="tier"
+              >
+                <slot
+                  name="tier-billing"
+                  :tier="(tier as T)"
+                >
+                  <span
+                    data-slot="tierBillingPeriod"
+                    :class="pohon.tierBillingPeriod({ class: pohonProp?.tierBillingPeriod })"
+                  >
+                    {{ tier.billingPeriod || '&nbsp;' }}
+                  </span>
+
+                  <span
+                    v-if="tier.billingCycle"
+                    data-slot="tierBillingCycle"
+                    :class="pohon.tierBillingCycle({ class: pohonProp?.tierBillingCycle })"
+                  >
+                    {{ tier.billingCycle }}
+                  </span>
+                </slot>
+              </slot>
+            </div>
+          </div>
+
+          <div
+            v-if="!!slots[(`${tier.id}-button` as keyof PPricingTableSlots<T>)] || !!slots['tier-button'] || tier.button"
+            data-slot="tierButton"
+            :class="pohon.tierButton({ class: pohonProp?.tierButton })"
+          >
+            <slot
+              :name="(`${tier.id}-button` as keyof PPricingTableSlots<T>)"
+              :tier="tier"
+            >
+              <slot
+                name="tier-button"
+                :tier="(tier as T)"
+              >
+                <PButton
+                  v-if="tier.button"
+                  block
+                  size="lg"
+                  v-bind="tier.button"
+                />
+              </slot>
+            </slot>
+          </div>
+        </slot>
       </slot>
-    </slot>
+    </div>
   </DefineTierTemplate>
 
   <DefineFeatureTemplate v-slot="{ feature, tier }">

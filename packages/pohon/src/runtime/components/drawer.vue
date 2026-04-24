@@ -68,7 +68,6 @@ export interface PDrawerSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import {
   ADrawerContent,
@@ -84,6 +83,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { FieldGroupReset } from '../composables/use-field-group';
 import { usePortal } from '../composables/use-portal';

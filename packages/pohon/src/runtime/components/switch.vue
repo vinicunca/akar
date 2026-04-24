@@ -58,7 +58,6 @@ export interface PSwitchSlots {
 </script>
 
 <script setup lang="ts" generic="T = boolean">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import {
   ALabel,
@@ -68,6 +67,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed, useAttrs, useId } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { uv } from '../utils/uv';

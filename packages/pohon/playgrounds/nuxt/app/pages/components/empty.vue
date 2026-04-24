@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/empty';
 import { reactive } from 'vue';
+import theme from '#build/pohon/empty';
 
 const variants = Object.keys(theme.variants.variant);
 const sizes = Object.keys(theme.variants.size);

@@ -100,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Vähenda',
       increment: 'Suurenda',
     },
+    listbox: {
+      noData: 'Pole andmeid',
+      noMatch: 'Pole vastavaid andmeid',
+      search: 'Otsi…',
+    },
     modal: {
       close: 'Sulge',
     },

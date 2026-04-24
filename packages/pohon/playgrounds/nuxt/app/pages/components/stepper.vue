@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import theme from '#build/pohon/stepper';
 import { AStepperDescription, AStepperIndicator, AStepperItem, AStepperRoot, AStepperSeparator, AStepperTitle, AStepperTrigger } from 'akar';
 import { ref, useTemplateRef } from 'vue';
+import theme from '#build/pohon/stepper';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

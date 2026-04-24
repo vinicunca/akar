@@ -14,10 +14,10 @@ export interface PColorModeButtonProps extends Omit<PButtonProps, PLinkPropsKeys
 </script>
 
 <script setup lang="ts">
-import { useAppConfig, useColorMode } from '#imports';
 import { reactiveOmit } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig, useColorMode } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import PButton from '../button.vue';

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import theme from '#build/pohon/input-time';
 import { Time } from '@internationalized/date';
 import { reactive, shallowRef } from 'vue';
+import theme from '#build/pohon/input-time';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from 'pohon-ui';
-import theme from '#build/pohon/file-upload';
 import { reactive, ref } from 'vue';
 import * as z from 'zod';
+import theme from '#build/pohon/file-upload';
 
 const sizes = Object.keys(theme.variants.size);
 const variants = Object.keys(theme.variants.variant);

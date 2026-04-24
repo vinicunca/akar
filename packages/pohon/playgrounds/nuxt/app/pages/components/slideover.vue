@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useOverlay } from '#imports';
 import { defineAsyncComponent, ref } from 'vue';
+import { useOverlay } from '#imports';
 
 const LazySlideoverExample = defineAsyncComponent(() => import('../../components/slideover-example.vue'));
 

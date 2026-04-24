@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { NuxtError } from '#app';
 import type { AppConfig } from '@nuxt/schema';
 import type { VNode } from 'vue';
+import type { NuxtError } from '#app';
 import type { PButtonProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
 import theme from '#build/pohon/error';
@@ -40,10 +40,10 @@ export interface PErrorSlots {
 </script>
 
 <script setup lang="ts">
-import { clearError, useAppConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { clearError, useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';

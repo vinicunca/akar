@@ -115,12 +115,12 @@ export interface PCarouselEmits {
 </script>
 
 <script setup lang="ts" generic="T extends PCarouselItem">
-import { useAppConfig } from '#imports';
 import { isBoolean, isObjectType, KEY_CODES } from '@vinicunca/perkakas';
 import { reactivePick } from '@vueuse/core';
 import { APrimitive, useForwardProps } from 'akar';
 import useEmblaCarousel from 'embla-carousel-vue';
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { uv } from '../utils/uv';

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/color-picker';
 import { reactive, ref } from 'vue';
+import theme from '#build/pohon/color-picker';
 
 const sizes = Object.keys(theme.variants.size);
 

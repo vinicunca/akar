@@ -73,6 +73,7 @@ export * from '../components/input-time.vue';
 export * from '../components/input.vue';
 export * from '../components/kbd.vue';
 export * from '../components/link.vue';
+export * from '../components/listbox.vue';
 export * from '../components/locale/locale-select.vue';
 export * from '../components/main.vue';
 export * from '../components/marquee.vue';

@@ -49,12 +49,12 @@ export type PChangelogVersionsSlots<T extends PChangelogVersionProps = PChangelo
 </script>
 
 <script setup lang="ts" generic="T extends PChangelogVersionProps">
-import { useAppConfig } from '#imports';
 import { isObjectType } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { defu } from 'defu';
 import { Motion, useScroll, useSpring, useTransform } from 'motion-v';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';

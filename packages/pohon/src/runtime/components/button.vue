@@ -43,10 +43,10 @@ export interface PButtonSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, inject, ref } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentIcons } from '../composables/use-component-icons';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFieldGroup } from '../composables/use-field-group';

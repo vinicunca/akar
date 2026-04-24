@@ -69,7 +69,6 @@ export interface PLinkSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { usePage } from '@inertiajs/vue3';
 import { isString } from '@vinicunca/perkakas';
 import { reactiveOmit } from '@vueuse/core';
@@ -77,6 +76,7 @@ import { APrimitiveSlot, useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { hasProtocol } from 'ufo';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { mergeClasses } from '../../../utils';
 import { uv } from '../../../utils/uv';
 import PLinkBase from './link-base.vue';

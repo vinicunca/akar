@@ -51,10 +51,10 @@ export type PPinInputEmits<T extends PinInputType = 'text'> = APinInputRootEmits
 </script>
 
 <script setup lang="ts" generic="T extends PinInputType">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { APinInputInput, APinInputRoot, useForwardPropsEmits } from 'akar';
 import { computed, onMounted, ref } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useFormField } from '../composables/use-form-field';
 import { looseToNumber } from '../utils';

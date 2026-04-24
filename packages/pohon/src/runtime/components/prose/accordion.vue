@@ -19,8 +19,8 @@ export interface ProseAccordionSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { computed, onBeforeUpdate, ref } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';

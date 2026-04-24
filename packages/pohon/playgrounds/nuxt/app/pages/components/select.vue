@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { PAvatarProps, PSelectItem } from 'pohon-ui';
-import { useFetch } from '#app';
-import theme from '#build/pohon/select';
 import {
   ASelectContent,
   ASelectGroup,
@@ -17,6 +15,8 @@ import {
   ASelectViewport,
 } from 'akar';
 import { reactive, ref } from 'vue';
+import { useFetch } from '#app';
+import theme from '#build/pohon/select';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/navigation-menu';
 import { computed, ref } from 'vue';
+import theme from '#build/pohon/navigation-menu';
 
 const orientations = Object.keys(theme.variants.orientation);
 

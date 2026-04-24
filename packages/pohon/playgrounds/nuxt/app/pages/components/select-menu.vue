@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PAvatarProps, PSelectMenuItem } from 'pohon-ui';
-import { useFetch } from '#app';
-import theme from '#build/pohon/select-menu';
 import { refDebounced } from '@vueuse/core';
 import { reactive, ref } from 'vue';
+import { useFetch } from '#app';
+import theme from '#build/pohon/select-menu';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);

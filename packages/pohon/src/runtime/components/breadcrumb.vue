@@ -59,9 +59,9 @@ export type PBreadcrumbSlots<T extends PBreadcrumbItem = PBreadcrumbItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends PBreadcrumbItem">
-import { useAppConfig } from '#imports';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { useLocale } from '../composables/use-locale';
 import { getProp } from '../utils';

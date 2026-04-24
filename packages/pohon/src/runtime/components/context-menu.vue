@@ -115,10 +115,10 @@ export type PContextMenuSlots<
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PContextMenuItem>">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { AContextMenuRoot, AContextMenuTrigger, useForwardPropsEmits } from 'akar';
 import { computed, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { omit } from '../utils';
 import { uv } from '../utils/uv';

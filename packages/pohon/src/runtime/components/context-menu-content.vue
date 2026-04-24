@@ -1,7 +1,7 @@
 <script lang="ts">
-import type theme from '#build/pohon/context-menu';
 import type { AppConfig } from '@nuxt/schema';
 import type { AContextMenuContentEmits, AContextMenuContentProps } from 'akar';
+import type theme from '#build/pohon/context-menu';
 import type { PAvatarProps, PContextMenuItem, PContextMenuSlots, PIconProps, PKbdProps } from '../types';
 import type { ArrayOrNested, GetItemKeys } from '../types/utils';
 import type { ComponentConfig } from '../types/uv';
@@ -35,12 +35,12 @@ interface ContextMenuContentEmits extends AContextMenuContentEmits {}
 </script>
 
 <script setup lang="ts" generic="T extends ArrayOrNested<PContextMenuItem>">
-import { useAppConfig } from '#imports';
 import { isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactiveOmit } from '@vueuse/core';
 import { useForwardPropsEmits } from 'akar';
 import { AContextMenu } from 'akar/namespaced';
 import { computed, toRef } from 'vue';
+import { useAppConfig } from '#imports';
 import { FieldGroupReset } from '../composables/use-field-group';
 import { useLocale } from '../composables/use-locale';
 import { usePortal } from '../composables/use-portal';

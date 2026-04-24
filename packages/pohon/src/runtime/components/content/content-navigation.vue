@@ -92,7 +92,6 @@ export interface PContentNavigationSlots<T extends PContentNavigationLink = PCon
 </script>
 
 <script setup lang="ts" generic="T extends PContentNavigationLink">
-import { useAppConfig, useRoute } from '#imports';
 import { isNumber, isString } from '@vinicunca/perkakas';
 import { createReusableTemplate, reactivePick } from '@vueuse/core';
 import {
@@ -104,6 +103,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig, useRoute } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { mapContentNavigationItem } from '../../utils/content';
 import { pickLinkProps } from '../../utils/link';

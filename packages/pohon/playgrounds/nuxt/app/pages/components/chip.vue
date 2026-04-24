@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import theme from '#build/pohon/chip';
 import { reactive } from 'vue';
+import theme from '#build/pohon/chip';
 
 const sizes = Object.keys(theme.variants.size);
 const positions = Object.keys(theme.variants.position);

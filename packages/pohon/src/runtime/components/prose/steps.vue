@@ -22,8 +22,8 @@ export interface ProseStepsSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig } from '#imports';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 

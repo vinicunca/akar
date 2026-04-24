@@ -21,7 +21,12 @@ export interface PAccordionItem {
   trailingIcon?: PIconProps['name'];
   slot?: string;
   content?: string;
-  /** A unique value for the accordion item. Defaults to the index. */
+  /**
+   * A unique value for the accordion item. Defaults to the index.
+   * Also used as the Vue `key` for this item, so providing a stable value prevents
+   * accordion content (and its local state) from remounting when items are added, removed,
+   * or reordered.
+   */
   value?: string;
   disabled?: boolean;
   class?: any;
@@ -70,7 +75,6 @@ export type PAccordionSlots<T extends PAccordionItem = PAccordionItem> = {
 </script>
 
 <script setup lang="ts" generic="T extends PAccordionItem">
-import { useAppConfig } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import {
   AAccordionContent,
@@ -81,6 +85,7 @@ import {
   useForwardPropsEmits,
 } from 'akar';
 import { computed } from 'vue';
+import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../composables/use-component-pohon';
 import { getProp } from '../utils';
 import { uv } from '../utils/uv';
@@ -122,7 +127,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.accord
     <AAccordionItem
       v-for="(item, index) in props.items"
       v-slot="{ open }"
-      :key="index"
+      :key="getProp(item, props.valueKey as string) ?? index"
       :value="getProp(item, props.valueKey as string) ?? String(index)"
       :disabled="item.disabled"
       data-slot="item"

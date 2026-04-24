@@ -31,8 +31,8 @@ export interface ProseTabsSlots {
 </script>
 
 <script setup lang="ts">
-import { useAppConfig, useState } from '#imports';
 import { computed, onBeforeUpdate, onMounted, ref, watch } from 'vue';
+import { useAppConfig, useState } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { transformPohon } from '../../utils';
 import { uv } from '../../utils/uv';

@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'English',
   code: 'en',
   messages: {
     alert: {
-      close: 'Close'
+      close: 'Close',
     },
     authForm: {
       hidePassword: 'Hide password',
       showPassword: 'Show password',
-      submit: 'Continue'
+      submit: 'Continue',
     },
     banner: {
-      close: 'Close'
+      close: 'Close',
     },
     calendar: {
       nextMonth: 'Next month',
       nextYear: 'Next year',
       prevMonth: 'Previous month',
-      prevYear: 'Previous year'
+      prevYear: 'Previous year',
     },
     carousel: {
       dots: 'Choose slide to display',
       goto: 'Go to slide {slide}',
       next: 'Next',
-      prev: 'Prev'
+      prev: 'Prev',
     },
     chatPrompt: {
-      placeholder: 'Type your message here…'
+      placeholder: 'Type your message here…',
     },
     chatPromptSubmit: {
-      label: 'Send prompt'
+      label: 'Send prompt',
     },
     colorMode: {
       dark: 'Dark',
       light: 'Light',
       switchToDark: 'Switch to dark mode',
       switchToLight: 'Switch to light mode',
-      system: 'System'
+      system: 'System',
     },
     commandPalette: {
       back: 'Back',
       close: 'Close',
       noData: 'No data',
       noMatch: 'No matching data',
-      placeholder: 'Type a command or search…'
+      placeholder: 'Type a command or search…',
     },
     contentSearch: {
       links: 'Links',
-      theme: 'Theme'
+      theme: 'Theme',
     },
     contentSearchButton: {
-      label: 'Search…'
+      label: 'Search…',
     },
     contentToc: {
-      title: 'On this page'
+      title: 'On this page',
     },
     dropdownMenu: {
       noMatch: 'No matching data',
-      search: 'Search…'
+      search: 'Search…',
     },
     dashboardSearch: {
-      theme: 'Theme'
+      theme: 'Theme',
     },
     dashboardSearchButton: {
-      label: 'Search…'
+      label: 'Search…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Collapse sidebar',
-      expand: 'Expand sidebar'
+      expand: 'Expand sidebar',
     },
     dashboardSidebarToggle: {
       close: 'Close sidebar',
-      open: 'Open sidebar'
+      open: 'Open sidebar',
     },
     error: {
-      clear: 'Back to home'
+      clear: 'Back to home',
     },
     fileUpload: {
-      removeFile: 'Remove {filename}'
+      removeFile: 'Remove {filename}',
     },
     header: {
       close: 'Close menu',
-      open: 'Open menu'
+      open: 'Open menu',
     },
     inputMenu: {
       create: 'Create "{label}"',
       noData: 'No data',
-      noMatch: 'No matching data'
+      noMatch: 'No matching data',
     },
     inputNumber: {
       decrement: 'Decrement',
-      increment: 'Increment'
+      increment: 'Increment',
+    },
+    listbox: {
+      noData: 'No data',
+      noMatch: 'No matching data',
+      search: 'Search…',
     },
     modal: {
-      close: 'Close'
+      close: 'Close',
     },
     pricingTable: {
-      caption: 'Pricing plan comparison'
+      caption: 'Pricing plan comparison',
     },
     prose: {
       codeCollapse: {
         closeText: 'Collapse',
         name: 'code',
-        openText: 'Expand'
+        openText: 'Expand',
       },
       collapsible: {
         closeText: 'Hide',
         name: 'properties',
-        openText: 'Show'
+        openText: 'Show',
       },
       pre: {
-        copy: 'Copy code to clipboard'
+        copy: 'Copy code to clipboard',
       },
       prompt: {
         copy: 'Copy prompt',
-        openIn: 'Open in {name}'
-      }
+        openIn: 'Open in {name}',
+      },
     },
     chatReasoning: {
-      thinking: 'Thinking...',
+      thinking: 'Thinking…',
       thought: 'Thought',
-      thoughtFor: 'Thought for {duration}'
+      thoughtFor: 'Thought for {duration}',
     },
     sidebar: {
       close: 'Close',
-      toggle: 'Toggle'
+      toggle: 'Toggle',
     },
     selectMenu: {
       create: 'Create "{label}"',
       noData: 'No data',
       noMatch: 'No matching data',
-      search: 'Search…'
+      search: 'Search…',
     },
     slideover: {
-      close: 'Close'
+      close: 'Close',
     },
     table: {
-      noData: 'No data'
+      noData: 'No data',
     },
     toast: {
-      close: 'Close'
-    }
-  }
-})
+      close: 'Close',
+    },
+  },
+});

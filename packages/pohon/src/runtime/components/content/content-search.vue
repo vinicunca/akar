@@ -12,7 +12,6 @@ import type {
   PCommandPaletteSlots,
   PDialogProps,
   PIconProps,
-  PInputProps,
   PLinkProps,
   PLinkPropsKeys,
 } from '../../types';
@@ -47,48 +46,12 @@ export interface PContentSearchItem extends Omit<PLinkProps, 'custom'>, PCommand
   icon?: PIconProps['name'];
 }
 
-export interface PContentSearchProps<T extends PContentSearchLink = PContentSearchLink> extends Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'> {
+export interface PContentSearchProps<T extends PContentSearchLink = PContentSearchLink> extends Pick<PDialogProps, 'title' | 'description' | 'overlay' | 'transition' | 'content' | 'dismissible' | 'fullscreen' | 'modal' | 'portal'>, Pick<PCommandPaletteProps<PCommandPaletteGroup<PContentSearchItem>, PContentSearchItem>, 'icon' | 'placeholder' | 'autofocus' | 'loading' | 'loadingIcon' | 'closeIcon' | 'groups'> {
   /**
    * @defaultValue 'md'
    */
   size?: ContentSearch['variants']['size'];
-  /**
-   * The icon displayed in the input.
-   * @defaultValue appConfig.pohon.icons.search
-   * @IconifyIcon
-   */
-  icon?: PIconProps['name'];
-  /**
-   * The placeholder text for the input.
-   * @defaultValue t('commandPalette.placeholder')
-   */
-  placeholder?: PInputProps['placeholder'];
-  /**
-   * Automatically focus the input when component is mounted.
-   * @defaultValue true
-   */
-  autofocus?: boolean;
-  /** When `true`, the loading icon will be displayed. */
-  loading?: boolean;
-  /**
-   * The icon when the `loading` prop is `true`.
-   * @defaultValue appConfig.pohon.icons.loading
-   * @IconifyIcon
-   */
-  loadingIcon?: PIconProps['name'];
-  /**
-   * Display a close button in the input (useful when inside a Modal for example).
-   * `{ size: 'md', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
-   * @emits 'update:open'
-   * @defaultValue true
-   */
   close?: boolean | Omit<PButtonProps, PLinkPropsKeys>;
-  /**
-   * The icon displayed in the close button.
-   * @defaultValue appConfig.pohon.icons.close
-   * @IconifyIcon
-   */
-  closeIcon?: PIconProps['name'];
   /**
    * Keyboard shortcut to open the search (used by [`defineShortcuts`](https://pohon.nuxt.com/docs/composables/define-shortcuts))
    * @defaultValue 'meta_k'
@@ -97,14 +60,28 @@ export interface PContentSearchProps<T extends PContentSearchLink = PContentSear
   /** Links group displayed as the first group in the command palette. */
   links?: Array<T>;
   navigation?: Array<ContentNavigationItem>;
-  /** Custom groups displayed between navigation and color mode group. */
-  groups?: Array<PCommandPaletteGroup<PContentSearchItem>>;
   files?: Array<PContentSearchFile>;
   /**
    * Options for [useFuse](https://vueuse.org/integrations/useFuse) passed to the [CommandPalette](https://pohon.nuxt.com/docs/components/command-palette).
-   * @defaultValue { fuseOptions: { includeMatches: true } }
+   * @defaultValue {
+      fuseOptions: {
+        ignoreLocation: true,
+        includeMatches: true,
+        threshold: 0.1,
+        keys: ['label', 'suffix']
+      },
+      resultLimit: 12,
+      matchAllWhenSearchEmpty: true
+    }
    */
   fuse?: UseFuseOptions<T>;
+  /**
+   * Delay (in milliseconds) before the search term is passed to Fuse (debounced).
+   * Useful for large doc sets where running fuzzy search on every keystroke is the bottleneck — the input stays responsive while Fuse only re-runs after typing settles.
+   * Set to `0` to disable.
+   * @defaultValue 100
+   */
+  searchDelay?: number;
   /**
    * When `true`, the theme command will be added to the groups.
    * @defaultValue true
@@ -121,11 +98,11 @@ export type PContentSearchSlots = PCommandPaletteSlots<PContentSearchItem> & {
 </script>
 
 <script setup lang="ts" generic="T extends PContentSearchLink">
-import { defineShortcuts, useAppConfig, useColorMode } from '#imports';
 import { reactivePick } from '@vueuse/core';
 import { useForwardProps } from 'akar';
 import { defu } from 'defu';
 import { computed, useTemplateRef } from 'vue';
+import { defineShortcuts, useAppConfig, useColorMode } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useContentSearch } from '../../composables/use-content-search';
 import { useLocale } from '../../composables/use-locale';
@@ -141,6 +118,7 @@ const props = withDefaults(
     colorMode: true,
     close: true,
     fullscreen: false,
+    searchDelay: 100,
   },
 );
 const slots = defineSlots<PContentSearchSlots>();
@@ -165,6 +143,7 @@ const commandPaletteProps = useForwardProps(
     'loadingIcon',
     'close',
     'closeIcon',
+    'searchDelay',
   ),
 );
 const dialogProps = useForwardProps(

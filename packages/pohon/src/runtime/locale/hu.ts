@@ -1,148 +1,153 @@
-import type { PMessages } from '../types'
-import { defineLocale } from '../composables/define-locale'
+import type { PMessages } from '../types';
+import { defineLocale } from '../composables/define-locale';
 
 export default defineLocale<PMessages>({
   name: 'Magyar',
   code: 'hu',
   messages: {
     alert: {
-      close: 'Bezárás'
+      close: 'Bezárás',
     },
     authForm: {
       hidePassword: 'Jelszó elrejtése',
       showPassword: 'Jelszó megjelenítése',
-      submit: 'Folytatás'
+      submit: 'Folytatás',
     },
     banner: {
-      close: 'Bezárás'
+      close: 'Bezárás',
     },
     calendar: {
       nextMonth: 'Következő hónap',
       nextYear: 'Következő év',
       prevMonth: 'Előző hónap',
-      prevYear: 'Előző év'
+      prevYear: 'Előző év',
     },
     carousel: {
       dots: 'Válassza ki a megjelenítendő diát',
       goto: 'Ugrás ide {slide}',
       next: 'Következő',
-      prev: 'Előző'
+      prev: 'Előző',
     },
     chatPrompt: {
-      placeholder: 'Írd be a kérdésedet itt…'
+      placeholder: 'Írd be a kérdésedet itt…',
     },
     chatPromptSubmit: {
-      label: 'Küldés'
+      label: 'Küldés',
     },
     chatReasoning: {
       thinking: 'Gondolkodik…',
       thought: 'Gondolkodott',
-      thoughtFor: '{duration} gondolkodott'
+      thoughtFor: '{duration} gondolkodott',
     },
     colorMode: {
       dark: 'Sötét',
       light: 'Világos',
       switchToDark: 'Váltás sötét módra',
       switchToLight: 'Váltás világos módra',
-      system: 'Rendszer'
+      system: 'Rendszer',
     },
     commandPalette: {
       back: 'Vissza',
       close: 'Bezárás',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      placeholder: 'Írjon be egy parancsot vagy keressen…'
+      placeholder: 'Írjon be egy parancsot vagy keressen…',
     },
     contentSearch: {
       links: 'Linkek',
-      theme: 'Téma'
+      theme: 'Téma',
     },
     contentSearchButton: {
-      label: 'Keresés…'
+      label: 'Keresés…',
     },
     contentToc: {
-      title: 'Ezen az oldalon'
+      title: 'Ezen az oldalon',
     },
     dropdownMenu: {
       noMatch: 'Nincs találat',
-      search: 'Keresés…'
+      search: 'Keresés…',
     },
     dashboardSearch: {
-      theme: 'Téma'
+      theme: 'Téma',
     },
     dashboardSearchButton: {
-      label: 'Keresés…'
+      label: 'Keresés…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Oldalsáv összecsukása',
-      expand: 'Oldalsáv kinyitása'
+      expand: 'Oldalsáv kinyitása',
     },
     dashboardSidebarToggle: {
       close: 'Oldalsáv bezárása',
-      open: 'Oldalsáv megnyitása'
+      open: 'Oldalsáv megnyitása',
     },
     error: {
-      clear: 'Vissza a főoldalra'
+      clear: 'Vissza a főoldalra',
     },
     fileUpload: {
-      removeFile: '{filename} eltávolítása'
+      removeFile: '{filename} eltávolítása',
     },
     header: {
       close: 'Menü bezárása',
-      open: 'Menü megnyitása'
+      open: 'Menü megnyitása',
     },
     inputMenu: {
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',
-      noMatch: 'Nincs találat'
+      noMatch: 'Nincs találat',
     },
     inputNumber: {
       decrement: 'Csökkent',
-      increment: 'Növel'
+      increment: 'Növel',
+    },
+    listbox: {
+      noData: 'Nincs adat',
+      noMatch: 'Nincs találat',
+      search: 'Keresés…',
     },
     modal: {
-      close: 'Bezárás'
+      close: 'Bezárás',
     },
     pricingTable: {
-      caption: 'Árlista összehasonlítása'
+      caption: 'Árlista összehasonlítása',
     },
     prose: {
       codeCollapse: {
         closeText: 'Összecsuk',
         name: 'kód',
-        openText: 'Kinyit'
+        openText: 'Kinyit',
       },
       collapsible: {
         closeText: 'Elrejt',
         name: 'tulajdonságok',
-        openText: 'Mutat'
+        openText: 'Mutat',
       },
       pre: {
-        copy: 'Kód másolása a vágólapra'
+        copy: 'Kód másolása a vágólapra',
       },
       prompt: {
         copy: 'Prompt másolása',
-        openIn: 'Megnyitás: {name}'
-      }
+        openIn: 'Megnyitás: {name}',
+      },
     },
     sidebar: {
       close: 'Bezárás',
-      toggle: 'Váltás'
+      toggle: 'Váltás',
     },
     selectMenu: {
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      search: 'Keresés…'
+      search: 'Keresés…',
     },
     slideover: {
-      close: 'Bezárás'
+      close: 'Bezárás',
     },
     table: {
-      noData: 'Nincs adat'
+      noData: 'Nincs adat',
     },
     toast: {
-      close: 'Bezárás'
-    }
-  }
-})
+      close: 'Bezárás',
+    },
+  },
+});
