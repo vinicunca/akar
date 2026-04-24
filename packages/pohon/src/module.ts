@@ -53,6 +53,10 @@ export interface PohonModuleOptions {
      */
     colors?: Array<Color>;
 
+    /**
+     * The default variants to use for components
+     * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#themedefaultvariants
+     */
     defaultVariants?: {
       /**
        * The default color variant to use for components
@@ -81,6 +85,7 @@ export interface PohonModuleOptions {
    * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#content
    */
   content?: boolean;
+
   /**
    * Experimental features
    */

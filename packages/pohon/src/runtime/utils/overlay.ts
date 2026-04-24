@@ -32,7 +32,7 @@ export function pointerDownOutside(event: PointerDownOutsideEvent, options: Poin
   }
 
   // Scrollable mode: prevent closing when clicking on scrollbar
-  // TODO: This is a workaround to prevent the overlay from closing when clicking on the scrollbar https://reka-ui.com/docs/components/dialog#scrollable-overlay but it's not working on Mac OS.
+  // TODO: This is a workaround to prevent the overlay from closing when clicking on the scrollbar https://dev.vinicunca.dev/docs/components/dialog#scrollable-overlay but it's not working on Mac OS.
   if (options.scrollable) {
     if (originalEvent.offsetX > target.clientWidth || originalEvent.offsetY > target.clientHeight) {
       event.preventDefault();

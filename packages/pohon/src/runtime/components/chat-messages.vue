@@ -46,7 +46,7 @@ export interface PChatMessagesProps {
   assistant?: Pick<PChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'pohon'>;
   /**
    * Render the messages in a compact style.
-   * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
+   * This is done automatically when used inside a `PChatPalette`{lang="ts-type"}.
    * @defaultValue false
    */
   compact?: boolean;

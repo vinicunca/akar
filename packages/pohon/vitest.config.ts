@@ -3,6 +3,7 @@ import { defineVitestProject } from '@nuxt/test-utils/config';
 import vue from '@vitejs/plugin-vue';
 import { glob } from 'tinyglobby';
 import { defineConfig } from 'vitest/config';
+import { getComponentName } from './src/utils/components';
 import pohon from './src/vite';
 
 const components = await glob('./src/runtime/components/*.vue', { absolute: true });
@@ -71,12 +72,13 @@ export default defineConfig({
                 const resolvedComponents = [...vueRouterOverrides, ...vueComponents, ...components];
                 const renderedComponents = new Set<string>();
                 return resolvedComponents.map((file) => {
-                  const componentName = file.split('/').pop()!.replace('.vue', '');
+                  const componentName = getComponentName(file);
+
                   if (renderedComponents.has(componentName)) {
                     return '';
                   }
                   renderedComponents.add(componentName);
-                  return `export { default as U${componentName} } from '${file}'`;
+                  return `export { default as P${componentName} } from '${file}'`;
                 }).join('\n');
               }
             },

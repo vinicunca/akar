@@ -69,7 +69,7 @@ export interface PohonOptions extends Omit<PohonModuleOptions, 'fonts' | 'colorM
    */
   inertia?: boolean;
   /**
-   * Additional packages to scan for components using Nuxt UI
+   * Additional packages to scan for components using Pohon
    * @see https://akar.vinicunca.dev/docs/getting-started/installation/vue#scanpackages
    */
   scanPackages?: Array<string>;

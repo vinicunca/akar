@@ -19,7 +19,7 @@ describe('Form', () => {
 
   it('passes accessibility tests', async () => {
     const wrapper = await renderForm({
-      fixture: 'FormA11y',
+      fixture: 'form-a11y',
     });
 
     expect(await axe(wrapper.element)).toHaveNoViolations();
@@ -87,7 +87,7 @@ describe('Form', () => {
       const onSubmit = vi.fn();
 
       const wrapper = await renderForm({
-        fixture: 'FormBasic',
+        fixture: 'form-basic',
         props: { ...options, onSubmit },
       });
 
@@ -136,7 +136,7 @@ describe('Form', () => {
     beforeEach(async () => {
       vi.clearAllMocks();
       wrapper = await renderForm({
-        fixture: 'FormBasic',
+        fixture: 'form-basic',
         props: {
           schema: z.object({
             email: z.email(),
@@ -421,7 +421,7 @@ describe('Form', () => {
     beforeEach(async () => {
       vi.clearAllMocks();
       wrapper = await renderForm({
-        fixture: 'FormNested',
+        fixture: 'form-nested',
         props: {
           onSubmit,
           onError,
@@ -481,7 +481,7 @@ describe('Form', () => {
 
     beforeEach(async () => {
       vi.clearAllMocks();
-      wrapper = await renderForm({ fixture: 'FormNested', props: { onSubmit, onError } });
+      wrapper = await renderForm({ fixture: 'form-nested', props: { onSubmit, onError } });
       form = wrapper.setupState.form.value;
     });
 
@@ -597,7 +597,7 @@ describe('Form', () => {
       async (_name: string, schema: any, input: any, expected: any) => {
         const onSubmit = vi.fn();
         const wrapper = await renderForm({
-          fixture: 'FormTransform',
+          fixture: 'form-transform',
           props: {
             schema,
             onSubmit,
@@ -618,7 +618,7 @@ describe('Form', () => {
   });
 
   it('form field errorPattern works', async () => {
-    const wrapper = await renderForm({ fixture: 'FormErrorPattern' });
+    const wrapper = await renderForm({ fixture: 'form-error-pattern' });
     const form = wrapper.setupState.form.value;
     form.submit();
     await flushPromises();
@@ -626,7 +626,7 @@ describe('Form', () => {
   });
 
   it('works with empty fields', async () => {
-    const wrapper = await renderForm({ fixture: 'FormEmptyFields' });
+    const wrapper = await renderForm({ fixture: 'form-empty-fields' });
     const form = wrapper.setupState.form.value;
     form.setErrors([
       { name: 'field1', message: 'Error on field1' },
@@ -646,7 +646,7 @@ describe('Form', () => {
       const onSubmit = vi.fn();
 
       const wrapper = await renderForm({
-        fixture: 'FormHtml5Validation',
+        fixture: 'form-html5-validation',
         props: { onSubmit },
       });
 
@@ -664,7 +664,7 @@ describe('Form', () => {
       const onSubmit = vi.fn();
 
       const wrapper = await renderForm({
-        fixture: 'FormHtml5Validation',
+        fixture: 'form-html5-validation',
         props: { onSubmit },
       });
 
@@ -695,7 +695,7 @@ describe('Form', () => {
       const onSubmit = vi.fn();
       // Create a nested form scenario
       const wrapper = await renderForm({
-        fixture: 'FormNested',
+        fixture: 'form-nested',
         props: { onSubmit },
       });
 

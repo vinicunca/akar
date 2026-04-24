@@ -30,7 +30,7 @@ section1:
   description: Control your entire design system with Figma Variables. Update primitive tokens once and watch your changes spread across the entire system.
   reverse: true
   features:
-    - title: Style with color variables powered by Tailwind CSS colors
+    - title: Style with color variables powered by UnoCSS colors
       icon: i-simple-icons:tailwindcss
     - title: Apply over 500+ local variables across your entire file
       icon: i-lucide:layers-2

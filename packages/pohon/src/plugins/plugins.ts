@@ -6,6 +6,7 @@ import { resolvePathSync } from 'mlly';
 import { join } from 'pathe';
 import { globSync } from 'tinyglobby';
 import { runtimeDir } from '../unplugin';
+import { getComponentName } from '../utils/components';
 
 /**
  * This plugin provides the necessary transforms to allow loading the
@@ -49,7 +50,7 @@ export default function PluginsPlugin(options: PohonOptions) {
     loadInclude: (id) => id === 'virtual:pohon-plugins',
     load() {
       const proseImports = proseComponents.map((p) => {
-        const name = `Prose${p.split('/').pop()?.replace(/\.vue$/, '')}`;
+        const name = `Prose${getComponentName(p)}`;
         return { name, path: p };
       });
 

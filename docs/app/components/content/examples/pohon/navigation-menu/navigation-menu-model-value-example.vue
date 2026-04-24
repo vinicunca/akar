@@ -26,7 +26,7 @@ const items: Array<PNavigationMenuItem> = [
       {
         label: 'Colors',
         icon: 'i-lucide:swatch-book',
-        description: 'Choose a primary and a neutral color from your Tailwind CSS theme.',
+        description: 'Choose a primary and a neutral color from your UnoCSS theme.',
       },
       {
         label: 'Theme',

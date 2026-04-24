@@ -35,7 +35,7 @@ export interface PChatMessageProps extends UIMessage {
   actions?: Array<Omit<PButtonProps, 'onClick'> & { onClick?: (event: MouseEvent, message: UIMessage) => void }>;
   /**
    * Render the message in a compact style.
-   * This is done automatically when used inside a `UChatPalette`{lang="ts-type"}.
+   * This is done automatically when used inside a `PChatPalette`{lang="ts-type"}.
    * @defaultValue false
    */
   compact?: boolean;
