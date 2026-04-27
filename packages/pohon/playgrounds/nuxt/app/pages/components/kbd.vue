@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { kbdKeysMap } from 'pohon-ui/composables';
 import theme from '#build/pohon/kbd';
-import { kbdKeysMap } from '#imports';
 
 const sizes = Object.keys(theme.variants.size);
 const variants = Object.keys(theme.variants.variant);
@@ -17,7 +16,7 @@ const kbdKeys = Object.keys(kbdKeysMap);
 </script>
 
 <template>
-  <BaseNavbar>
+  <Navbar>
     <PSelect
       v-model="attrs.color"
       :items="colors"
@@ -33,9 +32,9 @@ const kbdKeys = Object.keys(kbdKeysMap);
       :items="sizes"
       multiple
     />
-  </BaseNavbar>
+  </Navbar>
 
-  <BaseMatrix
+  <Matrix
     v-slot="props"
     :attrs="attrs"
   >
@@ -45,5 +44,5 @@ const kbdKeys = Object.keys(kbdKeysMap);
       :value="kdbKey"
       v-bind="props"
     />
-  </BaseMatrix>
+  </Matrix>
 </template>

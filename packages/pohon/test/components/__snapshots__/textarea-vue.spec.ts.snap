@@ -21,6 +21,14 @@ exports[`Textarea > renders with autoresize correctly 1`] = `
 </div>"
 `;
 
+exports[`Textarea > renders with avatar and leadingIcon correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg></span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with avatar and trailingIcon correctly 1`] = `"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><span data-slot="trailing" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class=""></svg></span></div>"`;
+
 exports[`Textarea > renders with avatar correctly 1`] = `
 "<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span>
   <!--v-if-->
@@ -48,6 +56,12 @@ exports[`Textarea > renders with disabled correctly 1`] = `
 </div>"
 `;
 
+exports[`Textarea > renders with icon correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg></span>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Textarea > renders with id correctly 1`] = `
 "<div data-slot="root" class=""><textarea id="id" rows="3" data-slot="base"></textarea>
   <!--v-if-->
@@ -55,8 +69,46 @@ exports[`Textarea > renders with id correctly 1`] = `
 </div>"
 `;
 
+exports[`Textarea > renders with leading and icon correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg></span>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`Textarea > renders with leading slot correctly 1`] = `
 "<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class="">Leading slot</span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with leadingIcon correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg></span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with loading and avatar correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg></span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with loading correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg></span>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Textarea > renders with loading trailing and avatar correctly 1`] = `"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span></span><span data-slot="trailing" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class=""></svg></span></div>"`;
+
+exports[`Textarea > renders with loading trailing correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea>
+  <!--v-if--><span data-slot="trailing" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class=""></svg></span>
+</div>"
+`;
+
+exports[`Textarea > renders with loadingIcon correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea><span data-slot="leading" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg></span>
   <!--v-if-->
 </div>"
 `;
@@ -201,8 +253,20 @@ exports[`Textarea > renders with size xs correctly 1`] = `
 </div>"
 `;
 
+exports[`Textarea > renders with trailing and icon correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea>
+  <!--v-if--><span data-slot="trailing" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class=""></svg></span>
+</div>"
+`;
+
 exports[`Textarea > renders with trailing slot correctly 1`] = `
 "<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea>
   <!--v-if--><span data-slot="trailing" class="">Trailing slot</span>
+</div>"
+`;
+
+exports[`Textarea > renders with trailingIcon correctly 1`] = `
+"<div data-slot="root" class=""><textarea rows="3" data-slot="base"></textarea>
+  <!--v-if--><span data-slot="trailing" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class=""></svg></span>
 </div>"
 `;

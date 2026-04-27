@@ -1,23 +1,19 @@
 <script setup lang="ts">
 defineProps<{
-  count: number;
-}>();
+  count: number
+}>()
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close'])
 </script>
 
 <template>
   <PSlideover :description="`This slideover was opened programmatically ${count} times`">
     <template #body>
-      <BasePlaceholder class="h-full" />
+      <Placeholder class="h-full" />
     </template>
 
     <template #footer>
-      <PButton
-        color="neutral"
-        label="Close"
-        @click="emit('close')"
-      />
+      <PButton color="neutral" label="Close" @click="emit('close')" />
     </template>
   </PSlideover>
 </template>

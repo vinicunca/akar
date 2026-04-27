@@ -108,6 +108,41 @@ exports[`CheckboxGroup > renders with class correctly 1`] = `
 </div>"
 `;
 
+exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`CheckboxGroup > renders with description correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
   <fieldset data-slot="fieldset">
@@ -240,6 +275,216 @@ exports[`CheckboxGroup > renders with disabled correctly 1`] = `
     </div>
     <div data-slot="root" class="">
       <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
+"<div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:1" data-slot="label" class="">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:2" data-slot="label" class="">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:3" data-slot="label" class="">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with horizontal variant list correctly 1`] = `
+"<div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
+"<div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:1" data-slot="label" class="">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:2" data-slot="label" class="">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:3" data-slot="label" class="">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
@@ -396,6 +641,146 @@ exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
 </div>"
 `;
 
+exports[`CheckboxGroup > renders with modelValue correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:1" data-slot="label" class="">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:2" data-slot="label" class="">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:3" data-slot="label" class="">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with neutral variant list correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:1" data-slot="label" class="">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:2" data-slot="label" class="">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:3" data-slot="label" class="">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`CheckboxGroup > renders with pohon correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
   <fieldset data-slot="fieldset" class="gap-x-4">
@@ -432,6 +817,111 @@ exports[`CheckboxGroup > renders with pohon correctly 1`] = `
 </div>"
 `;
 
+exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:1" data-slot="label" class="">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:2" data-slot="label" class="">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:3" data-slot="label" class="">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with primary variant list correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:1" data-slot="label" class="">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:2" data-slot="label" class="">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0:3" data-slot="label" class="">Option 3</p>
+        <!--v-if-->
+      </div>
+    </label>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
 exports[`CheckboxGroup > renders with required correctly 1`] = `
 "<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
   <fieldset data-slot="fieldset">
@@ -460,6 +950,216 @@ exports[`CheckboxGroup > renders with required correctly 1`] = `
           <!--v-if-->
         </button></div>
       <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with size lg correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with size md correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with size sm correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with size xl correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with size xs correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:Option 1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="icon" class=""></svg></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:Option 1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:Option 2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:Option 2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0:Option 3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0:Option 3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>

@@ -1,73 +1,57 @@
 <script lang="ts" setup>
-import type { PTimelineItem } from 'pohon-ui';
-import { ref } from 'vue';
-import theme from '#build/pohon/timeline';
+import type { TimelineItem } from 'pohon-ui'
+import theme from '#build/pohon/timeline'
 
-const sizes = Object.keys(theme.variants.size);
-const colors = Object.keys(theme.variants.color);
-const orientations = Object.keys(theme.variants.orientation);
+const sizes = Object.keys(theme.variants.size)
+const colors = Object.keys(theme.variants.color)
+const orientations = Object.keys(theme.variants.orientation)
 
-const color = ref(theme.defaultVariants.color);
-const size = ref(theme.defaultVariants.size);
-const orientation = ref('vertical' as keyof typeof theme.variants.orientation);
-const reverse = ref(false);
+const color = ref(theme.defaultVariants.color)
+const size = ref(theme.defaultVariants.size)
+const orientation = ref('vertical' as keyof typeof theme.variants.orientation)
+const reverse = ref(false)
 
 const items = [{
   date: 'Mar 15, 2025',
   title: 'Project Kickoff',
   description: 'Kicked off the project with team alignment. Set up project milestones and allocated resources.',
-  icon: 'i-lucide:rocket',
-  value: 'kickoff',
+  icon: 'i-lucide-rocket',
+  value: 'kickoff'
 }, {
   date: 'Mar 22, 2025',
   title: 'Design Phase',
   description: 'User research and design workshops. Created wireframes and prototypes for user testing',
-  icon: 'i-lucide:palette',
-  value: 'design',
+  icon: 'i-lucide-palette',
+  value: 'design'
 }, {
   date: 'Mar 29, 2025',
   title: 'Development Sprint',
   description: 'Frontend and backend development. Implemented core features and integrated with APIs.',
-  icon: 'i-lucide:code',
-  value: 'development',
+  icon: 'i-lucide-code',
+  value: 'development'
 }, {
   date: 'Apr 5, 2025',
   title: 'Testing & Deployment',
   description: 'QA testing and performance optimization. Deployed the application to production.',
-  icon: 'i-lucide:check-circle',
-  value: 'deployment',
-}] satisfies Array<PTimelineItem>;
+  icon: 'i-lucide-check-circle',
+  value: 'deployment'
+}] satisfies TimelineItem[]
 
-const value = ref('kickoff');
+const value = ref('kickoff')
+
+function onSelect(_e: Event, item: TimelineItem) {
+  value.value = item.value as string
+}
 </script>
 
 <template>
-  <BaseNavbar>
-    <PSelect
-      v-model="color"
-      :items="colors"
-      placeholder="Color"
-    />
-    <PSelect
-      v-model="size"
-      :items="sizes"
-      placeholder="Size"
-    />
-    <PSelect
-      v-model="orientation"
-      :items="orientations"
-      placeholder="Orientation"
-    />
-    <PSelect
-      v-model="value"
-      :items="items.map(item => item.value)"
-      placeholder="Value"
-    />
-    <PSwitch
-      v-model="reverse"
-      label="Reverse"
-    />
-  </BaseNavbar>
+  <Navbar>
+    <PSelect v-model="color" :items="colors" placeholder="Color" />
+    <PSelect v-model="size" :items="sizes" placeholder="Size" />
+    <PSelect v-model="orientation" :items="orientations" placeholder="Orientation" />
+    <PSelect v-model="value" :items="items.map(item => item.value)" placeholder="Value" />
+    <PSwitch v-model="reverse" label="Reverse" />
+  </Navbar>
 
   <PTimeline
     v-model="value"
@@ -76,6 +60,7 @@ const value = ref('kickoff');
     :size="size"
     :items="items"
     :reverse="reverse"
-    class="min-h-0 data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-96"
+    class="data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-96 min-h-0"
+    @select="onSelect"
   />
 </template>

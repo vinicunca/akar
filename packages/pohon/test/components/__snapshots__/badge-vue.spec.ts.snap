@@ -7,6 +7,13 @@ exports[`Badge > renders with as correctly 1`] = `
 </div>"
 `;
 
+exports[`Badge > renders with avatar and leadingIcon correctly 1`] = `"<span data-slot="base" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg><!--v-if--><!--v-if--></span>"`;
+
+exports[`Badge > renders with avatar and trailingIcon correctly 1`] = `
+"<span data-slot="base" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
+<!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class=""></svg></span>"
+`;
+
 exports[`Badge > renders with avatar correctly 1`] = `
 "<span data-slot="base" class=""><span data-slot="root"><img src="https://github.com/benjamincanac.png" data-slot="image"></span>
 <!--v-if-->
@@ -20,12 +27,18 @@ exports[`Badge > renders with class correctly 1`] = `
 
 exports[`Badge > renders with default slot correctly 1`] = `"<span data-slot="base" class=""><!--v-if-->Default slot<!--v-if--></span>"`;
 
+exports[`Badge > renders with icon correctly 1`] = `"<span data-slot="base" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg><!--v-if--><!--v-if--></span>"`;
+
 exports[`Badge > renders with label correctly 1`] = `
 "<span data-slot="base" class=""><!--v-if--><span data-slot="label" class="">Badge</span>
 <!--v-if--></span>"
 `;
 
+exports[`Badge > renders with leading and icon correctly 1`] = `"<span data-slot="base" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg><!--v-if--><!--v-if--></span>"`;
+
 exports[`Badge > renders with leading slot correctly 1`] = `"<span data-slot="base" class="">Leading slot<!--v-if--><!--v-if--></span>"`;
+
+exports[`Badge > renders with leadingIcon correctly 1`] = `"<span data-slot="base" class=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="leadingIcon" class=""></svg><!--v-if--><!--v-if--></span>"`;
 
 exports[`Badge > renders with neutral variant outline correctly 1`] = `
 "<span data-slot="base" class=""><!--v-if--><span data-slot="label" class="">Badge</span>
@@ -102,4 +115,8 @@ exports[`Badge > renders with square correctly 1`] = `
 <!--v-if--></span>"
 `;
 
+exports[`Badge > renders with trailing and icon correctly 1`] = `"<span data-slot="base" class=""><!--v-if--><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class=""></svg></span>"`;
+
 exports[`Badge > renders with trailing slot correctly 1`] = `"<span data-slot="base" class=""><!--v-if--><!--v-if-->Trailing slot</span>"`;
+
+exports[`Badge > renders with trailingIcon correctly 1`] = `"<span data-slot="base" class=""><!--v-if--><!--v-if--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 16 16" data-slot="trailingIcon" class=""></svg></span>"`;

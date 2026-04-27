@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import * as locales from 'pohon-ui/locale';
-import { ref } from 'vue';
+import * as locales from 'pohon-ui/locale'
 
-const locale = ref('en');
+const locale = ref('en')
 </script>
 
 <template>
-  <BaseNavbar to="https://akar.vinicunca.dev/docs/pohon/getting-started/integrations/i18n" />
+  <Navbar to="https://ui.nuxt.com/docs/getting-started/integrations/i18n" />
 
-  <PLocaleSelect
-    v-model="locale"
-    :locales="Object.values(locales)"
-  />
+  <PLocaleSelect v-model="locale" :locales="Object.values(locales)" />
 </template>

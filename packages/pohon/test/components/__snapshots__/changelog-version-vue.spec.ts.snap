@@ -441,6 +441,26 @@ exports[`ChangelogVersion > renders with title slot correctly 2`] = `
 </article>"
 `;
 
+exports[`ChangelogVersion > renders with to & image correctly 1`] = `
+"<article data-slot="root" class="">
+  <div data-slot="indicator" class="">
+    <!--v-if-->
+    <div data-slot="dot" class="">
+      <div data-slot="dotInner" class=""></div>
+    </div>
+  </div>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <!--v-if-->
+      <!--v-if-->
+      <!--v-if-->
+      <div data-slot="imageWrapper" class=""><img src="https://picsum.photos/640/360" data-slot="image"><a href="/changelog" aria-label="Version link" class="peer focus:outline-none"><span class="inset-0 absolute" aria-hidden="true"></span></a></div>
+    </div>
+    <!--v-if-->
+  </div>
+</article>"
+`;
+
 exports[`ChangelogVersion > renders with to correctly 1`] = `
 "<article data-slot="root" class="">
   <div data-slot="indicator" class="">

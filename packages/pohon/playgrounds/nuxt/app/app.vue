@@ -1,89 +1,74 @@
 <script setup lang="ts">
-import { useAppConfig, useRoute } from '#app';
-import {
-  BaseLogo,
-  BaseThemeDropdown,
-  PApp,
-  PColorModeButton,
-  PDashboardGroup,
-  PDashboardPanel,
-  PDashboardSidebar,
-  PNavigationMenu,
-  PSeparator,
-} from '#components';
-import { provide, useNavigation } from '#imports';
+const route = useRoute()
+const appConfig = useAppConfig()
 
-const route = useRoute();
-const appConfig = useAppConfig();
-const { components, items } = useNavigation();
+const { components, groups, items } = useNavigation()
 
-provide('components', components);
+useHead({
+  title: 'Nuxt UI - Playground',
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'description', content: 'Explore and test all Nuxt UI components in an interactive environment' }
+  ],
+  htmlAttrs: {
+    lang: 'en',
+    dir: computed(() => appConfig.dir)
+  }
+})
+
+provide('components', components)
 </script>
 
 <template>
-  <PApp
-    :toaster="appConfig.toaster"
-    :dir="appConfig.dir"
-  >
+  <PApp :toaster="appConfig.toaster" :dir="appConfig.dir">
     <PDashboardGroup unit="rem">
-      <PDashboardSidebar class="bg-background-elevated/25">
-        <template #header>
-          <NuxtLink
-            to="/"
-            class="color-text-highlighted"
-            aria-label="Home"
-          >
-            <BaseLogo class="h-5 w-auto" />
+      <PDashboardSidebar
+        class="bg-elevated/25"
+        resizable
+        collapsible
+        :toggle="{ size: 'sm', variant: 'outline', class: 'ring-default' }"
+      >
+        <template #header="{ collapsed }">
+          <NuxtLink to="/" class="text-highlighted inline-flex" aria-label="Home">
+            <Logo class="h-5 w-auto" :collapsed="collapsed" />
           </NuxtLink>
 
-          <div class="ms-auto flex items-center">
-            <BaseThemeDropdown />
+          <div v-if="!collapsed" class="flex items-center ms-auto">
+            <ThemeDropdown />
 
             <PColorModeButton />
           </div>
         </template>
 
-        <!-- <PDashboardSearchButton /> -->
+        <template #default="{ collapsed }">
+          <PDashboardSearchButton :collapsed="collapsed" />
 
-        <PNavigationMenu
-          :items="items"
-          orientation="vertical"
-        />
+          <PNavigationMenu :collapsed="collapsed" :items="items" orientation="vertical" />
 
-        <PSeparator type="dashed" />
+          <PSeparator type="dashed" />
 
-        <PNavigationMenu
-          :items="components"
-          orientation="vertical"
-        />
+          <PNavigationMenu :collapsed="collapsed" :items="components" orientation="vertical" />
+        </template>
       </PDashboardSidebar>
 
-      <PDashboardPanel :pohon="{ body: ['justify-center items-center', route.path.startsWith('/components') && 'mt-16'] }">
+      <NuxtPage v-if="route.path.startsWith('/components/sidebar')" />
+      <PDashboardPanel
+        v-else
+        :ui="{
+          body: [
+            route.path.startsWith('/components') && 'mt-16',
+            route.path.startsWith('/components/scroll-area') && 'p-0!'
+          ]
+        }"
+      >
         <template #body>
-          <NuxtPage />
+          <div class="flex flex-col items-center justify-center min-h-full shrink-0">
+            <NuxtPage />
+          </div>
         </template>
       </PDashboardPanel>
 
-      <!-- <PDashboardSearch
-        :groups="groups"
-        :fuse="{ resultLimit: 100 }"
-      /> -->
+      <PDashboardSearch :groups="groups" :fuse="{ resultLimit: 100 }" />
     </PDashboardGroup>
   </PApp>
-
-  <div class="group text-sm flex w-full select-none items-center relative focus-visible:outline-none focus:outline-none before:(rounded-md content-empty inset-x-0 inset-y-px absolute -z-1) focus-visible:before:ring-2 focus-visible:before:ring-inset" />
 </template>
-
-<style lang="postcss">
-:root {
-  --pohon-header-height: 4rem;
-}
-
-html {
-  font-family: 'Inter';
-}
-
-body {
-  @apply antialiased color-text bg-background scheme-light dark:scheme-dark;
-}
-</style>

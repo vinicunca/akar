@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue';
+import type { PDropdownMenuItem } from 'pohon-ui';
 import theme from '#build/pohon/dropdown-menu';
-import { defineShortcuts, extractShortcuts } from '#imports';
 
 const loading = ref(false);
 
@@ -9,30 +8,30 @@ const items = computed(() => [
   [{
     label: 'My account',
     avatar: {
-      src: 'https://github.com/praburangki.png',
+      src: 'https://github.com/benjamincanac.png',
     },
     type: 'label' as const,
   }],
   [{
     label: 'Profile',
     description: 'View your profile',
-    icon: 'i-lucide:user',
+    icon: 'i-lucide-user',
     slot: 'custom' as const,
-    onSelect(event: Event) {
-      event.preventDefault();
+    onSelect(e: Event) {
+      e.preventDefault();
       console.log('Profile clicked');
     },
   }, {
     label: 'Billing',
     description: 'Manage billing',
-    icon: 'i-lucide:credit-card',
+    icon: 'i-lucide-credit-card',
     kbds: ['meta', 'b'],
     onSelect() {
       console.log('Billing clicked');
     },
   }, {
     label: 'Settings',
-    icon: 'i-lucide:cog',
+    icon: 'i-lucide-cog',
     kbds: ['?'],
     onSelect() {
       console.log('Settings clicked');
@@ -40,57 +39,82 @@ const items = computed(() => [
   }],
   [{
     label: 'Team',
-    icon: 'i-lucide:users',
+    icon: 'i-lucide-users',
+    filter: {
+      placeholder: 'Search members...',
+    },
+    children: [{
+      label: 'benjamincanac',
+      avatar: { src: 'https://github.com/benjamincanac.png' },
+    }, {
+      label: 'HugoRCD',
+      avatar: { src: 'https://github.com/HugoRCD.png' },
+    }, {
+      label: 'romhml',
+      avatar: { src: 'https://github.com/romhml.png' },
+    }, {
+      label: 'sandros94',
+      avatar: { src: 'https://github.com/sandros94.png' },
+    }, {
+      label: 'hywax',
+      avatar: { src: 'https://github.com/hywax.png' },
+    }, {
+      label: 'J-Michalek',
+      avatar: { src: 'https://github.com/J-Michalek.png' },
+    }, {
+      label: 'genu',
+      avatar: { src: 'https://github.com/genu.png' },
+    }],
   }, {
     label: 'Invite users',
-    icon: 'i-lucide:user-plus',
+    icon: 'i-lucide-user-plus',
     children: [[{
       label: 'Invite by email',
-      icon: 'i-lucide:send-horizontal',
+      icon: 'i-lucide-send-horizontal',
     }, {
       label: 'Invite by link',
-      icon: 'i-lucide:link',
+      icon: 'i-lucide-link',
       kbds: ['meta', 'i'],
-      onSelect(event: Event) {
-        event.preventDefault();
+      onSelect(e: Event) {
+        e.preventDefault();
         console.log('Invite by link clicked');
       },
     }], [{
       label: 'More',
       description: 'Import from more sources',
-      icon: 'i-lucide:circle-plus',
+      icon: 'i-lucide-circle-plus',
       children: [{
         label: 'Import from Slack',
-        icon: 'i-simple-icons:slack',
+        icon: 'i-simple-icons-slack',
         to: 'https://slack.com',
         target: '_blank',
-        onSelect(event: Event) {
-          event.preventDefault();
+        onSelect(e: Event) {
+          e.preventDefault();
           console.log('Import from Slack clicked');
         },
       }, {
         label: 'Import from Trello',
-        icon: 'i-simple-icons:trello',
-        onSelect(event: Event) {
-          event.preventDefault();
+        icon: 'i-simple-icons-trello',
+        onSelect(e: Event) {
+          e.preventDefault();
           console.log('Import from Trello clicked');
         },
       }, {
         label: 'Import from Asana',
-        icon: 'i-simple-icons:asana',
-        onSelect(event: Event) {
-          event.preventDefault();
+        icon: 'i-simple-icons-asana',
+        onSelect(e: Event) {
+          e.preventDefault();
           console.log('Import from Asana clicked');
         },
       }],
     }]],
   }, {
     label: 'New team',
-    icon: 'i-lucide:plus',
+    icon: 'i-lucide-plus',
     kbds: ['meta', 'n'],
     loading: loading.value,
-    onSelect(event: Event) {
-      event.preventDefault();
+    onSelect(e: Event) {
+      e.preventDefault();
 
       loading.value = true;
       setTimeout(() => {
@@ -100,36 +124,36 @@ const items = computed(() => [
   }],
   [{
     label: 'GitHub',
-    icon: 'i-simple-icons:github',
+    icon: 'i-simple-icons-github',
     to: 'https://github.com/nuxt/ui',
     target: '_blank',
-    onSelect(event: Event) {
-      event.preventDefault();
+    onSelect(e: Event) {
+      e.preventDefault();
     },
   }, {
     label: 'Support',
-    icon: 'i-lucide:life-buoy',
+    icon: 'i-lucide-life-buoy',
     to: '/components/dropdown-menu',
   }, {
     type: 'separator' as const,
   }, {
     label: 'Keyboard Shortcuts',
-    icon: 'i-lucide:key-round',
+    icon: 'i-lucide-key-round',
   }, {
     label: 'API',
-    icon: 'i-lucide:box',
+    icon: 'i-lucide-box',
     disabled: true,
   }],
   [{
     label: 'Logout',
-    icon: 'i-lucide:log-out',
+    icon: 'i-lucide-log-out',
     color: 'error',
     kbds: ['shift', 'meta', 'q'],
     onSelect() {
       console.log('Logout clicked');
     },
   }],
-]);
+] satisfies Array<Array<PDropdownMenuItem>>);
 
 const sizes = Object.keys(theme.variants.size);
 
@@ -143,7 +167,7 @@ defineShortcuts(extractShortcuts(items.value));
 </script>
 
 <template>
-  <BaseNavbar>
+  <Navbar>
     <PSelect
       v-model="attrs.size"
       :items="sizes"
@@ -154,15 +178,16 @@ defineShortcuts(extractShortcuts(items.value));
       v-model="arrow"
       label="Arrow"
     />
-  </BaseNavbar>
+  </Navbar>
 
-  <BaseMatrix
+  <Matrix
     v-slot="props"
     :attrs="attrs"
   >
     <PDropdownMenu
       :items="items"
       :arrow="arrow"
+      filter
       :content="{ side: 'bottom', align: 'start' }"
       v-bind="props"
     >
@@ -170,15 +195,15 @@ defineShortcuts(extractShortcuts(items.value));
         label="Open"
         color="neutral"
         variant="outline"
-        icon="i-lucide:menu"
+        icon="i-lucide-menu"
       />
 
       <template #custom-trailing>
         <PIcon
-          name="i-lucide:badge-check"
-          class="text-primary shrink-0 size-5"
+          name="i-lucide-badge-check"
+          class="shrink-0 size-5 text-primary"
         />
       </template>
     </PDropdownMenu>
-  </BaseMatrix>
+  </Matrix>
 </template>

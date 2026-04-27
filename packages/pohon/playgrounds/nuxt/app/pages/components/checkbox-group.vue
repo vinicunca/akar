@@ -1,115 +1,58 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
-import themeCheckbox from '#build/pohon/checkbox';
-import theme from '#build/pohon/checkbox-group';
+import theme from '#build/pohon/checkbox-group'
+import themeCheckbox from '#build/pohon/checkbox'
 
-const colors = Object.keys(theme.variants.color);
-const sizes = Object.keys(theme.variants.size);
-const variants = Object.keys(theme.variants.variant);
-const indicators = Object.keys(themeCheckbox.variants.indicator);
-const orientations = Object.keys(theme.variants.orientation);
+const colors = Object.keys(theme.variants.color)
+const sizes = Object.keys(theme.variants.size)
+const variants = Object.keys(theme.variants.variant)
+const indicators = Object.keys(themeCheckbox.variants.indicator)
+const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
   color: [theme.defaultVariants.color],
   size: [theme.defaultVariants.size],
   variant: [theme.defaultVariants.variant],
-  indicator: [themeCheckbox.defaultVariants.indicator],
-});
+  indicator: [themeCheckbox.defaultVariants.indicator]
+})
 
-const orientation = ref('vertical' as keyof typeof theme.variants.orientation);
+const orientation = ref('vertical' as keyof typeof theme.variants.orientation)
 
 const items = [
   { value: '1', label: 'Option 1' },
   { value: '2', label: 'Option 2' },
-  { value: '3', label: 'Option 3' },
-];
+  { value: '3', label: 'Option 3' }
+]
 const itemsLiteral = [
   'Option 1',
   'Option 2',
-  'Option 3',
-];
+  'Option 3'
+]
 const itemsWithDescription = [
   { value: '1', label: 'Option 1', description: 'Description 1' },
   { value: '2', label: 'Option 2', description: 'Description 2' },
-  { value: '3', label: 'Option 3', description: 'Description 3' },
-];
+  { value: '3', label: 'Option 3', description: 'Description 3' }
+]
 </script>
 
 <template>
-  <BaseNavbar>
-    <PSelect
-      v-model="attrs.color"
-      :items="colors"
-      multiple
-    />
-    <PSelect
-      v-model="attrs.variant"
-      :items="variants"
-      multiple
-    />
-    <PSelect
-      v-model="attrs.size"
-      :items="sizes"
-      multiple
-    />
-    <PSelect
-      v-model="attrs.indicator"
-      :items="indicators"
-      multiple
-    />
-    <PSelect
-      v-model="orientation"
-      :items="orientations"
-    />
-  </BaseNavbar>
+  <Navbar>
+    <PSelect v-model="attrs.color" :items="colors" multiple />
+    <PSelect v-model="attrs.variant" :items="variants" multiple />
+    <PSelect v-model="attrs.size" :items="sizes" multiple />
+    <PSelect v-model="attrs.indicator" :items="indicators" multiple />
+    <PSelect v-model="orientation" :items="orientations" />
+  </Navbar>
 
-  <BaseMatrix
-    v-slot="props"
-    :attrs="attrs"
-  >
-    <PCheckboxGroup
-      :items="items"
-      :default-value="['1']"
-      :orientation="orientation"
-      v-bind="props"
-    />
-    <PCheckboxGroup
-      :items="itemsLiteral"
-      :default-value="['Option 1']"
-      :orientation="orientation"
-      v-bind="props"
-    />
-    <PCheckboxGroup
-      :items="itemsWithDescription"
-      :orientation="orientation"
-      v-bind="props"
-    />
-    <PCheckboxGroup
-      :items="items"
-      disabled
-      :orientation="orientation"
-      v-bind="props"
-    />
-    <PCheckboxGroup
-      :items="items"
-      legend="Legend"
-      :orientation="orientation"
-      v-bind="props"
-    />
-    <PCheckboxGroup
-      :items="items"
-      legend="Legend"
-      required
-      :orientation="orientation"
-      v-bind="props"
-    />
-    <PCheckboxGroup
-      :items="items"
-      :orientation="orientation"
-      v-bind="props"
-    >
+  <Matrix v-slot="props" :attrs="attrs">
+    <PCheckboxGroup :items="items" :default-value="['1']" :orientation="orientation" v-bind="props" />
+    <PCheckboxGroup :items="itemsLiteral" :default-value="['Option 1']" :orientation="orientation" v-bind="props" />
+    <PCheckboxGroup :items="itemsWithDescription" :orientation="orientation" v-bind="props" />
+    <PCheckboxGroup :items="items" disabled :orientation="orientation" v-bind="props" />
+    <PCheckboxGroup :items="items" legend="Legend" :orientation="orientation" v-bind="props" />
+    <PCheckboxGroup :items="items" legend="Legend" required :orientation="orientation" v-bind="props" />
+    <PCheckboxGroup :items="items" :orientation="orientation" v-bind="props">
       <template #legend>
-        <span class="font-bold italic">
+        <span class="italic font-bold">
           With slots
         </span>
       </template>
@@ -119,5 +62,5 @@ const itemsWithDescription = [
         </span>
       </template>
     </PCheckboxGroup>
-  </BaseMatrix>
+  </Matrix>
 </template>

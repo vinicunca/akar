@@ -1,94 +1,44 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const open = ref(false);
-const inset = ref(false);
+const open = ref(false)
+const inset = ref(false)
 </script>
 
 <template>
-  <BaseNavbar>
-    <PSwitch
-      v-model="inset"
-      label="Inset"
-    />
-  </BaseNavbar>
+  <Navbar>
+    <PSwitch v-model="inset" label="Inset" />
+  </Navbar>
 
   <div class="flex flex-col gap-2 min-h-0">
-    <PDrawer
-      v-model:open="open"
-      title="Drawer with v-model"
-      description="This is useful to control the state yourself."
-      :inset="inset"
-    >
-      <PButton
-        color="neutral"
-        variant="outline"
-        label="Open with v-model"
-      />
+    <PDrawer v-model:open="open" title="Drawer with v-model" description="This is useful to control the state yourself." :inset="inset">
+      <PButton color="neutral" variant="outline" label="Open with v-model" />
 
       <template #body>
-        <BasePlaceholder class="h-48 w-full" />
+        <Placeholder class="h-48 w-full" />
       </template>
 
       <template #footer>
-        <PButton
-          label="Submit"
-          color="neutral"
-          class="justify-center"
-        />
-        <PButton
-          label="Cancel"
-          color="neutral"
-          variant="outline"
-          class="justify-center"
-          @click="open = false"
-        />
+        <PButton label="Submit" color="neutral" class="justify-center" />
+        <PButton label="Cancel" color="neutral" variant="outline" class="justify-center" @click="open = false" />
       </template>
     </PDrawer>
 
-    <PDrawer
-      should-scale-background
-      title="Drawer with `should-scale-background`"
-      description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work."
-      :inset="inset"
-    >
-      <PButton
-        color="neutral"
-        variant="outline"
-        label="Open with scale"
-      />
+    <PDrawer should-scale-background title="Drawer with `should-scale-background`" description="You need to add the `data-vaul-drawer-wrapper` directive to your content to make it work." :inset="inset">
+      <PButton color="neutral" variant="outline" label="Open with scale" />
 
       <template #body>
-        <BasePlaceholder class="h-screen w-full" />
+        <Placeholder class="h-screen w-full" />
       </template>
     </PDrawer>
 
-    <PDrawer
-      title="Drawer with nested"
-      :inset="inset"
-      :pohon="{ content: 'h-full' }"
-      should-scale-background
-    >
-      <PButton
-        color="neutral"
-        variant="outline"
-        label="Open nested"
-      />
+    <PDrawer title="Drawer with nested" :inset="inset" :ui="{ content: 'h-full' }" should-scale-background>
+      <PButton color="neutral" variant="outline" label="Open nested" />
 
       <template #footer>
-        <PDrawer
-          :inset="inset"
-          nested
-          :pohon="{ content: 'h-full' }"
-        >
-          <PButton
-            color="neutral"
-            variant="outline"
-            label="Open nested"
-          />
+        <PDrawer :inset="inset" nested :ui="{ content: 'h-full' }">
+          <PButton color="neutral" variant="outline" label="Open nested" />
 
           <template #content>
-            <BasePlaceholder class="m-4 flex-1" />
+            <Placeholder class="flex-1 m-4" />
           </template>
         </PDrawer>
       </template>
@@ -102,78 +52,42 @@ const inset = ref(false);
       :overlay="false"
       :inset="inset"
     >
-      <PButton
-        label="Open unclosable"
-        color="neutral"
-        variant="outline"
-      />
+      <PButton label="Open unclosable" color="neutral" variant="outline" />
 
       <template #body>
-        <BasePlaceholder class="h-96 w-full" />
+        <Placeholder class="h-96 w-full" />
       </template>
     </PDrawer>
 
-    <PDrawer
-      title="Drawer with bottom direction"
-      direction="bottom"
-      :inset="inset"
-    >
-      <PButton
-        color="neutral"
-        variant="outline"
-        label="Open on bottom"
-      />
+    <PDrawer title="Drawer with bottom direction" direction="bottom" :inset="inset">
+      <PButton color="neutral" variant="outline" label="Open on bottom" />
 
       <template #body>
-        <BasePlaceholder class="h-96 w-full" />
+        <Placeholder class="h-96 w-full" />
       </template>
     </PDrawer>
 
-    <PDrawer
-      title="Drawer with left direction"
-      direction="left"
-      :inset="inset"
-    >
-      <PButton
-        color="neutral"
-        variant="outline"
-        label="Open on left"
-      />
+    <PDrawer title="Drawer with left direction" direction="left" :inset="inset">
+      <PButton color="neutral" variant="outline" label="Open on left" />
 
       <template #body>
-        <BasePlaceholder class="h-full w-96" />
+        <Placeholder class="w-96 h-full" />
       </template>
     </PDrawer>
 
-    <PDrawer
-      title="Drawer with top direction"
-      direction="top"
-      :inset="inset"
-    >
-      <PButton
-        color="neutral"
-        variant="outline"
-        label="Open on top"
-      />
+    <PDrawer title="Drawer with top direction" direction="top" :inset="inset">
+      <PButton color="neutral" variant="outline" label="Open on top" />
 
       <template #body>
-        <BasePlaceholder class="h-96 w-full" />
+        <Placeholder class="h-96 w-full" />
       </template>
     </PDrawer>
 
-    <PDrawer
-      title="Drawer with right direction"
-      direction="right"
-      :inset="inset"
-    >
-      <PButton
-        color="neutral"
-        variant="outline"
-        label="Open on right"
-      />
+    <PDrawer title="Drawer with right direction" direction="right" :inset="inset">
+      <PButton color="neutral" variant="outline" label="Open on right" />
 
       <template #body>
-        <BasePlaceholder class="h-full w-96" />
+        <Placeholder class="w-96 h-full" />
       </template>
     </PDrawer>
   </div>
