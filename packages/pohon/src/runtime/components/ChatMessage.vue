@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { FileUIPart, UIMessage } from 'ai';
+import type { FileUIPart, TextUIPart, UIDataTypes, UIMessage, UITools } from 'ai';
 import type { VNode } from 'vue';
 import type { PAvatarProps, PButtonProps, PIconProps } from '../types';
 import type { ComponentConfig } from '../types/uv';
@@ -8,7 +8,7 @@ import theme from '#build/pohon/chat-message';
 
 type ChatMessage = ComponentConfig<typeof theme, AppConfig, 'chatMessage'>;
 
-export interface PChatMessageProps extends UIMessage {
+export interface PChatMessageProps<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> extends UIMessage<TMetadata, TDataParts, TTools> {
   /**
    * The element or component this component should render as.
    * @defaultValue 'article'
@@ -32,7 +32,7 @@ export interface PChatMessageProps extends UIMessage {
    * The `label` will be used in a tooltip.
    * `{ size: 'xs', color: 'neutral', variant: 'ghost' }`{lang="ts-type"}
    */
-  actions?: Array<Omit<PButtonProps, 'onClick'> & { onClick?: (event: MouseEvent, message: UIMessage) => void }>;
+  actions?: Array<Omit<PButtonProps, 'onClick'> & { onClick?: (event: MouseEvent, message: UIMessage<TMetadata, TDataParts, TTools>) => void }>;
   /**
    * Render the message in a compact style.
    * This is done automatically when used inside a `PChatPalette`{lang="ts-type"}.
@@ -48,15 +48,15 @@ export interface PChatMessageProps extends UIMessage {
   pohon?: ChatMessage['slots'];
 }
 
-export interface PChatMessageSlots {
-  leading?: (props: { avatar: PChatMessageProps['avatar']; pohon: ChatMessage['pohon'] }) => Array<VNode>;
-  files?: (props: { parts: Array<FileUIPart> }) => Array<VNode>;
-  content?: (props: PChatMessageProps) => Array<VNode>;
-  actions?: (props: { actions: PChatMessageProps['actions'] }) => Array<VNode>;
+export interface PChatMessageSlots<TMetadata = unknown, TDataParts extends UIDataTypes = UIDataTypes, TTools extends UITools = UITools> {
+  leading?: (props: UIMessage<TMetadata, TDataParts, TTools> & { avatar: PChatMessageProps<TMetadata, TDataParts, TTools>['avatar']; pohon: ChatMessage['pohon'] }) => Array<VNode>;
+  files?: (props: Omit<UIMessage<TMetadata, TDataParts, TTools>, 'parts'> & { parts: Array<FileUIPart> }) => Array<VNode>;
+  content?: (props: UIMessage<TMetadata, TDataParts, TTools> & { content?: string }) => Array<VNode>;
+  actions?: (props: UIMessage<TMetadata, TDataParts, TTools> & { actions: PChatMessageProps<TMetadata, TDataParts, TTools>['actions'] }) => Array<VNode>;
 }
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="TMetadata, TDataParts extends UIDataTypes, TTools extends UITools">
 import { isFunction } from '@vinicunca/perkakas';
 import { APrimitive } from 'akar';
 import { computed } from 'vue';
@@ -69,15 +69,21 @@ import PButton from './Button.vue';
 import PIcon from './Icon.vue';
 import PTooltip from './Tooltip.vue';
 
-const props = withDefaults(defineProps<PChatMessageProps>(), {
-  as: 'article',
-});
-const slots = defineSlots<PChatMessageSlots>();
+const props = withDefaults(
+  defineProps<PChatMessageProps<TMetadata, TDataParts, TTools>>(),
+  {
+    as: 'article',
+  },
+);
+const slots = defineSlots<PChatMessageSlots<TMetadata, TDataParts, TTools>>();
 
 const appConfig = useAppConfig() as ChatMessage['AppConfig'];
 const pohonProp = useComponentPohon('chatMessage', props);
 
 const fileParts = computed(() => props.parts?.filter((part): part is FileUIPart => part.type === 'file') ?? []);
+const textParts = computed(() => props.parts?.filter((part): part is TextUIPart => part.type === 'text') ?? []);
+
+const messageProps = computed(() => omit(props, ['as', 'icon', 'avatar', 'variant', 'side', 'actions', 'compact', 'class', 'pohon', 'content']));
 
 const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMessage || {}) })({
   variant: props.variant,
@@ -102,7 +108,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
     >
       <slot
         name="files"
-        :parts="fileParts"
+        v-bind="{ ...messageProps, parts: fileParts }"
       />
     </div>
 
@@ -117,8 +123,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
       >
         <slot
           name="leading"
-          :avatar="avatar"
-          :pohon="pohon"
+          v-bind="{ ...messageProps, avatar, pohon }"
         >
           <PIcon
             v-if="icon"
@@ -137,28 +142,23 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
       </div>
 
       <div
-        v-if="content || parts.length || !!slots.content"
+        v-if="content || textParts.length || !!slots.content"
         data-slot="content"
         :class="pohon.content({ class: pohonProp?.content })"
       >
         <slot
-          :id="id"
           name="content"
-          :role="role"
-          :content="content"
-          :parts="parts"
+          v-bind="{ ...messageProps, content }"
         >
           <template v-if="content">
             {{ content }}
           </template>
           <template v-else>
             <template
-              v-for="(part, index) in parts"
+              v-for="(part, index) in textParts"
               :key="`${id}-${part.type}-${index}`"
             >
-              <template v-if="part.type === 'text'">
-                {{ part.text }}
-              </template>
+              {{ part.text }}
             </template>
           </template>
         </slot>
@@ -171,7 +171,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
       >
         <slot
           name="actions"
-          :actions="actions"
+          v-bind="{ ...messageProps, actions }"
         >
           <PTooltip
             v-for="(action, index) in actions"
@@ -184,7 +184,7 @@ const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.chatMe
               variant="ghost"
               v-bind="omit(action, ['onClick'])"
               :label="undefined"
-              @click="isFunction(action.onClick) ? action.onClick($event, props) : undefined"
+              @click="isFunction(action.onClick) ? action.onClick($event, messageProps) : undefined"
             />
           </PTooltip>
         </slot>

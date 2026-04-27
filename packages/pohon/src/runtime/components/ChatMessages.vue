@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/block-tag-newline -->
 <script lang="ts">
 import type { AppConfig } from '@nuxt/schema';
-import type { ChatStatus, UIMessage } from 'ai';
+import type { ChatStatus, UIDataTypes, UIMessage, UITools } from 'ai';
 import type { ComponentPublicInstance, VNode } from 'vue';
 import type { PButtonProps, PChatMessageProps, PChatMessageSlots, PIconProps, PLinkPropsKeys } from '../types';
 import type { ComponentConfig } from '../types/uv';
@@ -9,8 +9,18 @@ import theme from '#build/pohon/chat-messages';
 
 type ChatMessages = ComponentConfig<typeof theme, AppConfig, 'chatMessages'>;
 
-export interface PChatMessagesProps {
-  messages?: Array<UIMessage>;
+type MessageBase<T extends Array<UIMessage>>
+  = T[number] extends UIMessage<infer M, infer D, infer U>
+    ? UIMessage<M, D, U>
+    : UIMessage<unknown, UIDataTypes, UITools>;
+
+type PropsBase<T extends Array<UIMessage>>
+  = MessageBase<T> extends UIMessage<infer M, infer D, infer U>
+    ? PChatMessageProps<M, D, U>
+    : never;
+
+export interface PChatMessagesProps<T extends Array<UIMessage> = Array<UIMessage>> {
+  messages?: T;
   status?: ChatStatus;
   /**
    * Whether to automatically scroll to the bottom when a message is streaming.
@@ -38,12 +48,12 @@ export interface PChatMessagesProps {
    * The `user` messages props.
    * `{ side: 'right', variant: 'soft' }`{lang="ts-type"}
    */
-  user?: Pick<PChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'pohon'>;
+  user?: Pick<PropsBase<T>, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'pohon'>;
   /**
    * The `assistant` messages props.
    * `{ side: 'left', variant: 'naked' }`{lang="ts-type"}
    */
-  assistant?: Pick<PChatMessageProps, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'pohon'>;
+  assistant?: Pick<PropsBase<T>, 'icon' | 'avatar' | 'variant' | 'side' | 'actions' | 'pohon'>;
   /**
    * Render the messages in a compact style.
    * This is done automatically when used inside a `PChatPalette`{lang="ts-type"}.
@@ -59,22 +69,19 @@ export interface PChatMessagesProps {
   pohon?: ChatMessages['slots'];
 }
 
-type ExtendSlotWithVersion<K extends keyof PChatMessageSlots>
-  = Required<PChatMessageSlots>[K] extends (props: infer P) => Array<VNode>
-    ? (props: P & { message: UIMessage }) => Array<VNode>
-    : Required<PChatMessageSlots>[K];
-
-export type ChatMessagesSlots = {
-  [K in keyof PChatMessageSlots]?: ExtendSlotWithVersion<K>
-} & {
+export type PChatMessagesSlots<T extends Array<UIMessage> = Array<UIMessage>> = {
   default?: (props?: {}) => Array<VNode>;
   indicator?: (props: { pohon: ChatMessages['pohon'] }) => Array<VNode>;
   viewport?: (props: { pohon: ChatMessages['pohon']; onClick: () => void }) => Array<VNode>;
+} & {
+  [K in keyof PChatMessageSlots]?: NonNullable<PChatMessageSlots[K]> extends (props: infer P) => Array<VNode>
+    ? (props: P & { message: MessageBase<T> }) => Array<VNode>
+    : never
 };
 
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends UIMessage[] = UIMessage[]">
 import { isObjectType } from '@vinicunca/perkakas';
 import { useElementBounding, useEventListener, useMutationObserver, watchThrottled } from '@vueuse/core';
 import { APresence } from 'akar';
@@ -87,13 +94,16 @@ import { uv } from '../utils/uv';
 import PButton from './Button.vue';
 import PChatMessage from './ChatMessage.vue';
 
-const props = withDefaults(defineProps<PChatMessagesProps>(), {
-  autoScroll: true,
-  shouldAutoScroll: false,
-  shouldScrollToBottom: true,
-  spacingOffset: 0,
-});
-const slots = defineSlots<ChatMessagesSlots>();
+const props = withDefaults(
+  defineProps<PChatMessagesProps<T>>(),
+  {
+    autoScroll: true,
+    shouldAutoScroll: false,
+    shouldScrollToBottom: true,
+    spacingOffset: 0,
+  },
+);
+const slots = defineSlots<PChatMessagesSlots<T>>();
 
 const getProxySlots = () => omit(slots, ['default', 'indicator', 'viewport']);
 
@@ -331,8 +341,7 @@ onMounted(() => {
           >
             <slot
               :name="name"
-              v-bind="(slotData as any)"
-              :message="message"
+              v-bind="{ ...(slotData as any), message }"
             />
           </template>
         </PChatMessage>
