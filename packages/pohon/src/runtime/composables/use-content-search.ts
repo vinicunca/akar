@@ -1,5 +1,5 @@
 import type { ContentNavigationItem } from '@nuxt/content';
-import type { PContentSearchFile, PContentSearchItem } from '../components/content/content-search.vue';
+import type { PContentSearchFile, PContentSearchItem } from '../components/content/ContentSearch.vue';
 import { createSharedComposable } from '@vueuse/core';
 import { ref } from 'vue';
 import { useAppConfig } from '#imports';

@@ -1,7 +1,7 @@
 import { mockNuxtImport } from '@nuxt/test-utils/runtime';
 import { describe } from 'vitest';
 import theme from '#build/pohon/content/content-toc';
-import ContentToc from '../../../src/runtime/components/content/content-toc.vue';
+import ContentToc from '../../../src/runtime/components/content/ContentToc.vue';
 import { renderEach } from '../../component-render';
 
 describe('ContentToc', () => {

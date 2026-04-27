@@ -1,8 +1,8 @@
 import { describe } from 'vitest';
-import ContentSearchButton from '../../../src/runtime/components/content/content-search-button.vue';
+import ContentSearchButton from '../../../src/runtime/components/content/ContentSearchButton.vue';
 import { renderEach } from '../../component-render';
 
-describe('DashboardSearchButton', () => {
+describe('ContentSearchButton', () => {
   renderEach(ContentSearchButton, [
     // Props
     ['with label', { props: { label: 'Open' } }],

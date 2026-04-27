@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import ContentSurround from '../../../src/runtime/components/content/content-surround.vue';
+import ContentSurround from '../../../src/runtime/components/content/ContentSurround.vue';
 import { renderEach } from '../../component-render';
 
 describe('ContentSurround', () => {

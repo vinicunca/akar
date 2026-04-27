@@ -32,7 +32,7 @@ import { useComponentPohon } from '../../composables/use-component-pohon';
 import { useLocale } from '../../composables/use-locale';
 import { uv } from '../../utils/uv';
 import PButton from '../Button.vue';
-import PCodeIcon from './code-icon.vue';
+import PCodeIcon from './CodeIcon.vue';
 
 const props = defineProps<ProsePreProps>();
 defineSlots<ProsePreSlots>();

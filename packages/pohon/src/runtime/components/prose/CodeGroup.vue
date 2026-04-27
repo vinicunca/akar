@@ -37,7 +37,7 @@ import { computed, onBeforeUpdate, onMounted, ref, watch } from 'vue';
 import { useAppConfig, useState } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
-import PCodeIcon from './code-icon.vue';
+import PCodeIcon from './CodeIcon.vue';
 
 const props = withDefaults(defineProps<ProseCodeGroupProps>(), {
   defaultValue: '0',

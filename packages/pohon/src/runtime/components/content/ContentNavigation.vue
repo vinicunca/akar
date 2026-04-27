@@ -112,7 +112,7 @@ import PBadge from '../Badge.vue';
 import PIcon from '../Icon.vue';
 import PLinkBase from '../LinkBase.vue';
 import PLink from '../Link.vue';
-import PContentNavigation from './content-navigation.vue';
+import PContentNavigation from './ContentNavigation.vue';
 
 defineOptions({ inheritAttrs: false });
 

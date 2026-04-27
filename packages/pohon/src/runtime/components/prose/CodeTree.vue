@@ -56,7 +56,7 @@ import { useAppConfig } from '#imports';
 import { useComponentPohon } from '../../composables/use-component-pohon';
 import { uv } from '../../utils/uv';
 import PIcon from '../Icon.vue';
-import PCodeIcon from './code-icon.vue';
+import PCodeIcon from './CodeIcon.vue';
 
 defineOptions({ inheritAttrs: false });
 

@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
 import theme from '#build/pohon/content/content-search';
-import ContentSearch from '../../../src/runtime/components/content/content-search.vue';
+import ContentSearch from '../../../src/runtime/components/content/ContentSearch.vue';
 import { renderEach } from '../../component-render';
 
 describe('ContentSearch', () => {
