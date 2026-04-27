@@ -98,7 +98,7 @@ exports[`Tree > renders with defaultValue correctly 1`] = `
 </ul>"
 `;
 
-exports[`Tree > renders with defautExpanded item correctly 1`] = `
+exports[`Tree > renders with defaultExpanded item correctly 1`] = `
 "<ul role="tree" tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" data-slot="root">
   <li role="presentation" class=""><button type="button" data-slot="link" class="" role="treeitem" aria-selected="false" aria-expanded="true" aria-level="1" data-indent="1" data-expanded="" tabindex="-1" data-orientation="vertical" data-akar-collection-item=""><span class="iconify i-lucide:folder-open" aria-hidden="true" data-slot="linkLeadingIcon"></span><span data-slot="linkLabel" class="">Default Expanded</span><span data-slot="linkTrailing" class=""><span class="iconify i-lucide:chevron-down" aria-hidden="true" data-slot="linkTrailingIcon"></span></span></button>
     <ul role="group" data-slot="listWithChildren" class="">
